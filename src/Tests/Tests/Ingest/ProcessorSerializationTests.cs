@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -14,8 +15,8 @@ namespace Tests.Ingest
 		public void CanSerializeAndDeserializeAllProcessors()
 		{
 			var processorTypes =
-				from t in typeof(IProcessor).Assembly().Types()
-				where typeof(ProcessorBase).IsAssignableFrom(t) && !t.IsAbstract()
+				from t in typeof(IProcessor).Assembly.Types()
+				where typeof(ProcessorBase).IsAssignableFrom(t) && !t.IsAbstract
 				select t;
 
 			var processors = processorTypes

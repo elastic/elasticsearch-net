@@ -14,8 +14,7 @@ namespace Nest
 
 		public CharFilters(IDictionary<string, ICharFilter> container) : base(container) { }
 
-		public CharFilters(Dictionary<string, ICharFilter> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public CharFilters(Dictionary<string, ICharFilter> container) : base(container) { }
 
 		public void Add(string name, ICharFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}

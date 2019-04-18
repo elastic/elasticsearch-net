@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-#if DOTNETCORE
-using System.Reflection;
-
-#endif
 
 namespace Nest
 {
@@ -28,7 +24,7 @@ namespace Nest
 		{
 			var enumType = typeof(TEnum);
 
-			if (!enumType.IsEnumType())
+			if (!enumType.IsEnum)
 				throw new InvalidOperationException($"{nameof(TEnum)} must be an enum.");
 
 			var enums = Enum.GetValues(enumType).Cast<TEnum>().ToList();
@@ -37,11 +33,7 @@ namespace Nest
 
 			foreach (var e in enums)
 			{
-#if DOTNETCORE
-				var field = enumType.GetTypeInfo().GetDeclaredField(e.ToString());
-#else
 				var field = enumType.GetField(e.ToString());
-#endif
 				var enumMemberValue = field.GetCustomAttributes(typeof(EnumMemberAttribute), true)
 					.Cast<EnumMemberAttribute>()
 					.Select(a => a.Value)

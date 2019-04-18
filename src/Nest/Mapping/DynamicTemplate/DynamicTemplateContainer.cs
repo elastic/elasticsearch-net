@@ -10,12 +10,11 @@ namespace Nest
 
 	public class DynamicTemplateContainer : IsADictionaryBase<string, IDynamicTemplate>, IDynamicTemplateContainer
 	{
-		public DynamicTemplateContainer() : base() { }
+		public DynamicTemplateContainer() { }
 
 		public DynamicTemplateContainer(IDictionary<string, IDynamicTemplate> container) : base(container) { }
 
-		public DynamicTemplateContainer(Dictionary<string, IDynamicTemplate> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public DynamicTemplateContainer(Dictionary<string, IDynamicTemplate> container) : base(container) { }
 
 		/// <summary>
 		/// Add any setting to the index
