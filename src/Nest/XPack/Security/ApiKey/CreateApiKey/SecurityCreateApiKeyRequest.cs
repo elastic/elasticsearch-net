@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(SecurityCreateApiKeyRequestJsonConverter))]
 	public partial interface ISecurityCreateApiKeyRequest
 	{
 		/// <summary>
@@ -60,5 +62,42 @@ namespace Nest
 
 	}
 
-	public class RoleDescriptor{}
+	public class RoleDescriptor
+	{
+
+	}
+
+	internal class SecurityCreateApiKeyRequestJsonConverter : JsonConverter
+	{
+		public override bool CanRead => false;
+		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var apiKeyRequest = value as ISecurityCreateApiKeyRequest;
+			writer.WriteStartObject();
+
+			if (!string.IsNullOrEmpty(apiKeyRequest.Name))
+			{
+				writer.WritePropertyName("name");
+				serializer.Serialize(writer, apiKeyRequest.Name);
+			}
+
+			if (apiKeyRequest.Expiration != null)
+			{
+				writer.WritePropertyName("expiration");
+				serializer.Serialize(writer, apiKeyRequest.Expiration);
+			}
+
+			writer.WritePropertyName("role_descriptors");
+			serializer.Serialize(writer, apiKeyRequest.RoleDescriptors ?? new object()); // server expects {} if null
+
+			writer.WriteEndObject();
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			throw new NotSupportedException();
+	}
 }
