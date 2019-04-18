@@ -102,7 +102,7 @@ namespace Nest
 		/// <summary>
 		/// A field containing the number of required terms that must match
 		/// </summary>
-		public TermsSetQueryDescriptor<T> MinimumShouldMatchField(Expression<Func<T, object>> objectPath) =>
+		public TermsSetQueryDescriptor<T> MinimumShouldMatchField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.MinimumShouldMatchField = v);
 
 		/// <summary>

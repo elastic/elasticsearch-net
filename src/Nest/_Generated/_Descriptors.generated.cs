@@ -3503,7 +3503,7 @@ namespace Nest
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Field suggestField) => Qs("suggest_field", suggestField);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
+		public SearchDescriptor<T> SuggestField<TValue>(Expression<Func<T, TValue>> field)  => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
 		public SearchDescriptor<T> SuggestMode(SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		///<summary>How many suggestions to return in response</summary>

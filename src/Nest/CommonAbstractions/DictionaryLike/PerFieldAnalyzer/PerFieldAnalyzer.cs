@@ -23,7 +23,7 @@ namespace Nest
 
 	public class PerFieldAnalyzer<T> : PerFieldAnalyzer where T : class
 	{
-		public void Add(Expression<Func<T, object>> field, string analyzer) => BackingDictionary.Add(field, analyzer);
+		public void Add<TValue>(Expression<Func<T, TValue>> field, string analyzer) => BackingDictionary.Add(field, analyzer);
 	}
 
 	public class PerFieldAnalyzerDescriptor<T> : IsADictionaryDescriptorBase<PerFieldAnalyzerDescriptor<T>, IPerFieldAnalyzer, Field, string>
@@ -33,6 +33,6 @@ namespace Nest
 
 		public PerFieldAnalyzerDescriptor<T> Field(Field field, string analyzer) => Assign(field, analyzer);
 
-		public PerFieldAnalyzerDescriptor<T> Field(Expression<Func<T, object>> field, string analyzer) => Assign(field, analyzer);
+		public PerFieldAnalyzerDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field, string analyzer) => Assign(field, analyzer);
 	}
 }

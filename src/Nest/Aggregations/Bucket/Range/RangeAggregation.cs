@@ -46,7 +46,7 @@ namespace Nest
 
 		public RangeAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public RangeAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public RangeAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 

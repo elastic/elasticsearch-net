@@ -40,7 +40,7 @@ namespace Nest
 
 		public GsubProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public GsubProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public GsubProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public GsubProcessorDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);

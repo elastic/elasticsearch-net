@@ -94,7 +94,7 @@ namespace Nest
 
 		public AutoDateHistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public AutoDateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public AutoDateHistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public AutoDateHistogramAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 

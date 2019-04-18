@@ -43,10 +43,10 @@ namespace Nest
 
 		public GraphExploreControlsDescriptor<T> Timeout(Time time) => Assign(time, (a, v) => a.Timeout = v);
 
-		public GraphExploreControlsDescriptor<T> SamleDiversity(Field field, int? maxDocumentsPerValue) =>
+		public GraphExploreControlsDescriptor<T> SampleDiversity(Field field, int? maxDocumentsPerValue) =>
 			Assign(new SampleDiversity { Field = field, MaxDocumentsPerValue = maxDocumentsPerValue }, (a, v) => a.SampleDiversity = v);
 
-		public GraphExploreControlsDescriptor<T> SamleDiversity(Expression<Func<T, object>> field, int? maxDocumentsPerValue) =>
+		public GraphExploreControlsDescriptor<T> SampleDiversity<TValue>(Expression<Func<T, TValue>> field, int? maxDocumentsPerValue) =>
 			Assign(new SampleDiversity { Field = field, MaxDocumentsPerValue = maxDocumentsPerValue }, (a, v) => a.SampleDiversity = v);
 	}
 }

@@ -68,7 +68,7 @@ namespace Nest
 		/// <summary>
 		/// The field to decode
 		/// </summary>
-		public UrlDecodeProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public UrlDecodeProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <summary>
@@ -79,7 +79,7 @@ namespace Nest
 		/// <summary>
 		/// The field to assign the converted value to, by default <see cref="IUrlDecodeProcessor.Field" /> is updated in-place
 		/// </summary>
-		public UrlDecodeProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+		public UrlDecodeProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <summary>

@@ -69,7 +69,7 @@ namespace Nest
 		public WeightedAverageValueDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IWeightedAverageValue.Field" />
-		public WeightedAverageValueDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public WeightedAverageValueDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IWeightedAverageValue.Script" />
 		public virtual WeightedAverageValueDescriptor<T> Script(string script) => Assign(new InlineScript(script), (a, v) => a.Script = v);

@@ -13,10 +13,10 @@ namespace Nest
 		MultiTermQueryRewrite Rewrite { get; set; }
 	}
 
-	public class WildcardQuery<T> : WildcardQuery
+	public class WildcardQuery<T, TValue> : WildcardQuery
 		where T : class
 	{
-		public WildcardQuery(Expression<Func<T, object>> field) => Field = field;
+		public WildcardQuery(Expression<Func<T, TValue>> field) => Field = field;
 	}
 
 	public class WildcardQuery : FieldNameQueryBase, IWildcardQuery

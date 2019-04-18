@@ -40,7 +40,7 @@ namespace Nest
 
 		public void Add(PropertyName name, IProperty property) => BackingDictionary.Add(name, property);
 
-		public void Add(Expression<Func<T, object>> name, IProperty property) => BackingDictionary.Add(name, property);
+		public void Add<TValue>(Expression<Func<T, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 	}
 
 	public partial interface IPropertiesDescriptor<T, out TReturnType>

@@ -75,7 +75,7 @@ namespace Nest
 
 		public GeoDistanceSortDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public GeoDistanceSortDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public GeoDistanceSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IGeoDistanceSort.IgnoreUnmapped" />
 		public GeoDistanceSortDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);

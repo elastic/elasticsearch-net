@@ -81,7 +81,7 @@ namespace Nest
 		public DateHistogramRollupGroupingDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field" />
-		public DateHistogramRollupGroupingDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public DateHistogramRollupGroupingDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Interval" />
 		public DateHistogramRollupGroupingDescriptor<T> Interval(Time interval) => Assign(interval, (a, v) => a.Interval = v);

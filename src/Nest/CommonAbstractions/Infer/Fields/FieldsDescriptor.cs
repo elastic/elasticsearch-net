@@ -15,7 +15,7 @@ namespace Nest
 
 		public FieldsDescriptor<T> Fields(IEnumerable<Field> fields) => Assign(fields, (f, v) => f.ListOfFields.AddRange(v));
 
-		public FieldsDescriptor<T> Field(Expression<Func<T, object>> field, double? boost = null, string format = null) =>
+		public FieldsDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field, double? boost = null, string format = null) =>
 			Assign(new Field(field, boost, format), (f, v) => f.And(v));
 
 		public FieldsDescriptor<T> Field(string field, double? boost = null, string format = null) =>

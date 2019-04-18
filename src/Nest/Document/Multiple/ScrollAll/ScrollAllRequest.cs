@@ -93,7 +93,7 @@ namespace Nest
 		public ScrollAllDescriptor<T> RoutingField(Field field) => Assign(field, (a, v) => a.RoutingField = v);
 
 		/// <inheritdoc />
-		public ScrollAllDescriptor<T> RoutingField(Expression<Func<T, object>> objectPath) =>
+		public ScrollAllDescriptor<T> RoutingField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.RoutingField = v);
 
 		/// <inheritdoc />

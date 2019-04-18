@@ -38,7 +38,7 @@ namespace Nest
 
 		public SpanGapQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SpanGapQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public SpanGapQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(width, (a, v) => a.Width = v);
 	}

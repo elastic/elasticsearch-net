@@ -37,6 +37,6 @@ namespace Nest
 
 		public SlicedScrollDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SlicedScrollDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public SlicedScrollDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

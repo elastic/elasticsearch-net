@@ -47,7 +47,7 @@ namespace Nest
 
 		public TMetricAggregation Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public TMetricAggregation Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public virtual TMetricAggregation Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 

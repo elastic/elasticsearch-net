@@ -116,19 +116,19 @@ namespace Nest
 
 		public SumDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public SumDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
+		public SumDetectorDescriptor<T> FieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
 		public SumDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public SumDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
+		public SumDetectorDescriptor<T> ByFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
 		public SumDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(overFieldName, (a, v) => a.OverFieldName = v);
 
-		public SumDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
+		public SumDetectorDescriptor<T> OverFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
 
 		public SumDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public SumDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.PartitionFieldName = v);
+		public SumDetectorDescriptor<T> PartitionFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 
 	public class NonNullSumDetectorDescriptor<T> : DetectorDescriptorBase<NonNullSumDetectorDescriptor<T>, INonNullSumDetector>, INonNullSumDetector
@@ -142,15 +142,15 @@ namespace Nest
 
 		public NonNullSumDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
+		public NonNullSumDetectorDescriptor<T> FieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
 		public NonNullSumDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
+		public NonNullSumDetectorDescriptor<T> ByFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
 		public NonNullSumDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+		public NonNullSumDetectorDescriptor<T> PartitionFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 }

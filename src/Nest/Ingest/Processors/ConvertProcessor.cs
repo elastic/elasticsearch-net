@@ -37,12 +37,12 @@ namespace Nest
 
 		public ConvertProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public ConvertProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public ConvertProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public ConvertProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
-		public ConvertProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+		public ConvertProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		public ConvertProcessorDescriptor<T> Type(ConvertProcessorType? type) => Assign(type, (a, v) => a.Type = v);

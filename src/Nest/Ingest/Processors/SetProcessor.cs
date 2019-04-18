@@ -32,7 +32,7 @@ namespace Nest
 
 		public SetProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SetProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public SetProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public SetProcessorDescriptor<T> Value<TValue>(TValue value) => Assign(value, (a, v) => a.Value = v);

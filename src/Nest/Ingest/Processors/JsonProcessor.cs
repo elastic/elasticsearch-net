@@ -61,14 +61,14 @@ namespace Nest
 		public JsonProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public JsonProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
 		public JsonProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+		public JsonProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />

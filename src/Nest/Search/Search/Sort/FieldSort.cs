@@ -40,7 +40,7 @@ namespace Nest
 			return this;
 		}
 
-		public virtual FieldSortDescriptor<T> Field(Expression<Func<T, object>> objectPath)
+		public virtual FieldSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath)
 		{
 			_field = objectPath;
 			return this;

@@ -41,7 +41,7 @@ namespace Nest
 
 		public IpRangeAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public IpRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public IpRangeAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public IpRangeAggregationDescriptor<T> Ranges(params Func<IpRangeAggregationRangeDescriptor, IIpRangeAggregationRange>[] ranges) =>
 			Assign(ranges?.Select(r => r(new IpRangeAggregationRangeDescriptor())), (a, v) => a.Ranges = v);

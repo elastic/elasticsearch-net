@@ -47,6 +47,10 @@ namespace Nest
 		/// Create a strongly typed string field name representation of the path to a property
 		/// <para>e.g. p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
 		/// </summary>
+		public static Field Field<T, TValue>(Expression<Func<T, TValue>> path, double? boost = null, string format = null)
+			where T : class => new Field(path, boost, format);
+		
+		/// <inheritdoc cref="Field{T, TValue}" />
 		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null, string format = null)
 			where T : class => new Field(path, boost, format);
 
@@ -58,6 +62,8 @@ namespace Nest
 
 		public static PropertyName Property(string property) => property;
 
+		public static PropertyName Property<T, TValue>(Expression<Func<T, TValue>> path) where T : class => path;
+		
 		public static PropertyName Property<T>(Expression<Func<T, object>> path) where T : class => path;
 	}
 }

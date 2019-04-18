@@ -152,7 +152,7 @@ namespace Nest
 		public PercolateQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Field" />
-		public PercolateQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public PercolateQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Document" />
 		public PercolateQueryDescriptor<T> Document<TDocument>(TDocument document) => Assign(document, (a, v) => a.Document = v);

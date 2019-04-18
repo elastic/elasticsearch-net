@@ -33,9 +33,14 @@ namespace Nest
 		public IFieldMapping MappingFor<T>(Field property, IndexName index) =>
 			GetMapping(index ?? Index<T>(), property);
 
+		public IFieldMapping MappingFor<T, TValue>(Expression<Func<T, TValue>> objectPath, IndexName index = null)
+			where T : class =>
+			GetMapping(index ?? Index<T>(), Field(objectPath));
+		
 		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null)
 			where T : class =>
 			GetMapping(index ?? Index<T>(), Field(objectPath));
+
 
 		private IReadOnlyDictionary<Field, FieldMapping> MappingsFor(IndexName index)
 		{

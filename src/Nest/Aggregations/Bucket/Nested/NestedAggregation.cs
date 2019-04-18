@@ -33,6 +33,6 @@ namespace Nest
 
 		public NestedAggregationDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public NestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(path, (a, v) => a.Path = v);
+		public NestedAggregationDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> path) => Assign(path, (a, v) => a.Path = v);
 	}
 }

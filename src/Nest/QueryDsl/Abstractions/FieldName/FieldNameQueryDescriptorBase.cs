@@ -17,7 +17,7 @@ namespace Nest
 
 		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public TDescriptor Field(Expression<Func<T, object>> objectPath) =>
+		public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

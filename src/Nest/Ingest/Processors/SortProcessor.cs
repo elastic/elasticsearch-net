@@ -45,7 +45,7 @@ namespace Nest
 
 		public SortProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SortProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public SortProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>

@@ -33,6 +33,6 @@ namespace Nest
 
 		public ExistsQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public ExistsQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

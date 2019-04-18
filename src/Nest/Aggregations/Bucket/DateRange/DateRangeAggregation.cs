@@ -53,7 +53,7 @@ namespace Nest
 
 		public DateRangeAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public DateRangeAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
