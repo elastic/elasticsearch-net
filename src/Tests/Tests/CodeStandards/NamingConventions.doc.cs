@@ -29,7 +29,7 @@ namespace Tests.CodeStandards
 			};
 
 			var abstractClassesNotEndingInBase = typeof(IRequest).Assembly.GetTypes()
-				.Where(t => t.IsClass && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
+				.Where(t => t.IsClass && t.IsAbstract && !t.IsSealed && !exceptions.Contains(t))
 				//when testing nuget package against merged internalize json.net skip its types.
 				.Where(t => !t.Namespace.StartsWith("Nest.Json"))
 				.Where(t => !t.Namespace.StartsWith("Elastic.Internal"))
@@ -50,7 +50,7 @@ namespace Tests.CodeStandards
 			var baseClassesNotAbstract = typeof(IRequest).Assembly.GetTypes()
 				.Where(t => t.IsClass && !exceptions.Contains(t))
 				.Where(t => t.Name.Split('`')[0].EndsWith("Base"))
-				.Where(t => !t.IsAbstract())
+				.Where(t => !t.IsAbstract)
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
@@ -66,7 +66,7 @@ namespace Tests.CodeStandards
 		{
 			var types = typeof(IRequest).Assembly.GetTypes();
 			var requestsNotEndingInRequest = types
-				.Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
+				.Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract)
 				.Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Request"))
 				.Select(t => t.Name.Split('`')[0])
@@ -83,7 +83,7 @@ namespace Tests.CodeStandards
 		{
 			var types = typeof(IRequest).Assembly.GetTypes();
 			var responsesNotEndingInResponse = types
-				.Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
+				.Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract)
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
@@ -135,7 +135,7 @@ namespace Tests.CodeStandards
 			var requests = new HashSet<string>(types
 				.Where(t =>
 					t.IsClass &&
-					!t.IsAbstract() &&
+					!t.IsAbstract &&
 					typeof(IRequest).IsAssignableFrom(t) &&
 					!typeof(IDescriptor).IsAssignableFrom(t)
 					&& !t.Name.StartsWith("Cat")
@@ -144,7 +144,7 @@ namespace Tests.CodeStandards
 			);
 
 			var responses = types
-				.Where(t => t.IsClass && !t.IsAbstract() && typeof(IResponse).IsAssignableFrom(t))
+				.Where(t => t.IsClass && !t.IsAbstract && typeof(IResponse).IsAssignableFrom(t))
 				.Select(t => t.Name.Split('`')[0].Replace("Response", ""));
 
 			requests.Except(responses).Should().BeEmpty();
@@ -218,7 +218,8 @@ namespace Tests.CodeStandards
 			for (var index = 0; index < value.Length; ++index)
 			{
 				var character = value[index];
-				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
+				var unicodeCategory = char.GetUnicodeCategory(character);
+
 				switch (unicodeCategory)
 				{
 					case UnicodeCategory.UppercaseLetter:

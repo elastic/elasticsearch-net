@@ -56,7 +56,7 @@ namespace Tests.CodeStandards
 		{
 			var types =
 				from t in type.Assembly.Types()
-				where t.IsInterface() && type.IsAssignableFrom(t)
+				where t.IsInterface && type.IsAssignableFrom(t)
 				let properties = t.GetProperties()
 				from p in properties
 				where p.GetCustomAttribute(typeof(DataMemberAttribute)) == null

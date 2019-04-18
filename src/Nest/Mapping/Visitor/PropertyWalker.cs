@@ -94,7 +94,7 @@ namespace Nest
 					}
 				};
 
-			if (type.IsEnumType())
+			if (type.IsEnum)
 			{
 				if (type.GetTypeInfo().GetCustomAttribute<StringEnumAttribute>() != null
 					|| propertyInfo.GetCustomAttribute<StringEnumAttribute>() != null)
@@ -103,7 +103,7 @@ namespace Nest
 				return new NumberProperty(NumberType.Integer);
 			}
 
-			if (type.IsValue())
+			if (type.IsValueType)
 			{
 				switch (type.Name)
 				{

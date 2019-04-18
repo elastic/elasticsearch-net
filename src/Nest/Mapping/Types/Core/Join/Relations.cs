@@ -14,8 +14,7 @@ namespace Nest
 
 		public Relations(IDictionary<RelationName, Children> container) : base(container) { }
 
-		public Relations(Dictionary<RelationName, Children> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Relations(Dictionary<RelationName, Children> container) : base(container) { }
 
 		public void Add(RelationName type, Children children)
 		{

@@ -57,23 +57,14 @@ namespace Elasticsearch.Net
 				errors == SslPolicyErrors.None
 				|| ValidRootCa(caCertificate, cert, chain, trustRoot, revocationMode);
 
-		private static X509Certificate2 to2(X509Certificate certificate)
-		{
-#if DOTNETCORE
-			return new X509Certificate2(certificate.Export(X509ContentType.Cert));
-#else
-				return new X509Certificate2(certificate);
-			#endif
-		}
-
 		private static bool ValidRootCa(X509Certificate caCertificate, X509Certificate certificate, X509Chain chain, bool trustRoot,
 			X509RevocationMode revocationMode
 		)
 		{
-			var ca = to2(caCertificate);
+			var ca = new X509Certificate2(caCertificate);
 			var privateChain = new X509Chain { ChainPolicy = { RevocationMode = revocationMode } };
 			privateChain.ChainPolicy.ExtraStore.Add(ca);
-			privateChain.Build(to2(certificate));
+			privateChain.Build(new X509Certificate2(certificate));
 
 			//lets validate the our chain status
 			foreach (var chainStatus in privateChain.ChainStatus)
@@ -95,10 +86,10 @@ namespace Elasticsearch.Net
 			X509RevocationMode revocationMode
 		)
 		{
-			var ca = to2(caCertificate);
+			var ca = new X509Certificate2(caCertificate);
 			var privateChain = new X509Chain { ChainPolicy = { RevocationMode = revocationMode } };
 			privateChain.ChainPolicy.ExtraStore.Add(ca);
-			privateChain.Build(to2(certificate));
+			privateChain.Build(new X509Certificate2(certificate));
 
 			//Assert our chain has the same number of elements as the certifcate presented by the server
 			if (chain.ChainElements.Count != privateChain.ChainElements.Count) return false;

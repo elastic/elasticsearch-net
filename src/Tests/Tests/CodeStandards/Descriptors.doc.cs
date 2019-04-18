@@ -21,8 +21,8 @@ namespace Tests.CodeStandards
 			var notDescriptors = new[] {typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute"};
 
 			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly().Types()
-				where t.IsClass()
+				from t in typeof(DescriptorBase<,>).Assembly.Types()
+				where t.IsClass
 					  && t.Name.Contains("Descriptor")
 					  && !t.Namespace.StartsWith("Nest.Json")
 					  && !t.Namespace.StartsWith("Elastic.Internal")
@@ -44,8 +44,8 @@ namespace Tests.CodeStandards
 		{
 			var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
 			var selectors =
-				from t in typeof(SelectorBase<>).Assembly().Types()
-				where t.IsClass()
+				from t in typeof(SelectorBase<>).Assembly.Types()
+				where t.IsClass
 					  && t.Name.Contains("Selector")
 					  && !t.Namespace.StartsWith("Nest.Json")
 					  && !notSelectors.Contains(t.Name)
@@ -83,7 +83,7 @@ namespace Tests.CodeStandards
 
 			Func<Type, Type, bool> exclude = (first, second) =>
 			{
-				var key = first.IsGenericType()
+				var key = first.IsGenericType
 					? first.GetGenericTypeDefinition()
 					: first;
 
@@ -91,7 +91,7 @@ namespace Tests.CodeStandards
 				if (!exclusions.TryGetValue(key, out value))
 					return false;
 
-				return second.IsGenericType()
+				return second.IsGenericType
 					? second.GetGenericTypeDefinition() == value
 					: value.IsAssignableFrom(second);
 			};
@@ -102,14 +102,14 @@ namespace Tests.CodeStandards
 				let parameters = m.GetParameters()
 				from p in parameters
 				let type = p.ParameterType
-				let isGeneric = type.IsGenericType()
+				let isGeneric = type.IsGenericType
 				where isGeneric
 				let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
 				where isFunc
 				let firstFuncArg = type.GetGenericArguments().First()
 				let secondFuncArg = type.GetGenericArguments().Last()
 				where !exclude(firstFuncArg, secondFuncArg)
-				let lastArgIsNotInterface = !secondFuncArg.IsInterface()
+				let lastArgIsNotInterface = !secondFuncArg.IsInterface
 				where lastArgIsNotInterface
 				select $"{m.Name} on {m.DeclaringType.Name}";
 
@@ -125,7 +125,7 @@ namespace Tests.CodeStandards
 		{
 			var queries =
 				from t in typeof(IQuery).Assembly.Types()
-				where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
+				where t.IsInterface && typeof(IQuery).IsAssignableFrom(t)
 				where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
 				select t;
 
@@ -186,8 +186,8 @@ namespace Tests.CodeStandards
 				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
 				let p = ps.First()
 				let pt = p.ParameterType
-				where (!pt.IsGenericType() || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
-				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+				where (!pt.IsGenericType || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
+				let dt = m.DeclaringType.IsGenericType ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 
 				//skips
 				where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
@@ -238,7 +238,7 @@ namespace Tests.CodeStandards
 				let p = ps.First()
 				let pt = p.ParameterType
 				where pt == typeof(bool?)
-				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+				let dt = m.DeclaringType.IsGenericType ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 				where !(m.Name == nameof(BooleanPropertyDescriptor<object>.NullValue) && dt == typeof(BooleanPropertyDescriptor<>))
 				select new {m, d, p};
 
@@ -274,7 +274,7 @@ namespace Tests.CodeStandards
 			var descriptors =
 				from t in typeof(DescriptorBase<,>).Assembly.Types()
 				where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
-				where !t.IsAbstract()
+				where !t.IsAbstract
 				select t;
 			return descriptors;
 		}

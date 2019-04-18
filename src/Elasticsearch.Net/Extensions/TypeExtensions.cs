@@ -16,9 +16,6 @@ namespace Elasticsearch.Net
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
-
-		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance(args);
-
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			var argKey = args.Length;
@@ -29,7 +26,6 @@ namespace Elasticsearch.Net
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 				let p = c.GetParameters()
-				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
 				where p.Length == args.Length
 				select c;
 
@@ -41,8 +37,6 @@ namespace Elasticsearch.Net
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
-
-		internal static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
 
 		//do not remove this is referenced through GetActivatorMethod
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
@@ -86,7 +80,7 @@ namespace Elasticsearch.Net
 			new ConcurrentDictionary<Type, Func<object>>();
 
 		internal static object DefaultValue(this Type type) =>
-			type.IsValueType()
+			type.IsValueType
 				? CachedDefaultValues.GetOrAdd(type, t =>
 						Expression.Lambda<Func<object>>(
 								Expression.Convert(Expression.Default(type), typeof(object))
