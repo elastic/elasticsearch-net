@@ -85,6 +85,7 @@ namespace Tests.ClientConcepts.ServerError
 			error.CausedBy.Should().NotBeNull();
 			error.CausedBy.ScriptStack.Should().HaveCount(2);
 			error.CausedBy.ResourceId.Should().HaveCount(2);
+			error.AdditionalProperties.Should().ContainKeys("unknown_prop", "unknown_prop2");
 		}
 
 		private void AssertMetadata(string origin, ErrorCause errorMetadata)

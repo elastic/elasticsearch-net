@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,27 +20,61 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<ErrorCause> RootCause { get; set; }
 	}
 
-	internal class ErrorFormatter : IJsonFormatter<Error>
+	internal class ErrorFormatter : ErrorCauseFormatter<Error>
 	{
-		private static readonly IJsonFormatter<Error> Formatter =
-			DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<Error>();
-
-		public void Serialize(ref JsonWriter writer, Error value, IJsonFormatterResolver formatterResolver) =>
-			Formatter.Serialize(ref writer, value, formatterResolver);
-
-		public Error Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
-			var token = reader.GetCurrentJsonToken();
-			switch (token)
+			{ "headers", 0 },
+			{ "root_cause", 1 }
+		};
+
+		protected override void Serialize(ref JsonWriter writer, ref int count, Error value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value.Headers.Any())
 			{
-				case JsonToken.String:
-					return new Error { Reason = reader.ReadString() };
-				case JsonToken.BeginObject:
-					return Formatter.Deserialize(ref reader, formatterResolver);
-				default:
-					reader.ReadNextBlock();
-					return null;
+				if (count > 0)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("headers");
+				formatterResolver.GetFormatter<IReadOnlyDictionary<string, string>>()
+					.Serialize(ref writer, value.Headers, formatterResolver);
+
+				count++;
 			}
+
+			if (value.RootCause.Any())
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("root_cause");
+				formatterResolver.GetFormatter<IReadOnlyCollection<ErrorCause>>()
+					.Serialize(ref writer, value.RootCause, formatterResolver);
+
+				count++;
+			}
+		}
+
+		protected override bool Deserialize(ref JsonReader reader, ref ArraySegment<byte> property, Error value, IJsonFormatterResolver formatterResolver)
+		{
+			if (Fields.TryGetValue(property, out var fieldValue))
+			{
+				switch (fieldValue)
+				{
+					case 0:
+						value.Headers = formatterResolver.GetFormatter<Dictionary<string, string>>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+					case 1:
+						value.RootCause = formatterResolver.GetFormatter<List<ErrorCause>>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+				}
+
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

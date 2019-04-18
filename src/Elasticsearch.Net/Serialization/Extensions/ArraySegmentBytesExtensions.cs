@@ -74,5 +74,9 @@ namespace Elasticsearch.Net
 
 			return false;
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static string Utf8String(this ref ArraySegment<byte> segment) =>
+			StringEncoding.UTF8.GetString(segment.Array, segment.Offset, segment.Count);
 	}
 }
