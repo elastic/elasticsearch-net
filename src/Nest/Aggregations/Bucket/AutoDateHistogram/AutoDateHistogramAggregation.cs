@@ -91,21 +91,21 @@ namespace Nest
 
 		string IAutoDateHistogramAggregation.TimeZone { get; set; }
 
-		public AutoDateHistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public AutoDateHistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public AutoDateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public AutoDateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public AutoDateHistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public AutoDateHistogramAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public AutoDateHistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
-		public AutoDateHistogramAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public AutoDateHistogramAggregationDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
-		public AutoDateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public AutoDateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 
-		public AutoDateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(a => a.Offset = offset);
+		public AutoDateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(offset, (a, v) => a.Offset = v);
 
-		public AutoDateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(a => a.Missing = missing);
+		public AutoDateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(missing, (a, v) => a.Missing = v);
 	}
 }

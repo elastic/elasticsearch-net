@@ -94,33 +94,33 @@ namespace Nest
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<T> AnalysisLimits(Func<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit> selector) =>
-			Assign(a => a.AnalysisLimits = selector?.Invoke(new AnalysisMemoryLimitDescriptor()));
+			Assign(selector, (a, v) => a.AnalysisLimits = v?.Invoke(new AnalysisMemoryLimitDescriptor()));
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<T> BackgroundPersistInterval(Time backgroundPersistInterval) =>
-			Assign(a => a.BackgroundPersistInterval = backgroundPersistInterval);
+			Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<T> CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> customSettingsDictionary
 		) =>
-			Assign(a => a.CustomSettings = customSettingsDictionary(new FluentDictionary<string, object>()));
+			Assign(customSettingsDictionary(new FluentDictionary<string, object>()), (a, v) => a.CustomSettings = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> Description(string description) => Assign(a => a.Description = description);
+		public UpdateJobDescriptor<T> Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<T> ModelPlot(Func<ModelPlotConfigEnabledDescriptor<T>, IModelPlotConfigEnabled> selector) =>
-			Assign(a => a.ModelPlotConfig = selector?.Invoke(new ModelPlotConfigEnabledDescriptor<T>()));
+			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigEnabledDescriptor<T>()));
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<T> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
-			Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
+			Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<T> RenormalizationWindowDays(long? renormalizationWindowDays) =>
-			Assign(a => a.RenormalizationWindowDays = renormalizationWindowDays);
+			Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> ResultsRetentionDays(long? resultsRetentionDays) => Assign(a => a.ResultsRetentionDays = resultsRetentionDays);
+		public UpdateJobDescriptor<T> ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
 	}
 }

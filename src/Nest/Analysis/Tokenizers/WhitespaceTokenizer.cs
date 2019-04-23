@@ -37,6 +37,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IWhitespaceTokenizer.MaxTokenLength" />
 		public WhitespaceTokenizerDescriptor MaxTokenLength(int? maxTokenLength) =>
-			Assign(a => a.MaxTokenLength = maxTokenLength);
+			Assign(maxTokenLength, (a, v) => a.MaxTokenLength = v);
 	}
 }

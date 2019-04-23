@@ -33,8 +33,8 @@ namespace Nest
 		KuromojiTokenizationMode? IKuromojiAnalyzer.Mode { get; set; }
 		string IKuromojiAnalyzer.UserDictionary { get; set; }
 
-		public KuromojiAnalyzerDescriptor Mode(KuromojiTokenizationMode? mode) => Assign(a => a.Mode = mode);
+		public KuromojiAnalyzerDescriptor Mode(KuromojiTokenizationMode? mode) => Assign(mode, (a, v) => a.Mode = v);
 
-		public KuromojiAnalyzerDescriptor UserDictionary(string userDictionary) => Assign(a => a.UserDictionary = userDictionary);
+		public KuromojiAnalyzerDescriptor UserDictionary(string userDictionary) => Assign(userDictionary, (a, v) => a.UserDictionary = v);
 	}
 }

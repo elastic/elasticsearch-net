@@ -95,14 +95,14 @@ namespace Nest
 		IndexSortOrder[] ISortingSettings.Order { get; set; }
 
 		public SortingSettingsDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SortingSettingsDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public SortingSettingsDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
-		public SortingSettingsDescriptor<T> Order(params IndexSortOrder[] order) => Assign(a => a.Order = order);
+		public SortingSettingsDescriptor<T> Order(params IndexSortOrder[] order) => Assign(order, (a, v) => a.Order = v);
 
-		public SortingSettingsDescriptor<T> Mode(params IndexSortMode[] mode) => Assign(a => a.Mode = mode);
+		public SortingSettingsDescriptor<T> Mode(params IndexSortMode[] mode) => Assign(mode, (a, v) => a.Mode = v);
 
-		public SortingSettingsDescriptor<T> Missing(params IndexSortMissing[] missing) => Assign(a => a.Missing = missing);
+		public SortingSettingsDescriptor<T> Missing(params IndexSortMissing[] missing) => Assign(missing, (a, v) => a.Missing = v);
 	}
 }

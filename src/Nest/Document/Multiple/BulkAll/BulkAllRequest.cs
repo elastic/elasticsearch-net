@@ -198,56 +198,56 @@ namespace Nest
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.MaxDegreeOfParallelism" />
 		public BulkAllDescriptor<T> MaxDegreeOfParallelism(int? parallelism) =>
-			Assign(a => a.MaxDegreeOfParallelism = parallelism);
+			Assign(parallelism, (a, v) => a.MaxDegreeOfParallelism = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Size" />
-		public BulkAllDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public BulkAllDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.BackOffRetries" />
 		public BulkAllDescriptor<T> BackOffRetries(int? backoffs) =>
-			Assign(a => a.BackOffRetries = backoffs);
+			Assign(backoffs, (a, v) => a.BackOffRetries = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.BackOffTime" />
-		public BulkAllDescriptor<T> BackOffTime(Time time) => Assign(a => a.BackOffTime = time);
+		public BulkAllDescriptor<T> BackOffTime(Time time) => Assign(time, (a, v) => a.BackOffTime = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Index" />
-		public BulkAllDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
+		public BulkAllDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Index" />
-		public BulkAllDescriptor<T> Index<TOther>() where TOther : class => Assign(a => a.Index = typeof(TOther));
+		public BulkAllDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a, v) => a.Index = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Type" />
-		public BulkAllDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
+		public BulkAllDescriptor<T> Type(TypeName type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Type" />
-		public BulkAllDescriptor<T> Type<TOther>() where TOther : class => Assign(a => a.Type = typeof(TOther));
+		public BulkAllDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a, v) => a.Type = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshOnCompleted" />
-		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(p => p.RefreshOnCompleted = refresh);
+		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(refresh, (a, v) => a.RefreshOnCompleted = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Refresh" />
 #pragma warning disable 618
-		public BulkAllDescriptor<T> Refresh(Refresh? refresh) => Assign(p => p.Refresh = refresh);
+		public BulkAllDescriptor<T> Refresh(Refresh? refresh) => Assign(refresh, (a, v) => a.Refresh = v);
 #pragma warning restore 618
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshIndices" />
-		public BulkAllDescriptor<T> RefreshIndices(Indices indicesToRefresh) => Assign(a => a.RefreshIndices = indicesToRefresh);
+		public BulkAllDescriptor<T> RefreshIndices(Indices indicesToRefresh) => Assign(indicesToRefresh, (a, v) => a.RefreshIndices = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Routing" />
-		public BulkAllDescriptor<T> Routing(Routing routing) => Assign(p => p.Routing = routing);
+		public BulkAllDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Timeout" />
-		public BulkAllDescriptor<T> Timeout(Time timeout) => Assign(p => p.Timeout = timeout);
+		public BulkAllDescriptor<T> Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Pipeline" />
-		public BulkAllDescriptor<T> Pipeline(string pipeline) => Assign(p => p.Pipeline = pipeline);
+		public BulkAllDescriptor<T> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.BufferToBulk" />
-		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(p => p.BufferToBulk = modifier);
+		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(modifier, (a, v) => a.BufferToBulk = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RetryDocumentPredicate" />
 		public BulkAllDescriptor<T> RetryDocumentPredicate(Func<IBulkResponseItem, T, bool> predicate) =>
-			Assign(p => p.RetryDocumentPredicate = predicate);
+			Assign(predicate, (a, v) => a.RetryDocumentPredicate = v);
 
 		/// <summary>
 		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
@@ -259,13 +259,13 @@ namespace Nest
 		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
 		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
 		public BulkAllDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
-			Assign(a => a.BackPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency));
+			Assign(new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency), (a, v) => a.BackPressure = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.ContinueAfterDroppedDocuments" />
-		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(p => p.ContinueAfterDroppedDocuments = proceed);
+		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(proceed, (a, v) => a.ContinueAfterDroppedDocuments = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.DroppedDocumentCallback" />
 		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<IBulkResponseItem, T> callback) =>
-			Assign(p => p.DroppedDocumentCallback = callback);
+			Assign(callback, (a, v) => a.DroppedDocumentCallback = v);
 	}
 }

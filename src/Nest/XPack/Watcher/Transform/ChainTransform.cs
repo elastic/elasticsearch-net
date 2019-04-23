@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ChainTransformJsonConverter))]
+	[ContractJsonConverter(typeof(ChainTransformJsonConverter))]
 	public interface IChainTransform : ITransform
 	{
 		ICollection<TransformContainer> Transforms { get; set; }

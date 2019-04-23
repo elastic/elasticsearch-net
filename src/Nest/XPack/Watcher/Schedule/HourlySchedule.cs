@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HourlySchedule>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HourlySchedule>))]
 	public interface IHourlySchedule : ISchedule
 	{
 		[JsonProperty("minute")]
@@ -22,8 +22,8 @@ namespace Nest
 	{
 		IEnumerable<int> IHourlySchedule.Minute { get; set; }
 
-		public HourlyScheduleDescriptor Minute(params int[] minutes) => Assign(a => a.Minute = minutes);
+		public HourlyScheduleDescriptor Minute(params int[] minutes) => Assign(minutes, (a, v) => a.Minute = v);
 
-		public HourlyScheduleDescriptor Minute(IEnumerable<int> minutes) => Assign(a => a.Minute = minutes);
+		public HourlyScheduleDescriptor Minute(IEnumerable<int> minutes) => Assign(minutes, (a, v) => a.Minute = v);
 	}
 }

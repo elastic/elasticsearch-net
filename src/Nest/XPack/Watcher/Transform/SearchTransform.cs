@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTransform>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SearchTransform>))]
 	public interface ISearchTransform : ITransform
 	{
 		[JsonProperty("request")]
@@ -28,8 +28,8 @@ namespace Nest
 		Time ISearchTransform.Timeout { get; set; }
 
 		public SearchTransformDescriptor Request(Func<SearchInputRequestDescriptor, ISearchInputRequest> selector) =>
-			Assign(a => a.Request = selector.InvokeOrDefault(new SearchInputRequestDescriptor()));
+			Assign(selector.InvokeOrDefault(new SearchInputRequestDescriptor()), (a, v) => a.Request = v);
 
-		public SearchTransformDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
+		public SearchTransformDescriptor Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 }

@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 			using (var ms = new MemoryStream(serialized.Utf8Bytes())) await ms.CopyToAsync(writableStream).ConfigureAwait(false);
 		}
 
-		private static object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
+		private static object Default(Type type) => type.IsValueType ? type.CreateInstance() : null;
 
 		private static string RemoveNewLinesAndTabs(string input) => new string(input
 			.Where(c => c != '\r' && c != '\n')

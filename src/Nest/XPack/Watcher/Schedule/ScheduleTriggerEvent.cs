@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleTriggerEvent>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleTriggerEvent>))]
 	public interface IScheduleTriggerEvent : ITriggerEvent
 	{
 		[JsonProperty("scheduled_time")]
@@ -29,15 +29,15 @@ namespace Nest
 		Union<DateTimeOffset, string> IScheduleTriggerEvent.TriggeredTime { get; set; }
 
 		public ScheduleTriggerEventDescriptor TriggeredTime(DateTimeOffset? triggeredTime) =>
-			Assign(a => a.TriggeredTime = triggeredTime);
+			Assign(triggeredTime, (a, v) => a.TriggeredTime = v);
 
 		public ScheduleTriggerEventDescriptor TriggeredTime(string triggeredTime) =>
-			Assign(a => a.TriggeredTime = triggeredTime);
+			Assign(triggeredTime, (a, v) => a.TriggeredTime = v);
 
 		public ScheduleTriggerEventDescriptor ScheduledTime(DateTimeOffset? scheduledTime) =>
-			Assign(a => a.ScheduledTime = scheduledTime);
+			Assign(scheduledTime, (a, v) => a.ScheduledTime = v);
 
 		public ScheduleTriggerEventDescriptor ScheduledTime(string scheduledTime) =>
-			Assign(a => a.ScheduledTime = scheduledTime);
+			Assign(scheduledTime, (a, v) => a.ScheduledTime = v);
 	}
 }

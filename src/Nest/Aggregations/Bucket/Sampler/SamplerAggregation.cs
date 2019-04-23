@@ -44,15 +44,15 @@ namespace Nest
 		int? ISamplerAggregation.ShardSize { get; set; }
 
 		public SamplerAggregationDescriptor<T> ExecutionHint(SamplerAggregationExecutionHint? executionHint) =>
-			Assign(a => a.ExecutionHint = executionHint);
+			Assign(executionHint, (a, v) => a.ExecutionHint = v);
 
-		public SamplerAggregationDescriptor<T> MaxDocsPerValue(int? maxDocs) => Assign(a => a.MaxDocsPerValue = maxDocs);
+		public SamplerAggregationDescriptor<T> MaxDocsPerValue(int? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsPerValue = v);
 
-		public SamplerAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public SamplerAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public SamplerAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
-		public SamplerAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SamplerAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 	}
 }

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoutingJsonConverter))]
+	[ContractJsonConverter(typeof(RoutingJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{

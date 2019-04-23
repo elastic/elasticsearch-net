@@ -11,7 +11,7 @@ namespace Nest
 	/// <summary>
 	/// A field within Elasticsearch
 	/// </summary>
-	[JsonConverter(typeof(FieldJsonConverter))]
+	[ContractJsonConverter(typeof(FieldJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{

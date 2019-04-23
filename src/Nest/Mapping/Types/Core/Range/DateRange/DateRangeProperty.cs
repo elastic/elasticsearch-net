@@ -35,6 +35,6 @@ namespace Nest
 		string IDateRangeProperty.Format { get; set; }
 
 		/// <inheritdoc />
-		public DateRangePropertyDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateRangePropertyDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 	}
 }

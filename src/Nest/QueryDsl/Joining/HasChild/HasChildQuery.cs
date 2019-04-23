@@ -74,23 +74,23 @@ namespace Nest
 		TypeName IHasChildQuery.Type { get; set; }
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public HasChildQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
+		public HasChildQueryDescriptor<T> Type(string type) => Assign(type, (a, v) => a.Type = v);
 
-		public HasChildQueryDescriptor<T> ScoreMode(ChildScoreMode? scoreMode) => Assign(a => a.ScoreMode = scoreMode);
+		public HasChildQueryDescriptor<T> ScoreMode(ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreMode = v);
 
-		public HasChildQueryDescriptor<T> MinChildren(int? minChildren) => Assign(a => a.MinChildren = minChildren);
+		public HasChildQueryDescriptor<T> MinChildren(int? minChildren) => Assign(minChildren, (a, v) => a.MinChildren = v);
 
 		/// <summary>
 		/// Specify how many child documents are allowed to match.
 		/// </summary>
-		public HasChildQueryDescriptor<T> MaxChildren(int? maxChildren) => Assign(a => a.MaxChildren = maxChildren);
+		public HasChildQueryDescriptor<T> MaxChildren(int? maxChildren) => Assign(maxChildren, (a, v) => a.MaxChildren = v);
 
 		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
-			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+			Assign(selector.InvokeOrDefault(new InnerHitsDescriptor<T>()), (a, v) => a.InnerHits = v);
 
 		public HasChildQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) =>
-			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+			Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

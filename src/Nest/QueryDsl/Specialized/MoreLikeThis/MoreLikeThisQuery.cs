@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MoreLikeThisQueryDescriptor<object>>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<MoreLikeThisQueryDescriptor<object>>))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
 		[JsonProperty("analyzer")]
@@ -127,54 +127,54 @@ namespace Nest
 		VersionType? IMoreLikeThisQuery.VersionType { get; set; }
 
 		public MoreLikeThisQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MoreLikeThisQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public MoreLikeThisQueryDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+			Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
 		public MoreLikeThisQueryDescriptor<T> StopWords(params string[] stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(stopWords, (a, v) => a.StopWords = v);
 
 		public MoreLikeThisQueryDescriptor<T> StopWords(StopWords stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(stopWords, (a, v) => a.StopWords = v);
 
-		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int? maxQueryTerms) => Assign(a => a.MaxQueryTerms = maxQueryTerms);
+		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTerms = v);
 
-		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int? minTermFrequency) => Assign(a => a.MinTermFrequency = minTermFrequency);
+		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int? minTermFrequency) => Assign(minTermFrequency, (a, v) => a.MinTermFrequency = v);
 
 		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int? minDocumentFrequency) =>
-			Assign(a => a.MinDocumentFrequency = minDocumentFrequency);
+			Assign(minDocumentFrequency, (a, v) => a.MinDocumentFrequency = v);
 
 		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int? maxDocumentFrequency) =>
-			Assign(a => a.MaxDocumentFrequency = maxDocumentFrequency);
+			Assign(maxDocumentFrequency, (a, v) => a.MaxDocumentFrequency = v);
 
-		public MoreLikeThisQueryDescriptor<T> MinWordLength(int? minWordLength) => Assign(a => a.MinWordLength = minWordLength);
+		public MoreLikeThisQueryDescriptor<T> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLength = v);
 
-		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int? maxWordLength) => Assign(a => a.MaxWordLength = maxWordLength);
+		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLength = v);
 
-		public MoreLikeThisQueryDescriptor<T> BoostTerms(double? boostTerms) => Assign(a => a.BoostTerms = boostTerms);
+		public MoreLikeThisQueryDescriptor<T> BoostTerms(double? boostTerms) => Assign(boostTerms, (a, v) => a.BoostTerms = v);
 
-		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minMatch) => Assign(a => a.MinimumShouldMatch = minMatch);
+		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minMatch) => Assign(minMatch, (a, v) => a.MinimumShouldMatch = v);
 
-		public MoreLikeThisQueryDescriptor<T> Include(bool? include = true) => Assign(a => a.Include = include);
+		public MoreLikeThisQueryDescriptor<T> Include(bool? include = true) => Assign(include, (a, v) => a.Include = v);
 
-		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
 		public MoreLikeThisQueryDescriptor<T> Like(Func<LikeDescriptor<T>, IPromise<List<Like>>> selector) =>
-			Assign(a => a.Like = selector?.Invoke(new LikeDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Like = v?.Invoke(new LikeDescriptor<T>())?.Value);
 
 		public MoreLikeThisQueryDescriptor<T> Unlike(Func<LikeDescriptor<T>, IPromise<List<Like>>> selector) =>
-			Assign(a => a.Unlike = selector?.Invoke(new LikeDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Unlike = v?.Invoke(new LikeDescriptor<T>())?.Value);
 
 		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<PerFieldAnalyzerDescriptor<T>, IPromise<IPerFieldAnalyzer>> analyzerSelector) =>
-			Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new PerFieldAnalyzerDescriptor<T>())?.Value);
+			Assign(analyzerSelector, (a, v) => a.PerFieldAnalyzer = v?.Invoke(new PerFieldAnalyzerDescriptor<T>())?.Value);
 
-		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.Version = v);
 
-		public MoreLikeThisQueryDescriptor<T> VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
+		public MoreLikeThisQueryDescriptor<T> VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a.VersionType = v);
 
-		public MoreLikeThisQueryDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public MoreLikeThisQueryDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 	}
 }

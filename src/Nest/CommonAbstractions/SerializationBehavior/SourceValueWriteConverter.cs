@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -15,7 +16,7 @@ namespace Nest
 
 		public static void Write(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var nativeType = value.GetType().Assembly() == typeof(SourceValueWriteConverter).Assembly();
+			var nativeType = value.GetType().Assembly == typeof(SourceValueWriteConverter).Assembly;
 
 			var settings = serializer.GetConnectionSettings();
 			var s = nativeType ? settings.RequestResponseSerializer : settings.SourceSerializer;

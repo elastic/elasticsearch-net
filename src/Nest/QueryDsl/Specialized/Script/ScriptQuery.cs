@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ScriptQueryConverter))]
+	[ContractJsonConverter(typeof(ScriptQueryConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
@@ -68,13 +68,13 @@ namespace Nest
 
 		/// <summary> Inline script to execute </summary>
 		[Obsolete("Use Source(). Inline() is deprecated and scheduled to be removed in Elasticsearch 7.0")]
-		public ScriptQueryDescriptor<T> Inline(string script) => Assign(a => a.Inline = script);
+		public ScriptQueryDescriptor<T> Inline(string script) => Assign(script, (a, v) => a.Inline = v);
 
 		/// <summary> Inline script to execute </summary>
-		public ScriptQueryDescriptor<T> Source(string script) => Assign(a => a.Source = script);
+		public ScriptQueryDescriptor<T> Source(string script) => Assign(script, (a, v) => a.Source = v);
 
 		/// <summary> Id of an indexed script to execute </summary>
-		public ScriptQueryDescriptor<T> Id(string scriptId) => Assign(a => a.Id = scriptId);
+		public ScriptQueryDescriptor<T> Id(string scriptId) => Assign(scriptId, (a, v) => a.Id = v);
 
 		/// <summary>
 		///  Scripts are compiled and cached for faster execution.
@@ -88,20 +88,20 @@ namespace Nest
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
 		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary?.Invoke(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor<T> Lang(string lang) => Assign(a => a.Lang = lang);
+		public ScriptQueryDescriptor<T> Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
 		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor<T> Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
+		public ScriptQueryDescriptor<T> Lang(ScriptLang lang) => Assign(lang.GetStringValue(), (a, v) => a.Lang = v);
 	}
 }

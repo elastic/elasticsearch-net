@@ -70,18 +70,18 @@ namespace Nest
 		string IKeywordMarkerTokenFilter.KeywordsPattern { get; set; }
 
 		/// <inheritdoc />
-		public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+		public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(ignoreCase, (a, v) => a.IgnoreCase = v);
 
 		/// <inheritdoc />
-		public KeywordMarkerTokenFilterDescriptor KeywordsPath(string path) => Assign(a => a.KeywordsPath = path);
+		public KeywordMarkerTokenFilterDescriptor KeywordsPath(string path) => Assign(path, (a, v) => a.KeywordsPath = v);
 
 		/// <inheritdoc />
-		public KeywordMarkerTokenFilterDescriptor KeywordsPattern(string pattern) => Assign(a => a.KeywordsPattern = pattern);
+		public KeywordMarkerTokenFilterDescriptor KeywordsPattern(string pattern) => Assign(pattern, (a, v) => a.KeywordsPattern = v);
 
 		/// <inheritdoc />
-		public KeywordMarkerTokenFilterDescriptor Keywords(IEnumerable<string> keywords) => Assign(a => a.Keywords = keywords);
+		public KeywordMarkerTokenFilterDescriptor Keywords(IEnumerable<string> keywords) => Assign(keywords, (a, v) => a.Keywords = v);
 
 		/// <inheritdoc />
-		public KeywordMarkerTokenFilterDescriptor Keywords(params string[] keywords) => Assign(a => a.Keywords = keywords);
+		public KeywordMarkerTokenFilterDescriptor Keywords(params string[] keywords) => Assign(keywords, (a, v) => a.Keywords = v);
 	}
 }

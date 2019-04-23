@@ -30,6 +30,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IQuerySqlRequest.Cursor" />
 		/// >
-		public ClearSqlCursorDescriptor Cursor(string cursor) => Assign(a => a.Cursor = cursor);
+		public ClearSqlCursorDescriptor Cursor(string cursor) => Assign(cursor, (a, v) => a.Cursor = v);
 	}
 }

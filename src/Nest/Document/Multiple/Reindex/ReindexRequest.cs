@@ -141,23 +141,26 @@ namespace Nest
 		public ReindexDescriptor<TSource, TTarget> ScrollAll(Time scrollTime, int slices,
 			Func<ScrollAllDescriptor<TSource>, IScrollAllRequest> selector = null
 		) =>
-			Assign(a => a.ScrollAll = selector.InvokeOrDefault(new ScrollAllDescriptor<TSource>(scrollTime, slices)));
+			Assign(selector, (a, v) => a.ScrollAll = v.InvokeOrDefault(new ScrollAllDescriptor<TSource>(scrollTime, slices)));
 
 		/// <inheritdoc />
 		public ReindexDescriptor<TSource, TTarget> BackPressureFactor(int? maximum) =>
-			Assign(a => a.BackPressureFactor = maximum);
+			Assign(maximum, (a, v) => a.BackPressureFactor = v);
 
 		/// <inheritdoc />
 		public ReindexDescriptor<TSource, TTarget> BulkAll(
 			Func<BulkAllDescriptor<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> selector
-		) =>
-			Assign(a => _createBulkAll = selector);
+		)
+		{
+			_createBulkAll = selector;
+			return this;
+		}
 
 		/// <inheritdoc />
-		public ReindexDescriptor<TSource, TTarget> OmitIndexCreation(bool omit = true) => Assign(a => a.OmitIndexCreation = omit);
+		public ReindexDescriptor<TSource, TTarget> OmitIndexCreation(bool omit = true) => Assign(omit, (a, v) => a.OmitIndexCreation = v);
 
 		/// <inheritdoc />
 		public ReindexDescriptor<TSource, TTarget> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>
-			Assign(a => a.CreateIndexRequest = createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor("ignored")));
+			Assign(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor("ignored")), (a, v) => a.CreateIndexRequest = v);
 	}
 }

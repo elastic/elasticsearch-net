@@ -71,18 +71,18 @@ namespace Nest
 		/// <summary>
 		/// Prefix used to search for suggestions
 		/// </summary>
-		public CompletionSuggesterDescriptor<T> Prefix(string prefix) => Assign(a => a.Prefix = prefix);
+		public CompletionSuggesterDescriptor<T> Prefix(string prefix) => Assign(prefix, (a, v) => a.Prefix = v);
 
 		/// <summary>
 		/// Prefix as a regular expression used to search for suggestions
 		/// </summary>
-		public CompletionSuggesterDescriptor<T> Regex(string regex) => Assign(a => a.Regex = regex);
+		public CompletionSuggesterDescriptor<T> Regex(string regex) => Assign(regex, (a, v) => a.Regex = v);
 
 		/// <summary>
 		/// Support fuzziness for the suggestions
 		/// </summary>
 		public CompletionSuggesterDescriptor<T> Fuzzy(Func<FuzzySuggestDescriptor<T>, IFuzzySuggester> selector = null) =>
-			Assign(a => a.Fuzzy = selector.InvokeOrDefault(new FuzzySuggestDescriptor<T>()));
+			Assign(selector.InvokeOrDefault(new FuzzySuggestDescriptor<T>()), (a, v) => a.Fuzzy = v);
 
 		/// <summary>
 		/// Context mappings used to filter and/or boost suggestions
@@ -90,12 +90,12 @@ namespace Nest
 		public CompletionSuggesterDescriptor<T> Contexts(
 			Func<SuggestContextQueriesDescriptor<T>, IPromise<IDictionary<string, IList<ISuggestContextQuery>>>> contexts
 		) =>
-			Assign(a => a.Contexts = contexts?.Invoke(new SuggestContextQueriesDescriptor<T>()).Value);
+			Assign(contexts, (a, v) => a.Contexts = v?.Invoke(new SuggestContextQueriesDescriptor<T>()).Value);
 
 		/// <summary>
 		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
 		/// </summary>
 		/// <remarks>Only available in Elasticsearch 6.1.0+</remarks>
-		public CompletionSuggesterDescriptor<T> SkipDuplicates(bool? skipDuplicates = true) => Assign(a => a.SkipDuplicates = skipDuplicates);
+		public CompletionSuggesterDescriptor<T> SkipDuplicates(bool? skipDuplicates = true) => Assign(skipDuplicates, (a, v) => a.SkipDuplicates = v);
 	}
 }

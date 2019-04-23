@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ScheduleJsonConverter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
+	[ContractJsonConverter(typeof(ScheduleJsonConverter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
 	public interface IYearlySchedule : ISchedule, IEnumerable<ITimeOfYear> { }
 
 	public class YearlySchedule : ScheduleBase, IYearlySchedule
@@ -41,6 +41,6 @@ namespace Nest
 		public YearlyScheduleDescriptor() : base(new YearlySchedule()) { }
 
 		public YearlyScheduleDescriptor Add(Func<TimeOfYearDescriptor, ITimeOfYear> selector) =>
-			Assign(a => a.Add(selector.InvokeOrDefault(new TimeOfYearDescriptor())));
+			Assign(selector, (a, v) => a.Add(v.InvokeOrDefault(new TimeOfYearDescriptor())));
 	}
 }

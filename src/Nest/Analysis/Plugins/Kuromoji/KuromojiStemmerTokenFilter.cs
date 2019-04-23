@@ -34,6 +34,6 @@ namespace Nest
 		int? IKuromojiStemmerTokenFilter.MinimumLength { get; set; }
 
 		/// <inheritdoc />
-		public KuromojiStemmerTokenFilterDescriptor MinimumLength(int? minimumLength) => Assign(a => a.MinimumLength = minimumLength);
+		public KuromojiStemmerTokenFilterDescriptor MinimumLength(int? minimumLength) => Assign(minimumLength, (a, v) => a.MinimumLength = v);
 	}
 }

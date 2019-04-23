@@ -25,8 +25,7 @@ namespace Nest
 
 		public MultiBucketsPath(IDictionary<string, string> container) : base(container) { }
 
-		public MultiBucketsPath(Dictionary<string, string> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public MultiBucketsPath(Dictionary<string, string> container) : base(container) { }
 
 		public void Add(string name, string bucketsPath) => BackingDictionary.Add(name, bucketsPath);
 

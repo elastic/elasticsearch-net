@@ -24,7 +24,7 @@ namespace Nest
 		IScript IScriptField.Script { get; set; }
 
 		public ScriptFieldDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<ScriptFields, string, IScriptField>))]
@@ -36,8 +36,7 @@ namespace Nest
 
 		public ScriptFields(IDictionary<string, IScriptField> container) : base(container) { }
 
-		public ScriptFields(Dictionary<string, IScriptField> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public ScriptFields(Dictionary<string, IScriptField> container) : base(container) { }
 
 		public void Add(string name, IScriptField script) => BackingDictionary.Add(name, script);
 

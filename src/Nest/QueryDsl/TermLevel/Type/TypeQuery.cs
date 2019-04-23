@@ -29,8 +29,8 @@ namespace Nest
 		[JsonProperty("value")]
 		TypeName ITypeQuery.Value { get; set; }
 
-		public TypeQueryDescriptor Value<T>() => Assign(a => a.Value = typeof(T));
+		public TypeQueryDescriptor Value<T>() => Assign(typeof(T), (a, v) => a.Value = v);
 
-		public TypeQueryDescriptor Value(TypeName type) => Assign(a => a.Value = type);
+		public TypeQueryDescriptor Value(TypeName type) => Assign(type, (a, v) => a.Value = v);
 	}
 }

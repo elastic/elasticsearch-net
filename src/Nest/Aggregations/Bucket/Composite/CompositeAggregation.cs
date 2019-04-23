@@ -67,12 +67,12 @@ namespace Nest
 		public CompositeAggregationDescriptor<T> Sources(
 			Func<CompositeAggregationSourcesDescriptor<T>, IPromise<IList<ICompositeAggregationSource>>> selector
 		) =>
-			Assign(a => a.Sources = selector?.Invoke(new CompositeAggregationSourcesDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Sources = v?.Invoke(new CompositeAggregationSourcesDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="ICompositeAggregation.Size" />
-		public CompositeAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public CompositeAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="ICompositeAggregation.After" />
-		public CompositeAggregationDescriptor<T> After(object after) => Assign(a => a.After = after);
+		public CompositeAggregationDescriptor<T> After(object after) => Assign(after, (a, v) => a.After = v);
 	}
 }

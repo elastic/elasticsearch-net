@@ -59,18 +59,18 @@ namespace Nest
 		Field IBytesProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="IBytesProcessor.Field" />
-		public BytesProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public BytesProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IBytesProcessor.Field" />
-		public BytesProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public BytesProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IBytesProcessor.TargetField" />
-		public BytesProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public BytesProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IBytesProcessor.TargetField" />
-		public BytesProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(a => a.TargetField = objectPath);
+		public BytesProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IBytesProcessor.IgnoreMissing" />
-		public BytesProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public BytesProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

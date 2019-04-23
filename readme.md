@@ -222,7 +222,7 @@ From the package manager console:
 
 	PM> Install-Package Elasticsearch.Net
 
-or by searching for `Elastcsearch.Net` in the package manager UI.
+or by searching for `Elasticsearch.Net` in the package manager UI.
 
 ### Connecting
 
@@ -318,6 +318,6 @@ and a small HTTP server will be spun up locally on port 8000 through which you c
 
 ## Copyright and License
 
-This software is Copyright (c) 2014-2015 by Elasticsearch BV.
+This software is Copyright (c) 2014-2019 by Elasticsearch BV.
 
 This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elasticsearch/elasticsearch-net/blob/develop/license.txt).

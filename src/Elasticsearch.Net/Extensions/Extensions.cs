@@ -9,11 +9,13 @@ namespace Elasticsearch.Net
 {
 	internal static class Extensions
 	{
-#if !DOTNETCORE
+		private const long MillisecondsInAWeek = MillisecondsInADay * 7;
+		private const long MillisecondsInADay = MillisecondsInAnHour * 24;
+		private const long MillisecondsInAnHour = MillisecondsInAMinute * 60;
+		private const long MillisecondsInAMinute = MillisecondsInASecond * 60;
+		private const long MillisecondsInASecond = 1000;
+
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
-#else
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-#endif
 		internal static string Utf8String(this MemoryStream ms)
 		{
 			if (ms is null)
@@ -37,21 +39,6 @@ namespace Elasticsearch.Net
 		}
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
-
-		internal static string ToCamelCase(this string s)
-		{
-			if (string.IsNullOrEmpty(s))
-				return s;
-
-			if (!char.IsUpper(s[0]))
-				return s;
-
-			var camelCase = char.ToLowerInvariant(s[0]).ToString();
-			if (s.Length > 1)
-				camelCase += s.Substring(1);
-
-			return camelCase;
-		}
 
 		internal static string NotNull(this string @object, string parameterName)
 		{
@@ -96,41 +83,35 @@ namespace Elasticsearch.Net
 		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
 			items.GroupBy(property).Select(x => x.First());
 
-		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
-		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
-		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
-		private static readonly long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
-		private static readonly long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
-
 		internal static string ToTimeUnit(this TimeSpan timeSpan)
 		{
 			var ms = timeSpan.TotalMilliseconds;
 			string interval;
 			double factor = 0;
 
-			if (ms >= _week)
+			if (ms >= MillisecondsInAWeek)
 			{
-				factor = ms / _week;
+				factor = ms / MillisecondsInAWeek;
 				interval = "w";
 			}
-			else if (ms >= _day)
+			else if (ms >= MillisecondsInADay)
 			{
-				factor = ms / _day;
+				factor = ms / MillisecondsInADay;
 				interval = "d";
 			}
-			else if (ms >= _hour)
+			else if (ms >= MillisecondsInAnHour)
 			{
-				factor = ms / _hour;
+				factor = ms / MillisecondsInAnHour;
 				interval = "h";
 			}
-			else if (ms >= _minute)
+			else if (ms >= MillisecondsInAMinute)
 			{
-				factor = ms / _minute;
+				factor = ms / MillisecondsInAMinute;
 				interval = "m";
 			}
-			else if (ms >= _second)
+			else if (ms >= MillisecondsInASecond)
 			{
-				factor = ms / _second;
+				factor = ms / MillisecondsInASecond;
 				interval = "s";
 			}
 			else

@@ -17,8 +17,7 @@ namespace Nest
 
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 
-		public Properties(Dictionary<PropertyName, IProperty> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Properties(Dictionary<PropertyName, IProperty> container) : base(container) { }
 
 		internal Properties(IConnectionSettingsValues values) => _settings = values;
 
@@ -35,8 +34,7 @@ namespace Nest
 
 		public Properties(IProperties properties) : base(properties) { }
 
-		public Properties(Dictionary<PropertyName, IProperty> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Properties(Dictionary<PropertyName, IProperty> container) : base(container) { }
 
 		public void Add(PropertyName name, IProperty property) => BackingDictionary.Add(name, property);
 
@@ -175,7 +173,7 @@ namespace Nest
 			if (type.Name.IsConditionless())
 				throw new ArgumentException($"Could not get field name for {typeName} mapping");
 
-			return Assign(a => a[type.Name] = type);
+			return Assign(type, (a, v) => a[v.Name] = v);
 		}
 	}
 

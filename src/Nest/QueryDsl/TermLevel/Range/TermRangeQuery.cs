@@ -46,12 +46,12 @@ namespace Nest
 		string ITermRangeQuery.LessThan { get; set; }
 		string ITermRangeQuery.LessThanOrEqualTo { get; set; }
 
-		public TermRangeQueryDescriptor<T> GreaterThan(string from) => Assign(a => a.GreaterThan = from);
+		public TermRangeQueryDescriptor<T> GreaterThan(string from) => Assign(from, (a, v) => a.GreaterThan = v);
 
-		public TermRangeQueryDescriptor<T> GreaterThanOrEquals(string from) => Assign(a => a.GreaterThanOrEqualTo = from);
+		public TermRangeQueryDescriptor<T> GreaterThanOrEquals(string from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
 
-		public TermRangeQueryDescriptor<T> LessThan(string to) => Assign(a => a.LessThan = to);
+		public TermRangeQueryDescriptor<T> LessThan(string to) => Assign(to, (a, v) => a.LessThan = v);
 
-		public TermRangeQueryDescriptor<T> LessThanOrEquals(string to) => Assign(a => a.LessThanOrEqualTo = to);
+		public TermRangeQueryDescriptor<T> LessThanOrEquals(string to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
 	}
 }

@@ -36,14 +36,14 @@ namespace Nest
 		double? IRescoreQuery.RescoreQueryWeight { get; set; }
 		ScoreMode? IRescoreQuery.ScoreMode { get; set; }
 
-		public virtual RescoreQueryDescriptor<T> QueryWeight(double? queryWeight) => Assign(a => a.QueryWeight = queryWeight);
+		public virtual RescoreQueryDescriptor<T> QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a.QueryWeight = v);
 
 		public virtual RescoreQueryDescriptor<T> RescoreQueryWeight(double? rescoreQueryWeight) =>
-			Assign(a => a.RescoreQueryWeight = rescoreQueryWeight);
+			Assign(rescoreQueryWeight, (a, v) => a.RescoreQueryWeight = v);
 
-		public virtual RescoreQueryDescriptor<T> ScoreMode(ScoreMode? scoreMode) => Assign(a => a.ScoreMode = scoreMode);
+		public virtual RescoreQueryDescriptor<T> ScoreMode(ScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreMode = v);
 
 		public virtual RescoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

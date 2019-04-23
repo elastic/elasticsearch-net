@@ -9,7 +9,7 @@ namespace Nest
 	/// context when a watch is triggered.
 	/// </summary>
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchInput>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SearchInput>))]
 	public interface ISearchInput : IInput
 	{
 		/// <summary>
@@ -60,15 +60,15 @@ namespace Nest
 
 		/// <inheritdoc cref="ISearchInput.Request" />
 		public SearchInputDescriptor Request(Func<SearchInputRequestDescriptor, ISearchInputRequest> selector) =>
-			Assign(a => a.Request = selector?.InvokeOrDefault(new SearchInputRequestDescriptor()));
+			Assign(selector, (a, v) => a.Request = v?.InvokeOrDefault(new SearchInputRequestDescriptor()));
 
 		/// <inheritdoc cref="ISearchInput.Extract" />
-		public SearchInputDescriptor Extract(IEnumerable<string> extract) => Assign(a => a.Extract = extract);
+		public SearchInputDescriptor Extract(IEnumerable<string> extract) => Assign(extract, (a, v) => a.Extract = v);
 
 		/// <inheritdoc cref="ISearchInput.Extract" />
-		public SearchInputDescriptor Extract(params string[] extract) => Assign(a => a.Extract = extract);
+		public SearchInputDescriptor Extract(params string[] extract) => Assign(extract, (a, v) => a.Extract = v);
 
 		/// <inheritdoc cref="ISearchInput.Timeout" />
-		public SearchInputDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
+		public SearchInputDescriptor Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 }

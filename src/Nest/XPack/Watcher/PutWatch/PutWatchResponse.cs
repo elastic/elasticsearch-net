@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutWatchResponse>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PutWatchResponse>))]
 	public interface IPutWatchResponse : IResponse
 	{
 		[JsonProperty("created")]

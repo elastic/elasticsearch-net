@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetUserResponse, string, XPackUser>))]
+	[ContractJsonConverter(typeof(DictionaryResponseJsonConverter<GetUserResponse, string, XPackUser>))]
 	public class GetUserResponse : DictionaryResponseBase<string, XPackUser>, IGetUserResponse
 	{
 		[JsonIgnore]

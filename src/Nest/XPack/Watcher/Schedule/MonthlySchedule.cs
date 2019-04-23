@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ScheduleJsonConverter<IMonthlySchedule, MonthlySchedule, ITimeOfMonth>))]
+	[ContractJsonConverter(typeof(ScheduleJsonConverter<IMonthlySchedule, MonthlySchedule, ITimeOfMonth>))]
 	public interface IMonthlySchedule : ISchedule, IEnumerable<ITimeOfMonth> { }
 
 	public class MonthlySchedule : ScheduleBase, IMonthlySchedule
@@ -42,6 +42,6 @@ namespace Nest
 		public MonthlyScheduleDescriptor() : base(new MonthlySchedule()) { }
 
 		public MonthlyScheduleDescriptor Add(Func<TimeOfMonthDescriptor, ITimeOfMonth> selector) =>
-			Assign(a => a.Add(selector.InvokeOrDefault(new TimeOfMonthDescriptor())));
+			Assign(selector, (a, v) => a.Add(v.InvokeOrDefault(new TimeOfMonthDescriptor())));
 	}
 }

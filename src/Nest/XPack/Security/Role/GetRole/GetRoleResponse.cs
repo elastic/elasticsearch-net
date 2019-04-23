@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleResponse, string, XPackRole>))]
+	[ContractJsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleResponse, string, XPackRole>))]
 	public class GetRoleResponse : DictionaryResponseBase<string, XPackRole>, IGetRoleResponse
 	{
 		[JsonIgnore]

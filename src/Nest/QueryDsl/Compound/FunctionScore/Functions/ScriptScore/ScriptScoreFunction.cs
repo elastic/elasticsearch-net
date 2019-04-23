@@ -22,6 +22,6 @@ namespace Nest
 		IScriptQuery IScriptScoreFunction.Script { get; set; }
 
 		public ScriptScoreFunctionDescriptor<T> Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new ScriptQueryDescriptor<T>()));
 	}
 }

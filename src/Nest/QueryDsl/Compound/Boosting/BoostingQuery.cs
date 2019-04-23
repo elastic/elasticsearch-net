@@ -38,12 +38,12 @@ namespace Nest
 		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 
-		public BoostingQueryDescriptor<T> NegativeBoost(double? boost) => Assign(a => a.NegativeBoost = boost);
+		public BoostingQueryDescriptor<T> NegativeBoost(double? boost) => Assign(boost, (a, v) => a.NegativeBoost = v);
 
 		public BoostingQueryDescriptor<T> Positive(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.PositiveQuery = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.PositiveQuery = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public BoostingQueryDescriptor<T> Negative(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.NegativeQuery = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.NegativeQuery = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

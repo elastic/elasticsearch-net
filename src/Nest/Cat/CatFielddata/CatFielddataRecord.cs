@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(CatFielddataRecordJsonConverter))]
+	[ContractJsonConverter(typeof(CatFielddataRecordJsonConverter))]
 	public class CatFielddataRecord : ICatRecord
 	{
 		public string Field { get; set; }

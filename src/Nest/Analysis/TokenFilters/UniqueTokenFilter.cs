@@ -32,6 +32,6 @@ namespace Nest
 		bool? IUniqueTokenFilter.OnlyOnSamePosition { get; set; }
 
 		/// <inheritdoc />
-		public UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? samePositionOnly = true) => Assign(a => a.OnlyOnSamePosition = samePositionOnly);
+		public UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? samePositionOnly = true) => Assign(samePositionOnly, (a, v) => a.OnlyOnSamePosition = v);
 	}
 }

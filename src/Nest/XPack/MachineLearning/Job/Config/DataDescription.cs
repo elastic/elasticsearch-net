@@ -8,7 +8,7 @@ namespace Nest
 	/// Defines the format of the input data when you send data to the machine learning job.
 	/// Note that when configure a datafeed, these properties are automatically set.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DataDescription>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<DataDescription>))]
 	public interface IDataDescription
 	{
 		/// <summary>
@@ -51,15 +51,15 @@ namespace Nest
 		string IDataDescription.TimeFormat { get; set; }
 
 		/// <inheritdoc />
-		public DataDescriptionDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DataDescriptionDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
 		/// <inheritdoc />
-		public DataDescriptionDescriptor<T> TimeField(Field timeField) => Assign(a => a.TimeField = timeField);
+		public DataDescriptionDescriptor<T> TimeField(Field timeField) => Assign(timeField, (a, v) => a.TimeField = v);
 
 		/// <inheritdoc />
-		public DataDescriptionDescriptor<T> TimeField(Expression<Func<T, object>> objectPath) => Assign(a => a.TimeField = objectPath);
+		public DataDescriptionDescriptor<T> TimeField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TimeField = v);
 
 		/// <inheritdoc />
-		public DataDescriptionDescriptor<T> TimeFormat(string timeFormat) => Assign(a => a.TimeFormat = timeFormat);
+		public DataDescriptionDescriptor<T> TimeFormat(string timeFormat) => Assign(timeFormat, (a, v) => a.TimeFormat = v);
 	}
 }

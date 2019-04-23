@@ -62,16 +62,16 @@ namespace Nest
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(DateInterval? interval) =>
-			Assign(a => a.Interval = interval);
+			Assign(interval, (a, v) => a.Interval = v);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(Time interval) =>
-			Assign(a => a.Interval = interval);
+			Assign(interval, (a, v) => a.Interval = v);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone" />
-		public DateHistogramCompositeAggregationSourceDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+		public DateHistogramCompositeAggregationSourceDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.Timezone = v);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone" />
-		public DateHistogramCompositeAggregationSourceDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateHistogramCompositeAggregationSourceDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 	}
 }

@@ -75,13 +75,18 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
+			var notNullDerivativeSeen = 0;
 			// derivative not calculated for the first bucket
 			foreach (var item in projectsPerMonth.Buckets.Skip(1))
 			{
+				if (item.DocCount == 0) continue;
 				var commitsDerivative = item.Derivative("commits_derivative");
 				commitsDerivative.Should().NotBeNull();
-				commitsDerivative.Value.Should().NotBe(null);
+				if (commitsDerivative.Value != null) notNullDerivativeSeen++;
 			}
+			notNullDerivativeSeen.Should().BeGreaterThan(0, "atleast one bucket should yield a derivative value surely!");
+
+
 		}
 	}
 }

@@ -30,12 +30,12 @@ namespace Nest
 	{
 		IScript IBucketScriptAggregation.Script { get; set; }
 
-		public BucketScriptAggregationDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public BucketScriptAggregationDescriptor Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public BucketScriptAggregationDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
 		public BucketScriptAggregationDescriptor BucketsPath(Func<MultiBucketsPathDescriptor, IPromise<IBucketsPath>> selector) =>
-			Assign(a => a.BucketsPath = selector?.Invoke(new MultiBucketsPathDescriptor())?.Value);
+			Assign(selector, (a, v) => a.BucketsPath = v?.Invoke(new MultiBucketsPathDescriptor())?.Value);
 	}
 }

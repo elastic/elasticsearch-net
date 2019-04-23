@@ -27,6 +27,6 @@ namespace Nest
 		string IStemmerTokenFilter.Language { get; set; }
 
 		/// <inheritdoc />
-		public StemmerTokenFilterDescriptor Language(string language) => Assign(a => a.Language = language);
+		public StemmerTokenFilterDescriptor Language(string language) => Assign(language, (a, v) => a.Language = v);
 	}
 }

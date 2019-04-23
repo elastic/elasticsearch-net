@@ -137,6 +137,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 
 			foreach (var item in projectsPerMonth.Buckets)
 			{
+				if (item.DocCount == 0) continue;
 				var stablePercentage = item.BucketScript("stable_percentage");
 				stablePercentage.Should().NotBeNull();
 				stablePercentage.Value.Should().HaveValue();

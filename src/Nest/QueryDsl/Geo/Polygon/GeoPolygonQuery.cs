@@ -34,10 +34,10 @@ namespace Nest
 		IEnumerable<GeoLocation> IGeoPolygonQuery.Points { get; set; }
 		GeoValidationMethod? IGeoPolygonQuery.ValidationMethod { get; set; }
 
-		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<GeoLocation> points) => Assign(a => a.Points = points);
+		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<GeoLocation> points) => Assign(points, (a, v) => a.Points = v);
 
-		public GeoPolygonQueryDescriptor<T> Points(params GeoLocation[] points) => Assign(a => a.Points = points);
+		public GeoPolygonQueryDescriptor<T> Points(params GeoLocation[] points) => Assign(points, (a, v) => a.Points = v);
 
-		public GeoPolygonQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
+		public GeoPolygonQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(validation, (a, v) => a.ValidationMethod = v);
 	}
 }

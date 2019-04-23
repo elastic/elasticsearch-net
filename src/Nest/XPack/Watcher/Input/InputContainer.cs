@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReserializeJsonConverter<InputContainer, IInputContainer>))]
+	[ContractJsonConverter(typeof(ReserializeJsonConverter<InputContainer, IInputContainer>))]
 	public interface IInputContainer
 	{
 		[JsonProperty("chain")]
@@ -43,18 +43,18 @@ namespace Nest
 
 	public class InputDescriptor : InputContainer
 	{
-		private InputDescriptor Assign(Action<IInputContainer> assigner) => Fluent.Assign(this, assigner);
+		private InputDescriptor Assign<TValue>(TValue value, Action<IInputContainer, TValue> assigner) => Fluent.Assign(this, value, assigner);
 
 		public InputDescriptor Search(Func<SearchInputDescriptor, ISearchInput> selector) =>
-			Assign(a => a.Search = selector.Invoke(new SearchInputDescriptor()));
+			Assign(selector, (a, v) => a.Search = v.Invoke(new SearchInputDescriptor()));
 
 		public InputDescriptor Http(Func<HttpInputDescriptor, IHttpInput> selector) =>
-			Assign(a => a.Http = selector.Invoke(new HttpInputDescriptor()));
+			Assign(selector, (a, v) => a.Http = v.Invoke(new HttpInputDescriptor()));
 
 		public InputDescriptor Simple(Func<SimpleInputDescriptor, ISimpleInput> selector) =>
-			Assign(a => a.Simple = selector.Invoke(new SimpleInputDescriptor()));
+			Assign(selector,(a, v) => a.Simple = v.Invoke(new SimpleInputDescriptor()));
 
 		public InputDescriptor Chain(Func<ChainInputDescriptor, IChainInput> selector) =>
-			Assign(a => a.Chain = selector.Invoke(new ChainInputDescriptor()));
+			Assign(selector, (a, v) => a.Chain = v.Invoke(new ChainInputDescriptor()));
 	}
 }

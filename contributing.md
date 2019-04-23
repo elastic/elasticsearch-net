@@ -39,6 +39,7 @@ We do not require rebased/squashed commits although we do very much appreciate i
 Please submit your [Pull Requests](https://help.github.com/articles/creating-a-pull-request/) to 
 
 - [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for master
+- [`7.x`](https://github.com/elastic/elasticsearch-net/tree/7.x) branch for 7.x
 - [`6.x`](https://github.com/elastic/elasticsearch-net/tree/6.x) branch for 6.x
 - [`5.x`](https://github.com/elastic/elasticsearch-net/tree/5.x) branch for 5.x
 

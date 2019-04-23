@@ -73,12 +73,17 @@ namespace Tests.Core.Xunit
 			var config = TestConfiguration.Instance;
 			var runningIntegrations = config.RunIntegrationTests;
 			Console.ForegroundColor = ConsoleColor.Yellow;
-			///
 			Console.WriteLine("---Reproduce: -----");
 			var reproduceLine = ReproduceCommandLine(failedCollections, config, runningIntegrations);
 			Console.WriteLine(reproduceLine);
 			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION")))
 				Console.WriteLine($"##teamcity[buildProblem description='{reproduceLine}']");
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TF_BUILD")))
+			{
+				var count = failedCollections.Count;
+				Console.WriteLine($"##vso[task.logissue type=error;]{count} test failures");
+				Console.WriteLine($"##vso[task.logissue type=error;]{reproduceLine}");
+			}
 			Console.WriteLine("--------");
 		}
 

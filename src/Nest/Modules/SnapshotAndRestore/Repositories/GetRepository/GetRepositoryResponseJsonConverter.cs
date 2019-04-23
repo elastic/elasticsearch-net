@@ -26,7 +26,7 @@ namespace Nest
 			foreach (var kv in repositories)
 			{
 				var repository = JObject.FromObject(kv.Value);
-				var type = repository.Properties().Where(p => p.Name == "type").SingleOrDefault();
+				var type = repository.Properties().SingleOrDefault(p => p.Name == "type");
 				if (type == null) continue;
 
 				var typeName = type.Value.ToString();

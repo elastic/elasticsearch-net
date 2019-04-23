@@ -23,7 +23,7 @@ namespace Tests.CodeStandards
 			var fluentParametersNotNamedSelector =
 				from m in typeof(IElasticClient).GetMethods()
 				from p in m.GetParameters()
-				where p.ParameterType.BaseType() == typeof(MulticastDelegate)
+				where p.ParameterType.BaseType == typeof(MulticastDelegate)
 				where !p.Name.Equals("selector") && !p.Name.Equals("mapper")
 				select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' or 'mapper' but has a name of '{p.Name}'";
 
@@ -111,7 +111,7 @@ namespace Tests.CodeStandards
 				from methodInfo in typeof(IElasticClient).GetMethods()
 				where
 					typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType) ||
-					(methodInfo.ReturnType.IsGenericType()
+					(methodInfo.ReturnType.IsGenericType
 					 && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
 					 && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
 				where !methodInfo.Name.Contains("CreateDocument")
@@ -163,7 +163,7 @@ namespace Tests.CodeStandards
 					? methodInfo.Name.Substring(0, methodInfo.Name.Length - "Async".Length)
 					: methodInfo.Name;
 
-				IsAsync = methodInfo.ReturnType.IsGenericType() &&
+				IsAsync = methodInfo.ReturnType.IsGenericType &&
 						  methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
 
 				MethodInfo = methodInfo;
@@ -179,7 +179,7 @@ namespace Tests.CodeStandards
 				else
 				{
 					Parameter = methodInfo.GetParameters()
-						.First(p => p.ParameterType.BaseType() == typeof(MulticastDelegate));
+						.First(p => p.ParameterType.BaseType == typeof(MulticastDelegate));
 					MethodType = ClientMethodType.Fluent;
 				}
 			}

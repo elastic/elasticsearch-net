@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CronExpressionJsonConverter))]
+	[ContractJsonConverter(typeof(CronExpressionJsonConverter))]
 	public class CronExpression : ScheduleBase, IEquatable<CronExpression>
 	{
 		private readonly string _expression;

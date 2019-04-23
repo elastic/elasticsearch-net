@@ -67,20 +67,20 @@ namespace Nest
 		IScript IWeightedAverageValue.Script { get; set; }
 
 		/// <inheritdoc cref="IWeightedAverageValue.Field" />
-		public WeightedAverageValueDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public WeightedAverageValueDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IWeightedAverageValue.Field" />
-		public WeightedAverageValueDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public WeightedAverageValueDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IWeightedAverageValue.Script" />
-		public virtual WeightedAverageValueDescriptor<T> Script(string script) => Assign(a => a.Script = new InlineScript(script));
+		public virtual WeightedAverageValueDescriptor<T> Script(string script) => Assign(new InlineScript(script), (a, v) => a.Script = v);
 
 		/// <inheritdoc cref="IWeightedAverageValue.Script" />
 		public virtual WeightedAverageValueDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
 		/// <inheritdoc cref="IWeightedAverageValue.Missing" />
-		public WeightedAverageValueDescriptor<T> Missing(double? missing) => Assign(a => a.Missing = missing);
+		public WeightedAverageValueDescriptor<T> Missing(double? missing) => Assign(missing, (a, v) => a.Missing = v);
 	}
 
 	/// <summary>

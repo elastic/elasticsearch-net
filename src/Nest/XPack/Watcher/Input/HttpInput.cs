@@ -8,7 +8,7 @@ namespace Nest
 	/// input to submit a request to an HTTP endpoint and load the response
 	/// into the watch execution context when a watch is triggered.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInput>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInput>))]
 	public interface IHttpInput : IInput
 	{
 		/// <summary>
@@ -58,18 +58,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public HttpInputDescriptor Request(Func<HttpInputRequestDescriptor, IHttpInputRequest> httpRequestSelector) =>
-			Assign(a => a.Request = httpRequestSelector(new HttpInputRequestDescriptor()));
+			Assign(httpRequestSelector(new HttpInputRequestDescriptor()), (a, v) => a.Request = v);
 
 		/// <inheritdoc />
 		public HttpInputDescriptor Extract(IEnumerable<string> extract) =>
-			Assign(a => a.Extract = extract);
+			Assign(extract, (a, v) => a.Extract = v);
 
 		/// <inheritdoc />
 		public HttpInputDescriptor Extract(params string[] extract) =>
-			Assign(a => a.Extract = extract);
+			Assign(extract, (a, v) => a.Extract = v);
 
 		/// <inheritdoc />
 		public HttpInputDescriptor ResponseContentType(ResponseContentType? responseContentType) =>
-			Assign(a => a.ResponseContentType = responseContentType);
+			Assign(responseContentType, (a, v) => a.ResponseContentType = v);
 	}
 }
