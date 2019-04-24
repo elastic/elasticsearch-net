@@ -38,7 +38,7 @@ namespace Nest
 		public string ToUrl(ResolvedRouteValues values)
 		{
 			var sb = new StringBuilder(_length);
-			int i = 0;
+			var i = 0;
 			for (var index = 0; index < _tokenized.Length; index++)
 			{
 				var t = _tokenized[index];

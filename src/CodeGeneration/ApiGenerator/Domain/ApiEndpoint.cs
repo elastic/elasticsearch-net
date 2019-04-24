@@ -76,85 +76,67 @@ namespace ApiGenerator.Domain
 
 				PatchEndpoint();
 
-				var methods = new Dictionary<string, string>(RemovedMethods);
-				foreach (var method in Methods) methods.Add(method, null);
-				foreach (var kv in methods)
+				var method = Methods.First();
+				var methodName = CsharpMethodName;
+				foreach (var path in Url.ExposedApiPaths)
 				{
-					var method = kv.Key;
-					var obsoleteVersion = kv.Value;
-					var methodName = CsharpMethodName + OptionallyAppendHttpMethod(methods.Keys, method);
-					foreach (var path in Url.ExposedApiPaths)
+					var parts = new List<ApiUrlPart>(path.Parts);
+					var args = parts.Select(p => p.Argument);
+
+					if (Body != null)
+						parts.Add(new ApiUrlPart { Name = "body", Type = "PostData", Description = Body.Description });
+
+					if (Url.Params == null || !Url.Params.Any()) Url.Params = new Dictionary<string, ApiQueryParameters>();
+					var queryStringParamName = CsharpMethodName + "RequestParameters";
+					var apiMethod = new CsharpMethod
 					{
-						var parts = new List<ApiUrlPart>(path.Parts);
-						var args = parts.Select(p => p.Argument);
+						QueryStringParamName = queryStringParamName,
+						ReturnType = "TResponse",
+						ReturnTypeGeneric = "<TResponse>",
+						CallTypeGeneric = "TResponse",
+						ReturnDescription = "",
+						FullName = methodName,
+						HttpMethod = method,
+						Documentation = Documentation,
+						ObsoleteMethodVersion = null, //TODO
+						Path = path.Path,
+						Parts = parts,
+						Url = Url
+					};
+					PatchMethod(apiMethod);
 
-						//.NET does not allow get requests to have a body payload.
-						if (method != "GET" && Body != null)
-							parts.Add(new ApiUrlPart
-							{
-								Name = "body",
-								Type = "PostData",
-								Description = Body.Description
-							});
+					args = args.Concat(new[] { apiMethod.QueryStringParamName + " requestParameters = null" })
+						.ToList();
+					apiMethod.Arguments = string.Join(", ", args);
+					_csharpMethods.Add(apiMethod);
+					yield return apiMethod;
 
-						if (Url.Params == null || !Url.Params.Any()) Url.Params = new Dictionary<string, ApiQueryParameters>();
-						var queryStringParamName = CsharpMethodName + "RequestParameters";
-						var apiMethod = new CsharpMethod
-						{
-							QueryStringParamName = queryStringParamName,
-							ReturnType = "TResponse",
-							ReturnTypeGeneric = "<TResponse>",
-							CallTypeGeneric = "TResponse",
-							ReturnDescription = "",
-							FullName = methodName,
-							HttpMethod = method,
-							Documentation = Documentation,
-							ObsoleteMethodVersion = obsoleteVersion,
-							Path = path.Path,
-							Parts = parts,
-							Url = Url
-						};
-						PatchMethod(apiMethod);
-
-						args = args.Concat(new[]
-							{
-								apiMethod.QueryStringParamName + " requestParameters = null"
-							})
-							.ToList();
-						apiMethod.Arguments = string.Join(", ", args);
-						_csharpMethods.Add(apiMethod);
-						yield return apiMethod;
-
-						args = args.Concat(new[]
-							{
-								"CancellationToken ctx = default(CancellationToken)"
-							})
-							.ToList();
-						apiMethod = new CsharpMethod
-						{
-							QueryStringParamName = queryStringParamName,
-							ReturnType = "Task<TResponse>",
-							ReturnTypeGeneric = "<TResponse>",
-							CallTypeGeneric = "TResponse",
-							ReturnDescription = "",
-							FullName = methodName + "Async",
-							HttpMethod = method,
-							Documentation = Documentation,
-							ObsoleteMethodVersion = obsoleteVersion,
-							Arguments = string.Join(", ", args),
-							Path = path.Path,
-							Parts = parts,
-							Url = Url
-						};
-						PatchMethod(apiMethod);
-						_csharpMethods.Add(apiMethod);
-						yield return apiMethod;
-					}
+					args = args.Concat(new[] { "CancellationToken ctx = default" }).ToList();
+					apiMethod = new CsharpMethod
+					{
+						QueryStringParamName = queryStringParamName,
+						ReturnType = "Task<TResponse>",
+						ReturnTypeGeneric = "<TResponse>",
+						CallTypeGeneric = "TResponse",
+						ReturnDescription = "",
+						FullName = methodName + "Async",
+						HttpMethod = method,
+						Documentation = Documentation,
+						ObsoleteMethodVersion = null, //TODO
+						Arguments = string.Join(", ", args),
+						Path = path.Path,
+						Parts = parts,
+						Url = Url
+					};
+					PatchMethod(apiMethod);
+					_csharpMethods.Add(apiMethod);
+					yield return apiMethod;
 				}
 			}
 		}
 
 		private string _documentation;
+
 		public string Documentation
 		{
 			get => string.IsNullOrWhiteSpace(_documentation) ? "TODO" : _documentation;
@@ -169,14 +151,9 @@ namespace ApiGenerator.Domain
 				.DistinctBy(m => m.Path)
 				.OrderByDescending(m => m.Parts.Count())
 				.Select(m =>
-					new RawDispatchInfo
-					{
-						CsharpMethod = m,
-					}
+					new RawDispatchInfo { CsharpMethod = m, }
 				)
 			);
-
-		public IDictionary<string, string> RemovedMethods { get; set; } = new Dictionary<string, string>();
 
 		public string RestSpecName { get; set; }
 		public ApiUrl Url { get; set; }
@@ -186,16 +163,6 @@ namespace ApiGenerator.Domain
 		public IEnumerable<CsharpMethod> GetCsharpMethods() => CsharpMethods.ToList()
 			.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
 			);
-
-		public string OptionallyAppendHttpMethod(IEnumerable<string> availableMethods, string currentHttpMethod)
-		{
-			if (availableMethods.Count() == 1)
-				return string.Empty;
-			if (availableMethods.Count() == 2 && availableMethods.Contains("GET")) return currentHttpMethod == "GET" ? "Get" : string.Empty;
-
-			return availableMethods.First() == currentHttpMethod ? string.Empty : PascalCase(currentHttpMethod);
-		}
-
 
 		private IEndpointOverrides GetOverrides()
 		{
@@ -262,7 +229,6 @@ namespace ApiGenerator.Domain
 				method.RequestTypeGeneric = requestGeneric;
 				if (CodeConfiguration.NumberOfDeclaredRequests.TryGetValue("I" + method.RequestType, out var number))
 					method.GenericAndNonGeneric = number > 1;
-
 			}
 			else method.RequestTypeUnmapped = true;
 

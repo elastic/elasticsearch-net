@@ -54,9 +54,10 @@ namespace ApiGenerator
 		{
 			var directories = Directory.GetDirectories(CodeConfiguration.RestSpecificationFolder, "*", SearchOption.AllDirectories)
 				.Where(f => folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
+				.OrderBy(f=>new FileInfo(f).Name)
 				.ToList();
 
-			var endpoints = new Dictionary<string, ApiEndpoint>();
+			var endpoints = new SortedDictionary<string, ApiEndpoint>();
 			var seenFiles = new HashSet<string>();
 			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories",
 				new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
