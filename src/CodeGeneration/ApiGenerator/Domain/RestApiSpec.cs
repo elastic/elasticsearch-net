@@ -16,6 +16,8 @@ namespace ApiGenerator.Domain
 		public string Commit { get; set; }
 
 		public static SortedDictionary<string, QueryParameters> CommonApiQueryParameters { get; set; }
+		
+		public IReadOnlyCollection<Request> Requests { get; internal set; }
 
 		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo => Endpoints.Values
 			.SelectMany(v => v.CsharpMethods)

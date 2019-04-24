@@ -3,6 +3,18 @@ using System.Linq;
 
 namespace ApiGenerator.Domain
 {
+	public class Request
+	{
+		
+	}
+
+	public class Descriptor
+	{
+		
+	}
+	
+	
+	
 	public class CsharpMethod
 	{
 		public string Arguments { get; set; }

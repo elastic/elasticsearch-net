@@ -52,7 +52,7 @@ namespace ApiGenerator
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
 		{
-			var directories = Directory.GetDirectories(CodeConfiguration.RestSpecificationFolder, "*", SearchOption.AllDirectories)
+			var directories = Directory.GetDirectories(GeneratorLocations.RestSpecificationFolder, "*", SearchOption.AllDirectories)
 				.Where(f => folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
 				.OrderBy(f=>new FileInfo(f).Name)
 				.ToList();
@@ -67,7 +67,7 @@ namespace ApiGenerator
 						.Where(f => f.EndsWith(".json") && !CodeConfiguration.IgnoredApis.Contains(new FileInfo(f).Name))
 						.ToList()
 				);
-				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
+				var commonFile = Path.Combine(GeneratorLocations.RestSpecificationFolder, "Core", "_common.json");
 				if (!File.Exists(commonFile)) throw new Exception($"Expected to find {commonFile}");
 
 				RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(commonFile);
@@ -126,47 +126,47 @@ namespace ApiGenerator
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
+			var targetFile = GeneratorLocations.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateClientInterface),
-				File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
+				File.ReadAllText(GeneratorLocations.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRawClient(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
+			var targetFile = GeneratorLocations.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateRawClient),
-				File.ReadAllText(CodeConfiguration.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
+				File.ReadAllText(GeneratorLocations.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateDescriptors(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_Descriptors.generated.cs";
-			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"),
+			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Descriptors.generated.cs";
+			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Descriptors.Generated.cshtml"),
 				model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRequests(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_Requests.generated.cs";
-			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Requests.Generated.cshtml"), model);
+			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Requests.generated.cs";
+			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Requests.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRequestParameters(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"Domain/RequestParameters/RequestParameters.Generated.cs";
+			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/RequestParameters/RequestParameters.Generated.cs";
 			var source = DoRazor(nameof(GenerateRequestParameters),
-				File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
+				File.ReadAllText(GeneratorLocations.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateEnums(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"Domain/Enums.Generated.cs";
-			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(CodeConfiguration.ViewFolder + @"Enums.Generated.cshtml"), model);
+			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/Enums.Generated.cs";
+			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(GeneratorLocations.ViewFolder + @"Enums.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 	}

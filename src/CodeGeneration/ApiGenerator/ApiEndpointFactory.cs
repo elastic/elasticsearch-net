@@ -48,11 +48,9 @@ namespace ApiGenerator
 			var method = endpoint.CsharpMethodName;
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(endpoint.RestSpecName, out var mapsApiMethodName))
 				method = mapsApiMethodName;
-			else if (CodeConfiguration.MethodNameOverrides.TryGetValue(method, out var manualOverride))
-				method = manualOverride;
 
 			var typeName = "ApiGenerator.Overrides.Endpoints." + method + "Overrides";
-			var type = CodeConfiguration.Assembly.GetType(typeName);
+			var type = GeneratorLocations.Assembly.GetType(typeName);
 			if (type != null && Activator.CreateInstance(type) is IEndpointOverrides overrides)
 				endpoint.Overrides = overrides;
 		}

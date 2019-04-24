@@ -124,11 +124,8 @@ namespace ApiGenerator.Domain
 
 			method = Overrides?.PatchMethod(method) ?? method;
 
-			var key = method.QueryStringParamName.Replace("RequestParameters", "");
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(RestSpecName, out var mapsApiMethodName))
 				method.QueryStringParamName = mapsApiMethodName + "RequestParameters";
-			else if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out var manualOverride))
-				method.QueryStringParamName = manualOverride + "RequestParameters";
 
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");
 			method.RequestType = method.QueryStringParamName.Replace("RequestParameters", "Request");
@@ -140,7 +137,7 @@ namespace ApiGenerator.Domain
 			}
 			else method.RequestTypeUnmapped = true;
 
-			if (CodeConfiguration.KnownDescriptors.TryGetValue(method.DescriptorType, out var generic))
+			if (CodeConfiguration.DescriptorGenerics.TryGetValue(method.DescriptorType, out var generic))
 				method.DescriptorTypeGeneric = generic;
 			else method.Unmapped = true;
 		}

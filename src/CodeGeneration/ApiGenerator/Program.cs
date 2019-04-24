@@ -30,8 +30,8 @@ namespace ApiGenerator
 			else
 			{
 				// read last downloaded branch from file.
-				if (File.Exists(CodeConfiguration.LastDownloadedVersionFile))
-					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
+				if (File.Exists(GeneratorLocations.LastDownloadedVersionFile))
+					downloadBranch = File.ReadAllText(GeneratorLocations.LastDownloadedVersionFile);
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))
