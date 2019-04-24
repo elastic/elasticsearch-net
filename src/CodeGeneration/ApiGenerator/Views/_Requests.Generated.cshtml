@@ -33,14 +33,7 @@ namespace Nest
 		)
 		.OrderBy(s=>s.RequestType);
 }
-	public abstract partial class @Raw("PlainRequestBase<TParameters>")
-	{
-	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
-	{
-<text>		@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))
-</text>
-	}
-	}
+	@{ await IncludeAsync("Requests/PlainRequestBase.cshtml", m); }
 	@foreach (CsharpMethod method in methods)
 	{
 	if (!method.SkipInterface)

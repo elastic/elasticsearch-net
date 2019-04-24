@@ -13,6 +13,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+
+
+
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>
@@ -29,7 +32,7 @@ namespace Nest
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool? Pretty { get => Q<bool?>("pretty"); set => Q("pretty", value); }
 	}
-
+	
 	[InterfaceDataContract]
 	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters>
 	{

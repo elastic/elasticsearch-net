@@ -6,6 +6,7 @@ using System.Linq;
 using ApiGenerator.Domain;
 using Newtonsoft.Json.Linq;
 using RazorLight;
+using RazorLight.Razor;
 using ShellProgressBar;
 
 namespace ApiGenerator
@@ -13,6 +14,7 @@ namespace ApiGenerator
 	public partial class ApiGenerator
 	{
 		private static readonly RazorLightEngine Razor = new RazorLightEngineBuilder()
+			.UseProject(new FileSystemRazorProject(Path.GetFullPath(GeneratorLocations.ViewFolder)))
 			.UseMemoryCachingProvider()
 			.Build();
 
@@ -115,14 +117,8 @@ namespace ApiGenerator
 		}
 
 
-		private static string DoRazor(string name, string template, RestApiSpec model)
-		{
-			var engine = new RazorLightEngineBuilder()
-				.AddPrerenderCallbacks(t =>
-				{
-				}).Build();
-			return engine.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
-		}
+		private static string DoRazor(string name, string template, RestApiSpec model) => 
+			Razor.CompileRenderStringAsync<RestApiSpec>(name, template,  model).GetAwaiter().GetResult();
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{
