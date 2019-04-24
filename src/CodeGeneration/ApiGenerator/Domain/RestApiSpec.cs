@@ -17,24 +17,11 @@ namespace ApiGenerator.Domain
 
 		public static SortedDictionary<string, QueryParameters> CommonApiQueryParameters { get; set; }
 
-
-		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo =>
-			(from u in Endpoints.Values.SelectMany(v => v.CsharpMethods) select u)
+		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo => Endpoints.Values
+			.SelectMany(v => v.CsharpMethods)
+			.Select(u => u)
 			.GroupBy(m => m.QueryStringParamName)
-			.Select(g =>
-			{
-				if (g.Count() == 1) return g.First();
-
-				return g.OrderBy(v =>
-					{
-						switch (v.HttpMethod.ToUpper())
-						{
-							case "GET": return 1;
-							default: return 0;
-						}
-					})
-					.First();
-			});
+			.Select(g => g.First());
 
 		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
