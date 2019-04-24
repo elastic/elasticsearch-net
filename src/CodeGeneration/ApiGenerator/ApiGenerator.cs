@@ -204,7 +204,7 @@ namespace ApiGenerator
 
 		private static void GenerateDescriptors(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Descriptors.Generated.cs";
+			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_Descriptors.generated.cs";
 			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"),
 				model);
 			File.WriteAllText(targetFile, source);
@@ -212,14 +212,14 @@ namespace ApiGenerator
 
 		private static void GenerateRequests(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Requests.Generated.cs";
+			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_Requests.generated.cs";
 			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Requests.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRequestParameters(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
+			var targetFile = CodeConfiguration.EsNetFolder + @"Domain/RequestParameters/RequestParameters.Generated.cs";
 			var source = DoRazor(nameof(GenerateRequestParameters),
 				File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
@@ -227,7 +227,7 @@ namespace ApiGenerator
 
 		private static void GenerateEnums(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\Enums.Generated.cs";
+			var targetFile = CodeConfiguration.EsNetFolder + @"Domain/Enums.Generated.cs";
 			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(CodeConfiguration.ViewFolder + @"Enums.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
