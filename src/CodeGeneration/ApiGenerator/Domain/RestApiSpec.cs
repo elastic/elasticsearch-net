@@ -15,13 +15,12 @@ namespace ApiGenerator.Domain
 
 		public string Commit { get; set; }
 
-		public static Dictionary<string, ApiQueryParameters> CommonApiQueryParameters { get; set; }
+		public static SortedDictionary<string, QueryParameters> CommonApiQueryParameters { get; set; }
 
 
 		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo =>
-			(from u in Endpoints.Values.SelectMany(v => v.CsharpMethods)
-				where u.QueryStringParamName != "FluentQueryString"
-				select u).GroupBy(m => m.QueryStringParamName)
+			(from u in Endpoints.Values.SelectMany(v => v.CsharpMethods) select u)
+			.GroupBy(m => m.QueryStringParamName)
 			.Select(g =>
 			{
 				if (g.Count() == 1) return g.First();

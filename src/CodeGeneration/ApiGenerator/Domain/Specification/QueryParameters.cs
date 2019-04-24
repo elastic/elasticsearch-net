@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ApiGenerator.Domain
 {
-	public class ApiQueryParameters
+	public class QueryParameters
 	{
 		private static readonly string[] FieldsParams =
 		{

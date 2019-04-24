@@ -1,6 +1,6 @@
 ﻿namespace ApiGenerator.Domain
 {
-	public class ApiBody
+	public class Body
 	{
 		public string Description { get; set; }
 	}

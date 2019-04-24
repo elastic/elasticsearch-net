@@ -8,9 +8,9 @@ namespace ApiGenerator.Domain
 {
 	public static class ApiQueryParametersPatcher
 	{
-		public static Dictionary<string, ApiQueryParameters> Patch(
+		public static SortedDictionary<string, QueryParameters> Patch(
 			string urlPath,
-			IDictionary<string, ApiQueryParameters> source,
+			IDictionary<string, QueryParameters> source,
 			IEndpointOverrides overrides,
 			bool checkCommon = true
 		)
@@ -25,7 +25,7 @@ namespace ApiGenerator.Domain
 			var renameLookup = CreateRenameLookup(globalOverrides, overrides, declaredKeys);
 			var obsoleteLookup = CreateObsoleteLookup(globalOverrides, overrides, declaredKeys);
 
-			var patchedParams = new Dictionary<string, ApiQueryParameters>();
+			var patchedParams = new SortedDictionary<string, QueryParameters>();
 			var name = overrides?.GetType().Name ?? urlPath ?? "unknown";
 			foreach (var kv in source)
 			{
@@ -83,7 +83,7 @@ namespace ApiGenerator.Domain
 			Func<IEndpointOverrides, IDictionary<string, string>> @from, ICollection<string> declaredKeys
 		)
 		{
-			var d = new Dictionary<string, string>();
+			var d = new SortedDictionary<string, string>();
 			foreach (var kv in from(global)) d[kv.Key] = kv.Value;
 
 			if (local == null) return d;

@@ -6,11 +6,11 @@ using HtmlParserSharp;
 namespace ApiGenerator.Domain
 {
 	// ReSharper disable once ClassNeverInstantiated.Global
-	public class ApiUrl
+	public class UrlInformation
 	{
 		private IList<string> _paths;
-		private IList<ApiPath> _exposedPaths;
-		public IDictionary<string, ApiQueryParameters> Params { get; set; }
+		private IList<UrlPath> _exposedPaths;
+		public IDictionary<string, QueryParameters> Params { get; set; }
 
 		public string Path { get; set; }
 
@@ -20,33 +20,33 @@ namespace ApiGenerator.Domain
 			set => _paths = (value ?? Enumerable.Empty<string>()).ToList();
 		}
 
-		public IDictionary<string, ApiUrlPart> Parts { get; set; }
+		public IDictionary<string, UrlPart> Parts { get; set; }
 
-		public IEnumerable<ApiPath> ExposedApiPaths
+		public IEnumerable<UrlPath> ExposedApiPaths
 		{
 			get
 			{
 				if (_exposedPaths != null) return _exposedPaths;
 
-				_exposedPaths = Paths.Select(p => new ApiPath(p, Parts)).ToList();
+				_exposedPaths = Paths.Select(p => new UrlPath(p, Parts)).ToList();
 				return _exposedPaths;
 			}
 		}
 
 		public bool IsPartless => !ExposedApiParts.Any();
 
-		public bool TryGetDocumentApiPath(out ApiPath path)
+		public bool TryGetDocumentApiPath(out UrlPath path)
 		{
 			path = null;
 			if (!IsDocumentApi) return false;
 
 			var mostVerbosePath = _exposedPaths.OrderByDescending(p => p.Parts.Count()).First();
-			path = new ApiPath(mostVerbosePath.Path, Parts, mostVerbosePath.Parts);
+			path = new UrlPath(mostVerbosePath.Path, Parts, mostVerbosePath.Parts);
 			return true;
 		}
 
 
-		public IEnumerable<ApiUrlPart> ExposedApiParts => ExposedApiPaths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
+		public IEnumerable<UrlPart> ExposedApiParts => ExposedApiPaths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
 
 		private static readonly string[] DocumentApiParts = { "index", "id" };
 		public bool IsDocumentApi =>

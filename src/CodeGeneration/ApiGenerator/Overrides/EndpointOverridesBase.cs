@@ -7,9 +7,9 @@ namespace ApiGenerator.Overrides
 {
 	public abstract class EndpointOverridesBase : IEndpointOverrides
 	{
-		public virtual IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>();
+		public virtual IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new SortedDictionary<string, string>();
 
-		public virtual IDictionary<string, string> RenameQueryStringParams { get; } = new Dictionary<string, string>();
+		public virtual IDictionary<string, string> RenameQueryStringParams { get; } = new SortedDictionary<string, string>();
 
 		public virtual IEnumerable<string> RenderPartial { get; } = Enumerable.Empty<string>();
 

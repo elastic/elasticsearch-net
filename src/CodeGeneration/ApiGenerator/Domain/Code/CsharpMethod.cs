@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using CsQuery.ExtensionMethods.Internal;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ApiGenerator.Domain
 {
@@ -23,7 +19,7 @@ namespace ApiGenerator.Domain
 			string.IsNullOrEmpty(RequestTypeGeneric) ? null : $"I{RequestType}{RequestTypeGeneric}";
 
 		public string ObsoleteMethodVersion { get; set; }
-		public IEnumerable<ApiUrlPart> Parts { get; set; }
+		public IEnumerable<UrlPart> Parts { get; set; }
 		public string Path { get; set; }
 		public string QueryStringParamName { get; set; }
 		public string RequestType { get; set; }
@@ -37,7 +33,8 @@ namespace ApiGenerator.Domain
 
 		public bool SkipInterface { get; set; }
 		public bool Unmapped { get; set; }
-		public ApiUrl Url { get; set; }
+		public UrlInformation Url { get; set; }
+		public bool HasBody { get; set; }
 
 		public static CsharpMethod Clone(CsharpMethod method) => new CsharpMethod
 		{
@@ -59,7 +56,8 @@ namespace ApiGenerator.Domain
 			ReturnTypeGeneric = method.ReturnTypeGeneric,
 			Unmapped = method.Unmapped,
 			Url = method.Url,
-			SkipInterface = method.SkipInterface
+			SkipInterface = method.SkipInterface,
+			HasBody = method.HasBody,
 		};
 
 

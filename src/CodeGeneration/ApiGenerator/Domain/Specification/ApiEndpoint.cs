@@ -6,87 +6,32 @@ using ApiGenerator.Overrides.Descriptors;
 
 namespace ApiGenerator.Domain
 {
-	public class RawDispatchInfo
-	{
-		public CsharpMethod CsharpMethod { get; set; }
-
-		public string IfCheck
-		{
-			get
-			{
-				var parts = CsharpMethod.Parts.Where(p => p.Name != "body").ToList();
-				if (!parts.Any()) return string.Empty;
-
-				var allPartsAreRequired = parts.Any() && parts.All(p => p.Required);
-				var call = allPartsAreRequired ? "AllSetNoFallback" : "AllSet";
-				var assignments = parts
-					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}")
-					.ToList();
-
-				return $"{call}({string.Join(", ", assignments)})";
-			}
-		}
-
-		public IEnumerable<string> MethodArguments
-		{
-			get
-			{
-				var methodArgs = CsharpMethod.Parts
-					.Select(p =>
-					{
-						if (p.Name == "body") return "body";
-
-						switch (p.Type)
-						{
-							case "enum":
-								return $"p.RouteValues.{p.Name.ToPascalCase()}.Value";
-							case "long":
-								return $"long.Parse(p.RouteValues.{p.Name.ToPascalCase()})";
-							default:
-								return $"p.RouteValues.{p.Name.ToPascalCase()}";
-						}
-					})
-					.Concat(new[] { "p.RequestParameters" });
-				return methodArgs;
-			}
-		}
-	}
-
 	public class ApiEndpoint
 	{
-		private List<CsharpMethod> _csharpMethods;
-		public ApiBody Body { get; set; }
+		public Body Body { get; set; }
 		public string CsharpMethodName { get; set; }
 		public string FileName { get; set; }
 
-		public IEnumerable<CsharpMethod> CsharpMethods
+		private List<CsharpMethod> _csharpMethods;
+		public IReadOnlyCollection<CsharpMethod> CsharpMethods
 		{
 			get
 			{
-				if (_csharpMethods != null)
-				{
-					foreach (var csharpMethod in _csharpMethods)
-						yield return csharpMethod;
-
-					yield break;
-				}
+				if (_csharpMethods != null) return _csharpMethods;
 
 				// enumerate once and cache
 				_csharpMethods = new List<CsharpMethod>();
 
-				PatchEndpoint();
-
-				var method = Methods.First();
+				var httpMethod = Methods.First();
 				var methodName = CsharpMethodName;
 				foreach (var path in Url.ExposedApiPaths)
 				{
-					var parts = new List<ApiUrlPart>(path.Parts);
-					var args = parts.Select(p => p.Argument);
+					var parts = new List<UrlPart>(path.Parts);
 
 					if (Body != null)
-						parts.Add(new ApiUrlPart { Name = "body", Type = "PostData", Description = Body.Description });
+						parts.Add(new UrlPart { Name = "body", Type = "PostData", Description = Body.Description });
 
-					if (Url.Params == null || !Url.Params.Any()) Url.Params = new Dictionary<string, ApiQueryParameters>();
+					if (Url.Params == null || !Url.Params.Any()) Url.Params = new SortedDictionary<string, QueryParameters>();
 					var queryStringParamName = CsharpMethodName + "RequestParameters";
 					var apiMethod = new CsharpMethod
 					{
@@ -96,20 +41,22 @@ namespace ApiGenerator.Domain
 						CallTypeGeneric = "TResponse",
 						ReturnDescription = "",
 						FullName = methodName,
-						HttpMethod = method,
+						HttpMethod = httpMethod,
 						Documentation = Documentation,
 						ObsoleteMethodVersion = null, //TODO
 						Path = path.Path,
 						Parts = parts,
-						Url = Url
+						Url = Url,
+						HasBody = Body != null
 					};
 					PatchMethod(apiMethod);
 
-					args = args.Concat(new[] { apiMethod.QueryStringParamName + " requestParameters = null" })
+					var args = parts
+						.Select(p => p.Argument)
+						.Concat(new[] { apiMethod.QueryStringParamName + " requestParameters = null" })
 						.ToList();
 					apiMethod.Arguments = string.Join(", ", args);
 					_csharpMethods.Add(apiMethod);
-					yield return apiMethod;
 
 					args = args.Concat(new[] { "CancellationToken ctx = default" }).ToList();
 					apiMethod = new CsharpMethod
@@ -120,18 +67,19 @@ namespace ApiGenerator.Domain
 						CallTypeGeneric = "TResponse",
 						ReturnDescription = "",
 						FullName = methodName + "Async",
-						HttpMethod = method,
+						HttpMethod = httpMethod,
 						Documentation = Documentation,
 						ObsoleteMethodVersion = null, //TODO
 						Arguments = string.Join(", ", args),
 						Path = path.Path,
 						Parts = parts,
-						Url = Url
+						Url = Url,
+						HasBody = Body != null
 					};
 					PatchMethod(apiMethod);
 					_csharpMethods.Add(apiMethod);
-					yield return apiMethod;
 				}
+				return _csharpMethods;
 			}
 		}
 
@@ -145,54 +93,14 @@ namespace ApiGenerator.Domain
 
 		public IEnumerable<string> Methods { get; set; }
 
-		public IDictionary<string, IEnumerable<RawDispatchInfo>> RawDispatches => GetCsharpMethods()
-			.GroupBy(p => p.HttpMethod)
-			.ToDictionary(kv => kv.Key, kv => kv
-				.DistinctBy(m => m.Path)
-				.OrderByDescending(m => m.Parts.Count())
-				.Select(m =>
-					new RawDispatchInfo { CsharpMethod = m, }
-				)
-			);
-
 		public string RestSpecName { get; set; }
-		public ApiUrl Url { get; set; }
-
-		public string PascalCase(string s) => ApiGenerator.PascalCase(s);
+		public UrlInformation Url { get; set; }
+		public IEndpointOverrides Overrides { get; internal set; }
 
 		public IEnumerable<CsharpMethod> GetCsharpMethods() => CsharpMethods.ToList()
 			.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
-			);
+		);
 
-		private IEndpointOverrides GetOverrides()
-		{
-			var method = CsharpMethodName;
-			if (CodeConfiguration.ApiNameMapping.TryGetValue(RestSpecName, out var mapsApiMethodName))
-				method = mapsApiMethodName;
-			else if (CodeConfiguration.MethodNameOverrides.TryGetValue(method, out var manualOverride))
-				method = manualOverride;
-
-			var typeName = "ApiGenerator.Overrides.Endpoints." + method + "Overrides";
-			var type = CodeConfiguration.Assembly.GetType(typeName);
-			if (type != null && Activator.CreateInstance(type) is IEndpointOverrides overrides)
-				return overrides;
-
-			return null;
-		}
-
-
-		private void PatchEndpoint()
-		{
-			var overrides = GetOverrides();
-			PatchRequestParameters(overrides);
-		}
-
-
-		private void PatchRequestParameters(IEndpointOverrides overrides)
-		{
-			var newParams = ApiQueryParametersPatcher.Patch(Url.Path, Url.Params, overrides);
-			Url.Params = newParams;
-		}
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
@@ -214,7 +122,7 @@ namespace ApiGenerator.Domain
 			method.FullName =
 				Regex.Replace(method.FullName, m, a => a.Index != method.FullName.IndexOf(m, StringComparison.Ordinal) ? "" : m);
 
-			method = GetOverrides()?.PatchMethod(method) ?? method;
+			method = Overrides?.PatchMethod(method) ?? method;
 
 			var key = method.QueryStringParamName.Replace("RequestParameters", "");
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(RestSpecName, out var mapsApiMethodName))

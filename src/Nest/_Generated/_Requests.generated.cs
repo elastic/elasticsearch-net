@@ -14,10 +14,6 @@ namespace Nest
 {
 	public abstract partial class PlainRequestBase<TParameters>
 	{
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get => Q<bool?>("pretty"); set => Q("pretty", value); }
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Include the stack trace of returned errors.</summary>
 		public bool? ErrorTrace { get => Q<bool?>("error_trace"); set => Q("error_trace", value); }
 		///<summary>
@@ -27,6 +23,10 @@ namespace Nest
 		/// In such situations, use the low level client to issue the request and handle response deserialization</para>
 		///</summary>
 		public string[] FilterPath { get => Q<string[]>("filter_path"); set => Q("filter_path", value); }
+		///<summary>Return human readable values for statistics.</summary>
+		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool? Pretty { get => Q<bool?>("pretty"); set => Q("pretty", value); }
 	}
 
 	[InterfaceDataContract]
@@ -42,7 +42,7 @@ namespace Nest
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{watch_id}/_ack", "_watcher/watch/{watch_id}/_ack/{action_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_ack</summary>
 		///<param name="watch_id">this parameter is required</param>
@@ -73,7 +73,7 @@ namespace Nest
 	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
 		protected IActivateWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{watch_id}/_activate"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{watch_id}/_activate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_activate</summary>
 		///<param name="watch_id">this parameter is required</param>
@@ -100,7 +100,7 @@ namespace Nest
 	public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		protected IAliasExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_alias/{name}", "{index}/_alias/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_alias/{name}", "/{index}/_alias/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_alias/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -119,8 +119,6 @@ namespace Nest
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -128,6 +126,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -142,7 +142,7 @@ namespace Nest
 	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 		protected IAnalyzeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_analyze", "{index}/_analyze"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_analyze", "/{index}/_analyze"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_analyze</summary>
 		public AnalyzeRequest() : base(){}
@@ -164,7 +164,7 @@ namespace Nest
 	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/_authenticate"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/_authenticate"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -179,15 +179,15 @@ namespace Nest
 	public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		protected IBulkAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_aliases"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_aliases"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
-		///<summary>Request timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Request timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IBulkRequest : IRequest<BulkRequestParameters>
@@ -200,7 +200,7 @@ namespace Nest
 	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
 		protected IBulkRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_bulk", "{index}/_bulk"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_bulk", "/{index}/_bulk"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_bulk</summary>
 		public BulkRequest() : base(){}
@@ -212,12 +212,8 @@ namespace Nest
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
-		///<summary>
-		/// Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard
-		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
-		/// shard (number of replicas + 1)
-		///</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -232,18 +228,22 @@ namespace Nest
 		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Default document type for items which don't provide one</summary>
-		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
-		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Default document type for items which don't provide one</summary>
+		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters>
@@ -256,7 +256,7 @@ namespace Nest
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_tasks/_cancel", "_tasks/{task_id}/_cancel"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_tasks/_cancel", "/_tasks/{task_id}/_cancel"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_tasks/_cancel</summary>
 		public CancelTasksRequest() : base(){}
@@ -268,13 +268,13 @@ namespace Nest
 		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
 		// Request parameters
+		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
+		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
 		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
-		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
-		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 	}
@@ -289,7 +289,7 @@ namespace Nest
 	public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
 		protected ICatAliasesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/aliases", "_cat/aliases/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/aliases", "/_cat/aliases/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/aliases</summary>
 		public CatAliasesRequest() : base(){}
@@ -303,14 +303,14 @@ namespace Nest
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -327,7 +327,7 @@ namespace Nest
 	public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
 		protected ICatAllocationRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/allocation", "_cat/allocation/{node_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/allocation", "/_cat/allocation/{node_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/allocation</summary>
 		public CatAllocationRequest() : base(){}
@@ -339,18 +339,18 @@ namespace Nest
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -367,7 +367,7 @@ namespace Nest
 	public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
 		protected ICatCountRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/count", "_cat/count/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/count", "/_cat/count/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/count</summary>
 		public CatCountRequest() : base(){}
@@ -381,14 +381,14 @@ namespace Nest
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -405,7 +405,7 @@ namespace Nest
 	public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
 		protected ICatFielddataRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/fielddata", "_cat/fielddata/{fields}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/fielddata", "/_cat/fielddata/{fields}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/fielddata</summary>
 		public CatFielddataRequest() : base(){}
@@ -417,18 +417,18 @@ namespace Nest
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 
 		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -443,25 +443,25 @@ namespace Nest
 	public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
 		protected ICatHealthRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/health"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/health"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Set to false to disable timestamping</summary>
 		public bool? IncludeTimestamp { get => Q<bool?>("ts"); set => Q("ts", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
@@ -474,7 +474,7 @@ namespace Nest
 	public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
 		protected ICatHelpRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -495,7 +495,7 @@ namespace Nest
 	public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
 		protected ICatIndicesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/indices", "_cat/indices/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/indices", "/_cat/indices/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/indices</summary>
 		public CatIndicesRequest() : base(){}
@@ -507,20 +507,20 @@ namespace Nest
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public Health? Health { get => Q<Health?>("health"); set => Q("health", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
@@ -537,21 +537,21 @@ namespace Nest
 	public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
 		protected ICatMasterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/master"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/master"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -566,21 +566,21 @@ namespace Nest
 	public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
 		protected ICatNodeAttributesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/nodeattrs"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/nodeattrs"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -595,7 +595,7 @@ namespace Nest
 	public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
 		protected ICatNodesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/nodes"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/nodes"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -604,14 +604,14 @@ namespace Nest
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
 		public bool? FullId { get => Q<bool?>("full_id"); set => Q("full_id", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -626,21 +626,21 @@ namespace Nest
 	public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
 		protected ICatPendingTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/pending_tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/pending_tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -655,21 +655,21 @@ namespace Nest
 	public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
 		protected ICatPluginsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/plugins"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/plugins"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -686,7 +686,7 @@ namespace Nest
 	public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
 		protected ICatRecoveryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/recovery", "_cat/recovery/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/recovery", "/_cat/recovery/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/recovery</summary>
 		public CatRecoveryRequest() : base(){}
@@ -698,16 +698,16 @@ namespace Nest
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -722,21 +722,21 @@ namespace Nest
 	public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
 		protected ICatRepositoriesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/repositories"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/repositories"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -753,7 +753,7 @@ namespace Nest
 	public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
 		protected ICatSegmentsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/segments", "_cat/segments/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/segments", "/_cat/segments/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/segments</summary>
 		public CatSegmentsRequest() : base(){}
@@ -765,10 +765,10 @@ namespace Nest
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -789,7 +789,7 @@ namespace Nest
 	public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
 		protected ICatShardsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/shards", "_cat/shards/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/shards", "/_cat/shards/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/shards</summary>
 		public CatShardsRequest() : base(){}
@@ -801,18 +801,18 @@ namespace Nest
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -829,7 +829,7 @@ namespace Nest
 	public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
 		protected ICatSnapshotsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/snapshots", "_cat/snapshots/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/snapshots", "/_cat/snapshots/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/snapshots</summary>
 		public CatSnapshotsRequest() : base(){}
@@ -843,14 +843,14 @@ namespace Nest
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Set to true to ignore unavailable snapshots</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Set to true to ignore unavailable snapshots</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -865,28 +865,28 @@ namespace Nest
 	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
 		protected ICatTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
+		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
+		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
+		///<summary>Return detailed task information (default: false)</summary>
+		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
+		///<summary>Return help information</summary>
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
 		public string[] NodeId { get => Q<string[]>("node_id"); set => Q("node_id", value); }
-		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		///<summary>Return detailed task information (default: false)</summary>
-		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
 		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
-		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
-		///<summary>Return help information</summary>
-		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -903,7 +903,7 @@ namespace Nest
 	public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
 		protected ICatTemplatesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/templates", "_cat/templates/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/templates", "/_cat/templates/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/templates</summary>
 		public CatTemplatesRequest() : base(){}
@@ -917,14 +917,14 @@ namespace Nest
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -941,7 +941,7 @@ namespace Nest
 	public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cat/thread_pool", "_cat/thread_pool/{thread_pool_patterns}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cat/thread_pool", "/_cat/thread_pool/{thread_pool_patterns}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/thread_pool</summary>
 		public CatThreadPoolRequest() : base(){}
@@ -955,16 +955,16 @@ namespace Nest
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		///<summary>The multiplier in which to display values</summary>
-		public Size? Size { get => Q<Size?>("size"); set => Q("size", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>The multiplier in which to display values</summary>
+		public Size? Size { get => Q<Size?>("size"); set => Q("size", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
@@ -979,7 +979,7 @@ namespace Nest
 	public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
 	{
 		protected ICcrStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ccr/stats"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ccr/stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -996,7 +996,7 @@ namespace Nest
 	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/{username}/_password", "_security/user/_password"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/{username}/_password", "/_security/user/_password"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}/_password</summary>
 		///<param name="username">Optional, accepts null</param>
@@ -1025,7 +1025,7 @@ namespace Nest
 	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/realm/{realms}/_clear_cache"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/realm/{realms}/_clear_cache"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/realm/{realms}/_clear_cache</summary>
 		///<param name="realms">this parameter is required</param>
@@ -1052,7 +1052,7 @@ namespace Nest
 	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role/{name}/_clear_cache"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role/{name}/_clear_cache"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}/_clear_cache</summary>
 		///<param name="name">this parameter is required</param>
@@ -1077,7 +1077,7 @@ namespace Nest
 	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
 		protected IClearCacheRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cache/clear", "{index}/_cache/clear"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cache/clear", "/{index}/_cache/clear"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cache/clear</summary>
 		public ClearCacheRequest() : base(){}
@@ -1089,14 +1089,6 @@ namespace Nest
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Clear field data</summary>
-		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
-		///<summary>A comma-separated list of fields to clear when using the `fielddata` parameter (default: all)</summary>
-		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		///<summary>Clear query caches</summary>
-		public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1104,6 +1096,14 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Clear field data</summary>
+		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
+		///<summary>A comma-separated list of fields to clear when using the `fielddata` parameter (default: all)</summary>
+		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Clear query caches</summary>
+		public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
 		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
@@ -1116,7 +1116,7 @@ namespace Nest
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_search/scroll"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search/scroll"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -1131,7 +1131,7 @@ namespace Nest
 	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 	{
 		protected IClearSqlCursorRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_sql/close"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_sql/close"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -1148,7 +1148,7 @@ namespace Nest
 	public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 		protected ICloseIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_close"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_close"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_close</summary>
 		///<param name="index">this parameter is required</param>
@@ -1161,12 +1161,6 @@ namespace Nest
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1174,6 +1168,12 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
@@ -1186,7 +1186,7 @@ namespace Nest
 	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
 		protected ICloseJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_close"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_close"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -1215,15 +1215,15 @@ namespace Nest
 	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/allocation/explain"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/allocation/explain"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
-		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
-		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
+		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
+		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
@@ -1234,19 +1234,19 @@ namespace Nest
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/settings"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Whether to return all default clusters setting.</summary>
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Whether to return all default clusters setting.</summary>
-		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
@@ -1259,7 +1259,7 @@ namespace Nest
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/health", "_cluster/health/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/health", "/_cluster/health/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cluster/health</summary>
 		public ClusterHealthRequest() : base(){}
@@ -1281,14 +1281,14 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Wait until the specified number of shards is active</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Wait until the specified number of nodes is available</summary>
-		public string WaitForNodes { get => Q<string>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
 		public WaitForEvents? WaitForEvents { get => Q<WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
-		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
-		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 		///<summary>Whether to wait until there are no initializing shards in the cluster</summary>
 		public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
+		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
+		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
+		///<summary>Wait until the specified number of nodes is available</summary>
+		public string WaitForNodes { get => Q<string>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
@@ -1301,7 +1301,7 @@ namespace Nest
 	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
 		protected IClusterPendingTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/pending_tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/pending_tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -1320,7 +1320,7 @@ namespace Nest
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
 		protected IClusterPutSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/settings"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -1341,7 +1341,7 @@ namespace Nest
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		protected IClusterRerouteRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/reroute"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/reroute"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -1350,12 +1350,12 @@ namespace Nest
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
-		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
-		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public string[] Metric { get => Q<string[]>("metric"); set => Q("metric", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
+		public string[] Metric { get => Q<string[]>("metric"); set => Q("metric", value); }
+		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
+		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
@@ -1372,7 +1372,7 @@ namespace Nest
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		protected IClusterStateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/state", "_cluster/state/{metric}", "_cluster/state/{metric}/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cluster/state</summary>
 		public ClusterStateRequest() : base(){}
@@ -1390,18 +1390,6 @@ namespace Nest
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
-		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
-		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
-		public Time WaitForTimeout { get => Q<Time>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1409,6 +1397,18 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+		public Time WaitForTimeout { get => Q<Time>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
@@ -1421,7 +1421,7 @@ namespace Nest
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
 		protected IClusterStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_cluster/stats", "_cluster/stats/nodes/{node_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_cluster/stats", "/_cluster/stats/nodes/{node_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cluster/stats</summary>
 		public ClusterStatsRequest() : base(){}
@@ -1451,7 +1451,7 @@ namespace Nest
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_count", "{index}/_count"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_count", "/{index}/_count"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_count</summary>
 		public CountRequest() : base(){}
@@ -1463,21 +1463,33 @@ namespace Nest
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1487,18 +1499,6 @@ namespace Nest
 		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
@@ -1513,26 +1513,6 @@ namespace Nest
 	}
 	 
 	[InterfaceDataContract]
-	public partial interface ICreateApiKeyRequest : IRequest<CreateApiKeyRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
-	public partial class CreateApiKeyRequest : PlainRequestBase<CreateApiKeyRequestParameters>, ICreateApiKeyRequest
-	{
-		protected ICreateApiKeyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/api_key"});
-		internal override ApiUrls ApiUrls => Urls;
-		// values part of the url path
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[InterfaceDataContract]
 	public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1543,7 +1523,7 @@ namespace Nest
 	public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
 	{
 		protected ICreateAutoFollowPatternRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ccr/auto_follow/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ccr/auto_follow/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -1568,7 +1548,7 @@ namespace Nest
 	public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
 	{
 		protected ICreateFollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ccr/follow"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_ccr/follow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/follow</summary>
 		///<param name="index">this parameter is required</param>
@@ -1598,7 +1578,7 @@ namespace Nest
 	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		protected ICreateIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
@@ -1613,12 +1593,12 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether a type should be expected in the body of the mappings.</summary>
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
@@ -1631,7 +1611,7 @@ namespace Nest
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		protected ICreateRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name="repository">this parameter is required</param>
@@ -1666,7 +1646,7 @@ namespace Nest
 	public partial class CreateRequest : PlainRequestBase<CreateRequestParameters>, ICreateRequest
 	{
 		protected ICreateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_create/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_create/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_create/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -1682,12 +1662,8 @@ namespace Nest
 		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>
-		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
-		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
-		/// shard (number of replicas + 1)
-		///</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -1708,8 +1684,12 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	public partial class CreateRequest<TDocument> : CreateRequest, ICreateRequest<TDocument>
 	{
@@ -1742,7 +1722,7 @@ namespace Nest
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
 		protected ICreateRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_rollup/job/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_rollup/job/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -1767,7 +1747,7 @@ namespace Nest
 	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
 		protected IDeactivateWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{watch_id}/_deactivate"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{watch_id}/_deactivate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
 		///<param name="watch_id">this parameter is required</param>
@@ -1794,7 +1774,7 @@ namespace Nest
 	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
 		protected IDeleteAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_alias/{name}", "{index}/_aliases/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_alias/{name}", "/{index}/_aliases/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_aliases/{name}</summary>
 		///<param name="index">this parameter is required</param>
@@ -1810,10 +1790,10 @@ namespace Nest
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
-		///<summary>Explicit timestamp for the document</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit timestamp for the document</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
@@ -1826,7 +1806,7 @@ namespace Nest
 	public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
 	{
 		protected IDeleteAutoFollowPatternRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ccr/auto_follow/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ccr/auto_follow/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -1853,7 +1833,7 @@ namespace Nest
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_delete_by_query"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_delete_by_query"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_delete_by_query</summary>
 		///<param name="index">this parameter is required</param>
@@ -1866,33 +1846,39 @@ namespace Nest
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		///<summary>Starting offset (default: 0)</summary>
-		public long? From { get => Q<long?>("from"); set => Q("from", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>What to do when the delete by query hits version conflicts?</summary>
 		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Starting offset (default: 0)</summary>
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1904,12 +1890,16 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
-		///<summary>Search operation type</summary>
-		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Size on the scroll request powering the delete by query</summary>
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
 		///<summary>Whether the _source should be included in the response.</summary>
@@ -1918,32 +1908,22 @@ namespace Nest
 		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
-		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		///<summary>Specify whether to return document version as part of a hit</summary>
-		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		///<summary>Should the effected indexes be refreshed?</summary>
-		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Specify whether to return document version as part of a hit</summary>
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
 		/// copies for the shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Size on the scroll request powering the delete by query</summary>
-		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Should the request should block until the delete by query is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	public partial class DeleteByQueryRequest<T> : DeleteByQueryRequest, IDeleteByQueryRequest<T>
 	{
@@ -1966,7 +1946,7 @@ namespace Nest
 	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
 	{
 		protected IDeleteByQueryRethrottleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_delete_by_query/{task_id}/_rethrottle"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_delete_by_query/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_delete_by_query/{task_id}/_rethrottle</summary>
 		///<param name="task_id">this parameter is required</param>
@@ -1995,7 +1975,7 @@ namespace Nest
 	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 	{
 		protected IDeleteCalendarEventRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}/events/{event_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}/events/{event_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -2025,7 +2005,7 @@ namespace Nest
 	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 	{
 		protected IDeleteCalendarJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}/jobs/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -2053,7 +2033,7 @@ namespace Nest
 	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 	{
 		protected IDeleteCalendarRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -2078,7 +2058,7 @@ namespace Nest
 	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
 		protected IDeleteDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id">this parameter is required</param>
@@ -2103,34 +2083,9 @@ namespace Nest
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/_delete_expired_data"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/_delete_expired_data"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
-	public partial interface IDeleteFilterRequest : IRequest<DeleteFilterRequestParameters>
-	{
-		[IgnoreDataMember]
-			Id FilterId { get; }
-	}
-
-	///<summary>Request parameters for MlDeleteFilter <pre>TODO</pre></summary>
-	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
-	{
-		protected IDeleteFilterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters/{filter_id}"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ml/filters/{filter_id}</summary>
-		///<param name="filter_id">this parameter is required</param>
-		public DeleteFilterRequest(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal DeleteFilterRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 
 		// Request parameters
 	}
@@ -2147,7 +2102,7 @@ namespace Nest
 	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
 	{
 		protected IDeleteForecastRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -2179,7 +2134,7 @@ namespace Nest
 	public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 		protected IDeleteIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
@@ -2192,16 +2147,16 @@ namespace Nest
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
@@ -2214,7 +2169,7 @@ namespace Nest
 	public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
 		protected IDeleteIndexTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -2227,10 +2182,10 @@ namespace Nest
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters>
@@ -2243,7 +2198,7 @@ namespace Nest
 	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
 		protected IDeleteJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -2270,34 +2225,9 @@ namespace Nest
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
-	public partial interface IDeleteLifecycleRequest : IRequest<DeleteLifecycleRequestParameters>
-	{
-		[IgnoreDataMember]
-			PolicyId PolicyId { get; }
-	}
-
-	///<summary>Request parameters for IlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
-	public partial class DeleteLifecycleRequest : PlainRequestBase<DeleteLifecycleRequestParameters>, IDeleteLifecycleRequest
-	{
-		protected IDeleteLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/policy/{policy_id}"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name="policy_id">Optional, accepts null</param>
-		public DeleteLifecycleRequest(PolicyId policy_id) : base(r => r.Optional("policy_id", policy_id)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal DeleteLifecycleRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		PolicyId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
 
 		// Request parameters
 	}
@@ -2314,7 +2244,7 @@ namespace Nest
 	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
 		protected IDeleteModelSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -2342,7 +2272,7 @@ namespace Nest
 	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
 		protected IDeletePipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ingest/pipeline/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ingest/pipeline/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -2373,7 +2303,7 @@ namespace Nest
 	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
 	{
 		protected IDeletePrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/privilege/{application}/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/privilege/{application}/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name="application">this parameter is required</param>
@@ -2406,7 +2336,7 @@ namespace Nest
 	public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 		protected IDeleteRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name="repository">this parameter is required</param>
@@ -2439,7 +2369,7 @@ namespace Nest
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_doc/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_doc/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -2455,12 +2385,10 @@ namespace Nest
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>
-		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
-		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
-		/// shard (number of replicas + 1)
-		///</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -2477,14 +2405,16 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
-		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	public partial class DeleteRequest<TDocument> : DeleteRequest, IDeleteRequest<TDocument>
 	{
@@ -2517,7 +2447,7 @@ namespace Nest
 	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
 		protected IDeleteRoleMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role_mapping/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role_mapping/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -2547,7 +2477,7 @@ namespace Nest
 	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -2577,7 +2507,7 @@ namespace Nest
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
 		protected IDeleteRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_rollup/job/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_rollup/job/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -2602,7 +2532,7 @@ namespace Nest
 	public partial class DeleteScriptRequest : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		protected IDeleteScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_scripts/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_scripts/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_scripts/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -2615,10 +2545,10 @@ namespace Nest
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
@@ -2633,7 +2563,7 @@ namespace Nest
 	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
 		protected IDeleteSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}/{snapshot}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}/{snapshot}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name="repository">this parameter is required</param>
@@ -2663,7 +2593,7 @@ namespace Nest
 	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/{username}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/{username}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}</summary>
 		///<param name="username">this parameter is required</param>
@@ -2693,7 +2623,7 @@ namespace Nest
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -2718,7 +2648,7 @@ namespace Nest
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_migration/deprecations", "{index}/_migration/deprecations"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_migration/deprecations", "/{index}/_migration/deprecations"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_migration/deprecations</summary>
 		public DeprecationInfoRequest() : base(){}
@@ -2742,7 +2672,7 @@ namespace Nest
 	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
 		protected IDisableUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/{username}/_disable"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/{username}/_disable"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}/_disable</summary>
 		///<param name="username">this parameter is required</param>
@@ -2776,7 +2706,7 @@ namespace Nest
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_doc/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_doc/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -2792,8 +2722,6 @@ namespace Nest
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -2815,6 +2743,8 @@ namespace Nest
 		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2851,7 +2781,7 @@ namespace Nest
 	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
 		protected IEnableUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/{username}/_enable"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/{username}/_enable"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}/_enable</summary>
 		///<param name="username">this parameter is required</param>
@@ -2879,7 +2809,7 @@ namespace Nest
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
 		protected IExecutePainlessScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_scripts/painless/_execute"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_scripts/painless/_execute"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -2896,7 +2826,7 @@ namespace Nest
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{id}/_execute", "_watcher/watch/_execute"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}/_execute</summary>
 		///<param name="id">Optional, accepts null</param>
@@ -2910,31 +2840,6 @@ namespace Nest
 		// Request parameters
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
-	}
-	[InterfaceDataContract]
-	public partial interface IExplainLifecycleRequest : IRequest<ExplainLifecycleRequestParameters>
-	{
-		[IgnoreDataMember]
-			IndexName Index { get; }
-	}
-
-	///<summary>Request parameters for IlmExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
-	public partial class ExplainLifecycleRequest : PlainRequestBase<ExplainLifecycleRequestParameters>, IExplainLifecycleRequest
-	{
-		protected IExplainLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ilm/explain"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/{index}/_ilm/explain</summary>
-		///<param name="index">this parameter is required</param>
-		public ExplainLifecycleRequest(IndexName index) : base(r => r.Required("index", index)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal ExplainLifecycleRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IExplainRequest : IRequest<ExplainRequestParameters>
@@ -2951,7 +2856,7 @@ namespace Nest
 	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
 	{
 		protected IExplainRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_explain/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_explain/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_explain/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -3028,7 +2933,7 @@ namespace Nest
 	public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
 		protected IFieldCapabilitiesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_field_caps", "{index}/_field_caps"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_field_caps", "/{index}/_field_caps"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_field_caps</summary>
 		public FieldCapabilitiesRequest() : base(){}
@@ -3040,10 +2945,6 @@ namespace Nest
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>A comma-separated list of field names</summary>
-		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -3051,6 +2952,10 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>A comma-separated list of field names</summary>
+		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
@@ -3063,7 +2968,7 @@ namespace Nest
 	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
 		protected IFlushJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_flush"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_flush"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3090,7 +2995,7 @@ namespace Nest
 	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
 		protected IFlushRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_flush", "{index}/_flush"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_flush", "/{index}/_flush"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_flush</summary>
 		public FlushRequest() : base(){}
@@ -3103,24 +3008,24 @@ namespace Nest
 
 		// Request parameters
 		///<summary>
-		/// Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if
-		/// transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
-		///</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		///<summary>
-		/// If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default
-		/// is true. If set to false the flush will be skipped iff if another flush operation is already running.
-		///</summary>
-		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>
+		/// Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if
+		/// transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
+		///</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default
+		/// is true. If set to false the flush will be skipped iff if another flush operation is already running.
+		///</summary>
+		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
@@ -3133,7 +3038,7 @@ namespace Nest
 	public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
 	{
 		protected IFollowIndexStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ccr/stats"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_ccr/stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/stats</summary>
 		///<param name="index">this parameter is required</param>
@@ -3158,7 +3063,7 @@ namespace Nest
 	public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
 		protected IForceMergeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_forcemerge", "{index}/_forcemerge"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_forcemerge", "/{index}/_forcemerge"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_forcemerge</summary>
 		public ForceMergeRequest() : base(){}
@@ -3170,10 +3075,6 @@ namespace Nest
 		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -3181,6 +3082,10 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
+		public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
@@ -3197,7 +3102,7 @@ namespace Nest
 	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 	{
 		protected IForecastJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_forecast"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_forecast"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3224,7 +3129,7 @@ namespace Nest
 	public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
 		protected IGetAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_alias</summary>
 		public GetAliasRequest() : base(){}
@@ -3245,8 +3150,6 @@ namespace Nest
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -3254,6 +3157,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -3268,7 +3173,7 @@ namespace Nest
 	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
 		protected IGetAnomalyRecordsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/results/records"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/results/records"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3283,29 +3188,6 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
-	public partial interface IGetApiKeyRequest : IRequest<GetApiKeyRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
-	public partial class GetApiKeyRequest : PlainRequestBase<GetApiKeyRequestParameters>, IGetApiKeyRequest
-	{
-		protected IGetApiKeyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/api_key"});
-		internal override ApiUrls ApiUrls => Urls;
-		// values part of the url path
-
-		// Request parameters
-		///<summary>API key id of the API key to be retrieved</summary>
-		public string Id { get => Q<string>("id"); set => Q("id", value); }
-		///<summary>API key name of the API key to be retrieved</summary>
-		public string Name { get => Q<string>("name"); set => Q("name", value); }
-		///<summary>user name of the user who created this API key to be retrieved</summary>
-		public string Username { get => Q<string>("username"); set => Q("username", value); }
-		///<summary>realm name of the user who created this API key to be retrieved</summary>
-		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
-	}
-	[InterfaceDataContract]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3316,7 +3198,7 @@ namespace Nest
 	public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
 	{
 		protected IGetAutoFollowPatternRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ccr/auto_follow", "_ccr/auto_follow/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ccr/auto_follow", "/_ccr/auto_follow/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ccr/auto_follow</summary>
 		public GetAutoFollowPatternRequest() : base(){}
@@ -3338,7 +3220,7 @@ namespace Nest
 	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 	{
 		protected IGetBasicLicenseStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license/basic_status"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license/basic_status"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -3357,7 +3239,7 @@ namespace Nest
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
 		protected IGetBucketsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "_ml/anomaly_detectors/{job_id}/results/buckets"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3388,7 +3270,7 @@ namespace Nest
 	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 	{
 		protected IGetCalendarEventsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}/events"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}/events"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -3401,12 +3283,12 @@ namespace Nest
 		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
 
 		// Request parameters
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
 		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
 		///<summary>Get events after this time</summary>
 		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>Get events before this time</summary>
-		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
@@ -3419,7 +3301,7 @@ namespace Nest
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 	{
 		protected IGetCalendarsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars", "_ml/calendars/{calendar_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars", "/_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars</summary>
 		public GetCalendarsRequest() : base(){}
@@ -3445,7 +3327,7 @@ namespace Nest
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
 		protected IGetCategoriesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "_ml/anomaly_detectors/{job_id}/results/categories/"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_ml/anomaly_detectors/{job_id}/results/categories/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3474,7 +3356,7 @@ namespace Nest
 	public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
 	{
 		protected IGetCertificatesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ssl/certificates"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ssl/certificates"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -3491,7 +3373,7 @@ namespace Nest
 	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
 		protected IGetDatafeedsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}", "_ml/datafeeds"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}", "/_ml/datafeeds"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id">Optional, accepts null</param>
@@ -3517,7 +3399,7 @@ namespace Nest
 	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
 		protected IGetDatafeedStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}/_stats", "_ml/datafeeds/_stats"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}/_stats", "/_ml/datafeeds/_stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
 		///<param name="datafeed_id">Optional, accepts null</param>
@@ -3545,7 +3427,7 @@ namespace Nest
 	public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		protected IGetFieldMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_mapping/field/{fields}", "{index}/_mapping/field/{fields}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mapping/field/{fields}</summary>
 		///<param name="fields">this parameter is required</param>
@@ -3564,12 +3446,6 @@ namespace Nest
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-		///<summary>Whether the default mapping values should be returned as well</summary>
-		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -3577,51 +3453,14 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether the default mapping values should be returned as well</summary>
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	}
-	[InterfaceDataContract]
-	public partial interface IGetFiltersRequest : IRequest<GetFiltersRequestParameters>
-	{
-		[IgnoreDataMember]
-			Id FilterId { get; }
-	}
-
-	///<summary>Request parameters for MlGetFilters <pre>TODO</pre></summary>
-	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
-	{
-		protected IGetFiltersRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters", "_ml/filters/{filter_id}"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ml/filters</summary>
-		public GetFiltersRequest() : base(){}
-		///<summary>/_ml/filters/{filter_id}</summary>
-		///<param name="filter_id">Optional, accepts null</param>
-		public GetFiltersRequest(Id filter_id) : base(r => r.Optional("filter_id", filter_id)){}
-		// values part of the url path
-		[IgnoreDataMember]
-		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
-
-		// Request parameters
-		///<summary>skips a number of filters</summary>
-		public int? From { get => Q<int?>("from"); set => Q("from", value); }
-		///<summary>specifies a max number of filters to get</summary>
-		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
-	}
-	[InterfaceDataContract]
-	public partial interface IGetIlmStatusRequest : IRequest<GetIlmStatusRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for IlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
-	public partial class GetIlmStatusRequest : PlainRequestBase<GetIlmStatusRequestParameters>, IGetIlmStatusRequest
-	{
-		protected IGetIlmStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/status"});
-		internal override ApiUrls ApiUrls => Urls;
-		// values part of the url path
-
-		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
@@ -3634,7 +3473,7 @@ namespace Nest
 	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		protected IGetIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
@@ -3647,20 +3486,20 @@ namespace Nest
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+		///<summary>Whether to add the type name to the response (default: false)</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
@@ -3677,7 +3516,7 @@ namespace Nest
 	public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 		protected IGetIndexSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_settings</summary>
 		public GetIndexSettingsRequest() : base(){}
@@ -3698,10 +3537,6 @@ namespace Nest
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -3711,10 +3546,14 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
@@ -3727,7 +3566,7 @@ namespace Nest
 	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
 		protected IGetIndexTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_template", "_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_template", "/_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template</summary>
 		public GetIndexTemplateRequest() : base(){}
@@ -3739,14 +3578,14 @@ namespace Nest
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
@@ -3759,7 +3598,7 @@ namespace Nest
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
 		protected IGetInfluencersRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/results/influencers"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/results/influencers"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3784,7 +3623,7 @@ namespace Nest
 	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
 		protected IGetJobsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}", "_ml/anomaly_detectors"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}", "/_ml/anomaly_detectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name="job_id">Optional, accepts null</param>
@@ -3810,7 +3649,7 @@ namespace Nest
 	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
 		protected IGetJobStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/_stats", "_ml/anomaly_detectors/{job_id}/_stats"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/_stats</summary>
 		public GetJobStatsRequest() : base(){}
@@ -3834,37 +3673,13 @@ namespace Nest
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	}
-	[InterfaceDataContract]
-	public partial interface IGetLifecycleRequest : IRequest<GetLifecycleRequestParameters>
-	{
-		[IgnoreDataMember]
-			PolicyId PolicyId { get; }
-	}
-
-	///<summary>Request parameters for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
-	public partial class GetLifecycleRequest : PlainRequestBase<GetLifecycleRequestParameters>, IGetLifecycleRequest
-	{
-		protected IGetLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/policy/{policy_id}", "_ilm/policy"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name="policy_id">Optional, accepts null</param>
-		public GetLifecycleRequest(PolicyId policy_id) : base(r => r.Optional("policy_id", policy_id)){}
-		///<summary>/_ilm/policy</summary>
-		public GetLifecycleRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		PolicyId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
-
-		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
@@ -3877,7 +3692,7 @@ namespace Nest
 	public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
 		protected IGetMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_mapping", "{index}/_mapping"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_mapping", "/{index}/_mapping"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mapping</summary>
 		public GetMappingRequest() : base(){}
@@ -3889,10 +3704,6 @@ namespace Nest
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -3900,10 +3711,14 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether to add the type name to the response (default: false)</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters>
@@ -3918,7 +3733,7 @@ namespace Nest
 	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
 		protected IGetModelSnapshotsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "_ml/anomaly_detectors/{job_id}/model_snapshots"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3949,7 +3764,7 @@ namespace Nest
 	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
 	{
 		protected IGetOverallBucketsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/results/overall_buckets"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/results/overall_buckets"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -3974,7 +3789,7 @@ namespace Nest
 	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
 		protected IGetPipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ingest/pipeline", "_ingest/pipeline/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ingest/pipeline", "/_ingest/pipeline/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline</summary>
 		public GetPipelineRequest() : base(){}
@@ -4002,7 +3817,7 @@ namespace Nest
 	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 	{
 		protected IGetPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/privilege", "_security/privilege/{application}", "_security/privilege/{application}/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/privilege", "/_security/privilege/{application}", "/_security/privilege/{application}/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/privilege</summary>
 		public GetPrivilegesRequest() : base(){}
@@ -4032,7 +3847,7 @@ namespace Nest
 	public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
 		protected IGetRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot", "_snapshot/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot", "/_snapshot/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot</summary>
 		public GetRepositoryRequest() : base(){}
@@ -4044,10 +3859,10 @@ namespace Nest
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetRequest : IRequest<GetRequestParameters>
@@ -4064,7 +3879,7 @@ namespace Nest
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_doc/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_doc/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -4080,8 +3895,6 @@ namespace Nest
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -4100,9 +3913,11 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -4139,7 +3954,7 @@ namespace Nest
 	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
 		protected IGetRoleMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role_mapping/{name}", "_security/role_mapping"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role_mapping/{name}", "/_security/role_mapping"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name="name">Optional, accepts null</param>
@@ -4163,7 +3978,7 @@ namespace Nest
 	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role/{name}", "_security/role"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role/{name}", "/_security/role"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}</summary>
 		///<param name="name">Optional, accepts null</param>
@@ -4187,7 +4002,7 @@ namespace Nest
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
 		protected IGetRollupCapabilitiesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_rollup/data/{id}", "_rollup/data/"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_rollup/data/{id}", "/_rollup/data/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/data/{id}</summary>
 		///<param name="id">Optional, accepts null</param>
@@ -4211,7 +4026,7 @@ namespace Nest
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
 		protected IGetRollupIndexCapabilitiesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_rollup/data"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_rollup/data"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_rollup/data</summary>
 		///<param name="index">this parameter is required</param>
@@ -4236,7 +4051,7 @@ namespace Nest
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
 		protected IGetRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_rollup/job/{id}", "_rollup/job/"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_rollup/job/{id}", "/_rollup/job/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">Optional, accepts null</param>
@@ -4260,7 +4075,7 @@ namespace Nest
 	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		protected IGetScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_scripts/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_scripts/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_scripts/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -4289,7 +4104,7 @@ namespace Nest
 	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected IGetSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}/{snapshot}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}/{snapshot}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name="repository">this parameter is required</param>
@@ -4305,10 +4120,10 @@ namespace Nest
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
@@ -4323,7 +4138,7 @@ namespace Nest
 	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
 		protected IGetTaskRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_tasks/{task_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_tasks/{task_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_tasks/{task_id}</summary>
 		///<param name="task_id">this parameter is required</param>
@@ -4336,10 +4151,10 @@ namespace Nest
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
 		// Request parameters
-		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
@@ -4350,7 +4165,7 @@ namespace Nest
 	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 	{
 		protected IGetTrialLicenseStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license/trial_status"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license/trial_status"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -4365,7 +4180,7 @@ namespace Nest
 	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/oauth2/token"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/oauth2/token"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -4380,7 +4195,7 @@ namespace Nest
 	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 	{
 		protected IGetUserPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/_privileges"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/_privileges"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -4397,7 +4212,7 @@ namespace Nest
 	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/{username}", "_security/user"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/{username}", "/_security/user"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}</summary>
 		///<param name="username">Optional, accepts null</param>
@@ -4421,7 +4236,7 @@ namespace Nest
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -4448,7 +4263,7 @@ namespace Nest
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_graph/explore"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_graph/explore"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_graph/explore</summary>
 		///<param name="index">this parameter is required</param>
@@ -4492,7 +4307,7 @@ namespace Nest
 	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ingest/processor/grok"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ingest/processor/grok"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -4509,7 +4324,7 @@ namespace Nest
 	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
 	{
 		protected IHasPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/_has_privileges", "_security/user/{user}/_has_privileges"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/_has_privileges", "/_security/user/{user}/_has_privileges"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/_has_privileges</summary>
 		public HasPrivilegesRequest() : base(){}
@@ -4533,7 +4348,7 @@ namespace Nest
 	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
 		protected IIndexExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
@@ -4546,18 +4361,18 @@ namespace Nest
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
@@ -4574,7 +4389,7 @@ namespace Nest
 	public partial class IndexRequest : PlainRequestBase<IndexRequestParameters>, IIndexRequest
 	{
 		protected IIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_doc/{id}", "{index}/_doc"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_doc/{id}", "/{index}/_doc"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -4593,14 +4408,14 @@ namespace Nest
 		Id IIndexRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>
-		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
-		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
-		/// shard (number of replicas + 1)
-		///</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>Explicit operation type</summary>
 		public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -4621,12 +4436,12 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
-		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	public partial class IndexRequest<TDocument> : IndexRequest, IIndexRequest<TDocument>
 	{
@@ -4661,7 +4476,7 @@ namespace Nest
 	public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
 		protected IIndexTemplateExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -4676,10 +4491,10 @@ namespace Nest
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
@@ -4692,7 +4507,7 @@ namespace Nest
 	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
 		protected IIndicesShardStoresRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_shard_stores", "{index}/_shard_stores"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_shard_stores", "/{index}/_shard_stores"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_shard_stores</summary>
 		public IndicesShardStoresRequest() : base(){}
@@ -4704,10 +4519,6 @@ namespace Nest
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
-		public string[] Status { get => Q<string[]>("status"); set => Q("status", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -4715,6 +4526,10 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
+		public string[] Status { get => Q<string[]>("status"); set => Q("status", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
@@ -4729,7 +4544,7 @@ namespace Nest
 	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		protected IIndicesStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_stats", "_stats/{metric}", "{index}/_stats", "{index}/_stats/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_stats</summary>
 		public IndicesStatsRequest() : base(){}
@@ -4758,25 +4573,10 @@ namespace Nest
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public string[] Groups { get => Q<string[]>("groups"); set => Q("groups", value); }
-		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
-	}
-	[InterfaceDataContract]
-	public partial interface IInvalidateApiKeyRequest : IRequest<InvalidateApiKeyRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
-	public partial class InvalidateApiKeyRequest : PlainRequestBase<InvalidateApiKeyRequestParameters>, IInvalidateApiKeyRequest
-	{
-		protected IInvalidateApiKeyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/api_key"});
-		internal override ApiUrls ApiUrls => Urls;
-		// values part of the url path
-
-		// Request parameters
+		///<summary>Return stats aggregated at cluster, index or shard level</summary>
+		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>
@@ -4787,7 +4587,7 @@ namespace Nest
 	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/oauth2/token"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/oauth2/token"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -4802,28 +4602,28 @@ namespace Nest
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
+		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
+		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
+		///<summary>Return detailed task information (default: false)</summary>
+		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
+		///<summary>Group tasks by nodes or parent/child relationships</summary>
+		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
 		///<summary>
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
 		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
-		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		///<summary>Return detailed task information (default: false)</summary>
-		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
-		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
@@ -4834,7 +4634,7 @@ namespace Nest
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
 		protected IMachineLearningInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/info"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/info"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -4851,7 +4651,7 @@ namespace Nest
 	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 	{
 		protected IMigrationAssistanceRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_migration/assistance", "_migration/assistance/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_migration/assistance", "/_migration/assistance/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_migration/assistance</summary>
 		public MigrationAssistanceRequest() : base(){}
@@ -4884,7 +4684,7 @@ namespace Nest
 	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 	{
 		protected IMigrationUpgradeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_migration/upgrade/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_migration/upgrade/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_migration/upgrade/{index}</summary>
 		///<param name="index">this parameter is required</param>
@@ -4901,31 +4701,6 @@ namespace Nest
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	[InterfaceDataContract]
-	public partial interface IMoveToStepRequest : IRequest<MoveToStepRequestParameters>
-	{
-		[IgnoreDataMember]
-			IndexName Index { get; }
-	}
-
-	///<summary>Request parameters for IlmMoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
-	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
-	{
-		protected IMoveToStepRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/move/{index}"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ilm/move/{index}</summary>
-		///<param name="index">this parameter is required</param>
-		public MoveToStepRequest(IndexName index) : base(r => r.Required("index", index)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal MoveToStepRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -4936,7 +4711,7 @@ namespace Nest
 	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		protected IMultiGetRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_mget", "{index}/_mget"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_mget", "/{index}/_mget"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mget</summary>
 		public MultiGetRequest() : base(){}
@@ -4981,7 +4756,7 @@ namespace Nest
 	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		protected IMultiSearchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_msearch", "{index}/_msearch"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_msearch", "/{index}/_msearch"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_msearch</summary>
 		public MultiSearchRequest() : base(){}
@@ -4993,12 +4768,15 @@ namespace Nest
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Search operation type</summary>
-		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>
+		/// The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search
+		/// on the cluster in order to limit the number of concurrent shard requests
+		///</summary>
+		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
 		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
@@ -5006,15 +4784,12 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
-		///<summary>
-		/// The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search
-		/// on the cluster in order to limit the number of concurrent shard requests
-		///</summary>
-		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
-		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
@@ -5027,7 +4802,7 @@ namespace Nest
 	public partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
 		protected IMultiSearchTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_msearch/template", "{index}/_msearch/template"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_msearch/template", "/{index}/_msearch/template"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_msearch/template</summary>
 		public MultiSearchTemplateRequest() : base(){}
@@ -5039,16 +4814,16 @@ namespace Nest
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Search operation type</summary>
-		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
-		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
+		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
@@ -5061,7 +4836,7 @@ namespace Nest
 	public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
 		protected IMultiTermVectorsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_mtermvectors", "{index}/_mtermvectors"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_mtermvectors", "/{index}/_mtermvectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mtermvectors</summary>
 		public MultiTermVectorsRequest() : base(){}
@@ -5074,11 +4849,6 @@ namespace Nest
 
 		// Request parameters
 		///<summary>
-		/// Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified
-		/// in body "params" or "docs".
-		///</summary>
-		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
-		///<summary>
 		/// Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned
 		/// documents unless otherwise specified in body "params" or "docs".
 		///</summary>
@@ -5087,15 +4857,17 @@ namespace Nest
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
+		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 		///<summary>
 		/// Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise
 		/// specified in body "params" or "docs".
 		///</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -5105,8 +4877,11 @@ namespace Nest
 		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
-		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+		///<summary>
+		/// Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified
+		/// in body "params" or "docs".
+		///</summary>
+		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5123,7 +4898,7 @@ namespace Nest
 	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		protected INodesHotThreadsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_nodes/hot_threads", "_nodes/{node_id}/hot_threads"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/hot_threads</summary>
 		public NodesHotThreadsRequest() : base(){}
@@ -5135,16 +4910,16 @@ namespace Nest
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		// Request parameters
+		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
+		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 		///<summary>The interval for the second sampling of threads</summary>
 		public Time Interval { get => Q<Time>("interval"); set => Q("interval", value); }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
-		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
-		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType? ThreadType { get => Q<ThreadType?>("type"); set => Q("type", value); }
+		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
+		public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
@@ -5161,7 +4936,7 @@ namespace Nest
 	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		protected INodesInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_nodes", "_nodes/{node_id}", "_nodes/{metric}", "_nodes/{node_id}/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes</summary>
 		public NodesInfoRequest() : base(){}
@@ -5202,7 +4977,7 @@ namespace Nest
 	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		protected INodesStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_nodes/stats", "_nodes/{node_id}/stats", "_nodes/stats/{metric}", "_nodes/{node_id}/stats/{metric}", "_nodes/stats/{metric}/{index_metric}", "_nodes/{node_id}/stats/{metric}/{index_metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/stats</summary>
 		public NodesStatsRequest() : base(){}
@@ -5242,14 +5017,14 @@ namespace Nest
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
-		///<summary>Return indices stats aggregated at index, node or shard level</summary>
-		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
+		///<summary>Return indices stats aggregated at index, node or shard level</summary>
+		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
+		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParameters>
@@ -5264,7 +5039,7 @@ namespace Nest
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
 		protected INodesUsageRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/usage</summary>
 		public NodesUsageRequest() : base(){}
@@ -5299,7 +5074,7 @@ namespace Nest
 	public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
 		protected IOpenIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_open"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_open"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_open</summary>
 		///<param name="index">this parameter is required</param>
@@ -5312,12 +5087,6 @@ namespace Nest
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5325,6 +5094,12 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -5339,7 +5114,7 @@ namespace Nest
 	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
 		protected IOpenJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_open"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_open"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -5364,7 +5139,7 @@ namespace Nest
 	public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
 	{
 		protected IPauseFollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ccr/pause_follow"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_ccr/pause_follow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/pause_follow</summary>
 		///<param name="index">this parameter is required</param>
@@ -5387,7 +5162,7 @@ namespace Nest
 	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {""});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -5404,7 +5179,7 @@ namespace Nest
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 	{
 		protected IPostCalendarEventsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}/events"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}/events"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -5429,7 +5204,7 @@ namespace Nest
 	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
 		protected IPostJobDataRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_data"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_data"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -5442,10 +5217,10 @@ namespace Nest
 		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
-		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public DateTimeOffset? ResetStart { get => Q<DateTimeOffset?>("reset_start"); set => Q("reset_start", value); }
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset? ResetEnd { get => Q<DateTimeOffset?>("reset_end"); set => Q("reset_end", value); }
+		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		public DateTimeOffset? ResetStart { get => Q<DateTimeOffset?>("reset_start"); set => Q("reset_start", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
@@ -5456,7 +5231,7 @@ namespace Nest
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -5475,7 +5250,7 @@ namespace Nest
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
 		protected IPreviewDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}/_preview"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}/_preview"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
 		///<param name="datafeed_id">this parameter is required</param>
@@ -5502,7 +5277,7 @@ namespace Nest
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		protected IPutAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_alias/{name}", "{index}/_aliases/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_alias/{name}", "/{index}/_aliases/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_aliases/{name}</summary>
 		///<param name="index">this parameter is required</param>
@@ -5518,10 +5293,10 @@ namespace Nest
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
-		///<summary>Explicit timestamp for the document</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit timestamp for the document</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
@@ -5536,7 +5311,7 @@ namespace Nest
 	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 	{
 		protected IPutCalendarJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}/jobs/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -5564,7 +5339,7 @@ namespace Nest
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 	{
 		protected IPutCalendarRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/calendars/{calendar_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}</summary>
 		///<param name="calendar_id">this parameter is required</param>
@@ -5589,7 +5364,7 @@ namespace Nest
 	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
 		protected IPutDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id">this parameter is required</param>
@@ -5604,31 +5379,6 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
-	public partial interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
-	{
-		[IgnoreDataMember]
-			Id FilterId { get; }
-	}
-
-	///<summary>Request parameters for MlPutFilter <pre>TODO</pre></summary>
-	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
-	{
-		protected IPutFilterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters/{filter_id}"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ml/filters/{filter_id}</summary>
-		///<param name="filter_id">this parameter is required</param>
-		public PutFilterRequest(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal PutFilterRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -5639,7 +5389,7 @@ namespace Nest
 	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
 		protected IPutIndexTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -5652,16 +5402,16 @@ namespace Nest
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
@@ -5674,7 +5424,7 @@ namespace Nest
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
 		protected IPutJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -5685,31 +5435,6 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
-	public partial interface IPutLifecycleRequest : IRequest<PutLifecycleRequestParameters>
-	{
-		[IgnoreDataMember]
-			PolicyId PolicyId { get; }
-	}
-
-	///<summary>Request parameters for IlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
-	public partial class PutLifecycleRequest : PlainRequestBase<PutLifecycleRequestParameters>, IPutLifecycleRequest
-	{
-		protected IPutLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/policy/{policy_id}"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name="policy_id">Optional, accepts null</param>
-		public PutLifecycleRequest(PolicyId policy_id) : base(r => r.Optional("policy_id", policy_id)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal PutLifecycleRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		PolicyId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
 
 		// Request parameters
 	}
@@ -5726,7 +5451,7 @@ namespace Nest
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_mapping"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_mapping"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_mapping</summary>
 		///<param name="index">this parameter is required</param>
@@ -5739,14 +5464,6 @@ namespace Nest
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5754,6 +5471,14 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	public partial class PutMappingRequest<T> : PutMappingRequest, IPutMappingRequest<T>
 	{
@@ -5776,7 +5501,7 @@ namespace Nest
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
 		protected IPutPipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ingest/pipeline/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ingest/pipeline/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -5803,7 +5528,7 @@ namespace Nest
 	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
 	{
 		protected IPutPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/privilege/"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/privilege/"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -5825,7 +5550,7 @@ namespace Nest
 	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
 		protected IPutRoleMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role_mapping/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role_mapping/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -5855,7 +5580,7 @@ namespace Nest
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/role/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/role/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}</summary>
 		///<param name="name">this parameter is required</param>
@@ -5887,7 +5612,7 @@ namespace Nest
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_scripts/{id}", "_scripts/{id}/{context}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_scripts/{id}", "/_scripts/{id}/{context}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_scripts/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -5906,10 +5631,10 @@ namespace Nest
 		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
@@ -5922,7 +5647,7 @@ namespace Nest
 	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/user/{username}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_security/user/{username}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}</summary>
 		///<param name="username">this parameter is required</param>
@@ -5952,7 +5677,7 @@ namespace Nest
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/watch/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/watch/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
@@ -5967,12 +5692,12 @@ namespace Nest
 		// Request parameters
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
-		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>Explicit version number for concurrency control</summary>
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
@@ -5983,7 +5708,7 @@ namespace Nest
 	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 	{
 		protected IQuerySqlRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_sql"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_sql"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -6002,7 +5727,7 @@ namespace Nest
 	public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
 		protected IRecoveryStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_recovery", "{index}/_recovery"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_recovery", "/{index}/_recovery"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_recovery</summary>
 		public RecoveryStatusRequest() : base(){}
@@ -6014,10 +5739,10 @@ namespace Nest
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether to display detailed information about shard recovery</summary>
-		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
+		///<summary>Whether to display detailed information about shard recovery</summary>
+		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters>
@@ -6030,7 +5755,7 @@ namespace Nest
 	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
 		protected IRefreshRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_refresh", "{index}/_refresh"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_refresh", "/{index}/_refresh"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_refresh</summary>
 		public RefreshRequest() : base(){}
@@ -6042,8 +5767,6 @@ namespace Nest
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -6051,6 +5774,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters>
@@ -6061,13 +5786,19 @@ namespace Nest
 	public partial class ReindexOnServerRequest : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
 		protected IReindexOnServerRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_reindex"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_reindex"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>Control how long to keep the search context alive</summary>
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
@@ -6078,12 +5809,6 @@ namespace Nest
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		///<summary>Control how long to keep the search context alive</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>
@@ -6096,7 +5821,7 @@ namespace Nest
 	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_reindex/{task_id}/_rethrottle"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_reindex/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_reindex/{task_id}/_rethrottle</summary>
 		///<param name="task_id">this parameter is required</param>
@@ -6123,7 +5848,7 @@ namespace Nest
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 	{
 		protected IReloadSecureSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_nodes/reload_secure_settings", "_nodes/{node_id}/reload_secure_settings"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/reload_secure_settings</summary>
 		public ReloadSecureSettingsRequest() : base(){}
@@ -6147,34 +5872,9 @@ namespace Nest
 	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_remote/info"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_remote/info"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
-	public partial interface IRemovePolicyRequest : IRequest<RemovePolicyRequestParameters>
-	{
-		[IgnoreDataMember]
-			IndexName Index { get; }
-	}
-
-	///<summary>Request parameters for IlmRemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
-	public partial class RemovePolicyRequest : PlainRequestBase<RemovePolicyRequestParameters>, IRemovePolicyRequest
-	{
-		protected IRemovePolicyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ilm/remove"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/{index}/_ilm/remove</summary>
-		///<param name="index">this parameter is required</param>
-		public RemovePolicyRequest(IndexName index) : base(r => r.Required("index", index)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal RemovePolicyRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		IndexName IRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
 	}
@@ -6189,7 +5889,7 @@ namespace Nest
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
 		protected IRenderSearchTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_render/template", "_render/template/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_render/template", "/_render/template/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_render/template</summary>
 		public RenderSearchTemplateRequest() : base(){}
@@ -6215,7 +5915,7 @@ namespace Nest
 	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
 		protected IRestoreRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}/{snapshot}/_restore"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}/{snapshot}/_restore"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
 		///<param name="repository">this parameter is required</param>
@@ -6247,7 +5947,7 @@ namespace Nest
 	public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
 	{
 		protected IResumeFollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ccr/resume_follow"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_ccr/resume_follow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/resume_follow</summary>
 		///<param name="index">this parameter is required</param>
@@ -6258,31 +5958,6 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
-	public partial interface IRetryIlmRequest : IRequest<RetryIlmRequestParameters>
-	{
-		[IgnoreDataMember]
-			IndexName Index { get; }
-	}
-
-	///<summary>Request parameters for IlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
-	public partial class RetryIlmRequest : PlainRequestBase<RetryIlmRequestParameters>, IRetryIlmRequest
-	{
-		protected IRetryIlmRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ilm/retry"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/{index}/_ilm/retry</summary>
-		///<param name="index">this parameter is required</param>
-		public RetryIlmRequest(IndexName index) : base(r => r.Required("index", index)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal RetryIlmRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		IndexName IRetryIlmRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
 	}
@@ -6299,7 +5974,7 @@ namespace Nest
 	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
 		protected IRevertModelSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -6329,7 +6004,7 @@ namespace Nest
 	public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
 		protected IRolloverIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{alias}/_rollover", "{alias}/_rollover/{new_index}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{alias}/_rollover", "/{alias}/_rollover/{new_index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{alias}/_rollover</summary>
 		///<param name="alias">this parameter is required</param>
@@ -6348,14 +6023,14 @@ namespace Nest
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 
 		// Request parameters
-		///<summary>Whether a type should be included in the body of the mappings.</summary>
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+		///<summary>Whether a type should be included in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -6370,7 +6045,7 @@ namespace Nest
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
 		protected IRollupSearchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_rollup_search"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_rollup_search"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_rollup_search</summary>
 		///<param name="index">this parameter is required</param>
@@ -6383,10 +6058,10 @@ namespace Nest
 		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
@@ -6397,7 +6072,7 @@ namespace Nest
 	public partial class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
 		protected IRootNodeInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {""});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -6412,7 +6087,7 @@ namespace Nest
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_search/scroll"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search/scroll"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -6425,7 +6100,7 @@ namespace Nest
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }[DataMember(Name = "docvalue_fields")] Fields DocValueFields { get; set; }	}
+[DataMember(Name = "docvalue_fields")] Fields DocValueFields { get; set; }[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }	}
 
 	public partial interface ISearchRequest<T> : ISearchRequest { }
 
@@ -6433,7 +6108,7 @@ namespace Nest
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_search", "{index}/_search"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search", "/{index}/_search"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_search</summary>
 		public SearchRequest() : base(){}
@@ -6445,31 +6120,52 @@ namespace Nest
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
+		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>
+		/// The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism
+		/// to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+		///</summary>
+		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>
+		/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the
+		/// search on the cluster in order to limit the number of concurrent shard requests
+		///</summary>
+		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
+		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -6483,6 +6179,8 @@ namespace Nest
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
 		///<summary>Specify which field to use for suggestions</summary>
@@ -6493,35 +6191,12 @@ namespace Nest
 		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
-		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
-		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
-		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
-		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public bool? SequenceNumberPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
-		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		///<summary>
-		/// The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism
-		/// to reduce the memory overhead per search request if the potential number of shards in the request can be large.
-		///</summary>
-		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
-		///<summary>
-		/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the
-		/// search on the cluster in order to limit the number of concurrent shard requests
-		///</summary>
-		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
-		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
-		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
-		/// disjoint.
-		///</summary>
-		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	public partial class SearchRequest<T> : SearchRequest, ISearchRequest<T>
 	{
@@ -6546,7 +6221,7 @@ namespace Nest
 	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_search_shards", "{index}/_search_shards"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search_shards", "/{index}/_search_shards"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_search_shards</summary>
 		public SearchShardsRequest() : base(){}
@@ -6558,6 +6233,17 @@ namespace Nest
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>
@@ -6569,17 +6255,6 @@ namespace Nest
 		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	public partial class SearchShardsRequest<T> : SearchShardsRequest, ISearchShardsRequest<T>
 	{
@@ -6602,7 +6277,7 @@ namespace Nest
 	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
 		protected ISearchTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_search/template", "{index}/_search/template"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search/template", "/{index}/_search/template"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_search/template</summary>
 		public SearchTemplateRequest() : base(){}
@@ -6614,19 +6289,25 @@ namespace Nest
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Specify whether to profile the query execution</summary>
+		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -6640,16 +6321,10 @@ namespace Nest
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		///<summary>Specify whether to profile the query execution</summary>
-		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
-		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
-		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
@@ -6662,7 +6337,7 @@ namespace Nest
 	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
 		protected ISegmentsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_segments", "{index}/_segments"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_segments", "/{index}/_segments"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_segments</summary>
 		public SegmentsRequest() : base(){}
@@ -6674,8 +6349,6 @@ namespace Nest
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -6683,6 +6356,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
@@ -6699,7 +6374,7 @@ namespace Nest
 	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
 		protected IShrinkIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_shrink/{target}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_shrink/{target}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_shrink/{target}</summary>
 		///<param name="index">this parameter is required</param>
@@ -6715,10 +6390,10 @@ namespace Nest
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -6733,7 +6408,7 @@ namespace Nest
 	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
 		protected ISimulatePipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ingest/pipeline/_simulate", "_ingest/pipeline/{id}/_simulate"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline/_simulate</summary>
 		public SimulatePipelineRequest() : base(){}
@@ -6761,7 +6436,7 @@ namespace Nest
 	public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
 		protected ISnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}/{snapshot}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}/{snapshot}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name="repository">this parameter is required</param>
@@ -6795,7 +6470,7 @@ namespace Nest
 	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
 		protected ISnapshotStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/_status", "_snapshot/{repository}/_status", "_snapshot/{repository}/{snapshot}/_status"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/_status</summary>
 		public SnapshotStatusRequest() : base(){}
@@ -6813,10 +6488,10 @@ namespace Nest
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface ISourceExistsRequest : IRequest<SourceExistsRequestParameters>
@@ -6833,7 +6508,7 @@ namespace Nest
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_source/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_source/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_source/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -6910,7 +6585,7 @@ namespace Nest
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_source/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_source/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_source/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -6985,7 +6660,7 @@ namespace Nest
 	public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
 	{
 		protected ISplitIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_split/{target}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_split/{target}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_split/{target}</summary>
 		///<param name="index">this parameter is required</param>
@@ -7001,10 +6676,10 @@ namespace Nest
 		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -7017,7 +6692,7 @@ namespace Nest
 	public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 	{
 		protected IStartBasicLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license/start_basic"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license/start_basic"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -7036,7 +6711,7 @@ namespace Nest
 	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
 		protected IStartDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}/_start"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
 		///<param name="datafeed_id">this parameter is required</param>
@@ -7051,21 +6726,6 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
-	public partial interface IStartIlmRequest : IRequest<StartIlmRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
-	public partial class StartIlmRequest : PlainRequestBase<StartIlmRequestParameters>, IStartIlmRequest
-	{
-		protected IStartIlmRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/start"});
-		internal override ApiUrls ApiUrls => Urls;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
 	public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -7076,7 +6736,7 @@ namespace Nest
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
 		protected IStartRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_rollup/job/{id}/_start"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_rollup/job/{id}/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}/_start</summary>
 		///<param name="id">this parameter is required</param>
@@ -7099,15 +6759,15 @@ namespace Nest
 	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 	{
 		protected IStartTrialLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_license/start_trial"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_license/start_trial"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
 		// Request parameters
-		///<summary>The type of trial license to generate (default: "trial")</summary>
-		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+		///<summary>The type of trial license to generate (default: "trial")</summary>
+		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
@@ -7118,7 +6778,7 @@ namespace Nest
 	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/_start"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -7135,7 +6795,7 @@ namespace Nest
 	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
 		protected IStopDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}/_stop"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
 		///<param name="datafeed_id">this parameter is required</param>
@@ -7152,21 +6812,6 @@ namespace Nest
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	[InterfaceDataContract]
-	public partial interface IStopIlmRequest : IRequest<StopIlmRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for IlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
-	public partial class StopIlmRequest : PlainRequestBase<StopIlmRequestParameters>, IStopIlmRequest
-	{
-		protected IStopIlmRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ilm/stop"});
-		internal override ApiUrls ApiUrls => Urls;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
 	public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -7177,7 +6822,7 @@ namespace Nest
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
 		protected IStopRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_rollup/job/{id}/_stop"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_rollup/job/{id}/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}/_stop</summary>
 		///<param name="id">this parameter is required</param>
@@ -7190,10 +6835,10 @@ namespace Nest
 		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
@@ -7204,7 +6849,7 @@ namespace Nest
 	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/_stop"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -7221,7 +6866,7 @@ namespace Nest
 	public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
 		protected ISyncedFlushRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_flush/synced", "{index}/_flush/synced"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_flush/synced", "/{index}/_flush/synced"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_flush/synced</summary>
 		public SyncedFlushRequest() : base(){}
@@ -7233,8 +6878,6 @@ namespace Nest
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -7242,6 +6885,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters>
@@ -7258,7 +6903,7 @@ namespace Nest
 	public partial class TermVectorsRequest : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
 		protected ITermVectorsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_termvectors/{id}", "{index}/_termvectors"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_termvectors/{id}", "/{index}/_termvectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_termvectors/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -7277,20 +6922,20 @@ namespace Nest
 		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 		///<summary>A comma-separated list of fields to return.</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-		///<summary>Specifies if term positions should be returned.</summary>
-		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 		///<summary>Specifies if term payloads should be returned.</summary>
 		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
+		///<summary>Specifies if term positions should be returned.</summary>
+		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -7300,8 +6945,8 @@ namespace Nest
 		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -7338,7 +6983,7 @@ namespace Nest
 	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 	{
 		protected ITranslateSqlRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_sql/translate"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_sql/translate"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -7357,7 +7002,7 @@ namespace Nest
 	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
 		protected ITypeExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_mapping/{type}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_mapping/{type}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_mapping/{type}</summary>
 		///<param name="index">this parameter is required</param>
@@ -7373,8 +7018,6 @@ namespace Nest
 		Names ITypeExistsRequest.Type => Self.RouteValues.Get<Names>("type");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -7382,6 +7025,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -7396,7 +7041,7 @@ namespace Nest
 	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
 	{
 		protected IUnfollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_ccr/unfollow"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_ccr/unfollow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/unfollow</summary>
 		///<param name="index">this parameter is required</param>
@@ -7423,7 +7068,7 @@ namespace Nest
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_update_by_query"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_update_by_query"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_update_by_query</summary>
 		///<param name="index">this parameter is required</param>
@@ -7436,27 +7081,27 @@ namespace Nest
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		///<summary>Starting offset (default: 0)</summary>
-		public long? From { get => Q<long?>("from"); set => Q("from", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Starting offset (default: 0)</summary>
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
@@ -7465,6 +7110,12 @@ namespace Nest
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -7476,12 +7127,16 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
-		///<summary>Search operation type</summary>
-		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Size on the scroll request powering the update by query</summary>
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
 		///<summary>Whether the _source should be included in the response.</summary>
@@ -7490,34 +7145,24 @@ namespace Nest
 		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
-		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
 		public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
-		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		///<summary>Should the effected indexes be refreshed?</summary>
-		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
 		/// copies for the shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Size on the scroll request powering the update by query</summary>
-		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	public partial class UpdateByQueryRequest<T> : UpdateByQueryRequest, IUpdateByQueryRequest<T>
 	{
@@ -7540,7 +7185,7 @@ namespace Nest
 	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
 	{
 		protected IUpdateByQueryRethrottleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_update_by_query/{task_id}/_rethrottle"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_update_by_query/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_update_by_query/{task_id}/_rethrottle</summary>
 		///<param name="task_id">this parameter is required</param>
@@ -7567,7 +7212,7 @@ namespace Nest
 	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
 		protected IUpdateDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/datafeeds/{datafeed_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/datafeeds/{datafeed_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
 		///<param name="datafeed_id">this parameter is required</param>
@@ -7582,31 +7227,6 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
-	public partial interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
-	{
-		[IgnoreDataMember]
-			Id FilterId { get; }
-	}
-
-	///<summary>Request parameters for MlUpdateFilter <pre>TODO</pre></summary>
-	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
-	{
-		protected IUpdateFilterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters/{filter_id}/_update"});
-		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/_ml/filters/{filter_id}/_update</summary>
-		///<param name="filter_id">this parameter is required</param>
-		public UpdateFilterRequest(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal UpdateFilterRequest() : base(){}
-		// values part of the url path
-		[IgnoreDataMember]
-		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
-
-		// Request parameters
-	}
-	[InterfaceDataContract]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -7617,7 +7237,7 @@ namespace Nest
 	public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
 		protected IUpdateIndexSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_settings", "{index}/_settings"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_settings", "/{index}/_settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_settings</summary>
 		public UpdateIndexSettingsRequest() : base(){}
@@ -7629,14 +7249,6 @@ namespace Nest
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
-		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -7646,6 +7258,14 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
+		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
@@ -7658,7 +7278,7 @@ namespace Nest
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
 		protected IUpdateJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -7685,7 +7305,7 @@ namespace Nest
 	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
 		protected IUpdateModelSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
 		///<param name="job_id">this parameter is required</param>
@@ -7717,7 +7337,7 @@ namespace Nest
 	public partial class UpdateRequest : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest
 	{
 		protected IUpdateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"{index}/_update/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_update/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_update/{id}</summary>
 		///<param name="index">this parameter is required</param>
@@ -7733,14 +7353,10 @@ namespace Nest
 		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>
-		/// Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard
-		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
-		/// shard (number of replicas + 1)
-		///</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Whether the _source should be included in the response.</summary>
-		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>The script language (default: painless)</summary>
 		public string Lang { get => Q<string>("lang"); set => Q("lang", value); }
 		///<summary>
@@ -7759,12 +7375,16 @@ namespace Nest
 		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+		///<summary>Whether the _source should be included in the response.</summary>
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
-		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	public partial class UpdateRequest<TDocument, TPartialDocument> : UpdateRequest, IUpdateRequest<TDocument, TPartialDocument>
 	{
@@ -7797,7 +7417,7 @@ namespace Nest
 	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
 		protected IUpgradeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_upgrade", "{index}/_upgrade"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_upgrade", "/{index}/_upgrade"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_upgrade</summary>
 		public UpgradeRequest() : base(){}
@@ -7818,10 +7438,10 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get => Q<bool?>("only_ancient_segments"); set => Q("only_ancient_segments", value); }
+		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
@@ -7834,7 +7454,7 @@ namespace Nest
 	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
 		protected IUpgradeStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_upgrade", "{index}/_upgrade"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_upgrade", "/{index}/_upgrade"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_upgrade</summary>
 		public UpgradeStatusRequest() : base(){}
@@ -7846,8 +7466,6 @@ namespace Nest
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -7855,6 +7473,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
@@ -7865,7 +7485,7 @@ namespace Nest
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/_validate/detector"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/_validate/detector"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -7880,7 +7500,7 @@ namespace Nest
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/anomaly_detectors/_validate"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_ml/anomaly_detectors/_validate"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -7899,7 +7519,7 @@ namespace Nest
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_validate/query", "{index}/_validate/query"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_validate/query", "/{index}/_validate/query"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_validate/query</summary>
 		public ValidateQueryRequest() : base(){}
@@ -7911,33 +7531,33 @@ namespace Nest
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
-		///<summary>Return detailed information about the error</summary>
-		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Execute validation on all shards instead of one random shard per index</summary>
+		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Return detailed information about the error</summary>
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
-		///<summary>Execute validation on all shards instead of one random shard per index</summary>
-		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 	}
 	public partial class ValidateQueryRequest<T> : ValidateQueryRequest, IValidateQueryRequest<T>
 	{
@@ -7960,7 +7580,7 @@ namespace Nest
 	public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
 		protected IVerifyRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_snapshot/{repository}/_verify"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_snapshot/{repository}/_verify"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/_verify</summary>
 		///<param name="repository">this parameter is required</param>
@@ -7989,7 +7609,7 @@ namespace Nest
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_watcher/stats", "_watcher/stats/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_watcher/stats", "/_watcher/stats/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/stats</summary>
 		public WatcherStatsRequest() : base(){}
@@ -8013,7 +7633,7 @@ namespace Nest
 	public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
 		protected IXPackInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_xpack"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_xpack"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 
@@ -8030,7 +7650,7 @@ namespace Nest
 	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
 		protected IXPackUsageRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {"_xpack/usage"});
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_xpack/usage"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 

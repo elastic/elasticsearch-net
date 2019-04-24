@@ -10,7 +10,7 @@ using ShellProgressBar;
 
 namespace ApiGenerator
 {
-	public class ApiGenerator
+	public partial class ApiGenerator
 	{
 		private static readonly RazorLightEngine Razor = new RazorLightEngineBuilder()
 			.UseMemoryCachingProvider()
@@ -80,15 +80,12 @@ namespace ApiGenerator
 						foreach (var file in jsonFiles)
 						{
 							if (file.EndsWith("_common.json")) continue;
-							else if (file.EndsWith(".obsolete.json")) continue;
 							else if (file.EndsWith(".patch.json")) continue;
-							else if (file.EndsWith(".replace.json")) continue;
 							else
 							{
-								var endpoint = CreateApiEndpoint(file);
-								endpoint.Value.FileName = Path.GetFileName(file);
+								var endpoint = ApiEndpointFactory.FromFile(file);
 								seenFiles.Add(Path.GetFileNameWithoutExtension(file));
-								endpoints.Add(endpoint.Key, endpoint.Value);
+								endpoints.Add(endpoint.CsharpMethodName, endpoint);
 							}
 
 							fileProgress.Tick();
@@ -109,73 +106,14 @@ namespace ApiGenerator
 			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };
 		}
 
-		public static string PascalCase(string s)
-		{
-			var textInfo = new CultureInfo("en-US").TextInfo;
-			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
-		}
-
-		private static KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
-		{
-			var replaceFile = Path.Combine(Path.GetDirectoryName(jsonFile), Path.GetFileNameWithoutExtension(jsonFile)) + ".replace.json";
-			if (File.Exists(replaceFile))
-			{
-				var replaceSpec = JObject.Parse(File.ReadAllText(replaceFile));
-				var endpointReplaced = replaceSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
-				endpointReplaced.Value.RestSpecName = endpointReplaced.Key;
-				endpointReplaced.Value.CsharpMethodName = CreateMethodName(endpointReplaced.Key);
-				return endpointReplaced;
-			}
-
-			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
-			PatchOfficialSpec(officialJsonSpec, jsonFile);
-			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
-			endpoint.Value.RestSpecName = endpoint.Key;
-			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
-
-			PatchUrlParts(jsonFile, endpoint.Value.Url);
-			return endpoint;
-		}
-
-		private static void PatchUrlParts(string jsonFile, ApiUrl url)
-		{
-			if (url.IsPartless) return;
-			foreach (var kv in url.Parts)
-			{
-				var required = url.ExposedApiPaths.All(p => p.Path.Contains($"{{{kv.Key}}}"));
-				if (kv.Value.Required != required)
-					Warnings.Add($"{jsonFile} has part: {kv.Key} listed as {kv.Value.Required} but should be {required}");
-				kv.Value.Required = required;
-			}
-		}
-
-		private static void PatchOfficialSpec(JObject original, string jsonFile)
-		{
-			var directory = Path.GetDirectoryName(jsonFile);
-			var patchFile = Path.Combine(directory,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
-			if (!File.Exists(patchFile)) return;
-
-			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
-
-			var pathsOverride = patchedJson.SelectToken("*.url.paths");
-
-			original.Merge(patchedJson, new JsonMergeSettings
-			{
-				MergeArrayHandling = MergeArrayHandling.Union
-			});
-
-			if (pathsOverride != null) original.SelectToken("*.url.paths").Replace(pathsOverride);
-		}
-
-		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)
+		private static SortedDictionary<string, QueryParameters> CreateCommonApiQueryParameters(string jsonFile)
 		{
 			var json = File.ReadAllText(jsonFile);
 			var jobject = JObject.Parse(json);
-			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
+			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, QueryParameters>>();
 			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, false);
 		}
 
-		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
 
 		private static string DoRazor(string name, string template, RestApiSpec model)
 		{

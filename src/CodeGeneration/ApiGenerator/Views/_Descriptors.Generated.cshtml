@@ -44,7 +44,7 @@ namespace Nest
 </text>
 }
 		// values part of the url path
-@foreach (ApiUrlPart part in method.Url.ExposedApiParts)
+@foreach (UrlPart part in method.Url.ExposedApiParts)
 {
 <text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
 </text>
@@ -68,7 +68,7 @@ foreach (var param in method.Url.Params.Values)
 			continue;
 		}
 		//we prefer this parameter to be explictly implemented on the request body
-		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+		if (param.RenderPartial && (method.HasBody))
 		{
 			continue;
 		}

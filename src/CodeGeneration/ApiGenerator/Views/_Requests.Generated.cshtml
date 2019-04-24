@@ -48,14 +48,14 @@ namespace Nest
 	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName)))
 	{
 </text>
-	foreach (ApiUrlPart part in method.Url.ExposedApiParts)
+	foreach (UrlPart part in method.Url.ExposedApiParts)
 	{
 <text>		[IgnoreDataMember]
 			@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
 </text>
 	}
 	//render partial methods as interface properties forcing us to implement them on request and request descriptors
-	if (method.HttpMethod != "GET" && method.HttpMethod != "HEAD")
+	if (method.HasBody)
 	{
 		foreach (var partialParam in method.Url.Params.Values.Where(p=>p.RenderPartial))
 		{
@@ -100,8 +100,7 @@ namespace Nest
 	{
 		continue;
 	}
-	//we prefer this parameter to be explictly implemented on the request body
-	if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+	if (param.RenderPartial && (method.HasBody))
 	{
 		continue;
 	}
