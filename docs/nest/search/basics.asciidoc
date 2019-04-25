@@ -40,7 +40,7 @@ You can override type inferrence by explicitly specifying the index to search on
 
 [source,csharp]
 ----
-client.Search<MyObject>(s => s.
+client.Search<MyObject>(s => s
     .Index("Index_A")
     ...
 )
