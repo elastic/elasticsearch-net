@@ -99,7 +99,7 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
 
 		internal static bool IsConditionless(IMoreLikeThisQuery q) =>
-			q.Fields.IsConditionless() || !q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless);
+			q.Fields.IsConditionless() && (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
 	}
 
 	public class MoreLikeThisQueryDescriptor<T>

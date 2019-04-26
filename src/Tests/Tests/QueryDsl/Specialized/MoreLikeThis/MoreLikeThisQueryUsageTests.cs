@@ -14,9 +14,21 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMoreLikeThisQuery>(a => a.MoreLikeThis)
 		{
-			q => q.Like = null,
-			q => q.Like = Enumerable.Empty<Like>(),
-			q => q.Fields = null,
+			q =>
+			{
+				q.Like = null;
+				q.Fields = null;
+			},
+			q =>
+			{
+				q.Like = Enumerable.Empty<Like>();
+				q.Fields = null;
+			},
+			q =>
+			{
+				q.Fields = null;
+				q.Like = new [] { new Like("") };
+			},
 		};
 
 		protected override QueryContainer QueryInitializer => new MoreLikeThisQuery
