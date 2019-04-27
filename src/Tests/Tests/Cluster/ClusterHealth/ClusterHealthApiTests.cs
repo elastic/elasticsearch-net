@@ -69,6 +69,11 @@ namespace Tests.Cluster.ClusterHealth
 			response.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
 			response.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
 			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
+			response.ActiveShardsPercentAsNumber.Should().BePositive();
+			response.DelayedUnassignedShards.Should().Equals(0);
+			response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
+			response.TaskMaxWaitTimeInQueueInMillis.Should().BeGreaterOrEqualTo(0);
+
 			response.Indices.Should()
 				.NotBeEmpty()
 				.And.ContainKey(Index<Developer>());
