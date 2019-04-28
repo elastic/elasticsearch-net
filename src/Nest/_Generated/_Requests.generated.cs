@@ -13,9 +13,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-
-
-
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>
@@ -32,7 +29,6 @@ namespace Nest
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool? Pretty { get => Q<bool?>("pretty"); set => Q("pretty", value); }
 	}
-	
 	[InterfaceDataContract]
 	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters>
 	{
@@ -40,8 +36,9 @@ namespace Nest
 			Id WatchId { get; }
 		[IgnoreDataMember]
 			ActionIds ActionId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
@@ -66,13 +63,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id WatchId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
@@ -91,6 +91,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
 	{
@@ -98,8 +100,9 @@ namespace Nest
 			Names Name { get; }
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
@@ -135,13 +138,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
@@ -159,11 +165,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
@@ -174,11 +183,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
@@ -193,13 +205,16 @@ namespace Nest
 		///<summary>Request timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IBulkRequest : IRequest<BulkRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
@@ -249,13 +264,16 @@ namespace Nest
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters>
 	{
 		[IgnoreDataMember]
 			TaskId TaskId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
@@ -282,13 +300,16 @@ namespace Nest
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
@@ -320,13 +341,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters>
 	{
 		[IgnoreDataMember]
 			NodeIds NodeId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
@@ -360,13 +384,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
@@ -398,13 +425,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters>
 	{
 		[IgnoreDataMember]
 			Fields Fields { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
@@ -438,11 +468,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
@@ -469,11 +502,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
@@ -488,13 +524,16 @@ namespace Nest
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
@@ -532,11 +571,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
@@ -561,11 +603,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
@@ -590,11 +635,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
@@ -621,11 +669,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
@@ -650,11 +701,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
@@ -679,13 +733,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
@@ -717,11 +774,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
@@ -746,13 +806,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
@@ -782,13 +845,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
@@ -822,13 +888,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names RepositoryName { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
@@ -860,11 +929,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatTasksRequest : IRequest<CatTasksRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
@@ -896,13 +968,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
@@ -934,13 +1009,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names ThreadPoolPatterns { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
@@ -974,11 +1052,14 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
 	public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
 	{
@@ -989,13 +1070,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Username { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
@@ -1018,13 +1102,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names Realms { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
@@ -1045,13 +1132,16 @@ namespace Nest
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
 	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
@@ -1070,13 +1160,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
@@ -1111,11 +1204,14 @@ namespace Nest
 		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
@@ -1126,11 +1222,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SqlClearCursor <pre>Clear SQL cursor</pre></summary>
 	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 	{
@@ -1141,13 +1240,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
@@ -1179,13 +1281,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
@@ -1210,11 +1315,14 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
@@ -1229,11 +1337,14 @@ namespace Nest
 		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
@@ -1252,13 +1363,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
@@ -1296,11 +1410,14 @@ namespace Nest
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
@@ -1315,11 +1432,14 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
@@ -1336,11 +1456,14 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
@@ -1363,6 +1486,8 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
 	{
@@ -1370,8 +1495,9 @@ namespace Nest
 			Metrics Metric { get; }
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
@@ -1414,13 +1540,16 @@ namespace Nest
 		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
 		public Time WaitForTimeout { get => Q<Time>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
 	{
 		[IgnoreDataMember]
 			NodeIds NodeId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
@@ -1442,15 +1571,18 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICountRequest : IRequest<CountRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface ICountRequest<T> : ICountRequest { }
-
+		public partial interface ICountRequest<T> : ICountRequest { }
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
@@ -1506,6 +1638,7 @@ namespace Nest
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
+
 	public partial class CountRequest<T> : CountRequest, ICountRequest<T>
 	{
 		protected ICountRequest<T> TypedSelf => this;
@@ -1515,14 +1648,73 @@ namespace Nest
 		///<param name="index">Optional, accepts null</param>
 		public CountRequest(Indices index) : base(index){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
+	{
+		protected ICountRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_count", "/{index}/_count"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_count</summary>
+		public CountRequest() : base(){}
+		///<summary>/{index}/_count</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CountRequest(Indices index) : base(r => r.Optional("index", index)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>Include only documents with a specific `_score` value in the result</summary>
+		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
+		///</summary>
+		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
 	public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
 	{
@@ -1541,13 +1733,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICreateFollowIndexRequest : IRequest<CreateFollowIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
 	public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
 	{
@@ -1571,13 +1766,16 @@ namespace Nest
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
@@ -1604,13 +1802,16 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name RepositoryName { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
@@ -1635,6 +1836,8 @@ namespace Nest
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ICreateRequest : IRequest<CreateRequestParameters>
 	{
@@ -1642,10 +1845,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface ICreateRequest<TDocument> : ICreateRequest { }
-
+		public partial interface ICreateRequest<TDocument> : ICreateRequest { }
 	///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateRequest : PlainRequestBase<CreateRequestParameters>, ICreateRequest
 	{
@@ -1695,6 +1899,7 @@ namespace Nest
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+
 	public partial class CreateRequest<TDocument> : CreateRequest, ICreateRequest<TDocument>
 	{
 		protected ICreateRequest<TDocument> TypedSelf => this;
@@ -1714,14 +1919,16 @@ namespace Nest
 		[SerializationConstructor]
 		internal CreateRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface ICreateRollupJobRequest : IRequest<CreateRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupPutJob <pre>TODO</pre></summary>
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
@@ -1740,13 +1947,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id WatchId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
@@ -1765,6 +1975,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
 	{
@@ -1772,8 +1984,9 @@ namespace Nest
 			Indices Index { get; }
 		[IgnoreDataMember]
 			Names Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
@@ -1799,13 +2012,16 @@ namespace Nest
 		///<summary>Explicit timestamp for the document</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
 	public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
 	{
@@ -1824,15 +2040,18 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest { }
-
+		public partial interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest { }
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
@@ -1929,6 +2148,7 @@ namespace Nest
 		///<summary>Should the request should block until the delete by query is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+
 	public partial class DeleteByQueryRequest<T> : DeleteByQueryRequest, IDeleteByQueryRequest<T>
 	{
 		protected IDeleteByQueryRequest<T> TypedSelf => this;
@@ -1938,14 +2158,114 @@ namespace Nest
 		///<summary>/{index}/_delete_by_query</summary>
 		public DeleteByQueryRequest() : base(typeof(T)){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
+	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
+	{
+		protected IDeleteByQueryRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_delete_by_query"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_delete_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public DeleteByQueryRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteByQueryRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>What to do when the delete by query hits version conflicts?</summary>
+		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Starting offset (default: 0)</summary>
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
+		///</summary>
+		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
+		///<summary>Size on the scroll request powering the delete by query</summary>
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
+		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
+		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Number of hits to return (default: 10)</summary>
+		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
+		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
+		///<summary>Whether the _source should be included in the response.</summary>
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
+		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Specify whether to return document version as part of a hit</summary>
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>Should the request should block until the delete by query is complete.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteByQueryRethrottleRequest : IRequest<DeleteByQueryRethrottleRequestParameters>
 	{
 		[IgnoreDataMember]
 			TaskId TaskId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
 	{
@@ -1966,6 +2286,8 @@ namespace Nest
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
 	{
@@ -1973,8 +2295,9 @@ namespace Nest
 			Id CalendarId { get; }
 		[IgnoreDataMember]
 			Id EventId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteCalendarEvent <pre>TODO</pre></summary>
 	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 	{
@@ -1996,6 +2319,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
 	{
@@ -2003,8 +2328,9 @@ namespace Nest
 			Id CalendarId { get; }
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteCalendarJob <pre>TODO</pre></summary>
 	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 	{
@@ -2026,13 +2352,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id CalendarId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteCalendar <pre>TODO</pre></summary>
 	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 	{
@@ -2051,13 +2380,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
@@ -2078,11 +2410,14 @@ namespace Nest
 		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteExpiredData <pre>TODO</pre></summary>
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
@@ -2093,6 +2428,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
 	{
@@ -2100,8 +2437,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			ForecastIds ForecastId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
 	{
@@ -2127,13 +2465,16 @@ namespace Nest
 		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
@@ -2162,13 +2503,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
@@ -2191,13 +2535,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
@@ -2220,11 +2567,14 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
@@ -2235,6 +2585,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
 	{
@@ -2242,8 +2594,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			Id SnapshotId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
@@ -2265,13 +2618,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
@@ -2294,6 +2650,8 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
 	{
@@ -2301,8 +2659,9 @@ namespace Nest
 			Name Application { get; }
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityDeletePrivileges <pre>TODO</pre></summary>
 	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
 	{
@@ -2329,13 +2688,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names RepositoryName { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
@@ -2358,6 +2720,8 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters>
 	{
@@ -2365,10 +2729,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IDeleteRequest<TDocument> : IDeleteRequest { }
-
+		public partial interface IDeleteRequest<TDocument> : IDeleteRequest { }
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
@@ -2420,6 +2785,7 @@ namespace Nest
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+
 	public partial class DeleteRequest<TDocument> : DeleteRequest, IDeleteRequest<TDocument>
 	{
 		protected IDeleteRequest<TDocument> TypedSelf => this;
@@ -2439,14 +2805,16 @@ namespace Nest
 		[SerializationConstructor]
 		internal DeleteRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
 	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
@@ -2470,13 +2838,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
@@ -2500,13 +2871,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteRollupJobRequest : IRequest<DeleteRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupDeleteJob <pre>TODO</pre></summary>
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
@@ -2525,13 +2899,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptRequest : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
@@ -2554,6 +2931,8 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
 	{
@@ -2561,8 +2940,9 @@ namespace Nest
 			Name RepositoryName { get; }
 		[IgnoreDataMember]
 			Name Snapshot { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
@@ -2586,13 +2966,16 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Username { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
 	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
@@ -2616,13 +2999,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
@@ -2641,13 +3027,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
@@ -2665,13 +3054,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Username { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
 	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
@@ -2695,6 +3087,8 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters>
 	{
@@ -2702,10 +3096,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IDocumentExistsRequest<TDocument> : IDocumentExistsRequest { }
-
+		public partial interface IDocumentExistsRequest<TDocument> : IDocumentExistsRequest { }
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
@@ -2754,6 +3149,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
+
 	public partial class DocumentExistsRequest<TDocument> : DocumentExistsRequest, IDocumentExistsRequest<TDocument>
 	{
 		protected IDocumentExistsRequest<TDocument> TypedSelf => this;
@@ -2773,14 +3169,16 @@ namespace Nest
 		[SerializationConstructor]
 		internal DocumentExistsRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Username { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
 	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
@@ -2804,11 +3202,14 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IExecutePainlessScriptRequest : IRequest<ExecutePainlessScriptRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ScriptsPainlessExecute <pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
@@ -2819,13 +3220,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
@@ -2845,6 +3249,8 @@ namespace Nest
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IExplainRequest : IRequest<ExplainRequestParameters>
 	{
@@ -2852,10 +3258,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }<text>	}
+</text>
 
-	public partial interface IExplainRequest<TDocument> : IExplainRequest { }
-
+		public partial interface IExplainRequest<TDocument> : IExplainRequest { }
 	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
 	{
@@ -2906,6 +3313,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
+
 	public partial class ExplainRequest<TDocument> : ExplainRequest, IExplainRequest<TDocument>
 	{
 		protected IExplainRequest<TDocument> TypedSelf => this;
@@ -2925,14 +3333,16 @@ namespace Nest
 		[SerializationConstructor]
 		internal ExplainRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
@@ -2961,13 +3371,16 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
@@ -2988,13 +3401,16 @@ namespace Nest
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
@@ -3031,13 +3447,16 @@ namespace Nest
 		///</summary>
 		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 	public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
 	{
@@ -3056,13 +3475,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
@@ -3095,13 +3517,16 @@ namespace Nest
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlForecast <pre>TODO</pre></summary>
 	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 	{
@@ -3120,6 +3545,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
 	{
@@ -3127,8 +3554,9 @@ namespace Nest
 			Names Name { get; }
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
@@ -3166,13 +3594,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
@@ -3191,13 +3622,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
 	public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
 	{
@@ -3215,11 +3649,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 	{
@@ -3230,6 +3667,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
 	{
@@ -3237,8 +3676,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			Timestamp Timestamp { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
@@ -3263,13 +3703,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id CalendarId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetCalendarEvents <pre>TODO</pre></summary>
 	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 	{
@@ -3294,13 +3737,16 @@ namespace Nest
 		///<summary>Get events after this time</summary>
 		public string Start { get => Q<string>("start"); set => Q("start", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id CalendarId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetCalendars <pre>TODO</pre></summary>
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 	{
@@ -3318,6 +3764,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
@@ -3325,8 +3773,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			CategoryId CategoryId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
@@ -3351,11 +3800,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetCertificatesRequest : IRequest<GetCertificatesRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
 	public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
 	{
@@ -3366,13 +3818,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
@@ -3392,13 +3847,16 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
@@ -3418,6 +3876,8 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
 	{
@@ -3425,8 +3885,9 @@ namespace Nest
 			Fields Fields { get; }
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
@@ -3466,13 +3927,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
@@ -3507,6 +3971,8 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
 	{
@@ -3514,8 +3980,9 @@ namespace Nest
 			Indices Index { get; }
 		[IgnoreDataMember]
 			Names Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
@@ -3559,13 +4026,16 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
@@ -3591,13 +4061,16 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
@@ -3616,13 +4089,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
@@ -3642,13 +4118,16 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
@@ -3668,11 +4147,14 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
@@ -3685,13 +4167,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
@@ -3724,6 +4209,8 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters>
 	{
@@ -3731,8 +4218,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			Id SnapshotId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
@@ -3757,13 +4245,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
 	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
 	{
@@ -3782,13 +4273,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
@@ -3808,6 +4302,8 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
 	{
@@ -3815,8 +4311,9 @@ namespace Nest
 			Name Application { get; }
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityGetPrivileges <pre>TODO</pre></summary>
 	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 	{
@@ -3840,13 +4337,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names RepositoryName { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
@@ -3868,6 +4368,8 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRequest : IRequest<GetRequestParameters>
 	{
@@ -3875,10 +4377,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IGetRequest<TDocument> : IGetRequest { }
-
+		public partial interface IGetRequest<TDocument> : IGetRequest { }
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
@@ -3927,6 +4430,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
+
 	public partial class GetRequest<TDocument> : GetRequest, IGetRequest<TDocument>
 	{
 		protected IGetRequest<TDocument> TypedSelf => this;
@@ -3946,14 +4450,16 @@ namespace Nest
 		[SerializationConstructor]
 		internal GetRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
 	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
@@ -3971,13 +4477,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
@@ -3995,13 +4504,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupGetRollupCaps <pre>TODO</pre></summary>
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
@@ -4019,13 +4531,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRollupIndexCapabilitiesRequest : IRequest<GetRollupIndexCapabilitiesRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupGetRollupIndexCaps <pre>TODO</pre></summary>
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
@@ -4044,13 +4559,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupGetJobs <pre>TODO</pre></summary>
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
@@ -4068,13 +4586,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
@@ -4095,6 +4616,8 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
 	{
@@ -4102,8 +4625,9 @@ namespace Nest
 			Name RepositoryName { get; }
 		[IgnoreDataMember]
 			Names Snapshot { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
@@ -4131,13 +4655,16 @@ namespace Nest
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters>
 	{
 		[IgnoreDataMember]
 			TaskId TaskId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
@@ -4160,11 +4687,14 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 	{
@@ -4175,11 +4705,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
 	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
@@ -4190,11 +4723,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
 	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 	{
@@ -4205,13 +4741,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names Username { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
 	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
@@ -4229,13 +4768,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
@@ -4254,15 +4796,18 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IGraphExploreRequest<T> : IGraphExploreRequest { }
-
+		public partial interface IGraphExploreRequest<T> : IGraphExploreRequest { }
 	///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
@@ -4292,6 +4837,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+
 	public partial class GraphExploreRequest<T> : GraphExploreRequest, IGraphExploreRequest<T>
 	{
 		protected IGraphExploreRequest<T> TypedSelf => this;
@@ -4301,12 +4847,45 @@ namespace Nest
 		///<summary>/{index}/_graph/explore</summary>
 		public GraphExploreRequest() : base(typeof(T)){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
+	{
+		protected IGraphExploreRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_graph/explore"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_graph/explore</summary>
+		///<param name="index">this parameter is required</param>
+		public GraphExploreRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal GraphExploreRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
+		///</summary>
+		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
@@ -4317,13 +4896,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name User { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
 	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
 	{
@@ -4341,13 +4923,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
@@ -4378,6 +4963,8 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
@@ -4385,10 +4972,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IIndexRequest<TDocument> : IIndexRequest { }
-
+		public partial interface IIndexRequest<TDocument> : IIndexRequest { }
 	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexRequest : PlainRequestBase<IndexRequestParameters>, IIndexRequest
 	{
@@ -4447,6 +5035,7 @@ namespace Nest
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+
 	public partial class IndexRequest<TDocument> : IndexRequest, IIndexRequest<TDocument>
 	{
 		protected IIndexRequest<TDocument> TypedSelf => this;
@@ -4468,14 +5057,16 @@ namespace Nest
 		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Names Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
@@ -4500,13 +5091,16 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
@@ -4535,6 +5129,8 @@ namespace Nest
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public string[] Status { get => Q<string[]>("status"); set => Q("status", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
 	{
@@ -4542,8 +5138,9 @@ namespace Nest
 			Metrics Metric { get; }
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
@@ -4582,11 +5179,14 @@ namespace Nest
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
@@ -4597,11 +5197,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
@@ -4629,11 +5232,14 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlInfo <pre>TODO</pre></summary>
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
@@ -4644,13 +5250,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 	{
@@ -4677,13 +5286,16 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMigrationUpgradeRequest : IRequest<MigrationUpgradeRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 	{
@@ -4704,13 +5316,16 @@ namespace Nest
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }<text>	}
+</text>
 	///<summary>Request parameters for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
@@ -4749,13 +5364,16 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
@@ -4795,13 +5413,16 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
@@ -4829,13 +5450,16 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
@@ -4891,13 +5515,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters>
 	{
 		[IgnoreDataMember]
 			NodeIds NodeId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
@@ -4927,6 +5554,8 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
 	{
@@ -4934,8 +5563,9 @@ namespace Nest
 			NodeIds NodeId { get; }
 		[IgnoreDataMember]
 			Metrics Metric { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
@@ -4966,6 +5596,8 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
 	{
@@ -4975,8 +5607,9 @@ namespace Nest
 			Metrics Metric { get; }
 		[IgnoreDataMember]
 			IndexMetrics IndexMetric { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
@@ -5030,6 +5663,8 @@ namespace Nest
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParameters>
 	{
@@ -5037,8 +5672,9 @@ namespace Nest
 			NodeIds NodeId { get; }
 		[IgnoreDataMember]
 			Metrics Metric { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
@@ -5067,13 +5703,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
@@ -5107,13 +5746,16 @@ namespace Nest
 		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
@@ -5132,13 +5774,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
 	public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
 	{
@@ -5157,11 +5802,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
@@ -5172,13 +5820,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id CalendarId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPostCalendarEvents <pre>TODO</pre></summary>
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 	{
@@ -5197,13 +5848,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
@@ -5226,11 +5880,14 @@ namespace Nest
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
 		public DateTimeOffset? ResetStart { get => Q<DateTimeOffset?>("reset_start"); set => Q("reset_start", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
@@ -5243,13 +5900,16 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
@@ -5268,6 +5928,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
@@ -5275,8 +5937,9 @@ namespace Nest
 			Indices Index { get; }
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
@@ -5302,6 +5965,8 @@ namespace Nest
 		///<summary>Explicit timestamp for the document</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
 	{
@@ -5309,8 +5974,9 @@ namespace Nest
 			Id CalendarId { get; }
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPutCalendarJob <pre>TODO</pre></summary>
 	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 	{
@@ -5332,13 +5998,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id CalendarId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPutCalendar <pre>TODO</pre></summary>
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 	{
@@ -5357,13 +6026,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
@@ -5382,13 +6054,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
@@ -5417,13 +6092,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
@@ -5442,15 +6120,18 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IPutMappingRequest<T> : IPutMappingRequest { }
-
+		public partial interface IPutMappingRequest<T> : IPutMappingRequest { }
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
@@ -5484,6 +6165,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+
 	public partial class PutMappingRequest<T> : PutMappingRequest, IPutMappingRequest<T>
 	{
 		protected IPutMappingRequest<T> TypedSelf => this;
@@ -5493,14 +6175,51 @@ namespace Nest
 		///<summary>/{index}/_mapping</summary>
 		public PutMappingRequest() : base(typeof(T)){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
+	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
+	{
+		protected IPutMappingRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_mapping"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_mapping</summary>
+		///<param name="index">this parameter is required</param>
+		public PutMappingRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutMappingRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
@@ -5523,11 +6242,14 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutPrivilegesRequest : IRequest<PutPrivilegesRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityPutPrivileges <pre>TODO</pre></summary>
 	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
 	{
@@ -5543,13 +6265,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
 	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
@@ -5573,13 +6298,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Name { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
@@ -5603,6 +6331,8 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
 	{
@@ -5610,8 +6340,9 @@ namespace Nest
 			Id Id { get; }
 		[IgnoreDataMember]
 			Name Context { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
@@ -5640,13 +6371,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name Username { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
 	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
@@ -5670,13 +6404,16 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
@@ -5703,11 +6440,14 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SqlQuery <pre>Execute SQL</pre></summary>
 	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 	{
@@ -5720,13 +6460,16 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
@@ -5748,13 +6491,16 @@ namespace Nest
 		///<summary>Whether to display detailed information about shard recovery</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
@@ -5781,11 +6527,14 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerRequest : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
@@ -5814,13 +6563,16 @@ namespace Nest
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>
 	{
 		[IgnoreDataMember]
 			TaskId TaskId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
@@ -5841,13 +6593,16 @@ namespace Nest
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IReloadSecureSettingsRequest : IRequest<ReloadSecureSettingsRequestParameters>
 	{
 		[IgnoreDataMember]
 			NodeIds NodeId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 	{
@@ -5867,11 +6622,14 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
@@ -5882,13 +6640,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
@@ -5906,6 +6667,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 	{
@@ -5913,8 +6676,9 @@ namespace Nest
 			Name RepositoryName { get; }
 		[IgnoreDataMember]
 			Name Snapshot { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
@@ -5940,13 +6704,16 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IResumeFollowIndexRequest : IRequest<ResumeFollowIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
 	public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
 	{
@@ -5965,6 +6732,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
 	{
@@ -5972,8 +6741,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			Id SnapshotId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
@@ -5995,6 +6765,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
@@ -6002,8 +6774,9 @@ namespace Nest
 			Name Alias { get; }
 		[IgnoreDataMember]
 			IndexName NewIndex { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
@@ -6038,13 +6811,16 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupRollupSearch <pre>TODO</pre></summary>
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
@@ -6067,11 +6843,14 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
@@ -6082,11 +6861,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
@@ -6099,15 +6881,18 @@ namespace Nest
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-[DataMember(Name = "docvalue_fields")] Fields DocValueFields { get; set; }[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+[DataMember(Name = "docvalue_fields")] Fields DocValueFields { get; set; }[DataMember(Name = "stored_fields")] Fields StoredFields { get; set; }<text>	}
+</text>
 
-	public partial interface ISearchRequest<T> : ISearchRequest { }
-
+		public partial interface ISearchRequest<T> : ISearchRequest { }
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -6202,6 +6987,7 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
+
 	public partial class SearchRequest<T> : SearchRequest, ISearchRequest<T>
 	{
 		protected ISearchRequest<T> TypedSelf => this;
@@ -6211,16 +6997,114 @@ namespace Nest
 		///<param name="index">Optional, accepts null</param>
 		public SearchRequest(Indices index) : base(index){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
+	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
+	{
+		protected ISearchRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search", "/{index}/_search"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_search</summary>
+		public SearchRequest() : base(){}
+		///<summary>/{index}/_search</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SearchRequest(Indices index) : base(r => r.Optional("index", index)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
+		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>
+		/// The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism
+		/// to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+		///</summary>
+		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>
+		/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the
+		/// search on the cluster in order to limit the number of concurrent shard requests
+		///</summary>
+		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
+		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
+		///</summary>
+		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
+		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
+		///<summary>Specify which field to use for suggestions</summary>
+		public Field SuggestField { get => Q<Field>("suggest_field"); set => Q("suggest_field", value); }
+		///<summary>Specify suggest mode</summary>
+		public SuggestMode? SuggestMode { get => Q<SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
+		///<summary>How many suggestions to return in response</summary>
+		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
+		///<summary>The source text for which the suggestions should be returned</summary>
+		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface ISearchShardsRequest<T> : ISearchShardsRequest { }
-
+		public partial interface ISearchShardsRequest<T> : ISearchShardsRequest { }
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
@@ -6260,6 +7144,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 	}
+
 	public partial class SearchShardsRequest<T> : SearchShardsRequest, ISearchShardsRequest<T>
 	{
 		protected ISearchShardsRequest<T> TypedSelf => this;
@@ -6269,14 +7154,57 @@ namespace Nest
 		///<param name="index">Optional, accepts null</param>
 		public SearchShardsRequest(Indices index) : base(index){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
+	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
+	{
+		protected ISearchShardsRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_search_shards", "/{index}/_search_shards"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_search_shards</summary>
+		public SearchShardsRequest() : base(){}
+		///<summary>/{index}/_search_shards</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index) : base(r => r.Optional("index", index)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
+		///</summary>
+		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
@@ -6330,13 +7258,16 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
@@ -6365,6 +7296,8 @@ namespace Nest
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
 	{
@@ -6372,8 +7305,9 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			IndexName Target { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
@@ -6401,13 +7335,16 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
@@ -6427,6 +7364,8 @@ namespace Nest
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
 	{
@@ -6434,8 +7373,9 @@ namespace Nest
 			Name RepositoryName { get; }
 		[IgnoreDataMember]
 			Name Snapshot { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
@@ -6461,6 +7401,8 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>
 	{
@@ -6468,8 +7410,9 @@ namespace Nest
 			Name RepositoryName { get; }
 		[IgnoreDataMember]
 			Names Snapshot { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
@@ -6497,6 +7440,8 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISourceExistsRequest : IRequest<SourceExistsRequestParameters>
 	{
@@ -6504,10 +7449,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface ISourceExistsRequest<TDocument> : ISourceExistsRequest { }
-
+		public partial interface ISourceExistsRequest<TDocument> : ISourceExistsRequest { }
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
@@ -6554,6 +7500,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
+
 	public partial class SourceExistsRequest<TDocument> : SourceExistsRequest, ISourceExistsRequest<TDocument>
 	{
 		protected ISourceExistsRequest<TDocument> TypedSelf => this;
@@ -6573,7 +7520,8 @@ namespace Nest
 		[SerializationConstructor]
 		internal SourceExistsRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface ISourceRequest : IRequest<SourceRequestParameters>
 	{
@@ -6581,10 +7529,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface ISourceRequest<TDocument> : ISourceRequest { }
-
+		public partial interface ISourceRequest<TDocument> : ISourceRequest { }
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
@@ -6631,6 +7580,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
+
 	public partial class SourceRequest<TDocument> : SourceRequest, ISourceRequest<TDocument>
 	{
 		protected ISourceRequest<TDocument> TypedSelf => this;
@@ -6650,7 +7600,8 @@ namespace Nest
 		[SerializationConstructor]
 		internal SourceRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface ISplitIndexRequest : IRequest<SplitIndexRequestParameters>
 	{
@@ -6658,8 +7609,9 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			IndexName Target { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
 	public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
 	{
@@ -6687,11 +7639,14 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStartBasicLicenseRequest : IRequest<StartBasicLicenseRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicensePostStartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 	{
@@ -6704,13 +7659,16 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
@@ -6729,13 +7687,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupStartJob <pre>TODO</pre></summary>
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
@@ -6754,11 +7715,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for LicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 	{
@@ -6773,11 +7737,14 @@ namespace Nest
 		///<summary>The type of trial license to generate (default: "trial")</summary>
 		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
@@ -6788,13 +7755,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
@@ -6815,13 +7785,16 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for RollupStopJob <pre>TODO</pre></summary>
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
@@ -6844,11 +7817,14 @@ namespace Nest
 		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
@@ -6859,13 +7835,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
@@ -6892,6 +7871,8 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters>
 	{
@@ -6899,10 +7880,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface ITermVectorsRequest<TDocument> : ITermVectorsRequest { }
-
+		public partial interface ITermVectorsRequest<TDocument> : ITermVectorsRequest { }
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsRequest : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
@@ -6956,6 +7938,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
+
 	public partial class TermVectorsRequest<TDocument> : TermVectorsRequest, ITermVectorsRequest<TDocument>
 	{
 		protected ITermVectorsRequest<TDocument> TypedSelf => this;
@@ -6977,12 +7960,14 @@ namespace Nest
 		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
 	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 	{
@@ -6993,6 +7978,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
 	{
@@ -7000,8 +7987,9 @@ namespace Nest
 			Indices Index { get; }
 		[IgnoreDataMember]
 			Names Type { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
@@ -7034,13 +8022,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUnfollowIndexRequest : IRequest<UnfollowIndexRequestParameters>
 	{
 		[IgnoreDataMember]
 			IndexName Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
 	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
 	{
@@ -7059,15 +8050,18 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IUpdateByQueryRequest<T> : IUpdateByQueryRequest { }
-
+		public partial interface IUpdateByQueryRequest<T> : IUpdateByQueryRequest { }
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
@@ -7168,6 +8162,7 @@ namespace Nest
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+
 	public partial class UpdateByQueryRequest<T> : UpdateByQueryRequest, IUpdateByQueryRequest<T>
 	{
 		protected IUpdateByQueryRequest<T> TypedSelf => this;
@@ -7177,14 +8172,118 @@ namespace Nest
 		///<summary>/{index}/_update_by_query</summary>
 		public UpdateByQueryRequest() : base(typeof(T)){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
+	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
+	{
+		protected IUpdateByQueryRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/{index}/_update_by_query"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_update_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public UpdateByQueryRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal UpdateByQueryRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>What to do when the update by query hits version conflicts?</summary>
+		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Starting offset (default: 0)</summary>
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
+		///</summary>
+		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
+		///<summary>Size on the scroll request powering the update by query</summary>
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
+		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
+		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+		///<summary>Number of hits to return (default: 10)</summary>
+		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
+		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
+		///<summary>Whether the _source should be included in the response.</summary>
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
+		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>Specify whether to return document version as part of a hit</summary>
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
+		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
+		public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>Should the request should block until the update by query operation is complete.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateByQueryRethrottleRequest : IRequest<UpdateByQueryRethrottleRequestParameters>
 	{
 		[IgnoreDataMember]
 			TaskId TaskId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for UpdateByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
 	{
@@ -7205,13 +8304,16 @@ namespace Nest
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id DatafeedId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
@@ -7230,13 +8332,16 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
@@ -7271,13 +8376,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
 	{
 		[IgnoreDataMember]
 			Id JobId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
@@ -7296,6 +8404,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
 	{
@@ -7303,8 +8413,9 @@ namespace Nest
 			Id JobId { get; }
 		[IgnoreDataMember]
 			Id SnapshotId { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
@@ -7326,6 +8437,8 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpdateRequest : IRequest<UpdateRequestParameters>
 	{
@@ -7333,10 +8446,11 @@ namespace Nest
 			IndexName Index { get; }
 		[IgnoreDataMember]
 			Id Id { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest { }
-
+		public partial interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest { }
 	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateRequest : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest
 	{
@@ -7390,6 +8504,7 @@ namespace Nest
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
+
 	public partial class UpdateRequest<TDocument, TPartialDocument> : UpdateRequest, IUpdateRequest<TDocument, TPartialDocument>
 	{
 		protected IUpdateRequest<TDocument, TPartialDocument> TypedSelf => this;
@@ -7409,14 +8524,16 @@ namespace Nest
 		[SerializationConstructor]
 		internal UpdateRequest() : base(){}
 	}
-	 
+	 	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
@@ -7447,13 +8564,16 @@ namespace Nest
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
@@ -7480,11 +8600,14 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlValidateDetector <pre>TODO</pre></summary>
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
@@ -7495,11 +8618,14 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for MlValidate <pre>TODO</pre></summary>
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
@@ -7510,15 +8636,18 @@ namespace Nest
 
 		// Request parameters
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Indices Index { get; }
-	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 
-	public partial interface IValidateQueryRequest<T> : IValidateQueryRequest { }
-
+		public partial interface IValidateQueryRequest<T> : IValidateQueryRequest { }
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
@@ -7563,6 +8692,7 @@ namespace Nest
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 	}
+
 	public partial class ValidateQueryRequest<T> : ValidateQueryRequest, IValidateQueryRequest<T>
 	{
 		protected IValidateQueryRequest<T> TypedSelf => this;
@@ -7572,14 +8702,62 @@ namespace Nest
 		///<param name="index">Optional, accepts null</param>
 		public ValidateQueryRequest(Indices index) : base(index){}
 	}
-	 
+	 	}
+}
+	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
+	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
+	{
+		protected IValidateQueryRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"/_validate/query", "/{index}/_validate/query"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_validate/query</summary>
+		public ValidateQueryRequest() : base(){}
+		///<summary>/{index}/_validate/query</summary>
+		///<param name="index">Optional, accepts null</param>
+		public ValidateQueryRequest(Indices index) : base(r => r.Optional("index", index)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Execute validation on all shards instead of one random shard per index</summary>
+		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Return detailed information about the error</summary>
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
+		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
+		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
+	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
 			Name RepositoryName { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
@@ -7602,13 +8780,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters>
 	{
 		[IgnoreDataMember]
 			Metrics Metric { get; }
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for WatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
@@ -7628,11 +8809,14 @@ namespace Nest
 		///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
@@ -7645,11 +8829,14 @@ namespace Nest
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
+	}
+}
 	[InterfaceDataContract]
 	public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParameters>
 	{
-	}
-
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+<text>	}
+</text>
 	///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
 	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
@@ -7661,4 +8848,6 @@ namespace Nest
 		// Request parameters
 		///<summary>Specify timeout for watch write operation</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-	}}
+	}
+	}
+}
