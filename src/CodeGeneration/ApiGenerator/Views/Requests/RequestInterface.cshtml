@@ -1,0 +1,35 @@
+@inherits TemplatePage<CsharpMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@{
+	CsharpMethod method = Model;
+	var concreteInterface = method.InterfaceTypeGeneric == null ? method.InterfaceType : method.InterfaceTypeGeneric;
+}
+	[InterfaceDataContract]
+	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName)))
+	{
+@foreach (UrlPart part in method.Url.ExposedApiParts)
+{
+<text>		[IgnoreDataMember]
+			@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
+</text>
+}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+@if (method.HasBody)
+{
+		foreach (var partialParam in method.Url.Params.Values.Where(p=>p.RenderPartial))
+		{
+		<text>[DataMember(Name = "@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }</text>
+		}
+}
+<text>	}
+</text>
+@if (!string.IsNullOrWhiteSpace(method.InterfaceTypeGeneric))
+{
+<text>
+		public partial interface @(Raw(method.InterfaceTypeGeneric)) : @(Raw(method.InterfaceType)) { }
+</text>
+}

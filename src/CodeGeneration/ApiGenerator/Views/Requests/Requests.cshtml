@@ -1,0 +1,64 @@
+@inherits TemplatePage<CsharpMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@{
+	CsharpMethod method = Model;
+}
+	///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
+	public partial class @Raw(method.RequestType) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
+	{
+		protected @(Raw(method.InterfaceType)) Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", method.Url.ExposedApiPaths.Select(p=>$"\"{p.Path}\"")))});
+		internal override ApiUrls ApiUrls => Urls;
+@foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: true))
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
+</text>
+}
+		// values part of the url path
+@foreach (var part in method.Url.ExposedApiParts)
+{
+<text>		[IgnoreDataMember]
+		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+</text>
+}
+
+		// Request parameters
+@foreach (var param in method.Url.Params.Values)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+	if (method.Url.ExposedApiParts.Any(p=>p.Name == original))
+	{
+		continue;
+	}
+	if (param.RenderPartial && (method.HasBody))
+	{
+		continue;
+	}
+	var doc = param.DescriptionHighLevel.ToArray();
+<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
+</text>
+}
+@if (method.RequestTypeUnmapped)
+{<text>		//TODO THIS METHOD IS UNMAPPED!
+</text>
+}
+	}
+	@if (!string.IsNullOrWhiteSpace(method.InterfaceTypeGeneric))
+	{<text>
+	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": {0}, {1}", method.RequestType, method.InterfaceTypeGeneric))
+	{
+		protected @(Raw(method.InterfaceTypeGeneric)) TypedSelf => this;
+@foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: false))
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
+</text>
+}
+	}
+	 </text>}
+	}
+}
