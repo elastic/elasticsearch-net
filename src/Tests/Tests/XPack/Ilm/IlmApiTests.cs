@@ -30,7 +30,7 @@ namespace Tests.XPack.Ilm
 								Warm = new Phase
 								{
 									MinimumAge = "10d",
-									Actions = new List<ILifecycleAction>
+									Actions = new LifecycleActions
 									{
 										new ForceMergeLifecycleAction
 										{
@@ -41,7 +41,7 @@ namespace Tests.XPack.Ilm
 								Delete = new Phase
 								{
 									MinimumAge = "30d",
-									Actions = new List<ILifecycleAction>
+									Actions = new LifecycleActions
 									{
 										new DeleteLifecycleAction()
 									}
@@ -51,9 +51,9 @@ namespace Tests.XPack.Ilm
 					},
 					(v, d) => d
 						.Policy(p => p.Phases(a => a.Warm(w => w.MinimumAge("10d")
-																	 .Actions(ac => ac.ForceMerge(f => f.MaximumNumberSegments(1))))
-														.Delete(w => w.MinimumAge("30d")
-		       														  .Actions(ac => ac.Delete(f => f)))))
+																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberSegments(1))))
+													.Delete(w => w.MinimumAge("30d")
+		       													  .Actions(ac => ac.Delete(f => f)))))
 					,
 					(v, c, f) => c.IlmPutLifecycle("policy" + v, f),
 					(v, c, f) => c.IlmPutLifecycleAsync("policy" + v, f),
