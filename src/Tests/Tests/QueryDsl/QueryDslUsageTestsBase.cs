@@ -69,6 +69,7 @@ namespace Tests.QueryDsl
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.DefaultInMemoryClient.ConnectionSettings);
 			var query = QueryFluent(new QueryContainerDescriptor<Project>());
+			query.Should().NotBeNull("query evaluated to null which implies it may be conditionless");
 			query.Accept(visitor);
 			var pretty = visitor.PrettyPrint;
 			pretty.Should().NotBeNullOrWhiteSpace();
