@@ -69,7 +69,7 @@ namespace Nest
 		public Health Status { get; internal set; }
 
 		[JsonProperty("task_max_waiting_in_queue_millis")]
-		public long TaskMaxWaitTimeInQueueInMillis { get; internal set; }
+		public long TaskMaxWaitTimeInQueueInMilliseconds { get; internal set; }
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
