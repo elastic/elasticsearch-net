@@ -9,10 +9,12 @@ namespace Nest
 		IReadOnlyDictionary<string, LifecyclePolicy> Policies { get; }
 	}
 
-	public class IlmGetLifecycleResponse : ResponseBase, IIlmGetLifecycleResponse
+	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<IlmGetLifecycleResponse, string, LifecyclePolicy>))]
+	public class IlmGetLifecycleResponse : DictionaryResponseBase<string, LifecyclePolicy>, IIlmGetLifecycleResponse
 	{
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, LifecyclePolicy>))]
-		public IReadOnlyDictionary<string, LifecyclePolicy> Policies { get; internal set; } = EmptyReadOnly<string, LifecyclePolicy>.Dictionary;
+		[JsonIgnore]
+		public IReadOnlyDictionary<string, LifecyclePolicy> Policies => Self.BackingDictionary;
 	}
 
 	public class LifecyclePolicy
@@ -22,7 +24,7 @@ namespace Nest
 
 		[JsonProperty("modified_date")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
-		public DateTime ModifiedDate { get; internal set; }
+		public DateTimeOffset ModifiedDate { get; internal set; }
 
 		[JsonProperty("policy")]
 		public Policy Policy { get; internal set; }

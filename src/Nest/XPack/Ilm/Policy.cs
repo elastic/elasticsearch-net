@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Policy>))]
 	public interface IPolicy
 	{
 		[JsonProperty("phases")]

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Phases>))]
 	public interface IPhases
 	{
 		[JsonProperty("warm")]

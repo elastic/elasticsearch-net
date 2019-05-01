@@ -2,14 +2,11 @@
 
 namespace Nest
 {
-	public interface IIlmMoveToStepResponse : IResponse
+	public interface IIlmMoveToStepResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("acknowledged")]
-		bool Acknowledged { get; }
 	}
 
-	public class IlmMoveToStepResponse : ResponseBase, IIlmMoveToStepResponse
+	public class IlmMoveToStepResponse : AcknowledgedResponseBase, IIlmMoveToStepResponse
 	{
-		public bool Acknowledged { get; internal set; }
 	}
 }

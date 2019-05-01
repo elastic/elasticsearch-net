@@ -1,15 +1,10 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public interface IIlmExplainLifecycleResponse : IResponse
+	public interface IIlmExplainLifecycleResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("acknowledged")]
-		bool Acknowledged { get; }
 	}
 
-	public class IlmExplainLifecycleResponse : ResponseBase, IIlmExplainLifecycleResponse
+	public class IlmExplainLifecycleResponse : AcknowledgedResponseBase, IIlmExplainLifecycleResponse
 	{
-		public bool Acknowledged { get; internal set; }
 	}
 }
