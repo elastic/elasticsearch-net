@@ -8,7 +8,7 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
-	/**[[indexing]]
+	/**[[indexing-documents]]
 	*=== Indexing
 	*
 	* NEST has a number of ways to index documents.
