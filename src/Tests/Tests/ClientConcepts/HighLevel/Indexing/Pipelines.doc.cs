@@ -7,7 +7,7 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
-	/**[[ingest-pipelines]]
+	/**[[pipelines]]
 	*=== Ingest Pipelines
 	*
 	* An ingest pipeline is a series of processors that are to be executed in the same order as they are declared.
