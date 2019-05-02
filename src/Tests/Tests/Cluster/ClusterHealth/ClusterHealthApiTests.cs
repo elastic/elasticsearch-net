@@ -72,7 +72,7 @@ namespace Tests.Cluster.ClusterHealth
 			response.ActiveShardsPercentAsNumber.Should().BePositive();
 			response.DelayedUnassignedShards.Should().Equals(0);
 			response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
-			response.TaskMaxWaitTimeInQueueInMillis.Should().BeGreaterOrEqualTo(0);
+			response.TaskMaxWaitTimeInQueueInMilliseconds.Should().BeGreaterOrEqualTo(0);
 
 			response.Indices.Should()
 				.NotBeEmpty()
