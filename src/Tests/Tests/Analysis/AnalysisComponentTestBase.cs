@@ -30,7 +30,7 @@ namespace Tests.Analysis
 		where TAssertion : AnalysisComponentTestBase<TAssertion, TComponent, TContainer, TDescriptor>, new()
 		where TContainer : class
 	{
-		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
+		private static readonly SingleEndpointUsage<CreateIndexResponse> Usage = new SingleEndpointUsage<CreateIndexResponse>
 		(
 			(s, c) => c.CreateIndex(s, AssertionSetup.FluentCall),
 			(s, c) => c.CreateIndexAsync(s, AssertionSetup.FluentCall),

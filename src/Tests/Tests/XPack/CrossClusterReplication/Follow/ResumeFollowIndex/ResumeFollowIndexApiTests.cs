@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication.Follow.ResumeFollowIndex
 {
-	public class ResumeFollowIndexApiTests : ApiTestBase<XPackCluster, IResumeFollowIndexResponse, IResumeFollowIndexRequest, ResumeFollowIndexDescriptor, ResumeFollowIndexRequest>
+	public class ResumeFollowIndexApiTests : ApiTestBase<XPackCluster, ResumeFollowIndexResponse, IResumeFollowIndexRequest, ResumeFollowIndexDescriptor, ResumeFollowIndexRequest>
 	{
 		public ResumeFollowIndexApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

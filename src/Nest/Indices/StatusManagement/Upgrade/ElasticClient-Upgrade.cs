@@ -8,32 +8,32 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IUpgradeResponse Upgrade(IUpgradeRequest request);
+		UpgradeResponse Upgrade(IUpgradeRequest request);
 
 		/// <inheritdoc />
-		IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
+		UpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
 
 		/// <inheritdoc />
-		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default);
+		Task<UpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
-		Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null,
+		Task<UpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null,
 			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
-		public IUpgradeResponse Upgrade(IUpgradeRequest request) =>
+		public UpgradeResponse Upgrade(IUpgradeRequest request) =>
 			DoRequest<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters);
 
-		public IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
+		public UpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
 			Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 
-		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpgradeRequest, IUpgradeResponse, UpgradeResponse>(request, request.RequestParameters, ct);
+		public Task<UpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters, ct);
 
-		public Task<IUpgradeResponse> UpgradeAsync(
+		public Task<UpgradeResponse> UpgradeAsync(
 			Indices indices,
 			Func<UpgradeDescriptor, IUpgradeRequest> selector = null,
 			CancellationToken ct = default

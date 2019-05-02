@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 				WrapLongitude = true
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var viewport = response.Aggregations.GeoBounds("viewport");

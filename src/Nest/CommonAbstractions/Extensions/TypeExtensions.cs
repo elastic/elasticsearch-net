@@ -75,7 +75,7 @@ namespace Nest
 		}
 
 		internal static object DefaultValue(this Type type) =>
-			type.IsValueType()
+			type.IsValueType
 				? CachedDefaultValues.GetOrAdd(type, t =>
 						Expression.Lambda<Func<object>>(
 								Expression.Convert(Expression.Default(type), typeof(object))
@@ -193,8 +193,9 @@ namespace Nest
 					else
 						propertiesByName.Add(propertyInfo.Name, propertyInfo);
 				}
-				type = type.GetTypeInfo()?.BaseType;
-			} while (type?.GetTypeInfo()?.BaseType != null);
+				type = type.BaseType;
+			} while (type?.BaseType != null);
+
 			return propertiesByName.Values;
 		}
 
@@ -203,7 +204,7 @@ namespace Nest
 		/// </summary>
 		private static bool IsHidingMember(PropertyInfo propertyInfo)
 		{
-			var baseType = propertyInfo.DeclaringType?.GetTypeInfo()?.BaseType;
+			var baseType = propertyInfo.DeclaringType?.BaseType;
 			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
 			if (baseProperty == null) return false;
 

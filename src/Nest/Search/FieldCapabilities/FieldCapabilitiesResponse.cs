@@ -4,15 +4,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IFieldCapabilitiesResponse : IResponse
+	public class FieldCapabilitiesResponse : ResponseBase
 	{
 		[DataMember(Name = "fields")]
-		FieldCapabilitiesFields Fields { get; }
-	}
-
-	public class FieldCapabilitiesResponse : ResponseBase, IFieldCapabilitiesResponse
-	{
 		public FieldCapabilitiesFields Fields { get; internal set; }
 		//public ShardStatistics Shards { get; internal set; }
 	}

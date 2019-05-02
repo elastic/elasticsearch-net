@@ -2,15 +2,10 @@
 
 namespace Nest
 {
-	public abstract class NodesResponseBase : ResponseBase, INodesResponse
-	{
-		public NodeStatistics NodeStatistics { get; internal set; }
-	}
-
-	public interface INodesResponse : IResponse
+	public abstract class NodesResponseBase : ResponseBase
 	{
 		[DataMember(Name = "_nodes")]
-		NodeStatistics NodeStatistics { get; }
+		public NodeStatistics NodeStatistics { get; internal set; }
 	}
 
 	[DataContract]

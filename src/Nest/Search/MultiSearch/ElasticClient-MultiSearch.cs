@@ -17,45 +17,45 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the search operations on the multi search api</param>
-		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
+		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
 
 		/// <inheritdoc />
-		IMultiSearchResponse MultiSearch(IMultiSearchRequest request);
+		MultiSearchResponse MultiSearch(IMultiSearchRequest request);
 
 		/// <inheritdoc />
-		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector,
+		Task<MultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default);
+		Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector) =>
+		public MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector) =>
 			MultiSearch(selector?.Invoke(new MultiSearchDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearch(IMultiSearchRequest request)
+		public MultiSearchResponse MultiSearch(IMultiSearchRequest request)
 		{
 			CreateMultiSearchConverter(request);
 			return DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(
+		public Task<MultiSearchResponse> MultiSearchAsync(
 			Func<MultiSearchDescriptor, IMultiSearchRequest> selector,
 			CancellationToken ct = default
 		) => MultiSearchAsync(selector?.Invoke(new MultiSearchDescriptor()), ct);
 
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default)
+		public Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default)
 		{
 			CreateMultiSearchConverter(request);
-			return DoRequestAsync<IMultiSearchRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
 		private void CreateMultiSearchConverter(IMultiSearchRequest request)

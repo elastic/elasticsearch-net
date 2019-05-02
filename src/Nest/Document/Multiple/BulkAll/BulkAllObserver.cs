@@ -3,13 +3,13 @@ using System.Threading;
 
 namespace Nest
 {
-	public class BulkAllObserver : CoordinatedRequestObserverBase<IBulkAllResponse>
+	public class BulkAllObserver : CoordinatedRequestObserverBase<BulkAllResponse>
 	{
 		private long _totalNumberOfFailedBuffers;
 		private long _totalNumberOfRetries;
 
 		public BulkAllObserver(
-			Action<IBulkAllResponse> onNext = null,
+			Action<BulkAllResponse> onNext = null,
 			Action<Exception> onError = null,
 			Action onCompleted = null
 		)

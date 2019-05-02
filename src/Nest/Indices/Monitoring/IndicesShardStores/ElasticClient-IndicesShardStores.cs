@@ -14,19 +14,19 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		IIndicesShardStoresResponse IndicesShardStores(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null);
+		IndicesShardStoresResponse IndicesShardStores(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null);
 
 		/// <inheritdoc />
-		IIndicesShardStoresResponse IndicesShardStores(IIndicesShardStoresRequest request);
+		IndicesShardStoresResponse IndicesShardStores(IIndicesShardStoresRequest request);
 
 		/// <inheritdoc />
-		Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(
+		Task<IndicesShardStoresResponse> IndicesShardStoresAsync(
 			Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request,
+		Task<IndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -34,21 +34,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndicesShardStoresResponse IndicesShardStores(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null) =>
+		public IndicesShardStoresResponse IndicesShardStores(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null) =>
 			IndicesShardStores(selector.InvokeOrDefault(new IndicesShardStoresDescriptor()));
 
 		/// <inheritdoc />
-		public IIndicesShardStoresResponse IndicesShardStores(IIndicesShardStoresRequest request) =>
+		public IndicesShardStoresResponse IndicesShardStores(IIndicesShardStoresRequest request) =>
 			DoRequest<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(
+		public Task<IndicesShardStoresResponse> IndicesShardStoresAsync(
 			Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null,
 			CancellationToken ct = default
 		) => IndicesShardStoresAsync(selector.InvokeOrDefault(new IndicesShardStoresDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndicesShardStoresRequest, IIndicesShardStoresResponse, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
+		public Task<IndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
 	}
 }

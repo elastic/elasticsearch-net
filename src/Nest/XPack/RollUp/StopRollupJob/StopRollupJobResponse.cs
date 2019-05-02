@@ -3,15 +3,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IStopRollupJobResponse : IResponse
+	public class StopRollupJobResponse : ResponseBase
 	{
 		[DataMember(Name ="stopped")]
-		bool Stopped { get; set; }
-	}
-
-	public class StopRollupJobResponse : ResponseBase, IStopRollupJobResponse
-	{
 		public bool Stopped { get; set; }
 	}
 }

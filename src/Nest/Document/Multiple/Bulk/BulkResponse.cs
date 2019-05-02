@@ -5,16 +5,8 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IBulkResponse : IResponse
-	{
-		bool Errors { get; }
-		IReadOnlyCollection<IBulkResponseItem> Items { get; }
-		IEnumerable<IBulkResponseItem> ItemsWithErrors { get; }
-		long Took { get; }
-	}
-
 	[DataContract]
-	public class BulkResponse : ResponseBase, IBulkResponse
+	public class BulkResponse : ResponseBase
 	{
 		[DataMember(Name ="errors")]
 		public bool Errors { get; internal set; }
@@ -22,11 +14,11 @@ namespace Nest
 		public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();
 
 		[DataMember(Name ="items")]
-		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.Collection;
+		public IReadOnlyList<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.List;
 
 		[IgnoreDataMember]
-		public IEnumerable<IBulkResponseItem> ItemsWithErrors => !Items.HasAny()
-			? Enumerable.Empty<IBulkResponseItem>()
+		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !Items.HasAny()
+			? Enumerable.Empty<BulkResponseItemBase>()
 			: Items.Where(i => !i.IsValid);
 
 		[DataMember(Name ="took")]

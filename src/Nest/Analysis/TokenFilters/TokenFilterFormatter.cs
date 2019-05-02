@@ -1,86 +1,140 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 
 
 namespace Nest
 {
 	internal class TokenFilterFormatter : IJsonFormatter<ITokenFilter>
 	{
-		private static byte[] TypeField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
+		private static readonly byte[] TypeField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
+
+		private static readonly AutomataDictionary TokenFilterTypes = new AutomataDictionary
+		{
+			{ "asciifolding", 0 },
+			{ "common_grams", 1 },
+			{ "delimited_payload", 2 },
+			{ "dictionary_decompounder", 3 },
+			{ "edge_ngram", 4 },
+			{ "elision", 5 },
+			{ "hunspell", 6 },
+			{ "hyphenation_decompounder", 7 },
+			{ "keep_types", 8 },
+			{ "keep", 9 },
+			{ "keyword_marker", 10 },
+			{ "kstem", 11 },
+			{ "length", 12 },
+			{ "limit", 13 },
+			{ "lowercase", 14 },
+			{ "ngram", 15 },
+			{ "pattern_capture", 16 },
+			{ "pattern_replace", 17 },
+			{ "porter_stem", 18 },
+			{ "phonetic", 19 },
+			{ "reverse", 20 },
+			{ "shingle", 21 },
+			{ "snowball", 22 },
+			{ "stemmer", 23 },
+			{ "stemmer_override", 24 },
+			{ "stop", 25 },
+			{ "synonym", 26 },
+			{ "synonym_graph", 27 },
+			{ "trim", 28 },
+			{ "truncate", 29 },
+			{ "unique", 30 },
+			{ "uppercase", 31 },
+			{ "word_delimiter", 32 },
+			{ "word_delimiter_graph", 33 },
+			{ "fingerprint", 34 },
+			{ "nori_part_of_speech", 35 },
+			{ "kuromoji_readingform", 36 },
+			{ "kuromoji_part_of_speech", 37 },
+			{ "kuromoji_stemmer", 38 },
+			{ "icu_collation", 39 },
+			{ "icu_folding", 40 },
+			{ "icu_normalizer", 41 },
+			{ "icu_transform", 42 },
+			{ "condition", 43 },
+			{ "multiplexer", 44 },
+			{ "predicate_token_filter", 45 }
+		};
 
 		public ITokenFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var arraySegment = reader.ReadNextBlockSegment();
 			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 			var count = 0;
-			string tokenFilterType = null;
+			ArraySegment<byte> tokenFilterType = default;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
 				if (propertyName.EqualsBytes(TypeField))
 				{
-					tokenFilterType = segmentReader.ReadString();
+					tokenFilterType = segmentReader.ReadStringSegmentUnsafe();
 					break;
 				}
 
 				segmentReader.ReadNextBlock();
 			}
 
-			if (tokenFilterType == null)
+			if (tokenFilterType == default)
 				return null;
 
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
-
-			// TODO: Move to AutomataDictionary
-			switch (tokenFilterType)
+			if (TokenFilterTypes.TryGetValue(tokenFilterType, out var value))
 			{
-				case "asciifolding": return Deserialize<AsciiFoldingTokenFilter>(ref segmentReader, formatterResolver);
-				case "common_grams": return Deserialize<CommonGramsTokenFilter>(ref segmentReader, formatterResolver);
-				case "delimited_payload": return Deserialize<DelimitedPayloadTokenFilter>(ref segmentReader, formatterResolver);
-				case "dictionary_decompounder": return Deserialize<DictionaryDecompounderTokenFilter>(ref segmentReader, formatterResolver);
-				case "edge_ngram": return Deserialize<EdgeNGramTokenFilter>(ref segmentReader, formatterResolver);
-				case "elision": return Deserialize<ElisionTokenFilter>(ref segmentReader, formatterResolver);
-				case "hunspell": return Deserialize<HunspellTokenFilter>(ref segmentReader, formatterResolver);
-				case "hyphenation_decompounder": return Deserialize<HyphenationDecompounderTokenFilter>(ref segmentReader, formatterResolver);
-				case "keep_types": return Deserialize<KeepTypesTokenFilter>(ref segmentReader, formatterResolver);
-				case "keep": return Deserialize<KeepWordsTokenFilter>(ref segmentReader, formatterResolver);
-				case "keyword_marker": return Deserialize<KeywordMarkerTokenFilter>(ref segmentReader, formatterResolver);
-				case "kstem": return Deserialize<KStemTokenFilter>(ref segmentReader, formatterResolver);
-				case "length": return Deserialize<LengthTokenFilter>(ref segmentReader, formatterResolver);
-				case "limit": return Deserialize<LimitTokenCountTokenFilter>(ref segmentReader, formatterResolver);
-				case "lowercase": return Deserialize<LowercaseTokenFilter>(ref segmentReader, formatterResolver);
-				case "ngram": return Deserialize<NGramTokenFilter>(ref segmentReader, formatterResolver);
-				case "pattern_capture": return Deserialize<PatternCaptureTokenFilter>(ref segmentReader, formatterResolver);
-				case "pattern_replace": return Deserialize<PatternReplaceTokenFilter>(ref segmentReader, formatterResolver);
-				case "porter_stem": return Deserialize<PorterStemTokenFilter>(ref segmentReader, formatterResolver);
-				case "phonetic": return Deserialize<PhoneticTokenFilter>(ref segmentReader, formatterResolver);
-				case "reverse": return Deserialize<ReverseTokenFilter>(ref segmentReader, formatterResolver);
-				case "shingle": return Deserialize<ShingleTokenFilter>(ref segmentReader, formatterResolver);
-				case "snowball": return Deserialize<SnowballTokenFilter>(ref segmentReader, formatterResolver);
-				case "stemmer": return Deserialize<StemmerTokenFilter>(ref segmentReader, formatterResolver);
-				case "stemmer_override": return Deserialize<StemmerOverrideTokenFilter>(ref segmentReader, formatterResolver);
-				case "stop": return Deserialize<StopTokenFilter>(ref segmentReader, formatterResolver);
-				case "synonym": return Deserialize<SynonymTokenFilter>(ref segmentReader, formatterResolver);
-				case "synonym_graph": return Deserialize<SynonymGraphTokenFilter>(ref segmentReader, formatterResolver);
-				case "trim": return Deserialize<TrimTokenFilter>(ref segmentReader, formatterResolver);
-				case "truncate": return Deserialize<TruncateTokenFilter>(ref segmentReader, formatterResolver);
-				case "unique": return Deserialize<UniqueTokenFilter>(ref segmentReader, formatterResolver);
-				case "uppercase": return Deserialize<UppercaseTokenFilter>(ref segmentReader, formatterResolver);
-				case "word_delimiter": return Deserialize<WordDelimiterTokenFilter>(ref segmentReader, formatterResolver);
-				case "word_delimiter_graph": return Deserialize<WordDelimiterGraphTokenFilter>(ref segmentReader, formatterResolver);
-				case "fingerprint": return Deserialize<FingerprintTokenFilter>(ref segmentReader, formatterResolver);
-				case "nori_part_of_speech": return Deserialize<NoriPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
-				case "kuromoji_readingform": return Deserialize<KuromojiReadingFormTokenFilter>(ref segmentReader, formatterResolver);
-				case "kuromoji_part_of_speech": return Deserialize<KuromojiPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
-				case "kuromoji_stemmer": return Deserialize<KuromojiStemmerTokenFilter>(ref segmentReader, formatterResolver);
-				case "icu_collation": return Deserialize<IcuCollationTokenFilter>(ref segmentReader, formatterResolver);
-				case "icu_folding": return Deserialize<IcuFoldingTokenFilter>(ref segmentReader, formatterResolver);
-				case "icu_normalizer": return Deserialize<IcuNormalizationTokenFilter>(ref segmentReader, formatterResolver);
-				case "icu_transform": return Deserialize<IcuTransformTokenFilter>(ref segmentReader, formatterResolver);
-				case "condition": return Deserialize<ConditionTokenFilter>(ref segmentReader, formatterResolver);
-				case "multiplexer": return Deserialize<MultiplexerTokenFilter>(ref segmentReader, formatterResolver);
-				case "predicate_token_filter": return Deserialize<PredicateTokenFilter>(ref segmentReader, formatterResolver);
-				default: return null;
+				switch (value)
+				{
+					case 0: return Deserialize<AsciiFoldingTokenFilter>(ref segmentReader, formatterResolver);
+					case 1: return Deserialize<CommonGramsTokenFilter>(ref segmentReader, formatterResolver);
+					case 2: return Deserialize<DelimitedPayloadTokenFilter>(ref segmentReader, formatterResolver);
+					case 3: return Deserialize<DictionaryDecompounderTokenFilter>(ref segmentReader, formatterResolver);
+					case 4: return Deserialize<EdgeNGramTokenFilter>(ref segmentReader, formatterResolver);
+					case 5: return Deserialize<ElisionTokenFilter>(ref segmentReader, formatterResolver);
+					case 6: return Deserialize<HunspellTokenFilter>(ref segmentReader, formatterResolver);
+					case 7: return Deserialize<HyphenationDecompounderTokenFilter>(ref segmentReader, formatterResolver);
+					case 8: return Deserialize<KeepTypesTokenFilter>(ref segmentReader, formatterResolver);
+					case 9: return Deserialize<KeepWordsTokenFilter>(ref segmentReader, formatterResolver);
+					case 10: return Deserialize<KeywordMarkerTokenFilter>(ref segmentReader, formatterResolver);
+					case 11: return Deserialize<KStemTokenFilter>(ref segmentReader, formatterResolver);
+					case 12: return Deserialize<LengthTokenFilter>(ref segmentReader, formatterResolver);
+					case 13: return Deserialize<LimitTokenCountTokenFilter>(ref segmentReader, formatterResolver);
+					case 14: return Deserialize<LowercaseTokenFilter>(ref segmentReader, formatterResolver);
+					case 15: return Deserialize<NGramTokenFilter>(ref segmentReader, formatterResolver);
+					case 16: return Deserialize<PatternCaptureTokenFilter>(ref segmentReader, formatterResolver);
+					case 17: return Deserialize<PatternReplaceTokenFilter>(ref segmentReader, formatterResolver);
+					case 18: return Deserialize<PorterStemTokenFilter>(ref segmentReader, formatterResolver);
+					case 19: return Deserialize<PhoneticTokenFilter>(ref segmentReader, formatterResolver);
+					case 20: return Deserialize<ReverseTokenFilter>(ref segmentReader, formatterResolver);
+					case 21: return Deserialize<ShingleTokenFilter>(ref segmentReader, formatterResolver);
+					case 22: return Deserialize<SnowballTokenFilter>(ref segmentReader, formatterResolver);
+					case 23: return Deserialize<StemmerTokenFilter>(ref segmentReader, formatterResolver);
+					case 24: return Deserialize<StemmerOverrideTokenFilter>(ref segmentReader, formatterResolver);
+					case 25: return Deserialize<StopTokenFilter>(ref segmentReader, formatterResolver);
+					case 26: return Deserialize<SynonymTokenFilter>(ref segmentReader, formatterResolver);
+					case 27: return Deserialize<SynonymGraphTokenFilter>(ref segmentReader, formatterResolver);
+					case 28: return Deserialize<TrimTokenFilter>(ref segmentReader, formatterResolver);
+					case 29: return Deserialize<TruncateTokenFilter>(ref segmentReader, formatterResolver);
+					case 30: return Deserialize<UniqueTokenFilter>(ref segmentReader, formatterResolver);
+					case 31: return Deserialize<UppercaseTokenFilter>(ref segmentReader, formatterResolver);
+					case 32: return Deserialize<WordDelimiterTokenFilter>(ref segmentReader, formatterResolver);
+					case 33: return Deserialize<WordDelimiterGraphTokenFilter>(ref segmentReader, formatterResolver);
+					case 34: return Deserialize<FingerprintTokenFilter>(ref segmentReader, formatterResolver);
+					case 35: return Deserialize<NoriPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
+					case 36: return Deserialize<KuromojiReadingFormTokenFilter>(ref segmentReader, formatterResolver);
+					case 37: return Deserialize<KuromojiPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
+					case 38: return Deserialize<KuromojiStemmerTokenFilter>(ref segmentReader, formatterResolver);
+					case 39: return Deserialize<IcuCollationTokenFilter>(ref segmentReader, formatterResolver);
+					case 40: return Deserialize<IcuFoldingTokenFilter>(ref segmentReader, formatterResolver);
+					case 41: return Deserialize<IcuNormalizationTokenFilter>(ref segmentReader, formatterResolver);
+					case 42: return Deserialize<IcuTransformTokenFilter>(ref segmentReader, formatterResolver);
+					case 43: return Deserialize<ConditionTokenFilter>(ref segmentReader, formatterResolver);
+					case 44: return Deserialize<MultiplexerTokenFilter>(ref segmentReader, formatterResolver);
+					case 45: return Deserialize<PredicateTokenFilter>(ref segmentReader, formatterResolver);
+					default: return null;
+				}
 			}
+
+			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, ITokenFilter value, IJsonFormatterResolver formatterResolver)

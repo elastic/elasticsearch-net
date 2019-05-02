@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.WatcherStats
 {
 	public class WatcherStatsApiTests
-		: ApiIntegrationTestBase<XPackCluster, IWatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
+		: ApiIntegrationTestBase<XPackCluster, WatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
 	{
 		public WatcherStatsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -82,7 +82,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 			(client, r) => client.WatcherStatsAsync(r)
 		);
 
-		protected override void ExpectResponse(IWatcherStatsResponse response)
+		protected override void ExpectResponse(WatcherStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Stats.Should().NotBeEmpty();

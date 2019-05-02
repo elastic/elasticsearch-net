@@ -9,7 +9,7 @@ namespace Tests.Indices.StatusManagement.SyncedFlush
 {
 	public class SyncedFlushApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
-			<IntrusiveOperationCluster, ISyncedFlushResponse, ISyncedFlushRequest, SyncedFlushDescriptor, SyncedFlushRequest>
+			<IntrusiveOperationCluster, SyncedFlushResponse, ISyncedFlushRequest, SyncedFlushDescriptor, SyncedFlushRequest>
 	{
 		public SyncedFlushApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

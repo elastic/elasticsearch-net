@@ -2,18 +2,12 @@
 
 namespace Nest
 {
-	public interface IStartTrialLicenseResponse : IAcknowledgedResponse
+	public class StartTrialLicenseResponse : AcknowledgedResponseBase
 	{
 		[DataMember(Name ="error_message")]
-		string ErrorMessage { get; }
+		public string ErrorMessage { get; internal set; }
 
 		[DataMember(Name ="trial_was_started")]
-		bool TrialWasStarted { get; }
-	}
-
-	public class StartTrialLicenseResponse : AcknowledgedResponseBase, IStartTrialLicenseResponse
-	{
-		public string ErrorMessage { get; internal set; }
 		public bool TrialWasStarted { get; internal set; }
 	}
 }

@@ -42,7 +42,6 @@ namespace Nest
 			var settings = formatterResolver.GetConnectionSettings();
 
 			// HACK: Deduplicate property mappings with an instance of Properties that has access to ConnectionSettings to sanitize PropertyName keys
-			// TODO: Find a way to deduplicate outside of serialization
 			var properties = new Properties(settings);
 
 			foreach (var kv in value)

@@ -2,22 +2,15 @@
 
 namespace Nest
 {
-	public interface IDeleteWatchResponse : IResponse
+	public class DeleteWatchResponse : ResponseBase
 	{
 		[DataMember(Name ="found")]
-		bool Found { get; }
+		public bool Found { get; internal set; }
 
 		[DataMember(Name ="_id")]
-		string Id { get; }
+		public string Id { get; internal set; }
 
 		[DataMember(Name ="_version")]
-		int Version { get; }
-	}
-
-	public class DeleteWatchResponse : ResponseBase, IDeleteWatchResponse
-	{
-		public bool Found { get; internal set; }
-		public string Id { get; internal set; }
 		public int Version { get; internal set; }
 	}
 }

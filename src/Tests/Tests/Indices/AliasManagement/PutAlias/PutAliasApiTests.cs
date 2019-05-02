@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.AliasManagement.PutAlias
 {
 	public class PutAliasApiTests
-		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, PutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
 	{
 		public PutAliasApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -33,7 +33,7 @@ namespace Tests.Indices.AliasManagement.PutAlias
 
 	[SkipVersion("<6.4.0", "is_write_index is a new feature")]
 	public class PutAliasIsWriteIndexApiTests
-		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, PutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
 	{
 		public PutAliasIsWriteIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	public class BulkUpdateManyTests : ApiTestBase<ReadOnlyCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
+	public class BulkUpdateManyTests : ApiTestBase<ReadOnlyCluster, BulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		private readonly List<Project> Updates = Project.Projects.Take(10).ToList();
 

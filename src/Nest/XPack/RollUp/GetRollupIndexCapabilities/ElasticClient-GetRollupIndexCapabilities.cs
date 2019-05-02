@@ -9,23 +9,23 @@ namespace Nest
 	{
 		/// <summary>
 		/// </summary>
-		IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(
+		GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(
 			IndexName index,
 			Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null
 		);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request);
+		GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
+		Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
 			IndexName index,
 			Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IGetRollupIndexCapabilitiesRequest request,
+		Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IGetRollupIndexCapabilitiesRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -33,18 +33,18 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		public IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(
+		public GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(
 			IndexName index,
 			Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null
 		) =>
 			GetRollupIndexCapabilities(selector.InvokeOrDefault(new GetRollupIndexCapabilitiesDescriptor(index)));
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		public IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request) =>
+		public GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request) =>
 			DoRequest<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		public Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
+		public Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
 			IndexName index,
 			Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null,
 			CancellationToken cancellationToken = default
@@ -52,11 +52,11 @@ namespace Nest
 			GetRollupIndexCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupIndexCapabilitiesDescriptor(index)), cancellationToken);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		public Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
+		public Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
 			IGetRollupIndexCapabilitiesRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IGetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesResponse, GetRollupIndexCapabilitiesResponse>
+			DoRequestAsync<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

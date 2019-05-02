@@ -11,19 +11,19 @@ namespace Nest
 		/// Retrieves information about different cluster, node, and index level settings that use deprecated
 		/// features that will be removed or changed in the next major version.
 		/// </summary>
-		IDeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null);
+		DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null);
 
 		/// <summary>
 		/// Retrieves information about different cluster, node, and index level settings that use deprecated
 		/// features that will be removed or changed in the next major version.
 		/// </summary>
-		IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request);
+		DeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request);
 
 		/// <summary>
 		/// Retrieves information about different cluster, node, and index level settings that use deprecated
 		/// features that will be removed or changed in the next major version.
 		/// </summary>
-		Task<IDeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null,
+		Task<DeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null,
 			CancellationToken ct = default
 		);
 
@@ -31,7 +31,7 @@ namespace Nest
 		/// Retrieves information about different cluster, node, and index level settings that use deprecated
 		/// features that will be removed or changed in the next major version.
 		/// </summary>
-		Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request,
+		Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -39,22 +39,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null) =>
+		public DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null) =>
 			DeprecationInfo(selector.InvokeOrDefault(new DeprecationInfoDescriptor()));
 
 		/// <inheritdoc />
-		public IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) =>
+		public DeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) =>
 			DoRequest<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(
+		public Task<DeprecationInfoResponse> DeprecationInfoAsync(
 			Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null,
 			CancellationToken ct = default
 		) => DeprecationInfoAsync(selector.InvokeOrDefault(new DeprecationInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeprecationInfoRequest, IDeprecationInfoResponse, DeprecationInfoResponse>
+		public Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

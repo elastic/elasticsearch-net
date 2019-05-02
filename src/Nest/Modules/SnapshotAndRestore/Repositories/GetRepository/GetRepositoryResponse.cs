@@ -4,26 +4,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	[ReadAs(typeof(GetRepositoryResponse))]
-	public interface IGetRepositoryResponse : IResponse
-	{
-		IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; }
-
-		AzureRepository Azure(string name);
-
-		FileSystemRepository FileSystem(string name);
-
-		HdfsRepository Hdfs(string name);
-
-		ReadOnlyUrlRepository ReadOnlyUrl(string name);
-
-		S3Repository S3(string name);
-	}
-
 	[DataContract]
 	[JsonFormatter(typeof(GetRepositoryResponseFormatter))]
-	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
+	public class GetRepositoryResponse : ResponseBase
 	{
 		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } =
 			EmptyReadOnly<string, ISnapshotRepository>.Dictionary;

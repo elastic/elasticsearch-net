@@ -4,14 +4,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ISegmentsResponse : IResponse
-	{
-		IReadOnlyDictionary<string, IndexSegment> Indices { get; }
-		ShardStatistics Shards { get; }
-	}
-
 	[DataContract]
-	public class SegmentsResponse : ResponseBase, ISegmentsResponse
+	public class SegmentsResponse : ResponseBase
 	{
 		[DataMember(Name ="indices")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IndexSegment>))]

@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatCount
 {
 	public class CatCountApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
 	{
 		public CatCountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -25,12 +25,12 @@ namespace Tests.Cat.CatCount
 			(client, r) => client.CatCountAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatCountRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatCountRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
 	}
 
 	public class CatCountSingleIndexApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
 	{
 		public CatCountSingleIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -46,7 +46,7 @@ namespace Tests.Cat.CatCount
 			(client, r) => client.CatCountAsync(new CatCountRequest(typeof(Project)))
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatCountRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatCountRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
 	}
 }

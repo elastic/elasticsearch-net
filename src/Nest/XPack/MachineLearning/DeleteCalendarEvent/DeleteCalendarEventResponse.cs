@@ -1,6 +1,4 @@
 ﻿namespace Nest
 {
-	public interface IDeleteCalendarEventResponse : IAcknowledgedResponse { }
-
-	public class DeleteCalendarEventResponse : AcknowledgedResponseBase, IDeleteCalendarEventResponse { }
+	public class DeleteCalendarEventResponse : AcknowledgedResponseBase { }
 }

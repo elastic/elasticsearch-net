@@ -13,7 +13,7 @@ using static Tests.Domain.Helpers.TestValueHelper;
 namespace Tests.Document.Single.Index
 {
 	public class IndexIngestApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		public IndexIngestApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

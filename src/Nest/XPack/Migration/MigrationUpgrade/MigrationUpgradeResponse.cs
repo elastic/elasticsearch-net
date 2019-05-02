@@ -4,68 +4,52 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IMigrationUpgradeResponse : IResponse
+	public class MigrationUpgradeResponse : ResponseBase
 	{
+		public override bool IsValid => ApiCall?.HttpStatusCode == 200 && !Failures.HasAny();
+
 		[DataMember(Name ="batches")]
-		long Batches { get; }
+		public long Batches { get; internal set; }
 
 		[DataMember(Name ="created")]
-		long Created { get; }
+		public long Created { get; internal set; }
 
 		[DataMember(Name ="deleted")]
-		long Deleted { get; }
+		public long Deleted { get; internal set; }
 
-		[DataMember(Name ="failures")]
-		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
+		[DataMember(Name = "failures")]
+		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; }
+			= EmptyReadOnly<BulkIndexByScrollFailure>.Collection;
 
 		[DataMember(Name ="noops")]
-		long Noops { get; }
+		public long Noops { get; internal set; }
 
 		[DataMember(Name ="retries")]
-		Retries Retries { get; }
+		public Retries Retries { get; internal set; }
 
 		/// <summary>
 		/// The id of the task if <see cref="MigrationUpgradeRequestParameters.WaitForCompletion" />
 		/// is set to <c>false</c> on the request
 		/// </summary>
 		[DataMember(Name ="task")]
-		TaskId Task { get; }
+		public TaskId Task { get; internal set; }
 
 		[DataMember(Name ="throttled_millis")]
-		long ThrottledMilliseconds { get; }
+		public long ThrottledMilliseconds { get; internal set; }
 
 		[DataMember(Name ="timed_out")]
-		bool TimedOut { get; }
+		public bool TimedOut { get; internal set; }
 
 		[DataMember(Name ="took")]
-		long Took { get; }
+		public long Took { get; internal set; }
 
 		[DataMember(Name ="total")]
-		long Total { get; }
+		public long Total { get; internal set; }
 
 		[DataMember(Name ="updated")]
-		long Updated { get; }
+		public long Updated { get; internal set; }
 
 		[DataMember(Name ="version_conflicts")]
-		long VersionConflicts { get; }
-	}
-
-	public class MigrationUpgradeResponse : ResponseBase, IMigrationUpgradeResponse
-	{
-		public long Batches { get; internal set; }
-		public long Created { get; internal set; }
-		public long Deleted { get; internal set; }
-		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; }
-		public override bool IsValid => ApiCall?.HttpStatusCode == 200 && !Failures.HasAny();
-		public long Noops { get; internal set; }
-		public Retries Retries { get; internal set; }
-
-		public TaskId Task { get; internal set; }
-		public long ThrottledMilliseconds { get; internal set; }
-		public bool TimedOut { get; internal set; }
-		public long Took { get; internal set; }
-		public long Total { get; internal set; }
-		public long Updated { get; internal set; }
 		public long VersionConflicts { get; internal set; }
 	}
 }

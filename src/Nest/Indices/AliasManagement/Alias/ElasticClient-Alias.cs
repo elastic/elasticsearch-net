@@ -25,36 +25,36 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the alias operation</param>
-		IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
+		BulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc />
-		IBulkAliasResponse Alias(IBulkAliasRequest request);
+		BulkAliasResponse Alias(IBulkAliasRequest request);
 
 		/// <inheritdoc />
-		Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
+		Task<BulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default);
+		Task<BulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IBulkAliasResponse Alias(IBulkAliasRequest request) =>
+		public BulkAliasResponse Alias(IBulkAliasRequest request) =>
 			DoRequest<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
+		public BulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
 			Alias(selector?.Invoke(new BulkAliasDescriptor()));
 
 		/// <inheritdoc />
-		public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IBulkAliasRequest, IBulkAliasResponse, BulkAliasResponse>(request, request.RequestParameters, ct);
+		public Task<BulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken ct = default) =>
+		public Task<BulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken ct = default) =>
 			AliasAsync(selector?.Invoke(new BulkAliasDescriptor()), ct);
 	}
 }

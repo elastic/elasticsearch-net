@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.UpdateDatafeed
 {
 	public class UpdateDatafeedApiTests
-		: MachineLearningIntegrationTestBase<IUpdateDatafeedResponse,
+		: MachineLearningIntegrationTestBase<UpdateDatafeedResponse,
 			IUpdateDatafeedRequest, UpdateDatafeedDescriptor<Metric>, UpdateDatafeedRequest>
 	{
 		public UpdateDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -74,7 +74,7 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 
 		protected override UpdateDatafeedDescriptor<Metric> NewDescriptor() => new UpdateDatafeedDescriptor<Metric>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IUpdateDatafeedResponse response)
+		protected override void ExpectResponse(UpdateDatafeedResponse response)
 		{
 			response.ShouldBeValid();
 

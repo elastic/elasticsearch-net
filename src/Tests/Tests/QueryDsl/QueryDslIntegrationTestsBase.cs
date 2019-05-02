@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.QueryDsl
 {
 	public abstract class QueryDslIntegrationTestsBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected QueryDslIntegrationTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

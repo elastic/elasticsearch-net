@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.AliasManagement.Alias
 {
 	public class AliasApiRemoveIndexTests
-		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, BulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
 		public AliasApiRemoveIndexTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

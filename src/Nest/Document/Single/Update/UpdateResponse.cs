@@ -2,41 +2,34 @@
 
 namespace Nest
 {
-	public interface IUpdateResponse<TDocument> : IResponse
-		where TDocument : class
+	public interface IUpdateResponse<out TDocument> : IResponse where TDocument : class
 	{
-		[DataMember(Name ="get")]
-		InstantGet<TDocument> Get { get; }
-
-		[DataMember(Name ="_id")]
-		string Id { get; }
-
-		[DataMember(Name ="_index")]
-		string Index { get; }
-
-		[DataMember(Name ="result")]
-		Result Result { get; }
-
-		[DataMember(Name ="_shards")]
-		ShardStatistics ShardsHit { get; }
-
-		[DataMember(Name ="_type")]
-		string Type { get; }
-
-		[DataMember(Name ="_version")]
-		long Version { get; }
+		IInlineGet<TDocument> Get { get; }
 	}
 
 	[DataContract]
 	public class UpdateResponse<TDocument> : ResponseBase, IUpdateResponse<TDocument>
 		where TDocument : class
 	{
-		public InstantGet<TDocument> Get { get; internal set; }
+		[DataMember(Name ="get")]
+		public IInlineGet<TDocument> Get { get; internal set; }
+
+		[DataMember(Name ="_id")]
 		public string Id { get; internal set; }
+
+		[DataMember(Name ="_index")]
 		public string Index { get; internal set; }
+
+		[DataMember(Name ="result")]
 		public Result Result { get; internal set; }
+
+		[DataMember(Name ="_shards")]
 		public ShardStatistics ShardsHit { get; internal set; }
+
+		[DataMember(Name ="_type")]
 		public string Type { get; internal set; }
+
+		[DataMember(Name ="_version")]
 		public long Version { get; internal set; }
 	}
 }

@@ -2,19 +2,10 @@
 
 namespace Nest
 {
-	public interface ISnapshotResponse : IResponse
-	{
-		[DataMember(Name ="accepted")]
-		bool Accepted { get; }
-
-		[DataMember(Name ="snapshot")]
-		Snapshot Snapshot { get; set; }
-	}
-
 	[DataContract]
-	public class SnapshotResponse : ResponseBase, ISnapshotResponse
+	public class SnapshotResponse : ResponseBase
 	{
-		private bool _accepted = false;
+		private bool _accepted;
 
 		[DataMember(Name ="accepted")]
 		public bool Accepted

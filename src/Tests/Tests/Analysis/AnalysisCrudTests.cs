@@ -10,7 +10,7 @@ using static Tests.Framework.Promisify;
 namespace Tests.Analysis
 {
 	public class AnalysisCrudTests
-		: CrudWithNoDeleteTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
+		: CrudWithNoDeleteTestBase<CreateIndexResponse, GetIndexSettingsResponse, UpdateIndexSettingsResponse>
 	{
 		public AnalysisCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -26,7 +26,7 @@ namespace Tests.Analysis
 		/**
 		* We can create the analysis settings as part of the create index call
 		*/
-		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, ICreateIndexResponse>(
+		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
 			(s, c, f) => c.CreateIndex(s, f),
@@ -64,7 +64,7 @@ namespace Tests.Analysis
 		* We then read back the analysis settings using `GetIndexSettings()`, you can use this method to get the settings for 1, or many indices in one go
 		*/
 		protected override LazyResponses Read() =>
-			Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IGetIndexSettingsResponse>(
+			Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, GetIndexSettingsResponse>(
 				GetInitializer,
 				GetFluent,
 				(s, c, f) => c.GetIndexSettings(f),
@@ -81,7 +81,7 @@ namespace Tests.Analysis
 		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact
 		* store our html char filter called `htmls`
 		*/
-		protected override void ExpectAfterCreate(IGetIndexSettingsResponse response)
+		protected override void ExpectAfterCreate(GetIndexSettingsResponse response)
 		{
 			response.Indices.Should().NotBeNull().And.HaveCount(1);
 			var index = response.Indices.Values.First();
@@ -99,7 +99,7 @@ namespace Tests.Analysis
 		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
 		*/
 		protected override LazyResponses Update() =>
-			Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse>(
+			Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(
 				UpdateInitializer,
 				UpdateFluent,
 				(s, c, f) =>
@@ -160,7 +160,7 @@ namespace Tests.Analysis
 		/**
 		* Here we assert that the `GetIndexSettings()` call after the update sees the newly introduced `differentHmtl` char filter
 		*/
-		protected override void ExpectAfterUpdate(IGetIndexSettingsResponse response)
+		protected override void ExpectAfterUpdate(GetIndexSettingsResponse response)
 		{
 			response.Indices.Should().NotBeNull().And.HaveCount(1);
 			var index = response.Indices.Values.First();

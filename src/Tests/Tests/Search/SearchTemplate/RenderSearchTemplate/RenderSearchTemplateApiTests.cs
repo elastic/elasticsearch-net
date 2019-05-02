@@ -14,7 +14,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 {
 	public class RenderSearchTemplateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, RenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor,
 			RenderSearchTemplateRequest>
 	{
 		private static readonly string inlineSearchTemplate = @"

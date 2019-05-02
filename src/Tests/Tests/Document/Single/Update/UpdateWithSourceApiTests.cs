@@ -14,7 +14,7 @@ using static Nest.Infer;
 namespace Tests.Document.Single.Update
 {
 	public class UpdateWithSourceApiTests
-		: ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
+		: ApiIntegrationTestBase<WritableCluster, UpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
 			UpdateRequest<Project, Project>>
 	{
 		public UpdateWithSourceApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

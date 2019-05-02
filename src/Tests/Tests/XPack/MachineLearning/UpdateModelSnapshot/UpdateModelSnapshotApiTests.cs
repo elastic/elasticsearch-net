@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 {
 	public class UpdateModelSnapshotApiTests
-		: MachineLearningIntegrationTestBase<IUpdateModelSnapshotResponse, IUpdateModelSnapshotRequest, UpdateModelSnapshotDescriptor,
+		: MachineLearningIntegrationTestBase<UpdateModelSnapshotResponse, IUpdateModelSnapshotRequest, UpdateModelSnapshotDescriptor,
 			UpdateModelSnapshotRequest>
 	{
 		public UpdateModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -53,7 +53,7 @@ namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 		protected override UpdateModelSnapshotDescriptor NewDescriptor() =>
 			new UpdateModelSnapshotDescriptor(CallIsolatedValue, CallIsolatedValue + "-snapshot");
 
-		protected override void ExpectResponse(IUpdateModelSnapshotResponse response)
+		protected override void ExpectResponse(UpdateModelSnapshotResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();

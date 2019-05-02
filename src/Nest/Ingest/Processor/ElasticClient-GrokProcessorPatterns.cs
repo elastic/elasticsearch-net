@@ -13,19 +13,19 @@ namespace Nest
 		/// https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the endpoint usage operation</param>
-		IGrokProcessorPatternsResponse GrokProcessorPatterns(Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null);
+		GrokProcessorPatternsResponse GrokProcessorPatterns(Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null);
 
 		/// <inheritdoc />
-		IGrokProcessorPatternsResponse GrokProcessorPatterns(IGrokProcessorPatternsRequest request);
+		GrokProcessorPatternsResponse GrokProcessorPatterns(IGrokProcessorPatternsRequest request);
 
 		/// <inheritdoc />
-		Task<IGrokProcessorPatternsResponse> GrokProcessorPatternsAsync(
+		Task<GrokProcessorPatternsResponse> GrokProcessorPatternsAsync(
 			Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGrokProcessorPatternsResponse> GrokProcessorPatternsAsync(IGrokProcessorPatternsRequest request,
+		Task<GrokProcessorPatternsResponse> GrokProcessorPatternsAsync(IGrokProcessorPatternsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -33,21 +33,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGrokProcessorPatternsResponse GrokProcessorPatterns(Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null) =>
+		public GrokProcessorPatternsResponse GrokProcessorPatterns(Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null) =>
 			GrokProcessorPatterns(selector.InvokeOrDefault(new GrokProcessorPatternsDescriptor()));
 
 		/// <inheritdoc />
-		public IGrokProcessorPatternsResponse GrokProcessorPatterns(IGrokProcessorPatternsRequest request) =>
+		public GrokProcessorPatternsResponse GrokProcessorPatterns(IGrokProcessorPatternsRequest request) =>
 			DoRequest<IGrokProcessorPatternsRequest, GrokProcessorPatternsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGrokProcessorPatternsResponse> GrokProcessorPatternsAsync(
+		public Task<GrokProcessorPatternsResponse> GrokProcessorPatternsAsync(
 			Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null,
 			CancellationToken ct = default
 		) => GrokProcessorPatternsAsync(selector.InvokeOrDefault(new GrokProcessorPatternsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGrokProcessorPatternsResponse> GrokProcessorPatternsAsync(IGrokProcessorPatternsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGrokProcessorPatternsRequest, IGrokProcessorPatternsResponse, GrokProcessorPatternsResponse>(request, request.RequestParameters, ct);
+		public Task<GrokProcessorPatternsResponse> GrokProcessorPatternsAsync(IGrokProcessorPatternsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGrokProcessorPatternsRequest, GrokProcessorPatternsResponse>(request, request.RequestParameters, ct);
 	}
 }

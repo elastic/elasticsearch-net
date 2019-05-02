@@ -9,7 +9,7 @@ namespace Tests.Ingest.GetPipeline
 {
 	//integration test is part of PipelineCrudTests
 	public class GetPipelineApiTests
-		: ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
+		: ApiTestBase<ReadOnlyCluster, GetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
 	{
 		private const string PipelineId = "pipeline-1";
 

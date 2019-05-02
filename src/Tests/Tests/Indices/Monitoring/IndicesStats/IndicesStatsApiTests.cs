@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.Monitoring.IndicesStats
 {
 	public class IndicesStatsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IIndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
 	{
 		public IndicesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

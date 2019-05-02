@@ -6,88 +6,63 @@ namespace Nest
 	/// <summary>
 	/// An item within a bulk response
 	/// </summary>
-	[InterfaceDataContract]
 	[JsonFormatter(typeof(BulkResponseItemFormatter))]
-	public interface IBulkResponseItem
+	public abstract class BulkResponseItemBase
 	{
 		/// <summary>
 		/// The error associated with the bulk operation
 		/// </summary>
 		[DataMember(Name = "error")]
-		Error Error { get; }
+		public Error Error { get; internal set; }
 
 		/// <summary>
 		/// The id of the document for the bulk operation
 		/// </summary>
 		[DataMember(Name = "_id")]
-		string Id { get; }
+		public string Id { get; internal set; }
 
 		/// <summary>
 		/// The index against which the bulk operation ran
 		/// </summary>
 		[DataMember(Name = "_index")]
-		string Index { get; }
+		public string Index { get; internal set; }
 
-		/// <summary>
-		/// Specifies whether this particular bulk operation succeeded or not
-		/// </summary>
-		bool IsValid { get; }
-
-		/// <summary>
-		/// The type of bulk operation
-		/// </summary>
-		string Operation { get; }
+		/// <summary> The type of bulk operation </summary>
+		public abstract string Operation { get; }
 
 		[DataMember(Name = "_primary_term")]
-		long PrimaryTerm { get; }
+		public long PrimaryTerm { get; internal set; }
 
-		/// <summary>
-		/// The result of the bulk operation
-		/// </summary>
+		/// <summary> The result of the bulk operation</summary>
 		[DataMember(Name = "result")]
-		string Result { get; }
+		public string Result { get; internal set; }
 
 		[DataMember(Name = "_seq_no")]
-		long SequenceNumber { get; }
+		public long SequenceNumber { get; internal set; }
 
 		/// <summary>
 		/// The shards associated with the bulk operation
 		/// </summary>
 		[DataMember(Name = "_shards")]
-		ShardStatistics Shards { get; }
+		public ShardStatistics Shards { get; internal set; }
 
-		/// <summary>
-		/// The status of the bulk operation
-		/// </summary>
+		/// <summary> The status of the bulk operation </summary>
 		[DataMember(Name = "status")]
-		int Status { get; }
+		public int Status { get; internal set; }
 
 		/// <summary>
 		/// The type against which the bulk operation ran
 		/// </summary>
 		[DataMember(Name = "_type")]
-		string Type { get; }
+		public string Type { get; internal set; }
+
+		/// <summary> The version of the document </summary>
+		[DataMember(Name = "_version")]
+		public long Version { get; internal set; }
 
 		/// <summary>
-		/// The version of the document
+		/// Specifies whether this particular bulk operation succeeded or not
 		/// </summary>
-		[DataMember(Name = "_version")]
-		long Version { get; }
-	}
-
-	/// <inheritdoc />
-	public abstract class BulkResponseItemBase : IBulkResponseItem
-	{
-		/// <inheritdoc />
-		public Error Error { get; internal set; }
-
-		/// <inheritdoc />
-		public string Id { get; internal set; }
-
-		/// <inheritdoc />
-		public string Index { get; internal set; }
-
-		/// <inheritdoc />
 		public bool IsValid
 		{
 			get
@@ -106,31 +81,7 @@ namespace Nest
 				}
 			}
 		}
-
-		/// <inheritdoc />
-		public abstract string Operation { get; }
-
-		/// <inheritdoc />
-		public long PrimaryTerm { get; internal set; }
-
-		/// <inheritdoc />
-		public string Result { get; internal set; }
-
-		/// <inheritdoc />
-		public long SequenceNumber { get; internal set; }
-
-		/// <inheritdoc />
-		public ShardStatistics Shards { get; internal set; }
-
-		/// <inheritdoc />
-		public int Status { get; internal set; }
-
-		/// <inheritdoc />
-		public string Type { get; internal set; }
-
-		/// <inheritdoc />
-		public long Version { get; internal set; }
-
+    
 		public override string ToString() =>
 			$"{Operation} returned {Status} _index: {Index} _type: {Type} _id: {Id} _version: {Version} error: {Error}";
 	}

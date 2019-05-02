@@ -4,24 +4,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IClusterHealthResponse : IResponse
-	{
-		int ActivePrimaryShards { get; }
-		int ActiveShards { get; }
-		string ClusterName { get; }
-		IReadOnlyDictionary<IndexName, IndexHealthStats> Indices { get; }
-		int InitializingShards { get; }
-		int NumberOfDataNodes { get; }
-		int NumberOfNodes { get; }
-		int NumberOfPendingTasks { get; }
-		int RelocatingShards { get; }
-		Health Status { get; }
-		bool TimedOut { get; }
-		int UnassignedShards { get; }
-	}
-
 	[DataContract]
-	public class ClusterHealthResponse : ResponseBase, IClusterHealthResponse
+	public class ClusterHealthResponse : ResponseBase
 	{
 		[DataMember(Name = "active_primary_shards")]
 		public int ActivePrimaryShards { get; internal set; }

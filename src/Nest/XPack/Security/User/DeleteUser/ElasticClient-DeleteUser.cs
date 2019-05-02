@@ -8,39 +8,39 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IDeleteUserResponse DeleteUser(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null);
+		DeleteUserResponse DeleteUser(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null);
 
 		/// <inheritdoc />
-		IDeleteUserResponse DeleteUser(IDeleteUserRequest request);
+		DeleteUserResponse DeleteUser(IDeleteUserRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
+		Task<DeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default);
+		Task<DeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteUserResponse DeleteUser(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null) =>
+		public DeleteUserResponse DeleteUser(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null) =>
 			DeleteUser(selector.InvokeOrDefault(new DeleteUserDescriptor(username)));
 
 		/// <inheritdoc />
-		public IDeleteUserResponse DeleteUser(IDeleteUserRequest request) =>
+		public DeleteUserResponse DeleteUser(IDeleteUserRequest request) =>
 			DoRequest<IDeleteUserRequest, DeleteUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteUserResponse> DeleteUserAsync(
+		public Task<DeleteUserResponse> DeleteUserAsync(
 			Name username,
 			Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
 			CancellationToken ct = default
 		) => DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteUserRequest, IDeleteUserResponse, DeleteUserResponse>(request, request.RequestParameters, ct);
+		public Task<DeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteUserRequest, DeleteUserResponse>(request, request.RequestParameters, ct);
 	}
 }

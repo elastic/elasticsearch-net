@@ -10,39 +10,39 @@ namespace Nest
 		/// <summary>
 		/// Stops the Watcher/Alerting service, if the service is running
 		/// </summary>
-		IStopWatcherResponse StopWatcher(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null);
+		StopWatcherResponse StopWatcher(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null);
 
 		/// <inheritdoc />
-		IStopWatcherResponse StopWatcher(IStopWatcherRequest request);
+		StopWatcherResponse StopWatcher(IStopWatcherRequest request);
 
 		/// <inheritdoc />
-		Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null,
+		Task<StopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default);
+		Task<StopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IStopWatcherResponse StopWatcher(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null) =>
+		public StopWatcherResponse StopWatcher(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null) =>
 			StopWatcher(selector.InvokeOrDefault(new StopWatcherDescriptor()));
 
 		/// <inheritdoc />
-		public IStopWatcherResponse StopWatcher(IStopWatcherRequest request) =>
+		public StopWatcherResponse StopWatcher(IStopWatcherRequest request) =>
 			DoRequest<IStopWatcherRequest, StopWatcherResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStopWatcherResponse> StopWatcherAsync(
+		public Task<StopWatcherResponse> StopWatcherAsync(
 			Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null,
 			CancellationToken ct = default
 		) => StopWatcherAsync(selector.InvokeOrDefault(new StopWatcherDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStopWatcherRequest, IStopWatcherResponse, StopWatcherResponse>
+		public Task<StopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IStopWatcherRequest, StopWatcherResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

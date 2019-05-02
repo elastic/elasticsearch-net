@@ -9,7 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 {
-	public class SnapshotApiTests : ApiTestBase<ReadOnlyCluster, ISnapshotResponse, ISnapshotRequest, SnapshotDescriptor, SnapshotRequest>
+	public class SnapshotApiTests : ApiTestBase<ReadOnlyCluster, SnapshotResponse, ISnapshotRequest, SnapshotDescriptor, SnapshotRequest>
 	{
 		private static readonly string _repos = "repository1";
 		private static readonly string _snapshot = "snapshot1";

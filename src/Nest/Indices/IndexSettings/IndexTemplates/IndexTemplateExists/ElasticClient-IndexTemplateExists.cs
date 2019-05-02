@@ -11,19 +11,19 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IExistsResponse IndexTemplateExists(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null);
+		ExistsResponse IndexTemplateExists(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null);
 
 		/// <inheritdoc />
-		IExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request);
+		ExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> IndexTemplateExistsAsync(Name template,
+		Task<ExistsResponse> IndexTemplateExistsAsync(Name template,
 			Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request,
+		Task<ExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -31,22 +31,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IExistsResponse IndexTemplateExists(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null) =>
+		public ExistsResponse IndexTemplateExists(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null) =>
 			IndexTemplateExists(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(template)));
 
 		/// <inheritdoc />
-		public IExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request) =>
+		public ExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request) =>
 			DoRequest<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexTemplateExistsAsync(Name template,
+		public Task<ExistsResponse> IndexTemplateExistsAsync(Name template,
 			Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) =>
 			IndexTemplateExistsAsync(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(template)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndexTemplateExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+		public Task<ExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

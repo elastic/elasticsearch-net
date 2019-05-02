@@ -2,13 +2,8 @@
 
 namespace Nest
 {
-	public interface IRenderSearchTemplateResponse : IResponse
-	{
-		ILazyDocument TemplateOutput { get; set; }
-	}
-
 	[DataContract]
-	public class RenderSearchTemplateResponse : ResponseBase, IRenderSearchTemplateResponse
+	public class RenderSearchTemplateResponse : ResponseBase
 	{
 		[DataMember(Name ="template_output")]
 		public ILazyDocument TemplateOutput { get; set; }

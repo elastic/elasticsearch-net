@@ -13,7 +13,7 @@ namespace Tests.XPack.Security.RoleMapping
 {
 	[SkipVersion("<5.5.0", "Does not exist in earlier versions")]
 	public class RoleMappingCrudTests
-		: CrudTestBase<XPackCluster, IPutRoleMappingResponse, IGetRoleMappingResponse, IPutRoleMappingResponse, IDeleteRoleMappingResponse>
+		: CrudTestBase<XPackCluster, PutRoleMappingResponse, GetRoleMappingResponse, PutRoleMappingResponse, DeleteRoleMappingResponse>
 	{
 		private readonly string _dn = "*,ou=admin,dc=example,dc=com";
 		private readonly string[] _groups = { "group1", "group2" };
@@ -27,7 +27,7 @@ namespace Tests.XPack.Security.RoleMapping
 		private static string CreateRoleMappingName(string s) => $"role-mapping-{s}";
 
 		protected override LazyResponses Create() =>
-			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, IPutRoleMappingResponse>(
+			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, PutRoleMappingResponse>(
 				CreateInitializer,
 				CreateFluent,
 				(s, c, f) => c.PutRoleMapping(CreateRoleMappingName(s), f),
@@ -68,7 +68,7 @@ namespace Tests.XPack.Security.RoleMapping
 			);
 
 		protected override LazyResponses Read() =>
-			Calls<GetRoleMappingDescriptor, GetRoleMappingRequest, IGetRoleMappingRequest, IGetRoleMappingResponse>(
+			Calls<GetRoleMappingDescriptor, GetRoleMappingRequest, IGetRoleMappingRequest, GetRoleMappingResponse>(
 				ReadInitializer,
 				ReadFluent,
 				(s, c, f) => c.GetRoleMapping(f),
@@ -82,7 +82,7 @@ namespace Tests.XPack.Security.RoleMapping
 		protected IGetRoleMappingRequest ReadFluent(string role, GetRoleMappingDescriptor d) => d.Name(CreateRoleMappingName(role));
 
 		protected override LazyResponses Update() =>
-			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, IPutRoleMappingResponse>(
+			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, PutRoleMappingResponse>(
 				UpdateInitializer,
 				UpdateFluent,
 				(s, c, f) => c.PutRoleMapping(CreateRoleMappingName(s), f),
@@ -123,7 +123,7 @@ namespace Tests.XPack.Security.RoleMapping
 			);
 
 		protected override LazyResponses Delete() =>
-			Calls<DeleteRoleMappingDescriptor, DeleteRoleMappingRequest, IDeleteRoleMappingRequest, IDeleteRoleMappingResponse>(
+			Calls<DeleteRoleMappingDescriptor, DeleteRoleMappingRequest, IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(
 				DeleteInitializer,
 				DeleteFluent,
 				(s, c, f) => c.DeleteRoleMapping(CreateRoleMappingName(s), f),
@@ -136,7 +136,7 @@ namespace Tests.XPack.Security.RoleMapping
 
 		protected IDeleteRoleMappingRequest DeleteFluent(string role, DeleteRoleMappingDescriptor d) => d;
 
-		protected override void ExpectAfterCreate(IGetRoleMappingResponse response)
+		protected override void ExpectAfterCreate(GetRoleMappingResponse response)
 		{
 			response.RoleMappings.Should().NotBeEmpty();
 			var mapping = response.RoleMappings.First().Value;
@@ -150,7 +150,7 @@ namespace Tests.XPack.Security.RoleMapping
 			allMapping.Should().NotBeNull("expect to get back an all role mapping rule");
 		}
 
-		protected override void ExpectAfterUpdate(IGetRoleMappingResponse response)
+		protected override void ExpectAfterUpdate(GetRoleMappingResponse response)
 		{
 			response.RoleMappings.Should().NotBeEmpty();
 			var mapping = response.RoleMappings.First().Value;
@@ -164,7 +164,7 @@ namespace Tests.XPack.Security.RoleMapping
 			allMapping.Should().NotBeNull("expect to get back an all role mapping rule");
 		}
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteRoleMappingResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteRoleMappingResponse response)
 		{
 			response.Found.Should().BeFalse();
 			response.ServerError.Should().BeNull();

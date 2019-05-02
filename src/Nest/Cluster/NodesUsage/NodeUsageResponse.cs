@@ -3,14 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface INodesUsageResponse : INodesResponse
-	{
-		string ClusterName { get; }
-
-		IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; }
-	}
-
-	public class NodesUsageResponse : NodesResponseBase, INodesUsageResponse
+	public class NodesUsageResponse : NodesResponseBase
 	{
 		[DataMember(Name ="cluster_name")]
 		public string ClusterName { get; internal set; }

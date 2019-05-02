@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.Validate
 {
 	public class ValidateQueryApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, ValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>,
 			ValidateQueryRequest<Project>>
 	{
 		public ValidateQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -28,7 +28,7 @@ namespace Tests.Search.Validate
 	}
 
 	public class ValidateInvalidQueryApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, ValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>,
 			ValidateQueryRequest<Project>>
 	{
 		private readonly ValidateQueryDescriptor<Project> _descriptor = new ValidateQueryDescriptor<Project>()
@@ -64,6 +64,6 @@ namespace Tests.Search.Validate
 			(c, r) => c.ValidateQueryAsync(_request)
 		);
 
-		protected override void ExpectResponse(IValidateQueryResponse response) => response.Valid.Should().BeFalse();
+		protected override void ExpectResponse(ValidateQueryResponse response) => response.Valid.Should().BeFalse();
 	}
 }

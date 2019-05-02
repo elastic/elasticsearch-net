@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface IClearSqlCursorResponse : IResponse
+	public class ClearSqlCursorResponse : ResponseBase
 	{
 		[DataMember(Name ="succeeded")]
-		bool Succeeded { get; }
-	}
-
-	public class ClearSqlCursorResponse : ResponseBase, IClearSqlCursorResponse
-	{
 		public bool Succeeded { get; internal set; }
 	}
 }

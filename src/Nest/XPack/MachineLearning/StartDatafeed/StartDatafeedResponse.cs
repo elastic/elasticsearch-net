@@ -2,12 +2,7 @@
 
 namespace Nest
 {
-	public interface IStartDatafeedResponse : IResponse
-	{
-		bool Started { get; }
-	}
-
-	public class StartDatafeedResponse : ResponseBase, IStartDatafeedResponse
+	public class StartDatafeedResponse : ResponseBase
 	{
 		[DataMember(Name ="started")]
 		public bool Started { get; internal set; }

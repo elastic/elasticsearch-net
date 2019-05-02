@@ -7,34 +7,34 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		IGetTaskResponse GetTask(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null);
+		GetTaskResponse GetTask(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null);
 
-		IGetTaskResponse GetTask(IGetTaskRequest request);
+		GetTaskResponse GetTask(IGetTaskRequest request);
 
-		Task<IGetTaskResponse> GetTaskAsync(
-			TaskId id, 
+		Task<GetTaskResponse> GetTaskAsync(
+			TaskId id,
 			Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
 			CancellationToken ct = default
 		);
 
-		Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default);
+		Task<GetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
-		public IGetTaskResponse GetTask(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null) =>
+		public GetTaskResponse GetTask(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null) =>
 			GetTask(selector.InvokeOrDefault(new GetTaskDescriptor(id)));
 
-		public IGetTaskResponse GetTask(IGetTaskRequest request) =>
+		public GetTaskResponse GetTask(IGetTaskRequest request) =>
 			DoRequest<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters);
 
-		public Task<IGetTaskResponse> GetTaskAsync(
+		public Task<GetTaskResponse> GetTaskAsync(
 			TaskId id,
 			Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
 			CancellationToken ct = default
 		) => GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(id)), ct);
 
-		public Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetTaskRequest, IGetTaskResponse, GetTaskResponse>(request, request.RequestParameters, ct);
+		public Task<GetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters, ct);
 	}
 }

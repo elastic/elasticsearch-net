@@ -295,6 +295,20 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 		}
 
+		/**
+		* [[member-expressions-only]]
+		* ==== Member Expressions only
+		* The expression passed to Field should only be a MemberExpression
+		* https://docs.microsoft.com/en-us/dotnet/api/system.linq.expressions.memberexpression?view=netframework-4.7.2
+		*
+		*/
+		[U]
+		public void OnlyMemberExpressionAllowed()
+		{
+			var fieldExpression = Field<Project>(p => p.Name + 2);
+		}
+
+
 		/**[[field-name-attribute]]
 		* ==== Attribute based naming
 		*
@@ -575,7 +589,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		public class GeoModel
 		{
-			[JsonProperty("country_iso_code")]
+			[DataMember(Name = "country_iso_code")]
 			public string CountryIsoCode { get; set; }
 		}
 

@@ -13,18 +13,18 @@ namespace Nest
 		/// <para> </para>
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-update-settings.html
 		/// </summary>
-		IClusterPutSettingsResponse ClusterPutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector);
+		ClusterPutSettingsResponse ClusterPutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector);
 
 		/// <inheritdoc />
-		Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
+		Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		IClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest request);
+		ClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest request);
 
 		/// <inheritdoc />
-		Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
+		Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,23 +32,23 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IClusterPutSettingsResponse ClusterPutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector) =>
+		public ClusterPutSettingsResponse ClusterPutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector) =>
 			ClusterPutSettings(selector.InvokeOrDefault(new ClusterPutSettingsDescriptor()));
 
 		/// <inheritdoc />
-		public IClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest request) =>
+		public ClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest request) =>
 			DoRequest<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
+		public Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
 			CancellationToken ct = default
 		) =>
 			ClusterPutSettingsAsync(selector.InvokeOrDefault(new ClusterPutSettingsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
+		public Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IClusterPutSettingsRequest, IClusterPutSettingsResponse, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

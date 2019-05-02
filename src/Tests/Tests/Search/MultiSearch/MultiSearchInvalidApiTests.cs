@@ -15,7 +15,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.MultiSearch
 {
 	public class MultiSearchInvalidApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchInvalidApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -80,9 +80,9 @@ namespace Tests.Search.MultiSearch
 			AssertInvalidResponse(responses[2]);
 
 			/** GetInvalidResponses returns all the invalid responses as IResponse **/
-			var invalidResponses = r.GetInvalidResponses();
-			invalidResponses.Should().NotBeNull().And.HaveCount(2);
-			foreach (var response in invalidResponses)
+			var nvalidResponses = r.GetInvalidResponses();
+			nvalidResponses.Should().NotBeNull().And.HaveCount(2);
+			foreach (var response in nvalidResponses)
 				AssertInvalidResponse(response);
 		});
 

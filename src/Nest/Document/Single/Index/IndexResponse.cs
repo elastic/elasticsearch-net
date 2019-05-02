@@ -2,20 +2,8 @@
 
 namespace Nest
 {
-	public interface IIndexResponse : IResponse
-	{
-		string Id { get; }
-		string Index { get; }
-		long PrimaryTerm { get; }
-		Result Result { get; }
-		long SequenceNumber { get; }
-		ShardStatistics Shards { get; }
-		string Type { get; }
-		long Version { get; }
-	}
-
 	[DataContract]
-	public class IndexResponse : ResponseBase, IIndexResponse
+	public class IndexResponse : ResponseBase
 	{
 		[DataMember(Name ="_id")]
 		public string Id { get; internal set; }

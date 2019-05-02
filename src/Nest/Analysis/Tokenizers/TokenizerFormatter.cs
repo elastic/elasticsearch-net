@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 
 
 namespace Nest
@@ -7,58 +8,64 @@ namespace Nest
 	{
 		private static byte[] TypeField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
 
+		private static readonly AutomataDictionary TokenizerTypes = new AutomataDictionary
+		{
+			{ "char_group", 0 },
+			{ "edgengram", 1 },
+			{ "edge_ngram", 1 },
+			{ "ngram", 2 },
+			{ "path_hierarchy", 3 },
+			{ "pattern", 4 },
+			{ "standard", 5 },
+			{ "uax_url_email", 6 },
+			{ "whitespace", 7 },
+			{ "kuromoji_tokenizer", 8 },
+			{ "icu_tokenizer", 9 },
+			{ "nori_tokenizer", 10 },
+		};
+
 		public ITokenizer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var arraySegment = reader.ReadNextBlockSegment();
 			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 			var count = 0;
-			string tokenizerType = null;
+			ArraySegment<byte> tokenizerType = default;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
 				if (propertyName.EqualsBytes(TypeField))
 				{
-					tokenizerType = segmentReader.ReadString();
+					tokenizerType = segmentReader.ReadStringSegmentUnsafe();
 					break;
 				}
 
 				segmentReader.ReadNextBlock();
 			}
 
-			if (tokenizerType == null)
+			if (tokenizerType == default)
 				return null;
 
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
-
-			// TODO: Move to AutomataDictionary
-			switch (tokenizerType)
+			if (TokenizerTypes.TryGetValue(tokenizerType, out var value))
 			{
-				case "char_group":
-					return Deserialize<CharGroupTokenizer>(ref segmentReader, formatterResolver);
-				case "edgengram":
-				case "edge_ngram":
-					return Deserialize<EdgeNGramTokenizer>(ref segmentReader, formatterResolver);
-				case "ngram":
-					return Deserialize<NGramTokenizer>(ref segmentReader, formatterResolver);
-				case "path_hierarchy":
-					return Deserialize<PathHierarchyTokenizer>(ref segmentReader, formatterResolver);
-				case "pattern":
-					return Deserialize<PatternTokenizer>(ref segmentReader, formatterResolver);
-				case "standard":
-					return Deserialize<StandardTokenizer>(ref segmentReader, formatterResolver);
-				case "uax_url_email":
-					return Deserialize<UaxEmailUrlTokenizer>(ref segmentReader, formatterResolver);
-				case "whitespace":
-					return Deserialize<WhitespaceTokenizer>(ref segmentReader, formatterResolver);
-				case "kuromoji_tokenizer":
-					return Deserialize<KuromojiTokenizer>(ref segmentReader, formatterResolver);
-				case "icu_tokenizer":
-					return Deserialize<IcuTokenizer>(ref segmentReader, formatterResolver);
-				case "nori_tokenizer":
-					return Deserialize<NoriTokenizer>(ref segmentReader, formatterResolver);
-				default:
-					return null;
+				switch (value)
+				{
+					case 0: return Deserialize<CharGroupTokenizer>(ref segmentReader, formatterResolver);
+					case 1: return Deserialize<EdgeNGramTokenizer>(ref segmentReader, formatterResolver);
+					case 2: return Deserialize<NGramTokenizer>(ref segmentReader, formatterResolver);
+					case 3: return Deserialize<PathHierarchyTokenizer>(ref segmentReader, formatterResolver);
+					case 4: return Deserialize<PatternTokenizer>(ref segmentReader, formatterResolver);
+					case 5: return Deserialize<StandardTokenizer>(ref segmentReader, formatterResolver);
+					case 6: return Deserialize<UaxEmailUrlTokenizer>(ref segmentReader, formatterResolver);
+					case 7: return Deserialize<WhitespaceTokenizer>(ref segmentReader, formatterResolver);
+					case 8: return Deserialize<KuromojiTokenizer>(ref segmentReader, formatterResolver);
+					case 9: return Deserialize<IcuTokenizer>(ref segmentReader, formatterResolver);
+					case 10: return Deserialize<NoriTokenizer>(ref segmentReader, formatterResolver);
+					default: return null;
+				}
 			}
+
+			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, ITokenizer value, IJsonFormatterResolver formatterResolver)

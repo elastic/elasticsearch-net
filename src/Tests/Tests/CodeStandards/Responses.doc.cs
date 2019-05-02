@@ -26,14 +26,14 @@ namespace Tests.CodeStandards
 				typeof(ITypeMapping).GetProperty(nameof(ITypeMapping.Meta)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.DynamicDateFormats)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.Meta)),
-				typeof(IBulkResponse).GetProperty(nameof(IBulkResponse.ItemsWithErrors)),
-				typeof(IStartBasicLicenseResponse).GetProperty(nameof(IStartBasicLicenseResponse.Acknowledge)),
-				typeof(IFieldCapabilitiesResponse).GetProperty(nameof(IFieldCapabilitiesResponse.Fields)),
-				typeof(IMultiSearchResponse).GetProperty(nameof(IMultiSearchResponse.AllResponses)),
+				typeof(BulkResponse).GetProperty(nameof(BulkResponse.ItemsWithErrors)),
+				typeof(StartBasicLicenseResponse).GetProperty(nameof(StartBasicLicenseResponse.Acknowledge)),
+				typeof(FieldCapabilitiesResponse).GetProperty(nameof(FieldCapabilitiesResponse.Fields)),
+				typeof(MultiSearchResponse).GetProperty(nameof(MultiSearchResponse.AllResponses)),
 			};
 
-			var responseInterfaceTypes = from t in typeof(IResponse).Assembly().Types()
-								where t.IsInterface() && typeof(IResponse).IsAssignableFrom(t)
+			var responseInterfaceTypes = from t in typeof(IResponse).Assembly.Types()
+								where t.IsInterface && typeof(IResponse).IsAssignableFrom(t)
 								select t;
 
 			var ruleBreakers = new List<string>();
@@ -45,6 +45,40 @@ namespace Tests.CodeStandards
 
 			ruleBreakers.Should().BeEmpty();
 		}
+
+		[U] public void ResponsesShouldNotHaveInterfaceUnlessThatInterfaceIsCovariant()
+		{
+			var responses = from t in typeof(IResponse).Assembly.ExportedTypes
+							where t.IsClass && typeof(IResponse).IsAssignableFrom(t)
+							select t;
+
+			var offenders = new List<string>();
+			foreach (var r in responses)
+			{
+				var interfaces = r.GetInterfaces();
+				var sameNamedInterface = interfaces.FirstOrDefault(i => i.Name.StartsWith("I" + r.Name));
+				if (sameNamedInterface != null)
+				{
+					if (!sameNamedInterface.IsGenericType)
+					{
+						offenders.Add(sameNamedInterface.Name + " is not generic and thus can not be an allow covariant interface");
+						continue;
+					}
+					else
+					{
+						var generic = sameNamedInterface.GetGenericTypeDefinition();
+						var genericArg = generic.GetTypeInfo().GenericTypeParameters
+							.FirstOrDefault(a => a.GenericParameterAttributes.HasFlag(GenericParameterAttributes.Covariant));
+						if (genericArg == null)
+							offenders.Add(sameNamedInterface.Name + " is generic but not of its type arguments are covariant");
+					}
+				}
+			}
+			offenders.Should().BeEmpty("Responses may only have a same named interface if that interface is used to provide covariance");
+
+
+		}
+
 
 		private static readonly Type[] ResponseDictionaries = {typeof(AggregateDictionary)};
 
@@ -63,7 +97,7 @@ namespace Tests.CodeStandards
 				{
 					ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 				}
-				else if (propertyInfo.PropertyType.IsGenericType())
+				else if (propertyInfo.PropertyType.IsGenericType)
 				{
 					var genericTypeDefinition = propertyInfo.PropertyType.GetGenericTypeDefinition();
 					if (genericTypeDefinition == typeof(IDictionary<,>) ||
@@ -75,7 +109,7 @@ namespace Tests.CodeStandards
 						ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 					}
 				}
-				else if (propertyInfo.PropertyType.IsClass() &&
+				else if (propertyInfo.PropertyType.IsClass &&
 						 (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
 						 //Do not traverse known response dictionaries
 						 && !ResponseDictionaries.Contains(propertyInfo.PropertyType)

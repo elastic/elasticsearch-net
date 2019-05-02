@@ -12,7 +12,7 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 {
 	[SkipVersion("<6.3.0", "Not running on latest version")]
 	public class InvalidMigrationUpgradeApiTests
-		: ApiIntegrationTestBase<XPackCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, MigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor,
 			MigrationUpgradeRequest>
 	{
 		public InvalidMigrationUpgradeApiTests(XPackCluster cluster, EndpointUsage usage)
@@ -50,7 +50,7 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 				client.DeleteIndex(v);
 		}
 
-		protected override void ExpectResponse(IMigrationUpgradeResponse response)
+		protected override void ExpectResponse(MigrationUpgradeResponse response)
 		{
 			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();

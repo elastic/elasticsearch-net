@@ -21,26 +21,9 @@ namespace Tests.ClientConcepts.Connection
 	 * === Modifying the default connection
 	 *
 	 * The client abstracts sending the request and creating a response behind `IConnection` and the default
-	 * implementation uses
+	 * implementation uses https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx[`System.Net.Http.HttpClient`].
 	 *
-	 * - https://msdn.microsoft.com/en-us/library/system.net.webrequest(v=vs.110).aspx[`System.Net.WebRequest`] for Desktop CLR
-	 * - https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx[`System.Net.Http.HttpClient`] for Core CLR
-	 *
-	 * The reason for different implementations is that `WebRequest` and `ServicePoint` are not directly available
-	 * on netstandard 1.3.
-	 *
-	 * The Desktop CLR implementation using `WebRequest` is the most mature implementation, having been tried and trusted
-	 * in production since the beginning of NEST. For this reason, we aren't quite ready to it give up in favour of
-	 * a `HttpClient` implementation across all CLR versions.
-	 *
-	 * In addition to production usage, there are also a couple of important toggles that are easy to set against a
-	 * `ServicePoint` that are not possible to set as yet on `HttpClient`.
-	 *
-	 * Finally, another limitation is that `HttpClient` has no synchronous code paths, so supporting these means
-	 * doing hacky async patches which definitely need time to bake.
-	 *
-	 * So why would you ever want to pass your own `IConnection`? Let's look at a couple of examples
-	 *
+	 * Why would you ever want to pass your own `IConnection`? Let's look at a couple of examples
 	 */
 	public class ModifyingTheDefaultConnection
 	{
@@ -121,12 +104,6 @@ namespace Tests.ClientConcepts.Connection
 		* By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
 		* provides some examples
 		*
-		*
-		* [[servicepoint-behaviour]]
-		* ===== ServicePoint behaviour
-		*
-		* If you are running on the Desktop CLR you can override specific properties for the current `ServicePoint` easily
-		* by overriding `AlterServicePoint` on an `IConnection` implementation deriving from `HttpConnection`
 		*/
 #if !DOTNETCORE
 		public class MyCustomHttpConnection : HttpConnection
@@ -156,7 +133,7 @@ namespace Tests.ClientConcepts.Connection
 		 * See <<working-with-certificates, Working with certificates>> for further details.
 		 */
 #endif
-#if DOTNETCORE
+
 		/*
 		* [[kerberos-authentication]]
 		* ===== Kerberos Authentication
@@ -177,9 +154,5 @@ namespace Tests.ClientConcepts.Connection
 				return message;
 			}
 		}
-#endif
-
-
-
 	}
 }

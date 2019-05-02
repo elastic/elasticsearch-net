@@ -102,7 +102,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			//hide
 			Expect(expected).WhenSerializing(analyzeResponse as AnalyzeResponse);
 
-			/**which is deserialized to an instance of `IAnalyzeResponse` by NEST
+			/**which is deserialized to an instance of `AnalyzeResponse` by NEST
 			 * that we can work with
 			 */
 			foreach (var analyzeToken in analyzeResponse.Tokens)

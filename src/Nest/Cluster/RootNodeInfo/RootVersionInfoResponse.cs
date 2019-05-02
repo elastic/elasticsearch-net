@@ -2,15 +2,8 @@
 
 namespace Nest
 {
-	public interface IRootNodeInfoResponse : IResponse
-	{
-		string Name { get; }
-		string Tagline { get; }
-		ElasticsearchVersionInfo Version { get; }
-	}
-
 	[DataContract]
-	public class RootNodeInfoResponse : ResponseBase, IRootNodeInfoResponse
+	public class RootNodeInfoResponse : ResponseBase
 	{
 		[DataMember(Name ="name")]
 		public string Name { get; internal set; }

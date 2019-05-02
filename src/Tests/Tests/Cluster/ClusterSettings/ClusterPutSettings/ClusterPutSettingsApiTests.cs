@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
 	public class ClusterPutSettingsApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
 			ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -44,7 +44,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 			(client, r) => client.ClusterPutSettingsAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterPutSettingsResponse response)
+		protected override void ExpectResponse(ClusterPutSettingsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();
@@ -53,7 +53,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 	}
 
 	public class ClusterPutSettingsNoopApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
 			ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsNoopApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -76,7 +76,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 			(client, r) => client.ClusterPutSettingsAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterPutSettingsResponse response)
+		protected override void ExpectResponse(ClusterPutSettingsResponse response)
 		{
 			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();

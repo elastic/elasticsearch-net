@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Watcher.PutWatch
 {
-	public class PutWatchApiTests : ApiIntegrationTestBase<XPackCluster, IPutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
+	public class PutWatchApiTests : ApiIntegrationTestBase<XPackCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
 	{
 		public PutWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -704,7 +704,7 @@ namespace Tests.XPack.Watcher.PutWatch
 
 		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPutWatchResponse response)
+		protected override void ExpectResponse(PutWatchResponse response)
 		{
 			response.Created.Should().BeTrue();
 			response.Version.Should().Be(1);

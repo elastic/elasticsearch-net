@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search
 {
 	public abstract class SearchUsageTestBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected TermQuery ProjectFilter = new TermQuery
 		{
@@ -43,7 +43,7 @@ namespace Tests.Search
 
 		[U] protected override void SerializesFluent() => base.SerializesFluent();
 
-		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedStatusCode();
 
 		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
 

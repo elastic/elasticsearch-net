@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Single.Update
 {
 	public class UpdateApiTests
-		: ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
+		: ApiIntegrationTestBase<WritableCluster, UpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
 			UpdateRequest<Project, Project>>
 	{
 		public UpdateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -62,7 +62,7 @@ namespace Tests.Document.Single.Update
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
 			new UpdateDescriptor<Project, Project>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IUpdateResponse<Project> response)
+		protected override void ExpectResponse(UpdateResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			response.Result.Should().Be(Result.Noop);

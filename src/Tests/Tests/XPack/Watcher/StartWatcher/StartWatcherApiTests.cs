@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.StartWatcher
 {
 	public class StartWatcherApiTests
-		: ApiIntegrationTestBase<WatcherStateCluster, IStartWatcherResponse, IStartWatcherRequest, StartWatcherDescriptor, StartWatcherRequest>
+		: ApiIntegrationTestBase<WatcherStateCluster, StartWatcherResponse, IStartWatcherRequest, StartWatcherDescriptor, StartWatcherRequest>
 	{
 		public StartWatcherApiTests(WatcherStateCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,6 +32,6 @@ namespace Tests.XPack.Watcher.StartWatcher
 			(client, r) => client.StartWatcherAsync(r)
 		);
 
-		protected override void ExpectResponse(IStartWatcherResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(StartWatcherResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

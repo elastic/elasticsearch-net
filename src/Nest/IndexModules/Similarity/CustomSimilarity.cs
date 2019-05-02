@@ -19,8 +19,7 @@ namespace Nest
 
 		internal CustomSimilarity(IDictionary<string, object> container) : base(container) { }
 
-		internal CustomSimilarity(Dictionary<string, object> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		internal CustomSimilarity(Dictionary<string, object> container) : base(container) { }
 
 		public string Type
 		{

@@ -51,23 +51,21 @@ namespace Nest
 			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
 
-		internal Task<TResponseInterface> DoRequestAsync<TRequest, TResponseInterface, TResponse>(
+		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
 			TRequest p,
 			IRequestParameters parameters,
 			CancellationToken ct,
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponseInterface : IElasticsearchResponse
-			where TResponse : class, TResponseInterface, IElasticsearchResponse, new()
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
 
-			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters)
-				.ToBaseTask<TResponse, TResponseInterface>();
+			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
 		}
 
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)

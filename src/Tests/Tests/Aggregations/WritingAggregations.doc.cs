@@ -281,7 +281,7 @@ namespace Tests.Aggregations
 		* Now, using `.Aggregations`, we can easily get the `Children` aggregation response out and from that,
 		* the `Average` and `Max` sub aggregations.
 		*/
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

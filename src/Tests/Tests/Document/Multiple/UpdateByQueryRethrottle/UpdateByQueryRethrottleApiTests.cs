@@ -12,7 +12,7 @@ using Tests.Core.Extensions;
 namespace Tests.Document.Multiple.UpdateByQueryRethrottle
 {
 	public class UpdateByQueryRethrottleApiTests
-		: ApiIntegrationTestBase<ReindexCluster, IListTasksResponse, IUpdateByQueryRethrottleRequest,
+		: ApiIntegrationTestBase<ReindexCluster, ListTasksResponse, IUpdateByQueryRethrottleRequest,
 			UpdateByQueryRethrottleDescriptor, UpdateByQueryRethrottleRequest>
 	{
 		protected const string TaskIdKey = "taskId";
@@ -75,7 +75,7 @@ namespace Tests.Document.Multiple.UpdateByQueryRethrottle
 			ExtendedValue(TaskIdKey, updateByQuery.Task);
 		}
 
-		protected override void ExpectResponse(IListTasksResponse response)
+		protected override void ExpectResponse(ListTasksResponse response)
 		{
 			response.ShouldBeValid();
 

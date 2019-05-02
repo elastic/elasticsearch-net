@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Ingest.Processor
 {
 	public class GrokProcessorPatternsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGrokProcessorPatternsResponse, IGrokProcessorPatternsRequest, GrokProcessorPatternsDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, GrokProcessorPatternsResponse, IGrokProcessorPatternsRequest, GrokProcessorPatternsDescriptor,
 			GrokProcessorPatternsRequest>
 	{
 		public GrokProcessorPatternsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

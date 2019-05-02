@@ -61,7 +61,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var ringsAroundAmsterdam = response.Aggregations.GeoDistance("rings_around_amsterdam");

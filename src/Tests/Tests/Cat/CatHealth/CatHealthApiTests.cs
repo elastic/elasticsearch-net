@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatHealth
 {
 	public class CatHealthApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
 	{
 		public CatHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -25,12 +25,12 @@ namespace Tests.Cat.CatHealth
 			(client, r) => client.CatHealthAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatHealthRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatHealthRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
 	}
 
 	public class CatHealthNoTimestampApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
 	{
 		public CatHealthNoTimestampApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -56,7 +56,7 @@ namespace Tests.Cat.CatHealth
 			(client, r) => client.CatHealthAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatHealthRecord> response)
+		protected override void ExpectResponse(CatResponse<CatHealthRecord> response)
 		{
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
 

@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
 	public class SnapshotCrudTests
-		: CrudTestBase<IntrusiveOperationCluster, ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
+		: CrudTestBase<IntrusiveOperationCluster, SnapshotResponse, GetSnapshotResponse, AcknowledgedResponseBase, DeleteSnapshotResponse>
 	{
 		private static readonly string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
 
@@ -39,7 +39,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			);
 		}
 
-		protected override LazyResponses Create() => Calls<SnapshotDescriptor, SnapshotRequest, ISnapshotRequest, ISnapshotResponse>(
+		protected override LazyResponses Create() => Calls<SnapshotDescriptor, SnapshotRequest, ISnapshotRequest, SnapshotResponse>(
 			CreateInitializer,
 			CreateFluent,
 			(s, c, f) => c.Snapshot(_repositoryName, s, f),
@@ -58,7 +58,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			.WaitForCompletion()
 			.Indices(SnapshotIndexName);
 
-		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, IGetSnapshotResponse>(
+		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, GetSnapshotResponse>(
 			ReadInitializer,
 			ReadFluent,
 			(s, c, f) => c.GetSnapshot(_repositoryName, s, f),
@@ -72,7 +72,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		protected IGetSnapshotRequest ReadFluent(string snapshotName, GetSnapshotDescriptor d) => null;
 
 		protected override LazyResponses Delete() =>
-			Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IDeleteSnapshotResponse>(
+			Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, DeleteSnapshotResponse>(
 				DeleteInitializer,
 				DeleteFluent,
 				(s, c, f) => c.DeleteSnapshot(_repositoryName, s, f),
@@ -87,14 +87,14 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 		protected override LazyResponses Update() => LazyResponses.Empty;
 
-		protected override void ExpectAfterCreate(IGetSnapshotResponse response)
+		protected override void ExpectAfterCreate(GetSnapshotResponse response)
 		{
 			response.Snapshots.Should().HaveCount(1);
 			var snapshot = response.Snapshots.FirstOrDefault();
 			snapshot.Should().NotBeNull();
 		}
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteSnapshotResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteSnapshotResponse response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(404);

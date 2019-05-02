@@ -13,7 +13,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.MultiTermVectors
 {
 	public class MultiTermVectorsDocsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
 			MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsDocsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -45,7 +45,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p
+			.Documents<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p
 				.FieldStatistics()
 				.Payloads()
 				.TermStatistics()
@@ -90,7 +90,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			(client, r) => client.MultiTermVectorsAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiTermVectorsResponse response)
+		protected override void ExpectResponse(MultiTermVectorsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
@@ -128,7 +128,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 	}
 
 	public class MultiTermVectorsIdsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
 			MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsIdsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -175,7 +175,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			(client, r) => client.MultiTermVectorsAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiTermVectorsResponse response)
+		protected override void ExpectResponse(MultiTermVectorsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);

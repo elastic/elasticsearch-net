@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.QueryDsl
 {
 	public abstract class QueryDslUsageTestsBase
-		: ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
@@ -69,6 +69,7 @@ namespace Tests.QueryDsl
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.DefaultInMemoryClient.ConnectionSettings);
 			var query = QueryFluent(new QueryContainerDescriptor<Project>());
+			query.Should().NotBeNull("query evaluated to null which implies it may be conditionless");
 			query.Accept(visitor);
 			var pretty = visitor.PrettyPrint;
 			pretty.Should().NotBeNullOrWhiteSpace();

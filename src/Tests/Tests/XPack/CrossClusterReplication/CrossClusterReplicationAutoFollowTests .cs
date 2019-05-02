@@ -28,7 +28,7 @@ namespace Tests.XPack.CrossClusterReplication
 		{
 			{
 				CreateAutoFollowStep, u =>
-					u.Calls<CreateAutoFollowPatternDescriptor, CreateAutoFollowPatternRequest, ICreateAutoFollowPatternRequest, ICreateAutoFollowPatternResponse>(
+					u.Calls<CreateAutoFollowPatternDescriptor, CreateAutoFollowPatternRequest, ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(
 						v => new CreateAutoFollowPatternRequest(AutoPattern(v))
 						{
 							RemoteCluster = DefaultSeeder.RemoteClusterName,
@@ -50,7 +50,7 @@ namespace Tests.XPack.CrossClusterReplication
 			},
 			{
 				GetAutoFollowStep, u =>
-					u.Calls<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequest, IGetAutoFollowPatternRequest, IGetAutoFollowPatternResponse>(
+					u.Calls<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequest, IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(
 						v => new GetAutoFollowPatternRequest(AutoPattern(v)),
 						(v, d) => d.Name(AutoPattern(v)),
 						(v, c, f) => c.GetAutoFollowPattern(f),
@@ -61,7 +61,7 @@ namespace Tests.XPack.CrossClusterReplication
 			},
 			{
 				DeleteAutoFollowStep, u =>
-					u.Calls<DeleteAutoFollowPatternDescriptor, DeleteAutoFollowPatternRequest, IDeleteAutoFollowPatternRequest, IDeleteAutoFollowPatternResponse>(
+					u.Calls<DeleteAutoFollowPatternDescriptor, DeleteAutoFollowPatternRequest, IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(
 						v => new DeleteAutoFollowPatternRequest(AutoPattern(v)),
 						(v, d) => d,
 						(v, c, f) => c.DeleteAutoFollowPattern(AutoPattern(v), f),
@@ -71,7 +71,7 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, ICcrStatsResponse>(
+				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, CcrStatsResponse>(
 						v => new CcrStatsRequest(),
 						(v, d) => d,
 						(v, c, f) => c.CcrStats(f),

@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class RestoreObservable : IDisposable, IObservable<IRecoveryStatusResponse>
+	public class RestoreObservable : IDisposable, IObservable<RecoveryStatusResponse>
 	{
 		private readonly IElasticClient _elasticClient;
 		private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
@@ -43,7 +43,7 @@ namespace Nest
 
 		public void Dispose() => Dispose(true);
 
-		public IDisposable Subscribe(IObserver<IRecoveryStatusResponse> observer)
+		public IDisposable Subscribe(IObserver<RecoveryStatusResponse> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
 
@@ -79,9 +79,9 @@ namespace Nest
 
 		private void Restore(object state)
 		{
-			var observer = state as IObserver<IRecoveryStatusResponse>;
+			var observer = state as IObserver<RecoveryStatusResponse>;
 
-			if (observer == null) throw new ArgumentException($"must be an {nameof(IObserver<IRecoveryStatusResponse>)}", nameof(state));
+			if (observer == null) throw new ArgumentException($"must be an {nameof(IObserver<RecoveryStatusResponse>)}", nameof(state));
 
 			try
 			{
@@ -125,16 +125,16 @@ namespace Nest
 
 	public class RestoreNextEventArgs : EventArgs
 	{
-		public RestoreNextEventArgs(IRecoveryStatusResponse recoveryStatusResponse) => RecoveryStatusResponse = recoveryStatusResponse;
+		public RestoreNextEventArgs(RecoveryStatusResponse recoveryStatusResponse) => RecoveryStatusResponse = recoveryStatusResponse;
 
-		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
+		public RecoveryStatusResponse RecoveryStatusResponse { get; }
 	}
 
 	public class RestoreCompletedEventArgs : EventArgs
 	{
-		public RestoreCompletedEventArgs(IRecoveryStatusResponse recoveryStatusResponse) => RecoveryStatusResponse = recoveryStatusResponse;
+		public RestoreCompletedEventArgs(RecoveryStatusResponse recoveryStatusResponse) => RecoveryStatusResponse = recoveryStatusResponse;
 
-		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
+		public RecoveryStatusResponse RecoveryStatusResponse { get; }
 	}
 
 	public class RestoreErrorEventArgs : EventArgs

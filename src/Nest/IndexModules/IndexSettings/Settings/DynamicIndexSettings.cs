@@ -243,9 +243,8 @@ namespace Nest
 		/// <inheritdoc cref="IDynamicIndexSettings.RefreshInterval" />
 		public TDescriptor RefreshInterval(Time time) => Assign(time, (a, v) => a.RefreshInterval = v);
 
-		// TODO: align name for 7.x
 		/// <inheritdoc cref="IDynamicIndexSettings.RoutingAllocationTotalShardsPerNode" />
-		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
+		public TDescriptor RoutingAllocationTotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(totalShardsPerNode, (a, v) => a.RoutingAllocationTotalShardsPerNode = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.SlowLog" />

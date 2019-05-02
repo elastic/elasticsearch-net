@@ -3,28 +3,16 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	/// <summary>
-	/// The response from creating a calendar.
-	/// </summary>
-	public partial interface IPutCalendarResponse : IResponse
+	/// <summary> The response from creating a calendar.</summary>
+	public class PutCalendarResponse : ResponseBase
 	{
 		[DataMember(Name = "calendar_id")]
-		string CalendarId { get; }
-
-		[DataMember(Name = "description")]
-		string Description { get; }
-
-		[DataMember(Name = "job_ids")]
-		IReadOnlyCollection<string> JobIds { get; }
-	}
-
-	/// <inheritdoc cref="IPutCalendarResponse" />
-	public class PutCalendarResponse : ResponseBase, IPutCalendarResponse
-	{
 		public string CalendarId { get; internal set; }
 
+		[DataMember(Name = "description")]
 		public string Description { get; internal set; }
 
+		[DataMember(Name = "job_ids")]
 		public IReadOnlyCollection<string> JobIds { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
 }

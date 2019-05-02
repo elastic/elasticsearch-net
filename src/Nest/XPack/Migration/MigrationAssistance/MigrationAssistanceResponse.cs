@@ -5,14 +5,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IMigrationAssistanceResponse : IResponse
+	public class MigrationAssistanceResponse : ResponseBase
 	{
 		[DataMember(Name ="indices")]
-		IReadOnlyDictionary<IndexName, IndexUpgradeCheck> Indices { get; }
-	}
-
-	public class MigrationAssistanceResponse : ResponseBase, IMigrationAssistanceResponse
-	{
 		public IReadOnlyDictionary<IndexName, IndexUpgradeCheck> Indices { get; internal set; } =
 			EmptyReadOnly<IndexName, IndexUpgradeCheck>.Dictionary;
 	}

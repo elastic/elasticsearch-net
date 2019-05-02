@@ -18,7 +18,7 @@ namespace Tests.XPack.Rollup
 	//we send 2 digits for milliseconds sometimes which can cause a failure in parsing starting with 7.x
 	[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/40403")]
 	public class RollupJobCrudTests
-		: CrudTestBase<TimeSeriesCluster, ICreateRollupJobResponse, IGetRollupJobResponse, ICreateRollupJobResponse, IDeleteRollupJobResponse>
+		: CrudTestBase<TimeSeriesCluster, CreateRollupJobResponse, GetRollupJobResponse, CreateRollupJobResponse, DeleteRollupJobResponse>
 	{
 		private static readonly string CronPeriod = "*/2 * * * * ?";
 
@@ -30,7 +30,7 @@ namespace Tests.XPack.Rollup
 		private static string CreateRollupName(string s) => $"rollup-logs-{s}";
 
 		protected override LazyResponses Create() =>
-			Calls<CreateRollupJobDescriptor<Log>, CreateRollupJobRequest, ICreateRollupJobRequest, ICreateRollupJobResponse>(
+			Calls<CreateRollupJobDescriptor<Log>, CreateRollupJobRequest, ICreateRollupJobRequest, CreateRollupJobResponse>(
 				CreateInitializer,
 				CreateFluent,
 				(s, c, f) => c.CreateRollupJob(CreateRollupName(s), f),
@@ -86,7 +86,7 @@ namespace Tests.XPack.Rollup
 				.Field(p => p.Temperature, RollupMetric.Average, RollupMetric.Min, RollupMetric.Max)
 			);
 
-		protected override LazyResponses Read() => Calls<GetRollupJobDescriptor, GetRollupJobRequest, IGetRollupJobRequest, IGetRollupJobResponse>(
+		protected override LazyResponses Read() => Calls<GetRollupJobDescriptor, GetRollupJobRequest, IGetRollupJobRequest, GetRollupJobResponse>(
 			ReadInitializer,
 			ReadFluent,
 			(s, c, f) => c.GetRollupJob(f),
@@ -102,7 +102,7 @@ namespace Tests.XPack.Rollup
 		protected override IDictionary<string, Func<LazyResponses>> AfterCreateCalls() => new Dictionary<string, Func<LazyResponses>>
 		{
 			{
-				"start", () => Calls<StartRollupJobDescriptor, StartRollupJobRequest, IStartRollupJobRequest, IStartRollupJobResponse>(
+				"start", () => Calls<StartRollupJobDescriptor, StartRollupJobRequest, IStartRollupJobRequest, StartRollupJobResponse>(
 					StartInitializer,
 					StartFluent,
 					(s, c, f) => c.StartRollupJob(CreateRollupName(s), f),
@@ -113,7 +113,7 @@ namespace Tests.XPack.Rollup
 			},
 			{ "wait_for_finish", () => Call(WaitForFinish) },
 			{
-				"rollup_search", () => Calls<RollupSearchDescriptor<Log>, RollupSearchRequest, IRollupSearchRequest, IRollupSearchResponse<Log>>(
+				"rollup_search", () => Calls<RollupSearchDescriptor<Log>, RollupSearchRequest, IRollupSearchRequest, RollupSearchResponse<Log>>(
 					RollupSearchInitializer,
 					RollupSearchFluent,
 					(s, c, f) => c.RollupSearch(CreateRollupSearchIndices(s), f),
@@ -124,7 +124,7 @@ namespace Tests.XPack.Rollup
 			},
 			{
 				"rollup_caps", () =>
-					Calls<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequest, IGetRollupCapabilitiesRequest, IGetRollupCapabilitiesResponse
+					Calls<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequest, IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse
 					>(
 						CapsInitializer,
 						CapsFluent,
@@ -136,7 +136,7 @@ namespace Tests.XPack.Rollup
 			},
 			{
 				"rollup_index_caps", () =>
-					Calls<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesResponse
+					Calls<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse
 					>(
 						IndexCapsInitializer,
 						IndexCapsFluent,
@@ -147,7 +147,7 @@ namespace Tests.XPack.Rollup
 					)
 			},
 			{
-				"stop", () => Calls<StopRollupJobDescriptor, StopRollupJobRequest, IStopRollupJobRequest, IStopRollupJobResponse>(
+				"stop", () => Calls<StopRollupJobDescriptor, StopRollupJobRequest, IStopRollupJobRequest, StopRollupJobResponse>(
 					StopInitializer,
 					StopFluent,
 					(s, c, f) => c.StopRollupJob(CreateRollupName(s), f),
@@ -176,23 +176,23 @@ namespace Tests.XPack.Rollup
 			d.Id(TimeSeriesSeeder.IndicesWildCard);
 
 		[I] public async Task StartsJob() =>
-			await AssertOnAfterCreateResponse<IStartRollupJobResponse>("start", r => r.Started.Should().BeTrue());
+			await AssertOnAfterCreateResponse<StartRollupJobResponse>("start", r => r.Started.Should().BeTrue());
 
 		[I] public async Task StopsJob() =>
-			await AssertOnAfterCreateResponse<IStopRollupJobResponse>("stop", r => r.Stopped.Should().BeTrue());
+			await AssertOnAfterCreateResponse<StopRollupJobResponse>("stop", r => r.Stopped.Should().BeTrue());
 
-		private async Task<IGetRollupJobResponse> WaitForFinish(List<string> allJobs, IElasticClient client)
+		private async Task<GetRollupJobResponse> WaitForFinish(List<string> allJobs, IElasticClient client)
 		{
-			var tasks = new List<Task<IGetRollupJobResponse>>(4);
+			var tasks = new List<Task<GetRollupJobResponse>>(4);
 			foreach (var job in allJobs)
 				tasks.Add(WaitForFinish(CreateRollupName(job), client));
 			await Task.WhenAll(tasks);
 			return tasks[0].Result;
 		}
 
-		private static async Task<IGetRollupJobResponse> WaitForFinish(string job, IElasticClient client)
+		private static async Task<GetRollupJobResponse> WaitForFinish(string job, IElasticClient client)
 		{
-			IGetRollupJobResponse response;
+			GetRollupJobResponse response;
 			var stillRunning = true;
 			long processed = 0;
 			do
@@ -234,7 +234,7 @@ namespace Tests.XPack.Rollup
 			);
 
 		[I] public async Task RollupSearchReturnsAggregations() =>
-			await AssertOnAfterCreateResponse<IRollupSearchResponse<Log>>("rollup_search", r =>
+			await AssertOnAfterCreateResponse<RollupSearchResponse<Log>>("rollup_search", r =>
 			{
 				r.ShouldBeValid();
 				var avg = r.Aggregations.Average("avg_temp");
@@ -246,7 +246,7 @@ namespace Tests.XPack.Rollup
 			});
 
 		[I] public async Task GetRollupCapabilities() =>
-			await AssertOnAfterCreateResponse<IGetRollupCapabilitiesResponse>("rollup_caps", r =>
+			await AssertOnAfterCreateResponse<GetRollupCapabilitiesResponse>("rollup_caps", r =>
 			{
 				r.IsValid.Should().BeTrue();
 				r.Indices.Should().NotBeEmpty().And.ContainKey(TimeSeriesSeeder.IndicesWildCard);
@@ -265,7 +265,7 @@ namespace Tests.XPack.Rollup
 			});
 
 		[I] public async Task GetRollupIndexCapabilities() =>
-			await AssertOnAfterCreateResponse<IGetRollupIndexCapabilitiesResponse>("rollup_index_caps", r =>
+			await AssertOnAfterCreateResponse<GetRollupIndexCapabilitiesResponse>("rollup_index_caps", r =>
 			{
 				r.IsValid.Should().BeTrue();
 				r.Indices.Should().NotBeEmpty().And.HaveCount(1);
@@ -290,7 +290,7 @@ namespace Tests.XPack.Rollup
 		protected override LazyResponses Update() => null;
 
 		protected override LazyResponses Delete() =>
-			Calls<DeleteRollupJobDescriptor, DeleteRollupJobRequest, IDeleteRollupJobRequest, IDeleteRollupJobResponse>(
+			Calls<DeleteRollupJobDescriptor, DeleteRollupJobRequest, IDeleteRollupJobRequest, DeleteRollupJobResponse>(
 				DeleteInitializer,
 				DeleteFluent,
 				(s, c, f) => c.DeleteRollupJob(CreateRollupName(s), f),
@@ -303,7 +303,7 @@ namespace Tests.XPack.Rollup
 
 		protected IDeleteRollupJobRequest DeleteFluent(string role, DeleteRollupJobDescriptor d) => d;
 
-		protected override void ExpectAfterCreate(IGetRollupJobResponse response)
+		protected override void ExpectAfterCreate(GetRollupJobResponse response)
 		{
 			response.Jobs.Should().NotBeNull().And.NotBeEmpty();
 			foreach (var j in response.Jobs)

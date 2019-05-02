@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Single.Delete
 {
 	public class DeleteApiTests
-		: ApiIntegrationTestBase<WritableCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+		: ApiIntegrationTestBase<WritableCluster, DeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,7 +40,7 @@ namespace Tests.Document.Single.Delete
 
 		protected override DeleteDescriptor<Project> NewDescriptor() => new DeleteDescriptor<Project>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteResponse response)
+		protected override void ExpectResponse(DeleteResponse response)
 		{
 			response.ShouldBeValid();
 			response.Result.Should().Be(Result.Deleted);
@@ -53,7 +53,7 @@ namespace Tests.Document.Single.Delete
 	}
 
 	public class DeleteNonExistentDocumentApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest,
+		: ApiIntegrationTestBase<ReadOnlyCluster, DeleteResponse, IDeleteRequest,
 			DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -77,7 +77,7 @@ namespace Tests.Document.Single.Delete
 
 		protected override DeleteDescriptor<Project> NewDescriptor() => new DeleteDescriptor<Project>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteResponse response)
+		protected override void ExpectResponse(DeleteResponse response)
 		{
 			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.NotFound);
@@ -92,7 +92,7 @@ namespace Tests.Document.Single.Delete
 	}
 
 	public class DeleteNonExistentIndexDocumentApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, DeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -119,7 +119,7 @@ namespace Tests.Document.Single.Delete
 		protected override DeleteDescriptor<Project> NewDescriptor() =>
 			new DeleteDescriptor<Project>(index: CallIsolatedValue, id: CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteResponse response)
+		protected override void ExpectResponse(DeleteResponse response)
 		{
 			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.Error);

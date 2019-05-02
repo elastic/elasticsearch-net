@@ -14,7 +14,7 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 {
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
 	public class PostCalendarEventsApiTests
-		: MachineLearningIntegrationTestBase<IPostCalendarEventsResponse, IPostCalendarEventsRequest, PostCalendarEventsDescriptor,
+		: MachineLearningIntegrationTestBase<PostCalendarEventsResponse, IPostCalendarEventsRequest, PostCalendarEventsDescriptor,
 			PostCalendarEventsRequest>
 	{
 		public PostCalendarEventsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -88,7 +88,7 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 		protected override PostCalendarEventsDescriptor NewDescriptor() =>
 			new PostCalendarEventsDescriptor(CallIsolatedValue).Events(GetScheduledEvents());
 
-		protected override void ExpectResponse(IPostCalendarEventsResponse response)
+		protected override void ExpectResponse(PostCalendarEventsResponse response)
 		{
 			response.ShouldBeValid();
 

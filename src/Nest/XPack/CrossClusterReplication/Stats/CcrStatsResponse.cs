@@ -4,28 +4,21 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ICcrStatsResponse : IResponse
+	public class CcrStatsResponse : ResponseBase
 	{
+		/// <inheritdoc cref="CcrStatsResponse.AutoFollowStats"/>
 		[DataMember(Name ="auto_follow_stats")]
-		CcrAutoFollowStats AutoFollowStats { get; }
-
-		[DataMember(Name = "follow_stats")]
-		CcrFollowStats FollowStats { get; }
-	}
-
-	public class CcrStatsResponse : ResponseBase, ICcrStatsResponse
-	{
-		/// <inheritdoc cref="ICcrStatsResponse.AutoFollowStats"/>
 		public CcrAutoFollowStats AutoFollowStats { get; internal set; }
 
-		/// <inheritdoc cref="ICcrStatsResponse.FollowStats"/>
+		/// <inheritdoc cref="CcrStatsResponse.FollowStats"/>
+		[DataMember(Name = "follow_stats")]
 		public CcrFollowStats FollowStats { get; internal set; }
 	}
 
 
 	public class CcrFollowStats
 	{
-		/// <inheritdoc cref="IFollowIndexStatsResponse.Indices" />
+		/// <inheritdoc cref="FollowIndexStatsResponse.Indices" />
 		[DataMember(Name = "indices")]
 		public IReadOnlyCollection<FollowIndexStats> Indices { get; internal set; } = EmptyReadOnly<FollowIndexStats>.Collection;
 	}

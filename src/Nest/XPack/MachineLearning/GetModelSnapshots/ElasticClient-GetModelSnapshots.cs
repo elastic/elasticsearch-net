@@ -10,19 +10,19 @@ namespace Nest
 		/// <summary>
 		/// Retrieves information about machine learning model snapshots.
 		/// </summary>
-		IGetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null);
+		GetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request);
+		GetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request);
 
 		/// <inheritdoc />
-		Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
+		Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
 			Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request,
+		Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -30,22 +30,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null) =>
+		public GetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null) =>
 			GetModelSnapshots(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IGetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) =>
+		public GetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) =>
 			DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
+		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
 			Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => GetModelSnapshotsAsync(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetModelSnapshotsRequest, IGetModelSnapshotsResponse, GetModelSnapshotsResponse>
+		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Mapping.Metafields
 {
 	public abstract class MetafieldsMappingApiTestsBase
-		: ApiTestBase<ReadOnlyCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+		: ApiTestBase<ReadOnlyCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		protected MetafieldsMappingApiTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

@@ -3,22 +3,23 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IGetUserPrivilegesResponse : IResponse
+	public class GetUserPrivilegesResponse : ResponseBase
 	{
 		[DataMember(Name = "applications")]
-		IReadOnlyCollection<ApplicationResourcePrivileges> Applications { get; }
+		public IReadOnlyCollection<ApplicationResourcePrivileges> Applications { get; internal set; } =
+			EmptyReadOnly<ApplicationResourcePrivileges>.Collection;
 
 		[DataMember(Name = "cluster")]
-		IReadOnlyCollection<string> Cluster { get; }
+		public IReadOnlyCollection<string> Cluster { get; internal set; } = EmptyReadOnly<string>.Collection;
 
 		[DataMember(Name = "global")]
-		IReadOnlyCollection<GlobalPrivileges> Global { get; }
+		public IReadOnlyCollection<GlobalPrivileges> Global { get; internal set; } = EmptyReadOnly<GlobalPrivileges>.Collection;
 
 		[DataMember(Name = "indices")]
-		IReadOnlyCollection<UserIndicesPrivileges> Indices { get; }
+		public IReadOnlyCollection<UserIndicesPrivileges> Indices { get; internal set; } = EmptyReadOnly<UserIndicesPrivileges>.Collection;
 
 		[DataMember(Name = "run_as")]
-		IReadOnlyCollection<string> RunAs { get; }
+		public IReadOnlyCollection<string> RunAs { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
 
 	public class ManageUserPrivileges
@@ -87,22 +88,4 @@ namespace Nest
 		public IReadOnlyCollection<string> Resources { get; internal set; }
 	}
 
-	public class GetUserPrivilegesResponse : ResponseBase, IGetUserPrivilegesResponse
-	{
-		[DataMember(Name = "applications")]
-		public IReadOnlyCollection<ApplicationResourcePrivileges> Applications { get; internal set; } =
-			EmptyReadOnly<ApplicationResourcePrivileges>.Collection;
-
-		[DataMember(Name = "cluster")]
-		public IReadOnlyCollection<string> Cluster { get; internal set; } = EmptyReadOnly<string>.Collection;
-
-		[DataMember(Name = "global")]
-		public IReadOnlyCollection<GlobalPrivileges> Global { get; internal set; } = EmptyReadOnly<GlobalPrivileges>.Collection;
-
-		[DataMember(Name = "indices")]
-		public IReadOnlyCollection<UserIndicesPrivileges> Indices { get; internal set; } = EmptyReadOnly<UserIndicesPrivileges>.Collection;
-
-		[DataMember(Name = "run_as")]
-		public IReadOnlyCollection<string> RunAs { get; internal set; } = EmptyReadOnly<string>.Collection;
-	}
 }

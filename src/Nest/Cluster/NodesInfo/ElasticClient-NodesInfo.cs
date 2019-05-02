@@ -16,38 +16,38 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes info operation</param>
-		INodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
+		NodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
 
 		/// <inheritdoc />
-		INodesInfoResponse NodesInfo(INodesInfoRequest request);
+		NodesInfoResponse NodesInfo(INodesInfoRequest request);
 
 		/// <inheritdoc />
-		Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null,
+		Task<NodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken ct = default);
+		Task<NodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public INodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null) =>
+		public NodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null) =>
 			NodesInfo(selector.InvokeOrDefault(new NodesInfoDescriptor()));
 
 		/// <inheritdoc />
-		public INodesInfoResponse NodesInfo(INodesInfoRequest request) =>
+		public NodesInfoResponse NodesInfo(INodesInfoRequest request) =>
 			DoRequest<INodesInfoRequest, NodesInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null,
+		public Task<NodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			NodesInfoAsync(selector.InvokeOrDefault(new NodesInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<INodesInfoRequest, INodesInfoResponse, NodesInfoResponse>(request, request.RequestParameters, ct);
+		public Task<NodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<INodesInfoRequest, NodesInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

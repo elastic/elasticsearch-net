@@ -118,7 +118,7 @@ namespace Tests.Framework
 		where TReadResponse : class, IResponse
 		where TUpdateResponse : class, IResponse
 		where TDeleteResponse : class, IResponse
-		where TExistsResponse : class, IResponse, IExistsResponse
+		where TExistsResponse : ExistsResponse
 	{
 		private readonly Dictionary<string, LazyResponses> _afterCreateResponses = new Dictionary<string, LazyResponses>();
 		private readonly LazyResponses _createExistsResponse;

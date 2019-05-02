@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 {
 	public class GetAnomalyRecordsApiTests
-		: MachineLearningIntegrationTestBase<IGetAnomalyRecordsResponse, IGetAnomalyRecordsRequest, GetAnomalyRecordsDescriptor,
+		: MachineLearningIntegrationTestBase<GetAnomalyRecordsResponse, IGetAnomalyRecordsRequest, GetAnomalyRecordsDescriptor,
 			GetAnomalyRecordsRequest>
 	{
 		public GetAnomalyRecordsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -42,7 +42,7 @@ namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 			(client, r) => client.GetAnomalyRecordsAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetAnomalyRecordsResponse response)
+		protected override void ExpectResponse(GetAnomalyRecordsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().Be(1);

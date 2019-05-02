@@ -3,25 +3,18 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IAnalyzeResponse : IResponse
+	[DataContract]
+	public class AnalyzeResponse : ResponseBase
 	{
 		/// <summary>
 		/// When <see cref="IAnalyzeRequest.Explain " /> is to true this will hold the detailed view of the analyzed tokens.
 		/// </summary>
-		AnalyzeDetail Detail { get; }
+		[DataMember(Name ="detail")]
+		public AnalyzeDetail Detail { get; internal set; }
 
 		/// <summary>
 		/// When <see cref="IAnalyzeRequest.Explain " /> is not true this will hold the analyzed tokens.
 		/// </summary>
-		IReadOnlyCollection<AnalyzeToken> Tokens { get; }
-	}
-
-	[DataContract]
-	public class AnalyzeResponse : ResponseBase, IAnalyzeResponse
-	{
-		[DataMember(Name ="detail")]
-		public AnalyzeDetail Detail { get; internal set; }
-
 		[DataMember(Name ="tokens")]
 		public IReadOnlyCollection<AnalyzeToken> Tokens { get; internal set; } = EmptyReadOnly<AnalyzeToken>.Collection;
 	}

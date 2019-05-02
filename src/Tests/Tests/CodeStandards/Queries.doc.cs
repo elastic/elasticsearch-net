@@ -60,7 +60,7 @@ namespace Tests.CodeStandards
 				typeof(ISpanGapQuery)
 			};
 			var queries = typeof(IQuery).Assembly.ExportedTypes
-				.Where(t => t.IsInterface() && typeof(IQuery).IsAssignableFrom(t))
+				.Where(t => t.IsInterface && typeof(IQuery).IsAssignableFrom(t))
 				.Where(t => !skipQueryImplementations.Contains(t))
 				.ToList();
 			queries.Should().NotBeEmpty();

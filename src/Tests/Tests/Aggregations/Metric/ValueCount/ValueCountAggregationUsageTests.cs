@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.ValueCount
 		protected override AggregationDictionary InitializerAggs =>
 			new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits));
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitCount = response.Aggregations.ValueCount("commit_count");

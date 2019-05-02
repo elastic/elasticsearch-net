@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 {
-	public class CreateFollowIndexApiTests : ApiTestBase<XPackCluster, ICreateFollowIndexResponse, ICreateFollowIndexRequest, CreateFollowIndexDescriptor, CreateFollowIndexRequest>
+	public class CreateFollowIndexApiTests : ApiTestBase<XPackCluster, CreateFollowIndexResponse, ICreateFollowIndexRequest, CreateFollowIndexDescriptor, CreateFollowIndexRequest>
 	{
 		public CreateFollowIndexApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

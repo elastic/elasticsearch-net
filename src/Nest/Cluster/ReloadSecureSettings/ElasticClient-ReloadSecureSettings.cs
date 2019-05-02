@@ -18,19 +18,19 @@ namespace Nest
 		/// When changing multiple reloadable secure settings, modify all of them, on each cluster node, and then issue a reload_secure_settings call,
 		/// instead of reloading after each modification.</para>
 		/// </summary>
-		IReloadSecureSettingsResponse ReloadSecureSettings(Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null);
+		ReloadSecureSettingsResponse ReloadSecureSettings(Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		IReloadSecureSettingsResponse ReloadSecureSettings(IReloadSecureSettingsRequest request);
+		ReloadSecureSettingsResponse ReloadSecureSettings(IReloadSecureSettingsRequest request);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
+		Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
 			Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request,
+		Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -38,24 +38,24 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		public IReloadSecureSettingsResponse ReloadSecureSettings(
+		public ReloadSecureSettingsResponse ReloadSecureSettings(
 			Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null
 		) =>
 			ReloadSecureSettings(selector.InvokeOrDefault(new ReloadSecureSettingsDescriptor()));
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		public IReloadSecureSettingsResponse ReloadSecureSettings(IReloadSecureSettingsRequest request) =>
+		public ReloadSecureSettingsResponse ReloadSecureSettings(IReloadSecureSettingsRequest request) =>
 			DoRequest<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
+		public Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
 			Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			ReloadSecureSettingsAsync(selector.InvokeOrDefault(new ReloadSecureSettingsDescriptor()), ct);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IReloadSecureSettingsRequest, IReloadSecureSettingsResponse, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
+		public Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

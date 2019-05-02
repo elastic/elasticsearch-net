@@ -1,6 +1,4 @@
 ﻿namespace Nest
 {
-	public interface ICreateRepositoryResponse : IAcknowledgedResponse { }
-
-	public class CreateRepositoryResponse : AcknowledgedResponseBase, ICreateRepositoryResponse { }
+	public class CreateRepositoryResponse : AcknowledgedResponseBase { }
 }

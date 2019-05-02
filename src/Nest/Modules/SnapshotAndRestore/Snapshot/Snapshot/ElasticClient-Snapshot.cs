@@ -16,32 +16,32 @@ namespace Nest
 		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
 		/// <param name="snapshotName">The name of the snapshot</param>
 		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
-		ISnapshotResponse Snapshot(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null);
+		SnapshotResponse Snapshot(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null);
 
 		/// <inheritdoc />
-		ISnapshotResponse Snapshot(ISnapshotRequest request);
+		SnapshotResponse Snapshot(ISnapshotRequest request);
 
 		/// <inheritdoc />
-		Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
+		Task<SnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default);
+		Task<SnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ISnapshotResponse Snapshot(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) =>
+		public SnapshotResponse Snapshot(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) =>
 			Snapshot(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc />
-		public ISnapshotResponse Snapshot(ISnapshotRequest request) =>
+		public SnapshotResponse Snapshot(ISnapshotRequest request) =>
 			DoRequest<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ISnapshotResponse> SnapshotAsync(
+		public Task<SnapshotResponse> SnapshotAsync(
 			Name repository,
 			Name snapshotName,
 			Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
@@ -50,7 +50,7 @@ namespace Nest
 			SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)), ct);
 
 		/// <inheritdoc />
-		public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISnapshotRequest, ISnapshotResponse, SnapshotResponse>(request, request.RequestParameters, ct);
+		public Task<SnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

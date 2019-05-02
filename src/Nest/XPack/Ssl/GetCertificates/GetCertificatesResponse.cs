@@ -4,14 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IGetCertificatesResponse : IResponse
-	{
-		[IgnoreDataMember]
-		IReadOnlyCollection<ClusterCertificateInformation> Certificates { get; }
-
-	}
-
-	public class GetCertificatesResponse : ResponseBase, IGetCertificatesResponse
+	public class GetCertificatesResponse : ResponseBase
 	{
 		public IReadOnlyCollection<ClusterCertificateInformation> Certificates { get; internal set; } =
 			EmptyReadOnly<ClusterCertificateInformation>.Collection;

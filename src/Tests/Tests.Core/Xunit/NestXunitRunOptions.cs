@@ -87,7 +87,7 @@ namespace Tests.Core.Xunit
 			Console.WriteLine("--------");
 		}
 
-		private static string ReproduceCommandLine(ConcurrentBag<Tuple<string, string>> failedCollections, ITestConfiguration config,
+		private static string ReproduceCommandLine(ConcurrentBag<Tuple<string, string>> failedCollections, TestConfigurationBase config,
 			bool runningIntegrations
 		)
 		{

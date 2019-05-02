@@ -12,7 +12,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetCalendars
 {
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
-	public class GetCalendarsApiTests : MachineLearningIntegrationTestBase<IGetCalendarsResponse, IGetCalendarsRequest, GetCalendarsDescriptor, GetCalendarsRequest>
+	public class GetCalendarsApiTests : MachineLearningIntegrationTestBase<GetCalendarsResponse, IGetCalendarsRequest, GetCalendarsDescriptor, GetCalendarsRequest>
 	{
 		public GetCalendarsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -52,7 +52,7 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		protected override GetCalendarsDescriptor NewDescriptor() => new GetCalendarsDescriptor().CalendarId(CallIsolatedValue);
 
 
-		protected override void ExpectResponse(IGetCalendarsResponse response)
+		protected override void ExpectResponse(GetCalendarsResponse response)
 		{
 			response.ShouldBeValid();
 
@@ -68,7 +68,7 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 	}
 
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
-	public class GetCalendarsPagingApiTests : MachineLearningIntegrationTestBase<IGetCalendarsResponse, IGetCalendarsRequest, GetCalendarsDescriptor, GetCalendarsRequest>
+	public class GetCalendarsPagingApiTests : MachineLearningIntegrationTestBase<GetCalendarsResponse, IGetCalendarsRequest, GetCalendarsDescriptor, GetCalendarsRequest>
 	{
 		public GetCalendarsPagingApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -117,7 +117,7 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 
 		protected override GetCalendarsDescriptor NewDescriptor() => new GetCalendarsDescriptor().Page(p => p.Size(10).From(10));
 
-		protected override void ExpectResponse(IGetCalendarsResponse response)
+		protected override void ExpectResponse(GetCalendarsResponse response)
 		{
 			response.ShouldBeValid();
 

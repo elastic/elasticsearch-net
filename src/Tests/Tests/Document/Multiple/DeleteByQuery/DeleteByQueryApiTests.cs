@@ -15,7 +15,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.DeleteByQuery
 {
 	public class DeleteByQueryApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, DeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>,
 			DeleteByQueryRequest>
 	{
 		public DeleteByQueryApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -96,7 +96,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(Indices);
 
-		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		protected override void ExpectResponse(DeleteByQueryResponse response)
 		{
 			response.Took.Should().BeGreaterThan(0);
 			response.Total.Should().Be(1);
@@ -136,7 +136,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		protected override void ExpectResponse(DeleteByQueryResponse response)
 		{
 			response.Task.Should().NotBeNull();
 			response.Task.TaskNumber.Should().BeGreaterThan(0);
@@ -197,7 +197,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		protected override void ExpectResponse(DeleteByQueryResponse response)
 		{
 			response.VersionConflicts.Should().Be(1);
 			response.Failures.Should().NotBeEmpty();
@@ -264,7 +264,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		protected override void ExpectResponse(DeleteByQueryResponse response)
 		{
 			response.ShouldBeValid();
 			response.SliceId.Should().Be(0);

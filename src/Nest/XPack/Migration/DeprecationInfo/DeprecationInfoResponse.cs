@@ -5,15 +5,27 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	/// <summary>
-	/// The deprecation warning level
-	/// </summary>
+
+	public class DeprecationInfoResponse : ResponseBase
+	{
+		[DataMember(Name ="cluster_settings")]
+		public IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; internal set; } =
+			EmptyReadOnly<DeprecationInfo>.Collection;
+
+		[DataMember(Name ="index_settings")]
+		public IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; internal set; } =
+			EmptyReadOnly<string, IReadOnlyCollection<DeprecationInfo>>.Dictionary;
+
+		[DataMember(Name ="node_settings")]
+		public IReadOnlyCollection<DeprecationInfo> NodeSettings { get; internal set; } =
+			EmptyReadOnly<DeprecationInfo>.Collection;
+	}
+
+	/// <summary> The deprecation warning level</summary>
 	[StringEnum]
 	public enum DeprecationWarningLevel
 	{
-		/// <summary>
-		/// Everything is good
-		/// </summary>
+		/// <summary> Everything is good </summary>
 		[EnumMember(Value = "none")]
 		None,
 
@@ -30,9 +42,7 @@ namespace Nest
 		[EnumMember(Value = "warning")]
 		Warning,
 
-		/// <summary>
-		/// You cannot upgrade without fixing this problem.
-		/// </summary>
+		/// <summary> You cannot upgrade without fixing this problem.</summary>
 		[EnumMember(Value = "critical")]
 		Critical
 	}
@@ -55,27 +65,4 @@ namespace Nest
 		public string Url { get; internal set; }
 	}
 
-	public interface IDeprecationInfoResponse : IResponse
-	{
-		[DataMember(Name ="cluster_settings")]
-		IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; }
-
-		[DataMember(Name ="index_settings")]
-		IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; }
-
-		[DataMember(Name ="node_settings")]
-		IReadOnlyCollection<DeprecationInfo> NodeSettings { get; }
-	}
-
-	public class DeprecationInfoResponse : ResponseBase, IDeprecationInfoResponse
-	{
-		public IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; internal set; } =
-			EmptyReadOnly<DeprecationInfo>.Collection;
-
-		public IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; internal set; } =
-			EmptyReadOnly<string, IReadOnlyCollection<DeprecationInfo>>.Dictionary;
-
-		public IReadOnlyCollection<DeprecationInfo> NodeSettings { get; internal set; } =
-			EmptyReadOnly<DeprecationInfo>.Collection;
-	}
 }

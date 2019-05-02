@@ -3,14 +3,8 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface ISnapshotStatusResponse : IResponse
-	{
-		[DataMember(Name ="snapshots")]
-		IReadOnlyCollection<SnapshotStatus> Snapshots { get; }
-	}
-
 	[DataContract]
-	public class SnapshotStatusResponse : ResponseBase, ISnapshotStatusResponse
+	public class SnapshotStatusResponse : ResponseBase
 	{
 		[DataMember(Name ="snapshots")]
 		public IReadOnlyCollection<SnapshotStatus> Snapshots { get; internal set; } = EmptyReadOnly<SnapshotStatus>.Collection;

@@ -9,7 +9,7 @@ namespace Tests.Ingest.DeletePipeline
 {
 	//integration test is part of PipelineCrudTests
 	public class DeletePipelineApiTests
-		: ApiTestBase<ReadOnlyCluster, IDeletePipelineResponse, IDeletePipelineRequest, DeletePipelineDescriptor, DeletePipelineRequest>
+		: ApiTestBase<ReadOnlyCluster, DeletePipelineResponse, IDeletePipelineRequest, DeletePipelineDescriptor, DeletePipelineRequest>
 	{
 		private static readonly string _id = "pipeline-1";
 

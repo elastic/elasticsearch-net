@@ -9,7 +9,7 @@ namespace Nest
 	/// A response to a search request
 	/// </summary>
 	/// <typeparam name="T">The document type</typeparam>
-	public interface ISearchResponse<T> : IResponse where T : class
+	public interface ISearchResponse<out T> : IResponse where T : class
 	{
 		/// <summary>
 		/// Gets the collection of aggregations
@@ -53,7 +53,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the meta data about the hits that match the search query criteria.
 		/// </summary>
-		HitsMetadata<T> HitsMetadata { get; }
+		IHitsMetadata<T> HitsMetadata { get; }
 
 		/// <summary>
 		/// Gets the maximum score for documents matching the search query criteria
@@ -86,7 +86,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the suggester results.
 		/// </summary>
-		SuggestDictionary<T> Suggest { get; }
+		ISuggestDictionary<T> Suggest { get; }
 
 		/// <summary>
 		/// Gets a value indicating whether the search was terminated early
@@ -146,7 +146,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[DataMember(Name ="hits")]
-		public HitsMetadata<T> HitsMetadata { get; internal set; }
+		public IHitsMetadata<T> HitsMetadata { get; internal set; }
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
@@ -170,7 +170,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[DataMember(Name ="suggest")]
-		public SuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
+		public ISuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
 
 		/// <inheritdoc />
 		[DataMember(Name ="terminated_early")]

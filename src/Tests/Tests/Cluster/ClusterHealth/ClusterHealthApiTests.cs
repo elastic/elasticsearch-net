@@ -12,7 +12,7 @@ using static Nest.Infer;
 namespace Tests.Cluster.ClusterHealth
 {
 	public class ClusterHealthApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -28,7 +28,7 @@ namespace Tests.Cluster.ClusterHealth
 			(client, r) => client.ClusterHealthAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterHealthResponse response)
+		protected override void ExpectResponse(ClusterHealthResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Status.Should().NotBe(Health.Red);
@@ -41,7 +41,7 @@ namespace Tests.Cluster.ClusterHealth
 	}
 
 	public class ClusterHealthShardsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -60,7 +60,7 @@ namespace Tests.Cluster.ClusterHealth
 			(client, r) => client.ClusterHealthAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterHealthResponse response)
+		protected override void ExpectResponse(ClusterHealthResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Status.Should().NotBe(Health.Red);

@@ -12,16 +12,16 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-adding
 		/// </summary>
 		/// <param name="request">A descriptor that describes the put alias request</param>
-		IPutAliasResponse PutAlias(IPutAliasRequest request);
+		PutAliasResponse PutAlias(IPutAliasRequest request);
 
 		/// <inheritdoc />
-		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default);
+		Task<PutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
-		IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null);
+		PutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null);
 
 		/// <inheritdoc />
-		Task<IPutAliasResponse> PutAliasAsync(
+		Task<PutAliasResponse> PutAliasAsync(
 			Indices indices,
 			Name alias,
 			Func<PutAliasDescriptor, IPutAliasRequest> selector = null,
@@ -32,19 +32,19 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutAliasResponse PutAlias(IPutAliasRequest request) =>
+		public PutAliasResponse PutAlias(IPutAliasRequest request) =>
 			DoRequest<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) =>
+		public PutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) =>
 			PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)));
 
 		/// <inheritdoc />
-		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutAliasRequest, IPutAliasResponse, PutAliasResponse>(request, request.RequestParameters, ct);
+		public Task<PutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public Task<IPutAliasResponse> PutAliasAsync(
+		public Task<PutAliasResponse> PutAliasAsync(
 			Indices indices,
 			Name alias,
 			Func<PutAliasDescriptor, IPutAliasRequest> selector = null,

@@ -14,8 +14,7 @@ namespace Nest
 
 		public Aliases(IDictionary<IndexName, IAlias> container) : base(container) { }
 
-		public Aliases(Dictionary<IndexName, IAlias> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Aliases(Dictionary<IndexName, IAlias> container) : base(container) { }
 
 		/// <summary>
 		/// Add any setting to the index

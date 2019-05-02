@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.RootNodeInfo
 {
 	public class RootNodeInfoApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, RootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
 	{
 		public RootNodeInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,7 +24,7 @@ namespace Tests.Cluster.RootNodeInfo
 			(client, r) => client.RootNodeInfoAsync(r)
 		);
 
-		protected override void ExpectResponse(IRootNodeInfoResponse response)
+		protected override void ExpectResponse(RootNodeInfoResponse response)
 		{
 			response.Version.Should().NotBeNull();
 			response.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();

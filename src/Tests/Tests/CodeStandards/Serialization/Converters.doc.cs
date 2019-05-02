@@ -22,7 +22,7 @@ namespace Tests.CodeStandards.Serialization
 			var visible = new List<string>();
 			foreach (var formatter in formatters)
 			{
-				if (formatter.IsVisible())
+				if (formatter.IsVisible)
 					visible.Add(formatter.Name);
 			}
 			visible.Should().BeEmpty();

@@ -1,6 +1,4 @@
 ﻿namespace Nest
 {
-	public interface IDeleteDatafeedResponse : IAcknowledgedResponse { }
-
-	public class DeleteDatafeedResponse : AcknowledgedResponseBase, IDeleteDatafeedResponse { }
+	public class DeleteDatafeedResponse : AcknowledgedResponseBase { }
 }

@@ -2,24 +2,15 @@
 
 namespace Nest
 {
-	public interface IInvalidateUserAccessTokenResponse : IResponse
+	public class InvalidateUserAccessTokenResponse : ResponseBase
 	{
 		[DataMember(Name = "invalidated_tokens")]
-		long InvalidatedTokens { get; }
-
-		[DataMember(Name = "previously_invalidated_tokens")]
-		long PreviouslyInvalidatedTokens { get; }
-
-		[DataMember(Name = "error_count")]
-		long ErrorCount { get; }
-	}
-
-	public class InvalidateUserAccessTokenResponse : ResponseBase, IInvalidateUserAccessTokenResponse
-	{
 		public long InvalidatedTokens { get; internal set;  }
 
+		[DataMember(Name = "previously_invalidated_tokens")]
 		public long PreviouslyInvalidatedTokens { get; internal set;  }
 
+		[DataMember(Name = "error_count")]
 		public long ErrorCount { get; internal set;  }
 	}
 }

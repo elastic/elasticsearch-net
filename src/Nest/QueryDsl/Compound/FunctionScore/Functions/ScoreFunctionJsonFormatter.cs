@@ -353,31 +353,40 @@ namespace Nest
 			}
 
 			segmentReader = new JsonReader(segment.Array, segment.Offset);
-			// TODO: Avoid allocation
-			var t = $"{type}_{subType}";
 
-			switch (t)
+			switch (type)
 			{
-				case "exp_numeric":
-					return Deserialize<ExponentialDecayFunction>(ref segmentReader, formatterResolver);
-				case "exp_date":
-					return Deserialize<ExponentialDateDecayFunction>(ref segmentReader, formatterResolver);
-				case "exp_geo":
-					return Deserialize<ExponentialGeoDecayFunction>(ref segmentReader, formatterResolver);
-				case "gauss_numeric":
-					return Deserialize<GaussDecayFunction>(ref segmentReader, formatterResolver);
-				case "gauss_date":
-					return Deserialize<GaussDateDecayFunction>(ref segmentReader, formatterResolver);
-				case "gauss_geo":
-					return Deserialize<GaussGeoDecayFunction>(ref segmentReader, formatterResolver);
-				case "linear_numeric":
-					return Deserialize<LinearDecayFunction>(ref segmentReader, formatterResolver);
-				case "linear_date":
-					return Deserialize<LinearDateDecayFunction>(ref segmentReader, formatterResolver);
-				case "linear_geo":
-					return Deserialize<LinearGeoDecayFunction>(ref segmentReader, formatterResolver);
-				default:
-					return null;
+				case "exp":
+				{
+					switch (subType)
+					{
+						case "numeric": return Deserialize<ExponentialDecayFunction>(ref segmentReader, formatterResolver);
+						case "date": return Deserialize<ExponentialDateDecayFunction>(ref segmentReader, formatterResolver);
+						case "geo": return Deserialize<ExponentialGeoDecayFunction>(ref segmentReader, formatterResolver);
+						default: return null;
+					}
+				}
+				case "gauss":
+				{
+					switch (subType)
+					{
+						case "numeric": return Deserialize<GaussDecayFunction>(ref segmentReader, formatterResolver);
+						case "date": return Deserialize<GaussDateDecayFunction>(ref segmentReader, formatterResolver);
+						case "geo": return Deserialize<GaussGeoDecayFunction>(ref segmentReader, formatterResolver);
+						default: return null;
+					}
+				}
+				case "linear":
+				{
+					switch (subType)
+					{
+						case "numeric": return Deserialize<LinearDecayFunction>(ref segmentReader, formatterResolver);
+						case "date": return Deserialize<LinearDateDecayFunction>(ref segmentReader, formatterResolver);
+						case "geo": return Deserialize<LinearGeoDecayFunction>(ref segmentReader, formatterResolver);
+						default: return null;
+					}
+				}
+				default: return null;
 			}
 		}
 

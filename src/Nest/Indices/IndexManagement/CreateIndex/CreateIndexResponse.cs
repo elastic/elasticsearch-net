@@ -3,15 +3,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface ICreateIndexResponse : IAcknowledgedResponse
+	public class CreateIndexResponse : AcknowledgedResponseBase
 	{
 		[DataMember(Name ="shards_acknowledged")]
-		bool ShardsAcknowledged { get; }
-	}
-
-	public class CreateIndexResponse : AcknowledgedResponseBase, ICreateIndexResponse
-	{
 		public bool ShardsAcknowledged { get; set; }
 	}
 }

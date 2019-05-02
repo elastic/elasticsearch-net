@@ -14,7 +14,7 @@ namespace Tests.Aggregations
 			var aggregationTypes =
 				from t in typeof(IAggregation).Assembly.Types()
 				where typeof(IAggregation).IsAssignableFrom(t)
-				where t.IsInterface()
+				where t.IsInterface
 				select t;
 
 			var visitorMethodParameters =

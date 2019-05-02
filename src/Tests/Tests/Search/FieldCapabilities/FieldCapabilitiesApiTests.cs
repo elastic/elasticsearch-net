@@ -13,7 +13,7 @@ using static Nest.Infer;
 namespace Tests.Search.FieldCapabilities
 {
 	public class FieldCapabilitiesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, FieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor,
 			FieldCapabilitiesRequest>
 	{
 		public FieldCapabilitiesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -41,7 +41,7 @@ namespace Tests.Search.FieldCapabilities
 			(c, r) => c.FieldCapabilitiesAsync(r)
 		);
 
-		protected override void ExpectResponse(IFieldCapabilitiesResponse response)
+		protected override void ExpectResponse(FieldCapabilitiesResponse response)
 		{
 
 			var sourceField = response.Fields.First(kv => kv.Value.Source != null).Value.Source;

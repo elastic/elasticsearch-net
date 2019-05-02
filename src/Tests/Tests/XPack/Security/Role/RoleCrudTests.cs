@@ -13,14 +13,14 @@ namespace Tests.XPack.Security.Role
 {
 	[SkipVersion("<2.3.0", "")]
 	public class RoleCrudTests
-		: CrudTestBase<XPackCluster, IPutRoleResponse, IGetRoleResponse, IPutRoleResponse, IDeleteRoleResponse>
+		: CrudTestBase<XPackCluster, PutRoleResponse, GetRoleResponse, PutRoleResponse, DeleteRoleResponse>
 	{
 		public RoleCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private static string CreateRoleName(string s) => $"role-{s}";
 
-		protected override LazyResponses Create() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, IPutRoleResponse>(
+		protected override LazyResponses Create() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, PutRoleResponse>(
 			CreateInitializer,
 			CreateFluent,
 			(s, c, f) => c.PutRole(CreateRoleName(s), f),
@@ -63,7 +63,7 @@ namespace Tests.XPack.Security.Role
 				)
 			);
 
-		protected override LazyResponses Read() => Calls<GetRoleDescriptor, GetRoleRequest, IGetRoleRequest, IGetRoleResponse>(
+		protected override LazyResponses Read() => Calls<GetRoleDescriptor, GetRoleRequest, IGetRoleRequest, GetRoleResponse>(
 			ReadInitializer,
 			ReadFluent,
 			(s, c, f) => c.GetRole(f),
@@ -76,7 +76,7 @@ namespace Tests.XPack.Security.Role
 
 		protected IGetRoleRequest ReadFluent(string role, GetRoleDescriptor d) => d.Name(CreateRoleName(role));
 
-		protected override LazyResponses Update() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, IPutRoleResponse>(
+		protected override LazyResponses Update() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, PutRoleResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			(s, c, f) => c.PutRole(CreateRoleName(s), f),
@@ -121,7 +121,7 @@ namespace Tests.XPack.Security.Role
 				)
 			);
 
-		protected override LazyResponses Delete() => Calls<DeleteRoleDescriptor, DeleteRoleRequest, IDeleteRoleRequest, IDeleteRoleResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteRoleDescriptor, DeleteRoleRequest, IDeleteRoleRequest, DeleteRoleResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			(s, c, f) => c.DeleteRole(CreateRoleName(s), f),
@@ -134,7 +134,7 @@ namespace Tests.XPack.Security.Role
 
 		protected IDeleteRoleRequest DeleteFluent(string role, DeleteRoleDescriptor d) => d;
 
-		protected override void ExpectAfterCreate(IGetRoleResponse response)
+		protected override void ExpectAfterCreate(GetRoleResponse response)
 		{
 			response.Roles.Should().NotBeEmpty();
 			var role = response.Roles.First().Value;
@@ -152,7 +152,7 @@ namespace Tests.XPack.Security.Role
 			q.MatchAll.Should().NotBeNull();
 		}
 
-		protected override void ExpectAfterUpdate(IGetRoleResponse response)
+		protected override void ExpectAfterUpdate(GetRoleResponse response)
 		{
 			response.Roles.Should().NotBeEmpty();
 			var role = response.Roles.First().Value;
@@ -170,7 +170,7 @@ namespace Tests.XPack.Security.Role
 			q.MatchAll.Should().NotBeNull();
 		}
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteRoleResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteRoleResponse response)
 		{
 			response.Found.Should().BeFalse();
 			response.ServerError.Should().BeNull();

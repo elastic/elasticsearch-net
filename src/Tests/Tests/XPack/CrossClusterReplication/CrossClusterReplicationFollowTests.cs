@@ -44,7 +44,7 @@ namespace Tests.XPack.CrossClusterReplication
 		public CrossClusterReplicationFollowTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
 		{
 			{
-				CreateIndexStep, u => u.Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, ICreateIndexResponse>(
+				CreateIndexStep, u => u.Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
 					v => new CreateIndexRequest(v)
 					{
 						Settings = new IndexSettings()
@@ -74,7 +74,7 @@ namespace Tests.XPack.CrossClusterReplication
 			},
 			{
 				FollowIndexStep, u =>
-					u.Calls<CreateFollowIndexDescriptor, CreateFollowIndexRequest, ICreateFollowIndexRequest, ICreateFollowIndexResponse>(
+					u.Calls<CreateFollowIndexDescriptor, CreateFollowIndexRequest, ICreateFollowIndexRequest, CreateFollowIndexResponse>(
 						v => new CreateFollowIndexRequest(CopyIndex(v))
 						{
 							RemoteCluster = DefaultSeeder.RemoteClusterName,
@@ -104,7 +104,7 @@ namespace Tests.XPack.CrossClusterReplication
 			},
 			{
 				PauseFollowStep, u =>
-					u.Calls<PauseFollowIndexDescriptor, PauseFollowIndexRequest, IPauseFollowIndexRequest, IPauseFollowIndexResponse>(
+					u.Calls<PauseFollowIndexDescriptor, PauseFollowIndexRequest, IPauseFollowIndexRequest, PauseFollowIndexResponse>(
 						v => new PauseFollowIndexRequest(CopyIndex(v)),
 						(v, d) => d,
 						(v, c, f) => c.PauseFollowIndex(CopyIndex(v), f),
@@ -115,7 +115,7 @@ namespace Tests.XPack.CrossClusterReplication
 			},
 			{
 				ResumeFollowStep, u =>
-					u.Calls<ResumeFollowIndexDescriptor, ResumeFollowIndexRequest, IResumeFollowIndexRequest, IResumeFollowIndexResponse>(
+					u.Calls<ResumeFollowIndexDescriptor, ResumeFollowIndexRequest, IResumeFollowIndexRequest, ResumeFollowIndexResponse>(
 						v => new ResumeFollowIndexRequest(CopyIndex(v)),
 						(v, d) => d,
 						(v, c, f) => c.ResumeFollowIndex(CopyIndex(v), f),
@@ -129,7 +129,7 @@ namespace Tests.XPack.CrossClusterReplication
 			},
 			{
 				FollowStatsStep, u =>
-					u.Calls<FollowIndexStatsDescriptor, FollowIndexStatsRequest, IFollowIndexStatsRequest, IFollowIndexStatsResponse>(
+					u.Calls<FollowIndexStatsDescriptor, FollowIndexStatsRequest, IFollowIndexStatsRequest, FollowIndexStatsResponse>(
 						v => new FollowIndexStatsRequest(CopyIndex(v)),
 						(v, d) => d,
 						(v, c, f) => c.FollowIndexStats(CopyIndex(v), f),
@@ -139,7 +139,7 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				DeleteOriginalIndicesStep, u => u.Calls<DeleteIndexDescriptor, DeleteIndexRequest, IDeleteIndexRequest, IDeleteIndexResponse>
+				DeleteOriginalIndicesStep, u => u.Calls<DeleteIndexDescriptor, DeleteIndexRequest, IDeleteIndexRequest, DeleteIndexResponse>
 				(
 					v => new DeleteIndexRequest(v),
 					(v, d) => d,
@@ -152,7 +152,7 @@ namespace Tests.XPack.CrossClusterReplication
 			{
 				//This time we get exceptions on the stats
 				FollowStatsAgainStep, u =>
-					u.Calls<FollowIndexStatsDescriptor, FollowIndexStatsRequest, IFollowIndexStatsRequest, IFollowIndexStatsResponse>(
+					u.Calls<FollowIndexStatsDescriptor, FollowIndexStatsRequest, IFollowIndexStatsRequest, FollowIndexStatsResponse>(
 						v => new FollowIndexStatsRequest(CopyIndex(v)),
 						(v, d) => d,
 						(v, c, f) => c.FollowIndexStats(CopyIndex(v), f),
@@ -162,7 +162,7 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, ICcrStatsResponse>(
+				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, CcrStatsResponse>(
 						v => new CcrStatsRequest(),
 						(v, d) => d,
 						(v, c, f) => c.CcrStats(f),
@@ -172,7 +172,7 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				UnfollowStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, IUnfollowIndexResponse>
+				UnfollowStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, UnfollowIndexResponse>
 				(
 					v => new UnfollowIndexRequest(CopyIndex(v)),
 					(v, d) => d,
@@ -189,7 +189,7 @@ namespace Tests.XPack.CrossClusterReplication
 				CloseIndexStep, u => u.Call(async (v, c) => await c.CloseIndexAsync(CopyIndex(v)))
 			},
 			{
-				UnfollowAgainStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, IUnfollowIndexResponse>
+				UnfollowAgainStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, UnfollowIndexResponse>
 				(
 					v => new UnfollowIndexRequest(CopyIndex(v)),
 					(v, d) => d,

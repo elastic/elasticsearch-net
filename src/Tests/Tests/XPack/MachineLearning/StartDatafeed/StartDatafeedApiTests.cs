@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.StartDatafeed
 {
 	public class StartDatafeedApiTests
-		: MachineLearningIntegrationTestBase<IStartDatafeedResponse, IStartDatafeedRequest, StartDatafeedDescriptor, StartDatafeedRequest>
+		: MachineLearningIntegrationTestBase<StartDatafeedResponse, IStartDatafeedRequest, StartDatafeedDescriptor, StartDatafeedRequest>
 	{
 		public StartDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -49,6 +49,6 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 
 		protected override StartDatafeedDescriptor NewDescriptor() => new StartDatafeedDescriptor(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(IStartDatafeedResponse response) => response.Started.Should().BeTrue();
+		protected override void ExpectResponse(StartDatafeedResponse response) => response.Started.Should().BeTrue();
 	}
 }

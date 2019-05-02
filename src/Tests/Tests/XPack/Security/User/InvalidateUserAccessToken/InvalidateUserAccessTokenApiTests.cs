@@ -13,7 +13,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 {
 	[SkipVersion("<5.5.0", "")]
 	public class InvalidateUserAccessTokenApiTests
-		: ApiIntegrationTestBase<XPackCluster, IInvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
+		: ApiIntegrationTestBase<XPackCluster, InvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
 			InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequest>
 	{
 		protected const string AccessTokenValueKey = "accesstoken";
@@ -57,7 +57,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 
 		protected override InvalidateUserAccessTokenDescriptor NewDescriptor() => new InvalidateUserAccessTokenDescriptor(CurrentAccessToken);
 
-		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response) => response.InvalidatedTokens.Should().BeGreaterThan(0);
+		protected override void ExpectResponse(InvalidateUserAccessTokenResponse response) => response.InvalidatedTokens.Should().BeGreaterThan(0);
 	}
 
 	public class InvalidateUserAccessTokenBadPasswordApiTests : InvalidateUserAccessTokenApiTests
@@ -69,6 +69,6 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 401;
 
-		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response) => response.ServerError.Should().NotBeNull();
+		protected override void ExpectResponse(InvalidateUserAccessTokenResponse response) => response.ServerError.Should().NotBeNull();
 	}
 }
