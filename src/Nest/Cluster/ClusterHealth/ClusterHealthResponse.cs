@@ -19,7 +19,7 @@ namespace Nest
 		int NumberOfPendingTasks { get; }
 		int RelocatingShards { get; }
 		Health Status { get; }
-		long TaskMaxWaitTimeInQueueInMillis { get;  }
+		long TaskMaxWaitTimeInQueueInMilliseconds { get;  }
 		bool TimedOut { get; }
 		int UnassignedShards { get; }
 	}
