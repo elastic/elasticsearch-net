@@ -6,6 +6,7 @@ using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Aggregations;
+using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Serialization;
@@ -36,7 +37,8 @@ namespace Tests.Framework
 			UniqueValues = usage.CallUniqueValues;
 		}
 
-		public virtual IElasticClient Client => TestClient.DefaultInMemoryClient;
+		public virtual IElasticClient Client =>
+			TestConfiguration.Instance.RunIntegrationTests ? Cluster.Client : TestClient.DefaultInMemoryClient;
 
 		public TCluster Cluster { get; }
 
