@@ -123,6 +123,8 @@ namespace Nest
 
 		public virtual void Visit(IIdsQuery query) => Write("ids");
 
+		public virtual void Visit(IIntervalsQuery query) => Write("intervals");
+
 		public virtual void Visit(IMatchQuery query) => Write("match", query.Field);
 
 		public virtual void Visit(IMatchPhraseQuery query) => Write("match_phrase", query.Field);

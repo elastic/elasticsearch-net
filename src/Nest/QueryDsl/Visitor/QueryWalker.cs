@@ -31,6 +31,7 @@ namespace Nest
 			});
 			VisitQuery(qd.GeoShape, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Ids, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.Intervals, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Prefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.QueryString, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Range, visitor, (v, d) => v.Visit(d));

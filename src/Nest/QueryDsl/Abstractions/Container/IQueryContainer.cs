@@ -52,6 +52,9 @@ namespace Nest
 		[DataMember(Name ="ids")]
 		IIdsQuery Ids { get; set; }
 
+		[DataMember(Name = "intervals")]
+		IIntervalsQuery Intervals { get; set; }
+
 		[IgnoreDataMember]
 		bool IsConditionless { get; }
 
