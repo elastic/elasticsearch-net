@@ -9,7 +9,6 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public interface IApiCallDetails
 	{
-
 		//TODO: Get rid of setter
         /// <summary>
         /// An audit trail of requests made to nodes within the cluster

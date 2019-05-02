@@ -52,33 +52,30 @@ namespace Nest
 		private List<IMultiTermVectorOperation> Operations =>
 			_operations ?? (_operations = new List<IMultiTermVectorOperation>());
 
-		// TODO: Rename to Documents in 7.x
 		/// <summary>
 		/// A document for which to generate term vectors
 		/// </summary>
-		public MultiTermVectorsDescriptor Get<T>(Func<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation> getSelector)
+		public MultiTermVectorsDescriptor Documents<T>(Func<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation> selector)
 			where T : class
 		{
-			Operations.AddIfNotNull(getSelector?.Invoke(new MultiTermVectorOperationDescriptor<T>()));
+			Operations.AddIfNotNull(selector?.Invoke(new MultiTermVectorOperationDescriptor<T>()));
 			return this;
 		}
 
-		// TODO: Rename to Documents in 7.x
 		/// <inheritdoc cref="IMultiTermVectorsRequest.Documents" />
-		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<long> ids,
-			Func<MultiTermVectorOperationDescriptor<T>, long, IMultiTermVectorOperation> getSelector = null
+		public MultiTermVectorsDescriptor Documents<T>(IEnumerable<long> ids,
+			Func<MultiTermVectorOperationDescriptor<T>, long, IMultiTermVectorOperation> selector = null
 		)
 			where T : class
 		{
 			foreach (var id in ids)
-				Operations.Add(getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id));
+				Operations.Add(selector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id));
 
 			return this;
 		}
 
-		// TODO: Rename to Documents in 7.x
 		/// <inheritdoc cref="IMultiTermVectorsRequest.Documents" />
-		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<string> ids,
+		public MultiTermVectorsDescriptor Documents<T>(IEnumerable<string> ids,
 			Func<MultiTermVectorOperationDescriptor<T>, string, IMultiTermVectorOperation> getSelector = null
 		)
 			where T : class
@@ -89,9 +86,8 @@ namespace Nest
 			return this;
 		}
 
-		// TODO: Rename to Documents in 7.x
 		/// <inheritdoc cref="IMultiTermVectorsRequest.Documents" />
-		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<Id> ids,
+		public MultiTermVectorsDescriptor Documents<T>(IEnumerable<Id> ids,
 			Func<MultiTermVectorOperationDescriptor<T>, Id, IMultiTermVectorOperation> getSelector = null
 		)
 			where T : class

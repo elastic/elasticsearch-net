@@ -39,8 +39,7 @@ namespace Elasticsearch.Net
 
 		public List<Audit> AuditTrail { get; } = new List<Audit>();
 
-		// TODO: rename to DepeletedRetries in 7.x
-		public bool DepleededRetries => Retried >= MaxRetries + 1 || IsTakingTooLong;
+		public bool DepletedRetries => Retried >= MaxRetries + 1 || IsTakingTooLong;
 
 		public bool FirstPoolUsageNeedsSniffing =>
 			!RequestDisabledSniff
@@ -342,11 +341,11 @@ namespace Elasticsearch.Net
 			var refreshed = false;
 			for (var i = 0; i < 100; i++)
 			{
-				if (DepleededRetries) yield break;
+				if (DepletedRetries) yield break;
 
 				foreach (var node in _connectionPool
 					.CreateView(LazyAuditable)
-					.TakeWhile(node => !DepleededRetries))
+					.TakeWhile(node => !DepletedRetries))
 				{
 					if (!_settings.NodePredicate(node)) continue;
 

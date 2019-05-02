@@ -86,8 +86,7 @@ namespace Nest
 		/// vectors for
 		/// </summary>
 		[DataMember(Name = "fields")]
-		// TODO: Rename to Fields in 7.x
-		Fields StoredFields { get; set; }
+		Fields Fields { get; set; }
 
 		/// <summary>
 		/// Whether to include term statistics. When set to <c>true</c>,
@@ -159,7 +158,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Fields StoredFields { get; set; }
+		public Fields Fields { get; set; }
 
 		/// <inheritdoc />
 		public bool? TermStatistics { get; set; }
@@ -193,19 +192,17 @@ namespace Nest
 			set => _routing = value;
 		}
 
-		Fields IMultiTermVectorOperation.StoredFields { get; set; }
+		Fields IMultiTermVectorOperation.Fields { get; set; }
 		bool? IMultiTermVectorOperation.TermStatistics { get; set; }
 		long? IMultiTermVectorOperation.Version { get; set; }
 		VersionType? IMultiTermVectorOperation.VersionType { get; set; }
 
-		/// <inheritdoc cref="IMultiTermVectorOperation.StoredFields" />
-		// TODO: Rename to Fields in 7.x
-		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
+		/// <inheritdoc cref="IMultiTermVectorOperation.Fields" />
+		public MultiTermVectorOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		/// <inheritdoc cref="IMultiTermVectorOperation.StoredFields" />
-		// TODO: Rename to Fields in 7.x
-		public MultiTermVectorOperationDescriptor<T> StoredFields(Fields fields) => Assign(fields, (a, v) => a.StoredFields = v);
+		/// <inheritdoc cref="IMultiTermVectorOperation.Fields" />
+		public MultiTermVectorOperationDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Id" />
 		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(id, (a, v) => a.Id = v);

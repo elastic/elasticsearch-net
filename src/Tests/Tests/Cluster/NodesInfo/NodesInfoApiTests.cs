@@ -111,7 +111,7 @@ namespace Tests.Cluster.NodesInfo
 			jvm.Memory.HeapInitInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(Dictionary<string, NodeThreadPoolInfo> pools)
+		protected void Assert(IReadOnlyDictionary<string, NodeThreadPoolInfo> pools)
 		{
 			pools.Should().NotBeEmpty().And.ContainKey("fetch_shard_store");
 			var pool = pools["fetch_shard_store"];

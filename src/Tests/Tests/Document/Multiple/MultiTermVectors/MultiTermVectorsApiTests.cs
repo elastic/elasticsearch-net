@@ -45,7 +45,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p
+			.Documents<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p
 				.FieldStatistics()
 				.Payloads()
 				.TermStatistics()
