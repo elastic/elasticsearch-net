@@ -81,13 +81,14 @@ namespace Tests.ClientConcepts.ServerError
 			error.CausedBy.CausedBy.CausedBy.Reason.Should().Be("x");
 			error.RootCause.Should().NotBeEmpty(origin);
 			error.Headers.Should().HaveCount(2, origin);
-			AssertMetadata(origin, error.Metadata);
-			error.CausedBy.Metadata.Should().NotBeNull();
-			error.CausedBy.Metadata.ScriptStack.Should().HaveCount(2);
-			error.CausedBy.Metadata.ResourceId.Should().HaveCount(2);
+			AssertMetadata(origin, error);
+			error.CausedBy.Should().NotBeNull();
+			error.CausedBy.ScriptStack.Should().HaveCount(2);
+			error.CausedBy.ResourceId.Should().HaveCount(2);
+			error.AdditionalProperties.Should().ContainKeys("unknown_prop", "unknown_prop2");
 		}
 
-		private void AssertMetadata(string origin, ErrorCause.ErrorCauseMetadata errorMetadata)
+		private void AssertMetadata(string origin, ErrorCause errorMetadata)
 		{
 			errorMetadata.Should().NotBeNull(origin);
 			errorMetadata.Grouped.Should().BeTrue(origin);
