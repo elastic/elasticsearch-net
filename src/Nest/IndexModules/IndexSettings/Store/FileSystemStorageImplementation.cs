@@ -22,7 +22,7 @@ namespace Nest
 		/// <summary>
 		/// The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory)
 		/// using NIO. It allows multiple threads to read from the same file concurrently. It is not
-		/// recommended on Windows because of a bug in the SUN Java implementation./
+		/// recommended on Windows because of a bug in the SUN Java implementation.
 		/// </summary>
 		[EnumMember(Value = "niofs")]
 		NIO,

@@ -25,7 +25,26 @@ namespace Nest
 			return new FieldValues(formatterResolver.GetConnectionSettings().Inferrer, fields);
 		}
 
-		public void Serialize(ref JsonWriter writer, FieldValues value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotImplementedException();
+		public void Serialize(ref JsonWriter writer, FieldValues value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var count = 0;
+			foreach (var fieldValue in value)
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName(fieldValue.Key);
+				writer.WriteRaw(fieldValue.Value.Bytes);
+				count++;
+			}
+			writer.WriteEndObject();
+		}
 	}
 }

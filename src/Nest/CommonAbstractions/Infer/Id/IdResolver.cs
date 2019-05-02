@@ -31,8 +31,7 @@ namespace Nest
 			return t => f((T)t);
 		}
 
-		//TODO where T : class prevents boxing on null check.
-		public string Resolve<T>(T @object) =>
+		public string Resolve<T>(T @object) where T : class =>
 			_connectionSettings.DefaultDisableIdInference || @object == null ? null : Resolve(@object.GetType(), @object);
 
 		public string Resolve(Type type, object @object)

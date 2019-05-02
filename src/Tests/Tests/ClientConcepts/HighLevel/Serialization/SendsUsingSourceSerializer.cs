@@ -140,8 +140,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var doc = new ADocument();
 			CanAlterSource(
 				r => r.MultiTermVectors(b => b
-					.Get<ADocument>(g => g.Document(doc))
-					.Get<ADocument>(g => g.Document(doc))
+					.Documents<ADocument>(g => g.Document(doc))
+					.Documents<ADocument>(g => g.Document(doc))
 				),
 				ExpectMultiTermVectors(DefaultSerialized),
 				ExpectMultiTermVectors(IncludesNullAndType)

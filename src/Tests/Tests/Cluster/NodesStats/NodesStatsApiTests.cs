@@ -186,7 +186,7 @@ namespace Tests.Cluster.NodesStats
 
 		protected void Assert(HttpStats http) => http.Should().NotBeNull();
 
-		protected void Assert(Dictionary<string, BreakerStats> breakers)
+		protected void Assert(IReadOnlyDictionary<string, BreakerStats> breakers)
 		{
 			breakers.Should().NotBeEmpty().And.ContainKey("request");
 			var requestBreaker = breakers["request"];
@@ -213,7 +213,7 @@ namespace Tests.Cluster.NodesStats
 			path.Type.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected void Assert(Dictionary<string, ThreadCountStats> threadPools)
+		protected void Assert(IReadOnlyDictionary<string, ThreadCountStats> threadPools)
 		{
 			threadPools.Should().NotBeEmpty().And.ContainKey("management");
 			var threadPool = threadPools["management"];

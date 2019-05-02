@@ -151,8 +151,7 @@
 
 		public virtual void Visit(ITermsAggregation aggregation) { }
 
-		// TODO: make virtual
-		public void Visit(ISignificantTextAggregation aggregation) { }
+		public virtual void Visit(ISignificantTextAggregation aggregation) { }
 
 		public virtual void Visit(IPercentileRanksAggregation aggregation) { }
 
