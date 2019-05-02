@@ -344,6 +344,16 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.Ids = query);
 
 		/// <summary>
+		/// Allows fine-grained control over the order and proximity of matching terms.
+		/// Matching rules are constructed from a small set of definitions,
+		/// and the rules are then applied to terms from a particular field.
+		/// The definitions produce sequences of minimal intervals that span terms in a body of text.
+		/// These intervals can be further combined and filtered by parent sources.
+		/// </summary>
+		public QueryContainer Intervals(Func<IntervalsQueryDescriptor<T>, IIntervalsQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.Intervals = query);
+
+		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery.
 		/// </summary>
 		public QueryContainer SpanTerm(Func<SpanTermQueryDescriptor<T>, ISpanTermQuery> selector) =>

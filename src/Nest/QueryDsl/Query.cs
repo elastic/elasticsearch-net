@@ -56,6 +56,10 @@ namespace Nest
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Ids(selector);
 
+		/// <inheritdoc cref="IIntervalsQuery"/>
+		public static QueryContainer Intervals(Func<IntervalsQueryDescriptor<T>, IIntervalsQuery> selector) =>
+			new QueryContainerDescriptor<T>().Intervals(selector);
+
 		public static QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().Match(selector);
 
