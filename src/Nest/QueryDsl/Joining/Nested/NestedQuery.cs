@@ -57,7 +57,7 @@ namespace Nest
 
 		public NestedQueryDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
+		public NestedQueryDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 
 		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(selector.InvokeOrDefault(new InnerHitsDescriptor<T>()), (a, v) => a.InnerHits = v);

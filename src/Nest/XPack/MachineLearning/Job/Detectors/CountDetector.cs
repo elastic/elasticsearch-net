@@ -119,15 +119,15 @@ namespace Nest
 
 		public CountDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public CountDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
+		public CountDetectorDescriptor<T> ByFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
 		public CountDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(overFieldName, (a, v) => a.OverFieldName = v);
 
-		public CountDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
+		public CountDetectorDescriptor<T> OverFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
 
 		public CountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public CountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+		public CountDetectorDescriptor<T> PartitionFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 
@@ -141,12 +141,12 @@ namespace Nest
 
 		public NonZeroCountDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public NonZeroCountDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
+		public NonZeroCountDetectorDescriptor<T> ByFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
 		public NonZeroCountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) =>
 			Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public NonZeroCountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+		public NonZeroCountDetectorDescriptor<T> PartitionFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 
@@ -162,20 +162,20 @@ namespace Nest
 
 		public DistinctCountDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public DistinctCountDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
+		public DistinctCountDetectorDescriptor<T> FieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
 		public DistinctCountDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public DistinctCountDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
+		public DistinctCountDetectorDescriptor<T> ByFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
 		public DistinctCountDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(overFieldName, (a, v) => a.OverFieldName = v);
 
-		public DistinctCountDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
+		public DistinctCountDetectorDescriptor<T> OverFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
 
 		public DistinctCountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) =>
 			Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public DistinctCountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+		public DistinctCountDetectorDescriptor<T> PartitionFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 

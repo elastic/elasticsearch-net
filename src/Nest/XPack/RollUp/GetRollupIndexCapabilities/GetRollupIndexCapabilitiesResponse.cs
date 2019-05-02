@@ -43,6 +43,8 @@ namespace Nest
 		) : base(c, b) { }
 
 		public IReadOnlyCollection<RollupFieldsIndexCapabilities> Field<T>(Expression<Func<T, object>> selector) => this[selector];
+		
+		public IReadOnlyCollection<RollupFieldsIndexCapabilities> Field<T, TValue>(Expression<Func<T, TValue>> selector) => this[selector];
 
 		internal class Converter : ResolvableDictionaryFormatterBase
 				<RollupFieldsIndexCapabilitiesDictionary, Field, IReadOnlyCollection<RollupFieldsIndexCapabilities>>

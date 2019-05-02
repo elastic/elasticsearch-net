@@ -358,7 +358,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			 */
 			var analyzeResponse = client.Analyze(a => a
 				.Index("project-index")
-				.Field<Project>(f => f.Name)
+				.Field<Project, string>(f => f.Name)
 				.Text("F# is THE SUPERIOR language :)")
 			);
 		}

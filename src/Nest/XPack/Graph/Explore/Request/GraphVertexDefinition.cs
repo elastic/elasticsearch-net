@@ -71,7 +71,7 @@ namespace Nest
 	{
 		public GraphVerticesDescriptor() : base(new List<IGraphVertexDefinition>()) { }
 
-		public GraphVerticesDescriptor<T> Vertex(Expression<Func<T, object>> field,
+		public GraphVerticesDescriptor<T> Vertex<TValue>(Expression<Func<T, TValue>> field,
 			Func<GraphVertexDefinitionDescriptor, IGraphVertexDefinition> selector = null
 		) =>
 			Assign(selector.InvokeOrDefault(new GraphVertexDefinitionDescriptor(field)), (a, v) => a.Add(v));

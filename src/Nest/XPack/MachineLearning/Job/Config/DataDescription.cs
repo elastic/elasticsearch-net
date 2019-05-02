@@ -57,7 +57,7 @@ namespace Nest
 		public DataDescriptionDescriptor<T> TimeField(Field timeField) => Assign(timeField, (a, v) => a.TimeField = v);
 
 		/// <inheritdoc />
-		public DataDescriptionDescriptor<T> TimeField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TimeField = v);
+		public DataDescriptionDescriptor<T> TimeField<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.TimeField = v);
 
 		/// <inheritdoc />
 		public DataDescriptionDescriptor<T> TimeFormat(string timeFormat) => Assign(timeFormat, (a, v) => a.TimeFormat = v);

@@ -34,7 +34,7 @@ namespace Nest
 
 		public JoinProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public JoinProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public JoinProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public JoinProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);

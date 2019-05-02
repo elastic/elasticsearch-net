@@ -118,7 +118,7 @@ namespace Nest
 		public AnalysisConfigDescriptor<T> CategorizationFieldName(Field field) => Assign(field, (a, v) => a.CategorizationFieldName = v);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> CategorizationFieldName(Expression<Func<T, object>> objectPath) =>
+		public AnalysisConfigDescriptor<T> CategorizationFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.CategorizationFieldName = v);
 
 		/// <inheritdoc />
@@ -150,7 +150,7 @@ namespace Nest
 			Assign(summaryCountFieldName, (a, v) => a.SummaryCountFieldName = v);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Expression<Func<T, object>> objectPath) =>
+		public AnalysisConfigDescriptor<T> SummaryCountFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.SummaryCountFieldName = v);
 	}
 }

@@ -90,7 +90,7 @@ namespace Nest
 		public static QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Percolate(selector);
 
-		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+		public static QueryContainer Prefix<TValue>(Expression<Func<T, TValue>> fieldDescriptor, string value, double? boost = null,
 			MultiTermQueryRewrite rewrite = null, string name = null
 		) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
@@ -147,7 +147,7 @@ namespace Nest
 		public static QueryContainer SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
 			new QueryContainerDescriptor<T>().SpanFieldMasking(selector);
 
-		public static QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null, string name = null) =>
+		public static QueryContainer Term<TValue>(Expression<Func<T, TValue>> fieldDescriptor, object value, double? boost = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, boost, name);
 
 		public static QueryContainer Term(Field field, object value, double? boost = null, string name = null) =>
@@ -165,7 +165,7 @@ namespace Nest
 		public static QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
 			new QueryContainerDescriptor<T>().TermsSet(selector);
 
-		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+		public static QueryContainer Wildcard<TValue>(Expression<Func<T, TValue>> fieldDescriptor, string value, double? boost = null,
 			MultiTermQueryRewrite rewrite = null, string name = null
 		) =>
 			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);

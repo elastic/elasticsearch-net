@@ -101,13 +101,13 @@ namespace Nest
 		public KeyValueProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.Field" />
-		public KeyValueProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public KeyValueProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TargetField" />
 		public KeyValueProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TargetField" />
-		public KeyValueProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
+		public KeyValueProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.FieldSplit" />
 		public KeyValueProcessorDescriptor<T> FieldSplit(string split) => Assign(split, (a, v) => a.FieldSplit = v);

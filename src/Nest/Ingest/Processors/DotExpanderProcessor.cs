@@ -74,7 +74,7 @@ namespace Nest
 		/// <summary>
 		/// The field to expand into an object field
 		/// </summary>
-		public DotExpanderProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public DotExpanderProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <summary>

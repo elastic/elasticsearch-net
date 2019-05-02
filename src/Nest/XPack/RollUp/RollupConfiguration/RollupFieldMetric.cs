@@ -26,13 +26,13 @@ namespace Nest
 	{
 		public RollupFieldMetricsDescriptor() : base(new List<IRollupFieldMetric>()) { }
 
-		public RollupFieldMetricsDescriptor<T> Field(Expression<Func<T, object>> field, params RollupMetric[] metrics) =>
+		public RollupFieldMetricsDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field, params RollupMetric[] metrics) =>
 			Assign(new RollupFieldMetric { Field = field, Metrics = metrics }, (a, v) => a.Add(v));
 
 		public RollupFieldMetricsDescriptor<T> Field(Field field, params RollupMetric[] metrics) =>
 			Assign(new RollupFieldMetric { Field = field, Metrics = metrics }, (a, v) => a.Add(v));
 
-		public RollupFieldMetricsDescriptor<T> Field(Expression<Func<T, object>> field, IEnumerable<RollupMetric> metrics) =>
+		public RollupFieldMetricsDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field, IEnumerable<RollupMetric> metrics) =>
 			Assign(new RollupFieldMetric { Field = field, Metrics = metrics }, (a, v) => a.Add(v));
 
 		public RollupFieldMetricsDescriptor<T> Field(Field field, IEnumerable<RollupMetric> metrics) =>

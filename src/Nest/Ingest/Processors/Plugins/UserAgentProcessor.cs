@@ -75,14 +75,14 @@ namespace Nest
 		public UserAgentProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public UserAgentProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+		public UserAgentProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />

@@ -28,7 +28,7 @@ namespace Nest
 
 		public LowercaseProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public LowercaseProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public LowercaseProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

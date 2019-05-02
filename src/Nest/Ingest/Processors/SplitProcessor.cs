@@ -34,7 +34,7 @@ namespace Nest
 
 		public SplitProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SplitProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public SplitProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public SplitProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);

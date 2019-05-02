@@ -61,7 +61,7 @@ namespace Nest
 
 		public GeoDistanceAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public GeoDistanceAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public GeoDistanceAggregationDescriptor<T> Origin(double lat, double lon) => Assign(new GeoLocation(lat, lon), (a, v) => a.Origin = v);
 

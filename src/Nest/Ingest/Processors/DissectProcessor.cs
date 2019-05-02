@@ -67,7 +67,7 @@ namespace Nest
 		public DissectProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDissectProcessor.Field">
-		public DissectProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public DissectProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDissectProcessor.Pattern">

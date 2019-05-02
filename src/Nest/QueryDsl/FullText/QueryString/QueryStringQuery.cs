@@ -307,7 +307,7 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(field, (a, v) => a.DefaultField = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.DefaultField" />
-		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.DefaultField = v);
+		public QueryStringQueryDescriptor<T> DefaultField<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.DefaultField = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Fields" />
 		public QueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>

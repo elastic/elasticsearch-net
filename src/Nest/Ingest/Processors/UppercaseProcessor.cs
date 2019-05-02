@@ -30,7 +30,7 @@ namespace Nest
 
 		public UppercaseProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public UppercaseProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public UppercaseProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

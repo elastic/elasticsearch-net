@@ -39,7 +39,7 @@ namespace Nest
 		Field IFieldAliasProperty.Path { get; set; }
 
 		/// <inheritdoc cref="IFieldAliasProperty.Path" />
-		public FieldAliasPropertyDescriptor<T> Path(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Path = v);
+		public FieldAliasPropertyDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Path = v);
 
 		/// <inheritdoc cref="IFieldAliasProperty.Path" />
 		public FieldAliasPropertyDescriptor<T> Path(Field field) => Assign(field, (a, v) => a.Path = v);
