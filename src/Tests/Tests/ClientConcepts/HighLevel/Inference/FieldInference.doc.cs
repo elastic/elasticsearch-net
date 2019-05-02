@@ -589,7 +589,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		public class GeoModel
 		{
-			[JsonProperty("country_iso_code")]
+			[DataMember(Name = "country_iso_code")]
 			public string CountryIsoCode { get; set; }
 		}
 

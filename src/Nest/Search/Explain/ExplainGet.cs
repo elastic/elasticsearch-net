@@ -4,6 +4,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[InterfaceDataContract]
+	[ReadAs(typeof(InlineGet<>))]
 	public interface IInlineGet<out TDocument> where TDocument : class
 	{
 		[DataMember(Name = "fields")]

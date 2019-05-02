@@ -4,6 +4,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	/// <summary>
+	/// Suggest option
+	/// </summary>
 	[InterfaceDataContract]
 	[ReadAs(typeof(SuggestOption<>))]
 	public interface ISuggestOption<out TDocument> where TDocument : class
@@ -61,58 +64,59 @@ namespace Nest
 
 		// TODO this should be reported to elastic/elasticsearch
 		[DataMember(Name = "_score")]
-		double? DocumentScore { get; set; }
+		double? DocumentScore { get; }
 
 		[DataMember(Name ="score")]
-		double? SuggestScore { get; set; }
+		double? SuggestScore { get; }
 	}
 
-	/// <inheritdoc cref="ISuggestOption{TDocument}"/>
-	public class SuggestOption<TDocument> where TDocument : class
+	/// <inheritdoc />
+	public class SuggestOption<TDocument> : ISuggestOption<TDocument>
+		where TDocument : class
 	{
-		/// <inheritdoc cref="ISuggestOption{TDocument}.CollateMatch"/>
+		/// <inheritdoc />
 		[DataMember(Name ="collate_match")]
 		public bool CollateMatch { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Contexts"/>
+		/// <inheritdoc />
 		[DataMember(Name ="contexts")]
 		public IDictionary<string, IEnumerable<Context>> Contexts { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Frequency"/>
+		/// <inheritdoc />
 		[DataMember(Name ="freq")]
 		public long Frequency { get; set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Highlighted"/>
+		/// <inheritdoc />
 		[DataMember(Name ="highlighted")]
 		public string Highlighted { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Id"/>
+		/// <inheritdoc />
 		[DataMember(Name ="_id")]
 		public Id Id { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Index"/>
+		/// <inheritdoc />
 		[DataMember(Name ="_index")]
 		public IndexName Index { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Score"/>
+		/// <inheritdoc />
 		[IgnoreDataMember]
 		public double Score => DocumentScore ?? SuggestScore ?? 0;
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Source"/>
+		/// <inheritdoc />
 		[DataMember(Name ="_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
 		public TDocument Source { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.Text"/>
+		/// <inheritdoc />
 		[DataMember(Name ="text")]
 		public string Text { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.DocumentScore"/>
+		/// <inheritdoc />
 		[DataMember(Name = "_score")]
-		internal double? DocumentScore { get; set; }
+		public double? DocumentScore { get; internal set; }
 
-		/// <inheritdoc cref="ISuggestOption{TDocument}.SuggestScore"/>
+		/// <inheritdoc />
 		[DataMember(Name ="score")]
-		internal double? SuggestScore { get; set; }
+		public double? SuggestScore { get; internal set; }
 	}
 }
