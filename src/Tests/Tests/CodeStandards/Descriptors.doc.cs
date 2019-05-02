@@ -78,7 +78,8 @@ namespace Tests.CodeStandards
 				{typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer)},
 				{typeof(InputDescriptor), typeof(InputContainer)},
 				{typeof(RoleMappingRuleDescriptor), typeof(RoleMappingRuleBase)},
-				{typeof(FluentDictionary<,>), typeof(FluentDictionary<,>)}
+				{typeof(FluentDictionary<,>), typeof(FluentDictionary<,>)},
+				{typeof(IntervalsDescriptor), typeof(IntervalsContainer)}
 			};
 
 			Func<Type, Type, bool> exclude = (first, second) =>
