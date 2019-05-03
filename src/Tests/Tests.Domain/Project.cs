@@ -83,7 +83,7 @@ namespace Tests.Domain
 
 		public static readonly Project Instance = new Project
 		{
-			Name = Projects.First().Name,
+			Name = First.Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
 			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
@@ -93,7 +93,7 @@ namespace Tests.Domain
 
 		private static readonly object InstanceAnonymousDefault = new
 		{
-			name = Projects.First().Name,
+			name = First.Name,
 			type = TypeName,
 			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
@@ -108,7 +108,7 @@ namespace Tests.Domain
 
 		private static readonly object InstanceAnonymousSourceSerializer = new
 		{
-			name = Projects.First().Name,
+			name = First.Name,
 			type = TypeName,
 			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
