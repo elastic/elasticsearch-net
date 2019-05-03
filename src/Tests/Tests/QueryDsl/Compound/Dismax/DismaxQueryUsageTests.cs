@@ -32,7 +32,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			TieBreaker = 1.11,
+			TieBreaker = 0.11,
 			Queries = new QueryContainer[]
 			{
 				new MatchAllQuery() { Name = "query1" },
@@ -51,7 +51,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 					new { match_all = new { _name = "query1" } },
 					new { match_all = new { _name = "query2" } }
 				},
-				tie_breaker = 1.11
+				tie_breaker = 0.11
 			}
 		};
 
@@ -59,7 +59,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 			.DisMax(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.TieBreaker(1.11)
+				.TieBreaker(0.11)
 				.Queries(
 					qq => qq.MatchAll(m => m.Name("query1")),
 					qq => qq.MatchAll(m => m.Name("query2"))
