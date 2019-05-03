@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.Joining.HasChild
 			{
 				_name = "named_query",
 				boost = 1.1,
-				type = "commitActivity",
+				type = "commits",
 				score_mode = "avg",
 				min_children = 1,
 				max_children = 5,
