@@ -3,7 +3,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[ReadAs(typeof(PutWatchResponse))]
 	public class PutWatchResponse : ResponseBase
 	{
 		[DataMember(Name = "created")]
@@ -14,5 +13,11 @@ namespace Nest
 
 		[DataMember(Name = "_version")]
 		public int Version { get; internal set; }
+
+		[DataMember(Name = "_seq_no")]
+		public long SequenceNumber { get; internal set; }
+
+		[DataMember(Name = "_primary_term")]
+		public long PrimaryTerm { get; internal set; }
 	}
 }
