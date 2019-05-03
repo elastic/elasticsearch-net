@@ -3,7 +3,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
-namespace Tests.QueryDsl.Joining.SpanNot
+namespace Tests.QueryDsl.Span.Not
 {
 	public class SpanNotUsageTests : QueryDslUsageTestsBase
 	{
@@ -23,13 +23,10 @@ namespace Tests.QueryDsl.Joining.SpanNot
 			},
 		};
 
-		protected override bool KnownParseException => true; //using both pre/post AND dist needs to be split up in to two.
-
 		protected override QueryContainer QueryInitializer => new SpanNotQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Dist = 12,
 			Post = 13,
 			Pre = 14,
 			Include = new SpanQuery
@@ -63,8 +60,7 @@ namespace Tests.QueryDsl.Joining.SpanNot
 					span_term = new { field1 = new { value = "hoya2" } }
 				},
 				pre = 14,
-				post = 13,
-				dist = 12
+				post = 13
 			}
 		};
 
@@ -72,7 +68,6 @@ namespace Tests.QueryDsl.Joining.SpanNot
 			.SpanNot(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
-				.Dist(12)
 				.Post(13)
 				.Pre(14)
 				.Include(i => i

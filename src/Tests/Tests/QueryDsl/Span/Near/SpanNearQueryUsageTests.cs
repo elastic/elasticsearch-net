@@ -5,9 +5,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
-#pragma warning disable 618 // Uses CollectPayloads
-
-namespace Tests.QueryDsl.Joining.SpanNear
+namespace Tests.QueryDsl.Span.Near
 {
 	public class SpanNearUsageTests : QueryDslUsageTestsBase
 	{
