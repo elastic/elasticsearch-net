@@ -8,14 +8,18 @@ namespace Nest
 	{
 		int ActivePrimaryShards { get; }
 		int ActiveShards { get; }
+		double ActiveShardsPercentAsNumber { get; }
 		string ClusterName { get; }
+		int DelayedUnassignedShards { get; }
 		IReadOnlyDictionary<IndexName, IndexHealthStats> Indices { get; }
 		int InitializingShards { get; }
 		int NumberOfDataNodes { get; }
+		int NumberOfInFlightFetch { get; }
 		int NumberOfNodes { get; }
 		int NumberOfPendingTasks { get; }
 		int RelocatingShards { get; }
 		Health Status { get; }
+		long TaskMaxWaitTimeInQueueInMilliseconds { get;  }
 		bool TimedOut { get; }
 		int UnassignedShards { get; }
 	}
@@ -29,8 +33,14 @@ namespace Nest
 		[JsonProperty("active_shards")]
 		public int ActiveShards { get; internal set; }
 
+		[JsonProperty("active_shards_percent_as_number")]
+		public double ActiveShardsPercentAsNumber { get; internal set; }
+
 		[JsonProperty("cluster_name")]
 		public string ClusterName { get; internal set; }
+
+		[JsonProperty("delayed_unassigned_shards")]
+		public int DelayedUnassignedShards { get; internal set; }
 
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<IndexName, IndexHealthStats>))]
@@ -43,6 +53,9 @@ namespace Nest
 		[JsonProperty("number_of_data_nodes")]
 		public int NumberOfDataNodes { get; internal set; }
 
+		[JsonProperty("number_of_in_flight_fetch")]
+		public int NumberOfInFlightFetch { get; internal set; }
+
 		[JsonProperty("number_of_nodes")]
 		public int NumberOfNodes { get; internal set; }
 
@@ -54,6 +67,9 @@ namespace Nest
 
 		[JsonProperty("status")]
 		public Health Status { get; internal set; }
+
+		[JsonProperty("task_max_waiting_in_queue_millis")]
+		public long TaskMaxWaitTimeInQueueInMilliseconds { get; internal set; }
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
