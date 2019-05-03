@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -63,12 +65,12 @@ namespace Tests.XPack.CrossClusterReplication
 						v => new PutUserRequest($"user-{v}")
 						{
 							Password = "password",
-							Roles = new[] { $"role-{v}" },
+							Roles = new[] { $"role-{v}", "superuser" },
 							FullName = "API key user"
 						},
 						(v, d) => d
 							.Password("password")
-							.Roles($"role-{v}")
+							.Roles($"role-{v}", "superuser")
 							.FullName("API key user")
 						,
 						(v, c, f) => c.PutUser($"user-{v}", f),
@@ -90,13 +92,13 @@ namespace Tests.XPack.CrossClusterReplication
 										{
 											$"read", new PrivilegesActions
 											{
-												Actions = new[] { "data:read/*", "cluster:admin/xpack/security/api_key/get", "indices:data/read/search"}
+												Actions = new[] { "data:read/*" }
 											}
 										},
 										{
 											$"write", new PrivilegesActions
 											{
-												Actions = new[] { "data:write/*", "cluster:admin/xpack/security/api_key/create" }
+												Actions = new[] { "data:write/*" }
 											}
 										}
 									}
@@ -107,10 +109,10 @@ namespace Tests.XPack.CrossClusterReplication
 							.Applications(a => a
 								.Application($"app-{v}", pr => pr
 									.Privilege($"read", ac => ac
-										.Actions("data:read/*", "cluster:admin/xpack/security/api_key/get", "indices:data/read/search")
+										.Actions("data:read/*")
 									)
 									.Privilege($"write", ac => ac
-										.Actions("data:write/*", "cluster:admin/xpack/security/api_key/create")
+										.Actions("data:write/*")
 									)
 								)
 							)
@@ -212,11 +214,23 @@ namespace Tests.XPack.CrossClusterReplication
 		[I] public async Task SecurityGetApiKeyResponse() => await Assert<SecurityGetApiKeyResponse>(GetApiKeyStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
+			r.ApiKeys.Should().HaveCount(1);
+			var apiKey = r.ApiKeys.First();
+			apiKey.Id.Should().NotBeNullOrEmpty();
+			apiKey.Name.Should().NotBeNullOrEmpty();
+			apiKey.Creation.Should().BeBefore(DateTimeOffset.UtcNow);
+			apiKey.Expiration.Should().BeAfter(DateTimeOffset.UtcNow);
+			apiKey.Invalidated.Should().Be(false);
+			apiKey.Username.Should().NotBeNullOrEmpty();
+			apiKey.Realm.Should().NotBeNullOrEmpty();
 		});
 
 		[I] public async Task SecurityInvalidateApiKeyResponse() => await Assert<SecurityInvalidateApiKeyResponse>(InvalidateApiKeyStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
+			r.ErrorCount.Should().Be(0);
+			r.PreviouslyInvalidatedApiKeys.Should().BeEmpty();
+			r.InvalidatedApiKeys.Should().HaveCount(1);
 		});
 
 	}

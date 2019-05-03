@@ -28,7 +28,7 @@ namespace Nest
 		/// <summary>
 		/// Generated API key
 		/// </summary>
-		[JsonProperty("api_key ")]
+		[JsonProperty("api_key")]
 		string ApiKey { get; }
 	}
 
