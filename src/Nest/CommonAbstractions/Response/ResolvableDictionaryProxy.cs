@@ -89,7 +89,7 @@ namespace Nest
 			while (reader.ReadIsInObject(ref count))
 			{
 				var property = reader.ReadPropertyNameSegmentRaw();
-				if (DictionaryResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
+				if (ResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
 				{
 					switch (errorValue)
 					{
