@@ -24,7 +24,7 @@ namespace Nest
 		[DataMember(Name = "per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
-		[DataMember(Name = "_routing")]
+		[DataMember(Name = "routing")]
 		Routing Routing { get; set; }
 	}
 
