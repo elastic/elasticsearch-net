@@ -684,9 +684,10 @@ namespace Tests.QueryDsl.Geo.Shape
 			Field = Infer.Field<Project>(p => p.Location),
 			IndexedShape = new FieldLookup
 			{
-				Id = 2,
+				Id = Project.Instance.Name,
 				Index = Infer.Index<Project>(),
 				Path = Infer.Field<Project>(p => p.Location),
+				Routing = Project.Instance.Name
 			},
 			Relation = GeoShapeRelation.Intersects
 		};
@@ -701,9 +702,10 @@ namespace Tests.QueryDsl.Geo.Shape
 				{
 					indexed_shape = new
 					{
-						id = 2,
+						id = Project.Instance.Name,
 						index = "project",
-						path = "location"
+						path = "location",
+						routing = Project.Instance.Name
 					},
 					relation = "intersects"
 				}
@@ -716,8 +718,9 @@ namespace Tests.QueryDsl.Geo.Shape
 				.Boost(1.1)
 				.Field(p => p.Location)
 				.IndexedShape(p => p
-					.Id(2)
+					.Id(Project.Instance.Name)
 					.Path(pp => pp.Location)
+					.Routing(Project.Instance.Name)
 				)
 				.Relation(GeoShapeRelation.Intersects)
 			);
