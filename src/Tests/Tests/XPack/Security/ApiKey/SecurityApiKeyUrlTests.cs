@@ -25,7 +25,7 @@ namespace Tests.XPack.Security.User.SecurityInvalidateApiKey
 
 	public class SecurityCreateApiKeyUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await UrlTester.POST("/_security/api_key")
+		[U] public override async Task Urls() => await UrlTester.PUT("/_security/api_key")
 			.Fluent(c => c.SecurityCreateApiKey())
 			.Request(c => c.SecurityCreateApiKey(new SecurityCreateApiKeyRequest()))
 			.FluentAsync(c => c.SecurityCreateApiKeyAsync())
