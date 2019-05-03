@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Span.Near
 				new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
 			},
 			Slop = 12,
-			InOrder = false,
+			InOrder = true,
 		};
 
 		protected override object QueryJson => new
@@ -45,7 +45,7 @@ namespace Tests.QueryDsl.Span.Near
 					new { span_gap = new { field = 2 } }
 				},
 				slop = 12,
-				in_order = false,
+				in_order = true,
 				_name = "named_query",
 				boost = 1.1
 			}
@@ -62,7 +62,7 @@ namespace Tests.QueryDsl.Span.Near
 					c => c.SpanGap(st => st.Field("field").Width(2))
 				)
 				.Slop(12)
-				.InOrder(false)
+				.InOrder()
 			);
 	}
 }
