@@ -47,12 +47,12 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				},
 				new FieldValueFactorFunction
 				{
-					Field = "x", Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
+					Field = Field<Project>(p => p.NumberOfContributors), Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Square
 				},
 				new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
 				new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
 				new WeightFunction { Weight = 1.0 },
-				new ScriptScoreFunction { Script = new IndexedScript("x") }
+				new ScriptScoreFunction { Script = new InlineScript("Math.log(2 + doc['numberOfCommits'].value)") }
 			}
 		};
 
@@ -110,10 +110,10 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					{
 						field_value_factor = new
 						{
-							field = "x",
+							field = "numberOfContributors",
 							factor = 1.1,
 							missing = 0.1,
-							modifier = "ln"
+							modifier = "square"
 						}
 					},
 					new { random_score = new { seed = 1337, field = "_seq_no" } },
@@ -125,7 +125,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 						{
 							script = new
 							{
-								id = "x"
+								source = "Math.log(2 + doc['numberOfCommits'].value)"
 							}
 						}
 					}
@@ -154,11 +154,11 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					.GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
 					.LinearGeoLocation(b =>
 						b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
-					.FieldValueFactor(b => b.Field("x").Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Ln))
+					.FieldValueFactor(b => b.Field(p => p.NumberOfContributors).Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Square))
 					.RandomScore(r => r.Seed(1337).Field("_seq_no"))
 					.RandomScore(r => r.Seed("randomstring").Field("_seq_no"))
 					.Weight(1.0)
-					.ScriptScore(s => s.Script(ss => ss.Id("x")))
+					.ScriptScore(s => s.Script(ss => ss.Source("Math.log(2 + doc['numberOfCommits'].value)")))
 				)
 			);
 	}
