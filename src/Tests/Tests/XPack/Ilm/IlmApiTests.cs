@@ -23,6 +23,8 @@ namespace Tests.XPack.Ilm
 		private const string IlmDeleteLifecycleStep = nameof(IlmDeleteLifecycleStep);
 		private const string PutDocumentStep = nameof(PutDocumentStep);
 		private const string IlmExplainLifecycleStep = nameof(IlmExplainLifecycleStep);
+		private const string IlmRemovePolicyStep = nameof(IlmRemovePolicyStep);
+		private const string IlmStopStep = nameof(IlmStopStep);
 
 		public IlmApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -99,6 +101,16 @@ namespace Tests.XPack.Ilm
 				)
 			},
 			{
+				IlmRemovePolicyStep, u => u.Calls<IlmRemovePolicyDescriptor, IlmRemovePolicyRequest, IIlmRemovePolicyRequest, IIlmRemovePolicyResponse>(
+					v => new IlmRemovePolicyRequest("project"),
+					(v, d) => d,
+					(v, c, f) => c.IlmRemovePolicy("project", f),
+					(v, c, f) => c.IlmRemovePolicyAsync("project", f),
+					(v, c, r) => c.IlmRemovePolicy(r),
+					(v, c, r) => c.IlmRemovePolicyAsync(r)
+				)
+			},
+			{
 				IlmGetLifecycleStep, u => u.Calls<IlmGetLifecycleDescriptor, IlmGetLifecycleRequest, IIlmGetLifecycleRequest, IIlmGetLifecycleResponse>(
 					v => new IlmGetLifecycleRequest("policy" + v),
 					(v, d) => d.PolicyId("policy" + v),
@@ -116,6 +128,16 @@ namespace Tests.XPack.Ilm
 					(v, c, f) => c.IlmDeleteLifecycleAsync("policy" + v, f),
 					(v, c, r) => c.IlmDeleteLifecycle(r),
 					(v, c, r) => c.IlmDeleteLifecycleAsync(r)
+				)
+			},
+			{
+				IlmStopStep, u => u.Calls<IlmStopDescriptor, IlmStopRequest, IIlmStopRequest, IIlmStopResponse>(
+					v => new IlmStopRequest(),
+					(v, d) => d,
+					(v, c, f) => c.IlmStop(f),
+					(v, c, f) => c.IlmStopAsync(f),
+					(v, c, r) => c.IlmStop(r),
+					(v, c, r) => c.IlmStopAsync(r)
 				)
 			},
 		}) { }
@@ -136,7 +158,31 @@ namespace Tests.XPack.Ilm
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-			r.
+
+			var index = $"project";
+			var hasIndex = r.Indices.TryGetValue(index, out var indexDict);
+
+			hasIndex.Should().BeTrue($"expect `{index}` to be returned");
+			indexDict.Should().NotBeNull($"expect `{index}`'s value not to be null");
+
+			indexDict.Index.Should().Be("project");
+			indexDict.Managed.Should().Be(false);
+
+		});
+
+		[I] public async Task IlmStopResponse() => await Assert<IlmStopResponse>(IlmStopStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.ApiCall.HttpStatusCode.Should().Be(200);
+			r.Acknowledged.Should().BeTrue();
+		});
+
+		[I] public async Task IlmRemovePolicyResponse() => await Assert<IlmRemovePolicyResponse>(IlmRemovePolicyStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.ApiCall.HttpStatusCode.Should().Be(200);
+			r.HasFailures.Should().Be(false);
+			r.FailedIndexes.Should().BeEmpty();
 		});
 
 		[I] public async Task IlmGetStatusResponse() => await Assert<IlmGetStatusResponse>(IlmGetStatusStep, (v, r) =>
