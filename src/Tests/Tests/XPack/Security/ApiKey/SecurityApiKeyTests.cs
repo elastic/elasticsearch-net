@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
@@ -9,8 +10,9 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Integration;
+using Tests.Mapping.LocalMetadata.Extensions;
 
-namespace Tests.XPack.CrossClusterReplication
+namespace Tests.XPack.ApiKey
 {
 	[SkipVersion("<6.7.0", "Security Api Keys are modelled against 6.7.0")]
 	public class SecurityApiKeyTests : CoordinatedIntegrationTestBase<XPackCluster>
@@ -18,7 +20,8 @@ namespace Tests.XPack.CrossClusterReplication
 		private const string PutRoleStep = nameof(PutRoleStep);
 		private const string PutUserStep = nameof(PutUserStep);
 		private const string PutPrivilegesStep = nameof(PutPrivilegesStep);
-		private const string CreateApiKeyStep = nameof(CreateApiKeyStep);
+		private const string CreateApiKeyWithRolesStep = nameof(CreateApiKeyWithRolesStep);
+		private const string CreateApiKeyWithNoRolesStep = nameof(CreateApiKeyWithNoRolesStep);
 		private const string GetApiKeyStep = nameof(GetApiKeyStep);
 		private const string InvalidateApiKeyStep = nameof(InvalidateApiKeyStep);
 
@@ -124,7 +127,67 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				CreateApiKeyStep, u =>
+				CreateApiKeyWithRolesStep, u =>
+					u.Calls<SecurityCreateApiKeyDescriptor, SecurityCreateApiKeyRequest, ISecurityCreateApiKeyRequest, ISecurityCreateApiKeyResponse>(
+						v => new SecurityCreateApiKeyRequest
+						{
+							Name = v,
+							Expiration = "1d",
+							Roles = new ApiKeyRoles
+							{
+								{
+									"role-a", new ApiKeyRole
+												{
+													Cluster = new[] { "all" },
+													Index = new []
+													{
+														new ApiKeyPrivileges
+														{
+															Names = new [] { "index-a*" },
+															Privileges = new[] { "read" }
+														}
+													}
+												}
+								},
+								{
+									"role-b", new ApiKeyRole
+												{
+													Cluster = new[] { "all" },
+													Index = new []
+													{
+														new ApiKeyPrivileges
+														{
+															Names = new [] { "index-b*" },
+															Privileges = new[] { "read" }
+														}
+													}
+												}
+								}
+							},
+							RequestConfiguration = new RequestConfiguration
+							{
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials
+								{
+									Username = $"user-{v}",
+									Password = "password"
+								}
+							}
+						},
+						(v, d) => d
+							.Name(v)
+							.Expiration("1d")
+							.Roles(r => r.Role("role-a", o => o.Cluster("all").Indices(i => i.Index(k => k.Names("index-a").Privileges("read"))))
+								         .Role("role-b", o => o.Cluster("all").Indices(i => i.Index(k => k.Names("index-b").Privileges("read")))))
+							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+						,
+						(v, c, f) => c.SecurityCreateApiKey(f),
+						(v, c, f) => c.SecurityCreateApiKeyAsync(f),
+						(v, c, r) => c.SecurityCreateApiKey(r),
+						(v, c, r) => c.SecurityCreateApiKeyAsync(r)
+					)
+			},
+			{
+				CreateApiKeyWithNoRolesStep, u =>
 					u.Calls<SecurityCreateApiKeyDescriptor, SecurityCreateApiKeyRequest, ISecurityCreateApiKeyRequest, ISecurityCreateApiKeyResponse>(
 						v => new SecurityCreateApiKeyRequest
 						{
@@ -202,7 +265,7 @@ namespace Tests.XPack.CrossClusterReplication
 			}
 		}) { }
 
-		[I] public async Task SecurityCreateApiKeyResponse() => await Assert<SecurityCreateApiKeyResponse>(CreateApiKeyStep, r =>
+		[I] public async Task SecurityCreateApiKeyResponse() => await Assert<SecurityCreateApiKeyResponse>(CreateApiKeyWithRolesStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.Id.Should().NotBeNullOrEmpty();
@@ -214,15 +277,18 @@ namespace Tests.XPack.CrossClusterReplication
 		[I] public async Task SecurityGetApiKeyResponse() => await Assert<SecurityGetApiKeyResponse>(GetApiKeyStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
-			r.ApiKeys.Should().HaveCount(1);
-			var apiKey = r.ApiKeys.First();
-			apiKey.Id.Should().NotBeNullOrEmpty();
-			apiKey.Name.Should().NotBeNullOrEmpty();
-			apiKey.Creation.Should().BeBefore(DateTimeOffset.UtcNow);
-			apiKey.Expiration.Should().BeAfter(DateTimeOffset.UtcNow);
-			apiKey.Invalidated.Should().Be(false);
-			apiKey.Username.Should().NotBeNullOrEmpty();
-			apiKey.Realm.Should().NotBeNullOrEmpty();
+			r.ApiKeys.Should().NotBeNullOrEmpty();
+
+			foreach (var apiKey in r.ApiKeys)
+			{
+				apiKey.Id.Should().NotBeNullOrEmpty();
+				apiKey.Name.Should().NotBeNullOrEmpty();
+				apiKey.Creation.Should().BeBefore(DateTimeOffset.UtcNow);
+				apiKey.Expiration.Should().BeAfter(DateTimeOffset.UtcNow);
+				apiKey.Invalidated.Should().Be(false);
+				apiKey.Username.Should().NotBeNullOrEmpty();
+				apiKey.Realm.Should().NotBeNullOrEmpty();
+			}
 		});
 
 		[I] public async Task SecurityInvalidateApiKeyResponse() => await Assert<SecurityInvalidateApiKeyResponse>(InvalidateApiKeyStep, r =>
@@ -230,8 +296,7 @@ namespace Tests.XPack.CrossClusterReplication
 			r.IsValid.Should().BeTrue();
 			r.ErrorCount.Should().Be(0);
 			r.PreviouslyInvalidatedApiKeys.Should().BeEmpty();
-			r.InvalidatedApiKeys.Should().HaveCount(1);
+			r.InvalidatedApiKeys.Should().HaveCount(2);
 		});
-
 	}
 }
