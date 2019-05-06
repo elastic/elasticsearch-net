@@ -4,7 +4,7 @@
     "methods": [ "GET" ],
     "url": {
       "path": "/_ilm/policy/{policy_id}",
-      "paths": ["/_ilm/policy/{policy_id}", "/_ilm/policy_id"],
+      "paths": ["/_ilm/policy/{policy_id}", "/_ilm/policy"],
       "parts": {
         "policy_id": {
           "type" : "string",

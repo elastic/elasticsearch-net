@@ -3252,7 +3252,7 @@ namespace Nest
 					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.IlmGetLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
 						return _lowLevel.IlmGetLifecycle<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy_id");
+			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy");
 		}
 		
 		internal Task<TResponse> IlmGetLifecycleDispatchAsync<TResponse>(IRequest<IlmGetLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -3263,7 +3263,7 @@ namespace Nest
 					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
 						return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy_id");
+			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy");
 		}
 		
 		internal TResponse IlmGetStatusDispatch<TResponse>(IRequest<IlmGetStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()

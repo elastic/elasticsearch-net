@@ -20,6 +20,7 @@ namespace Tests.XPack.Ilm
 		private const string IlmGetStatusStep = nameof(IlmGetStatusStep);
 		private const string IlmPutLifecycleStep = nameof(IlmPutLifecycleStep);
 		private const string IlmGetLifecycleStep = nameof(IlmGetLifecycleStep);
+		private const string IlmGeAllLifecycleStep = nameof(IlmGeAllLifecycleStep);
 		private const string IlmDeleteLifecycleStep = nameof(IlmDeleteLifecycleStep);
 		private const string PutDocumentStep = nameof(PutDocumentStep);
 		private const string IlmExplainLifecycleStep = nameof(IlmExplainLifecycleStep);
@@ -114,6 +115,16 @@ namespace Tests.XPack.Ilm
 				IlmGetLifecycleStep, u => u.Calls<IlmGetLifecycleDescriptor, IlmGetLifecycleRequest, IIlmGetLifecycleRequest, IIlmGetLifecycleResponse>(
 					v => new IlmGetLifecycleRequest("policy" + v),
 					(v, d) => d.PolicyId("policy" + v),
+					(v, c, f) => c.IlmGetLifecycle(f),
+					(v, c, f) => c.IlmGetLifecycleAsync(f),
+					(v, c, r) => c.IlmGetLifecycle(r),
+					(v, c, r) => c.IlmGetLifecycleAsync(r)
+				)
+			},
+			{
+				IlmGeAllLifecycleStep, u => u.Calls<IlmGetLifecycleDescriptor, IlmGetLifecycleRequest, IIlmGetLifecycleRequest, IIlmGetLifecycleResponse>(
+					v => new IlmGetLifecycleRequest(),
+					(v, d) => d,
 					(v, c, f) => c.IlmGetLifecycle(f),
 					(v, c, f) => c.IlmGetLifecycleAsync(f),
 					(v, c, r) => c.IlmGetLifecycle(r),

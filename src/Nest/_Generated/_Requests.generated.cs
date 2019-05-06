@@ -3900,7 +3900,7 @@ namespace Nest
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name="policy_id">Optional, accepts null</param>
 		public IlmGetLifecycleRequest(PolicyId policy_id) : base(r=>r.Optional("policy_id", policy_id)){}
-		///<summary>/_ilm/policy_id</summary>
+		///<summary>/_ilm/policy</summary>
 		public IlmGetLifecycleRequest() : base(){}
 		// values part of the url path
 		PolicyId IIlmGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
