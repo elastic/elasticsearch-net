@@ -10,7 +10,8 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 			Strategy = GeoStrategy.Recursive,
 			TreeLevels = 3,
 			PointsOnly = true,
-			DistanceErrorPercentage = 1.0)]
+			DistanceErrorPercentage = 1.0,
+			Coerce = true)]
 		public object Full { get; set; }
 
 		[GeoShape]
@@ -31,7 +32,8 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 					strategy = "recursive",
 					tree_levels = 3,
 					points_only = true,
-					distance_error_pct = 1.0
+					distance_error_pct = 1.0,
+					coerce = true
 				},
 				minimal = new
 				{
