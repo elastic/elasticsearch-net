@@ -5,7 +5,7 @@ namespace Nest
 	public interface IForceMergeLifecycleAction : ILifecycleAction
 	{
 		[JsonProperty("max_num_segments")]
-		int? MaximumNumberSegments { get; set; }
+		int? MaximumNumberOfSegments { get; set; }
 	}
 
 	public class ForceMergeLifecycleAction : IForceMergeLifecycleAction
