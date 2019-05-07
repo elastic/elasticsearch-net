@@ -35,9 +35,6 @@ namespace ApiGenerator
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 			"xpack.ml.set_upgrade_mode.json",
-			"security.create_api_key.json",
-			"security.get_api_key.json",
-			"security.invalidate_api_key.json",
 			"xpack.monitoring.bulk.json",
 
 			// these API's are not ready for primetime yet
@@ -179,7 +176,15 @@ namespace ApiGenerator
 			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, false);
 		}
 
-		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
+		private static string CreateMethodName(string apiEndpointKey)
+		{
+			var pascalCased = PascalCase(apiEndpointKey);
+			if (pascalCased.StartsWith("Security"))
+			{
+				pascalCased = "Xpack" + pascalCased;
+			}
+			return pascalCased;
+		}
 
 		private static string DoRazor(string name, string template, RestApiSpec model) =>
 			Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
