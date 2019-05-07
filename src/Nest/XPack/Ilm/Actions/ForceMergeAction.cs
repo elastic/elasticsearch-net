@@ -15,7 +15,7 @@ namespace Nest
 
 	public class ForceMergeLifecycleActionDescriptor : DescriptorBase<ForceMergeLifecycleActionDescriptor, IForceMergeLifecycleAction>, IForceMergeLifecycleAction
 	{
-		int? IForceMergeLifecycleAction.MaximumNumberSegments { get; set; }
+		int? IForceMergeLifecycleAction.MaximumNumberOfSegments { get; set; }
 
 		public ForceMergeLifecycleActionDescriptor MaximumNumberSegments(int? maximumNumberSegments)
 			=> Assign(maximumNumberSegments, (a, v) => a.MaximumNumberSegments = maximumNumberSegments);
