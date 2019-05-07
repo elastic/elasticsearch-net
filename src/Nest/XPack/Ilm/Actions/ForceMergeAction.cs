@@ -17,7 +17,7 @@ namespace Nest
 	{
 		int? IForceMergeLifecycleAction.MaximumNumberOfSegments { get; set; }
 
-		public ForceMergeLifecycleActionDescriptor MaximumNumberSegments(int? maximumNumberSegments)
+		public ForceMergeLifecycleActionDescriptor MaximumNumberOfSegments(int? maximumNumberOfSegments)
 			=> Assign(maximumNumberSegments, (a, v) => a.MaximumNumberSegments = maximumNumberSegments);
 	}
 }
