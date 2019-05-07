@@ -74,7 +74,7 @@ namespace Tests.XPack.Ilm
 									{
 										new ForceMergeLifecycleAction
 										{
-											MaximumNumberSegments = 1
+											MaximumNumberOfSegments = 1
 										}
 									}
 								},
@@ -91,7 +91,7 @@ namespace Tests.XPack.Ilm
 					},
 					(v, d) => d
 						.Policy(p => p.Phases(a => a.Warm(w => w.MinimumAge("10d")
-																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberSegments(1))))
+																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberOfSegments(1))))
 													.Delete(w => w.MinimumAge("30d")
 		       													  .Actions(ac => ac.Delete(f => f)))))
 					,
@@ -235,7 +235,7 @@ namespace Tests.XPack.Ilm
 			warmAction.Key.Should().Be("forcemerge");
 			warmAction.Value.Should().BeOfType<ForceMergeLifecycleAction>();
 			var forceMerge = warmAction.Value.As<ForceMergeLifecycleAction>();
-			forceMerge.MaximumNumberSegments.Should().Be(1);
+			forceMerge.MaximumNumberOfSegments.Should().Be(1);
 
 			policyDict.Policy.Phases.Delete.Should().NotBe(null);
 			policyDict.Policy.Phases.Delete.MinimumAge.Should().Be(new Time("30d"));
