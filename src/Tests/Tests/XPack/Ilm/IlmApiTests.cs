@@ -200,7 +200,7 @@ namespace Tests.XPack.Ilm
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-			r.OperationMode.Should().Be(OperationMode.Running);
+			r.OperationMode.Should().Be(LifecycleOperationMode.Running);
 		});
 
 		[I] public async Task IlmPutLifecycleResponse() => await Assert<IlmPutLifecycleResponse>(IlmPutLifecycleStep, (v, r) =>
