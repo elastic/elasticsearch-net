@@ -10,7 +10,7 @@ namespace Nest
 
 	public class ForceMergeLifecycleAction : IForceMergeLifecycleAction
 	{
-		public int? MaximumNumberSegments { get; set; }
+		public int? MaximumNumberOfSegments { get; set; }
 	}
 
 	public class ForceMergeLifecycleActionDescriptor : DescriptorBase<ForceMergeLifecycleActionDescriptor, IForceMergeLifecycleAction>, IForceMergeLifecycleAction
