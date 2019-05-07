@@ -240,4 +240,80 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			((InlineScript)scriptedSimilarity.Script).Source.Should().NotBeNullOrEmpty();
 		}
 	}
+
+	public class CreateIndexWithAliasApiTests
+		: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	{
+		public CreateIndexWithAliasApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => new
+		{
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_replicas", 0 },
+				{ "index.number_of_shards", 1 },
+			},
+			aliases = new Dictionary<string, object>
+			{
+				{ CallIsolatedValue + "-alias", new { is_write_index = true } }
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
+			.Settings(s => s
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+			)
+			.Aliases(a => a
+				.Alias(CallIsolatedValue + "-alias", aa => aa
+					.IsWriteIndex()
+				)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
+		{
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfReplicas = 0,
+				NumberOfShards = 1,
+			},
+			Aliases = new Aliases
+			{
+				{ CallIsolatedValue + "-alias", new Alias { IsWriteIndex = true } }
+			}
+		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateIndex(CallIsolatedValue, f),
+			(client, f) => client.CreateIndexAsync(CallIsolatedValue, f),
+			(client, r) => client.CreateIndex(r),
+			(client, r) => client.CreateIndexAsync(r)
+		);
+
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
+
+		protected override void ExpectResponse(CreateIndexResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
+
+			var indexResponse = Client.GetIndex(CallIsolatedValue);
+
+			indexResponse.ShouldBeValid();
+			indexResponse.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
+
+			var aliases = indexResponse.Indices[CallIsolatedValue].Aliases;
+			aliases.Count.Should().Be(1);
+			aliases[CallIsolatedValue + "-alias"].IsWriteIndex.Should().BeTrue();
+		}
+	}
 }
