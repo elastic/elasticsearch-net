@@ -645,7 +645,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
@@ -919,7 +919,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
@@ -1839,7 +1839,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
+		public bool? SequenceNumberPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
@@ -2097,7 +2097,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}
@@ -2834,7 +2834,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		public long? IfSequenceNumber { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}

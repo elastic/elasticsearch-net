@@ -22,6 +22,10 @@ namespace Nest
 		string Type { get; }
 
 		long Version { get; }
+
+		long? SequenceNumber { get; }
+
+		long? PrimaryTerm { get; }
 	}
 
 	[DataContract]
@@ -55,5 +59,11 @@ namespace Nest
 
 		[DataMember(Name = "_version")]
 		public long Version { get; internal set; }
+
+		[DataMember(Name = "_seq_no")]
+		public long? SequenceNumber { get; internal set; }
+
+		[DataMember(Name = "_primary_term")]
+		public long? PrimaryTerm { get; internal set; }
 	}
 }

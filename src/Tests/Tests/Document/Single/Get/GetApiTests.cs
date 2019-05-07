@@ -44,6 +44,8 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
+			response.SequenceNumber.Should().HaveValue();
+			response.PrimaryTerm.Should().HaveValue();
 			response.Source.ShouldAdhereToSourceSerializerWhenSet();
 		}
 	}

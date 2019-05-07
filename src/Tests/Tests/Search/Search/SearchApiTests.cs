@@ -111,6 +111,54 @@ namespace Tests.Search.Search
 		}
 	}
 
+	public class SearchApiSequenceNumberPrimaryTermTests
+		: SearchApiTests
+	{
+		public SearchApiSequenceNumberPrimaryTermTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			query = new
+			{
+				match_all = new { }
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.SequenceNumberPrimaryTerm()
+			.Query(q => q
+				.MatchAll()
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		{
+			SequenceNumberPrimaryTerm = true,
+			Query = new QueryContainer(new MatchAllQuery()),
+		};
+
+		protected override string UrlPath => $"/project/_search?seq_no_primary_term=true";
+
+		protected override void ExpectResponse(SearchResponse<Project> response)
+		{
+			response.Total.Should().BeGreaterThan(0);
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
+
+			foreach (var hit in response.Hits)
+			{
+				hit.Should().NotBeNull();
+				hit.Source.Should().NotBeNull();
+				hit.SequenceNumber.Should().HaveValue();
+				hit.PrimaryTerm.Should().HaveValue();
+			}
+		}
+	}
+
 	public class SearchApiStoredFieldsTests : SearchApiTests
 	{
 		public SearchApiStoredFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

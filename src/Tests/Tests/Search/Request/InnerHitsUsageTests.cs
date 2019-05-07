@@ -340,8 +340,7 @@ namespace Tests.Search.Request
 			{
 				hit.Id.Should().NotBeNullOrEmpty();
 				hit.Index.Should().NotBeNullOrEmpty();
-				hit.Version?.Should().Be(1);
-
+				hit.Version.Should().Be(1);
 
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
 				princes.Should().NotBeEmpty();
@@ -359,7 +358,7 @@ namespace Tests.Search.Request
 					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p => p.Name);
 					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
 
-					princeHit.Version?.Should().Be(1);
+					princeHit.Version.Should().Be(1);
 				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();

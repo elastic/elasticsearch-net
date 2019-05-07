@@ -198,7 +198,7 @@ namespace Tests.Aggregations.Metric.TopHits
 				var hits = topStateHits.Hits<Project>();
 				hits.Should().NotBeNullOrEmpty();
 				hits.All(h => h.Explanation != null).Should().BeTrue();
-				hits.All(h => h.Version.HasValue).Should().BeTrue();
+				hits.All(h => h.Version >= 0).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<DateTime>("startedOn").Any()).Should().BeTrue();
 				var projects = topStateHits.Documents<Project>();

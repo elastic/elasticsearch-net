@@ -1,13 +1,14 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	// TODO: Looks like this can be removed?
 	public interface IGetResponse<out TDocument> : IResponse where TDocument : class
 	{
 		TDocument Source { get; }
 	}
+
 	public class GetResponse<TDocument> : ResponseBase, IGetResponse<TDocument> where TDocument : class
 	{
 		[DataMember(Name = "fields")]
@@ -22,8 +23,14 @@ namespace Nest
 		[DataMember(Name = "_index")]
 		public string Index { get; internal set; }
 
+		[DataMember(Name = "_primary_term")]
+		public long? PrimaryTerm { get; internal set; }
+
 		[DataMember(Name = "_routing")]
 		public string Routing { get; internal set; }
+
+		[DataMember(Name = "_seq_no")]
+		public long? SequenceNumber { get; internal set; }
 
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
