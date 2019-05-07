@@ -127,7 +127,7 @@ namespace Tests.Search.Search
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.SeqNoPrimaryTerm()
+			.SequenceNumberPrimaryTerm()
 			.Query(q => q
 				.MatchAll()
 			);
@@ -136,7 +136,7 @@ namespace Tests.Search.Search
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
-			SeqNoPrimaryTerm = true,
+			SequenceNumberPrimaryTerm = true,
 			Query = new QueryContainer(new MatchAllQuery()),
 		};
 

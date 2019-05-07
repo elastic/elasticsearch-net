@@ -38,6 +38,8 @@ namespace ApiGenerator.Overrides
 			{ "s", "sort_by_columns" },
 			{ "v", "verbose" },
 			{ "ts", "include_timestamp" },
+			{ "if_seq_no", "if_sequence_number" },
+			{ "seq_no_primary_term", "sequence_number_primary_term" },
 		};
 
 		public override IEnumerable<string> RenderPartial => new[]

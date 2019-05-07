@@ -1042,7 +1042,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeleteDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
-		public DeleteDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public DeleteDescriptor<TDocument> IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
 		public DeleteDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>Explicit version number for concurrency control</summary>
@@ -1622,7 +1622,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public IndexDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
-		public IndexDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public IndexDescriptor<TDocument> IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
 		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
@@ -3503,7 +3503,7 @@ namespace Nest
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Field suggestField) => Qs("suggest_field", suggestField);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField<TValue>(Expression<Func<T, TValue>> field)  => Qs("suggest_field", (Field)field);
+		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
 		public SearchDescriptor<T> SuggestMode(SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		///<summary>How many suggestions to return in response</summary>
@@ -3517,7 +3517,7 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public SearchDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Qs("seq_no_primary_term", seqNoPrimaryTerm);
+		public SearchDescriptor<T> SequenceNumberPrimaryTerm(bool? sequenceNumberPrimaryTerm = true) => Qs("seq_no_primary_term", sequenceNumberPrimaryTerm);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
@@ -4016,7 +4016,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public UpdateDescriptor<TDocument, TPartialDocument> IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	}
@@ -5881,7 +5881,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
 		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public PutWatchDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public PutWatchDescriptor IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
 		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	}

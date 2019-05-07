@@ -31,7 +31,7 @@ namespace Tests.Document.Multiple.Bulk
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Index<Project>(i => i.Document(Project.Instance))
-			.Index<Project>(i => i.IfSeqNo(-1).Document(Project.Instance));
+			.Index<Project>(i => i.IfSequenceNumber(-1).Document(Project.Instance));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -40,7 +40,7 @@ namespace Tests.Document.Multiple.Bulk
 			Operations = new List<IBulkOperation>
 			{
 				new BulkIndexOperation<Project>(Project.Instance),
-				new BulkIndexOperation<Project>(Project.Instance) { IfSeqNo = -1 }
+				new BulkIndexOperation<Project>(Project.Instance) { IfSequenceNumber = -1 }
 			}
 		};
 
