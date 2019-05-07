@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IIlmMoveToStepRequest
+	public partial interface IMoveToStepRequest
 	{
 		[JsonProperty("current_step")]
 		IStepKey CurrentStep { get; set; }
@@ -24,22 +24,22 @@ namespace Nest
 		string Name { get; set; }
 	}
 
-	public partial class IlmMoveToStepRequest
+	public partial class MoveToStepRequest
 	{
 		public IStepKey CurrentStep { get; set; }
 		public IStepKey NextStep { get; set; }
 	}
 
-	[DescriptorFor("IlmMoveToStep")]
-	public partial class IlmMoveToStepDescriptor
+	[DescriptorFor("XpackIlmMoveToStep")]
+	public partial class MoveToStepDescriptor
 	{
-		IStepKey IIlmMoveToStepRequest.CurrentStep { get; set; }
-		IStepKey IIlmMoveToStepRequest.NextStep { get; set; }
+		IStepKey IMoveToStepRequest.CurrentStep { get; set; }
+		IStepKey IMoveToStepRequest.NextStep { get; set; }
 
-		public IlmMoveToStepDescriptor CurrentStep(Func<StepKeyDescriptor, IStepKey> selector)
+		public MoveToStepDescriptor CurrentStep(Func<StepKeyDescriptor, IStepKey> selector)
 			=> Assign(selector, (a, v) => a.CurrentStep = v?.Invoke(new StepKeyDescriptor()));
 
-		public IlmMoveToStepDescriptor NextStep(Func<StepKeyDescriptor, IStepKey> selector)
+		public MoveToStepDescriptor NextStep(Func<StepKeyDescriptor, IStepKey> selector)
 			=> Assign(selector, (a, v) => a.NextStep = v?.Invoke(new StepKeyDescriptor()));
 	}
 

@@ -4,14 +4,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIlmGetLifecycleResponse : IResponse
+	public interface IGetLifecycleResponse : IResponse
 	{
 		IReadOnlyDictionary<string, LifecyclePolicy> Policies { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<IlmGetLifecycleResponse, string, LifecyclePolicy>))]
-	public class IlmGetLifecycleResponse : DictionaryResponseBase<string, LifecyclePolicy>, IIlmGetLifecycleResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetLifecycleResponse, string, LifecyclePolicy>))]
+	public class GetLifecycleResponse : DictionaryResponseBase<string, LifecyclePolicy>, IGetLifecycleResponse
 	{
 		[JsonIgnore]
 		public IReadOnlyDictionary<string, LifecyclePolicy> Policies => Self.BackingDictionary;

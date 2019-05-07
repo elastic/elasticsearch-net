@@ -169,7 +169,15 @@ namespace ApiGenerator
 			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, false);
 		}
 
-		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
+		private static string CreateMethodName(string apiEndpointKey)
+		{
+			var pascalCased = PascalCase(apiEndpointKey);
+			if (pascalCased.StartsWith("Ilm"))
+			{
+				pascalCased = "Xpack" + pascalCased;
+			}
+			return pascalCased;
+		}
 
 		private static string DoRazor(string name, string template, RestApiSpec model) =>
 			Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();

@@ -11,73 +11,73 @@ namespace Tests.XPack.Ilm
 		[U] public override async Task Urls()
 		{
 			await DELETE("/_ilm/policy/policy_id")
-					.Fluent(c => c.IlmDeleteLifecycle("policy_id"))
-					.Request(c => c.IlmDeleteLifecycle(new IlmDeleteLifecycleRequest("policy_id")))
-					.FluentAsync(c => c.IlmDeleteLifecycleAsync("policy_id"))
-					.RequestAsync(c => c.IlmDeleteLifecycleAsync(new IlmDeleteLifecycleRequest("policy_id")))
+					.Fluent(c => c.DeleteLifecycle("policy_id"))
+					.Request(c => c.DeleteLifecycle(new DeleteLifecycleRequest("policy_id")))
+					.FluentAsync(c => c.DeleteLifecycleAsync("policy_id"))
+					.RequestAsync(c => c.DeleteLifecycleAsync(new DeleteLifecycleRequest("policy_id")))
 				;
 
 			await GET("/index/_ilm/explain")
-					.Fluent(c => c.IlmExplainLifecycle("index"))
-					.Request(c => c.IlmExplainLifecycle(new IlmExplainLifecycleRequest("index")))
-					.FluentAsync(c => c.IlmExplainLifecycleAsync("index"))
-					.RequestAsync(c => c.IlmExplainLifecycleAsync(new IlmExplainLifecycleRequest("index")))
+					.Fluent(c => c.ExplainLifecycle("index"))
+					.Request(c => c.ExplainLifecycle(new ExplainLifecycleRequest("index")))
+					.FluentAsync(c => c.ExplainLifecycleAsync("index"))
+					.RequestAsync(c => c.ExplainLifecycleAsync(new ExplainLifecycleRequest("index")))
 				;
 
 			await GET("/_ilm/policy")
-					.Fluent(c => c.IlmGetLifecycle())
-					.Request(c => c.IlmGetLifecycle(new IlmGetLifecycleRequest()))
-					.FluentAsync(c => c.IlmGetLifecycleAsync())
-					.RequestAsync(c => c.IlmGetLifecycleAsync(new IlmGetLifecycleRequest()))
+					.Fluent(c => c.GetLifecycle())
+					.Request(c => c.GetLifecycle(new GetLifecycleRequest()))
+					.FluentAsync(c => c.GetLifecycleAsync())
+					.RequestAsync(c => c.GetLifecycleAsync(new GetLifecycleRequest()))
 				;
 
 			await GET("/_ilm/status")
-					.Fluent(c => c.IlmGetStatus())
-					.Request(c => c.IlmGetStatus())
-					.FluentAsync(c => c.IlmGetStatusAsync())
-					.RequestAsync(c => c.IlmGetStatusAsync())
+					.Fluent(c => c.GetIlmStatus())
+					.Request(c => c.GetIlmStatus())
+					.FluentAsync(c => c.GetIlmStatusAsync())
+					.RequestAsync(c => c.GetIlmStatusAsync())
 				;
 
 			await POST("/_ilm/move/index")
-					.Fluent(c => c.IlmMoveToStep("index"))
-					.Request(c => c.IlmMoveToStep(new IlmMoveToStepRequest("index")))
-					.FluentAsync(c => c.IlmMoveToStepAsync("index"))
-					.RequestAsync(c => c.IlmMoveToStepAsync(new IlmMoveToStepRequest("index")))
+					.Fluent(c => c.MoveToStep("index"))
+					.Request(c => c.MoveToStep(new MoveToStepRequest("index")))
+					.FluentAsync(c => c.MoveToStepAsync("index"))
+					.RequestAsync(c => c.MoveToStepAsync(new MoveToStepRequest("index")))
 				;
 
 			await PUT("/_ilm/policy/policy_id")
-					.Fluent(c => c.IlmPutLifecycle("policy_id"))
-					.Request(c => c.IlmPutLifecycle(new IlmPutLifecycleRequest("policy_id")))
-					.FluentAsync(c => c.IlmPutLifecycleAsync("policy_id"))
-					.RequestAsync(c => c.IlmPutLifecycleAsync(new IlmPutLifecycleRequest("policy_id")))
+					.Fluent(c => c.PutLifecycle("policy_id"))
+					.Request(c => c.PutLifecycle(new PutLifecycleRequest("policy_id")))
+					.FluentAsync(c => c.PutLifecycleAsync("policy_id"))
+					.RequestAsync(c => c.PutLifecycleAsync(new PutLifecycleRequest("policy_id")))
 				;
 
 			await POST("/index/_ilm/remove")
-					.Fluent(c => c.IlmRemovePolicy("index"))
-					.Request(c => c.IlmRemovePolicy(new IlmRemovePolicyRequest("index")))
-					.FluentAsync(c => c.IlmRemovePolicyAsync("index"))
-					.RequestAsync(c => c.IlmRemovePolicyAsync(new IlmRemovePolicyRequest("index")))
+					.Fluent(c => c.RemovePolicy("index"))
+					.Request(c => c.RemovePolicy(new RemovePolicyRequest("index")))
+					.FluentAsync(c => c.RemovePolicyAsync("index"))
+					.RequestAsync(c => c.RemovePolicyAsync(new RemovePolicyRequest("index")))
 				;
 
 			await POST("/index/_ilm/retry")
-					.Fluent(c => c.IlmRetry("index"))
-					.Request(c => c.IlmRetry(new IlmRetryRequest("index")))
-					.FluentAsync(c => c.IlmRetryAsync("index"))
-					.RequestAsync(c => c.IlmRetryAsync(new IlmRetryRequest("index")))
+					.Fluent(c => c.RetryIlm("index"))
+					.Request(c => c.RetryIlm(new RetryIlmRequest("index")))
+					.FluentAsync(c => c.RetryIlmAsync("index"))
+					.RequestAsync(c => c.RetryIlmAsync(new RetryIlmRequest("index")))
 				;
 
 			await POST("/_ilm/start")
-					.Fluent(c => c.IlmStart())
-					.Request(c => c.IlmStart())
-					.FluentAsync(c => c.IlmStartAsync())
-					.RequestAsync(c => c.IlmStartAsync())
+					.Fluent(c => c.StartIlm())
+					.Request(c => c.StartIlm())
+					.FluentAsync(c => c.StartIlmAsync())
+					.RequestAsync(c => c.StartIlmAsync())
 				;
 
 			await POST("/_ilm/stop")
-					.Fluent(c => c.IlmStop())
-					.Request(c => c.IlmStop())
-					.FluentAsync(c => c.IlmStopAsync())
-					.RequestAsync(c => c.IlmStopAsync())
+					.Fluent(c => c.StopIlm())
+					.Request(c => c.StopIlm())
+					.FluentAsync(c => c.StopIlmAsync())
+					.RequestAsync(c => c.StopIlmAsync())
 				;
 		}
 	}

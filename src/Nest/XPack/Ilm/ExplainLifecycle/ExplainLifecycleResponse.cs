@@ -4,13 +4,13 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIlmExplainLifecycleResponse : IResponse
+	public interface IExplainLifecycleResponse : IResponse
 	{
 		[JsonProperty("indices")]
 		IReadOnlyDictionary<string, LifecycleExplain> Indices { get; }
 	}
 
-	public class IlmExplainLifecycleResponse : ResponseBase, IIlmExplainLifecycleResponse
+	public class ExplainLifecycleResponse : ResponseBase, IExplainLifecycleResponse
 	{
 		public IReadOnlyDictionary<string, LifecycleExplain> Indices { get; internal set; }
 	}

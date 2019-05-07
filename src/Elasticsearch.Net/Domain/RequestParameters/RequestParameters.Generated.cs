@@ -2325,8 +2325,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmDeleteLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
-	public partial class IlmDeleteLifecycleRequestParameters : RequestParameters<IlmDeleteLifecycleRequestParameters> 
+	///<summary>Request options for XpackIlmDeleteLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleRequestParameters : RequestParameters<DeleteLifecycleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>
@@ -2340,8 +2340,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmExplainLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
-	public partial class IlmExplainLifecycleRequestParameters : RequestParameters<IlmExplainLifecycleRequestParameters> 
+	///<summary>Request options for XpackIlmExplainLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleRequestParameters : RequestParameters<ExplainLifecycleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -2355,8 +2355,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmGetLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
-	public partial class IlmGetLifecycleRequestParameters : RequestParameters<IlmGetLifecycleRequestParameters> 
+	///<summary>Request options for XpackIlmGetLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleRequestParameters : RequestParameters<GetLifecycleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -2370,8 +2370,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmGetStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
-	public partial class IlmGetStatusRequestParameters : RequestParameters<IlmGetStatusRequestParameters> 
+	///<summary>Request options for XpackIlmGetStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusRequestParameters : RequestParameters<GetIlmStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -2385,8 +2385,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmMoveToStep<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
-	public partial class IlmMoveToStepRequestParameters : RequestParameters<IlmMoveToStepRequestParameters> 
+	///<summary>Request options for XpackIlmMoveToStep<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepRequestParameters : RequestParameters<MoveToStepRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -2400,8 +2400,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmPutLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
-	public partial class IlmPutLifecycleRequestParameters : RequestParameters<IlmPutLifecycleRequestParameters> 
+	///<summary>Request options for XpackIlmPutLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleRequestParameters : RequestParameters<PutLifecycleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2415,8 +2415,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmRemovePolicy<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
-	public partial class IlmRemovePolicyRequestParameters : RequestParameters<IlmRemovePolicyRequestParameters> 
+	///<summary>Request options for XpackIlmRemovePolicy<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyRequestParameters : RequestParameters<RemovePolicyRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -2430,8 +2430,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmRetry<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
-	public partial class IlmRetryRequestParameters : RequestParameters<IlmRetryRequestParameters> 
+	///<summary>Request options for XpackIlmRetry<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmRequestParameters : RequestParameters<RetryIlmRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -2445,8 +2445,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmStart<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
-	public partial class IlmStartRequestParameters : RequestParameters<IlmStartRequestParameters> 
+	///<summary>Request options for XpackIlmStart<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmRequestParameters : RequestParameters<StartIlmRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -2460,8 +2460,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IlmStop<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
-	public partial class IlmStopRequestParameters : RequestParameters<IlmStopRequestParameters> 
+	///<summary>Request options for XpackIlmStop<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmRequestParameters : RequestParameters<StopIlmRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>

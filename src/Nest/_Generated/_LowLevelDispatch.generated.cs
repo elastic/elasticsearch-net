@@ -3200,218 +3200,218 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
-		internal TResponse IlmDeleteLifecycleDispatch<TResponse>(IRequest<IlmDeleteLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmDeleteLifecycleDispatch<TResponse>(IRequest<DeleteLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmDeleteLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.XpackIlmDeleteLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy_id}");
+			throw InvalidDispatch("XpackIlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy_id}");
 		}
 		
-		internal Task<TResponse> IlmDeleteLifecycleDispatchAsync<TResponse>(IRequest<IlmDeleteLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmDeleteLifecycleDispatchAsync<TResponse>(IRequest<DeleteLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmDeleteLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.XpackIlmDeleteLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy_id}");
+			throw InvalidDispatch("XpackIlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy_id}");
 		}
 		
-		internal TResponse IlmExplainLifecycleDispatch<TResponse>(IRequest<IlmExplainLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmExplainLifecycleDispatch<TResponse>(IRequest<ExplainLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmExplainLifecycle<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmExplainLifecycle<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmExplainLifecycle", p, new [] { GET }, "/{index}/_ilm/explain");
+			throw InvalidDispatch("XpackIlmExplainLifecycle", p, new [] { GET }, "/{index}/_ilm/explain");
 		}
 		
-		internal Task<TResponse> IlmExplainLifecycleDispatchAsync<TResponse>(IRequest<IlmExplainLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmExplainLifecycleDispatchAsync<TResponse>(IRequest<ExplainLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmExplainLifecycleAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmExplainLifecycleAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmExplainLifecycle", p, new [] { GET }, "/{index}/_ilm/explain");
+			throw InvalidDispatch("XpackIlmExplainLifecycle", p, new [] { GET }, "/{index}/_ilm/explain");
 		}
 		
-		internal TResponse IlmGetLifecycleDispatch<TResponse>(IRequest<IlmGetLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmGetLifecycleDispatch<TResponse>(IRequest<GetLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.IlmGetLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
-						return _lowLevel.IlmGetLifecycle<TResponse>(p.RequestParameters);
+					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.XpackIlmGetLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
+						return _lowLevel.XpackIlmGetLifecycle<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy");
+			throw InvalidDispatch("XpackIlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy");
 		}
 		
-		internal Task<TResponse> IlmGetLifecycleDispatchAsync<TResponse>(IRequest<IlmGetLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmGetLifecycleDispatchAsync<TResponse>(IRequest<GetLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
-						return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.XpackIlmGetLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
+						return _lowLevel.XpackIlmGetLifecycleAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy");
+			throw InvalidDispatch("XpackIlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy");
 		}
 		
-		internal TResponse IlmGetStatusDispatch<TResponse>(IRequest<IlmGetStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmGetStatusDispatch<TResponse>(IRequest<GetIlmStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-						return _lowLevel.IlmGetStatus<TResponse>(p.RequestParameters);
+						return _lowLevel.XpackIlmGetStatus<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IlmGetStatus", p, new [] { GET }, "/_ilm/status");
+			throw InvalidDispatch("XpackIlmGetStatus", p, new [] { GET }, "/_ilm/status");
 		}
 		
-		internal Task<TResponse> IlmGetStatusDispatchAsync<TResponse>(IRequest<IlmGetStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmGetStatusDispatchAsync<TResponse>(IRequest<GetIlmStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-						return _lowLevel.IlmGetStatusAsync<TResponse>(p.RequestParameters,ct);
+						return _lowLevel.XpackIlmGetStatusAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IlmGetStatus", p, new [] { GET }, "/_ilm/status");
+			throw InvalidDispatch("XpackIlmGetStatus", p, new [] { GET }, "/_ilm/status");
 		}
 		
-		internal TResponse IlmMoveToStepDispatch<TResponse>(IRequest<IlmMoveToStepRequestParameters> p,SerializableData<IIlmMoveToStepRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmMoveToStepDispatch<TResponse>(IRequest<MoveToStepRequestParameters> p,SerializableData<IMoveToStepRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmMoveToStep<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmMoveToStep<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
+			throw InvalidDispatch("XpackIlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
 		}
 		
-		internal Task<TResponse> IlmMoveToStepDispatchAsync<TResponse>(IRequest<IlmMoveToStepRequestParameters> p,SerializableData<IIlmMoveToStepRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmMoveToStepDispatchAsync<TResponse>(IRequest<MoveToStepRequestParameters> p,SerializableData<IMoveToStepRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmMoveToStepAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmMoveToStepAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
+			throw InvalidDispatch("XpackIlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
 		}
 		
-		internal TResponse IlmPutLifecycleDispatch<TResponse>(IRequest<IlmPutLifecycleRequestParameters> p,SerializableData<IIlmPutLifecycleRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmPutLifecycleDispatch<TResponse>(IRequest<PutLifecycleRequestParameters> p,SerializableData<IPutLifecycleRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmPutLifecycle<TResponse>(p.RouteValues.PolicyId,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.XpackIlmPutLifecycle<TResponse>(p.RouteValues.PolicyId,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy_id}");
+			throw InvalidDispatch("XpackIlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy_id}");
 		}
 		
-		internal Task<TResponse> IlmPutLifecycleDispatchAsync<TResponse>(IRequest<IlmPutLifecycleRequestParameters> p,SerializableData<IIlmPutLifecycleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmPutLifecycleDispatchAsync<TResponse>(IRequest<PutLifecycleRequestParameters> p,SerializableData<IPutLifecycleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmPutLifecycleAsync<TResponse>(p.RouteValues.PolicyId,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.XpackIlmPutLifecycleAsync<TResponse>(p.RouteValues.PolicyId,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy_id}");
+			throw InvalidDispatch("XpackIlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy_id}");
 		}
 		
-		internal TResponse IlmRemovePolicyDispatch<TResponse>(IRequest<IlmRemovePolicyRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmRemovePolicyDispatch<TResponse>(IRequest<RemovePolicyRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicy<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmRemovePolicy<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
+			throw InvalidDispatch("XpackIlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
 		}
 		
-		internal Task<TResponse> IlmRemovePolicyDispatchAsync<TResponse>(IRequest<IlmRemovePolicyRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmRemovePolicyDispatchAsync<TResponse>(IRequest<RemovePolicyRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicyAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmRemovePolicyAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
+			throw InvalidDispatch("XpackIlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
 		}
 		
-		internal TResponse IlmRetryDispatch<TResponse>(IRequest<IlmRetryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmRetryDispatch<TResponse>(IRequest<RetryIlmRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRetry<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmRetry<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
+			throw InvalidDispatch("XpackIlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
 		}
 		
-		internal Task<TResponse> IlmRetryDispatchAsync<TResponse>(IRequest<IlmRetryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmRetryDispatchAsync<TResponse>(IRequest<RetryIlmRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRetryAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackIlmRetryAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
+			throw InvalidDispatch("XpackIlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
 		}
 		
-		internal TResponse IlmStartDispatch<TResponse>(IRequest<IlmStartRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmStartDispatch<TResponse>(IRequest<StartIlmRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-						return _lowLevel.IlmStart<TResponse>(p.RequestParameters);
+						return _lowLevel.XpackIlmStart<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IlmStart", p, new [] { POST }, "/_ilm/start");
+			throw InvalidDispatch("XpackIlmStart", p, new [] { POST }, "/_ilm/start");
 		}
 		
-		internal Task<TResponse> IlmStartDispatchAsync<TResponse>(IRequest<IlmStartRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmStartDispatchAsync<TResponse>(IRequest<StartIlmRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-						return _lowLevel.IlmStartAsync<TResponse>(p.RequestParameters,ct);
+						return _lowLevel.XpackIlmStartAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IlmStart", p, new [] { POST }, "/_ilm/start");
+			throw InvalidDispatch("XpackIlmStart", p, new [] { POST }, "/_ilm/start");
 		}
 		
-		internal TResponse IlmStopDispatch<TResponse>(IRequest<IlmStopRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackIlmStopDispatch<TResponse>(IRequest<StopIlmRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-						return _lowLevel.IlmStop<TResponse>(p.RequestParameters);
+						return _lowLevel.XpackIlmStop<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IlmStop", p, new [] { POST }, "/_ilm/stop");
+			throw InvalidDispatch("XpackIlmStop", p, new [] { POST }, "/_ilm/stop");
 		}
 		
-		internal Task<TResponse> IlmStopDispatchAsync<TResponse>(IRequest<IlmStopRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackIlmStopDispatchAsync<TResponse>(IRequest<StopIlmRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-						return _lowLevel.IlmStopAsync<TResponse>(p.RequestParameters,ct);
+						return _lowLevel.XpackIlmStopAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IlmStop", p, new [] { POST }, "/_ilm/stop");
+			throw InvalidDispatch("XpackIlmStop", p, new [] { POST }, "/_ilm/stop");
 		}
 		
 		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()

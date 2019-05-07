@@ -2022,6 +2022,33 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteLifecycleRequest : IRequest<DeleteLifecycleRequestParameters>
+	{
+		PolicyId PolicyId { get; }
+	}
+	///<summary>Request parameters for XpackIlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleRequest : PlainRequestBase<DeleteLifecycleRequestParameters>, IDeleteLifecycleRequest
+	{
+		protected IDeleteLifecycleRequest Self => this;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">this parameter is required</param>
+		public DeleteLifecycleRequest(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
+		// values part of the url path
+		PolicyId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
 	{
 		Id JobId { get; }
@@ -2566,6 +2593,33 @@ namespace Nest
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IExplainLifecycleRequest : IRequest<ExplainLifecycleRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for XpackIlmExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleRequest : PlainRequestBase<ExplainLifecycleRequestParameters>, IExplainLifecycleRequest
+	{
+		protected IExplainLifecycleRequest Self => this;
+		///<summary>/{index}/_ilm/explain</summary>
+		///<param name="index">this parameter is required</param>
+		public ExplainLifecycleRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExplainRequest<TDocument> : IRequest<ExplainRequestParameters>
 	{
 		Id Id { get; }
@@ -3077,6 +3131,28 @@ namespace Nest
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetIlmStatusRequest : IRequest<GetIlmStatusRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackIlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusRequest : PlainRequestBase<GetIlmStatusRequestParameters>, IGetIlmStatusRequest
+	{
+		protected IGetIlmStatusRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 	{
 		Indices Index { get; }
@@ -3253,6 +3329,35 @@ namespace Nest
 		// Request parameters
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetLifecycleRequest : IRequest<GetLifecycleRequestParameters>
+	{
+		PolicyId PolicyId { get; }
+	}
+	///<summary>Request parameters for XpackIlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleRequest : PlainRequestBase<GetLifecycleRequestParameters>, IGetLifecycleRequest
+	{
+		protected IGetLifecycleRequest Self => this;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">Optional, accepts null</param>
+		public GetLifecycleRequest(PolicyId policy_id) : base(r=>r.Optional("policy_id", policy_id)){}
+		///<summary>/_ilm/policy</summary>
+		public GetLifecycleRequest() : base(){}
+		// values part of the url path
+		PolicyId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
@@ -3835,263 +3940,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmDeleteLifecycleRequest : IRequest<IlmDeleteLifecycleRequestParameters>
-	{
-		PolicyId PolicyId { get; }
-	}
-	///<summary>Request parameters for IlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
-	public partial class IlmDeleteLifecycleRequest : PlainRequestBase<IlmDeleteLifecycleRequestParameters>, IIlmDeleteLifecycleRequest
-	{
-		protected IIlmDeleteLifecycleRequest Self => this;
-		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name="policy_id">this parameter is required</param>
-		public IlmDeleteLifecycleRequest(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
-		// values part of the url path
-		PolicyId IIlmDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmExplainLifecycleRequest : IRequest<IlmExplainLifecycleRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for IlmExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
-	public partial class IlmExplainLifecycleRequest : PlainRequestBase<IlmExplainLifecycleRequestParameters>, IIlmExplainLifecycleRequest
-	{
-		protected IIlmExplainLifecycleRequest Self => this;
-		///<summary>/{index}/_ilm/explain</summary>
-		///<param name="index">this parameter is required</param>
-		public IlmExplainLifecycleRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IIlmExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmGetLifecycleRequest : IRequest<IlmGetLifecycleRequestParameters>
-	{
-		PolicyId PolicyId { get; }
-	}
-	///<summary>Request parameters for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
-	public partial class IlmGetLifecycleRequest : PlainRequestBase<IlmGetLifecycleRequestParameters>, IIlmGetLifecycleRequest
-	{
-		protected IIlmGetLifecycleRequest Self => this;
-		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name="policy_id">Optional, accepts null</param>
-		public IlmGetLifecycleRequest(PolicyId policy_id) : base(r=>r.Optional("policy_id", policy_id)){}
-		///<summary>/_ilm/policy</summary>
-		public IlmGetLifecycleRequest() : base(){}
-		// values part of the url path
-		PolicyId IIlmGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmGetStatusRequest : IRequest<IlmGetStatusRequestParameters>
-	{
-	}
-	///<summary>Request parameters for IlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
-	public partial class IlmGetStatusRequest : PlainRequestBase<IlmGetStatusRequestParameters>, IIlmGetStatusRequest
-	{
-		protected IIlmGetStatusRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmMoveToStepRequest : IRequest<IlmMoveToStepRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for IlmMoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
-	public partial class IlmMoveToStepRequest : PlainRequestBase<IlmMoveToStepRequestParameters>, IIlmMoveToStepRequest
-	{
-		protected IIlmMoveToStepRequest Self => this;
-		///<summary>/_ilm/move/{index}</summary>
-		///<param name="index">this parameter is required</param>
-		public IlmMoveToStepRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IIlmMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmPutLifecycleRequest : IRequest<IlmPutLifecycleRequestParameters>
-	{
-		PolicyId PolicyId { get; }
-	}
-	///<summary>Request parameters for IlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
-	public partial class IlmPutLifecycleRequest : PlainRequestBase<IlmPutLifecycleRequestParameters>, IIlmPutLifecycleRequest
-	{
-		protected IIlmPutLifecycleRequest Self => this;
-		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name="policy_id">this parameter is required</param>
-		public IlmPutLifecycleRequest(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
-		// values part of the url path
-		PolicyId IIlmPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmRemovePolicyRequest : IRequest<IlmRemovePolicyRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for IlmRemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
-	public partial class IlmRemovePolicyRequest : PlainRequestBase<IlmRemovePolicyRequestParameters>, IIlmRemovePolicyRequest
-	{
-		protected IIlmRemovePolicyRequest Self => this;
-		///<summary>/{index}/_ilm/remove</summary>
-		///<param name="index">this parameter is required</param>
-		public IlmRemovePolicyRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IIlmRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmRetryRequest : IRequest<IlmRetryRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for IlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
-	public partial class IlmRetryRequest : PlainRequestBase<IlmRetryRequestParameters>, IIlmRetryRequest
-	{
-		protected IIlmRetryRequest Self => this;
-		///<summary>/{index}/_ilm/retry</summary>
-		///<param name="index">this parameter is required</param>
-		public IlmRetryRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IIlmRetryRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmStartRequest : IRequest<IlmStartRequestParameters>
-	{
-	}
-	///<summary>Request parameters for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
-	public partial class IlmStartRequest : PlainRequestBase<IlmStartRequestParameters>, IIlmStartRequest
-	{
-		protected IIlmStartRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIlmStopRequest : IRequest<IlmStopRequestParameters>
-	{
-	}
-	///<summary>Request parameters for IlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
-	public partial class IlmStopRequest : PlainRequestBase<IlmStopRequestParameters>, IIlmStopRequest
-	{
-		protected IIlmStopRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-		///<summary>
-		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
-		/// request fails and returns an error. Defaults to 30s.
-		///</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>
-		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
-		/// an error. Defaults to 30s.
-		///</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
 		Indices Index { get; }
@@ -4386,6 +4234,33 @@ namespace Nest
 		// Request parameters
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMoveToStepRequest : IRequest<MoveToStepRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for XpackIlmMoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
+	{
+		protected IMoveToStepRequest Self => this;
+		///<summary>/_ilm/move/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public MoveToStepRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
@@ -5018,6 +4893,33 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutLifecycleRequest : IRequest<PutLifecycleRequestParameters>
+	{
+		PolicyId PolicyId { get; }
+	}
+	///<summary>Request parameters for XpackIlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleRequest : PlainRequestBase<PutLifecycleRequestParameters>, IPutLifecycleRequest
+	{
+		protected IPutLifecycleRequest Self => this;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">this parameter is required</param>
+		public PutLifecycleRequest(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
+		// values part of the url path
+		PolicyId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
 	{
 		Indices Index { get; }
@@ -5404,6 +5306,33 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRemovePolicyRequest : IRequest<RemovePolicyRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for XpackIlmRemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyRequest : PlainRequestBase<RemovePolicyRequestParameters>, IRemovePolicyRequest
+	{
+		protected IRemovePolicyRequest Self => this;
+		///<summary>/{index}/_ilm/remove</summary>
+		///<param name="index">this parameter is required</param>
+		public RemovePolicyRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
 	{
 		Id Id { get; }
@@ -5474,6 +5403,33 @@ namespace Nest
 		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRetryIlmRequest : IRequest<RetryIlmRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for XpackIlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmRequest : PlainRequestBase<RetryIlmRequestParameters>, IRetryIlmRequest
+	{
+		protected IRetryIlmRequest Self => this;
+		///<summary>/{index}/_ilm/retry</summary>
+		///<param name="index">this parameter is required</param>
+		public RetryIlmRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IRetryIlmRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
@@ -6315,6 +6271,28 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartIlmRequest : IRequest<StartIlmRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackIlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmRequest : PlainRequestBase<StartIlmRequestParameters>, IStartIlmRequest
+	{
+		protected IStartIlmRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
 	{
 		Id Id { get; }
@@ -6377,6 +6355,28 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStopIlmRequest : IRequest<StopIlmRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackIlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmRequest : PlainRequestBase<StopIlmRequestParameters>, IStopIlmRequest
+	{
+		protected IStopIlmRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>

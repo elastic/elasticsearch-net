@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIlmRemovePolicyResponse : IResponse
+	public interface IRemovePolicyResponse : IResponse
 	{
 		[JsonProperty("has_failures")]
 		bool HasFailures { get; }
@@ -12,7 +12,7 @@ namespace Nest
 		IReadOnlyCollection<string> FailedIndexes { get; }
 	}
 
-	public class IlmRemovePolicyResponse : ResponseBase, IIlmRemovePolicyResponse
+	public class RemovePolicyResponse : ResponseBase, IRemovePolicyResponse
 	{
 		public bool HasFailures { get; internal set; }
 

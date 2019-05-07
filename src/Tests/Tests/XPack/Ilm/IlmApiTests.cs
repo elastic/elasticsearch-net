@@ -40,28 +40,28 @@ namespace Tests.XPack.Ilm
 				)
 			},
 			{
-				IlmExplainLifecycleStep, u => u.Calls<IlmExplainLifecycleDescriptor, IlmExplainLifecycleRequest, IIlmExplainLifecycleRequest, IIlmExplainLifecycleResponse>(
-					v => new IlmExplainLifecycleRequest("project"),
+				IlmExplainLifecycleStep, u => u.Calls<ExplainLifecycleDescriptor, ExplainLifecycleRequest, IExplainLifecycleRequest, IExplainLifecycleResponse>(
+					v => new ExplainLifecycleRequest("project"),
 					(v, d) => d,
-					(v, c, f) => c.IlmExplainLifecycle("project", f),
-					(v, c, f) => c.IlmExplainLifecycleAsync("project", f),
-					(v, c, r) => c.IlmExplainLifecycle(r),
-					(v, c, r) => c.IlmExplainLifecycleAsync(r)
+					(v, c, f) => c.ExplainLifecycle("project", f),
+					(v, c, f) => c.ExplainLifecycleAsync("project", f),
+					(v, c, r) => c.ExplainLifecycle(r),
+					(v, c, r) => c.ExplainLifecycleAsync(r)
 				)
 			},
 			{
-				IlmGetStatusStep, u => u.Calls<IlmGetStatusDescriptor, IlmGetStatusRequest, IIlmGetStatusRequest, IIlmGetStatusResponse>(
-					v => new IlmGetStatusRequest(),
+				IlmGetStatusStep, u => u.Calls<GetIlmStatusDescriptor, GetIlmStatusRequest, IGetIlmStatusRequest, IGetIlmStatusResponse>(
+					v => new GetIlmStatusRequest(),
 					(v, d) => d,
-					(v, c, f) => c.IlmGetStatus(f),
-					(v, c, f) => c.IlmGetStatusAsync(f),
-					(v, c, r) => c.IlmGetStatus(r),
-					(v, c, r) => c.IlmGetStatusAsync(r)
+					(v, c, f) => c.GetIlmStatus(f),
+					(v, c, f) => c.GetIlmStatusAsync(f),
+					(v, c, r) => c.GetIlmStatus(r),
+					(v, c, r) => c.GetIlmStatusAsync(r)
 				)
 			},
 			{
-				IlmPutLifecycleStep, u => u.Calls<IlmPutLifecycleDescriptor, IlmPutLifecycleRequest, IIlmPutLifecycleRequest, IIlmPutLifecycleResponse>(
-					v => new IlmPutLifecycleRequest("policy" + v)
+				IlmPutLifecycleStep, u => u.Calls<PutLifecycleDescriptor, PutLifecycleRequest, IPutLifecycleRequest, IPutLifecycleResponse>(
+					v => new PutLifecycleRequest("policy" + v)
 					{
 						Policy = new Policy
 						{
@@ -95,60 +95,60 @@ namespace Tests.XPack.Ilm
 													.Delete(w => w.MinimumAge("30d")
 		       													  .Actions(ac => ac.Delete(f => f)))))
 					,
-					(v, c, f) => c.IlmPutLifecycle("policy" + v, f),
-					(v, c, f) => c.IlmPutLifecycleAsync("policy" + v, f),
-					(v, c, r) => c.IlmPutLifecycle(r),
-					(v, c, r) => c.IlmPutLifecycleAsync(r)
+					(v, c, f) => c.PutLifecycle("policy" + v, f),
+					(v, c, f) => c.PutLifecycleAsync("policy" + v, f),
+					(v, c, r) => c.PutLifecycle(r),
+					(v, c, r) => c.PutLifecycleAsync(r)
 				)
 			},
 			{
-				IlmRemovePolicyStep, u => u.Calls<IlmRemovePolicyDescriptor, IlmRemovePolicyRequest, IIlmRemovePolicyRequest, IIlmRemovePolicyResponse>(
-					v => new IlmRemovePolicyRequest("project"),
+				IlmRemovePolicyStep, u => u.Calls<RemovePolicyDescriptor, RemovePolicyRequest, IRemovePolicyRequest, IRemovePolicyResponse>(
+					v => new RemovePolicyRequest("project"),
 					(v, d) => d,
-					(v, c, f) => c.IlmRemovePolicy("project", f),
-					(v, c, f) => c.IlmRemovePolicyAsync("project", f),
-					(v, c, r) => c.IlmRemovePolicy(r),
-					(v, c, r) => c.IlmRemovePolicyAsync(r)
+					(v, c, f) => c.RemovePolicy("project", f),
+					(v, c, f) => c.RemovePolicyAsync("project", f),
+					(v, c, r) => c.RemovePolicy(r),
+					(v, c, r) => c.RemovePolicyAsync(r)
 				)
 			},
 			{
-				IlmGetLifecycleStep, u => u.Calls<IlmGetLifecycleDescriptor, IlmGetLifecycleRequest, IIlmGetLifecycleRequest, IIlmGetLifecycleResponse>(
-					v => new IlmGetLifecycleRequest("policy" + v),
+				IlmGetLifecycleStep, u => u.Calls<GetLifecycleDescriptor, GetLifecycleRequest, IGetLifecycleRequest, IGetLifecycleResponse>(
+					v => new GetLifecycleRequest("policy" + v),
 					(v, d) => d.PolicyId("policy" + v),
-					(v, c, f) => c.IlmGetLifecycle(f),
-					(v, c, f) => c.IlmGetLifecycleAsync(f),
-					(v, c, r) => c.IlmGetLifecycle(r),
-					(v, c, r) => c.IlmGetLifecycleAsync(r)
+					(v, c, f) => c.GetLifecycle(f),
+					(v, c, f) => c.GetLifecycleAsync(f),
+					(v, c, r) => c.GetLifecycle(r),
+					(v, c, r) => c.GetLifecycleAsync(r)
 				)
 			},
 			{
-				IlmGeAllLifecycleStep, u => u.Calls<IlmGetLifecycleDescriptor, IlmGetLifecycleRequest, IIlmGetLifecycleRequest, IIlmGetLifecycleResponse>(
-					v => new IlmGetLifecycleRequest(),
+				IlmGeAllLifecycleStep, u => u.Calls<GetLifecycleDescriptor, GetLifecycleRequest, IGetLifecycleRequest, IGetLifecycleResponse>(
+					v => new GetLifecycleRequest(),
 					(v, d) => d,
-					(v, c, f) => c.IlmGetLifecycle(f),
-					(v, c, f) => c.IlmGetLifecycleAsync(f),
-					(v, c, r) => c.IlmGetLifecycle(r),
-					(v, c, r) => c.IlmGetLifecycleAsync(r)
+					(v, c, f) => c.GetLifecycle(f),
+					(v, c, f) => c.GetLifecycleAsync(f),
+					(v, c, r) => c.GetLifecycle(r),
+					(v, c, r) => c.GetLifecycleAsync(r)
 				)
 			},
 			{
-				IlmDeleteLifecycleStep, u => u.Calls<IlmDeleteLifecycleDescriptor, IlmDeleteLifecycleRequest, IIlmDeleteLifecycleRequest, IIlmDeleteLifecycleResponse>(
-					v => new IlmDeleteLifecycleRequest("policy" + v),
+				IlmDeleteLifecycleStep, u => u.Calls<DeleteLifecycleDescriptor, DeleteLifecycleRequest, IDeleteLifecycleRequest, IDeleteLifecycleResponse>(
+					v => new DeleteLifecycleRequest("policy" + v),
 					(v, d) => d,
-					(v, c, f) => c.IlmDeleteLifecycle("policy" + v, f),
-					(v, c, f) => c.IlmDeleteLifecycleAsync("policy" + v, f),
-					(v, c, r) => c.IlmDeleteLifecycle(r),
-					(v, c, r) => c.IlmDeleteLifecycleAsync(r)
+					(v, c, f) => c.DeleteLifecycle("policy" + v, f),
+					(v, c, f) => c.DeleteLifecycleAsync("policy" + v, f),
+					(v, c, r) => c.DeleteLifecycle(r),
+					(v, c, r) => c.DeleteLifecycleAsync(r)
 				)
 			},
 			{
-				IlmStopStep, u => u.Calls<IlmStopDescriptor, IlmStopRequest, IIlmStopRequest, IIlmStopResponse>(
-					v => new IlmStopRequest(),
+				IlmStopStep, u => u.Calls<StopIlmDescriptor, StopIlmRequest, IStopIlmRequest, IStopIlmResponse>(
+					v => new StopIlmRequest(),
 					(v, d) => d,
-					(v, c, f) => c.IlmStop(f),
-					(v, c, f) => c.IlmStopAsync(f),
-					(v, c, r) => c.IlmStop(r),
-					(v, c, r) => c.IlmStopAsync(r)
+					(v, c, f) => c.StopIlm(f),
+					(v, c, f) => c.StopIlmAsync(f),
+					(v, c, r) => c.StopIlm(r),
+					(v, c, r) => c.StopIlmAsync(r)
 				)
 			},
 		}) { }
@@ -165,7 +165,7 @@ namespace Tests.XPack.Ilm
 
 		private static DateTime FixedDate { get; } = new DateTime(2015, 06, 06, 12, 01, 02, 123);
 
-		[I] public async Task IlmExplainLifecycleResponse() => await Assert<IlmExplainLifecycleResponse>(IlmExplainLifecycleStep, (v, r) =>
+		[I] public async Task IlmExplainLifecycleResponse() => await Assert<ExplainLifecycleResponse>(IlmExplainLifecycleStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
@@ -181,14 +181,14 @@ namespace Tests.XPack.Ilm
 
 		});
 
-		[I] public async Task IlmStopResponse() => await Assert<IlmStopResponse>(IlmStopStep, (v, r) =>
+		[I] public async Task IlmStopResponse() => await Assert<StopIlmResponse>(IlmStopStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 			r.Acknowledged.Should().BeTrue();
 		});
 
-		[I] public async Task IlmRemovePolicyResponse() => await Assert<IlmRemovePolicyResponse>(IlmRemovePolicyStep, (v, r) =>
+		[I] public async Task IlmRemovePolicyResponse() => await Assert<RemovePolicyResponse>(IlmRemovePolicyStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
@@ -196,21 +196,21 @@ namespace Tests.XPack.Ilm
 			r.FailedIndexes.Should().BeEmpty();
 		});
 
-		[I] public async Task IlmGetStatusResponse() => await Assert<IlmGetStatusResponse>(IlmGetStatusStep, (v, r) =>
+		[I] public async Task IlmGetStatusResponse() => await Assert<GetIlmStatusResponse>(IlmGetStatusStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 			r.OperationMode.Should().Be(LifecycleOperationMode.Running);
 		});
 
-		[I] public async Task IlmPutLifecycleResponse() => await Assert<IlmPutLifecycleResponse>(IlmPutLifecycleStep, (v, r) =>
+		[I] public async Task IlmPutLifecycleResponse() => await Assert<PutLifecycleResponse>(IlmPutLifecycleStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 			r.Acknowledged.Should().BeTrue();
 		});
 
-		[I] public async Task IlmGetLifecycleResponse() => await Assert<IlmGetLifecycleResponse>(IlmGetLifecycleStep, (v, r) =>
+		[I] public async Task IlmGetLifecycleResponse() => await Assert<GetLifecycleResponse>(IlmGetLifecycleStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
@@ -247,7 +247,7 @@ namespace Tests.XPack.Ilm
 			deleteAction.Value.Should().BeOfType<DeleteLifecycleAction>();
 		});
 
-		[I] public async Task IlmDeleteLifecycleResponse() => await Assert<IlmDeleteLifecycleResponse>(IlmDeleteLifecycleStep, (v, r) =>
+		[I] public async Task IlmDeleteLifecycleResponse() => await Assert<DeleteLifecycleResponse>(IlmDeleteLifecycleStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);

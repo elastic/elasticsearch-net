@@ -2,13 +2,13 @@
 
 namespace Nest
 {
-	public interface IIlmGetStatusResponse : IResponse
+	public interface IGetIlmStatusResponse : IResponse
 	{
 		[JsonProperty("operation_mode")]
 		LifecycleOperationMode OperationMode { get; }
 	}
 
-	public class IlmGetStatusResponse : ResponseBase, IIlmGetStatusResponse
+	public class GetIlmStatusResponse : ResponseBase, IGetIlmStatusResponse
 	{
 		public LifecycleOperationMode OperationMode { get; internal set; }
 	}
