@@ -22,7 +22,8 @@ namespace Tests.Mapping.Types.Core.GeoShape
 					strategy = "recursive",
 					tree_levels = 3,
 					points_only = true,
-					distance_error_pct = 1.0
+					distance_error_pct = 1.0,
+					coerce = true
 				}
 			}
 		};
@@ -36,6 +37,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 				.TreeLevels(3)
 				.PointsOnly()
 				.DistanceErrorPercentage(1.0)
+				.Coerce()
 			);
 
 
@@ -49,7 +51,8 @@ namespace Tests.Mapping.Types.Core.GeoShape
 					Strategy = GeoStrategy.Recursive,
 					TreeLevels = 3,
 					PointsOnly = true,
-					DistanceErrorPercentage = 1.0
+					DistanceErrorPercentage = 1.0,
+					Coerce = true
 				}
 			}
 		};
