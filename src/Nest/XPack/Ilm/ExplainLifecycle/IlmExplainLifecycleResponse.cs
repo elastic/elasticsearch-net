@@ -21,7 +21,7 @@ namespace Nest
 		public IndexName Index { get; internal set; }
 
 		/// <summary>
-		/// Shows if the index is being managed by ILM. If the index is not managed by ILM the other fields will not be shown.
+		/// Shows if the index is being managed by Index Lifecycle Management (ILM). If the index is not managed by ILM the other fields will not be shown.
 		/// </summary>
 		[JsonProperty("managed")]
 		public bool Managed { get; internal set; }
