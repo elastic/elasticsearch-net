@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISecurityCreateApiKeyResponse : IResponse
+	public interface ICreateApiKeyResponse : IResponse
 	{
 		/// <summary>
 		/// Id for the API key
@@ -32,7 +32,7 @@ namespace Nest
 		string ApiKey { get; }
 	}
 
-	public class SecurityCreateApiKeyResponse : ResponseBase, ISecurityCreateApiKeyResponse
+	public class CreateApiKeyResponse : ResponseBase, ICreateApiKeyResponse
 	{
 		/// <inheritdoc />
 		public string Id { get; internal set; }

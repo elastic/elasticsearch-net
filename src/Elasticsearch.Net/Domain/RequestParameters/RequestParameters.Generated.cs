@@ -2718,8 +2718,8 @@ namespace Elasticsearch.Net
 		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for SecurityCreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
-	public partial class SecurityCreateApiKeyRequestParameters : RequestParameters<SecurityCreateApiKeyRequestParameters> 
+	///<summary>Request options for XpackSecurityCreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class CreateApiKeyRequestParameters : RequestParameters<CreateApiKeyRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2728,8 +2728,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	///<summary>Request options for SecurityGetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
-	public partial class SecurityGetApiKeyRequestParameters : RequestParameters<SecurityGetApiKeyRequestParameters> 
+	///<summary>Request options for XpackSecurityGetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class GetApiKeyRequestParameters : RequestParameters<GetApiKeyRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>API key id of the API key to be retrieved</summary>
@@ -2741,8 +2741,8 @@ namespace Elasticsearch.Net
 		///<summary>realm name of the user who created this API key to be retrieved</summary>
 		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
 	}
-	///<summary>Request options for SecurityInvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
-	public partial class SecurityInvalidateApiKeyRequestParameters : RequestParameters<SecurityInvalidateApiKeyRequestParameters> 
+	///<summary>Request options for XpackSecurityInvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class InvalidateApiKeyRequestParameters : RequestParameters<InvalidateApiKeyRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}

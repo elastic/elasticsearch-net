@@ -4055,40 +4055,40 @@ namespace Elasticsearch.Net
 		///<summary>PUT on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 		///<param name="body">The api key request to create an API key</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse SecurityCreateApiKey<TResponse>(PostData body, SecurityCreateApiKeyRequestParameters requestParameters = null)
+		public TResponse XpackSecurityCreateApiKey<TResponse>(PostData body, CreateApiKeyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(PUT, Url($"_security/api_key"), body, _params(requestParameters));
 		///<summary>PUT on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 		///<param name="body">The api key request to create an API key</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> SecurityCreateApiKeyAsync<TResponse>(PostData body, SecurityCreateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackSecurityCreateApiKeyAsync<TResponse>(PostData body, CreateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(PUT, Url($"_security/api_key"), ctx, body, _params(requestParameters));
 		///<summary>POST on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 		///<param name="body">The api key request to create an API key</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse SecurityCreateApiKeyPost<TResponse>(PostData body, SecurityCreateApiKeyRequestParameters requestParameters = null)
+		public TResponse XpackSecurityCreateApiKeyPost<TResponse>(PostData body, CreateApiKeyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_security/api_key"), body, _params(requestParameters));
 		///<summary>POST on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 		///<param name="body">The api key request to create an API key</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> SecurityCreateApiKeyPostAsync<TResponse>(PostData body, SecurityCreateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackSecurityCreateApiKeyPostAsync<TResponse>(PostData body, CreateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_security/api_key"), ctx, body, _params(requestParameters));
 		///<summary>GET on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse SecurityGetApiKey<TResponse>(SecurityGetApiKeyRequestParameters requestParameters = null)
+		public TResponse XpackSecurityGetApiKey<TResponse>(GetApiKeyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_security/api_key"), null, _params(requestParameters));
 		///<summary>GET on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> SecurityGetApiKeyAsync<TResponse>(SecurityGetApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackSecurityGetApiKeyAsync<TResponse>(GetApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_security/api_key"), ctx, null, _params(requestParameters));
 		///<summary>DELETE on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
 		///<param name="body">The api key request to invalidate API key(s)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse SecurityInvalidateApiKey<TResponse>(PostData body, SecurityInvalidateApiKeyRequestParameters requestParameters = null)
+		public TResponse XpackSecurityInvalidateApiKey<TResponse>(PostData body, InvalidateApiKeyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(DELETE, Url($"_security/api_key"), body, _params(requestParameters));
 		///<summary>DELETE on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
 		///<param name="body">The api key request to invalidate API key(s)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> SecurityInvalidateApiKeyAsync<TResponse>(PostData body, SecurityInvalidateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackSecurityInvalidateApiKeyAsync<TResponse>(PostData body, InvalidateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(DELETE, Url($"_security/api_key"), ctx, body, _params(requestParameters));
 		///<summary>GET on /_xpack/security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

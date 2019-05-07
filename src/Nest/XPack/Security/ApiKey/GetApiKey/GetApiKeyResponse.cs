@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISecurityGetApiKeyResponse : IResponse
+	public interface IGetApiKeyResponse : IResponse
 	{
 		/// <summary>
 		/// The list of API keys that were retrieved for this request.
@@ -13,7 +13,7 @@ namespace Nest
 		IReadOnlyCollection<ApiKeys> ApiKeys { get; }
 	}
 
-	public class SecurityGetApiKeyResponse : ResponseBase, ISecurityGetApiKeyResponse
+	public class GetApiKeyResponse : ResponseBase, IGetApiKeyResponse
 	{
 		/// <inheritdoc />
 		public IReadOnlyCollection<ApiKeys> ApiKeys { get; internal set; } = EmptyReadOnly<ApiKeys>.Collection;

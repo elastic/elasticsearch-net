@@ -4962,38 +4962,34 @@ namespace Nest
 		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop.  Defaults to 30s.</summary>
 		public StopRollupJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
-	///<summary>descriptor for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
-	public partial class SecurityCreateApiKeyDescriptor  : RequestDescriptorBase<SecurityCreateApiKeyDescriptor,SecurityCreateApiKeyRequestParameters, ISecurityCreateApiKeyRequest>, ISecurityCreateApiKeyRequest
+	///<summary>descriptor for XpackSecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class CreateApiKeyDescriptor  : RequestDescriptorBase<CreateApiKeyDescriptor,CreateApiKeyRequestParameters, ICreateApiKeyRequest>, ICreateApiKeyRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public SecurityCreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public CreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
-	///<summary>descriptor for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
-	public partial class SecurityGetApiKeyDescriptor  : RequestDescriptorBase<SecurityGetApiKeyDescriptor,SecurityGetApiKeyRequestParameters, ISecurityGetApiKeyRequest>, ISecurityGetApiKeyRequest
+	///<summary>descriptor for XpackSecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class GetApiKeyDescriptor  : RequestDescriptorBase<GetApiKeyDescriptor,GetApiKeyRequestParameters, IGetApiKeyRequest>, IGetApiKeyRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
 		///<summary>API key id of the API key to be retrieved</summary>
-		public SecurityGetApiKeyDescriptor Id(string id) => Qs("id", id);
+		public GetApiKeyDescriptor Id(string id) => Qs("id", id);
 		///<summary>API key name of the API key to be retrieved</summary>
-		public SecurityGetApiKeyDescriptor Name(string name) => Qs("name", name);
+		public GetApiKeyDescriptor Name(string name) => Qs("name", name);
 		///<summary>user name of the user who created this API key to be retrieved</summary>
-		public SecurityGetApiKeyDescriptor Username(string username) => Qs("username", username);
+		public GetApiKeyDescriptor Username(string username) => Qs("username", username);
 		///<summary>realm name of the user who created this API key to be retrieved</summary>
-		public SecurityGetApiKeyDescriptor RealmName(string realmName) => Qs("realm_name", realmName);
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public GetApiKeyDescriptor RealmName(string realmName) => Qs("realm_name", realmName);
 	}
-	///<summary>descriptor for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
-	public partial class SecurityInvalidateApiKeyDescriptor  : RequestDescriptorBase<SecurityInvalidateApiKeyDescriptor,SecurityInvalidateApiKeyRequestParameters, ISecurityInvalidateApiKeyRequest>, ISecurityInvalidateApiKeyRequest
+	///<summary>descriptor for XpackSecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class InvalidateApiKeyDescriptor  : RequestDescriptorBase<InvalidateApiKeyDescriptor,InvalidateApiKeyRequestParameters, IInvalidateApiKeyRequest>, IInvalidateApiKeyRequest
 	{ 
 		// values part of the url path
 

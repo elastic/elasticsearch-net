@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISecurityInvalidateApiKeyResponse : IResponse
+	public interface IInvalidateApiKeyResponse : IResponse
 	{
 		/// <summary>
 		/// The ids of the API keys that were invalidated as part of this request.
@@ -31,7 +31,7 @@ namespace Nest
 		IReadOnlyCollection<ErrorCause> ErrorDetails { get; }
 	}
 
-	public class SecurityInvalidateApiKeyResponse : ResponseBase, ISecurityInvalidateApiKeyResponse
+	public class InvalidateApiKeyResponse : ResponseBase, IInvalidateApiKeyResponse
 	{
 		/// <inheritdoc />
 		public IReadOnlyCollection<string> InvalidatedApiKeys { get; internal set; } = EmptyReadOnly<string>.Collection;

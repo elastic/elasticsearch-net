@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -10,7 +8,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Integration;
-using Tests.Mapping.LocalMetadata.Extensions;
 
 namespace Tests.XPack.ApiKey
 {
@@ -128,8 +125,8 @@ namespace Tests.XPack.ApiKey
 			},
 			{
 				CreateApiKeyWithRolesStep, u =>
-					u.Calls<SecurityCreateApiKeyDescriptor, SecurityCreateApiKeyRequest, ISecurityCreateApiKeyRequest, ISecurityCreateApiKeyResponse>(
-						v => new SecurityCreateApiKeyRequest
+					u.Calls<CreateApiKeyDescriptor, CreateApiKeyRequest, ICreateApiKeyRequest, ICreateApiKeyResponse>(
+						v => new CreateApiKeyRequest
 						{
 							Name = v,
 							Expiration = "1d",
@@ -180,16 +177,16 @@ namespace Tests.XPack.ApiKey
 								         .Role("role-b", o => o.Cluster("all").Indices(i => i.Index(k => k.Names("index-b").Privileges("read")))))
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.SecurityCreateApiKey(f),
-						(v, c, f) => c.SecurityCreateApiKeyAsync(f),
-						(v, c, r) => c.SecurityCreateApiKey(r),
-						(v, c, r) => c.SecurityCreateApiKeyAsync(r)
+						(v, c, f) => c.CreateApiKey(f),
+						(v, c, f) => c.CreateApiKeyAsync(f),
+						(v, c, r) => c.CreateApiKey(r),
+						(v, c, r) => c.CreateApiKeyAsync(r)
 					)
 			},
 			{
 				CreateApiKeyWithNoRolesStep, u =>
-					u.Calls<SecurityCreateApiKeyDescriptor, SecurityCreateApiKeyRequest, ISecurityCreateApiKeyRequest, ISecurityCreateApiKeyResponse>(
-						v => new SecurityCreateApiKeyRequest
+					u.Calls<CreateApiKeyDescriptor, CreateApiKeyRequest, ICreateApiKeyRequest, ICreateApiKeyResponse>(
+						v => new CreateApiKeyRequest
 						{
 							Name = v,
 							Expiration = "1d",
@@ -207,16 +204,16 @@ namespace Tests.XPack.ApiKey
 							.Expiration("1d")
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.SecurityCreateApiKey(f),
-						(v, c, f) => c.SecurityCreateApiKeyAsync(f),
-						(v, c, r) => c.SecurityCreateApiKey(r),
-						(v, c, r) => c.SecurityCreateApiKeyAsync(r)
+						(v, c, f) => c.CreateApiKey(f),
+						(v, c, f) => c.CreateApiKeyAsync(f),
+						(v, c, r) => c.CreateApiKey(r),
+						(v, c, r) => c.CreateApiKeyAsync(r)
 					)
 			},
 			{
 				GetApiKeyStep, u =>
-					u.Calls<SecurityGetApiKeyDescriptor, SecurityGetApiKeyRequest, ISecurityGetApiKeyRequest, ISecurityGetApiKeyResponse>(
-						v => new SecurityGetApiKeyRequest
+					u.Calls<GetApiKeyDescriptor, GetApiKeyRequest, IGetApiKeyRequest, IGetApiKeyResponse>(
+						v => new GetApiKeyRequest
 						{
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
@@ -232,16 +229,16 @@ namespace Tests.XPack.ApiKey
 							.Name(v)
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.SecurityGetApiKey(f),
-						(v, c, f) => c.SecurityGetApiKeyAsync(f),
-						(v, c, r) => c.SecurityGetApiKey(r),
-						(v, c, r) => c.SecurityGetApiKeyAsync(r)
+						(v, c, f) => c.GetApiKey(f),
+						(v, c, f) => c.GetApiKeyAsync(f),
+						(v, c, r) => c.GetApiKey(r),
+						(v, c, r) => c.GetApiKeyAsync(r)
 					)
 			},
 			{
 				InvalidateApiKeyStep, u =>
-					u.Calls<SecurityInvalidateApiKeyDescriptor, SecurityInvalidateApiKeyRequest, ISecurityInvalidateApiKeyRequest, ISecurityInvalidateApiKeyResponse>(
-						v => new SecurityInvalidateApiKeyRequest
+					u.Calls<InvalidateApiKeyDescriptor, InvalidateApiKeyRequest, IInvalidateApiKeyRequest, IInvalidateApiKeyResponse>(
+						v => new InvalidateApiKeyRequest
 						{
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
@@ -257,15 +254,15 @@ namespace Tests.XPack.ApiKey
 							.Name(v)
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.SecurityInvalidateApiKey(f),
-						(v, c, f) => c.SecurityInvalidateApiKeyAsync(f),
-						(v, c, r) => c.SecurityInvalidateApiKey(r),
-						(v, c, r) => c.SecurityInvalidateApiKeyAsync(r)
+						(v, c, f) => c.InvalidateApiKey(f),
+						(v, c, f) => c.InvalidateApiKeyAsync(f),
+						(v, c, r) => c.InvalidateApiKey(r),
+						(v, c, r) => c.InvalidateApiKeyAsync(r)
 					)
 			}
 		}) { }
 
-		[I] public async Task SecurityCreateApiKeyResponse() => await Assert<SecurityCreateApiKeyResponse>(CreateApiKeyWithRolesStep, r =>
+		[I] public async Task SecurityCreateApiKeyResponse() => await Assert<CreateApiKeyResponse>(CreateApiKeyWithRolesStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.Id.Should().NotBeNullOrEmpty();
@@ -274,7 +271,7 @@ namespace Tests.XPack.ApiKey
 			r.ApiKey.Should().NotBeNullOrEmpty();
 		});
 
-		[I] public async Task SecurityGetApiKeyResponse() => await Assert<SecurityGetApiKeyResponse>(GetApiKeyStep, r =>
+		[I] public async Task SecurityGetApiKeyResponse() => await Assert<GetApiKeyResponse>(GetApiKeyStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiKeys.Should().NotBeNullOrEmpty();
@@ -291,7 +288,7 @@ namespace Tests.XPack.ApiKey
 			}
 		});
 
-		[I] public async Task SecurityInvalidateApiKeyResponse() => await Assert<SecurityInvalidateApiKeyResponse>(InvalidateApiKeyStep, r =>
+		[I] public async Task SecurityInvalidateApiKeyResponse() => await Assert<InvalidateApiKeyResponse>(InvalidateApiKeyStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ErrorCount.Should().Be(0);
