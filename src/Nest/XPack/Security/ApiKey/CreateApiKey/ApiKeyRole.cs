@@ -13,7 +13,7 @@ namespace Nest
 		IEnumerable<string> Cluster { get; set; }
 
 		/// <summary>
-		/// A list of indices.
+		/// A list of API key privileges for indices.
 		/// </summary>
 		[JsonProperty("index")]
 		IEnumerable<IApiKeyPrivileges> Index { get; set; }
