@@ -4856,6 +4856,70 @@ namespace Nest
 			throw InvalidDispatch("XpackRollupStopJob", p, new [] { POST }, "/_xpack/rollup/job/{id}/_stop");
 		}
 		
+		internal TResponse XpackSecurityCreateApiKeyDispatch<TResponse>(IRequest<CreateApiKeyRequestParameters> p,SerializableData<ICreateApiKeyRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.XpackSecurityCreateApiKey<TResponse>(body,p.RequestParameters);
+				case POST:
+						return _lowLevel.XpackSecurityCreateApiKeyPost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityCreateApiKey", p, new [] { PUT, POST }, "/_security/api_key");
+		}
+		
+		internal Task<TResponse> XpackSecurityCreateApiKeyDispatchAsync<TResponse>(IRequest<CreateApiKeyRequestParameters> p,SerializableData<ICreateApiKeyRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.XpackSecurityCreateApiKeyAsync<TResponse>(body,p.RequestParameters,ct);
+				case POST:
+						return _lowLevel.XpackSecurityCreateApiKeyPostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityCreateApiKey", p, new [] { PUT, POST }, "/_security/api_key");
+		}
+		
+		internal TResponse XpackSecurityGetApiKeyDispatch<TResponse>(IRequest<GetApiKeyRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSecurityGetApiKey<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityGetApiKey", p, new [] { GET }, "/_security/api_key");
+		}
+		
+		internal Task<TResponse> XpackSecurityGetApiKeyDispatchAsync<TResponse>(IRequest<GetApiKeyRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSecurityGetApiKeyAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityGetApiKey", p, new [] { GET }, "/_security/api_key");
+		}
+		
+		internal TResponse XpackSecurityInvalidateApiKeyDispatch<TResponse>(IRequest<InvalidateApiKeyRequestParameters> p,SerializableData<IInvalidateApiKeyRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.XpackSecurityInvalidateApiKey<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityInvalidateApiKey", p, new [] { DELETE }, "/_security/api_key");
+		}
+		
+		internal Task<TResponse> XpackSecurityInvalidateApiKeyDispatchAsync<TResponse>(IRequest<InvalidateApiKeyRequestParameters> p,SerializableData<IInvalidateApiKeyRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.XpackSecurityInvalidateApiKeyAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityInvalidateApiKey", p, new [] { DELETE }, "/_security/api_key");
+		}
+		
 		internal TResponse XpackSecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

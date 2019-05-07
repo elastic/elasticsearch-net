@@ -25,9 +25,6 @@ namespace ApiGenerator
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 			"xpack.ml.set_upgrade_mode.json",
-			"security.create_api_key.json",
-			"security.get_api_key.json",
-			"security.invalidate_api_key.json",
 			"xpack.monitoring.bulk.json",
 
 			// these API's are not ready for primetime yet
@@ -172,9 +169,10 @@ namespace ApiGenerator
 		private static string CreateMethodName(string apiEndpointKey)
 		{
 			var pascalCased = PascalCase(apiEndpointKey);
-			if (pascalCased.StartsWith("Ilm"))
+			if (pascalCased.StartsWith("Security")
+		        || pascalCased.StartsWith("Ilm"))
 			{
-				pascalCased = "Xpack" + pascalCased;
+				return "Xpack" + pascalCased;
 			}
 			return pascalCased;
 		}

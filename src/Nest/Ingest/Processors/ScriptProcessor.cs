@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
+	/// Allows inline and stored scripts to be executed within ingest pipelines.
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<ScriptProcessor>))]
