@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -36,6 +37,16 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "user_dictionary")]
 		string UserDictionary { get; set; }
+
+		/// <summary>
+		/// The Nori tokenizer uses the mecab-ko-dic dictionary by default. A user_dictionary with custom nouns (NNG)
+		/// can be specified inline with this property
+		/// </summary>
+		/// <remarks>
+		/// Valid for Elasticsearch 6.6.0+
+		/// </remarks>
+		[DataMember(Name = "user_dictionary_rules")]
+		IEnumerable<string> UserDictionaryRules { get; set; }
 	}
 
 	/// <inheritdoc cref="INoriTokenizer" />
@@ -48,6 +59,9 @@ namespace Nest
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
 		public string UserDictionary { get; set; }
+
+		/// <inheritdoc cref="INoriTokenizer.UserDictionaryRules" />
+		public IEnumerable<string> UserDictionaryRules { get; set; }
 	}
 
 	/// <inheritdoc cref="INoriTokenizer" />
@@ -58,11 +72,18 @@ namespace Nest
 
 		NoriDecompoundMode? INoriTokenizer.DecompoundMode { get; set; }
 		string INoriTokenizer.UserDictionary { get; set; }
+		IEnumerable<string> INoriTokenizer.UserDictionaryRules { get; set; }
 
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
 		public NoriTokenizerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(mode, (a, v) => a.DecompoundMode = v);
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
 		public NoriTokenizerDescriptor UserDictionary(string path) => Assign(path, (a, v) => a.UserDictionary = v);
+
+		/// <inheritdoc cref="INoriTokenizer.UserDictionaryRules" />
+		public NoriTokenizerDescriptor UserDictionaryRules(params string[] rules) => Assign(rules, (a, v) => a.UserDictionaryRules = v);
+
+		/// <inheritdoc cref="INoriTokenizer.UserDictionaryRules" />
+		public NoriTokenizerDescriptor UserDictionaryRules(IEnumerable<string> rules) => Assign(rules, (a, v) => a.UserDictionaryRules = v);
 	}
 }
