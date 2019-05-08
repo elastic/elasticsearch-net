@@ -51,14 +51,12 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		public void IngestionPipeline()
 		{
 			client.CreateIndex("people", c => c
-				.Mappings(ms => ms
-					.Map<Person>(p => p
-						.AutoMap() //<1> automatically create the mapping from the type
-						.Properties(props => props
-								.Keyword(t => t.Name("initials")) //<2> create an additional field to store the initials
-								.Ip(t => t.Name(dv => dv.IpAddress)) //<3> map field as IP Address type
-								.Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) //<4> map GeoIp as object
-						)
+				.Map<Person>(p => p
+					.AutoMap() //<1> automatically create the mapping from the type
+					.Properties(props => props
+							.Keyword(t => t.Name("initials")) //<2> create an additional field to store the initials
+							.Ip(t => t.Name(dv => dv.IpAddress)) //<3> map field as IP Address type
+							.Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) //<4> map GeoIp as object
 					)
 				)
 			);
