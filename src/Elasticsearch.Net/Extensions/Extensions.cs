@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -15,6 +16,27 @@ namespace Elasticsearch.Net
 		private const long MillisecondsInASecond = 1000;
 
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
+		internal static string Utf8String(this MemoryStream ms)
+		{
+			if (ms is null)
+				return null;
+
+			if (!ms.TryGetBuffer(out ArraySegment<byte> buffer) || buffer.Array is null)
+				return Encoding.UTF8.GetString(ms.ToArray());
+
+			return Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
+		}
+
+		internal static char[] Utf8CharArray(this MemoryStream ms)
+		{
+			if (ms is null)
+				return null;
+
+			if (!ms.TryGetBuffer(out ArraySegment<byte> buffer) || buffer.Array is null)
+				return Encoding.UTF8.GetChars(ms.ToArray());
+
+			return Encoding.UTF8.GetChars(buffer.Array, buffer.Offset, buffer.Count);
+		}
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 

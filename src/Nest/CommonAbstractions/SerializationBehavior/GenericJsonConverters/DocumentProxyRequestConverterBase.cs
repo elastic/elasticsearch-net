@@ -41,7 +41,9 @@ namespace Nest
 			using (var ms = new MemoryStream())
 			{
 				untypedDocumentRequest.WriteJson(serializer.GetConnectionSettings().SourceSerializer, ms, f);
-				var v = Encoding.UTF8.GetString(ms.ToArray());
+				var v = ms.TryGetBuffer(out ArraySegment<byte> buffer) && buffer.Array != null
+					? Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count)
+					: Encoding.UTF8.GetString(ms.ToArray());
 				writer.WriteRawValue(v);
 			}
 		}

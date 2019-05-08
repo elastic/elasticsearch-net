@@ -20,10 +20,9 @@ namespace Elasticsearch.Net
 			using (stream)
 			{
 				stream.CopyTo(ms);
-				var buffer = ms.ToArray();
-				if (buffer.Length <= 1) return Default(type);
+				if (ms.Length <= 1) return Default(type);
 
-				return SimpleJson.DeserializeObject(buffer.Utf8String(), type, Strategy);
+				return SimpleJson.DeserializeObject(ms.Utf8CharArray(), type, Strategy);
 			}
 		}
 
@@ -37,10 +36,9 @@ namespace Elasticsearch.Net
 			using (stream)
 			{
 				await stream.CopyToAsync(ms, BufferSize, cancellationToken).ConfigureAwait(false);
-				var buffer = ms.ToArray();
-				if (buffer.Length <= 1) return Default(type);
+				if (ms.Length <= 1) return Default(type);
 
-				var r = SimpleJson.DeserializeObject(buffer.Utf8String(), type, Strategy);
+				var r = SimpleJson.DeserializeObject(ms.Utf8CharArray(), type, Strategy);
 				return r;
 			}
 		}

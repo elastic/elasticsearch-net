@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,7 +38,13 @@ namespace Elasticsearch.Net
 
 		public static string SerializeToString<T>(this IElasticsearchSerializer serializer, T data,
 			SerializationFormatting formatting = SerializationFormatting.Indented
-		) =>
-			serializer.SerializeToBytes(data, formatting).Utf8String();
+		)
+		{
+			using (var ms = new MemoryStream())
+			{
+				serializer.Serialize(data, ms, formatting);
+				return ms.Utf8String();
+			}
+		}
 	}
 }
