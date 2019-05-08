@@ -28,8 +28,6 @@ namespace ApiGenerator.Overrides
 			{ "_source", "source_enabled" },
 			{ "_source_includes", "source_include" },
 			{ "_source_excludes", "source_exclude" },
-			{ "_source_include", "source_include" },
-			{ "_source_exclude", "source_exclude" },
 			{ "rest_total_hits_as_int", "total_hits_as_integer" },
 			{ "docvalue_fields", "doc_value_fields" },
 			{ "q", "query_on_query_string" },
@@ -56,6 +54,7 @@ namespace ApiGenerator.Overrides
 			"source", // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
 			"ttl",
 			"timestamp",
+			"_source_include", "_source_exclude" // can be removed once https://github.com/elastic/elasticsearch/pull/41439 is in
 		};
 	}
 }
