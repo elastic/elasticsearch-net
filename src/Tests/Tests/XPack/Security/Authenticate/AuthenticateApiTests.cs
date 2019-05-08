@@ -34,6 +34,12 @@ namespace Tests.XPack.Security.Authenticate
 		{
 			response.Username.Should().Be(Admin.Username);
 			response.Roles.Should().Contain(Admin.Role);
+			response.AuthenticationRealm.Should().NotBeNull();
+			response.AuthenticationRealm.Name.Should().Be("file1");
+			response.AuthenticationRealm.Type.Should().Be("file");
+			response.LookupRealm.Should().NotBeNull();
+			response.LookupRealm.Name.Should().Be("file1");
+			response.LookupRealm.Type.Should().Be("file");
 		}
 	}
 
