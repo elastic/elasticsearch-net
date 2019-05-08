@@ -325,9 +325,11 @@ namespace Nest
 					metric.Items.Add(new PercentileItem
 					{
 						Percentile = double.Parse(propertyName),
-						Value = reader.ReadDouble()
+						Value = reader.ReadNullableDouble()
 					});
 				}
+
+				reader.ReadNext(); // }
 			}
 			else
 			{
@@ -343,10 +345,12 @@ namespace Nest
 					metric.Items.Add(new PercentileItem
 					{
 						Percentile = percentile,
-						Value = reader.ReadDouble()
+						Value = reader.ReadNullableDouble()
 					});
 					reader.ReadNext(); // }
 				}
+
+				reader.ReadNext(); // ]
 			}
 
 			return metric;
