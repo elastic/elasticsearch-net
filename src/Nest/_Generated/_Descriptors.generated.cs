@@ -4089,6 +4089,182 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for XpackIlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleDescriptor  : RequestDescriptorBase<DeleteLifecycleDescriptor,DeleteLifecycleRequestParameters, IDeleteLifecycleRequest>, IDeleteLifecycleRequest
+	{ 
+		/// <summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id"> this parameter is required</param>
+		public DeleteLifecycleDescriptor(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
+		// values part of the url path
+		PolicyId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public DeleteLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public DeleteLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleDescriptor  : RequestDescriptorBase<ExplainLifecycleDescriptor,ExplainLifecycleRequestParameters, IExplainLifecycleRequest>, IExplainLifecycleRequest
+	{ 
+		/// <summary>/{index}/_ilm/explain</summary>
+		///<param name="index"> this parameter is required</param>
+		public ExplainLifecycleDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index to explain</summary>
+		public ExplainLifecycleDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ExplainLifecycleDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public ExplainLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public ExplainLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleDescriptor  : RequestDescriptorBase<GetLifecycleDescriptor,GetLifecycleRequestParameters, IGetLifecycleRequest>, IGetLifecycleRequest
+	{ 
+		/// <summary>/_ilm/policy/{policy_id}</summary>
+		public GetLifecycleDescriptor() : base(){}
+		// values part of the url path
+		PolicyId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		///<summary>The name of the index lifecycle policy</summary>
+		public GetLifecycleDescriptor PolicyId(PolicyId policyId) => Assign(policyId, (a,v)=>a.RouteValues.Optional("policy_id", v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public GetLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public GetLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusDescriptor  : RequestDescriptorBase<GetIlmStatusDescriptor,GetIlmStatusRequestParameters, IGetIlmStatusRequest>, IGetIlmStatusRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public GetIlmStatusDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public GetIlmStatusDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmMoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepDescriptor  : RequestDescriptorBase<MoveToStepDescriptor,MoveToStepRequestParameters, IMoveToStepRequest>, IMoveToStepRequest
+	{ 
+		/// <summary>/_ilm/move/{index}</summary>
+		///<param name="index"> this parameter is required</param>
+		public MoveToStepDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index whose lifecycle step is to change</summary>
+		public MoveToStepDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public MoveToStepDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public MoveToStepDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public MoveToStepDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for XpackIlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleDescriptor  : RequestDescriptorBase<PutLifecycleDescriptor,PutLifecycleRequestParameters, IPutLifecycleRequest>, IPutLifecycleRequest
+	{ 
+		/// <summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id"> this parameter is required</param>
+		public PutLifecycleDescriptor(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
+		// values part of the url path
+		PolicyId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public PutLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public PutLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmRemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyDescriptor  : RequestDescriptorBase<RemovePolicyDescriptor,RemovePolicyRequestParameters, IRemovePolicyRequest>, IRemovePolicyRequest
+	{ 
+		/// <summary>/{index}/_ilm/remove</summary>
+		///<param name="index"> this parameter is required</param>
+		public RemovePolicyDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index to remove policy on</summary>
+		public RemovePolicyDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RemovePolicyDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public RemovePolicyDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public RemovePolicyDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmDescriptor  : RequestDescriptorBase<RetryIlmDescriptor,RetryIlmRequestParameters, IRetryIlmRequest>, IRetryIlmRequest
+	{ 
+		/// <summary>/{index}/_ilm/retry</summary>
+		///<param name="index"> this parameter is required</param>
+		public RetryIlmDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IRetryIlmRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the indices (comma-separated) whose failed lifecycle step is to be retry</summary>
+		public RetryIlmDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RetryIlmDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public RetryIlmDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public RetryIlmDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmDescriptor  : RequestDescriptorBase<StartIlmDescriptor,StartIlmRequestParameters, IStartIlmRequest>, IStartIlmRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public StartIlmDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public StartIlmDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+	///<summary>descriptor for XpackIlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmDescriptor  : RequestDescriptorBase<StopIlmDescriptor,StopIlmRequestParameters, IStopIlmRequest>, IStopIlmRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public StopIlmDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public StopIlmDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{ 

@@ -2325,6 +2325,156 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for XpackIlmDeleteLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleRequestParameters : RequestParameters<DeleteLifecycleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmExplainLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleRequestParameters : RequestParameters<ExplainLifecycleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmGetLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleRequestParameters : RequestParameters<GetLifecycleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmGetStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusRequestParameters : RequestParameters<GetIlmStatusRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmMoveToStep<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepRequestParameters : RequestParameters<MoveToStepRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmPutLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleRequestParameters : RequestParameters<PutLifecycleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmRemovePolicy<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyRequestParameters : RequestParameters<RemovePolicyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmRetry<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmRequestParameters : RequestParameters<RetryIlmRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmStart<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmRequestParameters : RequestParameters<StartIlmRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for XpackIlmStop<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmRequestParameters : RequestParameters<StopIlmRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
 	///<summary>Request options for XpackInfo<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters> 
 	{

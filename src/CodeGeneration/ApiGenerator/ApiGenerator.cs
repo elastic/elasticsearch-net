@@ -22,16 +22,6 @@ namespace ApiGenerator
 		{
 			"ccr.follow_info.json",
 			"ccr.forget_follower.json",
-			"ilm.delete_lifecycle.json",
-			"ilm.explain_lifecycle.json",
-			"ilm.get_lifecycle.json",
-			"ilm.get_status.json",
-			"ilm.move_to_step.json",
-			"ilm.put_lifecycle.json",
-			"ilm.remove_policy.json",
-			"ilm.retry.json",
-			"ilm.start.json",
-			"ilm.stop.json",
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 			"xpack.ml.set_upgrade_mode.json",
@@ -179,9 +169,10 @@ namespace ApiGenerator
 		private static string CreateMethodName(string apiEndpointKey)
 		{
 			var pascalCased = PascalCase(apiEndpointKey);
-			if (pascalCased.StartsWith("Security"))
+			if (pascalCased.StartsWith("Security")
+		        || pascalCased.StartsWith("Ilm"))
 			{
-				pascalCased = "Xpack" + pascalCased;
+				return "Xpack" + pascalCased;
 			}
 			return pascalCased;
 		}
