@@ -17,6 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 
 An ingest pipeline is a series of processors that are to be executed in the same order as they are declared.
 
+Let's work with the following POCOs
+
 [source,csharp]
 ----
 public class Person
