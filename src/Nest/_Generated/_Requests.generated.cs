@@ -3915,9 +3915,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>

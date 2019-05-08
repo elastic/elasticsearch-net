@@ -1471,14 +1471,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public GetDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<TDocument> Version(long? version) => Qs("version", version);

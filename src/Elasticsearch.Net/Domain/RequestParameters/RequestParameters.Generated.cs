@@ -855,9 +855,9 @@ namespace Elasticsearch.Net
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
+		public string[] SourceExclude { get => Q<string[]>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
+		public string[] SourceInclude { get => Q<string[]>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
