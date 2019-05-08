@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -11,10 +12,21 @@ namespace Elasticsearch.Net
 		private const long MillisecondsInAWeek = MillisecondsInADay * 7;
 		private const long MillisecondsInADay = MillisecondsInAnHour * 24;
 		private const long MillisecondsInAnHour = MillisecondsInAMinute * 60;
-
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 		private const long MillisecondsInAMinute = MillisecondsInASecond * 60;
 		private const long MillisecondsInASecond = 1000;
+
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+
+		internal static string Utf8String(this MemoryStream ms)
+		{
+			if (ms is null)
+				return null;
+
+			if (!ms.TryGetBuffer(out ArraySegment<byte> buffer) || buffer.Array is null)
+				return Encoding.UTF8.GetString(ms.ToArray());
+
+			return Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
+		}
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
