@@ -44,7 +44,14 @@ namespace Elasticsearch.Net
 			T data,
 			IMemoryStreamFactory memoryStreamFactory = null,
 			SerializationFormatting formatting = SerializationFormatting.Indented
-		) =>
-			serializer.SerializeToBytes(data, memoryStreamFactory, formatting).Utf8String();
+		)
+		{
+			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.Default;
+			using (var ms = memoryStreamFactory.Create())
+			{
+				serializer.Serialize(data, ms, formatting);
+				return ms.Utf8String();
+			}
+		}
 	}
 }
