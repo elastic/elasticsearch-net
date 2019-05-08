@@ -19,6 +19,12 @@ namespace Nest
 
 		[JsonProperty("username")]
 		string Username { get; }
+
+		[JsonProperty("authentication_realm")]
+		RealmInfo AuthenticationRealm { get; }
+
+		[JsonProperty("lookup_realm")]
+		RealmInfo LookupRealm { get; }
 	}
 
 	public class AuthenticateResponse : ResponseBase, IAuthenticateResponse
@@ -30,6 +36,20 @@ namespace Nest
 		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 
 		public IReadOnlyCollection<string> Roles { get; internal set; } = EmptyReadOnly<string>.Collection;
+
 		public string Username { get; internal set; }
+
+		public RealmInfo AuthenticationRealm { get; internal set; }
+
+		public RealmInfo LookupRealm { get; internal set; }
+	}
+
+	public class RealmInfo
+	{
+		[JsonProperty("name")]
+		public string Name { get; internal set; }
+
+		[JsonProperty("type")]
+		public string Type { get; internal set; }
 	}
 }
