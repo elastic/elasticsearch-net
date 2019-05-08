@@ -2282,6 +2282,14 @@ namespace Elasticsearch.Net
 		///<summary>DELETE on /_ml/_delete_expired_data <para>TODO</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> MlDeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_ml/filters/{filter_id} <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse MlDeleteFilter<TResponse>(string filter_id, DeleteFilterRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_ml/filters/{filter_id} <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> MlDeleteFilterAsync<TResponse>(string filter_id, DeleteFilterRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
 		///<param name="job_id">The ID of the job from which to delete forecasts</param>
 		///<param name="forecast_id">The ID of the forecast to delete, can be comma delimited list or `_all`</param>
@@ -2476,6 +2484,20 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_ml/datafeeds/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> MlGetDatafeedStatsAsync<TResponse>(GetDatafeedStatsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/filters <para>TODO</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse MlGetFilters<TResponse>(GetFiltersRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/filters <para>TODO</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> MlGetFiltersAsync<TResponse>(GetFiltersRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/filters/{filter_id} <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to fetch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse MlGetFilters<TResponse>(string filter_id, GetFiltersRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/filters/{filter_id} <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to fetch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> MlGetFiltersAsync<TResponse>(string filter_id, GetFiltersRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/influencers <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
 		///<param name="job_id"></param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2670,6 +2692,16 @@ namespace Elasticsearch.Net
 		///<param name="body">The datafeed config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> MlPutDatafeedAsync<TResponse>(string datafeed_id, PostData body, PutDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ml/filters/{filter_id} <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to create</param>
+		///<param name="body">The filter details</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse MlPutFilter<TResponse>(string filter_id, PostData body, PutFilterRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ml/filters/{filter_id} <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to create</param>
+		///<param name="body">The filter details</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> MlPutFilterAsync<TResponse>(string filter_id, PostData body, PutFilterRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
 		///<param name="job_id">The ID of the job to create</param>
 		///<param name="body">The job</param>
@@ -2720,6 +2752,16 @@ namespace Elasticsearch.Net
 		///<param name="body">The datafeed update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> MlUpdateDatafeedAsync<TResponse>(string datafeed_id, PostData body, UpdateDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_ml/filters/{filter_id}/_update <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to update</param>
+		///<param name="body">The filter update</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse MlUpdateFilter<TResponse>(string filter_id, PostData body, UpdateFilterRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_ml/filters/{filter_id}/_update <para>TODO</para></summary>
+		///<param name="filter_id">The ID of the filter to update</param>
+		///<param name="body">The filter update</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> MlUpdateFilterAsync<TResponse>(string filter_id, PostData body, UpdateFilterRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
 		///<param name="job_id">The ID of the job to create</param>
 		///<param name="body">The job update settings</param>

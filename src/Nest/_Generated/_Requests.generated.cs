@@ -2090,6 +2090,31 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IDeleteFilterRequest : IRequest<DeleteFilterRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id FilterId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteFilter <pre>TODO</pre></summary>
+	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
+	{
+		protected IDeleteFilterRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters/{filter_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public DeleteFilterRequest(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteFilterRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3461,6 +3486,34 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IGetFiltersRequest : IRequest<GetFiltersRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id FilterId { get; }
+	}
+
+	///<summary>Request parameters for MlGetFilters <pre>TODO</pre></summary>
+	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
+	{
+		protected IGetFiltersRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters", "_ml/filters/{filter_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters</summary>
+		public GetFiltersRequest() : base(){}
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">Optional, accepts null</param>
+		public GetFiltersRequest(Id filter_id) : base(r => r.Optional("filter_id", filter_id)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+		///<summary>skips a number of filters</summary>
+		public int? From { get => Q<int?>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of filters to get</summary>
+		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
@@ -5379,6 +5432,31 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id FilterId { get; }
+	}
+
+	///<summary>Request parameters for MlPutFilter <pre>TODO</pre></summary>
+	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
+	{
+		protected IPutFilterRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters/{filter_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public PutFilterRequest(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutFilterRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -7223,6 +7301,31 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id FilterId { get; }
+	}
+
+	///<summary>Request parameters for MlUpdateFilter <pre>TODO</pre></summary>
+	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
+	{
+		protected IUpdateFilterRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_ml/filters/{filter_id}/_update"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters/{filter_id}/_update</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public UpdateFilterRequest(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal UpdateFilterRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 
 		// Request parameters
 	}

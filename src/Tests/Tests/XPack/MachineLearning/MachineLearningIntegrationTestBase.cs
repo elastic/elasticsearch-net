@@ -38,6 +38,19 @@ namespace Tests.XPack.MachineLearning
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
+		protected PutFilterResponse PutFilter(IElasticClient client, string filterId)
+		{
+			var putFilterResponse = client.PutFilter(filterId, f => f
+				.Description("A list of safe domains")
+				.Items("*.google.com", "wikipedia.org")
+			);
+
+			if (!putFilterResponse.IsValid)
+				throw new Exception($"Problem putting filter {filterId} for integration test: {putFilterResponse.DebugInformation}");
+
+			return putFilterResponse;
+		}
+
 		protected PutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
 		{
 			var putCalendarResponse = client.PutCalendar(calendarId, f => f

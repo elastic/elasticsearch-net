@@ -26,10 +26,6 @@ namespace ApiGenerator
 		public static string[] IgnoredApis { get; } =
 		{
 			// these API's are not ready for primetime yet
-			"ml.delete_filter.json",
-			"ml.get_filters.json",
-			"ml.put_filter.json",
-			"ml.update_filter.json",
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped

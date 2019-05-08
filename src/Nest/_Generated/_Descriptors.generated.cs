@@ -4599,6 +4599,22 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for MlDeleteFilter <pre>TODO</pre></summary>
+	public partial class DeleteFilterDescriptor  : RequestDescriptorBase<DeleteFilterDescriptor,DeleteFilterRequestParameters, IDeleteFilterRequest>, IDeleteFilterRequest
+	{ 
+		internal override ApiUrls ApiUrls => DeleteFilterRequest.Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public DeleteFilterDescriptor(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteFilterDescriptor() : base(){}
+		// values part of the url path
+		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for MlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public partial class DeleteForecastDescriptor  : RequestDescriptorBase<DeleteForecastDescriptor,DeleteForecastRequestParameters, IDeleteForecastRequest>, IDeleteForecastRequest
 	{ 
@@ -4820,6 +4836,28 @@ namespace Nest
 
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+	}
+	///<summary>descriptor for MlGetFilters <pre>TODO</pre></summary>
+	public partial class GetFiltersDescriptor  : RequestDescriptorBase<GetFiltersDescriptor,GetFiltersRequestParameters, IGetFiltersRequest>, IGetFiltersRequest
+	{ 
+		internal override ApiUrls ApiUrls => GetFiltersRequest.Urls;
+		///<summary>/_ml/filters</summary>
+		public GetFiltersDescriptor() : base(){}
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">Optional, accepts null</param>
+		public GetFiltersDescriptor(Id filter_id) : base(r => r.Optional("filter_id", filter_id)){}
+		// values part of the url path
+		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		///<summary>The ID of the filter to fetch</summary>
+		public GetFiltersDescriptor FilterId(Id filterId) => Assign(filterId, (a,v)=>a.RouteValues.Optional("filter_id", v));
+
+		// Request parameters
+
+		///<summary>skips a number of filters</summary>
+		public GetFiltersDescriptor From(int? from) => Qs("from", from);
+		///<summary>specifies a max number of filters to get</summary>
+		public GetFiltersDescriptor Size(int? size) => Qs("size", size);
 	}
 	///<summary>descriptor for MlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersDescriptor  : RequestDescriptorBase<GetInfluencersDescriptor,GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
@@ -5060,6 +5098,22 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for MlPutFilter <pre>TODO</pre></summary>
+	public partial class PutFilterDescriptor  : RequestDescriptorBase<PutFilterDescriptor,PutFilterRequestParameters, IPutFilterRequest>, IPutFilterRequest
+	{ 
+		internal override ApiUrls ApiUrls => PutFilterRequest.Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public PutFilterDescriptor(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutFilterDescriptor() : base(){}
+		// values part of the url path
+		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for MlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobDescriptor<T>  : RequestDescriptorBase<PutJobDescriptor<T>,PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{ 
@@ -5140,6 +5194,22 @@ namespace Nest
 		internal UpdateDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for MlUpdateFilter <pre>TODO</pre></summary>
+	public partial class UpdateFilterDescriptor  : RequestDescriptorBase<UpdateFilterDescriptor,UpdateFilterRequestParameters, IUpdateFilterRequest>, IUpdateFilterRequest
+	{ 
+		internal override ApiUrls ApiUrls => UpdateFilterRequest.Urls;
+		///<summary>/_ml/filters/{filter_id}/_update</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public UpdateFilterDescriptor(Id filter_id) : base(r => r.Required("filter_id", filter_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal UpdateFilterDescriptor() : base(){}
+		// values part of the url path
+		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 
 		// Request parameters
 

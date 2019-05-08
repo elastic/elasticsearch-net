@@ -2356,6 +2356,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
+	///<summary>Request options for MlDeleteFilter<pre>TODO</pre></summary>
+	public class DeleteFilterRequestParameters : RequestParameters<DeleteFilterRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
 	///<summary>Request options for MlDeleteForecast<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters> 
 	{
@@ -2430,6 +2435,15 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+	}
+	///<summary>Request options for MlGetFilters<pre>TODO</pre></summary>
+	public class GetFiltersRequestParameters : RequestParameters<GetFiltersRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>skips a number of filters</summary>
+		public int? From { get => Q<int?>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of filters to get</summary>
+		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 	///<summary>Request options for MlGetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters> 
@@ -2509,6 +2523,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
+	///<summary>Request options for MlPutFilter<pre>TODO</pre></summary>
+	public class PutFilterRequestParameters : RequestParameters<PutFilterRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
 	///<summary>Request options for MlPutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public class PutJobRequestParameters : RequestParameters<PutJobRequestParameters> 
 	{
@@ -2533,6 +2552,11 @@ namespace Elasticsearch.Net
 	}
 	///<summary>Request options for MlUpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlUpdateFilter<pre>TODO</pre></summary>
+	public class UpdateFilterRequestParameters : RequestParameters<UpdateFilterRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
