@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/HighLevel/Indexing/Indexing.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/HighLevel/Indexing/IndexingDocuments.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -205,12 +205,7 @@ client.BulkAll(people, b => b
       })
       .RetryDocumentPredicate((item, person) => <3>
       {
-          if (item.Error.Index == "even-index"
-              && person.FirstName == "Martijn")
-          {
-              return true;
-          }
-          return false;
+          return item.Error.Index == "even-index" && person.FirstName == "Martijn";
       })
       .DroppedDocumentCallback((item, person) => <4>
       {
