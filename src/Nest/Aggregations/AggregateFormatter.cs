@@ -87,8 +87,11 @@ namespace Nest
 		private IAggregate ReadAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			reader.ReadIsBeginObjectWithVerify();
-
 			IAggregate aggregate = null;
+
+			if (reader.ReadIsEndObject())
+				return aggregate;
+
 			var propertyName = reader.ReadPropertyNameSegmentRaw();
 			Dictionary<string, object> meta = null;
 
