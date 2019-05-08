@@ -8,9 +8,11 @@ using Tests.Framework;
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
 	/**[[pipelines]]
-	*=== Ingest Pipelines
-	*
-	* An ingest pipeline is a series of processors that are to be executed in the same order as they are declared.
+	 *=== Ingest Pipelines
+	 *
+	 * An ingest pipeline is a series of processors that are to be executed in the same order as they are declared.
+	 *
+	 * Let's work with the following POCOs
 	*/
 	public class IngestPipelines : DocumentationTestBase
 	{
@@ -46,7 +48,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* We could achieve this requirement by creating a custom mapping and creating an ingest pipeline.
 		* The Person type can then be used as-is, without making any changes.
 		*/
-		public async Task IngestionPipeline()
+		public void IngestionPipeline()
 		{
 			client.CreateIndex("people", c => c
 				.Mappings(ms => ms
@@ -95,7 +97,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*
 		* For large bulk requests, it could be prudent to increase the default indexing timeout to avoid exceptions.
 		*/
-		public async Task IncreasingTimeouts()
+		public void IncreasingTimeouts()
 		{
 			client.Bulk(b => b
 				.Index("people")

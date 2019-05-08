@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* If you need to set additional parameters when indexing you can use the fluent or object initializer syntax.
 		* This will allow you finer control over the indexing of single documents.
 		*/
-		public async Task SingleDocumentWithParameters()
+		public void SingleDocumentWithParameters()
 		{
 			var person = new Person
 			{
@@ -154,7 +154,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*
 		* The helper will also lazily enumerate an `IEnumerable<T>` collection, allowing you to index a large number of documents easily.
 		*/
-		public async Task BulkDocumentsWithObservableHelper()
+		public void BulkDocumentsWithObservableHelper()
 		{
                         // hide
 			var people = new []
@@ -203,7 +203,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* 2. `RetryDocumentPredicate` enables fine control on deciding if a document that failed to be indexed should be retried.
 		* 3. `DroppedDocumentCallback` in the event a document is not indexed, even after retrying, this delegate is called.
 		*/
-		public async Task AdvancedBulkIndexing()
+		public void AdvancedBulkIndexing()
 		{
 			//hide
 			var people = new[] { new Person() };
@@ -221,12 +221,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				  })
 				  .RetryDocumentPredicate((item, person) => //<3> decide if a document should be retried in the event of a failure
 				  {
-					  if (item.Error.Index == "even-index"
-					      && person.FirstName == "Martijn")
-					  {
-						  return true;
-					  }
-					  return false;
+					  return item.Error.Index == "even-index" && person.FirstName == "Martijn";
 				  })
 				  .DroppedDocumentCallback((item, person) => //<4> if a document cannot be indexed this delegate is called
 				  {

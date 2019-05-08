@@ -26,7 +26,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*
 		* The simplest way to achieve this is to create a dedicated "indexing" client instance, and use it for indexing requests.
 		*/
-		public async Task CustomClient()
+		public void CustomClient()
 		{
 			var pool = new StaticConnectionPool(new [] //<1> list of ingest nodes
 			{
@@ -45,7 +45,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* filter out the nodes that have ingest capabilities. This allows you to customise the cluster and not have to reconfigure
 		* the client.
 		*/
-		public async Task SniffingConnectionPool()
+		public void SniffingConnectionPool()
 		{
 			var pool = new SniffingConnectionPool(new [] //<1> list of cluster nodes
 			{
