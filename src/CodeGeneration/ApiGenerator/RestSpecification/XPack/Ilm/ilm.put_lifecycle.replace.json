@@ -1,0 +1,30 @@
+{
+  "ilm.put_lifecycle": {
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html",
+    "methods": [ "PUT" ],
+    "url": {
+      "path": "/_ilm/policy/{policy_id}",
+      "paths": ["/_ilm/policy/{policy_id}"],
+      "parts": {
+        "policy_id": {
+          "type" : "string",
+          "description" : "The name of the index lifecycle policy",
+          "required": true
+        }
+      },
+      "params": {
+        "master_timeout": {
+          "type" : "time",
+          "description" : "Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s."
+        },
+        "timeout": {
+          "type" : "time",
+          "description" : "Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s."
+        }
+      }
+    },
+    "body": {
+      "description": "The lifecycle policy definition to register"
+    }
+  }
+}

@@ -12,8 +12,8 @@ namespace ApiGenerator.Overrides
 		public virtual IDictionary<string, string> RenameQueryStringParams { get; } = new Dictionary<string, string>();
 
 		public virtual IEnumerable<string> RenderPartial { get; } = Enumerable.Empty<string>();
-		public virtual IEnumerable<string> SkipQueryStringParams { get; } = Enumerable.Empty<string>();
 
+		public virtual IEnumerable<string> SkipQueryStringParams { get; } = Enumerable.Empty<string>();
 
 		public virtual CsharpMethod PatchMethod(CsharpMethod method) => method;
 	}
