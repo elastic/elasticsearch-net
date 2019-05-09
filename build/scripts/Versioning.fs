@@ -29,7 +29,7 @@ module Versioning =
     let writeVersionIntoGlobalJson version =
         let globalJson = globalJson ()
         let newGlobalJson = { globalJson with version = version.ToString(); }
-        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson))
+        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson, Formatting.Indented))
         printfn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
     let GlobalJsonVersion = parse <| globalJson().version
