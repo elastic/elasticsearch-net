@@ -24,8 +24,6 @@ For such data it can be more descriptive than standard deviation.
 It is calculated as the median of each data point's deviation from the median of the
 entire sample. That is, for a random variable `X`, the median absolute deviation is `median(|median(X) - Xi|)`.
 
-Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-median-absolute-deviation-aggregation.html[Median Absolute Deviation Aggregation]
-
 ==== Fluent DSL example
 
 [source,csharp]

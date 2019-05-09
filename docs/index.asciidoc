@@ -1,5 +1,3 @@
-:title-separator: |
-
 [[elasticsearch-net-reference]]
 = Elasticsearch.Net and NEST:  the .NET clients
 

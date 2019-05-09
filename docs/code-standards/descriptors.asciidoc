@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.6
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.7
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,8 +23,8 @@ Every descriptor should inherit from `DescriptorBase`, this hides object members
 var notDescriptors = new[] {typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute"};
 
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass()
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass
           && t.Name.Contains("Descriptor")
           && !t.Namespace.StartsWith("Nest.Json")
           && !t.Namespace.StartsWith("Elastic.Internal")
@@ -44,8 +44,8 @@ Every selector should inherit from `ISelector`, this hides object members from t
 ----
 var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
 var selectors =
-    from t in typeof(SelectorBase<>).Assembly().Types()
-    where t.IsClass()
+    from t in typeof(SelectorBase<>).Assembly.Types()
+    where t.IsClass
           && t.Name.Contains("Selector")
           && !t.Namespace.StartsWith("Nest.Json")
           && !notSelectors.Contains(t.Name)
@@ -63,8 +63,8 @@ Methods taking a func should have that func return an interface
 [source,csharp]
 ----
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
     select t;
 
 var exclusions = new Dictionary<Type, Type>
@@ -81,7 +81,7 @@ var exclusions = new Dictionary<Type, Type>
 
 Func<Type, Type, bool> exclude = (first, second) =>
 {
-    var key = first.IsGenericType()
+    var key = first.IsGenericType
         ? first.GetGenericTypeDefinition()
         : first;
 
@@ -89,7 +89,7 @@ Func<Type, Type, bool> exclude = (first, second) =>
     if (!exclusions.TryGetValue(key, out value))
         return false;
 
-    return second.IsGenericType()
+    return second.IsGenericType
         ? second.GetGenericTypeDefinition() == value
         : value.IsAssignableFrom(second);
 };
@@ -100,14 +100,14 @@ var selectorMethods =
     let parameters = m.GetParameters()
     from p in parameters
     let type = p.ParameterType
-    let isGeneric = type.IsGenericType()
+    let isGeneric = type.IsGenericType
     where isGeneric
     let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
     where isFunc
     let firstFuncArg = type.GetGenericArguments().First()
     let secondFuncArg = type.GetGenericArguments().Last()
     where !exclude(firstFuncArg, secondFuncArg)
-    let lastArgIsNotInterface = !secondFuncArg.IsInterface()
+    let lastArgIsNotInterface = !secondFuncArg.IsInterface
     where lastArgIsNotInterface
     select $"{m.Name} on {m.DeclaringType.Name}";
 
@@ -120,14 +120,14 @@ a nullable bool with a default value
 [source,csharp]
 ----
 var queries =
-    from t in typeof(IQuery).Assembly().Types()
-    where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
+    from t in typeof(IQuery).Assembly.Types()
+    where t.IsInterface && typeof(IQuery).IsAssignableFrom(t)
     where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
     select t;
 
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
     where t.GetInterfaces().Intersect(queries).Any()
     select t;
 
@@ -161,7 +161,7 @@ foreach (var query in queries)
 breakingDescriptors.Should().BeEmpty();
 
 var processors = (
-    from t in typeof(IProcessor).Assembly().Types()
+    from t in typeof(IProcessor).Assembly.Types()
     where typeof(IProcessor).IsAssignableFrom(t)
     select t.Name).ToList();
 
@@ -171,11 +171,11 @@ processors.Should().OnlyContain(p => p.Contains("Processor"));
 var methods = from d in YieldAllDescriptors()
     from m in d.GetMethods()
     let ps = m.GetParameters()
-    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
     let p = ps.First()
     let pt = p.ParameterType
-    where (!pt.IsGenericType() || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
-    let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+    where (!pt.IsGenericType || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
+    let dt = m.DeclaringType.IsGenericType ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 
     //skips
     where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
@@ -200,6 +200,9 @@ var methods = from d in YieldAllDescriptors()
     where !(m.Name == nameof(SortDescriptor<object>.Descending) && dt == typeof(SortDescriptor<>))
     where !(m.Name == nameof(ClrTypeMappingDescriptor<object>.DisableIdInference) && dt == typeof(ClrTypeMappingDescriptor<>))
     where !(m.Name == nameof(ClrTypeMappingDescriptor.DisableIdInference) && dt == typeof(ClrTypeMappingDescriptor))
+    where !(m.Name == nameof(RuleConditionDescriptor.AppliesTo) && dt == typeof(RuleConditionDescriptor))
+    where !(m.Name == nameof(RuleConditionDescriptor.Operator) && dt == typeof(RuleConditionDescriptor))
+    where !(m.Name == nameof(RuleConditionDescriptor.Value) && dt == typeof(RuleConditionDescriptor))
 
     select new {m, d, p};
 
@@ -219,11 +222,11 @@ breakingDescriptors.Should().BeEmpty();
 var methods = from d in YieldAllDescriptors()
     from m in d.GetMethods()
     let ps = m.GetParameters()
-    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
     let p = ps.First()
     let pt = p.ParameterType
     where pt == typeof(bool?)
-    let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+    let dt = m.DeclaringType.IsGenericType ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
     where !(m.Name == nameof(BooleanPropertyDescriptor<object>.NullValue) && dt == typeof(BooleanPropertyDescriptor<>))
     select new {m, d, p};
 
@@ -253,9 +256,9 @@ foreach (var info in methods)
 nullableBools.Should().BeEmpty();
 
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
-    where !t.IsAbstract()
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
+    where !t.IsAbstract
     select t;
 return descriptors;
 ----

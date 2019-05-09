@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.6
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.7
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -21,7 +21,6 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 q
 .MoreLikeThis(sn => sn
-    .Fields(f => f.Field(p => p.Name))
     .Like(l => l
         .Document(d => d.Document(Project.Instance))
         .Text("some long text")
@@ -35,7 +34,6 @@ q
 ----
 new MoreLikeThisQuery
 {
-    Fields = Fields<Project>(p => p.Name),
     Like = new List<Like>
     {
         new LikeDocument<Project>(Project.Instance),
@@ -49,9 +47,6 @@ new MoreLikeThisQuery
 ----
 {
   "more_like_this": {
-    "fields": [
-      "name"
-    ],
     "like": [
       {
         "_index": "project",
