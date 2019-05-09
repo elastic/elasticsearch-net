@@ -15,13 +15,11 @@ namespace Nest
 		public IPhases Phases { get; set; }
 	}
 
-	public class PolicyDescriptor : IDescriptor, IPolicy
+	public class PolicyDescriptor : DescriptorBase<PolicyDescriptor, IPolicy>, IPolicy
 	{
 		IPhases IPolicy.Phases { get; set; }
 
-		private PolicyDescriptor Assign<TValue>(TValue value, Action<IPolicy, TValue> assigner) => Fluent.Assign(this, value, assigner);
-
 		public PolicyDescriptor Phases(Func<PhasesDescriptor, IPhases> selector) =>
-			Assign(selector, (a, v) => a.Phases = v?.InvokeOrDefault(new PhasesDescriptor()));
+			Assign(selector, (a, v) => a.Phases = v.InvokeOrDefault(new PhasesDescriptor()));
 	}
 }

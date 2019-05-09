@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ApiKeyPrivileges>))]
 	public interface IApiKeyPrivileges
 	{
 		/// <summary>
 		/// A list of names.
 		/// </summary>
+		[JsonProperty("names")]
 		IEnumerable<string> Names { get; set; }
 
 		/// <summary>
 		/// A list of privileges.
 		/// </summary>
+		[JsonProperty("privileges")]
 		IEnumerable<string> Privileges { get; set; }
 	}
 

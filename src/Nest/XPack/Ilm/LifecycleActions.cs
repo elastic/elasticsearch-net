@@ -23,7 +23,7 @@ namespace Nest
 		public void Add(IFreezeLifecycleAction action) => BackingDictionary.Add("freeze", action);
 		public void Add(IReadOnlyLifecycleAction action) => BackingDictionary.Add("readonly", action);
 		public void Add(IRolloverLifecycleAction action) => BackingDictionary.Add("rollover", action);
-		public void Add(ISetPriorityLifecycleAction action) => BackingDictionary.Add("setpriority", action);
+		public void Add(ISetPriorityLifecycleAction action) => BackingDictionary.Add("set_priority", action);
 		public void Add(IShrinkLifecycleAction action) => BackingDictionary.Add("shrink", action);
 		public void Add(IUnfollowLifecycleAction action) => BackingDictionary.Add("unfollow", action);
 	}
@@ -122,7 +122,7 @@ namespace Nest
 			Assign("rollover", selector.InvokeOrDefault(new RolloverLifecycleActionDescriptor()));
 
 		public LifecycleActionsDescriptor SetPriority(Func<SetPriorityLifecycleActionDescriptor, ISetPriorityLifecycleAction> selector) =>
-			Assign("setpriority", selector.InvokeOrDefault(new SetPriorityLifecycleActionDescriptor()));
+			Assign("set_priority", selector.InvokeOrDefault(new SetPriorityLifecycleActionDescriptor()));
 
 		public LifecycleActionsDescriptor Shrink(Func<ShrinkLifecycleActionDescriptor, IShrinkLifecycleAction> selector) =>
 			Assign("shrink", selector.InvokeOrDefault(new ShrinkLifecycleActionDescriptor()));

@@ -57,7 +57,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ICreateApiKeyRequest.Roles" />
 		public CreateApiKeyDescriptor Roles(Func<ApiKeyRolesDescriptor, IPromise<IApiKeyRoles>> selector) =>
-			Assign(selector,
-				(a, v) => a.Roles = v?.Invoke(new ApiKeyRolesDescriptor())?.Value ?? new ApiKeyRoles()); // Ensure not null, as server expects {}
+			Assign(selector, (a, v) => a.Roles = v.InvokeOrDefault(new ApiKeyRolesDescriptor()).Value);
 	}
 }
