@@ -255,11 +255,11 @@ namespace Tests.Ingest
 
 		public class Remove : ProcessorAssertion
 		{
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Remove<Project>(r => r.Field(p => p.Suggest));
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Remove<Project>(r => r.Field(p => p.Field(pp => pp.Suggest)));
 
 			public override IProcessor Initializer => new RemoveProcessor { Field = "suggest" };
 
-			public override object Json => new { field = "suggest" };
+			public override object Json => new { field = new [] { "suggest" } };
 			public override string Key => "remove";
 		}
 

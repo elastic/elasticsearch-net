@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	/// <summary>
-	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
+	/// Allows inline and stored scripts to be executed within ingest pipelines.
 	/// </summary>
 	[InterfaceDataContract]
 	public interface IScriptProcessor : IProcessor

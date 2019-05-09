@@ -28,11 +28,7 @@ namespace Nest
 		string Path { get; set; }
 	}
 
-	/// <summary>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </summary>
+	/// <inheritdoc cref="IDotExpanderProcessor" />
 	public class DotExpanderProcessor : ProcessorBase, IDotExpanderProcessor
 	{
 		/// <summary>
@@ -52,11 +48,7 @@ namespace Nest
 		protected override string Name => "dot_expander";
 	}
 
-	/// <summary>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </summary>
+	/// <inheritdoc cref="IDotExpanderProcessor" />
 	public class DotExpanderProcessorDescriptor<T>
 		: ProcessorDescriptorBase<DotExpanderProcessorDescriptor<T>, IDotExpanderProcessor>, IDotExpanderProcessor
 		where T : class
@@ -66,9 +58,7 @@ namespace Nest
 		Field IDotExpanderProcessor.Field { get; set; }
 		string IDotExpanderProcessor.Path { get; set; }
 
-		/// <summary>
-		/// The field to expand into an object field
-		/// </summary>
+		/// <inheritdoc cref="IDotExpanderProcessor.Field" />
 		public DotExpanderProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <summary>
@@ -77,11 +67,7 @@ namespace Nest
 		public DotExpanderProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
-		/// <summary>
-		/// The field that contains the field to expand.
-		/// Only required if the field to expand is part another object field,
-		/// because the field option can only understand leaf fields.
-		/// </summary>
+		/// <inheritdoc cref="IDotExpanderProcessor.Path" />
 		public DotExpanderProcessorDescriptor<T> Path(string path) => Assign(path, (a, v) => a.Path = v);
 	}
 }

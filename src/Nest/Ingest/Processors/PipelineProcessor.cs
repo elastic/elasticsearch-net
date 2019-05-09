@@ -18,7 +18,7 @@ namespace Nest
 	/// <inheritdoc cref="IPipelineProcessor" />
 	public class PipelineProcessor : ProcessorBase, IPipelineProcessor
 	{
-		/// <inheritdoc cref="IPipelineProcessor.ProcessorName"/>
+		/// <inheritdoc />
 		[DataMember(Name = "name")]
 		public string ProcessorName { get; set; }
 
