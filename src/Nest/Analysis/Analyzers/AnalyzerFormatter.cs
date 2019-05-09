@@ -56,6 +56,8 @@ namespace Nest
 					return Deserialize<KuromojiAnalyzer>(ref segmentReader, formatterResolver);
 				case "nori":
 					return Deserialize<NoriAnalyzer>(ref segmentReader, formatterResolver);
+				case "icu_analyzer":
+					return Deserialize<IcuAnalyzer>(ref segmentReader, formatterResolver);
 				default:
 					if (tokenizerPresent)
 						return Deserialize<CustomAnalyzer>(ref segmentReader, formatterResolver);
@@ -103,6 +105,9 @@ namespace Nest
 					break;
 				case "nori":
 					Serialize<INoriAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "icu_analyzer":
+					Serialize<IIcuAnalyzer>(ref writer, value, formatterResolver);
 					break;
 				case "custom":
 					Serialize<ICustomAnalyzer>(ref writer, value, formatterResolver);

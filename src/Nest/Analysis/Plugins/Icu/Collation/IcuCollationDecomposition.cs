@@ -12,6 +12,9 @@ namespace Nest
 	/// great many of the world’s languages do not require text normalization, most locales
 	/// set no as the default decomposition mode.
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	[StringEnum]
 	public enum IcuCollationDecomposition
 	{
