@@ -23,6 +23,7 @@ namespace Tests.XPack.CrossClusterReplication
 	[BlockedByIssue("CCR change in structure, will be fixed on 6.x and forward ported")]
 	public class CrossClusterReplicationFollowTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
+		private readonly XPackCluster _cluster;
 		private const string CloseIndexStep = nameof(CloseIndexStep);
 		private const string CountAfterStep = nameof(CountAfterStep);
 		private const string CountBeforeStep = nameof(CountBeforeStep);
@@ -75,14 +76,37 @@ namespace Tests.XPack.CrossClusterReplication
 			{
 				FollowIndexStep, u =>
 					u.Calls<CreateFollowIndexDescriptor, CreateFollowIndexRequest, ICreateFollowIndexRequest, CreateFollowIndexResponse>(
-						v => new CreateFollowIndexRequest(CopyIndex(v))
+						v =>
 						{
+							if (cluster.ClusterConfiguration.Version < "6.7.0")
+							{
+								return new CreateFollowIndexRequest(CopyIndex(v))
+								{
 							RemoteCluster = DefaultSeeder.RemoteClusterName,
 							LeaderIndex = v
+								};
+							}
+							return new CreateFollowIndexRequest(CopyIndex(v))
+							{
+								RemoteCluster = DefaultSeeder.RemoteClusterName,
+								LeaderIndex = v,
+								WaitForActiveShards = "1"
+							};
 						},
-						(v, d) => d
+						(v, d) =>
+						{
+							if (cluster.ClusterConfiguration.Version < "6.7.0")
+							{
+								return d
 							.RemoteCluster(DefaultSeeder.RemoteClusterName)
-							.LeaderIndex(v),
+									.LeaderIndex(v);
+							}
+
+							return d
+								.RemoteCluster(DefaultSeeder.RemoteClusterName)
+								.LeaderIndex(v)
+								.WaitForActiveShards("1");
+						},
 						(v, c, f) => c.CreateFollowIndex(CopyIndex(v), f),
 						(v, c, f) => c.CreateFollowIndexAsync(CopyIndex(v), f),
 						(v, c, r) => c.CreateFollowIndex(r),
@@ -199,7 +223,10 @@ namespace Tests.XPack.CrossClusterReplication
 					(v, c, r) => c.UnfollowIndexAsync(r)
 				)
 			},
-		}) { }
+		})
+		{
+			_cluster = cluster;
+		}
 
 		protected static string Prefix { get; } = $"f{Guid.NewGuid().ToString("N").Substring(0, 4)}";
 
@@ -320,6 +347,16 @@ namespace Tests.XPack.CrossClusterReplication
 		[I] public async Task CloseIsAcked() => await Assert<CloseIndexResponse>(CloseIndexStep, r => r.Acknowledged.Should().BeTrue());
 
 		[I] public async Task UnfollowAfterCloseIsAcked() =>
-			await Assert<UnfollowIndexResponse>(UnfollowAgainStep, r => r.Acknowledged.Should().BeTrue());
+			await Assert<UnfollowIndexResponse>(UnfollowAgainStep, r =>
+			{
+				// Unfollowing an index after closing on 6.7.0 throws an exception.
+				if (_cluster.ClusterConfiguration.Version < "6.7.0")
+				{
+					r.Acknowledged.Should().BeTrue();
+					return;
+				}
+				r.IsValid.Should().BeFalse();
+				r.ServerError.Should().NotBeNull();
+			});
 	}
 }
