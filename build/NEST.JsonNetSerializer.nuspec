@@ -10,8 +10,8 @@
 		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>NEST 6.x uses an internalized Json.NET serializer. This package enables serialization using your own custom Json.NET serializer</description>
-		<summary>NEST 6.x uses an internalized Json.NET serializer. This package enables serialization using your own custom Json.NET serializer</summary>
+		<description>NEST uses an internal Json.NET serializer. This package enables serialization for your documents using your own custom Json.NET serializer</description>
+		<summary>NEST uses an internal Json.NET serializer. This package enables serialization for your documents using your own custom Json.NET serializer</summary>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2017-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest,serializer,json</tags>

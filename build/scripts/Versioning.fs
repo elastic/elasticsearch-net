@@ -19,8 +19,8 @@ module Versioning =
     let parse (v:string) = SemVer.parse(v)
 
     //Versions in form of e.g 6.1.0 is inferred as datetime so we bake the json shape into the provider like this
-    type SdkVersion = { Version:string;  }
-    type GlobalJson = { Sdk: SdkVersion; Version:string; }
+    type SdkVersion = { version:string;  }
+    type GlobalJson = { sdk: SdkVersion; version:string; }
         
     let private globalJson () =
         let jsonString = File.ReadAllText "global.json"
@@ -28,11 +28,11 @@ module Versioning =
         
     let writeVersionIntoGlobalJson version =
         let globalJson = globalJson ()
-        let newGlobalJson = { globalJson with Version = version.ToString(); }
+        let newGlobalJson = { globalJson with version = version.ToString(); }
         File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson))
         printfn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
-    let GlobalJsonVersion = parse <| globalJson().Version
+    let GlobalJsonVersion = parse <| globalJson().version
     
     let private getVersion (args:Commandline.PassedArguments) =
         match (args.Target, args.CommandArguments) with
@@ -73,9 +73,9 @@ module Versioning =
             match version with
             | NoChange _ -> failwithf "cannot run release because no explicit version number was passed on the command line"
             | Update (newVersion, currentVersion) -> 
-                // fail if current is greater or equal to the new version
-                if (currentVersion >= newVersion) then
-                    failwithf "Can not release %O its lower then current %O" newVersion.Full currentVersion.Full
+                // fail if current is greater than the new version
+                if (currentVersion > newVersion) then
+                    failwithf "Can not release %O as it's lower than current %O" newVersion.Full currentVersion.Full
                 writeVersionIntoGlobalJson newVersion.Full
         | _ -> ignore()
     
@@ -103,7 +103,7 @@ module Versioning =
                 | Some sn -> sn
                 | None -> failwithf "Could not locate sn.exe"
 
-    let private oficialToken = "96c599bbe3e70f5d"
+    let private officialToken = "96c599bbe3e70f5d"
 
     let private validate dll name =
         let sn = sn ()
@@ -122,8 +122,8 @@ module Versioning =
     
         let valid = (out.ExitCode, token)
         match valid with
-        | (Some 0, t) when t = oficialToken  -> printfn "%s was signed with official key token %s" name t
-        | (_, t) -> printfn "%s was not signed with the official token: %s but %s" name oficialToken t
+        | (Some 0, t) when t = officialToken  -> printfn "%s was signed with official key token %s" name t
+        | (_, t) -> printfn "%s was not signed with the official token: %s but %s" name officialToken t
         
     let private validateDllStrongName dll name =
         match File.Exists dll with
