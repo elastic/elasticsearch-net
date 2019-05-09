@@ -4,6 +4,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json.Linq;
 using RazorLight;
 using RazorLight.Generation;
@@ -133,14 +135,22 @@ namespace ApiGenerator
 				throw e;
 			}
 		}
-			
+
+		private static void WriteFormattedCsharpFile(string path, string contents)
+		{
+			var tree = CSharpSyntaxTree.ParseText(contents);
+			var root = tree.GetRoot().NormalizeWhitespace(indentation:"\t", "\n", elasticTrivia: false);
+			contents = root.ToFullString();
+			File.WriteAllText(path, contents);
+		}
+
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{
 			var targetFile = GeneratorLocations.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateClientInterface),
 				File.ReadAllText(GeneratorLocations.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateRawClient(RestApiSpec model)
@@ -148,7 +158,7 @@ namespace ApiGenerator
 			var targetFile = GeneratorLocations.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateRawClient),
 				File.ReadAllText(GeneratorLocations.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateDescriptors(RestApiSpec model)
@@ -156,14 +166,14 @@ namespace ApiGenerator
 			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Descriptors.generated.cs";
 			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Descriptors.Generated.cshtml"),
 				model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateRequests(RestApiSpec model)
 		{
 			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Requests.generated.cs";
 			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Requests.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateRequestParameters(RestApiSpec model)
@@ -171,14 +181,14 @@ namespace ApiGenerator
 			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/RequestParameters/RequestParameters.Generated.cs";
 			var source = DoRazor(nameof(GenerateRequestParameters),
 				File.ReadAllText(GeneratorLocations.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateEnums(RestApiSpec model)
 		{
 			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/Enums.Generated.cs";
 			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(GeneratorLocations.ViewFolder + @"Enums.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 	}
 }
