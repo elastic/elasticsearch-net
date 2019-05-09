@@ -3,27 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ApiGenerator.Overrides.Descriptors;
+using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain
 {
 	public class ApiEndpoint
 	{
-		public Body Body { get; set; }
-		public string CsharpMethodName { get; set; }
 		public string FileName { get; set; }
+		public string Name { get; set; }
+		public string Namespace { get; set; }
+		public string MethodName { get; set; }
+		
+		public string Documentation
+		{
+			get => string.IsNullOrWhiteSpace(_documentation) ? "TODO" : _documentation;
+			set => _documentation = value;
+		}
+
+		[JsonProperty("methods")]
+		public IReadOnlyCollection<string> HttpMethods { get; set; }
+
+		public UrlInformation Url { get; set; }
+		public Body Body { get; set; }
+		
+		public IEndpointOverrides Overrides { get; internal set; }
 
 		private List<CsharpMethod> _csharpMethods;
 		public IReadOnlyCollection<CsharpMethod> CsharpMethods
 		{
 			get
 			{
-				if (_csharpMethods != null) return _csharpMethods;
+				if (_csharpMethods != null && _csharpMethods.Count > 0) return _csharpMethods;
 
 				// enumerate once and cache
 				_csharpMethods = new List<CsharpMethod>();
 
-				var httpMethod = Methods.First();
-				var methodName = CsharpMethodName;
+				var httpMethod = HttpMethods.First();
+				var methodName = MethodName;
 				foreach (var path in Url.ExposedApiPaths)
 				{
 					var parts = new List<UrlPart>(path.Parts);
@@ -32,7 +48,7 @@ namespace ApiGenerator.Domain
 						parts.Add(new UrlPart { Name = "body", Type = "PostData", Description = Body.Description });
 
 					if (Url.Params == null || !Url.Params.Any()) Url.Params = new SortedDictionary<string, QueryParameters>();
-					var queryStringParamName = CsharpMethodName + "RequestParameters";
+					var queryStringParamName = MethodName + "RequestParameters";
 					var apiMethod = new CsharpMethod
 					{
 						QueryStringParamName = queryStringParamName,
@@ -85,18 +101,6 @@ namespace ApiGenerator.Domain
 
 		private string _documentation;
 
-		public string Documentation
-		{
-			get => string.IsNullOrWhiteSpace(_documentation) ? "TODO" : _documentation;
-			set => _documentation = value;
-		}
-
-		public IEnumerable<string> Methods { get; set; }
-
-		public string RestSpecName { get; set; }
-		public UrlInformation Url { get; set; }
-		public IEndpointOverrides Overrides { get; internal set; }
-
 		public IEnumerable<CsharpMethod> GetCsharpMethods() => CsharpMethods.ToList()
 			.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
 		);
@@ -124,7 +128,7 @@ namespace ApiGenerator.Domain
 
 			method = Overrides?.PatchMethod(method) ?? method;
 
-			if (CodeConfiguration.ApiNameMapping.TryGetValue(RestSpecName, out var mapsApiMethodName))
+			if (CodeConfiguration.ApiNameMapping.TryGetValue(Name, out var mapsApiMethodName))
 				method.QueryStringParamName = mapsApiMethodName + "RequestParameters";
 
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");

@@ -90,7 +90,7 @@ namespace ApiGenerator
 							{
 								var endpoint = ApiEndpointFactory.FromFile(file);
 								seenFiles.Add(Path.GetFileNameWithoutExtension(file));
-								endpoints.Add(endpoint.CsharpMethodName, endpoint);
+								endpoints.Add(endpoint.Name, endpoint);
 							}
 
 							fileProgress.Tick();

@@ -2,6 +2,7 @@
 using System.Dynamic;
 using System.Linq;
 using HtmlParserSharp;
+using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain
 {
@@ -12,13 +13,8 @@ namespace ApiGenerator.Domain
 		private IList<UrlPath> _exposedPaths;
 		public IDictionary<string, QueryParameters> Params { get; set; }
 
-		public string Path { get; set; }
-
-		public IEnumerable<string> Paths
-		{
-			private get => _paths ?? Enumerable.Empty<string>();
-			set => _paths = (value ?? Enumerable.Empty<string>()).ToList();
-		}
+		[JsonProperty("paths")]
+		private IReadOnlyCollection<string> Paths { get; set; }
 
 		public IDictionary<string, UrlPart> Parts { get; set; }
 
@@ -26,7 +22,7 @@ namespace ApiGenerator.Domain
 		{
 			get
 			{
-				if (_exposedPaths != null) return _exposedPaths;
+				if (_exposedPaths != null && _exposedPaths.Count > 0) return _exposedPaths;
 
 				_exposedPaths = Paths.Select(p => new UrlPath(p, Parts)).ToList();
 				return _exposedPaths;

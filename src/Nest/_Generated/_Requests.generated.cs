@@ -63,7 +63,7 @@ namespace Nest
 	//render partial methods as interface properties forcing us to implement them on request and request descriptors
 	}
 
-	///<summary>Request parameters for WatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
+	///<summary>Request parameters for AckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
@@ -107,7 +107,7 @@ public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
+///<summary>Request parameters for ActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 {
 	protected IActivateWatchRequest Self => this;
@@ -131,6 +131,88 @@ public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchReques
 // Request parameters
 } } }
 [InterfaceDataContract]
+public partial interface IAliasesRequest : IRequest<AliasesRequestParameters>
+{
+	[IgnoreDataMember]
+	Names Name
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Aliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+public partial class AliasesRequest : PlainRequestBase<AliasesRequestParameters>, IAliasesRequest
+{
+	protected IAliasesRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/aliases", "/_cat/aliases/{name}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/aliases</summary>
+	public AliasesRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/aliases/{name}</summary>
+	///<param name = "name">Optional, accepts null</param>
+	public AliasesRequest(Names name): base(r => r.Optional("name", name))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Names IAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
 {
 	[IgnoreDataMember]
@@ -147,7 +229,7 @@ public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+///<summary>Request parameters for ExistsAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 {
 	protected IAliasExistsRequest Self => this;
@@ -210,6 +292,124 @@ public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestPar
 	}
 } } }
 [InterfaceDataContract]
+public partial interface IAllocationExplainRequest : IRequest<AllocationExplainRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+public partial class AllocationExplainRequest : PlainRequestBase<AllocationExplainRequestParameters>, IAllocationExplainRequest
+{
+	protected IAllocationExplainRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/allocation/explain"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>Return information about disk usage and shard sizes (default: false)</summary>
+	public bool? IncludeDiskInfo
+	{
+		get => Q<bool? >("include_disk_info");
+		set => Q("include_disk_info", value);
+	}
+
+	///<summary>Return 'YES' decisions in explanation (default: false)</summary>
+	public bool? IncludeYesDecisions
+	{
+		get => Q<bool? >("include_yes_decisions");
+		set => Q("include_yes_decisions", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
+public partial interface IAllocationRequest : IRequest<AllocationRequestParameters>
+{
+	[IgnoreDataMember]
+	NodeIds NodeId
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Allocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+public partial class AllocationRequest : PlainRequestBase<AllocationRequestParameters>, IAllocationRequest
+{
+	protected IAllocationRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/allocation", "/_cat/allocation/{node_id}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/allocation</summary>
+	public AllocationRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/allocation/{node_id}</summary>
+	///<param name = "node_id">Optional, accepts null</param>
+	public AllocationRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	NodeIds IAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+	// Request parameters
+	///<summary>The unit in which to display byte values</summary>
+	public Bytes? Bytes
+	{
+		get => Q<Bytes? >("bytes");
+		set => Q("bytes", value);
+	}
+
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 {
 	[IgnoreDataMember]
@@ -220,7 +420,7 @@ public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
+///<summary>Request parameters for Analyze <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 {
 	protected IAnalyzeRequest Self => this;
@@ -248,7 +448,7 @@ public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+///<summary>Request parameters for Authenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 {
 	protected IAuthenticateRequest Self => this;
@@ -263,7 +463,7 @@ public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+///<summary>Request parameters for UpdateAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 {
 	protected IBulkAliasRequest Self => this;
@@ -405,7 +605,7 @@ public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+///<summary>Request parameters for Cancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 {
 	protected ICancelTasksRequest Self => this;
@@ -451,613 +651,12 @@ public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestPar
 	}
 } } }
 [InterfaceDataContract]
-public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
-{
-	[IgnoreDataMember]
-	Names Name
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
-public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
-{
-	protected ICatAliasesRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/aliases", "/_cat/aliases/{name}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/aliases</summary>
-	public CatAliasesRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/aliases/{name}</summary>
-	///<param name = "name">Optional, accepts null</param>
-	public CatAliasesRequest(Names name): base(r => r.Optional("name", name))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters>
-{
-	[IgnoreDataMember]
-	NodeIds NodeId
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
-public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
-{
-	protected ICatAllocationRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/allocation", "/_cat/allocation/{node_id}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/allocation</summary>
-	public CatAllocationRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/allocation/{node_id}</summary>
-	///<param name = "node_id">Optional, accepts null</param>
-	public CatAllocationRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-	// Request parameters
-	///<summary>The unit in which to display byte values</summary>
-	public Bytes? Bytes
-	{
-		get => Q<Bytes? >("bytes");
-		set => Q("bytes", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatCountRequest : IRequest<CatCountRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
-public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
-{
-	protected ICatCountRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/count", "/_cat/count/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/count</summary>
-	public CatCountRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/count/{index}</summary>
-	///<param name = "index">Optional, accepts null</param>
-	public CatCountRequest(Indices index): base(r => r.Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters>
-{
-	[IgnoreDataMember]
-	Fields Fields
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
-public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
-{
-	protected ICatFielddataRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/fielddata", "/_cat/fielddata/{fields}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/fielddata</summary>
-	public CatFielddataRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/fielddata/{fields}</summary>
-	///<param name = "fields">Optional, accepts null</param>
-	public CatFielddataRequest(Fields fields): base(r => r.Optional("fields", fields))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
-	// Request parameters
-	///<summary>The unit in which to display byte values</summary>
-	public Bytes? Bytes
-	{
-		get => Q<Bytes? >("bytes");
-		set => Q("bytes", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
-public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
-{
-	protected ICatHealthRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/health"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Set to false to disable timestamping</summary>
-	public bool? IncludeTimestamp
-	{
-		get => Q<bool? >("ts");
-		set => Q("ts", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
-public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
-{
-	protected ICatHelpRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
-public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
-{
-	protected ICatIndicesRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/indices", "/_cat/indices/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/indices</summary>
-	public CatIndicesRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/indices/{index}</summary>
-	///<param name = "index">Optional, accepts null</param>
-	public CatIndicesRequest(Indices index): base(r => r.Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>The unit in which to display byte values</summary>
-	public Bytes? Bytes
-	{
-		get => Q<Bytes? >("bytes");
-		set => Q("bytes", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
-	public Health? Health
-	{
-		get => Q<Health? >("health");
-		set => Q("health", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Set to true to return stats only for primary shards</summary>
-	public bool? Pri
-	{
-		get => Q<bool? >("pri");
-		set => Q("pri", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
-public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
-{
-	protected ICatMasterRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/master"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
 {
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+///<summary>Request parameters for Nodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 {
 	protected ICatNodeAttributesRequest Self => this;
@@ -1115,669 +714,6 @@ public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttribut
 	}
 } } }
 [InterfaceDataContract]
-public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
-public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
-{
-	protected ICatNodesRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/nodes"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
-	public bool? FullId
-	{
-		get => Q<bool? >("full_id");
-		set => Q("full_id", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
-public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
-{
-	protected ICatPendingTasksRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/pending_tasks"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
-public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
-{
-	protected ICatPluginsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/plugins"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
-public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
-{
-	protected ICatRecoveryRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/recovery", "/_cat/recovery/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/recovery</summary>
-	public CatRecoveryRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/recovery/{index}</summary>
-	///<param name = "index">Optional, accepts null</param>
-	public CatRecoveryRequest(Indices index): base(r => r.Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>The unit in which to display byte values</summary>
-	public Bytes? Bytes
-	{
-		get => Q<Bytes? >("bytes");
-		set => Q("bytes", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
-public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
-{
-	protected ICatRepositoriesRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/repositories"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
-public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
-{
-	protected ICatSegmentsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/segments", "/_cat/segments/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/segments</summary>
-	public CatSegmentsRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/segments/{index}</summary>
-	///<param name = "index">Optional, accepts null</param>
-	public CatSegmentsRequest(Indices index): base(r => r.Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>The unit in which to display byte values</summary>
-	public Bytes? Bytes
-	{
-		get => Q<Bytes? >("bytes");
-		set => Q("bytes", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
-public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
-{
-	protected ICatShardsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/shards", "/_cat/shards/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/shards</summary>
-	public CatShardsRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/shards/{index}</summary>
-	///<param name = "index">Optional, accepts null</param>
-	public CatShardsRequest(Indices index): base(r => r.Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>The unit in which to display byte values</summary>
-	public Bytes? Bytes
-	{
-		get => Q<Bytes? >("bytes");
-		set => Q("bytes", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters>
-{
-	[IgnoreDataMember]
-	Names RepositoryName
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
-public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
-{
-	protected ICatSnapshotsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/snapshots", "/_cat/snapshots/{repository}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/snapshots</summary>
-	public CatSnapshotsRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/snapshots/{repository}</summary>
-	///<param name = "repository">Optional, accepts null</param>
-	public CatSnapshotsRequest(Names repository): base(r => r.Optional("repository", repository))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Set to true to ignore unavailable snapshots</summary>
-	public bool? IgnoreUnavailable
-	{
-		get => Q<bool? >("ignore_unavailable");
-		set => Q("ignore_unavailable", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface ICatTasksRequest : IRequest<CatTasksRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
-{
-	protected ICatTasksRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/tasks"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-	public string[] Actions
-	{
-		get => Q<string[]>("actions");
-		set => Q("actions", value);
-	}
-
-	///<summary>Return detailed task information (default: false)</summary>
-	public bool? Detailed
-	{
-		get => Q<bool? >("detailed");
-		set => Q("detailed", value);
-	}
-
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>
-	/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
-	/// connecting to, leave empty to get information from all nodes
-	///</summary>
-	public string[] NodeId
-	{
-		get => Q<string[]>("node_id");
-		set => Q("node_id", value);
-	}
-
-	///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-	public long? ParentTask
-	{
-		get => Q<long? >("parent_task");
-		set => Q("parent_task", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
 {
 	[IgnoreDataMember]
@@ -1788,7 +724,7 @@ public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+///<summary>Request parameters for Templates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 {
 	protected ICatTemplatesRequest Self => this;
@@ -1859,100 +795,12 @@ public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestP
 	}
 } } }
 [InterfaceDataContract]
-public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
-{
-	[IgnoreDataMember]
-	Names ThreadPoolPatterns
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
-public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
-{
-	protected ICatThreadPoolRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/thread_pool", "/_cat/thread_pool/{thread_pool_patterns}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cat/thread_pool</summary>
-	public CatThreadPoolRequest(): base()
-	{
-	}
-
-	///<summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
-	///<param name = "thread_pool_patterns">Optional, accepts null</param>
-	public CatThreadPoolRequest(Names thread_pool_patterns): base(r => r.Optional("thread_pool_patterns", thread_pool_patterns))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
-	// Request parameters
-	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-	public string Format
-	{
-		get => Q<string>("format");
-		set => Q("format", value);
-	}
-
-	///<summary>Comma-separated list of column names to display</summary>
-	public string[] Headers
-	{
-		get => Q<string[]>("h");
-		set => Q("h", value);
-	}
-
-	///<summary>Return help information</summary>
-	public bool? Help
-	{
-		get => Q<bool? >("help");
-		set => Q("help", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>The multiplier in which to display values</summary>
-	public Size? Size
-	{
-		get => Q<Size? >("size");
-		set => Q("size", value);
-	}
-
-	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-	public string[] SortByColumns
-	{
-		get => Q<string[]>("s");
-		set => Q("s", value);
-	}
-
-	///<summary>Verbose mode. Display column headers</summary>
-	public bool? Verbose
-	{
-		get => Q<bool? >("v");
-		set => Q("v", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
 {
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
+///<summary>Request parameters for Stats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
 public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
 {
 	protected ICcrStatsRequest Self => this;
@@ -1972,7 +820,7 @@ public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+///<summary>Request parameters for ChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 {
 	protected IChangePasswordRequest Self => this;
@@ -2014,7 +862,7 @@ public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+///<summary>Request parameters for ClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 {
 	protected IClearCachedRealmsRequest Self => this;
@@ -2054,7 +902,7 @@ public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+///<summary>Request parameters for ClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
 public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 {
 	protected IClearCachedRolesRequest Self => this;
@@ -2088,7 +936,7 @@ public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
+///<summary>Request parameters for ClearCache <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 {
 	protected IClearCacheRequest Self => this;
@@ -2182,7 +1030,7 @@ public partial interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SqlClearCursor <pre>Clear SQL cursor</pre></summary>
+///<summary>Request parameters for ClearCursor <pre>Clear SQL cursor</pre></summary>
 public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 {
 	protected IClearSqlCursorRequest Self => this;
@@ -2202,7 +1050,7 @@ public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+///<summary>Request parameters for Close <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 {
 	protected ICloseIndexRequest Self => this;
@@ -2273,7 +1121,7 @@ public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+///<summary>Request parameters for CloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 {
 	protected ICloseJobRequest Self => this;
@@ -2317,212 +1165,12 @@ public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameter
 	}
 } } }
 [InterfaceDataContract]
-public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
-public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
-{
-	protected IClusterAllocationExplainRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/allocation/explain"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>Return information about disk usage and shard sizes (default: false)</summary>
-	public bool? IncludeDiskInfo
-	{
-		get => Q<bool? >("include_disk_info");
-		set => Q("include_disk_info", value);
-	}
-
-	///<summary>Return 'YES' decisions in explanation (default: false)</summary>
-	public bool? IncludeYesDecisions
-	{
-		get => Q<bool? >("include_yes_decisions");
-		set => Q("include_yes_decisions", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
-{
-	protected IClusterGetSettingsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/settings"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>Return settings in flat format (default: false)</summary>
-	public bool? FlatSettings
-	{
-		get => Q<bool? >("flat_settings");
-		set => Q("flat_settings", value);
-	}
-
-	///<summary>Whether to return all default clusters setting.</summary>
-	public bool? IncludeDefaults
-	{
-		get => Q<bool? >("include_defaults");
-		set => Q("include_defaults", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
-public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
-{
-	protected IClusterHealthRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/health", "/_cluster/health/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cluster/health</summary>
-	public ClusterHealthRequest(): base()
-	{
-	}
-
-	///<summary>/_cluster/health/{index}</summary>
-	///<param name = "index">Optional, accepts null</param>
-	public ClusterHealthRequest(Indices index): base(r => r.Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>Specify the level of detail for returned information</summary>
-	public Level? Level
-	{
-		get => Q<Level? >("level");
-		set => Q("level", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-
-	///<summary>Wait until the specified number of shards is active</summary>
-	public string WaitForActiveShards
-	{
-		get => Q<string>("wait_for_active_shards");
-		set => Q("wait_for_active_shards", value);
-	}
-
-	///<summary>Wait until all currently queued events with the given priority are processed</summary>
-	public WaitForEvents? WaitForEvents
-	{
-		get => Q<WaitForEvents? >("wait_for_events");
-		set => Q("wait_for_events", value);
-	}
-
-	///<summary>Whether to wait until there are no initializing shards in the cluster</summary>
-	public bool? WaitForNoInitializingShards
-	{
-		get => Q<bool? >("wait_for_no_initializing_shards");
-		set => Q("wait_for_no_initializing_shards", value);
-	}
-
-	///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
-	public bool? WaitForNoRelocatingShards
-	{
-		get => Q<bool? >("wait_for_no_relocating_shards");
-		set => Q("wait_for_no_relocating_shards", value);
-	}
-
-	///<summary>Wait until the specified number of nodes is available</summary>
-	public string WaitForNodes
-	{
-		get => Q<string>("wait_for_nodes");
-		set => Q("wait_for_nodes", value);
-	}
-
-	///<summary>Wait until cluster is in a specific state</summary>
-	public WaitForStatus? WaitForStatus
-	{
-		get => Q<WaitForStatus? >("wait_for_status");
-		set => Q("wait_for_status", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
-public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
-{
-	protected IClusterPendingTasksRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/pending_tasks"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Specify timeout for connection to master</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>
 {
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+///<summary>Request parameters for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 {
 	protected IClusterPutSettingsRequest Self => this;
@@ -2552,214 +1200,6 @@ public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSett
 	}
 } } }
 [InterfaceDataContract]
-public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
-{
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
-public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
-{
-	protected IClusterRerouteRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/reroute"});
-	internal override ApiUrls ApiUrls => Urls;
-	// values part of the url path
-	// Request parameters
-	///<summary>Simulate the operation only and return the resulting state</summary>
-	public bool? DryRun
-	{
-		get => Q<bool? >("dry_run");
-		set => Q("dry_run", value);
-	}
-
-	///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-	public bool? Explain
-	{
-		get => Q<bool? >("explain");
-		set => Q("explain", value);
-	}
-
-	///<summary>Explicit operation timeout for connection to master node</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-	public string[] Metric
-	{
-		get => Q<string[]>("metric");
-		set => Q("metric", value);
-	}
-
-	///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
-	public bool? RetryFailed
-	{
-		get => Q<bool? >("retry_failed");
-		set => Q("retry_failed", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
-{
-	[IgnoreDataMember]
-	Metrics Metric
-	{
-		get;
-	}
-
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
-public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
-{
-	protected IClusterStateRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cluster/state</summary>
-	public ClusterStateRequest(): base()
-	{
-	}
-
-	///<summary>/_cluster/state/{metric}</summary>
-	///<param name = "metric">Optional, accepts null</param>
-	public ClusterStateRequest(Metrics metric): base(r => r.Optional("metric", metric))
-	{
-	}
-
-	///<summary>/_cluster/state/{metric}/{index}</summary>
-	///<param name = "metric">Optional, accepts null</param>
-	///<param name = "index">Optional, accepts null</param>
-	public ClusterStateRequest(Metrics metric, Indices index): base(r => r.Optional("metric", metric).Optional("index", index))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-	[IgnoreDataMember]
-	Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-	/// been specified)
-	///</summary>
-	public bool? AllowNoIndices
-	{
-		get => Q<bool? >("allow_no_indices");
-		set => Q("allow_no_indices", value);
-	}
-
-	///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-	public ExpandWildcards? ExpandWildcards
-	{
-		get => Q<ExpandWildcards? >("expand_wildcards");
-		set => Q("expand_wildcards", value);
-	}
-
-	///<summary>Return settings in flat format (default: false)</summary>
-	public bool? FlatSettings
-	{
-		get => Q<bool? >("flat_settings");
-		set => Q("flat_settings", value);
-	}
-
-	///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-	public bool? IgnoreUnavailable
-	{
-		get => Q<bool? >("ignore_unavailable");
-		set => Q("ignore_unavailable", value);
-	}
-
-	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-	public bool? Local
-	{
-		get => Q<bool? >("local");
-		set => Q("local", value);
-	}
-
-	///<summary>Specify timeout for connection to master</summary>
-	public Time MasterTimeout
-	{
-		get => Q<Time>("master_timeout");
-		set => Q("master_timeout", value);
-	}
-
-	///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
-	public long? WaitForMetadataVersion
-	{
-		get => Q<long? >("wait_for_metadata_version");
-		set => Q("wait_for_metadata_version", value);
-	}
-
-	///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
-	public Time WaitForTimeout
-	{
-		get => Q<Time>("wait_for_timeout");
-		set => Q("wait_for_timeout", value);
-	}
-} } }
-[InterfaceDataContract]
-public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
-{
-	[IgnoreDataMember]
-	NodeIds NodeId
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
-public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
-{
-	protected IClusterStatsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/stats", "/_cluster/stats/nodes/{node_id}"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_cluster/stats</summary>
-	public ClusterStatsRequest(): base()
-	{
-	}
-
-	///<summary>/_cluster/stats/nodes/{node_id}</summary>
-	///<param name = "node_id">Optional, accepts null</param>
-	public ClusterStatsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-	// Request parameters
-	///<summary>Return settings in flat format (default: false)</summary>
-	public bool? FlatSettings
-	{
-		get => Q<bool? >("flat_settings");
-		set => Q("flat_settings", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface ICountRequest : IRequest<CountRequestParameters>
 {
 	[IgnoreDataMember]
@@ -2774,18 +1214,18 @@ public partial interface ICountRequest<T> : ICountRequest
 {
 }
 
-///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 {
 	protected ICountRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_count", "/{index}/_count"});
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/count", "/_cat/count/{index}"});
 	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_count</summary>
+	///<summary>/_cat/count</summary>
 	public CountRequest(): base()
 	{
 	}
 
-	///<summary>/{index}/_count</summary>
+	///<summary>/_cat/count/{index}</summary>
 	///<param name = "index">Optional, accepts null</param>
 	public CountRequest(Indices index): base(r => r.Optional("index", index))
 	{
@@ -2795,141 +1235,82 @@ public partial class CountRequest : PlainRequestBase<CountRequestParameters>, IC
 	[IgnoreDataMember]
 	Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 	// Request parameters
-	///<summary>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-	/// been specified)
-	///</summary>
-	public bool? AllowNoIndices
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
 	{
-		get => Q<bool? >("allow_no_indices");
-		set => Q("allow_no_indices", value);
+		get => Q<string>("format");
+		set => Q("format", value);
 	}
 
-	///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-	public bool? AnalyzeWildcard
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
 	{
-		get => Q<bool? >("analyze_wildcard");
-		set => Q("analyze_wildcard", value);
+		get => Q<string[]>("h");
+		set => Q("h", value);
 	}
 
-	///<summary>The analyzer to use for the query string</summary>
-	public string Analyzer
+	///<summary>Return help information</summary>
+	public bool? Help
 	{
-		get => Q<string>("analyzer");
-		set => Q("analyzer", value);
+		get => Q<bool? >("help");
+		set => Q("help", value);
 	}
 
-	///<summary>The default operator for query string query (AND or OR)</summary>
-	public DefaultOperator? DefaultOperator
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
 	{
-		get => Q<DefaultOperator? >("default_operator");
-		set => Q("default_operator", value);
+		get => Q<bool? >("local");
+		set => Q("local", value);
 	}
 
-	///<summary>The field to use as default where no field prefix is given in the query string</summary>
-	public string Df
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
 	{
-		get => Q<string>("df");
-		set => Q("df", value);
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
 	}
 
-	///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-	public ExpandWildcards? ExpandWildcards
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
 	{
-		get => Q<ExpandWildcards? >("expand_wildcards");
-		set => Q("expand_wildcards", value);
+		get => Q<string[]>("s");
+		set => Q("s", value);
 	}
 
-	///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-	public bool? IgnoreThrottled
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
 	{
-		get => Q<bool? >("ignore_throttled");
-		set => Q("ignore_throttled", value);
-	}
-
-	///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-	public bool? IgnoreUnavailable
-	{
-		get => Q<bool? >("ignore_unavailable");
-		set => Q("ignore_unavailable", value);
-	}
-
-	///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-	public bool? Lenient
-	{
-		get => Q<bool? >("lenient");
-		set => Q("lenient", value);
-	}
-
-	///<summary>Include only documents with a specific `_score` value in the result</summary>
-	public double? MinScore
-	{
-		get => Q<double? >("min_score");
-		set => Q("min_score", value);
-	}
-
-	///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-	public string Preference
-	{
-		get => Q<string>("preference");
-		set => Q("preference", value);
-	}
-
-	///<summary>Query in the Lucene query string syntax</summary>
-	public string QueryOnQueryString
-	{
-		get => Q<string>("q");
-		set => Q("q", value);
-	}
-
-	///<summary>
-	/// A document is routed to a particular shard in an index using the following formula
-	/// <para> shard_num = hash(_routing) % num_primary_shards</para>
-	/// <para>Elasticsearch will use the document id if not provided. </para>
-	/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-	/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
-	////></para>
-	///</summary>
-	public Routing Routing
-	{
-		get => Q<Routing>("routing");
-		set => Q("routing", value);
-	}
-
-	///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
-	public long? TerminateAfter
-	{
-		get => Q<long? >("terminate_after");
-		set => Q("terminate_after", value);
+		get => Q<bool? >("v");
+		set => Q("v", value);
 	}
 }
 
 public partial class CountRequest<T> : CountRequest, ICountRequest<T>
 {
 	protected ICountRequest<T> TypedSelf => this;
-	///<summary>/{index}/_count</summary>
+	///<summary>/_cat/count/{index}</summary>
 	public CountRequest(): base(typeof(T))
 	{
 	}
 
-	///<summary>/{index}/_count</summary>
+	///<summary>/_cat/count/{index}</summary>
 	///<param name = "index">Optional, accepts null</param>
 	public CountRequest(Indices index): base(index)
 	{
 	}
 } } }
-///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 {
 	protected ICountRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_count", "/{index}/_count"});
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/count", "/_cat/count/{index}"});
 	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_count</summary>
+	///<summary>/_cat/count</summary>
 	public CountRequest(): base()
 	{
 	}
 
-	///<summary>/{index}/_count</summary>
+	///<summary>/_cat/count/{index}</summary>
 	///<param name = "index">Optional, accepts null</param>
 	public CountRequest(Indices index): base(r => r.Optional("index", index))
 	{
@@ -2939,112 +1320,53 @@ public partial class CountRequest : PlainRequestBase<CountRequestParameters>, IC
 	[IgnoreDataMember]
 	Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 	// Request parameters
-	///<summary>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-	/// been specified)
-	///</summary>
-	public bool? AllowNoIndices
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
 	{
-		get => Q<bool? >("allow_no_indices");
-		set => Q("allow_no_indices", value);
+		get => Q<string>("format");
+		set => Q("format", value);
 	}
 
-	///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-	public bool? AnalyzeWildcard
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
 	{
-		get => Q<bool? >("analyze_wildcard");
-		set => Q("analyze_wildcard", value);
+		get => Q<string[]>("h");
+		set => Q("h", value);
 	}
 
-	///<summary>The analyzer to use for the query string</summary>
-	public string Analyzer
+	///<summary>Return help information</summary>
+	public bool? Help
 	{
-		get => Q<string>("analyzer");
-		set => Q("analyzer", value);
+		get => Q<bool? >("help");
+		set => Q("help", value);
 	}
 
-	///<summary>The default operator for query string query (AND or OR)</summary>
-	public DefaultOperator? DefaultOperator
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
 	{
-		get => Q<DefaultOperator? >("default_operator");
-		set => Q("default_operator", value);
+		get => Q<bool? >("local");
+		set => Q("local", value);
 	}
 
-	///<summary>The field to use as default where no field prefix is given in the query string</summary>
-	public string Df
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
 	{
-		get => Q<string>("df");
-		set => Q("df", value);
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
 	}
 
-	///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-	public ExpandWildcards? ExpandWildcards
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
 	{
-		get => Q<ExpandWildcards? >("expand_wildcards");
-		set => Q("expand_wildcards", value);
+		get => Q<string[]>("s");
+		set => Q("s", value);
 	}
 
-	///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-	public bool? IgnoreThrottled
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
 	{
-		get => Q<bool? >("ignore_throttled");
-		set => Q("ignore_throttled", value);
-	}
-
-	///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-	public bool? IgnoreUnavailable
-	{
-		get => Q<bool? >("ignore_unavailable");
-		set => Q("ignore_unavailable", value);
-	}
-
-	///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-	public bool? Lenient
-	{
-		get => Q<bool? >("lenient");
-		set => Q("lenient", value);
-	}
-
-	///<summary>Include only documents with a specific `_score` value in the result</summary>
-	public double? MinScore
-	{
-		get => Q<double? >("min_score");
-		set => Q("min_score", value);
-	}
-
-	///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-	public string Preference
-	{
-		get => Q<string>("preference");
-		set => Q("preference", value);
-	}
-
-	///<summary>Query in the Lucene query string syntax</summary>
-	public string QueryOnQueryString
-	{
-		get => Q<string>("q");
-		set => Q("q", value);
-	}
-
-	///<summary>
-	/// A document is routed to a particular shard in an index using the following formula
-	/// <para> shard_num = hash(_routing) % num_primary_shards</para>
-	/// <para>Elasticsearch will use the document id if not provided. </para>
-	/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-	/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
-	////></para>
-	///</summary>
-	public Routing Routing
-	{
-		get => Q<Routing>("routing");
-		set => Q("routing", value);
-	}
-
-	///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
-	public long? TerminateAfter
-	{
-		get => Q<long? >("terminate_after");
-		set => Q("terminate_after", value);
+		get => Q<bool? >("v");
+		set => Q("v", value);
 	}
 } } }
 [InterfaceDataContract]
@@ -3058,7 +1380,7 @@ public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFo
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+///<summary>Request parameters for PutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
 public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
 {
 	protected ICreateAutoFollowPatternRequest Self => this;
@@ -3092,7 +1414,7 @@ public partial interface ICreateFollowIndexRequest : IRequest<CreateFollowIndexR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+///<summary>Request parameters for Follow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
 public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
 {
 	protected ICreateFollowIndexRequest Self => this;
@@ -3135,7 +1457,7 @@ public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
+///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 {
 	protected ICreateIndexRequest Self => this;
@@ -3196,7 +1518,7 @@ public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for CreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 {
 	protected ICreateRepositoryRequest Self => this;
@@ -3386,7 +1708,7 @@ public partial interface ICreateRollupJobRequest : IRequest<CreateRollupJobReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupPutJob <pre>TODO</pre></summary>
+///<summary>Request parameters for PutJob <pre>TODO</pre></summary>
 public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 {
 	protected ICreateRollupJobRequest Self => this;
@@ -3420,7 +1742,7 @@ public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
+///<summary>Request parameters for DeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 {
 	protected IDeactivateWatchRequest Self => this;
@@ -3460,7 +1782,7 @@ public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+///<summary>Request parameters for DeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 {
 	protected IDeleteAliasRequest Self => this;
@@ -3510,7 +1832,7 @@ public partial interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFo
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
+///<summary>Request parameters for DeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
 public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
 {
 	protected IDeleteAutoFollowPatternRequest Self => this;
@@ -4140,7 +2462,7 @@ public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEv
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteCalendarEvent <pre>TODO</pre></summary>
+///<summary>Request parameters for DeleteCalendarEvent <pre>TODO</pre></summary>
 public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 {
 	protected IDeleteCalendarEventRequest Self => this;
@@ -4183,7 +2505,7 @@ public partial interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteCalendarJob <pre>TODO</pre></summary>
+///<summary>Request parameters for DeleteCalendarJob <pre>TODO</pre></summary>
 public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 {
 	protected IDeleteCalendarJobRequest Self => this;
@@ -4220,7 +2542,7 @@ public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteCalendar <pre>TODO</pre></summary>
+///<summary>Request parameters for DeleteCalendar <pre>TODO</pre></summary>
 public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 {
 	protected IDeleteCalendarRequest Self => this;
@@ -4254,7 +2576,7 @@ public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+///<summary>Request parameters for DeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 {
 	protected IDeleteDatafeedRequest Self => this;
@@ -4289,7 +2611,7 @@ public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteExpiredData <pre>TODO</pre></summary>
+///<summary>Request parameters for DeleteExpiredData <pre>TODO</pre></summary>
 public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 {
 	protected IDeleteExpiredDataRequest Self => this;
@@ -4315,7 +2637,7 @@ public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+///<summary>Request parameters for DeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
 {
 	protected IDeleteForecastRequest Self => this;
@@ -4365,7 +2687,7 @@ public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
+///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 {
 	protected IDeleteIndexRequest Self => this;
@@ -4433,7 +2755,7 @@ public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTempl
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+///<summary>Request parameters for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 {
 	protected IDeleteIndexTemplateRequest Self => this;
@@ -4480,7 +2802,7 @@ public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+///<summary>Request parameters for DeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 {
 	protected IDeleteJobRequest Self => this;
@@ -4522,7 +2844,7 @@ public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for Delete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 {
 	protected IDeleteLicenseRequest Self => this;
@@ -4548,7 +2870,7 @@ public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnaps
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+///<summary>Request parameters for DeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 {
 	protected IDeleteModelSnapshotRequest Self => this;
@@ -4585,7 +2907,7 @@ public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+///<summary>Request parameters for DeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 {
 	protected IDeletePipelineRequest Self => this;
@@ -4638,7 +2960,7 @@ public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityDeletePrivileges <pre>TODO</pre></summary>
+///<summary>Request parameters for DeletePrivileges <pre>TODO</pre></summary>
 public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
 {
 	protected IDeletePrivilegesRequest Self => this;
@@ -4684,7 +3006,7 @@ public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for DeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 {
 	protected IDeleteRepositoryRequest Self => this;
@@ -4874,7 +3196,7 @@ public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+///<summary>Request parameters for DeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
 public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 {
 	protected IDeleteRoleMappingRequest Self => this;
@@ -4917,7 +3239,7 @@ public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+///<summary>Request parameters for DeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 {
 	protected IDeleteRoleRequest Self => this;
@@ -4960,7 +3282,7 @@ public partial interface IDeleteRollupJobRequest : IRequest<DeleteRollupJobReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupDeleteJob <pre>TODO</pre></summary>
+///<summary>Request parameters for DeleteJob <pre>TODO</pre></summary>
 public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 {
 	protected IDeleteRollupJobRequest Self => this;
@@ -5047,7 +3369,7 @@ public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 {
 	protected IDeleteSnapshotRequest Self => this;
@@ -5090,7 +3412,7 @@ public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+///<summary>Request parameters for DeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
 public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 {
 	protected IDeleteUserRequest Self => this;
@@ -5133,7 +3455,7 @@ public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
+///<summary>Request parameters for DeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 {
 	protected IDeleteWatchRequest Self => this;
@@ -5167,7 +3489,7 @@ public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+///<summary>Request parameters for Deprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 {
 	protected IDeprecationInfoRequest Self => this;
@@ -5200,7 +3522,7 @@ public partial interface IDisableUserRequest : IRequest<DisableUserRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+///<summary>Request parameters for DisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
 public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 {
 	protected IDisableUserRequest Self => this;
@@ -5393,7 +3715,7 @@ public partial interface IEnableUserRequest : IRequest<EnableUserRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+///<summary>Request parameters for EnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
 public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 {
 	protected IEnableUserRequest Self => this;
@@ -5451,7 +3773,7 @@ public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
+///<summary>Request parameters for ExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 {
 	protected IExecuteWatchRequest Self => this;
@@ -5644,6 +3966,61 @@ public partial class ExplainRequest<TDocument> : ExplainRequest, IExplainRequest
 	}
 } } }
 [InterfaceDataContract]
+public partial interface IExploreRequest : IRequest<ExploreRequestParameters>
+{
+	[IgnoreDataMember]
+	Indices Index
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+public partial class ExploreRequest : PlainRequestBase<ExploreRequestParameters>, IExploreRequest
+{
+	protected IExploreRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_graph/explore"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/{index}/_graph/explore</summary>
+	///<param name = "index">this parameter is required</param>
+	public ExploreRequest(Indices index): base(r => r.Required("index", index))
+	{
+	}
+
+	///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+	[SerializationConstructor]
+	internal ExploreRequest(): base()
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Indices IExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	///<summary>
+	/// A document is routed to a particular shard in an index using the following formula
+	/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+	/// <para>Elasticsearch will use the document id if not provided. </para>
+	/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+	/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
+	////></para>
+	///</summary>
+	public Routing Routing
+	{
+		get => Q<Routing>("routing");
+		set => Q("routing", value);
+	}
+
+	///<summary>Explicit operation timeout</summary>
+	public Time Timeout
+	{
+		get => Q<Time>("timeout");
+		set => Q("timeout", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
 {
 	[IgnoreDataMember]
@@ -5707,6 +4084,95 @@ public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabiliti
 	}
 } } }
 [InterfaceDataContract]
+public partial interface IFielddataRequest : IRequest<FielddataRequestParameters>
+{
+	[IgnoreDataMember]
+	Fields Fields
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Fielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+public partial class FielddataRequest : PlainRequestBase<FielddataRequestParameters>, IFielddataRequest
+{
+	protected IFielddataRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/fielddata", "/_cat/fielddata/{fields}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/fielddata</summary>
+	public FielddataRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/fielddata/{fields}</summary>
+	///<param name = "fields">Optional, accepts null</param>
+	public FielddataRequest(Fields fields): base(r => r.Optional("fields", fields))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Fields IFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
+	// Request parameters
+	///<summary>The unit in which to display byte values</summary>
+	public Bytes? Bytes
+	{
+		get => Q<Bytes? >("bytes");
+		set => Q("bytes", value);
+	}
+
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 {
 	[IgnoreDataMember]
@@ -5717,7 +4183,7 @@ public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+///<summary>Request parameters for FlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 {
 	protected IFlushJobRequest Self => this;
@@ -5757,7 +4223,7 @@ public partial interface IFlushRequest : IRequest<FlushRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
+///<summary>Request parameters for Flush <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 {
 	protected IFlushRequest Self => this;
@@ -5833,7 +4299,7 @@ public partial interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+///<summary>Request parameters for FollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
 {
 	protected IFollowIndexStatsRequest Self => this;
@@ -5867,7 +4333,7 @@ public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
+///<summary>Request parameters for Forcemerge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 {
 	protected IForceMergeRequest Self => this;
@@ -5944,7 +4410,7 @@ public partial interface IForecastJobRequest : IRequest<ForecastJobRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlForecast <pre>TODO</pre></summary>
+///<summary>Request parameters for Forecast <pre>TODO</pre></summary>
 public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 {
 	protected IForecastJobRequest Self => this;
@@ -5984,7 +4450,7 @@ public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+///<summary>Request parameters for GetAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 {
 	protected IGetAliasRequest Self => this;
@@ -6062,7 +4528,7 @@ public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+///<summary>Request parameters for GetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 {
 	protected IGetAnomalyRecordsRequest Self => this;
@@ -6096,7 +4562,7 @@ public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
+///<summary>Request parameters for GetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
 public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
 {
 	protected IGetAutoFollowPatternRequest Self => this;
@@ -6124,7 +4590,7 @@ public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicens
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for GetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 {
 	protected IGetBasicLicenseStatusRequest Self => this;
@@ -6150,7 +4616,7 @@ public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+///<summary>Request parameters for GetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 {
 	protected IGetBucketsRequest Self => this;
@@ -6193,7 +4659,7 @@ public partial interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetCalendarEvents <pre>TODO</pre></summary>
+///<summary>Request parameters for GetCalendarEvents <pre>TODO</pre></summary>
 public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 {
 	protected IGetCalendarEventsRequest Self => this;
@@ -6247,7 +4713,7 @@ public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetCalendars <pre>TODO</pre></summary>
+///<summary>Request parameters for GetCalendars <pre>TODO</pre></summary>
 public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 {
 	protected IGetCalendarsRequest Self => this;
@@ -6286,7 +4752,7 @@ public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+///<summary>Request parameters for GetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 {
 	protected IGetCategoriesRequest Self => this;
@@ -6324,7 +4790,7 @@ public partial interface IGetCertificatesRequest : IRequest<GetCertificatesReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+///<summary>Request parameters for Certificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
 public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
 {
 	protected IGetCertificatesRequest Self => this;
@@ -6344,7 +4810,7 @@ public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+///<summary>Request parameters for GetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 {
 	protected IGetDatafeedsRequest Self => this;
@@ -6383,7 +4849,7 @@ public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+///<summary>Request parameters for GetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 {
 	protected IGetDatafeedStatsRequest Self => this;
@@ -6428,7 +4894,7 @@ public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
+///<summary>Request parameters for GetFieldMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 {
 	protected IGetFieldMappingRequest Self => this;
@@ -6515,7 +4981,7 @@ public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
+///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 {
 	protected IGetIndexRequest Self => this;
@@ -6610,7 +5076,7 @@ public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
+///<summary>Request parameters for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 {
 	protected IGetIndexSettingsRequest Self => this;
@@ -6709,7 +5175,7 @@ public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+///<summary>Request parameters for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 {
 	protected IGetIndexTemplateRequest Self => this;
@@ -6769,7 +5235,7 @@ public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+///<summary>Request parameters for GetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 {
 	protected IGetInfluencersRequest Self => this;
@@ -6803,7 +5269,7 @@ public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+///<summary>Request parameters for GetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 {
 	protected IGetJobsRequest Self => this;
@@ -6842,7 +5308,7 @@ public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+///<summary>Request parameters for GetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 {
 	protected IGetJobStatsRequest Self => this;
@@ -6876,7 +5342,7 @@ public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for Get <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 {
 	protected IGetLicenseRequest Self => this;
@@ -6902,7 +5368,7 @@ public partial interface IGetMappingRequest : IRequest<GetMappingRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
+///<summary>Request parameters for GetMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 {
 	protected IGetMappingRequest Self => this;
@@ -6985,7 +5451,7 @@ public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+///<summary>Request parameters for GetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 {
 	protected IGetModelSnapshotsRequest Self => this;
@@ -7028,7 +5494,7 @@ public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+///<summary>Request parameters for GetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
 public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
 {
 	protected IGetOverallBucketsRequest Self => this;
@@ -7062,7 +5528,7 @@ public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+///<summary>Request parameters for GetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 {
 	protected IGetPipelineRequest Self => this;
@@ -7107,7 +5573,7 @@ public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityGetPrivileges <pre>TODO</pre></summary>
+///<summary>Request parameters for GetPrivileges <pre>TODO</pre></summary>
 public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 {
 	protected IGetPrivilegesRequest Self => this;
@@ -7149,7 +5615,7 @@ public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for GetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 {
 	protected IGetRepositoryRequest Self => this;
@@ -7345,7 +5811,7 @@ public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+///<summary>Request parameters for GetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
 public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 {
 	protected IGetRoleMappingRequest Self => this;
@@ -7378,7 +5844,7 @@ public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+///<summary>Request parameters for GetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 {
 	protected IGetRoleRequest Self => this;
@@ -7411,7 +5877,7 @@ public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapab
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupGetRollupCaps <pre>TODO</pre></summary>
+///<summary>Request parameters for GetRollupCaps <pre>TODO</pre></summary>
 public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 {
 	protected IGetRollupCapabilitiesRequest Self => this;
@@ -7444,7 +5910,7 @@ public partial interface IGetRollupIndexCapabilitiesRequest : IRequest<GetRollup
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupGetRollupIndexCaps <pre>TODO</pre></summary>
+///<summary>Request parameters for GetRollupIndexCaps <pre>TODO</pre></summary>
 public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 {
 	protected IGetRollupIndexCapabilitiesRequest Self => this;
@@ -7478,7 +5944,7 @@ public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupGetJobs <pre>TODO</pre></summary>
+///<summary>Request parameters for GetJobs <pre>TODO</pre></summary>
 public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 {
 	protected IGetRollupJobRequest Self => this;
@@ -7541,6 +6007,49 @@ public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParamet
 	}
 } } }
 [InterfaceDataContract]
+public partial interface IGetSettingsRequest : IRequest<GetSettingsRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+public partial class GetSettingsRequest : PlainRequestBase<GetSettingsRequestParameters>, IGetSettingsRequest
+{
+	protected IGetSettingsRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/settings"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>Return settings in flat format (default: false)</summary>
+	public bool? FlatSettings
+	{
+		get => Q<bool? >("flat_settings");
+		set => Q("flat_settings", value);
+	}
+
+	///<summary>Whether to return all default clusters setting.</summary>
+	public bool? IncludeDefaults
+	{
+		get => Q<bool? >("include_defaults");
+		set => Q("include_defaults", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Explicit operation timeout</summary>
+	public Time Timeout
+	{
+		get => Q<Time>("timeout");
+		set => Q("timeout", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
 {
 	[IgnoreDataMember]
@@ -7557,7 +6066,7 @@ public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 {
 	protected IGetSnapshotRequest Self => this;
@@ -7614,7 +6123,7 @@ public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 {
 	protected IGetTaskRequest Self => this;
@@ -7656,7 +6165,7 @@ public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicens
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for GetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 {
 	protected IGetTrialLicenseStatusRequest Self => this;
@@ -7671,7 +6180,7 @@ public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessToke
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+///<summary>Request parameters for GetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
 public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 {
 	protected IGetUserAccessTokenRequest Self => this;
@@ -7686,7 +6195,7 @@ public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+///<summary>Request parameters for GetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
 public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 {
 	protected IGetUserPrivilegesRequest Self => this;
@@ -7706,7 +6215,7 @@ public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+///<summary>Request parameters for GetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
 public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 {
 	protected IGetUserRequest Self => this;
@@ -7739,7 +6248,7 @@ public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
+///<summary>Request parameters for GetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 {
 	protected IGetWatchRequest Self => this;
@@ -7763,128 +6272,12 @@ public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameter
 // Request parameters
 } } }
 [InterfaceDataContract]
-public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters>
-{
-	[IgnoreDataMember]
-	Indices Index
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-public partial interface IGraphExploreRequest<T> : IGraphExploreRequest
-{
-}
-
-///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
-{
-	protected IGraphExploreRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_graph/explore"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/{index}/_graph/explore</summary>
-	///<param name = "index">this parameter is required</param>
-	public GraphExploreRequest(Indices index): base(r => r.Required("index", index))
-	{
-	}
-
-	///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-	[SerializationConstructor]
-	internal GraphExploreRequest(): base()
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>
-	/// A document is routed to a particular shard in an index using the following formula
-	/// <para> shard_num = hash(_routing) % num_primary_shards</para>
-	/// <para>Elasticsearch will use the document id if not provided. </para>
-	/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-	/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
-	////></para>
-	///</summary>
-	public Routing Routing
-	{
-		get => Q<Routing>("routing");
-		set => Q("routing", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-}
-
-public partial class GraphExploreRequest<T> : GraphExploreRequest, IGraphExploreRequest<T>
-{
-	protected IGraphExploreRequest<T> TypedSelf => this;
-	///<summary>/{index}/_graph/explore</summary>
-	///<param name = "index">this parameter is required</param>
-	public GraphExploreRequest(Indices index): base(index)
-	{
-	}
-
-	///<summary>/{index}/_graph/explore</summary>
-	public GraphExploreRequest(): base(typeof(T))
-	{
-	}
-} } }
-///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
-{
-	protected IGraphExploreRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_graph/explore"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/{index}/_graph/explore</summary>
-	///<param name = "index">this parameter is required</param>
-	public GraphExploreRequest(Indices index): base(r => r.Required("index", index))
-	{
-	}
-
-	///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-	[SerializationConstructor]
-	internal GraphExploreRequest(): base()
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
-	// Request parameters
-	///<summary>
-	/// A document is routed to a particular shard in an index using the following formula
-	/// <para> shard_num = hash(_routing) % num_primary_shards</para>
-	/// <para>Elasticsearch will use the document id if not provided. </para>
-	/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-	/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
-	////></para>
-	///</summary>
-	public Routing Routing
-	{
-		get => Q<Routing>("routing");
-		set => Q("routing", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters>
 {
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+///<summary>Request parameters for ProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 {
 	protected IGrokProcessorPatternsRequest Self => this;
@@ -7904,7 +6297,7 @@ public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+///<summary>Request parameters for HasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
 public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
 {
 	protected IHasPrivilegesRequest Self => this;
@@ -7927,6 +6320,181 @@ public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesReques
 // Request parameters
 } } }
 [InterfaceDataContract]
+public partial interface IHealthRequest : IRequest<HealthRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+public partial class HealthRequest : PlainRequestBase<HealthRequestParameters>, IHealthRequest
+{
+	protected IHealthRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/health"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Set to false to disable timestamping</summary>
+	public bool? IncludeTimestamp
+	{
+		get => Q<bool? >("ts");
+		set => Q("ts", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
+public partial interface IHelpRequest : IRequest<HelpRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Help <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+public partial class HelpRequest : PlainRequestBase<HelpRequestParameters>, IHelpRequest
+{
+	protected IHelpRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
+public partial interface IHotThreadsRequest : IRequest<HotThreadsRequestParameters>
+{
+	[IgnoreDataMember]
+	NodeIds NodeId
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for HotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+public partial class HotThreadsRequest : PlainRequestBase<HotThreadsRequestParameters>, IHotThreadsRequest
+{
+	protected IHotThreadsRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_nodes/hot_threads</summary>
+	public HotThreadsRequest(): base()
+	{
+	}
+
+	///<summary>/_nodes/{node_id}/hot_threads</summary>
+	///<param name = "node_id">Optional, accepts null</param>
+	public HotThreadsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	NodeIds IHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+	// Request parameters
+	///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
+	public bool? IgnoreIdleThreads
+	{
+		get => Q<bool? >("ignore_idle_threads");
+		set => Q("ignore_idle_threads", value);
+	}
+
+	///<summary>The interval for the second sampling of threads</summary>
+	public Time Interval
+	{
+		get => Q<Time>("interval");
+		set => Q("interval", value);
+	}
+
+	///<summary>Number of samples of thread stacktrace (default: 10)</summary>
+	public long? Snapshots
+	{
+		get => Q<long? >("snapshots");
+		set => Q("snapshots", value);
+	}
+
+	///<summary>Specify the number of threads to provide information for (default: 3)</summary>
+	public long? Threads
+	{
+		get => Q<long? >("threads");
+		set => Q("threads", value);
+	}
+
+	///<summary>Explicit operation timeout</summary>
+	public Time Timeout
+	{
+		get => Q<Time>("timeout");
+		set => Q("timeout", value);
+	}
+
+	///<summary>The type to sample (default: cpu)</summary>
+	public TypeQueryString? TypeQueryString
+	{
+		get => Q<TypeQueryString? >("type");
+		set => Q("type", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 {
 	[IgnoreDataMember]
@@ -7937,7 +6505,7 @@ public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
+///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 {
 	protected IIndexExistsRequest Self => this;
@@ -8181,7 +6749,7 @@ public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExi
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+///<summary>Request parameters for ExistsTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 {
 	protected IIndexTemplateExistsRequest Self => this;
@@ -8225,6 +6793,109 @@ public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplate
 	}
 } } }
 [InterfaceDataContract]
+public partial interface IIndicesRequest : IRequest<IndicesRequestParameters>
+{
+	[IgnoreDataMember]
+	Indices Index
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for IndicesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+public partial class IndicesRequest : PlainRequestBase<IndicesRequestParameters>, IIndicesRequest
+{
+	protected IIndicesRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/indices", "/_cat/indices/{index}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/indices</summary>
+	public IndicesRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/indices/{index}</summary>
+	///<param name = "index">Optional, accepts null</param>
+	public IndicesRequest(Indices index): base(r => r.Optional("index", index))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Indices IIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	///<summary>The unit in which to display byte values</summary>
+	public Bytes? Bytes
+	{
+		get => Q<Bytes? >("bytes");
+		set => Q("bytes", value);
+	}
+
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
+	public Health? Health
+	{
+		get => Q<Health? >("health");
+		set => Q("health", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Set to true to return stats only for primary shards</summary>
+	public bool? Pri
+	{
+		get => Q<bool? >("pri");
+		set => Q("pri", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
 {
 	[IgnoreDataMember]
@@ -8235,7 +6906,7 @@ public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStore
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+///<summary>Request parameters for ShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 {
 	protected IIndicesShardStoresRequest Self => this;
@@ -8304,7 +6975,7 @@ public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+///<summary>Request parameters for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 {
 	protected IIndicesStatsRequest Self => this;
@@ -8388,7 +7059,7 @@ public partial interface IInvalidateUserAccessTokenRequest : IRequest<Invalidate
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+///<summary>Request parameters for InvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 {
 	protected IInvalidateUserAccessTokenRequest Self => this;
@@ -8403,7 +7074,7 @@ public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+///<summary>Request parameters for List <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 {
 	protected IListTasksRequest Self => this;
@@ -8469,7 +7140,7 @@ public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningI
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlInfo <pre>TODO</pre></summary>
+///<summary>Request parameters for Info <pre>TODO</pre></summary>
 public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 {
 	protected IMachineLearningInfoRequest Self => this;
@@ -8477,6 +7148,70 @@ public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearni
 	internal override ApiUrls ApiUrls => Urls;
 // values part of the url path
 // Request parameters
+} } }
+[InterfaceDataContract]
+public partial interface IMasterRequest : IRequest<MasterRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Master <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+public partial class MasterRequest : PlainRequestBase<MasterRequestParameters>, IMasterRequest
+{
+	protected IMasterRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/master"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
 } } }
 [InterfaceDataContract]
 public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
@@ -8489,7 +7224,7 @@ public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssista
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+///<summary>Request parameters for GetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 {
 	protected IMigrationAssistanceRequest Self => this;
@@ -8545,7 +7280,7 @@ public partial interface IMigrationUpgradeRequest : IRequest<MigrationUpgradeReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+///<summary>Request parameters for Upgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 {
 	protected IMigrationUpgradeRequest Self => this;
@@ -8951,80 +7686,6 @@ public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectors
 	}
 } } }
 [InterfaceDataContract]
-public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters>
-{
-	[IgnoreDataMember]
-	NodeIds NodeId
-	{
-		get;
-	}
-//render partial methods as interface properties forcing us to implement them on request and request descriptors
-}
-
-///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
-public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
-{
-	protected INodesHotThreadsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads"});
-	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_nodes/hot_threads</summary>
-	public NodesHotThreadsRequest(): base()
-	{
-	}
-
-	///<summary>/_nodes/{node_id}/hot_threads</summary>
-	///<param name = "node_id">Optional, accepts null</param>
-	public NodesHotThreadsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
-	{
-	}
-
-	// values part of the url path
-	[IgnoreDataMember]
-	NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-	// Request parameters
-	///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-	public bool? IgnoreIdleThreads
-	{
-		get => Q<bool? >("ignore_idle_threads");
-		set => Q("ignore_idle_threads", value);
-	}
-
-	///<summary>The interval for the second sampling of threads</summary>
-	public Time Interval
-	{
-		get => Q<Time>("interval");
-		set => Q("interval", value);
-	}
-
-	///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-	public long? Snapshots
-	{
-		get => Q<long? >("snapshots");
-		set => Q("snapshots", value);
-	}
-
-	///<summary>The type to sample (default: cpu)</summary>
-	public ThreadType? ThreadType
-	{
-		get => Q<ThreadType? >("type");
-		set => Q("type", value);
-	}
-
-	///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-	public long? Threads
-	{
-		get => Q<long? >("threads");
-		set => Q("threads", value);
-	}
-
-	///<summary>Explicit operation timeout</summary>
-	public Time Timeout
-	{
-		get => Q<Time>("timeout");
-		set => Q("timeout", value);
-	}
-} } }
-[InterfaceDataContract]
 public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
 {
 	[IgnoreDataMember]
@@ -9041,7 +7702,7 @@ public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 {
 	protected INodesInfoRequest Self => this;
@@ -9092,6 +7753,77 @@ public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParamet
 	}
 } } }
 [InterfaceDataContract]
+public partial interface INodesRequest : IRequest<NodesRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for NodesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+public partial class NodesRequest : PlainRequestBase<NodesRequestParameters>, INodesRequest
+{
+	protected INodesRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/nodes"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
+	public bool? FullId
+	{
+		get => Q<bool? >("full_id");
+		set => Q("full_id", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
 {
 	[IgnoreDataMember]
@@ -9114,7 +7846,7 @@ public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+///<summary>Request parameters for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 {
 	protected INodesStatsRequest Self => this;
@@ -9240,7 +7972,7 @@ public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+///<summary>Request parameters for Usage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 {
 	protected INodesUsageRequest Self => this;
@@ -9294,7 +8026,7 @@ public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+///<summary>Request parameters for Open <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 {
 	protected IOpenIndexRequest Self => this;
@@ -9372,7 +8104,7 @@ public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+///<summary>Request parameters for OpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 {
 	protected IOpenJobRequest Self => this;
@@ -9406,7 +8138,7 @@ public partial interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+///<summary>Request parameters for PauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
 public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
 {
 	protected IPauseFollowIndexRequest Self => this;
@@ -9430,6 +8162,70 @@ public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndex
 // Request parameters
 } } }
 [InterfaceDataContract]
+public partial interface IPendingTasksRequest : IRequest<PendingTasksRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+public partial class PendingTasksRequest : PlainRequestBase<PendingTasksRequestParameters>, IPendingTasksRequest
+{
+	protected IPendingTasksRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/pending_tasks"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IPingRequest : IRequest<PingRequestParameters>
 {
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
@@ -9445,6 +8241,70 @@ public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPin
 // Request parameters
 } } }
 [InterfaceDataContract]
+public partial interface IPluginsRequest : IRequest<PluginsRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Plugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+public partial class PluginsRequest : PlainRequestBase<PluginsRequestParameters>, IPluginsRequest
+{
+	protected IPluginsRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/plugins"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
 {
 	[IgnoreDataMember]
@@ -9455,7 +8315,7 @@ public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEvent
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPostCalendarEvents <pre>TODO</pre></summary>
+///<summary>Request parameters for PostCalendarEvents <pre>TODO</pre></summary>
 public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 {
 	protected IPostCalendarEventsRequest Self => this;
@@ -9489,7 +8349,7 @@ public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+///<summary>Request parameters for PostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 {
 	protected IPostJobDataRequest Self => this;
@@ -9531,7 +8391,7 @@ public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for Post <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 {
 	protected IPostLicenseRequest Self => this;
@@ -9557,7 +8417,7 @@ public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedReque
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+///<summary>Request parameters for PreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 {
 	protected IPreviewDatafeedRequest Self => this;
@@ -9597,7 +8457,7 @@ public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+///<summary>Request parameters for PutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 {
 	protected IPutAliasRequest Self => this;
@@ -9653,7 +8513,7 @@ public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPutCalendarJob <pre>TODO</pre></summary>
+///<summary>Request parameters for PutCalendarJob <pre>TODO</pre></summary>
 public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 {
 	protected IPutCalendarJobRequest Self => this;
@@ -9690,7 +8550,7 @@ public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPutCalendar <pre>TODO</pre></summary>
+///<summary>Request parameters for PutCalendar <pre>TODO</pre></summary>
 public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 {
 	protected IPutCalendarRequest Self => this;
@@ -9724,7 +8584,7 @@ public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+///<summary>Request parameters for PutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 {
 	protected IPutDatafeedRequest Self => this;
@@ -9758,7 +8618,7 @@ public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+///<summary>Request parameters for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 {
 	protected IPutIndexTemplateRequest Self => this;
@@ -9826,7 +8686,7 @@ public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+///<summary>Request parameters for PutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 {
 	protected IPutJobRequest Self => this;
@@ -9864,7 +8724,7 @@ public partial interface IPutMappingRequest<T> : IPutMappingRequest
 {
 }
 
-///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
+///<summary>Request parameters for PutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 {
 	protected IPutMappingRequest Self => this;
@@ -9946,7 +8806,7 @@ public partial class PutMappingRequest<T> : PutMappingRequest, IPutMappingReques
 	{
 	}
 } } }
-///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
+///<summary>Request parameters for PutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 {
 	protected IPutMappingRequest Self => this;
@@ -10024,7 +8884,7 @@ public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+///<summary>Request parameters for PutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 {
 	protected IPutPipelineRequest Self => this;
@@ -10066,7 +8926,7 @@ public partial interface IPutPrivilegesRequest : IRequest<PutPrivilegesRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityPutPrivileges <pre>TODO</pre></summary>
+///<summary>Request parameters for PutPrivileges <pre>TODO</pre></summary>
 public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
 {
 	protected IPutPrivilegesRequest Self => this;
@@ -10095,7 +8955,7 @@ public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+///<summary>Request parameters for PutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
 public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 {
 	protected IPutRoleMappingRequest Self => this;
@@ -10138,7 +8998,7 @@ public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+///<summary>Request parameters for PutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 {
 	protected IPutRoleRequest Self => this;
@@ -10243,7 +9103,7 @@ public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+///<summary>Request parameters for PutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
 public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 {
 	protected IPutUserRequest Self => this;
@@ -10286,7 +9146,7 @@ public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
+///<summary>Request parameters for PutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 {
 	protected IPutWatchRequest Self => this;
@@ -10342,7 +9202,7 @@ public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SqlQuery <pre>Execute SQL</pre></summary>
+///<summary>Request parameters for Query <pre>Execute SQL</pre></summary>
 public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 {
 	protected IQuerySqlRequest Self => this;
@@ -10358,6 +9218,88 @@ public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameter
 	}
 } } }
 [InterfaceDataContract]
+public partial interface IRecoveryRequest : IRequest<RecoveryRequestParameters>
+{
+	[IgnoreDataMember]
+	Indices Index
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Recovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+public partial class RecoveryRequest : PlainRequestBase<RecoveryRequestParameters>, IRecoveryRequest
+{
+	protected IRecoveryRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/recovery", "/_cat/recovery/{index}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/recovery</summary>
+	public RecoveryRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/recovery/{index}</summary>
+	///<param name = "index">Optional, accepts null</param>
+	public RecoveryRequest(Indices index): base(r => r.Optional("index", index))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Indices IRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	///<summary>The unit in which to display byte values</summary>
+	public Bytes? Bytes
+	{
+		get => Q<Bytes? >("bytes");
+		set => Q("bytes", value);
+	}
+
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 {
 	[IgnoreDataMember]
@@ -10368,7 +9310,7 @@ public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
+///<summary>Request parameters for Recovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 {
 	protected IRecoveryStatusRequest Self => this;
@@ -10414,7 +9356,7 @@ public partial interface IRefreshRequest : IRequest<RefreshRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
+///<summary>Request parameters for Refresh <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 {
 	protected IRefreshRequest Self => this;
@@ -10577,7 +9519,7 @@ public partial interface IReloadSecureSettingsRequest : IRequest<ReloadSecureSet
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
+///<summary>Request parameters for ReloadSecureSettings <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
 public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 {
 	protected IReloadSecureSettingsRequest Self => this;
@@ -10611,7 +9553,7 @@ public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
+///<summary>Request parameters for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 {
 	protected IRemoteInfoRequest Self => this;
@@ -10654,6 +9596,127 @@ public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearch
 // Request parameters
 } } }
 [InterfaceDataContract]
+public partial interface IRepositoriesRequest : IRequest<RepositoriesRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Repositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
+public partial class RepositoriesRequest : PlainRequestBase<RepositoriesRequestParameters>, IRepositoriesRequest
+{
+	protected IRepositoriesRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/repositories"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
+public partial interface IRerouteRequest : IRequest<RerouteRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Reroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+public partial class RerouteRequest : PlainRequestBase<RerouteRequestParameters>, IRerouteRequest
+{
+	protected IRerouteRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/reroute"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>Simulate the operation only and return the resulting state</summary>
+	public bool? DryRun
+	{
+		get => Q<bool? >("dry_run");
+		set => Q("dry_run", value);
+	}
+
+	///<summary>Return an explanation of why the commands can or cannot be executed</summary>
+	public bool? Explain
+	{
+		get => Q<bool? >("explain");
+		set => Q("explain", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
+	public string[] Metric
+	{
+		get => Q<string[]>("metric");
+		set => Q("metric", value);
+	}
+
+	///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
+	public bool? RetryFailed
+	{
+		get => Q<bool? >("retry_failed");
+		set => Q("retry_failed", value);
+	}
+
+	///<summary>Explicit operation timeout</summary>
+	public Time Timeout
+	{
+		get => Q<Time>("timeout");
+		set => Q("timeout", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 {
 	[IgnoreDataMember]
@@ -10670,7 +9733,7 @@ public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for Restore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 {
 	protected IRestoreRequest Self => this;
@@ -10720,7 +9783,7 @@ public partial interface IResumeFollowIndexRequest : IRequest<ResumeFollowIndexR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+///<summary>Request parameters for ResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
 public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
 {
 	protected IResumeFollowIndexRequest Self => this;
@@ -10760,7 +9823,7 @@ public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnaps
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+///<summary>Request parameters for RevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 {
 	protected IRevertModelSnapshotRequest Self => this;
@@ -10803,7 +9866,7 @@ public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
+///<summary>Request parameters for Rollover <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 {
 	protected IRolloverIndexRequest Self => this;
@@ -10880,7 +9943,7 @@ public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupRollupSearch <pre>TODO</pre></summary>
+///<summary>Request parameters for RollupSearch <pre>TODO</pre></summary>
 public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 {
 	protected IRollupSearchRequest Self => this;
@@ -11792,18 +10855,18 @@ public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
+///<summary>Request parameters for Segments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 {
 	protected ISegmentsRequest Self => this;
-	internal static ApiUrls Urls = new ApiUrls(new[]{"/_segments", "/{index}/_segments"});
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/segments", "/_cat/segments/{index}"});
 	internal override ApiUrls ApiUrls => Urls;
-	///<summary>/_segments</summary>
+	///<summary>/_cat/segments</summary>
 	public SegmentsRequest(): base()
 	{
 	}
 
-	///<summary>/{index}/_segments</summary>
+	///<summary>/_cat/segments/{index}</summary>
 	///<param name = "index">Optional, accepts null</param>
 	public SegmentsRequest(Indices index): base(r => r.Optional("index", index))
 	{
@@ -11813,36 +10876,136 @@ public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameter
 	[IgnoreDataMember]
 	Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 	// Request parameters
-	///<summary>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-	/// been specified)
-	///</summary>
-	public bool? AllowNoIndices
+	///<summary>The unit in which to display byte values</summary>
+	public Bytes? Bytes
 	{
-		get => Q<bool? >("allow_no_indices");
-		set => Q("allow_no_indices", value);
+		get => Q<Bytes? >("bytes");
+		set => Q("bytes", value);
 	}
 
-	///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-	public ExpandWildcards? ExpandWildcards
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
 	{
-		get => Q<ExpandWildcards? >("expand_wildcards");
-		set => Q("expand_wildcards", value);
+		get => Q<string>("format");
+		set => Q("format", value);
 	}
 
-	///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-	public bool? IgnoreUnavailable
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
 	{
-		get => Q<bool? >("ignore_unavailable");
-		set => Q("ignore_unavailable", value);
+		get => Q<string[]>("h");
+		set => Q("h", value);
 	}
 
-	///<summary>Includes detailed memory usage by Lucene.</summary>
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
 	public bool? Verbose
 	{
-		get => Q<bool? >("verbose");
-		set => Q("verbose", value);
+		get => Q<bool? >("v");
+		set => Q("v", value);
 	}
+} } }
+[InterfaceDataContract]
+public partial interface IShardsRequest : IRequest<ShardsRequestParameters>
+{
+	[IgnoreDataMember]
+	Indices Index
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Shards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+public partial class ShardsRequest : PlainRequestBase<ShardsRequestParameters>, IShardsRequest
+{
+	protected IShardsRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/shards", "/_cat/shards/{index}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/shards</summary>
+	public ShardsRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/shards/{index}</summary>
+	///<param name = "index">Optional, accepts null</param>
+	public ShardsRequest(Indices index): base(r => r.Optional("index", index))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Indices IShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	///<summary>The unit in which to display byte values</summary>
+	public Bytes? Bytes
+	{
+		get => Q<Bytes? >("bytes");
+		set => Q("bytes", value);
+	}
+
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
 } } }
 [InterfaceDataContract]
 public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
@@ -11861,7 +11024,7 @@ public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
+///<summary>Request parameters for Shrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 {
 	protected IShrinkIndexRequest Self => this;
@@ -11918,7 +11081,7 @@ public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+///<summary>Request parameters for Simulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 {
 	protected ISimulatePipelineRequest Self => this;
@@ -11963,7 +11126,7 @@ public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 {
 	protected ISnapshotRequest Self => this;
@@ -12003,6 +11166,88 @@ public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameter
 	}
 } } }
 [InterfaceDataContract]
+public partial interface ISnapshotsRequest : IRequest<SnapshotsRequestParameters>
+{
+	[IgnoreDataMember]
+	Names RepositoryName
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Snapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
+public partial class SnapshotsRequest : PlainRequestBase<SnapshotsRequestParameters>, ISnapshotsRequest
+{
+	protected ISnapshotsRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/snapshots", "/_cat/snapshots/{repository}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/snapshots</summary>
+	public SnapshotsRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/snapshots/{repository}</summary>
+	///<param name = "repository">Optional, accepts null</param>
+	public SnapshotsRequest(Names repository): base(r => r.Optional("repository", repository))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Names ISnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Set to true to ignore unavailable snapshots</summary>
+	public bool? IgnoreUnavailable
+	{
+		get => Q<bool? >("ignore_unavailable");
+		set => Q("ignore_unavailable", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>
 {
 	[IgnoreDataMember]
@@ -12019,7 +11264,7 @@ public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for Status <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 {
 	protected ISnapshotStatusRequest Self => this;
@@ -12366,7 +11611,7 @@ public partial interface ISplitIndexRequest : IRequest<SplitIndexRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+///<summary>Request parameters for Split <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
 public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
 {
 	protected ISplitIndexRequest Self => this;
@@ -12418,7 +11663,7 @@ public partial interface IStartBasicLicenseRequest : IRequest<StartBasicLicenseR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicensePostStartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for PostStartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 {
 	protected IStartBasicLicenseRequest Self => this;
@@ -12444,7 +11689,7 @@ public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+///<summary>Request parameters for StartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 {
 	protected IStartDatafeedRequest Self => this;
@@ -12478,7 +11723,7 @@ public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupStartJob <pre>TODO</pre></summary>
+///<summary>Request parameters for StartJob <pre>TODO</pre></summary>
 public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 {
 	protected IStartRollupJobRequest Self => this;
@@ -12507,7 +11752,7 @@ public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseR
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for LicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+///<summary>Request parameters for PostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 {
 	protected IStartTrialLicenseRequest Self => this;
@@ -12535,7 +11780,7 @@ public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
+///<summary>Request parameters for Start <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 {
 	protected IStartWatcherRequest Self => this;
@@ -12543,6 +11788,160 @@ public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestP
 	internal override ApiUrls ApiUrls => Urls;
 // values part of the url path
 // Request parameters
+} } }
+[InterfaceDataContract]
+public partial interface IStateRequest : IRequest<StateRequestParameters>
+{
+	[IgnoreDataMember]
+	Metrics Metric
+	{
+		get;
+	}
+
+	[IgnoreDataMember]
+	Indices Index
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for State <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+public partial class StateRequest : PlainRequestBase<StateRequestParameters>, IStateRequest
+{
+	protected IStateRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cluster/state</summary>
+	public StateRequest(): base()
+	{
+	}
+
+	///<summary>/_cluster/state/{metric}</summary>
+	///<param name = "metric">Optional, accepts null</param>
+	public StateRequest(Metrics metric): base(r => r.Optional("metric", metric))
+	{
+	}
+
+	///<summary>/_cluster/state/{metric}/{index}</summary>
+	///<param name = "metric">Optional, accepts null</param>
+	///<param name = "index">Optional, accepts null</param>
+	public StateRequest(Metrics metric, Indices index): base(r => r.Optional("metric", metric).Optional("index", index))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Metrics IStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+	[IgnoreDataMember]
+	Indices IStateRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	///<summary>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+	/// been specified)
+	///</summary>
+	public bool? AllowNoIndices
+	{
+		get => Q<bool? >("allow_no_indices");
+		set => Q("allow_no_indices", value);
+	}
+
+	///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+	public ExpandWildcards? ExpandWildcards
+	{
+		get => Q<ExpandWildcards? >("expand_wildcards");
+		set => Q("expand_wildcards", value);
+	}
+
+	///<summary>Return settings in flat format (default: false)</summary>
+	public bool? FlatSettings
+	{
+		get => Q<bool? >("flat_settings");
+		set => Q("flat_settings", value);
+	}
+
+	///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+	public bool? IgnoreUnavailable
+	{
+		get => Q<bool? >("ignore_unavailable");
+		set => Q("ignore_unavailable", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Specify timeout for connection to master</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+	public long? WaitForMetadataVersion
+	{
+		get => Q<long? >("wait_for_metadata_version");
+		set => Q("wait_for_metadata_version", value);
+	}
+
+	///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+	public Time WaitForTimeout
+	{
+		get => Q<Time>("wait_for_timeout");
+		set => Q("wait_for_timeout", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
+public partial interface IStatsRequest : IRequest<StatsRequestParameters>
+{
+	[IgnoreDataMember]
+	NodeIds NodeId
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+public partial class StatsRequest : PlainRequestBase<StatsRequestParameters>, IStatsRequest
+{
+	protected IStatsRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/stats", "/_cluster/stats/nodes/{node_id}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cluster/stats</summary>
+	public StatsRequest(): base()
+	{
+	}
+
+	///<summary>/_cluster/stats/nodes/{node_id}</summary>
+	///<param name = "node_id">Optional, accepts null</param>
+	public StatsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	NodeIds IStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+	// Request parameters
+	///<summary>Return settings in flat format (default: false)</summary>
+	public bool? FlatSettings
+	{
+		get => Q<bool? >("flat_settings");
+		set => Q("flat_settings", value);
+	}
+
+	///<summary>Explicit operation timeout</summary>
+	public Time Timeout
+	{
+		get => Q<Time>("timeout");
+		set => Q("timeout", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
 } } }
 [InterfaceDataContract]
 public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
@@ -12555,7 +11954,7 @@ public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+///<summary>Request parameters for StopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 {
 	protected IStopDatafeedRequest Self => this;
@@ -12595,7 +11994,7 @@ public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for RollupStopJob <pre>TODO</pre></summary>
+///<summary>Request parameters for StopJob <pre>TODO</pre></summary>
 public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 {
 	protected IStopRollupJobRequest Self => this;
@@ -12637,7 +12036,7 @@ public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
+///<summary>Request parameters for Stop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 {
 	protected IStopWatcherRequest Self => this;
@@ -12657,7 +12056,7 @@ public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
+///<summary>Request parameters for FlushSynced <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 {
 	protected ISyncedFlushRequest Self => this;
@@ -12701,6 +12100,87 @@ public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestPar
 		get => Q<bool? >("ignore_unavailable");
 		set => Q("ignore_unavailable", value);
 	}
+} } }
+[InterfaceDataContract]
+public partial interface ITasksRequest : IRequest<TasksRequestParameters>
+{
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for Tasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+public partial class TasksRequest : PlainRequestBase<TasksRequestParameters>, ITasksRequest
+{
+	protected ITasksRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/tasks"});
+	internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
+	public string[] Actions
+	{
+		get => Q<string[]>("actions");
+		set => Q("actions", value);
+	}
+
+	///<summary>Return detailed task information (default: false)</summary>
+	public bool? Detailed
+	{
+		get => Q<bool? >("detailed");
+		set => Q("detailed", value);
+	}
+
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>
+	/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+	/// connecting to, leave empty to get information from all nodes
+	///</summary>
+	public string[] NodeId
+	{
+		get => Q<string[]>("node_id");
+		set => Q("node_id", value);
+	}
+
+	///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
+	public long? ParentTask
+	{
+		get => Q<long? >("parent_task");
+		set => Q("parent_task", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
 } } }
 [InterfaceDataContract]
 public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters>
@@ -12872,12 +12352,101 @@ public partial class TermVectorsRequest<TDocument> : TermVectorsRequest, ITermVe
 	partial void DocumentFromPath(TDocument document);
 } } }
 [InterfaceDataContract]
+public partial interface IThreadPoolRequest : IRequest<ThreadPoolRequestParameters>
+{
+	[IgnoreDataMember]
+	Names ThreadPoolPatterns
+	{
+		get;
+	}
+//render partial methods as interface properties forcing us to implement them on request and request descriptors
+}
+
+///<summary>Request parameters for ThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+public partial class ThreadPoolRequest : PlainRequestBase<ThreadPoolRequestParameters>, IThreadPoolRequest
+{
+	protected IThreadPoolRequest Self => this;
+	internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/thread_pool", "/_cat/thread_pool/{thread_pool_patterns}"});
+	internal override ApiUrls ApiUrls => Urls;
+	///<summary>/_cat/thread_pool</summary>
+	public ThreadPoolRequest(): base()
+	{
+	}
+
+	///<summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
+	///<param name = "thread_pool_patterns">Optional, accepts null</param>
+	public ThreadPoolRequest(Names thread_pool_patterns): base(r => r.Optional("thread_pool_patterns", thread_pool_patterns))
+	{
+	}
+
+	// values part of the url path
+	[IgnoreDataMember]
+	Names IThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
+	// Request parameters
+	///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+	public string Format
+	{
+		get => Q<string>("format");
+		set => Q("format", value);
+	}
+
+	///<summary>Comma-separated list of column names to display</summary>
+	public string[] Headers
+	{
+		get => Q<string[]>("h");
+		set => Q("h", value);
+	}
+
+	///<summary>Return help information</summary>
+	public bool? Help
+	{
+		get => Q<bool? >("help");
+		set => Q("help", value);
+	}
+
+	///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+	public bool? Local
+	{
+		get => Q<bool? >("local");
+		set => Q("local", value);
+	}
+
+	///<summary>Explicit operation timeout for connection to master node</summary>
+	public Time MasterTimeout
+	{
+		get => Q<Time>("master_timeout");
+		set => Q("master_timeout", value);
+	}
+
+	///<summary>The multiplier in which to display values</summary>
+	public Size? Size
+	{
+		get => Q<Size? >("size");
+		set => Q("size", value);
+	}
+
+	///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+	public string[] SortByColumns
+	{
+		get => Q<string[]>("s");
+		set => Q("s", value);
+	}
+
+	///<summary>Verbose mode. Display column headers</summary>
+	public bool? Verbose
+	{
+		get => Q<bool? >("v");
+		set => Q("v", value);
+	}
+//TODO THIS METHOD IS UNMAPPED!
+} } }
+[InterfaceDataContract]
 public partial interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
 {
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+///<summary>Request parameters for Translate <pre>Translate SQL into Elasticsearch queries</pre></summary>
 public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 {
 	protected ITranslateSqlRequest Self => this;
@@ -12903,7 +12472,7 @@ public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
+///<summary>Request parameters for ExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 {
 	protected ITypeExistsRequest Self => this;
@@ -12970,7 +12539,7 @@ public partial interface IUnfollowIndexRequest : IRequest<UnfollowIndexRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+///<summary>Request parameters for Unfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
 public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
 {
 	protected IUnfollowIndexRequest Self => this;
@@ -13622,7 +13191,7 @@ public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequest
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+///<summary>Request parameters for UpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 {
 	protected IUpdateDatafeedRequest Self => this;
@@ -13656,7 +13225,7 @@ public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSetti
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
+///<summary>Request parameters for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 {
 	protected IUpdateIndexSettingsRequest Self => this;
@@ -13740,7 +13309,7 @@ public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+///<summary>Request parameters for UpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 {
 	protected IUpdateJobRequest Self => this;
@@ -13780,7 +13349,7 @@ public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnaps
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+///<summary>Request parameters for UpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 {
 	protected IUpdateModelSnapshotRequest Self => this;
@@ -13967,7 +13536,7 @@ public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
+///<summary>Request parameters for Upgrade <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 {
 	protected IUpgradeRequest Self => this;
@@ -14037,7 +13606,7 @@ public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestPa
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
+///<summary>Request parameters for GetUpgrade <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 {
 	protected IUpgradeStatusRequest Self => this;
@@ -14088,7 +13657,7 @@ public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlValidateDetector <pre>TODO</pre></summary>
+///<summary>Request parameters for ValidateDetector <pre>TODO</pre></summary>
 public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 {
 	protected IValidateDetectorRequest Self => this;
@@ -14103,7 +13672,7 @@ public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParame
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for MlValidate <pre>TODO</pre></summary>
+///<summary>Request parameters for Validate <pre>TODO</pre></summary>
 public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 {
 	protected IValidateJobRequest Self => this;
@@ -14127,7 +13696,7 @@ public partial interface IValidateQueryRequest<T> : IValidateQueryRequest
 {
 }
 
-///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
+///<summary>Request parameters for ValidateQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 {
 	protected IValidateQueryRequest Self => this;
@@ -14250,7 +13819,7 @@ public partial class ValidateQueryRequest<T> : ValidateQueryRequest, IValidateQu
 	{
 	}
 } } }
-///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
+///<summary>Request parameters for ValidateQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 {
 	protected IValidateQueryRequest Self => this;
@@ -14369,7 +13938,7 @@ public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryReq
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+///<summary>Request parameters for VerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 {
 	protected IVerifyRepositoryRequest Self => this;
@@ -14416,7 +13985,7 @@ public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestPara
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for WatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
+///<summary>Request parameters for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 {
 	protected IWatcherStatsRequest Self => this;
@@ -14450,7 +14019,7 @@ public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
+///<summary>Request parameters for Info <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 {
 	protected IXPackInfoRequest Self => this;
@@ -14471,7 +14040,7 @@ public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParamete
 //render partial methods as interface properties forcing us to implement them on request and request descriptors
 }
 
-///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
+///<summary>Request parameters for Usage <pre>Retrieve information about xpack features usage</pre></summary>
 public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 {
 	protected IXPackUsageRequest Self => this;

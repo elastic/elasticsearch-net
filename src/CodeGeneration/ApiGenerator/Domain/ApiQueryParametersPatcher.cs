@@ -9,7 +9,7 @@ namespace ApiGenerator.Domain
 	public static class ApiQueryParametersPatcher
 	{
 		public static SortedDictionary<string, QueryParameters> Patch(
-			string urlPath,
+			string endpointName,
 			IDictionary<string, QueryParameters> source,
 			IEndpointOverrides overrides,
 			bool checkCommon = true
@@ -26,7 +26,7 @@ namespace ApiGenerator.Domain
 			var obsoleteLookup = CreateObsoleteLookup(globalOverrides, overrides, declaredKeys);
 
 			var patchedParams = new SortedDictionary<string, QueryParameters>();
-			var name = overrides?.GetType().Name ?? urlPath ?? "unknown";
+			var name = overrides?.GetType().Name ?? endpointName ?? "unknown";
 			foreach (var kv in source)
 			{
 				var queryStringKey = kv.Key;

@@ -13,8 +13,6 @@ namespace ApiGenerator.Domain
 		
 	}
 	
-	
-	
 	public class CsharpMethod
 	{
 		public string Arguments { get; set; }

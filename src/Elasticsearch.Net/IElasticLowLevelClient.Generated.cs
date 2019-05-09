@@ -39,375 +39,375 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/aliases <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatAliases<TResponse>(CatAliasesRequestParameters requestParameters = null)
+		TResponse Aliases<TResponse>(AliasesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/aliases <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatAliasesAsync<TResponse>(CatAliasesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AliasesAsync<TResponse>(AliasesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/aliases/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</para></summary>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatAliases<TResponse>(string name, CatAliasesRequestParameters requestParameters = null)
+		TResponse Aliases<TResponse>(string name, AliasesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/aliases/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</para></summary>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatAliasesAsync<TResponse>(string name, CatAliasesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AliasesAsync<TResponse>(string name, AliasesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/allocation <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatAllocation<TResponse>(CatAllocationRequestParameters requestParameters = null)
+		TResponse Allocation<TResponse>(AllocationRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/allocation <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatAllocationAsync<TResponse>(CatAllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AllocationAsync<TResponse>(AllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/allocation/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatAllocation<TResponse>(string node_id, CatAllocationRequestParameters requestParameters = null)
+		TResponse Allocation<TResponse>(string node_id, AllocationRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/allocation/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatAllocationAsync<TResponse>(string node_id, CatAllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AllocationAsync<TResponse>(string node_id, AllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatCount<TResponse>(CatCountRequestParameters requestParameters = null)
+		TResponse Count<TResponse>(CountRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatCountAsync<TResponse>(CatCountRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CountAsync<TResponse>(CountRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/count/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatCount<TResponse>(string index, CatCountRequestParameters requestParameters = null)
+		TResponse Count<TResponse>(string index, CountRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/count/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatCountAsync<TResponse>(string index, CatCountRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CountAsync<TResponse>(string index, CountRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/fielddata <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatFielddata<TResponse>(CatFielddataRequestParameters requestParameters = null)
+		TResponse Fielddata<TResponse>(FielddataRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/fielddata <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatFielddataAsync<TResponse>(CatFielddataRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FielddataAsync<TResponse>(FielddataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/fielddata/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para></summary>
 		///<param name = "fields">A comma-separated list of fields to return the fielddata size</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatFielddata<TResponse>(string fields, CatFielddataRequestParameters requestParameters = null)
+		TResponse Fielddata<TResponse>(string fields, FielddataRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/fielddata/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para></summary>
 		///<param name = "fields">A comma-separated list of fields to return the fielddata size</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatFielddataAsync<TResponse>(string fields, CatFielddataRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FielddataAsync<TResponse>(string fields, FielddataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatHealth<TResponse>(CatHealthRequestParameters requestParameters = null)
+		TResponse Health<TResponse>(HealthRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatHealthAsync<TResponse>(CatHealthRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HealthAsync<TResponse>(HealthRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatHelp<TResponse>(CatHelpRequestParameters requestParameters = null)
+		TResponse Help<TResponse>(HelpRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatHelpAsync<TResponse>(CatHelpRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HelpAsync<TResponse>(HelpRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/indices <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatIndices<TResponse>(CatIndicesRequestParameters requestParameters = null)
+		TResponse IndicesForAll<TResponse>(IndicesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/indices <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatIndicesAsync<TResponse>(CatIndicesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> IndicesForAllAsync<TResponse>(IndicesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/indices/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatIndices<TResponse>(string index, CatIndicesRequestParameters requestParameters = null)
+		TResponse Indices<TResponse>(string index, IndicesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/indices/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatIndicesAsync<TResponse>(string index, CatIndicesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> IndicesAsync<TResponse>(string index, IndicesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/master <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatMaster<TResponse>(CatMasterRequestParameters requestParameters = null)
+		TResponse Master<TResponse>(MasterRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/master <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatMasterAsync<TResponse>(CatMasterRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> MasterAsync<TResponse>(MasterRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/nodeattrs <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatNodeattrs<TResponse>(CatNodeAttributesRequestParameters requestParameters = null)
+		TResponse Nodeattrs<TResponse>(CatNodeAttributesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/nodeattrs <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatNodeattrsAsync<TResponse>(CatNodeAttributesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> NodeattrsAsync<TResponse>(CatNodeAttributesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/nodes <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatNodes<TResponse>(CatNodesRequestParameters requestParameters = null)
+		TResponse NodesForAll<TResponse>(NodesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/nodes <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatNodesAsync<TResponse>(CatNodesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> NodesForAllAsync<TResponse>(NodesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/pending_tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatPendingTasks<TResponse>(CatPendingTasksRequestParameters requestParameters = null)
+		TResponse PendingTasks<TResponse>(PendingTasksRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/pending_tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatPendingTasksAsync<TResponse>(CatPendingTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PendingTasksAsync<TResponse>(PendingTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/plugins <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatPlugins<TResponse>(CatPluginsRequestParameters requestParameters = null)
+		TResponse Plugins<TResponse>(PluginsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/plugins <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatPluginsAsync<TResponse>(CatPluginsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PluginsAsync<TResponse>(PluginsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatRecovery<TResponse>(CatRecoveryRequestParameters requestParameters = null)
+		TResponse Recovery<TResponse>(RecoveryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatRecoveryAsync<TResponse>(CatRecoveryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RecoveryAsync<TResponse>(RecoveryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/recovery/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatRecovery<TResponse>(string index, CatRecoveryRequestParameters requestParameters = null)
+		TResponse Recovery<TResponse>(string index, RecoveryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/recovery/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatRecoveryAsync<TResponse>(string index, CatRecoveryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RecoveryAsync<TResponse>(string index, RecoveryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/repositories <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatRepositories<TResponse>(CatRepositoriesRequestParameters requestParameters = null)
+		TResponse Repositories<TResponse>(RepositoriesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/repositories <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatRepositoriesAsync<TResponse>(CatRepositoriesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RepositoriesAsync<TResponse>(RepositoriesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatSegments<TResponse>(CatSegmentsRequestParameters requestParameters = null)
+		TResponse Segments<TResponse>(SegmentsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatSegmentsAsync<TResponse>(CatSegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SegmentsAsync<TResponse>(SegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/segments/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatSegments<TResponse>(string index, CatSegmentsRequestParameters requestParameters = null)
+		TResponse Segments<TResponse>(string index, SegmentsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/segments/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatSegmentsAsync<TResponse>(string index, CatSegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SegmentsAsync<TResponse>(string index, SegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/shards <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatShards<TResponse>(CatShardsRequestParameters requestParameters = null)
+		TResponse Shards<TResponse>(ShardsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/shards <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatShardsAsync<TResponse>(CatShardsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ShardsAsync<TResponse>(ShardsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/shards/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatShards<TResponse>(string index, CatShardsRequestParameters requestParameters = null)
+		TResponse Shards<TResponse>(string index, ShardsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/shards/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to limit the returned information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatShardsAsync<TResponse>(string index, CatShardsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ShardsAsync<TResponse>(string index, ShardsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/snapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatSnapshots<TResponse>(CatSnapshotsRequestParameters requestParameters = null)
+		TResponse Snapshots<TResponse>(SnapshotsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/snapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatSnapshotsAsync<TResponse>(CatSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SnapshotsAsync<TResponse>(SnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/snapshots/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</para></summary>
 		///<param name = "repository">Name of repository from which to fetch the snapshot information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatSnapshots<TResponse>(string repository, CatSnapshotsRequestParameters requestParameters = null)
+		TResponse Snapshots<TResponse>(string repository, SnapshotsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/snapshots/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</para></summary>
 		///<param name = "repository">Name of repository from which to fetch the snapshot information</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatSnapshotsAsync<TResponse>(string repository, CatSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SnapshotsAsync<TResponse>(string repository, SnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatTasks<TResponse>(CatTasksRequestParameters requestParameters = null)
+		TResponse Tasks<TResponse>(TasksRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatTasksAsync<TResponse>(CatTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> TasksAsync<TResponse>(TasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/templates <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatTemplates<TResponse>(CatTemplatesRequestParameters requestParameters = null)
+		TResponse Templates<TResponse>(CatTemplatesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/templates <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatTemplatesAsync<TResponse>(CatTemplatesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> TemplatesAsync<TResponse>(CatTemplatesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/templates/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</para></summary>
 		///<param name = "name">A pattern that returned template names must match</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatTemplates<TResponse>(string name, CatTemplatesRequestParameters requestParameters = null)
+		TResponse Templates<TResponse>(string name, CatTemplatesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/templates/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</para></summary>
 		///<param name = "name">A pattern that returned template names must match</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatTemplatesAsync<TResponse>(string name, CatTemplatesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> TemplatesAsync<TResponse>(string name, CatTemplatesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/thread_pool <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatThreadPool<TResponse>(CatThreadPoolRequestParameters requestParameters = null)
+		TResponse ThreadPool<TResponse>(ThreadPoolRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/thread_pool <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatThreadPoolAsync<TResponse>(CatThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ThreadPoolAsync<TResponse>(ThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/thread_pool/{thread_pool_patterns} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
 		///<param name = "thread_pool_patterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CatThreadPool<TResponse>(string thread_pool_patterns, CatThreadPoolRequestParameters requestParameters = null)
+		TResponse ThreadPool<TResponse>(string thread_pool_patterns, ThreadPoolRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cat/thread_pool/{thread_pool_patterns} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
 		///<param name = "thread_pool_patterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CatThreadPoolAsync<TResponse>(string thread_pool_patterns, CatThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ThreadPoolAsync<TResponse>(string thread_pool_patterns, ThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrDeleteAutoFollowPattern<TResponse>(string name, DeleteAutoFollowPatternRequestParameters requestParameters = null)
+		TResponse DeleteAutoFollowPattern<TResponse>(string name, DeleteAutoFollowPatternRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrDeleteAutoFollowPatternAsync<TResponse>(string name, DeleteAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteAutoFollowPatternAsync<TResponse>(string name, DeleteAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_ccr/follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
 		///<param name = "index">The name of the follower index</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrFollow<TResponse>(string index, PostData body, CreateFollowIndexRequestParameters requestParameters = null)
+		TResponse Follow<TResponse>(string index, PostData body, CreateFollowIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_ccr/follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
 		///<param name = "index">The name of the follower index</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrFollowAsync<TResponse>(string index, PostData body, CreateFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FollowAsync<TResponse>(string index, PostData body, CreateFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrFollowStats<TResponse>(string index, FollowIndexStatsRequestParameters requestParameters = null)
+		TResponse FollowStats<TResponse>(string index, FollowIndexStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrFollowStatsAsync<TResponse>(string index, FollowIndexStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FollowStatsAsync<TResponse>(string index, FollowIndexStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrGetAutoFollowPattern<TResponse>(GetAutoFollowPatternRequestParameters requestParameters = null)
+		TResponse GetAutoFollowPattern<TResponse>(GetAutoFollowPatternRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrGetAutoFollowPatternAsync<TResponse>(GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAutoFollowPatternAsync<TResponse>(GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrGetAutoFollowPattern<TResponse>(string name, GetAutoFollowPatternRequestParameters requestParameters = null)
+		TResponse GetAutoFollowPattern<TResponse>(string name, GetAutoFollowPatternRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrGetAutoFollowPatternAsync<TResponse>(string name, GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAutoFollowPatternAsync<TResponse>(string name, GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 		///<param name = "index">The name of the follower index that should pause following its leader index.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrPauseFollow<TResponse>(string index, PauseFollowIndexRequestParameters requestParameters = null)
+		TResponse PauseFollow<TResponse>(string index, PauseFollowIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 		///<param name = "index">The name of the follower index that should pause following its leader index.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrPauseFollowAsync<TResponse>(string index, PauseFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PauseFollowAsync<TResponse>(string index, PauseFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "body">The specification of the auto follow pattern</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrPutAutoFollowPattern<TResponse>(string name, PostData body, CreateAutoFollowPatternRequestParameters requestParameters = null)
+		TResponse PutAutoFollowPattern<TResponse>(string name, PostData body, CreateAutoFollowPatternRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "body">The specification of the auto follow pattern</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrPutAutoFollowPatternAsync<TResponse>(string name, PostData body, CreateAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutAutoFollowPatternAsync<TResponse>(string name, PostData body, CreateAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ccr/resume_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
 		///<param name = "index">The name of the follow index to resume following.</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrResumeFollow<TResponse>(string index, PostData body, ResumeFollowIndexRequestParameters requestParameters = null)
+		TResponse ResumeFollow<TResponse>(string index, PostData body, ResumeFollowIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ccr/resume_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
 		///<param name = "index">The name of the follow index to resume following.</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrResumeFollowAsync<TResponse>(string index, PostData body, ResumeFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ResumeFollowAsync<TResponse>(string index, PostData body, ResumeFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrStats<TResponse>(CcrStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(CcrStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrStatsAsync<TResponse>(CcrStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(CcrStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ccr/unfollow <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "index">The name of the follower index that should be turned into a regular index.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse CcrUnfollow<TResponse>(string index, UnfollowIndexRequestParameters requestParameters = null)
+		TResponse Unfollow<TResponse>(string index, UnfollowIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ccr/unfollow <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "index">The name of the follower index that should be turned into a regular index.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> CcrUnfollowAsync<TResponse>(string index, UnfollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UnfollowAsync<TResponse>(string index, UnfollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_search/scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
 		///<param name = "body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
@@ -422,122 +422,122 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_cluster/allocation/explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
 		///<param name = "body">The index, shard, and primary flag to explain. Empty means &#x27;explain the first unassigned shard&#x27;</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterAllocationExplain<TResponse>(PostData body, ClusterAllocationExplainRequestParameters requestParameters = null)
+		TResponse AllocationExplain<TResponse>(PostData body, AllocationExplainRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/allocation/explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
 		///<param name = "body">The index, shard, and primary flag to explain. Empty means &#x27;explain the first unassigned shard&#x27;</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterAllocationExplainAsync<TResponse>(PostData body, ClusterAllocationExplainRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AllocationExplainAsync<TResponse>(PostData body, AllocationExplainRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterGetSettings<TResponse>(ClusterGetSettingsRequestParameters requestParameters = null)
+		TResponse GetSettings<TResponse>(GetSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterGetSettingsAsync<TResponse>(ClusterGetSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetSettingsAsync<TResponse>(GetSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterHealth<TResponse>(ClusterHealthRequestParameters requestParameters = null)
+		TResponse Health<TResponse>(HealthRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterHealthAsync<TResponse>(ClusterHealthRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HealthAsync<TResponse>(HealthRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/health/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 		///<param name = "index">Limit the information returned to a specific index</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterHealth<TResponse>(string index, ClusterHealthRequestParameters requestParameters = null)
+		TResponse Health<TResponse>(string index, HealthRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/health/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 		///<param name = "index">Limit the information returned to a specific index</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterHealthAsync<TResponse>(string index, ClusterHealthRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HealthAsync<TResponse>(string index, HealthRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/pending_tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterPendingTasks<TResponse>(ClusterPendingTasksRequestParameters requestParameters = null)
+		TResponse PendingTasks<TResponse>(PendingTasksRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/pending_tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterPendingTasksAsync<TResponse>(ClusterPendingTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PendingTasksAsync<TResponse>(PendingTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_cluster/settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 		///<param name = "body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterPutSettings<TResponse>(PostData body, ClusterPutSettingsRequestParameters requestParameters = null)
+		TResponse PutSettings<TResponse>(PostData body, ClusterPutSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_cluster/settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 		///<param name = "body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterPutSettingsAsync<TResponse>(PostData body, ClusterPutSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutSettingsAsync<TResponse>(PostData body, ClusterPutSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_remote/info <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterRemoteInfo<TResponse>(RemoteInfoRequestParameters requestParameters = null)
+		TResponse RemoteInfo<TResponse>(RemoteInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_remote/info <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterRemoteInfoAsync<TResponse>(RemoteInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RemoteInfoAsync<TResponse>(RemoteInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_cluster/reroute <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
 		///<param name = "body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterReroute<TResponse>(PostData body, ClusterRerouteRequestParameters requestParameters = null)
+		TResponse Reroute<TResponse>(PostData body, RerouteRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_cluster/reroute <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
 		///<param name = "body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterRerouteAsync<TResponse>(PostData body, ClusterRerouteRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RerouteAsync<TResponse>(PostData body, RerouteRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/state <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterState<TResponse>(ClusterStateRequestParameters requestParameters = null)
+		TResponse State<TResponse>(StateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/state <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterStateAsync<TResponse>(ClusterStateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StateAsync<TResponse>(StateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/state/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterState<TResponse>(string metric, ClusterStateRequestParameters requestParameters = null)
+		TResponse State<TResponse>(string metric, StateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/state/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterStateAsync<TResponse>(string metric, ClusterStateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StateAsync<TResponse>(string metric, StateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/state/{metric}/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterState<TResponse>(string metric, string index, ClusterStateRequestParameters requestParameters = null)
+		TResponse State<TResponse>(string metric, string index, StateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/state/{metric}/{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterStateAsync<TResponse>(string metric, string index, ClusterStateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StateAsync<TResponse>(string metric, string index, StateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterStats<TResponse>(ClusterStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(StatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterStatsAsync<TResponse>(ClusterStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(StatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/stats/nodes/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse ClusterStats<TResponse>(string node_id, ClusterStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string node_id, StatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_cluster/stats/nodes/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ClusterStatsAsync<TResponse>(string node_id, ClusterStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string node_id, StatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 		///<param name = "body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -713,13 +713,13 @@ namespace Elasticsearch.Net
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">Graph Query DSL</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse GraphExplore<TResponse>(string index, PostData body, GraphExploreRequestParameters requestParameters = null)
+		TResponse Explore<TResponse>(string index, PostData body, ExploreRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_graph/explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">Graph Query DSL</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> GraphExploreAsync<TResponse>(string index, PostData body, GraphExploreRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExploreAsync<TResponse>(string index, PostData body, ExploreRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_doc/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
@@ -750,656 +750,656 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 		///<param name = "body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesAnalyzeForAll<TResponse>(PostData body, AnalyzeRequestParameters requestParameters = null)
+		TResponse Analyze<TResponse>(PostData body, AnalyzeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 		///<param name = "body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesAnalyzeForAllAsync<TResponse>(PostData body, AnalyzeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AnalyzeAsync<TResponse>(PostData body, AnalyzeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 		///<param name = "index">The name of the index to scope the operation</param>
 		///<param name = "body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesAnalyze<TResponse>(string index, PostData body, AnalyzeRequestParameters requestParameters = null)
+		TResponse Analyze<TResponse>(string index, PostData body, AnalyzeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 		///<param name = "index">The name of the index to scope the operation</param>
 		///<param name = "body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesAnalyzeAsync<TResponse>(string index, PostData body, AnalyzeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AnalyzeAsync<TResponse>(string index, PostData body, AnalyzeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_cache/clear <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesClearCacheForAll<TResponse>(ClearCacheRequestParameters requestParameters = null)
+		TResponse ClearCache<TResponse>(ClearCacheRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_cache/clear <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesClearCacheForAllAsync<TResponse>(ClearCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ClearCacheAsync<TResponse>(ClearCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_cache/clear <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 		///<param name = "index">A comma-separated list of index name to limit the operation</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesClearCache<TResponse>(string index, ClearCacheRequestParameters requestParameters = null)
+		TResponse ClearCache<TResponse>(string index, ClearCacheRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_cache/clear <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 		///<param name = "index">A comma-separated list of index name to limit the operation</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesClearCacheAsync<TResponse>(string index, ClearCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ClearCacheAsync<TResponse>(string index, ClearCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 		///<param name = "index">A comma separated list of indices to close</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesClose<TResponse>(string index, CloseIndexRequestParameters requestParameters = null)
+		TResponse Close<TResponse>(string index, CloseIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 		///<param name = "index">A comma separated list of indices to close</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesCloseAsync<TResponse>(string index, CloseIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CloseAsync<TResponse>(string index, CloseIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesCreate<TResponse>(string index, PostData body, CreateIndexRequestParameters requestParameters = null)
+		TResponse Create<TResponse>(string index, PostData body, CreateIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesCreateAsync<TResponse>(string index, PostData body, CreateIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CreateAsync<TResponse>(string index, PostData body, CreateIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 		///<param name = "index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesDelete<TResponse>(string index, DeleteIndexRequestParameters requestParameters = null)
+		TResponse Delete<TResponse>(string index, DeleteIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 		///<param name = "index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesDeleteAsync<TResponse>(string index, DeleteIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteAsync<TResponse>(string index, DeleteIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name = "name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesDeleteAlias<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null)
+		TResponse DeleteAlias<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name = "name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesDeleteAliasAsync<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteAliasAsync<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesDeleteTemplateForAll<TResponse>(string name, DeleteIndexTemplateRequestParameters requestParameters = null)
+		TResponse DeleteTemplate<TResponse>(string name, DeleteIndexTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesDeleteTemplateForAllAsync<TResponse>(string name, DeleteIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteTemplateAsync<TResponse>(string name, DeleteIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesExists<TResponse>(string index, IndexExistsRequestParameters requestParameters = null)
+		TResponse Exists<TResponse>(string index, IndexExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesExistsAsync<TResponse>(string index, IndexExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExistsAsync<TResponse>(string index, IndexExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesExistsAliasForAll<TResponse>(string name, AliasExistsRequestParameters requestParameters = null)
+		TResponse ExistsAlias<TResponse>(string name, AliasExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesExistsAliasForAllAsync<TResponse>(string name, AliasExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExistsAliasAsync<TResponse>(string name, AliasExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to filter aliases</param>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesExistsAlias<TResponse>(string index, string name, AliasExistsRequestParameters requestParameters = null)
+		TResponse ExistsAlias<TResponse>(string index, string name, AliasExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to filter aliases</param>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesExistsAliasAsync<TResponse>(string index, string name, AliasExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExistsAliasAsync<TResponse>(string index, string name, AliasExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The comma separated names of the index templates</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesExistsTemplateForAll<TResponse>(string name, IndexTemplateExistsRequestParameters requestParameters = null)
+		TResponse ExistsTemplate<TResponse>(string name, IndexTemplateExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The comma separated names of the index templates</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesExistsTemplateForAllAsync<TResponse>(string name, IndexTemplateExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExistsTemplateAsync<TResponse>(string name, IndexTemplateExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name = "type">A comma-separated list of document types to check</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesExistsType<TResponse>(string index, string type, TypeExistsRequestParameters requestParameters = null)
+		TResponse ExistsType<TResponse>(string index, string type, TypeExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name = "type">A comma-separated list of document types to check</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesExistsTypeAsync<TResponse>(string index, string type, TypeExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExistsTypeAsync<TResponse>(string index, string type, TypeExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesFlushForAll<TResponse>(FlushRequestParameters requestParameters = null)
+		TResponse Flush<TResponse>(FlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesFlushForAllAsync<TResponse>(FlushRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FlushAsync<TResponse>(FlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesFlush<TResponse>(string index, FlushRequestParameters requestParameters = null)
+		TResponse Flush<TResponse>(string index, FlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesFlushAsync<TResponse>(string index, FlushRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FlushAsync<TResponse>(string index, FlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesFlushSyncedForAll<TResponse>(SyncedFlushRequestParameters requestParameters = null)
+		TResponse FlushSynced<TResponse>(SyncedFlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesFlushSyncedForAllAsync<TResponse>(SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FlushSyncedAsync<TResponse>(SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesFlushSynced<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null)
+		TResponse FlushSynced<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesFlushSyncedAsync<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FlushSyncedAsync<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_forcemerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesForcemergeForAll<TResponse>(ForceMergeRequestParameters requestParameters = null)
+		TResponse Forcemerge<TResponse>(ForceMergeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_forcemerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesForcemergeForAllAsync<TResponse>(ForceMergeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ForcemergeAsync<TResponse>(ForceMergeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_forcemerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesForcemerge<TResponse>(string index, ForceMergeRequestParameters requestParameters = null)
+		TResponse Forcemerge<TResponse>(string index, ForceMergeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_forcemerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesForcemergeAsync<TResponse>(string index, ForceMergeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ForcemergeAsync<TResponse>(string index, ForceMergeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGet<TResponse>(string index, GetIndexRequestParameters requestParameters = null)
+		TResponse Get<TResponse>(string index, GetIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetAsync<TResponse>(string index, GetIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAsync<TResponse>(string index, GetIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_alias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetAliasForAll<TResponse>(GetAliasRequestParameters requestParameters = null)
+		TResponse GetAlias<TResponse>(GetAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_alias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetAliasForAllAsync<TResponse>(GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAliasAsync<TResponse>(GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetAliasForAll<TResponse>(string name, GetAliasRequestParameters requestParameters = null)
+		TResponse GetAlias<TResponse>(string name, GetAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetAliasForAllAsync<TResponse>(string name, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAliasAsync<TResponse>(string name, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to filter aliases</param>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetAlias<TResponse>(string index, string name, GetAliasRequestParameters requestParameters = null)
+		TResponse GetAlias<TResponse>(string index, string name, GetAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to filter aliases</param>
 		///<param name = "name">A comma-separated list of alias names to return</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetAliasAsync<TResponse>(string index, string name, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAliasAsync<TResponse>(string index, string name, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_alias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to filter aliases</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetAlias<TResponse>(string index, GetAliasRequestParameters requestParameters = null)
+		TResponse GetAlias<TResponse>(string index, GetAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_alias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to filter aliases</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetAliasAsync<TResponse>(string index, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAliasAsync<TResponse>(string index, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_mapping/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetFieldMappingForAll<TResponse>(string fields, GetFieldMappingRequestParameters requestParameters = null)
+		TResponse GetFieldMapping<TResponse>(string fields, GetFieldMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_mapping/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetFieldMappingForAllAsync<TResponse>(string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetFieldMappingAsync<TResponse>(string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_mapping/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetFieldMapping<TResponse>(string index, string fields, GetFieldMappingRequestParameters requestParameters = null)
+		TResponse GetFieldMapping<TResponse>(string index, string fields, GetFieldMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_mapping/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetFieldMappingAsync<TResponse>(string index, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetFieldMappingAsync<TResponse>(string index, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetMappingForAll<TResponse>(GetMappingRequestParameters requestParameters = null)
+		TResponse GetMapping<TResponse>(GetMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetMappingForAllAsync<TResponse>(GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetMappingAsync<TResponse>(GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetMapping<TResponse>(string index, GetMappingRequestParameters requestParameters = null)
+		TResponse GetMapping<TResponse>(string index, GetMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetMappingAsync<TResponse>(string index, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetMappingAsync<TResponse>(string index, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetSettingsForAll<TResponse>(GetIndexSettingsRequestParameters requestParameters = null)
+		TResponse GetSettings<TResponse>(GetIndexSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetSettingsForAllAsync<TResponse>(GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetSettingsAsync<TResponse>(GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetSettings<TResponse>(string index, GetIndexSettingsRequestParameters requestParameters = null)
+		TResponse GetSettings<TResponse>(string index, GetIndexSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetSettingsAsync<TResponse>(string index, GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetSettingsAsync<TResponse>(string index, GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_settings/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "name">The name of the settings that should be included</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetSettings<TResponse>(string index, string name, GetIndexSettingsRequestParameters requestParameters = null)
+		TResponse GetSettings<TResponse>(string index, string name, GetIndexSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_settings/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "name">The name of the settings that should be included</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetSettingsAsync<TResponse>(string index, string name, GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetSettingsAsync<TResponse>(string index, string name, GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_settings/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "name">The name of the settings that should be included</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetSettingsForAll<TResponse>(string name, GetIndexSettingsRequestParameters requestParameters = null)
+		TResponse GetSettings<TResponse>(string name, GetIndexSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_settings/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "name">The name of the settings that should be included</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetSettingsForAllAsync<TResponse>(string name, GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetSettingsAsync<TResponse>(string name, GetIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_template <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetTemplateForAll<TResponse>(GetIndexTemplateRequestParameters requestParameters = null)
+		TResponse GetTemplate<TResponse>(GetIndexTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_template <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetTemplateForAllAsync<TResponse>(GetIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetTemplateAsync<TResponse>(GetIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The comma separated names of the index templates</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetTemplateForAll<TResponse>(string name, GetIndexTemplateRequestParameters requestParameters = null)
+		TResponse GetTemplate<TResponse>(string name, GetIndexTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The comma separated names of the index templates</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetTemplateForAllAsync<TResponse>(string name, GetIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetTemplateAsync<TResponse>(string name, GetIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetUpgradeForAll<TResponse>(UpgradeStatusRequestParameters requestParameters = null)
+		TResponse GetUpgrade<TResponse>(UpgradeStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetUpgradeForAllAsync<TResponse>(UpgradeStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetUpgradeAsync<TResponse>(UpgradeStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesGetUpgrade<TResponse>(string index, UpgradeStatusRequestParameters requestParameters = null)
+		TResponse GetUpgrade<TResponse>(string index, UpgradeStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesGetUpgradeAsync<TResponse>(string index, UpgradeStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetUpgradeAsync<TResponse>(string index, UpgradeStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 		///<param name = "index">A comma separated list of indices to open</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesOpen<TResponse>(string index, OpenIndexRequestParameters requestParameters = null)
+		TResponse Open<TResponse>(string index, OpenIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 		///<param name = "index">A comma separated list of indices to open</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesOpenAsync<TResponse>(string index, OpenIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> OpenAsync<TResponse>(string index, OpenIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name = "name">The name of the alias to be created or updated</param>
 		///<param name = "body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesPutAlias<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null)
+		TResponse PutAlias<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_alias/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name = "name">The name of the alias to be created or updated</param>
 		///<param name = "body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesPutAliasAsync<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutAliasAsync<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesPutMapping<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null)
+		TResponse PutMapping<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesPutMappingAsync<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutMappingAsync<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesPutSettingsForAll<TResponse>(PostData body, UpdateIndexSettingsRequestParameters requestParameters = null)
+		TResponse PutSettings<TResponse>(PostData body, UpdateIndexSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesPutSettingsForAllAsync<TResponse>(PostData body, UpdateIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutSettingsAsync<TResponse>(PostData body, UpdateIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesPutSettings<TResponse>(string index, PostData body, UpdateIndexSettingsRequestParameters requestParameters = null)
+		TResponse PutSettings<TResponse>(string index, PostData body, UpdateIndexSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesPutSettingsAsync<TResponse>(string index, PostData body, UpdateIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutSettingsAsync<TResponse>(string index, PostData body, UpdateIndexSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "body">The template definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesPutTemplateForAll<TResponse>(string name, PostData body, PutIndexTemplateRequestParameters requestParameters = null)
+		TResponse PutTemplate<TResponse>(string name, PostData body, PutIndexTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "body">The template definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesPutTemplateForAllAsync<TResponse>(string name, PostData body, PutIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutTemplateAsync<TResponse>(string name, PostData body, PutIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesRecoveryForAll<TResponse>(RecoveryStatusRequestParameters requestParameters = null)
+		TResponse Recovery<TResponse>(RecoveryStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesRecoveryForAllAsync<TResponse>(RecoveryStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RecoveryAsync<TResponse>(RecoveryStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesRecovery<TResponse>(string index, RecoveryStatusRequestParameters requestParameters = null)
+		TResponse Recovery<TResponse>(string index, RecoveryStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesRecoveryAsync<TResponse>(string index, RecoveryStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RecoveryAsync<TResponse>(string index, RecoveryStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesRefreshForAll<TResponse>(RefreshRequestParameters requestParameters = null)
+		TResponse Refresh<TResponse>(RefreshRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesRefreshForAllAsync<TResponse>(RefreshRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RefreshAsync<TResponse>(RefreshRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesRefresh<TResponse>(string index, RefreshRequestParameters requestParameters = null)
+		TResponse Refresh<TResponse>(string index, RefreshRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesRefreshAsync<TResponse>(string index, RefreshRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RefreshAsync<TResponse>(string index, RefreshRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{alias}/_rollover <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 		///<param name = "alias">The name of the alias to rollover</param>
 		///<param name = "body">The conditions that needs to be met for executing rollover</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesRolloverForAll<TResponse>(string alias, PostData body, RolloverIndexRequestParameters requestParameters = null)
+		TResponse Rollover<TResponse>(string alias, PostData body, RolloverIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{alias}/_rollover <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 		///<param name = "alias">The name of the alias to rollover</param>
 		///<param name = "body">The conditions that needs to be met for executing rollover</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesRolloverForAllAsync<TResponse>(string alias, PostData body, RolloverIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RolloverAsync<TResponse>(string alias, PostData body, RolloverIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{alias}/_rollover/{new_index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 		///<param name = "alias">The name of the alias to rollover</param>
 		///<param name = "new_index">The name of the rollover index</param>
 		///<param name = "body">The conditions that needs to be met for executing rollover</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesRolloverForAll<TResponse>(string alias, string new_index, PostData body, RolloverIndexRequestParameters requestParameters = null)
+		TResponse Rollover<TResponse>(string alias, string new_index, PostData body, RolloverIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{alias}/_rollover/{new_index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 		///<param name = "alias">The name of the alias to rollover</param>
 		///<param name = "new_index">The name of the rollover index</param>
 		///<param name = "body">The conditions that needs to be met for executing rollover</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesRolloverForAllAsync<TResponse>(string alias, string new_index, PostData body, RolloverIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RolloverAsync<TResponse>(string alias, string new_index, PostData body, RolloverIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesSegmentsForAll<TResponse>(SegmentsRequestParameters requestParameters = null)
+		TResponse Segments<TResponse>(SegmentsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesSegmentsForAllAsync<TResponse>(SegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SegmentsAsync<TResponse>(SegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesSegments<TResponse>(string index, SegmentsRequestParameters requestParameters = null)
+		TResponse Segments<TResponse>(string index, SegmentsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesSegmentsAsync<TResponse>(string index, SegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SegmentsAsync<TResponse>(string index, SegmentsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_shard_stores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesShardStoresForAll<TResponse>(IndicesShardStoresRequestParameters requestParameters = null)
+		TResponse ShardStores<TResponse>(IndicesShardStoresRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_shard_stores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesShardStoresForAllAsync<TResponse>(IndicesShardStoresRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ShardStoresAsync<TResponse>(IndicesShardStoresRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_shard_stores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesShardStores<TResponse>(string index, IndicesShardStoresRequestParameters requestParameters = null)
+		TResponse ShardStores<TResponse>(string index, IndicesShardStoresRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_shard_stores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesShardStoresAsync<TResponse>(string index, IndicesShardStoresRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ShardStoresAsync<TResponse>(string index, IndicesShardStoresRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_shrink/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</para></summary>
 		///<param name = "index">The name of the source index to shrink</param>
 		///<param name = "target">The name of the target index to shrink into</param>
 		///<param name = "body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesShrink<TResponse>(string index, string target, PostData body, ShrinkIndexRequestParameters requestParameters = null)
+		TResponse Shrink<TResponse>(string index, string target, PostData body, ShrinkIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_shrink/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</para></summary>
 		///<param name = "index">The name of the source index to shrink</param>
 		///<param name = "target">The name of the target index to shrink into</param>
 		///<param name = "body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesShrinkAsync<TResponse>(string index, string target, PostData body, ShrinkIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ShrinkAsync<TResponse>(string index, string target, PostData body, ShrinkIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 		///<param name = "index">The name of the source index to split</param>
 		///<param name = "target">The name of the target index to split into</param>
 		///<param name = "body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesSplit<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null)
+		TResponse Split<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 		///<param name = "index">The name of the source index to split</param>
 		///<param name = "target">The name of the target index to split into</param>
 		///<param name = "body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesSplitAsync<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SplitAsync<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesStatsForAll<TResponse>(IndicesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(IndicesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesStatsForAllAsync<TResponse>(IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "metric">Limit the information returned the specific metrics.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesStatsForAll<TResponse>(string metric, IndicesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string metric, IndicesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "metric">Limit the information returned the specific metrics.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesStatsForAllAsync<TResponse>(string metric, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string metric, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesStats<TResponse>(string index, IndicesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string index, IndicesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesStatsAsync<TResponse>(string index, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string index, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "metric">Limit the information returned the specific metrics.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesStats<TResponse>(string index, string metric, IndicesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string index, string metric, IndicesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "metric">Limit the information returned the specific metrics.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesStatsAsync<TResponse>(string index, string metric, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string index, string metric, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_aliases <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "body">The definition of `actions` to perform</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesUpdateAliasesForAll<TResponse>(PostData body, BulkAliasRequestParameters requestParameters = null)
+		TResponse UpdateAliases<TResponse>(PostData body, BulkAliasRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_aliases <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "body">The definition of `actions` to perform</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesUpdateAliasesForAllAsync<TResponse>(PostData body, BulkAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpdateAliasesAsync<TResponse>(PostData body, BulkAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesUpgradeForAll<TResponse>(UpgradeRequestParameters requestParameters = null)
+		TResponse Upgrade<TResponse>(UpgradeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesUpgradeForAllAsync<TResponse>(UpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpgradeAsync<TResponse>(UpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesUpgrade<TResponse>(string index, UpgradeRequestParameters requestParameters = null)
+		TResponse Upgrade<TResponse>(string index, UpgradeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesUpgradeAsync<TResponse>(string index, UpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpgradeAsync<TResponse>(string index, UpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 		///<param name = "body">The query definition specified with the Query DSL</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesValidateQueryForAll<TResponse>(PostData body, ValidateQueryRequestParameters requestParameters = null)
+		TResponse ValidateQuery<TResponse>(PostData body, ValidateQueryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 		///<param name = "body">The query definition specified with the Query DSL</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesValidateQueryForAllAsync<TResponse>(PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ValidateQueryAsync<TResponse>(PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">The query definition specified with the Query DSL</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesValidateQuery<TResponse>(string index, PostData body, ValidateQueryRequestParameters requestParameters = null)
+		TResponse ValidateQuery<TResponse>(string index, PostData body, ValidateQueryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">The query definition specified with the Query DSL</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesValidateQueryAsync<TResponse>(string index, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ValidateQueryAsync<TResponse>(string index, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on / <para>http://www.elastic.co/guide/</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -1412,130 +1412,130 @@ namespace Elasticsearch.Net
 		///<summary>DELETE on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Pipeline ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestDeletePipeline<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null)
+		TResponse DeletePipeline<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Pipeline ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestDeletePipelineAsync<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeletePipelineAsync<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestGetPipeline<TResponse>(GetPipelineRequestParameters requestParameters = null)
+		TResponse GetPipeline<TResponse>(GetPipelineRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestGetPipelineAsync<TResponse>(GetPipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetPipelineAsync<TResponse>(GetPipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestGetPipeline<TResponse>(string id, GetPipelineRequestParameters requestParameters = null)
+		TResponse GetPipeline<TResponse>(string id, GetPipelineRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestGetPipelineAsync<TResponse>(string id, GetPipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetPipelineAsync<TResponse>(string id, GetPipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/processor/grok <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestProcessorGrok<TResponse>(GrokProcessorPatternsRequestParameters requestParameters = null)
+		TResponse ProcessorGrok<TResponse>(GrokProcessorPatternsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/processor/grok <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestProcessorGrokAsync<TResponse>(GrokProcessorPatternsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ProcessorGrokAsync<TResponse>(GrokProcessorPatternsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Pipeline ID</param>
 		///<param name = "body">The ingest definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestPutPipeline<TResponse>(string id, PostData body, PutPipelineRequestParameters requestParameters = null)
+		TResponse PutPipeline<TResponse>(string id, PostData body, PutPipelineRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Pipeline ID</param>
 		///<param name = "body">The ingest definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestPutPipelineAsync<TResponse>(string id, PostData body, PutPipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutPipelineAsync<TResponse>(string id, PostData body, PutPipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "body">The simulate definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestSimulate<TResponse>(PostData body, SimulatePipelineRequestParameters requestParameters = null)
+		TResponse Simulate<TResponse>(PostData body, SimulatePipelineRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "body">The simulate definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestSimulateAsync<TResponse>(PostData body, SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SimulateAsync<TResponse>(PostData body, SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Pipeline ID</param>
 		///<param name = "body">The simulate definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IngestSimulate<TResponse>(string id, PostData body, SimulatePipelineRequestParameters requestParameters = null)
+		TResponse Simulate<TResponse>(string id, PostData body, SimulatePipelineRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 		///<param name = "id">Pipeline ID</param>
 		///<param name = "body">The simulate definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IngestSimulateAsync<TResponse>(string id, PostData body, SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> SimulateAsync<TResponse>(string id, PostData body, SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicenseDelete<TResponse>(DeleteLicenseRequestParameters requestParameters = null)
+		TResponse Delete<TResponse>(DeleteLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicenseDeleteAsync<TResponse>(DeleteLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteAsync<TResponse>(DeleteLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicenseGet<TResponse>(GetLicenseRequestParameters requestParameters = null)
+		TResponse Get<TResponse>(GetLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicenseGetAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_license/basic_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicenseGetBasicStatus<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null)
+		TResponse GetBasicStatus<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_license/basic_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicenseGetBasicStatusAsync<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetBasicStatusAsync<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicenseGetTrialStatus<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null)
+		TResponse GetTrialStatus<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicenseGetTrialStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetTrialStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "body">licenses to be installed</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicensePost<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null)
+		TResponse Post<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "body">licenses to be installed</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicensePostAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PostAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_license/start_basic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicensePostStartBasic<TResponse>(StartBasicLicenseRequestParameters requestParameters = null)
+		TResponse PostStartBasic<TResponse>(StartBasicLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_license/start_basic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicensePostStartBasicAsync<TResponse>(StartBasicLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PostStartBasicAsync<TResponse>(StartBasicLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse LicensePostStartTrial<TResponse>(StartTrialLicenseRequestParameters requestParameters = null)
+		TResponse PostStartTrial<TResponse>(StartTrialLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> LicensePostStartTrialAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PostStartTrialAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_mget <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</para></summary>
 		///<param name = "body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -1561,581 +1561,581 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MigrationDeprecations<TResponse>(DeprecationInfoRequestParameters requestParameters = null)
+		TResponse Deprecations<TResponse>(DeprecationInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MigrationDeprecationsAsync<TResponse>(DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeprecationsAsync<TResponse>(DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 		///<param name = "index">Index pattern</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MigrationDeprecations<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null)
+		TResponse Deprecations<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 		///<param name = "index">Index pattern</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MigrationDeprecationsAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeprecationsAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_migration/assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MigrationGetAssistance<TResponse>(MigrationAssistanceRequestParameters requestParameters = null)
+		TResponse GetAssistance<TResponse>(MigrationAssistanceRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_migration/assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MigrationGetAssistanceAsync<TResponse>(MigrationAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAssistanceAsync<TResponse>(MigrationAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_migration/assistance/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MigrationGetAssistance<TResponse>(string index, MigrationAssistanceRequestParameters requestParameters = null)
+		TResponse GetAssistance<TResponse>(string index, MigrationAssistanceRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_migration/assistance/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MigrationGetAssistanceAsync<TResponse>(string index, MigrationAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAssistanceAsync<TResponse>(string index, MigrationAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_migration/upgrade/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MigrationUpgrade<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null)
+		TResponse Upgrade<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_migration/upgrade/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MigrationUpgradeAsync<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpgradeAsync<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 		///<param name = "job_id">The name of the job to close</param>
 		///<param name = "body">The URL params optionally sent in the body</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlCloseJob<TResponse>(string job_id, PostData body, CloseJobRequestParameters requestParameters = null)
+		TResponse CloseJob<TResponse>(string job_id, PostData body, CloseJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 		///<param name = "job_id">The name of the job to close</param>
 		///<param name = "body">The URL params optionally sent in the body</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlCloseJobAsync<TResponse>(string job_id, PostData body, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CloseJobAsync<TResponse>(string job_id, PostData body, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/calendars/{calendar_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteCalendar<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null)
+		TResponse DeleteCalendar<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/calendars/{calendar_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteCalendarAsync<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteCalendarAsync<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/calendars/{calendar_id}/events/{event_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "event_id">The ID of the event to remove from the calendar</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteCalendarEvent<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null)
+		TResponse DeleteCalendarEvent<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/calendars/{calendar_id}/events/{event_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "event_id">The ID of the event to remove from the calendar</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteCalendarEventAsync<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteCalendarEventAsync<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/calendars/{calendar_id}/jobs/{job_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "job_id">The ID of the job to remove from the calendar</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteCalendarJob<TResponse>(string calendar_id, string job_id, DeleteCalendarJobRequestParameters requestParameters = null)
+		TResponse DeleteCalendarJob<TResponse>(string calendar_id, string job_id, DeleteCalendarJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/calendars/{calendar_id}/jobs/{job_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "job_id">The ID of the job to remove from the calendar</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteCalendarJobAsync<TResponse>(string calendar_id, string job_id, DeleteCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteCalendarJobAsync<TResponse>(string calendar_id, string job_id, DeleteCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteDatafeed<TResponse>(string datafeed_id, DeleteDatafeedRequestParameters requestParameters = null)
+		TResponse DeleteDatafeed<TResponse>(string datafeed_id, DeleteDatafeedRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteDatafeedAsync<TResponse>(string datafeed_id, DeleteDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteDatafeedAsync<TResponse>(string datafeed_id, DeleteDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/_delete_expired_data <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteExpiredData<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null)
+		TResponse DeleteExpiredData<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/_delete_expired_data <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
 		///<param name = "job_id">The ID of the job from which to delete forecasts</param>
 		///<param name = "forecast_id">The ID of the forecast to delete, can be comma delimited list or `_all`</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteForecast<TResponse>(string job_id, string forecast_id, DeleteForecastRequestParameters requestParameters = null)
+		TResponse DeleteForecast<TResponse>(string job_id, string forecast_id, DeleteForecastRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
 		///<param name = "job_id">The ID of the job from which to delete forecasts</param>
 		///<param name = "forecast_id">The ID of the forecast to delete, can be comma delimited list or `_all`</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteForecastAsync<TResponse>(string job_id, string forecast_id, DeleteForecastRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteForecastAsync<TResponse>(string job_id, string forecast_id, DeleteForecastRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteJob<TResponse>(string job_id, DeleteJobRequestParameters requestParameters = null)
+		TResponse DeleteJob<TResponse>(string job_id, DeleteJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteJobAsync<TResponse>(string job_id, DeleteJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteJobAsync<TResponse>(string job_id, DeleteJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlDeleteModelSnapshot<TResponse>(string job_id, string snapshot_id, DeleteModelSnapshotRequestParameters requestParameters = null)
+		TResponse DeleteModelSnapshot<TResponse>(string job_id, string snapshot_id, DeleteModelSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlDeleteModelSnapshotAsync<TResponse>(string job_id, string snapshot_id, DeleteModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteModelSnapshotAsync<TResponse>(string job_id, string snapshot_id, DeleteModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 		///<param name = "job_id">The name of the job to flush</param>
 		///<param name = "body">Flush parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlFlushJob<TResponse>(string job_id, PostData body, FlushJobRequestParameters requestParameters = null)
+		TResponse FlushJob<TResponse>(string job_id, PostData body, FlushJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 		///<param name = "job_id">The name of the job to flush</param>
 		///<param name = "body">Flush parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlFlushJobAsync<TResponse>(string job_id, PostData body, FlushJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> FlushJobAsync<TResponse>(string job_id, PostData body, FlushJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast <para>TODO</para></summary>
 		///<param name = "job_id">The ID of the job to forecast for</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlForecast<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null)
+		TResponse Forecast<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast <para>TODO</para></summary>
 		///<param name = "job_id">The ID of the job to forecast for</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlForecastAsync<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ForecastAsync<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name = "job_id">ID of the job to get bucket results from</param>
 		///<param name = "timestamp">The timestamp of the desired single bucket result</param>
 		///<param name = "body">Bucket selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetBuckets<TResponse>(string job_id, string timestamp, PostData body, GetBucketsRequestParameters requestParameters = null)
+		TResponse GetBuckets<TResponse>(string job_id, string timestamp, PostData body, GetBucketsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name = "job_id">ID of the job to get bucket results from</param>
 		///<param name = "timestamp">The timestamp of the desired single bucket result</param>
 		///<param name = "body">Bucket selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetBucketsAsync<TResponse>(string job_id, string timestamp, PostData body, GetBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetBucketsAsync<TResponse>(string job_id, string timestamp, PostData body, GetBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name = "job_id">ID of the job to get bucket results from</param>
 		///<param name = "body">Bucket selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetBuckets<TResponse>(string job_id, PostData body, GetBucketsRequestParameters requestParameters = null)
+		TResponse GetBuckets<TResponse>(string job_id, PostData body, GetBucketsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name = "job_id">ID of the job to get bucket results from</param>
 		///<param name = "body">Bucket selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetBucketsAsync<TResponse>(string job_id, PostData body, GetBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetBucketsAsync<TResponse>(string job_id, PostData body, GetBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/calendars/{calendar_id}/events <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar containing the events</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetCalendarEvents<TResponse>(string calendar_id, GetCalendarEventsRequestParameters requestParameters = null)
+		TResponse GetCalendarEvents<TResponse>(string calendar_id, GetCalendarEventsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/calendars/{calendar_id}/events <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar containing the events</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetCalendarEventsAsync<TResponse>(string calendar_id, GetCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetCalendarEventsAsync<TResponse>(string calendar_id, GetCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/calendars <para>TODO</para></summary>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetCalendars<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null)
+		TResponse GetCalendars<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/calendars <para>TODO</para></summary>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetCalendarsAsync<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetCalendarsAsync<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/calendars/{calendar_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to fetch</param>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetCalendars<TResponse>(string calendar_id, PostData body, GetCalendarsRequestParameters requestParameters = null)
+		TResponse GetCalendars<TResponse>(string calendar_id, PostData body, GetCalendarsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/calendars/{calendar_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to fetch</param>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetCalendarsAsync<TResponse>(string calendar_id, PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetCalendarsAsync<TResponse>(string calendar_id, PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/categories/{category_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 		///<param name = "job_id">The name of the job</param>
 		///<param name = "category_id">The identifier of the category definition of interest</param>
 		///<param name = "body">Category selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetCategories<TResponse>(string job_id, long category_id, PostData body, GetCategoriesRequestParameters requestParameters = null)
+		TResponse GetCategories<TResponse>(string job_id, long category_id, PostData body, GetCategoriesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/categories/{category_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 		///<param name = "job_id">The name of the job</param>
 		///<param name = "category_id">The identifier of the category definition of interest</param>
 		///<param name = "body">Category selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetCategoriesAsync<TResponse>(string job_id, long category_id, PostData body, GetCategoriesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetCategoriesAsync<TResponse>(string job_id, long category_id, PostData body, GetCategoriesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/categories/ <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 		///<param name = "job_id">The name of the job</param>
 		///<param name = "body">Category selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetCategories<TResponse>(string job_id, PostData body, GetCategoriesRequestParameters requestParameters = null)
+		TResponse GetCategories<TResponse>(string job_id, PostData body, GetCategoriesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/categories/ <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 		///<param name = "job_id">The name of the job</param>
 		///<param name = "body">Category selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetCategoriesAsync<TResponse>(string job_id, PostData body, GetCategoriesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
-		///<param name = "datafeed_id">The ID of the datafeeds to fetch</param>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetDatafeeds<TResponse>(string datafeed_id, GetDatafeedsRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
-		///<param name = "datafeed_id">The ID of the datafeeds to fetch</param>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetDatafeedsAsync<TResponse>(string datafeed_id, GetDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/datafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetDatafeeds<TResponse>(GetDatafeedsRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/datafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetDatafeedsAsync<TResponse>(GetDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetCategoriesAsync<TResponse>(string job_id, PostData body, GetCategoriesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeeds stats to fetch</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetDatafeedStats<TResponse>(string datafeed_id, GetDatafeedStatsRequestParameters requestParameters = null)
+		TResponse GetDatafeedStats<TResponse>(string datafeed_id, GetDatafeedStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeeds stats to fetch</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetDatafeedStatsAsync<TResponse>(string datafeed_id, GetDatafeedStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetDatafeedStatsAsync<TResponse>(string datafeed_id, GetDatafeedStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/datafeeds/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetDatafeedStats<TResponse>(GetDatafeedStatsRequestParameters requestParameters = null)
+		TResponse GetDatafeedStats<TResponse>(GetDatafeedStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/datafeeds/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetDatafeedStatsAsync<TResponse>(GetDatafeedStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetDatafeedStatsAsync<TResponse>(GetDatafeedStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
+		///<param name = "datafeed_id">The ID of the datafeeds to fetch</param>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse GetDatafeeds<TResponse>(string datafeed_id, GetDatafeedsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
+		///<param name = "datafeed_id">The ID of the datafeeds to fetch</param>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> GetDatafeedsAsync<TResponse>(string datafeed_id, GetDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/datafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse GetDatafeeds<TResponse>(GetDatafeedsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/datafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> GetDatafeedsAsync<TResponse>(GetDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/influencers <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
 		///<param name = "job_id"></param>
 		///<param name = "body">Influencer selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetInfluencers<TResponse>(string job_id, PostData body, GetInfluencersRequestParameters requestParameters = null)
+		TResponse GetInfluencers<TResponse>(string job_id, PostData body, GetInfluencersRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/influencers <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
 		///<param name = "job_id"></param>
 		///<param name = "body">Influencer selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetInfluencersAsync<TResponse>(string job_id, PostData body, GetInfluencersRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
-		///<param name = "job_id">The ID of the jobs to fetch</param>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetJobs<TResponse>(string job_id, GetJobsRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
-		///<param name = "job_id">The ID of the jobs to fetch</param>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetJobsAsync<TResponse>(string job_id, GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/anomaly_detectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetJobs<TResponse>(GetJobsRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ml/anomaly_detectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
-		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetJobsAsync<TResponse>(GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetInfluencersAsync<TResponse>(string job_id, PostData body, GetInfluencersRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetJobStats<TResponse>(GetJobStatsRequestParameters requestParameters = null)
+		TResponse GetJobStats<TResponse>(GetJobStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetJobStatsAsync<TResponse>(GetJobStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetJobStatsAsync<TResponse>(GetJobStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 		///<param name = "job_id">The ID of the jobs stats to fetch</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetJobStats<TResponse>(string job_id, GetJobStatsRequestParameters requestParameters = null)
+		TResponse GetJobStats<TResponse>(string job_id, GetJobStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 		///<param name = "job_id">The ID of the jobs stats to fetch</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetJobStatsAsync<TResponse>(string job_id, GetJobStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetJobStatsAsync<TResponse>(string job_id, GetJobStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+		///<param name = "job_id">The ID of the jobs to fetch</param>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse GetJobs<TResponse>(string job_id, GetJobsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+		///<param name = "job_id">The ID of the jobs to fetch</param>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> GetJobsAsync<TResponse>(string job_id, GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/anomaly_detectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse GetJobs<TResponse>(GetJobsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ml/anomaly_detectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> GetJobsAsync<TResponse>(GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to fetch</param>
 		///<param name = "body">Model snapshot selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetModelSnapshots<TResponse>(string job_id, string snapshot_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null)
+		TResponse GetModelSnapshots<TResponse>(string job_id, string snapshot_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to fetch</param>
 		///<param name = "body">Model snapshot selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetModelSnapshotsAsync<TResponse>(string job_id, string snapshot_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetModelSnapshotsAsync<TResponse>(string job_id, string snapshot_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/model_snapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "body">Model snapshot selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetModelSnapshots<TResponse>(string job_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null)
+		TResponse GetModelSnapshots<TResponse>(string job_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/model_snapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "body">Model snapshot selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetModelSnapshotsAsync<TResponse>(string job_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetModelSnapshotsAsync<TResponse>(string job_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 		///<param name = "job_id">The job IDs for which to calculate overall bucket results</param>
 		///<param name = "body">Overall bucket selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetOverallBuckets<TResponse>(string job_id, PostData body, GetOverallBucketsRequestParameters requestParameters = null)
+		TResponse GetOverallBuckets<TResponse>(string job_id, PostData body, GetOverallBucketsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 		///<param name = "job_id">The job IDs for which to calculate overall bucket results</param>
 		///<param name = "body">Overall bucket selection details if not provided in URI</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetOverallBucketsAsync<TResponse>(string job_id, PostData body, GetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetOverallBucketsAsync<TResponse>(string job_id, PostData body, GetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/records <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 		///<param name = "job_id"></param>
 		///<param name = "body">Record selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlGetRecords<TResponse>(string job_id, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null)
+		TResponse GetRecords<TResponse>(string job_id, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/anomaly_detectors/{job_id}/results/records <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 		///<param name = "job_id"></param>
 		///<param name = "body">Record selection criteria</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlGetRecordsAsync<TResponse>(string job_id, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRecordsAsync<TResponse>(string job_id, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/info <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlInfo<TResponse>(MachineLearningInfoRequestParameters requestParameters = null)
+		TResponse Info<TResponse>(MachineLearningInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/info <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlInfoAsync<TResponse>(MachineLearningInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InfoAsync<TResponse>(MachineLearningInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_open <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to open</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlOpenJob<TResponse>(string job_id, OpenJobRequestParameters requestParameters = null)
+		TResponse OpenJob<TResponse>(string job_id, OpenJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_open <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to open</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlOpenJobAsync<TResponse>(string job_id, OpenJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> OpenJobAsync<TResponse>(string job_id, OpenJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/calendars/{calendar_id}/events <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "body">A list of events</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPostCalendarEvents<TResponse>(string calendar_id, PostData body, PostCalendarEventsRequestParameters requestParameters = null)
+		TResponse PostCalendarEvents<TResponse>(string calendar_id, PostData body, PostCalendarEventsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/calendars/{calendar_id}/events <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "body">A list of events</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPostCalendarEventsAsync<TResponse>(string calendar_id, PostData body, PostCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PostCalendarEventsAsync<TResponse>(string calendar_id, PostData body, PostCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_data <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
 		///<param name = "job_id">The name of the job receiving the data</param>
 		///<param name = "body">The data to process</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPostData<TResponse>(string job_id, PostData body, PostJobDataRequestParameters requestParameters = null)
+		TResponse PostData<TResponse>(string job_id, PostData body, PostJobDataRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_data <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
 		///<param name = "job_id">The name of the job receiving the data</param>
 		///<param name = "body">The data to process</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPostDataAsync<TResponse>(string job_id, PostData body, PostJobDataRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PostDataAsync<TResponse>(string job_id, PostData body, PostJobDataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_preview <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to preview</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPreviewDatafeed<TResponse>(string datafeed_id, PreviewDatafeedRequestParameters requestParameters = null)
+		TResponse PreviewDatafeed<TResponse>(string datafeed_id, PreviewDatafeedRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_preview <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to preview</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPreviewDatafeedAsync<TResponse>(string datafeed_id, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PreviewDatafeedAsync<TResponse>(string datafeed_id, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/calendars/{calendar_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to create</param>
 		///<param name = "body">The calendar details</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPutCalendar<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null)
+		TResponse PutCalendar<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/calendars/{calendar_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to create</param>
 		///<param name = "body">The calendar details</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPutCalendarAsync<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutCalendarAsync<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/calendars/{calendar_id}/jobs/{job_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "job_id">The ID of the job to add to the calendar</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPutCalendarJob<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null)
+		TResponse PutCalendarJob<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/calendars/{calendar_id}/jobs/{job_id} <para>TODO</para></summary>
 		///<param name = "calendar_id">The ID of the calendar to modify</param>
 		///<param name = "job_id">The ID of the job to add to the calendar</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPutCalendarJobAsync<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutCalendarJobAsync<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to create</param>
 		///<param name = "body">The datafeed config</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPutDatafeed<TResponse>(string datafeed_id, PostData body, PutDatafeedRequestParameters requestParameters = null)
+		TResponse PutDatafeed<TResponse>(string datafeed_id, PostData body, PutDatafeedRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to create</param>
 		///<param name = "body">The datafeed config</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPutDatafeedAsync<TResponse>(string datafeed_id, PostData body, PutDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutDatafeedAsync<TResponse>(string datafeed_id, PostData body, PutDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to create</param>
 		///<param name = "body">The job</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlPutJob<TResponse>(string job_id, PostData body, PutJobRequestParameters requestParameters = null)
+		TResponse PutJob<TResponse>(string job_id, PostData body, PutJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to create</param>
 		///<param name = "body">The job</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlPutJobAsync<TResponse>(string job_id, PostData body, PutJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutJobAsync<TResponse>(string job_id, PostData body, PutJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to revert to</param>
 		///<param name = "body">Reversion options</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlRevertModelSnapshot<TResponse>(string job_id, string snapshot_id, PostData body, RevertModelSnapshotRequestParameters requestParameters = null)
+		TResponse RevertModelSnapshot<TResponse>(string job_id, string snapshot_id, PostData body, RevertModelSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to revert to</param>
 		///<param name = "body">Reversion options</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlRevertModelSnapshotAsync<TResponse>(string job_id, string snapshot_id, PostData body, RevertModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RevertModelSnapshotAsync<TResponse>(string job_id, string snapshot_id, PostData body, RevertModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to start</param>
 		///<param name = "body">The start datafeed parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlStartDatafeed<TResponse>(string datafeed_id, PostData body, StartDatafeedRequestParameters requestParameters = null)
+		TResponse StartDatafeed<TResponse>(string datafeed_id, PostData body, StartDatafeedRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to start</param>
 		///<param name = "body">The start datafeed parameters</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlStartDatafeedAsync<TResponse>(string datafeed_id, PostData body, StartDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StartDatafeedAsync<TResponse>(string datafeed_id, PostData body, StartDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to stop</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlStopDatafeed<TResponse>(string datafeed_id, StopDatafeedRequestParameters requestParameters = null)
+		TResponse StopDatafeed<TResponse>(string datafeed_id, StopDatafeedRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to stop</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlStopDatafeedAsync<TResponse>(string datafeed_id, StopDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StopDatafeedAsync<TResponse>(string datafeed_id, StopDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to update</param>
 		///<param name = "body">The datafeed update settings</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlUpdateDatafeed<TResponse>(string datafeed_id, PostData body, UpdateDatafeedRequestParameters requestParameters = null)
+		TResponse UpdateDatafeed<TResponse>(string datafeed_id, PostData body, UpdateDatafeedRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
 		///<param name = "datafeed_id">The ID of the datafeed to update</param>
 		///<param name = "body">The datafeed update settings</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlUpdateDatafeedAsync<TResponse>(string datafeed_id, PostData body, UpdateDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpdateDatafeedAsync<TResponse>(string datafeed_id, PostData body, UpdateDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to create</param>
 		///<param name = "body">The job update settings</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlUpdateJob<TResponse>(string job_id, PostData body, UpdateJobRequestParameters requestParameters = null)
+		TResponse UpdateJob<TResponse>(string job_id, PostData body, UpdateJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
 		///<param name = "job_id">The ID of the job to create</param>
 		///<param name = "body">The job update settings</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlUpdateJobAsync<TResponse>(string job_id, PostData body, UpdateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpdateJobAsync<TResponse>(string job_id, PostData body, UpdateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to update</param>
 		///<param name = "body">The model snapshot properties to update</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlUpdateModelSnapshot<TResponse>(string job_id, string snapshot_id, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null)
+		TResponse UpdateModelSnapshot<TResponse>(string job_id, string snapshot_id, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</para></summary>
 		///<param name = "job_id">The ID of the job to fetch</param>
 		///<param name = "snapshot_id">The ID of the snapshot to update</param>
 		///<param name = "body">The model snapshot properties to update</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlUpdateModelSnapshotAsync<TResponse>(string job_id, string snapshot_id, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpdateModelSnapshotAsync<TResponse>(string job_id, string snapshot_id, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/_validate <para>TODO</para></summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlValidate<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null)
+		TResponse Validate<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/_validate <para>TODO</para></summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlValidateAsync<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ValidateAsync<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para>TODO</para></summary>
 		///<param name = "body">The detector</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse MlValidateDetector<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null)
+		TResponse ValidateDetector<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para>TODO</para></summary>
 		///<param name = "body">The detector</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> MlValidateDetectorAsync<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ValidateDetectorAsync<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_msearch <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</para></summary>
 		///<param name = "body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -2205,185 +2205,185 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/hot_threads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesHotThreadsForAll<TResponse>(NodesHotThreadsRequestParameters requestParameters = null)
+		TResponse HotThreads<TResponse>(HotThreadsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/hot_threads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesHotThreadsForAllAsync<TResponse>(NodesHotThreadsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HotThreadsAsync<TResponse>(HotThreadsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/hot_threads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesHotThreads<TResponse>(string node_id, NodesHotThreadsRequestParameters requestParameters = null)
+		TResponse HotThreads<TResponse>(string node_id, HotThreadsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/hot_threads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesHotThreadsAsync<TResponse>(string node_id, NodesHotThreadsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HotThreadsAsync<TResponse>(string node_id, HotThreadsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesInfoForAll<TResponse>(NodesInfoRequestParameters requestParameters = null)
+		TResponse Info<TResponse>(NodesInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesInfoForAllAsync<TResponse>(NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InfoAsync<TResponse>(NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesInfo<TResponse>(string node_id, NodesInfoRequestParameters requestParameters = null)
+		TResponse Info<TResponse>(string node_id, NodesInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesInfoAsync<TResponse>(string node_id, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InfoAsync<TResponse>(string node_id, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesInfoForAll<TResponse>(string metric, NodesInfoRequestParameters requestParameters = null)
+		TResponse Info<TResponse>(string metric, NodesInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesInfoForAllAsync<TResponse>(string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InfoAsync<TResponse>(string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesInfo<TResponse>(string node_id, string metric, NodesInfoRequestParameters requestParameters = null)
+		TResponse Info<TResponse>(string node_id, string metric, NodesInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesInfoAsync<TResponse>(string node_id, string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InfoAsync<TResponse>(string node_id, string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_nodes/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesReloadSecureSettingsForAll<TResponse>(ReloadSecureSettingsRequestParameters requestParameters = null)
+		TResponse ReloadSecureSettings<TResponse>(ReloadSecureSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_nodes/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesReloadSecureSettingsForAllAsync<TResponse>(ReloadSecureSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ReloadSecureSettingsAsync<TResponse>(ReloadSecureSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_nodes/{node_id}/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs to span the reload/reinit call. Should stay empty because reloading usually involves all cluster nodes.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesReloadSecureSettings<TResponse>(string node_id, ReloadSecureSettingsRequestParameters requestParameters = null)
+		TResponse ReloadSecureSettings<TResponse>(string node_id, ReloadSecureSettingsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_nodes/{node_id}/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs to span the reload/reinit call. Should stay empty because reloading usually involves all cluster nodes.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesReloadSecureSettingsAsync<TResponse>(string node_id, ReloadSecureSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ReloadSecureSettingsAsync<TResponse>(string node_id, ReloadSecureSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesStatsForAll<TResponse>(NodesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(NodesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesStatsForAllAsync<TResponse>(NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesStats<TResponse>(string node_id, NodesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string node_id, NodesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesStatsAsync<TResponse>(string node_id, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string node_id, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesStatsForAll<TResponse>(string metric, NodesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string metric, NodesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesStatsForAllAsync<TResponse>(string metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesStats<TResponse>(string node_id, string metric, NodesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string node_id, string metric, NodesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesStatsAsync<TResponse>(string node_id, string metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string node_id, string metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/stats/{metric}/{index_metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#x27;t used if `indices` (or `all`) metric isn&#x27;t specified.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesStatsForAll<TResponse>(string metric, string index_metric, NodesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string metric, string index_metric, NodesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/stats/{metric}/{index_metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#x27;t used if `indices` (or `all`) metric isn&#x27;t specified.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesStatsForAllAsync<TResponse>(string metric, string index_metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string metric, string index_metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/stats/{metric}/{index_metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#x27;t used if `indices` (or `all`) metric isn&#x27;t specified.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesStats<TResponse>(string node_id, string metric, string index_metric, NodesStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string node_id, string metric, string index_metric, NodesStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/stats/{metric}/{index_metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#x27;t used if `indices` (or `all`) metric isn&#x27;t specified.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesStatsAsync<TResponse>(string node_id, string metric, string index_metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string node_id, string metric, string index_metric, NodesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesUsageForAll<TResponse>(NodesUsageRequestParameters requestParameters = null)
+		TResponse Usage<TResponse>(NodesUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesUsageForAllAsync<TResponse>(NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UsageAsync<TResponse>(NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesUsage<TResponse>(string node_id, NodesUsageRequestParameters requestParameters = null)
+		TResponse Usage<TResponse>(string node_id, NodesUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesUsageAsync<TResponse>(string node_id, NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UsageAsync<TResponse>(string node_id, NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/usage/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesUsageForAll<TResponse>(string metric, NodesUsageRequestParameters requestParameters = null)
+		TResponse Usage<TResponse>(string metric, NodesUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/usage/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesUsageForAllAsync<TResponse>(string metric, NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UsageAsync<TResponse>(string metric, NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/usage/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse NodesUsage<TResponse>(string node_id, string metric, NodesUsageRequestParameters requestParameters = null)
+		TResponse Usage<TResponse>(string node_id, string metric, NodesUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_nodes/{node_id}/usage/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
 		///<param name = "metric">Limit the information returned to the specified metrics</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> NodesUsageAsync<TResponse>(string node_id, string metric, NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UsageAsync<TResponse>(string node_id, string metric, NodesUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>HEAD on / <para>http://www.elastic.co/guide/</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2464,102 +2464,102 @@ namespace Elasticsearch.Net
 		///<summary>DELETE on /_rollup/job/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupDeleteJob<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null)
+		TResponse DeleteJob<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_rollup/job/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to delete</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupDeleteJobAsync<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteJobAsync<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/job/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupGetJobs<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null)
+		TResponse GetJobs<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/job/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupGetJobsAsync<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetJobsAsync<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/job/ <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupGetJobs<TResponse>(GetRollupJobRequestParameters requestParameters = null)
+		TResponse GetJobs<TResponse>(GetRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/job/ <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupGetJobsAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetJobsAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/data/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the index to check rollup capabilities on, or left blank for all jobs</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupGetRollupCaps<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null)
+		TResponse GetRollupCaps<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/data/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the index to check rollup capabilities on, or left blank for all jobs</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupGetRollupCapsAsync<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRollupCapsAsync<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/data/ <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupGetRollupCaps<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null)
+		TResponse GetRollupCaps<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_rollup/data/ <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupGetRollupCapsAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRollupCapsAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_rollup/data <para>TODO</para></summary>
 		///<param name = "index">The rollup index or index pattern to obtain rollup capabilities from.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupGetRollupIndexCaps<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null)
+		TResponse GetRollupIndexCaps<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_rollup/data <para>TODO</para></summary>
 		///<param name = "index">The rollup index or index pattern to obtain rollup capabilities from.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupGetRollupIndexCapsAsync<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRollupIndexCapsAsync<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_rollup/job/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to create</param>
 		///<param name = "body">The job configuration</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupPutJob<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null)
+		TResponse PutJob<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_rollup/job/{id} <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to create</param>
 		///<param name = "body">The job configuration</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupPutJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_rollup_search <para>TODO</para></summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupRollupSearch<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null)
+		TResponse RollupSearch<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_rollup_search <para>TODO</para></summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupRollupSearchAsync<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RollupSearchAsync<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_rollup/job/{id}/_start <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupStartJob<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null)
+		TResponse StartJob<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_rollup/job/{id}/_start <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupStartJobAsync<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StartJobAsync<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_rollup/job/{id}/_stop <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to stop</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse RollupStopJob<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null)
+		TResponse StopJob<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_rollup/job/{id}/_stop <para>TODO</para></summary>
 		///<param name = "id">The ID of the job to stop</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> RollupStopJobAsync<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StopJobAsync<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_scripts/painless/_execute <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 		///<param name = "body">The script to execute</param>
@@ -2645,501 +2645,501 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityAuthenticate<TResponse>(AuthenticateRequestParameters requestParameters = null)
+		TResponse Authenticate<TResponse>(AuthenticateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityAuthenticateAsync<TResponse>(AuthenticateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AuthenticateAsync<TResponse>(AuthenticateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username}/_password <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 		///<param name = "username">The username of the user to change the password for</param>
 		///<param name = "body">the new password for the user</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityChangePassword<TResponse>(string username, PostData body, ChangePasswordRequestParameters requestParameters = null)
+		TResponse ChangePassword<TResponse>(string username, PostData body, ChangePasswordRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username}/_password <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 		///<param name = "username">The username of the user to change the password for</param>
 		///<param name = "body">the new password for the user</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityChangePasswordAsync<TResponse>(string username, PostData body, ChangePasswordRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ChangePasswordAsync<TResponse>(string username, PostData body, ChangePasswordRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/_password <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 		///<param name = "body">the new password for the user</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityChangePassword<TResponse>(PostData body, ChangePasswordRequestParameters requestParameters = null)
+		TResponse ChangePassword<TResponse>(PostData body, ChangePasswordRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/_password <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 		///<param name = "body">the new password for the user</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityChangePasswordAsync<TResponse>(PostData body, ChangePasswordRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ChangePasswordAsync<TResponse>(PostData body, ChangePasswordRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_security/realm/{realms}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 		///<param name = "realms">Comma-separated list of realms to clear</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityClearCachedRealms<TResponse>(string realms, ClearCachedRealmsRequestParameters requestParameters = null)
+		TResponse ClearCachedRealms<TResponse>(string realms, ClearCachedRealmsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_security/realm/{realms}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 		///<param name = "realms">Comma-separated list of realms to clear</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityClearCachedRealmsAsync<TResponse>(string realms, ClearCachedRealmsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ClearCachedRealmsAsync<TResponse>(string realms, ClearCachedRealmsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_security/role/{name}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityClearCachedRoles<TResponse>(string name, ClearCachedRolesRequestParameters requestParameters = null)
+		TResponse ClearCachedRoles<TResponse>(string name, ClearCachedRolesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_security/role/{name}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityClearCachedRolesAsync<TResponse>(string name, ClearCachedRolesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ClearCachedRolesAsync<TResponse>(string name, ClearCachedRolesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/privilege/{application}/{name} <para>TODO</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityDeletePrivileges<TResponse>(string application, string name, DeletePrivilegesRequestParameters requestParameters = null)
+		TResponse DeletePrivileges<TResponse>(string application, string name, DeletePrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/privilege/{application}/{name} <para>TODO</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityDeletePrivilegesAsync<TResponse>(string application, string name, DeletePrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeletePrivilegesAsync<TResponse>(string application, string name, DeletePrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityDeleteRole<TResponse>(string name, DeleteRoleRequestParameters requestParameters = null)
+		TResponse DeleteRole<TResponse>(string name, DeleteRoleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityDeleteRoleAsync<TResponse>(string name, DeleteRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteRoleAsync<TResponse>(string name, DeleteRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityDeleteRoleMapping<TResponse>(string name, DeleteRoleMappingRequestParameters requestParameters = null)
+		TResponse DeleteRoleMapping<TResponse>(string name, DeleteRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityDeleteRoleMappingAsync<TResponse>(string name, DeleteRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteRoleMappingAsync<TResponse>(string name, DeleteRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/user/{username} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</para></summary>
 		///<param name = "username">username</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityDeleteUser<TResponse>(string username, DeleteUserRequestParameters requestParameters = null)
+		TResponse DeleteUser<TResponse>(string username, DeleteUserRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/user/{username} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</para></summary>
 		///<param name = "username">username</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityDeleteUserAsync<TResponse>(string username, DeleteUserRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteUserAsync<TResponse>(string username, DeleteUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username}/_disable <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</para></summary>
 		///<param name = "username">The username of the user to disable</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityDisableUser<TResponse>(string username, DisableUserRequestParameters requestParameters = null)
+		TResponse DisableUser<TResponse>(string username, DisableUserRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username}/_disable <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</para></summary>
 		///<param name = "username">The username of the user to disable</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityDisableUserAsync<TResponse>(string username, DisableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DisableUserAsync<TResponse>(string username, DisableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username}/_enable <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</para></summary>
 		///<param name = "username">The username of the user to enable</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityEnableUser<TResponse>(string username, EnableUserRequestParameters requestParameters = null)
+		TResponse EnableUser<TResponse>(string username, EnableUserRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username}/_enable <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</para></summary>
 		///<param name = "username">The username of the user to enable</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityEnableUserAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> EnableUserAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/privilege <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)
+		TResponse GetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/privilege <para>TODO</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetPrivilegesAsync<TResponse>(GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetPrivilegesAsync<TResponse>(GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/privilege/{application} <para>TODO</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetPrivileges<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null)
+		TResponse GetPrivileges<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/privilege/{application} <para>TODO</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetPrivilegesAsync<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetPrivilegesAsync<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/privilege/{application}/{name} <para>TODO</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetPrivileges<TResponse>(string application, string name, GetPrivilegesRequestParameters requestParameters = null)
+		TResponse GetPrivileges<TResponse>(string application, string name, GetPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/privilege/{application}/{name} <para>TODO</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetPrivilegesAsync<TResponse>(string application, string name, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetPrivilegesAsync<TResponse>(string application, string name, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetRole<TResponse>(string name, GetRoleRequestParameters requestParameters = null)
+		TResponse GetRole<TResponse>(string name, GetRoleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetRoleAsync<TResponse>(string name, GetRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRoleAsync<TResponse>(string name, GetRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetRole<TResponse>(GetRoleRequestParameters requestParameters = null)
+		TResponse GetRole<TResponse>(GetRoleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetRoleAsync<TResponse>(GetRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRoleAsync<TResponse>(GetRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 		///<param name = "name">Role-Mapping name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetRoleMapping<TResponse>(string name, GetRoleMappingRequestParameters requestParameters = null)
+		TResponse GetRoleMapping<TResponse>(string name, GetRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 		///<param name = "name">Role-Mapping name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetRoleMappingAsync<TResponse>(string name, GetRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRoleMappingAsync<TResponse>(string name, GetRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetRoleMapping<TResponse>(GetRoleMappingRequestParameters requestParameters = null)
+		TResponse GetRoleMapping<TResponse>(GetRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/role_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetRoleMappingAsync<TResponse>(GetRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRoleMappingAsync<TResponse>(GetRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_security/oauth2/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</para></summary>
 		///<param name = "body">The token request to get</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetToken<TResponse>(PostData body, GetUserAccessTokenRequestParameters requestParameters = null)
+		TResponse GetToken<TResponse>(PostData body, GetUserAccessTokenRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_security/oauth2/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</para></summary>
 		///<param name = "body">The token request to get</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetTokenAsync<TResponse>(PostData body, GetUserAccessTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetTokenAsync<TResponse>(PostData body, GetUserAccessTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/{username} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 		///<param name = "username">A comma-separated list of usernames</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetUser<TResponse>(string username, GetUserRequestParameters requestParameters = null)
+		TResponse GetUser<TResponse>(string username, GetUserRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/{username} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 		///<param name = "username">A comma-separated list of usernames</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetUserAsync<TResponse>(string username, GetUserRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetUserAsync<TResponse>(string username, GetUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetUser<TResponse>(GetUserRequestParameters requestParameters = null)
+		TResponse GetUser<TResponse>(GetUserRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetUserAsync<TResponse>(GetUserRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetUserAsync<TResponse>(GetUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityGetUserPrivileges<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null)
+		TResponse GetUserPrivileges<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityGetUserPrivilegesAsync<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetUserPrivilegesAsync<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/_has_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 		///<param name = "body">The privileges to test</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityHasPrivileges<TResponse>(PostData body, HasPrivilegesRequestParameters requestParameters = null)
+		TResponse HasPrivileges<TResponse>(PostData body, HasPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/_has_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 		///<param name = "body">The privileges to test</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityHasPrivilegesAsync<TResponse>(PostData body, HasPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HasPrivilegesAsync<TResponse>(PostData body, HasPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/{user}/_has_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 		///<param name = "user">Username</param>
 		///<param name = "body">The privileges to test</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityHasPrivileges<TResponse>(string user, PostData body, HasPrivilegesRequestParameters requestParameters = null)
+		TResponse HasPrivileges<TResponse>(string user, PostData body, HasPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_security/user/{user}/_has_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 		///<param name = "user">Username</param>
 		///<param name = "body">The privileges to test</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityHasPrivilegesAsync<TResponse>(string user, PostData body, HasPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> HasPrivilegesAsync<TResponse>(string user, PostData body, HasPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/oauth2/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</para></summary>
 		///<param name = "body">The token to invalidate</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityInvalidateToken<TResponse>(PostData body, InvalidateUserAccessTokenRequestParameters requestParameters = null)
+		TResponse InvalidateToken<TResponse>(PostData body, InvalidateUserAccessTokenRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_security/oauth2/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</para></summary>
 		///<param name = "body">The token to invalidate</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityInvalidateTokenAsync<TResponse>(PostData body, InvalidateUserAccessTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InvalidateTokenAsync<TResponse>(PostData body, InvalidateUserAccessTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/privilege/ <para>TODO</para></summary>
 		///<param name = "body">The privilege(s) to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityPutPrivileges<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null)
+		TResponse PutPrivileges<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/privilege/ <para>TODO</para></summary>
 		///<param name = "body">The privilege(s) to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityPutPrivilegesAsync<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutPrivilegesAsync<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "body">The role to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityPutRole<TResponse>(string name, PostData body, PutRoleRequestParameters requestParameters = null)
+		TResponse PutRole<TResponse>(string name, PostData body, PutRoleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "body">The role to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityPutRoleAsync<TResponse>(string name, PostData body, PutRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutRoleAsync<TResponse>(string name, PostData body, PutRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
 		///<param name = "body">The role to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityPutRoleMapping<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null)
+		TResponse PutRoleMapping<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
 		///<param name = "body">The role to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityPutRoleMappingAsync<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutRoleMappingAsync<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</para></summary>
 		///<param name = "username">The username of the User</param>
 		///<param name = "body">The user to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SecurityPutUser<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null)
+		TResponse PutUser<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_security/user/{username} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</para></summary>
 		///<param name = "username">The username of the User</param>
 		///<param name = "body">The user to add</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SecurityPutUserAsync<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutUserAsync<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "body">The snapshot definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotCreate<TResponse>(string repository, string snapshot, PostData body, SnapshotRequestParameters requestParameters = null)
+		TResponse Create<TResponse>(string repository, string snapshot, PostData body, SnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "body">The snapshot definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotCreateAsync<TResponse>(string repository, string snapshot, PostData body, SnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CreateAsync<TResponse>(string repository, string snapshot, PostData body, SnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "body">The repository definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotCreateRepository<TResponse>(string repository, PostData body, CreateRepositoryRequestParameters requestParameters = null)
+		TResponse CreateRepository<TResponse>(string repository, PostData body, CreateRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "body">The repository definition</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotCreateRepositoryAsync<TResponse>(string repository, PostData body, CreateRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CreateRepositoryAsync<TResponse>(string repository, PostData body, CreateRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotDelete<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null)
+		TResponse Delete<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotDeleteAsync<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteAsync<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A comma-separated list of repository names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotDeleteRepository<TResponse>(string repository, DeleteRepositoryRequestParameters requestParameters = null)
+		TResponse DeleteRepository<TResponse>(string repository, DeleteRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A comma-separated list of repository names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotDeleteRepositoryAsync<TResponse>(string repository, DeleteRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteRepositoryAsync<TResponse>(string repository, DeleteRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotGet<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null)
+		TResponse Get<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotGetAsync<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAsync<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotGetRepository<TResponse>(GetRepositoryRequestParameters requestParameters = null)
+		TResponse GetRepository<TResponse>(GetRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotGetRepositoryAsync<TResponse>(GetRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRepositoryAsync<TResponse>(GetRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A comma-separated list of repository names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotGetRepository<TResponse>(string repository, GetRepositoryRequestParameters requestParameters = null)
+		TResponse GetRepository<TResponse>(string repository, GetRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A comma-separated list of repository names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotGetRepositoryAsync<TResponse>(string repository, GetRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetRepositoryAsync<TResponse>(string repository, GetRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_snapshot/{repository}/{snapshot}/_restore <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "body">Details of what to restore</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotRestore<TResponse>(string repository, string snapshot, PostData body, RestoreRequestParameters requestParameters = null)
+		TResponse Restore<TResponse>(string repository, string snapshot, PostData body, RestoreRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_snapshot/{repository}/{snapshot}/_restore <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "body">Details of what to restore</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotRestoreAsync<TResponse>(string repository, string snapshot, PostData body, RestoreRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> RestoreAsync<TResponse>(string repository, string snapshot, PostData body, RestoreRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/_status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotStatus<TResponse>(SnapshotStatusRequestParameters requestParameters = null)
+		TResponse Status<TResponse>(SnapshotStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/_status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotStatusAsync<TResponse>(SnapshotStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatusAsync<TResponse>(SnapshotStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository}/_status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotStatus<TResponse>(string repository, SnapshotStatusRequestParameters requestParameters = null)
+		TResponse Status<TResponse>(string repository, SnapshotStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository}/_status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotStatusAsync<TResponse>(string repository, SnapshotStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatusAsync<TResponse>(string repository, SnapshotStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository}/{snapshot}/_status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotStatus<TResponse>(string repository, string snapshot, SnapshotStatusRequestParameters requestParameters = null)
+		TResponse Status<TResponse>(string repository, string snapshot, SnapshotStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_snapshot/{repository}/{snapshot}/_status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotStatusAsync<TResponse>(string repository, string snapshot, SnapshotStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatusAsync<TResponse>(string repository, string snapshot, SnapshotStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_snapshot/{repository}/_verify <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SnapshotVerifyRepository<TResponse>(string repository, VerifyRepositoryRequestParameters requestParameters = null)
+		TResponse VerifyRepository<TResponse>(string repository, VerifyRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_snapshot/{repository}/_verify <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SnapshotVerifyRepositoryAsync<TResponse>(string repository, VerifyRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> VerifyRepositoryAsync<TResponse>(string repository, VerifyRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_sql/close <para>Clear SQL cursor</para></summary>
 		///<param name = "body">Specify the cursor value in the `cursor` element to clean the cursor.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SqlClearCursor<TResponse>(PostData body, ClearSqlCursorRequestParameters requestParameters = null)
+		TResponse ClearCursor<TResponse>(PostData body, ClearSqlCursorRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_sql/close <para>Clear SQL cursor</para></summary>
 		///<param name = "body">Specify the cursor value in the `cursor` element to clean the cursor.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SqlClearCursorAsync<TResponse>(PostData body, ClearSqlCursorRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ClearCursorAsync<TResponse>(PostData body, ClearSqlCursorRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_sql <para>Execute SQL</para></summary>
 		///<param name = "body">Use the `query` element to start a query. Use the `cursor` element to continue a query.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SqlQuery<TResponse>(PostData body, QuerySqlRequestParameters requestParameters = null)
+		TResponse Query<TResponse>(PostData body, QuerySqlRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_sql <para>Execute SQL</para></summary>
 		///<param name = "body">Use the `query` element to start a query. Use the `cursor` element to continue a query.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SqlQueryAsync<TResponse>(PostData body, QuerySqlRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> QueryAsync<TResponse>(PostData body, QuerySqlRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_sql/translate <para>Translate SQL into Elasticsearch queries</para></summary>
 		///<param name = "body">Specify the query in the `query` element.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SqlTranslate<TResponse>(PostData body, TranslateSqlRequestParameters requestParameters = null)
+		TResponse Translate<TResponse>(PostData body, TranslateSqlRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_sql/translate <para>Translate SQL into Elasticsearch queries</para></summary>
 		///<param name = "body">Specify the query in the `query` element.</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SqlTranslateAsync<TResponse>(PostData body, TranslateSqlRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> TranslateAsync<TResponse>(PostData body, TranslateSqlRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ssl/certificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse SslCertificates<TResponse>(GetCertificatesRequestParameters requestParameters = null)
+		TResponse Certificates<TResponse>(GetCertificatesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ssl/certificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> SslCertificatesAsync<TResponse>(GetCertificatesRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CertificatesAsync<TResponse>(GetCertificatesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_tasks/_cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse TasksCancel<TResponse>(CancelTasksRequestParameters requestParameters = null)
+		TResponse Cancel<TResponse>(CancelTasksRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_tasks/_cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> TasksCancelAsync<TResponse>(CancelTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CancelAsync<TResponse>(CancelTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_tasks/{task_id}/_cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse TasksCancel<TResponse>(string task_id, CancelTasksRequestParameters requestParameters = null)
+		TResponse Cancel<TResponse>(string task_id, CancelTasksRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_tasks/{task_id}/_cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> TasksCancelAsync<TResponse>(string task_id, CancelTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> CancelAsync<TResponse>(string task_id, CancelTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_tasks/{task_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse TasksGet<TResponse>(string task_id, GetTaskRequestParameters requestParameters = null)
+		TResponse Get<TResponse>(string task_id, GetTaskRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_tasks/{task_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> TasksGetAsync<TResponse>(string task_id, GetTaskRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetAsync<TResponse>(string task_id, GetTaskRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse TasksList<TResponse>(ListTasksRequestParameters requestParameters = null)
+		TResponse List<TResponse>(ListTasksRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> TasksListAsync<TResponse>(ListTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ListAsync<TResponse>(ListTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_termvectors/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</para></summary>
 		///<param name = "index">The index in which the document resides.</param>
@@ -3206,148 +3206,148 @@ namespace Elasticsearch.Net
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherAckWatch<TResponse>(string watch_id, AcknowledgeWatchRequestParameters requestParameters = null)
+		TResponse AckWatch<TResponse>(string watch_id, AcknowledgeWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherAckWatchAsync<TResponse>(string watch_id, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AckWatchAsync<TResponse>(string watch_id, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack/{action_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "action_id">A comma-separated list of the action ids to be acked</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherAckWatch<TResponse>(string watch_id, string action_id, AcknowledgeWatchRequestParameters requestParameters = null)
+		TResponse AckWatch<TResponse>(string watch_id, string action_id, AcknowledgeWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack/{action_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "action_id">A comma-separated list of the action ids to be acked</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherAckWatchAsync<TResponse>(string watch_id, string action_id, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> AckWatchAsync<TResponse>(string watch_id, string action_id, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherActivateWatch<TResponse>(string watch_id, ActivateWatchRequestParameters requestParameters = null)
+		TResponse ActivateWatch<TResponse>(string watch_id, ActivateWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherActivateWatchAsync<TResponse>(string watch_id, ActivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ActivateWatchAsync<TResponse>(string watch_id, ActivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherDeactivateWatch<TResponse>(string watch_id, DeactivateWatchRequestParameters requestParameters = null)
+		TResponse DeactivateWatch<TResponse>(string watch_id, DeactivateWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{watch_id}/_deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
 		///<param name = "watch_id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherDeactivateWatchAsync<TResponse>(string watch_id, DeactivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeactivateWatchAsync<TResponse>(string watch_id, DeactivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherDeleteWatch<TResponse>(string id, DeleteWatchRequestParameters requestParameters = null)
+		TResponse DeleteWatch<TResponse>(string id, DeleteWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherDeleteWatchAsync<TResponse>(string id, DeleteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteWatchAsync<TResponse>(string id, DeleteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{id}/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "body">Execution control</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherExecuteWatch<TResponse>(string id, PostData body, ExecuteWatchRequestParameters requestParameters = null)
+		TResponse ExecuteWatch<TResponse>(string id, PostData body, ExecuteWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{id}/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "body">Execution control</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherExecuteWatchAsync<TResponse>(string id, PostData body, ExecuteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExecuteWatchAsync<TResponse>(string id, PostData body, ExecuteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 		///<param name = "body">Execution control</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherExecuteWatch<TResponse>(PostData body, ExecuteWatchRequestParameters requestParameters = null)
+		TResponse ExecuteWatch<TResponse>(PostData body, ExecuteWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 		///<param name = "body">Execution control</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherExecuteWatchAsync<TResponse>(PostData body, ExecuteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ExecuteWatchAsync<TResponse>(PostData body, ExecuteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherGetWatch<TResponse>(string id, GetWatchRequestParameters requestParameters = null)
+		TResponse GetWatch<TResponse>(string id, GetWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherGetWatchAsync<TResponse>(string id, GetWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> GetWatchAsync<TResponse>(string id, GetWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "body">The watch</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherPutWatch<TResponse>(string id, PostData body, PutWatchRequestParameters requestParameters = null)
+		TResponse PutWatch<TResponse>(string id, PostData body, PutWatchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "body">The watch</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherPutWatchAsync<TResponse>(string id, PostData body, PutWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> PutWatchAsync<TResponse>(string id, PostData body, PutWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_watcher/_start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherStart<TResponse>(StartWatcherRequestParameters requestParameters = null)
+		TResponse Start<TResponse>(StartWatcherRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_watcher/_start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherStartAsync<TResponse>(StartWatcherRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StartAsync<TResponse>(StartWatcherRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_watcher/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherStats<TResponse>(WatcherStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(WatcherStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_watcher/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherStatsAsync<TResponse>(WatcherStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(WatcherStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_watcher/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 		///<param name = "metric">Controls what additional stat metrics should be include in the response</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherStats<TResponse>(string metric, WatcherStatsRequestParameters requestParameters = null)
+		TResponse Stats<TResponse>(string metric, WatcherStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_watcher/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 		///<param name = "metric">Controls what additional stat metrics should be include in the response</param>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherStatsAsync<TResponse>(string metric, WatcherStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StatsAsync<TResponse>(string metric, WatcherStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_watcher/_stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse WatcherStop<TResponse>(StopWatcherRequestParameters requestParameters = null)
+		TResponse Stop<TResponse>(StopWatcherRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_watcher/_stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> WatcherStopAsync<TResponse>(StopWatcherRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> StopAsync<TResponse>(StopWatcherRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_xpack <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse XpackInfo<TResponse>(XPackInfoRequestParameters requestParameters = null)
+		TResponse Info<TResponse>(XPackInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_xpack <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> XpackInfoAsync<TResponse>(XPackInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> InfoAsync<TResponse>(XPackInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_xpack/usage <para>Retrieve information about xpack features usage</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse XpackUsage<TResponse>(XPackUsageRequestParameters requestParameters = null)
+		TResponse Usage<TResponse>(XPackUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_xpack/usage <para>Retrieve information about xpack features usage</para></summary>
 		///<param name = "requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> XpackUsageAsync<TResponse>(XPackUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UsageAsync<TResponse>(XPackUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 	}
 }

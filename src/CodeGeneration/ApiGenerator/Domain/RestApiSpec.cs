@@ -42,7 +42,7 @@ namespace ApiGenerator.Domain
 					};
 
 				var urlParamEnums = from data in Endpoints.Values
-						.SelectMany(v => v.CsharpMethods.Select(m => new { m, n = v.CsharpMethodName }))
+						.SelectMany(v => v.CsharpMethods.Select(m => new { m, n = v.MethodName }))
 						.SelectMany(m => m.m.Parts.Select(part => new { m = m.n, p = part }))
 					let p = data.p
 					let m = data.m

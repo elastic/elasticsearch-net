@@ -17,8 +17,11 @@ namespace ApiGenerator
 			var (name, endpoint) = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
 			
 			endpoint.FileName = Path.GetFileName(jsonFile);
-			endpoint.RestSpecName = name;
-			endpoint.CsharpMethodName = name.ToPascalCase();
+			endpoint.Name = name;
+			var tokens = name.Split(".");
+			endpoint.MethodName = tokens.Last().ToPascalCase();
+			if (tokens.Length > 1)
+				endpoint.Namespace = tokens[0].ToPascalCase();
 			
 			LoadOverridesOnEndpoint(endpoint);
 			PatchRequestParameters(endpoint);
@@ -45,8 +48,8 @@ namespace ApiGenerator
 
 		private static void LoadOverridesOnEndpoint(ApiEndpoint endpoint)
 		{
-			var method = endpoint.CsharpMethodName;
-			if (CodeConfiguration.ApiNameMapping.TryGetValue(endpoint.RestSpecName, out var mapsApiMethodName))
+			var method = endpoint.MethodName;
+			if (CodeConfiguration.ApiNameMapping.TryGetValue(endpoint.Name, out var mapsApiMethodName))
 				method = mapsApiMethodName;
 
 			var typeName = "ApiGenerator.Overrides.Endpoints." + method + "Overrides";
@@ -57,12 +60,12 @@ namespace ApiGenerator
 
 		private static void PatchRequestParameters(ApiEndpoint endpoint)
 		{
-			var newParams = ApiQueryParametersPatcher.Patch(endpoint.Url.Path, endpoint.Url.Params, endpoint.Overrides);
+			var newParams = ApiQueryParametersPatcher.Patch(endpoint.Name, endpoint.Url.Params, endpoint.Overrides);
 			endpoint.Url.Params = newParams;
 		}
 		
 		/// <summary>
-		/// Finds a patch file in patches and union merges this with thie official spec.
+		/// Finds a patch file in patches and union merges this with the official spec.
 		/// This allows us to check in tweaks should breaking changes occur in the spec before we catch them
 		/// </summary>
 		private static void PatchOfficialSpec(JObject original, string jsonFile)
