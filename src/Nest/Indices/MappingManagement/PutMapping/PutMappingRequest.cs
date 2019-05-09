@@ -101,6 +101,10 @@ namespace Nest
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
+		/// <summary>/{index}/{type}/_mapping. Will infer the index from the generic type</summary>
+		///<param name="type"> this parameter is required</param>
+		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type).Required("index", (IndexName)typeof(T))){}
+
 		public PutMappingDescriptor(IndexName index, TypeName type) : base(r => r.Required("index", index).Required("type", type)) { }
 
 		IAllField ITypeMapping.AllField { get; set; }
