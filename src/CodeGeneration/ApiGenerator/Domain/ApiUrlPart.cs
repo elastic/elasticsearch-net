@@ -51,6 +51,7 @@ namespace ApiGenerator.Domain
 					case "filter_id":
 					case "id": return Type == "string" ? "Id" : "Ids";
 					case "category_id": return "CategoryId";
+					case "policy_id": return "PolicyId";
 					case "forecast_id": return "ForecastIds";
 					case "nodes":
 					case "node_id": return Type == "string" ? "NodeId" : "NodeIds";
@@ -107,7 +108,6 @@ namespace ApiGenerator.Domain
 		public IEnumerable<string> Options { get; set; }
 		public bool Required { get; set; }
 		public string Type { get; set; }
-
 
 		private string CleanUpDescription(string value)
 		{

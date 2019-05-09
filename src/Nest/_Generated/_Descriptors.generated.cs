@@ -4350,6 +4350,179 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for IlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleDescriptor  : RequestDescriptorBase<DeleteLifecycleDescriptor,DeleteLifecycleRequestParameters, IDeleteLifecycleRequest>, IDeleteLifecycleRequest
+	{ 
+		internal override ApiUrls ApiUrls => DeleteLifecycleRequest.Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">Optional, accepts null</param>
+		public DeleteLifecycleDescriptor(PolicyId policy_id) : base(r => r.Optional("policy_id", policy_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteLifecycleDescriptor() : base(){}
+		// values part of the url path
+		PolicyId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		///<summary>The name of the index lifecycle policy</summary>
+		public DeleteLifecycleDescriptor PolicyId(PolicyId policyId) => Assign(policyId, (a,v)=>a.RouteValues.Optional("policy_id", v));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleDescriptor  : RequestDescriptorBase<ExplainLifecycleDescriptor,ExplainLifecycleRequestParameters, IExplainLifecycleRequest>, IExplainLifecycleRequest
+	{ 
+		internal override ApiUrls ApiUrls => ExplainLifecycleRequest.Urls;
+		///<summary>/{index}/_ilm/explain</summary>
+		///<param name="index">this parameter is required</param>
+		public ExplainLifecycleDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal ExplainLifecycleDescriptor() : base(){}
+		// values part of the url path
+		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index to explain</summary>
+		public ExplainLifecycleDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ExplainLifecycleDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleDescriptor  : RequestDescriptorBase<GetLifecycleDescriptor,GetLifecycleRequestParameters, IGetLifecycleRequest>, IGetLifecycleRequest
+	{ 
+		internal override ApiUrls ApiUrls => GetLifecycleRequest.Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">Optional, accepts null</param>
+		public GetLifecycleDescriptor(PolicyId policy_id) : base(r => r.Optional("policy_id", policy_id)){}
+		///<summary>/_ilm/policy</summary>
+		public GetLifecycleDescriptor() : base(){}
+		// values part of the url path
+		PolicyId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		///<summary>The name of the index lifecycle policy</summary>
+		public GetLifecycleDescriptor PolicyId(PolicyId policyId) => Assign(policyId, (a,v)=>a.RouteValues.Optional("policy_id", v));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusDescriptor  : RequestDescriptorBase<GetIlmStatusDescriptor,GetIlmStatusRequestParameters, IGetIlmStatusRequest>, IGetIlmStatusRequest
+	{ 
+		internal override ApiUrls ApiUrls => GetIlmStatusRequest.Urls;
+		// values part of the url path
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmMoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepDescriptor  : RequestDescriptorBase<MoveToStepDescriptor,MoveToStepRequestParameters, IMoveToStepRequest>, IMoveToStepRequest
+	{ 
+		internal override ApiUrls ApiUrls => MoveToStepRequest.Urls;
+		///<summary>/_ilm/move/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public MoveToStepDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal MoveToStepDescriptor() : base(){}
+		// values part of the url path
+		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index whose lifecycle step is to change</summary>
+		public MoveToStepDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public MoveToStepDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for IlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleDescriptor  : RequestDescriptorBase<PutLifecycleDescriptor,PutLifecycleRequestParameters, IPutLifecycleRequest>, IPutLifecycleRequest
+	{ 
+		internal override ApiUrls ApiUrls => PutLifecycleRequest.Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">Optional, accepts null</param>
+		public PutLifecycleDescriptor(PolicyId policy_id) : base(r => r.Optional("policy_id", policy_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutLifecycleDescriptor() : base(){}
+		// values part of the url path
+		PolicyId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+
+		///<summary>The name of the index lifecycle policy</summary>
+		public PutLifecycleDescriptor PolicyId(PolicyId policyId) => Assign(policyId, (a,v)=>a.RouteValues.Optional("policy_id", v));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmRemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyDescriptor  : RequestDescriptorBase<RemovePolicyDescriptor,RemovePolicyRequestParameters, IRemovePolicyRequest>, IRemovePolicyRequest
+	{ 
+		internal override ApiUrls ApiUrls => RemovePolicyRequest.Urls;
+		///<summary>/{index}/_ilm/remove</summary>
+		///<param name="index">this parameter is required</param>
+		public RemovePolicyDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal RemovePolicyDescriptor() : base(){}
+		// values part of the url path
+		IndexName IRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index to remove policy on</summary>
+		public RemovePolicyDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RemovePolicyDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmDescriptor  : RequestDescriptorBase<RetryIlmDescriptor,RetryIlmRequestParameters, IRetryIlmRequest>, IRetryIlmRequest
+	{ 
+		internal override ApiUrls ApiUrls => RetryIlmRequest.Urls;
+		///<summary>/{index}/_ilm/retry</summary>
+		///<param name="index">this parameter is required</param>
+		public RetryIlmDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal RetryIlmDescriptor() : base(){}
+		// values part of the url path
+		IndexName IRetryIlmRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the indices (comma-separated) whose failed lifecycle step is to be retry</summary>
+		public RetryIlmDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RetryIlmDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmDescriptor  : RequestDescriptorBase<StartIlmDescriptor,StartIlmRequestParameters, IStartIlmRequest>, IStartIlmRequest
+	{ 
+		internal override ApiUrls ApiUrls => StartIlmRequest.Urls;
+		// values part of the url path
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for IlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmDescriptor  : RequestDescriptorBase<StopIlmDescriptor,StopIlmRequestParameters, IStopIlmRequest>, IStopIlmRequest
+	{ 
+		internal override ApiUrls ApiUrls => StopIlmRequest.Urls;
+		// values part of the url path
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for LicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 

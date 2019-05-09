@@ -32,18 +32,6 @@ namespace ApiGenerator
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-
-			"ilm.delete_lifecycle.json",
-			"ilm.explain_lifecycle.json",
-			"ilm.get_lifecycle.json",
-			"ilm.get_status.json",
-			"ilm.move_to_step.json",
-			"ilm.put_lifecycle.json",
-			"ilm.remove_policy.json",
-			"ilm.retry.json",
-			"ilm.start.json",
-			"ilm.stop.json",
-
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 
