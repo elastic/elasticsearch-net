@@ -2655,6 +2655,16 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for SecurityCreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public class CreateApiKeyRequestParameters : RequestParameters<CreateApiKeyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
 	///<summary>Request options for SecurityDeletePrivileges<pre>TODO</pre></summary>
 	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters> 
 	{
@@ -2715,6 +2725,19 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	///<summary>Request options for SecurityGetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public class GetApiKeyRequestParameters : RequestParameters<GetApiKeyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id { get => Q<string>("id"); set => Q("id", value); }
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name { get => Q<string>("name"); set => Q("name", value); }
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username { get => Q<string>("username"); set => Q("username", value); }
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
+	}
 	///<summary>Request options for SecurityGetPrivileges<pre>TODO</pre></summary>
 	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters> 
 	{
@@ -2749,6 +2772,11 @@ namespace Elasticsearch.Net
 	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for SecurityInvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public class InvalidateApiKeyRequestParameters : RequestParameters<InvalidateApiKeyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 	///<summary>Request options for SecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 

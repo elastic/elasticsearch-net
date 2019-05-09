@@ -5483,6 +5483,17 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class CreateApiKeyDescriptor  : RequestDescriptorBase<CreateApiKeyDescriptor,CreateApiKeyRequestParameters, ICreateApiKeyRequest>, ICreateApiKeyRequest
+	{ 
+		internal override ApiUrls ApiUrls => CreateApiKeyRequest.Urls;
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public CreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	}
 	///<summary>descriptor for SecurityDeletePrivileges <pre>TODO</pre></summary>
 	public partial class DeletePrivilegesDescriptor  : RequestDescriptorBase<DeletePrivilegesDescriptor,DeletePrivilegesRequestParameters, IDeletePrivilegesRequest>, IDeletePrivilegesRequest
 	{ 
@@ -5592,6 +5603,23 @@ namespace Nest
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	}
+	///<summary>descriptor for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class GetApiKeyDescriptor  : RequestDescriptorBase<GetApiKeyDescriptor,GetApiKeyRequestParameters, IGetApiKeyRequest>, IGetApiKeyRequest
+	{ 
+		internal override ApiUrls ApiUrls => GetApiKeyRequest.Urls;
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>API key id of the API key to be retrieved</summary>
+		public GetApiKeyDescriptor Id(string id) => Qs("id", id);
+		///<summary>API key name of the API key to be retrieved</summary>
+		public GetApiKeyDescriptor Name(string name) => Qs("name", name);
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public GetApiKeyDescriptor Username(string username) => Qs("username", username);
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public GetApiKeyDescriptor RealmName(string realmName) => Qs("realm_name", realmName);
 	}
 	///<summary>descriptor for SecurityGetPrivileges <pre>TODO</pre></summary>
 	public partial class GetPrivilegesDescriptor  : RequestDescriptorBase<GetPrivilegesDescriptor,GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
@@ -5710,6 +5738,15 @@ namespace Nest
 
 		//TODO THIS METHOD IS UNMAPPED!
 		
+	}
+	///<summary>descriptor for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class InvalidateApiKeyDescriptor  : RequestDescriptorBase<InvalidateApiKeyDescriptor,InvalidateApiKeyRequestParameters, IInvalidateApiKeyRequest>, IInvalidateApiKeyRequest
+	{ 
+		internal override ApiUrls ApiUrls => InvalidateApiKeyRequest.Urls;
+		// values part of the url path
+
+		// Request parameters
+
 	}
 	///<summary>descriptor for SecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest

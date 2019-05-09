@@ -1513,6 +1513,26 @@ namespace Nest
 	}
 	 
 	[InterfaceDataContract]
+	public partial interface ICreateApiKeyRequest : IRequest<CreateApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class CreateApiKeyRequest : PlainRequestBase<CreateApiKeyRequestParameters>, ICreateApiKeyRequest
+	{
+		protected ICreateApiKeyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/api_key"});
+		internal override ApiUrls ApiUrls => Urls;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	[InterfaceDataContract]
 	public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3213,6 +3233,29 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IGetApiKeyRequest : IRequest<GetApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class GetApiKeyRequest : PlainRequestBase<GetApiKeyRequestParameters>, IGetApiKeyRequest
+	{
+		protected IGetApiKeyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/api_key"});
+		internal override ApiUrls ApiUrls => Urls;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id { get => Q<string>("id"); set => Q("id", value); }
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name { get => Q<string>("name"); set => Q("name", value); }
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username { get => Q<string>("username"); set => Q("username", value); }
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
+	}
+	[InterfaceDataContract]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -4630,6 +4673,21 @@ namespace Nest
 		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IInvalidateApiKeyRequest : IRequest<InvalidateApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class InvalidateApiKeyRequest : PlainRequestBase<InvalidateApiKeyRequestParameters>, IInvalidateApiKeyRequest
+	{
+		protected IInvalidateApiKeyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {"_security/api_key"});
+		internal override ApiUrls ApiUrls => Urls;
+		// values part of the url path
+
+		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>

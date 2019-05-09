@@ -33,10 +33,6 @@ namespace ApiGenerator
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
 
-			"security.create_api_key.json",
-			"security.get_api_key.json",
-			"security.invalidate_api_key.json",
-
 			"ilm.delete_lifecycle.json",
 			"ilm.explain_lifecycle.json",
 			"ilm.get_lifecycle.json",
