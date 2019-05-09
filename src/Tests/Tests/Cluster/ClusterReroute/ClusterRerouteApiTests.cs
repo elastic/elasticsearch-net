@@ -12,10 +12,10 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterReroute
 {
 	public class ClusterRerouteApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationSeededCluster, IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor,
 			ClusterRerouteRequest>
 	{
-		public ClusterRerouteApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ClusterRerouteApiTests(IntrusiveOperationSeededCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 
