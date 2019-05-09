@@ -3594,23 +3594,23 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_xpack/license/start_trial");
 		}
 		
-		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
 		}
 		
-		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
