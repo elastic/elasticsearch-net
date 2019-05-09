@@ -12,6 +12,7 @@ namespace Nest
 		IStepKey NextStep { get; set; }
 	}
 
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<StepKey>))]
 	public interface IStepKey
 	{
 		[JsonProperty("phase")]
@@ -22,6 +23,15 @@ namespace Nest
 
 		[JsonProperty("name")]
 		string Name { get; set; }
+	}
+
+	public class StepKey : IStepKey
+	{
+		public string Phase { get; set; }
+
+		public string Action { get; set; }
+
+		public string Name { get; set; }
 	}
 
 	public partial class MoveToStepRequest

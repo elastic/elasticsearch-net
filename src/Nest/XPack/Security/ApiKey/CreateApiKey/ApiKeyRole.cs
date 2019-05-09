@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ApiKeyRole>))]
 	public interface IApiKeyRole
 	{
 		/// <summary>
