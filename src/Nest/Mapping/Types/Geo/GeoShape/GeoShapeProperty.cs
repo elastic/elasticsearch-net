@@ -98,6 +98,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="tree_levels")]
 		int? TreeLevels { get; set; }
+
+		/// <summary>
+		/// Should the data be coerced into becoming a valid geo shape (for instance closing a polygon)
+		/// </summary>
+		[DataMember(Name ="coerce")]
+		bool? Coerce { get; set; }
 	}
 
 	/// <inheritdoc cref="IGeoShapeProperty" />
@@ -132,6 +138,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? TreeLevels { get; set; }
+
+		/// <inheritdoc />
+		public bool? Coerce { get; set; }
 	}
 
 	/// <inheritdoc cref="IGeoShapeProperty" />
@@ -151,6 +160,7 @@ namespace Nest
 		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
+		bool? IGeoShapeProperty.Coerce { get; set; }
 
 		/// <inheritdoc cref="IGeoShapeProperty.Tree" />
 		public GeoShapePropertyDescriptor<T> Tree(GeoTree? tree) => Assign(tree, (a, v) => a.Tree = v);
@@ -182,5 +192,9 @@ namespace Nest
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreZValue" />
 		public GeoShapePropertyDescriptor<T> IgnoreZValue(bool? ignoreZValue = true) =>
 			Assign(ignoreZValue, (a, v) => a.IgnoreZValue = v);
+
+		/// <inheritdoc cref="IGeoShapeProperty.Coerce" />
+		public GeoShapePropertyDescriptor<T> Coerce(bool? coerce = true) =>
+			Assign(coerce, (a, v) => a.Coerce = v);
 	}
 }

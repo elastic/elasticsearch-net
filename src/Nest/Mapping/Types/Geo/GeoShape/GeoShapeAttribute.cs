@@ -63,6 +63,13 @@
 			set => Self.TreeLevels = value;
 		}
 
+		/// <inheritdoc cref="IGeoShapeProperty.Coerce" />
+		public bool Coerce
+		{
+			get => Self.Coerce.GetValueOrDefault(true);
+			set => Self.Coerce = value;
+		}
+
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
 		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
@@ -74,5 +81,7 @@
 
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
+
+		bool? IGeoShapeProperty.Coerce { get; set; }
 	}
 }
