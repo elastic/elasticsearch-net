@@ -9,44 +9,45 @@ namespace ApiGenerator.Domain
 	// ReSharper disable once ClassNeverInstantiated.Global
 	public class UrlInformation
 	{
-		private IList<string> _paths;
-		private IList<UrlPath> _exposedPaths;
 		public IDictionary<string, QueryParameters> Params { get; set; }
 
 		[JsonProperty("paths")]
-		private IReadOnlyCollection<string> Paths { get; set; }
+		private IReadOnlyCollection<string> OriginalPaths { get; set; }
 
-		public IDictionary<string, UrlPart> Parts { get; set; }
-
-		public IEnumerable<UrlPath> ExposedApiPaths
+		[JsonProperty("parts")]
+		private IDictionary<string, UrlPart> OriginalParts { get; set; }
+		
+		private List<UrlPath> _paths;
+		public IReadOnlyCollection<UrlPath> Paths
 		{
 			get
 			{
-				if (_exposedPaths != null && _exposedPaths.Count > 0) return _exposedPaths;
+				if (_paths != null && _paths.Count > 0) return _paths;
 
-				_exposedPaths = Paths.Select(p => new UrlPath(p, Parts)).ToList();
-				return _exposedPaths;
+				_paths = OriginalPaths.Select(p => new UrlPath(p, OriginalParts)).ToList();
+				return _paths;
 			}
 		}
 
-		public bool IsPartless => !ExposedApiParts.Any();
 
+		public IReadOnlyCollection<UrlPart> Parts => Paths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
+		
+		public bool IsPartless => !Parts.Any();
+
+		private static readonly string[] DocumentApiParts = { "index", "id" };
+		public bool IsDocumentApi =>
+			Parts.Count() == DocumentApiParts.Length
+			&& Parts.All(p => DocumentApiParts.Contains(p.Name));
+		
 		public bool TryGetDocumentApiPath(out UrlPath path)
 		{
 			path = null;
 			if (!IsDocumentApi) return false;
 
-			var mostVerbosePath = _exposedPaths.OrderByDescending(p => p.Parts.Count()).First();
-			path = new UrlPath(mostVerbosePath.Path, Parts, mostVerbosePath.Parts);
+			var mostVerbosePath = _paths.OrderByDescending(p => p.Parts.Count()).First();
+			path = new UrlPath(mostVerbosePath.Path, OriginalParts, mostVerbosePath.Parts);
 			return true;
 		}
 
-
-		public IEnumerable<UrlPart> ExposedApiParts => ExposedApiPaths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
-
-		private static readonly string[] DocumentApiParts = { "index", "id" };
-		public bool IsDocumentApi =>
-			ExposedApiParts.Count() == DocumentApiParts.Length
-			&& ExposedApiParts.All(p => DocumentApiParts.Contains(p.Name));
 	}
 }

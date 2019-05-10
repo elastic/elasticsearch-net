@@ -21,8 +21,8 @@ namespace Nest
 	RestApiSpec m = Model;
 }
 @{ await IncludeAsync("Descriptors/RequestDescriptorBase.cshtml", m); }
-	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
-	{
-		await IncludeAsync("Descriptors/Descriptor.cshtml", method);
-	}
+@foreach (var endpoint in m.Endpoints.Values)
+{
+	await IncludeAsync("Descriptors/Descriptor.cshtml", endpoint.DescriptorPartialImplementation);
+}
 }

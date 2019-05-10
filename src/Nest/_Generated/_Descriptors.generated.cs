@@ -19,6 +19,8 @@ namespace Nest
 		public TDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Pretty format the returned JSON response.</summary>
 		public TDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public TDescriptor SourceQueryString(string sourceQueryString) => Qs("source", sourceQueryString);
 	}
 
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
@@ -76,274 +78,267 @@ namespace Nest
 		public BulkDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for Aliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
-	public partial class AliasesDescriptor : RequestDescriptorBase<AliasesDescriptor, AliasesRequestParameters, IAliasesRequest>, IAliasesRequest
+	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+	public partial class CatAliasesDescriptor : RequestDescriptorBase<CatAliasesDescriptor, CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{
-		internal override ApiUrls ApiUrls => AliasesRequest.Urls;
+		internal override ApiUrls ApiUrls => CatAliasesRequest.Urls;
 		///<summary>/_cat/aliases</summary>
-		public AliasesDescriptor(): base()
+		public CatAliasesDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/aliases/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public AliasesDescriptor(Names name): base(r => r.Optional("name", name))
+		public CatAliasesDescriptor(Names name): base(r => r.Optional("name", name))
 		{
 		}
 
 		// values part of the url path
-		Names IAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
+		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 		///<summary>A comma-separated list of alias names to return</summary>
-		public AliasesDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		public CatAliasesDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public AliasesDescriptor Format(string format) => Qs("format", format);
+		public CatAliasesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public AliasesDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatAliasesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public AliasesDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatAliasesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public AliasesDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatAliasesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public AliasesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatAliasesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public AliasesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatAliasesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public AliasesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatAliasesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Allocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
-	public partial class AllocationDescriptor : RequestDescriptorBase<AllocationDescriptor, AllocationRequestParameters, IAllocationRequest>, IAllocationRequest
+	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+	public partial class CatAllocationDescriptor : RequestDescriptorBase<CatAllocationDescriptor, CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{
-		internal override ApiUrls ApiUrls => AllocationRequest.Urls;
+		internal override ApiUrls ApiUrls => CatAllocationRequest.Urls;
 		///<summary>/_cat/allocation</summary>
-		public AllocationDescriptor(): base()
+		public CatAllocationDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/allocation/{node_id}</summary>
 		///<param name = "node_id">Optional, accepts null</param>
-		public AllocationDescriptor(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		public CatAllocationDescriptor(NodeIds node_id): base(r => r.Optional("node_id", node_id))
 		{
 		}
 
 		// values part of the url path
-		NodeIds IAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
-		public AllocationDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
+		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
-		public AllocationDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		public CatAllocationDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public AllocationDescriptor Format(string format) => Qs("format", format);
+		public CatAllocationDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public AllocationDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatAllocationDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public AllocationDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatAllocationDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public AllocationDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatAllocationDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public AllocationDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatAllocationDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public AllocationDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatAllocationDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public AllocationDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatAllocationDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
-	public partial class CountDescriptor<T> : RequestDescriptorBase<CountDescriptor<T>, CountRequestParameters, ICountRequest<T>>, ICountRequest<T>
+	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
+	public partial class CatCountDescriptor : RequestDescriptorBase<CatCountDescriptor, CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{
-		internal override ApiUrls ApiUrls => CountRequest.Urls;
-		///<summary>/_cat/count/{index}</summary>
-		public CountDescriptor(): this(typeof(T))
+		internal override ApiUrls ApiUrls => CatCountRequest.Urls;
+		///<summary>/_cat/count</summary>
+		public CatCountDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/count/{index}</summary>
 		///<param name = "index">Optional, accepts null</param>
-		public CountDescriptor(Indices index): base(r => r.Optional("index", index))
+		public CatCountDescriptor(Indices index): base(r => r.Optional("index", index))
 		{
 		}
 
 		// values part of the url path
-		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public CountDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public CatCountDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CountDescriptor<T> Index<TOther>()
+		public CatCountDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CountDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public CatCountDescriptor AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public CountDescriptor<T> Format(string format) => Qs("format", format);
+		public CatCountDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CountDescriptor<T> Headers(params string[] headers) => Qs("h", headers);
+		public CatCountDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public CountDescriptor<T> Help(bool? help = true) => Qs("help", help);
+		public CatCountDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CountDescriptor<T> Local(bool? local = true) => Qs("local", local);
+		public CatCountDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CountDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatCountDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CountDescriptor<T> SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatCountDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CountDescriptor<T> Verbose(bool? verbose = true) => Qs("v", verbose);
+		public CatCountDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Fielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
-	public partial class FielddataDescriptor : RequestDescriptorBase<FielddataDescriptor, FielddataRequestParameters, IFielddataRequest>, IFielddataRequest
+	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+	public partial class CatFielddataDescriptor : RequestDescriptorBase<CatFielddataDescriptor, CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{
-		internal override ApiUrls ApiUrls => FielddataRequest.Urls;
+		internal override ApiUrls ApiUrls => CatFielddataRequest.Urls;
 		///<summary>/_cat/fielddata</summary>
-		public FielddataDescriptor(): base()
+		public CatFielddataDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/fielddata/{fields}</summary>
 		///<param name = "fields">Optional, accepts null</param>
-		public FielddataDescriptor(Fields fields): base(r => r.Optional("fields", fields))
+		public CatFielddataDescriptor(Fields fields): base(r => r.Optional("fields", fields))
 		{
 		}
 
 		// values part of the url path
-		Fields IFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
+		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public FielddataDescriptor Fields(Fields fields) => Assign(fields, (a, v) => a.RouteValues.Optional("fields", v));
+		public CatFielddataDescriptor Fields(Fields fields) => Assign(fields, (a, v) => a.RouteValues.Optional("fields", v));
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public FielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(fields, (a, v) => a.RouteValues.Optional("fields", (Fields)v));
+		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(fields, (a, v) => a.RouteValues.Optional("fields", (Fields)v));
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
-		public FielddataDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		public CatFielddataDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public FielddataDescriptor Format(string format) => Qs("format", format);
+		public CatFielddataDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public FielddataDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatFielddataDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public FielddataDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatFielddataDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public FielddataDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatFielddataDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public FielddataDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatFielddataDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public FielddataDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatFielddataDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public FielddataDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatFielddataDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
-	public partial class HealthDescriptor : RequestDescriptorBase<HealthDescriptor, HealthRequestParameters, IHealthRequest>, IHealthRequest
+	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+	public partial class CatHealthDescriptor : RequestDescriptorBase<CatHealthDescriptor, CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
 	{
-		internal override ApiUrls ApiUrls => HealthRequest.Urls;
+		internal override ApiUrls ApiUrls => CatHealthRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public HealthDescriptor Format(string format) => Qs("format", format);
+		public CatHealthDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public HealthDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatHealthDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public HealthDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatHealthDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Set to false to disable timestamping</summary>
-		public HealthDescriptor IncludeTimestamp(bool? includeTimestamp = true) => Qs("ts", includeTimestamp);
+		public CatHealthDescriptor IncludeTimestamp(bool? includeTimestamp = true) => Qs("ts", includeTimestamp);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public HealthDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public HealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public HealthDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatHealthDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public HealthDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatHealthDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Help <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
-	public partial class HelpDescriptor : RequestDescriptorBase<HelpDescriptor, HelpRequestParameters, IHelpRequest>, IHelpRequest
+	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+	public partial class CatHelpDescriptor : RequestDescriptorBase<CatHelpDescriptor, CatHelpRequestParameters, ICatHelpRequest>, ICatHelpRequest
 	{
-		internal override ApiUrls ApiUrls => HelpRequest.Urls;
+		internal override ApiUrls ApiUrls => CatHelpRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>Return help information</summary>
-		public HelpDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatHelpDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public HelpDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatHelpDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 	}
 
-	///<summary>descriptor for IndicesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
-	public partial class IndicesDescriptor : RequestDescriptorBase<IndicesDescriptor, IndicesRequestParameters, IIndicesRequest>, IIndicesRequest
+	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+	public partial class CatIndicesDescriptor : RequestDescriptorBase<CatIndicesDescriptor, CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{
-		internal override ApiUrls ApiUrls => IndicesRequest.Urls;
+		internal override ApiUrls ApiUrls => CatIndicesRequest.Urls;
 		///<summary>/_cat/indices</summary>
-		public IndicesDescriptor(): base()
+		public CatIndicesDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/indices/{index}</summary>
 		///<param name = "index">Optional, accepts null</param>
-		public IndicesDescriptor(Indices index): base(r => r.Optional("index", index))
+		public CatIndicesDescriptor(Indices index): base(r => r.Optional("index", index))
 		{
 		}
 
 		// values part of the url path
-		Indices IIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public IndicesDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public CatIndicesDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IndicesDescriptor Index<TOther>()
+		public CatIndicesDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public IndicesDescriptor AllIndices() => this.Index(Indices.All);
+		public CatIndicesDescriptor AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
-		public IndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		public CatIndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public IndicesDescriptor Format(string format) => Qs("format", format);
+		public CatIndicesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public IndicesDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatIndicesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
-		public IndicesDescriptor Health(Health? health) => Qs("health", health);
+		public CatIndicesDescriptor Health(Health? health) => Qs("health", health);
 		///<summary>Return help information</summary>
-		public IndicesDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatIndicesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatIndicesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IndicesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatIndicesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set to true to return stats only for primary shards</summary>
-		public IndicesDescriptor Pri(bool? pri = true) => Qs("pri", pri);
+		public CatIndicesDescriptor Pri(bool? pri = true) => Qs("pri", pri);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public IndicesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatIndicesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public IndicesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatIndicesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Master <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
-	public partial class MasterDescriptor : RequestDescriptorBase<MasterDescriptor, MasterRequestParameters, IMasterRequest>, IMasterRequest
+	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+	public partial class CatMasterDescriptor : RequestDescriptorBase<CatMasterDescriptor, CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
 	{
-		internal override ApiUrls ApiUrls => MasterRequest.Urls;
+		internal override ApiUrls ApiUrls => CatMasterRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public MasterDescriptor Format(string format) => Qs("format", format);
+		public CatMasterDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public MasterDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatMasterDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public MasterDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatMasterDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public MasterDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatMasterDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public MasterDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatMasterDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public MasterDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatMasterDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public MasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Nodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	///<summary>descriptor for CatNodeAttributes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesDescriptor : RequestDescriptorBase<CatNodeAttributesDescriptor, CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{
 		internal override ApiUrls ApiUrls => CatNodeAttributesRequest.Urls;
@@ -365,290 +360,282 @@ namespace Nest
 		public CatNodeAttributesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for NodesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
-	public partial class NodesDescriptor : RequestDescriptorBase<NodesDescriptor, NodesRequestParameters, INodesRequest>, INodesRequest
+	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+	public partial class CatNodesDescriptor : RequestDescriptorBase<CatNodesDescriptor, CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
 	{
-		internal override ApiUrls ApiUrls => NodesRequest.Urls;
+		internal override ApiUrls ApiUrls => CatNodesRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public NodesDescriptor Format(string format) => Qs("format", format);
+		public CatNodesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
-		public NodesDescriptor FullId(bool? fullId = true) => Qs("full_id", fullId);
+		public CatNodesDescriptor FullId(bool? fullId = true) => Qs("full_id", fullId);
 		///<summary>Comma-separated list of column names to display</summary>
-		public NodesDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public NodesDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public NodesDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public NodesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatNodesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public NodesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatNodesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public NodesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatNodesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
-	public partial class PendingTasksDescriptor : RequestDescriptorBase<PendingTasksDescriptor, PendingTasksRequestParameters, IPendingTasksRequest>, IPendingTasksRequest
+	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+	public partial class CatPendingTasksDescriptor : RequestDescriptorBase<CatPendingTasksDescriptor, CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
 	{
-		internal override ApiUrls ApiUrls => PendingTasksRequest.Urls;
+		internal override ApiUrls ApiUrls => CatPendingTasksRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public PendingTasksDescriptor Format(string format) => Qs("format", format);
+		public CatPendingTasksDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public PendingTasksDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatPendingTasksDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public PendingTasksDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatPendingTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public PendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public PendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public PendingTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatPendingTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public PendingTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatPendingTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Plugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
-	public partial class PluginsDescriptor : RequestDescriptorBase<PluginsDescriptor, PluginsRequestParameters, IPluginsRequest>, IPluginsRequest
+	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+	public partial class CatPluginsDescriptor : RequestDescriptorBase<CatPluginsDescriptor, CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
 	{
-		internal override ApiUrls ApiUrls => PluginsRequest.Urls;
+		internal override ApiUrls ApiUrls => CatPluginsRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public PluginsDescriptor Format(string format) => Qs("format", format);
+		public CatPluginsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public PluginsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatPluginsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public PluginsDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatPluginsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public PluginsDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatPluginsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public PluginsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatPluginsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public PluginsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatPluginsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public PluginsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatPluginsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Recovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
-	public partial class RecoveryDescriptor : RequestDescriptorBase<RecoveryDescriptor, RecoveryRequestParameters, IRecoveryRequest>, IRecoveryRequest
+	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+	public partial class CatRecoveryDescriptor : RequestDescriptorBase<CatRecoveryDescriptor, CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{
-		internal override ApiUrls ApiUrls => RecoveryRequest.Urls;
+		internal override ApiUrls ApiUrls => CatRecoveryRequest.Urls;
 		///<summary>/_cat/recovery</summary>
-		public RecoveryDescriptor(): base()
+		public CatRecoveryDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/recovery/{index}</summary>
 		///<param name = "index">Optional, accepts null</param>
-		public RecoveryDescriptor(Indices index): base(r => r.Optional("index", index))
+		public CatRecoveryDescriptor(Indices index): base(r => r.Optional("index", index))
 		{
 		}
 
 		// values part of the url path
-		Indices IRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public RecoveryDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public CatRecoveryDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RecoveryDescriptor Index<TOther>()
+		public CatRecoveryDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RecoveryDescriptor AllIndices() => this.Index(Indices.All);
+		public CatRecoveryDescriptor AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
-		public RecoveryDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		public CatRecoveryDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public RecoveryDescriptor Format(string format) => Qs("format", format);
+		public CatRecoveryDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public RecoveryDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatRecoveryDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public RecoveryDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatRecoveryDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public RecoveryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatRecoveryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public RecoveryDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatRecoveryDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public RecoveryDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatRecoveryDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Repositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
-	public partial class RepositoriesDescriptor : RequestDescriptorBase<RepositoriesDescriptor, RepositoriesRequestParameters, IRepositoriesRequest>, IRepositoriesRequest
+	///<summary>descriptor for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
+	public partial class CatRepositoriesDescriptor : RequestDescriptorBase<CatRepositoriesDescriptor, CatRepositoriesRequestParameters, ICatRepositoriesRequest>, ICatRepositoriesRequest
 	{
-		internal override ApiUrls ApiUrls => RepositoriesRequest.Urls;
+		internal override ApiUrls ApiUrls => CatRepositoriesRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public RepositoriesDescriptor Format(string format) => Qs("format", format);
+		public CatRepositoriesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public RepositoriesDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatRepositoriesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public RepositoriesDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatRepositoriesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node</summary>
-		public RepositoriesDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatRepositoriesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public RepositoriesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatRepositoriesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public RepositoriesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatRepositoriesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public RepositoriesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatRepositoriesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Segments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
-	public partial class SegmentsDescriptor : RequestDescriptorBase<SegmentsDescriptor, SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
+	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
+	public partial class CatSegmentsDescriptor : RequestDescriptorBase<CatSegmentsDescriptor, CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{
-		internal override ApiUrls ApiUrls => SegmentsRequest.Urls;
+		internal override ApiUrls ApiUrls => CatSegmentsRequest.Urls;
 		///<summary>/_cat/segments</summary>
-		public SegmentsDescriptor(): base()
+		public CatSegmentsDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/segments/{index}</summary>
 		///<param name = "index">Optional, accepts null</param>
-		public SegmentsDescriptor(Indices index): base(r => r.Optional("index", index))
+		public CatSegmentsDescriptor(Indices index): base(r => r.Optional("index", index))
 		{
 		}
 
 		// values part of the url path
-		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public SegmentsDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public CatSegmentsDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SegmentsDescriptor Index<TOther>()
+		public CatSegmentsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
+		public CatSegmentsDescriptor AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
-		public SegmentsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		public CatSegmentsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public SegmentsDescriptor Format(string format) => Qs("format", format);
+		public CatSegmentsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public SegmentsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatSegmentsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public SegmentsDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatSegmentsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public SegmentsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatSegmentsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+		public CatSegmentsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Shards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
-	public partial class ShardsDescriptor : RequestDescriptorBase<ShardsDescriptor, ShardsRequestParameters, IShardsRequest>, IShardsRequest
+	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+	public partial class CatShardsDescriptor : RequestDescriptorBase<CatShardsDescriptor, CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{
-		internal override ApiUrls ApiUrls => ShardsRequest.Urls;
+		internal override ApiUrls ApiUrls => CatShardsRequest.Urls;
 		///<summary>/_cat/shards</summary>
-		public ShardsDescriptor(): base()
+		public CatShardsDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/shards/{index}</summary>
 		///<param name = "index">Optional, accepts null</param>
-		public ShardsDescriptor(Indices index): base(r => r.Optional("index", index))
+		public CatShardsDescriptor(Indices index): base(r => r.Optional("index", index))
 		{
 		}
 
 		// values part of the url path
-		Indices IShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public ShardsDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public CatShardsDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ShardsDescriptor Index<TOther>()
+		public CatShardsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ShardsDescriptor AllIndices() => this.Index(Indices.All);
+		public CatShardsDescriptor AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
-		public ShardsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		public CatShardsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public ShardsDescriptor Format(string format) => Qs("format", format);
+		public CatShardsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public ShardsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatShardsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public ShardsDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatShardsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ShardsDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatShardsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ShardsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatShardsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public ShardsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatShardsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public ShardsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatShardsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Snapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
-	public partial class SnapshotsDescriptor : RequestDescriptorBase<SnapshotsDescriptor, SnapshotsRequestParameters, ISnapshotsRequest>, ISnapshotsRequest
+	///<summary>descriptor for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
+	public partial class CatSnapshotsDescriptor : RequestDescriptorBase<CatSnapshotsDescriptor, CatSnapshotsRequestParameters, ICatSnapshotsRequest>, ICatSnapshotsRequest
 	{
-		internal override ApiUrls ApiUrls => SnapshotsRequest.Urls;
+		internal override ApiUrls ApiUrls => CatSnapshotsRequest.Urls;
 		///<summary>/_cat/snapshots</summary>
-		public SnapshotsDescriptor(): base()
+		public CatSnapshotsDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/snapshots/{repository}</summary>
 		///<param name = "repository">Optional, accepts null</param>
-		public SnapshotsDescriptor(Names repository): base(r => r.Optional("repository", repository))
+		public CatSnapshotsDescriptor(Names repository): base(r => r.Optional("repository", repository))
 		{
 		}
 
 		// values part of the url path
-		Names ISnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 		///<summary>Name of repository from which to fetch the snapshot information</summary>
-		public SnapshotsDescriptor RepositoryName(Names repository) => Assign(repository, (a, v) => a.RouteValues.Optional("repository", v));
+		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(repository, (a, v) => a.RouteValues.Optional("repository", v));
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public SnapshotsDescriptor Format(string format) => Qs("format", format);
+		public CatSnapshotsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public SnapshotsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatSnapshotsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public SnapshotsDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatSnapshotsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Set to true to ignore unavailable snapshots</summary>
-		public SnapshotsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public CatSnapshotsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatSnapshotsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public SnapshotsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatSnapshotsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public SnapshotsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatSnapshotsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Tasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksDescriptor : RequestDescriptorBase<TasksDescriptor, TasksRequestParameters, ITasksRequest>, ITasksRequest
+	///<summary>descriptor for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	public partial class CatTasksDescriptor : RequestDescriptorBase<CatTasksDescriptor, CatTasksRequestParameters, ICatTasksRequest>, ICatTasksRequest
 	{
-		internal override ApiUrls ApiUrls => TasksRequest.Urls;
+		internal override ApiUrls ApiUrls => CatTasksRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public TasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
+		public CatTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Return detailed task information (default: false)</summary>
-		public TasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
+		public CatTasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public TasksDescriptor Format(string format) => Qs("format", format);
+		public CatTasksDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public TasksDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatTasksDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public TasksDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public TasksDescriptor NodeId(params string[] nodeId) => Qs("node_id", nodeId);
+		public CatTasksDescriptor NodeId(params string[] nodeId) => Qs("node_id", nodeId);
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public TasksDescriptor ParentTask(long? parentTask) => Qs("parent_task", parentTask);
+		public CatTasksDescriptor ParentTask(long? parentTask) => Qs("parent_task", parentTask);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public TasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public TasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for Templates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesDescriptor : RequestDescriptorBase<CatTemplatesDescriptor, CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
 	{
 		internal override ApiUrls ApiUrls => CatTemplatesRequest.Urls;
@@ -684,43 +671,42 @@ namespace Nest
 		public CatTemplatesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for ThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
-	public partial class ThreadPoolDescriptor : RequestDescriptorBase<ThreadPoolDescriptor, ThreadPoolRequestParameters, IThreadPoolRequest>, IThreadPoolRequest
+	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+	public partial class CatThreadPoolDescriptor : RequestDescriptorBase<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{
-		internal override ApiUrls ApiUrls => ThreadPoolRequest.Urls;
+		internal override ApiUrls ApiUrls => CatThreadPoolRequest.Urls;
 		///<summary>/_cat/thread_pool</summary>
-		public ThreadPoolDescriptor(): base()
+		public CatThreadPoolDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
 		///<param name = "thread_pool_patterns">Optional, accepts null</param>
-		public ThreadPoolDescriptor(Names thread_pool_patterns): base(r => r.Optional("thread_pool_patterns", thread_pool_patterns))
+		public CatThreadPoolDescriptor(Names thread_pool_patterns): base(r => r.Optional("thread_pool_patterns", thread_pool_patterns))
 		{
 		}
 
 		// values part of the url path
-		Names IThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
+		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
 		///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
-		public ThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(threadPoolPatterns, (a, v) => a.RouteValues.Optional("thread_pool_patterns", v));
+		public CatThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(threadPoolPatterns, (a, v) => a.RouteValues.Optional("thread_pool_patterns", v));
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public ThreadPoolDescriptor Format(string format) => Qs("format", format);
+		public CatThreadPoolDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
-		public ThreadPoolDescriptor Headers(params string[] headers) => Qs("h", headers);
+		public CatThreadPoolDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
-		public ThreadPoolDescriptor Help(bool? help = true) => Qs("help", help);
+		public CatThreadPoolDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
+		public CatThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ThreadPoolDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CatThreadPoolDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>The multiplier in which to display values</summary>
-		public ThreadPoolDescriptor Size(Size? size) => Qs("size", size);
+		public CatThreadPoolDescriptor Size(Size? size) => Qs("size", size);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public ThreadPoolDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
+		public CatThreadPoolDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public ThreadPoolDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-	//TODO THIS METHOD IS UNMAPPED!
+		public CatThreadPoolDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
 	///<summary>descriptor for DeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
@@ -744,7 +730,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Follow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+	///<summary>descriptor for CreateFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
 	public partial class CreateFollowIndexDescriptor : RequestDescriptorBase<CreateFollowIndexDescriptor, CreateFollowIndexRequestParameters, ICreateFollowIndexRequest>, ICreateFollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => CreateFollowIndexRequest.Urls;
@@ -772,7 +758,7 @@ namespace Nest
 		public CreateFollowIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for FollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+	///<summary>descriptor for FollowIndexStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 	public partial class FollowIndexStatsDescriptor : RequestDescriptorBase<FollowIndexStatsDescriptor, FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
 	{
 		internal override ApiUrls ApiUrls => FollowIndexStatsRequest.Urls;
@@ -822,7 +808,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+	///<summary>descriptor for PauseFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
 	public partial class PauseFollowIndexDescriptor : RequestDescriptorBase<PauseFollowIndexDescriptor, PauseFollowIndexRequestParameters, IPauseFollowIndexRequest>, IPauseFollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => PauseFollowIndexRequest.Urls;
@@ -848,7 +834,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+	///<summary>descriptor for CreateAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
 	public partial class CreateAutoFollowPatternDescriptor : RequestDescriptorBase<CreateAutoFollowPatternDescriptor, CreateAutoFollowPatternRequestParameters, ICreateAutoFollowPatternRequest>, ICreateAutoFollowPatternRequest
 	{
 		internal override ApiUrls ApiUrls => CreateAutoFollowPatternRequest.Urls;
@@ -869,7 +855,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+	///<summary>descriptor for ResumeFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
 	public partial class ResumeFollowIndexDescriptor : RequestDescriptorBase<ResumeFollowIndexDescriptor, ResumeFollowIndexRequestParameters, IResumeFollowIndexRequest>, IResumeFollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ResumeFollowIndexRequest.Urls;
@@ -895,7 +881,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Stats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
+	///<summary>descriptor for CcrStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
 	public partial class CcrStatsDescriptor : RequestDescriptorBase<CcrStatsDescriptor, CcrStatsRequestParameters, ICcrStatsRequest>, ICcrStatsRequest
 	{
 		internal override ApiUrls ApiUrls => CcrStatsRequest.Urls;
@@ -903,7 +889,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Unfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+	///<summary>descriptor for UnfollowIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
 	public partial class UnfollowIndexDescriptor : RequestDescriptorBase<UnfollowIndexDescriptor, UnfollowIndexRequestParameters, IUnfollowIndexRequest>, IUnfollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => UnfollowIndexRequest.Urls;
@@ -937,37 +923,94 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
-	public partial class AllocationExplainDescriptor : RequestDescriptorBase<AllocationExplainDescriptor, AllocationExplainRequestParameters, IAllocationExplainRequest>, IAllocationExplainRequest
+	///<summary>descriptor for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	public partial class ClusterAllocationExplainDescriptor : RequestDescriptorBase<ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
 	{
-		internal override ApiUrls ApiUrls => AllocationExplainRequest.Urls;
+		internal override ApiUrls ApiUrls => ClusterAllocationExplainRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
-		public AllocationExplainDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
+		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
 		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
-		public AllocationExplainDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
-	//TODO THIS METHOD IS UNMAPPED!
+		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
 	}
 
-	///<summary>descriptor for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class GetSettingsDescriptor : RequestDescriptorBase<GetSettingsDescriptor, GetSettingsRequestParameters, IGetSettingsRequest>, IGetSettingsRequest
+	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{
-		internal override ApiUrls ApiUrls => GetSettingsRequest.Urls;
+		internal override ApiUrls ApiUrls => ClusterGetSettingsRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ClusterGetSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default clusters setting.</summary>
-		public GetSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public ClusterGetSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterGetSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
-		public GetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-	//TODO THIS METHOD IS UNMAPPED!
+		public ClusterGetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	public partial class ClusterHealthDescriptor : RequestDescriptorBase<ClusterHealthDescriptor, ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
+	{
+		internal override ApiUrls ApiUrls => ClusterHealthRequest.Urls;
+		///<summary>/_cluster/health</summary>
+		public ClusterHealthDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cluster/health/{index}</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public ClusterHealthDescriptor(Indices index): base(r => r.Optional("index", index))
+		{
+		}
+
+		// values part of the url path
+		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>Limit the information returned to a specific index</summary>
+		public ClusterHealthDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ClusterHealthDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public ClusterHealthDescriptor AllIndices() => this.Index(Indices.All);
+		// Request parameters
+		///<summary>Specify the level of detail for returned information</summary>
+		public ClusterHealthDescriptor Level(Level? level) => Qs("level", level);
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public ClusterHealthDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ClusterHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Explicit operation timeout</summary>
+		public ClusterHealthDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>Wait until the specified number of shards is active</summary>
+		public ClusterHealthDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		///<summary>Wait until all currently queued events with the given priority are processed</summary>
+		public ClusterHealthDescriptor WaitForEvents(WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
+		///<summary>Whether to wait until there are no initializing shards in the cluster</summary>
+		public ClusterHealthDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
+		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
+		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
+		///<summary>Wait until the specified number of nodes is available</summary>
+		public ClusterHealthDescriptor WaitForNodes(string waitForNodes) => Qs("wait_for_nodes", waitForNodes);
+		///<summary>Wait until cluster is in a specific state</summary>
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
+	}
+
+	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	public partial class ClusterPendingTasksDescriptor : RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
+	{
+		internal override ApiUrls ApiUrls => ClusterPendingTasksRequest.Urls;
+		// values part of the url path
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public ClusterPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Specify timeout for connection to master</summary>
+		public ClusterPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+	}
+
+	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsDescriptor : RequestDescriptorBase<ClusterPutSettingsDescriptor, ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterPutSettingsRequest.Urls;
@@ -989,106 +1032,164 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Reroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
-	public partial class RerouteDescriptor : RequestDescriptorBase<RerouteDescriptor, RerouteRequestParameters, IRerouteRequest>, IRerouteRequest
+	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	public partial class ClusterRerouteDescriptor : RequestDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{
-		internal override ApiUrls ApiUrls => RerouteRequest.Urls;
+		internal override ApiUrls ApiUrls => ClusterRerouteRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>Simulate the operation only and return the resulting state</summary>
-		public RerouteDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
+		public ClusterRerouteDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-		public RerouteDescriptor Explain(bool? explain = true) => Qs("explain", explain);
+		public ClusterRerouteDescriptor Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public RerouteDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterRerouteDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public RerouteDescriptor Metric(params string[] metric) => Qs("metric", metric);
+		public ClusterRerouteDescriptor Metric(params string[] metric) => Qs("metric", metric);
 		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
-		public RerouteDescriptor RetryFailed(bool? retryFailed = true) => Qs("retry_failed", retryFailed);
+		public ClusterRerouteDescriptor RetryFailed(bool? retryFailed = true) => Qs("retry_failed", retryFailed);
 		///<summary>Explicit operation timeout</summary>
-		public RerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-	//TODO THIS METHOD IS UNMAPPED!
+		public ClusterRerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for State <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
-	public partial class StateDescriptor : RequestDescriptorBase<StateDescriptor, StateRequestParameters, IStateRequest>, IStateRequest
+	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	public partial class ClusterStateDescriptor : RequestDescriptorBase<ClusterStateDescriptor, ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{
-		internal override ApiUrls ApiUrls => StateRequest.Urls;
+		internal override ApiUrls ApiUrls => ClusterStateRequest.Urls;
 		///<summary>/_cluster/state</summary>
-		public StateDescriptor(): base()
+		public ClusterStateDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cluster/state/{metric}</summary>
 		///<param name = "metric">Optional, accepts null</param>
-		public StateDescriptor(Metrics metric): base(r => r.Optional("metric", metric))
+		public ClusterStateDescriptor(Metrics metric): base(r => r.Optional("metric", metric))
 		{
 		}
 
 		///<summary>/_cluster/state/{metric}/{index}</summary>
 		///<param name = "metric">Optional, accepts null</param>
 		///<param name = "index">Optional, accepts null</param>
-		public StateDescriptor(Metrics metric, Indices index): base(r => r.Optional("metric", metric).Optional("index", index))
+		public ClusterStateDescriptor(Metrics metric, Indices index): base(r => r.Optional("metric", metric).Optional("index", index))
 		{
 		}
 
 		// values part of the url path
-		Metrics IStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		Indices IStateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public StateDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public ClusterStateDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public StateDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public ClusterStateDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public StateDescriptor Index<TOther>()
+		public ClusterStateDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public StateDescriptor AllIndices() => this.Index(Indices.All);
+		public ClusterStateDescriptor AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public StateDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ClusterStateDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public StateDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public StateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ClusterStateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public StateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ClusterStateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public StateDescriptor Local(bool? local = true) => Qs("local", local);
+		public ClusterStateDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
-		public StateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterStateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
-		public StateDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
+		public ClusterStateDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
 		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
-		public StateDescriptor WaitForTimeout(Time waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
-	//TODO THIS METHOD IS UNMAPPED!
+		public ClusterStateDescriptor WaitForTimeout(Time waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 	}
 
-	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
-	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest
+	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	public partial class ClusterStatsDescriptor : RequestDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{
-		internal override ApiUrls ApiUrls => StatsRequest.Urls;
+		internal override ApiUrls ApiUrls => ClusterStatsRequest.Urls;
 		///<summary>/_cluster/stats</summary>
-		public StatsDescriptor(): base()
+		public ClusterStatsDescriptor(): base()
 		{
 		}
 
 		///<summary>/_cluster/stats/nodes/{node_id}</summary>
 		///<param name = "node_id">Optional, accepts null</param>
-		public StatsDescriptor(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		public ClusterStatsDescriptor(NodeIds node_id): base(r => r.Optional("node_id", node_id))
 		{
 		}
 
 		// values part of the url path
-		NodeIds IStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public StatsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
+		public ClusterStatsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>
-		public StatsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ClusterStatsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout</summary>
-		public StatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-	//TODO THIS METHOD IS UNMAPPED!
+		public ClusterStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
+	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+	public partial class CountDescriptor<T> : RequestDescriptorBase<CountDescriptor<T>, CountRequestParameters, ICountRequest<T>>, ICountRequest<T>
+	{
+		internal override ApiUrls ApiUrls => CountRequest.Urls;
+		///<summary>/{index}/_count</summary>
+		public CountDescriptor(): this(typeof(T))
+		{
+		}
+
+		///<summary>/{index}/_count</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public CountDescriptor(Indices index): base(r => r.Optional("index", index))
+		{
+		}
+
+		// values part of the url path
+		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of indices to restrict the results</summary>
+		public CountDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CountDescriptor<T> Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public CountDescriptor<T> AllIndices() => this.Index(Indices.All);
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public CountDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		///<summary>The analyzer to use for the query string</summary>
+		public CountDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public CountDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public CountDescriptor<T> Df(string df) => Qs("df", df);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public CountDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public CountDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public CountDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		///<summary>Include only documents with a specific `_score` value in the result</summary>
+		public CountDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public CountDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		///<summary>Query in the Lucene query string syntax</summary>
+		public CountDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
+		///</summary>
+		public CountDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public CountDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	}
 
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
@@ -1358,7 +1459,7 @@ namespace Nest
 		public DeleteScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>descriptor for DocumentExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<TDocument> : RequestDescriptorBase<DocumentExistsDescriptor<TDocument>, DocumentExistsRequestParameters, IDocumentExistsRequest<TDocument>>, IDocumentExistsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => DocumentExistsRequest.Urls;
@@ -1428,7 +1529,7 @@ namespace Nest
 		public DocumentExistsDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	}
 
-	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>descriptor for SourceExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsDescriptor<TDocument> : RequestDescriptorBase<SourceExistsDescriptor<TDocument>, SourceExistsRequestParameters, ISourceExistsRequest<TDocument>>, ISourceExistsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => SourceExistsRequest.Urls;
@@ -1564,7 +1665,7 @@ namespace Nest
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 	}
 
-	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
+	///<summary>descriptor for FieldCapabilities <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesDescriptor : RequestDescriptorBase<FieldCapabilitiesDescriptor, FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => FieldCapabilitiesRequest.Urls;
@@ -1695,7 +1796,7 @@ namespace Nest
 		public GetScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>descriptor for Source <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<TDocument> : RequestDescriptorBase<SourceDescriptor<TDocument>, SourceRequestParameters, ISourceRequest<TDocument>>, ISourceRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => SourceRequest.Urls;
@@ -1761,31 +1862,30 @@ namespace Nest
 		public SourceDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	}
 
-	///<summary>descriptor for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-	public partial class ExploreDescriptor : RequestDescriptorBase<ExploreDescriptor, ExploreRequestParameters, IExploreRequest>, IExploreRequest
+	///<summary>descriptor for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	public partial class GraphExploreDescriptor<T> : RequestDescriptorBase<GraphExploreDescriptor<T>, GraphExploreRequestParameters, IGraphExploreRequest<T>>, IGraphExploreRequest<T>
 	{
-		internal override ApiUrls ApiUrls => ExploreRequest.Urls;
+		internal override ApiUrls ApiUrls => GraphExploreRequest.Urls;
 		///<summary>/{index}/_graph/explore</summary>
 		///<param name = "index">this parameter is required</param>
-		public ExploreDescriptor(Indices index): base(r => r.Required("index", index))
+		public GraphExploreDescriptor(Indices index): base(r => r.Required("index", index))
 		{
 		}
 
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal ExploreDescriptor(): base()
+		///<summary>/{index}/_graph/explore</summary>
+		public GraphExploreDescriptor(): this(typeof(T))
 		{
 		}
 
 		// values part of the url path
-		Indices IExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public ExploreDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public GraphExploreDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ExploreDescriptor Index<TOther>()
+		public GraphExploreDescriptor<T> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ExploreDescriptor AllIndices() => this.Index(Indices.All);
+		public GraphExploreDescriptor<T> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -1794,10 +1894,9 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public ExploreDescriptor Routing(Routing routing) => Qs("routing", routing);
+		public GraphExploreDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
-		public ExploreDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-	//TODO THIS METHOD IS UNMAPPED!
+		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
@@ -1940,7 +2039,7 @@ namespace Nest
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
 	}
 
-	///<summary>descriptor for Close <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+	///<summary>descriptor for CloseIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor : RequestDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{
 		internal override ApiUrls ApiUrls => CloseIndexRequest.Urls;
@@ -1978,7 +2077,7 @@ namespace Nest
 		public CloseIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
+	///<summary>descriptor for CreateIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexDescriptor : RequestDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{
 		internal override ApiUrls ApiUrls => CreateIndexRequest.Urls;
@@ -2012,7 +2111,7 @@ namespace Nest
 		public CreateIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
+	///<summary>descriptor for DeleteIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor : RequestDescriptorBase<DeleteIndexDescriptor, DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteIndexRequest.Urls;
@@ -2084,7 +2183,7 @@ namespace Nest
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for DeleteIndexTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateDescriptor : RequestDescriptorBase<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteIndexTemplateRequest.Urls;
@@ -2109,7 +2208,7 @@ namespace Nest
 		public DeleteIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
+	///<summary>descriptor for IndexExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsDescriptor : RequestDescriptorBase<IndexExistsDescriptor, IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{
 		internal override ApiUrls ApiUrls => IndexExistsRequest.Urls;
@@ -2149,7 +2248,7 @@ namespace Nest
 		public IndexExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for ExistsAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for AliasExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor : RequestDescriptorBase<AliasExistsDescriptor, AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{
 		internal override ApiUrls ApiUrls => AliasExistsRequest.Urls;
@@ -2193,7 +2292,7 @@ namespace Nest
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for ExistsTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for IndexTemplateExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsDescriptor : RequestDescriptorBase<IndexTemplateExistsDescriptor, IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{
 		internal override ApiUrls ApiUrls => IndexTemplateExistsRequest.Urls;
@@ -2220,7 +2319,7 @@ namespace Nest
 		public IndexTemplateExistsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for ExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
+	///<summary>descriptor for TypeExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsDescriptor : RequestDescriptorBase<TypeExistsDescriptor, TypeExistsRequestParameters, ITypeExistsRequest>, ITypeExistsRequest
 	{
 		internal override ApiUrls ApiUrls => TypeExistsRequest.Urls;
@@ -2295,7 +2394,7 @@ namespace Nest
 		public FlushDescriptor WaitIfOngoing(bool? waitIfOngoing = true) => Qs("wait_if_ongoing", waitIfOngoing);
 	}
 
-	///<summary>descriptor for FlushSynced <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
+	///<summary>descriptor for SyncedFlush <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor : RequestDescriptorBase<SyncedFlushDescriptor, SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{
 		internal override ApiUrls ApiUrls => SyncedFlushRequest.Urls;
@@ -2328,7 +2427,7 @@ namespace Nest
 		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	///<summary>descriptor for Forcemerge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
+	///<summary>descriptor for ForceMerge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public partial class ForceMergeDescriptor : RequestDescriptorBase<ForceMergeDescriptor, ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
 	{
 		internal override ApiUrls ApiUrls => ForceMergeRequest.Urls;
@@ -2367,7 +2466,7 @@ namespace Nest
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes = true) => Qs("only_expunge_deletes", onlyExpungeDeletes);
 	}
 
-	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
+	///<summary>descriptor for GetIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexDescriptor : RequestDescriptorBase<GetIndexDescriptor, GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{
 		internal override ApiUrls ApiUrls => GetIndexRequest.Urls;
@@ -2549,7 +2648,7 @@ namespace Nest
 		public GetMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
+	///<summary>descriptor for GetIndexSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor : RequestDescriptorBase<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => GetIndexSettingsRequest.Urls;
@@ -2606,7 +2705,7 @@ namespace Nest
 		public GetIndexSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for GetIndexTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateDescriptor : RequestDescriptorBase<GetIndexTemplateDescriptor, GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => GetIndexTemplateRequest.Urls;
@@ -2636,7 +2735,7 @@ namespace Nest
 		public GetIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for GetUpgrade <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
+	///<summary>descriptor for UpgradeStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor : RequestDescriptorBase<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
 	{
 		internal override ApiUrls ApiUrls => UpgradeStatusRequest.Urls;
@@ -2669,7 +2768,7 @@ namespace Nest
 		public UpgradeStatusDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	///<summary>descriptor for Open <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+	///<summary>descriptor for OpenIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor : RequestDescriptorBase<OpenIndexDescriptor, OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{
 		internal override ApiUrls ApiUrls => OpenIndexRequest.Urls;
@@ -2782,7 +2881,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
+	///<summary>descriptor for UpdateIndexSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsDescriptor : RequestDescriptorBase<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => UpdateIndexSettingsRequest.Urls;
@@ -2823,7 +2922,7 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for PutIndexTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateDescriptor : RequestDescriptorBase<PutIndexTemplateDescriptor, PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => PutIndexTemplateRequest.Urls;
@@ -2854,7 +2953,7 @@ namespace Nest
 		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Recovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
+	///<summary>descriptor for RecoveryStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor : RequestDescriptorBase<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{
 		internal override ApiUrls ApiUrls => RecoveryStatusRequest.Urls;
@@ -2918,7 +3017,7 @@ namespace Nest
 		public RefreshDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	///<summary>descriptor for Rollover <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
+	///<summary>descriptor for RolloverIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public partial class RolloverIndexDescriptor : RequestDescriptorBase<RolloverIndexDescriptor, RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{
 		internal override ApiUrls ApiUrls => RolloverIndexRequest.Urls;
@@ -2959,7 +3058,42 @@ namespace Nest
 		public RolloverIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for ShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	///<summary>descriptor for Segments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
+	public partial class SegmentsDescriptor : RequestDescriptorBase<SegmentsDescriptor, SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
+	{
+		internal override ApiUrls ApiUrls => SegmentsRequest.Urls;
+		///<summary>/_segments</summary>
+		public SegmentsDescriptor(): base()
+		{
+		}
+
+		///<summary>/{index}/_segments</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public SegmentsDescriptor(Indices index): base(r => r.Optional("index", index))
+		{
+		}
+
+		// values part of the url path
+		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public SegmentsDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public SegmentsDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SegmentsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SegmentsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Includes detailed memory usage by Lucene.</summary>
+		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
+	}
+
+	///<summary>descriptor for IndicesShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor : RequestDescriptorBase<IndicesShardStoresDescriptor, IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{
 		internal override ApiUrls ApiUrls => IndicesShardStoresRequest.Urls;
@@ -2994,7 +3128,7 @@ namespace Nest
 		public IndicesShardStoresDescriptor Status(params string[] status) => Qs("status", status);
 	}
 
-	///<summary>descriptor for Shrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
+	///<summary>descriptor for ShrinkIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public partial class ShrinkIndexDescriptor : RequestDescriptorBase<ShrinkIndexDescriptor, ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ShrinkIndexRequest.Urls;
@@ -3028,7 +3162,7 @@ namespace Nest
 		public ShrinkIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for Split <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+	///<summary>descriptor for SplitIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
 	public partial class SplitIndexDescriptor : RequestDescriptorBase<SplitIndexDescriptor, SplitIndexRequestParameters, ISplitIndexRequest>, ISplitIndexRequest
 	{
 		internal override ApiUrls ApiUrls => SplitIndexRequest.Urls;
@@ -3062,7 +3196,7 @@ namespace Nest
 		public SplitIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+	///<summary>descriptor for IndicesStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor : RequestDescriptorBase<IndicesStatsDescriptor, IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{
 		internal override ApiUrls ApiUrls => IndicesStatsRequest.Urls;
@@ -3126,7 +3260,7 @@ namespace Nest
 		public IndicesStatsDescriptor Level(Level? level) => Qs("level", level);
 	}
 
-	///<summary>descriptor for UpdateAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for BulkAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasDescriptor : RequestDescriptorBase<BulkAliasDescriptor, BulkAliasRequestParameters, IBulkAliasRequest>, IBulkAliasRequest
 	{
 		internal override ApiUrls ApiUrls => BulkAliasRequest.Urls;
@@ -3226,7 +3360,7 @@ namespace Nest
 		public ValidateQueryDescriptor<T> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
 	}
 
-	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
+	///<summary>descriptor for RootNodeInfo <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class RootNodeInfoDescriptor : RequestDescriptorBase<RootNodeInfoDescriptor, RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{
 		internal override ApiUrls ApiUrls => RootNodeInfoRequest.Urls;
@@ -3283,7 +3417,7 @@ namespace Nest
 		public GetPipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for ProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for GrokProcessorPatterns <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GrokProcessorPatternsDescriptor : RequestDescriptorBase<GrokProcessorPatternsDescriptor, GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
 	{
 		internal override ApiUrls ApiUrls => GrokProcessorPatternsRequest.Urls;
@@ -3316,7 +3450,7 @@ namespace Nest
 		public PutPipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Simulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for SimulatePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class SimulatePipelineDescriptor : RequestDescriptorBase<SimulatePipelineDescriptor, SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
 	{
 		internal override ApiUrls ApiUrls => SimulatePipelineRequest.Urls;
@@ -3340,7 +3474,7 @@ namespace Nest
 		public SimulatePipelineDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
-	///<summary>descriptor for Delete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for DeleteLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor : RequestDescriptorBase<DeleteLicenseDescriptor, DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteLicenseRequest.Urls;
@@ -3348,7 +3482,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Get <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor : RequestDescriptorBase<GetLicenseDescriptor, GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => GetLicenseRequest.Urls;
@@ -3358,7 +3492,7 @@ namespace Nest
 		public GetLicenseDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for GetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetBasicLicenseStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetBasicLicenseStatusDescriptor : RequestDescriptorBase<GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequestParameters, IGetBasicLicenseStatusRequest>, IGetBasicLicenseStatusRequest
 	{
 		internal override ApiUrls ApiUrls => GetBasicLicenseStatusRequest.Urls;
@@ -3366,7 +3500,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetTrialLicenseStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetTrialLicenseStatusDescriptor : RequestDescriptorBase<GetTrialLicenseStatusDescriptor, GetTrialLicenseStatusRequestParameters, IGetTrialLicenseStatusRequest>, IGetTrialLicenseStatusRequest
 	{
 		internal override ApiUrls ApiUrls => GetTrialLicenseStatusRequest.Urls;
@@ -3374,7 +3508,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Post <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for PostLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor : RequestDescriptorBase<PostLicenseDescriptor, PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => PostLicenseRequest.Urls;
@@ -3384,7 +3518,7 @@ namespace Nest
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
-	///<summary>descriptor for PostStartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for StartBasicLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartBasicLicenseDescriptor : RequestDescriptorBase<StartBasicLicenseDescriptor, StartBasicLicenseRequestParameters, IStartBasicLicenseRequest>, IStartBasicLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => StartBasicLicenseRequest.Urls;
@@ -3394,7 +3528,7 @@ namespace Nest
 		public StartBasicLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
-	///<summary>descriptor for PostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for StartTrialLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartTrialLicenseDescriptor : RequestDescriptorBase<StartTrialLicenseDescriptor, StartTrialLicenseRequestParameters, IStartTrialLicenseRequest>, IStartTrialLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => StartTrialLicenseRequest.Urls;
@@ -3406,7 +3540,7 @@ namespace Nest
 		public StartTrialLicenseDescriptor TypeQueryString(string typeQueryString) => Qs("type", typeQueryString);
 	}
 
-	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
+	///<summary>descriptor for MultiGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor : RequestDescriptorBase<MultiGetDescriptor, MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
 	{
 		internal override ApiUrls ApiUrls => MultiGetRequest.Urls;
@@ -3457,7 +3591,7 @@ namespace Nest
 			where T : class => Qs("_source_includes", fields?.Select(e => (Field)e));
 	}
 
-	///<summary>descriptor for Deprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>descriptor for DeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoDescriptor : RequestDescriptorBase<DeprecationInfoDescriptor, DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{
 		internal override ApiUrls ApiUrls => DeprecationInfoRequest.Urls;
@@ -3482,7 +3616,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>descriptor for MigrationAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public partial class MigrationAssistanceDescriptor : RequestDescriptorBase<MigrationAssistanceDescriptor, MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
 	{
 		internal override ApiUrls ApiUrls => MigrationAssistanceRequest.Urls;
@@ -3515,7 +3649,7 @@ namespace Nest
 		public MigrationAssistanceDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	///<summary>descriptor for Upgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>descriptor for MigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public partial class MigrationUpgradeDescriptor : RequestDescriptorBase<MigrationUpgradeDescriptor, MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
 	{
 		internal override ApiUrls ApiUrls => MigrationUpgradeRequest.Urls;
@@ -3570,7 +3704,7 @@ namespace Nest
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for DeleteCalendar <pre>TODO</pre></summary>
+	///<summary>descriptor for DeleteCalendar <pre></pre></summary>
 	public partial class DeleteCalendarDescriptor : RequestDescriptorBase<DeleteCalendarDescriptor, DeleteCalendarRequestParameters, IDeleteCalendarRequest>, IDeleteCalendarRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteCalendarRequest.Urls;
@@ -3591,7 +3725,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for DeleteCalendarEvent <pre>TODO</pre></summary>
+	///<summary>descriptor for DeleteCalendarEvent <pre></pre></summary>
 	public partial class DeleteCalendarEventDescriptor : RequestDescriptorBase<DeleteCalendarEventDescriptor, DeleteCalendarEventRequestParameters, IDeleteCalendarEventRequest>, IDeleteCalendarEventRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteCalendarEventRequest.Urls;
@@ -3614,7 +3748,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for DeleteCalendarJob <pre>TODO</pre></summary>
+	///<summary>descriptor for DeleteCalendarJob <pre></pre></summary>
 	public partial class DeleteCalendarJobDescriptor : RequestDescriptorBase<DeleteCalendarJobDescriptor, DeleteCalendarJobRequestParameters, IDeleteCalendarJobRequest>, IDeleteCalendarJobRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteCalendarJobRequest.Urls;
@@ -3660,7 +3794,7 @@ namespace Nest
 		public DeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
 	}
 
-	///<summary>descriptor for DeleteExpiredData <pre>TODO</pre></summary>
+	///<summary>descriptor for DeleteExpiredData <pre></pre></summary>
 	public partial class DeleteExpiredDataDescriptor : RequestDescriptorBase<DeleteExpiredDataDescriptor, DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteExpiredDataRequest.Urls;
@@ -3766,7 +3900,7 @@ namespace Nest
 		public FlushJobDescriptor SkipTime(string skipTime) => Qs("skip_time", skipTime);
 	}
 
-	///<summary>descriptor for Forecast <pre>TODO</pre></summary>
+	///<summary>descriptor for ForecastJob <pre></pre></summary>
 	public partial class ForecastJobDescriptor : RequestDescriptorBase<ForecastJobDescriptor, ForecastJobRequestParameters, IForecastJobRequest>, IForecastJobRequest
 	{
 		internal override ApiUrls ApiUrls => ForecastJobRequest.Urls;
@@ -3818,7 +3952,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetCalendarEvents <pre>TODO</pre></summary>
+	///<summary>descriptor for GetCalendarEvents <pre></pre></summary>
 	public partial class GetCalendarEventsDescriptor : RequestDescriptorBase<GetCalendarEventsDescriptor, GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
 	{
 		internal override ApiUrls ApiUrls => GetCalendarEventsRequest.Urls;
@@ -3845,7 +3979,7 @@ namespace Nest
 		public GetCalendarEventsDescriptor Start(string start) => Qs("start", start);
 	}
 
-	///<summary>descriptor for GetCalendars <pre>TODO</pre></summary>
+	///<summary>descriptor for GetCalendars <pre></pre></summary>
 	public partial class GetCalendarsDescriptor : RequestDescriptorBase<GetCalendarsDescriptor, GetCalendarsRequestParameters, IGetCalendarsRequest>, IGetCalendarsRequest
 	{
 		internal override ApiUrls ApiUrls => GetCalendarsRequest.Urls;
@@ -4067,7 +4201,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	///<summary>descriptor for GetAnomalyRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public partial class GetAnomalyRecordsDescriptor : RequestDescriptorBase<GetAnomalyRecordsDescriptor, GetAnomalyRecordsRequestParameters, IGetAnomalyRecordsRequest>, IGetAnomalyRecordsRequest
 	{
 		internal override ApiUrls ApiUrls => GetAnomalyRecordsRequest.Urls;
@@ -4088,7 +4222,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Info <pre>TODO</pre></summary>
+	///<summary>descriptor for MachineLearningInfo <pre></pre></summary>
 	public partial class MachineLearningInfoDescriptor : RequestDescriptorBase<MachineLearningInfoDescriptor, MachineLearningInfoRequestParameters, IMachineLearningInfoRequest>, IMachineLearningInfoRequest
 	{
 		internal override ApiUrls ApiUrls => MachineLearningInfoRequest.Urls;
@@ -4117,7 +4251,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PostCalendarEvents <pre>TODO</pre></summary>
+	///<summary>descriptor for PostCalendarEvents <pre></pre></summary>
 	public partial class PostCalendarEventsDescriptor : RequestDescriptorBase<PostCalendarEventsDescriptor, PostCalendarEventsRequestParameters, IPostCalendarEventsRequest>, IPostCalendarEventsRequest
 	{
 		internal override ApiUrls ApiUrls => PostCalendarEventsRequest.Urls;
@@ -4138,7 +4272,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	///<summary>descriptor for PostJobData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor : RequestDescriptorBase<PostJobDataDescriptor, PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{
 		internal override ApiUrls ApiUrls => PostJobDataRequest.Urls;
@@ -4184,7 +4318,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutCalendar <pre>TODO</pre></summary>
+	///<summary>descriptor for PutCalendar <pre></pre></summary>
 	public partial class PutCalendarDescriptor : RequestDescriptorBase<PutCalendarDescriptor, PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
 	{
 		internal override ApiUrls ApiUrls => PutCalendarRequest.Urls;
@@ -4205,7 +4339,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutCalendarJob <pre>TODO</pre></summary>
+	///<summary>descriptor for PutCalendarJob <pre></pre></summary>
 	public partial class PutCalendarJobDescriptor : RequestDescriptorBase<PutCalendarJobDescriptor, PutCalendarJobRequestParameters, IPutCalendarJobRequest>, IPutCalendarJobRequest
 	{
 		internal override ApiUrls ApiUrls => PutCalendarJobRequest.Urls;
@@ -4402,7 +4536,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Validate <pre>TODO</pre></summary>
+	///<summary>descriptor for ValidateJob <pre></pre></summary>
 	public partial class ValidateJobDescriptor<T> : RequestDescriptorBase<ValidateJobDescriptor<T>, ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
 	{
 		internal override ApiUrls ApiUrls => ValidateJobRequest.Urls;
@@ -4410,7 +4544,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ValidateDetector <pre>TODO</pre></summary>
+	///<summary>descriptor for ValidateDetector <pre></pre></summary>
 	public partial class ValidateDetectorDescriptor<T> : RequestDescriptorBase<ValidateDetectorDescriptor<T>, ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
 	{
 		internal override ApiUrls ApiUrls => ValidateDetectorRequest.Urls;
@@ -4418,7 +4552,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
+	///<summary>descriptor for MultiSearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor : RequestDescriptorBase<MultiSearchDescriptor, MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{
 		internal override ApiUrls ApiUrls => MultiSearchRequest.Urls;
@@ -4459,7 +4593,7 @@ namespace Nest
 		public MultiSearchDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 
-	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
+	///<summary>descriptor for MultiSearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor : RequestDescriptorBase<MultiSearchTemplateDescriptor, MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => MultiSearchTemplateRequest.Urls;
@@ -4496,7 +4630,7 @@ namespace Nest
 		public MultiSearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 
-	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
+	///<summary>descriptor for MultiTermVectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor : RequestDescriptorBase<MultiTermVectorsDescriptor, MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{
 		internal override ApiUrls ApiUrls => MultiTermVectorsRequest.Urls;
@@ -4552,42 +4686,41 @@ namespace Nest
 		public MultiTermVectorsDescriptor VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	}
 
-	///<summary>descriptor for HotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
-	public partial class HotThreadsDescriptor : RequestDescriptorBase<HotThreadsDescriptor, HotThreadsRequestParameters, IHotThreadsRequest>, IHotThreadsRequest
+	///<summary>descriptor for NodesHotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+	public partial class NodesHotThreadsDescriptor : RequestDescriptorBase<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{
-		internal override ApiUrls ApiUrls => HotThreadsRequest.Urls;
+		internal override ApiUrls ApiUrls => NodesHotThreadsRequest.Urls;
 		///<summary>/_nodes/hot_threads</summary>
-		public HotThreadsDescriptor(): base()
+		public NodesHotThreadsDescriptor(): base()
 		{
 		}
 
 		///<summary>/_nodes/{node_id}/hot_threads</summary>
 		///<param name = "node_id">Optional, accepts null</param>
-		public HotThreadsDescriptor(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		public NodesHotThreadsDescriptor(NodeIds node_id): base(r => r.Optional("node_id", node_id))
 		{
 		}
 
 		// values part of the url path
-		NodeIds IHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public HotThreadsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
+		public NodesHotThreadsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		// Request parameters
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public HotThreadsDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
+		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
 		///<summary>The interval for the second sampling of threads</summary>
-		public HotThreadsDescriptor Interval(Time interval) => Qs("interval", interval);
+		public NodesHotThreadsDescriptor Interval(Time interval) => Qs("interval", interval);
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public HotThreadsDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
-		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public HotThreadsDescriptor Threads(long? threads) => Qs("threads", threads);
-		///<summary>Explicit operation timeout</summary>
-		public HotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		public NodesHotThreadsDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
 		///<summary>The type to sample (default: cpu)</summary>
-		public HotThreadsDescriptor TypeQueryString(TypeQueryString? typeQueryString) => Qs("type", typeQueryString);
-	//TODO THIS METHOD IS UNMAPPED!
+		public NodesHotThreadsDescriptor ThreadType(ThreadType? threadType) => Qs("type", threadType);
+		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
+		public NodesHotThreadsDescriptor Threads(long? threads) => Qs("threads", threads);
+		///<summary>Explicit operation timeout</summary>
+		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+	///<summary>descriptor for NodesInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor : RequestDescriptorBase<NodesInfoDescriptor, NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{
 		internal override ApiUrls ApiUrls => NodesInfoRequest.Urls;
@@ -4653,7 +4786,7 @@ namespace Nest
 		public ReloadSecureSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+	///<summary>descriptor for NodesStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor : RequestDescriptorBase<NodesStatsDescriptor, NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{
 		internal override ApiUrls ApiUrls => NodesStatsRequest.Urls;
@@ -4734,7 +4867,7 @@ namespace Nest
 		public NodesStatsDescriptor Types(params string[] types) => Qs("types", types);
 	}
 
-	///<summary>descriptor for Usage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	///<summary>descriptor for NodesUsage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageDescriptor : RequestDescriptorBase<NodesUsageDescriptor, NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
 	{
 		internal override ApiUrls ApiUrls => NodesUsageRequest.Urls;
@@ -4817,7 +4950,7 @@ namespace Nest
 		public PutScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
+	///<summary>descriptor for ReindexOnServer <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerDescriptor : RequestDescriptorBase<ReindexOnServerDescriptor, ReindexOnServerRequestParameters, IReindexOnServerRequest>, IReindexOnServerRequest
 	{
 		internal override ApiUrls ApiUrls => ReindexOnServerRequest.Urls;
@@ -4884,7 +5017,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for DeleteJob <pre>TODO</pre></summary>
+	///<summary>descriptor for DeleteRollupJob <pre></pre></summary>
 	public partial class DeleteRollupJobDescriptor : RequestDescriptorBase<DeleteRollupJobDescriptor, DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteRollupJobRequest.Urls;
@@ -4905,7 +5038,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetJobs <pre>TODO</pre></summary>
+	///<summary>descriptor for GetRollupJob <pre></pre></summary>
 	public partial class GetRollupJobDescriptor : RequestDescriptorBase<GetRollupJobDescriptor, GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => GetRollupJobRequest.Urls;
@@ -4927,7 +5060,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRollupCaps <pre>TODO</pre></summary>
+	///<summary>descriptor for GetRollupCapabilities <pre></pre></summary>
 	public partial class GetRollupCapabilitiesDescriptor : RequestDescriptorBase<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => GetRollupCapabilitiesRequest.Urls;
@@ -4949,7 +5082,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRollupIndexCaps <pre>TODO</pre></summary>
+	///<summary>descriptor for GetRollupIndexCapabilities <pre></pre></summary>
 	public partial class GetRollupIndexCapabilitiesDescriptor : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => GetRollupIndexCapabilitiesRequest.Urls;
@@ -4975,7 +5108,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutJob <pre>TODO</pre></summary>
+	///<summary>descriptor for CreateRollupJob <pre></pre></summary>
 	public partial class CreateRollupJobDescriptor<T> : RequestDescriptorBase<CreateRollupJobDescriptor<T>, CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => CreateRollupJobRequest.Urls;
@@ -4996,7 +5129,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for RollupSearch <pre>TODO</pre></summary>
+	///<summary>descriptor for RollupSearch <pre></pre></summary>
 	public partial class RollupSearchDescriptor<T> : RequestDescriptorBase<RollupSearchDescriptor<T>, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{
 		internal override ApiUrls ApiUrls => RollupSearchRequest.Urls;
@@ -5027,7 +5160,7 @@ namespace Nest
 		public RollupSearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 
-	///<summary>descriptor for StartJob <pre>TODO</pre></summary>
+	///<summary>descriptor for StartRollupJob <pre></pre></summary>
 	public partial class StartRollupJobDescriptor : RequestDescriptorBase<StartRollupJobDescriptor, StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => StartRollupJobRequest.Urls;
@@ -5048,7 +5181,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for StopJob <pre>TODO</pre></summary>
+	///<summary>descriptor for StopRollupJob <pre></pre></summary>
 	public partial class StopRollupJobDescriptor : RequestDescriptorBase<StopRollupJobDescriptor, StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => StopRollupJobRequest.Urls;
@@ -5073,7 +5206,7 @@ namespace Nest
 		public StopRollupJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
-	///<summary>descriptor for ScriptsPainlessExecute <pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
+	///<summary>descriptor for ExecutePainlessScript <pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
 	public partial class ExecutePainlessScriptDescriptor : RequestDescriptorBase<ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequestParameters, IExecutePainlessScriptRequest>, IExecutePainlessScriptRequest
 	{
 		internal override ApiUrls ApiUrls => ExecutePainlessScriptRequest.Urls;
@@ -5578,7 +5711,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	///<summary>descriptor for GetUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
 	public partial class GetUserAccessTokenDescriptor : RequestDescriptorBase<GetUserAccessTokenDescriptor, GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{
 		internal override ApiUrls ApiUrls => GetUserAccessTokenRequest.Urls;
@@ -5639,7 +5772,7 @@ namespace Nest
 	//TODO THIS METHOD IS UNMAPPED!
 	}
 
-	///<summary>descriptor for InvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	///<summary>descriptor for InvalidateUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{
 		internal override ApiUrls ApiUrls => InvalidateUserAccessTokenRequest.Urls;
@@ -5726,7 +5859,7 @@ namespace Nest
 		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Snapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor : RequestDescriptorBase<SnapshotDescriptor, SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => SnapshotRequest.Urls;
@@ -5780,7 +5913,7 @@ namespace Nest
 		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
 	}
 
-	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for DeleteSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor : RequestDescriptorBase<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteSnapshotRequest.Urls;
@@ -5830,7 +5963,7 @@ namespace Nest
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for GetSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor : RequestDescriptorBase<GetSnapshotDescriptor, GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => GetSnapshotRequest.Urls;
@@ -5912,7 +6045,7 @@ namespace Nest
 		public RestoreDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
-	///<summary>descriptor for Status <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor : RequestDescriptorBase<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{
 		internal override ApiUrls ApiUrls => SnapshotStatusRequest.Urls;
@@ -5973,7 +6106,7 @@ namespace Nest
 		public VerifyRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for ClearCursor <pre>Clear SQL cursor</pre></summary>
+	///<summary>descriptor for ClearSqlCursor <pre>Clear SQL cursor</pre></summary>
 	public partial class ClearSqlCursorDescriptor : RequestDescriptorBase<ClearSqlCursorDescriptor, ClearSqlCursorRequestParameters, IClearSqlCursorRequest>, IClearSqlCursorRequest
 	{
 		internal override ApiUrls ApiUrls => ClearSqlCursorRequest.Urls;
@@ -5981,7 +6114,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Query <pre>Execute SQL</pre></summary>
+	///<summary>descriptor for QuerySql <pre>Execute SQL</pre></summary>
 	public partial class QuerySqlDescriptor : RequestDescriptorBase<QuerySqlDescriptor, QuerySqlRequestParameters, IQuerySqlRequest>, IQuerySqlRequest
 	{
 		internal override ApiUrls ApiUrls => QuerySqlRequest.Urls;
@@ -5991,7 +6124,7 @@ namespace Nest
 		public QuerySqlDescriptor Format(string format) => Qs("format", format);
 	}
 
-	///<summary>descriptor for Translate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	///<summary>descriptor for TranslateSql <pre>Translate SQL into Elasticsearch queries</pre></summary>
 	public partial class TranslateSqlDescriptor : RequestDescriptorBase<TranslateSqlDescriptor, TranslateSqlRequestParameters, ITranslateSqlRequest>, ITranslateSqlRequest
 	{
 		internal override ApiUrls ApiUrls => TranslateSqlRequest.Urls;
@@ -5999,7 +6132,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Certificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	///<summary>descriptor for GetCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
 	public partial class GetCertificatesDescriptor : RequestDescriptorBase<GetCertificatesDescriptor, GetCertificatesRequestParameters, IGetCertificatesRequest>, IGetCertificatesRequest
 	{
 		internal override ApiUrls ApiUrls => GetCertificatesRequest.Urls;
@@ -6007,7 +6140,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Cancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>descriptor for CancelTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksDescriptor : RequestDescriptorBase<CancelTasksDescriptor, CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
 	{
 		internal override ApiUrls ApiUrls => CancelTasksRequest.Urls;
@@ -6035,7 +6168,7 @@ namespace Nest
 		public CancelTasksDescriptor ParentTaskId(string parentTaskId) => Qs("parent_task_id", parentTaskId);
 	}
 
-	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>descriptor for GetTask <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskDescriptor : RequestDescriptorBase<GetTaskDescriptor, GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{
 		internal override ApiUrls ApiUrls => GetTaskRequest.Urls;
@@ -6060,7 +6193,7 @@ namespace Nest
 		public GetTaskDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
-	///<summary>descriptor for List <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>descriptor for ListTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksDescriptor : RequestDescriptorBase<ListTasksDescriptor, ListTasksRequestParameters, IListTasksRequest>, IListTasksRequest
 	{
 		internal override ApiUrls ApiUrls => ListTasksRequest.Urls;
@@ -6082,7 +6215,7 @@ namespace Nest
 		public ListTasksDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
-	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
+	///<summary>descriptor for TermVectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument> : RequestDescriptorBase<TermVectorsDescriptor<TDocument>, TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => TermVectorsRequest.Urls;
@@ -6347,7 +6480,7 @@ namespace Nest
 		public UpdateByQueryRethrottleDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 	}
 
-	///<summary>descriptor for AckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
+	///<summary>descriptor for AcknowledgeWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor : RequestDescriptorBase<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{
 		internal override ApiUrls ApiUrls => AcknowledgeWatchRequest.Urls;
@@ -6515,7 +6648,7 @@ namespace Nest
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
 	}
 
-	///<summary>descriptor for Start <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
+	///<summary>descriptor for StartWatcher <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherDescriptor : RequestDescriptorBase<StartWatcherDescriptor, StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{
 		internal override ApiUrls ApiUrls => StartWatcherRequest.Urls;
@@ -6523,7 +6656,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
+	///<summary>descriptor for WatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsDescriptor : RequestDescriptorBase<WatcherStatsDescriptor, WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
 	{
 		internal override ApiUrls ApiUrls => WatcherStatsRequest.Urls;
@@ -6547,7 +6680,7 @@ namespace Nest
 		public WatcherStatsDescriptor EmitStacktraces(bool? emitStacktraces = true) => Qs("emit_stacktraces", emitStacktraces);
 	}
 
-	///<summary>descriptor for Stop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
+	///<summary>descriptor for StopWatcher <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherDescriptor : RequestDescriptorBase<StopWatcherDescriptor, StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
 	{
 		internal override ApiUrls ApiUrls => StopWatcherRequest.Urls;
@@ -6555,7 +6688,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Info <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
+	///<summary>descriptor for XPackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoDescriptor : RequestDescriptorBase<XPackInfoDescriptor, XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{
 		internal override ApiUrls ApiUrls => XPackInfoRequest.Urls;
@@ -6565,7 +6698,7 @@ namespace Nest
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);
 	}
 
-	///<summary>descriptor for Usage <pre>Retrieve information about xpack features usage</pre></summary>
+	///<summary>descriptor for XPackUsage <pre>Retrieve information about xpack features usage</pre></summary>
 	public partial class XPackUsageDescriptor : RequestDescriptorBase<XPackUsageDescriptor, XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{
 		internal override ApiUrls ApiUrls => XPackUsageRequest.Urls;

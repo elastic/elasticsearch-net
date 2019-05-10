@@ -39,7 +39,7 @@ namespace ApiGenerator
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
 
-		public static readonly Dictionary<string, string> DescriptorGenerics =
+		public static readonly Dictionary<string, string> DescriptorGenericsLookup =
 			(from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 				let contents = File.ReadAllText(f.FullName)
 				let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
@@ -48,28 +48,28 @@ namespace ApiGenerator
 			.OrderBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
 
-		private static readonly List<Tuple<string, string>> AllKnownRequests = (
+		/// <summary> Scan all NEST files for request interfaces and note any generics declared on them </summary>
+		private static readonly List<Tuple<string, string>> AllKnownRequestInterfaces = (
+			// find all files in NEST ending with Request.cs
 			from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			from l in File.ReadLines(f.FullName)
+			// attempt to locate all Request interfaces lines
 			where Regex.IsMatch(l, @"^.+interface [^ \r\n]+Request")
+			//grab the interface name including any generics declared on it
 			let c = Regex.Replace(l, @"^.+interface ([^ \r\n]+Request(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
 			where c.StartsWith("I") && c.Contains("Request")
-			let key = Regex.Replace(c, "<.*$", "")
-			let value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")
-			select Tuple.Create(key,  value)
-			).OrderBy(v=>v.Item1).ToList();
+			let request = Regex.Replace(c, "<.*$", "")
+			let generics = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")
+			select Tuple.Create(request,  generics)
+			)
+			.OrderBy(v=>v.Item1)
+			.ToList();
 
-		public static readonly Dictionary<string, string> KnownRequests =
-			AllKnownRequests
+		public static readonly Dictionary<string, string> RequestInterfaceGenericsLookup =
+			AllKnownRequestInterfaces
 			.GroupBy(v=>v.Item1)
 			.Select(g=>g.Last())
 			.ToDictionary(k => k.Item1, v => v.Item2);
-
-		public static readonly Dictionary<string, int> NumberOfDeclaredRequests =
-			AllKnownRequests
-			.GroupBy(v=>v.Item1)
-			.Where(v => v.Count() > 1)
-			.ToDictionary(k => k.Key, v => v.Count());
 
 	}
 }

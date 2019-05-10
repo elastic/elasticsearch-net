@@ -1,30 +1,31 @@
-@inherits TemplatePage<CsharpMethod>
+@inherits TemplatePage<DescriptorPartialImplementation>
 @using System
 @using System.Linq
 @using System.Collections.Generic
 @using RazorLight
 @using ApiGenerator.Domain
 @{
-	CsharpMethod method = Model;
-	var type = method.DescriptorType + method.DescriptorTypeGeneric;
-	var concreteInterface = method.InterfaceTypeGeneric == null ? method.InterfaceType : method.InterfaceTypeGeneric;
+	DescriptorPartialImplementation d = Model;
+	var names = d.CsharpNames;
+	var type = names.GenericOrNonGenericDescriptorName;
+	var concreteInterface = names.GenericOrNonGenericInterfaceName;
 }
-	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, concreteInterface)))
+	///<summary>descriptor for @names.MethodName <pre>@d.OfficialDocumentationLink</pre></summary>
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type,names.ParametersName, concreteInterface)))
 	{ 
-		internal override ApiUrls ApiUrls => @(Raw(method.RequestType)).Urls;
-@foreach (Constructor c in Constructor.DescriptorConstructors(method))
+		internal override ApiUrls ApiUrls => @(Raw(names.RequestName)).Urls;
+@foreach (Constructor c in d.Constructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
 }
 		// values part of the url path
-@foreach (UrlPart part in method.Url.ExposedApiParts)
+@foreach (UrlPart part in d.Parts)
 {
-<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
+<text>		@(Raw(part.ClrTypeName)) @(Raw(names.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
 </text>
 }
-@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
+@foreach (FluentRouteSetter c in d.GetFluentRouteSetters())
 {
 <text>
 		@(Raw(c.XmlDoc))
@@ -32,23 +33,23 @@
 </text>
 }
 		// Request parameters
-@foreach (var param in method.Url.Params.Values)
+@foreach (var param in d.Params)
 {
 	var original = param.QueryStringKey;
 	//skip parameters already part of the path portion of the url
-	if (method.Url.ExposedApiParts.Any(p=>p.Name == original))
+	if (d.Parts.Any(p=>p.Name == original))
 	{
 		continue;
 	}
 	//we prefer this parameter to be explictly implemented on the request body
-	if (param.RenderPartial && (method.HasBody))
+	if (param.RenderPartial && (d.HasBody))
 	{
 		continue;
 	}
 	var t = @param.TypeHighLevel;
 	var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
-	var typed = !string.IsNullOrEmpty(method.DescriptorTypeGeneric);
-	var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
+	var typed = !string.IsNullOrEmpty(names.GenericsDeclaredOnDescriptor);
+	var g = typed ? names.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "") : "T";
 	var desc = param.DescriptionHighLevel.ToList();
 	
 	await IncludeAsync("Shared/XmlDocs.cshtml", desc);
@@ -75,7 +76,7 @@
 </text>
 	}
 }
-	@if (method.Unmapped)
+	@if (names.DescriptorNotFoundInCodebase)
 	{<text>
 		//TODO THIS METHOD IS UNMAPPED!
 		</text>

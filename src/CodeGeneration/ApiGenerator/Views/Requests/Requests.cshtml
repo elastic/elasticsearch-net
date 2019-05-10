@@ -1,41 +1,44 @@
-@inherits TemplatePage<CsharpMethod>
+@inherits TemplatePage<RequestPartialImplementation>
 @using System
 @using System.Linq
 @using System.Collections.Generic
 @using RazorLight
 @using ApiGenerator.Domain
 @{
-	CsharpMethod method = Model;
+	RequestPartialImplementation r = Model;
+	CsharpNames names = r.CsharpNames;
 }
-	///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(method.RequestType) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
+	///<summary>Request for @names.MethodName <pre>@r.OfficialDocumentationLink</pre></summary>
+	public partial class @Raw(names.RequestName) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, names.InterfaceName))
 	{
-		protected @(Raw(method.InterfaceType)) Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", method.Url.ExposedApiPaths.Select(p=>$"\"{p.Path}\"")))});
+		protected @(Raw(names.InterfaceName)) Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", r.Paths.Select(p=>$"\"{p.Path}\"")))});
 		internal override ApiUrls ApiUrls => Urls;
-@foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: true))
+@foreach (Constructor c in r.Constructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
 }
 		// values part of the url path
-@foreach (var part in method.Url.ExposedApiParts)
+@foreach (var part in r.Parts)
 {
 <text>		[IgnoreDataMember]
-		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+		@(Raw(part.ClrTypeName)) @(Raw(names.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
 </text>
 }
 
 		// Request parameters
-@foreach (var param in method.Url.Params.Values)
+@foreach (var param in r.Params)
 {
 	var original = param.QueryStringKey;
 	//skip parameters already part of the path portion of the url
-	if (method.Url.ExposedApiParts.Any(p=>p.Name == original))
+	if (r.Parts.Any(p=>p.Name == original))
 	{
 		continue;
 	}
-	if (param.RenderPartial && (method.HasBody))
+	// We prefer to map these explicitly in our own hand written classes.
+	// The interface generation will generate properties for these so code won't compile until we do
+	if (param.RenderPartial && (r.HasBody))
 	{
 		continue;
 	}
@@ -43,22 +46,21 @@
 <text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
 </text>
 }
-@if (method.RequestTypeUnmapped)
-{<text>		//TODO THIS METHOD IS UNMAPPED!
+@if (names.DescriptorNotFoundInCodebase)
+{<text>		//TODO THIS METHOD IS UNMAPPED! Expected to find @names.DescriptorName and @names.RequestName in a file called @(names.RequestName).cs in NEST's codebase
 </text>
 }
 	}
-	@if (!string.IsNullOrWhiteSpace(method.InterfaceTypeGeneric))
+@if (!string.IsNullOrWhiteSpace(names.GenericsDeclaredOnRequest))
 	{<text>
-	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": {0}, {1}", method.RequestType, method.InterfaceTypeGeneric))
+	public partial class @Raw(names.GenericRequestName) @Raw(string.Format(": {0}, {1}", names.RequestName, names.GenericInterfaceName))
 	{
-		protected @(Raw(method.InterfaceTypeGeneric)) TypedSelf => this;
-@foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: false))
+		protected @(Raw(names.GenericInterfaceName)) TypedSelf => this;
+@foreach (Constructor c in r.GenericConstructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
 }
 	}
-	 </text>}
-	}
+	 </text>
 }

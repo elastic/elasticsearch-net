@@ -19,9 +19,11 @@ namespace ApiGenerator
 			endpoint.FileName = Path.GetFileName(jsonFile);
 			endpoint.Name = name;
 			var tokens = name.Split(".");
-			endpoint.MethodName = tokens.Last().ToPascalCase();
+			
+			endpoint.MethodName = tokens.Last();
 			if (tokens.Length > 1)
-				endpoint.Namespace = tokens[0].ToPascalCase();
+				endpoint.Namespace = tokens[0];
+			endpoint.CsharpNames = new CsharpNames(name, endpoint.MethodName, endpoint.Namespace);
 			
 			LoadOverridesOnEndpoint(endpoint);
 			PatchRequestParameters(endpoint);
@@ -37,18 +39,18 @@ namespace ApiGenerator
 		private static void EnforceRequiredOnParts(string jsonFile, UrlInformation url)
 		{
 			if (url.IsPartless) return;
-			foreach (var (name, part) in url.Parts)
+			foreach (var part in url.Parts)
 			{
-				var required = url.ExposedApiPaths.All(p => p.Path.Contains($"{{{name}}}"));
+				var required = url.Paths.All(p => p.Path.Contains($"{{{part.Name}}}"));
 				if (part.Required != required)
-					ApiGenerator.Warnings.Add($"{jsonFile} has part: {name} listed as {part.Required} but should be {required}");
+					ApiGenerator.Warnings.Add($"{jsonFile} has part: {part.Name} listed as {part.Required} but should be {required}");
 				part.Required = required;
 			}
 		}
 
 		private static void LoadOverridesOnEndpoint(ApiEndpoint endpoint)
 		{
-			var method = endpoint.MethodName;
+			var method = endpoint.CsharpNames.MethodName;
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(endpoint.Name, out var mapsApiMethodName))
 				method = mapsApiMethodName;
 

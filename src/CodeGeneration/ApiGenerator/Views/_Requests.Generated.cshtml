@@ -25,20 +25,12 @@ namespace Nest
 {
 @{
 	RestApiSpec m = Model;
-	var methods = m.CsharpMethodsWithQueryStringInfo
-		.Concat(m
-			.CsharpMethodsWithQueryStringInfo
-			.Where(s=>s.RequestTypeGeneric == "<T>")
-			.Select(s=> { var ss = CsharpMethod.Clone(s); ss.RequestTypeGeneric = ""; ss.SkipInterface = true; return ss; })
-		)
-		.OrderBy(s=>s.RequestType);
 }
 @{ await IncludeAsync("Requests/PlainRequestBase.cshtml", m); }
-@foreach (CsharpMethod method in methods)
+
+@foreach (var endpoint in m.Endpoints.Values)
 {
-	if (!method.SkipInterface)
-	{
-		await IncludeAsync("Requests/RequestInterface.cshtml", method);
-	}
-	await IncludeAsync("Requests/Requests.cshtml", method);
+	await IncludeAsync("Requests/RequestInterface.cshtml", endpoint.RequestInterface);
+	await IncludeAsync("Requests/Requests.cshtml", endpoint.RequestPartialImplementation);
+}
 }

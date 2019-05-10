@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ApiGenerator.Domain
 {
@@ -12,33 +13,35 @@ namespace ApiGenerator.Domain
 		public string Body { get; set; }
 		public string Description { get; set; }
 		public string Generated { get; set; }
-		public string Url { get; set; }
 
-		public static IEnumerable<Constructor> DescriptorConstructors(CsharpMethod method)
+		public static IEnumerable<Constructor> DescriptorConstructors(CsharpNames names, UrlInformation url)
 		{
-			var m = method.DescriptorType;
-			var generic = method.DescriptorTypeGeneric?.Replace("<", "").Replace(">", "").Split(",").First().Trim();
-			var generateGeneric = !string.IsNullOrEmpty(method.DescriptorTypeGeneric);
-			return GenerateConstructors(method, true, generateGeneric, m, generic);
+			var m = names.DescriptorName;
+			var generic = FirstGeneric(names.GenericsDeclaredOnDescriptor);
+			var generateGeneric = !string.IsNullOrEmpty(generic);
+			return GenerateConstructors(url, true, generateGeneric, m, generic);
 		}
 
-		public static IEnumerable<Constructor> RequestConstructors(CsharpMethod method, bool inheritsFromPlainRequestBase)
+		public static IEnumerable<Constructor> RequestConstructors(CsharpNames names, UrlInformation url, bool inheritsFromPlainRequestBase)
 		{
-			var generic = method.RequestTypeGeneric?.Replace("<", "").Replace(">", "").Split(",").First().Trim();
-			return GenerateConstructors(method, inheritsFromPlainRequestBase, !inheritsFromPlainRequestBase, method.RequestType, generic);
+			var generic = FirstGeneric(names.GenericsDeclaredOnRequest);
+			return GenerateConstructors(url, inheritsFromPlainRequestBase, !inheritsFromPlainRequestBase, names.RequestName, generic);
 		}
+		
+		private static string FirstGeneric(string fullGenericString) => 
+			fullGenericString?.Replace("<", "").Replace(">", "").Split(",").First().Trim();
 
 		private static IEnumerable<Constructor> GenerateConstructors(
-			CsharpMethod method,
+			UrlInformation url,
 			bool inheritsFromPlainRequestBase,
 			bool generateGeneric,
-			string typeName, string generic
+			string typeName, 
+			string generic
 		)
 		{
-			var url = method.Url;
 			var ctors = new List<Constructor>();
 
-			var paths = url.ExposedApiPaths.ToList();
+			var paths = url.Paths.ToList();
 
 			if (url.IsPartless) return ctors;
 

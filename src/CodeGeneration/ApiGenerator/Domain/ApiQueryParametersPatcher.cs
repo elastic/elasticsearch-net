@@ -41,7 +41,7 @@ namespace ApiGenerator.Domain
 				if (!renameLookup.TryGetValue(queryStringKey, out var preferredName)) preferredName = kv.Key;
 				kv.Value.ClsName = CreateCSharpName(preferredName);
 
-				if (skipList.Contains(queryStringKey)) continue;
+				if (skipList.Contains(queryStringKey)) kv.Value.Skip = true;;
 
 				if (partialList.Contains(queryStringKey)) kv.Value.RenderPartial = true;
 

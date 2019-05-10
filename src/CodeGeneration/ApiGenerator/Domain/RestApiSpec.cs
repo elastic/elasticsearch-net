@@ -11,54 +11,51 @@ namespace ApiGenerator.Domain
 
 	public class RestApiSpec
 	{
-		private IEnumerable<EnumDescription> _enumDescriptions;
-
 		public string Commit { get; set; }
 
 		public static SortedDictionary<string, QueryParameters> CommonApiQueryParameters { get; set; }
 		
-		public IReadOnlyCollection<Request> Requests { get; internal set; }
-
-		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo => Endpoints.Values
-			.SelectMany(v => v.CsharpMethods)
-			.Select(u => u)
-			.GroupBy(m => m.QueryStringParamName)
-			.Select(g => g.First());
-
 		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
+		private IEnumerable<EnumDescription> _enumDescriptions;
 		public IEnumerable<EnumDescription> EnumsInTheSpec
 		{
 			get
 			{
 				if (_enumDescriptions != null) return _enumDescriptions;
 
-				var queryParamEnums = from m in CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
-					where m.Value.Type == "enum"
+				string CreateName(string name, string methodName)
+				{
+					if (
+						name.ToLowerInvariant().Contains("metric")
+						 ||(name.ToLowerInvariant() == "status")
+					) 
+						return methodName + name;
+
+					return name;
+				}
+
+				var urlParameterEnums = (
+					from e in Endpoints.Values 
+					from para in e.Url.Params.Values 
+					where para.Options != null && para.Options.Any() 
 					select new EnumDescription
 					{
-						Name = m.Value.ClsName,
-						Options = m.Value.Options
-					};
-
-				var urlParamEnums = from data in Endpoints.Values
-						.SelectMany(v => v.CsharpMethods.Select(m => new { m, n = v.MethodName }))
-						.SelectMany(m => m.m.Parts.Select(part => new { m = m.n, p = part }))
-					let p = data.p
-					let m = data.m
-					where p.Options != null && p.Options.Any()
-					let name = p.Name.Contains("metric") && p.Name != "watcher_stats_metric"
-						? m + p.Name.ToPascalCase()
-						: p.Name.ToPascalCase()
+						Name = CreateName(para.ClsName, e.CsharpNames.MethodName),
+						Options = para.Options
+					}).ToList();
+				
+				var urlPartEnums = (
+					from e in Endpoints.Values 
+					from part in e.Url.Parts 
+					where part.Options != null && part.Options.Any() 
 					select new EnumDescription
 					{
-						Name = name,
-						Options = p.Options
-					};
+						Name = CreateName(part.Name.ToPascalCase(), e.CsharpNames.MethodName),
+						Options = part.Options
+					}).ToList();
 
-				_enumDescriptions = queryParamEnums.Concat(urlParamEnums).DistinctBy(e => e.Name);
-
-				return _enumDescriptions;
+				return urlPartEnums.Concat(urlParameterEnums).DistinctBy(e => e.Name);
 			}
 		}
 	}
