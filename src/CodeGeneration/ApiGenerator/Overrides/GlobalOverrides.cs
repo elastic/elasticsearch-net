@@ -19,7 +19,6 @@ namespace ApiGenerator.Overrides
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
 		{
 			{ "parent", "the parent parameter has been deprecated from elasticsearch, please use routing instead directly." },
-			{ "update_all_types", "Elasticsearch 6.x only allows a single type per index so this parameter is now useless" },
 			{ "copy_settings", "Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404" }
 		};
 
@@ -43,7 +42,6 @@ namespace ApiGenerator.Overrides
 		public override IEnumerable<string> RenderPartial => new[]
 		{
 			"stored_fields",
-			"script_fields",
 			"docvalue_fields"
 		};
 
@@ -52,7 +50,6 @@ namespace ApiGenerator.Overrides
 			"parent", //can be removed once https://github.com/elastic/elasticsearch/pull/41098 is in
 			"copy_settings", //this still needs a PR?
 			"source", // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
-			"ttl",
 			"timestamp",
 			"_source_include", "_source_exclude" // can be removed once https://github.com/elastic/elasticsearch/pull/41439 is in
 		};
