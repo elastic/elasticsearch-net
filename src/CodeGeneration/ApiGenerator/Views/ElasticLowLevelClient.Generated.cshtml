@@ -61,8 +61,8 @@ namespace Elasticsearch.Net
 		{
 <text>		[Obsolete("Scheduled to be removed in 7.0, @method.ObsoleteMethodVersion removed this method from the rest specification")]
 </text>}
-<text>		public @Raw(method.ReturnType) @(method.PerPathMethodName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
-			where @method.CallTypeGeneric : class, IElasticsearchResponse, new() => this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.PerPathMethodName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
+<text>		public @Raw(method.ReturnType) @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments))
+			where TResponse : class, IElasticsearchResponse, new() => this.@(requestMethod)@(Raw("<TResponse>"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.PerPathMethodName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
 </text>
 		}
 	}

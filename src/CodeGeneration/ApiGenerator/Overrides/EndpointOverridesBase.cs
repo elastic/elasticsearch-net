@@ -14,7 +14,5 @@ namespace ApiGenerator.Overrides
 		public virtual IEnumerable<string> RenderPartial { get; } = Enumerable.Empty<string>();
 
 		public virtual IEnumerable<string> SkipQueryStringParams { get; } = Enumerable.Empty<string>();
-
-		public virtual CsharpMethod PatchMethod(CsharpMethod method) => method;
 	}
 }
