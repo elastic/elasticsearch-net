@@ -55,7 +55,8 @@ namespace ApiGenerator.Domain
 						Options = part.Options
 					}).ToList();
 
-				return urlPartEnums.Concat(urlParameterEnums).DistinctBy(e => e.Name);
+				_enumDescriptions = urlPartEnums.Concat(urlParameterEnums).DistinctBy(e => e.Name).ToList();
+				return _enumDescriptions;
 			}
 		}
 	}

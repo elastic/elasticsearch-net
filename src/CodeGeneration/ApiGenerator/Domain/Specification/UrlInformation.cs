@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
-using HtmlParserSharp;
 using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain
 {
+	
 	// ReSharper disable once ClassNeverInstantiated.Global
 	public class UrlInformation
 	{
+		public CsharpNames CsharpNames { get; set; }
+		
 		public IDictionary<string, QueryParameters> Params { get; set; }
 
 		[JsonProperty("paths")]
@@ -35,10 +36,12 @@ namespace ApiGenerator.Domain
 		public bool IsPartless => !Parts.Any();
 
 		private static readonly string[] DocumentApiParts = { "index", "id" };
+
 		public bool IsDocumentApi =>
 			Parts.Count() == DocumentApiParts.Length
 			&& Parts.All(p => DocumentApiParts.Contains(p.Name));
-		
+
+
 		public bool TryGetDocumentApiPath(out UrlPath path)
 		{
 			path = null;

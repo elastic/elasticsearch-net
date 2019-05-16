@@ -23,7 +23,9 @@ namespace ApiGenerator
 			endpoint.MethodName = tokens.Last();
 			if (tokens.Length > 1)
 				endpoint.Namespace = tokens[0];
+			//todo side effect
 			endpoint.CsharpNames = new CsharpNames(name, endpoint.MethodName, endpoint.Namespace);
+			endpoint.Url.CsharpNames = endpoint.CsharpNames;
 			
 			LoadOverridesOnEndpoint(endpoint);
 			PatchRequestParameters(endpoint);

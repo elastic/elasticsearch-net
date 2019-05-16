@@ -1,3 +1,4 @@
+using System;
 using CsQuery.ExtensionMethods.Internal;
 
 namespace ApiGenerator.Domain 
@@ -20,6 +21,24 @@ namespace ApiGenerator.Domain
 		/// <pre>Uses <see cref="CodeConfiguration.ApiNameMapping"/> mapping of request implementations in the nest code base</pre>
 		/// </summary>
 		public string MethodName { get; set; }
+		
+		public string PerPathMethodName(string path)
+		{
+			Func<string, bool> ms = s => Namespace != null && Namespace.StartsWith(s);
+			Func<string, bool> pc = path.Contains;
+
+			if (ms("Indices") && !pc("{index}"))
+				return (MethodName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+
+			if (ms("Nodes") && !pc("{node_id}"))
+				return (MethodName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+
+			//temporary to maintain old behavior before we introduce namespaces
+			if (!string.IsNullOrWhiteSpace(Namespace) && !MethodName.StartsWith(Namespace))
+				return Namespace + MethodName;
+
+			return MethodName;
+		}
 		
 		public string RequestName => $"{MethodName}Request";
 		public string InterfaceName => $"I{RequestName}";
