@@ -2153,7 +2153,7 @@ namespace Nest
 	public partial class DeleteAliasDescriptor : RequestDescriptorBase<DeleteAliasDescriptor, DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteAliasRequest.Urls;
-		///<summary>/{index}/_aliases/{name}</summary>
+		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
 		public DeleteAliasDescriptor(Indices index, Names name): base(r => r.Required("index", index).Required("name", name))
@@ -2812,7 +2812,7 @@ namespace Nest
 	public partial class PutAliasDescriptor : RequestDescriptorBase<PutAliasDescriptor, PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
 	{
 		internal override ApiUrls ApiUrls => PutAliasRequest.Urls;
-		///<summary>/{index}/_aliases/{name}</summary>
+		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
 		public PutAliasDescriptor(Indices index, Name name): base(r => r.Required("index", index).Required("name", name))

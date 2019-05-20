@@ -135,9 +135,5 @@ namespace ApiGenerator.Domain
 			}
 		}
 
-		public IEnumerable<CsharpMethod> GetCsharpMethods() => CsharpMethods.ToList()
-			.DistinctBy(m => m.ReturnType + "--" + m.PerPathMethodName + "--" + m.Arguments
-		);
-
 	}
 }

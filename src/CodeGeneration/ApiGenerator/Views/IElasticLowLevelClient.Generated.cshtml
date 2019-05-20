@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 		{
 			var identifier = kv.Key;
 			var endpoint = kv.Value;
-			foreach(var method in endpoint.GetCsharpMethods())
+			foreach(var method in endpoint.CsharpMethods)
 			{
 <text>		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
 </text>

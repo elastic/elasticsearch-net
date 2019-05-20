@@ -4673,9 +4673,9 @@ namespace Nest
 	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
 		protected IDeleteAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_alias/{name}", "/{index}/_aliases/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_alias/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/{index}/_aliases/{name}</summary>
+		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
 		public DeleteAliasRequest(Indices index, Names name): base(r => r.Required("index", index).Required("name", name))
@@ -5908,9 +5908,9 @@ namespace Nest
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		protected IPutAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_alias/{name}", "/{index}/_aliases/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_alias/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
-		///<summary>/{index}/_aliases/{name}</summary>
+		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
 		public PutAliasRequest(Indices index, Name name): base(r => r.Required("index", index).Required("name", name))

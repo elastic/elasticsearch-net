@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 	foreach (var kv in model.Endpoints)
 	{
 		var endpoint = kv.Value;
-		var methods = endpoint.GetCsharpMethods().ToList();
+		var methods = endpoint.CsharpMethods.ToList();
 		var partsNotToReplace = new HashSet<string> {"category_id"};	
 		foreach (var method in methods)
 		{
