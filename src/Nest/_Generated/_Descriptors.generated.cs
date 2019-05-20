@@ -61,14 +61,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public BulkDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public BulkDescriptor SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields)
+		public BulkDescriptor SourceExcludes<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public BulkDescriptor SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields)
+		public BulkDescriptor SourceIncludes<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
@@ -1390,13 +1390,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public DeleteByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public DeleteByQueryDescriptor<T> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public DeleteByQueryDescriptor<T> SourceExcludes(params Expression<Func<T, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public DeleteByQueryDescriptor<T> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public DeleteByQueryDescriptor<T> SourceIncludes(params Expression<Func<T, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public DeleteByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
@@ -1512,13 +1512,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public DocumentExistsDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public DocumentExistsDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public DocumentExistsDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public DocumentExistsDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public DocumentExistsDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<TDocument> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -1582,13 +1582,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public SourceExistsDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public SourceExistsDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public SourceExistsDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public SourceExistsDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public SourceExistsDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1656,13 +1656,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public ExplainDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public ExplainDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public ExplainDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public ExplainDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public ExplainDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 	}
 
 	///<summary>descriptor for FieldCapabilities <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
@@ -1756,13 +1756,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public GetDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public GetDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public GetDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public GetDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public GetDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<TDocument> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -1849,13 +1849,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public SourceDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public SourceDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public SourceDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public SourceDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public SourceDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -3773,14 +3773,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public MultiGetDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public MultiGetDescriptor SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields)
+		public MultiGetDescriptor SourceExcludes<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public MultiGetDescriptor SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields)
+		public MultiGetDescriptor SourceIncludes<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("_source_includes", fields?.Select(e => (Field)e));
 	}
 
@@ -6750,13 +6750,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public UpdateByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public UpdateByQueryDescriptor<T> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public UpdateByQueryDescriptor<T> SourceExcludes(params Expression<Func<T, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public UpdateByQueryDescriptor<T> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public UpdateByQueryDescriptor<T> SourceIncludes(params Expression<Func<T, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public UpdateByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>

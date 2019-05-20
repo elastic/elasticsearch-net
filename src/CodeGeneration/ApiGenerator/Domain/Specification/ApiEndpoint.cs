@@ -70,7 +70,7 @@ namespace ApiGenerator.Domain
 		{
 			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink,
-			Params = Url.Params.Values.ToList(),
+			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
 			HttpMethod = PreferredHttpMethod
 		};
 

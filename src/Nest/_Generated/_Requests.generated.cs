@@ -123,14 +123,14 @@ namespace Nest
 		}
 
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -3079,14 +3079,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -3329,14 +3329,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -3479,14 +3479,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -3657,14 +3657,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -3849,14 +3849,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -4039,14 +4039,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -7663,14 +7663,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);
@@ -13295,14 +13295,14 @@ namespace Nest
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude
+		public Fields SourceExcludes
 		{
 			get => Q<Fields>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude
+		public Fields SourceIncludes
 		{
 			get => Q<Fields>("_source_includes");
 			set => Q("_source_includes", value);

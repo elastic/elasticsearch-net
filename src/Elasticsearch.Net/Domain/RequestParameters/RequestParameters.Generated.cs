@@ -44,14 +44,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -1695,14 +1695,6 @@ namespace Elasticsearch.Net
 	public class CreateRequestParameters : RequestParameters<CreateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline
 		{
@@ -1776,14 +1768,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
-		}
-
-		///<summary>ID of parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
 		}
 
 		///<summary>
@@ -2012,14 +1996,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -2107,14 +2091,6 @@ namespace Elasticsearch.Net
 	public class DocumentExistsRequestParameters : RequestParameters<DocumentExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -2151,14 +2127,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -2190,14 +2166,6 @@ namespace Elasticsearch.Net
 	public class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -2234,14 +2202,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -2301,14 +2269,6 @@ namespace Elasticsearch.Net
 			set => Q("lenient", value);
 		}
 
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -2338,14 +2298,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -2399,28 +2359,6 @@ namespace Elasticsearch.Net
 	public class GetRequestParameters : RequestParameters<GetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] _SourceExclude
-		{
-			get => Q<string[]>("_source_exclude");
-			set => Q("_source_exclude", value);
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] _SourceInclude
-		{
-			get => Q<string[]>("_source_include");
-			set => Q("_source_include", value);
-		}
-
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -2457,14 +2395,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -2508,14 +2446,6 @@ namespace Elasticsearch.Net
 	public class SourceRequestParameters : RequestParameters<SourceRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -2552,14 +2482,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -2682,14 +2612,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<OpType? >("op_type");
 			set => Q("op_type", value);
-		}
-
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
 		}
 
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
@@ -3776,13 +3698,6 @@ namespace Elasticsearch.Net
 			set => Q("master_timeout", value);
 		}
 
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public long? Order
-		{
-			get => Q<long? >("order");
-			set => Q("order", value);
-		}
-
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
@@ -3955,14 +3870,6 @@ namespace Elasticsearch.Net
 	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public bool? CopySettings
-		{
-			get => Q<bool? >("copy_settings");
-			set => Q("copy_settings", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -3989,14 +3896,6 @@ namespace Elasticsearch.Net
 	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public bool? CopySettings
-		{
-			get => Q<bool? >("copy_settings");
-			set => Q("copy_settings", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -4063,13 +3962,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<Level? >("level");
 			set => Q("level", value);
-		}
-
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public string[] Types
-		{
-			get => Q<string[]>("types");
-			set => Q("types", value);
 		}
 	}
 
@@ -4414,14 +4306,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -4598,39 +4490,11 @@ namespace Elasticsearch.Net
 	public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Advances time to the given value generating results and updating the model for the advanced interval</summary>
-		public string AdvanceTime
-		{
-			get => Q<string>("advance_time");
-			set => Q("advance_time", value);
-		}
-
-		///<summary>Calculates interim results for the most recent bucket or all buckets within the latency period</summary>
-		public bool? CalcInterim
-		{
-			get => Q<bool? >("calc_interim");
-			set => Q("calc_interim", value);
-		}
-
-		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
-		public string End
-		{
-			get => Q<string>("end");
-			set => Q("end", value);
-		}
-
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime
 		{
 			get => Q<string>("skip_time");
 			set => Q("skip_time", value);
-		}
-
-		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
-		public string Start
-		{
-			get => Q<string>("start");
-			set => Q("start", value);
 		}
 	}
 
@@ -4638,87 +4502,12 @@ namespace Elasticsearch.Net
 	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The duration of the forecast</summary>
-		public TimeSpan Duration
-		{
-			get => Q<TimeSpan>("duration");
-			set => Q("duration", value);
-		}
-
-		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
-		public TimeSpan ExpiresIn
-		{
-			get => Q<TimeSpan>("expires_in");
-			set => Q("expires_in", value);
-		}
 	}
 
 	///<summary>Request options for GetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Filter for the most anomalous buckets</summary>
-		public double AnomalyScore
-		{
-			get => Q<double>("anomaly_score");
-			set => Q("anomaly_score", value);
-		}
-
-		///<summary>Set the sort direction</summary>
-		public bool? Desc
-		{
-			get => Q<bool? >("desc");
-			set => Q("desc", value);
-		}
-
-		///<summary>End time filter for buckets</summary>
-		public string End
-		{
-			get => Q<string>("end");
-			set => Q("end", value);
-		}
-
-		///<summary>Exclude interim results</summary>
-		public bool? ExcludeInterim
-		{
-			get => Q<bool? >("exclude_interim");
-			set => Q("exclude_interim", value);
-		}
-
-		///<summary>Include anomaly records</summary>
-		public bool? Expand
-		{
-			get => Q<bool? >("expand");
-			set => Q("expand", value);
-		}
-
-		///<summary>skips a number of buckets</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
-		///<summary>specifies a max number of buckets to get</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
-		}
-
-		///<summary>Sort buckets by a particular field</summary>
-		public string Sort
-		{
-			get => Q<string>("sort");
-			set => Q("sort", value);
-		}
-
-		///<summary>Start time filter for buckets</summary>
-		public string Start
-		{
-			get => Q<string>("start");
-			set => Q("start", value);
-		}
 	}
 
 	///<summary>Request options for GetCalendarEvents<pre></pre></summary>
@@ -4732,25 +4521,11 @@ namespace Elasticsearch.Net
 			set => Q("end", value);
 		}
 
-		///<summary>Skips a number of events</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
 		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
 		public string JobId
 		{
 			get => Q<string>("job_id");
 			set => Q("job_id", value);
-		}
-
-		///<summary>Specifies a max number of events to get</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
 		}
 
 		///<summary>Get events after this time</summary>
@@ -4765,38 +4540,12 @@ namespace Elasticsearch.Net
 	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>skips a number of calendars</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
-		///<summary>specifies a max number of calendars to get</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
-		}
 	}
 
 	///<summary>Request options for GetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>skips a number of categories</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
-		///<summary>specifies a max number of categories to get</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
-		}
 	}
 
 	///<summary>Request options for GetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
@@ -4846,61 +4595,6 @@ namespace Elasticsearch.Net
 	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>whether the results should be sorted in decending order</summary>
-		public bool? Desc
-		{
-			get => Q<bool? >("desc");
-			set => Q("desc", value);
-		}
-
-		///<summary>end timestamp for the requested influencers</summary>
-		public string End
-		{
-			get => Q<string>("end");
-			set => Q("end", value);
-		}
-
-		///<summary>Exclude interim results</summary>
-		public bool? ExcludeInterim
-		{
-			get => Q<bool? >("exclude_interim");
-			set => Q("exclude_interim", value);
-		}
-
-		///<summary>skips a number of influencers</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
-		///<summary>influencer score threshold for the requested influencers</summary>
-		public double InfluencerScore
-		{
-			get => Q<double>("influencer_score");
-			set => Q("influencer_score", value);
-		}
-
-		///<summary>specifies a max number of influencers to get</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
-		}
-
-		///<summary>sort field for the requested influencers</summary>
-		public string Sort
-		{
-			get => Q<string>("sort");
-			set => Q("sort", value);
-		}
-
-		///<summary>start timestamp for the requested influencers</summary>
-		public string Start
-		{
-			get => Q<string>("start");
-			set => Q("start", value);
-		}
 	}
 
 	///<summary>Request options for GetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
@@ -4931,161 +4625,18 @@ namespace Elasticsearch.Net
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>True if the results should be sorted in descending order</summary>
-		public bool? Desc
-		{
-			get => Q<bool? >("desc");
-			set => Q("desc", value);
-		}
-
-		///<summary>The filter 'end' query parameter</summary>
-		public DateTimeOffset? End
-		{
-			get => Q<DateTimeOffset? >("end");
-			set => Q("end", value);
-		}
-
-		///<summary>Skips a number of documents</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
-		///<summary>The default number of documents returned in queries as a string.</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
-		}
-
-		///<summary>Name of the field to sort on</summary>
-		public string Sort
-		{
-			get => Q<string>("sort");
-			set => Q("sort", value);
-		}
-
-		///<summary>The filter 'start' query parameter</summary>
-		public DateTimeOffset? Start
-		{
-			get => Q<DateTimeOffset? >("start");
-			set => Q("start", value);
-		}
 	}
 
 	///<summary>Request options for GetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
 	public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs
-		{
-			get => Q<bool? >("allow_no_jobs");
-			set => Q("allow_no_jobs", value);
-		}
-
-		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
-		public string BucketSpan
-		{
-			get => Q<string>("bucket_span");
-			set => Q("bucket_span", value);
-		}
-
-		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
-		public string End
-		{
-			get => Q<string>("end");
-			set => Q("end", value);
-		}
-
-		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
-		public bool? ExcludeInterim
-		{
-			get => Q<bool? >("exclude_interim");
-			set => Q("exclude_interim", value);
-		}
-
-		///<summary>Returns overall buckets with overall scores higher than this value</summary>
-		public double OverallScore
-		{
-			get => Q<double>("overall_score");
-			set => Q("overall_score", value);
-		}
-
-		///<summary>Returns overall buckets with timestamps after this time</summary>
-		public string Start
-		{
-			get => Q<string>("start");
-			set => Q("start", value);
-		}
-
-		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
-		public int? TopN
-		{
-			get => Q<int? >("top_n");
-			set => Q("top_n", value);
-		}
 	}
 
 	///<summary>Request options for GetAnomalyRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Set the sort direction</summary>
-		public bool? Desc
-		{
-			get => Q<bool? >("desc");
-			set => Q("desc", value);
-		}
-
-		///<summary>End time filter for records</summary>
-		public string End
-		{
-			get => Q<string>("end");
-			set => Q("end", value);
-		}
-
-		///<summary>Exclude interim results</summary>
-		public bool? ExcludeInterim
-		{
-			get => Q<bool? >("exclude_interim");
-			set => Q("exclude_interim", value);
-		}
-
-		///<summary>skips a number of records</summary>
-		public int? From
-		{
-			get => Q<int? >("from");
-			set => Q("from", value);
-		}
-
-		public double RecordScore
-		{
-			get => Q<double>("record_score");
-			set => Q("record_score", value);
-		}
-
-		///<summary>specifies a max number of records to get</summary>
-		public int? Size
-		{
-			get => Q<int? >("size");
-			set => Q("size", value);
-		}
-
-		///<summary>Sort records by a particular field</summary>
-		public string Sort
-		{
-			get => Q<string>("sort");
-			set => Q("sort", value);
-		}
-
-		///<summary>Start time filter for records</summary>
-		public string Start
-		{
-			get => Q<string>("start");
-			set => Q("start", value);
-		}
 	}
 
 	///<summary>Request options for MachineLearningInfo<pre></pre></summary>
@@ -5165,38 +4716,12 @@ namespace Elasticsearch.Net
 	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Should we reset the results back to the time of the snapshot?</summary>
-		public bool? DeleteInterveningResults
-		{
-			get => Q<bool? >("delete_intervening_results");
-			set => Q("delete_intervening_results", value);
-		}
 	}
 
 	///<summary>Request options for StartDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The end time when the datafeed should stop. When not set, the datafeed continues in real time</summary>
-		public string End
-		{
-			get => Q<string>("end");
-			set => Q("end", value);
-		}
-
-		///<summary>The start time from where the datafeed should begin</summary>
-		public string Start
-		{
-			get => Q<string>("start");
-			set => Q("start", value);
-		}
-
-		///<summary>Controls the time to wait until a datafeed has started. Default to 20 seconds</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
-		}
 	}
 
 	///<summary>Request options for StopDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
@@ -5208,20 +4733,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
-		}
-
-		///<summary>True if the datafeed should be forcefully stopped.</summary>
-		public bool? Force
-		{
-			get => Q<bool? >("force");
-			set => Q("force", value);
-		}
-
-		///<summary>Controls the time to wait until a datafeed has stopped. Default to 20 seconds</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
 		}
 	}
 
@@ -5384,26 +4895,11 @@ namespace Elasticsearch.Net
 			set => Q("fields", value);
 		}
 
-		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set "ids" or "docs" in the request body</summary>
-		public string[] Ids
-		{
-			get => Q<string[]>("ids");
-			set => Q("ids", value);
-		}
-
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool? Offsets
 		{
 			get => Q<bool? >("offsets");
 			set => Q("offsets", value);
-		}
-
-		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
 		}
 
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
@@ -5812,20 +5308,6 @@ namespace Elasticsearch.Net
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll
-		{
-			get => Q<TimeSpan>("scroll");
-			set => Q("scroll", value);
-		}
-
-		///<summary>The scroll ID for scrolled search</summary>
-		public string ScrollId
-		{
-			get => Q<string>("scroll_id");
-			set => Q("scroll_id", value);
-		}
-
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger
 		{
@@ -5914,20 +5396,6 @@ namespace Elasticsearch.Net
 			set => Q("expand_wildcards", value);
 		}
 
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool? Explain
-		{
-			get => Q<bool? >("explain");
-			set => Q("explain", value);
-		}
-
-		///<summary>Starting offset (default: 0)</summary>
-		public long? From
-		{
-			get => Q<long? >("from");
-			set => Q("from", value);
-		}
-
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
 		public bool? IgnoreThrottled
 		{
@@ -5978,13 +5446,6 @@ namespace Elasticsearch.Net
 			set => Q("preference", value);
 		}
 
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString
-		{
-			get => Q<string>("q");
-			set => Q("q", value);
-		}
-
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache
 		{
@@ -6018,41 +5479,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("seq_no_primary_term");
 			set => Q("seq_no_primary_term", value);
-		}
-
-		///<summary>Number of hits to return (default: 10)</summary>
-		public long? Size
-		{
-			get => Q<long? >("size");
-			set => Q("size", value);
-		}
-
-		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public string[] Sort
-		{
-			get => Q<string[]>("sort");
-			set => Q("sort", value);
-		}
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled
-		{
-			get => Q<bool? >("_source");
-			set => Q("_source", value);
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
-		{
-			get => Q<string[]>("_source_excludes");
-			set => Q("_source_excludes", value);
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
-		{
-			get => Q<string[]>("_source_includes");
-			set => Q("_source_includes", value);
 		}
 
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -6097,32 +5523,11 @@ namespace Elasticsearch.Net
 			set => Q("suggest_text", value);
 		}
 
-		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public long? TerminateAfter
-		{
-			get => Q<long? >("terminate_after");
-			set => Q("terminate_after", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
-		}
-
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger
 		{
 			get => Q<bool? >("rest_total_hits_as_int");
 			set => Q("rest_total_hits_as_int", value);
-		}
-
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public bool? TrackScores
-		{
-			get => Q<bool? >("track_scores");
-			set => Q("track_scores", value);
 		}
 
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
@@ -6137,13 +5542,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("typed_keys");
 			set => Q("typed_keys", value);
-		}
-
-		///<summary>Specify whether to return document version as part of a hit</summary>
-		public bool? Version
-		{
-			get => Q<bool? >("version");
-			set => Q("version", value);
 		}
 	}
 
@@ -6925,14 +6323,6 @@ namespace Elasticsearch.Net
 			set => Q("offsets", value);
 		}
 
-		///<summary>Parent id of documents.</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>Specifies if term payloads should be returned.</summary>
 		public bool? Payloads
 		{
@@ -7015,14 +6405,6 @@ namespace Elasticsearch.Net
 			set => Q("lang", value);
 		}
 
-		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent
-		{
-			get => Q<string>("parent");
-			set => Q("parent", value);
-		}
-
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -7052,20 +6434,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("_source");
 			set => Q("_source", value);
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
-		{
-			get => Q<string[]>("_source_excludes");
-			set => Q("_source_excludes", value);
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
-		{
-			get => Q<string[]>("_source_includes");
-			set => Q("_source_includes", value);
 		}
 
 		///<summary>Explicit operation timeout</summary>
@@ -7270,14 +6638,14 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude
+		public string[] SourceExcludes
 		{
 			get => Q<string[]>("_source_excludes");
 			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude
+		public string[] SourceIncludes
 		{
 			get => Q<string[]>("_source_includes");
 			set => Q("_source_includes", value);
@@ -7439,13 +6807,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("emit_stacktraces");
 			set => Q("emit_stacktraces", value);
-		}
-
-		///<summary>Controls what additional stat metrics should be include in the response</summary>
-		public string[] Metric
-		{
-			get => Q<string[]>("metric");
-			set => Q("metric", value);
 		}
 	}
 
