@@ -1280,7 +1280,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for ClusterAllocationExplain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo
 		{
@@ -2265,7 +2265,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for Explain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public class ExplainRequestParameters : RequestParameters<ExplainRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard
 		{
@@ -2362,7 +2362,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for FieldCapabilities<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -2569,7 +2569,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GraphExplore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specific routing value</summary>
 		public string Routing
 		{
@@ -2678,7 +2678,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for Analyze<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The name of the index to scope the operation</summary>
 		public string IndexQueryString
 		{
@@ -4064,7 +4064,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for ValidateQuery<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public class ValidateQueryRequestParameters : RequestParameters<ValidateQueryRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards
 		{
@@ -4218,7 +4218,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for SimulatePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose
 		{
@@ -4303,7 +4303,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for MultiGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public class MultiGetRequestParameters : RequestParameters<MultiGetRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -4576,7 +4576,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Filter for the most anomalous buckets</summary>
 		public double AnomalyScore
 		{
@@ -4684,7 +4684,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetCalendars<pre></pre></summary>
 	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>skips a number of calendars</summary>
 		public int From
 		{
@@ -4703,7 +4703,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>skips a number of categories</summary>
 		public int From
 		{
@@ -4746,7 +4746,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>whether the results should be sorted in decending order</summary>
 		public bool? Desc
 		{
@@ -4831,7 +4831,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>True if the results should be sorted in descending order</summary>
 		public bool? Desc
 		{
@@ -4878,7 +4878,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
 	public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs
 		{
@@ -4932,7 +4932,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for GetAnomalyRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Set the sort direction</summary>
 		public bool? Desc
 		{
@@ -5153,7 +5153,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for MultiSearch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public class MultiSearchRequestParameters : RequestParameters<MultiSearchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public bool? CcsMinimizeRoundtrips
 		{
@@ -5215,7 +5215,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for MultiSearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public bool? CcsMinimizeRoundtrips
 		{
@@ -5255,7 +5255,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for MultiTermVectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public class MultiTermVectorsRequestParameters : RequestParameters<MultiTermVectorsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
 		/// Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned
 		/// documents unless otherwise specified in body "params" or "docs".
@@ -5614,7 +5614,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for RenderSearchTemplate<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
 	///<summary>Request options for DeleteRollupJob<pre></pre></summary>
@@ -5650,7 +5650,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for RollupSearch<pre></pre></summary>
 	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger
 		{
@@ -5694,13 +5694,13 @@ namespace Elasticsearch.Net
 	///<summary>Request options for ExecutePainlessScript<pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
 	public class ExecutePainlessScriptRequestParameters : RequestParameters<ExecutePainlessScriptRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
 	///<summary>Request options for Scroll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public TimeSpan Scroll
 		{
@@ -5726,7 +5726,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for Search<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -6039,7 +6039,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for SearchShards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -6089,7 +6089,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for SearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public class SearchTemplateRequestParameters : RequestParameters<SearchTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -6353,7 +6353,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for HasPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
 	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
 	///<summary>Request options for InvalidateUserAccessToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
@@ -6738,7 +6738,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for TermVectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool? FieldStatistics
 		{

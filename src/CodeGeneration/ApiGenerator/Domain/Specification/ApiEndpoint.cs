@@ -71,8 +71,19 @@ namespace ApiGenerator.Domain
 			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink,
 			Params = Url.Params.Values.ToList(),
-			HttpMethod = HttpMethods.First()
+			HttpMethod = PreferredHttpMethod
 		};
+
+		public string PreferredHttpMethod
+		{
+			get
+			{
+				var first = HttpMethods.First();
+				if (HttpMethods.Count > 1 && first.ToUpperInvariant() == "GET")
+					return HttpMethods.Last();
+				return first;
+			}
+		}
 		
 		private List<CsharpMethod> _csharpMethods;
 		public IReadOnlyCollection<CsharpMethod> CsharpMethods
@@ -84,7 +95,7 @@ namespace ApiGenerator.Domain
 				// enumerate once and cache
 				_csharpMethods = new List<CsharpMethod>();
 
-				var httpMethod = HttpMethods.First();
+				var httpMethod = PreferredHttpMethod;
 				foreach (var path in Url.Paths)
 				{
 					var methodName = CsharpNames.PerPathMethodName(path.Path);
