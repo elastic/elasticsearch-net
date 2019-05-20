@@ -1289,7 +1289,7 @@ namespace Nest
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
 		public DeleteDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
-		public DeleteDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public DeleteDescriptor<TDocument> IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public DeleteDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
@@ -1756,13 +1756,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public GetDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_exclude", fields?.Select(e => (Field)e));
+		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_include", fields?.Select(e => (Field)e));
+		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<TDocument> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -1899,6 +1899,199 @@ namespace Nest
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
+	///<summary>descriptor for DeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleDescriptor : RequestDescriptorBase<DeleteLifecycleDescriptor, DeleteLifecycleRequestParameters, IDeleteLifecycleRequest>, IDeleteLifecycleRequest
+	{
+		internal override ApiUrls ApiUrls => DeleteLifecycleRequest.Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name = "policy_id">this parameter is required</param>
+		public DeleteLifecycleDescriptor(PolicyId policy_id): base(r => r.Required("policy_id", policy_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteLifecycleDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		PolicyId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+	// Request parameters
+	}
+
+	///<summary>descriptor for ExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleDescriptor : RequestDescriptorBase<ExplainLifecycleDescriptor, ExplainLifecycleRequestParameters, IExplainLifecycleRequest>, IExplainLifecycleRequest
+	{
+		internal override ApiUrls ApiUrls => ExplainLifecycleRequest.Urls;
+		///<summary>/{index}/_ilm/explain</summary>
+		///<param name = "index">this parameter is required</param>
+		public ExplainLifecycleDescriptor(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal ExplainLifecycleDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the index to explain</summary>
+		public ExplainLifecycleDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ExplainLifecycleDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+	// Request parameters
+	}
+
+	///<summary>descriptor for GetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleDescriptor : RequestDescriptorBase<GetLifecycleDescriptor, GetLifecycleRequestParameters, IGetLifecycleRequest>, IGetLifecycleRequest
+	{
+		internal override ApiUrls ApiUrls => GetLifecycleRequest.Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name = "policy_id">Optional, accepts null</param>
+		public GetLifecycleDescriptor(PolicyId policy_id): base(r => r.Optional("policy_id", policy_id))
+		{
+		}
+
+		///<summary>/_ilm/policy</summary>
+		public GetLifecycleDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		PolicyId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+		///<summary>The name of the index lifecycle policy</summary>
+		public GetLifecycleDescriptor PolicyId(PolicyId policyId) => Assign(policyId, (a, v) => a.RouteValues.Optional("policy_id", v));
+	// Request parameters
+	}
+
+	///<summary>descriptor for GetIlmStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusDescriptor : RequestDescriptorBase<GetIlmStatusDescriptor, GetIlmStatusRequestParameters, IGetIlmStatusRequest>, IGetIlmStatusRequest
+	{
+		internal override ApiUrls ApiUrls => GetIlmStatusRequest.Urls;
+	// values part of the url path
+	// Request parameters
+	}
+
+	///<summary>descriptor for MoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepDescriptor : RequestDescriptorBase<MoveToStepDescriptor, MoveToStepRequestParameters, IMoveToStepRequest>, IMoveToStepRequest
+	{
+		internal override ApiUrls ApiUrls => MoveToStepRequest.Urls;
+		///<summary>/_ilm/move/{index}</summary>
+		///<param name = "index">this parameter is required</param>
+		public MoveToStepDescriptor(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal MoveToStepDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the index whose lifecycle step is to change</summary>
+		public MoveToStepDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public MoveToStepDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+	// Request parameters
+	//TODO THIS METHOD IS UNMAPPED!
+	}
+
+	///<summary>descriptor for PutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleDescriptor : RequestDescriptorBase<PutLifecycleDescriptor, PutLifecycleRequestParameters, IPutLifecycleRequest>, IPutLifecycleRequest
+	{
+		internal override ApiUrls ApiUrls => PutLifecycleRequest.Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name = "policy_id">this parameter is required</param>
+		public PutLifecycleDescriptor(PolicyId policy_id): base(r => r.Required("policy_id", policy_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutLifecycleDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		PolicyId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+	// Request parameters
+	}
+
+	///<summary>descriptor for RemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyDescriptor : RequestDescriptorBase<RemovePolicyDescriptor, RemovePolicyRequestParameters, IRemovePolicyRequest>, IRemovePolicyRequest
+	{
+		internal override ApiUrls ApiUrls => RemovePolicyRequest.Urls;
+		///<summary>/{index}/_ilm/remove</summary>
+		///<param name = "index">this parameter is required</param>
+		public RemovePolicyDescriptor(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal RemovePolicyDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName IRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the index to remove policy on</summary>
+		public RemovePolicyDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RemovePolicyDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+	// Request parameters
+	}
+
+	///<summary>descriptor for RetryIlm <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmDescriptor : RequestDescriptorBase<RetryIlmDescriptor, RetryIlmRequestParameters, IRetryIlmRequest>, IRetryIlmRequest
+	{
+		internal override ApiUrls ApiUrls => RetryIlmRequest.Urls;
+		///<summary>/{index}/_ilm/retry</summary>
+		///<param name = "index">this parameter is required</param>
+		public RetryIlmDescriptor(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal RetryIlmDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName IRetryIlmRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the indices (comma-separated) whose failed lifecycle step is to be retry</summary>
+		public RetryIlmDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RetryIlmDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+	// Request parameters
+	}
+
+	///<summary>descriptor for StartIlm <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmDescriptor : RequestDescriptorBase<StartIlmDescriptor, StartIlmRequestParameters, IStartIlmRequest>, IStartIlmRequest
+	{
+		internal override ApiUrls ApiUrls => StartIlmRequest.Urls;
+	// values part of the url path
+	// Request parameters
+	}
+
+	///<summary>descriptor for StopIlm <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmDescriptor : RequestDescriptorBase<StopIlmDescriptor, StopIlmRequestParameters, IStopIlmRequest>, IStopIlmRequest
+	{
+		internal override ApiUrls ApiUrls => StopIlmRequest.Urls;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<TDocument> : RequestDescriptorBase<IndexDescriptor<TDocument>, IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{
@@ -1945,7 +2138,7 @@ namespace Nest
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
 		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
-		public IndexDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public IndexDescriptor<TDocument> IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>Explicit operation type</summary>
 		public IndexDescriptor<TDocument> OpType(OpType? opType) => Qs("op_type", opType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
@@ -3802,6 +3995,27 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>descriptor for DeleteFilter <pre></pre></summary>
+	public partial class DeleteFilterDescriptor : RequestDescriptorBase<DeleteFilterDescriptor, DeleteFilterRequestParameters, IDeleteFilterRequest>, IDeleteFilterRequest
+	{
+		internal override ApiUrls ApiUrls => DeleteFilterRequest.Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name = "filter_id">this parameter is required</param>
+		public DeleteFilterDescriptor(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteFilterDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+	// Request parameters
+	}
+
 	///<summary>descriptor for DeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public partial class DeleteForecastDescriptor : RequestDescriptorBase<DeleteForecastDescriptor, DeleteForecastRequestParameters, IDeleteForecastRequest>, IDeleteForecastRequest
 	{
@@ -4078,6 +4292,32 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+	}
+
+	///<summary>descriptor for GetFilters <pre></pre></summary>
+	public partial class GetFiltersDescriptor : RequestDescriptorBase<GetFiltersDescriptor, GetFiltersRequestParameters, IGetFiltersRequest>, IGetFiltersRequest
+	{
+		internal override ApiUrls ApiUrls => GetFiltersRequest.Urls;
+		///<summary>/_ml/filters</summary>
+		public GetFiltersDescriptor(): base()
+		{
+		}
+
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name = "filter_id">Optional, accepts null</param>
+		public GetFiltersDescriptor(Id filter_id): base(r => r.Optional("filter_id", filter_id))
+		{
+		}
+
+		// values part of the url path
+		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+		///<summary>The ID of the filter to fetch</summary>
+		public GetFiltersDescriptor FilterId(Id filterId) => Assign(filterId, (a, v) => a.RouteValues.Optional("filter_id", v));
+		// Request parameters
+		///<summary>skips a number of filters</summary>
+		public GetFiltersDescriptor From(int? from) => Qs("from", from);
+		///<summary>specifies a max number of filters to get</summary>
+		public GetFiltersDescriptor Size(int? size) => Qs("size", size);
 	}
 
 	///<summary>descriptor for GetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
@@ -4383,6 +4623,27 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>descriptor for PutFilter <pre></pre></summary>
+	public partial class PutFilterDescriptor : RequestDescriptorBase<PutFilterDescriptor, PutFilterRequestParameters, IPutFilterRequest>, IPutFilterRequest
+	{
+		internal override ApiUrls ApiUrls => PutFilterRequest.Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name = "filter_id">this parameter is required</param>
+		public PutFilterDescriptor(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutFilterDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+	// Request parameters
+	}
+
 	///<summary>descriptor for PutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobDescriptor<T> : RequestDescriptorBase<PutJobDescriptor<T>, PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{
@@ -4489,6 +4750,27 @@ namespace Nest
 
 		// values part of the url path
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+	// Request parameters
+	}
+
+	///<summary>descriptor for UpdateFilter <pre></pre></summary>
+	public partial class UpdateFilterDescriptor : RequestDescriptorBase<UpdateFilterDescriptor, UpdateFilterRequestParameters, IUpdateFilterRequest>, IUpdateFilterRequest
+	{
+		internal override ApiUrls ApiUrls => UpdateFilterRequest.Urls;
+		///<summary>/_ml/filters/{filter_id}/_update</summary>
+		///<param name = "filter_id">this parameter is required</param>
+		public UpdateFilterDescriptor(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal UpdateFilterDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 	// Request parameters
 	}
 
@@ -5294,7 +5576,7 @@ namespace Nest
 		///<summary>Search operation type</summary>
 		public SearchDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public SearchDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Qs("seq_no_primary_term", seqNoPrimaryTerm);
+		public SearchDescriptor<T> SequenceNumberPrimaryTerm(bool? sequenceNumberPrimaryTerm = true) => Qs("seq_no_primary_term", sequenceNumberPrimaryTerm);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
@@ -5495,6 +5777,16 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>descriptor for CreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class CreateApiKeyDescriptor : RequestDescriptorBase<CreateApiKeyDescriptor, CreateApiKeyRequestParameters, ICreateApiKeyRequest>, ICreateApiKeyRequest
+	{
+		internal override ApiUrls ApiUrls => CreateApiKeyRequest.Urls;
+		// values part of the url path
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public CreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	}
+
 	///<summary>descriptor for DeletePrivileges <pre>TODO</pre></summary>
 	public partial class DeletePrivilegesDescriptor : RequestDescriptorBase<DeletePrivilegesDescriptor, DeletePrivilegesRequestParameters, IDeletePrivilegesRequest>, IDeletePrivilegesRequest
 	{
@@ -5635,6 +5927,22 @@ namespace Nest
 		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
+	///<summary>descriptor for GetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class GetApiKeyDescriptor : RequestDescriptorBase<GetApiKeyDescriptor, GetApiKeyRequestParameters, IGetApiKeyRequest>, IGetApiKeyRequest
+	{
+		internal override ApiUrls ApiUrls => GetApiKeyRequest.Urls;
+		// values part of the url path
+		// Request parameters
+		///<summary>API key id of the API key to be retrieved</summary>
+		public GetApiKeyDescriptor Id(string id) => Qs("id", id);
+		///<summary>API key name of the API key to be retrieved</summary>
+		public GetApiKeyDescriptor Name(string name) => Qs("name", name);
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public GetApiKeyDescriptor RealmName(string realmName) => Qs("realm_name", realmName);
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public GetApiKeyDescriptor Username(string username) => Qs("username", username);
+	}
+
 	///<summary>descriptor for GetPrivileges <pre>TODO</pre></summary>
 	public partial class GetPrivilegesDescriptor : RequestDescriptorBase<GetPrivilegesDescriptor, GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{
@@ -5770,6 +6078,14 @@ namespace Nest
 		public HasPrivilegesDescriptor User(Name user) => Assign(user, (a, v) => a.RouteValues.Optional("user", v));
 	// Request parameters
 	//TODO THIS METHOD IS UNMAPPED!
+	}
+
+	///<summary>descriptor for InvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class InvalidateApiKeyDescriptor : RequestDescriptorBase<InvalidateApiKeyDescriptor, InvalidateApiKeyRequestParameters, IInvalidateApiKeyRequest>, IInvalidateApiKeyRequest
+	{
+		internal override ApiUrls ApiUrls => InvalidateApiKeyRequest.Urls;
+	// values part of the url path
+	// Request parameters
 	}
 
 	///<summary>descriptor for InvalidateUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
@@ -6329,7 +6645,7 @@ namespace Nest
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public UpdateDescriptor<TDocument, TPartialDocument> IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -6643,7 +6959,7 @@ namespace Nest
 		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
 		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public PutWatchDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public PutWatchDescriptor IfSequenceNumber(long? ifSequenceNumber) => Qs("if_seq_no", ifSequenceNumber);
 		///<summary>Explicit version number for concurrency control</summary>
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
 	}

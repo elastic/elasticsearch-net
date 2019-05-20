@@ -1772,7 +1772,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
@@ -2399,6 +2399,20 @@ namespace Elasticsearch.Net
 	public class GetRequestParameters : RequestParameters<GetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public string[] _SourceExclude
+		{
+			get => Q<string[]>("_source_exclude");
+			set => Q("_source_exclude", value);
+		}
+
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public string[] _SourceInclude
+		{
+			get => Q<string[]>("_source_include");
+			set => Q("_source_include", value);
+		}
+
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent
@@ -2445,15 +2459,15 @@ namespace Elasticsearch.Net
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public string[] SourceExclude
 		{
-			get => Q<string[]>("_source_exclude");
-			set => Q("_source_exclude", value);
+			get => Q<string[]>("_source_excludes");
+			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public string[] SourceInclude
 		{
-			get => Q<string[]>("_source_include");
-			set => Q("_source_include", value);
+			get => Q<string[]>("_source_includes");
+			set => Q("_source_includes", value);
 		}
 
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -2585,6 +2599,66 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	///<summary>Request options for DeleteLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public class DeleteLifecycleRequestParameters : RequestParameters<DeleteLifecycleRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+
+	///<summary>Request options for ExplainLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public class ExplainLifecycleRequestParameters : RequestParameters<ExplainLifecycleRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
+	///<summary>Request options for GetLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public class GetLifecycleRequestParameters : RequestParameters<GetLifecycleRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
+	///<summary>Request options for GetIlmStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public class GetIlmStatusRequestParameters : RequestParameters<GetIlmStatusRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
+	///<summary>Request options for MoveToStep<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public class MoveToStepRequestParameters : RequestParameters<MoveToStepRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for PutLifecycle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public class PutLifecycleRequestParameters : RequestParameters<PutLifecycleRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+
+	///<summary>Request options for RemovePolicy<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public class RemovePolicyRequestParameters : RequestParameters<RemovePolicyRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for RetryIlm<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public class RetryIlmRequestParameters : RequestParameters<RetryIlmRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for StartIlm<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public class StartIlmRequestParameters : RequestParameters<StartIlmRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for StopIlm<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public class StopIlmRequestParameters : RequestParameters<StopIlmRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
 	///<summary>Request options for Index<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
 	{
@@ -2597,7 +2671,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
@@ -4470,6 +4544,12 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
+	///<summary>Request options for DeleteFilter<pre></pre></summary>
+	public class DeleteFilterRequestParameters : RequestParameters<DeleteFilterRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+
 	///<summary>Request options for DeleteForecast<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters>
 	{
@@ -4613,16 +4693,16 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>skips a number of buckets</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
 		///<summary>specifies a max number of buckets to get</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 
@@ -4653,9 +4733,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Skips a number of events</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
@@ -4667,9 +4747,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Specifies a max number of events to get</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 
@@ -4686,16 +4766,16 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>skips a number of calendars</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
 		///<summary>specifies a max number of calendars to get</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 	}
@@ -4705,16 +4785,16 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>skips a number of categories</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
 		///<summary>specifies a max number of categories to get</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 	}
@@ -4740,6 +4820,25 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
+		}
+	}
+
+	///<summary>Request options for GetFilters<pre></pre></summary>
+	public class GetFiltersRequestParameters : RequestParameters<GetFiltersRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>skips a number of filters</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>specifies a max number of filters to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
 		}
 	}
 
@@ -4769,9 +4868,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>skips a number of influencers</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
@@ -4783,9 +4882,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>specifies a max number of influencers to get</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 
@@ -4847,16 +4946,16 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Skips a number of documents</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
 		///<summary>The default number of documents returned in queries as a string.</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 
@@ -4922,9 +5021,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
-		public int TopN
+		public int? TopN
 		{
-			get => Q<int>("top_n");
+			get => Q<int? >("top_n");
 			set => Q("top_n", value);
 		}
 	}
@@ -4955,9 +5054,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>skips a number of records</summary>
-		public int From
+		public int? From
 		{
-			get => Q<int>("from");
+			get => Q<int? >("from");
 			set => Q("from", value);
 		}
 
@@ -4968,9 +5067,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>specifies a max number of records to get</summary>
-		public int Size
+		public int? Size
 		{
-			get => Q<int>("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 
@@ -5050,6 +5149,12 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
+	///<summary>Request options for PutFilter<pre></pre></summary>
+	public class PutFilterRequestParameters : RequestParameters<PutFilterRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+
 	///<summary>Request options for PutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public class PutJobRequestParameters : RequestParameters<PutJobRequestParameters>
 	{
@@ -5122,6 +5227,12 @@ namespace Elasticsearch.Net
 
 	///<summary>Request options for UpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for UpdateFilter<pre></pre></summary>
+	public class UpdateFilterRequestParameters : RequestParameters<UpdateFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
@@ -5903,7 +6014,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public bool? SeqNoPrimaryTerm
+		public bool? SequenceNumberPrimaryTerm
 		{
 			get => Q<bool? >("seq_no_primary_term");
 			set => Q("seq_no_primary_term", value);
@@ -6224,6 +6335,21 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
+	///<summary>Request options for CreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public class CreateApiKeyRequestParameters : RequestParameters<CreateApiKeyRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh
+		{
+			get => Q<Refresh? >("refresh");
+			set => Q("refresh", value);
+		}
+	}
+
 	///<summary>Request options for DeletePrivileges<pre>TODO</pre></summary>
 	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters>
 	{
@@ -6314,6 +6440,39 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	///<summary>Request options for GetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public class GetApiKeyRequestParameters : RequestParameters<GetApiKeyRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id
+		{
+			get => Q<string>("id");
+			set => Q("id", value);
+		}
+
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name
+		{
+			get => Q<string>("name");
+			set => Q("name", value);
+		}
+
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName
+		{
+			get => Q<string>("realm_name");
+			set => Q("realm_name", value);
+		}
+
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username
+		{
+			get => Q<string>("username");
+			set => Q("username", value);
+		}
+	}
+
 	///<summary>Request options for GetPrivileges<pre>TODO</pre></summary>
 	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters>
 	{
@@ -6354,6 +6513,12 @@ namespace Elasticsearch.Net
 	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for InvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public class InvalidateApiKeyRequestParameters : RequestParameters<InvalidateApiKeyRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
 	///<summary>Request options for InvalidateUserAccessToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
@@ -6837,7 +7002,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
@@ -7245,7 +7410,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);

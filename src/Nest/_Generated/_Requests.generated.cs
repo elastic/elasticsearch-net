@@ -2774,7 +2774,7 @@ namespace Nest
 		}
 
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
@@ -3851,15 +3851,15 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude
 		{
-			get => Q<Fields>("_source_exclude");
-			set => Q("_source_exclude", value);
+			get => Q<Fields>("_source_excludes");
+			set => Q("_source_excludes", value);
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude
 		{
-			get => Q<Fields>("_source_include");
-			set => Q("_source_include", value);
+			get => Q<Fields>("_source_includes");
+			set => Q("_source_includes", value);
 		}
 
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -4168,6 +4168,289 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IDeleteLifecycleRequest : IRequest<DeleteLifecycleRequestParameters>
+	{
+		[IgnoreDataMember]
+		PolicyId PolicyId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class DeleteLifecycleRequest : PlainRequestBase<DeleteLifecycleRequestParameters>, IDeleteLifecycleRequest
+	{
+		protected IDeleteLifecycleRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/policy/{policy_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name = "policy_id">this parameter is required</param>
+		public DeleteLifecycleRequest(PolicyId policy_id): base(r => r.Required("policy_id", policy_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteLifecycleRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		PolicyId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IExplainLifecycleRequest : IRequest<ExplainLifecycleRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class ExplainLifecycleRequest : PlainRequestBase<ExplainLifecycleRequestParameters>, IExplainLifecycleRequest
+	{
+		protected IExplainLifecycleRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ilm/explain"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_ilm/explain</summary>
+		///<param name = "index">this parameter is required</param>
+		public ExplainLifecycleRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal ExplainLifecycleRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IGetLifecycleRequest : IRequest<GetLifecycleRequestParameters>
+	{
+		[IgnoreDataMember]
+		PolicyId PolicyId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for GetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class GetLifecycleRequest : PlainRequestBase<GetLifecycleRequestParameters>, IGetLifecycleRequest
+	{
+		protected IGetLifecycleRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/policy/{policy_id}", "/_ilm/policy"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name = "policy_id">Optional, accepts null</param>
+		public GetLifecycleRequest(PolicyId policy_id): base(r => r.Optional("policy_id", policy_id))
+		{
+		}
+
+		///<summary>/_ilm/policy</summary>
+		public GetLifecycleRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		PolicyId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IGetIlmStatusRequest : IRequest<GetIlmStatusRequestParameters>
+	{
+	}
+
+	///<summary>Request for GetIlmStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class GetIlmStatusRequest : PlainRequestBase<GetIlmStatusRequestParameters>, IGetIlmStatusRequest
+	{
+		protected IGetIlmStatusRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/status"});
+		internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IMoveToStepRequest : IRequest<MoveToStepRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for MoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
+	{
+		protected IMoveToStepRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/move/{index}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ilm/move/{index}</summary>
+		///<param name = "index">this parameter is required</param>
+		public MoveToStepRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal MoveToStepRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
+	// Request parameters
+	//TODO THIS METHOD IS UNMAPPED! Expected to find MoveToStepDescriptor and MoveToStepRequest in a file called MoveToStepRequest.cs in NEST's codebase
+	}
+
+	[InterfaceDataContract]
+	public partial interface IPutLifecycleRequest : IRequest<PutLifecycleRequestParameters>
+	{
+		[IgnoreDataMember]
+		PolicyId PolicyId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for PutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class PutLifecycleRequest : PlainRequestBase<PutLifecycleRequestParameters>, IPutLifecycleRequest
+	{
+		protected IPutLifecycleRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/policy/{policy_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name = "policy_id">this parameter is required</param>
+		public PutLifecycleRequest(PolicyId policy_id): base(r => r.Required("policy_id", policy_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutLifecycleRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		PolicyId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IRemovePolicyRequest : IRequest<RemovePolicyRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for RemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	public partial class RemovePolicyRequest : PlainRequestBase<RemovePolicyRequestParameters>, IRemovePolicyRequest
+	{
+		protected IRemovePolicyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ilm/remove"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_ilm/remove</summary>
+		///<param name = "index">this parameter is required</param>
+		public RemovePolicyRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal RemovePolicyRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IRetryIlmRequest : IRequest<RetryIlmRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for RetryIlm <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class RetryIlmRequest : PlainRequestBase<RetryIlmRequestParameters>, IRetryIlmRequest
+	{
+		protected IRetryIlmRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ilm/retry"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/{index}/_ilm/retry</summary>
+		///<param name = "index">this parameter is required</param>
+		public RetryIlmRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal RetryIlmRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IRetryIlmRequest.Index => Self.RouteValues.Get<IndexName>("index");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IStartIlmRequest : IRequest<StartIlmRequestParameters>
+	{
+	}
+
+	///<summary>Request for StartIlm <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class StartIlmRequest : PlainRequestBase<StartIlmRequestParameters>, IStartIlmRequest
+	{
+		protected IStartIlmRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/start"});
+		internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IStopIlmRequest : IRequest<StopIlmRequestParameters>
+	{
+	}
+
+	///<summary>Request for StopIlm <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class StopIlmRequest : PlainRequestBase<StopIlmRequestParameters>, IStopIlmRequest
+	{
+		protected IStopIlmRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/stop"});
+		internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -4226,7 +4509,7 @@ namespace Nest
 		}
 
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
@@ -7753,6 +8036,40 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IDeleteFilterRequest : IRequest<DeleteFilterRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id FilterId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DeleteFilter <pre></pre></summary>
+	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
+	{
+		protected IDeleteFilterRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters/{filter_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name = "filter_id">this parameter is required</param>
+		public DeleteFilterRequest(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteFilterRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -8232,6 +8549,52 @@ namespace Nest
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IGetFiltersRequest : IRequest<GetFiltersRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id FilterId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for GetFilters <pre></pre></summary>
+	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
+	{
+		protected IGetFiltersRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters", "/_ml/filters/{filter_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters</summary>
+		public GetFiltersRequest(): base()
+		{
+		}
+
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name = "filter_id">Optional, accepts null</param>
+		public GetFiltersRequest(Id filter_id): base(r => r.Optional("filter_id", filter_id))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+		// Request parameters
+		///<summary>skips a number of filters</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>specifies a max number of filters to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
 		}
 	}
 
@@ -8740,6 +9103,40 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id FilterId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for PutFilter <pre></pre></summary>
+	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
+	{
+		protected IPutFilterRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters/{filter_id}"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name = "filter_id">this parameter is required</param>
+		public PutFilterRequest(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutFilterRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -8921,6 +9318,40 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id FilterId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for UpdateFilter <pre></pre></summary>
+	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
+	{
+		protected IUpdateFilterRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters/{filter_id}/_update"});
+		internal override ApiUrls ApiUrls => Urls;
+		///<summary>/_ml/filters/{filter_id}/_update</summary>
+		///<param name = "filter_id">this parameter is required</param>
+		public UpdateFilterRequest(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal UpdateFilterRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 	// Request parameters
 	}
 
@@ -10437,7 +10868,7 @@ namespace Nest
 		}
 
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public bool? SeqNoPrimaryTerm
+		public bool? SequenceNumberPrimaryTerm
 		{
 			get => Q<bool? >("seq_no_primary_term");
 			set => Q("seq_no_primary_term", value);
@@ -10883,6 +11314,30 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICreateApiKeyRequest : IRequest<CreateApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request for CreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class CreateApiKeyRequest : PlainRequestBase<CreateApiKeyRequestParameters>, ICreateApiKeyRequest
+	{
+		protected ICreateApiKeyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/api_key"});
+		internal override ApiUrls ApiUrls => Urls;
+		// values part of the url path
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh
+		{
+			get => Q<Refresh? >("refresh");
+			set => Q("refresh", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -11150,6 +11605,48 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IGetApiKeyRequest : IRequest<GetApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request for GetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class GetApiKeyRequest : PlainRequestBase<GetApiKeyRequestParameters>, IGetApiKeyRequest
+	{
+		protected IGetApiKeyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/api_key"});
+		internal override ApiUrls ApiUrls => Urls;
+		// values part of the url path
+		// Request parameters
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id
+		{
+			get => Q<string>("id");
+			set => Q("id", value);
+		}
+
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name
+		{
+			get => Q<string>("name");
+			set => Q("name", value);
+		}
+
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName
+		{
+			get => Q<string>("realm_name");
+			set => Q("realm_name", value);
+		}
+
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username
+		{
+			get => Q<string>("username");
+			set => Q("username", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -11358,6 +11855,21 @@ namespace Nest
 		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 	// Request parameters
 	//TODO THIS METHOD IS UNMAPPED! Expected to find HasPrivilegesDescriptor and HasPrivilegesRequest in a file called HasPrivilegesRequest.cs in NEST's codebase
+	}
+
+	[InterfaceDataContract]
+	public partial interface IInvalidateApiKeyRequest : IRequest<InvalidateApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request for InvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class InvalidateApiKeyRequest : PlainRequestBase<InvalidateApiKeyRequestParameters>, IInvalidateApiKeyRequest
+	{
+		protected IInvalidateApiKeyRequest Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/api_key"});
+		internal override ApiUrls ApiUrls => Urls;
+	// values part of the url path
+	// Request parameters
 	}
 
 	[InterfaceDataContract]
@@ -12464,7 +12976,7 @@ namespace Nest
 		}
 
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
@@ -13176,7 +13688,7 @@ namespace Nest
 		}
 
 		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public long? IfSeqNo
+		public long? IfSequenceNumber
 		{
 			get => Q<long? >("if_seq_no");
 			set => Q("if_seq_no", value);
