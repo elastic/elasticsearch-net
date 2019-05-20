@@ -12,7 +12,7 @@
 	public partial class @Raw(names.RequestName) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, names.InterfaceName))
 	{
 		protected @(Raw(names.InterfaceName)) Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", r.Paths.Select(p=>$"\"{p.Path}\"")))});
+		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", r.Paths.Select(p=>$"\"{p.Path.TrimStart('/')}\"")))});
 		internal override ApiUrls ApiUrls => Urls;
 @foreach (Constructor c in r.Constructors)
 {

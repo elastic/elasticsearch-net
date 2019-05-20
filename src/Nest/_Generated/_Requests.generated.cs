@@ -67,7 +67,7 @@ namespace Nest
 	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
 		protected IBulkRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_bulk", "/{index}/_bulk"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_bulk", "{index}/_bulk"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_bulk</summary>
 		public BulkRequest(): base()
@@ -176,7 +176,7 @@ namespace Nest
 	public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
 		protected ICatAliasesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/aliases", "/_cat/aliases/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/aliases", "_cat/aliases/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/aliases</summary>
 		public CatAliasesRequest(): base()
@@ -257,7 +257,7 @@ namespace Nest
 	public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
 		protected ICatAllocationRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/allocation", "/_cat/allocation/{node_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/allocation", "_cat/allocation/{node_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/allocation</summary>
 		public CatAllocationRequest(): base()
@@ -345,7 +345,7 @@ namespace Nest
 	public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
 		protected ICatCountRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/count", "/_cat/count/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/count", "_cat/count/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/count</summary>
 		public CatCountRequest(): base()
@@ -426,7 +426,7 @@ namespace Nest
 	public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
 		protected ICatFielddataRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/fielddata", "/_cat/fielddata/{fields}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/fielddata", "_cat/fielddata/{fields}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/fielddata</summary>
 		public CatFielddataRequest(): base()
@@ -509,7 +509,7 @@ namespace Nest
 	public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
 		protected ICatHealthRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/health"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/health"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -579,7 +579,7 @@ namespace Nest
 	public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
 		protected ICatHelpRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -612,7 +612,7 @@ namespace Nest
 	public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
 		protected ICatIndicesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/indices", "/_cat/indices/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/indices", "_cat/indices/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/indices</summary>
 		public CatIndicesRequest(): base()
@@ -709,7 +709,7 @@ namespace Nest
 	public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
 		protected ICatMasterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/master"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/master"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -772,7 +772,7 @@ namespace Nest
 	public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
 		protected ICatNodeAttributesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/nodeattrs"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/nodeattrs"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -835,7 +835,7 @@ namespace Nest
 	public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
 		protected ICatNodesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/nodes"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/nodes"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -905,7 +905,7 @@ namespace Nest
 	public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
 		protected ICatPendingTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/pending_tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/pending_tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -968,7 +968,7 @@ namespace Nest
 	public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
 		protected ICatPluginsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/plugins"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/plugins"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -1036,7 +1036,7 @@ namespace Nest
 	public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
 		protected ICatRecoveryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/recovery", "/_cat/recovery/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/recovery", "_cat/recovery/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/recovery</summary>
 		public CatRecoveryRequest(): base()
@@ -1112,7 +1112,7 @@ namespace Nest
 	public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
 		protected ICatRepositoriesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/repositories"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/repositories"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -1180,7 +1180,7 @@ namespace Nest
 	public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
 		protected ICatSegmentsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/segments", "/_cat/segments/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/segments", "_cat/segments/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/segments</summary>
 		public CatSegmentsRequest(): base()
@@ -1254,7 +1254,7 @@ namespace Nest
 	public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
 		protected ICatShardsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/shards", "/_cat/shards/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/shards", "_cat/shards/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/shards</summary>
 		public CatShardsRequest(): base()
@@ -1342,7 +1342,7 @@ namespace Nest
 	public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
 		protected ICatSnapshotsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/snapshots", "/_cat/snapshots/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/snapshots", "_cat/snapshots/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/snapshots</summary>
 		public CatSnapshotsRequest(): base()
@@ -1418,7 +1418,7 @@ namespace Nest
 	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
 		protected ICatTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -1503,7 +1503,7 @@ namespace Nest
 	public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
 		protected ICatTemplatesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/templates", "/_cat/templates/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/templates", "_cat/templates/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/templates</summary>
 		public CatTemplatesRequest(): base()
@@ -1584,7 +1584,7 @@ namespace Nest
 	public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cat/thread_pool", "/_cat/thread_pool/{thread_pool_patterns}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cat/thread_pool", "_cat/thread_pool/{thread_pool_patterns}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cat/thread_pool</summary>
 		public CatThreadPoolRequest(): base()
@@ -1672,7 +1672,7 @@ namespace Nest
 	public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
 	{
 		protected IDeleteAutoFollowPatternRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ccr/auto_follow/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -1706,7 +1706,7 @@ namespace Nest
 	public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
 	{
 		protected ICreateFollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ccr/follow"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ccr/follow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/follow</summary>
 		///<param name = "index">this parameter is required</param>
@@ -1749,7 +1749,7 @@ namespace Nest
 	public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
 	{
 		protected IFollowIndexStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ccr/stats"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ccr/stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/stats</summary>
 		///<param name = "index">this parameter is required</param>
@@ -1783,7 +1783,7 @@ namespace Nest
 	public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
 	{
 		protected IGetAutoFollowPatternRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ccr/auto_follow", "/_ccr/auto_follow/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ccr/auto_follow", "_ccr/auto_follow/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ccr/auto_follow</summary>
 		public GetAutoFollowPatternRequest(): base()
@@ -1816,7 +1816,7 @@ namespace Nest
 	public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
 	{
 		protected IPauseFollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ccr/pause_follow"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ccr/pause_follow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/pause_follow</summary>
 		///<param name = "index">this parameter is required</param>
@@ -1850,7 +1850,7 @@ namespace Nest
 	public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
 	{
 		protected ICreateAutoFollowPatternRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ccr/auto_follow/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -1884,7 +1884,7 @@ namespace Nest
 	public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
 	{
 		protected IResumeFollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ccr/resume_follow"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ccr/resume_follow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/resume_follow</summary>
 		///<param name = "index">this parameter is required</param>
@@ -1913,7 +1913,7 @@ namespace Nest
 	public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
 	{
 		protected ICcrStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ccr/stats"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ccr/stats"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -1933,7 +1933,7 @@ namespace Nest
 	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
 	{
 		protected IUnfollowIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ccr/unfollow"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ccr/unfollow"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ccr/unfollow</summary>
 		///<param name = "index">this parameter is required</param>
@@ -1962,7 +1962,7 @@ namespace Nest
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_search/scroll"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_search/scroll"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -1977,7 +1977,7 @@ namespace Nest
 	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/allocation/explain"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/allocation/explain"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -2005,7 +2005,7 @@ namespace Nest
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/settings"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -2052,7 +2052,7 @@ namespace Nest
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/health", "/_cluster/health/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/health", "_cluster/health/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cluster/health</summary>
 		public ClusterHealthRequest(): base()
@@ -2149,7 +2149,7 @@ namespace Nest
 	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
 		protected IClusterPendingTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/pending_tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/pending_tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -2177,7 +2177,7 @@ namespace Nest
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
 		protected IClusterPutSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/settings"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -2212,7 +2212,7 @@ namespace Nest
 	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_remote/info"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_remote/info"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -2227,7 +2227,7 @@ namespace Nest
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		protected IClusterRerouteRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/reroute"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/reroute"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -2294,7 +2294,7 @@ namespace Nest
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		protected IClusterStateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/state", "_cluster/state/{metric}", "_cluster/state/{metric}/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cluster/state</summary>
 		public ClusterStateRequest(): base()
@@ -2394,7 +2394,7 @@ namespace Nest
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
 		protected IClusterStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cluster/stats", "/_cluster/stats/nodes/{node_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cluster/stats", "_cluster/stats/nodes/{node_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cluster/stats</summary>
 		public ClusterStatsRequest(): base()
@@ -2444,7 +2444,7 @@ namespace Nest
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_count", "/{index}/_count"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_count", "{index}/_count"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_count</summary>
 		public CountRequest(): base()
@@ -2609,7 +2609,7 @@ namespace Nest
 	public partial class CreateRequest : PlainRequestBase<CreateRequestParameters>, ICreateRequest
 	{
 		protected ICreateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_create/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_create/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_create/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -2745,7 +2745,7 @@ namespace Nest
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_doc/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -2882,7 +2882,7 @@ namespace Nest
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_delete_by_query"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_delete_by_query"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_delete_by_query</summary>
 		///<param name = "index">this parameter is required</param>
@@ -3168,7 +3168,7 @@ namespace Nest
 	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
 	{
 		protected IDeleteByQueryRethrottleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_delete_by_query/{task_id}/_rethrottle"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_delete_by_query/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_delete_by_query/{task_id}/_rethrottle</summary>
 		///<param name = "task_id">this parameter is required</param>
@@ -3208,7 +3208,7 @@ namespace Nest
 	public partial class DeleteScriptRequest : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		protected IDeleteScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_scripts/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_scripts/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_scripts/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -3265,7 +3265,7 @@ namespace Nest
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_doc/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -3415,7 +3415,7 @@ namespace Nest
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_source/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_source/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_source/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -3565,7 +3565,7 @@ namespace Nest
 	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
 	{
 		protected IExplainRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_explain/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_explain/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_explain/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -3712,7 +3712,7 @@ namespace Nest
 	public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
 		protected IFieldCapabilitiesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_field_caps", "/{index}/_field_caps"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_field_caps", "{index}/_field_caps"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_field_caps</summary>
 		public FieldCapabilitiesRequest(): base()
@@ -3785,7 +3785,7 @@ namespace Nest
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_doc/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -3925,7 +3925,7 @@ namespace Nest
 	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		protected IGetScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_scripts/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_scripts/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_scripts/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -3975,7 +3975,7 @@ namespace Nest
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_source/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_source/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_source/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4112,7 +4112,7 @@ namespace Nest
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_graph/explore"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_graph/explore"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_graph/explore</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4181,7 +4181,7 @@ namespace Nest
 	public partial class DeleteLifecycleRequest : PlainRequestBase<DeleteLifecycleRequestParameters>, IDeleteLifecycleRequest
 	{
 		protected IDeleteLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/policy/{policy_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/policy/{policy_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name = "policy_id">this parameter is required</param>
@@ -4215,7 +4215,7 @@ namespace Nest
 	public partial class ExplainLifecycleRequest : PlainRequestBase<ExplainLifecycleRequestParameters>, IExplainLifecycleRequest
 	{
 		protected IExplainLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ilm/explain"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ilm/explain"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ilm/explain</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4249,7 +4249,7 @@ namespace Nest
 	public partial class GetLifecycleRequest : PlainRequestBase<GetLifecycleRequestParameters>, IGetLifecycleRequest
 	{
 		protected IGetLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/policy/{policy_id}", "/_ilm/policy"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/policy/{policy_id}", "_ilm/policy"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name = "policy_id">Optional, accepts null</param>
@@ -4277,7 +4277,7 @@ namespace Nest
 	public partial class GetIlmStatusRequest : PlainRequestBase<GetIlmStatusRequestParameters>, IGetIlmStatusRequest
 	{
 		protected IGetIlmStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/status"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/status"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -4297,7 +4297,7 @@ namespace Nest
 	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
 	{
 		protected IMoveToStepRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/move/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/move/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/move/{index}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4332,7 +4332,7 @@ namespace Nest
 	public partial class PutLifecycleRequest : PlainRequestBase<PutLifecycleRequestParameters>, IPutLifecycleRequest
 	{
 		protected IPutLifecycleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/policy/{policy_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/policy/{policy_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name = "policy_id">this parameter is required</param>
@@ -4366,7 +4366,7 @@ namespace Nest
 	public partial class RemovePolicyRequest : PlainRequestBase<RemovePolicyRequestParameters>, IRemovePolicyRequest
 	{
 		protected IRemovePolicyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ilm/remove"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ilm/remove"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ilm/remove</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4400,7 +4400,7 @@ namespace Nest
 	public partial class RetryIlmRequest : PlainRequestBase<RetryIlmRequestParameters>, IRetryIlmRequest
 	{
 		protected IRetryIlmRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_ilm/retry"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_ilm/retry"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_ilm/retry</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4429,7 +4429,7 @@ namespace Nest
 	public partial class StartIlmRequest : PlainRequestBase<StartIlmRequestParameters>, IStartIlmRequest
 	{
 		protected IStartIlmRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/start"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/start"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -4444,7 +4444,7 @@ namespace Nest
 	public partial class StopIlmRequest : PlainRequestBase<StopIlmRequestParameters>, IStopIlmRequest
 	{
 		protected IStopIlmRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ilm/stop"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/stop"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -4474,7 +4474,7 @@ namespace Nest
 	public partial class IndexRequest : PlainRequestBase<IndexRequestParameters>, IIndexRequest
 	{
 		protected IIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_doc/{id}", "/{index}/_doc"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_doc/{id}", "{index}/_doc"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4633,7 +4633,7 @@ namespace Nest
 	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 		protected IAnalyzeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_analyze", "/{index}/_analyze"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_analyze", "{index}/_analyze"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_analyze</summary>
 		public AnalyzeRequest(): base()
@@ -4666,7 +4666,7 @@ namespace Nest
 	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
 		protected IClearCacheRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_cache/clear", "/{index}/_cache/clear"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_cache/clear", "{index}/_cache/clear"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_cache/clear</summary>
 		public ClearCacheRequest(): base()
@@ -4750,7 +4750,7 @@ namespace Nest
 	public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 		protected ICloseIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_close"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_close"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_close</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4821,7 +4821,7 @@ namespace Nest
 	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		protected ICreateIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4882,7 +4882,7 @@ namespace Nest
 	public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 		protected IDeleteIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -4956,7 +4956,7 @@ namespace Nest
 	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
 		protected IDeleteAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_alias/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_alias/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -5006,7 +5006,7 @@ namespace Nest
 	public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
 		protected IDeleteIndexTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -5053,7 +5053,7 @@ namespace Nest
 	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
 		protected IIndexExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -5134,7 +5134,7 @@ namespace Nest
 	public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		protected IAliasExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_alias/{name}", "/{index}/_alias/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_alias/{name}", "{index}/_alias/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_alias/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -5207,7 +5207,7 @@ namespace Nest
 	public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
 		protected IIndexTemplateExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -5267,7 +5267,7 @@ namespace Nest
 	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
 		protected ITypeExistsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_mapping/{type}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_mapping/{type}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_mapping/{type}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -5334,7 +5334,7 @@ namespace Nest
 	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
 		protected IFlushRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_flush", "/{index}/_flush"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_flush", "{index}/_flush"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_flush</summary>
 		public FlushRequest(): base()
@@ -5410,7 +5410,7 @@ namespace Nest
 	public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
 		protected ISyncedFlushRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_flush/synced", "/{index}/_flush/synced"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_flush/synced", "{index}/_flush/synced"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_flush/synced</summary>
 		public SyncedFlushRequest(): base()
@@ -5466,7 +5466,7 @@ namespace Nest
 	public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
 		protected IForceMergeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_forcemerge", "/{index}/_forcemerge"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_forcemerge", "{index}/_forcemerge"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_forcemerge</summary>
 		public ForceMergeRequest(): base()
@@ -5543,7 +5543,7 @@ namespace Nest
 	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		protected IGetIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -5638,7 +5638,7 @@ namespace Nest
 	public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
 		protected IGetAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_alias</summary>
 		public GetAliasRequest(): base()
@@ -5722,7 +5722,7 @@ namespace Nest
 	public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		protected IGetFieldMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_mapping/field/{fields}", "{index}/_mapping/field/{fields}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mapping/field/{fields}</summary>
 		///<param name = "fields">this parameter is required</param>
@@ -5809,7 +5809,7 @@ namespace Nest
 	public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
 		protected IGetMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_mapping", "/{index}/_mapping"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_mapping", "{index}/_mapping"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mapping</summary>
 		public GetMappingRequest(): base()
@@ -5892,7 +5892,7 @@ namespace Nest
 	public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 		protected IGetIndexSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_settings</summary>
 		public GetIndexSettingsRequest(): base()
@@ -5991,7 +5991,7 @@ namespace Nest
 	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
 		protected IGetIndexTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_template", "/_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_template", "_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template</summary>
 		public GetIndexTemplateRequest(): base()
@@ -6051,7 +6051,7 @@ namespace Nest
 	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
 		protected IUpgradeStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_upgrade", "/{index}/_upgrade"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_upgrade", "{index}/_upgrade"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_upgrade</summary>
 		public UpgradeStatusRequest(): base()
@@ -6107,7 +6107,7 @@ namespace Nest
 	public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
 		protected IOpenIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_open"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_open"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_open</summary>
 		///<param name = "index">this parameter is required</param>
@@ -6191,7 +6191,7 @@ namespace Nest
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		protected IPutAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_alias/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_alias/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -6245,7 +6245,7 @@ namespace Nest
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_mapping"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_mapping"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_mapping</summary>
 		///<param name = "index">this parameter is required</param>
@@ -6338,7 +6338,7 @@ namespace Nest
 	public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
 		protected IUpdateIndexSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_settings", "/{index}/_settings"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_settings", "{index}/_settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_settings</summary>
 		public UpdateIndexSettingsRequest(): base()
@@ -6422,7 +6422,7 @@ namespace Nest
 	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
 		protected IPutIndexTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_template/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_template/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -6490,7 +6490,7 @@ namespace Nest
 	public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
 		protected IRecoveryStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_recovery", "/{index}/_recovery"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_recovery", "{index}/_recovery"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_recovery</summary>
 		public RecoveryStatusRequest(): base()
@@ -6536,7 +6536,7 @@ namespace Nest
 	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
 		protected IRefreshRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_refresh", "/{index}/_refresh"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_refresh", "{index}/_refresh"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_refresh</summary>
 		public RefreshRequest(): base()
@@ -6598,7 +6598,7 @@ namespace Nest
 	public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
 		protected IRolloverIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{alias}/_rollover", "/{alias}/_rollover/{new_index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{alias}/_rollover", "{alias}/_rollover/{new_index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{alias}/_rollover</summary>
 		///<param name = "alias">this parameter is required</param>
@@ -6675,7 +6675,7 @@ namespace Nest
 	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
 		protected ISegmentsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_segments", "/{index}/_segments"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_segments", "{index}/_segments"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_segments</summary>
 		public SegmentsRequest(): base()
@@ -6738,7 +6738,7 @@ namespace Nest
 	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
 		protected IIndicesShardStoresRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_shard_stores", "/{index}/_shard_stores"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_shard_stores", "{index}/_shard_stores"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_shard_stores</summary>
 		public IndicesShardStoresRequest(): base()
@@ -6807,7 +6807,7 @@ namespace Nest
 	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
 		protected IShrinkIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_shrink/{target}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_shrink/{target}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_shrink/{target}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -6870,7 +6870,7 @@ namespace Nest
 	public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
 	{
 		protected ISplitIndexRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_split/{target}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_split/{target}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_split/{target}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -6933,7 +6933,7 @@ namespace Nest
 	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		protected IIndicesStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_stats", "_stats/{metric}", "{index}/_stats", "{index}/_stats/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_stats</summary>
 		public IndicesStatsRequest(): base()
@@ -7017,7 +7017,7 @@ namespace Nest
 	public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		protected IBulkAliasRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_aliases"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_aliases"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -7050,7 +7050,7 @@ namespace Nest
 	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
 		protected IUpgradeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_upgrade", "/{index}/_upgrade"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_upgrade", "{index}/_upgrade"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_upgrade</summary>
 		public UpgradeRequest(): base()
@@ -7124,7 +7124,7 @@ namespace Nest
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_validate/query", "/{index}/_validate/query"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_validate/query", "{index}/_validate/query"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_validate/query</summary>
 		public ValidateQueryRequest(): base()
@@ -7253,7 +7253,7 @@ namespace Nest
 	public partial class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
 		protected IRootNodeInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{""});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -7273,7 +7273,7 @@ namespace Nest
 	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
 		protected IDeletePipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ingest/pipeline/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ingest/pipeline/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -7320,7 +7320,7 @@ namespace Nest
 	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
 		protected IGetPipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ingest/pipeline", "/_ingest/pipeline/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ingest/pipeline", "_ingest/pipeline/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline</summary>
 		public GetPipelineRequest(): base()
@@ -7354,7 +7354,7 @@ namespace Nest
 	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ingest/processor/grok"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ingest/processor/grok"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -7374,7 +7374,7 @@ namespace Nest
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
 		protected IPutPipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ingest/pipeline/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ingest/pipeline/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -7421,7 +7421,7 @@ namespace Nest
 	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
 		protected ISimulatePipelineRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ingest/pipeline/_simulate", "_ingest/pipeline/{id}/_simulate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ingest/pipeline/_simulate</summary>
 		public SimulatePipelineRequest(): base()
@@ -7455,7 +7455,7 @@ namespace Nest
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -7470,7 +7470,7 @@ namespace Nest
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -7491,7 +7491,7 @@ namespace Nest
 	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 	{
 		protected IGetBasicLicenseStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license/basic_status"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license/basic_status"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -7506,7 +7506,7 @@ namespace Nest
 	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 	{
 		protected IGetTrialLicenseStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license/trial_status"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license/trial_status"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -7521,7 +7521,7 @@ namespace Nest
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -7542,7 +7542,7 @@ namespace Nest
 	public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 	{
 		protected IStartBasicLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license/start_basic"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license/start_basic"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -7563,7 +7563,7 @@ namespace Nest
 	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 	{
 		protected IStartTrialLicenseRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_license/start_trial"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_license/start_trial"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -7603,7 +7603,7 @@ namespace Nest
 	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		protected IMultiGetRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_mget", "/{index}/_mget"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_mget", "{index}/_mget"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mget</summary>
 		public MultiGetRequest(): base()
@@ -7691,7 +7691,7 @@ namespace Nest
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_migration/deprecations", "/{index}/_migration/deprecations"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_migration/deprecations", "{index}/_migration/deprecations"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_migration/deprecations</summary>
 		public DeprecationInfoRequest(): base()
@@ -7724,7 +7724,7 @@ namespace Nest
 	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 	{
 		protected IMigrationAssistanceRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_migration/assistance", "/_migration/assistance/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_migration/assistance", "_migration/assistance/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_migration/assistance</summary>
 		public MigrationAssistanceRequest(): base()
@@ -7780,7 +7780,7 @@ namespace Nest
 	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 	{
 		protected IMigrationUpgradeRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_migration/upgrade/{index}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_migration/upgrade/{index}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_migration/upgrade/{index}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -7820,7 +7820,7 @@ namespace Nest
 	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
 		protected ICloseJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_close"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_close"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -7874,7 +7874,7 @@ namespace Nest
 	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 	{
 		protected IDeleteCalendarRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -7914,7 +7914,7 @@ namespace Nest
 	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 	{
 		protected IDeleteCalendarEventRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}/events/{event_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events/{event_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -7957,7 +7957,7 @@ namespace Nest
 	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 	{
 		protected IDeleteCalendarJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}/jobs/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -7994,7 +7994,7 @@ namespace Nest
 	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
 		protected IDeleteDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name = "datafeed_id">this parameter is required</param>
@@ -8029,7 +8029,7 @@ namespace Nest
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/_delete_expired_data"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/_delete_expired_data"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -8049,7 +8049,7 @@ namespace Nest
 	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
 	{
 		protected IDeleteFilterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters/{filter_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters/{filter_id}</summary>
 		///<param name = "filter_id">this parameter is required</param>
@@ -8089,7 +8089,7 @@ namespace Nest
 	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
 	{
 		protected IDeleteForecastRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8139,7 +8139,7 @@ namespace Nest
 	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
 		protected IDeleteJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8192,7 +8192,7 @@ namespace Nest
 	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
 		protected IDeleteModelSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8229,7 +8229,7 @@ namespace Nest
 	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
 		protected IFlushJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_flush"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_flush"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8269,7 +8269,7 @@ namespace Nest
 	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 	{
 		protected IForecastJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_forecast"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8309,7 +8309,7 @@ namespace Nest
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
 		protected IGetBucketsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "_ml/anomaly_detectors/{job_id}/results/buckets"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8352,7 +8352,7 @@ namespace Nest
 	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 	{
 		protected IGetCalendarEventsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}/events"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -8406,7 +8406,7 @@ namespace Nest
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 	{
 		protected IGetCalendarsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars", "/_ml/calendars/{calendar_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars", "_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars</summary>
 		public GetCalendarsRequest(): base()
@@ -8445,7 +8445,7 @@ namespace Nest
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
 		protected IGetCategoriesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_ml/anomaly_detectors/{job_id}/results/categories/"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "_ml/anomaly_detectors/{job_id}/results/categories/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8488,7 +8488,7 @@ namespace Nest
 	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
 		protected IGetDatafeedStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}/_stats", "/_ml/datafeeds/_stats"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stats", "_ml/datafeeds/_stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
 		///<param name = "datafeed_id">Optional, accepts null</param>
@@ -8527,7 +8527,7 @@ namespace Nest
 	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
 		protected IGetDatafeedsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}", "/_ml/datafeeds"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}", "_ml/datafeeds"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name = "datafeed_id">Optional, accepts null</param>
@@ -8566,7 +8566,7 @@ namespace Nest
 	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
 	{
 		protected IGetFiltersRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters", "/_ml/filters/{filter_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters", "_ml/filters/{filter_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters</summary>
 		public GetFiltersRequest(): base()
@@ -8612,7 +8612,7 @@ namespace Nest
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
 		protected IGetInfluencersRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/results/influencers"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/influencers"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8646,7 +8646,7 @@ namespace Nest
 	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
 		protected IGetJobStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/_stats", "_ml/anomaly_detectors/{job_id}/_stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/_stats</summary>
 		public GetJobStatsRequest(): base()
@@ -8685,7 +8685,7 @@ namespace Nest
 	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
 		protected IGetJobsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}", "/_ml/anomaly_detectors"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}", "_ml/anomaly_detectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name = "job_id">Optional, accepts null</param>
@@ -8730,7 +8730,7 @@ namespace Nest
 	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
 		protected IGetModelSnapshotsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "_ml/anomaly_detectors/{job_id}/model_snapshots"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8773,7 +8773,7 @@ namespace Nest
 	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
 	{
 		protected IGetOverallBucketsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/results/overall_buckets"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/overall_buckets"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8807,7 +8807,7 @@ namespace Nest
 	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
 		protected IGetAnomalyRecordsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/results/records"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/records"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8836,7 +8836,7 @@ namespace Nest
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
 		protected IMachineLearningInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/info"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/info"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -8856,7 +8856,7 @@ namespace Nest
 	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
 		protected IOpenJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_open"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_open"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8890,7 +8890,7 @@ namespace Nest
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 	{
 		protected IPostCalendarEventsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}/events"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -8924,7 +8924,7 @@ namespace Nest
 	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
 		protected IPostJobDataRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_data"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_data"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -8971,7 +8971,7 @@ namespace Nest
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
 		protected IPreviewDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}/_preview"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_preview"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
 		///<param name = "datafeed_id">this parameter is required</param>
@@ -9005,7 +9005,7 @@ namespace Nest
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 	{
 		protected IPutCalendarRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -9045,7 +9045,7 @@ namespace Nest
 	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 	{
 		protected IPutCalendarJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/calendars/{calendar_id}/jobs/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name = "calendar_id">this parameter is required</param>
@@ -9082,7 +9082,7 @@ namespace Nest
 	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
 		protected IPutDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name = "datafeed_id">this parameter is required</param>
@@ -9116,7 +9116,7 @@ namespace Nest
 	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
 	{
 		protected IPutFilterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters/{filter_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters/{filter_id}</summary>
 		///<param name = "filter_id">this parameter is required</param>
@@ -9150,7 +9150,7 @@ namespace Nest
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
 		protected IPutJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -9190,7 +9190,7 @@ namespace Nest
 	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
 		protected IRevertModelSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -9227,7 +9227,7 @@ namespace Nest
 	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
 		protected IStartDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}/_start"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
 		///<param name = "datafeed_id">this parameter is required</param>
@@ -9261,7 +9261,7 @@ namespace Nest
 	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
 		protected IStopDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}/_stop"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
 		///<param name = "datafeed_id">this parameter is required</param>
@@ -9301,7 +9301,7 @@ namespace Nest
 	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
 		protected IUpdateDatafeedRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/datafeeds/{datafeed_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
 		///<param name = "datafeed_id">this parameter is required</param>
@@ -9335,7 +9335,7 @@ namespace Nest
 	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
 	{
 		protected IUpdateFilterRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/filters/{filter_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters/{filter_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters/{filter_id}/_update</summary>
 		///<param name = "filter_id">this parameter is required</param>
@@ -9369,7 +9369,7 @@ namespace Nest
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
 		protected IUpdateJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -9409,7 +9409,7 @@ namespace Nest
 	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
 		protected IUpdateModelSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
 		///<param name = "job_id">this parameter is required</param>
@@ -9441,7 +9441,7 @@ namespace Nest
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/_validate"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/_validate"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -9456,7 +9456,7 @@ namespace Nest
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ml/anomaly_detectors/_validate/detector"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/_validate/detector"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -9476,7 +9476,7 @@ namespace Nest
 	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		protected IMultiSearchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_msearch", "/{index}/_msearch"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_msearch", "{index}/_msearch"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_msearch</summary>
 		public MultiSearchRequest(): base()
@@ -9565,7 +9565,7 @@ namespace Nest
 	public partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
 		protected IMultiSearchTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_msearch/template", "/{index}/_msearch/template"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_msearch/template", "{index}/_msearch/template"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_msearch/template</summary>
 		public MultiSearchTemplateRequest(): base()
@@ -9632,7 +9632,7 @@ namespace Nest
 	public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
 		protected IMultiTermVectorsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_mtermvectors", "/{index}/_mtermvectors"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_mtermvectors", "{index}/_mtermvectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_mtermvectors</summary>
 		public MultiTermVectorsRequest(): base()
@@ -9757,7 +9757,7 @@ namespace Nest
 	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		protected INodesHotThreadsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_nodes/hot_threads", "_nodes/{node_id}/hot_threads"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/hot_threads</summary>
 		public NodesHotThreadsRequest(): base()
@@ -9837,7 +9837,7 @@ namespace Nest
 	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		protected INodesInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_nodes", "_nodes/{node_id}", "_nodes/{metric}", "_nodes/{node_id}/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes</summary>
 		public NodesInfoRequest(): base()
@@ -9898,7 +9898,7 @@ namespace Nest
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 	{
 		protected IReloadSecureSettingsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_nodes/reload_secure_settings", "_nodes/{node_id}/reload_secure_settings"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/reload_secure_settings</summary>
 		public ReloadSecureSettingsRequest(): base()
@@ -9949,7 +9949,7 @@ namespace Nest
 	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		protected INodesStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_nodes/stats", "_nodes/{node_id}/stats", "_nodes/stats/{metric}", "_nodes/{node_id}/stats/{metric}", "_nodes/stats/{metric}/{index_metric}", "_nodes/{node_id}/stats/{metric}/{index_metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/stats</summary>
 		public NodesStatsRequest(): base()
@@ -10075,7 +10075,7 @@ namespace Nest
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
 		protected INodesUsageRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_nodes/usage</summary>
 		public NodesUsageRequest(): base()
@@ -10124,7 +10124,7 @@ namespace Nest
 	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{""});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -10150,7 +10150,7 @@ namespace Nest
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_scripts/{id}", "/_scripts/{id}/{context}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_scripts/{id}", "_scripts/{id}/{context}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_scripts/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -10201,7 +10201,7 @@ namespace Nest
 	public partial class ReindexOnServerRequest : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
 		protected IReindexOnServerRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_reindex"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_reindex"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -10273,7 +10273,7 @@ namespace Nest
 	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_reindex/{task_id}/_rethrottle"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_reindex/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_reindex/{task_id}/_rethrottle</summary>
 		///<param name = "task_id">this parameter is required</param>
@@ -10313,7 +10313,7 @@ namespace Nest
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
 		protected IRenderSearchTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_render/template", "/_render/template/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_render/template", "_render/template/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_render/template</summary>
 		public RenderSearchTemplateRequest(): base()
@@ -10346,7 +10346,7 @@ namespace Nest
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
 		protected IDeleteRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_rollup/job/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_rollup/job/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -10380,7 +10380,7 @@ namespace Nest
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
 		protected IGetRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_rollup/job/{id}", "/_rollup/job/"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_rollup/job/{id}", "_rollup/job/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name = "id">Optional, accepts null</param>
@@ -10413,7 +10413,7 @@ namespace Nest
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
 		protected IGetRollupCapabilitiesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_rollup/data/{id}", "/_rollup/data/"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_rollup/data/{id}", "_rollup/data/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/data/{id}</summary>
 		///<param name = "id">Optional, accepts null</param>
@@ -10446,7 +10446,7 @@ namespace Nest
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
 		protected IGetRollupIndexCapabilitiesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_rollup/data"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_rollup/data"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_rollup/data</summary>
 		///<param name = "index">this parameter is required</param>
@@ -10480,7 +10480,7 @@ namespace Nest
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
 		protected ICreateRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_rollup/job/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_rollup/job/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -10514,7 +10514,7 @@ namespace Nest
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
 		protected IRollupSearchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_rollup_search"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_rollup_search"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_rollup_search</summary>
 		///<param name = "index">this parameter is required</param>
@@ -10561,7 +10561,7 @@ namespace Nest
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
 		protected IStartRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_rollup/job/{id}/_start"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_rollup/job/{id}/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}/_start</summary>
 		///<param name = "id">this parameter is required</param>
@@ -10595,7 +10595,7 @@ namespace Nest
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
 		protected IStopRollupJobRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_rollup/job/{id}/_stop"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_rollup/job/{id}/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_rollup/job/{id}/_stop</summary>
 		///<param name = "id">this parameter is required</param>
@@ -10637,7 +10637,7 @@ namespace Nest
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
 		protected IExecutePainlessScriptRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_scripts/painless/_execute"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_scripts/painless/_execute"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -10652,7 +10652,7 @@ namespace Nest
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_search/scroll"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_search/scroll"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -10696,7 +10696,7 @@ namespace Nest
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_search", "/{index}/_search"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_search", "{index}/_search"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_search</summary>
 		public SearchRequest(): base()
@@ -10964,7 +10964,7 @@ namespace Nest
 	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_search_shards", "/{index}/_search_shards"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_search_shards", "{index}/_search_shards"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_search_shards</summary>
 		public SearchShardsRequest(): base()
@@ -11063,7 +11063,7 @@ namespace Nest
 	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
 		protected ISearchTemplateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_search/template", "/{index}/_search/template"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_search/template", "{index}/_search/template"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_search/template</summary>
 		public SearchTemplateRequest(): base()
@@ -11191,7 +11191,7 @@ namespace Nest
 	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/_authenticate"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/_authenticate"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -11211,7 +11211,7 @@ namespace Nest
 	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/{username}/_password", "/_security/user/_password"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/{username}/_password", "_security/user/_password"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}/_password</summary>
 		///<param name = "username">Optional, accepts null</param>
@@ -11253,7 +11253,7 @@ namespace Nest
 	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/realm/{realms}/_clear_cache"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/realm/{realms}/_clear_cache"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/realm/{realms}/_clear_cache</summary>
 		///<param name = "realms">this parameter is required</param>
@@ -11293,7 +11293,7 @@ namespace Nest
 	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role/{name}/_clear_cache"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role/{name}/_clear_cache"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}/_clear_cache</summary>
 		///<param name = "name">this parameter is required</param>
@@ -11322,7 +11322,7 @@ namespace Nest
 	public partial class CreateApiKeyRequest : PlainRequestBase<CreateApiKeyRequestParameters>, ICreateApiKeyRequest
 	{
 		protected ICreateApiKeyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/api_key"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/api_key"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -11357,7 +11357,7 @@ namespace Nest
 	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
 	{
 		protected IDeletePrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/privilege/{application}/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/privilege/{application}/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name = "application">this parameter is required</param>
@@ -11403,7 +11403,7 @@ namespace Nest
 	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -11446,7 +11446,7 @@ namespace Nest
 	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
 		protected IDeleteRoleMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role_mapping/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role_mapping/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -11489,7 +11489,7 @@ namespace Nest
 	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/{username}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/{username}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">this parameter is required</param>
@@ -11532,7 +11532,7 @@ namespace Nest
 	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
 		protected IDisableUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/{username}/_disable"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/{username}/_disable"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}/_disable</summary>
 		///<param name = "username">this parameter is required</param>
@@ -11575,7 +11575,7 @@ namespace Nest
 	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
 		protected IEnableUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/{username}/_enable"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/{username}/_enable"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}/_enable</summary>
 		///<param name = "username">this parameter is required</param>
@@ -11613,7 +11613,7 @@ namespace Nest
 	public partial class GetApiKeyRequest : PlainRequestBase<GetApiKeyRequestParameters>, IGetApiKeyRequest
 	{
 		protected IGetApiKeyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/api_key"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/api_key"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -11666,7 +11666,7 @@ namespace Nest
 	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 	{
 		protected IGetPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/privilege", "/_security/privilege/{application}", "/_security/privilege/{application}/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/privilege", "_security/privilege/{application}", "_security/privilege/{application}/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/privilege</summary>
 		public GetPrivilegesRequest(): base()
@@ -11708,7 +11708,7 @@ namespace Nest
 	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role/{name}", "/_security/role"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role/{name}", "_security/role"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
@@ -11741,7 +11741,7 @@ namespace Nest
 	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
 		protected IGetRoleMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role_mapping/{name}", "/_security/role_mapping"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role_mapping/{name}", "_security/role_mapping"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
@@ -11769,7 +11769,7 @@ namespace Nest
 	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/oauth2/token"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/oauth2/token"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -11789,7 +11789,7 @@ namespace Nest
 	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/{username}", "/_security/user"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/{username}", "_security/user"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">Optional, accepts null</param>
@@ -11817,7 +11817,7 @@ namespace Nest
 	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 	{
 		protected IGetUserPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/_privileges"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/_privileges"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -11837,7 +11837,7 @@ namespace Nest
 	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
 	{
 		protected IHasPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/_has_privileges", "/_security/user/{user}/_has_privileges"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/_has_privileges", "_security/user/{user}/_has_privileges"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/_has_privileges</summary>
 		public HasPrivilegesRequest(): base()
@@ -11866,7 +11866,7 @@ namespace Nest
 	public partial class InvalidateApiKeyRequest : PlainRequestBase<InvalidateApiKeyRequestParameters>, IInvalidateApiKeyRequest
 	{
 		protected IInvalidateApiKeyRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/api_key"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/api_key"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -11881,7 +11881,7 @@ namespace Nest
 	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/oauth2/token"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/oauth2/token"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -11896,7 +11896,7 @@ namespace Nest
 	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
 	{
 		protected IPutPrivilegesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/privilege/"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/privilege/"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -11925,7 +11925,7 @@ namespace Nest
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -11968,7 +11968,7 @@ namespace Nest
 	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
 		protected IPutRoleMappingRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/role_mapping/{name}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/role_mapping/{name}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -12011,7 +12011,7 @@ namespace Nest
 	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_security/user/{username}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_security/user/{username}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">this parameter is required</param>
@@ -12060,7 +12060,7 @@ namespace Nest
 	public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
 		protected ISnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}/{snapshot}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12110,7 +12110,7 @@ namespace Nest
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		protected ICreateRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12170,7 +12170,7 @@ namespace Nest
 	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
 		protected IDeleteSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}/{snapshot}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12213,7 +12213,7 @@ namespace Nest
 	public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 		protected IDeleteRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12266,7 +12266,7 @@ namespace Nest
 	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected IGetSnapshotRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}/{snapshot}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12323,7 +12323,7 @@ namespace Nest
 	public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
 		protected IGetRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot", "/_snapshot/{repository}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot", "_snapshot/{repository}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot</summary>
 		public GetRepositoryRequest(): base()
@@ -12375,7 +12375,7 @@ namespace Nest
 	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
 		protected IRestoreRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}/{snapshot}/_restore"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}/_restore"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12431,7 +12431,7 @@ namespace Nest
 	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
 		protected ISnapshotStatusRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/_status", "_snapshot/{repository}/_status", "_snapshot/{repository}/{snapshot}/_status"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/_status</summary>
 		public SnapshotStatusRequest(): base()
@@ -12486,7 +12486,7 @@ namespace Nest
 	public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
 		protected IVerifyRepositoryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_snapshot/{repository}/_verify"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_snapshot/{repository}/_verify"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_snapshot/{repository}/_verify</summary>
 		///<param name = "repository">this parameter is required</param>
@@ -12528,7 +12528,7 @@ namespace Nest
 	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 	{
 		protected IClearSqlCursorRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_sql/close"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_sql/close"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -12543,7 +12543,7 @@ namespace Nest
 	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 	{
 		protected IQuerySqlRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_sql"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_sql"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -12564,7 +12564,7 @@ namespace Nest
 	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 	{
 		protected ITranslateSqlRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_sql/translate"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_sql/translate"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -12579,7 +12579,7 @@ namespace Nest
 	public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
 	{
 		protected IGetCertificatesRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_ssl/certificates"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_ssl/certificates"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -12599,7 +12599,7 @@ namespace Nest
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_tasks/_cancel", "/_tasks/{task_id}/_cancel"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_tasks/_cancel", "_tasks/{task_id}/_cancel"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_tasks/_cancel</summary>
 		public CancelTasksRequest(): base()
@@ -12655,7 +12655,7 @@ namespace Nest
 	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
 		protected IGetTaskRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_tasks/{task_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_tasks/{task_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_tasks/{task_id}</summary>
 		///<param name = "task_id">this parameter is required</param>
@@ -12697,7 +12697,7 @@ namespace Nest
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_tasks"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_tasks"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -12778,7 +12778,7 @@ namespace Nest
 	public partial class TermVectorsRequest : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
 		protected ITermVectorsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_termvectors/{id}", "/{index}/_termvectors"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_termvectors/{id}", "{index}/_termvectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_termvectors/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -12947,7 +12947,7 @@ namespace Nest
 	public partial class UpdateRequest : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest
 	{
 		protected IUpdateRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_update/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_update/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_update/{id}</summary>
 		///<param name = "index">this parameter is required</param>
@@ -13091,7 +13091,7 @@ namespace Nest
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/{index}/_update_by_query"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"{index}/_update_by_query"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/{index}/_update_by_query</summary>
 		///<param name = "index">this parameter is required</param>
@@ -13391,7 +13391,7 @@ namespace Nest
 	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
 	{
 		protected IUpdateByQueryRethrottleRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_update_by_query/{task_id}/_rethrottle"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_update_by_query/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_update_by_query/{task_id}/_rethrottle</summary>
 		///<param name = "task_id">this parameter is required</param>
@@ -13437,7 +13437,7 @@ namespace Nest
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{watch_id}/_ack", "_watcher/watch/{watch_id}/_ack/{action_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_ack</summary>
 		///<param name = "watch_id">this parameter is required</param>
@@ -13480,7 +13480,7 @@ namespace Nest
 	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
 		protected IActivateWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{watch_id}/_activate"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{watch_id}/_activate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_activate</summary>
 		///<param name = "watch_id">this parameter is required</param>
@@ -13514,7 +13514,7 @@ namespace Nest
 	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
 		protected IDeactivateWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{watch_id}/_deactivate"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{watch_id}/_deactivate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
 		///<param name = "watch_id">this parameter is required</param>
@@ -13548,7 +13548,7 @@ namespace Nest
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -13582,7 +13582,7 @@ namespace Nest
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{id}/_execute", "_watcher/watch/_execute"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}/_execute</summary>
 		///<param name = "id">Optional, accepts null</param>
@@ -13621,7 +13621,7 @@ namespace Nest
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -13655,7 +13655,7 @@ namespace Nest
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/watch/{id}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name = "id">this parameter is required</param>
@@ -13711,7 +13711,7 @@ namespace Nest
 	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/_start"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -13731,7 +13731,7 @@ namespace Nest
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/stats", "/_watcher/stats/{metric}"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/stats", "_watcher/stats/{metric}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/stats</summary>
 		public WatcherStatsRequest(): base()
@@ -13765,7 +13765,7 @@ namespace Nest
 	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_watcher/_stop"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 	// values part of the url path
 	// Request parameters
@@ -13780,7 +13780,7 @@ namespace Nest
 	public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
 		protected IXPackInfoRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_xpack"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_xpack"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
@@ -13801,7 +13801,7 @@ namespace Nest
 	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
 		protected IXPackUsageRequest Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new[]{"/_xpack/usage"});
+		internal static ApiUrls Urls = new ApiUrls(new[]{"_xpack/usage"});
 		internal override ApiUrls ApiUrls => Urls;
 		// values part of the url path
 		// Request parameters
