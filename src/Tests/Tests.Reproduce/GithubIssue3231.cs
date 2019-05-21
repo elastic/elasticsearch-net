@@ -18,7 +18,7 @@ namespace Tests.Reproduce
 		public void CatIndicesUsesThrowExceptionsFromConnectionSettingsWhenRequestSettingsAreNotSetTest()
 		{
 			var client = new ElasticClient(_cluster.CreateConnectionSettings().ThrowExceptions());
-			Action catIndicesRequest = () => client.LowLevel.CatIndices<StringResponse>("non-existing-index");
+			Action catIndicesRequest = () => client.LowLevel.Cat.Indices<StringResponse>("non-existing-index");
 			catIndicesRequest.Should().Throw<ElasticsearchClientException>();
 		}
 	}

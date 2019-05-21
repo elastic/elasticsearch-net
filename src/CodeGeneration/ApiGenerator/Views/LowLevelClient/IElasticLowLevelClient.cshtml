@@ -1,4 +1,5 @@
 @using RazorLight
+@using System.Linq
 @using ApiGenerator.Domain
 @inherits TemplatePage<RestApiSpec>
 using System;
@@ -19,11 +20,17 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial interface IElasticLowLevelClient 
 	{
-		@foreach(var kv in Model.Endpoints)
+		@foreach(var kv in Model.EndpointsPerNamespace)
 		{
-			var identifier = kv.Key;
-			var endpoint = kv.Value;
-			foreach(var method in endpoint.CsharpMethods)
+		if (kv.Key != CsharpNames.RootNamespace)
+		{
+<text>		@(kv.Key)Client @kv.Key { get; }
+</text>
+			continue;
+		}
+			var endpoints = kv.Value;
+			var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
+			foreach(var method in methods)
 			{
 				await IncludeAsync("LowLevelClient/MethodInterface.cshtml", method);
 			}

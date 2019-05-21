@@ -85,15 +85,15 @@ namespace ApiGenerator.Domain
 			}
 		}
 		
-		private List<LowLevelClientMethod> _csharpMethods;
-		public IReadOnlyCollection<LowLevelClientMethod> CsharpMethods
+		private List<LowLevelClientMethod> _lowLevelClientMethods;
+		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{
 			get
 			{
-				if (_csharpMethods != null && _csharpMethods.Count > 0) return _csharpMethods;
+				if (_lowLevelClientMethods != null && _lowLevelClientMethods.Count > 0) return _lowLevelClientMethods;
 
 				// enumerate once and cache
-				_csharpMethods = new List<LowLevelClientMethod>();
+				_lowLevelClientMethods = new List<LowLevelClientMethod>();
 
 				var httpMethod = PreferredHttpMethod;
 				foreach (var path in Url.Paths)
@@ -104,8 +104,6 @@ namespace ApiGenerator.Domain
 					if (Body != null)
 						parts.Add(new UrlPart { Name = "body", Type = "PostData", Description = Body.Description });
 
-					if (Url.Params == null || !Url.Params.Any()) Url.Params = new SortedDictionary<string, QueryParameters>();
-					
 					var args = parts
 						.Select(p => p.Argument)
 						.Concat(new[] { CsharpNames.ParametersName + " requestParameters = null" })
@@ -124,9 +122,9 @@ namespace ApiGenerator.Domain
 						Url = Url,
 						HasBody = Body != null
 					};
-					_csharpMethods.Add(apiMethod);
+					_lowLevelClientMethods.Add(apiMethod);
 				}
-				return _csharpMethods;
+				return _lowLevelClientMethods;
 			}
 		}
 

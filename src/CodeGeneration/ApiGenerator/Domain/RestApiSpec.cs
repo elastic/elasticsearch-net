@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
+using CsQuery.ExtensionMethods.Internal;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace ApiGenerator.Domain
 {
@@ -17,6 +21,10 @@ namespace ApiGenerator.Domain
 		
 		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
+		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespace =>
+			Endpoints.Values.GroupBy(e=>e.CsharpNames.Namespace)
+				.ToImmutableSortedDictionary(kv => kv.Key, kv => kv.ToList().AsReadOnly());
+
 		private IEnumerable<EnumDescription> _enumDescriptions;
 		public IEnumerable<EnumDescription> EnumsInTheSpec
 		{
@@ -24,13 +32,16 @@ namespace ApiGenerator.Domain
 			{
 				if (_enumDescriptions != null) return _enumDescriptions;
 
-				string CreateName(string name, string methodName)
+				string CreateName(string name, string methodName, string @namespace)
 				{
 					if (
 						name.ToLowerInvariant().Contains("metric")
 						 ||(name.ToLowerInvariant() == "status")
 					) 
-						return methodName + name;
+						if (methodName.StartsWith(@namespace))
+							return methodName + name;
+						else
+							return @namespace + methodName + name;
 
 					return name;
 				}
@@ -41,7 +52,7 @@ namespace ApiGenerator.Domain
 					where para.Options != null && para.Options.Any() 
 					select new EnumDescription
 					{
-						Name = CreateName(para.ClsName, e.CsharpNames.MethodName),
+						Name = CreateName(para.ClsName, e.CsharpNames.MethodName, e.CsharpNames.Namespace),
 						Options = para.Options
 					}).ToList();
 				
@@ -51,7 +62,7 @@ namespace ApiGenerator.Domain
 					where part.Options != null && part.Options.Any() 
 					select new EnumDescription
 					{
-						Name = CreateName(part.Name.ToPascalCase(), e.CsharpNames.MethodName),
+						Name = CreateName(part.Name.ToPascalCase(), e.CsharpNames.MethodName, e.CsharpNames.Namespace),
 						Options = part.Options
 					}).ToList();
 

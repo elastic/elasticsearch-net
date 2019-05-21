@@ -22,6 +22,7 @@ using static Elasticsearch.Net.HttpMethod;
 
 @{
 	RestApiSpec model = Model;
+	var namespaces = model.EndpointsPerNamespace.Keys.Where(k => k != CsharpNames.RootNamespace);
 <text>
 namespace Elasticsearch.Net
 {
@@ -31,10 +32,33 @@ namespace Elasticsearch.Net
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
 </text>
-	foreach (var kv in model.Endpoints)
+	foreach (var ns in namespaces)
 	{
-		var endpoint = kv.Value;
-		var methods = endpoint.CsharpMethods.ToList();
+<text>		public @(ns)Client @ns { get; private set; } 
+</text>
+	}
+<text>
+		partial void SetupNamespaces()
+		{
+</text>
+	foreach (var ns in namespaces)
+	{
+<text>		@ns = new @(ns)Client(this);
+</text>
+	}
+<text>
+		}
+</text>
+	
+
+	foreach (var kv in model.EndpointsPerNamespace)
+	{
+		if (kv.Key != CsharpNames.RootNamespace)
+		{
+			continue;
+		}
+		var endpoints = kv.Value;
+		var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
 		foreach (var method in methods)
 		{
 			await IncludeAsync("LowLevelClient/MethodImplementation.cshtml", method);

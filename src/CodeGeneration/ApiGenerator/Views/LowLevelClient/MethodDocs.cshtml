@@ -1,0 +1,21 @@
+@inherits TemplatePage<LowLevelClientMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@{
+	LowLevelClientMethod method = Model;
+}
+		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
+@foreach (var part in method.Parts)
+{
+<text>		///@Raw("<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")
+</text>
+}
+		///@Raw(@"<param name=""requestParameters"">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>")
+		@if (!string.IsNullOrEmpty(method.DeprecatedPath))
+		{
+<text>		[Obsolete("@method.DeprecatedPath")]
+</text>}

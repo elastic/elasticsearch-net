@@ -10,7 +10,7 @@ namespace ApiGenerator.Domain
 	{
 		public CsharpNames CsharpNames { get; set; }
 		
-		public IDictionary<string, QueryParameters> Params { get; set; }
+		public IDictionary<string, QueryParameters> Params { get; set; } = new SortedDictionary<string, QueryParameters>();
 
 		[JsonProperty("paths")]
 		private IReadOnlyCollection<string> OriginalPaths { get; set; }
