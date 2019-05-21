@@ -1,0 +1,17 @@
+@inherits TemplatePage<LowLevelClientMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@{
+	LowLevelClientMethod method = Model;
+}
+@{await IncludeAsync("LowLevelClient/MethodDocs.cshtml", method); }
+		public TResponse @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest@(Raw("<TResponse>"))(@method.HttpMethod, @Raw(method.UrlInCode), @(method.PerPathMethodName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(method.Path.StartsWith("/_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
+
+@{await IncludeAsync("LowLevelClient/MethodDocs.cshtml", method); }
+		public Task@(Raw("<TResponse>")) @(method.PerPathMethodName)Async@(Raw("<TResponse>"))(@Raw(method.Arguments), CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync@(Raw("<TResponse>"))(@method.HttpMethod, @Raw(method.UrlInCode), @(method.PerPathMethodName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(method.Path.StartsWith("/_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));

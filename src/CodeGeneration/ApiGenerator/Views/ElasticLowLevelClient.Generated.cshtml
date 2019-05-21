@@ -37,8 +37,7 @@ namespace Elasticsearch.Net
 		var methods = endpoint.CsharpMethods.ToList();
 		foreach (var method in methods)
 		{
-			
-			await IncludeAsync("LowLevelClient/Method.cshtml", method);
+			await IncludeAsync("LowLevelClient/MethodImplementation.cshtml", method);
 		}
 	}
 	<text>

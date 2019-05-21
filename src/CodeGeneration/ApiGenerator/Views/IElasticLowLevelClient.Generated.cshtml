@@ -25,16 +25,7 @@ namespace Elasticsearch.Net
 			var endpoint = kv.Value;
 			foreach(var method in endpoint.CsharpMethods)
 			{
-<text>		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
-</text>
-		foreach (var part in method.Parts)
-		{
-<text>		@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")
-</text>
-		}
-<text>		@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
-		@Raw(method.ReturnType) @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments)) where TResponse : class, IElasticsearchResponse, new();
-</text>
+				await IncludeAsync("LowLevelClient/MethodInterface.cshtml", method);
 			}
 		}
 	}
