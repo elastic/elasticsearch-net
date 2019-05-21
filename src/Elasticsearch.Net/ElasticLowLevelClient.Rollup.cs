@@ -22,101 +22,101 @@ namespace Elasticsearch.Net
 		///<param name = "id">The ID of the job to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteRollupJob<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_rollup/job/{id:id}"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_rollup/job/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_rollup/job/{id} <para></para></summary>
 		///<param name = "id">The ID of the job to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteRollupJobAsync<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_rollup/job/{id:id}"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_rollup/job/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/job/{id} <para></para></summary>
 		///<param name = "id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRollupJob<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_rollup/job/{id:id}"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_rollup/job/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/job/{id} <para></para></summary>
 		///<param name = "id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetRollupJobAsync<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_rollup/job/{id:id}"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_rollup/job/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/job/ <para></para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRollupJob<TResponse>(GetRollupJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_rollup/job/", null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_rollup/job/", null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/job/ <para></para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetRollupJobAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_rollup/job/", ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_rollup/job/", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/data/{id} <para></para></summary>
 		///<param name = "id">The ID of the index to check rollup capabilities on, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRollupCapabilities<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_rollup/data/{id:id}"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_rollup/data/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/data/{id} <para></para></summary>
 		///<param name = "id">The ID of the index to check rollup capabilities on, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetRollupCapabilitiesAsync<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_rollup/data/{id:id}"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_rollup/data/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/data/ <para></para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRollupCapabilities<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_rollup/data/", null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_rollup/data/", null, RequestParams(requestParameters));
 		///<summary>GET on /_rollup/data/ <para></para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetRollupCapabilitiesAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_rollup/data/", ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_rollup/data/", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_rollup/data <para></para></summary>
 		///<param name = "index">The rollup index or index pattern to obtain rollup capabilities from.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRollupIndexCapabilities<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_rollup/data"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_rollup/data"), null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_rollup/data <para></para></summary>
 		///<param name = "index">The rollup index or index pattern to obtain rollup capabilities from.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetRollupIndexCapabilitiesAsync<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_rollup/data"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_rollup/data"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_rollup/job/{id} <para></para></summary>
 		///<param name = "id">The ID of the job to create</param>
 		///<param name = "body">The job configuration</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse CreateRollupJob<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_rollup/job/{id:id}"), body, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_rollup/job/{id:id}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_rollup/job/{id} <para></para></summary>
 		///<param name = "id">The ID of the job to create</param>
 		///<param name = "body">The job configuration</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> CreateRollupJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_rollup/job/{id:id}"), ctx, body, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_rollup/job/{id:id}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_rollup_search <para></para></summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Search<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_rollup_search"), body, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_rollup_search"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_rollup_search <para></para></summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> SearchAsync<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_rollup_search"), ctx, body, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_rollup_search"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_rollup/job/{id}/_start <para></para></summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse StartRollupJob<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_rollup/job/{id:id}/_start"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_rollup/job/{id:id}/_start"), null, RequestParams(requestParameters));
 		///<summary>POST on /_rollup/job/{id}/_start <para></para></summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> StartRollupJobAsync<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_rollup/job/{id:id}/_start"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_rollup/job/{id:id}/_start"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_rollup/job/{id}/_stop <para></para></summary>
 		///<param name = "id">The ID of the job to stop</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse StopRollupJob<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_rollup/job/{id:id}/_stop"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_rollup/job/{id:id}/_stop"), null, RequestParams(requestParameters));
 		///<summary>POST on /_rollup/job/{id}/_stop <para></para></summary>
 		///<param name = "id">The ID of the job to stop</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> StopRollupJobAsync<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_rollup/job/{id:id}/_stop"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_rollup/job/{id:id}/_stop"), ctx, null, RequestParams(requestParameters));
 	}
 }

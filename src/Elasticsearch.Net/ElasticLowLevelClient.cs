@@ -55,7 +55,7 @@ namespace Elasticsearch.Net
 
 		protected internal string Url(FormattableString formattable) => formattable.ToString(UrlFormatter);
 
-		protected internal TRequestParams _params<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
+		protected internal TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
 			if (contentType.IsNullOrEmpty()) return requestParams;

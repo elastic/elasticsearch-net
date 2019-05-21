@@ -32,7 +32,11 @@ namespace Elasticsearch.Net
 	public class @(model.Key)Client : NamespacedClientProxy
 	{
 		public @(model.Key)Client(ElasticLowLevelClient client) : base(client) {}
-	@{	
+@if (ns == "Cat")
+{
+	<text>protected override string ContentType { get; } = "text/plain";</text>
+}
+ 	@{	
 		var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
 		foreach (var method in methods)
 		{

@@ -1,4 +1,5 @@
 using System;
+using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,8 +21,10 @@ namespace Elasticsearch.Net
 
 		protected string Url(FormattableString formattable) => _client.Url(formattable);
 
-		protected TRequestParams _params<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
+		protected TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams)
 			where TRequestParams : class, IRequestParameters, new()
-			=> _client._params(requestParams, contentType, accept);
+			=> _client.RequestParams(requestParams, ContentType, ContentType);
+		
+		protected virtual string ContentType { get; }
 	}
 }
