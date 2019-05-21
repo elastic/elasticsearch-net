@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -100,6 +101,46 @@ namespace Tests.Cluster.ClusterState
 			node.Index.Should().NotBeNullOrWhiteSpace();
 			node.Node.Should().NotBeNullOrWhiteSpace();
 			node.State.Should().NotBeNullOrWhiteSpace();
+		}
+	}
+
+	[SkipVersion("<6.5.0", "Validated against 6.5.0")]
+	public class ClusterStateStoredScriptApiTests
+		: ApiIntegrationTestBase<WritableCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
+	{
+		public ClusterStateStoredScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			client.PutScript("my-script-id", s => s.Painless("return 0"));
+			client.PutScript("my-other-script-id", s => s.Painless("return 1"));
+		}
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => "/_cluster/state";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ClusterState(s => s.Metric(ClusterStateMetric.Metadata)),
+			(client, f) => client.ClusterStateAsync(s => s.Metric(ClusterStateMetric.Metadata)),
+			(client, r) => client.ClusterState(new ClusterStateRequest(ClusterStateMetric.Metadata)),
+			(client, r) => client.ClusterStateAsync(new ClusterStateRequest(ClusterStateMetric.Metadata))
+		);
+
+		protected override void ExpectResponse(IClusterStateResponse response)
+		{
+			response.Metadata.Should().NotBeNull();
+			response.Metadata.StoredScripts.Should().NotBeNull();
+			response.Metadata.StoredScripts.Count.Should().Be(2);
+
+			response.Metadata.StoredScripts["my-script-id"].Lang.Should().Be("painless");
+			response.Metadata.StoredScripts["my-script-id"].Source.Should().Be("return 0");
+			response.Metadata.StoredScripts["my-script-id"].Options.Should().BeEmpty();
+
+			response.Metadata.StoredScripts["my-other-script-id"].Lang.Should().Be("painless");
+			response.Metadata.StoredScripts["my-other-script-id"].Source.Should().Be("return 1");
+			response.Metadata.StoredScripts["my-other-script-id"].Options.Should().BeEmpty();
 		}
 	}
 }
