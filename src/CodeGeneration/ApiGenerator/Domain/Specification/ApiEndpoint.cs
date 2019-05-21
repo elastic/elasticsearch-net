@@ -85,6 +85,12 @@ namespace ApiGenerator.Domain
 			}
 		}
 		
+		public HighLevelClientMethod HighLevelClientMethod => new HighLevelClientMethod
+		{
+			CsharpNames = CsharpNames,
+			HasBody = Body != null
+		};
+		
 		private List<LowLevelClientMethod> _lowLevelClientMethods;
 		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{

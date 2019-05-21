@@ -70,6 +70,38 @@ namespace ApiGenerator
 			.GroupBy(v=>v.Item1)
 			.Select(g=>g.Last())
 			.ToDictionary(k => k.Item1, v => v.Item2);
+		
+		/// <summary>
+		/// Some API's reuse response this is a hardcoded map of these cases
+		/// </summary>
+		private static Dictionary<string, (string, string)> ResponseReroute = new Dictionary<string, (string, string)>
+		{
+			{"UpdateByQueryRethrottleResponse", ("ListTasksResponse", "")},
+			{"DeleteByQueryRethrottleResponse", ("ListTasksResponse", "")},
+			{"MultiSearchTemplateResponse", ("MultiSearchResponse", "")},
+			{"ScrollResponse", ("SearchResponse", "<TDocument>")},
+			{"SearchTemplateResponse", ("SearchResponse", "<TDocument>")},
+			
+		};
+		
+		
+		/// <summary> Create a dictionary lookup of all responses and their generics </summary>
+		public static readonly SortedDictionary<string, (string, string)> ResponseLookup = new SortedDictionary<string, (string, string)>(
+		(
+			// find all files in NEST ending with Request.cs
+			from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Response.cs", SearchOption.AllDirectories)
+			from l in File.ReadLines(f.FullName)
+			// attempt to locate all Response class lines
+			where Regex.IsMatch(l, @"^.+public class [^ \r\n]+Response")
+			//grab the response name including any generics declared on it
+			let c = Regex.Replace(l, @"^.+public class ([^ \r\n]+Response(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
+			where c.Contains("Response")
+			let response = Regex.Replace(c, "<.*$", "")
+			let generics = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")
+			select (response,  (response, generics))
+		)
+			.Concat(ResponseReroute.Select(kv=>(kv.Key, (kv.Value.Item1, kv.Value.Item2))))
+			.ToDictionary(t=>t.Item1, t=>t.Item2));
 
 	}
 }

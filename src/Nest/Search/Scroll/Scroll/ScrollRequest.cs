@@ -29,17 +29,17 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => _clrType;
 	}
 
-	public partial class ScrollDescriptor<T> where T : class
+	public partial class ScrollDescriptor<TDocument> where TDocument : class
 	{
-		Type ICovariantSearchRequest.ClrType => typeof(T);
+		Type ICovariantSearchRequest.ClrType => typeof(TDocument);
 
 		Time IScrollRequest.Scroll { get; set; }
 
 		string IScrollRequest.ScrollId { get; set; }
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(Time scroll) => Assign(scroll, (a, v) => a.Scroll = v);
+		public ScrollDescriptor<TDocument> Scroll(Time scroll) => Assign(scroll, (a, v) => a.Scroll = v);
 
-		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(scrollId, (a, v) => a.ScrollId = v);
+		public ScrollDescriptor<TDocument> ScrollId(string scrollId) => Assign(scrollId, (a, v) => a.ScrollId = v);
 	}
 }

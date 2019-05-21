@@ -31,7 +31,8 @@ namespace ApiGenerator
 			{
 				{ GenerateEnums, "Enums" },
 				{ GenerateLowLevelClientInterface, "Client interface" },
-				{ GenerateLowLevelClient, "Lowlevel client" },
+				{ GenerateLowLevelClient, "Low level client" },
+				{ GenerateHighLevelClient, "High level client" },
 				{ GenerateRequestParameters, "Request parameters" },
 				{ GenerateDescriptors, "Descriptors" },
 				{ GenerateRequests, "Requests" },
@@ -176,6 +177,29 @@ namespace ApiGenerator
 					
 				}
 			}
+		}
+		private static void GenerateHighLevelClient(RestApiSpec model, ProgressBar pbar)
+		{
+			var viewRoot = Path.Combine(GeneratorLocations.ViewFolder, "HighLevelClient") + "/";
+			
+			var targetFile = GeneratorLocations.NestFolder + @"ITempClient.cs";
+			var sourceFileContents = File.ReadAllText(viewRoot + @"ITempClient.cshtml");
+			var source = DoRazor(nameof(GenerateHighLevelClient), sourceFileContents, model);
+			WriteFormattedCsharpFile(targetFile, source);
+
+//			var namespaced = model.EndpointsPerNamespace.Where(kv => kv.Key != CsharpNames.RootNamespace).ToList();
+//			using (var c = pbar.Spawn(namespaced.Count, "Generating namespaces", new ProgressBarOptions { ForegroundColor = ConsoleColor.Yellow }))
+//			{
+//				foreach (var ns in namespaced)
+//				{
+//					targetFile = GeneratorLocations.EsNetFolder + $"ElasticLowLevelClient.{ns.Key}.cs";
+//					sourceFileContents = File.ReadAllText(viewRoot + @"ElasticLowLevelClient.Namespace.cshtml");
+//					source = DoRazor(nameof(GenerateLowLevelClient) + ns.Key, sourceFileContents, ns);
+//					WriteFormattedCsharpFile(targetFile, source);
+//					c.Tick($"Written namespace client for {ns.Key}");
+//					
+//				}
+//			}
 		}
 
 		private static void GenerateDescriptors(RestApiSpec model, ProgressBar pbar)

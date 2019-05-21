@@ -1,0 +1,20 @@
+@inherits TemplatePage<HighLevelClientMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@{
+	HighLevelClientMethod method = Model;
+	var selector = string.Format("Func<{0}, {1}>", method.CsharpNames.GenericOrNonGenericDescriptorName, method.CsharpNames.InterfaceName);
+	var optionalSelector = method.HasBody ? "" : " = null";
+	var methodGenerics = method.CsharpNames.HighLevelMethodGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.HighLevelMethodGenerics)}>" : null;
+}
+@{
+	//await IncludeAsync("HighLevelClient/MethodDocs.cshtml", method);
+}
+@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGenerics))(@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.HighLevelMethodGenericWhere;
+
+
+

@@ -2436,7 +2436,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface ICountRequest<T> : ICountRequest
+	public partial interface ICountRequest<TDocument> : ICountRequest
 	{
 	}
 
@@ -2570,11 +2570,11 @@ namespace Nest
 		}
 	}
 
-	public partial class CountRequest<T> : CountRequest, ICountRequest<T>
+	public partial class CountRequest<TDocument> : CountRequest, ICountRequest<TDocument>
 	{
-		protected ICountRequest<T> TypedSelf => this;
+		protected ICountRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_count</summary>
-		public CountRequest(): base(typeof(T))
+		public CountRequest(): base(typeof(TDocument))
 		{
 		}
 
@@ -2874,7 +2874,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest
+	public partial interface IDeleteByQueryRequest<TDocument> : IDeleteByQueryRequest
 	{
 	}
 
@@ -3139,9 +3139,9 @@ namespace Nest
 		}
 	}
 
-	public partial class DeleteByQueryRequest<T> : DeleteByQueryRequest, IDeleteByQueryRequest<T>
+	public partial class DeleteByQueryRequest<TDocument> : DeleteByQueryRequest, IDeleteByQueryRequest<TDocument>
 	{
-		protected IDeleteByQueryRequest<T> TypedSelf => this;
+		protected IDeleteByQueryRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_delete_by_query</summary>
 		///<param name = "index">this parameter is required</param>
 		public DeleteByQueryRequest(Indices index): base(index)
@@ -3149,7 +3149,7 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_delete_by_query</summary>
-		public DeleteByQueryRequest(): base(typeof(T))
+		public DeleteByQueryRequest(): base(typeof(TDocument))
 		{
 		}
 	}
@@ -6237,7 +6237,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface IPutMappingRequest<T> : IPutMappingRequest
+	public partial interface IPutMappingRequest<TDocument> : IPutMappingRequest
 	{
 	}
 
@@ -6309,9 +6309,9 @@ namespace Nest
 		}
 	}
 
-	public partial class PutMappingRequest<T> : PutMappingRequest, IPutMappingRequest<T>
+	public partial class PutMappingRequest<TDocument> : PutMappingRequest, IPutMappingRequest<TDocument>
 	{
-		protected IPutMappingRequest<T> TypedSelf => this;
+		protected IPutMappingRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_mapping</summary>
 		///<param name = "index">this parameter is required</param>
 		public PutMappingRequest(Indices index): base(index)
@@ -6319,7 +6319,7 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_mapping</summary>
-		public PutMappingRequest(): base(typeof(T))
+		public PutMappingRequest(): base(typeof(TDocument))
 		{
 		}
 	}
@@ -7116,7 +7116,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface IValidateQueryRequest<T> : IValidateQueryRequest
+	public partial interface IValidateQueryRequest<TDocument> : IValidateQueryRequest
 	{
 	}
 
@@ -7229,11 +7229,11 @@ namespace Nest
 		}
 	}
 
-	public partial class ValidateQueryRequest<T> : ValidateQueryRequest, IValidateQueryRequest<T>
+	public partial class ValidateQueryRequest<TDocument> : ValidateQueryRequest, IValidateQueryRequest<TDocument>
 	{
-		protected IValidateQueryRequest<T> TypedSelf => this;
+		protected IValidateQueryRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_validate/query</summary>
-		public ValidateQueryRequest(): base(typeof(T))
+		public ValidateQueryRequest(): base(typeof(TDocument))
 		{
 		}
 
@@ -10688,7 +10688,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface ISearchRequest<T> : ISearchRequest
+	public partial interface ISearchRequest<TDocument> : ISearchRequest
 	{
 	}
 
@@ -10931,11 +10931,11 @@ namespace Nest
 		}
 	}
 
-	public partial class SearchRequest<T> : SearchRequest, ISearchRequest<T>
+	public partial class SearchRequest<TDocument> : SearchRequest, ISearchRequest<TDocument>
 	{
-		protected ISearchRequest<T> TypedSelf => this;
+		protected ISearchRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_search</summary>
-		public SearchRequest(): base(typeof(T))
+		public SearchRequest(): base(typeof(TDocument))
 		{
 		}
 
@@ -10956,7 +10956,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface ISearchShardsRequest<T> : ISearchShardsRequest
+	public partial interface ISearchShardsRequest<TDocument> : ISearchShardsRequest
 	{
 	}
 
@@ -11034,11 +11034,11 @@ namespace Nest
 		}
 	}
 
-	public partial class SearchShardsRequest<T> : SearchShardsRequest, ISearchShardsRequest<T>
+	public partial class SearchShardsRequest<TDocument> : SearchShardsRequest, ISearchShardsRequest<TDocument>
 	{
-		protected ISearchShardsRequest<T> TypedSelf => this;
+		protected ISearchShardsRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_search_shards</summary>
-		public SearchShardsRequest(): base(typeof(T))
+		public SearchShardsRequest(): base(typeof(TDocument))
 		{
 		}
 
@@ -13083,7 +13083,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface IUpdateByQueryRequest<T> : IUpdateByQueryRequest
+	public partial interface IUpdateByQueryRequest<TDocument> : IUpdateByQueryRequest
 	{
 	}
 
@@ -13362,9 +13362,9 @@ namespace Nest
 		}
 	}
 
-	public partial class UpdateByQueryRequest<T> : UpdateByQueryRequest, IUpdateByQueryRequest<T>
+	public partial class UpdateByQueryRequest<TDocument> : UpdateByQueryRequest, IUpdateByQueryRequest<TDocument>
 	{
-		protected IUpdateByQueryRequest<T> TypedSelf => this;
+		protected IUpdateByQueryRequest<TDocument> TypedSelf => this;
 		///<summary>/{index}/_update_by_query</summary>
 		///<param name = "index">this parameter is required</param>
 		public UpdateByQueryRequest(Indices index): base(index)
@@ -13372,7 +13372,7 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_update_by_query</summary>
-		public UpdateByQueryRequest(): base(typeof(T))
+		public UpdateByQueryRequest(): base(typeof(TDocument))
 		{
 		}
 	}

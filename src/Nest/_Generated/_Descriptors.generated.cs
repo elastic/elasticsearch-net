@@ -1132,11 +1132,11 @@ namespace Nest
 	}
 
 	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
-	public partial class CountDescriptor<T> : RequestDescriptorBase<CountDescriptor<T>, CountRequestParameters, ICountRequest<T>>, ICountRequest<T>
+	public partial class CountDescriptor<TDocument> : RequestDescriptorBase<CountDescriptor<TDocument>, CountRequestParameters, ICountRequest<TDocument>>, ICountRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => CountRequest.Urls;
 		///<summary>/{index}/_count</summary>
-		public CountDescriptor(): this(typeof(T))
+		public CountDescriptor(): this(typeof(TDocument))
 		{
 		}
 
@@ -1149,37 +1149,37 @@ namespace Nest
 		// values part of the url path
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of indices to restrict the results</summary>
-		public CountDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public CountDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CountDescriptor<T> Index<TOther>()
+		public CountDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CountDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public CountDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public CountDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public CountDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public CountDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer to use for the query string</summary>
-		public CountDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		public CountDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public CountDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public CountDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public CountDescriptor<T> Df(string df) => Qs("df", df);
+		public CountDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public CountDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public CountDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		public CountDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public CountDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public CountDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public CountDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
+		public CountDescriptor<TDocument> MinScore(double? minScore) => Qs("min_score", minScore);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		public CountDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
+		public CountDescriptor<TDocument> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1187,9 +1187,9 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public CountDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public CountDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
-		public CountDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public CountDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	}
 
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
@@ -1311,7 +1311,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
-	public partial class DeleteByQueryDescriptor<T> : RequestDescriptorBase<DeleteByQueryDescriptor<T>, DeleteByQueryRequestParameters, IDeleteByQueryRequest<T>>, IDeleteByQueryRequest<T>
+	public partial class DeleteByQueryDescriptor<TDocument> : RequestDescriptorBase<DeleteByQueryDescriptor<TDocument>, DeleteByQueryRequestParameters, IDeleteByQueryRequest<TDocument>>, IDeleteByQueryRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => DeleteByQueryRequest.Urls;
 		///<summary>/{index}/_delete_by_query</summary>
@@ -1321,50 +1321,50 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_delete_by_query</summary>
-		public DeleteByQueryDescriptor(): this(typeof(T))
+		public DeleteByQueryDescriptor(): this(typeof(TDocument))
 		{
 		}
 
 		// values part of the url path
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public DeleteByQueryDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeleteByQueryDescriptor<T> Index<TOther>()
+		public DeleteByQueryDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public DeleteByQueryDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public DeleteByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public DeleteByQueryDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public DeleteByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public DeleteByQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer to use for the query string</summary>
-		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		public DeleteByQueryDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>What to do when the delete by query hits version conflicts?</summary>
-		public DeleteByQueryDescriptor<T> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
+		public DeleteByQueryDescriptor<TDocument> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public DeleteByQueryDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public DeleteByQueryDescriptor<T> Df(string df) => Qs("df", df);
+		public DeleteByQueryDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DeleteByQueryDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Starting offset (default: 0)</summary>
-		public DeleteByQueryDescriptor<T> From(long? from) => Qs("from", from);
+		public DeleteByQueryDescriptor<TDocument> From(long? from) => Qs("from", from);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public DeleteByQueryDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public DeleteByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public DeleteByQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public DeleteByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		public DeleteByQueryDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
+		public DeleteByQueryDescriptor<TDocument> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public DeleteByQueryDescriptor<T> Refresh(bool? refresh = true) => Qs("refresh", refresh);
+		public DeleteByQueryDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public DeleteByQueryDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
+		public DeleteByQueryDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
-		public DeleteByQueryDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteByQueryDescriptor<TDocument> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1372,43 +1372,43 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public DeleteByQueryDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public DeleteByQueryDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public DeleteByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
+		public DeleteByQueryDescriptor<TDocument> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Size on the scroll request powering the delete by query</summary>
-		public DeleteByQueryDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
+		public DeleteByQueryDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public DeleteByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
+		public DeleteByQueryDescriptor<TDocument> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Search operation type</summary>
-		public DeleteByQueryDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
+		public DeleteByQueryDescriptor<TDocument> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Number of hits to return (default: 10)</summary>
-		public DeleteByQueryDescriptor<T> Size(long? size) => Qs("size", size);
+		public DeleteByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public DeleteByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
+		public DeleteByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public DeleteByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
+		public DeleteByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public DeleteByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
+		public DeleteByQueryDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public DeleteByQueryDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExcludes(params Expression<Func<T, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public DeleteByQueryDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public DeleteByQueryDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceIncludes(params Expression<Func<T, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public DeleteByQueryDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public DeleteByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
+		public DeleteByQueryDescriptor<TDocument> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public DeleteByQueryDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
+		public DeleteByQueryDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public DeleteByQueryDescriptor<T> Version(bool? version = true) => Qs("version", version);
+		public DeleteByQueryDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public DeleteByQueryDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public DeleteByQueryDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Should the request should block until the delete by query is complete.</summary>
-		public DeleteByQueryDescriptor<T> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public DeleteByQueryDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	///<summary>descriptor for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
@@ -1863,7 +1863,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-	public partial class GraphExploreDescriptor<T> : RequestDescriptorBase<GraphExploreDescriptor<T>, GraphExploreRequestParameters, IGraphExploreRequest<T>>, IGraphExploreRequest<T>
+	public partial class GraphExploreDescriptor<TDocument> : RequestDescriptorBase<GraphExploreDescriptor<TDocument>, GraphExploreRequestParameters, IGraphExploreRequest<T>>, IGraphExploreRequest<T>
 	{
 		internal override ApiUrls ApiUrls => GraphExploreRequest.Urls;
 		///<summary>/{index}/_graph/explore</summary>
@@ -1873,19 +1873,19 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_graph/explore</summary>
-		public GraphExploreDescriptor(): this(typeof(T))
+		public GraphExploreDescriptor(): this(typeof(TDocument))
 		{
 		}
 
 		// values part of the url path
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public GraphExploreDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public GraphExploreDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GraphExploreDescriptor<T> Index<TOther>()
+		public GraphExploreDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GraphExploreDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public GraphExploreDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -1894,9 +1894,9 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public GraphExploreDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public GraphExploreDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
-		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
+		public GraphExploreDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>descriptor for DeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
@@ -2755,12 +2755,12 @@ namespace Nest
 	}
 
 	///<summary>descriptor for GetFieldMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
-	public partial class GetFieldMappingDescriptor<T> : RequestDescriptorBase<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
+	public partial class GetFieldMappingDescriptor<TDocument> : RequestDescriptorBase<GetFieldMappingDescriptor<TDocument>, GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
 	{
 		internal override ApiUrls ApiUrls => GetFieldMappingRequest.Urls;
 		///<summary>/{index}/_mapping/field/{fields}</summary>
 		///<param name = "fields">this parameter is required</param>
-		public GetFieldMappingDescriptor(Fields fields): this(typeof(T), fields)
+		public GetFieldMappingDescriptor(Fields fields): this(typeof(TDocument), fields)
 		{
 		}
 
@@ -2781,33 +2781,33 @@ namespace Nest
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names</summary>
-		public GetFieldMappingDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public GetFieldMappingDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetFieldMappingDescriptor<T> Index<TOther>()
+		public GetFieldMappingDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetFieldMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public GetFieldMappingDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetFieldMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetFieldMappingDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetFieldMappingDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetFieldMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public GetFieldMappingDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public GetFieldMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public GetFieldMappingDescriptor<TDocument> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetFieldMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
+		public GetFieldMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	}
 
 	///<summary>descriptor for GetMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
-	public partial class GetMappingDescriptor<T> : RequestDescriptorBase<GetMappingDescriptor<T>, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
+	public partial class GetMappingDescriptor<TDocument> : RequestDescriptorBase<GetMappingDescriptor<TDocument>, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{
 		internal override ApiUrls ApiUrls => GetMappingRequest.Urls;
 		///<summary>/{index}/_mapping</summary>
-		public GetMappingDescriptor(): this(typeof(T))
+		public GetMappingDescriptor(): this(typeof(TDocument))
 		{
 		}
 
@@ -2820,25 +2820,25 @@ namespace Nest
 		// values part of the url path
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names</summary>
-		public GetMappingDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public GetMappingDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetMappingDescriptor<T> Index<TOther>()
+		public GetMappingDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public GetMappingDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetMappingDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetMappingDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public GetMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public GetMappingDescriptor<TDocument> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
+		public GetMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
-		public GetMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public GetMappingDescriptor<TDocument> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	///<summary>descriptor for GetIndexSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
@@ -3036,7 +3036,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for PutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
-	public partial class PutMappingDescriptor<T> : RequestDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters, IPutMappingRequest<T>>, IPutMappingRequest<T>
+	public partial class PutMappingDescriptor<TDocument> : RequestDescriptorBase<PutMappingDescriptor<TDocument>, PutMappingRequestParameters, IPutMappingRequest<TDocument>>, IPutMappingRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => PutMappingRequest.Urls;
 		///<summary>/{index}/_mapping</summary>
@@ -3046,32 +3046,32 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_mapping</summary>
-		public PutMappingDescriptor(): this(typeof(T))
+		public PutMappingDescriptor(): this(typeof(TDocument))
 		{
 		}
 
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
-		public PutMappingDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public PutMappingDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PutMappingDescriptor<T> Index<TOther>()
+		public PutMappingDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public PutMappingDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public PutMappingDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public PutMappingDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PutMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public PutMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public PutMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public PutMappingDescriptor<TDocument> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutMappingDescriptor<TDocument> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
-		public PutMappingDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
+		public PutMappingDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>descriptor for UpdateIndexSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
@@ -3503,11 +3503,11 @@ namespace Nest
 	}
 
 	///<summary>descriptor for ValidateQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
-	public partial class ValidateQueryDescriptor<T> : RequestDescriptorBase<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, IValidateQueryRequest<T>>, IValidateQueryRequest<T>
+	public partial class ValidateQueryDescriptor<TDocument> : RequestDescriptorBase<ValidateQueryDescriptor<TDocument>, ValidateQueryRequestParameters, IValidateQueryRequest<TDocument>>, IValidateQueryRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ValidateQueryRequest.Urls;
 		///<summary>/{index}/_validate/query</summary>
-		public ValidateQueryDescriptor(): this(typeof(T))
+		public ValidateQueryDescriptor(): this(typeof(TDocument))
 		{
 		}
 
@@ -3520,37 +3520,37 @@ namespace Nest
 		// values part of the url path
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public ValidateQueryDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ValidateQueryDescriptor<T> Index<TOther>()
+		public ValidateQueryDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ValidateQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public ValidateQueryDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
-		public ValidateQueryDescriptor<T> AllShards(bool? allShards = true) => Qs("all_shards", allShards);
+		public ValidateQueryDescriptor<TDocument> AllShards(bool? allShards = true) => Qs("all_shards", allShards);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ValidateQueryDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public ValidateQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer to use for the query string</summary>
-		public ValidateQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		public ValidateQueryDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public ValidateQueryDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public ValidateQueryDescriptor<T> Df(string df) => Qs("df", df);
+		public ValidateQueryDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ValidateQueryDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return detailed information about the error</summary>
-		public ValidateQueryDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
+		public ValidateQueryDescriptor<TDocument> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ValidateQueryDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ValidateQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public ValidateQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
+		public ValidateQueryDescriptor<TDocument> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public ValidateQueryDescriptor<T> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
+		public ValidateQueryDescriptor<TDocument> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
 	}
 
 	///<summary>descriptor for RootNodeInfo <pre>http://www.elastic.co/guide/</pre></summary>
@@ -4603,7 +4603,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for PutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
-	public partial class PutDatafeedDescriptor<T> : RequestDescriptorBase<PutDatafeedDescriptor<T>, PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
+	public partial class PutDatafeedDescriptor<TDocument> : RequestDescriptorBase<PutDatafeedDescriptor<TDocument>, PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => PutDatafeedRequest.Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
@@ -4645,7 +4645,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for PutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
-	public partial class PutJobDescriptor<T> : RequestDescriptorBase<PutJobDescriptor<T>, PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
+	public partial class PutJobDescriptor<TDocument> : RequestDescriptorBase<PutJobDescriptor<TDocument>, PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{
 		internal override ApiUrls ApiUrls => PutJobRequest.Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
@@ -4733,7 +4733,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for UpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
-	public partial class UpdateDatafeedDescriptor<T> : RequestDescriptorBase<UpdateDatafeedDescriptor<T>, UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
+	public partial class UpdateDatafeedDescriptor<TDocument> : RequestDescriptorBase<UpdateDatafeedDescriptor<TDocument>, UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => UpdateDatafeedRequest.Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
@@ -4775,7 +4775,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for UpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
-	public partial class UpdateJobDescriptor<T> : RequestDescriptorBase<UpdateJobDescriptor<T>, UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
+	public partial class UpdateJobDescriptor<TDocument> : RequestDescriptorBase<UpdateJobDescriptor<TDocument>, UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
 	{
 		internal override ApiUrls ApiUrls => UpdateJobRequest.Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
@@ -4819,7 +4819,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for ValidateJob <pre></pre></summary>
-	public partial class ValidateJobDescriptor<T> : RequestDescriptorBase<ValidateJobDescriptor<T>, ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
+	public partial class ValidateJobDescriptor<TDocument> : RequestDescriptorBase<ValidateJobDescriptor<TDocument>, ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
 	{
 		internal override ApiUrls ApiUrls => ValidateJobRequest.Urls;
 	// values part of the url path
@@ -4827,7 +4827,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for ValidateDetector <pre></pre></summary>
-	public partial class ValidateDetectorDescriptor<T> : RequestDescriptorBase<ValidateDetectorDescriptor<T>, ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
+	public partial class ValidateDetectorDescriptor<TDocument> : RequestDescriptorBase<ValidateDetectorDescriptor<TDocument>, ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
 	{
 		internal override ApiUrls ApiUrls => ValidateDetectorRequest.Urls;
 	// values part of the url path
@@ -5391,7 +5391,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for CreateRollupJob <pre></pre></summary>
-	public partial class CreateRollupJobDescriptor<T> : RequestDescriptorBase<CreateRollupJobDescriptor<T>, CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
+	public partial class CreateRollupJobDescriptor<TDocument> : RequestDescriptorBase<CreateRollupJobDescriptor<TDocument>, CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => CreateRollupJobRequest.Urls;
 		///<summary>/_rollup/job/{id}</summary>
@@ -5412,7 +5412,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for Search <pre></pre></summary>
-	public partial class RollupSearchDescriptor<T> : RequestDescriptorBase<RollupSearchDescriptor<T>, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
+	public partial class RollupSearchDescriptor<TDocument> : RequestDescriptorBase<RollupSearchDescriptor<TDocument>, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{
 		internal override ApiUrls ApiUrls => RollupSearchRequest.Urls;
 		///<summary>/{index}/_rollup_search</summary>
@@ -5422,24 +5422,24 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_rollup_search</summary>
-		public RollupSearchDescriptor(): this(typeof(T))
+		public RollupSearchDescriptor(): this(typeof(TDocument))
 		{
 		}
 
 		// values part of the url path
 		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>The indices or index-pattern(s) (containing rollup or regular data) that should be searched</summary>
-		public RollupSearchDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public RollupSearchDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RollupSearchDescriptor<T> Index<TOther>()
+		public RollupSearchDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public RollupSearchDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public RollupSearchDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		public RollupSearchDescriptor<TDocument> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public RollupSearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public RollupSearchDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 
 	///<summary>descriptor for StartRollupJob <pre></pre></summary>
@@ -5497,21 +5497,21 @@ namespace Nest
 	}
 
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
-	public partial class ScrollDescriptor<T> : RequestDescriptorBase<ScrollDescriptor<T>, ScrollRequestParameters, IScrollRequest>, IScrollRequest
+	public partial class ScrollDescriptor<TDocument> : RequestDescriptorBase<ScrollDescriptor<TDocument>, ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ScrollRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public ScrollDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		public ScrollDescriptor<TDocument> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
-	public partial class SearchDescriptor<T> : RequestDescriptorBase<SearchDescriptor<T>, SearchRequestParameters, ISearchRequest<T>>, ISearchRequest<T>
+	public partial class SearchDescriptor<TDocument> : RequestDescriptorBase<SearchDescriptor<TDocument>, SearchRequestParameters, ISearchRequest<TDocument>>, ISearchRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => SearchRequest.Urls;
 		///<summary>/{index}/_search</summary>
-		public SearchDescriptor(): this(typeof(T))
+		public SearchDescriptor(): this(typeof(TDocument))
 		{
 		}
 
@@ -5524,45 +5524,45 @@ namespace Nest
 		// values part of the url path
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public SearchDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchDescriptor<T> Index<TOther>()
+		public SearchDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public SearchDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public SearchDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
-		public SearchDescriptor<T> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
+		public SearchDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public SearchDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer to use for the query string</summary>
-		public SearchDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		public SearchDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
-		public SearchDescriptor<T> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
+		public SearchDescriptor<TDocument> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
-		public SearchDescriptor<T> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
+		public SearchDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public SearchDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchDescriptor<T> Df(string df) => Qs("df", df);
+		public SearchDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public SearchDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		public SearchDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public SearchDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public SearchDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
-		public SearchDescriptor<T> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+		public SearchDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public SearchDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+		public SearchDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		public SearchDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public SearchDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
+		public SearchDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -5570,39 +5570,39 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public SearchDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public SearchDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
+		public SearchDescriptor<TDocument> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
+		public SearchDescriptor<TDocument> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public SearchDescriptor<T> SequenceNumberPrimaryTerm(bool? sequenceNumberPrimaryTerm = true) => Qs("seq_no_primary_term", sequenceNumberPrimaryTerm);
+		public SearchDescriptor<TDocument> SequenceNumberPrimaryTerm(bool? sequenceNumberPrimaryTerm = true) => Qs("seq_no_primary_term", sequenceNumberPrimaryTerm);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public SearchDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
+		public SearchDescriptor<TDocument> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Field suggestField) => Qs("suggest_field", suggestField);
+		public SearchDescriptor<TDocument> SuggestField(Field suggestField) => Qs("suggest_field", suggestField);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field) => Qs("suggest_field", (Field)field);
+		public SearchDescriptor<TDocument> SuggestField(Expression<Func<TDocument, object>> field) => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
+		public SearchDescriptor<TDocument> SuggestMode(SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor<T> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
+		public SearchDescriptor<TDocument> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchDescriptor<T> SuggestText(string suggestText) => Qs("suggest_text", suggestText);
+		public SearchDescriptor<TDocument> SuggestText(string suggestText) => Qs("suggest_text", suggestText);
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public SearchDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		public SearchDescriptor<TDocument> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public SearchDescriptor<T> TrackTotalHits(bool? trackTotalHits = true) => Qs("track_total_hits", trackTotalHits);
+		public SearchDescriptor<TDocument> TrackTotalHits(bool? trackTotalHits = true) => Qs("track_total_hits", trackTotalHits);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public SearchDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
-	public partial class SearchShardsDescriptor<T> : RequestDescriptorBase<SearchShardsDescriptor<T>, SearchShardsRequestParameters, ISearchShardsRequest<T>>, ISearchShardsRequest<T>
+	public partial class SearchShardsDescriptor<TDocument> : RequestDescriptorBase<SearchShardsDescriptor<TDocument>, SearchShardsRequestParameters, ISearchShardsRequest<TDocument>>, ISearchShardsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => SearchShardsRequest.Urls;
 		///<summary>/{index}/_search_shards</summary>
-		public SearchShardsDescriptor(): this(typeof(T))
+		public SearchShardsDescriptor(): this(typeof(TDocument))
 		{
 		}
 
@@ -5615,23 +5615,23 @@ namespace Nest
 		// values part of the url path
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchShardsDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public SearchShardsDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchShardsDescriptor<T> Index<TOther>()
+		public SearchShardsDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchShardsDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public SearchShardsDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchShardsDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public SearchShardsDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchShardsDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchShardsDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public SearchShardsDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SearchShardsDescriptor<T> Local(bool? local = true) => Qs("local", local);
+		public SearchShardsDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchShardsDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		public SearchShardsDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -5639,15 +5639,15 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public SearchShardsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public SearchShardsDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 	}
 
 	///<summary>descriptor for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
-	public partial class SearchTemplateDescriptor<T> : RequestDescriptorBase<SearchTemplateDescriptor<T>, SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
+	public partial class SearchTemplateDescriptor<TDocument> : RequestDescriptorBase<SearchTemplateDescriptor<TDocument>, SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => SearchTemplateRequest.Urls;
 		///<summary>/{index}/_search/template</summary>
-		public SearchTemplateDescriptor(): this(typeof(T))
+		public SearchTemplateDescriptor(): this(typeof(TDocument))
 		{
 		}
 
@@ -5660,29 +5660,29 @@ namespace Nest
 		// values part of the url path
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public SearchTemplateDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchTemplateDescriptor<T> Index<TOther>()
+		public SearchTemplateDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchTemplateDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public SearchTemplateDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public SearchTemplateDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
-		public SearchTemplateDescriptor<T> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
+		public SearchTemplateDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchTemplateDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public SearchTemplateDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
+		public SearchTemplateDescriptor<TDocument> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public SearchTemplateDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		public SearchTemplateDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public SearchTemplateDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchTemplateDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		public SearchTemplateDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to profile the query execution</summary>
-		public SearchTemplateDescriptor<T> Profile(bool? profile = true) => Qs("profile", profile);
+		public SearchTemplateDescriptor<TDocument> Profile(bool? profile = true) => Qs("profile", profile);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -5690,15 +5690,15 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public SearchTemplateDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public SearchTemplateDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchTemplateDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
+		public SearchTemplateDescriptor<TDocument> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
+		public SearchTemplateDescriptor<TDocument> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public SearchTemplateDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		public SearchTemplateDescriptor<TDocument> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchTemplateDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public SearchTemplateDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 
 	///<summary>descriptor for Authenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
@@ -6669,7 +6669,7 @@ namespace Nest
 	}
 
 	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
-	public partial class UpdateByQueryDescriptor<T> : RequestDescriptorBase<UpdateByQueryDescriptor<T>, UpdateByQueryRequestParameters, IUpdateByQueryRequest<T>>, IUpdateByQueryRequest<T>
+	public partial class UpdateByQueryDescriptor<TDocument> : RequestDescriptorBase<UpdateByQueryDescriptor<TDocument>, UpdateByQueryRequestParameters, IUpdateByQueryRequest<TDocument>>, IUpdateByQueryRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => UpdateByQueryRequest.Urls;
 		///<summary>/{index}/_update_by_query</summary>
@@ -6679,52 +6679,52 @@ namespace Nest
 		}
 
 		///<summary>/{index}/_update_by_query</summary>
-		public UpdateByQueryDescriptor(): this(typeof(T))
+		public UpdateByQueryDescriptor(): this(typeof(TDocument))
 		{
 		}
 
 		// values part of the url path
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public UpdateByQueryDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpdateByQueryDescriptor<T> Index<TOther>()
+		public UpdateByQueryDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpdateByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public UpdateByQueryDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public UpdateByQueryDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public UpdateByQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer to use for the query string</summary>
-		public UpdateByQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		public UpdateByQueryDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>What to do when the update by query hits version conflicts?</summary>
-		public UpdateByQueryDescriptor<T> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
+		public UpdateByQueryDescriptor<TDocument> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public UpdateByQueryDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public UpdateByQueryDescriptor<T> Df(string df) => Qs("df", df);
+		public UpdateByQueryDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpdateByQueryDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Starting offset (default: 0)</summary>
-		public UpdateByQueryDescriptor<T> From(long? from) => Qs("from", from);
+		public UpdateByQueryDescriptor<TDocument> From(long? from) => Qs("from", from);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateByQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public UpdateByQueryDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public UpdateByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public UpdateByQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
-		public UpdateByQueryDescriptor<T> Pipeline(string pipeline) => Qs("pipeline", pipeline);
+		public UpdateByQueryDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public UpdateByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
+		public UpdateByQueryDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public UpdateByQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
+		public UpdateByQueryDescriptor<TDocument> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public UpdateByQueryDescriptor<T> Refresh(bool? refresh = true) => Qs("refresh", refresh);
+		public UpdateByQueryDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public UpdateByQueryDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
+		public UpdateByQueryDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public UpdateByQueryDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public UpdateByQueryDescriptor<TDocument> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -6732,45 +6732,45 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public UpdateByQueryDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
+		public UpdateByQueryDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public UpdateByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
+		public UpdateByQueryDescriptor<TDocument> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Size on the scroll request powering the update by query</summary>
-		public UpdateByQueryDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
+		public UpdateByQueryDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public UpdateByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
+		public UpdateByQueryDescriptor<TDocument> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Search operation type</summary>
-		public UpdateByQueryDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
+		public UpdateByQueryDescriptor<TDocument> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Number of hits to return (default: 10)</summary>
-		public UpdateByQueryDescriptor<T> Size(long? size) => Qs("size", size);
+		public UpdateByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public UpdateByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
+		public UpdateByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public UpdateByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
+		public UpdateByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public UpdateByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
+		public UpdateByQueryDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public UpdateByQueryDescriptor<TDocument> SourceExcludes(Fields sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExcludes(params Expression<Func<T, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
+		public UpdateByQueryDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public UpdateByQueryDescriptor<TDocument> SourceIncludes(Fields sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceIncludes(params Expression<Func<T, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
+		public UpdateByQueryDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public UpdateByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
+		public UpdateByQueryDescriptor<TDocument> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public UpdateByQueryDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public UpdateByQueryDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
+		public UpdateByQueryDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public UpdateByQueryDescriptor<T> Version(bool? version = true) => Qs("version", version);
+		public UpdateByQueryDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
-		public UpdateByQueryDescriptor<T> VersionType(bool? versionType = true) => Qs("version_type", versionType);
+		public UpdateByQueryDescriptor<TDocument> VersionType(bool? versionType = true) => Qs("version_type", versionType);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public UpdateByQueryDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public UpdateByQueryDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
-		public UpdateByQueryDescriptor<T> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public UpdateByQueryDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	///<summary>descriptor for UpdateByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>

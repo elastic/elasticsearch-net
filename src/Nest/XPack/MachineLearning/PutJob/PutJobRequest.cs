@@ -83,7 +83,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public partial class PutJobDescriptor<T> where T : class
+	public partial class PutJobDescriptor<TDocument> where TDocument : class
 	{
 		IAnalysisConfig IPutJobRequest.AnalysisConfig { get; set; }
 		IAnalysisLimits IPutJobRequest.AnalysisLimits { get; set; }
@@ -94,34 +94,34 @@ namespace Nest
 		IndexName IPutJobRequest.ResultsIndexName { get; set; }
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> AnalysisConfig(Func<AnalysisConfigDescriptor<T>, IAnalysisConfig> selector) =>
-			Assign(selector, (a, v) => a.AnalysisConfig = v?.Invoke(new AnalysisConfigDescriptor<T>()));
+		public PutJobDescriptor<TDocument> AnalysisConfig(Func<AnalysisConfigDescriptor<TDocument>, IAnalysisConfig> selector) =>
+			Assign(selector, (a, v) => a.AnalysisConfig = v?.Invoke(new AnalysisConfigDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) =>
+		public PutJobDescriptor<TDocument> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) =>
 			Assign(selector, (a, v) => a.AnalysisLimits = v?.Invoke(new AnalysisLimitsDescriptor()));
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> DataDescription(Func<DataDescriptionDescriptor<T>, IDataDescription> selector) =>
-			Assign(selector.InvokeOrDefault(new DataDescriptionDescriptor<T>()), (a, v) => a.DataDescription = v);
+		public PutJobDescriptor<TDocument> DataDescription(Func<DataDescriptionDescriptor<TDocument>, IDataDescription> selector) =>
+			Assign(selector.InvokeOrDefault(new DataDescriptionDescriptor<TDocument>()), (a, v) => a.DataDescription = v);
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> Description(string description) => Assign(description, (a, v) => a.Description = v);
+		public PutJobDescriptor<TDocument> Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> ModelPlot(Func<ModelPlotConfigDescriptor<T>, IModelPlotConfig> selector) =>
-			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigDescriptor<T>()));
+		public PutJobDescriptor<TDocument> ModelPlot(Func<ModelPlotConfigDescriptor<TDocument>, IModelPlotConfig> selector) =>
+			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
+		public PutJobDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
 			Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> ResultsIndexName(IndexName indexName) =>
+		public PutJobDescriptor<TDocument> ResultsIndexName(IndexName indexName) =>
 			Assign(indexName, (a, v) => a.ResultsIndexName = v);
 
 		/// <inheritdoc />
-		public PutJobDescriptor<T> ResultsIndexName<TIndex>() =>
+		public PutJobDescriptor<TDocument> ResultsIndexName<TIndex>() =>
 			Assign(typeof(TIndex), (a, v) => a.ResultsIndexName = v);
 	}
 

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using CsQuery.ExtensionMethods.Internal;
@@ -31,6 +33,18 @@ namespace ApiGenerator.Domain
 		public string ApiName { get; private set; }
 		
 		public string RequestName => $"{ApiName}Request";
+
+		public string ResponseName
+		{
+			get
+			{
+				if (Namespace == "Cat") return $"CatResponse<{ApiName}Record>";
+				else if (ApiName.EndsWith("Exists")) return $"ExistsResponse";
+
+				var generatedName = $"{ApiName}Response";
+				return CodeConfiguration.ResponseLookup.TryGetValue(generatedName, out var lookup) ? lookup.Item1 : generatedName;
+			}
+		}
 		public string InterfaceName => $"I{RequestName}";
 		public string ParametersName => $"{RequestName}Parameters";
 		public string DescriptorName => $"{ApiName}Descriptor";
@@ -69,17 +83,54 @@ namespace ApiGenerator.Domain
 		
 		public string GenericsDeclaredOnRequest => 
 			CodeConfiguration.RequestInterfaceGenericsLookup.TryGetValue(InterfaceName, out var requestGeneric) ? requestGeneric : null;
+		
+		public string GenericsDeclaredOnResponse => 
+			CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var requestGeneric) ? requestGeneric.Item2 : null;
 
 		public string GenericsDeclaredOnDescriptor =>
 			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? generic : null;
+			
+		public List<string> HighLevelMethodGenerics
+		{
+			get 
+			{
+			
+				var descriptorGenerics = 
+					CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) 
+					? generic.Replace("<", "").Replace(">", "")
+					.Split(",")
+					.Where(g=>!string.IsNullOrWhiteSpace(g))
+					: Enumerable.Empty<string>();
+				var responseGenerics = 
+					CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var responseGeneric) 
+						&& !string.IsNullOrEmpty(responseGeneric.Item2)
+					? responseGeneric.Item2.Replace("<", "").Replace(">", "")
+					.Split(",")
+					.Where(g=>!string.IsNullOrWhiteSpace(g))
+					: Enumerable.Empty<string>();
+				return descriptorGenerics
+					.Concat(responseGenerics)
+					.Distinct()
+					.ToList();
+			}
+		}
+
+		public string HighLevelMethodGenericWhere =>
+			string.Join(" ", HighLevelMethodGenerics
+				.Where(g=>g.Contains("Document"))
+				.Select(g=>$"where {g} : class")
+			);
+
 
 		public bool DescriptorNotFoundInCodebase => !CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out _);
 		
 		public string GenericDescriptorName => GenericsDeclaredOnDescriptor.IsNullOrEmpty() ? null : $"{DescriptorName}{GenericsDeclaredOnDescriptor}";
 		public string GenericRequestName => GenericsDeclaredOnRequest.IsNullOrEmpty() ? null : $"{RequestName}{GenericsDeclaredOnRequest}";
 		public string GenericInterfaceName => GenericsDeclaredOnRequest.IsNullOrEmpty() ? null : $"I{GenericRequestName}";
+		public string GenericResponseName => GenericsDeclaredOnResponse.IsNullOrEmpty() ? null : $"{ResponseName}{GenericsDeclaredOnResponse}";
 		
 		public string GenericOrNonGenericDescriptorName => GenericDescriptorName ?? DescriptorName;
 		public string GenericOrNonGenericInterfaceName => GenericInterfaceName  ?? InterfaceName;
+		public string GenericOrNonGenericResponseName => GenericResponseName ?? ResponseName;
 	}
 }
