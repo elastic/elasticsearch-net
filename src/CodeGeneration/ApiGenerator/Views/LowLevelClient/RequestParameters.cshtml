@@ -6,7 +6,7 @@
 @using ApiGenerator
 @{
 	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
-	string ns = model.Key != CsharpNames.RootNamespace ? ".Api." + model.Key : null;
+	string ns = model.Key != CsharpNames.RootNamespace ? ".Apis." + model.Key + "Api" : null;
 	var endpoints = model.Value;
 }
 
