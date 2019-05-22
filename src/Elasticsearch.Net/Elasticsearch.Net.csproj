@@ -19,6 +19,12 @@
       <DependentUpon>ElasticLowLevelClient.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Domain\RequestParameters\RequestParameters.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Domain\RequestParameters\RequestParameters.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
   <!-- from Utf8Json -->
   <ItemGroup>

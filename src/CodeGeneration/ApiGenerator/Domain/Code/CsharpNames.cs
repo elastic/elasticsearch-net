@@ -50,6 +50,9 @@ namespace ApiGenerator.Domain
 		public string DescriptorName => $"{ApiName}Descriptor";
 
 		public const string RootNamespace = "NoNamespace";
+		public const string LowLevelClientNamespacePrefix = "LowLevel";
+		public const string HighLevelClientNamespacePrefix = "";
+		public const string ClientNamespaceSuffix = "Namespace";
 		private static string CreateCSharpNamespace(string endpointNamespace)
 		{
 			switch (endpointNamespace)

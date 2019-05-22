@@ -125,7 +125,7 @@ namespace Nest
 	[DataContract]
 	public partial class SearchRequest<TDocument> : ISearchRequest<TDocument>
 	{
-		Type ICovariantSearchRequest.ClrType => typeof(T);
+		Type ICovariantSearchRequest.ClrType => typeof(TDocument);
 	}
 
 	/// <summary>

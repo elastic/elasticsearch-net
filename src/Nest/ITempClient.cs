@@ -37,79 +37,79 @@ namespace Nest
 		CatResponse<CatThreadPoolRecord> ThreadPool(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null);
 		ClusterAllocationExplainResponse AllocationExplain(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector);
 		ClusterGetSettingsResponse GetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null);
-		ClusterHealthResponse Health(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
+		ClusterHealthResponse Health(Indices index, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
 		ClusterPendingTasksResponse PendingTasks(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null);
 		ClusterPutSettingsResponse PutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector);
 		RemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null);
 		ClusterRerouteResponse Reroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector);
-		ClusterStateResponse State(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
+		ClusterStateResponse State(Indices index, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
 		ClusterStatsResponse Stats(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null);
-		DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null);
-		CreateFollowIndexResponse CreateFollowIndex(Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector);
-		FollowIndexStatsResponse FollowIndexStats(Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null);
-		GetAutoFollowPatternResponse GetAutoFollowPattern(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null);
-		PauseFollowIndexResponse PauseFollowIndex(Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null);
-		CreateAutoFollowPatternResponse CreateAutoFollowPattern(Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector);
-		ResumeFollowIndexResponse ResumeFollowIndex(Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector);
+		DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null);
+		CreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector);
+		FollowIndexStatsResponse FollowIndexStats(Indices index, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null);
+		GetAutoFollowPatternResponse GetAutoFollowPattern(Name name, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null);
+		PauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null);
+		CreateAutoFollowPatternResponse CreateAutoFollowPattern(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector);
+		ResumeFollowIndexResponse ResumeFollowIndex(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector);
 		CcrStatsResponse CcrStats(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null);
-		UnfollowIndexResponse UnfollowIndex(Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null);
+		UnfollowIndexResponse UnfollowIndex(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null);
 		GraphExploreResponse Explore<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector)
 			where TDocument : class;
-		DeleteLifecycleResponse DeleteLifecycle(Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null);
-		ExplainLifecycleResponse ExplainLifecycle(Func<ExplainLifecycleDescriptor, IExplainLifecycleRequest> selector = null);
+		DeleteLifecycleResponse DeleteLifecycle(PolicyId policyId, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null);
+		ExplainLifecycleResponse ExplainLifecycle(IndexName index, Func<ExplainLifecycleDescriptor, IExplainLifecycleRequest> selector = null);
 		GetLifecycleResponse GetLifecycle(Func<GetLifecycleDescriptor, IGetLifecycleRequest> selector = null);
 		GetIlmStatusResponse GetIlmStatus(Func<GetIlmStatusDescriptor, IGetIlmStatusRequest> selector = null);
-		MoveToStepResponse MoveToStep(Func<MoveToStepDescriptor, IMoveToStepRequest> selector);
-		PutLifecycleResponse PutLifecycle(Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector);
-		RemovePolicyResponse RemovePolicy(Func<RemovePolicyDescriptor, IRemovePolicyRequest> selector = null);
-		RetryIlmResponse RetryIlm(Func<RetryIlmDescriptor, IRetryIlmRequest> selector = null);
+		MoveToStepResponse MoveToStep(IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector);
+		PutLifecycleResponse PutLifecycle(PolicyId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector);
+		RemovePolicyResponse RemovePolicy(IndexName index, Func<RemovePolicyDescriptor, IRemovePolicyRequest> selector = null);
+		RetryIlmResponse RetryIlm(IndexName index, Func<RetryIlmDescriptor, IRetryIlmRequest> selector = null);
 		StartIlmResponse StartIlm(Func<StartIlmDescriptor, IStartIlmRequest> selector = null);
 		StopIlmResponse StopIlm(Func<StopIlmDescriptor, IStopIlmRequest> selector = null);
-		AnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
-		ClearCacheResponse ClearCache(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
-		CloseIndexResponse CloseIndex(Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
-		CreateIndexResponse CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> selector);
-		DeleteIndexResponse DeleteIndex(Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
-		DeleteAliasResponse DeleteAlias(Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null);
-		DeleteIndexTemplateResponse DeleteIndexTemplate(Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
-		ExistsResponse IndexExists(Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
-		ExistsResponse AliasExists(Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null);
-		ExistsResponse IndexTemplateExists(Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null);
-		ExistsResponse TypeExists(Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
-		FlushResponse Flush(Func<FlushDescriptor, IFlushRequest> selector = null);
-		SyncedFlushResponse SyncedFlush(Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null);
-		ForceMergeResponse ForceMerge(Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
-		GetIndexResponse GetIndex(Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
-		GetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
-		GetFieldMappingResponse GetFieldMapping<TDocument>(Func<GetFieldMappingDescriptor<TDocument>, IGetFieldMappingRequest> selector = null)
+		AnalyzeResponse Analyze(IndexName index, Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
+		ClearCacheResponse ClearCache(Indices index, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
+		CloseIndexResponse CloseIndex(Indices index, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
+		CreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector);
+		DeleteIndexResponse DeleteIndex(Indices index, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
+		DeleteAliasResponse DeleteAlias(Indices index, Names name, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null);
+		DeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
+		ExistsResponse IndexExists(Indices index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
+		ExistsResponse AliasExists(Names name, Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null);
+		ExistsResponse IndexTemplateExists(Names name, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null);
+		ExistsResponse TypeExists(Indices index, Names type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
+		FlushResponse Flush(Indices index, Func<FlushDescriptor, IFlushRequest> selector = null);
+		SyncedFlushResponse SyncedFlush(Indices index, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null);
+		ForceMergeResponse ForceMerge(Indices index, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
+		GetIndexResponse GetIndex(Indices index, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
+		GetAliasResponse GetAlias(Indices index, Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
+		GetFieldMappingResponse GetFieldMapping<TDocument>(Fields fields, Func<GetFieldMappingDescriptor<TDocument>, IGetFieldMappingRequest> selector = null)
 			where TDocument : class;
 		GetMappingResponse GetMapping<TDocument>(Func<GetMappingDescriptor<TDocument>, IGetMappingRequest> selector = null)
 			where TDocument : class;
-		GetIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null);
-		GetIndexTemplateResponse GetIndexTemplate(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null);
-		UpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
-		OpenIndexResponse OpenIndex(Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
-		PutAliasResponse PutAlias(Func<PutAliasDescriptor, IPutAliasRequest> selector);
+		GetIndexSettingsResponse GetIndexSettings(Indices index, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null);
+		GetIndexTemplateResponse GetIndexTemplate(Names name, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null);
+		UpgradeStatusResponse UpgradeStatus(Indices index, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
+		OpenIndexResponse OpenIndex(Indices index, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
+		PutAliasResponse PutAlias(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector);
 		PutMappingResponse PutMapping<TDocument>(Func<PutMappingDescriptor<TDocument>, IPutMappingRequest> selector)
 			where TDocument : class;
-		UpdateIndexSettingsResponse UpdateIndexSettings(Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
-		PutIndexTemplateResponse PutIndexTemplate(Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
-		RecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
-		RefreshResponse Refresh(Func<RefreshDescriptor, IRefreshRequest> selector = null);
-		RolloverIndexResponse RolloverIndex(Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector);
-		SegmentsResponse Segments(Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
-		IndicesShardStoresResponse ShardStores(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null);
-		ShrinkIndexResponse ShrinkIndex(Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector);
-		SplitIndexResponse SplitIndex(Func<SplitIndexDescriptor, ISplitIndexRequest> selector);
-		IndicesStatsResponse Stats(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		UpdateIndexSettingsResponse UpdateIndexSettings(Indices index, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
+		PutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
+		RecoveryStatusResponse RecoveryStatus(Indices index, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		RefreshResponse Refresh(Indices index, Func<RefreshDescriptor, IRefreshRequest> selector = null);
+		RolloverIndexResponse RolloverIndex(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector);
+		SegmentsResponse Segments(Indices index, Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
+		IndicesShardStoresResponse ShardStores(Indices index, Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null);
+		ShrinkIndexResponse ShrinkIndex(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector);
+		SplitIndexResponse SplitIndex(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector);
+		IndicesStatsResponse Stats(Indices index, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 		BulkAliasResponse BulkAlias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
-		UpgradeResponse Upgrade(Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
+		UpgradeResponse Upgrade(Indices index, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
 		ValidateQueryResponse ValidateQuery<TDocument>(Func<ValidateQueryDescriptor<TDocument>, IValidateQueryRequest> selector)
 			where TDocument : class;
-		DeletePipelineResponse DeletePipeline(Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null);
+		DeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null);
 		GetPipelineResponse GetPipeline(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null);
 		GrokProcessorPatternsResponse GrokProcessorPatterns(Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> selector = null);
-		PutPipelineResponse PutPipeline(Func<PutPipelineDescriptor, IPutPipelineRequest> selector);
+		PutPipelineResponse PutPipeline(Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector);
 		SimulatePipelineResponse SimulatePipeline(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector);
 		DeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null);
 		GetLicenseResponse GetLicense(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null);
@@ -118,99 +118,99 @@ namespace Nest
 		PostLicenseResponse PostLicense(Func<PostLicenseDescriptor, IPostLicenseRequest> selector);
 		StartBasicLicenseResponse StartBasicLicense(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null);
 		StartTrialLicenseResponse StartTrialLicense(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null);
-		CloseJobResponse CloseJob(Func<CloseJobDescriptor, ICloseJobRequest> selector);
-		DeleteCalendarResponse DeleteCalendar(Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null);
-		DeleteCalendarEventResponse DeleteCalendarEvent(Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null);
-		DeleteCalendarJobResponse DeleteCalendarJob(Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null);
-		DeleteDatafeedResponse DeleteDatafeed(Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null);
+		CloseJobResponse CloseJob(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector);
+		DeleteCalendarResponse DeleteCalendar(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null);
+		DeleteCalendarEventResponse DeleteCalendarEvent(Id calendarId, Id eventId, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null);
+		DeleteCalendarJobResponse DeleteCalendarJob(Id calendarId, Id jobId, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null);
+		DeleteDatafeedResponse DeleteDatafeed(Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null);
 		DeleteExpiredDataResponse DeleteExpiredData(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null);
-		DeleteFilterResponse DeleteFilter(Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null);
-		DeleteForecastResponse DeleteForecast(Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null);
-		DeleteJobResponse DeleteJob(Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null);
-		DeleteModelSnapshotResponse DeleteModelSnapshot(Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null);
-		FlushJobResponse FlushJob(Func<FlushJobDescriptor, IFlushJobRequest> selector);
-		ForecastJobResponse ForecastJob(Func<ForecastJobDescriptor, IForecastJobRequest> selector = null);
-		GetBucketsResponse GetBuckets(Func<GetBucketsDescriptor, IGetBucketsRequest> selector);
-		GetCalendarEventsResponse GetCalendarEvents(Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null);
+		DeleteFilterResponse DeleteFilter(Id filterId, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null);
+		DeleteForecastResponse DeleteForecast(Id jobId, ForecastIds forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null);
+		DeleteJobResponse DeleteJob(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null);
+		DeleteModelSnapshotResponse DeleteModelSnapshot(Id jobId, Id snapshotId, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null);
+		FlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector);
+		ForecastJobResponse ForecastJob(Id jobId, Func<ForecastJobDescriptor, IForecastJobRequest> selector = null);
+		GetBucketsResponse GetBuckets(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector);
+		GetCalendarEventsResponse GetCalendarEvents(Id calendarId, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null);
 		GetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector);
-		GetCategoriesResponse GetCategories(Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector);
+		GetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector);
 		GetDatafeedStatsResponse GetDatafeedStats(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null);
 		GetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null);
 		GetFiltersResponse GetFilters(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null);
-		GetInfluencersResponse GetInfluencers(Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector);
+		GetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector);
 		GetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null);
 		GetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null);
-		GetModelSnapshotsResponse GetModelSnapshots(Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector);
-		GetOverallBucketsResponse GetOverallBuckets(Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector);
-		GetAnomalyRecordsResponse GetAnomalyRecords(Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector);
+		GetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector);
+		GetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector);
+		GetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector);
 		MachineLearningInfoResponse Info(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null);
-		OpenJobResponse OpenJob(Func<OpenJobDescriptor, IOpenJobRequest> selector = null);
-		PostCalendarEventsResponse PostCalendarEvents(Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector);
-		PostJobDataResponse PostJobData(Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
-		PreviewDatafeedResponse<TResult> PreviewDatafeed<TResult>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null);
-		PutCalendarResponse PutCalendar(Func<PutCalendarDescriptor, IPutCalendarRequest> selector);
-		PutCalendarJobResponse PutCalendarJob(Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null);
-		PutDatafeedResponse PutDatafeed<TDocument>(Func<PutDatafeedDescriptor<TDocument>, IPutDatafeedRequest> selector)
+		OpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null);
+		PostCalendarEventsResponse PostCalendarEvents(Id calendarId, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector);
+		PostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
+		PreviewDatafeedResponse<TResult> PreviewDatafeed<TResult>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null);
+		PutCalendarResponse PutCalendar(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector);
+		PutCalendarJobResponse PutCalendarJob(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null);
+		PutDatafeedResponse PutDatafeed<TDocument>(Id datafeedId, Func<PutDatafeedDescriptor<TDocument>, IPutDatafeedRequest> selector)
 			where TDocument : class;
-		PutFilterResponse PutFilter(Func<PutFilterDescriptor, IPutFilterRequest> selector);
-		PutJobResponse PutJob<TDocument>(Func<PutJobDescriptor<TDocument>, IPutJobRequest> selector)
+		PutFilterResponse PutFilter(Id filterId, Func<PutFilterDescriptor, IPutFilterRequest> selector);
+		PutJobResponse PutJob<TDocument>(Id jobId, Func<PutJobDescriptor<TDocument>, IPutJobRequest> selector)
 			where TDocument : class;
-		RevertModelSnapshotResponse RevertModelSnapshot(Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector);
-		StartDatafeedResponse StartDatafeed(Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector);
-		StopDatafeedResponse StopDatafeed(Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null);
-		UpdateDatafeedResponse UpdateDatafeed<TDocument>(Func<UpdateDatafeedDescriptor<TDocument>, IUpdateDatafeedRequest> selector)
+		RevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector);
+		StartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector);
+		StopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null);
+		UpdateDatafeedResponse UpdateDatafeed<TDocument>(Id datafeedId, Func<UpdateDatafeedDescriptor<TDocument>, IUpdateDatafeedRequest> selector)
 			where TDocument : class;
-		UpdateFilterResponse UpdateFilter(Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector);
-		UpdateJobResponse UpdateJob<TDocument>(Func<UpdateJobDescriptor<TDocument>, IUpdateJobRequest> selector)
+		UpdateFilterResponse UpdateFilter(Id filterId, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector);
+		UpdateJobResponse UpdateJob<TDocument>(Id jobId, Func<UpdateJobDescriptor<TDocument>, IUpdateJobRequest> selector)
 			where TDocument : class;
-		UpdateModelSnapshotResponse UpdateModelSnapshot(Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector);
+		UpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector);
 		ValidateJobResponse ValidateJob<TDocument>(Func<ValidateJobDescriptor<TDocument>, IValidateJobRequest> selector)
 			where TDocument : class;
 		ValidateDetectorResponse ValidateDetector<TDocument>(Func<ValidateDetectorDescriptor<TDocument>, IValidateDetectorRequest> selector)
 			where TDocument : class;
-		DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null);
-		MigrationAssistanceResponse Assistance(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null);
-		MigrationUpgradeResponse Upgrade(Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null);
+		DeprecationInfoResponse DeprecationInfo(IndexName index, Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null);
+		MigrationAssistanceResponse Assistance(Indices index, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null);
+		MigrationUpgradeResponse Upgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null);
 		NodesHotThreadsResponse HotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
 		NodesInfoResponse Info(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
 		ReloadSecureSettingsResponse ReloadSecureSettings(Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null);
 		NodesStatsResponse Stats(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
 		NodesUsageResponse Usage(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null);
-		BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
+		BulkResponse Bulk(IndexName index, Func<BulkDescriptor, IBulkRequest> selector);
 		ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector);
 		CountResponse Count<TDocument>(Func<CountDescriptor<TDocument>, ICountRequest> selector)
 			where TDocument : class;
-		CreateResponse Create<TDocument>(Func<CreateDescriptor<TDocument>, ICreateRequest> selector)
+		CreateResponse Create<TDocument>(Id id, Func<CreateDescriptor<TDocument>, ICreateRequest> selector)
 			where TDocument : class;
-		DeleteResponse Delete<TDocument>(Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null)
+		DeleteResponse Delete<TDocument>(Id id, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null)
 			where TDocument : class;
 		DeleteByQueryResponse DeleteByQuery<TDocument>(Func<DeleteByQueryDescriptor<TDocument>, IDeleteByQueryRequest> selector)
 			where TDocument : class;
-		ListTasksResponse DeleteByQueryRethrottle(Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null);
-		DeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
-		ExistsResponse DocumentExists<TDocument>(Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null)
+		ListTasksResponse DeleteByQueryRethrottle(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null);
+		DeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
+		ExistsResponse DocumentExists<TDocument>(Id id, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null)
 			where TDocument : class;
-		ExistsResponse SourceExists<TDocument>(Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null)
+		ExistsResponse SourceExists<TDocument>(Id id, Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null)
 			where TDocument : class;
-		ExplainResponse<TDocument> Explain<TDocument>(Func<ExplainDescriptor<TDocument>, IExplainRequest> selector)
+		ExplainResponse<TDocument> Explain<TDocument>(Id id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector)
 			where TDocument : class;
-		FieldCapabilitiesResponse FieldCapabilities(Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null);
-		GetResponse<TDocument> Get<TDocument>(Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
+		FieldCapabilitiesResponse FieldCapabilities(Indices index, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null);
+		GetResponse<TDocument> Get<TDocument>(Id id, Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
 			where TDocument : class;
-		GetScriptResponse GetScript(Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
-		SourceResponse<TDocument> Source<TDocument>(Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null)
+		GetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
+		SourceResponse<TDocument> Source<TDocument>(Id id, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null)
 			where TDocument : class;
 		IndexResponse Index<TDocument>(Func<IndexDescriptor<TDocument>, IIndexRequest> selector)
 			where TDocument : class;
 		RootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
-		MultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector);
-		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
-		MultiSearchResponse MultiSearchTemplate(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector);
-		MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector);
+		MultiGetResponse MultiGet(IndexName index, Func<MultiGetDescriptor, IMultiGetRequest> selector);
+		MultiSearchResponse MultiSearch(Indices index, Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
+		MultiSearchResponse MultiSearchTemplate(Indices index, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector);
+		MultiTermVectorsResponse MultiTermVectors(IndexName index, Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector);
 		PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null);
-		PutScriptResponse PutScript(Func<PutScriptDescriptor, IPutScriptRequest> selector);
+		PutScriptResponse PutScript(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
 		ReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector);
-		ReindexRethrottleResponse ReindexRethrottle(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null);
+		ReindexRethrottleResponse ReindexRethrottle(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null);
 		RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector);
 		ExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector);
 		SearchResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector)
@@ -223,36 +223,36 @@ namespace Nest
 			where TDocument : class;
 		TermVectorsResponse TermVectors<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest> selector)
 			where TDocument : class;
-		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest> selector)
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Id id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest> selector)
 			where TDocument : class where TPartialDocument : class;
 		UpdateByQueryResponse UpdateByQuery<TDocument>(Func<UpdateByQueryDescriptor<TDocument>, IUpdateByQueryRequest> selector)
 			where TDocument : class;
-		ListTasksResponse UpdateByQueryRethrottle(Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null);
-		DeleteRollupJobResponse DeleteRollupJob(Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null);
+		ListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null);
+		DeleteRollupJobResponse DeleteRollupJob(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null);
 		GetRollupJobResponse GetRollupJob(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null);
 		GetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null);
-		GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null);
-		CreateRollupJobResponse CreateRollupJob<TDocument>(Func<CreateRollupJobDescriptor<TDocument>, ICreateRollupJobRequest> selector)
+		GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IndexName index, Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null);
+		CreateRollupJobResponse CreateRollupJob<TDocument>(Id id, Func<CreateRollupJobDescriptor<TDocument>, ICreateRollupJobRequest> selector)
 			where TDocument : class;
 		RollupSearchResponse<TDocument> Search<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector)
 			where TDocument : class;
-		StartRollupJobResponse StartRollupJob(Func<StartRollupJobDescriptor, IStartRollupJobRequest> selector = null);
-		StopRollupJobResponse StopRollupJob(Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null);
+		StartRollupJobResponse StartRollupJob(Id id, Func<StartRollupJobDescriptor, IStartRollupJobRequest> selector = null);
+		StopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null);
 		AuthenticateResponse Authenticate(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null);
 		ChangePasswordResponse ChangePassword(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector);
-		ClearCachedRealmsResponse ClearCachedRealms(Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null);
-		ClearCachedRolesResponse ClearCachedRoles(Func<ClearCachedRolesDescriptor, IClearCachedRolesRequest> selector = null);
+		ClearCachedRealmsResponse ClearCachedRealms(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null);
+		ClearCachedRolesResponse ClearCachedRoles(Names name, Func<ClearCachedRolesDescriptor, IClearCachedRolesRequest> selector = null);
 		CreateApiKeyResponse CreateApiKey(Func<CreateApiKeyDescriptor, ICreateApiKeyRequest> selector);
-		DeletePrivilegesResponse DeletePrivileges(Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null);
-		DeleteRoleResponse DeleteRole(Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null);
-		DeleteRoleMappingResponse DeleteRoleMapping(Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null);
-		DeleteUserResponse DeleteUser(Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null);
-		DisableUserResponse DisableUser(Func<DisableUserDescriptor, IDisableUserRequest> selector = null);
-		EnableUserResponse EnableUser(Func<EnableUserDescriptor, IEnableUserRequest> selector = null);
+		DeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null);
+		DeleteRoleResponse DeleteRole(Name name, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null);
+		DeleteRoleMappingResponse DeleteRoleMapping(Name name, Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null);
+		DeleteUserResponse DeleteUser(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null);
+		DisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null);
+		EnableUserResponse EnableUser(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null);
 		GetApiKeyResponse GetApiKey(Func<GetApiKeyDescriptor, IGetApiKeyRequest> selector = null);
-		GetPrivilegesResponse GetPrivileges(Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null);
-		GetRoleResponse GetRole(Func<GetRoleDescriptor, IGetRoleRequest> selector = null);
-		GetRoleMappingResponse GetRoleMapping(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null);
+		GetPrivilegesResponse GetPrivileges(Name name, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null);
+		GetRoleResponse GetRole(Name name, Func<GetRoleDescriptor, IGetRoleRequest> selector = null);
+		GetRoleMappingResponse GetRoleMapping(Name name, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null);
 		GetUserAccessTokenResponse GetUserAccessToken(Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector);
 		GetUserResponse GetUser(Func<GetUserDescriptor, IGetUserRequest> selector = null);
 		GetUserPrivilegesResponse GetUserPrivileges(Func<GetUserPrivilegesDescriptor, IGetUserPrivilegesRequest> selector = null);
@@ -260,32 +260,32 @@ namespace Nest
 		InvalidateApiKeyResponse InvalidateApiKey(Func<InvalidateApiKeyDescriptor, IInvalidateApiKeyRequest> selector);
 		InvalidateUserAccessTokenResponse InvalidateUserAccessToken(Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector);
 		PutPrivilegesResponse PutPrivileges(Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector);
-		PutRoleResponse PutRole(Func<PutRoleDescriptor, IPutRoleRequest> selector);
-		PutRoleMappingResponse PutRoleMapping(Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector);
-		PutUserResponse PutUser(Func<PutUserDescriptor, IPutUserRequest> selector);
+		PutRoleResponse PutRole(Name name, Func<PutRoleDescriptor, IPutRoleRequest> selector);
+		PutRoleMappingResponse PutRoleMapping(Name name, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector);
+		PutUserResponse PutUser(Name username, Func<PutUserDescriptor, IPutUserRequest> selector);
 		GetCertificatesResponse GetCertificates(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null);
-		SnapshotResponse Snapshot(Func<SnapshotDescriptor, ISnapshotRequest> selector);
-		CreateRepositoryResponse CreateRepository(Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
-		DeleteSnapshotResponse DeleteSnapshot(Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null);
-		DeleteRepositoryResponse DeleteRepository(Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
-		GetSnapshotResponse GetSnapshot(Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
+		SnapshotResponse Snapshot(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector);
+		CreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
+		DeleteSnapshotResponse DeleteSnapshot(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null);
+		DeleteRepositoryResponse DeleteRepository(Names repository, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
+		GetSnapshotResponse GetSnapshot(Name repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
 		GetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null);
-		RestoreResponse Restore(Func<RestoreDescriptor, IRestoreRequest> selector);
+		RestoreResponse Restore(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector);
 		SnapshotStatusResponse Status(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null);
-		VerifyRepositoryResponse VerifyRepository(Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null);
+		VerifyRepositoryResponse VerifyRepository(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null);
 		ClearSqlCursorResponse ClearSqlCursor(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector);
 		QuerySqlResponse QuerySql(Func<QuerySqlDescriptor, IQuerySqlRequest> selector);
 		TranslateSqlResponse TranslateSql(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector);
 		CancelTasksResponse CancelTasks(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null);
-		GetTaskResponse GetTask(Func<GetTaskDescriptor, IGetTaskRequest> selector = null);
+		GetTaskResponse GetTask(TaskId taskId, Func<GetTaskDescriptor, IGetTaskRequest> selector = null);
 		ListTasksResponse ListTasks(Func<ListTasksDescriptor, IListTasksRequest> selector = null);
-		AcknowledgeWatchResponse AcknowledgeWatch(Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null);
-		ActivateWatchResponse ActivateWatch(Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null);
-		DeactivateWatchResponse DeactivateWatch(Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null);
-		DeleteWatchResponse DeleteWatch(Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null);
+		AcknowledgeWatchResponse AcknowledgeWatch(Id watchId, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null);
+		ActivateWatchResponse ActivateWatch(Id watchId, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null);
+		DeactivateWatchResponse DeactivateWatch(Id watchId, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null);
+		DeleteWatchResponse DeleteWatch(Id id, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null);
 		ExecuteWatchResponse ExecuteWatch(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector);
-		GetWatchResponse GetWatch(Func<GetWatchDescriptor, IGetWatchRequest> selector = null);
-		PutWatchResponse PutWatch(Func<PutWatchDescriptor, IPutWatchRequest> selector);
+		GetWatchResponse GetWatch(Id id, Func<GetWatchDescriptor, IGetWatchRequest> selector = null);
+		PutWatchResponse PutWatch(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector);
 		StartWatcherResponse StartWatcher(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null);
 		WatcherStatsResponse Stats(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null);
 		StopWatcherResponse StopWatcher(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null);

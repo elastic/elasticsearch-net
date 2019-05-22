@@ -88,8 +88,34 @@ namespace ApiGenerator.Domain
 		public HighLevelClientMethod HighLevelClientMethod => new HighLevelClientMethod
 		{
 			CsharpNames = CsharpNames,
-			HasBody = Body != null
+			HasBody = Body != null,
+			DescriptorArguments = CreateDescriptorArgs()
 		};
+		
+		public List<UrlPart> CreateDescriptorArgs()
+		{
+			var requiredParts = Url.Parts.Where(p => p.Required).ToList();
+			//Many api's return ALOT of information by default e.g get_alias or get_mapping
+			//the client methods that take a descriptor default to forcing a choice on the user.
+			//except for cat api's where the amount of information returned is manageable
+			var willInferFromDocument = CsharpNames.GenericsDeclaredOnDescriptor?.Contains("Document") ?? false;
+			if (!requiredParts.Any() && Namespace != "cat")
+			{
+				var parts = new[]
+				{
+					//only make index part the first argument if the descriptor is not generic on T.*?Document
+					Url.Parts.FirstOrDefault(p => (p.Name == "index" || p.Name == "indices") && !willInferFromDocument),
+					Url.Parts.FirstOrDefault(p => p.Name == "name"),
+				};
+				requiredParts = parts.Where(p=>p!= null).Take(1).ToList();
+			}
+			//if index, indices is required but the descriptor is generic these will be inferred so no need to pass explicitly
+			if (willInferFromDocument)
+				requiredParts = requiredParts.Where(p => p.Name != "index" && p.Name != "indices").ToList();
+
+			return requiredParts;
+			
+		}
 		
 		private List<LowLevelClientMethod> _lowLevelClientMethods;
 		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods

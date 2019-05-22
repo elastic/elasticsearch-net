@@ -10,8 +10,7 @@ namespace ApiGenerator.Domain
 		public bool HasBody { get; set; }
 
 		public string MethodName => CsharpNames.MethodName;
-		public string ResponseName => CsharpNames.ResponseName;
-		public string RequestGenerics => CsharpNames.GenericsDeclaredOnRequest;
+		public List<UrlPart> DescriptorArguments { get; set; }
 
 	}
 }

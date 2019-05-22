@@ -3,6 +3,7 @@
 @using System.Linq
 @using System.Collections.Generic
 @using RazorLight
+@using ApiGenerator
 @using ApiGenerator.Domain
 @using System.Text.RegularExpressions
 @{
@@ -11,10 +12,17 @@
 	var optionalSelector = method.HasBody ? "" : " = null";
 	var methodGenerics = method.CsharpNames.HighLevelMethodGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.HighLevelMethodGenerics)}>" : null;
 }
+@functions {
+	private string DescriptorArguments(List<UrlPart> requiredDescriptorParts)
+	{
+		if (!requiredDescriptorParts.Any()) return null;
+		return string.Join(", ", requiredDescriptorParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}")) + ", ";
+	}
+}
 @{
 	//await IncludeAsync("HighLevelClient/MethodDocs.cshtml", method);
 }
-@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGenerics))(@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.HighLevelMethodGenericWhere;
+@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.HighLevelMethodGenericWhere;
 
 
 

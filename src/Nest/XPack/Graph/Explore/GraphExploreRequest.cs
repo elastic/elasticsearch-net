@@ -11,7 +11,7 @@ namespace Nest
 		IGraphExploreControls Controls { get; set; }
 	}
 
-	public partial interface IGraphExploreRequest<T> where T : class { }
+	public partial interface IGraphExploreRequest<TDocument> where TDocument : class { }
 
 	public partial class GraphExploreRequest
 	{

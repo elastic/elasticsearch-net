@@ -26,12 +26,18 @@ using static Elasticsearch.Net.HttpMethod;
 	string ns = model.Key;
 	var endpoints = model.Value;
 }
-namespace Elasticsearch.Net
+// ReSharper disable once CheckNamespace
+namespace Elasticsearch.Net.Api.@ns
 {
-	///<summary> Raw operations with elasticsearch </summary>
-	public class @(model.Key)Client : NamespacedClientProxy
+	///<summary>
+	/// Logically groups all @ns API's together so that they may be discovered more naturally.
+	/// <para>Not intended to be instantiated directly please defer to the <see cref="IElasticLowLevelClient.@ns"/> property
+	/// on <see cref="IElasticLowLevelClient"/>.
+	///</para>
+	///</summary>
+	public class @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix) : NamespacedClientProxy
 	{
-		public @(model.Key)Client(ElasticLowLevelClient client) : base(client) {}
+		internal @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix)(ElasticLowLevelClient client) : base(client) {}
 @if (ns == "Cat")
 {
 	<text>protected override string ContentType { get; } = "text/plain";</text>
