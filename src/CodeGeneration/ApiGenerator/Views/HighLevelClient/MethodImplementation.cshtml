@@ -1,0 +1,51 @@
+@inherits TemplatePage<HighLevelClientMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@{
+	HighLevelClientMethod method = Model;
+	var selector = string.Format("Func<{0}, {1}>", method.CsharpNames.GenericOrNonGenericDescriptorName, method.CsharpNames.RequestInterfaceName);
+	var optionalSelector = method.HasBody ? "" : " = null";
+	var descriptorMethodGenerics = method.CsharpNames.HighLevelDescriptorMethodGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.HighLevelDescriptorMethodGenerics)}>" : null;
+	var requestMethodGenerics = method.CsharpNames.ResponseGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.ResponseGenerics)}>" : null;
+	var dispatchMethod = method.CsharpNames.Namespace == "Cat" ? "DoCat" : "DoRequest";
+	var dispatchGenerics = method.CsharpNames.Namespace == "Cat" 
+		? string.Format("<{0},{1},{2}>", method.CsharpNames.RequestInterfaceName, method.CsharpNames.ParametersName, method.CsharpNames.RequestName.Replace("Request", "Record"))
+		: string.Format("<{0},{1}>", method.CsharpNames.RequestInterfaceName, method.CsharpNames.GenericOrNonGenericResponseName);
+	var dispatchParameters = method.CsharpNames.Namespace == "Cat"
+		? "request"
+		: "request, request.RequestParameters";
+}
+@functions {
+	private string DescriptorArguments(List<UrlPart> requiredDescriptorParts)
+	{
+		if (!requiredDescriptorParts.Any()) return null;
+		return string.Join(", ", requiredDescriptorParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}")) + ", ";
+	}
+}
+@{
+	//await IncludeAsync("HighLevelClient/MethodDocs.cshtml", method);
+}
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+public @Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(descriptorMethodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.DescriptorMethodWhereClause @Raw("=>")
+	throw new NotImplementedException();
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+public Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(descriptorMethodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector), CancellationToken ct = default)@method.CsharpNames.DescriptorMethodWhereClause @Raw("=>")
+	throw new NotImplementedException();
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+public @Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request)@method.CsharpNames.InitializerMethodWhereClause @Raw("=>")
+	@(dispatchMethod)@(Raw(dispatchGenerics))(@dispatchParameters);
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+public Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request, CancellationToken ct = default)@method.CsharpNames.InitializerMethodWhereClause @Raw("=>")
+	@(dispatchMethod)Async@(Raw(dispatchGenerics))(@dispatchParameters, ct);
+
+
+

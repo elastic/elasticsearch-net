@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using ApiGenerator.Overrides.Descriptors;
 using Newtonsoft.Json;
@@ -109,9 +110,28 @@ namespace ApiGenerator.Domain
 				};
 				requiredParts = parts.Where(p=>p!= null).Take(1).ToList();
 			}
-			//if index, indices is required but the descriptor is generic these will be inferred so no need to pass explicitly
 			if (willInferFromDocument)
+			{
+				//if index, indices is required but the descriptor is generic these will be inferred so no need to pass explicitly
 				requiredParts = requiredParts.Where(p => p.Name != "index" && p.Name != "indices").ToList();
+				var idPart = requiredParts.FirstOrDefault(i => i.Name == "id");
+				if (idPart != null)
+				{
+					requiredParts.Remove(idPart);
+					var generic = CsharpNames.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "").Split(",").First().Trim();
+					requiredParts.Add(new UrlPart
+					{
+						Name = idPart.Name,
+						Required = idPart.Required,
+						Description = idPart.Description,
+						Options = idPart.Options,
+						Type = idPart.Type,
+						ClrTypeNameOverride = $"DocumentPath<{generic}>"
+					});
+					
+				}
+
+			}
 
 			return requiredParts;
 			

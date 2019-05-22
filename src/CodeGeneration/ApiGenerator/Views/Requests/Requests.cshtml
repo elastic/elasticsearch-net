@@ -9,9 +9,9 @@
 	CsharpNames names = r.CsharpNames;
 }
 	///<summary>Request for @names.MethodName <pre>@r.OfficialDocumentationLink</pre></summary>
-	public partial class @Raw(names.RequestName) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, names.InterfaceName))
+	public partial class @Raw(names.RequestName) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, names.RequestInterfaceName))
 	{
-		protected @(Raw(names.InterfaceName)) Self => this;
+		protected @(Raw(names.RequestInterfaceName)) Self => this;
 		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", r.Paths.Select(p=>$"\"{p.Path.TrimStart('/')}\"")))});
 		internal override ApiUrls ApiUrls => Urls;
 @foreach (Constructor c in r.Constructors)
@@ -23,7 +23,7 @@
 @foreach (var part in r.Parts)
 {
 <text>		[IgnoreDataMember]
-		@(Raw(part.ClrTypeName)) @(Raw(names.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+		@(Raw(part.ClrTypeName)) @(Raw(names.RequestInterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
 </text>
 }
 

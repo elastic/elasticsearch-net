@@ -1,0 +1,13 @@
+@using RazorLight
+@using System.Linq
+@using ApiGenerator.Domain
+@inherits TemplatePage<RestApiSpec>
+@foreach(var kv in Model.EndpointsPerNamespace)
+{
+	if (kv.Key != CsharpNames.RootNamespace)
+	{
+<text>using Nest.Apis.@(kv.Key)Api;
+</text>
+		continue;
+	}
+}

@@ -22,7 +22,7 @@
 		// values part of the url path
 @foreach (UrlPart part in d.Parts)
 {
-<text>		@(Raw(part.ClrTypeName)) @(Raw(names.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
+<text>		@(Raw(part.ClrTypeName)) @(Raw(names.RequestInterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
 </text>
 }
 @foreach (FluentRouteSetter c in d.GetFluentRouteSetters())

@@ -6,7 +6,7 @@
 @using ApiGenerator.Domain
 @{
 	RequestInterface i = Model;
-	string name = i.CsharpNames.InterfaceName;
+	string name = i.CsharpNames.RequestInterfaceName;
 }
 	[InterfaceDataContract]
 	public partial interface @(Raw(name)) : IRequest@(Raw(string.Format("<{0}>", i.CsharpNames.ParametersName)))

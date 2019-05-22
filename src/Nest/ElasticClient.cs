@@ -6,6 +6,33 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+
+	public class NamespacedClientProxy
+	{
+		private readonly ElasticClient _client;
+
+		protected NamespacedClientProxy(ElasticClient client) => _client = client;
+
+		internal TResponse DoRequest<TRequest, TResponse>(
+			TRequest p, 
+			IRequestParameters parameters,
+			Action<IRequestConfiguration> forceConfiguration = null
+		)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new() =>
+			_client.DoRequest<TRequest, TResponse>(p, parameters, forceConfiguration);
+
+		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			CancellationToken ct,
+			Action<IRequestConfiguration> forceConfiguration = null
+		)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new() =>
+			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
+		
+	}
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
@@ -27,7 +54,10 @@ namespace Nest
 
 			Transport = transport;
 			LowLevel = new ElasticLowLevelClient(Transport);
+			SetupNamespaces();
 		}
+
+		partial void SetupNamespaces();
 
 		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
 		public Inferrer Infer => Transport.Settings.Inferrer;

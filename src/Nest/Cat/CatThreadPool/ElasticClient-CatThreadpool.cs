@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Api.Cat;
 
 namespace Nest
 {

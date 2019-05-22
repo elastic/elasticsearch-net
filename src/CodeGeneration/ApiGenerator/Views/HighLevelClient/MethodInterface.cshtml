@@ -8,9 +8,10 @@
 @using System.Text.RegularExpressions
 @{
 	HighLevelClientMethod method = Model;
-	var selector = string.Format("Func<{0}, {1}>", method.CsharpNames.GenericOrNonGenericDescriptorName, method.CsharpNames.InterfaceName);
+	var selector = string.Format("Func<{0}, {1}>", method.CsharpNames.GenericOrNonGenericDescriptorName, method.CsharpNames.RequestInterfaceName);
 	var optionalSelector = method.HasBody ? "" : " = null";
-	var methodGenerics = method.CsharpNames.HighLevelMethodGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.HighLevelMethodGenerics)}>" : null;
+	var descriptorMethodGenerics = method.CsharpNames.HighLevelDescriptorMethodGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.HighLevelDescriptorMethodGenerics)}>" : null;
+	var requestMethodGenerics = method.CsharpNames.ResponseGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.ResponseGenerics)}>" : null;
 }
 @functions {
 	private string DescriptorArguments(List<UrlPart> requiredDescriptorParts)
@@ -22,7 +23,16 @@
 @{
 	//await IncludeAsync("HighLevelClient/MethodDocs.cshtml", method);
 }
-@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.HighLevelMethodGenericWhere;
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(descriptorMethodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.DescriptorMethodWhereClause;
 
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(descriptorMethodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector), CancellationToken ct = default)@method.CsharpNames.DescriptorMethodWhereClause;
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request)@method.CsharpNames.InitializerMethodWhereClause;
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request, CancellationToken ct = default)@method.CsharpNames.InitializerMethodWhereClause;
 
 
