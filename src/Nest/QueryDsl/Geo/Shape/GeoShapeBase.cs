@@ -291,7 +291,7 @@ namespace Nest
 		private static T GetCoordinates<T>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var count = 0;
-			T coordinates = default(T);
+			var coordinates = default(T);
 			while (reader.ReadIsInObject(ref count))
 			{
 				var propertyName = reader.ReadPropertyName();

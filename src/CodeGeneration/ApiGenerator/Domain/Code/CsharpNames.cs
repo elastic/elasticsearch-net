@@ -93,38 +93,32 @@ namespace ApiGenerator.Domain
 		public string GenericsDeclaredOnDescriptor =>
 			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? generic : null;
 			
-		public List<string> ResponseGenerics
-		{
-			get 
-			{
-				var responseGenerics = 
-					CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var responseGeneric) 
-						&& !string.IsNullOrEmpty(responseGeneric.Item2)
-					? responseGeneric.Item2.Replace("<", "").Replace(">", "")
-					.Split(",")
-					.Where(g=>!string.IsNullOrWhiteSpace(g))
-					: Enumerable.Empty<string>();
-				return responseGenerics
-					.Distinct()
-					.ToList();
-			}
-		}
-		public List<string> HighLevelDescriptorMethodGenerics
-		{
-			get 
-			{
-				var descriptorGenerics = 
-					CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) 
-					? generic.Replace("<", "").Replace(">", "")
-					.Split(",")
-					.Where(g=>!string.IsNullOrWhiteSpace(g))
-					: Enumerable.Empty<string>();
-				return descriptorGenerics
-					.Concat(ResponseGenerics)
-					.Distinct()
-					.ToList();
-			}
-		}
+		public List<string> ResponseGenerics =>
+			!CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var responseGeneric)
+			|| string.IsNullOrEmpty(responseGeneric.Item2)
+				? new List<string>()
+				: SplitGeneric(responseGeneric.Item2);
+		
+		public List<string> DescriptorGenerics =>
+			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? SplitGeneric(generic) : new List<string>();
+
+		public bool DescriptorBindsOverMultipleDocuments => 
+			HighLevelDescriptorMethodGenerics.Count == 2 && HighLevelDescriptorMethodGenerics.All(g => g.Contains("Document"))
+		&& ResponseGenerics.FirstOrDefault() == DescriptorBoundDocumentGeneric ;
+		public string DescriptorBoundDocumentGeneric => HighLevelDescriptorMethodGenerics.Last();
+
+		public List<string> HighLevelDescriptorMethodGenerics => DescriptorGenerics
+			.Concat(ResponseGenerics)
+			.Distinct()
+			.ToList();
+
+		private static List<string> SplitGeneric(string generic) => generic
+			.Replace("<", "")
+			.Replace(">", "")
+			.Split(",")
+			.Where(g => !string.IsNullOrWhiteSpace(g))
+			.Distinct()
+			.ToList();
 
 		public string DescriptorMethodWhereClause =>
 			string.Join(" ", HighLevelDescriptorMethodGenerics

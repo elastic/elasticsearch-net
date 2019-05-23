@@ -402,6 +402,12 @@ namespace Nest
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
 		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IScrollRequest"/>
+		public SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector)
+			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+		///<inheritdoc cref = "IScrollRequest"/>
+		public Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+		///<inheritdoc cref = "IScrollRequest"/>
 		public SearchResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IScrollRequest"/>
@@ -413,6 +419,12 @@ namespace Nest
 		///<inheritdoc cref = "IScrollRequest"/>
 		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
+		///<inheritdoc cref = "ISearchRequest"/>
+		public SearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector)
+			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+		///<inheritdoc cref = "ISearchRequest"/>
+		public Task<SearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "ISearchRequest"/>
 		public SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector)
 			where TDocument : class => throw new NotImplementedException();

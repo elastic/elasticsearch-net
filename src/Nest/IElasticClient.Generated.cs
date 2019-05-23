@@ -329,6 +329,12 @@ namespace Nest
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
 		Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken ct = default);
 		///<inheritdoc cref = "IScrollRequest"/>
+		SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector)
+			where TInferDocument : class where TDocument : class;
+		///<inheritdoc cref = "IScrollRequest"/>
+		Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class;
+		///<inheritdoc cref = "IScrollRequest"/>
 		SearchResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector)
 			where TDocument : class;
 		///<inheritdoc cref = "IScrollRequest"/>
@@ -340,6 +346,12 @@ namespace Nest
 		///<inheritdoc cref = "IScrollRequest"/>
 		Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
 			where TDocument : class;
+		///<inheritdoc cref = "ISearchRequest"/>
+		SearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector)
+			where TInferDocument : class where TDocument : class;
+		///<inheritdoc cref = "ISearchRequest"/>
+		Task<SearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class;
 		///<inheritdoc cref = "ISearchRequest"/>
 		SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector)
 			where TDocument : class;

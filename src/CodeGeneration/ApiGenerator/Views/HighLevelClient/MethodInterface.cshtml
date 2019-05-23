@@ -14,6 +14,10 @@
 	var requestMethodGenerics = method.CsharpNames.ResponseGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.ResponseGenerics)}>" : null;
 }
 @functions {
+	private string Selector(HighLevelClientMethod method, string generic)
+	{
+		return string.Format("Func<{0}, {1}>", generic, method.CsharpNames.RequestInterfaceName);
+	}
 	private string DescriptorArguments(List<UrlPart> requiredDescriptorParts)
 	{
 		if (!requiredDescriptorParts.Any()) return null;
@@ -28,6 +32,21 @@
 
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(descriptorMethodGenerics))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(selector)) selector@(optionalSelector), CancellationToken ct = default)@method.CsharpNames.DescriptorMethodWhereClause;
+@if (method.CsharpNames.DescriptorBindsOverMultipleDocuments)
+{
+	var methodGeneric = string.Format("<{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
+	var boundGeneric = string.Format("<{0},{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
+	var boundDescriptor = string.Format("{0}<{1}>", method.CsharpNames.DescriptorName, method.CsharpNames.DescriptorBoundDocumentGeneric);
+	var boundSelector = Selector(method, boundDescriptor);
+	var boundWhere = string.Format("where {0} : class", method.CsharpNames.DescriptorBoundDocumentGeneric);
+<text>
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGeneric))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(boundSelector)) selector@(optionalSelector))@boundWhere;
+
+///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
+Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(methodGeneric))(@(Raw(DescriptorArguments(@method.DescriptorArguments)))@(Raw(boundSelector)) selector@(optionalSelector), CancellationToken ct = default)@boundWhere;
+</text>
+}
 
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 @Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request)@method.CsharpNames.InitializerMethodWhereClause;

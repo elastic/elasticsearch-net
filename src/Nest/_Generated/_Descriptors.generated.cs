@@ -5515,21 +5515,21 @@ namespace Nest
 	}
 
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
-	public partial class ScrollDescriptor<TDocument> : RequestDescriptorBase<ScrollDescriptor<TDocument>, ScrollRequestParameters, IScrollRequest>, IScrollRequest
+	public partial class ScrollDescriptor<TInferDocument> : RequestDescriptorBase<ScrollDescriptor<TInferDocument>, ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ScrollRequest.Urls;
 		// values part of the url path
 		// Request parameters
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public ScrollDescriptor<TDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);
+		public ScrollDescriptor<TInferDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);
 	}
 
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
-	public partial class SearchDescriptor<TDocument> : RequestDescriptorBase<SearchDescriptor<TDocument>, SearchRequestParameters, ISearchRequest<TDocument>>, ISearchRequest<TDocument>
+	public partial class SearchDescriptor<TInferDocument> : RequestDescriptorBase<SearchDescriptor<TInferDocument>, SearchRequestParameters, ISearchRequest<TInferDocument>>, ISearchRequest<TInferDocument>
 	{
 		internal override ApiUrls ApiUrls => SearchRequest.Urls;
 		///<summary>/{index}/_search</summary>
-		public SearchDescriptor(): this(typeof(TDocument))
+		public SearchDescriptor(): this(typeof(TInferDocument))
 		{
 		}
 
@@ -5542,45 +5542,45 @@ namespace Nest
 		// values part of the url path
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public SearchDescriptor<TInferDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchDescriptor<TDocument> Index<TOther>()
+		public SearchDescriptor<TInferDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public SearchDescriptor<TInferDocument> AllIndices() => this.Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
+		public SearchDescriptor<TInferDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
 		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
-		public SearchDescriptor<TDocument> AllowPartialSearchResults(bool? allowpartialsearchresults = true) => Qs("allow_partial_search_results", allowpartialsearchresults);
+		public SearchDescriptor<TInferDocument> AllowPartialSearchResults(bool? allowpartialsearchresults = true) => Qs("allow_partial_search_results", allowpartialsearchresults);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchDescriptor<TDocument> AnalyzeWildcard(bool? analyzewildcard = true) => Qs("analyze_wildcard", analyzewildcard);
+		public SearchDescriptor<TInferDocument> AnalyzeWildcard(bool? analyzewildcard = true) => Qs("analyze_wildcard", analyzewildcard);
 		///<summary>The analyzer to use for the query string</summary>
-		public SearchDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
+		public SearchDescriptor<TInferDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
-		public SearchDescriptor<TDocument> BatchedReduceSize(long? batchedreducesize) => Qs("batched_reduce_size", batchedreducesize);
+		public SearchDescriptor<TInferDocument> BatchedReduceSize(long? batchedreducesize) => Qs("batched_reduce_size", batchedreducesize);
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
-		public SearchDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
+		public SearchDescriptor<TInferDocument> CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultoperator) => Qs("default_operator", defaultoperator);
+		public SearchDescriptor<TInferDocument> DefaultOperator(DefaultOperator? defaultoperator) => Qs("default_operator", defaultoperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchDescriptor<TDocument> Df(string df) => Qs("df", df);
+		public SearchDescriptor<TInferDocument> Df(string df) => Qs("df", df);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+		public SearchDescriptor<TInferDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
-		public SearchDescriptor<TDocument> IgnoreThrottled(bool? ignorethrottled = true) => Qs("ignore_throttled", ignorethrottled);
+		public SearchDescriptor<TInferDocument> IgnoreThrottled(bool? ignorethrottled = true) => Qs("ignore_throttled", ignorethrottled);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
+		public SearchDescriptor<TInferDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public SearchDescriptor<TInferDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
-		public SearchDescriptor<TDocument> MaxConcurrentShardRequests(long? maxconcurrentshardrequests) => Qs("max_concurrent_shard_requests", maxconcurrentshardrequests);
+		public SearchDescriptor<TInferDocument> MaxConcurrentShardRequests(long? maxconcurrentshardrequests) => Qs("max_concurrent_shard_requests", maxconcurrentshardrequests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public SearchDescriptor<TDocument> PreFilterShardSize(long? prefiltershardsize) => Qs("pre_filter_shard_size", prefiltershardsize);
+		public SearchDescriptor<TInferDocument> PreFilterShardSize(long? prefiltershardsize) => Qs("pre_filter_shard_size", prefiltershardsize);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
+		public SearchDescriptor<TInferDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public SearchDescriptor<TDocument> RequestCache(bool? requestcache = true) => Qs("request_cache", requestcache);
+		public SearchDescriptor<TInferDocument> RequestCache(bool? requestcache = true) => Qs("request_cache", requestcache);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -5588,31 +5588,31 @@ namespace Nest
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
 		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
 		///</summary>
-		public SearchDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
+		public SearchDescriptor<TInferDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchDescriptor<TDocument> Scroll(Time scroll) => Qs("scroll", scroll);
+		public SearchDescriptor<TInferDocument> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
+		public SearchDescriptor<TInferDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
 		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
-		public SearchDescriptor<TDocument> SequenceNumberPrimaryTerm(bool? sequencenumberprimaryterm = true) => Qs("seq_no_primary_term", sequencenumberprimaryterm);
+		public SearchDescriptor<TInferDocument> SequenceNumberPrimaryTerm(bool? sequencenumberprimaryterm = true) => Qs("seq_no_primary_term", sequencenumberprimaryterm);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public SearchDescriptor<TDocument> Stats(params string[] stats) => Qs("stats", stats);
+		public SearchDescriptor<TInferDocument> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<TDocument> SuggestField(Field suggestfield) => Qs("suggest_field", suggestfield);
+		public SearchDescriptor<TInferDocument> SuggestField(Field suggestfield) => Qs("suggest_field", suggestfield);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<TDocument> SuggestField(Expression<Func<TDocument, object>> field) => Qs("suggest_field", (Field)field);
+		public SearchDescriptor<TInferDocument> SuggestField(Expression<Func<TInferDocument, object>> field) => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<TDocument> SuggestMode(SuggestMode? suggestmode) => Qs("suggest_mode", suggestmode);
+		public SearchDescriptor<TInferDocument> SuggestMode(SuggestMode? suggestmode) => Qs("suggest_mode", suggestmode);
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor<TDocument> SuggestSize(long? suggestsize) => Qs("suggest_size", suggestsize);
+		public SearchDescriptor<TInferDocument> SuggestSize(long? suggestsize) => Qs("suggest_size", suggestsize);
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchDescriptor<TDocument> SuggestText(string suggesttext) => Qs("suggest_text", suggesttext);
+		public SearchDescriptor<TInferDocument> SuggestText(string suggesttext) => Qs("suggest_text", suggesttext);
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public SearchDescriptor<TDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);
+		public SearchDescriptor<TInferDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public SearchDescriptor<TDocument> TrackTotalHits(bool? tracktotalhits = true) => Qs("track_total_hits", tracktotalhits);
+		public SearchDescriptor<TInferDocument> TrackTotalHits(bool? tracktotalhits = true) => Qs("track_total_hits", tracktotalhits);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchDescriptor<TDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
+		public SearchDescriptor<TInferDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>

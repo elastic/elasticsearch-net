@@ -10706,7 +10706,7 @@ namespace Nest
 		}
 	}
 
-	public partial interface ISearchRequest<TDocument> : ISearchRequest
+	public partial interface ISearchRequest<TInferDocument> : ISearchRequest
 	{
 	}
 
@@ -10949,11 +10949,11 @@ namespace Nest
 		}
 	}
 
-	public partial class SearchRequest<TDocument> : SearchRequest, ISearchRequest<TDocument>
+	public partial class SearchRequest<TInferDocument> : SearchRequest, ISearchRequest<TInferDocument>
 	{
-		protected ISearchRequest<TDocument> TypedSelf => this;
+		protected ISearchRequest<TInferDocument> TypedSelf => this;
 		///<summary>/{index}/_search</summary>
-		public SearchRequest(): base(typeof(TDocument))
+		public SearchRequest(): base(typeof(TInferDocument))
 		{
 		}
 
