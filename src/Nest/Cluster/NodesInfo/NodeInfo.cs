@@ -81,6 +81,9 @@ namespace Nest
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
 
+		[JsonProperty("pretty_name")]
+		public string PrettyName { get; internal set; }
+
 		[JsonProperty("refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
