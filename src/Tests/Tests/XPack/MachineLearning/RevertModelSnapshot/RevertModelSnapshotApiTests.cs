@@ -47,16 +47,16 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 				IndexSnapshot(client, callUniqueValue.Value, "first");
 				IndexSnapshot(client, callUniqueValue.Value, "second", "2016-06-01T00:00:00Z");
 
-				client.GetModelSnapshots(callUniqueValue.Value).Count.Should().Be(2);
-				client.Refresh(".ml-state");
+				client.MachineLearning.GetModelSnapshots(callUniqueValue.Value).Count.Should().Be(2);
+				client.Indices.Refresh(".ml-state");
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.RevertModelSnapshot(CallIsolatedValue, "first", f),
-			(client, f) => client.RevertModelSnapshotAsync(CallIsolatedValue, "first", f),
-			(client, r) => client.RevertModelSnapshot(r),
-			(client, r) => client.RevertModelSnapshotAsync(r)
+			(client, f) => client.MachineLearning.RevertModelSnapshot(CallIsolatedValue, "first", f),
+			(client, f) => client.MachineLearning.RevertModelSnapshotAsync(CallIsolatedValue, "first", f),
+			(client, r) => client.MachineLearning.RevertModelSnapshot(r),
+			(client, r) => client.MachineLearning.RevertModelSnapshotAsync(r)
 		);
 
 		protected override RevertModelSnapshotDescriptor NewDescriptor() => new RevertModelSnapshotDescriptor(CallIsolatedValue, "first");

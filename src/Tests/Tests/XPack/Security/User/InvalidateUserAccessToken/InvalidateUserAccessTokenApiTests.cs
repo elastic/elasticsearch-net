@@ -43,16 +43,16 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var r = client.GetUserAccessToken(Admin.Username, Admin.Password);
+			var r = client.Security.GetUserAccessToken(Admin.Username, Admin.Password);
 			r.ShouldBeValid();
 			ExtendedValue(AccessTokenValueKey, r.AccessToken);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.InvalidateUserAccessToken(CurrentAccessToken, f),
-			(client, f) => client.InvalidateUserAccessTokenAsync(CurrentAccessToken, f),
-			(client, r) => client.InvalidateUserAccessToken(r),
-			(client, r) => client.InvalidateUserAccessTokenAsync(r)
+			(client, f) => client.Security.InvalidateUserAccessToken(CurrentAccessToken, f),
+			(client, f) => client.Security.InvalidateUserAccessTokenAsync(CurrentAccessToken, f),
+			(client, r) => client.Security.InvalidateUserAccessToken(r),
+			(client, r) => client.Security.InvalidateUserAccessTokenAsync(r)
 		);
 
 		protected override InvalidateUserAccessTokenDescriptor NewDescriptor() => new InvalidateUserAccessTokenDescriptor(CurrentAccessToken);

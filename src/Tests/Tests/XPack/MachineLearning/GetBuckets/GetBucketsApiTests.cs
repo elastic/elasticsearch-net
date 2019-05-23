@@ -33,10 +33,10 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetBuckets(CallIsolatedValue, f),
-			(client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetBuckets(r),
-			(client, r) => client.GetBucketsAsync(r)
+			(client, f) => client.MachineLearning.GetBuckets(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetBuckets(r),
+			(client, r) => client.MachineLearning.GetBucketsAsync(r)
 		);
 
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
@@ -89,10 +89,10 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetBuckets(CallIsolatedValue, f),
-			(client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetBuckets(r),
-			(client, r) => client.GetBucketsAsync(r)
+			(client, f) => client.MachineLearning.GetBuckets(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetBuckets(r),
+			(client, r) => client.MachineLearning.GetBucketsAsync(r)
 		);
 
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);

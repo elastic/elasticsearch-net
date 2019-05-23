@@ -13,10 +13,10 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		{
 			var token = "some_token";
 			await DELETE("/_security/oauth2/token")
-				.Fluent(c => c.InvalidateUserAccessToken(token))
-				.Request(c => c.InvalidateUserAccessToken(new InvalidateUserAccessTokenRequest(token)))
-				.FluentAsync(c => c.InvalidateUserAccessTokenAsync(token))
-				.RequestAsync(c => c.InvalidateUserAccessTokenAsync(new InvalidateUserAccessTokenRequest(token)));
+				.Fluent(c => c.Security.InvalidateUserAccessToken(token))
+				.Request(c => c.Security.InvalidateUserAccessToken(new InvalidateUserAccessTokenRequest(token)))
+				.FluentAsync(c => c.Security.InvalidateUserAccessTokenAsync(token))
+				.RequestAsync(c => c.Security.InvalidateUserAccessTokenAsync(new InvalidateUserAccessTokenRequest(token)));
 		}
 	}
 }

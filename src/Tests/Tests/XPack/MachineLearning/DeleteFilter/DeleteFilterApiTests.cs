@@ -37,10 +37,10 @@ namespace Tests.XPack.MachineLearning.DeleteFilter
 		protected override string UrlPath => $"_ml/filters/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteFilter(CallIsolatedValue, f),
-			(client, f) => client.DeleteFilterAsync(CallIsolatedValue, f),
-			(client, r) => client.DeleteFilter(r),
-			(client, r) => client.DeleteFilterAsync(r)
+			(client, f) => client.MachineLearning.DeleteFilter(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.DeleteFilterAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.DeleteFilter(r),
+			(client, r) => client.MachineLearning.DeleteFilterAsync(r)
 		);
 
 		protected override DeleteFilterDescriptor NewDescriptor() => new DeleteFilterDescriptor(CallIsolatedValue);

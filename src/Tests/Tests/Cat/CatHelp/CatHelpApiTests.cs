@@ -18,10 +18,10 @@ namespace Tests.Cat.CatHelp
 		protected override string UrlPath => "/_cat";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatHelp(),
-			(client, f) => client.CatHelpAsync(),
-			(client, r) => client.CatHelp(r),
-			(client, r) => client.CatHelpAsync(r)
+			(client, f) => client.Cat.Help(),
+			(client, f) => client.Cat.HelpAsync(),
+			(client, r) => client.Cat.Help(r),
+			(client, r) => client.Cat.HelpAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatHelpRecord> response) => response.Records.Should()

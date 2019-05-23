@@ -57,7 +57,7 @@ namespace Tests.Cluster.RemoteInfo
 				{ "cluster_one", "127.0.0.1:9300", "127.0.0.1:9301" },
 				{ "cluster_two", "127.0.0.1:9300" }
 			};
-			var enableRemoteClusters = client.ClusterPutSettings(new ClusterPutSettingsRequest
+			var enableRemoteClusters = client.Cluster.PutSettings(new ClusterPutSettingsRequest
 			{
 				Transient = oldWay
 			});
@@ -68,10 +68,10 @@ namespace Tests.Cluster.RemoteInfo
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.RemoteInfo(),
-			(client, f) => client.RemoteInfoAsync(),
-			(client, r) => client.RemoteInfo(r),
-			(client, r) => client.RemoteInfoAsync(r)
+			(client, f) => client.Cluster.RemoteInfo(),
+			(client, f) => client.Cluster.RemoteInfoAsync(),
+			(client, r) => client.Cluster.RemoteInfo(r),
+			(client, r) => client.Cluster.RemoteInfoAsync(r)
 		);
 
 		protected override void ExpectResponse(RemoteInfoResponse response)

@@ -43,7 +43,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			//hide
 			var client = Client;
 
-			var analyzeResponse = client.Analyze(a => a
+			var analyzeResponse = client.Indices.Analyze(a => a
 				.Analyzer("standard") // <1> Use the `standard` analyzer
 				.Text("F# is THE SUPERIOR language :)")
 			);
@@ -131,7 +131,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			//hide
 			var client = Client;
 
-			var analyzeResponse = client.Analyze(a => a
+			var analyzeResponse = client.Indices.Analyze(a => a
 				.Tokenizer("standard")
 				.Filter("lowercase", "stop")
 				.Text("F# is THE SUPERIOR language :)")
@@ -196,25 +196,25 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			//hide
 			var client = Client;
 			//hide
-			var createIndexResponse = client.CreateIndex("analysis-index", c => c
+			var createIndexResponse = client.Indices.CreateIndex("analysis-index", c => c
 				.Settings(s => s
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
 			);
 			//hide
-			client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Green).Index("analysis-index").Timeout("5s"));
+			client.Cluster.Health("analysis-index", h => h.WaitForStatus(WaitForStatus.Green).Timeout("5s"));
 
 			/**
 			 * In this example, we'll add a custom analyzer to an existing index. First,
 			 * we need to close the index
 			 */
-			client.CloseIndex("analysis-index");
+			client.Indices.CloseIndex("analysis-index");
 
 			/**
 			 * Now, we can update the settings to add the analyzer
 			 */
-			client.UpdateIndexSettings("analysis-index", i => i
+			client.Indices.UpdateIndexSettings("analysis-index", i => i
 				.IndexSettings(s => s
 					.Analysis(a => a
 						.CharFilters(cf => cf
@@ -244,16 +244,15 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			 * And open the index again. Here, we also wait up to five seconds for the
 			 * status of the index to become green
 			 */
-			client.OpenIndex("analysis-index");
-			client.ClusterHealth(h => h
+			client.Indices.OpenIndex("analysis-index");
+			client.Cluster.Health("analysis-index",h => h
 				.WaitForStatus(WaitForStatus.Green)
-				.Index("analysis-index")
 				.Timeout(TimeSpan.FromSeconds(5))
 			);
 
 			/**With the index open and ready, let's test the analyzer
 			 */
-			var analyzeResponse = client.Analyze(a => a
+			var analyzeResponse = client.Indices.Analyze(a => a
 				.Index("analysis-index") // <1> Since we added the custom analyzer to the "analysis-index" index, we need to target this index to test it
 				.Analyzer("my_analyzer")
 				.Text("F# is THE SUPERIOR language :)")
@@ -319,7 +318,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			// hide
 			var client = Client;
 
-			client.CreateIndex("project-index", i => i
+			client.Indices.CreateIndex("project-index", i => i
 				.Settings(s => s
 					.Analysis(a => a
 						.CharFilters(cf => cf
@@ -356,7 +355,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			/**
 			 * The analyzer on the `name` field can be tested with
 			 */
-			var analyzeResponse = client.Analyze(a => a
+			var analyzeResponse = client.Indices.Analyze(a => a
 				.Index("project-index")
 				.Field<Project, string>(f => f.Name)
 				.Text("F# is THE SUPERIOR language :)")

@@ -20,10 +20,10 @@ namespace Tests.Cat.CatTemplates
 		protected override string UrlPath => "/_cat/templates";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatTemplates(),
-			(client, f) => client.CatTemplatesAsync(),
-			(client, r) => client.CatTemplates(r),
-			(client, r) => client.CatTemplatesAsync(r)
+			(client, f) => client.Cat.Templates(),
+			(client, f) => client.Cat.TemplatesAsync(),
+			(client, r) => client.Cat.Templates(r),
+			(client, r) => client.Cat.TemplatesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatTemplatesRecord> response)

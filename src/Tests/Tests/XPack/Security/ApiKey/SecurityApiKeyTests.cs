@@ -53,10 +53,10 @@ namespace Tests.XPack.Security.ApiKey
 							.Indices(i => i.Add<object>(p => p.Names("*").Privileges("all")))
 							.Applications(i => i.Add(p => p.Application($"app-{v}").Privileges("*").Resources("*")))
 						,
-						(v, c, f) => c.PutRole($"role-{v}", f),
-						(v, c, f) => c.PutRoleAsync($"role-{v}", f),
-						(v, c, r) => c.PutRole(r),
-						(v, c, r) => c.PutRoleAsync(r)
+						(v, c, f) => c.Security.PutRole($"role-{v}", f),
+						(v, c, f) => c.Security.PutRoleAsync($"role-{v}", f),
+						(v, c, r) => c.Security.PutRole(r),
+						(v, c, r) => c.Security.PutRoleAsync(r)
 					)
 			},
 			{
@@ -73,10 +73,10 @@ namespace Tests.XPack.Security.ApiKey
 							.Roles($"role-{v}", "superuser")
 							.FullName("API key user")
 						,
-						(v, c, f) => c.PutUser($"user-{v}", f),
-						(v, c, f) => c.PutUserAsync($"user-{v}", f),
-						(v, c, r) => c.PutUser(r),
-						(v, c, r) => c.PutUserAsync(r)
+						(v, c, f) => c.Security.PutUser($"user-{v}", f),
+						(v, c, f) => c.Security.PutUserAsync($"user-{v}", f),
+						(v, c, r) => c.Security.PutUser(r),
+						(v, c, r) => c.Security.PutUserAsync(r)
 					)
 			},
 			{
@@ -117,10 +117,10 @@ namespace Tests.XPack.Security.ApiKey
 								)
 							)
 						,
-						(v, c, f) => c.PutPrivileges(f),
-						(v, c, f) => c.PutPrivilegesAsync(f),
-						(v, c, r) => c.PutPrivileges(r),
-						(v, c, r) => c.PutPrivilegesAsync(r)
+						(v, c, f) => c.Security.PutPrivileges(f),
+						(v, c, f) => c.Security.PutPrivilegesAsync(f),
+						(v, c, r) => c.Security.PutPrivileges(r),
+						(v, c, r) => c.Security.PutPrivilegesAsync(r)
 					)
 			},
 			{
@@ -177,10 +177,10 @@ namespace Tests.XPack.Security.ApiKey
 								         .Role("role-b", o => o.Cluster("all").Indices(i => i.Index(k => k.Names("index-b").Privileges("read")))))
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.CreateApiKey(f),
-						(v, c, f) => c.CreateApiKeyAsync(f),
-						(v, c, r) => c.CreateApiKey(r),
-						(v, c, r) => c.CreateApiKeyAsync(r)
+						(v, c, f) => c.Security.CreateApiKey(f),
+						(v, c, f) => c.Security.CreateApiKeyAsync(f),
+						(v, c, r) => c.Security.CreateApiKey(r),
+						(v, c, r) => c.Security.CreateApiKeyAsync(r)
 					)
 			},
 			{
@@ -204,10 +204,10 @@ namespace Tests.XPack.Security.ApiKey
 							.Expiration("1d")
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.CreateApiKey(f),
-						(v, c, f) => c.CreateApiKeyAsync(f),
-						(v, c, r) => c.CreateApiKey(r),
-						(v, c, r) => c.CreateApiKeyAsync(r)
+						(v, c, f) => c.Security.CreateApiKey(f),
+						(v, c, f) => c.Security.CreateApiKeyAsync(f),
+						(v, c, r) => c.Security.CreateApiKey(r),
+						(v, c, r) => c.Security.CreateApiKeyAsync(r)
 					)
 			},
 			{
@@ -229,10 +229,10 @@ namespace Tests.XPack.Security.ApiKey
 							.Name(v)
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.GetApiKey(f),
-						(v, c, f) => c.GetApiKeyAsync(f),
-						(v, c, r) => c.GetApiKey(r),
-						(v, c, r) => c.GetApiKeyAsync(r)
+						(v, c, f) => c.Security.GetApiKey(f),
+						(v, c, f) => c.Security.GetApiKeyAsync(f),
+						(v, c, r) => c.Security.GetApiKey(r),
+						(v, c, r) => c.Security.GetApiKeyAsync(r)
 					)
 			},
 			{
@@ -254,10 +254,10 @@ namespace Tests.XPack.Security.ApiKey
 							.Name(v)
 							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
 						,
-						(v, c, f) => c.InvalidateApiKey(f),
-						(v, c, f) => c.InvalidateApiKeyAsync(f),
-						(v, c, r) => c.InvalidateApiKey(r),
-						(v, c, r) => c.InvalidateApiKeyAsync(r)
+						(v, c, f) => c.Security.InvalidateApiKey(f),
+						(v, c, f) => c.Security.InvalidateApiKeyAsync(f),
+						(v, c, r) => c.Security.InvalidateApiKey(r),
+						(v, c, r) => c.Security.InvalidateApiKeyAsync(r)
 					)
 			}
 		}) { }

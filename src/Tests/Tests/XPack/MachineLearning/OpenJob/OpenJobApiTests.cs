@@ -35,10 +35,10 @@ namespace Tests.XPack.MachineLearning.OpenJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.OpenJob(CallIsolatedValue, f),
-			(client, f) => client.OpenJobAsync(CallIsolatedValue, f),
-			(client, r) => client.OpenJob(r),
-			(client, r) => client.OpenJobAsync(r)
+			(client, f) => client.MachineLearning.OpenJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.OpenJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.OpenJob(r),
+			(client, r) => client.MachineLearning.OpenJobAsync(r)
 		);
 
 		protected override OpenJobDescriptor NewDescriptor() => new OpenJobDescriptor(CallIsolatedValue);

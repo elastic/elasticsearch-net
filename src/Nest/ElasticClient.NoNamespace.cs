@@ -160,9 +160,9 @@ namespace Nest
 		}
 
 		///<inheritdoc cref = "IBulkRequest"/>
-		public BulkResponse Bulk(IndexName index, Func<BulkDescriptor, IBulkRequest> selector) => throw new NotImplementedException();
+		public BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) => throw new NotImplementedException();
 		///<inheritdoc cref = "IBulkRequest"/>
-		public Task<BulkResponse> BulkAsync(IndexName index, Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IBulkRequest"/>
 		public BulkResponse Bulk(IBulkRequest request) => DoRequest<IBulkRequest, BulkResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IBulkRequest"/>
@@ -322,9 +322,9 @@ namespace Nest
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
 		public Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMultiGetRequest"/>
-		public MultiGetResponse MultiGet(IndexName index, Func<MultiGetDescriptor, IMultiGetRequest> selector) => throw new NotImplementedException();
+		public MultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMultiGetRequest"/>
-		public Task<MultiGetResponse> MultiGetAsync(IndexName index, Func<MultiGetDescriptor, IMultiGetRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMultiGetRequest"/>
 		public MultiGetResponse MultiGet(IMultiGetRequest request) => DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMultiGetRequest"/>
@@ -346,9 +346,9 @@ namespace Nest
 		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
 		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
-		public MultiTermVectorsResponse MultiTermVectors(IndexName index, Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector) => throw new NotImplementedException();
+		public MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
-		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IndexName index, Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
 		public MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) => DoRequest<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>

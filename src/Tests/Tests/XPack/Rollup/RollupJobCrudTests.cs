@@ -33,10 +33,10 @@ namespace Tests.XPack.Rollup
 			Calls<CreateRollupJobDescriptor<Log>, CreateRollupJobRequest, ICreateRollupJobRequest, CreateRollupJobResponse>(
 				CreateInitializer,
 				CreateFluent,
-				(s, c, f) => c.CreateRollupJob(CreateRollupName(s), f),
-				(s, c, f) => c.CreateRollupJobAsync(CreateRollupName(s), f),
-				(s, c, r) => c.CreateRollupJob(r),
-				(s, c, r) => c.CreateRollupJobAsync(r)
+				(s, c, f) => c.Rollup.CreateRollupJob(CreateRollupName(s), f),
+				(s, c, f) => c.Rollup.CreateRollupJobAsync(CreateRollupName(s), f),
+				(s, c, r) => c.Rollup.CreateRollupJob(r),
+				(s, c, r) => c.Rollup.CreateRollupJobAsync(r)
 			);
 
 		protected CreateRollupJobRequest CreateInitializer(string role) => new CreateRollupJobRequest(CreateRollupName(role))
@@ -89,10 +89,10 @@ namespace Tests.XPack.Rollup
 		protected override LazyResponses Read() => Calls<GetRollupJobDescriptor, GetRollupJobRequest, IGetRollupJobRequest, GetRollupJobResponse>(
 			ReadInitializer,
 			ReadFluent,
-			(s, c, f) => c.GetRollupJob(f),
-			(s, c, f) => c.GetRollupJobAsync(f),
-			(s, c, r) => c.GetRollupJob(r),
-			(s, c, r) => c.GetRollupJobAsync(r)
+			(s, c, f) => c.Rollup.GetRollupJob(f),
+			(s, c, f) => c.Rollup.GetRollupJobAsync(f),
+			(s, c, r) => c.Rollup.GetRollupJob(r),
+			(s, c, r) => c.Rollup.GetRollupJobAsync(r)
 		);
 
 		protected GetRollupJobRequest ReadInitializer(string role) => new GetRollupJobRequest(CreateRollupName(role));
@@ -105,10 +105,10 @@ namespace Tests.XPack.Rollup
 				"start", () => Calls<StartRollupJobDescriptor, StartRollupJobRequest, IStartRollupJobRequest, StartRollupJobResponse>(
 					StartInitializer,
 					StartFluent,
-					(s, c, f) => c.StartRollupJob(CreateRollupName(s), f),
-					(s, c, f) => c.StartRollupJobAsync(CreateRollupName(s), f),
-					(s, c, r) => c.StartRollupJob(r),
-					(s, c, r) => c.StartRollupJobAsync(r)
+					(s, c, f) => c.Rollup.StartRollupJob(CreateRollupName(s), f),
+					(s, c, f) => c.Rollup.StartRollupJobAsync(CreateRollupName(s), f),
+					(s, c, r) => c.Rollup.StartRollupJob(r),
+					(s, c, r) => c.Rollup.StartRollupJobAsync(r)
 				)
 			},
 			{ "wait_for_finish", () => Call(WaitForFinish) },
@@ -116,10 +116,10 @@ namespace Tests.XPack.Rollup
 				"rollup_search", () => Calls<RollupSearchDescriptor<Log>, RollupSearchRequest, IRollupSearchRequest, RollupSearchResponse<Log>>(
 					RollupSearchInitializer,
 					RollupSearchFluent,
-					(s, c, f) => c.RollupSearch(CreateRollupSearchIndices(s), f),
-					(s, c, f) => c.RollupSearchAsync(CreateRollupSearchIndices(s), f),
-					(s, c, r) => c.RollupSearch<Log>(r),
-					(s, c, r) => c.RollupSearchAsync<Log>(r)
+					(s, c, f) => c.Rollup.Search(CreateRollupSearchIndices(s), f),
+					(s, c, f) => c.Rollup.SearchAsync(CreateRollupSearchIndices(s), f),
+					(s, c, r) => c.Rollup.Search<Log>(r),
+					(s, c, r) => c.Rollup.SearchAsync<Log>(r)
 				)
 			},
 			{
@@ -128,10 +128,10 @@ namespace Tests.XPack.Rollup
 					>(
 						CapsInitializer,
 						CapsFluent,
-						(s, c, f) => c.GetRollupCapabilities(f),
-						(s, c, f) => c.GetRollupCapabilitiesAsync(f),
-						(s, c, r) => c.GetRollupCapabilities(r),
-						(s, c, r) => c.GetRollupCapabilitiesAsync(r)
+						(s, c, f) => c.Rollup.GetRollupCapabilities(f),
+						(s, c, f) => c.Rollup.GetRollupCapabilitiesAsync(f),
+						(s, c, r) => c.Rollup.GetRollupCapabilities(r),
+						(s, c, r) => c.Rollup.GetRollupCapabilitiesAsync(r)
 					)
 			},
 			{
@@ -140,20 +140,20 @@ namespace Tests.XPack.Rollup
 					>(
 						IndexCapsInitializer,
 						IndexCapsFluent,
-						(s, c, f) => c.GetRollupIndexCapabilities(CreateRollupName(s), f),
-						(s, c, f) => c.GetRollupIndexCapabilitiesAsync(CreateRollupName(s), f),
-						(s, c, r) => c.GetRollupIndexCapabilities(r),
-						(s, c, r) => c.GetRollupIndexCapabilitiesAsync(r)
+						(s, c, f) => c.Rollup.GetRollupIndexCapabilities(CreateRollupName(s), f),
+						(s, c, f) => c.Rollup.GetRollupIndexCapabilitiesAsync(CreateRollupName(s), f),
+						(s, c, r) => c.Rollup.GetRollupIndexCapabilities(r),
+						(s, c, r) => c.Rollup.GetRollupIndexCapabilitiesAsync(r)
 					)
 			},
 			{
 				"stop", () => Calls<StopRollupJobDescriptor, StopRollupJobRequest, IStopRollupJobRequest, StopRollupJobResponse>(
 					StopInitializer,
 					StopFluent,
-					(s, c, f) => c.StopRollupJob(CreateRollupName(s), f),
-					(s, c, f) => c.StopRollupJobAsync(CreateRollupName(s), f),
-					(s, c, r) => c.StopRollupJob(r),
-					(s, c, r) => c.StopRollupJobAsync(r)
+					(s, c, f) => c.Rollup.StopRollupJob(CreateRollupName(s), f),
+					(s, c, f) => c.Rollup.StopRollupJobAsync(CreateRollupName(s), f),
+					(s, c, r) => c.Rollup.StopRollupJob(r),
+					(s, c, r) => c.Rollup.StopRollupJobAsync(r)
 				)
 			},
 		};
@@ -198,7 +198,7 @@ namespace Tests.XPack.Rollup
 			do
 			{
 				//we can do this because we know new data is no longer indexed into these indexes
-				response = await client.GetRollupJobAsync(j => j.Id(job));
+				response = await client.Rollup.GetRollupJobAsync(j => j.Id(job));
 				var validResponseWithJobs = response.IsValid && response.Jobs.Count > 0;
 				if (!validResponseWithJobs) break;
 
@@ -293,10 +293,10 @@ namespace Tests.XPack.Rollup
 			Calls<DeleteRollupJobDescriptor, DeleteRollupJobRequest, IDeleteRollupJobRequest, DeleteRollupJobResponse>(
 				DeleteInitializer,
 				DeleteFluent,
-				(s, c, f) => c.DeleteRollupJob(CreateRollupName(s), f),
-				(s, c, f) => c.DeleteRollupJobAsync(CreateRollupName(s), f),
-				(s, c, r) => c.DeleteRollupJob(r),
-				(s, c, r) => c.DeleteRollupJobAsync(r)
+				(s, c, f) => c.Rollup.DeleteRollupJob(CreateRollupName(s), f),
+				(s, c, f) => c.Rollup.DeleteRollupJobAsync(CreateRollupName(s), f),
+				(s, c, r) => c.Rollup.DeleteRollupJob(r),
+				(s, c, r) => c.Rollup.DeleteRollupJobAsync(r)
 			);
 
 		protected DeleteRollupJobRequest DeleteInitializer(string role) => new DeleteRollupJobRequest(CreateRollupName(role));

@@ -18,10 +18,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteIndexTemplate(CallIsolatedValue),
-			(client, f) => client.DeleteIndexTemplateAsync(CallIsolatedValue),
-			(client, r) => client.DeleteIndexTemplate(r),
-			(client, r) => client.DeleteIndexTemplateAsync(r)
+			(client, f) => client.Indices.DeleteIndexTemplate(CallIsolatedValue),
+			(client, f) => client.Indices.DeleteIndexTemplateAsync(CallIsolatedValue),
+			(client, r) => client.Indices.DeleteIndexTemplate(r),
+			(client, r) => client.Indices.DeleteIndexTemplateAsync(r)
 		);
 	}
 }

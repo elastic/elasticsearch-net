@@ -25,10 +25,10 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 		protected override string UrlPath => "/_all/_segments";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Segments(Infer.AllIndices, f),
-			(client, f) => client.SegmentsAsync(Infer.AllIndices, f),
-			(client, r) => client.Segments(r),
-			(client, r) => client.SegmentsAsync(r)
+			(client, f) => client.Indices.Segments(Infer.AllIndices, f),
+			(client, f) => client.Indices.SegmentsAsync(Infer.AllIndices, f),
+			(client, r) => client.Indices.Segments(r),
+			(client, r) => client.Indices.SegmentsAsync(r)
 		);
 
 		protected override void ExpectResponse(SegmentsResponse response)

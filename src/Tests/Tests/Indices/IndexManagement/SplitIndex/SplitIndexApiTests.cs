@@ -45,15 +45,15 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}/_split/{CallIsolatedValue}-target";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SplitIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			(client, f) => client.SplitIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			(client, r) => client.SplitIndex(r),
-			(client, r) => client.SplitIndexAsync(r)
+			(client, f) => client.Indices.SplitIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, f) => client.Indices.SplitIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, r) => client.Indices.SplitIndex(r),
+			(client, r) => client.Indices.SplitIndexAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var create = client.CreateIndex(CallIsolatedValue, c => c
+			var create = client.Indices.CreateIndex(CallIsolatedValue, c => c
 				.Settings(s => s
 					.NumberOfShards(4)
 					.NumberOfRoutingShards(8)
@@ -61,7 +61,7 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 				)
 			);
 			create.ShouldBeValid();
-			var update = client.UpdateIndexSettings(CallIsolatedValue, u => u
+			var update = client.Indices.UpdateIndexSettings(CallIsolatedValue, u => u
 				.IndexSettings(s => s
 					.BlocksWrite()
 				)

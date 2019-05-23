@@ -79,10 +79,10 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PostCalendarEvents(CallIsolatedValue, f),
-			(client, f) => client.PostCalendarEventsAsync(CallIsolatedValue, f),
-			(client, r) => client.PostCalendarEvents(r),
-			(client, r) => client.PostCalendarEventsAsync(r)
+			(client, f) => client.MachineLearning.PostCalendarEvents(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PostCalendarEventsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PostCalendarEvents(r),
+			(client, r) => client.MachineLearning.PostCalendarEventsAsync(r)
 		);
 
 		protected override PostCalendarEventsDescriptor NewDescriptor() =>

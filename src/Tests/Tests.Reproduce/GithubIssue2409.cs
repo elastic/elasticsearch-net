@@ -22,7 +22,7 @@ namespace Tests.Reproduce
 			var settings = new ConnectionSettings(pool, connection).DefaultIndex("test-events-v1-201412");
 			var client = new ElasticClient(settings);
 
-			var mappingResponse = client.GetMapping<Events>();
+			var mappingResponse = client.Indices.GetMapping<Events>();
 
 			mappingResponse.ShouldBeValid();
 

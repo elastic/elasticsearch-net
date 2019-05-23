@@ -115,7 +115,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			(client, r) => client.ReindexOnServerAsync(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
+		protected override void OnAfterCall(IElasticClient client) => client.Indices.Refresh(CallIsolatedValue);
 
 		protected override void ExpectResponse(ReindexOnServerResponse response)
 		{

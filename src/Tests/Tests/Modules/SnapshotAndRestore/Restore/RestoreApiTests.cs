@@ -16,7 +16,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
 
-			var createRepository = Client.CreateRepository(RepositoryName, r => r
+			var createRepository = Client.Snapshot.CreateRepository(RepositoryName, r => r
 				.FileSystem(fs => fs
 					.Settings(Path.Combine(cluster.FileSystem.RepositoryPath, RepositoryName))
 				)
@@ -24,12 +24,12 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 			if (!createRepository.IsValid)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var getSnapshotResponse = Client.GetSnapshot(RepositoryName, SnapshotName);
+			var getSnapshotResponse = Client.Snapshot.GetSnapshot(RepositoryName, SnapshotName);
 
 			if (!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404 ||
 				!getSnapshotResponse.Snapshots.Any())
 			{
-				var snapshot = Client.Snapshot(RepositoryName, SnapshotName, s => s
+				var snapshot = Client.Snapshot.Snapshot(RepositoryName, SnapshotName, s => s
 					.WaitForCompletion()
 				);
 
@@ -63,10 +63,10 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 		private static string SnapshotName { get; } = RandomString();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Restore(RepositoryName, SnapshotName, f),
-			(client, f) => client.RestoreAsync(RepositoryName, SnapshotName, f),
-			(client, r) => client.Restore(r),
-			(client, r) => client.RestoreAsync(r)
+			(client, f) => client.Snapshot.Restore(RepositoryName, SnapshotName, f),
+			(client, f) => client.Snapshot.RestoreAsync(RepositoryName, SnapshotName, f),
+			(client, r) => client.Snapshot.Restore(r),
+			(client, r) => client.Snapshot.RestoreAsync(r)
 		);
 
 		protected override RestoreDescriptor NewDescriptor() => new RestoreDescriptor(RepositoryName, SnapshotName);

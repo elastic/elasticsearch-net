@@ -20,7 +20,7 @@ namespace Tests.Reproduce
 			var client = _cluster.Client;
 
 			//create index with automapping
-			client.CreateIndex(indexName, create => create
+			client.Indices.CreateIndex(indexName, create => create
 				.Map<Root>(map => map
 					.AutoMap()
 				)

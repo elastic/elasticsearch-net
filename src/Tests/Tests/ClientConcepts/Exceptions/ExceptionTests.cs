@@ -23,7 +23,7 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(TestConnectionSettings.CreateUri(_port))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
-			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
+			var exception = Assert.Throws<ElasticsearchClientException>(() => client.Indices.GetMapping<Project>(s => s.Index("doesntexist")));
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus the inner exception should not be set
 			exception.InnerException.Should().BeNull();
 			exception.Response.Should().NotBeNull();
@@ -46,7 +46,7 @@ namespace Tests.ClientConcepts.Exceptions
 		{
 			var settings = new ConnectionSettings(TestConnectionSettings.CreateUri(_port));
 			var client = new ElasticClient(settings);
-			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
+			var response = client.Indices.GetMapping<Project>(s => s.Index("doesntexist"));
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			response.ApiCall.OriginalException.Should().BeNull();
 		}

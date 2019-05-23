@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*/
 		public void IngestionPipeline()
 		{
-			client.CreateIndex("people", c => c
+			client.Indices.CreateIndex("people", c => c
 				.Map<Person>(p => p
 					.AutoMap() //<1> automatically create the mapping from the type
 					.Properties(props => props
@@ -61,7 +61,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				)
 			);
 
-			client.PutPipeline("person-pipeline", p => p
+			client.Ingest.PutPipeline("person-pipeline", p => p
 				.Processors(ps => ps
 					.Uppercase<Person>(s => s
 						.Field(t => t.LastName) //<5> uppercase the lastname

@@ -22,10 +22,10 @@ namespace Tests.Cluster.ClusterHealth
 		protected override string UrlPath => "/_cluster/health";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterHealth(),
-			(client, f) => client.ClusterHealthAsync(),
-			(client, r) => client.ClusterHealth(r),
-			(client, r) => client.ClusterHealthAsync(r)
+			(client, f) => client.Cluster.Health(Nest.Indices.All, f),
+			(client, f) => client.Cluster.HealthAsync(Nest.Indices.All, f),
+			(client, r) => client.Cluster.Health(r),
+			(client, r) => client.Cluster.HealthAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterHealthResponse response)
@@ -54,10 +54,10 @@ namespace Tests.Cluster.ClusterHealth
 		protected override string UrlPath => "/_cluster/health?level=shards";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterHealth(f),
-			(client, f) => client.ClusterHealthAsync(f),
-			(client, r) => client.ClusterHealth(r),
-			(client, r) => client.ClusterHealthAsync(r)
+			(client, f) => client.Cluster.Health(Nest.Indices.All, f),
+			(client, f) => client.Cluster.HealthAsync(Nest.Indices.All, f),
+			(client, r) => client.Cluster.Health(r),
+			(client, r) => client.Cluster.HealthAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterHealthResponse response)

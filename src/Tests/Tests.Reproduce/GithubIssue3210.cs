@@ -40,7 +40,7 @@ namespace Tests.Reproduce
 		[U] public void MissingNodeDecisionOptionsInResponseThrowExceptionWhenAttemptingToDeserializeResponse()
 		{
 			var client = FixedResponseClient.Create(ClusterAllocationResponse);
-			var response = client.ClusterAllocationExplain();
+			var response = client.Cluster.AllocationExplain();
 
 			var nodeAllocationDecisions = response.NodeAllocationDecisions;
 			nodeAllocationDecisions.Should().NotBeNullOrEmpty();

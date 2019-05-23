@@ -55,7 +55,7 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 			foreach (var value in values)
 			{
 				var index = value.Value;
-				var createIndexResponse = client.CreateIndex(index);
+				var createIndexResponse = client.Indices.CreateIndex(index);
 
 				if (!createIndexResponse.IsValid)
 					throw new Exception($"Invalid response when setting up index for integration test {GetType().Name}");
@@ -63,10 +63,10 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.UpdateIndexSettings(CallIsolatedValue, f),
-			(client, f) => client.UpdateIndexSettingsAsync(CallIsolatedValue, f),
-			(client, r) => client.UpdateIndexSettings(r),
-			(client, r) => client.UpdateIndexSettingsAsync(r)
+			(client, f) => client.Indices.UpdateIndexSettings(CallIsolatedValue, f),
+			(client, f) => client.Indices.UpdateIndexSettingsAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.UpdateIndexSettings(r),
+			(client, r) => client.Indices.UpdateIndexSettingsAsync(r)
 		);
 	}
 
@@ -108,7 +108,7 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 			foreach (var value in values)
 			{
 				var index = value.Value;
-				var createIndexResponse = client.CreateIndex(index);
+				var createIndexResponse = client.Indices.CreateIndex(index);
 
 				if (!createIndexResponse.IsValid)
 					throw new Exception($"Invalid response when setting up index for integration test {GetType().Name}");
@@ -116,10 +116,10 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.UpdateIndexSettings(CallIsolatedValue, f),
-			(client, f) => client.UpdateIndexSettingsAsync(CallIsolatedValue, f),
-			(client, r) => client.UpdateIndexSettings(r),
-			(client, r) => client.UpdateIndexSettingsAsync(r)
+			(client, f) => client.Indices.UpdateIndexSettings(CallIsolatedValue, f),
+			(client, f) => client.Indices.UpdateIndexSettingsAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.UpdateIndexSettings(r),
+			(client, r) => client.Indices.UpdateIndexSettingsAsync(r)
 		);
 	}
 }

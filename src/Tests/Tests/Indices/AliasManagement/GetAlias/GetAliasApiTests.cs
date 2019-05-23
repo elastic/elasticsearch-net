@@ -32,10 +32,10 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAlias(f),
-			(client, f) => client.GetAliasAsync(f),
-			(client, r) => client.GetAlias(r),
-			(client, r) => client.GetAliasAsync(r)
+			(client, f) => client.Indices.GetAlias(f),
+			(client, f) => client.Indices.GetAliasAsync(f),
+			(client, r) => client.Indices.GetAlias(r),
+			(client, r) => client.Indices.GetAliasAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAliasResponse response)
@@ -69,10 +69,10 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}%2Cx%2Cy";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAlias(f),
-			(client, f) => client.GetAliasAsync(f),
-			(client, r) => client.GetAlias(r),
-			(client, r) => client.GetAliasAsync(r)
+			(client, f) => client.Indices.GetAlias(f),
+			(client, f) => client.Indices.GetAliasAsync(f),
+			(client, r) => client.Indices.GetAlias(r),
+			(client, r) => client.Indices.GetAliasAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAliasResponse response)
@@ -101,10 +101,10 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override string UrlPath => $"/_alias/bad-alias";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAlias(f),
-			(client, f) => client.GetAliasAsync(f),
-			(client, r) => client.GetAlias(r),
-			(client, r) => client.GetAliasAsync(r)
+			(client, f) => client.Indices.GetAlias(f),
+			(client, f) => client.Indices.GetAliasAsync(f),
+			(client, r) => client.Indices.GetAlias(r),
+			(client, r) => client.Indices.GetAliasAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAliasResponse response)

@@ -38,10 +38,10 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		protected override string UrlPath => "/_cluster/settings";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterPutSettings(f),
-			(client, f) => client.ClusterPutSettingsAsync(f),
-			(client, r) => client.ClusterPutSettings(r),
-			(client, r) => client.ClusterPutSettingsAsync(r)
+			(client, f) => client.Cluster.PutSettings(f),
+			(client, f) => client.Cluster.PutSettingsAsync(f),
+			(client, r) => client.Cluster.PutSettings(r),
+			(client, r) => client.Cluster.PutSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterPutSettingsResponse response)
@@ -70,10 +70,10 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		protected override string UrlPath => "/_cluster/settings";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterPutSettings(f),
-			(client, f) => client.ClusterPutSettingsAsync(f),
-			(client, r) => client.ClusterPutSettings(r),
-			(client, r) => client.ClusterPutSettingsAsync(r)
+			(client, f) => client.Cluster.PutSettings(f),
+			(client, f) => client.Cluster.PutSettingsAsync(f),
+			(client, r) => client.Cluster.PutSettings(r),
+			(client, r) => client.Cluster.PutSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterPutSettingsResponse response)

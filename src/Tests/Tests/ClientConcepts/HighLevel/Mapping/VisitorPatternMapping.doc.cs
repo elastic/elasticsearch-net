@@ -67,7 +67,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingACustomPropertyVisitor()
 		{
 			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = client.Indices.CreateIndex("myindex", c => c
 				.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 			);
 
@@ -153,7 +153,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingACustomPropertyVisitorOnPropertyInfo()
 		{
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = client.Indices.CreateIndex("myindex", c => c
 				.Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
 			);
 
@@ -224,7 +224,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 		[U] public void HidesInheritedMembers()
 		{
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = client.Indices.CreateIndex("myindex", c => c
 				.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
 			);
 

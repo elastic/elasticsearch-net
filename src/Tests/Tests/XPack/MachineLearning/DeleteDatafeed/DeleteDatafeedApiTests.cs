@@ -31,10 +31,10 @@ namespace Tests.XPack.MachineLearning.DeleteDatafeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteDatafeed(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.DeleteDatafeedAsync(CallIsolatedValue + "-datafeed", f),
-			(client, r) => client.DeleteDatafeed(r),
-			(client, r) => client.DeleteDatafeedAsync(r)
+			(client, f) => client.MachineLearning.DeleteDatafeed(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.DeleteDatafeedAsync(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.MachineLearning.DeleteDatafeed(r),
+			(client, r) => client.MachineLearning.DeleteDatafeedAsync(r)
 		);
 
 		protected override DeleteDatafeedDescriptor NewDescriptor() => new DeleteDatafeedDescriptor(CallIsolatedValue + "-datafeed");

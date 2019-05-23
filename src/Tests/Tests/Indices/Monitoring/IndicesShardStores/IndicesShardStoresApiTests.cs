@@ -39,7 +39,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			client.CreateIndex(IndexWithUnassignedShards, s => s
+			client.Indices.CreateIndex(IndexWithUnassignedShards, s => s
 				.Settings(settings => settings
 					.NumberOfShards(1)
 					.NumberOfReplicas(2)
@@ -53,10 +53,10 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.IndicesShardStores(f),
-			(client, f) => client.IndicesShardStoresAsync(f),
-			(client, r) => client.IndicesShardStores(r),
-			(client, r) => client.IndicesShardStoresAsync(r)
+			(client, f) => client.Indices.ShardStores(f),
+			(client, f) => client.Indices.ShardStoresAsync(f),
+			(client, r) => client.Indices.ShardStores(r),
+			(client, r) => client.Indices.ShardStoresAsync(r)
 		);
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>

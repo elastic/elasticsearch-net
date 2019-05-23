@@ -13,51 +13,51 @@ namespace Tests.Search.Validate
 		{
 			var hardcoded = "hardcoded";
 			await POST("/devs/_validate/query")
-					.Fluent(c => c.ValidateQuery<Developer>(s => s))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Developer>()))
-					.FluentAsync(c => c.ValidateQueryAsync<Developer>(s => s))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Developer>()))
+					.Fluent(c => c.Indices.ValidateQuery<Developer>(s => s))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest<Developer>()))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Developer>(s => s))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest<Developer>()))
 				;
 
 			await POST("/devs/_validate/query")
-					.Fluent(c => c.ValidateQuery<Developer>(s => s))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Project>(typeof(Developer))))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest(typeof(Developer))))
-					.FluentAsync(c => c.ValidateQueryAsync<Developer>(s => s))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Project>(typeof(Developer))))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest(typeof(Developer))))
+					.Fluent(c => c.Indices.ValidateQuery<Developer>(s => s))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest<Project>(typeof(Developer))))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest(typeof(Developer))))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Developer>(s => s))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest<Project>(typeof(Developer))))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest(typeof(Developer))))
 				;
 
 			await POST("/project/_validate/query")
-					.Fluent(c => c.ValidateQuery<Project>(s => s))
-					.Fluent(c => c.ValidateQuery<Project>(s => s))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest("project")))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Project>("project")))
-					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Project>(typeof(Project))))
-					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s))
+					.Fluent(c => c.Indices.ValidateQuery<Project>(s => s))
+					.Fluent(c => c.Indices.ValidateQuery<Project>(s => s))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest("project")))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest<Project>("project")))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Project>(s => s))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest<Project>(typeof(Project))))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Project>(s => s))
 				;
 
 			await POST("/hardcoded/_validate/query")
-					.Fluent(c => c.ValidateQuery<Project>(s => s.Index(hardcoded)))
-					.Fluent(c => c.ValidateQuery<Project>(s => s.Index(hardcoded)))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest(hardcoded)))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Project>(hardcoded)))
-					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s.Index(hardcoded)))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Project>(hardcoded)))
-					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s.Index(hardcoded)))
+					.Fluent(c => c.Indices.ValidateQuery<Project>(s => s.Index(hardcoded)))
+					.Fluent(c => c.Indices.ValidateQuery<Project>(s => s.Index(hardcoded)))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest(hardcoded)))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest<Project>(hardcoded)))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Project>(s => s.Index(hardcoded)))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest<Project>(hardcoded)))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Project>(s => s.Index(hardcoded)))
 				;
 
 			await POST("/_all/_validate/query")
-					.Fluent(c => c.ValidateQuery<Project>(s => s.AllIndices()))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Project>(Nest.Indices.All)))
-					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s.AllIndices()))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Project>(Nest.Indices.All)))
+					.Fluent(c => c.Indices.ValidateQuery<Project>(s => s.AllIndices()))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest<Project>(Nest.Indices.All)))
+					.FluentAsync(c => c.Indices.ValidateQueryAsync<Project>(s => s.AllIndices()))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest<Project>(Nest.Indices.All)))
 				;
 			
 			await POST("/_validate/query")
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest()))
-					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest()))
+					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest()))
+					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest()))
 				;
 		}
 	}

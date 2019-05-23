@@ -138,10 +138,10 @@ namespace Tests.XPack.Graph.Explore
 		protected override string UrlPath => $"/project/_graph/explore";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GraphExplore<Project>(f),
-			(client, f) => client.GraphExploreAsync<Project>(f),
-			(client, r) => client.GraphExplore(r),
-			(client, r) => client.GraphExploreAsync(r)
+			(client, f) => client.Graph.Explore<Project>(f),
+			(client, f) => client.Graph.ExploreAsync<Project>(f),
+			(client, r) => client.Graph.Explore(r),
+			(client, r) => client.Graph.ExploreAsync(r)
 		);
 
 		protected override void ExpectResponse(GraphExploreResponse response)

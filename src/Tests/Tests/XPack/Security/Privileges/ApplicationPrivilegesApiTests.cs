@@ -62,31 +62,31 @@ namespace Tests.XPack.Security.Privileges
 								)
 							)
 						),
-					(v, c, f) => c.PutPrivileges(f),
-					(v, c, f) => c.PutPrivilegesAsync(f),
-					(v, c, r) => c.PutPrivileges(r),
-					(v, c, r) => c.PutPrivilegesAsync(r)
+					(v, c, f) => c.Security.PutPrivileges(f),
+					(v, c, f) => c.Security.PutPrivilegesAsync(f),
+					(v, c, r) => c.Security.PutPrivileges(r),
+					(v, c, r) => c.Security.PutPrivilegesAsync(r)
 				)
 			},
 			{
 				GetPrivilegesStep, u => u.Calls<GetPrivilegesDescriptor, GetPrivilegesRequest, IGetPrivilegesRequest, GetPrivilegesResponse>(
 					v => new GetPrivilegesRequest($"app-{v}", $"p1-{v}"),
 					(v, d) => d.Application($"app-{v}").Name($"p1-{v}"),
-					(v, c, f) => c.GetPrivileges(f),
-					(v, c, f) => c.GetPrivilegesAsync(f),
-					(v, c, r) => c.GetPrivileges(r),
-					(v, c, r) => c.GetPrivilegesAsync(r)
+					(v, c, f) => c.Security.GetPrivileges(f),
+					(v, c, f) => c.Security.GetPrivilegesAsync(f),
+					(v, c, r) => c.Security.GetPrivileges(r),
+					(v, c, r) => c.Security.GetPrivilegesAsync(r)
 				)
 			},
 			{
-				PutRoleStep, u => u.Call((v, c) => c.PutRoleAsync($"role-{v}", r=>r
+				PutRoleStep, u => u.Call((v, c) => c.Security.PutRoleAsync($"role-{v}", r=>r
 					.Applications(apps=>apps
 						.Add(a=>a.Resources("*").Privileges($"p1-{v}").Application($"app-{v}"))
 					)
 				))
 			},
 			{
-				PutUserStep, u => u.Call((v, c) => c.PutUserAsync($"user-{v}",
+				PutUserStep, u => u.Call((v, c) => c.Security.PutUserAsync($"user-{v}",
 					r => r.Roles("admin", $"role-{v}").Password($"pass-{v}")))
 			},
 			{
@@ -120,10 +120,10 @@ namespace Tests.XPack.Security.Privileges
 							)
 						)
 					,
-					(v, c, f) => c.HasPrivileges(f),
-					(v, c, f) => c.HasPrivilegesAsync(f),
-					(v, c, r) => c.HasPrivileges(r),
-					(v, c, r) => c.HasPrivilegesAsync(r)
+					(v, c, f) => c.Security.HasPrivileges(f),
+					(v, c, f) => c.Security.HasPrivilegesAsync(f),
+					(v, c, r) => c.Security.HasPrivileges(r),
+					(v, c, r) => c.Security.HasPrivilegesAsync(r)
 				)
 			},
 			{
@@ -139,20 +139,20 @@ namespace Tests.XPack.Security.Privileges
 						}
 					},
 					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}")),
-					(v, c, f) => c.GetUserPrivileges(f),
-					(v, c, f) => c.GetUserPrivilegesAsync(f),
-					(v, c, r) => c.GetUserPrivileges(r),
-					(v, c, r) => c.GetUserPrivilegesAsync(r)
+					(v, c, f) => c.Security.GetUserPrivileges(f),
+					(v, c, f) => c.Security.GetUserPrivilegesAsync(f),
+					(v, c, r) => c.Security.GetUserPrivileges(r),
+					(v, c, r) => c.Security.GetUserPrivilegesAsync(r)
 				)
 			},
 			{
 				DeletePrivilegesStep, u => u.Calls<DeletePrivilegesDescriptor, DeletePrivilegesRequest, IDeletePrivilegesRequest, DeletePrivilegesResponse>(
 					v => new DeletePrivilegesRequest($"app-{v}", $"p1-{v}"),
 					(v, d) => d,
-					(v, c, f) => c.DeletePrivileges($"app-{v}", $"p1-{v}"),
-					(v, c, f) => c.DeletePrivilegesAsync($"app-{v}", $"p1-{v}"),
-					(v, c, r) => c.DeletePrivileges(r),
-					(v, c, r) => c.DeletePrivilegesAsync(r)
+					(v, c, f) => c.Security.DeletePrivileges($"app-{v}", $"p1-{v}"),
+					(v, c, f) => c.Security.DeletePrivilegesAsync($"app-{v}", $"p1-{v}"),
+					(v, c, r) => c.Security.DeletePrivileges(r),
+					(v, c, r) => c.Security.DeletePrivilegesAsync(r)
 				)
 			}
 		}) { }

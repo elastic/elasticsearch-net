@@ -31,17 +31,17 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetIndexTemplate(f),
-			(client, f) => client.GetIndexTemplateAsync(f),
-			(client, r) => client.GetIndexTemplate(r),
-			(client, r) => client.GetIndexTemplateAsync(r)
+			(client, f) => client.Indices.GetIndexTemplate(f),
+			(client, f) => client.Indices.GetIndexTemplateAsync(f),
+			(client, r) => client.Indices.GetIndexTemplate(r),
+			(client, r) => client.Indices.GetIndexTemplateAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putTemplateResponse = client.PutIndexTemplate(callUniqueValue.Value, d =>
+				var putTemplateResponse = client.Indices.PutIndexTemplate(callUniqueValue.Value, d =>
 					d.IndexPatterns("startingwiththis-*")
 						.Settings(s => s.NumberOfShards(2))
 						.Version(1)

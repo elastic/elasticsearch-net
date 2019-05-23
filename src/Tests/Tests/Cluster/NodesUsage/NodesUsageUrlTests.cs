@@ -12,31 +12,31 @@ namespace Tests.XPack.NodesUsage
 		[U] public override async Task Urls()
 		{
 			await GET("/_nodes/usage")
-					.Fluent(c => c.NodesUsage(d => d))
-					.Request(c => c.NodesUsage(new NodesUsageRequest()))
-					.FluentAsync(c => c.NodesUsageAsync(d => d))
-					.RequestAsync(c => c.NodesUsageAsync(new NodesUsageRequest()))
+					.Fluent(c => c.Nodes.Usage(d => d))
+					.Request(c => c.Nodes.Usage(new NodesUsageRequest()))
+					.FluentAsync(c => c.Nodes.UsageAsync(d => d))
+					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest()))
 				;
 
 			await GET("/_nodes/nodeId/usage")
-					.Fluent(c => c.NodesUsage(d => d.NodeId("nodeId")))
-					.Request(c => c.NodesUsage(new NodesUsageRequest("nodeId")))
-					.FluentAsync(c => c.NodesUsageAsync(d => d.NodeId("nodeId")))
-					.RequestAsync(c => c.NodesUsageAsync(new NodesUsageRequest("nodeId")))
+					.Fluent(c => c.Nodes.Usage(d => d.NodeId("nodeId")))
+					.Request(c => c.Nodes.Usage(new NodesUsageRequest("nodeId")))
+					.FluentAsync(c => c.Nodes.UsageAsync(d => d.NodeId("nodeId")))
+					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest("nodeId")))
 				;
 
 			await GET("/_nodes/nodeId/usage/rest_actions")
-					.Fluent(c => c.NodesUsage(d => d.NodeId("nodeId").Metric(NodesUsageMetric.RestActions)))
-					.Request(c => c.NodesUsage(new NodesUsageRequest("nodeId", NodesUsageMetric.RestActions)))
-					.FluentAsync(c => c.NodesUsageAsync(d => d.NodeId("nodeId").Metric(NodesUsageMetric.RestActions)))
-					.RequestAsync(c => c.NodesUsageAsync(new NodesUsageRequest("nodeId", NodesUsageMetric.RestActions)))
+					.Fluent(c => c.Nodes.Usage(d => d.NodeId("nodeId").Metric(NodesUsageMetric.RestActions)))
+					.Request(c => c.Nodes.Usage(new NodesUsageRequest("nodeId", NodesUsageMetric.RestActions)))
+					.FluentAsync(c => c.Nodes.UsageAsync(d => d.NodeId("nodeId").Metric(NodesUsageMetric.RestActions)))
+					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest("nodeId", NodesUsageMetric.RestActions)))
 				;
 
 			await GET("/_nodes/nodeId/usage/_all")
-					.Fluent(c => c.NodesUsage(d => d.NodeId("nodeId").Metric(NodesUsageMetric.All)))
-					.Request(c => c.NodesUsage(new NodesUsageRequest("nodeId", NodesUsageMetric.All)))
-					.FluentAsync(c => c.NodesUsageAsync(d => d.NodeId("nodeId").Metric(NodesUsageMetric.All)))
-					.RequestAsync(c => c.NodesUsageAsync(new NodesUsageRequest("nodeId", NodesUsageMetric.All)))
+					.Fluent(c => c.Nodes.Usage(d => d.NodeId("nodeId").Metric(NodesUsageMetric.All)))
+					.Request(c => c.Nodes.Usage(new NodesUsageRequest("nodeId", NodesUsageMetric.All)))
+					.FluentAsync(c => c.Nodes.UsageAsync(d => d.NodeId("nodeId").Metric(NodesUsageMetric.All)))
+					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest("nodeId", NodesUsageMetric.All)))
 				;
 		}
 	}

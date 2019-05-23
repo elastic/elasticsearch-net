@@ -43,7 +43,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void DefaultMultiFields()
 		{
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.CreateIndex("myindex", c => c
 				.Map<Person>(m => m
 					.AutoMap()
 				)
@@ -158,7 +158,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void CreatingMultiFields()
 		{
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.CreateIndex("myindex", c => c
 				.Map<Person>(m => m
 					.Properties(p => p
 						.Text(t => t

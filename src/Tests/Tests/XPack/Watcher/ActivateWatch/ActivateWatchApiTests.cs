@@ -70,10 +70,10 @@ namespace Tests.XPack.Watcher.ActivateWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ActivateWatch(CallIsolatedValue, f),
-			(client, f) => client.ActivateWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.ActivateWatch(r),
-			(client, r) => client.ActivateWatchAsync(r)
+			(client, f) => client.Watcher.ActivateWatch(CallIsolatedValue, f),
+			(client, f) => client.Watcher.ActivateWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.ActivateWatch(r),
+			(client, r) => client.Watcher.ActivateWatchAsync(r)
 		);
 
 		protected override ActivateWatchDescriptor NewDescriptor() => new ActivateWatchDescriptor(CallIsolatedValue);

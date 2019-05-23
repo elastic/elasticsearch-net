@@ -31,10 +31,10 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 		protected override string UrlPath => $"/_migration/upgrade/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.MigrationUpgrade(CallIsolatedValue, f),
-			(c, f) => c.MigrationUpgradeAsync(CallIsolatedValue, f),
-			(c, r) => c.MigrationUpgrade(r),
-			(c, r) => c.MigrationUpgradeAsync(r)
+			(c, f) => c.Migration.Upgrade(CallIsolatedValue, f),
+			(c, f) => c.Migration.UpgradeAsync(CallIsolatedValue, f),
+			(c, r) => c.Migration.Upgrade(r),
+			(c, r) => c.Migration.UpgradeAsync(r)
 		);
 
 		protected override MigrationUpgradeDescriptor NewDescriptor() => new MigrationUpgradeDescriptor(CallIsolatedValue);
@@ -42,12 +42,12 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var (k, v) in values)
-				client.CreateIndex(v);
+				client.Indices.CreateIndex(v);
 		}
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var (k, v) in values)
-				client.DeleteIndex(v);
+				client.Indices.DeleteIndex(v);
 		}
 
 		protected override void ExpectResponse(MigrationUpgradeResponse response)

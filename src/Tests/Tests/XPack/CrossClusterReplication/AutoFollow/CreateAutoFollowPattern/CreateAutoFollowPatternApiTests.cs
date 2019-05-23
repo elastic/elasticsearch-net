@@ -70,10 +70,10 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.CreateAutoFollowPattern
 		protected override string UrlPath => $"/_ccr/auto_follow/x";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateAutoFollowPattern("x", f),
-			(client, f) => client.CreateAutoFollowPatternAsync("x", f),
-			(client, r) => client.CreateAutoFollowPattern(r),
-			(client, r) => client.CreateAutoFollowPatternAsync(r)
+			(client, f) => client.CrossClusterReplication.CreateAutoFollowPattern("x", f),
+			(client, f) => client.CrossClusterReplication.CreateAutoFollowPatternAsync("x", f),
+			(client, r) => client.CrossClusterReplication.CreateAutoFollowPattern(r),
+			(client, r) => client.CrossClusterReplication.CreateAutoFollowPatternAsync(r)
 		);
 	}
 }

@@ -49,10 +49,10 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 		private string Role => $"role-{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetUserAccessToken(Admin.Username, UserPassword, f),
-			(client, f) => client.GetUserAccessTokenAsync(Admin.Username, UserPassword, f),
-			(client, r) => client.GetUserAccessToken(r),
-			(client, r) => client.GetUserAccessTokenAsync(r)
+			(client, f) => client.Security.GetUserAccessToken(Admin.Username, UserPassword, f),
+			(client, f) => client.Security.GetUserAccessTokenAsync(Admin.Username, UserPassword, f),
+			(client, r) => client.Security.GetUserAccessToken(r),
+			(client, r) => client.Security.GetUserAccessTokenAsync(r)
 		);
 
 		protected override GetUserAccessTokenDescriptor NewDescriptor() => new GetUserAccessTokenDescriptor(Admin.Username, UserPassword);

@@ -12,23 +12,23 @@ namespace Tests.Indices.StatusManagement.Upgrade
 		[U] public async Task Urls()
 		{
 			await POST($"/_all/_upgrade")
-					.Fluent(c => c.Upgrade(All))
-					.Request(c => c.Upgrade(new UpgradeRequest(All)))
-					.FluentAsync(c => c.UpgradeAsync(All))
-					.RequestAsync(c => c.UpgradeAsync(new UpgradeRequest(All)))
+					.Fluent(c => c.Indices.Upgrade(All))
+					.Request(c => c.Indices.Upgrade(new UpgradeRequest(All)))
+					.FluentAsync(c => c.Indices.UpgradeAsync(All))
+					.RequestAsync(c => c.Indices.UpgradeAsync(new UpgradeRequest(All)))
 				;
 			
 			await POST($"/_upgrade")
-					.Request(c => c.Upgrade(new UpgradeRequest()))
-					.RequestAsync(c => c.UpgradeAsync(new UpgradeRequest()))
+					.Request(c => c.Indices.Upgrade(new UpgradeRequest()))
+					.RequestAsync(c => c.Indices.UpgradeAsync(new UpgradeRequest()))
 				;
 
 			var index = "index1,index2";
 			await POST($"/index1%2Cindex2/_upgrade")
-					.Fluent(c => c.Upgrade(index))
-					.Request(c => c.Upgrade(new UpgradeRequest(index)))
-					.FluentAsync(c => c.UpgradeAsync(index))
-					.RequestAsync(c => c.UpgradeAsync(new UpgradeRequest(index)))
+					.Fluent(c => c.Indices.Upgrade(index))
+					.Request(c => c.Indices.Upgrade(new UpgradeRequest(index)))
+					.FluentAsync(c => c.Indices.UpgradeAsync(index))
+					.RequestAsync(c => c.Indices.UpgradeAsync(new UpgradeRequest(index)))
 				;
 		}
 	}

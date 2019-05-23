@@ -87,9 +87,9 @@ namespace Nest
 		}
 
 		///<inheritdoc cref = "IBulkRequest"/>
-		BulkResponse Bulk(IndexName index, Func<BulkDescriptor, IBulkRequest> selector);
+		BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
 		///<inheritdoc cref = "IBulkRequest"/>
-		Task<BulkResponse> BulkAsync(IndexName index, Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default);
+		Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default);
 		///<inheritdoc cref = "IBulkRequest"/>
 		BulkResponse Bulk(IBulkRequest request);
 		///<inheritdoc cref = "IBulkRequest"/>
@@ -249,9 +249,9 @@ namespace Nest
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
 		Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default);
 		///<inheritdoc cref = "IMultiGetRequest"/>
-		MultiGetResponse MultiGet(IndexName index, Func<MultiGetDescriptor, IMultiGetRequest> selector);
+		MultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector);
 		///<inheritdoc cref = "IMultiGetRequest"/>
-		Task<MultiGetResponse> MultiGetAsync(IndexName index, Func<MultiGetDescriptor, IMultiGetRequest> selector, CancellationToken ct = default);
+		Task<MultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector, CancellationToken ct = default);
 		///<inheritdoc cref = "IMultiGetRequest"/>
 		MultiGetResponse MultiGet(IMultiGetRequest request);
 		///<inheritdoc cref = "IMultiGetRequest"/>
@@ -273,9 +273,9 @@ namespace Nest
 		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
 		Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
-		MultiTermVectorsResponse MultiTermVectors(IndexName index, Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector);
+		MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
-		Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IndexName index, Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector, CancellationToken ct = default);
+		Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector, CancellationToken ct = default);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
 		MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>

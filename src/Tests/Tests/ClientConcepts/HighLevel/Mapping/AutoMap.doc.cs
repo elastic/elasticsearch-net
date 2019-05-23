@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* for the base class and then call AutoMap foreach of the types we want it to implement
 			*/
 
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.CreateIndex("myindex", c => c
 				.Map<Document>(m => m
 					.AutoMap<Company>() // <1> Auto map `Company` using the generic method
 					.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
@@ -168,7 +168,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			var client = new ElasticClient(connectionSettings);
 
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = client.Indices.CreateIndex("myindex", c => c
 				.Map<ParentWithStringId>(m => m
 					.AutoMap()
 				)
@@ -294,7 +294,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void ControllingRecursionDepth()
 		{
 			/** By default, `.AutoMap()` only goes as far as depth 1 */
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.CreateIndex("myindex", c => c
 				.Map<A>(m => m.AutoMap())
 			);
 
@@ -319,7 +319,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).FromRequest(createIndexResponse);
 
 			/** Now let's specify a maxRecursion of `3` */
-			createIndexResponse = _client.CreateIndex("myindex", c => c
+			createIndexResponse = _client.Indices.CreateIndex("myindex", c => c
 				.Map<A>(m => m.AutoMap(3))
 			);
 

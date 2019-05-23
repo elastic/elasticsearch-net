@@ -42,10 +42,10 @@ namespace Tests.XPack.MachineLearning.PutFilter
 		protected override string UrlPath => $"_ml/filters/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutFilter(CallIsolatedValue, f),
-			(client, f) => client.PutFilterAsync(CallIsolatedValue, f),
-			(client, r) => client.PutFilter(r),
-			(client, r) => client.PutFilterAsync(r)
+			(client, f) => client.MachineLearning.PutFilter(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PutFilterAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PutFilter(r),
+			(client, r) => client.MachineLearning.PutFilterAsync(r)
 		);
 
 		protected override PutFilterDescriptor NewDescriptor() => new PutFilterDescriptor(CallIsolatedValue);

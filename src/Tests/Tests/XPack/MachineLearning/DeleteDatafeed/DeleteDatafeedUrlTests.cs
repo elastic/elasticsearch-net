@@ -9,9 +9,9 @@ namespace Tests.XPack.MachineLearning.DeleteDatafeed
 	public class DeleteDatafeedUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await DELETE("/_ml/datafeeds/datafeed_id")
-			.Fluent(c => c.DeleteDatafeed("datafeed_id"))
-			.Request(c => c.DeleteDatafeed(new DeleteDatafeedRequest("datafeed_id")))
-			.FluentAsync(c => c.DeleteDatafeedAsync("datafeed_id"))
-			.RequestAsync(c => c.DeleteDatafeedAsync(new DeleteDatafeedRequest("datafeed_id")));
+			.Fluent(c => c.MachineLearning.DeleteDatafeed("datafeed_id"))
+			.Request(c => c.MachineLearning.DeleteDatafeed(new DeleteDatafeedRequest("datafeed_id")))
+			.FluentAsync(c => c.MachineLearning.DeleteDatafeedAsync("datafeed_id"))
+			.RequestAsync(c => c.MachineLearning.DeleteDatafeedAsync(new DeleteDatafeedRequest("datafeed_id")));
 	}
 }

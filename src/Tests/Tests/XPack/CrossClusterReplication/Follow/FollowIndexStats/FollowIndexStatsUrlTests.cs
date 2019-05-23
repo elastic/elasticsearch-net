@@ -11,10 +11,10 @@ namespace Tests.XPack.CrossClusterReplication.Follow.FollowIndexStats
 		{
 			var name = "x";
 			await UrlTester.GET($"/{name}/_ccr/stats")
-				.Fluent(c => c.FollowIndexStats(name, d => d))
-				.Request(c => c.FollowIndexStats(new FollowIndexStatsRequest(name)))
-				.FluentAsync(c => c.FollowIndexStatsAsync(name, d => d))
-				.RequestAsync(c => c.FollowIndexStatsAsync(new FollowIndexStatsRequest(name)));
+				.Fluent(c => c.CrossClusterReplication.FollowIndexStats(name, d => d))
+				.Request(c => c.CrossClusterReplication.FollowIndexStats(new FollowIndexStatsRequest(name)))
+				.FluentAsync(c => c.CrossClusterReplication.FollowIndexStatsAsync(name, d => d))
+				.RequestAsync(c => c.CrossClusterReplication.FollowIndexStatsAsync(new FollowIndexStatsRequest(name)));
 
 		}
 	}

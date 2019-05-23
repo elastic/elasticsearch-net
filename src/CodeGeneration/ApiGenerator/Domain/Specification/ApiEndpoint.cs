@@ -105,7 +105,7 @@ namespace ApiGenerator.Domain
 				var parts = new[]
 				{
 					//only make index part the first argument if the descriptor is not generic on T.*?Document
-					Url.Parts.FirstOrDefault(p => (p.Name == "index" || p.Name == "indices") && !willInferFromDocument),
+					Url.Parts.FirstOrDefault(p => p.Type == "list" && (p.Name == "index" || p.Name == "indices") && !willInferFromDocument),
 					Url.Parts.FirstOrDefault(p => p.Name == "name"),
 				};
 				requiredParts = parts.Where(p=>p!= null).Take(1).ToList();

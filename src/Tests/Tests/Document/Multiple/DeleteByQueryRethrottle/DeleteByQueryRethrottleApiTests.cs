@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.DeleteByQueryRethrottle
 			foreach (var callUniqueValue in values)
 			{
 				client.IndexMany(Project.Projects, callUniqueValue.Value);
-				client.Refresh(callUniqueValue.Value);
+				client.Indices.Refresh(callUniqueValue.Value);
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace Tests.Document.Multiple.DeleteByQueryRethrottle
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			client.IndexMany(Project.Projects, CallIsolatedValue);
-			client.Refresh(CallIsolatedValue);
+			client.Indices.Refresh(CallIsolatedValue);
 
 			var deleteByQuery = client.DeleteByQuery<Project>(u => u
 				.Index(CallIsolatedValue)

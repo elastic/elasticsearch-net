@@ -35,10 +35,10 @@ namespace Tests.XPack.Security.ClearCachedRealms
 		private string Realm => SecurityRealms.FileRealm;
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClearCachedRealms(Realm, f),
-			(client, f) => client.ClearCachedRealmsAsync(Realm, f),
-			(client, r) => client.ClearCachedRealms(r),
-			(client, r) => client.ClearCachedRealmsAsync(r)
+			(client, f) => client.Security.ClearCachedRealms(Realm, f),
+			(client, f) => client.Security.ClearCachedRealmsAsync(Realm, f),
+			(client, r) => client.Security.ClearCachedRealms(r),
+			(client, r) => client.Security.ClearCachedRealmsAsync(r)
 		);
 
 		protected override ClearCachedRealmsDescriptor NewDescriptor() => new ClearCachedRealmsDescriptor(Realm);

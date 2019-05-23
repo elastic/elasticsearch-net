@@ -93,10 +93,10 @@ namespace Tests.XPack.Security.Role.PutRole
 		protected override string UrlPath => $"/_security/role/{Role}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutRole(Role, f),
-			(client, f) => client.PutRoleAsync(Role, f),
-			(client, r) => client.PutRole(r),
-			(client, r) => client.PutRoleAsync(r)
+			(client, f) => client.Security.PutRole(Role, f),
+			(client, f) => client.Security.PutRoleAsync(Role, f),
+			(client, r) => client.Security.PutRole(r),
+			(client, r) => client.Security.PutRoleAsync(r)
 		);
 
 		protected override PutRoleDescriptor NewDescriptor() => new PutRoleDescriptor(Role);

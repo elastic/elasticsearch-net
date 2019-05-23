@@ -22,10 +22,10 @@ namespace Tests.Cluster.NodesInfo
 		protected override string UrlPath => "/_nodes";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesInfo(),
-			(client, f) => client.NodesInfoAsync(),
-			(client, r) => client.NodesInfo(r),
-			(client, r) => client.NodesInfoAsync(r)
+			(client, f) => client.Nodes.Info(),
+			(client, f) => client.Nodes.InfoAsync(),
+			(client, r) => client.Nodes.Info(r),
+			(client, r) => client.Nodes.InfoAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesInfoResponse response)
@@ -150,10 +150,10 @@ namespace Tests.Cluster.NodesInfo
 		protected override string UrlPath => "/_nodes/_local%2Cx";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesInfo(f),
-			(client, f) => client.NodesInfoAsync(f),
-			(client, r) => client.NodesInfo(r),
-			(client, r) => client.NodesInfoAsync(r)
+			(client, f) => client.Nodes.Info(f),
+			(client, f) => client.Nodes.InfoAsync(f),
+			(client, r) => client.Nodes.Info(r),
+			(client, r) => client.Nodes.InfoAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesInfoResponse response)

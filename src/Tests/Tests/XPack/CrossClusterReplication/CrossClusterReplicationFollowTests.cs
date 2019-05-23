@@ -67,10 +67,10 @@ namespace Tests.XPack.CrossClusterReplication
 							.Retention(r => r.Operations(1024))
 						)
 					),
-					(v, c, f) => c.CreateIndex(v, f),
-					(v, c, f) => c.CreateIndexAsync(v, f),
-					(v, c, r) => c.CreateIndex(r),
-					(v, c, r) => c.CreateIndexAsync(r)
+					(v, c, f) => c.Indices.CreateIndex(v, f),
+					(v, c, f) => c.Indices.CreateIndexAsync(v, f),
+					(v, c, r) => c.Indices.CreateIndex(r),
+					(v, c, r) => c.Indices.CreateIndexAsync(r)
 				)
 			},
 			{
@@ -107,10 +107,10 @@ namespace Tests.XPack.CrossClusterReplication
 								.LeaderIndex(v)
 								.WaitForActiveShards("1");
 						},
-						(v, c, f) => c.CreateFollowIndex(CopyIndex(v), f),
-						(v, c, f) => c.CreateFollowIndexAsync(CopyIndex(v), f),
-						(v, c, r) => c.CreateFollowIndex(r),
-						(v, c, r) => c.CreateFollowIndexAsync(r)
+						(v, c, f) => c.CrossClusterReplication.CreateFollowIndex(CopyIndex(v), f),
+						(v, c, f) => c.CrossClusterReplication.CreateFollowIndexAsync(CopyIndex(v), f),
+						(v, c, r) => c.CrossClusterReplication.CreateFollowIndex(r),
+						(v, c, r) => c.CrossClusterReplication.CreateFollowIndexAsync(r)
 					)
 			},
 			{
@@ -131,10 +131,10 @@ namespace Tests.XPack.CrossClusterReplication
 					u.Calls<PauseFollowIndexDescriptor, PauseFollowIndexRequest, IPauseFollowIndexRequest, PauseFollowIndexResponse>(
 						v => new PauseFollowIndexRequest(CopyIndex(v)),
 						(v, d) => d,
-						(v, c, f) => c.PauseFollowIndex(CopyIndex(v), f),
-						(v, c, f) => c.PauseFollowIndexAsync(CopyIndex(v), f),
-						(v, c, r) => c.PauseFollowIndex(r),
-						(v, c, r) => c.PauseFollowIndexAsync(r)
+						(v, c, f) => c.CrossClusterReplication.PauseFollowIndex(CopyIndex(v), f),
+						(v, c, f) => c.CrossClusterReplication.PauseFollowIndexAsync(CopyIndex(v), f),
+						(v, c, r) => c.CrossClusterReplication.PauseFollowIndex(r),
+						(v, c, r) => c.CrossClusterReplication.PauseFollowIndexAsync(r)
 					)
 			},
 			{
@@ -142,10 +142,10 @@ namespace Tests.XPack.CrossClusterReplication
 					u.Calls<ResumeFollowIndexDescriptor, ResumeFollowIndexRequest, IResumeFollowIndexRequest, ResumeFollowIndexResponse>(
 						v => new ResumeFollowIndexRequest(CopyIndex(v)),
 						(v, d) => d,
-						(v, c, f) => c.ResumeFollowIndex(CopyIndex(v), f),
-						(v, c, f) => c.ResumeFollowIndexAsync(CopyIndex(v), f),
-						(v, c, r) => c.ResumeFollowIndex(r),
-						(v, c, r) => c.ResumeFollowIndexAsync(r)
+						(v, c, f) => c.CrossClusterReplication.ResumeFollowIndex(CopyIndex(v), f),
+						(v, c, f) => c.CrossClusterReplication.ResumeFollowIndexAsync(CopyIndex(v), f),
+						(v, c, r) => c.CrossClusterReplication.ResumeFollowIndex(r),
+						(v, c, r) => c.CrossClusterReplication.ResumeFollowIndexAsync(r)
 					)
 			},
 			{
@@ -156,10 +156,10 @@ namespace Tests.XPack.CrossClusterReplication
 					u.Calls<FollowIndexStatsDescriptor, FollowIndexStatsRequest, IFollowIndexStatsRequest, FollowIndexStatsResponse>(
 						v => new FollowIndexStatsRequest(CopyIndex(v)),
 						(v, d) => d,
-						(v, c, f) => c.FollowIndexStats(CopyIndex(v), f),
-						(v, c, f) => c.FollowIndexStatsAsync(CopyIndex(v), f),
-						(v, c, r) => c.FollowIndexStats(r),
-						(v, c, r) => c.FollowIndexStatsAsync(r)
+						(v, c, f) => c.CrossClusterReplication.FollowIndexStats(CopyIndex(v), f),
+						(v, c, f) => c.CrossClusterReplication.FollowIndexStatsAsync(CopyIndex(v), f),
+						(v, c, r) => c.CrossClusterReplication.FollowIndexStats(r),
+						(v, c, r) => c.CrossClusterReplication.FollowIndexStatsAsync(r)
 					)
 			},
 			{
@@ -167,10 +167,10 @@ namespace Tests.XPack.CrossClusterReplication
 				(
 					v => new DeleteIndexRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.DeleteIndex(v, f),
-					(v, c, f) => c.DeleteIndexAsync(v, f),
-					(v, c, r) => c.DeleteIndex(r),
-					(v, c, r) => c.DeleteIndexAsync(r)
+					(v, c, f) => c.Indices.DeleteIndex(v, f),
+					(v, c, f) => c.Indices.DeleteIndexAsync(v, f),
+					(v, c, r) => c.Indices.DeleteIndex(r),
+					(v, c, r) => c.Indices.DeleteIndexAsync(r)
 				)
 			},
 			{
@@ -179,20 +179,20 @@ namespace Tests.XPack.CrossClusterReplication
 					u.Calls<FollowIndexStatsDescriptor, FollowIndexStatsRequest, IFollowIndexStatsRequest, FollowIndexStatsResponse>(
 						v => new FollowIndexStatsRequest(CopyIndex(v)),
 						(v, d) => d,
-						(v, c, f) => c.FollowIndexStats(CopyIndex(v), f),
-						(v, c, f) => c.FollowIndexStatsAsync(CopyIndex(v), f),
-						(v, c, r) => c.FollowIndexStats(r),
-						(v, c, r) => c.FollowIndexStatsAsync(r)
+						(v, c, f) => c.CrossClusterReplication.FollowIndexStats(CopyIndex(v), f),
+						(v, c, f) => c.CrossClusterReplication.FollowIndexStatsAsync(CopyIndex(v), f),
+						(v, c, r) => c.CrossClusterReplication.FollowIndexStats(r),
+						(v, c, r) => c.CrossClusterReplication.FollowIndexStatsAsync(r)
 					)
 			},
 			{
 				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, CcrStatsResponse>(
 						v => new CcrStatsRequest(),
 						(v, d) => d,
-						(v, c, f) => c.CcrStats(f),
-						(v, c, f) => c.CcrStatsAsync(f),
-						(v, c, r) => c.CcrStats(r),
-						(v, c, r) => c.CcrStatsAsync(r)
+						(v, c, f) => c.CrossClusterReplication.CcrStats(f),
+						(v, c, f) => c.CrossClusterReplication.CcrStatsAsync(f),
+						(v, c, r) => c.CrossClusterReplication.CcrStats(r),
+						(v, c, r) => c.CrossClusterReplication.CcrStatsAsync(r)
 					)
 			},
 			{
@@ -200,27 +200,27 @@ namespace Tests.XPack.CrossClusterReplication
 				(
 					v => new UnfollowIndexRequest(CopyIndex(v)),
 					(v, d) => d,
-					(v, c, f) => c.UnfollowIndex(CopyIndex(v), f),
-					(v, c, f) => c.UnfollowIndexAsync(CopyIndex(v), f),
-					(v, c, r) => c.UnfollowIndex(r),
-					(v, c, r) => c.UnfollowIndexAsync(r)
+					(v, c, f) => c.CrossClusterReplication.UnfollowIndex(CopyIndex(v), f),
+					(v, c, f) => c.CrossClusterReplication.UnfollowIndexAsync(CopyIndex(v), f),
+					(v, c, r) => c.CrossClusterReplication.UnfollowIndex(r),
+					(v, c, r) => c.CrossClusterReplication.UnfollowIndexAsync(r)
 				)
 			},
 			{
-				PauseForCloseStep, u => u.Call(async (v, c) => await c.PauseFollowIndexAsync(CopyIndex(v)))
+				PauseForCloseStep, u => u.Call(async (v, c) => await c.CrossClusterReplication.PauseFollowIndexAsync(CopyIndex(v)))
 			},
 			{
-				CloseIndexStep, u => u.Call(async (v, c) => await c.CloseIndexAsync(CopyIndex(v)))
+				CloseIndexStep, u => u.Call(async (v, c) => await c.CrossClusterReplication.CloseIndexAsync(CopyIndex(v)))
 			},
 			{
 				UnfollowAgainStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, UnfollowIndexResponse>
 				(
 					v => new UnfollowIndexRequest(CopyIndex(v)),
 					(v, d) => d,
-					(v, c, f) => c.UnfollowIndex(CopyIndex(v), f),
-					(v, c, f) => c.UnfollowIndexAsync(CopyIndex(v), f),
-					(v, c, r) => c.UnfollowIndex(r),
-					(v, c, r) => c.UnfollowIndexAsync(r)
+					(v, c, f) => c.CrossClusterReplication.UnfollowIndex(CopyIndex(v), f),
+					(v, c, f) => c.CrossClusterReplication.UnfollowIndexAsync(CopyIndex(v), f),
+					(v, c, r) => c.CrossClusterReplication.UnfollowIndex(r),
+					(v, c, r) => c.CrossClusterReplication.UnfollowIndexAsync(r)
 				)
 			},
 		})

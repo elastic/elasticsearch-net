@@ -27,9 +27,9 @@ namespace Nest
 			where T : class
 		{
 			var result = client.MultiGet(s => s
+				.Index(index)
 				.RequestConfiguration(r => r.ThrowExceptions())
 				.GetMany<T>(ids)
-				.Index(index)
 			);
 			return result.GetMany<T>(ids);
 		}
@@ -66,9 +66,9 @@ namespace Nest
 			where T : class
 		{
 			var response = await client.MultiGetAsync(s => s
+						.Index(index)
 						.RequestConfiguration(r => r.ThrowExceptions())
-						.GetMany<T>(ids)
-						.Index(index),
+						.GetMany<T>(ids),
 					cancellationToken
 				)
 				.ConfigureAwait(false);

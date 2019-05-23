@@ -39,10 +39,10 @@ namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/{CallIsolatedValue}-snapshot/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.UpdateModelSnapshot(CallIsolatedValue, CallIsolatedValue + "-snapshot", f),
-			(client, f) => client.UpdateModelSnapshotAsync(CallIsolatedValue, CallIsolatedValue + "-snapshot", f),
-			(client, r) => client.UpdateModelSnapshot(r),
-			(client, r) => client.UpdateModelSnapshotAsync(r)
+			(client, f) => client.MachineLearning.UpdateModelSnapshot(CallIsolatedValue, CallIsolatedValue + "-snapshot", f),
+			(client, f) => client.MachineLearning.UpdateModelSnapshotAsync(CallIsolatedValue, CallIsolatedValue + "-snapshot", f),
+			(client, r) => client.MachineLearning.UpdateModelSnapshot(r),
+			(client, r) => client.MachineLearning.UpdateModelSnapshotAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

@@ -12,7 +12,7 @@ namespace Nest
 		/// <param name="index">The index name we want to know aliases of</param>
 		public static IReadOnlyDictionary<string, AliasDefinition> GetAliasesPointingToIndex(this IElasticClient client, IndexName index)
 		{
-			var response = client.GetAlias(a => a.Index(index).RequestConfiguration(r => r.ThrowExceptions()));
+			var response = client.Indices.GetAlias(index, a => a.RequestConfiguration(r => r.ThrowExceptions()));
 			return AliasesPointingToIndex(index, response);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 			IndexName index
 		)
 		{
-			var response = await client.GetAliasAsync(a => a.Index(index).RequestConfiguration(r => r.ThrowExceptions())).ConfigureAwait(false);
+			var response = await client.Indices.GetAliasAsync(index, a => a.RequestConfiguration(r => r.ThrowExceptions())).ConfigureAwait(false);
 			return AliasesPointingToIndex(index, response);
 		}
 

@@ -62,10 +62,10 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetOverallBuckets(CallIsolatedValue, f),
-			(client, f) => client.GetOverallBucketsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetOverallBuckets(r),
-			(client, r) => client.GetOverallBucketsAsync(r)
+			(client, f) => client.MachineLearning.GetOverallBuckets(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetOverallBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetOverallBuckets(r),
+			(client, r) => client.MachineLearning.GetOverallBucketsAsync(r)
 		);
 
 		protected override GetOverallBucketsDescriptor NewDescriptor() => new GetOverallBucketsDescriptor(CallIsolatedValue);

@@ -24,10 +24,10 @@ namespace Tests.Indices.AliasManagement.PutAlias
 		protected override string UrlPath => $"/{CallIsolatedValue}/_alias/{CallIsolatedValue + "-alias"}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutAlias(CallIsolatedValue, CallIsolatedValue + "-alias"),
-			(client, f) => client.PutAliasAsync(CallIsolatedValue, CallIsolatedValue + "-alias"),
-			(client, r) => client.PutAlias(r),
-			(client, r) => client.PutAliasAsync(r)
+			(client, f) => client.Indices.PutAlias(CallIsolatedValue, CallIsolatedValue + "-alias"),
+			(client, f) => client.Indices.PutAliasAsync(CallIsolatedValue, CallIsolatedValue + "-alias"),
+			(client, r) => client.Indices.PutAlias(r),
+			(client, r) => client.Indices.PutAliasAsync(r)
 		);
 	}
 
@@ -54,10 +54,10 @@ namespace Tests.Indices.AliasManagement.PutAlias
 		protected override string UrlPath => $"/{CallIsolatedValue}/_alias/{CallIsolatedValue + "-alias"}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutAlias(CallIsolatedValue, CallIsolatedValue + "-alias"),
-			(client, f) => client.PutAliasAsync(CallIsolatedValue, CallIsolatedValue + "-alias"),
-			(client, r) => client.PutAlias(r),
-			(client, r) => client.PutAliasAsync(r)
+			(client, f) => client.Indices.PutAlias(CallIsolatedValue, CallIsolatedValue + "-alias"),
+			(client, f) => client.Indices.PutAliasAsync(CallIsolatedValue, CallIsolatedValue + "-alias"),
+			(client, r) => client.Indices.PutAlias(r),
+			(client, r) => client.Indices.PutAliasAsync(r)
 		);
 
 		protected override PutAliasDescriptor NewDescriptor() => new PutAliasDescriptor(CallIsolatedValue, CallIsolatedValue + "-alias");

@@ -84,10 +84,10 @@ namespace Tests.XPack.MachineLearning.PutJob
 		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutJob(CallIsolatedValue, f),
-			(client, f) => client.PutJobAsync(CallIsolatedValue, f),
-			(client, r) => client.PutJob(r),
-			(client, r) => client.PutJobAsync(r)
+			(client, f) => client.MachineLearning.PutJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PutJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PutJob(r),
+			(client, r) => client.MachineLearning.PutJobAsync(r)
 		);
 
 		protected override PutJobDescriptor<Metric> NewDescriptor() => new PutJobDescriptor<Metric>(CallIsolatedValue);
@@ -297,10 +297,10 @@ namespace Tests.XPack.MachineLearning.PutJob
 		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutJob(CallIsolatedValue, f),
-			(client, f) => client.PutJobAsync(CallIsolatedValue, f),
-			(client, r) => client.PutJob(r),
-			(client, r) => client.PutJobAsync(r)
+			(client, f) => client.MachineLearning.PutJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PutJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PutJob(r),
+			(client, r) => client.MachineLearning.PutJobAsync(r)
 		);
 
 		protected override PutJobDescriptor<Metric> NewDescriptor() => new PutJobDescriptor<Metric>(CallIsolatedValue);

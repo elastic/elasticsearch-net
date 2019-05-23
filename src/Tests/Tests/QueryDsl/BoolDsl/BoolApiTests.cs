@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.BoolDsl
 		protected override void SeedCluster()
 		{
 			var client = Client;
-			var index = client.CreateIndex(Index<A>(), i => i
+			var index = client.Indices.CreateIndex(Index<A>(), i => i
 				.Map<A>(m => m
 					.AutoMap()
 					.Properties(props => props
@@ -44,7 +44,7 @@ namespace Tests.QueryDsl.BoolDsl
 			var bulkResponse = client.Bulk(b => b.IndexMany(A.Documents));
 			if (!bulkResponse.IsValid) throw new Exception("Could not bootstrap bool cluster, bulk was invalid");
 
-			client.Refresh(Indices<A>());
+			client.Indices.Refresh(Indices<A>());
 		}
 
 		public class A

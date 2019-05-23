@@ -8,9 +8,9 @@ namespace Tests.Ingest.Processor
 	public class GrokProcessorPatternsUrlTests
 	{
 		[U] public async Task Urls() => await GET($"/_ingest/processor/grok")
-			.Fluent(c => c.GrokProcessorPatterns())
-			.Request(c => c.GrokProcessorPatterns())
-			.FluentAsync(c => c.GrokProcessorPatternsAsync())
-			.RequestAsync(c => c.GrokProcessorPatternsAsync());
+			.Fluent(c => c.Ingest.GrokProcessorPatterns())
+			.Request(c => c.Ingest.GrokProcessorPatterns())
+			.FluentAsync(c => c.Ingest.GrokProcessorPatternsAsync())
+			.RequestAsync(c => c.Ingest.GrokProcessorPatternsAsync());
 	}
 }

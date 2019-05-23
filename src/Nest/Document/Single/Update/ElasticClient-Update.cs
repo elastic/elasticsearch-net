@@ -58,7 +58,7 @@ namespace Nest
 		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest request)
 			where TDocument : class
 			where TPartialDocument : class =>
-			DoRequest<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
+			DoRequest<IUpdateRequest, UpdateResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(

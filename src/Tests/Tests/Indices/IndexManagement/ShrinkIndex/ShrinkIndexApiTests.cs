@@ -45,22 +45,22 @@ namespace Tests.Indices.IndexManagement.ShrinkIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}/_shrink/{CallIsolatedValue}-target";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ShrinkIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			(client, f) => client.ShrinkIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			(client, r) => client.ShrinkIndex(r),
-			(client, r) => client.ShrinkIndexAsync(r)
+			(client, f) => client.Indices.ShrinkIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, f) => client.Indices.ShrinkIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, r) => client.Indices.ShrinkIndex(r),
+			(client, r) => client.Indices.ShrinkIndexAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var create = client.CreateIndex(CallIsolatedValue, c => c
+			var create = client.Indices.CreateIndex(CallIsolatedValue, c => c
 				.Settings(s => s
 					.NumberOfShards(8)
 					.NumberOfReplicas(0)
 				)
 			);
 			create.ShouldBeValid();
-			var update = client.UpdateIndexSettings(CallIsolatedValue, u => u
+			var update = client.Indices.UpdateIndexSettings(CallIsolatedValue, u => u
 				.IndexSettings(s => s
 					.BlocksWrite()
 				)

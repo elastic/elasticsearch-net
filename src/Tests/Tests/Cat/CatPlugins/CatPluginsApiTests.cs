@@ -18,10 +18,10 @@ namespace Tests.Cat.CatPlugins
 		protected override string UrlPath => "/_cat/plugins";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatPlugins(),
-			(client, f) => client.CatPluginsAsync(),
-			(client, r) => client.CatPlugins(r),
-			(client, r) => client.CatPluginsAsync(r)
+			(client, f) => client.Cat.Plugins(),
+			(client, f) => client.Cat.PluginsAsync(),
+			(client, r) => client.Cat.Plugins(r),
+			(client, r) => client.Cat.PluginsAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatPluginsRecord> response) => response.Records.Should()

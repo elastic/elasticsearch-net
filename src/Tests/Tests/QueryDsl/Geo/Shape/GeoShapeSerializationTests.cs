@@ -110,10 +110,10 @@ namespace Tests.QueryDsl.Geo
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			if (client.IndexExists(Index).Exists)
+			if (client.Indices.IndexExists(Index).Exists)
 				return;
 
-			var createIndexResponse = client.CreateIndex(Index, c => c
+			var createIndexResponse = client.Indices.CreateIndex(Index, c => c
 				.Settings(s => s
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
@@ -159,10 +159,10 @@ namespace Tests.QueryDsl.Geo
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			if (client.IndexExists(Index).Exists)
+			if (client.Indices.IndexExists(Index).Exists)
 				return;
 
-			var createIndexResponse = client.CreateIndex(Index, c => c
+			var createIndexResponse = client.Indices.CreateIndex(Index, c => c
 				.Settings(s => s
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)

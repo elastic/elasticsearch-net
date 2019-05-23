@@ -21,7 +21,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		public void SeedNode()
 		{
-			_client.PutIndexTemplate("logs-template", p => p
+			_client.Indices.PutIndexTemplate("logs-template", p => p
 				.Create()
 				.Map<Log>(m => m.AutoMap())
 				.IndexPatterns(IndicesWildCard)

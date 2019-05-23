@@ -35,15 +35,15 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 		private static string AutoPattern(string v) => $"auto-pattern-{v}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAutoFollowPattern(f),
-			(client, f) => client.GetAutoFollowPatternAsync(f),
-			(client, r) => client.GetAutoFollowPattern(r),
-			(client, r) => client.GetAutoFollowPatternAsync(r)
+			(client, f) => client.CrossClusterReplication.GetAutoFollowPattern(f),
+			(client, f) => client.CrossClusterReplication.GetAutoFollowPatternAsync(f),
+			(client, r) => client.CrossClusterReplication.GetAutoFollowPattern(r),
+			(client, r) => client.CrossClusterReplication.GetAutoFollowPatternAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var createAutoFollowPatternResponse = client.CreateAutoFollowPattern(AutoPattern("getauto-1"), c => c
+			var createAutoFollowPatternResponse = client.CrossClusterReplication.CreateAutoFollowPattern(AutoPattern("getauto-1"), c => c
 				.RemoteCluster(DefaultSeeder.RemoteClusterName)
 				.LeaderIndexPatterns($"{LeaderPrefix}*")
 				.FollowIndexPattern($"{FollowerPrefix}{{{{leader_index}}}}")
@@ -52,7 +52,7 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 
 			createAutoFollowPatternResponse.ShouldBeValid();
 
-			createAutoFollowPatternResponse = client.CreateAutoFollowPattern(AutoPattern("getauto-2"), c => c
+			createAutoFollowPatternResponse = client.CrossClusterReplication.CreateAutoFollowPattern(AutoPattern("getauto-2"), c => c
 				.RemoteCluster(DefaultSeeder.RemoteClusterName)
 				.LeaderIndexPatterns($"{LeaderPrefix}*")
 				.FollowIndexPattern($"{FollowerPrefix}{{{{leader_index}}}}")
@@ -66,9 +66,9 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 		// which will hang integration tests
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
-			var deleteAutoFollowPattern = client.DeleteAutoFollowPattern(AutoPattern("getauto-1"));
+			var deleteAutoFollowPattern = client.CrossClusterReplication.DeleteAutoFollowPattern(AutoPattern("getauto-1"));
 			deleteAutoFollowPattern.ShouldBeValid();
-			deleteAutoFollowPattern = client.DeleteAutoFollowPattern(AutoPattern("getauto-2"));
+			deleteAutoFollowPattern = client.CrossClusterReplication.DeleteAutoFollowPattern(AutoPattern("getauto-2"));
 			deleteAutoFollowPattern.ShouldBeValid();
 		}
 
