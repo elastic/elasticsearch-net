@@ -36,13 +36,28 @@ namespace Tests.XPack.Info
 					(v, c, r) => c.XPackUsage(r),
 					(v, c, r) => c.XPackUsageAsync(r)
 				)
-			},
+			}
 		}) { }
 
 		[I] public async Task XPackInfoResponse() => await Assert<XPackInfoResponse>(XPackInfoStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
+
+			r.Build.Should().NotBeNull();
+			r.Features.Should().NotBeNull();
+			r.Features.Ccr.Should().NotBeNull();
+			r.Features.Graph.Should().NotBeNull();
+			r.Features.Ilm.Should().NotBeNull();
+			r.Features.Logstash.Should().NotBeNull();
+			r.Features.MachineLearning.Should().NotBeNull();
+			r.Features.MachineLearning.NativeCodeInformation.Should().NotBeNull();
+			r.Features.Monitoring.Should().NotBeNull();
+			r.Features.Rollup.Should().NotBeNull();
+			r.Features.Security.Should().NotBeNull();
+			r.Features.Sql.Should().NotBeNull();
+			r.Features.Watcher.Should().NotBeNull();
+			r.License.Should().NotBeNull();
 		});
 
 		[I] public async Task XPackUsageResponse() => await Assert<XPackUsageResponse>(XPackUsageStep, (v, r) =>
@@ -54,11 +69,22 @@ namespace Tests.XPack.Info
 			r.Graph.Should().NotBeNull();
 			r.Logstash.Should().NotBeNull();
 			r.MachineLearning.Should().NotBeNull();
+			r.MachineLearning.Datafeeds.Should().NotBeNull();
+			r.MachineLearning.Jobs.Should().NotBeNull();
 			r.Monitoring.Should().NotBeNull();
+			r.Monitoring.EnabledExporters.Should().NotBeNull();
 			r.Rollup.Should().NotBeNull();
 			r.Security.Should().NotBeNull();
+			r.Security.Roles.Should().NotBeNull();
+			r.Security.Realms.Should().NotBeNull();
+			r.Security.RoleMapping.Should().NotBeNull();
 			r.Sql.Should().NotBeNull();
+			r.Sql.Features.Should().NotBeNull();
+			r.Sql.Queries.Should().NotBeNull();
 			r.Alerting.Should().NotBeNull();
+			r.Alerting.Count.Should().NotBeNull();
+			r.Alerting.Execution.Should().NotBeNull();
+			r.Alerting.Watch.Should().NotBeNull();
 		});
 	}
 }

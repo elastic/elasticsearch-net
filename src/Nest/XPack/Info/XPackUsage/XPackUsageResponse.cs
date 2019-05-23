@@ -203,10 +203,22 @@ namespace Nest
 		[JsonProperty("execution")]
 		public AlertingExecution Execution { get; internal set; }
 
+		[JsonProperty("watch")]
+		public AlertingInput Watch { get; internal set; }
+
 		public class AlertingExecution
 		{
 			[JsonProperty("actions")]
 			public IReadOnlyDictionary<string, ExecutionAction> Actions { get; internal set; } = EmptyReadOnly<string, ExecutionAction>.Dictionary;
+		}
+
+		public class AlertingInput
+		{
+			[JsonProperty("input")]
+			public IReadOnlyDictionary<string, AlertingCount> Input { get; internal set; } = EmptyReadOnly<string, AlertingCount>.Dictionary;
+
+			[JsonProperty("trigger")]
+			public IReadOnlyDictionary<string, AlertingCount> Trigger { get; internal set; } = EmptyReadOnly<string, AlertingCount>.Dictionary;
 		}
 
 		public class ExecutionAction
