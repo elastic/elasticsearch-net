@@ -92,6 +92,16 @@ namespace Nest
 	}
 
 	[JsonObject]
+	public class ClusterOperatingSystemPrettyNane
+	{
+		[JsonProperty("pretty_name")]
+		public string PrettyName { get; internal set; }
+
+		[JsonProperty("count")]
+		public int Count { get; internal set; }
+	}
+
+	[JsonObject]
 	public class NodeInfoOSCPU
 	{
 		[JsonProperty("cache_size")]

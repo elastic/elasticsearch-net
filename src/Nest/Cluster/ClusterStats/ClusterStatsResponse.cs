@@ -7,6 +7,9 @@ namespace Nest
 		[JsonProperty("cluster_name")]
 		string ClusterName { get; }
 
+		[JsonProperty("cluster_uuid")]
+		string ClusterUUID { get; }
+
 		[JsonProperty("indices")]
 		ClusterIndicesStats Indices { get; }
 
@@ -23,6 +26,8 @@ namespace Nest
 	public class ClusterStatsResponse : NodesResponseBase, IClusterStatsResponse
 	{
 		public string ClusterName { get; internal set; }
+
+		public string ClusterUUID { get; internal set; }
 
 		public ClusterIndicesStats Indices { get; internal set; }
 

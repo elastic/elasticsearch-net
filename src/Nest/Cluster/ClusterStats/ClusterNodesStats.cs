@@ -15,6 +15,9 @@ namespace Nest
 		[JsonProperty("jvm")]
 		public ClusterJvm Jvm { get; internal set; }
 
+		[JsonProperty("network_types")]
+		public ClusterNetworkTypes NetworkTypes { get; internal set; }
+
 		[JsonProperty("os")]
 		public ClusterOperatingSystemStats OperatingSystem { get; internal set; }
 
@@ -26,6 +29,16 @@ namespace Nest
 
 		[JsonProperty("versions")]
 		public IReadOnlyCollection<string> Versions { get; internal set; }
+	}
+
+	[JsonObject]
+	public class ClusterNetworkTypes
+	{
+		[JsonProperty("http_types")]
+		public IReadOnlyDictionary<string, int> HttpTypes { get; internal set; }
+
+		[JsonProperty("transport_types")]
+		public IReadOnlyDictionary<string, int> TransportTypes { get; internal set; }
 	}
 
 	[JsonObject]
@@ -143,8 +156,33 @@ namespace Nest
 		[JsonProperty("available_processors")]
 		public int AvailableProcessors { get; internal set; }
 
+		[JsonProperty("mem")]
+		public OperatingSystemMemoryInfo Memory { get; internal set; }
+
 		[JsonProperty("names")]
 		public IReadOnlyCollection<ClusterOperatingSystemName> Names { get; internal set; }
+
+		[JsonProperty("pretty_names")]
+		public IReadOnlyCollection<ClusterOperatingSystemPrettyNane> PrettyNames { get; internal set; }
+	}
+
+	[JsonObject]
+	public class OperatingSystemMemoryInfo
+	{
+		[JsonProperty("free_in_bytes")]
+		public long FreeBytes { get; internal set; }
+
+		[JsonProperty("free_percent")]
+		public int FreePercent { get; internal set; }
+
+		[JsonProperty("total_in_bytes")]
+		public long TotalBytes { get; internal set; }
+
+		[JsonProperty("used_in_bytes")]
+		public long UsedBytes { get; internal set; }
+
+		[JsonProperty("used_percent")]
+		public int UsedPercent { get; internal set; }
 	}
 
 	[JsonObject]
