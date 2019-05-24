@@ -71,9 +71,9 @@ namespace Tests.XPack.Security.Privileges
 			{
 				GetPrivilegesStep, u => u.Calls<GetPrivilegesDescriptor, GetPrivilegesRequest, IGetPrivilegesRequest, GetPrivilegesResponse>(
 					v => new GetPrivilegesRequest($"app-{v}", $"p1-{v}"),
-					(v, d) => d.Application($"app-{v}").Name($"p1-{v}"),
-					(v, c, f) => c.Security.GetPrivileges(f),
-					(v, c, f) => c.Security.GetPrivilegesAsync(f),
+					(v, d) => d.Application($"app-{v}"),
+					(v, c, f) => c.Security.GetPrivileges($"p1-{v}", f),
+					(v, c, f) => c.Security.GetPrivilegesAsync($"p1-{v}", f),
 					(v, c, r) => c.Security.GetPrivileges(r),
 					(v, c, r) => c.Security.GetPrivilegesAsync(r)
 				)

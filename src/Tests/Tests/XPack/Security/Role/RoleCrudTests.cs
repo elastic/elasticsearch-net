@@ -66,15 +66,15 @@ namespace Tests.XPack.Security.Role
 		protected override LazyResponses Read() => Calls<GetRoleDescriptor, GetRoleRequest, IGetRoleRequest, GetRoleResponse>(
 			ReadInitializer,
 			ReadFluent,
-			(s, c, f) => c.Security.GetRole(f),
-			(s, c, f) => c.Security.GetRoleAsync(f),
+			(s, c, f) => c.Security.GetRole(CreateRoleName(s), f),
+			(s, c, f) => c.Security.GetRoleAsync(CreateRoleName(s), f),
 			(s, c, r) => c.Security.GetRole(r),
 			(s, c, r) => c.Security.GetRoleAsync(r)
 		);
 
 		protected GetRoleRequest ReadInitializer(string role) => new GetRoleRequest(CreateRoleName(role));
 
-		protected IGetRoleRequest ReadFluent(string role, GetRoleDescriptor d) => d.Name(CreateRoleName(role));
+		protected IGetRoleRequest ReadFluent(string role, GetRoleDescriptor d) => d;
 
 		protected override LazyResponses Update() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, PutRoleResponse>(
 			UpdateInitializer,

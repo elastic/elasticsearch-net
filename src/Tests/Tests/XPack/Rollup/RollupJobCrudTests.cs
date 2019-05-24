@@ -116,8 +116,8 @@ namespace Tests.XPack.Rollup
 				"rollup_search", () => Calls<RollupSearchDescriptor<Log>, RollupSearchRequest, IRollupSearchRequest, RollupSearchResponse<Log>>(
 					RollupSearchInitializer,
 					RollupSearchFluent,
-					(s, c, f) => c.Rollup.Search(CreateRollupSearchIndices(s), f),
-					(s, c, f) => c.Rollup.SearchAsync(CreateRollupSearchIndices(s), f),
+					(s, c, f) => c.Rollup.Search(f),
+					(s, c, f) => c.Rollup.SearchAsync(f),
 					(s, c, r) => c.Rollup.Search<Log>(r),
 					(s, c, r) => c.Rollup.SearchAsync<Log>(r)
 				)
@@ -226,6 +226,7 @@ namespace Tests.XPack.Rollup
 		};
 
 		protected IRollupSearchRequest RollupSearchFluent(string index, RollupSearchDescriptor<Log> d) => d
+			.Index(CreateRollupSearchIndices(index))
 			.Size(0)
 			.Query(q => q.MatchAll())
 			.Aggregations(aggs =>

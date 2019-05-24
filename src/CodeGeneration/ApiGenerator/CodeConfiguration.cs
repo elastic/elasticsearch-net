@@ -65,6 +65,12 @@ namespace ApiGenerator
 			.OrderBy(v=>v.Item1)
 			.ToList();
 
+		public static HashSet<string> GenericOnlyInterfaces = new HashSet<string>(AllKnownRequestInterfaces
+			.GroupBy(v => v.Item1)
+			.Where(g => g.All(v => !string.IsNullOrEmpty(v.Item2)))
+			.Select(g => g.Key)
+			.ToList());
+
 		public static readonly Dictionary<string, string> RequestInterfaceGenericsLookup =
 			AllKnownRequestInterfaces
 			.GroupBy(v=>v.Item1)

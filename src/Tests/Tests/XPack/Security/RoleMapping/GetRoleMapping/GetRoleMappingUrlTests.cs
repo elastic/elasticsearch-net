@@ -19,9 +19,9 @@ namespace Tests.XPack.Security.Role.GetRoleMapping
 
 			var roles = "can_write,can_read_metadata";
 			await GET($"/_security/role_mapping/{EscapeUriString(roles)}")
-					.Fluent(c => c.Security.GetRoleMapping(f => f.Name(roles)))
+					.Fluent(c => c.Security.GetRoleMapping(roles))
 					.Request(c => c.Security.GetRoleMapping(new GetRoleMappingRequest(roles)))
-					.FluentAsync(c => c.Security.GetRoleMappingAsync(f => f.Name(roles)))
+					.FluentAsync(c => c.Security.GetRoleMappingAsync(roles))
 					.RequestAsync(c => c.Security.GetRoleMappingAsync(new GetRoleMappingRequest(roles)))
 				;
 		}

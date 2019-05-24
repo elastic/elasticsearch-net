@@ -28,9 +28,9 @@ namespace Nest.Specification.MigrationApi
 		///<inheritdoc cref = "IDeprecationInfoRequest"/>
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
-		public MigrationAssistanceResponse Assistance(Indices index, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) => throw new NotImplementedException();
+		public MigrationAssistanceResponse Assistance(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
-		public Task<MigrationAssistanceResponse> AssistanceAsync(Indices index, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MigrationAssistanceResponse> AssistanceAsync(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
 		public MigrationAssistanceResponse Assistance(IMigrationAssistanceRequest request) => DoRequest<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>

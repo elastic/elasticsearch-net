@@ -29,8 +29,6 @@ namespace Tests.ScratchPad
 			{
 				Policy = new Policy()
 			});
-			
-			highLevel.IndexLifecycleManagement.PutLifecycle("policy", d => d.Policy(p => p.Phases()));
 
 		}
 

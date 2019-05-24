@@ -25,7 +25,7 @@ namespace Nest
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest request)
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class;
 
@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
-			IUpdateRequest request,
+			IUpdateRequest<TDocument, TPartialDocument> request,
 			CancellationToken ct = default
 		)
 			where TDocument : class
@@ -55,7 +55,7 @@ namespace Nest
 			Update<TDocument, TDocument>(documentPath, selector);
 
 		/// <inheritdoc />
-		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest request)
+		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class =>
 			DoRequest<IUpdateRequest, UpdateResponse<TDocument>>(request, request.RequestParameters);
@@ -71,7 +71,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
-			IUpdateRequest request,
+			IUpdateRequest<TDocument, TPartialDocument> request,
 			CancellationToken ct = default
 		)
 			where TDocument : class

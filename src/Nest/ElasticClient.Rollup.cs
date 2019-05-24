@@ -62,10 +62,10 @@ namespace Nest.Specification.RollupApi
 		///<inheritdoc cref = "ICreateRollupJobRequest"/>
 		public Task<CreateRollupJobResponse> CreateRollupJobAsync(ICreateRollupJobRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateRollupJobRequest, CreateRollupJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRollupSearchRequest"/>
-		public RollupSearchResponse<TDocument> Search<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector)
+		public RollupSearchResponse<TDocument> Search<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector = null)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IRollupSearchRequest"/>
-		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector, CancellationToken ct = default)
+		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IRollupSearchRequest"/>
 		public RollupSearchResponse<TDocument> Search<TDocument>(IRollupSearchRequest request)

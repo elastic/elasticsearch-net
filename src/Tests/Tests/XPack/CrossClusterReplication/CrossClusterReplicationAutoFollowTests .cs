@@ -52,9 +52,9 @@ namespace Tests.XPack.CrossClusterReplication
 				GetAutoFollowStep, u =>
 					u.Calls<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequest, IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(
 						v => new GetAutoFollowPatternRequest(AutoPattern(v)),
-						(v, d) => d.Name(AutoPattern(v)),
-						(v, c, f) => c.CrossClusterReplication.GetAutoFollowPattern(f),
-						(v, c, f) => c.CrossClusterReplication.GetAutoFollowPatternAsync(f),
+						(v, d) => d,
+						(v, c, f) => c.CrossClusterReplication.GetAutoFollowPattern(AutoPattern(v), f),
+						(v, c, f) => c.CrossClusterReplication.GetAutoFollowPatternAsync(AutoPattern(v), f),
 						(v, c, r) => c.CrossClusterReplication.GetAutoFollowPattern(r),
 						(v, c, r) => c.CrossClusterReplication.GetAutoFollowPatternAsync(r)
 					)

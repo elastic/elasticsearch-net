@@ -20,10 +20,10 @@ namespace Nest.Specification.GraphApi
 		}
 
 		///<inheritdoc cref = "IGraphExploreRequest"/>
-		public GraphExploreResponse Explore<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector)
+		public GraphExploreResponse Explore<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector = null)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IGraphExploreRequest"/>
-		public Task<GraphExploreResponse> ExploreAsync<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector, CancellationToken ct = default)
+		public Task<GraphExploreResponse> ExploreAsync<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IGraphExploreRequest"/>
 		public GraphExploreResponse Explore(IGraphExploreRequest request) => DoRequest<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters);

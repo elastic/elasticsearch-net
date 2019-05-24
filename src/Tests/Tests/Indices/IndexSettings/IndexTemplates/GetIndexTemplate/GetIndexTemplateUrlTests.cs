@@ -12,9 +12,9 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		{
 			var name = "temp";
 			await GET($"/_template/{name}")
-					.Fluent(c => c.Indices.GetIndexTemplate(p => p.Name(name)))
+					.Fluent(c => c.Indices.GetIndexTemplate(name))
 					.Request(c => c.Indices.GetIndexTemplate(new GetIndexTemplateRequest(name)))
-					.FluentAsync(c => c.Indices.GetIndexTemplateAsync(p => p.Name(name)))
+					.FluentAsync(c => c.Indices.GetIndexTemplateAsync(name))
 					.RequestAsync(c => c.Indices.GetIndexTemplateAsync(new GetIndexTemplateRequest(name)))
 				;
 

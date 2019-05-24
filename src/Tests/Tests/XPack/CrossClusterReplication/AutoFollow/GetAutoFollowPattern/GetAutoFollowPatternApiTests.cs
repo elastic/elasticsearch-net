@@ -34,9 +34,10 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 
 		private static string AutoPattern(string v) => $"auto-pattern-{v}";
 
+		//TODO 7.0 i think this should take Names..
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CrossClusterReplication.GetAutoFollowPattern(f),
-			(client, f) => client.CrossClusterReplication.GetAutoFollowPatternAsync(f),
+			(client, f) => client.CrossClusterReplication.GetAutoFollowPattern(null, f),
+			(client, f) => client.CrossClusterReplication.GetAutoFollowPatternAsync(null, f),
 			(client, r) => client.CrossClusterReplication.GetAutoFollowPattern(r),
 			(client, r) => client.CrossClusterReplication.GetAutoFollowPatternAsync(r)
 		);

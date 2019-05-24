@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using ApiGenerator.Overrides.Descriptors;
 using Newtonsoft.Json;
 
@@ -90,7 +91,8 @@ namespace ApiGenerator.Domain
 		{
 			CsharpNames = CsharpNames,
 			HasBody = Body != null,
-			DescriptorArguments = CreateDescriptorArgs()
+			DescriptorArguments = CreateDescriptorArgs(),
+			SelectorIsOptional = Body == null || !Body.Required || HttpMethods.Contains("GET")
 		};
 		
 		public List<UrlPart> CreateDescriptorArgs()

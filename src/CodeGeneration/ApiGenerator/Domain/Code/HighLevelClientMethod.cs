@@ -8,6 +8,7 @@ namespace ApiGenerator.Domain
 	{
 		public CsharpNames CsharpNames { get; set; }
 		public bool HasBody { get; set; }
+		public bool SelectorIsOptional { get; set; }
 
 		public string MethodName => CsharpNames.MethodName;
 		public List<UrlPart> DescriptorArguments { get; set; }

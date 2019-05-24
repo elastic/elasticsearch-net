@@ -54,8 +54,8 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, GetIndexTemplateResponse>(
 				name => new GetIndexTemplateRequest(name),
 				(name, d) => d.Name(name),
-				(s, c, f) => c.Indices.GetIndexTemplate(f),
-				(s, c, f) => c.Indices.GetIndexTemplateAsync(f),
+				(s, c, f) => c.Indices.GetIndexTemplate(s, f),
+				(s, c, f) => c.Indices.GetIndexTemplateAsync(s, f),
 				(s, c, r) => c.Indices.GetIndexTemplate(r),
 				(s, c, r) => c.Indices.GetIndexTemplateAsync(r)
 			);

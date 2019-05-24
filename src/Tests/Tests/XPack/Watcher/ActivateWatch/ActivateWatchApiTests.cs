@@ -31,7 +31,7 @@ namespace Tests.XPack.Watcher.ActivateWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.PutWatch(callUniqueValue.Value, p => p
 					.Active(false)
 					.Input(i => i
 						.Http(h => h

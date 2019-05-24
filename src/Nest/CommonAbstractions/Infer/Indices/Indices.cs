@@ -16,8 +16,9 @@ namespace Nest
 
 		internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
 
+		//TODO only use Infer.AllIndices
 		public static Indices All { get; } = new Indices(new AllIndicesMarker());
-		public static Indices AllIndices { get; } = new Indices(new AllIndicesMarker());
+		public static Indices AllIndices { get; } = All;
 
 		private string DebugDisplay => Match(
 			all => "_all",

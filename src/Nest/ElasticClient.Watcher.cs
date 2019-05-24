@@ -52,9 +52,9 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IDeleteWatchRequest"/>
 		public Task<DeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteWatchRequest, DeleteWatchResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
-		public ExecuteWatchResponse ExecuteWatch(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector) => throw new NotImplementedException();
+		public ExecuteWatchResponse ExecuteWatch(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
-		public Task<ExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
 		public ExecuteWatchResponse ExecuteWatch(IExecuteWatchRequest request) => DoRequest<IExecuteWatchRequest, ExecuteWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
@@ -68,9 +68,9 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IGetWatchRequest"/>
 		public Task<GetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken ct = default) => DoRequestAsync<IGetWatchRequest, GetWatchResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutWatchRequest"/>
-		public PutWatchResponse PutWatch(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector) => throw new NotImplementedException();
+		public PutWatchResponse PutWatch(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutWatchRequest"/>
-		public Task<PutWatchResponse> PutWatchAsync(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PutWatchResponse> PutWatchAsync(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutWatchRequest"/>
 		public PutWatchResponse PutWatch(IPutWatchRequest request) => DoRequest<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutWatchRequest"/>

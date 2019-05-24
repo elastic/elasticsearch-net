@@ -52,17 +52,17 @@ namespace Nest.Specification.IndexLifecycleManagementApi
 		///<inheritdoc cref = "IGetIlmStatusRequest"/>
 		public Task<GetIlmStatusResponse> GetIlmStatusAsync(IGetIlmStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIlmStatusRequest, GetIlmStatusResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMoveToStepRequest"/>
-		public MoveToStepResponse MoveToStep(IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector) => throw new NotImplementedException();
+		public MoveToStepResponse MoveToStep(IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMoveToStepRequest"/>
-		public Task<MoveToStepResponse> MoveToStepAsync(IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MoveToStepResponse> MoveToStepAsync(IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IMoveToStepRequest"/>
 		public MoveToStepResponse MoveToStep(IMoveToStepRequest request) => DoRequest<IMoveToStepRequest, MoveToStepResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMoveToStepRequest"/>
 		public Task<MoveToStepResponse> MoveToStepAsync(IMoveToStepRequest request, CancellationToken ct = default) => DoRequestAsync<IMoveToStepRequest, MoveToStepResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutLifecycleRequest"/>
-		public PutLifecycleResponse PutLifecycle(PolicyId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector) => throw new NotImplementedException();
+		public PutLifecycleResponse PutLifecycle(PolicyId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutLifecycleRequest"/>
-		public Task<PutLifecycleResponse> PutLifecycleAsync(PolicyId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PutLifecycleResponse> PutLifecycleAsync(PolicyId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutLifecycleRequest"/>
 		public PutLifecycleResponse PutLifecycle(IPutLifecycleRequest request) => DoRequest<IPutLifecycleRequest, PutLifecycleResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutLifecycleRequest"/>

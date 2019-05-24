@@ -19,9 +19,9 @@ namespace Tests.XPack.Security.Role.GetRole
 
 			var users = "admin,user,nest_user";
 			await GET($"/_security/role/{EscapeUriString(users)}")
-					.Fluent(c => c.Security.GetRole(f => f.Name(users)))
+					.Fluent(c => c.Security.GetRole(users))
 					.Request(c => c.Security.GetRole(new GetRoleRequest(users)))
-					.FluentAsync(c => c.Security.GetRoleAsync(f => f.Name(users)))
+					.FluentAsync(c => c.Security.GetRoleAsync(users))
 					.RequestAsync(c => c.Security.GetRoleAsync(new GetRoleRequest(users)))
 				;
 		}

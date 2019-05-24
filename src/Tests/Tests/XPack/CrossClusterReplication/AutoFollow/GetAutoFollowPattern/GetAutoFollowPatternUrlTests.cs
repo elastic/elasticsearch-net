@@ -11,15 +11,15 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 		{
 			var name = "x";
 			await UrlTester.GET($"/_ccr/auto_follow/{name}")
-				.Fluent(c => c.CrossClusterReplication.GetAutoFollowPattern(d => d.Name(name)))
+				.Fluent(c => c.CrossClusterReplication.GetAutoFollowPattern(name))
 				.Request(c => c.CrossClusterReplication.GetAutoFollowPattern(new GetAutoFollowPatternRequest(name)))
-				.FluentAsync(c => c.CrossClusterReplication.GetAutoFollowPatternAsync(d => d.Name(name)))
+				.FluentAsync(c => c.CrossClusterReplication.GetAutoFollowPatternAsync(name))
 				.RequestAsync(c => c.CrossClusterReplication.GetAutoFollowPatternAsync(new GetAutoFollowPatternRequest(name)));
 
 			await UrlTester.GET($"/_ccr/auto_follow")
-				.Fluent(c => c.CrossClusterReplication.GetAutoFollowPattern(d => d))
+				.Fluent(c => c.CrossClusterReplication.GetAutoFollowPattern())
 				.Request(c => c.CrossClusterReplication.GetAutoFollowPattern(new GetAutoFollowPatternRequest()))
-				.FluentAsync(c => c.CrossClusterReplication.GetAutoFollowPatternAsync(d => d))
+				.FluentAsync(c => c.CrossClusterReplication.GetAutoFollowPatternAsync())
 				.RequestAsync(c => c.CrossClusterReplication.GetAutoFollowPatternAsync(new GetAutoFollowPatternRequest()));
 
 		}

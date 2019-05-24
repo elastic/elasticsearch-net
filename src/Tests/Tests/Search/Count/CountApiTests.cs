@@ -55,8 +55,8 @@ namespace Tests.Search.Count
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Count(f),
 			(c, f) => c.CountAsync(f),
-			(c, r) => c.Count<Project>(r),
-			(c, r) => c.CountAsync<Project>(r)
+			(c, r) => c.Count(r),
+			(c, r) => c.CountAsync(r)
 		);
 	}
 }

@@ -20,9 +20,9 @@ namespace Nest.Specification.ClusterApi
 		}
 
 		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
-		public ClusterAllocationExplainResponse AllocationExplain(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector) => throw new NotImplementedException();
+		public ClusterAllocationExplainResponse AllocationExplain(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
-		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
 		public ClusterAllocationExplainResponse AllocationExplain(IClusterAllocationExplainRequest request) => DoRequest<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
@@ -36,9 +36,9 @@ namespace Nest.Specification.ClusterApi
 		///<inheritdoc cref = "IClusterGetSettingsRequest"/>
 		public Task<ClusterGetSettingsResponse> GetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IClusterHealthRequest"/>
-		public ClusterHealthResponse Health(Indices index, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null) => throw new NotImplementedException();
+		public ClusterHealthResponse Health(Indices index = null, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterHealthRequest"/>
-		public Task<ClusterHealthResponse> HealthAsync(Indices index, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ClusterHealthResponse> HealthAsync(Indices index = null, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterHealthRequest"/>
 		public ClusterHealthResponse Health(IClusterHealthRequest request) => DoRequest<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClusterHealthRequest"/>
@@ -68,17 +68,17 @@ namespace Nest.Specification.ClusterApi
 		///<inheritdoc cref = "IRemoteInfoRequest"/>
 		public Task<RemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IClusterRerouteRequest"/>
-		public ClusterRerouteResponse Reroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector) => throw new NotImplementedException();
+		public ClusterRerouteResponse Reroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterRerouteRequest"/>
-		public Task<ClusterRerouteResponse> RerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ClusterRerouteResponse> RerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterRerouteRequest"/>
 		public ClusterRerouteResponse Reroute(IClusterRerouteRequest request) => DoRequest<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClusterRerouteRequest"/>
 		public Task<ClusterRerouteResponse> RerouteAsync(IClusterRerouteRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IClusterStateRequest"/>
-		public ClusterStateResponse State(Indices index, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null) => throw new NotImplementedException();
+		public ClusterStateResponse State(Indices index = null, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterStateRequest"/>
-		public Task<ClusterStateResponse> StateAsync(Indices index, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ClusterStateResponse> StateAsync(Indices index = null, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClusterStateRequest"/>
 		public ClusterStateResponse State(IClusterStateRequest request) => DoRequest<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClusterStateRequest"/>

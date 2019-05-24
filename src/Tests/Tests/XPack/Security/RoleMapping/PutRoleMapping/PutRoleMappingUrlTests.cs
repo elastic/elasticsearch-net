@@ -12,9 +12,9 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		{
 			var role = "can_read";
 			await PUT($"/_security/role_mapping/{role}")
-					.Fluent(c => c.Security.PutRoleMapping(role))
+					.Fluent(c => c.Security.PutRoleMapping(role, p => p))
 					.Request(c => c.Security.PutRoleMapping(new PutRoleMappingRequest(role)))
-					.FluentAsync(c => c.Security.PutRoleMappingAsync(role))
+					.FluentAsync(c => c.Security.PutRoleMappingAsync(role, p => p))
 					.RequestAsync(c => c.Security.PutRoleMappingAsync(new PutRoleMappingRequest(role)))
 				;
 		}

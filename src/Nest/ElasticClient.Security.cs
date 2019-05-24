@@ -116,25 +116,25 @@ namespace Nest.Specification.SecurityApi
 		///<inheritdoc cref = "IGetApiKeyRequest"/>
 		public Task<GetApiKeyResponse> GetApiKeyAsync(IGetApiKeyRequest request, CancellationToken ct = default) => DoRequestAsync<IGetApiKeyRequest, GetApiKeyResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetPrivilegesRequest"/>
-		public GetPrivilegesResponse GetPrivileges(Name name, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null) => throw new NotImplementedException();
+		public GetPrivilegesResponse GetPrivileges(Name name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetPrivilegesRequest"/>
-		public Task<GetPrivilegesResponse> GetPrivilegesAsync(Name name, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetPrivilegesResponse> GetPrivilegesAsync(Name name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetPrivilegesRequest"/>
 		public GetPrivilegesResponse GetPrivileges(IGetPrivilegesRequest request) => DoRequest<IGetPrivilegesRequest, GetPrivilegesResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetPrivilegesRequest"/>
 		public Task<GetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetPrivilegesRequest, GetPrivilegesResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetRoleRequest"/>
-		public GetRoleResponse GetRole(Name name, Func<GetRoleDescriptor, IGetRoleRequest> selector = null) => throw new NotImplementedException();
+		public GetRoleResponse GetRole(Name name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetRoleRequest"/>
-		public Task<GetRoleResponse> GetRoleAsync(Name name, Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetRoleResponse> GetRoleAsync(Name name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetRoleRequest"/>
 		public GetRoleResponse GetRole(IGetRoleRequest request) => DoRequest<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetRoleRequest"/>
 		public Task<GetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetRoleMappingRequest"/>
-		public GetRoleMappingResponse GetRoleMapping(Name name, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) => throw new NotImplementedException();
+		public GetRoleMappingResponse GetRoleMapping(Name name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetRoleMappingRequest"/>
-		public Task<GetRoleMappingResponse> GetRoleMappingAsync(Name name, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetRoleMappingResponse> GetRoleMappingAsync(Name name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetRoleMappingRequest"/>
 		public GetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request) => DoRequest<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetRoleMappingRequest"/>
@@ -164,9 +164,9 @@ namespace Nest.Specification.SecurityApi
 		///<inheritdoc cref = "IGetUserPrivilegesRequest"/>
 		public Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(IGetUserPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetUserPrivilegesRequest, GetUserPrivilegesResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IHasPrivilegesRequest"/>
-		public HasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector) => throw new NotImplementedException();
+		public HasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IHasPrivilegesRequest"/>
-		public Task<HasPrivilegesResponse> HasPrivilegesAsync(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<HasPrivilegesResponse> HasPrivilegesAsync(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IHasPrivilegesRequest"/>
 		public HasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request) => DoRequest<IHasPrivilegesRequest, HasPrivilegesResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IHasPrivilegesRequest"/>

@@ -44,9 +44,9 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
 		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
-		public GetAutoFollowPatternResponse GetAutoFollowPattern(Name name, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => throw new NotImplementedException();
+		public GetAutoFollowPatternResponse GetAutoFollowPattern(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
-		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Name name, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
 		public GetAutoFollowPatternResponse GetAutoFollowPattern(IGetAutoFollowPatternRequest request) => DoRequest<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
@@ -68,9 +68,9 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
 		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
-		public ResumeFollowIndexResponse ResumeFollowIndex(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector) => throw new NotImplementedException();
+		public ResumeFollowIndexResponse ResumeFollowIndex(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
-		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
 		public ResumeFollowIndexResponse ResumeFollowIndex(IResumeFollowIndexRequest request) => DoRequest<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>

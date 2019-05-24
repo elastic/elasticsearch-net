@@ -32,7 +32,7 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putJobResponse = client.PutJob<object>(callUniqueValue.Value, f => f
+				var putJobResponse = client.MachineLearning.PutJob<object>(callUniqueValue.Value, f => f
 					.Description("GetOverallBucketsApiTests")
 					.AnalysisConfig(a => a
 						.BucketSpan($"{BucketSpanSeconds}s")

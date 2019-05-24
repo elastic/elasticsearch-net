@@ -71,15 +71,15 @@ namespace Tests.XPack.Security.RoleMapping
 			Calls<GetRoleMappingDescriptor, GetRoleMappingRequest, IGetRoleMappingRequest, GetRoleMappingResponse>(
 				ReadInitializer,
 				ReadFluent,
-				(s, c, f) => c.Security.GetRoleMapping(f),
-				(s, c, f) => c.Security.GetRoleMappingAsync(f),
+				(s, c, f) => c.Security.GetRoleMapping(CreateRoleMappingName(s), f),
+				(s, c, f) => c.Security.GetRoleMappingAsync(CreateRoleMappingName(s), f),
 				(s, c, r) => c.Security.GetRoleMapping(r),
 				(s, c, r) => c.Security.GetRoleMappingAsync(r)
 			);
 
 		protected GetRoleMappingRequest ReadInitializer(string role) => new GetRoleMappingRequest(CreateRoleMappingName(role));
 
-		protected IGetRoleMappingRequest ReadFluent(string role, GetRoleMappingDescriptor d) => d.Name(CreateRoleMappingName(role));
+		protected IGetRoleMappingRequest ReadFluent(string role, GetRoleMappingDescriptor d) => d;
 
 		protected override LazyResponses Update() =>
 			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, PutRoleMappingResponse>(

@@ -31,6 +31,8 @@ namespace Nest
 
 	public partial class ScrollDescriptor<TInferDocument> where TInferDocument : class
 	{
+		public ScrollDescriptor(string scrollId, Time scroll) => ScrollId(scrollId).Scroll(scroll);
+
 		Type ICovariantSearchRequest.ClrType => typeof(TInferDocument);
 
 		Time IScrollRequest.Scroll { get; set; }

@@ -22,13 +22,12 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> Fluent => d => d
-			.Index<ProjectPercolation>()
 			.Name("index.*")
 			.Local();
 
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(PercolationIndex, "index.*")
 		{
@@ -38,8 +37,8 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		protected override string UrlPath => $"/queries/_settings/index.%2A?local=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetIndexSettings(f),
-			(client, f) => client.Indices.GetIndexSettingsAsync(f),
+			(client, f) => client.Indices.GetIndexSettings(Index<ProjectPercolation>(), f),
+			(client, f) => client.Indices.GetIndexSettingsAsync(Index<ProjectPercolation>(), f),
 			(client, r) => client.Indices.GetIndexSettings(r),
 			(client, r) => client.Indices.GetIndexSettingsAsync(r)
 		);

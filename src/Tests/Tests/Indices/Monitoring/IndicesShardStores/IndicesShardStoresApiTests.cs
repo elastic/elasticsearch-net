@@ -22,19 +22,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-
-		protected override Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> Fluent => s =>
-			s.Index(IndexWithUnassignedShards)
-				.Status("all");
-
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-
-		protected override IndicesShardStoresRequest Initializer =>
-			new IndicesShardStoresRequest(IndexWithUnassignedShards)
-			{
-				Status = new[] { "all" }
-			};
-
 		protected override string UrlPath => $"/{IndexWithUnassignedShards}/_shard_stores?status=all";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -51,10 +39,18 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 				Refresh = Refresh.True
 			});
 		}
+		
+		protected override IndicesShardStoresRequest Initializer =>
+			new IndicesShardStoresRequest(IndexWithUnassignedShards)
+			{
+				Status = new[] { "all" }
+			};
+		protected override Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> Fluent => s => s
+			.Status("all");
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.ShardStores(f),
-			(client, f) => client.Indices.ShardStoresAsync(f),
+			(client, f) => client.Indices.ShardStores(IndexWithUnassignedShards, f),
+			(client, f) => client.Indices.ShardStoresAsync(IndexWithUnassignedShards, f),
 			(client, r) => client.Indices.ShardStores(r),
 			(client, r) => client.Indices.ShardStoresAsync(r)
 		);

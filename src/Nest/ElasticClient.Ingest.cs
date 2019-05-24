@@ -52,9 +52,9 @@ namespace Nest.Specification.IngestApi
 		///<inheritdoc cref = "IPutPipelineRequest"/>
 		public Task<PutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken ct = default) => DoRequestAsync<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISimulatePipelineRequest"/>
-		public SimulatePipelineResponse SimulatePipeline(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector) => throw new NotImplementedException();
+		public SimulatePipelineResponse SimulatePipeline(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISimulatePipelineRequest"/>
-		public Task<SimulatePipelineResponse> SimulatePipelineAsync(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<SimulatePipelineResponse> SimulatePipelineAsync(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISimulatePipelineRequest"/>
 		public SimulatePipelineResponse SimulatePipeline(ISimulatePipelineRequest request) => DoRequest<ISimulatePipelineRequest, SimulatePipelineResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISimulatePipelineRequest"/>

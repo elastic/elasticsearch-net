@@ -19,9 +19,9 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 
 			var index = "index1,index2";
 			await GET("/index1%2Cindex2/_shard_stores")
-					.Fluent(c => c.Indices.ShardStores(s => s.Index(index)))
+					.Fluent(c => c.Indices.ShardStores(index))
 					.Request(c => c.Indices.ShardStores(new IndicesShardStoresRequest(index)))
-					.FluentAsync(c => c.Indices.ShardStoresAsync(s => s.Index(index)))
+					.FluentAsync(c => c.Indices.ShardStoresAsync(index))
 					.RequestAsync(c => c.Indices.ShardStoresAsync(new IndicesShardStoresRequest(index)))
 				;
 		}

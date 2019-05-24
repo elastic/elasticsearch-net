@@ -66,7 +66,7 @@ namespace Tests.XPack.MachineLearning
 		{
 			var startDate = DateTime.Now.Year;
 
-			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f
+			var postCalendarEventsResponse = client.MachineLearning.PostCalendarEvents(calendarId, f => f
 				.Events(new ScheduledEvent
 					{
 						StartTime = new DateTimeOffset(startDate, 1, 1, 0, 0, 0, TimeSpan.Zero),

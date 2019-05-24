@@ -20,9 +20,9 @@ namespace Nest.Specification.SnapshotApi
 		}
 
 		///<inheritdoc cref = "ISnapshotRequest"/>
-		public SnapshotResponse Snapshot(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector) => throw new NotImplementedException();
+		public SnapshotResponse Snapshot(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISnapshotRequest"/>
-		public Task<SnapshotResponse> SnapshotAsync(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<SnapshotResponse> SnapshotAsync(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISnapshotRequest"/>
 		public SnapshotResponse Snapshot(ISnapshotRequest request) => DoRequest<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISnapshotRequest"/>
@@ -68,9 +68,9 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IGetRepositoryRequest"/>
 		public Task<GetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRestoreRequest"/>
-		public RestoreResponse Restore(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector) => throw new NotImplementedException();
+		public RestoreResponse Restore(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRestoreRequest"/>
-		public Task<RestoreResponse> RestoreAsync(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RestoreResponse> RestoreAsync(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRestoreRequest"/>
 		public RestoreResponse Restore(IRestoreRequest request) => DoRequest<IRestoreRequest, RestoreResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRestoreRequest"/>

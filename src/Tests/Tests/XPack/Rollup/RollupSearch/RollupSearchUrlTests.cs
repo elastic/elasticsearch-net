@@ -4,6 +4,7 @@ using Nest;
 using Tests.Domain;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+using static Nest.Infer;
 
 namespace Tests.XPack.Rollup.RollupSearch
 {
@@ -13,15 +14,15 @@ namespace Tests.XPack.Rollup.RollupSearch
 		{
 			const string index = "default-index";
 			await POST($"/{index}/_rollup_search")
-				.Fluent(c => c.Rollup.Search<Log>(index, s => s))
+				.Fluent(c => c.Rollup.Search<Log>(s => s.Index(index)))
 				.Request(c => c.Rollup.Search<Log>(new RollupSearchRequest(index)))
-				.FluentAsync(c => c.Rollup.SearchAsync<Log>(index, s => s))
+				.FluentAsync(c => c.Rollup.SearchAsync<Log>(s => s.Index(index)))
 				.RequestAsync(c => c.Rollup.SearchAsync<Log>(new RollupSearchRequest(index)));
 
 			await POST($"/_all/_rollup_search")
-				.Fluent(c => c.Rollup.Search<Log>(Nest.Indices.All, s => s))
+				.Fluent(c => c.Rollup.Search<Log>(s => s.Index(AllIndices)))
 				.Request(c => c.Rollup.Search<Log>(new RollupSearchRequest(Nest.Indices.All)))
-				.FluentAsync(c => c.Rollup.SearchAsync<Log>(Nest.Indices.All, s => s))
+				.FluentAsync(c => c.Rollup.SearchAsync<Log>(s => s.Index(AllIndices)))
 				.RequestAsync(c => c.Rollup.SearchAsync<Log>(new RollupSearchRequest(Nest.Indices.All)));
 		}
 	}

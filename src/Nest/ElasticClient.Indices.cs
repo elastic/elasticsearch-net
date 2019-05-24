@@ -20,17 +20,17 @@ namespace Nest.Specification.IndicesApi
 		}
 
 		///<inheritdoc cref = "IAnalyzeRequest"/>
-		public AnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector) => throw new NotImplementedException();
+		public AnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IAnalyzeRequest"/>
-		public Task<AnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<AnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IAnalyzeRequest"/>
 		public AnalyzeResponse Analyze(IAnalyzeRequest request) => DoRequest<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IAnalyzeRequest"/>
 		public Task<AnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default) => DoRequestAsync<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IClearCacheRequest"/>
-		public ClearCacheResponse ClearCache(Indices index, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => throw new NotImplementedException();
+		public ClearCacheResponse ClearCache(Indices index = null, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClearCacheRequest"/>
-		public Task<ClearCacheResponse> ClearCacheAsync(Indices index, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ClearCacheResponse> ClearCacheAsync(Indices index = null, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IClearCacheRequest"/>
 		public ClearCacheResponse ClearCache(IClearCacheRequest request) => DoRequest<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClearCacheRequest"/>
@@ -44,9 +44,9 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "ICloseIndexRequest"/>
 		public Task<CloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICreateIndexRequest"/>
-		public CreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector) => throw new NotImplementedException();
+		public CreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ICreateIndexRequest"/>
-		public Task<CreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<CreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ICreateIndexRequest"/>
 		public CreateIndexResponse CreateIndex(ICreateIndexRequest request) => DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateIndexRequest"/>
@@ -108,25 +108,25 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "ITypeExistsRequest"/>
 		public Task<ExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken ct = default) => DoRequestAsync<ITypeExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IFlushRequest"/>
-		public FlushResponse Flush(Indices index, Func<FlushDescriptor, IFlushRequest> selector = null) => throw new NotImplementedException();
+		public FlushResponse Flush(Indices index = null, Func<FlushDescriptor, IFlushRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IFlushRequest"/>
-		public Task<FlushResponse> FlushAsync(Indices index, Func<FlushDescriptor, IFlushRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<FlushResponse> FlushAsync(Indices index = null, Func<FlushDescriptor, IFlushRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IFlushRequest"/>
 		public FlushResponse Flush(IFlushRequest request) => DoRequest<IFlushRequest, FlushResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IFlushRequest"/>
 		public Task<FlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default) => DoRequestAsync<IFlushRequest, FlushResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISyncedFlushRequest"/>
-		public SyncedFlushResponse SyncedFlush(Indices index, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) => throw new NotImplementedException();
+		public SyncedFlushResponse SyncedFlush(Indices index = null, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISyncedFlushRequest"/>
-		public Task<SyncedFlushResponse> SyncedFlushAsync(Indices index, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<SyncedFlushResponse> SyncedFlushAsync(Indices index = null, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISyncedFlushRequest"/>
 		public SyncedFlushResponse SyncedFlush(ISyncedFlushRequest request) => DoRequest<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISyncedFlushRequest"/>
 		public Task<SyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken ct = default) => DoRequestAsync<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IForceMergeRequest"/>
-		public ForceMergeResponse ForceMerge(Indices index, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null) => throw new NotImplementedException();
+		public ForceMergeResponse ForceMerge(Indices index = null, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IForceMergeRequest"/>
-		public Task<ForceMergeResponse> ForceMergeAsync(Indices index, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ForceMergeResponse> ForceMergeAsync(Indices index = null, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IForceMergeRequest"/>
 		public ForceMergeResponse ForceMerge(IForceMergeRequest request) => DoRequest<IForceMergeRequest, ForceMergeResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IForceMergeRequest"/>
@@ -140,9 +140,9 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IGetIndexRequest"/>
 		public Task<GetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetAliasRequest"/>
-		public GetAliasResponse GetAlias(Indices index, Func<GetAliasDescriptor, IGetAliasRequest> selector = null) => throw new NotImplementedException();
+		public GetAliasResponse GetAlias(Indices index = null, Func<GetAliasDescriptor, IGetAliasRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetAliasRequest"/>
-		public Task<GetAliasResponse> GetAliasAsync(Indices index, Func<GetAliasDescriptor, IGetAliasRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetAliasResponse> GetAliasAsync(Indices index = null, Func<GetAliasDescriptor, IGetAliasRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetAliasRequest"/>
 		public GetAliasResponse GetAlias(IGetAliasRequest request) => DoRequest<IGetAliasRequest, GetAliasResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetAliasRequest"/>
@@ -168,25 +168,25 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IGetMappingRequest"/>
 		public Task<GetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken ct = default) => DoRequestAsync<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
-		public GetIndexSettingsResponse GetIndexSettings(Indices index, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null) => throw new NotImplementedException();
+		public GetIndexSettingsResponse GetIndexSettings(Indices index = null, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
-		public Task<GetIndexSettingsResponse> GetIndexSettingsAsync(Indices index, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetIndexSettingsResponse> GetIndexSettingsAsync(Indices index = null, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
 		public GetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest request) => DoRequest<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
 		public Task<GetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
-		public GetIndexTemplateResponse GetIndexTemplate(Names name, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null) => throw new NotImplementedException();
+		public GetIndexTemplateResponse GetIndexTemplate(Names name = null, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
-		public Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Names name, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Names name = null, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
 		public GetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest request) => DoRequest<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
 		public Task<GetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
-		public UpgradeStatusResponse UpgradeStatus(Indices index, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) => throw new NotImplementedException();
+		public UpgradeStatusResponse UpgradeStatus(Indices index = null, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
-		public Task<UpgradeStatusResponse> UpgradeStatusAsync(Indices index, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<UpgradeStatusResponse> UpgradeStatusAsync(Indices index = null, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
 		public UpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) => DoRequest<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
@@ -200,9 +200,9 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IOpenIndexRequest"/>
 		public Task<OpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutAliasRequest"/>
-		public PutAliasResponse PutAlias(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector) => throw new NotImplementedException();
+		public PutAliasResponse PutAlias(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutAliasRequest"/>
-		public Task<PutAliasResponse> PutAliasAsync(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PutAliasResponse> PutAliasAsync(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutAliasRequest"/>
 		public PutAliasResponse PutAlias(IPutAliasRequest request) => DoRequest<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutAliasRequest"/>
@@ -234,65 +234,65 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IPutIndexTemplateRequest"/>
 		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRecoveryStatusRequest"/>
-		public RecoveryStatusResponse RecoveryStatus(Indices index, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => throw new NotImplementedException();
+		public RecoveryStatusResponse RecoveryStatus(Indices index = null, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRecoveryStatusRequest"/>
-		public Task<RecoveryStatusResponse> RecoveryStatusAsync(Indices index, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RecoveryStatusResponse> RecoveryStatusAsync(Indices index = null, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRecoveryStatusRequest"/>
 		public RecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) => DoRequest<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRecoveryStatusRequest"/>
 		public Task<RecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRefreshRequest"/>
-		public RefreshResponse Refresh(Indices index, Func<RefreshDescriptor, IRefreshRequest> selector = null) => throw new NotImplementedException();
+		public RefreshResponse Refresh(Indices index = null, Func<RefreshDescriptor, IRefreshRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRefreshRequest"/>
-		public Task<RefreshResponse> RefreshAsync(Indices index, Func<RefreshDescriptor, IRefreshRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RefreshResponse> RefreshAsync(Indices index = null, Func<RefreshDescriptor, IRefreshRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRefreshRequest"/>
 		public RefreshResponse Refresh(IRefreshRequest request) => DoRequest<IRefreshRequest, RefreshResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRefreshRequest"/>
 		public Task<RefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) => DoRequestAsync<IRefreshRequest, RefreshResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
-		public RolloverIndexResponse RolloverIndex(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector) => throw new NotImplementedException();
+		public RolloverIndexResponse RolloverIndex(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
-		public Task<RolloverIndexResponse> RolloverIndexAsync(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RolloverIndexResponse> RolloverIndexAsync(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
 		public RolloverIndexResponse RolloverIndex(IRolloverIndexRequest request) => DoRequest<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
 		public Task<RolloverIndexResponse> RolloverIndexAsync(IRolloverIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISegmentsRequest"/>
-		public SegmentsResponse Segments(Indices index, Func<SegmentsDescriptor, ISegmentsRequest> selector = null) => throw new NotImplementedException();
+		public SegmentsResponse Segments(Indices index = null, Func<SegmentsDescriptor, ISegmentsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISegmentsRequest"/>
-		public Task<SegmentsResponse> SegmentsAsync(Indices index, Func<SegmentsDescriptor, ISegmentsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<SegmentsResponse> SegmentsAsync(Indices index = null, Func<SegmentsDescriptor, ISegmentsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISegmentsRequest"/>
 		public SegmentsResponse Segments(ISegmentsRequest request) => DoRequest<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISegmentsRequest"/>
 		public Task<SegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default) => DoRequestAsync<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IIndicesShardStoresRequest"/>
-		public IndicesShardStoresResponse ShardStores(Indices index, Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null) => throw new NotImplementedException();
+		public IndicesShardStoresResponse ShardStores(Indices index = null, Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IIndicesShardStoresRequest"/>
-		public Task<IndicesShardStoresResponse> ShardStoresAsync(Indices index, Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<IndicesShardStoresResponse> ShardStoresAsync(Indices index = null, Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IIndicesShardStoresRequest"/>
 		public IndicesShardStoresResponse ShardStores(IIndicesShardStoresRequest request) => DoRequest<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IIndicesShardStoresRequest"/>
 		public Task<IndicesShardStoresResponse> ShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) => DoRequestAsync<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
-		public ShrinkIndexResponse ShrinkIndex(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector) => throw new NotImplementedException();
+		public ShrinkIndexResponse ShrinkIndex(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
-		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
 		public ShrinkIndexResponse ShrinkIndex(IShrinkIndexRequest request) => DoRequest<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
 		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IShrinkIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISplitIndexRequest"/>
-		public SplitIndexResponse SplitIndex(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector) => throw new NotImplementedException();
+		public SplitIndexResponse SplitIndex(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISplitIndexRequest"/>
-		public Task<SplitIndexResponse> SplitIndexAsync(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<SplitIndexResponse> SplitIndexAsync(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ISplitIndexRequest"/>
 		public SplitIndexResponse SplitIndex(ISplitIndexRequest request) => DoRequest<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISplitIndexRequest"/>
 		public Task<SplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IIndicesStatsRequest"/>
-		public IndicesStatsResponse Stats(Indices index, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => throw new NotImplementedException();
+		public IndicesStatsResponse Stats(Indices index = null, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IIndicesStatsRequest"/>
-		public Task<IndicesStatsResponse> StatsAsync(Indices index, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<IndicesStatsResponse> StatsAsync(Indices index = null, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IIndicesStatsRequest"/>
 		public IndicesStatsResponse Stats(IIndicesStatsRequest request) => DoRequest<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IIndicesStatsRequest"/>
@@ -306,18 +306,18 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IBulkAliasRequest"/>
 		public Task<BulkAliasResponse> BulkAliasAsync(IBulkAliasRequest request, CancellationToken ct = default) => DoRequestAsync<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpgradeRequest"/>
-		public UpgradeResponse Upgrade(Indices index, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) => throw new NotImplementedException();
+		public UpgradeResponse Upgrade(Indices index = null, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IUpgradeRequest"/>
-		public Task<UpgradeResponse> UpgradeAsync(Indices index, Func<UpgradeDescriptor, IUpgradeRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<UpgradeResponse> UpgradeAsync(Indices index = null, Func<UpgradeDescriptor, IUpgradeRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IUpgradeRequest"/>
 		public UpgradeResponse Upgrade(IUpgradeRequest request) => DoRequest<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IUpgradeRequest"/>
 		public Task<UpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) => DoRequestAsync<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IValidateQueryRequest"/>
-		public ValidateQueryResponse ValidateQuery<TDocument>(Func<ValidateQueryDescriptor<TDocument>, IValidateQueryRequest> selector)
+		public ValidateQueryResponse ValidateQuery<TDocument>(Func<ValidateQueryDescriptor<TDocument>, IValidateQueryRequest> selector = null)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IValidateQueryRequest"/>
-		public Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(Func<ValidateQueryDescriptor<TDocument>, IValidateQueryRequest> selector, CancellationToken ct = default)
+		public Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(Func<ValidateQueryDescriptor<TDocument>, IValidateQueryRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => throw new NotImplementedException();
 		///<inheritdoc cref = "IValidateQueryRequest"/>
 		public ValidateQueryResponse ValidateQuery(IValidateQueryRequest request) => DoRequest<IValidateQueryRequest, ValidateQueryResponse>(request, request.RequestParameters);

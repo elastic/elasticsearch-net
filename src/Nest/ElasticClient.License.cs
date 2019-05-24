@@ -52,9 +52,9 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
 		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPostLicenseRequest"/>
-		public PostLicenseResponse PostLicense(Func<PostLicenseDescriptor, IPostLicenseRequest> selector) => throw new NotImplementedException();
+		public PostLicenseResponse PostLicense(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPostLicenseRequest"/>
-		public Task<PostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPostLicenseRequest"/>
 		public PostLicenseResponse PostLicense(IPostLicenseRequest request) => DoRequest<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPostLicenseRequest"/>

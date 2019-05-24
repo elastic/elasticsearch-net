@@ -20,9 +20,9 @@ namespace Nest.Specification.MachineLearningApi
 		}
 
 		///<inheritdoc cref = "ICloseJobRequest"/>
-		public CloseJobResponse CloseJob(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector) => throw new NotImplementedException();
+		public CloseJobResponse CloseJob(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "ICloseJobRequest"/>
-		public Task<CloseJobResponse> CloseJobAsync(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<CloseJobResponse> CloseJobAsync(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "ICloseJobRequest"/>
 		public CloseJobResponse CloseJob(ICloseJobRequest request) => DoRequest<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICloseJobRequest"/>
@@ -100,9 +100,9 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IDeleteModelSnapshotRequest"/>
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IFlushJobRequest"/>
-		public FlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector) => throw new NotImplementedException();
+		public FlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IFlushJobRequest"/>
-		public Task<FlushJobResponse> FlushJobAsync(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<FlushJobResponse> FlushJobAsync(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IFlushJobRequest"/>
 		public FlushJobResponse FlushJob(IFlushJobRequest request) => DoRequest<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IFlushJobRequest"/>
@@ -116,9 +116,9 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IForecastJobRequest"/>
 		public Task<ForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken ct = default) => DoRequestAsync<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetBucketsRequest"/>
-		public GetBucketsResponse GetBuckets(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector) => throw new NotImplementedException();
+		public GetBucketsResponse GetBuckets(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetBucketsRequest"/>
-		public Task<GetBucketsResponse> GetBucketsAsync(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetBucketsResponse> GetBucketsAsync(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetBucketsRequest"/>
 		public GetBucketsResponse GetBuckets(IGetBucketsRequest request) => DoRequest<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetBucketsRequest"/>
@@ -132,17 +132,17 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IGetCalendarEventsRequest"/>
 		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetCalendarsRequest"/>
-		public GetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector) => throw new NotImplementedException();
+		public GetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetCalendarsRequest"/>
-		public Task<GetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetCalendarsRequest"/>
 		public GetCalendarsResponse GetCalendars(IGetCalendarsRequest request) => DoRequest<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetCalendarsRequest"/>
 		public Task<GetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetCategoriesRequest"/>
-		public GetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector) => throw new NotImplementedException();
+		public GetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetCategoriesRequest"/>
-		public Task<GetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetCategoriesRequest"/>
 		public GetCategoriesResponse GetCategories(IGetCategoriesRequest request) => DoRequest<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetCategoriesRequest"/>
@@ -172,9 +172,9 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IGetFiltersRequest"/>
 		public Task<GetFiltersResponse> GetFiltersAsync(IGetFiltersRequest request, CancellationToken ct = default) => DoRequestAsync<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetInfluencersRequest"/>
-		public GetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector) => throw new NotImplementedException();
+		public GetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetInfluencersRequest"/>
-		public Task<GetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetInfluencersRequest"/>
 		public GetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) => DoRequest<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetInfluencersRequest"/>
@@ -196,25 +196,25 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IGetJobsRequest"/>
 		public Task<GetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetModelSnapshotsRequest"/>
-		public GetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector) => throw new NotImplementedException();
+		public GetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetModelSnapshotsRequest"/>
-		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetModelSnapshotsRequest"/>
 		public GetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) => DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetModelSnapshotsRequest"/>
 		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetOverallBucketsRequest"/>
-		public GetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector) => throw new NotImplementedException();
+		public GetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetOverallBucketsRequest"/>
-		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetOverallBucketsRequest"/>
 		public GetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) => DoRequest<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetOverallBucketsRequest"/>
 		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetAnomalyRecordsRequest"/>
-		public GetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector) => throw new NotImplementedException();
+		public GetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetAnomalyRecordsRequest"/>
-		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IGetAnomalyRecordsRequest"/>
 		public GetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) => DoRequest<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetAnomalyRecordsRequest"/>
@@ -260,9 +260,9 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IPreviewDatafeedRequest"/>
 		public Task<PreviewDatafeedResponse<TResult>> PreviewDatafeedAsync<TResult>(IPreviewDatafeedRequest request, CancellationToken ct = default) => DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<TResult>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutCalendarRequest"/>
-		public PutCalendarResponse PutCalendar(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector) => throw new NotImplementedException();
+		public PutCalendarResponse PutCalendar(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutCalendarRequest"/>
-		public Task<PutCalendarResponse> PutCalendarAsync(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PutCalendarResponse> PutCalendarAsync(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IPutCalendarRequest"/>
 		public PutCalendarResponse PutCalendar(IPutCalendarRequest request) => DoRequest<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutCalendarRequest"/>
@@ -304,17 +304,17 @@ namespace Nest.Specification.MachineLearningApi
 		///<inheritdoc cref = "IPutJobRequest"/>
 		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken ct = default) => DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRevertModelSnapshotRequest"/>
-		public RevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector) => throw new NotImplementedException();
+		public RevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRevertModelSnapshotRequest"/>
-		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IRevertModelSnapshotRequest"/>
 		public RevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) => DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRevertModelSnapshotRequest"/>
 		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IStartDatafeedRequest"/>
-		public StartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector) => throw new NotImplementedException();
+		public StartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null) => throw new NotImplementedException();
 		///<inheritdoc cref = "IStartDatafeedRequest"/>
-		public Task<StartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<StartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
 		///<inheritdoc cref = "IStartDatafeedRequest"/>
 		public StartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) => DoRequest<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartDatafeedRequest"/>

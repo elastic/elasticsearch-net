@@ -210,7 +210,7 @@ namespace Tests.XPack.CrossClusterReplication
 				PauseForCloseStep, u => u.Call(async (v, c) => await c.CrossClusterReplication.PauseFollowIndexAsync(CopyIndex(v)))
 			},
 			{
-				CloseIndexStep, u => u.Call(async (v, c) => await c.CrossClusterReplication.CloseIndexAsync(CopyIndex(v)))
+				CloseIndexStep, u => u.Call(async (v, c) => await c.Indices.CloseIndexAsync(CopyIndex(v)))
 			},
 			{
 				UnfollowAgainStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, UnfollowIndexResponse>

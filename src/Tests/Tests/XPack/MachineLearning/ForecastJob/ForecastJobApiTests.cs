@@ -65,7 +65,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 					timestamp += BucketSpanSeconds;
 				}
 
-				var postJobDataResponse = client.PostJobData(callUniqueValue.Value, d => d.Data(data));
+				var postJobDataResponse = client.MachineLearning.PostJobData(callUniqueValue.Value, d => d.Data(data));
 				if (!postJobDataResponse.IsValid)
 					throw new Exception($"Problem posting data for integration test: {postJobDataResponse.DebugInformation}");
 

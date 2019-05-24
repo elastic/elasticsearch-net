@@ -17,22 +17,16 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		public GetIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
-
 		protected override object ExpectJson => null;
-
 		protected override int ExpectStatusCode => 200;
-
-		protected override Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> Fluent => d => d
-			.Name(CallIsolatedValue);
-
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-
-		protected override GetIndexTemplateRequest Initializer => new GetIndexTemplateRequest(CallIsolatedValue);
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
+		
+		protected override GetIndexTemplateRequest Initializer => new GetIndexTemplateRequest(CallIsolatedValue);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetIndexTemplate(f),
-			(client, f) => client.Indices.GetIndexTemplateAsync(f),
+			(client, f) => client.Indices.GetIndexTemplate(CallIsolatedValue, f),
+			(client, f) => client.Indices.GetIndexTemplateAsync(CallIsolatedValue, f),
 			(client, r) => client.Indices.GetIndexTemplate(r),
 			(client, r) => client.Indices.GetIndexTemplateAsync(r)
 		);
