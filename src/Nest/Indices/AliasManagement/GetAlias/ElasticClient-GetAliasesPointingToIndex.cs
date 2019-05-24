@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Nest.Specification.IndicesApi;
 
 namespace Nest
 {
@@ -7,7 +8,7 @@ namespace Nest
 	{
 		/// <summary>
 		/// Returns a dictionary of aliases that point to the specified index, simplified version of
-		/// <see cref="IElasticClient.GetAlias(IGetAliasRequest)" />..
+		/// <see cref="IndicesNamespace.GetAlias(IGetAliasRequest)" />..
 		/// </summary>
 		/// <param name="index">The index name we want to know aliases of</param>
 		public static IReadOnlyDictionary<string, AliasDefinition> GetAliasesPointingToIndex(this IElasticClient client, IndexName index)
@@ -18,7 +19,7 @@ namespace Nest
 
 		/// <summary>
 		/// Returns a dictionary of aliases that point to the specified index, simplified version of
-		/// <see cref="IElasticClient.GetAlias(IGetAliasRequest)" />.
+		/// <see cref="IndicesNamespace.GetAlias(IGetAliasRequest)" />..
 		/// </summary>
 		/// <param name="index">The index name we want to know aliases of</param>
 		public static async Task<IReadOnlyDictionary<string, AliasDefinition>> GetAliasesPointingToIndexAsync(this IElasticClient client,
