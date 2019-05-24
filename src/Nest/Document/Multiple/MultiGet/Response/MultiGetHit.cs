@@ -23,6 +23,10 @@ namespace Nest
 		string Type { get; }
 
 		long Version { get; }
+
+		long PrimaryTerm { get; }
+
+		long SequenceNumber { get; }
 	}
 
 	[JsonObject]
@@ -58,5 +62,11 @@ namespace Nest
 
 		[JsonProperty("_version")]
 		public long Version { get; internal set; }
+
+		[JsonProperty("_primary_term")]
+		public long PrimaryTerm { get; internal set; }
+
+		[JsonProperty("_seq_no")]
+		public long SequenceNumber { get; internal set; }
 	}
 }
