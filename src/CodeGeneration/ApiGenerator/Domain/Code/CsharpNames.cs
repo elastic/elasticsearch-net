@@ -49,6 +49,8 @@ namespace ApiGenerator.Domain
 		public string ParametersName => $"{RequestName}Parameters";
 		public string DescriptorName => $"{ApiName}Descriptor";
 
+		public const string ApiNamespace = "Specification";
+		public const string ApiNamespaceSuffix = "Api";
 		public const string RootNamespace = "NoNamespace";
 		public const string LowLevelClientNamespacePrefix = "LowLevel";
 		public const string HighLevelClientNamespacePrefix = "";

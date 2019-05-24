@@ -1,11 +1,38 @@
-﻿using BenchmarkDotNet.Running;
+﻿using System;
+using BenchmarkDotNet.Running;
+using Elasticsearch.Net;
+using Nest;
 using Tests.ScratchPad.Runners.Inferrence;
 
 namespace Tests.ScratchPad
 {
+	public static class ElasticClientExtensions
+	{
+		[Obsolete()]
+		public static void CreateIndex(this IElasticClient client, string index) => client.Indices.CreateIndex(index);
+	}
+	
 	public class Program
 	{
-		private static void Main(string[] args) => Run<PropertyNameInferenceRunner>();
+		private static void Main(string[] args)
+		{
+			var lowLevel = new ElasticLowLevelClient();
+			var info = lowLevel.MachineLearning.Info<StringResponse>();
+			var rootInfo = lowLevel.RootNodeInfo<StringResponse>();
+			var xpack = lowLevel.Xpack.XPackInfo<StringResponse>();
+			
+			//lowLevel.Indices.Create<String>()
+			//lowLevel.Security.
+			
+			var highLevel = new ElasticClient();
+			highLevel.IndexLifecycleManagement.PutLifecycle(new PutLifecycleRequest("policy")
+			{
+				Policy = new Policy()
+			});
+			
+			highLevel.IndexLifecycleManagement.PutLifecycle("policy", d => d.Policy(p => p.Phases()));
+
+		}
 
 		private static void Bench<TBenchmark>() where TBenchmark : RunBase => BenchmarkRunner.Run<TBenchmark>();
 

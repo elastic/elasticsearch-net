@@ -27,7 +27,7 @@ using static Elasticsearch.Net.HttpMethod;
 	var endpoints = model.Value;
 }
 // ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net.Apis.@(ns)Api
+namespace Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix)
 {
 	///<summary>
 	/// Logically groups all @ns API's together so that they may be discovered more naturally.

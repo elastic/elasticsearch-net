@@ -6,7 +6,7 @@
 {
 	if (kv.Key != CsharpNames.RootNamespace)
 	{
-<text>using Elasticsearch.Net.Apis.@(kv.Key)Api;
+<text>using Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(kv.Key)@(CsharpNames.ApiNamespaceSuffix);
 </text>
 		continue;
 	}

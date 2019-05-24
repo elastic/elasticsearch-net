@@ -1,8 +1,16 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using RazorLight;
 
 namespace ApiGenerator
 {
+	public class CodeTemplatePage<TModel> : TemplatePage<TModel>
+	{
+		public override Task ExecuteAsync() => throw new NotImplementedException();
+
+		public Task Execute() => Task.CompletedTask;
+	}
 	public static class Program
 	{
 		private static readonly string DownloadBranch = "master";

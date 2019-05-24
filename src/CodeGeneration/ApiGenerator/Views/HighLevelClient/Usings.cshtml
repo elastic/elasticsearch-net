@@ -6,7 +6,7 @@
 {
 	if (kv.Key != CsharpNames.RootNamespace)
 	{
-<text>using Nest.Apis.@(kv.Key)Api;
+<text>using Nest.@(CsharpNames.ApiNamespace).@(kv.Key)@(CsharpNames.ApiNamespaceSuffix);
 </text>
 		continue;
 	}
