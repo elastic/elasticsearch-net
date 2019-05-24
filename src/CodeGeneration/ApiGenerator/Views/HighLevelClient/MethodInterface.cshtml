@@ -1,4 +1,3 @@
-@inherits TemplatePage<HighLevelClientMethod>
 @using System
 @using System.Linq
 @using System.Collections.Generic
@@ -7,6 +6,7 @@
 @using ApiGenerator
 @using ApiGenerator.Domain
 @using System.Text.RegularExpressions
+@inherits CodeTemplatePage<HighLevelClientMethod>
 @{
 	HighLevelClientMethod method = Model;
 	var selector = string.Format("Func<{0}, {1}>", method.CsharpNames.GenericOrNonGenericDescriptorName, method.CsharpNames.RequestInterfaceName);

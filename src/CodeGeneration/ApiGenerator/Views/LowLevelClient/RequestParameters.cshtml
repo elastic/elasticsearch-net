@@ -1,9 +1,9 @@
 @using RazorLight
-@inherits TemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
 @using System.Collections.Generic
 @using System.Collections.ObjectModel
 @using ApiGenerator.Domain
 @using ApiGenerator
+@inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
 @{
 	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
 	string ns = model.Key != CsharpNames.RootNamespace ? "."+CsharpNames.ApiNamespace+"." + model.Key + CsharpNames.ApiNamespaceSuffix : null;

@@ -1,9 +1,9 @@
-@inherits ApiGenerator.CodeTemplatePage<DescriptorPartialImplementation>
 @using System
 @using System.Linq
 @using System.Collections.Generic
 @using RazorLight
 @using ApiGenerator.Domain
+@inherits ApiGenerator.CodeTemplatePage<DescriptorPartialImplementation>
 @{
 	DescriptorPartialImplementation d = Model;
 	var names = d.CsharpNames;
@@ -52,7 +52,7 @@
 	var g = typed ? names.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "") : "T";
 	var desc = param.DescriptionHighLevel.ToList();
 	
-	await IncludeAsync("Shared/XmlDocs.cshtml", desc);
+	IncludeAsync("Shared/XmlDocs.cshtml", desc);
 	if(!string.IsNullOrWhiteSpace(param.Obsolete))
 	{
 <text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]

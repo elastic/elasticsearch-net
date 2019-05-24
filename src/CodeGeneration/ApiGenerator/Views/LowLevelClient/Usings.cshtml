@@ -1,7 +1,7 @@
 @using RazorLight
 @using System.Linq
 @using ApiGenerator.Domain
-@inherits TemplatePage<RestApiSpec>
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
 @foreach(var kv in Model.EndpointsPerNamespace)
 {
 	if (kv.Key != CsharpNames.RootNamespace)

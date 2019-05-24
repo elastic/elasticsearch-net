@@ -1,9 +1,9 @@
-@inherits TemplatePage<List<string>>
 @using System
 @using System.Linq
 @using System.Collections.Generic
 @using RazorLight
 @using ApiGenerator.Domain
+@inherits ApiGenerator.CodeTemplatePage<List<string>>
 @{
 	List<string> summary = Model;
 	var description = summary.Count == 1 ? summary.First() : string.Join("\r\n\t\t", summary.Select(d => "/// " + d));

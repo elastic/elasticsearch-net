@@ -1,4 +1,3 @@
-@inherits TemplatePage<HighLevelClientMethod>
 @using System
 @using System.Linq
 @using System.Collections.Generic
@@ -6,6 +5,7 @@
 @using ApiGenerator
 @using ApiGenerator.Domain
 @using System.Text.RegularExpressions
+@inherits CodeTemplatePage<HighLevelClientMethod>
 @{
 	HighLevelClientMethod method = Model;
 	var selector = Selector(method, method.CsharpNames.GenericOrNonGenericDescriptorName);
@@ -70,6 +70,4 @@ public @Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodN
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 public Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request, CancellationToken ct = default)@method.CsharpNames.InitializerMethodWhereClause @Raw("=>")
 	@(dispatchMethod)Async@(Raw(dispatchGenerics))(@dispatchParameters, ct);
-
-
 
