@@ -9,31 +9,31 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.WatcherApi
 {
-	///<summary>Request options for AcknowledgeWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
+	///<summary>Request options for Acknowledge<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for ActivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
+	///<summary>Request options for Activate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for DeactivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
+	///<summary>Request options for Deactivate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for DeleteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
+	///<summary>Request options for Delete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for ExecuteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
+	///<summary>Request options for Execute<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -45,13 +45,13 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		}
 	}
 
-	///<summary>Request options for GetWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
+	///<summary>Request options for Get<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for PutWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
+	///<summary>Request options for Put<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		}
 	}
 
-	///<summary>Request options for StartWatcher<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
+	///<summary>Request options for Start<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -102,7 +102,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		}
 	}
 
-	///<summary>Request options for StopWatcher<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
+	///<summary>Request options for Stop<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

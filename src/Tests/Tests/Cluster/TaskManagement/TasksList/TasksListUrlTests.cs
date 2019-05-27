@@ -8,9 +8,9 @@ namespace Tests.Cluster.TaskManagement.TasksList
 	public class TasksListUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await UrlTester.GET("/_tasks")
-			.Fluent(c => c.Tasks.ListTasks())
-			.Request(c => c.Tasks.ListTasks(new ListTasksRequest()))
-			.FluentAsync(c => c.Tasks.ListTasksAsync())
-			.RequestAsync(c => c.Tasks.ListTasksAsync(new ListTasksRequest()));
+			.Fluent(c => c.Tasks.List())
+			.Request(c => c.Tasks.List(new ListTasksRequest()))
+			.FluentAsync(c => c.Tasks.ListAsync())
+			.RequestAsync(c => c.Tasks.ListAsync(new ListTasksRequest()));
 	}
 }

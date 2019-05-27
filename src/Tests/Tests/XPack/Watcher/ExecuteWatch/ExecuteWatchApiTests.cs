@@ -96,7 +96,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.Watcher.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Input(i => i
 						.Search(s => s
 							.Request(r => r
@@ -184,10 +184,10 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Watcher.ExecuteWatch(f),
-			(client, f) => client.Watcher.ExecuteWatchAsync(f),
-			(client, r) => client.Watcher.ExecuteWatch(r),
-			(client, r) => client.Watcher.ExecuteWatchAsync(r)
+			(client, f) => client.Watcher.Execute(f),
+			(client, f) => client.Watcher.ExecuteAsync(f),
+			(client, r) => client.Watcher.Execute(r),
+			(client, r) => client.Watcher.ExecuteAsync(r)
 		);
 
 		protected override void ExpectResponse(ExecuteWatchResponse response)
@@ -545,7 +545,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.Watcher.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Input(i => i
 						.Search(s => s
 							.Request(r => r
@@ -604,10 +604,10 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Watcher.ExecuteWatch(f),
-			(client, f) => client.Watcher.ExecuteWatchAsync(f),
-			(client, r) => client.Watcher.ExecuteWatch(r),
-			(client, r) => client.Watcher.ExecuteWatchAsync(r)
+			(client, f) => client.Watcher.Execute(f),
+			(client, f) => client.Watcher.ExecuteAsync(f),
+			(client, r) => client.Watcher.Execute(r),
+			(client, r) => client.Watcher.ExecuteAsync(r)
 		);
 
 		protected override void ExpectResponse(ExecuteWatchResponse response)

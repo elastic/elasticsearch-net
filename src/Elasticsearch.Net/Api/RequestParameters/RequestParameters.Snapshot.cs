@@ -54,7 +54,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for DeleteSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>Request options for Delete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -85,7 +85,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for GetSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>Request options for Get<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

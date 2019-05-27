@@ -14,10 +14,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.GetSnapshot
 			var snapshot = "snap";
 
 			await GET($"/_snapshot/{repository}/{snapshot}")
-					.Fluent(c => c.Snapshot.GetSnapshot(repository, snapshot))
-					.Request(c => c.Snapshot.GetSnapshot(new GetSnapshotRequest(repository, snapshot)))
-					.FluentAsync(c => c.Snapshot.GetSnapshotAsync(repository, snapshot))
-					.RequestAsync(c => c.Snapshot.GetSnapshotAsync(new GetSnapshotRequest(repository, snapshot)))
+					.Fluent(c => c.Snapshot.Get(repository, snapshot))
+					.Request(c => c.Snapshot.Get(new GetSnapshotRequest(repository, snapshot)))
+					.FluentAsync(c => c.Snapshot.GetAsync(repository, snapshot))
+					.RequestAsync(c => c.Snapshot.GetAsync(new GetSnapshotRequest(repository, snapshot)))
 				;
 		}
 	}

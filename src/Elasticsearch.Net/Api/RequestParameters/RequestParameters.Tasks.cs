@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.TasksApi
 {
-	///<summary>Request options for CancelTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for Cancel<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class CancelTasksRequestParameters : RequestParameters<CancelTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -57,7 +57,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 		}
 	}
 
-	///<summary>Request options for ListTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for List<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

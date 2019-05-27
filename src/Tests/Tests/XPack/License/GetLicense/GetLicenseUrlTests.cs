@@ -9,9 +9,9 @@ namespace Tests.XPack.License.GetLicense
 	public class GetLicenseUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await GET("/_license")
-			.Fluent(c => c.License.GetLicense())
-			.Request(c => c.License.GetLicense(new GetLicenseRequest()))
-			.FluentAsync(c => c.License.GetLicenseAsync())
-			.RequestAsync(c => c.License.GetLicenseAsync(new GetLicenseRequest()));
+			.Fluent(c => c.License.Get())
+			.Request(c => c.License.Get(new GetLicenseRequest()))
+			.FluentAsync(c => c.License.GetAsync())
+			.RequestAsync(c => c.License.GetAsync(new GetLicenseRequest()));
 	}
 }

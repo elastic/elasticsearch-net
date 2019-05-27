@@ -25,10 +25,10 @@ namespace Tests.XPack.License.GetLicense
 		protected override string UrlPath => $"/_license";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.License.GetLicense(f),
-			(client, f) => client.License.GetLicenseAsync(f),
-			(client, r) => client.License.GetLicense(r),
-			(client, r) => client.License.GetLicenseAsync(r)
+			(client, f) => client.License.Get(f),
+			(client, f) => client.License.GetAsync(f),
+			(client, r) => client.License.Get(r),
+			(client, r) => client.License.GetAsync(r)
 		);
 
 		protected override void ExpectResponse(GetLicenseResponse response)

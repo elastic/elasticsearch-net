@@ -27,10 +27,10 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 		protected bool BootstrappedWithLicense => !string.IsNullOrEmpty(Cluster.ClusterConfiguration.XPackLicenseJson);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.License.GetTrialLicenseStatus(f),
-			(client, f) => client.License.GetTrialLicenseStatusAsync(f),
-			(client, r) => client.License.GetTrialLicenseStatus(r),
-			(client, r) => client.License.GetTrialLicenseStatusAsync(r)
+			(client, f) => client.License.GetTrialStatus(f),
+			(client, f) => client.License.GetTrialStatusAsync(f),
+			(client, r) => client.License.GetTrialStatus(r),
+			(client, r) => client.License.GetTrialStatusAsync(r)
 		);
 
 		protected override void ExpectResponse(GetTrialLicenseStatusResponse response)

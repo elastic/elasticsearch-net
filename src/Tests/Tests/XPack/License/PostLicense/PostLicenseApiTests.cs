@@ -56,10 +56,10 @@ namespace Tests.XPack.License.PostLicense
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.License.PostLicense(f),
-			(client, f) => client.License.PostLicenseAsync(f),
-			(client, r) => client.License.PostLicense(r),
-			(client, r) => client.License.PostLicenseAsync(r)
+			(client, f) => client.License.Post(f),
+			(client, f) => client.License.PostAsync(f),
+			(client, r) => client.License.Post(r),
+			(client, r) => client.License.PostAsync(r)
 		);
 	}
 }

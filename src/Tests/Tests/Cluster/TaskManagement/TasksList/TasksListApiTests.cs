@@ -34,10 +34,10 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override string UrlPath => "/_tasks?actions=%2Alists%2A";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Tasks.ListTasks(f),
-			(client, f) => client.Tasks.ListTasksAsync(f),
-			(client, r) => client.Tasks.ListTasks(r),
-			(client, r) => client.Tasks.ListTasksAsync(r)
+			(client, f) => client.Tasks.List(f),
+			(client, f) => client.Tasks.ListAsync(f),
+			(client, r) => client.Tasks.List(r),
+			(client, r) => client.Tasks.ListAsync(r)
 		);
 
 		protected override void ExpectResponse(ListTasksResponse response)
@@ -90,10 +90,10 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override string UrlPath => $"/_tasks?detailed=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Tasks.ListTasks(f),
-			(client, f) => client.Tasks.ListTasksAsync(f),
-			(client, r) => client.Tasks.ListTasks(r),
-			(client, r) => client.Tasks.ListTasksAsync(r)
+			(client, f) => client.Tasks.List(f),
+			(client, f) => client.Tasks.ListAsync(f),
+			(client, r) => client.Tasks.List(r),
+			(client, r) => client.Tasks.ListAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

@@ -7469,7 +7469,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for DeleteLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for Delete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
@@ -7484,7 +7484,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for Get <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
@@ -7505,7 +7505,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetBasicLicenseStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for GetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 	{
 		protected IGetBasicLicenseStatusRequest Self => this;
@@ -7520,7 +7520,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetTrialLicenseStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for GetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 	{
 		protected IGetTrialLicenseStatusRequest Self => this;
@@ -7535,7 +7535,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for PostLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for Post <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
@@ -7556,7 +7556,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for StartBasicLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for StartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 	{
 		protected IStartBasicLicenseRequest Self => this;
@@ -7577,7 +7577,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for StartTrialLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for StartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 	{
 		protected IStartTrialLicenseRequest Self => this;
@@ -10360,7 +10360,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteRollupJob <pre></pre></summary>
+	///<summary>Request for DeleteJob <pre></pre></summary>
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
 		protected IDeleteRollupJobRequest Self => this;
@@ -10394,7 +10394,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetRollupJob <pre></pre></summary>
+	///<summary>Request for GetJob <pre></pre></summary>
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
 		protected IGetRollupJobRequest Self => this;
@@ -10427,7 +10427,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetRollupCapabilities <pre></pre></summary>
+	///<summary>Request for GetCapabilities <pre></pre></summary>
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
 		protected IGetRollupCapabilitiesRequest Self => this;
@@ -10460,7 +10460,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetRollupIndexCapabilities <pre></pre></summary>
+	///<summary>Request for GetIndexCapabilities <pre></pre></summary>
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
 		protected IGetRollupIndexCapabilitiesRequest Self => this;
@@ -10494,7 +10494,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CreateRollupJob <pre></pre></summary>
+	///<summary>Request for CreateJob <pre></pre></summary>
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
 		protected ICreateRollupJobRequest Self => this;
@@ -10575,7 +10575,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StartRollupJob <pre></pre></summary>
+	///<summary>Request for StartJob <pre></pre></summary>
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
 		protected IStartRollupJobRequest Self => this;
@@ -10609,7 +10609,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StopRollupJob <pre></pre></summary>
+	///<summary>Request for StopJob <pre></pre></summary>
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
 		protected IStopRollupJobRequest Self => this;
@@ -12184,7 +12184,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>Request for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
 		protected IDeleteSnapshotRequest Self => this;
@@ -12280,7 +12280,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>Request for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected IGetSnapshotRequest Self => this;
@@ -12542,7 +12542,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearSqlCursor <pre>Clear SQL cursor</pre></summary>
+	///<summary>Request for ClearCursor <pre>Clear SQL cursor</pre></summary>
 	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 	{
 		protected IClearSqlCursorRequest Self => this;
@@ -12557,7 +12557,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for QuerySql <pre>Execute SQL</pre></summary>
+	///<summary>Request for Query <pre>Execute SQL</pre></summary>
 	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 	{
 		protected IQuerySqlRequest Self => this;
@@ -12578,7 +12578,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for TranslateSql <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	///<summary>Request for Translate <pre>Translate SQL into Elasticsearch queries</pre></summary>
 	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 	{
 		protected ITranslateSqlRequest Self => this;
@@ -12613,7 +12613,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CancelTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request for Cancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
@@ -12711,7 +12711,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ListTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request for List <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
@@ -13451,7 +13451,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for AcknowledgeWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
+	///<summary>Request for Acknowledge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
@@ -13494,7 +13494,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
+	///<summary>Request for Activate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
 		protected IActivateWatchRequest Self => this;
@@ -13528,7 +13528,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
+	///<summary>Request for Deactivate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
 		protected IDeactivateWatchRequest Self => this;
@@ -13562,7 +13562,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
+	///<summary>Request for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
@@ -13596,7 +13596,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
+	///<summary>Request for Execute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
@@ -13635,7 +13635,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
+	///<summary>Request for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
@@ -13669,7 +13669,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
+	///<summary>Request for Put <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
@@ -13725,7 +13725,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for StartWatcher <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
+	///<summary>Request for Start <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
@@ -13779,7 +13779,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for StopWatcher <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
+	///<summary>Request for Stop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;

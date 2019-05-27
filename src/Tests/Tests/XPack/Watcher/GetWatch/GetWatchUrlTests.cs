@@ -9,9 +9,9 @@ namespace Tests.XPack.Watcher.GetWatch
 	public class GetWatchUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await GET("/_watcher/watch/watch_id")
-			.Fluent(c => c.Watcher.GetWatch("watch_id"))
-			.Request(c => c.Watcher.GetWatch(new GetWatchRequest("watch_id")))
-			.FluentAsync(c => c.Watcher.GetWatchAsync("watch_id"))
-			.RequestAsync(c => c.Watcher.GetWatchAsync(new GetWatchRequest("watch_id")));
+			.Fluent(c => c.Watcher.Get("watch_id"))
+			.Request(c => c.Watcher.Get(new GetWatchRequest("watch_id")))
+			.FluentAsync(c => c.Watcher.GetAsync("watch_id"))
+			.RequestAsync(c => c.Watcher.GetAsync(new GetWatchRequest("watch_id")));
 	}
 }

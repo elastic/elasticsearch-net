@@ -518,10 +518,10 @@ namespace Tests.Search.Search
 		protected override string UrlPath => $"/_tasks?pretty=true&error_trace=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.Tasks.ListTasks(f),
-			(c, f) => c.Tasks.ListTasksAsync(f),
-			(c, r) => c.Tasks.ListTasks(r),
-			(c, r) => c.Tasks.ListTasksAsync(r)
+			(c, f) => c.Tasks.List(f),
+			(c, f) => c.Tasks.ListAsync(f),
+			(c, r) => c.Tasks.List(r),
+			(c, r) => c.Tasks.ListAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)

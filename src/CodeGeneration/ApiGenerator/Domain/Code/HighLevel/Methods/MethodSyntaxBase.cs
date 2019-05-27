@@ -9,6 +9,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 		public string ResponseName => CsharpNames.GenericOrNonGenericResponseName;
 
 		public string DocumentationCref => CsharpNames.RequestInterfaceName;
+		
 		public abstract string MethodGenerics { get; }
 		
 		public abstract string GenericWhereClause { get; }

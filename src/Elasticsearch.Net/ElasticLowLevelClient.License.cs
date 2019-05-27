@@ -26,61 +26,61 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 
 		///<summary>DELETE on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse DeleteLicense<TResponse>(DeleteLicenseRequestParameters requestParameters = null)
+		public TResponse Delete<TResponse>(DeleteLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_license", null, RequestParams(requestParameters));
 		///<summary>DELETE on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> DeleteLicenseAsync<TResponse>(DeleteLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DeleteAsync<TResponse>(DeleteLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_license", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetLicense<TResponse>(GetLicenseRequestParameters requestParameters = null)
+		public TResponse Get<TResponse>(GetLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_license", null, RequestParams(requestParameters));
 		///<summary>GET on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> GetLicenseAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_license", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_license/basic_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetBasicLicenseStatus<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null)
+		public TResponse GetBasicStatus<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_license/basic_status", null, RequestParams(requestParameters));
 		///<summary>GET on /_license/basic_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> GetBasicLicenseStatusAsync<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetBasicStatusAsync<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_license/basic_status", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetTrialLicenseStatus<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null)
+		public TResponse GetTrialStatus<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_license/trial_status", null, RequestParams(requestParameters));
 		///<summary>GET on /_license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> GetTrialLicenseStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetTrialStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_license/trial_status", ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "body">licenses to be installed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse PostLicense<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null)
+		public TResponse Post<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, "_license", body, RequestParams(requestParameters));
 		///<summary>PUT on /_license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "body">licenses to be installed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> PostLicenseAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> PostAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, "_license", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_basic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse StartBasicLicense<TResponse>(StartBasicLicenseRequestParameters requestParameters = null)
+		public TResponse StartBasic<TResponse>(StartBasicLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_license/start_basic", null, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_basic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> StartBasicLicenseAsync<TResponse>(StartBasicLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> StartBasicAsync<TResponse>(StartBasicLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_license/start_basic", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse StartTrialLicense<TResponse>(StartTrialLicenseRequestParameters requestParameters = null)
+		public TResponse StartTrial<TResponse>(StartTrialLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_license/start_trial", null, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> StartTrialLicenseAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> StartTrialAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_license/start_trial", ctx, null, RequestParams(requestParameters));
 	}
 }

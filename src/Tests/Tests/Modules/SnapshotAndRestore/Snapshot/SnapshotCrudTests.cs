@@ -60,10 +60,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, GetSnapshotResponse>(
 			ReadInitializer,
 			ReadFluent,
-			(s, c, f) => c.Snapshot.GetSnapshot(_repositoryName, s, f),
-			(s, c, f) => c.Snapshot.GetSnapshotAsync(_repositoryName, s, f),
-			(s, c, r) => c.Snapshot.GetSnapshot(r),
-			(s, c, r) => c.Snapshot.GetSnapshotAsync(r)
+			(s, c, f) => c.Snapshot.Get(_repositoryName, s, f),
+			(s, c, f) => c.Snapshot.GetAsync(_repositoryName, s, f),
+			(s, c, r) => c.Snapshot.Get(r),
+			(s, c, r) => c.Snapshot.GetAsync(r)
 		);
 
 		protected GetSnapshotRequest ReadInitializer(string snapshotName) => new GetSnapshotRequest(_repositoryName, snapshotName);
@@ -74,10 +74,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, DeleteSnapshotResponse>(
 				DeleteInitializer,
 				DeleteFluent,
-				(s, c, f) => c.Snapshot.DeleteSnapshot(_repositoryName, s, f),
-				(s, c, f) => c.Snapshot.DeleteSnapshotAsync(_repositoryName, s, f),
-				(s, c, r) => c.Snapshot.DeleteSnapshot(r),
-				(s, c, r) => c.Snapshot.DeleteSnapshotAsync(r)
+				(s, c, f) => c.Snapshot.Delete(_repositoryName, s, f),
+				(s, c, f) => c.Snapshot.DeleteAsync(_repositoryName, s, f),
+				(s, c, r) => c.Snapshot.Delete(r),
+				(s, c, r) => c.Snapshot.DeleteAsync(r)
 			);
 
 		protected DeleteSnapshotRequest DeleteInitializer(string snapshotName) => new DeleteSnapshotRequest(_repositoryName, snapshotName);

@@ -35,10 +35,10 @@ namespace Tests.XPack.License.StartTrialLicense
 		protected override string UrlPath => $"/_license/start_trial?acknowledge=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.License.StartTrialLicense(f),
-			(client, f) => client.License.StartTrialLicenseAsync(f),
-			(client, r) => client.License.StartTrialLicense(r),
-			(client, r) => client.License.StartTrialLicenseAsync(r)
+			(client, f) => client.License.StartTrial(f),
+			(client, f) => client.License.StartTrialAsync(f),
+			(client, r) => client.License.StartTrial(r),
+			(client, r) => client.License.StartTrialAsync(r)
 		);
 
 		protected override StartTrialLicenseRequest Initializer => new StartTrialLicenseRequest { Acknowledge = true };

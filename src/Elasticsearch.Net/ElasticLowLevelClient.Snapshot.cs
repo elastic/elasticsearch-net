@@ -54,13 +54,13 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse DeleteSnapshot<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null)
+		public TResponse Delete<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> DeleteSnapshotAsync<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DeleteAsync<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_snapshot/{repository} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A comma-separated list of repository names</param>
@@ -76,13 +76,13 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetSnapshot<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null)
+		public TResponse Get<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_snapshot/{repository}/{snapshot} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> GetSnapshotAsync<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetAsync<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_snapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
