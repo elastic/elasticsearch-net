@@ -22,7 +22,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IAcknowledgeWatchRequest"/>
 		public AcknowledgeWatchResponse AcknowledgeWatch(Id watchId, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null) => AcknowledgeWatch(selector.InvokeOrDefault(new AcknowledgeWatchDescriptor(watchId: watchId)));
 		///<inheritdoc cref = "IAcknowledgeWatchRequest"/>
-		public Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(Id watchId, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null, CancellationToken ct = default) => AcknowledgeWatchAsync(selector.InvokeOrDefault(new AcknowledgeWatchDescriptor(watchId: watchId)), ct: ct);
+		public Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(Id watchId, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null, CancellationToken ct = default) => AcknowledgeWatchAsync(selector.InvokeOrDefault(new AcknowledgeWatchDescriptor(watchId: watchId)), ct);
 		///<inheritdoc cref = "IAcknowledgeWatchRequest"/>
 		public AcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request) => DoRequest<IAcknowledgeWatchRequest, AcknowledgeWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IAcknowledgeWatchRequest"/>
@@ -30,7 +30,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IActivateWatchRequest"/>
 		public ActivateWatchResponse ActivateWatch(Id watchId, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null) => ActivateWatch(selector.InvokeOrDefault(new ActivateWatchDescriptor(watchId: watchId)));
 		///<inheritdoc cref = "IActivateWatchRequest"/>
-		public Task<ActivateWatchResponse> ActivateWatchAsync(Id watchId, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null, CancellationToken ct = default) => ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(watchId: watchId)), ct: ct);
+		public Task<ActivateWatchResponse> ActivateWatchAsync(Id watchId, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null, CancellationToken ct = default) => ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(watchId: watchId)), ct);
 		///<inheritdoc cref = "IActivateWatchRequest"/>
 		public ActivateWatchResponse ActivateWatch(IActivateWatchRequest request) => DoRequest<IActivateWatchRequest, ActivateWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IActivateWatchRequest"/>
@@ -38,7 +38,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IDeactivateWatchRequest"/>
 		public DeactivateWatchResponse DeactivateWatch(Id watchId, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null) => DeactivateWatch(selector.InvokeOrDefault(new DeactivateWatchDescriptor(watchId: watchId)));
 		///<inheritdoc cref = "IDeactivateWatchRequest"/>
-		public Task<DeactivateWatchResponse> DeactivateWatchAsync(Id watchId, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null, CancellationToken ct = default) => DeactivateWatchAsync(selector.InvokeOrDefault(new DeactivateWatchDescriptor(watchId: watchId)), ct: ct);
+		public Task<DeactivateWatchResponse> DeactivateWatchAsync(Id watchId, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null, CancellationToken ct = default) => DeactivateWatchAsync(selector.InvokeOrDefault(new DeactivateWatchDescriptor(watchId: watchId)), ct);
 		///<inheritdoc cref = "IDeactivateWatchRequest"/>
 		public DeactivateWatchResponse DeactivateWatch(IDeactivateWatchRequest request) => DoRequest<IDeactivateWatchRequest, DeactivateWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeactivateWatchRequest"/>
@@ -46,7 +46,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IDeleteWatchRequest"/>
 		public DeleteWatchResponse DeleteWatch(Id id, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null) => DeleteWatch(selector.InvokeOrDefault(new DeleteWatchDescriptor(id: id)));
 		///<inheritdoc cref = "IDeleteWatchRequest"/>
-		public Task<DeleteWatchResponse> DeleteWatchAsync(Id id, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null, CancellationToken ct = default) => DeleteWatchAsync(selector.InvokeOrDefault(new DeleteWatchDescriptor(id: id)), ct: ct);
+		public Task<DeleteWatchResponse> DeleteWatchAsync(Id id, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null, CancellationToken ct = default) => DeleteWatchAsync(selector.InvokeOrDefault(new DeleteWatchDescriptor(id: id)), ct);
 		///<inheritdoc cref = "IDeleteWatchRequest"/>
 		public DeleteWatchResponse DeleteWatch(IDeleteWatchRequest request) => DoRequest<IDeleteWatchRequest, DeleteWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteWatchRequest"/>
@@ -54,7 +54,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
 		public ExecuteWatchResponse ExecuteWatch(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector = null) => ExecuteWatch(selector.InvokeOrDefault(new ExecuteWatchDescriptor()));
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
-		public Task<ExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector = null, CancellationToken ct = default) => ExecuteWatchAsync(selector.InvokeOrDefault(new ExecuteWatchDescriptor()), ct: ct);
+		public Task<ExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector = null, CancellationToken ct = default) => ExecuteWatchAsync(selector.InvokeOrDefault(new ExecuteWatchDescriptor()), ct);
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
 		public ExecuteWatchResponse ExecuteWatch(IExecuteWatchRequest request) => DoRequest<IExecuteWatchRequest, ExecuteWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IExecuteWatchRequest"/>
@@ -62,7 +62,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IGetWatchRequest"/>
 		public GetWatchResponse GetWatch(Id id, Func<GetWatchDescriptor, IGetWatchRequest> selector = null) => GetWatch(selector.InvokeOrDefault(new GetWatchDescriptor(id: id)));
 		///<inheritdoc cref = "IGetWatchRequest"/>
-		public Task<GetWatchResponse> GetWatchAsync(Id id, Func<GetWatchDescriptor, IGetWatchRequest> selector = null, CancellationToken ct = default) => GetWatchAsync(selector.InvokeOrDefault(new GetWatchDescriptor(id: id)), ct: ct);
+		public Task<GetWatchResponse> GetWatchAsync(Id id, Func<GetWatchDescriptor, IGetWatchRequest> selector = null, CancellationToken ct = default) => GetWatchAsync(selector.InvokeOrDefault(new GetWatchDescriptor(id: id)), ct);
 		///<inheritdoc cref = "IGetWatchRequest"/>
 		public GetWatchResponse GetWatch(IGetWatchRequest request) => DoRequest<IGetWatchRequest, GetWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetWatchRequest"/>
@@ -70,7 +70,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IPutWatchRequest"/>
 		public PutWatchResponse PutWatch(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector = null) => PutWatch(selector.InvokeOrDefault(new PutWatchDescriptor(id: id)));
 		///<inheritdoc cref = "IPutWatchRequest"/>
-		public Task<PutWatchResponse> PutWatchAsync(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector = null, CancellationToken ct = default) => PutWatchAsync(selector.InvokeOrDefault(new PutWatchDescriptor(id: id)), ct: ct);
+		public Task<PutWatchResponse> PutWatchAsync(Id id, Func<PutWatchDescriptor, IPutWatchRequest> selector = null, CancellationToken ct = default) => PutWatchAsync(selector.InvokeOrDefault(new PutWatchDescriptor(id: id)), ct);
 		///<inheritdoc cref = "IPutWatchRequest"/>
 		public PutWatchResponse PutWatch(IPutWatchRequest request) => DoRequest<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutWatchRequest"/>
@@ -78,7 +78,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IStartWatcherRequest"/>
 		public StartWatcherResponse StartWatcher(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null) => StartWatcher(selector.InvokeOrDefault(new StartWatcherDescriptor()));
 		///<inheritdoc cref = "IStartWatcherRequest"/>
-		public Task<StartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null, CancellationToken ct = default) => StartWatcherAsync(selector.InvokeOrDefault(new StartWatcherDescriptor()), ct: ct);
+		public Task<StartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null, CancellationToken ct = default) => StartWatcherAsync(selector.InvokeOrDefault(new StartWatcherDescriptor()), ct);
 		///<inheritdoc cref = "IStartWatcherRequest"/>
 		public StartWatcherResponse StartWatcher(IStartWatcherRequest request) => DoRequest<IStartWatcherRequest, StartWatcherResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartWatcherRequest"/>
@@ -86,7 +86,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IWatcherStatsRequest"/>
 		public WatcherStatsResponse Stats(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new WatcherStatsDescriptor()));
 		///<inheritdoc cref = "IWatcherStatsRequest"/>
-		public Task<WatcherStatsResponse> StatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null, CancellationToken ct = default) => StatsAsync(selector.InvokeOrDefault(new WatcherStatsDescriptor()), ct: ct);
+		public Task<WatcherStatsResponse> StatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null, CancellationToken ct = default) => StatsAsync(selector.InvokeOrDefault(new WatcherStatsDescriptor()), ct);
 		///<inheritdoc cref = "IWatcherStatsRequest"/>
 		public WatcherStatsResponse Stats(IWatcherStatsRequest request) => DoRequest<IWatcherStatsRequest, WatcherStatsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IWatcherStatsRequest"/>
@@ -94,7 +94,7 @@ namespace Nest.Specification.WatcherApi
 		///<inheritdoc cref = "IStopWatcherRequest"/>
 		public StopWatcherResponse StopWatcher(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null) => StopWatcher(selector.InvokeOrDefault(new StopWatcherDescriptor()));
 		///<inheritdoc cref = "IStopWatcherRequest"/>
-		public Task<StopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null, CancellationToken ct = default) => StopWatcherAsync(selector.InvokeOrDefault(new StopWatcherDescriptor()), ct: ct);
+		public Task<StopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null, CancellationToken ct = default) => StopWatcherAsync(selector.InvokeOrDefault(new StopWatcherDescriptor()), ct);
 		///<inheritdoc cref = "IStopWatcherRequest"/>
 		public StopWatcherResponse StopWatcher(IStopWatcherRequest request) => DoRequest<IStopWatcherRequest, StopWatcherResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStopWatcherRequest"/>

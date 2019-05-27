@@ -6,56 +6,27 @@
 @using ApiGenerator
 @using ApiGenerator.Domain
 @using System.Text.RegularExpressions
-@inherits CodeTemplatePage<HighLevelClientMethod>
+@inherits CodeTemplatePage<HighLevelModel>
 @{
-	HighLevelClientMethod method = Model;
-	var selector = string.Format("Func<{0}, {1}>", method.CsharpNames.GenericOrNonGenericDescriptorName, method.CsharpNames.RequestInterfaceName);
-	var optionalSelector = !method.SelectorIsOptional ? "" : " = null";
-	var descriptorMethodGenerics = method.CsharpNames.HighLevelDescriptorMethodGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.HighLevelDescriptorMethodGenerics)}>" : null;
-	var requestMethodGenerics = method.CsharpNames.ResponseGenerics.Any() ? $"<{string.Join(", ", method.CsharpNames.ResponseGenerics)}>" : null;
-	var descriptorArgs = DescriptorArguments(method, @method.DescriptorArguments);
+	HighLevelModel model = Model;
 }
-@functions {
-	private string Selector(HighLevelClientMethod method, string generic)
-	{
-		return string.Format("Func<{0}, {1}>", generic, method.CsharpNames.RequestInterfaceName);
-	} 
-	private string DescriptorArguments(HighLevelClientMethod method, List<UrlPart> requiredDescriptorParts)
-	{
-		if (!requiredDescriptorParts.Any()) return null;
 
-		string Optional(UrlPart p) => !p.Required && method.SelectorIsOptional ? " = null" : string.Empty;
-		return string.Join(", ", requiredDescriptorParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}{Optional(p)}")) + ", ";
-	}
-}
-@{
-	//await IncludeAsync("HighLevelClient/MethodDocs.cshtml", method);
-}
-///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
-@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(descriptorMethodGenerics))(@(Raw(descriptorArgs))@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.DescriptorMethodWhereClause;
+///<inheritdoc cref="@(model.Fluent.DocumentationCref)" />
+@{ IncludeAsync("HighLevelClient/FluentSyntax/FluentMethodHeader.cshtml", new FluentSyntaxView(model.Fluent, async: false)); };
+///<inheritdoc cref="@(model.Fluent.DocumentationCref)" />
+@{ IncludeAsync("HighLevelClient/FluentSyntax/FluentMethodHeader.cshtml", new FluentSyntaxView(model.Fluent, async: true)); };
 
-///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
-Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(descriptorMethodGenerics))(@(Raw(descriptorArgs))@(Raw(selector)) selector@(optionalSelector), CancellationToken ct = default)@method.CsharpNames.DescriptorMethodWhereClause;
-@if (method.CsharpNames.DescriptorBindsOverMultipleDocuments)
+@if (model.FluentBound != null)
 {
-	var methodGeneric = string.Format("<{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
-	var boundGeneric = string.Format("<{0},{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
-	var boundDescriptor = string.Format("{0}<{1}>", method.CsharpNames.DescriptorName, method.CsharpNames.DescriptorBoundDocumentGeneric);
-	var boundSelector = Selector(method, boundDescriptor);
-	var boundWhere = string.Format("where {0} : class", method.CsharpNames.DescriptorBoundDocumentGeneric);
 <text>
-///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
-@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGeneric))(@(Raw(descriptorArgs))@(Raw(boundSelector)) selector@(optionalSelector))@boundWhere;
-
-///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
-Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(methodGeneric))(@(Raw(descriptorArgs))@(Raw(boundSelector)) selector@(optionalSelector), CancellationToken ct = default)@boundWhere;
+	///<inheritdoc cref="@(model.FluentBound.DocumentationCref)" />
+	@{ IncludeAsync("HighLevelClient/FluentSyntax/FluentMethodHeader.cshtml", new FluentSyntaxView(model.FluentBound, async: false)); };
+	///<inheritdoc cref="@(model.FluentBound.DocumentationCref)" />
+	@{ IncludeAsync("HighLevelClient/FluentSyntax/FluentMethodHeader.cshtml", new FluentSyntaxView(model.FluentBound, async: true)); };
 </text>
 }
-
-///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
-@Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request)@method.CsharpNames.InitializerMethodWhereClause;
-
-///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
-Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(requestMethodGenerics))(@method.CsharpNames.RequestInterfaceName request, CancellationToken ct = default)@method.CsharpNames.InitializerMethodWhereClause;
-
+///<inheritdoc cref="@(model.Initializer.DocumentationCref)" />
+@{ IncludeAsync("HighLevelClient/InitializerSyntax/InitializerMethodHeader.cshtml", new InitializerSyntaxView(model.Initializer, async: false)); };
+///<inheritdoc cref="@(model.Initializer.DocumentationCref)" />
+@{ IncludeAsync("HighLevelClient/InitializerSyntax/InitializerMethodHeader.cshtml", new InitializerSyntaxView(model.Initializer, async: true)); };
 

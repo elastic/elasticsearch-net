@@ -22,7 +22,7 @@ namespace Nest.Specification.TasksApi
 		///<inheritdoc cref = "ICancelTasksRequest"/>
 		public CancelTasksResponse CancelTasks(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null) => CancelTasks(selector.InvokeOrDefault(new CancelTasksDescriptor()));
 		///<inheritdoc cref = "ICancelTasksRequest"/>
-		public Task<CancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null, CancellationToken ct = default) => CancelTasksAsync(selector.InvokeOrDefault(new CancelTasksDescriptor()), ct: ct);
+		public Task<CancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null, CancellationToken ct = default) => CancelTasksAsync(selector.InvokeOrDefault(new CancelTasksDescriptor()), ct);
 		///<inheritdoc cref = "ICancelTasksRequest"/>
 		public CancelTasksResponse CancelTasks(ICancelTasksRequest request) => DoRequest<ICancelTasksRequest, CancelTasksResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICancelTasksRequest"/>
@@ -30,7 +30,7 @@ namespace Nest.Specification.TasksApi
 		///<inheritdoc cref = "IGetTaskRequest"/>
 		public GetTaskResponse GetTask(TaskId taskId, Func<GetTaskDescriptor, IGetTaskRequest> selector = null) => GetTask(selector.InvokeOrDefault(new GetTaskDescriptor(taskId: taskId)));
 		///<inheritdoc cref = "IGetTaskRequest"/>
-		public Task<GetTaskResponse> GetTaskAsync(TaskId taskId, Func<GetTaskDescriptor, IGetTaskRequest> selector = null, CancellationToken ct = default) => GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(taskId: taskId)), ct: ct);
+		public Task<GetTaskResponse> GetTaskAsync(TaskId taskId, Func<GetTaskDescriptor, IGetTaskRequest> selector = null, CancellationToken ct = default) => GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(taskId: taskId)), ct);
 		///<inheritdoc cref = "IGetTaskRequest"/>
 		public GetTaskResponse GetTask(IGetTaskRequest request) => DoRequest<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetTaskRequest"/>
@@ -38,7 +38,7 @@ namespace Nest.Specification.TasksApi
 		///<inheritdoc cref = "IListTasksRequest"/>
 		public ListTasksResponse ListTasks(Func<ListTasksDescriptor, IListTasksRequest> selector = null) => ListTasks(selector.InvokeOrDefault(new ListTasksDescriptor()));
 		///<inheritdoc cref = "IListTasksRequest"/>
-		public Task<ListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null, CancellationToken ct = default) => ListTasksAsync(selector.InvokeOrDefault(new ListTasksDescriptor()), ct: ct);
+		public Task<ListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null, CancellationToken ct = default) => ListTasksAsync(selector.InvokeOrDefault(new ListTasksDescriptor()), ct);
 		///<inheritdoc cref = "IListTasksRequest"/>
 		public ListTasksResponse ListTasks(IListTasksRequest request) => DoRequest<IListTasksRequest, ListTasksResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IListTasksRequest"/>

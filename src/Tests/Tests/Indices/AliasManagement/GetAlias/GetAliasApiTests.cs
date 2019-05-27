@@ -92,9 +92,9 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_alias/bad-alias";
+		protected override string UrlPath => $"/_all/_alias/bad-alias";
 		
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Names);
+		protected override GetAliasRequest Initializer => new GetAliasRequest(AllIndices, Names);
 		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d.Name(Names);
 
 		protected override LazyResponses ClientUsage() => Calls(

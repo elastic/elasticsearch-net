@@ -22,7 +22,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
 		public DeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) => DeleteLicense(selector.InvokeOrDefault(new DeleteLicenseDescriptor()));
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
-		public Task<DeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken ct = default) => DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), ct: ct);
+		public Task<DeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken ct = default) => DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), ct);
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
 		public DeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) => DoRequest<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
@@ -30,7 +30,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IGetLicenseRequest"/>
 		public GetLicenseResponse GetLicense(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null) => GetLicense(selector.InvokeOrDefault(new GetLicenseDescriptor()));
 		///<inheritdoc cref = "IGetLicenseRequest"/>
-		public Task<GetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null, CancellationToken ct = default) => GetLicenseAsync(selector.InvokeOrDefault(new GetLicenseDescriptor()), ct: ct);
+		public Task<GetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null, CancellationToken ct = default) => GetLicenseAsync(selector.InvokeOrDefault(new GetLicenseDescriptor()), ct);
 		///<inheritdoc cref = "IGetLicenseRequest"/>
 		public GetLicenseResponse GetLicense(IGetLicenseRequest request) => DoRequest<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetLicenseRequest"/>
@@ -38,7 +38,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
 		public GetBasicLicenseStatusResponse GetBasicLicenseStatus(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null) => GetBasicLicenseStatus(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()));
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
-		public Task<GetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetBasicLicenseStatusAsync(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()), ct: ct);
+		public Task<GetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetBasicLicenseStatusAsync(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()), ct);
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
 		public GetBasicLicenseStatusResponse GetBasicLicenseStatus(IGetBasicLicenseStatusRequest request) => DoRequest<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
@@ -46,7 +46,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
 		public GetTrialLicenseStatusResponse GetTrialLicenseStatus(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null) => GetTrialLicenseStatus(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()));
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
-		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetTrialLicenseStatusAsync(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()), ct: ct);
+		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetTrialLicenseStatusAsync(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()), ct);
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
 		public GetTrialLicenseStatusResponse GetTrialLicenseStatus(IGetTrialLicenseStatusRequest request) => DoRequest<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
@@ -54,7 +54,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IPostLicenseRequest"/>
 		public PostLicenseResponse PostLicense(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null) => PostLicense(selector.InvokeOrDefault(new PostLicenseDescriptor()));
 		///<inheritdoc cref = "IPostLicenseRequest"/>
-		public Task<PostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken ct = default) => PostLicenseAsync(selector.InvokeOrDefault(new PostLicenseDescriptor()), ct: ct);
+		public Task<PostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken ct = default) => PostLicenseAsync(selector.InvokeOrDefault(new PostLicenseDescriptor()), ct);
 		///<inheritdoc cref = "IPostLicenseRequest"/>
 		public PostLicenseResponse PostLicense(IPostLicenseRequest request) => DoRequest<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPostLicenseRequest"/>
@@ -62,7 +62,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
 		public StartBasicLicenseResponse StartBasicLicense(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null) => StartBasicLicense(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()));
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
-		public Task<StartBasicLicenseResponse> StartBasicLicenseAsync(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null, CancellationToken ct = default) => StartBasicLicenseAsync(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()), ct: ct);
+		public Task<StartBasicLicenseResponse> StartBasicLicenseAsync(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null, CancellationToken ct = default) => StartBasicLicenseAsync(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()), ct);
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
 		public StartBasicLicenseResponse StartBasicLicense(IStartBasicLicenseRequest request) => DoRequest<IStartBasicLicenseRequest, StartBasicLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
@@ -70,7 +70,7 @@ namespace Nest.Specification.LicenseApi
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
 		public StartTrialLicenseResponse StartTrialLicense(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null) => StartTrialLicense(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()));
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
-		public Task<StartTrialLicenseResponse> StartTrialLicenseAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null, CancellationToken ct = default) => StartTrialLicenseAsync(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()), ct: ct);
+		public Task<StartTrialLicenseResponse> StartTrialLicenseAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null, CancellationToken ct = default) => StartTrialLicenseAsync(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()), ct);
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
 		public StartTrialLicenseResponse StartTrialLicense(IStartTrialLicenseRequest request) => DoRequest<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>

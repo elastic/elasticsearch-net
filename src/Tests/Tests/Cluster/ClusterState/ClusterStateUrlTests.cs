@@ -13,17 +13,18 @@ namespace Tests.Cluster.ClusterState
 		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/state")
-					.Fluent(c => c.Cluster.State(AllIndices))
+					.Fluent(c => c.Cluster.State())
 					.Request(c => c.Cluster.State(new ClusterStateRequest()))
-					.FluentAsync(c => c.Cluster.StateAsync(AllIndices))
+					.FluentAsync(c => c.Cluster.StateAsync())
 					.RequestAsync(c => c.Cluster.StateAsync(new ClusterStateRequest()))
+				
 				;
 
 			var metrics = ClusterStateMetric.MasterNode | ClusterStateMetric.Metadata;
 			await GET("/_cluster/state/metadata%2Cmaster_node")
-					.Fluent(c => c.Cluster.State(AllIndices, p => p.Metric(metrics)))
+					.Fluent(c => c.Cluster.State(null, p => p.Metric(metrics)))
 					.Request(c => c.Cluster.State(new ClusterStateRequest(metrics)))
-					.FluentAsync(c => c.Cluster.StateAsync(AllIndices, p => p.Metric(metrics)))
+					.FluentAsync(c => c.Cluster.StateAsync(null, p => p.Metric(metrics)))
 					.RequestAsync(c => c.Cluster.StateAsync(new ClusterStateRequest(metrics)))
 				;
 

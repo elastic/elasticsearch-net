@@ -86,59 +86,18 @@ namespace ApiGenerator.Domain
 				return first;
 			}
 		}
-		
-		public HighLevelClientMethod HighLevelClientMethod => new HighLevelClientMethod
+		public HighLevelModel HighLevelModel => new HighLevelModel
 		{
 			CsharpNames = CsharpNames,
-			HasBody = Body != null,
-			DescriptorArguments = CreateDescriptorArgs(),
-			SelectorIsOptional = Body == null || !Body.Required || HttpMethods.Contains("GET")
+			Fluent = new FluentMethod(CsharpNames, Url.Parts,
+				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET")
+			),
+			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments ? null : new BoundFluentMethod(CsharpNames, Url.Parts,
+				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET")
+			),
+			Initializer = new InitializerMethod(CsharpNames) 
 		};
-		
-		public List<UrlPart> CreateDescriptorArgs()
-		{
-			var requiredParts = Url.Parts.Where(p => p.Required).ToList();
-			//Many api's return ALOT of information by default e.g get_alias or get_mapping
-			//the client methods that take a descriptor default to forcing a choice on the user.
-			//except for cat api's where the amount of information returned is manageable
-			var willInferFromDocument = CsharpNames.GenericsDeclaredOnDescriptor?.Contains("Document") ?? false;
-			if (!requiredParts.Any() && Namespace != "cat")
-			{
-				var parts = new[]
-				{
-					//only make index part the first argument if the descriptor is not generic on T.*?Document
-					Url.Parts.FirstOrDefault(p => p.Type == "list" && (p.Name == "index" || p.Name == "indices") && !willInferFromDocument),
-					Url.Parts.FirstOrDefault(p => p.Name == "name"),
-				};
-				requiredParts = parts.Where(p=>p!= null).Take(1).ToList();
-			}
-			if (willInferFromDocument)
-			{
-				//if index, indices is required but the descriptor is generic these will be inferred so no need to pass explicitly
-				requiredParts = requiredParts.Where(p => p.Name != "index" && p.Name != "indices").ToList();
-				var idPart = requiredParts.FirstOrDefault(i => i.Name == "id");
-				if (idPart != null && Url.IsDocumentApi)
-				{
-					requiredParts.Remove(idPart);
-					var generic = CsharpNames.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "").Split(",").First().Trim();
-					requiredParts.Add(new UrlPart
-					{
-						Name = idPart.Name,
-						Required = idPart.Required,
-						Description = idPart.Description,
-						Options = idPart.Options,
-						Type = idPart.Type,
-						ClrTypeNameOverride = $"DocumentPath<{generic}>"
-					});
-					
-				}
 
-			}
-
-			return requiredParts;
-			
-		}
-		
 		private List<LowLevelClientMethod> _lowLevelClientMethods;
 		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{

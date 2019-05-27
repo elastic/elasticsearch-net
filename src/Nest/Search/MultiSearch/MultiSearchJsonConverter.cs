@@ -22,14 +22,12 @@ namespace Nest
 			{
 				var p = operation.RequestParameters;
 
-				string GetString(string key)
-				{
-					return p.GetResolvedQueryStringValue(key, settings);
-				}
+				string GetString(string key) => p.GetResolvedQueryStringValue(key, settings);
 
 				IUrlParameter indices = value.Index == null || !value.Index.Equals(operation.Index)
 					? operation.Index
 					: null;
+				var operationIndex = indices?.GetString(settings);
 
 				var searchType = GetString("search_type");
 				if (searchType == "query_then_fetch")
@@ -37,7 +35,7 @@ namespace Nest
 
 				var header = new
 				{
-					index = indices?.GetString(settings),
+					index = operationIndex != value.Index ? operationIndex : null,
 					search_type = searchType,
 					preference = GetString("preference"),
 					routing = GetString("routing"),

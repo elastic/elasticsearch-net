@@ -22,7 +22,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
 		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null) => DeleteAutoFollowPattern(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)));
 		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
-		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)), ct: ct);
+		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)), ct);
 		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
 		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(IDeleteAutoFollowPatternRequest request) => DoRequest<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
@@ -30,7 +30,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
 		public CreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector) => CreateFollowIndex(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index: index)));
 		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
-		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector, CancellationToken ct = default) => CreateFollowIndexAsync(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index: index)), ct: ct);
+		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector, CancellationToken ct = default) => CreateFollowIndexAsync(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
 		public CreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request) => DoRequest<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
@@ -38,7 +38,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
 		public FollowIndexStatsResponse FollowIndexStats(Indices index, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null) => FollowIndexStats(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(index: index)));
 		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
-		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(Indices index, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null, CancellationToken ct = default) => FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(index: index)), ct: ct);
+		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(Indices index, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null, CancellationToken ct = default) => FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
 		public FollowIndexStatsResponse FollowIndexStats(IFollowIndexStatsRequest request) => DoRequest<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
@@ -46,7 +46,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
 		public GetAutoFollowPatternResponse GetAutoFollowPattern(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => GetAutoFollowPattern(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)));
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
-		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)), ct: ct);
+		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)), ct);
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
 		public GetAutoFollowPatternResponse GetAutoFollowPattern(IGetAutoFollowPatternRequest request) => DoRequest<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
@@ -54,7 +54,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
 		public PauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null) => PauseFollowIndex(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
-		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null, CancellationToken ct = default) => PauseFollowIndexAsync(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index: index)), ct: ct);
+		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null, CancellationToken ct = default) => PauseFollowIndexAsync(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
 		public PauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request) => DoRequest<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
@@ -62,7 +62,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
 		public CreateAutoFollowPatternResponse CreateAutoFollowPattern(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector) => CreateAutoFollowPattern(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)));
 		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
-		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector, CancellationToken ct = default) => CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)), ct: ct);
+		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector, CancellationToken ct = default) => CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)), ct);
 		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
 		public CreateAutoFollowPatternResponse CreateAutoFollowPattern(ICreateAutoFollowPatternRequest request) => DoRequest<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
@@ -70,7 +70,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
 		public ResumeFollowIndexResponse ResumeFollowIndex(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null) => ResumeFollowIndex(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
-		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null, CancellationToken ct = default) => ResumeFollowIndexAsync(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index: index)), ct: ct);
+		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null, CancellationToken ct = default) => ResumeFollowIndexAsync(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
 		public ResumeFollowIndexResponse ResumeFollowIndex(IResumeFollowIndexRequest request) => DoRequest<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
@@ -78,7 +78,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "ICcrStatsRequest"/>
 		public CcrStatsResponse CcrStats(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null) => CcrStats(selector.InvokeOrDefault(new CcrStatsDescriptor()));
 		///<inheritdoc cref = "ICcrStatsRequest"/>
-		public Task<CcrStatsResponse> CcrStatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null, CancellationToken ct = default) => CcrStatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), ct: ct);
+		public Task<CcrStatsResponse> CcrStatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null, CancellationToken ct = default) => CcrStatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), ct);
 		///<inheritdoc cref = "ICcrStatsRequest"/>
 		public CcrStatsResponse CcrStats(ICcrStatsRequest request) => DoRequest<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICcrStatsRequest"/>
@@ -86,7 +86,7 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IUnfollowIndexRequest"/>
 		public UnfollowIndexResponse UnfollowIndex(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null) => UnfollowIndex(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IUnfollowIndexRequest"/>
-		public Task<UnfollowIndexResponse> UnfollowIndexAsync(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null, CancellationToken ct = default) => UnfollowIndexAsync(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)), ct: ct);
+		public Task<UnfollowIndexResponse> UnfollowIndexAsync(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null, CancellationToken ct = default) => UnfollowIndexAsync(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IUnfollowIndexRequest"/>
 		public UnfollowIndexResponse UnfollowIndex(IUnfollowIndexRequest request) => DoRequest<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IUnfollowIndexRequest"/>

@@ -31,7 +31,7 @@ namespace Nest.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix
 		internal @(CsharpNames.HighLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix)(ElasticClient client) : base(client) {}
 		@foreach(var e in endpoints)
 		{
-			IncludeAsync("HighLevelClient/MethodImplementation.cshtml", e.HighLevelClientMethod);
+			IncludeAsync("HighLevelClient/MethodImplementation.cshtml", e.HighLevelModel);
 		}
 	}
 }

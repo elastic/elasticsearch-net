@@ -37,9 +37,11 @@ namespace ApiGenerator.Domain
 
 		private static readonly string[] DocumentApiParts = { "index", "id" };
 
-		public bool IsDocumentApi =>
-			Parts.Count() == DocumentApiParts.Length
-			&& Parts.All(p => DocumentApiParts.Contains(p.Name));
+		public bool IsDocumentApi => UrlInformation.IsADocumentRoute(Parts);
+		
+		public static bool IsADocumentRoute(IReadOnlyCollection<UrlPart> parts) =>
+			parts.Count() == DocumentApiParts.Length
+			&& parts.All(p => DocumentApiParts.Contains(p.Name));
 
 
 		public bool TryGetDocumentApiPath(out UrlPath path)

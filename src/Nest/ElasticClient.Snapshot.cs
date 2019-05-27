@@ -22,7 +22,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "ISnapshotRequest"/>
 		public SnapshotResponse Snapshot(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) => Snapshot(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		///<inheritdoc cref = "ISnapshotRequest"/>
-		public Task<SnapshotResponse> SnapshotAsync(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken ct = default) => SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)), ct: ct);
+		public Task<SnapshotResponse> SnapshotAsync(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken ct = default) => SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		///<inheritdoc cref = "ISnapshotRequest"/>
 		public SnapshotResponse Snapshot(ISnapshotRequest request) => DoRequest<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISnapshotRequest"/>
@@ -30,7 +30,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "ICreateRepositoryRequest"/>
 		public CreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => CreateRepository(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)));
 		///<inheritdoc cref = "ICreateRepositoryRequest"/>
-		public Task<CreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken ct = default) => CreateRepositoryAsync(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)), ct: ct);
+		public Task<CreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken ct = default) => CreateRepositoryAsync(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)), ct);
 		///<inheritdoc cref = "ICreateRepositoryRequest"/>
 		public CreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request) => DoRequest<ICreateRepositoryRequest, CreateRepositoryResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateRepositoryRequest"/>
@@ -38,7 +38,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IDeleteSnapshotRequest"/>
 		public DeleteSnapshotResponse DeleteSnapshot(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => DeleteSnapshot(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		///<inheritdoc cref = "IDeleteSnapshotRequest"/>
-		public Task<DeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteSnapshotAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct: ct);
+		public Task<DeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteSnapshotAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		///<inheritdoc cref = "IDeleteSnapshotRequest"/>
 		public DeleteSnapshotResponse DeleteSnapshot(IDeleteSnapshotRequest request) => DoRequest<IDeleteSnapshotRequest, DeleteSnapshotResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteSnapshotRequest"/>
@@ -46,7 +46,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IDeleteRepositoryRequest"/>
 		public DeleteRepositoryResponse DeleteRepository(Names repository, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) => DeleteRepository(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repository: repository)));
 		///<inheritdoc cref = "IDeleteRepositoryRequest"/>
-		public Task<DeleteRepositoryResponse> DeleteRepositoryAsync(Names repository, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null, CancellationToken ct = default) => DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repository: repository)), ct: ct);
+		public Task<DeleteRepositoryResponse> DeleteRepositoryAsync(Names repository, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null, CancellationToken ct = default) => DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repository: repository)), ct);
 		///<inheritdoc cref = "IDeleteRepositoryRequest"/>
 		public DeleteRepositoryResponse DeleteRepository(IDeleteRepositoryRequest request) => DoRequest<IDeleteRepositoryRequest, DeleteRepositoryResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteRepositoryRequest"/>
@@ -54,7 +54,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IGetSnapshotRequest"/>
 		public GetSnapshotResponse GetSnapshot(Name repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) => GetSnapshot(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		///<inheritdoc cref = "IGetSnapshotRequest"/>
-		public Task<GetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken ct = default) => GetSnapshotAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct: ct);
+		public Task<GetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken ct = default) => GetSnapshotAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		///<inheritdoc cref = "IGetSnapshotRequest"/>
 		public GetSnapshotResponse GetSnapshot(IGetSnapshotRequest request) => DoRequest<IGetSnapshotRequest, GetSnapshotResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetSnapshotRequest"/>
@@ -62,7 +62,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IGetRepositoryRequest"/>
 		public GetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null) => GetRepository(selector.InvokeOrDefault(new GetRepositoryDescriptor()));
 		///<inheritdoc cref = "IGetRepositoryRequest"/>
-		public Task<GetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null, CancellationToken ct = default) => GetRepositoryAsync(selector.InvokeOrDefault(new GetRepositoryDescriptor()), ct: ct);
+		public Task<GetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null, CancellationToken ct = default) => GetRepositoryAsync(selector.InvokeOrDefault(new GetRepositoryDescriptor()), ct);
 		///<inheritdoc cref = "IGetRepositoryRequest"/>
 		public GetRepositoryResponse GetRepository(IGetRepositoryRequest request) => DoRequest<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetRepositoryRequest"/>
@@ -70,7 +70,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IRestoreRequest"/>
 		public RestoreResponse Restore(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null) => Restore(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)));
 		///<inheritdoc cref = "IRestoreRequest"/>
-		public Task<RestoreResponse> RestoreAsync(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken ct = default) => RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)), ct: ct);
+		public Task<RestoreResponse> RestoreAsync(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken ct = default) => RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)), ct);
 		///<inheritdoc cref = "IRestoreRequest"/>
 		public RestoreResponse Restore(IRestoreRequest request) => DoRequest<IRestoreRequest, RestoreResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRestoreRequest"/>
@@ -78,7 +78,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "ISnapshotStatusRequest"/>
 		public SnapshotStatusResponse Status(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null) => Status(selector.InvokeOrDefault(new SnapshotStatusDescriptor()));
 		///<inheritdoc cref = "ISnapshotStatusRequest"/>
-		public Task<SnapshotStatusResponse> StatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null, CancellationToken ct = default) => StatusAsync(selector.InvokeOrDefault(new SnapshotStatusDescriptor()), ct: ct);
+		public Task<SnapshotStatusResponse> StatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null, CancellationToken ct = default) => StatusAsync(selector.InvokeOrDefault(new SnapshotStatusDescriptor()), ct);
 		///<inheritdoc cref = "ISnapshotStatusRequest"/>
 		public SnapshotStatusResponse Status(ISnapshotStatusRequest request) => DoRequest<ISnapshotStatusRequest, SnapshotStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISnapshotStatusRequest"/>
@@ -86,7 +86,7 @@ namespace Nest.Specification.SnapshotApi
 		///<inheritdoc cref = "IVerifyRepositoryRequest"/>
 		public VerifyRepositoryResponse VerifyRepository(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null) => VerifyRepository(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)));
 		///<inheritdoc cref = "IVerifyRepositoryRequest"/>
-		public Task<VerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null, CancellationToken ct = default) => VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)), ct: ct);
+		public Task<VerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null, CancellationToken ct = default) => VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)), ct);
 		///<inheritdoc cref = "IVerifyRepositoryRequest"/>
 		public VerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest request) => DoRequest<IVerifyRepositoryRequest, VerifyRepositoryResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IVerifyRepositoryRequest"/>

@@ -30,9 +30,9 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 				;
 
 			await GET($"/_settings/{name}")
-					.Fluent(c => c.Indices.GetIndexSettings(AllIndices, m => m.Name(name)))
+					.Fluent(c => c.Indices.GetIndexSettings(null, m => m.Name(name)))
 					.Request(c => c.Indices.GetIndexSettings(new GetIndexSettingsRequest(n)))
-					.FluentAsync(c => c.Indices.GetIndexSettingsAsync(AllIndices, m => m.Name(name)))
+					.FluentAsync(c => c.Indices.GetIndexSettingsAsync(null, m => m.Name(name)))
 					.RequestAsync(c => c.Indices.GetIndexSettingsAsync(new GetIndexSettingsRequest(n)))
 				;
 			await GET($"/_all/_settings")

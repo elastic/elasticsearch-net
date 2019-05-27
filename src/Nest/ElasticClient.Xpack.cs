@@ -22,7 +22,7 @@ namespace Nest.Specification.XpackApi
 		///<inheritdoc cref = "IXPackInfoRequest"/>
 		public XPackInfoResponse XPackInfo(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null) => XPackInfo(selector.InvokeOrDefault(new XPackInfoDescriptor()));
 		///<inheritdoc cref = "IXPackInfoRequest"/>
-		public Task<XPackInfoResponse> XPackInfoAsync(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null, CancellationToken ct = default) => XPackInfoAsync(selector.InvokeOrDefault(new XPackInfoDescriptor()), ct: ct);
+		public Task<XPackInfoResponse> XPackInfoAsync(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null, CancellationToken ct = default) => XPackInfoAsync(selector.InvokeOrDefault(new XPackInfoDescriptor()), ct);
 		///<inheritdoc cref = "IXPackInfoRequest"/>
 		public XPackInfoResponse XPackInfo(IXPackInfoRequest request) => DoRequest<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IXPackInfoRequest"/>
@@ -30,7 +30,7 @@ namespace Nest.Specification.XpackApi
 		///<inheritdoc cref = "IXPackUsageRequest"/>
 		public XPackUsageResponse XPackUsage(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null) => XPackUsage(selector.InvokeOrDefault(new XPackUsageDescriptor()));
 		///<inheritdoc cref = "IXPackUsageRequest"/>
-		public Task<XPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null, CancellationToken ct = default) => XPackUsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), ct: ct);
+		public Task<XPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null, CancellationToken ct = default) => XPackUsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), ct);
 		///<inheritdoc cref = "IXPackUsageRequest"/>
 		public XPackUsageResponse XPackUsage(IXPackUsageRequest request) => DoRequest<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IXPackUsageRequest"/>

@@ -55,10 +55,10 @@ namespace Nest
 			continue;
 		}
 		var endpoints = kv.Value;
-		var methods = endpoints.Select(e=>e.HighLevelClientMethod).ToList();
-		foreach (var method in methods)
+		var models = endpoints.Select(e=>e.HighLevelModel).ToList();
+		foreach (var m in models)
 		{
-			IncludeAsync("HighLevelClient/MethodImplementation.cshtml", method);
+			IncludeAsync("HighLevelClient/MethodImplementation.cshtml", m);
 		}
 	}
 	<text>
