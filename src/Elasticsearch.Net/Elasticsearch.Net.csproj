@@ -20,9 +20,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Domain\RequestParameters\RequestParameters.*.cs">
+    <Compile Update="Api\RequestParameters\RequestParameters.*.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Domain\RequestParameters\RequestParameters.cs</DependentUpon>
+      <DependentUpon>Api\RequestParameters\RequestParameters.cs</DependentUpon>
     </Compile>
   </ItemGroup>
 
