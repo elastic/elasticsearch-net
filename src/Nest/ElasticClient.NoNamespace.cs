@@ -406,17 +406,17 @@ namespace Nest
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
 		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IScrollRequest"/>
-		public SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
-			where TInferDocument : class where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>()));
+		public SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
+			where TInferDocument : class where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)));
 		///<inheritdoc cref = "IScrollRequest"/>
-		public Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
-			where TInferDocument : class where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>()), ct);
+		public Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)), ct);
 		///<inheritdoc cref = "IScrollRequest"/>
-		public SearchResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
-			where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>()));
+		public SearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
+			where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)));
 		///<inheritdoc cref = "IScrollRequest"/>
-		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>()), ct);
+		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)), ct);
 		///<inheritdoc cref = "IScrollRequest"/>
 		public SearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 			where TDocument : class => DoRequest<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters);

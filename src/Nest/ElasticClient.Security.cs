@@ -140,9 +140,9 @@ namespace Nest.Specification.SecurityApi
 		///<inheritdoc cref = "IGetRoleMappingRequest"/>
 		public Task<GetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetUserAccessTokenRequest"/>
-		public GetUserAccessTokenResponse GetUserAccessToken(Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector) => GetUserAccessToken(selector.InvokeOrDefault(new GetUserAccessTokenDescriptor()));
+		public GetUserAccessTokenResponse GetUserAccessToken(string username, string password, Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector = null) => GetUserAccessToken(selector.InvokeOrDefault(new GetUserAccessTokenDescriptor(username, password)));
 		///<inheritdoc cref = "IGetUserAccessTokenRequest"/>
-		public Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector, CancellationToken ct = default) => GetUserAccessTokenAsync(selector.InvokeOrDefault(new GetUserAccessTokenDescriptor()), ct);
+		public Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(string username, string password, Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector = null, CancellationToken ct = default) => GetUserAccessTokenAsync(selector.InvokeOrDefault(new GetUserAccessTokenDescriptor(username, password)), ct);
 		///<inheritdoc cref = "IGetUserAccessTokenRequest"/>
 		public GetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request) => DoRequest<IGetUserAccessTokenRequest, GetUserAccessTokenResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetUserAccessTokenRequest"/>
@@ -180,9 +180,9 @@ namespace Nest.Specification.SecurityApi
 		///<inheritdoc cref = "IInvalidateApiKeyRequest"/>
 		public Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(IInvalidateApiKeyRequest request, CancellationToken ct = default) => DoRequestAsync<IInvalidateApiKeyRequest, InvalidateApiKeyResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IInvalidateUserAccessTokenRequest"/>
-		public InvalidateUserAccessTokenResponse InvalidateUserAccessToken(Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector) => InvalidateUserAccessToken(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor()));
+		public InvalidateUserAccessTokenResponse InvalidateUserAccessToken(string token, Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null) => InvalidateUserAccessToken(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)));
 		///<inheritdoc cref = "IInvalidateUserAccessTokenRequest"/>
-		public Task<InvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector, CancellationToken ct = default) => InvalidateUserAccessTokenAsync(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor()), ct);
+		public Task<InvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(string token, Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null, CancellationToken ct = default) => InvalidateUserAccessTokenAsync(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)), ct);
 		///<inheritdoc cref = "IInvalidateUserAccessTokenRequest"/>
 		public InvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request) => DoRequest<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IInvalidateUserAccessTokenRequest"/>

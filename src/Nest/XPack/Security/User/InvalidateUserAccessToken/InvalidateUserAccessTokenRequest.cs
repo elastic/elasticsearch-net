@@ -20,9 +20,6 @@ namespace Nest
 
 	public partial class InvalidateUserAccessTokenDescriptor
 	{
-		[Obsolete("SHOULD NOT BE HERE, ONLY TEMPORARY TO MAKE THE CODEGEN HAPPEN INTERMITTENTLY")]
-		public InvalidateUserAccessTokenDescriptor() { }
-		
 		public InvalidateUserAccessTokenDescriptor(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;
 
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }

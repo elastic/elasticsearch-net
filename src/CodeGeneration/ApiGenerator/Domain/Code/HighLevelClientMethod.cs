@@ -64,11 +64,19 @@ namespace ApiGenerator.Domain
 
 	public abstract class FluentSyntaxBase : MethodSyntaxBase
 	{
+		private readonly bool _selectorIsOptional;
+
 		protected FluentSyntaxBase(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional) : base(names) =>
-			(UrlParts, SelectorIsOptional) = (CreateDescriptorArgs(parts), selectorIsOptional);
+			(UrlParts, _selectorIsOptional) = (CreateDescriptorArgs(parts), selectorIsOptional);
 
 		private IReadOnlyCollection<UrlPart> UrlParts { get; }
-		private bool SelectorIsOptional { get; }
+
+		/// <summary>
+		/// The selector is optional if so set by <see cref="ApiEndpoint.HighLevelModel"/> (has no or optional body)
+		/// Or if there is a custom constructor on the descriptor in which case we assume that constructor holds all the required
+		/// values
+		/// </summary>
+		private bool SelectorIsOptional => _selectorIsOptional || CodeConfiguration.DescriptorConstructors.ContainsKey(CsharpNames.DescriptorName);
 
 		public string MethodName => CsharpNames.MethodName;
 
@@ -138,14 +146,25 @@ namespace ApiGenerator.Domain
 		
 		public string DescriptorArguments()
 		{
-			if (!UrlParts.Any()) return null;
+			string codeArgs = null;
+			if (CodeConfiguration.DescriptorConstructors.TryGetValue(CsharpNames.DescriptorName, out codeArgs))
+				codeArgs += ",";
+			
+			if (!UrlParts.Any()) return codeArgs;
 
 			string Optional(UrlPart p) => !p.Required && SelectorIsOptional ? " = null" : string.Empty;
-			return string.Join(", ", UrlParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}{Optional(p)}")) + ", ";
+			return codeArgs + string.Join(", ", UrlParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}{Optional(p)}")) + ", ";
 		}
 
 		public string SelectorArguments()
 		{
+			string codeArgs = null;
+			if (CodeConfiguration.DescriptorConstructors.TryGetValue(CsharpNames.DescriptorName, out codeArgs))
+			{
+				codeArgs = string.Join(", ", codeArgs.Split(',').Select(a=>a.Split(' ').Last()));
+				return codeArgs;
+			}
+			
 			var parts = UrlParts.Where(p => p.Required).ToList();
 			if (!parts.Any()) return null;
 

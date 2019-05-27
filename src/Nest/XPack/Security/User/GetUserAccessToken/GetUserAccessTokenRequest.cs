@@ -41,9 +41,6 @@ namespace Nest
 
 	public partial class GetUserAccessTokenDescriptor
 	{
-		[Obsolete("SHOULD NOT BE HERE, ONLY TEMPORARY TO MAKE THE CODEGEN HAPPEN INTERMITTENTLY")]
-		public GetUserAccessTokenDescriptor() { }
-		
 		public GetUserAccessTokenDescriptor(string username, string password)
 		{
 			var self = (IGetUserAccessTokenRequest)this;

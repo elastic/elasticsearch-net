@@ -85,6 +85,19 @@ namespace ApiGenerator
 			)
 			.ToList());
 
+		public static readonly Dictionary<string, string> DescriptorConstructors = (
+			// find all files in NEST ending with Request.cs
+			from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
+			let descriptor = Path.GetFileNameWithoutExtension(f.Name).Replace("Request", "Descriptor")
+			let re = $@"^.+public {descriptor}\(([^\r\n\)]+?)\).*$"
+			from l in File.ReadLines(f.FullName)
+			where Regex.IsMatch(l, re)
+			let args = Regex.Replace(l, re, "$1", RegexOptions.Singleline)
+			where !string.IsNullOrWhiteSpace(args) && !args.Contains(": base")
+			select (Descriptor: descriptor, Args: args)
+			)
+			.ToDictionary(r => r.Descriptor, r => r.Args);
+
 		public static readonly Dictionary<string, string> RequestInterfaceGenericsLookup =
 			AllKnownRequestInterfaces
 			.GroupBy(v=>v.Item1)
