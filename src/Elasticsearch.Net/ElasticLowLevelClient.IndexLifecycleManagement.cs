@@ -64,11 +64,11 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ilm/policy", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetIlmStatus<TResponse>(GetIlmStatusRequestParameters requestParameters = null)
+		public TResponse GetStatus<TResponse>(GetIlmStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ilm/status", null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> GetIlmStatusAsync<TResponse>(GetIlmStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetStatusAsync<TResponse>(GetIlmStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ilm/status", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/move/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
 		///<param name = "index">The name of the index whose lifecycle step is to change</param>
@@ -107,28 +107,28 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<summary>POST on /{index}/_ilm/retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
 		///<param name = "index">The name of the indices (comma-separated) whose failed lifecycle step is to be retry</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse RetryIlm<TResponse>(string index, RetryIlmRequestParameters requestParameters = null)
+		public TResponse Retry<TResponse>(string index, RetryIlmRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_ilm/retry"), null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ilm/retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
 		///<param name = "index">The name of the indices (comma-separated) whose failed lifecycle step is to be retry</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> RetryIlmAsync<TResponse>(string index, RetryIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> RetryAsync<TResponse>(string index, RetryIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ilm/retry"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse StartIlm<TResponse>(StartIlmRequestParameters requestParameters = null)
+		public TResponse Start<TResponse>(StartIlmRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ilm/start", null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> StartIlmAsync<TResponse>(StartIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> StartAsync<TResponse>(StartIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ilm/start", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse StopIlm<TResponse>(StopIlmRequestParameters requestParameters = null)
+		public TResponse Stop<TResponse>(StopIlmRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ilm/stop", null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> StopIlmAsync<TResponse>(StopIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> StopAsync<TResponse>(StopIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ilm/stop", ctx, null, RequestParams(requestParameters));
 	}
 }

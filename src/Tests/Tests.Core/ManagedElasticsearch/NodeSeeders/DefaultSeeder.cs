@@ -60,7 +60,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// Sometimes we run against an manually started elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
-		private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(TestsIndexTemplateName).Exists;
+		private bool AlreadySeeded() => Client.Indices.TemplateExists(TestsIndexTemplateName).Exists;
 
 		private async Task SeedNodeAsync()
 		{
@@ -122,10 +122,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			var tasks = new Task[]
 			{
-				Client.Indices.DeleteIndexTemplateAsync(TestsIndexTemplateName),
-				Client.Indices.DeleteIndexAsync(typeof(Project)),
-				Client.Indices.DeleteIndexAsync(typeof(Developer)),
-				Client.Indices.DeleteIndexAsync(typeof(ProjectPercolation))
+				Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName),
+				Client.Indices.DeleteAsync(typeof(Project)),
+				Client.Indices.DeleteAsync(typeof(Developer)),
+				Client.Indices.DeleteAsync(typeof(ProjectPercolation))
 			};
 			await Task.WhenAll(tasks);
 		}
@@ -176,14 +176,14 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			await Client.Indices.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
 
-		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutIndexTemplateAsync(
+		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(
 			new PutIndexTemplateRequest(TestsIndexTemplateName)
 			{
 				IndexPatterns = new[] { "*" },
 				Settings = IndexSettings
 			});
 
-		private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.Indices.CreateIndexAsync(Infer.Index<Developer>(), c => c
+		private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.Indices.CreateAsync(Infer.Index<Developer>(), c => c
 			.Map<Developer>(m => m
 				.AutoMap()
 				.Properties(DeveloperProperties)
@@ -191,7 +191,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		);
 
 #pragma warning disable 618
-		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.Indices.CreateIndexAsync(typeof(Project), c => c
+		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.Indices.CreateAsync(typeof(Project), c => c
 			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
 			// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
 			// TODO 8.0 remove with once the overloads are gone too
@@ -255,7 +255,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		}
 
 
-		private Task<CreateIndexResponse> CreatePercolatorIndexAsync() => Client.Indices.CreateIndexAsync(typeof(ProjectPercolation), c => c
+		private Task<CreateIndexResponse> CreatePercolatorIndexAsync() => Client.Indices.CreateAsync(typeof(ProjectPercolation), c => c
 			.Settings(s => s
 				.AutoExpandReplicas("0-all")
 				.Analysis(ProjectAnalysisSettings)

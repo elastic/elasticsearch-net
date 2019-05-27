@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		{
 			var index = "index1";
 			await GET($"/{index}")
-					.Fluent(c => c.Indices.GetIndex(index, s => s))
-					.Request(c => c.Indices.GetIndex(new GetIndexRequest(index)))
-					.FluentAsync(c => c.Indices.GetIndexAsync(index))
-					.RequestAsync(c => c.Indices.GetIndexAsync(new GetIndexRequest(index)))
+					.Fluent(c => c.Indices.Get(index, s => s))
+					.Request(c => c.Indices.Get(new GetIndexRequest(index)))
+					.FluentAsync(c => c.Indices.GetAsync(index))
+					.RequestAsync(c => c.Indices.GetAsync(new GetIndexRequest(index)))
 				;
 		}
 	}

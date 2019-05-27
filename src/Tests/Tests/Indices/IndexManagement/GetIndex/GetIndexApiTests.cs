@@ -25,10 +25,10 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		protected override string UrlPath => $"/project";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetIndex(typeof(Project)),
-			(client, f) => client.Indices.GetIndexAsync(typeof(Project)),
-			(client, r) => client.Indices.GetIndex(r),
-			(client, r) => client.Indices.GetIndexAsync(r)
+			(client, f) => client.Indices.Get(typeof(Project)),
+			(client, f) => client.Indices.GetAsync(typeof(Project)),
+			(client, r) => client.Indices.Get(r),
+			(client, r) => client.Indices.GetAsync(r)
 		);
 
 		protected override void ExpectResponse(GetIndexResponse response)
@@ -52,10 +52,10 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		protected override string UrlPath => $"/_all";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetIndex(AllIndices),
-			(client, f) => client.Indices.GetIndexAsync(AllIndices),
-			(client, r) => client.Indices.GetIndex(r),
-			(client, r) => client.Indices.GetIndexAsync(r)
+			(client, f) => client.Indices.Get(AllIndices),
+			(client, f) => client.Indices.GetAsync(AllIndices),
+			(client, r) => client.Indices.Get(r),
+			(client, r) => client.Indices.GetAsync(r)
 		);
 	}
 }

@@ -32,10 +32,10 @@ namespace Tests.XPack.Ilm
 				;
 
 			await GET("/_ilm/status")
-					.Fluent(c => c.IndexLifecycleManagement.GetIlmStatus())
-					.Request(c => c.IndexLifecycleManagement.GetIlmStatus())
-					.FluentAsync(c => c.IndexLifecycleManagement.GetIlmStatusAsync())
-					.RequestAsync(c => c.IndexLifecycleManagement.GetIlmStatusAsync())
+					.Fluent(c => c.IndexLifecycleManagement.GetStatus())
+					.Request(c => c.IndexLifecycleManagement.GetStatus())
+					.FluentAsync(c => c.IndexLifecycleManagement.GetStatusAsync())
+					.RequestAsync(c => c.IndexLifecycleManagement.GetStatusAsync())
 				;
 
 			await POST("/_ilm/move/index")
@@ -60,24 +60,24 @@ namespace Tests.XPack.Ilm
 				;
 
 			await POST("/index/_ilm/retry")
-					.Fluent(c => c.IndexLifecycleManagement.RetryIlm("index"))
-					.Request(c => c.IndexLifecycleManagement.RetryIlm(new RetryIlmRequest("index")))
-					.FluentAsync(c => c.IndexLifecycleManagement.RetryIlmAsync("index"))
-					.RequestAsync(c => c.IndexLifecycleManagement.RetryIlmAsync(new RetryIlmRequest("index")))
+					.Fluent(c => c.IndexLifecycleManagement.Retry("index"))
+					.Request(c => c.IndexLifecycleManagement.Retry(new RetryIlmRequest("index")))
+					.FluentAsync(c => c.IndexLifecycleManagement.RetryAsync("index"))
+					.RequestAsync(c => c.IndexLifecycleManagement.RetryAsync(new RetryIlmRequest("index")))
 				;
 
 			await POST("/_ilm/start")
-					.Fluent(c => c.IndexLifecycleManagement.StartIlm())
-					.Request(c => c.IndexLifecycleManagement.StartIlm())
-					.FluentAsync(c => c.IndexLifecycleManagement.StartIlmAsync())
-					.RequestAsync(c => c.IndexLifecycleManagement.StartIlmAsync())
+					.Fluent(c => c.IndexLifecycleManagement.Start())
+					.Request(c => c.IndexLifecycleManagement.Start())
+					.FluentAsync(c => c.IndexLifecycleManagement.StartAsync())
+					.RequestAsync(c => c.IndexLifecycleManagement.StartAsync())
 				;
 
 			await POST("/_ilm/stop")
-					.Fluent(c => c.IndexLifecycleManagement.StopIlm())
-					.Request(c => c.IndexLifecycleManagement.StopIlm())
-					.FluentAsync(c => c.IndexLifecycleManagement.StopIlmAsync())
-					.RequestAsync(c => c.IndexLifecycleManagement.StopIlmAsync())
+					.Fluent(c => c.IndexLifecycleManagement.Stop())
+					.Request(c => c.IndexLifecycleManagement.Stop())
+					.FluentAsync(c => c.IndexLifecycleManagement.StopAsync())
+					.RequestAsync(c => c.IndexLifecycleManagement.StopAsync())
 				;
 		}
 	}

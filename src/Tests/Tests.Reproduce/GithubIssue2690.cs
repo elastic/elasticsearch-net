@@ -9,7 +9,7 @@ namespace Tests.Reproduce
 		[U] public void EmptyPolicyCausesNullReferenceException()
 		{
 			var client = TestClient.DefaultInMemoryClient;
-			var response = client.Indices.CreateIndex("foo", c => c
+			var response = client.Indices.Create("foo", c => c
 				.Settings(s => s
 					.Merge(m => m
 						.Scheduler(sch => sch.MaxThreadCount(1))

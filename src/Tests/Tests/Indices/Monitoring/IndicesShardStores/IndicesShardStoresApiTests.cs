@@ -27,7 +27,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			client.Indices.CreateIndex(IndexWithUnassignedShards, s => s
+			client.Indices.Create(IndexWithUnassignedShards, s => s
 				.Settings(settings => settings
 					.NumberOfShards(1)
 					.NumberOfReplicas(2)

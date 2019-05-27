@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.Indices.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Map<Test>(map => map
 						.Dynamic(false)
 						.Properties(props => props
@@ -173,7 +173,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.Indices.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.RefreshInterval(-1)
 					)

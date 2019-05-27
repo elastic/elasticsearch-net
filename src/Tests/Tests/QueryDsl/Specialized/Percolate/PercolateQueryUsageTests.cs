@@ -61,7 +61,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			foreach (var index in values.Values)
 			{
-				Client.Indices.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
@@ -72,7 +72,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					)
 				);
 				var percolationIndex = index + "-queries";
-				Client.Indices.CreateIndex(percolationIndex, c => c
+				Client.Indices.Create(percolationIndex, c => c
 					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)

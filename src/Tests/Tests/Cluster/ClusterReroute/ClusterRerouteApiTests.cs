@@ -23,7 +23,7 @@ namespace Tests.Cluster.ClusterReroute
 			// get a suitable load of projects in order to get a decent task status out
 			foreach (var (_, index) in values)
 			{
-				var createIndex = client.Indices.CreateIndex(index, i => i
+				var createIndex = client.Indices.Create(index, i => i
 					.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
 					.Map<Project>(DefaultSeeder.ProjectTypeMappings)
 				);

@@ -86,7 +86,7 @@ namespace Tests.Document.Single.Index
 			{
 				var index = value.Value;
 
-				client.Indices.CreateIndex(index, c => c
+				client.Indices.Create(index, c => c
 					.Map<IngestedAttachment>(mm => mm
 						.Properties(p => p
 							.Text(s => s
@@ -179,7 +179,7 @@ namespace Tests.Document.Single.Index
 				}
 			});
 
-			var createIndexResponse = _client.Indices.CreateIndex(Index, c => c
+			var createIndexResponse = _client.Indices.Create(Index, c => c
 				.Map<IngestedAttachment>(mm => mm
 					.Properties(p => p
 						.Text(s => s

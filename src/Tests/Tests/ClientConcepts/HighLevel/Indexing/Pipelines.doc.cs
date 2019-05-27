@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*/
 		public void IngestionPipeline()
 		{
-			client.Indices.CreateIndex("people", c => c
+			client.Indices.Create("people", c => c
 				.Map<Person>(p => p
 					.AutoMap() //<1> automatically create the mapping from the type
 					.Properties(props => props

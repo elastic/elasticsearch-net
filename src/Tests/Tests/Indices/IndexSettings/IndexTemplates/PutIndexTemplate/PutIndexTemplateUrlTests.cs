@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 		{
 			var name = "temp";
 			await PUT($"/_template/{name}")
-					.Fluent(c => c.Indices.PutIndexTemplate(name, p => p))
-					.Request(c => c.Indices.PutIndexTemplate(new PutIndexTemplateRequest(name)))
-					.FluentAsync(c => c.Indices.PutIndexTemplateAsync(name, p => p))
-					.RequestAsync(c => c.Indices.PutIndexTemplateAsync(new PutIndexTemplateRequest(name)))
+					.Fluent(c => c.Indices.PutTemplate(name, p => p))
+					.Request(c => c.Indices.PutTemplate(new PutIndexTemplateRequest(name)))
+					.FluentAsync(c => c.Indices.PutTemplateAsync(name, p => p))
+					.RequestAsync(c => c.Indices.PutTemplateAsync(new PutIndexTemplateRequest(name)))
 				;
 		}
 	}

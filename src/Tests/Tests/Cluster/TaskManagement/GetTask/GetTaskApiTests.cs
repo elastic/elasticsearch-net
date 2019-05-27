@@ -59,7 +59,7 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 
-			var createIndex = client.Indices.CreateIndex(targetIndex, i => i
+			var createIndex = client.Indices.Create(targetIndex, i => i
 				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
 				.Map<Project>(DefaultSeeder.ProjectTypeMappings)
 			);

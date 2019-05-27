@@ -37,10 +37,10 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		protected override string UrlPath => $"/queries/_settings/index.%2A?local=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetIndexSettings(Index<ProjectPercolation>(), f),
-			(client, f) => client.Indices.GetIndexSettingsAsync(Index<ProjectPercolation>(), f),
-			(client, r) => client.Indices.GetIndexSettings(r),
-			(client, r) => client.Indices.GetIndexSettingsAsync(r)
+			(client, f) => client.Indices.GetSettings(Index<ProjectPercolation>(), f),
+			(client, f) => client.Indices.GetSettingsAsync(Index<ProjectPercolation>(), f),
+			(client, r) => client.Indices.GetSettings(r),
+			(client, r) => client.Indices.GetSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetIndexSettingsResponse response)

@@ -43,7 +43,7 @@ namespace Tests.Cat.CatSnapshots
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var createIndex = Client.Indices.CreateIndex(SnapshotIndexName);
+			var createIndex = Client.Indices.Create(SnapshotIndexName);
 			Client.Cluster.Health(SnapshotIndexName, g => g.WaitForStatus(WaitForStatus.Yellow));
 			client.Snapshot.Snapshot(RepositoryName, SnapshotName, s => s.WaitForCompletion().Index(SnapshotIndexName));
 		}

@@ -213,7 +213,7 @@ namespace Nest
 			if (_reindexRequest.OmitIndexCreation) return null;
 
 			var pointsToSingleSourceIndex = fromIndices.Match((a) => false, (m) => m.Indices.Count == 1);
-			var targetExistsAlready = _client.Indices.IndexExists(resolvedTo);
+			var targetExistsAlready = _client.Indices.Exists(resolvedTo);
 			if (targetExistsAlready.Exists) return null;
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
@@ -222,7 +222,7 @@ namespace Nest
 
 			if (pointsToSingleSourceIndex)
 			{
-				var getIndexResponse = _client.Indices.GetIndex(resolvedFrom);
+				var getIndexResponse = _client.Indices.Get(resolvedFrom);
 				_compositeCancelToken.ThrowIfCancellationRequested();
 				originalIndexState = getIndexResponse.Indices[resolvedFrom];
 				if (_reindexRequest.OmitIndexCreation)
@@ -233,7 +233,7 @@ namespace Nest
 				(originalIndexState != null
 					? new CreateIndexRequest(resolvedTo, originalIndexState)
 					: new CreateIndexRequest(resolvedTo));
-			var createIndexResponse = _client.Indices.CreateIndex(createIndexRequest);
+			var createIndexResponse = _client.Indices.Create(createIndexRequest);
 			_compositeCancelToken.ThrowIfCancellationRequested();
 			if (!createIndexResponse.IsValid)
 				throw Throw($"Could not create destination index {resolvedTo}.", createIndexResponse.ApiCall);

@@ -199,10 +199,10 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.CreateIndex(CallIsolatedValue, f),
-			(client, f) => client.Indices.CreateIndexAsync(CallIsolatedValue, f),
-			(client, r) => client.Indices.CreateIndex(r),
-			(client, r) => client.Indices.CreateIndexAsync(r)
+			(client, f) => client.Indices.Create(CallIsolatedValue, f),
+			(client, f) => client.Indices.CreateAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Create(r),
+			(client, r) => client.Indices.CreateAsync(r)
 		);
 
 		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
@@ -213,7 +213,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			response.Acknowledged.Should().BeTrue();
 			response.ShardsAcknowledged.Should().BeTrue();
 
-			var indexSettings = Client.Indices.GetIndexSettings(CallIsolatedValue);
+			var indexSettings = Client.Indices.GetSettings(CallIsolatedValue);
 
 			indexSettings.ShouldBeValid();
 			indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
@@ -292,10 +292,10 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.CreateIndex(CallIsolatedValue, f),
-			(client, f) => client.Indices.CreateIndexAsync(CallIsolatedValue, f),
-			(client, r) => client.Indices.CreateIndex(r),
-			(client, r) => client.Indices.CreateIndexAsync(r)
+			(client, f) => client.Indices.Create(CallIsolatedValue, f),
+			(client, f) => client.Indices.CreateAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Create(r),
+			(client, r) => client.Indices.CreateAsync(r)
 		);
 
 		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
@@ -306,7 +306,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			response.Acknowledged.Should().BeTrue();
 			response.ShardsAcknowledged.Should().BeTrue();
 
-			var indexResponse = Client.Indices.GetIndex(CallIsolatedValue);
+			var indexResponse = Client.Indices.Get(CallIsolatedValue);
 
 			indexResponse.ShouldBeValid();
 			indexResponse.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);

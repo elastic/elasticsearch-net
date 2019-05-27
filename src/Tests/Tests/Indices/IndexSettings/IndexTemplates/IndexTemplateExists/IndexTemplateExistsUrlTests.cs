@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 		{
 			var name = "temp";
 			await HEAD($"/_template/{name}")
-					.Fluent(c => c.Indices.IndexTemplateExists(name))
-					.Request(c => c.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(name)))
-					.FluentAsync(c => c.Indices.IndexTemplateExistsAsync(name))
-					.RequestAsync(c => c.Indices.IndexTemplateExistsAsync(new IndexTemplateExistsRequest(name)))
+					.Fluent(c => c.Indices.TemplateExists(name))
+					.Request(c => c.Indices.TemplateExists(new IndexTemplateExistsRequest(name)))
+					.FluentAsync(c => c.Indices.TemplateExistsAsync(name))
+					.RequestAsync(c => c.Indices.TemplateExistsAsync(new IndexTemplateExistsRequest(name)))
 				;
 		}
 	}

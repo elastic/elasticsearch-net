@@ -36,29 +36,29 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IClearCacheRequest"/>
 		public Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) => DoRequestAsync<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICloseIndexRequest"/>
-		public CloseIndexResponse CloseIndex(Indices index, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) => CloseIndex(selector.InvokeOrDefault(new CloseIndexDescriptor(index: index)));
+		public CloseIndexResponse Close(Indices index, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) => Close(selector.InvokeOrDefault(new CloseIndexDescriptor(index: index)));
 		///<inheritdoc cref = "ICloseIndexRequest"/>
-		public Task<CloseIndexResponse> CloseIndexAsync(Indices index, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null, CancellationToken ct = default) => CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(index: index)), ct);
+		public Task<CloseIndexResponse> CloseAsync(Indices index, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null, CancellationToken ct = default) => CloseAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "ICloseIndexRequest"/>
-		public CloseIndexResponse CloseIndex(ICloseIndexRequest request) => DoRequest<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters);
+		public CloseIndexResponse Close(ICloseIndexRequest request) => DoRequest<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICloseIndexRequest"/>
-		public Task<CloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters, ct);
+		public Task<CloseIndexResponse> CloseAsync(ICloseIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICreateIndexRequest"/>
-		public CreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) => CreateIndex(selector.InvokeOrDefault(new CreateIndexDescriptor(index: index)));
+		public CreateIndexResponse Create(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) => Create(selector.InvokeOrDefault(new CreateIndexDescriptor(index: index)));
 		///<inheritdoc cref = "ICreateIndexRequest"/>
-		public Task<CreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null, CancellationToken ct = default) => CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index: index)), ct);
+		public Task<CreateIndexResponse> CreateAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null, CancellationToken ct = default) => CreateAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "ICreateIndexRequest"/>
-		public CreateIndexResponse CreateIndex(ICreateIndexRequest request) => DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
+		public CreateIndexResponse Create(ICreateIndexRequest request) => DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateIndexRequest"/>
-		public Task<CreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters, ct);
+		public Task<CreateIndexResponse> CreateAsync(ICreateIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteIndexRequest"/>
-		public DeleteIndexResponse DeleteIndex(Indices index, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) => DeleteIndex(selector.InvokeOrDefault(new DeleteIndexDescriptor(index: index)));
+		public DeleteIndexResponse Delete(Indices index, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IDeleteIndexRequest"/>
-		public Task<DeleteIndexResponse> DeleteIndexAsync(Indices index, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null, CancellationToken ct = default) => DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(index: index)), ct);
+		public Task<DeleteIndexResponse> DeleteAsync(Indices index, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IDeleteIndexRequest"/>
-		public DeleteIndexResponse DeleteIndex(IDeleteIndexRequest request) => DoRequest<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters);
+		public DeleteIndexResponse Delete(IDeleteIndexRequest request) => DoRequest<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteIndexRequest"/>
-		public Task<DeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters, ct);
+		public Task<DeleteIndexResponse> DeleteAsync(IDeleteIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteAliasRequest"/>
 		public DeleteAliasResponse DeleteAlias(Indices index, Names name, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null) => DeleteAlias(selector.InvokeOrDefault(new DeleteAliasDescriptor(index: index, name: name)));
 		///<inheritdoc cref = "IDeleteAliasRequest"/>
@@ -68,21 +68,21 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IDeleteAliasRequest"/>
 		public Task<DeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteIndexTemplateRequest"/>
-		public DeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) => DeleteIndexTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)));
+		public DeleteIndexTemplateResponse DeleteTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) => DeleteTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)));
 		///<inheritdoc cref = "IDeleteIndexTemplateRequest"/>
-		public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null, CancellationToken ct = default) => DeleteIndexTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)), ct);
+		public Task<DeleteIndexTemplateResponse> DeleteTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null, CancellationToken ct = default) => DeleteTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)), ct);
 		///<inheritdoc cref = "IDeleteIndexTemplateRequest"/>
-		public DeleteIndexTemplateResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request) => DoRequest<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters);
+		public DeleteIndexTemplateResponse DeleteTemplate(IDeleteIndexTemplateRequest request) => DoRequest<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteIndexTemplateRequest"/>
-		public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters, ct);
+		public Task<DeleteIndexTemplateResponse> DeleteTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IIndexExistsRequest"/>
-		public ExistsResponse IndexExists(Indices index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(index: index)));
+		public ExistsResponse Exists(Indices index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => Exists(selector.InvokeOrDefault(new IndexExistsDescriptor(index: index)));
 		///<inheritdoc cref = "IIndexExistsRequest"/>
-		public Task<ExistsResponse> IndexExistsAsync(Indices index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null, CancellationToken ct = default) => IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(index: index)), ct);
+		public Task<ExistsResponse> ExistsAsync(Indices index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null, CancellationToken ct = default) => ExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IIndexExistsRequest"/>
-		public ExistsResponse IndexExists(IIndexExistsRequest request) => DoRequest<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters);
+		public ExistsResponse Exists(IIndexExistsRequest request) => DoRequest<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IIndexExistsRequest"/>
-		public Task<ExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
+		public Task<ExistsResponse> ExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IAliasExistsRequest"/>
 		public ExistsResponse AliasExists(Names name, Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null) => AliasExists(selector.InvokeOrDefault(new AliasExistsDescriptor(name: name)));
 		///<inheritdoc cref = "IAliasExistsRequest"/>
@@ -92,13 +92,13 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IAliasExistsRequest"/>
 		public Task<ExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IAliasExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IIndexTemplateExistsRequest"/>
-		public ExistsResponse IndexTemplateExists(Names name, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null) => IndexTemplateExists(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(name: name)));
+		public ExistsResponse TemplateExists(Names name, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null) => TemplateExists(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(name: name)));
 		///<inheritdoc cref = "IIndexTemplateExistsRequest"/>
-		public Task<ExistsResponse> IndexTemplateExistsAsync(Names name, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null, CancellationToken ct = default) => IndexTemplateExistsAsync(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(name: name)), ct);
+		public Task<ExistsResponse> TemplateExistsAsync(Names name, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null, CancellationToken ct = default) => TemplateExistsAsync(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(name: name)), ct);
 		///<inheritdoc cref = "IIndexTemplateExistsRequest"/>
-		public ExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request) => DoRequest<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters);
+		public ExistsResponse TemplateExists(IIndexTemplateExistsRequest request) => DoRequest<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IIndexTemplateExistsRequest"/>
-		public Task<ExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
+		public Task<ExistsResponse> TemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ITypeExistsRequest"/>
 		public ExistsResponse TypeExists(Indices index, Names type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null) => TypeExists(selector.InvokeOrDefault(new TypeExistsDescriptor(index: index, type: type)));
 		///<inheritdoc cref = "ITypeExistsRequest"/>
@@ -132,13 +132,13 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IForceMergeRequest"/>
 		public Task<ForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default) => DoRequestAsync<IForceMergeRequest, ForceMergeResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetIndexRequest"/>
-		public GetIndexResponse GetIndex(Indices index, Func<GetIndexDescriptor, IGetIndexRequest> selector = null) => GetIndex(selector.InvokeOrDefault(new GetIndexDescriptor(index: index)));
+		public GetIndexResponse Get(Indices index, Func<GetIndexDescriptor, IGetIndexRequest> selector = null) => Get(selector.InvokeOrDefault(new GetIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IGetIndexRequest"/>
-		public Task<GetIndexResponse> GetIndexAsync(Indices index, Func<GetIndexDescriptor, IGetIndexRequest> selector = null, CancellationToken ct = default) => GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(index: index)), ct);
+		public Task<GetIndexResponse> GetAsync(Indices index, Func<GetIndexDescriptor, IGetIndexRequest> selector = null, CancellationToken ct = default) => GetAsync(selector.InvokeOrDefault(new GetIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IGetIndexRequest"/>
-		public GetIndexResponse GetIndex(IGetIndexRequest request) => DoRequest<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters);
+		public GetIndexResponse Get(IGetIndexRequest request) => DoRequest<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetIndexRequest"/>
-		public Task<GetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters, ct);
+		public Task<GetIndexResponse> GetAsync(IGetIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetAliasRequest"/>
 		public GetAliasResponse GetAlias(Indices index = null, Func<GetAliasDescriptor, IGetAliasRequest> selector = null) => GetAlias(selector.InvokeOrDefault(new GetAliasDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IGetAliasRequest"/>
@@ -168,21 +168,21 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IGetMappingRequest"/>
 		public Task<GetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken ct = default) => DoRequestAsync<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
-		public GetIndexSettingsResponse GetIndexSettings(Indices index = null, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null) => GetIndexSettings(selector.InvokeOrDefault(new GetIndexSettingsDescriptor().Index(index: index)));
+		public GetIndexSettingsResponse GetSettings(Indices index = null, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null) => GetSettings(selector.InvokeOrDefault(new GetIndexSettingsDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
-		public Task<GetIndexSettingsResponse> GetIndexSettingsAsync(Indices index = null, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null, CancellationToken ct = default) => GetIndexSettingsAsync(selector.InvokeOrDefault(new GetIndexSettingsDescriptor().Index(index: index)), ct);
+		public Task<GetIndexSettingsResponse> GetSettingsAsync(Indices index = null, Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector = null, CancellationToken ct = default) => GetSettingsAsync(selector.InvokeOrDefault(new GetIndexSettingsDescriptor().Index(index: index)), ct);
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
-		public GetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest request) => DoRequest<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters);
+		public GetIndexSettingsResponse GetSettings(IGetIndexSettingsRequest request) => DoRequest<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetIndexSettingsRequest"/>
-		public Task<GetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters, ct);
+		public Task<GetIndexSettingsResponse> GetSettingsAsync(IGetIndexSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
-		public GetIndexTemplateResponse GetIndexTemplate(Names name = null, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null) => GetIndexTemplate(selector.InvokeOrDefault(new GetIndexTemplateDescriptor().Name(name: name)));
+		public GetIndexTemplateResponse GetTemplate(Names name = null, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null) => GetTemplate(selector.InvokeOrDefault(new GetIndexTemplateDescriptor().Name(name: name)));
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
-		public Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Names name = null, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null, CancellationToken ct = default) => GetIndexTemplateAsync(selector.InvokeOrDefault(new GetIndexTemplateDescriptor().Name(name: name)), ct);
+		public Task<GetIndexTemplateResponse> GetTemplateAsync(Names name = null, Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null, CancellationToken ct = default) => GetTemplateAsync(selector.InvokeOrDefault(new GetIndexTemplateDescriptor().Name(name: name)), ct);
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
-		public GetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest request) => DoRequest<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters);
+		public GetIndexTemplateResponse GetTemplate(IGetIndexTemplateRequest request) => DoRequest<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetIndexTemplateRequest"/>
-		public Task<GetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
+		public Task<GetIndexTemplateResponse> GetTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
 		public UpgradeStatusResponse UpgradeStatus(Indices index = null, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) => UpgradeStatus(selector.InvokeOrDefault(new UpgradeStatusDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
@@ -192,13 +192,13 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IUpgradeStatusRequest"/>
 		public Task<UpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IOpenIndexRequest"/>
-		public OpenIndexResponse OpenIndex(Indices index, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null) => OpenIndex(selector.InvokeOrDefault(new OpenIndexDescriptor(index: index)));
+		public OpenIndexResponse Open(Indices index, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null) => Open(selector.InvokeOrDefault(new OpenIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IOpenIndexRequest"/>
-		public Task<OpenIndexResponse> OpenIndexAsync(Indices index, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null, CancellationToken ct = default) => OpenIndexAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(index: index)), ct);
+		public Task<OpenIndexResponse> OpenAsync(Indices index, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null, CancellationToken ct = default) => OpenAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(index: index)), ct);
 		///<inheritdoc cref = "IOpenIndexRequest"/>
-		public OpenIndexResponse OpenIndex(IOpenIndexRequest request) => DoRequest<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters);
+		public OpenIndexResponse Open(IOpenIndexRequest request) => DoRequest<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IOpenIndexRequest"/>
-		public Task<OpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters, ct);
+		public Task<OpenIndexResponse> OpenAsync(IOpenIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutAliasRequest"/>
 		public PutAliasResponse PutAlias(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) => PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(index: index, name: name)));
 		///<inheritdoc cref = "IPutAliasRequest"/>
@@ -218,21 +218,21 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IPutMappingRequest"/>
 		public Task<PutMappingResponse> PutMappingAsync(IPutMappingRequest request, CancellationToken ct = default) => DoRequestAsync<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpdateIndexSettingsRequest"/>
-		public UpdateIndexSettingsResponse UpdateIndexSettings(Indices index, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector) => UpdateIndexSettings(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(index: index)));
+		public UpdateIndexSettingsResponse UpdateSettings(Indices index, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector) => UpdateSettings(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IUpdateIndexSettingsRequest"/>
-		public Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices index, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector, CancellationToken ct = default) => UpdateIndexSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(index: index)), ct);
+		public Task<UpdateIndexSettingsResponse> UpdateSettingsAsync(Indices index, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector, CancellationToken ct = default) => UpdateSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(index: index)), ct);
 		///<inheritdoc cref = "IUpdateIndexSettingsRequest"/>
-		public UpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) => DoRequest<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters);
+		public UpdateIndexSettingsResponse UpdateSettings(IUpdateIndexSettingsRequest request) => DoRequest<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IUpdateIndexSettingsRequest"/>
-		public Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
+		public Task<UpdateIndexSettingsResponse> UpdateSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutIndexTemplateRequest"/>
-		public PutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => PutIndexTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)));
+		public PutIndexTemplateResponse PutTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => PutTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)));
 		///<inheritdoc cref = "IPutIndexTemplateRequest"/>
-		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector, CancellationToken ct = default) => PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)), ct);
+		public Task<PutIndexTemplateResponse> PutTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector, CancellationToken ct = default) => PutTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)), ct);
 		///<inheritdoc cref = "IPutIndexTemplateRequest"/>
-		public PutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) => DoRequest<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters);
+		public PutIndexTemplateResponse PutTemplate(IPutIndexTemplateRequest request) => DoRequest<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutIndexTemplateRequest"/>
-		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
+		public Task<PutIndexTemplateResponse> PutTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRecoveryStatusRequest"/>
 		public RecoveryStatusResponse RecoveryStatus(Indices index = null, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IRecoveryStatusRequest"/>
@@ -250,13 +250,13 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IRefreshRequest"/>
 		public Task<RefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) => DoRequestAsync<IRefreshRequest, RefreshResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
-		public RolloverIndexResponse RolloverIndex(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null) => RolloverIndex(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)));
+		public RolloverIndexResponse Rollover(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null) => Rollover(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)));
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
-		public Task<RolloverIndexResponse> RolloverIndexAsync(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null, CancellationToken ct = default) => RolloverIndexAsync(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)), ct);
+		public Task<RolloverIndexResponse> RolloverAsync(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null, CancellationToken ct = default) => RolloverAsync(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)), ct);
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
-		public RolloverIndexResponse RolloverIndex(IRolloverIndexRequest request) => DoRequest<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters);
+		public RolloverIndexResponse Rollover(IRolloverIndexRequest request) => DoRequest<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRolloverIndexRequest"/>
-		public Task<RolloverIndexResponse> RolloverIndexAsync(IRolloverIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters, ct);
+		public Task<RolloverIndexResponse> RolloverAsync(IRolloverIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISegmentsRequest"/>
 		public SegmentsResponse Segments(Indices index = null, Func<SegmentsDescriptor, ISegmentsRequest> selector = null) => Segments(selector.InvokeOrDefault(new SegmentsDescriptor().Index(index: index)));
 		///<inheritdoc cref = "ISegmentsRequest"/>
@@ -274,21 +274,21 @@ namespace Nest.Specification.IndicesApi
 		///<inheritdoc cref = "IIndicesShardStoresRequest"/>
 		public Task<IndicesShardStoresResponse> ShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) => DoRequestAsync<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
-		public ShrinkIndexResponse ShrinkIndex(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector = null) => ShrinkIndex(selector.InvokeOrDefault(new ShrinkIndexDescriptor(index: index, target: target)));
+		public ShrinkIndexResponse Shrink(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector = null) => Shrink(selector.InvokeOrDefault(new ShrinkIndexDescriptor(index: index, target: target)));
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
-		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector = null, CancellationToken ct = default) => ShrinkIndexAsync(selector.InvokeOrDefault(new ShrinkIndexDescriptor(index: index, target: target)), ct);
+		public Task<ShrinkIndexResponse> ShrinkAsync(IndexName index, IndexName target, Func<ShrinkIndexDescriptor, IShrinkIndexRequest> selector = null, CancellationToken ct = default) => ShrinkAsync(selector.InvokeOrDefault(new ShrinkIndexDescriptor(index: index, target: target)), ct);
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
-		public ShrinkIndexResponse ShrinkIndex(IShrinkIndexRequest request) => DoRequest<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters);
+		public ShrinkIndexResponse Shrink(IShrinkIndexRequest request) => DoRequest<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IShrinkIndexRequest"/>
-		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IShrinkIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters, ct);
+		public Task<ShrinkIndexResponse> ShrinkAsync(IShrinkIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISplitIndexRequest"/>
-		public SplitIndexResponse SplitIndex(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null) => SplitIndex(selector.InvokeOrDefault(new SplitIndexDescriptor(index: index, target: target)));
+		public SplitIndexResponse Split(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null) => Split(selector.InvokeOrDefault(new SplitIndexDescriptor(index: index, target: target)));
 		///<inheritdoc cref = "ISplitIndexRequest"/>
-		public Task<SplitIndexResponse> SplitIndexAsync(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null, CancellationToken ct = default) => SplitIndexAsync(selector.InvokeOrDefault(new SplitIndexDescriptor(index: index, target: target)), ct);
+		public Task<SplitIndexResponse> SplitAsync(IndexName index, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null, CancellationToken ct = default) => SplitAsync(selector.InvokeOrDefault(new SplitIndexDescriptor(index: index, target: target)), ct);
 		///<inheritdoc cref = "ISplitIndexRequest"/>
-		public SplitIndexResponse SplitIndex(ISplitIndexRequest request) => DoRequest<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters);
+		public SplitIndexResponse Split(ISplitIndexRequest request) => DoRequest<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISplitIndexRequest"/>
-		public Task<SplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters, ct);
+		public Task<SplitIndexResponse> SplitAsync(ISplitIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IIndicesStatsRequest"/>
 		public IndicesStatsResponse Stats(Indices index = null, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IIndicesStatsRequest"/>

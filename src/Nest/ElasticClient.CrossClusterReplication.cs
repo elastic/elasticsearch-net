@@ -76,13 +76,13 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
 		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICcrStatsRequest"/>
-		public CcrStatsResponse CcrStats(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null) => CcrStats(selector.InvokeOrDefault(new CcrStatsDescriptor()));
+		public CcrStatsResponse Stats(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new CcrStatsDescriptor()));
 		///<inheritdoc cref = "ICcrStatsRequest"/>
-		public Task<CcrStatsResponse> CcrStatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null, CancellationToken ct = default) => CcrStatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), ct);
+		public Task<CcrStatsResponse> StatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null, CancellationToken ct = default) => StatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), ct);
 		///<inheritdoc cref = "ICcrStatsRequest"/>
-		public CcrStatsResponse CcrStats(ICcrStatsRequest request) => DoRequest<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
+		public CcrStatsResponse Stats(ICcrStatsRequest request) => DoRequest<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICcrStatsRequest"/>
-		public Task<CcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken ct = default) => DoRequestAsync<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters, ct);
+		public Task<CcrStatsResponse> StatsAsync(ICcrStatsRequest request, CancellationToken ct = default) => DoRequestAsync<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUnfollowIndexRequest"/>
 		public UnfollowIndexResponse UnfollowIndex(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null) => UnfollowIndex(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)));
 		///<inheritdoc cref = "IUnfollowIndexRequest"/>

@@ -28,7 +28,7 @@ namespace Tests.Document.Multiple.BulkAll
 
 		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<TypeMappingDescriptor<SmallObject>, ITypeMapping> mappings = null)
 		{
-			var result = await Client.Indices.CreateIndexAsync(indexName, s => s
+			var result = await Client.Indices.CreateAsync(indexName, s => s
 				.Settings(settings => settings
 					.NumberOfShards(numberOfShards)
 					.NumberOfReplicas(0)

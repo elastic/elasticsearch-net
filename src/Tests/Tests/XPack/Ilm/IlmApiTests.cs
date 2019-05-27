@@ -53,10 +53,10 @@ namespace Tests.XPack.Ilm
 				IlmGetStatusStep, u => u.Calls<GetIlmStatusDescriptor, GetIlmStatusRequest, IGetIlmStatusRequest, GetIlmStatusResponse>(
 					v => new GetIlmStatusRequest(),
 					(v, d) => d,
-					(v, c, f) => c.IndexLifecycleManagement.GetIlmStatus(f),
-					(v, c, f) => c.IndexLifecycleManagement.GetIlmStatusAsync(f),
-					(v, c, r) => c.IndexLifecycleManagement.GetIlmStatus(r),
-					(v, c, r) => c.IndexLifecycleManagement.GetIlmStatusAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.GetStatus(f),
+					(v, c, f) => c.IndexLifecycleManagement.GetStatusAsync(f),
+					(v, c, r) => c.IndexLifecycleManagement.GetStatus(r),
+					(v, c, r) => c.IndexLifecycleManagement.GetStatusAsync(r)
 				)
 			},
 			{
@@ -145,10 +145,10 @@ namespace Tests.XPack.Ilm
 				IlmStopStep, u => u.Calls<StopIlmDescriptor, StopIlmRequest, IStopIlmRequest, StopIlmResponse>(
 					v => new StopIlmRequest(),
 					(v, d) => d,
-					(v, c, f) => c.IndexLifecycleManagement.StopIlm(f),
-					(v, c, f) => c.IndexLifecycleManagement.StopIlmAsync(f),
-					(v, c, r) => c.IndexLifecycleManagement.StopIlm(r),
-					(v, c, r) => c.IndexLifecycleManagement.StopIlmAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.Stop(f),
+					(v, c, f) => c.IndexLifecycleManagement.StopAsync(f),
+					(v, c, r) => c.IndexLifecycleManagement.Stop(r),
+					(v, c, r) => c.IndexLifecycleManagement.StopAsync(r)
 				)
 			},
 		}) { }
