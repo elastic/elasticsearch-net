@@ -134,11 +134,11 @@ namespace Tests.Cluster.ClusterState
 			response.Metadata.StoredScripts.Should().NotBeNull();
 			response.Metadata.StoredScripts.Count.Should().Be(2);
 
-			response.Metadata.StoredScripts["my-script-id"].Lang.Should().Be("painless");
+			response.Metadata.StoredScripts["my-script-id"].Language.Should().Be("painless");
 			response.Metadata.StoredScripts["my-script-id"].Source.Should().Be("return 0");
 			response.Metadata.StoredScripts["my-script-id"].Options.Should().BeEmpty();
 
-			response.Metadata.StoredScripts["my-other-script-id"].Lang.Should().Be("painless");
+			response.Metadata.StoredScripts["my-other-script-id"].Language.Should().Be("painless");
 			response.Metadata.StoredScripts["my-other-script-id"].Source.Should().Be("return 1");
 			response.Metadata.StoredScripts["my-other-script-id"].Options.Should().BeEmpty();
 		}

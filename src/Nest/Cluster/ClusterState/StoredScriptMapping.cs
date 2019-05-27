@@ -6,7 +6,7 @@ namespace Nest
 	public class StoredScriptMapping
 	{
 		[JsonProperty("lang")]
-		public string Lang { get; internal set; }
+		public string Language { get; internal set; }
 
 		[JsonProperty("source")]
 		public string Source { get; internal set; }
