@@ -29,7 +29,7 @@ namespace ApiGenerator.Generator.Razor
 			DoRazor(spec, view, target);
 			
 			var namespaced = spec.EndpointsPerNamespace.Where(kv => kv.Key != CsharpNames.RootNamespace).ToList();
-			var namespacedView = ViewLocations.LowLevel("Client, Implementation", "ElasticLowLevelClient.Namespace.cshtml");
+			var namespacedView = ViewLocations.LowLevel("Client", "Implementation", "ElasticLowLevelClient.Namespace.cshtml");
 			DoRazorDependantFiles(progressBar, namespaced, namespacedView, kv => kv.Key, id => GeneratorLocations.LowLevel($"ElasticLowLevelClient.{id}.cs"));
 		}
 	}
@@ -41,7 +41,7 @@ namespace ApiGenerator.Generator.Razor
 		public override void Generate(RestApiSpec spec, ProgressBar progressBar)
 		{
 			var view = ViewLocations.LowLevel("RequestParameters", "RequestParameters.cshtml");
-			string Target(string id) => GeneratorLocations.LowLevel("Api", "RequestParameters", $"ElasticLowLevelClient.{id}.cs");
+			string Target(string id) => GeneratorLocations.LowLevel("Api", "RequestParameters", $"RequestParameters.{id}.cs");
 			
 			var namespaced = spec.EndpointsPerNamespace.ToList();
 			DoRazorDependantFiles(progressBar, namespaced, view, kv => kv.Key, id => Target(id));

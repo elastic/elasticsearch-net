@@ -9,7 +9,7 @@
 @{
 	HighLevelModel model = Model;
 	var fluentPath = "HighLevel/Client/FluentSyntax/FluentMethod.cshtml";
-	var initializerPath = "HighLevel/Client/FluentSyntax/InitializerMethod.cshtml";
+	var initializerPath = "HighLevel/Client/InitializerSyntax/InitializerMethod.cshtml";
 }
 @{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); }
 @{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); }
