@@ -119,7 +119,7 @@ namespace Tests.Cluster.ClusterState
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/_cluster/state";
+		protected override string UrlPath => "/_cluster/state/metadata";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.ClusterState(s => s.Metric(ClusterStateMetric.Metadata)),
