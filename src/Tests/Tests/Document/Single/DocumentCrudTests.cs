@@ -78,8 +78,11 @@ namespace Tests.Document.Single
 		{
 			r.Source.Should().NotBeNull();
 			r.Version.Should().BeGreaterThan(1);
-			r.SequenceNumber.Should().BeGreaterOrEqualTo(1);
-			r.PrimaryTerm.Should().BeGreaterThan(0);
+			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+			{
+				r.SequenceNumber.Should().BeGreaterOrEqualTo(1);
+				r.PrimaryTerm.Should().BeGreaterThan(0);
+			}
 			r.Source.Description.Should().EndWith("updated");
 		});
 
