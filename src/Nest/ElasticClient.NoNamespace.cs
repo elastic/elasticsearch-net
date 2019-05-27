@@ -160,103 +160,103 @@ namespace Nest
 		}
 
 		///<inheritdoc cref = "IBulkRequest"/>
-		public BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) => throw new NotImplementedException();
+		public BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) => Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
 		///<inheritdoc cref = "IBulkRequest"/>
-		public Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) => BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()), ct: ct);
 		///<inheritdoc cref = "IBulkRequest"/>
 		public BulkResponse Bulk(IBulkRequest request) => DoRequest<IBulkRequest, BulkResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IBulkRequest"/>
 		public Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) => DoRequestAsync<IBulkRequest, BulkResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IClearScrollRequest"/>
-		public ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null) => throw new NotImplementedException();
+		public ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null) => ClearScroll(selector.InvokeOrDefault(new ClearScrollDescriptor()));
 		///<inheritdoc cref = "IClearScrollRequest"/>
-		public Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken ct = default) => ClearScrollAsync(selector.InvokeOrDefault(new ClearScrollDescriptor()), ct: ct);
 		///<inheritdoc cref = "IClearScrollRequest"/>
 		public ClearScrollResponse ClearScroll(IClearScrollRequest request) => DoRequest<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClearScrollRequest"/>
 		public Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default) => DoRequestAsync<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICountRequest"/>
 		public CountResponse Count<TDocument>(Func<CountDescriptor<TDocument>, ICountRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Count(selector.InvokeOrDefault(new CountDescriptor<TDocument>()));
 		///<inheritdoc cref = "ICountRequest"/>
 		public Task<CountResponse> CountAsync<TDocument>(Func<CountDescriptor<TDocument>, ICountRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => CountAsync(selector.InvokeOrDefault(new CountDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "ICountRequest"/>
 		public CountResponse Count(ICountRequest request) => DoRequest<ICountRequest, CountResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICountRequest"/>
 		public Task<CountResponse> CountAsync(ICountRequest request, CancellationToken ct = default) => DoRequestAsync<ICountRequest, CountResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICreateRequest"/>
 		public CreateResponse Create<TDocument>(DocumentPath<TDocument> id, Func<CreateDescriptor<TDocument>, ICreateRequest> selector)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Create(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "ICreateRequest"/>
 		public Task<CreateResponse> CreateAsync<TDocument>(DocumentPath<TDocument> id, Func<CreateDescriptor<TDocument>, ICreateRequest> selector, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => CreateAsync(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "ICreateRequest"/>
 		public CreateResponse Create(ICreateRequest request) => DoRequest<ICreateRequest, CreateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateRequest"/>
 		public Task<CreateResponse> CreateAsync(ICreateRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateRequest, CreateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteRequest"/>
 		public DeleteResponse Delete<TDocument>(DocumentPath<TDocument> id, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Delete(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "IDeleteRequest"/>
 		public Task<DeleteResponse> DeleteAsync<TDocument>(DocumentPath<TDocument> id, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "IDeleteRequest"/>
 		public DeleteResponse Delete(IDeleteRequest request) => DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteRequest"/>
 		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteByQueryRequest"/>
 		public DeleteByQueryResponse DeleteByQuery<TDocument>(Func<DeleteByQueryDescriptor<TDocument>, IDeleteByQueryRequest> selector)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => DeleteByQuery(selector.InvokeOrDefault(new DeleteByQueryDescriptor<TDocument>()));
 		///<inheritdoc cref = "IDeleteByQueryRequest"/>
 		public Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Func<DeleteByQueryDescriptor<TDocument>, IDeleteByQueryRequest> selector, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => DeleteByQueryAsync(selector.InvokeOrDefault(new DeleteByQueryDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "IDeleteByQueryRequest"/>
 		public DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) => DoRequest<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteByQueryRequest"/>
 		public Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
-		public ListTasksResponse DeleteByQueryRethrottle(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null) => throw new NotImplementedException();
+		public ListTasksResponse DeleteByQueryRethrottle(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null) => DeleteByQueryRethrottle(selector.InvokeOrDefault(new DeleteByQueryRethrottleDescriptor(taskId: taskId)));
 		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
-		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null, CancellationToken ct = default) => DeleteByQueryRethrottleAsync(selector.InvokeOrDefault(new DeleteByQueryRethrottleDescriptor(taskId: taskId)), ct: ct);
 		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
 		public ListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request) => DoRequest<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
 		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDeleteScriptRequest"/>
-		public DeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) => throw new NotImplementedException();
+		public DeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) => DeleteScript(selector.InvokeOrDefault(new DeleteScriptDescriptor(id: id)));
 		///<inheritdoc cref = "IDeleteScriptRequest"/>
-		public Task<DeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<DeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken ct = default) => DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(id: id)), ct: ct);
 		///<inheritdoc cref = "IDeleteScriptRequest"/>
 		public DeleteScriptResponse DeleteScript(IDeleteScriptRequest request) => DoRequest<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteScriptRequest"/>
 		public Task<DeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IDocumentExistsRequest"/>
 		public ExistsResponse DocumentExists<TDocument>(DocumentPath<TDocument> id, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => DocumentExists(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "IDocumentExistsRequest"/>
 		public Task<ExistsResponse> DocumentExistsAsync<TDocument>(DocumentPath<TDocument> id, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "IDocumentExistsRequest"/>
 		public ExistsResponse DocumentExists(IDocumentExistsRequest request) => DoRequest<IDocumentExistsRequest, ExistsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDocumentExistsRequest"/>
 		public Task<ExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IDocumentExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISourceExistsRequest"/>
 		public ExistsResponse SourceExists<TDocument>(DocumentPath<TDocument> id, Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SourceExists(selector.InvokeOrDefault(new SourceExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "ISourceExistsRequest"/>
 		public Task<ExistsResponse> SourceExistsAsync<TDocument>(DocumentPath<TDocument> id, Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SourceExistsAsync(selector.InvokeOrDefault(new SourceExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "ISourceExistsRequest"/>
 		public ExistsResponse SourceExists(ISourceExistsRequest request) => DoRequest<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISourceExistsRequest"/>
 		public Task<ExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default) => DoRequestAsync<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IExplainRequest"/>
 		public ExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Explain<TDocument>(selector.InvokeOrDefault(new ExplainDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "IExplainRequest"/>
 		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => ExplainAsync<TDocument>(selector.InvokeOrDefault(new ExplainDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "IExplainRequest"/>
 		public ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest request)
 			where TDocument : class => DoRequest<IExplainRequest, ExplainResponse<TDocument>>(request, request.RequestParameters);
@@ -264,19 +264,19 @@ namespace Nest
 		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IExplainRequest, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
-		public FieldCapabilitiesResponse FieldCapabilities(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null) => throw new NotImplementedException();
+		public FieldCapabilitiesResponse FieldCapabilities(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null) => FieldCapabilities(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
-		public Task<FieldCapabilitiesResponse> FieldCapabilitiesAsync(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<FieldCapabilitiesResponse> FieldCapabilitiesAsync(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null, CancellationToken ct = default) => FieldCapabilitiesAsync(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(index: index)), ct: ct);
 		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
 		public FieldCapabilitiesResponse FieldCapabilities(IFieldCapabilitiesRequest request) => DoRequest<IFieldCapabilitiesRequest, FieldCapabilitiesResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
 		public Task<FieldCapabilitiesResponse> FieldCapabilitiesAsync(IFieldCapabilitiesRequest request, CancellationToken ct = default) => DoRequestAsync<IFieldCapabilitiesRequest, FieldCapabilitiesResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetRequest"/>
 		public GetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> id, Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "IGetRequest"/>
 		public Task<GetResponse<TDocument>> GetAsync<TDocument>(DocumentPath<TDocument> id, Func<GetDescriptor<TDocument>, IGetRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "IGetRequest"/>
 		public GetResponse<TDocument> Get<TDocument>(IGetRequest request)
 			where TDocument : class => DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
@@ -284,19 +284,19 @@ namespace Nest
 		public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetScriptRequest"/>
-		public GetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) => throw new NotImplementedException();
+		public GetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) => GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(id: id)));
 		///<inheritdoc cref = "IGetScriptRequest"/>
-		public Task<GetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken ct = default) => GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(id: id)), ct: ct);
 		///<inheritdoc cref = "IGetScriptRequest"/>
 		public GetScriptResponse GetScript(IGetScriptRequest request) => DoRequest<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetScriptRequest"/>
 		public Task<GetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISourceRequest"/>
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Source<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "ISourceRequest"/>
 		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(DocumentPath<TDocument> id, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SourceAsync<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "ISourceRequest"/>
 		public SourceResponse<TDocument> Source<TDocument>(ISourceRequest request)
 			where TDocument : class => DoRequest<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters);
@@ -305,114 +305,114 @@ namespace Nest
 			where TDocument : class => DoRequestAsync<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IIndexRequest"/>
 		public IndexResponse Index<TDocument>(Func<IndexDescriptor<TDocument>, IIndexRequest> selector)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Index(selector.InvokeOrDefault(new IndexDescriptor<TDocument>()));
 		///<inheritdoc cref = "IIndexRequest"/>
 		public Task<IndexResponse> IndexAsync<TDocument>(Func<IndexDescriptor<TDocument>, IIndexRequest> selector, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => IndexAsync(selector.InvokeOrDefault(new IndexDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "IIndexRequest"/>
 		public IndexResponse Index(IIndexRequest request) => DoRequest<IIndexRequest, IndexResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IIndexRequest"/>
 		public Task<IndexResponse> IndexAsync(IIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexRequest, IndexResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
-		public RootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) => throw new NotImplementedException();
+		public RootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) => RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
-		public Task<RootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null, CancellationToken ct = default) => RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), ct: ct);
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
 		public RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) => DoRequest<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
 		public Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMultiGetRequest"/>
-		public MultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector = null) => throw new NotImplementedException();
+		public MultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector = null) => MultiGet(selector.InvokeOrDefault(new MultiGetDescriptor()));
 		///<inheritdoc cref = "IMultiGetRequest"/>
-		public Task<MultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null, CancellationToken ct = default) => MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()), ct: ct);
 		///<inheritdoc cref = "IMultiGetRequest"/>
 		public MultiGetResponse MultiGet(IMultiGetRequest request) => DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMultiGetRequest"/>
 		public Task<MultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMultiSearchRequest"/>
-		public MultiSearchResponse MultiSearch(Indices index = null, Func<MultiSearchDescriptor, IMultiSearchRequest> selector = null) => throw new NotImplementedException();
+		public MultiSearchResponse MultiSearch(Indices index = null, Func<MultiSearchDescriptor, IMultiSearchRequest> selector = null) => MultiSearch(selector.InvokeOrDefault(new MultiSearchDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IMultiSearchRequest"/>
-		public Task<MultiSearchResponse> MultiSearchAsync(Indices index = null, Func<MultiSearchDescriptor, IMultiSearchRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MultiSearchResponse> MultiSearchAsync(Indices index = null, Func<MultiSearchDescriptor, IMultiSearchRequest> selector = null, CancellationToken ct = default) => MultiSearchAsync(selector.InvokeOrDefault(new MultiSearchDescriptor().Index(index: index)), ct: ct);
 		///<inheritdoc cref = "IMultiSearchRequest"/>
 		public MultiSearchResponse MultiSearch(IMultiSearchRequest request) => DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMultiSearchRequest"/>
 		public Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
-		public MultiSearchResponse MultiSearchTemplate(Indices index = null, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector = null) => throw new NotImplementedException();
+		public MultiSearchResponse MultiSearchTemplate(Indices index = null, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector = null) => MultiSearchTemplate(selector.InvokeOrDefault(new MultiSearchTemplateDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
-		public Task<MultiSearchResponse> MultiSearchTemplateAsync(Indices index = null, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MultiSearchResponse> MultiSearchTemplateAsync(Indices index = null, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector = null, CancellationToken ct = default) => MultiSearchTemplateAsync(selector.InvokeOrDefault(new MultiSearchTemplateDescriptor().Index(index: index)), ct: ct);
 		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
 		public MultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request) => DoRequest<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
 		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
-		public MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null) => throw new NotImplementedException();
+		public MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null) => MultiTermVectors(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
-		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null, CancellationToken ct = default) => MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()), ct: ct);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
 		public MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) => DoRequest<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
 		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPingRequest"/>
-		public PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null) => throw new NotImplementedException();
+		public PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null) => Ping(selector.InvokeOrDefault(new PingDescriptor()));
 		///<inheritdoc cref = "IPingRequest"/>
-		public Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken ct = default) => PingAsync(selector.InvokeOrDefault(new PingDescriptor()), ct: ct);
 		///<inheritdoc cref = "IPingRequest"/>
 		public PingResponse Ping(IPingRequest request) => DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPingRequest"/>
 		public Task<PingResponse> PingAsync(IPingRequest request, CancellationToken ct = default) => DoRequestAsync<IPingRequest, PingResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPutScriptRequest"/>
-		public PutScriptResponse PutScript(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) => throw new NotImplementedException();
+		public PutScriptResponse PutScript(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) => PutScript(selector.InvokeOrDefault(new PutScriptDescriptor(id: id)));
 		///<inheritdoc cref = "IPutScriptRequest"/>
-		public Task<PutScriptResponse> PutScriptAsync(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PutScriptResponse> PutScriptAsync(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector, CancellationToken ct = default) => PutScriptAsync(selector.InvokeOrDefault(new PutScriptDescriptor(id: id)), ct: ct);
 		///<inheritdoc cref = "IPutScriptRequest"/>
 		public PutScriptResponse PutScript(IPutScriptRequest request) => DoRequest<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPutScriptRequest"/>
 		public Task<PutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IReindexOnServerRequest"/>
-		public ReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) => throw new NotImplementedException();
+		public ReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) => ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
 		///<inheritdoc cref = "IReindexOnServerRequest"/>
-		public Task<ReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken ct = default) => ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), ct: ct);
 		///<inheritdoc cref = "IReindexOnServerRequest"/>
 		public ReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) => DoRequest<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IReindexOnServerRequest"/>
 		public Task<ReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) => DoRequestAsync<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IReindexRethrottleRequest"/>
-		public ReindexRethrottleResponse ReindexRethrottle(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null) => throw new NotImplementedException();
+		public ReindexRethrottleResponse ReindexRethrottle(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null) => ReindexRethrottle(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(taskId: taskId)));
 		///<inheritdoc cref = "IReindexRethrottleRequest"/>
-		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken ct = default) => ReindexRethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(taskId: taskId)), ct: ct);
 		///<inheritdoc cref = "IReindexRethrottleRequest"/>
 		public ReindexRethrottleResponse ReindexRethrottle(IReindexRethrottleRequest request) => DoRequest<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IReindexRethrottleRequest"/>
 		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(IReindexRethrottleRequest request, CancellationToken ct = default) => DoRequestAsync<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
-		public RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null) => throw new NotImplementedException();
+		public RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null) => RenderSearchTemplate(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()));
 		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
-		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null, CancellationToken ct = default) => RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), ct: ct);
 		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
 		public RenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request) => DoRequest<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
 		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
-		public ExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null) => throw new NotImplementedException();
+		public ExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null) => ExecutePainlessScript<TResult>(selector.InvokeOrDefault(new ExecutePainlessScriptDescriptor()));
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
-		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null, CancellationToken ct = default) => ExecutePainlessScriptAsync<TResult>(selector.InvokeOrDefault(new ExecutePainlessScriptDescriptor()), ct: ct);
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
 		public ExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(IExecutePainlessScriptRequest request) => DoRequest<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters);
 		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
 		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IScrollRequest"/>
 		public SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
-			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+			where TInferDocument : class where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>()));
 		///<inheritdoc cref = "IScrollRequest"/>
 		public Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
-			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+			where TInferDocument : class where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>()), ct: ct);
 		///<inheritdoc cref = "IScrollRequest"/>
 		public SearchResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>()));
 		///<inheritdoc cref = "IScrollRequest"/>
 		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "IScrollRequest"/>
 		public SearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 			where TDocument : class => DoRequest<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
@@ -421,16 +421,16 @@ namespace Nest
 			where TDocument : class => DoRequestAsync<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISearchRequest"/>
 		public SearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null)
-			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+			where TInferDocument : class where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()));
 		///<inheritdoc cref = "ISearchRequest"/>
 		public Task<SearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
-			where TInferDocument : class where TDocument : class => throw new NotImplementedException();
+			where TInferDocument : class where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()), ct: ct);
 		///<inheritdoc cref = "ISearchRequest"/>
 		public SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()));
 		///<inheritdoc cref = "ISearchRequest"/>
 		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "ISearchRequest"/>
 		public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
 			where TDocument : class => DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
@@ -439,20 +439,20 @@ namespace Nest
 			where TDocument : class => DoRequestAsync<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISearchShardsRequest"/>
 		public SearchShardsResponse SearchShards<TDocument>(Func<SearchShardsDescriptor<TDocument>, ISearchShardsRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SearchShards(selector.InvokeOrDefault(new SearchShardsDescriptor<TDocument>()));
 		///<inheritdoc cref = "ISearchShardsRequest"/>
 		public Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Func<SearchShardsDescriptor<TDocument>, ISearchShardsRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SearchShardsAsync(selector.InvokeOrDefault(new SearchShardsDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "ISearchShardsRequest"/>
 		public SearchShardsResponse SearchShards(ISearchShardsRequest request) => DoRequest<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ISearchShardsRequest"/>
 		public Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default) => DoRequestAsync<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ISearchTemplateRequest"/>
 		public SearchResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SearchTemplate<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()));
 		///<inheritdoc cref = "ISearchTemplateRequest"/>
 		public Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SearchTemplateAsync<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "ISearchTemplateRequest"/>
 		public SearchResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request)
 			where TDocument : class => DoRequest<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
@@ -461,20 +461,20 @@ namespace Nest
 			where TDocument : class => DoRequestAsync<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ITermVectorsRequest"/>
 		public TermVectorsResponse TermVectors<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => TermVectors(selector.InvokeOrDefault(new TermVectorsDescriptor<TDocument>()));
 		///<inheritdoc cref = "ITermVectorsRequest"/>
 		public Task<TermVectorsResponse> TermVectorsAsync<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => TermVectorsAsync(selector.InvokeOrDefault(new TermVectorsDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "ITermVectorsRequest"/>
 		public TermVectorsResponse TermVectors(ITermVectorsRequest request) => DoRequest<ITermVectorsRequest, TermVectorsResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ITermVectorsRequest"/>
 		public Task<TermVectorsResponse> TermVectorsAsync(ITermVectorsRequest request, CancellationToken ct = default) => DoRequestAsync<ITermVectorsRequest, TermVectorsResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpdateRequest"/>
 		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest> selector)
-			where TDocument : class where TPartialDocument : class => throw new NotImplementedException();
+			where TDocument : class where TPartialDocument : class => Update<TDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TPartialDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
 		///<inheritdoc cref = "IUpdateRequest"/>
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest> selector, CancellationToken ct = default)
-			where TDocument : class where TPartialDocument : class => throw new NotImplementedException();
+			where TDocument : class where TPartialDocument : class => UpdateAsync<TDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TPartialDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct: ct);
 		///<inheritdoc cref = "IUpdateRequest"/>
 		public UpdateResponse<TDocument> Update<TDocument>(IUpdateRequest request)
 			where TDocument : class => DoRequest<IUpdateRequest, UpdateResponse<TDocument>>(request, request.RequestParameters);
@@ -483,18 +483,18 @@ namespace Nest
 			where TDocument : class => DoRequestAsync<IUpdateRequest, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpdateByQueryRequest"/>
 		public UpdateByQueryResponse UpdateByQuery<TDocument>(Func<UpdateByQueryDescriptor<TDocument>, IUpdateByQueryRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => UpdateByQuery(selector.InvokeOrDefault(new UpdateByQueryDescriptor<TDocument>()));
 		///<inheritdoc cref = "IUpdateByQueryRequest"/>
 		public Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Func<UpdateByQueryDescriptor<TDocument>, IUpdateByQueryRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => UpdateByQueryAsync(selector.InvokeOrDefault(new UpdateByQueryDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "IUpdateByQueryRequest"/>
 		public UpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) => DoRequest<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IUpdateByQueryRequest"/>
 		public Task<UpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
-		public ListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null) => throw new NotImplementedException();
+		public ListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null) => UpdateByQueryRethrottle(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId: taskId)));
 		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
-		public Task<ListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<ListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null, CancellationToken ct = default) => UpdateByQueryRethrottleAsync(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId: taskId)), ct: ct);
 		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
 		public ListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request) => DoRequest<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>

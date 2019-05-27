@@ -20,53 +20,53 @@ namespace Nest.Specification.RollupApi
 		}
 
 		///<inheritdoc cref = "IDeleteRollupJobRequest"/>
-		public DeleteRollupJobResponse DeleteRollupJob(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null) => throw new NotImplementedException();
+		public DeleteRollupJobResponse DeleteRollupJob(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null) => DeleteRollupJob(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id: id)));
 		///<inheritdoc cref = "IDeleteRollupJobRequest"/>
-		public Task<DeleteRollupJobResponse> DeleteRollupJobAsync(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<DeleteRollupJobResponse> DeleteRollupJobAsync(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken ct = default) => DeleteRollupJobAsync(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id: id)), ct: ct);
 		///<inheritdoc cref = "IDeleteRollupJobRequest"/>
 		public DeleteRollupJobResponse DeleteRollupJob(IDeleteRollupJobRequest request) => DoRequest<IDeleteRollupJobRequest, DeleteRollupJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteRollupJobRequest"/>
 		public Task<DeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteRollupJobRequest, DeleteRollupJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetRollupJobRequest"/>
-		public GetRollupJobResponse GetRollupJob(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null) => throw new NotImplementedException();
+		public GetRollupJobResponse GetRollupJob(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null) => GetRollupJob(selector.InvokeOrDefault(new GetRollupJobDescriptor()));
 		///<inheritdoc cref = "IGetRollupJobRequest"/>
-		public Task<GetRollupJobResponse> GetRollupJobAsync(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetRollupJobResponse> GetRollupJobAsync(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null, CancellationToken ct = default) => GetRollupJobAsync(selector.InvokeOrDefault(new GetRollupJobDescriptor()), ct: ct);
 		///<inheritdoc cref = "IGetRollupJobRequest"/>
 		public GetRollupJobResponse GetRollupJob(IGetRollupJobRequest request) => DoRequest<IGetRollupJobRequest, GetRollupJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetRollupJobRequest"/>
 		public Task<GetRollupJobResponse> GetRollupJobAsync(IGetRollupJobRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRollupJobRequest, GetRollupJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetRollupCapabilitiesRequest"/>
-		public GetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null) => throw new NotImplementedException();
+		public GetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null) => GetRollupCapabilities(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()));
 		///<inheritdoc cref = "IGetRollupCapabilitiesRequest"/>
-		public Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null, CancellationToken ct = default) => GetRollupCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()), ct: ct);
 		///<inheritdoc cref = "IGetRollupCapabilitiesRequest"/>
 		public GetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request) => DoRequest<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetRollupCapabilitiesRequest"/>
 		public Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetRollupIndexCapabilitiesRequest"/>
-		public GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IndexName index, Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null) => throw new NotImplementedException();
+		public GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IndexName index, Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null) => GetRollupIndexCapabilities(selector.InvokeOrDefault(new GetRollupIndexCapabilitiesDescriptor(index: index)));
 		///<inheritdoc cref = "IGetRollupIndexCapabilitiesRequest"/>
-		public Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IndexName index, Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IndexName index, Func<GetRollupIndexCapabilitiesDescriptor, IGetRollupIndexCapabilitiesRequest> selector = null, CancellationToken ct = default) => GetRollupIndexCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupIndexCapabilitiesDescriptor(index: index)), ct: ct);
 		///<inheritdoc cref = "IGetRollupIndexCapabilitiesRequest"/>
 		public GetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request) => DoRequest<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetRollupIndexCapabilitiesRequest"/>
 		public Task<GetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IGetRollupIndexCapabilitiesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ICreateRollupJobRequest"/>
-		public CreateRollupJobResponse CreateRollupJob<TDocument>(DocumentPath<TDocument> id, Func<CreateRollupJobDescriptor<TDocument>, ICreateRollupJobRequest> selector)
-			where TDocument : class => throw new NotImplementedException();
+		public CreateRollupJobResponse CreateRollupJob<TDocument>(Id id, Func<CreateRollupJobDescriptor<TDocument>, ICreateRollupJobRequest> selector)
+			where TDocument : class => CreateRollupJob(selector.InvokeOrDefault(new CreateRollupJobDescriptor<TDocument>(id: id)));
 		///<inheritdoc cref = "ICreateRollupJobRequest"/>
-		public Task<CreateRollupJobResponse> CreateRollupJobAsync<TDocument>(DocumentPath<TDocument> id, Func<CreateRollupJobDescriptor<TDocument>, ICreateRollupJobRequest> selector, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+		public Task<CreateRollupJobResponse> CreateRollupJobAsync<TDocument>(Id id, Func<CreateRollupJobDescriptor<TDocument>, ICreateRollupJobRequest> selector, CancellationToken ct = default)
+			where TDocument : class => CreateRollupJobAsync(selector.InvokeOrDefault(new CreateRollupJobDescriptor<TDocument>(id: id)), ct: ct);
 		///<inheritdoc cref = "ICreateRollupJobRequest"/>
 		public CreateRollupJobResponse CreateRollupJob(ICreateRollupJobRequest request) => DoRequest<ICreateRollupJobRequest, CreateRollupJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ICreateRollupJobRequest"/>
 		public Task<CreateRollupJobResponse> CreateRollupJobAsync(ICreateRollupJobRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateRollupJobRequest, CreateRollupJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IRollupSearchRequest"/>
 		public RollupSearchResponse<TDocument> Search<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector = null)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new RollupSearchDescriptor<TDocument>()));
 		///<inheritdoc cref = "IRollupSearchRequest"/>
 		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(Func<RollupSearchDescriptor<TDocument>, IRollupSearchRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => throw new NotImplementedException();
+			where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new RollupSearchDescriptor<TDocument>()), ct: ct);
 		///<inheritdoc cref = "IRollupSearchRequest"/>
 		public RollupSearchResponse<TDocument> Search<TDocument>(IRollupSearchRequest request)
 			where TDocument : class => DoRequest<IRollupSearchRequest, RollupSearchResponse<TDocument>>(request, request.RequestParameters);
@@ -74,17 +74,17 @@ namespace Nest.Specification.RollupApi
 		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(IRollupSearchRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IRollupSearchRequest, RollupSearchResponse<TDocument>>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IStartRollupJobRequest"/>
-		public StartRollupJobResponse StartRollupJob(Id id, Func<StartRollupJobDescriptor, IStartRollupJobRequest> selector = null) => throw new NotImplementedException();
+		public StartRollupJobResponse StartRollupJob(Id id, Func<StartRollupJobDescriptor, IStartRollupJobRequest> selector = null) => StartRollupJob(selector.InvokeOrDefault(new StartRollupJobDescriptor(id: id)));
 		///<inheritdoc cref = "IStartRollupJobRequest"/>
-		public Task<StartRollupJobResponse> StartRollupJobAsync(Id id, Func<StartRollupJobDescriptor, IStartRollupJobRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<StartRollupJobResponse> StartRollupJobAsync(Id id, Func<StartRollupJobDescriptor, IStartRollupJobRequest> selector = null, CancellationToken ct = default) => StartRollupJobAsync(selector.InvokeOrDefault(new StartRollupJobDescriptor(id: id)), ct: ct);
 		///<inheritdoc cref = "IStartRollupJobRequest"/>
 		public StartRollupJobResponse StartRollupJob(IStartRollupJobRequest request) => DoRequest<IStartRollupJobRequest, StartRollupJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartRollupJobRequest"/>
 		public Task<StartRollupJobResponse> StartRollupJobAsync(IStartRollupJobRequest request, CancellationToken ct = default) => DoRequestAsync<IStartRollupJobRequest, StartRollupJobResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IStopRollupJobRequest"/>
-		public StopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null) => throw new NotImplementedException();
+		public StopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null) => StopRollupJob(selector.InvokeOrDefault(new StopRollupJobDescriptor(id: id)));
 		///<inheritdoc cref = "IStopRollupJobRequest"/>
-		public Task<StopRollupJobResponse> StopRollupJobAsync(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<StopRollupJobResponse> StopRollupJobAsync(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null, CancellationToken ct = default) => StopRollupJobAsync(selector.InvokeOrDefault(new StopRollupJobDescriptor(id: id)), ct: ct);
 		///<inheritdoc cref = "IStopRollupJobRequest"/>
 		public StopRollupJobResponse StopRollupJob(IStopRollupJobRequest request) => DoRequest<IStopRollupJobRequest, StopRollupJobResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStopRollupJobRequest"/>

@@ -20,25 +20,25 @@ namespace Nest.Specification.MigrationApi
 		}
 
 		///<inheritdoc cref = "IDeprecationInfoRequest"/>
-		public DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null) => throw new NotImplementedException();
+		public DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null) => DeprecationInfo(selector.InvokeOrDefault(new DeprecationInfoDescriptor()));
 		///<inheritdoc cref = "IDeprecationInfoRequest"/>
-		public Task<DeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<DeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null, CancellationToken ct = default) => DeprecationInfoAsync(selector.InvokeOrDefault(new DeprecationInfoDescriptor()), ct: ct);
 		///<inheritdoc cref = "IDeprecationInfoRequest"/>
 		public DeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) => DoRequest<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeprecationInfoRequest"/>
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
-		public MigrationAssistanceResponse Assistance(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) => throw new NotImplementedException();
+		public MigrationAssistanceResponse Assistance(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) => Assistance(selector.InvokeOrDefault(new MigrationAssistanceDescriptor().Index(index: index)));
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
-		public Task<MigrationAssistanceResponse> AssistanceAsync(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MigrationAssistanceResponse> AssistanceAsync(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null, CancellationToken ct = default) => AssistanceAsync(selector.InvokeOrDefault(new MigrationAssistanceDescriptor().Index(index: index)), ct: ct);
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
 		public MigrationAssistanceResponse Assistance(IMigrationAssistanceRequest request) => DoRequest<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
 		public Task<MigrationAssistanceResponse> AssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) => DoRequestAsync<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
-		public MigrationUpgradeResponse Upgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null) => throw new NotImplementedException();
+		public MigrationUpgradeResponse Upgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null) => Upgrade(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index: index)));
 		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
-		public Task<MigrationUpgradeResponse> UpgradeAsync(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<MigrationUpgradeResponse> UpgradeAsync(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null, CancellationToken ct = default) => UpgradeAsync(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index: index)), ct: ct);
 		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
 		public MigrationUpgradeResponse Upgrade(IMigrationUpgradeRequest request) => DoRequest<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IMigrationUpgradeRequest"/>

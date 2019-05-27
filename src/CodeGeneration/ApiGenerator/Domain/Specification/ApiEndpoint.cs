@@ -117,7 +117,7 @@ namespace ApiGenerator.Domain
 				//if index, indices is required but the descriptor is generic these will be inferred so no need to pass explicitly
 				requiredParts = requiredParts.Where(p => p.Name != "index" && p.Name != "indices").ToList();
 				var idPart = requiredParts.FirstOrDefault(i => i.Name == "id");
-				if (idPart != null)
+				if (idPart != null && Url.IsDocumentApi)
 				{
 					requiredParts.Remove(idPart);
 					var generic = CsharpNames.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "").Split(",").First().Trim();

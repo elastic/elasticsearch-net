@@ -283,8 +283,8 @@ namespace Nest
 		}
 
 		///<summary>/_cat/allocation/{node_id}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public CatAllocationRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public CatAllocationRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -1610,8 +1610,8 @@ namespace Nest
 		}
 
 		///<summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
-		///<param name = "thread_pool_patterns">Optional, accepts null</param>
-		public CatThreadPoolRequest(Names thread_pool_patterns): base(r => r.Optional("thread_pool_patterns", thread_pool_patterns))
+		///<param name = "threadPoolPatterns">Optional, accepts null</param>
+		public CatThreadPoolRequest(Names threadPoolPatterns): base(r => r.Optional("thread_pool_patterns", threadPoolPatterns))
 		{
 		}
 
@@ -1700,7 +1700,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteAutoFollowPatternRequest(): base()
+		protected DeleteAutoFollowPatternRequest(): base()
 		{
 		}
 
@@ -1734,7 +1734,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateFollowIndexRequest(): base()
+		protected CreateFollowIndexRequest(): base()
 		{
 		}
 
@@ -1777,7 +1777,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal FollowIndexStatsRequest(): base()
+		protected FollowIndexStatsRequest(): base()
 		{
 		}
 
@@ -1844,7 +1844,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PauseFollowIndexRequest(): base()
+		protected PauseFollowIndexRequest(): base()
 		{
 		}
 
@@ -1878,7 +1878,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateAutoFollowPatternRequest(): base()
+		protected CreateAutoFollowPatternRequest(): base()
 		{
 		}
 
@@ -1912,7 +1912,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ResumeFollowIndexRequest(): base()
+		protected ResumeFollowIndexRequest(): base()
 		{
 		}
 
@@ -1961,7 +1961,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UnfollowIndexRequest(): base()
+		protected UnfollowIndexRequest(): base()
 		{
 		}
 
@@ -2420,8 +2420,8 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/stats/nodes/{node_id}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public ClusterStatsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public ClusterStatsRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -2638,7 +2638,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateRequest(): base()
+		protected CreateRequest(): base()
 		{
 		}
 
@@ -2734,7 +2734,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateRequest(): base()
+		protected CreateRequest(): base()
 		{
 		}
 	}
@@ -2774,7 +2774,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteRequest(): base()
+		protected DeleteRequest(): base()
 		{
 		}
 
@@ -2877,7 +2877,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteRequest(): base()
+		protected DeleteRequest(): base()
 		{
 		}
 	}
@@ -2910,7 +2910,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteByQueryRequest(): base()
+		protected DeleteByQueryRequest(): base()
 		{
 		}
 
@@ -3189,14 +3189,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_delete_by_query/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_delete_by_query/{task_id}/_rethrottle</summary>
-		///<param name = "task_id">this parameter is required</param>
-		public DeleteByQueryRethrottleRequest(TaskId task_id): base(r => r.Required("task_id", task_id))
+		///<param name = "taskId">this parameter is required</param>
+		public DeleteByQueryRethrottleRequest(TaskId taskId): base(r => r.Required("task_id", taskId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteByQueryRethrottleRequest(): base()
+		protected DeleteByQueryRethrottleRequest(): base()
 		{
 		}
 
@@ -3236,7 +3236,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteScriptRequest(): base()
+		protected DeleteScriptRequest(): base()
 		{
 		}
 
@@ -3294,7 +3294,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DocumentExistsRequest(): base()
+		protected DocumentExistsRequest(): base()
 		{
 		}
 
@@ -3404,7 +3404,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DocumentExistsRequest(): base()
+		protected DocumentExistsRequest(): base()
 		{
 		}
 	}
@@ -3444,7 +3444,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal SourceExistsRequest(): base()
+		protected SourceExistsRequest(): base()
 		{
 		}
 
@@ -3547,7 +3547,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal SourceExistsRequest(): base()
+		protected SourceExistsRequest(): base()
 		{
 		}
 	}
@@ -3594,7 +3594,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ExplainRequest(): base()
+		protected ExplainRequest(): base()
 		{
 		}
 
@@ -3711,7 +3711,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ExplainRequest(): base()
+		protected ExplainRequest(): base()
 		{
 		}
 	}
@@ -3814,7 +3814,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetRequest(): base()
+		protected GetRequest(): base()
 		{
 		}
 
@@ -3924,7 +3924,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetRequest(): base()
+		protected GetRequest(): base()
 		{
 		}
 	}
@@ -3953,7 +3953,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetScriptRequest(): base()
+		protected GetScriptRequest(): base()
 		{
 		}
 
@@ -4004,7 +4004,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal SourceRequest(): base()
+		protected SourceRequest(): base()
 		{
 		}
 
@@ -4107,7 +4107,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal SourceRequest(): base()
+		protected SourceRequest(): base()
 		{
 		}
 	}
@@ -4140,7 +4140,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GraphExploreRequest(): base()
+		protected GraphExploreRequest(): base()
 		{
 		}
 
@@ -4202,14 +4202,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/policy/{policy_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name = "policy_id">this parameter is required</param>
-		public DeleteLifecycleRequest(PolicyId policy_id): base(r => r.Required("policy_id", policy_id))
+		///<param name = "policyId">this parameter is required</param>
+		public DeleteLifecycleRequest(PolicyId policyId): base(r => r.Required("policy_id", policyId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteLifecycleRequest(): base()
+		protected DeleteLifecycleRequest(): base()
 		{
 		}
 
@@ -4243,7 +4243,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ExplainLifecycleRequest(): base()
+		protected ExplainLifecycleRequest(): base()
 		{
 		}
 
@@ -4270,8 +4270,8 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/policy/{policy_id}", "_ilm/policy"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name = "policy_id">Optional, accepts null</param>
-		public GetLifecycleRequest(PolicyId policy_id): base(r => r.Optional("policy_id", policy_id))
+		///<param name = "policyId">Optional, accepts null</param>
+		public GetLifecycleRequest(PolicyId policyId): base(r => r.Optional("policy_id", policyId))
 		{
 		}
 
@@ -4325,7 +4325,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal MoveToStepRequest(): base()
+		protected MoveToStepRequest(): base()
 		{
 		}
 
@@ -4353,14 +4353,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ilm/policy/{policy_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ilm/policy/{policy_id}</summary>
-		///<param name = "policy_id">this parameter is required</param>
-		public PutLifecycleRequest(PolicyId policy_id): base(r => r.Required("policy_id", policy_id))
+		///<param name = "policyId">this parameter is required</param>
+		public PutLifecycleRequest(PolicyId policyId): base(r => r.Required("policy_id", policyId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutLifecycleRequest(): base()
+		protected PutLifecycleRequest(): base()
 		{
 		}
 
@@ -4394,7 +4394,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal RemovePolicyRequest(): base()
+		protected RemovePolicyRequest(): base()
 		{
 		}
 
@@ -4428,7 +4428,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal RetryIlmRequest(): base()
+		protected RetryIlmRequest(): base()
 		{
 		}
 
@@ -4509,7 +4509,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal IndexRequest(): base()
+		protected IndexRequest(): base()
 		{
 		}
 
@@ -4778,7 +4778,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CloseIndexRequest(): base()
+		protected CloseIndexRequest(): base()
 		{
 		}
 
@@ -4849,7 +4849,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateIndexRequest(): base()
+		protected CreateIndexRequest(): base()
 		{
 		}
 
@@ -4910,7 +4910,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteIndexRequest(): base()
+		protected DeleteIndexRequest(): base()
 		{
 		}
 
@@ -4985,7 +4985,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteAliasRequest(): base()
+		protected DeleteAliasRequest(): base()
 		{
 		}
 
@@ -5034,7 +5034,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteIndexTemplateRequest(): base()
+		protected DeleteIndexTemplateRequest(): base()
 		{
 		}
 
@@ -5081,7 +5081,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal IndexExistsRequest(): base()
+		protected IndexExistsRequest(): base()
 		{
 		}
 
@@ -5169,7 +5169,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal AliasExistsRequest(): base()
+		protected AliasExistsRequest(): base()
 		{
 		}
 
@@ -5235,7 +5235,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal IndexTemplateExistsRequest(): base()
+		protected IndexTemplateExistsRequest(): base()
 		{
 		}
 
@@ -5296,7 +5296,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal TypeExistsRequest(): base()
+		protected TypeExistsRequest(): base()
 		{
 		}
 
@@ -5571,7 +5571,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetIndexRequest(): base()
+		protected GetIndexRequest(): base()
 		{
 		}
 
@@ -5757,7 +5757,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetFieldMappingRequest(): base()
+		protected GetFieldMappingRequest(): base()
 		{
 		}
 
@@ -6135,7 +6135,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal OpenIndexRequest(): base()
+		protected OpenIndexRequest(): base()
 		{
 		}
 
@@ -6220,7 +6220,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutAliasRequest(): base()
+		protected PutAliasRequest(): base()
 		{
 		}
 
@@ -6273,7 +6273,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutMappingRequest(): base()
+		protected PutMappingRequest(): base()
 		{
 		}
 
@@ -6450,7 +6450,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutIndexTemplateRequest(): base()
+		protected PutIndexTemplateRequest(): base()
 		{
 		}
 
@@ -6626,14 +6626,14 @@ namespace Nest
 
 		///<summary>/{alias}/_rollover/{new_index}</summary>
 		///<param name = "alias">this parameter is required</param>
-		///<param name = "new_index">Optional, accepts null</param>
-		public RolloverIndexRequest(Name alias, IndexName new_index): base(r => r.Required("alias", alias).Optional("new_index", new_index))
+		///<param name = "newIndex">Optional, accepts null</param>
+		public RolloverIndexRequest(Name alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal RolloverIndexRequest(): base()
+		protected RolloverIndexRequest(): base()
 		{
 		}
 
@@ -6836,7 +6836,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ShrinkIndexRequest(): base()
+		protected ShrinkIndexRequest(): base()
 		{
 		}
 
@@ -6899,7 +6899,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal SplitIndexRequest(): base()
+		protected SplitIndexRequest(): base()
 		{
 		}
 
@@ -7301,7 +7301,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeletePipelineRequest(): base()
+		protected DeletePipelineRequest(): base()
 		{
 		}
 
@@ -7402,7 +7402,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutPipelineRequest(): base()
+		protected PutPipelineRequest(): base()
 		{
 		}
 
@@ -7808,7 +7808,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal MigrationUpgradeRequest(): base()
+		protected MigrationUpgradeRequest(): base()
 		{
 		}
 
@@ -7841,14 +7841,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_close"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public CloseJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public CloseJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CloseJobRequest(): base()
+		protected CloseJobRequest(): base()
 		{
 		}
 
@@ -7895,14 +7895,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		public DeleteCalendarRequest(Id calendar_id): base(r => r.Required("calendar_id", calendar_id))
+		///<param name = "calendarId">this parameter is required</param>
+		public DeleteCalendarRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteCalendarRequest(): base()
+		protected DeleteCalendarRequest(): base()
 		{
 		}
 
@@ -7935,15 +7935,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events/{event_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		///<param name = "event_id">this parameter is required</param>
-		public DeleteCalendarEventRequest(Id calendar_id, Id event_id): base(r => r.Required("calendar_id", calendar_id).Required("event_id", event_id))
+		///<param name = "calendarId">this parameter is required</param>
+		///<param name = "eventId">this parameter is required</param>
+		public DeleteCalendarEventRequest(Id calendarId, Id eventId): base(r => r.Required("calendar_id", calendarId).Required("event_id", eventId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteCalendarEventRequest(): base()
+		protected DeleteCalendarEventRequest(): base()
 		{
 		}
 
@@ -7978,15 +7978,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		///<param name = "job_id">this parameter is required</param>
-		public DeleteCalendarJobRequest(Id calendar_id, Id job_id): base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id))
+		///<param name = "calendarId">this parameter is required</param>
+		///<param name = "jobId">this parameter is required</param>
+		public DeleteCalendarJobRequest(Id calendarId, Id jobId): base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteCalendarJobRequest(): base()
+		protected DeleteCalendarJobRequest(): base()
 		{
 		}
 
@@ -8015,14 +8015,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
-		///<param name = "datafeed_id">this parameter is required</param>
-		public DeleteDatafeedRequest(Id datafeed_id): base(r => r.Required("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">this parameter is required</param>
+		public DeleteDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteDatafeedRequest(): base()
+		protected DeleteDatafeedRequest(): base()
 		{
 		}
 
@@ -8070,14 +8070,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters/{filter_id}</summary>
-		///<param name = "filter_id">this parameter is required</param>
-		public DeleteFilterRequest(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		///<param name = "filterId">this parameter is required</param>
+		public DeleteFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteFilterRequest(): base()
+		protected DeleteFilterRequest(): base()
 		{
 		}
 
@@ -8110,15 +8110,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
-		///<param name = "job_id">this parameter is required</param>
-		///<param name = "forecast_id">this parameter is required</param>
-		public DeleteForecastRequest(Id job_id, ForecastIds forecast_id): base(r => r.Required("job_id", job_id).Required("forecast_id", forecast_id))
+		///<param name = "jobId">this parameter is required</param>
+		///<param name = "forecastId">this parameter is required</param>
+		public DeleteForecastRequest(Id jobId, ForecastIds forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteForecastRequest(): base()
+		protected DeleteForecastRequest(): base()
 		{
 		}
 
@@ -8160,14 +8160,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public DeleteJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public DeleteJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteJobRequest(): base()
+		protected DeleteJobRequest(): base()
 		{
 		}
 
@@ -8213,15 +8213,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-		///<param name = "job_id">this parameter is required</param>
-		///<param name = "snapshot_id">this parameter is required</param>
-		public DeleteModelSnapshotRequest(Id job_id, Id snapshot_id): base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
+		///<param name = "jobId">this parameter is required</param>
+		///<param name = "snapshotId">this parameter is required</param>
+		public DeleteModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteModelSnapshotRequest(): base()
+		protected DeleteModelSnapshotRequest(): base()
 		{
 		}
 
@@ -8250,14 +8250,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_flush"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public FlushJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public FlushJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal FlushJobRequest(): base()
+		protected FlushJobRequest(): base()
 		{
 		}
 
@@ -8290,14 +8290,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public ForecastJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public ForecastJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ForecastJobRequest(): base()
+		protected ForecastJobRequest(): base()
 		{
 		}
 
@@ -8330,21 +8330,21 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "_ml/anomaly_detectors/{job_id}/results/buckets"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
-		///<param name = "job_id">this parameter is required</param>
+		///<param name = "jobId">this parameter is required</param>
 		///<param name = "timestamp">Optional, accepts null</param>
-		public GetBucketsRequest(Id job_id, Timestamp timestamp): base(r => r.Required("job_id", job_id).Optional("timestamp", timestamp))
+		public GetBucketsRequest(Id jobId, Timestamp timestamp): base(r => r.Required("job_id", jobId).Optional("timestamp", timestamp))
 		{
 		}
 
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public GetBucketsRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public GetBucketsRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetBucketsRequest(): base()
+		protected GetBucketsRequest(): base()
 		{
 		}
 
@@ -8373,14 +8373,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		public GetCalendarEventsRequest(Id calendar_id): base(r => r.Required("calendar_id", calendar_id))
+		///<param name = "calendarId">this parameter is required</param>
+		public GetCalendarEventsRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetCalendarEventsRequest(): base()
+		protected GetCalendarEventsRequest(): base()
 		{
 		}
 
@@ -8432,8 +8432,8 @@ namespace Nest
 		}
 
 		///<summary>/_ml/calendars/{calendar_id}</summary>
-		///<param name = "calendar_id">Optional, accepts null</param>
-		public GetCalendarsRequest(Id calendar_id): base(r => r.Optional("calendar_id", calendar_id))
+		///<param name = "calendarId">Optional, accepts null</param>
+		public GetCalendarsRequest(Id calendarId): base(r => r.Optional("calendar_id", calendarId))
 		{
 		}
 
@@ -8466,21 +8466,21 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "_ml/anomaly_detectors/{job_id}/results/categories/"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
-		///<param name = "job_id">this parameter is required</param>
-		///<param name = "category_id">Optional, accepts null</param>
-		public GetCategoriesRequest(Id job_id, CategoryId category_id): base(r => r.Required("job_id", job_id).Optional("category_id", category_id))
+		///<param name = "jobId">this parameter is required</param>
+		///<param name = "categoryId">Optional, accepts null</param>
+		public GetCategoriesRequest(Id jobId, CategoryId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 		{
 		}
 
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public GetCategoriesRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public GetCategoriesRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetCategoriesRequest(): base()
+		protected GetCategoriesRequest(): base()
 		{
 		}
 
@@ -8509,8 +8509,8 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stats", "_ml/datafeeds/_stats"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
-		///<param name = "datafeed_id">Optional, accepts null</param>
-		public GetDatafeedStatsRequest(Id datafeed_id): base(r => r.Optional("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public GetDatafeedStatsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
 		{
 		}
 
@@ -8548,8 +8548,8 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}", "_ml/datafeeds"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
-		///<param name = "datafeed_id">Optional, accepts null</param>
-		public GetDatafeedsRequest(Id datafeed_id): base(r => r.Optional("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public GetDatafeedsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
 		{
 		}
 
@@ -8592,8 +8592,8 @@ namespace Nest
 		}
 
 		///<summary>/_ml/filters/{filter_id}</summary>
-		///<param name = "filter_id">Optional, accepts null</param>
-		public GetFiltersRequest(Id filter_id): base(r => r.Optional("filter_id", filter_id))
+		///<param name = "filterId">Optional, accepts null</param>
+		public GetFiltersRequest(Id filterId): base(r => r.Optional("filter_id", filterId))
 		{
 		}
 
@@ -8633,14 +8633,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/influencers"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public GetInfluencersRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public GetInfluencersRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetInfluencersRequest(): base()
+		protected GetInfluencersRequest(): base()
 		{
 		}
 
@@ -8672,8 +8672,8 @@ namespace Nest
 		}
 
 		///<summary>/_ml/anomaly_detectors/{job_id}/_stats</summary>
-		///<param name = "job_id">Optional, accepts null</param>
-		public GetJobStatsRequest(Id job_id): base(r => r.Optional("job_id", job_id))
+		///<param name = "jobId">Optional, accepts null</param>
+		public GetJobStatsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
 		{
 		}
 
@@ -8706,8 +8706,8 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}", "_ml/anomaly_detectors"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
-		///<param name = "job_id">Optional, accepts null</param>
-		public GetJobsRequest(Id job_id): base(r => r.Optional("job_id", job_id))
+		///<param name = "jobId">Optional, accepts null</param>
+		public GetJobsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
 		{
 		}
 
@@ -8751,21 +8751,21 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "_ml/anomaly_detectors/{job_id}/model_snapshots"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-		///<param name = "job_id">this parameter is required</param>
-		///<param name = "snapshot_id">Optional, accepts null</param>
-		public GetModelSnapshotsRequest(Id job_id, Id snapshot_id): base(r => r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id))
+		///<param name = "jobId">this parameter is required</param>
+		///<param name = "snapshotId">Optional, accepts null</param>
+		public GetModelSnapshotsRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Optional("snapshot_id", snapshotId))
 		{
 		}
 
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public GetModelSnapshotsRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public GetModelSnapshotsRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetModelSnapshotsRequest(): base()
+		protected GetModelSnapshotsRequest(): base()
 		{
 		}
 
@@ -8794,14 +8794,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/overall_buckets"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public GetOverallBucketsRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public GetOverallBucketsRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetOverallBucketsRequest(): base()
+		protected GetOverallBucketsRequest(): base()
 		{
 		}
 
@@ -8828,14 +8828,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/records"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public GetAnomalyRecordsRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public GetAnomalyRecordsRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetAnomalyRecordsRequest(): base()
+		protected GetAnomalyRecordsRequest(): base()
 		{
 		}
 
@@ -8877,14 +8877,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_open"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public OpenJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public OpenJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal OpenJobRequest(): base()
+		protected OpenJobRequest(): base()
 		{
 		}
 
@@ -8911,14 +8911,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		public PostCalendarEventsRequest(Id calendar_id): base(r => r.Required("calendar_id", calendar_id))
+		///<param name = "calendarId">this parameter is required</param>
+		public PostCalendarEventsRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PostCalendarEventsRequest(): base()
+		protected PostCalendarEventsRequest(): base()
 		{
 		}
 
@@ -8945,14 +8945,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_data"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public PostJobDataRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public PostJobDataRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PostJobDataRequest(): base()
+		protected PostJobDataRequest(): base()
 		{
 		}
 
@@ -8992,14 +8992,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_preview"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
-		///<param name = "datafeed_id">this parameter is required</param>
-		public PreviewDatafeedRequest(Id datafeed_id): base(r => r.Required("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">this parameter is required</param>
+		public PreviewDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PreviewDatafeedRequest(): base()
+		protected PreviewDatafeedRequest(): base()
 		{
 		}
 
@@ -9026,14 +9026,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		public PutCalendarRequest(Id calendar_id): base(r => r.Required("calendar_id", calendar_id))
+		///<param name = "calendarId">this parameter is required</param>
+		public PutCalendarRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutCalendarRequest(): base()
+		protected PutCalendarRequest(): base()
 		{
 		}
 
@@ -9066,15 +9066,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
-		///<param name = "calendar_id">this parameter is required</param>
-		///<param name = "job_id">this parameter is required</param>
-		public PutCalendarJobRequest(Id calendar_id, Id job_id): base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id))
+		///<param name = "calendarId">this parameter is required</param>
+		///<param name = "jobId">this parameter is required</param>
+		public PutCalendarJobRequest(Id calendarId, Id jobId): base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutCalendarJobRequest(): base()
+		protected PutCalendarJobRequest(): base()
 		{
 		}
 
@@ -9103,14 +9103,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
-		///<param name = "datafeed_id">this parameter is required</param>
-		public PutDatafeedRequest(Id datafeed_id): base(r => r.Required("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">this parameter is required</param>
+		public PutDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutDatafeedRequest(): base()
+		protected PutDatafeedRequest(): base()
 		{
 		}
 
@@ -9137,14 +9137,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters/{filter_id}</summary>
-		///<param name = "filter_id">this parameter is required</param>
-		public PutFilterRequest(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		///<param name = "filterId">this parameter is required</param>
+		public PutFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutFilterRequest(): base()
+		protected PutFilterRequest(): base()
 		{
 		}
 
@@ -9171,14 +9171,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public PutJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public PutJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutJobRequest(): base()
+		protected PutJobRequest(): base()
 		{
 		}
 
@@ -9211,15 +9211,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
-		///<param name = "job_id">this parameter is required</param>
-		///<param name = "snapshot_id">this parameter is required</param>
-		public RevertModelSnapshotRequest(Id job_id, Id snapshot_id): base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
+		///<param name = "jobId">this parameter is required</param>
+		///<param name = "snapshotId">this parameter is required</param>
+		public RevertModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal RevertModelSnapshotRequest(): base()
+		protected RevertModelSnapshotRequest(): base()
 		{
 		}
 
@@ -9248,14 +9248,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_start"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
-		///<param name = "datafeed_id">this parameter is required</param>
-		public StartDatafeedRequest(Id datafeed_id): base(r => r.Required("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">this parameter is required</param>
+		public StartDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal StartDatafeedRequest(): base()
+		protected StartDatafeedRequest(): base()
 		{
 		}
 
@@ -9282,14 +9282,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stop"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
-		///<param name = "datafeed_id">this parameter is required</param>
-		public StopDatafeedRequest(Id datafeed_id): base(r => r.Required("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">this parameter is required</param>
+		public StopDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal StopDatafeedRequest(): base()
+		protected StopDatafeedRequest(): base()
 		{
 		}
 
@@ -9322,14 +9322,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
-		///<param name = "datafeed_id">this parameter is required</param>
-		public UpdateDatafeedRequest(Id datafeed_id): base(r => r.Required("datafeed_id", datafeed_id))
+		///<param name = "datafeedId">this parameter is required</param>
+		public UpdateDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateDatafeedRequest(): base()
+		protected UpdateDatafeedRequest(): base()
 		{
 		}
 
@@ -9356,14 +9356,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/filters/{filter_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/filters/{filter_id}/_update</summary>
-		///<param name = "filter_id">this parameter is required</param>
-		public UpdateFilterRequest(Id filter_id): base(r => r.Required("filter_id", filter_id))
+		///<param name = "filterId">this parameter is required</param>
+		public UpdateFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateFilterRequest(): base()
+		protected UpdateFilterRequest(): base()
 		{
 		}
 
@@ -9390,14 +9390,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
-		///<param name = "job_id">this parameter is required</param>
-		public UpdateJobRequest(Id job_id): base(r => r.Required("job_id", job_id))
+		///<param name = "jobId">this parameter is required</param>
+		public UpdateJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateJobRequest(): base()
+		protected UpdateJobRequest(): base()
 		{
 		}
 
@@ -9430,15 +9430,15 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
-		///<param name = "job_id">this parameter is required</param>
-		///<param name = "snapshot_id">this parameter is required</param>
-		public UpdateModelSnapshotRequest(Id job_id, Id snapshot_id): base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
+		///<param name = "jobId">this parameter is required</param>
+		///<param name = "snapshotId">this parameter is required</param>
+		public UpdateModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateModelSnapshotRequest(): base()
+		protected UpdateModelSnapshotRequest(): base()
 		{
 		}
 
@@ -9783,8 +9783,8 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/hot_threads</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public NodesHotThreadsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public NodesHotThreadsRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -9863,8 +9863,8 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public NodesInfoRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public NodesInfoRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -9875,9 +9875,9 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/{metric}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
+		///<param name = "nodeId">Optional, accepts null</param>
 		///<param name = "metric">Optional, accepts null</param>
-		public NodesInfoRequest(NodeIds node_id, Metrics metric): base(r => r.Optional("node_id", node_id).Optional("metric", metric))
+		public NodesInfoRequest(NodeIds nodeId, Metrics metric): base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 		{
 		}
 
@@ -9924,8 +9924,8 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/reload_secure_settings</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public ReloadSecureSettingsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public ReloadSecureSettingsRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -9975,8 +9975,8 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/stats</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public NodesStatsRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -9987,24 +9987,24 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/stats/{metric}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
+		///<param name = "nodeId">Optional, accepts null</param>
 		///<param name = "metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id, Metrics metric): base(r => r.Optional("node_id", node_id).Optional("metric", metric))
+		public NodesStatsRequest(NodeIds nodeId, Metrics metric): base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 		{
 		}
 
 		///<summary>/_nodes/stats/{metric}/{index_metric}</summary>
 		///<param name = "metric">Optional, accepts null</param>
-		///<param name = "index_metric">Optional, accepts null</param>
-		public NodesStatsRequest(Metrics metric, IndexMetrics index_metric): base(r => r.Optional("metric", metric).Optional("index_metric", index_metric))
+		///<param name = "indexMetric">Optional, accepts null</param>
+		public NodesStatsRequest(Metrics metric, IndexMetrics indexMetric): base(r => r.Optional("metric", metric).Optional("index_metric", indexMetric))
 		{
 		}
 
 		///<summary>/_nodes/{node_id}/stats/{metric}/{index_metric}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
+		///<param name = "nodeId">Optional, accepts null</param>
 		///<param name = "metric">Optional, accepts null</param>
-		///<param name = "index_metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id, Metrics metric, IndexMetrics index_metric): base(r => r.Optional("node_id", node_id).Optional("metric", metric).Optional("index_metric", index_metric))
+		///<param name = "indexMetric">Optional, accepts null</param>
+		public NodesStatsRequest(NodeIds nodeId, Metrics metric, IndexMetrics indexMetric): base(r => r.Optional("node_id", nodeId).Optional("metric", metric).Optional("index_metric", indexMetric))
 		{
 		}
 
@@ -10101,8 +10101,8 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/usage</summary>
-		///<param name = "node_id">Optional, accepts null</param>
-		public NodesUsageRequest(NodeIds node_id): base(r => r.Optional("node_id", node_id))
+		///<param name = "nodeId">Optional, accepts null</param>
+		public NodesUsageRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
 		{
 		}
 
@@ -10113,9 +10113,9 @@ namespace Nest
 		}
 
 		///<summary>/_nodes/{node_id}/usage/{metric}</summary>
-		///<param name = "node_id">Optional, accepts null</param>
+		///<param name = "nodeId">Optional, accepts null</param>
 		///<param name = "metric">Optional, accepts null</param>
-		public NodesUsageRequest(NodeIds node_id, Metrics metric): base(r => r.Optional("node_id", node_id).Optional("metric", metric))
+		public NodesUsageRequest(NodeIds nodeId, Metrics metric): base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 		{
 		}
 
@@ -10185,7 +10185,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutScriptRequest(): base()
+		protected PutScriptRequest(): base()
 		{
 		}
 
@@ -10294,14 +10294,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_reindex/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_reindex/{task_id}/_rethrottle</summary>
-		///<param name = "task_id">this parameter is required</param>
-		public ReindexRethrottleRequest(TaskId task_id): base(r => r.Required("task_id", task_id))
+		///<param name = "taskId">this parameter is required</param>
+		public ReindexRethrottleRequest(TaskId taskId): base(r => r.Required("task_id", taskId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ReindexRethrottleRequest(): base()
+		protected ReindexRethrottleRequest(): base()
 		{
 		}
 
@@ -10374,7 +10374,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteRollupJobRequest(): base()
+		protected DeleteRollupJobRequest(): base()
 		{
 		}
 
@@ -10474,7 +10474,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetRollupIndexCapabilitiesRequest(): base()
+		protected GetRollupIndexCapabilitiesRequest(): base()
 		{
 		}
 
@@ -10508,7 +10508,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateRollupJobRequest(): base()
+		protected CreateRollupJobRequest(): base()
 		{
 		}
 
@@ -10542,7 +10542,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal RollupSearchRequest(): base()
+		protected RollupSearchRequest(): base()
 		{
 		}
 
@@ -10589,7 +10589,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal StartRollupJobRequest(): base()
+		protected StartRollupJobRequest(): base()
 		{
 		}
 
@@ -10623,7 +10623,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal StopRollupJobRequest(): base()
+		protected StopRollupJobRequest(): base()
 		{
 		}
 
@@ -11281,7 +11281,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ClearCachedRealmsRequest(): base()
+		protected ClearCachedRealmsRequest(): base()
 		{
 		}
 
@@ -11321,7 +11321,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ClearCachedRolesRequest(): base()
+		protected ClearCachedRolesRequest(): base()
 		{
 		}
 
@@ -11386,7 +11386,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeletePrivilegesRequest(): base()
+		protected DeletePrivilegesRequest(): base()
 		{
 		}
 
@@ -11431,7 +11431,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteRoleRequest(): base()
+		protected DeleteRoleRequest(): base()
 		{
 		}
 
@@ -11474,7 +11474,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteRoleMappingRequest(): base()
+		protected DeleteRoleMappingRequest(): base()
 		{
 		}
 
@@ -11517,7 +11517,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteUserRequest(): base()
+		protected DeleteUserRequest(): base()
 		{
 		}
 
@@ -11560,7 +11560,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DisableUserRequest(): base()
+		protected DisableUserRequest(): base()
 		{
 		}
 
@@ -11603,7 +11603,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal EnableUserRequest(): base()
+		protected EnableUserRequest(): base()
 		{
 		}
 
@@ -11953,7 +11953,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutRoleRequest(): base()
+		protected PutRoleRequest(): base()
 		{
 		}
 
@@ -11996,7 +11996,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutRoleMappingRequest(): base()
+		protected PutRoleMappingRequest(): base()
 		{
 		}
 
@@ -12039,7 +12039,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutUserRequest(): base()
+		protected PutUserRequest(): base()
 		{
 		}
 
@@ -12089,7 +12089,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal SnapshotRequest(): base()
+		protected SnapshotRequest(): base()
 		{
 		}
 
@@ -12138,7 +12138,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal CreateRepositoryRequest(): base()
+		protected CreateRepositoryRequest(): base()
 		{
 		}
 
@@ -12199,7 +12199,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteSnapshotRequest(): base()
+		protected DeleteSnapshotRequest(): base()
 		{
 		}
 
@@ -12241,7 +12241,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteRepositoryRequest(): base()
+		protected DeleteRepositoryRequest(): base()
 		{
 		}
 
@@ -12295,7 +12295,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetSnapshotRequest(): base()
+		protected GetSnapshotRequest(): base()
 		{
 		}
 
@@ -12404,7 +12404,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal RestoreRequest(): base()
+		protected RestoreRequest(): base()
 		{
 		}
 
@@ -12514,7 +12514,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal VerifyRepositoryRequest(): base()
+		protected VerifyRepositoryRequest(): base()
 		{
 		}
 
@@ -12625,8 +12625,8 @@ namespace Nest
 		}
 
 		///<summary>/_tasks/{task_id}/_cancel</summary>
-		///<param name = "task_id">Optional, accepts null</param>
-		public CancelTasksRequest(TaskId task_id): base(r => r.Optional("task_id", task_id))
+		///<param name = "taskId">Optional, accepts null</param>
+		public CancelTasksRequest(TaskId taskId): base(r => r.Optional("task_id", taskId))
 		{
 		}
 
@@ -12676,14 +12676,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_tasks/{task_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_tasks/{task_id}</summary>
-		///<param name = "task_id">this parameter is required</param>
-		public GetTaskRequest(TaskId task_id): base(r => r.Required("task_id", task_id))
+		///<param name = "taskId">this parameter is required</param>
+		public GetTaskRequest(TaskId taskId): base(r => r.Required("task_id", taskId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetTaskRequest(): base()
+		protected GetTaskRequest(): base()
 		{
 		}
 
@@ -12813,7 +12813,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal TermVectorsRequest(): base()
+		protected TermVectorsRequest(): base()
 		{
 		}
 
@@ -12976,7 +12976,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateRequest(): base()
+		protected UpdateRequest(): base()
 		{
 		}
 
@@ -13086,7 +13086,7 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateRequest(): base()
+		protected UpdateRequest(): base()
 		{
 		}
 	}
@@ -13119,7 +13119,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateByQueryRequest(): base()
+		protected UpdateByQueryRequest(): base()
 		{
 		}
 
@@ -13412,14 +13412,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_update_by_query/{task_id}/_rethrottle"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_update_by_query/{task_id}/_rethrottle</summary>
-		///<param name = "task_id">this parameter is required</param>
-		public UpdateByQueryRethrottleRequest(TaskId task_id): base(r => r.Required("task_id", task_id))
+		///<param name = "taskId">this parameter is required</param>
+		public UpdateByQueryRethrottleRequest(TaskId taskId): base(r => r.Required("task_id", taskId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal UpdateByQueryRethrottleRequest(): base()
+		protected UpdateByQueryRethrottleRequest(): base()
 		{
 		}
 
@@ -13458,21 +13458,21 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{watch_id}/_ack", "_watcher/watch/{watch_id}/_ack/{action_id}"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_ack</summary>
-		///<param name = "watch_id">this parameter is required</param>
-		public AcknowledgeWatchRequest(Id watch_id): base(r => r.Required("watch_id", watch_id))
+		///<param name = "watchId">this parameter is required</param>
+		public AcknowledgeWatchRequest(Id watchId): base(r => r.Required("watch_id", watchId))
 		{
 		}
 
 		///<summary>/_watcher/watch/{watch_id}/_ack/{action_id}</summary>
-		///<param name = "watch_id">this parameter is required</param>
-		///<param name = "action_id">Optional, accepts null</param>
-		public AcknowledgeWatchRequest(Id watch_id, ActionIds action_id): base(r => r.Required("watch_id", watch_id).Optional("action_id", action_id))
+		///<param name = "watchId">this parameter is required</param>
+		///<param name = "actionId">Optional, accepts null</param>
+		public AcknowledgeWatchRequest(Id watchId, ActionIds actionId): base(r => r.Required("watch_id", watchId).Optional("action_id", actionId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal AcknowledgeWatchRequest(): base()
+		protected AcknowledgeWatchRequest(): base()
 		{
 		}
 
@@ -13501,14 +13501,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{watch_id}/_activate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_activate</summary>
-		///<param name = "watch_id">this parameter is required</param>
-		public ActivateWatchRequest(Id watch_id): base(r => r.Required("watch_id", watch_id))
+		///<param name = "watchId">this parameter is required</param>
+		public ActivateWatchRequest(Id watchId): base(r => r.Required("watch_id", watchId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal ActivateWatchRequest(): base()
+		protected ActivateWatchRequest(): base()
 		{
 		}
 
@@ -13535,14 +13535,14 @@ namespace Nest
 		internal static ApiUrls Urls = new ApiUrls(new[]{"_watcher/watch/{watch_id}/_deactivate"});
 		internal override ApiUrls ApiUrls => Urls;
 		///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
-		///<param name = "watch_id">this parameter is required</param>
-		public DeactivateWatchRequest(Id watch_id): base(r => r.Required("watch_id", watch_id))
+		///<param name = "watchId">this parameter is required</param>
+		public DeactivateWatchRequest(Id watchId): base(r => r.Required("watch_id", watchId))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeactivateWatchRequest(): base()
+		protected DeactivateWatchRequest(): base()
 		{
 		}
 
@@ -13576,7 +13576,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal DeleteWatchRequest(): base()
+		protected DeleteWatchRequest(): base()
 		{
 		}
 
@@ -13649,7 +13649,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal GetWatchRequest(): base()
+		protected GetWatchRequest(): base()
 		{
 		}
 
@@ -13683,7 +13683,7 @@ namespace Nest
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		internal PutWatchRequest(): base()
+		protected PutWatchRequest(): base()
 		{
 		}
 

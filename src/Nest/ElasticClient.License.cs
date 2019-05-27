@@ -20,57 +20,57 @@ namespace Nest.Specification.LicenseApi
 		}
 
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
-		public DeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) => throw new NotImplementedException();
+		public DeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) => DeleteLicense(selector.InvokeOrDefault(new DeleteLicenseDescriptor()));
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
-		public Task<DeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<DeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken ct = default) => DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), ct: ct);
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
 		public DeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) => DoRequest<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IDeleteLicenseRequest"/>
 		public Task<DeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetLicenseRequest"/>
-		public GetLicenseResponse GetLicense(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null) => throw new NotImplementedException();
+		public GetLicenseResponse GetLicense(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null) => GetLicense(selector.InvokeOrDefault(new GetLicenseDescriptor()));
 		///<inheritdoc cref = "IGetLicenseRequest"/>
-		public Task<GetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null, CancellationToken ct = default) => GetLicenseAsync(selector.InvokeOrDefault(new GetLicenseDescriptor()), ct: ct);
 		///<inheritdoc cref = "IGetLicenseRequest"/>
 		public GetLicenseResponse GetLicense(IGetLicenseRequest request) => DoRequest<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetLicenseRequest"/>
 		public Task<GetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
-		public GetBasicLicenseStatusResponse GetBasicLicenseStatus(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null) => throw new NotImplementedException();
+		public GetBasicLicenseStatusResponse GetBasicLicenseStatus(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null) => GetBasicLicenseStatus(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()));
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
-		public Task<GetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetBasicLicenseStatusAsync(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()), ct: ct);
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
 		public GetBasicLicenseStatusResponse GetBasicLicenseStatus(IGetBasicLicenseStatusRequest request) => DoRequest<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
 		public Task<GetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
-		public GetTrialLicenseStatusResponse GetTrialLicenseStatus(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null) => throw new NotImplementedException();
+		public GetTrialLicenseStatusResponse GetTrialLicenseStatus(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null) => GetTrialLicenseStatus(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()));
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
-		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetTrialLicenseStatusAsync(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()), ct: ct);
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
 		public GetTrialLicenseStatusResponse GetTrialLicenseStatus(IGetTrialLicenseStatusRequest request) => DoRequest<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
 		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IPostLicenseRequest"/>
-		public PostLicenseResponse PostLicense(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null) => throw new NotImplementedException();
+		public PostLicenseResponse PostLicense(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null) => PostLicense(selector.InvokeOrDefault(new PostLicenseDescriptor()));
 		///<inheritdoc cref = "IPostLicenseRequest"/>
-		public Task<PostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<PostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken ct = default) => PostLicenseAsync(selector.InvokeOrDefault(new PostLicenseDescriptor()), ct: ct);
 		///<inheritdoc cref = "IPostLicenseRequest"/>
 		public PostLicenseResponse PostLicense(IPostLicenseRequest request) => DoRequest<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IPostLicenseRequest"/>
 		public Task<PostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
-		public StartBasicLicenseResponse StartBasicLicense(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null) => throw new NotImplementedException();
+		public StartBasicLicenseResponse StartBasicLicense(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null) => StartBasicLicense(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()));
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
-		public Task<StartBasicLicenseResponse> StartBasicLicenseAsync(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<StartBasicLicenseResponse> StartBasicLicenseAsync(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null, CancellationToken ct = default) => StartBasicLicenseAsync(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()), ct: ct);
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
 		public StartBasicLicenseResponse StartBasicLicense(IStartBasicLicenseRequest request) => DoRequest<IStartBasicLicenseRequest, StartBasicLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
 		public Task<StartBasicLicenseResponse> StartBasicLicenseAsync(IStartBasicLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IStartBasicLicenseRequest, StartBasicLicenseResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
-		public StartTrialLicenseResponse StartTrialLicense(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null) => throw new NotImplementedException();
+		public StartTrialLicenseResponse StartTrialLicense(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null) => StartTrialLicense(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()));
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
-		public Task<StartTrialLicenseResponse> StartTrialLicenseAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null, CancellationToken ct = default) => throw new NotImplementedException();
+		public Task<StartTrialLicenseResponse> StartTrialLicenseAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null, CancellationToken ct = default) => StartTrialLicenseAsync(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()), ct: ct);
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
 		public StartTrialLicenseResponse StartTrialLicense(IStartTrialLicenseRequest request) => DoRequest<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IStartTrialLicenseRequest"/>

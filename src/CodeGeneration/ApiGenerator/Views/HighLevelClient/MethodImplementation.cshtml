@@ -20,6 +20,9 @@
 		? "request"
 		: "request, request.RequestParameters";
 	var descriptorArgs = DescriptorArguments(method, @method.DescriptorArguments);
+	var selectorArgs = SelectorArguments(method, @method.DescriptorArguments);
+	var selectorChained = SelectorChainedDefaults(method, @method.DescriptorArguments);
+	
 }
 @functions {
 	private string Selector(HighLevelClientMethod method, string generic)
@@ -33,6 +36,28 @@
 		string Optional(UrlPart p) => !p.Required && method.SelectorIsOptional ? " = null" : string.Empty;
 		return string.Join(", ", requiredDescriptorParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}{Optional(p)}")) + ", ";
 	}
+	private string SelectorArguments(HighLevelClientMethod method, List<UrlPart> requiredDescriptorParts)
+	{
+		var parts = requiredDescriptorParts.Where(p => p.Required).ToList();
+		if (!parts.Any()) return null;
+
+		string ToArg(UrlPart p)
+		{
+			if (p.ClrTypeName.StartsWith("DocumentPath"))
+				return "documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id";
+
+			return $"{p.Name.ToCamelCase()}: {p.Name.ToCamelCase()}";
+		}
+		
+		return string.Join(", ", parts.Select(p => ToArg(p)));
+	}
+	private string SelectorChainedDefaults(HighLevelClientMethod method, List<UrlPart> requiredDescriptorParts)
+	{
+		var parts = requiredDescriptorParts.Where(p => !p.Required).ToList();
+		if (!parts.Any()) return null;
+
+		return "." + string.Join(".", parts.Select(p => $"{p.Name.ToPascalCase()}({p.Name.ToCamelCase()}: {p.Name.ToCamelCase()})"));
+	}
 }
 @{
 	//await IncludeAsync("HighLevelClient/MethodDocs.cshtml", method);
@@ -40,26 +65,26 @@
 
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 public @Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(descriptorMethodGenerics))(@(Raw(descriptorArgs))@(Raw(selector)) selector@(optionalSelector))@method.CsharpNames.DescriptorMethodWhereClause @Raw("=>")
-	throw new NotImplementedException();
+	@(method.MethodName)@(Raw(requestMethodGenerics))(selector.InvokeOrDefault(new @(Raw(method.CsharpNames.GenericOrNonGenericDescriptorName))(@Raw(selectorArgs))@(@selectorChained)));
 
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 public Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(descriptorMethodGenerics))(@(Raw(descriptorArgs))@(Raw(selector)) selector@(optionalSelector), CancellationToken ct = default)@method.CsharpNames.DescriptorMethodWhereClause @Raw("=>")
-	throw new NotImplementedException();
+	@(method.MethodName)Async@(Raw(requestMethodGenerics))(selector.InvokeOrDefault(new @(Raw(method.CsharpNames.GenericOrNonGenericDescriptorName))(@Raw(selectorArgs))@(@selectorChained)), ct: ct);
 @if (method.CsharpNames.DescriptorBindsOverMultipleDocuments)
 {
-	var methodGeneric = string.Format("<{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
 	var boundGeneric = string.Format("<{0},{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
 	var boundDescriptor = string.Format("{0}<{1}>", method.CsharpNames.DescriptorName, method.CsharpNames.DescriptorBoundDocumentGeneric);
 	var boundSelector = Selector(method, boundDescriptor);
 	var boundWhere = string.Format("where {0} : class", method.CsharpNames.DescriptorBoundDocumentGeneric);
+	var methodGeneric = string.Format("<{0}>", method.CsharpNames.DescriptorBoundDocumentGeneric);
 <text>
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 public @Raw(method.CsharpNames.GenericOrNonGenericResponseName) @(method.MethodName)@(Raw(methodGeneric))(@(Raw(descriptorArgs))@(Raw(boundSelector)) selector@(optionalSelector))@boundWhere @Raw("=>")
-	throw new NotImplementedException();
+	@(method.MethodName)@(Raw(requestMethodGenerics))(selector.InvokeOrDefault(new @(Raw(boundDescriptor))(@Raw(selectorArgs))@(@selectorChained)));
 
 ///<inheritdoc cref="@method.CsharpNames.RequestInterfaceName" />
 public Task@(Raw("<" + method.CsharpNames.GenericOrNonGenericResponseName + ">")) @(method.MethodName)Async@(Raw(methodGeneric))(@(Raw(descriptorArgs))@(Raw(boundSelector)) selector@(optionalSelector), CancellationToken ct = default)@boundWhere @Raw("=>")
-	throw new NotImplementedException();
+	@(method.MethodName)Async@(Raw(requestMethodGenerics))(selector.InvokeOrDefault(new @(Raw(boundDescriptor))(@Raw(selectorArgs))@(@selectorChained)), ct: ct);
 </text>
 }
 

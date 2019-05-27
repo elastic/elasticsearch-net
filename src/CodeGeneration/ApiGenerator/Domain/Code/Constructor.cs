@@ -93,7 +93,7 @@ namespace ApiGenerator.Domain
 				constructors.Add(new Constructor
 				{
 					Parameterless = true,
-					Generated = $"internal {typeName}() : base()",
+					Generated = $"protected {typeName}() : base()",
 					Description =
 						$"///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>{Indent}[SerializationConstructor]",
 				});

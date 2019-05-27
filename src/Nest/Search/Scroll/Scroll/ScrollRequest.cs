@@ -31,6 +31,9 @@ namespace Nest
 
 	public partial class ScrollDescriptor<TInferDocument> where TInferDocument : class
 	{
+		[Obsolete("SHOULD NOT BE HERE, ONLY TEMPORARY TO MAKE THE CODEGEN HAPPEN INTERMITTENTLY")]
+		public ScrollDescriptor() { }
+
 		public ScrollDescriptor(string scrollId, Time scroll) => ScrollId(scrollId).Scroll(scroll);
 
 		Type ICovariantSearchRequest.ClrType => typeof(TInferDocument);
