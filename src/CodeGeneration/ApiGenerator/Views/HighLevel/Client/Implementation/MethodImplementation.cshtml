@@ -1,0 +1,24 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@inherits CodeTemplatePage<HighLevelModel>
+@{
+	HighLevelModel model = Model;
+	var fluentPath = "HighLevel/Client/FluentSyntax/FluentMethod.cshtml";
+	var initializerPath = "HighLevel/Client/FluentSyntax/InitializerMethod.cshtml";
+}
+@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); }
+@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); }
+@if (model.FluentBound != null)
+{
+<text>
+	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); }
+	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); }
+</text>
+}
+@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); }
+@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); }

@@ -1,0 +1,34 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using System.Net.Http
+@using RazorLight
+@using ApiGenerator
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@inherits CodeTemplatePage<HighLevelModel>
+@{
+	HighLevelModel model = Model;
+	var fluentPath = "HighLevel/Client/FluentSyntax/FluentMethodHeader.cshtml";
+	var initializerPath = "HighLevel/Client/FluentSyntax/InitializerMethodHeader.cshtml";
+}
+
+///<inheritdoc cref="@(model.Fluent.DocumentationCref)" />
+@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); };
+///<inheritdoc cref="@(model.Fluent.DocumentationCref)" />
+@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); };
+
+@if (model.FluentBound != null)
+{
+<text>
+	///<inheritdoc cref="@(model.FluentBound.DocumentationCref)" />
+	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); };
+	///<inheritdoc cref="@(model.FluentBound.DocumentationCref)" />
+	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); };
+</text>
+}
+///<inheritdoc cref="@(model.Initializer.DocumentationCref)" />
+@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); };
+///<inheritdoc cref="@(model.Initializer.DocumentationCref)" />
+@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); };
+

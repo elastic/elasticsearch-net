@@ -1,0 +1,23 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@inherits ApiGenerator.CodeTemplatePage<InitializerSyntaxView>
+@{
+	InitializerMethod syntax = Model.Syntax;
+	
+	var dispatchMethod = !Model.Async ? syntax.DispatchMethod : string.Format("{0}Async", syntax.DispatchMethod);
+	var dispatchGenerics = syntax.DispatchGenerics;
+	var dispatchParameters = syntax.DispatchParameters;
+	if (Model.Async)
+	{
+		dispatchParameters += ", ct";
+	}
+}
+///<inheritdoc cref="@syntax.DocumentationCref" />
+public @{ IncludeAsync("HighLevel/Client/InitializerSyntax/InitializerMethodHeader.cshtml", Model); } @Raw("=>")
+	@(dispatchMethod)@(Raw(dispatchGenerics))(@dispatchParameters);
+
+
