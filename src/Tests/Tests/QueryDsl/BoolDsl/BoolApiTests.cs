@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.BoolDsl
 		protected override void SeedCluster()
 		{
 			var client = Client;
-			var index = client.Indices.CreateIndex(Index<A>(), i => i
+			var index = client.Indices.Create(Index<A>(), i => i
 				.Map<A>(m => m
 					.AutoMap()
 					.Properties(props => props

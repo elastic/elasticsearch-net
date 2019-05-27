@@ -12,17 +12,17 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		{
 			var name = "temp";
 			await GET($"/_template/{name}")
-					.Fluent(c => c.Indices.GetIndexTemplate(name))
-					.Request(c => c.Indices.GetIndexTemplate(new GetIndexTemplateRequest(name)))
-					.FluentAsync(c => c.Indices.GetIndexTemplateAsync(name))
-					.RequestAsync(c => c.Indices.GetIndexTemplateAsync(new GetIndexTemplateRequest(name)))
+					.Fluent(c => c.Indices.GetTemplate(name))
+					.Request(c => c.Indices.GetTemplate(new GetIndexTemplateRequest(name)))
+					.FluentAsync(c => c.Indices.GetTemplateAsync(name))
+					.RequestAsync(c => c.Indices.GetTemplateAsync(new GetIndexTemplateRequest(name)))
 				;
 
 			await GET($"/_template")
-					.Fluent(c => c.Indices.GetIndexTemplate())
-					.Request(c => c.Indices.GetIndexTemplate(new GetIndexTemplateRequest()))
-					.FluentAsync(c => c.Indices.GetIndexTemplateAsync())
-					.RequestAsync(c => c.Indices.GetIndexTemplateAsync(new GetIndexTemplateRequest()))
+					.Fluent(c => c.Indices.GetTemplate())
+					.Request(c => c.Indices.GetTemplate(new GetIndexTemplateRequest()))
+					.FluentAsync(c => c.Indices.GetTemplateAsync())
+					.RequestAsync(c => c.Indices.GetTemplateAsync(new GetIndexTemplateRequest()))
 				;
 		}
 	}

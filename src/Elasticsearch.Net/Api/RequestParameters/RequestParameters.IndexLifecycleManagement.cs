@@ -27,7 +27,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetIlmStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	///<summary>Request options for GetStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
 	public class GetIlmStatusRequestParameters : RequestParameters<GetIlmStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -51,19 +51,19 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for RetryIlm<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	///<summary>Request options for Retry<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
 	public class RetryIlmRequestParameters : RequestParameters<RetryIlmRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for StartIlm<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	///<summary>Request options for Start<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
 	public class StartIlmRequestParameters : RequestParameters<StartIlmRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for StopIlm<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	///<summary>Request options for Stop<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
 	public class StopIlmRequestParameters : RequestParameters<StopIlmRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

@@ -32,7 +32,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var createIndex = Client.Indices.CreateIndex(SnapshotIndexName);
+			var createIndex = Client.Indices.Create(SnapshotIndexName);
 			var waitForIndex = Client.Cluster.Health(SnapshotIndexName, c => c
 				.WaitForStatus(WaitForStatus.Yellow)
 			);

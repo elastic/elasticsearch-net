@@ -29,10 +29,10 @@ namespace Tests.Analysis
 		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
-			(s, c, f) => c.Indices.CreateIndex(s, f),
-			(s, c, f) => c.Indices.CreateIndexAsync(s, f),
-			(s, c, r) => c.Indices.CreateIndex(r),
-			(s, c, r) => c.Indices.CreateIndexAsync(r)
+			(s, c, f) => c.Indices.Create(s, f),
+			(s, c, f) => c.Indices.CreateAsync(s, f),
+			(s, c, r) => c.Indices.Create(r),
+			(s, c, r) => c.Indices.CreateAsync(r)
 		);
 
 		protected virtual CreateIndexRequest CreateInitializer(string indexName) => new CreateIndexRequest(indexName)
@@ -67,10 +67,10 @@ namespace Tests.Analysis
 			Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, GetIndexSettingsResponse>(
 				GetInitializer,
 				GetFluent,
-				(s, c, f) => c.Indices.GetIndexSettings(s, f),
-				(s, c, f) => c.Indices.GetIndexSettingsAsync(s, f),
-				(s, c, r) => c.Indices.GetIndexSettings(r),
-				(s, c, r) => c.Indices.GetIndexSettingsAsync(r)
+				(s, c, f) => c.Indices.GetSettings(s, f),
+				(s, c, f) => c.Indices.GetSettingsAsync(s, f),
+				(s, c, r) => c.Indices.GetSettings(r),
+				(s, c, r) => c.Indices.GetSettingsAsync(r)
 			);
 
 		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index(indexName)) { };
@@ -104,31 +104,31 @@ namespace Tests.Analysis
 				UpdateFluent,
 				(s, c, f) =>
 				{
-					c.Indices.CloseIndex(s);
-					var response = c.Indices.UpdateIndexSettings(s, f);
-					c.Indices.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = c.Indices.UpdateSettings(s, f);
+					c.Indices.Open(s);
 					return response;
 				}
 				,
 				async (s, c, f) =>
 				{
-					c.Indices.CloseIndex(s);
-					var response = await c.Indices.UpdateIndexSettingsAsync(s, f);
-					c.Indices.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = await c.Indices.UpdateSettingsAsync(s, f);
+					c.Indices.Open(s);
 					return response;
 				},
 				(s, c, r) =>
 				{
-					c.Indices.CloseIndex(s);
-					var response = c.Indices.UpdateIndexSettings(r);
-					c.Indices.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = c.Indices.UpdateSettings(r);
+					c.Indices.Open(s);
 					return response;
 				},
 				async (s, c, r) =>
 				{
-					c.Indices.CloseIndex(s);
-					var response = await c.Indices.UpdateIndexSettingsAsync(r);
-					c.Indices.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = await c.Indices.UpdateSettingsAsync(r);
+					c.Indices.Open(s);
 					return response;
 				}
 			);

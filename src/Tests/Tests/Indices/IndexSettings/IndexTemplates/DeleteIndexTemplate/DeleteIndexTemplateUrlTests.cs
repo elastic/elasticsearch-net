@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 		{
 			var name = "temp";
 			await DELETE($"/_template/{name}")
-					.Fluent(c => c.Indices.DeleteIndexTemplate(name))
-					.Request(c => c.Indices.DeleteIndexTemplate(new DeleteIndexTemplateRequest(name)))
-					.FluentAsync(c => c.Indices.DeleteIndexTemplateAsync(name))
-					.RequestAsync(c => c.Indices.DeleteIndexTemplateAsync(new DeleteIndexTemplateRequest(name)))
+					.Fluent(c => c.Indices.DeleteTemplate(name))
+					.Request(c => c.Indices.DeleteTemplate(new DeleteIndexTemplateRequest(name)))
+					.FluentAsync(c => c.Indices.DeleteTemplateAsync(name))
+					.RequestAsync(c => c.Indices.DeleteTemplateAsync(new DeleteIndexTemplateRequest(name)))
 				;
 		}
 	}

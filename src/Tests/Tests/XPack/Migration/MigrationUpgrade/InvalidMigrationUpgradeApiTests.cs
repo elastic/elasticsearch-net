@@ -42,12 +42,12 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var (k, v) in values)
-				client.Indices.CreateIndex(v);
+				client.Indices.Create(v);
 		}
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var (k, v) in values)
-				client.Indices.DeleteIndex(v);
+				client.Indices.Delete(v);
 		}
 
 		protected override void ExpectResponse(MigrationUpgradeResponse response)

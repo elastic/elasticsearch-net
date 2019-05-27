@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			var client = new ElasticClient(connectionSettings);
 
-			var createIndexResponse = client.Indices.CreateIndex("myindex", c => c
+			var createIndexResponse = client.Indices.Create("myindex", c => c
 				.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
 					.AutoMap()
 				)
@@ -122,7 +122,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			var client = new ElasticClient(connectionSettings);
 
-			var createIndexResponse = client.Indices.CreateIndex("myindex", c => c
+			var createIndexResponse = client.Indices.Create("myindex", c => c
 				.Map<Child>(m => m
 					.AutoMap()
 				)

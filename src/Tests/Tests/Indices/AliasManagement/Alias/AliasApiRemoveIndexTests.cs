@@ -48,11 +48,11 @@ namespace Tests.Indices.AliasManagement.Alias
 		{
 			foreach (var value in values.Values)
 			{
-				var createIndexResponse = client.Indices.CreateIndex(value + "-1", c => c);
+				var createIndexResponse = client.Indices.Create(value + "-1", c => c);
 				if (!createIndexResponse.IsValid)
 					throw new Exception(createIndexResponse.DebugInformation);
 
-				createIndexResponse = client.Indices.CreateIndex(value + "-2", c => c);
+				createIndexResponse = client.Indices.Create(value + "-2", c => c);
 				if (!createIndexResponse.IsValid)
 					throw new Exception(createIndexResponse.DebugInformation);
 			}

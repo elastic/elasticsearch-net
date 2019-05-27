@@ -18,8 +18,9 @@ namespace ApiGenerator.Domain.Code
 			else ApiName = endpointMethodName.ToPascalCase();
 
 			//if the api name starts with the namespace do not repeat it in the method name
-			string Replace(string original, string find, string replace)
+			string Replace(string original, string ns, string find, string replace)
 			{
+				if (ns != null && Namespace != ns) return original;
 				var replaced = original.Replace(find, replace);
 				if (string.IsNullOrEmpty(replaced)) return original;
 
@@ -27,11 +28,17 @@ namespace ApiGenerator.Domain.Code
 			}
 			
 			
-			MethodName = Replace(ApiName, Namespace, "");
+			MethodName = Replace(ApiName, null, Namespace, "");
 			
-			var renames = new Dictionary<string, string> { { "Watch", "" } };
-			foreach (var rename in renames)
-				MethodName = Replace(MethodName, rename.Key, rename.Value);
+			var namespaceRenames = new Dictionary<string, (string find, string replace)>
+			{
+				{ "Watcher", (find: "Watch", replace: "") },
+				{ "Indices", (find: "Index", replace: "") },
+				{ "CrossClusterReplication", (find: "Ccr", replace: "") },
+				{ "IndexLifecycleManagement", (find: "Ilm", replace: "") },
+			};
+			foreach (var (ns, (find, replace)) in namespaceRenames)
+				MethodName = Replace(MethodName, ns, find, replace);
 		}
 
 		/// <summary> Pascal cased version of the namespace from the specification </summary>
@@ -80,6 +87,7 @@ namespace ApiGenerator.Domain.Code
 				case "ilm": return "IndexLifecycleManagement";
 				case "ccr": return "CrossClusterReplication";
 				case "ml": return "MachineLearning";
+				case "xpack": return "XPack";
 				default: return endpointNamespace.ToPascalCase(); 
 			}
 		}

@@ -13,10 +13,10 @@ namespace Tests.Indices.IndexManagement.ShrinkIndex
 			var source = "source";
 			var target = "target";
 			await PUT($"/{source}/_shrink/{target}")
-					.Fluent(c => c.Indices.ShrinkIndex(source, target))
-					.Request(c => c.Indices.ShrinkIndex(new ShrinkIndexRequest(source, target)))
-					.FluentAsync(c => c.Indices.ShrinkIndexAsync(source, target))
-					.RequestAsync(c => c.Indices.ShrinkIndexAsync(new ShrinkIndexRequest(source, target)))
+					.Fluent(c => c.Indices.Shrink(source, target))
+					.Request(c => c.Indices.Shrink(new ShrinkIndexRequest(source, target)))
+					.FluentAsync(c => c.Indices.ShrinkAsync(source, target))
+					.RequestAsync(c => c.Indices.ShrinkAsync(new ShrinkIndexRequest(source, target)))
 				;
 		}
 	}

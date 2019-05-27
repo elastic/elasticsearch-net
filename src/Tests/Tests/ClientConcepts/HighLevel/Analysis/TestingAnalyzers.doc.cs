@@ -196,7 +196,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			//hide
 			var client = Client;
 			//hide
-			var createIndexResponse = client.Indices.CreateIndex("analysis-index", c => c
+			var createIndexResponse = client.Indices.Create("analysis-index", c => c
 				.Settings(s => s
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
@@ -209,12 +209,12 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			 * In this example, we'll add a custom analyzer to an existing index. First,
 			 * we need to close the index
 			 */
-			client.Indices.CloseIndex("analysis-index");
+			client.Indices.Close("analysis-index");
 
 			/**
 			 * Now, we can update the settings to add the analyzer
 			 */
-			client.Indices.UpdateIndexSettings("analysis-index", i => i
+			client.Indices.UpdateSettings("analysis-index", i => i
 				.IndexSettings(s => s
 					.Analysis(a => a
 						.CharFilters(cf => cf
@@ -244,7 +244,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			 * And open the index again. Here, we also wait up to five seconds for the
 			 * status of the index to become green
 			 */
-			client.Indices.OpenIndex("analysis-index");
+			client.Indices.Open("analysis-index");
 			client.Cluster.Health("analysis-index",h => h
 				.WaitForStatus(WaitForStatus.Green)
 				.Timeout(TimeSpan.FromSeconds(5))
@@ -318,7 +318,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 			// hide
 			var client = Client;
 
-			client.Indices.CreateIndex("project-index", i => i
+			client.Indices.Create("project-index", i => i
 				.Settings(s => s
 					.Analysis(a => a
 						.CharFilters(cf => cf

@@ -66,7 +66,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.Indices.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.NumberOfShards(2)
 						.NumberOfReplicas(0)
@@ -80,7 +80,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 				Client.IndexMany(Project.Projects, index);
 				var cloneIndex = index + "-clone";
-				Client.Indices.CreateIndex(cloneIndex);
+				Client.Indices.Create(cloneIndex);
 				Client.Indices.Refresh(Index(index).And(cloneIndex));
 			}
 		}
@@ -183,7 +183,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.Indices.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.RefreshInterval(-1)
 					)

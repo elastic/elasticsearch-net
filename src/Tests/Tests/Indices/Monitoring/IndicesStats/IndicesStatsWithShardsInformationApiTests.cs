@@ -31,7 +31,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var createShardedIndex = Client.Indices.CreateIndex(RandomString(), c => c
+			var createShardedIndex = Client.Indices.Create(RandomString(), c => c
 				.Settings(settings => settings
 					.NumberOfShards(3)
 				)

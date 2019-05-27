@@ -67,10 +67,10 @@ namespace Tests.XPack.CrossClusterReplication
 							.Retention(r => r.Operations(1024))
 						)
 					),
-					(v, c, f) => c.Indices.CreateIndex(v, f),
-					(v, c, f) => c.Indices.CreateIndexAsync(v, f),
-					(v, c, r) => c.Indices.CreateIndex(r),
-					(v, c, r) => c.Indices.CreateIndexAsync(r)
+					(v, c, f) => c.Indices.Create(v, f),
+					(v, c, f) => c.Indices.CreateAsync(v, f),
+					(v, c, r) => c.Indices.Create(r),
+					(v, c, r) => c.Indices.CreateAsync(r)
 				)
 			},
 			{
@@ -167,10 +167,10 @@ namespace Tests.XPack.CrossClusterReplication
 				(
 					v => new DeleteIndexRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.Indices.DeleteIndex(v, f),
-					(v, c, f) => c.Indices.DeleteIndexAsync(v, f),
-					(v, c, r) => c.Indices.DeleteIndex(r),
-					(v, c, r) => c.Indices.DeleteIndexAsync(r)
+					(v, c, f) => c.Indices.Delete(v, f),
+					(v, c, f) => c.Indices.DeleteAsync(v, f),
+					(v, c, r) => c.Indices.Delete(r),
+					(v, c, r) => c.Indices.DeleteAsync(r)
 				)
 			},
 			{
@@ -189,10 +189,10 @@ namespace Tests.XPack.CrossClusterReplication
 				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, CcrStatsResponse>(
 						v => new CcrStatsRequest(),
 						(v, d) => d,
-						(v, c, f) => c.CrossClusterReplication.CcrStats(f),
-						(v, c, f) => c.CrossClusterReplication.CcrStatsAsync(f),
-						(v, c, r) => c.CrossClusterReplication.CcrStats(r),
-						(v, c, r) => c.CrossClusterReplication.CcrStatsAsync(r)
+						(v, c, f) => c.CrossClusterReplication.Stats(f),
+						(v, c, f) => c.CrossClusterReplication.StatsAsync(f),
+						(v, c, r) => c.CrossClusterReplication.Stats(r),
+						(v, c, r) => c.CrossClusterReplication.StatsAsync(r)
 					)
 			},
 			{
@@ -210,7 +210,7 @@ namespace Tests.XPack.CrossClusterReplication
 				PauseForCloseStep, u => u.Call(async (v, c) => await c.CrossClusterReplication.PauseFollowIndexAsync(CopyIndex(v)))
 			},
 			{
-				CloseIndexStep, u => u.Call(async (v, c) => await c.Indices.CloseIndexAsync(CopyIndex(v)))
+				CloseIndexStep, u => u.Call(async (v, c) => await c.Indices.CloseAsync(CopyIndex(v)))
 			},
 			{
 				UnfollowAgainStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, UnfollowIndexResponse>

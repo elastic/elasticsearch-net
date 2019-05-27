@@ -74,10 +74,10 @@ namespace Tests.XPack.CrossClusterReplication
 				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, CcrStatsResponse>(
 						v => new CcrStatsRequest(),
 						(v, d) => d,
-						(v, c, f) => c.CrossClusterReplication.CcrStats(f),
-						(v, c, f) => c.CrossClusterReplication.CcrStatsAsync(f),
-						(v, c, r) => c.CrossClusterReplication.CcrStats(r),
-						(v, c, r) => c.CrossClusterReplication.CcrStatsAsync(r)
+						(v, c, f) => c.CrossClusterReplication.Stats(f),
+						(v, c, f) => c.CrossClusterReplication.StatsAsync(f),
+						(v, c, r) => c.CrossClusterReplication.Stats(r),
+						(v, c, r) => c.CrossClusterReplication.StatsAsync(r)
 					)
 			}
 		}) { }

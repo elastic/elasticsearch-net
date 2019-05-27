@@ -25,7 +25,7 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
-				client.Indices.CreateIndex(index, c => c
+				client.Indices.Create(index, c => c
 					.Aliases(aa => aa.Alias(index + "-alias"))
 				);
 		}
