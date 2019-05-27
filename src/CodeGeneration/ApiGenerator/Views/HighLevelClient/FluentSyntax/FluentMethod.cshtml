@@ -10,7 +10,7 @@
 	
 	var method = !Model.Async ? syntax.MethodName : string.Format("{0}Async", syntax.MethodName);
 	
-	var requestMethodGenerics = syntax.ResponseGenerics;
+	var requestMethodGenerics = syntax.RequestMethodGenerics;
 	var descriptor = syntax.DescriptorName;
 	var selectorArgs = syntax.SelectorArguments();
 	var selectorChained = syntax.SelectorChainedDefaults();

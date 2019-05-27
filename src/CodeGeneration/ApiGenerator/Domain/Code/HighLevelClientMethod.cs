@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using CsQuery.Engine.PseudoClassSelectors;
 using Microsoft.CodeAnalysis;
@@ -25,7 +26,7 @@ namespace ApiGenerator.Domain
 		public string ResponseName => CsharpNames.GenericOrNonGenericResponseName;
 
 		public string DocumentationCref => CsharpNames.RequestInterfaceName;
-		public string ResponseGenerics => CsharpNames.ResponseGenerics.Any() ? $"<{string.Join(", ", CsharpNames.ResponseGenerics)}>" : null;
+		public abstract string MethodGenerics { get; }
 		
 		public abstract string GenericWhereClause { get; }
 	}
@@ -35,10 +36,16 @@ namespace ApiGenerator.Domain
 		public InitializerMethod(CsharpNames names) : base(names) { }
 
 		public string MethodName => CsharpNames.MethodName;
-		public string ArgumentType => CsharpNames.RequestInterfaceName;
-		
+
+		public string ArgumentType => CsharpNames.GenericOrNonGenericInterfacePreference;
+
+		public override string MethodGenerics =>
+			CodeConfiguration.GenericOnlyInterfaces.Contains(CsharpNames.RequestInterfaceName)
+				? CsharpNames.GenericsDeclaredOnRequest
+				: CsharpNames.GenericsDeclaredOnResponse;
+
 		public override string GenericWhereClause =>
-			string.Join(" ", CsharpNames.ResponseGenerics
+			string.Join(" ", CsharpNames.SplitGeneric(MethodGenerics)
 				.Where(g=>g.Contains("Document"))
 				.Select(g=>$"where {g} : class")
 			);
@@ -68,18 +75,30 @@ namespace ApiGenerator.Domain
 		public string OptionalSelectorSuffix => SelectorIsOptional ? " = null" : string.Empty;
 
 		public virtual string DescriptorName => CsharpNames.GenericOrNonGenericDescriptorName;
-		public string Selector => $"Func<{DescriptorName}, {CsharpNames.RequestInterfaceName}>";
+		public virtual string Selector => $"Func<{DescriptorName}, {CsharpNames.GenericOrNonGenericInterfacePreference}>";
 
-		public virtual string MethodGenerics => CsharpNames.HighLevelDescriptorMethodGenerics.Any()
+		public override string MethodGenerics =>
+			CodeConfiguration.GenericOnlyInterfaces.Contains(CsharpNames.RequestInterfaceName)
+				? CsharpNames.GenericsDeclaredOnRequest
+				: DescriptorGenerics;
+		
+		public virtual string RequestMethodGenerics =>
+			CodeConfiguration.GenericOnlyInterfaces.Contains(CsharpNames.RequestInterfaceName)
+				? CsharpNames.GenericsDeclaredOnRequest
+				: CsharpNames.GenericsDeclaredOnResponse;
+
+		private string DescriptorGenerics => CsharpNames.HighLevelDescriptorMethodGenerics.Any()
 			? $"<{string.Join(", ", CsharpNames.HighLevelDescriptorMethodGenerics)}>"
 			: null;
 
 		private List<UrlPart> CreateDescriptorArgs(IReadOnlyCollection<UrlPart> parts)
 		{
 			var requiredParts = parts.Where(p => p.Required).ToList();
+			
 			//Many api's return ALOT of information by default e.g get_alias or get_mapping
 			//the client methods that take a descriptor default to forcing a choice on the user.
 			//except for cat api's where the amount of information returned is manageable
+			
 			var willInferFromDocument = CsharpNames.GenericsDeclaredOnDescriptor?.Contains("Document") ?? false;
 			if (!requiredParts.Any() && CsharpNames.Namespace != "Cat")
 			{
@@ -96,23 +115,26 @@ namespace ApiGenerator.Domain
 			//if index, indices is required but the descriptor is generic these will be inferred so no need to pass explicitly
 			requiredParts = requiredParts.Where(p => p.Name != "index" && p.Name != "indices").ToList();
 			var idPart = requiredParts.FirstOrDefault(i => i.Name == "id");
-			if (idPart != null && UrlInformation.IsADocumentRoute(parts))
+			if ((idPart != null && UrlInformation.IsADocumentRoute(parts)) || IsDocumentRequest)
 			{
-				requiredParts.Remove(idPart);
-				var generic = CsharpNames.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "").Split(",").First().Trim();
+				if (requiredParts.Contains(idPart)) requiredParts.Remove(idPart);
+				var generic = GenericFirstArgument;
+				var typeName = IsDocumentRequest ? generic : $"DocumentPath<{generic}>";
+				var arg = IsDocumentRequest ? "document" : idPart.Name;
 				requiredParts.Add(new UrlPart
 				{
-					Name = idPart.Name,
-					Required = idPart.Required,
-					Description = idPart.Description,
-					Options = idPart.Options,
-					Type = idPart.Type,
-					ClrTypeNameOverride = $"DocumentPath<{generic}>"
+					Name = arg,
+					Required = true,
+					ClrTypeNameOverride = typeName
 				});
 			}
 
 			return requiredParts;
 		}
+
+		private bool IsDocumentRequest => CodeConfiguration.DocumentRequests.Contains(CsharpNames.RequestInterfaceName);
+		private string GenericFirstArgument => 
+			CsharpNames.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "").Split(",").First().Trim();
 		
 		public string DescriptorArguments()
 		{
@@ -129,8 +151,11 @@ namespace ApiGenerator.Domain
 
 			string ToArg(UrlPart p)
 			{
+				if (IsDocumentRequest) return "documentWithId: document";
+				
 				if (p.ClrTypeName.StartsWith("DocumentPath"))
 					return "documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id";
+				
 
 				return $"{p.Name.ToCamelCase()}: {p.Name.ToCamelCase()}";
 			}
@@ -161,9 +186,28 @@ namespace ApiGenerator.Domain
 	{
 		public BoundFluentMethod(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional) : base(names, parts, selectorIsOptional) { }
 
-		public override string DescriptorName => $"{CsharpNames.DescriptorName}<{CsharpNames.DescriptorBoundDocumentGeneric}>";
+		private string DescriptorTypeParams => string.Join(", ", CsharpNames.DescriptorGenerics
+			.Select(e => CsharpNames.DescriptorBoundDocumentGeneric));
+		
+		private string RequestTypeParams => string.Join(", ", CsharpNames.SplitGeneric(CsharpNames.GenericsDeclaredOnRequest)
+			.Select(e => CsharpNames.DescriptorBoundDocumentGeneric));
+
+		private string SelectorReturn => string.IsNullOrWhiteSpace(CsharpNames.GenericsDeclaredOnRequest)
+			|| !CodeConfiguration.GenericOnlyInterfaces.Contains(CsharpNames.RequestInterfaceName)
+			? CsharpNames.RequestInterfaceName
+			: $"{CsharpNames.RequestInterfaceName}<{RequestTypeParams}>";
+		
+		public override string DescriptorName => $"{CsharpNames.DescriptorName}<{DescriptorTypeParams}>";
 		public override string GenericWhereClause => $"where {CsharpNames.DescriptorBoundDocumentGeneric} : class";
 		public override string MethodGenerics => $"<{CsharpNames.DescriptorBoundDocumentGeneric}>";
+		
+		public override string RequestMethodGenerics => !string.IsNullOrWhiteSpace(RequestTypeParams) 
+			? $"<{RequestTypeParams}>"
+			: base.RequestMethodGenerics;
+		
+		public override string Selector => $"Func<{DescriptorName}, {SelectorReturn}>";
+		
+
 	}
 
 	public class FluentSyntaxView
@@ -174,6 +218,7 @@ namespace ApiGenerator.Domain
 
 		public bool Async { get; }
 	}
+	
 	public class InitializerSyntaxView
 	{
 		public InitializerSyntaxView(InitializerMethod  syntax, bool async) => (Syntax , Async) = (syntax, async);

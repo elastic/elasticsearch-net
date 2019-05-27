@@ -65,10 +65,24 @@ namespace ApiGenerator
 			.OrderBy(v=>v.Item1)
 			.ToList();
 
-		public static HashSet<string> GenericOnlyInterfaces = new HashSet<string>(AllKnownRequestInterfaces
+		public static readonly HashSet<string> GenericOnlyInterfaces = new HashSet<string>(AllKnownRequestInterfaces
 			.GroupBy(v => v.Item1)
 			.Where(g => g.All(v => !string.IsNullOrEmpty(v.Item2)))
 			.Select(g => g.Key)
+			.ToList());
+		
+		public static readonly HashSet<string> DocumentRequests = new HashSet<string>((
+			// find all files in NEST ending with Request.cs
+			from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
+			from l in File.ReadLines(f.FullName)
+			// attempt to locate all Request interfaces lines
+			where Regex.IsMatch(l, @"^.+interface [^ \r\n]+Request")
+			where l.Contains("IDocumentRequest")
+			let c = Regex.Replace(l, @"^.+interface ([^ \r\n]+Request(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
+			//grab the interface name including any generics declared on it
+			let request = Regex.Replace(c, "<.*$", "")
+			select request
+			)
 			.ToList());
 
 		public static readonly Dictionary<string, string> RequestInterfaceGenericsLookup =

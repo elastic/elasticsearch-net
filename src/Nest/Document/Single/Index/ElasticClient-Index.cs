@@ -25,55 +25,17 @@ namespace Nest
 		/// <param name="selector">Optionally further describe the index operation i.e override type, index, id</param>
 		IndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class;
 
-		IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector) where TDocument : class;
-
-		/// <inheritdoc />
-		IndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class;
-
+		/// <inheritdoc cref="IElasticClient.IndexDocument{TDocument}" />
 		Task<IndexResponse> IndexDocumentAsync<T>(T document, CancellationToken ct = default)
 			where T : class;
-
-		/// <inheritdoc />
-		Task<IndexResponse> IndexAsync<TDocument>(
-			TDocument document,
-			Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
-			CancellationToken cancellationToken = default
-		) where TDocument : class;
-
-		/// <inheritdoc />
-		Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
-			where TDocument : class;
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
-		public IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
-			where TDocument : class =>
-			Index(selector?.InvokeOrDefault(new IndexDescriptor<TDocument>(document)));
-
-		/// <inheritdoc />
-		public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class =>
-			DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
-
-		/// <inheritdoc />
-		public Task<IndexResponse> IndexAsync<TDocument>(
-			TDocument document,
-			Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
-			CancellationToken cancellationToken = default
-		)
-			where TDocument : class =>
-			IndexAsync(selector?.InvokeOrDefault(new IndexDescriptor<TDocument>(document)), cancellationToken);
-
-		/// <inheritdoc />
-		public Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
-			where TDocument : class =>
-			DoRequestAsync<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters, ct);
-
-		/// <inheritdoc />
+		/// <inheritdoc cref="IElasticClient.IndexDocument{TDocument}" />
 		public IndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class => Index(document, s => s);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IElasticClient.IndexDocument{TDocument}" />
 		public Task<IndexResponse> IndexDocumentAsync<TDocument>(TDocument document, CancellationToken ct = default)
 			where TDocument : class =>
 			IndexAsync(document, s => s, ct);

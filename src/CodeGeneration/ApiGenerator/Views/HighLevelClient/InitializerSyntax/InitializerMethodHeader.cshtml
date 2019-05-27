@@ -10,7 +10,7 @@
 	
 	var response = !Model.Async ? syntax.ResponseName : string.Format("Task<{0}>", syntax.ResponseName);
 	var method = !Model.Async ? syntax.MethodName : string.Format("{0}Async", syntax.MethodName);
-	var requestMethodGenerics = syntax.ResponseGenerics;
+	var requestMethodGenerics = syntax.MethodGenerics;
 
 	var methodsArgs = string.Format("{0} request", syntax.ArgumentType);
 	if (Model.Async)

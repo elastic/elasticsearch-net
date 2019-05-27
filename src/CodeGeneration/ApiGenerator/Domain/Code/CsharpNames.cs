@@ -104,22 +104,19 @@ namespace ApiGenerator.Domain
 		public List<string> DescriptorGenerics =>
 			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? SplitGeneric(generic) : new List<string>();
 
+		public bool DescriptorBindsOverMultipleDocuments =>
+			HighLevelDescriptorMethodGenerics.Count == 2 && HighLevelDescriptorMethodGenerics.All(g => g.Contains("Document"));
+		//&& ResponseGenerics.FirstOrDefault() == DescriptorBoundDocumentGeneric ;
 		
-		
-		
-		
-		public bool DescriptorBindsOverMultipleDocuments => 
-			HighLevelDescriptorMethodGenerics.Count == 2 && HighLevelDescriptorMethodGenerics.All(g => g.Contains("Document"))
-		&& ResponseGenerics.FirstOrDefault() == DescriptorBoundDocumentGeneric ;
-		
-		public string DescriptorBoundDocumentGeneric => HighLevelDescriptorMethodGenerics.Last();
+		public string DescriptorBoundDocumentGeneric => 
+			HighLevelDescriptorMethodGenerics.FirstOrDefault(g=>g == "TDocument") ?? HighLevelDescriptorMethodGenerics.Last();
 
 		public List<string> HighLevelDescriptorMethodGenerics => DescriptorGenerics
 			.Concat(ResponseGenerics)
 			.Distinct()
 			.ToList();
 
-		private static List<string> SplitGeneric(string generic) => generic
+		public static List<string> SplitGeneric(string generic) => (generic ?? string.Empty)
 			.Replace("<", "")
 			.Replace(">", "")
 			.Split(",")
