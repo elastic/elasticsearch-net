@@ -9,9 +9,9 @@ namespace Tests.XPack.Watcher.StopWatcher
 	public class StopWatcherUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await POST("/_watcher/_stop")
-			.Fluent(c => c.Watcher.StopWatcher())
-			.Request(c => c.Watcher.StopWatcher(new StopWatcherRequest()))
-			.FluentAsync(c => c.Watcher.StopWatcherAsync())
-			.RequestAsync(c => c.Watcher.StopWatcherAsync(new StopWatcherRequest()));
+			.Fluent(c => c.Watcher.Stop())
+			.Request(c => c.Watcher.Stop(new StopWatcherRequest()))
+			.FluentAsync(c => c.Watcher.StopAsync())
+			.RequestAsync(c => c.Watcher.StopAsync(new StopWatcherRequest()));
 	}
 }

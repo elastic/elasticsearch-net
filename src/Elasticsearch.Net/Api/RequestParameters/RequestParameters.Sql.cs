@@ -9,13 +9,13 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.SqlApi
 {
-	///<summary>Request options for ClearSqlCursor<pre>Clear SQL cursor</pre></summary>
+	///<summary>Request options for ClearCursor<pre>Clear SQL cursor</pre></summary>
 	public class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for QuerySql<pre>Execute SQL</pre></summary>
+	///<summary>Request options for Query<pre>Execute SQL</pre></summary>
 	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -27,7 +27,7 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		}
 	}
 
-	///<summary>Request options for TranslateSql<pre>Translate SQL into Elasticsearch queries</pre></summary>
+	///<summary>Request options for Translate<pre>Translate SQL into Elasticsearch queries</pre></summary>
 	public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

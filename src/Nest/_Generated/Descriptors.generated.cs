@@ -3685,7 +3685,7 @@ namespace Nest
 		public SimulatePipelineDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
-	///<summary>descriptor for DeleteLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for Delete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor : RequestDescriptorBase<DeleteLicenseDescriptor, DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteLicenseRequest.Urls;
@@ -3693,7 +3693,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for Get <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor : RequestDescriptorBase<GetLicenseDescriptor, GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => GetLicenseRequest.Urls;
@@ -3703,7 +3703,7 @@ namespace Nest
 		public GetLicenseDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for GetBasicLicenseStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetBasicLicenseStatusDescriptor : RequestDescriptorBase<GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequestParameters, IGetBasicLicenseStatusRequest>, IGetBasicLicenseStatusRequest
 	{
 		internal override ApiUrls ApiUrls => GetBasicLicenseStatusRequest.Urls;
@@ -3711,7 +3711,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetTrialLicenseStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetTrialLicenseStatusDescriptor : RequestDescriptorBase<GetTrialLicenseStatusDescriptor, GetTrialLicenseStatusRequestParameters, IGetTrialLicenseStatusRequest>, IGetTrialLicenseStatusRequest
 	{
 		internal override ApiUrls ApiUrls => GetTrialLicenseStatusRequest.Urls;
@@ -3719,7 +3719,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PostLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for Post <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor : RequestDescriptorBase<PostLicenseDescriptor, PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => PostLicenseRequest.Urls;
@@ -3729,7 +3729,7 @@ namespace Nest
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
-	///<summary>descriptor for StartBasicLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for StartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartBasicLicenseDescriptor : RequestDescriptorBase<StartBasicLicenseDescriptor, StartBasicLicenseRequestParameters, IStartBasicLicenseRequest>, IStartBasicLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => StartBasicLicenseRequest.Urls;
@@ -3739,7 +3739,7 @@ namespace Nest
 		public StartBasicLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
-	///<summary>descriptor for StartTrialLicense <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for StartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class StartTrialLicenseDescriptor : RequestDescriptorBase<StartTrialLicenseDescriptor, StartTrialLicenseRequestParameters, IStartTrialLicenseRequest>, IStartTrialLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => StartTrialLicenseRequest.Urls;
@@ -5317,7 +5317,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for DeleteRollupJob <pre></pre></summary>
+	///<summary>descriptor for DeleteJob <pre></pre></summary>
 	public partial class DeleteRollupJobDescriptor : RequestDescriptorBase<DeleteRollupJobDescriptor, DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteRollupJobRequest.Urls;
@@ -5338,7 +5338,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRollupJob <pre></pre></summary>
+	///<summary>descriptor for GetJob <pre></pre></summary>
 	public partial class GetRollupJobDescriptor : RequestDescriptorBase<GetRollupJobDescriptor, GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => GetRollupJobRequest.Urls;
@@ -5360,7 +5360,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRollupCapabilities <pre></pre></summary>
+	///<summary>descriptor for GetCapabilities <pre></pre></summary>
 	public partial class GetRollupCapabilitiesDescriptor : RequestDescriptorBase<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => GetRollupCapabilitiesRequest.Urls;
@@ -5382,7 +5382,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRollupIndexCapabilities <pre></pre></summary>
+	///<summary>descriptor for GetIndexCapabilities <pre></pre></summary>
 	public partial class GetRollupIndexCapabilitiesDescriptor : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => GetRollupIndexCapabilitiesRequest.Urls;
@@ -5408,7 +5408,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for CreateRollupJob <pre></pre></summary>
+	///<summary>descriptor for CreateJob <pre></pre></summary>
 	public partial class CreateRollupJobDescriptor<TDocument> : RequestDescriptorBase<CreateRollupJobDescriptor<TDocument>, CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => CreateRollupJobRequest.Urls;
@@ -5460,7 +5460,7 @@ namespace Nest
 		public RollupSearchDescriptor<TDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>descriptor for StartRollupJob <pre></pre></summary>
+	///<summary>descriptor for StartJob <pre></pre></summary>
 	public partial class StartRollupJobDescriptor : RequestDescriptorBase<StartRollupJobDescriptor, StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => StartRollupJobRequest.Urls;
@@ -5481,7 +5481,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for StopRollupJob <pre></pre></summary>
+	///<summary>descriptor for StopJob <pre></pre></summary>
 	public partial class StopRollupJobDescriptor : RequestDescriptorBase<StopRollupJobDescriptor, StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => StopRollupJobRequest.Urls;
@@ -6247,7 +6247,7 @@ namespace Nest
 		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
 	}
 
-	///<summary>descriptor for DeleteSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor : RequestDescriptorBase<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteSnapshotRequest.Urls;
@@ -6297,7 +6297,7 @@ namespace Nest
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for GetSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor : RequestDescriptorBase<GetSnapshotDescriptor, GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => GetSnapshotRequest.Urls;
@@ -6440,7 +6440,7 @@ namespace Nest
 		public VerifyRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for ClearSqlCursor <pre>Clear SQL cursor</pre></summary>
+	///<summary>descriptor for ClearCursor <pre>Clear SQL cursor</pre></summary>
 	public partial class ClearSqlCursorDescriptor : RequestDescriptorBase<ClearSqlCursorDescriptor, ClearSqlCursorRequestParameters, IClearSqlCursorRequest>, IClearSqlCursorRequest
 	{
 		internal override ApiUrls ApiUrls => ClearSqlCursorRequest.Urls;
@@ -6448,7 +6448,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for QuerySql <pre>Execute SQL</pre></summary>
+	///<summary>descriptor for Query <pre>Execute SQL</pre></summary>
 	public partial class QuerySqlDescriptor : RequestDescriptorBase<QuerySqlDescriptor, QuerySqlRequestParameters, IQuerySqlRequest>, IQuerySqlRequest
 	{
 		internal override ApiUrls ApiUrls => QuerySqlRequest.Urls;
@@ -6458,7 +6458,7 @@ namespace Nest
 		public QuerySqlDescriptor Format(string format) => Qs("format", format);
 	}
 
-	///<summary>descriptor for TranslateSql <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	///<summary>descriptor for Translate <pre>Translate SQL into Elasticsearch queries</pre></summary>
 	public partial class TranslateSqlDescriptor : RequestDescriptorBase<TranslateSqlDescriptor, TranslateSqlRequestParameters, ITranslateSqlRequest>, ITranslateSqlRequest
 	{
 		internal override ApiUrls ApiUrls => TranslateSqlRequest.Urls;
@@ -6474,7 +6474,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for CancelTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>descriptor for Cancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksDescriptor : RequestDescriptorBase<CancelTasksDescriptor, CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
 	{
 		internal override ApiUrls ApiUrls => CancelTasksRequest.Urls;
@@ -6527,7 +6527,7 @@ namespace Nest
 		public GetTaskDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
-	///<summary>descriptor for ListTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>descriptor for List <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksDescriptor : RequestDescriptorBase<ListTasksDescriptor, ListTasksRequestParameters, IListTasksRequest>, IListTasksRequest
 	{
 		internal override ApiUrls ApiUrls => ListTasksRequest.Urls;
@@ -6814,7 +6814,7 @@ namespace Nest
 		public UpdateByQueryRethrottleDescriptor RequestsPerSecond(long? requestspersecond) => Qs("requests_per_second", requestspersecond);
 	}
 
-	///<summary>descriptor for AcknowledgeWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
+	///<summary>descriptor for Acknowledge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor : RequestDescriptorBase<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{
 		internal override ApiUrls ApiUrls => AcknowledgeWatchRequest.Urls;
@@ -6845,7 +6845,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
+	///<summary>descriptor for Activate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchDescriptor : RequestDescriptorBase<ActivateWatchDescriptor, ActivateWatchRequestParameters, IActivateWatchRequest>, IActivateWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ActivateWatchRequest.Urls;
@@ -6866,7 +6866,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for DeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
+	///<summary>descriptor for Deactivate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchDescriptor : RequestDescriptorBase<DeactivateWatchDescriptor, DeactivateWatchRequestParameters, IDeactivateWatchRequest>, IDeactivateWatchRequest
 	{
 		internal override ApiUrls ApiUrls => DeactivateWatchRequest.Urls;
@@ -6887,7 +6887,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for DeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
+	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchDescriptor : RequestDescriptorBase<DeleteWatchDescriptor, DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
 	{
 		internal override ApiUrls ApiUrls => DeleteWatchRequest.Urls;
@@ -6908,7 +6908,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
+	///<summary>descriptor for Execute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchDescriptor : RequestDescriptorBase<ExecuteWatchDescriptor, ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ExecuteWatchRequest.Urls;
@@ -6932,7 +6932,7 @@ namespace Nest
 		public ExecuteWatchDescriptor Debug(bool? debug = true) => Qs("debug", debug);
 	}
 
-	///<summary>descriptor for GetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
+	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchDescriptor : RequestDescriptorBase<GetWatchDescriptor, GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
 	{
 		internal override ApiUrls ApiUrls => GetWatchRequest.Urls;
@@ -6953,7 +6953,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
+	///<summary>descriptor for Put <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchDescriptor : RequestDescriptorBase<PutWatchDescriptor, PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
 	{
 		internal override ApiUrls ApiUrls => PutWatchRequest.Urls;
@@ -6982,7 +6982,7 @@ namespace Nest
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
 	}
 
-	///<summary>descriptor for StartWatcher <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
+	///<summary>descriptor for Start <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherDescriptor : RequestDescriptorBase<StartWatcherDescriptor, StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{
 		internal override ApiUrls ApiUrls => StartWatcherRequest.Urls;
@@ -7014,7 +7014,7 @@ namespace Nest
 		public WatcherStatsDescriptor EmitStacktraces(bool? emitstacktraces = true) => Qs("emit_stacktraces", emitstacktraces);
 	}
 
-	///<summary>descriptor for StopWatcher <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
+	///<summary>descriptor for Stop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherDescriptor : RequestDescriptorBase<StopWatcherDescriptor, StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
 	{
 		internal override ApiUrls ApiUrls => StopWatcherRequest.Urls;

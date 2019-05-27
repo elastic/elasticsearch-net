@@ -20,28 +20,28 @@ namespace Nest.Specification.SqlApi
 		}
 
 		///<inheritdoc cref = "IClearSqlCursorRequest"/>
-		public ClearSqlCursorResponse ClearSqlCursor(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector) => ClearSqlCursor(selector.InvokeOrDefault(new ClearSqlCursorDescriptor()));
+		public ClearSqlCursorResponse ClearCursor(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector) => ClearCursor(selector.InvokeOrDefault(new ClearSqlCursorDescriptor()));
 		///<inheritdoc cref = "IClearSqlCursorRequest"/>
-		public Task<ClearSqlCursorResponse> ClearSqlCursorAsync(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector, CancellationToken ct = default) => ClearSqlCursorAsync(selector.InvokeOrDefault(new ClearSqlCursorDescriptor()), ct);
+		public Task<ClearSqlCursorResponse> ClearCursorAsync(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector, CancellationToken ct = default) => ClearCursorAsync(selector.InvokeOrDefault(new ClearSqlCursorDescriptor()), ct);
 		///<inheritdoc cref = "IClearSqlCursorRequest"/>
-		public ClearSqlCursorResponse ClearSqlCursor(IClearSqlCursorRequest request) => DoRequest<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters);
+		public ClearSqlCursorResponse ClearCursor(IClearSqlCursorRequest request) => DoRequest<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IClearSqlCursorRequest"/>
-		public Task<ClearSqlCursorResponse> ClearSqlCursorAsync(IClearSqlCursorRequest request, CancellationToken ct = default) => DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters, ct);
+		public Task<ClearSqlCursorResponse> ClearCursorAsync(IClearSqlCursorRequest request, CancellationToken ct = default) => DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "IQuerySqlRequest"/>
-		public QuerySqlResponse QuerySql(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null) => QuerySql(selector.InvokeOrDefault(new QuerySqlDescriptor()));
+		public QuerySqlResponse Query(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null) => Query(selector.InvokeOrDefault(new QuerySqlDescriptor()));
 		///<inheritdoc cref = "IQuerySqlRequest"/>
-		public Task<QuerySqlResponse> QuerySqlAsync(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null, CancellationToken ct = default) => QuerySqlAsync(selector.InvokeOrDefault(new QuerySqlDescriptor()), ct);
+		public Task<QuerySqlResponse> QueryAsync(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null, CancellationToken ct = default) => QueryAsync(selector.InvokeOrDefault(new QuerySqlDescriptor()), ct);
 		///<inheritdoc cref = "IQuerySqlRequest"/>
-		public QuerySqlResponse QuerySql(IQuerySqlRequest request) => DoRequest<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters);
+		public QuerySqlResponse Query(IQuerySqlRequest request) => DoRequest<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "IQuerySqlRequest"/>
-		public Task<QuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken ct = default) => DoRequestAsync<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters, ct);
+		public Task<QuerySqlResponse> QueryAsync(IQuerySqlRequest request, CancellationToken ct = default) => DoRequestAsync<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters, ct);
 		///<inheritdoc cref = "ITranslateSqlRequest"/>
-		public TranslateSqlResponse TranslateSql(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null) => TranslateSql(selector.InvokeOrDefault(new TranslateSqlDescriptor()));
+		public TranslateSqlResponse Translate(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null) => Translate(selector.InvokeOrDefault(new TranslateSqlDescriptor()));
 		///<inheritdoc cref = "ITranslateSqlRequest"/>
-		public Task<TranslateSqlResponse> TranslateSqlAsync(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null, CancellationToken ct = default) => TranslateSqlAsync(selector.InvokeOrDefault(new TranslateSqlDescriptor()), ct);
+		public Task<TranslateSqlResponse> TranslateAsync(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null, CancellationToken ct = default) => TranslateAsync(selector.InvokeOrDefault(new TranslateSqlDescriptor()), ct);
 		///<inheritdoc cref = "ITranslateSqlRequest"/>
-		public TranslateSqlResponse TranslateSql(ITranslateSqlRequest request) => DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
+		public TranslateSqlResponse Translate(ITranslateSqlRequest request) => DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
 		///<inheritdoc cref = "ITranslateSqlRequest"/>
-		public Task<TranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request, CancellationToken ct = default) => DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters, ct);
+		public Task<TranslateSqlResponse> TranslateAsync(ITranslateSqlRequest request, CancellationToken ct = default) => DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters, ct);
 	}
 }

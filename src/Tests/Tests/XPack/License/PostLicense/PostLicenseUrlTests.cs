@@ -9,9 +9,9 @@ namespace Tests.XPack.License.PostLicense
 	public class PostLicenseUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await PUT("/_license")
-			.Fluent(c => c.License.PostLicense())
-			.Request(c => c.License.PostLicense(new PostLicenseRequest()))
-			.FluentAsync(c => c.License.PostLicenseAsync())
-			.RequestAsync(c => c.License.PostLicenseAsync(new PostLicenseRequest()));
+			.Fluent(c => c.License.Post())
+			.Request(c => c.License.Post(new PostLicenseRequest()))
+			.FluentAsync(c => c.License.PostAsync())
+			.RequestAsync(c => c.License.PostAsync(new PostLicenseRequest()));
 	}
 }

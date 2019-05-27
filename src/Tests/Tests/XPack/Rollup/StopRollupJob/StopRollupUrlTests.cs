@@ -12,10 +12,10 @@ namespace Tests.XPack.Rollup.StopRollupJob
 		{
 			const string id = "rollup-id";
 			await POST($"/_rollup/job/{id}/_stop")
-				.Fluent(c => c.Rollup.StopRollupJob(id))
-				.Request(c => c.Rollup.StopRollupJob(new StopRollupJobRequest(id)))
-				.FluentAsync(c => c.Rollup.StopRollupJobAsync(id))
-				.RequestAsync(c => c.Rollup.StopRollupJobAsync(new StopRollupJobRequest(id)));
+				.Fluent(c => c.Rollup.StopJob(id))
+				.Request(c => c.Rollup.StopJob(new StopRollupJobRequest(id)))
+				.FluentAsync(c => c.Rollup.StopJobAsync(id))
+				.RequestAsync(c => c.Rollup.StopJobAsync(new StopRollupJobRequest(id)));
 		}
 	}
 }

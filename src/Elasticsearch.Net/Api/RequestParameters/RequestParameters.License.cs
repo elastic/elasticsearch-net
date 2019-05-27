@@ -9,13 +9,13 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.LicenseApi
 {
-	///<summary>Request options for DeleteLicense<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for Delete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for GetLicense<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for Get<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -27,19 +27,19 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 		}
 	}
 
-	///<summary>Request options for GetBasicLicenseStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for GetBasicStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class GetBasicLicenseStatusRequestParameters : RequestParameters<GetBasicLicenseStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetTrialLicenseStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for GetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for PostLicense<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for Post<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -51,7 +51,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 		}
 	}
 
-	///<summary>Request options for StartBasicLicense<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for StartBasic<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class StartBasicLicenseRequestParameters : RequestParameters<StartBasicLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -63,7 +63,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 		}
 	}
 
-	///<summary>Request options for StartTrialLicense<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for StartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

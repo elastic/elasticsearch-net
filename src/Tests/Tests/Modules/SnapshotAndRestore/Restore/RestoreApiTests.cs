@@ -24,7 +24,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 			if (!createRepository.IsValid)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var getSnapshotResponse = Client.Snapshot.GetSnapshot(RepositoryName, SnapshotName);
+			var getSnapshotResponse = Client.Snapshot.Get(RepositoryName, SnapshotName);
 
 			if (!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404 ||
 				!getSnapshotResponse.Snapshots.Any())

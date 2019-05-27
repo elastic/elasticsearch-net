@@ -9,9 +9,9 @@ namespace Tests.XPack.License.DeleteLicense
 	public class DeleteLicenseUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await DELETE("/_license")
-			.Fluent(c => c.License.DeleteLicense())
-			.Request(c => c.License.DeleteLicense(new DeleteLicenseRequest()))
-			.FluentAsync(c => c.License.DeleteLicenseAsync())
-			.RequestAsync(c => c.License.DeleteLicenseAsync(new DeleteLicenseRequest()));
+			.Fluent(c => c.License.Delete())
+			.Request(c => c.License.Delete(new DeleteLicenseRequest()))
+			.FluentAsync(c => c.License.DeleteAsync())
+			.RequestAsync(c => c.License.DeleteAsync(new DeleteLicenseRequest()));
 	}
 }

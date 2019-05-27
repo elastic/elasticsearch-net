@@ -18,19 +18,32 @@ namespace ApiGenerator.Domain.Code
 			else ApiName = endpointMethodName.ToPascalCase();
 
 			//if the api name starts with the namespace do not repeat it in the method name
-			MethodName = Regex.Replace(ApiName, $"^{Namespace}(\\w+)$", "$1");
+			string Replace(string original, string find, string replace)
+			{
+				var replaced = original.Replace(find, replace);
+				if (string.IsNullOrEmpty(replaced)) return original;
+
+				return replaced;
+			}
+			
+			
+			MethodName = Replace(ApiName, Namespace, "");
+			
+			var renames = new Dictionary<string, string> { { "Watch", "" } };
+			foreach (var rename in renames)
+				MethodName = Replace(MethodName, rename.Key, rename.Value);
 		}
 
 		/// <summary> Pascal cased version of the namespace from the specification </summary>
-		public string Namespace { get; private set; }
+		public string Namespace { get; }
 
 		/// <summary>
 		/// The pascal cased method name as loaded by <see cref="ApiEndpointFactory.FromFile"/>
 		/// <pre>Uses <see cref="CodeConfiguration.ApiNameMapping"/> mapping of request implementations in the nest code base</pre>
 		/// </summary>
-		public string MethodName { get; private set; }
+		public string MethodName { get; }
 		
-		public string ApiName { get; private set; }
+		public string ApiName { get; }
 		
 		public string RequestName => $"{ApiName}Request";
 

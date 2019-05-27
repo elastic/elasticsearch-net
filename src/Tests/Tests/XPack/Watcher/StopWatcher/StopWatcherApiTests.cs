@@ -26,10 +26,10 @@ namespace Tests.XPack.Watcher.StopWatcher
 		protected override string UrlPath => "/_watcher/_stop";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Watcher.StopWatcher(f),
-			(client, f) => client.Watcher.StopWatcherAsync(f),
-			(client, r) => client.Watcher.StopWatcher(r),
-			(client, r) => client.Watcher.StopWatcherAsync(r)
+			(client, f) => client.Watcher.Stop(f),
+			(client, f) => client.Watcher.StopAsync(f),
+			(client, r) => client.Watcher.Stop(r),
+			(client, r) => client.Watcher.StopAsync(r)
 		);
 
 		protected override void ExpectResponse(StopWatcherResponse response) => response.Acknowledged.Should().BeTrue();

@@ -55,10 +55,10 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Tasks.CancelTasks(f),
-			(client, f) => client.Tasks.CancelTasksAsync(f),
-			(client, r) => client.Tasks.CancelTasks(r),
-			(client, r) => client.Tasks.CancelTasksAsync(r)
+			(client, f) => client.Tasks.Cancel(f),
+			(client, f) => client.Tasks.CancelAsync(f),
+			(client, r) => client.Tasks.Cancel(r),
+			(client, r) => client.Tasks.CancelAsync(r)
 		);
 
 		protected override void ExpectResponse(CancelTasksResponse response)

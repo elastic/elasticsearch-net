@@ -696,10 +696,10 @@ namespace Tests.XPack.Watcher.PutWatch
 		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Watcher.PutWatch(CallIsolatedValue, f),
-			(client, f) => client.Watcher.PutWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.Watcher.PutWatch(r),
-			(client, r) => client.Watcher.PutWatchAsync(r)
+			(client, f) => client.Watcher.Put(CallIsolatedValue, f),
+			(client, f) => client.Watcher.PutAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Put(r),
+			(client, r) => client.Watcher.PutAsync(r)
 		);
 
 		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);

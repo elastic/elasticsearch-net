@@ -32,7 +32,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.Watcher.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Active()
 					.Input(i => i
 						.Simple(s => s
@@ -59,7 +59,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var executeWatchResponse = client.Watcher.ExecuteWatch(e => e
+			var executeWatchResponse = client.Watcher.Execute(e => e
 				.Id(CallIsolatedValue)
 				.TriggerData(tr => tr
 					.TriggeredTime("now")

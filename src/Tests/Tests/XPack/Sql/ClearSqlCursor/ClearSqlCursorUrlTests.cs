@@ -8,9 +8,9 @@ namespace Tests.XPack.Sql.ClearSqlCursor
 	public class ClearSqlCursorUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await UrlTester.POST("_sql/close")
-			.Fluent(c => c.Sql.ClearSqlCursor(d => d))
-			.Request(c => c.Sql.ClearSqlCursor(new ClearSqlCursorRequest()))
-			.FluentAsync(c => c.Sql.ClearSqlCursorAsync(d => d))
-			.RequestAsync(c => c.Sql.ClearSqlCursorAsync(new ClearSqlCursorRequest()));
+			.Fluent(c => c.Sql.ClearCursor(d => d))
+			.Request(c => c.Sql.ClearCursor(new ClearSqlCursorRequest()))
+			.FluentAsync(c => c.Sql.ClearCursorAsync(d => d))
+			.RequestAsync(c => c.Sql.ClearCursorAsync(new ClearSqlCursorRequest()));
 	}
 }

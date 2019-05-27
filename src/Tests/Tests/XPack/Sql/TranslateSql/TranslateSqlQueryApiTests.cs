@@ -48,10 +48,10 @@ ORDER BY numberOfContributors DESC";
 		protected override string UrlPath => $"/_sql/translate";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Sql.TranslateSql(f),
-			(client, f) => client.Sql.TranslateSqlAsync(f),
-			(client, r) => client.Sql.TranslateSql(r),
-			(client, r) => client.Sql.TranslateSqlAsync(r)
+			(client, f) => client.Sql.Translate(f),
+			(client, f) => client.Sql.TranslateAsync(f),
+			(client, r) => client.Sql.Translate(r),
+			(client, r) => client.Sql.TranslateAsync(r)
 		);
 
 		protected override void ExpectResponse(TranslateSqlResponse response)
