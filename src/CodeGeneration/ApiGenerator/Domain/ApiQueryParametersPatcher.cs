@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApiGenerator.Overrides;
-using ApiGenerator.Overrides.Descriptors;
+using ApiGenerator.Configuration.Overrides;
+using ApiGenerator.Domain.Specification;
 
 namespace ApiGenerator.Domain
 {
@@ -34,7 +34,7 @@ namespace ApiGenerator.Domain
 
 				if (checkCommon && RestApiSpec.CommonApiQueryParameters.Keys.Contains(queryStringKey))
 				{
-					ApiGenerator.Warnings.Add($"key '{queryStringKey}' in {name} is already declared in _common.json");
+					Generator.ApiGenerator.Warnings.Add($"key '{queryStringKey}' in {name} is already declared in _common.json");
 					continue;
 				}
 
@@ -93,7 +93,7 @@ namespace ApiGenerator.Domain
 
 			var name = local.GetType().Name;
 			foreach (var p in localDictionary.Keys.Except(declaredKeys))
-				ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
+				Generator.ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
 
 			return d;
 		}
@@ -110,7 +110,7 @@ namespace ApiGenerator.Domain
 				list.AddRange(localList);
 				var name = local.GetType().Name;
 				foreach (var p in localList.Except(declaredKeys))
-					ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
+					Generator.ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
 			}
 			return list.Distinct().ToList();
 		}

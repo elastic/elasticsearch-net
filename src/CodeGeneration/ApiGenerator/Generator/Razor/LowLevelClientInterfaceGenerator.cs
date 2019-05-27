@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
 using ShellProgressBar;
 

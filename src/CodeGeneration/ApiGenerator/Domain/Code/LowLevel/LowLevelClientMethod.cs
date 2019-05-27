@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ApiGenerator.Domain.Specification;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain.Code.LowLevel
 {
 	public class LowLevelClientMethod
 	{

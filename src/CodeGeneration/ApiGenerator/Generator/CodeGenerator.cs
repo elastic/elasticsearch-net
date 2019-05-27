@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApiGenerator.Domain.Code.HighLevel.Requests;
 using CsQuery.ExtensionMethods.Internal;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Generator
 {
 	//TODO this should be in views and models
 	public static class CodeGenerator

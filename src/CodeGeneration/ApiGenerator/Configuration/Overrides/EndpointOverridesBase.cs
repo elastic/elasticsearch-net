@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ApiGenerator.Domain;
-using ApiGenerator.Overrides.Descriptors;
 
-namespace ApiGenerator.Overrides
+namespace ApiGenerator.Configuration.Overrides
 {
 	public abstract class EndpointOverridesBase : IEndpointOverrides
 	{

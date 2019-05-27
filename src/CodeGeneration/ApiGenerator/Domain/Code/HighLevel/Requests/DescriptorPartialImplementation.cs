@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using ApiGenerator.Domain.Specification;
 
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code.HighLevel.Requests 
 {
 	public class DescriptorPartialImplementation
 	{

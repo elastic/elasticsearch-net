@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ApiGenerator.Configuration;
+using ApiGenerator.Generator;
 using CsQuery.ExtensionMethods.Internal;
 
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code 
 {
 	public class CsharpNames
 	{

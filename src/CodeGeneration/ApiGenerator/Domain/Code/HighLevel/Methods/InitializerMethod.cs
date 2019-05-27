@@ -1,6 +1,7 @@
 using System.Linq;
+using ApiGenerator.Configuration;
 
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code.HighLevel.Methods 
 {
 	public class InitializerMethod : MethodSyntaxBase
 	{

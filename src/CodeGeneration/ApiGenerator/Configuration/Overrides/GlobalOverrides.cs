@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ApiGenerator.Overrides
+namespace ApiGenerator.Configuration.Overrides
 {
 	public class GlobalOverrides : EndpointOverridesBase
 	{

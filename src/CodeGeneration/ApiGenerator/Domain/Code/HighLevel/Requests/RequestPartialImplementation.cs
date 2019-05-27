@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using ApiGenerator.Domain.Specification;
 
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code.HighLevel.Requests 
 {
 	public class RequestPartialImplementation
 	{

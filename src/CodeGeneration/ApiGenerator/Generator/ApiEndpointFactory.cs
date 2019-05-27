@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ApiGenerator.Configuration;
+using ApiGenerator.Configuration.Overrides;
 using ApiGenerator.Domain;
-using ApiGenerator.Overrides.Descriptors;
+using ApiGenerator.Domain.Code;
+using ApiGenerator.Domain.Specification;
 using Newtonsoft.Json.Linq;
 
-namespace ApiGenerator 
+namespace ApiGenerator.Generator 
 {
 	public static class ApiEndpointFactory
 	{
@@ -56,7 +59,8 @@ namespace ApiGenerator
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(endpoint.Name, out var mapsApiMethodName))
 				method = mapsApiMethodName;
 
-			var typeName = "ApiGenerator.Overrides.Endpoints." + method + "Overrides";
+			var namespacePrefix = typeof(GlobalOverrides).Namespace + ".Endpoints.";
+			var typeName = namespacePrefix + method + "Overrides";
 			var type = GeneratorLocations.Assembly.GetType(typeName);
 			if (type != null && Activator.CreateInstance(type) is IEndpointOverrides overrides)
 				endpoint.Overrides = overrides;

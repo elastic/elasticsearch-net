@@ -1,10 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using CsQuery.Engine.PseudoClassSelectors;
-using Microsoft.CodeAnalysis;
-
-namespace ApiGenerator.Domain
+﻿namespace ApiGenerator.Domain.Code.HighLevel.Methods
 {
 	public class InitializerSyntaxView
 	{

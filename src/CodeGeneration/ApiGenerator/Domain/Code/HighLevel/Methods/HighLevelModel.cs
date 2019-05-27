@@ -1,4 +1,4 @@
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code.HighLevel.Methods 
 {
 	public class HighLevelModel
 	{

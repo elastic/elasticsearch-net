@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ApiGenerator.Overrides.Endpoints
+namespace ApiGenerator.Configuration.Overrides.Endpoints
 {
 	public class GetCategoriesOverrides : EndpointOverridesBase
 	{

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
+using ApiGenerator.Domain.Specification;
 using ApiGenerator.Generator.Razor;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json.Linq;
 using ShellProgressBar;
 
-namespace ApiGenerator
+namespace ApiGenerator.Generator
 {
 	public class ApiGenerator
 	{

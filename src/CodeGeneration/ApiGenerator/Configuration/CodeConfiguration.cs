@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace ApiGenerator
+namespace ApiGenerator.Configuration
 {
 	public static class CodeConfiguration
 	{

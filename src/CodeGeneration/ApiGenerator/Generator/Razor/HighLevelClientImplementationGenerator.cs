@@ -1,5 +1,7 @@
 using System.Linq;
+using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
+using ApiGenerator.Domain.Code;
 using ShellProgressBar;
 
 namespace ApiGenerator.Generator.Razor 

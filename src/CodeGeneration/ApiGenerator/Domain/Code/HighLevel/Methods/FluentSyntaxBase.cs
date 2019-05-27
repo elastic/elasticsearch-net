@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using ApiGenerator.Configuration;
+using ApiGenerator.Domain.Specification;
 
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code.HighLevel.Methods 
 {
 	public abstract class FluentSyntaxBase : MethodSyntaxBase
 	{

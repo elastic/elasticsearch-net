@@ -3,7 +3,10 @@
 @using System.Collections.Generic
 @using RazorLight
 @using ApiGenerator.Domain
-@inherits ApiGenerator.CodeTemplatePage<RequestPartialImplementation>
+@using ApiGenerator.Domain.Code
+@using ApiGenerator.Domain.Code.HighLevel.Requests
+@using ApiGenerator.Generator
+@inherits global::ApiGenerator.CodeTemplatePage<RequestPartialImplementation>
 @{
 	RequestPartialImplementation r = Model;
 	CsharpNames names = r.CsharpNames;

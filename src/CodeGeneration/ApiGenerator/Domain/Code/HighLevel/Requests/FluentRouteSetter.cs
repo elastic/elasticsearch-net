@@ -1,4 +1,4 @@
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain.Code.HighLevel.Requests
 {
 	public class FluentRouteSetter
 	{

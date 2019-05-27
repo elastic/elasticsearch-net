@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using ApiGenerator.Domain;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Configuration.Overrides
 {
 	/// <summary>
 	/// Tweaks the generated descriptors

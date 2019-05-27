@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ApiGenerator.Configuration;
 
 namespace ApiGenerator
 {
@@ -48,7 +49,7 @@ namespace ApiGenerator
 				generateCode = answer == "y" || answer == "";
 			}
 			if (generateCode)
-				ApiGenerator.Generate(downloadBranch, "Core", "XPack");
+				Generator.ApiGenerator.Generate(downloadBranch, "Core", "XPack");
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace ApiGenerator.Domain
+﻿namespace ApiGenerator.Domain.Specification
 {
 	public class Body
 	{

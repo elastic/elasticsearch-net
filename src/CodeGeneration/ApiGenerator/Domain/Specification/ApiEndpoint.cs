@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using ApiGenerator.Overrides.Descriptors;
+using ApiGenerator.Configuration.Overrides;
+using ApiGenerator.Domain.Code;
+using ApiGenerator.Domain.Code.HighLevel.Methods;
+using ApiGenerator.Domain.Code.HighLevel.Requests;
+using ApiGenerator.Domain.Code.LowLevel;
 using Newtonsoft.Json;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain.Specification
 {
 	public class ApiEndpoint
 	{

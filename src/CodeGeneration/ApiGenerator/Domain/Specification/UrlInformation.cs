@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ApiGenerator.Domain.Code;
 using Newtonsoft.Json;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain.Specification
 {
 	
 	// ReSharper disable once ClassNeverInstantiated.Global

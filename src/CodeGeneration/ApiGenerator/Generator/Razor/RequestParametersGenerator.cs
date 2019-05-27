@@ -1,4 +1,5 @@
 using System.Linq;
+using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
 using ShellProgressBar;
 
