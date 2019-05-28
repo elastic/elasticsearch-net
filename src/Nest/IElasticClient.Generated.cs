@@ -112,16 +112,16 @@ namespace Nest
 		CountResponse Count(ICountRequest request);
 		///<inheritdoc cref = "ICountRequest"/>
 		Task<CountResponse> CountAsync(ICountRequest request, CancellationToken ct = default);
-		///<inheritdoc cref = "ICreateRequest"/>
+		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
 		CreateResponse Create<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector)
 			where TDocument : class;
-		///<inheritdoc cref = "ICreateRequest"/>
+		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
 		Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "ICreateRequest"/>
+		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
 		CreateResponse Create<TDocument>(ICreateRequest<TDocument> request)
 			where TDocument : class;
-		///<inheritdoc cref = "ICreateRequest"/>
+		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
 		Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class;
 		///<inheritdoc cref = "IDeleteRequest"/>
@@ -181,16 +181,16 @@ namespace Nest
 		///<inheritdoc cref = "ISourceExistsRequest"/>
 		Task<ExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default);
 		///<inheritdoc cref = "IExplainRequest"/>
-		ExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector = null)
+		ExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector = null)
 			where TDocument : class;
 		///<inheritdoc cref = "IExplainRequest"/>
-		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector = null, CancellationToken ct = default)
+		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class;
 		///<inheritdoc cref = "IExplainRequest"/>
-		ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
+		ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest request)
 			where TDocument : class;
 		///<inheritdoc cref = "IExplainRequest"/>
-		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken ct = default)
+		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest request, CancellationToken ct = default)
 			where TDocument : class;
 		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
 		FieldCapabilitiesResponse FieldCapabilities(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null);
@@ -232,16 +232,16 @@ namespace Nest
 		///<inheritdoc cref = "ISourceRequest"/>
 		Task<SourceResponse<TDocument>> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "IIndexRequest"/>
+		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
 		IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
 			where TDocument : class;
-		///<inheritdoc cref = "IIndexRequest"/>
+		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
 		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "IIndexRequest"/>
+		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
 		IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
 			where TDocument : class;
-		///<inheritdoc cref = "IIndexRequest"/>
+		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
 		Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class;
 		///<inheritdoc cref = "IRootNodeInfoRequest"/>
@@ -390,34 +390,34 @@ namespace Nest
 		///<inheritdoc cref = "ISearchTemplateRequest"/>
 		Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "ITermVectorsRequest"/>
+		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
 		TermVectorsResponse TermVectors<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest<TDocument>> selector = null)
 			where TDocument : class;
-		///<inheritdoc cref = "ITermVectorsRequest"/>
+		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
 		Task<TermVectorsResponse> TermVectorsAsync<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest<TDocument>> selector = null, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "ITermVectorsRequest"/>
+		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
 		TermVectorsResponse TermVectors<TDocument>(ITermVectorsRequest<TDocument> request)
 			where TDocument : class;
-		///<inheritdoc cref = "ITermVectorsRequest"/>
+		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
 		Task<TermVectorsResponse> TermVectorsAsync<TDocument>(ITermVectorsRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "IUpdateRequest"/>
+		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
 		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
 			where TDocument : class where TPartialDocument : class;
-		///<inheritdoc cref = "IUpdateRequest"/>
+		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
 		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector, CancellationToken ct = default)
 			where TDocument : class where TPartialDocument : class;
-		///<inheritdoc cref = "IUpdateRequest"/>
+		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
 		UpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector)
 			where TDocument : class;
-		///<inheritdoc cref = "IUpdateRequest"/>
+		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
 		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class;
-		///<inheritdoc cref = "IUpdateRequest"/>
+		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
 		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class where TPartialDocument : class;
-		///<inheritdoc cref = "IUpdateRequest"/>
+		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
 		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request, CancellationToken ct = default)
 			where TDocument : class where TPartialDocument : class;
 		///<inheritdoc cref = "IUpdateByQueryRequest"/>

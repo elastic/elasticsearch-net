@@ -11,7 +11,7 @@
 	string name = i.CsharpNames.RequestInterfaceName;
 }
 	[InterfaceDataContract]
-	public partial interface @(Raw(name)) : IRequest@(Raw(string.Format("<{0}>", i.CsharpNames.ParametersName)))
+	public partial interface @(Raw(i.Name)) : IRequest@(Raw(string.Format("<{0}>", i.CsharpNames.ParametersName)))
 	{
 @foreach (UrlPart part in i.UrlParts)
 {
@@ -24,7 +24,7 @@
 <text>		[DataMember(Name = "@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }</text>
 }
 	}
-@if (!string.IsNullOrWhiteSpace(i.CsharpNames.GenericsDeclaredOnRequest))
+@if (i.NeedsGenericInterface)
 {
 <text>
 		public partial interface @(name)@(Raw(i.CsharpNames.GenericsDeclaredOnRequest)) : @(Raw(name)) { }

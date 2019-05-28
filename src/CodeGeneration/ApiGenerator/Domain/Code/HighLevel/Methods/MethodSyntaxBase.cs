@@ -8,7 +8,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 		
 		public string ResponseName => CsharpNames.GenericOrNonGenericResponseName;
 
-		public string DocumentationCref => CsharpNames.RequestInterfaceName;
+		public string DocumentationCref => CsharpNames.GenericOrNonGenericInterfacePreference;
 		
 		public abstract string MethodGenerics { get; }
 		

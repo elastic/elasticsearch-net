@@ -34,6 +34,7 @@ namespace ApiGenerator.Generator
 				new HighLevelClientImplementationGenerator(),
 				new DescriptorsGenerator(),
 				new RequestsGenerator(),
+				new ApiUrlsLookupsGenerator(),
 			};
 
 			using (var pbar = new ProgressBar(generators.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
