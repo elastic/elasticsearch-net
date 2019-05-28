@@ -35,10 +35,10 @@ namespace Nest
 		long Version { get; }
 
 		[JsonProperty("_primary_term")]
-		long PrimaryTerm { get; }
+		long? PrimaryTerm { get; }
 
 		[JsonProperty("_seq_no")]
-		long SequenceNumber { get; }
+		long? SequenceNumber { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -53,7 +53,7 @@ namespace Nest
 		public TDocument Source { get; internal set; }
 		public string Type { get; internal set; }
 		public long Version { get; internal set; }
-		public long PrimaryTerm { get; internal set; }
-		public long SequenceNumber { get; internal set; }
+		public long? PrimaryTerm { get; internal set; }
+		public long? SequenceNumber { get; internal set; }
 	}
 }
