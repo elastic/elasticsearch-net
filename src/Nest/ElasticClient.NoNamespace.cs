@@ -48,108 +48,126 @@ namespace Nest
 		public CatNamespace Cat
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Cluster</c> API's together.</summary>
 		public ClusterNamespace Cluster
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>CrossClusterReplication</c> API's together.</summary>
 		public CrossClusterReplicationNamespace CrossClusterReplication
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Graph</c> API's together.</summary>
 		public GraphNamespace Graph
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>IndexLifecycleManagement</c> API's together.</summary>
 		public IndexLifecycleManagementNamespace IndexLifecycleManagement
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Indices</c> API's together.</summary>
 		public IndicesNamespace Indices
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Ingest</c> API's together.</summary>
 		public IngestNamespace Ingest
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>License</c> API's together.</summary>
 		public LicenseNamespace License
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>MachineLearning</c> API's together.</summary>
 		public MachineLearningNamespace MachineLearning
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Migration</c> API's together.</summary>
 		public MigrationNamespace Migration
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Nodes</c> API's together.</summary>
 		public NodesNamespace Nodes
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Rollup</c> API's together.</summary>
 		public RollupNamespace Rollup
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Security</c> API's together.</summary>
 		public SecurityNamespace Security
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Snapshot</c> API's together.</summary>
 		public SnapshotNamespace Snapshot
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Sql</c> API's together.</summary>
 		public SqlNamespace Sql
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Tasks</c> API's together.</summary>
 		public TasksNamespace Tasks
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>Watcher</c> API's together.</summary>
 		public WatcherNamespace Watcher
 		{
 			get;
+			private set;
 		}
 
 		///<summary> This property logically groups all <c>XPack</c> API's together.</summary>
 		public XPackNamespace XPack
 		{
 			get;
+			private set;
 		}
 
 		partial void SetupNamespaces()
