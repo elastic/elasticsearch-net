@@ -34,77 +34,221 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		{
 		}
 
-		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>ccr.delete_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</a>
+		/// </summary>
 		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null) => DeleteAutoFollowPattern(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)));
-		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>ccr.delete_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</a>
+		/// </summary>
 		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)), ct);
-		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>ccr.delete_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</a>
+		/// </summary>
 		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(IDeleteAutoFollowPatternRequest request) => DoRequest<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeleteAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>ccr.delete_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</a>
+		/// </summary>
 		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</a>
+		/// </summary>
 		public CreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector) => CreateFollowIndex(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index: index)));
-		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</a>
+		/// </summary>
 		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector, CancellationToken ct = default) => CreateFollowIndexAsync(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index: index)), ct);
-		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</a>
+		/// </summary>
 		public CreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request) => DoRequest<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ICreateFollowIndexRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</a>
+		/// </summary>
 		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>
+		/// </summary>
 		public FollowIndexStatsResponse FollowIndexStats(Indices index, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null) => FollowIndexStats(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(index: index)));
-		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>
+		/// </summary>
 		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(Indices index, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null, CancellationToken ct = default) => FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(index: index)), ct);
-		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>
+		/// </summary>
 		public FollowIndexStatsResponse FollowIndexStats(IFollowIndexStatsRequest request) => DoRequest<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IFollowIndexStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>
+		/// </summary>
 		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</a>
+		/// </summary>
 		public GetAutoFollowPatternResponse GetAutoFollowPattern(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => GetAutoFollowPattern(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)));
-		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</a>
+		/// </summary>
 		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)), ct);
-		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</a>
+		/// </summary>
 		public GetAutoFollowPatternResponse GetAutoFollowPattern(IGetAutoFollowPatternRequest request) => DoRequest<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGetAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</a>
+		/// </summary>
 		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</a>
+		/// </summary>
 		public PauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null) => PauseFollowIndex(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index: index)));
-		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</a>
+		/// </summary>
 		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null, CancellationToken ct = default) => PauseFollowIndexAsync(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index: index)), ct);
-		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</a>
+		/// </summary>
 		public PauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request) => DoRequest<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IPauseFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</a>
+		/// </summary>
 		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.put_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
+		/// </summary>
 		public CreateAutoFollowPatternResponse CreateAutoFollowPattern(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector) => CreateAutoFollowPattern(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)));
-		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.put_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
+		/// </summary>
 		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector, CancellationToken ct = default) => CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)), ct);
-		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.put_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
+		/// </summary>
 		public CreateAutoFollowPatternResponse CreateAutoFollowPattern(ICreateAutoFollowPatternRequest request) => DoRequest<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ICreateAutoFollowPatternRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>ccr.put_auto_follow_pattern</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
+		/// </summary>
 		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</a>
+		/// </summary>
 		public ResumeFollowIndexResponse ResumeFollowIndex(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null) => ResumeFollowIndex(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index: index)));
-		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</a>
+		/// </summary>
 		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null, CancellationToken ct = default) => ResumeFollowIndexAsync(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index: index)), ct);
-		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</a>
+		/// </summary>
 		public ResumeFollowIndexResponse ResumeFollowIndex(IResumeFollowIndexRequest request) => DoRequest<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IResumeFollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_follow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</a>
+		/// </summary>
 		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ICcrStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</a>
+		/// </summary>
 		public CcrStatsResponse Stats(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new CcrStatsDescriptor()));
-		///<inheritdoc cref = "ICcrStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</a>
+		/// </summary>
 		public Task<CcrStatsResponse> StatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null, CancellationToken ct = default) => StatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), ct);
-		///<inheritdoc cref = "ICcrStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</a>
+		/// </summary>
 		public CcrStatsResponse Stats(ICcrStatsRequest request) => DoRequest<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ICcrStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</a>
+		/// </summary>
 		public Task<CcrStatsResponse> StatsAsync(ICcrStatsRequest request, CancellationToken ct = default) => DoRequestAsync<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IUnfollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
 		public UnfollowIndexResponse UnfollowIndex(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null) => UnfollowIndex(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)));
-		///<inheritdoc cref = "IUnfollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
 		public Task<UnfollowIndexResponse> UnfollowIndexAsync(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null, CancellationToken ct = default) => UnfollowIndexAsync(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)), ct);
-		///<inheritdoc cref = "IUnfollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
 		public UnfollowIndexResponse UnfollowIndex(IUnfollowIndexRequest request) => DoRequest<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IUnfollowIndexRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
 		public Task<UnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

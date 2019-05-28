@@ -34,61 +34,173 @@ namespace Nest.Specification.LicenseApi
 		{
 		}
 
-		///<inheritdoc cref = "IDeleteLicenseRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>license.delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public DeleteLicenseResponse Delete(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteLicenseDescriptor()));
-		///<inheritdoc cref = "IDeleteLicenseRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>license.delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<DeleteLicenseResponse> DeleteAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), ct);
-		///<inheritdoc cref = "IDeleteLicenseRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>license.delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public DeleteLicenseResponse Delete(IDeleteLicenseRequest request) => DoRequest<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeleteLicenseRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>license.delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<DeleteLicenseResponse> DeleteAsync(IDeleteLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IGetLicenseRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public GetLicenseResponse Get(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null) => Get(selector.InvokeOrDefault(new GetLicenseDescriptor()));
-		///<inheritdoc cref = "IGetLicenseRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<GetLicenseResponse> GetAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null, CancellationToken ct = default) => GetAsync(selector.InvokeOrDefault(new GetLicenseDescriptor()), ct);
-		///<inheritdoc cref = "IGetLicenseRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public GetLicenseResponse Get(IGetLicenseRequest request) => DoRequest<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGetLicenseRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<GetLicenseResponse> GetAsync(IGetLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_basic_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public GetBasicLicenseStatusResponse GetBasicStatus(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null) => GetBasicStatus(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()));
-		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_basic_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<GetBasicLicenseStatusResponse> GetBasicStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetBasicStatusAsync(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()), ct);
-		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_basic_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public GetBasicLicenseStatusResponse GetBasicStatus(IGetBasicLicenseStatusRequest request) => DoRequest<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGetBasicLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_basic_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<GetBasicLicenseStatusResponse> GetBasicStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_trial_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public GetTrialLicenseStatusResponse GetTrialStatus(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null) => GetTrialStatus(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()));
-		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_trial_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<GetTrialLicenseStatusResponse> GetTrialStatusAsync(Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null, CancellationToken ct = default) => GetTrialStatusAsync(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()), ct);
-		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_trial_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public GetTrialLicenseStatusResponse GetTrialStatus(IGetTrialLicenseStatusRequest request) => DoRequest<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGetTrialLicenseStatusRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>license.get_trial_status</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<GetTrialLicenseStatusResponse> GetTrialStatusAsync(IGetTrialLicenseStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IPostLicenseRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>license.post</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public PostLicenseResponse Post(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null) => Post(selector.InvokeOrDefault(new PostLicenseDescriptor()));
-		///<inheritdoc cref = "IPostLicenseRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>license.post</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<PostLicenseResponse> PostAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken ct = default) => PostAsync(selector.InvokeOrDefault(new PostLicenseDescriptor()), ct);
-		///<inheritdoc cref = "IPostLicenseRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>license.post</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public PostLicenseResponse Post(IPostLicenseRequest request) => DoRequest<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IPostLicenseRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>license.post</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<PostLicenseResponse> PostAsync(IPostLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_basic</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public StartBasicLicenseResponse StartBasic(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null) => StartBasic(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()));
-		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_basic</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<StartBasicLicenseResponse> StartBasicAsync(Func<StartBasicLicenseDescriptor, IStartBasicLicenseRequest> selector = null, CancellationToken ct = default) => StartBasicAsync(selector.InvokeOrDefault(new StartBasicLicenseDescriptor()), ct);
-		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_basic</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public StartBasicLicenseResponse StartBasic(IStartBasicLicenseRequest request) => DoRequest<IStartBasicLicenseRequest, StartBasicLicenseResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IStartBasicLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_basic</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<StartBasicLicenseResponse> StartBasicAsync(IStartBasicLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IStartBasicLicenseRequest, StartBasicLicenseResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_trial</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public StartTrialLicenseResponse StartTrial(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null) => StartTrial(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()));
-		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_trial</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<StartTrialLicenseResponse> StartTrialAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null, CancellationToken ct = default) => StartTrialAsync(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()), ct);
-		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_trial</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public StartTrialLicenseResponse StartTrial(IStartTrialLicenseRequest request) => DoRequest<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IStartTrialLicenseRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>license.post_start_trial</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/x-pack/current/license-management.html">https://www.elastic.co/guide/en/x-pack/current/license-management.html</a>
+		/// </summary>
 		public Task<StartTrialLicenseResponse> StartTrialAsync(IStartTrialLicenseRequest request, CancellationToken ct = default) => DoRequestAsync<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

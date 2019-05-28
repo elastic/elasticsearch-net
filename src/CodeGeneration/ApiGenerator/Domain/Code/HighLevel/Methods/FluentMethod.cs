@@ -6,7 +6,8 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 {
 	public class FluentMethod : FluentSyntaxBase
 	{
-		public FluentMethod(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional) : base(names, parts, selectorIsOptional) { }
+		public FluentMethod(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional, string link, string summary) 
+			: base(names, parts, selectorIsOptional, link, summary) { }
 
 		public override string GenericWhereClause =>
 			string.Join(" ", CsharpNames.HighLevelDescriptorMethodGenerics

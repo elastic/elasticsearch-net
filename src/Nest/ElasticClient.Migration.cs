@@ -34,29 +34,77 @@ namespace Nest.Specification.MigrationApi
 		{
 		}
 
-		///<inheritdoc cref = "IDeprecationInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// </summary>
 		public DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null) => DeprecationInfo(selector.InvokeOrDefault(new DeprecationInfoDescriptor()));
-		///<inheritdoc cref = "IDeprecationInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// </summary>
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null, CancellationToken ct = default) => DeprecationInfoAsync(selector.InvokeOrDefault(new DeprecationInfoDescriptor()), ct);
-		///<inheritdoc cref = "IDeprecationInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// </summary>
 		public DeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) => DoRequest<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeprecationInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// </summary>
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.get_assistance</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</a>
+		/// </summary>
 		public MigrationAssistanceResponse Assistance(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) => Assistance(selector.InvokeOrDefault(new MigrationAssistanceDescriptor().Index(index: index)));
-		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.get_assistance</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</a>
+		/// </summary>
 		public Task<MigrationAssistanceResponse> AssistanceAsync(Indices index = null, Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null, CancellationToken ct = default) => AssistanceAsync(selector.InvokeOrDefault(new MigrationAssistanceDescriptor().Index(index: index)), ct);
-		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.get_assistance</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</a>
+		/// </summary>
 		public MigrationAssistanceResponse Assistance(IMigrationAssistanceRequest request) => DoRequest<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IMigrationAssistanceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>migration.get_assistance</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</a>
+		/// </summary>
 		public Task<MigrationAssistanceResponse> AssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) => DoRequestAsync<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>migration.upgrade</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</a>
+		/// </summary>
 		public MigrationUpgradeResponse Upgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null) => Upgrade(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index: index)));
-		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>migration.upgrade</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</a>
+		/// </summary>
 		public Task<MigrationUpgradeResponse> UpgradeAsync(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null, CancellationToken ct = default) => UpgradeAsync(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index: index)), ct);
-		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>migration.upgrade</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</a>
+		/// </summary>
 		public MigrationUpgradeResponse Upgrade(IMigrationUpgradeRequest request) => DoRequest<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IMigrationUpgradeRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>migration.upgrade</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</a>
+		/// </summary>
 		public Task<MigrationUpgradeResponse> UpgradeAsync(IMigrationUpgradeRequest request, CancellationToken ct = default) => DoRequestAsync<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters, ct);
 	}
 }

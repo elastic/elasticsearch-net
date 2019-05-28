@@ -17,6 +17,6 @@
 	var selectorChained = syntax.SelectorChainedDefaults();
 	var cancellationToken = !Model.Async ? string.Empty : ", ct";
 }
-///<inheritdoc cref="@(syntax.DocumentationCref)" />
+@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", syntax); }
 public @{ IncludeAsync("HighLevel/Client/FluentSyntax/FluentMethodHeader.cshtml", Model);} @Raw("=>")
 	@(method)@(Raw(requestMethodGenerics))(selector.InvokeOrDefault(new @(Raw(descriptor))(@Raw(selectorArgs))@(@selectorChained))@cancellationToken);

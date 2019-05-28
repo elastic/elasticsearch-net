@@ -34,15 +34,31 @@ namespace Nest.Specification.GraphApi
 		{
 		}
 
-		///<inheritdoc cref = "IGraphExploreRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>graph.explore</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</a>
+		/// </summary>
 		public GraphExploreResponse Explore<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector = null)
 			where TDocument : class => Explore(selector.InvokeOrDefault(new GraphExploreDescriptor<TDocument>()));
-		///<inheritdoc cref = "IGraphExploreRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>graph.explore</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</a>
+		/// </summary>
 		public Task<GraphExploreResponse> ExploreAsync<TDocument>(Func<GraphExploreDescriptor<TDocument>, IGraphExploreRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => ExploreAsync(selector.InvokeOrDefault(new GraphExploreDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "IGraphExploreRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>graph.explore</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</a>
+		/// </summary>
 		public GraphExploreResponse Explore(IGraphExploreRequest request) => DoRequest<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGraphExploreRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>graph.explore</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</a>
+		/// </summary>
 		public Task<GraphExploreResponse> ExploreAsync(IGraphExploreRequest request, CancellationToken ct = default) => DoRequestAsync<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters, ct);
 	}
 }

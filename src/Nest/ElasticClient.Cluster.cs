@@ -34,77 +34,221 @@ namespace Nest.Specification.ClusterApi
 		{
 		}
 
-		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.allocation_explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</a>
+		/// </summary>
 		public ClusterAllocationExplainResponse AllocationExplain(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null) => AllocationExplain(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()));
-		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.allocation_explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</a>
+		/// </summary>
 		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null, CancellationToken ct = default) => AllocationExplainAsync(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()), ct);
-		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.allocation_explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</a>
+		/// </summary>
 		public ClusterAllocationExplainResponse AllocationExplain(IClusterAllocationExplainRequest request) => DoRequest<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterAllocationExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.allocation_explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</a>
+		/// </summary>
 		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(IClusterAllocationExplainRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterGetSettingsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.get_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public ClusterGetSettingsResponse GetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null) => GetSettings(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()));
-		///<inheritdoc cref = "IClusterGetSettingsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.get_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public Task<ClusterGetSettingsResponse> GetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null, CancellationToken ct = default) => GetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()), ct);
-		///<inheritdoc cref = "IClusterGetSettingsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.get_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public ClusterGetSettingsResponse GetSettings(IClusterGetSettingsRequest request) => DoRequest<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterGetSettingsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.get_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public Task<ClusterGetSettingsResponse> GetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</a>
+		/// </summary>
 		public ClusterHealthResponse Health(Indices index = null, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null) => Health(selector.InvokeOrDefault(new ClusterHealthDescriptor().Index(index: index)));
-		///<inheritdoc cref = "IClusterHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</a>
+		/// </summary>
 		public Task<ClusterHealthResponse> HealthAsync(Indices index = null, Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null, CancellationToken ct = default) => HealthAsync(selector.InvokeOrDefault(new ClusterHealthDescriptor().Index(index: index)), ct);
-		///<inheritdoc cref = "IClusterHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</a>
+		/// </summary>
 		public ClusterHealthResponse Health(IClusterHealthRequest request) => DoRequest<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</a>
+		/// </summary>
 		public Task<ClusterHealthResponse> HealthAsync(IClusterHealthRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</a>
+		/// </summary>
 		public ClusterPendingTasksResponse PendingTasks(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null) => PendingTasks(selector.InvokeOrDefault(new ClusterPendingTasksDescriptor()));
-		///<inheritdoc cref = "IClusterPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</a>
+		/// </summary>
 		public Task<ClusterPendingTasksResponse> PendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null, CancellationToken ct = default) => PendingTasksAsync(selector.InvokeOrDefault(new ClusterPendingTasksDescriptor()), ct);
-		///<inheritdoc cref = "IClusterPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</a>
+		/// </summary>
 		public ClusterPendingTasksResponse PendingTasks(IClusterPendingTasksRequest request) => DoRequest<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</a>
+		/// </summary>
 		public Task<ClusterPendingTasksResponse> PendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterPutSettingsRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>cluster.put_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public ClusterPutSettingsResponse PutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector) => PutSettings(selector.InvokeOrDefault(new ClusterPutSettingsDescriptor()));
-		///<inheritdoc cref = "IClusterPutSettingsRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>cluster.put_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public Task<ClusterPutSettingsResponse> PutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector, CancellationToken ct = default) => PutSettingsAsync(selector.InvokeOrDefault(new ClusterPutSettingsDescriptor()), ct);
-		///<inheritdoc cref = "IClusterPutSettingsRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>cluster.put_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public ClusterPutSettingsResponse PutSettings(IClusterPutSettingsRequest request) => DoRequest<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterPutSettingsRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>cluster.put_settings</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
+		/// </summary>
 		public Task<ClusterPutSettingsResponse> PutSettingsAsync(IClusterPutSettingsRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IRemoteInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.remote_info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</a>
+		/// </summary>
 		public RemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null) => RemoteInfo(selector.InvokeOrDefault(new RemoteInfoDescriptor()));
-		///<inheritdoc cref = "IRemoteInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.remote_info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</a>
+		/// </summary>
 		public Task<RemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null, CancellationToken ct = default) => RemoteInfoAsync(selector.InvokeOrDefault(new RemoteInfoDescriptor()), ct);
-		///<inheritdoc cref = "IRemoteInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.remote_info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</a>
+		/// </summary>
 		public RemoteInfoResponse RemoteInfo(IRemoteInfoRequest request) => DoRequest<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IRemoteInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.remote_info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</a>
+		/// </summary>
 		public Task<RemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterRerouteRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.reroute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</a>
+		/// </summary>
 		public ClusterRerouteResponse Reroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector = null) => Reroute(selector.InvokeOrDefault(new ClusterRerouteDescriptor()));
-		///<inheritdoc cref = "IClusterRerouteRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.reroute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</a>
+		/// </summary>
 		public Task<ClusterRerouteResponse> RerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector = null, CancellationToken ct = default) => RerouteAsync(selector.InvokeOrDefault(new ClusterRerouteDescriptor()), ct);
-		///<inheritdoc cref = "IClusterRerouteRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.reroute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</a>
+		/// </summary>
 		public ClusterRerouteResponse Reroute(IClusterRerouteRequest request) => DoRequest<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterRerouteRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.reroute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</a>
+		/// </summary>
 		public Task<ClusterRerouteResponse> RerouteAsync(IClusterRerouteRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterStateRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.state</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</a>
+		/// </summary>
 		public ClusterStateResponse State(Indices index = null, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null) => State(selector.InvokeOrDefault(new ClusterStateDescriptor().Index(index: index)));
-		///<inheritdoc cref = "IClusterStateRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.state</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</a>
+		/// </summary>
 		public Task<ClusterStateResponse> StateAsync(Indices index = null, Func<ClusterStateDescriptor, IClusterStateRequest> selector = null, CancellationToken ct = default) => StateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor().Index(index: index)), ct);
-		///<inheritdoc cref = "IClusterStateRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.state</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</a>
+		/// </summary>
 		public ClusterStateResponse State(IClusterStateRequest request) => DoRequest<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterStateRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.state</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</a>
+		/// </summary>
 		public Task<ClusterStateResponse> StateAsync(IClusterStateRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClusterStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</a>
+		/// </summary>
 		public ClusterStatsResponse Stats(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new ClusterStatsDescriptor()));
-		///<inheritdoc cref = "IClusterStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</a>
+		/// </summary>
 		public Task<ClusterStatsResponse> StatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null, CancellationToken ct = default) => StatsAsync(selector.InvokeOrDefault(new ClusterStatsDescriptor()), ct);
-		///<inheritdoc cref = "IClusterStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</a>
+		/// </summary>
 		public ClusterStatsResponse Stats(IClusterStatsRequest request) => DoRequest<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClusterStatsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cluster.stats</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</a>
+		/// </summary>
 		public Task<ClusterStatsResponse> StatsAsync(IClusterStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

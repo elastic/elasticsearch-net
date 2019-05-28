@@ -87,16 +87,26 @@ namespace ApiGenerator.Domain.Specification
 				return first;
 			}
 		}
+
+		public string HighLevelMethodXmlDocDescription => $"<c>{PreferredHttpMethod}</c> request to the <c>{Name}</c> API, read more about this API online:";
+		
 		public HighLevelModel HighLevelModel => new HighLevelModel
 		{
 			CsharpNames = CsharpNames,
 			Fluent = new FluentMethod(CsharpNames, Url.Parts,
-				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET")
+				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
+				link: OfficialDocumentationLink,
+				summary: HighLevelMethodXmlDocDescription
 			),
 			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments ? null : new BoundFluentMethod(CsharpNames, Url.Parts,
-				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET")
+				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
+				link: OfficialDocumentationLink,
+				summary: HighLevelMethodXmlDocDescription
 			),
-			Initializer = new InitializerMethod(CsharpNames) 
+			Initializer = new InitializerMethod(CsharpNames,
+				link: OfficialDocumentationLink,
+				summary: HighLevelMethodXmlDocDescription
+			)
 		};
 
 		private List<LowLevelClientMethod> _lowLevelClientMethods;

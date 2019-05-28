@@ -34,21 +34,53 @@ namespace Nest.Specification.XPackApi
 		{
 		}
 
-		///<inheritdoc cref = "IXPackInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</a>
+		/// </summary>
 		public XPackInfoResponse Info(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null) => Info(selector.InvokeOrDefault(new XPackInfoDescriptor()));
-		///<inheritdoc cref = "IXPackInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</a>
+		/// </summary>
 		public Task<XPackInfoResponse> InfoAsync(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null, CancellationToken ct = default) => InfoAsync(selector.InvokeOrDefault(new XPackInfoDescriptor()), ct);
-		///<inheritdoc cref = "IXPackInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</a>
+		/// </summary>
 		public XPackInfoResponse Info(IXPackInfoRequest request) => DoRequest<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IXPackInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</a>
+		/// </summary>
 		public Task<XPackInfoResponse> InfoAsync(IXPackInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IXPackUsageRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// </summary>
 		public XPackUsageResponse Usage(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null) => Usage(selector.InvokeOrDefault(new XPackUsageDescriptor()));
-		///<inheritdoc cref = "IXPackUsageRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// </summary>
 		public Task<XPackUsageResponse> UsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null, CancellationToken ct = default) => UsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), ct);
-		///<inheritdoc cref = "IXPackUsageRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// </summary>
 		public XPackUsageResponse Usage(IXPackUsageRequest request) => DoRequest<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IXPackUsageRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// </summary>
 		public Task<XPackUsageResponse> UsageAsync(IXPackUsageRequest request, CancellationToken ct = default) => DoRequestAsync<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -7,7 +7,8 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 {
 	public class BoundFluentMethod : FluentSyntaxBase
 	{
-		public BoundFluentMethod(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional) : base(names, parts, selectorIsOptional) { }
+		public BoundFluentMethod(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional, string link, string summary) 
+			: base(names, parts, selectorIsOptional, link, summary) { }
 
 		private string DescriptorTypeParams => string.Join(", ", CsharpNames.DescriptorGenerics
 			.Select(e => CsharpNames.DescriptorBoundDocumentGeneric));

@@ -174,357 +174,941 @@ namespace Nest
 			XPack = new XPackNamespace(this);
 		}
 
-		///<inheritdoc cref = "IBulkRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>bulk</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</a>
+		/// </summary>
 		public BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) => Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
-		///<inheritdoc cref = "IBulkRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>bulk</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</a>
+		/// </summary>
 		public Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) => BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()), ct);
-		///<inheritdoc cref = "IBulkRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>bulk</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</a>
+		/// </summary>
 		public BulkResponse Bulk(IBulkRequest request) => DoRequest<IBulkRequest, BulkResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IBulkRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>bulk</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</a>
+		/// </summary>
 		public Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) => DoRequestAsync<IBulkRequest, BulkResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IClearScrollRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null) => ClearScroll(selector.InvokeOrDefault(new ClearScrollDescriptor()));
-		///<inheritdoc cref = "IClearScrollRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken ct = default) => ClearScrollAsync(selector.InvokeOrDefault(new ClearScrollDescriptor()), ct);
-		///<inheritdoc cref = "IClearScrollRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public ClearScrollResponse ClearScroll(IClearScrollRequest request) => DoRequest<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IClearScrollRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default) => DoRequestAsync<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ICountRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</a>
+		/// </summary>
 		public CountResponse Count<TDocument>(Func<CountDescriptor<TDocument>, ICountRequest> selector = null)
 			where TDocument : class => Count(selector.InvokeOrDefault(new CountDescriptor<TDocument>()));
-		///<inheritdoc cref = "ICountRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</a>
+		/// </summary>
 		public Task<CountResponse> CountAsync<TDocument>(Func<CountDescriptor<TDocument>, ICountRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => CountAsync(selector.InvokeOrDefault(new CountDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "ICountRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</a>
+		/// </summary>
 		public CountResponse Count(ICountRequest request) => DoRequest<ICountRequest, CountResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ICountRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</a>
+		/// </summary>
 		public Task<CountResponse> CountAsync(ICountRequest request, CancellationToken ct = default) => DoRequestAsync<ICountRequest, CountResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>create</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public CreateResponse Create<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector)
 			where TDocument : class => Create<TDocument>(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(documentWithId: document)));
-		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>create</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class => CreateAsync<TDocument>(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(documentWithId: document)), ct);
-		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>create</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public CreateResponse Create<TDocument>(ICreateRequest<TDocument> request)
 			where TDocument : class => DoRequest<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ICreateRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>create</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IDeleteRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</a>
+		/// </summary>
 		public DeleteResponse Delete<TDocument>(DocumentPath<TDocument> id, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null)
 			where TDocument : class => Delete(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "IDeleteRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</a>
+		/// </summary>
 		public Task<DeleteResponse> DeleteAsync<TDocument>(DocumentPath<TDocument> id, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "IDeleteRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</a>
+		/// </summary>
 		public DeleteResponse Delete(IDeleteRequest request) => DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeleteRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</a>
+		/// </summary>
 		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IDeleteByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</a>
+		/// </summary>
 		public DeleteByQueryResponse DeleteByQuery<TDocument>(Func<DeleteByQueryDescriptor<TDocument>, IDeleteByQueryRequest> selector)
 			where TDocument : class => DeleteByQuery(selector.InvokeOrDefault(new DeleteByQueryDescriptor<TDocument>()));
-		///<inheritdoc cref = "IDeleteByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</a>
+		/// </summary>
 		public Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Func<DeleteByQueryDescriptor<TDocument>, IDeleteByQueryRequest> selector, CancellationToken ct = default)
 			where TDocument : class => DeleteByQueryAsync(selector.InvokeOrDefault(new DeleteByQueryDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "IDeleteByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</a>
+		/// </summary>
 		public DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) => DoRequest<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeleteByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</a>
+		/// </summary>
 		public Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</a>
+		/// </summary>
 		public ListTasksResponse DeleteByQueryRethrottle(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null) => DeleteByQueryRethrottle(selector.InvokeOrDefault(new DeleteByQueryRethrottleDescriptor(taskId: taskId)));
-		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</a>
+		/// </summary>
 		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null, CancellationToken ct = default) => DeleteByQueryRethrottleAsync(selector.InvokeOrDefault(new DeleteByQueryRethrottleDescriptor(taskId: taskId)), ct);
-		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</a>
+		/// </summary>
 		public ListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request) => DoRequest<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeleteByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>delete_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</a>
+		/// </summary>
 		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IDeleteScriptRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public DeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) => DeleteScript(selector.InvokeOrDefault(new DeleteScriptDescriptor(id: id)));
-		///<inheritdoc cref = "IDeleteScriptRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public Task<DeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken ct = default) => DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(id: id)), ct);
-		///<inheritdoc cref = "IDeleteScriptRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public DeleteScriptResponse DeleteScript(IDeleteScriptRequest request) => DoRequest<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDeleteScriptRequest"/>
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>delete_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public Task<DeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IDocumentExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public ExistsResponse DocumentExists<TDocument>(DocumentPath<TDocument> id, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null)
 			where TDocument : class => DocumentExists(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "IDocumentExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<ExistsResponse> DocumentExistsAsync<TDocument>(DocumentPath<TDocument> id, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "IDocumentExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public ExistsResponse DocumentExists(IDocumentExistsRequest request) => DoRequest<IDocumentExistsRequest, ExistsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IDocumentExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<ExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IDocumentExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ISourceExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public ExistsResponse SourceExists<TDocument>(DocumentPath<TDocument> id, Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null)
 			where TDocument : class => SourceExists(selector.InvokeOrDefault(new SourceExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "ISourceExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<ExistsResponse> SourceExistsAsync<TDocument>(DocumentPath<TDocument> id, Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => SourceExistsAsync(selector.InvokeOrDefault(new SourceExistsDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "ISourceExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public ExistsResponse SourceExists(ISourceExistsRequest request) => DoRequest<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ISourceExistsRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>exists_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<ExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default) => DoRequestAsync<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</a>
+		/// </summary>
 		public ExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector = null)
 			where TDocument : class => Explain<TDocument>(selector.InvokeOrDefault(new ExplainDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "IExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</a>
+		/// </summary>
 		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> id, Func<ExplainDescriptor<TDocument>, IExplainRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => ExplainAsync<TDocument>(selector.InvokeOrDefault(new ExplainDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "IExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</a>
+		/// </summary>
 		public ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest request)
 			where TDocument : class => DoRequest<IExplainRequest, ExplainResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "IExplainRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>explain</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</a>
+		/// </summary>
 		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IExplainRequest, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>field_caps</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</a>
+		/// </summary>
 		public FieldCapabilitiesResponse FieldCapabilities(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null) => FieldCapabilities(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(index: index)));
-		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>field_caps</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</a>
+		/// </summary>
 		public Task<FieldCapabilitiesResponse> FieldCapabilitiesAsync(Indices index = null, Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null, CancellationToken ct = default) => FieldCapabilitiesAsync(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(index: index)), ct);
-		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>field_caps</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</a>
+		/// </summary>
 		public FieldCapabilitiesResponse FieldCapabilities(IFieldCapabilitiesRequest request) => DoRequest<IFieldCapabilitiesRequest, FieldCapabilitiesResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IFieldCapabilitiesRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>field_caps</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</a>
+		/// </summary>
 		public Task<FieldCapabilitiesResponse> FieldCapabilitiesAsync(IFieldCapabilitiesRequest request, CancellationToken ct = default) => DoRequestAsync<IFieldCapabilitiesRequest, FieldCapabilitiesResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IGetRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public GetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> id, Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
 			where TDocument : class => Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "IGetRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<GetResponse<TDocument>> GetAsync<TDocument>(DocumentPath<TDocument> id, Func<GetDescriptor<TDocument>, IGetRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "IGetRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public GetResponse<TDocument> Get<TDocument>(IGetRequest request)
 			where TDocument : class => DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGetRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IGetScriptRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public GetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) => GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(id: id)));
-		///<inheritdoc cref = "IGetScriptRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public Task<GetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken ct = default) => GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(id: id)), ct);
-		///<inheritdoc cref = "IGetScriptRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public GetScriptResponse GetScript(IGetScriptRequest request) => DoRequest<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IGetScriptRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public Task<GetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ISourceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null)
 			where TDocument : class => Source<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "ISourceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(DocumentPath<TDocument> id, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => SourceAsync<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "ISourceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public SourceResponse<TDocument> Source<TDocument>(ISourceRequest request)
 			where TDocument : class => DoRequest<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "ISourceRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>get_source</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
+		/// </summary>
 		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
 			where TDocument : class => Index<TDocument>(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(documentWithId: document)));
-		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class => IndexAsync<TDocument>(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(documentWithId: document)), ct);
-		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
 			where TDocument : class => DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IIndexRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
+		/// </summary>
 		public Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IRootNodeInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public RootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) => RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
-		///<inheritdoc cref = "IRootNodeInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public Task<RootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null, CancellationToken ct = default) => RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), ct);
-		///<inheritdoc cref = "IRootNodeInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) => DoRequest<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IRootNodeInfoRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>info</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IMultiGetRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mget</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</a>
+		/// </summary>
 		public MultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector = null) => MultiGet(selector.InvokeOrDefault(new MultiGetDescriptor()));
-		///<inheritdoc cref = "IMultiGetRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mget</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</a>
+		/// </summary>
 		public Task<MultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null, CancellationToken ct = default) => MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()), ct);
-		///<inheritdoc cref = "IMultiGetRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mget</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</a>
+		/// </summary>
 		public MultiGetResponse MultiGet(IMultiGetRequest request) => DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IMultiGetRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mget</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</a>
+		/// </summary>
 		public Task<MultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IMultiSearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</a>
+		/// </summary>
 		public MultiSearchResponse MultiSearch(Indices index = null, Func<MultiSearchDescriptor, IMultiSearchRequest> selector = null) => MultiSearch(selector.InvokeOrDefault(new MultiSearchDescriptor().Index(index: index)));
-		///<inheritdoc cref = "IMultiSearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</a>
+		/// </summary>
 		public Task<MultiSearchResponse> MultiSearchAsync(Indices index = null, Func<MultiSearchDescriptor, IMultiSearchRequest> selector = null, CancellationToken ct = default) => MultiSearchAsync(selector.InvokeOrDefault(new MultiSearchDescriptor().Index(index: index)), ct);
-		///<inheritdoc cref = "IMultiSearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</a>
+		/// </summary>
 		public MultiSearchResponse MultiSearch(IMultiSearchRequest request) => DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IMultiSearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</a>
+		/// </summary>
 		public Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
+		/// </summary>
 		public MultiSearchResponse MultiSearchTemplate(Indices index = null, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector = null) => MultiSearchTemplate(selector.InvokeOrDefault(new MultiSearchTemplateDescriptor().Index(index: index)));
-		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
+		/// </summary>
 		public Task<MultiSearchResponse> MultiSearchTemplateAsync(Indices index = null, Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector = null, CancellationToken ct = default) => MultiSearchTemplateAsync(selector.InvokeOrDefault(new MultiSearchTemplateDescriptor().Index(index: index)), ct);
-		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
+		/// </summary>
 		public MultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request) => DoRequest<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IMultiSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>msearch_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
+		/// </summary>
 		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mtermvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</a>
+		/// </summary>
 		public MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null) => MultiTermVectors(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
-		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mtermvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</a>
+		/// </summary>
 		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null, CancellationToken ct = default) => MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()), ct);
-		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mtermvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</a>
+		/// </summary>
 		public MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) => DoRequest<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IMultiTermVectorsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>mtermvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</a>
+		/// </summary>
 		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IPingRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>ping</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null) => Ping(selector.InvokeOrDefault(new PingDescriptor()));
-		///<inheritdoc cref = "IPingRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>ping</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken ct = default) => PingAsync(selector.InvokeOrDefault(new PingDescriptor()), ct);
-		///<inheritdoc cref = "IPingRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>ping</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public PingResponse Ping(IPingRequest request) => DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IPingRequest"/>
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>ping</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/">http://www.elastic.co/guide/</a>
+		/// </summary>
 		public Task<PingResponse> PingAsync(IPingRequest request, CancellationToken ct = default) => DoRequestAsync<IPingRequest, PingResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IPutScriptRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>put_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public PutScriptResponse PutScript(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) => PutScript(selector.InvokeOrDefault(new PutScriptDescriptor(id: id)));
-		///<inheritdoc cref = "IPutScriptRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>put_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public Task<PutScriptResponse> PutScriptAsync(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector, CancellationToken ct = default) => PutScriptAsync(selector.InvokeOrDefault(new PutScriptDescriptor(id: id)), ct);
-		///<inheritdoc cref = "IPutScriptRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>put_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public PutScriptResponse PutScript(IPutScriptRequest request) => DoRequest<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IPutScriptRequest"/>
+		/// <summary>
+		/// <c>PUT</c> request to the <c>put_script</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</a>
+		/// </summary>
 		public Task<PutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IReindexOnServerRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public ReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) => ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
-		///<inheritdoc cref = "IReindexOnServerRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public Task<ReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken ct = default) => ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), ct);
-		///<inheritdoc cref = "IReindexOnServerRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public ReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) => DoRequest<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IReindexOnServerRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public Task<ReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) => DoRequestAsync<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IReindexRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public ReindexRethrottleResponse ReindexRethrottle(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null) => ReindexRethrottle(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(taskId: taskId)));
-		///<inheritdoc cref = "IReindexRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(TaskId taskId, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken ct = default) => ReindexRethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(taskId: taskId)), ct);
-		///<inheritdoc cref = "IReindexRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public ReindexRethrottleResponse ReindexRethrottle(IReindexRethrottleRequest request) => DoRequest<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IReindexRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>reindex_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</a>
+		/// </summary>
 		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(IReindexRethrottleRequest request, CancellationToken ct = default) => DoRequestAsync<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</a>
+		/// </summary>
 		public RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null) => RenderSearchTemplate(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()));
-		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</a>
+		/// </summary>
 		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null, CancellationToken ct = default) => RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), ct);
-		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</a>
+		/// </summary>
 		public RenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request) => DoRequest<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IRenderSearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</a>
+		/// </summary>
 		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scripts_painless_execute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</a>
+		/// </summary>
 		public ExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null) => ExecutePainlessScript<TResult>(selector.InvokeOrDefault(new ExecutePainlessScriptDescriptor()));
-		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scripts_painless_execute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</a>
+		/// </summary>
 		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null, CancellationToken ct = default) => ExecutePainlessScriptAsync<TResult>(selector.InvokeOrDefault(new ExecutePainlessScriptDescriptor()), ct);
-		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scripts_painless_execute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</a>
+		/// </summary>
 		public ExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(IExecutePainlessScriptRequest request) => DoRequest<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters);
-		///<inheritdoc cref = "IExecutePainlessScriptRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scripts_painless_execute</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</a>
+		/// </summary>
 		public Task<ExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken ct = default) => DoRequestAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IScrollRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
 			where TInferDocument : class where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)));
-		///<inheritdoc cref = "IScrollRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
 			where TInferDocument : class where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)), ct);
-		///<inheritdoc cref = "IScrollRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
 			where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)));
-		///<inheritdoc cref = "IScrollRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)), ct);
-		///<inheritdoc cref = "IScrollRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 			where TDocument : class => DoRequest<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "IScrollRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ISearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null)
 			where TInferDocument : class where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()));
-		///<inheritdoc cref = "ISearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
 			where TInferDocument : class where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()), ct);
-		///<inheritdoc cref = "ISearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null)
 			where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()));
-		///<inheritdoc cref = "ISearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "ISearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
 			where TDocument : class => DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "ISearchRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ISearchShardsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</a>
+		/// </summary>
 		public SearchShardsResponse SearchShards<TDocument>(Func<SearchShardsDescriptor<TDocument>, ISearchShardsRequest> selector = null)
 			where TDocument : class => SearchShards(selector.InvokeOrDefault(new SearchShardsDescriptor<TDocument>()));
-		///<inheritdoc cref = "ISearchShardsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</a>
+		/// </summary>
 		public Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Func<SearchShardsDescriptor<TDocument>, ISearchShardsRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => SearchShardsAsync(selector.InvokeOrDefault(new SearchShardsDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "ISearchShardsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</a>
+		/// </summary>
 		public SearchShardsResponse SearchShards(ISearchShardsRequest request) => DoRequest<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ISearchShardsRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</a>
+		/// </summary>
 		public Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default) => DoRequestAsync<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ISearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null)
 			where TDocument : class => SearchTemplate<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()));
-		///<inheritdoc cref = "ISearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => SearchTemplateAsync<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "ISearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
+		/// </summary>
 		public SearchResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request)
 			where TDocument : class => DoRequest<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "ISearchTemplateRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
+		/// </summary>
 		public Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>termvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</a>
+		/// </summary>
 		public TermVectorsResponse TermVectors<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest<TDocument>> selector = null)
 			where TDocument : class => TermVectors<TDocument>(selector.InvokeOrDefault(new TermVectorsDescriptor<TDocument>()));
-		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>termvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</a>
+		/// </summary>
 		public Task<TermVectorsResponse> TermVectorsAsync<TDocument>(Func<TermVectorsDescriptor<TDocument>, ITermVectorsRequest<TDocument>> selector = null, CancellationToken ct = default)
 			where TDocument : class => TermVectorsAsync<TDocument>(selector.InvokeOrDefault(new TermVectorsDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>termvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</a>
+		/// </summary>
 		public TermVectorsResponse TermVectors<TDocument>(ITermVectorsRequest<TDocument> request)
 			where TDocument : class => DoRequest<ITermVectorsRequest<TDocument>, TermVectorsResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "ITermVectorsRequest&lt;TDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>termvectors</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</a>
+		/// </summary>
 		public Task<TermVectorsResponse> TermVectorsAsync<TDocument>(ITermVectorsRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<ITermVectorsRequest<TDocument>, TermVectorsResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</a>
+		/// </summary>
 		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
 			where TDocument : class where TPartialDocument : class => Update<TDocument, TPartialDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TPartialDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</a>
+		/// </summary>
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector, CancellationToken ct = default)
 			where TDocument : class where TPartialDocument : class => UpdateAsync<TDocument, TPartialDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TPartialDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</a>
+		/// </summary>
 		public UpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector)
 			where TDocument : class => Update<TDocument, TDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)));
-		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</a>
+		/// </summary>
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> id, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class => UpdateAsync<TDocument, TDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TDocument>(documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id)), ct);
-		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</a>
+		/// </summary>
 		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class where TPartialDocument : class => DoRequest<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
-		///<inheritdoc cref = "IUpdateRequest&lt;TDocument, TPartialDocument&gt;"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</a>
+		/// </summary>
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request, CancellationToken ct = default)
 			where TDocument : class where TPartialDocument : class => DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IUpdateByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</a>
+		/// </summary>
 		public UpdateByQueryResponse UpdateByQuery<TDocument>(Func<UpdateByQueryDescriptor<TDocument>, IUpdateByQueryRequest> selector = null)
 			where TDocument : class => UpdateByQuery(selector.InvokeOrDefault(new UpdateByQueryDescriptor<TDocument>()));
-		///<inheritdoc cref = "IUpdateByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</a>
+		/// </summary>
 		public Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Func<UpdateByQueryDescriptor<TDocument>, IUpdateByQueryRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => UpdateByQueryAsync(selector.InvokeOrDefault(new UpdateByQueryDescriptor<TDocument>()), ct);
-		///<inheritdoc cref = "IUpdateByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</a>
+		/// </summary>
 		public UpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) => DoRequest<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IUpdateByQueryRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</a>
+		/// </summary>
 		public Task<UpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters, ct);
-		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</a>
+		/// </summary>
 		public ListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null) => UpdateByQueryRethrottle(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId: taskId)));
-		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</a>
+		/// </summary>
 		public Task<ListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null, CancellationToken ct = default) => UpdateByQueryRethrottleAsync(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId: taskId)), ct);
-		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</a>
+		/// </summary>
 		public ListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request) => DoRequest<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
-		///<inheritdoc cref = "IUpdateByQueryRethrottleRequest"/>
+		/// <summary>
+		/// <c>POST</c> request to the <c>update_by_query_rethrottle</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</a>
+		/// </summary>
 		public Task<ListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

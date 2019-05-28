@@ -34,165 +34,485 @@ namespace Nest.Specification.CatApi
 		{
 		}
 
-		///<inheritdoc cref = "ICatAliasesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.aliases</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</a>
+		/// </summary>
 		public CatResponse<CatAliasesRecord> Aliases(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null) => Aliases(selector.InvokeOrDefault(new CatAliasesDescriptor()));
-		///<inheritdoc cref = "ICatAliasesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.aliases</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</a>
+		/// </summary>
 		public Task<CatResponse<CatAliasesRecord>> AliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null, CancellationToken ct = default) => AliasesAsync(selector.InvokeOrDefault(new CatAliasesDescriptor()), ct);
-		///<inheritdoc cref = "ICatAliasesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.aliases</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</a>
+		/// </summary>
 		public CatResponse<CatAliasesRecord> Aliases(ICatAliasesRequest request) => DoCat<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request);
-		///<inheritdoc cref = "ICatAliasesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.aliases</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</a>
+		/// </summary>
 		public Task<CatResponse<CatAliasesRecord>> AliasesAsync(ICatAliasesRequest request, CancellationToken ct = default) => DoCatAsync<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, ct);
-		///<inheritdoc cref = "ICatAllocationRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.allocation</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</a>
+		/// </summary>
 		public CatResponse<CatAllocationRecord> Allocation(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null) => Allocation(selector.InvokeOrDefault(new CatAllocationDescriptor()));
-		///<inheritdoc cref = "ICatAllocationRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.allocation</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</a>
+		/// </summary>
 		public Task<CatResponse<CatAllocationRecord>> AllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null, CancellationToken ct = default) => AllocationAsync(selector.InvokeOrDefault(new CatAllocationDescriptor()), ct);
-		///<inheritdoc cref = "ICatAllocationRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.allocation</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</a>
+		/// </summary>
 		public CatResponse<CatAllocationRecord> Allocation(ICatAllocationRequest request) => DoCat<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request);
-		///<inheritdoc cref = "ICatAllocationRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.allocation</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</a>
+		/// </summary>
 		public Task<CatResponse<CatAllocationRecord>> AllocationAsync(ICatAllocationRequest request, CancellationToken ct = default) => DoCatAsync<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request, ct);
-		///<inheritdoc cref = "ICatCountRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</a>
+		/// </summary>
 		public CatResponse<CatCountRecord> Count(Func<CatCountDescriptor, ICatCountRequest> selector = null) => Count(selector.InvokeOrDefault(new CatCountDescriptor()));
-		///<inheritdoc cref = "ICatCountRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</a>
+		/// </summary>
 		public Task<CatResponse<CatCountRecord>> CountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null, CancellationToken ct = default) => CountAsync(selector.InvokeOrDefault(new CatCountDescriptor()), ct);
-		///<inheritdoc cref = "ICatCountRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</a>
+		/// </summary>
 		public CatResponse<CatCountRecord> Count(ICatCountRequest request) => DoCat<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request);
-		///<inheritdoc cref = "ICatCountRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.count</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</a>
+		/// </summary>
 		public Task<CatResponse<CatCountRecord>> CountAsync(ICatCountRequest request, CancellationToken ct = default) => DoCatAsync<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request, ct);
-		///<inheritdoc cref = "ICatFielddataRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.fielddata</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</a>
+		/// </summary>
 		public CatResponse<CatFielddataRecord> Fielddata(Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null) => Fielddata(selector.InvokeOrDefault(new CatFielddataDescriptor()));
-		///<inheritdoc cref = "ICatFielddataRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.fielddata</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</a>
+		/// </summary>
 		public Task<CatResponse<CatFielddataRecord>> FielddataAsync(Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null, CancellationToken ct = default) => FielddataAsync(selector.InvokeOrDefault(new CatFielddataDescriptor()), ct);
-		///<inheritdoc cref = "ICatFielddataRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.fielddata</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</a>
+		/// </summary>
 		public CatResponse<CatFielddataRecord> Fielddata(ICatFielddataRequest request) => DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request);
-		///<inheritdoc cref = "ICatFielddataRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.fielddata</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</a>
+		/// </summary>
 		public Task<CatResponse<CatFielddataRecord>> FielddataAsync(ICatFielddataRequest request, CancellationToken ct = default) => DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, ct);
-		///<inheritdoc cref = "ICatHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</a>
+		/// </summary>
 		public CatResponse<CatHealthRecord> Health(Func<CatHealthDescriptor, ICatHealthRequest> selector = null) => Health(selector.InvokeOrDefault(new CatHealthDescriptor()));
-		///<inheritdoc cref = "ICatHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</a>
+		/// </summary>
 		public Task<CatResponse<CatHealthRecord>> HealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector = null, CancellationToken ct = default) => HealthAsync(selector.InvokeOrDefault(new CatHealthDescriptor()), ct);
-		///<inheritdoc cref = "ICatHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</a>
+		/// </summary>
 		public CatResponse<CatHealthRecord> Health(ICatHealthRequest request) => DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request);
-		///<inheritdoc cref = "ICatHealthRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.health</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</a>
+		/// </summary>
 		public Task<CatResponse<CatHealthRecord>> HealthAsync(ICatHealthRequest request, CancellationToken ct = default) => DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, ct);
-		///<inheritdoc cref = "ICatHelpRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.help</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</a>
+		/// </summary>
 		public CatResponse<CatHelpRecord> Help(Func<CatHelpDescriptor, ICatHelpRequest> selector = null) => Help(selector.InvokeOrDefault(new CatHelpDescriptor()));
-		///<inheritdoc cref = "ICatHelpRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.help</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</a>
+		/// </summary>
 		public Task<CatResponse<CatHelpRecord>> HelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null, CancellationToken ct = default) => HelpAsync(selector.InvokeOrDefault(new CatHelpDescriptor()), ct);
-		///<inheritdoc cref = "ICatHelpRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.help</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</a>
+		/// </summary>
 		public CatResponse<CatHelpRecord> Help(ICatHelpRequest request) => DoCat<ICatHelpRequest, CatHelpRequestParameters, CatHelpRecord>(request);
-		///<inheritdoc cref = "ICatHelpRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.help</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</a>
+		/// </summary>
 		public Task<CatResponse<CatHelpRecord>> HelpAsync(ICatHelpRequest request, CancellationToken ct = default) => DoCatAsync<ICatHelpRequest, CatHelpRequestParameters, CatHelpRecord>(request, ct);
-		///<inheritdoc cref = "ICatIndicesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.indices</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</a>
+		/// </summary>
 		public CatResponse<CatIndicesRecord> Indices(Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null) => Indices(selector.InvokeOrDefault(new CatIndicesDescriptor()));
-		///<inheritdoc cref = "ICatIndicesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.indices</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</a>
+		/// </summary>
 		public Task<CatResponse<CatIndicesRecord>> IndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null, CancellationToken ct = default) => IndicesAsync(selector.InvokeOrDefault(new CatIndicesDescriptor()), ct);
-		///<inheritdoc cref = "ICatIndicesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.indices</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</a>
+		/// </summary>
 		public CatResponse<CatIndicesRecord> Indices(ICatIndicesRequest request) => DoCat<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request);
-		///<inheritdoc cref = "ICatIndicesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.indices</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</a>
+		/// </summary>
 		public Task<CatResponse<CatIndicesRecord>> IndicesAsync(ICatIndicesRequest request, CancellationToken ct = default) => DoCatAsync<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request, ct);
-		///<inheritdoc cref = "ICatMasterRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.master</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</a>
+		/// </summary>
 		public CatResponse<CatMasterRecord> Master(Func<CatMasterDescriptor, ICatMasterRequest> selector = null) => Master(selector.InvokeOrDefault(new CatMasterDescriptor()));
-		///<inheritdoc cref = "ICatMasterRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.master</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</a>
+		/// </summary>
 		public Task<CatResponse<CatMasterRecord>> MasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector = null, CancellationToken ct = default) => MasterAsync(selector.InvokeOrDefault(new CatMasterDescriptor()), ct);
-		///<inheritdoc cref = "ICatMasterRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.master</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</a>
+		/// </summary>
 		public CatResponse<CatMasterRecord> Master(ICatMasterRequest request) => DoCat<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request);
-		///<inheritdoc cref = "ICatMasterRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.master</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</a>
+		/// </summary>
 		public Task<CatResponse<CatMasterRecord>> MasterAsync(ICatMasterRequest request, CancellationToken ct = default) => DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, ct);
-		///<inheritdoc cref = "ICatNodeAttributesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</a>
+		/// </summary>
 		public CatResponse<CatNodeAttributesRecord> NodeAttributes(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null) => NodeAttributes(selector.InvokeOrDefault(new CatNodeAttributesDescriptor()));
-		///<inheritdoc cref = "ICatNodeAttributesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</a>
+		/// </summary>
 		public Task<CatResponse<CatNodeAttributesRecord>> NodeAttributesAsync(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null, CancellationToken ct = default) => NodeAttributesAsync(selector.InvokeOrDefault(new CatNodeAttributesDescriptor()), ct);
-		///<inheritdoc cref = "ICatNodeAttributesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</a>
+		/// </summary>
 		public CatResponse<CatNodeAttributesRecord> NodeAttributes(ICatNodeAttributesRequest request) => DoCat<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request);
-		///<inheritdoc cref = "ICatNodeAttributesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</a>
+		/// </summary>
 		public Task<CatResponse<CatNodeAttributesRecord>> NodeAttributesAsync(ICatNodeAttributesRequest request, CancellationToken ct = default) => DoCatAsync<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request, ct);
-		///<inheritdoc cref = "ICatNodesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodes</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</a>
+		/// </summary>
 		public CatResponse<CatNodesRecord> Nodes(Func<CatNodesDescriptor, ICatNodesRequest> selector = null) => Nodes(selector.InvokeOrDefault(new CatNodesDescriptor()));
-		///<inheritdoc cref = "ICatNodesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodes</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</a>
+		/// </summary>
 		public Task<CatResponse<CatNodesRecord>> NodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null, CancellationToken ct = default) => NodesAsync(selector.InvokeOrDefault(new CatNodesDescriptor()), ct);
-		///<inheritdoc cref = "ICatNodesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodes</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</a>
+		/// </summary>
 		public CatResponse<CatNodesRecord> Nodes(ICatNodesRequest request) => DoCat<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request);
-		///<inheritdoc cref = "ICatNodesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.nodes</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</a>
+		/// </summary>
 		public Task<CatResponse<CatNodesRecord>> NodesAsync(ICatNodesRequest request, CancellationToken ct = default) => DoCatAsync<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request, ct);
-		///<inheritdoc cref = "ICatPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</a>
+		/// </summary>
 		public CatResponse<CatPendingTasksRecord> PendingTasks(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null) => PendingTasks(selector.InvokeOrDefault(new CatPendingTasksDescriptor()));
-		///<inheritdoc cref = "ICatPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</a>
+		/// </summary>
 		public Task<CatResponse<CatPendingTasksRecord>> PendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null, CancellationToken ct = default) => PendingTasksAsync(selector.InvokeOrDefault(new CatPendingTasksDescriptor()), ct);
-		///<inheritdoc cref = "ICatPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</a>
+		/// </summary>
 		public CatResponse<CatPendingTasksRecord> PendingTasks(ICatPendingTasksRequest request) => DoCat<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request);
-		///<inheritdoc cref = "ICatPendingTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.pending_tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</a>
+		/// </summary>
 		public Task<CatResponse<CatPendingTasksRecord>> PendingTasksAsync(ICatPendingTasksRequest request, CancellationToken ct = default) => DoCatAsync<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, ct);
-		///<inheritdoc cref = "ICatPluginsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.plugins</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</a>
+		/// </summary>
 		public CatResponse<CatPluginsRecord> Plugins(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null) => Plugins(selector.InvokeOrDefault(new CatPluginsDescriptor()));
-		///<inheritdoc cref = "ICatPluginsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.plugins</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</a>
+		/// </summary>
 		public Task<CatResponse<CatPluginsRecord>> PluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null, CancellationToken ct = default) => PluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()), ct);
-		///<inheritdoc cref = "ICatPluginsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.plugins</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</a>
+		/// </summary>
 		public CatResponse<CatPluginsRecord> Plugins(ICatPluginsRequest request) => DoCat<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request);
-		///<inheritdoc cref = "ICatPluginsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.plugins</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</a>
+		/// </summary>
 		public Task<CatResponse<CatPluginsRecord>> PluginsAsync(ICatPluginsRequest request, CancellationToken ct = default) => DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, ct);
-		///<inheritdoc cref = "ICatRecoveryRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.recovery</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</a>
+		/// </summary>
 		public CatResponse<CatRecoveryRecord> Recovery(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null) => Recovery(selector.InvokeOrDefault(new CatRecoveryDescriptor()));
-		///<inheritdoc cref = "ICatRecoveryRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.recovery</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</a>
+		/// </summary>
 		public Task<CatResponse<CatRecoveryRecord>> RecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null, CancellationToken ct = default) => RecoveryAsync(selector.InvokeOrDefault(new CatRecoveryDescriptor()), ct);
-		///<inheritdoc cref = "ICatRecoveryRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.recovery</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</a>
+		/// </summary>
 		public CatResponse<CatRecoveryRecord> Recovery(ICatRecoveryRequest request) => DoCat<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request);
-		///<inheritdoc cref = "ICatRecoveryRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.recovery</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</a>
+		/// </summary>
 		public Task<CatResponse<CatRecoveryRecord>> RecoveryAsync(ICatRecoveryRequest request, CancellationToken ct = default) => DoCatAsync<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request, ct);
-		///<inheritdoc cref = "ICatRepositoriesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.repositories</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</a>
+		/// </summary>
 		public CatResponse<CatRepositoriesRecord> Repositories(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null) => Repositories(selector.InvokeOrDefault(new CatRepositoriesDescriptor()));
-		///<inheritdoc cref = "ICatRepositoriesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.repositories</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</a>
+		/// </summary>
 		public Task<CatResponse<CatRepositoriesRecord>> RepositoriesAsync(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null, CancellationToken ct = default) => RepositoriesAsync(selector.InvokeOrDefault(new CatRepositoriesDescriptor()), ct);
-		///<inheritdoc cref = "ICatRepositoriesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.repositories</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</a>
+		/// </summary>
 		public CatResponse<CatRepositoriesRecord> Repositories(ICatRepositoriesRequest request) => DoCat<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request);
-		///<inheritdoc cref = "ICatRepositoriesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.repositories</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</a>
+		/// </summary>
 		public Task<CatResponse<CatRepositoriesRecord>> RepositoriesAsync(ICatRepositoriesRequest request, CancellationToken ct = default) => DoCatAsync<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request, ct);
-		///<inheritdoc cref = "ICatSegmentsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.segments</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</a>
+		/// </summary>
 		public CatResponse<CatSegmentsRecord> Segments(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null) => Segments(selector.InvokeOrDefault(new CatSegmentsDescriptor()));
-		///<inheritdoc cref = "ICatSegmentsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.segments</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</a>
+		/// </summary>
 		public Task<CatResponse<CatSegmentsRecord>> SegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null, CancellationToken ct = default) => SegmentsAsync(selector.InvokeOrDefault(new CatSegmentsDescriptor()), ct);
-		///<inheritdoc cref = "ICatSegmentsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.segments</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</a>
+		/// </summary>
 		public CatResponse<CatSegmentsRecord> Segments(ICatSegmentsRequest request) => DoCat<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request);
-		///<inheritdoc cref = "ICatSegmentsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.segments</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</a>
+		/// </summary>
 		public Task<CatResponse<CatSegmentsRecord>> SegmentsAsync(ICatSegmentsRequest request, CancellationToken ct = default) => DoCatAsync<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request, ct);
-		///<inheritdoc cref = "ICatShardsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</a>
+		/// </summary>
 		public CatResponse<CatShardsRecord> Shards(Func<CatShardsDescriptor, ICatShardsRequest> selector = null) => Shards(selector.InvokeOrDefault(new CatShardsDescriptor()));
-		///<inheritdoc cref = "ICatShardsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</a>
+		/// </summary>
 		public Task<CatResponse<CatShardsRecord>> ShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null, CancellationToken ct = default) => ShardsAsync(selector.InvokeOrDefault(new CatShardsDescriptor()), ct);
-		///<inheritdoc cref = "ICatShardsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</a>
+		/// </summary>
 		public CatResponse<CatShardsRecord> Shards(ICatShardsRequest request) => DoCat<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request);
-		///<inheritdoc cref = "ICatShardsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.shards</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</a>
+		/// </summary>
 		public Task<CatResponse<CatShardsRecord>> ShardsAsync(ICatShardsRequest request, CancellationToken ct = default) => DoCatAsync<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request, ct);
-		///<inheritdoc cref = "ICatSnapshotsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.snapshots</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</a>
+		/// </summary>
 		public CatResponse<CatSnapshotsRecord> Snapshots(Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null) => Snapshots(selector.InvokeOrDefault(new CatSnapshotsDescriptor()));
-		///<inheritdoc cref = "ICatSnapshotsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.snapshots</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</a>
+		/// </summary>
 		public Task<CatResponse<CatSnapshotsRecord>> SnapshotsAsync(Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null, CancellationToken ct = default) => SnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor()), ct);
-		///<inheritdoc cref = "ICatSnapshotsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.snapshots</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</a>
+		/// </summary>
 		public CatResponse<CatSnapshotsRecord> Snapshots(ICatSnapshotsRequest request) => DoCat<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request);
-		///<inheritdoc cref = "ICatSnapshotsRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.snapshots</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</a>
+		/// </summary>
 		public Task<CatResponse<CatSnapshotsRecord>> SnapshotsAsync(ICatSnapshotsRequest request, CancellationToken ct = default) => DoCatAsync<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request, ct);
-		///<inheritdoc cref = "ICatTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</a>
+		/// </summary>
 		public CatResponse<CatTasksRecord> Tasks(Func<CatTasksDescriptor, ICatTasksRequest> selector = null) => Tasks(selector.InvokeOrDefault(new CatTasksDescriptor()));
-		///<inheritdoc cref = "ICatTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</a>
+		/// </summary>
 		public Task<CatResponse<CatTasksRecord>> TasksAsync(Func<CatTasksDescriptor, ICatTasksRequest> selector = null, CancellationToken ct = default) => TasksAsync(selector.InvokeOrDefault(new CatTasksDescriptor()), ct);
-		///<inheritdoc cref = "ICatTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</a>
+		/// </summary>
 		public CatResponse<CatTasksRecord> Tasks(ICatTasksRequest request) => DoCat<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(request);
-		///<inheritdoc cref = "ICatTasksRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.tasks</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</a>
+		/// </summary>
 		public Task<CatResponse<CatTasksRecord>> TasksAsync(ICatTasksRequest request, CancellationToken ct = default) => DoCatAsync<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(request, ct);
-		///<inheritdoc cref = "ICatTemplatesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.templates</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</a>
+		/// </summary>
 		public CatResponse<CatTemplatesRecord> Templates(Func<CatTemplatesDescriptor, ICatTemplatesRequest> selector = null) => Templates(selector.InvokeOrDefault(new CatTemplatesDescriptor()));
-		///<inheritdoc cref = "ICatTemplatesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.templates</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</a>
+		/// </summary>
 		public Task<CatResponse<CatTemplatesRecord>> TemplatesAsync(Func<CatTemplatesDescriptor, ICatTemplatesRequest> selector = null, CancellationToken ct = default) => TemplatesAsync(selector.InvokeOrDefault(new CatTemplatesDescriptor()), ct);
-		///<inheritdoc cref = "ICatTemplatesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.templates</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</a>
+		/// </summary>
 		public CatResponse<CatTemplatesRecord> Templates(ICatTemplatesRequest request) => DoCat<ICatTemplatesRequest, CatTemplatesRequestParameters, CatTemplatesRecord>(request);
-		///<inheritdoc cref = "ICatTemplatesRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.templates</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</a>
+		/// </summary>
 		public Task<CatResponse<CatTemplatesRecord>> TemplatesAsync(ICatTemplatesRequest request, CancellationToken ct = default) => DoCatAsync<ICatTemplatesRequest, CatTemplatesRequestParameters, CatTemplatesRecord>(request, ct);
-		///<inheritdoc cref = "ICatThreadPoolRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.thread_pool</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</a>
+		/// </summary>
 		public CatResponse<CatThreadPoolRecord> ThreadPool(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null) => ThreadPool(selector.InvokeOrDefault(new CatThreadPoolDescriptor()));
-		///<inheritdoc cref = "ICatThreadPoolRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.thread_pool</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</a>
+		/// </summary>
 		public Task<CatResponse<CatThreadPoolRecord>> ThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null, CancellationToken ct = default) => ThreadPoolAsync(selector.InvokeOrDefault(new CatThreadPoolDescriptor()), ct);
-		///<inheritdoc cref = "ICatThreadPoolRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.thread_pool</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</a>
+		/// </summary>
 		public CatResponse<CatThreadPoolRecord> ThreadPool(ICatThreadPoolRequest request) => DoCat<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request);
-		///<inheritdoc cref = "ICatThreadPoolRequest"/>
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.thread_pool</c> API, read more about this API online:
+		/// <para> </para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</a>
+		/// </summary>
 		public Task<CatResponse<CatThreadPoolRecord>> ThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken ct = default) => DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, ct);
 	}
 }
