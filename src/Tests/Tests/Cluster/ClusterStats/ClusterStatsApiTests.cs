@@ -28,6 +28,10 @@ namespace Tests.Cluster.ClusterStats
 		protected override void ExpectResponse(IClusterStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+
+			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+				response.ClusterUUID.Should().NotBeNullOrWhiteSpace();
+
 			response.NodeStatistics.Should().NotBeNull();
 			response.Status.Should().NotBe(ClusterStatus.Red);
 			response.Timestamp.Should().BeGreaterThan(0);
@@ -66,6 +70,12 @@ namespace Tests.Cluster.ClusterStats
 			nodes.OperatingSystem.AllocatedProcessors.Should().BeGreaterThan(0);
 
 			nodes.OperatingSystem.Names.Should().NotBeEmpty();
+
+			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+			{
+				nodes.OperatingSystem.Memory.Should().NotBeNull();
+				nodes.OperatingSystem.PrettyNames.Should().NotBeNull();
+			}
 
 			var plugins = nodes.Plugins;
 			plugins.Should().NotBeEmpty();
