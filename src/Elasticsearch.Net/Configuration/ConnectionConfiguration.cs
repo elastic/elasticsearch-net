@@ -482,15 +482,13 @@ namespace Elasticsearch.Net
 			Assign(certificates, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Use the following certificate to authenticate all HTTP requests. You can also set them on individual
-		/// request using <see cref="RequestConfiguration.ClientCertificates" />
+		/// Use a <see cref="System.Security.Cryptography.X509Certificates.X509Certificate"/> to authenticate all HTTP requests. You can also set them on individual request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificate(X509Certificate certificate) =>
 			Assign(new X509Certificate2Collection { certificate }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Use the following certificate to authenticate all HTTP requests. You can also set them on individual
-		/// request using <see cref="RequestConfiguration.ClientCertificates" />
+		/// Use a file path to a certificate to authenticate all HTTP requests. You can also set them on individual request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificate(string certificatePath) =>
 			Assign(new X509Certificate2Collection { new X509Certificate(certificatePath) }, (a, v) => a._clientCertificates = v);
