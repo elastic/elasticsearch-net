@@ -55,8 +55,17 @@ namespace Nest
 
 	public class XPackFeatures
 	{
+		[JsonProperty("ccr")]
+		public XPackFeature Ccr { get; internal set; }
+
 		[JsonProperty("graph")]
 		public XPackFeature Graph { get; internal set; }
+
+		[JsonProperty("ilm")]
+		public XPackFeature Ilm { get; internal set; }
+
+		[JsonProperty("logstash")]
+		public XPackFeature Logstash { get; internal set; }
 
 		[JsonProperty("ml")]
 		public XPackFeature MachineLearning { get; internal set; }
@@ -64,8 +73,14 @@ namespace Nest
 		[JsonProperty("monitoring")]
 		public XPackFeature Monitoring { get; internal set; }
 
+		[JsonProperty("rollup")]
+		public XPackFeature Rollup { get; internal set; }
+
 		[JsonProperty("security")]
 		public XPackFeature Security { get; internal set; }
+
+		[JsonProperty("sql")]
+		public XPackFeature Sql { get; internal set; }
 
 		[JsonProperty("watcher")]
 		public XPackFeature Watcher { get; internal set; }
