@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ApiGenerator.Configuration;
 using ApiGenerator.Domain.Specification;
 
 namespace ApiGenerator.Domain.Code.HighLevel.Requests
@@ -24,7 +25,8 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		public static IEnumerable<Constructor> RequestConstructors(CsharpNames names, UrlInformation url, bool inheritsFromPlainRequestBase)
 		{
 			var generic = FirstGeneric(names.GenericsDeclaredOnRequest);
-			return GenerateConstructors(url, inheritsFromPlainRequestBase, !inheritsFromPlainRequestBase, names.RequestName, generic);
+			var generateGeneric = CodeConfiguration.GenericOnlyInterfaces.Contains(names.RequestInterfaceName) || !inheritsFromPlainRequestBase;
+			return GenerateConstructors(url, inheritsFromPlainRequestBase, generateGeneric, names.RequestName, generic);
 		}
 		
 		private static string FirstGeneric(string fullGenericString) => 

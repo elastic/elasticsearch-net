@@ -98,7 +98,9 @@ module Main =
 
         command "diff" [ "clean"; ] <| fun _ -> Differ.Run parsed
 
-        command "cluster" [ "restore"; "full-build" ] <| fun _ -> Cluster.Run parsed
+        command "cluster" [ "restore"; "full-build" ] <| fun _ -> ReposTooling.LaunchCluster parsed
+        
+        command "codegen" [ ] <| ReposTooling.GenerateApi 
 
         Targets.RunTargetsAndExit([parsed.Target], fun e -> e.GetType() = typeof<ProcExecException>)
 

@@ -161,5 +161,10 @@ namespace ApiGenerator.Domain.Code
 		public string GenericOrNonGenericInterfacePreference => CodeConfiguration.GenericOnlyInterfaces.Contains(RequestInterfaceName)
 			? GenericInterfaceName
 			: RequestInterfaceName;
+		
+		/// <summary> If matching Request.cs only defined generic interface make the client method only accept said interface </summary>
+		public string GenericOrNonGenericRequestPreference => CodeConfiguration.GenericOnlyInterfaces.Contains(RequestInterfaceName)
+			? GenericRequestName
+			: RequestName;
 	}
 }

@@ -21,6 +21,7 @@ module Projects =
     type PrivateProject =
         | Tests
         | DocGenerator
+        | ApiGenerator
         
     type DependencyProject = 
         | JsonNet 
@@ -65,6 +66,7 @@ module Projects =
             | Project NestJsonNetSerializer -> "Nest.JsonNetSerializer"
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
+            | PrivateProject ApiGenerator -> "ApiGenerator"
             | DepencyProject JsonNet -> "Newtonsoft.Json"
  
         member this.NugetId =

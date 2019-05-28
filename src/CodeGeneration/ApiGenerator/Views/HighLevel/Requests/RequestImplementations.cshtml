@@ -10,13 +10,13 @@
 @{
 	RequestPartialImplementation r = Model;
 	CsharpNames names = r.CsharpNames;
+	var apiLookup = $"ApiUrlsLookups.{r.CsharpNames.Namespace}{r.CsharpNames.MethodName}";
 }
 	///<summary>Request for @names.MethodName <pre>@r.OfficialDocumentationLink</pre></summary>
-	public partial class @Raw(names.RequestName) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, names.RequestInterfaceName))
+	public partial class @Raw(r.Name) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, r.InterfaceName))
 	{
-		protected @(Raw(names.RequestInterfaceName)) Self => this;
-		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", r.Paths.Select(p=>$"\"{p.Path.TrimStart('/')}\"")))});
-		internal override ApiUrls ApiUrls => Urls;
+		protected @(Raw(r.InterfaceName)) Self => this;
+		internal override ApiUrls ApiUrls => @apiLookup;
 @foreach (Constructor c in r.Constructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
@@ -26,7 +26,7 @@
 @foreach (var part in r.Parts)
 {
 <text>		[IgnoreDataMember]
-		@(Raw(part.ClrTypeName)) @(Raw(names.RequestInterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+		@(Raw(part.ClrTypeName)) @(Raw(r.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
 </text>
 }
 
@@ -54,7 +54,7 @@
 </text>
 }
 	}
-@if (!string.IsNullOrWhiteSpace(names.GenericsDeclaredOnRequest))
+@if (r.NeedsGenericImplementation)
 	{<text>
 	public partial class @Raw(names.GenericRequestName) @Raw(string.Format(": {0}, {1}", names.RequestName, names.GenericInterfaceName))
 	{

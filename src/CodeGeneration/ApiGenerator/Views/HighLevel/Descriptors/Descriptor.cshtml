@@ -12,11 +12,13 @@
 	var names = d.CsharpNames;
 	var type = names.GenericOrNonGenericDescriptorName;
 	var concreteInterface = names.GenericOrNonGenericInterfaceName;
+	var baseInterface = names.GenericOrNonGenericInterfacePreference;
+	var apiLookup = $"ApiUrlsLookups.{d.CsharpNames.Namespace}{d.CsharpNames.MethodName}";
 }
 	///<summary>descriptor for @names.MethodName <pre>@d.OfficialDocumentationLink</pre></summary>
 	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type,names.ParametersName, concreteInterface)))
 	{ 
-		internal override ApiUrls ApiUrls => @(Raw(names.RequestName)).Urls;
+		internal override ApiUrls ApiUrls => @apiLookup;
 @foreach (Constructor c in d.Constructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
@@ -25,7 +27,7 @@
 		// values part of the url path
 @foreach (UrlPart part in d.Parts)
 {
-<text>		@(Raw(part.ClrTypeName)) @(Raw(names.RequestInterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
+<text>		@(Raw(part.ClrTypeName)) @(Raw(baseInterface)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
 </text>
 }
 @foreach (FluentRouteSetter c in d.GetFluentRouteSetters())

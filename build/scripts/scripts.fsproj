@@ -17,7 +17,7 @@
     <Compile Include="XmlDocPatcher.fs" />
     <Compile Include="Building.fs" />
     <Compile Include="ShadowDependencies.fs" />
-    <Compile Include="Cluster.fs" />
+    <Compile Include="ReposTooling.fs" />
     <Compile Include="Differ.fs" />
     <Compile Include="Testing.fs" />
     <Compile Include="Documentation.fs" />

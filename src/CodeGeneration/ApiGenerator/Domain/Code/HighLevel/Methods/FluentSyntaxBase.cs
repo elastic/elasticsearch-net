@@ -9,7 +9,8 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 	{
 		private readonly bool _selectorIsOptional;
 
-		protected FluentSyntaxBase(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional) : base(names) =>
+		protected FluentSyntaxBase(CsharpNames names, IReadOnlyCollection<UrlPart> parts, bool selectorIsOptional, string link, string summary) 
+			: base(names, link, summary) =>
 			(UrlParts, _selectorIsOptional) = (CreateDescriptorArgs(parts), selectorIsOptional);
 
 		private IReadOnlyCollection<UrlPart> UrlParts { get; }

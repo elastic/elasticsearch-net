@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest
+	public partial interface IUpdateRequest<TDocument, TPartialDocument> 
 		where TDocument : class
 		where TPartialDocument : class
 	{

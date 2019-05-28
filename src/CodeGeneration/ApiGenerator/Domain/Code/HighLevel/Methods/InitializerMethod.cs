@@ -5,7 +5,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 {
 	public class InitializerMethod : MethodSyntaxBase
 	{
-		public InitializerMethod(CsharpNames names) : base(names) { }
+		public InitializerMethod(CsharpNames names, string link, string summary) : base(names, link, summary) { }
 
 		public string MethodName => CsharpNames.MethodName;
 

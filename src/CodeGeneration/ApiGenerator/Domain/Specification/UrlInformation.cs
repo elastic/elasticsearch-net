@@ -9,8 +9,6 @@ namespace ApiGenerator.Domain.Specification
 	// ReSharper disable once ClassNeverInstantiated.Global
 	public class UrlInformation
 	{
-		public CsharpNames CsharpNames { get; set; }
-		
 		public IDictionary<string, QueryParameters> Params { get; set; } = new SortedDictionary<string, QueryParameters>();
 
 		[JsonProperty("paths")]

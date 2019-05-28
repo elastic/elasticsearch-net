@@ -15,22 +15,22 @@
 	var initializerPath = "HighLevel/Client/InitializerSyntax/InitializerMethodHeader.cshtml";
 }
 
-///<inheritdoc cref="@(model.Fluent.DocumentationCref)" />
+@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Fluent); }
 @{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); };
-///<inheritdoc cref="@(model.Fluent.DocumentationCref)" />
+@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Fluent); }
 @{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); };
 
 @if (model.FluentBound != null)
 {
 <text>
-	///<inheritdoc cref="@(model.FluentBound.DocumentationCref)" />
+	@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.FluentBound); }
 	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); };
-	///<inheritdoc cref="@(model.FluentBound.DocumentationCref)" />
+	@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.FluentBound); }
 	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); };
 </text>
 }
-///<inheritdoc cref="@(model.Initializer.DocumentationCref)" />
+@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Initializer); }
 @{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); };
-///<inheritdoc cref="@(model.Initializer.DocumentationCref)" />
+@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Initializer); }
 @{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); };
 
