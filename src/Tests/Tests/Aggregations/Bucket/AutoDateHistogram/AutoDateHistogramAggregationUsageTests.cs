@@ -36,6 +36,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 				auto_date_histogram = new
 				{
 					field = "startedOn",
+					buckets = 10,
 					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
 					missing = FixedDate
 				},
@@ -62,6 +63,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.AutoDateHistogram("projects_started_per_month", date => date
 				.Field(p => p.StartedOn)
+				.Buckets(10)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.Missing(FixedDate)
 				.Aggregations(childAggs => childAggs
@@ -78,6 +80,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 			new AutoDateHistogramAggregation("projects_started_per_month")
 			{
 				Field = Field<Project>(p => p.StartedOn),
+				Buckets = 10,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				Missing = FixedDate,
 				Aggregations = new NestedAggregation("project_tags")
