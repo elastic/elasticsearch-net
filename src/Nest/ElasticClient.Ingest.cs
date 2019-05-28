@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.IngestApi;
 namespace Nest.Specification.IngestApi
 {
 	///<summary>
-	/// Logically groups all Ingest API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Ingest</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Ingest"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

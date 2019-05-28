@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.WatcherApi;
 namespace Nest.Specification.WatcherApi
 {
 	///<summary>
-	/// Logically groups all Watcher API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Watcher</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Watcher"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

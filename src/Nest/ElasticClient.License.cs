@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.LicenseApi;
 namespace Nest.Specification.LicenseApi
 {
 	///<summary>
-	/// Logically groups all License API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>License</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.License"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

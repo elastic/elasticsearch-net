@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 namespace Nest.Specification.IndexLifecycleManagementApi
 {
 	///<summary>
-	/// Logically groups all IndexLifecycleManagement API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>IndexLifecycleManagement</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.IndexLifecycleManagement"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

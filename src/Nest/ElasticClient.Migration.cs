@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.MigrationApi;
 namespace Nest.Specification.MigrationApi
 {
 	///<summary>
-	/// Logically groups all Migration API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Migration</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Migration"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

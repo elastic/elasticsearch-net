@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.ClusterApi;
 namespace Nest.Specification.ClusterApi
 {
 	///<summary>
-	/// Logically groups all Cluster API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Cluster</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Cluster"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

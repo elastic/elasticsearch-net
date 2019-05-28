@@ -31,7 +31,8 @@ namespace Nest
 </text>
 	foreach (var ns in namespaces)
 	{
-<text>		public @(CsharpNames.HighLevelClientNamespacePrefix)@(ns)@(CsharpNames.ClientNamespaceSuffix) @ns { get; private set; } 
+<text>		///<summary> This property logically groups all <c>@ns</c> API's together.</summary>
+			public @CsharpNames.HighLevelClientNamespacePrefix@(ns)@CsharpNames.ClientNamespaceSuffix @ns { get; }
 </text>
 	}
 <text>

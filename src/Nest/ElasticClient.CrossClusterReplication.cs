@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 namespace Nest.Specification.CrossClusterReplicationApi
 {
 	///<summary>
-	/// Logically groups all CrossClusterReplication API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>CrossClusterReplication</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.CrossClusterReplication"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

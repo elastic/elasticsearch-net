@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.NodesApi;
 namespace Nest.Specification.NodesApi
 {
 	///<summary>
-	/// Logically groups all Nodes API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Nodes</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Nodes"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

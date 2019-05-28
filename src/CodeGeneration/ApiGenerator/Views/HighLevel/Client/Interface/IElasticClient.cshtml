@@ -23,7 +23,8 @@ namespace Nest
 		{
 		if (kv.Key != CsharpNames.RootNamespace)
 		{
-<text>		@CsharpNames.HighLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
+<text>		///<summary> This property logically groups all <c>@kv.Key</c> API's together.</summary>
+			@CsharpNames.HighLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
 </text>
 			continue;
 		}

@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.GraphApi;
 namespace Nest.Specification.GraphApi
 {
 	///<summary>
-	/// Logically groups all Graph API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Graph</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Graph"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

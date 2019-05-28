@@ -46,56 +46,67 @@ namespace Nest
 	///</summary>
 	public partial interface IElasticClient
 	{
+		///<summary> This property logically groups all <c>Cat</c> API's together.</summary>
 		CatNamespace Cat
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Cluster</c> API's together.</summary>
 		ClusterNamespace Cluster
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>CrossClusterReplication</c> API's together.</summary>
 		CrossClusterReplicationNamespace CrossClusterReplication
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Graph</c> API's together.</summary>
 		GraphNamespace Graph
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>IndexLifecycleManagement</c> API's together.</summary>
 		IndexLifecycleManagementNamespace IndexLifecycleManagement
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Indices</c> API's together.</summary>
 		IndicesNamespace Indices
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Ingest</c> API's together.</summary>
 		IngestNamespace Ingest
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>License</c> API's together.</summary>
 		LicenseNamespace License
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>MachineLearning</c> API's together.</summary>
 		MachineLearningNamespace MachineLearning
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Migration</c> API's together.</summary>
 		MigrationNamespace Migration
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Nodes</c> API's together.</summary>
 		NodesNamespace Nodes
 		{
 			get;
@@ -1037,36 +1048,43 @@ namespace Nest
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</a>
 		/// </summary>
 		Task<ListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request, CancellationToken ct = default);
+		///<summary> This property logically groups all <c>Rollup</c> API's together.</summary>
 		RollupNamespace Rollup
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Security</c> API's together.</summary>
 		SecurityNamespace Security
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Snapshot</c> API's together.</summary>
 		SnapshotNamespace Snapshot
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Sql</c> API's together.</summary>
 		SqlNamespace Sql
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Tasks</c> API's together.</summary>
 		TasksNamespace Tasks
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>Watcher</c> API's together.</summary>
 		WatcherNamespace Watcher
 		{
 			get;
 		}
 
+		///<summary> This property logically groups all <c>XPack</c> API's together.</summary>
 		XPackNamespace XPack
 		{
 			get;

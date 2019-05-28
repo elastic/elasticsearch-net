@@ -30,6 +30,8 @@ namespace Tests.ScratchPad
 			//lowLevel.Indices.Create<String>()
 			//lowLevel.Security.
 			
+			var highLevel = new ElasticClient();
+			
 			
 			highLevel.IndexLifecycleManagement.PutLifecycle(new PutLifecycleRequest("policy")
 			{

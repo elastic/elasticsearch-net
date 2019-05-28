@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.SqlApi;
 namespace Nest.Specification.SqlApi
 {
 	///<summary>
-	/// Logically groups all Sql API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Sql</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Sql"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

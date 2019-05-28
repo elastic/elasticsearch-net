@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 namespace Nest.Specification.SnapshotApi
 {
 	///<summary>
-	/// Logically groups all Snapshot API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Snapshot</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Snapshot"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

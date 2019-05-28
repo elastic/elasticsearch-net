@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.SecurityApi;
 namespace Nest.Specification.SecurityApi
 {
 	///<summary>
-	/// Logically groups all Security API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>Security</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.Security"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

@@ -23,7 +23,7 @@ using Elasticsearch.Net.Specification.XPackApi;
 namespace Nest.Specification.XPackApi
 {
 	///<summary>
-	/// Logically groups all XPack API's together so that they may be discovered more naturally.
+	/// Logically groups all <c>XPack</c> API's together so that they may be discovered more naturally.
 	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticClient.XPack"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>
