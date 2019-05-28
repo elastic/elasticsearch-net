@@ -1,5 +1,8 @@
 using System;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using CsQuery.ExtensionMethods.Internal;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 
 namespace ApiGenerator.Domain 
 {
@@ -7,20 +10,47 @@ namespace ApiGenerator.Domain
 	{
 		public CsharpNames(string name, string endpointMethodName, string endpointNamespace)
 		{
-			Namespace = endpointNamespace.ToPascalCase();
+			Namespace = CreateCSharpNamespace(endpointNamespace);
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(name, out var mapsApiMethodName))
-				MethodName = mapsApiMethodName;
-			else MethodName = $"{Namespace}{endpointMethodName.ToPascalCase()}";
+				ApiName = mapsApiMethodName;
+			else ApiName = endpointMethodName.ToPascalCase();
+
+			//if the api name starts with the namespace do not repeat it in the method name
+			MethodName = Regex.Replace(ApiName, $"^{Namespace}(\\w+)$", "$1");
 		}
 
 		/// <summary> Pascal cased version of the namespace from the specification </summary>
-		public string Namespace { get; set; }
+		public string Namespace { get; private set; }
 
 		/// <summary>
 		/// The pascal cased method name as loaded by <see cref="ApiEndpointFactory.FromFile"/>
 		/// <pre>Uses <see cref="CodeConfiguration.ApiNameMapping"/> mapping of request implementations in the nest code base</pre>
 		/// </summary>
-		public string MethodName { get; set; }
+		public string MethodName { get; private set; }
+		
+		public string ApiName { get; private set; }
+		
+		public string RequestName => $"{ApiName}Request";
+		public string InterfaceName => $"I{RequestName}";
+		public string ParametersName => $"{RequestName}Parameters";
+		public string DescriptorName => $"{ApiName}Descriptor";
+
+		public const string RootNamespace = "NoNamespace";
+		private static string CreateCSharpNamespace(string endpointNamespace)
+		{
+			switch (endpointNamespace)
+			{
+				case null:
+				case "": return RootNamespace;
+				// SSL namespace most likely removed, no need to introduce it
+				// https://github.com/elastic/elasticsearch/issues/41845
+				case "ssl": return "Security"; 
+				case "ilm": return "IndexLifecycleManagement";
+				case "ccr": return "CrossClusterReplication";
+				case "ml": return "MachineLearning";
+				default: return endpointNamespace.ToPascalCase(); 
+			}
+		}
 		
 		public string PerPathMethodName(string path)
 		{
@@ -33,17 +63,9 @@ namespace ApiGenerator.Domain
 			if (ms("Nodes") && !pc("{node_id}"))
 				return (MethodName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
 
-			//temporary to maintain old behavior before we introduce namespaces
-			if (!string.IsNullOrWhiteSpace(Namespace) && !MethodName.StartsWith(Namespace))
-				return Namespace + MethodName;
-
 			return MethodName;
 		}
-		
-		public string RequestName => $"{MethodName}Request";
-		public string InterfaceName => $"I{RequestName}";
-		public string ParametersName => $"{RequestName}Parameters";
-		public string DescriptorName => $"{MethodName}Descriptor";
+
 		
 		public string GenericsDeclaredOnRequest => 
 			CodeConfiguration.RequestInterfaceGenericsLookup.TryGetValue(InterfaceName, out var requestGeneric) ? requestGeneric : null;

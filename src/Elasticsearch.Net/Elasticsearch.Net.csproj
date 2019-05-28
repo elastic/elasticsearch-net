@@ -13,6 +13,12 @@
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.4.0" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ElasticLowLevelClient.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ElasticLowLevelClient.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
   <!-- from Utf8Json -->
   <ItemGroup>

@@ -172,7 +172,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+	///<summary>Request for Aliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
 		protected ICatAliasesRequest Self => this;
@@ -253,7 +253,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+	///<summary>Request for Allocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
 		protected ICatAllocationRequest Self => this;
@@ -341,7 +341,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
+	///<summary>Request for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
 		protected ICatCountRequest Self => this;
@@ -422,7 +422,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+	///<summary>Request for Fielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
 		protected ICatFielddataRequest Self => this;
@@ -505,7 +505,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+	///<summary>Request for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
 		protected ICatHealthRequest Self => this;
@@ -575,7 +575,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+	///<summary>Request for Help <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
 		protected ICatHelpRequest Self => this;
@@ -608,7 +608,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+	///<summary>Request for Indices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
 		protected ICatIndicesRequest Self => this;
@@ -705,7 +705,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+	///<summary>Request for Master <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
 		protected ICatMasterRequest Self => this;
@@ -768,7 +768,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatNodeAttributes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	///<summary>Request for NodeAttributes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
 		protected ICatNodeAttributesRequest Self => this;
@@ -831,7 +831,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+	///<summary>Request for Nodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
 		protected ICatNodesRequest Self => this;
@@ -901,7 +901,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+	///<summary>Request for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
 		protected ICatPendingTasksRequest Self => this;
@@ -964,7 +964,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+	///<summary>Request for Plugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
 		protected ICatPluginsRequest Self => this;
@@ -1032,7 +1032,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+	///<summary>Request for Recovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
 		protected ICatRecoveryRequest Self => this;
@@ -1108,7 +1108,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
+	///<summary>Request for Repositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
 		protected ICatRepositoriesRequest Self => this;
@@ -1176,7 +1176,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
+	///<summary>Request for Segments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
 		protected ICatSegmentsRequest Self => this;
@@ -1250,7 +1250,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+	///<summary>Request for Shards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
 		protected ICatShardsRequest Self => this;
@@ -1338,7 +1338,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
+	///<summary>Request for Snapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
 		protected ICatSnapshotsRequest Self => this;
@@ -1414,7 +1414,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request for Tasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
 		protected ICatTasksRequest Self => this;
@@ -1499,7 +1499,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	///<summary>Request for Templates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
 		protected ICatTemplatesRequest Self => this;
@@ -1580,7 +1580,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+	///<summary>Request for ThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
@@ -1973,7 +1973,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	///<summary>Request for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
@@ -2001,7 +2001,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>Request for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
@@ -2048,7 +2048,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	///<summary>Request for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
@@ -2145,7 +2145,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	///<summary>Request for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
 		protected IClusterPendingTasksRequest Self => this;
@@ -2173,7 +2173,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>Request for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
 		protected IClusterPutSettingsRequest Self => this;
@@ -2223,7 +2223,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	///<summary>Request for Reroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		protected IClusterRerouteRequest Self => this;
@@ -2290,7 +2290,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	///<summary>Request for State <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		protected IClusterStateRequest Self => this;
@@ -2390,7 +2390,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	///<summary>Request for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
 		protected IClusterStatsRequest Self => this;
@@ -4108,7 +4108,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>Request for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
@@ -6734,7 +6734,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for IndicesShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	///<summary>Request for ShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
 		protected IIndicesShardStoresRequest Self => this;
@@ -6929,7 +6929,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for IndicesStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+	///<summary>Request for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		protected IIndicesStatsRequest Self => this;
@@ -7720,7 +7720,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MigrationAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>Request for Assistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 	{
 		protected IMigrationAssistanceRequest Self => this;
@@ -7776,7 +7776,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>Request for Upgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 	{
 		protected IMigrationUpgradeRequest Self => this;
@@ -8832,7 +8832,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for MachineLearningInfo <pre></pre></summary>
+	///<summary>Request for Info <pre></pre></summary>
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
 		protected IMachineLearningInfoRequest Self => this;
@@ -9753,7 +9753,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for NodesHotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+	///<summary>Request for HotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		protected INodesHotThreadsRequest Self => this;
@@ -9833,7 +9833,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for NodesInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+	///<summary>Request for Info <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		protected INodesInfoRequest Self => this;
@@ -9945,7 +9945,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for NodesStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+	///<summary>Request for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		protected INodesStatsRequest Self => this;
@@ -10071,7 +10071,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for NodesUsage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	///<summary>Request for Usage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
 		protected INodesUsageRequest Self => this;
@@ -10510,7 +10510,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for RollupSearch <pre></pre></summary>
+	///<summary>Request for Search <pre></pre></summary>
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
 		protected IRollupSearchRequest Self => this;
@@ -12427,7 +12427,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>Request for Status <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
 		protected ISnapshotStatusRequest Self => this;
@@ -13727,7 +13727,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for WatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
+	///<summary>Request for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;

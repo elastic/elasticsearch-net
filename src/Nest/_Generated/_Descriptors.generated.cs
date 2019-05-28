@@ -78,7 +78,7 @@ namespace Nest
 		public BulkDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+	///<summary>descriptor for Aliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor : RequestDescriptorBase<CatAliasesDescriptor, CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{
 		internal override ApiUrls ApiUrls => CatAliasesRequest.Urls;
@@ -114,7 +114,7 @@ namespace Nest
 		public CatAliasesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+	///<summary>descriptor for Allocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor : RequestDescriptorBase<CatAllocationDescriptor, CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{
 		internal override ApiUrls ApiUrls => CatAllocationRequest.Urls;
@@ -152,7 +152,7 @@ namespace Nest
 		public CatAllocationDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
+	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor : RequestDescriptorBase<CatCountDescriptor, CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{
 		internal override ApiUrls ApiUrls => CatCountRequest.Urls;
@@ -193,7 +193,7 @@ namespace Nest
 		public CatCountDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+	///<summary>descriptor for Fielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor : RequestDescriptorBase<CatFielddataDescriptor, CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{
 		internal override ApiUrls ApiUrls => CatFielddataRequest.Urls;
@@ -233,7 +233,7 @@ namespace Nest
 		public CatFielddataDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+	///<summary>descriptor for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthDescriptor : RequestDescriptorBase<CatHealthDescriptor, CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
 	{
 		internal override ApiUrls ApiUrls => CatHealthRequest.Urls;
@@ -257,7 +257,7 @@ namespace Nest
 		public CatHealthDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+	///<summary>descriptor for Help <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpDescriptor : RequestDescriptorBase<CatHelpDescriptor, CatHelpRequestParameters, ICatHelpRequest>, ICatHelpRequest
 	{
 		internal override ApiUrls ApiUrls => CatHelpRequest.Urls;
@@ -269,7 +269,7 @@ namespace Nest
 		public CatHelpDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 	}
 
-	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+	///<summary>descriptor for Indices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor : RequestDescriptorBase<CatIndicesDescriptor, CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{
 		internal override ApiUrls ApiUrls => CatIndicesRequest.Urls;
@@ -316,7 +316,7 @@ namespace Nest
 		public CatIndicesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+	///<summary>descriptor for Master <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterDescriptor : RequestDescriptorBase<CatMasterDescriptor, CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
 	{
 		internal override ApiUrls ApiUrls => CatMasterRequest.Urls;
@@ -338,7 +338,7 @@ namespace Nest
 		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatNodeAttributes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	///<summary>descriptor for NodeAttributes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesDescriptor : RequestDescriptorBase<CatNodeAttributesDescriptor, CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{
 		internal override ApiUrls ApiUrls => CatNodeAttributesRequest.Urls;
@@ -360,7 +360,7 @@ namespace Nest
 		public CatNodeAttributesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+	///<summary>descriptor for Nodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesDescriptor : RequestDescriptorBase<CatNodesDescriptor, CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
 	{
 		internal override ApiUrls ApiUrls => CatNodesRequest.Urls;
@@ -384,7 +384,7 @@ namespace Nest
 		public CatNodesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+	///<summary>descriptor for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksDescriptor : RequestDescriptorBase<CatPendingTasksDescriptor, CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
 	{
 		internal override ApiUrls ApiUrls => CatPendingTasksRequest.Urls;
@@ -406,7 +406,7 @@ namespace Nest
 		public CatPendingTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+	///<summary>descriptor for Plugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsDescriptor : RequestDescriptorBase<CatPluginsDescriptor, CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
 	{
 		internal override ApiUrls ApiUrls => CatPluginsRequest.Urls;
@@ -428,7 +428,7 @@ namespace Nest
 		public CatPluginsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+	///<summary>descriptor for Recovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor : RequestDescriptorBase<CatRecoveryDescriptor, CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{
 		internal override ApiUrls ApiUrls => CatRecoveryRequest.Urls;
@@ -469,7 +469,7 @@ namespace Nest
 		public CatRecoveryDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
+	///<summary>descriptor for Repositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public partial class CatRepositoriesDescriptor : RequestDescriptorBase<CatRepositoriesDescriptor, CatRepositoriesRequestParameters, ICatRepositoriesRequest>, ICatRepositoriesRequest
 	{
 		internal override ApiUrls ApiUrls => CatRepositoriesRequest.Urls;
@@ -491,7 +491,7 @@ namespace Nest
 		public CatRepositoriesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
+	///<summary>descriptor for Segments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor : RequestDescriptorBase<CatSegmentsDescriptor, CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{
 		internal override ApiUrls ApiUrls => CatSegmentsRequest.Urls;
@@ -530,7 +530,7 @@ namespace Nest
 		public CatSegmentsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+	///<summary>descriptor for Shards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor : RequestDescriptorBase<CatShardsDescriptor, CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{
 		internal override ApiUrls ApiUrls => CatShardsRequest.Urls;
@@ -573,7 +573,7 @@ namespace Nest
 		public CatShardsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
+	///<summary>descriptor for Snapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsDescriptor : RequestDescriptorBase<CatSnapshotsDescriptor, CatSnapshotsRequestParameters, ICatSnapshotsRequest>, ICatSnapshotsRequest
 	{
 		internal override ApiUrls ApiUrls => CatSnapshotsRequest.Urls;
@@ -609,7 +609,7 @@ namespace Nest
 		public CatSnapshotsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>descriptor for Tasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CatTasksDescriptor : RequestDescriptorBase<CatTasksDescriptor, CatTasksRequestParameters, ICatTasksRequest>, ICatTasksRequest
 	{
 		internal override ApiUrls ApiUrls => CatTasksRequest.Urls;
@@ -635,7 +635,7 @@ namespace Nest
 		public CatTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	///<summary>descriptor for Templates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesDescriptor : RequestDescriptorBase<CatTemplatesDescriptor, CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
 	{
 		internal override ApiUrls ApiUrls => CatTemplatesRequest.Urls;
@@ -671,7 +671,7 @@ namespace Nest
 		public CatTemplatesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
-	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+	///<summary>descriptor for ThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor : RequestDescriptorBase<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{
 		internal override ApiUrls ApiUrls => CatThreadPoolRequest.Urls;
@@ -923,7 +923,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	///<summary>descriptor for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public partial class ClusterAllocationExplainDescriptor : RequestDescriptorBase<ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterAllocationExplainRequest.Urls;
@@ -935,7 +935,7 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
 	}
 
-	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterGetSettingsRequest.Urls;
@@ -951,7 +951,7 @@ namespace Nest
 		public ClusterGetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	///<summary>descriptor for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor : RequestDescriptorBase<ClusterHealthDescriptor, ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterHealthRequest.Urls;
@@ -998,7 +998,7 @@ namespace Nest
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 	}
 
-	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	///<summary>descriptor for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksDescriptor : RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterPendingTasksRequest.Urls;
@@ -1010,7 +1010,7 @@ namespace Nest
 		public ClusterPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsDescriptor : RequestDescriptorBase<ClusterPutSettingsDescriptor, ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterPutSettingsRequest.Urls;
@@ -1032,7 +1032,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	///<summary>descriptor for Reroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor : RequestDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterRerouteRequest.Urls;
@@ -1052,7 +1052,7 @@ namespace Nest
 		public ClusterRerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	///<summary>descriptor for State <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor : RequestDescriptorBase<ClusterStateDescriptor, ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterStateRequest.Urls;
@@ -1105,7 +1105,7 @@ namespace Nest
 		public ClusterStateDescriptor WaitForTimeout(Time waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 	}
 
-	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor : RequestDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ClusterStatsRequest.Urls;
@@ -1862,7 +1862,7 @@ namespace Nest
 		public SourceDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	}
 
-	///<summary>descriptor for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>descriptor for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T> : RequestDescriptorBase<GraphExploreDescriptor<T>, GraphExploreRequestParameters, IGraphExploreRequest<T>>, IGraphExploreRequest<T>
 	{
 		internal override ApiUrls ApiUrls => GraphExploreRequest.Urls;
@@ -3286,7 +3286,7 @@ namespace Nest
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
-	///<summary>descriptor for IndicesShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	///<summary>descriptor for ShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor : RequestDescriptorBase<IndicesShardStoresDescriptor, IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{
 		internal override ApiUrls ApiUrls => IndicesShardStoresRequest.Urls;
@@ -3389,7 +3389,7 @@ namespace Nest
 		public SplitIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	///<summary>descriptor for IndicesStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor : RequestDescriptorBase<IndicesStatsDescriptor, IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{
 		internal override ApiUrls ApiUrls => IndicesStatsRequest.Urls;
@@ -3809,7 +3809,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for MigrationAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>descriptor for Assistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public partial class MigrationAssistanceDescriptor : RequestDescriptorBase<MigrationAssistanceDescriptor, MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
 	{
 		internal override ApiUrls ApiUrls => MigrationAssistanceRequest.Urls;
@@ -3842,7 +3842,7 @@ namespace Nest
 		public MigrationAssistanceDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	///<summary>descriptor for MigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>descriptor for Upgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public partial class MigrationUpgradeDescriptor : RequestDescriptorBase<MigrationUpgradeDescriptor, MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
 	{
 		internal override ApiUrls ApiUrls => MigrationUpgradeRequest.Urls;
@@ -4462,7 +4462,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for MachineLearningInfo <pre></pre></summary>
+	///<summary>descriptor for Info <pre></pre></summary>
 	public partial class MachineLearningInfoDescriptor : RequestDescriptorBase<MachineLearningInfoDescriptor, MachineLearningInfoRequestParameters, IMachineLearningInfoRequest>, IMachineLearningInfoRequest
 	{
 		internal override ApiUrls ApiUrls => MachineLearningInfoRequest.Urls;
@@ -4968,7 +4968,7 @@ namespace Nest
 		public MultiTermVectorsDescriptor VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	}
 
-	///<summary>descriptor for NodesHotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+	///<summary>descriptor for HotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor : RequestDescriptorBase<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{
 		internal override ApiUrls ApiUrls => NodesHotThreadsRequest.Urls;
@@ -5002,7 +5002,7 @@ namespace Nest
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for NodesInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor : RequestDescriptorBase<NodesInfoDescriptor, NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{
 		internal override ApiUrls ApiUrls => NodesInfoRequest.Urls;
@@ -5068,7 +5068,7 @@ namespace Nest
 		public ReloadSecureSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for NodesStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor : RequestDescriptorBase<NodesStatsDescriptor, NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{
 		internal override ApiUrls ApiUrls => NodesStatsRequest.Urls;
@@ -5149,7 +5149,7 @@ namespace Nest
 		public NodesStatsDescriptor Types(params string[] types) => Qs("types", types);
 	}
 
-	///<summary>descriptor for NodesUsage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	///<summary>descriptor for Usage <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageDescriptor : RequestDescriptorBase<NodesUsageDescriptor, NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
 	{
 		internal override ApiUrls ApiUrls => NodesUsageRequest.Urls;
@@ -5411,7 +5411,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for RollupSearch <pre></pre></summary>
+	///<summary>descriptor for Search <pre></pre></summary>
 	public partial class RollupSearchDescriptor<T> : RequestDescriptorBase<RollupSearchDescriptor<T>, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{
 		internal override ApiUrls ApiUrls => RollupSearchRequest.Urls;
@@ -6361,7 +6361,7 @@ namespace Nest
 		public RestoreDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
-	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Status <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor : RequestDescriptorBase<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{
 		internal override ApiUrls ApiUrls => SnapshotStatusRequest.Urls;
@@ -6972,7 +6972,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for WatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
+	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsDescriptor : RequestDescriptorBase<WatcherStatsDescriptor, WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
 	{
 		internal override ApiUrls ApiUrls => WatcherStatsRequest.Urls;

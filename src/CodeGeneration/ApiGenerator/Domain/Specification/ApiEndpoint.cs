@@ -85,15 +85,15 @@ namespace ApiGenerator.Domain
 			}
 		}
 		
-		private List<CsharpMethod> _csharpMethods;
-		public IReadOnlyCollection<CsharpMethod> CsharpMethods
+		private List<LowLevelClientMethod> _lowLevelClientMethods;
+		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{
 			get
 			{
-				if (_csharpMethods != null && _csharpMethods.Count > 0) return _csharpMethods;
+				if (_lowLevelClientMethods != null && _lowLevelClientMethods.Count > 0) return _lowLevelClientMethods;
 
 				// enumerate once and cache
-				_csharpMethods = new List<CsharpMethod>();
+				_lowLevelClientMethods = new List<LowLevelClientMethod>();
 
 				var httpMethod = PreferredHttpMethod;
 				foreach (var path in Url.Paths)
@@ -104,45 +104,27 @@ namespace ApiGenerator.Domain
 					if (Body != null)
 						parts.Add(new UrlPart { Name = "body", Type = "PostData", Description = Body.Description });
 
-					if (Url.Params == null || !Url.Params.Any()) Url.Params = new SortedDictionary<string, QueryParameters>();
-					var apiMethod = new CsharpMethod
-					{
-						CsharpNames = CsharpNames,
-						ReturnType = "TResponse",
-						PerPathMethodName = methodName,
-						HttpMethod = httpMethod,
-						OfficialDocumentationLink = OfficialDocumentationLink,
-						ObsoleteMethodVersion = null, //TODO
-						Path = path.Path,
-						Parts = parts,
-						Url = Url,
-						HasBody = Body != null
-					};
-
 					var args = parts
 						.Select(p => p.Argument)
 						.Concat(new[] { CsharpNames.ParametersName + " requestParameters = null" })
 						.ToList();
-					apiMethod.Arguments = string.Join(", ", args);
-					_csharpMethods.Add(apiMethod);
-
-					args = args.Concat(new[] { "CancellationToken ctx = default" }).ToList();
-					apiMethod = new CsharpMethod
+					
+					var apiMethod = new LowLevelClientMethod
 					{
-						ReturnType = "Task<TResponse>",
-						PerPathMethodName = methodName + "Async",
+						Arguments = string.Join(", ", args),
+						CsharpNames = CsharpNames,
+						PerPathMethodName = methodName,
 						HttpMethod = httpMethod,
 						OfficialDocumentationLink = OfficialDocumentationLink,
-						ObsoleteMethodVersion = null, //TODO
-						Arguments = string.Join(", ", args),
+						DeprecatedPath = null, //TODO
 						Path = path.Path,
 						Parts = parts,
 						Url = Url,
 						HasBody = Body != null
 					};
-					_csharpMethods.Add(apiMethod);
+					_lowLevelClientMethods.Add(apiMethod);
 				}
-				return _csharpMethods;
+				return _lowLevelClientMethods;
 			}
 		}
 

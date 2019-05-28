@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("graph.explore.json")]
 	public partial interface IGraphExploreRequest : IHop
 	{
 		[DataMember(Name ="controls")]

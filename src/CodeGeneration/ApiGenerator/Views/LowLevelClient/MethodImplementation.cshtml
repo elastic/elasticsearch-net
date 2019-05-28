@@ -1,0 +1,17 @@
+@inherits TemplatePage<LowLevelClientMethod>
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@{
+	LowLevelClientMethod method = Model;
+}
+@{await IncludeAsync("LowLevelClient/MethodDocs.cshtml", method); }
+		public TResponse @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments))
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest@(Raw("<TResponse>"))(@method.HttpMethod, @Raw(method.UrlInCode), @(method.HasBody ? "body" : "null"), RequestParams(requestParameters));
+
+@{await IncludeAsync("LowLevelClient/MethodDocs.cshtml", method); }
+		public Task@(Raw("<TResponse>")) @(method.PerPathMethodName)Async@(Raw("<TResponse>"))(@Raw(method.Arguments), CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync@(Raw("<TResponse>"))(@method.HttpMethod, @Raw(method.UrlInCode), ctx, @(method.HasBody ? "body" : "null"), RequestParams(requestParameters));

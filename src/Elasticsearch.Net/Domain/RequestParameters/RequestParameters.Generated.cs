@@ -83,7 +83,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatAliases<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+	///<summary>Request options for Aliases<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -137,7 +137,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatAllocation<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+	///<summary>Request options for Allocation<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -198,7 +198,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatCount<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
+	///<summary>Request options for Count<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public class CatCountRequestParameters : RequestParameters<CatCountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -252,7 +252,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatFielddata<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+	///<summary>Request options for Fielddata<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -320,7 +320,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatHealth<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+	///<summary>Request options for Health<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -381,7 +381,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatHelp<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+	///<summary>Request options for Help<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -400,7 +400,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatIndices<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+	///<summary>Request options for Indices<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -475,7 +475,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatMaster<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+	///<summary>Request options for Master<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -529,7 +529,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatNodeAttributes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	///<summary>Request options for NodeAttributes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -583,7 +583,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatNodes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+	///<summary>Request options for Nodes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -644,7 +644,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+	///<summary>Request options for PendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -698,7 +698,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatPlugins<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+	///<summary>Request options for Plugins<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public class CatPluginsRequestParameters : RequestParameters<CatPluginsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -752,7 +752,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatRecovery<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+	///<summary>Request options for Recovery<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -806,7 +806,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatRepositories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
+	///<summary>Request options for Repositories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -860,7 +860,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatSegments<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
+	///<summary>Request options for Segments<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -907,7 +907,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatShards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+	///<summary>Request options for Shards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -968,7 +968,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
+	///<summary>Request options for Snapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1022,7 +1022,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for Tasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1093,7 +1093,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatTemplates<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	///<summary>Request options for Templates<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1147,7 +1147,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for CatThreadPool<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+	///<summary>Request options for ThreadPool<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public class CatThreadPoolRequestParameters : RequestParameters<CatThreadPoolRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1277,7 +1277,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for ClusterAllocationExplain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	///<summary>Request options for AllocationExplain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -1296,7 +1296,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClusterGetSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>Request options for GetSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1329,7 +1329,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClusterHealth<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	///<summary>Request options for Health<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1404,7 +1404,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClusterPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	///<summary>Request options for PendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1423,7 +1423,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClusterPutSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>Request options for PutSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -1455,7 +1455,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for ClusterReroute<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	///<summary>Request options for Reroute<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -1502,7 +1502,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClusterState<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	///<summary>Request options for State<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1566,7 +1566,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClusterStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	///<summary>Request options for Stats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -2510,7 +2510,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for GraphExplore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>Request options for Explore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -3830,7 +3830,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for IndicesShardStores<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	///<summary>Request options for ShardStores<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public class IndicesShardStoresRequestParameters : RequestParameters<IndicesShardStoresRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -3918,7 +3918,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for IndicesStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+	///<summary>Request options for Stats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public class IndicesStatsRequestParameters : RequestParameters<IndicesStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -4333,7 +4333,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for MigrationAssistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>Request options for Assistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -4362,7 +4362,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for MigrationUpgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>Request options for Upgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -4639,7 +4639,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for MachineLearningInfo<pre></pre></summary>
+	///<summary>Request options for Info<pre></pre></summary>
 	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -4965,7 +4965,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for NodesHotThreads<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+	///<summary>Request options for HotThreads<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -5012,7 +5012,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for NodesInfo<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+	///<summary>Request options for Info<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -5043,7 +5043,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for NodesStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+	///<summary>Request options for Stats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -5104,7 +5104,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for NodesUsage<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	///<summary>Request options for Usage<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -5254,7 +5254,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for RollupSearch<pre></pre></summary>
+	///<summary>Request options for Search<pre></pre></summary>
 	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -6125,7 +6125,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for SnapshotStatus<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>Request options for Status<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class SnapshotStatusRequestParameters : RequestParameters<SnapshotStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -6798,7 +6798,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for WatcherStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
+	///<summary>Request options for Stats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

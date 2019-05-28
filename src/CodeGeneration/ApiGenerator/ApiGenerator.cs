@@ -27,14 +27,14 @@ namespace ApiGenerator
 		{
 			Warnings = new List<string>();
 			var spec = CreateRestApiSpecModel(downloadBranch, folders);
-			var actions = new Dictionary<Action<RestApiSpec>, string>
+			var actions = new Dictionary<Action<RestApiSpec, ProgressBar>, string>
 			{
-				{ GenerateClientInterface, "Client interface" },
+				{ GenerateEnums, "Enums" },
+				{ GenerateLowLevelClientInterface, "Client interface" },
+				{ GenerateLowLevelClient, "Lowlevel client" },
 				{ GenerateRequestParameters, "Request parameters" },
 				{ GenerateDescriptors, "Descriptors" },
 				{ GenerateRequests, "Requests" },
-				{ GenerateEnums, "Enums" },
-				{ GenerateRawClient, "Lowlevel client" },
 			};
 
 			using (var pbar = new ProgressBar(actions.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
@@ -42,7 +42,7 @@ namespace ApiGenerator
 				foreach (var kv in actions)
 				{
 					pbar.Message = "Generating " + kv.Value;
-					kv.Key(spec);
+					kv.Key(spec, pbar);
 					pbar.Tick("Generated " + kv.Value);
 				}
 			}
@@ -120,11 +120,11 @@ namespace ApiGenerator
 		}
 
 
-		private static string DoRazor(string name, string template, RestApiSpec model)
+		private static string DoRazor<TModel>(string name, string template, TModel model)
 		{
 			try
 			{
-				return Razor.CompileRenderStringAsync<RestApiSpec>(name, template,  model).GetAwaiter().GetResult();
+				return Razor.CompileRenderStringAsync(name, template,  model).GetAwaiter().GetResult();
 			}
 			catch (TemplateGenerationException e)
 			{
@@ -145,23 +145,40 @@ namespace ApiGenerator
 		}
 
 
-		private static void GenerateClientInterface(RestApiSpec model)
+		private static void GenerateLowLevelClientInterface(RestApiSpec model, ProgressBar pbar)
 		{
+			var viewRoot = Path.Combine(GeneratorLocations.ViewFolder, "LowLevelClient") + "/";
 			var targetFile = GeneratorLocations.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
-			var source = DoRazor(nameof(GenerateClientInterface),
-				File.ReadAllText(GeneratorLocations.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
+			var source = DoRazor(nameof(GenerateLowLevelClientInterface),
+				File.ReadAllText( viewRoot+ @"IElasticLowLevelClient.cshtml"), model);
 			WriteFormattedCsharpFile(targetFile, source);
 		}
 
-		private static void GenerateRawClient(RestApiSpec model)
+		private static void GenerateLowLevelClient(RestApiSpec model, ProgressBar pbar)
 		{
-			var targetFile = GeneratorLocations.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
-			var source = DoRazor(nameof(GenerateRawClient),
-				File.ReadAllText(GeneratorLocations.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
+			var viewRoot = Path.Combine(GeneratorLocations.ViewFolder, "LowLevelClient") + "/";
+			
+			var targetFile = GeneratorLocations.EsNetFolder + @"ElasticLowLevelClient.Root.cs";
+			var sourceFileContents = File.ReadAllText(viewRoot + @"ElasticLowLevelClient.cshtml");
+			var source = DoRazor(nameof(GenerateLowLevelClient), sourceFileContents, model);
 			WriteFormattedCsharpFile(targetFile, source);
+
+			var namespaced = model.EndpointsPerNamespace.Where(kv => kv.Key != CsharpNames.RootNamespace).ToList();
+			using (var c = pbar.Spawn(namespaced.Count, "Generating namespaces", new ProgressBarOptions { ForegroundColor = ConsoleColor.Yellow }))
+			{
+				foreach (var ns in namespaced)
+				{
+					targetFile = GeneratorLocations.EsNetFolder + $"ElasticLowLevelClient.{ns.Key}.cs";
+					sourceFileContents = File.ReadAllText(viewRoot + @"ElasticLowLevelClient.Namespace.cshtml");
+					source = DoRazor(nameof(GenerateLowLevelClient) + ns.Key, sourceFileContents, ns);
+					WriteFormattedCsharpFile(targetFile, source);
+					c.Tick($"Written namespace client for {ns.Key}");
+					
+				}
+			}
 		}
 
-		private static void GenerateDescriptors(RestApiSpec model)
+		private static void GenerateDescriptors(RestApiSpec model, ProgressBar pbar)
 		{
 			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Descriptors.generated.cs";
 			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Descriptors.Generated.cshtml"),
@@ -169,14 +186,14 @@ namespace ApiGenerator
 			WriteFormattedCsharpFile(targetFile, source);
 		}
 
-		private static void GenerateRequests(RestApiSpec model)
+		private static void GenerateRequests(RestApiSpec model, ProgressBar pbar)
 		{
 			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Requests.generated.cs";
 			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Requests.Generated.cshtml"), model);
 			WriteFormattedCsharpFile(targetFile, source);
 		}
 
-		private static void GenerateRequestParameters(RestApiSpec model)
+		private static void GenerateRequestParameters(RestApiSpec model, ProgressBar pbar)
 		{
 			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/RequestParameters/RequestParameters.Generated.cs";
 			var source = DoRazor(nameof(GenerateRequestParameters),
@@ -184,7 +201,7 @@ namespace ApiGenerator
 			WriteFormattedCsharpFile(targetFile, source);
 		}
 
-		private static void GenerateEnums(RestApiSpec model)
+		private static void GenerateEnums(RestApiSpec model, ProgressBar pbar)
 		{
 			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/Enums.Generated.cs";
 			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(GeneratorLocations.ViewFolder + @"Enums.Generated.cshtml"), model);
