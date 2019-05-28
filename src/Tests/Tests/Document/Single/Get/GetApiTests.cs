@@ -45,6 +45,12 @@ namespace Tests.Document.Single.Get
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
 			response.Source.ShouldAdhereToSourceSerializerWhenSet();
+
+			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+			{
+				response.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+				response.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
+			}
 		}
 	}
 
