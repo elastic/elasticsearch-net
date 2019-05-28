@@ -5,9 +5,9 @@ open System.IO
 open Fake.IO
 open Commandline
 
-module Cluster =
+module ReposTooling =
 
-    let Run args =
+    let LaunchCluster args =
         let clusterName = Option.defaultValue "" <| match args.CommandArguments with | Cluster c -> Some c.Name | _ -> None
         let clusterVersion = Option.defaultValue "" <|match args.CommandArguments with | Cluster c -> c.Version | _ -> None
         
@@ -24,4 +24,10 @@ module Cluster =
         Tooling.DotNet.ExecInWithTimeout tempDir [dll; command] timeout  |> ignore
         
         Shell.deleteDir tempDir
+        
+    let GenerateApi () =
+        //TODO allow branch name to be passed for CI
+        let folder = Paths.Source <| "CodeGeneration/ApiGenerator";
+        let timeout = TimeSpan.FromMinutes(120.)
+        Tooling.DotNet.ExecInWithTimeout folder ["run"; ] timeout  |> ignore
          
