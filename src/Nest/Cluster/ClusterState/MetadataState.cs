@@ -15,5 +15,9 @@ namespace Nest
 		[JsonProperty("templates")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, TemplateMapping>))]
 		public IReadOnlyDictionary<string, TemplateMapping> Templates { get; internal set; }
+
+		[JsonProperty("stored_scripts")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, StoredScriptMapping>))]
+		public IReadOnlyDictionary<string, StoredScriptMapping> StoredScripts { get; internal set; }
 	}
 }
