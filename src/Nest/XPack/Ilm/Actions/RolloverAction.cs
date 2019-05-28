@@ -23,10 +23,10 @@ namespace Nest
 		long? MaximumDocuments { get; set; }
 
 		/// <summary>
-		/// Max primary shard index storage size in bytes.
+		/// Max primary shard index storage size using byte notation (e.g. 40gb or 40000000000b).
 		/// </summary>
 		[JsonProperty("max_size")]
-		long? MaximumSize { get; set; }
+		string MaximumSize { get; set; }
 	}
 
 	public class RolloverLifecycleAction : IRolloverLifecycleAction
@@ -38,7 +38,7 @@ namespace Nest
 		public long? MaximumDocuments { get; set; }
 
 		/// <inheritdoc />
-		public long? MaximumSize { get; set; }
+		public string MaximumSize { get; set; }
 	}
 
 	public class RolloverLifecycleActionDescriptor
@@ -51,10 +51,10 @@ namespace Nest
 		long? IRolloverLifecycleAction.MaximumDocuments { get; set; }
 
 		/// <inheritdoc cref="IRolloverLifecycleAction.MaximumSize" />
-		long? IRolloverLifecycleAction.MaximumSize { get; set; }
+		string IRolloverLifecycleAction.MaximumSize { get; set; }
 
 		/// <inheritdoc cref="IRolloverLifecycleAction.MaximumSize" />
-		public RolloverLifecycleActionDescriptor MaximumSize(long? maximumSize) => Assign(maximumSize, (a, v) => a.MaximumSize = maximumSize);
+		public RolloverLifecycleActionDescriptor MaximumSize(string maximumSize) => Assign(maximumSize, (a, v) => a.MaximumSize = maximumSize);
 
 		/// <inheritdoc cref="IRolloverLifecycleAction.MaximumAge" />
 		public RolloverLifecycleActionDescriptor MaximumAge(Time maximumAge) => Assign(maximumAge, (a, v) => a.MaximumAge = maximumAge);
