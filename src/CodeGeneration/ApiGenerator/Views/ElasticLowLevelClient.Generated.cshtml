@@ -34,21 +34,21 @@ namespace Elasticsearch.Net
 	foreach (var kv in model.Endpoints)
 	{
 		var endpoint = kv.Value;
-		var methods = endpoint.GetCsharpMethods().ToList();
+		var methods = endpoint.CsharpMethods.ToList();
 		var partsNotToReplace = new HashSet<string> {"category_id"};	
 		foreach (var method in methods)
 		{
 			var url = method.Path.Split(new[] {'/'}, 2).Last();
 			// Don't replace certain url parts e.g. category_id is defined as a long parameter
 			// which is .ToString()'ed as part of the URL. A .NotNull() method on long doesn't really make sense.
-			var partNames = method.Url.ExposedApiParts != null
-				? string.Join("|", method.Url.ExposedApiParts.Where(p => !partsNotToReplace.Contains(p.Name)).Select(p => p.Name))
+			var partNames = method.Url.Parts != null
+				? string.Join("|", method.Url.Parts.Where(p => !partsNotToReplace.Contains(p.Name)).Select(p => p.Name))
 				: @"\w+";
 			var pattern = string.IsNullOrEmpty(partNames) ? @"\w+" : partNames;
 			var patchedUrl = Regex.Replace(url, "{(" + pattern + ")}", "{$1.NotNull(\"$1\")}");
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
-<text>		///<summary>@method.HttpMethod on @method.Path <para>@method.Documentation</para></summary>
+<text>		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
 </text>
 			foreach (var part in method.Parts)
 			{
@@ -61,8 +61,8 @@ namespace Elasticsearch.Net
 		{
 <text>		[Obsolete("Scheduled to be removed in 7.0, @method.ObsoleteMethodVersion removed this method from the rest specification")]
 </text>}
-<text>		public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
-			where @method.CallTypeGeneric : class, IElasticsearchResponse, new() => this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.FullName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
+<text>		public @Raw(method.ReturnType) @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments))
+			where TResponse : class, IElasticsearchResponse, new() => this.@(requestMethod)@(Raw("<TResponse>"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.PerPathMethodName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
 </text>
 		}
 	}

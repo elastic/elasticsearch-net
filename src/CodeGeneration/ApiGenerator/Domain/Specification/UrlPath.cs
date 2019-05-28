@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ApiGenerator.Domain {
-	public class ApiPath
+namespace ApiGenerator.Domain 
+{
+	public class UrlPath
 	{
-		private readonly List<ApiUrlPart> _additionalPartsForConstructor;
+		private readonly List<UrlPart> _additionalPartsForConstructor;
 		public string Path { get; }
 
-		public List<ApiUrlPart> Parts { get; }
+		public List<UrlPart> Parts { get; }
 
-		public ApiPath(string path, IDictionary<string, ApiUrlPart> allParts, List<ApiUrlPart> additionalPartsForConstructor = null)
+		public UrlPath(string path, IDictionary<string, UrlPart> allParts, List<UrlPart> additionalPartsForConstructor = null)
 		{
-			_additionalPartsForConstructor = additionalPartsForConstructor ?? new List<ApiUrlPart>();
+			_additionalPartsForConstructor = additionalPartsForConstructor ?? new List<UrlPart>();
 			Path = LeadingBackslash(path);
 			if (allParts == null)
 			{
-				Parts = new List<ApiUrlPart>();
+				Parts = new List<UrlPart>();
 				return;
 			}
 			var parts =
@@ -59,26 +60,16 @@ namespace ApiGenerator.Domain {
 			doc += string.Join(indent, parts.Select(ParamDoc));
 			return doc;
 
-			string ParamDoc(ApiUrlPart p) => P(p.Name, GetDescription(p));
+			string ParamDoc(UrlPart p) => P(p.Name, GetDescription(p));
 
-			string GetDescription(ApiUrlPart p)
+			string GetDescription(UrlPart p)
 			{
 				if (documentConstructor) return "The document used to resolve the path from";
 				return p.Required ? "this parameter is required" : "Optional, accepts null";
 			}
 		}
-		public string GetDocumentPathXmlDocs(string indent)
-		{
-			var doc = $@"///<summary>{Path}</summary>";
-			doc += indent;
-			doc += P("path", "Describe the id and index of the document through <see cref=\"DocumentPath<>\" />");
-			return doc;
-
-		}
-
 
 		private string P(string name, string description) => $"///<param name=\"{name}\">{description}</param>";
-
 
 		private string LeadingBackslash(string p) => p.StartsWith("/") ? p : $"/{p}";
 	}

@@ -4,15 +4,20 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json.Linq;
 using RazorLight;
+using RazorLight.Generation;
+using RazorLight.Razor;
 using ShellProgressBar;
 
 namespace ApiGenerator
 {
-	public class ApiGenerator
+	public partial class ApiGenerator
 	{
 		private static readonly RazorLightEngine Razor = new RazorLightEngineBuilder()
+			.UseProject(new FileSystemRazorProject(Path.GetFullPath(GeneratorLocations.ViewFolder)))
 			.UseMemoryCachingProvider()
 			.Build();
 
@@ -52,11 +57,12 @@ namespace ApiGenerator
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
 		{
-			var directories = Directory.GetDirectories(CodeConfiguration.RestSpecificationFolder, "*", SearchOption.AllDirectories)
+			var directories = Directory.GetDirectories(GeneratorLocations.RestSpecificationFolder, "*", SearchOption.AllDirectories)
 				.Where(f => folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
+				.OrderBy(f=>new FileInfo(f).Name)
 				.ToList();
 
-			var endpoints = new Dictionary<string, ApiEndpoint>();
+			var endpoints = new SortedDictionary<string, ApiEndpoint>();
 			var seenFiles = new HashSet<string>();
 			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories",
 				new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
@@ -66,7 +72,7 @@ namespace ApiGenerator
 						.Where(f => f.EndsWith(".json") && !CodeConfiguration.IgnoredApis.Contains(new FileInfo(f).Name))
 						.ToList()
 				);
-				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
+				var commonFile = Path.Combine(GeneratorLocations.RestSpecificationFolder, "Core", "_common.json");
 				if (!File.Exists(commonFile)) throw new Exception($"Expected to find {commonFile}");
 
 				RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(commonFile);
@@ -79,15 +85,12 @@ namespace ApiGenerator
 						foreach (var file in jsonFiles)
 						{
 							if (file.EndsWith("_common.json")) continue;
-							else if (file.EndsWith(".obsolete.json")) continue;
 							else if (file.EndsWith(".patch.json")) continue;
-							else if (file.EndsWith(".replace.json")) continue;
 							else
 							{
-								var endpoint = CreateApiEndpoint(file);
-								endpoint.Value.FileName = Path.GetFileName(file);
+								var endpoint = ApiEndpointFactory.FromFile(file);
 								seenFiles.Add(Path.GetFileNameWithoutExtension(file));
-								endpoints.Add(endpoint.Key, endpoint.Value);
+								endpoints.Add(endpoint.Name, endpoint);
 							}
 
 							fileProgress.Tick();
@@ -108,127 +111,84 @@ namespace ApiGenerator
 			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };
 		}
 
-		public static string PascalCase(string s)
-		{
-			var textInfo = new CultureInfo("en-US").TextInfo;
-			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
-		}
-
-		private static KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
-		{
-			var replaceFile = Path.Combine(Path.GetDirectoryName(jsonFile), Path.GetFileNameWithoutExtension(jsonFile)) + ".replace.json";
-			if (File.Exists(replaceFile))
-			{
-				var replaceSpec = JObject.Parse(File.ReadAllText(replaceFile));
-				var endpointReplaced = replaceSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
-				endpointReplaced.Value.RestSpecName = endpointReplaced.Key;
-				endpointReplaced.Value.CsharpMethodName = CreateMethodName(endpointReplaced.Key);
-				return endpointReplaced;
-			}
-
-			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
-			PatchOfficialSpec(officialJsonSpec, jsonFile);
-			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
-			endpoint.Value.RestSpecName = endpoint.Key;
-			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
-
-			PatchUrlParts(jsonFile, endpoint.Value.Url);
-			return endpoint;
-		}
-
-		private static void PatchUrlParts(string jsonFile, ApiUrl url)
-		{
-			if (url.IsPartless) return;
-			foreach (var kv in url.Parts)
-			{
-				var required = url.ExposedApiPaths.All(p => p.Path.Contains($"{{{kv.Key}}}"));
-				if (kv.Value.Required != required)
-					Warnings.Add($"{jsonFile} has part: {kv.Key} listed as {kv.Value.Required} but should be {required}");
-				kv.Value.Required = required;
-			}
-		}
-
-		private static void PatchOfficialSpec(JObject original, string jsonFile)
-		{
-			var directory = Path.GetDirectoryName(jsonFile);
-			var patchFile = Path.Combine(directory,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
-			if (!File.Exists(patchFile)) return;
-
-			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
-
-			var pathsOverride = patchedJson.SelectToken("*.url.paths");
-
-			original.Merge(patchedJson, new JsonMergeSettings
-			{
-				MergeArrayHandling = MergeArrayHandling.Union
-			});
-
-			if (pathsOverride != null) original.SelectToken("*.url.paths").Replace(pathsOverride);
-		}
-
-		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)
+		private static SortedDictionary<string, QueryParameters> CreateCommonApiQueryParameters(string jsonFile)
 		{
 			var json = File.ReadAllText(jsonFile);
 			var jobject = JObject.Parse(json);
-			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
+			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, QueryParameters>>();
 			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, false);
 		}
 
-		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
 
 		private static string DoRazor(string name, string template, RestApiSpec model)
 		{
-			var engine = new RazorLightEngineBuilder()
-				.AddPrerenderCallbacks(t =>
+			try
+			{
+				return Razor.CompileRenderStringAsync<RestApiSpec>(name, template,  model).GetAwaiter().GetResult();
+			}
+			catch (TemplateGenerationException e)
+			{
+				foreach (var d in e.Diagnostics)
 				{
-				}).Build();
-			return engine.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
+					Console.WriteLine(d.GetMessage());
+				}
+				throw e;
+			}
 		}
+
+		private static void WriteFormattedCsharpFile(string path, string contents)
+		{
+			var tree = CSharpSyntaxTree.ParseText(contents);
+			var root = tree.GetRoot().NormalizeWhitespace(indentation:"\t", "\n", elasticTrivia: false);
+			contents = root.ToFullString();
+			File.WriteAllText(path, contents);
+		}
+
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
+			var targetFile = GeneratorLocations.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateClientInterface),
-				File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+				File.ReadAllText(GeneratorLocations.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateRawClient(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
+			var targetFile = GeneratorLocations.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateRawClient),
-				File.ReadAllText(CodeConfiguration.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+				File.ReadAllText(GeneratorLocations.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateDescriptors(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Descriptors.Generated.cs";
-			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"),
+			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Descriptors.generated.cs";
+			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Descriptors.Generated.cshtml"),
 				model);
-			File.WriteAllText(targetFile, source);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateRequests(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Requests.Generated.cs";
-			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Requests.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			var targetFile = GeneratorLocations.NestFolder + @"_Generated/_Requests.generated.cs";
+			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(GeneratorLocations.ViewFolder + @"_Requests.Generated.cshtml"), model);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateRequestParameters(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
+			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/RequestParameters/RequestParameters.Generated.cs";
 			var source = DoRazor(nameof(GenerateRequestParameters),
-				File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+				File.ReadAllText(GeneratorLocations.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 
 		private static void GenerateEnums(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\Enums.Generated.cs";
-			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(CodeConfiguration.ViewFolder + @"Enums.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
+			var targetFile = GeneratorLocations.EsNetFolder + @"Domain/Enums.Generated.cs";
+			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(GeneratorLocations.ViewFolder + @"Enums.Generated.cshtml"), model);
+			WriteFormattedCsharpFile(targetFile, source);
 		}
 	}
 }

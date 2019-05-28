@@ -29,12 +29,5 @@ namespace ApiGenerator.Overrides.Descriptors
 		/// We favor specifying params on the body so here we can specify params we don't want on the querystring.
 		/// </summary>
 		IEnumerable<string> SkipQueryStringParams { get; }
-
-		/// <summary>
-		/// Patch the CSharp method
-		/// </summary>
-		/// <param name="method"></param>
-		/// <returns></returns>
-		CsharpMethod PatchMethod(CsharpMethod method);
 	}
 }

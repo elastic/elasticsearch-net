@@ -2,7 +2,7 @@
 
 namespace ApiGenerator.Domain
 {
-	public class ApiUrlPart
+	public class UrlPart
 	{
 		private string _description;
 
@@ -19,7 +19,7 @@ namespace ApiGenerator.Domain
 					case "list":
 						return "string " + Name;
 					case "enum":
-						return ApiGenerator.PascalCase(Name) + " " + Name;
+						return Name.ToPascalCase() + " " + Name;
 					case "number":
 						return "string " + Name;
 					default:

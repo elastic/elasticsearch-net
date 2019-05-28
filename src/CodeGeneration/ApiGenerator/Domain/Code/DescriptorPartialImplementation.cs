@@ -1,80 +1,29 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using CsQuery.ExtensionMethods.Internal;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain 
 {
-	public class CsharpMethod
+	public class DescriptorPartialImplementation
 	{
-		public string Arguments { get; set; }
-		public string CallTypeGeneric { get; set; }
-		public string DescriptorType { get; set; }
-		public string DescriptorTypeGeneric { get; set; }
-		public string Documentation { get; set; }
-		public string FullName { get; set; }
-		public string HttpMethod { get; set; }
-
-		public string InterfaceType => $"I{RequestType}";
-
-		public string InterfaceTypeGeneric =>
-			string.IsNullOrEmpty(RequestTypeGeneric) ? null : $"I{RequestType}{RequestTypeGeneric}";
-
-		public string ObsoleteMethodVersion { get; set; }
-		public IEnumerable<ApiUrlPart> Parts { get; set; }
-		public string Path { get; set; }
-		public string QueryStringParamName { get; set; }
-		public string RequestType { get; set; }
-
-		public bool GenericAndNonGeneric { get; set; }
-		public string RequestTypeGeneric { get; set; }
-		public bool RequestTypeUnmapped { get; set; }
-		public string ReturnDescription { get; set; }
-		public string ReturnType { get; set; }
-		public string ReturnTypeGeneric { get; set; }
-
-		public bool SkipInterface { get; set; }
-		public bool Unmapped { get; set; }
-		public ApiUrl Url { get; set; }
-
-		public static CsharpMethod Clone(CsharpMethod method) => new CsharpMethod
-		{
-			Path = method.Path,
-			RequestType = method.RequestType,
-			ReturnDescription = method.ReturnDescription,
-			Arguments = method.Arguments,
-			CallTypeGeneric = method.CallTypeGeneric,
-			DescriptorType = method.DescriptorType,
-			DescriptorTypeGeneric = method.DescriptorTypeGeneric,
-			Documentation = method.Documentation,
-			FullName = method.FullName,
-			HttpMethod = method.HttpMethod,
-			Parts = method.Parts,
-			QueryStringParamName = method.QueryStringParamName,
-			RequestTypeGeneric = method.RequestTypeGeneric,
-			RequestTypeUnmapped = method.RequestTypeUnmapped,
-			ReturnType = method.ReturnType,
-			ReturnTypeGeneric = method.ReturnTypeGeneric,
-			Unmapped = method.Unmapped,
-			Url = method.Url,
-			SkipInterface = method.SkipInterface
-		};
-
-
-
+		public CsharpNames CsharpNames { get; set; }
+		public string OfficialDocumentationLink { get; set; }
+		public IReadOnlyCollection<Constructor> Constructors { get; set; }
+		public IReadOnlyCollection<UrlPart> Parts { get; set; }
+		public IReadOnlyCollection<UrlPath> Paths { get; set; }
+		public IReadOnlyCollection<QueryParameters> Params { get; set; }
+		public bool HasBody { get; set; }
+		
 		public IEnumerable<FluentRouteSetter> GetFluentRouteSetters()
 		{
 			var setters = new List<FluentRouteSetter>();
-			if (Url.IsPartless) return setters;
+			if (!Parts.Any()) return setters;
 
 			var alwaysGenerate = new[] { "index" };
-			var parts = Url.ExposedApiParts
+			var parts = Parts
 				.Where(p => !p.Required || alwaysGenerate.Contains(p.Name))
 				.Where(p => !string.IsNullOrEmpty(p.Name))
 				.ToList();
-			var returnType = DescriptorType + DescriptorTypeGeneric;
+			var returnType = CsharpNames.GenericOrNonGenericDescriptorName;
 			foreach (var part in parts)
 			{
 				var p = part;
@@ -117,6 +66,5 @@ namespace ApiGenerator.Domain
 			}
 			return setters;
 		}
-
 	}
 }

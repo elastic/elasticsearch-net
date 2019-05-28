@@ -4,12 +4,14 @@ using System.Linq;
 
 namespace ApiGenerator.Domain
 {
-	public class ApiQueryParameters
+	public class QueryParameters
 	{
 		private static readonly string[] FieldsParams =
 		{
 			"fields", "_source_include", "_source_exclude", "_source_includes", "_source_excludes",
 		};
+		
+		public bool Skip { get; set; }
 
 		public string ClsArgumentName => ClsName.ToCamelCase();
 
@@ -123,6 +125,7 @@ namespace ApiGenerator.Domain
 				}
 			}
 		}
+
 
 		public string InitializerGenerator(string type, string name, string key, string setter, params string[] doc) =>
 			CodeGenerator.Property(type, name, key, setter, Obsolete, doc);
