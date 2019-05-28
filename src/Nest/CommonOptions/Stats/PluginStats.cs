@@ -30,7 +30,7 @@ namespace Nest
 		public string JavaVersion { get; set; }
 
 		[JsonProperty("has_native_controller")]
-		public bool HasNativeController { get; set; }
+		public bool? HasNativeController { get; set; }
 
 		[JsonProperty("version")]
 		public string Version { get; set; }
