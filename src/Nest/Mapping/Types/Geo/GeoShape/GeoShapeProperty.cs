@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
@@ -23,6 +24,7 @@ namespace Nest
 		/// noting that large shapes will have greater false positives.
 		/// </remarks>
 		[JsonProperty("distance_error_pct")]
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		double? DistanceErrorPercentage { get; set; }
 
 		/// <summary>
@@ -63,6 +65,7 @@ namespace Nest
 		/// so that geo_shape queries are optimal on a point only field.
 		/// </summary>
 		[JsonProperty("points_only")]
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		bool? PointsOnly { get; set; }
 
 		/// <summary>
@@ -71,6 +74,7 @@ namespace Nest
 		/// the best tree_levels value to honor this precision.
 		/// </summary>
 		[JsonProperty("precision")]
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		Distance Precision { get; set; }
 
 		/// <summary>
@@ -85,6 +89,7 @@ namespace Nest
 		/// Name of the PrefixTree implementation to be used.
 		/// Defaults to <see cref="GeoTree.Geohash" />
 		/// </summary>
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		[JsonProperty("tree")]
 		GeoTree? Tree { get; set; }
 
@@ -96,6 +101,7 @@ namespace Nest
 		/// <see cref="Precision" /> parameter instead.
 		/// </summary>
 		[JsonProperty("tree_levels")]
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		int? TreeLevels { get; set; }
 
 		/// <summary>
@@ -112,6 +118,7 @@ namespace Nest
 		public GeoShapeProperty() : base(FieldType.GeoShape) { }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public double? DistanceErrorPercentage { get; set; }
 
 		/// <inheritdoc />
@@ -124,18 +131,22 @@ namespace Nest
 		public GeoOrientation? Orientation { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public bool? PointsOnly { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public Distance Precision { get; set; }
 
 		/// <inheritdoc />
 		public GeoStrategy? Strategy { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoTree? Tree { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public int? TreeLevels { get; set; }
 
 		/// <inheritdoc />
@@ -150,28 +161,42 @@ namespace Nest
 	{
 		public GeoShapePropertyDescriptor() : base(FieldType.GeoShape) { }
 
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
 		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		Distance IGeoShapeProperty.Precision { get; set; }
 		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 
 		bool? IGeoShapeProperty.Coerce { get; set; }
 
 		/// <inheritdoc cref="IGeoShapeProperty.Tree" />
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> Tree(GeoTree? tree) => Assign(tree, (a, v) => a.Tree = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.TreeLevels" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> TreeLevels(int? treeLevels) => Assign(treeLevels, (a, v) => a.TreeLevels = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Strategy" />
 		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy? strategy) => Assign(strategy, (a, v) => a.Strategy = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Precision" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> Precision(double precision, DistanceUnit unit) =>
 			Assign(new Distance(precision, unit), (a, v) => a.Precision = v);
 
@@ -179,10 +204,12 @@ namespace Nest
 		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation? orientation) => Assign(orientation, (a, v) => a.Orientation = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.DistanceErrorPercentage" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> DistanceErrorPercentage(double? distanceErrorPercentage) =>
 			Assign(distanceErrorPercentage, (a, v) => a.DistanceErrorPercentage = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.PointsOnly" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> PointsOnly(bool? pointsOnly = true) => Assign(pointsOnly, (a, v) => a.PointsOnly = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreMalformed" />
