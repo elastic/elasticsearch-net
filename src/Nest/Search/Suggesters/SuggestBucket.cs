@@ -27,15 +27,22 @@ namespace Nest
 
 	public class SuggestBucket : ISuggestBucket
 	{
+		[JsonProperty("completion")]
 		public ICompletionSuggester Completion { get; set; }
 
+		[JsonProperty("phrase")]
 		public IPhraseSuggester Phrase { get; set; }
 
+		[JsonProperty("prefix")]
 		public string Prefix { get; set; }
 
+		[JsonProperty("regex")]
 		public string Regex { get; set; }
 
+		[JsonProperty("term")]
 		public ITermSuggester Term { get; set; }
+
+		[JsonProperty("text")]
 		public string Text { get; set; }
 	}
 }
