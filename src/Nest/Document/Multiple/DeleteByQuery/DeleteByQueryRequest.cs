@@ -23,7 +23,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public partial interface IDeleteByQueryRequest<T>  where T : class { }
+	public partial interface IDeleteByQueryRequest<TDocument>  where TDocument : class { }
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
 	public partial class DeleteByQueryRequest
@@ -36,14 +36,14 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
-	public partial class DeleteByQueryRequest<T> where T : class
+	public partial class DeleteByQueryRequest<TDocument> where TDocument : class
 	{
 
 	}
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
-	public partial class DeleteByQueryDescriptor<T> : IDeleteByQueryRequest<T>
-		where T : class
+	public partial class DeleteByQueryDescriptor<TDocument> : IDeleteByQueryRequest<TDocument>
+		where TDocument : class
 	{
 		QueryContainer IDeleteByQueryRequest.Query { get; set; }
 		ISlicedScroll IDeleteByQueryRequest.Slice { get; set; }
@@ -52,19 +52,19 @@ namespace Nest
 		/// A match_all query to select all documents. Convenient shorthand for specifying
 		/// a match_all query using <see cref="Query" />
 		/// </summary>
-		public DeleteByQueryDescriptor<T> MatchAll() => Assign(new QueryContainerDescriptor<T>().MatchAll(), (a, v) => a.Query = v);
+		public DeleteByQueryDescriptor<TDocument> MatchAll() => Assign(new QueryContainerDescriptor<TDocument>().MatchAll(), (a, v) => a.Query = v);
 
 		/// <summary>
 		/// The query to use to select documents for deletion
 		/// </summary>
-		public DeleteByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public DeleteByQueryDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
 		/// <summary>
 		/// Parallelize the deleting process. This parallelization can improve efficiency and
 		/// provide a convenient way to break the request down into smaller parts.
 		/// </summary>
-		public DeleteByQueryDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) =>
-			Assign(selector, (a, v) => a.Slice = v?.Invoke(new SlicedScrollDescriptor<T>()));
+		public DeleteByQueryDescriptor<TDocument> Slice(Func<SlicedScrollDescriptor<TDocument>, ISlicedScroll> selector) =>
+			Assign(selector, (a, v) => a.Slice = v?.Invoke(new SlicedScrollDescriptor<TDocument>()));
 	}
 }

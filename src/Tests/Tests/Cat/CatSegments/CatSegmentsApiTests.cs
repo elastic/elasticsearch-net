@@ -18,10 +18,10 @@ namespace Tests.Cat.CatSegments
 		protected override string UrlPath => "/_cat/segments";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatSegments(),
-			(client, f) => client.CatSegmentsAsync(),
-			(client, r) => client.CatSegments(r),
-			(client, r) => client.CatSegmentsAsync(r)
+			(client, f) => client.Cat.Segments(),
+			(client, f) => client.Cat.SegmentsAsync(),
+			(client, r) => client.Cat.Segments(r),
+			(client, r) => client.Cat.SegmentsAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatSegmentsRecord> response) =>

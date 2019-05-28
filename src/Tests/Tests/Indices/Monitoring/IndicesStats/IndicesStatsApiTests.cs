@@ -22,10 +22,10 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		protected override string UrlPath => "/_all/_stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.IndicesStats(Infer.AllIndices, f),
-			(client, f) => client.IndicesStatsAsync(Infer.AllIndices, f),
-			(client, r) => client.IndicesStats(r),
-			(client, r) => client.IndicesStatsAsync(r)
+			(client, f) => client.Indices.Stats(Infer.AllIndices, f),
+			(client, f) => client.Indices.StatsAsync(Infer.AllIndices, f),
+			(client, r) => client.Indices.Stats(r),
+			(client, r) => client.Indices.StatsAsync(r)
 		);
 	}
 }

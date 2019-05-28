@@ -19,10 +19,10 @@ namespace Tests.Cluster.ClusterPendingTasks
 		protected override string UrlPath => "/_cluster/pending_tasks";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterPendingTasks(),
-			(client, f) => client.ClusterPendingTasksAsync(),
-			(client, r) => client.ClusterPendingTasks(r),
-			(client, r) => client.ClusterPendingTasksAsync(r)
+			(client, f) => client.Cluster.PendingTasks(),
+			(client, f) => client.Cluster.PendingTasksAsync(),
+			(client, r) => client.Cluster.PendingTasks(r),
+			(client, r) => client.Cluster.PendingTasksAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterPendingTasksResponse response) => response.Tasks.Should().NotBeNull();

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain.Specification
 {
 	public class UrlPart
 	{
@@ -105,6 +105,7 @@ namespace ApiGenerator.Domain
 		}
 
 		public string Name { get; set; }
+		public string NameAsArgument => Name.ToCamelCase();
 		public IEnumerable<string> Options { get; set; }
 		public bool Required { get; set; }
 		public string Type { get; set; }

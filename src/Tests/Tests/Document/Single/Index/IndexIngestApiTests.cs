@@ -73,7 +73,7 @@ namespace Tests.Document.Single.Index
 
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => client.PutPipeline(
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => client.Ingest.PutPipeline(
 			new PutPipelineRequest(PipelineId)
 			{
 				Description = "Index pipeline test",

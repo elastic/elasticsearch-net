@@ -5,5 +5,5 @@
 
 	public partial class GetMappingRequest { }
 
-	public partial class GetMappingDescriptor<T> where T : class { }
+	public partial class GetMappingDescriptor<TDocument> where TDocument : class { }
 }

@@ -25,10 +25,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.GetSnapshot
 		protected override string UrlPath => $"/_snapshot/{_repos}/{_snapshot}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetSnapshot(_repos, _snapshot, f),
-			(client, f) => client.GetSnapshotAsync(_repos, _snapshot, f),
-			(client, r) => client.GetSnapshot(r),
-			(client, r) => client.GetSnapshotAsync(r)
+			(client, f) => client.Snapshot.GetSnapshot(_repos, _snapshot, f),
+			(client, f) => client.Snapshot.GetSnapshotAsync(_repos, _snapshot, f),
+			(client, r) => client.Snapshot.GetSnapshot(r),
+			(client, r) => client.Snapshot.GetSnapshotAsync(r)
 		);
 
 		protected override GetSnapshotDescriptor NewDescriptor() => new GetSnapshotDescriptor(_repos, _snapshot);

@@ -27,10 +27,10 @@ namespace Tests.Indices.StatusManagement.ForceMerge
 		protected override string UrlPath => $"/{CallIsolatedValue}/_forcemerge?allow_no_indices=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ForceMerge(CallIsolatedValue, f),
-			(client, f) => client.ForceMergeAsync(CallIsolatedValue, f),
-			(client, r) => client.ForceMerge(r),
-			(client, r) => client.ForceMergeAsync(r)
+			(client, f) => client.Indices.ForceMerge(CallIsolatedValue, f),
+			(client, f) => client.Indices.ForceMergeAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.ForceMerge(r),
+			(client, r) => client.Indices.ForceMergeAsync(r)
 		);
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>

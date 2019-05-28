@@ -12,10 +12,10 @@ namespace Tests.XPack.Security.RoleMapping.DeleteRoleMapping
 		{
 			var role = "can_read";
 			await DELETE($"/_security/role_mapping/{role}")
-					.Fluent(c => c.DeleteRoleMapping(role))
-					.Request(c => c.DeleteRoleMapping(new DeleteRoleMappingRequest(role)))
-					.FluentAsync(c => c.DeleteRoleMappingAsync(role))
-					.RequestAsync(c => c.DeleteRoleMappingAsync(new DeleteRoleMappingRequest(role)))
+					.Fluent(c => c.Security.DeleteRoleMapping(role))
+					.Request(c => c.Security.DeleteRoleMapping(new DeleteRoleMappingRequest(role)))
+					.FluentAsync(c => c.Security.DeleteRoleMappingAsync(role))
+					.RequestAsync(c => c.Security.DeleteRoleMappingAsync(new DeleteRoleMappingRequest(role)))
 				;
 		}
 	}

@@ -31,7 +31,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putJobResponse = client.PutJob<object>(callUniqueValue.Value, f => f
+				var putJobResponse = client.MachineLearning.PutJob<object>(callUniqueValue.Value, f => f
 					.Description("ForecastJobApiTests")
 					.AnalysisConfig(a => a
 						.BucketSpan($"{BucketSpanSeconds}s")
@@ -65,7 +65,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 					timestamp += BucketSpanSeconds;
 				}
 
-				var postJobDataResponse = client.PostJobData(callUniqueValue.Value, d => d.Data(data));
+				var postJobDataResponse = client.MachineLearning.PostJobData(callUniqueValue.Value, d => d.Data(data));
 				if (!postJobDataResponse.IsValid)
 					throw new Exception($"Problem posting data for integration test: {postJobDataResponse.DebugInformation}");
 
@@ -83,10 +83,10 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ForecastJob(CallIsolatedValue, f),
-			(client, f) => client.ForecastJobAsync(CallIsolatedValue, f),
-			(client, r) => client.ForecastJob(r),
-			(client, r) => client.ForecastJobAsync(r)
+			(client, f) => client.MachineLearning.ForecastJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.ForecastJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.ForecastJob(r),
+			(client, r) => client.MachineLearning.ForecastJobAsync(r)
 		);
 
 		protected override ForecastJobDescriptor NewDescriptor() => new ForecastJobDescriptor(CallIsolatedValue);

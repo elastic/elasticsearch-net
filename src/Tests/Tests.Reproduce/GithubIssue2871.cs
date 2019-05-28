@@ -23,13 +23,13 @@ namespace Tests.Reproduce
 			var alias = "my_alias";
 			var client = _cluster.Client;
 
-			client.CreateIndex(index1, c => c
+			client.Indices.CreateIndex(index1, c => c
 				.Map<Project>(mm => mm
 					.AutoMap()
 				)
 			);
 
-			client.CreateIndex(index2, c => c
+			client.Indices.CreateIndex(index2, c => c
 				.Map<Project>(mm => mm
 					.AutoMap()
 				)
@@ -47,7 +47,7 @@ namespace Tests.Reproduce
 				.Refresh(Refresh.WaitFor)
 			);
 
-			client.Alias(a => a
+			client.Indices.BulkAlias(a => a
 				.Add(add => add
 					.Alias(alias)
 					.Index(index1)

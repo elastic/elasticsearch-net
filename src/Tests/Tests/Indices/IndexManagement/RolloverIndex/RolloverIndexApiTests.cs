@@ -130,7 +130,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var create = client.CreateIndex(CallIsolatedValue, c => c
+			var create = client.Indices.CreateIndex(CallIsolatedValue, c => c
 				.Aliases(a => a
 					.Alias(CallIsolatedValue + "-alias")
 				)
@@ -139,10 +139,10 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.RolloverIndex(CallIsolatedValue + "-alias", f),
-			(client, f) => client.RolloverIndexAsync(CallIsolatedValue + "-alias", f),
-			(client, r) => client.RolloverIndex(r),
-			(client, r) => client.RolloverIndexAsync(r)
+			(client, f) => client.Indices.RolloverIndex(CallIsolatedValue + "-alias", f),
+			(client, f) => client.Indices.RolloverIndexAsync(CallIsolatedValue + "-alias", f),
+			(client, r) => client.Indices.RolloverIndex(r),
+			(client, r) => client.Indices.RolloverIndexAsync(r)
 		);
 
 		protected override RolloverIndexDescriptor NewDescriptor() => new RolloverIndexDescriptor(CallIsolatedValue + "-alias");

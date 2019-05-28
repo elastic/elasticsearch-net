@@ -61,7 +61,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.CreateIndex(index, c => c
 					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
@@ -72,7 +72,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					)
 				);
 				var percolationIndex = index + "-queries";
-				Client.CreateIndex(percolationIndex, c => c
+				Client.Indices.CreateIndex(percolationIndex, c => c
 					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
@@ -93,7 +93,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					}
 				}, d => d.Index(percolationIndex));
 				Client.Index(Project.Instance, i => i.Routing(Project.Instance.Name));
-				Client.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
+				Client.Indices.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
 			}
 		}
 	}

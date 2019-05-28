@@ -36,7 +36,7 @@ namespace ApiGenerator
 			var pascal = s.ToPascalCase(true);
 			if (pascal.Length <= 1) return pascal;
 
-			return pascal[0].ToLower() + s.Substring(1);
+			return pascal[0].ToLower() + pascal.Substring(1);
 		}
 	}
 }

@@ -26,10 +26,10 @@ namespace Tests.XPack.License.StartBasicLicense
 		protected override string UrlPath => $"/_license/start_basic";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.StartBasicLicense(f),
-			(client, f) => client.StartBasicLicenseAsync(f),
-			(client, r) => client.StartBasicLicense(r),
-			(client, r) => client.StartBasicLicenseAsync(r)
+			(client, f) => client.License.StartBasicLicense(f),
+			(client, f) => client.License.StartBasicLicenseAsync(f),
+			(client, r) => client.License.StartBasicLicense(r),
+			(client, r) => client.License.StartBasicLicenseAsync(r)
 		);
 
 		protected override void ExpectResponse(StartBasicLicenseResponse response)

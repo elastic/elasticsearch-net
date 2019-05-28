@@ -64,7 +64,7 @@ namespace Tests.Document.Single.SourceExists
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var index = client.CreateIndex(IndexWithNoSource, i => i
+			var index = client.Indices.CreateIndex(IndexWithNoSource, i => i
 				.Map<Project>(mm => mm
 					.SourceField(sf => sf.Enabled(false))
 				)

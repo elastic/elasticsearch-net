@@ -48,7 +48,7 @@ namespace Nest
 			try
 			{
 				_snapshotRequest.RequestParameters.WaitForCompletion = false;
-				var snapshotResponse = _elasticClient.Snapshot(_snapshotRequest);
+				var snapshotResponse = _elasticClient.Snapshot.Snapshot(_snapshotRequest);
 
 				if (!snapshotResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to create snapshot.", snapshotResponse.ApiCall);
@@ -166,7 +166,7 @@ namespace Nest
 			try
 			{
 				var snapshotStatusResponse =
-					_elasticClient.SnapshotStatus(new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
+					_elasticClient.Snapshot.Status(new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
 						_snapshotRequest.Snapshot));
 
 				if (!snapshotStatusResponse.IsValid)

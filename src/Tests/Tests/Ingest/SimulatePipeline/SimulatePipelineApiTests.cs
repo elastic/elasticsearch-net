@@ -157,10 +157,10 @@ namespace Tests.Ingest.SimulatePipeline
 		protected override string UrlPath => $"/_ingest/pipeline/_simulate";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SimulatePipeline(f),
-			(client, f) => client.SimulatePipelineAsync(f),
-			(client, r) => client.SimulatePipeline(r),
-			(client, r) => client.SimulatePipelineAsync(r)
+			(client, f) => client.Ingest.SimulatePipeline(f),
+			(client, f) => client.Ingest.SimulatePipelineAsync(f),
+			(client, r) => client.Ingest.SimulatePipeline(r),
+			(client, r) => client.Ingest.SimulatePipelineAsync(r)
 		);
 
 		protected override void ExpectResponse(SimulatePipelineResponse response)

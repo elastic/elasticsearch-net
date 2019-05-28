@@ -9,9 +9,9 @@ namespace Tests.XPack.Watcher.StartWatcher
 	public class StartWatcherUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await POST("/_watcher/_start")
-			.Fluent(c => c.StartWatcher())
-			.Request(c => c.StartWatcher(new StartWatcherRequest()))
-			.FluentAsync(c => c.StartWatcherAsync())
-			.RequestAsync(c => c.StartWatcherAsync(new StartWatcherRequest()));
+			.Fluent(c => c.Watcher.StartWatcher())
+			.Request(c => c.Watcher.StartWatcher(new StartWatcherRequest()))
+			.FluentAsync(c => c.Watcher.StartWatcherAsync())
+			.RequestAsync(c => c.Watcher.StartWatcherAsync(new StartWatcherRequest()));
 	}
 }

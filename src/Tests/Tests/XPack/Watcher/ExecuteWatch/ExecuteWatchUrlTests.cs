@@ -9,9 +9,9 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 	public class ExecuteWatchUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await PUT("/_watcher/watch/watch_id/_execute")
-			.Fluent(c => c.ExecuteWatch(e => e.Id("watch_id")))
-			.Request(c => c.ExecuteWatch(new ExecuteWatchRequest("watch_id")))
-			.FluentAsync(c => c.ExecuteWatchAsync(e => e.Id("watch_id")))
-			.RequestAsync(c => c.ExecuteWatchAsync(new ExecuteWatchRequest("watch_id")));
+			.Fluent(c => c.Watcher.ExecuteWatch(e => e.Id("watch_id")))
+			.Request(c => c.Watcher.ExecuteWatch(new ExecuteWatchRequest("watch_id")))
+			.FluentAsync(c => c.Watcher.ExecuteWatchAsync(e => e.Id("watch_id")))
+			.RequestAsync(c => c.Watcher.ExecuteWatchAsync(new ExecuteWatchRequest("watch_id")));
 	}
 }

@@ -51,7 +51,7 @@ namespace Tests.XPack.Migration.DeprecationInfo
 			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
-			var response = client.DeprecationInfo();
+			var response = client.Migration.DeprecationInfo();
 			response.ShouldBeValid();
 
 			response.ClusterSettings.Should().NotBeNull();

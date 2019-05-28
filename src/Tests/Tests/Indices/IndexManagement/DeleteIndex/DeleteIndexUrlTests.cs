@@ -15,10 +15,10 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 			var indices = Index<Project>().And<Developer>();
 			var index = "project%2Cdevs";
 			await DELETE($"/{index}")
-					.Fluent(c => c.DeleteIndex(indices, s => s))
-					.Request(c => c.DeleteIndex(new DeleteIndexRequest(indices)))
-					.FluentAsync(c => c.DeleteIndexAsync(indices))
-					.RequestAsync(c => c.DeleteIndexAsync(new DeleteIndexRequest(indices)))
+					.Fluent(c => c.Indices.DeleteIndex(indices, s => s))
+					.Request(c => c.Indices.DeleteIndex(new DeleteIndexRequest(indices)))
+					.FluentAsync(c => c.Indices.DeleteIndexAsync(indices))
+					.RequestAsync(c => c.Indices.DeleteIndexAsync(new DeleteIndexRequest(indices)))
 				;
 		}
 	}

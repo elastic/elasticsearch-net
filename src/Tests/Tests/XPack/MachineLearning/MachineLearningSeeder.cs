@@ -29,7 +29,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		// Sometimes we run against an manually started elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If template exists assume this cluster is already seeded with the machine learning data.
-		private bool AlreadySeeded() => Client.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists;
+		private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists;
 
 		public void SeedNode()
 		{
@@ -43,8 +43,8 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		public void DeleteIndicesAndTemplates()
 		{
-			if (Client.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists)
-				Client.DeleteIndexTemplate(MachineLearningTestsIndexTemplateName);
+			if (Client.Indices.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists)
+				Client.Indices.DeleteIndexTemplate(MachineLearningTestsIndexTemplateName);
 		}
 
 		private void CreateIndicesAndSeedIndexData()
@@ -98,7 +98,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private void CreateMetricIndex()
 		{
-			var createProjectIndex = Client.CreateIndex(MachineLearningTestsIndexTemplateName, c => c
+			var createProjectIndex = Client.Indices.CreateIndex(MachineLearningTestsIndexTemplateName, c => c
 				.Map<Metric>(m => m
 					.AutoMap()
 					.Properties(props => props
@@ -116,7 +116,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private void CreateIndexTemplate()
 		{
-			var putTemplateResult = Client.PutIndexTemplate(new PutIndexTemplateRequest(MachineLearningTestsIndexTemplateName)
+			var putTemplateResult = Client.Indices.PutIndexTemplate(new PutIndexTemplateRequest(MachineLearningTestsIndexTemplateName)
 			{
 				IndexPatterns = new ReadOnlyCollection<string>(new[] { "*" }),
 				Settings = new IndexSettings

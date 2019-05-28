@@ -65,10 +65,10 @@ namespace Tests.XPack.MachineLearning.ValidateDetector
 		protected override string UrlPath => $"_ml/anomaly_detectors/_validate/detector";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ValidateDetector(f),
-			(client, f) => client.ValidateDetectorAsync(f),
-			(client, r) => client.ValidateDetector(r),
-			(client, r) => client.ValidateDetectorAsync(r)
+			(client, f) => client.MachineLearning.ValidateDetector(f),
+			(client, f) => client.MachineLearning.ValidateDetectorAsync(f),
+			(client, r) => client.MachineLearning.ValidateDetector(r),
+			(client, r) => client.MachineLearning.ValidateDetectorAsync(r)
 		);
 
 		protected override void ExpectResponse(ValidateDetectorResponse response) => response.Acknowledged.Should().BeTrue();

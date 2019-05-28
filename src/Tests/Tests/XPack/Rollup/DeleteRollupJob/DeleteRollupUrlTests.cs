@@ -12,10 +12,10 @@ namespace Tests.XPack.Rollup.DeleteRollupJob
 		{
 			const string id = "rollup-id";
 			await DELETE($"/_rollup/job/{id}")
-				.Fluent(c => c.DeleteRollupJob(id))
-				.Request(c => c.DeleteRollupJob(new DeleteRollupJobRequest(id)))
-				.FluentAsync(c => c.DeleteRollupJobAsync(id))
-				.RequestAsync(c => c.DeleteRollupJobAsync(new DeleteRollupJobRequest(id)));
+				.Fluent(c => c.Rollup.DeleteRollupJob(id))
+				.Request(c => c.Rollup.DeleteRollupJob(new DeleteRollupJobRequest(id)))
+				.FluentAsync(c => c.Rollup.DeleteRollupJobAsync(id))
+				.RequestAsync(c => c.Rollup.DeleteRollupJobAsync(new DeleteRollupJobRequest(id)));
 		}
 	}
 }

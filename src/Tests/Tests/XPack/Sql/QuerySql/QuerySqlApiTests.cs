@@ -47,10 +47,10 @@ ORDER BY numberOfContributors DESC";
 		protected override string UrlPath => $"/_sql";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.QuerySql(f),
-			(client, f) => client.QuerySqlAsync(f),
-			(client, r) => client.QuerySql(r),
-			(client, r) => client.QuerySqlAsync(r)
+			(client, f) => client.Sql.QuerySql(f),
+			(client, f) => client.Sql.QuerySqlAsync(f),
+			(client, r) => client.Sql.QuerySql(r),
+			(client, r) => client.Sql.QuerySqlAsync(r)
 		);
 
 		protected override void ExpectResponse(QuerySqlResponse response)

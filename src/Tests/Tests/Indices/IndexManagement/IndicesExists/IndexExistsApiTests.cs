@@ -22,10 +22,10 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 		protected override string UrlPath => $"/project";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.IndexExists(Index<Project>()),
-			(client, f) => client.IndexExistsAsync(Index<Project>()),
-			(client, r) => client.IndexExists(r),
-			(client, r) => client.IndexExistsAsync(r)
+			(client, f) => client.Indices.IndexExists(Index<Project>()),
+			(client, f) => client.Indices.IndexExistsAsync(Index<Project>()),
+			(client, r) => client.Indices.IndexExists(r),
+			(client, r) => client.Indices.IndexExistsAsync(r)
 		);
 
 		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeTrue();

@@ -12,7 +12,7 @@ namespace Nest
 		IScript Script { get; set; }
 	}
 
-	public partial interface IUpdateByQueryRequest<T> where T : class { }
+	public partial interface IUpdateByQueryRequest<TDocument> where TDocument : class { }
 
 	public partial class UpdateByQueryRequest
 	{
@@ -20,24 +20,24 @@ namespace Nest
 		public IScript Script { get; set; }
 	}
 
-	public partial class UpdateByQueryRequest<T> where T : class
+	public partial class UpdateByQueryRequest<TDocument> where TDocument : class
 	{
 	}
 
-	public partial class UpdateByQueryDescriptor<T>
-		where T : class
+	public partial class UpdateByQueryDescriptor<TDocument>
+		where TDocument : class
 	{
 		QueryContainer IUpdateByQueryRequest.Query { get; set; }
 		IScript IUpdateByQueryRequest.Script { get; set; }
 
-		public UpdateByQueryDescriptor<T> MatchAll() => Assign(new QueryContainerDescriptor<T>().MatchAll(), (a, v) => a.Query = v);
+		public UpdateByQueryDescriptor<TDocument> MatchAll() => Assign(new QueryContainerDescriptor<TDocument>().MatchAll(), (a, v) => a.Query = v);
 
-		public UpdateByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public UpdateByQueryDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
-		public UpdateByQueryDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
+		public UpdateByQueryDescriptor<TDocument> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
-		public UpdateByQueryDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+		public UpdateByQueryDescriptor<TDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

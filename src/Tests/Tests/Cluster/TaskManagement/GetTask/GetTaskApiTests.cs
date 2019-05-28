@@ -27,10 +27,10 @@ namespace Tests.Cluster.TaskManagement.GetTask
 		protected override string UrlPath => $"/_tasks/fakeid%3A1";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetTask(_taskId, f),
-			(client, f) => client.GetTaskAsync(_taskId, f),
-			(client, r) => client.GetTask(r),
-			(client, r) => client.GetTaskAsync(r)
+			(client, f) => client.Tasks.GetTask(_taskId, f),
+			(client, f) => client.Tasks.GetTaskAsync(_taskId, f),
+			(client, r) => client.Tasks.GetTask(r),
+			(client, r) => client.Tasks.GetTaskAsync(r)
 		);
 
 		protected override GetTaskDescriptor NewDescriptor() => new GetTaskDescriptor(_taskId);
@@ -59,7 +59,7 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 
-			var createIndex = client.CreateIndex(targetIndex, i => i
+			var createIndex = client.Indices.CreateIndex(targetIndex, i => i
 				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
 				.Map<Project>(DefaultSeeder.ProjectTypeMappings)
 			);

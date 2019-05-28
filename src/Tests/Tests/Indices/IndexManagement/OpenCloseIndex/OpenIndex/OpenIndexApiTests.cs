@@ -31,17 +31,17 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 		{
 			foreach (var index in values.Values)
 			{
-				client.CreateIndex(index);
-				client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(index));
-				client.CloseIndex(index);
+				client.Indices.CreateIndex(index);
+				client.Cluster.Health(index, h => h.WaitForStatus(WaitForStatus.Yellow));
+				client.Indices.CloseIndex(index);
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.OpenIndex(CallIsolatedValue, f),
-			(client, f) => client.OpenIndexAsync(CallIsolatedValue, f),
-			(client, r) => client.OpenIndex(r),
-			(client, r) => client.OpenIndexAsync(r)
+			(client, f) => client.Indices.OpenIndex(CallIsolatedValue, f),
+			(client, f) => client.Indices.OpenIndexAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.OpenIndex(r),
+			(client, r) => client.Indices.OpenIndexAsync(r)
 		);
 
 		protected override OpenIndexDescriptor NewDescriptor() => new OpenIndexDescriptor(CallIsolatedValue);

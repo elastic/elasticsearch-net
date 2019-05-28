@@ -103,7 +103,7 @@ namespace Nest
 
 	}
 
-	public partial class PutDatafeedDescriptor<T> where T : class
+	public partial class PutDatafeedDescriptor<TDocument> where TDocument : class
 	{
 		AggregationDictionary IPutDatafeedRequest.Aggregations { get; set; }
 		IChunkingConfig IPutDatafeedRequest.ChunkingConfig { get; set; }
@@ -116,41 +116,41 @@ namespace Nest
 		int? IPutDatafeedRequest.ScrollSize { get; set; }
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations, (a, v) => a.Aggregations = v);
+		public PutDatafeedDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> ChunkingConfig(Func<ChunkingConfigDescriptor, IChunkingConfig> selector) =>
+		public PutDatafeedDescriptor<TDocument> ChunkingConfig(Func<ChunkingConfigDescriptor, IChunkingConfig> selector) =>
 			Assign(selector, (a, v) => a.ChunkingConfig = v?.Invoke(new ChunkingConfigDescriptor()));
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Frequency(Time frequency) => Assign(frequency, (a, v) => a.Frequency = v);
+		public PutDatafeedDescriptor<TDocument> Frequency(Time frequency) => Assign(frequency, (a, v) => a.Frequency = v);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
+		public PutDatafeedDescriptor<TDocument> Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
 
 		///<summary>a shortcut into calling Indices(typeof(TOther))</summary>
-		public PutDatafeedDescriptor<T> Indices<TOther>() => Assign(typeof(TOther), (a, v) => a.Indices = v);
+		public PutDatafeedDescriptor<TDocument> Indices<TOther>() => Assign(typeof(TOther), (a, v) => a.Indices = v);
 
 		///<summary>A shortcut into calling Indices(Indices.All)</summary>
-		public PutDatafeedDescriptor<T> AllIndices() => Indices(Nest.Indices.All);
+		public PutDatafeedDescriptor<TDocument> AllIndices() => Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> JobId(Id jobId) => Assign(jobId, (a, v) => a.JobId = v);
+		public PutDatafeedDescriptor<TDocument> JobId(Id jobId) => Assign(jobId, (a, v) => a.JobId = v);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public PutDatafeedDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query) =>
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> QueryDelay(Time queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
+		public PutDatafeedDescriptor<TDocument> QueryDelay(Time queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
+		public PutDatafeedDescriptor<TDocument> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(selector, (a, v) => a.ScriptFields = v?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
+		public PutDatafeedDescriptor<TDocument> ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
 
 	}
 }

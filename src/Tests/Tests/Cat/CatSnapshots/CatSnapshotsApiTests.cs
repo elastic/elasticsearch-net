@@ -26,7 +26,6 @@ namespace Tests.Cat.CatSnapshots
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override CatSnapshotsRequest Initializer => new CatSnapshotsRequest(RepositoryName);
 		protected override string UrlPath => $"/_cat/snapshots/{RepositoryName}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -35,7 +34,7 @@ namespace Tests.Cat.CatSnapshots
 
 			var repositoryLocation = Path.Combine(Cluster.FileSystem.RepositoryPath, RandomString());
 
-			var create = Client.CreateRepository(RepositoryName, cr => cr
+			var create = Client.Snapshot.CreateRepository(RepositoryName, cr => cr
 				.FileSystem(fs => fs
 					.Settings(repositoryLocation)
 				)
@@ -44,16 +43,19 @@ namespace Tests.Cat.CatSnapshots
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var createIndex = Client.CreateIndex(SnapshotIndexName);
-			Client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Index(SnapshotIndexName));
-			client.Snapshot(RepositoryName, SnapshotName, s => s.WaitForCompletion().Index(SnapshotIndexName));
+			var createIndex = Client.Indices.CreateIndex(SnapshotIndexName);
+			Client.Cluster.Health(SnapshotIndexName, g => g.WaitForStatus(WaitForStatus.Yellow));
+			client.Snapshot.Snapshot(RepositoryName, SnapshotName, s => s.WaitForCompletion().Index(SnapshotIndexName));
 		}
+		
+		protected override CatSnapshotsRequest Initializer => new CatSnapshotsRequest(RepositoryName);
+		protected override Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> Fluent => f => f.RepositoryName(RepositoryName);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatSnapshots(RepositoryName, f),
-			(client, f) => client.CatSnapshotsAsync(RepositoryName, f),
-			(client, r) => client.CatSnapshots(r),
-			(client, r) => client.CatSnapshotsAsync(r)
+			(client, f) => client.Cat.Snapshots(f),
+			(client, f) => client.Cat.SnapshotsAsync(f),
+			(client, r) => client.Cat.Snapshots(r),
+			(client, r) => client.Cat.SnapshotsAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatSnapshotsRecord> response) =>

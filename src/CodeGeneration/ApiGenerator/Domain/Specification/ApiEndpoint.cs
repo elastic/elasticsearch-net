@@ -1,10 +1,13 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApiGenerator.Overrides.Descriptors;
+using ApiGenerator.Configuration.Overrides;
+using ApiGenerator.Domain.Code;
+using ApiGenerator.Domain.Code.HighLevel.Methods;
+using ApiGenerator.Domain.Code.HighLevel.Requests;
+using ApiGenerator.Domain.Code.LowLevel;
 using Newtonsoft.Json;
 
-namespace ApiGenerator.Domain
+namespace ApiGenerator.Domain.Specification
 {
 	public class ApiEndpoint
 	{
@@ -84,7 +87,18 @@ namespace ApiGenerator.Domain
 				return first;
 			}
 		}
-		
+		public HighLevelModel HighLevelModel => new HighLevelModel
+		{
+			CsharpNames = CsharpNames,
+			Fluent = new FluentMethod(CsharpNames, Url.Parts,
+				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET")
+			),
+			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments ? null : new BoundFluentMethod(CsharpNames, Url.Parts,
+				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET")
+			),
+			Initializer = new InitializerMethod(CsharpNames) 
+		};
+
 		private List<LowLevelClientMethod> _lowLevelClientMethods;
 		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{

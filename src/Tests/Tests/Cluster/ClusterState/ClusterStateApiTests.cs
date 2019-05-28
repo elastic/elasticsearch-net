@@ -24,10 +24,10 @@ namespace Tests.Cluster.ClusterState
 		protected override string UrlPath => "/_cluster/state";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterState(),
-			(client, f) => client.ClusterStateAsync(),
-			(client, r) => client.ClusterState(r),
-			(client, r) => client.ClusterStateAsync(r)
+			(client, f) => client.Cluster.State(),
+			(client, f) => client.Cluster.StateAsync(),
+			(client, r) => client.Cluster.State(r),
+			(client, r) => client.Cluster.StateAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterStateResponse response)

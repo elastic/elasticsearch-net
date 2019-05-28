@@ -18,10 +18,10 @@ namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 		protected override ClusterGetSettingsRequest Initializer { get; } = new ClusterGetSettingsRequest();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterGetSettings(),
-			(client, f) => client.ClusterGetSettingsAsync(),
-			(client, r) => client.ClusterGetSettings(r),
-			(client, r) => client.ClusterGetSettingsAsync(r)
+			(client, f) => client.Cluster.GetSettings(),
+			(client, f) => client.Cluster.GetSettingsAsync(),
+			(client, r) => client.Cluster.GetSettings(r),
+			(client, r) => client.Cluster.GetSettingsAsync(r)
 		);
 	}
 }

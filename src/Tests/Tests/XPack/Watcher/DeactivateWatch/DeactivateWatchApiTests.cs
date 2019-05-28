@@ -31,7 +31,7 @@ namespace Tests.XPack.Watcher.DeactivateWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.PutWatch(callUniqueValue.Value, p => p
 					.Active()
 					.Input(i => i
 						.Search(s => s
@@ -71,10 +71,10 @@ namespace Tests.XPack.Watcher.DeactivateWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeactivateWatch(CallIsolatedValue, f),
-			(client, f) => client.DeactivateWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.DeactivateWatch(r),
-			(client, r) => client.DeactivateWatchAsync(r)
+			(client, f) => client.Watcher.DeactivateWatch(CallIsolatedValue, f),
+			(client, f) => client.Watcher.DeactivateWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.DeactivateWatch(r),
+			(client, r) => client.Watcher.DeactivateWatchAsync(r)
 		);
 
 		protected override DeactivateWatchDescriptor NewDescriptor() => new DeactivateWatchDescriptor(CallIsolatedValue);

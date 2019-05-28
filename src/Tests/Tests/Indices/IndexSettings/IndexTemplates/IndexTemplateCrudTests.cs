@@ -19,20 +19,20 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			Calls<IndexTemplateExistsDescriptor, IndexTemplateExistsRequest, IIndexTemplateExistsRequest, ExistsResponse>(
 				id => new IndexTemplateExistsRequest(id),
 				(id, d) => d,
-				(s, c, f) => c.IndexTemplateExists(s, f),
-				(s, c, f) => c.IndexTemplateExistsAsync(s, f),
-				(s, c, r) => c.IndexTemplateExists(r),
-				(s, c, r) => c.IndexTemplateExistsAsync(r)
+				(s, c, f) => c.Indices.IndexTemplateExists(s, f),
+				(s, c, f) => c.Indices.IndexTemplateExistsAsync(s, f),
+				(s, c, r) => c.Indices.IndexTemplateExists(r),
+				(s, c, r) => c.Indices.IndexTemplateExistsAsync(r)
 			);
 
 		protected override LazyResponses Create() =>
 			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, PutIndexTemplateResponse>(
 				CreateInitializer,
 				CreateFluent,
-				(s, c, f) => c.PutIndexTemplate(s, f),
-				(s, c, f) => c.PutIndexTemplateAsync(s, f),
-				(s, c, r) => c.PutIndexTemplate(r),
-				(s, c, r) => c.PutIndexTemplateAsync(r)
+				(s, c, f) => c.Indices.PutIndexTemplate(s, f),
+				(s, c, f) => c.Indices.PutIndexTemplateAsync(s, f),
+				(s, c, r) => c.Indices.PutIndexTemplate(r),
+				(s, c, r) => c.Indices.PutIndexTemplateAsync(r)
 			);
 
 		private PutIndexTemplateRequest CreateInitializer(string name) => new PutIndexTemplateRequest(name)
@@ -54,10 +54,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, GetIndexTemplateResponse>(
 				name => new GetIndexTemplateRequest(name),
 				(name, d) => d.Name(name),
-				(s, c, f) => c.GetIndexTemplate(f),
-				(s, c, f) => c.GetIndexTemplateAsync(f),
-				(s, c, r) => c.GetIndexTemplate(r),
-				(s, c, r) => c.GetIndexTemplateAsync(r)
+				(s, c, f) => c.Indices.GetIndexTemplate(s, f),
+				(s, c, f) => c.Indices.GetIndexTemplateAsync(s, f),
+				(s, c, r) => c.Indices.GetIndexTemplate(r),
+				(s, c, r) => c.Indices.GetIndexTemplateAsync(r)
 			);
 
 		protected override void ExpectAfterCreate(GetIndexTemplateResponse response)
@@ -73,10 +73,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, PutIndexTemplateResponse>(
 				PutInitializer,
 				PutFluent,
-				(s, c, f) => c.PutIndexTemplate(s, f),
-				(s, c, f) => c.PutIndexTemplateAsync(s, f),
-				(s, c, r) => c.PutIndexTemplate(r),
-				(s, c, r) => c.PutIndexTemplateAsync(r)
+				(s, c, f) => c.Indices.PutIndexTemplate(s, f),
+				(s, c, f) => c.Indices.PutIndexTemplateAsync(s, f),
+				(s, c, r) => c.Indices.PutIndexTemplate(r),
+				(s, c, r) => c.Indices.PutIndexTemplateAsync(r)
 			);
 
 		private PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
@@ -107,10 +107,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(
 				name => new DeleteIndexTemplateRequest(name),
 				(name, d) => d,
-				(s, c, f) => c.DeleteIndexTemplate(s, f),
-				(s, c, f) => c.DeleteIndexTemplateAsync(s, f),
-				(s, c, r) => c.DeleteIndexTemplate(r),
-				(s, c, r) => c.DeleteIndexTemplateAsync(r)
+				(s, c, f) => c.Indices.DeleteIndexTemplate(s, f),
+				(s, c, f) => c.Indices.DeleteIndexTemplateAsync(s, f),
+				(s, c, r) => c.Indices.DeleteIndexTemplate(r),
+				(s, c, r) => c.Indices.DeleteIndexTemplateAsync(r)
 			);
 
 		protected override async Task GetAfterDeleteIsValid() => await AssertOnGetAfterDelete(r => r.ShouldNotBeValid());

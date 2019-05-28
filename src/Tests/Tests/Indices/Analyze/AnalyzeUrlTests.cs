@@ -13,17 +13,17 @@ namespace Tests.Indices.Analyze
 			var hardcoded = "hardcoded";
 			var index = "index";
 			await POST($"/{index}/_analyze")
-					.Fluent(c => c.Analyze(a => a.Text(hardcoded).Index(index)))
-					.Request(c => c.Analyze(new AnalyzeRequest(index, hardcoded)))
-					.FluentAsync(c => c.AnalyzeAsync(a => a.Text(hardcoded).Index(index)))
-					.RequestAsync(c => c.AnalyzeAsync(new AnalyzeRequest(index, hardcoded)))
+					.Fluent(c => c.Indices.Analyze(a => a.Text(hardcoded).Index(index)))
+					.Request(c => c.Indices.Analyze(new AnalyzeRequest(index, hardcoded)))
+					.FluentAsync(c => c.Indices.AnalyzeAsync(a => a.Text(hardcoded).Index(index)))
+					.RequestAsync(c => c.Indices.AnalyzeAsync(new AnalyzeRequest(index, hardcoded)))
 				;
 
 			await POST($"/_analyze")
-					.Fluent(c => c.Analyze(a => a.Text(hardcoded)))
-					.Request(c => c.Analyze(new AnalyzeRequest() { Text = new[] { hardcoded } }))
-					.FluentAsync(c => c.AnalyzeAsync(a => a.Text(hardcoded)))
-					.RequestAsync(c => c.AnalyzeAsync(new AnalyzeRequest() { Text = new[] { hardcoded } }))
+					.Fluent(c => c.Indices.Analyze(a => a.Text(hardcoded)))
+					.Request(c => c.Indices.Analyze(new AnalyzeRequest() { Text = new[] { hardcoded } }))
+					.FluentAsync(c => c.Indices.AnalyzeAsync(a => a.Text(hardcoded)))
+					.RequestAsync(c => c.Indices.AnalyzeAsync(new AnalyzeRequest() { Text = new[] { hardcoded } }))
 				;
 		}
 	}

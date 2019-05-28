@@ -19,6 +19,10 @@ namespace Tests.Search.Scroll.Scroll
 		public SlicedScrollSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_search/scroll";
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override object ExpectJson => new
 		{
@@ -26,14 +30,8 @@ namespace Tests.Search.Scroll.Scroll
 			scroll_id = _scrollId
 		};
 
-		protected override int ExpectStatusCode => 200;
-
-		protected override Func<ScrollDescriptor<Project>, IScrollRequest> Fluent => s => s.Scroll("1m").ScrollId(_scrollId);
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
 		protected override ScrollRequest Initializer => new ScrollRequest(_scrollId, "1m");
-		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_search/scroll";
+		protected override ScrollDescriptor<Project> NewDescriptor() => new ScrollDescriptor<Project>("1m", _scrollId);
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Scroll("1m", _scrollId, f),

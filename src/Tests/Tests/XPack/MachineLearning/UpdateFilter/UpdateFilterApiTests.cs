@@ -52,10 +52,10 @@ namespace Tests.XPack.MachineLearning.UpdateFilter
 		protected override string UrlPath => $"_ml/filters/{CallIsolatedValue}/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.UpdateFilter(CallIsolatedValue, f),
-			(client, f) => client.UpdateFilterAsync(CallIsolatedValue, f),
-			(client, r) => client.UpdateFilter(r),
-			(client, r) => client.UpdateFilterAsync(r)
+			(client, f) => client.MachineLearning.UpdateFilter(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.UpdateFilterAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.UpdateFilter(r),
+			(client, r) => client.MachineLearning.UpdateFilterAsync(r)
 		);
 
 		protected override UpdateFilterDescriptor NewDescriptor() => new UpdateFilterDescriptor(CallIsolatedValue);

@@ -24,10 +24,10 @@ namespace Tests.Cat.CatFielddata
 		protected override string UrlPath => "/_cat/fielddata";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatFielddata(),
-			(client, f) => client.CatFielddataAsync(),
-			(client, r) => client.CatFielddata(r),
-			(client, r) => client.CatFielddataAsync(r)
+			(client, f) => client.Cat.Fielddata(),
+			(client, f) => client.Cat.FielddataAsync(),
+			(client, r) => client.Cat.Fielddata(r),
+			(client, r) => client.Cat.FielddataAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

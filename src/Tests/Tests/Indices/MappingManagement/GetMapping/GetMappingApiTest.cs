@@ -37,10 +37,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override string UrlPath => "/project/_mapping?ignore_unavailable=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetMapping<Project>(f),
-			(client, f) => client.GetMappingAsync<Project>(f),
-			(client, r) => client.GetMapping(r),
-			(client, r) => client.GetMappingAsync(r)
+			(client, f) => client.Indices.GetMapping<Project>(f),
+			(client, f) => client.Indices.GetMappingAsync<Project>(f),
+			(client, r) => client.Indices.GetMapping(r),
+			(client, r) => client.Indices.GetMappingAsync(r)
 		);
 
 		protected override void ExpectResponse(GetMappingResponse response)
@@ -124,10 +124,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetMapping<Project>(f),
-			(client, f) => client.GetMappingAsync<Project>(f),
-			(client, r) => client.GetMapping(r),
-			(client, r) => client.GetMappingAsync(r)
+			(client, f) => client.Indices.GetMapping<Project>(f),
+			(client, f) => client.Indices.GetMappingAsync<Project>(f),
+			(client, r) => client.Indices.GetMapping(r),
+			(client, r) => client.Indices.GetMappingAsync(r)
 		);
 
 		protected override void ExpectResponse(GetMappingResponse response)

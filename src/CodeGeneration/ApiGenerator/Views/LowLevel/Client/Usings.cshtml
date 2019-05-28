@@ -1,0 +1,14 @@
+@using RazorLight
+@using System.Linq
+@using ApiGenerator.Domain
+@using ApiGenerator.Domain.Code
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@foreach(var kv in Model.EndpointsPerNamespace)
+{
+	if (kv.Key != CsharpNames.RootNamespace)
+	{
+<text>using Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(kv.Key)@(CsharpNames.ApiNamespaceSuffix);
+</text>
+		continue;
+	}
+}

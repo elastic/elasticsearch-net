@@ -25,10 +25,10 @@ namespace Tests.Indices.StatusManagement.Upgrade
 		protected override string UrlPath => $"/{CallIsolatedValue}/_upgrade?allow_no_indices=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Upgrade(CallIsolatedValue, f),
-			(client, f) => client.UpgradeAsync(CallIsolatedValue, f),
-			(client, r) => client.Upgrade(r),
-			(client, r) => client.UpgradeAsync(r)
+			(client, f) => client.Indices.Upgrade(CallIsolatedValue, f),
+			(client, f) => client.Indices.UpgradeAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Upgrade(r),
+			(client, r) => client.Indices.UpgradeAsync(r)
 		);
 	}
 }

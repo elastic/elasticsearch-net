@@ -32,10 +32,10 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetDatafeeds(f),
-			(client, f) => client.GetDatafeedsAsync(f),
-			(client, r) => client.GetDatafeeds(r),
-			(client, r) => client.GetDatafeedsAsync(r)
+			(client, f) => client.MachineLearning.GetDatafeeds(f),
+			(client, f) => client.MachineLearning.GetDatafeedsAsync(f),
+			(client, r) => client.MachineLearning.GetDatafeeds(r),
+			(client, r) => client.MachineLearning.GetDatafeedsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetDatafeedsResponse response)
@@ -89,10 +89,10 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetDatafeeds(f),
-			(client, f) => client.GetDatafeedsAsync(f),
-			(client, r) => client.GetDatafeeds(r),
-			(client, r) => client.GetDatafeedsAsync(r)
+			(client, f) => client.MachineLearning.GetDatafeeds(f),
+			(client, f) => client.MachineLearning.GetDatafeedsAsync(f),
+			(client, r) => client.MachineLearning.GetDatafeeds(r),
+			(client, r) => client.MachineLearning.GetDatafeedsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetDatafeedsResponse response)

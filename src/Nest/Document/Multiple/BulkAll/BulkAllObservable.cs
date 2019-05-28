@@ -104,7 +104,7 @@ namespace Nest
 			var indices = _partitionedBulkRequest.RefreshIndices ?? _partitionedBulkRequest.Index;
 			if (indices == null) return;
 
-			var refresh = _client.Refresh(indices);
+			var refresh = _client.Indices.Refresh(indices);
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 

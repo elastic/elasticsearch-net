@@ -26,10 +26,10 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteJob(CallIsolatedValue, f),
-			(client, f) => client.DeleteJobAsync(CallIsolatedValue, f),
-			(client, r) => client.DeleteJob(r),
-			(client, r) => client.DeleteJobAsync(r)
+			(client, f) => client.MachineLearning.DeleteJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.DeleteJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.DeleteJob(r),
+			(client, r) => client.MachineLearning.DeleteJobAsync(r)
 		);
 
 		protected override DeleteJobDescriptor NewDescriptor() => new DeleteJobDescriptor(CallIsolatedValue);

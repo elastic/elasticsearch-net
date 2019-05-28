@@ -1,10 +1,12 @@
 using System;
-using System.Net.Http;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
+using ApiGenerator.Configuration;
+using ApiGenerator.Generator;
 using CsQuery.ExtensionMethods.Internal;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 
-namespace ApiGenerator.Domain 
+namespace ApiGenerator.Domain.Code 
 {
 	public class CsharpNames
 	{
@@ -31,11 +33,28 @@ namespace ApiGenerator.Domain
 		public string ApiName { get; private set; }
 		
 		public string RequestName => $"{ApiName}Request";
-		public string InterfaceName => $"I{RequestName}";
+
+		public string ResponseName
+		{
+			get
+			{
+				if (Namespace == "Cat") return $"CatResponse<{ApiName}Record>";
+				else if (ApiName.EndsWith("Exists")) return $"ExistsResponse";
+
+				var generatedName = $"{ApiName}Response";
+				return CodeConfiguration.ResponseLookup.TryGetValue(generatedName, out var lookup) ? lookup.Item1 : generatedName;
+			}
+		}
+		public string RequestInterfaceName => $"I{RequestName}";
 		public string ParametersName => $"{RequestName}Parameters";
 		public string DescriptorName => $"{ApiName}Descriptor";
 
+		public const string ApiNamespace = "Specification";
+		public const string ApiNamespaceSuffix = "Api";
 		public const string RootNamespace = "NoNamespace";
+		public const string LowLevelClientNamespacePrefix = "LowLevel";
+		public const string HighLevelClientNamespacePrefix = "";
+		public const string ClientNamespaceSuffix = "Namespace";
 		private static string CreateCSharpNamespace(string endpointNamespace)
 		{
 			switch (endpointNamespace)
@@ -68,18 +87,58 @@ namespace ApiGenerator.Domain
 
 		
 		public string GenericsDeclaredOnRequest => 
-			CodeConfiguration.RequestInterfaceGenericsLookup.TryGetValue(InterfaceName, out var requestGeneric) ? requestGeneric : null;
+			CodeConfiguration.RequestInterfaceGenericsLookup.TryGetValue(RequestInterfaceName, out var requestGeneric) ? requestGeneric : null;
+		
+		public string GenericsDeclaredOnResponse => 
+			CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var requestGeneric) ? requestGeneric.Item2 : null;
 
 		public string GenericsDeclaredOnDescriptor =>
 			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? generic : null;
+			
+		public List<string> ResponseGenerics =>
+			!CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var responseGeneric)
+			|| string.IsNullOrEmpty(responseGeneric.Item2)
+				? new List<string>()
+				: SplitGeneric(responseGeneric.Item2);
+		
+		public List<string> DescriptorGenerics =>
+			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? SplitGeneric(generic) : new List<string>();
+
+		public bool DescriptorBindsOverMultipleDocuments =>
+			HighLevelDescriptorMethodGenerics.Count == 2 && HighLevelDescriptorMethodGenerics.All(g => g.Contains("Document"));
+		//&& ResponseGenerics.FirstOrDefault() == DescriptorBoundDocumentGeneric ;
+		
+		public string DescriptorBoundDocumentGeneric => 
+			HighLevelDescriptorMethodGenerics.FirstOrDefault(g=>g == "TDocument") ?? HighLevelDescriptorMethodGenerics.Last();
+
+		public List<string> HighLevelDescriptorMethodGenerics => DescriptorGenerics
+			.Concat(ResponseGenerics)
+			.Distinct()
+			.ToList();
+
+		public static List<string> SplitGeneric(string generic) => (generic ?? string.Empty)
+			.Replace("<", "")
+			.Replace(">", "")
+			.Split(",")
+			.Where(g => !string.IsNullOrWhiteSpace(g))
+			.Distinct()
+			.ToList();
+
 
 		public bool DescriptorNotFoundInCodebase => !CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out _);
 		
 		public string GenericDescriptorName => GenericsDeclaredOnDescriptor.IsNullOrEmpty() ? null : $"{DescriptorName}{GenericsDeclaredOnDescriptor}";
 		public string GenericRequestName => GenericsDeclaredOnRequest.IsNullOrEmpty() ? null : $"{RequestName}{GenericsDeclaredOnRequest}";
 		public string GenericInterfaceName => GenericsDeclaredOnRequest.IsNullOrEmpty() ? null : $"I{GenericRequestName}";
+		public string GenericResponseName => GenericsDeclaredOnResponse.IsNullOrEmpty() ? null : $"{ResponseName}{GenericsDeclaredOnResponse}";
 		
 		public string GenericOrNonGenericDescriptorName => GenericDescriptorName ?? DescriptorName;
-		public string GenericOrNonGenericInterfaceName => GenericInterfaceName  ?? InterfaceName;
+		public string GenericOrNonGenericInterfaceName => GenericInterfaceName  ?? RequestInterfaceName;
+		public string GenericOrNonGenericResponseName => GenericResponseName ?? ResponseName;
+
+		/// <summary> If matching Request.cs only defined generic interface make the client method only accept said interface </summary>
+		public string GenericOrNonGenericInterfacePreference => CodeConfiguration.GenericOnlyInterfaces.Contains(RequestInterfaceName)
+			? GenericInterfaceName
+			: RequestInterfaceName;
 	}
 }

@@ -10,9 +10,9 @@ namespace Tests.XPack.MachineLearning.PutFilter
 	{
 		[U] public override async Task Urls() =>
 			await PUT("/_ml/filters/filter_id")
-				.Fluent(c => c.PutFilter("filter_id", p => p))
-				.Request(c => c.PutFilter(new PutFilterRequest("filter_id")))
-				.FluentAsync(c => c.PutFilterAsync("filter_id", p => p))
-				.RequestAsync(c => c.PutFilterAsync(new PutFilterRequest("filter_id")));
+				.Fluent(c => c.MachineLearning.PutFilter("filter_id", p => p))
+				.Request(c => c.MachineLearning.PutFilter(new PutFilterRequest("filter_id")))
+				.FluentAsync(c => c.MachineLearning.PutFilterAsync("filter_id", p => p))
+				.RequestAsync(c => c.MachineLearning.PutFilterAsync(new PutFilterRequest("filter_id")));
 	}
 }

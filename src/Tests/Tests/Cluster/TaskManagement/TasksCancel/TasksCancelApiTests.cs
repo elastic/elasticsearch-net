@@ -34,7 +34,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			foreach (var index in values.Values)
 			{
 				client.IndexMany(Enumerable.Range(0, 10000).Select(i => new Test { Id = i + 1, Flag = "bar" }), index);
-				client.Refresh(index);
+				client.Indices.Refresh(index);
 			}
 			foreach (var view in values.Views)
 			{
@@ -48,17 +48,17 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 				);
 
 				var taskId = reindex.Task;
-				var taskInfo = client.GetTask(taskId);
+				var taskInfo = client.Tasks.GetTask(taskId);
 				taskInfo.ShouldBeValid();
 				values.ExtendedValue("taskId", taskId);
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CancelTasks(f),
-			(client, f) => client.CancelTasksAsync(f),
-			(client, r) => client.CancelTasks(r),
-			(client, r) => client.CancelTasksAsync(r)
+			(client, f) => client.Tasks.CancelTasks(f),
+			(client, f) => client.Tasks.CancelTasksAsync(f),
+			(client, r) => client.Tasks.CancelTasks(r),
+			(client, r) => client.Tasks.CancelTasksAsync(r)
 		);
 
 		protected override void ExpectResponse(CancelTasksResponse response)

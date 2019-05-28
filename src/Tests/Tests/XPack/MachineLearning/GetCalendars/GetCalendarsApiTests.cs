@@ -43,10 +43,10 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendars(f),
-			(client, f) => client.GetCalendarsAsync(f),
-			(client, r) => client.GetCalendars(r),
-			(client, r) => client.GetCalendarsAsync(r)
+			(client, f) => client.MachineLearning.GetCalendars(f),
+			(client, f) => client.MachineLearning.GetCalendarsAsync(f),
+			(client, r) => client.MachineLearning.GetCalendars(r),
+			(client, r) => client.MachineLearning.GetCalendarsAsync(r)
 		);
 
 		protected override GetCalendarsDescriptor NewDescriptor() => new GetCalendarsDescriptor().CalendarId(CallIsolatedValue);
@@ -109,10 +109,10 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		protected override string UrlPath => $"_ml/calendars";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendars(f),
-			(client, f) => client.GetCalendarsAsync(f),
-			(client, r) => client.GetCalendars(r),
-			(client, r) => client.GetCalendarsAsync(r)
+			(client, f) => client.MachineLearning.GetCalendars(f),
+			(client, f) => client.MachineLearning.GetCalendarsAsync(f),
+			(client, r) => client.MachineLearning.GetCalendars(r),
+			(client, r) => client.MachineLearning.GetCalendarsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetCalendarsResponse response)

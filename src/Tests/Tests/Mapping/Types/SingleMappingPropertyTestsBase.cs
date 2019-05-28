@@ -94,10 +94,10 @@ namespace Tests.Mapping.Types
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutIndexTemplate(CallIsolatedValue, f),
-			(client, f) => client.PutIndexTemplateAsync(CallIsolatedValue, f),
-			(client, r) => client.PutIndexTemplate(r),
-			(client, r) => client.PutIndexTemplateAsync(r)
+			(client, f) => client.Indices.PutIndexTemplate(CallIsolatedValue, f),
+			(client, f) => client.Indices.PutIndexTemplateAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.PutIndexTemplate(r),
+			(client, r) => client.Indices.PutIndexTemplateAsync(r)
 		);
 
 		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);

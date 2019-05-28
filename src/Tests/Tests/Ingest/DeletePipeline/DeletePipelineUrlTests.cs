@@ -13,10 +13,10 @@ namespace Tests.Ingest.DeletePipeline
 			var id = "pipeline-1";
 
 			await DELETE($"/_ingest/pipeline/{id}")
-					.Fluent(c => c.DeletePipeline(id))
-					.Request(c => c.DeletePipeline(new DeletePipelineRequest(id)))
-					.FluentAsync(c => c.DeletePipelineAsync(id))
-					.RequestAsync(c => c.DeletePipelineAsync(new DeletePipelineRequest(id)))
+					.Fluent(c => c.Ingest.DeletePipeline(id))
+					.Request(c => c.Ingest.DeletePipeline(new DeletePipelineRequest(id)))
+					.FluentAsync(c => c.Ingest.DeletePipelineAsync(id))
+					.RequestAsync(c => c.Ingest.DeletePipelineAsync(new DeletePipelineRequest(id)))
 				;
 		}
 	}

@@ -19,10 +19,10 @@ namespace Tests.Cat.CatNodeAttributes
 		protected override string UrlPath => "/_cat/nodeattrs";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatNodeAttributes(),
-			(client, f) => client.CatNodeAttributesAsync(),
-			(client, r) => client.CatNodeAttributes(r),
-			(client, r) => client.CatNodeAttributesAsync(r)
+			(client, f) => client.Cat.NodeAttributes(),
+			(client, f) => client.Cat.NodeAttributesAsync(),
+			(client, r) => client.Cat.NodeAttributes(r),
+			(client, r) => client.Cat.NodeAttributesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatNodeAttributesRecord> response) =>

@@ -36,7 +36,7 @@ namespace Tests.XPack.Watcher.GetWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.PutWatch(callUniqueValue.Value, p => p
 					.Input(i => i
 						.Chain(c => c
 							.Input("simple", ci => ci
@@ -213,10 +213,10 @@ namespace Tests.XPack.Watcher.GetWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetWatch(CallIsolatedValue, f),
-			(client, f) => client.GetWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.GetWatch(r),
-			(client, r) => client.GetWatchAsync(r)
+			(client, f) => client.Watcher.GetWatch(CallIsolatedValue, f),
+			(client, f) => client.Watcher.GetWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.GetWatch(r),
+			(client, r) => client.Watcher.GetWatchAsync(r)
 		);
 
 		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue);
@@ -314,10 +314,10 @@ namespace Tests.XPack.Watcher.GetWatch
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => GetWatchApiTests.PutWatch(client, values);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetWatch(CallIsolatedValue + "x", f),
-			(client, f) => client.GetWatchAsync(CallIsolatedValue + "x", f),
-			(client, r) => client.GetWatch(r),
-			(client, r) => client.GetWatchAsync(r)
+			(client, f) => client.Watcher.GetWatch(CallIsolatedValue + "x", f),
+			(client, f) => client.Watcher.GetWatchAsync(CallIsolatedValue + "x", f),
+			(client, r) => client.Watcher.GetWatch(r),
+			(client, r) => client.Watcher.GetWatchAsync(r)
 		);
 
 		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue + "x");

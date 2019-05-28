@@ -31,25 +31,25 @@ namespace Nest
 		public int? Size { get; set; }
 	}
 
-	public partial class RollupSearchDescriptor<T> where T : class
+	public partial class RollupSearchDescriptor<TDocument> where TDocument : class
 	{
 		AggregationDictionary IRollupSearchRequest.Aggregations { get; set; }
 		QueryContainer IRollupSearchRequest.Query { get; set; }
 		int? IRollupSearchRequest.Size { get; set; }
 
 		/// <inheritdoc cref="IRollupSearchRequest.Size" />
-		public RollupSearchDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
+		public RollupSearchDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IRollupSearchRequest.Aggregations" />
-		public RollupSearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations, (a, v) => a.Aggregations = v);
+		public RollupSearchDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="IRollupSearchRequest.Aggregations" />
-		public RollupSearchDescriptor<T> Aggregations(AggregationDictionary aggregations) =>
+		public RollupSearchDescriptor<TDocument> Aggregations(AggregationDictionary aggregations) =>
 			Assign(aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="IRollupSearchRequest.Query" />
-		public RollupSearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public RollupSearchDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query) =>
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }

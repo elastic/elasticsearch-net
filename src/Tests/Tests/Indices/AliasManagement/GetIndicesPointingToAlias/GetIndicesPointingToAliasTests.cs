@@ -30,13 +30,13 @@ namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 
 			foreach (var index in Indices)
 			{
-				if (_client.IndexExists(index).Exists) continue;
+				if (_client.Indices.IndexExists(index).Exists) continue;
 
 				lock (Unique)
 				{
-					if (_client.IndexExists(index).Exists) continue;
+					if (_client.Indices.IndexExists(index).Exists) continue;
 
-					var createResponse = _client.CreateIndex(index, c => c
+					var createResponse = _client.Indices.CreateIndex(index, c => c
 						.Settings(s => s
 							.NumberOfShards(1)
 							.NumberOfReplicas(0)

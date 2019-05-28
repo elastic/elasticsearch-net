@@ -45,7 +45,7 @@ namespace Tests.XPack.DeprecationInfo
 			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
-			var response = client.NodesUsage();
+			var response = client.Nodes.Usage();
 			response.ShouldBeValid();
 
 			response.ClusterName.Should().Be("my_cluster");

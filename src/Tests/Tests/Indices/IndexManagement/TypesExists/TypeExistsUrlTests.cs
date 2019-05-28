@@ -17,10 +17,10 @@ namespace Tests.Indices.IndexManagement.TypeExists
 			var types = "_doc";
 			var type = "_doc";
 			await HEAD($"/{index}/_mapping/{type}")
-					.Fluent(c => c.TypeExists(indices, types))
-					.Request(c => c.TypeExists(new TypeExistsRequest(indices, types)))
-					.FluentAsync(c => c.TypeExistsAsync(indices, types))
-					.RequestAsync(c => c.TypeExistsAsync(new TypeExistsRequest(indices, types)))
+					.Fluent(c => c.Indices.TypeExists(indices, types))
+					.Request(c => c.Indices.TypeExists(new TypeExistsRequest(indices, types)))
+					.FluentAsync(c => c.Indices.TypeExistsAsync(indices, types))
+					.RequestAsync(c => c.Indices.TypeExistsAsync(new TypeExistsRequest(indices, types)))
 				;
 		}
 	}

@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
+using static Nest.Infer;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Indices.AliasManagement.GetAlias
@@ -13,29 +14,33 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			Name name = "hardcoded";
 			IndexName index = "index";
 			await GET($"/_alias")
-					.Fluent(c => c.GetAlias())
-					.Request(c => c.GetAlias(new GetAliasRequest()))
-					.FluentAsync(c => c.GetAliasAsync())
-					.RequestAsync(c => c.GetAliasAsync(new GetAliasRequest()))
+					.Fluent(c => c.Indices.GetAlias())
+					.Request(c => c.Indices.GetAlias(new GetAliasRequest()))
+					.FluentAsync(c => c.Indices.GetAliasAsync())
+					.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest()))
 				;
+			await GET($"/_all/_alias/hardcoded")
+				.Fluent(c => c.Indices.GetAlias(AllIndices, b => b.Name(name)))
+				.Request(c => c.Indices.GetAlias(new GetAliasRequest(AllIndices, name)))
+				.FluentAsync(c => c.Indices.GetAliasAsync(AllIndices, b => b.Name(name)))
+				.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest(AllIndices, name)));
+				
 			await GET($"/_alias/hardcoded")
-					.Fluent(c => c.GetAlias(b => b.Name(name)))
-					.Request(c => c.GetAlias(new GetAliasRequest(name)))
-					.FluentAsync(c => c.GetAliasAsync(b => b.Name(name)))
-					.RequestAsync(c => c.GetAliasAsync(new GetAliasRequest(name)))
+					.Request(c => c.Indices.GetAlias(new GetAliasRequest(name)))
+					.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest(name)))
 				;
 			await GET($"/index/_alias")
-					.Fluent(c => c.GetAlias(b => b.Index(index)))
-					.Request(c => c.GetAlias(new GetAliasRequest(index)))
-					.FluentAsync(c => c.GetAliasAsync(b => b.Index(index)))
-					.RequestAsync(c => c.GetAliasAsync(new GetAliasRequest(index)))
+					.Fluent(c => c.Indices.GetAlias(index))
+					.Request(c => c.Indices.GetAlias(new GetAliasRequest(index)))
+					.FluentAsync(c => c.Indices.GetAliasAsync(index))
+					.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest(index)))
 				;
 
 			await GET($"/index/_alias/hardcoded")
-					.Fluent(c => c.GetAlias(b => b.Index(index).Name(name)))
-					.Request(c => c.GetAlias(new GetAliasRequest(index, name)))
-					.FluentAsync(c => c.GetAliasAsync(b => b.Index(index).Name(name)))
-					.RequestAsync(c => c.GetAliasAsync(new GetAliasRequest(index, name)))
+					.Fluent(c => c.Indices.GetAlias(index, b => b.Name(name)))
+					.Request(c => c.Indices.GetAlias(new GetAliasRequest(index, name)))
+					.FluentAsync(c => c.Indices.GetAliasAsync(index, b => b.Name(name)))
+					.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest(index, name)))
 				;
 		}
 	}

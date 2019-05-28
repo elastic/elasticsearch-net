@@ -19,10 +19,10 @@ namespace Tests.Cluster.ClusterStats
 		protected override string UrlPath => "/_cluster/stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterStats(),
-			(client, f) => client.ClusterStatsAsync(),
-			(client, r) => client.ClusterStats(r),
-			(client, r) => client.ClusterStatsAsync(r)
+			(client, f) => client.Cluster.Stats(),
+			(client, f) => client.Cluster.StatsAsync(),
+			(client, r) => client.Cluster.Stats(r),
+			(client, r) => client.Cluster.StatsAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterStatsResponse response)

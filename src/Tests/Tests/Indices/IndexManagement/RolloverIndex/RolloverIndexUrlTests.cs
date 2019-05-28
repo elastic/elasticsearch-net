@@ -12,18 +12,18 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 		{
 			var alias = "alias1";
 			await POST($"/{alias}/_rollover")
-				.Fluent(c => c.RolloverIndex(alias))
-				.Request(c => c.RolloverIndex(new RolloverIndexRequest(alias)))
-				.FluentAsync(c => c.RolloverIndexAsync(alias))
-				.RequestAsync(C => C.RolloverIndexAsync(new RolloverIndexRequest(alias)));
+				.Fluent(c => c.Indices.RolloverIndex(alias))
+				.Request(c => c.Indices.RolloverIndex(new RolloverIndexRequest(alias)))
+				.FluentAsync(c => c.Indices.RolloverIndexAsync(alias))
+				.RequestAsync(C => C.Indices.RolloverIndexAsync(new RolloverIndexRequest(alias)));
 
 			var index = "newindex";
 
 			await POST($"/{alias}/_rollover/{index}")
-				.Fluent(c => c.RolloverIndex(alias, r => r.NewIndex(index)))
-				.Request(c => c.RolloverIndex(new RolloverIndexRequest(alias, index)))
-				.FluentAsync(c => c.RolloverIndexAsync(alias, r => r.NewIndex(index)))
-				.RequestAsync(C => C.RolloverIndexAsync(new RolloverIndexRequest(alias, index)));
+				.Fluent(c => c.Indices.RolloverIndex(alias, r => r.NewIndex(index)))
+				.Request(c => c.Indices.RolloverIndex(new RolloverIndexRequest(alias, index)))
+				.FluentAsync(c => c.Indices.RolloverIndexAsync(alias, r => r.NewIndex(index)))
+				.RequestAsync(C => C.Indices.RolloverIndexAsync(new RolloverIndexRequest(alias, index)));
 		}
 	}
 }

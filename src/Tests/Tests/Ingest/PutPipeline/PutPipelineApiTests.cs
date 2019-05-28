@@ -41,10 +41,10 @@ namespace Tests.Ingest.PutPipeline
 		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutPipeline(_id, f),
-			(client, f) => client.PutPipelineAsync(_id, f),
-			(client, r) => client.PutPipeline(r),
-			(client, r) => client.PutPipelineAsync(r)
+			(client, f) => client.Ingest.PutPipeline(_id, f),
+			(client, f) => client.Ingest.PutPipelineAsync(_id, f),
+			(client, r) => client.Ingest.PutPipeline(r),
+			(client, r) => client.Ingest.PutPipelineAsync(r)
 		);
 
 		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);

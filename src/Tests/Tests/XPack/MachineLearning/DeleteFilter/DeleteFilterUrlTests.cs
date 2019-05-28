@@ -10,9 +10,9 @@ namespace Tests.XPack.MachineLearning.DeleteFilter
 	{
 		[U] public override async Task Urls() =>
 			await DELETE("/_ml/filters/filter_id")
-				.Fluent(c => c.DeleteFilter("filter_id", p => p))
-				.Request(c => c.DeleteFilter(new DeleteFilterRequest("filter_id")))
-				.FluentAsync(c => c.DeleteFilterAsync("filter_id", p => p))
-				.RequestAsync(c => c.DeleteFilterAsync(new DeleteFilterRequest("filter_id")));
+				.Fluent(c => c.MachineLearning.DeleteFilter("filter_id", p => p))
+				.Request(c => c.MachineLearning.DeleteFilter(new DeleteFilterRequest("filter_id")))
+				.FluentAsync(c => c.MachineLearning.DeleteFilterAsync("filter_id", p => p))
+				.RequestAsync(c => c.MachineLearning.DeleteFilterAsync(new DeleteFilterRequest("filter_id")));
 	}
 }

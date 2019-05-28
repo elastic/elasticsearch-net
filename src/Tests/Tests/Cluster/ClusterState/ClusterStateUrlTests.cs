@@ -4,6 +4,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterState
 {
@@ -12,27 +13,28 @@ namespace Tests.Cluster.ClusterState
 		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/state")
-					.Fluent(c => c.ClusterState())
-					.Request(c => c.ClusterState(new ClusterStateRequest()))
-					.FluentAsync(c => c.ClusterStateAsync())
-					.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest()))
+					.Fluent(c => c.Cluster.State())
+					.Request(c => c.Cluster.State(new ClusterStateRequest()))
+					.FluentAsync(c => c.Cluster.StateAsync())
+					.RequestAsync(c => c.Cluster.StateAsync(new ClusterStateRequest()))
+				
 				;
 
 			var metrics = ClusterStateMetric.MasterNode | ClusterStateMetric.Metadata;
 			await GET("/_cluster/state/metadata%2Cmaster_node")
-					.Fluent(c => c.ClusterState(p => p.Metric(metrics)))
-					.Request(c => c.ClusterState(new ClusterStateRequest(metrics)))
-					.FluentAsync(c => c.ClusterStateAsync(p => p.Metric(metrics)))
-					.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest(metrics)))
+					.Fluent(c => c.Cluster.State(null, p => p.Metric(metrics)))
+					.Request(c => c.Cluster.State(new ClusterStateRequest(metrics)))
+					.FluentAsync(c => c.Cluster.StateAsync(null, p => p.Metric(metrics)))
+					.RequestAsync(c => c.Cluster.StateAsync(new ClusterStateRequest(metrics)))
 				;
 
 			metrics |= ClusterStateMetric.All;
 			var index = "indexx";
 			await GET($"/_cluster/state/_all/{index}")
-					.Fluent(c => c.ClusterState(p => p.Metric(metrics).Index(index)))
-					.Request(c => c.ClusterState(new ClusterStateRequest(metrics, index)))
-					.FluentAsync(c => c.ClusterStateAsync(p => p.Metric(metrics).Index(index)))
-					.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest(metrics, index)))
+					.Fluent(c => c.Cluster.State(index, p => p.Metric(metrics)))
+					.Request(c => c.Cluster.State(new ClusterStateRequest(metrics, index)))
+					.FluentAsync(c => c.Cluster.StateAsync(index, p => p.Metric(metrics)))
+					.RequestAsync(c => c.Cluster.StateAsync(new ClusterStateRequest(metrics, index)))
 				;
 		}
 	}

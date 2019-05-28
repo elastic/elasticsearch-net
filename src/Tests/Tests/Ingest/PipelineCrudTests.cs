@@ -18,10 +18,10 @@ namespace Tests.Ingest
 		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, PutPipelineResponse>(
 			CreateInitializer,
 			CreateFluent,
-			(s, c, f) => c.PutPipeline(s, f),
-			(s, c, f) => c.PutPipelineAsync(s, f),
-			(s, c, r) => c.PutPipeline(r),
-			(s, c, r) => c.PutPipelineAsync(r)
+			(s, c, f) => c.Ingest.PutPipeline(s, f),
+			(s, c, f) => c.Ingest.PutPipelineAsync(s, f),
+			(s, c, r) => c.Ingest.PutPipeline(r),
+			(s, c, r) => c.Ingest.PutPipelineAsync(r)
 		);
 
 		protected override void ExpectAfterCreate(GetPipelineResponse response)
@@ -80,19 +80,19 @@ namespace Tests.Ingest
 		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, GetPipelineResponse>(
 			id => new GetPipelineRequest(id),
 			(id, d) => d.Id(id),
-			(s, c, f) => c.GetPipeline(f),
-			(s, c, f) => c.GetPipelineAsync(f),
-			(s, c, r) => c.GetPipeline(r),
-			(s, c, r) => c.GetPipelineAsync(r)
+			(s, c, f) => c.Ingest.GetPipeline(f),
+			(s, c, f) => c.Ingest.GetPipelineAsync(f),
+			(s, c, r) => c.Ingest.GetPipeline(r),
+			(s, c, r) => c.Ingest.GetPipelineAsync(r)
 		);
 
 		protected override LazyResponses Update() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, PutPipelineResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			(s, c, f) => c.PutPipeline(s, f),
-			(s, c, f) => c.PutPipelineAsync(s, f),
-			(s, c, r) => c.PutPipeline(r),
-			(s, c, r) => c.PutPipelineAsync(r)
+			(s, c, f) => c.Ingest.PutPipeline(s, f),
+			(s, c, f) => c.Ingest.PutPipelineAsync(s, f),
+			(s, c, r) => c.Ingest.PutPipeline(r),
+			(s, c, r) => c.Ingest.PutPipelineAsync(r)
 		);
 
 		private PutPipelineRequest UpdateInitializer(string pipelineId) => new PutPipelineRequest(pipelineId)
@@ -166,10 +166,10 @@ namespace Tests.Ingest
 			Calls<DeletePipelineDescriptor, DeletePipelineRequest, IDeletePipelineRequest, DeletePipelineResponse>(
 				id => new DeletePipelineRequest(id),
 				(id, d) => d,
-				(s, c, f) => c.DeletePipeline(s, f),
-				(s, c, f) => c.DeletePipelineAsync(s, f),
-				(s, c, r) => c.DeletePipeline(r),
-				(s, c, r) => c.DeletePipelineAsync(r)
+				(s, c, f) => c.Ingest.DeletePipeline(s, f),
+				(s, c, f) => c.Ingest.DeletePipelineAsync(s, f),
+				(s, c, r) => c.Ingest.DeletePipeline(r),
+				(s, c, r) => c.Ingest.DeletePipelineAsync(r)
 			);
 	}
 }

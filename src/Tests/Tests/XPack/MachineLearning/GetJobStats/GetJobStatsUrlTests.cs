@@ -11,17 +11,17 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		[U] public override async Task Urls()
 		{
 			await GET("/_ml/anomaly_detectors/_stats")
-					.Fluent(c => c.GetJobStats())
-					.Request(c => c.GetJobStats(new GetJobStatsRequest()))
-					.FluentAsync(c => c.GetJobStatsAsync())
-					.RequestAsync(c => c.GetJobStatsAsync(new GetJobStatsRequest()))
+					.Fluent(c => c.MachineLearning.GetJobStats())
+					.Request(c => c.MachineLearning.GetJobStats(new GetJobStatsRequest()))
+					.FluentAsync(c => c.MachineLearning.GetJobStatsAsync())
+					.RequestAsync(c => c.MachineLearning.GetJobStatsAsync(new GetJobStatsRequest()))
 				;
 
 			await GET("/_ml/anomaly_detectors/job_id/_stats")
-					.Fluent(c => c.GetJobStats(r => r.JobId("job_id")))
-					.Request(c => c.GetJobStats(new GetJobStatsRequest("job_id")))
-					.FluentAsync(c => c.GetJobStatsAsync(r => r.JobId("job_id")))
-					.RequestAsync(c => c.GetJobStatsAsync(new GetJobStatsRequest("job_id")))
+					.Fluent(c => c.MachineLearning.GetJobStats(r => r.JobId("job_id")))
+					.Request(c => c.MachineLearning.GetJobStats(new GetJobStatsRequest("job_id")))
+					.FluentAsync(c => c.MachineLearning.GetJobStatsAsync(r => r.JobId("job_id")))
+					.RequestAsync(c => c.MachineLearning.GetJobStatsAsync(new GetJobStatsRequest("job_id")))
 				;
 		}
 	}

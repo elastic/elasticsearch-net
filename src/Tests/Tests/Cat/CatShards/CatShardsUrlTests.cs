@@ -12,17 +12,17 @@ namespace Tests.Cat.CatShards
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/shards")
-					.Fluent(c => c.CatShards())
-					.Request(c => c.CatShards(new CatShardsRequest()))
-					.FluentAsync(c => c.CatShardsAsync())
-					.RequestAsync(c => c.CatShardsAsync(new CatShardsRequest()))
+					.Fluent(c => c.Cat.Shards())
+					.Request(c => c.Cat.Shards(new CatShardsRequest()))
+					.FluentAsync(c => c.Cat.ShardsAsync())
+					.RequestAsync(c => c.Cat.ShardsAsync(new CatShardsRequest()))
 				;
 
 			await GET("/_cat/shards/project")
-				.Fluent(c => c.CatShards(r => r.Index<Project>()))
-				.Request(c => c.CatShards(new CatShardsRequest(Nest.Indices.Index<Project>())))
-				.FluentAsync(c => c.CatShardsAsync(r => r.Index<Project>()))
-				.RequestAsync(c => c.CatShardsAsync(new CatShardsRequest(Nest.Indices.Index<Project>())));
+				.Fluent(c => c.Cat.Shards(r => r.Index<Project>()))
+				.Request(c => c.Cat.Shards(new CatShardsRequest(Nest.Indices.Index<Project>())))
+				.FluentAsync(c => c.Cat.ShardsAsync(r => r.Index<Project>()))
+				.RequestAsync(c => c.Cat.ShardsAsync(new CatShardsRequest(Nest.Indices.Index<Project>())));
 		}
 	}
 }

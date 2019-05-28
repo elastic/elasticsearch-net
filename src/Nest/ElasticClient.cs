@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +7,64 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+
+	public class NamespacedClientProxy
+	{
+		private readonly ElasticClient _client;
+
+		protected NamespacedClientProxy(ElasticClient client) => _client = client;
+
+		internal TResponse DoRequest<TRequest, TResponse>(
+			TRequest p, 
+			IRequestParameters parameters,
+			Action<IRequestConfiguration> forceConfiguration = null
+		)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new() =>
+			_client.DoRequest<TRequest, TResponse>(p, parameters, forceConfiguration);
+
+		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			CancellationToken ct,
+			Action<IRequestConfiguration> forceConfiguration = null
+		)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new() =>
+			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
+		
+		private CatResponse<TCatRecord> DeserializeCatResponse<TCatRecord>(IApiCallDetails response, Stream stream)
+			where TCatRecord : ICatRecord
+		{
+			var catResponse = new CatResponse<TCatRecord>();
+
+			if (!response.Success) return catResponse;
+
+			var records = _client.RequestResponseSerializer.Deserialize<IReadOnlyCollection<TCatRecord>>(stream);
+			catResponse.Records = records;
+
+			return catResponse;
+		}
+
+		protected CatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
+			where TCatRecord : ICatRecord
+			where TParams : RequestParameters<TParams>, new()
+			where TRequest : class, IRequest<TParams>
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
+			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
+		}
+
+		protected Task<CatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
+			where TCatRecord : ICatRecord
+			where TParams : RequestParameters<TParams>, new()
+			where TRequest : class, IRequest<TParams>
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
+			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
+		}
+		
+	}
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
@@ -27,7 +86,10 @@ namespace Nest
 
 			Transport = transport;
 			LowLevel = new ElasticLowLevelClient(Transport);
+			SetupNamespaces();
 		}
+
+		partial void SetupNamespaces();
 
 		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
 		public Inferrer Infer => Transport.Settings.Inferrer;
@@ -80,7 +142,7 @@ namespace Nest
 		private static void AcceptAllStatusCodesHandler(IRequestConfiguration requestConfiguration) =>
 			requestConfiguration.AllowedStatusCodes = AllStatusCodes;
 
-		private static void ForceJson(IRequestConfiguration requestConfiguration)
+		internal static void ForceJson(IRequestConfiguration requestConfiguration)
 		{
 			requestConfiguration.Accept = RequestData.MimeType;
 			requestConfiguration.ContentType = RequestData.MimeType;

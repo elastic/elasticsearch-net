@@ -11,10 +11,10 @@ namespace Tests.XPack.MachineLearning.GetCalendarEvents
 		[U] public override async Task Urls()
 		{
 			await GET("/_ml/calendars/1/events")
-				.Request(c => c.GetCalendarEvents(new GetCalendarEventsRequest(1)))
-				.Fluent(c => c.GetCalendarEvents(1, r => r))
-				.FluentAsync(c => c.GetCalendarEventsAsync(1, r => r))
-				.RequestAsync(c => c.GetCalendarEventsAsync(new GetCalendarEventsRequest(1)));
+				.Request(c => c.MachineLearning.GetCalendarEvents(new GetCalendarEventsRequest(1)))
+				.Fluent(c => c.MachineLearning.GetCalendarEvents(1, r => r))
+				.FluentAsync(c => c.MachineLearning.GetCalendarEventsAsync(1, r => r))
+				.RequestAsync(c => c.MachineLearning.GetCalendarEventsAsync(new GetCalendarEventsRequest(1)));
 		}
 	}
 }

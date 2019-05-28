@@ -21,10 +21,10 @@ namespace Tests.Cluster.NodesUsage
 		protected override string UrlPath => "/_nodes/usage";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesUsage(),
-			(client, f) => client.NodesUsageAsync(),
-			(client, r) => client.NodesUsage(r),
-			(client, r) => client.NodesUsageAsync(r)
+			(client, f) => client.Nodes.Usage(),
+			(client, f) => client.Nodes.UsageAsync(),
+			(client, r) => client.Nodes.Usage(r),
+			(client, r) => client.Nodes.UsageAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesUsageResponse response)

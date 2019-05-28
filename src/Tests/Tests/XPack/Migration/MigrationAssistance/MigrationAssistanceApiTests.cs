@@ -24,7 +24,7 @@ namespace Tests.XPack.Migration.MigrationAssistance
 
 			var client = FixedResponseClient.Create(fixedResponse);
 
-			var response = client.MigrationAssistance();
+			var response = client.Migration.Assistance();
 			response.ShouldBeValid();
 			response.Indices.Should().NotBeNull().And.HaveCount(4);
 

@@ -1,0 +1,17 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@{
+	RestApiSpec m = Model;
+}
+	public abstract partial class @Raw("PlainRequestBase<TParameters>")
+	{
+@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
+{
+<text>		@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))
+</text>
+}
+	}

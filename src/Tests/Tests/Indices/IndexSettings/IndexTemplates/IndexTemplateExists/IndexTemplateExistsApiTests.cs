@@ -20,10 +20,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.IndexTemplateExists(CallIsolatedValue, f),
-			(client, f) => client.IndexTemplateExistsAsync(CallIsolatedValue, f),
-			(client, r) => client.IndexTemplateExists(r),
-			(client, r) => client.IndexTemplateExistsAsync(r)
+			(client, f) => client.Indices.IndexTemplateExists(CallIsolatedValue, f),
+			(client, f) => client.Indices.IndexTemplateExistsAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.IndexTemplateExists(r),
+			(client, r) => client.Indices.IndexTemplateExistsAsync(r)
 		);
 
 		protected override IndexTemplateExistsDescriptor NewDescriptor() => new IndexTemplateExistsDescriptor(CallIsolatedValue);

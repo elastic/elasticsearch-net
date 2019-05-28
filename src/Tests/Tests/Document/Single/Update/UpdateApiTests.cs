@@ -55,8 +55,8 @@ namespace Tests.Document.Single.Update
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Update<Project>(CallIsolatedValue, f),
 			(client, f) => client.UpdateAsync<Project>(CallIsolatedValue, f),
-			(client, r) => client.Update<Project>(r),
-			(client, r) => client.UpdateAsync<Project>(r)
+			(client, r) => client.Update(r),
+			(client, r) => client.UpdateAsync(r)
 		);
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
