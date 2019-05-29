@@ -78,6 +78,18 @@ namespace Tests.XPack.Ilm
 										}
 									}
 								},
+								Hot = new Phase
+								{
+									MinimumAge = "1d",
+									Actions	= new LifecycleActions
+									{
+										new RolloverLifecycleAction
+										{
+											MaximumDocuments = 1_000_000,
+											MaximumSizeAsString = "40gb"
+										}
+									}
+								},
 								Delete = new Phase
 								{
 									MinimumAge = "30d",
@@ -92,6 +104,11 @@ namespace Tests.XPack.Ilm
 					(v, d) => d
 						.Policy(p => p.Phases(a => a.Warm(w => w.MinimumAge("10d")
 																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberOfSegments(1))))
+													.Hot(h => h.MinimumAge("1d")
+															    .Actions(ac => ac.Rollover(r => r.MaximumDocuments(1_000_000)
+#pragma warning disable 612, 618
+																								.MaximumSize(40_000_000_000))))
+#pragma warning restore 612, 618
 													.Delete(w => w.MinimumAge("30d")
 		       													  .Actions(ac => ac.Delete(f => f)))))
 					,
