@@ -10,7 +10,7 @@ namespace Nest
 		CounterClockWise
 	}
 
-	public class GeoOrientationConverter : JsonConverter
+	internal class GeoOrientationConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
