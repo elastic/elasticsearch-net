@@ -15,5 +15,23 @@ namespace Nest
 
 		[JsonProperty("trigger_count")]
 		public long TriggerCount { get; internal set; }
+
+		[JsonProperty("search_failures")]
+		public long? SearchFailures { get; internal set; }
+
+		[JsonProperty("index_failures")]
+		public long? IndexFailures { get; internal set; }
+
+		[JsonProperty("index_time_in_ms")]
+		public long? IndexTimeInMilliseconds { get; internal set; }
+
+		[JsonProperty("index_total")]
+		public long? IndexTotal { get; internal set; }
+
+		[JsonProperty("search_time_in_ms")]
+		public long? SearchTimeInMilliseconds { get; internal set; }
+
+		[JsonProperty("search_total")]
+		public long? SearchTotal { get; internal set; }
 	}
 }

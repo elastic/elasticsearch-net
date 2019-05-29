@@ -81,6 +81,9 @@ namespace Nest
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
 
+		[JsonProperty("pretty_name")]
+		public string PrettyName { get; internal set; }
+
 		[JsonProperty("refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
@@ -89,6 +92,16 @@ namespace Nest
 
 		[JsonProperty("version")]
 		public string Version { get; internal set; }
+	}
+
+	[JsonObject]
+	public class ClusterOperatingSystemPrettyNane
+	{
+		[JsonProperty("pretty_name")]
+		public string PrettyName { get; internal set; }
+
+		[JsonProperty("count")]
+		public int Count { get; internal set; }
 	}
 
 	[JsonObject]

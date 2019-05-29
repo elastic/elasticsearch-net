@@ -32,6 +32,9 @@ namespace Nest
 		[JsonProperty("index_writer_memory_in_bytes")]
 		public long IndexWriterMemoryInBytes { get; set; }
 
+		[JsonProperty("max_unsafe_auto_id_timestamp")]
+		public string MaximumUnsafeAutoIdTimestamp { get; set; }
+
 		[JsonProperty("memory")]
 		public string Memory { get; set; }
 
