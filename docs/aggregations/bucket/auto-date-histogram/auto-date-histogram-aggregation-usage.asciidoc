@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.7
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.8
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -33,6 +33,7 @@ Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregat
 a => a
 .AutoDateHistogram("projects_started_per_month", date => date
     .Field(p => p.StartedOn)
+    .Buckets(10)
     .Format("yyyy-MM-dd'T'HH:mm:ss")
     .Missing(FixedDate)
     .Aggregations(childAggs => childAggs
@@ -53,6 +54,7 @@ a => a
 new AutoDateHistogramAggregation("projects_started_per_month")
 {
     Field = Field<Project>(p => p.StartedOn),
+    Buckets = 10,
     Format = "yyyy-MM-dd'T'HH:mm:ss",
     Missing = FixedDate,
     Aggregations = new NestedAggregation("project_tags")
@@ -73,6 +75,7 @@ new AutoDateHistogramAggregation("projects_started_per_month")
   "projects_started_per_month": {
     "auto_date_histogram": {
       "field": "startedOn",
+      "buckets": 10,
       "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
       "missing": "2015-06-06T12:01:02.123"
     },

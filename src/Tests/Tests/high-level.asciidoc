@@ -122,8 +122,8 @@ NEST exposes a number of important features for indexing documents into Elastics
 - <<ingest-nodes, Ingest Node>>
 
 include::{output-dir}/indexing/indexing-documents.asciidoc[]
-include::{output-dir}/indexing/ingest-node.asciidoc[]
-include::{output-dir}/indexing/ingest-pipelines.asciidoc[]
+include::{output-dir}/indexing/ingest-nodes.asciidoc[]
+include::{output-dir}/indexing/pipelines.asciidoc[]
 
 [[analysis]]
 == Analysis
