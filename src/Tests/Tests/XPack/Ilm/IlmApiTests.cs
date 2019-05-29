@@ -86,7 +86,7 @@ namespace Tests.XPack.Ilm
 										new RolloverLifecycleAction
 										{
 											MaximumDocuments = 1_000_000,
-											MaximumSize = "40000000000b"
+											MaximumSizeAsString = "40gb"
 										}
 									}
 								},
@@ -106,7 +106,9 @@ namespace Tests.XPack.Ilm
 																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberOfSegments(1))))
 													.Hot(h => h.MinimumAge("1d")
 															    .Actions(ac => ac.Rollover(r => r.MaximumDocuments(1_000_000)
-																								.MaximumSize("40000000000b"))))
+#pragma warning disable 612, 618
+																								.MaximumSize(40_000_000_000))))
+#pragma warning restore 612, 618
 													.Delete(w => w.MinimumAge("30d")
 		       													  .Actions(ac => ac.Delete(f => f)))))
 					,
