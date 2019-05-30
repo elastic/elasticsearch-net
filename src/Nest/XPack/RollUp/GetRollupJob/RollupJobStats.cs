@@ -15,5 +15,23 @@ namespace Nest
 
 		[DataMember(Name ="trigger_count")]
 		public long TriggerCount { get; internal set; }
+
+		[DataMember(Name = "search_failures")]
+		public long? SearchFailures { get; internal set; }
+
+		[DataMember(Name = "index_failures")]
+		public long? IndexFailures { get; internal set; }
+
+		[DataMember(Name = "index_time_in_ms")]
+		public long? IndexTimeInMilliseconds { get; internal set; }
+
+		[DataMember(Name = "index_total")]
+		public long? IndexTotal { get; internal set; }
+
+		[DataMember(Name = "search_time_in_ms")]
+		public long? SearchTimeInMilliseconds { get; internal set; }
+
+		[DataMember(Name = "search_total")]
+		public long? SearchTotal { get; internal set; }
 	}
 }
