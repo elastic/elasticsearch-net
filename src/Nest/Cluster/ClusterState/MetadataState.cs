@@ -16,5 +16,9 @@ namespace Nest
 		[DataMember(Name = "templates")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, TemplateMapping>))]
 		public IReadOnlyDictionary<string, TemplateMapping> Templates { get; internal set; }
+
+		[DataMember(Name = "stored_scripts")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, StoredScriptMapping>))]
+		public IReadOnlyDictionary<string, StoredScriptMapping> StoredScripts { get; internal set; }
 	}
 }
