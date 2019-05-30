@@ -6,6 +6,9 @@ namespace Nest
 	{
 		[DataMember(Name ="cluster_name")]
 		public string ClusterName { get; internal set; }
+		
+		[DataMember(Name ="cluster_uuid")]
+		public string ClusterUUID { get; internal set; }
 
 		[DataMember(Name ="indices")]
 		public ClusterIndicesStats Indices { get; internal set; }

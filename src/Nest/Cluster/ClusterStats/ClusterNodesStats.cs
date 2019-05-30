@@ -15,6 +15,9 @@ namespace Nest
 		[DataMember(Name ="jvm")]
 		public ClusterJvm Jvm { get; internal set; }
 
+		[DataMember(Name ="network_types")]
+		public ClusterNetworkTypes NetworkTypes { get; internal set; }
+
 		[DataMember(Name ="os")]
 		public ClusterOperatingSystemStats OperatingSystem { get; internal set; }
 
@@ -26,6 +29,16 @@ namespace Nest
 
 		[DataMember(Name ="versions")]
 		public IReadOnlyCollection<string> Versions { get; internal set; }
+	}
+
+	[DataContract]
+	public class ClusterNetworkTypes
+	{
+		[DataMember(Name ="http_types")]
+		public IReadOnlyDictionary<string, int> HttpTypes { get; internal set; }
+
+		[DataMember(Name ="transport_types")]
+		public IReadOnlyDictionary<string, int> TransportTypes { get; internal set; }
 	}
 
 	[DataContract]
@@ -143,8 +156,33 @@ namespace Nest
 		[DataMember(Name ="available_processors")]
 		public int AvailableProcessors { get; internal set; }
 
+		[DataMember(Name ="mem")]
+		public OperatingSystemMemoryInfo Memory { get; internal set; }
+
 		[DataMember(Name ="names")]
 		public IReadOnlyCollection<ClusterOperatingSystemName> Names { get; internal set; }
+
+		[DataMember(Name ="pretty_names")]
+		public IReadOnlyCollection<ClusterOperatingSystemPrettyNane> PrettyNames { get; internal set; }
+	}
+
+	[DataContract]
+	public class OperatingSystemMemoryInfo
+	{
+		[DataMember(Name ="free_in_bytes")]
+		public long FreeBytes { get; internal set; }
+
+		[DataMember(Name ="free_percent")]
+		public int FreePercent { get; internal set; }
+
+		[DataMember(Name ="total_in_bytes")]
+		public long TotalBytes { get; internal set; }
+
+		[DataMember(Name ="used_in_bytes")]
+		public long UsedBytes { get; internal set; }
+
+		[DataMember(Name ="used_percent")]
+		public int UsedPercent { get; internal set; }
 	}
 
 	[DataContract]

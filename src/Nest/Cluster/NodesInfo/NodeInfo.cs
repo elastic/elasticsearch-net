@@ -80,6 +80,9 @@ namespace Nest
 		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
+		[DataMember(Name = "pretty_name")]
+		public string PrettyName { get; internal set; }
+
 		[DataMember(Name = "refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
@@ -88,6 +91,16 @@ namespace Nest
 
 		[DataMember(Name = "version")]
 		public string Version { get; internal set; }
+	}
+
+	[DataContract]
+	public class ClusterOperatingSystemPrettyNane
+	{
+		[DataMember(Name = "count")]
+		public int Count { get; internal set; }
+
+		[DataMember(Name = "pretty_name")]
+		public string PrettyName { get; internal set; }
 	}
 
 	[DataContract]
