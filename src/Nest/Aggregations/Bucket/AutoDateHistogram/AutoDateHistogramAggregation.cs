@@ -13,6 +13,9 @@ namespace Nest
 		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
+		[DataMember(Name = "buckets")]
+		int? Buckets { get; set; }
+
 		[DataMember(Name = "format")]
 		string Format { get; set; }
 
@@ -41,6 +44,8 @@ namespace Nest
 		public AutoDateHistogramAggregation(string name) : base(name) { }
 
 		public Field Field { get; set; }
+
+		public int? Buckets { get; set; }
 
 		//see: https://github.com/elastic/elasticsearch/issues/9725
 		public string Format
@@ -71,6 +76,8 @@ namespace Nest
 
 		Field IAutoDateHistogramAggregation.Field { get; set; }
 
+		int? IAutoDateHistogramAggregation.Buckets { get; set; }
+
 		//see: https://github.com/elastic/elasticsearch/issues/9725
 		string IAutoDateHistogramAggregation.Format
 		{
@@ -95,6 +102,8 @@ namespace Nest
 		public AutoDateHistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public AutoDateHistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
+
+		public AutoDateHistogramAggregationDescriptor<T> Buckets(int? buckets) => Assign(buckets, (a, v) => a.Buckets = v);
 
 		public AutoDateHistogramAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
