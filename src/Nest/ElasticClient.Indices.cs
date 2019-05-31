@@ -17,7 +17,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Specification.IndicesApi;
 
 // ReSharper disable once CheckNamespace
 namespace Nest.Specification.IndicesApi

@@ -246,11 +246,11 @@ namespace Tests.Framework
 
 		private class State
 		{
-			public int Called = 0;
-			public int Failures = 0;
-			public int Pinged = 0;
-			public int Sniffed = 0;
-			public int Successes = 0;
+			public int Called;
+			public int Failures;
+			public int Pinged;
+			public int Sniffed;
+			public int Successes;
 		}
 	}
 }

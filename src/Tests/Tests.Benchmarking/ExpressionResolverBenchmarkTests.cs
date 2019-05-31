@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using BenchmarkDotNet.Attributes;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;

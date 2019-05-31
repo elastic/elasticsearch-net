@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-
-namespace Nest
+﻿namespace Nest
 {
 	// TODO: See if this is actually needed
 //	internal class UpgradeStatusResponseFormatter : IJsonFormatter<UpgradeStatusResponse>

@@ -1,5 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {

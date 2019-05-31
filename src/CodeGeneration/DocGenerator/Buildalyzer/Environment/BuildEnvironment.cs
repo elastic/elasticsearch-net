@@ -30,8 +30,8 @@ namespace DocGenerator.Buildalyzer.Environment
 {
 	internal abstract class BuildEnvironment
 	{
-		private string _oldMsBuildExtensionsPath = null;
-		private string _oldMsBuildSdksPath = null;
+		private string _oldMsBuildExtensionsPath;
+		private string _oldMsBuildSdksPath;
 
 		public abstract string GetToolsPath();
 

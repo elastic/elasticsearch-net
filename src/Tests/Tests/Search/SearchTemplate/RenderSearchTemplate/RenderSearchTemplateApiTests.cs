@@ -7,7 +7,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Document.Multiple.UpdateByQuery;
 using Tests.Framework;
 using Tests.Framework.Integration;
 

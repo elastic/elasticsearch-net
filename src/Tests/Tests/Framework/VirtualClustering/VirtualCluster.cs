@@ -21,7 +21,7 @@ namespace Tests.Framework
 		public List<ISniffRule> SniffingRules { get; } = new List<ISniffRule>();
 		internal string PublishAddressOverride { get; private set; }
 
-		internal bool SniffShouldReturnFqnd { get; private set; } = false;
+		internal bool SniffShouldReturnFqnd { get; private set; }
 
 		public VirtualCluster SniffShouldReturnFqdn()
 		{

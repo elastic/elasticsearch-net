@@ -1,5 +1,4 @@
-﻿using System;
-using Nest.Specification.CrossClusterReplicationApi;
+﻿using Nest.Specification.CrossClusterReplicationApi;
 
 namespace Nest
 {

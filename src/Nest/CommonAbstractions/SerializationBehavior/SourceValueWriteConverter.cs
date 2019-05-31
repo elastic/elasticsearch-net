@@ -1,4 +1,3 @@
-using System.Reflection;
 using Elasticsearch.Net;
 
 namespace Nest

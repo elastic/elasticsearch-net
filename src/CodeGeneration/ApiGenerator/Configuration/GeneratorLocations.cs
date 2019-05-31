@@ -18,7 +18,7 @@ namespace ApiGenerator.Configuration
 
 		public static readonly Assembly Assembly = typeof(Generator.ApiGenerator).Assembly;
 		
-		private static string _root = null;
+		private static string _root;
 		public static string Root
 		{
 			get

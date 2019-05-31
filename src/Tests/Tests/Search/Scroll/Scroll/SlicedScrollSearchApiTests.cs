@@ -12,7 +12,7 @@ namespace Tests.Search.Scroll.Scroll
 	public class SlicedScrollSearchApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
-		protected int _slice = 0;
+		protected int _slice;
 
 		private string _scrollId = "default-for-unit-tests";
 

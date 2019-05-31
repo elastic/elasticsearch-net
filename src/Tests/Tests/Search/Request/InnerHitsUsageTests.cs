@@ -25,7 +25,7 @@ namespace Tests.Search.Request
 	public abstract class RoyalBase<TRoyal> : IRoyal
 		where TRoyal : class, IRoyal
 	{
-		protected static int IdState = 0;
+		protected static int IdState;
 
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()

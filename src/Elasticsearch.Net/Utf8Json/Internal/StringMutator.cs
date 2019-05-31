@@ -23,7 +23,6 @@
 #endregion
 
 using System;
-using System.Text;
 
 namespace Elasticsearch.Net
 {

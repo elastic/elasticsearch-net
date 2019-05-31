@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace Elasticsearch.Net
+﻿namespace Elasticsearch.Net
 {
 	public class BytesResponse : ElasticsearchResponse<byte[]>
 	{

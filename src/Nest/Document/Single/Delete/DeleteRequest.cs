@@ -1,6 +1,4 @@
-﻿using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	[MapsApi("delete.json")]
 	public partial interface IDeleteRequest { }

@@ -27,7 +27,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -545,7 +544,7 @@ namespace Elasticsearch.Net
 #endif
 
 
-		static int nameSequence = 0;
+		static int nameSequence;
 
 		static HashSet<Type> ignoreTypes = new HashSet<Type>
 		{

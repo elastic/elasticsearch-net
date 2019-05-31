@@ -68,7 +68,7 @@ namespace Elasticsearch.Net
 				: Math.Min(RequestConfiguration?.MaxRetries ?? _settings.MaxRetries.GetValueOrDefault(int.MaxValue), _connectionPool.MaxRetries);
 
 		public bool Refresh { get; private set; }
-		public int Retried { get; private set; } = 0;
+		public int Retried { get; private set; }
 
 		public IEnumerable<Node> SniffNodes => _connectionPool
 			.CreateView(LazyAuditable)

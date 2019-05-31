@@ -1,7 +1,6 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Framework;

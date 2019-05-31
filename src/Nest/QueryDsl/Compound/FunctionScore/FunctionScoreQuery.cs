@@ -48,7 +48,7 @@ namespace Nest
 		: QueryDescriptorBase<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery>
 			, IFunctionScoreQuery where T : class
 	{
-		private bool _forcedConditionless = false;
+		private bool _forcedConditionless;
 		protected override bool Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
 		IEnumerable<IScoreFunction> IFunctionScoreQuery.Functions { get; set; }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer

@@ -75,8 +75,8 @@ namespace Elasticsearch.Net
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		private int _connectionLimit;
 		private TimeSpan? _deadTimeout;
-		private bool _disableAutomaticProxyDetection = false;
-		private bool _disableDirectStreaming = false;
+		private bool _disableAutomaticProxyDetection;
+		private bool _disableDirectStreaming;
 		private bool _disablePings;
 		private bool _enableHttpCompression;
 		private bool _enableHttpPipelining = true;

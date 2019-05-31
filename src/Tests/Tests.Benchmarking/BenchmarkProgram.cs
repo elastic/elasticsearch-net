@@ -12,8 +12,6 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using Elastic.BenchmarkDotNetExporter;
 using LibGit2Sharp;
-using Tests.Benchmarking.Framework;
-using RunMode = BenchmarkDotNet.Jobs.RunMode;
 
 namespace Tests.Benchmarking
 {

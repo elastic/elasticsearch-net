@@ -14,14 +14,9 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
+
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 using static Elasticsearch.Net.HttpMethod;
 
 // ReSharper disable once CheckNamespace

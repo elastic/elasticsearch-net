@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using static Nest.Infer;
 
 namespace Tests.QueryDsl.TermLevel.Ids
 {

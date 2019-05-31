@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
     {
         public static readonly CompositeResolver Instance = new CompositeResolver();
 
-        static bool isFreezed = false;
+        static bool isFreezed;
         static IJsonFormatter[] formatters = new IJsonFormatter[0];
         static IJsonFormatterResolver[] resolvers = new IJsonFormatterResolver[0];
 

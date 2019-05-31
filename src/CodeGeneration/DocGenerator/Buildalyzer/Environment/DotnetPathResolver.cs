@@ -34,7 +34,7 @@ namespace DocGenerator.Buildalyzer.Environment
 	internal static class DotnetPathResolver
 	{
 		private const string DOTNET_CLI_UI_LANGUAGE = nameof(DOTNET_CLI_UI_LANGUAGE);
-		private static string BasePath = null;
+		private static string BasePath;
 
 		private static readonly object BasePathLock = new object();
 

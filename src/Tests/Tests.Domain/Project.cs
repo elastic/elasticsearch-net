@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Nest;
-using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Tests.Configuration;
 using Tests.Domain.Extensions;

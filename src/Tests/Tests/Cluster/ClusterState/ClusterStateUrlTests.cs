@@ -4,7 +4,6 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
-using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterState
 {

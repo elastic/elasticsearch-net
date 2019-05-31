@@ -6,7 +6,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Elasticsearch.Net;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
