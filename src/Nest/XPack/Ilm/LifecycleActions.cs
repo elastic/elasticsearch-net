@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(LifecycleActionsJsonConverter))]
+	[JsonFormatter(typeof(LifecycleActionsJsonFormatter))]
 	public interface ILifecycleActions : IIsADictionary<string, ILifecycleAction> { }
 
 	public class LifecycleActions : IsADictionaryBase<string, ILifecycleAction>, ILifecycleActions
@@ -32,7 +32,7 @@ namespace Nest
 		public void Add(IUnfollowLifecycleAction action) => BackingDictionary.Add("unfollow", action);
 	}
 
-	internal class LifecycleActionsJsonConverter : IJsonFormatter<ILifecycleActions>
+	internal class LifecycleActionsJsonFormatter : IJsonFormatter<ILifecycleActions>
 	{
 		private static readonly AutomataDictionary LifeCycleActions = new AutomataDictionary
 		{
