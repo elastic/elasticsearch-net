@@ -1,0 +1,23 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@using ApiGenerator.Domain.Code.HighLevel.Methods
+@inherits ApiGenerator.CodeTemplatePage<InitializerSyntaxView>
+@{
+	InitializerMethod syntax = Model.Syntax;
+	
+	var response = !Model.Async ? syntax.ResponseName : string.Format("Task<{0}>", syntax.ResponseName);
+	var method = !Model.Async ? syntax.MethodName : string.Format("{0}Async", syntax.MethodName);
+	var requestMethodGenerics = syntax.MethodGenerics;
+
+	var methodsArgs = string.Format("{0} request", syntax.ArgumentType);
+	if (Model.Async)
+	{
+		methodsArgs += ", CancellationToken ct = default";
+	}
+	var whereClause = syntax.GenericWhereClause;
+}
+@Raw(response) @(method)@(Raw(requestMethodGenerics))(@Raw(methodsArgs))@whereClause

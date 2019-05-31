@@ -25,10 +25,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.DeleteSnapshot
 		protected override string UrlPath => $"/_snapshot/{_repos}/{_snapshot}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteSnapshot(_repos, _snapshot, f),
-			(client, f) => client.DeleteSnapshotAsync(_repos, _snapshot, f),
-			(client, r) => client.DeleteSnapshot(r),
-			(client, r) => client.DeleteSnapshotAsync(r)
+			(client, f) => client.Snapshot.Delete(_repos, _snapshot, f),
+			(client, f) => client.Snapshot.DeleteAsync(_repos, _snapshot, f),
+			(client, r) => client.Snapshot.Delete(r),
+			(client, r) => client.Snapshot.DeleteAsync(r)
 		);
 
 		protected override DeleteSnapshotDescriptor NewDescriptor() => new DeleteSnapshotDescriptor(_repos, _snapshot);

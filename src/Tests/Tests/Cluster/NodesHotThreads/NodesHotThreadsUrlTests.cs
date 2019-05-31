@@ -11,17 +11,17 @@ namespace Tests.Cluster.NodesHotThreads
 		[U] public override async Task Urls()
 		{
 			await GET("/_nodes/hot_threads")
-					.Fluent(c => c.NodesHotThreads())
-					.Request(c => c.NodesHotThreads(new NodesHotThreadsRequest()))
-					.FluentAsync(c => c.NodesHotThreadsAsync())
-					.RequestAsync(c => c.NodesHotThreadsAsync(new NodesHotThreadsRequest()))
+					.Fluent(c => c.Nodes.HotThreads())
+					.Request(c => c.Nodes.HotThreads(new NodesHotThreadsRequest()))
+					.FluentAsync(c => c.Nodes.HotThreadsAsync())
+					.RequestAsync(c => c.Nodes.HotThreadsAsync(new NodesHotThreadsRequest()))
 				;
 
 			await GET("/_nodes/foo/hot_threads")
-					.Fluent(c => c.NodesHotThreads(n => n.NodeId("foo")))
-					.Request(c => c.NodesHotThreads(new NodesHotThreadsRequest("foo")))
-					.FluentAsync(c => c.NodesHotThreadsAsync(n => n.NodeId("foo")))
-					.RequestAsync(c => c.NodesHotThreadsAsync(new NodesHotThreadsRequest("foo")))
+					.Fluent(c => c.Nodes.HotThreads(n => n.NodeId("foo")))
+					.Request(c => c.Nodes.HotThreads(new NodesHotThreadsRequest("foo")))
+					.FluentAsync(c => c.Nodes.HotThreadsAsync(n => n.NodeId("foo")))
+					.RequestAsync(c => c.Nodes.HotThreadsAsync(new NodesHotThreadsRequest("foo")))
 				;
 		}
 	}

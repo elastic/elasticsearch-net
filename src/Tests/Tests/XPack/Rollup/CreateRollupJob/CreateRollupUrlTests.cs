@@ -13,10 +13,10 @@ namespace Tests.XPack.Rollup.CreateRollupJob
 		{
 			const string id = "rollup-id";
 			await PUT($"/_rollup/job/{id}")
-				.Fluent(c => c.CreateRollupJob<Project>(id, s => s))
-				.Request(c => c.CreateRollupJob(new CreateRollupJobRequest(id)))
-				.FluentAsync(c => c.CreateRollupJobAsync<Project>(id, s => s))
-				.RequestAsync(c => c.CreateRollupJobAsync(new CreateRollupJobRequest(id)));
+				.Fluent(c => c.Rollup.CreateJob<Project>(id, s => s))
+				.Request(c => c.Rollup.CreateJob(new CreateRollupJobRequest(id)))
+				.FluentAsync(c => c.Rollup.CreateJobAsync<Project>(id, s => s))
+				.RequestAsync(c => c.Rollup.CreateJobAsync(new CreateRollupJobRequest(id)));
 		}
 	}
 }

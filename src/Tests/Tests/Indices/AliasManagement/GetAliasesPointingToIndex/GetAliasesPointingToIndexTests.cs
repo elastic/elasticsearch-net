@@ -22,13 +22,13 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 			_cluster = cluster;
 			_client = _cluster.Client;
 
-			if (_client.IndexExists(Index).Exists) return;
+			if (_client.Indices.Exists(Index).Exists) return;
 
 			lock (Unique)
 			{
-				if (_client.IndexExists(Index).Exists) return;
+				if (_client.Indices.Exists(Index).Exists) return;
 
-				var createResponse = _client.CreateIndex(Index, c => c
+				var createResponse = _client.Indices.Create(Index, c => c
 					.Settings(s => s
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)

@@ -21,6 +21,9 @@ namespace Elasticsearch.Net
 			if (format == "r") return arg.ToString();
 
 			var value = CreateString(arg, _settings);
+			if (value.IsNullOrEmpty() && !format.IsNullOrEmpty())
+				throw new ArgumentException($"The parameter: {format} to the url is null or empty");
+			
 			return value.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(value);
 		}
 

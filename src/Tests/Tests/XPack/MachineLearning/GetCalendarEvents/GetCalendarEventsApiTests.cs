@@ -41,10 +41,10 @@ namespace Tests.XPack.MachineLearning.GetCalendarEvents
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendarEvents(CallIsolatedValue),
-			(client, f) => client.GetCalendarEventsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetCalendarEvents(r),
-			(client, r) => client.GetCalendarEventsAsync(r)
+			(client, f) => client.MachineLearning.GetCalendarEvents(CallIsolatedValue),
+			(client, f) => client.MachineLearning.GetCalendarEventsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetCalendarEvents(r),
+			(client, r) => client.MachineLearning.GetCalendarEventsAsync(r)
 		);
 
 		protected override GetCalendarEventsDescriptor NewDescriptor() => new GetCalendarEventsDescriptor(CallIsolatedValue);

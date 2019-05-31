@@ -1,0 +1,39 @@
+@using RazorLight
+@using System.Linq
+@using ApiGenerator.Domain
+@using ApiGenerator.Domain.Code
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
+using Nest;
+@{ IncludeAsync("HighLevel/Client/Usings.cshtml", Model);}
+
+namespace Nest
+{
+	///<summary>
+	///Raw operations with elasticsearch
+	///</summary>
+	public partial interface IElasticClient 
+	{
+		@foreach(var kv in Model.EndpointsPerNamespace)
+		{
+		if (kv.Key != CsharpNames.RootNamespace)
+		{
+<text>		///<summary> This property logically groups all <c>@kv.Key</c> API's together.</summary>
+			@CsharpNames.HighLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
+</text>
+			continue;
+		}
+			var endpoints = kv.Value;
+			var models = endpoints.Select(e=>e.HighLevelModel).ToList();
+			foreach(var m in models)
+			{
+				IncludeAsync("HighLevel/Client/Interface/MethodInterface.cshtml", m);
+			}
+		}
+	}
+}

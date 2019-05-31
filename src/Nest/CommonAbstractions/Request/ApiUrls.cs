@@ -60,7 +60,7 @@ namespace Nest
 			if (routes.Count == 1)
 				return routes[0].ToUrl(resolved);
 
-			//find the first url that has all provided parameters
+			//find the first url with N parts that has all provided named parts
 			foreach (var u in routes)
 			{
 				if (u.Matches(resolved))

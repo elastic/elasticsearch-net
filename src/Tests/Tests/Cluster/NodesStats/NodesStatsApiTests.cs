@@ -10,6 +10,7 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Cluster.NodesStats
 {
@@ -25,10 +26,10 @@ namespace Tests.Cluster.NodesStats
 		protected override string UrlPath => "/_nodes/stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesStats(),
-			(client, f) => client.NodesStatsAsync(),
-			(client, r) => client.NodesStats(r),
-			(client, r) => client.NodesStatsAsync(r)
+			(client, f) => client.Nodes.Stats(),
+			(client, f) => client.Nodes.StatsAsync(),
+			(client, r) => client.Nodes.Stats(r),
+			(client, r) => client.Nodes.StatsAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -37,7 +38,7 @@ namespace Tests.Cluster.NodesStats
 			// even if this api is tested in isolation
 			for (var i = 0; i < 5; i++)
 			{
-				var searchResult = client.MultiSearch(m => m
+				var searchResult = client.MultiSearch(AllIndices, m => m
 					.Search<Project>(s => s.MatchAll().Size(0))
 					.Search<Project>(s => s.MatchAll().Size(0))
 					.Search<Project>(s => s.MatchAll().Size(0))

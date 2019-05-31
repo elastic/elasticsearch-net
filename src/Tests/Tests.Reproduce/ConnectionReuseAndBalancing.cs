@@ -46,7 +46,7 @@ namespace Tests.Reproduce
 					.ToArray();
 				Task.WaitAll(tasks);
 
-				var nodeStats = await client.NodesStatsAsync(statsRequest);
+				var nodeStats = await client.Nodes.StatsAsync(statsRequest);
 				AssertHttpStats(client, nodeStats, i, requestsPerIteration);
 			}
 		}
@@ -93,7 +93,7 @@ namespace Tests.Reproduce
 		private async Task IndexMockData(IElasticClient c, int requestsPerIteration)
 		{
 			var tokenSource = new CancellationTokenSource();
-			await c.DeleteIndexAsync(Index<Project>(), ct: tokenSource.Token);
+			await c.Indices.DeleteAsync(Index<Project>(), ct: tokenSource.Token);
 			var observableBulk = c.BulkAll(MockDataGenerator(100000), f => f
 					.MaxDegreeOfParallelism(10)
 					.BackOffTime(TimeSpan.FromSeconds(10))
@@ -103,7 +103,7 @@ namespace Tests.Reproduce
 				, tokenSource.Token);
 			await observableBulk.ForEachAsync(x => { }, tokenSource.Token);
 			var statsRequest = new NodesStatsRequest(NodesStatsMetric.Http);
-			var nodeStats = await c.NodesStatsAsync(statsRequest, tokenSource.Token);
+			var nodeStats = await c.Nodes.StatsAsync(statsRequest, tokenSource.Token);
 			AssertHttpStats(c, nodeStats, -1, requestsPerIteration);
 		}
 	}

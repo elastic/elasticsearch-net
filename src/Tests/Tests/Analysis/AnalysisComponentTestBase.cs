@@ -32,14 +32,14 @@ namespace Tests.Analysis
 	{
 		private static readonly SingleEndpointUsage<CreateIndexResponse> Usage = new SingleEndpointUsage<CreateIndexResponse>
 		(
-			(s, c) => c.CreateIndex(s, AssertionSetup.FluentCall),
-			(s, c) => c.CreateIndexAsync(s, AssertionSetup.FluentCall),
-			(s, c) => c.CreateIndex(AssertionSetup.InitializerCall(s)),
-			(s, c) => c.CreateIndexAsync(AssertionSetup.InitializerCall(s)),
+			(s, c) => c.Indices.Create(s, AssertionSetup.FluentCall),
+			(s, c) => c.Indices.CreateAsync(s, AssertionSetup.FluentCall),
+			(s, c) => c.Indices.Create(AssertionSetup.InitializerCall(s)),
+			(s, c) => c.Indices.CreateAsync(AssertionSetup.InitializerCall(s)),
 			$"test-{typeof(TAssertion).Name.ToLowerInvariant()}"
 		)
 		{
-			OnAfterCall = c => c.DeleteIndex(Usage.CallUniqueValues.Value)
+			OnAfterCall = c => c.Indices.Delete(Usage.CallUniqueValues.Value)
 		};
 
 		protected AnalysisComponentTestBase()

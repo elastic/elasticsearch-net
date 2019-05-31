@@ -12,17 +12,17 @@ namespace Tests.Cat.CatRecovery
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/recovery")
-					.Fluent(c => c.CatRecovery())
-					.Request(c => c.CatRecovery(new CatRecoveryRequest()))
-					.FluentAsync(c => c.CatRecoveryAsync())
-					.RequestAsync(c => c.CatRecoveryAsync(new CatRecoveryRequest()))
+					.Fluent(c => c.Cat.Recovery())
+					.Request(c => c.Cat.Recovery(new CatRecoveryRequest()))
+					.FluentAsync(c => c.Cat.RecoveryAsync())
+					.RequestAsync(c => c.Cat.RecoveryAsync(new CatRecoveryRequest()))
 				;
 
 			await GET("/_cat/recovery/project")
-				.Fluent(c => c.CatRecovery(r => r.Index<Project>()))
-				.Request(c => c.CatRecovery(new CatRecoveryRequest(Nest.Indices.Index<Project>())))
-				.FluentAsync(c => c.CatRecoveryAsync(r => r.Index<Project>()))
-				.RequestAsync(c => c.CatRecoveryAsync(new CatRecoveryRequest(Nest.Indices.Index<Project>())));
+				.Fluent(c => c.Cat.Recovery(r => r.Index<Project>()))
+				.Request(c => c.Cat.Recovery(new CatRecoveryRequest(Nest.Indices.Index<Project>())))
+				.FluentAsync(c => c.Cat.RecoveryAsync(r => r.Index<Project>()))
+				.RequestAsync(c => c.Cat.RecoveryAsync(new CatRecoveryRequest(Nest.Indices.Index<Project>())));
 		}
 	}
 }

@@ -65,10 +65,10 @@ namespace Tests.XPack.Security.User.PutUser
 		private string Password => CallIsolatedValue;
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutUser(CallIsolatedValue, f),
-			(client, f) => client.PutUserAsync(CallIsolatedValue, f),
-			(client, r) => client.PutUser(r),
-			(client, r) => client.PutUserAsync(r)
+			(client, f) => client.Security.PutUser(CallIsolatedValue, f),
+			(client, f) => client.Security.PutUserAsync(CallIsolatedValue, f),
+			(client, r) => client.Security.PutUser(r),
+			(client, r) => client.Security.PutUserAsync(r)
 		);
 
 		protected override PutUserDescriptor NewDescriptor() => new PutUserDescriptor(CallIsolatedValue);
@@ -83,8 +83,8 @@ namespace Tests.XPack.Security.User.PutUser
 	{
 		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			var x = Client.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
-			var y = Client.GetRole(new GetRoleRequest(ClusterAuthentication.User.Role));
+			var x = Client.Security.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
+			var y = Client.Security.GetRole(new GetRoleRequest(ClusterAuthentication.User.Role));
 		}
 
 		protected override bool ExpectIsValid => false;

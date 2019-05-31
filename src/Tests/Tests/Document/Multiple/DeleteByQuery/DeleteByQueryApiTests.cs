@@ -66,7 +66,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.NumberOfShards(2)
 						.NumberOfReplicas(0)
@@ -80,8 +80,8 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 				Client.IndexMany(Project.Projects, index);
 				var cloneIndex = index + "-clone";
-				Client.CreateIndex(cloneIndex);
-				Client.Refresh(Index(index).And(cloneIndex));
+				Client.Indices.Create(cloneIndex);
+				Client.Indices.Refresh(Index(index).And(cloneIndex));
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			(client, r) => client.DeleteByQueryAsync(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
+		protected override void OnAfterCall(IElasticClient client) => client.Indices.Refresh(CallIsolatedValue);
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(Indices);
 
@@ -183,7 +183,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.RefreshInterval(-1)
 					)
@@ -271,7 +271,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 			// Since we only executed one slice of the two, some of the documents that
 			// match the query will still exist.
-			Client.Refresh(CallIsolatedValue);
+			Client.Indices.Refresh(CallIsolatedValue);
 
 			var countResponse = Client.Count<Project>(c => c
 				.Index(CallIsolatedValue)

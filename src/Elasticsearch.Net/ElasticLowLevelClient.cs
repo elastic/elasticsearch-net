@@ -10,8 +10,6 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
-		private readonly ElasticsearchUrlFormatter _formatter;
-
 		/// <summary>Instantiate a new low level elasticsearch client to http://localhost:9200</summary>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticLowLevelClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
@@ -31,14 +29,19 @@ namespace Elasticsearch.Net
 			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 
 			Transport = transport;
-			_formatter = Transport.Settings.UrlFormatter;
+			UrlFormatter = Transport.Settings.UrlFormatter;
+			SetupNamespaces();
 		}
+
+		partial void SetupNamespaces();
 
 		public IElasticsearchSerializer Serializer => Transport.Settings.RequestResponseSerializer;
 
 		public IConnectionConfigurationValues Settings => Transport.Settings;
 
 		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
+		
+		private ElasticsearchUrlFormatter UrlFormatter { get; }
 
 		public TResponse DoRequest<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() =>
@@ -50,9 +53,9 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new() =>
 			Transport.RequestAsync<TResponse>(method, path, cancellationToken, data, requestParameters);
 
-		private string Url(FormattableString formattable) => formattable.ToString(_formatter);
+		protected internal string Url(FormattableString formattable) => formattable.ToString(UrlFormatter);
 
-		private TRequestParams _params<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
+		protected internal TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
 			if (contentType.IsNullOrEmpty()) return requestParams;

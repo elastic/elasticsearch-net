@@ -32,11 +32,11 @@ Basic Authentication credentials to send with all requests to Elasticsearch
 
 `ClientCertificate`::
 
-Use the following certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+Use a `X509Certificate` to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
 
 `ClientCertificate`::
 
-Use the following certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+Use a file path to a certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
 
 `ClientCertificates`::
 

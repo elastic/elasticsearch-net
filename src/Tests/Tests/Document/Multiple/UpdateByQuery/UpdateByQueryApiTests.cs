@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Map<Test>(map => map
 						.Dynamic(false)
 						.Properties(props => props
@@ -76,7 +76,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			(client, r) => client.UpdateByQueryAsync(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
+		protected override void OnAfterCall(IElasticClient client) => client.Indices.Refresh(CallIsolatedValue);
 
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue);
 
@@ -173,7 +173,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.RefreshInterval(-1)
 					)

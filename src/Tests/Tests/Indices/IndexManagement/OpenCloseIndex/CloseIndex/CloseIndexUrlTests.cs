@@ -15,10 +15,10 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 			var indices = Index<Project>().And<Developer>();
 			var index = "project%2Cdevs";
 			await POST($"/{index}/_close")
-					.Fluent(c => c.CloseIndex(indices, s => s))
-					.Request(c => c.CloseIndex(new CloseIndexRequest(indices)))
-					.FluentAsync(c => c.CloseIndexAsync(indices))
-					.RequestAsync(c => c.CloseIndexAsync(new CloseIndexRequest(indices)))
+					.Fluent(c => c.Indices.Close(indices, s => s))
+					.Request(c => c.Indices.Close(new CloseIndexRequest(indices)))
+					.FluentAsync(c => c.Indices.CloseAsync(indices))
+					.RequestAsync(c => c.Indices.CloseAsync(new CloseIndexRequest(indices)))
 				;
 		}
 	}

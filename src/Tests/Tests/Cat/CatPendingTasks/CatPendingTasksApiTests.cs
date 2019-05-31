@@ -18,10 +18,10 @@ namespace Tests.Cat.CatPendingTasks
 		protected override string UrlPath => "/_cat/pending_tasks";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatPendingTasks(),
-			(client, f) => client.CatPendingTasksAsync(),
-			(client, r) => client.CatPendingTasks(r),
-			(client, r) => client.CatPendingTasksAsync(r)
+			(client, f) => client.Cat.PendingTasks(),
+			(client, f) => client.Cat.PendingTasksAsync(),
+			(client, r) => client.Cat.PendingTasks(r),
+			(client, r) => client.Cat.PendingTasksAsync(r)
 		);
 	}
 }

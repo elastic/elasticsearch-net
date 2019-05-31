@@ -3,13 +3,57 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	public class QueryUsage
+	{
+		[DataMember(Name = "total")]
+		public int Total { get; internal set; }
+
+		[DataMember(Name = "paging")]
+		public int Paging { get; internal set; }
+
+		[DataMember(Name = "failed")]
+		public int Failed { get; internal set; }
+
+		[DataMember(Name = "count")]
+		public int? Count { get; internal set; }
+	}
+
+	public class CcrUsage : XPackUsage
+	{
+		[DataMember(Name = "auto_follow_patterns_count")]
+		public int AutoFollowPatternsCount { get; internal set; }
+
+		[DataMember(Name = "follower_indices_count")]
+		public int FollowerIndicesCount { get; internal set; }
+	}
+
+	public class SqlUsage : XPackUsage
+	{
+		[DataMember(Name = "features")]
+		public IReadOnlyDictionary<string, int> Features { get; set; } = EmptyReadOnly<string, int>.Dictionary;
+
+		[DataMember(Name = "queries")]
+		public IReadOnlyDictionary<string, QueryUsage> Queries { get; set; } = EmptyReadOnly<string, QueryUsage>.Dictionary;
+	}
 	public class XPackUsageResponse : ResponseBase
 	{
+		[DataMember(Name = "sql")]
+		public SqlUsage Sql { get; internal set; }
+
+		[DataMember(Name = "rollup")]
+		public XPackUsage Rollup { get; internal set; }
+
+		[DataMember(Name = "ccr")]
+		public CcrUsage Ccr { get; internal set; }
+
 		[DataMember(Name = "watcher")]
 		public AlertingUsage Alerting { get; internal set; }
 
 		[DataMember(Name = "graph")]
 		public XPackUsage Graph { get; internal set; }
+
+		[DataMember(Name = "logstash")]
+		public XPackUsage Logstash { get; internal set; }
 
 		[DataMember(Name = "ml")]
 		public MachineLearningUsage MachineLearning { get; internal set; }
@@ -44,6 +88,9 @@ namespace Nest
 		[DataMember(Name = "realms")]
 		public IReadOnlyDictionary<string, RealmUsage> Realms { get; internal set; } = EmptyReadOnly<string, RealmUsage>.Dictionary;
 
+		[DataMember(Name = "role_mapping")]
+		public IReadOnlyDictionary<string, RoleMappingUsage> RoleMapping { get; internal set; } = EmptyReadOnly<string, RoleMappingUsage>.Dictionary;
+
 		[DataMember(Name = "roles")]
 		public IReadOnlyDictionary<string, RoleUsage> Roles { get; internal set; } = EmptyReadOnly<string, RoleUsage>.Dictionary;
 
@@ -52,6 +99,15 @@ namespace Nest
 
 		[DataMember(Name = "system_key")]
 		public SecurityFeatureToggle SystemKey { get; internal set; }
+
+		public class RoleMappingUsage
+		{
+			[DataMember(Name = "enabled")]
+			public int Enabled { get; internal set; }
+
+			[DataMember(Name = "size")]
+			public int Size { get; internal set; }
+		}
 
 		public class AuditUsage : SecurityFeatureToggle
 		{
@@ -116,10 +172,22 @@ namespace Nest
 		[DataMember(Name = "execution")]
 		public AlertingExecution Execution { get; internal set; }
 
+		[DataMember(Name = "watch")]
+		public AlertingInput Watch { get; internal set; }
+
 		public class AlertingExecution
 		{
 			[DataMember(Name = "actions")]
 			public IReadOnlyDictionary<string, ExecutionAction> Actions { get; internal set; } = EmptyReadOnly<string, ExecutionAction>.Dictionary;
+		}
+
+		public class AlertingInput
+		{
+			[DataMember(Name = "input")]
+			public IReadOnlyDictionary<string, AlertingCount> Input { get; internal set; } = EmptyReadOnly<string, AlertingCount>.Dictionary;
+
+			[DataMember(Name = "trigger")]
+			public IReadOnlyDictionary<string, AlertingCount> Trigger { get; internal set; } = EmptyReadOnly<string, AlertingCount>.Dictionary;
 		}
 
 		public class ExecutionAction
@@ -143,6 +211,9 @@ namespace Nest
 
 	public class MonitoringUsage : XPackUsage
 	{
+		[DataMember(Name = "collection_enabled")]
+		public bool CollectionEnabled { get; internal set; }
+
 		[DataMember(Name = "enabled_exporters")]
 		public IReadOnlyDictionary<string, long> EnabledExporters { get; set; } = EmptyReadOnly<string, long>.Dictionary;
 	}

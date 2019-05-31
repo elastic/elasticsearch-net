@@ -32,7 +32,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Active()
 					.Input(i => i
 						.Simple(s => s
@@ -59,7 +59,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var executeWatchResponse = client.ExecuteWatch(e => e
+			var executeWatchResponse = client.Watcher.Execute(e => e
 				.Id(CallIsolatedValue)
 				.TriggerData(tr => tr
 					.TriggeredTime("now")
@@ -76,10 +76,10 @@ namespace Tests.XPack.Watcher.WatcherStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.WatcherStats(f),
-			(client, f) => client.WatcherStatsAsync(f),
-			(client, r) => client.WatcherStats(r),
-			(client, r) => client.WatcherStatsAsync(r)
+			(client, f) => client.Watcher.Stats(f),
+			(client, f) => client.Watcher.StatsAsync(f),
+			(client, r) => client.Watcher.Stats(r),
+			(client, r) => client.Watcher.StatsAsync(r)
 		);
 
 		protected override void ExpectResponse(WatcherStatsResponse response)

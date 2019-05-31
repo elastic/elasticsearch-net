@@ -30,21 +30,6 @@ namespace Elasticsearch.Net
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
-		internal static string NotNull(this string @object, string parameterName)
-		{
-			@object.ThrowIfNull(parameterName);
-			if (string.IsNullOrWhiteSpace(@object))
-				throw new ArgumentException("String argument is empty", parameterName);
-
-			return @object;
-		}
-
-		internal static string NotNull(this Enum @object, string parameterName)
-		{
-			@object.ThrowIfNull(parameterName);
-			return @object.GetStringValue();
-		}
-
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
 			@object.ThrowIfNull(parameterName);

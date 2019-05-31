@@ -54,7 +54,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * To create a mapping for our Company type, we can use the fluent API
 			 * and map each property explicitly
 			 */
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<Company>(m => m
 					.Properties(ps => ps
 						.Text(s => s
@@ -148,7 +148,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* {ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the
 			* `List<Employee>` property as an `object` datatype
 			*/
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<Company>(m => m
 					.AutoMap()
 					.Properties(ps => ps
@@ -194,7 +194,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * manually mapped properties will still yield the same result. The next example
 			 * generates the same mapping as the previous
 			 */
-			createIndexResponse = _client.CreateIndex("myindex", c => c
+			createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<Company>(m => m
 					.Properties(ps => ps
 						.Nested<Employee>(n => n
@@ -261,7 +261,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void OverridingAutoMappedAttributes()
 		{
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<CompanyWithAttributes>(m => m
 					.AutoMap() // <1> Automap company
 					.Properties(ps => ps // <2> Override company inferred mappings

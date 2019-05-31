@@ -16,37 +16,35 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			var name = "name";
 			Name n = name;
 			await GET($"/index1%2Cindex2/_settings/{name}")
-					.Fluent(c => c.GetIndexSettings(m => m.Index(index).Name(name)))
-					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(index, name)))
-					.FluentAsync(c => c.GetIndexSettingsAsync(m => m.Index(index).Name(name)))
-					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(index, name)))
+					.Fluent(c => c.Indices.GetSettings(index, m => m.Name(name)))
+					.Request(c => c.Indices.GetSettings(new GetIndexSettingsRequest(index, name)))
+					.FluentAsync(c => c.Indices.GetSettingsAsync(index, m => m.Name(name)))
+					.RequestAsync(c => c.Indices.GetSettingsAsync(new GetIndexSettingsRequest(index, name)))
 				;
 
 			await GET($"/index1%2Cindex2/_settings")
-					.Fluent(c => c.GetIndexSettings(m => m.Index(index)))
-					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(indices)))
-					.FluentAsync(c => c.GetIndexSettingsAsync(m => m.Index(index)))
-					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(indices)))
+					.Fluent(c => c.Indices.GetSettings(index))
+					.Request(c => c.Indices.GetSettings(new GetIndexSettingsRequest(indices)))
+					.FluentAsync(c => c.Indices.GetSettingsAsync(index))
+					.RequestAsync(c => c.Indices.GetSettingsAsync(new GetIndexSettingsRequest(indices)))
 				;
 
 			await GET($"/_settings/{name}")
-					.Fluent(c => c.GetIndexSettings(m => m.Name(name)))
-					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(n)))
-					.FluentAsync(c => c.GetIndexSettingsAsync(m => m.Name(name)))
-					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(n)))
+					.Fluent(c => c.Indices.GetSettings(null, m => m.Name(name)))
+					.Request(c => c.Indices.GetSettings(new GetIndexSettingsRequest(n)))
+					.FluentAsync(c => c.Indices.GetSettingsAsync(null, m => m.Name(name)))
+					.RequestAsync(c => c.Indices.GetSettingsAsync(new GetIndexSettingsRequest(n)))
 				;
 			await GET($"/_all/_settings")
-					.Fluent(c => c.GetIndexSettings(m => m.Index(AllIndices)))
-					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(AllIndices)))
-					.FluentAsync(c => c.GetIndexSettingsAsync(m => m.Index(AllIndices)))
-					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(AllIndices)))
+					.Fluent(c => c.Indices.GetSettings(AllIndices))
+					.Request(c => c.Indices.GetSettings(new GetIndexSettingsRequest(AllIndices)))
+					.FluentAsync(c => c.Indices.GetSettingsAsync(AllIndices))
+					.RequestAsync(c => c.Indices.GetSettingsAsync(new GetIndexSettingsRequest(AllIndices)))
 				;
 
 			await GET($"/_settings")
-					.Fluent(c => c.GetIndexSettings(m => m))
-					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest()))
-					.FluentAsync(c => c.GetIndexSettingsAsync(m => m))
-					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest()))
+					.Request(c => c.Indices.GetSettings(new GetIndexSettingsRequest()))
+					.RequestAsync(c => c.Indices.GetSettingsAsync(new GetIndexSettingsRequest()))
 				;
 		}
 	}

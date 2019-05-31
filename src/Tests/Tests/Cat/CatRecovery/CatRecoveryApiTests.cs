@@ -17,10 +17,10 @@ namespace Tests.Cat.CatRecovery
 		protected override string UrlPath => "/_cat/recovery";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatRecovery(),
-			(client, f) => client.CatRecoveryAsync(),
-			(client, r) => client.CatRecovery(r),
-			(client, r) => client.CatRecoveryAsync(r)
+			(client, f) => client.Cat.Recovery(),
+			(client, f) => client.Cat.RecoveryAsync(),
+			(client, r) => client.Cat.Recovery(r),
+			(client, r) => client.Cat.RecoveryAsync(r)
 		);
 	}
 }

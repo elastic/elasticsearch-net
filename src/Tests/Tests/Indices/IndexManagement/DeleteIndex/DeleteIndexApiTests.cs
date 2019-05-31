@@ -22,10 +22,10 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteIndex(CallIsolatedValue),
-			(client, f) => client.DeleteIndexAsync(CallIsolatedValue),
-			(client, r) => client.DeleteIndex(r),
-			(client, r) => client.DeleteIndexAsync(r)
+			(client, f) => client.Indices.Delete(CallIsolatedValue),
+			(client, f) => client.Indices.DeleteAsync(CallIsolatedValue),
+			(client, r) => client.Indices.Delete(r),
+			(client, r) => client.Indices.DeleteAsync(r)
 		);
 
 		protected override void ExpectResponse(DeleteIndexResponse response) => response.Acknowledged.Should().BeTrue();
@@ -45,10 +45,10 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteIndex(CallIsolatedValue),
-			(client, f) => client.DeleteIndexAsync(CallIsolatedValue),
-			(client, r) => client.DeleteIndex(r),
-			(client, r) => client.DeleteIndexAsync(r)
+			(client, f) => client.Indices.Delete(CallIsolatedValue),
+			(client, f) => client.Indices.DeleteAsync(CallIsolatedValue),
+			(client, r) => client.Indices.Delete(r),
+			(client, r) => client.Indices.DeleteAsync(r)
 		);
 
 		protected override void ExpectResponse(DeleteIndexResponse response)
@@ -71,10 +71,10 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override string UrlPath => $"/_all";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteIndex(AllIndices),
-			(client, f) => client.DeleteIndexAsync(AllIndices),
-			(client, r) => client.DeleteIndex(r),
-			(client, r) => client.DeleteIndexAsync(r)
+			(client, f) => client.Indices.Delete(AllIndices),
+			(client, f) => client.Indices.DeleteAsync(AllIndices),
+			(client, r) => client.Indices.Delete(r),
+			(client, r) => client.Indices.DeleteAsync(r)
 		);
 	}
 }

@@ -9,9 +9,9 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 	public class StopDatafeedUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await POST("/_ml/datafeeds/datafeed_id/_stop")
-			.Fluent(c => c.StopDatafeed("datafeed_id"))
-			.Request(c => c.StopDatafeed(new StopDatafeedRequest("datafeed_id")))
-			.FluentAsync(c => c.StopDatafeedAsync("datafeed_id"))
-			.RequestAsync(c => c.StopDatafeedAsync(new StopDatafeedRequest("datafeed_id")));
+			.Fluent(c => c.MachineLearning.StopDatafeed("datafeed_id"))
+			.Request(c => c.MachineLearning.StopDatafeed(new StopDatafeedRequest("datafeed_id")))
+			.FluentAsync(c => c.MachineLearning.StopDatafeedAsync("datafeed_id"))
+			.RequestAsync(c => c.MachineLearning.StopDatafeedAsync(new StopDatafeedRequest("datafeed_id")));
 	}
 }

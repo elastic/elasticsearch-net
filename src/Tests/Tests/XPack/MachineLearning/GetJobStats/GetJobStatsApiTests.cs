@@ -29,10 +29,10 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetJobStats(f),
-			(client, f) => client.GetJobStatsAsync(f),
-			(client, r) => client.GetJobStats(r),
-			(client, r) => client.GetJobStatsAsync(r)
+			(client, f) => client.MachineLearning.GetJobStats(f),
+			(client, f) => client.MachineLearning.GetJobStatsAsync(f),
+			(client, r) => client.MachineLearning.GetJobStats(r),
+			(client, r) => client.MachineLearning.GetJobStatsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetJobStatsResponse response)
@@ -89,10 +89,10 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetJobStats(f),
-			(client, f) => client.GetJobStatsAsync(f),
-			(client, r) => client.GetJobStats(r),
-			(client, r) => client.GetJobStatsAsync(r)
+			(client, f) => client.MachineLearning.GetJobStats(f),
+			(client, f) => client.MachineLearning.GetJobStatsAsync(f),
+			(client, r) => client.MachineLearning.GetJobStats(r),
+			(client, r) => client.MachineLearning.GetJobStatsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetJobStatsResponse response)

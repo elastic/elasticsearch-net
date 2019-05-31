@@ -22,7 +22,7 @@ namespace Tests.Ingest.Processor
 			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
-			var response = client.GrokProcessorPatterns();
+			var response = client.Ingest.GrokProcessorPatterns();
 			response.ShouldBeValid();
 
 			response.Patterns.Should().NotBeNull();

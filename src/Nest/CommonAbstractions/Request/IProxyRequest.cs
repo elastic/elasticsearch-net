@@ -9,4 +9,10 @@ namespace Nest
 	{
 		void WriteJson(IElasticsearchSerializer sourceSerializer, Stream s, SerializationFormatting serializationFormatting);
 	}
+
+
+	/// <summary>
+	/// Describes a request that serializes the document passed to <see cref="DocumentPath{T}"/> when calling the fluent API.
+	/// </summary>
+	public interface IDocumentRequest { }
 }

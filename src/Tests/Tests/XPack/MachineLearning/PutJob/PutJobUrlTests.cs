@@ -9,9 +9,9 @@ namespace Tests.XPack.MachineLearning.PutJob
 	public class PutJobUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await PUT("/_ml/anomaly_detectors/job_id")
-			.Fluent(c => c.PutJob<object>("job_id", p => p))
-			.Request(c => c.PutJob(new PutJobRequest("job_id")))
-			.FluentAsync(c => c.PutJobAsync<object>("job_id", p => p))
-			.RequestAsync(c => c.PutJobAsync(new PutJobRequest("job_id")));
+			.Fluent(c => c.MachineLearning.PutJob<object>("job_id", p => p))
+			.Request(c => c.MachineLearning.PutJob(new PutJobRequest("job_id")))
+			.FluentAsync(c => c.MachineLearning.PutJobAsync<object>("job_id", p => p))
+			.RequestAsync(c => c.MachineLearning.PutJobAsync(new PutJobRequest("job_id")));
 	}
 }

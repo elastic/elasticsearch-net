@@ -26,10 +26,10 @@ namespace Tests.XPack.Watcher.StartWatcher
 		protected override string UrlPath => "/_watcher/_start";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.StartWatcher(f),
-			(client, f) => client.StartWatcherAsync(f),
-			(client, r) => client.StartWatcher(r),
-			(client, r) => client.StartWatcherAsync(r)
+			(client, f) => client.Watcher.Start(f),
+			(client, f) => client.Watcher.StartAsync(f),
+			(client, r) => client.Watcher.Start(r),
+			(client, r) => client.Watcher.StartAsync(r)
 		);
 
 		protected override void ExpectResponse(StartWatcherResponse response) => response.Acknowledged.Should().BeTrue();

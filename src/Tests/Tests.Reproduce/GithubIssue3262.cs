@@ -63,11 +63,11 @@ namespace Tests.Reproduce
 			var connectionSettings = new ConnectionSettings(pool, new InMemoryConnection(bytes));
 			var client = new ElasticClient(connectionSettings);
 
-			Action getIndexRequest = () => client.GetIndex(new GetIndexRequest("products_purchasing"));
+			Action getIndexRequest = () => client.Indices.Get(new GetIndexRequest("products_purchasing"));
 
 			getIndexRequest.Should().NotThrow();
 
-			var response = client.GetIndex(new GetIndexRequest("products_purchasing"));
+			var response = client.Indices.Get(new GetIndexRequest("products_purchasing"));
 
 			var normalizer = response.Indices["products_purchasing"].Settings.Analysis.Normalizers["lowercase"] as ICustomNormalizer;
 			normalizer.Should().NotBeNull();

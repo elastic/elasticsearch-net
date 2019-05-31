@@ -57,10 +57,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateRepository(_name, f),
-			(client, f) => client.CreateRepositoryAsync(_name, f),
-			(client, r) => client.CreateRepository(r),
-			(client, r) => client.CreateRepositoryAsync(r)
+			(client, f) => client.Snapshot.CreateRepository(_name, f),
+			(client, f) => client.Snapshot.CreateRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.CreateRepository(r),
+			(client, r) => client.Snapshot.CreateRepositoryAsync(r)
 		);
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
@@ -120,10 +120,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateRepository(_name, f),
-			(client, f) => client.CreateRepositoryAsync(_name, f),
-			(client, r) => client.CreateRepository(r),
-			(client, r) => client.CreateRepositoryAsync(r)
+			(client, f) => client.Snapshot.CreateRepository(_name, f),
+			(client, f) => client.Snapshot.CreateRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.CreateRepository(r),
+			(client, r) => client.Snapshot.CreateRepositoryAsync(r)
 		);
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
@@ -183,10 +183,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateRepository(_name, f),
-			(client, f) => client.CreateRepositoryAsync(_name, f),
-			(client, r) => client.CreateRepository(r),
-			(client, r) => client.CreateRepositoryAsync(r)
+			(client, f) => client.Snapshot.CreateRepository(_name, f),
+			(client, f) => client.Snapshot.CreateRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.CreateRepository(r),
+			(client, r) => client.Snapshot.CreateRepositoryAsync(r)
 		);
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
@@ -243,10 +243,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateRepository(_name, f),
-			(client, f) => client.CreateRepositoryAsync(_name, f),
-			(client, r) => client.CreateRepository(r),
-			(client, r) => client.CreateRepositoryAsync(r)
+			(client, f) => client.Snapshot.CreateRepository(_name, f),
+			(client, f) => client.Snapshot.CreateRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.CreateRepository(r),
+			(client, r) => client.Snapshot.CreateRepositoryAsync(r)
 		);
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
@@ -290,10 +290,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateRepository(_name, f),
-			(client, f) => client.CreateRepositoryAsync(_name, f),
-			(client, r) => client.CreateRepository(r),
-			(client, r) => client.CreateRepositoryAsync(r)
+			(client, f) => client.Snapshot.CreateRepository(_name, f),
+			(client, f) => client.Snapshot.CreateRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.CreateRepository(r),
+			(client, r) => client.Snapshot.CreateRepositoryAsync(r)
 		);
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
@@ -358,10 +358,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateRepository(_name, f),
-			(client, f) => client.CreateRepositoryAsync(_name, f),
-			(client, r) => client.CreateRepository(r),
-			(client, r) => client.CreateRepositoryAsync(r)
+			(client, f) => client.Snapshot.CreateRepository(_name, f),
+			(client, f) => client.Snapshot.CreateRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.CreateRepository(r),
+			(client, r) => client.Snapshot.CreateRepositoryAsync(r)
 		);
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);

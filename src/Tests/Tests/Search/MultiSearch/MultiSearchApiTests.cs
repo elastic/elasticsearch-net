@@ -8,11 +8,10 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using static Tests.Domain.Helpers.TestValueHelper;
+using static Nest.Infer;
 
 namespace Tests.Search.MultiSearch
 {
@@ -22,6 +21,18 @@ namespace Tests.Search.MultiSearch
 		public MultiSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => "/project/_msearch";
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.MultiSearch(Index<Project>(), f),
+			(c, f) => c.MultiSearchAsync(Index<Project>(), f),
+			(c, r) => c.MultiSearch(r),
+			(c, r) => c.MultiSearchAsync(r)
+		);
+
 
 		protected override object ExpectJson => new object[]
 		{
@@ -46,10 +57,9 @@ namespace Tests.Search.MultiSearch
 			},
 		};
 
-		protected override int ExpectStatusCode => 200;
+		protected override MultiSearchDescriptor NewDescriptor() => new MultiSearchDescriptor(Index<Project>());
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
-			.Index(typeof(Project))
 			.Search<Project>("10projects", s => s.Query(q => q.MatchAll()).From(0).Size(10))
 			.Search<Project>("dfs_projects", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
@@ -75,8 +85,6 @@ namespace Tests.Search.MultiSearch
 					)
 				)
 			);
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project))
 		{
@@ -111,16 +119,6 @@ namespace Tests.Search.MultiSearch
 				},
 			}
 		};
-
-		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => "/project/_msearch";
-
-		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.MultiSearch(f),
-			(c, f) => c.MultiSearchAsync(f),
-			(c, r) => c.MultiSearch(r),
-			(c, r) => c.MultiSearchAsync(r)
-		);
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{

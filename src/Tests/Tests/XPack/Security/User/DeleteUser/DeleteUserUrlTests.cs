@@ -9,9 +9,9 @@ namespace Tests.XPack.Security.User.DeleteUser
 	public class DeleteUserUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await DELETE("/_security/user/mpdreamz")
-			.Fluent(c => c.DeleteUser("mpdreamz"))
-			.Request(c => c.DeleteUser(new DeleteUserRequest("mpdreamz")))
-			.FluentAsync(c => c.DeleteUserAsync("mpdreamz"))
-			.RequestAsync(c => c.DeleteUserAsync(new DeleteUserRequest("mpdreamz")));
+			.Fluent(c => c.Security.DeleteUser("mpdreamz"))
+			.Request(c => c.Security.DeleteUser(new DeleteUserRequest("mpdreamz")))
+			.FluentAsync(c => c.Security.DeleteUserAsync("mpdreamz"))
+			.RequestAsync(c => c.Security.DeleteUserAsync(new DeleteUserRequest("mpdreamz")));
 	}
 }

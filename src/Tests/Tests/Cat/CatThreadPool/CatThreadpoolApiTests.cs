@@ -20,10 +20,10 @@ namespace Tests.Cat.CatThreadPool
 		protected override string UrlPath => "/_cat/thread_pool";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatThreadPool(),
-			(client, f) => client.CatThreadPoolAsync(),
-			(client, r) => client.CatThreadPool(r),
-			(client, r) => client.CatThreadPoolAsync(r)
+			(client, f) => client.Cat.ThreadPool(),
+			(client, f) => client.Cat.ThreadPoolAsync(),
+			(client, r) => client.Cat.ThreadPool(r),
+			(client, r) => client.Cat.ThreadPoolAsync(r)
 		);
 	}
 
@@ -47,10 +47,10 @@ namespace Tests.Cat.CatThreadPool
 		protected override string UrlPath => "/_cat/thread_pool?h=%2A";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatThreadPool(f),
-			(client, f) => client.CatThreadPoolAsync(f),
-			(client, r) => client.CatThreadPool(r),
-			(client, r) => client.CatThreadPoolAsync(r)
+			(client, f) => client.Cat.ThreadPool(f),
+			(client, f) => client.Cat.ThreadPoolAsync(f),
+			(client, r) => client.Cat.ThreadPool(r),
+			(client, r) => client.Cat.ThreadPoolAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatThreadPoolRecord> response)

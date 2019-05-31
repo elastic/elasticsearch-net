@@ -35,10 +35,10 @@ namespace Tests.XPack.MachineLearning.PreviewDatafeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
-			(client, r) => client.PreviewDatafeed<Metric>(r),
-			(client, r) => client.PreviewDatafeedAsync<Metric>(r)
+			(client, f) => client.MachineLearning.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.MachineLearning.PreviewDatafeed<Metric>(r),
+			(client, r) => client.MachineLearning.PreviewDatafeedAsync<Metric>(r)
 		);
 
 		protected override PreviewDatafeedDescriptor NewDescriptor() => new PreviewDatafeedDescriptor(CallIsolatedValue + "-datafeed");

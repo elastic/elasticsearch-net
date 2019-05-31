@@ -18,10 +18,10 @@ namespace Tests.Cat.CatMaster
 		protected override string UrlPath => "/_cat/master";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatMaster(),
-			(client, f) => client.CatMasterAsync(),
-			(client, r) => client.CatMaster(r),
-			(client, r) => client.CatMasterAsync(r)
+			(client, f) => client.Cat.Master(),
+			(client, f) => client.Cat.MasterAsync(),
+			(client, r) => client.Cat.Master(r),
+			(client, r) => client.Cat.MasterAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatMasterRecord> response) =>

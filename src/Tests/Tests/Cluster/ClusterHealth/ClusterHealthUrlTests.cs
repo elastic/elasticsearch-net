@@ -4,6 +4,7 @@ using Nest;
 using Tests.Domain;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterHealth
 {
@@ -12,17 +13,23 @@ namespace Tests.Cluster.ClusterHealth
 		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/health")
-					.Fluent(c => c.ClusterHealth())
-					.Request(c => c.ClusterHealth(new ClusterHealthRequest()))
-					.FluentAsync(c => c.ClusterHealthAsync())
-					.RequestAsync(c => c.ClusterHealthAsync(new ClusterHealthRequest()))
+					.Fluent(c => c.Cluster.Health())
+					.Request(c => c.Cluster.Health(new ClusterHealthRequest()))
+					.FluentAsync(c => c.Cluster.HealthAsync())
+					.RequestAsync(c => c.Cluster.HealthAsync(new ClusterHealthRequest()))
 				;
 
+			await GET("/_cluster/health/_all")
+				.Fluent(c => c.Cluster.Health(AllIndices))
+				.Request(c => c.Cluster.Health(new ClusterHealthRequest(AllIndices)))
+				.FluentAsync(c => c.Cluster.HealthAsync(AllIndices))
+				.RequestAsync(c => c.Cluster.HealthAsync(new ClusterHealthRequest(AllIndices)));
+
 			await GET("/_cluster/health/project")
-					.Fluent(c => c.ClusterHealth(h => h.Index<Project>()))
-					.Request(c => c.ClusterHealth(new ClusterHealthRequest(typeof(Project))))
-					.FluentAsync(c => c.ClusterHealthAsync(h => h.Index<Project>()))
-					.RequestAsync(c => c.ClusterHealthAsync(new ClusterHealthRequest(typeof(Project))))
+					.Fluent(c => c.Cluster.Health(Index<Project>()))
+					.Request(c => c.Cluster.Health(new ClusterHealthRequest(typeof(Project))))
+					.FluentAsync(c => c.Cluster.HealthAsync(Index<Project>()))
+					.RequestAsync(c => c.Cluster.HealthAsync(new ClusterHealthRequest(typeof(Project))))
 				;
 		}
 	}

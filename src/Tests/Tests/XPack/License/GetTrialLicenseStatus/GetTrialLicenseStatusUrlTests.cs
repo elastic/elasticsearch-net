@@ -9,9 +9,9 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 	public class GetTrialLicenseStatusUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await GET("/_license/trial_status")
-			.Fluent(c => c.GetTrialLicenseStatus())
-			.Request(c => c.GetTrialLicenseStatus(new GetTrialLicenseStatusRequest()))
-			.FluentAsync(c => c.GetTrialLicenseStatusAsync())
-			.RequestAsync(c => c.GetTrialLicenseStatusAsync(new GetTrialLicenseStatusRequest()));
+			.Fluent(c => c.License.GetTrialStatus())
+			.Request(c => c.License.GetTrialStatus(new GetTrialLicenseStatusRequest()))
+			.FluentAsync(c => c.License.GetTrialStatusAsync())
+			.RequestAsync(c => c.License.GetTrialStatusAsync(new GetTrialLicenseStatusRequest()));
 	}
 }

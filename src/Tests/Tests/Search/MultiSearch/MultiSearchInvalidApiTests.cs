@@ -11,6 +11,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Search.MultiSearch
 {
@@ -63,8 +64,8 @@ namespace Tests.Search.MultiSearch
 		protected override string UrlPath => "/project/_msearch";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.MultiSearch(f),
-			(c, f) => c.MultiSearchAsync(f),
+			(c, f) => c.MultiSearch(Index<Project>(), f),
+			(c, f) => c.MultiSearchAsync(Index<Project>(), f),
 			(c, r) => c.MultiSearch(r),
 			(c, r) => c.MultiSearchAsync(r)
 		);

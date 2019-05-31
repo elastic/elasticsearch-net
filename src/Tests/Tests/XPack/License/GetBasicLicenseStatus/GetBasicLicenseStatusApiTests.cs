@@ -27,10 +27,10 @@ namespace Tests.XPack.License.GetBasicLicenseStatus
 		protected override string UrlPath => $"/_license/basic_status";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetBasicLicenseStatus(f),
-			(client, f) => client.GetBasicLicenseStatusAsync(f),
-			(client, r) => client.GetBasicLicenseStatus(r),
-			(client, r) => client.GetBasicLicenseStatusAsync(r)
+			(client, f) => client.License.GetBasicStatus(f),
+			(client, f) => client.License.GetBasicStatusAsync(f),
+			(client, r) => client.License.GetBasicStatus(r),
+			(client, r) => client.License.GetBasicStatusAsync(r)
 		);
 
 		protected override void ExpectResponse(GetBasicLicenseStatusResponse response) =>

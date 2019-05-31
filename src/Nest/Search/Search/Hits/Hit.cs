@@ -40,9 +40,8 @@ namespace Nest
 	{
 		public static IHitMetadata<TTarget> Copy<TDocument, TTarget>(this IHitMetadata<TDocument> source, Func<TDocument, TTarget> mapper)
 			where TDocument : class
-			where TTarget : class
-		{
-			return new Hit<TTarget>()
+			where TTarget : class =>
+			new Hit<TTarget>()
 			{
 				Type = source.Type,
 				Index = source.Index,
@@ -50,7 +49,6 @@ namespace Nest
 				Routing = source.Routing,
 				Source = mapper(source.Source)
 			};
-		}
 	}
 
 	[InterfaceDataContract]

@@ -172,6 +172,7 @@ namespace Tests.CodeStandards
 				//when testing nuget package against merged internalize json.net skip its types.
 				.Where(t => !string.IsNullOrWhiteSpace(t.Namespace) && !t.Namespace.StartsWith("Nest.Json"))
 				.Where(t => !string.IsNullOrWhiteSpace(t.Namespace) && !t.Namespace.StartsWith("Elastic.Internal"))
+				.Where(t => !string.IsNullOrWhiteSpace(t.Namespace) && !t.Namespace.StartsWith("Nest.Specification"))
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();
@@ -201,7 +202,8 @@ namespace Tests.CodeStandards
 			var types = elasticsearchNetAssembly.GetTypes();
 			var typesNotIElasticsearchNetNamespace = types
 				.Where(t => !exceptions.Contains(t))
-				.Where(t => t.Namespace != "Elasticsearch.Net")
+				.Where(t => t.Namespace != null)
+				.Where(t => t.Namespace != "Elasticsearch.Net" && !t.Namespace.StartsWith("Elasticsearch.Net.Specification"))
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();

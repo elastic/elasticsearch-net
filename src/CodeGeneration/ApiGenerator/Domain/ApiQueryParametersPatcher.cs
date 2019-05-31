@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApiGenerator.Overrides;
-using ApiGenerator.Overrides.Descriptors;
+using ApiGenerator.Configuration.Overrides;
+using ApiGenerator.Domain.Specification;
 
 namespace ApiGenerator.Domain
 {
 	public static class ApiQueryParametersPatcher
 	{
-		public static Dictionary<string, ApiQueryParameters> Patch(
-			string urlPath,
-			IDictionary<string, ApiQueryParameters> source,
+		public static SortedDictionary<string, QueryParameters> Patch(
+			string endpointName,
+			IDictionary<string, QueryParameters> source,
 			IEndpointOverrides overrides,
 			bool checkCommon = true
 		)
@@ -25,8 +25,8 @@ namespace ApiGenerator.Domain
 			var renameLookup = CreateRenameLookup(globalOverrides, overrides, declaredKeys);
 			var obsoleteLookup = CreateObsoleteLookup(globalOverrides, overrides, declaredKeys);
 
-			var patchedParams = new Dictionary<string, ApiQueryParameters>();
-			var name = overrides?.GetType().Name ?? urlPath ?? "unknown";
+			var patchedParams = new SortedDictionary<string, QueryParameters>();
+			var name = overrides?.GetType().Name ?? endpointName ?? "unknown";
 			foreach (var kv in source)
 			{
 				var queryStringKey = kv.Key;
@@ -34,14 +34,14 @@ namespace ApiGenerator.Domain
 
 				if (checkCommon && RestApiSpec.CommonApiQueryParameters.Keys.Contains(queryStringKey))
 				{
-					ApiGenerator.Warnings.Add($"key '{queryStringKey}' in {name} is already declared in _common.json");
+					Generator.ApiGenerator.Warnings.Add($"key '{queryStringKey}' in {name} is already declared in _common.json");
 					continue;
 				}
 
 				if (!renameLookup.TryGetValue(queryStringKey, out var preferredName)) preferredName = kv.Key;
 				kv.Value.ClsName = CreateCSharpName(preferredName);
 
-				if (skipList.Contains(queryStringKey)) continue;
+				if (skipList.Contains(queryStringKey)) kv.Value.Skip = true;
 
 				if (partialList.Contains(queryStringKey)) kv.Value.RenderPartial = true;
 
@@ -83,7 +83,7 @@ namespace ApiGenerator.Domain
 			Func<IEndpointOverrides, IDictionary<string, string>> @from, ICollection<string> declaredKeys
 		)
 		{
-			var d = new Dictionary<string, string>();
+			var d = new SortedDictionary<string, string>();
 			foreach (var kv in from(global)) d[kv.Key] = kv.Value;
 
 			if (local == null) return d;
@@ -93,7 +93,7 @@ namespace ApiGenerator.Domain
 
 			var name = local.GetType().Name;
 			foreach (var p in localDictionary.Keys.Except(declaredKeys))
-				ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
+				Generator.ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
 
 			return d;
 		}
@@ -110,7 +110,7 @@ namespace ApiGenerator.Domain
 				list.AddRange(localList);
 				var name = local.GetType().Name;
 				foreach (var p in localList.Except(declaredKeys))
-					ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
+					Generator.ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
 			}
 			return list.Distinct().ToList();
 		}

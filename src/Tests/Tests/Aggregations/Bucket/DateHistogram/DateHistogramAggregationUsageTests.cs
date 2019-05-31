@@ -136,4 +136,72 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		}
 	}
+
+	// hide
+	public class DateHistogramAggregationNoSubAggregationsUsageTests : ProjectsOnlyAggregationUsageTestBase
+	{
+		public DateHistogramAggregationNoSubAggregationsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new
+		{
+			projects_started_per_month = new
+			{
+				date_histogram = new
+				{
+					field = "startedOn",
+					interval = "month",
+					min_doc_count = 2,
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+					order = new { _count = "asc" },
+					extended_bounds = new
+					{
+						min = FixedDate.AddYears(-1),
+						max = FixedDate.AddYears(1)
+					},
+					missing = FixedDate
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", date => date
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(2)
+				.Format("yyyy-MM-dd'T'HH:mm:ss")
+				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+				.Order(HistogramOrder.CountAscending)
+				.Missing(FixedDate)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
+			{
+				Field = Field<Project>(p => p.StartedOn),
+				Interval = DateInterval.Month,
+				MinimumDocumentCount = 2,
+				Format = "yyyy-MM-dd'T'HH:mm:ss",
+				ExtendedBounds = new ExtendedBounds<DateMath>
+				{
+					Minimum = FixedDate.AddYears(-1),
+					Maximum = FixedDate.AddYears(1),
+				},
+				Order = HistogramOrder.CountAscending,
+				Missing = FixedDate
+			};
+
+		protected override void ExpectResponse(SearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_month");
+			dateHistogram.Should().NotBeNull();
+			dateHistogram.Buckets.Should().NotBeNull();
+			dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
+			foreach (var item in dateHistogram.Buckets)
+			{
+				item.Date.Should().NotBe(default(DateTime));
+				item.DocCount.Should().BeGreaterThan(0);
+			}
+		}
+	}
 }

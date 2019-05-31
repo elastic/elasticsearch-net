@@ -36,10 +36,10 @@ namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAnomalyRecords(CallIsolatedValue, f),
-			(client, f) => client.GetAnomalyRecordsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetAnomalyRecords(r),
-			(client, r) => client.GetAnomalyRecordsAsync(r)
+			(client, f) => client.MachineLearning.GetAnomalyRecords(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetAnomalyRecordsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetAnomalyRecords(r),
+			(client, r) => client.MachineLearning.GetAnomalyRecordsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAnomalyRecordsResponse response)

@@ -87,14 +87,14 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			client.IndexMany(Project.Projects);
-			client.Refresh(Index<Project>());
+			client.Indices.Refresh(Index<Project>());
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Rethrottle(TaskId, f),
-			(client, f) => client.RethrottleAsync(TaskId, f),
-			(client, r) => client.Rethrottle(r),
-			(client, r) => client.RethrottleAsync(r)
+			(client, f) => client.ReindexRethrottle(TaskId, f),
+			(client, f) => client.ReindexRethrottleAsync(TaskId, f),
+			(client, r) => client.ReindexRethrottle(r),
+			(client, r) => client.ReindexRethrottleAsync(r)
 		);
 
 		protected override ReindexRethrottleDescriptor NewDescriptor() => new ReindexRethrottleDescriptor(TaskId);

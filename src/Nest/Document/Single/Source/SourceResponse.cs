@@ -1,12 +1,12 @@
 ﻿namespace Nest
 {
-	public interface ISourceResponse<out T> : IResponse
+	public interface ISourceResponse<out TDocument> : IResponse
 	{
-		T Body { get; }
+		TDocument Body { get; }
 	}
 
-	public class SourceResponse<T> : ResponseBase, ISourceResponse<T>
+	public class SourceResponse<TDocument> : ResponseBase, ISourceResponse<TDocument>
 	{
-		public T Body { get; internal set; }
+		public TDocument Body { get; internal set; }
 	}
 }

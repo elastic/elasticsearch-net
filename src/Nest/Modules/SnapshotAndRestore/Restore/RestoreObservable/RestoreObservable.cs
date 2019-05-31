@@ -50,7 +50,7 @@ namespace Nest
 			try
 			{
 				_restoreRequest.RequestParameters.WaitForCompletion = false;
-				var restoreResponse = _elasticClient.Restore(_restoreRequest);
+				var restoreResponse = _elasticClient.Snapshot.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
@@ -179,7 +179,7 @@ namespace Nest
 							))
 						.ToArray();
 
-				var recoveryStatus = _elasticClient.RecoveryStatus(new RecoveryStatusRequest(indices)
+				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(new RecoveryStatusRequest(indices)
 				{
 					Detailed = true,
 				});

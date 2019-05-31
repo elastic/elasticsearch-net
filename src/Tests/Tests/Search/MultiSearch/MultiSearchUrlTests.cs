@@ -13,16 +13,16 @@ namespace Tests.Search.MultiSearch
 		{
 			var index = "indexx";
 			await POST($"/_msearch")
-					.Fluent(c => c.MultiSearch(s => s))
+					.Fluent(c => c.MultiSearch())
 					.Request(c => c.MultiSearch(new MultiSearchRequest()))
-					.FluentAsync(c => c.MultiSearchAsync(s => s))
+					.FluentAsync(c => c.MultiSearchAsync())
 					.RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest()))
 				;
 
 			await POST($"/{index}/_msearch")
-					.Fluent(c => c.MultiSearch(s => s.Index(index)))
+					.Fluent(c => c.MultiSearch(index))
 					.Request(c => c.MultiSearch(new MultiSearchRequest(index)))
-					.FluentAsync(c => c.MultiSearchAsync(s => s.Index(index)))
+					.FluentAsync(c => c.MultiSearchAsync(index))
 					.RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest(index)))
 				;
 		}

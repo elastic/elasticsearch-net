@@ -30,7 +30,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Input(i => i
 						.Simple(s => s
 							.Add("key", "value")
@@ -58,10 +58,10 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteWatch(CallIsolatedValue, f),
-			(client, f) => client.DeleteWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.DeleteWatch(r),
-			(client, r) => client.DeleteWatchAsync(r)
+			(client, f) => client.Watcher.Delete(CallIsolatedValue, f),
+			(client, f) => client.Watcher.DeleteAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Delete(r),
+			(client, r) => client.Watcher.DeleteAsync(r)
 		);
 
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
@@ -92,10 +92,10 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteWatch(CallIsolatedValue, f),
-			(client, f) => client.DeleteWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.DeleteWatch(r),
-			(client, r) => client.DeleteWatchAsync(r)
+			(client, f) => client.Watcher.Delete(CallIsolatedValue, f),
+			(client, f) => client.Watcher.DeleteAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Delete(r),
+			(client, r) => client.Watcher.DeleteAsync(r)
 		);
 
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);

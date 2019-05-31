@@ -20,10 +20,10 @@ namespace Tests.Cat.CatIndices
 		protected override string UrlPath => "/_cat/indices";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatIndices(),
-			(client, f) => client.CatIndicesAsync(),
-			(client, r) => client.CatIndices(r),
-			(client, r) => client.CatIndicesAsync(r)
+			(client, f) => client.Cat.Indices(),
+			(client, f) => client.Cat.IndicesAsync(),
+			(client, r) => client.Cat.Indices(r),
+			(client, r) => client.Cat.IndicesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatIndicesRecord> response) =>
@@ -59,10 +59,10 @@ namespace Tests.Cat.CatIndices
 		protected override string UrlPath => "/_cat/indices/doesnot-exist-%2A";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatIndices(f),
-			(client, f) => client.CatIndicesAsync(f),
-			(client, r) => client.CatIndices(r),
-			(client, r) => client.CatIndicesAsync(r)
+			(client, f) => client.Cat.Indices(f),
+			(client, f) => client.Cat.IndicesAsync(f),
+			(client, r) => client.Cat.Indices(r),
+			(client, r) => client.Cat.IndicesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatIndicesRecord> response)

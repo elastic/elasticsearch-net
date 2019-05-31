@@ -3,13 +3,13 @@
 namespace Nest
 {
 	//TODO T can be anything?
-	public interface IPreviewDatafeedResponse<out T> : IResponse
+	public interface IPreviewDatafeedResponse<out TResult> : IResponse
 	{
-		IReadOnlyCollection<T> Data { get; }
+		IReadOnlyCollection<TResult> Data { get; }
 	}
 
-	public class PreviewDatafeedResponse<T> : ResponseBase, IPreviewDatafeedResponse<T>
+	public class PreviewDatafeedResponse<TResult> : ResponseBase, IPreviewDatafeedResponse<TResult>
 	{
-		public IReadOnlyCollection<T> Data { get; internal set; } = EmptyReadOnly<T>.Collection;
+		public IReadOnlyCollection<TResult> Data { get; internal set; } = EmptyReadOnly<TResult>.Collection;
 	}
 }

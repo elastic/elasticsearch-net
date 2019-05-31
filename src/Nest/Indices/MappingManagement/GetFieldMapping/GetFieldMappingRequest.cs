@@ -5,5 +5,5 @@
 
 	public partial class GetFieldMappingRequest { }
 
-	public partial class GetFieldMappingDescriptor<T> where T : class { }
+	public partial class GetFieldMappingDescriptor<TDocument> where TDocument : class { }
 }

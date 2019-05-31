@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using ApiGenerator.Configuration;
 using CsQuery;
 using ShellProgressBar;
 
@@ -43,7 +44,7 @@ namespace ApiGenerator
 				}
 			}
 
-			File.WriteAllText(CodeConfiguration.LastDownloadedVersionFile, branch);
+			File.WriteAllText(GeneratorLocations.LastDownloadedVersionFile, branch);
 		}
 
 		public static RestSpecDownloader Download(string branch) => new RestSpecDownloader(branch);
@@ -59,7 +60,8 @@ namespace ApiGenerator
 
 		private void FindJsonFilesOnListing(Specification spec, string html, IProgressBar pbar)
 		{
-			if (!Directory.Exists(CodeConfiguration.RestSpecificationFolder)) Directory.CreateDirectory(CodeConfiguration.RestSpecificationFolder);
+			if (!Directory.Exists(GeneratorLocations.RestSpecificationFolder)) 
+				Directory.CreateDirectory(GeneratorLocations.RestSpecificationFolder);
 
 			var dom = CQ.Create(html);
 
@@ -88,7 +90,7 @@ namespace ApiGenerator
 
 		private void WriteToEndpointsFolder(string folder, string filename, string contents)
 		{
-			var f = Path.Combine(CodeConfiguration.RestSpecificationFolder, folder);
+			var f = Path.Combine(GeneratorLocations.RestSpecificationFolder, folder);
 			if (!Directory.Exists(f)) Directory.CreateDirectory(f);
 			File.WriteAllText(f + "\\" + filename, contents);
 		}

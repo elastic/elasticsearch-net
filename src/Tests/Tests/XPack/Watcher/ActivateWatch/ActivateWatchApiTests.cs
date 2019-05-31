@@ -31,7 +31,7 @@ namespace Tests.XPack.Watcher.ActivateWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Active(false)
 					.Input(i => i
 						.Http(h => h
@@ -70,10 +70,10 @@ namespace Tests.XPack.Watcher.ActivateWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ActivateWatch(CallIsolatedValue, f),
-			(client, f) => client.ActivateWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.ActivateWatch(r),
-			(client, r) => client.ActivateWatchAsync(r)
+			(client, f) => client.Watcher.Activate(CallIsolatedValue, f),
+			(client, f) => client.Watcher.ActivateAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Activate(r),
+			(client, r) => client.Watcher.ActivateAsync(r)
 		);
 
 		protected override ActivateWatchDescriptor NewDescriptor() => new ActivateWatchDescriptor(CallIsolatedValue);

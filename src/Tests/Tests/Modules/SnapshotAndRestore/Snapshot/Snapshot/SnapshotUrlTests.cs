@@ -15,24 +15,24 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 			var snapshot = "snap";
 
 			await PUT($"/_snapshot/{repository}/{snapshot}")
-					.Fluent(c => c.Snapshot(repository, snapshot))
-					.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot)))
-					.FluentAsync(c => c.SnapshotAsync(repository, snapshot))
-					.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot)))
+					.Fluent(c => c.Snapshot.Snapshot(repository, snapshot))
+					.Request(c => c.Snapshot.Snapshot(new SnapshotRequest(repository, snapshot)))
+					.FluentAsync(c => c.Snapshot.SnapshotAsync(repository, snapshot))
+					.RequestAsync(c => c.Snapshot.SnapshotAsync(new SnapshotRequest(repository, snapshot)))
 				;
 
 
 			await ExpectUrl(HttpMethod.PUT, $"/_snapshot/{repository}/{snapshot}?pretty=true", s => s.PrettyJson())
-				.Fluent(c => c.Snapshot(repository, snapshot))
-				.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot)))
-				.FluentAsync(c => c.SnapshotAsync(repository, snapshot))
-				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot)));
+				.Fluent(c => c.Snapshot.Snapshot(repository, snapshot))
+				.Request(c => c.Snapshot.Snapshot(new SnapshotRequest(repository, snapshot)))
+				.FluentAsync(c => c.Snapshot.SnapshotAsync(repository, snapshot))
+				.RequestAsync(c => c.Snapshot.SnapshotAsync(new SnapshotRequest(repository, snapshot)));
 
 			await ExpectUrl(HttpMethod.PUT, $"/_snapshot/{repository}/{snapshot}?pretty=true", s => s.PrettyJson())
-				.Fluent(c => c.Snapshot(repository, snapshot, s => s.Pretty()))
-				.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot) { Pretty = true }))
-				.FluentAsync(c => c.SnapshotAsync(repository, snapshot, s => s.Pretty()))
-				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot) { Pretty = true }));
+				.Fluent(c => c.Snapshot.Snapshot(repository, snapshot, s => s.Pretty()))
+				.Request(c => c.Snapshot.Snapshot(new SnapshotRequest(repository, snapshot) { Pretty = true }))
+				.FluentAsync(c => c.Snapshot.SnapshotAsync(repository, snapshot, s => s.Pretty()))
+				.RequestAsync(c => c.Snapshot.SnapshotAsync(new SnapshotRequest(repository, snapshot) { Pretty = true }));
 		}
 	}
 }

@@ -98,7 +98,7 @@ namespace Tests.Search.Request
 
 		public void Seed()
 		{
-			var create = _client.CreateIndex(_index, c => c
+			var create = _client.Indices.Create(_index, c => c
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
@@ -152,7 +152,7 @@ namespace Tests.Search.Request
 				)
 			);
 			_client.Bulk(bulk);
-			_client.Refresh(_index);
+			_client.Indices.Refresh(_index);
 		}
 
 

@@ -42,21 +42,21 @@ namespace Tests.XPack.CrossClusterReplication
 							.FollowIndexPattern($"{FollowerPrefix}{{{{leader_index}}}}")
 							.MaxWriteBufferSize("1mb")
 						,
-						(v, c, f) => c.CreateAutoFollowPattern(AutoPattern(v), f),
-						(v, c, f) => c.CreateAutoFollowPatternAsync(AutoPattern(v), f),
-						(v, c, r) => c.CreateAutoFollowPattern(r),
-						(v, c, r) => c.CreateAutoFollowPatternAsync(r)
+						(v, c, f) => c.CrossClusterReplication.CreateAutoFollowPattern(AutoPattern(v), f),
+						(v, c, f) => c.CrossClusterReplication.CreateAutoFollowPatternAsync(AutoPattern(v), f),
+						(v, c, r) => c.CrossClusterReplication.CreateAutoFollowPattern(r),
+						(v, c, r) => c.CrossClusterReplication.CreateAutoFollowPatternAsync(r)
 					)
 			},
 			{
 				GetAutoFollowStep, u =>
 					u.Calls<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequest, IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(
 						v => new GetAutoFollowPatternRequest(AutoPattern(v)),
-						(v, d) => d.Name(AutoPattern(v)),
-						(v, c, f) => c.GetAutoFollowPattern(f),
-						(v, c, f) => c.GetAutoFollowPatternAsync(f),
-						(v, c, r) => c.GetAutoFollowPattern(r),
-						(v, c, r) => c.GetAutoFollowPatternAsync(r)
+						(v, d) => d,
+						(v, c, f) => c.CrossClusterReplication.GetAutoFollowPattern(AutoPattern(v), f),
+						(v, c, f) => c.CrossClusterReplication.GetAutoFollowPatternAsync(AutoPattern(v), f),
+						(v, c, r) => c.CrossClusterReplication.GetAutoFollowPattern(r),
+						(v, c, r) => c.CrossClusterReplication.GetAutoFollowPatternAsync(r)
 					)
 			},
 			{
@@ -64,20 +64,20 @@ namespace Tests.XPack.CrossClusterReplication
 					u.Calls<DeleteAutoFollowPatternDescriptor, DeleteAutoFollowPatternRequest, IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(
 						v => new DeleteAutoFollowPatternRequest(AutoPattern(v)),
 						(v, d) => d,
-						(v, c, f) => c.DeleteAutoFollowPattern(AutoPattern(v), f),
-						(v, c, f) => c.DeleteAutoFollowPatternAsync(AutoPattern(v), f),
-						(v, c, r) => c.DeleteAutoFollowPattern(r),
-						(v, c, r) => c.DeleteAutoFollowPatternAsync(r)
+						(v, c, f) => c.CrossClusterReplication.DeleteAutoFollowPattern(AutoPattern(v), f),
+						(v, c, f) => c.CrossClusterReplication.DeleteAutoFollowPatternAsync(AutoPattern(v), f),
+						(v, c, r) => c.CrossClusterReplication.DeleteAutoFollowPattern(r),
+						(v, c, r) => c.CrossClusterReplication.DeleteAutoFollowPatternAsync(r)
 					)
 			},
 			{
 				GlobalStatsStep, u => u.Calls<CcrStatsDescriptor, CcrStatsRequest, ICcrStatsRequest, CcrStatsResponse>(
 						v => new CcrStatsRequest(),
 						(v, d) => d,
-						(v, c, f) => c.CcrStats(f),
-						(v, c, f) => c.CcrStatsAsync(f),
-						(v, c, r) => c.CcrStats(r),
-						(v, c, r) => c.CcrStatsAsync(r)
+						(v, c, f) => c.CrossClusterReplication.Stats(f),
+						(v, c, f) => c.CrossClusterReplication.StatsAsync(f),
+						(v, c, r) => c.CrossClusterReplication.Stats(r),
+						(v, c, r) => c.CrossClusterReplication.StatsAsync(r)
 					)
 			}
 		}) { }

@@ -24,10 +24,10 @@ namespace Tests.Ingest.Processor
 		protected override string UrlPath => $"/_ingest/processor/grok";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GrokProcessorPatterns(f),
-			(client, f) => client.GrokProcessorPatternsAsync(f),
-			(client, r) => client.GrokProcessorPatterns(r),
-			(client, r) => client.GrokProcessorPatternsAsync(r)
+			(client, f) => client.Ingest.GrokProcessorPatterns(f),
+			(client, f) => client.Ingest.GrokProcessorPatternsAsync(f),
+			(client, r) => client.Ingest.GrokProcessorPatterns(r),
+			(client, r) => client.Ingest.GrokProcessorPatternsAsync(r)
 		);
 	}
 }

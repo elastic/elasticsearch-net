@@ -11,10 +11,10 @@ namespace Tests.XPack.CrossClusterReplication.Follow.PauseFollowIndex
 		{
 			var name = "x";
 			await UrlTester.POST($"/{name}/_ccr/pause_follow")
-				.Fluent(c => c.PauseFollowIndex(name, d => d))
-				.Request(c => c.PauseFollowIndex(new PauseFollowIndexRequest(name)))
-				.FluentAsync(c => c.PauseFollowIndexAsync(name, d => d))
-				.RequestAsync(c => c.PauseFollowIndexAsync(new PauseFollowIndexRequest(name)));
+				.Fluent(c => c.CrossClusterReplication.PauseFollowIndex(name, d => d))
+				.Request(c => c.CrossClusterReplication.PauseFollowIndex(new PauseFollowIndexRequest(name)))
+				.FluentAsync(c => c.CrossClusterReplication.PauseFollowIndexAsync(name, d => d))
+				.RequestAsync(c => c.CrossClusterReplication.PauseFollowIndexAsync(new PauseFollowIndexRequest(name)));
 
 		}
 	}

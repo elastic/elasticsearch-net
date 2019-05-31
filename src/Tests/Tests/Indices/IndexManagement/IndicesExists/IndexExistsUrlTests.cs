@@ -15,10 +15,10 @@ namespace Tests.Indices.IndexManagement.IndexExists
 			var indices = Index<Project>().And<CommitActivity>();
 			var index = "project";
 			await HEAD($"/{index}")
-					.Fluent(c => c.IndexExists(index, s => s))
-					.Request(c => c.IndexExists(new IndexExistsRequest(index)))
-					.FluentAsync(c => c.IndexExistsAsync(index))
-					.RequestAsync(c => c.IndexExistsAsync(new IndexExistsRequest(index)))
+					.Fluent(c => c.Indices.Exists(index, s => s))
+					.Request(c => c.Indices.Exists(new IndexExistsRequest(index)))
+					.FluentAsync(c => c.Indices.ExistsAsync(index))
+					.RequestAsync(c => c.Indices.ExistsAsync(new IndexExistsRequest(index)))
 				;
 		}
 	}

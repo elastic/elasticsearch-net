@@ -22,10 +22,10 @@ namespace Tests.Indices.StatusManagement.Flush
 		protected override string UrlPath => $"/{CallIsolatedValue}/_flush?allow_no_indices=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Flush(CallIsolatedValue, f),
-			(client, f) => client.FlushAsync(CallIsolatedValue, f),
-			(client, r) => client.Flush(r),
-			(client, r) => client.FlushAsync(r)
+			(client, f) => client.Indices.Flush(CallIsolatedValue, f),
+			(client, f) => client.Indices.FlushAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Flush(r),
+			(client, r) => client.Indices.FlushAsync(r)
 		);
 	}
 }

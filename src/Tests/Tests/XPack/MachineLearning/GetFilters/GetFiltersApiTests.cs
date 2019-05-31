@@ -40,10 +40,10 @@ namespace Tests.XPack.MachineLearning.GetFilters
 		protected override string UrlPath => $"_ml/filters/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetFilters(f),
-			(client, f) => client.GetFiltersAsync(f),
-			(client, r) => client.GetFilters(r),
-			(client, r) => client.GetFiltersAsync(r)
+			(client, f) => client.MachineLearning.GetFilters(f),
+			(client, f) => client.MachineLearning.GetFiltersAsync(f),
+			(client, r) => client.MachineLearning.GetFilters(r),
+			(client, r) => client.MachineLearning.GetFiltersAsync(r)
 		);
 
 		protected override GetFiltersDescriptor NewDescriptor() => new GetFiltersDescriptor().FilterId(CallIsolatedValue);
@@ -99,10 +99,10 @@ namespace Tests.XPack.MachineLearning.GetFilters
 		protected override string UrlPath => $"_ml/filters?from=10&size=10";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetFilters(f),
-			(client, f) => client.GetFiltersAsync(f),
-			(client, r) => client.GetFilters(r),
-			(client, r) => client.GetFiltersAsync(r)
+			(client, f) => client.MachineLearning.GetFilters(f),
+			(client, f) => client.MachineLearning.GetFiltersAsync(f),
+			(client, r) => client.MachineLearning.GetFilters(r),
+			(client, r) => client.MachineLearning.GetFiltersAsync(r)
 		);
 
 		protected override void ExpectResponse(GetFiltersResponse response)

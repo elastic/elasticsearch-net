@@ -43,15 +43,15 @@ ORDER BY numberOfContributors DESC";
 		protected override string UrlPath => $"/_sql/close";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClearSqlCursor(f),
-			(client, f) => client.ClearSqlCursorAsync(f),
-			(client, r) => client.ClearSqlCursor(r),
-			(client, r) => client.ClearSqlCursorAsync(r)
+			(client, f) => client.Sql.ClearCursor(f),
+			(client, f) => client.Sql.ClearCursorAsync(f),
+			(client, r) => client.Sql.ClearCursor(r),
+			(client, r) => client.Sql.ClearCursorAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var sqlQueryResponse = Client.QuerySql(q => q.Query(SqlQuery).FetchSize(5));
+			var sqlQueryResponse = Client.Sql.Query(q => q.Query(SqlQuery).FetchSize(5));
 			if (!sqlQueryResponse.IsValid)
 				throw new Exception("Setup: Initial scroll failed.");
 

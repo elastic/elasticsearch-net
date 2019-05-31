@@ -81,10 +81,10 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 		protected override string UrlPath => $"_ml/anomaly_detectors/_validate";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ValidateJob(f),
-			(client, f) => client.ValidateJobAsync(f),
-			(client, r) => client.ValidateJob(r),
-			(client, r) => client.ValidateJobAsync(r)
+			(client, f) => client.MachineLearning.ValidateJob(f),
+			(client, f) => client.MachineLearning.ValidateJobAsync(f),
+			(client, r) => client.MachineLearning.ValidateJob(r),
+			(client, r) => client.MachineLearning.ValidateJobAsync(r)
 		);
 
 		protected override void ExpectResponse(ValidateJobResponse response) => response.Acknowledged.Should().BeTrue();

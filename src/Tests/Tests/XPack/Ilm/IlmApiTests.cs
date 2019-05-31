@@ -43,20 +43,20 @@ namespace Tests.XPack.Ilm
 				IlmExplainLifecycleStep, u => u.Calls<ExplainLifecycleDescriptor, ExplainLifecycleRequest, IExplainLifecycleRequest, ExplainLifecycleResponse>(
 					v => new ExplainLifecycleRequest("project"),
 					(v, d) => d,
-					(v, c, f) => c.ExplainLifecycle("project", f),
-					(v, c, f) => c.ExplainLifecycleAsync("project", f),
-					(v, c, r) => c.ExplainLifecycle(r),
-					(v, c, r) => c.ExplainLifecycleAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.ExplainLifecycle("project", f),
+					(v, c, f) => c.IndexLifecycleManagement.ExplainLifecycleAsync("project", f),
+					(v, c, r) => c.IndexLifecycleManagement.ExplainLifecycle(r),
+					(v, c, r) => c.IndexLifecycleManagement.ExplainLifecycleAsync(r)
 				)
 			},
 			{
 				IlmGetStatusStep, u => u.Calls<GetIlmStatusDescriptor, GetIlmStatusRequest, IGetIlmStatusRequest, GetIlmStatusResponse>(
 					v => new GetIlmStatusRequest(),
 					(v, d) => d,
-					(v, c, f) => c.GetIlmStatus(f),
-					(v, c, f) => c.GetIlmStatusAsync(f),
-					(v, c, r) => c.GetIlmStatus(r),
-					(v, c, r) => c.GetIlmStatusAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.GetStatus(f),
+					(v, c, f) => c.IndexLifecycleManagement.GetStatusAsync(f),
+					(v, c, r) => c.IndexLifecycleManagement.GetStatus(r),
+					(v, c, r) => c.IndexLifecycleManagement.GetStatusAsync(r)
 				)
 			},
 			{
@@ -95,60 +95,60 @@ namespace Tests.XPack.Ilm
 													.Delete(w => w.MinimumAge("30d")
 		       													  .Actions(ac => ac.Delete(f => f)))))
 					,
-					(v, c, f) => c.PutLifecycle("policy" + v, f),
-					(v, c, f) => c.PutLifecycleAsync("policy" + v, f),
-					(v, c, r) => c.PutLifecycle(r),
-					(v, c, r) => c.PutLifecycleAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.PutLifecycle("policy" + v, f),
+					(v, c, f) => c.IndexLifecycleManagement.PutLifecycleAsync("policy" + v, f),
+					(v, c, r) => c.IndexLifecycleManagement.PutLifecycle(r),
+					(v, c, r) => c.IndexLifecycleManagement.PutLifecycleAsync(r)
 				)
 			},
 			{
 				IlmRemovePolicyStep, u => u.Calls<RemovePolicyDescriptor, RemovePolicyRequest, IRemovePolicyRequest, RemovePolicyResponse>(
 					v => new RemovePolicyRequest("project"),
 					(v, d) => d,
-					(v, c, f) => c.RemovePolicy("project", f),
-					(v, c, f) => c.RemovePolicyAsync("project", f),
-					(v, c, r) => c.RemovePolicy(r),
-					(v, c, r) => c.RemovePolicyAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.RemovePolicy("project", f),
+					(v, c, f) => c.IndexLifecycleManagement.RemovePolicyAsync("project", f),
+					(v, c, r) => c.IndexLifecycleManagement.RemovePolicy(r),
+					(v, c, r) => c.IndexLifecycleManagement.RemovePolicyAsync(r)
 				)
 			},
 			{
 				IlmGetLifecycleStep, u => u.Calls<GetLifecycleDescriptor, GetLifecycleRequest, IGetLifecycleRequest, GetLifecycleResponse>(
 					v => new GetLifecycleRequest("policy" + v),
 					(v, d) => d.PolicyId("policy" + v),
-					(v, c, f) => c.GetLifecycle(f),
-					(v, c, f) => c.GetLifecycleAsync(f),
-					(v, c, r) => c.GetLifecycle(r),
-					(v, c, r) => c.GetLifecycleAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.GetLifecycle(f),
+					(v, c, f) => c.IndexLifecycleManagement.GetLifecycleAsync(f),
+					(v, c, r) => c.IndexLifecycleManagement.GetLifecycle(r),
+					(v, c, r) => c.IndexLifecycleManagement.GetLifecycleAsync(r)
 				)
 			},
 			{
 				IlmGeAllLifecycleStep, u => u.Calls<GetLifecycleDescriptor, GetLifecycleRequest, IGetLifecycleRequest, GetLifecycleResponse>(
 					v => new GetLifecycleRequest(),
 					(v, d) => d,
-					(v, c, f) => c.GetLifecycle(f),
-					(v, c, f) => c.GetLifecycleAsync(f),
-					(v, c, r) => c.GetLifecycle(r),
-					(v, c, r) => c.GetLifecycleAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.GetLifecycle(f),
+					(v, c, f) => c.IndexLifecycleManagement.GetLifecycleAsync(f),
+					(v, c, r) => c.IndexLifecycleManagement.GetLifecycle(r),
+					(v, c, r) => c.IndexLifecycleManagement.GetLifecycleAsync(r)
 				)
 			},
 			{
 				IlmDeleteLifecycleStep, u => u.Calls<DeleteLifecycleDescriptor, DeleteLifecycleRequest, IDeleteLifecycleRequest, DeleteLifecycleResponse>(
 					v => new DeleteLifecycleRequest("policy" + v),
 					(v, d) => d,
-					(v, c, f) => c.DeleteLifecycle("policy" + v, f),
-					(v, c, f) => c.DeleteLifecycleAsync("policy" + v, f),
-					(v, c, r) => c.DeleteLifecycle(r),
-					(v, c, r) => c.DeleteLifecycleAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.DeleteLifecycle("policy" + v, f),
+					(v, c, f) => c.IndexLifecycleManagement.DeleteLifecycleAsync("policy" + v, f),
+					(v, c, r) => c.IndexLifecycleManagement.DeleteLifecycle(r),
+					(v, c, r) => c.IndexLifecycleManagement.DeleteLifecycleAsync(r)
 				)
 			},
 			{
 				IlmStopStep, u => u.Calls<StopIlmDescriptor, StopIlmRequest, IStopIlmRequest, StopIlmResponse>(
 					v => new StopIlmRequest(),
 					(v, d) => d,
-					(v, c, f) => c.StopIlm(f),
-					(v, c, f) => c.StopIlmAsync(f),
-					(v, c, r) => c.StopIlm(r),
-					(v, c, r) => c.StopIlmAsync(r)
+					(v, c, f) => c.IndexLifecycleManagement.Stop(f),
+					(v, c, f) => c.IndexLifecycleManagement.StopAsync(f),
+					(v, c, r) => c.IndexLifecycleManagement.Stop(r),
+					(v, c, r) => c.IndexLifecycleManagement.StopAsync(r)
 				)
 			},
 		}) { }

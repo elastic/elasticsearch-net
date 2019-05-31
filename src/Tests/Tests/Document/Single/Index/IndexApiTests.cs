@@ -74,8 +74,8 @@ namespace Tests.Document.Single.Index
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Index<Project>(Document, f),
-			(client, f) => client.IndexAsync<Project>(Document, f),
+			(client, f) => client.Index(Document, f),
+			(client, f) => client.IndexAsync(Document, f),
 			(client, r) => client.Index(r),
 			(client, r) => client.IndexAsync(r)
 		);

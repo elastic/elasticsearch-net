@@ -1,0 +1,27 @@
+@using RazorLight
+@using System.Collections.Generic
+@using System.Linq
+@using CsQuery.ExtensionMethods.Internal
+@using ApiGenerator.Domain
+@using ApiGenerator
+@inherits CodeTemplatePage<RestApiSpec>
+@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Linq.Expressions;
+using Elasticsearch.Net;
+@{ IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+
+namespace Nest
+{
+@{
+	RestApiSpec m = Model;
+}
+@{ IncludeAsync("HighLevel/Descriptors/RequestDescriptorBase.cshtml", m); }
+@foreach (var endpoint in m.Endpoints.Values)
+{
+	IncludeAsync("HighLevel/Descriptors/Descriptor.cshtml", endpoint.DescriptorPartialImplementation);
+}
+}

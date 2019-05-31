@@ -41,10 +41,10 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.StartDatafeed(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.StartDatafeedAsync(CallIsolatedValue + "-datafeed", f),
-			(client, r) => client.StartDatafeed(r),
-			(client, r) => client.StartDatafeedAsync(r)
+			(client, f) => client.MachineLearning.StartDatafeed(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.StartDatafeedAsync(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.MachineLearning.StartDatafeed(r),
+			(client, r) => client.MachineLearning.StartDatafeedAsync(r)
 		);
 
 		protected override StartDatafeedDescriptor NewDescriptor() => new StartDatafeedDescriptor(CallIsolatedValue + "-datafeed");

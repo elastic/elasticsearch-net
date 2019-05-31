@@ -12,16 +12,16 @@ namespace Tests.XPack.Rollup.GetRollupJob
 		{
 			const string id = "rollup-id";
 			await GET($"/_rollup/job/{id}")
-				.Fluent(c => c.GetRollupJob(j => j.Id(id)))
-				.Request(c => c.GetRollupJob(new GetRollupJobRequest(id)))
-				.FluentAsync(c => c.GetRollupJobAsync(j => j.Id(id)))
-				.RequestAsync(c => c.GetRollupJobAsync(new GetRollupJobRequest(id)));
+				.Fluent(c => c.Rollup.GetJob(j => j.Id(id)))
+				.Request(c => c.Rollup.GetJob(new GetRollupJobRequest(id)))
+				.FluentAsync(c => c.Rollup.GetJobAsync(j => j.Id(id)))
+				.RequestAsync(c => c.Rollup.GetJobAsync(new GetRollupJobRequest(id)));
 
 			await GET($"/_rollup/job/")
-				.Fluent(c => c.GetRollupJob())
-				.Request(c => c.GetRollupJob(new GetRollupJobRequest()))
-				.FluentAsync(c => c.GetRollupJobAsync())
-				.RequestAsync(c => c.GetRollupJobAsync(new GetRollupJobRequest()));
+				.Fluent(c => c.Rollup.GetJob())
+				.Request(c => c.Rollup.GetJob(new GetRollupJobRequest()))
+				.FluentAsync(c => c.Rollup.GetJobAsync())
+				.RequestAsync(c => c.Rollup.GetJobAsync(new GetRollupJobRequest()));
 		}
 	}
 }

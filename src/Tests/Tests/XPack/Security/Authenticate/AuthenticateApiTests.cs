@@ -24,10 +24,10 @@ namespace Tests.XPack.Security.Authenticate
 		protected override string UrlPath => $"/_security/_authenticate";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Authenticate(f),
-			(client, f) => client.AuthenticateAsync(f),
-			(client, r) => client.Authenticate(r),
-			(client, r) => client.AuthenticateAsync(r)
+			(client, f) => client.Security.Authenticate(f),
+			(client, f) => client.Security.AuthenticateAsync(f),
+			(client, r) => client.Security.Authenticate(r),
+			(client, r) => client.Security.AuthenticateAsync(r)
 		);
 
 		protected override void ExpectResponse(AuthenticateResponse response)

@@ -22,9 +22,9 @@ namespace Tests.Framework
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var index in values.Values) client.CreateIndex(index, CreateIndexSettings).ShouldBeValid();
+			foreach (var index in values.Values) client.Indices.Create(index, CreateIndexSettings).ShouldBeValid();
 			var indices = Infer.Indices(values.Values.Select(i => (IndexName)i));
-			client.ClusterHealth(f => f.WaitForStatus(WaitForStatus.Yellow).Index(indices))
+			client.Cluster.Health(indices, f => f.WaitForStatus(WaitForStatus.Yellow))
 				.ShouldBeValid();
 		}
 

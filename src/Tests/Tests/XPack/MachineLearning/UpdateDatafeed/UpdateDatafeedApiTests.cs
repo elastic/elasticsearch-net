@@ -57,10 +57,10 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.UpdateDatafeed(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.UpdateDatafeedAsync(CallIsolatedValue + "-datafeed", f),
-			(client, r) => client.UpdateDatafeed(r),
-			(client, r) => client.UpdateDatafeedAsync(r)
+			(client, f) => client.MachineLearning.UpdateDatafeed(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.UpdateDatafeedAsync(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.MachineLearning.UpdateDatafeed(r),
+			(client, r) => client.MachineLearning.UpdateDatafeedAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

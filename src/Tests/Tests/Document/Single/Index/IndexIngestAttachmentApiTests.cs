@@ -86,7 +86,7 @@ namespace Tests.Document.Single.Index
 			{
 				var index = value.Value;
 
-				client.CreateIndex(index, c => c
+				client.Indices.Create(index, c => c
 					.Map<IngestedAttachment>(mm => mm
 						.Properties(p => p
 							.Text(s => s
@@ -100,7 +100,7 @@ namespace Tests.Document.Single.Index
 				);
 			}
 
-			client.PutPipeline(new PutPipelineRequest(PipelineId)
+			client.Ingest.PutPipeline(new PutPipelineRequest(PipelineId)
 			{
 				Description = "Attachment pipeline test",
 				Processors = new List<IProcessor>
@@ -166,7 +166,7 @@ namespace Tests.Document.Single.Index
 		{
 			_client = cluster.Client;
 
-			_client.PutPipeline(new PutPipelineRequest(PipelineId)
+			_client.Ingest.PutPipeline(new PutPipelineRequest(PipelineId)
 			{
 				Description = "Attachment pipeline test",
 				Processors = new List<IProcessor>
@@ -179,7 +179,7 @@ namespace Tests.Document.Single.Index
 				}
 			});
 
-			var createIndexResponse = _client.CreateIndex(Index, c => c
+			var createIndexResponse = _client.Indices.Create(Index, c => c
 				.Map<IngestedAttachment>(mm => mm
 					.Properties(p => p
 						.Text(s => s

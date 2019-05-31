@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ApiGenerator.Configuration;
 
 namespace ApiGenerator
 {
@@ -30,8 +31,8 @@ namespace ApiGenerator
 			else
 			{
 				// read last downloaded branch from file.
-				if (File.Exists(CodeConfiguration.LastDownloadedVersionFile))
-					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
+				if (File.Exists(GeneratorLocations.LastDownloadedVersionFile))
+					downloadBranch = File.ReadAllText(GeneratorLocations.LastDownloadedVersionFile);
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))
@@ -48,7 +49,7 @@ namespace ApiGenerator
 				generateCode = answer == "y" || answer == "";
 			}
 			if (generateCode)
-				ApiGenerator.Generate(downloadBranch, "Core", "XPack");
+				Generator.ApiGenerator.Generate(downloadBranch, "Core", "XPack");
 		}
 	}
 }

@@ -9,9 +9,9 @@ namespace Tests.XPack.CrossClusterReplication.Stats
 	{
 		[U] public override async Task Urls() =>
 			await UrlTester.GET($"/_ccr/stats")
-				.Fluent(c => c.CcrStats(d => d))
-				.Request(c => c.CcrStats(new CcrStatsRequest()))
-				.FluentAsync(c => c.CcrStatsAsync(d => d))
-				.RequestAsync(c => c.CcrStatsAsync(new CcrStatsRequest()));
+				.Fluent(c => c.CrossClusterReplication.Stats(d => d))
+				.Request(c => c.CrossClusterReplication.Stats(new CcrStatsRequest()))
+				.FluentAsync(c => c.CrossClusterReplication.StatsAsync(d => d))
+				.RequestAsync(c => c.CrossClusterReplication.StatsAsync(new CcrStatsRequest()));
 	}
 }

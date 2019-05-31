@@ -19,10 +19,10 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}/_close";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CloseIndex(CallIsolatedValue),
-			(client, f) => client.CloseIndexAsync(CallIsolatedValue),
-			(client, r) => client.CloseIndex(r),
-			(client, r) => client.CloseIndexAsync(r)
+			(client, f) => client.Indices.Close(CallIsolatedValue),
+			(client, f) => client.Indices.CloseAsync(CallIsolatedValue),
+			(client, r) => client.Indices.Close(r),
+			(client, r) => client.Indices.CloseAsync(r)
 		);
 	}
 }

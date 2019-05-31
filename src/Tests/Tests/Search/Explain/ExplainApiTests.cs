@@ -67,8 +67,8 @@ namespace Tests.Search.Explain
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Explain(_project, f),
 			(c, f) => c.ExplainAsync(_project, f),
-			(c, r) => c.Explain(r),
-			(c, r) => c.ExplainAsync(r)
+			(c, r) => c.Explain<Project>(r),
+			(c, r) => c.ExplainAsync<Project>(r)
 		);
 
 		protected override ExplainDescriptor<Project> NewDescriptor() => new ExplainDescriptor<Project>(_project);
