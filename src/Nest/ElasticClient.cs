@@ -16,7 +16,7 @@ namespace Nest
 		protected NamespacedClientProxy(ElasticClient client) => _client = client;
 
 		internal TResponse DoRequest<TRequest, TResponse>(
-			TRequest p, 
+			TRequest p,
 			IRequestParameters parameters,
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
@@ -33,7 +33,7 @@ namespace Nest
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new() =>
 			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
-		
+
 		private CatResponse<TCatRecord> DeserializeCatResponse<TCatRecord>(IApiCallDetails response, Stream stream)
 			where TCatRecord : ICatRecord
 		{
@@ -86,24 +86,22 @@ namespace Nest
 			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
 			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
 		}
-		
 
-		protected CatResponse<TCatRecord> DoCatHelp<TRequest, TParams, TCatRecord>(TRequest request)
-			where TCatRecord : ICatRecord
+
+		protected CatResponse<CatHelpRecord> DoCatHelp<TRequest, TParams, TCatRecord>(TRequest request)
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse<TCatRecord>;
-			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
+			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse<CatHelpRecord>;
+			return DoRequest<TRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
 		}
 
-		protected Task<CatResponse<TCatRecord>> DoCatHelpAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
-			where TCatRecord : ICatRecord
+		protected Task<CatResponse<CatHelpRecord>> DoCatHelpAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse<TCatRecord>;
-			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
+			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse<CatHelpRecord>;
+			return DoRequestAsync<TRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
 		}
 	}
 	/// <summary>
