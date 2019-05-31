@@ -171,13 +171,13 @@ namespace Nest.Specification.CatApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</a>
 		/// </summary>
-		public CatResponse<CatHelpRecord> Help(ICatHelpRequest request) => DoCat<ICatHelpRequest, CatHelpRequestParameters, CatHelpRecord>(request);
+		public CatResponse<CatHelpRecord> Help(ICatHelpRequest request) => DoCatHelp<ICatHelpRequest, CatHelpRequestParameters, CatHelpRecord>(request);
 		/// <summary>
 		/// <c>GET</c> request to the <c>cat.help</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</a>
 		/// </summary>
-		public Task<CatResponse<CatHelpRecord>> HelpAsync(ICatHelpRequest request, CancellationToken ct = default) => DoCatAsync<ICatHelpRequest, CatHelpRequestParameters, CatHelpRecord>(request, ct);
+		public Task<CatResponse<CatHelpRecord>> HelpAsync(ICatHelpRequest request, CancellationToken ct = default) => DoCatHelpAsync<ICatHelpRequest, CatHelpRequestParameters, CatHelpRecord>(request, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>cat.indices</c> API, read more about this API online:
 		/// <para> </para>
