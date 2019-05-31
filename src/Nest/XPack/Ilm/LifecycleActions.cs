@@ -32,7 +32,7 @@ namespace Nest
 		public void Add(IUnfollowLifecycleAction action) => BackingDictionary.Add("unfollow", action);
 	}
 
-	internal class LifecycleActionsJsonConverter : IJsonFormatter<LifecycleActions>
+	internal class LifecycleActionsJsonConverter : IJsonFormatter<ILifecycleActions>
 	{
 		private static readonly AutomataDictionary LifeCycleActions = new AutomataDictionary
 		{
@@ -47,7 +47,7 @@ namespace Nest
 			{ "unfollow", 8 },
 		};
 
-		public LifecycleActions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public ILifecycleActions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 			{
@@ -113,7 +113,7 @@ namespace Nest
 			return new LifecycleActions(lifecycles);
 		}
 
-		public void Serialize(ref JsonWriter writer, LifecycleActions value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, ILifecycleActions value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
 			{
