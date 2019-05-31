@@ -6,13 +6,14 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Security;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 #if DOTNETCORE
 using System.Net.Http;
+using System.Runtime.InteropServices;
 #endif
-
 
 namespace Elasticsearch.Net
 {
@@ -139,6 +140,9 @@ namespace Elasticsearch.Net
 
 		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
+		private string _userAgent =
+			$"elasticsearch-net/{typeof(IConnectionConfigurationValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Elasticsearch.Net)";
+
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
 			_connectionPool = connectionPool;
@@ -198,6 +202,7 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
+		string IConnectionConfigurationValues.UserAgent => _userAgent;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -501,6 +506,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>
 			Assign(new ReadOnlyCollection<int>(statusCodes), (a, v) => a._skipDeserializationForStatusCodes = v);
+
+		/// <summary>
+		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
+		/// versions that initiate requests to Elasticsearch
+		/// </summary>
+		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
 
 		protected virtual void DisposeManagedResources()
 		{

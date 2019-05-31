@@ -185,6 +185,10 @@ namespace Elasticsearch.Net
 				request.Headers.Add("Accept-Encoding", "gzip,deflate");
 				request.Headers.Add("Content-Encoding", "gzip");
 			}
+
+			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))
+				request.UserAgent = requestData.UserAgent;
+
 			if (!string.IsNullOrWhiteSpace(requestData.RunAs))
 				request.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
 

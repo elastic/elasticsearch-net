@@ -6,6 +6,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
 
+#if DOTNETCORE
+using System.Runtime.InteropServices;
+#endif
+
 namespace Nest
 {
 	/// <inheritdoc cref="IConnectionSettingsValues" />
@@ -101,6 +105,9 @@ namespace Nest
 			_defaultRelationNames = new FluentDictionary<Type, string>();
 
 			_inferrer = new Inferrer(this);
+
+			UserAgent(
+				$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)");
 		}
 
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;

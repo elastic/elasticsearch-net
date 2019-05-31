@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Security;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
@@ -213,5 +214,11 @@ namespace Elasticsearch.Net
 		bool ThrowExceptions { get; }
 
 		ElasticsearchUrlFormatter UrlFormatter { get; }
+
+		/// <summary>
+		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
+		/// versions that initiate requests to Elasticsearch
+		/// </summary>
+		string UserAgent { get; }
 	}
 }
