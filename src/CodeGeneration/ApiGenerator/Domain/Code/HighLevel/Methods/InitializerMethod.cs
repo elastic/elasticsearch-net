@@ -1,7 +1,7 @@
 using System.Linq;
 using ApiGenerator.Configuration;
 
-namespace ApiGenerator.Domain.Code.HighLevel.Methods 
+namespace ApiGenerator.Domain.Code.HighLevel.Methods
 {
 	public class InitializerMethod : MethodSyntaxBase
 	{
@@ -23,14 +23,16 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 			);
 
 		private bool IsCatMethod => CsharpNames.Namespace == "Cat";
-		
-		public string DispatchMethod => IsCatMethod ? "DoCat" : "DoRequest";
 
-		public string DispatchGenerics => IsCatMethod 
+		private bool IsCatHelpMethod => CsharpNames.Namespace == "Cat" && MethodName == "Help";
+
+		public string DispatchMethod => IsCatHelpMethod ? "DoCatHelp" : IsCatMethod ? "DoCat" : "DoRequest";
+
+		public string DispatchGenerics => IsCatMethod
 			? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
 			: $"<{ArgumentType},{ResponseName}>";
 
 		public string DispatchParameters => IsCatMethod ? "request" : "request, request.RequestParameters";
-	
+
 	}
 }
