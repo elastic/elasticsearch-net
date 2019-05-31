@@ -42,7 +42,7 @@ namespace Elasticsearch.Net
 				sb.AppendLine($"# Audit exception in step {a.i + 1} {a.audit.Event.GetStringValue()}:\r\n{a.audit.Exception}");
 		}
 
-		public static void DebugAuditTrail(List<Audit> auditTrail, System.Text.StringBuilder sb)
+		public static void DebugAuditTrail(List<Audit> auditTrail, StringBuilder sb)
 		{
 			if (auditTrail == null) return;
 
@@ -54,7 +54,9 @@ namespace Elasticsearch.Net
 				AuditNodeUrl(sb, audit);
 
 				if (audit.Exception != null) sb.Append($" Exception: {audit.Exception.GetType().Name}");
-				sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
+				if (audit.Ended == default)
+					sb.AppendLine();
+				else sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
 			}
 		}
 
