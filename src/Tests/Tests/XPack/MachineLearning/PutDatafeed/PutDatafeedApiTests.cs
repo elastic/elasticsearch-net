@@ -17,10 +17,8 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 	{
 		private IElasticClient _client;
 
-		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
+		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) => 
 			_client = cluster.Client;
-		}
 
 		protected override bool ExpectIsValid => true;
 

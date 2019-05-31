@@ -477,7 +477,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			private FieldResolver _resolver;
 			private Stopwatch _stopwatch;
 
-			public CachePerformance(ITestOutputHelper output) => this._output = output;
+			public CachePerformance(ITestOutputHelper output) => _output = output;
 
 			[U]
 			public void CachedVsNonCached()

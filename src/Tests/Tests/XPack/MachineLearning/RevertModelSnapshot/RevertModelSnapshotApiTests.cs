@@ -61,9 +61,6 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 
 		protected override RevertModelSnapshotDescriptor NewDescriptor() => new RevertModelSnapshotDescriptor(CallIsolatedValue, "first");
 
-		protected override void ExpectResponse(RevertModelSnapshotResponse response)
-		{
-			response.Model.Should().NotBeNull();
-		}
+		protected override void ExpectResponse(RevertModelSnapshotResponse response) => response.Model.Should().NotBeNull();
 	}
 }

@@ -7,13 +7,11 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 {
 	public class InfoUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
+		[U] public override async Task Urls() =>
 			await UrlTester.GET("_ml/info")
-					.Fluent(c => c.MachineLearning.Info())
-					.Request(c => c.MachineLearning.Info(new MachineLearningInfoRequest()))
-					.FluentAsync(c => c.MachineLearning.InfoAsync())
-					.RequestAsync(c => c.MachineLearning.InfoAsync(new MachineLearningInfoRequest()));
-		}
+				.Fluent(c => c.MachineLearning.Info())
+				.Request(c => c.MachineLearning.Info(new MachineLearningInfoRequest()))
+				.FluentAsync(c => c.MachineLearning.InfoAsync())
+				.RequestAsync(c => c.MachineLearning.InfoAsync(new MachineLearningInfoRequest()));
 	}
 }

@@ -78,7 +78,7 @@ namespace Nest
                     break;
                 case JsonToken.Number:
 					var segment = reader.ReadNumberSegment();
-					for (int i = 0; i < segment.Count; i++)
+					for (var i = 0; i < segment.Count; i++)
 						writer.WriteRawUnsafe(segment.Array[i + segment.Offset]);
 					break;
                 case JsonToken.String:

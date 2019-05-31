@@ -223,10 +223,7 @@ namespace Tests.XPack.CrossClusterReplication
 					(v, c, r) => c.CrossClusterReplication.UnfollowIndexAsync(r)
 				)
 			},
-		})
-		{
-			_cluster = cluster;
-		}
+		}) => _cluster = cluster;
 
 		protected static string Prefix { get; } = $"f{Guid.NewGuid().ToString("N").Substring(0, 4)}";
 
