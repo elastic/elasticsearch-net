@@ -54,7 +54,9 @@ namespace Elasticsearch.Net
 				AuditNodeUrl(sb, audit);
 
 				if (audit.Exception != null) sb.Append($" Exception: {audit.Exception.GetType().Name}");
-				sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
+				if (audit.Ended == default)
+					sb.AppendLine();
+				else sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
 			}
 		}
 
