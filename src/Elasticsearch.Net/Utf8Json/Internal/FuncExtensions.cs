@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     // Unity compiler can't understand this.
 

@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Elasticsearch.Net.CrossPlatform;
+using Elasticsearch.Net.Serialization.Formatters;
 
 namespace Elasticsearch.Net
 {
@@ -60,7 +62,7 @@ namespace Elasticsearch.Net
 
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
+	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues
 		where T : ConnectionConfiguration<T>
 	{
 		private readonly IConnection _connection;

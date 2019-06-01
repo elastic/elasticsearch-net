@@ -1,5 +1,8 @@
 ﻿using System;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Serialization.Extensions;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest

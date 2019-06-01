@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
-	internal static class Extensions
+	internal static class UtilExtensions
 	{
 		private const long MillisecondsInAWeek = MillisecondsInADay * 7;
 		private const long MillisecondsInADay = MillisecondsInAnHour * 24;

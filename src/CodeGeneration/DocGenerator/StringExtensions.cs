@@ -252,7 +252,7 @@ namespace DocGenerator
 				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location),
 			};
-			var systemReferences = new string[]
+			var systemReferences = new[]
 			{
 				"System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
 				"System.ObjectModel, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -310,7 +310,7 @@ namespace DocGenerator
 
 		public static string ReplaceArityWithGenericSignature(this string value)
 		{
-			var indexOfBackTick = value.IndexOf("`");
+			var indexOfBackTick = value.IndexOf("`", StringComparison.Ordinal);
 
 			if (indexOfBackTick == -1)
 				return value;

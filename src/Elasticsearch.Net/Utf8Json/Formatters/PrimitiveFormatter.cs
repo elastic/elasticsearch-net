@@ -23,8 +23,9 @@
 #endregion
 
 using System;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	internal sealed class SByteFormatter : IJsonFormatter<SByte>, IObjectPropertyNameFormatter<SByte>
     {

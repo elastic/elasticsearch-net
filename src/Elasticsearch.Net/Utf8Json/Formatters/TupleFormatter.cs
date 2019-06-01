@@ -22,11 +22,12 @@
 // SOFTWARE.
 #endregion
 
-#if NETSTANDARD
 
+using Elasticsearch.Net.Utf8Json.Internal;
+#if NETSTANDARD
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	// reduce static constructor generate size on generics(especially IL2CPP on Unity)
 	internal static class TupleFormatterHelper

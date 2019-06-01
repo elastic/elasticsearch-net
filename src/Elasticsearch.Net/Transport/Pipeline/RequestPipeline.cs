@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Specification.NodesApi;
 using static Elasticsearch.Net.AuditEvent;
 

@@ -2,6 +2,10 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Serialization.Formatters;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
 namespace Nest
 {

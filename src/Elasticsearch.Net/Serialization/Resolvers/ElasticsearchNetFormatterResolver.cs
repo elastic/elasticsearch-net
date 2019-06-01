@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Concurrent;
+using Elasticsearch.Net.Serialization.Formatters;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Serialization.Resolvers
 {
 	internal class ElasticsearchNetFormatterResolver : IJsonFormatterResolver
 	{

@@ -33,8 +33,8 @@ namespace DocGenerator.Buildalyzer.Environment
 {
 	internal static class DotnetPathResolver
 	{
-		private const string DOTNET_CLI_UI_LANGUAGE = nameof(DOTNET_CLI_UI_LANGUAGE);
-		private static string BasePath;
+		private const string DotnetCliUiLanguage = nameof(DotnetCliUiLanguage);
+		private static string _basePath;
 
 		private static readonly object BasePathLock = new object();
 
@@ -42,19 +42,19 @@ namespace DocGenerator.Buildalyzer.Environment
 		{
 			lock (BasePathLock)
 			{
-				if (BasePath != null) return BasePath;
+				if (_basePath != null) return _basePath;
 
 				// Need to rety calling "dotnet --info" and do a hacky timeout for the process otherwise it occasionally locks up during testing (and possibly in the field)
-				var lines = GetInfo(projectPath);
+				List<string> lines;
 				var retry = 0;
 				do
 				{
 					lines = GetInfo(projectPath);
 					retry++;
 				} while ((lines == null || lines.Count == 0) && retry < 5);
-				BasePath = ParseBasePath(lines);
+				_basePath = ParseBasePath(lines);
 
-				return BasePath;
+				return _basePath;
 			}
 		}
 
@@ -62,8 +62,8 @@ namespace DocGenerator.Buildalyzer.Environment
 		{
 			// Ensure that we set the DOTNET_CLI_UI_LANGUAGE environment variable to "en-US" before
 			// running 'dotnet --info'. Otherwise, we may get localized results.
-			var originalCliLanguage = System.Environment.GetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE);
-			System.Environment.SetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE, "en-US");
+			var originalCliLanguage = System.Environment.GetEnvironmentVariable(DotnetCliUiLanguage);
+			System.Environment.SetEnvironmentVariable(DotnetCliUiLanguage, "en-US");
 
 			try
 			{
@@ -96,7 +96,7 @@ namespace DocGenerator.Buildalyzer.Environment
 			}
 			finally
 			{
-				System.Environment.SetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE, originalCliLanguage);
+				System.Environment.SetEnvironmentVariable(DotnetCliUiLanguage, originalCliLanguage);
 			}
 		}
 

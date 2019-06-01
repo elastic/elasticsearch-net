@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Serialization.Formatters
 {
 	internal class DynamicBodyFormatter : IJsonFormatter<DynamicBody>
 	{

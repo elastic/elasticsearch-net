@@ -1,4 +1,6 @@
-namespace Elasticsearch.Net
+using Elasticsearch.Net.Utf8Json;
+
+namespace Elasticsearch.Net.Serialization.Formatters
 {
 	internal class NullableStringIntFormatter : IJsonFormatter<int?>
 	{

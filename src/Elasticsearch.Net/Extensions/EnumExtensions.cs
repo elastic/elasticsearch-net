@@ -2,9 +2,9 @@
 
 namespace Elasticsearch.Net
 {
-	public static class EnumExtensions
+	internal static class EnumExtensions
 	{
-		public static string GetStringValue(this HttpMethod enumValue)
+		internal static string GetStringValue(this HttpMethod enumValue)
 		{
 			switch (enumValue)
 			{

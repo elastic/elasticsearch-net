@@ -51,7 +51,7 @@ namespace DocGenerator
 						sigBuilder.Append("this ");
 					}
 				}
-				else if (secondParam == true)
+				else if (secondParam)
 					secondParam = false;
 				else
 					sigBuilder.Append(", ");

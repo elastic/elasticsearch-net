@@ -44,28 +44,28 @@ namespace DocGenerator.Buildalyzer.Environment
 				{ MsBuildProperties.SkipCompilerExecution, "true" },
 				{ MsBuildProperties.ProvideCommandLineArgs, "true" },
 				// Workaround for a problem with resource files, see https://github.com/dotnet/sdk/issues/346#issuecomment-257654120
-				{ MsBuildProperties.GenerateResourceMSBuildArchitecture, "CurrentArchitecture" }
+				{ MsBuildProperties.GenerateResourceMsBuildArchitecture, "CurrentArchitecture" }
 			};
 
 		public virtual void SetEnvironmentVars(IReadOnlyDictionary<string, string> globalProperties)
 		{
-			if (globalProperties.TryGetValue(MsBuildProperties.MSBuildExtensionsPath, out var msBuildExtensionsPath))
+			if (globalProperties.TryGetValue(MsBuildProperties.MsBuildExtensionsPath, out var msBuildExtensionsPath))
 			{
-				_oldMsBuildExtensionsPath = System.Environment.GetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath);
-				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath, msBuildExtensionsPath);
+				_oldMsBuildExtensionsPath = System.Environment.GetEnvironmentVariable(MsBuildProperties.MsBuildExtensionsPath);
+				System.Environment.SetEnvironmentVariable(MsBuildProperties.MsBuildExtensionsPath, msBuildExtensionsPath);
 			}
-			if (globalProperties.TryGetValue(MsBuildProperties.MSBuildSDKsPath, out var msBuildSDKsPath))
+			if (globalProperties.TryGetValue(MsBuildProperties.MsBuildSdKsPath, out var msBuildSdKsPath))
 			{
-				_oldMsBuildSdksPath = System.Environment.GetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath);
-				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath, msBuildSDKsPath);
+				_oldMsBuildSdksPath = System.Environment.GetEnvironmentVariable(MsBuildProperties.MsBuildSdKsPath);
+				System.Environment.SetEnvironmentVariable(MsBuildProperties.MsBuildSdKsPath, msBuildSdKsPath);
 			}
 		}
 
 		public virtual void UnsetEnvironmentVars()
 		{
 			if (_oldMsBuildExtensionsPath != null)
-				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath, _oldMsBuildExtensionsPath);
-			if (_oldMsBuildSdksPath != null) System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath, _oldMsBuildSdksPath);
+				System.Environment.SetEnvironmentVariable(MsBuildProperties.MsBuildExtensionsPath, _oldMsBuildExtensionsPath);
+			if (_oldMsBuildSdksPath != null) System.Environment.SetEnvironmentVariable(MsBuildProperties.MsBuildSdKsPath, _oldMsBuildSdksPath);
 		}
 	}
 }

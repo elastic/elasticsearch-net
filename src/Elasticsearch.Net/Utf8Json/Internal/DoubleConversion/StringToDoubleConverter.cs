@@ -25,7 +25,7 @@
 using System;
 using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 {
 #pragma warning disable 660
 #pragma warning disable 661

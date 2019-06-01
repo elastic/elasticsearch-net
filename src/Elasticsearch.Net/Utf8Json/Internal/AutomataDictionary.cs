@@ -29,8 +29,9 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     // Key = long, Value = int for UTF8String Dictionary
 

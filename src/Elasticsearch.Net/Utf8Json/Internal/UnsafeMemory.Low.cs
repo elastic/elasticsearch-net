@@ -22,12 +22,12 @@
 // SOFTWARE.
 #endregion
 
-#if NETSTANDARD
 
-using System;
 using System.Runtime.CompilerServices;
+#if NETSTANDARD
+using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     // for string key property name write optimization.
 

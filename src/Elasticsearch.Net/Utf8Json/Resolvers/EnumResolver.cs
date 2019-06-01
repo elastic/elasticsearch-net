@@ -24,8 +24,10 @@
 
 using System;
 using System.Reflection;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal static class EnumResolver
 	{

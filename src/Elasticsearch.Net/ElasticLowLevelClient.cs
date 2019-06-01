@@ -2,6 +2,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Serialization.Formatters;
 
 namespace Elasticsearch.Net
 {

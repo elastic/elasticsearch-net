@@ -25,7 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     [StructLayout(LayoutKind.Explicit, Pack = 1)]
     internal struct GuidBits

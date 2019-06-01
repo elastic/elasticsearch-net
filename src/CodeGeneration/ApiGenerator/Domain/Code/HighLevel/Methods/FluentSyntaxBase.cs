@@ -90,7 +90,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 		
 		public string DescriptorArguments()
 		{
-			string codeArgs = null;
+			string codeArgs;
 			if (CodeConfiguration.DescriptorConstructors.TryGetValue(CsharpNames.DescriptorName, out codeArgs))
 				codeArgs += ",";
 			

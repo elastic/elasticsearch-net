@@ -63,7 +63,8 @@ namespace DocGenerator.Buildalyzer
 			// Get the paths
 			_buildEnvironment = EnvironmentFactory.GetBuildEnvironment(projectFilePath, _projectDocument);
 
-			// Preload/enforce referencing some required asemblies
+			// Preload/enforce referencing some required assemblies
+			// ReSharper disable once UnusedVariable
 			var copy = new Copy();
 
 

@@ -26,8 +26,10 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json
 {
     /// <summary>
     /// High-Level API of Utf8Json.

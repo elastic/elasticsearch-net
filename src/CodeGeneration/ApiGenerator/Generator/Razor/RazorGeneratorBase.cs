@@ -34,7 +34,7 @@ namespace ApiGenerator.Generator.Razor
 				{
 					Console.WriteLine(d.GetMessage());
 				}
-				throw e;
+				throw;
 			}
 		}
 
@@ -57,7 +57,7 @@ namespace ApiGenerator.Generator.Razor
 		protected static void WriteFormattedCsharpFile(string path, string contents)
 		{
 			var tree = CSharpSyntaxTree.ParseText(contents);
-			var root = tree.GetRoot().NormalizeWhitespace(indentation:"\t", "\n", elasticTrivia: false);
+			var root = tree.GetRoot().NormalizeWhitespace(indentation:"\t", "\n");
 			contents = root.ToFullString();
 			File.WriteAllText(path, contents);
 		}

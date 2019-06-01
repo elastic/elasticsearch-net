@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {

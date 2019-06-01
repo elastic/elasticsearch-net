@@ -1,7 +1,10 @@
 using System;
 using System.Runtime.CompilerServices;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Serialization.Extensions
 {
 	internal static class ArraySegmentBytesExtensions
 	{

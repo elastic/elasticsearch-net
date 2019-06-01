@@ -34,11 +34,11 @@ namespace DocGenerator.Buildalyzer.Environment
 		public const string DesignTimeBuild = nameof(DesignTimeBuild);
 
 		// Others
-		public const string GenerateResourceMSBuildArchitecture = nameof(GenerateResourceMSBuildArchitecture);
+		public const string GenerateResourceMsBuildArchitecture = nameof(GenerateResourceMsBuildArchitecture);
 
 		// MSBuild Project Loading
-		public const string MSBuildExtensionsPath = nameof(MSBuildExtensionsPath);
-		public const string MSBuildSDKsPath = nameof(MSBuildSDKsPath);
+		public const string MsBuildExtensionsPath = nameof(MsBuildExtensionsPath);
+		public const string MsBuildSdKsPath = nameof(MsBuildSdKsPath);
 		public const string ProvideCommandLineArgs = nameof(ProvideCommandLineArgs);
 		public const string RoslynTargetsPath = nameof(RoslynTargetsPath);
 		public const string SkipCompilerExecution = nameof(SkipCompilerExecution);

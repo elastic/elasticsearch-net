@@ -38,6 +38,7 @@ using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {

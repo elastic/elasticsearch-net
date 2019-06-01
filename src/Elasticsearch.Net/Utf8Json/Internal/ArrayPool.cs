@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     internal sealed class BufferPool : ArrayPool<byte>
     {

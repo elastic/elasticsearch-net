@@ -25,8 +25,9 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
+using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal sealed class CompositeResolver : IJsonFormatterResolver
     {

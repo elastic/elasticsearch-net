@@ -25,7 +25,7 @@
 using System;
 using System.Reflection;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json
 {
 	internal interface IJsonFormatterResolver
     {

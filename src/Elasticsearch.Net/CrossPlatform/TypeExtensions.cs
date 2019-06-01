@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.CrossPlatform
 {
 	internal static class DotNetCoreTypeExtensions
 	{

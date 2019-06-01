@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net 
+namespace Elasticsearch.Net.Extensions 
 {
 	internal static class NameValueCollectionExtensions
 	{
@@ -35,7 +35,7 @@ namespace Elasticsearch.Net
 			if (queryString == null || queryString.Count < 0) return;
 			if (queryStringUpdates == null || queryStringUpdates.Count < 0) return;
 
-			foreach (var kv in queryStringUpdates.Where(kv => !Extensions.IsNullOrEmpty(kv.Key)))
+			foreach (var kv in queryStringUpdates.Where(kv => !kv.Key.IsNullOrEmpty()))
 			{
 				if (kv.Value == null)
 				{
