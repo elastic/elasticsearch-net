@@ -90,7 +90,6 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 			}
 			var constructors = ctors.GroupBy(c => c.Generated.Split(new[] { ':' }, 2)[0]).Select(g => g.Last()).ToList();
 			if (!constructors.Any(c=>c.Parameterless))
-			{
 				constructors.Add(new Constructor
 				{
 					Parameterless = true,
@@ -98,7 +97,6 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					Description =
 						$"///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>{Indent}[SerializationConstructor]",
 				});
-			}
 			return constructors;
 		}
 	}

@@ -30,10 +30,7 @@ namespace ApiGenerator.Generator.Razor
 			}
 			catch (TemplateGenerationException e)
 			{
-				foreach (var d in e.Diagnostics)
-				{
-					Console.WriteLine(d.GetMessage());
-				}
+				foreach (var d in e.Diagnostics) Console.WriteLine(d.GetMessage());
 				throw;
 			}
 		}

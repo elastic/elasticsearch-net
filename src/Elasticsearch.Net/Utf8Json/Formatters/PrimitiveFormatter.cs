@@ -1257,7 +1257,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             else
             {
                 reader.ReadIsBeginArrayWithVerify();
-                var array = new System.Double[4];
+                var array = new Double[4];
                 var count = 0;
                 while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
                 {

@@ -26,6 +26,8 @@
 using Elasticsearch.Net.Utf8Json.Internal;
 #if NETSTANDARD
 using System;
+// These all proxy to TupleFormatterHelper
+// ReSharper disable StaticMemberInGenericType
 
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {
@@ -173,7 +175,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			};
 		}
 	}
-
+	
 	internal sealed class TupleFormatter<T1> : IJsonFormatter<Tuple<T1>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache1;

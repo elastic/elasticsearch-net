@@ -27,8 +27,8 @@ using System.Globalization;
 
 namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 {
-    using uint64_t = System.UInt64;
-    using uint32_t = System.UInt32;
+    using uint64_t = UInt64;
+    using uint32_t = UInt32;
 
 	internal struct InternalStringBuilder
     {

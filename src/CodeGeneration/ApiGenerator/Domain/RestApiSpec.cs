@@ -36,11 +36,13 @@ namespace ApiGenerator.Domain
 					if (
 						name.ToLowerInvariant().Contains("metric")
 						 ||(name.ToLowerInvariant() == "status")
-					) 
+					)
+					{
 						if (methodName.StartsWith(@namespace))
 							return methodName + name;
 						else
 							return @namespace + methodName + name;
+					}
 
 					return name;
 				}

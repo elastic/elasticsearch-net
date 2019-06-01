@@ -295,7 +295,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         }
     }
 
-	internal sealed class ConcurrentDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>>
+	internal sealed class ConcurrentDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, ConcurrentDictionary<TKey, TValue>>
     {
         protected override void Add(ref ConcurrentDictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {

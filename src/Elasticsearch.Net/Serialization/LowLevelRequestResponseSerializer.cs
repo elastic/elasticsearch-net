@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Serialization.Resolvers;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net

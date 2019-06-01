@@ -25,6 +25,7 @@
 #if NETSTANDARD
 
 using System;
+// ReSharper disable All
 
 namespace Elasticsearch.Net.Utf8Json.Internal
 {

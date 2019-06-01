@@ -164,12 +164,12 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         // for debugging
         public override string ToString()
         {
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             ToStringCore(root.YieldChildren(), sb, 0);
             return sb.ToString();
         }
 
-        static void ToStringCore(IEnumerable<AutomataNode> nexts, System.Text.StringBuilder sb, int depth)
+        static void ToStringCore(IEnumerable<AutomataNode> nexts, StringBuilder sb, int depth)
         {
             foreach (var item in nexts)
             {

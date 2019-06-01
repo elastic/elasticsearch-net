@@ -6,7 +6,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
-using Elasticsearch.Net.Serialization.Formatters;
 using Elasticsearch.Net.Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody

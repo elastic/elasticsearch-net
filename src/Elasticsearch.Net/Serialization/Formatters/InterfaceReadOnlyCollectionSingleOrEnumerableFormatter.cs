@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Elasticsearch.Net.Serialization.Formatters
+namespace Elasticsearch.Net
 {
 	internal class InterfaceReadOnlyCollectionSingleOrEnumerableFormatter<T> : IJsonFormatter<IReadOnlyCollection<T>>
 	{

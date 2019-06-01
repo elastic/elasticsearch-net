@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Formatters;
 
-namespace Elasticsearch.Net.Serialization.Formatters
+namespace Elasticsearch.Net
 {
 	internal class DynamicBodyFormatter : IJsonFormatter<DynamicBody>
 	{

@@ -34,7 +34,6 @@ namespace Elasticsearch.Net
 			_dateTimeProvider = dateTimeProvider;
 			_memoryStreamFactory = memoryStreamFactory;
 
-			RequestParameters = requestParameters;
 			RequestConfiguration = requestParameters?.RequestConfiguration;
 			StartedOn = dateTimeProvider.Now();
 		}
@@ -113,8 +112,6 @@ namespace Elasticsearch.Net
 		private IRequestConfiguration RequestConfiguration { get; }
 
 		private bool RequestDisabledSniff => RequestConfiguration != null && (RequestConfiguration.DisableSniff ?? false);
-
-		private IRequestParameters RequestParameters { get; }
 
 		private TimeSpan RequestTimeout => RequestConfiguration?.RequestTimeout ?? _settings.RequestTimeout;
 
@@ -443,7 +440,6 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						audit.Exception = e;
 						exceptions.Add(e);
-						continue;
 					}
 				}
 			}
@@ -478,7 +474,6 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						audit.Exception = e;
 						exceptions.Add(e);
-						continue;
 					}
 				}
 			}
@@ -574,7 +569,6 @@ namespace Elasticsearch.Net
 		private void LazyAuditable(AuditEvent e, Node n)
 		{
 			using (new Auditable(e, AuditTrail, _dateTimeProvider) { Node = n }) { }
-			;
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>

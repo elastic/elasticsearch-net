@@ -199,6 +199,7 @@ namespace Elasticsearch.Net
 		}
 
 
+		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
 		private void HandleElasticsearchClientException(RequestData data, Exception clientException, IElasticsearchResponse response)
 		{
 			if (response.ApiCall is ApiCallDetails a)
@@ -218,7 +219,7 @@ namespace Elasticsearch.Net
 			}
 
 			Settings.OnRequestCompleted?.Invoke(response.ApiCall);
-			if (clientException != null && data.ThrowExceptions) throw clientException;
+			if (data != null && (clientException != null && data.ThrowExceptions)) throw clientException;
 		}
 
 		private static void Ping(IRequestPipeline pipeline, Node node)

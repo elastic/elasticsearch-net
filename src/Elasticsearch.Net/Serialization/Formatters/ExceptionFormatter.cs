@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Elasticsearch.Net.Serialization.Formatters
+namespace Elasticsearch.Net
 {
 	internal class ExceptionFormatterResolver : IJsonFormatterResolver
 	{

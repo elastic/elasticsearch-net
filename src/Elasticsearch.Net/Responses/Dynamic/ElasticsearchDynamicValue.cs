@@ -23,10 +23,7 @@ namespace Elasticsearch.Net
 		/// Initializes a new instance of the <see cref="ElasticsearchDynamicValue" /> class.
 		/// </summary>
 		/// <param name="value">The value to store in the instance</param>
-		public ElasticsearchDynamicValue(object value)
-		{
-			this._value = value;
-		}
+		public ElasticsearchDynamicValue(object value) => _value = value;
 
 		/// <summary>
 		/// Gets a value indicating whether this instance has value.

@@ -32,17 +32,17 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 {
     internal static class ReflectionExtensions
     {
-        public static bool IsNullable(this System.Reflection.TypeInfo type)
+        public static bool IsNullable(this TypeInfo type)
         {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(System.Nullable<>);
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
-        public static bool IsPublic(this System.Reflection.TypeInfo type)
+        public static bool IsPublic(this TypeInfo type)
         {
             return type.IsPublic;
         }
 
-        public static bool IsAnonymous(this System.Reflection.TypeInfo type)
+        public static bool IsAnonymous(this TypeInfo type)
         {
             return type.GetCustomAttribute<CompilerGeneratedAttribute>() != null
                 && type.Name.Contains("AnonymousType")
@@ -120,7 +120,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
 #if NETSTANDARD
 
-        public static bool IsConstructedGenericType(this System.Reflection.TypeInfo type)
+        public static bool IsConstructedGenericType(this TypeInfo type)
         {
             return type.AsType().IsConstructedGenericType;
         }
