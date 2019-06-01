@@ -14,12 +14,21 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
-
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using static Elasticsearch.Net.HttpMethod;
 
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
 // ReSharper disable once CheckNamespace
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable RedundantExtendsListEntry
 namespace Elasticsearch.Net.Specification.IndicesApi
 {
 	///<summary>
@@ -522,18 +531,18 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{alias:alias}/_rollover"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{alias}/_rollover/{new_index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 		///<param name = "alias">The name of the alias to rollover</param>
-		///<param name = "new_index">The name of the rollover index</param>
+		///<param name = "newIndex">The name of the rollover index</param>
 		///<param name = "body">The conditions that needs to be met for executing rollover</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse RolloverForAll<TResponse>(string alias, string new_index, PostData body, RolloverIndexRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{alias:alias}/_rollover/{new_index:new_index}"), body, RequestParams(requestParameters));
+		public TResponse RolloverForAll<TResponse>(string alias, string newIndex, PostData body, RolloverIndexRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{alias:alias}/_rollover/{newIndex:newIndex}"), body, RequestParams(requestParameters));
 		///<summary>POST on /{alias}/_rollover/{new_index} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 		///<param name = "alias">The name of the alias to rollover</param>
-		///<param name = "new_index">The name of the rollover index</param>
+		///<param name = "newIndex">The name of the rollover index</param>
 		///<param name = "body">The conditions that needs to be met for executing rollover</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> RolloverForAllAsync<TResponse>(string alias, string new_index, PostData body, RolloverIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{alias:alias}/_rollover/{new_index:new_index}"), ctx, body, RequestParams(requestParameters));
+		public Task<TResponse> RolloverForAllAsync<TResponse>(string alias, string newIndex, PostData body, RolloverIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{alias:alias}/_rollover/{newIndex:newIndex}"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse SegmentsForAll<TResponse>(SegmentsRequestParameters requestParameters = null)

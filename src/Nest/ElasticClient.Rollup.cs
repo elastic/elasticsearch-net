@@ -14,9 +14,11 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Specification.RollupApi;
 
 // ReSharper disable once CheckNamespace
 namespace Nest.Specification.RollupApi

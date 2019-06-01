@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Serialization.Extensions;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
 

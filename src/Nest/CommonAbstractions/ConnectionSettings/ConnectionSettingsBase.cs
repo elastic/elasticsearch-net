@@ -237,7 +237,7 @@ namespace Nest
 			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
 			else _disableIdInference.Remove(inferMapping.ClrType);
 
-			return UpdateId();
+			return (TConnectionSettings)this;
 		}
 
 		/// <summary>
@@ -259,13 +259,13 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			return UpdateId();
+			return (TConnectionSettings)this;
 		}
 
 		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})"/>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
-			if (typeMappings == null) return UpdateId();
+			if (typeMappings == null) return (TConnectionSettings)this;
 
 			foreach (var inferMapping in typeMappings)
 			{
@@ -279,7 +279,7 @@ namespace Nest
 					_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 			}
 
-			return UpdateId();
+			return (TConnectionSettings)this;
 		}
 	}
 }

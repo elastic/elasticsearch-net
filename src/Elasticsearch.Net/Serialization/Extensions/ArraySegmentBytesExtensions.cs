@@ -4,7 +4,7 @@ using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Formatters;
 using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Serialization.Extensions
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class ArraySegmentBytesExtensions
 	{
@@ -17,7 +17,7 @@ namespace Elasticsearch.Net.Serialization.Extensions
 			var i = 0;
 			while (i < arraySegment.Count)
 			{
-				if (arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
+				if (arraySegment.Array != null && arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
 					return true;
 
 				i++;

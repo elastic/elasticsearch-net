@@ -55,9 +55,9 @@ namespace Elasticsearch.Net
 		) =>
 			(sender, cert, chain, errors) =>
 				errors == SslPolicyErrors.None
-				|| ValidRootCa(caCertificate, cert, chain, trustRoot, revocationMode);
+				|| ValidRootCa(caCertificate, cert, trustRoot, revocationMode);
 
-		private static bool ValidRootCa(X509Certificate caCertificate, X509Certificate certificate, X509Chain chain, bool trustRoot,
+		private static bool ValidRootCa(X509Certificate caCertificate, X509Certificate certificate, bool trustRoot,
 			X509RevocationMode revocationMode
 		)
 		{

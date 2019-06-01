@@ -12,18 +12,18 @@ using System.Net;
 namespace Elasticsearch.Net
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
-		where TConnectionSettings : IConnectionConfigurationValues
+		where TConnectionSettings : class, IConnectionConfigurationValues
 	{
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
-		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
+		/// <param name="configurationValues">The connection settings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues) : this(configurationValues, null, null, null) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
-		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
+		/// <param name="configurationValues">The connection settings to use for this transport</param>
 		/// <param name="pipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
 		/// <param name="dateTimeProvider">The date time proved to use, safe to pass null to use the default</param>
 		/// <param name="memoryStreamFactory">The memory stream provider to use, safe to pass null to use the default</param>

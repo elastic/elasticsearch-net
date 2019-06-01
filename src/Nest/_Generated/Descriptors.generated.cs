@@ -14,12 +14,14 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
@@ -38,7 +40,6 @@ using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
-using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {

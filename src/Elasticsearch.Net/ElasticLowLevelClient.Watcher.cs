@@ -14,12 +14,21 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
-
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using static Elasticsearch.Net.HttpMethod;
 
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
 // ReSharper disable once CheckNamespace
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable RedundantExtendsListEntry
 namespace Elasticsearch.Net.Specification.WatcherApi
 {
 	///<summary>
@@ -35,47 +44,47 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		}
 
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
+		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Acknowledge<TResponse>(string watch_id, AcknowledgeWatchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_ack"), null, RequestParams(requestParameters));
+		public TResponse Acknowledge<TResponse>(string watchId, AcknowledgeWatchRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_ack"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
+		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> AcknowledgeAsync<TResponse>(string watch_id, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_ack"), ctx, null, RequestParams(requestParameters));
+		public Task<TResponse> AcknowledgeAsync<TResponse>(string watchId, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_ack"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack/{action_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
-		///<param name = "action_id">A comma-separated list of the action ids to be acked</param>
+		///<param name = "watchId">Watch ID</param>
+		///<param name = "actionId">A comma-separated list of the action ids to be acked</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Acknowledge<TResponse>(string watch_id, string action_id, AcknowledgeWatchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_ack/{action_id:action_id}"), null, RequestParams(requestParameters));
+		public TResponse Acknowledge<TResponse>(string watchId, string actionId, AcknowledgeWatchRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_ack/{actionId:actionId}"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack/{action_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
-		///<param name = "action_id">A comma-separated list of the action ids to be acked</param>
+		///<param name = "watchId">Watch ID</param>
+		///<param name = "actionId">A comma-separated list of the action ids to be acked</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> AcknowledgeAsync<TResponse>(string watch_id, string action_id, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_ack/{action_id:action_id}"), ctx, null, RequestParams(requestParameters));
+		public Task<TResponse> AcknowledgeAsync<TResponse>(string watchId, string actionId, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_ack/{actionId:actionId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
+		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Activate<TResponse>(string watch_id, ActivateWatchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_activate"), null, RequestParams(requestParameters));
+		public TResponse Activate<TResponse>(string watchId, ActivateWatchRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_activate"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
+		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> ActivateAsync<TResponse>(string watch_id, ActivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_activate"), ctx, null, RequestParams(requestParameters));
+		public Task<TResponse> ActivateAsync<TResponse>(string watchId, ActivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_activate"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
+		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Deactivate<TResponse>(string watch_id, DeactivateWatchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_deactivate"), null, RequestParams(requestParameters));
+		public TResponse Deactivate<TResponse>(string watchId, DeactivateWatchRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_deactivate"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
-		///<param name = "watch_id">Watch ID</param>
+		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> DeactivateAsync<TResponse>(string watch_id, DeactivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watch_id:watch_id}/_deactivate"), ctx, null, RequestParams(requestParameters));
+		public Task<TResponse> DeactivateAsync<TResponse>(string watchId, DeactivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_deactivate"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

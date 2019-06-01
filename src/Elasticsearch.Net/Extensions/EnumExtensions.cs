@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class EnumExtensions
 	{

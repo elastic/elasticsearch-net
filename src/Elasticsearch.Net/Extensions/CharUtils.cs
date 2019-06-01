@@ -1,4 +1,4 @@
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class CharUtils
 	{

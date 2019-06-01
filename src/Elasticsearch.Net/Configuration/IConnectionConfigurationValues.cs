@@ -4,16 +4,11 @@ using System.Collections.Specialized;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using Elasticsearch.Net.Serialization.Formatters;
 
 namespace Elasticsearch.Net
 {
 	public interface IConnectionConfigurationValues : IDisposable
 	{
-		// TODO: reevaluate for the 7.0.0-beta1
-		/// <summary> A unique id for this connection settings instance </summary>
-		string Id { get; }
-		
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>

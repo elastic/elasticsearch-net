@@ -14,7 +14,12 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Linq.Expressions;
 
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.IngestApi

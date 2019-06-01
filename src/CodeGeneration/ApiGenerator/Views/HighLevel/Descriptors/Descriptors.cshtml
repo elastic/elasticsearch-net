@@ -6,12 +6,15 @@
 @using ApiGenerator
 @inherits CodeTemplatePage<RestApiSpec>
 @{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 @{ IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
 
 namespace Nest

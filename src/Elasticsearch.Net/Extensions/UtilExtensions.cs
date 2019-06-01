@@ -47,7 +47,7 @@ namespace Elasticsearch.Net.Extensions
 			return es.Length == 1 ? es[0] : new AggregateException(es);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name)
+		internal static void ThrowIfNull<T>(this T value, string name) where T : class
 		{
 			if (value == null)
 				throw new ArgumentNullException(name);

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 
 namespace Nest
 {

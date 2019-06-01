@@ -14,6 +14,7 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -196,14 +197,14 @@ namespace Elasticsearch.Net
 		Task<TResponse> DeleteByQueryAsync<TResponse>(string index, PostData body, DeleteByQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_delete_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</para></summary>
-		///<param name = "task_id">The task id to rethrottle</param>
+		///<param name = "taskId">The task id to rethrottle</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		TResponse DeleteByQueryRethrottle<TResponse>(string task_id, DeleteByQueryRethrottleRequestParameters requestParameters = null)
+		TResponse DeleteByQueryRethrottle<TResponse>(string taskId, DeleteByQueryRethrottleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_delete_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</para></summary>
-		///<param name = "task_id">The task id to rethrottle</param>
+		///<param name = "taskId">The task id to rethrottle</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> DeleteByQueryRethrottleAsync<TResponse>(string task_id, DeleteByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> DeleteByQueryRethrottleAsync<TResponse>(string taskId, DeleteByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_scripts/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 		///<param name = "id">Script ID</param>
@@ -472,14 +473,14 @@ namespace Elasticsearch.Net
 		Task<TResponse> ReindexOnServerAsync<TResponse>(PostData body, ReindexOnServerRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_reindex/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</para></summary>
-		///<param name = "task_id">The task id to rethrottle</param>
+		///<param name = "taskId">The task id to rethrottle</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		TResponse ReindexRethrottle<TResponse>(string task_id, ReindexRethrottleRequestParameters requestParameters = null)
+		TResponse ReindexRethrottle<TResponse>(string taskId, ReindexRethrottleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_reindex/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</para></summary>
-		///<param name = "task_id">The task id to rethrottle</param>
+		///<param name = "taskId">The task id to rethrottle</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> ReindexRethrottleAsync<TResponse>(string task_id, ReindexRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> ReindexRethrottleAsync<TResponse>(string taskId, ReindexRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_render/template <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para></summary>
 		///<param name = "body">The search definition template and its params</param>
@@ -638,14 +639,14 @@ namespace Elasticsearch.Net
 		Task<TResponse> UpdateByQueryAsync<TResponse>(string index, PostData body, UpdateByQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_update_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
-		///<param name = "task_id">The task id to rethrottle</param>
+		///<param name = "taskId">The task id to rethrottle</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		TResponse UpdateByQueryRethrottle<TResponse>(string task_id, UpdateByQueryRethrottleRequestParameters requestParameters = null)
+		TResponse UpdateByQueryRethrottle<TResponse>(string taskId, UpdateByQueryRethrottleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_update_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
-		///<param name = "task_id">The task id to rethrottle</param>
+		///<param name = "taskId">The task id to rethrottle</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> UpdateByQueryRethrottleAsync<TResponse>(string task_id, UpdateByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		Task<TResponse> UpdateByQueryRethrottleAsync<TResponse>(string taskId, UpdateByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		LowLevelRollupNamespace Rollup
 		{

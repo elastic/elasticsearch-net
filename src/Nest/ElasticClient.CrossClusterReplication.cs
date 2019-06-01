@@ -14,9 +14,11 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 
 // ReSharper disable once CheckNamespace
 namespace Nest.Specification.CrossClusterReplicationApi

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using static Elasticsearch.Net.ElasticsearchUrlFormatter;
 
+// ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net
 {
 	/// <summary>
