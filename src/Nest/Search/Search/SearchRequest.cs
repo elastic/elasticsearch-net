@@ -118,7 +118,7 @@ namespace Nest
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
-		Type ICovariantSearchRequest.ClrType { get; }
+		Type ICovariantSearchRequest.ClrType => null;
 
 		protected sealed override void Initialize() => TypedKeys = true;
 	}

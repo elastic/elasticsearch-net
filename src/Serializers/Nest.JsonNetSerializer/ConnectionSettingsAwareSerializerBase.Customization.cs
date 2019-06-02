@@ -16,9 +16,9 @@ namespace Nest.JsonNetSerializer
 		private static readonly Task CompletedTask = Task.CompletedTask;
 
 		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		private readonly Newtonsoft.Json.JsonSerializer _collapsedSerializer;
+		private readonly JsonSerializer _collapsedSerializer;
 
-		private readonly Newtonsoft.Json.JsonSerializer _serializer;
+		private readonly JsonSerializer _serializer;
 		protected virtual int BufferSize => DefaultBufferSize;
 
 		public T Deserialize<T>(Stream stream)

@@ -58,8 +58,11 @@ namespace Nest
 								}
 							}
 
-							decayFunction.MultiValueMode = multiValueMode;
-							function = decayFunction;
+							if (decayFunction != null)
+							{
+								decayFunction.MultiValueMode = multiValueMode;
+								function = decayFunction;
+							}
 							break;
 						case 3:
 							var randomScoreFormatter = formatterResolver.GetFormatter<RandomScoreFunction>();
@@ -202,7 +205,7 @@ namespace Nest
 			switch (decay)
 			{
 				case IDecayFunction<double?, double?> numericDecay:
-					WriteNumericDecay(ref writer, ref written, numericDecay, formatterResolver);
+					WriteNumericDecay(ref writer, ref written, numericDecay);
 					break;
 				case IDecayFunction<DateMath, Time> dateDecay:
 					WriteDateDecay(ref writer, ref written, dateDecay, formatterResolver);
@@ -237,9 +240,7 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 
-		private static void WriteNumericDecay(ref JsonWriter writer, ref bool written, IDecayFunction<double?, double?> value,
-			IJsonFormatterResolver formatterResolver
-		)
+		private static void WriteNumericDecay(ref JsonWriter writer, ref bool written, IDecayFunction<double?, double?> value)
 		{
 			if (value.Origin.HasValue)
 			{

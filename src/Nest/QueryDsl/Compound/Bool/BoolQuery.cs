@@ -60,8 +60,6 @@ namespace Nest
 		private IList<QueryContainer> _mustNot;
 		private IList<QueryContainer> _should;
 
-		public BoolQuery() { }
-
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
 		/// </summary>

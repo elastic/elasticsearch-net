@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
@@ -91,8 +90,6 @@ namespace Nest
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
 		bool? IGeoShapeProperty.Coerce { get; set; }
-
-		/// <inheritdoc cref="IGeoShapeProperty.Tree" />
 
 		/// <inheritdoc cref="IGeoShapeProperty.Strategy" />
 		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy? strategy) => Assign(strategy, (a, v) => a.Strategy = v);

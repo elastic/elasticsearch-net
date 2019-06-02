@@ -59,7 +59,7 @@ namespace Nest
 		public ISpanWithinQuery SpanWithin { get; set; }
 		double? IQuery.Boost { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
-		bool IQuery.IsWritable { get; }
+		bool IQuery.IsWritable => IsWritable;
 		string IQuery.Name { get; set; }
 
 		public void Accept(IQueryVisitor visitor) => new QueryWalker().Walk(this, visitor);

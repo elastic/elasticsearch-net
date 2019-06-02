@@ -81,6 +81,7 @@ namespace Nest
 					var serializerParameter = Expression.Parameter(typeof(IJsonFormatterResolver), "formatterResolver");
 					var multiHitCollection = Expression.Parameter(typeof(IDictionary<string, IResponse>), "collection");
 					var parameterExpressions = new[] { tupleParameter, serializerParameter, multiHitCollection };
+					// ReSharper disable once CoVariantArrayConversion
 					var call = Expression.Call(null, methodInfo, parameterExpressions);
 					var lambda = Expression.Lambda<Action<SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>(
 						call, parameterExpressions);

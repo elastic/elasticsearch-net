@@ -24,9 +24,9 @@ namespace Nest
 
 		public string ScrollId { get; set; }
 
+		// TODO 7.x TypeSelector is not used
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-		private Type _clrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => _clrType;
+		Type ICovariantSearchRequest.ClrType => null;
 	}
 
 	public partial class ScrollDescriptor<TInferDocument> where TInferDocument : class

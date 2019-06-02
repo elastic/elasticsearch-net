@@ -72,7 +72,7 @@ namespace Nest
 		Fields Fields { get; set; }
 
 		/// <summary>
-		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Fuzziness.Auto" />
+		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Nest.Fuzziness.Auto" />
 		/// </summary>
 		[DataMember(Name = "fuzziness")]
 		Fuzziness Fuzziness { get; set; }

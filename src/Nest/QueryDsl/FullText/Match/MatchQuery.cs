@@ -23,8 +23,8 @@ namespace Nest
 		/// <summary>
 		/// A cutoff frequency that allows specifying an absolute or relative document frequency where
 		/// high frequency terms are moved into an optional subquery and are only scored if one of the low frequency
-		/// (below the cutoff) terms in the case of <see cref="Operator.Or" />,
-		/// or all of the low frequency terms in the case of an <see cref="Operator.And" /> match.
+		/// (below the cutoff) terms in the case of <see cref="Nest.Operator.Or" />,
+		/// or all of the low frequency terms in the case of an <see cref="Nest.Operator.And" /> match.
 		/// </summary>
 		[DataMember(Name = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
@@ -75,7 +75,7 @@ namespace Nest
 
 		/// <summary>
 		/// The operator used if no explicit operator is specified.
-		/// The default operator is <see cref="Operator.Or" />
+		/// The default operator is <see cref="Nest.Operator.Or" />
 		/// </summary>
 		[DataMember(Name = "operator")]
 		Operator? Operator { get; set; }
@@ -94,8 +94,8 @@ namespace Nest
 
 		/// <summary>
 		/// If the analyzer used removes all tokens in a query like a stop filter does, the default behavior is
-		/// to match no documents at all. In order to change that, <see cref="ZeroTermsQuery" /> can be used,
-		/// which accepts <see cref="ZeroTermsQuery.None" /> (default) and <see cref="ZeroTermsQuery.All" />
+		/// to match no documents at all. In order to change that, <see cref="Nest.ZeroTermsQuery" /> can be used,
+		/// which accepts <see cref="Nest.ZeroTermsQuery.None" /> (default) and <see cref="Nest.ZeroTermsQuery.All" />
 		/// which corresponds to a match_all query.
 		/// </summary>
 		[DataMember(Name = "zero_terms_query")]

@@ -83,21 +83,17 @@ namespace Nest
 									case JsonToken.String:
 										var valueSegment = reader.ReadStringSegmentUnsafe();
 										if (valueSegment.IsDateTime(formatterResolver, out var dateTime))
-										{
 											query = new FuzzyDateQuery
 											{
 												Field = field,
 												Value = dateTime
 											};
-										}
 										else
-										{
 											query = new FuzzyQuery
 											{
 												Field = field,
 												Value = valueSegment.Utf8String()
 											};
-										}
 										break;
 									case JsonToken.Number:
 										query = new FuzzyNumericQuery

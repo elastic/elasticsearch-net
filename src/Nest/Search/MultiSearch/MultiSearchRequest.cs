@@ -20,7 +20,7 @@ namespace Nest
 
 	public partial class MultiSearchDescriptor
 	{
-		internal IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
+		private IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
 
 		IDictionary<string, ISearchRequest> IMultiSearchRequest.Operations
 		{

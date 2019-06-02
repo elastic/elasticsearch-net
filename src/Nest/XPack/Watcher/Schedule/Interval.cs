@@ -164,6 +164,7 @@ namespace Nest
 			return Equals((Interval)obj);
 		}
 
+		// ReSharper disable once NonReadonlyMemberInGetHashCode
 		public override int GetHashCode() => _seconds.GetHashCode();
 
 		internal override void WrapInContainer(IScheduleContainer container) => container.Interval = this;
