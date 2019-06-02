@@ -1,5 +1,4 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -26,7 +25,7 @@ namespace Nest
 				return;
 			}
 
-			switch (value._tag)
+			switch (value.Tag)
 			{
 				case 0:
 				{
@@ -41,7 +40,7 @@ namespace Nest
 					break;
 				}
 				default:
-					throw new Exception($"Unrecognized tag value: {value._tag}");
+					throw new Exception($"Unrecognized tag value: {value.Tag}");
 			}
 		}
 

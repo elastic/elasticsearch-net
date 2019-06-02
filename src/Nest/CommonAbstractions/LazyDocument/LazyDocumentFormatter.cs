@@ -1,4 +1,3 @@
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
 
@@ -51,11 +50,9 @@ namespace Nest
                         var c = 0;
                         while (reader.ReadIsInObject(ref c))
                         {
-                            if (c != 1)
-                            {
-                                writer.WriteRaw((byte)',');
-                            }
-                            writer.WritePropertyName(reader.ReadPropertyName());
+                            if (c != 1) 
+								writer.WriteRaw((byte)',');
+							writer.WritePropertyName(reader.ReadPropertyName());
 							WriteUnindented(ref reader, ref writer);
                         }
                         writer.WriteEndObject();
@@ -67,10 +64,8 @@ namespace Nest
                         var c = 0;
                         while (reader.ReadIsInArray(ref c))
                         {
-                            if (c != 1)
-                            {
-                                writer.WriteRaw((byte)',');
-                            }
+                            if (c != 1) 
+								writer.WriteRaw((byte)',');
 							WriteUnindented(ref reader, ref writer);
                         }
                         writer.WriteEndArray();
@@ -79,6 +74,8 @@ namespace Nest
                 case JsonToken.Number:
 					var segment = reader.ReadNumberSegment();
 					for (var i = 0; i < segment.Count; i++)
+						// segment.Array never null
+						// ReSharper disable once PossibleNullReferenceException
 						writer.WriteRawUnsafe(segment.Array[i + segment.Offset]);
 					break;
                 case JsonToken.String:

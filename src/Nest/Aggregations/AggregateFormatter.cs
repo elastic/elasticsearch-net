@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
@@ -591,13 +591,11 @@ namespace Nest
 						token = reader.GetCurrentJsonToken();
 
 						if (token == JsonToken.EndObject)
-						{
 							return new ValueAggregate
 							{
 								Value = value,
 								ValueAsString = valueAsString
 							};
-						}
 
 						reader.ReadNext(); // ,
 						propertyName = reader.ReadPropertyNameSegmentRaw();
@@ -698,7 +696,6 @@ namespace Nest
 
 			IBucket bucket;
 			if (fromString != null || toString != null)
-			{
 				bucket = new IpRangeBucket(subAggregates)
 				{
 					Key = key,
@@ -706,9 +703,7 @@ namespace Nest
 					From = fromString,
 					To = toString,
 				};
-			}
 			else
-			{
 				bucket = new RangeBucket(subAggregates)
 				{
 					Key = key,
@@ -718,7 +713,6 @@ namespace Nest
 					FromAsString = fromAsString,
 					ToAsString = toAsString,
 				};
-			}
 
 			return bucket;
 		}
@@ -792,7 +786,7 @@ namespace Nest
 				switch (propertyName)
 				{
 					case Parser.Score:
-						return GetSignificantTermsBucket(ref reader, formatterResolver, key, keyAsString, docCount);
+						return GetSignificantTermsBucket(ref reader, formatterResolver, key, docCount);
 					case Parser.DocCountErrorUpperBound:
 					{
 						docCountErrorUpperBound = reader.ReadNullableLong();
@@ -840,7 +834,7 @@ namespace Nest
 			return new CompositeBucket(nestedAggregates, key) { DocCount = docCount };
 		}
 
-		private IBucket GetSignificantTermsBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver, object key, string keyAsString,
+		private IBucket GetSignificantTermsBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver, object key,
 			long? docCount
 		)
 		{
@@ -880,6 +874,7 @@ namespace Nest
 			};
 		}
 
+		[SuppressMessage("ReSharper", "MemberHidesStaticFromOuterClass")]
 		private static class Parser
 		{
 			public const string AfterKey = "after_key";
@@ -902,12 +897,10 @@ namespace Nest
 			public const string KeyAsString = "key_as_string";
 			public const string Keys = "keys";
 			public const string Location = "location";
-			public const string Lower = "lower";
 			public const string MaxScore = "max_score";
 			public const string Meta = "meta";
 
 			public const string Score = "score";
-			public const string StdDeviationBoundsAsString = "std_deviation_bounds_as_string";
 
 			public const string SumOtherDocCount = "sum_other_doc_count";
 			public const string To = "to";
@@ -917,7 +910,6 @@ namespace Nest
 
 			public const string Total = "total";
 
-			public const string Upper = "upper";
 			public const string Value = "value";
 
 			public const string ValueAsString = "value_as_string";

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 
@@ -55,7 +54,7 @@ namespace Nest
 				var rangeString = match.Groups["ranges"].Value;
 				do
 				{
-					var nextRangeStart = rangeString.Substring(1).IndexOfAny(new char[] { '+', '-', '/' });
+					var nextRangeStart = rangeString.Substring(1).IndexOfAny(new[] { '+', '-', '/' });
 					if (nextRangeStart == -1) nextRangeStart = rangeString.Length - 1;
 					var unit = rangeString.Substring(1, nextRangeStart);
 					if (rangeString.StartsWith("+", StringComparison.Ordinal))

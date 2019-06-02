@@ -79,7 +79,7 @@ namespace Nest
 					interval = DateMathTimeUnit.Minute;
 					break;
 				default:
-					interval = intervalValue.ToEnum<DateMathTimeUnit>().Value;
+					interval = intervalValue.ToEnum<DateMathTimeUnit>().GetValueOrDefault();
 					break;
 			}
 
@@ -99,7 +99,7 @@ namespace Nest
 		public int CompareTo(DateMathTime other)
 		{
 			if (other == null) return 1;
-			if (_approximateSeconds == other._approximateSeconds) return 0;
+			if (Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon) return 0;
 			if (_approximateSeconds < other._approximateSeconds) return -1;
 
 			return 1;
@@ -110,7 +110,7 @@ namespace Nest
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
 
-			return _approximateSeconds == other._approximateSeconds;
+			return Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon;
 		}
 
 		public static implicit operator DateMathTime(TimeSpan span) => new DateMathTime(span);
@@ -315,6 +315,7 @@ namespace Nest
 			return Equals((DateMathTime)obj);
 		}
 
+		// ReSharper disable once NonReadonlyMemberInGetHashCode
 		public override int GetHashCode() => _approximateSeconds.GetHashCode();
 	}
 }

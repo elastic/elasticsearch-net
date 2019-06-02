@@ -146,16 +146,16 @@ namespace Nest
 	public class NodeJvmInfo
 	{
 		[DataMember(Name = "gc_collectors")]
-		public IEnumerable<string> GCCollectors { get; internal set; }
+		public IEnumerable<string> GcCollectors { get; internal set; }
 
 		[DataMember(Name = "mem")]
-		public NodeInfoJVMMemory Memory { get; internal set; }
+		public NodeInfoJvmMemory Memory { get; internal set; }
 
 		[DataMember(Name = "memory_pools")]
 		public IEnumerable<string> MemoryPools { get; internal set; }
 
 		[DataMember(Name = "pid")]
-		public int PID { get; internal set; }
+		public int Pid { get; internal set; }
 
 		[DataMember(Name = "start_time_in_millis")]
 		public long StartTime { get; internal set; }
@@ -174,7 +174,7 @@ namespace Nest
 	}
 
 	[DataContract]
-	public class NodeInfoJVMMemory
+	public class NodeInfoJvmMemory
 	{
 		[DataMember(Name = "direct_max")]
 		public string DirectMax { get; internal set; }

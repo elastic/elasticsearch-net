@@ -23,6 +23,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface IDeleteByQueryRequest<TDocument>  where TDocument : class { }
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
@@ -36,6 +37,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
+	// ReSharper disable once UnusedTypeParameter
 	public partial class DeleteByQueryRequest<TDocument> where TDocument : class
 	{
 

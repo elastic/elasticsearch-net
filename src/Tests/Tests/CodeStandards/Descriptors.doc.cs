@@ -44,7 +44,7 @@ namespace Tests.CodeStandards
 		{
 			var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
 			var selectors =
-				from t in typeof(SelectorBase<>).Assembly.Types()
+				from t in typeof(SelectorBase).Assembly.Types()
 				where t.IsClass
 					  && t.Name.Contains("Selector")
 					  && !t.Namespace.StartsWith("Nest.Json")

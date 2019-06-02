@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 /*

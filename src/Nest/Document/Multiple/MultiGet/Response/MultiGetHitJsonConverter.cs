@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Resolvers;
 
@@ -60,6 +59,7 @@ namespace Nest
 						var serializerParameter = Expression.Parameter(typeof(IJsonFormatterResolver), "formatterResolver");
 						var multiHitCollection = Expression.Parameter(typeof(ICollection<IMultiGetHit<object>>), "collection");
 						var parameterExpressions = new[] { tupleParameter, serializerParameter, multiHitCollection };
+						// ReSharper disable once CoVariantArrayConversion
 						var call = Expression.Call(null, methodInfo, parameterExpressions);
 						var lambda =
 							Expression.Lambda<Action<MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>>(call,

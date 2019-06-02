@@ -10,7 +10,7 @@ namespace Tests.Domain.Extensions
 		public static object ToAnonymousObject(this JoinField field) =>
 			field.Match<object>(p => Infer.RelationName(p.Name), c => new
 			{
-				parent = Infer.Id(c.Parent),
+				parent = Infer.Id(c.ParentId),
 				name = Infer.RelationName(c.Name)
 			});
 	}

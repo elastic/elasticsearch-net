@@ -95,13 +95,13 @@ namespace Tests.Cluster.NodesInfo
 		protected void Assert(NodeJvmInfo jvm)
 		{
 			jvm.Should().NotBeNull();
-			jvm.PID.Should().BeGreaterThan(0);
+			jvm.Pid.Should().BeGreaterThan(0);
 			jvm.StartTime.Should().BeGreaterThan(0);
 			jvm.Version.Should().NotBeNullOrWhiteSpace();
 			jvm.VMName.Should().NotBeNullOrWhiteSpace();
 			jvm.VMVendor.Should().NotBeNullOrWhiteSpace();
 			jvm.VMVersion.Should().NotBeNullOrWhiteSpace();
-			jvm.GCCollectors.Should().NotBeEmpty();
+			jvm.GcCollectors.Should().NotBeEmpty();
 			jvm.MemoryPools.Should().NotBeEmpty();
 			jvm.Memory.Should().NotBeNull();
 			jvm.Memory.DirectMaxInBytes.Should().BeGreaterOrEqualTo(0);

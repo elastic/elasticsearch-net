@@ -46,24 +46,24 @@ namespace Nest
 			}
 
 			// ref cannot be used inside lambda expression body
-			switch (value._tag)
+			switch (value.Tag)
 			{
 				case 0:
 				{
 					var relationNameFormatter = formatterResolver.GetFormatter<RelationName>();
-					relationNameFormatter.Serialize(ref writer, value._parent.Name, formatterResolver);
+					relationNameFormatter.Serialize(ref writer, value.ParentOption.Name, formatterResolver);
 					break;
 				}
 				case 1:
 				{
-					var child = value._child;
+					var child = value.ChildOption;
 					writer.WriteBeginObject();
 					writer.WritePropertyName("name");
 					var relationNameFormatter = formatterResolver.GetFormatter<RelationName>();
 					relationNameFormatter.Serialize(ref writer, child.Name, formatterResolver);
 					writer.WriteValueSeparator();
 					writer.WritePropertyName("parent");
-					var id = (child.Parent as IUrlParameter)?.GetString(formatterResolver.GetConnectionSettings());
+					var id = (child.ParentId as IUrlParameter)?.GetString(formatterResolver.GetConnectionSettings());
 					writer.WriteString(id);
 					writer.WriteEndObject();
 					break;

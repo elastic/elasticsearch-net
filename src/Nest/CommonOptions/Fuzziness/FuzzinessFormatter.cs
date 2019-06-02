@@ -1,5 +1,4 @@
-﻿using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
+﻿using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
 
@@ -57,6 +56,7 @@ namespace Nest
 					var commaIndex = -1;
 					for (var i = AutoBytes.Length; i < rawAuto.Count; i++)
 					{
+						// ReSharper disable once PossibleNullReferenceException
 						if (rawAuto.Array[rawAuto.Offset + i] == (byte)':')
 							colonIndex = rawAuto.Offset + i;
 						else if (rawAuto.Array[rawAuto.Offset + i] == (byte)',')
@@ -66,8 +66,8 @@ namespace Nest
 						}
 					}
 
-					var low = NumberConverter.ReadInt32(rawAuto.Array, colonIndex + 1, out var _);
-					var high = NumberConverter.ReadInt32(rawAuto.Array, commaIndex + 1, out var _);
+					var low = NumberConverter.ReadInt32(rawAuto.Array, colonIndex + 1, out _);
+					var high = NumberConverter.ReadInt32(rawAuto.Array, commaIndex + 1, out _);
 					return Fuzziness.AutoLength(low, high);
 				}
 				case JsonToken.Number: {
@@ -75,12 +75,12 @@ namespace Nest
 
 					if (value.IsDouble())
 					{
-						var ratio = NumberConverter.ReadDouble(value.Array, value.Offset, out var count);
+						var ratio = NumberConverter.ReadDouble(value.Array, value.Offset, out _);
 						return Fuzziness.Ratio(ratio);
 					}
 					else
 					{
-						var editDistance = NumberConverter.ReadInt32(value.Array, value.Offset, out var count);
+						var editDistance = NumberConverter.ReadInt32(value.Array, value.Offset, out _);
 						return Fuzziness.EditDistance(editDistance);
 					}
 				}

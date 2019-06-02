@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -137,11 +136,11 @@ namespace Nest
 		protected override object GetBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
 			{
-				_PartialUpdate = Doc,
-				_Script = Script,
-				_Upsert = Upsert,
-				_DocAsUpsert = DocAsUpsert,
-				_ScriptedUpsert = ScriptedUpsert
+				PartialUpdate = Doc,
+				Script = Script,
+				Upsert = Upsert,
+				DocAsUpsert = DocAsUpsert,
+				ScriptedUpsert = ScriptedUpsert
 			};
 	}
 
@@ -165,11 +164,11 @@ namespace Nest
 		protected override object GetBulkOperationBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
 			{
-				_PartialUpdate = Self.Doc,
-				_Script = Self.Script,
-				_Upsert = Self.Upsert,
-				_DocAsUpsert = Self.DocAsUpsert,
-				_ScriptedUpsert = Self.ScriptedUpsert
+				PartialUpdate = Self.Doc,
+				Script = Self.Script,
+				Upsert = Self.Upsert,
+				DocAsUpsert = Self.DocAsUpsert,
+				ScriptedUpsert = Self.ScriptedUpsert
 			};
 
 		protected override Id GetIdForOperation(Inferrer inferrer) =>

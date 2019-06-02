@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -317,11 +316,11 @@ namespace Nest
 			public long NonHeapUsedInBytes { get; internal set; }
 
 			[DataMember(Name = "pools")]
-			[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, JVMPool>))]
-			public IReadOnlyDictionary<string, JVMPool> Pools { get; internal set; }
+			[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, JvmPool>))]
+			public IReadOnlyDictionary<string, JvmPool> Pools { get; internal set; }
 
 			[DataContract]
-			public class JVMPool
+			public class JvmPool
 			{
 				[DataMember(Name = "max")]
 				public string Max { get; internal set; }
@@ -512,25 +511,25 @@ namespace Nest
 	public class TransportStats
 	{
 		[DataMember(Name = "rx_count")]
-		public long RXCount { get; internal set; }
+		public long RxCount { get; internal set; }
 
 		[DataMember(Name = "rx_size")]
-		public string RXSize { get; internal set; }
+		public string RxSize { get; internal set; }
 
 		[DataMember(Name = "rx_size_in_bytes")]
-		public long RXSizeInBytes { get; internal set; }
+		public long RxSizeInBytes { get; internal set; }
 
 		[DataMember(Name = "server_open")]
 		public int ServerOpen { get; internal set; }
 
 		[DataMember(Name = "tx_count")]
-		public long TXCount { get; internal set; }
+		public long TxCount { get; internal set; }
 
 		[DataMember(Name = "tx_size")]
-		public string TXSize { get; internal set; }
+		public string TxSize { get; internal set; }
 
 		[DataMember(Name = "tx_size_in_bytes")]
-		public long TXSizeInBytes { get; internal set; }
+		public long TxSizeInBytes { get; internal set; }
 	}
 
 	[DataContract]

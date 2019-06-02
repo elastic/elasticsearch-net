@@ -13,14 +13,14 @@ namespace Nest
 		BulkAllObservable<T> BulkAll<T>(
 			IEnumerable<T> documents,
 			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where T : class;
 
 		/// <summary>
 		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to elasticsearch as bulks concurrently
 		/// </summary>
-		BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) where T : class;
 	}
 
 	public partial class ElasticClient
@@ -29,13 +29,13 @@ namespace Nest
 		public BulkAllObservable<T> BulkAll<T>(
 			IEnumerable<T> documents,
 			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where T : class =>
-			BulkAll<T>(selector.InvokeOrDefault(new BulkAllDescriptor<T>(documents)), cancellationToken);
+			BulkAll(selector.InvokeOrDefault(new BulkAllDescriptor<T>(documents)), cancellationToken);
 
 		///<inheritdoc />
-		public BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
+		public BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default)
 			where T : class =>
 			new BulkAllObservable<T>(this, request, cancellationToken);
 	}

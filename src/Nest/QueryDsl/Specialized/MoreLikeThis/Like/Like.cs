@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -45,7 +44,7 @@ namespace Nest
 			if (union == null)
 				return null;
 
-			switch (union._tag)
+			switch (union.Tag)
 			{
 				case 0:
 					return new Like(union.Item1);

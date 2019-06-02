@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -38,6 +37,7 @@ namespace Nest
 		/// <summary>
 		/// A similarity with Bayesian smoothing using Dirichlet priors.
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		public SimilaritiesDescriptor LMDirichlet(string name, Func<LMDirichletSimilarityDescriptor, ILMDirichletSimilarity> selector) =>
 			Assign(name, selector?.Invoke(new LMDirichletSimilarityDescriptor()));
 
@@ -45,12 +45,14 @@ namespace Nest
 		/// A similarity that attempts to capture important patterns in the text,
 		/// while leaving out noise.
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		public SimilaritiesDescriptor LMJelinek(string name, Func<LMJelinekMercerSimilarityDescriptor, ILMJelinekMercerSimilarity> selector) =>
 			Assign(name, selector?.Invoke(new LMJelinekMercerSimilarityDescriptor()));
 
 		/// <summary>
 		/// Similarity that implements the divergence from independence model
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		public SimilaritiesDescriptor DFI(string name, Func<DFISimilarityDescriptor, IDFISimilarity> selector) =>
 			Assign(name, selector?.Invoke(new DFISimilarityDescriptor()));
 
@@ -76,6 +78,7 @@ namespace Nest
 		/// is primarily determined by the repetitive usage of its basic elements.
 		/// For written texts this challenge would correspond to comparing the writing styles of different authors.
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		public SimilaritiesDescriptor IB(string name, Func<IBSimilarityDescriptor, IIBSimilarity> selector) =>
 			Assign(name, selector?.Invoke(new IBSimilarityDescriptor()));
 

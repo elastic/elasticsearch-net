@@ -18,7 +18,7 @@ namespace Nest
 		private readonly IdResolver _idResolver;
 
 		private readonly ConcurrentDictionary<Type, Func<object, string>>
-			LocalRouteDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+			_localRouteDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 
 		public RoutingResolver(IConnectionSettingsValues connectionSettings, IdResolver idResolver)
 		{
@@ -42,7 +42,7 @@ namespace Nest
 			if (TryConnectionSettingsRoute(type, @object, out var route)) return route;
 
 			var joinField = GetJoinFieldFromObject(type, @object);
-			return joinField?.Match(p => _idResolver.Resolve(@object), c => ResolveId(c.Parent, _connectionSettings));
+			return joinField?.Match(p => _idResolver.Resolve(@object), c => ResolveId(c.ParentId, _connectionSettings));
 		}
 
 		private bool TryConnectionSettingsRoute(Type type, object @object, out string route)
@@ -51,7 +51,7 @@ namespace Nest
 			if (!_connectionSettings.RouteProperties.TryGetValue(type, out var propertyName))
 				return false;
 
-			if (LocalRouteDelegates.TryGetValue(type, out var cachedLookup))
+			if (_localRouteDelegates.TryGetValue(type, out var cachedLookup))
 			{
 				route = cachedLookup(@object);
 				return true;
@@ -63,7 +63,7 @@ namespace Nest
 				var v = func(o);
 				return v?.ToString();
 			};
-			LocalRouteDelegates.TryAdd(type, cachedLookup);
+			_localRouteDelegates.TryAdd(type, cachedLookup);
 			route = cachedLookup(@object);
 			return true;
 		}

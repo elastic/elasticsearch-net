@@ -87,6 +87,7 @@ namespace Nest
 		public string Uptime => _u ?? _uptime;
 		public string Version => _v ?? _version;
 
+		// ReSharper disable InconsistentNaming
 		[DataMember(Name ="b")]
 		internal string _b { get; set; }
 
@@ -668,5 +669,6 @@ namespace Nest
 
 		[DataMember(Name ="version")]
 		internal string _version { get; set; }
+		// ReSharper restore InconsistentNaming
 	}
 }

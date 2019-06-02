@@ -1,5 +1,4 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -13,7 +12,7 @@ namespace Nest
 	[JsonFormatter(typeof(UnionFormatter<,>))]
 	public class Union<TFirst, TSecond>
 	{
-		internal readonly int _tag;
+		internal readonly int Tag;
 		internal readonly TFirst Item1;
 		internal readonly TSecond Item2;
 
@@ -24,7 +23,7 @@ namespace Nest
 		public Union(TFirst item)
 		{
 			Item1 = item;
-			_tag = 0;
+			Tag = 0;
 		}
 
 		/// <summary>
@@ -34,7 +33,7 @@ namespace Nest
 		public Union(TSecond item)
 		{
 			Item2 = item;
-			_tag = 1;
+			Tag = 1;
 		}
 
 		/// <summary>
@@ -44,7 +43,7 @@ namespace Nest
 		/// <param name="second">The delegate to run when this instance encapsulates an instance of <typeparamref name="TSecond" /></param>
 		public void Match(Action<TFirst> first, Action<TSecond> second)
 		{
-			switch (_tag)
+			switch (Tag)
 			{
 				case 0:
 					first(Item1);
@@ -52,7 +51,7 @@ namespace Nest
 				case 1:
 					second(Item2);
 					break;
-				default: throw new Exception($"Unrecognized tag value: {_tag}");
+				default: throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 
@@ -63,11 +62,11 @@ namespace Nest
 		/// <param name="second">The delegate to run when this instance encapsulates an instance of <typeparamref name="TSecond" /></param>
 		public T Match<T>(Func<TFirst, T> first, Func<TSecond, T> second)
 		{
-			switch (_tag)
+			switch (Tag)
 			{
 				case 0: return first(Item1);
 				case 1: return second(Item2);
-				default: throw new Exception($"Unrecognized tag value: {_tag}");
+				default: throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 

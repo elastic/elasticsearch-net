@@ -1,4 +1,3 @@
-using Elasticsearch.Net;
 using Elasticsearch.Net.CrossPlatform;
 using Elasticsearch.Net.Utf8Json;
 

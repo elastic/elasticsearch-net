@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
 using Elasticsearch.Net.CrossPlatform;
 using Elasticsearch.Net.Utf8Json;
 
@@ -156,13 +155,13 @@ namespace Nest
 	internal abstract class InterfaceDictionaryFormatterBase<TKey, TValue, TDictionary> : IJsonFormatter<TDictionary>
 		where TDictionary : class
 	{
-		protected readonly TypeExtensions.ObjectActivator<TDictionary> _activator;
-		protected readonly bool _parameterlessCtor;
+		protected readonly TypeExtensions.ObjectActivator<TDictionary> Activator;
+		protected readonly bool ParameterlessCtor;
 
 		public InterfaceDictionaryFormatterBase(TypeExtensions.ObjectActivator<TDictionary> activator, bool parameterlessCtor)
 		{
-			_activator = activator;
-			_parameterlessCtor = parameterlessCtor;
+			Activator = activator;
+			ParameterlessCtor = parameterlessCtor;
 		}
 
 		public TDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -183,7 +182,7 @@ namespace Nest
 					var key = objectKeyFormatter.DeserializeFromPropertyName(ref reader, formatterResolver);
 					reader.ReadIsNameSeparatorWithVerify();
 					var value = valueFormatter.Deserialize(ref reader, formatterResolver);
-					Add(ref dict, i - 1, key, value);
+					Add(ref dict, key, value);
 				}
 			}
 			else
@@ -194,7 +193,7 @@ namespace Nest
 					var key = (TKey)Convert.ChangeType(keyString, typeof(TKey));
 					reader.ReadIsNameSeparatorWithVerify();
 					var value = valueFormatter.Deserialize(ref reader, formatterResolver);
-					Add(ref dict, i - 1, key, value);
+					Add(ref dict, key, value);
 				}
 			}
 
@@ -209,6 +208,7 @@ namespace Nest
 				return;
 			}
 
+			// TODO 7.0 mutator is not used, should it?
 			var mutator = formatterResolver.GetConnectionSettings().DefaultFieldNameInferrer;
 			var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>() as IObjectPropertyNameFormatter<TKey>;
 			var valueFormatter = formatterResolver.GetFormatterWithVerify<TValue>();
@@ -273,7 +273,7 @@ namespace Nest
 		private Dictionary<TKey, TValue> Create() =>
 			new Dictionary<TKey, TValue>();
 
-		private void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value) =>
+		private void Add(ref Dictionary<TKey, TValue> collection, TKey key, TValue value) =>
 			collection.Add(key, value);
 
 		protected abstract IEnumerator<KeyValuePair<TKey, TValue>> GetSourceEnumerator(TDictionary source);
@@ -291,7 +291,7 @@ namespace Nest
 			source.GetEnumerator();
 
 		protected override TDictionary Complete(ref Dictionary<TKey, TValue> intermediateCollection) =>
-			_activator(intermediateCollection);
+			Activator(intermediateCollection);
 	}
 
 	internal class InterfaceDictionaryFormatter<TKey, TValue, TDictionary> : InterfaceDictionaryFormatterBase<TKey, TValue, TDictionary>
@@ -308,14 +308,14 @@ namespace Nest
 		protected override TDictionary Complete(ref Dictionary<TKey, TValue> intermediateCollection)
 		{
 			TDictionary dictionary;
-			if (_parameterlessCtor)
+			if (ParameterlessCtor)
 			{
-				dictionary = _activator();
+				dictionary = Activator();
 				foreach (var kv in intermediateCollection)
 					dictionary.Add(kv);
 			}
 			else
-				dictionary = _activator(intermediateCollection);
+				dictionary = Activator(intermediateCollection);
 
 			return dictionary;
 		}

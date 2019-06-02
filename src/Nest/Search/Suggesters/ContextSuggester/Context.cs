@@ -1,5 +1,4 @@
-﻿using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
+﻿using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -24,7 +23,7 @@ namespace Nest
 		{
 			var formatter = formatterResolver.GetFormatter<Union<string, GeoLocation>>();
 			var union = formatter.Deserialize(ref reader, formatterResolver);
-			switch (union._tag)
+			switch (union.Tag)
 			{
 				case 0:
 					return new Context(union.Item1);
