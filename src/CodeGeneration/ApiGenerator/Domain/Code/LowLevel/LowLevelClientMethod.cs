@@ -25,12 +25,18 @@ namespace ApiGenerator.Domain.Code.LowLevel
 		{
 			get
 			{
+				string Evaluator(Match m)
+				{
+					var arg = m.Groups.Last().Value.ToCamelCase();
+					return $"{{{arg}:{arg}}}";
+				}
+
 				var url = Path.TrimStart('/');
 				var pattern = string.Join("|", Url.Parts.Select(p => p.Name));
 				var urlCode = $"\"{url}\"";
 				if (Path.Contains("{"))
 				{
-					var patchedUrl = Regex.Replace(url, "{(" + pattern + ")}", "{$1:$1}");
+					var patchedUrl = Regex.Replace(url, "{(" + pattern + ")}", Evaluator);
 					urlCode = $"Url($\"{patchedUrl}\")";
 				}
 				return urlCode;

@@ -12,6 +12,8 @@ namespace Nest
 		IScript Script { get; set; }
 	}
 
+	// ReSharper disable once UnusedMember.Global
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface IUpdateByQueryRequest<TDocument> where TDocument : class { }
 
 	public partial class UpdateByQueryRequest
@@ -20,6 +22,7 @@ namespace Nest
 		public IScript Script { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class UpdateByQueryRequest<TDocument> where TDocument : class
 	{
 	}

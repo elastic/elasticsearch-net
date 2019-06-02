@@ -14,6 +14,7 @@ namespace Tests.Reproduce
 
 			Action getScroll = () =>
 			{
+				// ReSharper disable once UnusedVariable
 				var scroll = searchRequest.Scroll;
 			};
 

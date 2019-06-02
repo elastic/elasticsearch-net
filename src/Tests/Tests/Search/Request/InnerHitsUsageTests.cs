@@ -8,8 +8,8 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -25,12 +25,14 @@ namespace Tests.Search.Request
 	public abstract class RoyalBase<TRoyal> : IRoyal
 		where TRoyal : class, IRoyal
 	{
-		protected static int IdState = 0;
+		// ReSharper disable once StaticMemberInGenericType
+		// on purpose per TRoyal
+		private static int _idState;
 
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()
 				.UseSeed(GenerationSeed())
-				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
+				.RuleFor(p => p.Name, f => f.Person.Company.Name + _idState++);
 
 		public virtual JoinField Join { get; set; }
 		public string Name { get; set; }
@@ -57,10 +59,6 @@ namespace Tests.Search.Request
 		}
 	}
 
-	public abstract class RoyalBase<TRoyal, TSubject> : RoyalBase<TRoyal>
-		where TRoyal : class, IRoyal
-		where TSubject : class, IRoyal { }
-
 	public class King : RoyalBase<King>
 	{
 		public List<King> Foes { get; set; }
@@ -81,7 +79,6 @@ namespace Tests.Search.Request
 	//hide
 	public class RoyalSeeder
 	{
-		public static readonly string RoyalType = "royal";
 		private readonly IElasticClient _client;
 		private readonly IndexName _index;
 
@@ -222,8 +219,8 @@ namespace Tests.Search.Request
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(Client, Index).Seed();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<TRoyal>(f),
-			(client, f) => client.SearchAsync<TRoyal>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<TRoyal>(r),
 			(client, r) => client.SearchAsync<TRoyal>(r)
 		);

@@ -5,9 +5,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Framework.Integration;
 
 namespace Tests.XPack.Security.ApiKey
 {

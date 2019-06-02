@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -21,8 +21,8 @@ namespace Nest
 
 		/// <summary>
 		/// If the analyzer used removes all tokens in a query like a stop filter does, the default behavior is
-		/// to match no documents at all. In order to change that, <see cref="ZeroTermsQuery" /> can be used,
-		/// which accepts <see cref="ZeroTermsQuery.None" /> (default) and <see cref="ZeroTermsQuery.All" />
+		/// to match no documents at all. In order to change that, <see cref="Nest.ZeroTermsQuery" /> can be used,
+		/// which accepts <see cref="Nest.ZeroTermsQuery.None" /> (default) and <see cref="Nest.ZeroTermsQuery.All" />
 		/// which corresponds to a match_all query.
 		/// </summary>
 		[DataMember(Name = "zero_terms_query")]

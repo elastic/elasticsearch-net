@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterHealth
@@ -70,7 +70,7 @@ namespace Tests.Cluster.ClusterHealth
 			response.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
 			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
 			response.ActiveShardsPercentAsNumber.Should().BePositive();
-			response.DelayedUnassignedShards.Should().Equals(0);
+			response.DelayedUnassignedShards.Should().Be(0);
 			response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
 			response.TaskMaxWaitTimeInQueueInMilliseconds.Should().BeGreaterOrEqualTo(0);
 

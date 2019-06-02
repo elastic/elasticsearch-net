@@ -2,11 +2,9 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Mapping.LocalMetadata.Extensions;
 using Tests.Mapping.Types.Core.Text;
 
-namespace Tests.Mapping.LocalMetadata
-{
+namespace Tests.Mapping.LocalMetadata {
 	public class LocalMetadataVisitorTests
 	{
 		[U]
@@ -45,10 +43,7 @@ namespace Tests.Mapping.LocalMetadata
 			visitor.MetadataCount.Should().Be(1);
 		}
 	}
-}
 
-namespace Tests.Mapping.LocalMetadata.Extensions
-{
 	public static class TestLocalMetadataMappingExtensions
 	{
 		public static TDescriptor AddTestLocalMetadata<TDescriptor>(this TDescriptor descriptor)

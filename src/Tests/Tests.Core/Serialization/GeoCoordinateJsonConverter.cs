@@ -1,6 +1,5 @@
 ﻿using System;
 using Nest;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Tests.Core.Serialization

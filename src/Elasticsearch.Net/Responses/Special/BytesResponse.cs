@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {

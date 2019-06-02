@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -95,7 +96,7 @@ namespace Nest
 
 			Factor = f;
 			var interval = match.Groups["interval"].Success ? match.Groups["interval"].Value : null;
-			Interval = interval.ToEnum<TimeUnit>(StringComparison.OrdinalIgnoreCase);
+			Interval = interval.ToEnum<TimeUnit>();
 			if (!Interval.HasValue)
 				throw new ArgumentException($"Expression '{interval}' cannot be parsed to an interval", nameof(timeUnit));
 
@@ -114,10 +115,13 @@ namespace Nest
 				if (StaticTimeValue.Value < other.StaticTimeValue.Value) return -1;
 				return 1;
 			}
-
-			// ReSharper disable once PossibleInvalidOperationException
+			
+			if (Milliseconds == null && other.Milliseconds == null) return 0;
+			if (Milliseconds != null && other.Milliseconds == null) return 1;
+			if (Milliseconds == null || other.Milliseconds == null) return 1;
+			
 			if (Math.Abs(Milliseconds.Value - other.Milliseconds.Value) < FLOAT_TOLERANCE) return 0;
-			if (Milliseconds < other.Milliseconds) return -1;
+			if (other.Milliseconds != null && Milliseconds < other.Milliseconds.Value) return -1;
 
 			return 1;
 		}
@@ -160,10 +164,16 @@ namespace Nest
 			switch (Interval.Value)
 			{
 				case TimeUnit.Microseconds:
+					if (!Factor.HasValue) 
+						throw new InvalidOperationException("Time is in microseconds but factor has no value, this is a bug please report!");
 					return TimeSpan.FromTicks((long)(Factor.Value / MicrosecondsInATick));
 				case TimeUnit.Nanoseconds:
+					if (!Factor.HasValue) 
+						throw new InvalidOperationException("Time is in nanoseconds but factor has no value, this is a bug please report!");
 					return TimeSpan.FromTicks((long)(Factor.Value / NanosecondsInATick));
 				default:
+					if (!Milliseconds.HasValue) 
+						throw new InvalidOperationException("Milliseconds is null so we have nothing to create a TimeSpan from, this is a bug please report!");
 					return TimeSpan.FromMilliseconds(Milliseconds.Value);
 			}
 		}
@@ -197,7 +207,10 @@ namespace Nest
 			if (!StaticTimeValue.HasValue && other.StaticTimeValue.HasValue) return false;
 			if (StaticTimeValue.HasValue && other.StaticTimeValue.HasValue)
 				return StaticTimeValue == other.StaticTimeValue;
-
+			
+			
+			if (Milliseconds == null && other.Milliseconds == null) return true;
+			if (Milliseconds == null || other.Milliseconds == null) return false;
 			return Math.Abs(Milliseconds.Value - other.Milliseconds.Value) < FLOAT_TOLERANCE;
 		}
 
@@ -212,6 +225,7 @@ namespace Nest
 
 		public override int GetHashCode() => StaticTimeValue.HasValue
 			? StaticTimeValue.Value.GetHashCode()
+			// ReSharper disable once NonReadonlyMemberInGetHashCode
 			: Milliseconds.GetHashCode();
 
 		private void Reduce(double ms)

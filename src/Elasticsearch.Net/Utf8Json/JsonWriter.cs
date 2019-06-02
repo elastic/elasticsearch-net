@@ -25,8 +25,11 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Internal.DoubleConversion;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 

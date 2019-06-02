@@ -1,6 +1,5 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
-using Tests.Configuration;
 
 namespace Tests.Core.Xunit
 {

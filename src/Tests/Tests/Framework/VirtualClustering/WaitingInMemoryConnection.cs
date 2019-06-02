@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
 	public class WaitingInMemoryConnection : InMemoryConnection
 	{

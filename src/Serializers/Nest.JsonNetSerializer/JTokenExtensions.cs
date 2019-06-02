@@ -1,7 +1,4 @@
 ﻿using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

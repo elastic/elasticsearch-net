@@ -16,8 +16,6 @@ namespace DocGenerator
 
 		private static string GetProjectDir(string projectName) => Path.Combine(Program.InputDirPath, projectName);
 
-		private static string GetProjectFile(string projectName) => Path.Combine(GetProjectDir(projectName), $"{projectName}.csproj");
-
 		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
 			from f in Directory.GetFiles(GetProjectDir("Tests"), $"{path}", SearchOption.AllDirectories)
 			let dir = new DirectoryInfo(f)

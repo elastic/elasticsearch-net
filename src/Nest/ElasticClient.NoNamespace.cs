@@ -14,6 +14,7 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ using Nest.Specification.TasksApi;
 using Nest.Specification.WatcherApi;
 using Nest.Specification.XPackApi;
 
+// ReSharper disable RedundantTypeArgumentsOfMethod
 namespace Nest
 {
 	///<summary>

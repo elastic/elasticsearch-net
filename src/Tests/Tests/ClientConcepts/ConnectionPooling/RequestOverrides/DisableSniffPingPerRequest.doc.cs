@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Tests.Framework;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
@@ -21,7 +23,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U] public async Task DisableSniff()
 		{
 			/** Let's set up the cluster and configure clients to **always** sniff on startup */
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()
@@ -60,7 +62,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		/** Now, let's disable pinging on the request */
 		[U] public async Task DisablePing()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()
@@ -80,7 +82,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		/** Finally, let's demonstrate disabling both sniff and ping on the request */
 		[U] public async Task DisableSniffAndPing()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()

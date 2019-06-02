@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class AnalyzeTokenizersSelector : SelectorBase<ITokenizer>
+	public class AnalyzeTokenizersSelector : SelectorBase
 	{
 		/// <summary>
 		/// A tokenizer of type edgeNGram.

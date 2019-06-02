@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 using static Nest.FixedIndexSettings;
 using static Nest.IndexSortSettings;
 using static Nest.UpdatableIndexSettings;
@@ -210,7 +210,7 @@ namespace Nest
 			Set<int?>(s, settings, MergeSchedulerMaxThreadCount, v => ms.MaxThreadCount = v, formatterResolver);
 			Set<bool?>(s, settings, MergeSchedulerAutoThrottle, v => ms.AutoThrottle = v, formatterResolver);
 
-			var slowlog = s.SlowLog = new SlowLog();
+			s.SlowLog = new SlowLog();
 			var search = s.SlowLog.Search = new SlowLogSearch();
 			Set<LogLevel?>(s, settings, SlowlogSearchLevel, v => search.LogLevel = v, formatterResolver);
 			var query = s.SlowLog.Search.Query = new SlowLogSearchQuery();
@@ -250,7 +250,7 @@ namespace Nest
 			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, IndexSortSettings.Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v },
 				formatterResolver);
 
-			var queries = s.Queries = new QueriesSettings();
+			s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
 			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v, formatterResolver);
 

@@ -4,13 +4,12 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkAllExceptionApiTests : BulkAllApiTestsBase
 	{
-		public BulkAllExceptionApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkAllExceptionApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] public void WaitBulkAllThrowsAndIsCaught()
 		{

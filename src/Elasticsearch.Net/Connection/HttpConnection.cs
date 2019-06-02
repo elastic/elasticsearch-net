@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 using static System.Net.DecompressionMethods;
 
 namespace Elasticsearch.Net
@@ -187,7 +188,7 @@ namespace Elasticsearch.Net
 			}
 			else if (requestData.DisableAutomaticProxyDetection) handler.UseProxy = false;
 
-			var callback = requestData?.ConnectionSettings?.ServerCertificateValidationCallback;
+			var callback = requestData.ConnectionSettings?.ServerCertificateValidationCallback;
 			if (callback != null && handler.ServerCertificateCustomValidationCallback == null)
 				handler.ServerCertificateCustomValidationCallback = callback;
 
@@ -213,10 +214,8 @@ namespace Elasticsearch.Net
 			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
 
 			if (requestData.Headers != null)
-			{
 				foreach (string key in requestData.Headers)
 					requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
-			}
 
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;

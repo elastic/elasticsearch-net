@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace Tests.Framework
+namespace Tests.Framework.Extensions
 {
 	public static class CoreFxExtensions
 	{

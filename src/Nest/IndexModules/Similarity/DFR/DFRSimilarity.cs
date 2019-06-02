@@ -57,6 +57,7 @@ namespace Nest
 		/// Pareto-Zipf Normalization
 		/// </summary>
 		[DataMember(Name = "normalization.z.z")]
+		// ReSharper disable once InconsistentNaming
 		double? NormalizationZZ { get; set; }
 	}
 

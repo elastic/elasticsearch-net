@@ -178,6 +178,7 @@ namespace Nest
 		}
 
 		private static readonly int[] AllStatusCodes = { -1 };
+		//TODO 7.x wire this in for necessary apis again
 		private static void AcceptAllStatusCodesHandler(IRequestConfiguration requestConfiguration) =>
 			requestConfiguration.AllowedStatusCodes = AllStatusCodes;
 

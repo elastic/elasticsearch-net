@@ -28,7 +28,7 @@ namespace Nest
 
 		public static RelationName Relation<T>() => typeof(T);
 
-		public static Routing Route<T>(T instance) where T : class => Routing.From<T>(instance);
+		public static Routing Route<T>(T instance) where T : class => Routing.From(instance);
 
 		public static Names Names(params string[] names) => string.Join(",", names);
 

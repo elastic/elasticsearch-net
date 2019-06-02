@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
-using static Nest.Infer;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Specialized.MoreLikeThis
 {

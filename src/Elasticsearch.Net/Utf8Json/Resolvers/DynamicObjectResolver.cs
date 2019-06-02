@@ -27,11 +27,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	/// <summary>
 	/// ObjectResolver by dynamic code generation.
@@ -545,7 +547,7 @@ namespace Elasticsearch.Net
 #endif
 
 
-		static int nameSequence = 0;
+		static int nameSequence;
 
 		static HashSet<Type> ignoreTypes = new HashSet<Type>
 		{
@@ -1671,7 +1673,7 @@ namespace Elasticsearch.Net
 
 			public static readonly MethodInfo GetFormatterWithVerify = typeof(JsonFormatterResolverExtensions).GetRuntimeMethod("GetFormatterWithVerify", new[] { typeof(IJsonFormatterResolver) });
 #if NETSTANDARD
-			public static readonly MethodInfo UnsafeMemory_MemoryCopy = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonWriter writer, byte[] src) => UnsafeMemory.MemoryCopy(ref writer, src));
+			public static readonly MethodInfo UnsafeMemory_MemoryCopy = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer, byte[] src) => UnsafeMemory.MemoryCopy(ref writer, src));
 #endif
 			public static readonly ConstructorInfo InvalidOperationExceptionConstructor = typeof(System.InvalidOperationException).GetTypeInfo().DeclaredConstructors.First(x => { var p = x.GetParameters(); return p.Length == 1 && p[0].ParameterType == typeof(string); });
 			public static readonly MethodInfo GetTypeFromHandle = ExpressionUtility.GetMethodInfo(() => Type.GetTypeFromHandle(default(RuntimeTypeHandle)));
@@ -1690,16 +1692,16 @@ namespace Elasticsearch.Net
 
 			public static readonly MethodInfo MakeGenericType = ExpressionUtility.GetMethodInfo((Type t) => t.MakeGenericType(default(Type[])));
 
-			public static readonly MethodInfo NongenericSerialize = ExpressionUtility.GetMethodInfo<Elasticsearch.Net.JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(default(Type), ref writer, default(object), default(IJsonFormatterResolver)));
+			public static readonly MethodInfo NongenericSerialize = ExpressionUtility.GetMethodInfo<Utf8Json.JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(default(Type), ref writer, default(object), default(IJsonFormatterResolver)));
 
 			public static MethodInfo Serialize(Type type)
 			{
-				return typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod("Serialize", new[] { typeof(Elasticsearch.Net.JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
+				return typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod("Serialize", new[] { typeof(Utf8Json.JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
 			}
 
 			public static MethodInfo Deserialize(Type type)
 			{
-				return typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod("Deserialize", new[] { typeof(Elasticsearch.Net.JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) });
+				return typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod("Deserialize", new[] { typeof(Utf8Json.JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) });
 			}
 
 			public static MethodInfo GetNullableHasValue(Type type)
@@ -1709,19 +1711,19 @@ namespace Elasticsearch.Net
 
 			internal static class JsonWriter
 			{
-				public static readonly MethodInfo GetEncodedPropertyNameWithBeginObject = ExpressionUtility.GetMethodInfo(() => Elasticsearch.Net.JsonWriter.GetEncodedPropertyNameWithBeginObject(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyNameWithBeginObject = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithBeginObject(default(string)));
 
-				public static readonly MethodInfo GetEncodedPropertyNameWithPrefixValueSeparator = ExpressionUtility.GetMethodInfo(() => Elasticsearch.Net.JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyNameWithPrefixValueSeparator = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator(default(string)));
 
-				public static readonly MethodInfo GetEncodedPropertyNameWithoutQuotation = ExpressionUtility.GetMethodInfo(() => Elasticsearch.Net.JsonWriter.GetEncodedPropertyNameWithoutQuotation(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyNameWithoutQuotation = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithoutQuotation(default(string)));
 
-				public static readonly MethodInfo GetEncodedPropertyName = ExpressionUtility.GetMethodInfo(() => Elasticsearch.Net.JsonWriter.GetEncodedPropertyName(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyName = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyName(default(string)));
 
-				public static readonly MethodInfo WriteNull = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonWriter writer) => writer.WriteNull());
-				public static readonly MethodInfo WriteRaw = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonWriter writer) => writer.WriteRaw(default(byte[])));
-				public static readonly MethodInfo WriteBeginObject = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonWriter writer) => writer.WriteBeginObject());
-				public static readonly MethodInfo WriteEndObject = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonWriter writer) => writer.WriteEndObject());
-				public static readonly MethodInfo WriteValueSeparator = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonWriter writer) => writer.WriteValueSeparator());
+				public static readonly MethodInfo WriteNull = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteNull());
+				public static readonly MethodInfo WriteRaw = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteRaw(default(byte[])));
+				public static readonly MethodInfo WriteBeginObject = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteBeginObject());
+				public static readonly MethodInfo WriteEndObject = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteEndObject());
+				public static readonly MethodInfo WriteValueSeparator = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteValueSeparator());
 
 				static JsonWriter()
 				{
@@ -1730,13 +1732,13 @@ namespace Elasticsearch.Net
 
 			internal static class JsonReader
 			{
-				public static readonly MethodInfo ReadIsNull = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader) => reader.ReadIsNull());
-				public static readonly MethodInfo ReadIsBeginObjectWithVerify = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader) => reader.ReadIsBeginObjectWithVerify());
-				public static readonly MethodInfo ReadIsEndObjectWithSkipValueSeparator = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader, int count) => reader.ReadIsEndObjectWithSkipValueSeparator(ref count));
-				public static readonly MethodInfo ReadPropertyNameSegmentUnsafe = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader) => reader.ReadPropertyNameSegmentRaw());
-				public static readonly MethodInfo ReadNextBlock = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader) => reader.ReadNextBlock());
-				public static readonly MethodInfo GetBufferUnsafe = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader) => reader.GetBufferUnsafe());
-				public static readonly MethodInfo GetCurrentOffsetUnsafe = ExpressionUtility.GetMethodInfo((Elasticsearch.Net.JsonReader reader) => reader.GetCurrentOffsetUnsafe());
+				public static readonly MethodInfo ReadIsNull = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadIsNull());
+				public static readonly MethodInfo ReadIsBeginObjectWithVerify = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadIsBeginObjectWithVerify());
+				public static readonly MethodInfo ReadIsEndObjectWithSkipValueSeparator = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader, int count) => reader.ReadIsEndObjectWithSkipValueSeparator(ref count));
+				public static readonly MethodInfo ReadPropertyNameSegmentUnsafe = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadPropertyNameSegmentRaw());
+				public static readonly MethodInfo ReadNextBlock = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadNextBlock());
+				public static readonly MethodInfo GetBufferUnsafe = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.GetBufferUnsafe());
+				public static readonly MethodInfo GetCurrentOffsetUnsafe = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.GetCurrentOffsetUnsafe());
 
 				static JsonReader()
 				{
@@ -1745,8 +1747,8 @@ namespace Elasticsearch.Net
 
 			internal static class JsonFormatterAttr
 			{
-				internal static readonly MethodInfo FormatterType = ExpressionUtility.GetPropertyInfo((Elasticsearch.Net.JsonFormatterAttribute attr) => attr.FormatterType).GetGetMethod();
-				internal static readonly MethodInfo Arguments = ExpressionUtility.GetPropertyInfo((Elasticsearch.Net.JsonFormatterAttribute attr) => attr.Arguments).GetGetMethod();
+				internal static readonly MethodInfo FormatterType = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.FormatterType).GetGetMethod();
+				internal static readonly MethodInfo Arguments = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.Arguments).GetGetMethod();
 			}
 		}
 

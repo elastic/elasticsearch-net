@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 using static Nest.Infer;
 using static Tests.Core.Serialization.SerializationTestHelper;

@@ -10,7 +10,7 @@ using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Domain;
 
-namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
+namespace Tests.XPack.MachineLearning
 {
 	public class MachineLearningSeeder
 	{

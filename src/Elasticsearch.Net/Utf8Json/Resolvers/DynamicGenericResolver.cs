@@ -29,8 +29,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{

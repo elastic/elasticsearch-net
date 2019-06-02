@@ -7,8 +7,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterReroute
 {
@@ -107,13 +107,13 @@ namespace Tests.Cluster.ClusterReroute
 				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
-				.AcceptDataLoss(true)
+				.AcceptDataLoss()
 			)
 			.AllocateStalePrimary(a => a
 				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
-				.AcceptDataLoss(true)
+				.AcceptDataLoss()
 			)
 			.AllocateReplica(a => a
 				.Index(CallIsolatedValue)

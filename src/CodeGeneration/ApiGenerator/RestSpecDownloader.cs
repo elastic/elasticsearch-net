@@ -97,6 +97,7 @@ namespace ApiGenerator
 
 		private class Specification
 		{
+			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public string Branch { get; set; }
 			public string FolderOnDisk { get; set; }
 			public string GithubListingUrl { get; set; }

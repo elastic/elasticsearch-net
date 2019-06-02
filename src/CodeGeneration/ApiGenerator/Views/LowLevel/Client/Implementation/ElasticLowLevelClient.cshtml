@@ -10,6 +10,7 @@
 @using CsQuery.StringScanner.Implementation
 @inherits CodeTemplatePage<RestApiSpec>
 @{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -25,6 +26,8 @@ using static Elasticsearch.Net.HttpMethod;
 	RestApiSpec model = Model;
 	var namespaces = model.EndpointsPerNamespace.Keys.Where(k => k != CsharpNames.RootNamespace);
 <text>
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable RedundantExtendsListEntry
 namespace Elasticsearch.Net
 {
 	///<summary>

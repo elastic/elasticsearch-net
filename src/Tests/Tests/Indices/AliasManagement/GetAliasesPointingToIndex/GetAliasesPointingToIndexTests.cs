@@ -5,7 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
 namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 {
@@ -15,12 +15,10 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 		private static readonly string Index = "aliases-index-" + Unique;
 
 		private readonly IElasticClient _client;
-		private readonly WritableCluster _cluster;
 
 		public GetAliasesPointingToIndexTests(WritableCluster cluster) : base(cluster)
 		{
-			_cluster = cluster;
-			_client = _cluster.Client;
+			_client = cluster.Client;
 
 			if (_client.Indices.Exists(Index).Exists) return;
 

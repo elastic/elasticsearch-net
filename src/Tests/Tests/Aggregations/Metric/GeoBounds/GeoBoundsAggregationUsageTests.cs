@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.GeoBounds
@@ -28,7 +28,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoBounds("viewport", gb => gb
 				.Field(p => p.Location)
-				.WrapLongitude(true)
+				.WrapLongitude()
 			);
 
 		protected override AggregationDictionary InitializerAggs =>

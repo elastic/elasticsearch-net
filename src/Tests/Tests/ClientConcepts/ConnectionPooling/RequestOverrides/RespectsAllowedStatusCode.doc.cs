@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Tests.Framework;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
@@ -15,7 +17,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task CanOverrideBadResponse()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(400))
 				.StaticConnectionPool()

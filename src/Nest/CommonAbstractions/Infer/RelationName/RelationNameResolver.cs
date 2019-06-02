@@ -6,7 +6,7 @@ namespace Nest
 	public class RelationNameResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private readonly ConcurrentDictionary<Type, string> RelationNames = new ConcurrentDictionary<Type, string>();
+		private readonly ConcurrentDictionary<Type, string> _relationNames = new ConcurrentDictionary<Type, string>();
 
 		public RelationNameResolver(IConnectionSettingsValues connectionSettings)
 		{
@@ -24,12 +24,12 @@ namespace Nest
 
 			string typeName;
 
-			if (RelationNames.TryGetValue(type, out typeName))
+			if (_relationNames.TryGetValue(type, out typeName))
 				return typeName;
 
 			if (_connectionSettings.DefaultRelationNames.TryGetValue(type, out typeName))
 			{
-				RelationNames.TryAdd(type, typeName);
+				_relationNames.TryAdd(type, typeName);
 				return typeName;
 			}
 
@@ -39,7 +39,7 @@ namespace Nest
 			else
 				typeName = type.Name.ToLowerInvariant();
 
-			RelationNames.TryAdd(type, typeName);
+			_relationNames.TryAdd(type, typeName);
 			return typeName;
 		}
 	}

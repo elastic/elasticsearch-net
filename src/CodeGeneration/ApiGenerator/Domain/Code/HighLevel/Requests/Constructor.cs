@@ -64,7 +64,9 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 				ctors.AddRange(from path in paths.Where(path => path.HasResolvableArguments)
 					let baseArgs = path.AutoResolveBaseArguments(generic)
 					let constructorArgs = path.AutoResolveConstructorArguments
-					let baseOrThis = inheritsFromPlainRequestBase ? "this" : "base"
+					let baseOrThis = inheritsFromPlainRequestBase  
+						? "this" 
+						: "base"
 					let generated = $"public {typeName}({constructorArgs}) : {baseOrThis}({baseArgs})"
 					select new Constructor
 					{
@@ -82,6 +84,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					{
 						Parameterless = string.IsNullOrEmpty(docPathConstArgs),
 						Generated = $"public {typeName}({docPathConstArgs}) : this({docPathBaseArgs})",
+		
 						AdditionalCode = $"partial void DocumentFromPath({generic} document);",
 						Description = docPath.GetXmlDocs(Indent, skipResolvable: true, documentConstructor: true),
 						Body = "=> DocumentFromPath(documentWithId);"
@@ -90,7 +93,6 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 			}
 			var constructors = ctors.GroupBy(c => c.Generated.Split(new[] { ':' }, 2)[0]).Select(g => g.Last()).ToList();
 			if (!constructors.Any(c=>c.Parameterless))
-			{
 				constructors.Add(new Constructor
 				{
 					Parameterless = true,
@@ -98,7 +100,6 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					Description =
 						$"///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>{Indent}[SerializationConstructor]",
 				});
-			}
 			return constructors;
 		}
 	}

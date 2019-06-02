@@ -8,7 +8,6 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Search

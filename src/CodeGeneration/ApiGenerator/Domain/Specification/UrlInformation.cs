@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ApiGenerator.Domain.Code;
 using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain.Specification
@@ -36,7 +35,7 @@ namespace ApiGenerator.Domain.Specification
 
 		private static readonly string[] DocumentApiParts = { "index", "id" };
 
-		public bool IsDocumentApi => UrlInformation.IsADocumentRoute(Parts);
+		public bool IsDocumentApi => IsADocumentRoute(Parts);
 		
 		public static bool IsADocumentRoute(IReadOnlyCollection<UrlPart> parts) =>
 			parts.Count() == DocumentApiParts.Length

@@ -4,13 +4,12 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkAllDeallocationApiTests : BulkAllApiTestsBase
 	{
-		public BulkAllDeallocationApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkAllDeallocationApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] public void ForEachAsyncReleasesProcessedItemsInMemory()
 		{

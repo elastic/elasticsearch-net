@@ -12,6 +12,7 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface ICountRequest<TDocument> where TDocument : class { }
 
 	public partial class CountRequest
@@ -25,9 +26,8 @@ namespace Nest
 				: HttpMethod.POST;
 	}
 
-	public partial class CountRequest<TDocument> where TDocument : class
-	{
-	}
+	// ReSharper disable once UnusedTypeParameter
+	public partial class CountRequest<TDocument> where TDocument : class { }
 
 	public partial class CountDescriptor<TDocument> where TDocument : class
 	{

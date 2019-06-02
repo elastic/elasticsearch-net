@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +12,7 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface IValidateQueryRequest<TDocument> where TDocument : class { }
 
 	public partial class ValidateQueryRequest
@@ -19,6 +20,7 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class ValidateQueryRequest<TDocument> where TDocument : class
 	{
 	}

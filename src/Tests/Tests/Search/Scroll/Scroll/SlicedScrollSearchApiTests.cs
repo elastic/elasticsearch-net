@@ -4,15 +4,15 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.Scroll.Scroll
 {
 	public class SlicedScrollSearchApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
-		protected int _slice = 0;
+		private int _slice;
 
 		private string _scrollId = "default-for-unit-tests";
 

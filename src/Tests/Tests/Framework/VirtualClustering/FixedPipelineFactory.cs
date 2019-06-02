@@ -1,7 +1,7 @@
 using Elasticsearch.Net;
 using Nest;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{

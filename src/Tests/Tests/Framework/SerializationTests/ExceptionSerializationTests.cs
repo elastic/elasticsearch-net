@@ -11,7 +11,7 @@ namespace Tests.Framework.SerializationTests
 	{
 		private readonly IElasticsearchSerializer _elasticsearchNetSerializer;
 
-		private readonly Exception Exception = new Exception("outer_exception",
+		private readonly Exception _exception = new Exception("outer_exception",
 			new InnerException("inner_exception",
 				new InnerInnerException("inner_inner_exception")));
 
@@ -27,7 +27,7 @@ namespace Tests.Framework.SerializationTests
 		[U]
 		public void LowLevelExceptionSerializationMatchesJsonNet()
 		{
-			var serialized = _elasticsearchNetSerializer.SerializeToString(Exception);
+			var serialized = _elasticsearchNetSerializer.SerializeToString(_exception);
 
 			object CreateException(Type exceptionType, string message, int depth)
 			{

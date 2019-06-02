@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
-	internal static class Extensions
+	internal static class UtilExtensions
 	{
 		private const long MillisecondsInAWeek = MillisecondsInADay * 7;
 		private const long MillisecondsInADay = MillisecondsInAnHour * 24;
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 			return es.Length == 1 ? es[0] : new AggregateException(es);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name)
+		internal static void ThrowIfNull<T>(this T value, string name) where T : class
 		{
 			if (value == null)
 				throw new ArgumentNullException(name);

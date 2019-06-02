@@ -11,7 +11,7 @@ using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.EndpointTests.TestState
 {
 	public class EndpointUsage
 	{
@@ -29,6 +29,7 @@ namespace Tests.Framework.Integration
 
 		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, string key)
 		{
+			// ReSharper disable once InconsistentlySynchronizedField
 			if (_usages.TryGetValue(key, out var lazyResponses)) return lazyResponses;
 
 			lock (_lock)
@@ -71,6 +72,7 @@ namespace Tests.Framework.Integration
 		public Action<IElasticClient> OnAfterCall { get; set; }
 		public Action<IElasticClient> OnBeforeCall { get; set; }
 
+		// ReSharper disable once StaticMemberInGenericType
 		public static Randomizer Random { get; } = new Randomizer(TestConfiguration.Instance.Seed);
 
 		private LazyResponses Responses { get; set; }

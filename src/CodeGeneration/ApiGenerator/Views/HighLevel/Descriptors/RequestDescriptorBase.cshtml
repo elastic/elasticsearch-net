@@ -7,6 +7,9 @@
 @{
 	RestApiSpec m = Model;
 }
+namespace Nest
+{
+	// ReSharper disable UnusedTypeParameter
 	public abstract partial class @Raw("RequestDescriptorBase<TDescriptor, TParameters, TInterface>")
 	{
 @foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
@@ -19,3 +22,4 @@
 </text>
 }
 	}
+}

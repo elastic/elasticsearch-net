@@ -5,9 +5,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Document.Multiple.Reindex;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
 using Tests.Core.Extensions;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Multiple.UpdateByQueryRethrottle
 {

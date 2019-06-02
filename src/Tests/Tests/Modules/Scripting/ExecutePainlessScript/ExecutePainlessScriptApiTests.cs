@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.Scripting.ExecutePainlessScript
 {
@@ -153,6 +154,8 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			response.Result.Should().BeGreaterOrEqualTo(0);
 		}
 
+		[SuppressMessage("ReSharper", "UnusedMember.Local")]
+		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
 		private class ScriptDocument
 		{
 			public string Field { get; set; }

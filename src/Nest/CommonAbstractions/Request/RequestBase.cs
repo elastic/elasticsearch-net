@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -137,6 +138,7 @@ namespace Nest
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
+		// ReSharper disable BaseObjectEqualsIsObjectEquals
 		public override bool Equals(object obj) => base.Equals(obj);
 
 		/// <summary>
@@ -144,7 +146,9 @@ namespace Nest
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
+		// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
 		public override int GetHashCode() => base.GetHashCode();
+		// ReSharper restore BaseObjectEqualsIsObjectEquals
 
 		/// <summary>
 		/// Hides the <see cref="ToString" /> method.

@@ -3,9 +3,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using static Tests.Framework.Promisify;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
+using static Tests.Framework.Extensions.Promisify;
 
 namespace Tests.Analysis
 {
@@ -73,7 +73,7 @@ namespace Tests.Analysis
 				(s, c, r) => c.Indices.GetSettingsAsync(r)
 			);
 
-		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index(indexName)) { };
+		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index((IndexName)indexName));
 
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u;
 
@@ -143,7 +143,7 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter() } }
 				}
 			}
 		};

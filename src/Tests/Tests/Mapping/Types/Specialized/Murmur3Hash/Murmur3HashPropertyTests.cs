@@ -2,9 +2,9 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.Murmur3Hash
+namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 {
 	public class Murmur3HashPropertyTests : PropertyTestsBase
 	{

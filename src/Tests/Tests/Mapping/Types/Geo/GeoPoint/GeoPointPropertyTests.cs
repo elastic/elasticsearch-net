@@ -2,9 +2,9 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.GeoPoint
+namespace Tests.Mapping.Types.Geo.GeoPoint
 {
 	public class GeoPointPropertyTests : PropertyTestsBase
 	{

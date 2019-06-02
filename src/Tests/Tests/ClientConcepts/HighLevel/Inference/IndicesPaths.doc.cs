@@ -5,6 +5,7 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 using static Nest.Indices;
 
 namespace Tests.ClientConcepts.HighLevel.Inference

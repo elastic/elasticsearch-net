@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -59,8 +59,6 @@ namespace Nest
 		private IList<QueryContainer> _must;
 		private IList<QueryContainer> _mustNot;
 		private IList<QueryContainer> _should;
-
-		public BoolQuery() { }
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).

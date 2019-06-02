@@ -11,9 +11,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 	public class VolatileUpdates
 	{
 		protected int NumberOfNodes = 10;
-		private readonly Random Random = new Random();
+		private readonly Random _random = new Random();
 
-		private readonly List<Node> Update = Enumerable.Range(9200, 10)
+		private readonly List<Node> _update = Enumerable.Range(9200, 10)
 			.Select(p => new Uri("http://localhost:" + p))
 			.Select(u => new Node(u))
 			.ToList();
@@ -39,7 +39,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		}
 
 		// hide
-		public void AssertCreateView(IConnectionPool pool)
+		private void AssertCreateView(IConnectionPool pool)
 		{
 			/**
 			*/
@@ -56,9 +56,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		{
 			for (var i = 0; i < 1000; i++)
 			{
-				foreach (var v in CallGetNext(pool))
+				foreach (var _ in CallGetNext(pool))
 				{
-					if (Random.Next(10) % 2 == 0) pool.Reseed(Update);
+					if (_random.Next(10) % 2 == 0) pool.Reseed(_update);
 				}
 			}
 		});

@@ -41,8 +41,9 @@ namespace Tests.Reproduce
 			var statsRequest = new NodesStatsRequest(NodesStatsMetric.Http);
 			for (var i = 0; i < 20; i++)
 			{
-				Task[] tasks = Enumerable.Range(0, requestsPerIteration)
+				var tasks = Enumerable.Range(0, requestsPerIteration)
 					.Select(async (r) => await client.SearchAsync<Project>())
+					.Cast<Task>()
 					.ToArray();
 				Task.WaitAll(tasks);
 

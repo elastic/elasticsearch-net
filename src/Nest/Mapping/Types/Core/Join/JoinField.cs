@@ -1,5 +1,5 @@
 using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -15,20 +15,20 @@ namespace Nest
 	[JsonFormatter(typeof(JoinFieldFormatter))]
 	public class JoinField
 	{
-		internal readonly Child _child;
-		internal readonly Parent _parent;
-		internal readonly int _tag;
+		internal Child ChildOption { get;  }
+		internal Parent ParentOption { get; }
+		internal int Tag { get; }
 
 		public JoinField(Parent parentName)
 		{
-			_parent = parentName;
-			_tag = 0;
+			ParentOption = parentName;
+			Tag = 0;
 		}
 
 		public JoinField(Child child)
 		{
-			_child = child;
-			_tag = 1;
+			ChildOption = child;
+			Tag = 1;
 		}
 
 		public static JoinField Root<TParent>() => new Parent(typeof(TParent));
@@ -38,7 +38,7 @@ namespace Nest
 		public static JoinField Link(RelationName child, Id parentId) => new Child(child, parentId);
 
 		public static JoinField Link<TChild, TParentDocument>(TParentDocument parent) where TParentDocument : class =>
-			new Child(typeof(TChild), Id.From<TParentDocument>(parent));
+			new Child(typeof(TChild), Id.From(parent));
 
 		public static JoinField Link<TChild>(Id parentId) => new Child(typeof(TChild), parentId);
 
@@ -52,27 +52,27 @@ namespace Nest
 
 		public T Match<T>(Func<Parent, T> first, Func<Child, T> second)
 		{
-			switch (_tag)
+			switch (Tag)
 			{
 				case 0:
-					return first(_parent);
+					return first(ParentOption);
 				case 1:
-					return second(_child);
-				default: throw new Exception($"Unrecognized tag value: {_tag}");
+					return second(ChildOption);
+				default: throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 
 		public void Match(Action<Parent> first, Action<Child> second)
 		{
-			switch (_tag)
+			switch (Tag)
 			{
 				case 0:
-					first(_parent);
+					first(ParentOption);
 					break;
 				case 1:
-					second(_child);
+					second(ChildOption);
 					break;
-				default: throw new Exception($"Unrecognized tag value: {_tag}");
+				default: throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 
@@ -88,11 +88,11 @@ namespace Nest
 			public Child(RelationName name, Id parent)
 			{
 				Name = name;
-				Parent = parent;
+				ParentId = parent;
 			}
 
 			public RelationName Name { get; }
-			public Id Parent { get; }
+			public Id ParentId { get; }
 		}
 	}
 }

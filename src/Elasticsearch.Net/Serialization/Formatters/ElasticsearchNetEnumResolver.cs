@@ -1,5 +1,8 @@
 using System;
 using System.Reflection;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net
 {
@@ -9,11 +12,11 @@ namespace Elasticsearch.Net
 
 		private ElasticsearchNetEnumResolver() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache()
 			{
@@ -28,13 +31,13 @@ namespace Elasticsearch.Net
 					var innerFormatter = Instance.GetFormatterDynamic(ti.AsType());
 					if (innerFormatter == null) return;
 
-					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()),
+					Formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()),
 						new object[] { innerFormatter });
 				}
 				else if (typeof(T).IsEnum)
 				{
 					var stringEnumAttribute = typeof(T).GetCustomAttribute<StringEnumAttribute>();
-					formatter = stringEnumAttribute != null
+					Formatter = stringEnumAttribute != null
 						? new EnumFormatter<T>(true)
 						: new EnumFormatter<T>(false);
 				}

@@ -25,14 +25,15 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
+using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal sealed class CompositeResolver : IJsonFormatterResolver
     {
         public static readonly CompositeResolver Instance = new CompositeResolver();
 
-        static bool isFreezed = false;
+        static bool isFreezed;
         static IJsonFormatter[] formatters = new IJsonFormatter[0];
         static IJsonFormatterResolver[] resolvers = new IJsonFormatterResolver[0];
 

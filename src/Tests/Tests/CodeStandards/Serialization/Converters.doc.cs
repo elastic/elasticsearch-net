@@ -6,6 +6,7 @@ using Nest;
 using Tests.Framework;
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Tests.CodeStandards.Serialization
 {

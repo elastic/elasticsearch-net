@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Elasticsearch.Net.CrossPlatform;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -18,6 +20,8 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
+		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
+		
 		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
@@ -55,12 +59,11 @@ namespace Elasticsearch.Net
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
 
-		internal static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
 	}
 
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
+	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues
 		where T : ConnectionConfiguration<T>
 	{
 		private readonly IConnection _connection;
@@ -75,8 +78,8 @@ namespace Elasticsearch.Net
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		private int _connectionLimit;
 		private TimeSpan? _deadTimeout;
-		private bool _disableAutomaticProxyDetection = false;
-		private bool _disableDirectStreaming = false;
+		private bool _disableAutomaticProxyDetection;
+		private bool _disableDirectStreaming;
 		private bool _disablePings;
 		private bool _enableHttpCompression;
 		private bool _enableHttpPipelining = true;
@@ -99,7 +102,6 @@ namespace Elasticsearch.Net
 		private bool _sniffOnConnectionFault;
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
-		private string _uniqueId = Guid.NewGuid().ToString("N");
 
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
@@ -118,7 +120,6 @@ namespace Elasticsearch.Net
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
 		}
 
-		string IConnectionConfigurationValues.Id => _uniqueId;
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
@@ -177,9 +178,7 @@ namespace Elasticsearch.Net
 
 		private static bool DefaultNodePredicate(Node node) => true;
 
-		protected T UpdateId() => Fluent.Assign<T, T, string>((T)this, Guid.NewGuid().ToString("N"), (a, v) => a._uniqueId = v);
-		
-		protected T Assign<TValue>(TValue value, Action<T, TValue> assigner) => Fluent.Assign((T)this, value, assigner).UpdateId();
+		protected T Assign<TValue>(TValue value, Action<T, TValue> assigner) => Fluent.Assign((T)this, value, assigner);
 
 		/// <summary> The default serializer used to serialize documents to and from JSON </summary>
 		protected virtual IElasticsearchSerializer DefaultSerializer(T settings) => new LowLevelRequestResponseSerializer();

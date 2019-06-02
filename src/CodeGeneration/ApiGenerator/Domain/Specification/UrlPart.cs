@@ -15,15 +15,15 @@ namespace ApiGenerator.Domain.Specification
 				{
 					case "int":
 					case "string":
-						return Type + " " + Name;
+						return Type + " " + NameAsArgument;
 					case "list":
-						return "string " + Name;
+						return "string " + NameAsArgument;
 					case "enum":
-						return Name.ToPascalCase() + " " + Name;
+						return Name.ToPascalCase() + " " + NameAsArgument;
 					case "number":
-						return "string " + Name;
+						return "string " + NameAsArgument;
 					default:
-						return Type + " " + Name;
+						return Type + " " + NameAsArgument;
 				}
 			}
 		}

@@ -2,13 +2,9 @@
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
-using Tests.Configuration;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteCalendarEvent
 {

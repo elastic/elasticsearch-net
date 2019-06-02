@@ -6,16 +6,14 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
-using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly IElasticClient _client;
 
-		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster, EndpointUsage usage) => _client = cluster.Client;
+		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster) => _client = cluster.Client;
 
 		protected static List<object> Search => new object[]
 		{

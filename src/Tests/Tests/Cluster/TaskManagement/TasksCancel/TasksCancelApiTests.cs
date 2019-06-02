@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
@@ -69,6 +70,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			tasks.Should().NotBeEmpty().And.ContainKey(TaskId);
 		}
 
+		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
 		private class Test
 		{
 			public string Flag { get; set; }

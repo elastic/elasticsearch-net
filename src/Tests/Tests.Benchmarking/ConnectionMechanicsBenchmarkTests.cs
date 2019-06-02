@@ -31,9 +31,6 @@ namespace Tests.Benchmarking
 
 
 		[Benchmark(Description = "SearchResponse", OperationsPerInvoke = 1000)]
-		public void SearchResponse()
-		{
-			var response = Client.LowLevel.Search<VoidResponse>("index", Post);
-		}
+		public void SearchResponse() => Client.LowLevel.Search<VoidResponse>("index", Post);
 	}
 }

@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Nest.JsonNetSerializer;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Tests.Reproduce
@@ -65,6 +65,7 @@ namespace Tests.Reproduce
 			};
 		}
 
+		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
 		private class Dates
 		{
 			public DateTime DateTimeLocal { get; set; }

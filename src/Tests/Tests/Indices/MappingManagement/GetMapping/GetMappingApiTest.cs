@@ -9,8 +9,8 @@ using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetMapping
@@ -37,8 +37,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override string UrlPath => "/project/_mapping?ignore_unavailable=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetMapping<Project>(f),
-			(client, f) => client.Indices.GetMappingAsync<Project>(f),
+			(client, f) => client.Indices.GetMapping(f),
+			(client, f) => client.Indices.GetMappingAsync(f),
 			(client, r) => client.Indices.GetMapping(r),
 			(client, r) => client.Indices.GetMappingAsync(r)
 		);
@@ -124,8 +124,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.GetMapping<Project>(f),
-			(client, f) => client.Indices.GetMappingAsync<Project>(f),
+			(client, f) => client.Indices.GetMapping(f),
+			(client, f) => client.Indices.GetMappingAsync(f),
 			(client, r) => client.Indices.GetMapping(r),
 			(client, r) => client.Indices.GetMappingAsync(r)
 		);

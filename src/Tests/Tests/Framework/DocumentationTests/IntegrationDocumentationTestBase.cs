@@ -3,7 +3,7 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
-namespace Tests.Framework
+namespace Tests.Framework.DocumentationTests
 {
 	public abstract class DocumentationTestBase
 	{

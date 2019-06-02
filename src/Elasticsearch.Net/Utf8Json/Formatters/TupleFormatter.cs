@@ -22,11 +22,14 @@
 // SOFTWARE.
 #endregion
 
+
+using Elasticsearch.Net.Utf8Json.Internal;
 #if NETSTANDARD
-
 using System;
+// These all proxy to TupleFormatterHelper
+// ReSharper disable StaticMemberInGenericType
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	// reduce static constructor generate size on generics(especially IL2CPP on Unity)
 	internal static class TupleFormatterHelper
@@ -172,7 +175,7 @@ namespace Elasticsearch.Net
 			};
 		}
 	}
-
+	
 	internal sealed class TupleFormatter<T1> : IJsonFormatter<Tuple<T1>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache1;

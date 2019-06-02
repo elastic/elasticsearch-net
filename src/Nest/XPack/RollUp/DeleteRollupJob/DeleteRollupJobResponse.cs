@@ -1,7 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class DeleteRollupJobResponse : AcknowledgedResponseBase
 	{

@@ -1,8 +1,9 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net
 {

@@ -9,6 +9,7 @@ namespace Nest
 		public IPercentilesMethod HDRHistogram(Func<HDRHistogramMethodDescriptor, IHDRHistogramMethod> hdrSelector = null) =>
 			hdrSelector.InvokeOrDefault(new HDRHistogramMethodDescriptor());
 
+	// ReSharper disable once InconsistentNaming
 		public IPercentilesMethod TDigest(Func<TDigestMethodDescriptor, ITDigestMethod> tdigestSelector = null) =>
 			tdigestSelector.InvokeOrDefault(new TDigestMethodDescriptor());
 	}

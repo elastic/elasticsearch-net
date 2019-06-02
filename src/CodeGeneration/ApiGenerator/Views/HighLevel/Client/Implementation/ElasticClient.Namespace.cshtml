@@ -13,12 +13,14 @@
 	var endpoints = model.Value;
 }
 @{ IncludeAsync("GeneratorNotice.cshtml", model); }
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix);
 
 // ReSharper disable once CheckNamespace
+// ReSharper disable RedundantTypeArgumentsOfMethod
 namespace Nest.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix)
 {
 	///<summary>

@@ -25,6 +25,7 @@ namespace Nest
 		/// recommended on Windows because of a bug in the SUN Java implementation.
 		/// </summary>
 		[EnumMember(Value = "niofs")]
+		// ReSharper disable once InconsistentNaming
 		NIO,
 
 		/// <summary>

@@ -1,6 +1,4 @@
-﻿using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	[MapsApi("indices.upgrade.json")]
 	public partial interface IUpgradeRequest  { }

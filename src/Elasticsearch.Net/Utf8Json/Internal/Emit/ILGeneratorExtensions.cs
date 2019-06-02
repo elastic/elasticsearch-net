@@ -27,7 +27,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 {
     internal struct ArgumentField
     {
@@ -366,7 +366,7 @@ namespace Elasticsearch.Net
 
         public static void EmitThrowNotimplemented(this ILGenerator il)
         {
-            il.Emit(OpCodes.Newobj, typeof(System.NotImplementedException).GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Length == 0));
+            il.Emit(OpCodes.Newobj, typeof(NotImplementedException).GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Length == 0));
             il.Emit(OpCodes.Throw);
         }
 

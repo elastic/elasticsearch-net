@@ -422,7 +422,7 @@ namespace Tests.Analysis.TokenFilters
 		public class KStemTests : TokenFilterAssertionBase<KStemTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.KStem(n);
-			public override ITokenFilter Initializer => new KStemTokenFilter { };
+			public override ITokenFilter Initializer => new KStemTokenFilter();
 			public override object Json => new { type = "kstem" };
 			public override string Name => "kstem";
 		}
@@ -982,7 +982,7 @@ namespace Tests.Analysis.TokenFilters
 		public class RemoveDuplicatesTests : TokenFilterAssertionBase<RemoveDuplicatesTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
-			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
+			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter();
 			public override object Json => new { type = "remove_duplicates" };
 			public override string Name => "dupes";
 		}

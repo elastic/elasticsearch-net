@@ -6,7 +6,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Nest.JsonNetSerializer;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

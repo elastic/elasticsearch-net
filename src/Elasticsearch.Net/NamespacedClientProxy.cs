@@ -1,5 +1,4 @@
 using System;
-using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +24,7 @@ namespace Elasticsearch.Net
 			where TRequestParams : class, IRequestParameters, new()
 			=> _client.RequestParams(requestParams, ContentType, ContentType);
 		
+		// ReSharper disable once UnassignedGetOnlyAutoProperty intended to be overridden
 		protected virtual string ContentType { get; }
 	}
 }

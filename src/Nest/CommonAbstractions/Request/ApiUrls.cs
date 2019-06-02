@@ -27,7 +27,7 @@ namespace Nest
 		/// <summary> Only intended to be created once per request and stored in a static </summary>
 		internal ApiUrls(string[] routes)
 		{
-			if (routes == null || routes.Length == 0) throw new ArgumentException(nameof(routes), "urls is null or empty");
+			if (routes == null || routes.Length == 0) throw new ArgumentException("urls is null or empty", nameof(routes));
 			if (routes.Length == 1 && !routes[0].Contains("{")) _fixedUrl = routes[0];
 			else
 			{

@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -25,7 +25,7 @@ namespace Nest
 
 	internal static class Extensions
 	{
-		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
+		private static readonly ConcurrentDictionary<string, object> EnumCache = new ConcurrentDictionary<string, object>();
 
 		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 
@@ -64,7 +64,7 @@ namespace Nest
 
 			var enumType = typeof(T);
 			var key = $"{enumType.Name}.{str}";
-			if (_enumCache.TryGetValue(key, out var value))
+			if (EnumCache.TryGetValue(key, out var value))
 				return (T)value;
 
 			foreach (var name in Enum.GetNames(enumType))
@@ -72,7 +72,7 @@ namespace Nest
 				if (name.Equals(str, comparison))
 				{
 					var v = (T)Enum.Parse(enumType, name, true);
-					_enumCache.TryAdd(key, v);
+					EnumCache.TryAdd(key, v);
 					return v;
 				}
 
@@ -81,7 +81,7 @@ namespace Nest
 				if (enumMemberAttribute?.Value.Equals(str, comparison) ?? false)
 				{
 					var v = (T)Enum.Parse(enumType, name);
-					_enumCache.TryAdd(key, v);
+					EnumCache.TryAdd(key, v);
 					return v;
 				}
 
@@ -89,7 +89,7 @@ namespace Nest
 				if (alternativeEnumMemberAttribute?.Value.Equals(str, comparison) ?? false)
 				{
 					var v = (T)Enum.Parse(enumType, name);
-					_enumCache.TryAdd(key, v);
+					EnumCache.TryAdd(key, v);
 					return v;
 				}
 			}
@@ -123,9 +123,9 @@ namespace Nest
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
 
-		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList<T>() ?? new List<T>();
+		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList() ?? new List<T>();
 
-		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList<T>();
+		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList();
 
 		internal static List<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
@@ -228,7 +228,6 @@ namespace Nest
 			try
 			{
 				var tasks = new List<Task>(maxDegreeOfParallelism);
-				var i = 0;
 				foreach (var item in lazyList)
 				{
 					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimiter, page++));
@@ -237,7 +236,6 @@ namespace Nest
 
 					var task = await Task.WhenAny(tasks).ConfigureAwait(false);
 					tasks.Remove(task);
-					i++;
 				}
 
 				await Task.WhenAll(tasks).ConfigureAwait(false);

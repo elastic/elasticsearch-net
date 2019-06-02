@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Framework.Integration;
 
 namespace Tests.XPack.Security.Privileges
 {

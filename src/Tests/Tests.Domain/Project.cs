@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Nest;
-using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Tests.Configuration;
 using Tests.Domain.Extensions;
@@ -51,7 +50,7 @@ namespace Tests.Domain
 			new Faker<Project>()
 				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
-				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
+				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs())
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
 				.RuleFor(p => p.Visibility, f => f.PickRandom<Visibility>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net
 {
@@ -70,10 +73,9 @@ namespace Elasticsearch.Net
 			: $"Type: {Type} Reason: \"{Reason}\" CausedBy: \"{CausedBy}\"";
 	}
 
-	internal class ErrorCauseFormatter<TErrorCause> : IJsonFormatter<TErrorCause>
-		where TErrorCause : ErrorCause, new()
+	internal static class ErrorCauseFormatterStatics
 	{
-		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		public static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
 			{ "bytes_limit", 0 },
 			{ "bytes_wanted", 1 },
@@ -97,13 +99,17 @@ namespace Elasticsearch.Net
 			{ "type", 19 }
 		};
 
-		private static readonly NullableStringIntFormatter ShardFormatter = new NullableStringIntFormatter();
+		public static readonly NullableStringIntFormatter ShardFormatter = new NullableStringIntFormatter();
 
-		private static readonly InterfaceReadOnlyCollectionSingleOrEnumerableFormatter<string> SingleOrEnumerableFormatter =
+		public static readonly InterfaceReadOnlyCollectionSingleOrEnumerableFormatter<string> SingleOrEnumerableFormatter =
 			new InterfaceReadOnlyCollectionSingleOrEnumerableFormatter<string>();
 
-		private static readonly ErrorCauseFormatter<ErrorCause> ErrorCausePropertyFormatter = new ErrorCauseFormatter<ErrorCause>();
+		public static readonly ErrorCauseFormatter<ErrorCause> ErrorCausePropertyFormatter = new ErrorCauseFormatter<ErrorCause>();
+	}
 
+	internal class ErrorCauseFormatter<TErrorCause> : IJsonFormatter<TErrorCause>
+		where TErrorCause : ErrorCause, new()
+	{
 		protected virtual bool Deserialize(ref JsonReader reader, ref ArraySegment<byte> property, TErrorCause value,
 			IJsonFormatterResolver formatterResolver) => false;
 
@@ -125,7 +131,7 @@ namespace Elasticsearch.Net
 					while (reader.ReadIsInObject(ref count))
 					{
 						var property = reader.ReadPropertyNameSegmentRaw();
-						if (Fields.TryGetValue(property, out var value))
+						if (ErrorCauseFormatterStatics.Fields.TryGetValue(property, out var value))
 						{
 							switch (value)
 							{
@@ -136,7 +142,7 @@ namespace Elasticsearch.Net
 									errorCause.BytesWanted = reader.ReadInt64();
 									break;
 								case 2:
-									errorCause.CausedBy = ErrorCausePropertyFormatter.Deserialize(ref reader, formatterResolver);
+									errorCause.CausedBy = ErrorCauseFormatterStatics.ErrorCausePropertyFormatter.Deserialize(ref reader, formatterResolver);
 									break;
 								case 3:
 									errorCause.Column = reader.ReadInt32();
@@ -170,7 +176,7 @@ namespace Elasticsearch.Net
 									errorCause.Reason = reader.ReadString();
 									break;
 								case 13:
-									errorCause.ResourceId = SingleOrEnumerableFormatter.Deserialize(ref reader, formatterResolver);
+									errorCause.ResourceId = ErrorCauseFormatterStatics.SingleOrEnumerableFormatter.Deserialize(ref reader, formatterResolver);
 									break;
 								case 14:
 									errorCause.ResourceType = reader.ReadString();
@@ -179,10 +185,10 @@ namespace Elasticsearch.Net
 									errorCause.Script = reader.ReadString();
 									break;
 								case 16:
-									errorCause.ScriptStack = SingleOrEnumerableFormatter.Deserialize(ref reader, formatterResolver);
+									errorCause.ScriptStack = ErrorCauseFormatterStatics.SingleOrEnumerableFormatter.Deserialize(ref reader, formatterResolver);
 									break;
 								case 17:
-									errorCause.Shard = ShardFormatter.Deserialize(ref reader, formatterResolver);
+									errorCause.Shard = ErrorCauseFormatterStatics.ShardFormatter.Deserialize(ref reader, formatterResolver);
 									break;
 								case 18:
 									errorCause.StackTrace = reader.ReadString();
@@ -240,7 +246,7 @@ namespace Elasticsearch.Net
 					writer.WriteValueSeparator();
 
 				writer.WritePropertyName("caused_by");
-				ErrorCausePropertyFormatter.Serialize(ref writer, value.CausedBy, formatterResolver);
+				ErrorCauseFormatterStatics.ErrorCausePropertyFormatter.Serialize(ref writer, value.CausedBy, formatterResolver);
 				count++;
 			}
 
@@ -351,7 +357,7 @@ namespace Elasticsearch.Net
 					writer.WriteValueSeparator();
 
 				writer.WritePropertyName("resource.id");
-				SingleOrEnumerableFormatter.Serialize(ref writer, value.ResourceId, formatterResolver);
+				ErrorCauseFormatterStatics.SingleOrEnumerableFormatter.Serialize(ref writer, value.ResourceId, formatterResolver);
 				count++;
 			}
 
@@ -381,7 +387,7 @@ namespace Elasticsearch.Net
 					writer.WriteValueSeparator();
 
 				writer.WritePropertyName("script_stack");
-				SingleOrEnumerableFormatter.Serialize(ref writer, value.ScriptStack, formatterResolver);
+				ErrorCauseFormatterStatics.SingleOrEnumerableFormatter.Serialize(ref writer, value.ScriptStack, formatterResolver);
 				count++;
 			}
 

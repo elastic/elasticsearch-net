@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -20,7 +20,7 @@ namespace Nest
 
 	public partial class MultiSearchTemplateDescriptor
 	{
-		internal IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();
+		private IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();
 
 		IDictionary<string, ISearchTemplateRequest> IMultiSearchTemplateRequest.Operations
 		{

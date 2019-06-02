@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
-	public static class Cluster
+	public static class VirtualClusterWith
 	{
 		public static VirtualCluster Nodes(int numberOfNodes, int startFrom = 9200) =>
 			new VirtualCluster(

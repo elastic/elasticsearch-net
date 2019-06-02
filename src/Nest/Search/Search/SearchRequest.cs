@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -78,6 +79,7 @@ namespace Nest
 
 	[ReadAs(typeof(SearchRequest<>))]
 	[InterfaceDataContract]
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface ISearchRequest<TInferDocument> : ISearchRequest { }
 
 	[DataContract]
@@ -117,7 +119,7 @@ namespace Nest
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
-		Type ICovariantSearchRequest.ClrType { get; }
+		Type ICovariantSearchRequest.ClrType => null;
 
 		protected sealed override void Initialize() => TypedKeys = true;
 	}

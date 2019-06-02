@@ -6,8 +6,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Multiple.Bulk
 {
@@ -17,7 +17,7 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override bool ExpectIsValid => false;
 
-		protected override object ExpectJson { get; } = new object[]
+		protected override object ExpectJson { get; } = new[]
 		{
 			new Dictionary<string, object> { { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,

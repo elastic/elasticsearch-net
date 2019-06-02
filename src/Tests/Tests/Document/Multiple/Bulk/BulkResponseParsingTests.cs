@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
 namespace Tests.Document.Multiple.Bulk
 {

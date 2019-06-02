@@ -7,8 +7,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiGet
@@ -16,7 +16,7 @@ namespace Tests.Document.Multiple.MultiGet
 	public class MultiGetSimplifiedApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
-		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
+		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => d.Id).Take(10);
 
 		public MultiGetSimplifiedApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -67,7 +67,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 	public class MultiGetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
-		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
+		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => d.Id).Take(10);
 
 		public MultiGetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

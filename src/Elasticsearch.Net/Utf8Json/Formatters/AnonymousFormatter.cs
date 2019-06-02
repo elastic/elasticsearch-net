@@ -24,29 +24,29 @@
 
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
     internal sealed class AnonymousFormatter<T> : IJsonFormatter<T>
     {
-        readonly JsonSerializeAction<T> serialize;
-        readonly JsonDeserializeFunc<T> deserialize;
+        readonly JsonSerializeAction<T> _serialize;
+        readonly JsonDeserializeFunc<T> _deserialize;
 
         public AnonymousFormatter(JsonSerializeAction<T> serialize, JsonDeserializeFunc<T> deserialize)
         {
-            this.serialize = serialize;
-            this.deserialize = deserialize;
+            this._serialize = serialize;
+            this._deserialize = deserialize;
         }
 
         public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
         {
-            if (serialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Serialize.");
-            serialize(ref writer, value, formatterResolver);
+            if (this._serialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Serialize.");
+            this._serialize(ref writer, value, formatterResolver);
         }
 
         public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
-            if (deserialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Deserialize.");
-            return deserialize(ref reader, formatterResolver);
+            if (this._deserialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Deserialize.");
+            return this._deserialize(ref reader, formatterResolver);
         }
     }
 }

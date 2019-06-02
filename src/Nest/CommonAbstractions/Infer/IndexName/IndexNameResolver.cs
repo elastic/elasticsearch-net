@@ -38,6 +38,7 @@ namespace Nest
 
 		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
 
+		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
 		private static void ValidateIndexName(string indexName)
 		{
 			if (string.IsNullOrWhiteSpace(indexName))

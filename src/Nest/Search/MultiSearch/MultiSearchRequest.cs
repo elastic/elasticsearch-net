@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -21,7 +20,7 @@ namespace Nest
 
 	public partial class MultiSearchDescriptor
 	{
-		internal IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
+		private IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
 
 		IDictionary<string, ISearchRequest> IMultiSearchRequest.Operations
 		{

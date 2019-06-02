@@ -7,7 +7,6 @@ using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;
 using Tests.Core.Xunit;
-using Tests.Framework;
 
 namespace Tests.CodeStandards
 {

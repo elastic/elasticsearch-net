@@ -1,9 +1,9 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.PrefixLevel.Prefix
+namespace Tests.QueryDsl.TermLevel.Prefix
 {
 	public class PrefixQueryUsageTests : QueryDslUsageTestsBase
 	{

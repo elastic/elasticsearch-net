@@ -23,11 +23,11 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal static class EnumResolver
 	{

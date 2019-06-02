@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class X509CertificateExtensions
 	{

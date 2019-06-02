@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -11,6 +11,7 @@ namespace Elasticsearch.Net
 		void Write(Stream writableStream, IConnectionConfigurationValues settings);
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public interface IPostData<out T> : IPostData { }
 
 	public enum PostType
@@ -82,6 +83,7 @@ namespace Elasticsearch.Net
 			Type = PostType.EnumerableOfObject;
 		}
 
+		// TODO investigate if SerializableData negates the need for this
 		private PostData(T item)
 		{
 			var boxedType = item.GetType();
@@ -116,7 +118,7 @@ namespace Elasticsearch.Net
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null;
-			Stream stream = null;
+			Stream stream;
 			switch (Type)
 			{
 				case PostType.ByteArray:
@@ -168,7 +170,7 @@ namespace Elasticsearch.Net
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null;
-			Stream stream = null;
+			Stream stream;
 			switch (Type)
 			{
 				case PostType.ByteArray:

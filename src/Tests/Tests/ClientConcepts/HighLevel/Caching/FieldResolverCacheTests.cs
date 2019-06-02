@@ -9,6 +9,7 @@ using Nest;
 using Tests.Domain;
 using Xunit.Abstractions;
 using static Nest.Infer;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {

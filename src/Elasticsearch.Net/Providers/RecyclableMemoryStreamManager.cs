@@ -46,9 +46,9 @@ namespace Elasticsearch.Net
 		/// pools[1] = 2x largeBufferMultiple buffers
 		/// etc., up to maximumBufferSize
 		/// </summary>
-		private readonly ConcurrentStack<byte[]>[] largePools;
+		private readonly ConcurrentStack<byte[]>[] _largePools;
 
-		private readonly ConcurrentStack<byte[]> smallPool;
+		private readonly ConcurrentStack<byte[]> _smallPool;
 
 		private long _smallPoolFreeSize;
 		private long _smallPoolInUseSize;
@@ -90,16 +90,16 @@ namespace Elasticsearch.Net
 				throw new ArgumentException("maximumBufferSize is not a multiple of largeBufferMultiple",
 					nameof(maximumBufferSize));
 
-			smallPool = new ConcurrentStack<byte[]>();
+			_smallPool = new ConcurrentStack<byte[]>();
 			var numLargePools = maximumBufferSize / largeBufferMultiple;
 
 			// +1 to store size of bytes in use that are too large to be pooled
 			_largeBufferInUseSize = new long[numLargePools + 1];
 			_largeBufferFreeSize = new long[numLargePools];
 
-			largePools = new ConcurrentStack<byte[]>[numLargePools];
+			_largePools = new ConcurrentStack<byte[]>[numLargePools];
 
-			for (var i = 0; i < largePools.Length; ++i) largePools[i] = new ConcurrentStack<byte[]>();
+			for (var i = 0; i < _largePools.Length; ++i) _largePools[i] = new ConcurrentStack<byte[]>();
 		}
 
 		/// <summary>
@@ -130,7 +130,7 @@ namespace Elasticsearch.Net
 			get
 			{
 				long free = 0;
-				foreach (var pool in largePools) free += pool.Count;
+				foreach (var pool in _largePools) free += pool.Count;
 				return free;
 			}
 		}
@@ -202,7 +202,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// How many blocks are in the small pool
 		/// </summary>
-		public long SmallBlocksFree => smallPool.Count;
+		public long SmallBlocksFree => _smallPool.Count;
 
 		/// <summary>
 		/// Number of bytes in small pool not currently in use
@@ -220,7 +220,7 @@ namespace Elasticsearch.Net
 		/// <returns>A byte[] array</returns>
 		internal byte[] GetBlock()
 		{
-			if (!smallPool.TryPop(out var block))
+			if (!_smallPool.TryPop(out var block))
 				block = new byte[BlockSize];
 			else
 				Interlocked.Add(ref _smallPoolFreeSize, -BlockSize);
@@ -243,9 +243,9 @@ namespace Elasticsearch.Net
 			var poolIndex = requiredSize / LargeBufferMultiple - 1;
 
 			byte[] buffer;
-			if (poolIndex < largePools.Length)
+			if (poolIndex < _largePools.Length)
 			{
-				if (!largePools[poolIndex].TryPop(out buffer))
+				if (!_largePools[poolIndex].TryPop(out buffer))
 					buffer = new byte[requiredSize];
 				else
 					Interlocked.Add(ref _largeBufferFreeSize[poolIndex], -buffer.Length);
@@ -290,12 +290,12 @@ namespace Elasticsearch.Net
 
 			var poolIndex = buffer.Length / LargeBufferMultiple - 1;
 
-			if (poolIndex < largePools.Length)
+			if (poolIndex < _largePools.Length)
 			{
-				if ((largePools[poolIndex].Count + 1) * buffer.Length <= MaximumFreeLargePoolBytes ||
+				if ((_largePools[poolIndex].Count + 1) * buffer.Length <= MaximumFreeLargePoolBytes ||
 					MaximumFreeLargePoolBytes == 0)
 				{
-					largePools[poolIndex].Push(buffer);
+					_largePools[poolIndex].Push(buffer);
 					Interlocked.Add(ref _largeBufferFreeSize[poolIndex], buffer.Length);
 				}
 			}
@@ -330,7 +330,7 @@ namespace Elasticsearch.Net
 				if (MaximumFreeSmallPoolBytes == 0 || SmallPoolFreeSize < MaximumFreeSmallPoolBytes)
 				{
 					Interlocked.Add(ref _smallPoolFreeSize, BlockSize);
-					smallPool.Push(block);
+					_smallPool.Push(block);
 				}
 				else
 					break;

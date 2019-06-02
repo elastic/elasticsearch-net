@@ -14,12 +14,14 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Specification.XPackApi;
 
 // ReSharper disable once CheckNamespace
+// ReSharper disable RedundantTypeArgumentsOfMethod
 namespace Nest.Specification.XPackApi
 {
 	///<summary>

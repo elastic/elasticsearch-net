@@ -17,16 +17,13 @@ namespace Elasticsearch.Net
 {
 	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>, IConvertible
 	{
-		internal readonly object value;
+		private readonly object _value;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ElasticsearchDynamicValue" /> class.
 		/// </summary>
 		/// <param name="value">The value to store in the instance</param>
-		public ElasticsearchDynamicValue(object value)
-		{
-			this.value = value;
-		}
+		public ElasticsearchDynamicValue(object value) => _value = value;
 
 		/// <summary>
 		/// Gets a value indicating whether this instance has value.
@@ -35,7 +32,7 @@ namespace Elasticsearch.Net
 		/// <remarks><see langword="null" /> is considered as not being a value.</remarks>
 		public bool HasValue
 		{
-			get { return value != null; }
+			get { return _value != null; }
 		}
 
 		public ElasticsearchDynamicValue this[string name]
@@ -69,7 +66,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public object Value
 		{
-			get { return value; }
+			get { return _value; }
 		}
 
 		/// <summary>
@@ -81,9 +78,9 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public TypeCode GetTypeCode()
 		{
-			if (value == null) return TypeCode.Empty;
+			if (_value == null) return TypeCode.Empty;
 
-			return Type.GetTypeCode(value.GetType());
+			return Type.GetTypeCode(_value.GetType());
 		}
 
 		/// <summary>
@@ -99,7 +96,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public bool ToBoolean(IFormatProvider provider)
 		{
-			return Convert.ToBoolean(value, provider);
+			return Convert.ToBoolean(_value, provider);
 		}
 
 		/// <summary>
@@ -115,7 +112,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public byte ToByte(IFormatProvider provider)
 		{
-			return Convert.ToByte(value, provider);
+			return Convert.ToByte(_value, provider);
 		}
 
 		/// <summary>
@@ -131,7 +128,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public char ToChar(IFormatProvider provider)
 		{
-			return Convert.ToChar(value, provider);
+			return Convert.ToChar(_value, provider);
 		}
 
 		/// <summary>
@@ -148,7 +145,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public DateTime ToDateTime(IFormatProvider provider)
 		{
-			return Convert.ToDateTime(value, provider);
+			return Convert.ToDateTime(_value, provider);
 		}
 
 		/// <summary>
@@ -165,7 +162,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public decimal ToDecimal(IFormatProvider provider)
 		{
-			return Convert.ToDecimal(value, provider);
+			return Convert.ToDecimal(_value, provider);
 		}
 
 		/// <summary>
@@ -182,7 +179,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public double ToDouble(IFormatProvider provider)
 		{
-			return Convert.ToDouble(value, provider);
+			return Convert.ToDouble(_value, provider);
 		}
 
 		/// <summary>
@@ -198,7 +195,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public short ToInt16(IFormatProvider provider)
 		{
-			return Convert.ToInt16(value, provider);
+			return Convert.ToInt16(_value, provider);
 		}
 
 		/// <summary>
@@ -214,7 +211,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public int ToInt32(IFormatProvider provider)
 		{
-			return Convert.ToInt32(value, provider);
+			return Convert.ToInt32(_value, provider);
 		}
 
 		/// <summary>
@@ -230,7 +227,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public long ToInt64(IFormatProvider provider)
 		{
-			return Convert.ToInt64(value, provider);
+			return Convert.ToInt64(_value, provider);
 		}
 
 		/// <summary>
@@ -247,7 +244,7 @@ namespace Elasticsearch.Net
 		[CLSCompliant(false)]
 		public sbyte ToSByte(IFormatProvider provider)
 		{
-			return Convert.ToSByte(value, provider);
+			return Convert.ToSByte(_value, provider);
 		}
 
 		/// <summary>
@@ -264,7 +261,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public float ToSingle(IFormatProvider provider)
 		{
-			return Convert.ToSingle(value, provider);
+			return Convert.ToSingle(_value, provider);
 		}
 
 		/// <summary>
@@ -281,7 +278,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public string ToString(IFormatProvider provider)
 		{
-			return Convert.ToString(value, provider);
+			return Convert.ToString(_value, provider);
 		}
 
 		/// <summary>
@@ -300,7 +297,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public object ToType(Type conversionType, IFormatProvider provider)
 		{
-			return Convert.ChangeType(value, conversionType, provider);
+			return Convert.ChangeType(_value, conversionType, provider);
 		}
 
 		/// <summary>
@@ -317,7 +314,7 @@ namespace Elasticsearch.Net
 		[CLSCompliant(false)]
 		public ushort ToUInt16(IFormatProvider provider)
 		{
-			return Convert.ToUInt16(value, provider);
+			return Convert.ToUInt16(_value, provider);
 		}
 
 		/// <summary>
@@ -334,7 +331,7 @@ namespace Elasticsearch.Net
 		[CLSCompliant(false)]
 		public uint ToUInt32(IFormatProvider provider)
 		{
-			return Convert.ToUInt32(value, provider);
+			return Convert.ToUInt32(_value, provider);
 		}
 
 		/// <summary>
@@ -351,7 +348,7 @@ namespace Elasticsearch.Net
 		[CLSCompliant(false)]
 		public ulong ToUInt64(IFormatProvider provider)
 		{
-			return Convert.ToUInt64(value, provider);
+			return Convert.ToUInt64(_value, provider);
 		}
 
 
@@ -369,7 +366,7 @@ namespace Elasticsearch.Net
 				return false;
 			}
 
-			return ReferenceEquals(this, compareValue) || Equals(compareValue.value, value);
+			return ReferenceEquals(this, compareValue) || Equals(compareValue._value, _value);
 		}
 
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
@@ -433,11 +430,11 @@ namespace Elasticsearch.Net
 			{
 				try
 				{
-					return (T)value;
+					return (T)_value;
 				}
 				catch
 				{
-					var typeName = value.GetType().Name;
+					var typeName = _value.GetType().Name;
 					var message = string.Format("Cannot convert value of type '{0}' to type '{1}'",
 						typeName, typeof(T).Name);
 
@@ -460,15 +457,15 @@ namespace Elasticsearch.Net
 			{
 				try
 				{
-					if (value.GetType().IsAssignableFrom(typeof(T)))
+					if (_value.GetType().IsAssignableFrom(typeof(T)))
 					{
-						return (T)value;
+						return (T)_value;
 					}
 
-					var TType = typeof(T);
+					var type = typeof(T);
 
-					var stringValue = value as string;
-					if (TType == typeof(DateTime))
+					var stringValue = _value as string;
+					if (type == typeof(DateTime))
 					{
 						DateTime result;
 
@@ -479,12 +476,12 @@ namespace Elasticsearch.Net
 					}
 					else if (stringValue != null)
 					{
-						var converter = TypeDescriptor.GetConverter(TType);
+						var converter = TypeDescriptor.GetConverter(type);
 						if (converter.IsValid(stringValue)) return (T)converter.ConvertFromInvariantString(stringValue);
 					}
-					else if (TType == typeof(string))
+					else if (type == typeof(string))
 					{
-						return (T)Convert.ChangeType(value, TypeCode.String, CultureInfo.InvariantCulture);
+						return (T)Convert.ChangeType(_value, TypeCode.String, CultureInfo.InvariantCulture);
 				}
 				}
 				catch
@@ -498,12 +495,12 @@ namespace Elasticsearch.Net
 
 		public static bool operator ==(ElasticsearchDynamicValue dynamicValue, object compareValue)
 		{
-			if (dynamicValue.value == null && compareValue == null)
+			if (dynamicValue._value == null && compareValue == null)
 			{
 				return true;
 			}
 
-			return dynamicValue.value != null && dynamicValue.value.Equals(compareValue);
+			return dynamicValue._value != null && dynamicValue._value.Equals(compareValue);
 		}
 
 		public static bool operator !=(ElasticsearchDynamicValue dynamicValue, object compareValue)
@@ -527,8 +524,8 @@ namespace Elasticsearch.Net
 			}
 
 			if (ReferenceEquals(this, compareValue)
-				|| ReferenceEquals(value, compareValue)
-				|| Equals(value, compareValue)
+				|| ReferenceEquals(_value, compareValue)
+				|| Equals(_value, compareValue)
 			)
 			{
 				return true;
@@ -543,7 +540,7 @@ namespace Elasticsearch.Net
 		/// <returns>A hash code for the current instance.</returns>
 		public override int GetHashCode()
 		{
-			return value != null ? value.GetHashCode() : 0;
+			return _value != null ? _value.GetHashCode() : 0;
 		}
 
 		/// <summary>
@@ -607,7 +604,7 @@ namespace Elasticsearch.Net
 		{
 			result = null;
 
-			if (value == null)
+			if (_value == null)
 			{
 				return true;
 			}
@@ -615,14 +612,14 @@ namespace Elasticsearch.Net
 			var binderType = binder.Type;
 			if (binderType == typeof(string))
 			{
-				result = Convert.ToString(value);
+				result = Convert.ToString(_value);
 				return true;
 			}
 
 			if (binderType == typeof(Guid) || binderType == typeof(Guid?))
 			{
 				Guid guid;
-				if (Guid.TryParse(Convert.ToString(value), out guid))
+				if (Guid.TryParse(Convert.ToString(_value), out guid))
 				{
 					result = guid;
 					return true;
@@ -631,7 +628,7 @@ namespace Elasticsearch.Net
 			else if (binderType == typeof(TimeSpan) || binderType == typeof(TimeSpan?))
 			{
 				TimeSpan timespan;
-				if (TimeSpan.TryParse(Convert.ToString(value), out timespan))
+				if (TimeSpan.TryParse(Convert.ToString(_value), out timespan))
 				{
 					result = timespan;
 					return true;
@@ -646,16 +643,16 @@ namespace Elasticsearch.Net
 
 				if (typeCode == TypeCode.Object)
 				{
-					if (binderType.IsAssignableFrom(value.GetType()))
+					if (binderType.IsAssignableFrom(_value.GetType()))
 					{
-						result = value;
+						result = _value;
 						return true;
 					}
 					else
 						return false;
 				}
 
-				result = Convert.ChangeType(value, typeCode);
+				result = Convert.ChangeType(_value, typeCode);
 				return true;
 			}
 			return base.TryConvert(binder, out result);
@@ -663,16 +660,16 @@ namespace Elasticsearch.Net
 
 		public override string ToString()
 		{
-			return value == null ? base.ToString() : Convert.ToString(value);
+			return _value == null ? base.ToString() : Convert.ToString(_value);
 		}
 
 		public static implicit operator bool(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (!dynamicValue.HasValue) return false;
 
-			if (dynamicValue.value.GetType().IsValueType) return Convert.ToBoolean(dynamicValue.value);
+			if (dynamicValue._value.GetType().IsValueType) return Convert.ToBoolean(dynamicValue._value);
 
-			if (bool.TryParse(dynamicValue.ToString(), out var result)) return result;
+			if (bool.TryParse(dynamicValue.ToString(CultureInfo.InvariantCulture), out var result)) return result;
 
 			return true;
 		}
@@ -680,73 +677,73 @@ namespace Elasticsearch.Net
 		public static implicit operator string(ElasticsearchDynamicValue dynamicValue)
 		{
 			return dynamicValue.HasValue
-				? Convert.ToString(dynamicValue.value)
+				? Convert.ToString(dynamicValue._value)
 				: null;
 		}
 
 		public static implicit operator int(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType) return Convert.ToInt32(dynamicValue.value);
+			if (dynamicValue._value.GetType().IsValueType) return Convert.ToInt32(dynamicValue._value);
 
-			return int.Parse(dynamicValue.ToString());
+			return int.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator Guid(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value is Guid)
+			if (dynamicValue._value is Guid)
 			{
-				return (Guid)dynamicValue.value;
+				return (Guid)dynamicValue._value;
 			}
 
-			return Guid.Parse(dynamicValue.ToString());
+			return Guid.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator DateTime(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value is DateTime)
+			if (dynamicValue._value is DateTime)
 			{
-				return (DateTime)dynamicValue.value;
+				return (DateTime)dynamicValue._value;
 			}
 
-			return DateTime.Parse(dynamicValue.ToString());
+			return DateTime.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator TimeSpan(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value is TimeSpan)
+			if (dynamicValue._value is TimeSpan)
 			{
-				return (TimeSpan)dynamicValue.value;
+				return (TimeSpan)dynamicValue._value;
 			}
 
-			return TimeSpan.Parse(dynamicValue.ToString());
+			return TimeSpan.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator long(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType) return Convert.ToInt64(dynamicValue.value);
+			if (dynamicValue._value.GetType().IsValueType) return Convert.ToInt64(dynamicValue._value);
 
-			return long.Parse(dynamicValue.ToString());
+			return long.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator float(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType) return Convert.ToSingle(dynamicValue.value);
+			if (dynamicValue._value.GetType().IsValueType) return Convert.ToSingle(dynamicValue._value);
 
-			return float.Parse(dynamicValue.ToString());
+			return float.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator decimal(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType) return Convert.ToDecimal(dynamicValue.value);
+			if (dynamicValue._value.GetType().IsValueType) return Convert.ToDecimal(dynamicValue._value);
 
-			return decimal.Parse(dynamicValue.ToString());
+			return decimal.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public static implicit operator double(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType) return Convert.ToDouble(dynamicValue.value);
+			if (dynamicValue._value.GetType().IsValueType) return Convert.ToDouble(dynamicValue._value);
 
-			return double.Parse(dynamicValue.ToString());
+			return double.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 	}
 }

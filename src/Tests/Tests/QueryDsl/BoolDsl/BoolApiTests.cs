@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using System.Runtime.Serialization;
-
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using static Nest.Infer;

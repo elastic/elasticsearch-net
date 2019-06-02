@@ -1,7 +1,7 @@
 using System;
 using Nest;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering.Rules
 {
 	public interface ISniffRule : IRule
 	{

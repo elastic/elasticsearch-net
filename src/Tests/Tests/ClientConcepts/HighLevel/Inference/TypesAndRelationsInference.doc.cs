@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Domain;
 using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 using Xunit;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;

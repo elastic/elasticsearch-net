@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 
-namespace Tests.Ingest.Processor
+namespace Tests.Ingest.GrokProcessorPatterns
 {
 	public class GrokProcessorPatternsUnitTests
 	{

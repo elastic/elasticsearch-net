@@ -1,7 +1,10 @@
 using System;
 using System.Runtime.CompilerServices;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class ArraySegmentBytesExtensions
 	{
@@ -14,7 +17,7 @@ namespace Elasticsearch.Net
 			var i = 0;
 			while (i < arraySegment.Count)
 			{
-				if (arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
+				if (arraySegment.Array != null && arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
 					return true;
 
 				i++;
@@ -34,7 +37,7 @@ namespace Elasticsearch.Net
 
 			for (var i = 0; i < bytes.Length; i++)
 			{
-				if (bytes[i] != arraySegment.Array[arraySegment.Offset + i])
+				if (arraySegment.Array != null && bytes[i] != arraySegment.Array[arraySegment.Offset + i])
 					return false;
 			}
 
@@ -65,8 +68,8 @@ namespace Elasticsearch.Net
 			var i = 0;
 			while (i < segment.Count)
 			{
-				if (segment.Array[segment.Offset + i] == DateMathSeparator &&
-					i + 1 < segment.Count && segment.Array[segment.Offset + i + 1] == DateMathSeparator)
+				if (segment.Array != null && (segment.Array[segment.Offset + i] == DateMathSeparator &&
+					i + 1 < segment.Count && segment.Array[segment.Offset + i + 1] == DateMathSeparator))
 					return true;
 
 				i++;
@@ -77,6 +80,8 @@ namespace Elasticsearch.Net
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static string Utf8String(this ref ArraySegment<byte> segment) =>
+			// segment.Array is never null
+			// ReSharper disable once AssignNullToNotNullAttribute
 			StringEncoding.UTF8.GetString(segment.Array, segment.Offset, segment.Count);
 	}
 }

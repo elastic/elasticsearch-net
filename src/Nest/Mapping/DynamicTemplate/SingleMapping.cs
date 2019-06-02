@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class SingleMappingSelector<T> : SelectorBase<IProperty>, IPropertiesDescriptor<T, IProperty> where T : class
+	public class SingleMappingSelector<T> : SelectorBase, IPropertiesDescriptor<T, IProperty> where T : class
 	{
 		public IProperty Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector) =>
 			selector?.Invoke(new BinaryPropertyDescriptor<T>());

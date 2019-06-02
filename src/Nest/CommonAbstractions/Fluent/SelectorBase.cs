@@ -4,7 +4,7 @@ namespace Nest
 {
 	public interface ISelector { }
 
-	public abstract class SelectorBase<TInterface> : ISelector where TInterface : class
+	public abstract class SelectorBase : ISelector
 	{
 		/// <summary>
 		/// Hides the <see cref="Equals" /> method.

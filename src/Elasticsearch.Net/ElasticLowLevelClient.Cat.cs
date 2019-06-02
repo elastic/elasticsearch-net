@@ -14,6 +14,7 @@
 // 		Windows 	:	build.bat codegen
 //
 // -----------------------------------------------
+// ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -24,7 +25,10 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using static Elasticsearch.Net.HttpMethod;
 
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
 // ReSharper disable once CheckNamespace
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable RedundantExtendsListEntry
 namespace Elasticsearch.Net.Specification.CatApi
 {
 	///<summary>
@@ -72,15 +76,15 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public Task<TResponse> AllocationAsync<TResponse>(CatAllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/allocation", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/allocation/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
-		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information</param>
+		///<param name = "nodeId">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Allocation<TResponse>(string node_id, CatAllocationRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/allocation/{node_id:node_id}"), null, RequestParams(requestParameters));
+		public TResponse Allocation<TResponse>(string nodeId, CatAllocationRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/allocation/{nodeId:nodeId}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/allocation/{node_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
-		///<param name = "node_id">A comma-separated list of node IDs or names to limit the returned information</param>
+		///<param name = "nodeId">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> AllocationAsync<TResponse>(string node_id, CatAllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/allocation/{node_id:node_id}"), ctx, null, RequestParams(requestParameters));
+		public Task<TResponse> AllocationAsync<TResponse>(string nodeId, CatAllocationRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/allocation/{nodeId:nodeId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Count<TResponse>(CatCountRequestParameters requestParameters = null)
@@ -306,14 +310,14 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public Task<TResponse> ThreadPoolAsync<TResponse>(CatThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/thread_pool", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/thread_pool/{thread_pool_patterns} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
-		///<param name = "thread_pool_patterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
+		///<param name = "threadPoolPatterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ThreadPool<TResponse>(string thread_pool_patterns, CatThreadPoolRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/thread_pool/{thread_pool_patterns:thread_pool_patterns}"), null, RequestParams(requestParameters));
+		public TResponse ThreadPool<TResponse>(string threadPoolPatterns, CatThreadPoolRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/thread_pool/{threadPoolPatterns:threadPoolPatterns}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/thread_pool/{thread_pool_patterns} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
-		///<param name = "thread_pool_patterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
+		///<param name = "threadPoolPatterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> ThreadPoolAsync<TResponse>(string thread_pool_patterns, CatThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/thread_pool/{thread_pool_patterns:thread_pool_patterns}"), ctx, null, RequestParams(requestParameters));
+		public Task<TResponse> ThreadPoolAsync<TResponse>(string threadPoolPatterns, CatThreadPoolRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/thread_pool/{threadPoolPatterns:threadPoolPatterns}"), ctx, null, RequestParams(requestParameters));
 	}
 }

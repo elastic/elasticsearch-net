@@ -3,8 +3,6 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ApiGenerator.Domain.Specification;
-using CsQuery.ExtensionMethods.Internal;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace ApiGenerator.Domain
 {
@@ -38,11 +36,13 @@ namespace ApiGenerator.Domain
 					if (
 						name.ToLowerInvariant().Contains("metric")
 						 ||(name.ToLowerInvariant() == "status")
-					) 
+					)
+					{
 						if (methodName.StartsWith(@namespace))
 							return methodName + name;
 						else
 							return @namespace + methodName + name;
+					}
 
 					return name;
 				}

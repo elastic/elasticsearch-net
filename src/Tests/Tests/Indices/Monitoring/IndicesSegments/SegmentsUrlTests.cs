@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using static Nest.Indices;
 
 namespace Tests.Indices.Monitoring.IndicesSegments

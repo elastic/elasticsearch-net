@@ -9,8 +9,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Search.MultiSearch
@@ -100,7 +100,7 @@ namespace Tests.Search.MultiSearch
 						Query = new QueryContainer(new PercolateQuery
 						{
 							Document = Project.Instance,
-							Field = Infer.Field<ProjectPercolation>(f => f.Query)
+							Field = Field<ProjectPercolation>(f => f.Query)
 						})
 					}
 				},
@@ -113,7 +113,7 @@ namespace Tests.Search.MultiSearch
 							Id = Project.First.Name,
 							Version = 1,
 							Routing = Project.First.Name,
-							Field = Infer.Field<ProjectPercolation>(f => f.Query)
+							Field = Field<ProjectPercolation>(f => f.Query)
 						})
 					}
 				},

@@ -9,7 +9,7 @@ namespace Tests.Domain
 {
 	public class Shape
 	{
-		private static int _idState = 0;
+		private static int _idState;
 		public ICircleGeoShape Circle { get; set; }
 		public IEnvelopeGeoShape Envelope { get; set; }
 

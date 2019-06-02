@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
 namespace Tests.Document.Single.Source
 {

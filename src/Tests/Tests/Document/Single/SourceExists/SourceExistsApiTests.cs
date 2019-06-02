@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.SourceExists
 {
@@ -32,8 +32,8 @@ namespace Tests.Document.Single.SourceExists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SourceExists<Project>(CallIsolatedValue, f),
-			(client, f) => client.SourceExistsAsync<Project>(CallIsolatedValue, f),
+			(client, f) => client.SourceExists(CallIsolatedValue, f),
+			(client, f) => client.SourceExistsAsync(CallIsolatedValue, f),
 			(client, r) => client.SourceExists(r),
 			(client, r) => client.SourceExistsAsync(r)
 		);
@@ -76,8 +76,8 @@ namespace Tests.Document.Single.SourceExists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SourceExists<Project>(Doc(CallIsolatedValue), f),
-			(client, f) => client.SourceExistsAsync<Project>(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExists(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExistsAsync(Doc(CallIsolatedValue), f),
 			(client, r) => client.SourceExists(r),
 			(client, r) => client.SourceExistsAsync(r)
 		);
@@ -112,8 +112,8 @@ namespace Tests.Document.Single.SourceExists
 		private static DocumentPath<Project> Doc(string id) => new DocumentPath<Project>(id).Index(IndexWithNoSource);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SourceExists<Project>(Doc(CallIsolatedValue), f),
-			(client, f) => client.SourceExistsAsync<Project>(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExists(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExistsAsync(Doc(CallIsolatedValue), f),
 			(client, r) => client.SourceExists(r),
 			(client, r) => client.SourceExistsAsync(r)
 		);

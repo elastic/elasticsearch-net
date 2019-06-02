@@ -40,11 +40,6 @@ namespace Nest
 
 	public partial class SearchTemplateDescriptor<TDocument> where TDocument : class
 	{
-		/// <summary>
-		/// Whether conditionless queries are allowed or not
-		/// </summary>
-		internal bool _Strict { get; set; }
-
 		Type ICovariantSearchRequest.ClrType => typeof(TDocument);
 
 		string ISearchTemplateRequest.Id { get; set; }

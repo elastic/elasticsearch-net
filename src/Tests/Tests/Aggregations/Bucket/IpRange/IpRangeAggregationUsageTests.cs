@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
-using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.IpRange

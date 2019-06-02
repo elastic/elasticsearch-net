@@ -5,10 +5,9 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class CoordinatedIntegrationTestBase<TCluster>
 		: IClusterFixture<TCluster>, IClassFixture<EndpointUsage>

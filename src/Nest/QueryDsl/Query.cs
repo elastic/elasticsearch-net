@@ -48,10 +48,10 @@ namespace Nest
 			new QueryContainerDescriptor<T>().GeoShape(selector);
 
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
-			new QueryContainerDescriptor<T>().HasChild<TChild>(selector);
+			new QueryContainerDescriptor<T>().HasChild(selector);
 
 		public static QueryContainer HasParent<TParent>(Func<HasParentQueryDescriptor<TParent>, IHasParentQuery> selector) where TParent : class =>
-			new QueryContainerDescriptor<T>().HasParent<TParent>(selector);
+			new QueryContainerDescriptor<T>().HasParent(selector);
 
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Ids(selector);

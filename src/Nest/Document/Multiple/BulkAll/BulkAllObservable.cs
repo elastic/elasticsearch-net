@@ -26,7 +26,7 @@ namespace Nest
 		public BulkAllObservable(
 			IElasticClient client,
 			IBulkAllRequest<T> partitionedBulkRequest,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 		{
 			_client = client;
@@ -42,11 +42,8 @@ namespace Nest
 			_compositeCancelToken = _compositeCancelTokenSource.Token;
 		}
 
-		public bool IsDisposed { get; private set; }
-
 		public void Dispose()
 		{
-			IsDisposed = true;
 			_compositeCancelTokenSource?.Cancel();
 			_compositeCancelTokenSource?.Dispose();
 		}
@@ -132,21 +129,17 @@ namespace Nest
 			if (!response.ApiCall.Success)
 				return await HandleBulkRequest(buffer, page, backOffRetries, response);
 
-			var successfulDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 			var retryableDocuments = new List<T>();
 			var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 
 			foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
 			{
-				if (documentWithResponse.Item1.IsValid)
-					successfulDocuments.Add(documentWithResponse);
+				if (documentWithResponse.Item1.IsValid) continue;
+
+				if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
+					retryableDocuments.Add(documentWithResponse.Item2);
 				else
-				{
-					if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
-						retryableDocuments.Add(documentWithResponse.Item2);
-					else
-						droppedDocuments.Add(documentWithResponse);
-				}
+					droppedDocuments.Add(documentWithResponse);
 			}
 
 			HandleDroppedDocuments(droppedDocuments, response);

@@ -30,11 +30,8 @@ namespace ApiGenerator.Generator.Razor
 			}
 			catch (TemplateGenerationException e)
 			{
-				foreach (var d in e.Diagnostics)
-				{
-					Console.WriteLine(d.GetMessage());
-				}
-				throw e;
+				foreach (var d in e.Diagnostics) Console.WriteLine(d.GetMessage());
+				throw;
 			}
 		}
 
@@ -57,7 +54,7 @@ namespace ApiGenerator.Generator.Razor
 		protected static void WriteFormattedCsharpFile(string path, string contents)
 		{
 			var tree = CSharpSyntaxTree.ParseText(contents);
-			var root = tree.GetRoot().NormalizeWhitespace(indentation:"\t", "\n", elasticTrivia: false);
+			var root = tree.GetRoot().NormalizeWhitespace(indentation:"\t", "\n");
 			contents = root.ToFullString();
 			File.WriteAllText(path, contents);
 		}

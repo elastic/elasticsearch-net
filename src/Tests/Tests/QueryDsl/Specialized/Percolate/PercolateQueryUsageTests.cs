@@ -7,10 +7,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Specialized.Percolate
 {
@@ -36,8 +35,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override string UrlPath => $"{PercolationIndex}/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<ProjectPercolation>(f),
-			(client, f) => client.SearchAsync<ProjectPercolation>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<ProjectPercolation>(r),
 			(client, r) => client.SearchAsync<ProjectPercolation>(r)
 		);

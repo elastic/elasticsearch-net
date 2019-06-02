@@ -46,9 +46,9 @@ namespace DocGenerator.Buildalyzer
 		private readonly Dictionary<string, string> _globalProperties;
 		private readonly ConsoleLogger _logger;
 		private readonly XDocument _projectDocument;
-		private ProjectInstance _compiledProject = null;
+		private ProjectInstance _compiledProject;
 
-		private Project _project = null;
+		private Project _project;
 
 		internal ProjectAnalyzer(AnalyzerManager manager, string projectFilePath)
 			: this(manager, projectFilePath, XDocument.Load(projectFilePath)) { }
@@ -63,7 +63,8 @@ namespace DocGenerator.Buildalyzer
 			// Get the paths
 			_buildEnvironment = EnvironmentFactory.GetBuildEnvironment(projectFilePath, _projectDocument);
 
-			// Preload/enforce referencing some required asemblies
+			// Preload/enforce referencing some required assemblies
+			// ReSharper disable once UnusedVariable
 			var copy = new Copy();
 
 

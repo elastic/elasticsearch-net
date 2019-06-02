@@ -1,12 +1,9 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteCalendar
 {
@@ -17,10 +14,8 @@ namespace Tests.XPack.MachineLearning.DeleteCalendar
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
+			foreach (var callUniqueValue in values) 
 				PutCalendar(client, callUniqueValue.Value);
-			}
 		}
 
 		protected override bool ExpectIsValid => true;

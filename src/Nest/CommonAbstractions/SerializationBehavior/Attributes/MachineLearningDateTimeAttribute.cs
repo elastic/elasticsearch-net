@@ -1,5 +1,6 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
 
 namespace Nest

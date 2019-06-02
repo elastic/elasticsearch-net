@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using Elasticsearch.Net.Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
 // ReSharper disable RemoveRedundantBraces
@@ -23,7 +24,7 @@ namespace Elasticsearch.Net
 			IEnumerable<string>,
 			IDictionary<string, object>
 	{
-		private readonly IDictionary<string, dynamic> BackingDictionary = new Dictionary<string, dynamic>(StringComparer.OrdinalIgnoreCase);
+		private readonly IDictionary<string, dynamic> _backingDictionary = new Dictionary<string, dynamic>(StringComparer.OrdinalIgnoreCase);
 
 		/// <summary>
 		/// Gets the number of elements contained in the <see cref="DynamicBody" />.
@@ -31,7 +32,7 @@ namespace Elasticsearch.Net
 		/// <returns>The number of elements contained in the <see cref="DynamicBody" />.</returns>
 		public int Count
 		{
-			get { return BackingDictionary.Count; }
+			get { return _backingDictionary.Count; }
 		}
 
 		/// <summary>
@@ -60,7 +61,7 @@ namespace Elasticsearch.Net
 				name = GetNeutralKey(name);
 
 				dynamic member;
-				if (!BackingDictionary.TryGetValue(name, out member))
+				if (!_backingDictionary.TryGetValue(name, out member))
 				{
 					member = new ElasticsearchDynamicValue(null);
 				}
@@ -71,7 +72,7 @@ namespace Elasticsearch.Net
 			{
 				name = GetNeutralKey(name);
 
-				BackingDictionary[name] = value is ElasticsearchDynamicValue ? value : new ElasticsearchDynamicValue(value);
+				_backingDictionary[name] = value is ElasticsearchDynamicValue ? value : new ElasticsearchDynamicValue(value);
 			}
 		}
 
@@ -79,7 +80,7 @@ namespace Elasticsearch.Net
 		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="DynamicBody" />.
 		/// </summary>
 		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="DynamicBody" />.</returns>
-		public ICollection<string> Keys => BackingDictionary.Keys;
+		public ICollection<string> Keys => _backingDictionary.Keys;
 
 		/// <summary>
 		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="DynamicBody" />.
@@ -87,7 +88,7 @@ namespace Elasticsearch.Net
 		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="DynamicBody" />.</returns>
 		public ICollection<dynamic> Values
 		{
-			get { return BackingDictionary.Values; }
+			get { return _backingDictionary.Values; }
 		}
 
 		/// <summary>
@@ -102,7 +103,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Removes all items from the <see cref="DynamicBody" />.
 		/// </summary>
-		public void Clear() => BackingDictionary.Clear();
+		public void Clear() => _backingDictionary.Clear();
 
 		/// <summary>
 		/// Determines whether the <see cref="DynamicBody" /> contains a specific value.
@@ -116,7 +117,7 @@ namespace Elasticsearch.Net
 			var dynamicValueKeyValuePair =
 				GetDynamicKeyValuePair(item);
 
-			return BackingDictionary.Contains(dynamicValueKeyValuePair);
+			return _backingDictionary.Contains(dynamicValueKeyValuePair);
 		}
 
 		/// <summary>
@@ -130,7 +131,7 @@ namespace Elasticsearch.Net
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying begins.</param>
 		public void CopyTo(KeyValuePair<string, dynamic>[] array, int arrayIndex)
 		{
-			BackingDictionary.CopyTo(array, arrayIndex);
+			_backingDictionary.CopyTo(array, arrayIndex);
 		}
 
 		/// <summary>
@@ -146,7 +147,7 @@ namespace Elasticsearch.Net
 			var dynamicValueKeyValuePair =
 				GetDynamicKeyValuePair(item);
 
-			return BackingDictionary.Remove(dynamicValueKeyValuePair);
+			return _backingDictionary.Remove(dynamicValueKeyValuePair);
 		}
 
 		/// <summary>
@@ -168,7 +169,7 @@ namespace Elasticsearch.Net
 		/// <param name="key">The key to locate in the <see cref="DynamicBody" />.</param>
 		public bool ContainsKey(string key)
 		{
-			return BackingDictionary.ContainsKey(key);
+			return _backingDictionary.ContainsKey(key);
 		}
 
 		/// <summary>
@@ -179,7 +180,7 @@ namespace Elasticsearch.Net
 		public bool Remove(string key)
 		{
 			key = GetNeutralKey(key);
-			return BackingDictionary.Remove(key);
+			return _backingDictionary.Remove(key);
 		}
 
 		/// <summary>
@@ -196,7 +197,7 @@ namespace Elasticsearch.Net
 		/// </param>
 		public bool TryGetValue(string key, out dynamic value)
 		{
-			if (BackingDictionary.TryGetValue(key, out value)) return true;
+			if (_backingDictionary.TryGetValue(key, out value)) return true;
 
 			return false;
 		}
@@ -207,7 +208,7 @@ namespace Elasticsearch.Net
 		/// <returns>A <see cref="IEnumerator" /> that contains dynamic member names.</returns>
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return BackingDictionary.Keys.GetEnumerator();
+			return _backingDictionary.Keys.GetEnumerator();
 		}
 
 		/// <summary>
@@ -216,7 +217,7 @@ namespace Elasticsearch.Net
 		/// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.</returns>
 		IEnumerator<KeyValuePair<string, dynamic>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
 		{
-			return BackingDictionary.GetEnumerator();
+			return _backingDictionary.GetEnumerator();
 		}
 
 		/// <summary>
@@ -225,7 +226,7 @@ namespace Elasticsearch.Net
 		/// <returns>A <see cref="IEnumerable{T}" /> that contains dynamic member names.</returns>
 		public IEnumerator<string> GetEnumerator()
 		{
-			return BackingDictionary.Keys.GetEnumerator();
+			return _backingDictionary.Keys.GetEnumerator();
 		}
 
 		/// <summary>
@@ -243,7 +244,7 @@ namespace Elasticsearch.Net
 				return false;
 			}
 
-			return ReferenceEquals(this, other) || Equals(other.BackingDictionary, BackingDictionary);
+			return ReferenceEquals(this, other) || Equals(other._backingDictionary, _backingDictionary);
 		}
 
 		/// <summary>
@@ -307,7 +308,7 @@ namespace Elasticsearch.Net
 		/// </param>
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
 		{
-			if (!BackingDictionary.TryGetValue(binder.Name, out result))
+			if (!_backingDictionary.TryGetValue(binder.Name, out result))
 			{
 				result = new ElasticsearchDynamicValue(null);
 			}
@@ -321,7 +322,7 @@ namespace Elasticsearch.Net
 		/// <returns>A <see cref="IEnumerable{T}" /> that contains dynamic member names.</returns>
 		public override IEnumerable<string> GetDynamicMemberNames()
 		{
-			return BackingDictionary.Keys;
+			return _backingDictionary.Keys;
 		}
 
 		/// <summary>
@@ -351,7 +352,7 @@ namespace Elasticsearch.Net
 		/// Returns a hash code for this <see cref="DynamicBody" />.
 		/// </summary>
 		/// <returns> A hash code for this <see cref="DynamicBody" />, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-		public override int GetHashCode() => BackingDictionary?.GetHashCode() ?? 0;
+		public override int GetHashCode() => _backingDictionary?.GetHashCode() ?? 0;
 
 		private static KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, dynamic> item)
 		{

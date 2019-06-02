@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nest;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework;
 
 namespace Tests.IndexModules.IndexSettings.Settings
 {

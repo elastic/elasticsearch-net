@@ -48,7 +48,7 @@ namespace Tests.Core.Serialization
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null
 		)
-			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, false) => _object = @object;
+			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider) => _object = @object;
 
 		public T RoundTrips() => Tester.AssertRoundTrip(_object);
 
@@ -111,8 +111,8 @@ namespace Tests.Core.Serialization
 		{
 			switch ((object)actual)
 			{
-				case string s: throw new Exception($"{nameof(WhenSerializing)} was passed a string but it only expects objects");
-				case byte[] b: throw new Exception($"{nameof(WhenSerializing)} was passed a byte[] but it only expects objects");
+				case string _: throw new Exception($"{nameof(WhenSerializing)} was passed a string but it only expects objects");
+				case byte[] _: throw new Exception($"{nameof(WhenSerializing)} was passed a byte[] but it only expects objects");
 			}
 			var result = Tester.RoundTrips(actual, _expectedJson, PreserveNullInExpected);
 			result.Success.Should().BeTrue(result.ToString());
@@ -127,7 +127,7 @@ namespace Tests.Core.Serialization
 
 		public JsonRoundTripper WhenInferringRoutingOn<T>(T project) where T : class
 		{
-			Tester.Client.Infer.Routing<T>(project).Should().Be((string)_expectedJson);
+			Tester.Client.Infer.Routing(project).Should().Be((string)_expectedJson);
 			return this;
 		}
 
@@ -175,7 +175,7 @@ namespace Tests.Core.Serialization
 
 			public JsonRoundTripperContinuation<TDifferent> WhenSerializing<TDifferent>(TDifferent actual)
 			{
-				var result = Tester.RoundTrips<TDifferent>(actual, _expectedJson);
+				var result = Tester.RoundTrips(actual, _expectedJson);
 				result.ShouldBeValid();
 				return new JsonRoundTripperContinuation<TDifferent>(result.Serialized, result.Result, Tester);
 			}

@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single
 {
@@ -21,8 +21,8 @@ namespace Tests.Document.Single
 			Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, ExistsResponse>(
 				id => new DocumentExistsRequest<Project>(id){ Routing = Project.Instance.Name },
 				(id, d) => d.Routing(Project.Instance.Name),
-				(s, c, f) => c.DocumentExists<Project>(s, f),
-				(s, c, f) => c.DocumentExistsAsync<Project>(s, f),
+				(s, c, f) => c.DocumentExists(s, f),
+				(s, c, f) => c.DocumentExistsAsync(s, f),
 				(s, c, r) => c.DocumentExists(r),
 				(s, c, r) => c.DocumentExistsAsync(r)
 			);
@@ -39,8 +39,8 @@ namespace Tests.Document.Single
 		protected override LazyResponses Read() => Calls<GetDescriptor<Project>, GetRequest<Project>, IGetRequest, GetResponse<Project>>(
 			id => new GetRequest<Project>(id) { Routing = Project.Instance.Name },
 			(id, d) => d.Routing(Project.Instance.Name),
-			(s, c, f) => c.Get<Project>(s, f),
-			(s, c, f) => c.GetAsync<Project>(s, f),
+			(s, c, f) => c.Get(s, f),
+			(s, c, f) => c.GetAsync(s, f),
 			(s, c, r) => c.Get<Project>(r),
 			(s, c, r) => c.GetAsync<Project>(r)
 		);
@@ -61,15 +61,15 @@ namespace Tests.Document.Single
 				.Doc(new Project { Description = id + " updated" }),
 			(s, c, f) => c.Update<Project, Project>(s, f),
 			(s, c, f) => c.UpdateAsync<Project, Project>(s, f),
-			(s, c, r) => c.Update<Project, Project>(r),
-			(s, c, r) => c.UpdateAsync<Project, Project>(r)
+			(s, c, r) => c.Update(r),
+			(s, c, r) => c.UpdateAsync(r)
 		);
 
 		protected override LazyResponses Delete() => Calls<DeleteDescriptor<Project>, DeleteRequest<Project>, IDeleteRequest, DeleteResponse>(
 			id => new DeleteRequest<Project>(id) { Routing = Project.Instance.Name },
 			(id, d) => d.Routing(Project.Instance.Name),
-			(s, c, f) => c.Delete<Project>(s, f),
-			(s, c, f) => c.DeleteAsync<Project>(s, f),
+			(s, c, f) => c.Delete(s, f),
+			(s, c, f) => c.DeleteAsync(s, f),
 			(s, c, r) => c.Delete(r),
 			(s, c, r) => c.DeleteAsync(r)
 		);

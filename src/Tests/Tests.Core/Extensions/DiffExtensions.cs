@@ -26,10 +26,8 @@ namespace Tests.Core.Extensions
 				}
 			}
 			if (token is JArray jArray)
-			{
 				foreach (var v in jArray.Values())
 					v?.DeepSort();
-			}
 			if (token is JProperty jProp)
 				jProp.Value?.DeepSort();
 		}

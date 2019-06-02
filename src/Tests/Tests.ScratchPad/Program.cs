@@ -2,7 +2,6 @@
 using BenchmarkDotNet.Running;
 using Elasticsearch.Net;
 using Nest;
-using Tests.ScratchPad.Runners.Inferrence;
 
 namespace Tests.ScratchPad
 {

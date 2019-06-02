@@ -31,9 +31,9 @@ namespace Nest
 	public class FieldLookupDescriptor<T> : DescriptorBase<FieldLookupDescriptor<T>, IFieldLookup>, IFieldLookup
 		where T : class
 	{
-		public FieldLookupDescriptor() => Self.Index = _ClrType;
+		public FieldLookupDescriptor() => Self.Index = ClrType;
 
-		internal Type _ClrType => typeof(T);
+		private static Type ClrType => typeof(T);
 
 		Id IFieldLookup.Id { get; set; }
 

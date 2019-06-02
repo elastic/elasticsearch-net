@@ -2,13 +2,14 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	[JsonFormatter(typeof(DistanceFormatter))]
 	public class Distance
 	{
-		private static readonly Regex _distanceUnitRegex =
+		private static readonly Regex DistanceUnitRegex =
 			new Regex(@"^(?<precision>\d+(?:\.\d+)?)(?<unit>\D+)?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
 		public Distance(double distance) : this(distance, DistanceUnit.Meters) { }
@@ -22,7 +23,7 @@ namespace Nest
 		public Distance(string distanceUnit)
 		{
 			distanceUnit.ThrowIfNullOrEmpty(nameof(distanceUnit));
-			var match = _distanceUnitRegex.Match(distanceUnit);
+			var match = DistanceUnitRegex.Match(distanceUnit);
 
 			if (!match.Success)
 				throw new ArgumentException("must be a valid distance unit", nameof(distanceUnit));

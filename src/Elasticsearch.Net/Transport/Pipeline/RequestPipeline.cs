@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Specification.NodesApi;
 using static Elasticsearch.Net.AuditEvent;
 
@@ -33,7 +34,6 @@ namespace Elasticsearch.Net
 			_dateTimeProvider = dateTimeProvider;
 			_memoryStreamFactory = memoryStreamFactory;
 
-			RequestParameters = requestParameters;
 			RequestConfiguration = requestParameters?.RequestConfiguration;
 			StartedOn = dateTimeProvider.Now();
 		}
@@ -68,7 +68,7 @@ namespace Elasticsearch.Net
 				: Math.Min(RequestConfiguration?.MaxRetries ?? _settings.MaxRetries.GetValueOrDefault(int.MaxValue), _connectionPool.MaxRetries);
 
 		public bool Refresh { get; private set; }
-		public int Retried { get; private set; } = 0;
+		public int Retried { get; private set; }
 
 		public IEnumerable<Node> SniffNodes => _connectionPool
 			.CreateView(LazyAuditable)
@@ -112,8 +112,6 @@ namespace Elasticsearch.Net
 		private IRequestConfiguration RequestConfiguration { get; }
 
 		private bool RequestDisabledSniff => RequestConfiguration != null && (RequestConfiguration.DisableSniff ?? false);
-
-		private IRequestParameters RequestParameters { get; }
 
 		private TimeSpan RequestTimeout => RequestConfiguration?.RequestTimeout ?? _settings.RequestTimeout;
 
@@ -442,7 +440,6 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						audit.Exception = e;
 						exceptions.Add(e);
-						continue;
 					}
 				}
 			}
@@ -477,7 +474,6 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						audit.Exception = e;
 						exceptions.Add(e);
-						continue;
 					}
 				}
 			}
@@ -573,7 +569,6 @@ namespace Elasticsearch.Net
 		private void LazyAuditable(AuditEvent e, Node n)
 		{
 			using (new Auditable(e, AuditTrail, _dateTimeProvider) { Node = n }) { }
-			;
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>
