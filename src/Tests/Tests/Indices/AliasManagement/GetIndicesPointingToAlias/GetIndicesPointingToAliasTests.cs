@@ -4,7 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
 namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 {
@@ -21,12 +21,10 @@ namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 		};
 
 		private readonly IElasticClient _client;
-		private readonly WritableCluster _cluster;
 
 		public GetIndicesPointingToAliasTests(WritableCluster cluster) : base(cluster)
 		{
-			_cluster = cluster;
-			_client = _cluster.Client;
+			_client = cluster.Client;
 
 			foreach (var index in Indices)
 			{

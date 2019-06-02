@@ -10,7 +10,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Xunit;
 using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.ClientConcepts.Certificates
 {

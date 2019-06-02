@@ -26,10 +26,10 @@ namespace Tests.Reproduce
 
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/_search");
 
-			response = client.Search<ESLogEvent>(new SearchRequest<ESLogEvent> { });
+			response = client.Search<ESLogEvent>(new SearchRequest<ESLogEvent>());
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/_search");
 
-			response = client.Search<ESLogEvent>(new SearchRequest { });
+			response = client.Search<ESLogEvent>(new SearchRequest());
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/_search");
 		}
 

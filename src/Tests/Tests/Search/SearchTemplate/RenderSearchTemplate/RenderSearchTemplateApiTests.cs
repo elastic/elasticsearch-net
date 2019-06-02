@@ -7,8 +7,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 {
@@ -29,7 +29,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 	}
   }";
 
-		private readonly string[] statusValues = new[] { "pending", "published" };
+		private readonly string[] _statusValues = { "pending", "published" };
 
 		public RenderSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -39,7 +39,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 		protected override Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> Fluent => s => s
 			.Source(inlineSearchTemplate)
 			.Params(p => p
-				.Add("status", statusValues)
+				.Add("status", _statusValues)
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -50,7 +50,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 			Source = inlineSearchTemplate,
 			Params = new Dictionary<string, object>
 			{
-				{ "status", statusValues }
+				{ "status", _statusValues }
 			}
 		};
 

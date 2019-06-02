@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Tests.Framework;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
@@ -19,7 +21,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task DefaultMaxIsNumberOfNodes()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -45,7 +47,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task FixedMaximumNumberOfRetries()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -71,7 +73,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task DoesNotRetryOnSingleNodeConnectionPool()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())

@@ -6,13 +6,12 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkAllCancellationTokenApiTests : BulkAllApiTestsBase
 	{
-		public BulkAllCancellationTokenApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkAllCancellationTokenApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] [SkipOnTeamCity]
 		public void CancelBulkAll()

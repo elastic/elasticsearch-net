@@ -9,7 +9,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
-using static Tests.Framework.TimesHelper;
+using static Tests.Framework.VirtualClustering.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky

@@ -7,7 +7,7 @@ using Nest;
 using Tests.Aggregations.Bucket.Children;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.DocumentationTests;
 using static Nest.Infer;
 
 namespace Tests.Aggregations

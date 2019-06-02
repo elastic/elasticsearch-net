@@ -9,13 +9,14 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client.Settings;
+using Tests.Core.Extensions;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 {
 	public class ResponseBuilderDisposeTests
 	{
 		private readonly IConnectionSettingsValues _settings = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(false);
-		private readonly IConnectionSettingsValues _settingsDisableDirectStream = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(true);
+		private readonly IConnectionSettingsValues _settingsDisableDirectStream = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming();
 
 		[U] public async Task ResponseWithHttpStatusCode() => await AssertRegularResponse(false, 1);
 
@@ -38,6 +39,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			var stream = new TrackDisposeStream();
 			var response = ResponseBuilder.ToResponse<RootNodeInfoResponse>(requestData, null, statusCode, null, stream);
+			response.Should().NotBeNull();
 
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 1 : 0);
 			if (disableDirectStreaming)
@@ -52,6 +54,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			var ct = new CancellationToken();
 			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream,
 				cancellationToken: ct);
+			response.Should().NotBeNull();
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			if (disableDirectStreaming)
 			{
@@ -76,13 +79,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			var settings = disableDirectStreaming ? _settingsDisableDirectStream : _settings;
 			var memoryStreamFactory = new TrackMemoryStreamFactory();
 
-			var requestData = new RequestData(HttpMethod.GET, "/", null, settings, (IRequestParameters)null, memoryStreamFactory)
+			var requestData = new RequestData(HttpMethod.GET, "/", null, settings, null, memoryStreamFactory)
 			{
 				Node = new Node(new Uri("http://localhost:9200"))
 			};
 
 			var stream = new TrackDisposeStream();
 			var response = ResponseBuilder.ToResponse<RootNodeInfoResponse>(requestData, null, statusCode, null, stream);
+			response.Should().NotBeNull();
 
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 1 : 0);
 			stream.IsDisposed.Should().Be(true);
@@ -91,6 +95,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			var ct = new CancellationToken();
 			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream,
 				cancellationToken: ct);
+			response.Should().NotBeNull();
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			stream.IsDisposed.Should().Be(true);
 		}

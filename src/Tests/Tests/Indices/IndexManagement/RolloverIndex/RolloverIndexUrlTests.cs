@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {
@@ -15,7 +15,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				.Fluent(c => c.Indices.Rollover(alias))
 				.Request(c => c.Indices.Rollover(new RolloverIndexRequest(alias)))
 				.FluentAsync(c => c.Indices.RolloverAsync(alias))
-				.RequestAsync(C => C.Indices.RolloverAsync(new RolloverIndexRequest(alias)));
+				.RequestAsync(c => c.Indices.RolloverAsync(new RolloverIndexRequest(alias)));
 
 			var index = "newindex";
 
@@ -23,7 +23,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				.Fluent(c => c.Indices.Rollover(alias, r => r.NewIndex(index)))
 				.Request(c => c.Indices.Rollover(new RolloverIndexRequest(alias, index)))
 				.FluentAsync(c => c.Indices.RolloverAsync(alias, r => r.NewIndex(index)))
-				.RequestAsync(C => C.Indices.RolloverAsync(new RolloverIndexRequest(alias, index)));
+				.RequestAsync(c => c.Indices.RolloverAsync(new RolloverIndexRequest(alias, index)));
 		}
 	}
 }

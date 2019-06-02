@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Elasticsearch.Net;
+using Tests.Framework.VirtualClustering.Providers;
+using Tests.Framework.VirtualClustering.Rules;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
 	public class VirtualCluster
 	{

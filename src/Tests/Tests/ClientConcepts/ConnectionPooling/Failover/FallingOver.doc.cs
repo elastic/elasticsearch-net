@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Tests.Framework;
-using static Elasticsearch.Net.AuditEvent;
+using Elasticsearch.Net;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
 
-namespace Tests.ClientConcepts.ConnectionPooling.FailOver
+namespace Tests.ClientConcepts.ConnectionPooling.Failover
 {
 	public class FallingOver
 	{
@@ -15,7 +16,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		[U]
 		public async Task ExceptionFallsOverToNextNode()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -25,8 +26,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ HealthyResponse, 9201 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -39,7 +40,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		[U]
 		public async Task Http502FallsOver()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(502))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -49,8 +50,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ HealthyResponse, 9201 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -63,7 +64,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		[U]
 		public async Task Http503FallsOver()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(503))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -73,8 +74,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ HealthyResponse, 9201 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -87,7 +88,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		[U]
 		public async Task Http504FallsOver()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(504))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -97,8 +98,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ HealthyResponse, 9201 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -112,7 +113,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		[U]
 		public async Task HttpTeapotDoesNotFallOver()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(418))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -122,7 +123,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9200 },
 				}
 			);
 		}

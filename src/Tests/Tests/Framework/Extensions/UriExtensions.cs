@@ -4,7 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using Tests.Core.Extensions;
 
-namespace Tests
+namespace Tests.Framework.Extensions
 {
 	public static class UriExtensions
 	{

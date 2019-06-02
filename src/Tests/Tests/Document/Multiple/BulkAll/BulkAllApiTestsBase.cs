@@ -7,14 +7,12 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
-using Xunit;
 
 namespace Tests.Document.Multiple.BulkAll
 {
-	public abstract class BulkAllApiTestsBase : IClusterFixture<IntrusiveOperationCluster>, IClassFixture<EndpointUsage>
+	public abstract class BulkAllApiTestsBase : IClusterFixture<IntrusiveOperationCluster>
 	{
-		protected BulkAllApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) => Client = cluster.Client;
+		protected BulkAllApiTestsBase(IntrusiveOperationCluster cluster) => Client = cluster.Client;
 
 		protected IElasticClient Client { get; }
 
@@ -33,7 +31,7 @@ namespace Tests.Document.Multiple.BulkAll
 					.NumberOfShards(numberOfShards)
 					.NumberOfReplicas(0)
 				)
-				.Map<SmallObject>(mappings)
+				.Map(mappings)
 			);
 			result.Should().NotBeNull();
 			result.ShouldBeValid();

@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using static Tests.Core.Serialization.SerializationTestHelper;
+using Tests.Core.Serialization;
 
-
-namespace Tests.Framework
+namespace Tests.Framework.SerializationTests
 {
 	public class IsADictionarySerializationTests
 	{
@@ -24,7 +23,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			Object(isADictionary).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(isADictionary).RoundTrips(ExpectJson);
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -46,7 +45,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -58,7 +57,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -71,7 +70,7 @@ namespace Tests.Framework
 					{ "Key2", "value2" },
 				});
 
-			Object(dictionary).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -83,7 +82,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -95,7 +94,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			Object(dictionary).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -107,7 +106,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(hashTable).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(hashTable).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -119,7 +118,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(hashTable).RoundTrips(ExpectJson);
+			SerializationTestHelper.Object(hashTable).RoundTrips(ExpectJson);
 		}
 
 		private class MyDictionary : IDictionary

@@ -15,14 +15,9 @@ namespace Tests.Document.Multiple.MultiGet
 	public class GetManyApiTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly IElasticClient _client;
-		private readonly ReadOnlyCluster _cluster;
-		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
+		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => d.Id).Take(10);
 
-		public GetManyApiTests(ReadOnlyCluster cluster)
-		{
-			_cluster = cluster;
-			_client = _cluster.Client;
-		}
+		public GetManyApiTests(ReadOnlyCluster cluster) => _client = cluster.Client;
 
 		[I] public void UsesDefaultIndexAndInferredType()
 		{

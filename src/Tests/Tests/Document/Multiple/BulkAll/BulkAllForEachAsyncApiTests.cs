@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkAllForEachAsyncApiTests : BulkAllApiTestsBase
 	{
-		public BulkAllForEachAsyncApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkAllForEachAsyncApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] public async Task AwaitBulkAll()
 		{

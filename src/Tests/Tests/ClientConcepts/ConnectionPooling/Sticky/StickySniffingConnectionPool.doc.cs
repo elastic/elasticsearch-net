@@ -9,7 +9,9 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
-using static Tests.Framework.TimesHelper;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
+using static Tests.Framework.VirtualClustering.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
@@ -60,11 +62,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				We setup node 9202 to fail after two client calls in which case we sniff and find nodes
 				`9210-9213` in which case we should become sticky on rack_11.
 			 */
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(Nodes(0))
 				.ClientCalls(p => p.OnPort(9202).Succeeds(Twice).ThrowsAfterSucceeds())
 				.ClientCalls(p => p.FailAlways())
-				.Sniff(s=>s.SucceedAlways(Framework.Cluster
+				.Sniff(s=>s.SucceedAlways(VirtualClusterWith
 					.Nodes(Nodes(10))
 					.ClientCalls(p => p.SucceedAlways()))
 				)
@@ -112,10 +114,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			/** We seed a cluster with an array of 4 Uri's starting at port 9200.
 			* Our sniffing sorted connection pool is set up to favor nodes in rack_2
 			*/
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(4)
 				.ClientCalls(p => p.SucceedAlways())
-				.Sniff(s=>s.SucceedAlways(Framework.Cluster
+				.Sniff(s=>s.SucceedAlways(VirtualClusterWith
 					.Nodes(Nodes(0))
 					.ClientCalls(p => p.SucceedAlways()))
 				)
@@ -152,7 +154,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task PicksADifferentNodeEachTimeAnodeIsDown()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(4)
 				.ClientCalls(p => p.Fails(Always))
 				.StickySniffingConnectionPool()

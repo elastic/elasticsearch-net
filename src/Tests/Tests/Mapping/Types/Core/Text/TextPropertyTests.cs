@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.Text
 {
@@ -150,7 +150,7 @@ namespace Tests.Mapping.Types.Core.Text
 						.IgnoreAbove(100)
 					)
 				)
-				.Index(true)
+				.Index()
 				.IndexOptions(IndexOptions.Offsets)
 				.PositionIncrementGap(5)
 				.SearchAnalyzer("standard")

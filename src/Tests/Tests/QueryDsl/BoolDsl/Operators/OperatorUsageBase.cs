@@ -7,7 +7,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public abstract class OperatorUsageBase
 	{
-		protected static readonly TermQuery ConditionlessQuery = new TermQuery { };
+		protected static readonly TermQuery ConditionlessQuery = new TermQuery();
 		protected static readonly TermQuery NullQuery = null;
 		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
 

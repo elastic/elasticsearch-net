@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
-namespace Tests.ClientConcepts.HighLevel.Caching
+namespace Tests.ClientConcepts.HighLevel.Indexing
 {
 	/**[[pipelines]]
 	 *=== Ingest Pipelines

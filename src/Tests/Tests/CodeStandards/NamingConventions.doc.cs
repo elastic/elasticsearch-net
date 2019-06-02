@@ -204,6 +204,9 @@ namespace Tests.CodeStandards
 				.Where(t => !exceptions.Contains(t))
 				.Where(t => t.Namespace != null)
 				.Where(t => t.Namespace != "Elasticsearch.Net" && !t.Namespace.StartsWith("Elasticsearch.Net.Specification"))
+				.Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.Utf8Json"))
+				.Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.Extensions"))
+				.Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.CrossPlatform"))
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();

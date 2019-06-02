@@ -2,37 +2,36 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
 
-namespace Tests.XPack.NodesUsage
+namespace Tests.Cluster.NodesUsage
 {
 	public class NodesUsageUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_nodes/usage")
+			await UrlTester.GET("/_nodes/usage")
 					.Fluent(c => c.Nodes.Usage(d => d))
 					.Request(c => c.Nodes.Usage(new NodesUsageRequest()))
 					.FluentAsync(c => c.Nodes.UsageAsync(d => d))
 					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest()))
 				;
 
-			await GET("/_nodes/nodeId/usage")
+			await UrlTester.GET("/_nodes/nodeId/usage")
 					.Fluent(c => c.Nodes.Usage(d => d.NodeId("nodeId")))
 					.Request(c => c.Nodes.Usage(new NodesUsageRequest("nodeId")))
 					.FluentAsync(c => c.Nodes.UsageAsync(d => d.NodeId("nodeId")))
 					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest("nodeId")))
 				;
 
-			await GET("/_nodes/nodeId/usage/rest_actions")
+			await UrlTester.GET("/_nodes/nodeId/usage/rest_actions")
 					.Fluent(c => c.Nodes.Usage(d => d.NodeId("nodeId").Metric(NodesUsageMetric.RestActions)))
 					.Request(c => c.Nodes.Usage(new NodesUsageRequest("nodeId", NodesUsageMetric.RestActions)))
 					.FluentAsync(c => c.Nodes.UsageAsync(d => d.NodeId("nodeId").Metric(NodesUsageMetric.RestActions)))
 					.RequestAsync(c => c.Nodes.UsageAsync(new NodesUsageRequest("nodeId", NodesUsageMetric.RestActions)))
 				;
 
-			await GET("/_nodes/nodeId/usage/_all")
+			await UrlTester.GET("/_nodes/nodeId/usage/_all")
 					.Fluent(c => c.Nodes.Usage(d => d.NodeId("nodeId").Metric(NodesUsageMetric.All)))
 					.Request(c => c.Nodes.Usage(new NodesUsageRequest("nodeId", NodesUsageMetric.All)))
 					.FluentAsync(c => c.Nodes.UsageAsync(d => d.NodeId("nodeId").Metric(NodesUsageMetric.All)))

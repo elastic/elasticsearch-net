@@ -5,7 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric
 {
@@ -65,6 +65,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		{
 			public string Combine { get; set; }
 			public string Init { get; set; }
+			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public string Language { get; set; }
 			public string Map { get; set; }
 			public string Reduce { get; set; }

@@ -8,7 +8,7 @@ using Tests.Domain;
 namespace Tests.Reproduce {
 	public class Utf8JsonTest
 	{
-		private string json = @"{
+		private readonly string _json = @"{
   ""took"" : 6,
   ""timed_out"" : false,
   ""_shards"" : {
@@ -1700,7 +1700,7 @@ namespace Tests.Reproduce {
 		[U]
 		public void Deserialize()
 		{
-			var client = FixedResponseClient.Create(json);
+			var client = FixedResponseClient.Create(_json);
 
 			var searchResponse = client.Search<Project>();
 

@@ -1,7 +1,7 @@
 ﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Geo.BoundingBox
 {
@@ -12,7 +12,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoBoundingBoxQuery>(a => a.GeoBoundingBox)
 		{
 			q => q.BoundingBox = null,
-			q => q.BoundingBox = new Nest.BoundingBox { },
+			q => q.BoundingBox = new Nest.BoundingBox(),
 			q => q.Field = null
 		};
 
@@ -75,7 +75,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoBoundingBoxQuery>(a => a.GeoBoundingBox)
 		{
 			q => q.BoundingBox = null,
-			q => q.BoundingBox = new Nest.BoundingBox { },
+			q => q.BoundingBox = new Nest.BoundingBox(),
 			q => q.Field = null
 		};
 

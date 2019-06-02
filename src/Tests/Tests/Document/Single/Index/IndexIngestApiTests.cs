@@ -6,8 +6,8 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Domain.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index
@@ -88,8 +88,8 @@ namespace Tests.Document.Single.Index
 			});
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Index<Project>(Document, f),
-			(client, f) => client.IndexAsync<Project>(Document, f),
+			(client, f) => client.Index(Document, f),
+			(client, f) => client.IndexAsync(Document, f),
 			(client, r) => client.Index(r),
 			(client, r) => client.IndexAsync(r)
 		);

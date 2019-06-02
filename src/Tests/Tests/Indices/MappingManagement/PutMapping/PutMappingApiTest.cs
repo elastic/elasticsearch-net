@@ -4,8 +4,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
@@ -214,8 +214,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					}
 				},
 				{ p => p.Description, new TextProperty() },
-				{ p => p.DateString, new TextProperty { } },
-				{ p => p.Type, new TextProperty { } },
+				{ p => p.DateString, new TextProperty() },
+				{ p => p.Type, new TextProperty() },
 				{ p => p.LastActivity, new DateProperty() },
 				{
 					p => p.LeadDeveloper, new ObjectProperty

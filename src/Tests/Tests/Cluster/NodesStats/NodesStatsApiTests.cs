@@ -8,8 +8,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Cluster.NodesStats
@@ -190,6 +190,7 @@ namespace Tests.Cluster.NodesStats
 		protected void Assert(IReadOnlyDictionary<string, BreakerStats> breakers)
 		{
 			breakers.Should().NotBeEmpty().And.ContainKey("request");
+			// ReSharper disable once UnusedVariable
 			var requestBreaker = breakers["request"];
 			//requestBreaker.LimitSizeInBytes.Should().BeGreaterThan(0);
 			//requestBreaker.Overhead.Should().BeGreaterThan(0);
@@ -217,6 +218,7 @@ namespace Tests.Cluster.NodesStats
 		protected void Assert(IReadOnlyDictionary<string, ThreadCountStats> threadPools)
 		{
 			threadPools.Should().NotBeEmpty().And.ContainKey("management");
+			// ReSharper disable once UnusedVariable
 			var threadPool = threadPools["management"];
 			//threadPool.Completed.Should().BeGreaterThan(0);
 		}

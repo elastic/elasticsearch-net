@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.Delete
 {
@@ -32,8 +32,8 @@ namespace Tests.Document.Single.Delete
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Delete<Project>(CallIsolatedValue, f),
-			(client, f) => client.DeleteAsync<Project>(CallIsolatedValue, f),
+			(client, f) => client.Delete(CallIsolatedValue, f),
+			(client, f) => client.DeleteAsync(CallIsolatedValue, f),
 			(client, r) => client.Delete(r),
 			(client, r) => client.DeleteAsync(r)
 		);
@@ -69,8 +69,8 @@ namespace Tests.Document.Single.Delete
 		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Delete<Project>(CallIsolatedValue, f),
-			(client, f) => client.DeleteAsync<Project>(CallIsolatedValue, f),
+			(client, f) => client.Delete(CallIsolatedValue, f),
+			(client, f) => client.DeleteAsync(CallIsolatedValue, f),
 			(client, r) => client.Delete(r),
 			(client, r) => client.DeleteAsync(r)
 		);
@@ -110,8 +110,8 @@ namespace Tests.Document.Single.Delete
 		private string BadIndex => CallIsolatedValue + "-bad-index";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Delete<Project>(CallIsolatedValue, f),
-			(client, f) => client.DeleteAsync<Project>(CallIsolatedValue, f),
+			(client, f) => client.Delete(CallIsolatedValue, f),
+			(client, f) => client.DeleteAsync(CallIsolatedValue, f),
 			(client, r) => client.Delete(r),
 			(client, r) => client.DeleteAsync(r)
 		);

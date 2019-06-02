@@ -13,7 +13,7 @@ using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.DocumentationTests;
 using Xunit;
 
 namespace Tests.ClientConcepts.Troubleshooting

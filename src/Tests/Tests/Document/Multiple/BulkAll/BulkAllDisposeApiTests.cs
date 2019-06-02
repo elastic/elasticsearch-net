@@ -6,13 +6,12 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkAllDisposeApiTests : BulkAllApiTestsBase
 	{
-		public BulkAllDisposeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkAllDisposeApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] [SkipOnTeamCity]
 		public void DisposingObservableCancelsBulkAll()

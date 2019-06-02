@@ -16,9 +16,9 @@ namespace Tests.Reproduce
 	/// pulled in the high level serializer here.
 	public class GithubIssue2052
 	{
-		private const string _objectMessage = "My message";
+		private const string ObjectMessage = "My message";
 
-		private static readonly object _bulkHeader =
+		private static readonly object BulkHeader =
 			new { index = new { _index = "myIndex", } };
 
 		private readonly ElasticLowLevelClient _client;
@@ -53,7 +53,7 @@ namespace Tests.Reproduce
 		{
 			var postData = PostData.MultiJson(new List<object>
 			{
-				_bulkHeader,
+				BulkHeader,
 				new
 				{
 					message = "My message",
@@ -73,20 +73,21 @@ namespace Tests.Reproduce
 				var stackTrace = e.StackTrace;
 				var remoteStackTrace = string.Empty;
 				var remoteStackIndex = string.Empty;
-				var exceptionMethod = string.Empty;
 				var hresult = e.HResult;
 				var source = e.Source;
 				var className = string.Empty;
 
 				yield return new
 				{
+					// ReSharper disable RedundantAnonymousTypePropertyName
 					depth = depth,
-					className = className,
-					message = e.Message,
 					source = source,
+					remoteStackIndex = remoteStackIndex,
+					className = className,
+					// ReSharper restore RedundantAnonymousTypePropertyName
+					message = e.Message,
 					stackTraceString = stackTrace,
 					remoteStackTraceString = remoteStackTrace,
-					remoteStackIndex = remoteStackIndex,
 					hResult = hresult,
 					helpURL = helpUrl,
 					//ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
@@ -97,6 +98,7 @@ namespace Tests.Reproduce
 			} while (depth < maxExceptions && e != null);
 		}
 
+		// ReSharper disable once UnusedMember.Local
 		private object WriteStructuredExceptionMethod(string exceptionMethodString)
 		{
 			if (string.IsNullOrWhiteSpace(exceptionMethodString)) return null;
@@ -127,14 +129,14 @@ namespace Tests.Reproduce
 		{
 			var document = new Dictionary<string, object>
 			{
-				{ "message", _objectMessage },
+				{ "message", ObjectMessage },
 				{ "exception", ex }
 			};
 
 
 			var payload = new List<object>
 			{
-				_bulkHeader,
+				BulkHeader,
 				document
 			};
 			var response = _client.Bulk<BytesResponse>(PostData.MultiJson(payload));

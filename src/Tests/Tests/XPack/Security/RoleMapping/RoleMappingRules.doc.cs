@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
-using static Tests.Core.Serialization.SerializationTestHelper;
+using Tests.Core.Serialization;
 
-namespace Tests.Search
+namespace Tests.XPack.Security.RoleMapping
 {
 	/**[[role-mapping-rules]]
 	 * === Role Mapping Rules
@@ -134,7 +126,7 @@ namespace Tests.Search
 
 		private void Assert(object json, RoleMappingRuleBase rules)
 		{
-			Expect(new
+			SerializationTestHelper.Expect(new
 			{
 				enabled = true,
 				roles = new[] {"admin"},

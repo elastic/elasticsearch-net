@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.IndexModules.Similarity
 {

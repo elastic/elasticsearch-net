@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 using static Nest.Indices;
 
 namespace Tests.Indices.Monitoring.IndicesStats
@@ -40,7 +40,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 				;
 
 			metrics = IndicesStatsMetric.Completion | IndicesStatsMetric.Flush | IndicesStatsMetric.All;
-			var request = new IndicesStatsRequest(index, metrics) { };
+			var request = new IndicesStatsRequest(index, metrics);
 			await GET($"/index1%2Cindex2/_stats/_all")
 					.Fluent(c => c.Indices.Stats(index, i => i.Metric(metrics)))
 					.Request(c => c.Indices.Stats(request))

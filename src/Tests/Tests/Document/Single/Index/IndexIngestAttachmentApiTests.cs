@@ -7,8 +7,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.Index
 {
@@ -114,8 +114,8 @@ namespace Tests.Document.Single.Index
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Index<IngestedAttachment>(Document, f),
-			(client, f) => client.IndexAsync<IngestedAttachment>(Document, f),
+			(client, f) => client.Index(Document, f),
+			(client, f) => client.IndexAsync(Document, f),
 			(client, r) => client.Index(r),
 			(client, r) => client.IndexAsync(r)
 		);
@@ -192,7 +192,7 @@ namespace Tests.Document.Single.Index
 			);
 
 			createIndexResponse.ShouldBeValid();
-			var ndexResponse = _client.Index<IngestedAttachment>(Document, i => i
+			var ndexResponse = _client.Index(Document, i => i
 				.Index(Index)
 				.Refresh(Refresh.True)
 				.Pipeline(PipelineId)
@@ -212,7 +212,7 @@ namespace Tests.Document.Single.Index
 			var ingestedAttachment = getResponse.Source;
 			ingestedAttachment.Should().NotBeNull();
 
-			var ndexResponse = _client.Index<IngestedAttachment>(ingestedAttachment, i => i
+			var ndexResponse = _client.Index(ingestedAttachment, i => i
 				.Index(Index + "2")
 				.Refresh(Refresh.True)
 			);

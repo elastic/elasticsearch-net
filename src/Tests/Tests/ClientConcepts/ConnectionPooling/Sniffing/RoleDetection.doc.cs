@@ -14,10 +14,10 @@ using Tests.Core.Client.Settings;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
-using static Tests.Framework.TimesHelper;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
+using static Tests.Framework.VirtualClustering.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -32,11 +32,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsMasterNodes()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligible(9200, 9201, 9202))
+					.Succeeds(Always, VirtualClusterWith.Nodes(8).MasterEligible(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -62,11 +62,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsDataNodes()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+					.Succeeds(Always, VirtualClusterWith.Nodes(8).StoresNoData(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -92,10 +92,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SkipsNodesThatDisableHttp()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).HttpDisabled(9201))
+					.Succeeds(Always, VirtualClusterWith.Nodes(8).StoresNoData(9200, 9201, 9202).HttpDisabled(9201))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -132,10 +132,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			var masterNodes = new[] {9200, 9201, 9202};
 			var totalNodesInTheCluster = 20;
 			//
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.MasterOnlyNodes(masterNodes.Length)
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster
+					.Succeeds(Always, VirtualClusterWith
 						.Nodes(totalNodesInTheCluster)
 						.StoresNoData(masterNodes)
 						.MasterEligible(masterNodes))
@@ -205,11 +205,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			var value = "rack_one";
 			var nodesInRackOne = new[] {9204, 9210, 9213};
 
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(totalNodesInTheCluster)
 				//
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster
+					.Succeeds(Always, VirtualClusterWith
 						.Nodes(totalNodesInTheCluster)
 						.HasSetting(setting, value, nodesInRackOne))
 				)
@@ -273,10 +273,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var totalNodesInTheCluster = 20;
 
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(totalNodesInTheCluster)
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster.Nodes(totalNodesInTheCluster))
+					.Succeeds(Always, VirtualClusterWith.Nodes(totalNodesInTheCluster))
 				)
 				.SniffingConnectionPool()
 				.Settings(s => s
@@ -318,10 +318,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsFqdn()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster
+					.Succeeds(Always, VirtualClusterWith
 						.Nodes(8)
 						.StoresNoData(9200, 9201, 9202)
 						.SniffShouldReturnFqdn())

@@ -6,9 +6,10 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
+using Tests.Framework.Extensions;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>

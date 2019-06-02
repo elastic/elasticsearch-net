@@ -15,7 +15,6 @@ using Tests.Core.Client.Settings;
 using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 using Field = Nest.Field;

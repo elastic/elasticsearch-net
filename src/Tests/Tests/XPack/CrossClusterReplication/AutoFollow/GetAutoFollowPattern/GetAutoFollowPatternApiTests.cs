@@ -7,8 +7,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Core.Xunit;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 {
@@ -28,9 +28,9 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_ccr/auto_follow";
 		private static string FollowerPrefix { get; } = "follower-";
+		private static string Prefix { get; } = $"autof-{Guid.NewGuid().ToString("N").Substring(0, 4)}";
 		private static string LeaderPrefix { get; } = $"leader-{Prefix}";
 
-		private static string Prefix { get; } = $"autof-{Guid.NewGuid().ToString("N").Substring(0, 4)}";
 
 		private static string AutoPattern(string v) => $"auto-pattern-{v}";
 

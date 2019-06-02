@@ -1,7 +1,7 @@
 using System.IO;
 using System.Net.Http;
 
-namespace Tests.Framework
+namespace Tests.Framework.Extensions
 {
 	public class WebClient
 	{

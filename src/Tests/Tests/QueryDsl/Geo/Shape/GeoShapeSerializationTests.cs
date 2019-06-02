@@ -9,10 +9,10 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.Geo
+namespace Tests.QueryDsl.Geo.Shape
 {
 	public abstract class GeoShapeSerializationTestsBase
 		: ApiIntegrationTestBase<IntrusiveOperationCluster,
@@ -88,8 +88,8 @@ namespace Tests.QueryDsl.Geo
 		protected override string UrlPath => $"/{Index}/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<Domain.Shape>(f),
-			(client, f) => client.SearchAsync<Domain.Shape>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<Domain.Shape>(r),
 			(client, r) => client.SearchAsync<Domain.Shape>(r)
 		);

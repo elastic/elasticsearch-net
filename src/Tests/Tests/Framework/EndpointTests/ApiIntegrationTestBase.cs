@@ -10,9 +10,9 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
@@ -76,11 +76,9 @@ namespace Tests.Framework
 
 	public class ResponseAssertionException : Exception
 	{
-		private readonly IResponse _response;
 
 		public ResponseAssertionException(Exception innerException, IResponse response)
-			: base(ResponseInMessage(innerException.Message, response), innerException) =>
-			_response = response;
+			: base(ResponseInMessage(innerException.Message, response), innerException) { }
 
 		private static string ResponseInMessage(string innerExceptionMessage, IResponse r) => $@"{innerExceptionMessage}
 Response Under Test:

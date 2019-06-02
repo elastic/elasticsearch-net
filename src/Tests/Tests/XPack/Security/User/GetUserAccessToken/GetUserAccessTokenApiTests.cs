@@ -4,8 +4,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.GetUserAccessToken
@@ -44,9 +44,6 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 		protected override string UrlPath => "/_security/oauth2/token";
 
 		protected virtual string UserPassword => Admin.Password;
-
-		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string Role => $"role-{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Security.GetUserAccessToken(Admin.Username, UserPassword, f),

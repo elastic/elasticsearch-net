@@ -11,9 +11,8 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication
 {
@@ -38,6 +37,8 @@ namespace Tests.XPack.CrossClusterReplication
 		private const string UnfollowStep = nameof(UnfollowStep);
 		private const string GlobalStatsStep = nameof(GlobalStatsStep);
 
+		// ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+		// wrong would result in different projects being sent
 		private static readonly Project[] Data = Project.Generator.GenerateLazy(1000).ToArray();
 
 		public CrossClusterReplicationFollowTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
@@ -77,13 +78,12 @@ namespace Tests.XPack.CrossClusterReplication
 						v =>
 						{
 							if (cluster.ClusterConfiguration.Version < "6.7.0")
-							{
 								return new CreateFollowIndexRequest(CopyIndex(v))
 								{
-							RemoteCluster = DefaultSeeder.RemoteClusterName,
-							LeaderIndex = v
+									RemoteCluster = DefaultSeeder.RemoteClusterName,
+									LeaderIndex = v
 								};
-							}
+
 							return new CreateFollowIndexRequest(CopyIndex(v))
 							{
 								RemoteCluster = DefaultSeeder.RemoteClusterName,
@@ -94,11 +94,9 @@ namespace Tests.XPack.CrossClusterReplication
 						(v, d) =>
 						{
 							if (cluster.ClusterConfiguration.Version < "6.7.0")
-							{
 								return d
-							.RemoteCluster(DefaultSeeder.RemoteClusterName)
+									.RemoteCluster(DefaultSeeder.RemoteClusterName)
 									.LeaderIndex(v);
-							}
 
 							return d
 								.RemoteCluster(DefaultSeeder.RemoteClusterName)

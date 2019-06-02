@@ -4,7 +4,7 @@ using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Compound.FunctionScore
@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Query = new MatchAllQuery { },
+			Query = new MatchAllQuery(),
 			BoostMode = FunctionBoostMode.Multiply,
 			ScoreMode = FunctionScoreMode.Sum,
 			MaxBoost = 20.0,

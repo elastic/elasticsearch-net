@@ -1,4 +1,4 @@
-﻿namespace Tests.Framework
+﻿namespace Tests.Framework.Extensions
 {
 	internal static class NumericExtensions
 	{

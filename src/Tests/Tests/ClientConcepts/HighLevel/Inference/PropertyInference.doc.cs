@@ -6,9 +6,9 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using Xunit;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {

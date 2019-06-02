@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.IndexModules.IndexSettings.Settings
 {

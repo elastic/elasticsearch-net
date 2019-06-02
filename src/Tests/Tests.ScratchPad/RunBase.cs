@@ -69,7 +69,7 @@ namespace Tests.ScratchPad
 					for (var i = 0; i < limit; i++) Act(c, instantiator());
 
 					var elapsed = sw.Elapsed;
-					var perOp = elapsed.TotalMilliseconds / (double)limit + 1;
+					var perOp = elapsed.TotalMilliseconds / limit + 1;
 					var messagesPerSecond = TimeSpan.FromSeconds(1).TotalMilliseconds / perOp;
 					Console.WriteLine($"Done {limit:N0} iterations in {elapsed}. ({messagesPerSecond:N2}/s)");
 				};

@@ -2,9 +2,9 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.Object
+namespace Tests.Mapping.Types.Complex.Object
 {
 	public class ObjectPropertyTests : PropertyTestsBase
 	{
@@ -33,7 +33,7 @@ namespace Tests.Mapping.Types.Core.Object
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Object<Developer>(n => n
 				.Name(p => p.LeadDeveloper)
-				.Dynamic(true)
+				.Dynamic()
 				.Enabled()
 				.Properties(pps => pps
 					.Ip(i => i

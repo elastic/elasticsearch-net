@@ -5,9 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetFilters
 {
@@ -69,10 +67,8 @@ namespace Tests.XPack.MachineLearning.GetFilters
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
-			{
 				for (var i = 0; i < 3; i++)
 					PutFilter(client, callUniqueValue.Value + "_" + (i + 1));
-			}
 		}
 
 		protected override bool ExpectIsValid => true;

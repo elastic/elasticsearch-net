@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Search.Explain
 {
@@ -23,7 +23,7 @@ namespace Tests.Search.Explain
 
 			await POST("/project/_explain/NEST")
 					.Fluent(c => c.Explain<Project>("NEST", e => e.Query(q => q.MatchAll())))
-					.Request(c => c.Explain<Project>(new ExplainRequest<Project>("project", "NEST") { }))
+					.Request(c => c.Explain<Project>(new ExplainRequest<Project>("project", "NEST")))
 					.FluentAsync(c => c.ExplainAsync<Project>("NEST", e => e.Query(q => q.MatchAll())))
 					.RequestAsync(c => c.ExplainAsync<Project>(new ExplainRequest<Project>("NEST")))
 				;

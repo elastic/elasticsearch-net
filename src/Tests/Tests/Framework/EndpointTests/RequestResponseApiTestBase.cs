@@ -10,10 +10,10 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Serialization;
 using Tests.Domain.Helpers;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
@@ -32,7 +32,7 @@ namespace Tests.Framework
 			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
 
 			Cluster = cluster;
-			Responses = usage.CallOnce(ClientUsage, 0);
+			Responses = usage.CallOnce(ClientUsage);
 			UniqueValues = usage.CallUniqueValues;
 		}
 

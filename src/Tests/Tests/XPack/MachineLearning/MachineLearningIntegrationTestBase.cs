@@ -6,9 +6,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning
 {
@@ -87,7 +86,6 @@ namespace Tests.XPack.MachineLearning
 			var startDate = DateTime.Now.Year;
 
 			for (var i = 0; i < 10; i++)
-			{
 				yield return new ScheduledEvent
 				{
 					StartTime = new DateTimeOffset(startDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
@@ -95,7 +93,6 @@ namespace Tests.XPack.MachineLearning
 					Description = $"Event {i}",
 					CalendarId = calendarId
 				};
-			}
 		}
 
 		protected PostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)

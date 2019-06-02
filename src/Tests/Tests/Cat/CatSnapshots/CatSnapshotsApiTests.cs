@@ -6,8 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatSnapshots
 {
@@ -43,7 +43,7 @@ namespace Tests.Cat.CatSnapshots
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var createIndex = Client.Indices.Create(SnapshotIndexName);
+			Client.Indices.Create(SnapshotIndexName);
 			Client.Cluster.Health(SnapshotIndexName, g => g.WaitForStatus(WaitForStatus.Yellow));
 			client.Snapshot.Snapshot(RepositoryName, SnapshotName, s => s.WaitForCompletion().Index(SnapshotIndexName));
 		}

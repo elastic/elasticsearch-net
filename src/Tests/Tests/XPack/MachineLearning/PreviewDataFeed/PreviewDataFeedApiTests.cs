@@ -3,11 +3,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.XPack.MachineLearning.PreviewDatafeed
+namespace Tests.XPack.MachineLearning.PreviewDataFeed
 {
 	//TODO what does an invalid request return here? this API returns a json array for the happy path
 	public class PreviewDatafeedApiTests

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using static Nest.Infer;
-using static Tests.Framework.UrlTester;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.AliasManagement.GetAlias
 {

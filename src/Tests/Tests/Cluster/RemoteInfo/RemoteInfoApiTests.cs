@@ -4,8 +4,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using M = System.Collections.Generic.Dictionary<string, object>;
 using static Nest.Infer;
 
@@ -52,6 +52,7 @@ namespace Tests.Cluster.RemoteInfo
 			 * As of 6.5.0 you can also use the following helper class which uses
 			 * the new way to configure remote clusters.
 			 */
+			// ReSharper disable once UnusedVariable
 			var newWay = new RemoteClusterConfiguration()
 			{
 				{ "cluster_one", "127.0.0.1:9300", "127.0.0.1:9301" },

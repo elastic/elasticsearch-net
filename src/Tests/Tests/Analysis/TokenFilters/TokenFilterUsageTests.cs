@@ -1,6 +1,6 @@
 ﻿using System;
 using Nest;
-using Tests.Framework;
+using Tests.IndexModules;
 
 namespace Tests.Analysis.TokenFilters
 {
@@ -226,7 +226,7 @@ namespace Tests.Analysis.TokenFilters
 						{ "keeptypes", new KeepTypesTokenFilter { Types = new[] { "<NUM>", "<SOMETHINGELSE>" } } },
 						{ "keepwords", new KeepWordsTokenFilter { KeepWordsCase = true, KeepWords = new[] { "a", "b", "c" } } },
 						{ "marker", new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" } } },
-						{ "kstem", new KStemTokenFilter { } },
+						{ "kstem", new KStemTokenFilter() },
 						{ "length", new LengthTokenFilter { Min = 10, Max = 200 } },
 						{ "limit", new LimitTokenCountTokenFilter { ConsumeAllTokens = true, MaxTokenCount = 12 } },
 						{ "lc", new LowercaseTokenFilter() },

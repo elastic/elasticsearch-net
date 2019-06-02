@@ -7,15 +7,15 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl
 {
 	public abstract class QueryDslUsageTestsBase
 		: ApiTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
+		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery());
 
 		protected readonly QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
 
@@ -46,8 +46,8 @@ namespace Tests.QueryDsl
 		protected override string UrlPath => "/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<Project>(f),
-			(client, f) => client.SearchAsync<Project>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<Project>(r),
 			(client, r) => client.SearchAsync<Project>(r)
 		);

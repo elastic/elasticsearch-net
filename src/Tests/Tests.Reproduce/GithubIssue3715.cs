@@ -647,7 +647,7 @@ namespace Tests.Reproduce
 		{
 			var percentilesAggregate = bucket.Percentiles(name);
 			percentilesAggregate.Should().NotBeNull();
-			percentilesAggregate.Items.Should().HaveCount(1).And.Contain(p => p.Percentile == 50d);
+			percentilesAggregate.Items.Should().HaveCount(1).And.Contain(p => Math.Abs(p.Percentile - 50d) < double.Epsilon);
 		}
 	}
 }

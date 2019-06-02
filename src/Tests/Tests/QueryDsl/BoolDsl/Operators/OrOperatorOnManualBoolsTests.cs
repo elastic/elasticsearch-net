@@ -9,8 +9,6 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public class OrOperatorOnManualBoolsTests : OperatorUsageBase
 	{
-		private static QueryContainer ATermQuery(QueryContainerDescriptor<Project> must) => must.Term(p => p.Name, "foo");
-
 		[U] public void CombindingTwoBools()
 		{
 			var queries = new QueryContainer[] { Query };

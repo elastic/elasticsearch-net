@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.MockResponses;
+using Tests.Framework.VirtualClustering.MockResponses;
+using Tests.Framework.VirtualClustering.Providers;
+using Tests.Framework.VirtualClustering.Rules;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
 	public class VirtualClusterConnection : InMemoryConnection
 	{
-		private static readonly object _lock = new object();
+		private static readonly object Lock = new object();
 
-		private static byte[] DefaultResponseBytes;
+		private static byte[] _defaultResponseBytes;
 
 		private VirtualCluster _cluster;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
-		private IDictionary<int, State> Calls = new Dictionary<int, State> { };
+		private IDictionary<int, State> _calls = new Dictionary<int, State>();
 
 		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
 		{
@@ -55,10 +57,10 @@ namespace Tests.Framework
 		{
 			if (cluster == null) return;
 
-			lock (_lock)
+			lock (Lock)
 			{
 				_cluster = cluster;
-				Calls = cluster.Nodes.ToDictionary(n => n.Uri.Port, v => new State());
+				_calls = cluster.Nodes.ToDictionary(n => n.Uri.Port, v => new State());
 			}
 		}
 
@@ -69,10 +71,10 @@ namespace Tests.Framework
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
-			Calls.Should().ContainKey(requestData.Uri.Port);
+			_calls.Should().ContainKey(requestData.Uri.Port);
 			try
 			{
-				var state = Calls[requestData.Uri.Port];
+				var state = _calls[requestData.Uri.Port];
 				if (IsSniffRequest(requestData))
 				{
 					var sniffed = Interlocked.Increment(ref state.Sniffed);
@@ -122,7 +124,7 @@ namespace Tests.Framework
 		{
 			requestData.MadeItToResponse = true;
 
-			var state = Calls[requestData.Uri.Port];
+			var state = _calls[requestData.Uri.Port];
 			foreach (var rule in rules.Where(s => s.OnPort.HasValue))
 			{
 				var always = rule.Times.Match(t => true, t => false);
@@ -197,7 +199,7 @@ namespace Tests.Framework
 			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
-			var state = Calls[requestData.Uri.Port];
+			var state = _calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
 			var ret = returnOverride ?? rule.Return;
 
@@ -218,7 +220,7 @@ namespace Tests.Framework
 			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
-			var state = Calls[requestData.Uri.Port];
+			var state = _calls[requestData.Uri.Port];
 			var succeeded = Interlocked.Increment(ref state.Successes);
 			beforeReturn?.Invoke(rule);
 			return ReturnConnectionStatus<TResponse>(requestData, successResponse(rule), contentType: rule.ReturnContentType);
@@ -230,15 +232,15 @@ namespace Tests.Framework
 			if (rule?.ReturnResponse != null)
 				return rule.ReturnResponse;
 
-			if (DefaultResponseBytes != null) return DefaultResponseBytes;
+			if (_defaultResponseBytes != null) return _defaultResponseBytes;
 
 			var response = DefaultResponse;
 			using (var ms = new MemoryStream())
 			{
 				new LowLevelRequestResponseSerializer().Serialize(response, ms);
-				DefaultResponseBytes = ms.ToArray();
+				_defaultResponseBytes = ms.ToArray();
 			}
-			return DefaultResponseBytes;
+			return _defaultResponseBytes;
 		}
 
 		public override Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken) =>

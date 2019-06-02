@@ -5,8 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.InvalidateUserAccessToken
@@ -34,8 +34,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		protected override Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
-		protected override InvalidateUserAccessTokenRequest Initializer => new InvalidateUserAccessTokenRequest(CurrentAccessToken)
-			{ };
+		protected override InvalidateUserAccessTokenRequest Initializer => new InvalidateUserAccessTokenRequest(CurrentAccessToken);
 
 		protected override bool SupportsDeserialization => false;
 

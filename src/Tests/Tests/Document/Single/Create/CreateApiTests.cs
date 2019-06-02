@@ -12,8 +12,9 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Domain.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.DocumentationTests;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Create

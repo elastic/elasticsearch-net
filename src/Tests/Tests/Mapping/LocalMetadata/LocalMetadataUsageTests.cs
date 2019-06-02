@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
+using Tests.IndexModules;
 
 namespace Tests.Mapping.LocalMetadata
 {

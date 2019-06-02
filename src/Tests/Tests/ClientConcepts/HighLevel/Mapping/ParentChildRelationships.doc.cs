@@ -10,6 +10,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 

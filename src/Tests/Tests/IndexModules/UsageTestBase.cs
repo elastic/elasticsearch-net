@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.Serialization;
 
-namespace Tests.Framework
+namespace Tests.IndexModules
 {
 	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : ExpectJsonTestBase
 		where TDescriptor : TInterface, new()
