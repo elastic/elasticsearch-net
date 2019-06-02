@@ -5,5 +5,6 @@
 
 	public partial class GetMappingRequest { }
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class GetMappingDescriptor<TDocument> where TDocument : class { }
 }

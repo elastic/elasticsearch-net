@@ -79,6 +79,7 @@ namespace Nest
 
 	[ReadAs(typeof(SearchRequest<>))]
 	[InterfaceDataContract]
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface ISearchRequest<TInferDocument> : ISearchRequest { }
 
 	[DataContract]

@@ -23,8 +23,16 @@ using System.Linq.Expressions;
 
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net@(ns);
+@if (model.Key != CsharpNames.RootNamespace)
+{
+	<text>using Elasticsearch.Net@(ns);
+</text>
+}
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 @foreach (var endpoint in endpoints)

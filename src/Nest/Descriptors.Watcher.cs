@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.WatcherApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for Acknowledge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
@@ -220,7 +224,7 @@ namespace Nest
 		// values part of the url path
 		Metrics IWatcherStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		///<summary>Controls what additional stat metrics should be include in the response</summary>
-		public WatcherStatsDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public WatcherStatsDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		// Request parameters
 		///<summary>Emits stack traces of currently running watches</summary>
 		public WatcherStatsDescriptor EmitStacktraces(bool? emitstacktraces = true) => Qs("emit_stacktraces", emitstacktraces);

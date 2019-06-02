@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.IngestApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for DeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>

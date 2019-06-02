@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.RollupApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for DeleteJob <pre></pre></summary>
@@ -161,7 +165,7 @@ namespace Nest
 		public RollupSearchDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RollupSearchDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public RollupSearchDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public RollupSearchDescriptor<TDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);

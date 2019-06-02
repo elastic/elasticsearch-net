@@ -38,6 +38,7 @@ using Nest.Specification.TasksApi;
 using Nest.Specification.WatcherApi;
 using Nest.Specification.XPackApi;
 
+// ReSharper disable RedundantTypeArgumentsOfMethod
 namespace Nest
 {
 	///<summary>

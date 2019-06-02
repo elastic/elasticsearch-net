@@ -102,8 +102,11 @@ namespace Tests.Aggregations.Pipeline.BucketSort
 			// sum of commits should descend over buckets
 			foreach (var item in projectsPerMonth.Buckets)
 			{
-				var numberOfCommits = item.Sum("commits").Value.Value;
-				if (previousCommits != -1)
+				var value = item.Sum("commits").Value;
+				if (value == null) continue;
+
+				var numberOfCommits = value.Value;
+				if (Math.Abs(previousCommits - (-1)) > double.Epsilon)
 					numberOfCommits.Should().BeLessOrEqualTo(previousCommits);
 
 				previousCommits = numberOfCommits;

@@ -12,5 +12,6 @@
 	// ReSharper disable once UnusedTypeParameter
 	public partial class DocumentExistsRequest<TDocument> where TDocument : class { }
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class DocumentExistsDescriptor<TDocument> where TDocument : class { }
 }

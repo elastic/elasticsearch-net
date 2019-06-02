@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net.Specification.WatcherApi;
 
 // ReSharper disable once CheckNamespace
+// ReSharper disable RedundantTypeArgumentsOfMethod
 namespace Nest.Specification.WatcherApi
 {
 	///<summary>

@@ -72,8 +72,8 @@ namespace Tests.Aggregations
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<Project>(f),
-			(client, f) => client.SearchAsync<Project>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<Project>(r),
 			(client, r) => client.SearchAsync<Project>(r)
 		);

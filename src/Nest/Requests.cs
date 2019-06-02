@@ -42,6 +42,7 @@ using Elasticsearch.Net.Specification.TasksApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
 
+// ReSharper disable UnusedTypeParameter
 namespace Nest
 {
 	public abstract partial class PlainRequestBase<TParameters>

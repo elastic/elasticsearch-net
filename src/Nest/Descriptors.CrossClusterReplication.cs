@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for DeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
@@ -99,7 +103,7 @@ namespace Nest
 		public FollowIndexStatsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public FollowIndexStatsDescriptor AllIndices() => this.Index(Indices.All);
+		public FollowIndexStatsDescriptor AllIndices() => Index(Indices.All);
 	// Request parameters
 	}
 

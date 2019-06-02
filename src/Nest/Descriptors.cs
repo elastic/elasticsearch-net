@@ -1,5 +1,6 @@
 namespace Nest
 {
+	// ReSharper disable UnusedTypeParameter
 	public abstract partial class RequestDescriptorBase<TDescriptor, TParameters, TInterface>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>

@@ -11,6 +11,7 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface IExplainRequest<TDocument> where TDocument : class { }
 
 	public partial class ExplainRequest
@@ -19,6 +20,7 @@ namespace Nest
 		public Fields StoredFields { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class ExplainRequest<TDocument> where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>

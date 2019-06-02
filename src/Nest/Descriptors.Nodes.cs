@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.NodesApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for HotThreads <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
@@ -94,7 +98,7 @@ namespace Nest
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
-		public NodesInfoDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public NodesInfoDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoDescriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
@@ -176,9 +180,9 @@ namespace Nest
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public NodesStatsDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public NodesStatsDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		///<summary>Limit the information returned for `indices` metric to the specific index metrics. Isn't used if `indices` (or `all`) metric isn't specified.</summary>
-		public NodesStatsDescriptor IndexMetric(IndexMetrics indexMetric) => Assign(indexMetric, (a, v) => a.RouteValues.Optional("index_metric", (IndexMetrics)v));
+		public NodesStatsDescriptor IndexMetric(IndexMetrics indexMetric) => Assign(indexMetric, (a, v) => a.RouteValues.Optional("index_metric", v));
 		// Request parameters
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(Fields completionfields) => Qs("completion_fields", completionfields);
@@ -241,7 +245,7 @@ namespace Nest
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public NodesUsageDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public NodesUsageDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
 		public NodesUsageDescriptor Timeout(Time timeout) => Qs("timeout", timeout);

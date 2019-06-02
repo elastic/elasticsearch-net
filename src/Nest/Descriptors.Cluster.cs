@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.ClusterApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
@@ -77,7 +81,7 @@ namespace Nest
 		public ClusterHealthDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ClusterHealthDescriptor AllIndices() => this.Index(Indices.All);
+		public ClusterHealthDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthDescriptor Level(Level? level) => Qs("level", level);
@@ -181,14 +185,14 @@ namespace Nest
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public ClusterStateDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public ClusterStateDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ClusterStateDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ClusterStateDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ClusterStateDescriptor AllIndices() => this.Index(Indices.All);
+		public ClusterStateDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ClusterStateDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);

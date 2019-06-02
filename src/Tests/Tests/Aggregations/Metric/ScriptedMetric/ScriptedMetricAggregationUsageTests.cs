@@ -11,7 +11,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 {
 	public class ScriptedMetricAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
-		private readonly Scripted Script = new Scripted
+		private readonly Scripted _script = new Scripted
 		{
 			Language = "painless",
 			Init = "state.commits = []",
@@ -28,29 +28,29 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			{
 				scripted_metric = new
 				{
-					init_script = new { source = Script.Init },
-					map_script = new { source = Script.Map },
-					combine_script = new { source = Script.Combine },
-					reduce_script = new { source = Script.Reduce }
+					init_script = new { source = _script.Init },
+					map_script = new { source = _script.Map },
+					combine_script = new { source = _script.Combine },
+					reduce_script = new { source = _script.Reduce }
 				}
 			}
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.ScriptedMetric("sum_the_hard_way", sm => sm
-				.InitScript(ss => ss.Source(Script.Init))
-				.MapScript(ss => ss.Source(Script.Map))
-				.CombineScript(ss => ss.Source(Script.Combine))
-				.ReduceScript(ss => ss.Source(Script.Reduce))
+				.InitScript(ss => ss.Source(_script.Init))
+				.MapScript(ss => ss.Source(_script.Map))
+				.CombineScript(ss => ss.Source(_script.Combine))
+				.ReduceScript(ss => ss.Source(_script.Reduce))
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
 			new ScriptedMetricAggregation("sum_the_hard_way")
 			{
-				InitScript = new InlineScript(Script.Init),
-				MapScript = new InlineScript(Script.Map),
-				CombineScript = new InlineScript(Script.Combine),
-				ReduceScript = new InlineScript(Script.Reduce)
+				InitScript = new InlineScript(_script.Init),
+				MapScript = new InlineScript(_script.Map),
+				CombineScript = new InlineScript(_script.Combine),
+				ReduceScript = new InlineScript(_script.Reduce)
 			};
 
 		protected override void ExpectResponse(SearchResponse<Project> response)
@@ -76,7 +76,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// </summary>
 	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
-		private readonly Scripted First = new Scripted
+		private readonly Scripted _first = new Scripted
 		{
 			Language = "painless",
 			Init = "state.map = [:]",
@@ -102,7 +102,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			Combine = "return state.map;"
 		};
 
-		private readonly Scripted Second = new Scripted
+		private readonly Scripted _second = new Scripted
 		{
 			Language = "painless",
 			Init = "state.commits = []",
@@ -121,23 +121,23 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				{
 					init_script = new
 					{
-						source = First.Init,
-						lang = First.Language
+						source = _first.Init,
+						lang = _first.Language
 					},
 					combine_script = new
 					{
-						source = First.Combine,
-						lang = First.Language
+						source = _first.Combine,
+						lang = _first.Language
 					},
 					map_script = new
 					{
-						source = First.Map,
-						lang = First.Language
+						source = _first.Map,
+						lang = _first.Language
 					},
 					reduce_script = new
 					{
-						source = First.Reduce,
-						lang = First.Language
+						source = _first.Reduce,
+						lang = _first.Language
 					}
 				}
 			},
@@ -147,23 +147,23 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				{
 					init_script = new
 					{
-						source = Second.Init,
-						lang = Second.Language
+						source = _second.Init,
+						lang = _second.Language
 					},
 					map_script = new
 					{
-						source = Second.Map,
-						lang = Second.Language
+						source = _second.Map,
+						lang = _second.Language
 					},
 					combine_script = new
 					{
-						source = Second.Combine,
-						lang = Second.Language
+						source = _second.Combine,
+						lang = _second.Language
 					},
 					reduce_script = new
 					{
-						source = Second.Reduce,
-						lang = Second.Language
+						source = _second.Reduce,
+						lang = _second.Language
 					}
 				}
 			}
@@ -171,32 +171,32 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.ScriptedMetric("by_state_total", sm => sm
-				.InitScript(ss => ss.Source(First.Init).Lang(First.Language))
-				.CombineScript(ss => ss.Source(First.Combine).Lang(First.Language))
-				.MapScript(ss => ss.Source(First.Map).Lang(First.Language))
-				.ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
+				.InitScript(ss => ss.Source(_first.Init).Lang(_first.Language))
+				.CombineScript(ss => ss.Source(_first.Combine).Lang(_first.Language))
+				.MapScript(ss => ss.Source(_first.Map).Lang(_first.Language))
+				.ReduceScript(ss => ss.Source(_first.Reduce).Lang(_first.Language))
 			)
 			.ScriptedMetric("total_commits", sm => sm
-				.InitScript(ss => ss.Source(Second.Init).Lang(Second.Language))
-				.MapScript(ss => ss.Source(Second.Map).Lang(Second.Language))
-				.CombineScript(ss => ss.Source(Second.Combine).Lang(Second.Language))
-				.ReduceScript(ss => ss.Source(Second.Reduce).Lang(Second.Language))
+				.InitScript(ss => ss.Source(_second.Init).Lang(_second.Language))
+				.MapScript(ss => ss.Source(_second.Map).Lang(_second.Language))
+				.CombineScript(ss => ss.Source(_second.Combine).Lang(_second.Language))
+				.ReduceScript(ss => ss.Source(_second.Reduce).Lang(_second.Language))
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
 			new ScriptedMetricAggregation("by_state_total")
 			{
-				InitScript = new InlineScript(First.Init) { Lang = First.Language },
-				CombineScript = new InlineScript(First.Combine) { Lang = First.Language },
-				MapScript = new InlineScript(First.Map) { Lang = First.Language },
-				ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
+				InitScript = new InlineScript(_first.Init) { Lang = _first.Language },
+				CombineScript = new InlineScript(_first.Combine) { Lang = _first.Language },
+				MapScript = new InlineScript(_first.Map) { Lang = _first.Language },
+				ReduceScript = new InlineScript(_first.Reduce) { Lang = _first.Language }
 			}
 			&& new ScriptedMetricAggregation("total_commits")
 			{
-				InitScript = new InlineScript(Second.Init) { Lang = Second.Language },
-				MapScript = new InlineScript(Second.Map) { Lang = Second.Language },
-				CombineScript = new InlineScript(Second.Combine) { Lang = Second.Language },
-				ReduceScript = new InlineScript(Second.Reduce) { Lang = Second.Language }
+				InitScript = new InlineScript(_second.Init) { Lang = _second.Language },
+				MapScript = new InlineScript(_second.Map) { Lang = _second.Language },
+				CombineScript = new InlineScript(_second.Combine) { Lang = _second.Language },
+				ReduceScript = new InlineScript(_second.Reduce) { Lang = _second.Language }
 			};
 
 		protected override void ExpectResponse(SearchResponse<Project> response)

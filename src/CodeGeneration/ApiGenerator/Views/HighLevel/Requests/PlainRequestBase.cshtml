@@ -18,6 +18,8 @@ using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 @{ IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+
+// ReSharper disable UnusedTypeParameter
 namespace Nest
 {
 	public abstract partial class @Raw("PlainRequestBase<TParameters>")

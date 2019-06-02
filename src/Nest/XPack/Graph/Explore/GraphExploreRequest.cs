@@ -11,6 +11,7 @@ namespace Nest
 		IGraphExploreControls Controls { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface IGraphExploreRequest<TDocument> where TDocument : class { }
 
 	public partial class GraphExploreRequest
@@ -21,6 +22,7 @@ namespace Nest
 		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class GraphExploreRequest<TDocument> where TDocument : class { }
 
 	public partial class GraphExploreDescriptor<TDocument> where TDocument : class

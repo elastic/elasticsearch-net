@@ -28,7 +28,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoBounds("viewport", gb => gb
 				.Field(p => p.Location)
-				.WrapLongitude(true)
+				.WrapLongitude()
 			);
 
 		protected override AggregationDictionary InitializerAggs =>

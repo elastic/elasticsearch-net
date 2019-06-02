@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.GraphApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
@@ -49,7 +53,7 @@ namespace Nest
 		public GraphExploreDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GraphExploreDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public GraphExploreDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula

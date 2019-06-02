@@ -64,7 +64,9 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 				ctors.AddRange(from path in paths.Where(path => path.HasResolvableArguments)
 					let baseArgs = path.AutoResolveBaseArguments(generic)
 					let constructorArgs = path.AutoResolveConstructorArguments
-					let baseOrThis = inheritsFromPlainRequestBase ? "this" : "base"
+					let baseOrThis = inheritsFromPlainRequestBase  
+						? "this" 
+						: "base"
 					let generated = $"public {typeName}({constructorArgs}) : {baseOrThis}({baseArgs})"
 					select new Constructor
 					{
@@ -82,6 +84,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					{
 						Parameterless = string.IsNullOrEmpty(docPathConstArgs),
 						Generated = $"public {typeName}({docPathConstArgs}) : this({docPathBaseArgs})",
+		
 						AdditionalCode = $"partial void DocumentFromPath({generic} document);",
 						Description = docPath.GetXmlDocs(Indent, skipResolvable: true, documentConstructor: true),
 						Body = "=> DocumentFromPath(documentWithId);"

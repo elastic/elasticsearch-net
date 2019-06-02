@@ -22,8 +22,11 @@ using System.Text;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
@@ -112,7 +115,7 @@ namespace Nest
 		public CountDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CountDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public CountDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CountDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -291,7 +294,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public DeleteByQueryDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public DeleteByQueryDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public DeleteByQueryDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -646,7 +649,7 @@ namespace Nest
 		public FieldCapabilitiesDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public FieldCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
+		public FieldCapabilitiesDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -973,7 +976,7 @@ namespace Nest
 		public MultiSearchDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public MultiSearchDescriptor AllIndices() => this.Index(Indices.All);
+		public MultiSearchDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public MultiSearchDescriptor CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
@@ -1014,7 +1017,7 @@ namespace Nest
 		public MultiSearchTemplateDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public MultiSearchTemplateDescriptor AllIndices() => this.Index(Indices.All);
+		public MultiSearchTemplateDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public MultiSearchTemplateDescriptor CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
@@ -1235,7 +1238,7 @@ namespace Nest
 		public SearchDescriptor<TInferDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchDescriptor<TInferDocument> AllIndices() => this.Index(Indices.All);
+		public SearchDescriptor<TInferDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchDescriptor<TInferDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1326,7 +1329,7 @@ namespace Nest
 		public SearchShardsDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchShardsDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public SearchShardsDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchShardsDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1371,7 +1374,7 @@ namespace Nest
 		public SearchTemplateDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SearchTemplateDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public SearchTemplateDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchTemplateDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1567,7 +1570,7 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpdateByQueryDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public UpdateByQueryDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpdateByQueryDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);

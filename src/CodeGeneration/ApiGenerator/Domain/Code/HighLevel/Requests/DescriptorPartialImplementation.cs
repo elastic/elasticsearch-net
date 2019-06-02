@@ -37,9 +37,6 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 				var routeValue = "v";
 				var routeSetter = p.Required ? "Required" : "Optional";
 
-				if (paramName == "metric" || paramName == "watcherStatsMetric") routeValue = "(Metrics)v";
-				else if (paramName == "indexMetric") routeValue = "(IndexMetrics)v";
-
 				var code =
 					$"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign({paramName}, (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
@@ -53,7 +50,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 				}
 				if (paramName == "index" && p.Type == "list")
 				{
-					code = $"public {returnType} AllIndices() => this.Index(Indices.All);";
+					code = $"public {returnType} AllIndices() => Index(Indices.All);";
 					xmlDoc = $"///<summary>A shortcut into calling Index(Indices.All)</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}

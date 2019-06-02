@@ -92,8 +92,8 @@ namespace Tests.Aggregations.Bucket.Parent
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<CommitActivity>(f),
-			(client, f) => client.SearchAsync<CommitActivity>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<CommitActivity>(r),
 			(client, r) => client.SearchAsync<CommitActivity>(r)
 		);

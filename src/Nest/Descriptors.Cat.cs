@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.CatApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for Aliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
@@ -123,7 +127,7 @@ namespace Nest
 		public CatCountDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CatCountDescriptor AllIndices() => this.Index(Indices.All);
+		public CatCountDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatCountDescriptor Format(string format) => Qs("format", format);
@@ -240,7 +244,7 @@ namespace Nest
 		public CatIndicesDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CatIndicesDescriptor AllIndices() => this.Index(Indices.All);
+		public CatIndicesDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
@@ -399,7 +403,7 @@ namespace Nest
 		public CatRecoveryDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CatRecoveryDescriptor AllIndices() => this.Index(Indices.All);
+		public CatRecoveryDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
@@ -462,7 +466,7 @@ namespace Nest
 		public CatSegmentsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CatSegmentsDescriptor AllIndices() => this.Index(Indices.All);
+		public CatSegmentsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
 		public CatSegmentsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
@@ -501,7 +505,7 @@ namespace Nest
 		public CatShardsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CatShardsDescriptor AllIndices() => this.Index(Indices.All);
+		public CatShardsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
 		public CatShardsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);

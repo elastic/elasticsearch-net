@@ -24,6 +24,10 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.IndicesApi;
 
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	///<summary>descriptor for Analyze <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
@@ -74,7 +78,7 @@ namespace Nest
 		public ClearCacheDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ClearCacheDescriptor AllIndices() => this.Index(Indices.All);
+		public ClearCacheDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ClearCacheDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -119,7 +123,7 @@ namespace Nest
 		public CloseIndexDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public CloseIndexDescriptor AllIndices() => this.Index(Indices.All);
+		public CloseIndexDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CloseIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -191,7 +195,7 @@ namespace Nest
 		public DeleteIndexDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public DeleteIndexDescriptor AllIndices() => this.Index(Indices.All);
+		public DeleteIndexDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public DeleteIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -231,7 +235,7 @@ namespace Nest
 		public DeleteAliasDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public DeleteAliasDescriptor AllIndices() => this.Index(Indices.All);
+		public DeleteAliasDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteAliasDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -288,7 +292,7 @@ namespace Nest
 		public IndexExistsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
+		public IndexExistsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public IndexExistsDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -336,7 +340,7 @@ namespace Nest
 		public AliasExistsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public AliasExistsDescriptor AllIndices() => this.Index(Indices.All);
+		public AliasExistsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public AliasExistsDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -401,7 +405,7 @@ namespace Nest
 		public TypeExistsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public TypeExistsDescriptor AllIndices() => this.Index(Indices.All);
+		public TypeExistsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public TypeExistsDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -436,7 +440,7 @@ namespace Nest
 		public FlushDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public FlushDescriptor AllIndices() => this.Index(Indices.All);
+		public FlushDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public FlushDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -473,7 +477,7 @@ namespace Nest
 		public SyncedFlushDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SyncedFlushDescriptor AllIndices() => this.Index(Indices.All);
+		public SyncedFlushDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SyncedFlushDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -506,7 +510,7 @@ namespace Nest
 		public ForceMergeDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ForceMergeDescriptor AllIndices() => this.Index(Indices.All);
+		public ForceMergeDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ForceMergeDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -546,7 +550,7 @@ namespace Nest
 		public GetIndexDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
+		public GetIndexDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public GetIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -605,7 +609,7 @@ namespace Nest
 		public GetAliasDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetAliasDescriptor AllIndices() => this.Index(Indices.All);
+		public GetAliasDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetAliasDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -649,7 +653,7 @@ namespace Nest
 		public GetFieldMappingDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetFieldMappingDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public GetFieldMappingDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetFieldMappingDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -688,7 +692,7 @@ namespace Nest
 		public GetMappingDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetMappingDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public GetMappingDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetMappingDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -741,7 +745,7 @@ namespace Nest
 		public GetIndexSettingsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
+		public GetIndexSettingsDescriptor AllIndices() => Index(Indices.All);
 		///<summary>The name of the settings that should be included</summary>
 		public GetIndexSettingsDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 		// Request parameters
@@ -814,7 +818,7 @@ namespace Nest
 		public UpgradeStatusDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpgradeStatusDescriptor AllIndices() => this.Index(Indices.All);
+		public UpgradeStatusDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeStatusDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -848,7 +852,7 @@ namespace Nest
 		public OpenIndexDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public OpenIndexDescriptor AllIndices() => this.Index(Indices.All);
+		public OpenIndexDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public OpenIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -890,7 +894,7 @@ namespace Nest
 		public PutAliasDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public PutAliasDescriptor AllIndices() => this.Index(Indices.All);
+		public PutAliasDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public PutAliasDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -921,7 +925,7 @@ namespace Nest
 		public PutMappingDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public PutMappingDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public PutMappingDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public PutMappingDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -960,7 +964,7 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
+		public UpdateIndexSettingsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpdateIndexSettingsDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1032,7 +1036,7 @@ namespace Nest
 		public RecoveryStatusDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RecoveryStatusDescriptor AllIndices() => this.Index(Indices.All);
+		public RecoveryStatusDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public RecoveryStatusDescriptor ActiveOnly(bool? activeonly = true) => Qs("active_only", activeonly);
@@ -1063,7 +1067,7 @@ namespace Nest
 		public RefreshDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RefreshDescriptor AllIndices() => this.Index(Indices.All);
+		public RefreshDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public RefreshDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1137,7 +1141,7 @@ namespace Nest
 		public SegmentsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
+		public SegmentsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SegmentsDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1172,7 +1176,7 @@ namespace Nest
 		public IndicesShardStoresDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public IndicesShardStoresDescriptor AllIndices() => this.Index(Indices.All);
+		public IndicesShardStoresDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndicesShardStoresDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1284,14 +1288,14 @@ namespace Nest
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>Limit the information returned the specific metrics.</summary>
-		public IndicesStatsDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", (Metrics)v));
+		public IndicesStatsDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesStatsDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public IndicesStatsDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public IndicesStatsDescriptor AllIndices() => this.Index(Indices.All);
+		public IndicesStatsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(Fields completionfields) => Qs("completion_fields", completionfields);
@@ -1351,7 +1355,7 @@ namespace Nest
 		public UpgradeDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
+		public UpgradeDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
@@ -1388,7 +1392,7 @@ namespace Nest
 		public ValidateQueryDescriptor<TDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ValidateQueryDescriptor<TDocument> AllIndices() => this.Index(Indices.All);
+		public ValidateQueryDescriptor<TDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public ValidateQueryDescriptor<TDocument> AllShards(bool? allshards = true) => Qs("all_shards", allshards);

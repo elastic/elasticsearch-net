@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Nest.Specification.IndicesApi
+namespace Nest
 {
 	[MapsApi("indices.put_mapping.json")]
 	[ReadAs(typeof(PutMappingRequest))]
@@ -11,6 +11,7 @@ namespace Nest.Specification.IndicesApi
 
 	[InterfaceDataContract]
 	[ReadAs(typeof(PutMappingRequest<object>))]
+	// ReSharper disable once UnusedTypeParameter
 	public partial interface IPutMappingRequest<TDocument> where TDocument : class { }
 
 	[DataContract]
@@ -56,6 +57,7 @@ namespace Nest.Specification.IndicesApi
 		public ISourceField SourceField { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class PutMappingRequest<TDocument> where TDocument : class { }
 
 	[DataContract]

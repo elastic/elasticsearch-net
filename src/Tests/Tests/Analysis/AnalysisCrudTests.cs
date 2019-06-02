@@ -73,7 +73,7 @@ namespace Tests.Analysis
 				(s, c, r) => c.Indices.GetSettingsAsync(r)
 			);
 
-		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index(indexName)) { };
+		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index((IndexName)indexName));
 
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u;
 
@@ -143,7 +143,7 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter() } }
 				}
 			}
 		};
