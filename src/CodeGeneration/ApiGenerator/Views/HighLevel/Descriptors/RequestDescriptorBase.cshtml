@@ -7,6 +7,8 @@
 @{
 	RestApiSpec m = Model;
 }
+namespace Nest
+{
 	public abstract partial class @Raw("RequestDescriptorBase<TDescriptor, TParameters, TInterface>")
 	{
 @foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
@@ -19,3 +21,4 @@
 </text>
 }
 	}
+}

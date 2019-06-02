@@ -10,6 +10,12 @@
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Requests.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Requests.generated.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="ElasticClient.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>ElasticClient.cs</DependentUpon>

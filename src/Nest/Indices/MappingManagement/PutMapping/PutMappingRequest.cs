@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Nest
+namespace Nest.Specification.IndicesApi
 {
 	[MapsApi("indices.put_mapping.json")]
 	[ReadAs(typeof(PutMappingRequest))]

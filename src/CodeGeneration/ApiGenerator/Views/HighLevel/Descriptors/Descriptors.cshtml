@@ -1,10 +1,18 @@
 @using RazorLight
 @using System.Collections.Generic
+@using System.Collections.ObjectModel
 @using System.Linq
 @using CsQuery.ExtensionMethods.Internal
-@using ApiGenerator.Domain
 @using ApiGenerator
-@inherits CodeTemplatePage<RestApiSpec>
+@using ApiGenerator.Domain.Specification
+@using ApiGenerator.Domain.Code
+@using ApiGenerator.Domain
+@inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
+@{
+	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
+	string ns = model.Key != CsharpNames.RootNamespace ? "."+CsharpNames.ApiNamespace+"." + model.Key + CsharpNames.ApiNamespaceSuffix : null;
+	var endpoints = model.Value;
+}
 @{ IncludeAsync("GeneratorNotice.cshtml", Model); }
 // ReSharper disable RedundantUsingDirective
 using System;
@@ -15,15 +23,11 @@ using System.Linq.Expressions;
 
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
-@{ IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+using Elasticsearch.Net@(ns);
 
 namespace Nest
 {
-@{
-	RestApiSpec m = Model;
-}
-@{ IncludeAsync("HighLevel/Descriptors/RequestDescriptorBase.cshtml", m); }
-@foreach (var endpoint in m.Endpoints.Values)
+@foreach (var endpoint in endpoints)
 {
 	IncludeAsync("HighLevel/Descriptors/Descriptor.cshtml", endpoint.DescriptorPartialImplementation);
 }
