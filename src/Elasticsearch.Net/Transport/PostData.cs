@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,9 +56,8 @@ namespace Elasticsearch.Net
 	public class PostData<T> : PostData, IPostData<T>
 	{
 		private readonly IEnumerable<object> _enumerableOfObject;
-		private readonly IEnumerable<string> _enumurableOfStrings;
+		private readonly IEnumerable<string> _enumerableOfStrings;
 		private readonly string _literalString;
-		private readonly T _serializable;
 
 		protected internal PostData(byte[] item)
 		{
@@ -73,7 +73,7 @@ namespace Elasticsearch.Net
 
 		protected internal PostData(IEnumerable<string> item)
 		{
-			_enumurableOfStrings = item;
+			_enumerableOfStrings = item;
 			Type = PostType.EnumerableOfString;
 		}
 
@@ -83,42 +83,9 @@ namespace Elasticsearch.Net
 			Type = PostType.EnumerableOfObject;
 		}
 
-		// TODO investigate if SerializableData negates the need for this
-		private PostData(T item)
-		{
-			var boxedType = item.GetType();
-			if (typeof(byte[]).IsAssignableFrom(boxedType))
-			{
-				WrittenBytes = item as byte[];
-				Type = PostType.ByteArray;
-			}
-			else if (typeof(string).IsAssignableFrom(boxedType))
-			{
-				_literalString = item as string;
-				Type = PostType.LiteralString;
-			}
-			else if (typeof(IEnumerable<string>).IsAssignableFrom(boxedType))
-			{
-				_enumurableOfStrings = (IEnumerable<string>)item;
-				Type = PostType.EnumerableOfString;
-			}
-			else if (typeof(IEnumerable<object>).IsAssignableFrom(boxedType))
-			{
-				_enumerableOfObject = (IEnumerable<object>)item;
-				Type = PostType.EnumerableOfObject;
-			}
-			else
-			{
-				_serializable = item;
-				Type = PostType.Serializable;
-			}
-		}
-
 		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
-			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null;
-			Stream stream;
 			switch (Type)
 			{
 				case PostType.ByteArray:
@@ -128,13 +95,14 @@ namespace Elasticsearch.Net
 					ms = !string.IsNullOrEmpty(_literalString) ? settings.MemoryStreamFactory.Create(_literalString?.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString:
-					ms = _enumurableOfStrings.HasAny()
-						? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes())
+					ms = _enumerableOfStrings.HasAny()
+						? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumerableOfStrings) + NewLineString).Utf8Bytes())
 						: null;
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
+					Stream stream;
 					if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = settings.MemoryStreamFactory.Create();
@@ -148,14 +116,7 @@ namespace Elasticsearch.Net
 					}
 					break;
 				case PostType.Serializable:
-					stream = writableStream;
-					if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
-					{
-						ms = settings.MemoryStreamFactory.Create();
-						stream = ms;
-					}
-					settings.RequestResponseSerializer.Serialize(_serializable, stream, indent);
-					break;
+					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
 			}
 			if (ms != null)
 			{
@@ -168,9 +129,7 @@ namespace Elasticsearch.Net
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
-			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null;
-			Stream stream;
 			switch (Type)
 			{
 				case PostType.ByteArray:
@@ -180,13 +139,14 @@ namespace Elasticsearch.Net
 					ms = !string.IsNullOrEmpty(_literalString) ? settings.MemoryStreamFactory.Create(_literalString.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString:
-					ms = _enumurableOfStrings.HasAny()
-						? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes())
+					ms = _enumerableOfStrings.HasAny()
+						? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumerableOfStrings) + NewLineString).Utf8Bytes())
 						: null;
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
+					Stream stream;
 					if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = settings.MemoryStreamFactory.Create();
@@ -201,14 +161,7 @@ namespace Elasticsearch.Net
 					}
 					break;
 				case PostType.Serializable:
-					stream = writableStream;
-					if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
-					{
-						ms = settings.MemoryStreamFactory.Create();
-						stream = ms;
-					}
-					await settings.RequestResponseSerializer.SerializeAsync(_serializable, stream, indent, cancellationToken).ConfigureAwait(false);
-					break;
+					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
 			}
 			if (ms != null)
 			{
