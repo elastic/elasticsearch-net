@@ -12,7 +12,11 @@
   <ItemGroup>
     <Compile Update="Requests.*.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Requests.generated.cs</DependentUpon>
+      <DependentUpon>Requests.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Descriptors.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Descriptors.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
