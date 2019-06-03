@@ -19,7 +19,7 @@ namespace Elasticsearch.Net
 		)
 			: this(method, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
-			CustomConverter = local?.DeserializationOverride;
+			CustomResponseBuilder = local?.CustomResponseBuilder;
 			PathAndQuery = CreatePathWithQueryStrings(path, ConnectionSettings, local);
 		}
 
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net
 
 		public X509CertificateCollection ClientCertificates { get; }
 		public IConnectionConfigurationValues ConnectionSettings { get; }
-		public Func<IApiCallDetails, Stream, object> CustomConverter { get; }
+		public CustomResponseBuilderBase CustomResponseBuilder { get; }
 		public bool DisableAutomaticProxyDetection { get; }
 
 		public NameValueCollection Headers { get; }

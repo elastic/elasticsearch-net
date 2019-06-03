@@ -98,11 +98,13 @@ namespace Elasticsearch.Net
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
 
-				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
+				if (requestData.CustomResponseBuilder != null) 
+					return requestData.CustomResponseBuilder.DeserializeResponse(serializer, details, responseStream) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
 					? null
-					: requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
+					: serializer.Deserialize<TResponse>(responseStream);
 			}
 		}
 
@@ -128,11 +130,13 @@ namespace Elasticsearch.Net
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
 
-				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
+				if (requestData.CustomResponseBuilder != null) 
+					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
 					? null
-					: await requestData.ConnectionSettings.RequestResponseSerializer
+					: await serializer
 						.DeserializeAsync<TResponse>(responseStream, cancellationToken)
 						.ConfigureAwait(false);
 			}

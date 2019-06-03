@@ -30,7 +30,7 @@ namespace Nest
 		/// overrides, etc.
 		/// </summary>
 		[IgnoreDataMember]
-		TParameters RequestParameters { get; set; }
+		TParameters RequestParameters { get; }
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
@@ -54,7 +54,7 @@ namespace Nest
 		HttpMethod IRequest.HttpMethod => HttpMethod;
 
 		[IgnoreDataMember]
-		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
+		TParameters IRequest<TParameters>.RequestParameters { get; } = new TParameters();
 
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();

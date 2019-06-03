@@ -15,7 +15,7 @@ namespace Elasticsearch.Net
 	{
 		public abstract HttpMethod DefaultHttpMethod { get; }
 
-		public Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set; }
+		public CustomResponseBuilderBase CustomResponseBuilder { get; set; }
 		public Dictionary<string, object> QueryString { get; set; } = new Dictionary<string, object>();
 		public IRequestConfiguration RequestConfiguration { get; set; }
 		private IRequestParameters Self => this;

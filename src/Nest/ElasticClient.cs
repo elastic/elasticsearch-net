@@ -36,89 +36,15 @@ namespace Nest
 			where TResponse : class, IElasticsearchResponse, new() =>
 			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
 
-		private CatResponse<TCatRecord> DeserializeCatResponse<TCatRecord>(IApiCallDetails response, Stream stream)
-			where TCatRecord : ICatRecord
-		{
-			var catResponse = new CatResponse<TCatRecord>();
-
-			if (!response.Success) return catResponse;
-
-			var records = _client.RequestResponseSerializer.Deserialize<IReadOnlyCollection<TCatRecord>>(stream);
-			catResponse.Records = records;
-
-			return catResponse;
-		}
-
-		private CatResponse<TCatRecord> DeserializeCatHelpResponse<TCatRecord>(IApiCallDetails response, Stream stream)
-			where TCatRecord : ICatRecord
-		{
-			var catResponse = new CatResponse<TCatRecord>();
-
-			if (!response.Success) return catResponse;
-
-			using (stream)
-			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
-			{
-				stream.CopyTo(ms);
-				var body = ms.ToArray().Utf8String();
-				catResponse.Records = body.Split('\n')
-					.Skip(1)
-					.Select(f => new CatHelpRecord { Endpoint = f.Trim() })
-					.Cast<TCatRecord>()
-					.ToList();
-			}
-
-			return catResponse;
-		}
-
-		//::: {Dragonfly}{lvtIV72sRIWBGik7ulbuaw}{127.0.0.1}{127.0.0.1:9300}
-		private static readonly Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
-
-		private static NodesHotThreadsResponse DeserializeNodesHotThreadsResponse(IApiCallDetails response, Stream stream)
-		{
-			using (stream)
-			using (var sr = new StreamReader(stream, Encoding.UTF8))
-			{
-				var plainTextResponse = sr.ReadToEnd();
-
-				// If the response doesn't start with :::, which is the pattern that delimits
-				// each node section in the response, then the response format isn't recognized.
-				// Just return an empty response object. This is especially useful when unit
-				// testing against an in-memory connection where you won't get a real response.
-				if (!plainTextResponse.StartsWith(":::", StringComparison.Ordinal))
-					return new NodesHotThreadsResponse();
-
-				var sections = plainTextResponse.Split(new[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
-				var info =
-					from section in sections
-					select section.Split(new[] { "\n   \n" }, StringSplitOptions.None)
-					into sectionLines
-					where sectionLines.Length > 0
-					let nodeLine = sectionLines.FirstOrDefault()
-					where nodeLine != null
-					let matches = NodeRegex.Match(nodeLine)
-					where matches.Success
-					let node = matches.Groups["name"].Value
-					let nodeId = matches.Groups["id"].Value
-					let hosts = matches.Groups["hosts"].Value.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries)
-					let threads = sectionLines.Skip(1).Take(sectionLines.Length - 1).ToList()
-					select new HotThreadInformation
-					{
-						NodeName = node,
-						NodeId = nodeId,
-						Threads = threads,
-						Hosts = hosts
-					};
-				return new NodesHotThreadsResponse(info.ToList());
-			}
-		}
-
 		protected CatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
 			where TCatRecord : ICatRecord
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
+			if (typeof(TCatRecord) == typeof(CatHelpRecord))
+				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
+			else 
+				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
 		}
 
@@ -127,36 +53,11 @@ namespace Nest
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
+			if (typeof(TCatRecord) == typeof(CatHelpRecord))
+				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
+			else 
+				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
-		}
-
-		protected CatResponse<CatHelpRecord> DoCatHelp<TRequest, TParams, TCatRecord>(TRequest request)
-			where TParams : RequestParameters<TParams>, new()
-			where TRequest : class, IRequest<TParams>
-		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse<CatHelpRecord>;
-			return DoRequest<TRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
-		}
-
-		protected Task<CatResponse<CatHelpRecord>> DoCatHelpAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
-			where TParams : RequestParameters<TParams>, new()
-			where TRequest : class, IRequest<TParams>
-		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse<CatHelpRecord>;
-			return DoRequestAsync<TRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
-		}
-
-		protected NodesHotThreadsResponse DoNodesHotThreads(INodesHotThreadsRequest request)
-		{
-			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse;
-			return DoRequest<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters);
-		}
-
-		protected Task<NodesHotThreadsResponse> DoNodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct)
-		{
-			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse;
-			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
 		}
 	}
 	/// <summary>

@@ -18,5 +18,4 @@ namespace Nest
 		public string NodeName { get; internal set; }
 		public IReadOnlyCollection<string> Threads { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
-
 }
