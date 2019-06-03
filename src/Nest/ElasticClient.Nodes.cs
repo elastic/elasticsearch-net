@@ -52,13 +52,13 @@ namespace Nest.Specification.NodesApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</a>
 		/// </summary>
-		public NodesHotThreadsResponse HotThreads(INodesHotThreadsRequest request) => DoRequest<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters);
+		public NodesHotThreadsResponse HotThreads(INodesHotThreadsRequest request) => DoNodesHotThreads(request);
 		/// <summary>
 		/// <c>GET</c> request to the <c>nodes.hot_threads</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</a>
 		/// </summary>
-		public Task<NodesHotThreadsResponse> HotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default) => DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
+		public Task<NodesHotThreadsResponse> HotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default) => DoNodesHotThreadsAsync(request, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>nodes.info</c> API, read more about this API online:
 		/// <para> </para>
