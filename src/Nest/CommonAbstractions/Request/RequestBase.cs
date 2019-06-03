@@ -36,13 +36,19 @@ namespace Nest
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
 	{
 		// ReSharper disable once VirtualMemberCallInConstructor
-		protected RequestBase() => Initialize();
+		protected RequestBase()
+		{
+			_parameters = new TParameters();
+			// ReSharper disable once VirtualMemberCallInConstructor
+			RequestDefaults(_parameters);
+		}
 
 		protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
 		{
 			pathSelector(RequestState.RouteValues);
+			_parameters = new TParameters();
 			// ReSharper disable once VirtualMemberCallInConstructor
-			Initialize();
+			RequestDefaults(_parameters);
 		}
 
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
@@ -53,8 +59,10 @@ namespace Nest
 		[IgnoreDataMember]
 		HttpMethod IRequest.HttpMethod => HttpMethod;
 
+		private readonly TParameters _parameters;
+
 		[IgnoreDataMember]
-		TParameters IRequest<TParameters>.RequestParameters { get; } = new TParameters();
+		TParameters IRequest<TParameters>.RequestParameters => _parameters;
 
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
@@ -65,8 +73,10 @@ namespace Nest
 
 		IRequestParameters IRequest.RequestParametersInternal => RequestState.RequestParameters;
 
-		// TODO remove this is only used to make sure requests set typed_keys automatically, find better approach for this
-		protected virtual void Initialize() { }
+		/// <summary>
+		/// Allows a request implementation to set certain request parameter defaults, use sparingly!
+		/// </summary>
+		protected virtual void RequestDefaults(TParameters parameters) { }
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 

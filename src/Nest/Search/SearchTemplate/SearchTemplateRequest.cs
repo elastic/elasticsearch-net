@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -27,7 +28,7 @@ namespace Nest
 		protected Type ClrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => ClrType;
 
-		protected sealed override void Initialize() => TypedKeys = true;
+		protected sealed override void RequestDefaults(SearchTemplateRequestParameters parameters) => TypedKeys = true;
 	}
 
 	public class SearchTemplateRequest<T> : SearchTemplateRequest
@@ -48,7 +49,7 @@ namespace Nest
 
 		string ISearchTemplateRequest.Source { get; set; }
 
-		protected sealed override void Initialize() => TypedKeys();
+		protected sealed override void RequestDefaults(SearchTemplateRequestParameters parameters) => TypedKeys();
 
 		public SearchTemplateDescriptor<TDocument> Source(string template) => Assign(template, (a, v) => a.Source = v);
 
