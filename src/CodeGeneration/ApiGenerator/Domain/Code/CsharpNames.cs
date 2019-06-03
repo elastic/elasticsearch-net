@@ -5,7 +5,7 @@ using ApiGenerator.Configuration;
 using ApiGenerator.Generator;
 using CsQuery.ExtensionMethods.Internal;
 
-namespace ApiGenerator.Domain.Code 
+namespace ApiGenerator.Domain.Code
 {
 	public class CsharpNames
 	{
@@ -25,10 +25,10 @@ namespace ApiGenerator.Domain.Code
 
 				return replaced;
 			}
-			
-			
+
+
 			MethodName = Replace(ApiName, null, Namespace, "");
-			
+
 			var namespaceRenames = new Dictionary<string, (string find, string replace)>
 			{
 				{ "Watcher", (find: "Watch", replace: "") },
@@ -48,9 +48,9 @@ namespace ApiGenerator.Domain.Code
 		/// <pre>Uses <see cref="CodeConfiguration.ApiNameMapping"/> mapping of request implementations in the nest code base</pre>
 		/// </summary>
 		public string MethodName { get; }
-		
+
 		public string ApiName { get; }
-		
+
 		public string RequestName => $"{ApiName}Request";
 
 		public string ResponseName
@@ -82,15 +82,15 @@ namespace ApiGenerator.Domain.Code
 				case "": return RootNamespace;
 				// SSL namespace most likely removed, no need to introduce it
 				// https://github.com/elastic/elasticsearch/issues/41845
-				case "ssl": return "Security"; 
+				case "ssl": return "Security";
 				case "ilm": return "IndexLifecycleManagement";
 				case "ccr": return "CrossClusterReplication";
 				case "ml": return "MachineLearning";
 				case "xpack": return "XPack";
-				default: return endpointNamespace.ToPascalCase(); 
+				default: return endpointNamespace.ToPascalCase();
 			}
 		}
-		
+
 		public string PerPathMethodName(string path)
 		{
 			Func<string, bool> ms = s => Namespace != null && Namespace.StartsWith(s);
@@ -105,30 +105,30 @@ namespace ApiGenerator.Domain.Code
 			return MethodName;
 		}
 
-		
-		public string GenericsDeclaredOnRequest => 
+
+		public string GenericsDeclaredOnRequest =>
 			CodeConfiguration.RequestInterfaceGenericsLookup.TryGetValue(RequestInterfaceName, out var requestGeneric) ? requestGeneric : null;
-		
-		public string GenericsDeclaredOnResponse => 
+
+		public string GenericsDeclaredOnResponse =>
 			CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var requestGeneric) ? requestGeneric.Item2 : null;
 
 		public string GenericsDeclaredOnDescriptor =>
 			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? generic : null;
-			
+
 		public List<string> ResponseGenerics =>
 			!CodeConfiguration.ResponseLookup.TryGetValue(ResponseName, out var responseGeneric)
 			|| string.IsNullOrEmpty(responseGeneric.Item2)
 				? new List<string>()
 				: SplitGeneric(responseGeneric.Item2);
-		
+
 		public List<string> DescriptorGenerics =>
 			CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out var generic) ? SplitGeneric(generic) : new List<string>();
 
 		public bool DescriptorBindsOverMultipleDocuments =>
 			HighLevelDescriptorMethodGenerics.Count == 2 && HighLevelDescriptorMethodGenerics.All(g => g.Contains("Document"));
 		//&& ResponseGenerics.FirstOrDefault() == DescriptorBoundDocumentGeneric ;
-		
-		public string DescriptorBoundDocumentGeneric => 
+
+		public string DescriptorBoundDocumentGeneric =>
 			HighLevelDescriptorMethodGenerics.FirstOrDefault(g=>g == "TDocument") ?? HighLevelDescriptorMethodGenerics.Last();
 
 		public List<string> HighLevelDescriptorMethodGenerics => DescriptorGenerics
@@ -146,12 +146,12 @@ namespace ApiGenerator.Domain.Code
 
 
 		public bool DescriptorNotFoundInCodebase => !CodeConfiguration.DescriptorGenericsLookup.TryGetValue(DescriptorName, out _);
-		
+
 		public string GenericDescriptorName => GenericsDeclaredOnDescriptor.IsNullOrEmpty() ? null : $"{DescriptorName}{GenericsDeclaredOnDescriptor}";
 		public string GenericRequestName => GenericsDeclaredOnRequest.IsNullOrEmpty() ? null : $"{RequestName}{GenericsDeclaredOnRequest}";
 		public string GenericInterfaceName => GenericsDeclaredOnRequest.IsNullOrEmpty() ? null : $"I{GenericRequestName}";
 		public string GenericResponseName => GenericsDeclaredOnResponse.IsNullOrEmpty() ? null : $"{ResponseName}{GenericsDeclaredOnResponse}";
-		
+
 		public string GenericOrNonGenericDescriptorName => GenericDescriptorName ?? DescriptorName;
 		public string GenericOrNonGenericInterfaceName => GenericInterfaceName  ?? RequestInterfaceName;
 		public string GenericOrNonGenericResponseName => GenericResponseName ?? ResponseName;
@@ -160,10 +160,12 @@ namespace ApiGenerator.Domain.Code
 		public string GenericOrNonGenericInterfacePreference => CodeConfiguration.GenericOnlyInterfaces.Contains(RequestInterfaceName)
 			? GenericInterfaceName
 			: RequestInterfaceName;
-		
+
 		/// <summary> If matching Request.cs only defined generic interface make the client method only accept said interface </summary>
 		public string GenericOrNonGenericRequestPreference => CodeConfiguration.GenericOnlyInterfaces.Contains(RequestInterfaceName)
 			? GenericRequestName
 			: RequestName;
+
+		public bool CustomResponseBuilderPerRequestOverride(out string call) => CodeConfiguration.ResponseBuilderInClientCalls.TryGetValue(RequestName, out call);
 	}
 }

@@ -38,7 +38,7 @@ namespace Nest
 		{
 			if (typeof(TCatRecord) == typeof(CatHelpRecord))
 				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
-			else 
+			else
 				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
 		}
@@ -50,7 +50,7 @@ namespace Nest
 		{
 			if (typeof(TCatRecord) == typeof(CatHelpRecord))
 				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
-			else 
+			else
 				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
 		}
@@ -137,6 +137,12 @@ namespace Nest
 		{
 			requestConfiguration.Accept = RequestData.MimeType;
 			requestConfiguration.ContentType = RequestData.MimeType;
+		}
+
+		internal IRequestParameters ResponseBuilder(SourceRequestParameters parameters, CustomResponseBuilderBase builder)
+		{
+			parameters.CustomResponseBuilder = builder;
+			return parameters;
 		}
 	}
 }

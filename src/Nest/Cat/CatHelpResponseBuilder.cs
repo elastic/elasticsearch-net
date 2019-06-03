@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Nest 
+namespace Nest
 {
 	internal class CatHelpResponseBuilder : CustomResponseBuilderBase
 	{
@@ -37,7 +37,7 @@ namespace Nest
 			CancellationToken ctx = default
 		)
 		{
-			
+
 			var catResponse = new CatResponse<CatHelpRecord>();
 
 			if (!response.Success) return catResponse;

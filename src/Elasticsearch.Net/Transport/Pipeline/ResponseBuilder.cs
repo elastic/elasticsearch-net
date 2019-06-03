@@ -99,7 +99,7 @@ namespace Elasticsearch.Net
 					return null;
 
 				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
-				if (requestData.CustomResponseBuilder != null) 
+				if (requestData.CustomResponseBuilder != null)
 					return requestData.CustomResponseBuilder.DeserializeResponse(serializer, details, responseStream) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
@@ -131,7 +131,7 @@ namespace Elasticsearch.Net
 					return null;
 
 				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
-				if (requestData.CustomResponseBuilder != null) 
+				if (requestData.CustomResponseBuilder != null)
 					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)

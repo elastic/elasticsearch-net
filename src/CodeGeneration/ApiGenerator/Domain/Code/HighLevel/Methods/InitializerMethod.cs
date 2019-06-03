@@ -30,8 +30,10 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 			? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
 			: $"<{ArgumentType},{ResponseName}>";
 
-		public string DispatchParameters => IsCatMethod 
+		public string DispatchParameters => IsCatMethod
 			? "request"
-			: "request, request.RequestParameters";
+			: CsharpNames.CustomResponseBuilderPerRequestOverride(out var builder)
+				? $"request, ResponseBuilder(request.RequestParameters, {builder})"
+				: "request, request.RequestParameters";
 	}
 }

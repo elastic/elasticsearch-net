@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class MultiSearchResponseBuilder : CustomResponseBuilderBase
+	internal class MultiSearchResponseBuilder : CustomResponseBuilderBase
 	{
 		public MultiSearchResponseBuilder(IRequest request) => Formatter = new MultiSearchResponseFormatter(request);
 

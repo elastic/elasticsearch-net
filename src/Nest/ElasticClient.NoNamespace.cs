@@ -572,14 +572,14 @@ namespace Nest
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
 		/// </summary>
 		public SourceResponse<TDocument> Source<TDocument>(ISourceRequest request)
-			where TDocument : class => DoRequest<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters);
+			where TDocument : class => DoRequest<ISourceRequest, SourceResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, SourceRequestResponseBuilder<TDocument>.Instance));
 		/// <summary>
 		/// <c>GET</c> request to the <c>get_source</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</a>
 		/// </summary>
 		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default)
-			where TDocument : class => DoRequestAsync<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters, ct);
+			where TDocument : class => DoRequestAsync<ISourceRequest, SourceResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, SourceRequestResponseBuilder<TDocument>.Instance), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
 		/// <para> </para>

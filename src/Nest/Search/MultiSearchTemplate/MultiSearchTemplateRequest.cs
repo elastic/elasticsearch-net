@@ -14,13 +14,24 @@ namespace Nest
 
 	public partial class MultiSearchTemplateRequest
 	{
+		protected sealed override void RequestDefaults(MultiSearchTemplateRequestParameters parameters)
+		{
+			TypedKeys = true;
+			parameters.CustomResponseBuilder = new MultiSearchResponseBuilder(this);
+		}
+
 		public IDictionary<string, ISearchTemplateRequest> Operations { get; set; }
 
-		protected sealed override void RequestDefaults(MultiSearchTemplateRequestParameters parameters) => TypedKeys = true;
 	}
 
 	public partial class MultiSearchTemplateDescriptor
 	{
+		protected sealed override void RequestDefaults(MultiSearchTemplateRequestParameters parameters)
+		{
+			TypedKeys();
+			parameters.CustomResponseBuilder = new MultiSearchResponseBuilder(this);
+		}
+
 		private IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();
 
 		IDictionary<string, ISearchTemplateRequest> IMultiSearchTemplateRequest.Operations
@@ -28,8 +39,6 @@ namespace Nest
 			get => _operations;
 			set => _operations = value;
 		}
-
-		protected sealed override void RequestDefaults(MultiSearchTemplateRequestParameters parameters) => TypedKeys();
 
 		public MultiSearchTemplateDescriptor Template<T>(string name, Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class

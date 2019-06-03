@@ -19,6 +19,6 @@
 }
 @{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", syntax); }
 public @{ IncludeAsync("HighLevel/Client/InitializerSyntax/InitializerMethodHeader.cshtml", Model); } @Raw("=>")
-	@(dispatchMethod)@(Raw(dispatchGenerics))(@dispatchParameters);
+	@(dispatchMethod)@(Raw(dispatchGenerics))(@Raw(dispatchParameters));
 
 
