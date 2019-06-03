@@ -8,8 +8,6 @@ open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
 open Fake.Core;
-open Microsoft.FSharp.Quotations
-open Microsoft.FSharp.Quotations.Patterns
 
 open Projects
 open Versioning
@@ -63,7 +61,7 @@ module Release =
         
         File.Move(nugetOutFile, outputFile)
 
-    let private nugetPackMain (p:DotNetProject) nugetId nuspec properties version = 
+    let private nugetPackMain (_:DotNetProject) nugetId nuspec properties version = 
         pack nuspec nugetId properties version
         
     let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
@@ -143,6 +141,6 @@ module Release =
             callback p nugetId nuspec properties version
         )
             
-    let NugetPack (ArtifactsVersion(version))  = packProjects version nugetPackMain 
+    let NugetPack (ArtifactsVersion(version)) = packProjects version nugetPackMain 
 
-    let NugetPackVersioned (ArtifactsVersion(version))  = packProjects version nugetPackVersioned
+    let NugetPackVersioned (ArtifactsVersion(version)) = packProjects version nugetPackVersioned

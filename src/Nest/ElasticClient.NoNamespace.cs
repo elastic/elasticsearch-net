@@ -18,6 +18,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Nest;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;

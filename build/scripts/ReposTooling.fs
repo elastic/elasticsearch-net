@@ -16,7 +16,7 @@ module ReposTooling =
         
         printfn "%s" testsProjectDirectory
         
-        Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
+        Shell.copyDir tempDir testsProjectDirectory (fun _ -> true)
         
         let command = sprintf "%s %s" clusterName clusterVersion
         let timeout = TimeSpan.FromMinutes(120.)

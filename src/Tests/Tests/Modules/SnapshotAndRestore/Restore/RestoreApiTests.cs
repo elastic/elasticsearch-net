@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Elasticsearch.Net;
@@ -12,6 +13,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 {
 	public class RestoreApiTests : ApiTestBase<IntrusiveOperationCluster, RestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
 	{
+		[SuppressMessage("ReSharper", "VirtualMemberCallInConstructor")]
 		public RestoreApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;

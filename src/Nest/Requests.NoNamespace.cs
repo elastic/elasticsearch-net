@@ -27,6 +27,7 @@ using Elasticsearch.Net.Utf8Json;
 // ReSharper disable RedundantBaseConstructorCall
 // ReSharper disable UnusedTypeParameter
 // ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	[InterfaceDataContract]

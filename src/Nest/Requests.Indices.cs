@@ -28,6 +28,7 @@ using Elasticsearch.Net.Specification.IndicesApi;
 // ReSharper disable RedundantBaseConstructorCall
 // ReSharper disable UnusedTypeParameter
 // ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
 namespace Nest
 {
 	[InterfaceDataContract]

@@ -37,9 +37,9 @@ namespace Tests.Ingest
 			where a == null || !a.Ranges.Any(r => r.IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
 			select (IProcessorAssertion)Activator.CreateInstance(t);
 
-		public static IProcessor[] Initializer => All.Select(a => a.Initializer).ToArray();
+		public static IProcessor[] Initializers => All.Select(a => a.Initializer).ToArray();
 
-		public static Dictionary<string, object>[] Json =>
+		public static Dictionary<string, object>[] AllAsJson =>
 			All.Select(a => new Dictionary<string, object>
 				{
 					{ a.Key, a.Json }
@@ -110,7 +110,7 @@ namespace Tests.Ingest
 			{
 				Field = "startedOn",
 				TargetField = "timestamp",
-				Formats = new string[] { "dd/MM/yyyy hh:mm:ss" },
+				Formats = new[] { "dd/MM/yyyy hh:mm:ss" },
 				TimeZone = "Europe/Amsterdam"
 			};
 

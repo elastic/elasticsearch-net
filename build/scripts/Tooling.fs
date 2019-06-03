@@ -3,7 +3,6 @@
 open System
 open System.IO
 open ProcNet
-open Fake.IO.Globbing.Operators
 open ProcNet.Std
 
 module Tooling = 

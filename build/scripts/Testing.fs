@@ -9,7 +9,7 @@ open Versioning
 module Tests =
 
     let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
-    let private buildingOnTeamCity = match Environment.environVarOrNone "TEAMCITY_VERSION" with | Some x -> true | None -> false
+    let private buildingOnTeamCity = match Environment.environVarOrNone "TEAMCITY_VERSION" with | Some _ -> true | None -> false
 
     let SetTestEnvironmentVariables args = 
         let clusterFilter = match args.CommandArguments with | Integration a -> a.ClusterFilter | _ -> None

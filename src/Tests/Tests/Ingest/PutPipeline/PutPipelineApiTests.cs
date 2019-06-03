@@ -20,7 +20,7 @@ namespace Tests.Ingest.PutPipeline
 		protected override object ExpectJson { get; } = new
 		{
 			description = "My test pipeline",
-			processors = ProcessorAssertions.Json
+			processors = ProcessorAssertions.AllAsJson
 		};
 
 		protected override int ExpectStatusCode => 200;
@@ -34,7 +34,7 @@ namespace Tests.Ingest.PutPipeline
 		protected override PutPipelineRequest Initializer => new PutPipelineRequest(_id)
 		{
 			Description = "My test pipeline",
-			Processors = ProcessorAssertions.Initializer
+			Processors = ProcessorAssertions.Initializers
 		};
 
 		protected override bool SupportsDeserialization => false;

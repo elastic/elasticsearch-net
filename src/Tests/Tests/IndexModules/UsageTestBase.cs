@@ -12,6 +12,7 @@ namespace Tests.IndexModules
 		where TInterface : class
 	{
 		protected UsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
+			// ReSharper disable once VirtualMemberCallInConstructor
 			FluentInstance = Fluent(new TDescriptor());
 
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -34,6 +35,7 @@ namespace Tests.IndexModules
 		where TInterface : class
 	{
 		protected PromiseUsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
+			// ReSharper disable once VirtualMemberCallInConstructor
 			FluentInstance = Fluent(new TDescriptor())?.Value;
 
 		protected abstract Func<TDescriptor, IPromise<TInterface>> Fluent { get; }

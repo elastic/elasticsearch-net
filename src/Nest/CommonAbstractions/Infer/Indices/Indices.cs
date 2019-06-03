@@ -40,6 +40,8 @@ namespace Nest
 			}
 		);
 
+		public static IndexName Index(string index) => index;
+		
 		public static IndexName Index(IndexName index) => index;
 
 		public static IndexName Index<T>() => typeof(T);

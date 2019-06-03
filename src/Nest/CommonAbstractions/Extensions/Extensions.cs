@@ -116,9 +116,10 @@ namespace Nest
 				throw new ArgumentException("Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
 		}
 
+		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
-			@object.ThrowIfNull(parameterName);
+			if (@object == null) throw new ArgumentNullException(parameterName);
 			if (!@object.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
@@ -160,7 +161,7 @@ namespace Nest
 			return !enumerable.Any() || enumerable.All(t => t == null);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
+		internal static void ThrowIfNull<T>(this T value, string name, string message = null) 
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);

@@ -9,7 +9,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client.Settings;
-using Tests.Core.Extensions;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 {

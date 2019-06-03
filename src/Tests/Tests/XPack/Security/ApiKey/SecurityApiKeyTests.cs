@@ -49,6 +49,7 @@ namespace Tests.XPack.Security.ApiKey
 						},
 						(v, d) => d
 							.Cluster("all")
+							// ReSharper disable once PossiblyMistakenUseOfParamsMethod
 							.Indices(i => i.Add<object>(p => p.Names("*").Privileges("all")))
 							.Applications(i => i.Add(p => p.Application($"app-{v}").Privileges("*").Resources("*")))
 						,
