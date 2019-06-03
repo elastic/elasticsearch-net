@@ -24,15 +24,28 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 
 		private bool IsCatMethod => CsharpNames.Namespace == "Cat";
 
-		private bool IsCatHelpMethod => CsharpNames.Namespace == "Cat" && MethodName == "Help";
+		private bool IsCatHelpMethod => IsCatMethod && MethodName == "Help";
 
-		public string DispatchMethod => IsCatHelpMethod ? "DoCatHelp" : IsCatMethod ? "DoCat" : "DoRequest";
+		private bool IsMultiGetMethod => MethodName == "MultiGet";
 
-		public string DispatchGenerics => IsCatMethod
+		private bool IsMultiSearchMethod => MethodName == "MultiSearch";
+
+		public string DispatchMethod => IsMultiGetMethod
+											? "DoMultiGet"
+											: IsMultiSearchMethod
+												? "DoMultiSearch"
+												: IsCatHelpMethod
+													? "DoCatHelp"
+													: IsCatMethod
+														? "DoCat"
+														: "DoRequest";
+
+		public string DispatchGenerics => IsMultiGetMethod || IsMultiSearchMethod ? "" : IsCatMethod
 			? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
 			: $"<{ArgumentType},{ResponseName}>";
 
-		public string DispatchParameters => IsCatMethod ? "request" : "request, request.RequestParameters";
-
+		public string DispatchParameters => IsCatMethod || IsMultiGetMethod || IsMultiSearchMethod
+			? "request"
+			: "request, request.RequestParameters";
 	}
 }

@@ -18,6 +18,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Nest;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
@@ -648,13 +649,13 @@ namespace Nest
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</a>
 		/// </summary>
-		public MultiGetResponse MultiGet(IMultiGetRequest request) => DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
+		public MultiGetResponse MultiGet(IMultiGetRequest request) => DoMultiGet(request);
 		/// <summary>
 		/// <c>POST</c> request to the <c>mget</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</a>
 		/// </summary>
-		public Task<MultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters, ct);
+		public Task<MultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default) => DoMultiGetAsync(request, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>msearch</c> API, read more about this API online:
 		/// <para> </para>
@@ -672,13 +673,13 @@ namespace Nest
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</a>
 		/// </summary>
-		public MultiSearchResponse MultiSearch(IMultiSearchRequest request) => DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
+		public MultiSearchResponse MultiSearch(IMultiSearchRequest request) => DoMultiSearch(request);
 		/// <summary>
 		/// <c>POST</c> request to the <c>msearch</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</a>
 		/// </summary>
-		public Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
+		public Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default) => DoMultiSearchAsync(request, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>msearch_template</c> API, read more about this API online:
 		/// <para> </para>

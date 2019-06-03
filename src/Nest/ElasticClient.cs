@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -87,7 +88,6 @@ namespace Nest
 			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
 		}
 
-
 		protected CatResponse<CatHelpRecord> DoCatHelp<TRequest, TParams, TCatRecord>(TRequest request)
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
@@ -167,6 +167,48 @@ namespace Nest
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
 
 			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
+		}
+
+		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, IMultiGetRequest request)
+		{
+			if (!response.Success)
+				return new MultiGetResponse();
+
+			var formatter = new MultiGetResponseFormatter(request);
+			return ConnectionSettings.CreateStateful(formatter).Deserialize<MultiGetResponse>(stream);
+		}
+
+		private MultiGetResponse DoMultiGet(IMultiGetRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = (response, stream) => DeserializeMultiGetResponse(response, stream, request);
+			return DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
+		}
+
+		private Task<MultiGetResponse> DoMultiGetAsync(IMultiGetRequest request, CancellationToken ct)
+		{
+			request.RequestParameters.DeserializationOverride = (response, stream) => DeserializeMultiGetResponse(response, stream, request);
+			return DoRequestAsync<IMultiGetRequest,MultiGetResponse>(request, request.RequestParameters, ct);
+		}
+
+		private MultiSearchResponse DeserializeMultiSearchResponse(IApiCallDetails response, Stream stream, IMultiSearchRequest request)
+		{
+			if (!response.Success)
+				return new MultiSearchResponse();
+
+			var formatter = new MultiSearchResponseFormatter(request);
+			return ConnectionSettings.CreateStateful(formatter).Deserialize<MultiSearchResponse>(stream);
+		}
+
+		private MultiSearchResponse DoMultiSearch(IMultiSearchRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = (response, stream) => DeserializeMultiSearchResponse(response, stream, request);
+			return DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
+		}
+
+		private Task<MultiSearchResponse> DoMultiSearchAsync(IMultiSearchRequest request, CancellationToken ct)
+		{
+			request.RequestParameters.DeserializationOverride = (response, stream) => DeserializeMultiSearchResponse(response, stream, request);
+			return DoRequestAsync<IMultiSearchRequest,MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
