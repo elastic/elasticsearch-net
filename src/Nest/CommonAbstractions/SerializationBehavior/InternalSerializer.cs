@@ -12,11 +12,7 @@ namespace Nest
 	{
 		internal const int DefaultBufferSize = 1024;
 
-		public InternalSerializer(IConnectionSettingsValues settings, IJsonFormatterResolver formatterResolver)
-		{
-			Settings = settings;
-			FormatterResolver = formatterResolver;
-		}
+		public InternalSerializer(IJsonFormatterResolver formatterResolver) => FormatterResolver = formatterResolver;
 
 		public IJsonFormatterResolver FormatterResolver { get; }
 
@@ -27,8 +23,6 @@ namespace Nest
 		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
 		protected virtual int BufferSize => DefaultBufferSize;
-
-		protected IConnectionSettingsValues Settings { get; }
 
 		public T Deserialize<T>(Stream stream)
 		{
