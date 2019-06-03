@@ -74,8 +74,7 @@ namespace Nest
 		//::: {Dragonfly}{lvtIV72sRIWBGik7ulbuaw}{127.0.0.1}{127.0.0.1:9300}
 		private static readonly Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
 
-		private NodesHotThreadsResponse DeserializeNodesHotThreadsResponse<TCatRecord>(IApiCallDetails response, Stream stream)
-			where TCatRecord : ICatRecord
+		private static NodesHotThreadsResponse DeserializeNodesHotThreadsResponse(IApiCallDetails response, Stream stream)
 		{
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
@@ -150,14 +149,14 @@ namespace Nest
 
 		protected NodesHotThreadsResponse DoNodesHotThreads(INodesHotThreadsRequest request)
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse<CatHelpRecord>;
-			return DoRequest<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
+			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse;
+			return DoRequest<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters);
 		}
 
 		protected Task<NodesHotThreadsResponse> DoNodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct)
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse<CatHelpRecord>;
-			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
+			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse;
+			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
 		}
 	}
 	/// <summary>
