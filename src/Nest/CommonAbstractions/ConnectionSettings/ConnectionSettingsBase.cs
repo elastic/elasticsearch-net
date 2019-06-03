@@ -86,7 +86,7 @@ namespace Nest
 		{
 			var formatterResolver = new NestFormatterResolver(this);
 			//Utf8Json.JsonSerializer.SetDefaultResolver(formatterResolver);
-			var defaultSerializer = new InternalSerializer(this, formatterResolver);
+			var defaultSerializer = new InternalSerializer(formatterResolver);
 			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			UseThisRequestResponseSerializer = defaultSerializer;
 			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
@@ -116,7 +116,7 @@ namespace Nest
 		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
 
 		/// <inheritdoc cref="IConnectionSettingsValues.DefaultFieldNameInferrer"/>
-		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) => 
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
 			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
 		/// <inheritdoc cref="IConnectionSettingsValues.DisableIdInference"/>

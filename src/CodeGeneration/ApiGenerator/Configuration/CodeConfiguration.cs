@@ -39,6 +39,20 @@ namespace ApiGenerator.Configuration
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
 
+		private static readonly string ResponseBuilderAttributeRegex = @"^.+\[ResponseBuilderWithGeneric\(""([^ \r\n]+)""\)\].*$";
+		/// <summary>
+		/// Scan all nest source code files for Requests and look for the [MapsApi(filename)] attribute.
+		/// The class name minus Request is used as the canonical .NET name for the API.
+		/// </summary>
+		public static readonly Dictionary<string, string> ResponseBuilderInClientCalls =
+			(from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
+				from l in File.ReadLines(f.FullName)
+				where Regex.IsMatch(l, ResponseBuilderAttributeRegex)
+				let c = Regex.Replace(l, @"^.+\[ResponseBuilderWithGeneric\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
+				select new { Key = f.Name.Replace(".cs", ""), Value = c })
+			.DistinctBy(v => v.Key)
+			.ToDictionary(k => k.Key, v => v.Value);
+
 		public static readonly Dictionary<string, string> DescriptorGenericsLookup =
 			(from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 				let contents = File.ReadAllText(f.FullName)
@@ -70,7 +84,7 @@ namespace ApiGenerator.Configuration
 			.Where(g => g.All(v => !string.IsNullOrEmpty(v.Item2)))
 			.Select(g => g.Key)
 			.ToList());
-		
+
 		public static readonly HashSet<string> DocumentRequests = new HashSet<string>((
 			// find all files in NEST ending with Request.cs
 			from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
@@ -103,7 +117,7 @@ namespace ApiGenerator.Configuration
 			.GroupBy(v=>v.Item1)
 			.Select(g=>g.Last())
 			.ToDictionary(k => k.Item1, v => v.Item2);
-		
+
 		/// <summary>
 		/// Some API's reuse response this is a hardcoded map of these cases
 		/// </summary>
@@ -114,10 +128,10 @@ namespace ApiGenerator.Configuration
 			{"MultiSearchTemplateResponse", ("MultiSearchResponse", "")},
 			{"ScrollResponse", ("SearchResponse", "<TDocument>")},
 			{"SearchTemplateResponse", ("SearchResponse", "<TDocument>")},
-			
+
 		};
-		
-		
+
+
 		/// <summary> Create a dictionary lookup of all responses and their generics </summary>
 		public static readonly SortedDictionary<string, (string, string)> ResponseLookup = new SortedDictionary<string, (string, string)>(
 		(

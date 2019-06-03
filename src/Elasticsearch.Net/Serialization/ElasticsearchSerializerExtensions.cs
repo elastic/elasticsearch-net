@@ -1,6 +1,7 @@
 using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
 
-namespace Elasticsearch.Net 
+namespace Elasticsearch.Net
 {
 	public static class ElasticsearchSerializerExtensions
 	{
@@ -33,5 +34,7 @@ namespace Elasticsearch.Net
 				return ms.Utf8String();
 			}
 		}
+
+
 	}
 }

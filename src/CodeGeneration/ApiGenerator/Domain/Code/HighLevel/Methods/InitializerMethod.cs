@@ -24,18 +24,16 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 
 		private bool IsCatMethod => CsharpNames.Namespace == "Cat";
 
-		private bool IsCatHelpMethod => IsCatMethod && MethodName == "Help";
+		public string DispatchMethod => IsCatMethod ? "DoCat" : "DoRequest";
 
-		private bool IsNodesHotThreadsMethod => CsharpNames.Namespace == "Nodes" && MethodName == "HotThreads";
-
-		public string DispatchMethod => IsNodesHotThreadsMethod ? "DoNodesHotThreads" : IsCatHelpMethod ? "DoCatHelp" : IsCatMethod ? "DoCat" : "DoRequest";
-
-		public string DispatchGenerics => IsNodesHotThreadsMethod ? "" : IsCatMethod
+		public string DispatchGenerics => IsCatMethod
 			? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
 			: $"<{ArgumentType},{ResponseName}>";
 
-		public string DispatchParameters => IsCatMethod || IsNodesHotThreadsMethod
+		public string DispatchParameters => IsCatMethod
 			? "request"
-			: "request, request.RequestParameters";
+			: CsharpNames.CustomResponseBuilderPerRequestOverride(out var builder)
+				? $"request, ResponseBuilder(request.RequestParameters, {builder})"
+				: "request, request.RequestParameters";
 	}
 }

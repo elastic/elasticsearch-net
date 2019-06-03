@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -13,13 +14,24 @@ namespace Nest
 
 	public partial class MultiSearchTemplateRequest
 	{
+		protected sealed override void RequestDefaults(MultiSearchTemplateRequestParameters parameters)
+		{
+			TypedKeys = true;
+			parameters.CustomResponseBuilder = new MultiSearchResponseBuilder(this);
+		}
+
 		public IDictionary<string, ISearchTemplateRequest> Operations { get; set; }
 
-		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
 	public partial class MultiSearchTemplateDescriptor
 	{
+		protected sealed override void RequestDefaults(MultiSearchTemplateRequestParameters parameters)
+		{
+			TypedKeys();
+			parameters.CustomResponseBuilder = new MultiSearchResponseBuilder(this);
+		}
+
 		private IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();
 
 		IDictionary<string, ISearchTemplateRequest> IMultiSearchTemplateRequest.Operations
@@ -27,8 +39,6 @@ namespace Nest
 			get => _operations;
 			set => _operations = value;
 		}
-
-		protected sealed override void Initialize() => TypedKeys();
 
 		public MultiSearchTemplateDescriptor Template<T>(string name, Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class

@@ -1,6 +1,7 @@
 ﻿namespace Nest
 {
 	[MapsApi("get_source.json")]
+	[ResponseBuilderWithGeneric("SourceRequestResponseBuilder<TDocument>.Instance")]
 	public partial interface ISourceRequest { }
 
 	// ReSharper disable UnusedTypeParameter

@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net.Specification.SqlApi;
 
 namespace Nest
 {
@@ -8,6 +9,9 @@ namespace Nest
 
 	public partial class TranslateSqlRequest
 	{
+		protected sealed override void RequestDefaults(TranslateSqlRequestParameters parameters) =>
+			parameters.CustomResponseBuilder = TranslateSqlResponseBuilder.Instance;
+
 		/// <inheritdoc cref="ISqlRequest.FetchSize" />
 		/// >
 		public int? FetchSize { get; set; }
@@ -27,6 +31,9 @@ namespace Nest
 
 	public partial class TranslateSqlDescriptor
 	{
+		protected sealed override void RequestDefaults(TranslateSqlRequestParameters parameters) =>
+			parameters.CustomResponseBuilder = TranslateSqlResponseBuilder.Instance;
+
 		int? ISqlRequest.FetchSize { get; set; }
 		QueryContainer ISqlRequest.Filter { get; set; }
 		string ISqlRequest.Query { get; set; }

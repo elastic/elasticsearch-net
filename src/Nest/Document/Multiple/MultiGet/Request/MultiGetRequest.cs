@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -16,12 +17,19 @@ namespace Nest
 
 	public partial class MultiGetRequest
 	{
+		protected sealed override void RequestDefaults(MultiGetRequestParameters parameters) =>
+			parameters.CustomResponseBuilder = new MultiGetResponseBuilder(this);
+
 		public Fields StoredFields { get; set; }
 		public IEnumerable<IMultiGetOperation> Documents { get; set; }
+
 	}
 
 	public partial class MultiGetDescriptor
 	{
+		protected sealed override void RequestDefaults(MultiGetRequestParameters parameters) =>
+			parameters.CustomResponseBuilder = new MultiGetResponseBuilder(this);
+
 		private List<IMultiGetOperation> _operations = new List<IMultiGetOperation>();
 
 		IEnumerable<IMultiGetOperation> IMultiGetRequest.Documents

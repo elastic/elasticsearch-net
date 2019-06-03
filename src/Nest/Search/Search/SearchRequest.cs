@@ -121,7 +121,7 @@ namespace Nest
 
 		Type ICovariantSearchRequest.ClrType => null;
 
-		protected sealed override void Initialize() => TypedKeys = true;
+		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys = true;
 	}
 
 	[DataContract]
@@ -169,7 +169,7 @@ namespace Nest
 		bool? ISearchRequest.TrackScores { get; set; }
 		bool? ISearchRequest.Version { get; set; }
 
-		protected sealed override void Initialize() => TypedKeys();
+		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys();
 
 		public SearchDescriptor<TInferDocument> Aggregations(Func<AggregationContainerDescriptor<TInferDocument>, IAggregationContainer> aggregationsSelector) =>
 			Assign(aggregationsSelector(new AggregationContainerDescriptor<TInferDocument>())?.Aggregations, (a, v) => a.Aggregations = v);

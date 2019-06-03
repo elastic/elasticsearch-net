@@ -9,11 +9,8 @@ namespace Elasticsearch.Net
 	{
 		HttpMethod DefaultHttpMethod { get; }
 
-		/// <summary>
-		/// A method that can be set on the request to take ownership of creating the response object.
-		/// When set this will be called instead of the internal .Deserialize();
-		/// </summary>
-		Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set; }
+		/// <summary> Allows you to completely circumvent the serializer to build the final response.</summary>
+		CustomResponseBuilderBase CustomResponseBuilder { get; set; }
 
 		/// <summary>
 		/// The querystring that should be appended to the path of the request
