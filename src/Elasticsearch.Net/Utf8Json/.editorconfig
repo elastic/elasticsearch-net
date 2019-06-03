@@ -33,4 +33,6 @@ resharper_redundant_jump_statement_highlighting=do_not_show
 resharper_redundant_explicit_array_size_highlighting=do_not_show
 resharper_redundant_assignment_highlighting=do_not_show
 
+resharper_redundant_assignment_highlighting=do_not_show
+
 disable_formatter=true

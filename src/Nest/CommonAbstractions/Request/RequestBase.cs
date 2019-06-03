@@ -35,11 +35,13 @@ namespace Nest
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
 	{
+		// ReSharper disable once VirtualMemberCallInConstructor
 		protected RequestBase() => Initialize();
 
 		protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
 		{
 			pathSelector(RequestState.RouteValues);
+			// ReSharper disable once VirtualMemberCallInConstructor
 			Initialize();
 		}
 

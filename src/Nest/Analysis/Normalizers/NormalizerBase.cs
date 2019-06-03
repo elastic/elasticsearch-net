@@ -17,6 +17,7 @@ namespace Nest
 	{
 		internal NormalizerBase() { }
 
+		// ReSharper disable once VirtualMemberCallInConstructor
 		protected NormalizerBase(string type) => Type = type;
 
 		public virtual string Type { get; protected set; }

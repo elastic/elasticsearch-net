@@ -88,10 +88,10 @@ namespace Nest
 				if (!plainTextResponse.StartsWith(":::", StringComparison.Ordinal))
 					return new NodesHotThreadsResponse();
 
-				var sections = plainTextResponse.Split(new string[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
+				var sections = plainTextResponse.Split(new[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
 				var info =
 					from section in sections
-					select section.Split(new string[] { "\n   \n" }, StringSplitOptions.None)
+					select section.Split(new[] { "\n   \n" }, StringSplitOptions.None)
 					into sectionLines
 					where sectionLines.Length > 0
 					let nodeLine = sectionLines.FirstOrDefault()

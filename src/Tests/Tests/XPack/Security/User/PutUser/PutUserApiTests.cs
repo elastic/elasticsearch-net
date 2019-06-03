@@ -79,8 +79,10 @@ namespace Tests.XPack.Security.User.PutUser
 	{
 		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
+			// ReSharper disable VirtualMemberCallInConstructor
 			var x = Client.Security.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
 			var y = Client.Security.GetRole(new GetRoleRequest(ClusterAuthentication.User.Role));
+			// ReSharper restore VirtualMemberCallInConstructor
 		}
 
 		protected override bool ExpectIsValid => false;

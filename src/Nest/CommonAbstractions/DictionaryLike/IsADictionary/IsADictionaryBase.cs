@@ -10,9 +10,11 @@ namespace Nest
 
 		protected IsADictionaryBase(IDictionary<TKey, TValue> backingDictionary)
 		{
+			// ReSharper disable VirtualMemberCallInConstructor
 			if (backingDictionary != null)
 				foreach (var key in backingDictionary.Keys)
 					ValidateKey(Sanitize(key));
+			// ReSharper enable VirtualMemberCallInConstructor
 
 			BackingDictionary = backingDictionary != null
 				? new Dictionary<TKey, TValue>(backingDictionary)

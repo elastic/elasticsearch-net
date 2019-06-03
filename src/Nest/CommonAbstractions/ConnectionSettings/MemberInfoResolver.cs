@@ -9,6 +9,7 @@ namespace Nest
 	/// </summary>
 	public class MemberInfoResolver : ExpressionVisitor
 	{
+		// ReSharper disable once VirtualMemberCallInConstructor
 		public MemberInfoResolver(Expression expression) => Visit(expression);
 
 		public IList<MemberInfo> Members { get; } = new List<MemberInfo>();
