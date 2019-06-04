@@ -889,9 +889,9 @@ namespace Nest
 			else
 				reader.ReadNext(); // }
 
-			var significantTermItem = new SignificantTermsBucket(subAggregates)
+			var significantTermItem = new SignificantTermsBucket<object>(subAggregates)
 			{
-				Key = (string)key,
+				Key = key,
 				DocCount = docCount.GetValueOrDefault(0),
 				BgCount = bgCount,
 				Score = score

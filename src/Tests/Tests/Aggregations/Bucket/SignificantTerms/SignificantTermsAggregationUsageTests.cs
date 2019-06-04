@@ -196,4 +196,67 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 			sigNames.DocCount.Should().BeGreaterThan(0);
 		}
 	}
+
+	/**
+	 * [float]
+	 * == Numeric fields
+	 *
+	 * A significant terms aggregation on a numeric field
+	 */
+	public class NumericSignificantTermsAggregationUsageTests : AggregationUsageTestBase
+	{
+		public NumericSignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new
+		{
+			commits = new
+			{
+				significant_terms = new
+				{
+					field = "numberOfCommits",
+					min_doc_count = 10,
+					mutual_information = new
+					{
+						background_is_superset = true,
+						include_negatives = true
+					}
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.SignificantTerms("commits", st => st
+				.Field(p => p.NumberOfCommits)
+				.MinimumDocumentCount(10)
+				.MutualInformation(mi => mi
+					.BackgroundIsSuperSet()
+					.IncludeNegatives()
+				)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new SignificantTermsAggregation("commits")
+			{
+				Field = Field<Project>(p => p.NumberOfCommits),
+				MinimumDocumentCount = 10,
+				MutualInformation = new MutualInformationHeuristic
+				{
+					BackgroundIsSuperSet = true,
+					IncludeNegatives = true
+				}
+			};
+
+		protected override void ExpectResponse(SearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var commits = response.Aggregations.SignificantTerms<int>("commits");
+			commits.Should().NotBeNull();
+			commits.Buckets.Should().NotBeNull();
+			commits.Buckets.Count.Should().BeGreaterThan(0);
+			foreach (var item in commits.Buckets) {
+				item.Key.Should().BeGreaterThan(0);
+				item.DocCount.Should().BeGreaterOrEqualTo(1);
+			}
+		}
+	}
 }
