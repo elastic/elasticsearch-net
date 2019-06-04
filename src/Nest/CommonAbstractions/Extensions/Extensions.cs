@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -96,7 +97,6 @@ namespace Nest
 
 			return null;
 		}
-
 		internal static string Utf8String(this ref ArraySegment<byte> segment) =>
 			StringEncoding.UTF8.GetString(segment.Array, segment.Offset, segment.Count);
 
@@ -161,7 +161,7 @@ namespace Nest
 			return !enumerable.Any() || enumerable.All(t => t == null);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name, string message = null) 
+		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 
 namespace Nest
 {
@@ -20,7 +21,7 @@ namespace Nest
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
 			{
 				stream.CopyTo(ms);
-				var body = ms.ToArray().Utf8String();
+				var body = ms.Utf8String();
 				Parse(catResponse, body);
 			}
 
@@ -46,7 +47,7 @@ namespace Nest
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
 			{
 				await stream.CopyToAsync(ms, 81920, ctx);
-				var body = ms.ToArray().Utf8String();
+				var body = ms.Utf8String();
 				Parse(catResponse, body);
 			}
 

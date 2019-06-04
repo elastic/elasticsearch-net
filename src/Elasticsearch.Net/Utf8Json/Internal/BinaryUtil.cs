@@ -112,9 +112,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             byte[] FastCloneWithResize(byte[] src, int newSize)
         {
             if (newSize < 0) throw new ArgumentOutOfRangeException("newSize");
-            if (src.Length < newSize) throw new ArgumentException("length < newSize");
-
             if (src == null) return new byte[newSize];
+            if (src.Length < newSize) throw new ArgumentException("length < newSize");
 
             byte[] dst = new byte[newSize];
 

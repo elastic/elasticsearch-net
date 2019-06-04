@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -31,7 +32,7 @@ namespace Elasticsearch.Net
 				ms.CopyTo(writableStream, BufferSize);
 			}
 			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+				WrittenBytes = ms?.ToArrayOrBuffer();
 		}
 
 		public static implicit operator SerializableData<T>(T serializableData) => new SerializableData<T>(serializableData);
@@ -53,7 +54,7 @@ namespace Elasticsearch.Net
 				await ms.CopyToAsync(writableStream, BufferSize, cancellationToken).ConfigureAwait(false);
 			}
 			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+				WrittenBytes = ms?.ToArrayOrBuffer();
 		}
 	}
 }

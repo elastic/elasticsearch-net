@@ -124,7 +124,7 @@ namespace Elasticsearch.Net
 				ms.CopyTo(writableStream, BufferSize);
 			}
 			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+				WrittenBytes = ms?.ToArrayOrBuffer();
 		}
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
@@ -169,7 +169,7 @@ namespace Elasticsearch.Net
 				await ms.CopyToAsync(writableStream, BufferSize, cancellationToken).ConfigureAwait(false);
 			}
 			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+				WrittenBytes = ms?.ToArrayOrBuffer();
 		}
 	}
 }

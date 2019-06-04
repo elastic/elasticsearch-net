@@ -1,5 +1,4 @@
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net
 {
@@ -16,7 +15,7 @@ namespace Elasticsearch.Net
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
-				return ms.ToArray();
+				return ms.ToArrayOrBuffer();
 			}
 		}
 

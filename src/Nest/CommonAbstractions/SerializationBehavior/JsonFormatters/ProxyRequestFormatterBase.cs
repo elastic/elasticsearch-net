@@ -1,5 +1,6 @@
 using System.Reflection;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -41,7 +42,7 @@ namespace Nest
 			using (var ms = settings.MemoryStreamFactory.Create())
 			{
 				untypedDocumentRequest.WriteJson(serializer, ms, SerializationFormatting.None);
-				var v = ms.ToArray();
+				var v = ms.ToArrayOrBuffer();
 				writer.WriteRaw(v);
 			}
 		}

@@ -27,6 +27,16 @@ namespace Elasticsearch.Net.Extensions
 
 			return Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
 		}
+		/// <summary> Attempts to return to underlying bytes buffer (no-copy) if possible </summary>
+		internal static byte[] ToArrayOrBuffer(this MemoryStream ms)
+		{
+			if (ms is null) return null;
+
+			if (!ms.TryGetBuffer(out var buffer) || buffer.Array is null)
+				return ms.ToArray();
+
+			return buffer.Array;
+		}
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 

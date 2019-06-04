@@ -174,7 +174,7 @@ namespace Elasticsearch.Net
 
 		private static byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{
-			var bytes = ms.ToArray();
+			var bytes = ms.ToArrayOrBuffer();
 			responseStream.Dispose();
 			responseStream = ms;
 			responseStream.Position = 0;
