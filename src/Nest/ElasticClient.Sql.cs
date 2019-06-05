@@ -101,12 +101,12 @@ namespace Nest.Specification.SqlApi
 		/// <para> </para>
 		/// <a href = "Translate SQL into Elasticsearch queries">Translate SQL into Elasticsearch queries</a>
 		/// </summary>
-		public TranslateSqlResponse Translate(ITranslateSqlRequest request) => DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
+		public TranslateSqlResponse Translate(ITranslateSqlRequest request) => DoSqlTranslate(request);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.translate</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "Translate SQL into Elasticsearch queries">Translate SQL into Elasticsearch queries</a>
 		/// </summary>
-		public Task<TranslateSqlResponse> TranslateAsync(ITranslateSqlRequest request, CancellationToken ct = default) => DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters, ct);
+		public Task<TranslateSqlResponse> TranslateAsync(ITranslateSqlRequest request, CancellationToken ct = default) => DoSqlTranslateAsync(request, ct);
 	}
 }

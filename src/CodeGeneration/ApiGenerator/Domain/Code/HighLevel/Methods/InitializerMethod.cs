@@ -34,25 +34,30 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 
 		private bool IsMultiSearchTemplateMethod => MethodName == "MultiSearchTemplate";
 
+		private bool IsSqlTranslateMethod =>  CsharpNames.Namespace == "Sql" && MethodName == "Translate";
+
 		public string DispatchMethod => IsNodesHotThreadsMethod
-										? "DoNodesHotThreads"
-										:IsMultiSearchTemplateMethod
-											? "DoMultiSearchTemplate"
-											: IsMultiGetMethod
-												? "DoMultiGet"
-												: IsMultiSearchMethod
-													? "DoMultiSearch"
-													: IsCatHelpMethod
-														? "DoCatHelp"
-														: IsCatMethod
-															? "DoCat"
-															: "DoRequest";
+											? "DoNodesHotThreads"
+											: IsSqlTranslateMethod
+												? "DoSqlTranslate"
+												: IsMultiSearchTemplateMethod
+													? "DoMultiSearchTemplate"
+													: IsMultiGetMethod
+														? "DoMultiGet"
+														: IsMultiSearchMethod
+															? "DoMultiSearch"
+															: IsCatHelpMethod
+																? "DoCatHelp"
+																: IsCatMethod
+																	? "DoCat"
+																	: "DoRequest";
 		public string DispatchGenerics =>
 			IsNodesHotThreadsMethod
 			|| IsMultiGetMethod
 			|| IsMultiSearchMethod
 			|| IsMultiSearchTemplateMethod
-				  ? ""
+			|| IsSqlTranslateMethod
+				  ? string.Empty
 				  : IsCatMethod
 						? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
 						: $"<{ArgumentType},{ResponseName}>";
@@ -63,6 +68,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 			|| IsMultiSearchMethod
 			|| IsMultiSearchTemplateMethod
 			|| IsNodesHotThreadsMethod
+			|| IsSqlTranslateMethod
 					? "request"
 					: "request, request.RequestParameters";
 	}

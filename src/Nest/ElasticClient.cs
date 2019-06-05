@@ -159,6 +159,24 @@ namespace Nest
 			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadsResponse;
 			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
 		}
+
+		private TranslateSqlResponse ToTranslateSqlResponse(IApiCallDetails apiCallDetails, Stream stream)
+		{
+			var result = _client.RequestResponseSerializer.Deserialize<ISearchRequest>(stream);
+			return new TranslateSqlResponse { Result = result };
+		}
+
+		protected TranslateSqlResponse DoSqlTranslate(ITranslateSqlRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
+			return DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
+		}
+
+		protected Task<TranslateSqlResponse> DoSqlTranslateAsync(ITranslateSqlRequest request, CancellationToken ct)
+		{
+			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
+			return DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters, ct);
+		}
 	}
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints

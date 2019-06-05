@@ -61,15 +61,14 @@ ORDER BY numberOfContributors DESC";
 			search.Size.Should().HaveValue().And.Be(5);
 			search.Source.Should().NotBeNull();
 			search.Source.Match(b => b.Should().BeFalse(), f => f.Should().BeNull());
-			// TODO DocValueFields is gone after code gen rework on 7.x
-			// We used to generate these documented in the spec as params to be implemented on the body
-//			search.DocValueFields.Should()
-//				.NotBeNullOrEmpty()
-//				.And.HaveCount(4)
-//				.And.Contain("type")
-//				.And.Contain("name")
-//				.And.Contain("startedOn")
-//				.And.Contain("numberOfCommits");
+
+			search.DocValueFields.Should()
+				.NotBeNullOrEmpty()
+				.And.HaveCount(4)
+				.And.Contain("type")
+				.And.Contain("name")
+				.And.Contain("startedOn")
+				.And.Contain("numberOfCommits");
 
 			search.Query.Should().NotBeNull();
 			IQueryContainer q = search.Query;
