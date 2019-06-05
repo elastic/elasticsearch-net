@@ -301,6 +301,24 @@ namespace Nest
 			return LowLevel.MultiSearchTemplateAsync<MultiSearchResponse>(new SerializableData<IMultiSearchTemplateRequest>(request), request.RequestParameters, ctx: ct);
 		}
 
+		private SourceResponse<TDocument> ToSourceResponse<TDocument>(IApiCallDetails apiCallDetails, Stream stream)
+		{
+			var source = SourceSerializer.Deserialize<TDocument>(stream);
+			return new SourceResponse<TDocument> { Body = source };
+		}
+
+		private SourceResponse<TDocument> DoSource<TDocument>(ISourceRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
+			return DoRequest<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters);
+		}
+
+		private Task<SourceResponse<TDocument>> DoSourceAsync<TDocument>(ISourceRequest request, CancellationToken ct)
+		{
+			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
+			return DoRequestAsync<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters, ct);
+		}
+
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
