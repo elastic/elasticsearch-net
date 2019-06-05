@@ -697,13 +697,13 @@ namespace Nest
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
 		/// </summary>
-		public MultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request) => DoRequest<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
+		public MultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request) => DoMultiSearchTemplate(request);
 		/// <summary>
 		/// <c>POST</c> request to the <c>msearch_template</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
 		/// </summary>
-		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
+		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default) => DoMultiSearchTemplateAsync(request, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>mtermvectors</c> API, read more about this API online:
 		/// <para> </para>

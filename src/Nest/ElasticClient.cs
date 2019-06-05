@@ -267,6 +267,22 @@ namespace Nest
 			return DoRequestAsync<IMultiSearchRequest,MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
+		private MultiSearchResponse DoMultiSearchTemplate(IMultiSearchTemplateRequest request)
+		{
+			var formatter = new MultiSearchResponseFormatter(request);
+			var serializer = ConnectionSettings.CreateStateful(formatter);
+			request.RequestParameters.DeserializationOverride = (r, s) => serializer.Deserialize<MultiSearchResponse>(s);
+			return LowLevel.MultiSearchTemplate<MultiSearchResponse>(new SerializableData<IMultiSearchTemplateRequest>(request), request.RequestParameters);
+		}
+
+		private Task<MultiSearchResponse> DoMultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct)
+		{
+			var formatter = new MultiSearchResponseFormatter(request);
+			var serializer = ConnectionSettings.CreateStateful(formatter);
+			request.RequestParameters.DeserializationOverride = (r, s) => serializer.Deserialize<MultiSearchResponse>(s);
+			return LowLevel.MultiSearchTemplateAsync<MultiSearchResponse>(new SerializableData<IMultiSearchTemplateRequest>(request), request.RequestParameters, ctx: ct);
+		}
+
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;

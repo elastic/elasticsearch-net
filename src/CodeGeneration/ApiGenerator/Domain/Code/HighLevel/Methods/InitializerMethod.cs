@@ -31,20 +31,39 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 		private bool IsMultiGetMethod => MethodName == "MultiGet";
 
 		private bool IsMultiSearchMethod => MethodName == "MultiSearch";
-		public string DispatchMethod => IsNodesHotThreadsMethod ? "DoNodesHotThreads" : IsMultiGetMethod
-											? "DoMultiGet"
-											: IsMultiSearchMethod
-												? "DoMultiSearch"
-												: IsCatHelpMethod
-													? "DoCatHelp"
-													: IsCatMethod
-														? "DoCat"
-														: "DoRequest";
-		public string DispatchGenerics => IsNodesHotThreadsMethod || IsMultiGetMethod || IsMultiSearchMethod ? "" : IsCatMethod
-			? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
-			: $"<{ArgumentType},{ResponseName}>";
-		public string DispatchParameters => IsCatMethod || IsMultiGetMethod || IsMultiSearchMethod || IsNodesHotThreadsMethod
-			? "request"
-			: "request, request.RequestParameters";
+
+		private bool IsMultiSearchTemplateMethod => MethodName == "MultiSearchTemplate";
+
+		public string DispatchMethod => IsNodesHotThreadsMethod
+										? "DoNodesHotThreads"
+										:IsMultiSearchTemplateMethod
+											? "DoMultiSearchTemplate"
+											: IsMultiGetMethod
+												? "DoMultiGet"
+												: IsMultiSearchMethod
+													? "DoMultiSearch"
+													: IsCatHelpMethod
+														? "DoCatHelp"
+														: IsCatMethod
+															? "DoCat"
+															: "DoRequest";
+		public string DispatchGenerics =>
+			IsNodesHotThreadsMethod
+			|| IsMultiGetMethod
+			|| IsMultiSearchMethod
+			|| IsMultiSearchTemplateMethod
+				  ? ""
+				  : IsCatMethod
+						? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
+						: $"<{ArgumentType},{ResponseName}>";
+
+		public string DispatchParameters =>
+			IsCatMethod
+			|| IsMultiGetMethod
+			|| IsMultiSearchMethod
+			|| IsMultiSearchTemplateMethod
+			|| IsNodesHotThreadsMethod
+					? "request"
+					: "request, request.RequestParameters";
 	}
 }
