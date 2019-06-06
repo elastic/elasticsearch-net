@@ -116,14 +116,14 @@ namespace Nest
 						aggregate = GetValueAggregate(ref reader, formatterResolver);
 						break;
 					case 2:
-						var dictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
-						var afterKeys = dictionaryFormatter.Deserialize(ref reader, formatterResolver);
+						var compositeKeyFormatter = formatterResolver.GetFormatter<CompositeKey>();
+						var afterKey = compositeKeyFormatter.Deserialize(ref reader, formatterResolver);
 						reader.ReadNext(); // ,
 						propertyName = reader.ReadPropertyNameSegmentRaw();
 						var bucketAggregate = propertyName.EqualsBytes(BucketsField)
 							? GetMultiBucketAggregate(ref reader, formatterResolver, ref propertyName) as BucketAggregate ?? new BucketAggregate()
 							: new BucketAggregate();
-						bucketAggregate.AfterKey = afterKeys;
+						bucketAggregate.AfterKey = afterKey;
 						aggregate = bucketAggregate;
 						break;
 					case 3:

@@ -53,7 +53,7 @@ namespace Nest
 	// Intermediate object used for deserialization
 	public class BucketAggregate : IAggregate
 	{
-		public IReadOnlyDictionary<string, object> AfterKey { get; set; } = EmptyReadOnly<string, object>.Dictionary;
+		public CompositeKey AfterKey { get; set; }
 		public long BgCount { get; set; }
 		public long DocCount { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }
