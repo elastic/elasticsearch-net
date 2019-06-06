@@ -43,6 +43,8 @@ namespace Nest
 					new TimeSpanToStringFormatter(),
 					new NullableTimeSpanToStringFormatter(),
 					new JsonNetCompatibleUriFormatter(),
+					new GeoOrientationFormatter(),
+					new NullableGeoOrientationFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
