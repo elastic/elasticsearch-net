@@ -204,7 +204,7 @@ namespace Nest
 			{
 				Buckets = bucket.Items.OfType<CompositeBucket>().ToList(),
 				Meta = bucket.Meta,
-				AfterKey = new CompositeKey(bucket.AfterKey)
+				AfterKey = bucket.AfterKey
 			};
 		}
 
