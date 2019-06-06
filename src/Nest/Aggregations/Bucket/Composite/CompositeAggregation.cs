@@ -17,7 +17,7 @@ namespace Nest
 		/// last composite buckets returned in a previous round
 		/// </summary>
 		[DataMember(Name ="after")]
-		object After { get; set; }
+		CompositeKey After { get; set; }
 
 		/// <summary>
 		/// Defines how many composite buckets should be returned.
@@ -43,7 +43,7 @@ namespace Nest
 		public CompositeAggregation(string name) : base(name) { }
 
 		/// <inheritdoc />
-		public object After { get; set; }
+		public CompositeKey After { get; set; }
 
 		/// <inheritdoc />
 		public int? Size { get; set; }
@@ -60,7 +60,7 @@ namespace Nest
 			, ICompositeAggregation
 		where T : class
 	{
-		object ICompositeAggregation.After { get; set; }
+		CompositeKey ICompositeAggregation.After { get; set; }
 		int? ICompositeAggregation.Size { get; set; }
 		IEnumerable<ICompositeAggregationSource> ICompositeAggregation.Sources { get; set; }
 
@@ -74,6 +74,6 @@ namespace Nest
 		public CompositeAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="ICompositeAggregation.After" />
-		public CompositeAggregationDescriptor<T> After(object after) => Assign(after, (a, v) => a.After = v);
+		public CompositeAggregationDescriptor<T> After(CompositeKey after) => Assign(after, (a, v) => a.After = v);
 	}
 }
