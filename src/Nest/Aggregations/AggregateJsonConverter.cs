@@ -88,7 +88,10 @@ namespace Nest
 					var bucketAggregate = reader.Value.ToString() == Parser.Buckets
 						? GetMultiBucketAggregate(reader, serializer) as BucketAggregate ?? new BucketAggregate()
 						: new BucketAggregate();
+#pragma warning disable 618
 					bucketAggregate.AfterKey = afterKeys;
+#pragma warning restore 618
+					bucketAggregate.CompositeAfterKey = new CompositeKey(afterKeys);
 					aggregate = bucketAggregate;
 					break;
 				case Parser.Buckets:

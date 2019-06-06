@@ -192,7 +192,6 @@ namespace Nest
 			};
 		}
 
-
 		public CompositeBucketAggregate Composite(string key)
 		{
 			var bucket = TryGet<BucketAggregate>(key);
@@ -202,7 +201,7 @@ namespace Nest
 			{
 				Buckets = bucket.Items.OfType<CompositeBucket>().ToList(),
 				Meta = bucket.Meta,
-				AfterKey = new CompositeKey(bucket.AfterKey)
+				AfterKey = bucket.CompositeAfterKey
 			};
 		}
 
@@ -211,11 +210,8 @@ namespace Nest
 		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
 
 		private TAggregate TryGet<TAggregate>(string key)
-			where TAggregate : class, IAggregate
-		{
-			IAggregate agg;
-			return BackingDictionary.TryGetValue(key, out agg) ? agg as TAggregate : null;
-		}
+			where TAggregate : class, IAggregate =>
+			BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 
 		private MultiBucketAggregate<TBucket> GetMultiBucketAggregate<TBucket>(string key)
 			where TBucket : IBucket
