@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using System;
+
+namespace Nest
 {
 	/// <inheritdoc cref="IGeoShapeProperty" />
 	public class GeoShapeAttribute : ElasticsearchDocValuesPropertyAttributeBase, IGeoShapeProperty
@@ -6,6 +8,7 @@
 		public GeoShapeAttribute() : base(FieldType.GeoShape) { }
 
 		/// <inheritdoc cref="IGeoShapeProperty.DistanceErrorPercentage" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public double DistanceErrorPercentage
 		{
 			get => (Self.Precision != null) | (Self.TreeLevels != null)
@@ -36,6 +39,7 @@
 		}
 
 		/// <inheritdoc cref="IGeoShapeProperty.PointsOnly" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public bool PointsOnly
 		{
 			get => Self.PointsOnly.GetValueOrDefault(false);
@@ -43,6 +47,7 @@
 		}
 
 		/// <inheritdoc cref="IGeoShapeProperty.Strategy" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoStrategy Strategy
 		{
 			get => Self.Strategy.GetValueOrDefault(GeoStrategy.Recursive);
@@ -50,6 +55,7 @@
 		}
 
 		/// <inheritdoc cref="IGeoShapeProperty.Tree" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoTree Tree
 		{
 			get => Self.Tree.GetValueOrDefault(GeoTree.Geohash);
@@ -57,6 +63,7 @@
 		}
 
 		/// <inheritdoc cref="IGeoShapeProperty.TreeLevels" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public int TreeLevels
 		{
 			get => Self.TreeLevels.GetValueOrDefault(50);
@@ -70,16 +77,30 @@
 			set => Self.Coerce = value;
 		}
 
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
+
 		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
+
 		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
+
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		Distance IGeoShapeProperty.Precision { get; set; }
+
 		private IGeoShapeProperty Self => this;
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
 
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 
 		bool? IGeoShapeProperty.Coerce { get; set; }

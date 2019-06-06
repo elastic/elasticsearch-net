@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable 612, 618
+using System;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -58,3 +59,4 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		};
 	}
 }
+#pragma warning restore 612, 618

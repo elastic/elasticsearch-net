@@ -1,3 +1,4 @@
+#pragma warning disable 612, 618
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,14 +41,15 @@ namespace Tests.XPack.Ilm
 				)
 			},
 			{
-				IlmExplainLifecycleStep, u => u.Calls<ExplainLifecycleDescriptor, ExplainLifecycleRequest, IExplainLifecycleRequest, IExplainLifecycleResponse>(
-					v => new ExplainLifecycleRequest("project"),
-					(v, d) => d,
-					(v, c, f) => c.ExplainLifecycle("project", f),
-					(v, c, f) => c.ExplainLifecycleAsync("project", f),
-					(v, c, r) => c.ExplainLifecycle(r),
-					(v, c, r) => c.ExplainLifecycleAsync(r)
-				)
+				IlmExplainLifecycleStep, u =>
+					u.Calls<ExplainLifecycleDescriptor, ExplainLifecycleRequest, IExplainLifecycleRequest, IExplainLifecycleResponse>(
+						v => new ExplainLifecycleRequest("project"),
+						(v, d) => d,
+						(v, c, f) => c.ExplainLifecycle("project", f),
+						(v, c, f) => c.ExplainLifecycleAsync("project", f),
+						(v, c, r) => c.ExplainLifecycle(r),
+						(v, c, r) => c.ExplainLifecycleAsync(r)
+					)
 			},
 			{
 				IlmGetStatusStep, u => u.Calls<GetIlmStatusDescriptor, GetIlmStatusRequest, IGetIlmStatusRequest, IGetIlmStatusResponse>(
@@ -81,7 +83,7 @@ namespace Tests.XPack.Ilm
 								Hot = new Phase
 								{
 									MinimumAge = "1d",
-									Actions	= new LifecycleActions
+									Actions = new LifecycleActions
 									{
 										new RolloverLifecycleAction
 										{
@@ -103,14 +105,12 @@ namespace Tests.XPack.Ilm
 					},
 					(v, d) => d
 						.Policy(p => p.Phases(a => a.Warm(w => w.MinimumAge("10d")
-																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberOfSegments(1))))
-													.Hot(h => h.MinimumAge("1d")
-															    .Actions(ac => ac.Rollover(r => r.MaximumDocuments(1_000_000)
-#pragma warning disable 612, 618
-																								.MaximumSize(40_000_000_000))))
-#pragma warning restore 612, 618
-													.Delete(w => w.MinimumAge("30d")
-		       													  .Actions(ac => ac.Delete(f => f)))))
+								.Actions(ac => ac.ForceMerge(f => f.MaximumNumberOfSegments(1))))
+							.Hot(h => h.MinimumAge("1d")
+								.Actions(ac => ac.Rollover(r => r.MaximumDocuments(1_000_000)
+									.MaximumSize(40_000_000_000))))
+							.Delete(w => w.MinimumAge("30d")
+								.Actions(ac => ac.Delete(f => f)))))
 					,
 					(v, c, f) => c.PutLifecycle("policy" + v, f),
 					(v, c, f) => c.PutLifecycleAsync("policy" + v, f),
@@ -149,14 +149,15 @@ namespace Tests.XPack.Ilm
 				)
 			},
 			{
-				IlmDeleteLifecycleStep, u => u.Calls<DeleteLifecycleDescriptor, DeleteLifecycleRequest, IDeleteLifecycleRequest, IDeleteLifecycleResponse>(
-					v => new DeleteLifecycleRequest("policy" + v),
-					(v, d) => d,
-					(v, c, f) => c.DeleteLifecycle("policy" + v, f),
-					(v, c, f) => c.DeleteLifecycleAsync("policy" + v, f),
-					(v, c, r) => c.DeleteLifecycle(r),
-					(v, c, r) => c.DeleteLifecycleAsync(r)
-				)
+				IlmDeleteLifecycleStep, u =>
+					u.Calls<DeleteLifecycleDescriptor, DeleteLifecycleRequest, IDeleteLifecycleRequest, IDeleteLifecycleResponse>(
+						v => new DeleteLifecycleRequest("policy" + v),
+						(v, d) => d,
+						(v, c, f) => c.DeleteLifecycle("policy" + v, f),
+						(v, c, f) => c.DeleteLifecycleAsync("policy" + v, f),
+						(v, c, r) => c.DeleteLifecycle(r),
+						(v, c, r) => c.DeleteLifecycleAsync(r)
+					)
 			},
 			{
 				IlmStopStep, u => u.Calls<StopIlmDescriptor, StopIlmRequest, IStopIlmRequest, IStopIlmResponse>(
@@ -272,3 +273,4 @@ namespace Tests.XPack.Ilm
 		});
 	}
 }
+#pragma warning restore 612, 618

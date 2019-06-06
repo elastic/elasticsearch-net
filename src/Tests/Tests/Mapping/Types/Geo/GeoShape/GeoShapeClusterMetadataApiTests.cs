@@ -1,3 +1,4 @@
+#pragma warning disable 612, 618
 using System;
 using System.Linq;
 using Elasticsearch.Net;
@@ -85,3 +86,4 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		}
 	}
 }
+#pragma warning restore 612, 618

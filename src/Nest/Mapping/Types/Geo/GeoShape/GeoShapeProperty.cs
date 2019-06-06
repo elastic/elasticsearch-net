@@ -83,6 +83,7 @@ namespace Nest
 		/// Elasticsearch set this parameter automatically.
 		/// </summary>
 		[JsonProperty("strategy")]
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		GeoStrategy? Strategy { get; set; }
 
 		/// <summary>
@@ -139,6 +140,7 @@ namespace Nest
 		public Distance Precision { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoStrategy? Strategy { get; set; }
 
 		/// <inheritdoc />
@@ -161,18 +163,23 @@ namespace Nest
 	{
 		public GeoShapePropertyDescriptor() : base(FieldType.GeoShape) { }
 
+		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
+		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
+
+		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
+
+		bool? IGeoShapeProperty.Coerce { get; set; }
 
 		[Obsolete("Removed in Elasticsearch 6.6")]
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
-		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
-		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
-		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 
 		[Obsolete("Removed in Elasticsearch 6.6")]
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
 
 		[Obsolete("Removed in Elasticsearch 6.6")]
 		Distance IGeoShapeProperty.Precision { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
 
 		[Obsolete("Removed in Elasticsearch 6.6")]
@@ -181,10 +188,7 @@ namespace Nest
 		[Obsolete("Removed in Elasticsearch 6.6")]
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 
-		bool? IGeoShapeProperty.Coerce { get; set; }
-
 		/// <inheritdoc cref="IGeoShapeProperty.Tree" />
-
 		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> Tree(GeoTree? tree) => Assign(tree, (a, v) => a.Tree = v);
 
@@ -193,6 +197,7 @@ namespace Nest
 		public GeoShapePropertyDescriptor<T> TreeLevels(int? treeLevels) => Assign(treeLevels, (a, v) => a.TreeLevels = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Strategy" />
+		[Obsolete("Removed in Elasticsearch 6.6")]
 		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy? strategy) => Assign(strategy, (a, v) => a.Strategy = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Precision" />
