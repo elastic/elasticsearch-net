@@ -45,7 +45,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		private static IProperties InitializerProperties => new Properties
 		{
 			{
-				"location", new GeoShapeProperty
+				"locationShape", new GeoShapeProperty
 				{
 					Orientation = GeoOrientation.ClockWise,
 					Strategy = GeoStrategy.Recursive,
