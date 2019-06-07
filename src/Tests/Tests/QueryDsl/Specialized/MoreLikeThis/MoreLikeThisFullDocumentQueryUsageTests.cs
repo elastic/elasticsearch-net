@@ -28,8 +28,6 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 					new
 					{
 						_index = "project",
-						_id = Project.Instance.Name,
-						routing = Project.Instance.Name,
 						doc = Project.InstanceAnonymous
 					},
 					"some long text"
