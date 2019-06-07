@@ -44,8 +44,8 @@ namespace Nest
 
 		[DataMember(Name ="version_map_memory_in_bytes")]
 		public long VersionMapMemoryInBytes { get; set; }
-		
+
 		[DataMember(Name ="file_sizes")]
-		public IReadOnlyDictionary<string, ShardFileSizeInfo> FileSizes { get; internal set; } = EmptyReadOnly<string, ShardFileSizeInfo>.Dictionary;
+		public IReadOnlyDictionary<string, ShardFileSizeInfo> FileSizes { get; internal set; }
 	}
 }
