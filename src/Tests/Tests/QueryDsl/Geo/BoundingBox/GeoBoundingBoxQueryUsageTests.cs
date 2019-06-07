@@ -20,7 +20,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationPoint),
 			BoundingBox = new Nest.BoundingBox
 			{
 				TopLeft = new GeoLocation(34, -34),
@@ -38,7 +38,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				validation_method = "strict",
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationPoint = new
 				{
 					top_left = new
 					{
@@ -58,7 +58,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			.GeoBoundingBox(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.BoundingBox(b => b
 					.TopLeft(34, -34)
 					.BottomRight(-34, 34)
@@ -83,7 +83,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationPoint),
 			BoundingBox = new Nest.BoundingBox
 			{
 				WellKnownText = "BBOX (34, -34, -34, 34)"
@@ -100,7 +100,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				validation_method = "strict",
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationPoint = new
 				{
 					wkt = "BBOX (34, -34, -34, 34)"
 				}
@@ -111,7 +111,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			.GeoBoundingBox(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.BoundingBox(b => b
 					.WellKnownText("BBOX (34, -34, -34, 34)")
 				)

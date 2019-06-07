@@ -41,8 +41,6 @@ namespace Nest
 	/// </summary>
 	public abstract class GeoShapeBase : IGeoShape
 	{
-		internal static readonly GeoShapeFormatter ShapeFormatter = new GeoShapeFormatter();
-		
 		protected GeoShapeBase(string type) => Type = type;
 
 		/// <inheritdoc />
@@ -55,14 +53,16 @@ namespace Nest
 		where TShape : IGeoShape
 	{
 		public void Serialize(ref JsonWriter writer, TShape value, IJsonFormatterResolver formatterResolver) =>
-			GeoShapeBase.ShapeFormatter.Serialize(ref writer, value, formatterResolver);
+			GeoShapeFormatter.Instance.Serialize(ref writer, value, formatterResolver);
 
 		public TShape Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
-			(TShape)GeoShapeBase.ShapeFormatter.Deserialize(ref reader, formatterResolver);
+			(TShape)GeoShapeFormatter.Instance.Deserialize(ref reader, formatterResolver);
 	}
 
 	internal class GeoShapeFormatter : IJsonFormatter<IGeoShape>
 	{
+		internal static readonly GeoShapeFormatter Instance = new GeoShapeFormatter();
+
 		public IGeoShape Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();

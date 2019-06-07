@@ -20,7 +20,7 @@ namespace Tests.QueryDsl.Geo.Distance
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationPoint),
 			DistanceType = GeoDistanceType.Arc,
 			Location = new GeoLocation(34, -34),
 			Distance = "200m",
@@ -36,7 +36,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				distance = "200m",
 				distance_type = "arc",
 				validation_method = "ignore_malformed",
-				location = new
+				locationPoint = new
 				{
 					lat = 34.0,
 					lon = -34.0
@@ -48,7 +48,7 @@ namespace Tests.QueryDsl.Geo.Distance
 			.GeoDistance(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.DistanceType(GeoDistanceType.Arc)
 				.Location(34, -34)
 				.Distance("200m")
