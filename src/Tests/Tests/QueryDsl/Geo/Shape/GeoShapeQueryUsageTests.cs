@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -63,7 +64,7 @@ namespace Tests.QueryDsl.Geo.Shape
 					new[] { 18.2, 8.2 },
 					new[] { -18.8, 8.2 },
 					new[] { -10.8, -8.8 },
-					new[] { 18.2, 8.8 }
+					new[] { 18.2, 8.2 }
 				}
 			},
 			new[]
@@ -90,7 +91,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			},
 			new GeoCoordinate[]
 			{
-				new[] { 18.2, 8.2 }, new[] { -18.8, 8.2 }, new[] { -10.8, -8.8 }, new[] { 18.2, 8.8 }
+				new[] { 18.2, 8.2 }, new[] { -18.8, 8.2 }, new[] { -10.8, -8.8 }, new[] { 18.2, 8.2 }
 			}
 		};
 
@@ -160,6 +161,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with MultiPoint
 	 *
 	 */
+	[SkipVersion(">7.0.0", "multipoint queries are not supported")]
 	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
