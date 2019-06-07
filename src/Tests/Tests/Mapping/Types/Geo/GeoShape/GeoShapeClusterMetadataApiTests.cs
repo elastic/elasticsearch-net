@@ -7,7 +7,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.GeoShape
 {
@@ -36,12 +37,8 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		private static Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoShape(s => s
 				.Name(p => p.Location)
-				.Tree(GeoTree.Quadtree)
 				.Orientation(GeoOrientation.ClockWise)
 				.Strategy(GeoStrategy.Recursive)
-				.TreeLevels(3)
-				.PointsOnly()
-				.DistanceErrorPercentage(1.0)
 				.Coerce()
 			);
 
@@ -50,12 +47,8 @@ namespace Tests.Mapping.Types.Core.GeoShape
 			{
 				"location", new GeoShapeProperty
 				{
-					Tree = GeoTree.Quadtree,
 					Orientation = GeoOrientation.ClockWise,
 					Strategy = GeoStrategy.Recursive,
-					TreeLevels = 3,
-					PointsOnly = true,
-					DistanceErrorPercentage = 1.0,
 					Coerce = true
 				}
 			}
