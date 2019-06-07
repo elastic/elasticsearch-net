@@ -15,7 +15,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		{
 			properties = new
 			{
-				location = new
+				locationShape = new
 				{
 					type = "geo_shape",
 					tree = "quadtree",
@@ -31,7 +31,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoShape(s => s
-				.Name(p => p.Location)
+				.Name(p => p.LocationShape)
 				.Tree(GeoTree.Quadtree)
 				.Orientation(GeoOrientation.ClockWise)
 				.Strategy(GeoStrategy.Recursive)
@@ -45,7 +45,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		protected override IProperties InitializerProperties => new Properties
 		{
 			{
-				"location", new GeoShapeProperty
+				"locationShape", new GeoShapeProperty
 				{
 					Tree = GeoTree.Quadtree,
 					Orientation = GeoOrientation.ClockWise,

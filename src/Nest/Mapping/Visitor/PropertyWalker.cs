@@ -162,6 +162,9 @@ namespace Nest
 			if (type == typeof(QueryContainer))
 				return new PercolatorProperty();
 
+			if (type == typeof(IGeoShape))
+				return new GeoShapeProperty();
+
 			return new ObjectProperty();
 		}
 

@@ -62,7 +62,7 @@ namespace DocGenerator
 			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
 			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
 			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "EnvelopeCoordinates", @"new [] { new [] { 45.0, -45.0 }, new [] { -45.0, 45.0 }}" },
+			{ "EnvelopeCoordinates", @"new [] { new [] { -45.0, 45.0 }, new [] { 45.0, -45.0 }}" },
 			{ "CircleCoordinates", @"new [] { 45.0, -45.0 }" },
 			{ "MultiPointCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
 			{
@@ -117,12 +117,6 @@ namespace DocGenerator
 			},
 			{ "LineStringCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
 			{ "PointCoordinates", "new[] { 38.897676, -77.03653 }" },
-			{
-			  "_polygonCoordinates", @"new[]{
-										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
-										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
-									}"
-			},
 			{ "ProjectFilterExpectedJson", "new {term = new {type = new {value = \"project\"}}}" }
 		};
 

@@ -9,13 +9,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 {
 	public class GeoShapeMultiLineStringQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _coordinates = new[]
-		{
-			new GeoCoordinate[] { new[] { 12.0, 2.0 }, new[] { 13.0, 2.0 }, new[] { 13.0, 3.0 }, new[] { 12.0, 3.0 } },
-			new GeoCoordinate[] { new[] { 10.0, 0.0 }, new[] { 11.0, 0.0 }, new[] { 11.0, 1.0 }, new[] { 10.0, 1.0 } },
-			new GeoCoordinate[] { new[] { 10.2, 0.2 }, new[] { 10.8, 0.2 }, new[] { 10.8, 0.8 }, new[] { 12.0, 0.8 } },
-		};
-
 		public GeoShapeMultiLineStringQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen =>
@@ -30,23 +23,23 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Field<Project>(p => p.Location),
-			Shape = new MultiLineStringGeoShape(_coordinates),
+			Field = Field<Project>(p => p.LocationShape),
+			Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override object ShapeJson => new
 		{
 			type = "multilinestring",
-			coordinates = _coordinates
+			coordinates = MultiLineStringCoordinates
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.GeoShapeMultiLineString(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
-				.Coordinates(_coordinates)
+				.Field(p => p.LocationShape)
+				.Coordinates(MultiLineStringCoordinates)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 	}

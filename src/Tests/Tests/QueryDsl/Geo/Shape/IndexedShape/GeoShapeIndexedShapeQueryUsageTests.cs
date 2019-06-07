@@ -32,13 +32,13 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Field<Project>(p => p.Location),
+			Field = Field<Project>(p => p.LocationShape),
 			IndexedShape = new FieldLookup
 			{
 				Id = 2,
 				Index = Index<Project>(),
 				Type = Type<Project>(),
-				Path = Field<Project>(p => p.Location),
+				Path = Field<Project>(p => p.LocationShape),
 			},
 			Relation = GeoShapeRelation.Intersects
 		};
@@ -49,14 +49,14 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					indexed_shape = new
 					{
 						id = 2,
 						type = "doc",
 						index = "project",
-						path = "location"
+						path = "locationShape"
 					},
 					relation = "intersects"
 				}
@@ -67,10 +67,10 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			.GeoIndexedShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.IndexedShape(p => p
 					.Id(2)
-					.Path(pp => pp.Location)
+					.Path(pp => pp.LocationShape)
 				)
 				.Relation(GeoShapeRelation.Intersects)
 			);
