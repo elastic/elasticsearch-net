@@ -80,7 +80,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		protected override void ExpectResponse(PutMappingResponse response)
 		{
 			// Ensure metadata can be deserialised
-			var metadata = Client.Cluster.State(null, r => r.Metric(ClusterStateMetric.Metadata));
+			var metadata = Client.Cluster.State(CallIsolatedValue, r => r.Metric(ClusterStateMetric.Metadata));
 			metadata.IsValid.Should().BeTrue();
 		}
 	}
