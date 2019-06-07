@@ -19,7 +19,7 @@ namespace Tests.Reproduce
 		}
 
 		[U]
-		public void SerializeDateMathWithMinimumThreeDecimalPlacesThenHundreds()
+		public void SerializeDateMathWithMinimumThreeDecimalPlacesWhenHundreds()
 		{
 			DateMath dateMath = new DateTime(2019, 5, 7, 12, 0, 0, 200);
 
