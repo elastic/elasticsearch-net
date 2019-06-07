@@ -23,8 +23,8 @@ namespace Tests.QueryDsl.Geo.Shape
 
 		protected static readonly IEnumerable<GeoCoordinate> EnvelopeCoordinates = new GeoCoordinate[]
 		{
-			new[] { -45.0, 45.0 },
-			new[] { 45.0, -45.0 }
+			new[] { 45.0, -45.0, },
+			new[] { -45.0, 45.0 }
 		};
 
 		protected static readonly IEnumerable<GeoCoordinate> LineStringCoordinates = new GeoCoordinate[]
@@ -161,7 +161,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with MultiPoint
 	 *
 	 */
-	[SkipVersion(">7.0.0", "multipoint queries are not supported")]
+	[SkipVersion(">=7.0.0", "multipoint queries are not supported")]
 	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -604,6 +604,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with Circle
 	 *
 	 */
+	[SkipVersion(">=7.0.0", "CIRCLE geometry is not supported")]
 	public class GeoShapeCircleQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
