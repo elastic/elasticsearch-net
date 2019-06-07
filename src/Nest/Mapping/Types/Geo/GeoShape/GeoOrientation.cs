@@ -29,11 +29,11 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var enumString = (string)reader.Value;
-			switch (enumString.ToLower())
+			switch (enumString.ToUpperInvariant())
 			{
-				case "left":
-				case "cw":
-				case "clockwise":
+				case "LEFT":
+				case "CW":
+				case "CLOCKWISE":
 					return GeoOrientation.ClockWise;
 			}
 			// Default, complies with the OGC standard
@@ -42,4 +42,5 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 	}
+
 }
