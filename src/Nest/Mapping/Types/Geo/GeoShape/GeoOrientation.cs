@@ -25,6 +25,12 @@ namespace Nest
 
 		public GeoOrientation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
+			if (reader.ReadIsNull())
+			{
+				// Default, complies with the OGC standard
+				return GeoOrientation.CounterClockWise;
+			}
+
 			var enumString = reader.ReadString();
 			switch (enumString.ToUpperInvariant())
 			{
@@ -33,6 +39,7 @@ namespace Nest
 				case "CLOCKWISE":
 					return GeoOrientation.ClockWise;
 			}
+
 			// Default, complies with the OGC standard
 			return GeoOrientation.CounterClockWise;
 		}
@@ -61,12 +68,12 @@ namespace Nest
 
 		public GeoOrientation? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var enumString = reader.ReadString();
-
-			if (string.IsNullOrEmpty(enumString))
+			if (reader.ReadIsNull())
 			{
 				return null;
 			}
+
+			var enumString = reader.ReadString();
 
 			switch (enumString.ToUpperInvariant())
 			{
@@ -78,9 +85,9 @@ namespace Nest
 				case "CCW":
 				case "COUNTERCLOCKWISE":
 					return GeoOrientation.CounterClockWise;
+				default:
+					return null;
 			}
-
-			return null;
 		}
 	}
 }
