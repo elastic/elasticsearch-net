@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -22,8 +23,8 @@ namespace Tests.QueryDsl.Geo.Shape
 
 		protected static readonly IEnumerable<GeoCoordinate> EnvelopeCoordinates = new GeoCoordinate[]
 		{
-			new[] { -45.0, 45.0 },
-			new[] { 45.0, -45.0 }
+			new[] { 45.0, -45.0, },
+			new[] { -45.0, 45.0 }
 		};
 
 		protected static readonly IEnumerable<GeoCoordinate> LineStringCoordinates = new GeoCoordinate[]
@@ -63,7 +64,7 @@ namespace Tests.QueryDsl.Geo.Shape
 					new[] { 18.2, 8.2 },
 					new[] { -18.8, 8.2 },
 					new[] { -10.8, -8.8 },
-					new[] { 18.2, 8.8 }
+					new[] { 18.2, 8.2 }
 				}
 			},
 			new[]
@@ -90,7 +91,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			},
 			new GeoCoordinate[]
 			{
-				new[] { 18.2, 8.2 }, new[] { -18.8, 8.2 }, new[] { -10.8, -8.8 }, new[] { 18.2, 8.8 }
+				new[] { 18.2, 8.2 }, new[] { -18.8, 8.2 }, new[] { -10.8, -8.8 }, new[] { 18.2, 8.2 }
 			}
 		};
 
@@ -119,7 +120,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new PointGeoShape(PointCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -130,7 +131,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -146,7 +147,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.Point(PointCoordinates)
 				)
@@ -160,6 +161,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with MultiPoint
 	 *
 	 */
+	[SkipVersion(">=7.0.0", "multipoint queries are not supported")]
 	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -175,7 +177,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new MultiPointGeoShape(MultiPointCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -186,7 +188,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -202,7 +204,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.MultiPoint(MultiPointCoordinates)
 				)
@@ -231,7 +233,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new LineStringGeoShape(LineStringCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -242,7 +244,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -258,7 +260,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.LineString(LineStringCoordinates)
 				)
@@ -287,7 +289,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -298,7 +300,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -314,7 +316,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.MultiLineString(MultiLineStringCoordinates)
 				)
@@ -343,7 +345,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new PolygonGeoShape(PolygonCoordinates),
 			IgnoreUnmapped = true,
 			Relation = GeoShapeRelation.Intersects,
@@ -356,7 +358,7 @@ namespace Tests.QueryDsl.Geo.Shape
 				_name = "named_query",
 				boost = 1.1,
 				ignore_unmapped = true,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -372,7 +374,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.Polygon(PolygonCoordinates)
 				)
@@ -402,7 +404,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new MultiPolygonGeoShape(MultiPolygonCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -413,7 +415,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -429,7 +431,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.MultiPolygon(MultiPolygonCoordinates)
 				)
@@ -458,7 +460,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new GeometryCollection(new IGeoShape[]
 			{
 				new PointGeoShape(PointCoordinates),
@@ -477,7 +479,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -525,7 +527,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.GeometryCollection(
 						new PointGeoShape(PointCoordinates),
@@ -561,7 +563,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new EnvelopeGeoShape(EnvelopeCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -572,7 +574,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -588,7 +590,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.Envelope(EnvelopeCoordinates)
 				)
@@ -602,6 +604,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with Circle
 	 *
 	 */
+	[SkipVersion(">=7.0.0", "CIRCLE geometry is not supported")]
 	public class GeoShapeCircleQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -617,7 +620,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new CircleGeoShape(CircleCoordinates, "100m"),
 			Relation = GeoShapeRelation.Intersects,
 		};
@@ -628,7 +631,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					relation = "intersects",
 					shape = new
@@ -645,7 +648,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Shape(s => s
 					.Circle(CircleCoordinates, "100m")
 				)
@@ -681,12 +684,12 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			IndexedShape = new FieldLookup
 			{
 				Id = Project.Instance.Name,
 				Index = Infer.Index<Project>(),
-				Path = Infer.Field<Project>(p => p.Location),
+				Path = Infer.Field<Project>(p => p.LocationShape),
 				Routing = Project.Instance.Name
 			},
 			Relation = GeoShapeRelation.Intersects
@@ -698,13 +701,13 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					indexed_shape = new
 					{
 						id = Project.Instance.Name,
 						index = "project",
-						path = "location",
+						path = "locationShape",
 						routing = Project.Instance.Name
 					},
 					relation = "intersects"
@@ -716,10 +719,10 @@ namespace Tests.QueryDsl.Geo.Shape
 			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.IndexedShape(p => p
 					.Id(Project.Instance.Name)
-					.Path(pp => pp.Location)
+					.Path(pp => pp.LocationShape)
 					.Routing(Project.Instance.Name)
 				)
 				.Relation(GeoShapeRelation.Intersects)

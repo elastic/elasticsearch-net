@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					{ Origin = DateMath.Now, Field = Field<Project>(p => p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
 				new LinearGeoDecayFunction
 				{
-					Origin = new GeoLocation(70, -70), Field = Field<Project>(p => p.Location), Scale = Distance.Miles(1),
+					Origin = new GeoLocation(70, -70), Field = Field<Project>(p => p.LocationPoint), Scale = Distance.Miles(1),
 					MultiValueMode = MultiValueMode.Average
 				},
 				new FieldValueFactorFunction
@@ -94,7 +94,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					{
 						linear = new
 						{
-							location = new
+							locationPoint = new
 							{
 								origin = new
 								{
@@ -153,7 +153,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					.Exponential(b => b.Field(p => p.NumberOfCommits).Decay(0.5).Origin(1.0).Scale(0.1).Weight(2.1))
 					.GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
 					.LinearGeoLocation(b =>
-						b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
+						b.Field(p => p.LocationPoint).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
 					.FieldValueFactor(b => b.Field(p => p.NumberOfContributors).Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Square))
 					.RandomScore(r => r.Seed(1337).Field("_seq_no"))
 					.RandomScore(r => r.Seed("randomstring").Field("_seq_no"))

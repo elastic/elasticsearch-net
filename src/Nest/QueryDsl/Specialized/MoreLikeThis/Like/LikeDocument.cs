@@ -62,7 +62,6 @@ namespace Nest
 
 		public LikeDocument(TDocument document)
 		{
-			Id = Id.From(document);
 			Document = document;
 			Index = typeof(TDocument);
 		}
@@ -98,11 +97,7 @@ namespace Nest
 
 		public LikeDocumentDescriptor<TDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
-		public LikeDocumentDescriptor<TDocument> Document(TDocument document) => Assign(document,  (a, v) =>
-		{
-			a.Id = Infer.Id(v);
-			a.Document = v;
-		});
+		public LikeDocumentDescriptor<TDocument> Document(TDocument document) => Assign(document,  (a, v) => a.Document = v);
 
 		public LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(
 			Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector

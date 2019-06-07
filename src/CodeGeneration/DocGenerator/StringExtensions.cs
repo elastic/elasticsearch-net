@@ -62,7 +62,7 @@ namespace DocGenerator
 			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
 			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
 			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "EnvelopeCoordinates", @"new [] { new [] { 45.0, -45.0 }, new [] { -45.0, 45.0 }}" },
+			{ "EnvelopeCoordinates", @"new [] { new [] { -45.0, 45.0 }, new [] { 45.0, -45.0 }}" },
 			{ "CircleCoordinates", @"new [] { 45.0, -45.0 }" },
 			{ "MultiPointCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
 			{

@@ -14,7 +14,7 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 		{
 			properties = new
 			{
-				location = new
+				locationPoint = new
 				{
 					type = "geo_point",
 					ignore_malformed = true
@@ -25,7 +25,7 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoPoint(s => s
-				.Name(p => p.Location)
+				.Name(p => p.LocationPoint)
 				.IgnoreMalformed()
 			);
 
@@ -33,7 +33,7 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 		protected override IProperties InitializerProperties => new Properties
 		{
 			{
-				"location", new GeoPointProperty
+				"locationPoint", new GeoPointProperty
 				{
 					IgnoreMalformed = true
 				}

@@ -14,7 +14,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 		{
 			properties = new
 			{
-				location = new
+				locationShape = new
 				{
 					type = "geo_shape",
 					orientation = "cw",
@@ -26,7 +26,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoShape(s => s
-				.Name(p => p.Location)
+				.Name(p => p.LocationShape)
 				.Orientation(GeoOrientation.ClockWise)
 				.Strategy(GeoStrategy.Recursive)
 				.Coerce()
@@ -36,7 +36,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 		protected override IProperties InitializerProperties => new Properties
 		{
 			{
-				"location", new GeoShapeProperty
+				"locationShape", new GeoShapeProperty
 				{
 					Orientation = GeoOrientation.ClockWise,
 					Strategy = GeoStrategy.Recursive,

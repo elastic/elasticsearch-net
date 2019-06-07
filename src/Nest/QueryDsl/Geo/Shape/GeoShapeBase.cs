@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -41,8 +43,6 @@ namespace Nest
 	/// </summary>
 	public abstract class GeoShapeBase : IGeoShape
 	{
-		internal static readonly GeoShapeFormatter ShapeFormatter = new GeoShapeFormatter();
-		
 		protected GeoShapeBase(string type) => Type = type;
 
 		/// <inheritdoc />
@@ -54,15 +54,22 @@ namespace Nest
 	internal class GeoShapeFormatter<TShape> : IJsonFormatter<TShape>
 		where TShape : IGeoShape
 	{
-		public void Serialize(ref JsonWriter writer, TShape value, IJsonFormatterResolver formatterResolver) =>
-			GeoShapeBase.ShapeFormatter.Serialize(ref writer, value, formatterResolver);
-
 		public TShape Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
-			(TShape)GeoShapeBase.ShapeFormatter.Deserialize(ref reader, formatterResolver);
+			(TShape)GeoShapeFormatter.Instance.Deserialize(ref reader, formatterResolver);
+
+		public void Serialize(ref JsonWriter writer, TShape value, IJsonFormatterResolver formatterResolver) =>
+			GeoShapeFormatter.Instance.Serialize(ref writer, value, formatterResolver);
 	}
 
 	internal class GeoShapeFormatter : IJsonFormatter<IGeoShape>
 	{
+		private static readonly AutomataDictionary CircleFields = new AutomataDictionary { { "coordinates", 0 }, { "radius", 1 } };
+		private static readonly byte[] CoordinatesField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("coordinates");
+		private static readonly byte[] GeometriesField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("geometries");
+		internal static readonly GeoShapeFormatter Instance = new GeoShapeFormatter();
+
+		private static readonly byte[] TypeField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
+
 		public IGeoShape Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
@@ -179,12 +186,14 @@ namespace Nest
 
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				var propertyName = segmentReader.ReadPropertyName();
-				if (propertyName == "type")
+				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(TypeField))
 				{
 					typeName = segmentReader.ReadString().ToUpperInvariant();
 					break;
 				}
+
+				segmentReader.ReadNextBlock();
 			}
 
 			segmentReader = new JsonReader(segment.Array, segment.Offset);
@@ -217,18 +226,21 @@ namespace Nest
 		private static GeometryCollection ParseGeometryCollection(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var count = 0;
-			var geoShapes = Enumerable.Empty<IGeoShape>();
+			var geometries = Enumerable.Empty<IGeoShape>();
 			while (reader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
-				if (propertyName == "geometries")
-					geoShapes = formatterResolver.GetFormatter<IEnumerable<IGeoShape>>()
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(GeometriesField))
+				{
+					geometries = formatterResolver.GetFormatter<IEnumerable<IGeoShape>>()
 						.Deserialize(ref reader, formatterResolver);
-				else
-					reader.ReadNextBlock();
+					break;
+				}
+
+				reader.ReadNextBlock();
 			}
 
-			return new GeometryCollection { Geometries = geoShapes };
+			return new GeometryCollection { Geometries = geometries };
 		}
 
 		private static MultiPolygonGeoShape ParseMultiPolygonGeoShape(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
@@ -247,10 +259,7 @@ namespace Nest
 			new PointGeoShape { Coordinates = GetCoordinates<GeoCoordinate>(ref reader, formatterResolver) };
 
 		private static MultiLineStringGeoShape ParseMultiLineStringGeoShape(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
-			new MultiLineStringGeoShape
-			{
-				Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(ref reader, formatterResolver)
-			};
+			new MultiLineStringGeoShape { Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(ref reader, formatterResolver) };
 
 		private static LineStringGeoShape ParseLineStringGeoShape(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
 			new LineStringGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(ref reader, formatterResolver) };
@@ -265,27 +274,26 @@ namespace Nest
 			GeoCoordinate coordinate = null;
 			while (reader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
-				switch (propertyName)
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+
+				if (CircleFields.TryGetValue(propertyName, out var value))
 				{
-					case "coordinates":
-						coordinate = formatterResolver.GetFormatter<GeoCoordinate>()
-							.Deserialize(ref reader, formatterResolver);
-						break;
-					case "radius":
-						radius = reader.ReadString();
-						break;
-					default:
-						reader.ReadNextBlock();
-						break;
+					switch (value)
+					{
+						case 0:
+							coordinate = formatterResolver.GetFormatter<GeoCoordinate>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 1:
+							radius = reader.ReadString();
+							break;
+					}
 				}
+				else
+					reader.ReadNextBlock();
 			}
 
-			return new CircleGeoShape
-			{
-				Coordinates = coordinate,
-				Radius = radius
-			};
+			return new CircleGeoShape { Coordinates = coordinate, Radius = radius };
 		}
 
 		private static T GetCoordinates<T>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -294,14 +302,15 @@ namespace Nest
 			var coordinates = default(T);
 			while (reader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
-				if (propertyName == "coordinates")
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(CoordinatesField))
 				{
 					var formatter = formatterResolver.GetFormatter<T>();
 					coordinates = formatter.Deserialize(ref reader, formatterResolver);
+					break;
 				}
-				else
-					reader.ReadNextBlock();
+
+				reader.ReadNextBlock();
 			}
 
 			return coordinates;
