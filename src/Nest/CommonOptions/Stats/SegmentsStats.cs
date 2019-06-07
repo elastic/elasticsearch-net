@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -21,7 +22,7 @@ namespace Nest
 		public long IndexWriterMemoryInBytes { get; set; }
 
 		[DataMember(Name ="max_unsafe_auto_id_timestamp")]
-		public string MaximumUnsafeAutoIdTimestamp { get; set; }
+		public long MaximumUnsafeAutoIdTimestamp { get; set; }
 
 		[DataMember(Name ="memory_in_bytes")]
 		public long MemoryInBytes { get; set; }
@@ -43,5 +44,8 @@ namespace Nest
 
 		[DataMember(Name ="version_map_memory_in_bytes")]
 		public long VersionMapMemoryInBytes { get; set; }
+		
+		[DataMember(Name ="file_sizes")]
+		public IReadOnlyDictionary<string, ShardFileSizeInfo> FileSizes { get; internal set; } = EmptyReadOnly<string, ShardFileSizeInfo>.Dictionary;
 	}
 }

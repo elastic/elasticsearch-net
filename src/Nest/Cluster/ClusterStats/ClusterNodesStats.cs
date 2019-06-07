@@ -9,6 +9,9 @@ namespace Nest
 		[DataMember(Name ="count")]
 		public ClusterNodeCount Count { get; internal set; }
 
+		[DataMember(Name ="discovery_types")]
+		public IReadOnlyDictionary<string, int> DiscoveryTypes { get; internal set; }
+
 		[DataMember(Name ="fs")]
 		public ClusterFileSystem FileSystem { get; internal set; }
 
@@ -44,20 +47,11 @@ namespace Nest
 	[DataContract]
 	public class ClusterFileSystem
 	{
-		[DataMember(Name ="available")]
-		public string Available { get; internal set; }
-
 		[DataMember(Name ="available_in_bytes")]
 		public long AvailableInBytes { get; internal set; }
 
-		[DataMember(Name ="free")]
-		public string Free { get; internal set; }
-
 		[DataMember(Name ="free_in_bytes")]
 		public long FreeInBytes { get; internal set; }
-
-		[DataMember(Name ="total")]
-		public string Total { get; internal set; }
 
 		[DataMember(Name ="total_in_bytes")]
 		public long TotalInBytes { get; internal set; }
@@ -66,9 +60,6 @@ namespace Nest
 	[DataContract]
 	public class ClusterJvm
 	{
-		[DataMember(Name ="max_uptime")]
-		public string MaxUptime { get; internal set; }
-
 		[DataMember(Name ="max_uptime_in_millis")]
 		public long MaxUptimeInMilliseconds { get; internal set; }
 
@@ -85,6 +76,12 @@ namespace Nest
 	[DataContract]
 	public class ClusterJvmVersion
 	{
+		[DataMember(Name ="bundled_jdk")]
+		public bool BundledJdk { get; internal set; }
+
+		[DataMember(Name ="using_bundled_jdk")]
+		public bool? UsingBundledJdk { get; internal set; }
+
 		[DataMember(Name ="count")]
 		public int Count { get; internal set; }
 
@@ -104,14 +101,8 @@ namespace Nest
 	[DataContract]
 	public class ClusterJvmMemory
 	{
-		[DataMember(Name ="heap_max")]
-		public string HeapMax { get; internal set; }
-
 		[DataMember(Name ="heap_max_in_bytes")]
 		public long HeapMaxInBytes { get; internal set; }
-
-		[DataMember(Name ="heap_used")]
-		public string HeapUsed { get; set; }
 
 		[DataMember(Name ="heap_used_in_bytes")]
 		public long HeapUsedInBytes { get; internal set; }
