@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -27,11 +26,11 @@ namespace Nest
 		public GeoOrientation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var enumString = reader.ReadString();
-			switch (enumString.ToLowerInvariant())
+			switch (enumString)
 			{
-				case "left":
-				case "cw":
-				case "clockwise":
+				case "LEFT":
+				case "CW":
+				case "CLOCKWISE":
 					return GeoOrientation.ClockWise;
 			}
 			// Default, complies with the OGC standard
@@ -69,15 +68,15 @@ namespace Nest
 				return null;
 			}
 
-			switch (enumString.ToLowerInvariant())
+			switch (enumString)
 			{
-				case "left":
-				case "cw":
-				case "clockwise":
+				case "LEFT":
+				case "CW":
+				case "CLOCKWISE":
 					return GeoOrientation.ClockWise;
-				case "right":
-				case "ccw":
-				case "counterclockwise":
+				case "RIGHT":
+				case "CCW":
+				case "COUNTERCLOCKWISE":
 					return GeoOrientation.CounterClockWise;
 			}
 
