@@ -26,7 +26,7 @@ namespace Nest
 		public GeoOrientation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var enumString = reader.ReadString();
-			switch (enumString)
+			switch (enumString.ToUpperInvariant())
 			{
 				case "LEFT":
 				case "CW":
@@ -68,7 +68,7 @@ namespace Nest
 				return null;
 			}
 
-			switch (enumString)
+			switch (enumString.ToUpperInvariant())
 			{
 				case "LEFT":
 				case "CW":
