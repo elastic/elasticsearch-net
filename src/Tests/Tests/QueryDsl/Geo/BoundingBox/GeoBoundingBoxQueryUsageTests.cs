@@ -86,7 +86,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			Field = Infer.Field<Project>(p => p.LocationPoint),
 			BoundingBox = new Nest.BoundingBox
 			{
-				WellKnownText = "BBOX (34, -34, -34, 34)"
+				WellKnownText = "BBOX (-34, 34, 34, -34)"
 			},
 			Type = GeoExecution.Indexed,
 			ValidationMethod = GeoValidationMethod.Strict
@@ -102,7 +102,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				boost = 1.1,
 				locationPoint = new
 				{
-					wkt = "BBOX (34, -34, -34, 34)"
+					wkt = "BBOX (-34, 34, 34, -34)"
 				}
 			}
 		};
@@ -113,7 +113,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				.Name("named_query")
 				.Field(p => p.LocationPoint)
 				.BoundingBox(b => b
-					.WellKnownText("BBOX (34, -34, -34, 34)")
+					.WellKnownText("BBOX (-34, 34, 34, -34)")
 				)
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Type(GeoExecution.Indexed)
