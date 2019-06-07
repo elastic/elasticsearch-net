@@ -36,7 +36,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 
 		private static Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoShape(s => s
-				.Name(p => p.Location)
+				.Name(p => p.LocationShape)
 				.Orientation(GeoOrientation.ClockWise)
 				.Strategy(GeoStrategy.Recursive)
 				.Coerce()
