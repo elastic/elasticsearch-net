@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable 612, 618
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -253,3 +254,4 @@ namespace Tests.QueryDsl.Geo
 		}
 	}
 }
+#pragma warning restore 612, 618

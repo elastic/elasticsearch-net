@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿#pragma warning disable 612, 618
+using Nest;
 
 namespace Tests.Mapping.Types.Geo.GeoShape
 {
@@ -43,3 +44,4 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 		};
 	}
 }
+#pragma warning restore 612, 618
