@@ -155,12 +155,7 @@ namespace Tests.QueryDsl.Geo.Shape
 			);
 	}
 
-	/**
-	 * [float]
-	 * [[geo-shape-query-multipoint]]
-	 * == Querying with MultiPoint
-	 *
-	 */
+	// hide
 	[SkipVersion(">=7.0.0", "multipoint queries are not supported")]
 	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
@@ -598,13 +593,8 @@ namespace Tests.QueryDsl.Geo.Shape
 			);
 	}
 
-	/**
-	 * [float]
-	 * [[geo-shape-query-circle]]
-	 * == Querying with Circle
-	 *
-	 */
-	[SkipVersion(">=7.0.0", "CIRCLE geometry is not supported")]
+	// hide
+	[SkipVersion(">=7.0.0", "CIRCLE geometry is not supported. See https://github.com/elastic/elasticsearch/issues/39237")]
 	public class GeoShapeCircleQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
