@@ -387,7 +387,7 @@ namespace Elasticsearch.Net
 		/// verbatim.
 		/// </summary>
 		/// <param name="predicate">Return true if you want the node to be used for API calls</param>
-		public T NodePredicate(Func<Node, bool> predicate) => Assign(predicate ?? DefaultNodePredicate, (a, v) => a._nodePredicate = predicate);
+		public T NodePredicate(Func<Node, bool> predicate) => Assign(predicate ?? DefaultNodePredicate, (a, v) => a._nodePredicate = v);
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
