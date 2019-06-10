@@ -39,12 +39,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var settings = new ConnectionSettings()
 				.DefaultMappingFor<CommitActivity>(m => m
 					.IndexName("projects-and-commits")
-					.TypeName("doc")
 					.RelationName("commits")
 				)
 				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects-and-commits")
-					.TypeName("doc")
 					.RelationName("projects")
 				);
 
@@ -67,7 +65,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var settings = new ConnectionSettings()
 				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects-and-commits")
-					.TypeName("doc")
 				);
 
 			var resolver = new RelationNameResolver(settings);

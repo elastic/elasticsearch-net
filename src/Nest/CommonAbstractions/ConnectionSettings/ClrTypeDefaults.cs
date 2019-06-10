@@ -26,11 +26,6 @@ namespace Nest
 		/// </summary>
 		string RelationName { get; set; }
 
-		/// <summary>
-		/// The default Elasticsearch type name for the given <see cref="ClrType" />
-		/// </summary>
-		string TypeName { get; set; }
-
 		/// <summary>Disables Id inference for the given <see cref="ClrType"/>.
 		/// By default, the _id value for a document is inferred from a property named Id,
 		/// or from the property named by <see cref="IdPropertyName"/>, if set.
@@ -72,9 +67,6 @@ namespace Nest
 		public string RelationName { get; set; }
 
 		/// <inheritdoc />
-		public string TypeName { get; set; }
-
-		/// <inheritdoc />
 		public bool DisableIdInference { get; set; }
 	}
 
@@ -106,14 +98,10 @@ namespace Nest
 		string IClrTypeMapping.IdPropertyName { get; set; }
 		string IClrTypeMapping.IndexName { get; set; }
 		string IClrTypeMapping.RelationName { get; set; }
-		string IClrTypeMapping.TypeName { get; set; }
 		bool IClrTypeMapping.DisableIdInference { get; set; }
 
 		/// <inheritdoc cref="IClrTypeMapping.IndexName"/>
 		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(indexName, (a, v) => a.IndexName = v);
-
-		/// <inheritdoc cref="IClrTypeMapping.TypeName"/>
-		public ClrTypeMappingDescriptor TypeName(string typeName) => Assign(typeName, (a, v) => a.TypeName = v);
 
 		/// <inheritdoc cref="IClrTypeMapping.RelationName"/>
 		public ClrTypeMappingDescriptor RelationName(string relationName) => Assign(relationName, (a, v) => a.RelationName = v);
@@ -136,18 +124,12 @@ namespace Nest
 		IList<IClrPropertyMapping<TDocument>> IClrTypeMapping<TDocument>.Properties { get; set; } = new List<IClrPropertyMapping<TDocument>>();
 		string IClrTypeMapping.RelationName { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.RoutingProperty { get; set; }
-		string IClrTypeMapping.TypeName { get; set; }
 		bool IClrTypeMapping.DisableIdInference { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for <typeparamref name="TDocument" />
 		/// </summary>
 		public ClrTypeMappingDescriptor<TDocument> IndexName(string indexName) => Assign(indexName, (a, v) => a.IndexName = v);
-
-		/// <summary>
-		/// The default Elasticsearch type name for <typeparamref name="TDocument" />
-		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> TypeName(string typeName) => Assign(typeName, (a, v) => a.TypeName = v);
 
 		/// <summary>
 		/// The relation name for <typeparamref name="TDocument" /> to resolve to.
