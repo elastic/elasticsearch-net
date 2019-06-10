@@ -93,10 +93,7 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-							{
-								Username = $"user-{v}", Password = $"pass-{v}"
-							}
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", $"pass-{v}")
 						},
 						Application = new[]
 						{
@@ -130,10 +127,7 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-							{
-								Username = $"user-{v}", Password = $"pass-{v}"
-							}
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", $"pass-{v}")
 						}
 					},
 					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}")),

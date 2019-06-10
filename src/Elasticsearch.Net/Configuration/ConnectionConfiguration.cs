@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Net.Security;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Elasticsearch.Net.CrossPlatform;
@@ -21,7 +22,7 @@ namespace Elasticsearch.Net
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
 		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
-		
+
 		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
@@ -72,7 +73,7 @@ namespace Elasticsearch.Net
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 		private readonly ElasticsearchUrlFormatter _urlFormatter;
-		
+
 		private BasicAuthenticationCredentials _basicAuthCredentials;
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
@@ -93,7 +94,7 @@ namespace Elasticsearch.Net
 		private TimeSpan? _pingTimeout;
 		private bool _prettyJson;
 		private string _proxyAddress;
-		private string _proxyPassword;
+		private SecureString _proxyPassword;
 		private string _proxyUsername;
 		private TimeSpan _requestTimeout;
 		private Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> _serverCertificateValidationCallback;
@@ -147,7 +148,7 @@ namespace Elasticsearch.Net
 		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
 		bool IConnectionConfigurationValues.PrettyJson => _prettyJson;
 		string IConnectionConfigurationValues.ProxyAddress => _proxyAddress;
-		string IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
+		SecureString IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
 		string IConnectionConfigurationValues.ProxyUsername => _proxyUsername;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 		IElasticsearchSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
@@ -310,8 +311,16 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// If your connection has to go through proxy, use this method to specify the proxy url
 		/// </summary>
-		public T Proxy(Uri proxyAdress, string username, string password) =>
-			Assign(proxyAdress.ToString(), (a, v) => a._proxyAddress = v)
+		public T Proxy(Uri proxyAddress, string username, string password) =>
+			Assign(proxyAddress.ToString(), (a, v) => a._proxyAddress = v)
+				.Assign(username, (a, v) => a._proxyUsername = v)
+				.Assign(password, (a, v) => a._proxyPassword = v.CreateSecureString());
+
+		/// <summary>
+		/// If your connection has to go through proxy, use this method to specify the proxy url
+		/// </summary>
+		public T Proxy(Uri proxyAddress, string username, SecureString password) =>
+			Assign(proxyAddress.ToString(), (a, v) => a._proxyAddress = v)
 				.Assign(username, (a, v) => a._proxyUsername = v)
 				.Assign(password, (a, v) => a._proxyPassword = v);
 
@@ -369,8 +378,14 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Basic Authentication credentials to send with all requests to Elasticsearch
 		/// </summary>
-		public T BasicAuthentication(string userName, string password) =>
-			Assign(new BasicAuthenticationCredentials { Username = userName, Password = password }, (a, v) => a._basicAuthCredentials = v);
+		public T BasicAuthentication(string username, string password) =>
+			Assign(new BasicAuthenticationCredentials(username, password), (a, v) => a._basicAuthCredentials = v);
+
+		/// <summary>
+		/// Basic Authentication credentials to send with all requests to Elasticsearch
+		/// </summary>
+		public T BasicAuthentication(string username, SecureString password) =>
+			Assign(new BasicAuthenticationCredentials(username, password), (a, v) => a._basicAuthCredentials = v);
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining

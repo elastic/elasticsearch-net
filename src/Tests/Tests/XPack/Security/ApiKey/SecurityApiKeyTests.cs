@@ -163,11 +163,7 @@ namespace Tests.XPack.Security.ApiKey
 							},
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-								{
-									Username = $"user-{v}",
-									Password = "password"
-								}
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
@@ -192,11 +188,7 @@ namespace Tests.XPack.Security.ApiKey
 							Expiration = "1d",
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-								{
-									Username = $"user-{v}",
-									Password = "password"
-								}
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
@@ -218,11 +210,7 @@ namespace Tests.XPack.Security.ApiKey
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-								{
-									Username = $"user-{v}",
-									Password = "password"
-								}
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
@@ -243,11 +231,7 @@ namespace Tests.XPack.Security.ApiKey
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-								{
-									Username = $"user-{v}",
-									Password = "password"
-								}
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}","password")
 							}
 						},
 						(v, d) => d

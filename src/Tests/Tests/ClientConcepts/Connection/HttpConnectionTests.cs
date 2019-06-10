@@ -70,7 +70,7 @@ namespace Tests.ClientConcepts.Connection
 				.EnableHttpCompression(httpCompression);
 
 			if (proxyAddress != null)
-				connectionSettings.Proxy(proxyAddress, null, null);
+				connectionSettings.Proxy(proxyAddress, null, (string)null);
 
 			var requestData = new RequestData(HttpMethod.GET, "/", null, connectionSettings, new PingRequestParameters(),
 				new MemoryStreamFactory())

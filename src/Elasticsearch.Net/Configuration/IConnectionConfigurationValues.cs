@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Security;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
@@ -97,7 +98,7 @@ namespace Elasticsearch.Net
 		TimeSpan? KeepAliveTime { get; }
 
 		/// <summary>
-		/// The maximum ammount of time a node is allowed to marked dead
+		/// The maximum amount of time a node is allowed to marked dead
 		/// </summary>
 		TimeSpan? MaxDeadTimeout { get; }
 
@@ -158,7 +159,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The password for the proxy, when configured
 		/// </summary>
-		string ProxyPassword { get; }
+		SecureString ProxyPassword { get; }
 
 		/// <summary>
 		/// The username for the proxy, when configured
