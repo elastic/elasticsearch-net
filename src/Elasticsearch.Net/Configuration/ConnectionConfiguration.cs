@@ -6,63 +6,97 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Security;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 #if DOTNETCORE
 using System.Net.Http;
+using System.Runtime.InteropServices;
 #endif
-
 
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
-	/// to elasticsearch
+	/// Allows you to control how <see cref="ElasticLowLevelClient"/> behaves and where/how it connects to Elasticsearch
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
+		/// <summary>
+		/// The default ping timeout. Defaults to 2 seconds
+		/// </summary>
 		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
-		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
-		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
-		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
-
 
 		/// <summary>
-		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
-		/// to elasticsearch
+		/// The default ping timeout when the connection is over HTTPS. Defaults to
+		/// 5 seconds
 		/// </summary>
-		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
+		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
+
+		/// <summary>
+		/// The default timeout before the client aborts a request to Elasticsearch.
+		/// Defaults to 1 minute
+		/// </summary>
+		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
+
+		/// <summary>
+		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c> except for
+		/// HttpClientHandler implementations based on curl, which defaults to
+		/// <see cref="Environment.ProcessorCount"/>
+		/// </summary>
+		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
+
+		/// <summary>
+		/// The default user agent for Elasticsearch.Net
+		/// </summary>
+		public static readonly string DefaultUserAgent = $"elasticsearch-net/{typeof(IConnectionConfigurationValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Elasticsearch.Net)";
+
+		/// <summary>
+		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// </summary>
+		/// <param name="uri">The root of the Elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		/// <summary>
-		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
-		/// to elasticsearch
+		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
 		/// </summary>
-		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
+		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 			// ReSharper disable once IntroduceOptionalParameters.Global
 			: this(connectionPool, null, null) { }
 
+		/// <summary>
+		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// </summary>
+		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
+		/// <param name="connection">An connection implementation that can make API requests</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection)
 			// ReSharper disable once IntroduceOptionalParameters.Global
 			: this(connectionPool, connection, null) { }
 
+		/// <summary>
+		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// </summary>
+		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
+		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
 			: this(connectionPool, null, serializer) { }
 
-		// ReSharper disable once MemberCanBePrivate.Global
-		// eventhough we use don't use this we very much would like to  expose this constructor
-
+		/// <summary>
+		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// </summary>
+		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
+		/// <param name="connection">An connection implementation that can make API requests</param>
+		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
 
 		internal static bool IsCurlHandler { get; } =
 #if DOTNETCORE
-                typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
-            #else
+			typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+#else
 			false;
 #endif
 	}
@@ -139,6 +173,8 @@ namespace Elasticsearch.Net
 
 		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
+		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
+
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
 			_connectionPool = connectionPool;
@@ -198,6 +234,7 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
+		string IConnectionConfigurationValues.UserAgent => _userAgent;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -499,6 +536,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>
 			Assign(new ReadOnlyCollection<int>(statusCodes), (a, v) => a._skipDeserializationForStatusCodes = v);
+
+		/// <summary>
+		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
+		/// versions that initiate requests to Elasticsearch
+		/// </summary>
+		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
 
 		protected virtual void DisposeManagedResources()
 		{

@@ -222,6 +222,12 @@ namespace Elasticsearch.Net
 			requestMessage.Headers.ConnectionClose = false;
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
+			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))
+			{
+				requestMessage.Headers.UserAgent.Clear();
+				requestMessage.Headers.UserAgent.TryParseAdd(requestData.UserAgent);
+			}
+
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
 
