@@ -41,7 +41,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c> except for
-		/// <see cref="HttpClientHandler"/> implementations based on curl, which defaults to
+		/// HttpClientHandler implementations based on curl, which defaults to
 		/// <see cref="Environment.ProcessorCount"/>
 		/// </summary>
 		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
