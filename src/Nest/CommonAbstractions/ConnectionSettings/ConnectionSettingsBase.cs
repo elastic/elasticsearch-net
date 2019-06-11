@@ -6,11 +6,21 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
 
+#if DOTNETCORE
+using System.Runtime.InteropServices;
+#endif
+
 namespace Nest
 {
 	/// <inheritdoc cref="IConnectionSettingsValues" />
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
+		/// <summary>
+		/// The default user agent for Nest
+		/// </summary>
+		public static readonly string DefaultUserAgent =
+			$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)";
+
 		/// <summary>
 		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
 		/// documents.
@@ -43,8 +53,7 @@ namespace Nest
 			IConnection connection,
 			SourceSerializerFactory sourceSerializer,
 			IPropertyMappingProvider propertyMappingProvider
-		)
-			: base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
+		) : base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
 	}
 
 	/// <inheritdoc cref="IConnectionSettingsValues" />
@@ -93,6 +102,8 @@ namespace Nest
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
 			_inferrer = new Inferrer(this);
+
+			UserAgent(ConnectionSettings.DefaultUserAgent);
 		}
 		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 

@@ -76,6 +76,7 @@ namespace Elasticsearch.Net
 			BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
+			UserAgent = global.UserAgent;
 		}
 
 		public string Accept { get; }
@@ -113,6 +114,7 @@ namespace Elasticsearch.Net
 		public string RunAs { get; }
 		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 		public bool ThrowExceptions { get; }
+		public string UserAgent { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 
