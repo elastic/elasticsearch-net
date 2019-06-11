@@ -52,9 +52,6 @@ namespace Nest
 	/// <inheritdoc />
 	public abstract class LikeDocumentBase : ILikeDocument
 	{
-		[IgnoreDataMember]
-		private Routing _routing;
-
 		/// <inheritdoc />
 		public object Document { get; set; }
 
@@ -71,11 +68,7 @@ namespace Nest
 		public IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
 		/// <inheritdoc />
-		public Routing Routing
-		{
-			get => _routing ?? (Document == null ? null : new Routing(Document));
-			set => _routing = value;
-		}
+		public Routing Routing { get; set; }
 	}
 
 	/// <inheritdoc cref="ILikeDocument" />
@@ -103,39 +96,33 @@ namespace Nest
 	{
 		public LikeDocumentDescriptor() => Self.Index = typeof(TDocument);
 
-		private Routing _routing;
-
 		object ILikeDocument.Document { get; set; }
 		Fields ILikeDocument.Fields { get; set; }
 		Id ILikeDocument.Id { get; set; }
 		IndexName ILikeDocument.Index { get; set; }
 		IPerFieldAnalyzer ILikeDocument.PerFieldAnalyzer { get; set; }
-		Routing ILikeDocument.Routing
-		{
-			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
-			set => _routing = value;
-		}
+		Routing ILikeDocument.Routing { get; set; }
 
-		/// <inheritdoc cref="ILikeDocument.Index"/>
+		/// <inheritdoc cref="ILikeDocument.Index" />
 		public LikeDocumentDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		/// <inheritdoc cref="ILikeDocument.Id"/>
+		/// <inheritdoc cref="ILikeDocument.Id" />
 		public LikeDocumentDescriptor<TDocument> Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		/// <inheritdoc cref="ILikeDocument.Routing"/>
+		/// <inheritdoc cref="ILikeDocument.Routing" />
 		public LikeDocumentDescriptor<TDocument> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 
-		/// <inheritdoc cref="ILikeDocument.Fields"/>
+		/// <inheritdoc cref="ILikeDocument.Fields" />
 		public LikeDocumentDescriptor<TDocument> Fields(Func<FieldsDescriptor<TDocument>, IPromise<Fields>> fields) =>
 			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
 
-		/// <inheritdoc cref="ILikeDocument.Fields"/>
+		/// <inheritdoc cref="ILikeDocument.Fields" />
 		public LikeDocumentDescriptor<TDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
-		/// <inheritdoc cref="ILikeDocument.Document"/>
+		/// <inheritdoc cref="ILikeDocument.Document" />
 		public LikeDocumentDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.Document = v);
 
-		/// <inheritdoc cref="ILikeDocument.PerFieldAnalyzer"/> />
+		/// <inheritdoc cref="ILikeDocument.PerFieldAnalyzer" />
 		public LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(
 			Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector
 		) =>

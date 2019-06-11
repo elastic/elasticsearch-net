@@ -14,7 +14,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 		{
 			Like = new List<Like>
 			{
-				new LikeDocument<Project>(Project.Instance),
+				new LikeDocument<Project>(Project.Instance) { Routing = Project.Instance.Name },
 				"some long text"
 			}
 		};
@@ -39,7 +39,10 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.MoreLikeThis(sn => sn
 				.Like(l => l
-					.Document(d => d.Document(Project.Instance))
+					.Document(d => d
+						.Document(Project.Instance)
+						.Routing(Project.Instance.Name)
+					)
 					.Text("some long text")
 				)
 			);
