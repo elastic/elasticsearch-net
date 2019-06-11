@@ -49,7 +49,6 @@ namespace Tests.ClientConcepts.Connection
 			var connectionSettings = new ConnectionSettings()
 				.DefaultMappingFor<Project>(i => i
 					.IndexName("my-projects")
-					.TypeName("project")
 				)
 				.EnableDebugMode()
 				.PrettyJson()

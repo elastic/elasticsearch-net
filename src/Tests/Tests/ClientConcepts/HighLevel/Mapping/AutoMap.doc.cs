@@ -161,7 +161,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
 				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
 				.DefaultMappingFor<ParentWithStringId>(m => m
-					.TypeName("parent")
 					.Ignore(p => p.Description)
 					.Ignore(p => p.IgnoreMe)
 				);

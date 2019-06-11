@@ -56,8 +56,6 @@ namespace Nest
 
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
 
-		private readonly FluentDictionary<Type, string> _defaultTypeNames;
-
 		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
 
 		private readonly Inferrer _inferrer;
@@ -94,7 +92,6 @@ namespace Nest
 
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
-			_defaultTypeNames = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
 			_inferrer = new Inferrer(this);
 		}
@@ -216,9 +213,6 @@ namespace Nest
 			if (!inferMapping.IndexName.IsNullOrEmpty())
 				_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
-			if (!inferMapping.TypeName.IsNullOrEmpty())
-				_defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
-
 			if (!inferMapping.RelationName.IsNullOrEmpty())
 				_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 
@@ -250,9 +244,6 @@ namespace Nest
 			if (!inferMapping.IndexName.IsNullOrEmpty())
 				_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
-			if (!inferMapping.TypeName.IsNullOrEmpty())
-				_defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
-
 			if (!inferMapping.RelationName.IsNullOrEmpty())
 				_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 
@@ -271,9 +262,6 @@ namespace Nest
 			{
 				if (!inferMapping.IndexName.IsNullOrEmpty())
 					_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
-
-				if (!inferMapping.TypeName.IsNullOrEmpty())
-					_defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
 
 				if (!inferMapping.RelationName.IsNullOrEmpty())
 					_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
