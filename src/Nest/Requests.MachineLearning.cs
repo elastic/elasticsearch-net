@@ -645,7 +645,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		LongId CategoryId
+		long? CategoryId
 		{
 			get;
 		}
@@ -659,7 +659,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "categoryId">Optional, accepts null</param>
-		public GetCategoriesRequest(Id jobId, LongId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+		public GetCategoriesRequest(Id jobId, long? categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 		{
 		}
 
@@ -679,7 +679,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		[IgnoreDataMember]
-		LongId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<LongId>("category_id");
+		long? IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<long? >("category_id");
 	// Request parameters
 	}
 

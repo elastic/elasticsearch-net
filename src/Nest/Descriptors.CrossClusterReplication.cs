@@ -36,7 +36,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationDeleteAutoFollowPattern;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteAutoFollowPatternDescriptor(Name name): base(r => r.Required("name", name))
+		public DeleteAutoFollowPatternDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -47,7 +47,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<string>("name");
 	// Request parameters
 	}
 
@@ -118,14 +118,14 @@ namespace Nest
 
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetAutoFollowPatternDescriptor(Name name): base(r => r.Optional("name", name))
+		public GetAutoFollowPatternDescriptor(string name): base(r => r.Optional("name", name))
 		{
 		}
 
 		// values part of the url path
-		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<string>("name");
 		///<summary>The name of the auto follow pattern.</summary>
-		public GetAutoFollowPatternDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		public GetAutoFollowPatternDescriptor Name(string name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 	// Request parameters
 	}
 
@@ -161,7 +161,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationCreateAutoFollowPattern;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public CreateAutoFollowPatternDescriptor(Name name): base(r => r.Required("name", name))
+		public CreateAutoFollowPatternDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -172,7 +172,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+		string ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<string>("name");
 	// Request parameters
 	}
 

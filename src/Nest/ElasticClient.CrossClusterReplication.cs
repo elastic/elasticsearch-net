@@ -41,13 +41,13 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</a>
 		/// </summary>
-		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null) => DeleteAutoFollowPattern(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)));
+		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(string name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null) => DeleteAutoFollowPattern(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ccr.delete_auto_follow_pattern</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</a>
 		/// </summary>
-		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)), ct);
+		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(string name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ccr.delete_auto_follow_pattern</c> API, read more about this API online:
 		/// <para> </para>
@@ -113,13 +113,13 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</a>
 		/// </summary>
-		public GetAutoFollowPatternResponse GetAutoFollowPattern(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => GetAutoFollowPattern(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)));
+		public GetAutoFollowPatternResponse GetAutoFollowPattern(string name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => GetAutoFollowPattern(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</a>
 		/// </summary>
-		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Name name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)), ct);
+		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(string name = null, Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
 		/// <para> </para>
@@ -161,13 +161,13 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
 		/// </summary>
-		public CreateAutoFollowPatternResponse CreateAutoFollowPattern(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector) => CreateAutoFollowPattern(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)));
+		public CreateAutoFollowPatternResponse CreateAutoFollowPattern(string name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector) => CreateAutoFollowPattern(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ccr.put_auto_follow_pattern</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
 		/// </summary>
-		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector, CancellationToken ct = default) => CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)), ct);
+		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(string name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector, CancellationToken ct = default) => CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ccr.put_auto_follow_pattern</c> API, read more about this API online:
 		/// <para> </para>

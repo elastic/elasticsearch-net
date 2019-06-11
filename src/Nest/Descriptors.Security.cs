@@ -44,7 +44,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityChangePassword;
 		///<summary>/_security/user/{username}/_password</summary>
 		///<param name = "username">Optional, accepts null</param>
-		public ChangePasswordDescriptor(Name username): base(r => r.Optional("username", username))
+		public ChangePasswordDescriptor(string username): base(r => r.Optional("username", username))
 		{
 		}
 
@@ -54,9 +54,9 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
+		string IChangePasswordRequest.Username => Self.RouteValues.Get<string>("username");
 		///<summary>The username of the user to change the password for</summary>
-		public ChangePasswordDescriptor Username(Name username) => Assign(username, (a, v) => a.RouteValues.Optional("username", v));
+		public ChangePasswordDescriptor Username(string username) => Assign(username, (a, v) => a.RouteValues.Optional("username", v));
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public ChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -123,7 +123,7 @@ namespace Nest
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name = "application">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
-		public DeletePrivilegesDescriptor(Name application, Name name): base(r => r.Required("application", application).Required("name", name))
+		public DeletePrivilegesDescriptor(string application, string name): base(r => r.Required("application", application).Required("name", name))
 		{
 		}
 
@@ -134,8 +134,8 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
-		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IDeletePrivilegesRequest.Application => Self.RouteValues.Get<string>("application");
+		string IDeletePrivilegesRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeletePrivilegesDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -147,7 +147,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteRoleDescriptor(Name name): base(r => r.Required("name", name))
+		public DeleteRoleDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -158,7 +158,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IDeleteRoleRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -170,7 +170,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteRoleMappingDescriptor(Name name): base(r => r.Required("name", name))
+		public DeleteRoleMappingDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -181,7 +181,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -193,7 +193,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteUser;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">this parameter is required</param>
-		public DeleteUserDescriptor(Name username): base(r => r.Required("username", username))
+		public DeleteUserDescriptor(string username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -204,7 +204,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		string IDeleteUserRequest.Username => Self.RouteValues.Get<string>("username");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -216,7 +216,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDisableUser;
 		///<summary>/_security/user/{username}/_disable</summary>
 		///<param name = "username">this parameter is required</param>
-		public DisableUserDescriptor(Name username): base(r => r.Required("username", username))
+		public DisableUserDescriptor(string username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -227,7 +227,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		string IDisableUserRequest.Username => Self.RouteValues.Get<string>("username");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DisableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -239,7 +239,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityEnableUser;
 		///<summary>/_security/user/{username}/_enable</summary>
 		///<param name = "username">this parameter is required</param>
-		public EnableUserDescriptor(Name username): base(r => r.Required("username", username))
+		public EnableUserDescriptor(string username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -250,7 +250,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		string IEnableUserRequest.Username => Self.RouteValues.Get<string>("username");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -283,24 +283,24 @@ namespace Nest
 
 		///<summary>/_security/privilege/{application}</summary>
 		///<param name = "application">Optional, accepts null</param>
-		public GetPrivilegesDescriptor(Name application): base(r => r.Optional("application", application))
+		public GetPrivilegesDescriptor(string application): base(r => r.Optional("application", application))
 		{
 		}
 
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name = "application">Optional, accepts null</param>
 		///<param name = "name">Optional, accepts null</param>
-		public GetPrivilegesDescriptor(Name application, Name name): base(r => r.Optional("application", application).Optional("name", name))
+		public GetPrivilegesDescriptor(string application, string name): base(r => r.Optional("application", application).Optional("name", name))
 		{
 		}
 
 		// values part of the url path
-		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
-		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IGetPrivilegesRequest.Application => Self.RouteValues.Get<string>("application");
+		string IGetPrivilegesRequest.Name => Self.RouteValues.Get<string>("name");
 		///<summary>Application name</summary>
-		public GetPrivilegesDescriptor Application(Name application) => Assign(application, (a, v) => a.RouteValues.Optional("application", v));
+		public GetPrivilegesDescriptor Application(string application) => Assign(application, (a, v) => a.RouteValues.Optional("application", v));
 		///<summary>Privilege name</summary>
-		public GetPrivilegesDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		public GetPrivilegesDescriptor Name(string name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 	// Request parameters
 	}
 
@@ -310,7 +310,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleDescriptor(Name name): base(r => r.Optional("name", name))
+		public GetRoleDescriptor(string name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -320,9 +320,9 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IGetRoleRequest.Name => Self.RouteValues.Get<string>("name");
 		///<summary>Role name</summary>
-		public GetRoleDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		public GetRoleDescriptor Name(string name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 	// Request parameters
 	}
 
@@ -332,7 +332,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleMappingDescriptor(Name name): base(r => r.Optional("name", name))
+		public GetRoleMappingDescriptor(string name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -342,9 +342,9 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IGetRoleMappingRequest.Name => Self.RouteValues.Get<string>("name");
 		///<summary>Role-Mapping name</summary>
-		public GetRoleMappingDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		public GetRoleMappingDescriptor Name(string name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 	// Request parameters
 	}
 
@@ -397,14 +397,14 @@ namespace Nest
 
 		///<summary>/_security/user/{user}/_has_privileges</summary>
 		///<param name = "user">Optional, accepts null</param>
-		public HasPrivilegesDescriptor(Name user): base(r => r.Optional("user", user))
+		public HasPrivilegesDescriptor(string user): base(r => r.Optional("user", user))
 		{
 		}
 
 		// values part of the url path
-		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
+		string IHasPrivilegesRequest.User => Self.RouteValues.Get<string>("user");
 		///<summary>Username</summary>
-		public HasPrivilegesDescriptor User(Name user) => Assign(user, (a, v) => a.RouteValues.Optional("user", v));
+		public HasPrivilegesDescriptor User(string user) => Assign(user, (a, v) => a.RouteValues.Optional("user", v));
 	// Request parameters
 	//TODO THIS METHOD IS UNMAPPED!
 	}
@@ -441,7 +441,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public PutRoleDescriptor(Name name): base(r => r.Required("name", name))
+		public PutRoleDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -452,7 +452,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IPutRoleRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -464,7 +464,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public PutRoleMappingDescriptor(Name name): base(r => r.Required("name", name))
+		public PutRoleMappingDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -475,7 +475,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IPutRoleMappingRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
@@ -487,7 +487,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutUser;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">this parameter is required</param>
-		public PutUserDescriptor(Name username): base(r => r.Required("username", username))
+		public PutUserDescriptor(string username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -498,7 +498,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		string IPutUserRequest.Username => Self.RouteValues.Get<string>("username");
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);

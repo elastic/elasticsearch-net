@@ -1108,7 +1108,7 @@ namespace Nest
 		///<summary>/_scripts/{id}/{context}</summary>
 		///<param name = "id">this parameter is required</param>
 		///<param name = "context">Optional, accepts null</param>
-		public PutScriptDescriptor(Id id, Name context): base(r => r.Required("id", id).Optional("context", context))
+		public PutScriptDescriptor(Id id, string context): base(r => r.Required("id", id).Optional("context", context))
 		{
 		}
 
@@ -1120,9 +1120,9 @@ namespace Nest
 
 		// values part of the url path
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
+		string IPutScriptRequest.Context => Self.RouteValues.Get<string>("context");
 		///<summary>Script context</summary>
-		public PutScriptDescriptor Context(Name context) => Assign(context, (a, v) => a.RouteValues.Optional("context", v));
+		public PutScriptDescriptor Context(string context) => Assign(context, (a, v) => a.RouteValues.Optional("context", v));
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public PutScriptDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);

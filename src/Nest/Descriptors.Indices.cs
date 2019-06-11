@@ -249,7 +249,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteIndexTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		public DeleteIndexTemplateDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -260,7 +260,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -875,7 +875,7 @@ namespace Nest
 		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
-		public PutAliasDescriptor(Indices index, Name name): base(r => r.Required("index", index).Required("name", name))
+		public PutAliasDescriptor(Indices index, string name): base(r => r.Required("index", index).Required("name", name))
 		{
 		}
 
@@ -887,7 +887,7 @@ namespace Nest
 
 		// values part of the url path
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IPutAliasRequest.Name => Self.RouteValues.Get<string>("name");
 		///<summary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
 		public PutAliasDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
@@ -988,7 +988,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplate;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public PutIndexTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		public PutIndexTemplateDescriptor(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -999,7 +999,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IPutIndexTemplateRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
@@ -1083,14 +1083,14 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
 		///<summary>/{alias}/_rollover</summary>
 		///<param name = "alias">this parameter is required</param>
-		public RolloverIndexDescriptor(Name alias): base(r => r.Required("alias", alias))
+		public RolloverIndexDescriptor(string alias): base(r => r.Required("alias", alias))
 		{
 		}
 
 		///<summary>/{alias}/_rollover/{new_index}</summary>
 		///<param name = "alias">this parameter is required</param>
 		///<param name = "newIndex">Optional, accepts null</param>
-		public RolloverIndexDescriptor(Name alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
+		public RolloverIndexDescriptor(string alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
 		{
 		}
 
@@ -1101,7 +1101,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
+		string IRolloverIndexRequest.Alias => Self.RouteValues.Get<string>("alias");
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 		///<summary>The name of the rollover index</summary>
 		public RolloverIndexDescriptor NewIndex(IndexName newIndex) => Assign(newIndex, (a, v) => a.RouteValues.Optional("new_index", v));

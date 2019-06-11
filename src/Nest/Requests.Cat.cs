@@ -1344,7 +1344,7 @@ namespace Nest
 	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name Name
+		string Name
 		{
 			get;
 		}
@@ -1362,13 +1362,13 @@ namespace Nest
 
 		///<summary>/_cat/templates/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public CatTemplatesRequest(Name name): base(r => r.Optional("name", name))
+		public CatTemplatesRequest(string name): base(r => r.Optional("name", name))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
+		string ICatTemplatesRequest.Name => Self.RouteValues.Get<string>("name");
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format

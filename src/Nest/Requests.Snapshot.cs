@@ -35,13 +35,13 @@ namespace Nest
 	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
 
 		[IgnoreDataMember]
-		Name Snapshot
+		string Snapshot
 		{
 			get;
 		}
@@ -55,7 +55,7 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
-		public SnapshotRequest(Name repository, Name snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+		public SnapshotRequest(string repository, string snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
 
@@ -67,9 +67,9 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string ISnapshotRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		[IgnoreDataMember]
-		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		string ISnapshotRequest.Snapshot => Self.RouteValues.Get<string>("snapshot");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout
@@ -90,7 +90,7 @@ namespace Nest
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
@@ -103,7 +103,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotCreateRepository;
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name = "repository">this parameter is required</param>
-		public CreateRepositoryRequest(Name repository): base(r => r.Required("repository", repository))
+		public CreateRepositoryRequest(string repository): base(r => r.Required("repository", repository))
 		{
 		}
 
@@ -115,7 +115,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout
@@ -143,13 +143,13 @@ namespace Nest
 	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
 
 		[IgnoreDataMember]
-		Name Snapshot
+		string Snapshot
 		{
 			get;
 		}
@@ -163,7 +163,7 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
-		public DeleteSnapshotRequest(Name repository, Name snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+		public DeleteSnapshotRequest(string repository, string snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
 
@@ -175,9 +175,9 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		[IgnoreDataMember]
-		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		string IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<string>("snapshot");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout
@@ -237,7 +237,7 @@ namespace Nest
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
@@ -257,7 +257,7 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
-		public GetSnapshotRequest(Name repository, Names snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+		public GetSnapshotRequest(string repository, Names snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
 
@@ -269,7 +269,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		[IgnoreDataMember]
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 		// Request parameters
@@ -344,13 +344,13 @@ namespace Nest
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
 
 		[IgnoreDataMember]
-		Name Snapshot
+		string Snapshot
 		{
 			get;
 		}
@@ -364,7 +364,7 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
-		public RestoreRequest(Name repository, Name snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+		public RestoreRequest(string repository, string snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
 
@@ -376,9 +376,9 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string IRestoreRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		[IgnoreDataMember]
-		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		string IRestoreRequest.Snapshot => Self.RouteValues.Get<string>("snapshot");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout
@@ -399,7 +399,7 @@ namespace Nest
 	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
@@ -423,20 +423,20 @@ namespace Nest
 
 		///<summary>/_snapshot/{repository}/_status</summary>
 		///<param name = "repository">Optional, accepts null</param>
-		public SnapshotStatusRequest(Name repository): base(r => r.Optional("repository", repository))
+		public SnapshotStatusRequest(string repository): base(r => r.Optional("repository", repository))
 		{
 		}
 
 		///<summary>/_snapshot/{repository}/{snapshot}/_status</summary>
 		///<param name = "repository">Optional, accepts null</param>
 		///<param name = "snapshot">Optional, accepts null</param>
-		public SnapshotStatusRequest(Name repository, Names snapshot): base(r => r.Optional("repository", repository).Optional("snapshot", snapshot))
+		public SnapshotStatusRequest(string repository, Names snapshot): base(r => r.Optional("repository", repository).Optional("snapshot", snapshot))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		[IgnoreDataMember]
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 		// Request parameters
@@ -459,7 +459,7 @@ namespace Nest
 	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name RepositoryName
+		string RepositoryName
 		{
 			get;
 		}
@@ -472,7 +472,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotVerifyRepository;
 		///<summary>/_snapshot/{repository}/_verify</summary>
 		///<param name = "repository">this parameter is required</param>
-		public VerifyRepositoryRequest(Name repository): base(r => r.Required("repository", repository))
+		public VerifyRepositoryRequest(string repository): base(r => r.Required("repository", repository))
 		{
 		}
 
@@ -484,7 +484,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		string IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<string>("repository");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout

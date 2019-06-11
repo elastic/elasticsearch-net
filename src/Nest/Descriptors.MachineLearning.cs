@@ -382,7 +382,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "categoryId">Optional, accepts null</param>
-		public GetCategoriesDescriptor(Id jobId, LongId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+		public GetCategoriesDescriptor(Id jobId, long? categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 		{
 		}
 
@@ -400,9 +400,9 @@ namespace Nest
 
 		// values part of the url path
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		LongId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<LongId>("category_id");
+		long? IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<long? >("category_id");
 		///<summary>The identifier of the category definition of interest</summary>
-		public GetCategoriesDescriptor CategoryId(LongId categoryId) => Assign(categoryId, (a, v) => a.RouteValues.Optional("category_id", v));
+		public GetCategoriesDescriptor CategoryId(long? categoryId) => Assign(categoryId, (a, v) => a.RouteValues.Optional("category_id", v));
 	// Request parameters
 	}
 

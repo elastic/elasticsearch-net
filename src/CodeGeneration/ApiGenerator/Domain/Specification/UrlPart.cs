@@ -37,7 +37,8 @@ namespace ApiGenerator.Domain.Specification
 
 				switch (Name)
 				{
-					case "category_id": return "long";
+					case "category_id": return Required ? "long" : "long?";
+					
 					case "timestamp": return "Timestamp";
 					case "index_metric": return "IndexMetrics";
 					case "metric": return "Metrics";

@@ -35,7 +35,7 @@ namespace Nest
 	public partial interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name Name
+		string Name
 		{
 			get;
 		}
@@ -48,7 +48,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationDeleteAutoFollowPattern;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+		public DeleteAutoFollowPatternRequest(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -60,7 +60,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<string>("name");
 	// Request parameters
 	}
 
@@ -143,7 +143,7 @@ namespace Nest
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name Name
+		string Name
 		{
 			get;
 		}
@@ -161,13 +161,13 @@ namespace Nest
 
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetAutoFollowPatternRequest(Name name): base(r => r.Optional("name", name))
+		public GetAutoFollowPatternRequest(string name): base(r => r.Optional("name", name))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+		string IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<string>("name");
 	// Request parameters
 	}
 
@@ -208,7 +208,7 @@ namespace Nest
 	public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name Name
+		string Name
 		{
 			get;
 		}
@@ -221,7 +221,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationCreateAutoFollowPattern;
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public CreateAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+		public CreateAutoFollowPatternRequest(string name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -233,7 +233,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+		string ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<string>("name");
 	// Request parameters
 	}
 
