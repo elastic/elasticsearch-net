@@ -3,7 +3,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - script: ./build.sh test-one skipdocs
+  - script: ./build.sh test-one
     displayName: 'build and unit test'
   - task: PublishTestResults@2
     inputs:
@@ -15,7 +15,7 @@ jobs:
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-  - script: build.bat canary skipdocs
+  - script: build.bat canary
     displayName: 'build and unit test'
   - task: PublishTestResults@2
     inputs:
@@ -37,7 +37,7 @@ jobs:
       latest7:
         esVersion: 'latest-7'
   steps:
-      - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack" skipdocs'
+      - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
         displayName: '$(esVersion) windows integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()
@@ -56,7 +56,7 @@ jobs:
           latest7:
               esVersion: 'latest-7'
   steps:
-      - script: './build.sh integrate-one $(esVersion) "readonly,writable" skipdocs'
+      - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
         displayName: '$(esVersion) linux integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()

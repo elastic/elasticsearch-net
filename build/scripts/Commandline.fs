@@ -41,7 +41,7 @@ NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to for
 
 Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
-- skipdocs : skip generating documentation
+- gendocs : generate documentation
 - non-interactive : make targets that run in interactive mode by default to run unassisted.
 - docs:<B> : the branch name B to use when generating documentation
 - seed:<N> : provide a seed to run the tests with.
@@ -91,7 +91,7 @@ Execution hints can be provided anywhere on the command line
     type PassedArguments = {
         NonInteractive: bool;
         SkipTests: bool;
-        SkipDocs: bool;
+        GenDocs: bool;
         Seed: string;
         RandomArguments: string list;
         DocsBranch: string;
@@ -119,7 +119,7 @@ Execution hints can be provided anywhere on the command line
             args
             |> List.filter(fun x -> 
                x <> "skiptests" && 
-               x <> "skipdocs" && 
+               x <> "gendocs" && 
                x <> "non-interactive" && 
                not (x.StartsWith("seed:")) && 
                not (x.StartsWith("random:")) && 
@@ -133,7 +133,7 @@ Execution hints can be provided anywhere on the command line
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
             SkipTests = skipTests
-            SkipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
+            GenDocs = args |> List.exists (fun x -> x = "gendocs") && isMono = false
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
                 | Some t -> t.Replace("seed:", "")

@@ -55,7 +55,7 @@ module Main =
 
         conditional (not isMono) "internalize-dependencies" <| fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
-        conditional (not parsed.SkipDocs) "documentation" <| fun _ -> Documentation.Generate parsed
+        conditional (parsed.GenDocs) "documentation" <| fun _ -> Documentation.Generate parsed
 
         conditional (not parsed.SkipTests) "test" <| fun _ -> Tests.RunUnitTests parsed |> ignore
         
