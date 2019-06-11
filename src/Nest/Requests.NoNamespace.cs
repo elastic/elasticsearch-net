@@ -2336,7 +2336,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		string Context
+		Name Context
 		{
 			get;
 		}
@@ -2356,7 +2356,7 @@ namespace Nest
 		///<summary>/_scripts/{id}/{context}</summary>
 		///<param name = "id">this parameter is required</param>
 		///<param name = "context">Optional, accepts null</param>
-		public PutScriptRequest(Id id, string context): base(r => r.Required("id", id).Optional("context", context))
+		public PutScriptRequest(Id id, Name context): base(r => r.Required("id", id).Optional("context", context))
 		{
 		}
 
@@ -2370,7 +2370,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		[IgnoreDataMember]
-		string IPutScriptRequest.Context => Self.RouteValues.Get<string>("context");
+		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout

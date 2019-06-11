@@ -598,14 +598,14 @@ namespace Nest
 
 		///<summary>/_cat/templates/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public CatTemplatesDescriptor(string name): base(r => r.Optional("name", name))
+		public CatTemplatesDescriptor(Name name): base(r => r.Optional("name", name))
 		{
 		}
 
 		// values part of the url path
-		string ICatTemplatesRequest.Name => Self.RouteValues.Get<string>("name");
+		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
 		///<summary>A pattern that returned template names must match</summary>
-		public CatTemplatesDescriptor Name(string name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		public CatTemplatesDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatTemplatesDescriptor Format(string format) => Qs("format", format);

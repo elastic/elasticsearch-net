@@ -49,7 +49,7 @@ namespace Nest
 	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Username
+		Name Username
 		{
 			get;
 		}
@@ -62,7 +62,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityChangePassword;
 		///<summary>/_security/user/{username}/_password</summary>
 		///<param name = "username">Optional, accepts null</param>
-		public ChangePasswordRequest(string username): base(r => r.Optional("username", username))
+		public ChangePasswordRequest(Name username): base(r => r.Optional("username", username))
 		{
 		}
 
@@ -73,7 +73,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IChangePasswordRequest.Username => Self.RouteValues.Get<string>("username");
+		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -185,13 +185,13 @@ namespace Nest
 	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Application
+		Name Application
 		{
 			get;
 		}
 
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -205,7 +205,7 @@ namespace Nest
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name = "application">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
-		public DeletePrivilegesRequest(string application, string name): base(r => r.Required("application", application).Required("name", name))
+		public DeletePrivilegesRequest(Name application, Name name): base(r => r.Required("application", application).Required("name", name))
 		{
 		}
 
@@ -217,9 +217,9 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IDeletePrivilegesRequest.Application => Self.RouteValues.Get<string>("application");
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		[IgnoreDataMember]
-		string IDeletePrivilegesRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -236,7 +236,7 @@ namespace Nest
 	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -249,7 +249,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteRoleRequest(string name): base(r => r.Required("name", name))
+		public DeleteRoleRequest(Name name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -261,7 +261,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IDeleteRoleRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -278,7 +278,7 @@ namespace Nest
 	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -291,7 +291,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteRoleMappingRequest(string name): base(r => r.Required("name", name))
+		public DeleteRoleMappingRequest(Name name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -303,7 +303,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -320,7 +320,7 @@ namespace Nest
 	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Username
+		Name Username
 		{
 			get;
 		}
@@ -333,7 +333,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteUser;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">this parameter is required</param>
-		public DeleteUserRequest(string username): base(r => r.Required("username", username))
+		public DeleteUserRequest(Name username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -345,7 +345,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IDeleteUserRequest.Username => Self.RouteValues.Get<string>("username");
+		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -362,7 +362,7 @@ namespace Nest
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Username
+		Name Username
 		{
 			get;
 		}
@@ -375,7 +375,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDisableUser;
 		///<summary>/_security/user/{username}/_disable</summary>
 		///<param name = "username">this parameter is required</param>
-		public DisableUserRequest(string username): base(r => r.Required("username", username))
+		public DisableUserRequest(Name username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -387,7 +387,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IDisableUserRequest.Username => Self.RouteValues.Get<string>("username");
+		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -404,7 +404,7 @@ namespace Nest
 	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Username
+		Name Username
 		{
 			get;
 		}
@@ -417,7 +417,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityEnableUser;
 		///<summary>/_security/user/{username}/_enable</summary>
 		///<param name = "username">this parameter is required</param>
-		public EnableUserRequest(string username): base(r => r.Required("username", username))
+		public EnableUserRequest(Name username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -429,7 +429,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IEnableUserRequest.Username => Self.RouteValues.Get<string>("username");
+		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -487,13 +487,13 @@ namespace Nest
 	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Application
+		Name Application
 		{
 			get;
 		}
 
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -511,22 +511,22 @@ namespace Nest
 
 		///<summary>/_security/privilege/{application}</summary>
 		///<param name = "application">Optional, accepts null</param>
-		public GetPrivilegesRequest(string application): base(r => r.Optional("application", application))
+		public GetPrivilegesRequest(Name application): base(r => r.Optional("application", application))
 		{
 		}
 
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name = "application">Optional, accepts null</param>
 		///<param name = "name">Optional, accepts null</param>
-		public GetPrivilegesRequest(string application, string name): base(r => r.Optional("application", application).Optional("name", name))
+		public GetPrivilegesRequest(Name application, Name name): base(r => r.Optional("application", application).Optional("name", name))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IGetPrivilegesRequest.Application => Self.RouteValues.Get<string>("application");
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		[IgnoreDataMember]
-		string IGetPrivilegesRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 	// Request parameters
 	}
 
@@ -534,7 +534,7 @@ namespace Nest
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -547,7 +547,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleRequest(string name): base(r => r.Optional("name", name))
+		public GetRoleRequest(Name name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -558,7 +558,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IGetRoleRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 	// Request parameters
 	}
 
@@ -566,7 +566,7 @@ namespace Nest
 	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -579,7 +579,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleMappingRequest(string name): base(r => r.Optional("name", name))
+		public GetRoleMappingRequest(Name name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -590,7 +590,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IGetRoleMappingRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 	// Request parameters
 	}
 
@@ -658,7 +658,7 @@ namespace Nest
 	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
-		string User
+		Name User
 		{
 			get;
 		}
@@ -676,13 +676,13 @@ namespace Nest
 
 		///<summary>/_security/user/{user}/_has_privileges</summary>
 		///<param name = "user">Optional, accepts null</param>
-		public HasPrivilegesRequest(string user): base(r => r.Optional("user", user))
+		public HasPrivilegesRequest(Name user): base(r => r.Optional("user", user))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IHasPrivilegesRequest.User => Self.RouteValues.Get<string>("user");
+		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 	// Request parameters
 	//TODO THIS METHOD IS UNMAPPED! Expected to find HasPrivilegesDescriptor and HasPrivilegesRequest in a file called HasPrivilegesRequest.cs in NEST's codebase
 	}
@@ -742,7 +742,7 @@ namespace Nest
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -755,7 +755,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public PutRoleRequest(string name): base(r => r.Required("name", name))
+		public PutRoleRequest(Name name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -767,7 +767,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IPutRoleRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -784,7 +784,7 @@ namespace Nest
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -797,7 +797,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public PutRoleMappingRequest(string name): base(r => r.Required("name", name))
+		public PutRoleMappingRequest(Name name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -809,7 +809,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IPutRoleMappingRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
@@ -826,7 +826,7 @@ namespace Nest
 	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Username
+		Name Username
 		{
 			get;
 		}
@@ -839,7 +839,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutUser;
 		///<summary>/_security/user/{username}</summary>
 		///<param name = "username">this parameter is required</param>
-		public PutUserRequest(string username): base(r => r.Required("username", username))
+		public PutUserRequest(Name username): base(r => r.Required("username", username))
 		{
 		}
 
@@ -851,7 +851,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IPutUserRequest.Username => Self.RouteValues.Get<string>("username");
+		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		// Request parameters
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh

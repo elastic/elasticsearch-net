@@ -161,13 +161,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "TODO">TODO</a>
 		/// </summary>
-		public DeletePrivilegesResponse DeletePrivileges(string application, string name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null) => DeletePrivileges(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application: application, name: name)));
+		public DeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null) => DeletePrivileges(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application: application, name: name)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_privileges</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "TODO">TODO</a>
 		/// </summary>
-		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(string application, string name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null, CancellationToken ct = default) => DeletePrivilegesAsync(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application: application, name: name)), ct);
+		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null, CancellationToken ct = default) => DeletePrivilegesAsync(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application: application, name: name)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_privileges</c> API, read more about this API online:
 		/// <para> </para>
@@ -185,13 +185,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</a>
 		/// </summary>
-		public DeleteRoleResponse DeleteRole(string name, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null) => DeleteRole(selector.InvokeOrDefault(new DeleteRoleDescriptor(name: name)));
+		public DeleteRoleResponse DeleteRole(Name name, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null) => DeleteRole(selector.InvokeOrDefault(new DeleteRoleDescriptor(name: name)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_role</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</a>
 		/// </summary>
-		public Task<DeleteRoleResponse> DeleteRoleAsync(string name, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null, CancellationToken ct = default) => DeleteRoleAsync(selector.InvokeOrDefault(new DeleteRoleDescriptor(name: name)), ct);
+		public Task<DeleteRoleResponse> DeleteRoleAsync(Name name, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null, CancellationToken ct = default) => DeleteRoleAsync(selector.InvokeOrDefault(new DeleteRoleDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_role</c> API, read more about this API online:
 		/// <para> </para>
@@ -209,13 +209,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</a>
 		/// </summary>
-		public DeleteRoleMappingResponse DeleteRoleMapping(string name, Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null) => DeleteRoleMapping(selector.InvokeOrDefault(new DeleteRoleMappingDescriptor(name: name)));
+		public DeleteRoleMappingResponse DeleteRoleMapping(Name name, Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null) => DeleteRoleMapping(selector.InvokeOrDefault(new DeleteRoleMappingDescriptor(name: name)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_role_mapping</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</a>
 		/// </summary>
-		public Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(string name, Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null, CancellationToken ct = default) => DeleteRoleMappingAsync(selector.InvokeOrDefault(new DeleteRoleMappingDescriptor(name: name)), ct);
+		public Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(Name name, Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null, CancellationToken ct = default) => DeleteRoleMappingAsync(selector.InvokeOrDefault(new DeleteRoleMappingDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_role_mapping</c> API, read more about this API online:
 		/// <para> </para>
@@ -233,13 +233,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</a>
 		/// </summary>
-		public DeleteUserResponse DeleteUser(string username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null) => DeleteUser(selector.InvokeOrDefault(new DeleteUserDescriptor(username: username)));
+		public DeleteUserResponse DeleteUser(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null) => DeleteUser(selector.InvokeOrDefault(new DeleteUserDescriptor(username: username)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_user</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</a>
 		/// </summary>
-		public Task<DeleteUserResponse> DeleteUserAsync(string username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null, CancellationToken ct = default) => DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username: username)), ct);
+		public Task<DeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null, CancellationToken ct = default) => DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username: username)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_user</c> API, read more about this API online:
 		/// <para> </para>
@@ -257,13 +257,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</a>
 		/// </summary>
-		public DisableUserResponse DisableUser(string username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null) => DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor(username: username)));
+		public DisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null) => DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor(username: username)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.disable_user</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</a>
 		/// </summary>
-		public Task<DisableUserResponse> DisableUserAsync(string username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null, CancellationToken ct = default) => DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor(username: username)), ct);
+		public Task<DisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null, CancellationToken ct = default) => DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor(username: username)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.disable_user</c> API, read more about this API online:
 		/// <para> </para>
@@ -281,13 +281,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</a>
 		/// </summary>
-		public EnableUserResponse EnableUser(string username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null) => EnableUser(selector.InvokeOrDefault(new EnableUserDescriptor(username: username)));
+		public EnableUserResponse EnableUser(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null) => EnableUser(selector.InvokeOrDefault(new EnableUserDescriptor(username: username)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.enable_user</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</a>
 		/// </summary>
-		public Task<EnableUserResponse> EnableUserAsync(string username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null, CancellationToken ct = default) => EnableUserAsync(selector.InvokeOrDefault(new EnableUserDescriptor(username: username)), ct);
+		public Task<EnableUserResponse> EnableUserAsync(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null, CancellationToken ct = default) => EnableUserAsync(selector.InvokeOrDefault(new EnableUserDescriptor(username: username)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.enable_user</c> API, read more about this API online:
 		/// <para> </para>
@@ -329,13 +329,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "TODO">TODO</a>
 		/// </summary>
-		public GetPrivilegesResponse GetPrivileges(string name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null) => GetPrivileges(selector.InvokeOrDefault(new GetPrivilegesDescriptor().Name(name: name)));
+		public GetPrivilegesResponse GetPrivileges(Name name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null) => GetPrivileges(selector.InvokeOrDefault(new GetPrivilegesDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "TODO">TODO</a>
 		/// </summary>
-		public Task<GetPrivilegesResponse> GetPrivilegesAsync(string name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null, CancellationToken ct = default) => GetPrivilegesAsync(selector.InvokeOrDefault(new GetPrivilegesDescriptor().Name(name: name)), ct);
+		public Task<GetPrivilegesResponse> GetPrivilegesAsync(Name name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null, CancellationToken ct = default) => GetPrivilegesAsync(selector.InvokeOrDefault(new GetPrivilegesDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para> </para>
@@ -353,13 +353,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</a>
 		/// </summary>
-		public GetRoleResponse GetRole(string name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null) => GetRole(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)));
+		public GetRoleResponse GetRole(Name name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null) => GetRole(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</a>
 		/// </summary>
-		public Task<GetRoleResponse> GetRoleAsync(string name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken ct = default) => GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)), ct);
+		public Task<GetRoleResponse> GetRoleAsync(Name name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken ct = default) => GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role</c> API, read more about this API online:
 		/// <para> </para>
@@ -377,13 +377,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</a>
 		/// </summary>
-		public GetRoleMappingResponse GetRoleMapping(string name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) => GetRoleMapping(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)));
+		public GetRoleMappingResponse GetRoleMapping(Name name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) => GetRoleMapping(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role_mapping</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</a>
 		/// </summary>
-		public Task<GetRoleMappingResponse> GetRoleMappingAsync(string name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null, CancellationToken ct = default) => GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)), ct);
+		public Task<GetRoleMappingResponse> GetRoleMappingAsync(Name name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null, CancellationToken ct = default) => GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role_mapping</c> API, read more about this API online:
 		/// <para> </para>
@@ -569,13 +569,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</a>
 		/// </summary>
-		public PutRoleResponse PutRole(string name, Func<PutRoleDescriptor, IPutRoleRequest> selector) => PutRole(selector.InvokeOrDefault(new PutRoleDescriptor(name: name)));
+		public PutRoleResponse PutRole(Name name, Func<PutRoleDescriptor, IPutRoleRequest> selector) => PutRole(selector.InvokeOrDefault(new PutRoleDescriptor(name: name)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_role</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</a>
 		/// </summary>
-		public Task<PutRoleResponse> PutRoleAsync(string name, Func<PutRoleDescriptor, IPutRoleRequest> selector, CancellationToken ct = default) => PutRoleAsync(selector.InvokeOrDefault(new PutRoleDescriptor(name: name)), ct);
+		public Task<PutRoleResponse> PutRoleAsync(Name name, Func<PutRoleDescriptor, IPutRoleRequest> selector, CancellationToken ct = default) => PutRoleAsync(selector.InvokeOrDefault(new PutRoleDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_role</c> API, read more about this API online:
 		/// <para> </para>
@@ -593,13 +593,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</a>
 		/// </summary>
-		public PutRoleMappingResponse PutRoleMapping(string name, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector) => PutRoleMapping(selector.InvokeOrDefault(new PutRoleMappingDescriptor(name: name)));
+		public PutRoleMappingResponse PutRoleMapping(Name name, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector) => PutRoleMapping(selector.InvokeOrDefault(new PutRoleMappingDescriptor(name: name)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_role_mapping</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</a>
 		/// </summary>
-		public Task<PutRoleMappingResponse> PutRoleMappingAsync(string name, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector, CancellationToken ct = default) => PutRoleMappingAsync(selector.InvokeOrDefault(new PutRoleMappingDescriptor(name: name)), ct);
+		public Task<PutRoleMappingResponse> PutRoleMappingAsync(Name name, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector, CancellationToken ct = default) => PutRoleMappingAsync(selector.InvokeOrDefault(new PutRoleMappingDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_role_mapping</c> API, read more about this API online:
 		/// <para> </para>
@@ -617,13 +617,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</a>
 		/// </summary>
-		public PutUserResponse PutUser(string username, Func<PutUserDescriptor, IPutUserRequest> selector) => PutUser(selector.InvokeOrDefault(new PutUserDescriptor(username: username)));
+		public PutUserResponse PutUser(Name username, Func<PutUserDescriptor, IPutUserRequest> selector) => PutUser(selector.InvokeOrDefault(new PutUserDescriptor(username: username)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_user</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</a>
 		/// </summary>
-		public Task<PutUserResponse> PutUserAsync(string username, Func<PutUserDescriptor, IPutUserRequest> selector, CancellationToken ct = default) => PutUserAsync(selector.InvokeOrDefault(new PutUserDescriptor(username: username)), ct);
+		public Task<PutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector, CancellationToken ct = default) => PutUserAsync(selector.InvokeOrDefault(new PutUserDescriptor(username: username)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_user</c> API, read more about this API online:
 		/// <para> </para>

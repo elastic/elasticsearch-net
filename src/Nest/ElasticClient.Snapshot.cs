@@ -41,13 +41,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public SnapshotResponse Snapshot(string repository, string snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) => Snapshot(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)));
+		public SnapshotResponse Snapshot(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) => Snapshot(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>snapshot.create</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<SnapshotResponse> SnapshotAsync(string repository, string snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken ct = default) => SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
+		public Task<SnapshotResponse> SnapshotAsync(Name repository, Name snapshot, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken ct = default) => SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>snapshot.create</c> API, read more about this API online:
 		/// <para> </para>
@@ -65,13 +65,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public CreateRepositoryResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => CreateRepository(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)));
+		public CreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => CreateRepository(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>snapshot.create_repository</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<CreateRepositoryResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken ct = default) => CreateRepositoryAsync(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)), ct);
+		public Task<CreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken ct = default) => CreateRepositoryAsync(selector.InvokeOrDefault(new CreateRepositoryDescriptor(repository: repository)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>snapshot.create_repository</c> API, read more about this API online:
 		/// <para> </para>
@@ -89,13 +89,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public DeleteSnapshotResponse Delete(string repository, string snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)));
+		public DeleteSnapshotResponse Delete(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>snapshot.delete</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<DeleteSnapshotResponse> DeleteAsync(string repository, string snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
+		public Task<DeleteSnapshotResponse> DeleteAsync(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>snapshot.delete</c> API, read more about this API online:
 		/// <para> </para>
@@ -137,13 +137,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public GetSnapshotResponse Get(string repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) => Get(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)));
+		public GetSnapshotResponse Get(Name repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) => Get(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>snapshot.get</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<GetSnapshotResponse> GetAsync(string repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken ct = default) => GetAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
+		public Task<GetSnapshotResponse> GetAsync(Name repository, Names snapshot, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken ct = default) => GetAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>snapshot.get</c> API, read more about this API online:
 		/// <para> </para>
@@ -185,13 +185,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public RestoreResponse Restore(string repository, string snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null) => Restore(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)));
+		public RestoreResponse Restore(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null) => Restore(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.restore</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<RestoreResponse> RestoreAsync(string repository, string snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken ct = default) => RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)), ct);
+		public Task<RestoreResponse> RestoreAsync(Name repository, Name snapshot, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken ct = default) => RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository: repository, snapshot: snapshot)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.restore</c> API, read more about this API online:
 		/// <para> </para>
@@ -233,13 +233,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public VerifyRepositoryResponse VerifyRepository(string repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null) => VerifyRepository(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)));
+		public VerifyRepositoryResponse VerifyRepository(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null) => VerifyRepository(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.verify_repository</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<VerifyRepositoryResponse> VerifyRepositoryAsync(string repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null, CancellationToken ct = default) => VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)), ct);
+		public Task<VerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null, CancellationToken ct = default) => VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository: repository)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.verify_repository</c> API, read more about this API online:
 		/// <para> </para>

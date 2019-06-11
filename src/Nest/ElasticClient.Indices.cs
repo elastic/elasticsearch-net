@@ -185,13 +185,13 @@ namespace Nest.Specification.IndicesApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
 		/// </summary>
-		public DeleteIndexTemplateResponse DeleteTemplate(string name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) => DeleteTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)));
+		public DeleteIndexTemplateResponse DeleteTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) => DeleteTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>indices.delete_template</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
 		/// </summary>
-		public Task<DeleteIndexTemplateResponse> DeleteTemplateAsync(string name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null, CancellationToken ct = default) => DeleteTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)), ct);
+		public Task<DeleteIndexTemplateResponse> DeleteTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null, CancellationToken ct = default) => DeleteTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>indices.delete_template</c> API, read more about this API online:
 		/// <para> </para>
@@ -573,13 +573,13 @@ namespace Nest.Specification.IndicesApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
-		public PutAliasResponse PutAlias(Indices index, string name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) => PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(index: index, name: name)));
+		public PutAliasResponse PutAlias(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) => PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(index: index, name: name)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.put_alias</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
-		public Task<PutAliasResponse> PutAliasAsync(Indices index, string name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null, CancellationToken ct = default) => PutAliasAsync(selector.InvokeOrDefault(new PutAliasDescriptor(index: index, name: name)), ct);
+		public Task<PutAliasResponse> PutAliasAsync(Indices index, Name name, Func<PutAliasDescriptor, IPutAliasRequest> selector = null, CancellationToken ct = default) => PutAliasAsync(selector.InvokeOrDefault(new PutAliasDescriptor(index: index, name: name)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.put_alias</c> API, read more about this API online:
 		/// <para> </para>
@@ -647,13 +647,13 @@ namespace Nest.Specification.IndicesApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
 		/// </summary>
-		public PutIndexTemplateResponse PutTemplate(string name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => PutTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)));
+		public PutIndexTemplateResponse PutTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => PutTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.put_template</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
 		/// </summary>
-		public Task<PutIndexTemplateResponse> PutTemplateAsync(string name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector, CancellationToken ct = default) => PutTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)), ct);
+		public Task<PutIndexTemplateResponse> PutTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector, CancellationToken ct = default) => PutTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.put_template</c> API, read more about this API online:
 		/// <para> </para>
@@ -719,13 +719,13 @@ namespace Nest.Specification.IndicesApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</a>
 		/// </summary>
-		public RolloverIndexResponse Rollover(string alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null) => Rollover(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)));
+		public RolloverIndexResponse Rollover(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null) => Rollover(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.rollover</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</a>
 		/// </summary>
-		public Task<RolloverIndexResponse> RolloverAsync(string alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null, CancellationToken ct = default) => RolloverAsync(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)), ct);
+		public Task<RolloverIndexResponse> RolloverAsync(Name alias, Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null, CancellationToken ct = default) => RolloverAsync(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias: alias)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.rollover</c> API, read more about this API online:
 		/// <para> </para>

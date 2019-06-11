@@ -402,7 +402,7 @@ namespace Nest
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -415,7 +415,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public DeleteIndexTemplateRequest(string name): base(r => r.Required("name", name))
+		public DeleteIndexTemplateRequest(Name name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -427,7 +427,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout
@@ -1571,7 +1571,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -1585,7 +1585,7 @@ namespace Nest
 		///<summary>/{index}/_alias/{name}</summary>
 		///<param name = "index">this parameter is required</param>
 		///<param name = "name">this parameter is required</param>
-		public PutAliasRequest(Indices index, string name): base(r => r.Required("index", index).Required("name", name))
+		public PutAliasRequest(Indices index, Name name): base(r => r.Required("index", index).Required("name", name))
 		{
 		}
 
@@ -1599,7 +1599,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		[IgnoreDataMember]
-		string IPutAliasRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout
@@ -1799,7 +1799,7 @@ namespace Nest
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Name
+		Name Name
 		{
 			get;
 		}
@@ -1812,7 +1812,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplate;
 		///<summary>/_template/{name}</summary>
 		///<param name = "name">this parameter is required</param>
-		public PutIndexTemplateRequest(string name): base(r => r.Required("name", name))
+		public PutIndexTemplateRequest(Name name): base(r => r.Required("name", name))
 		{
 		}
 
@@ -1824,7 +1824,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IPutIndexTemplateRequest.Name => Self.RouteValues.Get<string>("name");
+		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 		// Request parameters
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create
@@ -1966,7 +1966,7 @@ namespace Nest
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
 		[IgnoreDataMember]
-		string Alias
+		Name Alias
 		{
 			get;
 		}
@@ -1985,14 +1985,14 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
 		///<summary>/{alias}/_rollover</summary>
 		///<param name = "alias">this parameter is required</param>
-		public RolloverIndexRequest(string alias): base(r => r.Required("alias", alias))
+		public RolloverIndexRequest(Name alias): base(r => r.Required("alias", alias))
 		{
 		}
 
 		///<summary>/{alias}/_rollover/{new_index}</summary>
 		///<param name = "alias">this parameter is required</param>
 		///<param name = "newIndex">Optional, accepts null</param>
-		public RolloverIndexRequest(string alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
+		public RolloverIndexRequest(Name alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
 		{
 		}
 
@@ -2004,7 +2004,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string IRolloverIndexRequest.Alias => Self.RouteValues.Get<string>("alias");
+		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
 		[IgnoreDataMember]
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 		// Request parameters
