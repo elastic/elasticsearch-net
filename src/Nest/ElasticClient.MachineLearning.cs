@@ -209,13 +209,13 @@ namespace Nest.Specification.MachineLearningApi
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
 		/// </summary>
-		public DeleteForecastResponse DeleteForecast(Id jobId, StringIds forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null) => DeleteForecast(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId: jobId, forecastId: forecastId)));
+		public DeleteForecastResponse DeleteForecast(Id jobId, Ids forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null) => DeleteForecast(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId: jobId, forecastId: forecastId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_forecast</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
 		/// </summary>
-		public Task<DeleteForecastResponse> DeleteForecastAsync(Id jobId, StringIds forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null, CancellationToken ct = default) => DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId: jobId, forecastId: forecastId)), ct);
+		public Task<DeleteForecastResponse> DeleteForecastAsync(Id jobId, Ids forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null, CancellationToken ct = default) => DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId: jobId, forecastId: forecastId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_forecast</c> API, read more about this API online:
 		/// <para> </para>

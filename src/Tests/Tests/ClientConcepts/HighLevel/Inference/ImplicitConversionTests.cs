@@ -12,14 +12,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	{
 		private static T Implicit<T>(T i) => i;
 
-		[U] public void StringIds()
+		[U] public void Ids()
 		{
-			Implicit<StringIds>(null).Should().BeNull();
-			Implicit<StringIds>("").Should().BeNull();
-			Implicit<StringIds>("   ").Should().BeNull();
-			Implicit<StringIds>(",, ,,").Should().BeNull();
-			Implicit<StringIds>(new string[] { }).Should().BeNull();
-			Implicit<StringIds>(new string[] { null, null }).Should().BeNull();
+			Implicit<Ids>(null).Should().BeNull();
+			Implicit<Ids>("").Should().BeNull();
+			Implicit<Ids>("   ").Should().BeNull();
+			Implicit<Ids>(",, ,,").Should().BeNull();
+			Implicit<Ids>(new string[] { }).Should().BeNull();
+			Implicit<Ids>(new string[] { null, null }).Should().BeNull();
 		}
 
 		[U] public void LongId() => Implicit<LongId>(null).Should().BeNull();

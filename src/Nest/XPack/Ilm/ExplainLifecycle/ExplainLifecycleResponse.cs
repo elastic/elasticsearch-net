@@ -60,7 +60,7 @@ namespace Nest
 		/// The name of the policy which ILM is using for this index.
 		/// </summary>
 		[DataMember(Name = "policy")]
-		public StringId Policy { get; internal set; }
+		public string Policy { get; internal set; }
 
 		[DataMember(Name = "step")]
 		public string Step { get; internal set; }
@@ -95,7 +95,7 @@ namespace Nest
 		public IPhase PhaseDefinition { get; internal set; }
 
 		[DataMember(Name = "policy")]
-		public StringId Policy { get; internal set; }
+		public string Policy { get; internal set; }
 
 		/// <summary>
 		/// The version of the policy that was loaded.

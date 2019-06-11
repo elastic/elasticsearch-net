@@ -41,13 +41,13 @@ namespace Nest.Specification.IndexLifecycleManagementApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</a>
 		/// </summary>
-		public DeleteLifecycleResponse DeleteLifecycle(StringId policyId, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null) => DeleteLifecycle(selector.InvokeOrDefault(new DeleteLifecycleDescriptor(policyId: policyId)));
+		public DeleteLifecycleResponse DeleteLifecycle(Id policyId, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null) => DeleteLifecycle(selector.InvokeOrDefault(new DeleteLifecycleDescriptor(policyId: policyId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ilm.delete_lifecycle</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</a>
 		/// </summary>
-		public Task<DeleteLifecycleResponse> DeleteLifecycleAsync(StringId policyId, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null, CancellationToken ct = default) => DeleteLifecycleAsync(selector.InvokeOrDefault(new DeleteLifecycleDescriptor(policyId: policyId)), ct);
+		public Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Id policyId, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null, CancellationToken ct = default) => DeleteLifecycleAsync(selector.InvokeOrDefault(new DeleteLifecycleDescriptor(policyId: policyId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ilm.delete_lifecycle</c> API, read more about this API online:
 		/// <para> </para>
@@ -161,13 +161,13 @@ namespace Nest.Specification.IndexLifecycleManagementApi
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</a>
 		/// </summary>
-		public PutLifecycleResponse PutLifecycle(StringId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null) => PutLifecycle(selector.InvokeOrDefault(new PutLifecycleDescriptor(policyId: policyId)));
+		public PutLifecycleResponse PutLifecycle(Id policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null) => PutLifecycle(selector.InvokeOrDefault(new PutLifecycleDescriptor(policyId: policyId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ilm.put_lifecycle</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</a>
 		/// </summary>
-		public Task<PutLifecycleResponse> PutLifecycleAsync(StringId policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null, CancellationToken ct = default) => PutLifecycleAsync(selector.InvokeOrDefault(new PutLifecycleDescriptor(policyId: policyId)), ct);
+		public Task<PutLifecycleResponse> PutLifecycleAsync(Id policyId, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null, CancellationToken ct = default) => PutLifecycleAsync(selector.InvokeOrDefault(new PutLifecycleDescriptor(policyId: policyId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ilm.put_lifecycle</c> API, read more about this API online:
 		/// <para> </para>

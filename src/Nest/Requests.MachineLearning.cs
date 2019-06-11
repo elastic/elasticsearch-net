@@ -297,7 +297,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		StringIds ForecastId
+		Ids ForecastId
 		{
 			get;
 		}
@@ -311,7 +311,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "forecastId">this parameter is required</param>
-		public DeleteForecastRequest(Id jobId, StringIds forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
+		public DeleteForecastRequest(Id jobId, Ids forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
 		{
 		}
 
@@ -325,7 +325,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		[IgnoreDataMember]
-		StringIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<StringIds>("forecast_id");
+		Ids IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<Ids>("forecast_id");
 		// Request parameters
 		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
 		public bool? AllowNoForecasts

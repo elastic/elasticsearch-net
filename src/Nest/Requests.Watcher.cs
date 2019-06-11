@@ -41,7 +41,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		StringIds ActionId
+		Ids ActionId
 		{
 			get;
 		}
@@ -61,7 +61,7 @@ namespace Nest
 		///<summary>/_watcher/watch/{watch_id}/_ack/{action_id}</summary>
 		///<param name = "watchId">this parameter is required</param>
 		///<param name = "actionId">Optional, accepts null</param>
-		public AcknowledgeWatchRequest(Id watchId, StringIds actionId): base(r => r.Required("watch_id", watchId).Optional("action_id", actionId))
+		public AcknowledgeWatchRequest(Id watchId, Ids actionId): base(r => r.Required("watch_id", watchId).Optional("action_id", actionId))
 		{
 		}
 
@@ -75,7 +75,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		[IgnoreDataMember]
-		StringIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<StringIds>("action_id");
+		Ids IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<Ids>("action_id");
 	// Request parameters
 	}
 

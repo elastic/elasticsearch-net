@@ -48,18 +48,26 @@ namespace ApiGenerator.Domain.Specification
 					case "datafeed_id":
 					case "snapshot_id":
 					case "filter_id":
-					case "id": return Type == "string" ? "Id" : "Ids";
-					case "category_id": return "LongId";
-					case "policy_id": return "StringId";
+					case "policy_id":
+					case "id":
+						return "Id";
 					case "forecast_id":
-					case "action_id": return "StringIds";
+					case "action_id":
+						return "Ids";
+					case "category_id":
+						return "LongId";
 					case "nodes":
-					case "node_id": return Type == "string" ? "NodeId" : "NodeIds";
+					case "node_id":
+						return Type == "string" ? "NodeId" : "NodeIds";
 					case "field":
-					case "fields": return Type == "string" ? "Field" : "Fields";
-					case "index_metric": return "IndexMetrics";
-					case "metric": return "Metrics";
-					case "feature": return "Features";
+					case "fields":
+						return Type == "string" ? "Field" : "Fields";
+					case "index_metric":
+						return "IndexMetrics";
+					case "metric":
+						return "Metrics";
+					case "feature":
+						return "Features";
 					case "application":
 					case "repository":
 					case "snapshot":
@@ -76,8 +84,10 @@ namespace ApiGenerator.Domain.Specification
 					case "type":
 						return Type == "string" ? "Name" : "Names";
 					case "parent_task_id":
-					case "task_id": return "TaskId";
-					case "timestamp": return "Timestamp";
+					case "task_id":
+						return "TaskId";
+					case "timestamp":
+						return "Timestamp";
 					default: return Type + "_";
 				}
 			}

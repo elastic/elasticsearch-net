@@ -183,7 +183,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "forecastId">this parameter is required</param>
-		public DeleteForecastDescriptor(Id jobId, StringIds forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
+		public DeleteForecastDescriptor(Id jobId, Ids forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
 		{
 		}
 
@@ -195,7 +195,7 @@ namespace Nest
 
 		// values part of the url path
 		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		StringIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<StringIds>("forecast_id");
+		Ids IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<Ids>("forecast_id");
 		// Request parameters
 		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
 		public DeleteForecastDescriptor AllowNoForecasts(bool? allownoforecasts = true) => Qs("allow_no_forecasts", allownoforecasts);

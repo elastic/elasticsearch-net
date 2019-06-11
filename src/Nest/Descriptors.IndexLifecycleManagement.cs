@@ -36,7 +36,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementDeleteLifecycle;
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name = "policyId">this parameter is required</param>
-		public DeleteLifecycleDescriptor(StringId policyId): base(r => r.Required("policy_id", policyId))
+		public DeleteLifecycleDescriptor(Id policyId): base(r => r.Required("policy_id", policyId))
 		{
 		}
 
@@ -47,7 +47,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		StringId IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<StringId>("policy_id");
+		Id IDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<Id>("policy_id");
 	// Request parameters
 	}
 
@@ -83,7 +83,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementGetLifecycle;
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name = "policyId">Optional, accepts null</param>
-		public GetLifecycleDescriptor(StringId policyId): base(r => r.Optional("policy_id", policyId))
+		public GetLifecycleDescriptor(Id policyId): base(r => r.Optional("policy_id", policyId))
 		{
 		}
 
@@ -93,9 +93,9 @@ namespace Nest
 		}
 
 		// values part of the url path
-		StringId IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<StringId>("policy_id");
+		Id IGetLifecycleRequest.PolicyId => Self.RouteValues.Get<Id>("policy_id");
 		///<summary>The name of the index lifecycle policy</summary>
-		public GetLifecycleDescriptor PolicyId(StringId policyId) => Assign(policyId, (a, v) => a.RouteValues.Optional("policy_id", v));
+		public GetLifecycleDescriptor PolicyId(Id policyId) => Assign(policyId, (a, v) => a.RouteValues.Optional("policy_id", v));
 	// Request parameters
 	}
 
@@ -140,7 +140,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementPutLifecycle;
 		///<summary>/_ilm/policy/{policy_id}</summary>
 		///<param name = "policyId">this parameter is required</param>
-		public PutLifecycleDescriptor(StringId policyId): base(r => r.Required("policy_id", policyId))
+		public PutLifecycleDescriptor(Id policyId): base(r => r.Required("policy_id", policyId))
 		{
 		}
 
@@ -151,7 +151,7 @@ namespace Nest
 		}
 
 		// values part of the url path
-		StringId IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<StringId>("policy_id");
+		Id IPutLifecycleRequest.PolicyId => Self.RouteValues.Get<Id>("policy_id");
 	// Request parameters
 	}
 
