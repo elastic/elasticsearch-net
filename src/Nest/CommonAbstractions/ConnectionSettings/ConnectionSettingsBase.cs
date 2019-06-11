@@ -12,7 +12,8 @@ namespace Nest
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
 		/// <summary>
-		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to documents.
+		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
+		/// documents.
 		/// By default, the internal serializer will be used to serializer all types.
 		/// </summary>
 		public delegate IElasticsearchSerializer SourceSerializerFactory(IElasticsearchSerializer builtIn, IConnectionSettingsValues values);
@@ -55,6 +56,7 @@ namespace Nest
 		private readonly FluentDictionary<Type, string> _defaultIndices;
 
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
+		private readonly HashSet<Type> _disableIdInference = new HashSet<Type>();
 
 		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
 
@@ -67,12 +69,10 @@ namespace Nest
 		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
 
 		private readonly IElasticsearchSerializer _sourceSerializer;
+		private bool _defaultDisableAllInference;
 
 		private Func<string, string> _defaultFieldNameInferrer;
 		private string _defaultIndex;
-
-		private HashSet<Type> _disableIdInference = new HashSet<Type>();
-		private bool _defaultDisableAllInference;
 
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
@@ -83,7 +83,6 @@ namespace Nest
 			: base(connectionPool, connection, null)
 		{
 			var formatterResolver = new NestFormatterResolver(this);
-			//Utf8Json.JsonSerializer.SetDefaultResolver(formatterResolver);
 			var defaultSerializer = new InternalSerializer(formatterResolver);
 			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			UseThisRequestResponseSerializer = defaultSerializer;
@@ -95,10 +94,12 @@ namespace Nest
 			_defaultRelationNames = new FluentDictionary<Type, string>();
 			_inferrer = new Inferrer(this);
 		}
+		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
+		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
@@ -106,8 +107,6 @@ namespace Nest
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
-		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
-		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 
 		/// <inheritdoc cref="IConnectionSettingsValues.DefaultIndex"/>
 		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
@@ -116,7 +115,7 @@ namespace Nest
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
 			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DisableIdInference"/>
+		/// <inheritdoc cref="IConnectionSettingsValues.DefaultDisableIdInference" />
 		public TConnectionSettings DefaultDisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._defaultDisableAllInference = v);
 
 		/// <inheritdoc cref="IConnectionSettingsValues.IdProperties"/>
@@ -211,10 +210,10 @@ namespace Nest
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
 			if (!inferMapping.IndexName.IsNullOrEmpty())
-				_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
+				_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
-				_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
@@ -242,10 +241,10 @@ namespace Nest
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
-				_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
+				_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
-				_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
@@ -253,7 +252,7 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})"/>
+		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})" />
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
 			if (typeMappings == null) return (TConnectionSettings)this;
@@ -261,10 +260,10 @@ namespace Nest
 			foreach (var inferMapping in typeMappings)
 			{
 				if (!inferMapping.IndexName.IsNullOrEmpty())
-					_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
+					_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
 				if (!inferMapping.RelationName.IsNullOrEmpty())
-					_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+					_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 			}
 
 			return (TConnectionSettings)this;
