@@ -16,6 +16,12 @@ namespace Nest
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
 		/// <summary>
+		/// The default user agent for Nest
+		/// </summary>
+		public static readonly string DefaultUserAgent =
+			$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)";
+
+		/// <summary>
 		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to documents.
 		/// By default, the internal serializer will be used to serializer all types.
 		/// </summary>
@@ -106,8 +112,7 @@ namespace Nest
 
 			_inferrer = new Inferrer(this);
 
-			UserAgent(
-				$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)");
+			UserAgent(ConnectionSettings.DefaultUserAgent);
 		}
 
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
