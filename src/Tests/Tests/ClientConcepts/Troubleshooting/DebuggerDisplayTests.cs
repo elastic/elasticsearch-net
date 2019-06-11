@@ -54,8 +54,8 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 		[U] public void ActionIds()
 		{
-			ActionIds fromString = "a,b,  c,d    ";
-			ActionIds fromStringArray = new[] { "a", "b" };
+			StringIds fromString = "a,b,  c,d    ";
+			StringIds fromStringArray = new[] { "a", "b" };
 
 			DebugFor(fromString).Should().Be("a,b,c,d");
 			DebugFor(fromStringArray).Should().Be("a,b");

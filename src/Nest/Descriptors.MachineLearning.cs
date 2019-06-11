@@ -183,7 +183,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "forecastId">this parameter is required</param>
-		public DeleteForecastDescriptor(Id jobId, ForecastIds forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
+		public DeleteForecastDescriptor(Id jobId, StringIds forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
 		{
 		}
 
@@ -195,7 +195,7 @@ namespace Nest
 
 		// values part of the url path
 		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		ForecastIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<ForecastIds>("forecast_id");
+		StringIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<StringIds>("forecast_id");
 		// Request parameters
 		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
 		public DeleteForecastDescriptor AllowNoForecasts(bool? allownoforecasts = true) => Qs("allow_no_forecasts", allownoforecasts);
@@ -382,7 +382,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "categoryId">Optional, accepts null</param>
-		public GetCategoriesDescriptor(Id jobId, CategoryId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+		public GetCategoriesDescriptor(Id jobId, LongId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 		{
 		}
 
@@ -400,9 +400,9 @@ namespace Nest
 
 		// values part of the url path
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
+		LongId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<LongId>("category_id");
 		///<summary>The identifier of the category definition of interest</summary>
-		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(categoryId, (a, v) => a.RouteValues.Optional("category_id", v));
+		public GetCategoriesDescriptor CategoryId(LongId categoryId) => Assign(categoryId, (a, v) => a.RouteValues.Optional("category_id", v));
 	// Request parameters
 	}
 

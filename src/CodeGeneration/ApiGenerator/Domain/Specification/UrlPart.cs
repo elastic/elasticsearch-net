@@ -41,7 +41,6 @@ namespace ApiGenerator.Domain.Specification
 						return Type == "string" ? "IndexName" : "Indices";
 					case "target":
 						return "IndexName";
-					case "type": return Type == "string" ? "Name" : "Names";
 					case "watch_id":
 					case "job_id":
 					case "calendar_id":
@@ -50,18 +49,17 @@ namespace ApiGenerator.Domain.Specification
 					case "snapshot_id":
 					case "filter_id":
 					case "id": return Type == "string" ? "Id" : "Ids";
-					case "category_id": return "CategoryId";
-					case "policy_id": return "PolicyId";
-					case "forecast_id": return "ForecastIds";
+					case "category_id": return "LongId";
+					case "policy_id": return "StringId";
+					case "forecast_id":
+					case "action_id": return "StringIds";
 					case "nodes":
 					case "node_id": return Type == "string" ? "NodeId" : "NodeIds";
 					case "field":
 					case "fields": return Type == "string" ? "Field" : "Fields";
 					case "index_metric": return "IndexMetrics";
-					case "metric":
-						return "Metrics";
+					case "metric": return "Metrics";
 					case "feature": return "Features";
-					case "action_id": return "ActionIds";
 					case "application":
 					case "repository":
 					case "snapshot":
@@ -75,6 +73,7 @@ namespace ApiGenerator.Domain.Specification
 					case "name":
 					case "user":
 					case "thread_pool_patterns":
+					case "type":
 						return Type == "string" ? "Name" : "Names";
 					case "parent_task_id":
 					case "task_id": return "TaskId";
