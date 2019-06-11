@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net.Extensions;
 
@@ -105,7 +106,7 @@ namespace Elasticsearch.Net
 		public bool Pipelined { get; }
 		public PostData PostData { get; }
 		public string ProxyAddress { get; }
-		public string ProxyPassword { get; }
+		public SecureString ProxyPassword { get; }
 		public string ProxyUsername { get; }
 		public string RequestMimeType { get; }
 		public TimeSpan RequestTimeout { get; }

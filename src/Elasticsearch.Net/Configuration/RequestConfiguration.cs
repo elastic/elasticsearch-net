@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
@@ -257,6 +258,15 @@ namespace Elasticsearch.Net
 		}
 
 		public RequestConfigurationDescriptor BasicAuthentication(string userName, string password)
+		{
+			if (Self.BasicAuthenticationCredentials == null)
+				Self.BasicAuthenticationCredentials = new BasicAuthenticationCredentials();
+			Self.BasicAuthenticationCredentials.Username = userName;
+			Self.BasicAuthenticationCredentials.Password = password.CreateSecureString();
+			return this;
+		}
+
+		public RequestConfigurationDescriptor BasicAuthentication(string userName, SecureString password)
 		{
 			if (Self.BasicAuthenticationCredentials == null)
 				Self.BasicAuthenticationCredentials = new BasicAuthenticationCredentials();

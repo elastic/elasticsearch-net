@@ -51,11 +51,9 @@ namespace Tests.XPack.Security.Authenticate
 		{
 			RequestConfiguration = new RequestConfiguration
 			{
-				BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-				{
-					Username = ClusterAuthentication.User.Username,
-					Password = ClusterAuthentication.User.Password
-				}
+				BasicAuthenticationCredentials = new BasicAuthenticationCredentials(
+					ClusterAuthentication.User.Username,
+					ClusterAuthentication.User.Password)
 			}
 		};
 

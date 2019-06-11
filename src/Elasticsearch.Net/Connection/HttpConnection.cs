@@ -253,7 +253,7 @@ namespace Elasticsearch.Net
 			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
 				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
 			else if (requestData.BasicAuthorizationCredentials != null)
-				userInfo = requestData.BasicAuthorizationCredentials.ToString();
+				userInfo = $"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 			if (!userInfo.IsNullOrEmpty())
 			{
 				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
