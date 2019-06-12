@@ -32,7 +32,9 @@ namespace ApiGenerator.Domain.Code.LowLevel
 				}
 
 				var url = Path.TrimStart('/');
-				var pattern = string.Join("|", Url.OriginalParts.Select(p => p.Key));
+				var options = Url.OriginalParts?.Select(p => p.Key) ?? Enumerable.Empty<string>();
+				
+				var pattern = string.Join("|", options);
 				var urlCode = $"\"{url}\"";
 				if (Path.Contains("{"))
 				{

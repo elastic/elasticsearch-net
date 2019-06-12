@@ -317,6 +317,16 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> InvalidateUserAccessTokenAsync<TResponse>(PostData body, InvalidateUserAccessTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_security/oauth2/token", ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /_security/privilege/ <para>TODO</para></summary>
+		///<param name = "body">The privilege(s) to add</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutPrivileges<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, "_security/privilege/", body, RequestParams(requestParameters));
+		///<summary>PUT on /_security/privilege/ <para>TODO</para></summary>
+		///<param name = "body">The privilege(s) to add</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutPrivilegesAsync<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, "_security/privilege/", ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</para></summary>
 		///<param name = "name">Role name</param>
 		///<param name = "body">The role to add</param>

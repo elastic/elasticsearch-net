@@ -120,10 +120,6 @@ namespace ApiGenerator.Domain.Specification
 				_lowLevelClientMethods = new List<LowLevelClientMethod>();
 
 				var httpMethod = PreferredHttpMethod;
-				if (Name.Contains("put_mapping"))
-				{
-					
-				}
 				foreach (var path in Url.PathsWithDeprecations)
 				{
 					var methodName = CsharpNames.PerPathMethodName(path.Path);

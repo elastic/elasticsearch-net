@@ -40,6 +40,11 @@ namespace ApiGenerator.Domain.Specification
 		{
 			get
 			{
+				if (Paths.Any(p => p.Path.Contains("plugins")))
+				{
+					
+				}
+				
 				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
 				
 				var paths = Paths ?? new UrlPath[] {};
@@ -62,7 +67,6 @@ namespace ApiGenerator.Domain.Specification
 					.GroupBy(t => t.parts, HashSet<string>.CreateSetComparer())
 					.Where(grouped => !canonicalPartNameLookup.Any(set => set.SetEquals(grouped.Key)))
 					.Select(grouped => grouped.First().deprecatedPath); 
-				
 				
 							
 				_pathsWithDeprecation = paths
