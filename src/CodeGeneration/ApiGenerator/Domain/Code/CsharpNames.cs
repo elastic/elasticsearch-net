@@ -96,13 +96,18 @@ namespace ApiGenerator.Domain.Code
 			Func<string, bool> ms = s => Namespace != null && Namespace.StartsWith(s);
 			Func<string, bool> pc = path.Contains;
 
+			var method = MethodName;
+			// This is temporary for 7.0 transition period
+			// TODO: remove in master once master in elasticsearch is scrubbed
+			if (path.Contains("{type}") && !method.Contains("Type")) method += "UsingType";
+
 			if (ms("Indices") && !pc("{index}"))
-				return (MethodName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+				return (method + "ForAll").Replace("AsyncForAll", "ForAllAsync");
 
 			if (ms("Nodes") && !pc("{node_id}"))
-				return (MethodName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+				return (method + "ForAll").Replace("AsyncForAll", "ForAllAsync");
 
-			return MethodName;
+			return method;
 		}
 
 

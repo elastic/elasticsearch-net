@@ -18,29 +18,30 @@ namespace ApiGenerator.Domain.Specification
 	{
 		private string _description;
 
-		public string Argument
+		public string Argument => $"{LowLevelTypeName} {NameAsArgument}";
+
+		public string LowLevelTypeName
 		{
 			get
 			{
 				//TODO treat list with fixed options as Flags Enum
 				switch (Type)
 				{
-					case "int":
+					case "int": //last i checked does not occur on part
+					case "number": //last i checked does not occur on part
 					case "string":
-						return Type + " " + NameAsArgument;
+						return Type;
 					case "list":
-						return "string " + NameAsArgument;
+						return "string";
 					case "enum":
-						return Name.ToPascalCase() + " " + NameAsArgument;
-					case "number":
-						return "string " + NameAsArgument;
+						return Name.ToPascalCase();
 					default:
-						return Type + " " + NameAsArgument;
+						return Type;
 				}
 			}
 		}
 
-		public string ClrTypeName
+		public string HighLevelTypeName
 		{
 			get
 			{

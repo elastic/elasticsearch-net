@@ -44,7 +44,7 @@ namespace ApiGenerator.Domain.Specification
 			Parts = parts.ToList();
 		}
 
-		public string ConstructorArguments => string.Join(", ", Parts.Select(p => $"{p.ClrTypeName} {p.NameAsArgument}"));
+		public string ConstructorArguments => string.Join(", ", Parts.Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument}"));
 		public string RequestBaseArguments =>
 			!Parts.Any() ? string.Empty
 				: "r => r." + string.Join(".", Parts.Select(p => $"{(p.Required ? "Required" : "Optional")}(\"{p.Name}\", {p.NameAsArgument})"));
@@ -55,7 +55,7 @@ namespace ApiGenerator.Domain.Specification
 
 
 		public bool HasResolvableArguments => Parts.Any(p => ResolvabeFromT.Contains(p.Name));
-		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvabeFromT.Contains(p.Name)).Select(p => $"{p.ClrTypeName} {p.NameAsArgument}"));
+		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvabeFromT.Contains(p.Name)).Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument}"));
 
 		public string AutoResolveBaseArguments(string generic) => string.Join(", ", Parts.Select(p => !ResolvabeFromT.Contains(p.Name) ? p.Name : $"typeof({generic})"));
 
@@ -64,7 +64,7 @@ namespace ApiGenerator.Domain.Specification
 				: ResolvabeFromT.Contains(p.Name) ? $"{p.Name} ?? typeof({generic})" : p.Name));
 
 		public string DocumentPathConstructorArgument(string generic) => string.Join(", ",
-			new [] { $"{generic} documentWithId" }.Concat(_additionalPartsForConstructor.Select(p => $"{p.ClrTypeName} {p.NameAsArgument} = null")));
+			new [] { $"{generic} documentWithId" }.Concat(_additionalPartsForConstructor.Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument} = null")));
 
 		public string GetXmlDocs(string indent, bool skipResolvable = false, bool documentConstructor = false)
 		{

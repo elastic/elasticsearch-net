@@ -607,25 +607,5 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> UpdateModelSnapshotAsync<TResponse>(string jobId, string snapshotId, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_update"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate <para></para></summary>
-		///<param name = "body">The job config</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ValidateJob<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/anomaly_detectors/_validate", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate <para></para></summary>
-		///<param name = "body">The job config</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> ValidateJobAsync<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/anomaly_detectors/_validate", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para></para></summary>
-		///<param name = "body">The detector</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ValidateDetector<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/anomaly_detectors/_validate/detector", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para></para></summary>
-		///<param name = "body">The detector</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> ValidateDetectorAsync<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/anomaly_detectors/_validate/detector", ctx, body, RequestParams(requestParameters));
 	}
 }
