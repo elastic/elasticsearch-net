@@ -16,6 +16,9 @@ namespace ApiGenerator.Domain.Specification
 		[JsonProperty("parts")]
 		private IDictionary<string, UrlPart> OriginalParts { get; set; }
 		
+		[JsonProperty("deprecated_paths")]
+		private IReadOnlyCollection<DeprecatedPath> DeprecatedPaths { get; set; }
+		
 		private List<UrlPath> _paths;
 		public IReadOnlyCollection<UrlPath> Paths
 		{
@@ -25,6 +28,21 @@ namespace ApiGenerator.Domain.Specification
 
 				_paths = OriginalPaths.Select(p => new UrlPath(p, OriginalParts)).ToList();
 				return _paths;
+			}
+		}
+		
+		private List<UrlPath> _pathsWithDeprecation;
+		public IReadOnlyCollection<UrlPath> PathsWithDeprecations
+		{
+			get
+			{
+				
+				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
+				
+				var paths = Paths;
+
+				_pathsWithDeprecation = paths.Concat(DeprecatedPaths.Select(p => new UrlPath(p, OriginalParts, Paths))).ToList();
+				return _pathsWithDeprecation;
 			}
 		}
 

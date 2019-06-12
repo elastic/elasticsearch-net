@@ -3,6 +3,17 @@ using System.Transactions;
 
 namespace ApiGenerator.Domain.Specification
 {
+
+	//TODO once https://github.com/elastic/elasticsearch/pull/42346 lands 
+	// Rename this type to Deprecation and remove Path duplication
+	public class DeprecatedPath
+	{
+		public string Version { get; set; }
+		public string Path { get; set; }
+		public string Description { get; set; }
+	}
+	
+	
 	public class UrlPart
 	{
 		private string _description;
@@ -116,6 +127,7 @@ namespace ApiGenerator.Domain.Specification
 		public string NameAsArgument => Name.ToCamelCase();
 		public IEnumerable<string> Options { get; set; }
 		public bool Required { get; set; }
+		public bool Deprecated { get; set; }
 		public string Type { get; set; }
 
 		private string CleanUpDescription(string value)
