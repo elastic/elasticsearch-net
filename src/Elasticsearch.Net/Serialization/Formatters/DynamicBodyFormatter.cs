@@ -6,7 +6,7 @@ namespace Elasticsearch.Net
 {
 	internal class DynamicBodyFormatter : IJsonFormatter<DynamicBody>
 	{
-		private static readonly DictionaryFormatter<string, object> DictionaryFormatter =
+		protected static readonly DictionaryFormatter<string, object> DictionaryFormatter =
 			new DictionaryFormatter<string, object>();
 
 		public void Serialize(ref JsonWriter writer, DynamicBody value, IJsonFormatterResolver formatterResolver)

@@ -1,43 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	public class ClusterStateResponse : ResponseBase
+	[JsonFormatter(typeof(DynamicResponseFormatter<ClusterStateResponse>))]
+	public class ClusterStateResponse : DynamicResponseBase
 	{
-		[DataMember(Name = "blocks")]
-		public BlockState Blocks { get; internal set; }
+		public DynamicBody State => Self.BackingBody;
 
 		[DataMember(Name = "cluster_name")]
-		public string ClusterName { get; internal set; }
+		public string ClusterName => State["cluster_name"] as string;
 
 		/// <summary>The Universally Unique Identifier for the cluster.</summary>
 		/// <remarks>While the cluster is still forming, it is possible for the `cluster_uuid` to be `_na_`.</remarks>
 		[DataMember(Name = "cluster_uuid")]
-		public string ClusterUUID { get; internal set; }
+		public string ClusterUUID => State["cluster_uuid"] as string;
 
 		[DataMember(Name = "master_node")]
-		public string MasterNode { get; internal set; }
-
-		[DataMember(Name = "metadata")]
-		public MetadataState Metadata { get; internal set; }
-
-		[DataMember(Name = "nodes")]
-		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeState>))]
-		public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; }
-			= EmptyReadOnly<string, NodeState>.Dictionary;
-
-		[DataMember(Name = "routing_nodes")]
-		public RoutingNodesState RoutingNodes { get; internal set; }
-
-		[DataMember(Name = "routing_table")]
-		public RoutingTableState RoutingTable { get; internal set; }
+		public string MasterNode => State["master_node"] as string;
 
 		[DataMember(Name = "state_uuid")]
-		public string StateUUID { get; internal set; }
+		public string StateUUID => State["state_uuid"] as string;
 
 		[DataMember(Name = "version")]
-		public long Version { get; internal set; }
+		public long? Version => State["version"] as long?;
 	}
 }
