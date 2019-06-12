@@ -12,27 +12,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	{
 		private static T Implicit<T>(T i) => i;
 
-		[U] public void ForecastIds()
+		[U] public void Ids()
 		{
-			Implicit<ForecastIds>(null).Should().BeNull();
-			Implicit<ForecastIds>("").Should().BeNull();
-			Implicit<ForecastIds>("   ").Should().BeNull();
-			Implicit<ForecastIds>(",, ,,").Should().BeNull();
-			Implicit<ForecastIds>(new string[] { }).Should().BeNull();
-			Implicit<ForecastIds>(new string[] { null, null }).Should().BeNull();
+			Implicit<Ids>(null).Should().BeNull();
+			Implicit<Ids>("").Should().BeNull();
+			Implicit<Ids>("   ").Should().BeNull();
+			Implicit<Ids>(",, ,,").Should().BeNull();
+			Implicit<Ids>(new string[] { }).Should().BeNull();
+			Implicit<Ids>(new string[] { null, null }).Should().BeNull();
 		}
 
-		[U] public void ActionIds()
-		{
-			Implicit<ActionIds>(null).Should().BeNull();
-			Implicit<ActionIds>("").Should().BeNull();
-			Implicit<ActionIds>("   ").Should().BeNull();
-			Implicit<ActionIds>(",, ,,").Should().BeNull();
-			Implicit<ActionIds>(new string[] { }).Should().BeNull();
-			Implicit<ActionIds>(new string[] { null, null }).Should().BeNull();
-		}
-
-		[U] public void CategoryId() => Implicit<CategoryId>(null).Should().BeNull();
+		[U] public void LongId() => Implicit<LongId>(null).Should().BeNull();
 
 		[U] public void DocumentPath()
 		{

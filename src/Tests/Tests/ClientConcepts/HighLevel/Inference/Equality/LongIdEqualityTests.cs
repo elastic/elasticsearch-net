@@ -5,19 +5,19 @@ using Tests.Core.Extensions;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
-	public class CategoryIdEqualityTests
+	public class LongIdEqualityTests
 	{
 		[U] public void Eq()
 		{
-			CategoryId types = 2;
-			CategoryId[] equal = { 2L, 2 };
+			LongId types = 2;
+			LongId[] equal = { 2L, 2 };
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
 				t.Should().Be(types);
 			}
 
-			CategoryId l1 = 2, l2 = 2;
+			LongId l1 = 2, l2 = 2;
 			(l1 == l2).ShouldBeTrue(l2);
 			(l1 == 2).ShouldBeTrue(l1);
 			l1.Should().Be(l2);
@@ -26,14 +26,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 
 		[U] public void NotEq()
 		{
-			CategoryId types = 3;
-			CategoryId[] notEqual = { 4L, 4 };
+			LongId types = 3;
+			LongId[] notEqual = { 4L, 4 };
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
 				t.Should().NotBe(types);
 			}
-			CategoryId l1 = 2, l2 = 3;
+			LongId l1 = 2, l2 = 3;
 			(l1 != l2).ShouldBeTrue(l2);
 			(l1 != 3).ShouldBeTrue(l1);
 			l1.Should().NotBe(l2);
@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 
 		[U] public void Null()
 		{
-			CategoryId c = 10;
+			LongId c = 10;
 			(c == null).Should().BeFalse();
 			(null == c).Should().BeFalse();
 		}

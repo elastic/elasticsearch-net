@@ -297,7 +297,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		ForecastIds ForecastId
+		Ids ForecastId
 		{
 			get;
 		}
@@ -311,7 +311,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "forecastId">this parameter is required</param>
-		public DeleteForecastRequest(Id jobId, ForecastIds forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
+		public DeleteForecastRequest(Id jobId, Ids forecastId): base(r => r.Required("job_id", jobId).Required("forecast_id", forecastId))
 		{
 		}
 
@@ -325,7 +325,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		[IgnoreDataMember]
-		ForecastIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<ForecastIds>("forecast_id");
+		Ids IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<Ids>("forecast_id");
 		// Request parameters
 		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
 		public bool? AllowNoForecasts
@@ -645,7 +645,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		CategoryId CategoryId
+		LongId CategoryId
 		{
 			get;
 		}
@@ -659,7 +659,7 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name = "jobId">this parameter is required</param>
 		///<param name = "categoryId">Optional, accepts null</param>
-		public GetCategoriesRequest(Id jobId, CategoryId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+		public GetCategoriesRequest(Id jobId, LongId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 		{
 		}
 
@@ -679,7 +679,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		[IgnoreDataMember]
-		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
+		LongId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<LongId>("category_id");
 	// Request parameters
 	}
 

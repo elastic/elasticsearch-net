@@ -43,7 +43,7 @@ namespace Nest
 		///<summary>/_watcher/watch/{watch_id}/_ack/{action_id}</summary>
 		///<param name = "watchId">this parameter is required</param>
 		///<param name = "actionId">Optional, accepts null</param>
-		public AcknowledgeWatchDescriptor(Id watchId, ActionIds actionId): base(r => r.Required("watch_id", watchId).Optional("action_id", actionId))
+		public AcknowledgeWatchDescriptor(Id watchId, Ids actionId): base(r => r.Required("watch_id", watchId).Optional("action_id", actionId))
 		{
 		}
 
@@ -55,9 +55,9 @@ namespace Nest
 
 		// values part of the url path
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
-		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
+		Ids IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<Ids>("action_id");
 		///<summary>A comma-separated list of the action ids to be acked</summary>
-		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(actionId, (a, v) => a.RouteValues.Optional("action_id", v));
+		public AcknowledgeWatchDescriptor ActionId(Ids actionId) => Assign(actionId, (a, v) => a.RouteValues.Optional("action_id", v));
 	// Request parameters
 	}
 

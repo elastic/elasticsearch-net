@@ -46,20 +46,19 @@ namespace Nest
 		}
 
 		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
-
+		
 		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value, false);
 
 		internal RouteValues Optional(string route, Metrics value) => Route(route, value, false);
 
 		internal RouteValues Optional(string route, IndexMetrics value) => Route(route, value, false);
 
-		internal TActual Get<TActual>(string route) where TActual : class, IUrlParameter
+		internal TActual Get<TActual>(string route) 
 		{
-			IUrlParameter actual;
-			if (TryGetValue(route, out actual) && actual != null)
+			if (TryGetValue(route, out var actual) && actual != null)
 				return (TActual)actual;
 
-			return null;
+			return default;
 		}
 	}
 }
