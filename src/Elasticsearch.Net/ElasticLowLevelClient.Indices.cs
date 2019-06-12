@@ -127,6 +127,18 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteAliasAsync<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"{index:index}/_alias/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>DELETE on /{index}/_aliases/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+		///<param name = "index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
+		///<param name = "name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse DeleteAlias<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"{index:index}/_aliases/{name:name}"), null, RequestParams(requestParameters));
+		///<summary>DELETE on /{index}/_aliases/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+		///<param name = "index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
+		///<param name = "name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> DeleteAliasAsync<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"{index:index}/_aliases/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_template/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -317,6 +329,32 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetFieldMappingAsync<TResponse>(string index, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "fields">A comma-separated list of fields</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetFieldMappingForAll<TResponse>(string type, string fields, GetFieldMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_mapping/{type}/field/{fields:fields}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "fields">A comma-separated list of fields</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> GetFieldMappingForAllAsync<TResponse>(string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_mapping/{type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names</param>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "fields">A comma-separated list of fields</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetFieldMapping<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_mapping/{type}/field/{fields:fields}"), null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names</param>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "fields">A comma-separated list of fields</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> GetFieldMappingAsync<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetMappingForAll<TResponse>(GetMappingRequestParameters requestParameters = null)
@@ -335,6 +373,28 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetMappingAsync<TResponse>(string index, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetMappingForAll<TResponse>(string type, GetMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_mapping/{type}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> GetMappingForAllAsync<TResponse>(string type, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_mapping/{type}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names</param>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetMapping<TResponse>(string index, string type, GetMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_mapping/{type}"), null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names</param>
+		///<param name = "type">A comma-separated list of document types</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> GetMappingAsync<TResponse>(string index, string type, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetSettingsForAll<TResponse>(GetIndexSettingsRequestParameters requestParameters = null)
@@ -417,6 +477,20 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PutAliasAsync<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_alias/{name:name}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_aliases/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
+		///<param name = "name">The name of the alias to be created or updated</param>
+		///<param name = "body">The settings for the alias, such as `routing` or `filter`</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutAlias<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/_aliases/{name:name}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_aliases/{name} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
+		///<param name = "name">The name of the alias to be created or updated</param>
+		///<param name = "body">The settings for the alias, such as `routing` or `filter`</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutAliasAsync<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_aliases/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /{index}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name = "body">The mapping definition</param>
@@ -429,6 +503,98 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PutMappingAsync<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_mapping"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/{type}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMapping<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/{type}/_mapping"), body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/{type}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingAsync<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/{type}/_mapping"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMapping<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/_mapping/{type}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingAsync<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_mapping/{type}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/{type}/_mappings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMapping<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/{type}/_mappings"), body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/{type}/_mappings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingAsync<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/{type}/_mappings"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_mappings/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMapping<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/_mappings/{type}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_mappings/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingAsync<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_mappings/{type}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /_mappings/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMappingForAll<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_mappings/{type}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /_mappings/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingForAllAsync<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_mappings/{type}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_mappings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMapping<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/_mappings"), body, RequestParams(requestParameters));
+		///<summary>PUT on /{index}/_mappings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingAsync<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_mappings"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutMappingForAll<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_mapping/{type}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+		///<param name = "type">The name of the document type</param>
+		///<param name = "body">The mapping definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> PutMappingForAllAsync<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_mapping/{type}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -661,5 +827,19 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> ValidateQueryAsync<TResponse>(string index, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_validate/query"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/{type}/_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
+		///<param name = "index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
+		///<param name = "body">The query definition specified with the Query DSL</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ValidateQuery<TResponse>(string index, string type, PostData body, ValidateQueryRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type}/_validate/query"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/{type}/_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
+		///<param name = "index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
+		///<param name = "body">The query definition specified with the Query DSL</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> ValidateQueryAsync<TResponse>(string index, string type, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type}/_validate/query"), ctx, body, RequestParams(requestParameters));
 	}
 }

@@ -39,7 +39,13 @@ namespace ApiGenerator.Domain.Specification
 				
 				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
 				
-				var paths = Paths;
+				var paths = Paths ?? new UrlPath[] {};
+				if (DeprecatedPaths == null || DeprecatedPaths.Count == 0) return Paths;
+				
+				
+				var withoutDeprecatedAliases = 
+					from d in DeprecatedPaths
+					let parts = OriginalParts.
 
 				_pathsWithDeprecation = paths.Concat(DeprecatedPaths.Select(p => new UrlPath(p, OriginalParts, Paths))).ToList();
 				return _pathsWithDeprecation;

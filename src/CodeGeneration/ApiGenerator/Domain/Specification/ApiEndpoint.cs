@@ -120,7 +120,7 @@ namespace ApiGenerator.Domain.Specification
 				_lowLevelClientMethods = new List<LowLevelClientMethod>();
 
 				var httpMethod = PreferredHttpMethod;
-				foreach (var path in Url.Paths)
+				foreach (var path in Url.PathsWithDeprecations)
 				{
 					var methodName = CsharpNames.PerPathMethodName(path.Path);
 					var parts = new List<UrlPart>(path.Parts);
