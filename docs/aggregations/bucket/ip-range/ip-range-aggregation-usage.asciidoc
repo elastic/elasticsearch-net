@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/IpRange/IpRangeAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/IpRange/IpRangeAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -36,10 +36,10 @@ a => a
 new IpRangeAggregation("ip_ranges")
 {
     Field = Field((Project p) => p.LeadDeveloper.IpAddress),
-    Ranges = new List<Nest.IpRangeAggregationRange>
+    Ranges = new List<IpRangeAggregationRange>
     {
-        new Nest.IpRangeAggregationRange {To = "127.0.0.1"},
-        new Nest.IpRangeAggregationRange {From = "127.0.0.1"}
+        new IpRangeAggregationRange { To = "127.0.0.1" },
+        new IpRangeAggregationRange { From = "127.0.0.1" }
     }
 }
 ----
@@ -72,12 +72,12 @@ response.ShouldBeValid();
 var ipRanges = response.Aggregations.IpRange("ip_ranges");
 ipRanges.Should().NotBeNull();
 ipRanges.Buckets.Should().NotBeNull();
-ipRanges.Buckets.Count.Should().BeGreaterThan(0);
+ipRanges.Buckets.Count.Should().Be(2);
+ipRanges.Buckets.First().To.Should().Be("127.0.0.1");
+ipRanges.Buckets.Last().From.Should().Be("127.0.0.1");
 foreach (var range in ipRanges.Buckets)
 {
-    if (TestConfiguration.Instance.InRange("6.4.0"))
-        range.Key.Should().NotBeNullOrEmpty();
-
+    range.Key.Should().NotBeNullOrEmpty();
     range.DocCount.Should().BeGreaterThan(0);
 }
 ----

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Geo/Polygon/GeoPolygonQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Geo/Polygon/GeoPolygonQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,9 +23,9 @@ q
 .GeoPolygon(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.LocationPoint)
     .ValidationMethod(GeoValidationMethod.Strict)
-    .Points( new GeoLocation(45,-45), new GeoLocation(-34,34))
+    .Points(new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70))
 )
 ----
 
@@ -37,9 +37,9 @@ new GeoPolygonQuery
 {
     Boost = 1.1,
     Name = "named_query",
-    ValidationMethod =    GeoValidationMethod.Strict,
-    Points = new [] { new GeoLocation(45,-45), new GeoLocation(-34,34),  },
-    Field = Infer.Field<Project>(p=>p.Location)
+    ValidationMethod = GeoValidationMethod.Strict,
+    Points = new[] { new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70) },
+    Field = Infer.Field<Project>(p => p.LocationPoint)
 }
 ----
 
@@ -51,7 +51,7 @@ new GeoPolygonQuery
     "_name": "named_query",
     "boost": 1.1,
     "validation_method": "strict",
-    "location": {
+    "locationPoint": {
       "points": [
         {
           "lat": 45.0,
@@ -60,6 +60,10 @@ new GeoPolygonQuery
         {
           "lat": -34.0,
           "lon": 34.0
+        },
+        {
+          "lat": 70.0,
+          "lon": -70.0
         }
       ]
     }

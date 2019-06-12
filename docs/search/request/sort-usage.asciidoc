@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/SortUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Request/SortUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -29,15 +29,16 @@ s => s
     .Descending(p => p.Name)
     .Descending(SortSpecialField.Score)
     .Ascending(SortSpecialField.DocumentIndexOrder)
-
     .Field(f => f
         .Field(p => p.Tags.First().Added)
         .Order(SortOrder.Descending)
         .MissingLast()
         .UnmappedType(FieldType.Date)
         .Mode(SortMode.Average)
-        .NestedPath(p => p.Tags)
-        .NestedFilter(q => q.MatchAll())
+        .Nested(n => n
+            .Path(p => p.Tags)
+            .Filter(q => q.MatchAll())
+        )
     )
     .Field(f => f
         .Field(p => p.NumberOfCommits)
@@ -45,7 +46,7 @@ s => s
         .Missing(-1)
     )
     .GeoDistance(g => g
-        .Field(p => p.Location)
+        .Field(p => p.LocationPoint)
         .DistanceType(GeoDistanceType.Arc)
         .Order(SortOrder.Ascending)
         .Unit(DistanceUnit.Centimeters)
@@ -72,21 +73,24 @@ new SearchRequest<Project>
 {
     Sort = new List<ISort>
     {
-        new SortField { Field = "startedOn", Order = SortOrder.Ascending },
-        new SortField { Field = "name", Order = SortOrder.Descending },
-        new SortField { Field = "_score", Order = SortOrder.Descending },
-        new SortField { Field = "_doc", Order = SortOrder.Ascending },
-        new SortField
+        new FieldSort { Field = "startedOn", Order = SortOrder.Ascending },
+        new FieldSort { Field = "name", Order = SortOrder.Descending },
+        new FieldSort { Field = "_score", Order = SortOrder.Descending },
+        new FieldSort { Field = "_doc", Order = SortOrder.Ascending },
+        new FieldSort
         {
-            Field = Field<Project>(p=>p.Tags.First().Added),
+            Field = Field<Project>(p => p.Tags.First().Added),
             Order = SortOrder.Descending,
             Missing = "_last",
             UnmappedType = FieldType.Date,
             Mode = SortMode.Average,
-            NestedPath = Field<Project>(p=>p.Tags),
-            NestedFilter = new MatchAllQuery(),
+            Nested = new NestedSort
+            {
+                Path = Field<Project>(p => p.Tags),
+                Filter = new MatchAllQuery()
+            }
         },
-        new SortField
+        new FieldSort
         {
             Field = Field<Project>(p => p.NumberOfCommits),
             Order = SortOrder.Descending,
@@ -94,12 +98,12 @@ new SearchRequest<Project>
         },
         new GeoDistanceSort
         {
-            Field = "location",
+            Field = "locationPoint",
             Order = SortOrder.Ascending,
             DistanceType = GeoDistanceType.Arc,
-            GeoUnit = DistanceUnit.Centimeters,
+            Unit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
-            Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
+            Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
         },
         new ScriptSort
         {
@@ -109,7 +113,7 @@ new SearchRequest<Project>
             {
                 Params = new Dictionary<string, object>
                 {
-                    {"factor", 1.1}
+                    { "factor", 1.1 }
                 }
             }
         }
@@ -147,9 +151,11 @@ new SearchRequest<Project>
         "missing": "_last",
         "order": "desc",
         "mode": "avg",
-        "nested_path": "tags",
-        "nested_filter": {
-          "match_all": {}
+        "nested": {
+          "path": "tags",
+          "filter": {
+            "match_all": {}
+          }
         },
         "unmapped_type": "date"
       }
@@ -162,7 +168,7 @@ new SearchRequest<Project>
     },
     {
       "_geo_distance": {
-        "location": [
+        "locationPoint": [
           {
             "lat": 70.0,
             "lon": -70.0
@@ -229,7 +235,7 @@ new SearchRequest<Project>
 {
     Sort = new List<ISort>
     {
-        new SortField
+        new FieldSort
         {
             Field = Field<Project>(p => p.Tags.First().Added),
             Order = SortOrder.Descending,

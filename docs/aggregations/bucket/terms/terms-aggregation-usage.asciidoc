@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Terms/TermsAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Terms/TermsAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -62,7 +62,7 @@ new TermsAggregation("states")
     },
     Meta = new Dictionary<string, object>
     {
-        {"foo", "bar"}
+        { "foo", "bar" }
     }
 }
 ----
@@ -167,7 +167,7 @@ new TermsAggregation("states")
     },
     Meta = new Dictionary<string, object>
     {
-        {"foo", "bar"}
+        { "foo", "bar" }
     }
 }
 ----
@@ -239,7 +239,7 @@ a => a
     .ShardSize(100)
     .ExecutionHint(TermsAggregationExecutionHint.Map)
     .Missing("n/a")
-    .Include(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()})
+    .Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
     .Order(o => o
         .KeyAscending()
         .CountDescending()
@@ -262,7 +262,7 @@ new TermsAggregation("states")
     ShardSize = 100,
     ExecutionHint = TermsAggregationExecutionHint.Map,
     Missing = "n/a",
-    Include = new TermsInclude(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()}),
+    Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
     Order = new List<TermsOrder>
     {
         TermsOrder.KeyAscending,
@@ -270,7 +270,7 @@ new TermsAggregation("states")
     },
     Meta = new Dictionary<string, object>
     {
-        {"foo", "bar"}
+        { "foo", "bar" }
     }
 }
 ----
@@ -346,7 +346,7 @@ Partitioning is available only in Elasticsearch 5.2.0+
 a => a
 .Terms("commits", st => st
     .Field(p => p.NumberOfCommits)
-    .Include(partition: 0, numberOfPartitions: 10)
+    .Include(0, 10)
     .Size(5)
 )
 ----
@@ -357,7 +357,7 @@ a => a
 ----
 new TermsAggregation("commits")
 {
-    Field = Infer.Field<Project>(p => p.NumberOfCommits),
+    Field = Field<Project>(p => p.NumberOfCommits),
     Include = new TermsInclude(0, 10),
     Size = 5
 }
@@ -490,7 +490,7 @@ new TermsAggregation("commits")
     Field = Field<Project>(p => p.NumberOfCommits),
     Aggregations = new TermsAggregation("state")
     {
-        Meta = new Dictionary<string, object> {{"x", "y"}},
+        Meta = new Dictionary<string, object> { { "x", "y" } },
         Field = Field<Project>(p => p.State),
     }
 }

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/LowLevel/GettingStarted.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/LowLevel/GettingStarted.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -99,15 +99,15 @@ var person = new Person
     LastName = "Laarman"
 };
 
-var indexResponse = lowlevelClient.Index<BytesResponse>("people", "person", "1", PostData.Serializable(person)); <1>
-byte[] responseBytes = indexResponse.Body;
+var ndexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); <1>
+byte[] responseBytes = ndexResponse.Body;
 
-var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "person", "1", PostData.Serializable(person)); <2>
+var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "1", PostData.Serializable(person)); <2>
 string responseString = asyncIndexResponse.Body;
 ----
-<1> synchronous method that returns an `IIndexResponse`
+<1> synchronous method that returns an `IndexResponse`
 
-<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+<2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 
 NOTE: All available methods within Elasticsearch.Net are exposed as both synchronous and asynchronous versions,
 with the latter using the idiomatic *Async suffix for the method name.
@@ -124,8 +124,8 @@ var person = new
     LastName = "Laarman"
 };
 
-var indexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "person", "1", PostData.Serializable(person));
-byte[] responseStream = indexResponse.Body;
+var ndexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "1", PostData.Serializable(person));
+byte[] responseStream = ndexResponse.Body;
 ----
 
 For API's that take a body you can send the body as an (anonymous) object, byte[], string, stream. Additionally for API's that
@@ -144,17 +144,17 @@ If you need to index many documents, Elasticsearch has a {ref_current}/docs-bulk
 [source,csharp]
 ----
 var people = new object[]
-            {
-                new { index = new { _index = "people", _type = "person", _id = "1"  }},
-                new { FirstName = "Martijn", LastName = "Laarman" },
-                new { index = new { _index = "people", _type = "person", _id = "2"  }},
-                new { FirstName = "Greg", LastName = "Marzouka" },
-                new { index = new { _index = "people", _type = "person", _id = "3"  }},
-                new { FirstName = "Russ", LastName = "Cam" },
-            };
+{
+    new { index = new { _index = "people", _type = "person", _id = "1"  }},
+    new { FirstName = "Martijn", LastName = "Laarman" },
+    new { index = new { _index = "people", _type = "person", _id = "2"  }},
+    new { FirstName = "Greg", LastName = "Marzouka" },
+    new { index = new { _index = "people", _type = "person", _id = "3"  }},
+    new { FirstName = "Russ", LastName = "Cam" },
+};
 
-var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
-string responseStream = indexResponse.Body;
+var ndexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
+string responseStream = ndexResponse.Body;
 ----
 
 The client will serialize each item seperately and join items up using the `\n` character as required by the Bulk API. Refer to the
@@ -169,7 +169,7 @@ The Elasticsearch Query DSL can be expressed using an anonymous type within the 
 
 [source,csharp]
 ----
-var searchResponse = lowlevelClient.Search<StringResponse>("people", "person", PostData.Serializable(new
+var searchResponse = lowlevelClient.Search<StringResponse>("people", PostData.Serializable(new
 {
     from = 0,
     size = 10,
@@ -195,7 +195,7 @@ Strings can also be used to express the request
 
 [source,csharp]
 ----
-var searchResponse = lowlevelClient.Search<BytesResponse>("people", "person", @"
+var searchResponse = lowlevelClient.Search<BytesResponse>("people", @"
 {
     ""from"": 0,
     ""size"": 10,
@@ -236,7 +236,7 @@ is successful
 
 [source,csharp]
 ----
-var searchResponse = lowlevelClient.Search<BytesResponse>("people", "person", PostData.Serializable(new { match_all = new {} }));
+var searchResponse = lowlevelClient.Search<BytesResponse>("people", PostData.Serializable(new { match_all = new {} }));
 
 var success = searchResponse.Success; <1>
 var successOrKnownError = searchResponse.SuccessOrKnownError; <2>

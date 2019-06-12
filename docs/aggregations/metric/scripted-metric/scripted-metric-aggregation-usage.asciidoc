@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Metric/ScriptedMetric/ScriptedMetricAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Metric/ScriptedMetric/ScriptedMetricAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -15,28 +15,16 @@ please modify the original csharp file found at the link and submit the PR with 
 [[scripted-metric-aggregation-usage]]
 === Scripted Metric Aggregation Usage
 
-[source,csharp]
-----
-private class Scripted
-{
-    public string Language { get; set; }
-    public string Combine { get; set; }
-    public string Reduce { get; set; }
-    public string Map { get; set; }
-    public string Init { get; set; }
-}
-----
-
 ==== Fluent DSL example
 
 [source,csharp]
 ----
 a => a
 .ScriptedMetric("sum_the_hard_way", sm => sm
-    .InitScript(ss => ss.Source(Script.Init))
-    .MapScript(ss => ss.Source(Script.Map))
-    .CombineScript(ss => ss.Source(Script.Combine))
-    .ReduceScript(ss => ss.Source(Script.Reduce))
+    .InitScript(ss => ss.Source(_script.Init))
+    .MapScript(ss => ss.Source(_script.Map))
+    .CombineScript(ss => ss.Source(_script.Combine))
+    .ReduceScript(ss => ss.Source(_script.Reduce))
 )
 ----
 
@@ -46,33 +34,10 @@ a => a
 ----
 new ScriptedMetricAggregation("sum_the_hard_way")
 {
-    InitScript = new InlineScript(Script.Init),
-    MapScript = new InlineScript(Script.Map),
-    CombineScript = new InlineScript(Script.Combine),
-    ReduceScript = new InlineScript(Script.Reduce)
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "sum_the_hard_way": {
-    "scripted_metric": {
-      "init_script": {
-        "source": "params._agg.commits = []"
-      },
-      "map_script": {
-        "source": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }"
-      },
-      "combine_script": {
-        "source": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum"
-      },
-      "reduce_script": {
-        "source": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum"
-      }
-    }
-  }
+    InitScript = new InlineScript(_script.Init),
+    MapScript = new InlineScript(_script.Map),
+    CombineScript = new InlineScript(_script.Combine),
+    ReduceScript = new InlineScript(_script.Reduce)
 }
 ----
 
@@ -86,21 +51,35 @@ sumTheHardWay.Should().NotBeNull();
 sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
 ----
 
+[source,csharp]
+----
+private class Scripted
+{
+    public string Combine { get; set; }
+    public string Init { get; set; }
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
+    public string Language { get; set; }
+    public string Map { get; set; }
+    public string Reduce { get; set; }
+}
+----
+
 ==== Fluent DSL example
 
 [source,csharp]
 ----
 a => a
 .ScriptedMetric("by_state_total", sm => sm
-    .InitScript(ss => ss.Source(First.Init).Lang(First.Language))
-    .MapScript(ss => ss.Source(First.Map).Lang(First.Language))
-    .ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
+    .InitScript(ss => ss.Source(_first.Init).Lang(_first.Language))
+    .CombineScript(ss => ss.Source(_first.Combine).Lang(_first.Language))
+    .MapScript(ss => ss.Source(_first.Map).Lang(_first.Language))
+    .ReduceScript(ss => ss.Source(_first.Reduce).Lang(_first.Language))
 )
 .ScriptedMetric("total_commits", sm => sm
-    .InitScript(ss => ss.Source(Second.Init).Lang(Second.Language))
-    .MapScript(ss => ss.Source(Second.Map).Lang(Second.Language))
-    .CombineScript(ss => ss.Source(Second.Combine).Lang(Second.Language))
-    .ReduceScript(ss => ss.Source(Second.Reduce).Lang(Second.Language))
+    .InitScript(ss => ss.Source(_second.Init).Lang(_second.Language))
+    .MapScript(ss => ss.Source(_second.Map).Lang(_second.Language))
+    .CombineScript(ss => ss.Source(_second.Combine).Lang(_second.Language))
+    .ReduceScript(ss => ss.Source(_second.Reduce).Lang(_second.Language))
 )
 ----
 
@@ -110,59 +89,17 @@ a => a
 ----
 new ScriptedMetricAggregation("by_state_total")
 {
-    InitScript = new InlineScript(First.Init) {Lang = First.Language},
-    MapScript = new InlineScript(First.Map) {Lang = First.Language},
-    ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+    InitScript = new InlineScript(_first.Init) { Lang = _first.Language },
+    CombineScript = new InlineScript(_first.Combine) { Lang = _first.Language },
+    MapScript = new InlineScript(_first.Map) { Lang = _first.Language },
+    ReduceScript = new InlineScript(_first.Reduce) { Lang = _first.Language }
 }
 && new ScriptedMetricAggregation("total_commits")
 {
-    InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-    MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-    CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-    ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "by_state_total": {
-    "scripted_metric": {
-      "init_script": {
-        "source": "params._agg.map = [:]",
-        "lang": "painless"
-      },
-      "map_script": {
-        "source": "if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;",
-        "lang": "painless"
-      },
-      "reduce_script": {
-        "source": "def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;",
-        "lang": "painless"
-      }
-    }
-  },
-  "total_commits": {
-    "scripted_metric": {
-      "init_script": {
-        "source": "params._agg.commits = []",
-        "lang": "painless"
-      },
-      "map_script": {
-        "source": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
-        "lang": "painless"
-      },
-      "combine_script": {
-        "source": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
-        "lang": "painless"
-      },
-      "reduce_script": {
-        "source": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
-        "lang": "painless"
-      }
-    }
-  }
+    InitScript = new InlineScript(_second.Init) { Lang = _second.Language },
+    MapScript = new InlineScript(_second.Map) { Lang = _second.Language },
+    CombineScript = new InlineScript(_second.Combine) { Lang = _second.Language },
+    ReduceScript = new InlineScript(_second.Reduce) { Lang = _second.Language }
 }
 ----
 

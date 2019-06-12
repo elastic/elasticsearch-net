@@ -1,0 +1,72 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Span/Containing/SpanContainingQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[span-containing-query-usage]]
+=== Span Containing Query Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.SpanContaining(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Little(i => i
+        .SpanTerm(st => st.Field("field1").Value("hoya"))
+    )
+    .Big(e => e
+        .SpanTerm(st => st.Field("field1").Value("hoya2"))
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new SpanContainingQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
+    Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_containing": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "little": {
+      "span_term": {
+        "field1": {
+          "value": "hoya"
+        }
+      }
+    },
+    "big": {
+      "span_term": {
+        "field1": {
+          "value": "hoya2"
+        }
+      }
+    }
+  }
+}
+----
+

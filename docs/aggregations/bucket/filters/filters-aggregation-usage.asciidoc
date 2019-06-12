@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Filters/FiltersAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Filters/FiltersAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -53,12 +53,12 @@ new FiltersAggregation("projects_by_state")
     OtherBucketKey = "other_states_of_being",
     Filters = new NamedFiltersContainer
     {
-        {"belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp)},
-        {"stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable)},
-        {"very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)}
+        { "belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp) },
+        { "stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable) },
+        { "very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive) }
     },
     Aggregations =
-        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
+        new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 }
 ----
 
@@ -107,7 +107,7 @@ new FiltersAggregation("projects_by_state")
 
 ==== Handling Responses
 
-The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
 so we can fetch our aggregation results easily in the correct type.
 <<handling-aggregate-response, Be sure to read more about these helper methods>>
 
@@ -170,7 +170,7 @@ new FiltersAggregation("projects_by_state")
         Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)
     },
     Aggregations =
-        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
+        new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 }
 ----
 
@@ -218,7 +218,7 @@ new FiltersAggregation("projects_by_state")
 
 ==== Handling Responses
 
-The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
 so we can fetch our aggregation results easily in the correct type.
 <<handling-aggregate-response, Be sure to read more about these helper methods>>
 
@@ -231,10 +231,7 @@ filterAgg.Should().NotBeNull();
 var results = filterAgg.AnonymousBuckets();
 results.Count.Should().Be(4);
 
-foreach (var singleBucket in results.Take(3))
-{
-    singleBucket.DocCount.Should().BeGreaterThan(0);
-}
+foreach (var singleBucket in results.Take(3)) singleBucket.DocCount.Should().BeGreaterThan(0);
 
 results.Last().DocCount.Should().Be(0); <1>
 ----

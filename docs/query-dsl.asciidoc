@@ -47,6 +47,8 @@ NEST exposes all of the full text queries available in Elasticsearch
 
 * <<common-terms-usage,Common Terms Usage>>
 
+* <<intervals-usage,Intervals Usage>>
+
 * <<match-usage,Match Usage>>
 
 * <<match-phrase-usage,Match Phrase Usage>>
@@ -64,6 +66,8 @@ See the Elasticsearch documentation on {ref_current}/full-text-queries.html[Full
 :includes-from-dirs: query-dsl/full-text
 
 include::query-dsl/full-text/common-terms/common-terms-usage.asciidoc[]
+
+include::query-dsl/full-text/intervals/intervals-usage.asciidoc[]
 
 include::query-dsl/full-text/match/match-usage.asciidoc[]
 
@@ -299,6 +303,8 @@ Span queries cannot be mixed with non-span queries (with the exception of the sp
 
 * <<span-containing-query-usage,Span Containing Query Usage>>
 
+* <<span-containing-query-usage,Span Containing Query Usage>>
+
 * <<span-field-masking-usage,Span Field Masking Usage>>
 
 * <<span-first-query-usage,Span First Query Usage>>
@@ -320,6 +326,8 @@ See the Elasticsearch documentation on {ref_current}/span-queries.html[Span quer
 :includes-from-dirs: query-dsl/span
 
 include::query-dsl/span/container/span-containing-query-usage.asciidoc[]
+
+include::query-dsl/span/containing/span-containing-query-usage.asciidoc[]
 
 include::query-dsl/span/field-masking/span-field-masking-usage.asciidoc[]
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/Script/ScriptQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Specialized/Script/ScriptQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -27,8 +27,10 @@ q
 .Script(sn => sn
     .Name("named_query")
     .Boost(1.1)
-    .Source(_templateString)
-    .Params(p=>p.Add("param1", 50))
+    .Script(s => s
+        .Source(_templateString)
+        .Params(p => p.Add("param1", 50))
+    )
 )
 ----
 
@@ -40,11 +42,13 @@ new ScriptQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Source = _templateString,
-    Params = new Dictionary<string, object>
+    Script = new InlineScript(_templateString)
     {
-        { "param1", 50 }
-    }
+        Params = new Dictionary<string, object>
+        {
+            { "param1", 50 }
+        }
+    },
 }
 ----
 
@@ -56,7 +60,7 @@ new ScriptQuery
     "_name": "named_query",
     "boost": 1.1,
     "script": {
-      "source": "doc['numberOfCommits'].value > param1",
+      "source": "doc['numberOfCommits'].value > params.param1",
       "params": {
         "param1": 50
       }

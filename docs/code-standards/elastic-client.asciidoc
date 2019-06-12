@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/CodeStandards/ElasticClient.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/CodeStandards/ElasticClient.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -20,7 +20,7 @@ please modify the original csharp file found at the link and submit the PR with 
 var fluentParametersNotNamedSelector =
     from m in typeof(IElasticClient).GetMethods()
     from p in m.GetParameters()
-    where p.ParameterType.BaseType() == typeof(MulticastDelegate)
+    where p.ParameterType.BaseType == typeof(MulticastDelegate)
     where !p.Name.Equals("selector") && !p.Name.Equals("mapper")
     select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' or 'mapper' but has a name of '{p.Name}'";
 
@@ -76,7 +76,7 @@ var methodGroups =
     from methodInfo in typeof(IElasticClient).GetMethods()
     where
         typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType) ||
-        (methodInfo.ReturnType.IsGenericType()
+        (methodInfo.ReturnType.IsGenericType
          && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
          && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
     where !methodInfo.Name.Contains("CreateDocument")
@@ -121,7 +121,7 @@ public MethodWithRequestParameter(MethodInfo methodInfo)
         ? methodInfo.Name.Substring(0, methodInfo.Name.Length - "Async".Length)
         : methodInfo.Name;
 
-    IsAsync = methodInfo.ReturnType.IsGenericType() &&
+    IsAsync = methodInfo.ReturnType.IsGenericType &&
               methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
 
     MethodInfo = methodInfo;
@@ -137,7 +137,7 @@ public MethodWithRequestParameter(MethodInfo methodInfo)
     else
     {
         Parameter = methodInfo.GetParameters()
-            .First(p => p.ParameterType.BaseType() == typeof(MulticastDelegate));
+            .First(p => p.ParameterType.BaseType == typeof(MulticastDelegate));
         MethodType = ClientMethodType.Fluent;
     }
 }

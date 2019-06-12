@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/Percolate/PercolateQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Specialized/Percolate/PercolateQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -112,7 +112,6 @@ See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.h
 ----
 q
 .Percolate(p => p
-    .Type<Project>()
     .Index<Project>()
     .Id(Project.Instance.Name)
     .Routing(Project.Instance.Name)
@@ -126,7 +125,6 @@ q
 ----
 new PercolateQuery
 {
-    Type = typeof(Project),
     Index = IndexName.From<Project>(),
     Id = Project.Instance.Name,
     Routing = Project.Instance.Name,
@@ -186,7 +184,7 @@ q
 ----
 new PercolateQuery
 {
-    Documents = new [] { Project.Instance, Project.Instance, Project.Instance },
+    Documents = new[] { Project.Instance, Project.Instance, Project.Instance },
     Field = Infer.Field<ProjectPercolation>(f => f.Query)
 }
 ----
@@ -262,7 +260,7 @@ response.Fields.Count.Should().Be(1);
 
 var field = response.Fields.ElementAt(0);
 var values = field.ValuesOf<int>("_percolator_document_slot");
-values.Should().Contain(new[] {0, 1, 2});
+values.Should().Contain(new[] { 0, 1, 2 });
 
 var match = response.Documents.First();
 match.Id.Should().Be(PercolatorId);

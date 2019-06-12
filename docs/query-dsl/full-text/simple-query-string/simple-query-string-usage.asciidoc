@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/SimpleQueryString/SimpleQueryStringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/SimpleQueryString/SimpleQueryStringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,11 +23,11 @@ q
 .SimpleQueryString(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Fields(f => f.Field(p => p.Description).Field("myOtherField"))
     .Query("hello world")
     .Analyzer("standard")
     .DefaultOperator(Operator.Or)
-    .Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
+    .Flags(SimpleQueryStringFlags.And | SimpleQueryStringFlags.Near)
     .Lenient()
     .AnalyzeWildcard()
     .MinimumShouldMatch("30%")
@@ -46,11 +46,11 @@ new SimpleQueryStringQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Fields = Field<Project>(p => p.Description).And("myOtherField"),
     Query = "hello world",
     Analyzer = "standard",
     DefaultOperator = Operator.Or,
-    Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
+    Flags = SimpleQueryStringFlags.And | SimpleQueryStringFlags.Near,
     Lenient = true,
     AnalyzeWildcard = true,
     MinimumShouldMatch = "30%",

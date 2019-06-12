@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Analysis/TestingAnalyzers.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Analysis/TestingAnalyzers.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -25,7 +25,7 @@ a piece of text
 
 [source,csharp]
 ----
-var analyzeResponse = client.Analyze(a => a
+var analyzeResponse = client.Indices.Analyze(a => a
     .Analyzer("standard") <1>
     .Text("F# is THE SUPERIOR language :)")
 );
@@ -77,7 +77,7 @@ This returns the following response from Elasticsearch
 }
 ----
 
-which is deserialized to an instance of `IAnalyzeResponse` by NEST
+which is deserialized to an instance of `AnalyzeResponse` by NEST
 that we can work with
 
 [source,csharp]
@@ -106,7 +106,7 @@ an analysis configuration
 
 [source,csharp]
 ----
-var analyzeResponse = client.Analyze(a => a
+var analyzeResponse = client.Indices.Analyze(a => a
     .Tokenizer("standard")
     .Filter("lowercase", "stop")
     .Text("F# is THE SUPERIOR language :)")
@@ -161,14 +161,14 @@ we need to close the index
 
 [source,csharp]
 ----
-client.CloseIndex("analysis-index");
+client.Indices.Close("analysis-index");
 ----
 
 Now, we can update the settings to add the analyzer
 
 [source,csharp]
 ----
-client.UpdateIndexSettings("analysis-index", i => i
+client.Indices.UpdateSettings("analysis-index", i => i
     .IndexSettings(s => s
         .Analysis(a => a
             .CharFilters(cf => cf
@@ -200,10 +200,9 @@ status of the index to become green
 
 [source,csharp]
 ----
-client.OpenIndex("analysis-index");
-client.ClusterHealth(h => h
+client.Indices.Open("analysis-index");
+client.Cluster.Health("analysis-index",h => h
     .WaitForStatus(WaitForStatus.Green)
-    .Index("analysis-index")
     .Timeout(TimeSpan.FromSeconds(5))
 );
 ----
@@ -212,7 +211,7 @@ With the index open and ready, let's test the analyzer
 
 [source,csharp]
 ----
-var analyzeResponse = client.Analyze(a => a
+var analyzeResponse = client.Indices.Analyze(a => a
     .Index("analysis-index") <1>
     .Analyzer("my_analyzer")
     .Text("F# is THE SUPERIOR language :)")
@@ -267,7 +266,7 @@ Given an index created with the following settings and mappings
 
 [source,csharp]
 ----
-client.CreateIndex("project-index", i => i
+client.Indices.Create("project-index", i => i
     .Settings(s => s
         .Analysis(a => a
             .CharFilters(cf => cf
@@ -291,13 +290,11 @@ client.CreateIndex("project-index", i => i
 
         )
     )
-    .Mappings(m => m
-        .Map<Project>(mm => mm
-            .Properties(p => p
-                .Text(t => t
-                    .Name(n => n.Name)
-                    .Analyzer("my_analyzer")
-                )
+    .Map<Project>(mm => mm
+        .Properties(p => p
+            .Text(t => t
+                .Name(n => n.Name)
+                .Analyzer("my_analyzer")
             )
         )
     )
@@ -308,9 +305,9 @@ The analyzer on the `name` field can be tested with
 
 [source,csharp]
 ----
-var analyzeResponse = client.Analyze(a => a
+var analyzeResponse = client.Indices.Analyze(a => a
     .Index("project-index")
-    .Field<Project>(f => f.Name)
+    .Field<Project, string>(f => f.Name)
     .Text("F# is THE SUPERIOR language :)")
 );
 ----

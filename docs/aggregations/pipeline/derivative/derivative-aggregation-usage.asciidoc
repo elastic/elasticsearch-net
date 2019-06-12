@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,33 +7,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/Derivative/DerivativeAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/Derivative/DerivativeAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
 [[derivative-aggregation-usage]]
 === Derivative Aggregation Usage
-
-==== Handling Responses
-
-[source,csharp]
-----
-response.ShouldBeValid();
-
-var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
-projectsPerMonth.Should().NotBeNull();
-projectsPerMonth.Buckets.Should().NotBeNull();
-projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-
-// derivative not calculated for the first bucket
-foreach (var item in projectsPerMonth.Buckets.Skip(1))
-{
-    var commitsDerivative = item.Derivative("commits_derivative");
-    commitsDerivative.Should().NotBeNull();
-    commitsDerivative.Value.Should().NotBe(null);
-}
-----
 
 ==== Fluent DSL example
 
@@ -90,6 +70,26 @@ new DateHistogramAggregation("projects_started_per_month")
       }
     }
   }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+// derivative not calculated for the first bucket
+foreach (var item in projectsPerMonth.Buckets.Skip(1))
+{
+    var commitsDerivative = item.Derivative("commits_derivative");
+    commitsDerivative.Should().NotBeNull();
+    commitsDerivative.Value.Should().NotBe(null);
 }
 ----
 

@@ -70,7 +70,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				.Interval(DateInterval.Month)
 				.MinimumDocumentCount(2)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
-				//.Format("date_optional_time")
 				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 				.Order(HistogramOrder.CountAscending)
 				.Missing(FixedDate)
@@ -91,7 +90,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				Interval = DateInterval.Month,
 				MinimumDocumentCount = 2,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
-				//Format = "date_optional_time",
 				ExtendedBounds = new ExtendedBounds<DateMath>
 				{
 					Minimum = FixedDate.AddYears(-1),

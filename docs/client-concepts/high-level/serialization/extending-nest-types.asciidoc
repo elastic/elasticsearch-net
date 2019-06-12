@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Serialization/ExtendingNestTypes.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Serialization/ExtendingNestTypes.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -48,12 +48,10 @@ Now that we have our own `IProperty` implementation we can add it to our propert
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<Project>(m => m
-            .Properties(props => props
-                .Custom(new MyPluginProperty("fieldName", "dutch"))
-            )
+var createIndexResponse = _client.Indices.Create("myindex", c => c
+    .Map<Project>(m => m
+        .Properties(props => props
+            .Custom(new MyPluginProperty("fieldName", "dutch"))
         )
     )
 );
@@ -65,13 +63,11 @@ which will serialize to the following JSON request
 ----
 {
   "mappings": {
-    "doc": {
-      "properties": {
-        "fieldName": {
-          "type": "my_plugin_property",
-          "language": "dutch",
-          "numeric": true
-        }
+    "properties": {
+      "fieldName": {
+        "type": "my_plugin_property",
+        "language": "dutch",
+        "numeric": true
       }
     }
   }

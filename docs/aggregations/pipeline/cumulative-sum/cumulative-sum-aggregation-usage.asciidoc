@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,32 +7,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/CumulativeSum/CumulativeSumAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/CumulativeSum/CumulativeSumAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
 [[cumulative-sum-aggregation-usage]]
 === Cumulative Sum Aggregation Usage
-
-==== Handling Responses
-
-[source,csharp]
-----
-response.ShouldBeValid();
-
-var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
-projectsPerMonth.Should().NotBeNull();
-projectsPerMonth.Buckets.Should().NotBeNull();
-projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-
-foreach (var item in projectsPerMonth.Buckets)
-{
-    var commitsDerivative = item.Derivative("cumulative_commits");
-    commitsDerivative.Should().NotBeNull();
-    commitsDerivative.Value.Should().NotBe(null);
-}
-----
 
 ==== Fluent DSL example
 
@@ -89,6 +70,25 @@ new DateHistogramAggregation("projects_started_per_month")
       }
     }
   }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in projectsPerMonth.Buckets)
+{
+    var commitsDerivative = item.Derivative("cumulative_commits");
+    commitsDerivative.Should().NotBeNull();
+    commitsDerivative.Value.Should().NotBe(null);
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/IgnoringProperties.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/IgnoringProperties.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -34,7 +34,7 @@ json serializer specific attribute  to ignore the property either `IgnorePropert
 
 [source,csharp]
 ----
-[ElasticsearchType(Name = "company")]
+[ElasticsearchType(RelationName = "company")]
 public class CompanyWithAttributesAndPropertiesToIgnore
 {
     public string Name { get; set; }
@@ -61,17 +61,15 @@ var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
 
 var client = new ElasticClient(connectionSettings);
 
-var createIndexResponse = client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
-            .AutoMap()
-        )
+var createIndexResponse = client.Indices.Create("myindex", c => c
+    .Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+        .AutoMap()
     )
 );
 ----
 <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
 
-<2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
+<2> we disable direct streaming here to capture the request and response bytes. In a production application, you would likely not call this as it adds overhead to each call.
 
 The JSON output for the mapping does not contain the ignored properties
 
@@ -79,15 +77,13 @@ The JSON output for the mapping does not contain the ignored properties
 ----
 {
   "mappings": {
-    "company": {
-      "properties": {
-        "name": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
-            }
+    "properties": {
+      "name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
           }
         }
       }
@@ -121,11 +117,9 @@ var connectionSettings = new ConnectionSettings(new InMemoryConnection())
 
 var client = new ElasticClient(connectionSettings);
 
-var createIndexResponse = client.CreateIndex("myindex", c => c
-        .Mappings(ms => ms
-            .Map<Child>(m => m
-                .AutoMap()
-            )
+var createIndexResponse = client.Indices.Create("myindex", c => c
+        .Map<Child>(m => m
+            .AutoMap()
         )
     );
 ----
@@ -136,20 +130,18 @@ The property `IgnoreMe` has been ignored for the child mapping
 ----
 {
   "mappings": {
-    "child": {
-      "properties": {
-        "id": {
-          "type": "integer"
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "desc": {
+        "fields": {
+          "keyword": {
+            "ignore_above": 256,
+            "type": "keyword"
+          }
         },
-        "desc": {
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          },
-          "type": "text"
-        }
+        "type": "text"
       }
     }
   }

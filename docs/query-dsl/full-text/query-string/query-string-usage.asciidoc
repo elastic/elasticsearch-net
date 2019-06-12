@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/QueryString/QueryStringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/QueryString/QueryStringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,12 +23,11 @@ q
 .QueryString(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Fields(f => f.Field(p => p.Description).Field("myOtherField"))
     .Query("hello world")
-    .DefaultField(p=>p.Description)
     .DefaultOperator(Operator.Or)
     .Analyzer("standard")
-    .QuoteAnalyzer("quote-an")
+    .QuoteAnalyzer("keyword")
     .AllowLeadingWildcard()
     .MaximumDeterminizedStates(2)
     .Escape()
@@ -52,14 +51,13 @@ q
 ----
 new QueryStringQuery
 {
-    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Fields = Field<Project>(p => p.Description).And("myOtherField"),
     Boost = 1.1,
     Name = "named_query",
     Query = "hello world",
-    DefaultField = Field<Project>(p=>p.Description),
     DefaultOperator = Operator.Or,
     Analyzer = "standard",
-    QuoteAnalyzer = "quote-an",
+    QuoteAnalyzer = "keyword",
     AllowLeadingWildcard = true,
     MaximumDeterminizedStates = 2,
     Escape = true,
@@ -85,10 +83,9 @@ new QueryStringQuery
     "_name": "named_query",
     "boost": 1.1,
     "query": "hello world",
-    "default_field": "description",
     "default_operator": "or",
     "analyzer": "standard",
-    "quote_analyzer": "quote-an",
+    "quote_analyzer": "keyword",
     "allow_leading_wildcard": true,
     "fuzzy_max_expansions": 3,
     "fuzziness": "AUTO",

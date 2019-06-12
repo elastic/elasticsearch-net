@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/Troubleshooting/LoggingWithFiddler.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/Troubleshooting/LoggingWithFiddler.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[logging-with-fiddler]]
 === Logging with Fiddler
 
-A web debugging proxy such as http://www.telerik.com/fiddler[Fiddler] is a useful way to capture HTTP traffic 
+A web debugging proxy such as http://www.telerik.com/fiddler[Fiddler] is a useful way to capture HTTP traffic
 from a machine, particularly whilst developing against a local Elasticsearch cluster.
 
 ==== Capturing traffic to a remote cluster
@@ -27,7 +27,7 @@ image::capture-requests-remotehost.png[Capturing requests to a remote host]
 
 ==== Capturing traffic to a local cluster
 
-The .NET Framework is hardcoded not to send requests for `localhost` through any proxies and as a proxy 
+The .NET Framework is hardcoded not to send requests for `localhost` through any proxies and as a proxy
 Fiddler will not receive such traffic.
 
 This is easily circumvented by using `ipv4.fiddler` as the hostname instead of `localhost`
@@ -44,12 +44,12 @@ var client = new ElasticClient(connectionSettings);
 ----
 <1> prettify json requests and responses to make them easier to read in Fiddler
 
-With Fiddler running, the requests and responses will now be captured and can be inspected in the 
+With Fiddler running, the requests and responses will now be captured and can be inspected in the
 Inspectors tab
 
 image::inspect-requests.png[Inspecting requests and responses]
 
-As before, you may also want to filter traffic to only show requests to `ipv4.fiddler` on the port 
+As before, you may also want to filter traffic to only show requests to `ipv4.fiddler` on the port
 on which you are running Elasticsearch.
 
 image::capture-requests-localhost.png[Capturing requests to localhost]

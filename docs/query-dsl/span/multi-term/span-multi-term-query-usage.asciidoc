@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Span/MultiTerm/SpanMultiTermQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Span/MultiTerm/SpanMultiTermQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,8 +23,8 @@ q
 .SpanMultiTerm(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Match(sq=>sq
-        .Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
+    .Match(sq => sq
+        .Prefix(pr => pr.Field(p => p.Description).Value("pre-*"))
     )
 )
 ----
@@ -37,7 +37,7 @@ new SpanMultiTermQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Match = new PrefixQuery { Field = "name", Value = "pre-*" }
+    Match = new PrefixQuery { Field = Infer.Field<Project>(f => f.Description), Value = "pre-*" }
 }
 ----
 
@@ -50,7 +50,7 @@ new SpanMultiTermQuery
     "boost": 1.1,
     "match": {
       "prefix": {
-        "name": {
+        "description": {
           "value": "pre-*"
         }
       }

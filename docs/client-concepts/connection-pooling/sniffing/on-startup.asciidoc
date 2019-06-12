@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sniffing/OnStartup.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sniffing/OnStartup.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -25,7 +25,7 @@ sniff to fail on all nodes _*except*_ 9202
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202).Succeeds(Always))
@@ -67,7 +67,7 @@ await audit.TraceCall(
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202).Succeeds(Always))
@@ -102,10 +102,10 @@ is used for subsequent client requests
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
-    .Sniff(s => s.OnPort(9202).Succeeds(Always, Framework.Cluster.Nodes(8, startFrom: 9204))) <1>
+    .Sniff(s => s.OnPort(9202).Succeeds(Always, VirtualClusterWith.Nodes(8, startFrom: 9204))) <1>
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -129,7 +129,7 @@ Sniffing prefers to run on master eligible nodes
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(new[] {
         new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
         new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
@@ -152,7 +152,7 @@ although it will fail over to non-master eligible nodes when sniffing fails on m
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(new[] {
         new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
         new Node(new Uri("http://localhost:9201")) { MasterEligible = true },

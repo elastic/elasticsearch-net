@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Search/Collapsing/FieldCollapseUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Search/Collapsing/FieldCollapseUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -73,14 +73,15 @@ new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 [source,csharp]
 ----
 var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
 response.Hits.Count.Should().Be(numberOfStates);
 foreach (var hit in response.Hits)
 {
     var name = nameof(StateOfBeing).ToLowerInvariant();
     hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
-    var innherHits = hit.InnerHits[name];
-    innherHits.Hits.Total.Should().BeGreaterThan(0);
+    var innerHits = hit.InnerHits[name];
+    innerHits.Hits.Total.Should().NotBeNull();
+    innerHits.Hits.Total.Value.Should().BeGreaterThan(0);
 }
 ----
 
@@ -89,18 +90,18 @@ foreach (var hit in response.Hits)
 [source,csharp]
 ----
 s => s
-.Source(source=>source.ExcludeAll())
+.Source(source => source.ExcludeAll())
 .Index(DefaultSeeder.ProjectsAliasFilter)
 .Collapse(c => c
     .Field(f => f.State)
     .MaxConcurrentGroupSearches(1000)
     .InnerHits(i => i
-        .Source(source=>source.ExcludeAll())
+        .Source(source => source.ExcludeAll())
         .Name(nameof(StateOfBeing).ToLowerInvariant())
         .Size(5)
         .From(1)
         .Collapse(c2 => c2
-            .Field(p=>p.Name)
+            .Field(p => p.Name)
         )
     )
 )
@@ -125,7 +126,7 @@ new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
             From = 1,
             Collapse = new FieldCollapse
             {
-                Field = Field<Project>(p=>p.Name)
+                Field = Field<Project>(p => p.Name)
             }
         }
     }
@@ -166,19 +167,22 @@ new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 [source,csharp]
 ----
 var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
 response.Hits.Count.Should().Be(numberOfStates);
 foreach (var hit in response.Hits)
 {
     var name = nameof(StateOfBeing).ToLowerInvariant();
     hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
     var innerHits = hit.InnerHits[name];
-    innerHits.Hits.Total.Should().BeGreaterThan(0);
+    innerHits.Hits.Total.Should().NotBeNull();
+    innerHits.Hits.Total.Value.Should().BeGreaterThan(0);
+
     var i = 0;
     foreach (var innerHit in innerHits.Hits.Hits)
     {
         i++;
-        innerHit.Fields.Should().NotBeEmpty()
+        innerHit.Fields.Should()
+            .NotBeEmpty()
             .And.ContainKey("name");
     }
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sniffing/OnConnectionFailure.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sniffing/OnConnectionFailure.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -27,16 +27,16 @@ a search on 9201. This should cause a sniff to be kicked off.
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(5)
     .MasterEligible(9202, 9203, 9204)
     .ClientCalls(r => r.SucceedAlways())
     .ClientCalls(r => r.OnPort(9201).Fails(Once)) <1>
-    .Sniff(p => p.SucceedAlways(Framework.Cluster
+    .Sniff(p => p.SucceedAlways(VirtualClusterWith
         .Nodes(3)
         .MasterEligible(9200, 9202)
         .ClientCalls(r => r.OnPort(9201).Fails(Once))
-        .Sniff(s => s.SucceedAlways(Framework.Cluster <2>
+        .Sniff(s => s.SucceedAlways(VirtualClusterWith <2>
             .Nodes(3, 9210)
             .MasterEligible(9210, 9212)
             .ClientCalls(r => r.SucceedAlways())
@@ -95,15 +95,15 @@ Only we enable pinging (default is `true`) and make the ping fail
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(5)
     .MasterEligible(9202, 9203, 9204)
     .Ping(r => r.OnPort(9201).Fails(Once))
-    .Sniff(p => p.SucceedAlways(Framework.Cluster
+    .Sniff(p => p.SucceedAlways(VirtualClusterWith
         .Nodes(3)
         .MasterEligible(9200, 9202)
         .Ping(r => r.OnPort(9201).Fails(Once))
-        .Sniff(s => s.SucceedAlways(Framework.Cluster
+        .Sniff(s => s.SucceedAlways(VirtualClusterWith
             .Nodes(3, 9210)
             .MasterEligible(9210, 9211)
             .Ping(r => r.SucceedAlways())
@@ -162,11 +162,11 @@ audit = await audit.TraceCalls(
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
         .Nodes(2)
         .MasterEligible(9200)
         .Ping(r => r.OnPort(9200).Fails(Once))
-        .Sniff(p => p.SucceedAlways(Framework.Cluster
+        .Sniff(p => p.SucceedAlways(VirtualClusterWith
                 .Nodes(10)
                 .MasterEligible(9200, 9202, 9201)
                 .PublishAddress("10.0.12.1")

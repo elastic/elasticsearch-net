@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Metric/WeightedAverage/WeightedAverageAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Metric/WeightedAverage/WeightedAverageAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -32,7 +32,7 @@ Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregat
 a => a
 .WeightedAverage("weighted_avg_commits", avg => avg
     .Value(v => v.Field(p => p.NumberOfCommits).Missing(0))
-    .Weight(w => w.Script("doc.numberOfContributors.value + 1"))
+    .Weight(w => w.Script("(doc['numberOfContributors']?.value ?: 0) + 1"))
     .ValueType(ValueType.Long)
 )
 ----
@@ -47,7 +47,7 @@ new WeightedAverageAggregation("weighted_avg_commits")
     {
         Missing = 0
     },
-    Weight = new WeightedAverageValue(new InlineScript("doc.numberOfContributors.value + 1")),
+    Weight = new WeightedAverageValue(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1")),
     ValueType = ValueType.Long
 }
 ----
@@ -64,7 +64,7 @@ new WeightedAverageAggregation("weighted_avg_commits")
       },
       "weight": {
         "script": {
-          "source": "doc.numberOfContributors.value + 1"
+          "source": "(doc['numberOfContributors']?.value ?: 0) + 1"
         }
       },
       "value_type": "long"

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Inference/FieldInference.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Inference/FieldInference.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -324,6 +324,17 @@ Expect("leadDeveloper.firstName.raw.evendeeper").WhenSerializing(multiSuffixFiel
 Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 ----
 
+[[member-expressions-only]]
+==== Member Expressions only
+
+The expression passed to Field should only be a MemberExpression
+https://docs.microsoft.com/en-us/dotnet/api/system.linq.expressions.memberexpression?view=netframework-4.7.2
+
+[source,csharp]
+----
+var fieldExpression = Field<Project>(p => p.Name + 2);
+----
+
 [[field-name-attribute]]
 ==== Attribute based naming
 
@@ -383,7 +394,7 @@ If both a NEST property attribute and a serializer specific attribute are presen
 public class Both
 {
     [Text(Name = "naam")]
-    [PropertyName("nameInJson"), JsonProperty("nameInJson")]
+    [PropertyName("nameInJson"), DataMember(Name = "nameInJson")]
     public string Name { get; set; }
 }
 
@@ -489,7 +500,7 @@ private class Precedence
     [PropertyName("nestProp"),JsonProperty("jsonProp")]
     public string NestProperty { get; set; } <3>
 
-    [JsonProperty("jsonProp")]
+    [DataMember(Name ="jsonProp")]
     public string JsonProperty { get; set; } <4>
 
     [PropertyName("dontaskme"),JsonProperty("dontaskme")]
@@ -622,5 +633,33 @@ usingSettings.Expect(new []
         Description = "this property will be renamed for Child",
         IgnoreMe = "this property will be ignored (won't be serialized) for Child",
     });
+
+public class SourceModel
+{
+    [PropertyName("gexo")]
+    public GeoModel Geo { get; set; }
+}
+
+public class GeoModel
+{
+    [DataMember(Name = "country_iso_code")]
+    public string CountryIsoCode { get; set; }
+}
+
+var usingSettings = WithConnectionSettings(s => s)
+        .WithSourceSerializer(JsonNetSerializer.Default);
+
+usingSettings.Expect("gexo").ForField(Field<SourceModel>(p=>p.Geo));
+usingSettings.Expect("country_iso_code").ForField(Field<GeoModel>(p=>p.CountryIsoCode));
+usingSettings.Expect(new []
+    {
+        "country_iso_code",
+    }).AsPropertiesOf(new GeoModel { CountryIsoCode = "nl" });
+usingSettings.Expect(new []
+    {
+        "gexo",
+    }).AsPropertiesOf(new SourceModel { Geo = new GeoModel { CountryIsoCode = "nl" } });
+
+usingSettings.Expect("gexo.country_iso_code").ForField(Field<SourceModel>(p=>p.Geo.CountryIsoCode));
 ----
 

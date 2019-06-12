@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/AutoMap.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/AutoMap.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -50,16 +50,14 @@ public class Employee : Document
 
 Auto mapping can take the pain out of having to define a manual mapping for all properties
 on the POCO. In this case we want to index two subclasses into a single index. We call Map
-for the base class and then call AutoMap foreach of the types we want it it the implement
+for the base class and then call AutoMap foreach of the types we want it to implement
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<Document>(m => m
-            .AutoMap<Company>() <1>
-            .AutoMap(typeof(Employee)) <2>
-        )
+var createIndexResponse = _client.Indices.Create("myindex", c => c
+    .Map<Document>(m => m
+        .AutoMap<Company>() <1>
+        .AutoMap(typeof(Employee)) <2>
     )
 );
 ----
@@ -73,76 +71,74 @@ This produces the following JSON request
 ----
 {
   "mappings": {
-    "document": {
-      "properties": {
-        "birthday": {
-          "type": "date"
-        },
-        "employees": {
-          "properties": {
-            "birthday": {
-              "type": "date"
-            },
-            "employees": {
-              "properties": {},
-              "type": "object"
-            },
-            "hours": {
-              "type": "long"
-            },
-            "isManager": {
-              "type": "boolean"
-            },
-            "join": {
-              "properties": {},
-              "type": "object"
-            },
-            "lastName": {
-              "fields": {
-                "keyword": {
-                  "ignore_above": 256,
-                  "type": "keyword"
-                }
-              },
-              "type": "text"
-            },
-            "salary": {
-              "type": "integer"
-            }
+    "properties": {
+      "birthday": {
+        "type": "date"
+      },
+      "employees": {
+        "properties": {
+          "birthday": {
+            "type": "date"
           },
-          "type": "object"
-        },
-        "hours": {
-          "type": "long"
-        },
-        "isManager": {
-          "type": "boolean"
-        },
-        "join": {
-          "properties": {},
-          "type": "object"
-        },
-        "lastName": {
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
+          "employees": {
+            "properties": {},
+            "type": "object"
           },
-          "type": "text"
-        },
-        "name": {
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
+          "hours": {
+            "type": "long"
           },
-          "type": "text"
+          "isManager": {
+            "type": "boolean"
+          },
+          "join": {
+            "properties": {},
+            "type": "object"
+          },
+          "lastName": {
+            "fields": {
+              "keyword": {
+                "ignore_above": 256,
+                "type": "keyword"
+              }
+            },
+            "type": "text"
+          },
+          "salary": {
+            "type": "integer"
+          }
         },
-        "salary": {
-          "type": "integer"
-        }
+        "type": "object"
+      },
+      "hours": {
+        "type": "long"
+      },
+      "isManager": {
+        "type": "boolean"
+      },
+      "join": {
+        "properties": {},
+        "type": "object"
+      },
+      "lastName": {
+        "fields": {
+          "keyword": {
+            "ignore_above": 256,
+            "type": "keyword"
+          }
+        },
+        "type": "text"
+      },
+      "name": {
+        "fields": {
+          "keyword": {
+            "ignore_above": 256,
+            "type": "keyword"
+          }
+        },
+        "type": "text"
+      },
+      "salary": {
+        "type": "integer"
       }
     }
   }
@@ -159,18 +155,15 @@ public class ParentWithStringId : IgnoringProperties.Parent
 var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
         .DisableDirectStreaming() <2>
         .DefaultMappingFor<ParentWithStringId>(m => m
-            .TypeName("parent")
             .Ignore(p => p.Description)
             .Ignore(p => p.IgnoreMe)
         );
 
 var client = new ElasticClient(connectionSettings);
 
-var createIndexResponse = client.CreateIndex("myindex", c => c
-        .Mappings(ms => ms
-            .Map<ParentWithStringId>(m => m
-                .AutoMap()
-            )
+var createIndexResponse = client.Indices.Create("myindex", c => c
+        .Map<ParentWithStringId>(m => m
+            .AutoMap()
         )
     );
 ----
@@ -182,15 +175,13 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
 ----
 {
   "mappings": {
-    "parent": {
-      "properties": {
-        "id": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
+    "properties": {
+      "id": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "ignore_above": 256,
+            "type": "keyword"
           }
         }
       }
@@ -370,10 +361,8 @@ By default, `.AutoMap()` only goes as far as depth 1
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<A>(m => m.AutoMap())
-    )
+var createIndexResponse = _client.Indices.Create("myindex", c => c
+    .Map<A>(m => m.AutoMap())
 );
 ----
 
@@ -383,12 +372,10 @@ Thus we do not map properties on the second occurrence of our Child property
 ----
 {
   "mappings": {
-    "a": {
-      "properties": {
-        "child": {
-          "properties": {},
-          "type": "object"
-        }
+    "properties": {
+      "child": {
+        "properties": {},
+        "type": "object"
       }
     }
   }
@@ -399,10 +386,8 @@ Now let's specify a maxRecursion of `3`
 
 [source,csharp]
 ----
-createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<A>(m => m.AutoMap(3))
-    )
+createIndexResponse = _client.Indices.Create("myindex", c => c
+    .Map<A>(m => m.AutoMap(3))
 );
 ----
 
@@ -412,21 +397,19 @@ createIndexResponse = _client.CreateIndex("myindex", c => c
 ----
 {
   "mappings": {
-    "a": {
-      "properties": {
-        "child": {
-          "type": "object",
-          "properties": {
-            "child": {
-              "type": "object",
-              "properties": {
-                "child": {
-                  "type": "object",
-                  "properties": {
-                    "child": {
-                      "type": "object",
-                      "properties": {}
-                    }
+    "properties": {
+      "child": {
+        "type": "object",
+        "properties": {
+          "child": {
+            "type": "object",
+            "properties": {
+              "child": {
+                "type": "object",
+                "properties": {
+                  "child": {
+                    "type": "object",
+                    "properties": {}
                   }
                 }
               }

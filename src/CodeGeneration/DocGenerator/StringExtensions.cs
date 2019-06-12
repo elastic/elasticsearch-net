@@ -229,6 +229,7 @@ namespace DocGenerator
 					using System.ComponentModel;
 					using System.Runtime.Serialization;
 					using Newtonsoft.Json.Linq;
+					using Newtonsoft.Json;
 
 					namespace Temporary
 					{{

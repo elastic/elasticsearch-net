@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/Troubleshooting/LoggingWithOnRequestCompleted.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/Troubleshooting/LoggingWithOnRequestCompleted.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -117,7 +117,6 @@ var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) 
 var client = new ElasticClient(settings);
 
 var syncResponse = client.Search<object>(s => s <4>
-    .AllTypes()
     .AllIndices()
     .Scroll("2m")
     .Sort(ss => ss
@@ -128,7 +127,6 @@ var syncResponse = client.Search<object>(s => s <4>
 list.Count.Should().Be(2);
 
 var asyncResponse = await client.SearchAsync<object>(s => s <5>
-    .AllTypes()
     .AllIndices()
     .Scroll("10m")
     .Sort(ss => ss
@@ -137,11 +135,11 @@ var asyncResponse = await client.SearchAsync<object>(s => s <5>
 );
 
 list.Count.Should().Be(4);
-list.ShouldAllBeEquivalentTo(new[] <6>
+list.Should().BeEquivalentTo(new[] <6>
 {
-    @"POST http://localhost:9200/_search?typed_keys=true&scroll=2m {""sort"":[{""_doc"":{""order"":""asc""}}]}",
+    @"POST http://localhost:9200/_all/_search?typed_keys=true&scroll=2m {""sort"":[{""_doc"":{""order"":""asc""}}]}",
     @"Status: 200",
-    @"POST http://localhost:9200/_search?typed_keys=true&scroll=10m {""sort"":[{""_doc"":{""order"":""asc""}}]}",
+    @"POST http://localhost:9200/_all/_search?typed_keys=true&scroll=10m {""sort"":[{""_doc"":{""order"":""asc""}}]}",
     @"Status: 200"
 });
 ----
@@ -202,7 +200,6 @@ var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
 var client = new ElasticClient(settings);
 
 var syncResponse = client.Search<object>(s => s <1>
-    .AllTypes()
     .AllIndices()
     .Scroll("2m")
     .Sort(ss => ss
@@ -216,7 +213,6 @@ var asyncResponse = await client.SearchAsync<object>(s => s <2>
     .RequestConfiguration(r => r
         .DisableDirectStreaming()
     )
-    .AllTypes()
     .AllIndices()
     .Scroll("10m")
     .Sort(ss => ss
@@ -225,11 +221,11 @@ var asyncResponse = await client.SearchAsync<object>(s => s <2>
 );
 
 list.Count.Should().Be(4);
-list.ShouldAllBeEquivalentTo(new[]
+list.Should().BeEquivalentTo(new[]
 {
-    @"POST http://localhost:9200/_search?typed_keys=true&scroll=2m", <3>
+    @"POST http://localhost:9200/_all/_search?typed_keys=true&scroll=2m", <3>
     @"Status: 200",
-    @"POST http://localhost:9200/_search?typed_keys=true&scroll=10m {""sort"":[{""_doc"":{""order"":""asc""}}]}", <4>
+    @"POST http://localhost:9200/_all/_search?typed_keys=true&scroll=10m {""sort"":[{""_doc"":{""order"":""asc""}}]}", <4>
     @"Status: 200"
 });
 ----

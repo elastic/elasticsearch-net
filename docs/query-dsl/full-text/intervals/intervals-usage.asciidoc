@@ -1,0 +1,170 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/Intervals/IntervalsUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[intervals-usage]]
+=== Intervals Usage
+
+An intervals query allows fine-grained control over the order and proximity of matching terms.
+Matching rules are constructed from a small set of definitions, and the rules are then applied to terms from a particular field.
+
+The definitions produce sequences of minimal intervals that span terms in a body of text. These intervals can be further combined and filtered by parent sources.
+
+NOTE: Only available in Elasticsearch 6.7.0+
+
+Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-intervals-query.html[Intervals query]
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Intervals(c => c
+    .Field(p => p.Description)
+    .Name("named_query")
+    .Boost(1.1)
+    .AnyOf(any => any
+        .Intervals(i => i
+            .Match(m => m
+                .Query("my favourite food")
+                .MaxGaps(5)
+                .Ordered()
+                .Filter(f => f
+                    .Containing(co => co
+                        .Match(mm => mm
+                            .Query("kimchy")
+                        )
+                    )
+                )
+            )
+            .AllOf(all => all
+                .Intervals(ii => ii
+                    .Match(m => m
+                        .Query("hot water")
+                    )
+                    .Match(m => m
+                        .Query("cold porridge")
+                    )
+                )
+                .Filter(f => f
+                    .Script(s => s
+                        .Source("interval.start > 0 && interval.end < 200")
+                    )
+                )
+            )
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new IntervalsQuery
+{
+    Field = Field<Project>(p => p.Description),
+    Name = "named_query",
+    Boost = 1.1,
+    AnyOf = new IntervalsAnyOf
+    {
+        Intervals = new IntervalsContainer[]
+        {
+            new IntervalsMatch
+            {
+                Query = "my favourite food",
+                MaxGaps = 5,
+                Ordered = true,
+                Filter = new IntervalsFilter
+                {
+                    Containing = new IntervalsMatch
+                    {
+                        Query = "kimchy"
+                    }
+                }
+            },
+            new IntervalsAllOf
+            {
+                Intervals = new IntervalsContainer[]
+                {
+                    new IntervalsMatch
+                    {
+                        Query = "hot water",
+                    },
+                    new IntervalsMatch
+                    {
+                        Query = "cold porridge",
+                    },
+                },
+                Filter = new IntervalsFilter
+                {
+                    Script = new InlineScript("interval.start > 0 && interval.end < 200")
+                }
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "intervals": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "any_of": {
+        "intervals": [
+          {
+            "match": {
+              "query": "my favourite food",
+              "max_gaps": 5,
+              "ordered": true,
+              "filter": {
+                "containing": {
+                  "match": {
+                    "query": "kimchy"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "all_of": {
+              "intervals": [
+                {
+                  "match": {
+                    "query": "hot water"
+                  }
+                },
+                {
+                  "match": {
+                    "query": "cold porridge"
+                  }
+                }
+              ],
+              "filter": {
+                "script": {
+                  "source": "interval.start > 0 && interval.end < 200"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
