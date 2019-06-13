@@ -245,7 +245,20 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 				reader.ReadIsBeginArrayWithVerify();
 				while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
 				{
-					Add(ref builder, count - 1, formatter.Deserialize(ref reader, formatterResolver));
+					if (reader.ReadIsNull())
+					{
+						TElement defaultValue = default;
+						if (defaultValue != null)
+						{
+							// If TElement is a value type then throw an exception as we are expecting a null value
+							throw new JsonParsingException($"Cannot deserialize a null value from type: {typeof(TElement)}");
+						}
+						Add(ref builder, count - 1, defaultValue);
+						continue;
+					}
+
+					var value = formatter.Deserialize(ref reader, formatterResolver);
+					Add(ref builder, count - 1, value);
 				}
 
 				return Complete(ref builder);
