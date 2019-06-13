@@ -24,7 +24,10 @@ namespace Nest
 				return formatter.Deserialize(ref reader, formatterResolver);
 			}
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			if (token == JsonToken.Number)
 			{

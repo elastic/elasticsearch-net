@@ -103,7 +103,10 @@ namespace Nest
 		public IDetector Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var segment = reader.ReadNextBlockSegment();
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);

@@ -25,7 +25,10 @@ namespace Nest
 		public ILazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				//reader.ReadNext();
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 
@@ -50,7 +53,7 @@ namespace Nest
                         var c = 0;
                         while (reader.ReadIsInObject(ref c))
                         {
-                            if (c != 1) 
+                            if (c != 1)
 								writer.WriteRaw((byte)',');
 							writer.WritePropertyName(reader.ReadPropertyName());
 							WriteUnindented(ref reader, ref writer);
@@ -64,7 +67,7 @@ namespace Nest
                         var c = 0;
                         while (reader.ReadIsInArray(ref c))
                         {
-                            if (c != 1) 
+                            if (c != 1)
 								writer.WriteRaw((byte)',');
 							WriteUnindented(ref reader, ref writer);
                         }
@@ -109,7 +112,10 @@ namespace Nest
 		public LazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				//reader.ReadNext();
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 

@@ -16,7 +16,10 @@ namespace Nest
 		public SqlValue Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 			return new SqlValue(BinaryUtil.ToArray(ref arraySegment), formatterResolver);
