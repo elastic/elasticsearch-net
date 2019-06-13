@@ -74,6 +74,8 @@ ProjectSection(SolutionItems) = preProject
 	..\readme.md = ..\readme.md
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.7xUpgradeHelper", "Nest.7xUpgradeHelper\Nest.7xUpgradeHelper.csproj", "{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,5 +160,9 @@ Global
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
