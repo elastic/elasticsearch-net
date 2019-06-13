@@ -36,7 +36,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Authenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+	///<summary>Request for Authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
@@ -55,7 +55,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+	///<summary>Request for ChangePassword <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
@@ -96,7 +96,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+	///<summary>Request for ClearCachedRealms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
@@ -135,7 +135,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+	///<summary>Request for ClearCachedRoles <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</para></summary>
 	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
@@ -163,7 +163,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for CreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	///<summary>Request for CreateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 	public partial class CreateApiKeyRequest : PlainRequestBase<CreateApiKeyRequestParameters>, ICreateApiKeyRequest
 	{
 		protected ICreateApiKeyRequest Self => this;
@@ -197,7 +197,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeletePrivileges <pre>TODO</pre></summary>
+	///<summary>Request for DeletePrivileges <para>TODO</para></summary>
 	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
 	{
 		protected IDeletePrivilegesRequest Self => this;
@@ -242,7 +242,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+	///<summary>Request for DeleteRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</para></summary>
 	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
@@ -284,7 +284,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+	///<summary>Request for DeleteRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</para></summary>
 	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
 		protected IDeleteRoleMappingRequest Self => this;
@@ -326,7 +326,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+	///<summary>Request for DeleteUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</para></summary>
 	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
@@ -368,7 +368,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+	///<summary>Request for DisableUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</para></summary>
 	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
 		protected IDisableUserRequest Self => this;
@@ -410,7 +410,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for EnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+	///<summary>Request for EnableUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</para></summary>
 	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
 		protected IEnableUserRequest Self => this;
@@ -447,7 +447,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	///<summary>Request for GetApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 	public partial class GetApiKeyRequest : PlainRequestBase<GetApiKeyRequestParameters>, IGetApiKeyRequest
 	{
 		protected IGetApiKeyRequest Self => this;
@@ -499,7 +499,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetPrivileges <pre>TODO</pre></summary>
+	///<summary>Request for GetPrivileges <para>TODO</para></summary>
 	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 	{
 		protected IGetPrivilegesRequest Self => this;
@@ -540,7 +540,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+	///<summary>Request for GetRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
@@ -572,7 +572,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+	///<summary>Request for GetRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
 		protected IGetRoleMappingRequest Self => this;
@@ -599,7 +599,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	///<summary>Request for GetUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</para></summary>
 	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
@@ -618,7 +618,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+	///<summary>Request for GetUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
@@ -645,7 +645,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	///<summary>Request for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 	{
 		protected IGetUserPrivilegesRequest Self => this;
@@ -664,7 +664,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for HasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	///<summary>Request for HasPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
 	{
 		protected IHasPrivilegesRequest Self => this;
@@ -692,7 +692,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for InvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	///<summary>Request for InvalidateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
 	public partial class InvalidateApiKeyRequest : PlainRequestBase<InvalidateApiKeyRequestParameters>, IInvalidateApiKeyRequest
 	{
 		protected IInvalidateApiKeyRequest Self => this;
@@ -706,7 +706,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for InvalidateUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	///<summary>Request for InvalidateUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</para></summary>
 	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
@@ -720,7 +720,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for PutPrivileges <pre>TODO</pre></summary>
+	///<summary>Request for PutPrivileges <para>TODO</para></summary>
 	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
 	{
 		protected IPutPrivilegesRequest Self => this;
@@ -748,7 +748,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+	///<summary>Request for PutRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</para></summary>
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
@@ -790,7 +790,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+	///<summary>Request for PutRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
 		protected IPutRoleMappingRequest Self => this;
@@ -832,7 +832,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+	///<summary>Request for PutUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</para></summary>
 	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
@@ -869,7 +869,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	///<summary>Request for GetCertificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 	public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
 	{
 		protected IGetCertificatesRequest Self => this;

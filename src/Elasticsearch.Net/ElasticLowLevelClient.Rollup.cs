@@ -32,8 +32,8 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Elasticsearch.Net.Specification.RollupApi
 {
 	///<summary>
-	/// Logically groups all Rollup API's together so that they may be discovered more naturally.
-	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticLowLevelClient.Rollup"/> property
+	/// Rollup APIs.
+	/// <para>Not intended to be instantiated directly. Use the <see cref = "IElasticLowLevelClient.Rollup"/> property
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>

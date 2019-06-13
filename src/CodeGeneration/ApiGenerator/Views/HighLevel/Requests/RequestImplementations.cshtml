@@ -12,7 +12,7 @@
 	CsharpNames names = r.CsharpNames;
 	var apiLookup = $"ApiUrlsLookups.{r.CsharpNames.Namespace}{r.CsharpNames.MethodName}";
 }
-	///<summary>Request for @names.MethodName <pre>@r.OfficialDocumentationLink</pre></summary>
+	///<summary>Request for @names.MethodName <para>@r.OfficialDocumentationLink</para></summary>
 	public partial class @Raw(r.Name) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, r.InterfaceName))
 	{
 		protected @(Raw(r.InterfaceName)) Self => this;

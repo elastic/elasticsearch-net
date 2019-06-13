@@ -494,7 +494,7 @@ namespace Elasticsearch.Net
 			Assign(new X509Certificate2Collection { new X509Certificate(certificatePath) }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401,
+		/// Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns a HTML for 401,
 		/// 500
 		/// </summary>
 		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>

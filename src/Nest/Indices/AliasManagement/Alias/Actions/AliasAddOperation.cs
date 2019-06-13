@@ -17,8 +17,8 @@ namespace Nest
 		public string IndexRouting { get; set; }
 
 		/// <summary>
-		/// If an alias points to multiple indices elasticsearch will reject the write operations
-		/// unless one is explicitly marked with as the write alias using this property.
+		/// If an alias points to multiple indices, Elasticsearch will reject the write operations
+		/// unless one is explicitly marked as the write alias using this property.
 		/// </summary>
 		[DataMember(Name ="is_write_index")]
 		public bool? IsWriteIndex { get; set; }

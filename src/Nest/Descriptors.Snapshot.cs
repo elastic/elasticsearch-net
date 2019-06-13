@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for Snapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Snapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class SnapshotDescriptor : RequestDescriptorBase<SnapshotDescriptor, SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotSnapshot;
@@ -57,7 +57,7 @@ namespace Nest
 		public SnapshotDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
-	///<summary>descriptor for CreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for CreateRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class CreateRepositoryDescriptor : RequestDescriptorBase<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotCreateRepository;
@@ -84,7 +84,7 @@ namespace Nest
 		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
 	}
 
-	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class DeleteSnapshotDescriptor : RequestDescriptorBase<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotDelete;
@@ -109,7 +109,7 @@ namespace Nest
 		public DeleteSnapshotDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for DeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for DeleteRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class DeleteRepositoryDescriptor : RequestDescriptorBase<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotDeleteRepository;
@@ -134,7 +134,7 @@ namespace Nest
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class GetSnapshotDescriptor : RequestDescriptorBase<GetSnapshotDescriptor, GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotGet;
@@ -163,7 +163,7 @@ namespace Nest
 		public GetSnapshotDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
-	///<summary>descriptor for GetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for GetRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class GetRepositoryDescriptor : RequestDescriptorBase<GetRepositoryDescriptor, GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotGetRepository;
@@ -189,7 +189,7 @@ namespace Nest
 		public GetRepositoryDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for Restore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Restore <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class RestoreDescriptor : RequestDescriptorBase<RestoreDescriptor, RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotRestore;
@@ -216,7 +216,7 @@ namespace Nest
 		public RestoreDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
-	///<summary>descriptor for Status <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for Status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class SnapshotStatusDescriptor : RequestDescriptorBase<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotStatus;
@@ -252,7 +252,7 @@ namespace Nest
 		public SnapshotStatusDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for VerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for VerifyRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class VerifyRepositoryDescriptor : RequestDescriptorBase<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotVerifyRepository;

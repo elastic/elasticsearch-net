@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.ClusterApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	///<summary>descriptor for AllocationExplain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
 	public partial class ClusterAllocationExplainDescriptor : RequestDescriptorBase<ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
@@ -42,7 +42,7 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeyesdecisions = true) => Qs("include_yes_decisions", includeyesdecisions);
 	}
 
-	///<summary>descriptor for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for GetSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
@@ -58,7 +58,7 @@ namespace Nest
 		public ClusterGetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	///<summary>descriptor for Health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 	public partial class ClusterHealthDescriptor : RequestDescriptorBase<ClusterHealthDescriptor, ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
@@ -105,7 +105,7 @@ namespace Nest
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatus? waitforstatus) => Qs("wait_for_status", waitforstatus);
 	}
 
-	///<summary>descriptor for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	///<summary>descriptor for PendingTasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</para></summary>
 	public partial class ClusterPendingTasksDescriptor : RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
@@ -117,7 +117,7 @@ namespace Nest
 		public ClusterPendingTasksDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for PutSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public partial class ClusterPutSettingsDescriptor : RequestDescriptorBase<ClusterPutSettingsDescriptor, ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
@@ -131,7 +131,7 @@ namespace Nest
 		public ClusterPutSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
+	///<summary>descriptor for RemoteInfo <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</para></summary>
 	public partial class RemoteInfoDescriptor : RequestDescriptorBase<RemoteInfoDescriptor, RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
@@ -139,7 +139,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Reroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	///<summary>descriptor for Reroute <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
 	public partial class ClusterRerouteDescriptor : RequestDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
@@ -159,7 +159,7 @@ namespace Nest
 		public ClusterRerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for State <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	///<summary>descriptor for State <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 	public partial class ClusterStateDescriptor : RequestDescriptorBase<ClusterStateDescriptor, ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
@@ -212,7 +212,7 @@ namespace Nest
 		public ClusterStateDescriptor WaitForTimeout(Time waitfortimeout) => Qs("wait_for_timeout", waitfortimeout);
 	}
 
-	///<summary>descriptor for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	///<summary>descriptor for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 	public partial class ClusterStatsDescriptor : RequestDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterStats;

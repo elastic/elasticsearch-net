@@ -45,60 +45,71 @@ using Elasticsearch.Net.Specification.XPackApi;
 namespace Elasticsearch.Net
 {
 	///<summary>
-	///Raw operations with elasticsearch
+	///Elasticsearch low level client
 	///</summary>
 	public partial interface IElasticLowLevelClient
 	{
+		///<summary>Cat APIs</summary>
 		LowLevelCatNamespace Cat
 		{
 			get;
 		}
 
+		///<summary>Cluster APIs</summary>
 		LowLevelClusterNamespace Cluster
 		{
 			get;
 		}
 
+		///<summary>Cross Cluster Replication APIs</summary>
 		LowLevelCrossClusterReplicationNamespace CrossClusterReplication
 		{
 			get;
 		}
 
+		///<summary>Graph APIs</summary>
 		LowLevelGraphNamespace Graph
 		{
 			get;
 		}
 
+		///<summary>Index Lifecycle Management APIs</summary>
 		LowLevelIndexLifecycleManagementNamespace IndexLifecycleManagement
 		{
 			get;
 		}
 
+		///<summary>Indices APIs</summary>
 		LowLevelIndicesNamespace Indices
 		{
 			get;
 		}
 
+		///<summary>Ingest APIs</summary>
 		LowLevelIngestNamespace Ingest
 		{
 			get;
 		}
 
+		///<summary>License APIs</summary>
 		LowLevelLicenseNamespace License
 		{
 			get;
 		}
 
+		///<summary>Machine Learning APIs</summary>
 		LowLevelMachineLearningNamespace MachineLearning
 		{
 			get;
 		}
 
+		///<summary>Migration APIs</summary>
 		LowLevelMigrationNamespace Migration
 		{
 			get;
 		}
 
+		///<summary>Nodes APIs</summary>
 		LowLevelNodesNamespace Nodes
 		{
 			get;
@@ -648,36 +659,43 @@ namespace Elasticsearch.Net
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> UpdateByQueryRethrottleAsync<TResponse>(string taskId, UpdateByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>Rollup APIs</summary>
 		LowLevelRollupNamespace Rollup
 		{
 			get;
 		}
 
+		///<summary>Security APIs</summary>
 		LowLevelSecurityNamespace Security
 		{
 			get;
 		}
 
+		///<summary>Snapshot APIs</summary>
 		LowLevelSnapshotNamespace Snapshot
 		{
 			get;
 		}
 
+		///<summary>Sql APIs</summary>
 		LowLevelSqlNamespace Sql
 		{
 			get;
 		}
 
+		///<summary>Tasks APIs</summary>
 		LowLevelTasksNamespace Tasks
 		{
 			get;
 		}
 
+		///<summary>Watcher APIs</summary>
 		LowLevelWatcherNamespace Watcher
 		{
 			get;
 		}
 
+		///<summary>X Pack APIs</summary>
 		LowLevelXPackNamespace XPack
 		{
 			get;

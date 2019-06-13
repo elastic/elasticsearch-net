@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>Request for DeprecationInfo <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
@@ -73,7 +73,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Assistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>Request for Assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 	{
 		protected IMigrationAssistanceRequest Self => this;
@@ -128,7 +128,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Upgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>Request for Upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 	{
 		protected IMigrationUpgradeRequest Self => this;

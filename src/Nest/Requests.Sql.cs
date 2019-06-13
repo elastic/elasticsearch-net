@@ -36,7 +36,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearCursor <pre>Clear SQL cursor</pre></summary>
+	///<summary>Request for ClearCursor <para>Clear SQL cursor</para></summary>
 	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 	{
 		protected IClearSqlCursorRequest Self => this;
@@ -50,7 +50,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Query <pre>Execute SQL</pre></summary>
+	///<summary>Request for Query <para>Execute SQL</para></summary>
 	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 	{
 		protected IQuerySqlRequest Self => this;
@@ -70,7 +70,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Translate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	///<summary>Request for Translate <para>Translate SQL into Elasticsearch queries</para></summary>
 	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 	{
 		protected ITranslateSqlRequest Self => this;

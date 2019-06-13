@@ -32,8 +32,8 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Elasticsearch.Net.Specification.ClusterApi
 {
 	///<summary>
-	/// Logically groups all Cluster API's together so that they may be discovered more naturally.
-	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticLowLevelClient.Cluster"/> property
+	/// Cluster APIs.
+	/// <para>Not intended to be instantiated directly. Use the <see cref = "IElasticLowLevelClient.Cluster"/> property
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>

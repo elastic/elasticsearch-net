@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Cancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request for Cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
@@ -96,7 +96,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetTask <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request for GetTask <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
 		protected IGetTaskRequest Self => this;
@@ -137,7 +137,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for List <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request for List <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;

@@ -36,7 +36,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Info <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
+	///<summary>Request for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 	public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
 		protected IXPackInfoRequest Self => this;
@@ -56,7 +56,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Usage <pre>Retrieve information about xpack features usage</pre></summary>
+	///<summary>Request for Usage <para>Retrieve information about xpack features usage</para></summary>
 	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
 		protected IXPackUsageRequest Self => this;

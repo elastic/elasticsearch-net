@@ -57,7 +57,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			t.Wait(TimeSpan.FromSeconds(40));
 		}
 
-		// Sometimes we run against an manually started elasticsearch when
+		// Sometimes we run against an manually started Elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
 		private bool AlreadySeeded() => Client.Indices.TemplateExists(TestsIndexTemplateName).Exists;

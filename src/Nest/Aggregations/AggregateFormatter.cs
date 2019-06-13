@@ -73,7 +73,7 @@ namespace Nest
 			UsingReservedAggNameFormat =
 				"'{0}' is one of the reserved aggregation keywords"
 				+ " we use a heuristics based response parser and using these reserved keywords"
-				+ " could throw its heuristics off course. We are working on a solution in elasticsearch itself to make"
+				+ " could throw its heuristics off course. We are working on a solution in Elasticsearch itself to make"
 				+ " the response parseable. For now these are all the reserved keywords: "
 				+ allKeys;
 		}

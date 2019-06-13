@@ -24,13 +24,13 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.MigrationApi
 {
-	///<summary>Request options for DeprecationInfo<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>Request options for DeprecationInfo <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for Assistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>Request options for Assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 	public class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -59,7 +59,7 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 		}
 	}
 
-	///<summary>Request options for Upgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>Request options for Upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 	public class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

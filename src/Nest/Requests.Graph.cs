@@ -45,7 +45,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>Request for Explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;

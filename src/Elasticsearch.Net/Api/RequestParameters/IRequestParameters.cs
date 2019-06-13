@@ -35,7 +35,7 @@ namespace Elasticsearch.Net
 		TOut GetQueryStringValue<TOut>(string name);
 
 		/// <summary>
-		/// Gets the stringified representation of a query string value as it would be sent to elasticsearch.
+		/// Gets the stringified representation of a query string value as it would be sent to Elasticsearch.
 		/// </summary>
 		string GetResolvedQueryStringValue(string n, IConnectionConfigurationValues s);
 	}

@@ -24,13 +24,13 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.SecurityApi
 {
-	///<summary>Request options for Authenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+	///<summary>Request options for Authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 	public class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for ChangePassword<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+	///<summary>Request options for ChangePassword <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 	public class ChangePasswordRequestParameters : RequestParameters<ChangePasswordRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -45,7 +45,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for ClearCachedRealms<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+	///<summary>Request options for ClearCachedRealms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 	public class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -57,13 +57,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for ClearCachedRoles<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+	///<summary>Request options for ClearCachedRoles <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</para></summary>
 	public class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for CreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	///<summary>Request options for CreateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 	public class CreateApiKeyRequestParameters : RequestParameters<CreateApiKeyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -78,7 +78,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for DeletePrivileges<pre>TODO</pre></summary>
+	///<summary>Request options for DeletePrivileges <para>TODO</para></summary>
 	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -93,7 +93,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for DeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+	///<summary>Request options for DeleteRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</para></summary>
 	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -108,7 +108,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for DeleteRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+	///<summary>Request options for DeleteRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</para></summary>
 	public class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -123,7 +123,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for DeleteUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+	///<summary>Request options for DeleteUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</para></summary>
 	public class DeleteUserRequestParameters : RequestParameters<DeleteUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -138,7 +138,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for DisableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+	///<summary>Request options for DisableUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</para></summary>
 	public class DisableUserRequestParameters : RequestParameters<DisableUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -153,7 +153,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for EnableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+	///<summary>Request options for EnableUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</para></summary>
 	public class EnableUserRequestParameters : RequestParameters<EnableUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -168,7 +168,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for GetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	///<summary>Request options for GetApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 	public class GetApiKeyRequestParameters : RequestParameters<GetApiKeyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -201,61 +201,61 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for GetPrivileges<pre>TODO</pre></summary>
+	///<summary>Request options for GetPrivileges <para>TODO</para></summary>
 	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+	///<summary>Request options for GetRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+	///<summary>Request options for GetRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetUserAccessToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	///<summary>Request options for GetUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</para></summary>
 	public class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+	///<summary>Request options for GetUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 	public class GetUserRequestParameters : RequestParameters<GetUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetUserPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	///<summary>Request options for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 	public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for HasPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	///<summary>Request options for HasPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for InvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	///<summary>Request options for InvalidateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
 	public class InvalidateApiKeyRequestParameters : RequestParameters<InvalidateApiKeyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for InvalidateUserAccessToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	///<summary>Request options for InvalidateUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</para></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for PutPrivileges<pre>TODO</pre></summary>
+	///<summary>Request options for PutPrivileges <para>TODO</para></summary>
 	public class PutPrivilegesRequestParameters : RequestParameters<PutPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -270,7 +270,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for PutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+	///<summary>Request options for PutRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</para></summary>
 	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -285,7 +285,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for PutRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+	///<summary>Request options for PutRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 	public class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -300,7 +300,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for PutUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+	///<summary>Request options for PutUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</para></summary>
 	public class PutUserRequestParameters : RequestParameters<PutUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -315,7 +315,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for GetCertificates<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	///<summary>Request options for GetCertificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 	public class GetCertificatesRequestParameters : RequestParameters<GetCertificatesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

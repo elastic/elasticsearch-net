@@ -26,7 +26,7 @@ namespace Tests.XPack.MachineLearning
 
 		private IElasticClient Client { get; }
 
-		// Sometimes we run against an manually started elasticsearch when
+		// Sometimes we run against an manually started Elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If template exists assume this cluster is already seeded with the machine learning data.
 		private bool AlreadySeeded() => Client.Indices.TemplateExists(MachineLearningTestsIndexTemplateName).Exists;

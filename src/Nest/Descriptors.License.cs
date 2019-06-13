@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.LicenseApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for Delete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for Delete <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class DeleteLicenseDescriptor : RequestDescriptorBase<DeleteLicenseDescriptor, DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseDelete;
@@ -38,7 +38,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Get <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for Get <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class GetLicenseDescriptor : RequestDescriptorBase<GetLicenseDescriptor, GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGet;
@@ -48,7 +48,7 @@ namespace Nest
 		public GetLicenseDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for GetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetBasicStatus <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class GetBasicLicenseStatusDescriptor : RequestDescriptorBase<GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequestParameters, IGetBasicLicenseStatusRequest>, IGetBasicLicenseStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGetBasicStatus;
@@ -56,7 +56,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for GetTrialStatus <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class GetTrialLicenseStatusDescriptor : RequestDescriptorBase<GetTrialLicenseStatusDescriptor, GetTrialLicenseStatusRequestParameters, IGetTrialLicenseStatusRequest>, IGetTrialLicenseStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGetTrialStatus;
@@ -64,7 +64,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Post <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for Post <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class PostLicenseDescriptor : RequestDescriptorBase<PostLicenseDescriptor, PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePost;
@@ -74,7 +74,7 @@ namespace Nest
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
-	///<summary>descriptor for StartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for StartBasic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class StartBasicLicenseDescriptor : RequestDescriptorBase<StartBasicLicenseDescriptor, StartBasicLicenseRequestParameters, IStartBasicLicenseRequest>, IStartBasicLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseStartBasic;
@@ -84,7 +84,7 @@ namespace Nest
 		public StartBasicLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
-	///<summary>descriptor for StartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for StartTrial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class StartTrialLicenseDescriptor : RequestDescriptorBase<StartTrialLicenseDescriptor, StartTrialLicenseRequestParameters, IStartTrialLicenseRequest>, IStartTrialLicenseRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseStartTrial;

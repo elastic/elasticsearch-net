@@ -32,8 +32,8 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Elasticsearch.Net.Specification.MigrationApi
 {
 	///<summary>
-	/// Logically groups all Migration API's together so that they may be discovered more naturally.
-	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticLowLevelClient.Migration"/> property
+	/// Migration APIs.
+	/// <para>Not intended to be instantiated directly. Use the <see cref = "IElasticLowLevelClient.Migration"/> property
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>

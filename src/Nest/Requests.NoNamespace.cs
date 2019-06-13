@@ -40,7 +40,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
+	///<summary>Request for Bulk <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
 	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
 		protected IBulkRequest Self => this;
@@ -143,7 +143,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
+	///<summary>Request for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
@@ -166,7 +166,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+	///<summary>Request for Count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
@@ -326,7 +326,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
+	///<summary>Request for Create <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 	public partial class CreateRequest<TDocument> : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
 	{
 		protected ICreateRequest<TDocument> Self => this;
@@ -444,7 +444,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
+	///<summary>Request for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</para></summary>
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
@@ -580,7 +580,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
+	///<summary>Request for DeleteByQuery <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</para></summary>
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
@@ -865,7 +865,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	///<summary>Request for DeleteByQueryRethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</para></summary>
 	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
 	{
 		protected IDeleteByQueryRethrottleRequest Self => this;
@@ -904,7 +904,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
+	///<summary>Request for DeleteScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public partial class DeleteScriptRequest : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		protected IDeleteScriptRequest Self => this;
@@ -960,7 +960,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for DocumentExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>Request for DocumentExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
@@ -1109,7 +1109,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for SourceExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>Request for SourceExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
@@ -1258,7 +1258,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
+	///<summary>Request for Explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</para></summary>
 	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
 	{
 		protected IExplainRequest Self => this;
@@ -1404,7 +1404,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for FieldCapabilities <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
+	///<summary>Request for FieldCapabilities <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
 	public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
 		protected IFieldCapabilitiesRequest Self => this;
@@ -1476,7 +1476,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>Request for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
@@ -1615,7 +1615,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
+	///<summary>Request for GetScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		protected IGetScriptRequest Self => this;
@@ -1664,7 +1664,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Source <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>Request for Source <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
@@ -1802,7 +1802,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
+	///<summary>Request for Index <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
 		protected IIndexRequest<TDocument> Self => this;
@@ -1931,7 +1931,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for RootNodeInfo <pre>http://www.elastic.co/guide/</pre></summary>
+	///<summary>Request for RootNodeInfo <para>http://www.elastic.co/guide/</para></summary>
 	public partial class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
 		protected IRootNodeInfoRequest Self => this;
@@ -1957,7 +1957,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MultiGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
+	///<summary>Request for MultiGet <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</para></summary>
 	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		protected IMultiGetRequest Self => this;
@@ -2044,7 +2044,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MultiSearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
+	///<summary>Request for MultiSearch <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</para></summary>
 	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		protected IMultiSearchRequest Self => this;
@@ -2132,7 +2132,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MultiSearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
+	///<summary>Request for MultiSearchTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</para></summary>
 	public partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
 		protected IMultiSearchTemplateRequest Self => this;
@@ -2198,7 +2198,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MultiTermVectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
+	///<summary>Request for MultiTermVectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</para></summary>
 	public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
 		protected IMultiTermVectorsRequest Self => this;
@@ -2317,7 +2317,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Ping <pre>http://www.elastic.co/guide/</pre></summary>
+	///<summary>Request for Ping <para>http://www.elastic.co/guide/</para></summary>
 	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
@@ -2342,7 +2342,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
+	///<summary>Request for PutScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
@@ -2392,7 +2392,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ReindexOnServer <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
+	///<summary>Request for ReindexOnServer <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</para></summary>
 	public partial class ReindexOnServerRequest : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
 		protected IReindexOnServerRequest Self => this;
@@ -2463,7 +2463,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
+	///<summary>Request for ReindexRethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</para></summary>
 	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;
@@ -2502,7 +2502,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>Request for RenderSearchTemplate <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para></summary>
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
 		protected IRenderSearchTemplateRequest Self => this;
@@ -2529,7 +2529,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ExecutePainlessScript <pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
+	///<summary>Request for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
 		protected IExecutePainlessScriptRequest Self => this;
@@ -2543,7 +2543,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
+	///<summary>Request for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
@@ -2586,7 +2586,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
+	///<summary>Request for Search <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</para></summary>
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
@@ -2853,7 +2853,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
+	///<summary>Request for SearchShards <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para></summary>
 	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
@@ -2951,7 +2951,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	///<summary>Request for SearchTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para></summary>
 	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
 		protected ISearchTemplateRequest Self => this;
@@ -3089,7 +3089,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for TermVectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
+	///<summary>Request for TermVectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</para></summary>
 	public partial class TermVectorsRequest<TDocument> : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
 		protected ITermVectorsRequest<TDocument> Self => this;
@@ -3229,7 +3229,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
+	///<summary>Request for Update <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</para></summary>
 	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 	{
 		protected IUpdateRequest<TDocument, TPartialDocument> Self => this;
@@ -3355,7 +3355,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
+	///<summary>Request for UpdateByQuery <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</para></summary>
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
@@ -3654,7 +3654,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	///<summary>Request for UpdateByQueryRethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
 	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
 	{
 		protected IUpdateByQueryRethrottleRequest Self => this;
