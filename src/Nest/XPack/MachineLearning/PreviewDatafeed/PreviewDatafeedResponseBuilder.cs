@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return response.Success
 				? new PreviewDatafeedResponse<TDocument> { Data = builtInSerializer.Deserialize<IReadOnlyCollection<TDocument>>(stream) }
-				: null;
+				: new PreviewDatafeedResponse<TDocument>();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -26,7 +26,7 @@ namespace Nest
 		{
 			return response.Success
 				? new PreviewDatafeedResponse<TDocument> { Data = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TDocument>>(stream) }
-				: null;
+				: new PreviewDatafeedResponse<TDocument>();
 		}
 	}
 }

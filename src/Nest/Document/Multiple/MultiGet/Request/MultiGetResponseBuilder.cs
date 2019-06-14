@@ -15,7 +15,7 @@ namespace Nest
 		{
 			return response.Success
 				? builtInSerializer.CreateStateful(Formatter).Deserialize<MultiGetResponse>(stream)
-				: null;
+				: new MultiGetResponse();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return response.Success
 				? await builtInSerializer.CreateStateful(Formatter).DeserializeAsync<MultiGetResponse>(stream, ctx)
-				: null;
+				: new MultiGetResponse();
 		}
 	}
 }

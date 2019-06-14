@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return response.Success
 				? new GetCertificatesResponse { Certificates = builtInSerializer.Deserialize<ClusterCertificateInformation[]>(stream) }
-				: null;
+				: new GetCertificatesResponse();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -25,7 +25,7 @@ namespace Nest
 		{
 			return response.Success
 				? new GetCertificatesResponse { Certificates = await builtInSerializer.DeserializeAsync<ClusterCertificateInformation[]>(stream) }
-				: null;
+				: new GetCertificatesResponse();
 		}
 	}
 }

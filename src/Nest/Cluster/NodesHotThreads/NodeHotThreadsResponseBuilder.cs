@@ -52,7 +52,7 @@ namespace Nest
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
 			if (response.Success == false)
-				return null;
+				return new NodesHotThreadsResponse();
 
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
@@ -70,7 +70,7 @@ namespace Nest
 		)
 		{
 			if (response.Success == false)
-				return null;
+				return new NodesHotThreadsResponse();
 
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))

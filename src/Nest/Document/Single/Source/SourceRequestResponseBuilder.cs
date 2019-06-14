@@ -13,14 +13,14 @@ namespace Nest
 		{
 			return response.Success
 				? new SourceResponse<TDocument> { Body = builtInSerializer.Deserialize<TDocument>(stream) }
-				: null;
+				: new SourceResponse<TDocument>();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default)
 		{
 			return response.Success
 				? new SourceResponse<TDocument> { Body = await builtInSerializer.DeserializeAsync<TDocument>(stream) }
-				: null;
+				: new SourceResponse<TDocument>();
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return response.Success
 				? new TranslateSqlResponse { Result = builtInSerializer.Deserialize<ISearchRequest>(stream) }
-				: null;
+				: new TranslateSqlResponse();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -25,7 +25,7 @@ namespace Nest
 		{
 			return response.Success
 				? new TranslateSqlResponse { Result = await builtInSerializer.DeserializeAsync<ISearchRequest>(stream) }
-				: null;
+				: new TranslateSqlResponse();
 		}
 	}
 }
