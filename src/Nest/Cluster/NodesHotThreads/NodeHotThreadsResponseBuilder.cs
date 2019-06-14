@@ -7,12 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Nest 
+namespace Nest
 {
 	internal class NodeHotThreadsResponseBuilder : CustomResponseBuilderBase
 	{
 		public static NodeHotThreadsResponseBuilder Instance { get; } = new NodeHotThreadsResponseBuilder();
-		
+
 		//::: {Dragonfly}{lvtIV72sRIWBGik7ulbuaw}{127.0.0.1}{127.0.0.1:9300}
 		private static readonly Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
 
@@ -49,8 +49,11 @@ namespace Nest
 			return new NodesHotThreadsResponse(info.ToList());
 		}
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream) 
+		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
+			if (response.Success == false)
+				return null;
+
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
 			{
@@ -60,19 +63,21 @@ namespace Nest
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
-			IElasticsearchSerializer builtInSerializer, 
-			IApiCallDetails apiCallDetails, 
+			IElasticsearchSerializer builtInSerializer,
+			IApiCallDetails response,
 			Stream stream,
 			CancellationToken ctx = default
 		)
 		{
+			if (response.Success == false)
+				return null;
+
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
 			{
 				var plainTextResponse = await sr.ReadToEndAsync();
 				return Parse(plainTextResponse);
 			}
-			
 		}
 	}
 }

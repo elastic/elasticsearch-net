@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Specification.MachineLearningApi;
 
 namespace Nest
 {
@@ -53,6 +54,12 @@ namespace Nest
 			else
 				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
+		}
+
+		internal IRequestParameters ResponseBuilder(PreviewDatafeedRequestParameters parameters, CustomResponseBuilderBase builder)
+		{
+			parameters.CustomResponseBuilder = builder;
+			return parameters;
 		}
 	}
 	/// <summary>

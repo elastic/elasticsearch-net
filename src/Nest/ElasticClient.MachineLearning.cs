@@ -752,14 +752,14 @@ namespace Nest.Specification.MachineLearningApi
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(IPreviewDatafeedRequest request)
-			where TDocument : class => DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, request.RequestParameters);
+			where TDocument : class => DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, PreviewDatafeedResponseBuilder<TDocument>.Instance));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para> </para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(IPreviewDatafeedRequest request, CancellationToken ct = default)
-			where TDocument : class => DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, request.RequestParameters, ct);
+			where TDocument : class => DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, PreviewDatafeedResponseBuilder<TDocument>.Instance), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar</c> API, read more about this API online:
 		/// <para> </para>

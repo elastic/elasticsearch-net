@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -5,16 +6,14 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class MultiGetResponseBuilder : CustomResponseBuilderBase
+	internal class PreviewDatafeedResponseBuilder<TDocument> : CustomResponseBuilderBase where TDocument : class
 	{
-		public MultiGetResponseBuilder(IMultiGetRequest request) => Formatter = new MultiGetResponseFormatter(request);
-
-		private MultiGetResponseFormatter Formatter { get; }
+		public static PreviewDatafeedResponseBuilder<TDocument> Instance { get; } = new PreviewDatafeedResponseBuilder<TDocument>();
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
 			return response.Success
-				? builtInSerializer.CreateStateful(Formatter).Deserialize<MultiGetResponse>(stream)
+				? new PreviewDatafeedResponse<TDocument> { Data = builtInSerializer.Deserialize<IReadOnlyCollection<TDocument>>(stream) }
 				: null;
 		}
 
@@ -26,7 +25,7 @@ namespace Nest
 		)
 		{
 			return response.Success
-				? await builtInSerializer.CreateStateful(Formatter).DeserializeAsync<MultiGetResponse>(stream, ctx)
+				? new PreviewDatafeedResponse<TDocument> { Data = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TDocument>>(stream) }
 				: null;
 		}
 	}

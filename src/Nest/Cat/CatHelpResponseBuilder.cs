@@ -12,10 +12,10 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
+			if (!response.Success)
+				return null;
+
 			var catResponse = new CatResponse<CatHelpRecord>();
-
-			if (!response.Success) return catResponse;
-
 			using (stream)
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
 			{
@@ -37,11 +37,10 @@ namespace Nest
 			CancellationToken ctx = default
 		)
 		{
+			if (!response.Success)
+				return null;
 
 			var catResponse = new CatResponse<CatHelpRecord>();
-
-			if (!response.Success) return catResponse;
-
 			using (stream)
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
 			{
