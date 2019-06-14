@@ -2,13 +2,13 @@
 
 namespace Nest
 {
-	public interface IPreviewDatafeedResponse<out TResult> : IResponse where TResult : class
+	public interface IPreviewDatafeedResponse<out TDocument> : IResponse where TDocument : class
 	{
-		IReadOnlyCollection<TResult> Data { get; }
+		IReadOnlyCollection<TDocument> Data { get; }
 	}
 
-	public class PreviewDatafeedResponse<TResult> : ResponseBase, IPreviewDatafeedResponse<TResult> where TResult : class
+	public class PreviewDatafeedResponse<TDocument> : ResponseBase, IPreviewDatafeedResponse<TDocument> where TDocument : class
 	{
-		public IReadOnlyCollection<TResult> Data { get; internal set; } = EmptyReadOnly<TResult>.Collection;
+		public IReadOnlyCollection<TDocument> Data { get; internal set; } = EmptyReadOnly<TDocument>.Collection;
 	}
 }
