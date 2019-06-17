@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -45,9 +46,24 @@ namespace Tests.Cluster.ClusterState
 			var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
 			badPath.Should().BeNull();
 
-			var dict = response.Get<IDictionary<string, object>>($"nodes");
+			var dict = response.Get<DynamicBody>($"nodes");
 
-			dict.Should().NotBeNull();
+			dict.Count.Should().BeGreaterThan(0);
+			var node = dict[response.MasterNode].ToDictionary();
+			node.Should().NotBeNull().And.ContainKey("name");
+
+			object dictDoesNotExist = response.Get<DynamicBody>("nodes2");
+			dictDoesNotExist.Should().BeNull();
+
+
+			dynamic r = response.State;
+
+			string lastCommittedConfig = r.metadata.cluster_coordination.last_committed_config[0];
+
+			lastCommittedConfig.Should().NotBeNullOrWhiteSpace();
+
+
+
 
 		}
 	}
