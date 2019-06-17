@@ -48,6 +48,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
+                Project Project.NestUpgradeHelper;
             ] 
         static member Tests = seq [PrivateProject PrivateProject.Tests]
         

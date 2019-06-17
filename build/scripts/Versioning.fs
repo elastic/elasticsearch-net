@@ -109,16 +109,20 @@ module Versioning =
         let sn = sn ()
         let out = Tooling.read sn ["-v"; dll;]
         
-        let valid = (out.ExitCode, out.Output |> Seq.findIndex(fun s -> s.Line.Contains("is valid")))
+        // Mono StrongName - version 5.18.1.0
+        // returns `is strongnamed` 
+        let valid = (out.ExitCode, out.Output |> Seq.findIndex(fun s -> s.Line.Contains("is valid") || s.Line.Contains("is strongnamed")))
         match valid with
         | (0, i) when i >= 0 -> printfn "%s was signed correctly" name 
         | (_, _) -> failwithf "{0} was not validly signed"
         
         let out = Tooling.read sn ["-T"; dll;]
         
-        let tokenMessage = (out.Output |> Seq.find(fun s -> s.Line.Contains("Public key token is")));
+        let tokenMessage = (out.Output |> Seq.find(fun s -> s.Line.Contains("Public key token", StringComparison.OrdinalIgnoreCase)));
         
-        let token = (tokenMessage.Line.Replace("Public key token is", "")).Trim();
+        // Mono StrongName - version 5.18.1.0
+        // returns `Key Token:` 
+        let token = (tokenMessage.Line.Replace("Public Key Token:", "").Replace("Public key token is", "")).Trim();
     
         let valid = (out.ExitCode, token)
         match valid with
