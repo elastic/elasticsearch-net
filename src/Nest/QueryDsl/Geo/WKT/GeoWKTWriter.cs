@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -135,13 +136,13 @@ namespace Nest
 
 			// WKT specification expects the following order: minLon, maxLon, maxLat, minLat.
 			// envelope is top_left (minLon, maxLat), bottom_right (maxLon, minLat)
-			builder.Append(topLeft.Longitude)
+			builder.Append(topLeft.Longitude.ToString(CultureInfo.InvariantCulture))
 				.Append(", ")
-				.Append(bottomRight.Longitude)
+				.Append(bottomRight.Longitude.ToString(CultureInfo.InvariantCulture))
 				.Append(", ")
-				.Append(topLeft.Latitude)
+				.Append(topLeft.Latitude.ToString(CultureInfo.InvariantCulture))
 				.Append(", ")
-				.Append(bottomRight.Latitude)
+				.Append(bottomRight.Latitude.ToString(CultureInfo.InvariantCulture))
 				.Append(")");
 		}
 
@@ -176,12 +177,12 @@ namespace Nest
 
 		private static void WriteCoordinate(GeoCoordinate coordinate, StringBuilder builder)
 		{
-			builder.Append(coordinate.Longitude)
+			builder.Append(coordinate.Longitude.ToString(CultureInfo.InvariantCulture))
 				.Append(" ")
-				.Append(coordinate.Latitude);
+				.Append(coordinate.Latitude.ToString(CultureInfo.InvariantCulture));
 
 			if (coordinate.Z.HasValue)
-				builder.Append(" ").Append(coordinate.Z.Value);
+				builder.Append(" ").Append(coordinate.Z.Value.ToString(CultureInfo.InvariantCulture));
 		}
 	}
 }
