@@ -107,6 +107,7 @@ module Release =
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
+        | Project NestUpgradeHelper
         | Project NestJsonNetSerializer -> 
             let nestDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
             nestDeps |> Seq.iter (fun e ->
