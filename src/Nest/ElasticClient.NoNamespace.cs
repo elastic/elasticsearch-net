@@ -165,7 +165,7 @@ namespace Nest
 			private set;
 		}
 
-		///<summary>X Pack APIs</summary>
+		///<summary>XPack APIs</summary>
 		public XPackNamespace XPack
 		{
 			get;

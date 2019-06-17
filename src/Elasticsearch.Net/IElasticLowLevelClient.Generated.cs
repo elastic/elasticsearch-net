@@ -695,7 +695,7 @@ namespace Elasticsearch.Net
 			get;
 		}
 
-		///<summary>X Pack APIs</summary>
+		///<summary>XPack APIs</summary>
 		LowLevelXPackNamespace XPack
 		{
 			get;

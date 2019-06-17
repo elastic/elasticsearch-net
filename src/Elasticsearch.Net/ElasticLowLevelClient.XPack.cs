@@ -32,7 +32,7 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Elasticsearch.Net.Specification.XPackApi
 {
 	///<summary>
-	/// X Pack APIs.
+	/// XPack APIs.
 	/// <para>Not intended to be instantiated directly. Use the <see cref = "IElasticLowLevelClient.XPack"/> property
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>

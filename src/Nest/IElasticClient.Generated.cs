@@ -1085,7 +1085,7 @@ namespace Nest
 			get;
 		}
 
-		///<summary>X Pack APIs</summary>
+		///<summary>XPack APIs</summary>
 		XPackNamespace XPack
 		{
 			get;

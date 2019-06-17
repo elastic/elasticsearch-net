@@ -25,7 +25,7 @@ using Elasticsearch.Net.Specification.XPackApi;
 namespace Nest.Specification.XPackApi
 {
 	///<summary>
-	/// X Pack APIs.
+	/// XPack APIs.
 	/// <para>Not intended to be instantiated directly. Use the <see cref = "IElasticClient.XPack"/> property
 	/// on <see cref = "IElasticClient"/>.
 	///</para>

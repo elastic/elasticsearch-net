@@ -41,6 +41,6 @@ namespace ApiGenerator
 		}
 
 		public static string SplitPascalCase(this string s) =>
-			Regex.Replace(s, "([a-z](?=[A-Z]|[0-9])|[A-Z](?=[A-Z][a-z]|[0-9])|[0-9](?=[^0-9]))", "$1 ");
+			Regex.Replace(s, "([A-Z]+[a-z]*)", " $1").Trim();
 	}
 }
