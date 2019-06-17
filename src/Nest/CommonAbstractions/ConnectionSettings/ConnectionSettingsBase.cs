@@ -105,8 +105,8 @@ namespace Nest
 
 			UserAgent(ConnectionSettings.DefaultUserAgent);
 		}
-		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 
+		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
@@ -213,7 +213,7 @@ namespace Nest
 
 		/// <summary>
 		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index, type, id and relation name for a given CLR type, as well as control
+		/// The mapping can infer the index, id and relation name for a given CLR type, as well as control
 		/// serialization behaviour for CLR properties.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
@@ -246,7 +246,7 @@ namespace Nest
 
 		/// <summary>
 		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index, type and relation name for a given CLR type.
+		/// The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
 		{

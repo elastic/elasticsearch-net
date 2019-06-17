@@ -41,6 +41,29 @@ new ScriptedMetricAggregation("sum_the_hard_way")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "sum_the_hard_way": {
+    "scripted_metric": {
+      "init_script": {
+        "source": "state.commits = []"
+      },
+      "map_script": {
+        "source": "if (doc['state'].value == \"Stable\") { state.commits.add(doc['numberOfCommits'].value) }"
+      },
+      "combine_script": {
+        "source": "def sum = 0.0; for (c in state.commits) { sum += c } return sum"
+      },
+      "reduce_script": {
+        "source": "def sum = 0.0; for (a in states) { sum += a } return sum"
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -100,6 +123,53 @@ new ScriptedMetricAggregation("by_state_total")
     MapScript = new InlineScript(_second.Map) { Lang = _second.Language },
     CombineScript = new InlineScript(_second.Combine) { Lang = _second.Language },
     ReduceScript = new InlineScript(_second.Reduce) { Lang = _second.Language }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "by_state_total": {
+    "scripted_metric": {
+      "init_script": {
+        "source": "state.map = [:]",
+        "lang": "painless"
+      },
+      "combine_script": {
+        "source": "return state.map;",
+        "lang": "painless"
+      },
+      "map_script": {
+        "source": "if (state.map.containsKey(doc['state'].value)) state.map[doc['state'].value] += 1; else state.map[doc['state'].value] = 1;",
+        "lang": "painless"
+      },
+      "reduce_script": {
+        "source": "def reduce = [:]; for (map in states){ for (entry in map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); }} return reduce;",
+        "lang": "painless"
+      }
+    }
+  },
+  "total_commits": {
+    "scripted_metric": {
+      "init_script": {
+        "source": "state.commits = []",
+        "lang": "painless"
+      },
+      "map_script": {
+        "source": "if (doc['state'].value == \"Stable\") { state.commits.add(doc['numberOfCommits'].value) }",
+        "lang": "painless"
+      },
+      "combine_script": {
+        "source": "def sum = 0.0; for (c in state.commits) { sum += c } return sum",
+        "lang": "painless"
+      },
+      "reduce_script": {
+        "source": "def sum = 0.0; for (a in states) { sum += a } return sum",
+        "lang": "painless"
+      }
+    }
+  }
 }
 ----
 
