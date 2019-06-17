@@ -63,23 +63,16 @@ namespace Nest
 		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>, IConnectionSettingsValues
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;
-
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
 		private readonly HashSet<Type> _disableIdInference = new HashSet<Type>();
-
 		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
-
 		private readonly Inferrer _inferrer;
-
 		private readonly IPropertyMappingProvider _propertyMappingProvider;
-
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
-
 		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
-
 		private readonly IElasticsearchSerializer _sourceSerializer;
-		private bool _defaultDisableAllInference;
 
+		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
 		private string _defaultIndex;
 
@@ -119,17 +112,32 @@ namespace Nest
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultIndex"/>
+		/// <summary>
+		/// The default index to use for a request when no index has been explicitly specified
+		/// and no default indices are specified for the given CLR type specified for the request.
+		/// </summary>
 		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultFieldNameInferrer"/>
+		/// <summary>
+		/// Specifies how field names are inferred from CLR property names.
+		/// <para></para>
+		/// By default, NEST camel cases property names.
+		/// </summary>
+		/// <example>
+		/// CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
+		/// </example>
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
 			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultDisableIdInference" />
+		/// <summary>
+		/// Disables automatic Id inference for given CLR types.
+		/// <para></para>
+		/// NEST by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding a type
+		/// will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use
+		/// <see cref="DefaultDisableIdInference"/>
+		/// </summary>
 		public TConnectionSettings DefaultDisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._defaultDisableAllInference = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.IdProperties"/>
 		private void MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -263,7 +271,10 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})" />
+		/// <summary>
+		/// Specify how the mapping is inferred for a given CLR type.
+		/// The mapping can infer the index and relation name for a given CLR type.
+		/// </summary>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
 			if (typeMappings == null) return (TConnectionSettings)this;
