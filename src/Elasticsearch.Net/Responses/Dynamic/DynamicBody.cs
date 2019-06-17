@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using Elasticsearch.Net.Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
@@ -48,6 +49,30 @@ namespace Elasticsearch.Net
 		public bool IsReadOnly
 		{
 			get { return false; }
+		}
+
+		/// <summary>
+		/// Helper to to easily traverse the data using a path notation
+		/// </summary>
+		/// <param name="path">path into the stored object, keys are seperated with a dot and the last key is returned as T</param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns>T or default</returns>
+		public T Get<T>(string path)
+		{
+			var stack = new Stack<string>(path.Split('.'));
+			if (stack.Count == 0) return default;
+
+			var lastValue = stack.Pop();
+			var queue = new Queue<string>(stack.Reverse());
+			dynamic map = this;
+			while (queue.Count > 0)
+			{
+				var key = queue.Dequeue();
+				map = map[key];
+				if (map == null) break;
+			}
+			var v = map?[lastValue]?.Value;
+			return v == null ? default : (T)v;
 		}
 
 		/// <summary>

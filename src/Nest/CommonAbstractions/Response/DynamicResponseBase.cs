@@ -17,17 +17,26 @@ namespace Nest
 		[IgnoreDataMember]
 		protected IDynamicResponse Self => this;
 
+		/// <summary>
+		/// Helper to to easily traverse the data using a path notation
+		/// </summary>
+		/// <param name="path">path into the stored object, keys are seperated with a dot and the last key is returned as T</param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns>T or default</returns>
+		public T Get<T>(string path) => Self.BackingBody.Get<T>(path);
+
 		DynamicBody IDynamicResponse.BackingBody { get; set; } = new DynamicBody();
 	}
+
 
 	internal class DynamicResponseFormatter<TResponse> : IJsonFormatter<TResponse>
 		where TResponse : ResponseBase, IDynamicResponse, new()
 	{
 		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			
+
 			var response = new TResponse();
-			
+
 			var keyFormatter = formatterResolver.GetFormatter<string>();
 			var valueFormatter = formatterResolver.GetFormatter<object>();
 			var dictionary = new Dictionary<string, object>();

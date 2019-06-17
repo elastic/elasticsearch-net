@@ -1,16 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterState
 {
@@ -39,10 +33,22 @@ namespace Tests.Cluster.ClusterState
 			response.Version.Should().BeGreaterThan(0);
 
 			var masterNode = response.State["nodes"][response.MasterNode];
-			var masterNodeName = masterNode["name"] as string;
-			var transportAddress = masterNode["transport_address"] as string;
+			var masterNodeName = masterNode["name"].Value as string;
+			var transportAddress = masterNode["transport_address"].Value as string;
 			masterNodeName.Should().NotBeNullOrWhiteSpace();
 			transportAddress.Should().NotBeNullOrWhiteSpace();
+
+			var getSyntax = response.Get<string>($"nodes.{response.MasterNode}.transport_address");
+
+			getSyntax.Should().NotBeNullOrWhiteSpace().And.Be(transportAddress);
+
+			var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
+			badPath.Should().BeNull();
+
+			var dict = response.Get<IDictionary<string, object>>($"nodes");
+
+			dict.Should().NotBeNull();
+
 		}
 	}
 }

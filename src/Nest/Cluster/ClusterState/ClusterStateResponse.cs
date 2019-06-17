@@ -11,20 +11,20 @@ namespace Nest
 		public DynamicBody State => Self.BackingBody;
 
 		[DataMember(Name = "cluster_name")]
-		public string ClusterName => State["cluster_name"] as string;
+		public string ClusterName => State.Get<string>("cluster_name");
 
 		/// <summary>The Universally Unique Identifier for the cluster.</summary>
 		/// <remarks>While the cluster is still forming, it is possible for the `cluster_uuid` to be `_na_`.</remarks>
 		[DataMember(Name = "cluster_uuid")]
-		public string ClusterUUID => State["cluster_uuid"] as string;
+		public string ClusterUUID => State.Get<string>("cluster_uuid");
 
 		[DataMember(Name = "master_node")]
-		public string MasterNode => State["master_node"] as string;
+		public string MasterNode => State.Get<string>("master_node");
 
 		[DataMember(Name = "state_uuid")]
-		public string StateUUID => State["state_uuid"] as string;
+		public string StateUUID => State.Get<string>("state_uuid");
 
 		[DataMember(Name = "version")]
-		public long? Version => State["version"] as long?;
+		public long? Version => State.Get<long?>("version");
 	}
 }
