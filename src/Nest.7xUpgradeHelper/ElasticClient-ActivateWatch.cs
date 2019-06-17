@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,19 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Activates a currently inactive watch.
 		/// </summary>
-		public static ActivateWatchResponse ActivateWatch(this IElasticClient client,Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ActivateWatchResponse ActivateWatch(this IElasticClient client, Id id,
+			Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null
+		)
+			=> client.Watcher.Activate(id, selector);
+
+		////<inheritdoc />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ActivateWatchResponse ActivateWatch(this IElasticClient client, IActivateWatchRequest request)
+			=> client.Watcher.Activate(request);
 
 		/// <inheritdoc />
-		public static ActivateWatchResponse ActivateWatch(this IElasticClient client,IActivateWatchRequest request);
-
-		/// <inheritdoc />
-		public static Task<ActivateWatchResponse> ActivateWatchAsync(this IElasticClient client,Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ActivateWatchResponse> ActivateWatchAsync(this IElasticClient client, Id id,
+			Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.ActivateAsync(id, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ActivateWatchResponse> ActivateWatchAsync(this IElasticClient client,IActivateWatchRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ActivateWatchResponse> ActivateWatchAsync(this IElasticClient client, IActivateWatchRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.ActivateAsync(request, ct);
 	}
 }

@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static GetRepositoryResponse GetRepository(this IElasticClient client,Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetRepositoryResponse GetRepository(this IElasticClient client,
+			Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null
+		)
+			=> client.Snapshot.GetRepository(selector);
 
 		/// <inheritdoc />
-		public static GetRepositoryResponse GetRepository(this IElasticClient client,IGetRepositoryRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetRepositoryResponse GetRepository(this IElasticClient client, IGetRepositoryRequest request)
+			=> client.Snapshot.GetRepository(request);
 
 		/// <inheritdoc />
-		public static Task<GetRepositoryResponse> GetRepositoryAsync(this IElasticClient client,Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetRepositoryResponse> GetRepositoryAsync(this IElasticClient client,
+			Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Snapshot.GetRepositoryAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetRepositoryResponse> GetRepositoryAsync(this IElasticClient client,IGetRepositoryRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetRepositoryResponse> GetRepositoryAsync(this IElasticClient client, IGetRepositoryRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Snapshot.GetRepositoryAsync(request, ct);
 	}
-
 }

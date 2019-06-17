@@ -16,18 +16,26 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes stats operation</param>
-		public static NodesStatsResponse NodesStats(this IElasticClient client,Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static NodesStatsResponse NodesStats(this IElasticClient client, Func<NodesStatsDescriptor, INodesStatsRequest> selector = null)
+			=> client.Nodes.Stats(selector);
 
 		/// <inheritdoc />
-		public static NodesStatsResponse NodesStats(this IElasticClient client,INodesStatsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static NodesStatsResponse NodesStats(this IElasticClient client, INodesStatsRequest request)
+			=> client.Nodes.Stats(request);
 
 		/// <inheritdoc />
-		public static Task<NodesStatsResponse> NodesStatsAsync(this IElasticClient client,Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<NodesStatsResponse> NodesStatsAsync(this IElasticClient client,
+			Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Nodes.StatsAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<NodesStatsResponse> NodesStatsAsync(this IElasticClient client,INodesStatsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<NodesStatsResponse> NodesStatsAsync(this IElasticClient client, INodesStatsRequest request, CancellationToken ct = default)
+			=> client.Nodes.StatsAsync(request, ct);
 	}
-
 }

@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
-		public static ForceMergeResponse ForceMerge(this IElasticClient client,Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ForceMergeResponse ForceMerge(this IElasticClient client, Indices indices,
+			Func<ForceMergeDescriptor, IForceMergeRequest> selector = null
+		)
+			=> client.Indices.ForceMerge(indices, selector);
 
 		/// <inheritdoc />
-		public static ForceMergeResponse ForceMerge(this IElasticClient client,IForceMergeRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ForceMergeResponse ForceMerge(this IElasticClient client, IForceMergeRequest request)
+			=> client.Indices.ForceMerge(request);
 
 		/// <inheritdoc />
-		public static Task<ForceMergeResponse> ForceMergeAsync(this IElasticClient client,Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ForceMergeResponse> ForceMergeAsync(this IElasticClient client, Indices indices,
+			Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.ForceMergeAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ForceMergeResponse> ForceMergeAsync(this IElasticClient client,IForceMergeRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ForceMergeResponse> ForceMergeAsync(this IElasticClient client, IForceMergeRequest request, CancellationToken ct = default)
+			=> client.Indices.ForceMergeAsync(request, ct);
 	}
-
 }

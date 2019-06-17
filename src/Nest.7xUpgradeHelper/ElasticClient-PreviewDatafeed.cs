@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,20 +10,29 @@ namespace Nest
 		/// Preview a machine learning datafeed.
 		/// This preview shows the structure of the data that will be passed to the anomaly detection engine.
 		/// </summary>
-		public static PreviewDatafeedResponse<T> PreviewDatafeed<T>(this IElasticClient client,Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PreviewDatafeedResponse<T> PreviewDatafeed<T>(this IElasticClient client, Id datafeedId,
+			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null
+		)
+			=> client.MachineLearning.PreviewDatafeed<T>(datafeedId, selector);
 
 		/// <inheritdoc />
-		public static PreviewDatafeedResponse<T> PreviewDatafeed<T>(this IElasticClient client,IPreviewDatafeedRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PreviewDatafeedResponse<T> PreviewDatafeed<T>(this IElasticClient client, IPreviewDatafeedRequest request)
+			=> client.MachineLearning.PreviewDatafeed<T>(request);
 
 		/// <inheritdoc />
-		public static Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(this IElasticClient client,Id datafeedId,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(this IElasticClient client, Id datafeedId,
 			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.PreviewDatafeedAsync<T>(datafeedId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(this IElasticClient client,IPreviewDatafeedRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(this IElasticClient client, IPreviewDatafeedRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.PreviewDatafeedAsync<T>(request, ct);
 	}
-
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,20 +14,30 @@ namespace Nest
 		/// <param name="repositories">The names of the repositories</param>
 		/// <param name="selector">Optionaly provide the delete operation with more details</param>
 		/// >
-		public static DeleteRepositoryResponse DeleteRepository(this IElasticClient client,Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteRepositoryResponse DeleteRepository(this IElasticClient client, Names repositories,
+			Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null
+		)
+			=> client.Snapshot.DeleteRepository(repositories, selector);
 
 		/// <inheritdoc />
-		public static DeleteRepositoryResponse DeleteRepository(this IElasticClient client,IDeleteRepositoryRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteRepositoryResponse DeleteRepository(this IElasticClient client, IDeleteRepositoryRequest request)
+			=> client.Snapshot.DeleteRepository(request);
 
 		/// <inheritdoc />
-		public static Task<DeleteRepositoryResponse> DeleteRepositoryAsync(this IElasticClient client,Names repositories,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteRepositoryResponse> DeleteRepositoryAsync(this IElasticClient client, Names repositories,
 			Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Snapshot.DeleteRepositoryAsync(repositories, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeleteRepositoryResponse> DeleteRepositoryAsync(this IElasticClient client,IDeleteRepositoryRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteRepositoryResponse> DeleteRepositoryAsync(this IElasticClient client, IDeleteRepositoryRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Snapshot.DeleteRepositoryAsync(request);
 	}
-
+}

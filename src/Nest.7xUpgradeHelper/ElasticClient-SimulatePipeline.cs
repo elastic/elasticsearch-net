@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static SimulatePipelineResponse SimulatePipeline(this IElasticClient client,Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static SimulatePipelineResponse SimulatePipeline(this IElasticClient client,
+			Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector
+		)
+			=> client.Ingest.SimulatePipeline(selector);
 
 		/// <inheritdoc />
-		public static SimulatePipelineResponse SimulatePipeline(this IElasticClient client,ISimulatePipelineRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static SimulatePipelineResponse SimulatePipeline(this IElasticClient client, ISimulatePipelineRequest request)
+			=> client.Ingest.SimulatePipeline(request);
 
 		/// <inheritdoc />
-		public static Task<SimulatePipelineResponse> SimulatePipelineAsync(this IElasticClient client,Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<SimulatePipelineResponse> SimulatePipelineAsync(this IElasticClient client,
+			Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Ingest.SimulatePipelineAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<SimulatePipelineResponse> SimulatePipelineAsync(this IElasticClient client,ISimulatePipelineRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<SimulatePipelineResponse> SimulatePipelineAsync(this IElasticClient client, ISimulatePipelineRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Ingest.SimulatePipelineAsync(request, ct);
 	}
-
 }

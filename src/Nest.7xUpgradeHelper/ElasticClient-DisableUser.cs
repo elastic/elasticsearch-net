@@ -1,25 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static DisableUserResponse DisableUser(this IElasticClient client,Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DisableUserResponse DisableUser(this IElasticClient client, Name username,
+			Func<DisableUserDescriptor, IDisableUserRequest> selector = null
+		)
+			=> client.Security.DisableUser(username, selector);
 
 		/// <inheritdoc />
-		public static DisableUserResponse DisableUser(this IElasticClient client,IDisableUserRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DisableUserResponse DisableUser(this IElasticClient client, IDisableUserRequest request)
+			=> client.Security.DisableUser(request);
 
 		/// <inheritdoc />
-		public static Task<DisableUserResponse> DisableUserAsync(this IElasticClient client,Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DisableUserResponse> DisableUserAsync(this IElasticClient client, Name username,
+			Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.DisableUserAsync(username, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DisableUserResponse> DisableUserAsync(this IElasticClient client,IDisableUserRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DisableUserResponse> DisableUserAsync(this IElasticClient client, IDisableUserRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Security.DisableUserAsync(request, ct);
 	}
-
 }

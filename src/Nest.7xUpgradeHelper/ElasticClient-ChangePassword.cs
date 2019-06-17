@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static ChangePasswordResponse ChangePassword(this IElasticClient client,Func<ChangePasswordDescriptor, IChangePasswordRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ChangePasswordResponse ChangePassword(this IElasticClient client,
+			Func<ChangePasswordDescriptor, IChangePasswordRequest> selector
+		)
+			=> client.Security.ChangePassword(selector);
 
 		/// <inheritdoc />
-		public static ChangePasswordResponse ChangePassword(this IElasticClient client,IChangePasswordRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ChangePasswordResponse ChangePassword(this IElasticClient client, IChangePasswordRequest request)
+			=> client.Security.ChangePassword(request);
 
 		/// <inheritdoc />
-		public static Task<ChangePasswordResponse> ChangePasswordAsync(this IElasticClient client,Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ChangePasswordResponse> ChangePasswordAsync(this IElasticClient client,
+			Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.ChangePasswordAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ChangePasswordResponse> ChangePasswordAsync(this IElasticClient client,IChangePasswordRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ChangePasswordResponse> ChangePasswordAsync(this IElasticClient client, IChangePasswordRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.ChangePasswordAsync(request, ct);
 	}
-
 }

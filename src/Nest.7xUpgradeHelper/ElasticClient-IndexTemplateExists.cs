@@ -11,21 +11,30 @@ namespace Nest
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static ExistsResponse IndexTemplateExists(this IElasticClient client,Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExistsResponse IndexTemplateExists(this IElasticClient client, Name template,
+			Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null
+		)
+			=> client.Indices.TemplateExists(template, selector);
 
 		/// <inheritdoc />
-		public static ExistsResponse IndexTemplateExists(this IElasticClient client,IIndexTemplateExistsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExistsResponse IndexTemplateExists(this IElasticClient client, IIndexTemplateExistsRequest request)
+			=> client.Indices.TemplateExists(request);
 
 		/// <inheritdoc />
-		public static Task<ExistsResponse> IndexTemplateExistsAsync(this IElasticClient client,Name template,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExistsResponse> IndexTemplateExistsAsync(this IElasticClient client, Name template,
 			Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.TemplateExistsAsync(template, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ExistsResponse> IndexTemplateExistsAsync(this IElasticClient client,IIndexTemplateExistsRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExistsResponse> IndexTemplateExistsAsync(this IElasticClient client, IIndexTemplateExistsRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.TemplateExistsAsync(request, ct);
 	}
-
 }

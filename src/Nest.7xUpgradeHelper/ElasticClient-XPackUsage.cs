@@ -7,18 +7,26 @@ namespace Nest
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static XPackUsageResponse XPackUsage(this IElasticClient client,Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static XPackUsageResponse XPackUsage(this IElasticClient client, Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null)
+			=> client.XPack.Usage(selector);
 
 		/// <inheritdoc />
-		public static XPackUsageResponse XPackUsage(this IElasticClient client,IXPackUsageRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static XPackUsageResponse XPackUsage(this IElasticClient client, IXPackUsageRequest request)
+			=> client.XPack.Usage(request);
 
 		/// <inheritdoc />
-		public static Task<XPackUsageResponse> XPackUsageAsync(this IElasticClient client,Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<XPackUsageResponse> XPackUsageAsync(this IElasticClient client,
+			Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.XPack.UsageAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<XPackUsageResponse> XPackUsageAsync(this IElasticClient client,IXPackUsageRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<XPackUsageResponse> XPackUsageAsync(this IElasticClient client, IXPackUsageRequest request, CancellationToken ct = default)
+			=> client.XPack.UsageAsync(request, ct);
 	}
-
 }

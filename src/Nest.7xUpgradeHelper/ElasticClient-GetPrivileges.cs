@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Retrieves application privileges.
 		/// </summary>
-		public static GetPrivilegesResponse GetPrivileges(this IElasticClient client,Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetPrivilegesResponse GetPrivileges(this IElasticClient client,
+			Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null
+		)
+			=> client.Security.GetPrivileges(null, selector);
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
-		public static GetPrivilegesResponse GetPrivileges(this IElasticClient client,IGetPrivilegesRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetPrivilegesResponse GetPrivileges(this IElasticClient client, IGetPrivilegesRequest request)
+			=> client.Security.GetPrivileges(request);
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
-		public static Task<GetPrivilegesResponse> GetPrivilegesAsync(this IElasticClient client,Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetPrivilegesResponse> GetPrivilegesAsync(this IElasticClient client,
+			Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.GetPrivilegesAsync(null, selector, ct);
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
-		public static Task<GetPrivilegesResponse> GetPrivilegesAsync(this IElasticClient client,IGetPrivilegesRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetPrivilegesResponse> GetPrivilegesAsync(this IElasticClient client, IGetPrivilegesRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Security.GetPrivilegesAsync(request, ct);
 	}
-
 }

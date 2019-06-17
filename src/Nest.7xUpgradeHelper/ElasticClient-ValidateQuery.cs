@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,22 +13,32 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to describe the query</typeparam>
 		/// <param name="selector">A descriptor that describes the query operation</param>
-		public static ValidateQueryResponse ValidateQuery<T>(this IElasticClient client,Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
-			where T : class;
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ValidateQueryResponse ValidateQuery<T>(this IElasticClient client,
+			Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector
+		)
+			where T : class
+			=> client.Indices.ValidateQuery(selector);
 
 		/// <inheritdoc />
-		public static ValidateQueryResponse ValidateQuery(this IElasticClient client,IValidateQueryRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ValidateQueryResponse ValidateQuery(this IElasticClient client, IValidateQueryRequest request)
+			=> client.Indices.ValidateQuery(request);
 
 		/// <inheritdoc />
-		public static Task<ValidateQueryResponse> ValidateQueryAsync<T>(this IElasticClient client,Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ValidateQueryResponse> ValidateQueryAsync<T>(this IElasticClient client,
+			Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
 			CancellationToken ct = default
 		)
-			where T : class;
+			where T : class
+			=> client.Indices.ValidateQueryAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ValidateQueryResponse> ValidateQueryAsync(this IElasticClient client,IValidateQueryRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ValidateQueryResponse> ValidateQueryAsync(this IElasticClient client, IValidateQueryRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.ValidateQueryAsync(request,ct);
 	}
-
 }

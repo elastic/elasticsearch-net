@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,20 +9,33 @@ namespace Nest
 		/// <summary>
 		/// Deletes forecasts from a machine learning job.
 		/// </summary>
-		public static DeleteForecastResponse DeleteForecast(this IElasticClient client,Id jobId, ForecastIds forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteForecastResponse DeleteForecast(this IElasticClient client, Id jobId, Ids forecastId,
+			Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null
+		)
+			=> client.MachineLearning.DeleteForecast(jobId, forecastId, selector);
 
-		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
-		public static DeleteForecastResponse DeleteForecast(this IElasticClient client,IDeleteForecastRequest request);
+		/// <inheritdoc
+		///     cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteForecastResponse DeleteForecast(this IElasticClient client, IDeleteForecastRequest request)
+			=> client.MachineLearning.DeleteForecast(request);
 
-		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
-		public static Task<DeleteForecastResponse> DeleteForecastAsync(this IElasticClient client,Id jobId, ForecastIds forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null,
+		/// <inheritdoc
+		///     cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteForecastResponse> DeleteForecastAsync(this IElasticClient client, Id jobId, Ids forecastId,
+			Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.DeleteForecastAsync(jobId, forecastId, selector, ct);
 
-		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
-		public static Task<DeleteForecastResponse> DeleteForecastAsync(this IElasticClient client,IDeleteForecastRequest request,
+		/// <inheritdoc
+		///     cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteForecastResponse> DeleteForecastAsync(this IElasticClient client, IDeleteForecastRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.DeleteForecastAsync(request, ct);
 	}
-
 }

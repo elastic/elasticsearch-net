@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,29 @@ namespace Nest
 		/// <summary>
 		/// Starts the Watcher/Alerting service, if the service is not already running
 		/// </summary>
-		public static StartWatcherResponse StartWatcher(this IElasticClient client,Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static StartWatcherResponse StartWatcher(this IElasticClient client, Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null
+		)
+			=> client.Watcher.Start(selector);
 
 		/// <inheritdoc />
-		public static StartWatcherResponse StartWatcher(this IElasticClient client,IStartWatcherRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static StartWatcherResponse StartWatcher(this IElasticClient client, IStartWatcherRequest request)
+			=> client.Watcher.Start(request);
 
 		/// <inheritdoc />
-		public static Task<StartWatcherResponse> StartWatcherAsync(this IElasticClient client,Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<StartWatcherResponse> StartWatcherAsync(this IElasticClient client,
+			Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.StartAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<StartWatcherResponse> StartWatcherAsync(this IElasticClient client,IStartWatcherRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<StartWatcherResponse> StartWatcherAsync(this IElasticClient client, IStartWatcherRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Watcher.StartAsync(request, ct);
 	}
-
 }

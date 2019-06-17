@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,28 @@ namespace Nest
 		/// <summary>
 		/// Sends data to a machine learning job for analysis.
 		/// </summary>
-		public static PostJobDataResponse PostJobData(this IElasticClient client,Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PostJobDataResponse PostJobData(this IElasticClient client, Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector)
+			=> client.MachineLearning.PostJobData(jobId, selector);
 
 		/// <inheritdoc />
-		public static PostJobDataResponse PostJobData(this IElasticClient client,IPostJobDataRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PostJobDataResponse PostJobData(this IElasticClient client, IPostJobDataRequest request)
+			=> client.MachineLearning.PostJobData(request);
 
 		/// <inheritdoc />
-		public static Task<PostJobDataResponse> PostJobDataAsync(this IElasticClient client,Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PostJobDataResponse> PostJobDataAsync(this IElasticClient client, Id jobId,
+			Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.PostJobDataAsync(jobId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<PostJobDataResponse> PostJobDataAsync(this IElasticClient client,IPostJobDataRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PostJobDataResponse> PostJobDataAsync(this IElasticClient client, IPostJobDataRequest request,
+			CancellationToken ct = default
+		)
+			=> client.MachineLearning.PostJobDataAsync(request, ct);
 	}
-
 }

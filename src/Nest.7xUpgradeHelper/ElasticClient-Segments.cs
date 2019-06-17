@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,20 +14,29 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the segments operation</param>
-		public static SegmentsResponse Segments(this IElasticClient client,Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static SegmentsResponse Segments(this IElasticClient client, Indices indices,
+			Func<SegmentsDescriptor, ISegmentsRequest> selector = null
+		)
+			=> client.Indices.Segments(indices, selector);
 
 		/// <inheritdoc />
-		public static SegmentsResponse Segments(this IElasticClient client,ISegmentsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static SegmentsResponse Segments(this IElasticClient client, ISegmentsRequest request)
+			=> client.Indices.Segments(request);
 
 		/// <inheritdoc />
-		public static Task<SegmentsResponse> SegmentsAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<SegmentsResponse> SegmentsAsync(this IElasticClient client,
 			Indices indices,
 			Func<SegmentsDescriptor, ISegmentsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.SegmentsAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<SegmentsResponse> SegmentsAsync(this IElasticClient client,ISegmentsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<SegmentsResponse> SegmentsAsync(this IElasticClient client, ISegmentsRequest request, CancellationToken ct = default)
+			=> client.Indices.SegmentsAsync(request, ct);
 	}
-
 }

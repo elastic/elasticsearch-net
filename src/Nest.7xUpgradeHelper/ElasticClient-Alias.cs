@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -25,17 +24,25 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the alias operation</param>
-		public static BulkAliasResponse Alias(this IElasticClient client,Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static BulkAliasResponse Alias(this IElasticClient client, Func<BulkAliasDescriptor, IBulkAliasRequest> selector)
+			=> client.Indices.BulkAlias(selector);
 
 		/// <inheritdoc />
-		public static BulkAliasResponse Alias(this IElasticClient client,IBulkAliasRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static BulkAliasResponse Alias(this IElasticClient client, IBulkAliasRequest request)
+			=> client.Indices.BulkAlias(request);
 
 		/// <inheritdoc />
-		public static Task<BulkAliasResponse> AliasAsync(this IElasticClient client,Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<BulkAliasResponse> AliasAsync(this IElasticClient client, Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.BulkAliasAsync(selector);
 
 		/// <inheritdoc />
-		public static Task<BulkAliasResponse> AliasAsync(this IElasticClient client,IBulkAliasRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<BulkAliasResponse> AliasAsync(this IElasticClient client, IBulkAliasRequest request, CancellationToken ct = default)
+			=> client.Indices.BulkAliasAsync(request, ct);
 	}
 }

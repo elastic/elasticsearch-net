@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static GetRoleMappingResponse GetRoleMapping(this IElasticClient client,Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetRoleMappingResponse GetRoleMapping(this IElasticClient client,
+			Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null
+		)
+			=> client.Security.GetRoleMapping(null, selector);
 
 		/// <inheritdoc />
-		public static GetRoleMappingResponse GetRoleMapping(this IElasticClient client,IGetRoleMappingRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetRoleMappingResponse GetRoleMapping(this IElasticClient client, IGetRoleMappingRequest request)
+			=> client.Security.GetRoleMapping(request);
 
 		/// <inheritdoc />
-		public static Task<GetRoleMappingResponse> GetRoleMappingAsync(this IElasticClient client,Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetRoleMappingResponse> GetRoleMappingAsync(this IElasticClient client,
+			Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.GetRoleMappingAsync(null, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetRoleMappingResponse> GetRoleMappingAsync(this IElasticClient client,IGetRoleMappingRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetRoleMappingResponse> GetRoleMappingAsync(this IElasticClient client, IGetRoleMappingRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.GetRoleMappingAsync(request, ct);
 	}
-
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,18 +12,26 @@ namespace Nest
 		/// <a href="http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/remote-info.html</a>
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the remote info operation</param>
-		public static RemoteInfoResponse RemoteInfo(this IElasticClient client,Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static RemoteInfoResponse RemoteInfo(this IElasticClient client, Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null)
+			=> client.Cluster.RemoteInfo(selector);
 
 		/// <inheritdoc />
-		public static RemoteInfoResponse RemoteInfo(this IElasticClient client,IRemoteInfoRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static RemoteInfoResponse RemoteInfo(this IElasticClient client, IRemoteInfoRequest request)
+			=> client.Cluster.RemoteInfo(request);
 
 		/// <inheritdoc />
-		public static Task<RemoteInfoResponse> RemoteInfoAsync(this IElasticClient client,Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<RemoteInfoResponse> RemoteInfoAsync(this IElasticClient client,
+			Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.RemoteInfoAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<RemoteInfoResponse> RemoteInfoAsync(this IElasticClient client,IRemoteInfoRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<RemoteInfoResponse> RemoteInfoAsync(this IElasticClient client, IRemoteInfoRequest request, CancellationToken ct = default)
+			=> client.Cluster.RemoteInfoAsync(request, ct);
 	}
-
 }

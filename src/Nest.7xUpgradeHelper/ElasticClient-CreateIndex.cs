@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,20 +13,31 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the create index operation</param>
-		public static CreateIndexResponse CreateIndex(this IElasticClient client,IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CreateIndexResponse CreateIndex(this IElasticClient client, IndexName index,
+			Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null
+		)
+			=> client.Indices.Create(index, selector);
 
 		/// <inheritdoc />
-		public static CreateIndexResponse CreateIndex(this IElasticClient client,ICreateIndexRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CreateIndexResponse CreateIndex(this IElasticClient client, ICreateIndexRequest request)
+			=> client.Indices.Create(request);
 
 		/// <inheritdoc />
-		public static Task<CreateIndexResponse> CreateIndexAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CreateIndexResponse> CreateIndexAsync(this IElasticClient client,
 			IndexName index,
 			Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.CreateAsync(index, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CreateIndexResponse> CreateIndexAsync(this IElasticClient client,ICreateIndexRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CreateIndexResponse> CreateIndexAsync(this IElasticClient client, ICreateIndexRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Indices.CreateAsync(request, ct);
 	}
-
 }

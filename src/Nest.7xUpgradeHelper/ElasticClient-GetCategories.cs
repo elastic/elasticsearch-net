@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,20 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Retrieves machine learning job results for one or more categories.
 		/// </summary>
-		public static GetCategoriesResponse GetCategories(this IElasticClient client,Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetCategoriesResponse GetCategories(this IElasticClient client, Id jobId,
+			Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null
+		)
+			=> client.MachineLearning.GetCategories(jobId, selector);
 
 		/// <inheritdoc />
-		public static GetCategoriesResponse GetCategories(this IElasticClient client,IGetCategoriesRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetCategoriesResponse GetCategories(this IElasticClient client, IGetCategoriesRequest request)
+			=> client.MachineLearning.GetCategories(request);
 
 		/// <inheritdoc />
-		public static Task<GetCategoriesResponse> GetCategoriesAsync(this IElasticClient client,Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetCategoriesResponse> GetCategoriesAsync(this IElasticClient client, Id jobId,
+			Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetCategoriesAsync(jobId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetCategoriesResponse> GetCategoriesAsync(this IElasticClient client,IGetCategoriesRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetCategoriesResponse> GetCategoriesAsync(this IElasticClient client, IGetCategoriesRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetCategoriesAsync(request, ct);
 	}
-
 }

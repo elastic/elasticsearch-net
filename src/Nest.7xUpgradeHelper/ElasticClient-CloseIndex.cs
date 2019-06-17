@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -16,20 +15,29 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor thata describes the close index operation</param>
-		public static CloseIndexResponse CloseIndex(this IElasticClient client,Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CloseIndexResponse CloseIndex(this IElasticClient client, Indices indices,
+			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null
+		)
+			=> client.Indices.Close(indices, selector);
 
 		/// <inheritdoc />
-		public static CloseIndexResponse CloseIndex(this IElasticClient client,ICloseIndexRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CloseIndexResponse CloseIndex(this IElasticClient client, ICloseIndexRequest request)
+			=> client.Indices.Close(request);
 
 		/// <inheritdoc />
-		public static Task<CloseIndexResponse> CloseIndexAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CloseIndexResponse> CloseIndexAsync(this IElasticClient client,
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.CloseAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CloseIndexResponse> CloseIndexAsync(this IElasticClient client,ICloseIndexRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CloseIndexResponse> CloseIndexAsync(this IElasticClient client, ICloseIndexRequest request, CancellationToken ct = default)
+			=> client.Indices.CloseAsync(request, ct);
 	}
-
 }

@@ -1,28 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static DeleteRoleMappingResponse DeleteRoleMapping(this IElasticClient client,Name role, Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteRoleMappingResponse DeleteRoleMapping(this IElasticClient client, Name role,
+			Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null
+		)
+			=> client.Security.DeleteRoleMapping(role, selector);
 
 		/// <inheritdoc />
-		public static DeleteRoleMappingResponse DeleteRoleMapping(this IElasticClient client,IDeleteRoleMappingRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteRoleMappingResponse DeleteRoleMapping(this IElasticClient client, IDeleteRoleMappingRequest request)
+			=> client.Security.DeleteRoleMapping(request);
 
 		/// <inheritdoc />
-		public static Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(this IElasticClient client,Name role,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(this IElasticClient client, Name role,
 			Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.DeleteRoleMappingAsync(role, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(this IElasticClient client,IDeleteRoleMappingRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(this IElasticClient client, IDeleteRoleMappingRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.DeleteRoleMappingAsync(request, ct);
 	}
-
 }

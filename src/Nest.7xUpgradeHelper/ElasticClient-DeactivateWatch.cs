@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,20 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Deactivates a currently active watch.
 		/// </summary>
-		public static DeactivateWatchResponse DeactivateWatch(this IElasticClient client,Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeactivateWatchResponse DeactivateWatch(this IElasticClient client, Id id,
+			Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null
+		)
+			=> client.Watcher.Deactivate(id, selector);
 
 		/// <inheritdoc />
-		public static DeactivateWatchResponse DeactivateWatch(this IElasticClient client,IDeactivateWatchRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeactivateWatchResponse DeactivateWatch(this IElasticClient client, IDeactivateWatchRequest request)
+			=> client.Watcher.Deactivate(request);
 
 		/// <inheritdoc />
-		public static Task<DeactivateWatchResponse> DeactivateWatchAsync(this IElasticClient client,Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeactivateWatchResponse> DeactivateWatchAsync(this IElasticClient client, Id id,
+			Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.DeactivateAsync(id, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeactivateWatchResponse> DeactivateWatchAsync(this IElasticClient client,IDeactivateWatchRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeactivateWatchResponse> DeactivateWatchAsync(this IElasticClient client, IDeactivateWatchRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.DeactivateAsync(request, ct);
 	}
-
 }

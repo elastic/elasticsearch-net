@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Determine whether the authenticated user has a specified list of privileges.
 		/// </summary>
-		public static HasPrivilegesResponse HasPrivileges(this IElasticClient client,Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static HasPrivilegesResponse HasPrivileges(this IElasticClient client,
+			Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null
+		)
+			=> client.Security.HasPrivileges(selector);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public static HasPrivilegesResponse HasPrivileges(this IElasticClient client,IHasPrivilegesRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static HasPrivilegesResponse HasPrivileges(this IElasticClient client, IHasPrivilegesRequest request)
+			=> client.Security.HasPrivileges(request);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public static Task<HasPrivilegesResponse> HasPrivilegesAsync(this IElasticClient client,Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<HasPrivilegesResponse> HasPrivilegesAsync(this IElasticClient client,
+			Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.HasPrivilegesAsync(selector, ct);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public static Task<HasPrivilegesResponse> HasPrivilegesAsync(this IElasticClient client,IHasPrivilegesRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<HasPrivilegesResponse> HasPrivilegesAsync(this IElasticClient client, IHasPrivilegesRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Security.HasPrivilegesAsync(request, ct);
 	}
-
 }

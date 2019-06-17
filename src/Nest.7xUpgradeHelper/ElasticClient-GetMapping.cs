@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,19 +12,26 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
-		public static GetMappingResponse GetMapping<T>(this IElasticClient client,Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null) where T : class;
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetMappingResponse GetMapping<T>(this IElasticClient client, Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null)
+			where T : class => client.Indices.GetMapping<T>(selector);
 
 		/// <inheritdoc />
-		public static GetMappingResponse GetMapping(this IElasticClient client,IGetMappingRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetMappingResponse GetMapping(this IElasticClient client, IGetMappingRequest request)
+			=> client.Indices.GetMapping(request);
 
 		/// <inheritdoc />
-		public static Task<GetMappingResponse> GetMappingAsync<T>(this IElasticClient client,Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetMappingResponse> GetMappingAsync<T>(this IElasticClient client,
+			Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null,
 			CancellationToken ct = default
 		)
-			where T : class;
+			where T : class => client.Indices.GetMappingAsync<T>(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetMappingResponse> GetMappingAsync(this IElasticClient client,IGetMappingRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetMappingResponse> GetMappingAsync(this IElasticClient client, IGetMappingRequest request, CancellationToken ct = default)
+			=> client.Indices.GetMappingAsync(request, ct);
 	}
-
 }

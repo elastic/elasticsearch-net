@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,22 +13,31 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete template operation</param>
-		public static DeleteIndexTemplateResponse DeleteIndexTemplate(this IElasticClient client,Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteIndexTemplateResponse DeleteIndexTemplate(this IElasticClient client, Name name,
+			Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null
+		)
+			=> client.Indices.DeleteTemplate(name, selector);
 
 		/// <inheritdoc />
-		public static DeleteIndexTemplateResponse DeleteIndexTemplate(this IElasticClient client,IDeleteIndexTemplateRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteIndexTemplateResponse DeleteIndexTemplate(this IElasticClient client, IDeleteIndexTemplateRequest request)
+			=> client.Indices.DeleteTemplate(request);
 
 		/// <inheritdoc />
-		public static Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(this IElasticClient client,
 			Name name,
 			Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.DeleteTemplateAsync(name, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(this IElasticClient client,IDeleteIndexTemplateRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(this IElasticClient client, IDeleteIndexTemplateRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.DeleteTemplateAsync(request, ct);
 	}
-
 }

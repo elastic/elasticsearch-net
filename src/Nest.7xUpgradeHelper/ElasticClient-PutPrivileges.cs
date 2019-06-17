@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,16 +9,27 @@ namespace Nest
 		/// <summary>
 		/// Adds or updates application privileges.
 		/// </summary>
-		public static PutPrivilegesResponse PutPrivileges(this IElasticClient client,Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PutPrivilegesResponse PutPrivileges(this IElasticClient client, Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector)
+			=> client.Security.PutPrivileges(selector);
 
 		/// <inheritdoc cref="PutPrivileges(System.Func{Nest.PutPrivilegesDescriptor,Nest.IPutPrivilegesRequest})" />
-		public static PutPrivilegesResponse PutPrivileges(this IElasticClient client,IPutPrivilegesRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PutPrivilegesResponse PutPrivileges(this IElasticClient client, IPutPrivilegesRequest request)
+			=> client.Security.PutPrivileges(request);
 
 		/// <inheritdoc cref="PutPrivileges(System.Func{Nest.PutPrivilegesDescriptor,Nest.IPutPrivilegesRequest})" />
-		public static Task<PutPrivilegesResponse> PutPrivilegesAsync(this IElasticClient client,Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PutPrivilegesResponse> PutPrivilegesAsync(this IElasticClient client,
+			Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector, CancellationToken ct = default
+		)
+			=> client.Security.PutPrivilegesAsync(selector, ct);
 
 		/// <inheritdoc cref="PutPrivileges(System.Func{Nest.PutPrivilegesDescriptor,Nest.IPutPrivilegesRequest})" />
-		public static Task<PutPrivilegesResponse> PutPrivilegesAsync(this IElasticClient client,IPutPrivilegesRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PutPrivilegesResponse> PutPrivilegesAsync(this IElasticClient client, IPutPrivilegesRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Security.PutPrivilegesAsync(request, ct);
 	}
-
 }

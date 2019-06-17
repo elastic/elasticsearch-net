@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,29 @@ namespace Nest
 		/// <summary>
 		/// Validates a machine learning job
 		/// </summary>
-		public static ValidateJobResponse ValidateJob<T>(this IElasticClient client,Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector) where T : class;
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ValidateJobResponse ValidateJob<T>(this IElasticClient client, Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector)
+			where T : class
+			=> client.MachineLearning.ValidateJob(selector);
 
 		/// <inheritdoc />
-		public static ValidateJobResponse ValidateJob(this IElasticClient client,IValidateJobRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ValidateJobResponse ValidateJob(this IElasticClient client, IValidateJobRequest request)
+			=> client.MachineLearning.ValidateJob(request);
 
 		/// <inheritdoc />
-		public static Task<ValidateJobResponse> ValidateJobAsync<T>(this IElasticClient client,Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ValidateJobResponse> ValidateJobAsync<T>(this IElasticClient client,
+			Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector,
 			CancellationToken ct = default
-		) where T : class;
+		) where T : class
+			=> client.MachineLearning.ValidateJobAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ValidateJobResponse> ValidateJobAsync(this IElasticClient client,IValidateJobRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ValidateJobResponse> ValidateJobAsync(this IElasticClient client, IValidateJobRequest request,
+			CancellationToken ct = default
+		)
+			=> client.MachineLearning.ValidateJobAsync(request, ct);
 	}
-
 }

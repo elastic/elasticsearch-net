@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,18 +13,26 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the refresh operation</param>
-		public static RefreshResponse Refresh(this IElasticClient client,Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static RefreshResponse Refresh(this IElasticClient client, Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null)
+			=> client.Indices.Refresh(indices, selector);
 
 		/// <inheritdoc />
-		public static RefreshResponse Refresh(this IElasticClient client,IRefreshRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static RefreshResponse Refresh(this IElasticClient client, IRefreshRequest request)
+			=> client.Indices.Refresh(request);
 
 		/// <inheritdoc />
-		public static Task<RefreshResponse> RefreshAsync(this IElasticClient client,Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<RefreshResponse> RefreshAsync(this IElasticClient client, Indices indices,
+			Func<RefreshDescriptor, IRefreshRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.RefreshAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<RefreshResponse> RefreshAsync(this IElasticClient client,IRefreshRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<RefreshResponse> RefreshAsync(this IElasticClient client, IRefreshRequest request, CancellationToken ct = default)
+			=> client.Indices.RefreshAsync(request, ct);
 	}
-
 }

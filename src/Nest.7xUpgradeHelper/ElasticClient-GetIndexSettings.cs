@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using static Nest.Infer;
 
 namespace Nest
 {
@@ -13,20 +13,30 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
-		public static GetIndexSettingsResponse GetIndexSettings(this IElasticClient client,Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetIndexSettingsResponse GetIndexSettings(this IElasticClient client,
+			Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector
+		)
+			=> client.Indices.GetSettings(AllIndices, selector);
 
 		/// <inheritdoc />
-		public static GetIndexSettingsResponse GetIndexSettings(this IElasticClient client,IGetIndexSettingsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetIndexSettingsResponse GetIndexSettings(this IElasticClient client, IGetIndexSettingsRequest request)
+			=> client.Indices.GetSettings(request);
 
 		/// <inheritdoc />
-		public static Task<GetIndexSettingsResponse> GetIndexSettingsAsync(this IElasticClient client,Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetIndexSettingsResponse> GetIndexSettingsAsync(this IElasticClient client,
+			Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.GetSettingsAsync(AllIndices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetIndexSettingsResponse> GetIndexSettingsAsync(this IElasticClient client,IGetIndexSettingsRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetIndexSettingsResponse> GetIndexSettingsAsync(this IElasticClient client, IGetIndexSettingsRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.GetSettingsAsync(request);
 	}
-
 }

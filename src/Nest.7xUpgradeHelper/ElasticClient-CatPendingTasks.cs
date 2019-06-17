@@ -1,28 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static CatResponse<CatPendingTasksRecord> CatPendingTasks(this IElasticClient client,Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatPendingTasksRecord> CatPendingTasks(this IElasticClient client,
+			Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null
+		)
+			=> client.Cat.PendingTasks(selector);
 
 		/// <inheritdoc />
-		public static CatResponse<CatPendingTasksRecord> CatPendingTasks(this IElasticClient client,ICatPendingTasksRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatPendingTasksRecord> CatPendingTasks(this IElasticClient client, ICatPendingTasksRequest request)
+			=> client.Cat.PendingTasks(request);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(this IElasticClient client,
 			Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.PendingTasksAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(this IElasticClient client,ICatPendingTasksRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(this IElasticClient client, ICatPendingTasksRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.PendingTasksAsync(request);
 	}
-
 }

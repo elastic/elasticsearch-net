@@ -1,25 +1,34 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static DeleteUserResponse DeleteUser(this IElasticClient client,Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteUserResponse DeleteUser(this IElasticClient client, Name username,
+			Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null
+		)
+			=> client.Security.DeleteUser(username, selector);
 
 		/// <inheritdoc />
-		public static DeleteUserResponse DeleteUser(this IElasticClient client,IDeleteUserRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteUserResponse DeleteUser(this IElasticClient client, IDeleteUserRequest request)
+			=> client.Security.DeleteUser(request);
 
 		/// <inheritdoc />
-		public static Task<DeleteUserResponse> DeleteUserAsync(this IElasticClient client,Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteUserResponse> DeleteUserAsync(this IElasticClient client, Name username,
+			Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.DeleteUserAsync(username, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeleteUserResponse> DeleteUserAsync(this IElasticClient client,IDeleteUserRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteUserResponse> DeleteUserAsync(this IElasticClient client, IDeleteUserRequest request, CancellationToken ct = default)
+			=> client.Security.DeleteUserAsync(request, ct);
 	}
-
 }

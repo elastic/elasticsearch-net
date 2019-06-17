@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
-		public static GetTaskResponse GetTask(this IElasticClient client,TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetTaskResponse GetTask(this IElasticClient client, TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null)
+			=> client.Tasks.GetTask(id, selector);
 
-		public static GetTaskResponse GetTask(this IElasticClient client,IGetTaskRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetTaskResponse GetTask(this IElasticClient client, IGetTaskRequest request)
+			=> client.Tasks.GetTask(request);
 
-		public static Task<GetTaskResponse> GetTaskAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetTaskResponse> GetTaskAsync(this IElasticClient client,
 			TaskId id,
 			Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Tasks.GetTaskAsync(id, selector, ct);
 
-		public static Task<GetTaskResponse> GetTaskAsync(this IElasticClient client,IGetTaskRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetTaskResponse> GetTaskAsync(this IElasticClient client, IGetTaskRequest request, CancellationToken ct = default)
+			=> client.Tasks.GetTaskAsync(request);
 	}
-
 }

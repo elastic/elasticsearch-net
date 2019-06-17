@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,33 @@ namespace Nest
 		/// <summary>
 		/// Removes application privileges.
 		/// </summary>
-		public static DeletePrivilegesResponse DeletePrivileges(this IElasticClient client,Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeletePrivilegesResponse DeletePrivileges(this IElasticClient client, Name application, Name name,
+			Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null
+		)
+			=> client.Security.DeletePrivileges(application, name, selector);
 
-		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public static DeletePrivilegesResponse DeletePrivileges(this IElasticClient client,IDeletePrivilegesRequest request);
+		/// <inheritdoc
+		///     cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeletePrivilegesResponse DeletePrivileges(this IElasticClient client, IDeletePrivilegesRequest request)
+			=> client.Security.DeletePrivileges(request);
 
-		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public static Task<DeletePrivilegesResponse> DeletePrivilegesAsync(this IElasticClient client,Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null,
+		/// <inheritdoc
+		///     cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeletePrivilegesResponse> DeletePrivilegesAsync(this IElasticClient client, Name application, Name name,
+			Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.DeletePrivilegesAsync(application, name, selector, ct);
 
-		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public static Task<DeletePrivilegesResponse> DeletePrivilegesAsync(this IElasticClient client,IDeletePrivilegesRequest request, CancellationToken ct = default);
+		/// <inheritdoc
+		///     cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeletePrivilegesResponse> DeletePrivilegesAsync(this IElasticClient client, IDeletePrivilegesRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Security.DeletePrivilegesAsync(request, ct);
 	}
-
 }

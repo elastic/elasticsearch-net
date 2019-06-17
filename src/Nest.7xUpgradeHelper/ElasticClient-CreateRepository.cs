@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,20 +13,30 @@ namespace Nest
 		/// </summary>
 		/// <param name="repository">The name for the repository</param>
 		/// <param name="selector">describe what the repository looks like</param>
-		public static CreateRepositoryResponse CreateRepository(this IElasticClient client,Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CreateRepositoryResponse CreateRepository(this IElasticClient client, Name repository,
+			Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector
+		)
+			=> client.Snapshot.CreateRepository(repository, selector);
 
 		/// <inheritdoc />
-		public static CreateRepositoryResponse CreateRepository(this IElasticClient client,ICreateRepositoryRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CreateRepositoryResponse CreateRepository(this IElasticClient client, ICreateRepositoryRequest request)
+			=> client.Snapshot.CreateRepository(request);
 
 		/// <inheritdoc />
-		public static Task<CreateRepositoryResponse> CreateRepositoryAsync(this IElasticClient client,Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CreateRepositoryResponse> CreateRepositoryAsync(this IElasticClient client, Name repository,
+			Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Snapshot.CreateRepositoryAsync(repository, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CreateRepositoryResponse> CreateRepositoryAsync(this IElasticClient client,ICreateRepositoryRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CreateRepositoryResponse> CreateRepositoryAsync(this IElasticClient client, ICreateRepositoryRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Snapshot.CreateRepositoryAsync(request);
 	}
-
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -18,23 +17,37 @@ namespace Nest
 		/// <para />
 		/// 1. Does this index have associated rollup data somewhere in the cluster?
 		/// <para />
-		/// 2. If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+		/// 2. If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the
+		/// data live?
 		/// </summary>
-		public static GetRollupCapabilitiesResponse GetRollupCapabilities(this IElasticClient client,Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetRollupCapabilitiesResponse GetRollupCapabilities(this IElasticClient client,
+			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null
+		)
+			=> client.Rollup.GetCapabilities(selector);
 
-		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
-		public static GetRollupCapabilitiesResponse GetRollupCapabilities(this IElasticClient client,IGetRollupCapabilitiesRequest request);
+		/// <inheritdoc
+		///     cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetRollupCapabilitiesResponse GetRollupCapabilities(this IElasticClient client, IGetRollupCapabilitiesRequest request)
+			=> client.Rollup.GetCapabilities(request);
 
-		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
-		public static Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(this IElasticClient client,
+		/// <inheritdoc
+		///     cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(this IElasticClient client,
 			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Rollup.GetCapabilitiesAsync(selector, ct);
 
-		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
-		public static Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(this IElasticClient client,IGetRollupCapabilitiesRequest request,
+		/// <inheritdoc
+		///     cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(this IElasticClient client,
+			IGetRollupCapabilitiesRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Rollup.GetCapabilitiesAsync(request, ct);
 	}
-
 }

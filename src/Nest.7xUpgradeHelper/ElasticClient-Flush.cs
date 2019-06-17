@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -16,18 +15,26 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
-		public static FlushResponse Flush(this IElasticClient client,Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static FlushResponse Flush(this IElasticClient client, Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null)
+			=> client.Indices.Flush(indices, selector);
 
 		/// <inheritdoc />
-		public static FlushResponse Flush(this IElasticClient client,IFlushRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static FlushResponse Flush(this IElasticClient client, IFlushRequest request)
+			=> client.Indices.Flush(request);
 
 		/// <inheritdoc />
-		public static Task<FlushResponse> FlushAsync(this IElasticClient client,Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<FlushResponse> FlushAsync(this IElasticClient client, Indices indices,
+			Func<FlushDescriptor, IFlushRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.FlushAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<FlushResponse> FlushAsync(this IElasticClient client,IFlushRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<FlushResponse> FlushAsync(this IElasticClient client, IFlushRequest request, CancellationToken ct = default)
+			=> client.Indices.FlushAsync(request, ct);
 	}
-
 }

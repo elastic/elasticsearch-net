@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using static Nest.Infer;
 
 namespace Nest
 {
@@ -14,21 +14,30 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		public static IndicesShardStoresResponse IndicesShardStores(this IElasticClient client,Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static IndicesShardStoresResponse IndicesShardStores(this IElasticClient client,
+			Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null
+		)
+			=> client.Indices.ShardStores(AllIndices, selector);
 
 		/// <inheritdoc />
-		public static IndicesShardStoresResponse IndicesShardStores(this IElasticClient client,IIndicesShardStoresRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static IndicesShardStoresResponse IndicesShardStores(this IElasticClient client, IIndicesShardStoresRequest request)
+			=> client.Indices.ShardStores(request);
 
 		/// <inheritdoc />
-		public static Task<IndicesShardStoresResponse> IndicesShardStoresAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<IndicesShardStoresResponse> IndicesShardStoresAsync(this IElasticClient client,
 			Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.ShardStoresAsync(AllIndices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<IndicesShardStoresResponse> IndicesShardStoresAsync(this IElasticClient client,IIndicesShardStoresRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<IndicesShardStoresResponse> IndicesShardStoresAsync(this IElasticClient client, IIndicesShardStoresRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.ShardStoresAsync(request, ct);
 	}
-
 }

@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static XPackInfoResponse XPackInfo(this IElasticClient client,Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static XPackInfoResponse XPackInfo(this IElasticClient client, Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null)
+			=> client.XPack.Info(selector);
 
 		/// <inheritdoc />
-		public static XPackInfoResponse XPackInfo(this IElasticClient client,IXPackInfoRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static XPackInfoResponse XPackInfo(this IElasticClient client, IXPackInfoRequest request)
+			=> client.XPack.Info(request);
 
 		/// <inheritdoc />
-		public static Task<XPackInfoResponse> XPackInfoAsync(this IElasticClient client,Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<XPackInfoResponse> XPackInfoAsync(this IElasticClient client, Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.XPack.InfoAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<XPackInfoResponse> XPackInfoAsync(this IElasticClient client,IXPackInfoRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<XPackInfoResponse> XPackInfoAsync(this IElasticClient client, IXPackInfoRequest request, CancellationToken ct = default)
+			=> client.XPack.InfoAsync(request, ct);
 	}
-
 }

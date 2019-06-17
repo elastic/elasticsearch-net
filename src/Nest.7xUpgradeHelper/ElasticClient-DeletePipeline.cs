@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static DeletePipelineResponse DeletePipeline(this IElasticClient client,Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeletePipelineResponse DeletePipeline(this IElasticClient client, Id id,
+			Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null
+		)
+			=> client.Ingest.DeletePipeline(id, selector);
 
 		/// <inheritdoc />
-		public static DeletePipelineResponse DeletePipeline(this IElasticClient client,IDeletePipelineRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeletePipelineResponse DeletePipeline(this IElasticClient client, IDeletePipelineRequest request)
+			=> client.Ingest.DeletePipeline(request);
 
 		/// <inheritdoc />
-		public static Task<DeletePipelineResponse> DeletePipelineAsync(this IElasticClient client,Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeletePipelineResponse> DeletePipelineAsync(this IElasticClient client, Id id,
+			Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Ingest.DeletePipelineAsync(id, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeletePipelineResponse> DeletePipelineAsync(this IElasticClient client,IDeletePipelineRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeletePipelineResponse> DeletePipelineAsync(this IElasticClient client, IDeletePipelineRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Ingest.DeletePipelineAsync(request, ct);
 	}
-
 }

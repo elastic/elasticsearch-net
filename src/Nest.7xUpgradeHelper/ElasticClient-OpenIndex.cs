@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -16,20 +15,29 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the open index operation</param>
-		public static OpenIndexResponse OpenIndex(this IElasticClient client,Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static OpenIndexResponse OpenIndex(this IElasticClient client, Indices indices,
+			Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null
+		)
+			=> client.Indices.Open(indices, selector);
 
 		/// <inheritdoc />
-		public static OpenIndexResponse OpenIndex(this IElasticClient client,IOpenIndexRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static OpenIndexResponse OpenIndex(this IElasticClient client, IOpenIndexRequest request)
+			=> client.Indices.Open(request);
 
 		/// <inheritdoc />
-		public static Task<OpenIndexResponse> OpenIndexAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<OpenIndexResponse> OpenIndexAsync(this IElasticClient client,
 			Indices indices,
 			Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.OpenAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<OpenIndexResponse> OpenIndexAsync(this IElasticClient client,IOpenIndexRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<OpenIndexResponse> OpenIndexAsync(this IElasticClient client, IOpenIndexRequest request, CancellationToken ct = default)
+			=> client.Indices.OpenAsync(request, ct);
 	}
-
 }

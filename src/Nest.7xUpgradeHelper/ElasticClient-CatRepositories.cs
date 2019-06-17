@@ -1,28 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static CatResponse<CatRepositoriesRecord> CatRepositories(this IElasticClient client,Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatRepositoriesRecord> CatRepositories(this IElasticClient client,
+			Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null
+		)
+			=> client.Cat.Repositories(selector);
 
 		/// <inheritdoc />
-		public static CatResponse<CatRepositoriesRecord> CatRepositories(this IElasticClient client,ICatRepositoriesRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatRepositoriesRecord> CatRepositories(this IElasticClient client, ICatRepositoriesRequest request)
+			=> client.Cat.Repositories(request);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(this IElasticClient client,
 			Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.RepositoriesAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(this IElasticClient client,ICatRepositoriesRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(this IElasticClient client, ICatRepositoriesRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.RepositoriesAsync(request, ct);
 	}
-
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -18,23 +17,32 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the put template operation</param>
-		public static PutIndexTemplateResponse PutIndexTemplate(this IElasticClient client,Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PutIndexTemplateResponse PutIndexTemplate(this IElasticClient client, Name name,
+			Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector
+		)
+			=> client.Indices.PutTemplate(name, selector);
 
 		/// <inheritdoc />
-		public static PutIndexTemplateResponse PutIndexTemplate(this IElasticClient client,IPutIndexTemplateRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PutIndexTemplateResponse PutIndexTemplate(this IElasticClient client, IPutIndexTemplateRequest request)
+			=> client.Indices.PutTemplate(request);
 
 		/// <inheritdoc />
-		public static Task<PutIndexTemplateResponse> PutIndexTemplateAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PutIndexTemplateResponse> PutIndexTemplateAsync(this IElasticClient client,
 			Name name,
 			Func<PutIndexTemplateDescriptor,
 				IPutIndexTemplateRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.PutTemplateAsync(name, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<PutIndexTemplateResponse> PutIndexTemplateAsync(this IElasticClient client,IPutIndexTemplateRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PutIndexTemplateResponse> PutIndexTemplateAsync(this IElasticClient client, IPutIndexTemplateRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.PutTemplateAsync(request, ct);
 	}
-
 }

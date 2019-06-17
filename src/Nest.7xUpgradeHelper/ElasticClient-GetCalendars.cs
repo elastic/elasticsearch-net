@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,19 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Retrieves calendar configuration information for machine learning jobs.
 		/// </summary>
-		public static GetCalendarsResponse GetCalendars(this IElasticClient client,Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetCalendarsResponse GetCalendars(this IElasticClient client, Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null
+		)
+			=> client.MachineLearning.GetCalendars(selector);
 
 
 		/// <inheritdoc cref="GetCalendars(System.Func{Nest.GetCalendarsDescriptor,Nest.IGetCalendarsRequest})" />
-		public static GetCalendarsResponse GetCalendars(this IElasticClient client,IGetCalendarsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetCalendarsResponse GetCalendars(this IElasticClient client, IGetCalendarsRequest request)
+			=> client.MachineLearning.GetCalendars(request);
 
 		/// <inheritdoc cref="GetCalendars(System.Func{Nest.GetCalendarsDescriptor,Nest.IGetCalendarsRequest})" />
-		public static Task<GetCalendarsResponse> GetCalendarsAsync(this IElasticClient client,Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetCalendarsResponse> GetCalendarsAsync(this IElasticClient client,
+			Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetCalendarsAsync(selector, ct);
 
 		/// <inheritdoc cref="GetCalendars(System.Func{Nest.GetCalendarsDescriptor,Nest.IGetCalendarsRequest})" />
-		public static Task<GetCalendarsResponse> GetCalendarsAsync(this IElasticClient client,IGetCalendarsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetCalendarsResponse> GetCalendarsAsync(this IElasticClient client, IGetCalendarsRequest request,
+			CancellationToken ct = default
+		)
+			=> client.MachineLearning.GetCalendarsAsync(request, ct);
 	}
-
 }

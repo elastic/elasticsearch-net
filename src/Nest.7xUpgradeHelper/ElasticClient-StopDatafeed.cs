@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,21 +8,34 @@ namespace Nest
 	{
 		/// <summary>
 		/// Stop a machine learning data feed.
-		/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped multiple times throughout its
+		/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped multiple
+		/// times throughout its
 		/// lifecycle.
 		/// </summary>
-		public static StopDatafeedResponse StopDatafeed(this IElasticClient client,Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static StopDatafeedResponse StopDatafeed(this IElasticClient client, Id datafeedId,
+			Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null
+		)
+			=> client.MachineLearning.StopDatafeed(datafeedId, selector);
 
 		/// <inheritdoc />
-		public static StopDatafeedResponse StopDatafeed(this IElasticClient client,IStopDatafeedRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static StopDatafeedResponse StopDatafeed(this IElasticClient client, IStopDatafeedRequest request)
+			=> client.MachineLearning.StopDatafeed(request);
 
 		/// <inheritdoc />
-		public static Task<StopDatafeedResponse> StopDatafeedAsync(this IElasticClient client,Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<StopDatafeedResponse> StopDatafeedAsync(this IElasticClient client, Id datafeedId,
+			Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.StopDatafeedAsync(datafeedId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<StopDatafeedResponse> StopDatafeedAsync(this IElasticClient client,IStopDatafeedRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<StopDatafeedResponse> StopDatafeedAsync(this IElasticClient client, IStopDatafeedRequest request,
+			CancellationToken ct = default
+		)
+			=> client.MachineLearning.StopDatafeedAsync(request, ct);
 	}
-
 }

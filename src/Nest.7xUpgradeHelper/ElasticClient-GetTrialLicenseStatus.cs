@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,7 +12,11 @@ namespace Nest
 		/// <remarks>
 		/// Valid in Elasticsearch 6.2.0+.
 		/// </remarks>
-		public static GetTrialLicenseStatusResponse GetTrialLicenseStatus(this IElasticClient client,Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetTrialLicenseStatusResponse GetTrialLicenseStatus(this IElasticClient client,
+			Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null
+		)
+			=> client.License.GetTrialStatus(selector);
 
 		/// <summary>
 		/// Checks the status of a trial license.
@@ -21,7 +24,9 @@ namespace Nest
 		/// <remarks>
 		/// Valid in Elasticsearch 6.2.0+.
 		/// </remarks>
-		public static GetTrialLicenseStatusResponse GetTrialLicenseStatus(this IElasticClient client,IGetTrialLicenseStatusRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetTrialLicenseStatusResponse GetTrialLicenseStatus(this IElasticClient client, IGetTrialLicenseStatusRequest request)
+			=> client.License.GetTrialStatus(request);
 
 		/// <summary>
 		/// Checks the status of a trial license.
@@ -29,10 +34,12 @@ namespace Nest
 		/// <remarks>
 		/// Valid in Elasticsearch 6.2.0+.
 		/// </remarks>
-		public static Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(this IElasticClient client,
 			Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.License.GetTrialStatusAsync(selector, ct);
 
 		/// <summary>
 		/// Checks the status of a trial license.
@@ -40,9 +47,11 @@ namespace Nest
 		/// <remarks>
 		/// Valid in Elasticsearch 6.2.0+.
 		/// </remarks>
-		public static Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(this IElasticClient client,IGetTrialLicenseStatusRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(this IElasticClient client,
+			IGetTrialLicenseStatusRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.License.GetTrialStatusAsync(request, ct);
 	}
-
 }

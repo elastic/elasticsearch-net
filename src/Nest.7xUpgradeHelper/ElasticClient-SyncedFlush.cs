@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,18 +14,30 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the synced flush operation</param>
 		/// <returns></returns>
-		public static SyncedFlushResponse SyncedFlush(this IElasticClient client,Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static SyncedFlushResponse SyncedFlush(this IElasticClient client, Indices indices,
+			Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null
+		)
+			=> client.Indices.SyncedFlush(indices, selector);
 
 		/// <inheritdoc />
-		public static SyncedFlushResponse SyncedFlush(this IElasticClient client,ISyncedFlushRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static SyncedFlushResponse SyncedFlush(this IElasticClient client, ISyncedFlushRequest request)
+			=> client.Indices.SyncedFlush(request);
 
 		/// <inheritdoc />
-		public static Task<SyncedFlushResponse> SyncedFlushAsync(this IElasticClient client,Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<SyncedFlushResponse> SyncedFlushAsync(this IElasticClient client, Indices indices,
+			Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.SyncedFlushAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<SyncedFlushResponse> SyncedFlushAsync(this IElasticClient client,ISyncedFlushRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<SyncedFlushResponse> SyncedFlushAsync(this IElasticClient client, ISyncedFlushRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Indices.SyncedFlushAsync(request);
 	}
-
 }

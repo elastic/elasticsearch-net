@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,18 +14,26 @@ namespace Nest
 		/// <remarks>
 		/// It is not currently possible to delete multiple jobs, either using wildcards or a comma separated list.
 		/// </remarks>
-		public static DeleteJobResponse DeleteJob(this IElasticClient client,Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteJobResponse DeleteJob(this IElasticClient client, Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null)
+			=> client.MachineLearning.DeleteJob(jobId, selector);
 
 		/// <inheritdoc />
-		public static DeleteJobResponse DeleteJob(this IElasticClient client,IDeleteJobRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteJobResponse DeleteJob(this IElasticClient client, IDeleteJobRequest request)
+			=> client.MachineLearning.DeleteJob(request);
 
 		/// <inheritdoc />
-		public static Task<DeleteJobResponse> DeleteJobAsync(this IElasticClient client,Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteJobResponse> DeleteJobAsync(this IElasticClient client, Id jobId,
+			Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.DeleteJobAsync(jobId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeleteJobResponse> DeleteJobAsync(this IElasticClient client,IDeleteJobRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteJobResponse> DeleteJobAsync(this IElasticClient client, IDeleteJobRequest request, CancellationToken ct = default)
+			=> client.MachineLearning.DeleteJobAsync(request, ct);
 	}
-
 }

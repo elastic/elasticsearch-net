@@ -12,24 +12,34 @@ namespace Nest
 		/// <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</a>
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the cluster allocation explain operation</param>
-		public static ClusterAllocationExplainResponse ClusterAllocationExplain(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterAllocationExplainResponse ClusterAllocationExplain(this IElasticClient client,
 			Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null
-		);
+		)
+			=> client.Cluster.AllocationExplain(selector);
 
-		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
-		public static ClusterAllocationExplainResponse ClusterAllocationExplain(this IElasticClient client,IClusterAllocationExplainRequest request);
+		/// <inheritdoc
+		///     cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterAllocationExplainResponse ClusterAllocationExplain(this IElasticClient client, IClusterAllocationExplainRequest request)
+			=> client.Cluster.AllocationExplain(request);
 
-		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
-		public static Task<ClusterAllocationExplainResponse> ClusterAllocationExplainAsync(this IElasticClient client,
+		/// <inheritdoc
+		///     cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterAllocationExplainResponse> ClusterAllocationExplainAsync(this IElasticClient client,
 			Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.AllocationExplainAsync(selector, ct);
 
-		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
-		public static Task<ClusterAllocationExplainResponse> ClusterAllocationExplainAsync(this IElasticClient client,
+		/// <inheritdoc
+		///     cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterAllocationExplainResponse> ClusterAllocationExplainAsync(this IElasticClient client,
 			IClusterAllocationExplainRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.AllocationExplainAsync(request, ct);
 	}
-
 }

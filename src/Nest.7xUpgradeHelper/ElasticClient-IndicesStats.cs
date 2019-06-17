@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,20 +13,31 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		public static IndicesStatsResponse IndicesStats(this IElasticClient client,Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static IndicesStatsResponse IndicesStats(this IElasticClient client, Indices indices,
+			Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null
+		)
+			=> client.Indices.Stats(indices, selector);
 
 		/// <inheritdoc />
-		public static IndicesStatsResponse IndicesStats(this IElasticClient client,IIndicesStatsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static IndicesStatsResponse IndicesStats(this IElasticClient client, IIndicesStatsRequest request)
+			=> client.Indices.Stats(request);
 
 		/// <inheritdoc />
-		public static Task<IndicesStatsResponse> IndicesStatsAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<IndicesStatsResponse> IndicesStatsAsync(this IElasticClient client,
 			Indices indices,
 			Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.StatsAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<IndicesStatsResponse> IndicesStatsAsync(this IElasticClient client,IIndicesStatsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<IndicesStatsResponse> IndicesStatsAsync(this IElasticClient client, IIndicesStatsRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Indices.StatsAsync(request, ct);
 	}
-
 }

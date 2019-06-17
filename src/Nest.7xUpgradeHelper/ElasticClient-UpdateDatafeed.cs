@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,21 +9,31 @@ namespace Nest
 		/// <summary>
 		/// Update a machine learning datafeed.
 		/// </summary>
-		public static UpdateDatafeedResponse UpdateDatafeed<T>(this IElasticClient client,Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
-			where T : class;
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static UpdateDatafeedResponse UpdateDatafeed<T>(this IElasticClient client, Id datafeedId,
+			Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null
+		)
+			where T : class
+			=> client.MachineLearning.UpdateDatafeed(datafeedId, selector);
 
 		/// <inheritdoc />
-		public static UpdateDatafeedResponse UpdateDatafeed(this IElasticClient client,IUpdateDatafeedRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static UpdateDatafeedResponse UpdateDatafeed(this IElasticClient client, IUpdateDatafeedRequest request)
+			=> client.MachineLearning.UpdateDatafeed(request);
 
 		/// <inheritdoc />
-		public static Task<UpdateDatafeedResponse> UpdateDatafeedAsync<T>(this IElasticClient client,Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<UpdateDatafeedResponse> UpdateDatafeedAsync<T>(this IElasticClient client, Id datafeedId,
+			Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
 			CancellationToken ct = default
-		) where T : class;
+		) where T : class
+			=> client.MachineLearning.UpdateDatafeedAsync(datafeedId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<UpdateDatafeedResponse> UpdateDatafeedAsync(this IElasticClient client,IUpdateDatafeedRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<UpdateDatafeedResponse> UpdateDatafeedAsync(this IElasticClient client, IUpdateDatafeedRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.UpdateDatafeedAsync(request, ct);
 	}
-
 }

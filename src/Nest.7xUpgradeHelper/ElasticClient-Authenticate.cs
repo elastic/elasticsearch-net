@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static AuthenticateResponse Authenticate(this IElasticClient client,Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static AuthenticateResponse Authenticate(this IElasticClient client, Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null
+		)
+			=> client.Security.Authenticate(selector);
 
 		/// <inheritdoc />
-		public static AuthenticateResponse Authenticate(this IElasticClient client,IAuthenticateRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static AuthenticateResponse Authenticate(this IElasticClient client, IAuthenticateRequest request)
+			=> client.Security.Authenticate(request);
 
 		/// <inheritdoc />
-		public static Task<AuthenticateResponse> AuthenticateAsync(this IElasticClient client,Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<AuthenticateResponse> AuthenticateAsync(this IElasticClient client,
+			Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Security.AuthenticateAsync(selector);
 
 		/// <inheritdoc />
-		public static Task<AuthenticateResponse> AuthenticateAsync(this IElasticClient client,IAuthenticateRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<AuthenticateResponse> AuthenticateAsync(this IElasticClient client, IAuthenticateRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Security.AuthenticateAsync(request, ct);
 	}
 }

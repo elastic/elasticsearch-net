@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,22 +12,31 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that strongly types all the updateable settings</param>
-		public static UpdateIndexSettingsResponse UpdateIndexSettings(this IElasticClient client,Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static UpdateIndexSettingsResponse UpdateIndexSettings(this IElasticClient client, Indices indices,
+			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector
+		)
+			=> client.Indices.UpdateSettings(indices, selector);
 
 		/// <inheritdoc />
-		public static UpdateIndexSettingsResponse UpdateIndexSettings(this IElasticClient client,IUpdateIndexSettingsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static UpdateIndexSettingsResponse UpdateIndexSettings(this IElasticClient client, IUpdateIndexSettingsRequest request)
+			=> client.Indices.UpdateSettings(request);
 
 		/// <inheritdoc />
-		public static Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(this IElasticClient client,
 			Indices indices,
 			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.UpdateSettingsAsync(indices, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(this IElasticClient client,IUpdateIndexSettingsRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(this IElasticClient client, IUpdateIndexSettingsRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.UpdateSettingsAsync(request, ct);
 	}
-
 }

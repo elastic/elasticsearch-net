@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,18 +10,28 @@ namespace Nest
 		/// Forces the execution of a stored watch. It can be used to force execution of the watch outside of its triggering logic,
 		/// or to simulate the watch execution for debugging purposes.
 		/// </summary>
-		public static ExecuteWatchResponse ExecuteWatch(this IElasticClient client,Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExecuteWatchResponse ExecuteWatch(this IElasticClient client, Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector)
+			=> client.Watcher.Execute(selector);
 
 		/// <inheritdoc />
-		public static ExecuteWatchResponse ExecuteWatch(this IElasticClient client,IExecuteWatchRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExecuteWatchResponse ExecuteWatch(this IElasticClient client, IExecuteWatchRequest request)
+			=> client.Watcher.Execute(request);
 
 		/// <inheritdoc />
-		public static Task<ExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client,Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client,
+			Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.ExecuteAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client,IExecuteWatchRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client, IExecuteWatchRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Watcher.ExecuteAsync(request, ct);
 	}
-
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -18,18 +15,30 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector"></param>
 		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
-		public static NodesHotThreadsResponse NodesHotThreads(this IElasticClient client,Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static NodesHotThreadsResponse NodesHotThreads(this IElasticClient client,
+			Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null
+		)
+			=> client.Nodes.HotThreads(selector);
 
 		/// <inheritdoc />
-		public static NodesHotThreadsResponse NodesHotThreads(this IElasticClient client,INodesHotThreadsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static NodesHotThreadsResponse NodesHotThreads(this IElasticClient client, INodesHotThreadsRequest request)
+			=> client.Nodes.HotThreads(request);
 
 		/// <inheritdoc />
-		public static Task<NodesHotThreadsResponse> NodesHotThreadsAsync(this IElasticClient client,Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<NodesHotThreadsResponse> NodesHotThreadsAsync(this IElasticClient client,
+			Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Nodes.HotThreadsAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<NodesHotThreadsResponse> NodesHotThreadsAsync(this IElasticClient client,INodesHotThreadsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<NodesHotThreadsResponse> NodesHotThreadsAsync(this IElasticClient client, INodesHotThreadsRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Nodes.HotThreadsAsync(request, ct);
 	}
-
 }

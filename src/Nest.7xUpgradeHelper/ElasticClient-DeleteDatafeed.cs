@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,20 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Deletes an existing datafeed for a machine learning job.
 		/// </summary>
-		public static DeleteDatafeedResponse DeleteDatafeed(this IElasticClient client,Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteDatafeedResponse DeleteDatafeed(this IElasticClient client, Id datafeedId,
+			Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null
+		)
+			=> client.MachineLearning.DeleteDatafeed(datafeedId, selector);
 
 		/// <inheritdoc />
-		public static DeleteDatafeedResponse DeleteDatafeed(this IElasticClient client,IDeleteDatafeedRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static DeleteDatafeedResponse DeleteDatafeed(this IElasticClient client, IDeleteDatafeedRequest request)
+			=> client.MachineLearning.DeleteDatafeed(request);
 
 		/// <inheritdoc />
-		public static Task<DeleteDatafeedResponse> DeleteDatafeedAsync(this IElasticClient client,Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteDatafeedResponse> DeleteDatafeedAsync(this IElasticClient client, Id datafeedId,
+			Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.DeleteDatafeedAsync(datafeedId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<DeleteDatafeedResponse> DeleteDatafeedAsync(this IElasticClient client,IDeleteDatafeedRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<DeleteDatafeedResponse> DeleteDatafeedAsync(this IElasticClient client, IDeleteDatafeedRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.DeleteDatafeedAsync(request, ct);
 	}
-
 }

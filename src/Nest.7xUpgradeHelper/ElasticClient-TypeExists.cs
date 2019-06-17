@@ -8,22 +8,31 @@ namespace Nest
 {
 	using TypeExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
-	// TODO should we keep this around in 7.x
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static ExistsResponse TypeExists(this IElasticClient client,Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExistsResponse TypeExists(this IElasticClient client, Indices indices, string type,
+			Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null
+		)
+			=> client.Indices.TypeExists(indices, type, selector);
 
 		/// <inheritdoc />
-		public static ExistsResponse TypeExists(this IElasticClient client,ITypeExistsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExistsResponse TypeExists(this IElasticClient client, ITypeExistsRequest request)
+			=> client.Indices.TypeExists(request);
 
 		/// <inheritdoc />
-		public static Task<ExistsResponse> TypeExistsAsync(this IElasticClient client,Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExistsResponse> TypeExistsAsync(this IElasticClient client, Indices indices, string type,
+			Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.TypeExistsAsync(indices, type, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ExistsResponse> TypeExistsAsync(this IElasticClient client,ITypeExistsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExistsResponse> TypeExistsAsync(this IElasticClient client, ITypeExistsRequest request, CancellationToken ct = default)
+			=> client.Indices.TypeExistsAsync(request, ct);
 	}
-
 }

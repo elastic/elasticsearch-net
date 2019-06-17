@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,20 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Validates a detector for a machine learning job
 		/// </summary>
-		public static ValidateDetectorResponse ValidateDetector<T>(this IElasticClient client,Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector) where T : class;
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ValidateDetectorResponse ValidateDetector<T>(this IElasticClient client,
+			Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector
+		) where T : class
+			=> client.MachineLearning.ValidateDetector(selector);
 
 		/// <inheritdoc />
-		public static ValidateDetectorResponse ValidateDetector(this IElasticClient client,IValidateDetectorRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ValidateDetectorResponse ValidateDetector(this IElasticClient client, IValidateDetectorRequest request)
+			=> client.MachineLearning.ValidateDetector(request);
 
 		/// <inheritdoc />
-		public static Task<ValidateDetectorResponse> ValidateDetectorAsync<T>(this IElasticClient client,Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ValidateDetectorResponse> ValidateDetectorAsync<T>(this IElasticClient client,
+			Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector,
 			CancellationToken ct = default
-		) where T : class;
+		) where T : class
+			=> client.MachineLearning.ValidateDetectorAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<ValidateDetectorResponse> ValidateDetectorAsync(this IElasticClient client,IValidateDetectorRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ValidateDetectorResponse> ValidateDetectorAsync(this IElasticClient client, IValidateDetectorRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.ValidateDetectorAsync(request, ct);
 	}
-
 }

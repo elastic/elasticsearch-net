@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,18 +9,29 @@ namespace Nest
 		/// <summary>
 		/// Retrieves configuration information for machine learning datafeeds.
 		/// </summary>
-		public static GetDatafeedsResponse GetDatafeeds(this IElasticClient client,Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetDatafeedsResponse GetDatafeeds(this IElasticClient client, Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null
+		)
+			=> client.MachineLearning.GetDatafeeds(selector);
 
 		/// <inheritdoc />
-		public static GetDatafeedsResponse GetDatafeeds(this IElasticClient client,IGetDatafeedsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetDatafeedsResponse GetDatafeeds(this IElasticClient client, IGetDatafeedsRequest request)
+			=> client.MachineLearning.GetDatafeeds(request);
 
 		/// <inheritdoc />
-		public static Task<GetDatafeedsResponse> GetDatafeedsAsync(this IElasticClient client,Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetDatafeedsResponse> GetDatafeedsAsync(this IElasticClient client,
+			Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetDatafeedsAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetDatafeedsResponse> GetDatafeedsAsync(this IElasticClient client,IGetDatafeedsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetDatafeedsResponse> GetDatafeedsAsync(this IElasticClient client, IGetDatafeedsRequest request,
+			CancellationToken ct = default
+		)
+			=> client.MachineLearning.GetDatafeedsAsync(request, ct);
 	}
-
 }

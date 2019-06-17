@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,23 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Reverts a specific snapshot for a machine learning job
 		/// </summary>
-		public static RevertModelSnapshotResponse RevertModelSnapshot(this IElasticClient client,Id jobId, Id snapshotId,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static RevertModelSnapshotResponse RevertModelSnapshot(this IElasticClient client, Id jobId, Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null
-		);
+		)
+			=> client.MachineLearning.RevertModelSnapshot(jobId, snapshotId, selector);
 
 		/// <inheritdoc />
-		public static RevertModelSnapshotResponse RevertModelSnapshot(this IElasticClient client,IRevertModelSnapshotRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static RevertModelSnapshotResponse RevertModelSnapshot(this IElasticClient client, IRevertModelSnapshotRequest request)
+			=> client.MachineLearning.RevertModelSnapshot(request);
 
 		/// <inheritdoc />
-		public static Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(this IElasticClient client,Id jobId, Id snapshotId,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(this IElasticClient client, Id jobId, Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.RevertModelSnapshotAsync(jobId, snapshotId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(this IElasticClient client,IRevertModelSnapshotRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(this IElasticClient client, IRevertModelSnapshotRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.RevertModelSnapshotAsync(request, ct);
 	}
-
 }

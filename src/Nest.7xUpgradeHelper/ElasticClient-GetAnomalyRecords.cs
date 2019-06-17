@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,21 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Retrieve anomaly records for a machine learning job.
 		/// </summary>
-		public static GetAnomalyRecordsResponse GetAnomalyRecords(this IElasticClient client,Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetAnomalyRecordsResponse GetAnomalyRecords(this IElasticClient client, Id jobId,
+			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null
+		)
+			=> client.MachineLearning.GetAnomalyRecords(jobId, selector);
 
 		/// <inheritdoc />
-		public static GetAnomalyRecordsResponse GetAnomalyRecords(this IElasticClient client,IGetAnomalyRecordsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetAnomalyRecordsResponse GetAnomalyRecords(this IElasticClient client, IGetAnomalyRecordsRequest request)
+			=> client.MachineLearning.GetAnomalyRecords(request);
 
 		/// <inheritdoc />
-		public static Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(this IElasticClient client,Id jobId,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(this IElasticClient client, Id jobId,
 			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetAnomalyRecordsAsync(jobId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(this IElasticClient client,IGetAnomalyRecordsRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(this IElasticClient client, IGetAnomalyRecordsRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetAnomalyRecordsAsync(request, ct);
 	}
-
 }

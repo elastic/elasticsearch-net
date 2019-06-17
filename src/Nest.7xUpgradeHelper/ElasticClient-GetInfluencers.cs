@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,20 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Retrieves results for machine learning job influencers.
 		/// </summary>
-		public static GetInfluencersResponse GetInfluencers(this IElasticClient client,Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetInfluencersResponse GetInfluencers(this IElasticClient client, Id jobId,
+			Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null
+		)
+			=> client.MachineLearning.GetInfluencers(jobId, selector);
 
 		/// <inheritdoc />
-		public static GetInfluencersResponse GetInfluencers(this IElasticClient client,IGetInfluencersRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static GetInfluencersResponse GetInfluencers(this IElasticClient client, IGetInfluencersRequest request)
+			=> client.MachineLearning.GetInfluencers(request);
 
 		/// <inheritdoc />
-		public static Task<GetInfluencersResponse> GetInfluencersAsync(this IElasticClient client,Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetInfluencersResponse> GetInfluencersAsync(this IElasticClient client, Id jobId,
+			Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetInfluencersAsync(jobId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<GetInfluencersResponse> GetInfluencersAsync(this IElasticClient client,IGetInfluencersRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<GetInfluencersResponse> GetInfluencersAsync(this IElasticClient client, IGetInfluencersRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.GetInfluencersAsync(request, ct);
 	}
-
 }

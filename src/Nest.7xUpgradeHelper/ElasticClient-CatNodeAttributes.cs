@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static CatResponse<CatNodeAttributesRecord> CatNodeAttributes(this IElasticClient client,Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatNodeAttributesRecord> CatNodeAttributes(this IElasticClient client,
+			Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null
+		)
+			=> client.Cat.NodeAttributes(selector);
 
 		/// <inheritdoc />
-		public static CatResponse<CatNodeAttributesRecord> CatNodeAttributes(this IElasticClient client,ICatNodeAttributesRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatNodeAttributesRecord> CatNodeAttributes(this IElasticClient client, ICatNodeAttributesRequest request)
+			=> client.Cat.NodeAttributes(request);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(this IElasticClient client,
 			Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.NodeAttributesAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(this IElasticClient client,ICatNodeAttributesRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(this IElasticClient client, ICatNodeAttributesRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.NodeAttributesAsync(request, ct);
 	}
 }

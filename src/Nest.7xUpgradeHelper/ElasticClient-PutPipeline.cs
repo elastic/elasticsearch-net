@@ -1,25 +1,34 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static PutPipelineResponse PutPipeline(this IElasticClient client,Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PutPipelineResponse PutPipeline(this IElasticClient client, Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector)
+			=> client.Ingest.PutPipeline(id, selector);
 
 		/// <inheritdoc />
-		public static PutPipelineResponse PutPipeline(this IElasticClient client,IPutPipelineRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PutPipelineResponse PutPipeline(this IElasticClient client, IPutPipelineRequest request)
+			=> client.Ingest.PutPipeline(request);
 
 		/// <inheritdoc />
-		public static Task<PutPipelineResponse> PutPipelineAsync(this IElasticClient client,Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PutPipelineResponse> PutPipelineAsync(this IElasticClient client, Id id,
+			Func<PutPipelineDescriptor, IPutPipelineRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Ingest.PutPipelineAsync(id, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<PutPipelineResponse> PutPipelineAsync(this IElasticClient client,IPutPipelineRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PutPipelineResponse> PutPipelineAsync(this IElasticClient client, IPutPipelineRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Ingest.PutPipelineAsync(request, ct);
 	}
-
 }

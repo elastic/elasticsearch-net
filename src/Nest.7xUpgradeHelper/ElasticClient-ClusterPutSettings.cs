@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,20 +12,30 @@ namespace Nest
 		/// <para> </para>
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-update-settings.html
 		/// </summary>
-		public static ClusterPutSettingsResponse ClusterPutSettings(this IElasticClient client,Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterPutSettingsResponse ClusterPutSettings(this IElasticClient client,
+			Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector
+		)
+			=> client.Cluster.PutSettings(selector);
 
 		/// <inheritdoc />
-		public static Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(this IElasticClient client,Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(this IElasticClient client,
+			Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.PutSettingsAsync(selector);
 
 		/// <inheritdoc />
-		public static ClusterPutSettingsResponse ClusterPutSettings(this IElasticClient client,IClusterPutSettingsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterPutSettingsResponse ClusterPutSettings(this IElasticClient client, IClusterPutSettingsRequest request)
+			=> client.Cluster.PutSettings(request);
 
 		/// <inheritdoc />
-		public static Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(this IElasticClient client,IClusterPutSettingsRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(this IElasticClient client, IClusterPutSettingsRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.PutSettingsAsync(request, ct);
 	}
-
 }

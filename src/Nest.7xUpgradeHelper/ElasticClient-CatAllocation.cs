@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
 		/// <inheritdoc />
-		public static CatResponse<CatAllocationRecord> CatAllocation(this IElasticClient client,Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatAllocationRecord> CatAllocation(this IElasticClient client,
+			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null
+		)
+			=> client.Cat.Allocation(selector);
 
 		/// <inheritdoc />
-		public static CatResponse<CatAllocationRecord> CatAllocation(this IElasticClient client,ICatAllocationRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static CatResponse<CatAllocationRecord> CatAllocation(this IElasticClient client, ICatAllocationRequest request)
+			=> client.Cat.Allocation(request);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(this IElasticClient client,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(this IElasticClient client,
 			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.AllocationAsync(selector, ct);
 
 		/// <inheritdoc />
-		public static Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(this IElasticClient client,ICatAllocationRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(this IElasticClient client, ICatAllocationRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cat.AllocationAsync(request, ct);
 	}
 }

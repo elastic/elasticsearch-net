@@ -13,23 +13,34 @@ namespace Nest
 		/// <summary>
 		/// Checks if aliases exist for indices
 		/// </summary>
-		public static ExistsResponse AliasExists(this IElasticClient client,Names name, Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExistsResponse AliasExists(this IElasticClient client, Names name,
+			Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null
+		)
+			=> client.Indices.AliasExists(name, selector);
 
 		/// <summary>
 		/// Checks if aliases exist for indices
 		/// </summary>
-		public static ExistsResponse AliasExists(this IElasticClient client,IAliasExistsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ExistsResponse AliasExists(this IElasticClient client, IAliasExistsRequest request)
+			=> client.Indices.AliasExists(request);
 
 		/// <summary>
 		/// Checks if aliases exist for indices
 		/// </summary>
-		public static Task<ExistsResponse> AliasExistsAsync(this IElasticClient client,Names name, Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExistsResponse> AliasExistsAsync(this IElasticClient client, Names name,
+			Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Indices.AliasExistsAsync(name, selector, ct);
 
 		/// <summary>
 		/// Checks if aliases exist for indices
 		/// </summary>
-		public static Task<ExistsResponse> AliasExistsAsync(this IElasticClient client,IAliasExistsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ExistsResponse> AliasExistsAsync(this IElasticClient client, IAliasExistsRequest request, CancellationToken ct = default)
+			=> client.Indices.AliasExistsAsync(request, ct);
 	}
 }

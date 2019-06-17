@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,19 +12,30 @@ namespace Nest
 		/// <para> </para>
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-update-settings.html
 		/// </summary>
-		public static ClusterGetSettingsResponse ClusterGetSettings(this IElasticClient client,Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterGetSettingsResponse ClusterGetSettings(this IElasticClient client,
+			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null
+		)
+			=> client.Cluster.GetSettings(selector);
 
-		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public static Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(this IElasticClient client,
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(this IElasticClient client,
 			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.GetSettingsAsync(selector, ct);
 
-		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public static ClusterGetSettingsResponse ClusterGetSettings(this IElasticClient client,IClusterGetSettingsRequest request);
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterGetSettingsResponse ClusterGetSettings(this IElasticClient client, IClusterGetSettingsRequest request)
+			=> client.Cluster.GetSettings(request);
 
-		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public static Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(this IElasticClient client,IClusterGetSettingsRequest request, CancellationToken ct = default);
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(this IElasticClient client, IClusterGetSettingsRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Cluster.GetSettingsAsync(request, ct);
 	}
-
 }

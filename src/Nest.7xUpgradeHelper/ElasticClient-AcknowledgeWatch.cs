@@ -1,31 +1,39 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
+	internal static class InvokeExtensions
+	{
+		internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
+			where T : class, TReturn where TReturn : class =>
+			func?.Invoke(@default) ?? @default;
+	}
+	
 	public static partial class ElasticClientExtensions
 	{
-		/// <summary>
-		/// Acknowledges a watch, to manually throttle execution of the watch's actions
-		/// while the watch condition remains <c>true</c>.
-		/// An acknowledged watch action remains in the acknowledged (acked) state until the watch’s condition
-		/// evaluates to <c>false</c>.
-		/// </summary>
-		public static AcknowledgeWatchResponse AcknowledgeWatch(this IElasticClient client,Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static AcknowledgeWatchResponse AcknowledgeWatch(this IElasticClient client, Id id,
+			Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null
+		)
+			=> client.Watcher.Acknowledge(id, selector);
 
-		/// <inheritdoc />
-		public static AcknowledgeWatchResponse AcknowledgeWatch(this IElasticClient client,IAcknowledgeWatchRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static AcknowledgeWatchResponse AcknowledgeWatch(this IElasticClient client, IAcknowledgeWatchRequest request)
+			=> client.Watcher.Acknowledge(request);
 
-		/// <inheritdoc />
-		public static Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(this IElasticClient client,Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(this IElasticClient client, Id id,
+			Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.AcknowledgeAsync(id, selector, ct);
 
-		/// <inheritdoc />
-		public static Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(this IElasticClient client,IAcknowledgeWatchRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(this IElasticClient client, IAcknowledgeWatchRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Watcher.AcknowledgeAsync(request, ct);
 	}
 }

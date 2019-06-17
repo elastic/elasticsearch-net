@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,18 +14,29 @@ namespace Nest
 		/// <para> </para>
 		/// <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/_cluster_stats.html">https://www.elastic.co/guide/en/elasticsearch/guide/current/_cluster_stats.html</a>
 		/// <param name="selector">A descriptor that describes the cluster stats operation</param>
-		public static ClusterStatsResponse ClusterStats(this IElasticClient client,Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterStatsResponse ClusterStats(this IElasticClient client, Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null
+		)
+			=> client.Cluster.Stats(selector);
 
 		/// <inheritdoc />
-		public static Task<ClusterStatsResponse> ClusterStatsAsync(this IElasticClient client,Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterStatsResponse> ClusterStatsAsync(this IElasticClient client,
+			Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.Cluster.StatsAsync(selector);
 
 		/// <inheritdoc />
-		public static ClusterStatsResponse ClusterStats(this IElasticClient client,IClusterStatsRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static ClusterStatsResponse ClusterStats(this IElasticClient client, IClusterStatsRequest request)
+			=> client.Cluster.Stats(request);
 
 		/// <inheritdoc />
-		public static Task<ClusterStatsResponse> ClusterStatsAsync(this IElasticClient client,IClusterStatsRequest request, CancellationToken ct = default);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<ClusterStatsResponse> ClusterStatsAsync(this IElasticClient client, IClusterStatsRequest request,
+			CancellationToken ct = default
+		)
+			=> client.Cluster.StatsAsync(request, ct);
 	}
-
 }

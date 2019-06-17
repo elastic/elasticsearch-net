@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,18 +11,33 @@ namespace Nest
 		/// the leader index. You can resume following with the resume follower API. Pausing and resuming a follower index can be
 		/// used to change the configuration of the following task.
 		/// </summary>
-		public static PauseFollowIndexResponse PauseFollowIndex(this IElasticClient client,IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PauseFollowIndexResponse PauseFollowIndex(this IElasticClient client, IndexName index,
+			Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null
+		)
+			=> client.CrossClusterReplication.PauseFollowIndex(index, selector);
 
-		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public static PauseFollowIndexResponse PauseFollowIndex(this IElasticClient client,IPauseFollowIndexRequest request);
+		/// <inheritdoc
+		///     cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static PauseFollowIndexResponse PauseFollowIndex(this IElasticClient client, IPauseFollowIndexRequest request)
+			=> client.CrossClusterReplication.PauseFollowIndex(request);
 
-		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public static Task<PauseFollowIndexResponse> PauseFollowIndexAsync(this IElasticClient client,IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
+		/// <inheritdoc
+		///     cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PauseFollowIndexResponse> PauseFollowIndexAsync(this IElasticClient client, IndexName index,
+			Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.CrossClusterReplication.PauseFollowIndexAsync(index, selector, ct);
 
-		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public static Task<PauseFollowIndexResponse> PauseFollowIndexAsync(this IElasticClient client,IPauseFollowIndexRequest request, CancellationToken ct = default);
+		/// <inheritdoc
+		///     cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<PauseFollowIndexResponse> PauseFollowIndexAsync(this IElasticClient client, IPauseFollowIndexRequest request,
+			CancellationToken ct = default
+		)
+			=> client.CrossClusterReplication.PauseFollowIndexAsync(request, ct);
 	}
-
 }

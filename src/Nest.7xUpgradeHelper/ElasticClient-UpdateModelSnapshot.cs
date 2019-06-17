@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,23 +9,30 @@ namespace Nest
 		/// <summary>
 		/// Updates a machine learning model snapshot.
 		/// </summary>
-		public static UpdateModelSnapshotResponse UpdateModelSnapshot(this IElasticClient client,Id jobId, Id snapshotId,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static UpdateModelSnapshotResponse UpdateModelSnapshot(this IElasticClient client, Id jobId, Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null
-		);
+		)
+			=> client.MachineLearning.UpdateModelSnapshot(jobId, snapshotId, selector);
 
 		/// <inheritdoc />
-		public static UpdateModelSnapshotResponse UpdateModelSnapshot(this IElasticClient client,IUpdateModelSnapshotRequest request);
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static UpdateModelSnapshotResponse UpdateModelSnapshot(this IElasticClient client, IUpdateModelSnapshotRequest request)
+			=> client.MachineLearning.UpdateModelSnapshot(request);
 
 		/// <inheritdoc />
-		public static Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(this IElasticClient client,Id jobId, Id snapshotId,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(this IElasticClient client, Id jobId, Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.UpdateModelSnapshotAsync(jobId, snapshotId, selector, ct);
 
 		/// <inheritdoc />
-		public static Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(this IElasticClient client,IUpdateModelSnapshotRequest request,
+		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
+public static Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(this IElasticClient client, IUpdateModelSnapshotRequest request,
 			CancellationToken ct = default
-		);
+		)
+			=> client.MachineLearning.UpdateModelSnapshotAsync(request, ct);
 	}
-
 }
