@@ -6,27 +6,23 @@ namespace Nest
 {
 	public static partial class ElasticClientExtensions
 	{
-		/// <inheritdoc />
-		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
-public static GetLicenseResponse GetLicense(this IElasticClient client, Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null)
+		[Obsolete("Moved to client.License.Get(), please update this usage.")]
+		public static GetLicenseResponse GetLicense(this IElasticClient client, Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null)
 			=> client.License.Get(selector);
 
-		/// <inheritdoc />
-		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
-public static GetLicenseResponse GetLicense(this IElasticClient client, IGetLicenseRequest request)
+		[Obsolete("Moved to client.License.Get(), please update this usage.")]
+		public static GetLicenseResponse GetLicense(this IElasticClient client, IGetLicenseRequest request)
 			=> client.License.Get(request);
 
-		/// <inheritdoc />
-		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
-public static Task<GetLicenseResponse> GetLicenseAsync(this IElasticClient client,
+		[Obsolete("Moved to client.License.GetAsync(), please update this usage.")]
+		public static Task<GetLicenseResponse> GetLicenseAsync(this IElasticClient client,
 			Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null,
 			CancellationToken ct = default
 		)
 			=> client.License.GetAsync(selector, ct);
 
-		/// <inheritdoc />
-		[Obsolete("Moved to client.XX.XX(), please update this usage.")]
-public static Task<GetLicenseResponse> GetLicenseAsync(this IElasticClient client, IGetLicenseRequest request, CancellationToken ct = default)
+		[Obsolete("Moved to client.License.GetAsync(), please update this usage.")]
+		public static Task<GetLicenseResponse> GetLicenseAsync(this IElasticClient client, IGetLicenseRequest request, CancellationToken ct = default)
 			=> client.License.GetAsync(request, ct);
 	}
 }
