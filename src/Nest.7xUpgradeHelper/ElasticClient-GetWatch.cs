@@ -23,6 +23,6 @@ namespace Nest
 
 		[Obsolete("Moved to client.Watcher.GetAsync(), please update this usage.")]
 		public static Task<GetWatchResponse> GetWatchAsync(this IElasticClient client, IGetWatchRequest request, CancellationToken ct = default)
-			=> client.Watcher.GetAsync(request);
+			=> client.Watcher.GetAsync(request,ct);
 	}
 }

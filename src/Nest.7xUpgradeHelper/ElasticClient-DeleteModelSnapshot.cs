@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(this IElasticClient client, IDeleteModelSnapshotRequest request,
 			CancellationToken ct = default
 		)
-			=> client.MachineLearning.DeleteModelSnapshotAsync(request);
+			=> client.MachineLearning.DeleteModelSnapshotAsync(request, ct);
 	}
 }

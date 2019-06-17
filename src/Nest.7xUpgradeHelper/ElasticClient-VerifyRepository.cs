@@ -21,7 +21,7 @@ namespace Nest
 			Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null,
 			CancellationToken ct = default
 		)
-			=> client.Snapshot.VerifyRepositoryAsync(repository, selector);
+			=> client.Snapshot.VerifyRepositoryAsync(repository, selector, ct);
 
 		[Obsolete("Moved to client.Snapshot.VerifyRepositoryAsync(), please update this usage.")]
 		public static Task<VerifyRepositoryResponse> VerifyRepositoryAsync(this IElasticClient client, IVerifyRepositoryRequest request,

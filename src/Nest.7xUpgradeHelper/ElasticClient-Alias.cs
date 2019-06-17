@@ -18,7 +18,7 @@ namespace Nest
 		public static Task<BulkAliasResponse> AliasAsync(this IElasticClient client, Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
 			CancellationToken ct = default
 		)
-			=> client.Indices.BulkAliasAsync(selector);
+			=> client.Indices.BulkAliasAsync(selector, ct);
 
 		[Obsolete("Moved to client.Indices.BulkAliasAsync(), please update this usage.")]
 		public static Task<BulkAliasResponse> AliasAsync(this IElasticClient client, IBulkAliasRequest request, CancellationToken ct = default)

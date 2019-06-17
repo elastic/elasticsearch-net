@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<CreateRepositoryResponse> CreateRepositoryAsync(this IElasticClient client, ICreateRepositoryRequest request,
 			CancellationToken ct = default
 		)
-			=> client.Snapshot.CreateRepositoryAsync(request);
+			=> client.Snapshot.CreateRepositoryAsync(request, ct);
 	}
 }

@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<CatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(this IElasticClient client, ICatPendingTasksRequest request,
 			CancellationToken ct = default
 		)
-			=> client.Cat.PendingTasksAsync(request);
+			=> client.Cat.PendingTasksAsync(request, ct);
 	}
 }

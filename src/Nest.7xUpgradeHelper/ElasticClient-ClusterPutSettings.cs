@@ -17,7 +17,7 @@ namespace Nest
 			Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
 			CancellationToken ct = default
 		)
-			=> client.Cluster.PutSettingsAsync(selector);
+			=> client.Cluster.PutSettingsAsync(selector, ct);
 
 		[Obsolete("Moved to client.Cluster.PutSettings(), please update this usage.")]
 		public static ClusterPutSettingsResponse ClusterPutSettings(this IElasticClient client, IClusterPutSettingsRequest request)

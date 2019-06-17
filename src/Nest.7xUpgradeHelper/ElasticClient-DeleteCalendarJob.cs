@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(this IElasticClient client, IDeleteCalendarJobRequest request,
 			CancellationToken ct = default
 		)
-			=> client.MachineLearning.DeleteCalendarJobAsync(request);
+			=> client.MachineLearning.DeleteCalendarJobAsync(request, ct);
 	}
 }

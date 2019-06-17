@@ -20,7 +20,7 @@ namespace Nest
 			Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null,
 			CancellationToken ct = default
 		)
-			=> client.Security.AuthenticateAsync(selector);
+			=> client.Security.AuthenticateAsync(selector, ct);
 
 		[Obsolete("Moved to client.Security.AuthenticateAsync(), please update this usage.")]
 		public static Task<AuthenticateResponse> AuthenticateAsync(this IElasticClient client, IAuthenticateRequest request,

@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<DeleteRepositoryResponse> DeleteRepositoryAsync(this IElasticClient client, IDeleteRepositoryRequest request,
 			CancellationToken ct = default
 		)
-			=> client.Snapshot.DeleteRepositoryAsync(request);
+			=> client.Snapshot.DeleteRepositoryAsync(request, ct);
 	}
 }

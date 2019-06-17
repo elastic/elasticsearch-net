@@ -18,7 +18,7 @@ namespace Nest
 		public static Task<AnalyzeResponse> AnalyzeAsync(this IElasticClient client, Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
 			CancellationToken ct = default
 		)
-			=> client.Indices.AnalyzeAsync(selector);
+			=> client.Indices.AnalyzeAsync(selector, ct);
 
 		[Obsolete("Moved to client.Indices.AnalyzeAsync(), please update this usage.")]
 		public static Task<AnalyzeResponse> AnalyzeAsync(this IElasticClient client, IAnalyzeRequest request, CancellationToken ct = default)

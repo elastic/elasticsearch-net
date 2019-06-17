@@ -16,7 +16,7 @@ namespace Nest
 			Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null,
 			CancellationToken ct = default
 		)
-			=> client.Cluster.StatsAsync(selector);
+			=> client.Cluster.StatsAsync(selector, ct);
 
 		[Obsolete("Moved to client.Cluster.Stats(), please update this usage.")]
 		public static ClusterStatsResponse ClusterStats(this IElasticClient client, IClusterStatsRequest request)

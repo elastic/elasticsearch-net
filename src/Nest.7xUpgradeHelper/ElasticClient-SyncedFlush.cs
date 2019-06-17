@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<SyncedFlushResponse> SyncedFlushAsync(this IElasticClient client, ISyncedFlushRequest request,
 			CancellationToken ct = default
 		)
-			=> client.Indices.SyncedFlushAsync(request);
+			=> client.Indices.SyncedFlushAsync(request, ct);
 	}
 }

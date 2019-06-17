@@ -21,7 +21,7 @@ namespace Nest
 			Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null,
 			CancellationToken ct = default
 		)
-			=> client.Watcher.DeleteAsync(watchId, selector);
+			=> client.Watcher.DeleteAsync(watchId, selector, ct);
 
 		[Obsolete("Moved to client.Watcher.DeleteAsync(), please update this usage.")]
 		public static Task<DeleteWatchResponse> DeleteWatchAsync(this IElasticClient client, IDeleteWatchRequest request,

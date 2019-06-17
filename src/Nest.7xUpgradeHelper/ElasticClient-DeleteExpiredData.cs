@@ -27,6 +27,6 @@ namespace Nest
 		public static Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(this IElasticClient client, IDeleteExpiredDataRequest request,
 			CancellationToken ct = default
 		)
-			=> client.MachineLearning.DeleteExpiredDataAsync(request);
+			=> client.MachineLearning.DeleteExpiredDataAsync(request, ct);
 	}
 }

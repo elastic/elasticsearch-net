@@ -24,6 +24,6 @@ namespace Nest
 
 		[Obsolete("Moved to client.Tasks.GetTaskAsync(), please update this usage.")]
 		public static Task<GetTaskResponse> GetTaskAsync(this IElasticClient client, IGetTaskRequest request, CancellationToken ct = default)
-			=> client.Tasks.GetTaskAsync(request);
+			=> client.Tasks.GetTaskAsync(request, ct);
 	}
 }

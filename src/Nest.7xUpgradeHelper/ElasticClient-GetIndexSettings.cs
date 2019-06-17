@@ -28,6 +28,6 @@ namespace Nest
 		public static Task<GetIndexSettingsResponse> GetIndexSettingsAsync(this IElasticClient client, IGetIndexSettingsRequest request,
 			CancellationToken ct = default
 		)
-			=> client.Indices.GetSettingsAsync(request);
+			=> client.Indices.GetSettingsAsync(request, ct);
 	}
 }
