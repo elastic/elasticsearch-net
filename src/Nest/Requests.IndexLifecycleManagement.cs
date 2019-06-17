@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	///<summary>Request for DeleteLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
 	public partial class DeleteLifecycleRequest : PlainRequestBase<DeleteLifecycleRequestParameters>, IDeleteLifecycleRequest
 	{
 		protected IDeleteLifecycleRequest Self => this;
@@ -74,7 +74,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	///<summary>Request for ExplainLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</para></summary>
 	public partial class ExplainLifecycleRequest : PlainRequestBase<ExplainLifecycleRequestParameters>, IExplainLifecycleRequest
 	{
 		protected IExplainLifecycleRequest Self => this;
@@ -107,7 +107,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	///<summary>Request for GetLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
 	public partial class GetLifecycleRequest : PlainRequestBase<GetLifecycleRequestParameters>, IGetLifecycleRequest
 	{
 		protected IGetLifecycleRequest Self => this;
@@ -134,7 +134,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	///<summary>Request for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
 	public partial class GetIlmStatusRequest : PlainRequestBase<GetIlmStatusRequestParameters>, IGetIlmStatusRequest
 	{
 		protected IGetIlmStatusRequest Self => this;
@@ -153,7 +153,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for MoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	///<summary>Request for MoveToStep <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
 	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
 	{
 		protected IMoveToStepRequest Self => this;
@@ -187,7 +187,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	///<summary>Request for PutLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
 	public partial class PutLifecycleRequest : PlainRequestBase<PutLifecycleRequestParameters>, IPutLifecycleRequest
 	{
 		protected IPutLifecycleRequest Self => this;
@@ -220,7 +220,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for RemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
+	///<summary>Request for RemovePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
 	public partial class RemovePolicyRequest : PlainRequestBase<RemovePolicyRequestParameters>, IRemovePolicyRequest
 	{
 		protected IRemovePolicyRequest Self => this;
@@ -253,7 +253,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Retry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	///<summary>Request for Retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
 	public partial class RetryIlmRequest : PlainRequestBase<RetryIlmRequestParameters>, IRetryIlmRequest
 	{
 		protected IRetryIlmRequest Self => this;
@@ -281,7 +281,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Start <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	///<summary>Request for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
 	public partial class StartIlmRequest : PlainRequestBase<StartIlmRequestParameters>, IStartIlmRequest
 	{
 		protected IStartIlmRequest Self => this;
@@ -295,7 +295,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Stop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	///<summary>Request for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
 	public partial class StopIlmRequest : PlainRequestBase<StopIlmRequestParameters>, IStopIlmRequest
 	{
 		protected IStopIlmRequest Self => this;

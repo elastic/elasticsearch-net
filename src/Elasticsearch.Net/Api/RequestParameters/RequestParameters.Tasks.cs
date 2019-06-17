@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.TasksApi
 {
-	///<summary>Request options for Cancel<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for Cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class CancelTasksRequestParameters : RequestParameters<CancelTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 		}
 	}
 
-	///<summary>Request options for GetTask<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for GetTask <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class GetTaskRequestParameters : RequestParameters<GetTaskRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -72,7 +72,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 		}
 	}
 
-	///<summary>Request options for List<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for List <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

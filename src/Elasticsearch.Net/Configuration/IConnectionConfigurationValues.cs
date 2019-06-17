@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// When set to true will disable (de)serializing directly to the request and response stream and return a byte[]
-		/// copy of the raw request and response on elasticsearch calls. Defaults to  false
+		/// copy of the raw request and response on Elasticsearch calls. Defaults to  false
 		/// </summary>
 		bool DisableDirectStreaming { get; }
 
@@ -69,7 +69,7 @@ namespace Elasticsearch.Net
 		bool DisablePings { get; }
 
 		/// <summary>
-		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
+		/// Enable gzip compressed requests and responses, do note that you need to configure Elasticsearch to set this
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
@@ -80,7 +80,7 @@ namespace Elasticsearch.Net
 		NameValueCollection Headers { get; }
 
 		/// <summary>
-		/// By default the client enables http pipelining as elasticsearch 2.0 defaults to true as well
+		/// Whether HTTP pipelining is enabled. The default is <c>true</c>
 		/// </summary>
 		bool HttpPipeliningEnabled { get; }
 
@@ -104,7 +104,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// When a retryable exception occurs or status code is returned this controls the maximum
-		/// amount of times we should retry the call to elasticsearch
+		/// amount of times we should retry the call to Elasticsearch
 		/// </summary>
 		int? MaxRetries { get; }
 
@@ -146,7 +146,7 @@ namespace Elasticsearch.Net
 		TimeSpan? PingTimeout { get; }
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
+		/// Forces all requests to have ?pretty=true, causing Elasticsearch to return formatted json.
 		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
 		bool PrettyJson { get; }
@@ -185,7 +185,7 @@ namespace Elasticsearch.Net
 		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> ServerCertificateValidationCallback { get; }
 
 		/// <summary>
-		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns an unexpected
+		/// Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns an unexpected
 		/// json format
 		/// </summary>
 		IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }

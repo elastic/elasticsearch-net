@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.NodesApi
 {
-	///<summary>Request options for HotThreads<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+	///<summary>Request options for HotThreads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 	public class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -71,7 +71,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 		}
 	}
 
-	///<summary>Request options for Info<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+	///<summary>Request options for Info <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 	public class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -90,7 +90,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 		}
 	}
 
-	///<summary>Request options for ReloadSecureSettings<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
+	///<summary>Request options for ReloadSecureSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</para></summary>
 	public class ReloadSecureSettingsRequestParameters : RequestParameters<ReloadSecureSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -102,7 +102,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 		}
 	}
 
-	///<summary>Request options for Stats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+	///<summary>Request options for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 	public class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -163,7 +163,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 		}
 	}
 
-	///<summary>Request options for Usage<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	///<summary>Request options for Usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 	public class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

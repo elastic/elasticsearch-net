@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.XPackApi
 {
-	///<summary>Request options for Info<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
+	///<summary>Request options for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Specification.XPackApi
 		}
 	}
 
-	///<summary>Request options for Usage<pre>Retrieve information about xpack features usage</pre></summary>
+	///<summary>Request options for Usage <para>Retrieve information about xpack features usage</para></summary>
 	public class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

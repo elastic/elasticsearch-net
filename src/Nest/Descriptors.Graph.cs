@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.GraphApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for Explore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>descriptor for Explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
 	public partial class GraphExploreDescriptor<TDocument> : RequestDescriptorBase<GraphExploreDescriptor<TDocument>, GraphExploreRequestParameters, IGraphExploreRequest<TDocument>>, IGraphExploreRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.GraphExplore;

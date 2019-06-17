@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.MigrationApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for DeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>descriptor for DeprecationInfo <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
 	public partial class DeprecationInfoDescriptor : RequestDescriptorBase<DeprecationInfoDescriptor, DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationDeprecationInfo;
@@ -55,7 +55,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Assistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	///<summary>descriptor for Assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 	public partial class MigrationAssistanceDescriptor : RequestDescriptorBase<MigrationAssistanceDescriptor, MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationAssistance;
@@ -88,7 +88,7 @@ namespace Nest
 		public MigrationAssistanceDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
-	///<summary>descriptor for Upgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	///<summary>descriptor for Upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 	public partial class MigrationUpgradeDescriptor : RequestDescriptorBase<MigrationUpgradeDescriptor, MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationUpgrade;

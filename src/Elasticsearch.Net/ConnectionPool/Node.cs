@@ -11,7 +11,7 @@ namespace Elasticsearch.Net
 
 		public Node(Uri uri)
 		{
-			//this makes sure that elasticsearch paths stay relative to the path passed in
+			//this makes sure that Elasticsearch paths stay relative to the path passed in
 			//http://my-saas-provider.com/instance
 			if (!uri.OriginalString.EndsWith("/", StringComparison.Ordinal))
 				uri = new Uri(uri.OriginalString + "/");

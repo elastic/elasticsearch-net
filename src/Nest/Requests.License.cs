@@ -36,7 +36,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Delete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
@@ -50,7 +50,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Get <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for Get <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
@@ -70,7 +70,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for GetBasicStatus <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 	{
 		protected IGetBasicLicenseStatusRequest Self => this;
@@ -84,7 +84,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for GetTrialStatus <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 	{
 		protected IGetTrialLicenseStatusRequest Self => this;
@@ -98,7 +98,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Post <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for Post <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
@@ -118,7 +118,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for StartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for StartBasic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 	{
 		protected IStartBasicLicenseRequest Self => this;
@@ -138,7 +138,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for StartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request for StartTrial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 	{
 		protected IStartTrialLicenseRequest Self => this;

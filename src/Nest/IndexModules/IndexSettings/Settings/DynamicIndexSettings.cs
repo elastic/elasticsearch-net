@@ -85,7 +85,7 @@ namespace Nest
 		ISimilarities Similarity { get; set; }
 
 		/// <summary>
-		/// Configure logging thresholds and levels in elasticsearch for search/fetch and indexing
+		/// Configure logging thresholds and levels in Elasticsearch for search/fetch and indexing
 		/// </summary>
 		ISlowLog SlowLog { get; set; }
 

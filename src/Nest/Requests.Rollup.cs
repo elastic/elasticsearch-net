@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteJob <pre></pre></summary>
+	///<summary>Request for DeleteJob <para></para></summary>
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
 		protected IDeleteRollupJobRequest Self => this;
@@ -74,7 +74,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetJob <pre></pre></summary>
+	///<summary>Request for GetJob <para></para></summary>
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
 		protected IGetRollupJobRequest Self => this;
@@ -106,7 +106,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCapabilities <pre></pre></summary>
+	///<summary>Request for GetCapabilities <para></para></summary>
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
 		protected IGetRollupCapabilitiesRequest Self => this;
@@ -138,7 +138,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetIndexCapabilities <pre></pre></summary>
+	///<summary>Request for GetIndexCapabilities <para></para></summary>
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
 		protected IGetRollupIndexCapabilitiesRequest Self => this;
@@ -171,7 +171,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CreateJob <pre></pre></summary>
+	///<summary>Request for CreateJob <para></para></summary>
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
 		protected ICreateRollupJobRequest Self => this;
@@ -204,7 +204,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Search <pre></pre></summary>
+	///<summary>Request for Search <para></para></summary>
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
 		protected IRollupSearchRequest Self => this;
@@ -250,7 +250,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StartJob <pre></pre></summary>
+	///<summary>Request for StartJob <para></para></summary>
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
 		protected IStartRollupJobRequest Self => this;
@@ -283,7 +283,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StopJob <pre></pre></summary>
+	///<summary>Request for StopJob <para></para></summary>
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
 		protected IStopRollupJobRequest Self => this;

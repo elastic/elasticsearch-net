@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.XPackApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for Info <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
+	///<summary>descriptor for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 	public partial class XPackInfoDescriptor : RequestDescriptorBase<XPackInfoDescriptor, XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.XPackInfo;
@@ -40,7 +40,7 @@ namespace Nest
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);
 	}
 
-	///<summary>descriptor for Usage <pre>Retrieve information about xpack features usage</pre></summary>
+	///<summary>descriptor for Usage <para>Retrieve information about xpack features usage</para></summary>
 	public partial class XPackUsageDescriptor : RequestDescriptorBase<XPackUsageDescriptor, XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.XPackUsage;

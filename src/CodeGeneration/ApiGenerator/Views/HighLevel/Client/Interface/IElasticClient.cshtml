@@ -1,5 +1,6 @@
 @using RazorLight
 @using System.Linq
+@using ApiGenerator
 @using ApiGenerator.Domain
 @using ApiGenerator.Domain.Code
 @inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
@@ -16,7 +17,7 @@ using Nest;
 namespace Nest
 {
 	///<summary>
-	///Raw operations with elasticsearch
+	///Elasticsearch high level client 
 	///</summary>
 	public partial interface IElasticClient 
 	{
@@ -24,7 +25,7 @@ namespace Nest
 		{
 		if (kv.Key != CsharpNames.RootNamespace)
 		{
-<text>		///<summary> This property logically groups all <c>@kv.Key</c> API's together.</summary>
+<text>		///<summary>@(kv.Key.SplitPascalCase()) APIs</summary>
 			@CsharpNames.HighLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
 </text>
 			continue;

@@ -24,37 +24,37 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.RollupApi
 {
-	///<summary>Request options for DeleteJob<pre></pre></summary>
+	///<summary>Request options for DeleteJob <para></para></summary>
 	public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for GetJob<pre></pre></summary>
+	///<summary>Request options for GetJob <para></para></summary>
 	public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetCapabilities<pre></pre></summary>
+	///<summary>Request options for GetCapabilities <para></para></summary>
 	public class GetRollupCapabilitiesRequestParameters : RequestParameters<GetRollupCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetIndexCapabilities<pre></pre></summary>
+	///<summary>Request options for GetIndexCapabilities <para></para></summary>
 	public class GetRollupIndexCapabilitiesRequestParameters : RequestParameters<GetRollupIndexCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for CreateJob<pre></pre></summary>
+	///<summary>Request options for CreateJob <para></para></summary>
 	public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for Search<pre></pre></summary>
+	///<summary>Request options for Search <para></para></summary>
 	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -73,13 +73,13 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		}
 	}
 
-	///<summary>Request options for StartJob<pre></pre></summary>
+	///<summary>Request options for StartJob <para></para></summary>
 	public class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for StopJob<pre></pre></summary>
+	///<summary>Request options for StopJob <para></para></summary>
 	public class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

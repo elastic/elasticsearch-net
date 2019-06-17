@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.GraphApi
 {
-	///<summary>Request options for Explore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>Request options for Explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
