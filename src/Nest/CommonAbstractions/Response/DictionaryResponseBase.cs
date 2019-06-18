@@ -7,7 +7,6 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
-	//TODO can this interface in favor of the base class?
 	public interface IDictionaryResponse<TKey, TValue> : IResponse
 	{
 		IReadOnlyDictionary<TKey, TValue> BackingDictionary { get; set; }
