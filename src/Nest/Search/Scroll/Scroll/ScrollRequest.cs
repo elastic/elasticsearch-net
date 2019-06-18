@@ -24,8 +24,6 @@ namespace Nest
 
 		public string ScrollId { get; set; }
 
-		// TODO 7.x TypeSelector is not used
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		Type ICovariantSearchRequest.ClrType => null;
 	}
 
