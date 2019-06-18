@@ -167,7 +167,6 @@ namespace Nest
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			//TODO expose this on IAPiCallDetails as RetryLater in 7.0?
 			var failureReason = clientException?.FailureReason.GetValueOrDefault(PipelineFailure.Unexpected);
 			switch (failureReason)
 			{
@@ -183,6 +182,10 @@ namespace Nest
 				case PipelineFailure.Unexpected:
 					throw ThrowOnBadBulk(response,
 						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
+				case PipelineFailure.BadResponse:
+				case PipelineFailure.PingFailure:
+				case PipelineFailure.MaxTimeoutReached:
+				case PipelineFailure.BadRequest:
 				default:
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 			}
