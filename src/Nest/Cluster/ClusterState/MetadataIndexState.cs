@@ -12,7 +12,6 @@ namespace Nest
 		[DataMember(Name = "mappings")]
 		public ITypeMapping Mappings { get; internal set; }
 
-		// TODO: Why this uses DynamicBody
 		[DataMember(Name = "settings")]
 		public DynamicBody Settings { get; internal set; }
 
