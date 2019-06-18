@@ -19,13 +19,13 @@ namespace Elasticsearch.Net
 			{
 				try
 				{
-					num = Marshal.SecureStringToBSTR(secureString);
-					return Marshal.PtrToStringBSTR(num);
+					num = Marshal.SecureStringToGlobalAllocUnicode(secureString);
+					return Marshal.PtrToStringUni(num);
 				}
 				finally
 				{
 					if (num != IntPtr.Zero)
-						Marshal.ZeroFreeBSTR(num);
+						Marshal.ZeroFreeGlobalAllocUnicode(num);
 				}
 			}
 
