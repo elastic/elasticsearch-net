@@ -14,22 +14,21 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public static string CreateString(this SecureString secureString)
 		{
-			var num = IntPtr.Zero;
-			if (secureString != null && secureString.Length != 0)
-			{
-				try
-				{
-					num = Marshal.SecureStringToGlobalAllocUnicode(secureString);
-					return Marshal.PtrToStringUni(num);
-				}
-				finally
-				{
-					if (num != IntPtr.Zero)
-						Marshal.ZeroFreeGlobalAllocUnicode(num);
-				}
-			}
+			if (secureString == null || secureString.Length == 0)
+				return string.Empty;
 
-			return string.Empty;
+			var num = IntPtr.Zero;
+
+			try
+			{
+				num = Marshal.SecureStringToGlobalAllocUnicode(secureString);
+				return Marshal.PtrToStringUni(num);
+			}
+			finally
+			{
+				if (num != IntPtr.Zero)
+					Marshal.ZeroFreeGlobalAllocUnicode(num);
+			}
 		}
 
 		/// <summary>
