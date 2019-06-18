@@ -203,7 +203,7 @@ namespace Nest
 			long? docCount = null
 		)
 		{
-			var matrixStats = new MatrixStatsAggregate { DocCount = docCount, Meta = meta };
+			var matrixStats = new MatrixStatsAggregate { DocCount = docCount.GetValueOrDefault(), Meta = meta };
 			var matrixStatsListFormatter = formatterResolver.GetFormatter<List<MatrixStatsField>>();
 			matrixStats.Fields = matrixStatsListFormatter.Deserialize(ref reader, formatterResolver);
 			return matrixStats;
