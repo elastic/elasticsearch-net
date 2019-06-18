@@ -56,8 +56,6 @@ namespace Nest
 		public IReadOnlyCollection<ExplainAnalyzeToken> Tokens { get; internal set; } = EmptyReadOnly<ExplainAnalyzeToken>.Collection;
 	}
 
-	//TODO create an issue on the main repos that this API uses camelCase
-	//this causes us to be unable to subclass from AnalyzeToken directly
 	[DataContract]
 	public class ExplainAnalyzeToken
 	{
