@@ -3,9 +3,9 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	// TODO 7.x is this still needed?
+	/// <summary> Signals the type to deserialize hits into </summary>
 	[InterfaceDataContract]
-	public interface ICovariantSearchRequest
+	public interface ISearchTypeInformation
 	{
 		Type ClrType { get; }
 	}

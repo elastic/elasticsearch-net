@@ -56,7 +56,7 @@ namespace Nest
 						(doc, desc) => new SearchHitTuple
 						{
 							Hit = doc,
-							Descriptor = new KeyValuePair<string, ICovariantSearchRequest>(desc.Key, desc.Value)
+							Descriptor = new KeyValuePair<string, ISearchTypeInformation>(desc.Key, desc.Value)
 						});
 					break;
 				case IMultiSearchTemplateRequest multiSearchTemplate:
@@ -64,7 +64,7 @@ namespace Nest
 						(doc, desc) => new SearchHitTuple
 						{
 							Hit = doc,
-							Descriptor = new KeyValuePair<string, ICovariantSearchRequest>(desc.Key, desc.Value)
+							Descriptor = new KeyValuePair<string, ISearchTypeInformation>(desc.Key, desc.Value)
 						});
 					break;
 				default:
@@ -117,7 +117,7 @@ namespace Nest
 
 		internal class SearchHitTuple
 		{
-			public KeyValuePair<string, ICovariantSearchRequest> Descriptor { get; set; }
+			public KeyValuePair<string, ISearchTypeInformation> Descriptor { get; set; }
 			public ArraySegment<byte> Hit { get; set; }
 		}
 	}
