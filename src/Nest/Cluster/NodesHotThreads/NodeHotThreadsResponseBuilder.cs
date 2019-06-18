@@ -69,7 +69,7 @@ namespace Nest
 			CancellationToken ctx = default
 		)
 		{
-			if (response.Success == false)
+			if (!response.Success)
 				return new NodesHotThreadsResponse();
 
 			using (stream)
