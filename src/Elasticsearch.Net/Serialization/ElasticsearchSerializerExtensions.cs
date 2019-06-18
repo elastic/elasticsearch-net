@@ -8,14 +8,14 @@ namespace Elasticsearch.Net
 		public static byte[] SerializeToBytes<T>(
 			this IElasticsearchSerializer serializer,
 			T data,
-			SerializationFormatting formatting = SerializationFormatting.Indented) =>
+			SerializationFormatting formatting = SerializationFormatting.None) =>
 			SerializeToBytes(serializer, data, RecyclableMemoryStreamFactory.Default, formatting);
 
 		public static byte[] SerializeToBytes<T>(
 			this IElasticsearchSerializer serializer,
 			T data,
 			IMemoryStreamFactory memoryStreamFactory,
-			SerializationFormatting formatting = SerializationFormatting.Indented
+			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
 			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.Default;
@@ -29,14 +29,14 @@ namespace Elasticsearch.Net
 		public static string SerializeToString<T>(
 			this IElasticsearchSerializer serializer,
 			T data,
-			SerializationFormatting formatting = SerializationFormatting.Indented) =>
+			SerializationFormatting formatting = SerializationFormatting.None) =>
 			SerializeToString(serializer, data, RecyclableMemoryStreamFactory.Default, formatting);
 
 		public static string SerializeToString<T>(
 			this IElasticsearchSerializer serializer,
 			T data,
 			IMemoryStreamFactory memoryStreamFactory,
-			SerializationFormatting formatting = SerializationFormatting.Indented
+			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
 			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.Default;
