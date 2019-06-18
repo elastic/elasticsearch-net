@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	//TODO T can be anything?
 	public interface IPreviewDatafeedResponse<out TResult> : IResponse
 	{
 		IReadOnlyCollection<TResult> Data { get; }

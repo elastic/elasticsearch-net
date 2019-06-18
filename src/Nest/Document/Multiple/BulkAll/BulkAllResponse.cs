@@ -7,10 +7,6 @@ namespace Nest
 	[DataContract]
 	public class BulkAllResponse
 	{
-		// TODO: why is this here?
-		/// <inheritdoc />
-		public bool IsValid => true;
-
 		/// <summary>This is the Nth buffer.</summary>
 		public long Page { get; internal set; }
 

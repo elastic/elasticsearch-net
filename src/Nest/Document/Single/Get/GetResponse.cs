@@ -3,7 +3,6 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	// TODO: Looks like this can be removed?
 	public interface IGetResponse<out TDocument> : IResponse where TDocument : class
 	{
 		TDocument Source { get; }

@@ -45,7 +45,6 @@ namespace Nest
 		[DataMember(Name = "roles")]
 		public List<NodeRole> Roles { get; internal set; }
 
-		//TODO why is this using DynamicBody
 		[DataMember(Name = "settings")]
 		public DynamicBody Settings { get; internal set; }
 
