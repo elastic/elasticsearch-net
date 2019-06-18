@@ -51,7 +51,7 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
-			if (response.Success == false)
+			if (!response.Success)
 				return new NodesHotThreadsResponse();
 
 			using (stream)
