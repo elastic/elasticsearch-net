@@ -172,7 +172,6 @@ namespace Nest
 			switch (failureReason)
 			{
 				case PipelineFailure.MaxRetriesReached:
-					//TODO move this to its own PipelineFailure classification in 7.0
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
 						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
 
