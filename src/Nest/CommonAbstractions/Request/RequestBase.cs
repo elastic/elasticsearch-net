@@ -15,7 +15,6 @@ namespace Nest
 		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
 
-		// TODO refactor RequestParameters
 		[IgnoreDataMember]
 		IRequestParameters RequestParameters { get; }
 
