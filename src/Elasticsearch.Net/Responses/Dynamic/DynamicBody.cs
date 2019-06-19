@@ -52,7 +52,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Helper to to easily traverse the data using a path notation
+		/// Traverses data using path notation
 		/// </summary>
 		/// <param name="path">path into the stored object, keys are seperated with a dot and the last key is returned as T</param>
 		/// <typeparam name="T"></typeparam>
