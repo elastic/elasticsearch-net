@@ -46,6 +46,13 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x/tests"><img alt="6.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/6.x.svg?style=flat-square"></a></td>
     </tr>
     <tr>
+    	<td><code>7.x</code></td>
+    	<td><code>7.x</code></td>
+      <td>:star:</td>
+      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/7.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=7.x&svg=true"></a></td>
+    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/7.x/tests"><img alt="7.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/7.x.svg?style=flat-square"></a></td>
+    </tr>
+    <tr>
     	<td><code>master</code></td>
     	<td><code>master</code></td>
     	<td>:x:</td>
@@ -53,6 +60,8 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master/tests"><img alt="master unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/master.svg?style=flat-square"></a></td>
     </tr>
 </table>
+          
+:star: 7.x is currently prerelease. Will be supported once GA
 
 ## Preview builds
 
