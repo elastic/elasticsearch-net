@@ -7,6 +7,7 @@
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
     <LangVersion>latest</LangVersion>
+    <IsTestProject>True</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
