@@ -205,9 +205,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();
 			response.ShardsAcknowledged.Should().BeTrue();
-
-			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
-				response.Index.Should().Be(CallIsolatedValue);
+			response.Index.Should().Be(CallIsolatedValue);
 
 			var indexSettings = Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
 
