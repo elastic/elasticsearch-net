@@ -108,7 +108,11 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Error.Reason.Should().Contain("missing");
+
+			response.IsValid.Should().BeFalse();
+
 			response.Indices.Should().NotBeNull();
+			response.Indices.Should().BeEmpty();
 		}
 	}
 }
