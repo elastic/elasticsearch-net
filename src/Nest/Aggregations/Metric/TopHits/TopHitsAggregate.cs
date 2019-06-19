@@ -6,8 +6,8 @@ namespace Nest
 {
 	public class TopHitsAggregate : MetricAggregateBase
 	{
-		private readonly IList<LazyDocument> _hits;
 		private readonly IJsonFormatterResolver _formatterResolver;
+		private readonly IList<LazyDocument> _hits;
 
 		public TopHitsAggregate() { }
 
