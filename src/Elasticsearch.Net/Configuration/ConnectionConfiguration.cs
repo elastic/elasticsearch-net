@@ -513,6 +513,8 @@ namespace Elasticsearch.Net
 			_connectionPool?.Dispose();
 			_connection?.Dispose();
 			_semaphore?.Dispose();
+			_proxyPassword?.Dispose();
+			_basicAuthCredentials?.Dispose();
 		}
 	}
 }
