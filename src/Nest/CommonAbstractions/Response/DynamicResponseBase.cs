@@ -9,7 +9,7 @@ namespace Nest
 {
 	public interface IDynamicResponse : IResponse
 	{
-		DynamicBody BackingBody { get; set; }
+		DynamicDictionary BackingDictionary { get; set; }
 	}
 
 	public abstract class DynamicResponseBase : ResponseBase, IDynamicResponse
@@ -23,9 +23,9 @@ namespace Nest
 		/// <param name="path">path into the stored object, keys are seperated with a dot and the last key is returned as T</param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns>T or default</returns>
-		public T Get<T>(string path) => Self.BackingBody.Get<T>(path);
+		public T Get<T>(string path) => Self.BackingDictionary.Get<T>(path);
 
-		DynamicBody IDynamicResponse.BackingBody { get; set; } = new DynamicBody();
+		DynamicDictionary IDynamicResponse.BackingDictionary { get; set; } = new DynamicDictionary();
 	}
 
 
@@ -76,7 +76,7 @@ namespace Nest
 				}
 			}
 
-			response.BackingBody = DynamicBody.Create(dictionary);
+			response.BackingDictionary = DynamicDictionary.Create(dictionary);
 			return response;
 		}
 

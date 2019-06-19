@@ -18,19 +18,19 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
-	[JsonFormatter(typeof(DynamicBodyFormatter))]
-	public class DynamicBody
+	[JsonFormatter(typeof(DynamicDictionaryFormatter))]
+	public class DynamicDictionary
 		: DynamicObject,
-			IEquatable<DynamicBody>,
+			IEquatable<DynamicDictionary>,
 			IEnumerable<string>,
 			IDictionary<string, DynamicValue>
 	{
 		private readonly IDictionary<string, DynamicValue> _backingDictionary = new Dictionary<string, DynamicValue>(StringComparer.OrdinalIgnoreCase);
 
 		/// <summary>
-		/// Gets the number of elements contained in the <see cref="DynamicBody" />.
+		/// Gets the number of elements contained in the <see cref="DynamicDictionary" />.
 		/// </summary>
-		/// <returns>The number of elements contained in the <see cref="DynamicBody" />.</returns>
+		/// <returns>The number of elements contained in the <see cref="DynamicDictionary" />.</returns>
 		public int Count
 		{
 			get { return _backingDictionary.Count; }
@@ -39,11 +39,11 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Returns an empty dynamic dictionary.
 		/// </summary>
-		/// <value>A <see cref="DynamicBody" /> instance.</value>
-		public static DynamicBody Empty => new DynamicBody();
+		/// <value>A <see cref="DynamicDictionary" /> instance.</value>
+		public static DynamicDictionary Empty => new DynamicDictionary();
 
 		/// <summary>
-		/// Gets a value indicating whether the <see cref="DynamicBody" /> is read-only.
+		/// Gets a value indicating whether the <see cref="DynamicDictionary" /> is read-only.
 		/// </summary>
 		/// <returns>Always returns <see langword="false" />.</returns>
 		public bool IsReadOnly
@@ -73,8 +73,8 @@ namespace Elasticsearch.Net
 				if (map == null) break;
 			}
 			var v = map?[lastValue]?.Value;
-			if (v != null && typeof(T) == typeof(DynamicBody) && v is IDictionary<string, object> dict)
-				return (T)(object)DynamicBody.Create(dict);
+			if (v != null && typeof(T) == typeof(DynamicDictionary) && v is IDictionary<string, object> dict)
+				return (T)(object)DynamicDictionary.Create(dict);
 
 			return v == null ? default : (T)v;
 		}
@@ -105,53 +105,53 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="DynamicBody" />.
+		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="DynamicDictionary" />.
 		/// </summary>
-		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="DynamicBody" />.</returns>
+		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="DynamicDictionary" />.</returns>
 		public ICollection<string> Keys => _backingDictionary.Keys;
 
 		/// <summary>
-		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="DynamicBody" />.
+		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="DynamicDictionary" />.
 		/// </summary>
-		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="DynamicBody" />.</returns>
+		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="DynamicDictionary" />.</returns>
 		public ICollection<DynamicValue> Values
 		{
 			get { return _backingDictionary.Values; }
 		}
 
 		/// <summary>
-		/// Adds an item to the <see cref="DynamicBody" />.
+		/// Adds an item to the <see cref="DynamicDictionary" />.
 		/// </summary>
-		/// <param name="item">The object to add to the <see cref="DynamicBody" />.</param>
+		/// <param name="item">The object to add to the <see cref="DynamicDictionary" />.</param>
 		public void Add(KeyValuePair<string, DynamicValue> item)
 		{
 			this[item.Key] = item.Value;
 		}
 
 		/// <summary>
-		/// Removes all items from the <see cref="DynamicBody" />.
+		/// Removes all items from the <see cref="DynamicDictionary" />.
 		/// </summary>
 		public void Clear() => _backingDictionary.Clear();
 
 		/// <summary>
-		/// Determines whether the <see cref="DynamicBody" /> contains a specific value.
+		/// Determines whether the <see cref="DynamicDictionary" /> contains a specific value.
 		/// </summary>
 		/// <returns>
-		/// <see langword="true" /> if <paramref name="item" /> is found in the <see cref="DynamicBody" />; otherwise, <see langword="false" />.
+		/// <see langword="true" /> if <paramref name="item" /> is found in the <see cref="DynamicDictionary" />; otherwise, <see langword="false" />.
 		/// </returns>
-		/// <param name="item">The object to locate in the <see cref="DynamicBody" />.</param>
+		/// <param name="item">The object to locate in the <see cref="DynamicDictionary" />.</param>
 		public bool Contains(KeyValuePair<string, DynamicValue> item)
 		{
 			return _backingDictionary.Contains(item);
 		}
 
 		/// <summary>
-		/// Copies the elements of the <see cref="DynamicBody" /> to an <see cref="T:System.Array" />, starting at a particular
+		/// Copies the elements of the <see cref="DynamicDictionary" /> to an <see cref="T:System.Array" />, starting at a particular
 		/// <see cref="T:System.Array" /> index.
 		/// </summary>
 		/// <param name="array">
 		/// The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from the
-		/// <see cref="DynamicBody" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+		/// <see cref="DynamicDictionary" />. The <see cref="T:System.Array" /> must have zero-based indexing.
 		/// </param>
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying begins.</param>
 		public void CopyTo(KeyValuePair<string, DynamicValue>[] array, int arrayIndex)
@@ -160,20 +160,20 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Removes the first occurrence of a specific object from the <see cref="DynamicBody" />.
+		/// Removes the first occurrence of a specific object from the <see cref="DynamicDictionary" />.
 		/// </summary>
 		/// <returns>
-		/// <see langword="true" /> if <paramref name="item" /> was successfully removed from the <see cref="DynamicBody" />; otherwise,
+		/// <see langword="true" /> if <paramref name="item" /> was successfully removed from the <see cref="DynamicDictionary" />; otherwise,
 		/// <see langword="false" />.
 		/// </returns>
-		/// <param name="item">The object to remove from the <see cref="DynamicBody" />.</param>
+		/// <param name="item">The object to remove from the <see cref="DynamicDictionary" />.</param>
 		public bool Remove(KeyValuePair<string, DynamicValue> item)
 		{
 			return _backingDictionary.Remove(item);
 		}
 
 		/// <summary>
-		/// Adds an element with the provided key and value to the <see cref="DynamicBody" />.
+		/// Adds an element with the provided key and value to the <see cref="DynamicDictionary" />.
 		/// </summary>
 		/// <param name="key">The object to use as the key of the element to add.</param>
 		/// <param name="value">The object to use as the value of the element to add.</param>
@@ -183,19 +183,19 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Determines whether the <see cref="DynamicBody" /> contains an element with the specified key.
+		/// Determines whether the <see cref="DynamicDictionary" /> contains an element with the specified key.
 		/// </summary>
 		/// <returns>
-		/// <see langword="true" /> if the <see cref="DynamicBody" /> contains an element with the key; otherwise, <see langword="false" />.
+		/// <see langword="true" /> if the <see cref="DynamicDictionary" /> contains an element with the key; otherwise, <see langword="false" />.
 		/// </returns>
-		/// <param name="key">The key to locate in the <see cref="DynamicBody" />.</param>
+		/// <param name="key">The key to locate in the <see cref="DynamicDictionary" />.</param>
 		public bool ContainsKey(string key)
 		{
 			return _backingDictionary.ContainsKey(key);
 		}
 
 		/// <summary>
-		/// Removes the element with the specified key from the <see cref="DynamicBody" />.
+		/// Removes the element with the specified key from the <see cref="DynamicDictionary" />.
 		/// </summary>
 		/// <returns><see langword="true" /> if the element is successfully removed; otherwise, <see langword="false" />.</returns>
 		/// <param name="key">The key of the element to remove.</param>
@@ -209,7 +209,7 @@ namespace Elasticsearch.Net
 		/// Gets the value associated with the specified key.
 		/// </summary>
 		/// <returns>
-		/// <see langword="true" /> if the <see cref="DynamicBody" /> contains an element with the specified key; otherwise,
+		/// <see langword="true" /> if the <see cref="DynamicDictionary" /> contains an element with the specified key; otherwise,
 		/// <see langword="false" />.
 		/// </returns>
 		/// <param name="key">The key whose value to get.</param>
@@ -252,14 +252,14 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Indicates whether the current <see cref="DynamicBody" /> is equal to another object of the same type.
+		/// Indicates whether the current <see cref="DynamicDictionary" /> is equal to another object of the same type.
 		/// </summary>
 		/// <returns>
 		/// <see langword="true" /> if the current instance is equal to the <paramref name="other" /> parameter; otherwise,
 		/// <see langword="false" />.
 		/// </returns>
-		/// <param name="other">An <see cref="DynamicBody" /> instance to compare with this instance.</param>
-		public bool Equals(DynamicBody other)
+		/// <param name="other">An <see cref="DynamicDictionary" /> instance to compare with this instance.</param>
+		public bool Equals(DynamicDictionary other)
 		{
 			if (ReferenceEquals(null, other))
 			{
@@ -273,10 +273,10 @@ namespace Elasticsearch.Net
 		/// Creates a dynamic dictionary from an <see cref="IDictionary{TKey,TValue}" /> instance.
 		/// </summary>
 		/// <param name="values">An <see cref="IDictionary{TKey,TValue}" /> instance, that the dynamic dictionary should be created from.</param>
-		/// <returns>An <see cref="DynamicBody" /> instance.</returns>
-		public static DynamicBody Create(IDictionary<string, object> values)
+		/// <returns>An <see cref="DynamicDictionary" /> instance.</returns>
+		public static DynamicDictionary Create(IDictionary<string, object> values)
 		{
-			var instance = new DynamicBody();
+			var instance = new DynamicDictionary();
 
 			foreach (var key in values.Keys)
 			{
@@ -368,13 +368,13 @@ namespace Elasticsearch.Net
 				return true;
 			}
 
-			return obj.GetType() == typeof(DynamicBody) && Equals((DynamicBody)obj);
+			return obj.GetType() == typeof(DynamicDictionary) && Equals((DynamicDictionary)obj);
 		}
 
 		/// <summary>
-		/// Returns a hash code for this <see cref="DynamicBody" />.
+		/// Returns a hash code for this <see cref="DynamicDictionary" />.
 		/// </summary>
-		/// <returns> A hash code for this <see cref="DynamicBody" />, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+		/// <returns> A hash code for this <see cref="DynamicDictionary" />, suitable for use in hashing algorithms and data structures like a hash table.</returns>
 		public override int GetHashCode() => _backingDictionary?.GetHashCode() ?? 0;
 
 		private static KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, DynamicValue> item)

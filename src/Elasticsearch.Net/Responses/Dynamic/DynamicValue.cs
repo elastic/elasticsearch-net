@@ -358,7 +358,7 @@ namespace Elasticsearch.Net
 		public IDictionary<string, DynamicValue> ToDictionary()
 		{
 			if (!(_value is IDictionary<string, object> dict)) return null;
-			return DynamicBody.Create(dict);
+			return DynamicDictionary.Create(dict);
 		}
 
 

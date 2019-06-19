@@ -8,7 +8,7 @@ namespace Nest
 	[JsonFormatter(typeof(DynamicResponseFormatter<ClusterStateResponse>))]
 	public class ClusterStateResponse : DynamicResponseBase
 	{
-		public DynamicBody State => Self.BackingBody;
+		public DynamicDictionary State => Self.BackingDictionary;
 
 		[DataMember(Name = "cluster_name")]
 		public string ClusterName => State.Get<string>("cluster_name");

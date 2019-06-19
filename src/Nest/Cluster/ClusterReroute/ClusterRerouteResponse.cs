@@ -12,6 +12,6 @@ namespace Nest
 			EmptyReadOnly<ClusterRerouteExplanation>.Collection;
 
 		[DataMember(Name ="state")]
-		public DynamicBody State { get; internal set; }
+		public DynamicDictionary State { get; internal set; }
 	}
 }

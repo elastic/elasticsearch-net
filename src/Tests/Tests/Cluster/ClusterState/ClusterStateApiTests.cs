@@ -46,13 +46,13 @@ namespace Tests.Cluster.ClusterState
 			var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
 			badPath.Should().BeNull();
 
-			var dict = response.Get<DynamicBody>($"nodes");
+			var dict = response.Get<DynamicDictionary>($"nodes");
 
 			dict.Count.Should().BeGreaterThan(0);
 			var node = dict[response.MasterNode].ToDictionary();
 			node.Should().NotBeNull().And.ContainKey("name");
 
-			object dictDoesNotExist = response.Get<DynamicBody>("nodes2");
+			object dictDoesNotExist = response.Get<DynamicDictionary>("nodes2");
 			dictDoesNotExist.Should().BeNull();
 
 
