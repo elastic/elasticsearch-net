@@ -14,7 +14,7 @@ namespace Nest
 
 		public const string CompoundFormat = "index.compound_format";
 		public const string CompoundOnFlush = "index.compound_on_flush";
-
+    
 		/// <summary>limits the number of unique nested types per index.</summary>
 		public const string MappingNestedFieldsLimit = "index.mapping.nested_fields.limit";
 		/// <summary>
@@ -22,6 +22,19 @@ namespace Nest
 		/// in order to prevent out of memory errors when a document contains too many nested objects.
 		/// </summary>
 		public const string MappingNestedObjectsLimit = "index.mapping.nested_objects.limit";
+
+		/// <summary>the maximum difference between min_gram and max_gram for <see cref="INGramTokenizer"/> and <see cref="INGramTokenFilter"/></summary>
+		public const string MaxNGramDiff = "index.max_ngram_diff";
+		/// <summary>maximum value of from + size on a query</summary>
+		public const string MaxResultWindow = "index.max_result_window";
+		/// <summary>maximum value of from + size on an individual inner hit definition or top hits aggregation</summary>
+		public const string MaxInnerResultWindow = "index.max_inner_result_window";
+		/// <summary>maximum value of allowed script_fields that can be retrieved per search request.</summary>
+		public const string MaxScriptFields = "index.max_script_fields";
+		/// <summary>the maximum difference between min_shingle_size and max_shingle_size for <see cref="IShingleTokenFilter"/></summary>
+		public const string MaxShingleDiff = "index.max_shingle_diff";
+
+
 
 		public const string MergePolicyExpungeDeletesAllowed = "index.merge.policy.expunge_deletes_allowed";
 		public const string MergePolicyFloorSegment = "index.merge.policy.floor_segment";
