@@ -31,7 +31,7 @@ jobs:
     maxParallel: 5
     matrix:
       es7:
-        esVersion: '7.0.0-beta1'
+        esVersion: '7.0.0'
   steps:
       - script: 'build.bat integrate $(esVersion) "readonly,writable,bool,xpack" skipdocs'
         displayName: '$(esVersion) windows integration tests'
