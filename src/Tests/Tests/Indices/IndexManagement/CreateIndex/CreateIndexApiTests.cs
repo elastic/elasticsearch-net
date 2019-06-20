@@ -212,6 +212,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();
 			response.ShardsAcknowledged.Should().BeTrue();
+			response.Index.Should().Be(CallIsolatedValue);
 
 			var indexSettings = Client.Indices.GetSettings(CallIsolatedValue);
 
