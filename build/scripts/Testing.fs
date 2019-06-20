@@ -53,7 +53,11 @@ module Tests =
             | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; "-v"; "m"] |> List.append command
             | _  -> command
             
-        Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+        if Environment.UserInteractive then
+            Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            |> ignore
+        else 
+            Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
 
     let RunReleaseUnitTests (ArtifactsVersion(version)) =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
