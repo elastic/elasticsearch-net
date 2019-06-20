@@ -1,5 +1,6 @@
 ﻿namespace Scripts
 
+open Elastic.Managed.ConsoleWriters
 open System
 open System.IO
 open ProcNet
@@ -10,6 +11,15 @@ module Tooling =
     type ExecResult = { ExitCode: int option; Output: Std.LineOut seq;}
     
     let private defaultTimeout = TimeSpan.FromMinutes(5.)
+    
+    let startRedirectedInWithTimeout timeout workinDir bin args = 
+        let startArgs = StartArguments(bin, args |> List.toArray)
+        if (Option.isSome workinDir) then
+            startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
+        let result = Proc.StartRedirected(startArgs, timeout, LineHighlightWriter())
+        if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
+        let exitCode = match result.ExitCode.HasValue with | false -> None | true -> Some result.ExitCode.Value
+        { ExitCode = exitCode; Output = seq []}
     
     let readInWithTimeout timeout workinDir bin args = 
         let startArgs = StartArguments(bin, args |> List.toArray)
@@ -40,6 +50,7 @@ module Tooling =
     type BuildTooling(timeout, path) =
         let timeout = match timeout with | Some t -> t | None -> defaultTimeout
         member this.Path = path
+        member this.StartInWithTimeout workingDirectory arguments timeout = startRedirectedInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ReadInWithTimeout workingDirectory arguments timeout = readInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ExecInWithTimeout workingDirectory arguments timeout = execInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ExecWithTimeout arguments timeout = execInWithTimeout timeout None this.Path arguments
