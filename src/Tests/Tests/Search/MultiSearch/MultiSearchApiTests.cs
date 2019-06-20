@@ -122,6 +122,8 @@ namespace Tests.Search.MultiSearch
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{
+			r.Took.Should().BeGreaterThan(0);
+
 			r.TotalResponses.Should().Be(6);
 
 			var nvalidResponses = r.GetInvalidResponses();
