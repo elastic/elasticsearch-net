@@ -15,6 +15,14 @@ namespace Nest
 		public const string CompoundFormat = "index.compound_format";
 		public const string CompoundOnFlush = "index.compound_on_flush";
 
+		/// <summary>limits the number of unique nested types per index.</summary>
+		public const string MappingNestedFieldsLimit = "index.mapping.nested_fields.limit";
+		/// <summary>
+		///  limits the number of nested objects that a single document may contain across all nested types,
+		/// in order to prevent out of memory errors when a document contains too many nested objects.
+		/// </summary>
+		public const string MappingNestedObjectsLimit = "index.mapping.nested_objects.limit";
+
 		public const string MergePolicyExpungeDeletesAllowed = "index.merge.policy.expunge_deletes_allowed";
 		public const string MergePolicyFloorSegment = "index.merge.policy.floor_segment";
 		public const string MergePolicyMaxMergeAtOnce = "index.merge.policy.max_merge_at_once";
