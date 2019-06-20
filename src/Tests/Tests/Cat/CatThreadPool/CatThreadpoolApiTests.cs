@@ -57,7 +57,6 @@ namespace Tests.Cat.CatThreadPool
 		{
 			response.Records.Should().NotBeNull();
 
-
 			foreach (var r in response.Records)
 			{
 				r.EphemeralNodeId.Should().NotBeNullOrWhiteSpace();

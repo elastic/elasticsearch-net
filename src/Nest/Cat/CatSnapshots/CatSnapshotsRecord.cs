@@ -38,9 +38,9 @@ namespace Nest
 		[DataMember(Name ="status")]
 		public string Status { get; set; }
 
-		[DataMember(Name ="succesful_shards")]
+		[DataMember(Name ="successful_shards")]
 		[JsonFormatter(typeof(StringLongFormatter))]
-		public long SuccesfulShards { get; set; }
+		public long SuccessfulShards { get; set; }
 
 		[DataMember(Name ="total_shards")]
 		[JsonFormatter(typeof(StringLongFormatter))]

@@ -36,6 +36,11 @@ namespace Nest
 						responses.Add(reader.ReadNextBlockSegment());
 					break;
 				}
+				else if (propertyName == "took")
+				{
+					response.Took = reader.ReadInt64();
+					continue;
+				}
 
 				reader.ReadNextBlock();
 			}

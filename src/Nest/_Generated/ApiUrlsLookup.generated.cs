@@ -135,8 +135,6 @@ namespace Nest
 		internal static ApiUrls LicenseStartTrial = new ApiUrls(new[]{"_license/start_trial"});
 		internal static ApiUrls NoNamespaceMultiGet = new ApiUrls(new[]{"_mget", "{index}/_mget"});
 		internal static ApiUrls MigrationDeprecationInfo = new ApiUrls(new[]{"_migration/deprecations", "{index}/_migration/deprecations"});
-		internal static ApiUrls MigrationAssistance = new ApiUrls(new[]{"_migration/assistance", "_migration/assistance/{index}"});
-		internal static ApiUrls MigrationUpgrade = new ApiUrls(new[]{"_migration/upgrade/{index}"});
 		internal static ApiUrls MachineLearningCloseJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_close"});
 		internal static ApiUrls MachineLearningDeleteCalendar = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal static ApiUrls MachineLearningDeleteCalendarEvent = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events/{event_id}"});

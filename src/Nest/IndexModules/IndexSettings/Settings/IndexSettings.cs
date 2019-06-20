@@ -25,7 +25,7 @@ namespace Nest
 		int? NumberOfRoutingShards { get; set; }
 
 		/// <summary>
-		/// The number of primary shards that an index should have. Defaults to 5.
+		/// The number of primary shards that an index should have. Defaults to 1.
 		/// This setting can only be set at index creation time. It cannot be changed on a closed index.
 		/// </summary>
 		int? NumberOfShards { get; set; }
