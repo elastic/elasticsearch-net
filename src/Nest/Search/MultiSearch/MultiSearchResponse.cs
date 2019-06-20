@@ -13,6 +13,8 @@ namespace Nest
 	{
 		public MultiSearchResponse() => Responses = new Dictionary<string, IResponse>();
 
+		public long Took { get; set; }
+
 		public IEnumerable<IResponse> AllResponses => _allResponses<IResponse>();
 
 		public override bool IsValid => base.IsValid && AllResponses.All(b => b.IsValid);
