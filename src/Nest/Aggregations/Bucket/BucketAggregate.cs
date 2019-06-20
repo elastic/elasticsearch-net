@@ -32,7 +32,7 @@ namespace Nest
 		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 
 		/// <inheritdoc />
-		public IReadOnlyDictionary<string, object> Meta { get; set; }
+		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 
 	/// <summary>
@@ -50,7 +50,10 @@ namespace Nest
 		public CompositeKey AfterKey { get; set; }
 	}
 
-	// Intermediate object used for deserialization
+	/// <summary>
+	/// Intermediate Aggregation response, transformed to a more specific
+	/// aggregation response when requested.
+	/// </summary>
 	public class BucketAggregate : IAggregate
 	{
 		public CompositeKey AfterKey { get; set; }
