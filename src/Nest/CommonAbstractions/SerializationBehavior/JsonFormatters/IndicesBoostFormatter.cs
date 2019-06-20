@@ -52,6 +52,7 @@ namespace Nest
 					}
 					return dictionary;
 				default:
+					reader.ReadNextBlock();
 					return null;
 			}
 		}

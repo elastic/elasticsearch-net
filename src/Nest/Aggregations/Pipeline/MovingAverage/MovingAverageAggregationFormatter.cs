@@ -31,7 +31,10 @@ namespace Nest
 		public IMovingAverageAggregation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			var aggregation = new MovingAverageAggregation();

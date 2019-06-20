@@ -10,7 +10,10 @@ namespace Nest
 		{
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			TermsExclude termsExclude;
 			switch (token)

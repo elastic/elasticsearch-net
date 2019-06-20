@@ -70,7 +70,8 @@ namespace Nest
 					var high = NumberConverter.ReadInt32(rawAuto.Array, commaIndex + 1, out _);
 					return Fuzziness.AutoLength(low, high);
 				}
-				case JsonToken.Number: {
+				case JsonToken.Number:
+				{
 					var value = reader.ReadNumberSegment();
 
 					if (value.IsDouble())
@@ -85,6 +86,7 @@ namespace Nest
 					}
 				}
 				default:
+					reader.ReadNextBlock();
 					return null;
 			}
 		}

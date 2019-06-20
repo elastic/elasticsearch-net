@@ -8,7 +8,10 @@ namespace Nest
 		public DateTimeOffset? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.Number)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var secondsSinceEpoch = reader.ReadDouble();
 			var dateTimeOffset = DateTimeUtil.Epoch.AddSeconds(secondsSinceEpoch);

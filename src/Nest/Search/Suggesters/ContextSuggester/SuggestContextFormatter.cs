@@ -15,7 +15,7 @@ namespace Nest
 
 		public ISuggestContext Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			if (reader.ReadIsNull())
 				return null;
 
 			var segment = reader.ReadNextBlockSegment();
