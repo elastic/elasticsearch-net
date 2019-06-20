@@ -6,6 +6,7 @@ namespace Nest
 	public static class UpdatableIndexSettings
 	{
 		public const string Analysis = "analysis";
+		public const string AnalyzeMaxTokenCount = "index.analyze.max_token_count";
 		public const string AutoExpandReplicas = "index.auto_expand_replicas";
 		public const string BlocksMetadata = "index.blocks.metadata";
 		public const string BlocksRead = "index.blocks.read";
