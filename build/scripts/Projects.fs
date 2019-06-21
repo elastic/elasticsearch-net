@@ -19,7 +19,7 @@ module Projects =
         | Nest
         | ElasticsearchNet
         | NestJsonNetSerializer
-        | NestUpgradeHelper
+        | NestUpgradeAssistant
         
     type PrivateProject =
         | Tests
@@ -39,7 +39,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
-                Project Project.NestUpgradeHelper; 
+                Project Project.NestUpgradeAssistant; 
                 PrivateProject PrivateProject.Tests
             ]
 
@@ -48,7 +48,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
-                Project Project.NestUpgradeHelper;
+                Project Project.NestUpgradeAssistant;
             ] 
         static member Tests = seq [PrivateProject PrivateProject.Tests]
         
@@ -61,7 +61,7 @@ module Projects =
             match this with 
             | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; ]
             | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
-            | Project NestUpgradeHelper -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
+            | Project NestUpgradeAssistant -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
             | Project ElasticsearchNet -> [Project ElasticsearchNet]
             | _ -> []
 
@@ -70,7 +70,7 @@ module Projects =
             | Project Nest -> "Nest"
             | Project ElasticsearchNet -> "Elasticsearch.Net"
             | Project NestJsonNetSerializer -> "Nest.JsonNetSerializer"
-            | Project NestUpgradeHelper -> "Nest.7xUpgradeHelper"
+            | Project NestUpgradeAssistant -> "Nest.7xUpgradeAssistant"
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
             | PrivateProject ApiGenerator -> "ApiGenerator"
@@ -80,7 +80,7 @@ module Projects =
             match this with
             | Project Nest -> "NEST"
             | Project NestJsonNetSerializer -> "NEST.JsonNetSerializer"
-            | Project NestUpgradeHelper -> "NEST.7xUpgradeHelper"
+            | Project NestUpgradeAssistant -> "NEST.7xUpgradeAssistant"
             | _ -> this.Name
         
         member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true

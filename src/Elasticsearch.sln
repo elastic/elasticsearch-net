@@ -75,7 +75,7 @@ ProjectSection(SolutionItems) = preProject
 	..\readme.md = ..\readme.md
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.7xUpgradeHelper", "Nest.7xUpgradeHelper\Nest.7xUpgradeHelper.csproj", "{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.7xUpgradeAssistant", "Nest.7xUpgradeAssistant\Nest.7xUpgradeAssistant.csproj", "{B8B8C45A-22D3-4D1E-9A3A-C030997D5BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

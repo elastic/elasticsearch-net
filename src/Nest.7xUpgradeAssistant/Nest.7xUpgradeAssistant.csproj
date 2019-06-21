@@ -4,7 +4,7 @@
         <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;net461</TargetFrameworks>
         <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0</TargetFrameworks>
         <LangVersion>latest</LangVersion>
-        <RootNamespace>Nest.UpgradeHelper</RootNamespace>
+        <RootNamespace>Nest.UpgradeAssistant</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
-		<id>NEST.7xUpgradeHelper</id>
+		<id>NEST.7xUpgradeAssistant</id>
 		<version>$version$</version>
 		<title>NEST - 7.x upgrade helper</title>
 		<authors>Elastic and contributors</authors>
@@ -23,7 +23,7 @@
 	</metadata>
 	<files>
 		<file src="..\license.txt" target="" />
-		<file src="output\Nest.7xUpgradeHelper\netstandard2.0\Nest.7xUpgradeHelper.dll" target="lib\netstandard2.0"/>
-		<file src="output\Nest.7xUpgradeHelper\netstandard2.0\Nest.7xUpgradeHelper.xml" target="lib\netstandard2.0"/>
+		<file src="output\Nest.7xUpgradeAssistant\netstandard2.0\Nest.7xUpgradeAssistant.dll" target="lib\netstandard2.0"/>
+		<file src="output\Nest.7xUpgradeAssistant\netstandard2.0\Nest.7xUpgradeAssistant.xml" target="lib\netstandard2.0"/>
 	</files>
 </package>
