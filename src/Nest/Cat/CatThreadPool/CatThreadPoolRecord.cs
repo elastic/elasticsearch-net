@@ -10,8 +10,8 @@ namespace Nest
 		/// The number of active threads in the current thread pool
 		/// </summary>
 		[DataMember(Name = "active")]
-		[JsonFormatter(typeof(StringLongFormatter))]
-		public long Active { get; set; }
+		[JsonFormatter(typeof(StringIntFormatter))]
+		public int Active { get; set; }
 
 		/// <summary>
 		/// The number of tasks completed by the thread pool executor
@@ -108,8 +108,8 @@ namespace Nest
 		/// The number of tasks in the queue for the current thread pool
 		/// </summary>
 		[DataMember(Name = "queue")]
-		[JsonFormatter(typeof(StringLongFormatter))]
-		public long Queue { get; set; }
+		[JsonFormatter(typeof(StringIntFormatter))]
+		public int Queue { get; set; }
 
 		/// <summary>
 		/// The maximum number of tasks permitted in the queue for the current thread pool
