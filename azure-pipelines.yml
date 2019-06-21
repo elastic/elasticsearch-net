@@ -52,7 +52,7 @@ jobs:
           es7:
               esVersion: '7.0.0'
   steps:
-      - script: 'build.bat integrate $(esVersion) "readonly,writable" skipdocs'
+      - script: './build.sh integrate $(esVersion) "readonly,writable" skipdocs'
         displayName: '$(esVersion) linux integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()
