@@ -18,7 +18,7 @@ module Tooling =
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
         let result = Proc.StartRedirected(startArgs, timeout, LineHighlightWriter())
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
-        let exitCode = match result.ExitCode.HasValue with | false -> None | true -> Some result.ExitCode.Value
+        let exitCode = if result.ExitCode.HasValue then Some result.ExitCode.Value else None 
         { ExitCode = exitCode; Output = seq []}
     
     let readInWithTimeout timeout workinDir bin args = 
