@@ -66,7 +66,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 			first.Flush.Should().NotBeNull();
 			first.Warmer.Should().NotBeNull();
 			first.QueryCache.Should().NotBeNull();
-			first.FieldData.Should().NotBeNull();
+			first.Fielddata.Should().NotBeNull();
 			first.Completion.Should().NotBeNull();
 			first.Segments.Should().NotBeNull();
 			first.TransactionLog.Should().NotBeNull();

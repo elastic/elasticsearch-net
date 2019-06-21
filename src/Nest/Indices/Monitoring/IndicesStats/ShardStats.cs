@@ -15,7 +15,7 @@ namespace Nest
 		public ShardDocs Documents { get; internal set; }
 
 		[DataMember(Name ="fielddata")]
-		public ShardFieldData FieldData { get; internal set; }
+		public ShardFielddata Fielddata { get; internal set; }
 
 		[DataMember(Name ="flush")]
 		public ShardFlush Flush { get; internal set; }
