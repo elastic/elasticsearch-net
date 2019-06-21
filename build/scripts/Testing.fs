@@ -54,8 +54,8 @@ module Tests =
             | _  -> command
             
         if Environment.UserInteractive then
-            Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
-            |> ignore
+            let out = Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            if out.ExitCode <> 0 then failwith "dotnet test failed"
         else 
             Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
 

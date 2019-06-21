@@ -8,7 +8,7 @@ open ProcNet.Std
 
 module Tooling = 
 
-    type ExecResult = { ExitCode: int option; Output: Std.LineOut seq;}
+    type ExecResult = { ExitCode: int; Output: Std.LineOut seq;}
     
     let private defaultTimeout = TimeSpan.FromMinutes(5.)
     
@@ -16,10 +16,11 @@ module Tooling =
         let startArgs = StartArguments(bin, args |> List.toArray)
         if (Option.isSome workinDir) then
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
+        startArgs.WaitForStreamReadersTimeout <- Nullable<TimeSpan>()
         let result = Proc.StartRedirected(startArgs, timeout, LineHighlightWriter())
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
-        let exitCode = if result.ExitCode.HasValue then Some result.ExitCode.Value else None 
-        { ExitCode = exitCode; Output = seq []}
+        if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
+        { ExitCode = result.ExitCode.Value; Output = seq []}
     
     let readInWithTimeout timeout workinDir bin args = 
         let startArgs = StartArguments(bin, args |> List.toArray)
@@ -27,8 +28,8 @@ module Tooling =
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
         let result = Proc.Start(startArgs, timeout, ConsoleOutColorWriter())
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
-        let exitCode = match result.ExitCode.HasValue with | false -> None | true -> Some result.ExitCode.Value
-        { ExitCode = exitCode; Output = seq result.ConsoleOut}
+        if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
+        { ExitCode = result.ExitCode.Value; Output = seq result.ConsoleOut}
         
     let read bin args = readInWithTimeout defaultTimeout None bin args
     
