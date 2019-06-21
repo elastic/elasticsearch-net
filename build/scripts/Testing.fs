@@ -40,8 +40,11 @@ module Tests =
             let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
             match (target, Environment.isLinux) with 
-            | (_, true) 
-            | (Commandline.MultiTarget.One, _) -> ["--framework"; "netcoreapp2.1"] |> List.append p
+            | (_, true) -> ["--framework"; "netcoreapp2.1"] |> List.append p
+            | (Commandline.MultiTarget.One, _) ->
+                let random = new Random()
+                let fw = DotNetFramework.All |> List.sortBy (fun _ -> random.Next()) |> List.head
+                ["--framework"; fw.Identifier.MSBuild] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =
             // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
