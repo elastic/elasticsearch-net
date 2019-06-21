@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 
@@ -33,6 +34,8 @@ namespace Tests.CodeStandards
 				typeof(StartBasicLicenseResponse).GetProperty(nameof(StartBasicLicenseResponse.Acknowledge)),
 				typeof(FieldCapabilitiesResponse).GetProperty(nameof(FieldCapabilitiesResponse.Fields)),
 				typeof(MultiSearchResponse).GetProperty(nameof(MultiSearchResponse.AllResponses)),
+				typeof(DynamicDictionary).GetProperty(nameof(DynamicDictionary.Keys)),
+				typeof(DynamicDictionary).GetProperty(nameof(DynamicDictionary.Values)),
 			};
 
 			var responseInterfaceTypes = from t in typeof(IResponse).Assembly.Types()
