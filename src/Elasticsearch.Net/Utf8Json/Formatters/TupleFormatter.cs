@@ -175,7 +175,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			};
 		}
 	}
-	
+
 	internal sealed class TupleFormatter<T1> : IJsonFormatter<Tuple<T1>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache1;
@@ -727,5 +727,5 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-#endif
 }
+#endif

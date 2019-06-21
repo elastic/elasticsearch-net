@@ -29,7 +29,7 @@ namespace Tests.Cluster.ClusterStats
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 
-			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
 				response.ClusterUUID.Should().NotBeNullOrWhiteSpace();
 
 			response.NodeStatistics.Should().NotBeNull();
@@ -71,7 +71,7 @@ namespace Tests.Cluster.ClusterStats
 
 			nodes.OperatingSystem.Names.Should().NotBeEmpty();
 
-			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
 			{
 				nodes.OperatingSystem.Memory.Should().NotBeNull();
 				nodes.OperatingSystem.PrettyNames.Should().NotBeNull();

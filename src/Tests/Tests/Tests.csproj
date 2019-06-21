@@ -2,9 +2,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.1;net461</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1</TargetFrameworks>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
+    <LangVersion>latest</LangVersion>
+    <IsTestProject>True</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />

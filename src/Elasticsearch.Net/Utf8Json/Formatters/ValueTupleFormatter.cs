@@ -709,5 +709,5 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-#endif
 }
+#endif
