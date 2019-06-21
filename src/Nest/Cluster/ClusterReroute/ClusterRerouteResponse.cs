@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,6 +12,6 @@ namespace Nest
 			EmptyReadOnly<ClusterRerouteExplanation>.Collection;
 
 		[DataMember(Name ="state")]
-		public ClusterRerouteState State { get; internal set; }
+		public DynamicDictionary State { get; internal set; }
 	}
 }

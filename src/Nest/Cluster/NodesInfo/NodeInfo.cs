@@ -46,7 +46,7 @@ namespace Nest
 		public List<NodeRole> Roles { get; internal set; }
 
 		[DataMember(Name = "settings")]
-		public DynamicBody Settings { get; internal set; }
+		public DynamicDictionary Settings { get; internal set; }
 
 		[DataMember(Name = "thread_pool")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
