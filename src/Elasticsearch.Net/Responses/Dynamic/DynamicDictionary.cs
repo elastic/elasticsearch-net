@@ -59,6 +59,7 @@ namespace Elasticsearch.Net
 		/// <returns>T or default</returns>
 		public T Get<T>(string path)
 		{
+			if (path == null) return default;
 			var stack = new Stack<string>(path.Split('.'));
 			if (stack.Count == 0) return default;
 
