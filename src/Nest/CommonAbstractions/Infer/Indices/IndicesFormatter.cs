@@ -9,7 +9,7 @@ namespace Nest
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
 			{
-				reader.ReadNext();
+				reader.ReadNextBlock();
 				return null;
 			}
 

@@ -18,22 +18,25 @@ namespace Nest
 		{
 			var token = reader.GetCurrentJsonToken();
 
-			if (token == JsonToken.String)
+			switch (token)
 			{
-				var formatter = formatterResolver.GetFormatter<DateTimeOffset>();
-				return formatter.Deserialize(ref reader, formatterResolver);
+				case JsonToken.String:
+				{
+					var formatter = formatterResolver.GetFormatter<DateTimeOffset>();
+					return formatter.Deserialize(ref reader, formatterResolver);
+				}
+				case JsonToken.Null:
+					reader.ReadNext();
+					return null;
+				case JsonToken.Number:
+				{
+					var millisecondsSinceEpoch = reader.ReadDouble();
+					var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
+					return dateTimeOffset;
+				}
+				default:
+					throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
 			}
-			if (token == JsonToken.Null)
-				return null;
-
-			if (token == JsonToken.Number)
-			{
-				var millisecondsSinceEpoch = reader.ReadDouble();
-				var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
-				return dateTimeOffset;
-			}
-
-			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
 		}
 
 		public void Serialize(ref JsonWriter writer, DateTimeOffset? value, IJsonFormatterResolver formatterResolver)

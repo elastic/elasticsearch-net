@@ -50,7 +50,7 @@ namespace Nest
 
 		public override IFuzzyQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			if (reader.ReadIsNull())
 				return null;
 
 			var count = 0;

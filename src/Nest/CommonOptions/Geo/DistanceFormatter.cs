@@ -7,7 +7,10 @@ namespace Nest
 		public Distance Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.String)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var value = reader.ReadString();
 			return value == null

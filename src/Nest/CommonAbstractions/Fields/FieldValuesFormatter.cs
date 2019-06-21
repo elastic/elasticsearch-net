@@ -10,7 +10,10 @@ namespace Nest
 		public FieldValues Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			var fields = new Dictionary<string, LazyDocument>();

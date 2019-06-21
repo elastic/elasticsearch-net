@@ -8,7 +8,10 @@ namespace Nest
 		public TSortOrder Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			var sortOrder = new TSortOrder();
