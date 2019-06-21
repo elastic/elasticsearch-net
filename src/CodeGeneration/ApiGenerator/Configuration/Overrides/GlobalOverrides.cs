@@ -18,7 +18,6 @@ namespace ApiGenerator.Configuration.Overrides
 
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
 		{
-			{ "parent", "the parent parameter has been deprecated from Elasticsearch, please use routing instead directly." },
 			{ "copy_settings", "Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404" }
 		};
 
