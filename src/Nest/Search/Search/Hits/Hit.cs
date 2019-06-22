@@ -28,7 +28,6 @@ namespace Nest
 		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Source { get; }
 
-		// TODO obsolete or remove type on response
 		[DataMember(Name = "_type")]
 		string Type { get; }
 
