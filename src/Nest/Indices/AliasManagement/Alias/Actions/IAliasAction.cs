@@ -73,7 +73,6 @@ namespace Nest
 					Serialize(ref writer, removeIndexAction, formatterResolver);
 					break;
 				default:
-					// TODO: Should we handle some other way?
 					writer.WriteNull();
 					break;
 			}

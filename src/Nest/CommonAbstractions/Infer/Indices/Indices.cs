@@ -17,8 +17,10 @@ namespace Nest
 
 		internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
 
-		//TODO only use Infer.AllIndices
+		/// <summary>All indices. Represents _all</summary>
 		public static Indices All { get; } = new Indices(new AllIndicesMarker());
+
+		/// <inheritdoc cref="All" />
 		public static Indices AllIndices { get; } = All;
 
 		private string DebugDisplay => Match(
@@ -41,7 +43,7 @@ namespace Nest
 		);
 
 		public static IndexName Index(string index) => index;
-		
+
 		public static IndexName Index(IndexName index) => index;
 
 		public static IndexName Index<T>() => typeof(T);

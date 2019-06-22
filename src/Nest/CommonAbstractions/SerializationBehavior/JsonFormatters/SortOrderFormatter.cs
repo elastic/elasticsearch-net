@@ -34,7 +34,6 @@ namespace Nest
 			}
 
 			writer.WriteBeginObject();
-			// TODO: Should this be a Field?
 			writer.WritePropertyName(value.Key);
 			formatterResolver.GetFormatter<SortOrder>().Serialize(ref writer, value.Order, formatterResolver);
 			writer.WriteEndObject();

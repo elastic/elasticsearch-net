@@ -66,7 +66,7 @@ namespace Nest
 		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, List<string>>, string, List<string>>))]
 		Dictionary<string, List<string>> Highlight { get; }
 
-		// TODO investigate this mapping
+		// TODO change to a formatter that deserializes highlights directly
 		/// <summary> This provides easier access into <see cref="Highlight" /> </summary>
 		[IgnoreDataMember]
 		HighlightFieldDictionary Highlights { get; }

@@ -6,7 +6,7 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	//TODO 6.0 completely revisit how we mapped highlighters
+	//TODO 8.0 completely revisit how we mapped highlighters
 	//this is used in tophits/percolator AND in search highligher as the root
 	//Not all of these properties might make sense/valid there
 	[InterfaceDataContract]
