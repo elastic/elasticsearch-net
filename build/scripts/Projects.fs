@@ -61,7 +61,6 @@ module Projects =
             match this with 
             | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; ]
             | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
-            | Project NestUpgradeAssistant -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
             | Project ElasticsearchNet -> [Project ElasticsearchNet]
             | _ -> []
 
