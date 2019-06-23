@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -26,6 +27,8 @@ namespace Tests.CodeStandards
 				typeof(ITypeMapping).GetProperty(nameof(ITypeMapping.Meta)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.DynamicDateFormats)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.Meta)),
+				typeof(DynamicDictionary).GetProperty(nameof(DynamicDictionary.Keys)),
+				typeof(DynamicDictionary).GetProperty(nameof(DynamicDictionary.Values)),
 				typeof(BulkResponse).GetProperty(nameof(BulkResponse.ItemsWithErrors)),
 				typeof(StartBasicLicenseResponse).GetProperty(nameof(StartBasicLicenseResponse.Acknowledge)),
 				typeof(FieldCapabilitiesResponse).GetProperty(nameof(FieldCapabilitiesResponse.Fields)),

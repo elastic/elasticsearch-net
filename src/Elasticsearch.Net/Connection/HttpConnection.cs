@@ -59,7 +59,6 @@ namespace Elasticsearch.Net
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				SetContent(requestMessage, requestData);
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
-				// ReSharper disable once AccessToModifiedClosure
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
 					responseMessage = client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult();
@@ -110,7 +109,6 @@ namespace Elasticsearch.Net
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				SetAsyncContent(requestMessage, requestData, cancellationToken);
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null) 
-				// ReSharper disable once AccessToModifiedClosure
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
 					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);

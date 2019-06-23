@@ -7,7 +7,7 @@ namespace Nest
 	{
 		public static DefaultHighLevelSerializer CreateStateful<T>(this IElasticsearchSerializer serializer, IJsonFormatter<T> formatter)
 		{
-			var currentFormatterResolver = ((DefaultHighLevelSerializer)serializer).FormatterResolver;
+			var currentFormatterResolver = ((IInternalSerializerWithFormatter)serializer).FormatterResolver;
 			var formatterResolver = new StatefulFormatterResolver<T>(formatter, currentFormatterResolver);
 			return new DefaultHighLevelSerializer(formatterResolver);
 		}

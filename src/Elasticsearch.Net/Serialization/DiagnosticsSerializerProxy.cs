@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Diagnostics;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net
 {
@@ -33,17 +34,22 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Wraps configured serializer so that we can emit diagnostics per configured serializer.
 	/// </summary>
-	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer
+	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializerWithFormatter
 	{
 		private readonly IElasticsearchSerializer _serializer;
 		private readonly SerializerRegistrationInformation _state;
+		private readonly IJsonFormatterResolver _formatterResolver;
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.Serializer.SourceName);
 
 		public DiagnosticsSerializerProxy(IElasticsearchSerializer serializer, string purpose = "request/response")
 		{
 			_serializer = serializer;
 			_state = new SerializerRegistrationInformation(serializer.GetType(), purpose);
+			if (serializer is IInternalSerializerWithFormatter withFormatter)
+				_formatterResolver = withFormatter.FormatterResolver;
 		}
+
+		public IJsonFormatterResolver FormatterResolver => _formatterResolver;
 
 		public object Deserialize(Type type, Stream stream)
 		{
@@ -83,5 +89,6 @@ namespace Elasticsearch.Net
 			using (DiagnosticSource.Diagnose(DiagnosticSources.Serializer.Serialize, _state))
 				return _serializer.SerializeAsync<T>(data, stream, formatting, cancellationToken);
 		}
+
 	}
 }

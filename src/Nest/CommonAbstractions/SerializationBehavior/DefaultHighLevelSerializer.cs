@@ -8,7 +8,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
-	internal class DefaultHighLevelSerializer : IElasticsearchSerializer
+	internal class DefaultHighLevelSerializer : IElasticsearchSerializer, IInternalSerializerWithFormatter
 	{
 		internal const int DefaultBufferSize = 1024;
 

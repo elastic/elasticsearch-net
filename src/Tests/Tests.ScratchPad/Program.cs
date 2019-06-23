@@ -57,15 +57,7 @@ namespace Tests.ScratchPad
 					.SniffOnStartup();
 				var client = new ElasticClient(settings);
 
-				try
-				{
-					var x = client.Search<object>(s=>s.AllIndices());
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine(e);
-					throw;
-				}
+				var x = client.Search<object>(s=>s.AllIndices());
 
 				await Task.Delay(TimeSpan.FromSeconds(7));
 				
