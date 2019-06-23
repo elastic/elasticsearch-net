@@ -2,10 +2,31 @@ using System;
 
 namespace Elasticsearch.Net
 {
+	public class DiagnosticAudit
+	{
+		/// <summary>
+		/// The exception for the audit, if there was one.
+		/// </summary>
+		public Exception Exception { get; internal set; }
+
+		/// <summary>
+		/// The node on which the request was made
+		/// </summary>
+		public Node Node { get; internal set; }
+
+		/// <summary>
+		/// The path of the request
+		/// </summary>
+		public string Path { get; internal set; }
+		
+		public override string ToString() => $"Node: {Node?.Uri}, NodeAlive: {Node?.IsAlive} ";
+	}
+	
+	
 	/// <summary>
-	/// An audit of a request made
+	/// An audit of the request made
 	/// </summary>
-	public class Audit
+	public class Audit : DiagnosticAudit
 	{
 		public Audit(AuditEvent type, DateTime started)
 		{
@@ -22,21 +43,6 @@ namespace Elasticsearch.Net
 		/// The type of audit event
 		/// </summary>
 		public AuditEvent Event { get; internal set; }
-
-		/// <summary>
-		/// The exception for the audit, if there was one.
-		/// </summary>
-		public Exception Exception { get; internal set; }
-
-		/// <summary>
-		/// The node on which the request was made
-		/// </summary>
-		public Node Node { get; internal set; }
-
-		/// <summary>
-		/// The path of the request
-		/// </summary>
-		public string Path { get; internal set; }
 
 		/// <summary>
 		/// The start date and time of the audit

@@ -5,11 +5,11 @@ namespace Nest
 {
 	internal static class StatefulSerializerExtensions
 	{
-		public static InternalSerializer CreateStateful<T>(this IElasticsearchSerializer serializer, IJsonFormatter<T> formatter)
+		public static DefaultHighLevelSerializer CreateStateful<T>(this IElasticsearchSerializer serializer, IJsonFormatter<T> formatter)
 		{
-			var currentFormatterResolver = ((InternalSerializer)serializer).FormatterResolver;
+			var currentFormatterResolver = ((DefaultHighLevelSerializer)serializer).FormatterResolver;
 			var formatterResolver = new StatefulFormatterResolver<T>(formatter, currentFormatterResolver);
-			return new InternalSerializer(formatterResolver);
+			return new DefaultHighLevelSerializer(formatterResolver);
 		}
 
 		private class StatefulFormatterResolver<TStateful> : IJsonFormatterResolver, IJsonFormatterResolverWithSettings

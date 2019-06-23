@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Running;
+using Elasticsearch.Net;
+using Elasticsearch.Net.Diagnostics;
 using Nest;
-using Tests.ScratchPad.Runners.ApiCalls;
 
 namespace Tests.ScratchPad
 {
@@ -18,23 +20,24 @@ namespace Tests.ScratchPad
 
 			public void OnNext(DiagnosticListener value)
 			{
-				if (value.Name == "Elasticsearch.Net.RequestPipeline")
-				{
-					value.Subscribe(new RequestPipelineListener());
-				}
-				if (value.Name == "Elasticsearch.Net.HttpConnection")
-				{
-					value.Subscribe(new RequestPipelineListener());
-				}
+				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
+					value.Subscribe(new AuditDiagnosticListener(v => Console.WriteLine($"{v.EventName} {v.EventData}")));
+				
+				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
+					value.Subscribe(new RequestPipelineDiagnosticListener(
+						v => Console.WriteLine($"{v.EventName} {v.RequestData}"),
+						v => Console.WriteLine($"{v.EventName} {v.Response}"))
+					);
+				
+				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
+					value.Subscribe(new HttpConnectionDiagnosticListener(
+						v => Console.WriteLine($"{v.EventName} {v.RequestData}"),
+						v => Console.WriteLine($"{v.EventName} {v.StatusCode}")
+					));
+				
+				if (value.Name == DiagnosticSources.Serializer.SourceName)
+					value.Subscribe(new SerializerDiagnosticListener(v => Console.WriteLine($"{v.EventName} {v.Registration}")));
 			}
-		}
-		private class RequestPipelineListener : IObserver<KeyValuePair<string, object>>
-		{
-			public void OnCompleted() => Console.WriteLine("Completed");
-
-			public void OnError(Exception error) => Console.Error.WriteLine(error.Message);
-
-			public void OnNext(KeyValuePair<string, object> value) => Console.WriteLine($"- {value.Key}: {value.Value}");
 		}
 
 		private static async Task Main(string[] args)
@@ -45,10 +48,18 @@ namespace Tests.ScratchPad
 			{
 				node.Start();
 
-				var client = new ElasticClient();
+				var settings = new ConnectionSettings(new SniffingConnectionPool(new[] { node.NodesUris().First() }))
+					.SniffOnStartup();
+				var client = new ElasticClient(settings);
 
 				var x = client.Search<object>(s=>s.AllIndices());
 
+				await Task.Delay(TimeSpan.FromSeconds(7));
+				
+				Console.WriteLine(new string('-', Console.WindowWidth - 1));
+				
+				var y = client.Search<object>(s=>s.Index("does-not-exist"));
+				
 				await Task.Delay(TimeSpan.FromSeconds(7));
 
 

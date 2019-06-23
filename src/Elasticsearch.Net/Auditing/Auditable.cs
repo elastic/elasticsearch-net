@@ -8,23 +8,23 @@ namespace Elasticsearch.Net
 	internal class Auditable : IDisposable
 	{
 		private readonly Audit _audit;
-		private readonly Activity _activity;
+		private readonly IDisposable _activity;
 		private readonly IDateTimeProvider _dateTimeProvider;
+		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.AuditTrailEvents.SourceName);
 
-		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline);
-
-		public Auditable(AuditEvent type, List<Audit> auditTrail, IDateTimeProvider dateTimeProvider)
+		public Auditable(AuditEvent type, List<Audit> auditTrail, IDateTimeProvider dateTimeProvider, Node node)
 		{
 			_dateTimeProvider = dateTimeProvider;
 			var started = _dateTimeProvider.Now();
 
 			_audit = new Audit(type, started);
+			_audit.Node = node;
 			auditTrail.Add(_audit);
-			_activity =
-				DiagnosticSource.IsEnabled(type.GetString())
-					? DiagnosticSource.StartActivity(new Activity(type.GetString()).SetStartTime(started), _audit)
-					: null;
+			var diagnosticName = type.GetAuditEventName();
+			_activity = diagnosticName != null ? DiagnosticSource.Diagnose(diagnosticName, _audit) : null;
 		}
+
+		public DiagnosticAudit DiagnosticInformation => _audit;
 
 		public AuditEvent Event
 		{
@@ -48,9 +48,8 @@ namespace Elasticsearch.Net
 
 		public void Dispose()
 		{
-			var ended = _dateTimeProvider.Now();
-			_audit.Ended = ended;
-			if (_activity != null) DiagnosticSource.StopActivity(_activity.SetEndTime(ended), _audit);
+			_audit.Ended = _dateTimeProvider.Now();
+			_activity?.Dispose();
 		}
 	}
 }

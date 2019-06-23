@@ -4,7 +4,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -54,22 +53,29 @@ namespace Elasticsearch.Net
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
+			IDisposable receive = DiagnosticSources.SingletonDisposable;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				SetContent(requestMessage, requestData);
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
-				using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Send))
+				// ReSharper disable once AccessToModifiedClosure
+				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
+				{
 					responseMessage = client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult();
+					statusCode = (int)responseMessage.StatusCode;
+					d.EndState = statusCode;
+				}
 				
 				requestData.MadeItToResponse = true;
-				statusCode = (int)responseMessage.StatusCode;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 
 				if (responseMessage.Content != null)
-					using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Receive))
-						responseStream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+				{
+					receive = DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.ReceiveBody, requestData, statusCode);
+					responseStream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+				}
 			}
 			catch (TaskCanceledException e)
 			{
@@ -79,6 +85,7 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
+			using(receive)
 			using (responseStream = responseStream ?? Stream.Null)
 			{
 				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
@@ -97,22 +104,29 @@ namespace Elasticsearch.Net
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
+			IDisposable receive = DiagnosticSources.SingletonDisposable;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				SetAsyncContent(requestMessage, requestData, cancellationToken);
-				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
-				using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Send))
+				using(requestMessage?.Content ?? (IDisposable)Stream.Null) 
+				// ReSharper disable once AccessToModifiedClosure
+				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
+				{
 					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+					statusCode = (int)responseMessage.StatusCode;
+					d.EndState = statusCode;
+				}
 				
 				requestData.MadeItToResponse = true;
 				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
-				statusCode = (int)responseMessage.StatusCode;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 
 				if (responseMessage.Content != null)
-					using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Receive))
-						responseStream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				{
+					receive = DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.ReceiveBody, requestData, statusCode);
+					responseStream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				}
 			}
 			catch (TaskCanceledException e)
 			{
@@ -122,6 +136,7 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
+			using (receive)
 			using (responseStream = responseStream ?? Stream.Null)
 			{
 				var response = await ResponseBuilder.ToResponseAsync<TResponse>

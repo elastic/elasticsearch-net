@@ -1,54 +1,133 @@
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Elasticsearch.Net.Diagnostics
 {
-	
 	public static class DiagnosticSources
 	{
-		public static string RequestPipeline { get; } = typeof(RequestPipeline).FullName;
-		public static HttpConnectionDiagnosticKeys HttpConnection { get; } = new HttpConnectionDiagnosticKeys(); 
-
-		private class EmptyDisposable : IDisposable
+		internal class EmptyDisposable : IDisposable
 		{
 			public void Dispose() { }
 		}
 
-		private static EmptyDisposable SingletonDisposable { get; } = new EmptyDisposable();
+		internal static EmptyDisposable SingletonDisposable { get; } = new EmptyDisposable();
 
-		internal static IDisposable Diagnose(this DiagnosticSource source, string operationName, IDateTimeProvider dateTimeProvider = null)
+		internal static IDisposable Diagnose<TState>(this DiagnosticSource source, string operationName, TState state)
 		{
 			if (!source.IsEnabled(operationName)) return SingletonDisposable;
-			return new Diagnose(operationName, source, dateTimeProvider = null);
+
+			return new Diagnostic<TState>(operationName, source, state);
 		}
-	}
 
-	public interface IDiagnosticsKeys
-	{
-		string SourceName { get; }
-	}
-	
-	public class HttpConnectionDiagnosticKeys : IDiagnosticsKeys
-	{
-		public string SourceName { get; } = typeof(HttpConnection).FullName;
-		public string Send { get; } = nameof(Send);
-		public string Receive { get; } = nameof(Receive);
-	}
-
-
-	internal class Diagnose : Activity, IDisposable
-	{
-		private readonly string _operationName;
-		private readonly DiagnosticSource _source;
-		private readonly IDateTimeProvider _dateTimeProvider;
-
-		public Diagnose(string operationName, DiagnosticSource source, IDateTimeProvider dateTimeProvider) : base(operationName)
+		internal static Diagnostic<TState, TStateStop> Diagnose<TState, TStateStop>(this DiagnosticSource source, string operationName, TState state)
 		{
-			(_operationName, _source, _dateTimeProvider) = (operationName, source, dateTimeProvider ?? DateTimeProvider.Default);
-			_source.StartActivity(SetStartTime(_dateTimeProvider.Now()), _operationName);
+			if (!source.IsEnabled(operationName)) return Diagnostic<TState, TStateStop>.Default;
+
+			return new Diagnostic<TState, TStateStop>(operationName, source, state);
+		}
+		
+		internal static Diagnostic<TState, TEndState> Diagnose<TState, TEndState>(this DiagnosticSource source, string operationName, TState state, TEndState endState)
+		{
+			if (!source.IsEnabled(operationName)) return Diagnostic<TState, TEndState>.Default;
+
+			return new Diagnostic<TState, TEndState>(operationName, source, state)
+			{
+				EndState = endState
+			};
+			
+		}
+
+		/// <summary>
+		/// When subscribing to <see cref="AuditDiagnosticKeys.SourceName"/> you will be notified of all decisions in the request pipeline
+		/// </summary>
+		public static AuditDiagnosticKeys AuditTrailEvents { get; } = new AuditDiagnosticKeys();
+
+		/// <summary>
+		/// When subscribing to <see cref="RequestPipelineDiagnosticKeys.SourceName"/> you will be notified every time a sniff/ping or an API call to Elasticsearch happens
+		/// </summary>
+		public static RequestPipelineDiagnosticKeys RequestPipeline { get; } = new RequestPipelineDiagnosticKeys();
+
+		/// <summary>
+		/// When subscribing to <see cref="HttpConnectionDiagnosticKeys.SourceName"/> you will be notified every time a a connection starts and stops a request and starts and stops a a response
+		/// </summary>
+		public static HttpConnectionDiagnosticKeys HttpConnection { get; } = new HttpConnectionDiagnosticKeys();
+
+		/// <summary>
+		/// When subscribing to <see cref="SerializerDiagnosticKeys.SourceName"/> you will be notified every time a particular serializer writes or reads
+		/// </summary>
+		public static SerializerDiagnosticKeys Serializer { get; } = new SerializerDiagnosticKeys();
+
+
+		private interface IDiagnosticsKeys
+		{
+			string SourceName { get; }
+		}
+
+		public class HttpConnectionDiagnosticKeys : IDiagnosticsKeys
+		{
+			public string SourceName { get; } = typeof(HttpConnection).FullName;
+			public string SendAndReceiveHeaders { get; } = nameof(SendAndReceiveHeaders);
+			public string ReceiveBody { get; } = nameof(ReceiveBody);
+		}
+
+		public class SerializerDiagnosticKeys : IDiagnosticsKeys
+		{
+			public string SourceName { get; } = typeof(IElasticsearchSerializer).FullName;
+			public string Serialize { get; } = nameof(Serialize);
+			public string Deserialize { get; } = nameof(Deserialize);
+		}
+
+		public class RequestPipelineDiagnosticKeys : IDiagnosticsKeys
+		{
+			public string SourceName { get; } = typeof(RequestPipeline).FullName;
+			public string CallElasticsearch { get; } = nameof(CallElasticsearch);
+			public string Ping { get; } = nameof(Ping);
+			public string Sniff { get; } = nameof(Sniff);
+		}
+
+		public class AuditDiagnosticKeys : IDiagnosticsKeys
+		{
+			public string SourceName { get; } = typeof(Audit).FullName;
+		}
+	}
+
+
+	internal class Diagnostic<TState> : Diagnostic<TState, TState>
+	{
+		public Diagnostic(string operationName, DiagnosticSource source, TState state)
+			: base(operationName, source, state) =>
+			EndState = state;
+	}
+
+	internal class Diagnostic<TState, TStateEnd> : Activity, IDisposable
+	{
+		public static Diagnostic<TState, TStateEnd> Default { get; } = new Diagnostic<TState, TStateEnd>();
+
+		private readonly DiagnosticSource _source;
+		private TStateEnd _endState;
+		private readonly bool _default;
+
+		private Diagnostic() : base("__NOOP__") => _default = true;
+
+		public Diagnostic(string operationName, DiagnosticSource source, TState state) : base(operationName)
+		{
+			_source = source;
+			_source.StartActivity(SetStartTime(DateTime.UtcNow), state);
+		}
+
+		public TStateEnd EndState
+		{
+			get => _endState;
+			internal set
+			{
+				//do not store state on default instance 
+				if (_default) return;
+				_endState =  value;	
+			}
 		}
 
 
-		public void Dispose() => _source.StopActivity(SetEndTime(_dateTimeProvider.Now()), _operationName);
+		public void Dispose() => _source.StopActivity(SetEndTime(DateTime.UtcNow), EndState);
 	}
 }

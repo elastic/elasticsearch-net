@@ -29,21 +29,22 @@ namespace Elasticsearch.Net
 
 	internal static class AuditEventExtensions
 	{
-		public static string GetString(this AuditEvent @event)
+		public static string GetAuditEventName(this AuditEvent @event)
 		{
 			switch(@event)
 			{
+				case SniffFailure: 
+				case SniffSuccess:
+				case PingFailure: 
+				case PingSuccess: 
+				case BadResponse: 
+				case HealthyResponse: 
+					return null;
 				case SniffOnStartup: return nameof(SniffOnStartup);
 				case SniffOnFail: return nameof(SniffOnFail);
 				case SniffOnStaleCluster: return nameof(SniffOnStaleCluster);
-				case SniffSuccess: return nameof(SniffSuccess);
-				case SniffFailure: return nameof(SniffFailure);
-				case PingSuccess: return nameof(PingSuccess);
-				case PingFailure: return nameof(PingFailure);
 				case Resurrection: return nameof(Resurrection);
 				case AllNodesDead: return nameof(AllNodesDead);
-				case BadResponse: return nameof(BadResponse);
-				case HealthyResponse: return nameof(HealthyResponse);
 				case MaxTimeoutReached: return nameof(MaxTimeoutReached);
 				case MaxRetriesReached: return nameof(MaxRetriesReached);
 				case BadRequest: return nameof(BadRequest);
