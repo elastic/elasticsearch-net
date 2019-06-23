@@ -27,6 +27,7 @@ namespace Elasticsearch.Net
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
 			var response = SetBody<TResponse>(details, requestData, responseStream, mimeType) ?? new TResponse();
 			response.ApiCall = details;
 			return response;
@@ -39,7 +40,7 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings,
 			Stream responseStream,
 			string mimeType = RequestData.MimeType,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{

@@ -149,10 +149,9 @@ namespace Elasticsearch.Net
 				audit.Node = requestData.Node;
 				audit.Path = requestData.PathAndQuery;
 
-				TResponse response = null;
 				try
 				{
-					response = _connection.Request<TResponse>(requestData);
+					var response = _connection.Request<TResponse>(requestData);
 					response.ApiCall.AuditTrail = AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
 					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
@@ -160,7 +159,6 @@ namespace Elasticsearch.Net
 				}
 				catch (Exception e)
 				{
-					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
 					throw;
@@ -176,10 +174,9 @@ namespace Elasticsearch.Net
 				audit.Node = requestData.Node;
 				audit.Path = requestData.PathAndQuery;
 
-				TResponse response = null;
 				try
 				{
-					response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+					var response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
 					response.ApiCall.AuditTrail = AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
 					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
@@ -187,7 +184,6 @@ namespace Elasticsearch.Net
 				}
 				catch (Exception e)
 				{
-					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
 					throw;

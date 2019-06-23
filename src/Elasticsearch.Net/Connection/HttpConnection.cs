@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -10,6 +11,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Diagnostics;
 using Elasticsearch.Net.Extensions;
 using static System.Net.DecompressionMethods;
 
@@ -32,6 +34,8 @@ namespace Elasticsearch.Net
 	/// <summary> The default IConnection implementation. Uses <see cref="HttpClient" />.</summary>
 	public class HttpConnection : IConnection
 	{
+		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.HttpConnection.SourceName);
+
 		private static readonly string MissingConnectionLimitMethodError =
 			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
 			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
@@ -53,18 +57,19 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
+				SetContent(requestMessage, requestData);
+				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
+				using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Send))
+					responseMessage = client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult();
+				
 				requestData.MadeItToResponse = true;
 				statusCode = (int)responseMessage.StatusCode;
-
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 
 				if (responseMessage.Content != null)
-					responseStream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
-				// https://github.com/elastic/elasticsearch-net/issues/2311
-				// if stream is null call dispose on response instead.
-				if (responseStream == null || responseStream == Stream.Null) responseMessage.Dispose();
+					using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Receive))
+						responseStream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
 			}
 			catch (TaskCanceledException e)
 			{
@@ -74,13 +79,11 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
-			responseStream = responseStream ?? Stream.Null;
-			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
-
-			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
-			//but we can not guarantee this is true for all HttpMessageHandler implementations
-			if (typeof(TResponse) != typeof(ElasticsearchResponse<Stream>)) responseMessage?.Dispose();
-			return response;
+			using (responseStream = responseStream ?? Stream.Null)
+			{
+				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
+				return response;
+			}
 		}
 
 
@@ -97,17 +100,19 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+				SetAsyncContent(requestMessage, requestData, cancellationToken);
+				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
+				using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Send))
+					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+				
 				requestData.MadeItToResponse = true;
 				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 				statusCode = (int)responseMessage.StatusCode;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 
 				if (responseMessage.Content != null)
-					responseStream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
-				// https://github.com/elastic/elasticsearch-net/issues/2311
-				// if stream is null call dispose on response instead.
-				if (responseStream == null || responseStream == Stream.Null) responseMessage.Dispose();
+					using (DiagnosticSource.Diagnose(DiagnosticSources.HttpConnection.Receive))
+						responseStream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
 			}
 			catch (TaskCanceledException e)
 			{
@@ -117,14 +122,13 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
-			responseStream = responseStream ?? Stream.Null;
-			var response = await ResponseBuilder.ToResponseAsync<TResponse>
-					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
-				.ConfigureAwait(false);
-			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
-			//but we can not guarantee this is true for all HttpMessageHandler implementations
-			if (typeof(TResponse) != typeof(ElasticsearchResponse<Stream>)) responseMessage?.Dispose();
-			return response;
+			using (responseStream = responseStream ?? Stream.Null)
+			{
+				var response = await ResponseBuilder.ToResponseAsync<TResponse>
+						(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
+					.ConfigureAwait(false);
+				return response;
+			}
 		}
 
 		void IDisposable.Dispose() => DisposeManagedResources();
@@ -139,10 +143,7 @@ namespace Elasticsearch.Net
 				client = Clients.GetOrAdd(key, h =>
 				{
 					var handler = CreateHttpClientHandler(requestData);
-					var httpClient = new HttpClient(handler, false)
-					{
-						Timeout = requestData.RequestTimeout
-					};
+					var httpClient = new HttpClient(handler, false) { Timeout = requestData.RequestTimeout };
 
 					httpClient.DefaultRequestHeaders.ExpectContinue = false;
 					return httpClient;
@@ -154,10 +155,7 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpMessageHandler CreateHttpClientHandler(RequestData requestData)
 		{
-			var handler = new HttpClientHandler
-			{
-				AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None,
-			};
+			var handler = new HttpClientHandler { AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None, };
 
 			// same limit as desktop clr
 			if (requestData.ConnectionSettings.ConnectionLimit > 0)
@@ -231,28 +229,19 @@ namespace Elasticsearch.Net
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
 
-			var data = requestData.PostData;
-
-			if (data != null)
+			if (requestData.HttpCompression)
 			{
-				var stream = requestData.MemoryStreamFactory.Create();
-				requestMessage.Content = new StreamContent(stream);
-				requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
-				if (requestData.HttpCompression)
-				{
-					requestMessage.Content.Headers.Add("Content-Encoding", "gzip");
-					requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-					requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
-					using (var zipStream = new GZipStream(stream, CompressionMode.Compress, true))
-						data.Write(zipStream, requestData.ConnectionSettings);
-				}
-				else
-					data.Write(stream, requestData.ConnectionSettings);
-				stream.Position = 0;
+				requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+				requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
 			}
 
 			return requestMessage;
 		}
+
+		private static void SetContent(HttpRequestMessage message, RequestData requestData) => message.Content = new RequestDataContent(requestData);
+
+		private static void SetAsyncContent(HttpRequestMessage message, RequestData requestData, CancellationToken token) =>
+			message.Content = new RequestDataContent(requestData, token);
 
 		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
 		{
@@ -260,7 +249,8 @@ namespace Elasticsearch.Net
 			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
 				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
 			else if (requestData.BasicAuthorizationCredentials != null)
-				userInfo = $"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
+				userInfo =
+					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 			if (!userInfo.IsNullOrEmpty())
 			{
 				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));

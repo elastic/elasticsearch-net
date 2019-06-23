@@ -78,7 +78,7 @@ namespace Elasticsearch.Net
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
 		}
-
+		
 		public string Accept { get; }
 		public IEnumerable<int> AllowedStatusCodes { get; }
 
@@ -118,6 +118,7 @@ namespace Elasticsearch.Net
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 
+		// TODO This feels like its in the wrong place
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
 			path = path ?? string.Empty;
