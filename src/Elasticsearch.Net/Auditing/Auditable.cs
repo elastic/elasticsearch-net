@@ -24,8 +24,6 @@ namespace Elasticsearch.Net
 			_activity = diagnosticName != null ? DiagnosticSource.Diagnose(diagnosticName, _audit) : null;
 		}
 
-		public DiagnosticAudit DiagnosticInformation => _audit;
-
 		public AuditEvent Event
 		{
 			set => _audit.Event = value;

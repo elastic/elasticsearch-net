@@ -20,23 +20,28 @@ namespace Tests.ScratchPad
 
 			public void OnNext(DiagnosticListener value)
 			{
+				void WriteToConsole<T>(string eventName, T data)
+				{
+					var a = Activity.Current;
+					Console.WriteLine($"{eventName?.PadRight(30)} {a.Id?.PadRight(32)} {a.ParentId?.PadRight(32)} {data?.ToString().PadRight(10)}");
+				}
 				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
-					value.Subscribe(new AuditDiagnosticListener(v => Console.WriteLine($"{v.EventName} {v.EventData}")));
+					value.Subscribe(new AuditDiagnosticListener(v => WriteToConsole(v.EventName, v.Audit)));
 				
 				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
 					value.Subscribe(new RequestPipelineDiagnosticListener(
-						v => Console.WriteLine($"{v.EventName} {v.RequestData}"),
-						v => Console.WriteLine($"{v.EventName} {v.Response}"))
+						v => WriteToConsole(v.EventName, v.RequestData),
+						v => WriteToConsole(v.EventName, v.Response))
 					);
 				
 				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
 					value.Subscribe(new HttpConnectionDiagnosticListener(
-						v => Console.WriteLine($"{v.EventName} {v.RequestData}"),
-						v => Console.WriteLine($"{v.EventName} {v.StatusCode}")
+						v => WriteToConsole(v.EventName, v.RequestData),
+						v => WriteToConsole(v.EventName, v.StatusCode)
 					));
 				
 				if (value.Name == DiagnosticSources.Serializer.SourceName)
-					value.Subscribe(new SerializerDiagnosticListener(v => Console.WriteLine($"{v.EventName} {v.Registration}")));
+					value.Subscribe(new SerializerDiagnosticListener(v => WriteToConsole(v.EventName, v.Registration)));
 			}
 		}
 
@@ -52,7 +57,15 @@ namespace Tests.ScratchPad
 					.SniffOnStartup();
 				var client = new ElasticClient(settings);
 
-				var x = client.Search<object>(s=>s.AllIndices());
+				try
+				{
+					var x = client.Search<object>(s=>s.AllIndices());
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e);
+					throw;
+				}
 
 				await Task.Delay(TimeSpan.FromSeconds(7));
 				

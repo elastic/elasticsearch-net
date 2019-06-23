@@ -6,7 +6,7 @@ namespace Elasticsearch.Net.Diagnostics
 	public class AuditDiagnosticListener : TypedDiagnosticListenerBase<Audit>
 	{
 		public AuditDiagnosticListener(
-			Action<(string EventName,  Audit EventData)> onNext,
+			Action<(string EventName,  Audit Audit)> onNext,
 			Action<Exception> onError = null,
 			Action onCompleted = null
 		) : base(onNext, onError, onCompleted) { }

@@ -27,6 +27,8 @@ namespace Elasticsearch.Net.Diagnostics
 		void IObserver<KeyValuePair<string, object>>.OnNext(KeyValuePair<string, object> value)
 		{
 			if (value.Value is TOnNext next) _onNext?.Invoke((EventName: value.Key, EventData: next));
+			else if (value.Value == null) _onNext?.Invoke((EventName: value.Key, EventData: default));
+			
 			else throw new Exception($"{value.Key} received unexpected type {value.Value.GetType()}");
 
 		} 
@@ -58,7 +60,11 @@ namespace Elasticsearch.Net.Diagnostics
 		void IObserver<KeyValuePair<string, object>>.OnNext(KeyValuePair<string, object> value)
 		{
 			if (value.Value is TOnNextStart nextStart) _onNextStart?.Invoke((EventName: value.Key, EventData: nextStart));
+			else if (value.Key.EndsWith(".Start") && value.Value is null) _onNextStart?.Invoke((EventName: value.Key, EventData: default));
+			
 			else if (value.Value is TOnNextEnd nextEnd) _onNextEnd?.Invoke((EventName: value.Key, EventData: nextEnd));
+			else if (value.Key.EndsWith(".Stop") && value.Value is null) _onNextEnd?.Invoke((EventName: value.Key, EventData: default));
+			
 			else throw new Exception($"{value.Key} received unexpected type {value.Value.GetType()}");
 
 		} 
