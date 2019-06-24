@@ -64,7 +64,7 @@ module Release =
     let private nugetPackMain (_:DotNetProject) nugetId nuspec properties version = 
         pack nuspec nugetId properties version
         
-    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
+    let private nugetPackVersionedUnfiltered (p:DotNetProject) nugetId nuspec properties version =
         let currentMajorVersion = currentMajorVersion version
         let newId = sprintf "%s.v%s" nugetId currentMajorVersion;
         let nuspecVersioned = sprintf @"build/%s.nuspec" newId
@@ -141,6 +141,13 @@ module Release =
 
             callback p nugetId nuspec properties version
         )
+        
+    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
+        match p with
+        | Project NestUpgradeAssistant ->
+            printfn "Skipping %s from building a versioned nightly" p.Name
+            ignore()
+        | _ -> nugetPackVersionedUnfiltered p nugetId nuspec properties version
             
     let NugetPack (ArtifactsVersion(version)) = packProjects version nugetPackMain 
 
