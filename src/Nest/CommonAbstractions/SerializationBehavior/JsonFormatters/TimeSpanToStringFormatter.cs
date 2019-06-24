@@ -19,7 +19,7 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) => writer.WriteInt64(value.Ticks);
 	}
 
-	//TODO: unused,should it?
+	//TODO: hook up in NestFormatterResolver to return TimeSpanToStringFormatter when StringTimeSpanAttribute is *not* specified on T
 	internal class TimeSpanToStringFormatterResolver : IJsonFormatterResolver
 	{
 		public IJsonFormatter<T> GetFormatter<T>() => null;

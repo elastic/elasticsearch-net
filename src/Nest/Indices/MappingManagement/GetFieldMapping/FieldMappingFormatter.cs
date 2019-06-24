@@ -56,7 +56,6 @@ namespace Nest
 							mapping = formatterResolver.GetFormatter<SizeField>()
 								.Deserialize(ref reader, formatterResolver);
 							break;
-						//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
 					}
 				}
 				else

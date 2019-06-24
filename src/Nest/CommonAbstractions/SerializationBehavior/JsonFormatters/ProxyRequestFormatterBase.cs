@@ -31,10 +31,6 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, TRequestInterface value, IJsonFormatterResolver formatterResolver)
 		{
 			var untypedDocumentRequest = (IProxyRequest)value;
-
-			// TODO: Allow formatting
-			//var f = writer.Formatting == Formatting.Indented ? Indented : None;
-
 			var settings = formatterResolver.GetConnectionSettings();
 			var serializer = settings.SourceSerializer;
 

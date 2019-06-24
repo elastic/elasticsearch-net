@@ -16,9 +16,6 @@ namespace Nest
 
 		[DataMember(Name = "error_message")]
 		public string ErrorMessage { get; internal set; }
-
-		//TODO: make this the default on base class for 7.0 ?
-		public override bool IsValid => base.IsValid && Acknowledged;
 	}
 
 	[JsonFormatter(typeof(StartBasicLicenseFeatureAcknowledgementsFormatter))]

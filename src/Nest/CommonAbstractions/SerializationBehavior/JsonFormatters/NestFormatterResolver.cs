@@ -40,7 +40,6 @@ namespace Nest
 				DynamicCompositeResolver.Create(new IJsonFormatter[]
 				{
 					new QueryContainerCollectionFormatter(),
-					new QueryContainerListFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
 					// TODO: condition on TimeSpanToStringFormatter and NullableTimeSpanToStringFormatter to only take effect when StringTimeSpanAttribute is not present.
 					new TimeSpanToStringFormatter(),

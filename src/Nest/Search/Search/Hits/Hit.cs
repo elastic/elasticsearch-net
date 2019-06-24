@@ -53,7 +53,6 @@ namespace Nest
 		/// <summary>
 		/// The type of hit
 		/// </summary>
-		// TODO obsolete or remove type on response
 		[DataMember(Name = "_type")]
 		string Type { get; }
 
