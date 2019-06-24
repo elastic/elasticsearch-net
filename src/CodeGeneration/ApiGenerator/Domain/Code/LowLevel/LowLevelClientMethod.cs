@@ -14,7 +14,7 @@ namespace ApiGenerator.Domain.Code.LowLevel
 		public string PerPathMethodName { get; set; }
 		public string HttpMethod { get; set; }
 
-		public string DeprecatedPath { get; set; }
+		public DeprecatedPath DeprecatedPath { get; set; }
 		public UrlInformation Url { get; set; }
 		public bool HasBody { get; set; }
 		public IEnumerable<UrlPart> Parts { get; set; }
@@ -32,7 +32,9 @@ namespace ApiGenerator.Domain.Code.LowLevel
 				}
 
 				var url = Path.TrimStart('/');
-				var pattern = string.Join("|", Url.Parts.Select(p => p.Name));
+				var options = Url.OriginalParts?.Select(p => p.Key) ?? Enumerable.Empty<string>();
+				
+				var pattern = string.Join("|", options);
 				var urlCode = $"\"{url}\"";
 				if (Path.Contains("{"))
 				{

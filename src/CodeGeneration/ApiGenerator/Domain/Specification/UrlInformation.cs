@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Reflection;
+using CsQuery.Engine;
+using CsQuery.Engine.PseudoClassSelectors;
 using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain.Specification
@@ -13,8 +17,11 @@ namespace ApiGenerator.Domain.Specification
 		[JsonProperty("paths")]
 		private IReadOnlyCollection<string> OriginalPaths { get; set; }
 
-		[JsonProperty("parts")]
-		private IDictionary<string, UrlPart> OriginalParts { get; set; }
+		[JsonProperty("parts")] 
+		public IDictionary<string, UrlPart> OriginalParts { get; set; }
+		
+		[JsonProperty("deprecated_paths")]
+		private IReadOnlyCollection<DeprecatedPath> DeprecatedPaths { get; set; }
 		
 		private List<UrlPath> _paths;
 		public IReadOnlyCollection<UrlPath> Paths
@@ -25,6 +32,42 @@ namespace ApiGenerator.Domain.Specification
 
 				_paths = OriginalPaths.Select(p => new UrlPath(p, OriginalParts)).ToList();
 				return _paths;
+			}
+		}
+		
+		private List<UrlPath> _pathsWithDeprecation;
+		public IReadOnlyCollection<UrlPath> PathsWithDeprecations
+		{
+			get
+			{
+				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
+				
+				var paths = Paths ?? new UrlPath[] {};
+				if (DeprecatedPaths == null || DeprecatedPaths.Count == 0) return Paths;
+				
+				//some deprecated paths describe aliases to the canonical using the same path e.g
+				// PUT /{index}/_mapping/{type}
+				// PUT /{index}/{type}/_mappings
+				//
+				//The following routine dedups these occasions and prefers either the cononical path
+				//or the first duplicate deprecated path
+
+				var canonicalPartNameLookup = paths.Select(path => new HashSet<string>(path.Parts.Select(p => p.Name))).ToList();
+				var withoutDeprecatedAliases = DeprecatedPaths
+					.Select(deprecatedPath => new
+					{
+						deprecatedPath, 
+						parts = new HashSet<string>(OriginalParts.Keys.Where(k => deprecatedPath.Path.Contains($"{{{k}}}")))
+					})
+					.GroupBy(t => t.parts, HashSet<string>.CreateSetComparer())
+					.Where(grouped => !canonicalPartNameLookup.Any(set => set.SetEquals(grouped.Key)))
+					.Select(grouped => grouped.First().deprecatedPath); 
+				
+							
+				_pathsWithDeprecation = paths
+					.Concat(withoutDeprecatedAliases.Select(p => new UrlPath(p, OriginalParts, Paths)))
+					.ToList();
+				return _pathsWithDeprecation;
 			}
 		}
 

@@ -97,7 +97,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 			if (!UrlParts.Any()) return codeArgs;
 
 			string Optional(UrlPart p) => !p.Required && SelectorIsOptional ? " = null" : string.Empty;
-			return codeArgs + string.Join(", ", UrlParts.Select(p => $"{p.ClrTypeName} {p.Name.ToCamelCase()}{Optional(p)}")) + ", ";
+			return codeArgs + string.Join(", ", UrlParts.Select(p => $"{p.HighLevelTypeName} {p.Name.ToCamelCase()}{Optional(p)}")) + ", ";
 		}
 
 		public string SelectorArguments()
@@ -116,7 +116,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 			{
 				if (IsDocumentRequest) return "documentWithId: document";
 				
-				if (p.ClrTypeName.StartsWith("DocumentPath"))
+				if (p.HighLevelTypeName.StartsWith("DocumentPath"))
 					return "documentWithId: id?.Document, index: id?.Self?.Index, id: id?.Self?.Id";
 				
 

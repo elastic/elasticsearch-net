@@ -683,8 +683,9 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
-	// Request parameters
-	//TODO THIS METHOD IS UNMAPPED! Expected to find HasPrivilegesDescriptor and HasPrivilegesRequest in a file called HasPrivilegesRequest.cs in NEST's codebase
+		// Request parameters
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement HasPrivilegesDescriptor and HasPrivilegesRequest in a file called HasPrivilegesRequest.cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
 	}
 
 	[InterfaceDataContract]

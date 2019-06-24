@@ -16,7 +16,7 @@
 @foreach (UrlPart part in i.UrlParts)
 {
 <text>		[IgnoreDataMember]
-			@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
+			@(Raw(part.HighLevelTypeName)) @(part.InterfaceName) { get; }
 </text>
 }
 @foreach (var partialParam in i.PartialParameters)

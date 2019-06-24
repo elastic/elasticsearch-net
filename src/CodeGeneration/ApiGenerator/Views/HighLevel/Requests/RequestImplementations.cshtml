@@ -26,7 +26,7 @@
 @foreach (var part in r.Parts)
 {
 <text>		[IgnoreDataMember]
-		@(Raw(part.ClrTypeName)) @(Raw(r.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+		@(Raw(part.HighLevelTypeName)) @(Raw(r.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.HighLevelTypeName)))("@(part.Name)");
 </text>
 }
 
@@ -50,8 +50,10 @@
 </text>
 }
 @if (names.DescriptorNotFoundInCodebase)
-{<text>		//TODO THIS METHOD IS UNMAPPED! Expected to find @names.DescriptorName and @names.RequestName in a file called @(names.RequestName).cs in NEST's codebase
-</text>
+{<text>
+		 [Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement @names.DescriptorName and @names.RequestName in a file called @(names.RequestName).cs in NEST's codebase", true)]
+		 public bool IsUnmapped => true;
+ </text>
 }
 	}
 @if (r.NeedsGenericImplementation)

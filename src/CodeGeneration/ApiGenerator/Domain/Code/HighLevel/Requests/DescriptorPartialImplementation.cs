@@ -38,13 +38,13 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 				var routeSetter = p.Required ? "Required" : "Optional";
 
 				var code =
-					$"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign({paramName}, (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
+					$"public {returnType} {p.InterfaceName}({p.HighLevelTypeName} {paramName}) => Assign({paramName}, (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				if (paramName == "index")
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
-					code += $"=> Assign(typeof(TOther), (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.ClrTypeName})v));";
+					code += $"=> Assign(typeof(TOther), (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.HighLevelTypeName})v));";
 					xmlDoc = $"///<summary>a shortcut into calling {p.InterfaceName}(typeof(TOther))</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}

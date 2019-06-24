@@ -8,9 +8,23 @@ namespace ApiGenerator.Domain.Specification
 	{
 		private readonly List<UrlPart> _additionalPartsForConstructor;
 		public string Path { get; }
+		public DeprecatedPath Deprecation { get; }
+
 
 		public List<UrlPart> Parts { get; }
 
+		//TODO mark the parts that are deprecated
+		//TODO this will all go away once https://github.com/elastic/elasticsearch/pull/42346 lands 
+		public UrlPath(DeprecatedPath path, IDictionary<string, UrlPart> originalParts, IReadOnlyCollection<UrlPath> allNonDeprecatedPaths) 
+			: this(path.Path, originalParts)
+		{
+			Deprecation = path;
+			foreach (var part in Parts)
+			{
+				if (!part.Deprecated && !allNonDeprecatedPaths.Any(p => p.Path.Contains($"{{{part.Name}}}")))
+					part.Deprecated = true;
+			}
+		}
 		public UrlPath(string path, IDictionary<string, UrlPart> allParts, List<UrlPart> additionalPartsForConstructor = null)
 		{
 			_additionalPartsForConstructor = additionalPartsForConstructor ?? new List<UrlPart>();
@@ -30,7 +44,7 @@ namespace ApiGenerator.Domain.Specification
 			Parts = parts.ToList();
 		}
 
-		public string ConstructorArguments => string.Join(", ", Parts.Select(p => $"{p.ClrTypeName} {p.NameAsArgument}"));
+		public string ConstructorArguments => string.Join(", ", Parts.Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument}"));
 		public string RequestBaseArguments =>
 			!Parts.Any() ? string.Empty
 				: "r => r." + string.Join(".", Parts.Select(p => $"{(p.Required ? "Required" : "Optional")}(\"{p.Name}\", {p.NameAsArgument})"));
@@ -38,8 +52,10 @@ namespace ApiGenerator.Domain.Specification
 		public string TypedSubClassBaseArguments => string.Join(", ", Parts.Select(p => p.NameAsArgument));
 
 		private static string[] ResolvabeFromT = { "index"};
+
+
 		public bool HasResolvableArguments => Parts.Any(p => ResolvabeFromT.Contains(p.Name));
-		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvabeFromT.Contains(p.Name)).Select(p => $"{p.ClrTypeName} {p.NameAsArgument}"));
+		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvabeFromT.Contains(p.Name)).Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument}"));
 
 		public string AutoResolveBaseArguments(string generic) => string.Join(", ", Parts.Select(p => !ResolvabeFromT.Contains(p.Name) ? p.Name : $"typeof({generic})"));
 
@@ -48,7 +64,7 @@ namespace ApiGenerator.Domain.Specification
 				: ResolvabeFromT.Contains(p.Name) ? $"{p.Name} ?? typeof({generic})" : p.Name));
 
 		public string DocumentPathConstructorArgument(string generic) => string.Join(", ",
-			new [] { $"{generic} documentWithId" }.Concat(_additionalPartsForConstructor.Select(p => $"{p.ClrTypeName} {p.NameAsArgument} = null")));
+			new [] { $"{generic} documentWithId" }.Concat(_additionalPartsForConstructor.Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument} = null")));
 
 		public string GetXmlDocs(string indent, bool skipResolvable = false, bool documentConstructor = false)
 		{
