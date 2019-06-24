@@ -27,8 +27,8 @@ namespace ApiGenerator.Domain.Specification
 				//TODO treat list with fixed options as Flags Enum
 				switch (Type)
 				{
-					case "int": //last i checked does not occur on part
-					case "number": //last i checked does not occur on part
+					case "int": //does not occur on part
+					case "number": //does not occur on part
 					case "string":
 						return Type;
 					case "list":

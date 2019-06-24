@@ -18,5 +18,5 @@
 		///@Raw(@"<param name=""requestParameters"">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>")
 		@if (method.DeprecatedPath != null)
 		{
-<text>		[Obsolete("Deprecated as of @(method.DeprecatedPath.Version): @Raw(method.DeprecatedPath.Description)")]
+<text>		[Obsolete("Deprecated in version @(method.DeprecatedPath.Version): @Raw(method.DeprecatedPath.Description)")]
 </text>}

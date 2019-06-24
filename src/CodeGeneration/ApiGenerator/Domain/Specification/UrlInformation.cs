@@ -40,11 +40,6 @@ namespace ApiGenerator.Domain.Specification
 		{
 			get
 			{
-				if (Paths.Any(p => p.Path.Contains("plugins")))
-				{
-					
-				}
-				
 				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
 				
 				var paths = Paths ?? new UrlPath[] {};
