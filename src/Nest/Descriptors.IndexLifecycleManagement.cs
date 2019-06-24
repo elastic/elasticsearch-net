@@ -130,9 +130,7 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public MoveToStepDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement MoveToStepDescriptor and MoveToStepRequest in a file called MoveToStepRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
+	// Request parameters
 	}
 
 	///<summary>descriptor for PutLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>

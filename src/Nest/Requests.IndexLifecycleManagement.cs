@@ -173,9 +173,7 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		IndexName IMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement MoveToStepDescriptor and MoveToStepRequest in a file called MoveToStepRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
+	// Request parameters
 	}
 
 	[InterfaceDataContract]

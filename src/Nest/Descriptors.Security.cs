@@ -405,9 +405,7 @@ namespace Nest
 		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 		///<summary>Username</summary>
 		public HasPrivilegesDescriptor User(Name user) => Assign(user, (a, v) => a.RouteValues.Optional("user", v));
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement HasPrivilegesDescriptor and HasPrivilegesRequest in a file called HasPrivilegesRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
+	// Request parameters
 	}
 
 	///<summary>descriptor for InvalidateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
