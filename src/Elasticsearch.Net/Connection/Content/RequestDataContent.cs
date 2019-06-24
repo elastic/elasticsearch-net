@@ -31,6 +31,8 @@ namespace Elasticsearch.Net
 		{
 			_requestData = requestData;
 			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+			if (requestData.HttpCompression)
+				Headers.ContentEncoding.Add("gzip");
 			
 			Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
 			{
@@ -44,6 +46,8 @@ namespace Elasticsearch.Net
 		{
 			_requestData = requestData;
 			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+			if (requestData.HttpCompression)
+				Headers.ContentEncoding.Add("gzip");
 
 			async Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
 			{
@@ -71,10 +75,7 @@ namespace Elasticsearch.Net
 			var serializeToStreamTask = new TaskCompletionSource<bool>();
 
 			if (_requestData.HttpCompression)
-			{
-				Headers.Add("Content-Encoding", "gzip");
 				stream = new GZipStream(stream, CompressionMode.Compress, false);
-			}
 			var wrappedStream = new CompleteTaskOnCloseStream(stream, serializeToStreamTask);
             await _onStreamAvailable(data, wrappedStream, this, context);
             await serializeToStreamTask.Task;

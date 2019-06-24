@@ -7,6 +7,7 @@ using BenchmarkDotNet.Running;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Diagnostics;
 using Nest;
+using Xunit.Sdk;
 
 namespace Tests.ScratchPad
 {
@@ -53,8 +54,10 @@ namespace Tests.ScratchPad
 			{
 				node.Start();
 
-				var settings = new ConnectionSettings(new SniffingConnectionPool(new[] { node.NodesUris().First() }))
-					.SniffOnStartup();
+				var settings = new ConnectionSettings(new StaticConnectionPool(new[] { node.NodesUris("ipv4.fiddler").First() }))
+					.EnableHttpCompression()
+					.Proxy(new Uri("http://127.0.0.1:8080"), (string)null, (string)null)
+					;
 				var client = new ElasticClient(settings);
 
 				var x = client.Search<object>(s=>s.AllIndices());

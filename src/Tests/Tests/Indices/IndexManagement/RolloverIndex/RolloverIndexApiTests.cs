@@ -18,6 +18,10 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			: base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
 
 		protected override object ExpectJson => new
 		{
@@ -55,8 +59,6 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			}
 		};
 
-		protected override int ExpectStatusCode => 200;
-
 		protected override Func<RolloverIndexDescriptor, IRolloverIndexRequest> Fluent => f => f
 			.NewIndex(CallIsolatedValue + "-new")
 			.Conditions(c => c
@@ -83,8 +85,6 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			.Aliases(a => a
 				.Alias("new_projects")
 			);
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override RolloverIndexRequest Initializer => new RolloverIndexRequest(CallIsolatedValue + "-alias", CallIsolatedValue + "-new")
 		{
@@ -123,10 +123,6 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				{ "new_projects", new Alias() }
 			}
 		};
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
