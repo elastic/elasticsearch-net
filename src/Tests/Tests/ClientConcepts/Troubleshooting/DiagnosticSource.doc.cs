@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 		 * Here we choose the more verbose `IObserver<>` implementation.
 		 * 
 		 */
-		private class ListenerObserver : IObserver<DiagnosticListener>
+		private class ListenerObserver : IObserver<DiagnosticListener>, IDisposable
 		{
 			private long _messagesWrittenToConsole = 0;
 			public long MessagesWrittenToConsole => _messagesWrittenToConsole;
@@ -60,6 +60,8 @@ namespace Tests.ClientConcepts.Troubleshooting
 				Interlocked.Increment(ref _messagesWrittenToConsole);
 			}
 			
+			private List<IDisposable> Disposables { get; } = new List<IDisposable>();
+			
 			/**
 			 * By inspecting the name we selectively subscribe only to topics `Elasticsearch.Net` emits.
 			 *
@@ -74,29 +76,40 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 */
 			public void OnNext(DiagnosticListener value)
 			{
+				void TrySubscribe(string sourceName, Func<IObserver<KeyValuePair<string, object>>> listener)
+				{
+					if (value.Name != sourceName) return;
+
+					var subscription = value.Subscribe(listener());
+					Disposables.Add(subscription);
+				}
 				
-				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
-					value.Subscribe(new AuditDiagnosticListener(v => WriteToConsole(v.EventName, v.Audit)));
+				TrySubscribe(DiagnosticSources.AuditTrailEvents.SourceName, 
+					() => new AuditDiagnosticObserver(v => WriteToConsole(v.EventName, v.Audit)));
 				
+				TrySubscribe(DiagnosticSources.Serializer.SourceName, 
+					() => new SerializerDiagnosticObserver(v => WriteToConsole(v.EventName, v.Registration)));
 				/**
 				 * RequestPipeline emits a different context object for the start of the `Activity` then it does
 				 * for the end of the `Activity` therefor `RequestPipelineDiagnosticObserver` accepts two `onNext` lambda's.
 				 * One for the `.Start` events and one for the `.Stop` events.
 				 */
-				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
-					value.Subscribe(new RequestPipelineDiagnosticListener(
+				TrySubscribe(DiagnosticSources.RequestPipeline.SourceName, 
+					() => new RequestPipelineDiagnosticObserver(
 						v => WriteToConsole(v.EventName, v.RequestData),
-						v => WriteToConsole(v.EventName, v.Response))
-					);
+						v => WriteToConsole(v.EventName, v.Response)
+					));
 				
-				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
-					value.Subscribe(new HttpConnectionDiagnosticListener(
+				TrySubscribe(DiagnosticSources.HttpConnection.SourceName, 
+					() => new HttpConnectionDiagnosticObserver(
 						v => WriteToConsole(v.EventName, v.RequestData),
 						v => WriteToConsole(v.EventName, v.StatusCode)
 					));
-				
-				if (value.Name == DiagnosticSources.Serializer.SourceName)
-					value.Subscribe(new SerializerDiagnosticListener(v => WriteToConsole(v.EventName, v.Registration)));
+			}
+
+			public void Dispose()
+			{
+				foreach(var d in Disposables) d.Dispose();
 			}
 		}
 
@@ -106,7 +119,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * Here we hook into all diagnostic sources and use `ListenerObserver` to only listen to the ones
 			 * from `Elasticsearch.Net`
 			 */
-			var listenerObserver = new ListenerObserver();
+			using(var listenerObserver = new ListenerObserver())
 			using (var subscription = DiagnosticListener.AllListeners.Subscribe(listenerObserver))
 			{
 				

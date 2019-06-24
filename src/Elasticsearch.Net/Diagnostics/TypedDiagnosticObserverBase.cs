@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.Net.Diagnostics 
 {
-	public abstract class TypedDiagnosticListenerBase<TOnNext> : IObserver<KeyValuePair<string, object>>
+	public abstract class TypedDiagnosticObserverBase<TOnNext> : IObserver<KeyValuePair<string, object>>
 	{
 		private readonly Action<(string EventName, TOnNext EventData)> _onNext;
 		private readonly Action<Exception> _onError;
 		private readonly Action _onCompleted;
 
-		protected TypedDiagnosticListenerBase(
+		protected TypedDiagnosticObserverBase(
 			Action<(string EventName, TOnNext RequestData)> onNext,
 			Action<Exception> onError = null,
 			Action onCompleted = null
@@ -33,14 +33,14 @@ namespace Elasticsearch.Net.Diagnostics
 
 		} 
 	}
-	public abstract class TypedDiagnosticListenerBase<TOnNextStart, TOnNextEnd> : IObserver<KeyValuePair<string, object>>
+	public abstract class TypedDiagnosticObserverBase<TOnNextStart, TOnNextEnd> : IObserver<KeyValuePair<string, object>>
 	{
 		private readonly Action<(string EventName, TOnNextStart EventData)> _onNextStart;
 		private readonly Action<(string EventName, TOnNextEnd EventData)> _onNextEnd;
 		private readonly Action<Exception> _onError;
 		private readonly Action _onCompleted;
 
-		protected TypedDiagnosticListenerBase(
+		protected TypedDiagnosticObserverBase(
 			Action<(string EventName, TOnNextStart RequestData)> onNextStart,
 			Action<(string EventName, TOnNextEnd RequestData)> onNextEnd,
 			Action<Exception> onError = null,

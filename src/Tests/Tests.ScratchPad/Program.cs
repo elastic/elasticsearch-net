@@ -26,22 +26,22 @@ namespace Tests.ScratchPad
 					Console.WriteLine($"{eventName?.PadRight(30)} {a.Id?.PadRight(32)} {a.ParentId?.PadRight(32)} {data?.ToString().PadRight(10)}");
 				}
 				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
-					value.Subscribe(new AuditDiagnosticListener(v => WriteToConsole(v.EventName, v.Audit)));
+					value.Subscribe(new AuditDiagnosticObserver(v => WriteToConsole(v.EventName, v.Audit)));
 				
 				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
-					value.Subscribe(new RequestPipelineDiagnosticListener(
+					value.Subscribe(new RequestPipelineDiagnosticObserver(
 						v => WriteToConsole(v.EventName, v.RequestData),
 						v => WriteToConsole(v.EventName, v.Response))
 					);
 				
 				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
-					value.Subscribe(new HttpConnectionDiagnosticListener(
+					value.Subscribe(new HttpConnectionDiagnosticObserver(
 						v => WriteToConsole(v.EventName, v.RequestData),
 						v => WriteToConsole(v.EventName, v.StatusCode)
 					));
 				
 				if (value.Name == DiagnosticSources.Serializer.SourceName)
-					value.Subscribe(new SerializerDiagnosticListener(v => WriteToConsole(v.EventName, v.Registration)));
+					value.Subscribe(new SerializerDiagnosticObserver(v => WriteToConsole(v.EventName, v.Registration)));
 			}
 		}
 
