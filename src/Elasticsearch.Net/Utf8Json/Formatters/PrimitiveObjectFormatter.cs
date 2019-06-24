@@ -175,7 +175,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 case JsonToken.EndObject:
                     throw new InvalidOperationException("Invalid Json Token:" + token);
                 case JsonToken.Null:
-                    reader.ReadNext();
+                    reader.ReadIsNull();
                     return null;
                 case JsonToken.None:
                 default:

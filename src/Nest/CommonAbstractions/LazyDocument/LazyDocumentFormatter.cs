@@ -26,7 +26,6 @@ namespace Nest
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
 			{
-				//reader.ReadNext();
 				return null;
 			}
 
@@ -113,7 +112,6 @@ namespace Nest
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
 			{
-				//reader.ReadNext();
 				return null;
 			}
 

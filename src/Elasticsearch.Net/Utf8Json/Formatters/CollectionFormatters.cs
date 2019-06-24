@@ -245,8 +245,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 				reader.ReadIsBeginArrayWithVerify();
 				while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
 				{
-					var value = formatter.Deserialize(ref reader, formatterResolver);
-					Add(ref builder, count - 1, value);
+					Add(ref builder, count - 1, formatter.Deserialize(ref reader, formatterResolver));
 				}
 
 				return Complete(ref builder);
