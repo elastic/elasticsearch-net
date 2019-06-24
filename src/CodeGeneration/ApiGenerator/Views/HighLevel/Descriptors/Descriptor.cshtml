@@ -83,8 +83,9 @@
 }
 	@if (names.DescriptorNotFoundInCodebase)
 	{<text>
-		//TODO THIS METHOD IS UNMAPPED!
-		</text>
+		 [Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement @names.DescriptorName and @names.RequestName in a file called @(names.RequestName).cs in NEST's codebase", true)]
+		 public bool IsUnmapped => true;
+	 </text>
 	}	
 	}
 
