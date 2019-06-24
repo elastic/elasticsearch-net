@@ -11,10 +11,16 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
-			var source = builtInSerializer.Deserialize<TDocument>(stream);
-			return new SourceResponse<TDocument> { Body = source, };
+			return response.Success
+				? new SourceResponse<TDocument> { Body = builtInSerializer.Deserialize<TDocument>(stream) }
+				: new SourceResponse<TDocument>();
 		}
 
-		public override Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default) => throw new System.NotImplementedException();
+		public override async Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default)
+		{
+			return response.Success
+				? new SourceResponse<TDocument> { Body = await builtInSerializer.DeserializeAsync<TDocument>(stream) }
+				: new SourceResponse<TDocument>();
+		}
 	}
 }

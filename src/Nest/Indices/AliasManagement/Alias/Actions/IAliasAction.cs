@@ -23,7 +23,10 @@ namespace Nest
 		{
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var segment = reader.ReadNextBlockSegment();
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);

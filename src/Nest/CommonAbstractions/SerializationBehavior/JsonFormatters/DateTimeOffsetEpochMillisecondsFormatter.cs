@@ -26,8 +26,10 @@ namespace Nest
 					return formatter.Deserialize(ref reader, formatterResolver);
 				}
 				case JsonToken.Null:
+				{
 					reader.ReadNext();
 					return null;
+				}
 				case JsonToken.Number:
 				{
 					var millisecondsSinceEpoch = reader.ReadDouble();

@@ -14,7 +14,8 @@ namespace Nest
 		{
 			var catResponse = new CatResponse<CatHelpRecord>();
 
-			if (!response.Success) return catResponse;
+			if (!response.Success)
+				return catResponse;
 
 			using (stream)
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
@@ -27,20 +28,13 @@ namespace Nest
 			return catResponse;
 		}
 
-		private static void Parse(CatResponse<CatHelpRecord> catResponse, string body) =>
-			catResponse.Records = body.Split('\n')
-				.Skip(1)
-				.Select(f => new CatHelpRecord { Endpoint = f.Trim() })
-				.ToList();
-
 		public override async Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream,
-			CancellationToken ctx = default
-		)
+			CancellationToken ctx = default)
 		{
-
 			var catResponse = new CatResponse<CatHelpRecord>();
 
-			if (!response.Success) return catResponse;
+			if (!response.Success)
+				return catResponse;
 
 			using (stream)
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
@@ -52,5 +46,11 @@ namespace Nest
 
 			return catResponse;
 		}
+
+		private static void Parse(CatResponse<CatHelpRecord> catResponse, string body) =>
+			catResponse.Records = body.Split('\n')
+				.Skip(1)
+				.Select(f => new CatHelpRecord { Endpoint = f.Trim() })
+				.ToList();
 	}
 }

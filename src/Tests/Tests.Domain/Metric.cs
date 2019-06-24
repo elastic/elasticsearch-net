@@ -40,7 +40,12 @@ namespace Tests.Domain
 				var formatter = formatterResolver.GetFormatter<DateTime>();
 				return formatter.Deserialize(ref reader, formatterResolver);
 			}
-			if (token == JsonToken.Null) return default;
+
+			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
+				return default;
+			}
 
 			if (token == JsonToken.Number)
 			{

@@ -13,8 +13,9 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
-			var statefulSerializer = builtInSerializer.CreateStateful(Formatter);
-			return statefulSerializer.Deserialize<MultiSearchResponse>(stream);
+			return response.Success
+				? builtInSerializer.CreateStateful(Formatter).Deserialize<MultiSearchResponse>(stream)
+				: new MultiSearchResponse();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -24,8 +25,9 @@ namespace Nest
 			CancellationToken ctx = default
 		)
 		{
-			var statefulSerializer = builtInSerializer.CreateStateful(Formatter);
-			return await statefulSerializer.DeserializeAsync<MultiSearchResponse>(stream, ctx);
+			return response.Success
+				? await builtInSerializer.CreateStateful(Formatter).DeserializeAsync<MultiSearchResponse>(stream, ctx)
+				: new MultiSearchResponse();
 		}
 	}
 }

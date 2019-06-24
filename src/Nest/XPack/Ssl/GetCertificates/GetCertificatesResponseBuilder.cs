@@ -11,8 +11,9 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
-			var result = builtInSerializer.Deserialize<ClusterCertificateInformation[]>(stream);
-			return new GetCertificatesResponse { Certificates = result };
+			return response.Success
+				? new GetCertificatesResponse { Certificates = builtInSerializer.Deserialize<ClusterCertificateInformation[]>(stream) }
+				: new GetCertificatesResponse();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -22,8 +23,9 @@ namespace Nest
 			CancellationToken ctx = default
 		)
 		{
-			var result = await builtInSerializer.DeserializeAsync<ClusterCertificateInformation[]>(stream);
-			return new GetCertificatesResponse { Certificates = result };
+			return response.Success
+				? new GetCertificatesResponse { Certificates = await builtInSerializer.DeserializeAsync<ClusterCertificateInformation[]>(stream) }
+				: new GetCertificatesResponse();
 		}
 	}
 }

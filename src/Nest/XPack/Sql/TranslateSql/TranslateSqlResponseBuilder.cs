@@ -11,8 +11,9 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
-			var result = builtInSerializer.Deserialize<ISearchRequest>(stream);
-			return new TranslateSqlResponse { Result = result };
+			return response.Success
+				? new TranslateSqlResponse { Result = builtInSerializer.Deserialize<ISearchRequest>(stream) }
+				: new TranslateSqlResponse();
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
@@ -22,8 +23,9 @@ namespace Nest
 			CancellationToken ctx = default
 		)
 		{
-			var result = await builtInSerializer.DeserializeAsync<ISearchRequest>(stream);
-			return new TranslateSqlResponse { Result = result };
+			return response.Success
+				? new TranslateSqlResponse { Result = await builtInSerializer.DeserializeAsync<ISearchRequest>(stream) }
+				: new TranslateSqlResponse();
 		}
 	}
 }

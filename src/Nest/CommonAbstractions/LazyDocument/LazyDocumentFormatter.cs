@@ -111,8 +111,10 @@ namespace Nest
 
 		public LazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.ReadIsNull())
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 
