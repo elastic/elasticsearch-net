@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Diagnostics;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Specification.NodesApi;
 using static Elasticsearch.Net.AuditEvent;
@@ -20,6 +22,8 @@ namespace Elasticsearch.Net
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly IConnectionConfigurationValues _settings;
+		
+		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline.SourceName);
 
 		public RequestPipeline(
 			IConnectionConfigurationValues configurationValues,
@@ -144,15 +148,14 @@ namespace Elasticsearch.Net
 		public TResponse CallElasticsearch<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var audit = Audit(HealthyResponse))
+			using (var audit = Audit(HealthyResponse, requestData.Node))
+			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData))
 			{
-				audit.Node = requestData.Node;
 				audit.Path = requestData.PathAndQuery;
-
-				TResponse response = null;
 				try
 				{
-					response = _connection.Request<TResponse>(requestData);
+					var response = _connection.Request<TResponse>(requestData);
+					d.EndState = response.ApiCall;
 					response.ApiCall.AuditTrail = AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
 					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
@@ -160,7 +163,6 @@ namespace Elasticsearch.Net
 				}
 				catch (Exception e)
 				{
-					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
 					throw;
@@ -171,15 +173,14 @@ namespace Elasticsearch.Net
 		public async Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var audit = Audit(HealthyResponse))
+			using (var audit = Audit(HealthyResponse, requestData.Node))
+			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData))
 			{
-				audit.Node = requestData.Node;
 				audit.Path = requestData.PathAndQuery;
-
-				TResponse response = null;
 				try
 				{
-					response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+					var response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+					d.EndState = response.ApiCall;
 					response.ApiCall.AuditTrail = AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
 					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
@@ -187,7 +188,6 @@ namespace Elasticsearch.Net
 				}
 				catch (Exception e)
 				{
-					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
 					throw;
@@ -365,12 +365,15 @@ namespace Elasticsearch.Net
 		{
 			if (PingDisabled(node)) return;
 
-			using (var audit = Audit(PingSuccess))
+			var pingData = CreatePingRequestData(node);
+			using (var audit = Audit(PingSuccess, node))
+			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
 			{
+				audit.Path = pingData.PathAndQuery;
 				try
 				{
-					var pingData = CreatePingRequestData(node, audit);
 					var response = _connection.Request<VoidResponse>(pingData);
+					d.EndState = response;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
 					if (!response.Success)
@@ -389,13 +392,16 @@ namespace Elasticsearch.Net
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
 			if (PingDisabled(node)) return;
-
-			using (var audit = Audit(PingSuccess))
+			
+			var pingData = CreatePingRequestData(node);
+			using (var audit = Audit(PingSuccess, node))
+			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
 			{
+				audit.Path = pingData.PathAndQuery;
 				try
 				{
-					var pingData = CreatePingRequestData(node, audit);
 					var response = await _connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
+					d.EndState = response;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
 					if (!response.Success)
@@ -416,14 +422,17 @@ namespace Elasticsearch.Net
 			var exceptions = new List<Exception>();
 			foreach (var node in SniffNodes)
 			{
-				using (var audit = Audit(SniffSuccess))
+				var requestData = CreateSniffRequestData(node);
+				using (var audit = Audit(SniffSuccess, node))
+				using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Sniff, requestData))
+				using(DiagnosticSource.Diagnose(DiagnosticSources.RequestPipeline.Sniff, requestData))
 				{
-					audit.Node = node;
 					try
 					{
-						var requestData = CreateSniffRequestData(node);
 						audit.Path = requestData.PathAndQuery;
 						var response = _connection.Request<SniffResponse>(requestData);
+						d.EndState = response;
+						
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success)
@@ -451,14 +460,16 @@ namespace Elasticsearch.Net
 			var exceptions = new List<Exception>();
 			foreach (var node in SniffNodes)
 			{
-				using (var audit = Audit(SniffSuccess))
+				var requestData = CreateSniffRequestData(node);
+				using (var audit = Audit(SniffSuccess, node))
+				using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Sniff, requestData))
 				{
-					audit.Node = node;
 					try
 					{
-						var requestData = CreateSniffRequestData(node);
 						audit.Path = requestData.PathAndQuery;
 						var response = await _connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
+						d.EndState = response;
+						
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success)
@@ -533,11 +544,10 @@ namespace Elasticsearch.Net
 			(RequestConfiguration?.DisablePing).GetValueOrDefault(false)
 			|| _settings.DisablePings || !_connectionPool.SupportsPinging || !node.IsResurrected;
 
-		private Auditable Audit(AuditEvent type) => new Auditable(type, AuditTrail, _dateTimeProvider);
+		private Auditable Audit(AuditEvent type, Node node = null) => new Auditable(type, AuditTrail, _dateTimeProvider, node);
 
-		private RequestData CreatePingRequestData(Node node, Auditable audit)
+		private RequestData CreatePingRequestData(Node node)
 		{
-			audit.Node = node;
 
 			var requestOverrides = new RequestConfiguration
 			{
@@ -551,7 +561,6 @@ namespace Elasticsearch.Net
 			requestParameters.RequestConfiguration = requestOverrides;
 
 			var data = new RequestData(HttpMethod.HEAD, "/", null, _settings, requestParameters, _memoryStreamFactory) { Node = node };
-			audit.Path = data.PathAndQuery;
 			return data;
 		}
 
@@ -567,7 +576,7 @@ namespace Elasticsearch.Net
 
 		private void LazyAuditable(AuditEvent e, Node n)
 		{
-			using (new Auditable(e, AuditTrail, _dateTimeProvider) { Node = n }) { }
+			using (new Auditable(e, AuditTrail, _dateTimeProvider, n)) { }
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>

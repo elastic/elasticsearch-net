@@ -8,11 +8,11 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
-	internal class InternalSerializer : IElasticsearchSerializer
+	internal class DefaultHighLevelSerializer : IElasticsearchSerializer, IInternalSerializerWithFormatter
 	{
 		internal const int DefaultBufferSize = 1024;
 
-		public InternalSerializer(IJsonFormatterResolver formatterResolver) => FormatterResolver = formatterResolver;
+		public DefaultHighLevelSerializer(IJsonFormatterResolver formatterResolver) => FormatterResolver = formatterResolver;
 
 		public IJsonFormatterResolver FormatterResolver { get; }
 
@@ -26,7 +26,7 @@ namespace Nest
 
 		public T Deserialize<T>(Stream stream)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
+			if (stream == null || stream.CanSeek && stream.Length == 0) return default;
 
 			return JsonSerializer.Deserialize<T>(stream, FormatterResolver);
 		}
@@ -38,14 +38,14 @@ namespace Nest
 			return JsonSerializer.NonGeneric.Deserialize(type, stream, FormatterResolver);
 		}
 
-		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(default(T));
 
 			return JsonSerializer.DeserializeAsync<T>(stream, FormatterResolver);
 		}
 
-		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
 
@@ -56,7 +56,7 @@ namespace Nest
 			JsonSerializer.Serialize(writableStream, data, FormatterResolver);
 
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) => JsonSerializer.SerializeAsync(stream, data, FormatterResolver);
 	}
 }

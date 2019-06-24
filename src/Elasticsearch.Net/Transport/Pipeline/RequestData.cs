@@ -20,6 +20,7 @@ namespace Elasticsearch.Net
 		)
 			: this(method, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
+			_path = path;
 			CustomResponseBuilder = local?.CustomResponseBuilder;
 			PathAndQuery = CreatePathWithQueryStrings(path, ConnectionSettings, local);
 		}
@@ -78,7 +79,9 @@ namespace Elasticsearch.Net
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
 		}
-
+		
+		private readonly string _path;
+		
 		public string Accept { get; }
 		public IEnumerable<int> AllowedStatusCodes { get; }
 
@@ -118,6 +121,9 @@ namespace Elasticsearch.Net
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 
+		public override string ToString() => $"{Method.GetStringValue()} {_path}";
+
+		// TODO This feels like its in the wrong place
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
 			path = path ?? string.Empty;

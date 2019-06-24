@@ -85,9 +85,13 @@ namespace Nest
 			: base(connectionPool, connection, null)
 		{
 			var formatterResolver = new NestFormatterResolver(this);
-			var defaultSerializer = new InternalSerializer(formatterResolver);
-			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
-			UseThisRequestResponseSerializer = defaultSerializer;
+			var defaultSerializer = new DefaultHighLevelSerializer(formatterResolver);
+			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
+			
+			//We wrap these in an internal proxy to facilitate diagnostics
+			_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source"); 
+			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
+			
 			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
 			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
