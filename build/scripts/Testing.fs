@@ -43,7 +43,7 @@ module Tests =
             | (_, true) -> ["--framework"; "netcoreapp2.1"] |> List.append p
             | (Commandline.MultiTarget.One, _) ->
                 let random = new Random()
-                let fw = DotNetFramework.All |> List.sortBy (fun _ -> random.Next()) |> List.head
+                let fw = DotNetFramework.AllTests |> List.sortBy (fun _ -> random.Next()) |> List.head
                 ["--framework"; fw.Identifier.MSBuild] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =

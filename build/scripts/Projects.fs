@@ -8,7 +8,8 @@ module Projects =
         | NetStandard2_0
         | Net461
         | NetCoreApp2_1
-        static member All = [NetStandard2_0; Net461] 
+        static member All = [NetStandard2_0; Net461]
+        static member AllTests = [NetCoreApp2_1; Net461] 
         member this.Identifier = 
             match this with
             | NetStandard2_0 -> { MSBuild = "netstandard2.0"; Nuget = "netstandard2.0"; DefineConstants = ""; }
