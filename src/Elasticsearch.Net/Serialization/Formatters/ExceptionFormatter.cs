@@ -109,8 +109,29 @@ namespace Elasticsearch.Net
 			}
 
 			var flattenedExceptions = FlattenExceptions(value);
-			var formatter = formatterResolver.GetFormatter<List<Dictionary<string, object>>>();
-			formatter.Serialize(ref writer, flattenedExceptions, formatterResolver);
+			var valueFormatter = formatterResolver.GetFormatter<object>();
+
+			writer.WriteBeginArray();
+			for (int i = 0; i < flattenedExceptions.Count; i++)
+			{
+				if (i > 0)
+					writer.WriteValueSeparator();
+
+				var flattenedException = flattenedExceptions[i];
+				writer.WriteBeginObject();
+				var count = 0;
+				foreach (var kv in flattenedException)
+				{
+					if (count > 0)
+						writer.WriteValueSeparator();
+
+					writer.WritePropertyName(kv.Key);
+					valueFormatter.Serialize(ref writer, kv.Value, formatterResolver);
+					count++;
+				}
+				writer.WriteEndObject();
+			}
+			writer.WriteEndArray();
 		}
 
 		public Exception Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>

@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Serialization;
 
 namespace Tests.Framework.SerializationTests
@@ -24,6 +27,20 @@ namespace Tests.Framework.SerializationTests
 			});
 
 			SerializationTestHelper.Object(isADictionary).RoundTrips(ExpectJson);
+		}
+
+		[U]
+		public void SerializesIsADictionaryNullValues()
+		{
+			var isADictionary = new MyIsADictionary(new Dictionary<object, object>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			});
+
+			var client = new ElasticClient();
+			client.RequestResponseSerializer.SerializeToString(isADictionary).Should().Be("{\"key1\":null,\"key2\":\"value2\"}");
+			client.SourceSerializer.SerializeToString(isADictionary).Should().Be("{\"key1\":null,\"key2\":\"value2\"}");
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -119,6 +136,54 @@ namespace Tests.Framework.SerializationTests
 			};
 
 			SerializationTestHelper.Object(hashTable).RoundTrips(ExpectJson);
+		}
+
+		[U]
+		public void DoesNotSerializeDictionaryNullValues()
+		{
+			var dictionary = new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			};
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+		}
+
+		[U]
+		public void DoesNotSerializeIDictionaryNullValues()
+		{
+			IDictionary<string, string> dictionary = new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			};
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+		}
+
+		[U]
+		public void DoesNotSerializeReadOnlyDictionaryNullValues()
+		{
+			var dictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			});
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+		}
+
+		[U]
+		public void DoesNotSerializeIReadOnlyDictionaryNullValues()
+		{
+			IReadOnlyDictionary<string, string> dictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			});
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
 		}
 
 		private class MyDictionary : IDictionary

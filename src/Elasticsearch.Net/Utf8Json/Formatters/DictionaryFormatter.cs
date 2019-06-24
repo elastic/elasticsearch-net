@@ -34,6 +34,8 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         where TDictionary : class, IEnumerable<KeyValuePair<TKey, TValue>>
         where TEnumerator : IEnumerator<KeyValuePair<TKey, TValue>>
     {
+		protected bool SkipValue(TValue value) => value == null;
+
         public void Serialize(ref JsonWriter writer, TDictionary value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -51,14 +53,20 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 var e = GetSourceEnumerator(value);
                 try
                 {
+					var written = 0;
                     if (keyFormatter != null)
                     {
                         if (e.MoveNext())
                         {
                             var item = e.Current;
-                            keyFormatter.SerializeToPropertyName(ref writer, item.Key, formatterResolver);
-                            writer.WriteNameSeparator();
-                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+
+							if (!SkipValue(item.Value))
+							{
+	                            keyFormatter.SerializeToPropertyName(ref writer, item.Key, formatterResolver);
+	                            writer.WriteNameSeparator();
+	                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+								written++;
+							}
                         }
                         else
                         {
@@ -67,11 +75,17 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
                         while (e.MoveNext())
                         {
-                            writer.WriteValueSeparator();
+
                             var item = e.Current;
-                            keyFormatter.SerializeToPropertyName(ref writer, item.Key, formatterResolver);
-                            writer.WriteNameSeparator();
-                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+							if (!SkipValue(item.Value))
+							{
+								if (written > 0)
+									writer.WriteValueSeparator();
+	                            keyFormatter.SerializeToPropertyName(ref writer, item.Key, formatterResolver);
+	                            writer.WriteNameSeparator();
+	                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+								written++;
+							}
                         }
                     }
                     else
@@ -79,9 +93,13 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         if (e.MoveNext())
                         {
                             var item = e.Current;
-                            writer.WriteString(item.Key.ToString());
-                            writer.WriteNameSeparator();
-                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+							if (!SkipValue(item.Value))
+							{
+								written++;
+	                            writer.WriteString(item.Key.ToString());
+	                            writer.WriteNameSeparator();
+	                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+							}
                         }
                         else
                         {
@@ -90,11 +108,17 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
                         while (e.MoveNext())
                         {
-                            writer.WriteValueSeparator();
-                            var item = e.Current;
-                            writer.WriteString(item.Key.ToString());
-                            writer.WriteNameSeparator();
-                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+							var item = e.Current;
+							if (!SkipValue(item.Value))
+							{
+								if (written > 0)
+									writer.WriteValueSeparator();
+
+								writer.WriteString(item.Key.ToString());
+	                            writer.WriteNameSeparator();
+	                            valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
+								written++;
+							}
                         }
                     }
                 }
@@ -164,8 +188,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             return intermediateCollection;
         }
     }
-
-
+	
 	internal sealed class DictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, Dictionary<TKey, TValue>.Enumerator, Dictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
