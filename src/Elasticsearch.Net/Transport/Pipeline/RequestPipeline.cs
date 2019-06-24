@@ -229,7 +229,6 @@ namespace Elasticsearch.Net
 				exceptionMessage = "Maximum number of retries reached";
 
 				var now = _dateTimeProvider.Now();
-				// TODO make AliveNodes on IConnectionPool public in 7.0 (default interface C# 8 FTW)
 				var activeNodes = _connectionPool.Nodes.Count(n => n.IsAlive || n.DeadUntil <= now);
 				if (Retried >= activeNodes)
 				{

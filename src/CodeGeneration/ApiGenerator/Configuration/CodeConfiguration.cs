@@ -11,10 +11,14 @@ namespace ApiGenerator.Configuration
 		/// <summary> These API"s are not implemented yet in the low and high level client</summary>
 		public static string[] IgnoredApis { get; } =
 		{
-			// these API's are not ready for primetime yet
+			// APIs is no longer useful and will be removed
+			"indices.upgrade.json",
+			"indices.get_upgrade.json",
+
+			// these APIs are not ready for primetime yet
 			"rank_eval.json",
 
-			// these API's are new and need to be mapped
+			// these APIs are new and need to be mapped
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",

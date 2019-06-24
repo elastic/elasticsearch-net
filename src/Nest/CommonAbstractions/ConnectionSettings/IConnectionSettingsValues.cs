@@ -13,7 +13,7 @@ namespace Nest
 		/// <summary>
 		/// Specifies how field names are inferred from CLR property names.
 		/// <para></para>
-		/// By default, NEST camel cases property names
+		/// By default, NEST camel cases property names.
 		/// </summary>
 		/// <example>
 		/// CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name

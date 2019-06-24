@@ -6,7 +6,8 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Helper method that can parallelize a scroll using the sliced scroll feature of elasticsearch and return the results as an IObservable.
+		/// Helper method that can parallelize a scroll using the sliced scroll feature of Elasticsearch, and return the results as an
+		/// <see cref="IObservable{T}"/>.
 		/// </summary>
 		/// <param name="scrollTime">The time to keep the scroll active on the server until we send another scroll request</param>
 		/// <param name="numberOfSlices">
@@ -19,7 +20,8 @@ namespace Nest
 			where T : class;
 
 		/// <summary>
-		/// Helper method that can parallelize a scroll using the sliced scroll feature of elasticsearch and return the results as an IObservable.
+		/// Helper method that can parallelize a scroll using the sliced scroll feature of Elasticsearch and return the results as an
+		/// <see cref="IObservable{T}"/>.
 		/// </summary>
 		IObservable<ScrollAllResponse<T>> ScrollAll<T>(IScrollAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;

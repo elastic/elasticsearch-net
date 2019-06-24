@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.SecurityApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for Authenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+	///<summary>descriptor for Authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 	public partial class AuthenticateDescriptor : RequestDescriptorBase<AuthenticateDescriptor, AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityAuthenticate;
@@ -38,7 +38,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+	///<summary>descriptor for ChangePassword <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 	public partial class ChangePasswordDescriptor : RequestDescriptorBase<ChangePasswordDescriptor, ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityChangePassword;
@@ -62,7 +62,7 @@ namespace Nest
 		public ChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for ClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+	///<summary>descriptor for ClearCachedRealms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 	public partial class ClearCachedRealmsDescriptor : RequestDescriptorBase<ClearCachedRealmsDescriptor, ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearCachedRealms;
@@ -85,7 +85,7 @@ namespace Nest
 		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => Qs("usernames", usernames);
 	}
 
-	///<summary>descriptor for ClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+	///<summary>descriptor for ClearCachedRoles <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</para></summary>
 	public partial class ClearCachedRolesDescriptor : RequestDescriptorBase<ClearCachedRolesDescriptor, ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearCachedRoles;
@@ -106,7 +106,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for CreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	///<summary>descriptor for CreateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 	public partial class CreateApiKeyDescriptor : RequestDescriptorBase<CreateApiKeyDescriptor, CreateApiKeyRequestParameters, ICreateApiKeyRequest>, ICreateApiKeyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityCreateApiKey;
@@ -116,7 +116,7 @@ namespace Nest
 		public CreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for DeletePrivileges <pre>TODO</pre></summary>
+	///<summary>descriptor for DeletePrivileges <para>TODO</para></summary>
 	public partial class DeletePrivilegesDescriptor : RequestDescriptorBase<DeletePrivilegesDescriptor, DeletePrivilegesRequestParameters, IDeletePrivilegesRequest>, IDeletePrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeletePrivileges;
@@ -141,7 +141,7 @@ namespace Nest
 		public DeletePrivilegesDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for DeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+	///<summary>descriptor for DeleteRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</para></summary>
 	public partial class DeleteRoleDescriptor : RequestDescriptorBase<DeleteRoleDescriptor, DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRole;
@@ -164,7 +164,7 @@ namespace Nest
 		public DeleteRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for DeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+	///<summary>descriptor for DeleteRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</para></summary>
 	public partial class DeleteRoleMappingDescriptor : RequestDescriptorBase<DeleteRoleMappingDescriptor, DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRoleMapping;
@@ -187,7 +187,7 @@ namespace Nest
 		public DeleteRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for DeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+	///<summary>descriptor for DeleteUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</para></summary>
 	public partial class DeleteUserDescriptor : RequestDescriptorBase<DeleteUserDescriptor, DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteUser;
@@ -210,7 +210,7 @@ namespace Nest
 		public DeleteUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for DisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+	///<summary>descriptor for DisableUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</para></summary>
 	public partial class DisableUserDescriptor : RequestDescriptorBase<DisableUserDescriptor, DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDisableUser;
@@ -233,7 +233,7 @@ namespace Nest
 		public DisableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for EnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+	///<summary>descriptor for EnableUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</para></summary>
 	public partial class EnableUserDescriptor : RequestDescriptorBase<EnableUserDescriptor, EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityEnableUser;
@@ -256,7 +256,7 @@ namespace Nest
 		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for GetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	///<summary>descriptor for GetApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 	public partial class GetApiKeyDescriptor : RequestDescriptorBase<GetApiKeyDescriptor, GetApiKeyRequestParameters, IGetApiKeyRequest>, IGetApiKeyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetApiKey;
@@ -272,7 +272,7 @@ namespace Nest
 		public GetApiKeyDescriptor Username(string username) => Qs("username", username);
 	}
 
-	///<summary>descriptor for GetPrivileges <pre>TODO</pre></summary>
+	///<summary>descriptor for GetPrivileges <para>TODO</para></summary>
 	public partial class GetPrivilegesDescriptor : RequestDescriptorBase<GetPrivilegesDescriptor, GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetPrivileges;
@@ -304,7 +304,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+	///<summary>descriptor for GetRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 	public partial class GetRoleDescriptor : RequestDescriptorBase<GetRoleDescriptor, GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRole;
@@ -326,7 +326,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+	///<summary>descriptor for GetRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 	public partial class GetRoleMappingDescriptor : RequestDescriptorBase<GetRoleMappingDescriptor, GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
@@ -348,7 +348,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	///<summary>descriptor for GetUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</para></summary>
 	public partial class GetUserAccessTokenDescriptor : RequestDescriptorBase<GetUserAccessTokenDescriptor, GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetUserAccessToken;
@@ -356,7 +356,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+	///<summary>descriptor for GetUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 	public partial class GetUserDescriptor : RequestDescriptorBase<GetUserDescriptor, GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetUser;
@@ -378,7 +378,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	///<summary>descriptor for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 	public partial class GetUserPrivilegesDescriptor : RequestDescriptorBase<GetUserPrivilegesDescriptor, GetUserPrivilegesRequestParameters, IGetUserPrivilegesRequest>, IGetUserPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetUserPrivileges;
@@ -386,7 +386,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for HasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	///<summary>descriptor for HasPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 	public partial class HasPrivilegesDescriptor : RequestDescriptorBase<HasPrivilegesDescriptor, HasPrivilegesRequestParameters, IHasPrivilegesRequest>, IHasPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityHasPrivileges;
@@ -409,7 +409,7 @@ namespace Nest
 	//TODO THIS METHOD IS UNMAPPED!
 	}
 
-	///<summary>descriptor for InvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	///<summary>descriptor for InvalidateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
 	public partial class InvalidateApiKeyDescriptor : RequestDescriptorBase<InvalidateApiKeyDescriptor, InvalidateApiKeyRequestParameters, IInvalidateApiKeyRequest>, IInvalidateApiKeyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityInvalidateApiKey;
@@ -417,7 +417,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for InvalidateUserAccessToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	///<summary>descriptor for InvalidateUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</para></summary>
 	public partial class InvalidateUserAccessTokenDescriptor : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityInvalidateUserAccessToken;
@@ -425,7 +425,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutPrivileges <pre>TODO</pre></summary>
+	///<summary>descriptor for PutPrivileges <para>TODO</para></summary>
 	public partial class PutPrivilegesDescriptor : RequestDescriptorBase<PutPrivilegesDescriptor, PutPrivilegesRequestParameters, IPutPrivilegesRequest>, IPutPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutPrivileges;
@@ -435,7 +435,7 @@ namespace Nest
 		public PutPrivilegesDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for PutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+	///<summary>descriptor for PutRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</para></summary>
 	public partial class PutRoleDescriptor : RequestDescriptorBase<PutRoleDescriptor, PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRole;
@@ -458,7 +458,7 @@ namespace Nest
 		public PutRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for PutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+	///<summary>descriptor for PutRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 	public partial class PutRoleMappingDescriptor : RequestDescriptorBase<PutRoleMappingDescriptor, PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRoleMapping;
@@ -481,7 +481,7 @@ namespace Nest
 		public PutRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for PutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+	///<summary>descriptor for PutUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</para></summary>
 	public partial class PutUserDescriptor : RequestDescriptorBase<PutUserDescriptor, PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutUser;
@@ -504,7 +504,7 @@ namespace Nest
 		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>descriptor for GetCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	///<summary>descriptor for GetCertificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 	public partial class GetCertificatesDescriptor : RequestDescriptorBase<GetCertificatesDescriptor, GetCertificatesRequestParameters, IGetCertificatesRequest>, IGetCertificatesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetCertificates;

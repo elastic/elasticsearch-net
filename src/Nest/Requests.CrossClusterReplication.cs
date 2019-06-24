@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
+	///<summary>Request for DeleteAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 	public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
 	{
 		protected IDeleteAutoFollowPatternRequest Self => this;
@@ -74,7 +74,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CreateFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+	///<summary>Request for CreateFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
 	public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
 	{
 		protected ICreateFollowIndexRequest Self => this;
@@ -116,7 +116,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for FollowIndexStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+	///<summary>Request for FollowIndexStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 	public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
 	{
 		protected IFollowIndexStatsRequest Self => this;
@@ -149,7 +149,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
+	///<summary>Request for GetAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 	public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
 	{
 		protected IGetAutoFollowPatternRequest Self => this;
@@ -181,7 +181,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PauseFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+	///<summary>Request for PauseFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 	public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
 	{
 		protected IPauseFollowIndexRequest Self => this;
@@ -214,7 +214,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CreateAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+	///<summary>Request for CreateAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
 	public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
 	{
 		protected ICreateAutoFollowPatternRequest Self => this;
@@ -247,7 +247,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ResumeFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+	///<summary>Request for ResumeFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
 	public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
 	{
 		protected IResumeFollowIndexRequest Self => this;
@@ -275,7 +275,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Stats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
+	///<summary>Request for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
 	public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
 	{
 		protected ICcrStatsRequest Self => this;
@@ -294,7 +294,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UnfollowIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+	///<summary>Request for UnfollowIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
 	{
 		protected IUnfollowIndexRequest Self => this;

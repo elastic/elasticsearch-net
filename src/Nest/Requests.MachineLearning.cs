@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+	///<summary>Request for CloseJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
 		protected ICloseJobRequest Self => this;
@@ -94,7 +94,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendar <pre></pre></summary>
+	///<summary>Request for DeleteCalendar <para></para></summary>
 	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 	{
 		protected IDeleteCalendarRequest Self => this;
@@ -133,7 +133,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendarEvent <pre></pre></summary>
+	///<summary>Request for DeleteCalendarEvent <para></para></summary>
 	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 	{
 		protected IDeleteCalendarEventRequest Self => this;
@@ -175,7 +175,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendarJob <pre></pre></summary>
+	///<summary>Request for DeleteCalendarJob <para></para></summary>
 	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 	{
 		protected IDeleteCalendarJobRequest Self => this;
@@ -211,7 +211,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+	///<summary>Request for DeleteDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
 		protected IDeleteDatafeedRequest Self => this;
@@ -245,7 +245,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for DeleteExpiredData <pre></pre></summary>
+	///<summary>Request for DeleteExpiredData <para></para></summary>
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
@@ -264,7 +264,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteFilter <pre></pre></summary>
+	///<summary>Request for DeleteFilter <para></para></summary>
 	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
 	{
 		protected IDeleteFilterRequest Self => this;
@@ -303,7 +303,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	///<summary>Request for DeleteForecast <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
 	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
 	{
 		protected IDeleteForecastRequest Self => this;
@@ -352,7 +352,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+	///<summary>Request for DeleteJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
 	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
 		protected IDeleteJobRequest Self => this;
@@ -404,7 +404,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+	///<summary>Request for DeleteModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</para></summary>
 	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
 		protected IDeleteModelSnapshotRequest Self => this;
@@ -440,7 +440,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for FlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+	///<summary>Request for FlushJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
 		protected IFlushJobRequest Self => this;
@@ -479,7 +479,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ForecastJob <pre></pre></summary>
+	///<summary>Request for ForecastJob <para></para></summary>
 	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 	{
 		protected IForecastJobRequest Self => this;
@@ -518,7 +518,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+	///<summary>Request for GetBuckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
 		protected IGetBucketsRequest Self => this;
@@ -560,7 +560,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCalendarEvents <pre></pre></summary>
+	///<summary>Request for GetCalendarEvents <para></para></summary>
 	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 	{
 		protected IGetCalendarEventsRequest Self => this;
@@ -613,7 +613,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCalendars <pre></pre></summary>
+	///<summary>Request for GetCalendars <para></para></summary>
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 	{
 		protected IGetCalendarsRequest Self => this;
@@ -651,7 +651,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+	///<summary>Request for GetCategories <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
 		protected IGetCategoriesRequest Self => this;
@@ -693,7 +693,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+	///<summary>Request for GetDatafeedStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
 		protected IGetDatafeedStatsRequest Self => this;
@@ -731,7 +731,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+	///<summary>Request for GetDatafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
 	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
 		protected IGetDatafeedsRequest Self => this;
@@ -769,7 +769,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetFilters <pre></pre></summary>
+	///<summary>Request for GetFilters <para></para></summary>
 	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
 	{
 		protected IGetFiltersRequest Self => this;
@@ -814,7 +814,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+	///<summary>Request for GetInfluencers <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
 		protected IGetInfluencersRequest Self => this;
@@ -847,7 +847,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+	///<summary>Request for GetJobStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
 		protected IGetJobStatsRequest Self => this;
@@ -885,7 +885,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+	///<summary>Request for GetJobs <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
 	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
 		protected IGetJobsRequest Self => this;
@@ -929,7 +929,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+	///<summary>Request for GetModelSnapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
 		protected IGetModelSnapshotsRequest Self => this;
@@ -971,7 +971,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	///<summary>Request for GetOverallBuckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
 	{
 		protected IGetOverallBucketsRequest Self => this;
@@ -1004,7 +1004,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetAnomalyRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	///<summary>Request for GetAnomalyRecords <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
 		protected IGetAnomalyRecordsRequest Self => this;
@@ -1032,7 +1032,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Info <pre></pre></summary>
+	///<summary>Request for Info <para></para></summary>
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
 		protected IMachineLearningInfoRequest Self => this;
@@ -1051,7 +1051,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for OpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+	///<summary>Request for OpenJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
 		protected IOpenJobRequest Self => this;
@@ -1084,7 +1084,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PostCalendarEvents <pre></pre></summary>
+	///<summary>Request for PostCalendarEvents <para></para></summary>
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 	{
 		protected IPostCalendarEventsRequest Self => this;
@@ -1117,7 +1117,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PostJobData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	///<summary>Request for PostJobData <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
 	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
 		protected IPostJobDataRequest Self => this;
@@ -1163,7 +1163,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+	///<summary>Request for PreviewDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
 		protected IPreviewDatafeedRequest Self => this;
@@ -1196,7 +1196,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutCalendar <pre></pre></summary>
+	///<summary>Request for PutCalendar <para></para></summary>
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 	{
 		protected IPutCalendarRequest Self => this;
@@ -1235,7 +1235,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutCalendarJob <pre></pre></summary>
+	///<summary>Request for PutCalendarJob <para></para></summary>
 	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 	{
 		protected IPutCalendarJobRequest Self => this;
@@ -1271,7 +1271,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+	///<summary>Request for PutDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
 		protected IPutDatafeedRequest Self => this;
@@ -1304,7 +1304,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutFilter <pre></pre></summary>
+	///<summary>Request for PutFilter <para></para></summary>
 	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
 	{
 		protected IPutFilterRequest Self => this;
@@ -1337,7 +1337,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+	///<summary>Request for PutJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
 		protected IPutJobRequest Self => this;
@@ -1376,7 +1376,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for RevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+	///<summary>Request for RevertModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
 		protected IRevertModelSnapshotRequest Self => this;
@@ -1412,7 +1412,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+	///<summary>Request for StartDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
 		protected IStartDatafeedRequest Self => this;
@@ -1445,7 +1445,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+	///<summary>Request for StopDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
 		protected IStopDatafeedRequest Self => this;
@@ -1484,7 +1484,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+	///<summary>Request for UpdateDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
 	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
 		protected IUpdateDatafeedRequest Self => this;
@@ -1517,7 +1517,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateFilter <pre></pre></summary>
+	///<summary>Request for UpdateFilter <para></para></summary>
 	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
 	{
 		protected IUpdateFilterRequest Self => this;
@@ -1550,7 +1550,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+	///<summary>Request for UpdateJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
 		protected IUpdateJobRequest Self => this;
@@ -1589,7 +1589,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+	///<summary>Request for UpdateModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</para></summary>
 	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
 		protected IUpdateModelSnapshotRequest Self => this;
@@ -1620,7 +1620,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateJob <pre></pre></summary>
+	///<summary>Request for ValidateJob <para></para></summary>
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
@@ -1634,7 +1634,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateDetector <pre></pre></summary>
+	///<summary>Request for ValidateDetector <para></para></summary>
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;

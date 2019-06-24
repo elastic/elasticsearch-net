@@ -166,7 +166,7 @@ namespace Nest
 
 		private static void SetKnownIndexSettings(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IIndexSettings s)
 		{
-			// TODO: Fix this. May need to use dynamic here, and flatten from it
+			// TODO: Ugly. Could use dynamic dictionary here, and use get traversal logic
 			var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
 			var settings = Flatten(formatter.Deserialize(ref reader, formatterResolver));
 

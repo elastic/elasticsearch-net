@@ -6,8 +6,8 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>
-	/// Contains aggregates that are returned by Elasticsearch. In NEST `Aggregation` always refers to an aggregation
-	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
+	/// Contains aggregates that are returned by Elasticsearch. In NEST, Aggregation always refers to an aggregation
+	/// request to Elasticsearch and an Aggregate describes an aggregation response.
 	/// </summary>
 	[JsonFormatter(typeof(AggregateDictionaryFormatter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
@@ -212,12 +212,8 @@ namespace Nest
 
 		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
 
-		private TAggregate TryGet<TAggregate>(string key)
-			where TAggregate : class, IAggregate
-		{
-			IAggregate agg;
-			return BackingDictionary.TryGetValue(key, out agg) ? agg as TAggregate : null;
-		}
+		private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate =>
+			BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 
 		private MultiBucketAggregate<TBucket> GetMultiBucketAggregate<TBucket>(string key)
 			where TBucket : IBucket
@@ -228,7 +224,7 @@ namespace Nest
 			return new MultiBucketAggregate<TBucket>
 			{
 				Buckets = bucket.Items.OfType<TBucket>().ToList(),
-				Meta = bucket.Meta,
+				Meta = bucket.Meta
 			};
 		}
 
@@ -240,7 +236,7 @@ namespace Nest
 			return new MultiBucketAggregate<KeyedBucket<TKey>>
 			{
 				Buckets = GetKeyedBuckets<TKey>(bucket.Items).ToList(),
-				Meta = bucket.Meta,
+				Meta = bucket.Meta
 			};
 		}
 

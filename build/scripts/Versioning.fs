@@ -111,7 +111,7 @@ module Versioning =
         
         let valid = (out.ExitCode, out.Output |> Seq.findIndex(fun s -> s.Line.Contains("is valid")))
         match valid with
-        | (Some 0, i) when i >= 0 -> printfn "%s was signed correctly" name 
+        | (0, i) when i >= 0 -> printfn "%s was signed correctly" name 
         | (_, _) -> failwithf "{0} was not validly signed"
         
         let out = Tooling.read sn ["-T"; dll;]
@@ -122,7 +122,7 @@ module Versioning =
     
         let valid = (out.ExitCode, token)
         match valid with
-        | (Some 0, t) when t = officialToken  -> printfn "%s was signed with official key token %s" name t
+        | (0, t) when t = officialToken  -> printfn "%s was signed with official key token %s" name t
         | (_, t) -> printfn "%s was not signed with the official token: %s but %s" name officialToken t
         
     let private validateDllStrongName dll name =

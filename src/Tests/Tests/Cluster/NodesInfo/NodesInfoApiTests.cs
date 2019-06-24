@@ -118,6 +118,10 @@ namespace Tests.Cluster.NodesInfo
 			pool.KeepAlive.Should().NotBeNullOrWhiteSpace();
 			pool.Type.Should().Be("scaling");
 			pool.QueueSize.Should().BeGreaterOrEqualTo(-1);
+
+			// both should have a value for a scaling pool
+			pool.Core.Should().HaveValue();
+			pool.Max.Should().HaveValue();
 		}
 
 		protected void Assert(NodeInfoTransport transport)

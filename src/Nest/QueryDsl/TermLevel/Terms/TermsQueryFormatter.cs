@@ -27,7 +27,10 @@ namespace Nest
 		public ITermsQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			ITermsQuery query = new TermsQuery();
 			var count = 0;

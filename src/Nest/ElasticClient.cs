@@ -130,9 +130,9 @@ namespace Nest
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
-			var configuration = request.RequestParametersInternal.RequestConfiguration ?? new RequestConfiguration();
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			forceConfiguration(configuration);
-			request.RequestParametersInternal.RequestConfiguration = configuration;
+			request.RequestParameters.RequestConfiguration = configuration;
 		}
 
 		private static readonly int[] AllStatusCodes = { -1 };

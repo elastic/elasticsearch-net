@@ -150,55 +150,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).FromRequest(createIndexResponse);
 		}
 
-		public class ParentWithStringId : IgnoringProperties.Parent
-		{
-			public new string Id { get; set; }
-		}
-
-		[U]
-		public void OverridingInheritedProperties()
-		{
-			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
-				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
-				.DefaultMappingFor<ParentWithStringId>(m => m
-					.Ignore(p => p.Description)
-					.Ignore(p => p.IgnoreMe)
-				);
-
-			var client = new ElasticClient(connectionSettings);
-
-			var createIndexResponse = client.Indices.Create("myindex", c => c
-				.Map<ParentWithStringId>(m => m
-					.AutoMap()
-				)
-			);
-
-			// json
-			var expected = new
-			{
-				mappings = new
-				{
-					properties = new
-					{
-						id = new
-						{
-							type = "text",
-							fields = new
-							{
-								keyword = new
-								{
-									ignore_above = 256,
-									type = "keyword"
-								}
-							}
-						}
-					}
-				}
-			};
-
-			// hide
-			Expect(expected).FromRequest(createIndexResponse);
-		}
 		/**
 		 * Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
 		 * In this example,
@@ -211,6 +162,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 *
 		 * and the remaining string properties as multi field `text` datatypes, each with a `keyword` datatype
 		 * sub field.
+		 *
+		 * [float]
+		 * [[inferred-dotnet-type-mapping]]
+		 * === Inferred .NET type mapping
 		 *
 		 * NEST has inferred mapping support for the following .NET types
 		 *
@@ -236,13 +191,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * and supports a number of special types defined in NEST
 		 *
 		 * [horizontal]
+		 * `Nest.QueryContainer`:: maps to `"percolator"`
 		 * `Nest.GeoLocation`:: maps to `"geo_point"`
+		 * `Nest.IGeoShape`:: maps to `"geo_shape"`
 		 * `Nest.CompletionField`:: maps to `"completion"`
 		 * `Nest.DateRange`:: maps to `"date_range"`
 		 * `Nest.DoubleRange`:: maps to `"double_range"`
 		 * `Nest.FloatRange`:: maps to `"float_range"`
 		 * `Nest.IntegerRange`:: maps to `"integer_range"`
 		 * `Nest.LongRange`:: maps to `"long_range"`
+		 * `Nest.IpAddressRange`:: maps to `"ip_range"`
 		 *
 		 * All other types map to `"object"` by default.
 		 *
@@ -263,7 +221,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * For a conversion from `decimal` to `float` or `double`, the `decimal` value is rounded to the nearest `double` or `float` value.
 		 * While this conversion may lose precision, it never causes an exception to be thrown.
 		 *
-		 * This conversion causes an exception to be thrown at deserialization time for `Decimal.MinValue` and `Decimal.MaxValue` because, at
+		 * This conversion does cause an exception to be thrown at deserialization time for `Decimal.MinValue` and `Decimal.MaxValue` because, at
 		 * serialization time, the nearest `double` value that is converted to is outside of the bounds of `Decimal.MinValue` or `Decimal.MaxValue`,
 		 * respectively. In these cases, it is advisable to use `double` as the POCO property type.
 		 * --

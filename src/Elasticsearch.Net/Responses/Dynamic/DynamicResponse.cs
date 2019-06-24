@@ -4,6 +4,6 @@
 	{
 		public DynamicResponse() { }
 
-		public DynamicResponse(DynamicBody body) => Body = body;
+		public DynamicResponse(DynamicDictionary dictionary) => Body = dictionary;
 	}
 }

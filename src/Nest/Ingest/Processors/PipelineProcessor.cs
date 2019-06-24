@@ -7,7 +7,6 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IPipelineProcessor : IProcessor
 	{
-		//TODO 7.x: this property clashes with the Name property on the IProcessor, need to rename base in master
 		/// <summary>The name of the pipeline to execute. </summary>
 		[DataMember(Name = "name")]
 		string ProcessorName { get; set; }

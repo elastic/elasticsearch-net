@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for DeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
+	///<summary>descriptor for DeleteAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 	public partial class DeleteAutoFollowPatternDescriptor : RequestDescriptorBase<DeleteAutoFollowPatternDescriptor, DeleteAutoFollowPatternRequestParameters, IDeleteAutoFollowPatternRequest>, IDeleteAutoFollowPatternRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationDeleteAutoFollowPattern;
@@ -51,7 +51,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for CreateFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+	///<summary>descriptor for CreateFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
 	public partial class CreateFollowIndexDescriptor : RequestDescriptorBase<CreateFollowIndexDescriptor, CreateFollowIndexRequestParameters, ICreateFollowIndexRequest>, ICreateFollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationCreateFollowIndex;
@@ -79,7 +79,7 @@ namespace Nest
 		public CreateFollowIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for FollowIndexStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+	///<summary>descriptor for FollowIndexStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 	public partial class FollowIndexStatsDescriptor : RequestDescriptorBase<FollowIndexStatsDescriptor, FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowIndexStats;
@@ -107,7 +107,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
+	///<summary>descriptor for GetAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 	public partial class GetAutoFollowPatternDescriptor : RequestDescriptorBase<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequestParameters, IGetAutoFollowPatternRequest>, IGetAutoFollowPatternRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationGetAutoFollowPattern;
@@ -129,7 +129,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PauseFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+	///<summary>descriptor for PauseFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 	public partial class PauseFollowIndexDescriptor : RequestDescriptorBase<PauseFollowIndexDescriptor, PauseFollowIndexRequestParameters, IPauseFollowIndexRequest>, IPauseFollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseFollowIndex;
@@ -155,7 +155,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for CreateAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+	///<summary>descriptor for CreateAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
 	public partial class CreateAutoFollowPatternDescriptor : RequestDescriptorBase<CreateAutoFollowPatternDescriptor, CreateAutoFollowPatternRequestParameters, ICreateAutoFollowPatternRequest>, ICreateAutoFollowPatternRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationCreateAutoFollowPattern;
@@ -176,7 +176,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ResumeFollowIndex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+	///<summary>descriptor for ResumeFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
 	public partial class ResumeFollowIndexDescriptor : RequestDescriptorBase<ResumeFollowIndexDescriptor, ResumeFollowIndexRequestParameters, IResumeFollowIndexRequest>, IResumeFollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeFollowIndex;
@@ -202,7 +202,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Stats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
+	///<summary>descriptor for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
 	public partial class CcrStatsDescriptor : RequestDescriptorBase<CcrStatsDescriptor, CcrStatsRequestParameters, ICcrStatsRequest>, ICcrStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationStats;
@@ -210,7 +210,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for UnfollowIndex <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+	///<summary>descriptor for UnfollowIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 	public partial class UnfollowIndexDescriptor : RequestDescriptorBase<UnfollowIndexDescriptor, UnfollowIndexRequestParameters, IUnfollowIndexRequest>, IUnfollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationUnfollowIndex;

@@ -35,8 +35,8 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix)
 {
 	///<summary>
-	/// Logically groups all @ns API's together so that they may be discovered more naturally.
-	/// <para>Not intended to be instantiated directly please defer to the <see cref="IElasticLowLevelClient.@ns"/> property
+	/// @(ns.SplitPascalCase()) APIs.
+	/// <para>Not intended to be instantiated directly. Use the <see cref="IElasticLowLevelClient.@ns"/> property
 	/// on <see cref="IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>

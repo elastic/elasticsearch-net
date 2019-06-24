@@ -159,7 +159,7 @@ namespace Elasticsearch.Net
 			{
 				using (var ms = memoryStreamFactory.Create(bytes))
 				{
-					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicBody>(ms);
+					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicDictionary>(ms);
 					cs = new DynamicResponse(body) as TResponse;
 				}
 			}

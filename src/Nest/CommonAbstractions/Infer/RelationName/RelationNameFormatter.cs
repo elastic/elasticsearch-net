@@ -12,6 +12,7 @@ namespace Nest
 				return relationName;
 			}
 
+			reader.ReadNextBlock();
 			return null;
 		}
 

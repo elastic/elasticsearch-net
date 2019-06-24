@@ -15,14 +15,13 @@ namespace Nest
 		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
 
-		// TODO refactor RequestParameters
 		[IgnoreDataMember]
-		IRequestParameters RequestParametersInternal { get; }
+		IRequestParameters RequestParameters { get; }
 
 		string GetUrl(IConnectionSettingsValues settings);
 	}
 
-	public interface IRequest<TParameters> : IRequest
+	public interface IRequest<out TParameters> : IRequest
 		where TParameters : class, IRequestParameters, new()
 	{
 		/// <summary>
@@ -30,7 +29,7 @@ namespace Nest
 		/// overrides, etc.
 		/// </summary>
 		[IgnoreDataMember]
-		TParameters RequestParameters { get; }
+		new TParameters RequestParameters { get; }
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
@@ -63,6 +62,7 @@ namespace Nest
 
 		[IgnoreDataMember]
 		TParameters IRequest<TParameters>.RequestParameters => _parameters;
+		IRequestParameters IRequest.RequestParameters => _parameters;
 
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
@@ -71,7 +71,6 @@ namespace Nest
 
 		string IRequest.GetUrl(IConnectionSettingsValues settings) => ApiUrls.Resolve(RequestState.RouteValues, settings);
 
-		IRequestParameters IRequest.RequestParametersInternal => RequestState.RequestParameters;
 
 		/// <summary>
 		/// Allows a request implementation to set certain request parameter defaults, use sparingly!
@@ -116,18 +115,6 @@ namespace Nest
 		protected TInterface Self => _descriptor;
 
 		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
-
-		protected TDescriptor AssignParam(Action<TParameters> assigner)
-		{
-			assigner?.Invoke(RequestState.RequestParameters);
-			return _descriptor;
-		}
-
-		protected TDescriptor Qs(Action<TParameters> assigner)
-		{
-			assigner?.Invoke(RequestState.RequestParameters);
-			return _descriptor;
-		}
 
 		protected TDescriptor Qs(string name, object value)
 		{

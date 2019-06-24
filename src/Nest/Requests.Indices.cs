@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Analyze <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
+	///<summary>Request for Analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 		protected IAnalyzeRequest Self => this;
@@ -73,7 +73,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ClearCache <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
+	///<summary>Request for ClearCache <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
 		protected IClearCacheRequest Self => this;
@@ -156,7 +156,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Close <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+	///<summary>Request for Close <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 		protected ICloseIndexRequest Self => this;
@@ -226,7 +226,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
+	///<summary>Request for Create <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</para></summary>
 	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		protected ICreateIndexRequest Self => this;
@@ -286,7 +286,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
+	///<summary>Request for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 	public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 		protected IDeleteIndexRequest Self => this;
@@ -359,7 +359,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>Request for DeleteAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
 		protected IDeleteAliasRequest Self => this;
@@ -408,7 +408,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>Request for DeleteTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
 		protected IDeleteIndexTemplateRequest Self => this;
@@ -454,7 +454,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
+	///<summary>Request for Exists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
 		protected IIndexExistsRequest Self => this;
@@ -534,7 +534,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for AliasExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>Request for AliasExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		protected IAliasExistsRequest Self => this;
@@ -606,7 +606,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for TemplateExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>Request for TemplateExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
 		protected IIndexTemplateExistsRequest Self => this;
@@ -665,7 +665,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for TypeExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
+	///<summary>Request for TypeExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
 	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
 		protected ITypeExistsRequest Self => this;
@@ -731,7 +731,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Flush <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
+	///<summary>Request for Flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
 		protected IFlushRequest Self => this;
@@ -806,7 +806,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for SyncedFlush <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
+	///<summary>Request for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
 	public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
 		protected ISyncedFlushRequest Self => this;
@@ -861,7 +861,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ForceMerge <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
+	///<summary>Request for ForceMerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 	public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
 		protected IForceMergeRequest Self => this;
@@ -937,7 +937,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
+	///<summary>Request for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		protected IGetIndexRequest Self => this;
@@ -1031,7 +1031,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>Request for GetAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
 		protected IGetAliasRequest Self => this;
@@ -1114,7 +1114,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetFieldMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
+	///<summary>Request for GetFieldMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 	public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		protected IGetFieldMappingRequest Self => this;
@@ -1200,7 +1200,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
+	///<summary>Request for GetMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 	public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
 		protected IGetMappingRequest Self => this;
@@ -1282,7 +1282,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
+	///<summary>Request for GetSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 	public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 		protected IGetIndexSettingsRequest Self => this;
@@ -1380,7 +1380,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>Request for GetTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
 		protected IGetIndexTemplateRequest Self => this;
@@ -1430,61 +1430,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
-	{
-		[IgnoreDataMember]
-		Indices Index
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for UpgradeStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
-	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
-	{
-		protected IUpgradeStatusRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpgradeStatus;
-		///<summary>/_upgrade</summary>
-		public UpgradeStatusRequest(): base()
-		{
-		}
-
-		///<summary>/{index}/_upgrade</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public UpgradeStatusRequest(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-	}
-
-	[InterfaceDataContract]
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1494,7 +1439,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Open <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+	///<summary>Request for Open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
 		protected IOpenIndexRequest Self => this;
@@ -1577,7 +1522,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>Request for PutAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		protected IPutAliasRequest Self => this;
@@ -1630,7 +1575,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for PutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
+	///<summary>Request for PutMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
@@ -1722,7 +1667,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
+	///<summary>Request for UpdateSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 	public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
 		protected IUpdateIndexSettingsRequest Self => this;
@@ -1805,7 +1750,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>Request for PutTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
 		protected IPutIndexTemplateRequest Self => this;
@@ -1872,7 +1817,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for RecoveryStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
+	///<summary>Request for RecoveryStatus <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 	public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
 		protected IRecoveryStatusRequest Self => this;
@@ -1917,7 +1862,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Refresh <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
+	///<summary>Request for Refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
 		protected IRefreshRequest Self => this;
@@ -1978,7 +1923,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Rollover <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
+	///<summary>Request for Rollover <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 	public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
 		protected IRolloverIndexRequest Self => this;
@@ -2054,7 +1999,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Segments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
+	///<summary>Request for Segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
 		protected ISegmentsRequest Self => this;
@@ -2116,7 +2061,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ShardStores <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	///<summary>Request for ShardStores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
 		protected IIndicesShardStoresRequest Self => this;
@@ -2184,7 +2129,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Shrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
+	///<summary>Request for Shrink <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</para></summary>
 	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
 		protected IShrinkIndexRequest Self => this;
@@ -2246,7 +2191,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Split <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+	///<summary>Request for Split <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 	public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
 	{
 		protected ISplitIndexRequest Self => this;
@@ -2308,7 +2253,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+	///<summary>Request for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		protected IIndicesStatsRequest Self => this;
@@ -2391,7 +2336,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for BulkAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>Request for BulkAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		protected IBulkAliasRequest Self => this;
@@ -2414,75 +2359,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
-	{
-		[IgnoreDataMember]
-		Indices Index
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for Upgrade <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
-	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
-	{
-		protected IUpgradeRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpgrade;
-		///<summary>/_upgrade</summary>
-		public UpgradeRequest(): base()
-		{
-		}
-
-		///<summary>/{index}/_upgrade</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public UpgradeRequest(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public bool? OnlyAncientSegments
-		{
-			get => Q<bool? >("only_ancient_segments");
-			set => Q("only_ancient_segments", value);
-		}
-
-		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public bool? WaitForCompletion
-		{
-			get => Q<bool? >("wait_for_completion");
-			set => Q("wait_for_completion", value);
-		}
-	}
-
-	[InterfaceDataContract]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -2496,7 +2372,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
+	///<summary>Request for ValidateQuery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;

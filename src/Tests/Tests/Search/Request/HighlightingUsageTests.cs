@@ -218,13 +218,13 @@ namespace Tests.Search.Request
 		{
 			response.ShouldBeValid();
 
-			foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
+			foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlight))
 			{
 				foreach (var highlightField in highlightsInEachHit)
 				{
 					if (highlightField.Key == "name.standard")
 					{
-						foreach (var highlight in highlightField.Value.Highlights)
+						foreach (var highlight in highlightField.Value)
 						{
 							highlight.Should().Contain("<tag1>");
 							highlight.Should().Contain("</tag1>");
@@ -232,7 +232,7 @@ namespace Tests.Search.Request
 					}
 					else if (highlightField.Key == "leadDeveloper.firstName")
 					{
-						foreach (var highlight in highlightField.Value.Highlights)
+						foreach (var highlight in highlightField.Value)
 						{
 							highlight.Should().Contain("<name>");
 							highlight.Should().Contain("</name>");
@@ -240,7 +240,7 @@ namespace Tests.Search.Request
 					}
 					else if (highlightField.Key == "leadDeveloper.lastName")
 					{
-						foreach (var highlight in highlightField.Value.Highlights)
+						foreach (var highlight in highlightField.Value)
 						{
 							highlight.Should().Contain("<name>");
 							highlight.Should().Contain("</name>");

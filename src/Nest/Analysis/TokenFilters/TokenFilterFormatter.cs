@@ -16,6 +16,7 @@ namespace Nest
 			{ "asciifolding", 0 },
 			{ "common_grams", 1 },
 			{ "delimited_payload", 2 },
+			{ "delimited_payload_filter", 2 },
 			{ "dictionary_decompounder", 3 },
 			{ "edge_ngram", 4 },
 			{ "elision", 5 },

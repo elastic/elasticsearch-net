@@ -97,9 +97,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 		/**==== Ignoring inherited properties
 		 *
-		 * By using the infer mapping configuration for a POCO on the `ConnectionSettings`, it is possible to
-		 * ignore inherited properties too.
-		 *
+		 * By using the `DefaultMappingFor<T>()` configuration for a POCO on the `ConnectionSettings`, it is possible to
+		 * ignore inherited properties too
 		 */
 		public class Parent
 		{
@@ -154,6 +153,66 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
+			Expect(expected).FromRequest(createIndexResponse);
+		}
+
+		/**==== Overriding inherited properties
+		 *
+		 * `DefaultMappingFor<T>()` configuration for a POCO on the `ConnectionSettings` can also be
+		 * used to override inherited properties.
+		 *
+		 * In the following example, the `Id` property is shadowed in `ParentWithStringId` as
+		 * a `string` type, resulting in NEST's automapping inferring the mapping as the default
+		 * `text` with `keyword` multi-field field datatype mapping for a `string` type.
+		 *
+		 */
+		public class ParentWithStringId : Parent
+		{
+			public new string Id { get; set; }
+		}
+
+		[U]
+		public void OverridingInheritedProperties()
+		{
+			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
+				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
+				.DefaultMappingFor<ParentWithStringId>(m => m
+					.Ignore(p => p.Description)
+					.Ignore(p => p.IgnoreMe)
+				);
+
+			var client = new ElasticClient(connectionSettings);
+
+			var createIndexResponse = client.Indices.Create("myindex", c => c
+				.Map<ParentWithStringId>(m => m
+					.AutoMap()
+				)
+			);
+
+			// json
+			var expected = new
+			{
+				mappings = new
+				{
+					properties = new
+					{
+						id = new
+						{
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									ignore_above = 256,
+									type = "keyword"
+								}
+							}
+						}
+					}
+				}
+			};
+
+			// hide
 			Expect(expected).FromRequest(createIndexResponse);
 		}
 	}

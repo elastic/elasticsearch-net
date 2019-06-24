@@ -35,12 +35,11 @@ namespace Nest
 		[DataMember(Name ="highlighted")]
 		string Highlighted { get; }
 
-		//TODO can this just be a string? Is it used at Request side?
 		/// <summary>
 		/// Completion suggester only, the id of the completed document
 		/// </summary>
 		[DataMember(Name ="_id")]
-		Id Id { get; }
+		string Id { get; }
 
 		/// <summary>
 		/// Completion suggester only, the index of the completed document
@@ -92,7 +91,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[DataMember(Name ="_id")]
-		public Id Id { get; internal set; }
+		public string Id { get; internal set; }
 
 		/// <inheritdoc />
 		[DataMember(Name ="_index")]

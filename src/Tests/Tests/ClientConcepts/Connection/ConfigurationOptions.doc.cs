@@ -12,22 +12,18 @@ namespace Tests.ClientConcepts.Connection
 		 *
 		 * Connecting to Elasticsearch with <<elasticsearch-net-getting-started,Elasticsearch.Net>> and <<nest-getting-started,NEST>> is easy, but
 		 * it's entirely possible that you'd like to change the default connection behaviour. There are a number of configuration options available
-		 * on `ConnectionSettings` (and `ConnectionConfiguration` for Elasticsearch.Net) that can be used to control
+		 * on `ConnectionConfiguration` for the low level client and `ConnectionSettings` for the high level client that can be used to control
 		 * how the clients interact with Elasticsearch.
 		 *
 		 * ==== Options on ConnectionConfiguration
 		 *
 		 * The following is a list of available connection configuration options on `ConnectionConfiguration`; since
 		 * `ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
-		 * Elasticsearch.Net and NEST:
+		 * the low level and high level client:
 		 *
 		 * :xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
 		 *
-		 * ==== Options on ConnectionSettings
-		 *
-		 * The following is a list of available connection configuration options on `ConnectionSettings`:
-		 *
-		 * :xml-docs: Nest:ConnectionSettingsBase`1
+		 * ==== ConnectionConfiguration with ElasticLowLevelClient
 		 *
 		 * Here's an example to demonstrate setting several configuration options using the low level client
 		 */
@@ -42,13 +38,21 @@ namespace Tests.ClientConcepts.Connection
 
 			var lowLevelClient = new ElasticLowLevelClient(connectionConfiguration);
 
-
 			/**
-			 * And with the high level client
+			 * ==== Options on ConnectionSettings
+			 *
+			 * The following is a list of available connection configuration options on `ConnectionSettings`:
+			 *
+			 * :xml-docs: Nest:ConnectionSettingsBase`1
+			 *
+			 * ==== ConnectionSettings with ElasticClient
+			 *
+			 * Here's an example to demonstrate setting several configuration options using the high level client
 			 */
 			var connectionSettings = new ConnectionSettings()
 				.DefaultMappingFor<Project>(i => i
 					.IndexName("my-projects")
+					.IdProperty(p => p.Name)
 				)
 				.EnableDebugMode()
 				.PrettyJson()

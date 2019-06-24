@@ -53,9 +53,9 @@ module Tests =
             | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; "-v"; "m"] |> List.append command
             | _  -> command
             
-        if Environment.UserInteractive && Environment.isWindows then
-            Tooling.DotNet.ReadInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
-            |> ignore
+        if Environment.UserInteractive then
+            let out = Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            if out.ExitCode <> 0 then failwith "dotnet test failed"
         else 
             Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
 

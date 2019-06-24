@@ -1,5 +1,6 @@
 @using RazorLight
 @using System.Linq
+@using ApiGenerator
 @using ApiGenerator.Domain
 @using ApiGenerator.Domain.Code
 @inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
@@ -18,7 +19,7 @@ using Elasticsearch.Net;
 namespace Elasticsearch.Net
 {
 	///<summary>
-	///Raw operations with elasticsearch
+	///Elasticsearch low level client
 	///</summary>
 	public partial interface IElasticLowLevelClient 
 	{
@@ -26,7 +27,9 @@ namespace Elasticsearch.Net
 		{
 		if (kv.Key != CsharpNames.RootNamespace)
 		{
-<text>		@CsharpNames.LowLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
+<text>
+			///<summary>@(kv.Key.SplitPascalCase()) APIs</summary>
+		    @CsharpNames.LowLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
 </text>
 			continue;
 		}

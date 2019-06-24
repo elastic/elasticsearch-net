@@ -34,7 +34,7 @@ namespace Tests.Mapping.Types.Core.Number
 				.Name(p => p.NumberOfCommits)
 				.Type(NumberType.Integer)
 				.DocValues()
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.Boost(1.5)
@@ -50,7 +50,7 @@ namespace Tests.Mapping.Types.Core.Number
 				"numberOfCommits", new NumberProperty(NumberType.Integer)
 				{
 					DocValues = true,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					Boost = 1.5,
@@ -92,7 +92,7 @@ namespace Tests.Mapping.Types.Core.Number
 				.Type(NumberType.ScaledFloat)
 				.ScalingFactor(10)
 				.DocValues()
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.Boost(1.5)
@@ -109,7 +109,7 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					ScalingFactor = 10,
 					DocValues = true,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					Boost = 1.5,

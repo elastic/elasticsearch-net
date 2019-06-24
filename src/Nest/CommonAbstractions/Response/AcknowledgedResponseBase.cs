@@ -6,5 +6,7 @@ namespace Nest
 	{
 		[DataMember(Name = "acknowledged")]
 		public bool Acknowledged { get; internal set; }
+
+		public override bool IsValid => base.IsValid && Acknowledged;
 	}
 }

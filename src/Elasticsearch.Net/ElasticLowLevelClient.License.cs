@@ -32,8 +32,8 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Elasticsearch.Net.Specification.LicenseApi
 {
 	///<summary>
-	/// Logically groups all License API's together so that they may be discovered more naturally.
-	/// <para>Not intended to be instantiated directly please defer to the <see cref = "IElasticLowLevelClient.License"/> property
+	/// License APIs.
+	/// <para>Not intended to be instantiated directly. Use the <see cref = "IElasticLowLevelClient.License"/> property
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>

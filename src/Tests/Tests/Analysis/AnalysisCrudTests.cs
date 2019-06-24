@@ -19,7 +19,7 @@ namespace Tests.Analysis
 		*
 		* In this example we will create an index with analysis settings, read those settings back, update the analysis settings
 		* and do another read after the update to assert our new analysis setting is applied.
-		* There is NO mechanism to delete an analysis setting in elasticsearch.
+		* There is NO mechanism to delete an analysis setting in Elasticsearch.
 		*/
 		protected override bool SupportsDeletes => false;
 

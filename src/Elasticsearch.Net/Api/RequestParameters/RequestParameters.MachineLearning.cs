@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.MachineLearningApi
 {
-	///<summary>Request options for CloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+	///<summary>Request options for CloseJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 	public class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -50,25 +50,25 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteCalendar<pre></pre></summary>
+	///<summary>Request options for DeleteCalendar <para></para></summary>
 	public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteCalendarEvent<pre></pre></summary>
+	///<summary>Request options for DeleteCalendarEvent <para></para></summary>
 	public class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteCalendarJob<pre></pre></summary>
+	///<summary>Request options for DeleteCalendarJob <para></para></summary>
 	public class DeleteCalendarJobRequestParameters : RequestParameters<DeleteCalendarJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+	///<summary>Request options for DeleteDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -80,19 +80,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteExpiredData<pre></pre></summary>
+	///<summary>Request options for DeleteExpiredData <para></para></summary>
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteFilter<pre></pre></summary>
+	///<summary>Request options for DeleteFilter <para></para></summary>
 	public class DeleteFilterRequestParameters : RequestParameters<DeleteFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteForecast<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	///<summary>Request options for DeleteForecast <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
 	public class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -111,7 +111,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+	///<summary>Request options for DeleteJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
 	public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -130,13 +130,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+	///<summary>Request options for DeleteModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</para></summary>
 	public class DeleteModelSnapshotRequestParameters : RequestParameters<DeleteModelSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for FlushJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+	///<summary>Request options for FlushJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 	public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -148,19 +148,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for ForecastJob<pre></pre></summary>
+	///<summary>Request options for ForecastJob <para></para></summary>
 	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+	///<summary>Request options for GetBuckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetCalendarEvents<pre></pre></summary>
+	///<summary>Request options for GetCalendarEvents <para></para></summary>
 	public class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -186,19 +186,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetCalendars<pre></pre></summary>
+	///<summary>Request options for GetCalendars <para></para></summary>
 	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+	///<summary>Request options for GetCategories <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+	///<summary>Request options for GetDatafeedStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 	public class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -210,7 +210,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetDatafeeds<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+	///<summary>Request options for GetDatafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
 	public class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -222,7 +222,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetFilters<pre></pre></summary>
+	///<summary>Request options for GetFilters <para></para></summary>
 	public class GetFiltersRequestParameters : RequestParameters<GetFiltersRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -241,13 +241,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+	///<summary>Request options for GetInfluencers <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
 	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+	///<summary>Request options for GetJobStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 	public class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -259,7 +259,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetJobs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+	///<summary>Request options for GetJobs <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
 	public class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -271,43 +271,43 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+	///<summary>Request options for GetModelSnapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	///<summary>Request options for GetOverallBuckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 	public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetAnomalyRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	///<summary>Request options for GetAnomalyRecords <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for Info<pre></pre></summary>
+	///<summary>Request options for Info <para></para></summary>
 	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for OpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+	///<summary>Request options for OpenJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for PostCalendarEvents<pre></pre></summary>
+	///<summary>Request options for PostCalendarEvents <para></para></summary>
 	public class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for PostJobData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	///<summary>Request options for PostJobData <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
 	public class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -326,55 +326,55 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for PreviewDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+	///<summary>Request options for PreviewDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for PutCalendar<pre></pre></summary>
+	///<summary>Request options for PutCalendar <para></para></summary>
 	public class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for PutCalendarJob<pre></pre></summary>
+	///<summary>Request options for PutCalendarJob <para></para></summary>
 	public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for PutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+	///<summary>Request options for PutDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for PutFilter<pre></pre></summary>
+	///<summary>Request options for PutFilter <para></para></summary>
 	public class PutFilterRequestParameters : RequestParameters<PutFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for PutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+	///<summary>Request options for PutJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
 	public class PutJobRequestParameters : RequestParameters<PutJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for RevertModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+	///<summary>Request options for RevertModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for StartDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+	///<summary>Request options for StartDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for StopDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+	///<summary>Request options for StopDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -386,37 +386,37 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for UpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+	///<summary>Request options for UpdateDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
 	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for UpdateFilter<pre></pre></summary>
+	///<summary>Request options for UpdateFilter <para></para></summary>
 	public class UpdateFilterRequestParameters : RequestParameters<UpdateFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for UpdateJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+	///<summary>Request options for UpdateJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
 	public class UpdateJobRequestParameters : RequestParameters<UpdateJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for UpdateModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+	///<summary>Request options for UpdateModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</para></summary>
 	public class UpdateModelSnapshotRequestParameters : RequestParameters<UpdateModelSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for ValidateJob<pre></pre></summary>
+	///<summary>Request options for ValidateJob <para></para></summary>
 	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for ValidateDetector<pre></pre></summary>
+	///<summary>Request options for ValidateDetector <para></para></summary>
 	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

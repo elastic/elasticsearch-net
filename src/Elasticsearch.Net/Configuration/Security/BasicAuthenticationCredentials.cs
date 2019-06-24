@@ -1,11 +1,12 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 
 namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// Credentials for Basic Authentication
 	/// </summary>
-	public class BasicAuthenticationCredentials
+	public class BasicAuthenticationCredentials : IDisposable
 	{
 		public BasicAuthenticationCredentials()
 		{
@@ -32,5 +33,7 @@ namespace Elasticsearch.Net
 		/// The username with which to authenticate
 		/// </summary>
 		public string Username { get; set; }
+
+		public void Dispose() => Password?.Dispose();
 	}
 }

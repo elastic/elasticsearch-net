@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.CatApi
 {
-	///<summary>Request options for Aliases<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+	///<summary>Request options for Aliases <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</para></summary>
 	public class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -78,7 +78,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Allocation<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+	///<summary>Request options for Allocation <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</para></summary>
 	public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -139,7 +139,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Count<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
+	///<summary>Request options for Count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</para></summary>
 	public class CatCountRequestParameters : RequestParameters<CatCountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -193,7 +193,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Fielddata<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+	///<summary>Request options for Fielddata <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para></summary>
 	public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -261,7 +261,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Health<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+	///<summary>Request options for Health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</para></summary>
 	public class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -322,7 +322,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Help<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+	///<summary>Request options for Help <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</para></summary>
 	public class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -341,7 +341,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Indices<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+	///<summary>Request options for Indices <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</para></summary>
 	public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -416,7 +416,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Master<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+	///<summary>Request options for Master <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</para></summary>
 	public class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -470,7 +470,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for NodeAttributes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	///<summary>Request options for NodeAttributes <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 	public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -524,7 +524,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Nodes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+	///<summary>Request options for Nodes <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</para></summary>
 	public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -585,7 +585,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for PendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+	///<summary>Request options for PendingTasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</para></summary>
 	public class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -639,7 +639,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Plugins<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+	///<summary>Request options for Plugins <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para></summary>
 	public class CatPluginsRequestParameters : RequestParameters<CatPluginsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -693,7 +693,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Recovery<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+	///<summary>Request options for Recovery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</para></summary>
 	public class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -747,7 +747,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Repositories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
+	///<summary>Request options for Repositories <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</para></summary>
 	public class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -801,7 +801,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Segments<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
+	///<summary>Request options for Segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para></summary>
 	public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -848,7 +848,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Shards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+	///<summary>Request options for Shards <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</para></summary>
 	public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -909,7 +909,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Snapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
+	///<summary>Request options for Snapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</para></summary>
 	public class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -963,7 +963,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Tasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	///<summary>Request options for Tasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1034,7 +1034,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Templates<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	///<summary>Request options for Templates <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</para></summary>
 	public class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1088,7 +1088,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for ThreadPool<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+	///<summary>Request options for ThreadPool <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para></summary>
 	public class CatThreadPoolRequestParameters : RequestParameters<CatThreadPoolRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

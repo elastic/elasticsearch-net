@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+
 	public interface IPreviewDatafeedResponse<out TDocument> : IResponse where TDocument : class
 	{
 		IReadOnlyCollection<TDocument> Data { get; }

@@ -12,7 +12,6 @@ namespace Nest
 		/// Segments smaller than this are "rounded up" to this size, i.e. treated as equal (floor) size for merge selection.
 		/// This is to prevent frequent flushing of tiny segments, thus preventing a long tail in the index. Default is 2mb.
 		/// </summary>
-		//TODO map special type for sizes (e.g 5gb, 16mb)
 		string FloorSegment { get; set; }
 
 		/// <summary>
@@ -30,7 +29,6 @@ namespace Nest
 		/// This setting is approximate: the estimate of the merged segment size is made by summing
 		/// sizes of to-be-merged segments (compensating for percent deleted docs). Default is 5gb.
 		/// </summary>
-		//TODO map special type for sizes (e.g 5gb, 16mb)
 		string MaxMergedSegment { get; set; }
 
 		/// <summary>

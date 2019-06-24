@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.IngestApi
 {
-	///<summary>Request options for DeletePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for DeletePipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 	public class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Specification.IngestApi
 		}
 	}
 
-	///<summary>Request options for GetPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for GetPipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 	public class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -55,13 +55,13 @@ namespace Elasticsearch.Net.Specification.IngestApi
 		}
 	}
 
-	///<summary>Request options for GrokProcessorPatterns<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for GrokProcessorPatterns <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 	public class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for PutPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 	public class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -80,7 +80,7 @@ namespace Elasticsearch.Net.Specification.IngestApi
 		}
 	}
 
-	///<summary>Request options for SimulatePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for SimulatePipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
 	public class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

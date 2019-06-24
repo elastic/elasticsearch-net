@@ -8,6 +8,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
+using Tests.Framework.Extensions;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterReroute

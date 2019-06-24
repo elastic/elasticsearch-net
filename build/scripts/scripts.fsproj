@@ -26,6 +26,8 @@
   <ItemGroup>
     <Content Include="..\..\build.sh"><Link>build.sh</Link></Content>
     <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
+    <Content Include="..\..\appveyor.yml"><Link>appveyor.yml</Link></Content>
+    <Content Include="..\..\azure-pipelines.yml"><Link>azure-pipelines.yml</Link></Content>
   </ItemGroup>
   <!-- Type providers currently can't run inside the .NET Core 2.0 hosted compiler, see https://github.com/Microsoft/visualfsharp/pull/3658#issuecomment-334773415 -->
   <PropertyGroup>
@@ -66,20 +68,22 @@
     <FscToolExe>fsharpc</FscToolExe>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Bullseye" Version="2.3.0" />
-    <PackageReference Include="Fake.Core.Environment" Version="5.12.6" />
-    <PackageReference Include="Fake.Core.SemVer" Version="5.12.6" />
-    <PackageReference Include="Fake.IO.FileSystem" Version="5.12.6" />
-    <PackageReference Include="Fake.IO.Zip" Version="5.12.6" />
+    <PackageReference Include="Bullseye" Version="2.4.0-alpha.1" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190621T072151" />
+    <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
+    <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
+    <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
+    <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
     <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
     <PackageReference Include="FSharp.Core" Version="4.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="NuGet.CommandLine" Version="4.9.4" />
     <PackageReference Include="Octokit" Version="0.32.0" />
-    <PackageReference Include="Proc" Version="0.4.3" />
+    <PackageReference Include="Proc" Version="0.6.1" />
 
     <DotNetCliToolReference Include="dotnet-assembly-rewriter" Version="1.0.0-alpha20190401T093210" />
     <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190403T095656" />
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
     
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">

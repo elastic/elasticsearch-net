@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <summary>
 		/// object type, no need to set this manually if its not a value type this will be set.
-		/// Only set this if you need to force a value type to be mapped to an elasticsearch object type.
+		/// Only set this if you need to force a value type to be mapped to an Elasticsearch object type.
 		/// </summary>
 		[EnumMember(Value = "object")]
 		Object,

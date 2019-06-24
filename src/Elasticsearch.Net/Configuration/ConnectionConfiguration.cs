@@ -238,7 +238,9 @@ namespace Elasticsearch.Net
 		public T MaximumRetries(int maxRetries) => Assign(maxRetries, (a, v) => a._maxRetries = v);
 
 		/// <summary>
-		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to <c>80</c>.
+		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to <c>80</c> for all IConnection
+		/// implementations that are not based on <c>System.Net.Http.CurlHandler</c>. For those based on System.Net.Http.CurlHandler, defaults
+		/// to <c>Environment.ProcessorCount</c>.
 		/// <para>
 		/// For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating
 		/// ServicePoint objects, affecting the default <see cref="IConnection" /> implementation.
@@ -494,7 +496,7 @@ namespace Elasticsearch.Net
 			Assign(new X509Certificate2Collection { new X509Certificate(certificatePath) }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401,
+		/// Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns a HTML for 401,
 		/// 500
 		/// </summary>
 		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>
@@ -511,6 +513,8 @@ namespace Elasticsearch.Net
 			_connectionPool?.Dispose();
 			_connection?.Dispose();
 			_semaphore?.Dispose();
+			_proxyPassword?.Dispose();
+			_basicAuthCredentials?.Dispose();
 		}
 	}
 }

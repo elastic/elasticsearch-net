@@ -351,7 +351,6 @@ namespace Nest
 			Chars(Comment, Comment, CharacterType.Comment);
 		}
 
-		// TODO: use ReadOnlySpan<char> in future
 		public WellKnownTextTokenizer(TextReader reader) =>
 			_reader = reader ?? throw new ArgumentNullException(nameof(reader));
 

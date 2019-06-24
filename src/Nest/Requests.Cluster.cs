@@ -36,7 +36,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for AllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	///<summary>Request for AllocationExplain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
 	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
@@ -63,7 +63,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>Request for GetSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
@@ -109,7 +109,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Health <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	///<summary>Request for Health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
@@ -205,7 +205,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for PendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	///<summary>Request for PendingTasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</para></summary>
 	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
 		protected IClusterPendingTasksRequest Self => this;
@@ -232,7 +232,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for PutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>Request for PutSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
 		protected IClusterPutSettingsRequest Self => this;
@@ -266,7 +266,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
+	///<summary>Request for RemoteInfo <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</para></summary>
 	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
@@ -280,7 +280,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Reroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	///<summary>Request for Reroute <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		protected IClusterRerouteRequest Self => this;
@@ -346,7 +346,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for State <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	///<summary>Request for State <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		protected IClusterStateRequest Self => this;
@@ -445,7 +445,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Stats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	///<summary>Request for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
 		protected IClusterStatsRequest Self => this;

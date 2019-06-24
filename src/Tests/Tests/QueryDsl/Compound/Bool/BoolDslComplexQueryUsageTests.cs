@@ -50,7 +50,8 @@ namespace Tests.QueryDsl.Compound.Bool
 					{
 						@bool = new
 						{
-							must = new[]
+							// must be typed to object[] for documentation
+							must = new object[]
 							{
 								new
 								{
