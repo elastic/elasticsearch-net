@@ -40,7 +40,18 @@ namespace Tests.Framework.SerializationTests
 
 			var client = new ElasticClient();
 			client.RequestResponseSerializer.SerializeToString(isADictionary).Should().Be("{\"key1\":null,\"key2\":\"value2\"}");
-			client.SourceSerializer.SerializeToString(isADictionary).Should().Be("{\"key1\":null,\"key2\":\"value2\"}");
+		}
+
+		[U]
+		public void SerializesIsADictionaryRespectsDefaultFieldNameInferrer()
+		{
+			var isADictionary = new MyIsADictionary(new Dictionary<object, object>
+			{
+				{ "Key1", "value1" }
+			});
+
+			var client = new ElasticClient(new ConnectionSettings().DefaultFieldNameInferrer(f => f.ToUpperInvariant()));
+			client.RequestResponseSerializer.SerializeToString(isADictionary).Should().Be("{\"KEY1\":\"value1\"}");
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -75,6 +86,19 @@ namespace Tests.Framework.SerializationTests
 			};
 
 			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
+		}
+
+		[U]
+		public void CanSerializeIgnoresDefaultFieldNameInferrer()
+		{
+			var dictionary = new Dictionary<string, string>
+			{
+				{ "Key1", "value1" },
+				{ "Key2", "value2" },
+			};
+
+			var client = new ElasticClient(new ConnectionSettings().DefaultFieldNameInferrer(f => f.ToUpperInvariant()));
+			client.RequestResponseSerializer.SerializeToString(dictionary).Should().Be("{\"Key1\":\"value1\",\"Key2\":\"value2\"}");
 		}
 
 		[U]
