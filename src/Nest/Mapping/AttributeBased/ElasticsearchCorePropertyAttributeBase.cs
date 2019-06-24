@@ -15,7 +15,7 @@ namespace Nest
 		public string Similarity
 		{
 			set => Self.Similarity = value;
-			get => Self.Similarity?.Match(f => f.GetStringValue(), str => str);
+			get => Self.Similarity;
 		}
 
 		/// <inheritdoc cref="ICoreProperty" />
@@ -31,7 +31,7 @@ namespace Nest
 
 		private ICoreProperty Self => this;
 
-		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
+		string ICoreProperty.Similarity { get; set; }
 
 		bool? ICoreProperty.Store { get; set; }
 

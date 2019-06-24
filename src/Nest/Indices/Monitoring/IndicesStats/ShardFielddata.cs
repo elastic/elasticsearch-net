@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[DataContract]
-	public class ShardFieldData
+	public class ShardFielddata
 	{
 		[DataMember(Name ="evictions")]
 		public long Evictions { get; internal set; }

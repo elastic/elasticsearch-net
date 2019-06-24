@@ -46,7 +46,7 @@ namespace Nest
 		public List<NodeRole> Roles { get; internal set; }
 
 		[DataMember(Name = "settings")]
-		public DynamicBody Settings { get; internal set; }
+		public DynamicDictionary Settings { get; internal set; }
 
 		[DataMember(Name = "thread_pool")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
@@ -222,18 +222,39 @@ namespace Nest
 	[DataContract]
 	public class NodeThreadPoolInfo
 	{
+		/// <summary>
+		/// The configured keep alive time for threads
+		/// </summary>
 		[DataMember(Name = "keep_alive")]
 		public string KeepAlive { get; internal set; }
 
+		/// <summary>
+		/// The configured maximum number of active threads allowed in the current thread pool
+		/// </summary>
 		[DataMember(Name = "max")]
 		public int? Max { get; internal set; }
 
-		[DataMember(Name = "min")]
-		public int? Min { get; internal set; }
+		/// <summary>
+		/// The configured core number of active threads allowed in the current thread pool
+		/// </summary>
+		[DataMember(Name = "core")]
+		public int? Core { get; internal set; }
 
+		/// <summary>
+		/// The configured fixed number of active threads allowed in the current thread pool
+		/// </summary>
+		[DataMember(Name = "size")]
+		public int? Size { get; internal set; }
+
+		/// <summary>
+		/// The maximum number of tasks permitted in the queue for the current thread pool
+		/// </summary>
 		[DataMember(Name = "queue_size")]
 		public int? QueueSize { get; internal set; }
 
+		/// <summary>
+		/// The type of thread pool
+		/// </summary>
 		[DataMember(Name = "type")]
 		public string Type { get; internal set; }
 	}

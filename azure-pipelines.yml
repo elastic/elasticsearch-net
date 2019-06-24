@@ -31,13 +31,34 @@ jobs:
     maxParallel: 5
     matrix:
       es7:
-        esVersion: '7.0.0-beta1'
+        esVersion: '7.0.0'
+      es71:
+        esVersion: '7.1.0'
   steps:
       - script: 'build.bat integrate $(esVersion) "readonly,writable,bool,xpack" skipdocs'
-        displayName: '$(esVersion) integration tests'
+        displayName: '$(esVersion) windows integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()
         inputs:
             testRunner: VSTest
             testResultsFiles: 'src/Tests/Tests/**/*.trx'
-            testRunTitle: '$(esVersion) Integration Tests'
+            testRunTitle: '$(esVersion) Windows Integration Tests'
+            
+- job: LinuxIntegrationTests
+  dependsOn: LinuxUnitTests
+  pool:
+      vmImage: 'ubuntu-16.04'
+  strategy:
+      maxParallel: 5
+      matrix:
+          es7:
+              esVersion: '7.0.0'
+  steps:
+      - script: './build.sh integrate $(esVersion) "readonly,writable" skipdocs'
+        displayName: '$(esVersion) linux integration tests'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+            testRunner: VSTest
+            testResultsFiles: 'src/Tests/Tests/**/*.trx'
+            testRunTitle: '$(esVersion) Linux Integration Tests'

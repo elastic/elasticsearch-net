@@ -4,12 +4,12 @@ using Elasticsearch.Net.Utf8Json.Formatters;
 
 namespace Elasticsearch.Net
 {
-	internal class DynamicBodyFormatter : IJsonFormatter<DynamicBody>
+	internal class DynamicDictionaryFormatter : IJsonFormatter<DynamicDictionary>
 	{
-		private static readonly DictionaryFormatter<string, object> DictionaryFormatter =
+		protected static readonly DictionaryFormatter<string, object> DictionaryFormatter =
 			new DictionaryFormatter<string, object>();
 
-		public void Serialize(ref JsonWriter writer, DynamicBody value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, DynamicDictionary value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
 			{
@@ -20,21 +20,21 @@ namespace Elasticsearch.Net
 			writer.WriteBeginObject();
 			var formatter = formatterResolver.GetFormatter<object>();
 			var count = 0;
-			foreach (var kv in (IDictionary<string, object>)value)
+			foreach (var kv in (IDictionary<string, DynamicValue>)value)
 			{
 				if (count > 0)
 					writer.WriteValueSeparator();
 				writer.WritePropertyName(kv.Key);
-				formatter.Serialize(ref writer, kv.Value, formatterResolver);
+				formatter.Serialize(ref writer, kv.Value?.Value, formatterResolver);
 				count++;
 			}
 			writer.WriteEndObject();
 		}
 
-		public DynamicBody Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public DynamicDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var dictionary = DictionaryFormatter.Deserialize(ref reader, formatterResolver);
-			return DynamicBody.Create(dictionary);
+			return DynamicDictionary.Create(dictionary);
 		}
 	}
 }

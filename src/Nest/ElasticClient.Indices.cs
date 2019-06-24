@@ -521,30 +521,6 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<GetIndexTemplateResponse> GetTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 		/// <summary>
-		/// <c>GET</c> request to the <c>indices.get_upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public UpgradeStatusResponse UpgradeStatus(Indices index = null, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) => UpgradeStatus(selector.InvokeOrDefault(new UpgradeStatusDescriptor().Index(index: index)));
-		/// <summary>
-		/// <c>GET</c> request to the <c>indices.get_upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public Task<UpgradeStatusResponse> UpgradeStatusAsync(Indices index = null, Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null, CancellationToken ct = default) => UpgradeStatusAsync(selector.InvokeOrDefault(new UpgradeStatusDescriptor().Index(index: index)), ct);
-		/// <summary>
-		/// <c>GET</c> request to the <c>indices.get_upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public UpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) => DoRequest<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters);
-		/// <summary>
-		/// <c>GET</c> request to the <c>indices.get_upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public Task<UpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters, ct);
-		/// <summary>
 		/// <c>POST</c> request to the <c>indices.open</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</a>
@@ -882,30 +858,6 @@ namespace Nest.Specification.IndicesApi
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
 		public Task<BulkAliasResponse> BulkAliasAsync(IBulkAliasRequest request, CancellationToken ct = default) => DoRequestAsync<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters, ct);
-		/// <summary>
-		/// <c>POST</c> request to the <c>indices.upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public UpgradeResponse Upgrade(Indices index = null, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) => Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(index: index)));
-		/// <summary>
-		/// <c>POST</c> request to the <c>indices.upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public Task<UpgradeResponse> UpgradeAsync(Indices index = null, Func<UpgradeDescriptor, IUpgradeRequest> selector = null, CancellationToken ct = default) => UpgradeAsync(selector.InvokeOrDefault(new UpgradeDescriptor().Index(index: index)), ct);
-		/// <summary>
-		/// <c>POST</c> request to the <c>indices.upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public UpgradeResponse Upgrade(IUpgradeRequest request) => DoRequest<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters);
-		/// <summary>
-		/// <c>POST</c> request to the <c>indices.upgrade</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</a>
-		/// </summary>
-		public Task<UpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) => DoRequestAsync<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.validate_query</c> API, read more about this API online:
 		/// <para></para>

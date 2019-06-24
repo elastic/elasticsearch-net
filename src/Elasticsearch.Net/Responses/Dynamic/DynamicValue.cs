@@ -15,15 +15,15 @@ using Microsoft.CSharp.RuntimeBinder;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>, IConvertible
+	public class DynamicValue : DynamicObject, IEquatable<DynamicValue>, IConvertible
 	{
 		private readonly object _value;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ElasticsearchDynamicValue" /> class.
+		/// Initializes a new instance of the <see cref="DynamicValue" /> class.
 		/// </summary>
 		/// <param name="value">The value to store in the instance</param>
-		public ElasticsearchDynamicValue(object value) => _value = value;
+		public DynamicValue(object value) => _value = value;
 
 		/// <summary>
 		/// Gets a value indicating whether this instance has value.
@@ -35,29 +35,29 @@ namespace Elasticsearch.Net
 			get { return _value != null; }
 		}
 
-		public ElasticsearchDynamicValue this[string name]
+		public DynamicValue this[string name]
 		{
 			get
 			{
 				object r;
 				Dispatch(out r, name);
-				return (ElasticsearchDynamicValue)r;
+				return (DynamicValue)r;
 			}
 		}
 
-		public ElasticsearchDynamicValue this[int i]
+		public DynamicValue this[int i]
 		{
 			get
 			{
 				if (!HasValue)
-					return new ElasticsearchDynamicValue(null);
+					return new DynamicValue(null);
 
 				var l = Value as IList;
 				if (l != null && l.Count - 1 >= i)
 				{
-					return new ElasticsearchDynamicValue(l[i]);
+					return new DynamicValue(l[i]);
 				}
-				return new ElasticsearchDynamicValue(null);
+				return new DynamicValue(null);
 			}
 		}
 
@@ -351,6 +351,16 @@ namespace Elasticsearch.Net
 			return Convert.ToUInt64(_value, provider);
 		}
 
+		/// <summary>
+		/// Returns the value as a dictionary if the current value represents an object.
+		/// Otherwise returns null.
+		/// </summary>
+		public IDictionary<string, DynamicValue> ToDictionary()
+		{
+			if (!(_value is IDictionary<string, object> dict)) return null;
+			return DynamicDictionary.Create(dict);
+		}
+
 
 		/// <summary>
 		/// Indicates whether the current object is equal to another object of the same type.
@@ -358,8 +368,8 @@ namespace Elasticsearch.Net
 		/// <returns>
 		/// <c>true</c> if the current object is equal to the <paramref name="compareValue" /> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		/// <param name="compareValue">An <see cref="ElasticsearchDynamicValue" /> to compare with this instance.</param>
-		public bool Equals(ElasticsearchDynamicValue compareValue)
+		/// <param name="compareValue">An <see cref="DynamicValue" /> to compare with this instance.</param>
+		public bool Equals(DynamicValue compareValue)
 		{
 			if (ReferenceEquals(null, compareValue))
 			{
@@ -381,7 +391,7 @@ namespace Elasticsearch.Net
 		{
 			if (!HasValue)
 			{
-				result = new ElasticsearchDynamicValue(null);
+				result = new DynamicValue(null);
 				return true;
 			}
 
@@ -389,24 +399,24 @@ namespace Elasticsearch.Net
 			object r;
 			if (d != null && d.TryGetValue(name, out r))
 			{
-				result = new ElasticsearchDynamicValue(r);
+				result = new DynamicValue(r);
 				return true;
 			}
 			var x = Value as IDynamicMetaObjectProvider;
 			if (x != null)
 			{
 				var dm = GetDynamicMember(Value, name);
-				result = new ElasticsearchDynamicValue(dm);
+				result = new DynamicValue(dm);
 				return true;
 			}
 			var ds = Value as IDictionary;
 			if (ds != null && ds.Contains(name))
 			{
-				result = new ElasticsearchDynamicValue(ds[name]);
+				result = new DynamicValue(ds[name]);
 				return true;
 			}
 
-			result = new ElasticsearchDynamicValue(Value);
+			result = new DynamicValue(Value);
 			return true;
 		}
 
@@ -493,7 +503,7 @@ namespace Elasticsearch.Net
 			return defaultValue;
 		}
 
-		public static bool operator ==(ElasticsearchDynamicValue dynamicValue, object compareValue)
+		public static bool operator ==(DynamicValue dynamicValue, object compareValue)
 		{
 			if (dynamicValue._value == null && compareValue == null)
 			{
@@ -503,7 +513,7 @@ namespace Elasticsearch.Net
 			return dynamicValue._value != null && dynamicValue._value.Equals(compareValue);
 		}
 
-		public static bool operator !=(ElasticsearchDynamicValue dynamicValue, object compareValue)
+		public static bool operator !=(DynamicValue dynamicValue, object compareValue)
 		{
 			return !(dynamicValue == compareValue);
 		}
@@ -512,10 +522,10 @@ namespace Elasticsearch.Net
 		/// Determines whether the specified <see cref="object" /> is equal to the current <see cref="object" />.
 		/// </summary>
 		/// <returns>
-		/// <c>true</c> if the specified <see cref="object" /> is equal to the current <see cref="ElasticsearchDynamicValue" />; otherwise,
+		/// <c>true</c> if the specified <see cref="object" /> is equal to the current <see cref="DynamicValue" />; otherwise,
 		/// <c>false</c>.
 		/// </returns>
-		/// <param name="compareValue">The <see cref="object" /> to compare with the current <see cref="ElasticsearchDynamicValue" />.</param>
+		/// <param name="compareValue">The <see cref="object" /> to compare with the current <see cref="DynamicValue" />.</param>
 		public override bool Equals(object compareValue)
 		{
 			if (ReferenceEquals(null, compareValue))
@@ -531,7 +541,7 @@ namespace Elasticsearch.Net
 				return true;
 			}
 
-			return compareValue.GetType() == typeof(ElasticsearchDynamicValue) && Equals((ElasticsearchDynamicValue)compareValue);
+			return compareValue.GetType() == typeof(DynamicValue) && Equals((DynamicValue)compareValue);
 		}
 
 		/// <summary>
@@ -572,7 +582,7 @@ namespace Elasticsearch.Net
 			}
 
 			var convert =
-				Binder.Convert(CSharpBinderFlags.None, arg.GetType(), typeof(ElasticsearchDynamicValue));
+				Binder.Convert(CSharpBinderFlags.None, arg.GetType(), typeof(DynamicValue));
 
 			if (!TryConvert((ConvertBinder)convert, out resultOfCast))
 			{
@@ -663,7 +673,7 @@ namespace Elasticsearch.Net
 			return _value == null ? base.ToString() : Convert.ToString(_value);
 		}
 
-		public static implicit operator bool(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator bool(DynamicValue dynamicValue)
 		{
 			if (!dynamicValue.HasValue) return false;
 
@@ -674,21 +684,21 @@ namespace Elasticsearch.Net
 			return true;
 		}
 
-		public static implicit operator string(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator string(DynamicValue dynamicValue)
 		{
 			return dynamicValue.HasValue
 				? Convert.ToString(dynamicValue._value)
 				: null;
 		}
 
-		public static implicit operator int(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator int(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToInt32(dynamicValue._value);
 
 			return int.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator Guid(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator Guid(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value is Guid)
 			{
@@ -698,7 +708,7 @@ namespace Elasticsearch.Net
 			return Guid.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator DateTime(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator DateTime(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value is DateTime)
 			{
@@ -708,7 +718,7 @@ namespace Elasticsearch.Net
 			return DateTime.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator TimeSpan(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator TimeSpan(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value is TimeSpan)
 			{
@@ -718,28 +728,28 @@ namespace Elasticsearch.Net
 			return TimeSpan.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator long(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator long(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToInt64(dynamicValue._value);
 
 			return long.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator float(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator float(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToSingle(dynamicValue._value);
 
 			return float.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator decimal(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator decimal(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToDecimal(dynamicValue._value);
 
 			return decimal.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
 
-		public static implicit operator double(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator double(DynamicValue dynamicValue)
 		{
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToDouble(dynamicValue._value);
 
