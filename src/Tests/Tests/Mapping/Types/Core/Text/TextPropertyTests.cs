@@ -155,7 +155,7 @@ namespace Tests.Mapping.Types.Core.Text
 				.PositionIncrementGap(5)
 				.SearchAnalyzer("standard")
 				.SearchQuoteAnalyzer("standard")
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 				.Norms(false)
 				.TermVector(TermVectorOption.WithPositionsOffsets)
@@ -192,7 +192,7 @@ namespace Tests.Mapping.Types.Core.Text
 					PositionIncrementGap = 5,
 					SearchAnalyzer = "standard",
 					SearchQuoteAnalyzer = "standard",
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Norms = false,
 					TermVector = TermVectorOption.WithPositionsOffsets

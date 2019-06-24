@@ -56,7 +56,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.NullValue("null")
 				.Normalizer("myCustom")
 				.Norms(false)
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 				.Fields(fs => fs
 					.Keyword(k => k
@@ -81,7 +81,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					NullValue = "null",
 					Normalizer = "myCustom",
 					Norms = false,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Fields = new Properties
 					{

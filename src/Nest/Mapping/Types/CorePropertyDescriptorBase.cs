@@ -13,7 +13,7 @@ namespace Nest
 
 		Fields ICoreProperty.CopyTo { get; set; }
 		IProperties ICoreProperty.Fields { get; set; }
-		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
+		string ICoreProperty.Similarity { get; set; }
 		bool? ICoreProperty.Store { get; set; }
 
 		/// <inheritdoc cref="ICoreProperty.Store" />
@@ -22,9 +22,6 @@ namespace Nest
 		/// <inheritdoc cref="ICoreProperty.Fields" />
 		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector) =>
 			Assign(selector, (a, v) => a.Fields = v?.Invoke(new PropertiesDescriptor<T>())?.Value);
-
-		/// <inheritdoc cref="ICoreProperty.Similarity" />
-		public TDescriptor Similarity(SimilarityOption? similarity) => Assign(similarity, (a, v) => a.Similarity = v);
 
 		/// <inheritdoc cref="ICoreProperty.Similarity" />
 		public TDescriptor Similarity(string similarity) => Assign(similarity, (a, v) => a.Similarity = v);
