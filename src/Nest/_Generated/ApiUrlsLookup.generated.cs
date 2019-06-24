@@ -103,7 +103,6 @@ namespace Nest
 		internal static ApiUrls IndicesGetMapping = new ApiUrls(new[]{"_mapping", "{index}/_mapping"});
 		internal static ApiUrls IndicesGetSettings = new ApiUrls(new[]{"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
 		internal static ApiUrls IndicesGetTemplate = new ApiUrls(new[]{"_template", "_template/{name}"});
-		internal static ApiUrls IndicesUpgradeStatus = new ApiUrls(new[]{"_upgrade", "{index}/_upgrade"});
 		internal static ApiUrls IndicesOpen = new ApiUrls(new[]{"{index}/_open"});
 		internal static ApiUrls IndicesPutAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
 		internal static ApiUrls IndicesPutMapping = new ApiUrls(new[]{"{index}/_mapping"});
@@ -118,7 +117,6 @@ namespace Nest
 		internal static ApiUrls IndicesSplit = new ApiUrls(new[]{"{index}/_split/{target}"});
 		internal static ApiUrls IndicesStats = new ApiUrls(new[]{"_stats", "_stats/{metric}", "{index}/_stats", "{index}/_stats/{metric}"});
 		internal static ApiUrls IndicesBulkAlias = new ApiUrls(new[]{"_aliases"});
-		internal static ApiUrls IndicesUpgrade = new ApiUrls(new[]{"_upgrade", "{index}/_upgrade"});
 		internal static ApiUrls IndicesValidateQuery = new ApiUrls(new[]{"_validate/query", "{index}/_validate/query"});
 		internal static ApiUrls NoNamespaceRootNodeInfo = new ApiUrls(new[]{""});
 		internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[]{"_ingest/pipeline/{id}"});

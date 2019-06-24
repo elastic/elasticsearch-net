@@ -1430,61 +1430,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
-	{
-		[IgnoreDataMember]
-		Indices Index
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for UpgradeStatus <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
-	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
-	{
-		protected IUpgradeStatusRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpgradeStatus;
-		///<summary>/_upgrade</summary>
-		public UpgradeStatusRequest(): base()
-		{
-		}
-
-		///<summary>/{index}/_upgrade</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public UpgradeStatusRequest(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-	}
-
-	[InterfaceDataContract]
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -2410,75 +2355,6 @@ namespace Nest
 		{
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
-		}
-	}
-
-	[InterfaceDataContract]
-	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
-	{
-		[IgnoreDataMember]
-		Indices Index
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for Upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
-	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
-	{
-		protected IUpgradeRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpgrade;
-		///<summary>/_upgrade</summary>
-		public UpgradeRequest(): base()
-		{
-		}
-
-		///<summary>/{index}/_upgrade</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public UpgradeRequest(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public bool? OnlyAncientSegments
-		{
-			get => Q<bool? >("only_ancient_segments");
-			set => Q("only_ancient_segments", value);
-		}
-
-		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public bool? WaitForCompletion
-		{
-			get => Q<bool? >("wait_for_completion");
-			set => Q("wait_for_completion", value);
 		}
 	}
 
