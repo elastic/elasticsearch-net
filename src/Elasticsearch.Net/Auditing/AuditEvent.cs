@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Elasticsearch.Net
@@ -29,7 +30,13 @@ namespace Elasticsearch.Net
 
 	internal static class AuditEventExtensions
 	{
-		public static string GetAuditEventName(this AuditEvent @event)
+		/// <summary>
+		/// Returns the name of the event to be used for use in <see cref="DiagnosticSource"/>.
+		/// <para>If this return null the event should not be reported on</para>
+		/// <para>This indicates this event is monitored by a different component already</para>
+		/// </summary>
+		/// <returns>The diagnostic event name representation or null if it should go unreported</returns>
+		public static string GetAuditDiagnosticEventName(this AuditEvent @event)
 		{
 			switch(@event)
 			{

@@ -20,7 +20,7 @@ namespace Elasticsearch.Net
 			_audit = new Audit(type, started);
 			_audit.Node = node;
 			auditTrail.Add(_audit);
-			var diagnosticName = type.GetAuditEventName();
+			var diagnosticName = type.GetAuditDiagnosticEventName();
 			_activity = diagnosticName != null ? DiagnosticSource.Diagnose(diagnosticName, _audit) : null;
 		}
 
