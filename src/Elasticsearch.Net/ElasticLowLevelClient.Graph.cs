@@ -60,7 +60,7 @@ namespace Elasticsearch.Net.Specification.GraphApi
 		///<param name = "type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name = "body">Graph Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated as of 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		public TResponse ExploreUsingType<TResponse>(string index, string type, PostData body, GraphExploreRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_graph/explore"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/{type}/_graph/explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
@@ -68,7 +68,7 @@ namespace Elasticsearch.Net.Specification.GraphApi
 		///<param name = "type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name = "body">Graph Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated as of 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> ExploreUsingTypeAsync<TResponse>(string index, string type, PostData body, GraphExploreRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_graph/explore"), ctx, body, RequestParams(requestParameters));
 	}

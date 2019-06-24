@@ -128,7 +128,7 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		///<param name = "type">The doc type inside the index</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated as of 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		public TResponse SearchUsingType<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_rollup_search"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/{type}/_rollup_search <para></para></summary>
@@ -136,7 +136,7 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		///<param name = "type">The doc type inside the index</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated as of 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> SearchUsingTypeAsync<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_rollup_search"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_rollup/job/{id}/_start <para></para></summary>
