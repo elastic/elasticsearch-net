@@ -814,35 +814,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for UpgradeStatus <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
-	public class UpgradeStatusRequestParameters : RequestParameters<UpgradeStatusRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-	}
-
 	///<summary>Request options for Open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters>
 	{
@@ -1334,49 +1305,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<TimeSpan>("timeout");
 			set => Q("timeout", value);
-		}
-	}
-
-	///<summary>Request options for Upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
-	public class UpgradeRequestParameters : RequestParameters<UpgradeRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public bool? OnlyAncientSegments
-		{
-			get => Q<bool? >("only_ancient_segments");
-			set => Q("only_ancient_segments", value);
-		}
-
-		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public bool? WaitForCompletion
-		{
-			get => Q<bool? >("wait_for_completion");
-			set => Q("wait_for_completion", value);
 		}
 	}
 

@@ -795,39 +795,6 @@ namespace Nest
 		public GetIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for UpgradeStatus <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
-	public partial class UpgradeStatusDescriptor : RequestDescriptorBase<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpgradeStatus;
-		///<summary>/_upgrade</summary>
-		public UpgradeStatusDescriptor(): base()
-		{
-		}
-
-		///<summary>/{index}/_upgrade</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public UpgradeStatusDescriptor(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
-		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpgradeStatusDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpgradeStatusDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpgradeStatusDescriptor AllIndices() => Index(Indices.All);
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeStatusDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeStatusDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-	}
-
 	///<summary>descriptor for Open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class OpenIndexDescriptor : RequestDescriptorBase<OpenIndexDescriptor, OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{
@@ -1330,43 +1297,6 @@ namespace Nest
 		public BulkAliasDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Request timeout</summary>
 		public BulkAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-	}
-
-	///<summary>descriptor for Upgrade <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para></summary>
-	public partial class UpgradeDescriptor : RequestDescriptorBase<UpgradeDescriptor, UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpgrade;
-		///<summary>/_upgrade</summary>
-		public UpgradeDescriptor(): base()
-		{
-		}
-
-		///<summary>/{index}/_upgrade</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public UpgradeDescriptor(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
-		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpgradeDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpgradeDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public UpgradeDescriptor AllIndices() => Index(Indices.All);
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public UpgradeDescriptor OnlyAncientSegments(bool? onlyancientsegments = true) => Qs("only_ancient_segments", onlyancientsegments);
-		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public UpgradeDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
 	///<summary>descriptor for ValidateQuery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
