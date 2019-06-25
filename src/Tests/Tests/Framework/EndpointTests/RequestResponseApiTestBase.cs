@@ -41,7 +41,7 @@ namespace Tests.Framework.EndpointTests
 
 		public TCluster Cluster { get; }
 
-		protected string CallIsolatedValue => UniqueValues.Value;
+		protected virtual string CallIsolatedValue => UniqueValues.Value;
 		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
 		protected virtual TInitializer Initializer { get; } = null;
 		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;
