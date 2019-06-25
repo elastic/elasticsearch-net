@@ -133,7 +133,7 @@ namespace Elasticsearch.Net
 
 				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
 				if (requestData.CustomResponseBuilder != null)
-					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken) as TResponse;
+					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken).ConfigureAwait(false) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
 					? null

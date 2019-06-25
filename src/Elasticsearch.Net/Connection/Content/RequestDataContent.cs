@@ -52,7 +52,7 @@ namespace Elasticsearch.Net
 			async Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
 			{
 				using (stream)
-					await data.WriteAsync(stream, requestData.ConnectionSettings, token);
+					await data.WriteAsync(stream, requestData.ConnectionSettings, token).ConfigureAwait(false);
 			}
 			_onStreamAvailable = OnStreamAvailable;
 		}
@@ -77,8 +77,8 @@ namespace Elasticsearch.Net
 			if (_requestData.HttpCompression)
 				stream = new GZipStream(stream, CompressionMode.Compress, false);
 			var wrappedStream = new CompleteTaskOnCloseStream(stream, serializeToStreamTask);
-            await _onStreamAvailable(data, wrappedStream, this, context);
-            await serializeToStreamTask.Task;
+            await _onStreamAvailable(data, wrappedStream, this, context).ConfigureAwait(false);
+            await serializeToStreamTask.Task.ConfigureAwait(false);
 		}
 
 		/// <summary>

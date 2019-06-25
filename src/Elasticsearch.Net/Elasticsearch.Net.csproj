@@ -9,6 +9,7 @@
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
     <PackageReference Condition="'$(OS)' != 'Windows_NT'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" /> 
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview3.19128.7" />
 

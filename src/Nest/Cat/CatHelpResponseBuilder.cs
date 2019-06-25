@@ -39,7 +39,7 @@ namespace Nest
 			using (stream)
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
 			{
-				await stream.CopyToAsync(ms, 81920, ctx);
+				await stream.CopyToAsync(ms, 81920, ctx).ConfigureAwait(false);
 				var body = ms.ToArray().Utf8String();
 				Parse(catResponse, body);
 			}

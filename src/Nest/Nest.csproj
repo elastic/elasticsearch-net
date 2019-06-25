@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
     <PackageReference Condition="'$(OS)' != 'Windows_NT'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" /> 
   </ItemGroup>
   <ItemGroup>

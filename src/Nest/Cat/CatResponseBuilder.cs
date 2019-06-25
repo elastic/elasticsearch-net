@@ -29,7 +29,7 @@ namespace Nest
 			if (!response.Success)
 				return catResponse;
 
-			var records = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TCatRecord>>(stream, ctx);
+			var records = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TCatRecord>>(stream, ctx).ConfigureAwait(false);
 			catResponse.Records = records;
 			return catResponse;
 		}

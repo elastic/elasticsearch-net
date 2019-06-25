@@ -75,7 +75,7 @@ namespace Nest
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
 			{
-				var plainTextResponse = await sr.ReadToEndAsync();
+				var plainTextResponse = await sr.ReadToEndAsync().ConfigureAwait(false);
 				return Parse(plainTextResponse);
 			}
 		}
