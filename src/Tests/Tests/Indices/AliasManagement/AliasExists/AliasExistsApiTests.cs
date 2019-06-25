@@ -51,7 +51,7 @@ namespace Tests.Indices.AliasManagement.AliasExists
 	{
 		public AliasExistsNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 
 		protected override Func<AliasExistsDescriptor, IAliasExistsRequest> Fluent => d => d;

@@ -86,7 +86,14 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public virtual bool IsValid => (ApiCall?.Success ?? false) && ServerError == null;
+		public virtual bool IsValid 
+		{
+			get
+			{
+				var statusCode = ApiCall?.HttpStatusCode;
+				if (statusCode == 404) return false;
+				return (ApiCall?.Success ?? false) && ServerError == null;
+			}}
 
 
 		/// <inheritdoc />
