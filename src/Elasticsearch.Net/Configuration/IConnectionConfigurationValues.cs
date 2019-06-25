@@ -197,12 +197,12 @@ namespace Elasticsearch.Net
 		TimeSpan? SniffInformationLifeSpan { get; }
 
 		/// <summary>
-		/// Force a new sniff for the cluster state everytime a connection dies
+		/// Force a new sniff for the cluster state every time a connection dies
 		/// </summary>
 		bool SniffsOnConnectionFault { get; }
 
 		/// <summary>
-		/// Sniff the cluster state immediatly on startup
+		/// Sniff the cluster state immediately on startup
 		/// </summary>
 		bool SniffsOnStartup { get; }
 
@@ -220,5 +220,18 @@ namespace Elasticsearch.Net
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
 		string UserAgent { get; }
+		
+		/// <summary>
+		/// Allow you to override the status code inspection that sets <see cref="ElasticsearchResponseBase.Success"/>
+		/// <para>
+		/// Defaults to validating the statusCode is greater or equal to 200 and less then 300
+		/// </para>
+		/// <para>
+		/// When the request is using <see cref="HttpMethod.HEAD"/> 404 is valid out of the box as well
+		/// </para>
+		/// <para></para>
+		/// <para>NOTE: if a request specifies <see cref="IRequestConfiguration.AllowedStatusCodes"/> this takes precedence</para>
+		/// </summary>
+		Func<HttpMethod, int, bool> StatusCodeToResponseSuccess { get; }
 	}
 }

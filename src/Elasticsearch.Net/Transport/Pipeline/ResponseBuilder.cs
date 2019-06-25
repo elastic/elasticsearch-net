@@ -57,12 +57,15 @@ namespace Elasticsearch.Net
 		)
 		{
 			var success = false;
-			var allowedStatusCodes = requestData.AllowedStatusCodes.ToList();
+			var allowedStatusCodes = requestData.AllowedStatusCodes;
 			if (statusCode.HasValue)
-				success = statusCode >= 200 && statusCode < 300
-					|| requestData.Method == HttpMethod.HEAD && statusCode == 404
-					|| allowedStatusCodes.Contains(statusCode.Value)
-					|| allowedStatusCodes.Contains(-1);
+			{
+				if (allowedStatusCodes.Contains(-1) || allowedStatusCodes.Contains(statusCode.Value)) 
+					success = true;
+				else
+					success = requestData.ConnectionSettings
+						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
+			}
 			var details = new ApiCallDetails
 			{
 				Success = success,

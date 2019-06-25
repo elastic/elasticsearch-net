@@ -12,17 +12,6 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
-	internal static class EmptyReadOnly<TElement>
-	{
-		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new TElement[0]);
-		public static readonly IReadOnlyList<TElement> List = new List<TElement>();
-	}
-
-	internal static class EmptyReadOnly<TKey, TValue>
-	{
-		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(0));
-	}
-
 	internal static class Extensions
 	{
 		private static readonly ConcurrentDictionary<string, object> EnumCache = new ConcurrentDictionary<string, object>();

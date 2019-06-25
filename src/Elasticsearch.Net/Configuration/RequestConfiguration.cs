@@ -16,7 +16,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Treat the following statuses (on top of the 200 range) NOT as error.
 		/// </summary>
-		IEnumerable<int> AllowedStatusCodes { get; set; }
+		IReadOnlyCollection<int> AllowedStatusCodes { get; set; }
 
 		/// <summary>
 		/// Basic access authorization credentials to specify with this request.
@@ -99,9 +99,8 @@ namespace Elasticsearch.Net
 	public class RequestConfiguration : IRequestConfiguration
 	{
 		public string Accept { get; set; }
-		public IEnumerable<int> AllowedStatusCodes { get; set; }
+		public IReadOnlyCollection<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-		public CancellationToken CancellationToken { get; set; }
 
 		public X509CertificateCollection ClientCertificates { get; set; }
 		public string ContentType { get; set; }
@@ -147,7 +146,7 @@ namespace Elasticsearch.Net
 		}
 
 		string IRequestConfiguration.Accept { get; set; }
-		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
+		IReadOnlyCollection<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
 		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
 		string IRequestConfiguration.ContentType { get; set; }
@@ -211,13 +210,13 @@ namespace Elasticsearch.Net
 
 		public RequestConfigurationDescriptor AllowedStatusCodes(IEnumerable<int> codes)
 		{
-			Self.AllowedStatusCodes = codes;
+			Self.AllowedStatusCodes = codes?.ToReadOnlyCollection();
 			return this;
 		}
 
 		public RequestConfigurationDescriptor AllowedStatusCodes(params int[] codes)
 		{
-			Self.AllowedStatusCodes = codes;
+			Self.AllowedStatusCodes = codes?.ToReadOnlyCollection();
 			return this;
 		}
 
