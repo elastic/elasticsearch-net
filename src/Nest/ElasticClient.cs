@@ -135,11 +135,6 @@ namespace Nest
 			request.RequestParameters.RequestConfiguration = configuration;
 		}
 
-		private static readonly int[] AllStatusCodes = { -1 };
-		//TODO 7.x wire this in for necessary apis again
-		private static void AcceptAllStatusCodesHandler(IRequestConfiguration requestConfiguration) =>
-			requestConfiguration.AllowedStatusCodes = AllStatusCodes;
-
 		internal static void ForceJson(IRequestConfiguration requestConfiguration)
 		{
 			requestConfiguration.Accept = RequestData.MimeType;

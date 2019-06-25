@@ -19,5 +19,7 @@ namespace Nest
 			Members.Add(expression.Member);
 			return base.VisitMember(expression);
 		}
+		
+		public IList<MemberInfo> Members2 { get; } = new List<MemberInfo>();
 	}
 }
