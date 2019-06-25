@@ -9,23 +9,22 @@ namespace Nest
 	{
 		public static TranslateSqlResponseBuilder Instance { get; } = new TranslateSqlResponseBuilder();
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
-		{
-			return response.Success
+		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
+			response.Success
 				? new TranslateSqlResponse { Result = builtInSerializer.Deserialize<ISearchRequest>(stream) }
 				: new TranslateSqlResponse();
-		}
 
 		public override async Task<object> DeserializeResponseAsync(
 			IElasticsearchSerializer builtInSerializer,
 			IApiCallDetails response,
 			Stream stream,
 			CancellationToken ctx = default
-		)
-		{
-			return response.Success
-				? new TranslateSqlResponse { Result = await builtInSerializer.DeserializeAsync<ISearchRequest>(stream) }
+		) =>
+			response.Success
+				? new TranslateSqlResponse
+				{
+					Result = await builtInSerializer.DeserializeAsync<ISearchRequest>(stream, ctx).ConfigureAwait(false)
+				}
 				: new TranslateSqlResponse();
-		}
 	}
 }

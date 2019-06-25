@@ -5,7 +5,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <VersionSuffix>alpha</VersionSuffix>
-    <NoWarn>NU1701,NU1605</NoWarn>
+    <!-- CAC001: We dont need to set ConfigureAwait(false) here -->
+    <NoWarn>NU1701,NU1605,CAC001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AsciiDocNet" Version="1.0.0-alpha6" />

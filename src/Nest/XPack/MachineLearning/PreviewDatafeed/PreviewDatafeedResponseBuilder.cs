@@ -10,23 +10,22 @@ namespace Nest
 	{
 		public static PreviewDatafeedResponseBuilder<TDocument> Instance { get; } = new PreviewDatafeedResponseBuilder<TDocument>();
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
-		{
-			return response.Success
+		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
+			response.Success
 				? new PreviewDatafeedResponse<TDocument> { Data = builtInSerializer.Deserialize<IReadOnlyCollection<TDocument>>(stream) }
 				: new PreviewDatafeedResponse<TDocument>();
-		}
 
 		public override async Task<object> DeserializeResponseAsync(
 			IElasticsearchSerializer builtInSerializer,
 			IApiCallDetails response,
 			Stream stream,
 			CancellationToken ctx = default
-		)
-		{
-			return response.Success
-				? new PreviewDatafeedResponse<TDocument> { Data = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TDocument>>(stream) }
+		) =>
+			response.Success
+				? new PreviewDatafeedResponse<TDocument>
+				{
+					Data = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TDocument>>(stream, ctx).ConfigureAwait(false)
+				}
 				: new PreviewDatafeedResponse<TDocument>();
-		}
 	}
 }

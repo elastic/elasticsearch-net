@@ -11,23 +11,21 @@ namespace Nest
 
 		private MultiGetResponseFormatter Formatter { get; }
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
-		{
-			return response.Success
+		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
+			response.Success
 				? builtInSerializer.CreateStateful(Formatter).Deserialize<MultiGetResponse>(stream)
 				: new MultiGetResponse();
-		}
 
 		public override async Task<object> DeserializeResponseAsync(
 			IElasticsearchSerializer builtInSerializer,
 			IApiCallDetails response,
 			Stream stream,
 			CancellationToken ctx = default
-		)
-		{
-			return response.Success
-				? await builtInSerializer.CreateStateful(Formatter).DeserializeAsync<MultiGetResponse>(stream, ctx)
+		) =>
+			response.Success
+				? await builtInSerializer.CreateStateful(Formatter)
+					.DeserializeAsync<MultiGetResponse>(stream, ctx)
+					.ConfigureAwait(false)
 				: new MultiGetResponse();
-		}
 	}
 }

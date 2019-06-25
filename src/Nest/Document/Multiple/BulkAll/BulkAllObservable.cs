@@ -127,7 +127,7 @@ namespace Nest
 			_compositeCancelToken.ThrowIfCancellationRequested();
 
 			if (!response.ApiCall.Success)
-				return await HandleBulkRequest(buffer, page, backOffRetries, response);
+				return await HandleBulkRequest(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
 			var retryableDocuments = new List<T>();
 			var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
@@ -174,7 +174,7 @@ namespace Nest
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
 						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
 
-					return await RetryDocuments(page, ++backOffRetries, buffer);
+					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 				case PipelineFailure.CouldNotStartSniffOnStartup:
 				case PipelineFailure.BadAuthentication:
 				case PipelineFailure.NoNodesAttempted:
