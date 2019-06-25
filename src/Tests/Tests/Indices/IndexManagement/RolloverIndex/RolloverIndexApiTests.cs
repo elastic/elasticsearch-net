@@ -132,6 +132,13 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				)
 			);
 			create.ShouldBeValid();
+			var someDocs = client.Bulk( b=> b
+				.Index(CallIsolatedValue)
+				.Refresh(Refresh.True)
+				.IndexMany(Project.Generator.Generate(1200))
+			);
+			someDocs.ShouldBeValid();
+			
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -148,11 +155,11 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			response.ShouldBeValid();
 			response.OldIndex.Should().NotBeNullOrEmpty();
 			response.NewIndex.Should().NotBeNullOrEmpty();
-			response.RolledOver.Should().BeFalse();
-			response.ShardsAcknowledged.Should().BeFalse();
+			response.RolledOver.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
 			response.Conditions.Should().NotBeNull().And.HaveCount(2);
 			response.Conditions["[max_age: 7d]"].Should().BeFalse();
-			response.Conditions["[max_docs: 1000]"].Should().BeFalse();
+			response.Conditions["[max_docs: 1000]"].Should().BeTrue();
 		}
 	}
 }

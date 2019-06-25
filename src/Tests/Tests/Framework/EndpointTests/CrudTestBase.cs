@@ -401,7 +401,7 @@ namespace Tests.Framework.EndpointTests
 
 		[I] protected virtual async Task ExistsAfterDeleteIsValid() => await AssertOnExistsAfterDelete(r =>
 		{
-			r.ShouldBeValid();
+			r.ShouldNotBeValid();
 			r.Exists.Should().BeFalse();
 			ExpectExistsAfterDelete(r);
 		});

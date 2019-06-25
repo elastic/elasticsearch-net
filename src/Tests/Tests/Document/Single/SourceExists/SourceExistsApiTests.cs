@@ -50,7 +50,7 @@ namespace Tests.Document.Single.SourceExists
 	{
 		public SourceExistsNotFoundApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
@@ -96,7 +96,7 @@ namespace Tests.Document.Single.SourceExists
 	{
 		public SourceExistsIndexNotFoundApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => f => null;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
