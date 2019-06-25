@@ -8,28 +8,14 @@ namespace Nest
 	}
 
 	[DataContract]
-	public class UpdateResponse<TDocument> : ResponseBase, IUpdateResponse<TDocument>
+	public class UpdateResponse<TDocument> : WriteResponseBase, IUpdateResponse<TDocument>
 		where TDocument : class
 	{
+		public override bool IsValid => base.IsValid && 
+			(Result != Result.NotFound && Result != Result.Error);
+		
 		[DataMember(Name ="get")]
 		public IInlineGet<TDocument> Get { get; internal set; }
 
-		[DataMember(Name ="_id")]
-		public string Id { get; internal set; }
-
-		[DataMember(Name ="_index")]
-		public string Index { get; internal set; }
-
-		[DataMember(Name ="result")]
-		public Result Result { get; internal set; }
-
-		[DataMember(Name ="_shards")]
-		public ShardStatistics ShardsHit { get; internal set; }
-
-		[DataMember(Name ="_type")]
-		public string Type { get; internal set; }
-
-		[DataMember(Name ="_version")]
-		public long Version { get; internal set; }
 	}
 }
