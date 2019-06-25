@@ -181,11 +181,6 @@ namespace Nest
 			return split.Length == 0;
 		}
 
-		internal static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> handler)
-		{
-			foreach (var item in enumerable) handler(item);
-		}
-
 		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable)
 		{
 			var list = enumerable.AsInstanceOrToListOrNull();
@@ -211,8 +206,6 @@ namespace Nest
 			var i = dictionary?.Count;
 			return i.GetValueOrDefault(0) > 0 ? dictionary : null;
 		}
-
-		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs) => xs ?? new T[0];
 
 		internal static async Task ForEachAsync<TSource, TResult>(
 			this IEnumerable<TSource> lazyList,
