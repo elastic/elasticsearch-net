@@ -34,11 +34,6 @@ namespace Elasticsearch.Net
 			set => _audit.Exception = value;
 		}
 
-		public Node Node
-		{
-			set => _audit.Node = value;
-		}
-
 		public string Path
 		{
 			set => _audit.Path = value;

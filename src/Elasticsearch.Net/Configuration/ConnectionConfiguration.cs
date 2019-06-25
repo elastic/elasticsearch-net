@@ -219,9 +219,6 @@ namespace Elasticsearch.Net
 
 		protected T Assign<TValue>(TValue value, Action<T, TValue> assigner) => Fluent.Assign((T)this, value, assigner);
 
-		/// <summary> The default serializer used to serialize documents to and from JSON </summary>
-		protected virtual IElasticsearchSerializer DefaultSerializer(T settings) => new LowLevelRequestResponseSerializer();
-
 		/// <summary>
 		/// Sets the keep-alive option on a TCP connection.
 		/// <para>For Desktop CLR, sets ServicePointManager.SetTcpKeepAlive</para>

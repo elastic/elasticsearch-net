@@ -101,7 +101,6 @@ namespace Elasticsearch.Net
 		public string Accept { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-		public CancellationToken CancellationToken { get; set; }
 
 		public X509CertificateCollection ClientCertificates { get; set; }
 		public string ContentType { get; set; }
