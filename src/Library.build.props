@@ -12,8 +12,9 @@
 		<AssemblyVersion>$(CurrentAssemblyVersion)</AssemblyVersion>
 		<!-- File version reflects actual version number without prelease since that not allowed in its struct -->
 		<FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-    <DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
+    	<DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
