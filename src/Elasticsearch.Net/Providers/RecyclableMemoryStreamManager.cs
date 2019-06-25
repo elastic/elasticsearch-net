@@ -393,7 +393,6 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public MemoryStream GetStream(string tag, byte[] buffer, int offset, int count)
 		{
-			// TODO wouldn't it be better to just wrap
 			var stream = new RecyclableMemoryStream(this, tag, count);
 			stream.Write(buffer, offset, count);
 			stream.Position = 0;
