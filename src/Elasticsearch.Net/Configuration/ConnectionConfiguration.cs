@@ -520,9 +520,9 @@ namespace Elasticsearch.Net
 			_proxyPassword?.Dispose();
 			_basicAuthCredentials?.Dispose();
 		}
-		
-		protected virtual bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) => 
-			statusCode >= 200 && statusCode < 300
-			|| (method == HttpMethod.HEAD && statusCode == 404);
+
+		protected virtual bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>
+			statusCode >= 200 && statusCode < 300;
+
 	}
 }
