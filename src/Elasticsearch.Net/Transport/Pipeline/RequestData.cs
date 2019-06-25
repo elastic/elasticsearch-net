@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 			ProxyPassword = global.ProxyPassword;
 			DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
 			BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
-			AllowedStatusCodes = local?.AllowedStatusCodes.ToReadOnlyCollection();
+			AllowedStatusCodes = local != null ? local.AllowedStatusCodes?.ToReadOnlyCollection() : EmptyReadOnly<int>.Collection;
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
 		}
