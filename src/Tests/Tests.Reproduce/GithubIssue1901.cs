@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
@@ -46,7 +47,29 @@ namespace Tests.Reproduce
 			response.ApiCall.ResponseBodyInBytes.Should().NotBeNullOrEmpty();
 			response.ApiCall.HttpStatusCode.Should().Be(401);
 		}
+		[U] public async Task BadMimeMakesA200ResponseUnsuccesful()
+		{
+			var client = FixedResponseClient.Create(ProxyAuthResponse, 200,
+				s => s.DisableDirectStreaming(),
+				"text/html"
+			);
+			var response = await client.LowLevel.GetAsync<StringResponse>("examples", "1");
+			response.ApiCall.Success.Should().BeFalse();
+			response.ApiCall.HttpStatusCode.Should().Be(200);
+		}
+		[U] public async Task BadMimeMakesA200ResponseInvalid()
+		{
+			var client = FixedResponseClient.Create(ProxyAuthResponse, 200,
+				s => s.DisableDirectStreaming(),
+				"text/html"
+			);
+			var response = await client.LowLevel.GetAsync<GetResponse<object>>("examples", "1");
+			response.ApiCall.Success.Should().BeFalse();
+			response.ApiCall.HttpStatusCode.Should().Be(200);
+			response.IsValid.Should().BeFalse();
+		}
 
 		private class Example { }
 	}
+
 }

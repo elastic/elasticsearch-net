@@ -66,6 +66,9 @@ namespace Elasticsearch.Net
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
+			if (requestData.RequestMimeType != mimeType)
+				success = false;
+			
 			var details = new ApiCallDetails
 			{
 				Success = success,
