@@ -59,9 +59,11 @@ namespace ApiGenerator.Configuration
 
 		public static readonly Dictionary<string, string> DescriptorGenericsLookup =
 			(from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
+				let name = Path.GetFileNameWithoutExtension(f.Name).Replace("Request", "")
 				let contents = File.ReadAllText(f.FullName)
-				let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
-				select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
+				let c = Regex.Replace(contents, $@"^.+class ({name}Descriptor(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
+				let key = $"{name}Descriptor"
+				select new { Key = key, Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
 			.DistinctBy(v => v.Key)
 			.OrderBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
