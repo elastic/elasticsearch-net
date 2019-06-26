@@ -55,7 +55,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			aliases = new Dictionary<string, object>
 			{
-				{ CallIsolatedValue + "new_projects",  new { } }
+				{ CallIsolatedValue + "-new_projects",  new { } }
 			}
 		};
 
@@ -120,7 +120,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			Aliases = new Aliases
 			{
-				{ CallIsolatedValue + "new_projects", new Alias() }
+				{ CallIsolatedValue + "-new_projects", new Alias() }
 			}
 		};
 
@@ -138,7 +138,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				.IndexMany(Project.Generator.Generate(1200))
 			);
 			someDocs.ShouldBeValid();
-			
+
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(

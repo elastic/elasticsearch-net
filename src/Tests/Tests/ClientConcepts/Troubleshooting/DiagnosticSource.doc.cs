@@ -26,27 +26,27 @@ namespace Tests.ClientConcepts.Troubleshooting
 	 *
 	 * To aid with their discover the topics you can subscribe on and the event names they emit are exposed as
 	 * strongly typed strings under `Elasticsearch.Net.Diagnostics.DiagnosticSources`
-	 * 
+	 *
 	 */
 	public class DiagnosticSourceUsageDocumentation : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly ReadOnlyCluster _cluster;
 
 		public DiagnosticSourceUsageDocumentation(ReadOnlyCluster cluster) => _cluster = cluster;
-		
-		
+
+
 		/**
 		 * Subscribing to DiagnosticSources means implementing `IObserver<DiagnosticListener>`
 		 * or use `.Subscribe(observer, filter)` to opt in to the correct topic.
 		 *
 		 * Here we choose the more verbose `IObserver<>` implementation.
-		 * 
+		 *
 		 */
 		private class ListenerObserver : IObserver<DiagnosticListener>, IDisposable
 		{
 			private long _messagesWrittenToConsole = 0;
 			public long MessagesWrittenToConsole => _messagesWrittenToConsole;
-			
+
 			public Exception SeenException { get; private set; }
 			public void OnError(Exception error) => SeenException = error;
 
@@ -56,12 +56,11 @@ namespace Tests.ClientConcepts.Troubleshooting
 			private void WriteToConsole<T>(string eventName, T data)
 			{
 				var a = Activity.Current;
-				Console.WriteLine($"{eventName?.PadRight(30)} {a.Id?.PadRight(32)} {a.ParentId?.PadRight(32)} {data?.ToString().PadRight(10)}");
 				Interlocked.Increment(ref _messagesWrittenToConsole);
 			}
-			
+
 			private List<IDisposable> Disposables { get; } = new List<IDisposable>();
-			
+
 			/**
 			 * By inspecting the name we selectively subscribe only to topics `Elasticsearch.Net` emits.
 			 *
@@ -72,7 +71,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 *
 			 * Therefor each topic we ship with has a dedicated `Observer` implementation that takes an `onNext` lambda
 			 * which is typed to the context object we actually emit.
-			 * 
+			 *
 			 */
 			public void OnNext(DiagnosticListener value)
 			{
@@ -83,24 +82,24 @@ namespace Tests.ClientConcepts.Troubleshooting
 					var subscription = value.Subscribe(listener());
 					Disposables.Add(subscription);
 				}
-				
-				TrySubscribe(DiagnosticSources.AuditTrailEvents.SourceName, 
+
+				TrySubscribe(DiagnosticSources.AuditTrailEvents.SourceName,
 					() => new AuditDiagnosticObserver(v => WriteToConsole(v.EventName, v.Audit)));
-				
-				TrySubscribe(DiagnosticSources.Serializer.SourceName, 
+
+				TrySubscribe(DiagnosticSources.Serializer.SourceName,
 					() => new SerializerDiagnosticObserver(v => WriteToConsole(v.EventName, v.Registration)));
 				/**
 				 * RequestPipeline emits a different context object for the start of the `Activity` then it does
 				 * for the end of the `Activity` therefor `RequestPipelineDiagnosticObserver` accepts two `onNext` lambda's.
 				 * One for the `.Start` events and one for the `.Stop` events.
 				 */
-				TrySubscribe(DiagnosticSources.RequestPipeline.SourceName, 
+				TrySubscribe(DiagnosticSources.RequestPipeline.SourceName,
 					() => new RequestPipelineDiagnosticObserver(
 						v => WriteToConsole(v.EventName, v.RequestData),
 						v => WriteToConsole(v.EventName, v.Response)
 					));
-				
-				TrySubscribe(DiagnosticSources.HttpConnection.SourceName, 
+
+				TrySubscribe(DiagnosticSources.HttpConnection.SourceName,
 					() => new HttpConnectionDiagnosticObserver(
 						v => WriteToConsole(v.EventName, v.RequestData),
 						v => WriteToConsole(v.EventName, v.StatusCode)
@@ -122,7 +121,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			using(var listenerObserver = new ListenerObserver())
 			using (var subscription = DiagnosticListener.AllListeners.Subscribe(listenerObserver))
 			{
-				
+
 				/**
 				 * We'll use a Sniffing connection pool here since it sniffs on startup and pings before
 				 * first usage, so our diagnostics are involved enough to showcase most topics.
