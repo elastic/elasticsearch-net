@@ -41,14 +41,14 @@ namespace Tests.Cluster.NodesStats
 				;
 
 			var indexMetrics = NodesStatsIndexMetric.Fielddata | NodesStatsIndexMetric.Merge;
-			await GET("/_nodes/stats/fs%2Cjvm/fielddata%2Cmerge")
+			await GET("/_nodes/stats/fs%2Cjvm/merge%2Cfielddata")
 					.Fluent(c => c.Nodes.Stats(p => p.Metric(metrics).IndexMetric(indexMetrics)))
 					.Request(c => c.Nodes.Stats(new NodesStatsRequest(metrics, indexMetrics)))
 					.FluentAsync(c => c.Nodes.StatsAsync(p => p.Metric(metrics).IndexMetric(indexMetrics)))
 					.RequestAsync(c => c.Nodes.StatsAsync(new NodesStatsRequest(metrics, indexMetrics)))
 				;
 
-			await GET("/_nodes/foo/stats/fs%2Cjvm/fielddata%2Cmerge")
+			await GET("/_nodes/foo/stats/fs%2Cjvm/merge%2Cfielddata")
 					.Fluent(c => c.Nodes.Stats(p => p.NodeId("foo").Metric(metrics).IndexMetric(indexMetrics)))
 					.Request(c => c.Nodes.Stats(new NodesStatsRequest("foo", metrics, indexMetrics)))
 					.FluentAsync(c => c.Nodes.StatsAsync(p => p.NodeId("foo").Metric(metrics).IndexMetric(indexMetrics)))

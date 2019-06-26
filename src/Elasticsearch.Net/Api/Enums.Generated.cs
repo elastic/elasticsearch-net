@@ -49,39 +49,40 @@ namespace Elasticsearch.Net
 	[Flags, StringEnum]
 	public enum IndicesStatsMetric
 	{
-		[EnumMember(Value = "completion")]
-		Completion = 1 << 0,
-		[EnumMember(Value = "docs")]
-		Docs = 1 << 1,
-		[EnumMember(Value = "fielddata")]
-		Fielddata = 1 << 2,
-		[EnumMember(Value = "query_cache")]
-		QueryCache = 1 << 3,
-		[EnumMember(Value = "flush")]
-		Flush = 1 << 4,
-		[EnumMember(Value = "get")]
-		Get = 1 << 5,
-		[EnumMember(Value = "indexing")]
-		Indexing = 1 << 6,
-		[EnumMember(Value = "merge")]
-		Merge = 1 << 7,
-		[EnumMember(Value = "request_cache")]
-		RequestCache = 1 << 8,
-		[EnumMember(Value = "refresh")]
-		Refresh = 1 << 9,
-		[EnumMember(Value = "search")]
-		Search = 1 << 10,
-		[EnumMember(Value = "segments")]
-		Segments = 1 << 11,
 		[EnumMember(Value = "store")]
-		Store = 1 << 12,
+		Store = 1 << 0,
+		[EnumMember(Value = "indexing")]
+		Indexing = 1 << 1,
+		[EnumMember(Value = "get")]
+		Get = 1 << 2,
+		[EnumMember(Value = "search")]
+		Search = 1 << 3,
+		[EnumMember(Value = "merge")]
+		Merge = 1 << 4,
+		[EnumMember(Value = "flush")]
+		Flush = 1 << 5,
+		[EnumMember(Value = "refresh")]
+		Refresh = 1 << 6,
+		[EnumMember(Value = "query_cache")]
+		QueryCache = 1 << 7,
+		[EnumMember(Value = "fielddata")]
+		Fielddata = 1 << 8,
+		[EnumMember(Value = "docs")]
+		Docs = 1 << 9,
 		[EnumMember(Value = "warmer")]
-		Warmer = 1 << 13,
-		[Obsolete("Suggest stats have folded under the search stats, this alias will be removed")]
-		[EnumMember(Value = "suggest")]
-		Suggest = 1 << 14,
+		Warmer = 1 << 10,
+		[EnumMember(Value = "completion")]
+		Completion = 1 << 11,
+		[EnumMember(Value = "segments")]
+		Segments = 1 << 12,
+		[EnumMember(Value = "translog")]
+		Translog = 1 << 13,
+		[EnumMember(Value = "request_cache")]
+		RequestCache = 1 << 14,
+		[EnumMember(Value = "recovery")]
+		Recovery = 1 << 15,
 		[EnumMember(Value = "_all")]
-		All = 1 << 15
+		All = 1 << 16
 	}
 
 	[Flags, StringEnum]
@@ -137,39 +138,40 @@ namespace Elasticsearch.Net
 	[Flags, StringEnum]
 	public enum NodesStatsIndexMetric
 	{
-		[EnumMember(Value = "completion")]
-		Completion = 1 << 0,
-		[EnumMember(Value = "docs")]
-		Docs = 1 << 1,
-		[EnumMember(Value = "fielddata")]
-		Fielddata = 1 << 2,
-		[EnumMember(Value = "query_cache")]
-		QueryCache = 1 << 3,
-		[EnumMember(Value = "flush")]
-		Flush = 1 << 4,
-		[EnumMember(Value = "get")]
-		Get = 1 << 5,
-		[EnumMember(Value = "indexing")]
-		Indexing = 1 << 6,
-		[EnumMember(Value = "merge")]
-		Merge = 1 << 7,
-		[EnumMember(Value = "request_cache")]
-		RequestCache = 1 << 8,
-		[EnumMember(Value = "refresh")]
-		Refresh = 1 << 9,
-		[EnumMember(Value = "search")]
-		Search = 1 << 10,
-		[EnumMember(Value = "segments")]
-		Segments = 1 << 11,
 		[EnumMember(Value = "store")]
-		Store = 1 << 12,
+		Store = 1 << 0,
+		[EnumMember(Value = "indexing")]
+		Indexing = 1 << 1,
+		[EnumMember(Value = "get")]
+		Get = 1 << 2,
+		[EnumMember(Value = "search")]
+		Search = 1 << 3,
+		[EnumMember(Value = "merge")]
+		Merge = 1 << 4,
+		[EnumMember(Value = "flush")]
+		Flush = 1 << 5,
+		[EnumMember(Value = "refresh")]
+		Refresh = 1 << 6,
+		[EnumMember(Value = "query_cache")]
+		QueryCache = 1 << 7,
+		[EnumMember(Value = "fielddata")]
+		Fielddata = 1 << 8,
+		[EnumMember(Value = "docs")]
+		Docs = 1 << 9,
 		[EnumMember(Value = "warmer")]
-		Warmer = 1 << 13,
-		[Obsolete("As of 5.0 this option always returned an empty object in the response")]
-		[EnumMember(Value = "suggest")]
-		Suggest = 1 << 14,
+		Warmer = 1 << 10,
+		[EnumMember(Value = "completion")]
+		Completion = 1 << 11,
+		[EnumMember(Value = "segments")]
+		Segments = 1 << 12,
+		[EnumMember(Value = "translog")]
+		Translog = 1 << 13,
+		[EnumMember(Value = "request_cache")]
+		RequestCache = 1 << 14,
+		[EnumMember(Value = "recovery")]
+		Recovery = 1 << 15,
 		[EnumMember(Value = "_all")]
-		All = 1 << 15
+		All = 1 << 16
 	}
 
 	[Flags, StringEnum]
@@ -498,38 +500,38 @@ namespace Elasticsearch.Net
 			if ((enumValue & IndicesStatsMetric.All) != 0)
 				return "_all";
 			var list = new List<string>();
-			if ((enumValue & IndicesStatsMetric.Completion) != 0)
-				list.Add("completion");
-			if ((enumValue & IndicesStatsMetric.Docs) != 0)
-				list.Add("docs");
-			if ((enumValue & IndicesStatsMetric.Fielddata) != 0)
-				list.Add("fielddata");
-			if ((enumValue & IndicesStatsMetric.QueryCache) != 0)
-				list.Add("query_cache");
-			if ((enumValue & IndicesStatsMetric.Flush) != 0)
-				list.Add("flush");
-			if ((enumValue & IndicesStatsMetric.Get) != 0)
-				list.Add("get");
-			if ((enumValue & IndicesStatsMetric.Indexing) != 0)
-				list.Add("indexing");
-			if ((enumValue & IndicesStatsMetric.Merge) != 0)
-				list.Add("merge");
-			if ((enumValue & IndicesStatsMetric.RequestCache) != 0)
-				list.Add("request_cache");
-			if ((enumValue & IndicesStatsMetric.Refresh) != 0)
-				list.Add("refresh");
-			if ((enumValue & IndicesStatsMetric.Search) != 0)
-				list.Add("search");
-			if ((enumValue & IndicesStatsMetric.Segments) != 0)
-				list.Add("segments");
 			if ((enumValue & IndicesStatsMetric.Store) != 0)
 				list.Add("store");
+			if ((enumValue & IndicesStatsMetric.Indexing) != 0)
+				list.Add("indexing");
+			if ((enumValue & IndicesStatsMetric.Get) != 0)
+				list.Add("get");
+			if ((enumValue & IndicesStatsMetric.Search) != 0)
+				list.Add("search");
+			if ((enumValue & IndicesStatsMetric.Merge) != 0)
+				list.Add("merge");
+			if ((enumValue & IndicesStatsMetric.Flush) != 0)
+				list.Add("flush");
+			if ((enumValue & IndicesStatsMetric.Refresh) != 0)
+				list.Add("refresh");
+			if ((enumValue & IndicesStatsMetric.QueryCache) != 0)
+				list.Add("query_cache");
+			if ((enumValue & IndicesStatsMetric.Fielddata) != 0)
+				list.Add("fielddata");
+			if ((enumValue & IndicesStatsMetric.Docs) != 0)
+				list.Add("docs");
 			if ((enumValue & IndicesStatsMetric.Warmer) != 0)
 				list.Add("warmer");
-#pragma warning disable 618
-			if ((enumValue & IndicesStatsMetric.Suggest) != 0)
-				list.Add("suggest");
-#pragma warning restore 618
+			if ((enumValue & IndicesStatsMetric.Completion) != 0)
+				list.Add("completion");
+			if ((enumValue & IndicesStatsMetric.Segments) != 0)
+				list.Add("segments");
+			if ((enumValue & IndicesStatsMetric.Translog) != 0)
+				list.Add("translog");
+			if ((enumValue & IndicesStatsMetric.RequestCache) != 0)
+				list.Add("request_cache");
+			if ((enumValue & IndicesStatsMetric.Recovery) != 0)
+				list.Add("recovery");
 			return string.Join(",", list);
 		}
 
@@ -590,38 +592,38 @@ namespace Elasticsearch.Net
 			if ((enumValue & NodesStatsIndexMetric.All) != 0)
 				return "_all";
 			var list = new List<string>();
-			if ((enumValue & NodesStatsIndexMetric.Completion) != 0)
-				list.Add("completion");
-			if ((enumValue & NodesStatsIndexMetric.Docs) != 0)
-				list.Add("docs");
-			if ((enumValue & NodesStatsIndexMetric.Fielddata) != 0)
-				list.Add("fielddata");
-			if ((enumValue & NodesStatsIndexMetric.QueryCache) != 0)
-				list.Add("query_cache");
-			if ((enumValue & NodesStatsIndexMetric.Flush) != 0)
-				list.Add("flush");
-			if ((enumValue & NodesStatsIndexMetric.Get) != 0)
-				list.Add("get");
-			if ((enumValue & NodesStatsIndexMetric.Indexing) != 0)
-				list.Add("indexing");
-			if ((enumValue & NodesStatsIndexMetric.Merge) != 0)
-				list.Add("merge");
-			if ((enumValue & NodesStatsIndexMetric.RequestCache) != 0)
-				list.Add("request_cache");
-			if ((enumValue & NodesStatsIndexMetric.Refresh) != 0)
-				list.Add("refresh");
-			if ((enumValue & NodesStatsIndexMetric.Search) != 0)
-				list.Add("search");
-			if ((enumValue & NodesStatsIndexMetric.Segments) != 0)
-				list.Add("segments");
 			if ((enumValue & NodesStatsIndexMetric.Store) != 0)
 				list.Add("store");
+			if ((enumValue & NodesStatsIndexMetric.Indexing) != 0)
+				list.Add("indexing");
+			if ((enumValue & NodesStatsIndexMetric.Get) != 0)
+				list.Add("get");
+			if ((enumValue & NodesStatsIndexMetric.Search) != 0)
+				list.Add("search");
+			if ((enumValue & NodesStatsIndexMetric.Merge) != 0)
+				list.Add("merge");
+			if ((enumValue & NodesStatsIndexMetric.Flush) != 0)
+				list.Add("flush");
+			if ((enumValue & NodesStatsIndexMetric.Refresh) != 0)
+				list.Add("refresh");
+			if ((enumValue & NodesStatsIndexMetric.QueryCache) != 0)
+				list.Add("query_cache");
+			if ((enumValue & NodesStatsIndexMetric.Fielddata) != 0)
+				list.Add("fielddata");
+			if ((enumValue & NodesStatsIndexMetric.Docs) != 0)
+				list.Add("docs");
 			if ((enumValue & NodesStatsIndexMetric.Warmer) != 0)
 				list.Add("warmer");
-#pragma warning disable 618
-			if ((enumValue & NodesStatsIndexMetric.Suggest) != 0)
-				list.Add("suggest");
-#pragma warning restore 618
+			if ((enumValue & NodesStatsIndexMetric.Completion) != 0)
+				list.Add("completion");
+			if ((enumValue & NodesStatsIndexMetric.Segments) != 0)
+				list.Add("segments");
+			if ((enumValue & NodesStatsIndexMetric.Translog) != 0)
+				list.Add("translog");
+			if ((enumValue & NodesStatsIndexMetric.RequestCache) != 0)
+				list.Add("request_cache");
+			if ((enumValue & NodesStatsIndexMetric.Recovery) != 0)
+				list.Add("recovery");
 			return string.Join(",", list);
 		}
 
