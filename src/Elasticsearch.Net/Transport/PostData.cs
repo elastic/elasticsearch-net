@@ -7,13 +7,12 @@ using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
-	public interface IPostData
+	// ReSharper disable once UnusedTypeParameter
+	public interface IPostData<out T> 
 	{
 		void Write(Stream writableStream, IConnectionConfigurationValues settings);
+		Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken token);
 	}
-
-	// ReSharper disable once UnusedTypeParameter
-	public interface IPostData<out T> : IPostData { }
 
 	public enum PostType
 	{

@@ -40,6 +40,7 @@ namespace Elasticsearch.Net
 		public static ServerError Create(Stream stream) =>
 			LowLevelRequestResponseSerializer.Instance.Deserialize<ServerError>(stream);
 
+		// ReSharper disable once UnusedMember.Global
 		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token = default) =>
 			LowLevelRequestResponseSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
 

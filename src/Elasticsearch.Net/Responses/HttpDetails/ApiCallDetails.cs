@@ -25,7 +25,6 @@ namespace Elasticsearch.Net
 		public byte[] RequestBodyInBytes { get; set; }
 		public byte[] ResponseBodyInBytes { get; set; }
 		public string ResponseMimeType { get; set; }
-		public ServerError ServerError { get; set; }
 		public bool Success { get; set; }
 
 		public bool SuccessOrKnownError =>
