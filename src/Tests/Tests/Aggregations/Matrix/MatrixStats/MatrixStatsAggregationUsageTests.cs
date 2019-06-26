@@ -74,6 +74,7 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 			var matrix = response.Aggregations.MatrixStats("matrixstats");
 			matrix.Should().NotBeNull();
 			matrix.Fields.Should().NotBeNull().And.HaveCount(2);
+			matrix.DocCount.Should().BeGreaterThan(0);
 
 			AssertField(matrix, "numberOfCommits");
 			AssertField(matrix, "numberOfContributors");

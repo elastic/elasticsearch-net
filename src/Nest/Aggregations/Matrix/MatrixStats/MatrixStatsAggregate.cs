@@ -34,9 +34,8 @@ namespace Nest
 	[DataContract]
 	public class MatrixStatsAggregate : MatrixAggregateBase
 	{
-		//TODO non nullable in 6.0
-		[DataMember(Name = "fields")]
-		public long? DocCount { get; set; }
+		[DataMember(Name = "doc_count")]
+		public long DocCount { get; set; }
 
 		[DataMember(Name = "fields")]
 		public List<MatrixStatsField> Fields { get; set; }
