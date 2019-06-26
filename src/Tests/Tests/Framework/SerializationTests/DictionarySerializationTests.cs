@@ -11,12 +11,15 @@ using Tests.Core.Serialization;
 
 namespace Tests.Framework.SerializationTests
 {
+	/// <summary>
+	/// <see cref="IIsADictionary"/> implementations do not use
+	/// <see cref="VerbatimDictionaryKeysFormatter{TKey,TValue}"/>
+	/// so keys are camel cased on serialization, in line with NEST conventions
+	/// </summary>
 	public class IsADictionarySerializationTests
 	{
 		protected object ExpectJson => new { key1 = "value1", key2 = "value2", };
 
-		// IIsADictionary implementations do not use the VerbatimDictionaryKeysConverter
-		// so keys are camel cased on serialization, in line with NEST conventions
 		[U]
 		public void CanSerializeIsADictionary()
 		{
