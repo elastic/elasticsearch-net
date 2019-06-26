@@ -13,7 +13,7 @@ namespace Nest
 	/// new features in the future.
 	/// </pre>
 	/// </summary>
-	[Obsolete("Mappings are no longer type dependend please use TypeMapping directly")]
+	[Obsolete("Mappings are no longer type dependant, please use TypeMapping directly")]
 	public class Mappings : ObsoleteMappingsBase, ITypeMapping, IEnumerable<ITypeMapping>
 	{
 		private IEnumerable<ITypeMapping> AsEnumerable => new[] { new TypeMapping() };
