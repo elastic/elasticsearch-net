@@ -634,7 +634,9 @@ namespace Nest
 			}
 
 			var scriptedMetric = reader.ReadNextBlockSegment();
-			return new ScriptedMetricAggregate(new LazyDocument(BinaryUtil.ToArray(ref scriptedMetric), formatterResolver))
+			var bytes = BinaryUtil.ToArray(ref scriptedMetric);
+			var doc = new LazyDocument(bytes, formatterResolver);
+			return new ScriptedMetricAggregate(doc)
 			{
 				Meta = meta
 			};
