@@ -6,5 +6,6 @@ namespace Nest
 	{
 		[DataMember(Name ="found")]
 		public bool Found { get; internal set; }
+		
 	}
 }

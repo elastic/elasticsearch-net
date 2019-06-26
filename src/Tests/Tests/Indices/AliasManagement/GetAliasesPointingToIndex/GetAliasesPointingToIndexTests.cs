@@ -67,6 +67,11 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 			var indices = await _client.GetIndicesPointingToAliasAsync(Alias(3));
 			indices.Should().NotBeEmpty().And.Contain(Index);
 		}
+		[I] public async Task NotFoundAliasReturnEmpty()
+		{
+			var indices = await _client.GetIndicesPointingToAliasAsync(Alias(4));
+			indices.Should().BeEmpty();
+		}
 
 		private static void AssertGetAliasesPointingToIndexResponse(IReadOnlyDictionary<string, AliasDefinition> aliasesPointingToIndex)
 		{

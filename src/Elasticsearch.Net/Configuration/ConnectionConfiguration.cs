@@ -8,10 +8,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Net.Security;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using System.Runtime.InteropServices;
 using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
@@ -139,6 +139,7 @@ namespace Elasticsearch.Net
 		private bool _throwExceptions;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
+		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
@@ -156,6 +157,7 @@ namespace Elasticsearch.Net
 				_nodePredicate = DefaultReseedableNodePredicate;
 
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
+			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -201,6 +203,7 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
 		string IConnectionConfigurationValues.UserAgent => _userAgent;
+		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -517,5 +520,9 @@ namespace Elasticsearch.Net
 			_proxyPassword?.Dispose();
 			_basicAuthCredentials?.Dispose();
 		}
+
+		protected virtual bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>
+			statusCode >= 200 && statusCode < 300;
+
 	}
 }
