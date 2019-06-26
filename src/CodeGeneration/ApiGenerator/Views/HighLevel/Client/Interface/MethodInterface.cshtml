@@ -15,22 +15,22 @@
 	var initializerPath = "HighLevel/Client/InitializerSyntax/InitializerMethodHeader.cshtml";
 }
 
-@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Fluent); }
-@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); };
-@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Fluent); }
-@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); };
+@{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Fluent); }
+@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); };
+@{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Fluent); }
+@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); };
 
 @if (model.FluentBound != null)
 {
 <text>
-	@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.FluentBound); }
-	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); };
-	@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.FluentBound); }
-	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); };
+	@{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.FluentBound); }
+	@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); };
+	@{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.FluentBound); }
+	@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); };
 </text>
 }
-@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Initializer); }
-@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); };
-@{ IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Initializer); }
-@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); };
+@{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Initializer); }
+@{ await IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); };
+@{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", model.Initializer); }
+@{ await IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); };
 

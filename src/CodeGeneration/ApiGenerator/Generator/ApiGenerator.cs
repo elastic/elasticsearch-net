@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
 using ApiGenerator.Domain.Specification;
@@ -15,20 +16,20 @@ namespace ApiGenerator.Generator
 	{
 		public static List<string> Warnings { get; private set; }
 
-		public static void Generate(string downloadBranch, params string[] folders)
+		public static async Task Generate(string downloadBranch, params string[] folders)
 		{
 			Warnings = new List<string>();
 			var spec = CreateRestApiSpecModel(downloadBranch, folders);
 			var generators = new List<RazorGeneratorBase>
 			{
-				
+
 				//low level client
 				new LowLevelClientInterfaceGenerator(),
 				new LowLevelClientImplementationGenerator(),
 				new RequestParametersGenerator(),
 				new EnumsGenerator(),
-				
-				
+
+
 				//high level client
 				new HighLevelClientInterfaceGenerator(),
 				new HighLevelClientImplementationGenerator(),
@@ -42,7 +43,7 @@ namespace ApiGenerator.Generator
 				foreach (var generator in generators)
 				{
 					pbar.Message = "Generating " + generator.Title;
-					generator.Generate(spec, pbar);
+					await generator.Generate(spec, pbar);
 					pbar.Tick("Generated " + generator.Title);
 				}
 			}

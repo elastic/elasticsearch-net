@@ -11,7 +11,7 @@
 @using CsQuery.StringScanner.Implementation
 @using ApiGenerator.Domain.Specification
 @inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
-@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 @{
 	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
 	string ns = model.Key;
@@ -51,7 +51,7 @@ namespace Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNa
 		var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
 		foreach (var method in methods)
 		{
-			IncludeAsync("LowLevel/Client/Methods/MethodImplementation.cshtml", method);
+			await IncludeAsync("LowLevel/Client/Methods/MethodImplementation.cshtml", method);
 		}
 	}
 	}

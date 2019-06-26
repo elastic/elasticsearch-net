@@ -9,7 +9,7 @@
 @using ApiGenerator.Domain.Code
 @using CsQuery.StringScanner.Implementation
 @inherits CodeTemplatePage<RestApiSpec>
-@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 // ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-@{ IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+@{ await IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
 using static Elasticsearch.Net.HttpMethod;
 
 @{
@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 		var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
 		foreach (var method in methods)
 		{
-			IncludeAsync("LowLevel/Client/Methods/MethodImplementation.cshtml", method);
+			await IncludeAsync("LowLevel/Client/Methods/MethodImplementation.cshtml", method);
 		}
 	}
 	<text>

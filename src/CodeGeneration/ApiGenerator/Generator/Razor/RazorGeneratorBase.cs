@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
 using Microsoft.CodeAnalysis;
@@ -19,13 +20,13 @@ namespace ApiGenerator.Generator.Razor
 			.UseMemoryCachingProvider()
 			.Build();
 
-		protected void DoRazor<TModel>(TModel model, string viewLocation, string targetLocation, string cacheNameSuffix = null)
+		protected async Task DoRazor<TModel>(TModel model, string viewLocation, string targetLocation, string cacheNameSuffix = null)
 		{
 			try
 			{
 				var name = GetType().Name + cacheNameSuffix;
 				var sourceFileContents = File.ReadAllText(viewLocation);
-				var generated = Engine.CompileRenderStringAsync(name, sourceFileContents,  model).GetAwaiter().GetResult();
+				var generated = await Engine.CompileRenderStringAsync(name, sourceFileContents,  model);
 				WriteFormattedCsharpFile(targetLocation, generated);
 			}
 			catch (TemplateGenerationException e)
@@ -35,8 +36,8 @@ namespace ApiGenerator.Generator.Razor
 			}
 		}
 
-		protected void DoRazorDependantFiles<TModel>(
-			ProgressBar pbar, IReadOnlyCollection<TModel> items, string viewLocation, 
+		protected async Task DoRazorDependantFiles<TModel>(
+			ProgressBar pbar, IReadOnlyCollection<TModel> items, string viewLocation,
 			Func<TModel, string> identifier, Func<string, string> target)
 		{
 			using (var c = pbar.Spawn(items.Count, "Generating namespaces", new ProgressBarOptions { ForegroundColor = ConsoleColor.Yellow }))
@@ -45,12 +46,12 @@ namespace ApiGenerator.Generator.Razor
 				{
 					var id = identifier(item);
 					var targetLocation = target(id);
-					DoRazor(item, viewLocation, targetLocation, id);
+					await DoRazor(item, viewLocation, targetLocation, id);
 					c.Tick($"{Title}: {id}");
 				}
 			}
 		}
-		
+
 		protected static void WriteFormattedCsharpFile(string path, string contents)
 		{
 			var tree = CSharpSyntaxTree.ParseText(contents);
@@ -60,6 +61,6 @@ namespace ApiGenerator.Generator.Razor
 		}
 
 		public abstract string Title { get; }
-		public abstract void Generate(RestApiSpec spec, ProgressBar progressBar);
+		public abstract Task Generate(RestApiSpec spec, ProgressBar progressBar);
 	}
 }

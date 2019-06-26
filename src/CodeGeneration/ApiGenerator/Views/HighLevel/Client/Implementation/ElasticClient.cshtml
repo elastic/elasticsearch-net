@@ -10,13 +10,13 @@
 @using ApiGenerator.Domain.Code
 @using CsQuery.StringScanner.Implementation
 @inherits CodeTemplatePage<RestApiSpec>
-@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 // ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Nest;
-@{ IncludeAsync("HighLevel/Client/Usings.cshtml", Model);}
+@{ await IncludeAsync("HighLevel/Client/Usings.cshtml", Model);}
 
 @{
 	RestApiSpec model = Model;
@@ -61,7 +61,7 @@ namespace Nest
 		var models = endpoints.Select(e=>e.HighLevelModel).ToList();
 		foreach (var m in models)
 		{
-			IncludeAsync("HighLevel/Client/Implementation/MethodImplementation.cshtml", m);
+			await IncludeAsync("HighLevel/Client/Implementation/MethodImplementation.cshtml", m);
 		}
 	}
 	<text>

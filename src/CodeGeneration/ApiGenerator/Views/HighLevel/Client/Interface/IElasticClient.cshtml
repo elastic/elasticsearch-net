@@ -4,7 +4,7 @@
 @using ApiGenerator.Domain
 @using ApiGenerator.Domain.Code
 @inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
-@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 // ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Nest;
-@{ IncludeAsync("HighLevel/Client/Usings.cshtml", Model);}
+@{ await IncludeAsync("HighLevel/Client/Usings.cshtml", Model);}
 
 namespace Nest
 {
@@ -34,7 +34,7 @@ namespace Nest
 			var models = endpoints.Select(e=>e.HighLevelModel).ToList();
 			foreach(var m in models)
 			{
-				IncludeAsync("HighLevel/Client/Interface/MethodInterface.cshtml", m);
+				await IncludeAsync("HighLevel/Client/Interface/MethodInterface.cshtml", m);
 			}
 		}
 	}

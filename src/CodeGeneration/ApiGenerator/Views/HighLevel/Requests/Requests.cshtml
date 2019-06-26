@@ -16,7 +16,7 @@
 	string ns = model.Key != CsharpNames.RootNamespace ? "."+CsharpNames.ApiNamespace+"." + model.Key + CsharpNames.ApiNamespaceSuffix : null;
 	var endpoints = model.Value;
 }
-@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 // ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace Nest
 {
 @foreach (var endpoint in endpoints)
 {
-	IncludeAsync("HighLevel/Requests/RequestInterface.cshtml", endpoint.RequestInterface);
-	IncludeAsync("HighLevel/Requests/RequestImplementations.cshtml", endpoint.RequestPartialImplementation);
+	await IncludeAsync("HighLevel/Requests/RequestInterface.cshtml", endpoint.RequestInterface);
+	await IncludeAsync("HighLevel/Requests/RequestImplementations.cshtml", endpoint.RequestPartialImplementation);
 }
 }
