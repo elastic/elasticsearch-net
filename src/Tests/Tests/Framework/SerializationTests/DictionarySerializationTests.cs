@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Serialization;
 
 namespace Tests.Framework.SerializationTests
 {
+	/// <summary>
+	/// <see cref="IIsADictionary"/> implementations do not use
+	/// <see cref="VerbatimDictionaryKeysFormatter{TKey,TValue}"/>
+	/// so keys are camel cased on serialization, in line with NEST conventions
+	/// </summary>
 	public class IsADictionarySerializationTests
 	{
 		protected object ExpectJson => new { key1 = "value1", key2 = "value2", };
 
-		// IIsADictionary implementations do not use the VerbatimDictionaryKeysConverter
-		// so keys are camel cased on serialization, in line with NEST conventions
 		[U]
 		public void CanSerializeIsADictionary()
 		{
@@ -24,6 +30,31 @@ namespace Tests.Framework.SerializationTests
 			});
 
 			SerializationTestHelper.Object(isADictionary).RoundTrips(ExpectJson);
+		}
+
+		[U]
+		public void SerializesIsADictionaryNullValues()
+		{
+			var isADictionary = new MyIsADictionary(new Dictionary<object, object>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			});
+
+			var client = new ElasticClient();
+			client.RequestResponseSerializer.SerializeToString(isADictionary).Should().Be("{\"key1\":null,\"key2\":\"value2\"}");
+		}
+
+		[U]
+		public void SerializesIsADictionaryRespectsDefaultFieldNameInferrer()
+		{
+			var isADictionary = new MyIsADictionary(new Dictionary<object, object>
+			{
+				{ "Key1", "value1" }
+			});
+
+			var client = new ElasticClient(new ConnectionSettings().DefaultFieldNameInferrer(f => f.ToUpperInvariant()));
+			client.RequestResponseSerializer.SerializeToString(isADictionary).Should().Be("{\"KEY1\":\"value1\"}");
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -58,6 +89,19 @@ namespace Tests.Framework.SerializationTests
 			};
 
 			SerializationTestHelper.Object(dictionary).RoundTrips(ExpectJson);
+		}
+
+		[U]
+		public void CanSerializeIgnoresDefaultFieldNameInferrer()
+		{
+			var dictionary = new Dictionary<string, string>
+			{
+				{ "Key1", "value1" },
+				{ "Key2", "value2" },
+			};
+
+			var client = new ElasticClient(new ConnectionSettings().DefaultFieldNameInferrer(f => f.ToUpperInvariant()));
+			client.RequestResponseSerializer.SerializeToString(dictionary).Should().Be("{\"Key1\":\"value1\",\"Key2\":\"value2\"}");
 		}
 
 		[U]
@@ -119,6 +163,54 @@ namespace Tests.Framework.SerializationTests
 			};
 
 			SerializationTestHelper.Object(hashTable).RoundTrips(ExpectJson);
+		}
+
+		[U]
+		public void DoesNotSerializeDictionaryNullValues()
+		{
+			var dictionary = new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			};
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+		}
+
+		[U]
+		public void DoesNotSerializeIDictionaryNullValues()
+		{
+			IDictionary<string, string> dictionary = new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			};
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+		}
+
+		[U]
+		public void DoesNotSerializeReadOnlyDictionaryNullValues()
+		{
+			var dictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			});
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+		}
+
+		[U]
+		public void DoesNotSerializeIReadOnlyDictionaryNullValues()
+		{
+			IReadOnlyDictionary<string, string> dictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
+			{
+				{ "Key1", null },
+				{ "Key2", "value2" },
+			});
+
+			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
 		}
 
 		private class MyDictionary : IDictionary
