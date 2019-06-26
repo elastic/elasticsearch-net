@@ -5,7 +5,7 @@ namespace Nest
 {
 	/// <summary> Signals the type to deserialize hits into </summary>
 	[InterfaceDataContract]
-	public interface ISearchTypeInformation
+	public interface ITypedSearchRequest
 	{
 		Type ClrType { get; }
 	}
