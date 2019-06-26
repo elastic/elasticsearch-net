@@ -38,9 +38,11 @@ namespace Nest
 			where TRequest : class, IRequest<TParams>
 		{
 			if (typeof(TCatRecord) == typeof(CatHelpRecord))
+			{
 				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
-			else
-				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
+				return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceTextPlain(r));
+			}
+			request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
 		}
 
@@ -50,9 +52,11 @@ namespace Nest
 			where TRequest : class, IRequest<TParams>
 		{
 			if (typeof(TCatRecord) == typeof(CatHelpRecord))
+			{
 				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
-			else
-				request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
+				return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceTextPlain(r));
+			}
+			request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
 			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
 		}
 
@@ -103,6 +107,7 @@ namespace Nest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
@@ -120,6 +125,7 @@ namespace Nest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
@@ -130,8 +136,16 @@ namespace Nest
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
+			
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			forceConfiguration(configuration);
+			request.RequestParameters.RequestConfiguration = configuration;
+		}
+		private void ForceContentType<TRequest>(TRequest request, string contentType) where TRequest : class, IRequest
+		{
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
+			configuration.Accept = contentType;
+			configuration.ContentType = contentType;
 			request.RequestParameters.RequestConfiguration = configuration;
 		}
 
@@ -139,6 +153,11 @@ namespace Nest
 		{
 			requestConfiguration.Accept = RequestData.MimeType;
 			requestConfiguration.ContentType = RequestData.MimeType;
+		}
+		internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
+		{
+			requestConfiguration.Accept = RequestData.MimeTypeTextPlain;
+			requestConfiguration.ContentType = RequestData.MimeTypeTextPlain;
 		}
 
 		internal IRequestParameters ResponseBuilder(SourceRequestParameters parameters, CustomResponseBuilderBase builder)

@@ -12,6 +12,7 @@ namespace Elasticsearch.Net
 	public class RequestData
 	{
 		public const string MimeType = "application/json";
+		public const string MimeTypeTextPlain = "text/plain";
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 

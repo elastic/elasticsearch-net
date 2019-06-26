@@ -53,9 +53,9 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 					}
 				}
 			},
-			aliases = new
+			aliases = new Dictionary<string, object>
 			{
-				new_projects = new { }
+				{ CallIsolatedValue + "new_projects",  new { } }
 			}
 		};
 
@@ -83,7 +83,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				)
 			)
 			.Aliases(a => a
-				.Alias("new_projects")
+				.Alias(CallIsolatedValue + "-new_projects")
 			);
 
 		protected override RolloverIndexRequest Initializer => new RolloverIndexRequest(CallIsolatedValue + "-alias", CallIsolatedValue + "-new")
@@ -120,7 +120,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			Aliases = new Aliases
 			{
-				{ "new_projects", new Alias() }
+				{ CallIsolatedValue + "new_projects", new Alias() }
 			}
 		};
 

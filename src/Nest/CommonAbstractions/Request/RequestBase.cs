@@ -10,6 +10,9 @@ namespace Nest
 	public interface IRequest
 	{
 		[IgnoreDataMember]
+		string ContentType { get; }
+
+		[IgnoreDataMember]
 		HttpMethod HttpMethod { get; }
 
 		[IgnoreDataMember]
@@ -57,6 +60,10 @@ namespace Nest
 
 		[IgnoreDataMember]
 		HttpMethod IRequest.HttpMethod => HttpMethod;
+
+		[IgnoreDataMember]
+		string IRequest.ContentType => ContentType;
+		protected virtual string ContentType { get; } = null;
 
 		private readonly TParameters _parameters;
 
