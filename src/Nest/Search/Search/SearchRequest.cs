@@ -7,7 +7,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[ReadAs(typeof(SearchRequest))]
-	public partial interface ISearchRequest : ICovariantSearchRequest
+	public partial interface ISearchRequest : ITypedSearchRequest
 	{
 		[DataMember(Name = "aggs")]
 		AggregationDictionary Aggregations { get; set; }
@@ -119,7 +119,7 @@ namespace Nest
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
-		Type ICovariantSearchRequest.ClrType => null;
+		Type ITypedSearchRequest.ClrType => null;
 
 		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys = true;
 	}
@@ -127,7 +127,7 @@ namespace Nest
 	[DataContract]
 	public partial class SearchRequest<TInferDocument> : ISearchRequest<TInferDocument>
 	{
-		Type ICovariantSearchRequest.ClrType => typeof(TInferDocument);
+		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
 	}
 
 	/// <summary>
@@ -142,7 +142,7 @@ namespace Nest
 				: HttpMethod.POST;
 
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
-		Type ICovariantSearchRequest.ClrType => typeof(TInferDocument);
+		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
 		IFieldCollapse ISearchRequest.Collapse { get; set; }
 		Fields ISearchRequest.DocValueFields { get; set; }
 		bool? ISearchRequest.Explain { get; set; }

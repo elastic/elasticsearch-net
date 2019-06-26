@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public partial interface IScrollRequest : ICovariantSearchRequest
+	public partial interface IScrollRequest : ISearchTypeInformation
 	{
 		[DataMember(Name ="scroll")]
 		Time Scroll { get; set; }
@@ -24,14 +24,14 @@ namespace Nest
 
 		public string ScrollId { get; set; }
 
-		Type ICovariantSearchRequest.ClrType => null;
+		Type ISearchTypeInformation.ClrType => null;
 	}
 
 	public partial class ScrollDescriptor<TInferDocument> where TInferDocument : class
 	{
 		public ScrollDescriptor(Time scroll, string scrollId) => ScrollId(scrollId).Scroll(scroll);
 
-		Type ICovariantSearchRequest.ClrType => typeof(TInferDocument);
+		Type ISearchTypeInformation.ClrType => typeof(TInferDocument);
 
 		Time IScrollRequest.Scroll { get; set; }
 

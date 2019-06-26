@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[ReadAs(typeof(SearchTemplateRequest))]
-	public partial interface ISearchTemplateRequest : ICovariantSearchRequest
+	public partial interface ISearchTemplateRequest : ITypedSearchRequest
 	{
 		[DataMember(Name ="id")]
 		string Id { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 
 		public string Source { get; set; }
 		protected Type ClrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => ClrType;
+		Type ITypedSearchRequest.ClrType => ClrType;
 
 		protected sealed override void RequestDefaults(SearchTemplateRequestParameters parameters) => TypedKeys = true;
 	}
@@ -41,7 +41,7 @@ namespace Nest
 
 	public partial class SearchTemplateDescriptor<TDocument> where TDocument : class
 	{
-		Type ICovariantSearchRequest.ClrType => typeof(TDocument);
+		Type ITypedSearchRequest.ClrType => typeof(TDocument);
 
 		string ISearchTemplateRequest.Id { get; set; }
 
