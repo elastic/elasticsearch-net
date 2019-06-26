@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 
 namespace ApiGenerator
@@ -9,7 +10,7 @@ namespace ApiGenerator
 		private static readonly string DownloadBranch = "master";
 
 		// ReSharper disable once UnusedParameter.Local
-		private static void Main(string[] args)
+		private static async Task Main(string[] args)
 		{
 			var redownloadCoreSpecification = false;
 			var generateCode = false;
@@ -50,7 +51,7 @@ namespace ApiGenerator
 				generateCode = answer == "y" || answer == "";
 			}
 			if (generateCode)
-				Generator.ApiGenerator.Generate(downloadBranch, "Core", "XPack");
+				await Generator.ApiGenerator.Generate(downloadBranch, "Core", "XPack");
 		}
 	}
 }

@@ -11,7 +11,7 @@
 @{
 	RestApiSpec m = Model;
 }
-@{ IncludeAsync("GeneratorNotice.cshtml", m); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", m); }
 namespace Nest
 {
 	internal static class ApiUrlsLookups 

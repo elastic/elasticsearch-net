@@ -57,7 +57,7 @@
 	var g = typed ? names.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "") : "T";
 	var desc = param.DescriptionHighLevel.ToList();
 	
-	IncludeAsync("HighLevel/Descriptors/XmlDocs.cshtml", desc);
+	await IncludeAsync("HighLevel/Descriptors/XmlDocs.cshtml", desc);
 	if(!string.IsNullOrWhiteSpace(param.Obsolete))
 	{
 <text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]

@@ -13,7 +13,7 @@
 	string ns = model.Key;
 	var endpoints = model.Value;
 }
-@{ IncludeAsync("GeneratorNotice.cshtml", model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", model); }
 // ReSharper disable RedundantUsingDirective
 using System;
 using System.Threading;
@@ -35,7 +35,7 @@ namespace Nest.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix
 		internal @(CsharpNames.HighLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix)(ElasticClient client) : base(client) {}
 		@foreach(var e in endpoints)
 		{
-			IncludeAsync("HighLevel/Client/Implementation/MethodImplementation.cshtml", e.HighLevelModel);
+			await IncludeAsync("HighLevel/Client/Implementation/MethodImplementation.cshtml", e.HighLevelModel);
 		}
 	}
 }

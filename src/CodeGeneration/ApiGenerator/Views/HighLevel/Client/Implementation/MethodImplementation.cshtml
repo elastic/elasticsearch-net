@@ -13,14 +13,14 @@
 	var fluentPath = "HighLevel/Client/FluentSyntax/FluentMethod.cshtml";
 	var initializerPath = "HighLevel/Client/InitializerSyntax/InitializerMethod.cshtml";
 }
-@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); }
-@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); }
+@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: false)); }
+@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.Fluent, async: true)); }
 @if (model.FluentBound != null)
 {
 <text>
-	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); }
-	@{ IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); }
+	@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: false)); }
+	@{ await IncludeAsync(fluentPath, new FluentSyntaxView(model.FluentBound, async: true)); }
 </text>
 }
-@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); }
-@{ IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); }
+@{ await IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: false)); }
+@{ await IncludeAsync(initializerPath, new InitializerSyntaxView(model.Initializer, async: true)); }

@@ -1,20 +1,20 @@
+using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
 using ShellProgressBar;
 
-namespace ApiGenerator.Generator.Razor 
+namespace ApiGenerator.Generator.Razor
 {
 	public class HighLevelClientInterfaceGenerator : RazorGeneratorBase
 	{
 		public override string Title => "NEST client interface";
 
-		public override void Generate(RestApiSpec spec, ProgressBar progressBar)
+		public override async Task Generate(RestApiSpec spec, ProgressBar progressBar)
 		{
 			var view = ViewLocations.HighLevel("Client", "Interface", "IElasticClient.cshtml");
 			var target = GeneratorLocations.HighLevel("IElasticClient.Generated.cs");
-			
-			DoRazor(spec, view, target);
-			
+
+			await DoRazor(spec, view, target);
 		}
 	}
 }

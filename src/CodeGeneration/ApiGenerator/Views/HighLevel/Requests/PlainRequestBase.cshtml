@@ -7,7 +7,7 @@
 @{
 	RestApiSpec m = Model;
 }
-@{ IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 // ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
-@{ IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+@{ await IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
 
 // ReSharper disable UnusedTypeParameter
 namespace Nest
