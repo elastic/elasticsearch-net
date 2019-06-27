@@ -196,4 +196,52 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 			sigNames.DocCount.Should().BeGreaterThan(0);
 		}
 	}
+
+	/**
+	 * [float]
+	 * [[significant-terms-numeric-field]]
+	 * == Numeric fields
+	 *
+	 * A significant terms aggregation on a numeric field
+	 */
+	public class NumericSignificantTermsAggregationUsageTests : AggregationUsageTestBase
+	{
+		public NumericSignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new
+		{
+			commits = new
+			{
+				significant_terms = new
+				{
+					field = "numberOfContributors"
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.SignificantTerms("commits", st => st
+				.Field(p => p.NumberOfContributors)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new SignificantTermsAggregation("commits")
+			{
+				Field = Field<Project, int>(p => p.NumberOfContributors)
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var commits = response.Aggregations.SignificantTerms<int>("commits");
+			commits.Should().NotBeNull();
+			commits.Buckets.Should().NotBeNull();
+			commits.Buckets.Count.Should().BeGreaterThan(0);
+			foreach (var item in commits.Buckets)
+			{
+				item.Key.Should().BeGreaterThan(0);
+				item.DocCount.Should().BeGreaterOrEqualTo(1);
+			}
+		}
+	}
 }

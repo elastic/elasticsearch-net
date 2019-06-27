@@ -63,7 +63,7 @@ namespace Tests.Domain
 				.RuleFor(p => p.LocationPoint, f => SimpleGeoPoint.Generator.Generate())
 				.RuleFor(p => p.LocationShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
-				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
+				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 50))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
 				.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }))
 				.RuleFor(p => p.SourceOnly, f =>
