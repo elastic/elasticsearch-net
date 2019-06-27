@@ -147,6 +147,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 #if NETSTANDARD
 
+#if VALUETASK
 				// ValueTask
 				else if (genericType == typeof(ValueTask<>))
 				{
@@ -156,6 +157,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				{
 					return CreateInstance(typeof(NullableFormatter<>), new[] { nullableElementType });
 				}
+#endif
 
 				// Tuple
 				else if (ti.FullName.StartsWith("System.Tuple"))
@@ -194,6 +196,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
 
+#if DOTNETCORE
 				// ValueTuple
 				else if (ti.FullName.StartsWith("System.ValueTuple"))
 				{
@@ -230,6 +233,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
+#endif
 
 #endif
 

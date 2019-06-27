@@ -27,29 +27,29 @@ namespace Tests.ScratchPad
 					Console.WriteLine($"{eventName?.PadRight(30)} {a.Id?.PadRight(32)} {a.ParentId?.PadRight(32)} {data?.ToString().PadRight(10)}");
 				}
 				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
-					value.Subscribe(new AuditDiagnosticObserver(v => WriteToConsole(v.EventName, v.Audit)));
-				
+					value.Subscribe(new AuditDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
+
 				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
 					value.Subscribe(new RequestPipelineDiagnosticObserver(
-						v => WriteToConsole(v.EventName, v.RequestData),
-						v => WriteToConsole(v.EventName, v.Response))
+						v => WriteToConsole(v.Key, v.Value),
+						v => WriteToConsole(v.Key, v.Value))
 					);
-				
+
 				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
 					value.Subscribe(new HttpConnectionDiagnosticObserver(
-						v => WriteToConsole(v.EventName, v.RequestData),
-						v => WriteToConsole(v.EventName, v.StatusCode)
+						v => WriteToConsole(v.Key, v.Value),
+						v => WriteToConsole(v.Key, v.Value)
 					));
-				
+
 				if (value.Name == DiagnosticSources.Serializer.SourceName)
-					value.Subscribe(new SerializerDiagnosticObserver(v => WriteToConsole(v.EventName, v.Registration)));
+					value.Subscribe(new SerializerDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
 			}
 		}
 
 		private static async Task Main(string[] args)
 		{
 			DiagnosticListener.AllListeners.Subscribe(new ListenerObserver());
-				
+
 			using (var node = new Elastic.Managed.Ephemeral.EphemeralCluster("7.0.0"))
 			{
 				node.Start();
@@ -63,11 +63,11 @@ namespace Tests.ScratchPad
 				var x = client.Search<object>(s=>s.AllIndices());
 
 				await Task.Delay(TimeSpan.FromSeconds(7));
-				
+
 				Console.WriteLine(new string('-', Console.WindowWidth - 1));
-				
+
 				var y = client.Search<object>(s=>s.Index("does-not-exist"));
-				
+
 				await Task.Delay(TimeSpan.FromSeconds(7));
 
 

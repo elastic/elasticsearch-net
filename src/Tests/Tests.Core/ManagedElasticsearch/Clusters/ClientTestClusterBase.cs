@@ -50,6 +50,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			Add($"script.stored", "true", ">5.0.0-alpha1 <5.5.0");
 			Add($"script.indexed", "true", "<5.0.0-alpha1");
 			Add($"script.allowed_types", "inline,stored", ">=5.5.0");
+			Add("xpack.ml.enabled", "false");
 
 			AdditionalBeforeNodeStartedTasks.Add(new WriteAnalysisFiles());
 		}

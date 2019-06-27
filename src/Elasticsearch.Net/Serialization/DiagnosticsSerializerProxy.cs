@@ -14,10 +14,11 @@ namespace Elasticsearch.Net
 
 		public SerializerRegistrationInformation(Type type, string purpose)
 		{
-			(TypeInformation, Purpose) = (type, purpose);
+			TypeInformation = type;
+			Purpose = purpose;
 			_stringRepresentation = $"{Purpose}: {TypeInformation.FullName}";
 		}
-		
+
 
 		public Type TypeInformation { get; }
 

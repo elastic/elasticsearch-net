@@ -3,6 +3,7 @@
 
 // modified to be dedicated for RequestData only
 
+#if DOTNETCORE
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -18,22 +19,22 @@ namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// Provides an <see cref="HttpContent"/> implementation that exposes an output <see cref="Stream"/>
-	/// which can be written to directly. The ability to push data to the output stream differs from the 
+	/// which can be written to directly. The ability to push data to the output stream differs from the
 	/// <see cref="StreamContent"/> where data is pulled and not pushed.
 	/// </summary>
 	internal class RequestDataContent : HttpContent
 	{
 		private readonly RequestData _requestData;
 		private readonly Func<PostData, CompleteTaskOnCloseStream, RequestDataContent, TransportContext, Task> _onStreamAvailable;
-		
-		
+
+
 		public RequestDataContent(RequestData requestData)
 		{
 			_requestData = requestData;
 			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 			if (requestData.HttpCompression)
 				Headers.ContentEncoding.Add("gzip");
-			
+
 			Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
 			{
 				using(stream)
@@ -58,8 +59,8 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// When this method is called, it calls the action provided in the constructor with the output 
-		/// stream to write to. Once the action has completed its work it closes the stream which will 
+		/// When this method is called, it calls the action provided in the constructor with the output
+		/// stream to write to. Once the action has completed its work it closes the stream which will
 		/// close this content instance and complete the HTTP request or response.
 		/// </summary>
 		/// <param name="stream">The <see cref="Stream"/> to which to write.</param>
@@ -68,7 +69,7 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is passed as task result.")]
 		protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
 		{
-			
+
 			var data = _requestData.PostData;
 			if (data == null) return;
 
@@ -109,7 +110,7 @@ namespace Elasticsearch.Net
 				_serializeToStreamTask.TrySetResult(true);
 				base.Dispose();
 			}
-			
+
 
 			public override void Close() => _serializeToStreamTask.TrySetResult(true);
 		}
@@ -195,3 +196,4 @@ namespace Elasticsearch.Net
 		}
 	}
 }
+#endif
