@@ -32,24 +32,30 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeTrue();
 	}
 
-	// uses DirectStreamingReadOnlyCluster so that response stream is not seekable
+	// DisableDirectStreaming = false so that response stream is not seekable
 	public class IndexNotExistsApiTests
-		: ApiIntegrationTestBase<DirectStreamingReadOnlyCluster, ExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
 	{
 		private const string NonExistentIndex = "non-existent-index";
 
-		public IndexNotExistsApiTests(DirectStreamingReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexNotExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override IndexExistsRequest Initializer => new IndexExistsRequest(NonExistentIndex);
+		protected override IndexExistsRequest Initializer => new IndexExistsRequest(NonExistentIndex)
+		{
+			RequestConfiguration = new RequestConfiguration
+			{
+				DisableDirectStreaming = false
+			}
+		};
 		protected override string UrlPath => $"/{NonExistentIndex}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.Exists(NonExistentIndex),
-			(client, f) => client.Indices.ExistsAsync(NonExistentIndex),
+			(client, f) => client.Indices.Exists(NonExistentIndex, r => r.RequestConfiguration(c => c.DisableDirectStreaming(false))),
+			(client, f) => client.Indices.ExistsAsync(NonExistentIndex,r => r.RequestConfiguration(c => c.DisableDirectStreaming(false))),
 			(client, r) => client.Indices.Exists(r),
 			(client, r) => client.Indices.ExistsAsync(r)
 		);
