@@ -279,8 +279,7 @@ namespace Tests.Search.Search
 			{
 				new
 				{
-					field = "name",
-					format = "use_field_mapping"
+					field = "name"
 				},
 				new
 				{
@@ -305,7 +304,7 @@ namespace Tests.Search.Search
 				.Term(p => p.State, StateOfBeing.Stable)
 			)
 			.DocValueFields(fs => fs
-				.Field(p => p.Name, format: "use_field_mapping")
+				.Field(p => p.Name)
 				.Field(p => p.LastActivity, format: "weekyear")
 			);
 
@@ -323,7 +322,7 @@ namespace Tests.Search.Search
 				Field = "state",
 				Value = "Stable"
 			}),
-			DocValueFields = Infer.Field<Project>(p => p.Name, format: "use_field_mapping")
+			DocValueFields = Infer.Field<Project>(p => p.Name)
 				.And<Project>(p => p.LastActivity, format: "weekyear")
 		};
 
