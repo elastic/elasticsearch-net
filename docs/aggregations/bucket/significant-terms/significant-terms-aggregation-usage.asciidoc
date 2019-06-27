@@ -221,3 +221,57 @@ sigNames.Should().NotBeNull();
 sigNames.DocCount.Should().BeGreaterThan(0);
 ----
 
+[[significant-terms-numeric-field]]
+[float]
+== Numeric fields
+
+A significant terms aggregation on a numeric field
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.SignificantTerms("commits", st => st
+    .Field(p => p.NumberOfContributors)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new SignificantTermsAggregation("commits")
+{
+    Field = Field<Project, int>(p => p.NumberOfContributors)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "significant_terms": {
+      "field": "numberOfContributors"
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var commits = response.Aggregations.SignificantTerms<int>("commits");
+commits.Should().NotBeNull();
+commits.Buckets.Should().NotBeNull();
+commits.Buckets.Count.Should().BeGreaterThan(0);
+foreach (var item in commits.Buckets)
+{
+    item.Key.Should().BeGreaterThan(0);
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+----
+

@@ -383,11 +383,12 @@ var searchResponse = client.Search<Project>(s => s
 var projects = searchResponse.Documents;
 ----
 
-`.Documents` is a convenient shorthand for
+`.Documents` is a convenient shorthand for retrieving the `_source`
+for each hit
 
 [source,csharp]
 ----
-searchResponse.HitsMetadata.Hits.Select(h => h.Source);
+var sources = searchResponse.HitsMetadata.Hits.Select(h => h.Source);
 ----
 
 and it's possible to retrieve other metadata about each hit from the hits collection. Here's
@@ -396,7 +397,7 @@ an example that retrieves the highlights for a hit, when using <<highlighting-us
 [source,csharp]
 ----
 var highlights = searchResponse.HitsMetadata.Hits.Select(h => h
-    .Highlights <1>
+    .Highlight <1>
 );
 ----
 <1> Get the highlights for the hit, when using highlighting

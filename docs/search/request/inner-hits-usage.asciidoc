@@ -157,11 +157,11 @@ foreach (var hit in response.Hits)
     princes.Should().NotBeEmpty();
     foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
     {
-        var highlights = princeHit.Highlights;
+        var highlights = princeHit.Highlight;
         highlights.Should().NotBeNull("princes should have highlights");
         highlights.Should().ContainKey("fullTextField", "we are highlighting this field");
         var hl = highlights["fullTextField"];
-        hl.Highlights.Should()
+        hl.Should()
             .NotBeEmpty("all docs have the same text so should all highlight")
             .And.Contain(s => s.Contains("<em>default</em>"), "default to be highlighted as its part of the query");
 
