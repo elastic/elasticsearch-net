@@ -147,6 +147,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 #if NETSTANDARD
 
+				//TODO: VALUETASK is not defined.
 #if VALUETASK
 				// ValueTask
 				else if (genericType == typeof(ValueTask<>))
