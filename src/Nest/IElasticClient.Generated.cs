@@ -796,84 +796,84 @@ namespace Nest
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
+		ISearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
 			where TInferDocument : class where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
 			where TInferDocument : class where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		SearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
+		ISearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		SearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
+		ISearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		SearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null)
+		ISearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null)
 			where TInferDocument : class where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
 			where TInferDocument : class where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null)
+		ISearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
+		ISearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_shards</c> API, read more about this API online:
@@ -906,28 +906,28 @@ namespace Nest
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		SearchResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null)
+		ISearchResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		SearchResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request)
+		ISearchResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken ct = default)
+		Task<ISearchResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>termvectors</c> API, read more about this API online:
