@@ -864,9 +864,9 @@ namespace Nest
 				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
 			}
 
-			return new SignificantTermsBucket(subAggregates)
+			return new SignificantTermsBucket<object>(subAggregates)
 			{
-				Key = (string)key,
+				Key = key,
 				DocCount = docCount.GetValueOrDefault(0),
 				BgCount = bgCount,
 				Score = score

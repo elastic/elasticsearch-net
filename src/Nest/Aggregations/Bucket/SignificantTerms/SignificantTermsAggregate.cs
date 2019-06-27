@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class SignificantTermsAggregate : MultiBucketAggregate<SignificantTermsBucket>
+	public class SignificantTermsAggregate<TKey> : MultiBucketAggregate<SignificantTermsBucket<TKey>>
 	{
 		/// <summary>
 		/// The background count
