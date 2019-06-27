@@ -13,9 +13,7 @@ namespace Tests.XPack.Security.ApiKey
 	[SkipVersion("<6.7.0", "Security Api Keys are modelled against 6.7.0")]
 	public class SecurityApiKeyTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
-		private const string PutRoleStep = nameof(PutRoleStep);
 		private const string PutUserStep = nameof(PutUserStep);
-		private const string PutPrivilegesStep = nameof(PutPrivilegesStep);
 		private const string CreateApiKeyWithRolesStep = nameof(CreateApiKeyWithRolesStep);
 		private const string CreateApiKeyWithNoRolesStep = nameof(CreateApiKeyWithNoRolesStep);
 		private const string GetApiKeyStep = nameof(GetApiKeyStep);
@@ -24,103 +22,23 @@ namespace Tests.XPack.Security.ApiKey
 		public SecurityApiKeyTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
-				PutRoleStep, u =>
-					u.Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, PutRoleResponse>(
-						v => new PutRoleRequest($"role-{v}")
-						{
-							Cluster = new[] { "all" },
-							Indices = new IIndicesPrivileges[]
-							{
-								new IndicesPrivileges
-								{
-									Names = "*",
-									Privileges = new [] { "all" }
-								}
-							},
-							Applications = new IApplicationPrivileges[]
-							{
-								new ApplicationPrivileges
-								{
-									Application = $"app-{v}",
-									Privileges = new [] { "*" },
-									Resources = new [] { "*" }
-								}
-							}
-						},
-						(v, d) => d
-							.Cluster("all")
-							// ReSharper disable once PossiblyMistakenUseOfParamsMethod
-							.Indices(i => i.Add<object>(p => p.Names("*").Privileges("all")))
-							.Applications(i => i.Add(p => p.Application($"app-{v}").Privileges("*").Resources("*")))
-						,
-						(v, c, f) => c.Security.PutRole($"role-{v}", f),
-						(v, c, f) => c.Security.PutRoleAsync($"role-{v}", f),
-						(v, c, r) => c.Security.PutRole(r),
-						(v, c, r) => c.Security.PutRoleAsync(r)
-					)
-			},
-			{
 				PutUserStep, u =>
 					u.Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, PutUserResponse>(
 						v => new PutUserRequest($"user-{v}")
 						{
 							Password = "password",
-							Roles = new[] { $"role-{v}", "superuser" },
-							FullName = "API key user"
+							Roles = new[] { "superuser" },
+							FullName = "API key superuser"
 						},
 						(v, d) => d
 							.Password("password")
-							.Roles($"role-{v}", "superuser")
-							.FullName("API key user")
+							.Roles("superuser")
+							.FullName("API key superuser")
 						,
 						(v, c, f) => c.Security.PutUser($"user-{v}", f),
 						(v, c, f) => c.Security.PutUserAsync($"user-{v}", f),
 						(v, c, r) => c.Security.PutUser(r),
 						(v, c, r) => c.Security.PutUserAsync(r)
-					)
-			},
-			{
-				PutPrivilegesStep, u =>
-					u.Calls<PutPrivilegesDescriptor, PutPrivilegesRequest, IPutPrivilegesRequest, PutPrivilegesResponse>(
-						v => new PutPrivilegesRequest
-						{
-							Applications = new AppPrivileges
-							{
-								{
-									$"app-{v}", new Nest.Privileges
-									{
-										{
-											$"read", new PrivilegesActions
-											{
-												Actions = new[] { "data:read/*" }
-											}
-										},
-										{
-											$"write", new PrivilegesActions
-											{
-												Actions = new[] { "data:write/*" }
-											}
-										}
-									}
-								}
-							}
-						},
-						(v, d) => d
-							.Applications(a => a
-								.Application($"app-{v}", pr => pr
-									.Privilege($"read", ac => ac
-										.Actions("data:read/*")
-									)
-									.Privilege($"write", ac => ac
-										.Actions("data:write/*")
-									)
-								)
-							)
-						,
-						(v, c, f) => c.Security.PutPrivileges(f),
-						(v, c, f) => c.Security.PutPrivilegesAsync(f),
-						(v, c, r) => c.Security.PutPrivileges(r),
-						(v, c, r) => c.Security.PutPrivilegesAsync(r)
 					)
 			},
 			{
