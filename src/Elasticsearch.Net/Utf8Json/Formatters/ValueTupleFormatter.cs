@@ -174,6 +174,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
+	#if DOTNETCORE
 	internal sealed class ValueTupleFormatter<T1> : IJsonFormatter<ValueTuple<T1>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache1;
@@ -708,6 +709,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			return new ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>(item1, item2, item3, item4, item5, item6, item7, item8);
 		}
 	}
+	#endif
 
 }
 #endif

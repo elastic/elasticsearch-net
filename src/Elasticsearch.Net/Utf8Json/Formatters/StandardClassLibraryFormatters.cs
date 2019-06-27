@@ -686,6 +686,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
+	#if VALUETASK
 	internal sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
 	{
 		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver)
@@ -700,6 +701,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			return new ValueTask<T>(v);
 		}
 	}
+	#endif
 
 #endif
 

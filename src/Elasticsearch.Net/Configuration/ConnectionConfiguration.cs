@@ -5,10 +5,12 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+#if DOTNETCORE
 using System.Net.Http;
+using System.Runtime.InteropServices;
+#endif
 using System.Net.Security;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -21,7 +23,11 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
+#if DOTNETCORE
 		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+#else
+		private static bool IsCurlHandler { get; } = false;
+#endif
 
 		/// <summary>
 		/// The default ping timeout. Defaults to 2 seconds
@@ -41,9 +47,10 @@ namespace Elasticsearch.Net
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 
 		/// <summary>
-		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c> except for
-		/// <see cref="HttpClientHandler"/> implementations based on curl, which defaults to
-		/// <see cref="Environment.ProcessorCount"/>
+		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c>
+#if DOTNETCORE
+		/// <para>Except for <see cref="HttpClientHandler"/> implementations based on curl, which defaults to <see cref="Environment.ProcessorCount"/></para>
+#endif
 		/// </summary>
 		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
 

@@ -84,10 +84,10 @@ namespace Tests.ClientConcepts.Troubleshooting
 				}
 
 				TrySubscribe(DiagnosticSources.AuditTrailEvents.SourceName,
-					() => new AuditDiagnosticObserver(v => WriteToConsole(v.EventName, v.Audit)));
+					() => new AuditDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
 
 				TrySubscribe(DiagnosticSources.Serializer.SourceName,
-					() => new SerializerDiagnosticObserver(v => WriteToConsole(v.EventName, v.Registration)));
+					() => new SerializerDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
 				/**
 				 * RequestPipeline emits a different context object for the start of the `Activity` then it does
 				 * for the end of the `Activity` therefor `RequestPipelineDiagnosticObserver` accepts two `onNext` lambda's.
@@ -95,14 +95,14 @@ namespace Tests.ClientConcepts.Troubleshooting
 				 */
 				TrySubscribe(DiagnosticSources.RequestPipeline.SourceName,
 					() => new RequestPipelineDiagnosticObserver(
-						v => WriteToConsole(v.EventName, v.RequestData),
-						v => WriteToConsole(v.EventName, v.Response)
+						v => WriteToConsole(v.Key, v.Value),
+						v => WriteToConsole(v.Key, v.Value)
 					));
 
 				TrySubscribe(DiagnosticSources.HttpConnection.SourceName,
 					() => new HttpConnectionDiagnosticObserver(
-						v => WriteToConsole(v.EventName, v.RequestData),
-						v => WriteToConsole(v.EventName, v.StatusCode)
+						v => WriteToConsole(v.Key, v.Value),
+						v => WriteToConsole(v.Key, v.Value)
 					));
 			}
 
