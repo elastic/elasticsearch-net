@@ -30,4 +30,31 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 
 		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeTrue();
 	}
+
+	public class IndexNotExistsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
+	{
+		private const string NonExistentIndex = "non-existent-index";
+
+		public IndexNotExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+
+		protected override IndexExistsRequest Initializer => new IndexExistsRequest(NonExistentIndex);
+		protected override string UrlPath => $"/{NonExistentIndex}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Indices.Exists(NonExistentIndex),
+			(client, f) => client.Indices.ExistsAsync(NonExistentIndex),
+			(client, r) => client.Indices.Exists(r),
+			(client, r) => client.Indices.ExistsAsync(r)
+		);
+
+		protected override void ExpectResponse(ExistsResponse response)
+		{
+			response.Exists.Should().BeFalse();
+		}
+	}
 }
