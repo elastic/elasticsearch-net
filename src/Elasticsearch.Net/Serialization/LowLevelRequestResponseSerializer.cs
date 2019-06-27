@@ -13,29 +13,21 @@ namespace Elasticsearch.Net
 
 		public object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
-
 			return JsonSerializer.NonGeneric.Deserialize(type, stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public T Deserialize<T>(Stream stream)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
-
 			return JsonSerializer.Deserialize<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
-
 			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(default(T));
-
 			return JsonSerializer.DeserializeAsync<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 

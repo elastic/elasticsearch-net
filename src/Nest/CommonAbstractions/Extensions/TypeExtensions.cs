@@ -69,17 +69,6 @@ namespace Nest
 			return activator(args);
 		}
 
-		internal static object DefaultValue(this Type type) =>
-			type.IsValueType
-				? CachedDefaultValues.GetOrAdd(type, t =>
-						Expression.Lambda<Func<object>>(
-								Expression.Convert(Expression.Default(type), typeof(object))
-							)
-							.Compile()
-					)
-					.Invoke()
-				: null;
-
 		//do not remove this is referenced through GetActivatorMethod
 		internal static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
