@@ -72,7 +72,8 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override PutUserDescriptor NewDescriptor() => new PutUserDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(PutUserResponse response) => response.Created.Should().BeTrue();
+		protected override void ExpectResponse(PutUserResponse response) => 
+			response.Created.Should().BeTrue("{0}", response.DebugInformation);
 	}
 
 	public class PutUserRunAsApiTests : PutUserApiTests

@@ -20,6 +20,8 @@ namespace Elasticsearch.Net
 		{
 			//Not available under mono
 			if (!IsMono) HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
+
+
 		}
 
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
@@ -244,10 +246,13 @@ namespace Elasticsearch.Net
 			// 2 - Specified at the global IConnectionSettings level
 			// 3 - Specified with the URI (lowest precedence)
 
-			var userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+			string userInfo = null;
+			if (!string.IsNullOrEmpty(requestData.Uri.UserInfo))
+				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+			else if (requestData.BasicAuthorizationCredentials != null)
+				userInfo =
+					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 
-			if (requestData.BasicAuthorizationCredentials != null)
-				userInfo = requestData.BasicAuthorizationCredentials.ToString();
 
 			if (!string.IsNullOrWhiteSpace(userInfo))
 				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
