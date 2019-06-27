@@ -4,17 +4,7 @@ namespace ApiGenerator.Configuration.Overrides
 {
 	public class GlobalOverrides : EndpointOverridesBase
 	{
-		public IDictionary<string, Dictionary<string, string>> ObsoleteEnumMembers { get; set; } = new Dictionary<string, Dictionary<string, string>>
-		{
-			{
-				"NodesStatsIndexMetric",
-				new Dictionary<string, string> { { "suggest", "As of 5.0 this option always returned an empty object in the response" } }
-			},
-			{
-				"IndicesStatsMetric",
-				new Dictionary<string, string> { { "suggest", "Suggest stats have folded under the search stats, this alias will be removed" } }
-			}
-		};
+		public IDictionary<string, Dictionary<string, string>> ObsoleteEnumMembers { get; set; } = new Dictionary<string, Dictionary<string, string>>();
 
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
 		{

@@ -91,7 +91,16 @@ namespace ApiGenerator.Generator
 			});
 
 			if (pathsOverride != null) original.SelectToken("*.url.paths").Replace(pathsOverride);
-		}
 
+			void ReplaceOptions(string path)
+			{
+				var optionsOverrides = patchedJson.SelectToken(path);
+				if (optionsOverrides != null)
+					original.SelectToken(path).Replace(optionsOverrides);
+			}
+
+			ReplaceOptions("*.url.parts.metric.options");
+			ReplaceOptions("*.url.parts.index_metric.options");
+		}
 	}
 }
