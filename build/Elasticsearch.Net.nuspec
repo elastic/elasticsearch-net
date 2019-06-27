@@ -23,6 +23,7 @@
 			</group>
 			<group targetFramework="net461">
 				<dependency id="System.Buffers" version="[4.5.0,)"/>
+				<dependency id="System.Diagnostics.DiagnosticSource" version="[4.5.1,)" />
 			</group>
 		</dependencies>
 	</metadata>
