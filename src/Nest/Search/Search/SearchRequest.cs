@@ -96,7 +96,7 @@ namespace Nest
 
 		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		
+
 		public double? MinScore { get; set; }
 		public QueryContainer PostFilter { get; set; }
 		public bool? Profile { get; set; }
@@ -242,29 +242,6 @@ namespace Nest
 		/// terminated_early.
 		/// </summary>
 		public SearchDescriptor<TInferDocument> TerminateAfter(long? terminateAfter) => Assign(terminateAfter, (a, v) => a.TerminateAfter = v);
-
-		/// <summary>
-		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on.
-		/// By default, the operation is randomized between the each shard replicas.
-		/// </para>
-		/// <para>
-		/// The operation will go and be executed only on the primary shards.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<TInferDocument> ExecuteOnPrimary() => Preference("_primary");
-
-		/// <summary>
-		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on.
-		/// By default, the operation is randomized between the each shard replicas.
-		/// </para>
-		/// <para>
-		/// The operation will go and be executed on the primary shard, and if not available (failover),
-		/// will execute on other shards.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<TInferDocument> ExecuteOnPrimaryFirst() => Preference("_primary_first");
 
 		/// <summary>
 		/// <para>

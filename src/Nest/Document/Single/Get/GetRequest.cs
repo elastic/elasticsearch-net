@@ -12,8 +12,6 @@
 
 	public partial class GetDescriptor<TDocument> where TDocument : class
 	{
-		public GetDescriptor<TDocument> ExecuteOnPrimary() => Preference("_primary");
-
 		public GetDescriptor<TDocument> ExecuteOnLocalShard() => Preference("_local");
 	}
 }

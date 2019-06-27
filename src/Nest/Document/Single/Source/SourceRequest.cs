@@ -14,8 +14,6 @@
 
 	public partial class SourceDescriptor<TDocument> where TDocument : class
 	{
-		public SourceDescriptor<TDocument> ExecuteOnPrimary() => Preference("_primary");
-
 		public SourceDescriptor<TDocument> ExecuteOnLocalShard() => Preference("_local");
 	}
 }
