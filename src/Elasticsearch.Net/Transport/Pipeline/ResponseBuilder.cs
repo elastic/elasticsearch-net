@@ -60,15 +60,16 @@ namespace Elasticsearch.Net
 			var allowedStatusCodes = requestData.AllowedStatusCodes;
 			if (statusCode.HasValue)
 			{
-				if (allowedStatusCodes.Contains(-1) || allowedStatusCodes.Contains(statusCode.Value)) 
+				if (allowedStatusCodes.Contains(-1) || allowedStatusCodes.Contains(statusCode.Value))
 					success = true;
 				else
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
-			if (mimeType != null && requestData.RequestMimeType != mimeType)
+			//mimeType can include charset information on .NET full framework
+			if (mimeType != null && !mimeType.StartsWith(requestData.RequestMimeType))
 				success = false;
-			
+
 			var details = new ApiCallDetails
 			{
 				Success = success,
