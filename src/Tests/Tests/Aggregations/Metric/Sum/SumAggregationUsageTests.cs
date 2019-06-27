@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.Sum
 		protected override AggregationDictionary InitializerAggs =>
 			new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits));
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsSum = response.Aggregations.Sum("commits_sum");

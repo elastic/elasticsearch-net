@@ -69,7 +69,7 @@ namespace Tests.Aggregations.Pipeline.AverageBucket
 				GapPolicy = GapPolicy.InsertZeros
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

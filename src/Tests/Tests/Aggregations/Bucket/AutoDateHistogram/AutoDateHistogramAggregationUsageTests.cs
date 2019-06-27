@@ -91,7 +91,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods

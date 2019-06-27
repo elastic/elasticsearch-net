@@ -14,7 +14,7 @@ namespace Tests.Cat.CatFielddata
 	public class CatFielddataApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
-		private SearchResponse<Project> _initialSearchResponse;
+		private ISearchResponse<Project> _initialSearchResponse;
 
 		public CatFielddataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

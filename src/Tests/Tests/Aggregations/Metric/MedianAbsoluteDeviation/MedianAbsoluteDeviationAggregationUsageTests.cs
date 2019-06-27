@@ -56,7 +56,7 @@ namespace Tests.Aggregations.Metric.MedianAbsoluteDeviation
 			new AverageAggregation("average_commits", Infer.Field<Project>(p => p.NumberOfCommits)) &&
 			new MedianAbsoluteDeviationAggregation("commit_variability", Infer.Field<Project>(p => p.NumberOfCommits));
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var medianAbsoluteDeviation = response.Aggregations.MedianAbsoluteDeviation("commit_variability");

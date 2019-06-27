@@ -14,7 +14,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Search
 {
 	public class SearchApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -94,7 +94,7 @@ namespace Tests.Search.Search
 			(c, r) => c.SearchAsync<Project>(r)
 		);
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.Total.Should().BeGreaterThan(0);
 			response.Hits.Count.Should().BeGreaterThan(0);
@@ -142,7 +142,7 @@ namespace Tests.Search.Search
 
 		protected override string UrlPath => $"/project/_search?seq_no_primary_term=true";
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.Total.Should().BeGreaterThan(0);
 			response.Hits.Count.Should().BeGreaterThan(0);
@@ -230,7 +230,7 @@ namespace Tests.Search.Search
 			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.Hits.Count().Should().BeGreaterThan(0);
 			response.Hits.First().Should().NotBeNull();
@@ -327,7 +327,7 @@ namespace Tests.Search.Search
 				.And<Project>(p => p.LastActivity, format: "weekyear")
 		};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.HitsMetadata.Should().NotBeNull();
 			response.Hits.Count().Should().BeGreaterThan(0);
@@ -417,7 +417,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(SearchResponse<Project> response) => response.ShouldBeValid();
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 	public class SearchApiNullQueryContainerTests : SearchApiTests
@@ -445,7 +445,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(SearchResponse<Project> response) => response.ShouldBeValid();
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 	public class SearchApiNullQueriesInQueryContainerTests : SearchApiTests
@@ -491,7 +491,7 @@ namespace Tests.Search.Search
 		// time it will NOT write that bool because the is verbatim did not carry over.
 		protected override bool SupportsDeserialization => false;
 
-		protected override void ExpectResponse(SearchResponse<Project> response) => response.ShouldBeValid();
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 
@@ -559,7 +559,7 @@ namespace Tests.Search.Search
 
 	[SkipVersion("<6.5.0", "_clusters on response only available in 6.1.0+, but ability to skip_unavailable only works in 6.5.0+")]
 	public class CrossClusterSearchApiTests
-		: ApiIntegrationTestBase<CrossCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<CrossCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public CrossClusterSearchApiTests(CrossCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -597,7 +597,7 @@ namespace Tests.Search.Search
 			(c, r) => c.SearchAsync<Project>(r)
 		);
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.Clusters.Should().NotBeNull();
 			response.Clusters.Total.Should().Be(2);

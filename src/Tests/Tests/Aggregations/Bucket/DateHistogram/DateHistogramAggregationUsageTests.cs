@@ -107,7 +107,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
@@ -187,7 +187,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				Missing = FixedDate
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_month");

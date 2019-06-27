@@ -57,7 +57,7 @@ namespace Tests.Aggregations
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var min = response.Aggregations.Min("min_last_activity");

@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Pipeline.Derivative
 					new DerivativeAggregation("commits_derivative", "commits")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

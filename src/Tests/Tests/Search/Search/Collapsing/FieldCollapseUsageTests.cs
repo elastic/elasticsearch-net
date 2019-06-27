@@ -59,7 +59,7 @@ namespace Tests.Search.Search.Collapsing
 
 		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
 			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
@@ -144,7 +144,7 @@ namespace Tests.Search.Search.Collapsing
 
 		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
 			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);

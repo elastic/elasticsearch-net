@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var sigNames = response.Aggregations.SignificantTerms("significant_names");
@@ -126,7 +126,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 				Include = new IncludeExclude("pi*")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var sigNames = response.Aggregations.SignificantTerms("significant_names");
@@ -188,7 +188,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 				Exclude = new IncludeExclude(new[] { "pierce" })
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var sigNames = response.Aggregations.SignificantTerms("significant_names");

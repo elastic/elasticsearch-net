@@ -11,7 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Search
 {
 	public class SearchProfileApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest,
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest,
 			SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -71,7 +71,7 @@ namespace Tests.Search.Search
 			(c, r) => c.SearchAsync<Project>(r)
 		);
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.Hits.Count().Should().BeGreaterThan(0);
 			var profile = response.Profile;

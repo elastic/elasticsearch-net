@@ -255,7 +255,7 @@ namespace Tests.Search.Request
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
 

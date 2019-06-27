@@ -9,7 +9,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Scroll.Scroll
 {
 	public class ScrollApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
 		private string _scrollId = "default-for-unit-tests";
 

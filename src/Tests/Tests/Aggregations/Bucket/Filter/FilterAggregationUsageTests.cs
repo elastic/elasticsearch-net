@@ -58,7 +58,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling Responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
@@ -116,7 +116,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response) => response.ShouldNotBeValid();
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldNotBeValid();
 	}
 
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
@@ -165,7 +165,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			response.Aggregations.Filter(_aggName).DocCount.Should().BeGreaterThan(0);

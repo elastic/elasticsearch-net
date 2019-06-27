@@ -65,7 +65,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 					new CumulativeSumAggregation("cumulative_commits", "commits")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
