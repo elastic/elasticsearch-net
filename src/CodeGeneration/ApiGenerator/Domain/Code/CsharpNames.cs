@@ -61,7 +61,8 @@ namespace ApiGenerator.Domain.Code
 				else if (ApiName.EndsWith("Exists")) return $"ExistsResponse";
 
 				var generatedName = $"{ApiName}Response";
-				return CodeConfiguration.ResponseLookup.TryGetValue(generatedName, out var lookup) ? lookup.Item1 : generatedName;
+				var name = CodeConfiguration.ResponseLookup.TryGetValue(generatedName, out var lookup) ? lookup.Item1 : generatedName;
+				return name;
 			}
 		}
 		public string RequestInterfaceName => $"I{RequestName}";
@@ -159,7 +160,16 @@ namespace ApiGenerator.Domain.Code
 
 		public string GenericOrNonGenericDescriptorName => GenericDescriptorName ?? DescriptorName;
 		public string GenericOrNonGenericInterfaceName => GenericInterfaceName  ?? RequestInterfaceName;
-		public string GenericOrNonGenericResponseName => GenericResponseName ?? ResponseName;
+		public string GenericOrNonGenericResponseName
+		{
+			get
+			{
+				var full = GenericResponseName ?? ResponseName;
+				if (full.StartsWith("SearchResponse<"))
+					full = "I" + full;
+				return full;
+			}
+		}
 
 		/// <summary> If matching Request.cs only defined generic interface make the client method only accept said interface </summary>
 		public string GenericOrNonGenericInterfacePreference => CodeConfiguration.GenericOnlyInterfaces.Contains(RequestInterfaceName)
