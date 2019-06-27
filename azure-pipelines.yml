@@ -35,7 +35,7 @@ jobs:
       es71:
         esVersion: '7.1.0'
   steps:
-      - script: 'build.bat integrate $(esVersion) "readonly,writable,bool,xpack" skipdocs'
+      - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack" skipdocs'
         displayName: '$(esVersion) windows integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()
@@ -54,7 +54,7 @@ jobs:
           es7:
               esVersion: '7.0.0'
   steps:
-      - script: './build.sh integrate $(esVersion) "readonly,writable" skipdocs'
+      - script: './build.sh integrate-one $(esVersion) "readonly,writable" skipdocs'
         displayName: '$(esVersion) linux integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()

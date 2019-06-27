@@ -8,7 +8,8 @@ module Projects =
         | NetStandard2_0
         | Net461
         | NetCoreApp2_1
-        static member All = [NetStandard2_0; Net461] 
+        static member All = [NetStandard2_0; Net461]
+        static member AllTests = [NetCoreApp2_1; Net461] 
         member this.Identifier = 
             match this with
             | NetStandard2_0 -> { MSBuild = "netstandard2.0"; Nuget = "netstandard2.0"; DefineConstants = ""; }
@@ -19,6 +20,7 @@ module Projects =
         | Nest
         | ElasticsearchNet
         | NestJsonNetSerializer
+        | NestUpgradeAssistant
         
     type PrivateProject =
         | Tests
@@ -38,6 +40,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
+                Project Project.NestUpgradeAssistant; 
                 PrivateProject PrivateProject.Tests
             ]
 
@@ -46,6 +49,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
+                Project Project.NestUpgradeAssistant;
             ] 
         static member Tests = seq [PrivateProject PrivateProject.Tests]
         
@@ -66,6 +70,7 @@ module Projects =
             | Project Nest -> "Nest"
             | Project ElasticsearchNet -> "Elasticsearch.Net"
             | Project NestJsonNetSerializer -> "Nest.JsonNetSerializer"
+            | Project NestUpgradeAssistant -> "Nest.7xUpgradeAssistant"
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
             | PrivateProject ApiGenerator -> "ApiGenerator"
@@ -75,6 +80,7 @@ module Projects =
             match this with
             | Project Nest -> "NEST"
             | Project NestJsonNetSerializer -> "NEST.JsonNetSerializer"
+            | Project NestUpgradeAssistant -> "NEST.7xUpgradeAssistant"
             | _ -> this.Name
         
         member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true
