@@ -84,7 +84,7 @@ namespace Tests.XPack.Security.Privileges
 				))
 			},
 			{
-				PutUserStep, u => u.Call((v, c) => c.Security.PutUserAsync($"user-{v}",
+				PutUserStep, u => u.Call((v, c) => c.Security.PutUserAsync($"user-ap-{v}",
 					r => r.Roles("admin", $"role-{v}").Password($"pass-{v}")))
 			},
 			{
@@ -93,7 +93,7 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", $"pass-{v}")
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-ap-{v}", $"pass-{v}")
 						},
 						Application = new[]
 						{
@@ -106,7 +106,7 @@ namespace Tests.XPack.Security.Privileges
 						}
 					},
 					(v, d) => d
-						.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}"))
+						.RequestConfiguration(r=>r.BasicAuthentication($"user-ap-{v}", $"pass-{v}"))
 						.Applications(apps => apps
 							.Application(a => a
 								.Name($"app-{v}")
@@ -127,10 +127,10 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", $"pass-{v}")
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-ap-{v}", $"pass-{v}")
 						}
 					},
-					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}")),
+					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-ap-{v}", $"pass-{v}")),
 					(v, c, f) => c.Security.GetUserPrivileges(f),
 					(v, c, f) => c.Security.GetUserPrivilegesAsync(f),
 					(v, c, r) => c.Security.GetUserPrivileges(r),
@@ -201,7 +201,7 @@ namespace Tests.XPack.Security.Privileges
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-			r.Username.Should().Be($"user-{v}");
+			r.Username.Should().Be($"user-ap-{v}");
 			r.HasAllRequested.Should().Be(true);
 			r.Applications.Should().NotBeEmpty();
 			var app = $"app-{v}";
