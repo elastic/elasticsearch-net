@@ -277,10 +277,7 @@ namespace Tests.Search.Search
 			},
 			docvalue_fields = new object[]
 			{
-				new
-				{
-					field = "name"
-				},
+				"name",
 				new
 				{
 					field = "lastActivity",
