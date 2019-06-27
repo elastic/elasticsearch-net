@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
@@ -31,12 +32,13 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeTrue();
 	}
 
+	// uses DirectStreamingReadOnlyCluster so that response stream is not seekable
 	public class IndexNotExistsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
+		: ApiIntegrationTestBase<DirectStreamingReadOnlyCluster, ExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
 	{
 		private const string NonExistentIndex = "non-existent-index";
 
-		public IndexNotExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexNotExistsApiTests(DirectStreamingReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;

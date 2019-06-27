@@ -16,29 +16,21 @@ namespace Nest
 
 		public T Deserialize<T>(Stream stream)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return default;
-
 			return JsonSerializer.Deserialize<T>(stream, FormatterResolver);
 		}
 
 		public object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return type.DefaultValue();
-
 			return JsonSerializer.NonGeneric.Deserialize(type, stream, FormatterResolver);
 		}
 
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(default(T));
-
 			return JsonSerializer.DeserializeAsync<T>(stream, FormatterResolver);
 		}
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
-
 			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, FormatterResolver);
 		}
 
