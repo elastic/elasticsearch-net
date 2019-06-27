@@ -77,7 +77,7 @@ namespace Tests.Aggregations.Bucket.Filters
 					new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling Responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
@@ -162,7 +162,7 @@ namespace Tests.Aggregations.Bucket.Filters
 					new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling Responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
@@ -211,7 +211,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				Filters = new List<QueryContainer>()
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			response.Aggregations.Filters("empty_filters").Buckets.Should().BeEmpty();
@@ -251,7 +251,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			response.Aggregations.Filters("conditionless_filters").Buckets.Should().BeEmpty();

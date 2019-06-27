@@ -203,7 +203,7 @@ namespace Tests.Search.Request
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
 	public abstract class InnerHitsApiTestsBase<TRoyal>
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, SearchResponse<TRoyal>,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>,
 			ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
@@ -330,7 +330,7 @@ namespace Tests.Search.Request
 
 		private static IndexName IndexName { get; } = RandomString();
 
-		protected override void ExpectResponse(SearchResponse<King> response)
+		protected override void ExpectResponse(ISearchResponse<King> response)
 		{
 			response.Hits.Should().NotBeEmpty();
 			foreach (var hit in response.Hits)

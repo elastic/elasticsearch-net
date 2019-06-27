@@ -12,13 +12,16 @@
 	var dispatchMethod = !Model.Async ? syntax.DispatchMethod : string.Format("{0}Async", syntax.DispatchMethod);
 	var dispatchGenerics = syntax.DispatchGenerics;
 	var dispatchParameters = syntax.DispatchParameters;
+	var asyncKeyword = Model.Syntax.InterfaceResponse && Model.Async ? "async " : String.Empty;
+	var awaitKeyWord = Model.Syntax.InterfaceResponse && Model.Async ? "await ": string.Empty;
+	var configureAwait = Model.Syntax.InterfaceResponse && Model.Async ? ".ConfigureAwait(false)" : String.Empty;
 	if (Model.Async)
 	{
 		dispatchParameters += ", ct";
 	}
 }
 @{ await IncludeAsync("HighLevel/Client/MethodXmlDocs.cshtml", syntax); }
-public @{ await IncludeAsync("HighLevel/Client/InitializerSyntax/InitializerMethodHeader.cshtml", Model); } @Raw("=>")
-	@(dispatchMethod)@(Raw(dispatchGenerics))(@Raw(dispatchParameters));
+public @Raw(asyncKeyword)@{ await IncludeAsync("HighLevel/Client/InitializerSyntax/InitializerMethodHeader.cshtml", Model); } @Raw("=>")
+	@(awaitKeyWord)@(dispatchMethod)@(Raw(dispatchGenerics))(@Raw(dispatchParameters))@Raw(configureAwait);
 
 

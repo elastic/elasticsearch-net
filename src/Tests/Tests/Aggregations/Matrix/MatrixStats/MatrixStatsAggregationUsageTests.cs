@@ -68,7 +68,7 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 				Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var matrix = response.Aggregations.MatrixStats("matrixstats");

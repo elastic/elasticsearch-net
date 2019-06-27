@@ -182,7 +182,7 @@ namespace Tests.Aggregations.Metric.TopHits
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var states = response.Aggregations.Terms("states");

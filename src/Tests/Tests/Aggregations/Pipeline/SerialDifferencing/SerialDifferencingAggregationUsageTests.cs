@@ -70,7 +70,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 					}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

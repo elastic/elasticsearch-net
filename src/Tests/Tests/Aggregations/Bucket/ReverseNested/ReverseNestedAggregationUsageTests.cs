@@ -78,7 +78,7 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var tags = response.Aggregations.Nested("tags");

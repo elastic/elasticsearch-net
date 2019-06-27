@@ -26,9 +26,15 @@ namespace ApiGenerator.Domain.Code.HighLevel.Methods
 
 		public string DispatchMethod => IsCatMethod ? "DoCat" : "DoRequest";
 
+		/// <summary>
+		/// Dispatch needs a class instance so if the response is an interface transform it to the concrete implementation
+		/// when calling into DoRequest
+		/// </summary>
+		private string DispatchResponseName => InterfaceResponse ? ResponseName.Substring(1, ResponseName.Length - 1) : ResponseName;
+
 		public string DispatchGenerics => IsCatMethod
 			? $"<{ArgumentType},{CsharpNames.ParametersName},{CsharpNames.RequestName.Replace("Request", "Record")}>"
-			: $"<{ArgumentType},{ResponseName}>";
+			: $"<{ArgumentType},{DispatchResponseName}>";
 
 		public string DispatchParameters => IsCatMethod
 			? "request"

@@ -53,7 +53,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				ReduceScript = new InlineScript(_script.Reduce)
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var sumTheHardWay = response.Aggregations.ScriptedMetric("sum_the_hard_way");
@@ -200,7 +200,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				ReduceScript = new InlineScript(_second.Reduce) { Lang = _second.Language }
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var byStateTotal = response.Aggregations.ScriptedMetric("by_state_total");

@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Metric.Cardinality
 				PrecisionThreshold = 100
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var projectCount = response.Aggregations.Cardinality("state_count");

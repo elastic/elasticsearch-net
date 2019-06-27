@@ -877,85 +877,85 @@ namespace Nest
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
+		public ISearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
 			where TInferDocument : class where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
-			where TInferDocument : class where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)), ct);
+		public async Task<ISearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class => await ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TInferDocument>(scroll, scrollId)), ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
+		public ISearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
 			where TDocument : class => Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)), ct);
+		public async Task<ISearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => await ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor<TDocument>(scroll, scrollId)), ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
+		public ISearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 			where TDocument : class => DoRequest<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
-			where TDocument : class => DoRequestAsync<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
+		public async Task<ISearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
+			where TDocument : class => await DoRequestAsync<IScrollRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null)
+		public ISearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null)
 			where TInferDocument : class where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
-			where TInferDocument : class where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()), ct);
+		public async Task<ISearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<SearchDescriptor<TInferDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class => await SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TInferDocument>()), ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null)
+		public ISearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null)
 			where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()), ct);
+		public async Task<ISearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor<TDocument>, ISearchRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => await SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor<TDocument>()), ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
+		public ISearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
 			where TDocument : class => DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken ct = default)
-			where TDocument : class => DoRequestAsync<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
+		public async Task<ISearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken ct = default)
+			where TDocument : class => await DoRequestAsync<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_shards</c> API, read more about this API online:
 		/// <para></para>
@@ -987,29 +987,29 @@ namespace Nest
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null)
+		public ISearchResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null)
 			where TDocument : class => SearchTemplate<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => SearchTemplateAsync<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()), ct);
+		public async Task<ISearchResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor<TDocument>, ISearchTemplateRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => await SearchTemplateAsync<TDocument>(selector.InvokeOrDefault(new SearchTemplateDescriptor<TDocument>()), ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		public SearchResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request)
+		public ISearchResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request)
 			where TDocument : class => DoRequest<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>search_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</a>
 		/// </summary>
-		public Task<SearchResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken ct = default)
-			where TDocument : class => DoRequestAsync<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct);
+		public async Task<ISearchResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken ct = default)
+			where TDocument : class => await DoRequestAsync<ISearchTemplateRequest, SearchResponse<TDocument>>(request, request.RequestParameters, ct).ConfigureAwait(false);
 		/// <summary>
 		/// <c>POST</c> request to the <c>termvectors</c> API, read more about this API online:
 		/// <para></para>

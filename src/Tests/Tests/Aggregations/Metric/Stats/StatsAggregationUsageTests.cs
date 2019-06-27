@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.Stats
 		protected override AggregationDictionary InitializerAggs =>
 			new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits));
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitStats = response.Aggregations.Stats("commit_stats");

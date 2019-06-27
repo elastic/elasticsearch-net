@@ -89,7 +89,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var states = response.Aggregations.Terms("states");
@@ -185,7 +185,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var states = response.Aggregations.Terms("states");
@@ -281,7 +281,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var states = response.Aggregations.Terms("states");
@@ -349,7 +349,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				Size = 5
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commits = response.Aggregations.Terms<int>("commits");
@@ -404,7 +404,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				Missing = -1
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commits = response.Aggregations.Terms<int>("commits");
@@ -470,7 +470,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commits = response.Aggregations.Terms<int>("commits");

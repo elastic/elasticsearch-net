@@ -62,7 +62,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldNotBeValid();
 			var serverError = response.ServerError;

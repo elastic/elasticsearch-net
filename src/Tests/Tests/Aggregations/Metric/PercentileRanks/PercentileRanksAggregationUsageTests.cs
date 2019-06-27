@@ -60,7 +60,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 				Missing = 0
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsOutlier = response.Aggregations.PercentileRanks("commits_outlier");
@@ -125,7 +125,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 				Keyed = false
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsOutlier = response.Aggregations.PercentileRanks("commits_outlier");

@@ -40,7 +40,7 @@ namespace Tests.Reproduce
 			var connectionSettings = new ConnectionSettings(pool, new InMemoryConnection(bytes));
 			var client = new ElasticClient(connectionSettings);
 
-			Func<SearchResponse<TestEntity>> response = () => client.Search<TestEntity>(s => s
+			Func<ISearchResponse<TestEntity>> response = () => client.Search<TestEntity>(s => s
 				.Size(0)
 				.Index("issue")
 				.Aggregations(q => q

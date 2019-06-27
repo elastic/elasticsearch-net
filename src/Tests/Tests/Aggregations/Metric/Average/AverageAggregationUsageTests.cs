@@ -55,7 +55,7 @@ namespace Tests.Aggregations.Metric.Average
 				Script = new InlineScript("_value * 1.2")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsAvg = response.Aggregations.Average("average_commits");

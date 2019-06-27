@@ -80,7 +80,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue);
 
-		private SearchResponse<Test> SearchFlags(string index) =>
+		private ISearchResponse<Test> SearchFlags(string index) =>
 			Client.Search<Test>(s => s
 				.Index(index)
 				.Query(q => q.Match(m => m.Field(p => p.Flag).Query("foo")))

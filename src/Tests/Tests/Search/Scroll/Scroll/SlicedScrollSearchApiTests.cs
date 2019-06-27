@@ -10,7 +10,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Scroll.Scroll
 {
 	public class SlicedScrollSearchApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
 		private int _slice;
 

@@ -69,7 +69,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 				Sigma = 2.0
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

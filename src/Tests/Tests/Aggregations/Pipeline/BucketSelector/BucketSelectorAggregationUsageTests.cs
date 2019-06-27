@@ -81,7 +81,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 					}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
