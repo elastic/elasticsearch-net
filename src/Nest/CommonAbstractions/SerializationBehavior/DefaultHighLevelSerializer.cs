@@ -34,10 +34,10 @@ namespace Nest
 			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, FormatterResolver);
 		}
 
-		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.None) =>
 			JsonSerializer.Serialize(writableStream, data, FormatterResolver);
 
-		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None,
 			CancellationToken cancellationToken = default
 		) => JsonSerializer.SerializeAsync(stream, data, FormatterResolver);
 	}
