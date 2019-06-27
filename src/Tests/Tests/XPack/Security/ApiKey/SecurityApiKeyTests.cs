@@ -14,9 +14,7 @@ namespace Tests.XPack.ApiKey
 	[SkipVersion("<6.7.0", "Security Api Keys are modelled against 6.7.0")]
 	public class SecurityApiKeyTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
-		private const string PutRoleStep = nameof(PutRoleStep);
 		private const string PutUserStep = nameof(PutUserStep);
-		private const string PutPrivilegesStep = nameof(PutPrivilegesStep);
 		private const string CreateApiKeyWithRolesStep = nameof(CreateApiKeyWithRolesStep);
 		private const string CreateApiKeyWithNoRolesStep = nameof(CreateApiKeyWithNoRolesStep);
 		private const string GetApiKeyStep = nameof(GetApiKeyStep);
@@ -25,102 +23,23 @@ namespace Tests.XPack.ApiKey
 		public SecurityApiKeyTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
-				PutRoleStep, u =>
-					u.Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, IPutRoleResponse>(
-						v => new PutRoleRequest($"role-{v}")
-						{
-							Cluster = new[] { "all" },
-							Indices = new IIndicesPrivileges[]
-							{
-								new IndicesPrivileges
-								{
-									Names = "*",
-									Privileges = new [] { "all" }
-								}
-							},
-							Applications = new IApplicationPrivileges[]
-							{
-								new ApplicationPrivileges
-								{
-									Application = $"app-{v}",
-									Privileges = new [] { "*" },
-									Resources = new [] { "*" }
-								}
-							}
-						},
-						(v, d) => d
-							.Cluster("all")
-							.Indices(i => i.Add<object>(p => p.Names("*").Privileges("all")))
-							.Applications(i => i.Add<object>(p => p.Application($"app-{v}").Privileges("*").Resources("*")))
-						,
-						(v, c, f) => c.PutRole($"role-{v}", f),
-						(v, c, f) => c.PutRoleAsync($"role-{v}", f),
-						(v, c, r) => c.PutRole(r),
-						(v, c, r) => c.PutRoleAsync(r)
-					)
-			},
-			{
 				PutUserStep, u =>
 					u.Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, IPutUserResponse>(
 						v => new PutUserRequest($"user-{v}")
 						{
 							Password = "password",
-							Roles = new[] { $"role-{v}", "superuser" },
-							FullName = "API key user"
+							Roles = new[] { "superuser" },
+							FullName = "API key superuser"
 						},
 						(v, d) => d
 							.Password("password")
-							.Roles($"role-{v}", "superuser")
-							.FullName("API key user")
+							.Roles("superuser")
+							.FullName("API key superuser")
 						,
 						(v, c, f) => c.PutUser($"user-{v}", f),
 						(v, c, f) => c.PutUserAsync($"user-{v}", f),
 						(v, c, r) => c.PutUser(r),
 						(v, c, r) => c.PutUserAsync(r)
-					)
-			},
-			{
-				PutPrivilegesStep, u =>
-					u.Calls<PutPrivilegesDescriptor, PutPrivilegesRequest, IPutPrivilegesRequest, IPutPrivilegesResponse>(
-						v => new PutPrivilegesRequest
-						{
-							Applications = new AppPrivileges
-							{
-								{
-									$"app-{v}", new Privileges
-									{
-										{
-											$"read", new PrivilegesActions
-											{
-												Actions = new[] { "data:read/*" }
-											}
-										},
-										{
-											$"write", new PrivilegesActions
-											{
-												Actions = new[] { "data:write/*" }
-											}
-										}
-									}
-								}
-							}
-						},
-						(v, d) => d
-							.Applications(a => a
-								.Application($"app-{v}", pr => pr
-									.Privilege($"read", ac => ac
-										.Actions("data:read/*")
-									)
-									.Privilege($"write", ac => ac
-										.Actions("data:write/*")
-									)
-								)
-							)
-						,
-						(v, c, f) => c.PutPrivileges(f),
-						(v, c, f) => c.PutPrivilegesAsync(f),
-						(v, c, r) => c.PutPrivileges(r),
-						(v, c, r) => c.PutPrivilegesAsync(r)
 					)
 			},
 			{
