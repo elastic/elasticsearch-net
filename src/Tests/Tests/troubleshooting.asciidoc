@@ -22,11 +22,16 @@ There are a couple of popular ways of capturing this information
 - <<logging-with-on-request-completed, Using `OnRequestCompleted`>>
 - <<logging-with-fiddler, Using Fiddler, a web debugging proxy>>
 
+More detailed diagnostic information can be captured with
+
+- <<diagnostic-source, Diagnostic Source>>
+
 In addition to logging requests and responses, Elasticsearch 5.0+ also 
 <<deprecation-logging, sends back warning headers>> in the response,
 to notify you if you are using a feature that is marked as deprecated.
 
 include::client-concepts/troubleshooting/logging-with-on-request-completed.asciidoc[]
+include::client-concepts/troubleshooting/diagnostic-source.asciidoc[]
 include::client-concepts/troubleshooting/logging-with-fiddler.asciidoc[]
 include::client-concepts/troubleshooting/deprecation-logging.asciidoc[]
 

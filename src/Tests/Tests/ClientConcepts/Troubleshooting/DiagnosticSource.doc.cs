@@ -20,36 +20,36 @@ using Xunit;
 namespace Tests.ClientConcepts.Troubleshooting
 {
 	/**
+	 * [[diagnostic-source]]
 	 * === Diagnostic Source
 	 *
-	 * Elasticsearch.Net and by proxy NEST ship with support for DiagnosticSource and Activity out of the box.
+	 * Elasticsearch.Net and NEST support capturing diagnostics information using `DiagnosticSource` and `Activity` from the
+	 * `System.Diagnostics` namespace.
 	 *
-	 * To aid with their discover the topics you can subscribe on and the event names they emit are exposed as
-	 * strongly typed strings under `Elasticsearch.Net.Diagnostics.DiagnosticSources`
-	 *
+	 * To aid with the discoverability of the topics you can subscribe to and the event names they emit,
+	 * both topics and event names are exposed as strongly typed strings under `Elasticsearch.Net.Diagnostics.DiagnosticSources`
 	 */
 	public class DiagnosticSourceUsageDocumentation : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly ReadOnlyCluster _cluster;
 
+		// hide
 		public DiagnosticSourceUsageDocumentation(ReadOnlyCluster cluster) => _cluster = cluster;
-
 
 		/**
 		 * Subscribing to DiagnosticSources means implementing `IObserver<DiagnosticListener>`
-		 * or use `.Subscribe(observer, filter)` to opt in to the correct topic.
+		 * or using `.Subscribe(observer, filter)` to opt in to the correct topic.
 		 *
-		 * Here we choose the more verbose `IObserver<>` implementation.
-		 *
+		 * Here we choose the more verbose `IObserver<>` implementation
 		 */
-		private class ListenerObserver : IObserver<DiagnosticListener>, IDisposable
+		public class ListenerObserver : IObserver<DiagnosticListener>, IDisposable
 		{
 			private long _messagesWrittenToConsole = 0;
 			public long MessagesWrittenToConsole => _messagesWrittenToConsole;
 
 			public Exception SeenException { get; private set; }
-			public void OnError(Exception error) => SeenException = error;
 
+			public void OnError(Exception error) => SeenException = error;
 			public bool Completed { get; private set; }
 			public void OnCompleted() => Completed = true;
 
@@ -61,21 +61,9 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 			private List<IDisposable> Disposables { get; } = new List<IDisposable>();
 
-			/**
-			 * By inspecting the name we selectively subscribe only to topics `Elasticsearch.Net` emits.
-			 *
-			 * Thanks to `DiagnosticSources` you do not have to guess the topics we emit under.
-			 *
-			 * `DiagnosticListener.Subscribe` expects an `IObserver<KeyValuePair<string, object>>` which is useful to create
-			 * a decoupled messaging contract but as a subscriber you would like to know what `object` is.
-			 *
-			 * Therefor each topic we ship with has a dedicated `Observer` implementation that takes an `onNext` lambda
-			 * which is typed to the context object we actually emit.
-			 *
-			 */
 			public void OnNext(DiagnosticListener value)
 			{
-				void TrySubscribe(string sourceName, Func<IObserver<KeyValuePair<string, object>>> listener)
+				void TrySubscribe(string sourceName, Func<IObserver<KeyValuePair<string, object>>> listener) // <1> By inspecting the name, we can selectively subscribe only to the topics `Elasticsearch.Net` emit
 				{
 					if (value.Name != sourceName) return;
 
@@ -88,11 +76,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 				TrySubscribe(DiagnosticSources.Serializer.SourceName,
 					() => new SerializerDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
-				/**
-				 * RequestPipeline emits a different context object for the start of the `Activity` then it does
-				 * for the end of the `Activity` therefor `RequestPipelineDiagnosticObserver` accepts two `onNext` lambda's.
-				 * One for the `.Start` events and one for the `.Stop` events.
-				 */
+
 				TrySubscribe(DiagnosticSources.RequestPipeline.SourceName,
 					() => new RequestPipelineDiagnosticObserver(
 						v => WriteToConsole(v.Key, v.Value),
@@ -111,22 +95,31 @@ namespace Tests.ClientConcepts.Troubleshooting
 				foreach(var d in Disposables) d.Dispose();
 			}
 		}
-
+		/**
+		 * Thanks to `DiagnosticSources`, you do not have to guess the topics emitted.
+		 *
+		 * The `DiagnosticListener.Subscribe` method expects an `IObserver<KeyValuePair<string, object>>`
+		 * which is a rather generic message contract. As a subscriber, it's useful to know what `object` is in each case.
+		 * To help with this, each topic within the client has a dedicated `Observer` implementation that
+		 * takes an `onNext` delegate typed to the context object actually emitted.
+		 *
+		 * The RequestPipeline diagnostic source emits a different context objects the start and end of the `Activity`
+		 * For this reason, `RequestPipelineDiagnosticObserver` accepts two `onNext` delegates,
+		 * one for the `.Start` events and one for the `.Stop` events.
+		 *
+		 * [[subscribing-to-topics]]
+		 * ==== Subscribing to topics
+		 *
+		 * As a concrete example of subscribing to topics, let's hook into all diagnostic sources and use
+		 * `ListenerObserver` to only listen to the ones from `Elasticsearch.Net`
+		 */
 		[I] public void SubscribeToTopics()
 		{
-			/**
-			 * Here we hook into all diagnostic sources and use `ListenerObserver` to only listen to the ones
-			 * from `Elasticsearch.Net`
-			 */
+
 			using(var listenerObserver = new ListenerObserver())
 			using (var subscription = DiagnosticListener.AllListeners.Subscribe(listenerObserver))
 			{
-
-				/**
-				 * We'll use a Sniffing connection pool here since it sniffs on startup and pings before
-				 * first usage, so our diagnostics are involved enough to showcase most topics.
-				 */
-				var pool = new SniffingConnectionPool(new []{ TestConnectionSettings.CreateUri() });
+				var pool = new SniffingConnectionPool(new []{ TestConnectionSettings.CreateUri() }); // <1> use a sniffing connection pool that sniffs on startup and pings before first usage, so our diagnostics will emit most topics.
 				var connectionSettings = new ConnectionSettings(pool)
 					.DefaultMappingFor<Project>(i => i
 						.IndexName("project")
@@ -134,14 +127,11 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 				var client = new ElasticClient(connectionSettings);
 
-				/**
-				 * After issuing the following request
-				 */
-				var response = client.Search<Project>(s => s
+				var response = client.Search<Project>(s => s // <2> make a search API call
 					.MatchAll()
 				);
 
-				listenerObserver.SeenException.Should().BeNull();
+				listenerObserver.SeenException.Should().BeNull(); // <3> verify that the listener is picking up events
 				listenerObserver.Completed.Should().BeFalse();
 				listenerObserver.MessagesWrittenToConsole.Should().BeGreaterThan(0);
 			}
