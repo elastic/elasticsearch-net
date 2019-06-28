@@ -1,4 +1,4 @@
-Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasticsearch](https://github.com/elastic/elasticsearch) .NET clients.
+Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasticsearch](https://github.com/elastic/elasticsearch) .NET clients.
 
 ## Compatibility Matrix
 <table>
@@ -56,7 +56,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><code>master</code></td>
     	<td><code>master</code></td>
     	<td>:x:</td>
-      <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
+      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master/tests"><img alt="master unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/master.svg?style=flat-square"></a></td>
     </tr>
 </table>
@@ -83,6 +83,10 @@ Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.c
 ### Upgrading from 5.x to 6.x
 
 Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 6.0](https://www.elastic.co/blog/nest-elasticsearch-net-6-0-ga), in addition to the list of breaking changes for [NEST](https://www.elastic.co/guide/en/elasticsearch/client/net-api/6.x/nest-breaking-changes.html) and [Elasticsearch.Net](https://www.elastic.co/guide/en/elasticsearch/client/net-api/6.x/elasticsearch-net-breaking-changes.html).
+
+### Upgrading from 6.x to 7.x
+
+More comprehensive details and a blog post coming soon. For now, please see the [7.0.0 release notes](https://github.com/elastic/elasticsearch-net/releases/tag/7.0.0).
 
 # [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
 
@@ -201,7 +205,7 @@ NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.
 ```csharp
 //.LowLevel is of type IElasticLowLevelClient
 // Generic parameter of Search<> is the type of .Body on response
-var response = client.LowLevel.Search<SearchResponse<Tweet>>("myindex","elasticsearchprojects", PostData.Serializable(new
+var response = client.LowLevel.Search<SearchResponse<Tweet>>("myindex", PostData.Serializable(new
 {
 	from = 0,
 	size = 10,
@@ -266,10 +270,14 @@ will execute a `GET` to `/myindex/mytype/1/_source?routing=routingvalue`. All th
 As you can see, Elasticsearch.Net also strongly types the query string parameters that it knows exist on an endpoint with full Intellisense documentation. However, unknown query string parameters can still be added:
 
 ```csharp
-client.GetSource("myindex","mytype","1",qs=>qs
-    .Routing("routingvalue")
-    .Add("key","value")
-);
+client.Source<StringResponse>("myindex", "1", new SourceRequestParameters
+{
+    Routing = "routingvalue",
+    QueryString =
+    {
+        { "key", "value" }
+    }
+});
 ```
 
 The query string parameter is always optional.
@@ -280,7 +288,7 @@ You can specify a request body directly with a string:
 
 ```csharp
 var myJson = @"{ ""hello"" : ""world"" }";
-client.Index("myindex","mytype","1", myJson);
+client.Index<StringResponse>("myindex", "1", myJson);
 ```
 
 This will execute a `POST` to `/myindex/mytype/1` with the provided string `myJson` passed verbatim as the request body.
@@ -289,10 +297,9 @@ Alternatively, you can specify an anonymous object:
 
 ```csharp
 var myJson = new { hello = "world" };
-client.Index("myindex","mytype","1", myJson);
+client.Index<BytesResponse>("myindex", "1", PostData.Serializable(myJson));
 ```
-
-This will execute the same request, but this time `myJson` will be serialized by the registered `ISerializer`.
+This will execute the same request, but this time `myJson` will be serialized by the registered `IElasticsearchSerializer`.
 
 #### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html) 
 
