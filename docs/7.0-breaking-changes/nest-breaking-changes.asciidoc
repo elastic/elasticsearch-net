@@ -147,6 +147,7 @@ Most API methods now return classes and not interfaces, for example, the client 
 
 In instances where methods can benefit from returning an interface, these have been left intact, for example, `ISearchResponse<T>`.
 
+[float]
 ==== Why make the change? 
 
 Firstly, this significantly reduces the number of types in 
@@ -169,6 +170,7 @@ the client calls and objects within that layer so they can be mocked.
 `IApiCallDetails.Success` and `ResponseBase.IsValid` have been simplified, making it easier to inspect 
 if a request to Elasticsearch was indeed successful or not.
 
+[float]
 ==== Low Level Client
 
 If the status code from Elasticsearch is `2xx` then `.Success` will be `true`. In instances where a `404` 
@@ -177,6 +179,7 @@ will be `false`. This is also the case for `HEAD` requests that result in a `404
 
 This is controlled via `IConnectionConfiguration.StatusCodeToResponseSuccess`, which currently has no public setter.
 
+[float]
 ==== High Level Client
 
 The NEST high level client overrides `StatusCodeToResponseSuccess`, whereby `404` status codes now sets `.Success` as `true`.
