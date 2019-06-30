@@ -56,44 +56,44 @@ This is controlled via `IConnectionConfiguration.StatusCodeToResponseSuccess`, w
 === Public API changes
 
 [discrete]
-=== `Elasticsearch.Net.AcknowledgeWatchRequestParameters`
+==== `Elasticsearch.Net.AcknowledgeWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ActivateWatchRequestParameters`
+==== `Elasticsearch.Net.ActivateWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.AliasExistsRequestParameters`
+==== `Elasticsearch.Net.AliasExistsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.AnalyzeRequestParameters`
+==== `Elasticsearch.Net.AnalyzeRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ApiCallDetails`
+==== `Elasticsearch.Net.ApiCallDetails`
 
 [horizontal]
 `ConnectionConfiguration` property:: added
 `ServerError` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.AuthenticateRequestParameters`
+==== `Elasticsearch.Net.AuthenticateRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.BasicAuthenticationCredentials`
+==== `Elasticsearch.Net.BasicAuthenticationCredentials`
 
 [horizontal]
 `BasicAuthenticationCredentials(String, SecureString)` method:: added
@@ -102,13 +102,13 @@ type:: deleted
 `ToString()` method:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.BulkAliasRequestParameters`
+==== `Elasticsearch.Net.BulkAliasRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.BulkRequestParameters`
+==== `Elasticsearch.Net.BulkRequestParameters`
 
 [horizontal]
 `Fields` property:: deleted
@@ -118,230 +118,230 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.CancelTasksRequestParameters`
+==== `Elasticsearch.Net.CancelTasksRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatAliasesRequestParameters`
+==== `Elasticsearch.Net.CatAliasesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatAllocationRequestParameters`
+==== `Elasticsearch.Net.CatAllocationRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatCountRequestParameters`
+==== `Elasticsearch.Net.CatCountRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatFielddataRequestParameters`
+==== `Elasticsearch.Net.CatFielddataRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatHealthRequestParameters`
+==== `Elasticsearch.Net.CatHealthRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatHelpRequestParameters`
+==== `Elasticsearch.Net.CatHelpRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatIndicesRequestParameters`
+==== `Elasticsearch.Net.CatIndicesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatMasterRequestParameters`
+==== `Elasticsearch.Net.CatMasterRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatNodeAttributesRequestParameters`
+==== `Elasticsearch.Net.CatNodeAttributesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatNodesRequestParameters`
+==== `Elasticsearch.Net.CatNodesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatPendingTasksRequestParameters`
+==== `Elasticsearch.Net.CatPendingTasksRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatPluginsRequestParameters`
+==== `Elasticsearch.Net.CatPluginsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatRecoveryRequestParameters`
+==== `Elasticsearch.Net.CatRecoveryRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatRepositoriesRequestParameters`
+==== `Elasticsearch.Net.CatRepositoriesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatSegmentsRequestParameters`
+==== `Elasticsearch.Net.CatSegmentsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatShardsRequestParameters`
+==== `Elasticsearch.Net.CatShardsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatSnapshotsRequestParameters`
+==== `Elasticsearch.Net.CatSnapshotsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatTasksRequestParameters`
+==== `Elasticsearch.Net.CatTasksRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatTemplatesRequestParameters`
+==== `Elasticsearch.Net.CatTemplatesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CatThreadPoolRequestParameters`
+==== `Elasticsearch.Net.CatThreadPoolRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CcrStatsRequestParameters`
+==== `Elasticsearch.Net.CcrStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ChangePasswordRequestParameters`
+==== `Elasticsearch.Net.ChangePasswordRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClearCachedRealmsRequestParameters`
+==== `Elasticsearch.Net.ClearCachedRealmsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClearCachedRolesRequestParameters`
+==== `Elasticsearch.Net.ClearCachedRolesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClearCacheRequestParameters`
+==== `Elasticsearch.Net.ClearCacheRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClearSqlCursorRequestParameters`
+==== `Elasticsearch.Net.ClearSqlCursorRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CloseIndexRequestParameters`
+==== `Elasticsearch.Net.CloseIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CloseJobRequestParameters`
+==== `Elasticsearch.Net.CloseJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterAllocationExplainRequestParameters`
+==== `Elasticsearch.Net.ClusterAllocationExplainRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterGetSettingsRequestParameters`
+==== `Elasticsearch.Net.ClusterGetSettingsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterHealthRequestParameters`
+==== `Elasticsearch.Net.ClusterHealthRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterPendingTasksRequestParameters`
+==== `Elasticsearch.Net.ClusterPendingTasksRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterPutSettingsRequestParameters`
+==== `Elasticsearch.Net.ClusterPutSettingsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterRerouteMetric`
+==== `Elasticsearch.Net.ClusterRerouteMetric`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.ClusterRerouteRequestParameters`
+==== `Elasticsearch.Net.ClusterRerouteRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.ClusterStateRequestParameters`
+==== `Elasticsearch.Net.ClusterStateRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ClusterStatsRequestParameters`
+==== `Elasticsearch.Net.ClusterStatsRequestParameters`
 
 [horizontal]
 type:: deleted
@@ -349,7 +349,7 @@ type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.ConnectionConfiguration<T>`
+==== `Elasticsearch.Net.ConnectionConfiguration<T>`
 
 [horizontal]
 `Assign<TValue>(TValue, Action<T, TValue>)` method:: added
@@ -364,74 +364,74 @@ Parameter name changed from `proxyAdress` to `proxyAddress`.
 `UserAgent(String)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.CreateApiKeyRequestParameters`
+==== `Elasticsearch.Net.CreateApiKeyRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CreateAutoFollowPatternRequestParameters`
+==== `Elasticsearch.Net.CreateAutoFollowPatternRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CreateFollowIndexRequestParameters`
+==== `Elasticsearch.Net.CreateFollowIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CreateIndexRequestParameters`
+==== `Elasticsearch.Net.CreateIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CreateRepositoryRequestParameters`
+==== `Elasticsearch.Net.CreateRepositoryRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CreateRequestParameters`
+==== `Elasticsearch.Net.CreateRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CreateRollupJobRequestParameters`
+==== `Elasticsearch.Net.CreateRollupJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.CustomResponseBuilderBase`
+==== `Elasticsearch.Net.CustomResponseBuilderBase`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.DeactivateWatchRequestParameters`
+==== `Elasticsearch.Net.DeactivateWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.DeleteAliasRequestParameters`
+==== `Elasticsearch.Net.DeleteAliasRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteAutoFollowPatternRequestParameters`
+==== `Elasticsearch.Net.DeleteAutoFollowPatternRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteByQueryRequestParameters`
+==== `Elasticsearch.Net.DeleteByQueryRequestParameters`
 
 [horizontal]
 `SourceExclude` property:: deleted
@@ -440,103 +440,103 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.DeleteCalendarEventRequestParameters`
+==== `Elasticsearch.Net.DeleteCalendarEventRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteCalendarJobRequestParameters`
+==== `Elasticsearch.Net.DeleteCalendarJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteCalendarRequestParameters`
+==== `Elasticsearch.Net.DeleteCalendarRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteDatafeedRequestParameters`
+==== `Elasticsearch.Net.DeleteDatafeedRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteExpiredDataRequestParameters`
+==== `Elasticsearch.Net.DeleteExpiredDataRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteFilterRequestParameters`
+==== `Elasticsearch.Net.DeleteFilterRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteForecastRequestParameters`
+==== `Elasticsearch.Net.DeleteForecastRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteIndexRequestParameters`
+==== `Elasticsearch.Net.DeleteIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteIndexTemplateRequestParameters`
+==== `Elasticsearch.Net.DeleteIndexTemplateRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteJobRequestParameters`
+==== `Elasticsearch.Net.DeleteJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteLicenseRequestParameters`
+==== `Elasticsearch.Net.DeleteLicenseRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteLifecycleRequestParameters`
+==== `Elasticsearch.Net.DeleteLifecycleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteModelSnapshotRequestParameters`
+==== `Elasticsearch.Net.DeleteModelSnapshotRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeletePipelineRequestParameters`
+==== `Elasticsearch.Net.DeletePipelineRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeletePrivilegesRequestParameters`
+==== `Elasticsearch.Net.DeletePrivilegesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteRepositoryRequestParameters`
+==== `Elasticsearch.Net.DeleteRepositoryRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteRequestParameters`
+==== `Elasticsearch.Net.DeleteRequestParameters`
 
 [horizontal]
 `IfSeqNo` property:: deleted
@@ -544,97 +544,97 @@ type:: deleted
 `Parent` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteRoleMappingRequestParameters`
+==== `Elasticsearch.Net.DeleteRoleMappingRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteRoleRequestParameters`
+==== `Elasticsearch.Net.DeleteRoleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteRollupJobRequestParameters`
+==== `Elasticsearch.Net.DeleteRollupJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteSnapshotRequestParameters`
+==== `Elasticsearch.Net.DeleteSnapshotRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteUserRequestParameters`
+==== `Elasticsearch.Net.DeleteUserRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeleteWatchRequestParameters`
+==== `Elasticsearch.Net.DeleteWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DeprecationInfoRequestParameters`
+==== `Elasticsearch.Net.DeprecationInfoRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.AuditDiagnosticObserver`
+==== `Elasticsearch.Net.Diagnostics.AuditDiagnosticObserver`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.DiagnosticSources`
+==== `Elasticsearch.Net.Diagnostics.DiagnosticSources`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.HttpConnectionDiagnosticObserver`
+==== `Elasticsearch.Net.Diagnostics.HttpConnectionDiagnosticObserver`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.RequestPipelineDiagnosticObserver`
+==== `Elasticsearch.Net.Diagnostics.RequestPipelineDiagnosticObserver`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.SerializerDiagnosticObserver`
+==== `Elasticsearch.Net.Diagnostics.SerializerDiagnosticObserver`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.TypedDiagnosticObserverBase<TOnNext>`
+==== `Elasticsearch.Net.Diagnostics.TypedDiagnosticObserverBase<TOnNext>`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Diagnostics.TypedDiagnosticObserverBase<TOnNextStart, TOnNextEnd>`
+==== `Elasticsearch.Net.Diagnostics.TypedDiagnosticObserverBase<TOnNextStart, TOnNextEnd>`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.DisableUserRequestParameters`
+==== `Elasticsearch.Net.DisableUserRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DocumentExistsRequestParameters`
+==== `Elasticsearch.Net.DocumentExistsRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
@@ -644,32 +644,32 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.DynamicBody`
+==== `Elasticsearch.Net.DynamicBody`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.DynamicDictionary`
+==== `Elasticsearch.Net.DynamicDictionary`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.DynamicResponse`
+==== `Elasticsearch.Net.DynamicResponse`
 
 [horizontal]
 `DynamicResponse(DynamicBody)` method:: deleted
 `DynamicResponse(DynamicDictionary)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.DynamicValue`
+==== `Elasticsearch.Net.DynamicValue`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.ElasticLowLevelClient`
+==== `Elasticsearch.Net.ElasticLowLevelClient`
 
 [horizontal]
 `Bulk<TResponse>(String, String, PostData, BulkRequestParameters)` method:: deleted
@@ -1689,13 +1689,13 @@ Member is more visible.
 `XPack` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.ElasticsearchDynamicValue`
+==== `Elasticsearch.Net.ElasticsearchDynamicValue`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ElasticsearchResponseBase`
+==== `Elasticsearch.Net.ElasticsearchResponseBase`
 
 [horizontal]
 `AuditTrail` property getter::
@@ -1704,33 +1704,33 @@ changed to virtual.
 `ConnectionConfiguration` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.ElasticsearchSerializerExtensions`
+==== `Elasticsearch.Net.ElasticsearchSerializerExtensions`
 
 [horizontal]
 `SerializeToBytes<T>(IElasticsearchSerializer, T, IMemoryStreamFactory, SerializationFormatting)` method:: added
 `SerializeToString<T>(IElasticsearchSerializer, T, IMemoryStreamFactory, SerializationFormatting)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.ElasticsearchUrlFormatter`
+==== `Elasticsearch.Net.ElasticsearchUrlFormatter`
 
 [horizontal]
 `CreateEscapedString(Object)` method:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.EnableUserRequestParameters`
+==== `Elasticsearch.Net.EnableUserRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.EnumExtensions`
+==== `Elasticsearch.Net.EnumExtensions`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.ErrorCause`
+==== `Elasticsearch.Net.ErrorCause`
 
 [horizontal]
 `AdditionalProperties` property:: added
@@ -1761,26 +1761,26 @@ Member is less visible.
 Member is less visible.
 
 [discrete]
-=== `.ErrorCauseMetadata`
+==== `.ErrorCauseMetadata`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ExecuteWatchRequestParameters`
+==== `Elasticsearch.Net.ExecuteWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.ExplainLifecycleRequestParameters`
+==== `Elasticsearch.Net.ExplainLifecycleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ExplainRequestParameters`
+==== `Elasticsearch.Net.ExplainRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
@@ -1790,217 +1790,217 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.FlushJobRequestParameters`
+==== `Elasticsearch.Net.FlushJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.FlushRequestParameters`
+==== `Elasticsearch.Net.FlushRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.FollowIndexStatsRequestParameters`
+==== `Elasticsearch.Net.FollowIndexStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ForceMergeRequestParameters`
+==== `Elasticsearch.Net.ForceMergeRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ForecastJobRequestParameters`
+==== `Elasticsearch.Net.ForecastJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.Format`
+==== `Elasticsearch.Net.Format`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetAliasRequestParameters`
+==== `Elasticsearch.Net.GetAliasRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetAnomalyRecordsRequestParameters`
+==== `Elasticsearch.Net.GetAnomalyRecordsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetApiKeyRequestParameters`
+==== `Elasticsearch.Net.GetApiKeyRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetAutoFollowPatternRequestParameters`
+==== `Elasticsearch.Net.GetAutoFollowPatternRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetBasicLicenseStatusRequestParameters`
+==== `Elasticsearch.Net.GetBasicLicenseStatusRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetBucketsRequestParameters`
+==== `Elasticsearch.Net.GetBucketsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetCalendarEventsRequestParameters`
+==== `Elasticsearch.Net.GetCalendarEventsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetCalendarsRequestParameters`
+==== `Elasticsearch.Net.GetCalendarsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetCategoriesRequestParameters`
+==== `Elasticsearch.Net.GetCategoriesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetCertificatesRequestParameters`
+==== `Elasticsearch.Net.GetCertificatesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetDatafeedsRequestParameters`
+==== `Elasticsearch.Net.GetDatafeedsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetDatafeedStatsRequestParameters`
+==== `Elasticsearch.Net.GetDatafeedStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetFieldMappingRequestParameters`
+==== `Elasticsearch.Net.GetFieldMappingRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetFiltersRequestParameters`
+==== `Elasticsearch.Net.GetFiltersRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetIlmStatusRequestParameters`
+==== `Elasticsearch.Net.GetIlmStatusRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetIndexRequestParameters`
+==== `Elasticsearch.Net.GetIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetIndexSettingsRequestParameters`
+==== `Elasticsearch.Net.GetIndexSettingsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetIndexTemplateRequestParameters`
+==== `Elasticsearch.Net.GetIndexTemplateRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetInfluencersRequestParameters`
+==== `Elasticsearch.Net.GetInfluencersRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetJobsRequestParameters`
+==== `Elasticsearch.Net.GetJobsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetJobStatsRequestParameters`
+==== `Elasticsearch.Net.GetJobStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetLicenseRequestParameters`
+==== `Elasticsearch.Net.GetLicenseRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetLifecycleRequestParameters`
+==== `Elasticsearch.Net.GetLifecycleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetMappingRequestParameters`
+==== `Elasticsearch.Net.GetMappingRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetModelSnapshotsRequestParameters`
+==== `Elasticsearch.Net.GetModelSnapshotsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetOverallBucketsRequestParameters`
+==== `Elasticsearch.Net.GetOverallBucketsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetPipelineRequestParameters`
+==== `Elasticsearch.Net.GetPipelineRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetPrivilegesRequestParameters`
+==== `Elasticsearch.Net.GetPrivilegesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetRepositoryRequestParameters`
+==== `Elasticsearch.Net.GetRepositoryRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetRequestParameters`
+==== `Elasticsearch.Net.GetRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
@@ -2010,119 +2010,119 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.GetRoleMappingRequestParameters`
+==== `Elasticsearch.Net.GetRoleMappingRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetRoleRequestParameters`
+==== `Elasticsearch.Net.GetRoleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetRollupCapabilitiesRequestParameters`
+==== `Elasticsearch.Net.GetRollupCapabilitiesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetRollupIndexCapabilitiesRequestParameters`
+==== `Elasticsearch.Net.GetRollupIndexCapabilitiesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetRollupJobRequestParameters`
+==== `Elasticsearch.Net.GetRollupJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetSnapshotRequestParameters`
+==== `Elasticsearch.Net.GetSnapshotRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetTaskRequestParameters`
+==== `Elasticsearch.Net.GetTaskRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetTrialLicenseStatusRequestParameters`
+==== `Elasticsearch.Net.GetTrialLicenseStatusRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetUserAccessTokenRequestParameters`
+==== `Elasticsearch.Net.GetUserAccessTokenRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetUserPrivilegesRequestParameters`
+==== `Elasticsearch.Net.GetUserPrivilegesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetUserRequestParameters`
+==== `Elasticsearch.Net.GetUserRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GetWatchRequestParameters`
+==== `Elasticsearch.Net.GetWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GraphExploreRequestParameters`
+==== `Elasticsearch.Net.GraphExploreRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.GrokProcessorPatternsRequestParameters`
-
-[horizontal]
-type:: deleted
-
-
-[discrete]
-=== `Elasticsearch.Net.HasPrivilegesRequestParameters`
+==== `Elasticsearch.Net.GrokProcessorPatternsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.HttpConnection`
+==== `Elasticsearch.Net.HasPrivilegesRequestParameters`
+
+[horizontal]
+type:: deleted
+
+
+[discrete]
+==== `Elasticsearch.Net.HttpConnection`
 
 [horizontal]
 `CreateHttpClientHandler(RequestData)` method::
 Member type changed from `HttpClientHandler` to `HttpMessageHandler`.
 
 [discrete]
-=== `Elasticsearch.Net.IApiCallDetails`
+==== `Elasticsearch.Net.IApiCallDetails`
 
 [horizontal]
 `ConnectionConfiguration` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.IConnectionConfigurationValues`
+==== `Elasticsearch.Net.IConnectionConfigurationValues`
 
 [horizontal]
 `StatusCodeToResponseSuccess` property:: added
 `UserAgent` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.IElasticLowLevelClient`
+==== `Elasticsearch.Net.IElasticLowLevelClient`
 
 [horizontal]
 `Bulk<TResponse>(String, String, PostData, BulkRequestParameters)` method:: deleted
@@ -3139,25 +3139,25 @@ Parameter name changed from `task_id` to `taskId`.
 `XPack` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.IHideObjectMembers`
+==== `Elasticsearch.Net.IHideObjectMembers`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IMemoryStreamFactory`
+==== `Elasticsearch.Net.IMemoryStreamFactory`
 
 [horizontal]
 `Create(Byte[], Int32, Int32)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.IndexExistsRequestParameters`
+==== `Elasticsearch.Net.IndexExistsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IndexRequestParameters`
+==== `Elasticsearch.Net.IndexRequestParameters`
 
 [horizontal]
 `IfSeqNo` property:: deleted
@@ -3165,69 +3165,69 @@ type:: deleted
 `Parent` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IndexTemplateExistsRequestParameters`
+==== `Elasticsearch.Net.IndexTemplateExistsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IndicesShardStoresRequestParameters`
+==== `Elasticsearch.Net.IndicesShardStoresRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IndicesShardStoresStatus`
+==== `Elasticsearch.Net.IndicesShardStoresStatus`
 
 [horizontal]
 type:: added
 
 
 [discrete]
-=== `Elasticsearch.Net.IndicesStatsRequestParameters`
+==== `Elasticsearch.Net.IndicesStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.InvalidateApiKeyRequestParameters`
+==== `Elasticsearch.Net.InvalidateApiKeyRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.InvalidateUserAccessTokenRequestParameters`
+==== `Elasticsearch.Net.InvalidateUserAccessTokenRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IPostData`
+==== `Elasticsearch.Net.IPostData`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.IPostData<out T>`
+==== `Elasticsearch.Net.IPostData<out T>`
 
 [horizontal]
 `Write(Stream, IConnectionConfigurationValues)` method:: added
 `WriteAsync(Stream, IConnectionConfigurationValues, CancellationToken)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.IRequestConfiguration`
+==== `Elasticsearch.Net.IRequestConfiguration`
 
 [horizontal]
 
 [discrete]
-=== `Elasticsearch.Net.IRequestParameters`
+==== `Elasticsearch.Net.IRequestParameters`
 
 [horizontal]
 `CustomResponseBuilder` property:: added
 `DeserializationOverride` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.KnownEnums`
+==== `Elasticsearch.Net.KnownEnums`
 
 [horizontal]
 `GetStringValue(ClusterRerouteMetric)` method:: added
@@ -3236,44 +3236,44 @@ type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.ListTasksRequestParameters`
+==== `Elasticsearch.Net.ListTasksRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.MachineLearningInfoRequestParameters`
+==== `Elasticsearch.Net.MachineLearningInfoRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.MemoryStreamFactory`
+==== `Elasticsearch.Net.MemoryStreamFactory`
 
 [horizontal]
 `Create(Byte[], Int32, Int32)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.MigrationAssistanceRequestParameters`
+==== `Elasticsearch.Net.MigrationAssistanceRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.MigrationUpgradeRequestParameters`
+==== `Elasticsearch.Net.MigrationUpgradeRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.MoveToStepRequestParameters`
+==== `Elasticsearch.Net.MoveToStepRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.MultiGetRequestParameters`
+==== `Elasticsearch.Net.MultiGetRequestParameters`
 
 [horizontal]
 `SourceExclude` property:: deleted
@@ -3282,38 +3282,38 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.MultiSearchRequestParameters`
+==== `Elasticsearch.Net.MultiSearchRequestParameters`
 
 [horizontal]
 `CcsMinimizeRoundtrips` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.MultiSearchTemplateRequestParameters`
+==== `Elasticsearch.Net.MultiSearchTemplateRequestParameters`
 
 [horizontal]
 `CcsMinimizeRoundtrips` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.MultiTermVectorsRequestParameters`
+==== `Elasticsearch.Net.MultiTermVectorsRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.NamespacedClientProxy`
+==== `Elasticsearch.Net.NamespacedClientProxy`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.NodesHotThreadsRequestParameters`
+==== `Elasticsearch.Net.NodesHotThreadsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.NodesInfoRequestParameters`
+==== `Elasticsearch.Net.NodesInfoRequestParameters`
 
 [horizontal]
 type:: deleted
@@ -3321,171 +3321,171 @@ type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.NodesStatsRequestParameters`
+==== `Elasticsearch.Net.NodesStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.NodesUsageRequestParameters`
+==== `Elasticsearch.Net.NodesUsageRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.OpenIndexRequestParameters`
+==== `Elasticsearch.Net.OpenIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.OpenJobRequestParameters`
+==== `Elasticsearch.Net.OpenJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.PauseFollowIndexRequestParameters`
+==== `Elasticsearch.Net.PauseFollowIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PipelineException`
+==== `Elasticsearch.Net.PipelineException`
 
 [horizontal]
 `PipelineException(String)` method:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PostCalendarEventsRequestParameters`
+==== `Elasticsearch.Net.PostCalendarEventsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PostJobDataRequestParameters`
+==== `Elasticsearch.Net.PostJobDataRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PostLicenseRequestParameters`
+==== `Elasticsearch.Net.PostLicenseRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PreviewDatafeedRequestParameters`
+==== `Elasticsearch.Net.PreviewDatafeedRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutAliasRequestParameters`
+==== `Elasticsearch.Net.PutAliasRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutCalendarJobRequestParameters`
+==== `Elasticsearch.Net.PutCalendarJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutCalendarRequestParameters`
+==== `Elasticsearch.Net.PutCalendarRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutDatafeedRequestParameters`
+==== `Elasticsearch.Net.PutDatafeedRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutFilterRequestParameters`
+==== `Elasticsearch.Net.PutFilterRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutIndexTemplateRequestParameters`
+==== `Elasticsearch.Net.PutIndexTemplateRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutJobRequestParameters`
+==== `Elasticsearch.Net.PutJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutLifecycleRequestParameters`
+==== `Elasticsearch.Net.PutLifecycleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutMappingRequestParameters`
+==== `Elasticsearch.Net.PutMappingRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutPipelineRequestParameters`
+==== `Elasticsearch.Net.PutPipelineRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutPrivilegesRequestParameters`
+==== `Elasticsearch.Net.PutPrivilegesRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutRoleMappingRequestParameters`
+==== `Elasticsearch.Net.PutRoleMappingRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutRoleRequestParameters`
+==== `Elasticsearch.Net.PutRoleRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutUserRequestParameters`
+==== `Elasticsearch.Net.PutUserRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.PutWatchRequestParameters`
+==== `Elasticsearch.Net.PutWatchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.QuerySqlRequestParameters`
+==== `Elasticsearch.Net.QuerySqlRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RecoveryStatusRequestParameters`
+==== `Elasticsearch.Net.RecoveryStatusRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RecyclableMemoryStreamFactory`
+==== `Elasticsearch.Net.RecyclableMemoryStreamFactory`
 
 [horizontal]
 `Create(Byte[], Int32, Int32)` method:: added
@@ -3493,43 +3493,43 @@ type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.RefreshRequestParameters`
+==== `Elasticsearch.Net.RefreshRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ReloadSecureSettingsRequestParameters`
+==== `Elasticsearch.Net.ReloadSecureSettingsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RemoteInfoRequestParameters`
+==== `Elasticsearch.Net.RemoteInfoRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RemovePolicyRequestParameters`
+==== `Elasticsearch.Net.RemovePolicyRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RequestConfiguration`
+==== `Elasticsearch.Net.RequestConfiguration`
 
 [horizontal]
 `CancellationToken` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RequestConfigurationDescriptor`
+==== `Elasticsearch.Net.RequestConfigurationDescriptor`
 
 [horizontal]
 `BasicAuthentication(String, SecureString)` method:: added
 
 [discrete]
-=== `Elasticsearch.Net.RequestData`
+==== `Elasticsearch.Net.RequestData`
 
 [horizontal]
 `ToString()` method:: added
@@ -3538,63 +3538,63 @@ type:: deleted
 `UserAgent` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.RequestParameters<T>`
+==== `Elasticsearch.Net.RequestParameters<T>`
 
 [horizontal]
 `CustomResponseBuilder` property:: added
 `DeserializationOverride` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RequestPipeline`
+==== `Elasticsearch.Net.RequestPipeline`
 
 [horizontal]
 `DepleededRetries` property:: deleted
 `DepletedRetries` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.RestartWatcherRequestParameters`
+==== `Elasticsearch.Net.RestartWatcherRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RestoreRequestParameters`
+==== `Elasticsearch.Net.RestoreRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ResumeFollowIndexRequestParameters`
+==== `Elasticsearch.Net.ResumeFollowIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RetryIlmRequestParameters`
+==== `Elasticsearch.Net.RetryIlmRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RevertModelSnapshotRequestParameters`
+==== `Elasticsearch.Net.RevertModelSnapshotRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RolloverIndexRequestParameters`
+==== `Elasticsearch.Net.RolloverIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.RollupSearchRequestParameters`
+==== `Elasticsearch.Net.RollupSearchRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.SearchRequestParameters`
+==== `Elasticsearch.Net.SearchRequestParameters`
 
 [horizontal]
 `CcsMinimizeRoundtrips` property:: added
@@ -3602,33 +3602,33 @@ type:: deleted
 `SequenceNumberPrimaryTerm` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.SearchTemplateRequestParameters`
+==== `Elasticsearch.Net.SearchTemplateRequestParameters`
 
 [horizontal]
 `CcsMinimizeRoundtrips` property:: added
 
 
 [discrete]
-=== `Elasticsearch.Net.SecureStrings`
+==== `Elasticsearch.Net.SecureStrings`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.SegmentsRequestParameters`
+==== `Elasticsearch.Net.SegmentsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.SerializableData<T>`
+==== `Elasticsearch.Net.SerializableData<T>`
 
 [horizontal]
 `op_Implicit(T)` method::
 Parameter name changed from `serialiableData` to `serializableData`.
 
 [discrete]
-=== `Elasticsearch.Net.SerializerRegistrationInformation`
+==== `Elasticsearch.Net.SerializerRegistrationInformation`
 
 [horizontal]
 type:: added
@@ -3636,32 +3636,32 @@ type:: added
 
 
 [discrete]
-=== `Elasticsearch.Net.ShrinkIndexRequestParameters`
+==== `Elasticsearch.Net.ShrinkIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.SimulatePipelineRequestParameters`
+==== `Elasticsearch.Net.SimulatePipelineRequestParameters`
 
 [horizontal]
 type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.SnapshotRequestParameters`
+==== `Elasticsearch.Net.SnapshotRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.SnapshotStatusRequestParameters`
+==== `Elasticsearch.Net.SnapshotStatusRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.SourceExistsRequestParameters`
+==== `Elasticsearch.Net.SourceExistsRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
@@ -3671,7 +3671,7 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.SourceRequestParameters`
+==== `Elasticsearch.Net.SourceRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
@@ -3681,1461 +3681,1461 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatAliasesRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatAliasesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatAllocationRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatAllocationRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatCountRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatCountRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatFielddataRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatFielddataRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatHealthRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatHealthRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatHelpRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatHelpRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatIndicesRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatIndicesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatMasterRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatMasterRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatNodeAttributesRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatNodeAttributesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatNodesRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatNodesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatPendingTasksRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatPendingTasksRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatPluginsRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatPluginsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatRecoveryRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatRecoveryRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatRepositoriesRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatRepositoriesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatSegmentsRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatSegmentsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatShardsRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatShardsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatSnapshotsRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatSnapshotsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatTasksRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatTasksRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatTemplatesRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatTemplatesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.CatThreadPoolRequestParameters`
+==== `Elasticsearch.Net.Specification.CatApi.CatThreadPoolRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CatApi.LowLevelCatNamespace`
+==== `Elasticsearch.Net.Specification.CatApi.LowLevelCatNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterAllocationExplainRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterAllocationExplainRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterGetSettingsRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterGetSettingsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterHealthRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterHealthRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterPendingTasksRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterPendingTasksRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterPutSettingsRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterPutSettingsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterRerouteRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterRerouteRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterStateRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterStateRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.ClusterStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.ClusterStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.LowLevelClusterNamespace`
+==== `Elasticsearch.Net.Specification.ClusterApi.LowLevelClusterNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.ClusterApi.RemoteInfoRequestParameters`
+==== `Elasticsearch.Net.Specification.ClusterApi.RemoteInfoRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.CcrStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.CcrStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.CreateAutoFollowPatternRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.CreateAutoFollowPatternRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.CreateFollowIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.CreateFollowIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.DeleteAutoFollowPatternRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.DeleteAutoFollowPatternRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.FollowIndexStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.FollowIndexStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.GetAutoFollowPatternRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.GetAutoFollowPatternRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.LowLevelCrossClusterReplicationNamespace`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.LowLevelCrossClusterReplicationNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.PauseFollowIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.PauseFollowIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.ResumeFollowIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.ResumeFollowIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.UnfollowIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.CrossClusterReplicationApi.UnfollowIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.GraphApi.GraphExploreRequestParameters`
+==== `Elasticsearch.Net.Specification.GraphApi.GraphExploreRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.GraphApi.LowLevelGraphNamespace`
+==== `Elasticsearch.Net.Specification.GraphApi.LowLevelGraphNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.DeleteLifecycleRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.DeleteLifecycleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.ExplainLifecycleRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.ExplainLifecycleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.GetIlmStatusRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.GetIlmStatusRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.GetLifecycleRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.GetLifecycleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.LowLevelIndexLifecycleManagementNamespace`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.LowLevelIndexLifecycleManagementNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.MoveToStepRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.MoveToStepRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.PutLifecycleRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.PutLifecycleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.RemovePolicyRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.RemovePolicyRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.RetryIlmRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.RetryIlmRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.StartIlmRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.StartIlmRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.StopIlmRequestParameters`
+==== `Elasticsearch.Net.Specification.IndexLifecycleManagementApi.StopIlmRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.AliasExistsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.AliasExistsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.AnalyzeRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.AnalyzeRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.BulkAliasRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.BulkAliasRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.ClearCacheRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.ClearCacheRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.CloseIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.CloseIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.CreateIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.CreateIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.DeleteAliasRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.DeleteAliasRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.DeleteIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.DeleteIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.DeleteIndexTemplateRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.DeleteIndexTemplateRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.FlushRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.FlushRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.ForceMergeRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.ForceMergeRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.GetAliasRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.GetAliasRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.GetFieldMappingRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.GetFieldMappingRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.GetIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.GetIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.GetIndexSettingsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.GetIndexSettingsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.GetIndexTemplateRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.GetIndexTemplateRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.GetMappingRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.GetMappingRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.IndexExistsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.IndexExistsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.IndexTemplateExistsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.IndexTemplateExistsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.IndicesShardStoresRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.IndicesShardStoresRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.IndicesStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.IndicesStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.LowLevelIndicesNamespace`
+==== `Elasticsearch.Net.Specification.IndicesApi.LowLevelIndicesNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.OpenIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.OpenIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.PutAliasRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.PutAliasRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.PutIndexTemplateRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.PutIndexTemplateRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.PutMappingRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.PutMappingRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.RecoveryStatusRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.RecoveryStatusRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.RefreshRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.RefreshRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.RolloverIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.RolloverIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.SegmentsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.SegmentsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.ShrinkIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.ShrinkIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.SplitIndexRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.SplitIndexRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.SyncedFlushRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.SyncedFlushRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.TypeExistsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.TypeExistsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.UpdateIndexSettingsRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.UpdateIndexSettingsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IndicesApi.ValidateQueryRequestParameters`
+==== `Elasticsearch.Net.Specification.IndicesApi.ValidateQueryRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IngestApi.DeletePipelineRequestParameters`
+==== `Elasticsearch.Net.Specification.IngestApi.DeletePipelineRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IngestApi.GetPipelineRequestParameters`
+==== `Elasticsearch.Net.Specification.IngestApi.GetPipelineRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IngestApi.GrokProcessorPatternsRequestParameters`
+==== `Elasticsearch.Net.Specification.IngestApi.GrokProcessorPatternsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IngestApi.LowLevelIngestNamespace`
+==== `Elasticsearch.Net.Specification.IngestApi.LowLevelIngestNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IngestApi.PutPipelineRequestParameters`
+==== `Elasticsearch.Net.Specification.IngestApi.PutPipelineRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.IngestApi.SimulatePipelineRequestParameters`
+==== `Elasticsearch.Net.Specification.IngestApi.SimulatePipelineRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.DeleteLicenseRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.DeleteLicenseRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.GetBasicLicenseStatusRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.GetBasicLicenseStatusRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.GetLicenseRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.GetLicenseRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.GetTrialLicenseStatusRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.GetTrialLicenseStatusRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.LowLevelLicenseNamespace`
+==== `Elasticsearch.Net.Specification.LicenseApi.LowLevelLicenseNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.PostLicenseRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.PostLicenseRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.StartBasicLicenseRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.StartBasicLicenseRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.LicenseApi.StartTrialLicenseRequestParameters`
+==== `Elasticsearch.Net.Specification.LicenseApi.StartTrialLicenseRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.CloseJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.CloseJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteCalendarEventRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteCalendarEventRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteCalendarJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteCalendarJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteCalendarRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteCalendarRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteDatafeedRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteDatafeedRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteExpiredDataRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteExpiredDataRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteFilterRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteFilterRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteForecastRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteForecastRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteModelSnapshotRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.DeleteModelSnapshotRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.FlushJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.FlushJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.ForecastJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.ForecastJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetAnomalyRecordsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetAnomalyRecordsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetBucketsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetBucketsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetCalendarEventsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetCalendarEventsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetCalendarsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetCalendarsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetCategoriesRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetCategoriesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetDatafeedsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetDatafeedsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetDatafeedStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetDatafeedStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetFiltersRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetFiltersRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetInfluencersRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetInfluencersRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetJobsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetJobsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetJobStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetJobStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetModelSnapshotsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetModelSnapshotsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.GetOverallBucketsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.GetOverallBucketsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.LowLevelMachineLearningNamespace`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.LowLevelMachineLearningNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.MachineLearningInfoRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.MachineLearningInfoRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.OpenJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.OpenJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PostCalendarEventsRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PostCalendarEventsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PostJobDataRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PostJobDataRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PreviewDatafeedRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PreviewDatafeedRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PutCalendarJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PutCalendarJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PutCalendarRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PutCalendarRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PutDatafeedRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PutDatafeedRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PutFilterRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PutFilterRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.PutJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.PutJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.RevertModelSnapshotRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.RevertModelSnapshotRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.StartDatafeedRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.StartDatafeedRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.StopDatafeedRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.StopDatafeedRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateDatafeedRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateDatafeedRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateFilterRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateFilterRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateModelSnapshotRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.UpdateModelSnapshotRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.ValidateDetectorRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.ValidateDetectorRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MachineLearningApi.ValidateJobRequestParameters`
+==== `Elasticsearch.Net.Specification.MachineLearningApi.ValidateJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MigrationApi.DeprecationInfoRequestParameters`
+==== `Elasticsearch.Net.Specification.MigrationApi.DeprecationInfoRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.MigrationApi.LowLevelMigrationNamespace`
+==== `Elasticsearch.Net.Specification.MigrationApi.LowLevelMigrationNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.NodesApi.LowLevelNodesNamespace`
+==== `Elasticsearch.Net.Specification.NodesApi.LowLevelNodesNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.NodesApi.NodesHotThreadsRequestParameters`
+==== `Elasticsearch.Net.Specification.NodesApi.NodesHotThreadsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.NodesApi.NodesInfoRequestParameters`
+==== `Elasticsearch.Net.Specification.NodesApi.NodesInfoRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.NodesApi.NodesStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.NodesApi.NodesStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.NodesApi.NodesUsageRequestParameters`
+==== `Elasticsearch.Net.Specification.NodesApi.NodesUsageRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.NodesApi.ReloadSecureSettingsRequestParameters`
+==== `Elasticsearch.Net.Specification.NodesApi.ReloadSecureSettingsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.CreateRollupJobRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.CreateRollupJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.DeleteRollupJobRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.DeleteRollupJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.GetRollupCapabilitiesRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.GetRollupCapabilitiesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.GetRollupIndexCapabilitiesRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.GetRollupIndexCapabilitiesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.GetRollupJobRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.GetRollupJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.LowLevelRollupNamespace`
+==== `Elasticsearch.Net.Specification.RollupApi.LowLevelRollupNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.RollupSearchRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.RollupSearchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.StartRollupJobRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.StartRollupJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.RollupApi.StopRollupJobRequestParameters`
+==== `Elasticsearch.Net.Specification.RollupApi.StopRollupJobRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.AuthenticateRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.AuthenticateRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.ChangePasswordRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.ChangePasswordRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.ClearCachedRealmsRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.ClearCachedRealmsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.ClearCachedRolesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.ClearCachedRolesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.CreateApiKeyRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.CreateApiKeyRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.DeletePrivilegesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.DeletePrivilegesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.DeleteRoleMappingRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.DeleteRoleMappingRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.DeleteRoleRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.DeleteRoleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.DeleteUserRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.DeleteUserRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.DisableUserRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.DisableUserRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.EnableUserRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.EnableUserRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetApiKeyRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetApiKeyRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetCertificatesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetCertificatesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetPrivilegesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetPrivilegesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetRoleMappingRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetRoleMappingRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetRoleRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetRoleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetUserAccessTokenRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetUserAccessTokenRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetUserPrivilegesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetUserPrivilegesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.GetUserRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.GetUserRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.HasPrivilegesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.HasPrivilegesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.InvalidateApiKeyRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.InvalidateApiKeyRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.InvalidateUserAccessTokenRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.InvalidateUserAccessTokenRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.LowLevelSecurityNamespace`
+==== `Elasticsearch.Net.Specification.SecurityApi.LowLevelSecurityNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.PutPrivilegesRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.PutPrivilegesRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.PutRoleMappingRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.PutRoleMappingRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.PutRoleRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.PutRoleRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SecurityApi.PutUserRequestParameters`
+==== `Elasticsearch.Net.Specification.SecurityApi.PutUserRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.CreateRepositoryRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.CreateRepositoryRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.DeleteRepositoryRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.DeleteRepositoryRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.DeleteSnapshotRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.DeleteSnapshotRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.GetRepositoryRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.GetRepositoryRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.GetSnapshotRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.GetSnapshotRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.LowLevelSnapshotNamespace`
+==== `Elasticsearch.Net.Specification.SnapshotApi.LowLevelSnapshotNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.RestoreRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.RestoreRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.SnapshotRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.SnapshotRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.SnapshotStatusRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.SnapshotStatusRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SnapshotApi.VerifyRepositoryRequestParameters`
+==== `Elasticsearch.Net.Specification.SnapshotApi.VerifyRepositoryRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SqlApi.ClearSqlCursorRequestParameters`
+==== `Elasticsearch.Net.Specification.SqlApi.ClearSqlCursorRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SqlApi.LowLevelSqlNamespace`
+==== `Elasticsearch.Net.Specification.SqlApi.LowLevelSqlNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SqlApi.QuerySqlRequestParameters`
+==== `Elasticsearch.Net.Specification.SqlApi.QuerySqlRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.SqlApi.TranslateSqlRequestParameters`
+==== `Elasticsearch.Net.Specification.SqlApi.TranslateSqlRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.TasksApi.CancelTasksRequestParameters`
+==== `Elasticsearch.Net.Specification.TasksApi.CancelTasksRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.TasksApi.GetTaskRequestParameters`
+==== `Elasticsearch.Net.Specification.TasksApi.GetTaskRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.TasksApi.ListTasksRequestParameters`
+==== `Elasticsearch.Net.Specification.TasksApi.ListTasksRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.TasksApi.LowLevelTasksNamespace`
+==== `Elasticsearch.Net.Specification.TasksApi.LowLevelTasksNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.AcknowledgeWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.AcknowledgeWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.ActivateWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.ActivateWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.DeactivateWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.DeactivateWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.DeleteWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.DeleteWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.ExecuteWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.ExecuteWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.GetWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.GetWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.LowLevelWatcherNamespace`
+==== `Elasticsearch.Net.Specification.WatcherApi.LowLevelWatcherNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.PutWatchRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.PutWatchRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.StartWatcherRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.StartWatcherRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.StopWatcherRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.StopWatcherRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.WatcherApi.WatcherStatsRequestParameters`
+==== `Elasticsearch.Net.Specification.WatcherApi.WatcherStatsRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.XPackApi.LowLevelXPackNamespace`
+==== `Elasticsearch.Net.Specification.XPackApi.LowLevelXPackNamespace`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.XPackApi.XPackInfoRequestParameters`
+==== `Elasticsearch.Net.Specification.XPackApi.XPackInfoRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Specification.XPackApi.XPackUsageRequestParameters`
+==== `Elasticsearch.Net.Specification.XPackApi.XPackUsageRequestParameters`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.SplitIndexRequestParameters`
+==== `Elasticsearch.Net.SplitIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StartBasicLicenseRequestParameters`
+==== `Elasticsearch.Net.StartBasicLicenseRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StartDatafeedRequestParameters`
+==== `Elasticsearch.Net.StartDatafeedRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StartIlmRequestParameters`
+==== `Elasticsearch.Net.StartIlmRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StartRollupJobRequestParameters`
+==== `Elasticsearch.Net.StartRollupJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StartTrialLicenseRequestParameters`
+==== `Elasticsearch.Net.StartTrialLicenseRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StartWatcherRequestParameters`
+==== `Elasticsearch.Net.StartWatcherRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StopDatafeedRequestParameters`
+==== `Elasticsearch.Net.StopDatafeedRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StopIlmRequestParameters`
+==== `Elasticsearch.Net.StopIlmRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StopRollupJobRequestParameters`
+==== `Elasticsearch.Net.StopRollupJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StopWatcherRequestParameters`
+==== `Elasticsearch.Net.StopWatcherRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.StringEnumAttribute`
+==== `Elasticsearch.Net.StringEnumAttribute`
 
 [horizontal]
 type:: added
 
 
 [discrete]
-=== `Elasticsearch.Net.SyncedFlushRequestParameters`
+==== `Elasticsearch.Net.SyncedFlushRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.TermVectorsRequestParameters`
+==== `Elasticsearch.Net.TermVectorsRequestParameters`
 
 [horizontal]
 `Parent` property:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.TranslateSqlRequestParameters`
+==== `Elasticsearch.Net.TranslateSqlRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.TypeExistsRequestParameters`
+==== `Elasticsearch.Net.TypeExistsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UnfollowIndexRequestParameters`
+==== `Elasticsearch.Net.UnfollowIndexRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpdateByQueryRequestParameters`
+==== `Elasticsearch.Net.UpdateByQueryRequestParameters`
 
 [horizontal]
 `SourceExclude` property:: deleted
@@ -5144,37 +5144,37 @@ type:: deleted
 `SourceIncludes` property:: added
 
 [discrete]
-=== `Elasticsearch.Net.UpdateDatafeedRequestParameters`
+==== `Elasticsearch.Net.UpdateDatafeedRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpdateFilterRequestParameters`
+==== `Elasticsearch.Net.UpdateFilterRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpdateIndexSettingsRequestParameters`
+==== `Elasticsearch.Net.UpdateIndexSettingsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpdateJobRequestParameters`
+==== `Elasticsearch.Net.UpdateJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpdateModelSnapshotRequestParameters`
+==== `Elasticsearch.Net.UpdateModelSnapshotRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpdateRequestParameters`
+==== `Elasticsearch.Net.UpdateRequestParameters`
 
 [horizontal]
 `IfSeqNo` property:: deleted
@@ -5184,49 +5184,49 @@ type:: deleted
 `VersionType` property:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpgradeRequestParameters`
+==== `Elasticsearch.Net.UpgradeRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.UpgradeStatusRequestParameters`
+==== `Elasticsearch.Net.UpgradeStatusRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.Utf8Json.Formatters.EnumFormatterHelper`
+==== `Elasticsearch.Net.Utf8Json.Formatters.EnumFormatterHelper`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.Utf8Json.JsonParsingException`
+==== `Elasticsearch.Net.Utf8Json.JsonParsingException`
 
 [horizontal]
 type:: added
 
 [discrete]
-=== `Elasticsearch.Net.ValidateDetectorRequestParameters`
+==== `Elasticsearch.Net.ValidateDetectorRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ValidateJobRequestParameters`
+==== `Elasticsearch.Net.ValidateJobRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.ValidateQueryRequestParameters`
+==== `Elasticsearch.Net.ValidateQueryRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.VerifyRepositoryRequestParameters`
+==== `Elasticsearch.Net.VerifyRepositoryRequestParameters`
 
 [horizontal]
 type:: deleted
@@ -5236,19 +5236,19 @@ type:: deleted
 
 
 [discrete]
-=== `Elasticsearch.Net.WatcherStatsRequestParameters`
+==== `Elasticsearch.Net.WatcherStatsRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.XPackInfoRequestParameters`
+==== `Elasticsearch.Net.XPackInfoRequestParameters`
 
 [horizontal]
 type:: deleted
 
 [discrete]
-=== `Elasticsearch.Net.XPackUsageRequestParameters`
+==== `Elasticsearch.Net.XPackUsageRequestParameters`
 
 [horizontal]
 type:: deleted
