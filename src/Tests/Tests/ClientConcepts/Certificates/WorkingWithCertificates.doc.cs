@@ -179,7 +179,7 @@ namespace Tests.ClientConcepts.Certificates
 		/**
 		 * ==== Client Certificates
 		 *
-		 * X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
+		 * X-Pack also allows you to configure a {ref_current}/configuring-pki-realm.html[PKI realm] to enable user authentication
 		 * through client certificates. The {ref_current}/certutil.html[+elasticsearch-certutil+ tool] included with X-Pack allows you to
 		 * generate client certificates as well and assign the distinguished name (DN) of the
 		 * certificate to a user with a certain role.
