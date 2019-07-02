@@ -1,8 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
-namespace Elasticsearch.Net.Virtual
+namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class WaitingInMemoryConnection : InMemoryConnection
 	{
