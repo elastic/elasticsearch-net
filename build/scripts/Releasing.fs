@@ -144,6 +144,9 @@ module Release =
         
     let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
         match p with
+        | Project ElasticsearchNetVirtual ->
+            printfn "Skipping %s from building a versioned nightly" p.Name
+            ignore()
         | _ -> nugetPackVersionedUnfiltered p nugetId nuspec properties version
             
     let NugetPack (ArtifactsVersion(version)) = packProjects version nugetPackMain 
