@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary> Deletes a configured collection of auto-follow patterns. </summary>
 	[MapsApi("ccr.delete_auto_follow_pattern.json")]

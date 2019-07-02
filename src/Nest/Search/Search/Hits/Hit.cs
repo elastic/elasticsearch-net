@@ -3,61 +3,112 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Metadata about a hit matching a query
+	/// </summary>
+	/// <typeparam name="TDocument">The type of the source document</typeparam>
 	[InterfaceDataContract]
 	public interface IHitMetadata<out TDocument> where TDocument : class
 	{
+		/// <summary>
+		/// The id of the hit
+		/// </summary>
 		[DataMember(Name = "_id")]
 		string Id { get; }
+
+		/// <summary>
+		/// The index in which the hit resides
+		/// </summary>
 		[DataMember(Name = "_index")]
 		string Index { get; }
+
+		/// <summary>
+		/// The primary term of the hit
+		/// </summary>
+		[DataMember(Name = "_primary_term")]
+		long? PrimaryTerm { get; }
+
+		/// <summary>
+		/// The routing value for the hit
+		/// </summary>
 		[DataMember(Name = "_routing")]
 		string Routing { get; }
 
+		/// <summary>
+		/// The sequence number for this hit
+		/// </summary>
+		[DataMember(Name = "_seq_no")]
+		long? SequenceNumber { get; }
+
+		/// <summary>
+		/// The source document for the hit
+		/// </summary>
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Source { get; }
 
-		// TODO obsolete or remove type on response
+		/// <summary>
+		/// The type of hit
+		/// </summary>
 		[DataMember(Name = "_type")]
 		string Type { get; }
 
+		/// <summary>
+		/// The version of the hit
+		/// </summary>
 		[DataMember(Name = "_version")]
-		long? Version { get; }
+		long Version { get; }
 	}
 
 	internal static class HitMetadataConversionExtensions
 	{
 		public static IHitMetadata<TTarget> Copy<TDocument, TTarget>(this IHitMetadata<TDocument> source, Func<TDocument, TTarget> mapper)
 			where TDocument : class
-			where TTarget : class
-		{
-			return new Hit<TTarget>()
+			where TTarget : class =>
+			new Hit<TTarget>()
 			{
 				Type = source.Type,
 				Index = source.Index,
 				Id = source.Id,
-#pragma warning disable 618
 				Routing = source.Routing,
-#pragma warning restore 618
 				Source = mapper(source.Source)
 			};
-		}
 	}
 
+	/// <summary>
+	/// A hit matching a query
+	/// </summary>
+	/// <typeparam name="TDocument">The type of the source document</typeparam>
 	[InterfaceDataContract]
 	[ReadAs(typeof(Hit<>))]
 	public interface IHit<out TDocument> : IHitMetadata<TDocument>
 		where TDocument : class
 	{
+		/// <summary>
+		/// An explanation for why the hit is a match for a query
+		/// </summary>
 		[DataMember(Name = "_explanation")]
 		Explanation Explanation { get; }
 
+		/// <summary>
+		/// The individual fields requested for a hit
+		/// </summary>
 		[DataMember(Name = "fields")]
 		FieldValues Fields { get; }
 
+		/// <summary>
+		/// The field highlights
+		/// </summary>
+		[DataMember(Name = "highlight")]
+		IReadOnlyDictionary<string, IReadOnlyCollection<string>> Highlight { get; }
+
+		/// <summary>
+		/// The inner hits
+		/// </summary>
 		[DataMember(Name = "inner_hits")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, InnerHitsResult>))]
 		IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; }
@@ -65,66 +116,64 @@ namespace Nest
 		[DataMember(Name = "_nested")]
 		NestedIdentity Nested { get; }
 
+		/// <summary>
+		/// Which queries the hit is a match for, when a compound query is involved
+		/// and named queries used
+		/// </summary>
 		[DataMember(Name = "matched_queries")]
 		IReadOnlyCollection<string> MatchedQueries { get; }
 
+		/// <summary>
+		/// The score for the hit in relation to the query
+		/// </summary>
 		[DataMember(Name = "_score")]
 		double? Score { get; }
 
+		/// <summary>
+		/// The sort values used in sorting the hit relative to other hits
+		/// </summary>
 		[DataMember(Name = "sort")]
 		IReadOnlyCollection<object> Sorts { get; }
-
-		// TODO investigate this mapping
-		/// <summary> This provides easier access into <see cref="Highlight"/> </summary>
-		[IgnoreDataMember]
-		HighlightFieldDictionary Highlights { get; }
-
-		/// <summary> see <see cref="Highlights"/> for easier access into this data structure </summary>
-		[DataMember(Name = "highlight")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, List<string>>, string, List<string>>))]
-		Dictionary<string, List<string>> Highlight { get; }
 	}
 
+	/// <inheritdoc />
 	public class Hit<TDocument> : IHit<TDocument>
 		where TDocument : class
 	{
+		/// <inheritdoc />
 		public Explanation Explanation { get; internal set; }
+		/// <inheritdoc />
 		public FieldValues Fields { get; internal set; }
+		/// <inheritdoc />
+		public IReadOnlyDictionary<string, IReadOnlyCollection<string>> Highlight { get; internal set; } =
+			EmptyReadOnly<string, IReadOnlyCollection<string>>.Dictionary;
+		/// <inheritdoc />
 		public string Id { get; internal set; }
+		/// <inheritdoc />
 		public string Index { get; internal set; }
+		/// <inheritdoc />
 		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
 			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
+		/// <inheritdoc />
 		public IReadOnlyCollection<string> MatchedQueries { get; internal set; }
 			= EmptyReadOnly<string>.Collection;
+		/// <inheritdoc />
 		public NestedIdentity Nested { get; internal set; }
+		/// <inheritdoc />
+		public long? PrimaryTerm { get; internal set; }
+		/// <inheritdoc />
 		public string Routing { get; internal set; }
+		/// <inheritdoc />
 		public double? Score { get; set; }
-		public IReadOnlyCollection<object> Sorts { get; internal set; }
-			= EmptyReadOnly<object>.Collection;
+		/// <inheritdoc />
+		public long? SequenceNumber { get; internal set; }
+		/// <inheritdoc />
+		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
+		/// <inheritdoc />
 		public TDocument Source { get; internal set; }
+		/// <inheritdoc />
 		public string Type { get; internal set; }
-		public long? Version { get; internal set; }
-
-		public Dictionary<string, List<string>> Highlight { get; set; }
-
-		public HighlightFieldDictionary Highlights
-		{
-			get
-			{
-				if (Highlight == null)
-					return new HighlightFieldDictionary();
-
-				var highlights = Highlight.Select(kv => new HighlightHit
-					{
-						DocumentId = Id,
-						Field = kv.Key,
-						Highlights = kv.Value
-					})
-					.ToDictionary(k => k.Field, v => v);
-
-				return new HighlightFieldDictionary(highlights);
-			}
-		}
-
+		/// <inheritdoc />
+		public long Version { get; internal set; }
 	}
 }

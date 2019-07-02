@@ -8,7 +8,6 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Search
@@ -438,16 +437,17 @@ namespace Tests.Search
 			var projects = searchResponse.Documents;
 
 			/**
-			 * `.Documents` is a convenient shorthand for
+			 * `.Documents` is a convenient shorthand for retrieving the `_source`
+			 * for each hit
 			 */
-			searchResponse.HitsMetadata.Hits.Select(h => h.Source);
+			var sources = searchResponse.HitsMetadata.Hits.Select(h => h.Source);
 
 			/**
 			 * and it's possible to retrieve other metadata about each hit from the hits collection. Here's
 			 * an example that retrieves the highlights for a hit, when using <<highlighting-usage, highlighting>>
 			 */
 			var highlights = searchResponse.HitsMetadata.Hits.Select(h => h
-				.Highlights // <1> Get the highlights for the hit, when using highlighting
+				.Highlight // <1> Get the highlights for the hit, when using highlighting
 			);
 		}
 	}

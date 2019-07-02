@@ -35,8 +35,8 @@ namespace Tests.Document.Multiple.Reindex
 
 			// create a couple of projects
 			var projects = Project.Generator.Generate(2);
-			var ndexProjectsResponse = _client.IndexMany(projects, IndexName);
-			_client.Refresh(IndexName);
+			_client.IndexMany(projects, IndexName);
+			_client.Indices.Refresh(IndexName);
 
 			// create a thousand commits and associate with the projects
 			var commits = CommitActivity.Generator.Generate(5000);
@@ -65,7 +65,7 @@ namespace Tests.Document.Multiple.Reindex
 			var bulkResult = _client.Bulk(b => bb);
 			bulkResult.ShouldBeValid();
 
-			_client.Refresh(IndexName);
+			_client.Indices.Refresh(IndexName);
 
 			_reindexManyTypesResult = _client.Reindex<ILazyDocument>(r => r
 				.BackPressureFactor(10)
@@ -114,13 +114,12 @@ namespace Tests.Document.Multiple.Reindex
 			void Signal(Exception e)
 			{
 				ex = e;
-				observableWait.Signal();
+				// ReSharper disable once AccessToModifiedClosure
+				observableWait?.Signal();
 			}
 
-			CountdownEvent GetSignal()
-			{
-				return observableWait;
-			}
+			// ReSharper disable once AccessToModifiedClosure
+			CountdownEvent GetSignal() => observableWait;
 		}
 
 		public void ReindexMany(Func<CountdownEvent> getCountDown, Action<Exception> signal)
@@ -135,7 +134,8 @@ namespace Tests.Document.Multiple.Reindex
 
 		private void ReindexManyTypesCompleted(CountdownEvent handle)
 		{
-			var refresh = _client.Refresh(NewManyTypesIndexName);
+			var refresh = _client.Indices.Refresh(NewManyTypesIndexName);
+			refresh.ShouldBeValid();
 
 			var originalIndexCount = _client.Count<CommitActivity>(c => c
 				.Index(IndexName)
@@ -160,7 +160,7 @@ namespace Tests.Document.Multiple.Reindex
 			do
 			{
 				var result = searchResult;
-				searchResult = _client.Scroll<CommitActivity>(scroll, result.ScrollId);
+				searchResult = _client.Scroll<CommitActivity>(new ScrollRequest(result.ScrollId, scroll));
 				foreach (var hit in searchResult.Hits) hit.Routing.Should().NotBeNullOrEmpty();
 			} while (searchResult.IsValid && searchResult.Documents.Any());
 			handle.Signal();
@@ -177,7 +177,8 @@ namespace Tests.Document.Multiple.Reindex
 
 		private void ProjectionCompleted(CountdownEvent handle)
 		{
-			var refresh = _client.Refresh(NewProjectionIndex);
+			var refresh = _client.Indices.Refresh(NewProjectionIndex);
+			refresh.ShouldBeValid();
 			var originalIndexCount = _client.Count<CommitActivity>(c => c
 				.Index(IndexName)
 				.Query(q => q.HasRelationName<CommitActivity>(p => p.Join))
@@ -206,7 +207,8 @@ namespace Tests.Document.Multiple.Reindex
 
 		private void ReindexSingleTypeCompleted(CountdownEvent handle)
 		{
-			var refresh = _client.Refresh(NewSingleTypeIndexName);
+			var refresh = _client.Indices.Refresh(NewSingleTypeIndexName);
+			refresh.ShouldBeValid();
 			var originalIndexCount = _client.Count<Project>(c => c.Index(IndexName));
 
 			// new index should only contain project document types

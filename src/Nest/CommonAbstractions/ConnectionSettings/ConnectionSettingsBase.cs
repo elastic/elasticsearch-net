@@ -6,13 +6,24 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
 
+#if DOTNETCORE
+using System.Runtime.InteropServices;
+#endif
+
 namespace Nest
 {
 	/// <inheritdoc cref="IConnectionSettingsValues" />
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
 		/// <summary>
-		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to documents.
+		/// The default user agent for Nest
+		/// </summary>
+		public static readonly string DefaultUserAgent =
+			$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)";
+
+		/// <summary>
+		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
+		/// documents.
 		/// By default, the internal serializer will be used to serializer all types.
 		/// </summary>
 		public delegate IElasticsearchSerializer SourceSerializerFactory(IElasticsearchSerializer builtIn, IConnectionSettingsValues values);
@@ -42,8 +53,7 @@ namespace Nest
 			IConnection connection,
 			SourceSerializerFactory sourceSerializer,
 			IPropertyMappingProvider propertyMappingProvider
-		)
-			: base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
+		) : base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
 	}
 
 	/// <inheritdoc cref="IConnectionSettingsValues" />
@@ -53,28 +63,18 @@ namespace Nest
 		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>, IConnectionSettingsValues
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;
-
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
-
-		private readonly FluentDictionary<Type, string> _defaultTypeNames;
-
+		private readonly HashSet<Type> _disableIdInference = new HashSet<Type>();
 		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
-
 		private readonly Inferrer _inferrer;
-
 		private readonly IPropertyMappingProvider _propertyMappingProvider;
-
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
-
 		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
-
 		private readonly IElasticsearchSerializer _sourceSerializer;
 
+		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
 		private string _defaultIndex;
-
-		private HashSet<Type> _disableIdInference = new HashSet<Type>();
-		private bool _defaultDisableAllInference;
 
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
@@ -85,23 +85,29 @@ namespace Nest
 			: base(connectionPool, connection, null)
 		{
 			var formatterResolver = new NestFormatterResolver(this);
-			//Utf8Json.JsonSerializer.SetDefaultResolver(formatterResolver);
-			var defaultSerializer = new InternalSerializer(this, formatterResolver);
-			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
-			UseThisRequestResponseSerializer = defaultSerializer;
+			var defaultSerializer = new DefaultHighLevelSerializer(formatterResolver);
+			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
+			
+			//We wrap these in an internal proxy to facilitate diagnostics
+			_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source"); 
+			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
+			
 			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
 			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
-			_defaultTypeNames = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
 			_inferrer = new Inferrer(this);
+
+			UserAgent(ConnectionSettings.DefaultUserAgent);
 		}
 
+		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
+		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
@@ -109,20 +115,33 @@ namespace Nest
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
-		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
-		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultIndex"/>
+		/// <summary>
+		/// The default index to use for a request when no index has been explicitly specified
+		/// and no default indices are specified for the given CLR type specified for the request.
+		/// </summary>
 		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultFieldNameInferrer"/>
-		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) => 
+		/// <summary>
+		/// Specifies how field names are inferred from CLR property names.
+		/// <para></para>
+		/// By default, NEST camel cases property names.
+		/// </summary>
+		/// <example>
+		/// CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
+		/// </example>
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
 			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.DisableIdInference"/>
+		/// <summary>
+		/// Disables automatic Id inference for given CLR types.
+		/// <para></para>
+		/// NEST by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding a type
+		/// will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use
+		/// <see cref="DefaultDisableIdInference"/>
+		/// </summary>
 		public TConnectionSettings DefaultDisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._defaultDisableAllInference = v);
 
-		/// <inheritdoc cref="IConnectionSettingsValues.IdProperties"/>
 		private void MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -206,7 +225,7 @@ namespace Nest
 
 		/// <summary>
 		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index, type, id and relation name for a given CLR type, as well as control
+		/// The mapping can infer the index, id and relation name for a given CLR type, as well as control
 		/// serialization behaviour for CLR properties.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
@@ -214,13 +233,10 @@ namespace Nest
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
 			if (!inferMapping.IndexName.IsNullOrEmpty())
-				_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
-
-			if (!inferMapping.TypeName.IsNullOrEmpty())
-				_defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
+				_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
-				_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
@@ -237,49 +253,55 @@ namespace Nest
 			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
 			else _disableIdInference.Remove(inferMapping.ClrType);
 
-			return UpdateId();
+			return (TConnectionSettings)this;
 		}
 
 		/// <summary>
 		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index, type and relation name for a given CLR type.
+		/// The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
-				_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
-
-			if (!inferMapping.TypeName.IsNullOrEmpty())
-				_defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
+				_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
-				_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			return UpdateId();
+			return (TConnectionSettings)this;
 		}
 
-		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})"/>
+		/// <summary>
+		/// Specify how the mapping is inferred for a given CLR type.
+		/// The mapping can infer the index and relation name for a given CLR type.
+		/// </summary>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
-			if (typeMappings == null) return UpdateId();
+			if (typeMappings == null) return (TConnectionSettings)this;
 
 			foreach (var inferMapping in typeMappings)
 			{
 				if (!inferMapping.IndexName.IsNullOrEmpty())
-					_defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
-
-				if (!inferMapping.TypeName.IsNullOrEmpty())
-					_defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
+					_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
 				if (!inferMapping.RelationName.IsNullOrEmpty())
-					_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+					_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 			}
 
-			return UpdateId();
+			return (TConnectionSettings)this;
 		}
+		
+		/// <summary>
+		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions
+		/// when <see cref="IConnectionConfigurationValues.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
+		/// so a 404 never signals a wrong url but a missing entity.
+		/// </summary>
+		protected override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) => 
+			statusCode >= 200 && statusCode < 300
+			|| statusCode == 404; 
 	}
 }

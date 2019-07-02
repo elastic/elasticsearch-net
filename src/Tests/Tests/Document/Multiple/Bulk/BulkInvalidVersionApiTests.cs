@@ -6,8 +6,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Multiple.Bulk
 {
@@ -17,7 +17,7 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override bool ExpectIsValid => false;
 
-		protected override object ExpectJson { get; } = new object[]
+		protected override object ExpectJson { get; } = new[]
 		{
 			new Dictionary<string, object> { { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
@@ -31,7 +31,7 @@ namespace Tests.Document.Multiple.Bulk
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Index<Project>(i => i.Document(Project.Instance))
-			.Index<Project>(i => i.IfSeqNo(-1).Document(Project.Instance));
+			.Index<Project>(i => i.IfSequenceNumber(-1).Document(Project.Instance));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -40,7 +40,7 @@ namespace Tests.Document.Multiple.Bulk
 			Operations = new List<IBulkOperation>
 			{
 				new BulkIndexOperation<Project>(Project.Instance),
-				new BulkIndexOperation<Project>(Project.Instance) { IfSeqNo = -1 }
+				new BulkIndexOperation<Project>(Project.Instance) { IfSequenceNumber = -1 }
 			}
 		};
 

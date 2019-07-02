@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
@@ -40,10 +40,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 		protected override string UrlPath => $"/_snapshot/{_repos}/{_snapshot}?wait_for_completion=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Snapshot(_repos, _snapshot, f),
-			(client, f) => client.SnapshotAsync(_repos, _snapshot, f),
-			(client, r) => client.Snapshot(r),
-			(client, r) => client.SnapshotAsync(r)
+			(client, f) => client.Snapshot.Snapshot(_repos, _snapshot, f),
+			(client, f) => client.Snapshot.SnapshotAsync(_repos, _snapshot, f),
+			(client, r) => client.Snapshot.Snapshot(r),
+			(client, r) => client.Snapshot.SnapshotAsync(r)
 		);
 
 		protected override SnapshotDescriptor NewDescriptor() => new SnapshotDescriptor(_repos, _snapshot);

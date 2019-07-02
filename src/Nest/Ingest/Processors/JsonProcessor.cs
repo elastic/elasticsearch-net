@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -31,7 +31,7 @@ namespace Nest
 		Field TargetField { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IJsonProcessor" />
 	public class JsonProcessor : ProcessorBase, IJsonProcessor
 	{
 		/// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Nest
 		protected override string Name => "json";
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IJsonProcessor" />
 	public class JsonProcessorDescriptor<T>
 		: ProcessorDescriptorBase<JsonProcessorDescriptor<T>, IJsonProcessor>, IJsonProcessor
 		where T : class
@@ -57,21 +57,21 @@ namespace Nest
 		Field IJsonProcessor.Field { get; set; }
 		Field IJsonProcessor.TargetField { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.Field" />
 		public JsonProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		/// <inheritdoc cref="IJsonProcessor.Field" />
+		public JsonProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.TargetField" />
 		public JsonProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
-		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+		/// <inheritdoc cref="IJsonProcessor.TargetField" />
+		public JsonProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.AddToRoot" />
 		public JsonProcessorDescriptor<T> AddToRoot(bool? addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRoot = v);
 	}
 }

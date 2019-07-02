@@ -1,4 +1,5 @@
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
 
 namespace Nest
@@ -42,7 +43,6 @@ namespace Nest
 			var settings = formatterResolver.GetConnectionSettings();
 
 			// HACK: Deduplicate property mappings with an instance of Properties that has access to ConnectionSettings to sanitize PropertyName keys
-			// TODO: Find a way to deduplicate outside of serialization
 			var properties = new Properties(settings);
 
 			foreach (var kv in value)

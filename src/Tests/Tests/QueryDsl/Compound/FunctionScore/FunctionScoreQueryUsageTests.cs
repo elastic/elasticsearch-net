@@ -4,7 +4,7 @@ using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Compound.FunctionScore
@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Query = new MatchAllQuery { },
+			Query = new MatchAllQuery(),
 			BoostMode = FunctionBoostMode.Multiply,
 			ScoreMode = FunctionScoreMode.Sum,
 			MaxBoost = 20.0,
@@ -42,17 +42,17 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					{ Origin = DateMath.Now, Field = Field<Project>(p => p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
 				new LinearGeoDecayFunction
 				{
-					Origin = new GeoLocation(70, -70), Field = Field<Project>(p => p.Location), Scale = Distance.Miles(1),
+					Origin = new GeoLocation(70, -70), Field = Field<Project>(p => p.LocationPoint), Scale = Distance.Miles(1),
 					MultiValueMode = MultiValueMode.Average
 				},
 				new FieldValueFactorFunction
 				{
-					Field = "x", Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
+					Field = Field<Project>(p => p.NumberOfContributors), Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Square
 				},
 				new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
 				new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
 				new WeightFunction { Weight = 1.0 },
-				new ScriptScoreFunction { Script = new IndexedScript("x") }
+				new ScriptScoreFunction { Script = new InlineScript("Math.log(2 + doc['numberOfCommits'].value)") }
 			}
 		};
 
@@ -94,7 +94,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					{
 						linear = new
 						{
-							location = new
+							locationPoint = new
 							{
 								origin = new
 								{
@@ -110,10 +110,10 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					{
 						field_value_factor = new
 						{
-							field = "x",
+							field = "numberOfContributors",
 							factor = 1.1,
 							missing = 0.1,
-							modifier = "ln"
+							modifier = "square"
 						}
 					},
 					new { random_score = new { seed = 1337, field = "_seq_no" } },
@@ -125,7 +125,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 						{
 							script = new
 							{
-								id = "x"
+								source = "Math.log(2 + doc['numberOfCommits'].value)"
 							}
 						}
 					}
@@ -153,12 +153,12 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					.Exponential(b => b.Field(p => p.NumberOfCommits).Decay(0.5).Origin(1.0).Scale(0.1).Weight(2.1))
 					.GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
 					.LinearGeoLocation(b =>
-						b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
-					.FieldValueFactor(b => b.Field("x").Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Ln))
+						b.Field(p => p.LocationPoint).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
+					.FieldValueFactor(b => b.Field(p => p.NumberOfContributors).Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Square))
 					.RandomScore(r => r.Seed(1337).Field("_seq_no"))
 					.RandomScore(r => r.Seed("randomstring").Field("_seq_no"))
 					.Weight(1.0)
-					.ScriptScore(s => s.Script(ss => ss.Id("x")))
+					.ScriptScore(s => s.Script(ss => ss.Source("Math.log(2 + doc['numberOfCommits'].value)")))
 				)
 			);
 	}

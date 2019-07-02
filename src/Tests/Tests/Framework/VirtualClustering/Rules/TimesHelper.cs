@@ -1,6 +1,6 @@
 using System;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering.Rules
 {
 	public static class TimesHelper
 	{

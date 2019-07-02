@@ -7,8 +7,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.Monitoring.IndicesShardStores
 {
@@ -22,24 +22,12 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-
-		protected override Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> Fluent => s =>
-			s.Index(IndexWithUnassignedShards)
-				.Status("all");
-
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-
-		protected override IndicesShardStoresRequest Initializer =>
-			new IndicesShardStoresRequest(IndexWithUnassignedShards)
-			{
-				Status = new[] { "all" }
-			};
-
 		protected override string UrlPath => $"/{IndexWithUnassignedShards}/_shard_stores?status=all";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			client.CreateIndex(IndexWithUnassignedShards, s => s
+			client.Indices.Create(IndexWithUnassignedShards, s => s
 				.Settings(settings => settings
 					.NumberOfShards(1)
 					.NumberOfReplicas(2)
@@ -51,12 +39,20 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 				Refresh = Refresh.True
 			});
 		}
+		
+		protected override IndicesShardStoresRequest Initializer =>
+			new IndicesShardStoresRequest(IndexWithUnassignedShards)
+			{
+				Status = new[] { "all" }
+			};
+		protected override Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> Fluent => s => s
+			.Status("all");
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.IndicesShardStores(f),
-			(client, f) => client.IndicesShardStoresAsync(f),
-			(client, r) => client.IndicesShardStores(r),
-			(client, r) => client.IndicesShardStoresAsync(r)
+			(client, f) => client.Indices.ShardStores(IndexWithUnassignedShards, f),
+			(client, f) => client.Indices.ShardStoresAsync(IndexWithUnassignedShards, f),
+			(client, r) => client.Indices.ShardStores(r),
+			(client, r) => client.Indices.ShardStoresAsync(r)
 		);
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>

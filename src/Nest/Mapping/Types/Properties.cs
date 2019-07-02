@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -38,7 +37,7 @@ namespace Nest
 
 		public void Add(PropertyName name, IProperty property) => BackingDictionary.Add(name, property);
 
-		public void Add(Expression<Func<T, object>> name, IProperty property) => BackingDictionary.Add(name, property);
+		public void Add<TValue>(Expression<Func<T, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 	}
 
 	public partial interface IPropertiesDescriptor<T, out TReturnType>

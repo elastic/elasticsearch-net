@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -17,6 +17,7 @@ namespace Nest
 	{
 		internal NormalizerBase() { }
 
+		// ReSharper disable once VirtualMemberCallInConstructor
 		protected NormalizerBase(string type) => Type = type;
 
 		public virtual string Type { get; protected set; }

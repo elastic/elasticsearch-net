@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -16,7 +17,10 @@ namespace Nest
 		{
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			TermsInclude termsInclude;
 			switch (token)

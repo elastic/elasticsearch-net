@@ -5,7 +5,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Metric.GeoCentroid
 {
@@ -25,20 +25,20 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 			{
 				geo_centroid = new
 				{
-					field = "location"
+					field = "locationPoint"
 				}
 			}
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoCentroid("centroid", gb => gb
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location));
+			new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.LocationPoint));
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var centroid = response.Aggregations.GeoCentroid("centroid");
@@ -76,7 +76,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 					{
 						geo_centroid = new
 						{
-							field = "location"
+							field = "locationPoint"
 						}
 					}
 				}
@@ -88,7 +88,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 				.Field(p => p.Name)
 				.Aggregations(sa => sa
 					.GeoCentroid("centroid", gb => gb
-						.Field(p => p.Location)
+						.Field(p => p.LocationPoint)
 					)
 				)
 			);
@@ -97,10 +97,10 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 			new TermsAggregation("projects")
 			{
 				Field = Infer.Field<Project>(p => p.Name),
-				Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+				Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.LocationPoint))
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
@@ -128,22 +128,22 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		{
 			centroid = new
 			{
-				geo_centroid = new { field = "location" }
+				geo_centroid = new { field = "locationPoint" }
 			}
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoCentroid("centroid", gb => gb
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location));
+			new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.LocationPoint));
 
 		protected override QueryContainer QueryScope => new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = "noresult" };
 		protected override object QueryScopeJson { get; } = new { term = new { name = new { value = "noresult" } } };
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var centroid = response.Aggregations.GeoCentroid("centroid");

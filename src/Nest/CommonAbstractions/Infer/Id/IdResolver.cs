@@ -12,7 +12,7 @@ namespace Nest
 			typeof(IdResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private readonly ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 
 		public IdResolver(IConnectionSettingsValues connectionSettings) => _connectionSettings = connectionSettings;
 
@@ -31,8 +31,7 @@ namespace Nest
 			return t => f((T)t);
 		}
 
-		//TODO where T : class prevents boxing on null check.
-		public string Resolve<T>(T @object) =>
+		public string Resolve<T>(T @object) where T : class =>
 			_connectionSettings.DefaultDisableIdInference || @object == null ? null : Resolve(@object.GetType(), @object);
 
 		public string Resolve(Type type, object @object)
@@ -43,7 +42,7 @@ namespace Nest
 
 			var preferLocal = _connectionSettings.IdProperties.TryGetValue(type, out _);
 
-			if (LocalIdDelegates.TryGetValue(type, out var cachedLookup))
+			if (_localIdDelegates.TryGetValue(type, out var cachedLookup))
 				return cachedLookup(@object);
 
 			if (!preferLocal && IdDelegates.TryGetValue(type, out cachedLookup))
@@ -61,7 +60,7 @@ namespace Nest
 				return v?.ToString();
 			};
 			if (preferLocal)
-				LocalIdDelegates.TryAdd(type, cachedLookup);
+				_localIdDelegates.TryAdd(type, cachedLookup);
 			else
 				IdDelegates.TryAdd(type, cachedLookup);
 			return cachedLookup(@object);
@@ -78,7 +77,7 @@ namespace Nest
 				return GetPropertyCaseInsensitive(type, propertyName);
 
 			var esTypeAtt = ElasticsearchTypeAttribute.From(type);
-			propertyName = esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ? "Id" : esTypeAtt?.IdProperty;
+			propertyName = esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ? "Id" : esTypeAtt.IdProperty;
 
 			return GetPropertyCaseInsensitive(type, propertyName);
 		}

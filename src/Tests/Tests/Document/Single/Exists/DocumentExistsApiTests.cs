@@ -4,8 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.Exists
 {
@@ -31,8 +31,8 @@ namespace Tests.Document.Single.Exists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DocumentExists<Project>(CallIsolatedValue, f),
-			(client, f) => client.DocumentExistsAsync<Project>(CallIsolatedValue, f),
+			(client, f) => client.DocumentExists(CallIsolatedValue, f),
+			(client, f) => client.DocumentExistsAsync(CallIsolatedValue, f),
 			(client, r) => client.DocumentExists(r),
 			(client, r) => client.DocumentExistsAsync(r)
 		);

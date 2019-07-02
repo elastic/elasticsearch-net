@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.Date
 {
@@ -33,7 +33,7 @@ namespace Tests.Mapping.Types.Core.Date
 			.Date(b => b
 				.Name(p => p.LastActivity)
 				.DocValues(false)
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.Boost(1.2)
@@ -48,7 +48,7 @@ namespace Tests.Mapping.Types.Core.Date
 				"lastActivity", new DateProperty
 				{
 					DocValues = false,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					Boost = 1.2,

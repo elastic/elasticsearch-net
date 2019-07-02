@@ -5,8 +5,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
@@ -115,7 +115,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			(client, r) => client.ReindexOnServerAsync(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
+		protected override void OnAfterCall(IElasticClient client) => client.Indices.Refresh(CallIsolatedValue);
 
 		protected override void ExpectResponse(ReindexOnServerResponse response)
 		{

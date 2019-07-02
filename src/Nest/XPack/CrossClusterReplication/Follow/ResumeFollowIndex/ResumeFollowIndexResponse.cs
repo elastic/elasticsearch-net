@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class ResumeFollowIndexResponse : AcknowledgedResponseBase { }
 }

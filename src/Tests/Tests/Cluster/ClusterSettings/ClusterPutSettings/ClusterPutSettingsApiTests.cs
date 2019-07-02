@@ -5,8 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
@@ -38,10 +38,10 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		protected override string UrlPath => "/_cluster/settings";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterPutSettings(f),
-			(client, f) => client.ClusterPutSettingsAsync(f),
-			(client, r) => client.ClusterPutSettings(r),
-			(client, r) => client.ClusterPutSettingsAsync(r)
+			(client, f) => client.Cluster.PutSettings(f),
+			(client, f) => client.Cluster.PutSettingsAsync(f),
+			(client, r) => client.Cluster.PutSettings(r),
+			(client, r) => client.Cluster.PutSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterPutSettingsResponse response)
@@ -64,16 +64,15 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-		protected override ClusterPutSettingsRequest Initializer => new ClusterPutSettingsRequest
-			{ };
+		protected override ClusterPutSettingsRequest Initializer => new ClusterPutSettingsRequest();
 
 		protected override string UrlPath => "/_cluster/settings";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterPutSettings(f),
-			(client, f) => client.ClusterPutSettingsAsync(f),
-			(client, r) => client.ClusterPutSettings(r),
-			(client, r) => client.ClusterPutSettingsAsync(r)
+			(client, f) => client.Cluster.PutSettings(f),
+			(client, f) => client.Cluster.PutSettingsAsync(f),
+			(client, r) => client.Cluster.PutSettings(r),
+			(client, r) => client.Cluster.PutSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterPutSettingsResponse response)

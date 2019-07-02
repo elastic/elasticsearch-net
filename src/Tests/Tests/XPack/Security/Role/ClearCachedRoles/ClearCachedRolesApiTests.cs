@@ -6,8 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Security.Role.ClearCachedRoles
 {
@@ -34,13 +34,13 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 		private string Role => $"role-{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClearCachedRoles(Role, f),
-			(client, f) => client.ClearCachedRolesAsync(Role, f),
-			(client, r) => client.ClearCachedRoles(r),
-			(client, r) => client.ClearCachedRolesAsync(r)
+			(client, f) => client.Security.ClearCachedRoles(Role, f),
+			(client, f) => client.Security.ClearCachedRolesAsync(Role, f),
+			(client, r) => client.Security.ClearCachedRoles(r),
+			(client, r) => client.Security.ClearCachedRolesAsync(r)
 		);
 
-		protected override void OnBeforeCall(IElasticClient client) => client.PutRole(new PutRoleRequest(Role));
+		protected override void OnBeforeCall(IElasticClient client) => client.Security.PutRole(new PutRoleRequest(Role));
 
 		protected override ClearCachedRolesDescriptor NewDescriptor() => new ClearCachedRolesDescriptor(Role);
 

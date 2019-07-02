@@ -7,10 +7,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Specialized.Percolate
 {
@@ -18,7 +17,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	public abstract class PercolateQueryUsageTestsBase
 		: ApiIntegrationTestBase<
 			WritableCluster,
-			SearchResponse<ProjectPercolation>,
+			ISearchResponse<ProjectPercolation>,
 			ISearchRequest,
 			SearchDescriptor<ProjectPercolation>,
 			SearchRequest<ProjectPercolation>
@@ -36,8 +35,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override string UrlPath => $"{PercolationIndex}/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<ProjectPercolation>(f),
-			(client, f) => client.SearchAsync<ProjectPercolation>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<ProjectPercolation>(r),
 			(client, r) => client.SearchAsync<ProjectPercolation>(r)
 		);
@@ -61,7 +60,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
@@ -72,7 +71,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					)
 				);
 				var percolationIndex = index + "-queries";
-				Client.CreateIndex(percolationIndex, c => c
+				Client.Indices.Create(percolationIndex, c => c
 					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
@@ -92,8 +91,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						Query = "Martijn"
 					}
 				}, d => d.Index(percolationIndex));
-				Client.IndexDocument(Project.Instance);
-				Client.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
+				Client.Index(Project.Instance, i => i.Routing(Project.Instance.Name));
+				Client.Indices.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
 			}
 		}
 	}
@@ -152,7 +151,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Field(f => f.Query)
 			);
 
-		protected override void ExpectResponse(SearchResponse<ProjectPercolation> response)
+		protected override void ExpectResponse(ISearchResponse<ProjectPercolation> response)
 		{
 			response.Total.Should().BeGreaterThan(0);
 			response.Hits.Should().NotBeNull();
@@ -178,7 +177,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
-	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class PercolateQueryExistingDocumentUsageTests : PercolateQueryUsageTestsBase
 	{
 		public PercolateQueryExistingDocumentUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -222,7 +220,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Field(f => f.Query)
 			);
 
-		protected override void ExpectResponse(SearchResponse<ProjectPercolation> response)
+		protected override void ExpectResponse(ISearchResponse<ProjectPercolation> response)
 		{
 			response.Total.Should().BeGreaterThan(0);
 			response.Hits.Should().NotBeNull();
@@ -242,7 +240,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
-	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class PercolateMultipleDocumentsQueryUsageTests : PercolateQueryUsageTestsBase
 	{
 		public PercolateMultipleDocumentsQueryUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -289,7 +286,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Field(f => f.Query)
 			);
 
-		protected override void ExpectResponse(SearchResponse<ProjectPercolation> response)
+		protected override void ExpectResponse(ISearchResponse<ProjectPercolation> response)
 		{
 			response.Total.Should().Be(1);
 			response.Hits.Should().NotBeNull();

@@ -49,9 +49,11 @@ namespace Nest
 
 		private static BulkRequest CreateDeleteBulkRequest<T>(IEnumerable<T> objects, IndexName index) where T : class
 		{
-			@objects.ThrowIfEmpty(nameof(objects));
+			// ReSharper disable once PossibleMultipleEnumeration
+			objects.ThrowIfEmpty(nameof(objects));
 			var bulkRequest = new BulkRequest(index);
-			var deletes = @objects
+			// ReSharper disable once PossibleMultipleEnumeration
+			var deletes = objects
 				.Select(o => new BulkDeleteOperation<T>(o))
 				.Cast<IBulkOperation>()
 				.ToList();

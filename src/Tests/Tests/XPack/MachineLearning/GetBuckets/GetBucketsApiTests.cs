@@ -4,9 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetBuckets
 {
@@ -33,10 +31,10 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetBuckets(CallIsolatedValue, f),
-			(client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetBuckets(r),
-			(client, r) => client.GetBucketsAsync(r)
+			(client, f) => client.MachineLearning.GetBuckets(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetBuckets(r),
+			(client, r) => client.MachineLearning.GetBucketsAsync(r)
 		);
 
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
@@ -89,10 +87,10 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetBuckets(CallIsolatedValue, f),
-			(client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetBuckets(r),
-			(client, r) => client.GetBucketsAsync(r)
+			(client, f) => client.MachineLearning.GetBuckets(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetBuckets(r),
+			(client, r) => client.MachineLearning.GetBucketsAsync(r)
 		);
 
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);

@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.NodesHotThreads
 {
@@ -20,10 +20,10 @@ namespace Tests.Cluster.NodesHotThreads
 		protected override string UrlPath => "/_nodes/hot_threads";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesHotThreads(),
-			(client, f) => client.NodesHotThreadsAsync(),
-			(client, r) => client.NodesHotThreads(r),
-			(client, r) => client.NodesHotThreadsAsync(r)
+			(client, f) => client.Nodes.HotThreads(),
+			(client, f) => client.Nodes.HotThreadsAsync(),
+			(client, r) => client.Nodes.HotThreads(r),
+			(client, r) => client.Nodes.HotThreadsAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesHotThreadsResponse response)

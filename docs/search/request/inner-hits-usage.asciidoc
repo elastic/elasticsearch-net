@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/InnerHitsUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Request/InnerHitsUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -91,6 +91,56 @@ new SearchRequest<King>(Index)
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "has_child": {
+            "type": "prince",
+            "query": {
+              "match": {
+                "fullTextField": {
+                  "query": "default"
+                }
+              }
+            },
+            "inner_hits": {
+              "name": "princes",
+              "docvalue_fields": [
+                "name"
+              ],
+              "highlight": {
+                "fields": {
+                  "fullTextField": {}
+                }
+              },
+              "ignore_unmapped": false,
+              "version": true
+            }
+          }
+        },
+        {
+          "nested": {
+            "query": {
+              "match_all": {}
+            },
+            "path": "foes",
+            "inner_hits": {
+              "version": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "version": true
+}
+----
+
 [float]
 === Handling Responses
 
@@ -101,18 +151,17 @@ foreach (var hit in response.Hits)
 {
     hit.Id.Should().NotBeNullOrEmpty();
     hit.Index.Should().NotBeNullOrEmpty();
-    hit.Version?.Should().Be(1);
-
+    hit.Version.Should().Be(1);
 
     var princes = hit.InnerHits["princes"].Documents<Prince>();
     princes.Should().NotBeEmpty();
     foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
     {
-        var highlights = princeHit.Highlights;
+        var highlights = princeHit.Highlight;
         highlights.Should().NotBeNull("princes should have highlights");
         highlights.Should().ContainKey("fullTextField", "we are highlighting this field");
         var hl = highlights["fullTextField"];
-        hl.Highlights.Should()
+        hl.Should()
             .NotBeEmpty("all docs have the same text so should all highlight")
             .And.Contain(s => s.Contains("<em>default</em>"), "default to be highlighted as its part of the query");
 
@@ -120,7 +169,7 @@ foreach (var hit in response.Hits)
         var docValueName = princeHit.Fields.ValueOf<Prince, string>(p => p.Name);
         docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
 
-        princeHit.Version?.Should().Be(1);
+        princeHit.Version.Should().Be(1);
     }
 
     var foes = hit.InnerHits["foes"].Documents<King>();

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Nest.Specification.IndicesApi;
 
 namespace Nest
 {
@@ -7,25 +9,25 @@ namespace Nest
 	{
 		/// <summary>
 		/// Returns a dictionary of aliases that point to the specified index, simplified version of
-		/// <see cref="IElasticClient.GetAlias(IGetAliasRequest)" />..
+		/// <see cref="IndicesNamespace.GetAlias(IGetAliasRequest)" />..
 		/// </summary>
 		/// <param name="index">The index name we want to know aliases of</param>
 		public static IReadOnlyDictionary<string, AliasDefinition> GetAliasesPointingToIndex(this IElasticClient client, IndexName index)
 		{
-			var response = client.GetAlias(a => a.Index(index).RequestConfiguration(r => r.ThrowExceptions()));
+			var response = client.Indices.GetAlias(index, a => a.RequestConfiguration(r => r.ThrowExceptions()));
 			return AliasesPointingToIndex(index, response);
 		}
 
 		/// <summary>
 		/// Returns a dictionary of aliases that point to the specified index, simplified version of
-		/// <see cref="IElasticClient.GetAlias(IGetAliasRequest)" />.
+		/// <see cref="IndicesNamespace.GetAlias(IGetAliasRequest)" />..
 		/// </summary>
 		/// <param name="index">The index name we want to know aliases of</param>
 		public static async Task<IReadOnlyDictionary<string, AliasDefinition>> GetAliasesPointingToIndexAsync(this IElasticClient client,
 			IndexName index
 		)
 		{
-			var response = await client.GetAliasAsync(a => a.Index(index).RequestConfiguration(r => r.ThrowExceptions())).ConfigureAwait(false);
+			var response = await client.Indices.GetAliasAsync(index, a => a.RequestConfiguration(r => r.ThrowExceptions())).ConfigureAwait(false);
 			return AliasesPointingToIndex(index, response);
 		}
 

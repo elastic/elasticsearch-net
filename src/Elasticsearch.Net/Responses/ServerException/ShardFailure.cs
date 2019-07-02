@@ -1,46 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Runtime.Serialization;
 
 namespace Elasticsearch.Net
 {
-	[JsonFormatter(typeof(ShardFailureFormatter))]
+	[DataContract]
 	public class ShardFailure
 	{
+		[DataMember(Name = "index")]
 		public string Index { get; set; }
+
+		[DataMember(Name = "node")]
 		public string Node { get; set; }
+
+		[DataMember(Name = "reason")]
 		public ErrorCause Reason { get; set; }
+
+		[DataMember(Name = "shard")]
 		public int? Shard { get; set; }
+
+		[DataMember(Name = "status")]
 		public string Status { get; set; }
-	}
-
-	internal class ShardFailureFormatter : IJsonFormatter<ShardFailure>
-	{
-		public void Serialize(ref JsonWriter writer, ShardFailure value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
-
-		public ShardFailure Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			var failure = new ShardFailure();
-
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
-			{
-				reader.ReadNextBlock();
-				return failure;
-			}
-
-			var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
-			var dict = formatter.Deserialize(ref reader, formatterResolver);
-
-			if (dict.TryGetValue("shard", out var shard)) failure.Shard = Convert.ToInt32(shard);
-			if (dict.TryGetValue("index", out var index)) failure.Index = Convert.ToString(index);
-			if (dict.TryGetValue("node", out var node)) failure.Node = Convert.ToString(node);
-			if (dict.TryGetValue("status", out var status)) failure.Status = Convert.ToString(status);
-			if (dict.TryGetValue("reason", out var reason))
-			{
-				var cause = formatterResolver.ReserializeAndDeserialize<ErrorCause>(reason);
-				failure.Reason = cause;
-			}
-			return failure;
-		}
 	}
 }

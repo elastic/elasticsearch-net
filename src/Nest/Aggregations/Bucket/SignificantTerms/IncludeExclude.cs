@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -39,7 +39,10 @@ namespace Nest
 			var token = reader.GetCurrentJsonToken();
 
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			IncludeExclude termsInclude;
 

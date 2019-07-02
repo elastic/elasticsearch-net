@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sticky/SkipDeadNodes.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sticky/SkipDeadNodes.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -90,7 +90,7 @@ A cluster with 2 nodes where the second node fails on ping
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(4)
     .ClientCalls(p => p.Succeeds(Always))
     .ClientCalls(p => p.OnPort(9200).FailAlways())
@@ -125,7 +125,7 @@ A cluster with 2 nodes where the second node fails on ping
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(4)
     .ClientCalls(p => p.Fails(Always))
     .StickyConnectionPool()

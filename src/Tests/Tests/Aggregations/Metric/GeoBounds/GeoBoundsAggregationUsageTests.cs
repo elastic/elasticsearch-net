@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.GeoBounds
@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 			{
 				geo_bounds = new
 				{
-					field = "location",
+					field = "locationPoint",
 					wrap_longitude = true
 				}
 			}
@@ -27,17 +27,17 @@ namespace Tests.Aggregations.Metric.GeoBounds
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoBounds("viewport", gb => gb
-				.Field(p => p.Location)
-				.WrapLongitude(true)
+				.Field(p => p.LocationPoint)
+				.WrapLongitude()
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
+			new GeoBoundsAggregation("viewport", Field<Project>(p => p.LocationPoint))
 			{
 				WrapLongitude = true
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var viewport = response.Aggregations.GeoBounds("viewport");

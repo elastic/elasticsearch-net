@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// A response to a search request
 	/// </summary>
-	/// <typeparam name="T">The document type</typeparam>
-	public interface ISearchResponse<out T> : IResponse where T : class
+	/// <typeparam name="TDocument">The document type</typeparam>
+	public interface ISearchResponse<out TDocument> : IResponse where TDocument : class
 	{
 		/// <summary>
 		/// Gets the collection of aggregations
@@ -25,7 +25,7 @@ namespace Nest
 		ClusterStatistics Clusters { get; }
 
 		/// <summary>
-		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into <typeparamref name="T" />
+		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into <typeparamref name="TDocument" />
 		/// <para>
 		/// NOTE: if you use <see cref="ISearchRequest.StoredFields" /> on the search request,
 		/// <see cref="Documents" /> will be empty and you should use <see cref="Fields" />
@@ -34,7 +34,7 @@ namespace Nest
 		/// search request to return <see cref="Documents" /> with partial fields selected
 		/// </para>
 		/// </summary>
-		IReadOnlyCollection<T> Documents { get; }
+		IReadOnlyCollection<TDocument> Documents { get; }
 
 		/// <summary>
 		/// Gets the field values inside the hits, when the search request uses
@@ -48,12 +48,12 @@ namespace Nest
 		/// <value>
 		/// The hits.
 		/// </value>
-		IReadOnlyCollection<IHit<T>> Hits { get; }
+		IReadOnlyCollection<IHit<TDocument>> Hits { get; }
 
 		/// <summary>
 		/// Gets the meta data about the hits that match the search query criteria.
 		/// </summary>
-		IHitsMetadata<T> HitsMetadata { get; }
+		IHitsMetadata<TDocument> HitsMetadata { get; }
 
 		/// <summary>
 		/// Gets the maximum score for documents matching the search query criteria
@@ -86,7 +86,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the suggester results.
 		/// </summary>
-		ISuggestDictionary<T> Suggest { get; }
+		ISuggestDictionary<TDocument> Suggest { get; }
 
 		/// <summary>
 		/// Gets a value indicating whether the search was terminated early
@@ -109,13 +109,13 @@ namespace Nest
 		long Total { get; }
 	}
 
-	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
+	public class SearchResponse<TDocument> : ResponseBase, ISearchResponse<TDocument> where TDocument : class
 	{
-		private IReadOnlyCollection<T> _documents;
+		private IReadOnlyCollection<TDocument> _documents;
 
 		private IReadOnlyCollection<FieldValues> _fields;
 
-		private IReadOnlyCollection<IHit<T>> _hits;
+		private IReadOnlyCollection<IHit<TDocument>> _hits;
 
 		/// <inheritdoc />
 		[DataMember(Name ="aggregations")]
@@ -127,7 +127,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
-		public IReadOnlyCollection<T> Documents =>
+		public IReadOnlyCollection<TDocument> Documents =>
 			_documents ?? (_documents = Hits
 				.Select(h => h.Source)
 				.ToList());
@@ -141,12 +141,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
-		public IReadOnlyCollection<IHit<T>> Hits =>
-			_hits ?? (_hits = HitsMetadata?.Hits ?? EmptyReadOnly<IHit<T>>.Collection);
+		public IReadOnlyCollection<IHit<TDocument>> Hits =>
+			_hits ?? (_hits = HitsMetadata?.Hits ?? EmptyReadOnly<IHit<TDocument>>.Collection);
 
 		/// <inheritdoc />
 		[DataMember(Name ="hits")]
-		public IHitsMetadata<T> HitsMetadata { get; internal set; }
+		public IHitsMetadata<TDocument> HitsMetadata { get; internal set; }
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
@@ -170,7 +170,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[DataMember(Name ="suggest")]
-		public ISuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
+		public ISuggestDictionary<TDocument> Suggest { get; internal set; } = SuggestDictionary<TDocument>.Default;
 
 		/// <inheritdoc />
 		[DataMember(Name ="terminated_early")]

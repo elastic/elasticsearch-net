@@ -1,14 +1,18 @@
 using System;
+using System.Diagnostics;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Framework.Integration;
+using Tests.Framework.Extensions;
 using Xunit;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class CoordinatedIntegrationTestBase<TCluster>
 		: IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
@@ -53,7 +57,23 @@ namespace Tests.Framework
 				if (!_coordinatedUsage.MethodIsolatedValues.TryGetValue(key, out var isolatedValue))
 					throw new Exception($"{name} is not a request observed and so no call isolated values could be located for it");
 
-				assert(isolatedValue, response);
+				var r = response;
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
+					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
+				{
+					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					throw new ResponseAssertionException(e.SourceException, r).Demystify();
+				}
+
+				try
+				{
+					assert(isolatedValue, response);
+				}
+				catch (Exception e)
+				{
+					var ex = ExceptionDispatchInfo.Capture(e.Demystify());
+					throw new ResponseAssertionException(ex.SourceException, r).Demystify();
+				}
 			}
 		}
 

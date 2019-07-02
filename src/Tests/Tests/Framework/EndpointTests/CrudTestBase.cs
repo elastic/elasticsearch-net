@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
@@ -12,10 +9,10 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class CrudWithNoDeleteTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
 		: CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponseBase>
@@ -165,10 +162,12 @@ namespace Tests.Framework
 		/// <summary>Helpful if you want to capture a reproduce trace with e.g fiddler</summary>
 		protected virtual bool TestOnlyOneMethod => false;
 
+		// ReSharper disable StaticMemberInGenericType
 		private static string RandomFluent { get; } = $"fluent-{RandomString()}";
 		private static string RandomFluentAsync { get; } = $"fluentasync-{RandomString()}";
 		private static string RandomInitializer { get; } = $"ois-{RandomString()}";
 		private static string RandomInitializerAsync { get; } = $"oisasync-{RandomString()}";
+		// ReSharper restore StaticMemberInGenericType
 
 		protected abstract LazyResponses Create();
 
@@ -402,7 +401,7 @@ namespace Tests.Framework
 
 		[I] protected virtual async Task ExistsAfterDeleteIsValid() => await AssertOnExistsAfterDelete(r =>
 		{
-			r.ShouldBeValid();
+			r.ShouldNotBeValid();
 			r.Exists.Should().BeFalse();
 			ExpectExistsAfterDelete(r);
 		});

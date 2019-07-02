@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Span/Not/SpanNotQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Span/Not/SpanNotQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,7 +23,6 @@ q
 .SpanNot(sn => sn
     .Name("named_query")
     .Boost(1.1)
-    .Dist(12)
     .Post(13)
     .Pre(14)
     .Include(i => i
@@ -43,7 +42,6 @@ new SpanNotQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Dist = 12,
     Post = 13,
     Pre = 14,
     Include = new SpanQuery
@@ -60,6 +58,33 @@ new SpanNotQuery
             Field = "field1", Value = "hoya2"
         }
     },
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_not": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "include": {
+      "span_term": {
+        "field1": {
+          "value": "hoya"
+        }
+      }
+    },
+    "exclude": {
+      "span_term": {
+        "field1": {
+          "value": "hoya2"
+        }
+      }
+    },
+    "pre": 14,
+    "post": 13
+  }
 }
 ----
 

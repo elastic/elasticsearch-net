@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -48,7 +48,7 @@ namespace Nest
 		: QueryDescriptorBase<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery>
 			, IFunctionScoreQuery where T : class
 	{
-		private bool _forcedConditionless = false;
+		private bool _forcedConditionless;
 		protected override bool Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
 		IEnumerable<IScoreFunction> IFunctionScoreQuery.Functions { get; set; }

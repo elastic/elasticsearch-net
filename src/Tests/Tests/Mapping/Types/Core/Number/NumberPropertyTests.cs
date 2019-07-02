@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.Number
 {
@@ -33,8 +33,8 @@ namespace Tests.Mapping.Types.Core.Number
 			.Number(n => n
 				.Name(p => p.NumberOfCommits)
 				.Type(NumberType.Integer)
-				.DocValues(true)
-				.Similarity(SimilarityOption.BM25)
+				.DocValues()
+				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.Boost(1.5)
@@ -50,7 +50,7 @@ namespace Tests.Mapping.Types.Core.Number
 				"numberOfCommits", new NumberProperty(NumberType.Integer)
 				{
 					DocValues = true,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					Boost = 1.5,
@@ -91,8 +91,8 @@ namespace Tests.Mapping.Types.Core.Number
 				.Name(p => p.NumberOfCommits)
 				.Type(NumberType.ScaledFloat)
 				.ScalingFactor(10)
-				.DocValues(true)
-				.Similarity(SimilarityOption.BM25)
+				.DocValues()
+				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.Boost(1.5)
@@ -109,7 +109,7 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					ScalingFactor = 10,
 					DocValues = true,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					Boost = 1.5,

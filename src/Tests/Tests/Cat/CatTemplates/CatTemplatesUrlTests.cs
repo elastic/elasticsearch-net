@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Cat.CatTemplates
 {
@@ -11,17 +11,17 @@ namespace Tests.Cat.CatTemplates
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/templates")
-					.Fluent(c => c.CatTemplates())
-					.Request(c => c.CatTemplates(new CatTemplatesRequest()))
-					.FluentAsync(c => c.CatTemplatesAsync())
-					.RequestAsync(c => c.CatTemplatesAsync(new CatTemplatesRequest()))
+					.Fluent(c => c.Cat.Templates())
+					.Request(c => c.Cat.Templates(new CatTemplatesRequest()))
+					.FluentAsync(c => c.Cat.TemplatesAsync())
+					.RequestAsync(c => c.Cat.TemplatesAsync(new CatTemplatesRequest()))
 				;
 
 			await GET("/_cat/templates/index-%2A")
-				.Fluent(c => c.CatTemplates(r => r.Name("index-*")))
-				.Request(c => c.CatTemplates(new CatTemplatesRequest("index-*")))
-				.FluentAsync(c => c.CatTemplatesAsync(r => r.Name("index-*")))
-				.RequestAsync(c => c.CatTemplatesAsync(new CatTemplatesRequest("index-*")));
+				.Fluent(c => c.Cat.Templates(r => r.Name("index-*")))
+				.Request(c => c.Cat.Templates(new CatTemplatesRequest("index-*")))
+				.FluentAsync(c => c.Cat.TemplatesAsync(r => r.Name("index-*")))
+				.RequestAsync(c => c.Cat.TemplatesAsync(new CatTemplatesRequest("index-*")));
 		}
 	}
 }

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/QueryString/QueryStringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/QueryString/QueryStringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -25,10 +25,9 @@ q
     .Boost(1.1)
     .Fields(f => f.Field(p => p.Description).Field("myOtherField"))
     .Query("hello world")
-    .DefaultField(p => p.Description)
     .DefaultOperator(Operator.Or)
     .Analyzer("standard")
-    .QuoteAnalyzer("quote-an")
+    .QuoteAnalyzer("keyword")
     .AllowLeadingWildcard()
     .MaximumDeterminizedStates(2)
     .Escape()
@@ -56,10 +55,9 @@ new QueryStringQuery
     Boost = 1.1,
     Name = "named_query",
     Query = "hello world",
-    DefaultField = Field<Project>(p => p.Description),
     DefaultOperator = Operator.Or,
     Analyzer = "standard",
-    QuoteAnalyzer = "quote-an",
+    QuoteAnalyzer = "keyword",
     AllowLeadingWildcard = true,
     MaximumDeterminizedStates = 2,
     Escape = true,
@@ -74,6 +72,39 @@ new QueryStringQuery
     QuoteFieldSuffix = "'",
     Lenient = true,
     AutoGenerateSynonymsPhraseQuery = false
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "query_string": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "query": "hello world",
+    "default_operator": "or",
+    "analyzer": "standard",
+    "quote_analyzer": "keyword",
+    "allow_leading_wildcard": true,
+    "fuzzy_max_expansions": 3,
+    "fuzziness": "AUTO",
+    "fuzzy_prefix_length": 2,
+    "analyze_wildcard": true,
+    "max_determinized_states": 2,
+    "minimum_should_match": 2,
+    "lenient": true,
+    "fields": [
+      "description",
+      "myOtherField"
+    ],
+    "tie_breaker": 1.2,
+    "rewrite": "constant_score",
+    "fuzzy_rewrite": "constant_score",
+    "quote_field_suffix": "'",
+    "escape": true,
+    "auto_generate_synonyms_phrase_query": false
+  }
 }
 ----
 

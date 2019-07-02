@@ -4,9 +4,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using static Nest.Infer;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
@@ -69,7 +68,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					},
 					type = "object"
 				},
-				location = new
+				locationPoint = new
 				{
 					properties = new
 					{
@@ -77,6 +76,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						lon = new { type = "double" }
 					},
 					type = "object"
+				},
+				locationShape = new
+				{
+					type = "geo_shape"
 				},
 				metadata = new { type = "object" },
 				name = new
@@ -215,8 +218,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					}
 				},
 				{ p => p.Description, new TextProperty() },
-				{ p => p.DateString, new TextProperty { } },
-				{ p => p.Type, new TextProperty { } },
+				{ p => p.DateString, new TextProperty() },
+				{ p => p.Type, new TextProperty() },
 				{ p => p.LastActivity, new DateProperty() },
 				{
 					p => p.LeadDeveloper, new ObjectProperty
@@ -236,7 +239,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					}
 				},
 				{
-					p => p.Location, new ObjectProperty
+					p => p.LocationPoint, new ObjectProperty
 					{
 						Properties = new Properties<SimpleGeoPoint>
 						{
@@ -245,6 +248,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						}
 					}
 				},
+				{ p => p.LocationShape, new GeoShapeProperty() },
 				{ p => p.Metadata, new ObjectProperty() },
 				{ p => p.Name, new TextProperty { Index = false } },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },

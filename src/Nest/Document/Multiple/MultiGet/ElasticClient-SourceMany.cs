@@ -12,7 +12,7 @@ namespace Nest
 	public static class SourceManyExtensions
 	{
 		/// <summary>
-		/// SourceMany allows you to get a list of T documents out of elasticsearch, internally it calls into MultiGet()
+		/// SourceMany allows you to get a list of T documents out of Elasticsearch, internally it calls into MultiGet()
 		/// <para>
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing).
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
@@ -25,21 +25,19 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as string</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
-		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
+		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<string> ids, string index = null)
 			where T : class
 		{
 			var result = client.MultiGet(s => s
+				.Index(index)
 				.RequestConfiguration(r => r.ThrowExceptions())
-				.GetMany<T>(ids, (gs, i) => gs
-					.Index(index)
-				)
+				.GetMany<T>(ids, (gs, i) => gs )
 			);
 			return result.SourceMany<T>(ids);
 		}
 
 		/// <summary>
-		/// SourceMany allows you to get a list of T documents out of elasticsearch, internally it calls into MultiGet()
+		/// SourceMany allows you to get a list of T documents out of Elasticsearch, internally it calls into MultiGet()
 		/// <para>
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing).
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
@@ -52,12 +50,11 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as int</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
-		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
-			where T : class => client.SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
+		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<long> ids, string index = null)
+			where T : class => client.SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index);
 
 		/// <summary>
-		/// SourceMany allows you to get a list of T documents out of elasticsearch, internally it calls into MultiGet()
+		/// SourceMany allows you to get a list of T documents out of Elasticsearch, internally it calls into MultiGet()
 		/// <para>
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing).
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
@@ -70,24 +67,21 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as string</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
 		public static async Task<IEnumerable<T>> SourceManyAsync<T>(
-			this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			this IElasticClient client, IEnumerable<string> ids, string index = null, CancellationToken cancellationToken = default
 		)
 			where T : class
 		{
 			var response = await client.MultiGetAsync(s => s
+					.Index(index)
 					.RequestConfiguration(r => r.ThrowExceptions())
-					.GetMany<T>(ids, (gs, i) => gs
-						.Index(index)
-					), cancellationToken)
+					.GetMany<T>(ids, (gs, i) => gs), cancellationToken)
 				.ConfigureAwait(false);
 			return response.SourceMany<T>(ids);
 		}
 
 		/// <summary>
-		/// SourceMany allows you to get a list of T documents out of elasticsearch, internally it calls into MultiGet()
+		/// SourceMany allows you to get a list of T documents out of Elasticsearch, internally it calls into MultiGet()
 		/// <para>
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing).
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
@@ -100,11 +94,10 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as int</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
 		public static Task<IEnumerable<T>> SourceManyAsync<T>(
-			this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			this IElasticClient client, IEnumerable<long> ids, string index = null,
+			CancellationToken cancellationToken = default
 		)
-			where T : class => client.SourceManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type, cancellationToken);
+			where T : class => client.SourceManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, cancellationToken);
 	}
 }

@@ -10,7 +10,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Xunit;
 using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.ClientConcepts.Certificates
 {
@@ -118,6 +119,8 @@ namespace Tests.ClientConcepts.Certificates
 		[IntegrationOnly]
 		public class CertgenCaCluster : SslAndKpiXPackCluster
 		{
+            public CertgenCaCluster() : base() { }
+            public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
 					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))
@@ -176,7 +179,7 @@ namespace Tests.ClientConcepts.Certificates
 		/**
 		 * ==== Client Certificates
 		 *
-		 * X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
+		 * X-Pack also allows you to configure a {ref_current}/configuring-pki-realm.html[PKI realm] to enable user authentication
 		 * through client certificates. The {ref_current}/certutil.html[+elasticsearch-certutil+ tool] included with X-Pack allows you to
 		 * generate client certificates as well and assign the distinguished name (DN) of the
 		 * certificate to a user with a certain role.

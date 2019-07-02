@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.Monitoring.IndicesRecovery
 {
@@ -22,10 +22,10 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 		protected override string UrlPath => "/_all/_recovery";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.RecoveryStatus(Infer.AllIndices, f),
-			(client, f) => client.RecoveryStatusAsync(Infer.AllIndices, f),
-			(client, r) => client.RecoveryStatus(r),
-			(client, r) => client.RecoveryStatusAsync(r)
+			(client, f) => client.Indices.RecoveryStatus(Infer.AllIndices, f),
+			(client, f) => client.Indices.RecoveryStatusAsync(Infer.AllIndices, f),
+			(client, r) => client.Indices.RecoveryStatus(r),
+			(client, r) => client.Indices.RecoveryStatusAsync(r)
 		);
 	}
 }

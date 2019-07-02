@@ -37,9 +37,9 @@ namespace Tests.Ingest
 			where a == null || !a.Ranges.Any(r => r.IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
 			select (IProcessorAssertion)Activator.CreateInstance(t);
 
-		public static IProcessor[] Initializer => All.Select(a => a.Initializer).ToArray();
+		public static IProcessor[] Initializers => All.Select(a => a.Initializer).ToArray();
 
-		public static Dictionary<string, object>[] Json =>
+		public static Dictionary<string, object>[] AllAsJson =>
 			All.Select(a => new Dictionary<string, object>
 				{
 					{ a.Key, a.Json }
@@ -110,7 +110,7 @@ namespace Tests.Ingest
 			{
 				Field = "startedOn",
 				TargetField = "timestamp",
-				Formats = new string[] { "dd/MM/yyyy hh:mm:ss" },
+				Formats = new[] { "dd/MM/yyyy hh:mm:ss" },
 				TimeZone = "Europe/Amsterdam"
 			};
 
@@ -255,11 +255,11 @@ namespace Tests.Ingest
 
 		public class Remove : ProcessorAssertion
 		{
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Remove<Project>(r => r.Field(p => p.Suggest));
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Remove<Project>(r => r.Field(p => p.Field(pp => pp.Suggest)));
 
 			public override IProcessor Initializer => new RemoveProcessor { Field = "suggest" };
 
-			public override object Json => new { field = "suggest" };
+			public override object Json => new { field = new [] { "suggest" } };
 			public override string Key => "remove";
 		}
 

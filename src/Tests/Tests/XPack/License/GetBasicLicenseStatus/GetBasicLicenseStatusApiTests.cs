@@ -1,12 +1,11 @@
-﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.GetBasicLicenseStatus
@@ -27,10 +26,10 @@ namespace Tests.XPack.License.GetBasicLicenseStatus
 		protected override string UrlPath => $"/_license/basic_status";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetBasicLicenseStatus(f),
-			(client, f) => client.GetBasicLicenseStatusAsync(f),
-			(client, r) => client.GetBasicLicenseStatus(r),
-			(client, r) => client.GetBasicLicenseStatusAsync(r)
+			(client, f) => client.License.GetBasicStatus(f),
+			(client, f) => client.License.GetBasicStatusAsync(f),
+			(client, r) => client.License.GetBasicStatus(r),
+			(client, r) => client.License.GetBasicStatusAsync(r)
 		);
 
 		protected override void ExpectResponse(GetBasicLicenseStatusResponse response) =>

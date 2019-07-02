@@ -2,13 +2,9 @@
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
-using Tests.Configuration;
+using Tests.Framework.EndpointTests.TestState;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.DeleteCalendarEvent
 {
@@ -28,7 +24,7 @@ namespace Tests.XPack.MachineLearning.DeleteCalendarEvent
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var events = client.GetCalendarEvents(CallIsolatedValue, f => f);
+			var events = client.MachineLearning.GetCalendarEvents(CallIsolatedValue, f => f);
 			var eventId = events.Events.First().EventId;
 			ExtendedValue("eventId", eventId);
 		}
@@ -52,17 +48,14 @@ namespace Tests.XPack.MachineLearning.DeleteCalendarEvent
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events/{EventId}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteCalendarEvent(CallIsolatedValue, EventId, f),
-			(client, f) => client.DeleteCalendarEventAsync(CallIsolatedValue, EventId, f),
-			(client, r) => client.DeleteCalendarEvent(r),
-			(client, r) => client.DeleteCalendarEventAsync(r)
+			(client, f) => client.MachineLearning.DeleteCalendarEvent(CallIsolatedValue, EventId, f),
+			(client, f) => client.MachineLearning.DeleteCalendarEventAsync(CallIsolatedValue, EventId, f),
+			(client, r) => client.MachineLearning.DeleteCalendarEvent(r),
+			(client, r) => client.MachineLearning.DeleteCalendarEventAsync(r)
 		);
 
 		protected override DeleteCalendarEventDescriptor NewDescriptor() => new DeleteCalendarEventDescriptor(CallIsolatedValue, EventId);
 
-		protected override void ExpectResponse(DeleteCalendarEventResponse response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(DeleteCalendarEventResponse response) => response.ShouldBeValid();
 	}
 }

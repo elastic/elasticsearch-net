@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.MachineLearning.GetDatafeedStats
 {
@@ -11,17 +11,17 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		[U] public override async Task Urls()
 		{
 			await GET("/_ml/datafeeds/_stats")
-					.Fluent(c => c.GetDatafeedStats())
-					.Request(c => c.GetDatafeedStats(new GetDatafeedStatsRequest()))
-					.FluentAsync(c => c.GetDatafeedStatsAsync())
-					.RequestAsync(c => c.GetDatafeedStatsAsync(new GetDatafeedStatsRequest()))
+					.Fluent(c => c.MachineLearning.GetDatafeedStats())
+					.Request(c => c.MachineLearning.GetDatafeedStats(new GetDatafeedStatsRequest()))
+					.FluentAsync(c => c.MachineLearning.GetDatafeedStatsAsync())
+					.RequestAsync(c => c.MachineLearning.GetDatafeedStatsAsync(new GetDatafeedStatsRequest()))
 				;
 
 			await GET("/_ml/datafeeds/datafeed_id/_stats")
-					.Fluent(c => c.GetDatafeedStats(r => r.DatafeedId("datafeed_id")))
-					.Request(c => c.GetDatafeedStats(new GetDatafeedStatsRequest("datafeed_id")))
-					.FluentAsync(c => c.GetDatafeedStatsAsync(r => r.DatafeedId("datafeed_id")))
-					.RequestAsync(c => c.GetDatafeedStatsAsync(new GetDatafeedStatsRequest("datafeed_id")))
+					.Fluent(c => c.MachineLearning.GetDatafeedStats(r => r.DatafeedId("datafeed_id")))
+					.Request(c => c.MachineLearning.GetDatafeedStats(new GetDatafeedStatsRequest("datafeed_id")))
+					.FluentAsync(c => c.MachineLearning.GetDatafeedStatsAsync(r => r.DatafeedId("datafeed_id")))
+					.RequestAsync(c => c.MachineLearning.GetDatafeedStatsAsync(new GetDatafeedStatsRequest("datafeed_id")))
 				;
 		}
 	}

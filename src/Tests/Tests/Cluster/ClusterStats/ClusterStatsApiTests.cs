@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterStats
 {
@@ -19,15 +19,19 @@ namespace Tests.Cluster.ClusterStats
 		protected override string UrlPath => "/_cluster/stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterStats(),
-			(client, f) => client.ClusterStatsAsync(),
-			(client, r) => client.ClusterStats(r),
-			(client, r) => client.ClusterStatsAsync(r)
+			(client, f) => client.Cluster.Stats(),
+			(client, f) => client.Cluster.StatsAsync(),
+			(client, r) => client.Cluster.Stats(r),
+			(client, r) => client.Cluster.StatsAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+
+			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
+				response.ClusterUUID.Should().NotBeNullOrWhiteSpace();
+
 			response.NodeStatistics.Should().NotBeNull();
 			response.Status.Should().NotBe(ClusterStatus.Red);
 			response.Timestamp.Should().BeGreaterThan(0);
@@ -66,6 +70,12 @@ namespace Tests.Cluster.ClusterStats
 			nodes.OperatingSystem.AllocatedProcessors.Should().BeGreaterThan(0);
 
 			nodes.OperatingSystem.Names.Should().NotBeEmpty();
+
+			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
+			{
+				nodes.OperatingSystem.Memory.Should().NotBeNull();
+				nodes.OperatingSystem.PrettyNames.Should().NotBeNull();
+			}
 
 			var plugins = nodes.Plugins;
 			plugins.Should().NotBeEmpty();

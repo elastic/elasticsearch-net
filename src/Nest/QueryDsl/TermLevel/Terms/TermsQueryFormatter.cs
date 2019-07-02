@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -26,7 +27,10 @@ namespace Nest
 		public ITermsQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			ITermsQuery query = new TermsQuery();
 			var count = 0;

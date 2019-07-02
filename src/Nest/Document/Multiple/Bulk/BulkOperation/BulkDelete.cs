@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		T Document { get; set; }
 
 		[DataMember(Name = "if_seq_no")]
-		long? IfSeqNo { get; set; }
+		long? IfSequenceNumber { get; set; }
 
 		[DataMember(Name = "if_primary_term")]
 		long? IfPrimaryTerm { get; set; }
@@ -27,7 +27,7 @@ namespace Nest
 
 		public T Document { get; set; }
 
-		public long? IfSeqNo { get; set; }
+		public long? IfSequenceNumber { get; set; }
 
 		public long? IfPrimaryTerm { get; set; }
 
@@ -48,7 +48,7 @@ namespace Nest
 	{
 		protected override Type BulkOperationClrType => typeof(T);
 		protected override string BulkOperationType => "delete";
-		long? IBulkDeleteOperation<T>.IfSeqNo { get; set; }
+		long? IBulkDeleteOperation<T>.IfSequenceNumber { get; set; }
 		long? IBulkDeleteOperation<T>.IfPrimaryTerm { get; set; }
 
 		T IBulkDeleteOperation<T>.Document { get; set; }
@@ -64,7 +64,7 @@ namespace Nest
 		/// </summary>
 		public BulkDeleteDescriptor<T> Document(T @object) => Assign(@object, (a, v) => a.Document = v);
 
-		public BulkDeleteDescriptor<T> IfSeqNo(long? seqNo) => Assign(seqNo, (a, v) => a.IfSeqNo = v);
+		public BulkDeleteDescriptor<T> IfSequenceNumber(long? sequenceNumber) => Assign(sequenceNumber, (a, v) => a.IfSequenceNumber = v);
 
 		public BulkDeleteDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfPrimaryTerm = v);
 	}

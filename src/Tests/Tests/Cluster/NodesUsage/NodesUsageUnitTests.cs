@@ -5,7 +5,7 @@ using FluentAssertions;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 
-namespace Tests.XPack.DeprecationInfo
+namespace Tests.Cluster.NodesUsage
 {
 	public class NodesUsageUnitTests
 	{
@@ -45,7 +45,7 @@ namespace Tests.XPack.DeprecationInfo
 			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
-			var response = client.NodesUsage();
+			var response = client.Nodes.Usage();
 			response.ShouldBeValid();
 
 			response.ClusterName.Should().Be("my_cluster");

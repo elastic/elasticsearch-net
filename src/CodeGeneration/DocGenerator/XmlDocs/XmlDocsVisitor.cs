@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using AsciiDocNet;
 using NuDoq;
+using Example = NuDoq.Example;
 
 namespace DocGenerator.XmlDocs
 {
@@ -45,6 +46,15 @@ namespace DocGenerator.XmlDocs
 						paragraph.Add(new TextLiteral(" " + content));
 				}
 			}
+		}
+
+		public override void VisitExample(Example example)
+		{
+			var elements = new List<Element> { new Text ("For example, " )};
+			elements.AddRange(example.Elements);
+			example = new Example(elements);
+
+			base.VisitExample(example);
 		}
 
 		public override void VisitParam(Param param)

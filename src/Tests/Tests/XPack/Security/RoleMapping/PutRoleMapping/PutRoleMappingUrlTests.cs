@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 {
@@ -12,10 +12,10 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		{
 			var role = "can_read";
 			await PUT($"/_security/role_mapping/{role}")
-					.Fluent(c => c.PutRoleMapping(role))
-					.Request(c => c.PutRoleMapping(new PutRoleMappingRequest(role)))
-					.FluentAsync(c => c.PutRoleMappingAsync(role))
-					.RequestAsync(c => c.PutRoleMappingAsync(new PutRoleMappingRequest(role)))
+					.Fluent(c => c.Security.PutRoleMapping(role, p => p))
+					.Request(c => c.Security.PutRoleMapping(new PutRoleMappingRequest(role)))
+					.FluentAsync(c => c.Security.PutRoleMappingAsync(role, p => p))
+					.RequestAsync(c => c.Security.PutRoleMappingAsync(new PutRoleMappingRequest(role)))
 				;
 		}
 	}

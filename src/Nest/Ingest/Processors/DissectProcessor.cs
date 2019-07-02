@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -22,8 +21,8 @@ namespace Nest
 		[DataMember(Name = "pattern")]
 		string Pattern { get; set; }
 
-		/// <summary
-		/// If true and field does not exist or is null, the processor quietly exits without modifying the document>
+		/// <summary>
+		/// If <c>true</c> and field does not exist or is null, the processor quietly exits without modifying the document
 		/// </summary>
 		[DataMember(Name = "ignore_missing")]
 		bool? IgnoreMissing { get; set; }
@@ -67,7 +66,7 @@ namespace Nest
 		public DissectProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDissectProcessor.Field">
-		public DissectProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public DissectProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDissectProcessor.Pattern">

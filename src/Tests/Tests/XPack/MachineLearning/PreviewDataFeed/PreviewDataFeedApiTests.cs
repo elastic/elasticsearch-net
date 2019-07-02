@@ -3,11 +3,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.XPack.MachineLearning.PreviewDatafeed
+namespace Tests.XPack.MachineLearning.PreviewDataFeed
 {
 	//TODO what does an invalid request return here? this API returns a json array for the happy path
 	public class PreviewDatafeedApiTests
@@ -35,10 +33,10 @@ namespace Tests.XPack.MachineLearning.PreviewDatafeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
-			(client, r) => client.PreviewDatafeed<Metric>(r),
-			(client, r) => client.PreviewDatafeedAsync<Metric>(r)
+			(client, f) => client.MachineLearning.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.MachineLearning.PreviewDatafeed<Metric>(r),
+			(client, r) => client.MachineLearning.PreviewDatafeedAsync<Metric>(r)
 		);
 
 		protected override PreviewDatafeedDescriptor NewDescriptor() => new PreviewDatafeedDescriptor(CallIsolatedValue + "-datafeed");

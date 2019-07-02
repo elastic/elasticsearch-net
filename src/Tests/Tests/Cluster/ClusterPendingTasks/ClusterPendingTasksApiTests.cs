@@ -2,8 +2,8 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterPendingTasks
 {
@@ -19,10 +19,10 @@ namespace Tests.Cluster.ClusterPendingTasks
 		protected override string UrlPath => "/_cluster/pending_tasks";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterPendingTasks(),
-			(client, f) => client.ClusterPendingTasksAsync(),
-			(client, r) => client.ClusterPendingTasks(r),
-			(client, r) => client.ClusterPendingTasksAsync(r)
+			(client, f) => client.Cluster.PendingTasks(),
+			(client, f) => client.Cluster.PendingTasksAsync(),
+			(client, r) => client.Cluster.PendingTasks(r),
+			(client, r) => client.Cluster.PendingTasksAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterPendingTasksResponse response) => response.Tasks.Should().NotBeNull();

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -17,7 +16,10 @@ namespace Nest
 		public SqlValue Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 			return new SqlValue(BinaryUtil.ToArray(ref arraySegment), formatterResolver);

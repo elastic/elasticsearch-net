@@ -3,7 +3,7 @@ using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Joining.Nested
@@ -31,10 +31,10 @@ namespace Tests.QueryDsl.Joining.Nested
 			Name = "named_query",
 			Boost = 1.1,
 			InnerHits = new InnerHits { Explain = true },
-			Path = Field<Project>(p => p.CuratedTags),
+			Path = Field<Project>(p => p.Tags),
 			Query = new TermsQuery
 			{
-				Field = Field<Project>(p => p.CuratedTags.First().Name),
+				Field = Field<Project>(p => p.Tags.First().Name),
 				Terms = new[] { "lorem", "ipsum" }
 			},
 			IgnoreUnmapped = true
@@ -50,11 +50,11 @@ namespace Tests.QueryDsl.Joining.Nested
 				{
 					terms = new Dictionary<string, object>
 					{
-						{ "curatedTags.name", new[] { "lorem", "ipsum" } }
+						{ "tags.name", new[] { "lorem", "ipsum" } }
 					}
 				},
 				ignore_unmapped = true,
-				path = "curatedTags",
+				path = "tags",
 				inner_hits = new
 				{
 					explain = true
@@ -67,10 +67,10 @@ namespace Tests.QueryDsl.Joining.Nested
 				.Name("named_query")
 				.Boost(1.1)
 				.InnerHits(i => i.Explain())
-				.Path(p => p.CuratedTags)
+				.Path(p => p.Tags)
 				.Query(nq => nq
 					.Terms(t => t
-						.Field(f => f.CuratedTags.First().Name)
+						.Field(f => f.Tags.First().Name)
 						.Terms("lorem", "ipsum")
 					)
 				)

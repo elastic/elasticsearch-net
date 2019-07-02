@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ReloadSecureSettings
 {
@@ -20,10 +20,10 @@ namespace Tests.Cluster.ReloadSecureSettings
 		protected override string UrlPath => "/_nodes/reload_secure_settings";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ReloadSecureSettings(),
-			(client, f) => client.ReloadSecureSettingsAsync(),
-			(client, r) => client.ReloadSecureSettings(r),
-			(client, r) => client.ReloadSecureSettingsAsync(r)
+			(client, f) => client.Nodes.ReloadSecureSettings(),
+			(client, f) => client.Nodes.ReloadSecureSettingsAsync(),
+			(client, r) => client.Nodes.ReloadSecureSettings(r),
+			(client, r) => client.Nodes.ReloadSecureSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(ReloadSecureSettingsResponse response)

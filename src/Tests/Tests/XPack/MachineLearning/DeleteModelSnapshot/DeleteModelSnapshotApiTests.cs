@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 {
@@ -29,15 +27,15 @@ namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 				PutJob(client, callUniqueValue.Value);
 				IndexSnapshot(client, callUniqueValue.Value, "1");
 
-				client.GetModelSnapshots(callUniqueValue.Value).Count.Should().Be(1);
+				client.MachineLearning.GetModelSnapshots(callUniqueValue.Value).Count.Should().Be(1);
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteModelSnapshot(CallIsolatedValue, "1", f),
-			(client, f) => client.DeleteModelSnapshotAsync(CallIsolatedValue, "1", f),
-			(client, r) => client.DeleteModelSnapshot(r),
-			(client, r) => client.DeleteModelSnapshotAsync(r)
+			(client, f) => client.MachineLearning.DeleteModelSnapshot(CallIsolatedValue, "1", f),
+			(client, f) => client.MachineLearning.DeleteModelSnapshotAsync(CallIsolatedValue, "1", f),
+			(client, r) => client.MachineLearning.DeleteModelSnapshot(r),
+			(client, r) => client.MachineLearning.DeleteModelSnapshotAsync(r)
 		);
 
 		protected override DeleteModelSnapshotDescriptor NewDescriptor() => new DeleteModelSnapshotDescriptor(CallIsolatedValue, "1");

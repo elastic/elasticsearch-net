@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Ingest.GetPipeline
 {
@@ -11,19 +11,19 @@ namespace Tests.Ingest.GetPipeline
 		[U] public async Task Urls()
 		{
 			await GET($"/_ingest/pipeline")
-					.Fluent(c => c.GetPipeline())
-					.Request(c => c.GetPipeline(new GetPipelineRequest()))
-					.FluentAsync(c => c.GetPipelineAsync())
-					.RequestAsync(c => c.GetPipelineAsync())
+					.Fluent(c => c.Ingest.GetPipeline())
+					.Request(c => c.Ingest.GetPipeline(new GetPipelineRequest()))
+					.FluentAsync(c => c.Ingest.GetPipelineAsync())
+					.RequestAsync(c => c.Ingest.GetPipelineAsync())
 				;
 
 			var id = "id";
 
 			await GET($"/_ingest/pipeline/{id}")
-					.Fluent(c => c.GetPipeline(g => g.Id(id)))
-					.Request(c => c.GetPipeline(new GetPipelineRequest(id)))
-					.FluentAsync(c => c.GetPipelineAsync(g => g.Id(id)))
-					.RequestAsync(c => c.GetPipelineAsync(new GetPipelineRequest(id)))
+					.Fluent(c => c.Ingest.GetPipeline(g => g.Id(id)))
+					.Request(c => c.Ingest.GetPipeline(new GetPipelineRequest(id)))
+					.FluentAsync(c => c.Ingest.GetPipelineAsync(g => g.Id(id)))
+					.RequestAsync(c => c.Ingest.GetPipelineAsync(new GetPipelineRequest(id)))
 				;
 		}
 	}

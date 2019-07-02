@@ -1,0 +1,92 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using ApiGenerator.Domain.Code.HighLevel.Requests
+@using ApiGenerator.Domain.Specification
+@using ApiGenerator.Generator
+@inherits global::ApiGenerator.CodeTemplatePage<DescriptorPartialImplementation>
+@{
+	DescriptorPartialImplementation d = Model;
+	var names = d.CsharpNames;
+	var type = names.GenericOrNonGenericDescriptorName;
+	var concreteInterface = names.GenericOrNonGenericInterfaceName;
+	var baseInterface = names.GenericOrNonGenericInterfacePreference;
+	var apiLookup = $"ApiUrlsLookups.{d.CsharpNames.Namespace}{d.CsharpNames.MethodName}";
+}
+	///<summary>descriptor for @names.MethodName <para>@d.OfficialDocumentationLink</para></summary>
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type,names.ParametersName, concreteInterface)))
+	{ 
+		internal override ApiUrls ApiUrls => @apiLookup;
+@foreach (Constructor c in d.Constructors)
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
+</text>
+}
+		// values part of the url path
+@foreach (UrlPart part in d.Parts)
+{
+<text>		@(Raw(part.HighLevelTypeName)) @(Raw(baseInterface)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.HighLevelTypeName)))("@(part.Name)");
+</text>
+}
+@foreach (FluentRouteSetter c in d.GetFluentRouteSetters())
+{
+<text>
+		@(Raw(c.XmlDoc))
+		@(Raw(c.Code))
+</text>
+}
+		// Request parameters
+@foreach (var param in d.Params)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+	if (d.Parts.Any(p=>p.Name == original))
+	{
+		continue;
+	}
+	//we prefer this parameter to be explictly implemented on the request body
+	if (param.RenderPartial && (d.HasBody))
+	{
+		continue;
+	}
+	var t = @param.TypeHighLevel;
+	var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
+	var typed = !string.IsNullOrEmpty(names.GenericsDeclaredOnDescriptor);
+	var g = typed ? names.GenericsDeclaredOnDescriptor.Replace("<", "").Replace(">", "") : "T";
+	var desc = param.DescriptionHighLevel.ToList();
+	
+	await IncludeAsync("HighLevel/Descriptors/XmlDocs.cshtml", desc);
+	if(!string.IsNullOrWhiteSpace(param.Obsolete))
+	{
+<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
+</text>
+	}
+<text>
+		public @Raw(type) @(param.ClsName)(@param.DescriptorArgumentType @param.ClsArgumentName@tSuffix) => Qs("@original", @(param.ClsArgumentName));
+</text>
+	if (param.IsFieldsParam)
+	{
+<text>
+		///<summary>@param.Description</summary>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));
+</text>
+	}
+	else if (param.IsFieldParam)
+	{
+<text>
+		///<summary>@param.Description</summary>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);
+</text>
+	}
+}
+	@if (names.DescriptorNotFoundInCodebase)
+	{<text>
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement @names.DescriptorName and @names.RequestName in a file called @(names.RequestName).cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
+	 </text>
+	}	
+	}
+

@@ -7,8 +7,7 @@ open System.Text
 open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
-open Microsoft.FSharp.Quotations
-open Microsoft.FSharp.Quotations.Patterns
+open Fake.Core;
 
 open Projects
 open Versioning
@@ -34,18 +33,10 @@ module Release =
             let semanticVersion = parse version
             sprintf "%i" (semanticVersion.Major + 1u)
             
-    let private addKeyValue (e:Expr<string>) (builder:StringBuilder) =
-        // the binding for this tuple looks like key/value should 
-        // be round the other way (but it's correct as is)...
-        let (value,key) = 
-            match e with
-            | PropertyGet (eo, pi, li) -> (pi.Name, (pi.GetValue(e) |> string))
-            | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
-            | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
-            
+    let private addKeyValue key value (builder:StringBuilder) =
         if (not (String.IsNullOrEmpty value)) then builder.AppendFormat("{0}=\"{1}\";", key, value)
         else builder
-
+        
     let private currentMajorVersion version = sprintf "%i" <| version.Full.Major
     let private nextMajorVersion version = sprintf "%i" <| version.Full.Major + 1u
 
@@ -53,9 +44,9 @@ module Release =
         let currentMajorVersion = currentMajorVersion version
         let nextMajorVersion = nextMajorVersion version
         new StringBuilder()
-        |> addKeyValue <@currentMajorVersion@>
-        |> addKeyValue <@nextMajorVersion@>
-        |> addKeyValue <@year@>
+        |> addKeyValue "currentMajorVersion" currentMajorVersion
+        |> addKeyValue "nextMajorVersion" nextMajorVersion
+        |> addKeyValue "year" year
 
     let pack file n properties version  = 
         Tooling.Nuget.Exec [ "pack"; file; 
@@ -70,10 +61,10 @@ module Release =
         
         File.Move(nugetOutFile, outputFile)
 
-    let private nugetPackMain (p:DotNetProject) nugetId nuspec properties version = 
+    let private nugetPackMain (_:DotNetProject) nugetId nuspec properties version = 
         pack nuspec nugetId properties version
         
-    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
+    let private nugetPackVersionedUnfiltered (p:DotNetProject) nugetId nuspec properties version =
         let currentMajorVersion = currentMajorVersion version
         let newId = sprintf "%s.v%s" nugetId currentMajorVersion;
         let nuspecVersioned = sprintf @"build/%s.nuspec" newId
@@ -116,6 +107,7 @@ module Release =
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
+        | Project NestUpgradeAssistant
         | Project NestJsonNetSerializer -> 
             let nestDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
             nestDeps |> Seq.iter (fun e ->
@@ -140,9 +132,9 @@ module Release =
 
             let properties =
                 props version
-                |> addKeyValue <@jsonDotNetCurrentVersion@>
-                |> addKeyValue <@jsonDotNetNextVersion@>
-            let properties = properties.ToString()
+                |> addKeyValue "jsonDotNetCurrentVersion" jsonDotNetCurrentVersion
+                |> addKeyValue "jsonDotNetNextVersion" jsonDotNetNextVersion
+                |> StringBuilder.toText
                 
             let nugetId = p.NugetId 
             let nuspec = (sprintf @"build/%s.nuspec" nugetId)
@@ -150,6 +142,13 @@ module Release =
             callback p nugetId nuspec properties version
         )
             
-    let NugetPack (ArtifactsVersion(version))  = packProjects version nugetPackMain 
+    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
+        match p with
+        | Project NestUpgradeAssistant ->
+            printfn "Skipping %s from building a versioned nightly" p.Name
+            ignore()
+        | _ -> nugetPackVersionedUnfiltered p nugetId nuspec properties version
 
-    let NugetPackVersioned (ArtifactsVersion(version))  = packProjects version nugetPackVersioned
+    let NugetPack (ArtifactsVersion(version)) = packProjects version nugetPackMain 
+
+    let NugetPackVersioned (ArtifactsVersion(version)) = packProjects version nugetPackVersioned

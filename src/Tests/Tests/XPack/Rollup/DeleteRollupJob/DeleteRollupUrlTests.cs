@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.Rollup.DeleteRollupJob
 {
@@ -12,10 +12,10 @@ namespace Tests.XPack.Rollup.DeleteRollupJob
 		{
 			const string id = "rollup-id";
 			await DELETE($"/_rollup/job/{id}")
-				.Fluent(c => c.DeleteRollupJob(id))
-				.Request(c => c.DeleteRollupJob(new DeleteRollupJobRequest(id)))
-				.FluentAsync(c => c.DeleteRollupJobAsync(id))
-				.RequestAsync(c => c.DeleteRollupJobAsync(new DeleteRollupJobRequest(id)));
+				.Fluent(c => c.Rollup.DeleteJob(id))
+				.Request(c => c.Rollup.DeleteJob(new DeleteRollupJobRequest(id)))
+				.FluentAsync(c => c.Rollup.DeleteJobAsync(id))
+				.RequestAsync(c => c.Rollup.DeleteJobAsync(new DeleteRollupJobRequest(id)));
 		}
 	}
 }

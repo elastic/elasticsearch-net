@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -38,7 +38,7 @@ namespace Nest
 
 		public SpanGapQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SpanGapQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public SpanGapQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(width, (a, v) => a.Width = v);
 	}
@@ -63,7 +63,10 @@ namespace Nest
 		public ISpanGapQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var count = 0;
 			var query = new SpanGapQuery();

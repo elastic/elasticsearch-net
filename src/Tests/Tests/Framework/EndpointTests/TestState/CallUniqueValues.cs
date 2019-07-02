@@ -2,9 +2,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using static Tests.Framework.Integration.ClientMethod;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.EndpointTests.TestState
 {
 	/// <summary>
 	/// Holds unique values for the the two DSL's and the exposed sync and async methods we expose
@@ -19,19 +18,19 @@ namespace Tests.Framework.Integration
 			_prefix = prefix;
 			FixedForAllCallsValue = UniqueValue;
 			SetupClientMethod(ClientMethod.Fluent);
-			SetupClientMethod(FluentAsync);
-			SetupClientMethod(Initializer);
-			SetupClientMethod(InitializerAsync);
+			SetupClientMethod(ClientMethod.FluentAsync);
+			SetupClientMethod(ClientMethod.Initializer);
+			SetupClientMethod(ClientMethod.InitializerAsync);
 			CurrentView = ClientMethod.Fluent;
 		}
 
-		public ClientMethod CurrentView { get; set; } = ClientMethod.Fluent;
+		public ClientMethod CurrentView { get; set; }
 		public string FixedForAllCallsValue { get; }
 
 		public string Value => this[CurrentView];
 		public string ViewName => CurrentView.GetStringValue().ToLowerInvariant();
 
-		public ClientMethod[] Views { get; } = { ClientMethod.Fluent, FluentAsync, Initializer, InitializerAsync };
+		public ClientMethod[] Views { get; } = { ClientMethod.Fluent, ClientMethod.FluentAsync, ClientMethod.Initializer, ClientMethod.InitializerAsync };
 
 		private IDictionary<ClientMethod, ConcurrentDictionary<string, object>> ExtendedValues { get; }
 			= new Dictionary<ClientMethod, ConcurrentDictionary<string, object>>();

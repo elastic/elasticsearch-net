@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 using static Tests.Core.Serialization.SerializationTestHelper;
 

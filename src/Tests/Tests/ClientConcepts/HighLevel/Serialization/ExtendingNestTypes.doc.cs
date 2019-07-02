@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 *
 			 * Now that we have our own `IProperty` implementation we can add it to our propertes mapping when creating an index
 			 */
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<Project>(m => m
 					.Properties(props => props
 						.Custom(new MyPluginProperty("fieldName", "dutch"))

@@ -1,0 +1,33 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@{
+	RestApiSpec m = Model;
+}
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Linq.Expressions;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+@{ await IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+
+// ReSharper disable UnusedTypeParameter
+namespace Nest
+{
+	public abstract partial class @Raw("PlainRequestBase<TParameters>")
+	{
+@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
+{
+<text>		@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))
+</text>
+}
+	}
+}

@@ -1,17 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.AliasManagement.Alias
 {
 	public class AliasUrlTests
 	{
 		[U] public async Task Urls() => await POST($"/_aliases")
-			.Fluent(c => c.Alias(b => b))
-			.Request(c => c.Alias(new BulkAliasRequest()))
-			.FluentAsync(c => c.AliasAsync(b => b))
-			.RequestAsync(c => c.AliasAsync(new BulkAliasRequest()));
+			.Fluent(c => c.Indices.BulkAlias(b => b))
+			.Request(c => c.Indices.BulkAlias(new BulkAliasRequest()))
+			.FluentAsync(c => c.Indices.BulkAliasAsync(b => b))
+			.RequestAsync(c => c.Indices.BulkAliasAsync(new BulkAliasRequest()));
 	}
 }

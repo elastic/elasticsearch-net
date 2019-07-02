@@ -12,7 +12,8 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
-	public partial interface ICountRequest<T> where T : class { }
+	// ReSharper disable once UnusedTypeParameter
+	public partial interface ICountRequest<TDocument> where TDocument : class { }
 
 	public partial class CountRequest
 	{
@@ -25,11 +26,10 @@ namespace Nest
 				: HttpMethod.POST;
 	}
 
-	public partial class CountRequest<T> where T : class
-	{
-	}
+	// ReSharper disable once UnusedTypeParameter
+	public partial class CountRequest<TDocument> where TDocument : class { }
 
-	public partial class CountDescriptor<T> where T : class
+	public partial class CountDescriptor<TDocument> where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
 			Self.RequestParameters.ContainsQueryString("source") || Self.RequestParameters.ContainsQueryString("q") || Self.Query == null
@@ -39,7 +39,7 @@ namespace Nest
 
 		QueryContainer ICountRequest.Query { get; set; }
 
-		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public CountDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }

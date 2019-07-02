@@ -4,7 +4,7 @@ using FluentAssertions;
 
 namespace Tests.ClientConcepts.ServerError
 {
-	public class StringErrrorTests : ServerErrorTestsBase
+	public class StringErrorTests : ServerErrorTestsBase
 	{
 		protected override string Json => @"""alias [x] is missing""";
 
@@ -17,9 +17,8 @@ namespace Tests.ClientConcepts.ServerError
 			error.RootCause.Should().BeNull(origin);
 		}
 	}
-	//
 
-	public class TempErrrorTests : ServerErrorTestsBase
+	public class TempErrorTests : ServerErrorTestsBase
 	{
 		protected override string Json =>
 			@"{""root_cause"":[{""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}],""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}";

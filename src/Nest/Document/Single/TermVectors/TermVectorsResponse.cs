@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	[DataContract]
 	public class TermVectorsResponse : ResponseBase
 	{
+		/// <summary>
+		/// TermVector API returns 200 even if <see cref="Found"/>;
+		/// </summary>
+		public override bool IsValid => base.IsValid && Found;
+		
 		[DataMember(Name ="found")]
 		public bool Found { get; internal set; }
 

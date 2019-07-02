@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -25,7 +25,6 @@ namespace Elasticsearch.Net
 		public byte[] RequestBodyInBytes { get; set; }
 		public byte[] ResponseBodyInBytes { get; set; }
 		public string ResponseMimeType { get; set; }
-		public ServerError ServerError { get; set; }
 		public bool Success { get; set; }
 
 		public bool SuccessOrKnownError =>
@@ -39,6 +38,6 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionConfiguration { get; set; }
 
 		public override string ToString() =>
-			$"{(Success ? "S" : "Uns")}uccessful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
+			$"{(Success ? "S" : "Uns")}uccessful ({HttpStatusCode}) low level call on {EnumExtensions.GetStringValue(HttpMethod)}: {Uri.PathAndQuery}";
 	}
 }

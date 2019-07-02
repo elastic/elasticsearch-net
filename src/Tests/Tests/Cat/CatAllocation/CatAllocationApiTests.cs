@@ -2,8 +2,8 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatAllocation
 {
@@ -19,10 +19,10 @@ namespace Tests.Cat.CatAllocation
 		protected override string UrlPath => "/_cat/allocation";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatAllocation(),
-			(client, f) => client.CatAllocationAsync(),
-			(client, r) => client.CatAllocation(r),
-			(client, r) => client.CatAllocationAsync(r)
+			(client, f) => client.Cat.Allocation(),
+			(client, f) => client.Cat.AllocationAsync(),
+			(client, r) => client.Cat.Allocation(r),
+			(client, r) => client.Cat.AllocationAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatAllocationRecord> response) =>

@@ -4,8 +4,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
@@ -25,10 +25,10 @@ namespace Tests.XPack.License.GetLicense
 		protected override string UrlPath => $"/_license";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetLicense(f),
-			(client, f) => client.GetLicenseAsync(f),
-			(client, r) => client.GetLicense(r),
-			(client, r) => client.GetLicenseAsync(r)
+			(client, f) => client.License.Get(f),
+			(client, f) => client.License.GetAsync(f),
+			(client, r) => client.License.Get(r),
+			(client, r) => client.License.GetAsync(r)
 		);
 
 		protected override void ExpectResponse(GetLicenseResponse response)

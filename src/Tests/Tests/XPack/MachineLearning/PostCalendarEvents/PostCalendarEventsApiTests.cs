@@ -6,9 +6,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.PostCalendarEvents
 {
@@ -21,10 +19,8 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
+			foreach (var callUniqueValue in values) 
 				PutCalendar(client, callUniqueValue.Value);
-			}
 		}
 
 		protected override bool ExpectIsValid => true;
@@ -41,7 +37,6 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 		private IEnumerable<object> GetScheduledJsonEvents()
 		{
 			for (var i = 0; i < 10; i++)
-			{
 				yield return new
 				{
 					start_time = new DateTimeOffset(StartDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero).ToUnixTimeMilliseconds(),
@@ -49,13 +44,11 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 					description = $"Event {i}",
 					calendar_id = CallIsolatedValue
 				};
-			}
 		}
 
 		private IEnumerable<ScheduledEvent> GetScheduledEvents()
 		{
 			for (var i = 0; i < 10; i++)
-			{
 				yield return new ScheduledEvent
 				{
 					StartTime = new DateTimeOffset(StartDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
@@ -63,7 +56,6 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 					Description = $"Event {i}",
 					CalendarId = CallIsolatedValue
 				};
-			}
 		}
 
 		protected override Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> Fluent => f => f.Events(GetScheduledEvents());
@@ -79,10 +71,10 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PostCalendarEvents(CallIsolatedValue, f),
-			(client, f) => client.PostCalendarEventsAsync(CallIsolatedValue, f),
-			(client, r) => client.PostCalendarEvents(r),
-			(client, r) => client.PostCalendarEventsAsync(r)
+			(client, f) => client.MachineLearning.PostCalendarEvents(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PostCalendarEventsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PostCalendarEvents(r),
+			(client, r) => client.MachineLearning.PostCalendarEventsAsync(r)
 		);
 
 		protected override PostCalendarEventsDescriptor NewDescriptor() =>

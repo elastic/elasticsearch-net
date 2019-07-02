@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("cluster.reroute.json")]
 	[ReadAs(typeof(ClusterRerouteRequest))]
 	public partial interface IClusterRerouteRequest
 	{

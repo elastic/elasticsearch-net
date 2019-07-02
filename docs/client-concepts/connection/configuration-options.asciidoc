@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/Connection/ConfigurationOptions.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/Connection/ConfigurationOptions.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -17,14 +17,18 @@ please modify the original csharp file found at the link and submit the PR with 
 
 Connecting to Elasticsearch with <<elasticsearch-net-getting-started,Elasticsearch.Net>> and <<nest-getting-started,NEST>> is easy, but
 it's entirely possible that you'd like to change the default connection behaviour. There are a number of configuration options available
-on `ConnectionSettings` (and `ConnectionConfiguration` for Elasticsearch.Net) that can be used to control
+on `ConnectionConfiguration` for the low level client and `ConnectionSettings` for the high level client that can be used to control
 how the clients interact with Elasticsearch.
 
 ==== Options on ConnectionConfiguration
 
 The following is a list of available connection configuration options on `ConnectionConfiguration`; since
 `ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
-Elasticsearch.Net and NEST:
+the low level and high level client:
+
+`BasicAuthentication`::
+
+Basic Authentication credentials to send with all requests to Elasticsearch
 
 `BasicAuthentication`::
 
@@ -44,7 +48,7 @@ Use the following certificates to authenticate all HTTP requests. You can also s
 
 `ConnectionLimit`::
 
-Limits the number of concurrent connections that can be opened to an endpoint. Defaults to `80` .
+Limits the number of concurrent connections that can be opened to an endpoint. Defaults to `80` for all IConnection             implementations that are not based on `System.Net.Http.CurlHandler` . For those based on System.Net.Http.CurlHandler, defaults             to `Environment.ProcessorCount` .
 +
 For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default `IConnection` implementation.
 +
@@ -142,6 +146,10 @@ Forces all requests to have ?pretty=true querystring parameter appended, causing
 
 If your connection has to go through proxy, use this method to specify the proxy url
 
+`Proxy`::
+
+If your connection has to go through proxy, use this method to specify the proxy url
+
 `RequestTimeout`::
 
 Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to `60` seconds.
@@ -151,6 +159,10 @@ NOTE: You can set this to a high value here, and specify a timeout on Elasticsea
 `ServerCertificateValidationCallback`::
 
 Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true. After this callback returns true that endpoint is validated for the lifetime of the ServiceEndpoint for that host.
+
+`SkipDeserializationForStatusCodes`::
+
+Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns a HTML for 401, 500
 
 `SniffLifeSpan`::
 
@@ -172,25 +184,7 @@ Reasons for such exceptions could be search parser errors, index missing excepti
 
 :xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
 
-==== Options on ConnectionSettings
-
-The following is a list of available connection configuration options on `ConnectionSettings`:
-
-`DefaultDisableIdInference`::
-
-`DefaultFieldNameInferrer`::
-
-`DefaultIndex`::
-
-`DefaultMappingFor`::
-
-Specify how the mapping is inferred for a given CLR type. The mapping can infer the index, type, id and relation name for a given CLR type, as well as control serialization behaviour for CLR properties.
-
-`DefaultMappingFor`::
-
-Specify how the mapping is inferred for a given CLR type. The mapping can infer the index, type and relation name for a given CLR type.
-
-:xml-docs: Nest:ConnectionSettingsBase`1
+==== ConnectionConfiguration with ElasticLowLevelClient
 
 Here's an example to demonstrate setting several configuration options using the low level client
 
@@ -206,14 +200,46 @@ var connectionConfiguration = new ConnectionConfiguration()
 var lowLevelClient = new ElasticLowLevelClient(connectionConfiguration);
 ----
 
-And with the high level client
+==== Options on ConnectionSettings
+
+The following is a list of available connection configuration options on `ConnectionSettings`:
+
+`DefaultDisableIdInference`::
+
+Disables automatic Id inference for given CLR types.
++
+NEST by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding a type will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use `DefaultDisableIdInference`
+
+`DefaultFieldNameInferrer`::
+
+Specifies how field names are inferred from CLR property names.
++
+By default, NEST camel cases property names. For example, CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
+
+`DefaultIndex`::
+
+The default index to use for a request when no index has been explicitly specified and no default indices are specified for the given CLR type specified for the request.
+
+`DefaultMappingFor`::
+
+Specify how the mapping is inferred for a given CLR type. The mapping can infer the index, id and relation name for a given CLR type, as well as control serialization behaviour for CLR properties.
+
+`DefaultMappingFor`::
+
+Specify how the mapping is inferred for a given CLR type. The mapping can infer the index and relation name for a given CLR type.
+
+:xml-docs: Nest:ConnectionSettingsBase`1
+
+==== ConnectionSettings with ElasticClient
+
+Here's an example to demonstrate setting several configuration options using the high level client
 
 [source,csharp]
 ----
 var connectionSettings = new ConnectionSettings()
     .DefaultMappingFor<Project>(i => i
         .IndexName("my-projects")
-        .TypeName("project")
+        .IdProperty(p => p.Name)
     )
     .EnableDebugMode()
     .PrettyJson()

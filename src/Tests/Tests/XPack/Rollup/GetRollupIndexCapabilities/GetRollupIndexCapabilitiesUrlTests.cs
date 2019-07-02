@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.Rollup.GetRollupIndexCapabilities
 {
@@ -12,10 +12,10 @@ namespace Tests.XPack.Rollup.GetRollupIndexCapabilities
 		{
 			const string index = "rollup-index";
 			await GET($"{index}/_rollup/data")
-				.Fluent(c => c.GetRollupIndexCapabilities(index))
-				.Request(c => c.GetRollupIndexCapabilities(new GetRollupIndexCapabilitiesRequest(index)))
-				.FluentAsync(c => c.GetRollupIndexCapabilitiesAsync(index))
-				.RequestAsync(c => c.GetRollupIndexCapabilitiesAsync(new GetRollupIndexCapabilitiesRequest(index)));
+				.Fluent(c => c.Rollup.GetIndexCapabilities(index))
+				.Request(c => c.Rollup.GetIndexCapabilities(new GetRollupIndexCapabilitiesRequest(index)))
+				.FluentAsync(c => c.Rollup.GetIndexCapabilitiesAsync(index))
+				.RequestAsync(c => c.Rollup.GetIndexCapabilitiesAsync(new GetRollupIndexCapabilitiesRequest(index)));
 		}
 	}
 }

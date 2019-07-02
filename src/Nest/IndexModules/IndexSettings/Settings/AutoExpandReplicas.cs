@@ -1,5 +1,5 @@
 using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -85,7 +85,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas" /> with the specified lower and upper bounds of replicas
+		/// Creates an <see cref="AutoExpandReplicas" /> with the specified lower and upper bounds of replicas.
 		/// </summary>
 		/// <example>0-5</example>
 		/// <example>0-all</example>

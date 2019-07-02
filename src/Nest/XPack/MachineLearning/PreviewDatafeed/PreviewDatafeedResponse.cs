@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	//TODO T can be anything?
-	public interface IPreviewDatafeedResponse<out T> : IResponse
+
+	public interface IPreviewDatafeedResponse<out TDocument> : IResponse where TDocument : class
 	{
-		IReadOnlyCollection<T> Data { get; }
+		IReadOnlyCollection<TDocument> Data { get; }
 	}
 
-	public class PreviewDatafeedResponse<T> : ResponseBase, IPreviewDatafeedResponse<T>
+	public class PreviewDatafeedResponse<TDocument> : ResponseBase, IPreviewDatafeedResponse<TDocument> where TDocument : class
 	{
-		public IReadOnlyCollection<T> Data { get; internal set; } = EmptyReadOnly<T>.Collection;
+		public IReadOnlyCollection<TDocument> Data { get; internal set; } = EmptyReadOnly<TDocument>.Collection;
 	}
 }

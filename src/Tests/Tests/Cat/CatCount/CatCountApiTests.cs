@@ -3,8 +3,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatCount
 {
@@ -19,10 +19,10 @@ namespace Tests.Cat.CatCount
 		protected override string UrlPath => "/_cat/count";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatCount(),
-			(client, f) => client.CatCountAsync(),
-			(client, r) => client.CatCount(r),
-			(client, r) => client.CatCountAsync(r)
+			(client, f) => client.Cat.Count(),
+			(client, f) => client.Cat.CountAsync(),
+			(client, r) => client.Cat.Count(r),
+			(client, r) => client.Cat.CountAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatCountRecord> response) =>
@@ -40,10 +40,10 @@ namespace Tests.Cat.CatCount
 		protected override string UrlPath => "/_cat/count/project";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatCount(c => c.Index<Project>()),
-			(client, f) => client.CatCountAsync(c => c.Index<Project>()),
-			(client, r) => client.CatCount(new CatCountRequest(typeof(Project))),
-			(client, r) => client.CatCountAsync(new CatCountRequest(typeof(Project)))
+			(client, f) => client.Cat.Count(c => c.Index<Project>()),
+			(client, f) => client.Cat.CountAsync(c => c.Index<Project>()),
+			(client, r) => client.Cat.Count(new CatCountRequest(typeof(Project))),
+			(client, r) => client.Cat.CountAsync(new CatCountRequest(typeof(Project)))
 		);
 
 		protected override void ExpectResponse(CatResponse<CatCountRecord> response) =>

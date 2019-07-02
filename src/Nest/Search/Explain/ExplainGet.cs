@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	[InterfaceDataContract]
+	[ReadAs(typeof(InlineGet<>))]
 	public interface IInlineGet<out TDocument> where TDocument : class
 	{
 		[DataMember(Name = "fields")]

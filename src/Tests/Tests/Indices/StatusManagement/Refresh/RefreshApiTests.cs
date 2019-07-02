@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.StatusManagement.Refresh
 {
@@ -23,10 +23,10 @@ namespace Tests.Indices.StatusManagement.Refresh
 		protected override string UrlPath => $"/{CallIsolatedValue}/_refresh?allow_no_indices=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Refresh(CallIsolatedValue, f),
-			(client, f) => client.RefreshAsync(CallIsolatedValue, f),
-			(client, r) => client.Refresh(r),
-			(client, r) => client.RefreshAsync(r)
+			(client, f) => client.Indices.Refresh(CallIsolatedValue, f),
+			(client, f) => client.Indices.RefreshAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Refresh(r),
+			(client, r) => client.Indices.RefreshAsync(r)
 		);
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -6,7 +6,11 @@ namespace Nest
 	{
 		public IndexName Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() != JsonToken.String) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.String)
+			{
+				reader.ReadNextBlock();
+				return null;
+			}
 
 			IndexName indexName = reader.ReadString();
 			return indexName;

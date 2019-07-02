@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// Stops the following task associated with a follower index and removes index metadata and settings associated with

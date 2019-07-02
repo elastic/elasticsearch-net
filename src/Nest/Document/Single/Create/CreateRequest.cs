@@ -1,11 +1,12 @@
 ﻿using System.IO;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	[MapsApi("create.json")]
 	[JsonFormatter(typeof(CreateRequestFormatter<>))]
-	public partial interface ICreateRequest<TDocument> : IProxyRequest where TDocument : class
+	public partial interface ICreateRequest<TDocument> : IProxyRequest, IDocumentRequest where TDocument : class
 	{
 		TDocument Document { get; set; }
 	}

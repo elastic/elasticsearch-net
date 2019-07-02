@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/ParentChildRelationships.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/ParentChildRelationships.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -68,9 +68,9 @@ under the same type.
 ----
 var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 var connectionSettings = new ConnectionSettings(connectionPool, new InMemoryConnection()) <1>
-    .DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
-    .DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
-    .DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+    .DefaultMappingFor<MyDocument>(m => m.IndexName("index"))
+    .DefaultMappingFor<MyChild>(m => m.IndexName("index"))
+    .DefaultMappingFor<MyParent>(m => m.IndexName("index").RelationName("parent"));
 
 var client = new ElasticClient(connectionSettings);
 ----
@@ -80,7 +80,7 @@ With the `ConnectionSettings` set up, we can proceed to map `MyParent` and `MyCh
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("index", c => c
+var createIndexResponse = client.Indices.Create("index", c => c
     .Index<MyDocument>()
     .Map<MyDocument>(m => m
         .RoutingField(r => r.Required()) <1>
@@ -98,8 +98,11 @@ var createIndexResponse = client.CreateIndex("index", c => c
 );
 ----
 <1> recommended to make the routing field mandatory so you can not accidentally forget
+
 <2> Map all of the `MyParent` properties
+
 <3> Map all of the `MyChild` properties
+
 <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
 
 We call `AutoMap()` for both types to discover properties of both .NET types. `AutoMap()` won't automatically setup the
@@ -108,29 +111,32 @@ join field mapping though because NEST can not infer all the `Relations` that ar
 In this case we setup `MyChild` to be child of `MyParent`. `.Join()` has many overloads so be sure to check them out if you
 need to map not one but multiple children.
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        _routing = new { required = true },
-        properties = new
-        {
-            parentProperty = new {type = "text"},
-            childProperty = new {type = "text"},
-            id = new {type = "integer"},
-            myJoinField = new
-            {
-                type = "join",
-                relations = new
-                {
-                    parent = "mychild"
-                }
-            }
+  "mappings": {
+    "_routing": {
+      "required": true
+    },
+    "properties": {
+      "parentProperty": {
+        "type": "text"
+      },
+      "childProperty": {
+        "type": "text"
+      },
+      "id": {
+        "type": "integer"
+      },
+      "myJoinField": {
+        "type": "join",
+        "relations": {
+          "parent": "mychild"
         }
+      }
     }
-};
+  }
+}
 ----
 
 Note how `MyParent`'s relation name is `parent` because of the mapping on connection settings. This also comes in handy
@@ -168,17 +174,19 @@ parentDocument = new MyParent
     MyJoinField = "myparent" <2>
 };
 var indexParent = client.IndexDocument(parentDocument);
-
-//json
-var expected = new
-{
-    id = 1,
-    parentProperty = "a parent prop",
-    myJoinField = "myparent"
-};
 ----
 <1> this lets the join data type know this is a root document of type `myparent`
+
 <2> this lets the join data type know this is a root document of type `myparent`
+
+[source,javascript]
+----
+{
+  "id": 1,
+  "parentProperty": "a parent prop",
+  "myJoinField": "myparent"
+}
+----
 
 Linking the child document to its parent follows a similar pattern.
 Here we create a link by inferring the id from our parent instance `parentDocument`
@@ -201,17 +209,17 @@ indexChild = client.IndexDocument(new MyChild
     Id = 2,
     MyJoinField = JoinField.Link<MyChild>(1)
 });
+----
 
-//json
-var childJson = new
+[source,javascript]
+----
 {
-    id = 2,
-    myJoinField = new
-    {
-        name = "mychild",
-        parent = "1"
-    }
-};
+  "id": 2,
+  "myJoinField": {
+    "name": "mychild",
+    "parent": "1"
+  }
+}
 ----
 
 The mapping already links `myparent` as the parent type so we only need supply the parent id.
@@ -259,8 +267,8 @@ to `Routing` which can infer the correct routing key based on the JoinField prop
 
 [source,csharp]
 ----
-var indexResponse = client.Index(parent, i => i.Routing(Routing.From(parent)));
-indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+var ndexResponse = client.Index(parent, i => i.Routing(Routing.From(parent)));
+ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
 The same goes for when we index a child, we can pass the instance directly to `Routing` and NEST will use the parent id
@@ -269,23 +277,23 @@ create an instance of `Routing`
 
 [source,csharp]
 ----
-indexResponse = client.Index(child, i => i.Routing(Route(child)));
-indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+ndexResponse = client.Index(child, i => i.Routing(Route(child)));
+ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
 You can always override the default inferred routing though 
 
 [source,csharp]
 ----
-indexResponse = client.Index(child, i => i.Routing("explicit"));
-indexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
+ndexResponse = client.Index(child, i => i.Routing("explicit"));
+ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
 
-indexResponse = client.Index(child, i => i.Routing(null));
-indexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
+ndexResponse = client.Index(child, i => i.Routing(null));
+ndexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
 
 var indexRequest = new IndexRequest<MyChild>(child) { Routing = Route(child) } ;
-indexResponse = client.Index(indexRequest);
-indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+ndexResponse = client.Index(indexRequest);
+ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
 Its important to note that the routing is resolved at request time, not instantation time
@@ -294,8 +302,8 @@ here we update the `child`'s `JoinField` after already creating the index reques
 [source,csharp]
 ----
 child.MyJoinField = JoinField.Link<MyChild>(parentId: "something-else");
-indexResponse = client.Index(indexRequest);
-indexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
+ndexResponse = client.Index(indexRequest);
+ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
 ----
 
 [NOTE]

@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Specialized.Script
 {
@@ -13,7 +13,7 @@ namespace Tests.QueryDsl.Specialized.Script
 	*/
 	public class ScriptQueryUsageTests : QueryDslUsageTestsBase
 	{
-		private static readonly string _templateString = "doc['numberOfCommits'].value > param1";
+		private static readonly string _templateString = "doc['numberOfCommits'].value > params.param1";
 
 		public ScriptQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -62,7 +62,7 @@ namespace Tests.QueryDsl.Specialized.Script
 				boost = 1.1,
 				script = new
 				{
-					source = "doc['numberOfCommits'].value > param1",
+					source = "doc['numberOfCommits'].value > params.param1",
 					@params = new { param1 = 50 }
 				}
 			}

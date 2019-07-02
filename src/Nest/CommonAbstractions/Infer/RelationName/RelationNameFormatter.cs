@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +12,7 @@ namespace Nest
 				return relationName;
 			}
 
+			reader.ReadNextBlock();
 			return null;
 		}
 

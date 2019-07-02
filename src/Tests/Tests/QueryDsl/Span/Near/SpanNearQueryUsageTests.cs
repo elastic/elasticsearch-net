@@ -3,11 +3,9 @@ using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-#pragma warning disable 618 // Uses CollectPayloads
-
-namespace Tests.QueryDsl.Joining.SpanNear
+namespace Tests.QueryDsl.Span.Near
 {
 	public class SpanNearUsageTests : QueryDslUsageTestsBase
 	{
@@ -32,7 +30,7 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
 			},
 			Slop = 12,
-			InOrder = false,
+			InOrder = true,
 		};
 
 		protected override object QueryJson => new
@@ -47,7 +45,7 @@ namespace Tests.QueryDsl.Joining.SpanNear
 					new { span_gap = new { field = 2 } }
 				},
 				slop = 12,
-				in_order = false,
+				in_order = true,
 				_name = "named_query",
 				boost = 1.1
 			}
@@ -64,7 +62,7 @@ namespace Tests.QueryDsl.Joining.SpanNear
 					c => c.SpanGap(st => st.Field("field").Width(2))
 				)
 				.Slop(12)
-				.InOrder(false)
+				.InOrder()
 			);
 	}
 }

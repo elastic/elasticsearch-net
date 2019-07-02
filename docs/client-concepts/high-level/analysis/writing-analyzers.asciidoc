@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Analysis/WritingAnalyzers.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Analysis/WritingAnalyzers.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -57,7 +57,7 @@ which maps to the `Name` POCO property on the `Project` type, uses the `whitespa
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("my-index", c => c
+var createIndexResponse = _client.Indices.Create("my-index", c => c
     .Map<Project>(mm => mm
         .Properties(p => p
             .Text(t => t
@@ -79,7 +79,7 @@ Configuring a built-in analyzer requires creating an analyzer based on the built
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("my-index", c => c
+var createIndexResponse = _client.Indices.Create("my-index", c => c
     .Settings(s => s
         .Analysis(a => a
             .Analyzers(aa => aa
@@ -100,38 +100,33 @@ var createIndexResponse = _client.CreateIndex("my-index", c => c
 );
 ----
 <1> Pre-defined list of English stopwords within Elasticsearch
+
 <2> Use the `standard_english` analyzer configured
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    settings = new
-    {
-        analysis = new
-        {
-            analyzer = new
-            {
-                standard_english = new
-                {
-                    type = "standard",
-                    stopwords = new [] { "_english_" }
-                }
-            }
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "standard_english": {
+          "type": "standard",
+          "stopwords": [
+            "_english_"
+          ]
         }
-    },
-    mappings = new
-    {
-        properties = new
-        {
-            name = new
-            {
-                type = "text",
-                analyzer = "standard_english"
-            }
-        }
+      }
     }
-};
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "analyzer": "standard_english"
+      }
+    }
+  }
+}
 ----
 
 ==== Creating a custom analyzer
@@ -165,7 +160,7 @@ We can solve our issue with a custom analyzer
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("questions", c => c
+var createIndexResponse = _client.Indices.Create("questions", c => c
     .Settings(s => s
         .Analysis(a => a
             .CharFilters(cf => cf
@@ -228,7 +223,7 @@ use at query time
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("questions", c => c
+var createIndexResponse = _client.Indices.Create("questions", c => c
     .Settings(s => s
         .Analysis(a => a
             .CharFilters(cf => cf
@@ -267,6 +262,7 @@ var createIndexResponse = _client.CreateIndex("questions", c => c
 );
 ----
 <1> Use an analyzer at index time that strips HTML tags
+
 <2> Use an analyzer at search time that does not strip HTML tags
 
 With this in place, the text of a question body will be analyzed with the `index_question` analyzer

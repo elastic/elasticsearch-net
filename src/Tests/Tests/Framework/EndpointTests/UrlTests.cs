@@ -6,8 +6,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
+using Tests.Framework.Extensions;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class UrlTestsBase
 	{
@@ -34,13 +35,14 @@ namespace Tests.Framework
 				: new ElasticClient(settings(new AlwaysInMemoryConnectionSettings()));
 		}
 
-		protected HttpMethod ExpectedHttpMethod { get; set; }
-		protected string ExpectedUrl { get; set; }
+		private HttpMethod ExpectedHttpMethod { get; }
+		private string ExpectedUrl { get; }
 		private IElasticClient Client { get; }
 
 		public static UrlTester ExpectUrl(HttpMethod method, string url, Func<ConnectionSettings, ConnectionSettings> settings = null) =>
 			new UrlTester(method, url, settings);
 
+		// ReSharper disable InconsistentNaming
 		public static UrlTester POST(string url) => new UrlTester(HttpMethod.POST, url);
 
 		public static UrlTester PUT(string url) => new UrlTester(HttpMethod.PUT, url);
@@ -50,6 +52,7 @@ namespace Tests.Framework
 		public static UrlTester HEAD(string url) => new UrlTester(HttpMethod.HEAD, url);
 
 		public static UrlTester DELETE(string url) => new UrlTester(HttpMethod.DELETE, url);
+		// ReSharper restore InconsistentNaming
 
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 
@@ -65,21 +68,21 @@ namespace Tests.Framework
 
 		public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
 		{
-			var callDetails = call(TestClient.DefaultInMemoryClient.LowLevel);
+			var callDetails = call(Client.LowLevel);
 			return Assert("lowlevel", callDetails);
 		}
 
 		private UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
 			where TResponse : IResponse
 		{
-			var callDetails = call(TestClient.DefaultInMemoryClient);
+			var callDetails = call(Client);
 			return Assert(typeOfCall, callDetails.ApiCall);
 		}
 
 		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)
 			where TResponse : IResponse
 		{
-			var callDetails = (await call(TestClient.DefaultInMemoryClient)).ApiCall;
+			var callDetails = (await call(Client)).ApiCall;
 			return Assert(typeOfCall, callDetails);
 		}
 

@@ -4,9 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetInfluencers
 {
@@ -35,10 +33,10 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetInfluencers(CallIsolatedValue, f),
-			(client, f) => client.GetInfluencersAsync(CallIsolatedValue, f),
-			(client, r) => client.GetInfluencers(r),
-			(client, r) => client.GetInfluencersAsync(r)
+			(client, f) => client.MachineLearning.GetInfluencers(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetInfluencersAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetInfluencers(r),
+			(client, r) => client.MachineLearning.GetInfluencersAsync(r)
 		);
 
 		protected override void ExpectResponse(GetInfluencersResponse response)

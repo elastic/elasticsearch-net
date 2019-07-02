@@ -5,21 +5,24 @@ using System.Runtime.Serialization;
 namespace Nest
 {
 	[MapsApi("explain.json")]
-	public partial interface IExplainRequest<TDocument> where TDocument : class
+	public partial interface IExplainRequest
 	{
 		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
+	public partial interface IExplainRequest<TDocument> where TDocument : class { }
+
 	public partial class ExplainRequest
 	{
+		public QueryContainer Query { get; set; }
 		public Fields StoredFields { get; set; }
 	}
 
+	// ReSharper disable once UnusedTypeParameter
 	public partial class ExplainRequest<TDocument> where TDocument : class
 	{
-		public QueryContainer Query { get; set; }
-
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
 				? HttpMethod.GET
@@ -35,7 +38,7 @@ namespace Nest
 				: HttpMethod.POST;
 
 		Fields IExplainRequest.StoredFields { get; set; }
-		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
+		QueryContainer IExplainRequest.Query { get; set; }
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
 			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));

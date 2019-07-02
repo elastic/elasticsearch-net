@@ -93,9 +93,9 @@ namespace Elasticsearch.Net
 		/// </remarks>
 		private byte[] _largeBuffer;
 
-		private int length;
+		private int _length;
 
-		private int position;
+		private int _position;
 
 		/// <summary>
 		/// Allocate a new RecyclableMemoryStream object.
@@ -205,7 +205,7 @@ namespace Elasticsearch.Net
 			get
 			{
 				CheckDisposed();
-				return length;
+				return _length;
 			}
 		}
 
@@ -218,7 +218,7 @@ namespace Elasticsearch.Net
 			get
 			{
 				CheckDisposed();
-				return position;
+				return _position;
 			}
 			set
 			{
@@ -227,7 +227,7 @@ namespace Elasticsearch.Net
 
 				if (value > MaxStreamLength) throw new ArgumentOutOfRangeException("value", "value cannot be more than " + MaxStreamLength);
 
-				position = (int)value;
+				_position = (int)value;
 			}
 		}
 
@@ -343,7 +343,7 @@ namespace Elasticsearch.Net
 
 			// InternalRead will check for existence of largeBuffer, so make sure we
 			// don't set it until after we've copied the data.
-			InternalRead(newBuffer, 0, length, 0);
+			InternalRead(newBuffer, 0, _length, 0);
 			_largeBuffer = newBuffer;
 
 			if (_blocks.Count > 0 && _memoryManager.AggressiveBufferReturn)
@@ -368,7 +368,7 @@ namespace Elasticsearch.Net
 			CheckDisposed();
 			var newBuffer = new byte[Length];
 
-			InternalRead(newBuffer, 0, length, 0);
+			InternalRead(newBuffer, 0, _length, 0);
 			return newBuffer;
 		}
 #pragma warning restore CS0809
@@ -384,7 +384,7 @@ namespace Elasticsearch.Net
 		/// <exception cref="ArgumentOutOfRangeException">offset or count is less than 0</exception>
 		/// <exception cref="ArgumentException">offset subtracted from the buffer length is less than count</exception>
 		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
-		public override int Read(byte[] buffer, int offset, int count) => SafeRead(buffer, offset, count, ref position);
+		public override int Read(byte[] buffer, int offset, int count) => SafeRead(buffer, offset, count, ref _position);
 
 		/// <summary>
 		/// Reads from the specified position into the provided buffer
@@ -438,7 +438,7 @@ namespace Elasticsearch.Net
 			if (count + offset > buffer.Length) throw new ArgumentException("count must be greater than buffer.Length - offset");
 
 			var blockSize = _memoryManager.BlockSize;
-			var end = (long)position + count;
+			var end = (long)_position + count;
 			// Check for overflow
 			if (end > MaxStreamLength) throw new IOException("Maximum capacity exceeded");
 
@@ -452,7 +452,7 @@ namespace Elasticsearch.Net
 			{
 				var bytesRemaining = count;
 				var bytesWritten = 0;
-				var blockAndOffset = GetBlockAndRelativeOffset(position);
+				var blockAndOffset = GetBlockAndRelativeOffset(_position);
 
 				while (bytesRemaining > 0)
 				{
@@ -471,9 +471,9 @@ namespace Elasticsearch.Net
 				}
 			}
 			else
-				Buffer.BlockCopy(buffer, offset, _largeBuffer, position, count);
-			position = (int)end;
-			length = Math.Max(position, length);
+				Buffer.BlockCopy(buffer, offset, _largeBuffer, _position, count);
+			_position = (int)end;
+			_length = Math.Max(_position, _length);
 		}
 
 		/// <summary>
@@ -489,7 +489,7 @@ namespace Elasticsearch.Net
 		public override void WriteByte(byte value)
 		{
 			CheckDisposed();
-			var end = position + 1;
+			var end = _position + 1;
 
 			// Check for overflow
 			if (end > MaxStreamLength) throw new IOException("Maximum capacity exceeded");
@@ -498,16 +498,16 @@ namespace Elasticsearch.Net
 			if (_largeBuffer == null)
 			{
 				var blockSize = _memoryManager.BlockSize;
-				var block = position / blockSize;
-				var offset = position - block * blockSize;
+				var block = _position / blockSize;
+				var offset = _position - block * blockSize;
 				var currentBlock = _blocks[block];
 				currentBlock[offset] = value;
 			}
 			else
-				_largeBuffer[position] = value;
+				_largeBuffer[_position] = value;
 
-			position = end;
-			length = Math.Max(position, length);
+			_position = end;
+			_length = Math.Max(_position, _length);
 		}
 
 		/// <summary>
@@ -515,7 +515,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		/// <returns>The byte at the current position, or -1 if the position is at the end of the stream.</returns>
 		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
-		public override int ReadByte() => SafeReadByte(ref position);
+		public override int ReadByte() => SafeReadByte(ref _position);
 
 		/// <summary>
 		/// Reads a single byte from the specified position in the stream.
@@ -526,7 +526,7 @@ namespace Elasticsearch.Net
 		public int SafeReadByte(ref int streamPosition)
 		{
 			CheckDisposed();
-			if (streamPosition == length) return -1;
+			if (streamPosition == _length) return -1;
 
 			byte value;
 			if (_largeBuffer == null)
@@ -554,8 +554,8 @@ namespace Elasticsearch.Net
 
 			EnsureCapacity((int)value);
 
-			length = (int)value;
-			if (position > value) position = (int)value;
+			_length = (int)value;
+			if (_position > value) _position = (int)value;
 		}
 
 		/// <summary>
@@ -580,18 +580,18 @@ namespace Elasticsearch.Net
 					newPosition = (int)offset;
 					break;
 				case SeekOrigin.Current:
-					newPosition = (int)offset + position;
+					newPosition = (int)offset + _position;
 					break;
 				case SeekOrigin.End:
-					newPosition = (int)offset + length;
+					newPosition = (int)offset + _length;
 					break;
 				default:
 					throw new ArgumentException("Invalid seek origin", nameof(loc));
 			}
 			if (newPosition < 0) throw new IOException("Seek before beginning");
 
-			position = newPosition;
-			return position;
+			_position = newPosition;
+			return _position;
 		}
 
 		/// <summary>
@@ -607,7 +607,7 @@ namespace Elasticsearch.Net
 			if (_largeBuffer == null)
 			{
 				var currentBlock = 0;
-				var bytesRemaining = length;
+				var bytesRemaining = _length;
 
 				while (bytesRemaining > 0)
 				{
@@ -620,7 +620,7 @@ namespace Elasticsearch.Net
 				}
 			}
 			else
-				stream.Write(_largeBuffer, 0, length);
+				stream.Write(_largeBuffer, 0, _length);
 		}
 
 		private void CheckDisposed()
@@ -630,7 +630,7 @@ namespace Elasticsearch.Net
 
 		private int InternalRead(byte[] buffer, int offset, int count, int fromPosition)
 		{
-			if (length - fromPosition <= 0) return 0;
+			if (_length - fromPosition <= 0) return 0;
 
 			int amountToCopy;
 
@@ -638,7 +638,7 @@ namespace Elasticsearch.Net
 			{
 				var blockAndOffset = GetBlockAndRelativeOffset(fromPosition);
 				var bytesWritten = 0;
-				var bytesRemaining = Math.Min(count, length - fromPosition);
+				var bytesRemaining = Math.Min(count, _length - fromPosition);
 
 				while (bytesRemaining > 0)
 				{
@@ -656,7 +656,7 @@ namespace Elasticsearch.Net
 				}
 				return bytesWritten;
 			}
-			amountToCopy = Math.Min(count, length - fromPosition);
+			amountToCopy = Math.Min(count, _length - fromPosition);
 			Buffer.BlockCopy(_largeBuffer, fromPosition, buffer, offset, amountToCopy);
 			return amountToCopy;
 		}
@@ -678,7 +678,7 @@ namespace Elasticsearch.Net
 				if (newCapacity > _largeBuffer.Length)
 				{
 					var newBuffer = _memoryManager.GetLargeBuffer(newCapacity, _tag);
-					InternalRead(newBuffer, 0, length, 0);
+					InternalRead(newBuffer, 0, _length, 0);
 					ReleaseLargeBuffer();
 					_largeBuffer = newBuffer;
 				}

@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.VerifyRepository
 {
@@ -27,10 +27,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.VerifyRepository
 
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.VerifyRepository(_name, f),
-			(client, f) => client.VerifyRepositoryAsync(_name, f),
-			(client, r) => client.VerifyRepository(r),
-			(client, r) => client.VerifyRepositoryAsync(r)
+			(client, f) => client.Snapshot.VerifyRepository(_name, f),
+			(client, f) => client.Snapshot.VerifyRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.VerifyRepository(r),
+			(client, r) => client.Snapshot.VerifyRepositoryAsync(r)
 		);
 
 		protected override VerifyRepositoryDescriptor NewDescriptor() => new VerifyRepositoryDescriptor(_name);

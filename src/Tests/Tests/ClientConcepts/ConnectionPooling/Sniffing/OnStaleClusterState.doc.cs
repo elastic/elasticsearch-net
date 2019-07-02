@@ -5,6 +5,8 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
@@ -23,15 +25,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()
 		{
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.MasterEligible(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
-				.Sniff(s => s.SucceedAlways(Framework.Cluster
+				.Sniff(s => s.SucceedAlways(VirtualClusterWith
 					.Nodes(100)
 					.MasterEligible(9202, 9203, 9204)
 					.ClientCalls(r => r.SucceedAlways())
-					.Sniff(ss => ss.SucceedAlways(Framework.Cluster
+					.Sniff(ss => ss.SucceedAlways(VirtualClusterWith
 						.Nodes(10)
 						.MasterEligible(9202, 9203, 9204)
 						.ClientCalls(r => r.SucceedAlways())

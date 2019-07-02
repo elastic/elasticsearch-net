@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -34,6 +34,6 @@ namespace Nest
 
 		public ReverseNestedAggregationDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public ReverseNestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(path, (a, v) => a.Path = v);
+		public ReverseNestedAggregationDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> path) => Assign(path, (a, v) => a.Path = v);
 	}
 }

@@ -1,11 +1,9 @@
 ﻿using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	//TODO: Remove this interface
-
-
 	/// <summary>
 	/// An item within a bulk response
 	/// </summary>
@@ -16,7 +14,7 @@ namespace Nest
 		/// The error associated with the bulk operation
 		/// </summary>
 		[DataMember(Name = "error")]
-		public BulkError Error { get; internal set; }
+		public Error Error { get; internal set; }
 
 		/// <summary>
 		/// The id of the document for the bulk operation

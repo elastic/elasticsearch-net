@@ -1,4 +1,6 @@
-﻿[[elasticsearch-net-reference]]
+﻿:title-separator: |
+
+[[elasticsearch-net-reference]]
 = Elasticsearch.Net and NEST: the .NET clients
 
 include::intro.asciidoc[]

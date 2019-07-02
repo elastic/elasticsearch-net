@@ -1,8 +1,8 @@
 ﻿using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatTasks
 {
@@ -17,10 +17,10 @@ namespace Tests.Cat.CatTasks
 		protected override string UrlPath => "/_cat/tasks";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatTasks(),
-			(client, f) => client.CatTasksAsync(),
-			(client, r) => client.CatTasks(r),
-			(client, r) => client.CatTasksAsync(r)
+			(client, f) => client.Cat.Tasks(),
+			(client, f) => client.Cat.TasksAsync(),
+			(client, r) => client.Cat.Tasks(r),
+			(client, r) => client.Cat.TasksAsync(r)
 		);
 	}
 }

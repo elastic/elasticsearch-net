@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -28,15 +28,22 @@ namespace Nest
 
 	public class SuggestBucket : ISuggestBucket
 	{
+		[DataMember(Name = "completion")]
 		public ICompletionSuggester Completion { get; set; }
 
+		[DataMember(Name = "phrase")]
 		public IPhraseSuggester Phrase { get; set; }
 
+		[DataMember(Name = "prefix")]
 		public string Prefix { get; set; }
 
+		[DataMember(Name = "regex")]
 		public string Regex { get; set; }
 
+		[DataMember(Name = "term")]
 		public ITermSuggester Term { get; set; }
+
+		[DataMember(Name = "text")]
 		public string Text { get; set; }
 	}
 }

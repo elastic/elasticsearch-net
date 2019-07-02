@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
+using Tests.Framework.Extensions;
 
 namespace Tests.Framework.EndpointTests.TestState
 {
@@ -36,7 +36,7 @@ namespace Tests.Framework.EndpointTests.TestState
 		private static string RandomInitializer { get; } = $"o-{RandomString()}";
 		private static string RandomInitializerAsync { get; } = $"oa-{RandomString()}";
 
-		public readonly Dictionary<ClientMethod, string> _values;
+		private readonly Dictionary<ClientMethod, string> _values;
 		public IReadOnlyDictionary<ClientMethod, string> MethodIsolatedValues => _values;
 
 		protected override string GetKeyForItem(LazyResponses item) => item.Name;
@@ -65,7 +65,7 @@ namespace Tests.Framework.EndpointTests.TestState
 			var client = Client;
 			return k => _usage.CallOnce(
 				() => new LazyResponses(k,
-					async () => await CallAllClientMethodsOverloads(k, initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
+					async () => await CallAllClientMethodsOverloads(initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
 				, k);
 		}
 
@@ -98,7 +98,6 @@ namespace Tests.Framework.EndpointTests.TestState
 		private string Sanitize(string value) => string.IsNullOrEmpty(Prefix) ? value : $"{Prefix}-{value}";
 
 		private async Task<Dictionary<ClientMethod, IResponse>> CallAllClientMethodsOverloads<TDescriptor, TInitializer, TInterface, TResponse>(
-			string name,
 			Func<string, TInitializer> initializerBody,
 			Func<string, TDescriptor, TInterface> fluentBody,
 			Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,

@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -67,10 +69,21 @@ namespace Nest
 
 	internal class ActionsFormatter : IJsonFormatter<Actions>
 	{
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		{
+			{ "throttle_period", 0 },
+			{ "throttle_period_in_millis", 0 },
+			{ "email", 1 },
+			{ "webhook", 2 },
+			{ "index", 3 },
+			{ "logging", 4 },
+			{ "slack", 5 },
+			{ "pagerduty", 6 }
+		};
+
 		public Actions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var dictionary = new Dictionary<string, IAction>();
-
 			var count = 0;
 			while (reader.ReadIsInObject(ref count))
 			{
@@ -79,52 +92,46 @@ namespace Nest
 
 				Time throttlePeriod = null;
 				IAction action = null;
-
 				while (reader.ReadIsInObject(ref actionCount))
 				{
-					var propertyName = reader.ReadPropertyName();
-					switch (propertyName)
+					var propertyName = reader.ReadPropertyNameSegmentRaw();
+
+					if (Fields.TryGetValue(propertyName, out var value))
 					{
-						case "throttle_period":
-						case "throttle_period_in_millis":
-							throttlePeriod = formatterResolver.GetFormatter<Time>()
-								.Deserialize(ref reader, formatterResolver);
-							break;
-						default:
-							// TODO: Introduce AutomataDictionary
-							var actionType = propertyName.ToEnum<ActionType>();
-							switch (actionType)
-							{
-								case ActionType.Email:
-									action = formatterResolver.GetFormatter<EmailAction>()
-										.Deserialize(ref reader, formatterResolver);
-									break;
-								case ActionType.Webhook:
-									action = formatterResolver.GetFormatter<WebhookAction>()
-										.Deserialize(ref reader, formatterResolver);
-									break;
-								case ActionType.Index:
-									action = formatterResolver.GetFormatter<IndexAction>()
-										.Deserialize(ref reader, formatterResolver);
-									break;
-								case ActionType.Logging:
-									action = formatterResolver.GetFormatter<LoggingAction>()
-										.Deserialize(ref reader, formatterResolver);
-									break;
-								case ActionType.Slack:
-									action = formatterResolver.GetFormatter<SlackAction>()
-										.Deserialize(ref reader, formatterResolver);
-									break;
-								case ActionType.PagerDuty:
-									action = formatterResolver.GetFormatter<PagerDutyAction>()
-										.Deserialize(ref reader, formatterResolver);
-									break;
-								case null:
-									reader.ReadNextBlock();
-									break;
-							}
-							break;
+						switch (value)
+						{
+							case 0:
+								throttlePeriod = formatterResolver.GetFormatter<Time>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 1:
+								action = formatterResolver.GetFormatter<EmailAction>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 2:
+								action = formatterResolver.GetFormatter<WebhookAction>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 3:
+								action = formatterResolver.GetFormatter<IndexAction>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 4:
+								action = formatterResolver.GetFormatter<LoggingAction>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 5:
+								action = formatterResolver.GetFormatter<SlackAction>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 6:
+								action = formatterResolver.GetFormatter<PagerDutyAction>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+						}
 					}
+					else
+						reader.ReadNextBlock();
 				}
 
 				if (action != null)

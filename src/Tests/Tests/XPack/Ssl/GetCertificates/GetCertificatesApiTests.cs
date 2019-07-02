@@ -4,8 +4,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Ssl.GetCertificates
 {
@@ -24,10 +24,10 @@ namespace Tests.XPack.Ssl.GetCertificates
 		protected override string UrlPath => $"/_ssl/certificates";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCertificates(f),
-			(client, f) => client.GetCertificatesAsync(f),
-			(client, r) => client.GetCertificates(r),
-			(client, r) => client.GetCertificatesAsync(r)
+			(client, f) => client.Security.GetCertificates(f),
+			(client, f) => client.Security.GetCertificatesAsync(f),
+			(client, r) => client.Security.GetCertificates(r),
+			(client, r) => client.Security.GetCertificatesAsync(r)
 		);
 
 		protected override void ExpectResponse(GetCertificatesResponse response)

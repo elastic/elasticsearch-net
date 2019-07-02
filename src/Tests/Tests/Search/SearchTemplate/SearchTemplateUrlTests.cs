@@ -2,8 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using static Nest.Infer;
+using Tests.Framework.EndpointTests;
 
 namespace Tests.Search.SearchTemplate
 {

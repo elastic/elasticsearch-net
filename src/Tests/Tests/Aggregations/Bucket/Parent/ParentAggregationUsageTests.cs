@@ -9,8 +9,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Parent
@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Bucket.Parent
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-parent-aggregation.html[Parent Aggregation].
 	 */
 	[SkipVersion("<6.6.0", "Parent aggregation only available in Elasticsearch 6.6.0+")]
-	public class ParentAggregationUsageTests : ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<CommitActivity>, ISearchRequest, SearchDescriptor<CommitActivity>, SearchRequest<CommitActivity>>
+	public class ParentAggregationUsageTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<CommitActivity>, ISearchRequest, SearchDescriptor<CommitActivity>, SearchRequest<CommitActivity>>
 	{
 		public ParentAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -92,8 +92,8 @@ namespace Tests.Aggregations.Bucket.Parent
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<CommitActivity>(f),
-			(client, f) => client.SearchAsync<CommitActivity>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<CommitActivity>(r),
 			(client, r) => client.SearchAsync<CommitActivity>(r)
 		);
@@ -116,7 +116,7 @@ namespace Tests.Aggregations.Bucket.Parent
 					&& new MinAggregation("min_commits", Field<Project>(f => f.NumberOfCommits))
 			};
 
-		protected override void ExpectResponse(SearchResponse<CommitActivity> response)
+		protected override void ExpectResponse(ISearchResponse<CommitActivity> response)
 		{
 			response.ShouldBeValid();
 

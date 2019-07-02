@@ -3,6 +3,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -11,6 +12,8 @@ namespace Nest
 	public class MultiSearchResponse : ResponseBase
 	{
 		public MultiSearchResponse() => Responses = new Dictionary<string, IResponse>();
+
+		public long Took { get; set; }
 
 		public IEnumerable<IResponse> AllResponses => _allResponses<IResponse>();
 

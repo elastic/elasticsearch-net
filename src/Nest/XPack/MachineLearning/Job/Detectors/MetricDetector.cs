@@ -145,19 +145,19 @@ namespace Nest
 
 		public MetricDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public MetricDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
+		public MetricDetectorDescriptor<T> FieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
 		public MetricDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public MetricDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
+		public MetricDetectorDescriptor<T> ByFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
 		public MetricDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(overFieldName, (a, v) => a.OverFieldName = v);
 
-		public MetricDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
+		public MetricDetectorDescriptor<T> OverFieldName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
 
 		public MetricDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public MetricDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+		public MetricDetectorDescriptor<T> PartitionFieldName<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 }

@@ -4,8 +4,8 @@ using Nest;
 using Tests.Analysis;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
-using static Tests.Framework.Promisify;
+using Tests.Framework.EndpointTests.TestState;
+using static Tests.Framework.Extensions.Promisify;
 
 namespace Tests.Mapping.Types.Core.Keyword
 {
@@ -56,8 +56,8 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.NullValue("null")
 				.Normalizer("myCustom")
 				.Norms(false)
-				.Similarity(SimilarityOption.BM25)
-				.Store(true)
+				.Similarity("BM25")
+				.Store()
 				.Fields(fs => fs
 					.Keyword(k => k
 						.Name("foo")
@@ -81,7 +81,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					NullValue = "null",
 					Normalizer = "myCustom",
 					Norms = false,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Fields = new Properties
 					{

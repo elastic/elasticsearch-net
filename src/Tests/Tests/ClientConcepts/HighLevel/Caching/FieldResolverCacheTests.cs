@@ -9,6 +9,7 @@ using Nest;
 using Tests.Domain;
 using Xunit.Abstractions;
 using static Nest.Infer;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
@@ -477,7 +478,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			private FieldResolver _resolver;
 			private Stopwatch _stopwatch;
 
-			public CachePerformance(ITestOutputHelper output) => this._output = output;
+			public CachePerformance(ITestOutputHelper output) => _output = output;
 
 			[U]
 			public void CachedVsNonCached()

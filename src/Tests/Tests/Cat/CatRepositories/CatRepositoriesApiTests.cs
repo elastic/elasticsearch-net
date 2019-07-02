@@ -6,8 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatRepositories
 {
@@ -31,7 +31,7 @@ namespace Tests.Cat.CatRepositories
 
 			var repositoryLocation = Path.Combine(Cluster.FileSystem.RepositoryPath, RandomString());
 
-			var create = Client.CreateRepository(RepositoryName, cr => cr
+			var create = Client.Snapshot.CreateRepository(RepositoryName, cr => cr
 				.FileSystem(fs => fs
 					.Settings(repositoryLocation)
 				)
@@ -42,10 +42,10 @@ namespace Tests.Cat.CatRepositories
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatRepositories(f),
-			(client, f) => client.CatRepositoriesAsync(f),
-			(client, r) => client.CatRepositories(r),
-			(client, r) => client.CatRepositoriesAsync(r)
+			(client, f) => client.Cat.Repositories(f),
+			(client, f) => client.Cat.RepositoriesAsync(f),
+			(client, r) => client.Cat.Repositories(r),
+			(client, r) => client.Cat.RepositoriesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatRepositoriesRecord> response) => response.Records.Should()

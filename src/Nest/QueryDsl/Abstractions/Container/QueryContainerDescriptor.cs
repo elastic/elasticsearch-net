@@ -253,7 +253,7 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed).
 		/// The term query maps to Lucene TermQuery.
 		/// </summary>
-		public QueryContainer Term(Expression<Func<T, object>> field, object value, double? boost = null, string name = null) =>
+		public QueryContainer Term<TValue>(Expression<Func<T, TValue>> field, object value, double? boost = null, string name = null) =>
 			Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 		/// <summary>
@@ -287,7 +287,7 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
+		public QueryContainer Wildcard<TValue>(Expression<Func<T, TValue>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
 			string name = null
 		) =>
 			Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
@@ -316,7 +316,7 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
 		/// The prefix query maps to Lucene PrefixQuery.
 		/// </summary>
-		public QueryContainer Prefix(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
+		public QueryContainer Prefix<TValue>(Expression<Func<T, TValue>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
 			string name = null
 		) =>
 			Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
@@ -342,6 +342,16 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Ids = query);
+
+		/// <summary>
+		/// Allows fine-grained control over the order and proximity of matching terms.
+		/// Matching rules are constructed from a small set of definitions,
+		/// and the rules are then applied to terms from a particular field.
+		/// The definitions produce sequences of minimal intervals that span terms in a body of text.
+		/// These intervals can be further combined and filtered by parent sources.
+		/// </summary>
+		public QueryContainer Intervals(Func<IntervalsQueryDescriptor<T>, IIntervalsQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.Intervals = query);
 
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery.

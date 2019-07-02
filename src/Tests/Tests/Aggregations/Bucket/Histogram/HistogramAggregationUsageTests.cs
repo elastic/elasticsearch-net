@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Histogram
@@ -50,7 +50,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 				Offset = 1.1
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commits = response.Aggregations.Histogram("commits");

@@ -4,8 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Security.User
 {
@@ -24,10 +24,10 @@ namespace Tests.XPack.Security.User
 		protected override LazyResponses Create() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, PutUserResponse>(
 			CreateInitializer,
 			CreateFluent,
-			(s, c, f) => c.PutUser(s, f),
-			(s, c, f) => c.PutUserAsync(s, f),
-			(s, c, r) => c.PutUser(r),
-			(s, c, r) => c.PutUserAsync(r)
+			(s, c, f) => c.Security.PutUser(s, f),
+			(s, c, f) => c.Security.PutUserAsync(s, f),
+			(s, c, r) => c.Security.PutUser(r),
+			(s, c, r) => c.Security.PutUserAsync(r)
 		);
 
 		protected PutUserRequest CreateInitializer(string username) => new PutUserRequest(username)
@@ -42,10 +42,10 @@ namespace Tests.XPack.Security.User
 		protected override LazyResponses Read() => Calls<GetUserDescriptor, GetUserRequest, IGetUserRequest, GetUserResponse>(
 			ReadInitializer,
 			ReadFluent,
-			(s, c, f) => c.GetUser(f),
-			(s, c, f) => c.GetUserAsync(f),
-			(s, c, r) => c.GetUser(r),
-			(s, c, r) => c.GetUserAsync(r)
+			(s, c, f) => c.Security.GetUser(f),
+			(s, c, f) => c.Security.GetUserAsync(f),
+			(s, c, r) => c.Security.GetUser(r),
+			(s, c, r) => c.Security.GetUserAsync(r)
 		);
 
 		protected GetUserRequest ReadInitializer(string username) => new GetUserRequest(username);
@@ -55,10 +55,10 @@ namespace Tests.XPack.Security.User
 		protected override LazyResponses Update() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, PutUserResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			(s, c, f) => c.PutUser(s, f),
-			(s, c, f) => c.PutUserAsync(s, f),
-			(s, c, r) => c.PutUser(r),
-			(s, c, r) => c.PutUserAsync(r)
+			(s, c, f) => c.Security.PutUser(s, f),
+			(s, c, f) => c.Security.PutUserAsync(s, f),
+			(s, c, r) => c.Security.PutUser(r),
+			(s, c, r) => c.Security.PutUserAsync(r)
 		);
 
 		protected PutUserRequest UpdateInitializer(string username) => new PutUserRequest(username)
@@ -74,10 +74,10 @@ namespace Tests.XPack.Security.User
 		protected override LazyResponses Delete() => Calls<DeleteUserDescriptor, DeleteUserRequest, IDeleteUserRequest, DeleteUserResponse>(
 			DeleteInitializer,
 			DeleteFluent,
-			(s, c, f) => c.DeleteUser(s, f),
-			(s, c, f) => c.DeleteUserAsync(s, f),
-			(s, c, r) => c.DeleteUser(r),
-			(s, c, r) => c.DeleteUserAsync(r)
+			(s, c, f) => c.Security.DeleteUser(s, f),
+			(s, c, f) => c.Security.DeleteUserAsync(s, f),
+			(s, c, r) => c.Security.DeleteUser(r),
+			(s, c, r) => c.Security.DeleteUserAsync(r)
 		);
 
 		protected DeleteUserRequest DeleteInitializer(string username) => new DeleteUserRequest(username);

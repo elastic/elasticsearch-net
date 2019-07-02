@@ -1,5 +1,5 @@
 using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -19,7 +19,7 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) => writer.WriteInt64(value.Ticks);
 	}
 
-	//TODO: what d
+	//TODO: hook up in NestFormatterResolver to return TimeSpanToStringFormatter when StringTimeSpanAttribute is *not* specified on T
 	internal class TimeSpanToStringFormatterResolver : IJsonFormatterResolver
 	{
 		public IJsonFormatter<T> GetFormatter<T>() => null;

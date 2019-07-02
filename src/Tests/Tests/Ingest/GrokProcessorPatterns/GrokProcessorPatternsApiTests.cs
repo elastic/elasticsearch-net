@@ -2,10 +2,10 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Ingest.Processor
+namespace Tests.Ingest.GrokProcessorPatterns
 {
 	public class GrokProcessorPatternsApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, GrokProcessorPatternsResponse, IGrokProcessorPatternsRequest, GrokProcessorPatternsDescriptor,
@@ -24,10 +24,10 @@ namespace Tests.Ingest.Processor
 		protected override string UrlPath => $"/_ingest/processor/grok";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GrokProcessorPatterns(f),
-			(client, f) => client.GrokProcessorPatternsAsync(f),
-			(client, r) => client.GrokProcessorPatterns(r),
-			(client, r) => client.GrokProcessorPatternsAsync(r)
+			(client, f) => client.Ingest.GrokProcessorPatterns(f),
+			(client, f) => client.Ingest.GrokProcessorPatternsAsync(f),
+			(client, r) => client.Ingest.GrokProcessorPatterns(r),
+			(client, r) => client.Ingest.GrokProcessorPatternsAsync(r)
 		);
 	}
 }

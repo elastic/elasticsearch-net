@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -37,6 +39,8 @@ namespace Nest
 
 	internal class FuzzinessFormatter : IJsonFormatter<Fuzziness>
 	{
+		private static readonly byte[] AutoBytes = JsonWriter.GetEncodedPropertyNameWithoutQuotation("AUTO");
+
 		public Fuzziness Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
@@ -44,32 +48,45 @@ namespace Nest
 			switch (token) {
 				case JsonToken.String:
 				{
-					// TODO: read bytes from reader and avoid string allocation
-					var rawAuto = reader.ReadString();
-					var colonIndex = rawAuto.IndexOf(':');
-					var commaIndex = rawAuto.IndexOf(',');
-					if (colonIndex == -1 || commaIndex == -1)
+					var rawAuto = reader.ReadStringSegmentUnsafe();
+					if (rawAuto.EqualsBytes(AutoBytes))
 						return Fuzziness.Auto;
 
-					var low = int.Parse(rawAuto.Substring(colonIndex + 1, commaIndex - colonIndex - 1));
-					var high = int.Parse(rawAuto.Substring(commaIndex + 1));
+					var colonIndex = -1;
+					var commaIndex = -1;
+					for (var i = AutoBytes.Length; i < rawAuto.Count; i++)
+					{
+						// ReSharper disable once PossibleNullReferenceException
+						if (rawAuto.Array[rawAuto.Offset + i] == (byte)':')
+							colonIndex = rawAuto.Offset + i;
+						else if (rawAuto.Array[rawAuto.Offset + i] == (byte)',')
+						{
+							commaIndex = rawAuto.Offset + i;
+							break;
+						}
+					}
+
+					var low = NumberConverter.ReadInt32(rawAuto.Array, colonIndex + 1, out _);
+					var high = NumberConverter.ReadInt32(rawAuto.Array, commaIndex + 1, out _);
 					return Fuzziness.AutoLength(low, high);
 				}
-				case JsonToken.Number: {
+				case JsonToken.Number:
+				{
 					var value = reader.ReadNumberSegment();
 
 					if (value.IsDouble())
 					{
-						var ratio = NumberConverter.ReadDouble(value.Array, value.Offset, out var count);
+						var ratio = NumberConverter.ReadDouble(value.Array, value.Offset, out _);
 						return Fuzziness.Ratio(ratio);
 					}
 					else
 					{
-						var editDistance = NumberConverter.ReadInt32(value.Array, value.Offset, out var count);
+						var editDistance = NumberConverter.ReadInt32(value.Array, value.Offset, out _);
 						return Fuzziness.EditDistance(editDistance);
 					}
 				}
 				default:
+					reader.ReadNextBlock();
 					return null;
 			}
 		}

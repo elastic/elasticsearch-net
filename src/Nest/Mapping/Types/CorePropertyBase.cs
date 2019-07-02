@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -26,10 +26,10 @@ namespace Nest
 
 		/// <summary>
 		/// Which relevancy scoring algorithm or similarity should be used.
-		/// Defaults to <see cref="SimilarityOption.BM25" />
+		/// Defaults to BM25
 		/// </summary>
 		[DataMember(Name = "similarity")]
-		Union<SimilarityOption, string> Similarity { get; set; }
+		string Similarity { get; set; }
 
 		/// <summary>
 		/// Whether the field value should be stored and retrievable separately from the _source field
@@ -55,7 +55,7 @@ namespace Nest
 		public IProperties Fields { get; set; }
 
 		/// <inheritdoc />
-		public Union<SimilarityOption, string> Similarity { get; set; }
+		public string Similarity { get; set; }
 
 		/// <inheritdoc />
 		public bool? Store { get; set; }

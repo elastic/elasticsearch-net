@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -40,6 +40,6 @@ namespace Nest
 
 		public TDescriptor Path(Field field) => Assign(field, (a, v) => a.Path = v);
 
-		public TDescriptor Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
+		public TDescriptor Path<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 	}
 }

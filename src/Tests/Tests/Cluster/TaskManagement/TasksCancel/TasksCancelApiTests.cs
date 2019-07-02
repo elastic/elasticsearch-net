@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
@@ -34,7 +35,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			foreach (var index in values.Values)
 			{
 				client.IndexMany(Enumerable.Range(0, 10000).Select(i => new Test { Id = i + 1, Flag = "bar" }), index);
-				client.Refresh(index);
+				client.Indices.Refresh(index);
 			}
 			foreach (var view in values.Views)
 			{
@@ -48,17 +49,17 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 				);
 
 				var taskId = reindex.Task;
-				var taskInfo = client.GetTask(taskId);
+				var taskInfo = client.Tasks.GetTask(taskId);
 				taskInfo.ShouldBeValid();
 				values.ExtendedValue("taskId", taskId);
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CancelTasks(f),
-			(client, f) => client.CancelTasksAsync(f),
-			(client, r) => client.CancelTasks(r),
-			(client, r) => client.CancelTasksAsync(r)
+			(client, f) => client.Tasks.Cancel(f),
+			(client, f) => client.Tasks.CancelAsync(f),
+			(client, r) => client.Tasks.Cancel(r),
+			(client, r) => client.Tasks.CancelAsync(r)
 		);
 
 		protected override void ExpectResponse(CancelTasksResponse response)
@@ -69,6 +70,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			tasks.Should().NotBeEmpty().And.ContainKey(TaskId);
 		}
 
+		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
 		private class Test
 		{
 			public string Flag { get; set; }

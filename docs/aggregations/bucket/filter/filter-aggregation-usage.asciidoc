@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Filter/FilterAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Filter/FilterAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -45,9 +45,32 @@ new FilterAggregation("bethels_projects")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "bethels_projects": {
+    "filter": {
+      "term": {
+        "leadDeveloper.firstName": {
+          "value": "pierce"
+        }
+      }
+    },
+    "aggs": {
+      "project_tags": {
+        "terms": {
+          "field": "curatedTags.name.keyword"
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
-The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
 so we can fetch our aggregation results easily in the correct type.
 <<handling-aggregate-response, Be sure to read more about these helper methods>>
 
@@ -93,6 +116,16 @@ new FilterAggregation("empty_filter")
     {
         Filter = new List<QueryContainer>()
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "empty_filter": {
+    "filter": {}
+  }
 }
 ----
 

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
 	public class RequestData
 	{
 		public const string MimeType = "application/json";
+		public const string MimeTypeTextPlain = "text/plain";
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
@@ -19,7 +21,8 @@ namespace Elasticsearch.Net
 		)
 			: this(method, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
-			CustomConverter = local?.DeserializationOverride;
+			_path = path;
+			CustomResponseBuilder = local?.CustomResponseBuilder;
 			PathAndQuery = CreatePathWithQueryStrings(path, ConnectionSettings, local);
 		}
 
@@ -73,18 +76,21 @@ namespace Elasticsearch.Net
 			ProxyPassword = global.ProxyPassword;
 			DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
 			BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
-			AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
+			AllowedStatusCodes = local?.AllowedStatusCodes ?? EmptyReadOnly<int>.Collection;
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
+			UserAgent = global.UserAgent;
 		}
-
+		
+		private readonly string _path;
+		
 		public string Accept { get; }
-		public IEnumerable<int> AllowedStatusCodes { get; }
+		public IReadOnlyCollection<int> AllowedStatusCodes { get; }
 
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 
 		public X509CertificateCollection ClientCertificates { get; }
 		public IConnectionConfigurationValues ConnectionSettings { get; }
-		public Func<IApiCallDetails, Stream, object> CustomConverter { get; }
+		public CustomResponseBuilderBase CustomResponseBuilder { get; }
 		public bool DisableAutomaticProxyDetection { get; }
 
 		public NameValueCollection Headers { get; }
@@ -105,16 +111,20 @@ namespace Elasticsearch.Net
 		public bool Pipelined { get; }
 		public PostData PostData { get; }
 		public string ProxyAddress { get; }
-		public string ProxyPassword { get; }
+		public SecureString ProxyPassword { get; }
 		public string ProxyUsername { get; }
 		public string RequestMimeType { get; }
 		public TimeSpan RequestTimeout { get; }
 		public string RunAs { get; }
 		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 		public bool ThrowExceptions { get; }
+		public string UserAgent { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 
+		public override string ToString() => $"{Method.GetStringValue()} {_path}";
+
+		// TODO This feels like its in the wrong place
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
 			path = path ?? string.Empty;
@@ -140,51 +150,6 @@ namespace Elasticsearch.Net
 			var queryString = nv.ToQueryString();
 			path += queryString;
 			return path;
-		}
-	}
-
-	internal static class NameValueCollectionExtensions
-	{
-		internal static string ToQueryString(this NameValueCollection nv)
-		{
-			if (nv == null || nv.AllKeys.Length == 0) return string.Empty;
-
-			// initialize with capacity for number of key/values with length 5 each
-			var builder = new StringBuilder("?", nv.AllKeys.Length * 2 * 5);
-			for (int i = 0; i < nv.AllKeys.Length; i++)
-			{
-				if (i != 0)
-					builder.Append("&");
-
-				var key = nv.AllKeys[i];
-				builder.Append(Uri.EscapeDataString(key));
-				builder.Append("=");
-				builder.Append(Uri.EscapeDataString(nv[key]));
-			}
-
-			return builder.ToString();
-		}
-
-		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates,
-			ElasticsearchUrlFormatter provider
-		)
-		{
-			if (queryString == null || queryString.Count < 0) return;
-			if (queryStringUpdates == null || queryStringUpdates.Count < 0) return;
-
-			foreach (var kv in queryStringUpdates.Where(kv => !kv.Key.IsNullOrEmpty()))
-			{
-				if (kv.Value == null)
-				{
-					queryString.Remove(kv.Key);
-					continue;
-				}
-				var resolved = provider.CreateString(kv.Value);
-				if (!resolved.IsNullOrEmpty())
-					queryString[kv.Key] = resolved;
-				else
-					queryString.Remove(kv.Key);
-			}
 		}
 	}
 }

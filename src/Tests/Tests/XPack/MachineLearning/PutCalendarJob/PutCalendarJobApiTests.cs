@@ -5,9 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.PutCalendarJob
 {
@@ -42,10 +40,10 @@ namespace Tests.XPack.MachineLearning.PutCalendarJob
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}_calendar/jobs/{CallIsolatedValue}_job";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutCalendarJob(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
-			(client, f) => client.PutCalendarJobAsync(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
-			(client, r) => client.PutCalendarJob(r),
-			(client, r) => client.PutCalendarJobAsync(r)
+			(client, f) => client.MachineLearning.PutCalendarJob(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
+			(client, f) => client.MachineLearning.PutCalendarJobAsync(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
+			(client, r) => client.MachineLearning.PutCalendarJob(r),
+			(client, r) => client.MachineLearning.PutCalendarJobAsync(r)
 		);
 
 		protected override PutCalendarJobDescriptor NewDescriptor() => new PutCalendarJobDescriptor(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job");

@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
@@ -31,17 +31,17 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 		{
 			foreach (var index in values.Values)
 			{
-				client.CreateIndex(index);
-				client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(index));
-				client.CloseIndex(index);
+				client.Indices.Create(index);
+				client.Cluster.Health(index, h => h.WaitForStatus(WaitForStatus.Yellow));
+				client.Indices.Close(index);
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.OpenIndex(CallIsolatedValue, f),
-			(client, f) => client.OpenIndexAsync(CallIsolatedValue, f),
-			(client, r) => client.OpenIndex(r),
-			(client, r) => client.OpenIndexAsync(r)
+			(client, f) => client.Indices.Open(CallIsolatedValue, f),
+			(client, f) => client.Indices.OpenAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Open(r),
+			(client, r) => client.Indices.OpenAsync(r)
 		);
 
 		protected override OpenIndexDescriptor NewDescriptor() => new OpenIndexDescriptor(CallIsolatedValue);

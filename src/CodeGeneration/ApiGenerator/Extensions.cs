@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using CsQuery.ExtensionMethods.Internal;
 
@@ -36,7 +37,10 @@ namespace ApiGenerator
 			var pascal = s.ToPascalCase(true);
 			if (pascal.Length <= 1) return pascal;
 
-			return pascal[0].ToLower() + s.Substring(1);
+			return pascal[0].ToLower() + pascal.Substring(1);
 		}
+
+		public static string SplitPascalCase(this string s) =>
+			Regex.Replace(s, "([A-Z]+[a-z]*)", " $1").Trim();
 	}
 }

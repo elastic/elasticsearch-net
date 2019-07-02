@@ -5,9 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.PostJobData
 {
@@ -83,10 +81,10 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PostJobData(CallIsolatedValue, f),
-			(client, f) => client.PostJobDataAsync(CallIsolatedValue, f),
-			(client, r) => client.PostJobData(r),
-			(client, r) => client.PostJobDataAsync(r)
+			(client, f) => client.MachineLearning.PostJobData(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PostJobDataAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PostJobData(r),
+			(client, r) => client.MachineLearning.PostJobDataAsync(r)
 		);
 
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
@@ -187,10 +185,10 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PostJobData(CallIsolatedValue, f),
-			(client, f) => client.PostJobDataAsync(CallIsolatedValue, f),
-			(client, r) => client.PostJobData(r),
-			(client, r) => client.PostJobDataAsync(r)
+			(client, f) => client.MachineLearning.PostJobData(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PostJobDataAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PostJobData(r),
+			(client, r) => client.MachineLearning.PostJobDataAsync(r)
 		);
 
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);

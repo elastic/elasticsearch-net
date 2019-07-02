@@ -17,9 +17,6 @@ namespace Nest
 		[DataMember(Name ="hit_count")]
 		public long HitCount { get; set; }
 
-		[DataMember(Name ="memory_size")]
-		public string MemorySize { get; set; }
-
 		[DataMember(Name ="memory_size_in_bytes")]
 		public long MemorySizeInBytes { get; set; }
 

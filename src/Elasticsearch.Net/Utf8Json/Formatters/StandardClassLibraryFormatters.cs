@@ -30,8 +30,9 @@ using System.Globalization;
 using System.Numerics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	// MEMO:should write/read base64 directly like corefxlab/System.Binary.Base64
 	// https://github.com/dotnet/corefxlab/tree/master/src/System.Binary.Base64/System/Binary
@@ -685,6 +686,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	#if VALUETASK
 	internal sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
 	{
 		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver)
@@ -699,6 +701,7 @@ namespace Elasticsearch.Net
 			return new ValueTask<T>(v);
 		}
 	}
+	#endif
 
 #endif
 

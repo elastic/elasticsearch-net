@@ -6,15 +6,15 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatFielddata
 {
 	public class CatFielddataApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
-		private SearchResponse<Project> _initialSearchResponse;
+		private ISearchResponse<Project> _initialSearchResponse;
 
 		public CatFielddataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,10 +24,10 @@ namespace Tests.Cat.CatFielddata
 		protected override string UrlPath => "/_cat/fielddata";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatFielddata(),
-			(client, f) => client.CatFielddataAsync(),
-			(client, r) => client.CatFielddata(r),
-			(client, r) => client.CatFielddataAsync(r)
+			(client, f) => client.Cat.Fielddata(),
+			(client, f) => client.Cat.FielddataAsync(),
+			(client, r) => client.Cat.Fielddata(r),
+			(client, r) => client.Cat.FielddataAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

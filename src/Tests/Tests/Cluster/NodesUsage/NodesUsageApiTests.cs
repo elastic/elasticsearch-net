@@ -5,8 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.NodesUsage
 {
@@ -21,10 +21,10 @@ namespace Tests.Cluster.NodesUsage
 		protected override string UrlPath => "/_nodes/usage";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesUsage(),
-			(client, f) => client.NodesUsageAsync(),
-			(client, r) => client.NodesUsage(r),
-			(client, r) => client.NodesUsageAsync(r)
+			(client, f) => client.Nodes.Usage(),
+			(client, f) => client.Nodes.UsageAsync(),
+			(client, r) => client.Nodes.Usage(r),
+			(client, r) => client.Nodes.UsageAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesUsageResponse response)

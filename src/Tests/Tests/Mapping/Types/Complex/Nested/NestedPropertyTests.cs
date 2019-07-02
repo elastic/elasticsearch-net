@@ -2,9 +2,9 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.Nested
+namespace Tests.Mapping.Types.Complex.Nested
 {
 	public class NestedPropertyTests : PropertyTestsBase
 	{

@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.CrossClusterReplication.Follow.ResumeFollowIndex
 {
@@ -60,10 +60,10 @@ namespace Tests.XPack.CrossClusterReplication.Follow.ResumeFollowIndex
 		protected override string UrlPath => $"/x/_ccr/resume_follow";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ResumeFollowIndex("x", f),
-			(client, f) => client.ResumeFollowIndexAsync("x", f),
-			(client, r) => client.ResumeFollowIndex(r),
-			(client, r) => client.ResumeFollowIndexAsync(r)
+			(client, f) => client.CrossClusterReplication.ResumeFollowIndex("x", f),
+			(client, f) => client.CrossClusterReplication.ResumeFollowIndexAsync("x", f),
+			(client, r) => client.CrossClusterReplication.ResumeFollowIndex(r),
+			(client, r) => client.CrossClusterReplication.ResumeFollowIndexAsync(r)
 		);
 	}
 }

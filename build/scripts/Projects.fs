@@ -6,21 +6,26 @@ module Projects =
 
     type DotNetFramework = 
         | NetStandard2_0
+        | Net461
         | NetCoreApp2_1
-        static member All = [NetStandard2_0] 
+        static member All = [NetStandard2_0; Net461]
+        static member AllTests = [NetCoreApp2_1; Net461] 
         member this.Identifier = 
             match this with
             | NetStandard2_0 -> { MSBuild = "netstandard2.0"; Nuget = "netstandard2.0"; DefineConstants = ""; }
             | NetCoreApp2_1 -> { MSBuild = "netcoreapp2.1"; Nuget = "netcoreapp2.1"; DefineConstants = ""; }
+            | Net461 -> { MSBuild = "net461"; Nuget = "net461"; DefineConstants = ""; }
 
     type Project =
         | Nest
         | ElasticsearchNet
         | NestJsonNetSerializer
+        | NestUpgradeAssistant
         
     type PrivateProject =
         | Tests
         | DocGenerator
+        | ApiGenerator
         
     type DependencyProject = 
         | JsonNet 
@@ -35,6 +40,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
+                Project Project.NestUpgradeAssistant; 
                 PrivateProject PrivateProject.Tests
             ]
 
@@ -43,6 +49,7 @@ module Projects =
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
                 Project Project.NestJsonNetSerializer;
+                Project Project.NestUpgradeAssistant;
             ] 
         static member Tests = seq [PrivateProject PrivateProject.Tests]
         
@@ -63,14 +70,17 @@ module Projects =
             | Project Nest -> "Nest"
             | Project ElasticsearchNet -> "Elasticsearch.Net"
             | Project NestJsonNetSerializer -> "Nest.JsonNetSerializer"
+            | Project NestUpgradeAssistant -> "Nest.7xUpgradeAssistant"
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
+            | PrivateProject ApiGenerator -> "ApiGenerator"
             | DepencyProject JsonNet -> "Newtonsoft.Json"
  
         member this.NugetId =
             match this with
             | Project Nest -> "NEST"
             | Project NestJsonNetSerializer -> "NEST.JsonNetSerializer"
+            | Project NestUpgradeAssistant -> "NEST.7xUpgradeAssistant"
             | _ -> this.Name
         
         member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true

@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteExpiredData
 {
@@ -23,10 +21,10 @@ namespace Tests.XPack.MachineLearning.DeleteExpiredData
 		protected override string UrlPath => $"_ml/_delete_expired_data";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteExpiredData(f),
-			(client, f) => client.DeleteExpiredDataAsync(f),
-			(client, r) => client.DeleteExpiredData(r),
-			(client, r) => client.DeleteExpiredDataAsync(r)
+			(client, f) => client.MachineLearning.DeleteExpiredData(f),
+			(client, f) => client.MachineLearning.DeleteExpiredDataAsync(f),
+			(client, r) => client.MachineLearning.DeleteExpiredData(r),
+			(client, r) => client.MachineLearning.DeleteExpiredDataAsync(r)
 		);
 
 		protected override DeleteExpiredDataDescriptor NewDescriptor() => new DeleteExpiredDataDescriptor();

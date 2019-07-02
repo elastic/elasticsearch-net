@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Removes existing fields. If one field doesn't exist, an exception will be thrown.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IRemoveProcessor : IProcessor
 	{
+		/// <summary>
+		/// fields to be removed. Supports template snippets.
+		/// </summary>
 		[DataMember(Name ="field")]
-		Field Field { get; set; }
+		Fields Field { get; set; }
 
 		/// <summary>
-		/// If <c>true</c> and <see cref="Field" /> does not exist or is null,
+		/// If <c>true</c> and <see cref="Nest.Field" /> does not exist or is null,
 		/// the processor quietly exits without modifying the document. Default is <c>false</c>
 		/// </summary>
 		[DataMember(Name ="ignore_missing")]
@@ -22,10 +27,10 @@ namespace Nest
 	/// <inheritdoc cref="IRemoveProcessor" />
 	public class RemoveProcessor : ProcessorBase, IRemoveProcessor
 	{
-		/// <inheritdoc cref="IRemoveProcessor.Field" />
-		public Field Field { get; set; }
+		/// <inheritdoc />
+		public Fields Field { get; set; }
 
-		/// <inheritdoc cref="IRemoveProcessor.IgnoreMissing" />
+		/// <inheritdoc />
 		public bool? IgnoreMissing { get; set; }
 
 		protected override string Name => "remove";
@@ -38,14 +43,15 @@ namespace Nest
 	{
 		protected override string Name => "remove";
 
-		Field IRemoveProcessor.Field { get; set; }
+		Fields IRemoveProcessor.Field { get; set; }
 		bool? IRemoveProcessor.IgnoreMissing { get; set; }
 
 		/// <inheritdoc cref="IRemoveProcessor.Field" />
-		public RemoveProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
+		public RemoveProcessorDescriptor<T> Field(Fields fields) => Assign(fields, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IRemoveProcessor.Field" />
-		public RemoveProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public RemoveProcessorDescriptor<T> Field(Func<FieldsDescriptor<T>, IPromise<Fields>> selector) =>
+			Assign(selector, (a, v) => a.Field = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="IRemoveProcessor.IgnoreMissing" />
 		public RemoveProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);

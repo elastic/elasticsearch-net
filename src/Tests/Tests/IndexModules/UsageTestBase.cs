@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Client;
 using Tests.Core.Serialization;
 
-namespace Tests.Framework
+namespace Tests.IndexModules
 {
 	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : ExpectJsonTestBase
 		where TDescriptor : TInterface, new()
@@ -12,6 +12,7 @@ namespace Tests.Framework
 		where TInterface : class
 	{
 		protected UsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
+			// ReSharper disable once VirtualMemberCallInConstructor
 			FluentInstance = Fluent(new TDescriptor());
 
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -34,6 +35,7 @@ namespace Tests.Framework
 		where TInterface : class
 	{
 		protected PromiseUsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
+			// ReSharper disable once VirtualMemberCallInConstructor
 			FluentInstance = Fluent(new TDescriptor())?.Value;
 
 		protected abstract Func<TDescriptor, IPromise<TInterface>> Fluent { get; }

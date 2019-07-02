@@ -24,7 +24,11 @@ namespace Nest.JsonNetSerializer.Converters
 		private IMemoryStreamFactory _memoryStreamFactory;
 
 		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer, IMemoryStreamFactory memoryStreamFactory
-		) => (_builtInSerializer, _memoryStreamFactory) = (builtInSerializer, memoryStreamFactory);
+		)
+		{
+			_builtInSerializer = builtInSerializer;
+			_memoryStreamFactory = memoryStreamFactory;
+		}
 
 		public override bool CanRead => true;
 		public override bool CanWrite => true;

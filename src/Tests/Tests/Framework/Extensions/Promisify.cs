@@ -1,6 +1,6 @@
 using Nest;
 
-namespace Tests.Framework
+namespace Tests.Framework.Extensions
 {
 	public static class Promisify
 	{

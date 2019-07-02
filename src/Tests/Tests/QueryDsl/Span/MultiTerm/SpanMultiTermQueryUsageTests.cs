@@ -1,9 +1,9 @@
 ﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.Joining.SpanMultiTerm
+namespace Tests.QueryDsl.Span.MultiTerm
 {
 	public class SpanMultiTermUsageTests : QueryDslUsageTestsBase
 	{
@@ -19,7 +19,7 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Match = new PrefixQuery { Field = "name", Value = "pre-*" }
+			Match = new PrefixQuery { Field = Infer.Field<Project>(f => f.Description), Value = "pre-*" }
 		};
 
 		protected override object QueryJson => new
@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 				boost = 1.1,
 				match = new
 				{
-					prefix = new { name = new { value = "pre-*" } }
+					prefix = new { description = new { value = "pre-*" } }
 				}
 			}
 		};
@@ -40,7 +40,7 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 				.Name("named_query")
 				.Boost(1.1)
 				.Match(sq => sq
-					.Prefix(pr => pr.Field(p => p.Name).Value("pre-*"))
+					.Prefix(pr => pr.Field(p => p.Description).Value("pre-*"))
 				)
 			);
 	}

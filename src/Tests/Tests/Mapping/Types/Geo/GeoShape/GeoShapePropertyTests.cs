@@ -2,9 +2,9 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.GeoShape
+namespace Tests.Mapping.Types.Geo.GeoShape
 {
 	public class GeoShapePropertyTests : PropertyTestsBase
 	{
@@ -14,42 +14,33 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		{
 			properties = new
 			{
-				location = new
+				locationShape = new
 				{
 					type = "geo_shape",
-					tree = "quadtree",
 					orientation = "cw",
 					strategy = "recursive",
-					tree_levels = 3,
-					points_only = true,
-					distance_error_pct = 1.0
+					coerce = true
 				}
 			}
 		};
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoShape(s => s
-				.Name(p => p.Location)
-				.Tree(GeoTree.Quadtree)
+				.Name(p => p.LocationShape)
 				.Orientation(GeoOrientation.ClockWise)
 				.Strategy(GeoStrategy.Recursive)
-				.TreeLevels(3)
-				.PointsOnly()
-				.DistanceErrorPercentage(1.0)
+				.Coerce()
 			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
 			{
-				"location", new GeoShapeProperty
+				"locationShape", new GeoShapeProperty
 				{
-					Tree = GeoTree.Quadtree,
 					Orientation = GeoOrientation.ClockWise,
 					Strategy = GeoStrategy.Recursive,
-					TreeLevels = 3,
-					PointsOnly = true,
-					DistanceErrorPercentage = 1.0
+					Coerce = true
 				}
 			}
 		};

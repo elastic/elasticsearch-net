@@ -5,10 +5,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Watcher.PutWatch
 {
@@ -696,10 +695,10 @@ namespace Tests.XPack.Watcher.PutWatch
 		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutWatch(CallIsolatedValue, f),
-			(client, f) => client.PutWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.PutWatch(r),
-			(client, r) => client.PutWatchAsync(r)
+			(client, f) => client.Watcher.Put(CallIsolatedValue, f),
+			(client, f) => client.Watcher.PutAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Put(r),
+			(client, r) => client.Watcher.PutAsync(r)
 		);
 
 		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);

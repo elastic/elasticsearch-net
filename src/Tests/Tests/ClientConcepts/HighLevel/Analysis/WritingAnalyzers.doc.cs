@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		 */
 		public void AddAnalyzerToFieldMapping()
 		{
-			var createIndexResponse = _client.CreateIndex("my-index", c => c
+			var createIndexResponse = _client.Indices.Create("my-index", c => c
 				.Map<Project>(mm => mm
 					.Properties(p => p
 						.Text(t => t
@@ -80,7 +80,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		[U]
 		public void ChangingBuiltInAnalyzer()
 		{
-			var createIndexResponse = _client.CreateIndex("my-index", c => c
+			var createIndexResponse = _client.Indices.Create("my-index", c => c
 				.Settings(s => s
 					.Analysis(a => a
 						.Analyzers(aa => aa
@@ -166,7 +166,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		 */
 		public void CustomAnalyzer()
 		{
-			var createIndexResponse = _client.CreateIndex("questions", c => c
+			var createIndexResponse = _client.Indices.Create("questions", c => c
 				.Settings(s => s
 					.Analysis(a => a
 						.CharFilters(cf => cf
@@ -225,7 +225,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		 */
 		public void CustomIndexAndSearchAnalyzers()
 		{
-			var createIndexResponse = _client.CreateIndex("questions", c => c
+			var createIndexResponse = _client.Indices.Create("questions", c => c
 				.Settings(s => s
 					.Analysis(a => a
 						.CharFilters(cf => cf

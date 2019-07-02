@@ -133,6 +133,9 @@ namespace Nest
 		public AnalyzeDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
+		public AnalyzeDescriptor Field<T, TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
+
+		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		///<summary>The text on which the analysis should be performed</summary>

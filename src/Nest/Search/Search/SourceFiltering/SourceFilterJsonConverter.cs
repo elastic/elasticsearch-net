@@ -1,6 +1,6 @@
-using System;
-using Elasticsearch.Net;
-
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
 
 namespace Nest
@@ -17,7 +17,10 @@ namespace Nest
 		{
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var filter = new SourceFilter();
 			switch (token)

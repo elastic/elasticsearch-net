@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Security;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
@@ -9,10 +10,6 @@ namespace Elasticsearch.Net
 {
 	public interface IConnectionConfigurationValues : IDisposable
 	{
-		// TODO: reevaluate for the 7.0.0-beta1
-		/// <summary> A unique id for this connection settings instance </summary>
-		string Id { get; }
-		
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
@@ -61,7 +58,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// When set to true will disable (de)serializing directly to the request and response stream and return a byte[]
-		/// copy of the raw request and response on elasticsearch calls. Defaults to  false
+		/// copy of the raw request and response on Elasticsearch calls. Defaults to  false
 		/// </summary>
 		bool DisableDirectStreaming { get; }
 
@@ -72,7 +69,7 @@ namespace Elasticsearch.Net
 		bool DisablePings { get; }
 
 		/// <summary>
-		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
+		/// Enable gzip compressed requests and responses, do note that you need to configure Elasticsearch to set this
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
@@ -83,7 +80,7 @@ namespace Elasticsearch.Net
 		NameValueCollection Headers { get; }
 
 		/// <summary>
-		/// By default the client enables http pipelining as elasticsearch 2.0 defaults to true as well
+		/// Whether HTTP pipelining is enabled. The default is <c>true</c>
 		/// </summary>
 		bool HttpPipeliningEnabled { get; }
 
@@ -101,13 +98,13 @@ namespace Elasticsearch.Net
 		TimeSpan? KeepAliveTime { get; }
 
 		/// <summary>
-		/// The maximum ammount of time a node is allowed to marked dead
+		/// The maximum amount of time a node is allowed to marked dead
 		/// </summary>
 		TimeSpan? MaxDeadTimeout { get; }
 
 		/// <summary>
 		/// When a retryable exception occurs or status code is returned this controls the maximum
-		/// amount of times we should retry the call to elasticsearch
+		/// amount of times we should retry the call to Elasticsearch
 		/// </summary>
 		int? MaxRetries { get; }
 
@@ -149,7 +146,7 @@ namespace Elasticsearch.Net
 		TimeSpan? PingTimeout { get; }
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
+		/// Forces all requests to have ?pretty=true, causing Elasticsearch to return formatted json.
 		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
 		bool PrettyJson { get; }
@@ -162,7 +159,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The password for the proxy, when configured
 		/// </summary>
-		string ProxyPassword { get; }
+		SecureString ProxyPassword { get; }
 
 		/// <summary>
 		/// The username for the proxy, when configured
@@ -188,7 +185,7 @@ namespace Elasticsearch.Net
 		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> ServerCertificateValidationCallback { get; }
 
 		/// <summary>
-		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns an unexpected
+		/// Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns an unexpected
 		/// json format
 		/// </summary>
 		IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
@@ -200,12 +197,12 @@ namespace Elasticsearch.Net
 		TimeSpan? SniffInformationLifeSpan { get; }
 
 		/// <summary>
-		/// Force a new sniff for the cluster state everytime a connection dies
+		/// Force a new sniff for the cluster state every time a connection dies
 		/// </summary>
 		bool SniffsOnConnectionFault { get; }
 
 		/// <summary>
-		/// Sniff the cluster state immediatly on startup
+		/// Sniff the cluster state immediately on startup
 		/// </summary>
 		bool SniffsOnStartup { get; }
 
@@ -217,5 +214,24 @@ namespace Elasticsearch.Net
 		bool ThrowExceptions { get; }
 
 		ElasticsearchUrlFormatter UrlFormatter { get; }
+
+		/// <summary>
+		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
+		/// versions that initiate requests to Elasticsearch
+		/// </summary>
+		string UserAgent { get; }
+		
+		/// <summary>
+		/// Allow you to override the status code inspection that sets <see cref="ElasticsearchResponseBase.Success"/>
+		/// <para>
+		/// Defaults to validating the statusCode is greater or equal to 200 and less then 300
+		/// </para>
+		/// <para>
+		/// When the request is using <see cref="HttpMethod.HEAD"/> 404 is valid out of the box as well
+		/// </para>
+		/// <para></para>
+		/// <para>NOTE: if a request specifies <see cref="IRequestConfiguration.AllowedStatusCodes"/> this takes precedence</para>
+		/// </summary>
+		Func<HttpMethod, int, bool> StatusCodeToResponseSuccess { get; }
 	}
 }

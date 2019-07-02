@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -55,12 +55,9 @@ namespace Nest
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
 		private IList<QueryContainer> _filter;
-
 		private IList<QueryContainer> _must;
 		private IList<QueryContainer> _mustNot;
 		private IList<QueryContainer> _should;
-
-		public BoolQuery() { }
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
@@ -116,11 +113,13 @@ namespace Nest
 		internal static bool IsConditionless(IBoolQuery q) =>
 			q.Must.NotWritable() && q.MustNot.NotWritable() && q.Should.NotWritable() && q.Filter.NotWritable();
 
-		// TODO: Introduce QueryContainerCollection type to implement this logic once?
-		public bool ShouldSerializeShould() => (Should?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		public bool ShouldSerializeMust() => (Must?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		public bool ShouldSerializeMustNot() => (MustNot?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		public bool ShouldSerializeFilter() => (Filter?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		internal static bool ShouldSerialize(IEnumerable<QueryContainer> queries) =>
+			(queries?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+
+		bool IBoolQuery.ShouldSerializeShould() => ShouldSerialize(Should);
+		bool IBoolQuery.ShouldSerializeMust() => ShouldSerialize(Must);
+		bool IBoolQuery.ShouldSerializeMustNot() => ShouldSerialize(MustNot);
+		bool IBoolQuery.ShouldSerializeFilter() => ShouldSerialize(Filter);
 	}
 
 	public class BoolQueryDescriptor<T>
@@ -160,6 +159,11 @@ namespace Nest
 			get => _should;
 			set => _should = value.AsInstanceOrToListOrNull();
 		}
+
+		bool IBoolQuery.ShouldSerializeShould() => BoolQuery.ShouldSerialize(Self.Should);
+		bool IBoolQuery.ShouldSerializeMust() => BoolQuery.ShouldSerialize(Self.Must);
+		bool IBoolQuery.ShouldSerializeMustNot() => BoolQuery.ShouldSerialize(Self.MustNot);
+		bool IBoolQuery.ShouldSerializeFilter() => BoolQuery.ShouldSerialize(Self.Filter);
 
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.
@@ -267,10 +271,5 @@ namespace Nest
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Filter(params QueryContainer[] queries) =>
 			Assign(queries.ToListOrNullIfEmpty(), (a, v) => a.Filter = v);
-
-		public bool ShouldSerializeShould() => (Self.Should?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		public bool ShouldSerializeMust() => (Self.Must?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		public bool ShouldSerializeMustNot() => (Self.MustNot?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		public bool ShouldSerializeFilter() => (Self.Filter?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
 	}
 }

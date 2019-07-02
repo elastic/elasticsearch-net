@@ -44,7 +44,7 @@ namespace Tests.CodeStandards
 		{
 			var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
 			var selectors =
-				from t in typeof(SelectorBase<>).Assembly.Types()
+				from t in typeof(SelectorBase).Assembly.Types()
 				where t.IsClass
 					  && t.Name.Contains("Selector")
 					  && !t.Namespace.StartsWith("Nest.Json")
@@ -78,7 +78,8 @@ namespace Tests.CodeStandards
 				{typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer)},
 				{typeof(InputDescriptor), typeof(InputContainer)},
 				{typeof(RoleMappingRuleDescriptor), typeof(RoleMappingRuleBase)},
-				{typeof(FluentDictionary<,>), typeof(FluentDictionary<,>)}
+				{typeof(FluentDictionary<,>), typeof(FluentDictionary<,>)},
+				{typeof(IntervalsDescriptor), typeof(IntervalsContainer)}
 			};
 
 			Func<Type, Type, bool> exclude = (first, second) =>
@@ -212,6 +213,9 @@ namespace Tests.CodeStandards
 				where !(m.Name == nameof(SortDescriptor<object>.Descending) && dt == typeof(SortDescriptor<>))
 				where !(m.Name == nameof(ClrTypeMappingDescriptor<object>.DisableIdInference) && dt == typeof(ClrTypeMappingDescriptor<>))
 				where !(m.Name == nameof(ClrTypeMappingDescriptor.DisableIdInference) && dt == typeof(ClrTypeMappingDescriptor))
+				where !(m.Name == nameof(RuleConditionDescriptor.AppliesTo) && dt == typeof(RuleConditionDescriptor))
+				where !(m.Name == nameof(RuleConditionDescriptor.Operator) && dt == typeof(RuleConditionDescriptor))
+				where !(m.Name == nameof(RuleConditionDescriptor.Value) && dt == typeof(RuleConditionDescriptor))
 
 				select new {m, d, p};
 

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.AliasManagement.Alias
 {
@@ -48,21 +48,21 @@ namespace Tests.Indices.AliasManagement.Alias
 		{
 			foreach (var value in values.Values)
 			{
-				var createIndexResponse = client.CreateIndex(value + "-1", c => c);
+				var createIndexResponse = client.Indices.Create(value + "-1", c => c);
 				if (!createIndexResponse.IsValid)
 					throw new Exception(createIndexResponse.DebugInformation);
 
-				createIndexResponse = client.CreateIndex(value + "-2", c => c);
+				createIndexResponse = client.Indices.Create(value + "-2", c => c);
 				if (!createIndexResponse.IsValid)
 					throw new Exception(createIndexResponse.DebugInformation);
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Alias(f),
-			(client, f) => client.AliasAsync(f),
-			(client, r) => client.Alias(r),
-			(client, r) => client.AliasAsync(r)
+			(client, f) => client.Indices.BulkAlias(f),
+			(client, f) => client.Indices.BulkAliasAsync(f),
+			(client, r) => client.Indices.BulkAlias(r),
+			(client, r) => client.Indices.BulkAliasAsync(r)
 		);
 	}
 }

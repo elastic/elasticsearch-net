@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Domain;
 using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 using Xunit;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
@@ -38,12 +39,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var settings = new ConnectionSettings()
 				.DefaultMappingFor<CommitActivity>(m => m
 					.IndexName("projects-and-commits")
-					.TypeName("doc")
 					.RelationName("commits")
 				)
 				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects-and-commits")
-					.TypeName("doc")
 					.RelationName("projects")
 				);
 
@@ -66,7 +65,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var settings = new ConnectionSettings()
 				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects-and-commits")
-					.TypeName("doc")
 				);
 
 			var resolver = new RelationNameResolver(settings);

@@ -1,13 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(GetCertificatesResponseFormatter))]
 	public class GetCertificatesResponse : ResponseBase
 	{
+		[IgnoreDataMember]
 		public IReadOnlyCollection<ClusterCertificateInformation> Certificates { get; internal set; } =
 			EmptyReadOnly<ClusterCertificateInformation>.Collection;
+	}
+
+	internal class GetCertificatesResponseFormatter : IJsonFormatter<GetCertificatesResponse>
+	{
+		private static readonly ReadOnlyCollectionFormatter<ClusterCertificateInformation> Formatter =
+			new ReadOnlyCollectionFormatter<ClusterCertificateInformation>();
+
+		public void Serialize(ref JsonWriter writer, GetCertificatesResponse value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotImplementedException();
+
+		public GetCertificatesResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var response = new GetCertificatesResponse();
+
+			if (reader.ReadIsNull())
+				return response;
+
+			switch (reader.GetCurrentJsonToken())
+			{
+				case JsonToken.BeginArray:
+					response.Certificates = Formatter.Deserialize(ref reader, formatterResolver);
+					break;
+				case JsonToken.BeginObject:
+					var count = 0;
+					while (reader.ReadIsInObject(ref count))
+					{
+						var property = reader.ReadPropertyNameSegmentRaw();
+						if (ResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
+						{
+							switch (errorValue)
+							{
+								case 0:
+									if (reader.GetCurrentJsonToken() == JsonToken.String)
+										response.Error = new Error { Reason = reader.ReadString() };
+									else
+									{
+										var formatter = formatterResolver.GetFormatter<Error>();
+										response.Error = formatter.Deserialize(ref reader, formatterResolver);
+									}
+									break;
+								case 1:
+									if (reader.GetCurrentJsonToken() == JsonToken.Number)
+										response.StatusCode = reader.ReadInt32();
+									else
+										reader.ReadNextBlock();
+									break;
+							}
+						}
+						else
+							reader.ReadNextBlock();
+					}
+					break;
+			}
+
+			return response;
+		}
 	}
 
 	public class ClusterCertificateInformation

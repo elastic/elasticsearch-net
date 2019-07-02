@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -18,10 +17,6 @@ namespace Nest
 	{
 		public QueryContainer Filter { get; set; }
 
-		// TODO: Remove Lang, Params and Script.
-		public string Lang { get; set; }
-		public Dictionary<string, object> Params { get; set; }
-		public string Script { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.ConstantScore = this;

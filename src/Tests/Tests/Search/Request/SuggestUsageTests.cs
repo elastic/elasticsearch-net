@@ -7,7 +7,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -255,7 +255,7 @@ namespace Tests.Search.Request
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
 

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -9,20 +9,20 @@ namespace Nest
 		where TPartialUpdate : class
 	{
 		[DataMember(Name ="doc_as_upsert")]
-		public bool? _DocAsUpsert { get; set; }
+		public bool? DocAsUpsert { get; set; }
 
 		[DataMember(Name ="doc")]
 		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
-		internal TPartialUpdate _PartialUpdate { get; set; }
+		internal TPartialUpdate PartialUpdate { get; set; }
 
 		[DataMember(Name ="script")]
-		internal IScript _Script { get; set; }
+		internal IScript Script { get; set; }
 
 		[DataMember(Name ="scripted_upsert")]
-		internal bool? _ScriptedUpsert { get; set; }
+		internal bool? ScriptedUpsert { get; set; }
 
 		[DataMember(Name ="upsert")]
 		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
-		internal TDocument _Upsert { get; set; }
+		internal TDocument Upsert { get; set; }
 	}
 }

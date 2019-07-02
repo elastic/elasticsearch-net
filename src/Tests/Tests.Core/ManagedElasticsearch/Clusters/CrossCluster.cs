@@ -9,7 +9,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			new DefaultSeeder(Client).SeedNode();
 
 			// persist settings for cross cluster search, when cluster_two is not available
-			Client.ClusterPutSettings(s => s
+			Client.Cluster.PutSettings(s => s
 				.Persistent(d => d
 					.Add("cluster.remote.cluster_two.seeds", new [] { "127.0.0.1:9399" })
 					.Add("cluster.remote.cluster_two.skip_unavailable", true)

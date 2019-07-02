@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Search.FieldCapabilities
 {
@@ -11,7 +11,7 @@ namespace Tests.Search.FieldCapabilities
 	{
 		[U] public async Task Urls() => await GET("/project/_field_caps")
 			.Fluent(c => c.FieldCapabilities(Nest.Indices.Index<Project>()))
-			.Request(c => c.FieldCapabilities(new FieldCapabilitiesRequest("project") { }))
+			.Request(c => c.FieldCapabilities(new FieldCapabilitiesRequest("project")))
 			.FluentAsync(c => c.FieldCapabilitiesAsync(typeof(Project)))
 			.RequestAsync(c => c.FieldCapabilitiesAsync(new FieldCapabilitiesRequest("project")));
 	}

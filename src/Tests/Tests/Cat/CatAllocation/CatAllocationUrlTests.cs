@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Cat.CatAllocation
 {
@@ -11,17 +11,17 @@ namespace Tests.Cat.CatAllocation
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/allocation")
-					.Fluent(c => c.CatAllocation())
-					.Request(c => c.CatAllocation(new CatAllocationRequest()))
-					.FluentAsync(c => c.CatAllocationAsync())
-					.RequestAsync(c => c.CatAllocationAsync(new CatAllocationRequest()))
+					.Fluent(c => c.Cat.Allocation())
+					.Request(c => c.Cat.Allocation(new CatAllocationRequest()))
+					.FluentAsync(c => c.Cat.AllocationAsync())
+					.RequestAsync(c => c.Cat.AllocationAsync(new CatAllocationRequest()))
 				;
 
 			await GET("/_cat/allocation/foo")
-					.Fluent(c => c.CatAllocation(a => a.NodeId("foo")))
-					.Request(c => c.CatAllocation(new CatAllocationRequest("foo")))
-					.FluentAsync(c => c.CatAllocationAsync(a => a.NodeId("foo")))
-					.RequestAsync(c => c.CatAllocationAsync(new CatAllocationRequest("foo")))
+					.Fluent(c => c.Cat.Allocation(a => a.NodeId("foo")))
+					.Request(c => c.Cat.Allocation(new CatAllocationRequest("foo")))
+					.FluentAsync(c => c.Cat.AllocationAsync(a => a.NodeId("foo")))
+					.RequestAsync(c => c.Cat.AllocationAsync(new CatAllocationRequest("foo")))
 				;
 		}
 	}

@@ -5,8 +5,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 {
@@ -96,10 +96,10 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		private string Role => $"role-{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutRoleMapping(Role, f),
-			(client, f) => client.PutRoleMappingAsync(Role, f),
-			(client, r) => client.PutRoleMapping(r),
-			(client, r) => client.PutRoleMappingAsync(r)
+			(client, f) => client.Security.PutRoleMapping(Role, f),
+			(client, f) => client.Security.PutRoleMappingAsync(Role, f),
+			(client, r) => client.Security.PutRoleMapping(r),
+			(client, r) => client.Security.PutRoleMappingAsync(r)
 		);
 
 		protected override PutRoleMappingDescriptor NewDescriptor() => new PutRoleMappingDescriptor(Role);

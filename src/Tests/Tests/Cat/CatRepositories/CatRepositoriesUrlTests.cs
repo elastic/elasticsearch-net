@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Cat.CatRepositories
 {
@@ -11,17 +11,17 @@ namespace Tests.Cat.CatRepositories
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/repositories")
-					.Fluent(c => c.CatRepositories())
-					.Request(c => c.CatRepositories(new CatRepositoriesRequest()))
-					.FluentAsync(c => c.CatRepositoriesAsync())
-					.RequestAsync(c => c.CatRepositoriesAsync(new CatRepositoriesRequest()))
+					.Fluent(c => c.Cat.Repositories())
+					.Request(c => c.Cat.Repositories(new CatRepositoriesRequest()))
+					.FluentAsync(c => c.Cat.RepositoriesAsync())
+					.RequestAsync(c => c.Cat.RepositoriesAsync(new CatRepositoriesRequest()))
 				;
 
 			await GET("/_cat/repositories?v=true")
-					.Fluent(c => c.CatRepositories(s => s.Verbose()))
-					.Request(c => c.CatRepositories(new CatRepositoriesRequest() { Verbose = true }))
-					.FluentAsync(c => c.CatRepositoriesAsync(s => s.Verbose()))
-					.RequestAsync(c => c.CatRepositoriesAsync(new CatRepositoriesRequest() { Verbose = true }))
+					.Fluent(c => c.Cat.Repositories(s => s.Verbose()))
+					.Request(c => c.Cat.Repositories(new CatRepositoriesRequest() { Verbose = true }))
+					.FluentAsync(c => c.Cat.RepositoriesAsync(s => s.Verbose()))
+					.RequestAsync(c => c.Cat.RepositoriesAsync(new CatRepositoriesRequest() { Verbose = true }))
 				;
 		}
 	}

@@ -6,7 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.TopHits
@@ -182,7 +182,7 @@ namespace Tests.Aggregations.Metric.TopHits
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var states = response.Aggregations.Terms("states");
@@ -198,7 +198,7 @@ namespace Tests.Aggregations.Metric.TopHits
 				var hits = topStateHits.Hits<Project>();
 				hits.Should().NotBeNullOrEmpty();
 				hits.All(h => h.Explanation != null).Should().BeTrue();
-				hits.All(h => h.Version.HasValue).Should().BeTrue();
+				hits.All(h => h.Version >= 0).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<DateTime>("startedOn").Any()).Should().BeTrue();
 				var projects = topStateHits.Documents<Project>();

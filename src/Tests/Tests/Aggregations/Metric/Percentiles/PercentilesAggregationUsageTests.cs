@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Percentiles
@@ -59,7 +59,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 				Missing = 0
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsOutlier = response.Aggregations.Percentiles("commits_outlier");
@@ -124,7 +124,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 				Keyed = false
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsOutlier = response.Aggregations.Percentiles("commits_outlier");

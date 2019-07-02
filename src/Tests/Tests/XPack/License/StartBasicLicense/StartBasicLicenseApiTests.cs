@@ -1,11 +1,10 @@
-﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.StartBasicLicense
@@ -26,10 +25,10 @@ namespace Tests.XPack.License.StartBasicLicense
 		protected override string UrlPath => $"/_license/start_basic";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.StartBasicLicense(f),
-			(client, f) => client.StartBasicLicenseAsync(f),
-			(client, r) => client.StartBasicLicense(r),
-			(client, r) => client.StartBasicLicenseAsync(r)
+			(client, f) => client.License.StartBasic(f),
+			(client, f) => client.License.StartBasicAsync(f),
+			(client, r) => client.License.StartBasic(r),
+			(client, r) => client.License.StartBasicAsync(r)
 		);
 
 		protected override void ExpectResponse(StartBasicLicenseResponse response)

@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
@@ -31,10 +31,10 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override string UrlPath => $"/project%2Cqueries/_mapping/field/name%2CleadDeveloper.ipAddress";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetFieldMapping<Project>(Fields, f),
-			(client, f) => client.GetFieldMappingAsync<Project>(Fields, f),
-			(client, r) => client.GetFieldMapping(r),
-			(client, r) => client.GetFieldMappingAsync(r)
+			(client, f) => client.Indices.GetFieldMapping(Fields, f),
+			(client, f) => client.Indices.GetFieldMappingAsync(Fields, f),
+			(client, r) => client.Indices.GetFieldMapping(r),
+			(client, r) => client.Indices.GetFieldMappingAsync(r)
 		);
 
 		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);

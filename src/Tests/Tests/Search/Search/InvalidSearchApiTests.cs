@@ -6,7 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.Search
 {
@@ -62,7 +62,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldNotBeValid();
 			var serverError = response.ServerError;

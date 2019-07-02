@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Geo/Distance/GeoDistanceQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Geo/Distance/GeoDistanceQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,7 +23,7 @@ q
 .GeoDistance(g => g
     .Boost(1.1)
     .Name("named_query")
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .DistanceType(GeoDistanceType.Arc)
     .Location(34, -34)
     .Distance("200m")
@@ -39,11 +39,29 @@ new GeoDistanceQuery
 {
     Boost = 1.1,
     Name = "named_query",
-    Field = Infer.Field<Project>(p => p.Location),
+    Field = Infer.Field<Project>(p => p.LocationPoint),
     DistanceType = GeoDistanceType.Arc,
     Location = new GeoLocation(34, -34),
     Distance = "200m",
     ValidationMethod = GeoValidationMethod.IgnoreMalformed
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_distance": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "distance": "200m",
+    "distance_type": "arc",
+    "validation_method": "ignore_malformed",
+    "locationPoint": {
+      "lat": 34.0,
+      "lon": -34.0
+    }
+  }
 }
 ----
 

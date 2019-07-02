@@ -1,8 +1,9 @@
 using System;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Framework.VirtualClustering.Providers;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
 	public class SealedVirtualCluster
 	{

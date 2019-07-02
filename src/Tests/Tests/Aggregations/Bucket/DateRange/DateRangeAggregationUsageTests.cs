@@ -5,7 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 using static Tests.Domain.Helpers.TestValueHelper;
 
@@ -75,7 +75,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 					new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling Responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods

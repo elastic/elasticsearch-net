@@ -3,8 +3,8 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.License.PostLicense
 {
@@ -56,10 +56,10 @@ namespace Tests.XPack.License.PostLicense
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PostLicense(f),
-			(client, f) => client.PostLicenseAsync(f),
-			(client, r) => client.PostLicense(r),
-			(client, r) => client.PostLicenseAsync(r)
+			(client, f) => client.License.Post(f),
+			(client, f) => client.License.PostAsync(f),
+			(client, r) => client.License.Post(r),
+			(client, r) => client.License.PostAsync(r)
 		);
 	}
 }

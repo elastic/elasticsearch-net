@@ -6,39 +6,38 @@ namespace Nest
 	[DataContract]
 	public class MatrixStatsField
 	{
-		[DataMember(Name ="correlation")]
+		[DataMember(Name = "correlation")]
 		public Dictionary<string, double> Correlation { get; set; }
 
-		[DataMember(Name ="count")]
+		[DataMember(Name = "count")]
 		public int Count { get; set; }
 
-		[DataMember(Name ="covariance")]
+		[DataMember(Name = "covariance")]
 		public Dictionary<string, double> Covariance { get; set; }
 
-		[DataMember(Name ="kurtosis")]
+		[DataMember(Name = "kurtosis")]
 		public double Kurtosis { get; set; }
 
-		[DataMember(Name ="mean")]
+		[DataMember(Name = "mean")]
 		public double Mean { get; set; }
 
-		[DataMember(Name ="name")]
+		[DataMember(Name = "name")]
 		public string Name { get; set; }
 
-		[DataMember(Name ="skewness")]
+		[DataMember(Name = "skewness")]
 		public double Skewness { get; set; }
 
-		[DataMember(Name ="variance")]
+		[DataMember(Name = "variance")]
 		public double Variance { get; set; }
 	}
 
 	[DataContract]
 	public class MatrixStatsAggregate : MatrixAggregateBase
 	{
-		//TODO non nullable in 6.0
-		[DataMember(Name ="fields")]
-		public long? DocCount { get; set; }
+		[DataMember(Name = "doc_count")]
+		public long DocCount { get; set; }
 
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		public List<MatrixStatsField> Fields { get; set; }
 	}
 }

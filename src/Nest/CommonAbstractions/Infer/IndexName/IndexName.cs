@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -51,10 +52,9 @@ namespace Nest
 
 		public static IndexName From<T>(string clusterName) => From(typeof(T), clusterName);
 
-		private static IndexName From(Type t, string clusterName) => new IndexName(t, clusterName);
+		private static IndexName From(Type type, string clusterName) => new IndexName(type, clusterName);
 
-		// TODO private?
-		public static IndexName Rebuild(string index, Type t, string clusterName = null) => new IndexName(index, t, clusterName);
+		internal static IndexName Rebuild(string index, Type type, string clusterName = null) => new IndexName(index, type, clusterName);
 
 		public Indices And<T>() => new Indices(new[] { this, typeof(T) });
 
@@ -109,7 +109,7 @@ namespace Nest
 
 		private string PrefixClusterName(string name) => PrefixClusterName(this, name);
 
-		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
+		private static string PrefixClusterName(IndexName index, string name) => index.Cluster.IsNullOrEmpty() ? name : $"{index.Cluster}:{name}";
 
 		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == PrefixClusterName(Name);
 

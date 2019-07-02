@@ -22,10 +22,12 @@
 // SOFTWARE.
 #endregion
 
+
+using Elasticsearch.Net.Utf8Json.Internal;
 #if NETSTANDARD
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	// reduce static constructor generate size on generics(especially IL2CPP on Unity)
 	internal static class ValueTupleFormatterHelper
@@ -172,6 +174,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	#if DOTNETCORE
 	internal sealed class ValueTupleFormatter<T1> : IJsonFormatter<ValueTuple<T1>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache1;
@@ -706,6 +709,7 @@ namespace Elasticsearch.Net
 			return new ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>(item1, item2, item3, item4, item5, item6, item7, item8);
 		}
 	}
+	#endif
 
-#endif
 }
+#endif

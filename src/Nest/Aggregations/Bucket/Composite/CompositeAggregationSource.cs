@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
-
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
 
 namespace Nest
@@ -125,7 +125,7 @@ namespace Nest
 		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Field" />
-		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Order" />
 		public TDescriptor Order(SortOrder? order) => Assign(order, (a, v) => a.Order = v);

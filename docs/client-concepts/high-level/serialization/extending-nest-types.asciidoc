@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Serialization/ExtendingNestTypes.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Serialization/ExtendingNestTypes.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -48,7 +48,7 @@ Now that we have our own `IProperty` implementation we can add it to our propert
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Project>(m => m
         .Properties(props => props
             .Custom(new MyPluginProperty("fieldName", "dutch"))
@@ -59,23 +59,19 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
 
 which will serialize to the following JSON request
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            fieldName = new
-            {
-                type = "my_plugin_property",
-                language = "dutch",
-                numeric = true
-            }
-        }
+  "mappings": {
+    "properties": {
+      "fieldName": {
+        "type": "my_plugin_property",
+        "language": "dutch",
+        "numeric": true
+      }
     }
-};
+  }
+}
 ----
 
 Whilst NEST can _serialize_ our `my_plugin_property`, it does not know how to _deserialize_ it;

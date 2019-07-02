@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -42,17 +42,10 @@ namespace Nest
 
 		/// <summary>
 		/// A watch condition that evaluates a script.
-		/// The default scripting language is groovy.
 		/// You can use any of the scripting languages supported by Elasticsearch as long as the
 		/// language supports evaluating expressions to Boolean values.
 		/// Note that the mustache and expression languages are too limited to be used by this condition.
 		/// </summary>
-		/// <remarks>
-		/// For Groovy, you must explicitly enable dynamic scripts in elasticsearch.yml
-		/// to use inline or stored scripts.
-		/// To enable groovy scripting for watches only,
-		/// you can set script.engine.groovy.inline.xpack_watch: true.
-		/// </remarks>
 		[DataMember(Name = "script")]
 		IScriptCondition Script { get; set; }
 	}

@@ -4,8 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Watcher.AcknowledgeWatch
 {
@@ -37,7 +37,7 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 			{
 				var watchId = callUniqueValue.Value;
 
-				var putWatchResponse = client.PutWatch(watchId, p => p
+				var putWatchResponse = client.Watcher.Put(watchId, p => p
 					.Input(i => i
 						.Simple(s => s
 							.Add("payload", new { send = "yes" })
@@ -64,13 +64,13 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 				if (!putWatchResponse.IsValid)
 					throw new Exception("Problem setting up PutWatch for integration test");
 
-				var getWatchResponse = client.GetWatch(watchId);
+				var getWatchResponse = client.Watcher.Get(watchId);
 				if (!getWatchResponse.IsValid)
 					throw new Exception("Problem with GetWatch for integration test");
 
 				getWatchResponse.Status.Actions["test_index"].Acknowledgement.State.Should().Be(AcknowledgementState.AwaitsSuccessfulExecution);
 
-				var executeWatchResponse = client.ExecuteWatch(e => e
+				var executeWatchResponse = client.Watcher.Execute(e => e
 					.Id(watchId)
 					.RecordExecution()
 				);
@@ -78,7 +78,7 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 				if (!executeWatchResponse.IsValid)
 					throw new Exception("Problem with ExecuteWatch for integration test");
 
-				getWatchResponse = client.GetWatch(watchId);
+				getWatchResponse = client.Watcher.Get(watchId);
 				if (!getWatchResponse.IsValid)
 					throw new Exception("Problem with GetWatch for integration test");
 
@@ -87,10 +87,10 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.AcknowledgeWatch(CallIsolatedValue, f),
-			(client, f) => client.AcknowledgeWatchAsync(CallIsolatedValue, f),
-			(client, r) => client.AcknowledgeWatch(r),
-			(client, r) => client.AcknowledgeWatchAsync(r)
+			(client, f) => client.Watcher.Acknowledge(CallIsolatedValue, f),
+			(client, f) => client.Watcher.AcknowledgeAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Acknowledge(r),
+			(client, r) => client.Watcher.AcknowledgeAsync(r)
 		);
 
 		protected override AcknowledgeWatchDescriptor NewDescriptor() => new AcknowledgeWatchDescriptor(CallIsolatedValue);

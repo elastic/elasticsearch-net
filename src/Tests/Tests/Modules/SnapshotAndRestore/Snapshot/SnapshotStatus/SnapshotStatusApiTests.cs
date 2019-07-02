@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 {
@@ -27,10 +27,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 		protected override string UrlPath => $"/_snapshot/{_repos}/{_snapshot}/_status";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SnapshotStatus(f),
-			(client, f) => client.SnapshotStatusAsync(f),
-			(client, r) => client.SnapshotStatus(r),
-			(client, r) => client.SnapshotStatusAsync(r)
+			(client, f) => client.Snapshot.Status(f),
+			(client, f) => client.Snapshot.StatusAsync(f),
+			(client, r) => client.Snapshot.Status(r),
+			(client, r) => client.Snapshot.StatusAsync(r)
 		);
 	}
 }

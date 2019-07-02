@@ -15,7 +15,6 @@ using Tests.Core.Client.Settings;
 using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 using Field = Nest.Field;
@@ -589,7 +588,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		public class GeoModel
 		{
-			[JsonProperty("country_iso_code")]
+			[DataMember(Name = "country_iso_code")]
 			public string CountryIsoCode { get; set; }
 		}
 

@@ -1,0 +1,16 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@using ApiGenerator.Domain.Code.LowLevel
+@inherits ApiGenerator.CodeTemplatePage<LowLevelClientMethod>
+@{
+	LowLevelClientMethod method = Model;
+}
+@{await IncludeAsync("LowLevel/Client/Methods/MethodDocs.cshtml", method); }
+		TResponse @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments)) where TResponse : class, IElasticsearchResponse, new();
+
+@{await IncludeAsync("LowLevel/Client/Methods/MethodDocs.cshtml", method); }
+		Task@(Raw("<TResponse>")) @(method.PerPathMethodName)Async@(Raw("<TResponse>"))(@Raw(method.Arguments), CancellationToken ctx = default) where TResponse : class, IElasticsearchResponse, new();

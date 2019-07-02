@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -24,16 +24,29 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="order")]
 		SortOrder? Order { get; set; }
+
+		/// <summary>
+		/// The field to assign the sorted value to, by default field is updated in-place
+		/// </summary>
+		[DataMember(Name = "target_field")]
+		Field TargetField { get; set; }
 	}
 
+	/// <inheritdoc cref="ISortProcessor" />
 	public class SortProcessor : ProcessorBase, ISortProcessor
 	{
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
+		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
+
+		/// <inheritdoc />
+		public Field TargetField { get; set; }
 		protected override string Name => "sort";
 	}
 
+	/// <inheritdoc cref="ISortProcessor" />
 	public class SortProcessorDescriptor<T>
 		: ProcessorDescriptorBase<SortProcessorDescriptor<T>, ISortProcessor>, ISortProcessor
 		where T : class
@@ -42,12 +55,23 @@ namespace Nest
 
 		Field ISortProcessor.Field { get; set; }
 		SortOrder? ISortProcessor.Order { get; set; }
+		Field ISortProcessor.TargetField { get; set; }
 
+		/// <inheritdoc cref="ISortProcessor.Field" />
 		public SortProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SortProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		/// <inheritdoc cref="ISortProcessor.Field" />
+		public SortProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
+		/// <inheritdoc cref="ISortProcessor.TargetField" />
+		public SortProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
+
+		/// <inheritdoc cref="ISortProcessor.TargetField" />
+		public SortProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+			Assign(objectPath, (a, v) => a.TargetField = v);
+
+		/// <inheritdoc cref="ISortProcessor.Order" />
 		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>
 			Assign(order, (a, v) => a.Order = v);
 	}

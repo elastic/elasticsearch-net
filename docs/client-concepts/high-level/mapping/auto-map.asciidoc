@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/AutoMap.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/AutoMap.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -54,7 +54,7 @@ for the base class and then call AutoMap foreach of the types we want it to impl
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Document>(m => m
         .AutoMap<Company>() <1>
         .AutoMap(typeof(Employee)) <2>
@@ -62,134 +62,88 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
 );
 ----
 <1> Auto map `Company` using the generic method
+
 <2> Auto map `Employee` using the non-generic method
 
 This produces the following JSON request
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            birthday = new {type = "date"},
-            employees = new
-            {
-                properties = new
-                {
-                    birthday = new {type = "date"},
-                    employees = new
-                    {
-                        properties = new { },
-                        type = "object"
-                    },
-                    hours = new {type = "long"},
-                    isManager = new {type = "boolean"},
-                    join = new
-                    {
-                        properties = new { },
-                        type = "object"
-                    },
-                    lastName = new
-                    {
-                        fields = new
-                        {
-                            keyword = new
-                            {
-                                ignore_above = 256,
-                                type = "keyword"
-                            }
-                        },
-                        type = "text"
-                    },
-                    salary = new {type = "integer"}
-                },
-                type = "object"
+  "mappings": {
+    "properties": {
+      "birthday": {
+        "type": "date"
+      },
+      "employees": {
+        "properties": {
+          "birthday": {
+            "type": "date"
+          },
+          "employees": {
+            "properties": {},
+            "type": "object"
+          },
+          "hours": {
+            "type": "long"
+          },
+          "isManager": {
+            "type": "boolean"
+          },
+          "join": {
+            "properties": {},
+            "type": "object"
+          },
+          "lastName": {
+            "fields": {
+              "keyword": {
+                "ignore_above": 256,
+                "type": "keyword"
+              }
             },
-            hours = new {type = "long"},
-            isManager = new {type = "boolean"},
-            join = new
-            {
-                properties = new { },
-                type = "object"
-            },
-            lastName = new
-            {
-                fields = new
-                {
-                    keyword = new
-                    {
-                        ignore_above = 256,
-                        type = "keyword"
-                    }
-                },
-                type = "text"
-            },
-            name = new
-            {
-                fields = new
-                {
-                    keyword = new
-                    {
-                        ignore_above = 256,
-                        type = "keyword"
-                    }
-                },
-                type = "text"
-            },
-            salary = new {type = "integer"}
-        }
+            "type": "text"
+          },
+          "salary": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "hours": {
+        "type": "long"
+      },
+      "isManager": {
+        "type": "boolean"
+      },
+      "join": {
+        "properties": {},
+        "type": "object"
+      },
+      "lastName": {
+        "fields": {
+          "keyword": {
+            "ignore_above": 256,
+            "type": "keyword"
+          }
+        },
+        "type": "text"
+      },
+      "name": {
+        "fields": {
+          "keyword": {
+            "ignore_above": 256,
+            "type": "keyword"
+          }
+        },
+        "type": "text"
+      },
+      "salary": {
+        "type": "integer"
+      }
     }
-};
-
-public class ParentWithStringId : IgnoringProperties.Parent
-        {
-public new string Id { get; set; }
-        }
-
-var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
-    .DisableDirectStreaming() <2>
-    .DefaultMappingFor<ParentWithStringId>(m => m
-        .TypeName("parent")
-        .Ignore(p => p.Description)
-        .Ignore(p => p.IgnoreMe)
-    );
-
-var client = new ElasticClient(connectionSettings);
-
-var createIndexResponse = client.CreateIndex("myindex", c => c
-    .Map<ParentWithStringId>(m => m
-        .AutoMap()
-    )
-);
-
-// json
-var expected = new
-{
-    mappings = new
-    {
-        properties = new
-        {
-            id = new
-            {
-                type = "text",
-                fields = new
-                {
-                    keyword = new
-                    {
-                        ignore_above = 256,
-                        type = "keyword"
-                    }
-                }
-            }
-        }
-    }
-};
+  }
+}
 ----
-<1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
-<2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
 
 Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
 In this example,
@@ -206,6 +160,10 @@ In this example,
 
 and the remaining string properties as multi field `text` datatypes, each with a `keyword` datatype
 sub field.
+
+[[inferred-dotnet-type-mapping]]
+[float]
+=== Inferred .NET type mapping
 
 NEST has inferred mapping support for the following .NET types
 
@@ -281,9 +239,17 @@ maps to `"keyword"`
 and supports a number of special types defined in NEST
 
 [horizontal]
+`Nest.QueryContainer`::
+
+maps to `"percolator"`
+
 `Nest.GeoLocation`::
 
 maps to `"geo_point"`
+
+`Nest.IGeoShape`::
+
+maps to `"geo_shape"`
 
 `Nest.CompletionField`::
 
@@ -309,6 +275,10 @@ maps to `"integer_range"`
 
 maps to `"long_range"`
 
+`Nest.IpAddressRange`::
+
+maps to `"ip_range"`
+
 All other types map to `"object"` by default.
 
 [IMPORTANT]
@@ -328,7 +298,7 @@ As the https://download.microsoft.com/download/3/8/8/388e7205-bc10-4226-b2a8-753
 For a conversion from `decimal` to `float` or `double`, the `decimal` value is rounded to the nearest `double` or `float` value.
 While this conversion may lose precision, it never causes an exception to be thrown.
 
-This conversion causes an exception to be thrown at deserialization time for `Decimal.MinValue` and `Decimal.MaxValue` because, at
+This conversion does cause an exception to be thrown at deserialization time for `Decimal.MinValue` and `Decimal.MaxValue` because, at
 serialization time, the nearest `double` value that is converted to is outside of the bounds of `Decimal.MinValue` or `Decimal.MaxValue`,
 respectively. In these cases, it is advisable to use `double` as the POCO property type.
 
@@ -362,78 +332,64 @@ By default, `.AutoMap()` only goes as far as depth 1
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<A>(m => m.AutoMap())
 );
 ----
 
 Thus we do not map properties on the second occurrence of our Child property 
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            child = new
-            {
-                properties = new { },
-                type = "object"
-            }
-        }
+  "mappings": {
+    "properties": {
+      "child": {
+        "properties": {},
+        "type": "object"
+      }
     }
-};
+  }
+}
 ----
 
 Now let's specify a maxRecursion of `3` 
 
 [source,csharp]
 ----
-createIndexResponse = _client.CreateIndex("myindex", c => c
+createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<A>(m => m.AutoMap(3))
 );
 ----
 
 `.AutoMap()` has now mapped three levels of our Child property 
 
-[source,csharp]
+[source,javascript]
 ----
-var expectedWithMaxRecursion = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            child = new
-            {
-                type = "object",
-                properties = new
-                {
-                    child = new
-                    {
-                        type = "object",
-                        properties = new
-                        {
-                            child = new
-                            {
-                                type = "object",
-                                properties = new
-                                {
-                                    child = new
-                                    {
-                                        type = "object",
-                                        properties = new { }
-                                    }
-                                }
-                            }
-                        }
-                    }
+  "mappings": {
+    "properties": {
+      "child": {
+        "type": "object",
+        "properties": {
+          "child": {
+            "type": "object",
+            "properties": {
+              "child": {
+                "type": "object",
+                "properties": {
+                  "child": {
+                    "type": "object",
+                    "properties": {}
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
-};
+  }
+}
 ----
 

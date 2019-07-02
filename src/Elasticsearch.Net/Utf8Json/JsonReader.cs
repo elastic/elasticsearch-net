@@ -25,8 +25,10 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Internal.DoubleConversion;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 
@@ -1015,19 +1017,24 @@ namespace Elasticsearch.Net
                     offset += 1; // position is "\"";
                     for (int i = offset; i < bytes.Length; i++)
                     {
-                        if (bytes[i] == (char)'\"')
+                        if (bytes[i] == '\"')
                         {
-							// is escape?
-							// ... and that escape is not escaped?
-							if (bytes[i - 1] == (char)'\\' && bytes[i - 2] != (char)'\\')
-                            {
-                                continue;
-                            }
-                            else
-                            {
-                                offset = i + 1;
-                                return; // end
-                            }
+							// backtrack and count escape characters
+							var count = 0;
+							for (var j = i - 1; j >= offset; j--)
+							{
+								if (bytes[j] != '\\')
+									break;
+
+								count++;
+							}
+
+							// even number of escape characters means this " is not escaped.
+							if (count % 2 == 0)
+							{
+								offset = i + 1;
+								return; // end
+							}
                         }
                     }
                     throw CreateParsingExceptionMessage("not found end string.");

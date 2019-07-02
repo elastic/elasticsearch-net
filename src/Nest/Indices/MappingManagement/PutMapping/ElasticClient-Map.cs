@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,7 +11,7 @@ namespace Nest
 		/// <para> </para>
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
 		/// </summary>
-		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
+		/// <typeparam name="T">The type we want to map in Elasticsearch</typeparam>
 		/// <param name="selector">A descriptor to describe the mapping of our type</param>
 		PutMappingResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
 			where T : class;

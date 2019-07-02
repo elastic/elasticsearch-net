@@ -4,7 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Tests.QueryDsl.BoolDsl;
 
 namespace Tests.QueryDsl.Compound.Bool
@@ -50,6 +50,7 @@ namespace Tests.QueryDsl.Compound.Bool
 					{
 						@bool = new
 						{
+							// must be typed to object[] for documentation
 							must = new object[]
 							{
 								new

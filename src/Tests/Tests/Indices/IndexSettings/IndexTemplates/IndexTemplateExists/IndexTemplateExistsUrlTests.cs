@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 {
@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 		{
 			var name = "temp";
 			await HEAD($"/_template/{name}")
-					.Fluent(c => c.IndexTemplateExists(name))
-					.Request(c => c.IndexTemplateExists(new IndexTemplateExistsRequest(name)))
-					.FluentAsync(c => c.IndexTemplateExistsAsync(name))
-					.RequestAsync(c => c.IndexTemplateExistsAsync(new IndexTemplateExistsRequest(name)))
+					.Fluent(c => c.Indices.TemplateExists(name))
+					.Request(c => c.Indices.TemplateExists(new IndexTemplateExistsRequest(name)))
+					.FluentAsync(c => c.Indices.TemplateExistsAsync(name))
+					.RequestAsync(c => c.Indices.TemplateExistsAsync(new IndexTemplateExistsRequest(name)))
 				;
 		}
 	}

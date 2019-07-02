@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Elasticsearch.Net;
+﻿using System.Collections.Generic;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -11,7 +10,10 @@ namespace Nest
 		public FieldValues Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			var fields = new Dictionary<string, LazyDocument>();
@@ -25,7 +27,26 @@ namespace Nest
 			return new FieldValues(formatterResolver.GetConnectionSettings().Inferrer, fields);
 		}
 
-		public void Serialize(ref JsonWriter writer, FieldValues value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotImplementedException();
+		public void Serialize(ref JsonWriter writer, FieldValues value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var count = 0;
+			foreach (var fieldValue in value)
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName(fieldValue.Key);
+				writer.WriteRaw(fieldValue.Value.Bytes);
+				count++;
+			}
+			writer.WriteEndObject();
+		}
 	}
 }

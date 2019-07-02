@@ -7,8 +7,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Document.Single.Update
@@ -64,8 +64,8 @@ namespace Tests.Document.Single.Update
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Update<Project>(CallIsolatedValue, f),
 			(client, f) => client.UpdateAsync<Project>(CallIsolatedValue, f),
-			(client, r) => client.Update<Project>(r),
-			(client, r) => client.UpdateAsync<Project>(r)
+			(client, r) => client.Update(r),
+			(client, r) => client.UpdateAsync(r)
 		);
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>

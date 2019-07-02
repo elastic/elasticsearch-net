@@ -6,16 +6,14 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
-using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly IElasticClient _client;
 
-		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster, EndpointUsage usage) => _client = cluster.Client;
+		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster) => _client = cluster.Client;
 
 		protected static List<object> Search => new object[]
 		{
@@ -32,7 +30,7 @@ namespace Tests.Search.MultiSearch
 
 		[I] public void PostEnumerableOfObjects()
 		{
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", PostData.MultiJson(Search));
+			var response = _client.LowLevel.MultiSearch<DynamicResponse>("project", PostData.MultiJson(Search));
 			AssertResponse(response);
 		}
 
@@ -42,7 +40,7 @@ namespace Tests.Search.MultiSearch
 				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, _client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None))
 				.ToList();
 
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", PostData.MultiJson(listOfStrings));
+			var response = _client.LowLevel.MultiSearch<DynamicResponse>("project", PostData.MultiJson(listOfStrings));
 			AssertResponse(response);
 		}
 
@@ -53,7 +51,7 @@ namespace Tests.Search.MultiSearch
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", str);
+			var response = _client.LowLevel.MultiSearch<DynamicResponse>("project", str);
 			AssertResponse(response);
 		}
 
@@ -66,7 +64,7 @@ namespace Tests.Search.MultiSearch
 
 			var bytes = Encoding.UTF8.GetBytes(str);
 
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", bytes);
+			var response = _client.LowLevel.MultiSearch<DynamicResponse>("project", bytes);
 			AssertResponse(response);
 		}
 

@@ -3,7 +3,7 @@ using System.IO;
 using Elasticsearch.Net;
 using Nest;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering.Rules
 {
 	public interface IRule
 	{

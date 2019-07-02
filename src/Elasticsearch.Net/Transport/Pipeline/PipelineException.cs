@@ -7,9 +7,6 @@ namespace Elasticsearch.Net
 		public PipelineException(PipelineFailure failure)
 			: base(GetMessage(failure)) => FailureReason = failure;
 
-		public PipelineException(string message)
-			: base(message) => FailureReason = PipelineFailure.BadResponse;
-
 		public PipelineException(PipelineFailure failure, Exception innerException)
 			: base(GetMessage(failure), innerException) => FailureReason = failure;
 

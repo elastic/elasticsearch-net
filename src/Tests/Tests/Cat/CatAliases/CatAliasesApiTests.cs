@@ -3,8 +3,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatAliases
 {
@@ -19,10 +19,10 @@ namespace Tests.Cat.CatAliases
 		protected override string UrlPath => "/_cat/aliases";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatAliases(),
-			(client, f) => client.CatAliasesAsync(),
-			(client, r) => client.CatAliases(r),
-			(client, r) => client.CatAliasesAsync(r)
+			(client, f) => client.Cat.Aliases(),
+			(client, f) => client.Cat.AliasesAsync(),
+			(client, r) => client.Cat.Aliases(r),
+			(client, r) => client.Cat.AliasesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatAliasesRecord> response) =>

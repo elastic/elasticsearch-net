@@ -63,7 +63,7 @@ namespace Tests.Analysis.CharFilters
 		public class HtmlStripTests : CharFilterAssertionBase<HtmlStripTests>
 		{
 			public override FuncTokenizer Fluent => (n, cf) => cf.HtmlStrip(n);
-			public override ICharFilter Initializer => new HtmlStripCharFilter { };
+			public override ICharFilter Initializer => new HtmlStripCharFilter();
 			public override object Json => new { type = "html_strip" };
 			public override string Name => "htmls";
 		}

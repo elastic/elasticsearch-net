@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteCalendarJob
 {
@@ -43,10 +40,10 @@ namespace Tests.XPack.MachineLearning.DeleteCalendarJob
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}_calendar/jobs/{CallIsolatedValue}_job";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteCalendarJob(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
-			(client, f) => client.DeleteCalendarJobAsync(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
-			(client, r) => client.DeleteCalendarJob(r),
-			(client, r) => client.DeleteCalendarJobAsync(r)
+			(client, f) => client.MachineLearning.DeleteCalendarJob(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
+			(client, f) => client.MachineLearning.DeleteCalendarJobAsync(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),
+			(client, r) => client.MachineLearning.DeleteCalendarJob(r),
+			(client, r) => client.MachineLearning.DeleteCalendarJobAsync(r)
 		);
 
 		protected override DeleteCalendarJobDescriptor NewDescriptor() => new DeleteCalendarJobDescriptor(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job");

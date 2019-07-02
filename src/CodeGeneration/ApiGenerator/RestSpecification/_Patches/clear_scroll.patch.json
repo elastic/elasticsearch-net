@@ -3,6 +3,12 @@
     "url": {
       "path": "/_search/scroll",
       "paths": [ "/_search/scroll" ],
+      "parts": {
+        "scroll_id": {
+          "type" : "list",
+          "description" : "A comma-separated list of scroll IDs to clear"
+        }
+      },
       "deprecated_paths": [
         {
           "version": "7.0",

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
@@ -5,6 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[StringEnum]
+	[SuppressMessage("ReSharper", "InconsistentNaming")]
 	public enum DFRBasicModel
 	{
 		/// <summary>

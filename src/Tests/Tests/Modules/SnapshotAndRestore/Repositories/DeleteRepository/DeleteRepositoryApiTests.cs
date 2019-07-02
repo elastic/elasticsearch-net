@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 {
@@ -24,10 +24,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteRepository(_name, f),
-			(client, f) => client.DeleteRepositoryAsync(_name, f),
-			(client, r) => client.DeleteRepository(r),
-			(client, r) => client.DeleteRepositoryAsync(r)
+			(client, f) => client.Snapshot.DeleteRepository(_name, f),
+			(client, f) => client.Snapshot.DeleteRepositoryAsync(_name, f),
+			(client, r) => client.Snapshot.DeleteRepository(r),
+			(client, r) => client.Snapshot.DeleteRepositoryAsync(r)
 		);
 
 		protected override DeleteRepositoryDescriptor NewDescriptor() => new DeleteRepositoryDescriptor(_name);

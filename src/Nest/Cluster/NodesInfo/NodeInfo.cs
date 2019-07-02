@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -44,14 +45,12 @@ namespace Nest
 		[DataMember(Name = "roles")]
 		public List<NodeRole> Roles { get; internal set; }
 
-		//TODO why is this using DynamicBody
 		[DataMember(Name = "settings")]
-		public DynamicBody Settings { get; internal set; }
+		public DynamicDictionary Settings { get; internal set; }
 
-		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "thread_pool")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
-		public Dictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
+		public IReadOnlyDictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "transport")]
 		public NodeInfoTransport Transport { get; internal set; }
@@ -81,6 +80,9 @@ namespace Nest
 		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
+		[DataMember(Name = "pretty_name")]
+		public string PrettyName { get; internal set; }
+
 		[DataMember(Name = "refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
@@ -89,6 +91,16 @@ namespace Nest
 
 		[DataMember(Name = "version")]
 		public string Version { get; internal set; }
+	}
+
+	[DataContract]
+	public class ClusterOperatingSystemPrettyNane
+	{
+		[DataMember(Name = "count")]
+		public int Count { get; internal set; }
+
+		[DataMember(Name = "pretty_name")]
+		public string PrettyName { get; internal set; }
 	}
 
 	[DataContract]
@@ -146,16 +158,16 @@ namespace Nest
 	public class NodeJvmInfo
 	{
 		[DataMember(Name = "gc_collectors")]
-		public IEnumerable<string> GCCollectors { get; internal set; }
+		public IEnumerable<string> GcCollectors { get; internal set; }
 
 		[DataMember(Name = "mem")]
-		public NodeInfoJVMMemory Memory { get; internal set; }
+		public NodeInfoJvmMemory Memory { get; internal set; }
 
 		[DataMember(Name = "memory_pools")]
 		public IEnumerable<string> MemoryPools { get; internal set; }
 
 		[DataMember(Name = "pid")]
-		public int PID { get; internal set; }
+		public int Pid { get; internal set; }
 
 		[DataMember(Name = "start_time_in_millis")]
 		public long StartTime { get; internal set; }
@@ -174,7 +186,7 @@ namespace Nest
 	}
 
 	[DataContract]
-	public class NodeInfoJVMMemory
+	public class NodeInfoJvmMemory
 	{
 		[DataMember(Name = "direct_max")]
 		public string DirectMax { get; internal set; }
@@ -210,18 +222,39 @@ namespace Nest
 	[DataContract]
 	public class NodeThreadPoolInfo
 	{
+		/// <summary>
+		/// The configured keep alive time for threads
+		/// </summary>
 		[DataMember(Name = "keep_alive")]
 		public string KeepAlive { get; internal set; }
 
+		/// <summary>
+		/// The configured maximum number of active threads allowed in the current thread pool
+		/// </summary>
 		[DataMember(Name = "max")]
 		public int? Max { get; internal set; }
 
-		[DataMember(Name = "min")]
-		public int? Min { get; internal set; }
+		/// <summary>
+		/// The configured core number of active threads allowed in the current thread pool
+		/// </summary>
+		[DataMember(Name = "core")]
+		public int? Core { get; internal set; }
 
+		/// <summary>
+		/// The configured fixed number of active threads allowed in the current thread pool
+		/// </summary>
+		[DataMember(Name = "size")]
+		public int? Size { get; internal set; }
+
+		/// <summary>
+		/// The maximum number of tasks permitted in the queue for the current thread pool
+		/// </summary>
 		[DataMember(Name = "queue_size")]
 		public int? QueueSize { get; internal set; }
 
+		/// <summary>
+		/// The type of thread pool
+		/// </summary>
 		[DataMember(Name = "type")]
 		public string Type { get; internal set; }
 	}

@@ -8,7 +8,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
@@ -21,7 +20,7 @@ namespace Tests.Document.Multiple.BulkAll
 			// last page will have some errors we don't need a 100 exceptions printed on console out though :)
 			NumberOfDocuments = Size * (Pages - 1) + 2;
 
-		public BulkOnErrorApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkOnErrorApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] public async Task WaitThrowsExceptionAndHalts()
 		{
@@ -74,7 +73,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var expectedBadDocuments = NumberOfDocuments - Size * FailAfterPage;
 			var badDocumentIds = new List<int>(expectedBadDocuments);
 			var observableBulk = KickOff(index, documents, r => r
-				.ContinueAfterDroppedDocuments(true)
+				.ContinueAfterDroppedDocuments()
 				.DroppedDocumentCallback((i, d) =>
 				{
 					d.Should().NotBeNull();

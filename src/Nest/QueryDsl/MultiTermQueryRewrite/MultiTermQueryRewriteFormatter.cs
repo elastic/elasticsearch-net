@@ -1,5 +1,5 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -10,7 +10,10 @@ namespace Nest
 			var token = reader.GetCurrentJsonToken();
 
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			if (token != JsonToken.String)
 				throw new Exception($"Invalid token type {token} to deserialize {nameof(MultiTermQueryRewrite)} from");

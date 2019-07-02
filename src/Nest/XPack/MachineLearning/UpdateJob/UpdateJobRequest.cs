@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -82,7 +82,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public partial class UpdateJobDescriptor<T> where T : class
+	public partial class UpdateJobDescriptor<TDocument> where TDocument : class
 	{
 		IAnalysisMemoryLimit IUpdateJobRequest.AnalysisLimits { get; set; }
 		Time IUpdateJobRequest.BackgroundPersistInterval { get; set; }
@@ -94,34 +94,34 @@ namespace Nest
 		long? IUpdateJobRequest.ResultsRetentionDays { get; set; }
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> AnalysisLimits(Func<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit> selector) =>
+		public UpdateJobDescriptor<TDocument> AnalysisLimits(Func<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit> selector) =>
 			Assign(selector, (a, v) => a.AnalysisLimits = v?.Invoke(new AnalysisMemoryLimitDescriptor()));
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> BackgroundPersistInterval(Time backgroundPersistInterval) =>
+		public UpdateJobDescriptor<TDocument> BackgroundPersistInterval(Time backgroundPersistInterval) =>
 			Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> customSettingsDictionary
+		public UpdateJobDescriptor<TDocument> CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> customSettingsDictionary
 		) =>
 			Assign(customSettingsDictionary(new FluentDictionary<string, object>()), (a, v) => a.CustomSettings = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> Description(string description) => Assign(description, (a, v) => a.Description = v);
+		public UpdateJobDescriptor<TDocument> Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> ModelPlot(Func<ModelPlotConfigEnabledDescriptor<T>, IModelPlotConfigEnabled> selector) =>
-			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigEnabledDescriptor<T>()));
+		public UpdateJobDescriptor<TDocument> ModelPlot(Func<ModelPlotConfigEnabledDescriptor<TDocument>, IModelPlotConfigEnabled> selector) =>
+			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigEnabledDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
+		public UpdateJobDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
 			Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> RenormalizationWindowDays(long? renormalizationWindowDays) =>
+		public UpdateJobDescriptor<TDocument> RenormalizationWindowDays(long? renormalizationWindowDays) =>
 			Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
+		public UpdateJobDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
 	}
 }

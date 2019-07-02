@@ -4,8 +4,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.GetUserAccessToken
@@ -45,14 +45,11 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 
 		protected virtual string UserPassword => Admin.Password;
 
-		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string Role => $"role-{CallIsolatedValue}";
-
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetUserAccessToken(Admin.Username, UserPassword, f),
-			(client, f) => client.GetUserAccessTokenAsync(Admin.Username, UserPassword, f),
-			(client, r) => client.GetUserAccessToken(r),
-			(client, r) => client.GetUserAccessTokenAsync(r)
+			(client, f) => client.Security.GetUserAccessToken(Admin.Username, UserPassword, f),
+			(client, f) => client.Security.GetUserAccessTokenAsync(Admin.Username, UserPassword, f),
+			(client, r) => client.Security.GetUserAccessToken(r),
+			(client, r) => client.Security.GetUserAccessTokenAsync(r)
 		);
 
 		protected override GetUserAccessTokenDescriptor NewDescriptor() => new GetUserAccessTokenDescriptor(Admin.Username, UserPassword);

@@ -6,7 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 
 namespace Tests.Search.Request
@@ -214,17 +214,17 @@ namespace Tests.Search.Request
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
-			foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
+			foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlight))
 			{
 				foreach (var highlightField in highlightsInEachHit)
 				{
 					if (highlightField.Key == "name.standard")
 					{
-						foreach (var highlight in highlightField.Value.Highlights)
+						foreach (var highlight in highlightField.Value)
 						{
 							highlight.Should().Contain("<tag1>");
 							highlight.Should().Contain("</tag1>");
@@ -232,7 +232,7 @@ namespace Tests.Search.Request
 					}
 					else if (highlightField.Key == "leadDeveloper.firstName")
 					{
-						foreach (var highlight in highlightField.Value.Highlights)
+						foreach (var highlight in highlightField.Value)
 						{
 							highlight.Should().Contain("<name>");
 							highlight.Should().Contain("</name>");
@@ -240,7 +240,7 @@ namespace Tests.Search.Request
 					}
 					else if (highlightField.Key == "leadDeveloper.lastName")
 					{
-						foreach (var highlight in highlightField.Value.Highlights)
+						foreach (var highlight in highlightField.Value)
 						{
 							highlight.Should().Contain("<name>");
 							highlight.Should().Contain("</name>");

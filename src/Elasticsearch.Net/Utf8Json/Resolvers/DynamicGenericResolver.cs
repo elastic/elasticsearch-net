@@ -29,8 +29,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{
@@ -145,6 +147,8 @@ namespace Elasticsearch.Net
 
 #if NETSTANDARD
 
+				//TODO: VALUETASK is not defined.
+#if VALUETASK
 				// ValueTask
 				else if (genericType == typeof(ValueTask<>))
 				{
@@ -154,6 +158,7 @@ namespace Elasticsearch.Net
 				{
 					return CreateInstance(typeof(NullableFormatter<>), new[] { nullableElementType });
 				}
+#endif
 
 				// Tuple
 				else if (ti.FullName.StartsWith("System.Tuple"))
@@ -192,6 +197,7 @@ namespace Elasticsearch.Net
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
 
+#if DOTNETCORE
 				// ValueTuple
 				else if (ti.FullName.StartsWith("System.ValueTuple"))
 				{
@@ -228,6 +234,7 @@ namespace Elasticsearch.Net
 
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
+#endif
 
 #endif
 

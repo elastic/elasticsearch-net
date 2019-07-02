@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -16,8 +17,11 @@ namespace Nest
 
 		internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
 
+		/// <summary>All indices. Represents _all</summary>
 		public static Indices All { get; } = new Indices(new AllIndicesMarker());
-		public static Indices AllIndices { get; } = new Indices(new AllIndicesMarker());
+
+		/// <inheritdoc cref="All" />
+		public static Indices AllIndices { get; } = All;
 
 		private string DebugDisplay => Match(
 			all => "_all",
@@ -37,6 +41,8 @@ namespace Nest
 				return string.Join(",", indices);
 			}
 		);
+
+		public static IndexName Index(string index) => index;
 
 		public static IndexName Index(IndexName index) => index;
 

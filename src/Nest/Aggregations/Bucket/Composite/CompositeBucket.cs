@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -119,6 +119,13 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, CompositeKey value, IJsonFormatterResolver formatterResolver) =>
 			DictionaryFormatter.Serialize(ref writer, value, formatterResolver);
 
-		public CompositeKey Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+		public CompositeKey Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.ReadIsNull())
+				return null;
+
+			var dictionary = DictionaryFormatter.Deserialize(ref reader, formatterResolver);
+			return new CompositeKey(dictionary);
+		}
 	}
 }

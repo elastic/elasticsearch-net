@@ -1,9 +1,9 @@
 ﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.Joining.SpanWithin
+namespace Tests.QueryDsl.Span.Within
 {
 	public class SpanWithinUsageTests : QueryDslUsageTestsBase
 	{
@@ -18,8 +18,8 @@ namespace Tests.QueryDsl.Joining.SpanWithin
 			},
 			q =>
 			{
-				q.Big = new SpanQuery { };
-				q.Little = new SpanQuery { };
+				q.Big = new SpanQuery();
+				q.Little = new SpanQuery();
 			},
 		};
 

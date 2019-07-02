@@ -1,6 +1,5 @@
-using System;
-using System.Linq;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -26,7 +25,10 @@ namespace Nest
 		public ILazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 
@@ -52,10 +54,8 @@ namespace Nest
                         while (reader.ReadIsInObject(ref c))
                         {
                             if (c != 1)
-                            {
-                                writer.WriteRaw((byte)',');
-                            }
-                            writer.WritePropertyName(reader.ReadPropertyName());
+								writer.WriteRaw((byte)',');
+							writer.WritePropertyName(reader.ReadPropertyName());
 							WriteUnindented(ref reader, ref writer);
                         }
                         writer.WriteEndObject();
@@ -68,9 +68,7 @@ namespace Nest
                         while (reader.ReadIsInArray(ref c))
                         {
                             if (c != 1)
-                            {
-                                writer.WriteRaw((byte)',');
-                            }
+								writer.WriteRaw((byte)',');
 							WriteUnindented(ref reader, ref writer);
                         }
                         writer.WriteEndArray();
@@ -78,7 +76,9 @@ namespace Nest
                     break;
                 case JsonToken.Number:
 					var segment = reader.ReadNumberSegment();
-					for (int i = 0; i < segment.Count; i++)
+					for (var i = 0; i < segment.Count; i++)
+						// segment.Array never null
+						// ReSharper disable once PossibleNullReferenceException
 						writer.WriteRawUnsafe(segment.Array[i + segment.Offset]);
 					break;
                 case JsonToken.String:
@@ -112,7 +112,9 @@ namespace Nest
 		public LazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
 				return null;
+			}
 
 			var arraySegment = reader.ReadNextBlockSegment();
 

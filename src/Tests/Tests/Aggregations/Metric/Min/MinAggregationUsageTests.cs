@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Min
@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.Min
 		protected override AggregationDictionary InitializerAggs =>
 			new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity));
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var min = response.Aggregations.Min("min_last_activity");

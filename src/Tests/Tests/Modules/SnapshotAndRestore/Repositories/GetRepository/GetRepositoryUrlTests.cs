@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 {
@@ -13,16 +13,16 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 			var repositories = "repos1,repos2";
 
 			await GET($"/_snapshot/repos1%2Crepos2")
-					.Fluent(c => c.GetRepository(s => s.RepositoryName(repositories)))
-					.Request(c => c.GetRepository(new GetRepositoryRequest(repositories)))
-					.FluentAsync(c => c.GetRepositoryAsync(s => s.RepositoryName(repositories)))
-					.RequestAsync(c => c.GetRepositoryAsync(new GetRepositoryRequest(repositories)))
+					.Fluent(c => c.Snapshot.GetRepository(s => s.RepositoryName(repositories)))
+					.Request(c => c.Snapshot.GetRepository(new GetRepositoryRequest(repositories)))
+					.FluentAsync(c => c.Snapshot.GetRepositoryAsync(s => s.RepositoryName(repositories)))
+					.RequestAsync(c => c.Snapshot.GetRepositoryAsync(new GetRepositoryRequest(repositories)))
 				;
 			await GET($"/_snapshot")
-					.Fluent(c => c.GetRepository())
-					.Request(c => c.GetRepository(new GetRepositoryRequest()))
-					.FluentAsync(c => c.GetRepositoryAsync())
-					.RequestAsync(c => c.GetRepositoryAsync(new GetRepositoryRequest()))
+					.Fluent(c => c.Snapshot.GetRepository())
+					.Request(c => c.Snapshot.GetRepository(new GetRepositoryRequest()))
+					.FluentAsync(c => c.Snapshot.GetRepositoryAsync())
+					.RequestAsync(c => c.Snapshot.GetRepositoryAsync(new GetRepositoryRequest()))
 				;
 		}
 	}

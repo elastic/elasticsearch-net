@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -40,7 +40,7 @@ namespace Nest
 			return this;
 		}
 
-		public virtual FieldSortDescriptor<T> Field(Expression<Func<T, object>> objectPath)
+		public virtual FieldSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath)
 		{
 			_field = objectPath;
 			return this;

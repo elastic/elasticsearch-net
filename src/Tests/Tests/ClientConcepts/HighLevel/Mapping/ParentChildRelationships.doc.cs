@@ -10,6 +10,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 
@@ -76,9 +77,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
-				.DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
-				.DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
-				.DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+				.DefaultMappingFor<MyDocument>(m => m.IndexName("index"))
+				.DefaultMappingFor<MyChild>(m => m.IndexName("index"))
+				.DefaultMappingFor<MyParent>(m => m.IndexName("index").RelationName("parent"));
 
 			var client = new ElasticClient(connectionSettings);
 
@@ -88,7 +89,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			/**
 			* With the `ConnectionSettings` set up, we can proceed to map `MyParent` and `MyChild` as part of the create index request.
 			*/
-			var createIndexResponse = client.CreateIndex("index", c => c
+			var createIndexResponse = client.Indices.Create("index", c => c
 				.Index<MyDocument>()
 				.Map<MyDocument>(m => m
 					.RoutingField(r => r.Required()) // <1> recommended to make the routing field mandatory so you can not accidentally forget

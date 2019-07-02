@@ -2,9 +2,9 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using static Nest.Indices;
-using static Tests.Framework.UrlTester;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
@@ -15,10 +15,10 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 			var indices = Index<Project>().And<Developer>();
 			var index = "project%2Cdevs";
 			await DELETE($"/{index}")
-					.Fluent(c => c.DeleteIndex(indices, s => s))
-					.Request(c => c.DeleteIndex(new DeleteIndexRequest(indices)))
-					.FluentAsync(c => c.DeleteIndexAsync(indices))
-					.RequestAsync(c => c.DeleteIndexAsync(new DeleteIndexRequest(indices)))
+					.Fluent(c => c.Indices.Delete(indices, s => s))
+					.Request(c => c.Indices.Delete(new DeleteIndexRequest(indices)))
+					.FluentAsync(c => c.Indices.DeleteAsync(indices))
+					.RequestAsync(c => c.Indices.DeleteAsync(new DeleteIndexRequest(indices)))
 				;
 		}
 	}

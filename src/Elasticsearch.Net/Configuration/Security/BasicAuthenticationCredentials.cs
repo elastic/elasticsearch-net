@@ -1,10 +1,39 @@
-﻿namespace Elasticsearch.Net
+﻿using System;
+using System.Security;
+
+namespace Elasticsearch.Net
 {
-	public class BasicAuthenticationCredentials
+	/// <summary>
+	/// Credentials for Basic Authentication
+	/// </summary>
+	public class BasicAuthenticationCredentials : IDisposable
 	{
-		public string Password { get; set; }
+		public BasicAuthenticationCredentials()
+		{
+		}
+
+		public BasicAuthenticationCredentials(string username, string password)
+		{
+			Username = username;
+			Password = password.CreateSecureString();
+		}
+
+		public BasicAuthenticationCredentials(string username, SecureString password)
+		{
+			Username = username;
+			Password = password;
+		}
+
+		/// <summary>
+		/// The password with which to authenticate
+		/// </summary>
+		public SecureString Password { get; set; }
+
+		/// <summary>
+		/// The username with which to authenticate
+		/// </summary>
 		public string Username { get; set; }
 
-		public override string ToString() => $"{Username}:{Password}";
+		public void Dispose() => Password?.Dispose();
 	}
 }

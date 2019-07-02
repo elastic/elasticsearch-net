@@ -9,14 +9,14 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.Geo
+namespace Tests.QueryDsl.Geo.Shape
 {
 	public abstract class GeoShapeSerializationTestsBase
 		: ApiIntegrationTestBase<IntrusiveOperationCluster,
-			SearchResponse<Domain.Shape>,
+			ISearchResponse<Domain.Shape>,
 			ISearchRequest,
 			SearchDescriptor<Domain.Shape>,
 			SearchRequest<Domain.Shape>>
@@ -88,13 +88,13 @@ namespace Tests.QueryDsl.Geo
 		protected override string UrlPath => $"/{Index}/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<Domain.Shape>(f),
-			(client, f) => client.SearchAsync<Domain.Shape>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<Domain.Shape>(r),
 			(client, r) => client.SearchAsync<Domain.Shape>(r)
 		);
 
-		protected override void ExpectResponse(SearchResponse<Domain.Shape> response)
+		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.Documents.Count.Should().Be(10);
@@ -110,10 +110,10 @@ namespace Tests.QueryDsl.Geo
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			if (client.IndexExists(Index).Exists)
+			if (client.Indices.Exists(Index).Exists)
 				return;
 
-			var createIndexResponse = client.CreateIndex(Index, c => c
+			var createIndexResponse = client.Indices.Create(Index, c => c
 				.Settings(s => s
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
@@ -159,10 +159,10 @@ namespace Tests.QueryDsl.Geo
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			if (client.IndexExists(Index).Exists)
+			if (client.Indices.Exists(Index).Exists)
 				return;
 
-			var createIndexResponse = client.CreateIndex(Index, c => c
+			var createIndexResponse = client.Indices.Create(Index, c => c
 				.Settings(s => s
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
@@ -210,7 +210,7 @@ namespace Tests.QueryDsl.Geo
 				throw new Exception($"Error indexing shapes for integration test: {bulkResponse.DebugInformation}");
 		}
 
-		protected override void ExpectResponse(SearchResponse<Domain.Shape> response)
+		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
 		{
 			base.ExpectResponse(response);
 

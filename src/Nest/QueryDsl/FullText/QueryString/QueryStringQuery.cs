@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -72,7 +72,7 @@ namespace Nest
 		Fields Fields { get; set; }
 
 		/// <summary>
-		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Fuzziness.Auto" />
+		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Nest.Fuzziness.Auto" />
 		/// </summary>
 		[DataMember(Name = "fuzziness")]
 		Fuzziness Fuzziness { get; set; }
@@ -307,7 +307,7 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(field, (a, v) => a.DefaultField = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.DefaultField" />
-		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.DefaultField = v);
+		public QueryStringQueryDescriptor<T> DefaultField<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.DefaultField = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Fields" />
 		public QueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>

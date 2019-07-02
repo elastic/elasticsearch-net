@@ -1,6 +1,5 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Elasticsearch.Net;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -22,8 +21,14 @@ namespace Nest
 		[DataMember(Name = "_index")]
 		public string Index { get; internal set; }
 
+		[DataMember(Name = "_primary_term")]
+		public long? PrimaryTerm { get; internal set; }
+
 		[DataMember(Name = "_routing")]
 		public string Routing { get; internal set; }
+
+		[DataMember(Name = "_seq_no")]
+		public long? SequenceNumber { get; internal set; }
 
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]

@@ -4,8 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories
 {
@@ -22,10 +22,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, CreateRepositoryResponse>(
 				CreateInitializer,
 				CreateFluent,
-				(s, c, f) => c.CreateRepository(s, f),
-				(s, c, f) => c.CreateRepositoryAsync(s, f),
-				(s, c, r) => c.CreateRepository(r),
-				(s, c, r) => c.CreateRepositoryAsync(r)
+				(s, c, f) => c.Snapshot.CreateRepository(s, f),
+				(s, c, f) => c.Snapshot.CreateRepositoryAsync(s, f),
+				(s, c, r) => c.Snapshot.CreateRepository(r),
+				(s, c, r) => c.Snapshot.CreateRepositoryAsync(r)
 			);
 
 		private string GetRepositoryPath(string name) => Path.Combine(_rootRepositoryPath, name);
@@ -54,10 +54,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			Calls<GetRepositoryDescriptor, GetRepositoryRequest, IGetRepositoryRequest, GetRepositoryResponse>(
 				ReadInitializer,
 				ReadFluent,
-				(s, c, f) => c.GetRepository(f),
-				(s, c, f) => c.GetRepositoryAsync(f),
-				(s, c, r) => c.GetRepository(r),
-				(s, c, r) => c.GetRepositoryAsync(r)
+				(s, c, f) => c.Snapshot.GetRepository(f),
+				(s, c, f) => c.Snapshot.GetRepositoryAsync(f),
+				(s, c, r) => c.Snapshot.GetRepository(r),
+				(s, c, r) => c.Snapshot.GetRepositoryAsync(r)
 			);
 
 		protected GetRepositoryRequest ReadInitializer(string name) => new GetRepositoryRequest(name);
@@ -69,10 +69,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, CreateRepositoryResponse>(
 				UpdateInitializer,
 				UpdateFluent,
-				(s, c, f) => c.CreateRepository(s, f),
-				(s, c, f) => c.CreateRepositoryAsync(s, f),
-				(s, c, r) => c.CreateRepository(r),
-				(s, c, r) => c.CreateRepositoryAsync(r)
+				(s, c, f) => c.Snapshot.CreateRepository(s, f),
+				(s, c, f) => c.Snapshot.CreateRepositoryAsync(s, f),
+				(s, c, r) => c.Snapshot.CreateRepository(r),
+				(s, c, r) => c.Snapshot.CreateRepositoryAsync(r)
 			);
 
 		protected CreateRepositoryRequest UpdateInitializer(string name) => new CreateRepositoryRequest(name)
@@ -99,10 +99,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			Calls<DeleteRepositoryDescriptor, DeleteRepositoryRequest, IDeleteRepositoryRequest, DeleteRepositoryResponse>(
 				DeleteInitializer,
 				DeleteFluent,
-				(s, c, f) => c.DeleteRepository(s),
-				(s, c, f) => c.DeleteRepositoryAsync(s),
-				(s, c, r) => c.DeleteRepository(r),
-				(s, c, r) => c.DeleteRepositoryAsync(r)
+				(s, c, f) => c.Snapshot.DeleteRepository(s),
+				(s, c, f) => c.Snapshot.DeleteRepositoryAsync(s),
+				(s, c, r) => c.Snapshot.DeleteRepository(r),
+				(s, c, r) => c.Snapshot.DeleteRepositoryAsync(r)
 			);
 
 		protected DeleteRepositoryRequest DeleteInitializer(string name) => new DeleteRepositoryRequest(name);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -108,5 +106,9 @@ namespace Nest
 		/// <inheritdoc cref="INoriAnalyzer" />
 		public AnalyzersDescriptor Nori(string name, Func<NoriAnalyzerDescriptor, INoriAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new NoriAnalyzerDescriptor()));
+
+		/// <inheritdoc cref="IIcuAnalyzer" />
+		public AnalyzersDescriptor Icu(string name, Func<IcuAnalyzerDescriptor, IIcuAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new IcuAnalyzerDescriptor()));
 	}
 }

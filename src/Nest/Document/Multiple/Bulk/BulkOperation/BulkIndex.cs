@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -17,7 +17,7 @@ namespace Nest
 		string Pipeline { get; set; }
 
 		[DataMember(Name = "if_seq_no")]
-		long? IfSeqNo { get; set; }
+		long? IfSequenceNumber { get; set; }
 
 		[DataMember(Name = "if_primary_term")]
 		long? IfPrimaryTerm { get; set; }
@@ -35,7 +35,7 @@ namespace Nest
 
 		public string Pipeline { get; set; }
 
-		public long? IfSeqNo { get; set; }
+		public long? IfSequenceNumber { get; set; }
 
 		public long? IfPrimaryTerm { get; set; }
 
@@ -59,7 +59,7 @@ namespace Nest
 		T IBulkIndexOperation<T>.Document { get; set; }
 		string IBulkIndexOperation<T>.Percolate { get; set; }
 		string IBulkIndexOperation<T>.Pipeline { get; set; }
-		long? IBulkIndexOperation<T>.IfSeqNo { get; set; }
+		long? IBulkIndexOperation<T>.IfSequenceNumber { get; set; }
 		long? IBulkIndexOperation<T>.IfPrimaryTerm { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
@@ -80,8 +80,8 @@ namespace Nest
 
 		public BulkIndexDescriptor<T> Percolate(string percolate) => Assign(percolate, (a, v) => a.Percolate = v);
 
-		public BulkIndexDescriptor<T> IfSeqNo(long? seqNo) => Assign(seqNo, (a, v) => a.IfSeqNo = v);
+		public BulkIndexDescriptor<T> IfSequenceNumber(long? seqNo) => Assign(seqNo, (a, v) => a.IfSequenceNumber = v);
 
-		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfSeqNo = v);
+		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfSequenceNumber = v);
 	}
 }

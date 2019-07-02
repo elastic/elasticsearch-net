@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterHealth
@@ -22,10 +22,10 @@ namespace Tests.Cluster.ClusterHealth
 		protected override string UrlPath => "/_cluster/health";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterHealth(),
-			(client, f) => client.ClusterHealthAsync(),
-			(client, r) => client.ClusterHealth(r),
-			(client, r) => client.ClusterHealthAsync(r)
+			(client, f) => client.Cluster.Health(),
+			(client, f) => client.Cluster.HealthAsync(),
+			(client, r) => client.Cluster.Health(r),
+			(client, r) => client.Cluster.HealthAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterHealthResponse response)
@@ -54,10 +54,10 @@ namespace Tests.Cluster.ClusterHealth
 		protected override string UrlPath => "/_cluster/health?level=shards";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterHealth(f),
-			(client, f) => client.ClusterHealthAsync(f),
-			(client, r) => client.ClusterHealth(r),
-			(client, r) => client.ClusterHealthAsync(r)
+			(client, f) => client.Cluster.Health(null, f),
+			(client, f) => client.Cluster.HealthAsync(null, f),
+			(client, r) => client.Cluster.Health(r),
+			(client, r) => client.Cluster.HealthAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterHealthResponse response)
@@ -69,6 +69,11 @@ namespace Tests.Cluster.ClusterHealth
 			response.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
 			response.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
 			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
+			response.ActiveShardsPercentAsNumber.Should().BePositive();
+			response.DelayedUnassignedShards.Should().Be(0);
+			response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
+			response.TaskMaxWaitTimeInQueueInMilliseconds.Should().BeGreaterOrEqualTo(0);
+
 			response.Indices.Should()
 				.NotBeEmpty()
 				.And.ContainKey(Index<Developer>());

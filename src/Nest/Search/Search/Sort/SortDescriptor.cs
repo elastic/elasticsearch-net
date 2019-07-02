@@ -10,10 +10,10 @@ namespace Nest
 	{
 		public SortDescriptor() : base(new List<ISort>()) { }
 
-		public SortDescriptor<T> Ascending(Expression<Func<T, object>> objectPath) =>
+		public SortDescriptor<T> Ascending<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Add(new FieldSort { Field = v, Order = SortOrder.Ascending }));
 
-		public SortDescriptor<T> Descending(Expression<Func<T, object>> objectPath) =>
+		public SortDescriptor<T> Descending<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Add(new FieldSort { Field = v, Order = SortOrder.Descending }));
 
 		public SortDescriptor<T> Ascending(Field field) => Assign(field, (a, v) => a.Add(new FieldSort { Field = v, Order = SortOrder.Ascending }));
@@ -31,7 +31,7 @@ namespace Nest
 
 		public SortDescriptor<T> Field(Field field, SortOrder order) => AddSort(new FieldSort { Field = field, Order = order });
 
-		public SortDescriptor<T> Field(Expression<Func<T, object>> field, SortOrder order) =>
+		public SortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field, SortOrder order) =>
 			AddSort(new FieldSort { Field = field, Order = order });
 
 		public SortDescriptor<T> GeoDistance(Func<GeoDistanceSortDescriptor<T>, IGeoDistanceSort> sortSelector) =>

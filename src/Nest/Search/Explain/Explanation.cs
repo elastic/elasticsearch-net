@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	[DataContract]
 	public class Explanation
 	{
-		[DataMember(Name ="description")]
+		[DataMember(Name = "description")]
 		public string Description { get; internal set; }
 
-		[DataMember(Name ="details")]
+		[DataMember(Name = "details")]
 		public IReadOnlyCollection<ExplanationDetail> Details { get; internal set; } = EmptyReadOnly<ExplanationDetail>.Collection;
 
-		[DataMember(Name ="value")]
+		[DataMember(Name = "value")]
 		public float Value { get; internal set; }
 	}
 }

@@ -13,11 +13,11 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public abstract class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
 	{
-		public ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
+		protected ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
 
-		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins)) { }
+		protected ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins)) { }
 
-		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
+		protected ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 
 		public IElasticClient Client => this.GetOrAddClient(s => ConnectionSettings(s.ApplyDomainSettings()));
 

@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteJob
 {
@@ -26,10 +24,10 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteJob(CallIsolatedValue, f),
-			(client, f) => client.DeleteJobAsync(CallIsolatedValue, f),
-			(client, r) => client.DeleteJob(r),
-			(client, r) => client.DeleteJobAsync(r)
+			(client, f) => client.MachineLearning.DeleteJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.DeleteJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.DeleteJob(r),
+			(client, r) => client.MachineLearning.DeleteJobAsync(r)
 		);
 
 		protected override DeleteJobDescriptor NewDescriptor() => new DeleteJobDescriptor(CallIsolatedValue);

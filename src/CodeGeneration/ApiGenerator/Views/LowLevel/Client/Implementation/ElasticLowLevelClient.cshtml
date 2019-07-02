@@ -1,0 +1,75 @@
+@using RazorLight
+@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@using System.Text.RegularExpressions
+@using ApiGenerator.Domain
+@using ApiGenerator 
+@using ApiGenerator.Domain.Code
+@using CsQuery.StringScanner.Implementation
+@inherits CodeTemplatePage<RestApiSpec>
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
+@{ await IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+using static Elasticsearch.Net.HttpMethod;
+
+@{
+	RestApiSpec model = Model;
+	var namespaces = model.EndpointsPerNamespace.Keys.Where(k => k != CsharpNames.RootNamespace);
+<text>
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable RedundantExtendsListEntry
+namespace Elasticsearch.Net
+{
+	///<summary>
+	///Elasticsearch low level client
+	///</summary>
+	public partial class ElasticLowLevelClient : IElasticLowLevelClient
+	{
+</text>
+	foreach (var ns in namespaces)
+	{
+<text>		public @(CsharpNames.LowLevelClientNamespacePrefix)@(ns)@(CsharpNames.ClientNamespaceSuffix) @ns { get; private set; } 
+</text>
+	}
+<text>
+		partial void SetupNamespaces()
+		{
+</text>
+	foreach (var ns in namespaces)
+	{
+<text>		@ns = new @(CsharpNames.LowLevelClientNamespacePrefix)@(ns)@(CsharpNames.ClientNamespaceSuffix)(this);
+</text>
+	}
+<text>
+		}
+</text>
+	
+
+	foreach (var kv in model.EndpointsPerNamespace)
+	{
+		if (kv.Key != CsharpNames.RootNamespace)
+		{
+			continue;
+		}
+		var endpoints = kv.Value;
+		var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
+		foreach (var method in methods)
+		{
+			await IncludeAsync("LowLevel/Client/Methods/MethodImplementation.cshtml", method);
+		}
+	}
+	<text>
+	}
+	}
+	</text>
+}

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/SignificantTerms/SignificantTermsAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/SignificantTerms/SignificantTermsAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -55,6 +55,23 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "significant_names": {
+    "significant_terms": {
+      "field": "name",
+      "min_doc_count": 10,
+      "mutual_information": {
+        "background_is_superset": true,
+        "include_negatives": true
+      }
+    }
+  }
 }
 ----
 
@@ -107,6 +124,24 @@ new SignificantTermsAggregation("significant_names")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "significant_names": {
+    "significant_terms": {
+      "field": "name",
+      "min_doc_count": 10,
+      "mutual_information": {
+        "background_is_superset": true,
+        "include_negatives": true
+      },
+      "include": "pi*"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -156,6 +191,26 @@ new SignificantTermsAggregation("significant_names")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "significant_names": {
+    "significant_terms": {
+      "field": "name",
+      "min_doc_count": 10,
+      "mutual_information": {
+        "background_is_superset": true,
+        "include_negatives": true
+      },
+      "exclude": [
+        "pierce"
+      ]
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -164,5 +219,59 @@ response.ShouldBeValid();
 var sigNames = response.Aggregations.SignificantTerms("significant_names");
 sigNames.Should().NotBeNull();
 sigNames.DocCount.Should().BeGreaterThan(0);
+----
+
+[[significant-terms-numeric-field]]
+[float]
+== Numeric fields
+
+A significant terms aggregation on a numeric field
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.SignificantTerms("commits", st => st
+    .Field(p => p.NumberOfContributors)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new SignificantTermsAggregation("commits")
+{
+    Field = Field<Project, int>(p => p.NumberOfContributors)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "significant_terms": {
+      "field": "numberOfContributors"
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var commits = response.Aggregations.SignificantTerms<int>("commits");
+commits.Should().NotBeNull();
+commits.Buckets.Should().NotBeNull();
+commits.Buckets.Count.Should().BeGreaterThan(0);
+foreach (var item in commits.Buckets)
+{
+    item.Key.Should().BeGreaterThan(0);
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
 ----
 

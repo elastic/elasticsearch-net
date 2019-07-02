@@ -36,7 +36,7 @@ namespace Nest
 		public TDescriptor Name(PropertyName name) => Assign(name, (a, v) => a.Name = v);
 
 		/// <inheritdoc cref="IProperty.Name" />
-		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Name = v);
+		public TDescriptor Name<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Name = v);
 
 		/// <inheritdoc cref="IProperty.LocalMetadata" />
 		public TDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>

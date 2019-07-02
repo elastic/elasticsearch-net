@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 {
@@ -12,17 +12,17 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		{
 			var name = "temp";
 			await GET($"/_template/{name}")
-					.Fluent(c => c.GetIndexTemplate(p => p.Name(name)))
-					.Request(c => c.GetIndexTemplate(new GetIndexTemplateRequest(name)))
-					.FluentAsync(c => c.GetIndexTemplateAsync(p => p.Name(name)))
-					.RequestAsync(c => c.GetIndexTemplateAsync(new GetIndexTemplateRequest(name)))
+					.Fluent(c => c.Indices.GetTemplate(name))
+					.Request(c => c.Indices.GetTemplate(new GetIndexTemplateRequest(name)))
+					.FluentAsync(c => c.Indices.GetTemplateAsync(name))
+					.RequestAsync(c => c.Indices.GetTemplateAsync(new GetIndexTemplateRequest(name)))
 				;
 
 			await GET($"/_template")
-					.Fluent(c => c.GetIndexTemplate())
-					.Request(c => c.GetIndexTemplate(new GetIndexTemplateRequest()))
-					.FluentAsync(c => c.GetIndexTemplateAsync())
-					.RequestAsync(c => c.GetIndexTemplateAsync(new GetIndexTemplateRequest()))
+					.Fluent(c => c.Indices.GetTemplate())
+					.Request(c => c.Indices.GetTemplate(new GetIndexTemplateRequest()))
+					.FluentAsync(c => c.Indices.GetTemplateAsync())
+					.RequestAsync(c => c.Indices.GetTemplateAsync(new GetIndexTemplateRequest()))
 				;
 		}
 	}

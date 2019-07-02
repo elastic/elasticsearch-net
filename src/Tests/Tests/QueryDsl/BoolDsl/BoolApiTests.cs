@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using System.Runtime.Serialization;
-
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
@@ -33,7 +31,7 @@ namespace Tests.QueryDsl.BoolDsl
 		protected override void SeedCluster()
 		{
 			var client = Client;
-			var index = client.CreateIndex(Index<A>(), i => i
+			var index = client.Indices.Create(Index<A>(), i => i
 				.Map<A>(m => m
 					.AutoMap()
 					.Properties(props => props
@@ -44,7 +42,7 @@ namespace Tests.QueryDsl.BoolDsl
 			var bulkResponse = client.Bulk(b => b.IndexMany(A.Documents));
 			if (!bulkResponse.IsValid) throw new Exception("Could not bootstrap bool cluster, bulk was invalid");
 
-			client.Refresh(Indices<A>());
+			client.Indices.Refresh(Indices<A>());
 		}
 
 		public class A

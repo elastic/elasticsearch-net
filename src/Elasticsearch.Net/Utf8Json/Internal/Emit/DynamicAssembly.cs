@@ -23,14 +23,10 @@
 #endregion
 
 using System;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Resources;
-using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 {
 	internal class DynamicAssembly
 	{

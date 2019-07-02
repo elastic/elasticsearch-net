@@ -81,7 +81,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public partial class ValidateJobDescriptor<T> where T : class
+	public partial class ValidateJobDescriptor<TDocument> where TDocument : class
 	{
 		IAnalysisConfig IValidateJobRequest.AnalysisConfig { get; set; }
 		IAnalysisLimits IValidateJobRequest.AnalysisLimits { get; set; }
@@ -92,32 +92,32 @@ namespace Nest
 		IndexName IValidateJobRequest.ResultsIndexName { get; set; }
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> AnalysisConfig(Func<AnalysisConfigDescriptor<T>, IAnalysisConfig> selector) =>
-			Assign(selector, (a, v) => a.AnalysisConfig = v?.Invoke(new AnalysisConfigDescriptor<T>()));
+		public ValidateJobDescriptor<TDocument> AnalysisConfig(Func<AnalysisConfigDescriptor<TDocument>, IAnalysisConfig> selector) =>
+			Assign(selector, (a, v) => a.AnalysisConfig = v?.Invoke(new AnalysisConfigDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) =>
+		public ValidateJobDescriptor<TDocument> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) =>
 			Assign(selector, (a, v) => a.AnalysisLimits = v?.Invoke(new AnalysisLimitsDescriptor()));
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> DataDescription(Func<DataDescriptionDescriptor<T>, IDataDescription> selector) =>
-			Assign(selector.InvokeOrDefault(new DataDescriptionDescriptor<T>()), (a, v) => a.DataDescription = v);
+		public ValidateJobDescriptor<TDocument> DataDescription(Func<DataDescriptionDescriptor<TDocument>, IDataDescription> selector) =>
+			Assign(selector.InvokeOrDefault(new DataDescriptionDescriptor<TDocument>()), (a, v) => a.DataDescription = v);
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> Description(string description) => Assign(description, (a, v) => a.Description = v);
+		public ValidateJobDescriptor<TDocument> Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ModelPlot(Func<ModelPlotConfigDescriptor<T>, IModelPlotConfig> selector) =>
-			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigDescriptor<T>()));
+		public ValidateJobDescriptor<TDocument> ModelPlot(Func<ModelPlotConfigDescriptor<TDocument>, IModelPlotConfig> selector) =>
+			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
+		public ValidateJobDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
 			Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ResultsIndexName(IndexName indexName) => Assign(indexName, (a, v) => a.ResultsIndexName = v);
+		public ValidateJobDescriptor<TDocument> ResultsIndexName(IndexName indexName) => Assign(indexName, (a, v) => a.ResultsIndexName = v);
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ResultsIndexName<TIndex>() => Assign(typeof(TIndex), (a, v) => a.ResultsIndexName = v);
+		public ValidateJobDescriptor<TDocument> ResultsIndexName<TIndex>() => Assign(typeof(TIndex), (a, v) => a.ResultsIndexName = v);
 	}
 }

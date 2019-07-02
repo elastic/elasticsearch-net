@@ -6,8 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.AliasManagement.Alias
 {
@@ -50,10 +50,10 @@ namespace Tests.Indices.AliasManagement.Alias
 		protected override string UrlPath => $"/_aliases";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Alias(f),
-			(client, f) => client.AliasAsync(f),
-			(client, r) => client.Alias(r),
-			(client, r) => client.AliasAsync(r)
+			(client, f) => client.Indices.BulkAlias(f),
+			(client, f) => client.Indices.BulkAliasAsync(f),
+			(client, r) => client.Indices.BulkAlias(r),
+			(client, r) => client.Indices.BulkAliasAsync(r)
 		);
 	}
 
@@ -116,10 +116,10 @@ namespace Tests.Indices.AliasManagement.Alias
 		private string Index => CallIsolatedValue;
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Alias(f),
-			(client, f) => client.AliasAsync(f),
-			(client, r) => client.Alias(r),
-			(client, r) => client.AliasAsync(r)
+			(client, f) => client.Indices.BulkAlias(f),
+			(client, f) => client.Indices.BulkAliasAsync(f),
+			(client, r) => client.Indices.BulkAlias(r),
+			(client, r) => client.Indices.BulkAliasAsync(r)
 		);
 
 		private string Alias(int i) => $"alias-{CallIsolatedValue}-{i}";
@@ -127,7 +127,7 @@ namespace Tests.Indices.AliasManagement.Alias
 		protected override void OnAfterCall(IElasticClient client)
 		{
 			var secondAlias = Alias(2);
-			var aliasResponse = Client.GetAlias(a => a.Name(secondAlias));
+			var aliasResponse = Client.Indices.GetAlias(secondAlias);
 			aliasResponse.ShouldBeValid();
 			aliasResponse.Indices.Should().NotBeEmpty().And.ContainKey(Index);
 			var indexAliases = aliasResponse.Indices[Index].Aliases;

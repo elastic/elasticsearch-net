@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types
 {
@@ -94,10 +94,10 @@ namespace Tests.Mapping.Types
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutIndexTemplate(CallIsolatedValue, f),
-			(client, f) => client.PutIndexTemplateAsync(CallIsolatedValue, f),
-			(client, r) => client.PutIndexTemplate(r),
-			(client, r) => client.PutIndexTemplateAsync(r)
+			(client, f) => client.Indices.PutTemplate(CallIsolatedValue, f),
+			(client, f) => client.Indices.PutTemplateAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.PutTemplate(r),
+			(client, r) => client.Indices.PutTemplateAsync(r)
 		);
 
 		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);

@@ -1,6 +1,6 @@
 using System;
-using System.Text;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -58,8 +58,11 @@ namespace Nest
 								}
 							}
 
-							decayFunction.MultiValueMode = multiValueMode;
-							function = decayFunction;
+							if (decayFunction != null)
+							{
+								decayFunction.MultiValueMode = multiValueMode;
+								function = decayFunction;
+							}
 							break;
 						case 3:
 							var randomScoreFormatter = formatterResolver.GetFormatter<RandomScoreFunction>();
@@ -202,7 +205,7 @@ namespace Nest
 			switch (decay)
 			{
 				case IDecayFunction<double?, double?> numericDecay:
-					WriteNumericDecay(ref writer, ref written, numericDecay, formatterResolver);
+					WriteNumericDecay(ref writer, ref written, numericDecay);
 					break;
 				case IDecayFunction<DateMath, Time> dateDecay:
 					WriteDateDecay(ref writer, ref written, dateDecay, formatterResolver);
@@ -237,9 +240,7 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 
-		private static void WriteNumericDecay(ref JsonWriter writer, ref bool written, IDecayFunction<double?, double?> value,
-			IJsonFormatterResolver formatterResolver
-		)
+		private static void WriteNumericDecay(ref JsonWriter writer, ref bool written, IDecayFunction<double?, double?> value)
 		{
 			if (value.Origin.HasValue)
 			{
@@ -353,31 +354,40 @@ namespace Nest
 			}
 
 			segmentReader = new JsonReader(segment.Array, segment.Offset);
-			// TODO: Avoid allocation
-			var t = $"{type}_{subType}";
 
-			switch (t)
+			switch (type)
 			{
-				case "exp_numeric":
-					return Deserialize<ExponentialDecayFunction>(ref segmentReader, formatterResolver);
-				case "exp_date":
-					return Deserialize<ExponentialDateDecayFunction>(ref segmentReader, formatterResolver);
-				case "exp_geo":
-					return Deserialize<ExponentialGeoDecayFunction>(ref segmentReader, formatterResolver);
-				case "gauss_numeric":
-					return Deserialize<GaussDecayFunction>(ref segmentReader, formatterResolver);
-				case "gauss_date":
-					return Deserialize<GaussDateDecayFunction>(ref segmentReader, formatterResolver);
-				case "gauss_geo":
-					return Deserialize<GaussGeoDecayFunction>(ref segmentReader, formatterResolver);
-				case "linear_numeric":
-					return Deserialize<LinearDecayFunction>(ref segmentReader, formatterResolver);
-				case "linear_date":
-					return Deserialize<LinearDateDecayFunction>(ref segmentReader, formatterResolver);
-				case "linear_geo":
-					return Deserialize<LinearGeoDecayFunction>(ref segmentReader, formatterResolver);
-				default:
-					return null;
+				case "exp":
+				{
+					switch (subType)
+					{
+						case "numeric": return Deserialize<ExponentialDecayFunction>(ref segmentReader, formatterResolver);
+						case "date": return Deserialize<ExponentialDateDecayFunction>(ref segmentReader, formatterResolver);
+						case "geo": return Deserialize<ExponentialGeoDecayFunction>(ref segmentReader, formatterResolver);
+						default: return null;
+					}
+				}
+				case "gauss":
+				{
+					switch (subType)
+					{
+						case "numeric": return Deserialize<GaussDecayFunction>(ref segmentReader, formatterResolver);
+						case "date": return Deserialize<GaussDateDecayFunction>(ref segmentReader, formatterResolver);
+						case "geo": return Deserialize<GaussGeoDecayFunction>(ref segmentReader, formatterResolver);
+						default: return null;
+					}
+				}
+				case "linear":
+				{
+					switch (subType)
+					{
+						case "numeric": return Deserialize<LinearDecayFunction>(ref segmentReader, formatterResolver);
+						case "date": return Deserialize<LinearDateDecayFunction>(ref segmentReader, formatterResolver);
+						case "geo": return Deserialize<LinearGeoDecayFunction>(ref segmentReader, formatterResolver);
+						default: return null;
+					}
+				}
+				default: return null;
 			}
 		}
 

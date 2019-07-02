@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -8,7 +8,10 @@ namespace Nest
 		public TSortOrder Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			var sortOrder = new TSortOrder();
@@ -31,7 +34,6 @@ namespace Nest
 			}
 
 			writer.WriteBeginObject();
-			// TODO: Should this be a Field?
 			writer.WritePropertyName(value.Key);
 			formatterResolver.GetFormatter<SortOrder>().Serialize(ref writer, value.Order, formatterResolver);
 			writer.WriteEndObject();

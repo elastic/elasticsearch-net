@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {

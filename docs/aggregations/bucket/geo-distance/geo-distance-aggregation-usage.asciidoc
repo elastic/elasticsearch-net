@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/GeoDistance/GeoDistanceAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/GeoDistance/GeoDistanceAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -21,7 +21,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 a => a
 .GeoDistance("rings_around_amsterdam", g => g
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .Origin(52.376, 4.894)
     .Ranges(
         r => r.To(100),
@@ -37,7 +37,7 @@ a => a
 ----
 new GeoDistanceAggregation("rings_around_amsterdam")
 {
-    Field = Field((Project p) => p.Location),
+    Field = Field((Project p) => p.LocationPoint),
     Origin = "52.376, 4.894",
     Ranges = new List<AggregationRange>
     {
@@ -45,6 +45,34 @@ new GeoDistanceAggregation("rings_around_amsterdam")
         new AggregationRange { From = 100, To = 300 },
         new AggregationRange { From = 300 }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "rings_around_amsterdam": {
+    "geo_distance": {
+      "field": "locationPoint",
+      "origin": {
+        "lat": 52.376,
+        "lon": 4.894
+      },
+      "ranges": [
+        {
+          "to": 100.0
+        },
+        {
+          "from": 100.0,
+          "to": 300.0
+        },
+        {
+          "from": 300.0
+        }
+      ]
+    }
+  }
 }
 ----
 

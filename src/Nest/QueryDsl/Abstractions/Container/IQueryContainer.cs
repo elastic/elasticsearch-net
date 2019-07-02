@@ -1,5 +1,5 @@
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -51,6 +51,9 @@ namespace Nest
 
 		[DataMember(Name ="ids")]
 		IIdsQuery Ids { get; set; }
+
+		[DataMember(Name = "intervals")]
+		IIntervalsQuery Intervals { get; set; }
 
 		[IgnoreDataMember]
 		bool IsConditionless { get; }

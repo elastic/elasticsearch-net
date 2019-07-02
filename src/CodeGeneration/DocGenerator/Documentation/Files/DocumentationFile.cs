@@ -59,7 +59,7 @@ namespace DocGenerator.Documentation.Files
 				FileOptions.Asynchronous | FileOptions.SequentialScan))
 			using (var destinationStream = new FileStream(destinationFile, FileMode.Create, FileAccess.Write, FileShare.None, 4096,
 				FileOptions.Asynchronous | FileOptions.SequentialScan))
-				await sourceStream.CopyToAsync(destinationStream);
+				await sourceStream.CopyToAsync(destinationStream).ConfigureAwait(false);
 		}
 	}
 }

@@ -6,8 +6,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Multiple.Bulk
 {
@@ -17,7 +17,7 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override bool ExpectIsValid => true;
 
-		protected override object ExpectJson => new object[]
+		protected override object ExpectJson => new[]
 		{
 			new Dictionary<string, object>
 				{ { "index", new { _id = Project.Instance.Name, pipeline = "pipeline", routing = Project.Instance.Name } } },
@@ -116,14 +116,14 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var pipelineResponse = client.PutPipeline("default-pipeline", p => p
+			var pipelineResponse = client.Ingest.PutPipeline("default-pipeline", p => p
 				.Processors(pr => pr
 					.Set<Project>(t => t.Field(f => f.Description).Value("Default"))
 				)
 			);
 			pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
 
-			pipelineResponse = client.PutPipeline("pipeline", p => p
+			pipelineResponse = client.Ingest.PutPipeline("pipeline", p => p
 				.Processors(pr => pr
 					.Set<Project>(t => t.Field(f => f.Description).Value("Overridden"))
 				)
@@ -155,14 +155,14 @@ namespace Tests.Document.Multiple.Bulk
 				item.Result.Should().NotBeNullOrEmpty();
 			}
 
-			var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
+			var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue)).Body;
 			project1.LeadDeveloper.FirstName.Should().Be("martijn");
 			project1.Description.Should().Be("Overridden");
 
 			var project2 = Client.Source<Project>(Project.Instance.Name + "2", p => p
 				.Index(CallIsolatedValue)
 				.Routing(Project.Instance.Name)
-			);
+			).Body;
 			project2.Description.Should().Be("Default");
 			project2.NumberOfCommits.Should().Be(30);
 		}

@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 				WrittenBytes = ms?.ToArray();
 		}
 
-		public static implicit operator SerializableData<T>(T serialiableData) => new SerializableData<T>(serialiableData);
+		public static implicit operator SerializableData<T>(T serializableData) => new SerializableData<T>(serializableData);
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{

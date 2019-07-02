@@ -23,9 +23,8 @@
 #endregion
 
 using System;
-using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     internal static class StringMutator
     {

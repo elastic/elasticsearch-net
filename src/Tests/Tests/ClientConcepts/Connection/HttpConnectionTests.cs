@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DOTNETCORE
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -70,7 +71,7 @@ namespace Tests.ClientConcepts.Connection
 				.EnableHttpCompression(httpCompression);
 
 			if (proxyAddress != null)
-				connectionSettings.Proxy(proxyAddress, null, null);
+				connectionSettings.Proxy(proxyAddress, null, (string)null);
 
 			var requestData = new RequestData(HttpMethod.GET, "/", null, connectionSettings, new PingRequestParameters(),
 				new MemoryStreamFactory())
@@ -135,3 +136,4 @@ namespace Tests.ClientConcepts.Connection
 		}
 	}
 }
+#endif

@@ -26,8 +26,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json
 {
     /// <summary>
     /// High-Level API of Utf8Json.
@@ -252,7 +255,11 @@ namespace Elasticsearch.Net
 
         public static T Deserialize<T>(byte[] bytes, int offset, IJsonFormatterResolver resolver)
         {
-            if (resolver == null) resolver = DefaultResolver;
+			if (bytes == null || bytes.Length == 0)
+				return default;
+
+            if (resolver == null)
+				resolver = DefaultResolver;
 
             var reader = new JsonReader(bytes, offset);
             var formatter = resolver.GetFormatterWithVerify<T>();
@@ -279,11 +286,14 @@ namespace Elasticsearch.Net
 
         public static T Deserialize<T>(Stream stream, IJsonFormatterResolver resolver)
         {
-            if (resolver == null) resolver = DefaultResolver;
+			if (stream == null || stream.CanSeek && stream.Length == 0)
+				return default;
+
+            if (resolver == null)
+				resolver = DefaultResolver;
 
 #if NETSTANDARD && !NET45
-            var ms = stream as MemoryStream;
-            if (ms != null)
+			if (stream is MemoryStream ms)
             {
 				if (ms.TryGetBuffer(out var buf2))
                 {
@@ -300,39 +310,63 @@ namespace Elasticsearch.Net
                 }
             }
 #endif
-            {
-				var buf = MemoryPool.Rent();
-				var poolBuf = buf;
-				try
-				{
-					var len = FillFromStream(stream, ref buf);
+            var buf = MemoryPool.Rent();
+			var poolBuf = buf;
+			try
+			{
+				var length = FillFromStream(stream, ref buf);
 
-					// when token is number, can not use from pool(can not find end line).
-					var token = new JsonReader(buf).GetCurrentJsonToken();
-					if (token == JsonToken.Number)
-					{
-						buf = BinaryUtil.FastCloneWithResize(buf, len);
-					}
+				if (length == 0)
+					return default;
 
-					return Deserialize<T>(buf, resolver);
-				}
-				finally
+				// when token is number, can not use from pool(can not find end line).
+				var token = new JsonReader(buf).GetCurrentJsonToken();
+				if (token == JsonToken.Number)
 				{
-					MemoryPool.Return(poolBuf);
+					buf = BinaryUtil.FastCloneWithResize(buf, length);
 				}
-            }
+
+				return Deserialize<T>(buf, resolver);
+			}
+			finally
+			{
+				MemoryPool.Return(poolBuf);
+			}
         }
 
 #if NETSTANDARD
 
-        public static System.Threading.Tasks.Task<T> DeserializeAsync<T>(Stream stream)
+        public static Task<T> DeserializeAsync<T>(Stream stream)
         {
             return DeserializeAsync<T>(stream, defaultResolver);
         }
 
-        public static async System.Threading.Tasks.Task<T> DeserializeAsync<T>(Stream stream, IJsonFormatterResolver resolver)
+        public static async Task<T> DeserializeAsync<T>(Stream stream, IJsonFormatterResolver resolver)
         {
-            if (resolver == null) resolver = DefaultResolver;
+			if (stream == null || stream.CanSeek && stream.Length == 0)
+				return default;
+
+            if (resolver == null)
+				resolver = DefaultResolver;
+
+#if NETSTANDARD && !NET45
+			if (stream is MemoryStream ms)
+            {
+				if (ms.TryGetBuffer(out var buf2))
+                {
+                    // when token is number, can not use from pool(can not find end line).
+                    var token = new JsonReader(buf2.Array, buf2.Offset).GetCurrentJsonToken();
+                    if (token == JsonToken.Number)
+                    {
+                        var buf3 = new byte[buf2.Count];
+                        Buffer.BlockCopy(buf2.Array, buf2.Offset, buf3, 0, buf3.Length);
+                        return Deserialize<T>(buf3, 0, resolver);
+                    }
+
+                    return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
+                }
+            }
+#endif
 
             var buffer = MemoryPool.Rent();
             var buf = buffer;
@@ -344,10 +378,11 @@ namespace Elasticsearch.Net
                 {
                     length += read;
                     if (length == buf.Length)
-                    {
-                        BinaryUtil.FastResize(ref buf, length * 2);
-                    }
+						BinaryUtil.FastResize(ref buf, length * 2);
                 }
+
+				if (length == 0)
+					return default;
 
                 // when token is number, can not use from pool(can not find end line).
                 var token = new JsonReader(buf).GetCurrentJsonToken();

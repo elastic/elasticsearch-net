@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -55,7 +56,7 @@ namespace Nest
 
 		public static implicit operator Fields(Field[] fields) => fields.IsEmpty() ? null : new Fields(fields);
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class
+		public Fields And<T, TValue>(Expression<Func<T, TValue>> field, double? boost = null, string format = null) where T : class
 		{
 			ListOfFields.Add(new Field(field, boost, format));
 			return this;

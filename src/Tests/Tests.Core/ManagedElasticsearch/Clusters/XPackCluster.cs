@@ -15,7 +15,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		public XPackClusterConfiguration() : this(ClusterFeatures.SSL | ClusterFeatures.Security) { }
 
-		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1)
+		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features)
 		{
 			// Get license file path from environment variable
 			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");

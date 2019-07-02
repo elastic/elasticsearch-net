@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.DeleteForecast
 {
@@ -27,7 +25,7 @@ namespace Tests.XPack.MachineLearning.DeleteForecast
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putJobResponse = client.PutJob<object>(callUniqueValue.Value + "-job", f => f
+				var putJobResponse = client.MachineLearning.PutJob<object>(callUniqueValue.Value + "-job", f => f
 					.Description("DeleteForecastApiTests")
 					.AnalysisConfig(a => a
 						.BucketSpan($"{BucketSpanSeconds}s")
@@ -51,10 +49,10 @@ namespace Tests.XPack.MachineLearning.DeleteForecast
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteForecast(CallIsolatedValue + "-job", CallIsolatedValue),
-			(client, f) => client.DeleteForecastAsync(CallIsolatedValue + "-job", CallIsolatedValue),
-			(client, r) => client.DeleteForecast(r),
-			(client, r) => client.DeleteForecastAsync(r)
+			(client, f) => client.MachineLearning.DeleteForecast(CallIsolatedValue + "-job", CallIsolatedValue),
+			(client, f) => client.MachineLearning.DeleteForecastAsync(CallIsolatedValue + "-job", CallIsolatedValue),
+			(client, r) => client.MachineLearning.DeleteForecast(r),
+			(client, r) => client.MachineLearning.DeleteForecastAsync(r)
 		);
 
 		protected override DeleteForecastDescriptor NewDescriptor() => new DeleteForecastDescriptor(CallIsolatedValue + "-job", CallIsolatedValue);

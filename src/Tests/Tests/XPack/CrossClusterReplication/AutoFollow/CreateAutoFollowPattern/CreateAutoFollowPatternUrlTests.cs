@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 
 namespace Tests.XPack.CrossClusterReplication.AutoFollow.CreateAutoFollowPattern
 {
@@ -11,10 +11,10 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.CreateAutoFollowPattern
 		{
 			var name = "x";
 			await UrlTester.PUT($"/_ccr/auto_follow/{name}")
-				.Fluent(c => c.CreateAutoFollowPattern(name, d => d))
-				.Request(c => c.CreateAutoFollowPattern(new CreateAutoFollowPatternRequest(name)))
-				.FluentAsync(c => c.CreateAutoFollowPatternAsync(name, d => d))
-				.RequestAsync(c => c.CreateAutoFollowPatternAsync(new CreateAutoFollowPatternRequest(name)));
+				.Fluent(c => c.CrossClusterReplication.CreateAutoFollowPattern(name, d => d))
+				.Request(c => c.CrossClusterReplication.CreateAutoFollowPattern(new CreateAutoFollowPatternRequest(name)))
+				.FluentAsync(c => c.CrossClusterReplication.CreateAutoFollowPatternAsync(name, d => d))
+				.RequestAsync(c => c.CrossClusterReplication.CreateAutoFollowPatternAsync(new CreateAutoFollowPatternRequest(name)));
 
 		}
 	}

@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Aggregations;
+using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Serialization;
 using Tests.Domain.Helpers;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
@@ -32,15 +32,16 @@ namespace Tests.Framework
 			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
 
 			Cluster = cluster;
-			Responses = usage.CallOnce(ClientUsage, 0);
+			Responses = usage.CallOnce(ClientUsage);
 			UniqueValues = usage.CallUniqueValues;
 		}
 
-		public virtual IElasticClient Client => TestClient.DefaultInMemoryClient;
+		public virtual IElasticClient Client =>
+			TestConfiguration.Instance.RunIntegrationTests ? Cluster.Client : TestClient.DefaultInMemoryClient;
 
 		public TCluster Cluster { get; }
 
-		protected string CallIsolatedValue => UniqueValues.Value;
+		protected virtual string CallIsolatedValue => UniqueValues.Value;
 		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
 		protected virtual TInitializer Initializer { get; } = null;
 		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;

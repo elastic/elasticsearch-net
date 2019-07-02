@@ -1,7 +1,7 @@
 ﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Joining.HasParent
 {
@@ -52,9 +52,9 @@ namespace Tests.QueryDsl.Joining.HasParent
 				.Name("named_query")
 				.Boost(1.1)
 				.InnerHits(i => i.Explain())
-				.Score(true)
+				.Score()
 				.Query(qq => qq.MatchAll())
-				.IgnoreUnmapped(true)
+				.IgnoreUnmapped()
 			);
 	}
 }

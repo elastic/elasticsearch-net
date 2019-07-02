@@ -8,7 +8,7 @@ using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Composite
@@ -154,7 +154,7 @@ namespace Tests.Aggregations.Bucket.Composite
 		 * Each Composite aggregation bucket key is a `CompositeKey` type, a specialized
 		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
 		 */
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
@@ -287,7 +287,7 @@ namespace Tests.Aggregations.Bucket.Composite
 		 * Each Composite aggregation bucket key is an `CompositeKey`, a specialized
 		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
 		 */
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
@@ -408,7 +408,7 @@ namespace Tests.Aggregations.Bucket.Composite
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

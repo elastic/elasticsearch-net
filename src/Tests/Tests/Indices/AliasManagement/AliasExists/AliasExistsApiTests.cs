@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.AliasExists
@@ -28,16 +28,16 @@ namespace Tests.Indices.AliasManagement.AliasExists
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
-				client.CreateIndex(index, c => c
+				client.Indices.Create(index, c => c
 					.Aliases(aa => aa.Alias(index + "-alias"))
 				);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.AliasExists(CallIsolatedValue + "-alias", f),
-			(client, f) => client.AliasExistsAsync(CallIsolatedValue + "-alias", f),
-			(client, r) => client.AliasExists(r),
-			(client, r) => client.AliasExistsAsync(r)
+			(client, f) => client.Indices.AliasExists(CallIsolatedValue + "-alias", f),
+			(client, f) => client.Indices.AliasExistsAsync(CallIsolatedValue + "-alias", f),
+			(client, r) => client.Indices.AliasExists(r),
+			(client, r) => client.Indices.AliasExistsAsync(r)
 		);
 
 		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names(CallIsolatedValue + "-alias"));
@@ -51,7 +51,7 @@ namespace Tests.Indices.AliasManagement.AliasExists
 	{
 		public AliasExistsNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 
 		protected override Func<AliasExistsDescriptor, IAliasExistsRequest> Fluent => d => d;
@@ -63,10 +63,10 @@ namespace Tests.Indices.AliasManagement.AliasExists
 		protected override string UrlPath => $"/_alias/unknown-alias";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.AliasExists("unknown-alias", f),
-			(client, f) => client.AliasExistsAsync("unknown-alias", f),
-			(client, r) => client.AliasExists(r),
-			(client, r) => client.AliasExistsAsync(r)
+			(client, f) => client.Indices.AliasExists("unknown-alias", f),
+			(client, f) => client.Indices.AliasExistsAsync("unknown-alias", f),
+			(client, r) => client.Indices.AliasExists(r),
+			(client, r) => client.Indices.AliasExistsAsync(r)
 		);
 
 		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names("unknown-alias"));

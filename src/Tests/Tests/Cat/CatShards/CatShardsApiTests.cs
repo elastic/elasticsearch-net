@@ -2,8 +2,8 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatShards
 {
@@ -18,10 +18,10 @@ namespace Tests.Cat.CatShards
 		protected override string UrlPath => "/_cat/shards";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatShards(),
-			(client, f) => client.CatShardsAsync(),
-			(client, r) => client.CatShards(r),
-			(client, r) => client.CatShardsAsync(r)
+			(client, f) => client.Cat.Shards(),
+			(client, f) => client.Cat.ShardsAsync(),
+			(client, r) => client.Cat.Shards(r),
+			(client, r) => client.Cat.ShardsAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatShardsRecord> response) =>

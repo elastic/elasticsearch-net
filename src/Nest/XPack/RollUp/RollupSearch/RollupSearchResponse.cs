@@ -1,4 +1,4 @@
 ﻿namespace Nest
 {
-	public class RollupSearchResponse<T> : SearchResponse<T> where T : class { }
+	public class RollupSearchResponse<TDocument> : SearchResponse<TDocument> where TDocument : class { }
 }

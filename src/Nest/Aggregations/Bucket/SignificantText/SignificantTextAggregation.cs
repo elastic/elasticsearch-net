@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -229,7 +229,7 @@ namespace Nest
 		public SignificantTextAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Field" />
-		public SignificantTextAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public SignificantTextAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Size" />
 		public SignificantTextAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);

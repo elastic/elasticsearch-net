@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using Nest;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering.Rules
 {
 	public interface IClientCallRule : IRule { }
 

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 using static Nest.Indices;
 
 namespace Tests.Indices.StatusManagement.Refresh
@@ -12,23 +12,23 @@ namespace Tests.Indices.StatusManagement.Refresh
 		[U] public async Task Urls()
 		{
 			await POST($"/_refresh")
-					.Request(c => c.Refresh(new RefreshRequest()))
-					.RequestAsync(c => c.RefreshAsync(new RefreshRequest()))
+					.Request(c => c.Indices.Refresh(new RefreshRequest()))
+					.RequestAsync(c => c.Indices.RefreshAsync(new RefreshRequest()))
 				;
 			
 			await POST($"/_all/_refresh")
-					.Fluent(c => c.Refresh(All))
-					.Request(c => c.Refresh(new RefreshRequest(All)))
-					.FluentAsync(c => c.RefreshAsync(All))
-					.RequestAsync(c => c.RefreshAsync(new RefreshRequest(All)))
+					.Fluent(c => c.Indices.Refresh(All))
+					.Request(c => c.Indices.Refresh(new RefreshRequest(All)))
+					.FluentAsync(c => c.Indices.RefreshAsync(All))
+					.RequestAsync(c => c.Indices.RefreshAsync(new RefreshRequest(All)))
 				;
 
 			var index = "index1,index2";
 			await POST($"/index1%2Cindex2/_refresh")
-					.Fluent(c => c.Refresh(index))
-					.Request(c => c.Refresh(new RefreshRequest(index)))
-					.FluentAsync(c => c.RefreshAsync(index))
-					.RequestAsync(c => c.RefreshAsync(new RefreshRequest(index)))
+					.Fluent(c => c.Indices.Refresh(index))
+					.Request(c => c.Indices.Refresh(new RefreshRequest(index)))
+					.FluentAsync(c => c.Indices.RefreshAsync(index))
+					.RequestAsync(c => c.Indices.RefreshAsync(new RefreshRequest(index)))
 				;
 		}
 	}

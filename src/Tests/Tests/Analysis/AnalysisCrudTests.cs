@@ -3,9 +3,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using static Tests.Framework.Promisify;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
+using static Tests.Framework.Extensions.Promisify;
 
 namespace Tests.Analysis
 {
@@ -19,7 +19,7 @@ namespace Tests.Analysis
 		*
 		* In this example we will create an index with analysis settings, read those settings back, update the analysis settings
 		* and do another read after the update to assert our new analysis setting is applied.
-		* There is NO mechanism to delete an analysis setting in elasticsearch.
+		* There is NO mechanism to delete an analysis setting in Elasticsearch.
 		*/
 		protected override bool SupportsDeletes => false;
 
@@ -29,10 +29,10 @@ namespace Tests.Analysis
 		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
-			(s, c, f) => c.CreateIndex(s, f),
-			(s, c, f) => c.CreateIndexAsync(s, f),
-			(s, c, r) => c.CreateIndex(r),
-			(s, c, r) => c.CreateIndexAsync(r)
+			(s, c, f) => c.Indices.Create(s, f),
+			(s, c, f) => c.Indices.CreateAsync(s, f),
+			(s, c, r) => c.Indices.Create(r),
+			(s, c, r) => c.Indices.CreateAsync(r)
 		);
 
 		protected virtual CreateIndexRequest CreateInitializer(string indexName) => new CreateIndexRequest(indexName)
@@ -67,15 +67,15 @@ namespace Tests.Analysis
 			Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, GetIndexSettingsResponse>(
 				GetInitializer,
 				GetFluent,
-				(s, c, f) => c.GetIndexSettings(f),
-				(s, c, f) => c.GetIndexSettingsAsync(f),
-				(s, c, r) => c.GetIndexSettings(r),
-				(s, c, r) => c.GetIndexSettingsAsync(r)
+				(s, c, f) => c.Indices.GetSettings(s, f),
+				(s, c, f) => c.Indices.GetSettingsAsync(s, f),
+				(s, c, r) => c.Indices.GetSettings(r),
+				(s, c, r) => c.Indices.GetSettingsAsync(r)
 			);
 
-		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index(indexName)) { };
+		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index((IndexName)indexName));
 
-		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u.Index(indexName);
+		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u;
 
 		/**
 		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact
@@ -104,31 +104,31 @@ namespace Tests.Analysis
 				UpdateFluent,
 				(s, c, f) =>
 				{
-					c.CloseIndex(s);
-					var response = c.UpdateIndexSettings(s, f);
-					c.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = c.Indices.UpdateSettings(s, f);
+					c.Indices.Open(s);
 					return response;
 				}
 				,
 				async (s, c, f) =>
 				{
-					c.CloseIndex(s);
-					var response = await c.UpdateIndexSettingsAsync(s, f);
-					c.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = await c.Indices.UpdateSettingsAsync(s, f);
+					c.Indices.Open(s);
 					return response;
 				},
 				(s, c, r) =>
 				{
-					c.CloseIndex(s);
-					var response = c.UpdateIndexSettings(r);
-					c.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = c.Indices.UpdateSettings(r);
+					c.Indices.Open(s);
 					return response;
 				},
 				async (s, c, r) =>
 				{
-					c.CloseIndex(s);
-					var response = await c.UpdateIndexSettingsAsync(r);
-					c.OpenIndex(s);
+					c.Indices.Close(s);
+					var response = await c.Indices.UpdateSettingsAsync(r);
+					c.Indices.Open(s);
 					return response;
 				}
 			);
@@ -143,7 +143,7 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter() } }
 				}
 			}
 		};

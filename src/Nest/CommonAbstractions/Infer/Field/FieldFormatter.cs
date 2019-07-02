@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -28,7 +29,6 @@ namespace Nest
 					double? boost = null;
 					string format = null;
 
-					// TODO: include Format in Field ctor
 					while (reader.ReadIsInObject(ref count))
 					{
 						var property = reader.ReadPropertyNameSegmentRaw();

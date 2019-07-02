@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/MoreLikeThis/MoreLikeThisFullDocumentQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Specialized/MoreLikeThis/MoreLikeThisFullDocumentQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -21,9 +21,11 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 q
 .MoreLikeThis(sn => sn
-    .Fields(f => f.Field(p => p.Name))
     .Like(l => l
-        .Document(d => d.Document(Project.Instance))
+        .Document(d => d
+            .Document(Project.Instance)
+            .Routing(Project.Instance.Name)
+        )
         .Text("some long text")
     )
 )
@@ -35,12 +37,43 @@ q
 ----
 new MoreLikeThisQuery
 {
-    Fields = Fields<Project>(p => p.Name),
     Like = new List<Like>
     {
-        new LikeDocument<Project>(Project.Instance),
+        new LikeDocument<Project>(Project.Instance) { Routing = Project.Instance.Name },
         "some long text"
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "more_like_this": {
+    "like": [
+      {
+        "_index": "project",
+        "doc": {
+          "name": "Koch, Collier and Mohr",
+          "state": "BellyUp",
+          "startedOn": "2015-01-01T00:00:00",
+          "lastActivity": "0001-01-01T00:00:00",
+          "leadDeveloper": {
+            "gender": "Male",
+            "id": 0,
+            "firstName": "Martijn",
+            "lastName": "Laarman"
+          },
+          "location": {
+            "lat": 42.1523,
+            "lon": -80.321
+          }
+        },
+        "routing": "Durgan LLC"
+      },
+      "some long text"
+    ]
+  }
 }
 ----
 

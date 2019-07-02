@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Nest
@@ -22,9 +21,6 @@ namespace Nest
 
 		private static readonly ConcurrentDictionary<string, Type> CachedGenericClosedTypes =
 			new ConcurrentDictionary<string, Type>();
-
-		private static readonly ConcurrentDictionary<Type, IList<CachedPropertyInfo>> CachedTypeProperties =
-			new ConcurrentDictionary<Type, IList<CachedPropertyInfo>>();
 
 		private static readonly ConcurrentDictionary<Type, IList<PropertyInfo>> CachedTypePropertyInfos =
 			new ConcurrentDictionary<Type, IList<PropertyInfo>>();
@@ -74,17 +70,6 @@ namespace Nest
 			return activator(args);
 		}
 
-		internal static object DefaultValue(this Type type) =>
-			type.IsValueType
-				? CachedDefaultValues.GetOrAdd(type, t =>
-						Expression.Lambda<Func<object>>(
-								Expression.Convert(Expression.Default(type), typeof(object))
-							)
-							.Compile()
-					)
-					.Invoke()
-				: null;
-
 		//do not remove this is referenced through GetActivatorMethod
 		internal static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
@@ -119,17 +104,6 @@ namespace Nest
 			return compiled;
 		}
 
-		internal static IList<CachedPropertyInfo> GetCachedObjectProperties(this Type t, Func<string, string> inferrer, bool optInSerialization = true
-		)
-		{
-			if (CachedTypeProperties.TryGetValue(t, out var propertyDictionary))
-				return propertyDictionary;
-
-			propertyDictionary = PropertiesOfAll(t, inferrer, optInSerialization);
-			CachedTypeProperties.TryAdd(t, propertyDictionary);
-			return propertyDictionary;
-		}
-
 		internal static IList<PropertyInfo> AllPropertiesCached(this Type t)
 		{
 			if (CachedTypePropertyInfos.TryGetValue(t, out var propertyInfos))
@@ -139,42 +113,6 @@ namespace Nest
 			CachedTypePropertyInfos.TryAdd(t, propertyInfos);
 			return propertyInfos;
 		}
-
-		private static IList<CachedPropertyInfo> CreateProperties(Type t, Func<string, string> inferrer, bool optInSerialization = true)
-		{
-			var properties = t.AllPropertiesNotCached()
-				.Select(propertyInfo => new CachedPropertyInfo(propertyInfo, inferrer));
-
-			return (optInSerialization
-				? properties.Where(p => p.HasMemberAttribute)
-				: properties).ToList();
-		}
-
-		public static IList<CachedPropertyInfo> PropertiesOfAllInterfaces(Type t, Func<string, string> inferrer, bool optInSerialization = true) =>
-			(
-				from i in t.GetInterfaces()
-				select CreateProperties(i, inferrer, optInSerialization)
-			)
-			.SelectMany(interfaceProps => interfaceProps)
-			.DistinctBy(p => p.PropertyName)
-			.ToList();
-
-		public static IList<CachedPropertyInfo> PropertiesOfInterface<TInterface>(Type t, Func<string, string> inferrer,
-			bool optInSerialization = true
-		)
-			where TInterface : class => (
-				from i in t.GetInterfaces().Where(i => typeof(TInterface).IsAssignableFrom(i))
-				select CreateProperties(i, inferrer, optInSerialization)
-			)
-			.SelectMany(interfaceProps => interfaceProps)
-			.DistinctBy(p => p.PropertyName)
-			.ToList();
-
-		public static IList<CachedPropertyInfo> PropertiesOfAll(Type t, Func<string, string> inferrer, bool optInSerialization = true) =>
-			CreateProperties(t, inferrer, optInSerialization)
-				.Concat(PropertiesOfAllInterfaces(t, inferrer, optInSerialization))
-				.DistinctBy(p => p.PropertyName)
-				.ToList();
 
 		/// <summary>
 		/// Returns inherited properties with reflectedType set to base type
@@ -213,47 +151,5 @@ namespace Nest
 		}
 
 		internal delegate T ObjectActivator<out T>(params object[] args);
-	}
-
-	// TODO: Temporary shim for JsonProperty
-	internal class CachedPropertyInfo
-	{
-		public CachedPropertyInfo(PropertyInfo propertyInfo, Func<string, string> inferrer)
-		{
-			PropertyInfo = propertyInfo;
-			AttributeProvider = new PropertyAttributeProvider(propertyInfo);
-			var dataMemberAttribute = propertyInfo.GetCustomAttribute<DataMemberAttribute>();
-			var propertyNameAttribute = propertyInfo.GetCustomAttribute<PropertyNameAttribute>();
-			HasMemberAttribute = dataMemberAttribute != null;
-
-			if (propertyNameAttribute != null)
-				PropertyName = propertyNameAttribute.Name;
-			else if (dataMemberAttribute != null)
-				PropertyName = dataMemberAttribute.Name;
-			else if (inferrer != null)
-				PropertyName = inferrer(propertyInfo.Name);
-			else
-				PropertyName = propertyInfo.Name.ToCamelCase();
-		}
-
-		public PropertyAttributeProvider AttributeProvider { get; }
-
-		public bool HasMemberAttribute { get; }
-		public PropertyInfo PropertyInfo { get; }
-
-		public string PropertyName { get; }
-
-		internal class PropertyAttributeProvider
-		{
-			private readonly PropertyInfo _propertyInfo;
-
-			public PropertyAttributeProvider(PropertyInfo propertyInfo) => _propertyInfo = propertyInfo;
-
-			public IList<Attribute> GetAttributes(bool inherit) =>
-				Attribute.GetCustomAttributes(_propertyInfo, inherit);
-
-			public IList<Attribute> GetAttributes(Type attributeType, bool inherit) =>
-				Attribute.GetCustomAttributes(_propertyInfo, attributeType, inherit);
-		}
 	}
 }

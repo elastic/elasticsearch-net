@@ -1,0 +1,22 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using System.Text.RegularExpressions
+@using ApiGenerator.Domain.Code.LowLevel
+@inherits ApiGenerator.CodeTemplatePage<LowLevelClientMethod>
+@{
+	LowLevelClientMethod method = Model;
+}
+		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
+@foreach (var part in method.Parts)
+{
+<text>		///@Raw("<param name=\""+part.NameAsArgument+"\">")@part.Description@Raw("</param>")
+</text>
+}
+		///@Raw(@"<param name=""requestParameters"">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>")
+		@if (method.DeprecatedPath != null)
+		{
+<text>		[Obsolete("Deprecated in version @(method.DeprecatedPath.Version): @Raw(method.DeprecatedPath.Description)")]
+</text>}

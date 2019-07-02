@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Search.Explain
 {
@@ -16,16 +16,16 @@ namespace Tests.Search.Explain
 
 			await POST("/project/_explain/NEST?routing=NEST")
 					.Fluent(c => c.Explain<Project>(project, e => e.Routing(routing).Query(q => q.MatchAll())))
-					.Request(c => c.Explain(new ExplainRequest<Project>(project) { Routing = routing }))
+					.Request(c => c.Explain<Project>(new ExplainRequest<Project>(project) { Routing = routing }))
 					.FluentAsync(c => c.ExplainAsync<Project>(project, e => e.Routing(routing).Query(q => q.MatchAll())))
-					.RequestAsync(c => c.ExplainAsync(new ExplainRequest<Project>(project) { Routing = routing }))
+					.RequestAsync(c => c.ExplainAsync<Project>(new ExplainRequest<Project>(project) { Routing = routing }))
 				;
 
 			await POST("/project/_explain/NEST")
 					.Fluent(c => c.Explain<Project>("NEST", e => e.Query(q => q.MatchAll())))
-					.Request(c => c.Explain(new ExplainRequest<Project>("project", "NEST") { }))
+					.Request(c => c.Explain<Project>(new ExplainRequest<Project>("project", "NEST")))
 					.FluentAsync(c => c.ExplainAsync<Project>("NEST", e => e.Query(q => q.MatchAll())))
-					.RequestAsync(c => c.ExplainAsync(new ExplainRequest<Project>("NEST")))
+					.RequestAsync(c => c.ExplainAsync<Project>(new ExplainRequest<Project>("NEST")))
 				;
 		}
 	}

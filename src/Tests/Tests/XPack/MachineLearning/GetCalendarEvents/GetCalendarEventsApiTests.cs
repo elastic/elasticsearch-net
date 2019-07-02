@@ -5,9 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetCalendarEvents
 {
@@ -41,10 +39,10 @@ namespace Tests.XPack.MachineLearning.GetCalendarEvents
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendarEvents(CallIsolatedValue),
-			(client, f) => client.GetCalendarEventsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetCalendarEvents(r),
-			(client, r) => client.GetCalendarEventsAsync(r)
+			(client, f) => client.MachineLearning.GetCalendarEvents(CallIsolatedValue),
+			(client, f) => client.MachineLearning.GetCalendarEventsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetCalendarEvents(r),
+			(client, r) => client.MachineLearning.GetCalendarEventsAsync(r)
 		);
 
 		protected override GetCalendarEventsDescriptor NewDescriptor() => new GetCalendarEventsDescriptor(CallIsolatedValue);

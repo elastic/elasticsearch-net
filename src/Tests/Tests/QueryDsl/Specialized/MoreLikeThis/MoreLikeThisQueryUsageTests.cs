@@ -3,7 +3,7 @@ using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Specialized.MoreLikeThis
@@ -14,9 +14,21 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMoreLikeThisQuery>(a => a.MoreLikeThis)
 		{
-			q => q.Like = null,
-			q => q.Like = Enumerable.Empty<Like>(),
-			q => q.Fields = null,
+			q =>
+			{
+				q.Like = null;
+				q.Fields = null;
+			},
+			q =>
+			{
+				q.Like = Enumerable.Empty<Like>();
+				q.Fields = null;
+			},
+			q =>
+			{
+				q.Fields = null;
+				q.Like = new [] { new Like("") };
+			},
 		};
 
 		protected override QueryContainer QueryInitializer => new MoreLikeThisQuery
@@ -26,7 +38,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 			Fields = Fields<Project>(p => p.Name),
 			Like = new List<Like>
 			{
-				new LikeDocument<Project>(Project.Instance.Name),
+				new LikeDocument<Project>(Project.Instance.Name) { Routing = Project.Instance.Name },
 				"some long text"
 			},
 			Analyzer = "some_analyzer",
@@ -67,7 +79,8 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 					new
 					{
 						_index = "project",
-						_id = Project.Instance.Name
+						_id = Project.Instance.Name,
+						routing = Project.Instance.Name
 					},
 					"some long text"
 				},
@@ -82,7 +95,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 				.Name("named_query")
 				.Boost(1.1)
 				.Like(l => l
-					.Document(d => d.Id(Project.Instance.Name))
+					.Document(d => d.Id(Project.Instance.Name).Routing(Project.Instance.Name))
 					.Text("some long text")
 				)
 				.Analyzer("some_analyzer")

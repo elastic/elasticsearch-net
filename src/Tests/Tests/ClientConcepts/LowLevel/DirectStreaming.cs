@@ -3,6 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Domain;
 
 namespace Tests.ClientConcepts.LowLevel
@@ -131,6 +132,7 @@ namespace Tests.ClientConcepts.LowLevel
 					)
 				)
 			);
+			response.ShouldBeValid();
 			global.Should().Be(1);
 			local.Should().Be(1);
 		}

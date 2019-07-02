@@ -6,7 +6,10 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
-using static Tests.Framework.TimesHelper;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Audit;
+using Tests.Framework.VirtualClustering.Providers;
+using static Tests.Framework.VirtualClustering.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
@@ -96,7 +99,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		public async Task FallsOverDeadNodes()
 		{
 			/** A cluster with 2 nodes where the second node fails on ping */
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(4)
 				.ClientCalls(p => p.Succeeds(Always))
 				.ClientCalls(p => p.OnPort(9201).FailAlways())
@@ -144,7 +147,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		public async Task PicksADifferentNodeEachTimeAnodeIsDown()
 		{
 			/** A cluster with 2 nodes where the second node fails on ping */
-			var audit = new Auditor(() => Framework.Cluster
+			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(4)
 				.ClientCalls(p => p.Fails(Always))
 				.StaticConnectionPool()

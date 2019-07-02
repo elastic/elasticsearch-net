@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/TermLevel/TermsSet/TermsSetQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/TermLevel/TermsSet/TermsSetQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -54,6 +54,24 @@ new TermsSetQuery
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "terms_set": {
+    "branches": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "terms": [
+        "master",
+        "dev"
+      ],
+      "minimum_should_match_field": "requiredBranches"
+    }
+  }
+}
+----
+
 [float]
 === Minimum should match with script
 
@@ -61,20 +79,6 @@ Scripts can also be used to control how many terms are required to match in a mo
 
 The `params.num_terms` parameter is available in the script to indicate the number of
 terms that have been specified in the query.
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new TermsSetQuery
-{
-    Name = "named_query",
-    Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.Branches),
-    Terms = new[] { "master", "dev" },
-    MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
-}
-----
 
 ==== Fluent DSL example
 
@@ -87,8 +91,42 @@ q
     .Field(p => p.Branches)
     .Terms("master", "dev")
     .MinimumShouldMatchScript(s => s
-        .Source("Math.min(params.num_terms, doc['requiredBranches'].value)")
+        .Source("doc['requiredBranches'].size() == 0 ? params.num_terms : Math.min(params.num_terms, doc['requiredBranches'].value)")
     )
 )
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new TermsSetQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.Branches),
+    Terms = new[] { "master", "dev" },
+    MinimumShouldMatchScript = new InlineScript("doc['requiredBranches'].size() == 0 ? params.num_terms : Math.min(params.num_terms, doc['requiredBranches'].value)")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "terms_set": {
+    "branches": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "terms": [
+        "master",
+        "dev"
+      ],
+      "minimum_should_match_script": {
+        "source": "doc['requiredBranches'].size() == 0 ? params.num_terms : Math.min(params.num_terms, doc['requiredBranches'].value)"
+      }
+    }
+  }
+}
 ----
 

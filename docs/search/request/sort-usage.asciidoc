@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/SortUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Request/SortUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -46,7 +46,7 @@ s => s
         .Missing(-1)
     )
     .GeoDistance(g => g
-        .Field(p => p.Location)
+        .Field(p => p.LocationPoint)
         .DistanceType(GeoDistanceType.Arc)
         .Order(SortOrder.Ascending)
         .Unit(DistanceUnit.Centimeters)
@@ -98,7 +98,7 @@ new SearchRequest<Project>
         },
         new GeoDistanceSort
         {
-            Field = "location",
+            Field = "locationPoint",
             Order = SortOrder.Ascending,
             DistanceType = GeoDistanceType.Arc,
             Unit = DistanceUnit.Centimeters,
@@ -118,6 +118,85 @@ new SearchRequest<Project>
             }
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sort": [
+    {
+      "startedOn": {
+        "order": "asc"
+      }
+    },
+    {
+      "name": {
+        "order": "desc"
+      }
+    },
+    {
+      "_score": {
+        "order": "desc"
+      }
+    },
+    {
+      "_doc": {
+        "order": "asc"
+      }
+    },
+    {
+      "tags.added": {
+        "missing": "_last",
+        "order": "desc",
+        "mode": "avg",
+        "nested": {
+          "path": "tags",
+          "filter": {
+            "match_all": {}
+          }
+        },
+        "unmapped_type": "date"
+      }
+    },
+    {
+      "numberOfCommits": {
+        "missing": -1,
+        "order": "desc"
+      }
+    },
+    {
+      "_geo_distance": {
+        "locationPoint": [
+          {
+            "lat": 70.0,
+            "lon": -70.0
+          },
+          {
+            "lat": -12.0,
+            "lon": 12.0
+          }
+        ],
+        "order": "asc",
+        "mode": "min",
+        "distance_type": "arc",
+        "unit": "cm"
+      }
+    },
+    {
+      "_script": {
+        "order": "asc",
+        "type": "number",
+        "script": {
+          "params": {
+            "factor": 1.1
+          },
+          "source": "doc['numberOfCommits'].value * params.factor"
+        }
+      }
+    }
+  ]
 }
 ----
 
@@ -170,6 +249,29 @@ new SearchRequest<Project>
             }
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sort": [
+    {
+      "tags.added": {
+        "missing": "_last",
+        "order": "desc",
+        "mode": "avg",
+        "nested": {
+          "path": "tags",
+          "filter": {
+            "match_all": {}
+          }
+        },
+        "unmapped_type": "date"
+      }
+    }
+  ]
 }
 ----
 

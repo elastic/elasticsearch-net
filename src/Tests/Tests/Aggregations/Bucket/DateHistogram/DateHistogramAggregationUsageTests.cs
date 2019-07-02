@@ -4,9 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 using static Tests.Domain.Helpers.TestValueHelper;
 
@@ -71,7 +70,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				.Interval(DateInterval.Month)
 				.MinimumDocumentCount(2)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
-				//.Format("date_optional_time")
 				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 				.Order(HistogramOrder.CountAscending)
 				.Missing(FixedDate)
@@ -92,7 +90,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				Interval = DateInterval.Month,
 				MinimumDocumentCount = 2,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
-				//Format = "date_optional_time",
 				ExtendedBounds = new ExtendedBounds<DateMath>
 				{
 					Minimum = FixedDate.AddYears(-1),
@@ -110,7 +107,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
@@ -133,6 +130,74 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 				var nestedTerms = nested.Terms("tags");
 				nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+			}
+		}
+	}
+
+	// hide
+	public class DateHistogramAggregationNoSubAggregationsUsageTests : ProjectsOnlyAggregationUsageTestBase
+	{
+		public DateHistogramAggregationNoSubAggregationsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new
+		{
+			projects_started_per_month = new
+			{
+				date_histogram = new
+				{
+					field = "startedOn",
+					interval = "month",
+					min_doc_count = 2,
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+					order = new { _count = "asc" },
+					extended_bounds = new
+					{
+						min = FixedDate.AddYears(-1),
+						max = FixedDate.AddYears(1)
+					},
+					missing = FixedDate
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", date => date
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(2)
+				.Format("yyyy-MM-dd'T'HH:mm:ss")
+				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+				.Order(HistogramOrder.CountAscending)
+				.Missing(FixedDate)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
+			{
+				Field = Field<Project>(p => p.StartedOn),
+				Interval = DateInterval.Month,
+				MinimumDocumentCount = 2,
+				Format = "yyyy-MM-dd'T'HH:mm:ss",
+				ExtendedBounds = new ExtendedBounds<DateMath>
+				{
+					Minimum = FixedDate.AddYears(-1),
+					Maximum = FixedDate.AddYears(1),
+				},
+				Order = HistogramOrder.CountAscending,
+				Missing = FixedDate
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_month");
+			dateHistogram.Should().NotBeNull();
+			dateHistogram.Buckets.Should().NotBeNull();
+			dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
+			foreach (var item in dateHistogram.Buckets)
+			{
+				item.Date.Should().NotBe(default(DateTime));
+				item.DocCount.Should().BeGreaterThan(0);
 			}
 		}
 	}

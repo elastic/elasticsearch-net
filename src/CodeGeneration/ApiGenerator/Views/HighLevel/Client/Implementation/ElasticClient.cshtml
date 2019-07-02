@@ -1,0 +1,71 @@
+@using RazorLight
+@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@using System.Text.RegularExpressions
+@using System.Threading.Tasks
+@using ApiGenerator.Domain
+@using ApiGenerator 
+@using ApiGenerator.Domain.Code
+@using CsQuery.StringScanner.Implementation
+@inherits CodeTemplatePage<RestApiSpec>
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Nest;
+@{ await IncludeAsync("HighLevel/Client/Usings.cshtml", Model);}
+
+@{
+	RestApiSpec model = Model;
+	var namespaces = model.EndpointsPerNamespace.Keys.Where(k => k != CsharpNames.RootNamespace);
+<text>
+// ReSharper disable RedundantTypeArgumentsOfMethod
+namespace Nest
+{
+	///<summary>
+	///Elasticsearch high level client
+	///</summary>
+	public partial class ElasticClient : IElasticClient
+	{
+</text>
+	foreach (var ns in namespaces)
+	{
+<text>		///<summary>@(ns.SplitPascalCase()) APIs</summary>
+			public @CsharpNames.HighLevelClientNamespacePrefix@(ns)@CsharpNames.ClientNamespaceSuffix @ns { get; private set; }
+</text>
+	}
+<text>
+		partial void SetupNamespaces()
+		{
+</text>
+	foreach (var ns in namespaces)
+	{
+<text>		@ns = new @(CsharpNames.HighLevelClientNamespacePrefix)@(ns)@(CsharpNames.ClientNamespaceSuffix)(this);
+</text>
+	}
+<text>
+		}
+</text>
+	
+
+	foreach (var kv in model.EndpointsPerNamespace)
+	{
+		if (kv.Key != CsharpNames.RootNamespace)
+		{
+			continue;
+		}
+		var endpoints = kv.Value;
+		var models = endpoints.Select(e=>e.HighLevelModel).ToList();
+		foreach (var m in models)
+		{
+			await IncludeAsync("HighLevel/Client/Implementation/MethodImplementation.cshtml", m);
+		}
+	}
+	<text>
+	}
+	}
+	</text>
+}

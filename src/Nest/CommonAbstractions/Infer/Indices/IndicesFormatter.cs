@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -9,7 +9,7 @@ namespace Nest
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
 			{
-				reader.ReadNext();
+				reader.ReadNextBlock();
 				return null;
 			}
 
@@ -31,7 +31,7 @@ namespace Nest
 				return;
 			}
 
-			switch (value._tag)
+			switch (value.Tag)
 			{
 				case 0:
 					writer.WriteBeginArray();

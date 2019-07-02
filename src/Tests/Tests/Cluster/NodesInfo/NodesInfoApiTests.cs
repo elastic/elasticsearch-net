@@ -6,8 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.NodesInfo
 {
@@ -22,10 +22,10 @@ namespace Tests.Cluster.NodesInfo
 		protected override string UrlPath => "/_nodes";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesInfo(),
-			(client, f) => client.NodesInfoAsync(),
-			(client, r) => client.NodesInfo(r),
-			(client, r) => client.NodesInfoAsync(r)
+			(client, f) => client.Nodes.Info(),
+			(client, f) => client.Nodes.InfoAsync(),
+			(client, r) => client.Nodes.Info(r),
+			(client, r) => client.Nodes.InfoAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesInfoResponse response)
@@ -95,13 +95,13 @@ namespace Tests.Cluster.NodesInfo
 		protected void Assert(NodeJvmInfo jvm)
 		{
 			jvm.Should().NotBeNull();
-			jvm.PID.Should().BeGreaterThan(0);
+			jvm.Pid.Should().BeGreaterThan(0);
 			jvm.StartTime.Should().BeGreaterThan(0);
 			jvm.Version.Should().NotBeNullOrWhiteSpace();
 			jvm.VMName.Should().NotBeNullOrWhiteSpace();
 			jvm.VMVendor.Should().NotBeNullOrWhiteSpace();
 			jvm.VMVersion.Should().NotBeNullOrWhiteSpace();
-			jvm.GCCollectors.Should().NotBeEmpty();
+			jvm.GcCollectors.Should().NotBeEmpty();
 			jvm.MemoryPools.Should().NotBeEmpty();
 			jvm.Memory.Should().NotBeNull();
 			jvm.Memory.DirectMaxInBytes.Should().BeGreaterOrEqualTo(0);
@@ -111,13 +111,17 @@ namespace Tests.Cluster.NodesInfo
 			jvm.Memory.HeapInitInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(Dictionary<string, NodeThreadPoolInfo> pools)
+		protected void Assert(IReadOnlyDictionary<string, NodeThreadPoolInfo> pools)
 		{
 			pools.Should().NotBeEmpty().And.ContainKey("fetch_shard_store");
 			var pool = pools["fetch_shard_store"];
 			pool.KeepAlive.Should().NotBeNullOrWhiteSpace();
 			pool.Type.Should().Be("scaling");
 			pool.QueueSize.Should().BeGreaterOrEqualTo(-1);
+
+			// both should have a value for a scaling pool
+			pool.Core.Should().HaveValue();
+			pool.Max.Should().HaveValue();
 		}
 
 		protected void Assert(NodeInfoTransport transport)
@@ -150,10 +154,10 @@ namespace Tests.Cluster.NodesInfo
 		protected override string UrlPath => "/_nodes/_local%2Cx";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesInfo(f),
-			(client, f) => client.NodesInfoAsync(f),
-			(client, r) => client.NodesInfo(r),
-			(client, r) => client.NodesInfoAsync(r)
+			(client, f) => client.Nodes.Info(f),
+			(client, f) => client.Nodes.InfoAsync(f),
+			(client, r) => client.Nodes.Info(r),
+			(client, r) => client.Nodes.InfoAsync(r)
 		);
 
 		protected override void ExpectResponse(NodesInfoResponse response)

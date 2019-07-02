@@ -3,7 +3,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Missing
@@ -34,7 +34,7 @@ namespace Tests.Aggregations.Bucket.Missing
 				Field = Field<Project>(p => p.Description.Suffix("keyword"))
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var projectsWithoutDesc = response.Aggregations.Missing("projects_without_a_description");

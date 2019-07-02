@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net.CrossPlatform;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -142,9 +143,7 @@ namespace Nest
 						valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
 					}
 					else
-					{
 						goto END;
-					}
 
 					while (e.MoveNext())
 					{
@@ -167,9 +166,7 @@ namespace Nest
 						valueFormatter.Serialize(ref writer, item.Value, formatterResolver);
 					}
 					else
-					{
 						goto END;
-					}
 
 					while (e.MoveNext())
 					{
@@ -192,10 +189,7 @@ namespace Nest
 
         public TDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
-            if (reader.ReadIsNull())
-            {
-                return null;
-            }
+            if (reader.ReadIsNull()) return null;
 
 			var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>();
 			var objectKeyFormatter = keyFormatter as IObjectPropertyNameFormatter<TKey>;

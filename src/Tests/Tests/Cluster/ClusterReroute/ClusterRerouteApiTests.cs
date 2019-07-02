@@ -7,8 +7,9 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.Extensions;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterReroute
 {
@@ -23,13 +24,13 @@ namespace Tests.Cluster.ClusterReroute
 			// get a suitable load of projects in order to get a decent task status out
 			foreach (var (_, index) in values)
 			{
-				var createIndex = client.CreateIndex(index, i => i
+				var createIndex = client.Indices.Create(index, i => i
 					.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
 					.Map<Project>(DefaultSeeder.ProjectTypeMappings)
 				);
 				createIndex.ShouldBeValid();
 				client.IndexMany(Project.Generator.Generate(100), index).ShouldBeValid();
-				client.Refresh(index).ShouldBeValid();
+				client.Indices.Refresh(index).ShouldBeValid();
 			}
 
 		}
@@ -107,13 +108,13 @@ namespace Tests.Cluster.ClusterReroute
 				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
-				.AcceptDataLoss(true)
+				.AcceptDataLoss()
 			)
 			.AllocateStalePrimary(a => a
 				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
-				.AcceptDataLoss(true)
+				.AcceptDataLoss()
 			)
 			.AllocateReplica(a => a
 				.Index(CallIsolatedValue)
@@ -149,10 +150,10 @@ namespace Tests.Cluster.ClusterReroute
 		protected override string UrlPath => "/_cluster/reroute";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterReroute(f),
-			(client, f) => client.ClusterRerouteAsync(f),
-			(client, r) => client.ClusterReroute(r),
-			(client, r) => client.ClusterRerouteAsync(r)
+			(client, f) => client.Cluster.Reroute(f),
+			(client, f) => client.Cluster.RerouteAsync(f),
+			(client, r) => client.Cluster.Reroute(r),
+			(client, r) => client.Cluster.RerouteAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterRerouteResponse response)

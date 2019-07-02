@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
 
 namespace Nest
@@ -58,77 +59,6 @@ namespace Nest
 
 			var queryFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IQueryContainer>();
 			queryFormatter.Serialize(ref writer, value, formatterResolver);
-		}
-	}
-
-	// TODO: Unify with QueryContainerCollectionFormatter
-	internal class QueryContainerListFormatter : IJsonFormatter<List<QueryContainer>>
-	{
-		private static readonly QueryContainerFormatter QueryContainerFormatter =
-			new QueryContainerFormatter();
-
-		private static readonly QueryContainerInterfaceFormatter QueryContainerInterfaceFormatter =
-			new QueryContainerInterfaceFormatter();
-
-		public List<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			var token = reader.GetCurrentJsonToken();
-			switch (token)
-			{
-				case JsonToken.BeginArray:
-				{
-					var count = 0;
-					var queryContainers = new List<QueryContainer>();
-					while (reader.ReadIsInArray(ref count))
-						queryContainers.Add(QueryContainerFormatter.Deserialize(ref reader, formatterResolver));
-
-					return queryContainers;
-				}
-				case JsonToken.BeginObject:
-				{
-					var queryContainers = new List<QueryContainer>
-					{
-						QueryContainerFormatter.Deserialize(ref reader, formatterResolver)
-					};
-
-					return queryContainers;
-				}
-				default:
-					reader.ReadNextBlock();
-					return null;
-			}
-		}
-
-		public void Serialize(ref JsonWriter writer, List<QueryContainer> value, IJsonFormatterResolver formatterResolver)
-		{
-			if (value == null)
-				writer.WriteNull();
-			else
-			{
-				writer.WriteBeginArray();
-				var e = value.GetEnumerator();
-				try
-				{
-					var written = false;
-					while (e.MoveNext())
-					{
-						if (e.Current != null && e.Current.IsWritable)
-						{
-							if (written)
-								writer.WriteValueSeparator();
-
-							QueryContainerInterfaceFormatter.Serialize(ref writer, e.Current, formatterResolver);
-							written = true;
-						}
-					}
-				}
-				finally
-				{
-					e.Dispose();
-				}
-
-				writer.WriteEndArray();
-			}
 		}
 	}
 

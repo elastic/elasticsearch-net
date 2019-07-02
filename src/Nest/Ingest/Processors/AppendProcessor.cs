@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -34,7 +34,7 @@ namespace Nest
 
 		public AppendProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public AppendProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public AppendProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		public AppendProcessorDescriptor<T> Value<TValue>(IEnumerable<TValue> values) => Assign(values, (a, v) => a.Value = v?.Cast<object>());

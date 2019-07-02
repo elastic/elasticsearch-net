@@ -8,13 +8,12 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkAndScrollApiTests : BulkAllApiTestsBase
 	{
-		public BulkAndScrollApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkAndScrollApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
 		[I] public async Task BulkAllAndScrollAll()
 		{
@@ -33,7 +32,7 @@ namespace Tests.Document.Multiple.BulkAll
 		{
 			var seenDocuments = 0;
 			var seenSlices = new ConcurrentBag<int>();
-			var scrollObserver = Client.ScrollAll<SmallObject>("1m", numberOfShards, s => s
+			Client.ScrollAll<SmallObject>("1m", numberOfShards, s => s
 					.MaxDegreeOfParallelism(numberOfShards / 2)
 					.Search(search => search
 						.Size(size / 2)

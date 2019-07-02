@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nest;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework;
 
 namespace Tests.IndexModules.IndexSettings.Settings
 {
@@ -56,7 +54,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				.Priority(11)
 				.RecoveryInitialShards(RecoveryInitialShards.FullMinusOne)
 				.RequestsCacheEnabled()
-				.TotalShardsPerNode(10)
+				.RoutingAllocationTotalShardsPerNode(10)
 				.UnassignedNodeLeftDelayedTimeout(TimeSpan.FromMinutes(1))
 				.RefreshInterval(-1)
 				.FileSystemStorageImplementation(FileSystemStorageImplementation.MMap)

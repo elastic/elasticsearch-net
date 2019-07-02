@@ -5,7 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Average
@@ -55,7 +55,7 @@ namespace Tests.Aggregations.Metric.Average
 				Script = new InlineScript("_value * 1.2")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsAvg = response.Aggregations.Average("average_commits");

@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.CloseJob
 {
@@ -30,10 +28,10 @@ namespace Tests.XPack.MachineLearning.CloseJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CloseJob(CallIsolatedValue, f),
-			(client, f) => client.CloseJobAsync(CallIsolatedValue, f),
-			(client, r) => client.CloseJob(r),
-			(client, r) => client.CloseJobAsync(r)
+			(client, f) => client.MachineLearning.CloseJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.CloseJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.CloseJob(r),
+			(client, r) => client.MachineLearning.CloseJobAsync(r)
 		);
 
 		protected override CloseJobDescriptor NewDescriptor() => new CloseJobDescriptor(CallIsolatedValue);

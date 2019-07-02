@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.FlushJob
 {
@@ -52,10 +50,10 @@ namespace Tests.XPack.MachineLearning.FlushJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.FlushJob(CallIsolatedValue, f),
-			(client, f) => client.FlushJobAsync(CallIsolatedValue, f),
-			(client, r) => client.FlushJob(r),
-			(client, r) => client.FlushJobAsync(r)
+			(client, f) => client.MachineLearning.FlushJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.FlushJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.FlushJob(r),
+			(client, r) => client.MachineLearning.FlushJobAsync(r)
 		);
 
 		protected override FlushJobDescriptor NewDescriptor() => new FlushJobDescriptor(CallIsolatedValue);

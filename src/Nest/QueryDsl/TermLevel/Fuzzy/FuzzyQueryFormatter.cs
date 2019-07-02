@@ -1,5 +1,7 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -49,7 +51,10 @@ namespace Nest
 		public override IFuzzyQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var count = 0;
 			IFuzzyQuery query = null;
@@ -81,21 +86,17 @@ namespace Nest
 									case JsonToken.String:
 										var valueSegment = reader.ReadStringSegmentUnsafe();
 										if (valueSegment.IsDateTime(formatterResolver, out var dateTime))
-										{
 											query = new FuzzyDateQuery
 											{
 												Field = field,
 												Value = dateTime
 											};
-										}
 										else
-										{
 											query = new FuzzyQuery
 											{
 												Field = field,
 												Value = valueSegment.Utf8String()
 											};
-										}
 										break;
 									case JsonToken.Number:
 										query = new FuzzyNumericQuery

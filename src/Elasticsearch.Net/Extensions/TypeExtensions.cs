@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class TypeExtensions
 	{
@@ -33,7 +33,7 @@ namespace Elasticsearch.Net
 			if (ctor == null)
 				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
 
-			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
+			activator = (ObjectActivator<object>)generic.Invoke(null, new object[] { ctor });
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
@@ -41,7 +41,6 @@ namespace Elasticsearch.Net
 		//do not remove this is referenced through GetActivatorMethod
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
-			var type = ctor.DeclaringType;
 			var paramsInfo = ctor.GetParameters();
 
 			//create a single param of type object[]

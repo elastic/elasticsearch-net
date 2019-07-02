@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.StatusManagement.SyncedFlush
 {
@@ -23,10 +23,10 @@ namespace Tests.Indices.StatusManagement.SyncedFlush
 		protected override string UrlPath => $"/{CallIsolatedValue}/_flush/synced?allow_no_indices=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SyncedFlush(CallIsolatedValue, f),
-			(client, f) => client.SyncedFlushAsync(CallIsolatedValue, f),
-			(client, r) => client.SyncedFlush(r),
-			(client, r) => client.SyncedFlushAsync(r)
+			(client, f) => client.Indices.SyncedFlush(CallIsolatedValue, f),
+			(client, f) => client.Indices.SyncedFlushAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.SyncedFlush(r),
+			(client, r) => client.Indices.SyncedFlushAsync(r)
 		);
 	}
 }

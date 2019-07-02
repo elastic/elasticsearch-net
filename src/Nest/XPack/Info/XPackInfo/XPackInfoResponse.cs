@@ -44,25 +44,40 @@ namespace Nest
 
 	public class XPackFeatures
 	{
-		[DataMember(Name ="graph")]
+		[DataMember(Name = "ccr")]
+		public XPackFeature Ccr { get; internal set; }
+
+		[DataMember(Name = "graph")]
 		public XPackFeature Graph { get; internal set; }
 
-		[DataMember(Name ="ml")]
+		[DataMember(Name = "ilm")]
+		public XPackFeature Ilm { get; internal set; }
+
+		[DataMember(Name = "logstash")]
+		public XPackFeature Logstash { get; internal set; }
+
+		[DataMember(Name = "ml")]
 		public XPackFeature MachineLearning { get; internal set; }
 
-		[DataMember(Name ="monitoring")]
+		[DataMember(Name = "monitoring")]
 		public XPackFeature Monitoring { get; internal set; }
 
-		[DataMember(Name ="security")]
+		[DataMember(Name = "rollup")]
+		public XPackFeature Rollup { get; internal set; }
+
+		[DataMember(Name = "security")]
 		public XPackFeature Security { get; internal set; }
 
-		[DataMember(Name ="watcher")]
+		[DataMember(Name = "sql")]
+		public XPackFeature Sql { get; internal set; }
+
+		[DataMember(Name = "watcher")]
 		public XPackFeature Watcher { get; internal set; }
 	}
 
 	public class XPackFeature
 	{
-		[DataMember(Name ="available")]
+		[DataMember(Name = "available")]
 		public bool Available { get; internal set; }
 
 		[DataMember(Name ="description")]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nest;
-using Tests.Framework;
+using Tests.IndexModules;
 
 namespace Tests.Mapping.Scalar
 {

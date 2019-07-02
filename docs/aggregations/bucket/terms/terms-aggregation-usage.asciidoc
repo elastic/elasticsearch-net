@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Terms/TermsAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Terms/TermsAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -64,6 +64,37 @@ new TermsAggregation("states")
     {
         { "foo", "bar" }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "states": {
+    "meta": {
+      "foo": "bar"
+    },
+    "terms": {
+      "field": "state",
+      "min_doc_count": 2,
+      "size": 5,
+      "shard_size": 100,
+      "execution_hint": "map",
+      "missing": "n/a",
+      "script": {
+        "source": "'State of Being: '+_value"
+      },
+      "order": [
+        {
+          "_key": "asc"
+        },
+        {
+          "_count": "desc"
+        }
+      ]
+    }
+  }
 }
 ----
 
@@ -141,6 +172,35 @@ new TermsAggregation("states")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "states": {
+    "meta": {
+      "foo": "bar"
+    },
+    "terms": {
+      "field": "state.keyword",
+      "min_doc_count": 2,
+      "size": 5,
+      "shard_size": 100,
+      "execution_hint": "map",
+      "missing": "n/a",
+      "include": "(Stable|VeryActive)",
+      "order": [
+        {
+          "_key": "asc"
+        },
+        {
+          "_count": "desc"
+        }
+      ]
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -215,6 +275,38 @@ new TermsAggregation("states")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "states": {
+    "meta": {
+      "foo": "bar"
+    },
+    "terms": {
+      "field": "state.keyword",
+      "min_doc_count": 2,
+      "size": 5,
+      "shard_size": 100,
+      "execution_hint": "map",
+      "missing": "n/a",
+      "include": [
+        "Stable",
+        "VeryActive"
+      ],
+      "order": [
+        {
+          "_key": "asc"
+        },
+        {
+          "_count": "desc"
+        }
+      ]
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -271,6 +363,23 @@ new TermsAggregation("commits")
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "terms": {
+      "field": "numberOfCommits",
+      "size": 5,
+      "include": {
+        "partition": 0,
+        "num_partitions": 10
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -315,6 +424,20 @@ new TermsAggregation("commits")
     Field = Field<Project>(p => p.NumberOfCommits),
     ShowTermDocCountError = true,
     Missing = -1
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "terms": {
+      "field": "numberOfCommits",
+      "missing": -1,
+      "show_term_doc_count_error": true
+    }
+  }
 }
 ----
 
@@ -370,6 +493,28 @@ new TermsAggregation("commits")
         Meta = new Dictionary<string, object> { { "x", "y" } },
         Field = Field<Project>(p => p.State),
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "terms": {
+      "field": "numberOfCommits"
+    },
+    "aggs": {
+      "state": {
+        "meta": {
+          "x": "y"
+        },
+        "terms": {
+          "field": "state"
+        }
+      }
+    }
+  }
 }
 ----
 

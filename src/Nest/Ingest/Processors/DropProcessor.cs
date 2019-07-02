@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {

@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer
@@ -17,9 +16,9 @@ namespace Nest.JsonNetSerializer
 		private static readonly Task CompletedTask = Task.CompletedTask;
 
 		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		private readonly Newtonsoft.Json.JsonSerializer _collapsedSerializer;
+		private readonly JsonSerializer _collapsedSerializer;
 
-		private readonly Newtonsoft.Json.JsonSerializer _serializer;
+		private readonly JsonSerializer _serializer;
 		protected virtual int BufferSize => DefaultBufferSize;
 
 		public T Deserialize<T>(Stream stream)
@@ -36,7 +35,7 @@ namespace Nest.JsonNetSerializer
 				return _serializer.Deserialize(jsonTextReader, type);
 		}
 
-		public virtual async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public virtual async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
@@ -56,7 +55,7 @@ namespace Nest.JsonNetSerializer
 			}
 		}
 
-		public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			using (var writer = new StreamWriter(stream, ExpectedEncoding, BufferSize, true))
 			using (var jsonWriter = new JsonTextWriter(writer))
@@ -66,8 +65,8 @@ namespace Nest.JsonNetSerializer
 			}
 		}
 
-		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None,
+			CancellationToken cancellationToken = default
 		)
 		{
 			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out

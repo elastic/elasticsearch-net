@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 
 #if !DOTNETCORE
 using System.Net;
@@ -11,18 +12,18 @@ using System.Net;
 namespace Elasticsearch.Net
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
-		where TConnectionSettings : IConnectionConfigurationValues
+		where TConnectionSettings : class, IConnectionConfigurationValues
 	{
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
-		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
+		/// <param name="configurationValues">The connection settings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues) : this(configurationValues, null, null, null) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
-		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
+		/// <param name="configurationValues">The connection settings to use for this transport</param>
 		/// <param name="pipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
 		/// <param name="dateTimeProvider">The date time proved to use, safe to pass null to use the default</param>
 		/// <param name="memoryStreamFactory">The memory stream provider to use, safe to pass null to use the default</param>
@@ -198,6 +199,7 @@ namespace Elasticsearch.Net
 		}
 
 
+		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
 		private void HandleElasticsearchClientException(RequestData data, Exception clientException, IElasticsearchResponse response)
 		{
 			if (response.ApiCall is ApiCallDetails a)
@@ -217,7 +219,7 @@ namespace Elasticsearch.Net
 			}
 
 			Settings.OnRequestCompleted?.Invoke(response.ApiCall);
-			if (clientException != null && data.ThrowExceptions) throw clientException;
+			if (data != null && (clientException != null && data.ThrowExceptions)) throw clientException;
 		}
 
 		private static void Ping(IRequestPipeline pipeline, Node node)

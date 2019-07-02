@@ -1,7 +1,7 @@
 ﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
-using static Tests.Framework.Promisify;
+using Tests.Framework.EndpointTests.TestState;
+using static Tests.Framework.Extensions.Promisify;
 
 namespace Tests.Analysis
 {

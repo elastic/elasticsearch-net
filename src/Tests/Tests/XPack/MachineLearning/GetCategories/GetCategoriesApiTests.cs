@@ -4,9 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetCategories
 {
@@ -42,10 +40,10 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCategories(CallIsolatedValue, f),
-			(client, f) => client.GetCategoriesAsync(CallIsolatedValue, f),
-			(client, r) => client.GetCategories(r),
-			(client, r) => client.GetCategoriesAsync(r)
+			(client, f) => client.MachineLearning.GetCategories(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetCategoriesAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetCategories(r),
+			(client, r) => client.MachineLearning.GetCategoriesAsync(r)
 		);
 
 		protected override GetCategoriesDescriptor NewDescriptor() => new GetCategoriesDescriptor(CallIsolatedValue);
@@ -88,10 +86,10 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCategories(CallIsolatedValue, f),
-			(client, f) => client.GetCategoriesAsync(CallIsolatedValue, f),
-			(client, r) => client.GetCategories(r),
-			(client, r) => client.GetCategoriesAsync(r)
+			(client, f) => client.MachineLearning.GetCategories(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetCategoriesAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetCategories(r),
+			(client, r) => client.MachineLearning.GetCategoriesAsync(r)
 		);
 
 		protected override GetCategoriesDescriptor NewDescriptor() => new GetCategoriesDescriptor(CallIsolatedValue);

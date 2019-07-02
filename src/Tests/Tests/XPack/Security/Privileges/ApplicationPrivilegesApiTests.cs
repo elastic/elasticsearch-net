@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Framework.Integration;
 
 namespace Tests.XPack.Security.Privileges
 {
@@ -62,31 +60,31 @@ namespace Tests.XPack.Security.Privileges
 								)
 							)
 						),
-					(v, c, f) => c.PutPrivileges(f),
-					(v, c, f) => c.PutPrivilegesAsync(f),
-					(v, c, r) => c.PutPrivileges(r),
-					(v, c, r) => c.PutPrivilegesAsync(r)
+					(v, c, f) => c.Security.PutPrivileges(f),
+					(v, c, f) => c.Security.PutPrivilegesAsync(f),
+					(v, c, r) => c.Security.PutPrivileges(r),
+					(v, c, r) => c.Security.PutPrivilegesAsync(r)
 				)
 			},
 			{
 				GetPrivilegesStep, u => u.Calls<GetPrivilegesDescriptor, GetPrivilegesRequest, IGetPrivilegesRequest, GetPrivilegesResponse>(
 					v => new GetPrivilegesRequest($"app-{v}", $"p1-{v}"),
-					(v, d) => d.Application($"app-{v}").Name($"p1-{v}"),
-					(v, c, f) => c.GetPrivileges(f),
-					(v, c, f) => c.GetPrivilegesAsync(f),
-					(v, c, r) => c.GetPrivileges(r),
-					(v, c, r) => c.GetPrivilegesAsync(r)
+					(v, d) => d.Application($"app-{v}"),
+					(v, c, f) => c.Security.GetPrivileges($"p1-{v}", f),
+					(v, c, f) => c.Security.GetPrivilegesAsync($"p1-{v}", f),
+					(v, c, r) => c.Security.GetPrivileges(r),
+					(v, c, r) => c.Security.GetPrivilegesAsync(r)
 				)
 			},
 			{
-				PutRoleStep, u => u.Call((v, c) => c.PutRoleAsync($"role-{v}", r=>r
+				PutRoleStep, u => u.Call((v, c) => c.Security.PutRoleAsync($"role-{v}", r=>r
 					.Applications(apps=>apps
 						.Add(a=>a.Resources("*").Privileges($"p1-{v}").Application($"app-{v}"))
 					)
 				))
 			},
 			{
-				PutUserStep, u => u.Call((v, c) => c.PutUserAsync($"user-{v}",
+				PutUserStep, u => u.Call((v, c) => c.Security.PutUserAsync($"user-ap-{v}",
 					r => r.Roles("admin", $"role-{v}").Password($"pass-{v}")))
 			},
 			{
@@ -95,10 +93,7 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-							{
-								Username = $"user-{v}", Password = $"pass-{v}"
-							}
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-ap-{v}", $"pass-{v}")
 						},
 						Application = new[]
 						{
@@ -111,7 +106,7 @@ namespace Tests.XPack.Security.Privileges
 						}
 					},
 					(v, d) => d
-						.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}"))
+						.RequestConfiguration(r=>r.BasicAuthentication($"user-ap-{v}", $"pass-{v}"))
 						.Applications(apps => apps
 							.Application(a => a
 								.Name($"app-{v}")
@@ -120,10 +115,10 @@ namespace Tests.XPack.Security.Privileges
 							)
 						)
 					,
-					(v, c, f) => c.HasPrivileges(f),
-					(v, c, f) => c.HasPrivilegesAsync(f),
-					(v, c, r) => c.HasPrivileges(r),
-					(v, c, r) => c.HasPrivilegesAsync(r)
+					(v, c, f) => c.Security.HasPrivileges(f),
+					(v, c, f) => c.Security.HasPrivilegesAsync(f),
+					(v, c, r) => c.Security.HasPrivileges(r),
+					(v, c, r) => c.Security.HasPrivilegesAsync(r)
 				)
 			},
 			{
@@ -132,27 +127,24 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials
-							{
-								Username = $"user-{v}", Password = $"pass-{v}"
-							}
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-ap-{v}", $"pass-{v}")
 						}
 					},
-					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}")),
-					(v, c, f) => c.GetUserPrivileges(f),
-					(v, c, f) => c.GetUserPrivilegesAsync(f),
-					(v, c, r) => c.GetUserPrivileges(r),
-					(v, c, r) => c.GetUserPrivilegesAsync(r)
+					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-ap-{v}", $"pass-{v}")),
+					(v, c, f) => c.Security.GetUserPrivileges(f),
+					(v, c, f) => c.Security.GetUserPrivilegesAsync(f),
+					(v, c, r) => c.Security.GetUserPrivileges(r),
+					(v, c, r) => c.Security.GetUserPrivilegesAsync(r)
 				)
 			},
 			{
 				DeletePrivilegesStep, u => u.Calls<DeletePrivilegesDescriptor, DeletePrivilegesRequest, IDeletePrivilegesRequest, DeletePrivilegesResponse>(
 					v => new DeletePrivilegesRequest($"app-{v}", $"p1-{v}"),
 					(v, d) => d,
-					(v, c, f) => c.DeletePrivileges($"app-{v}", $"p1-{v}"),
-					(v, c, f) => c.DeletePrivilegesAsync($"app-{v}", $"p1-{v}"),
-					(v, c, r) => c.DeletePrivileges(r),
-					(v, c, r) => c.DeletePrivilegesAsync(r)
+					(v, c, f) => c.Security.DeletePrivileges($"app-{v}", $"p1-{v}"),
+					(v, c, f) => c.Security.DeletePrivilegesAsync($"app-{v}", $"p1-{v}"),
+					(v, c, r) => c.Security.DeletePrivileges(r),
+					(v, c, r) => c.Security.DeletePrivilegesAsync(r)
 				)
 			}
 		}) { }
@@ -209,7 +201,7 @@ namespace Tests.XPack.Security.Privileges
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-			r.Username.Should().Be($"user-{v}");
+			r.Username.Should().Be($"user-ap-{v}");
 			r.HasAllRequested.Should().Be(true);
 			r.Applications.Should().NotBeEmpty();
 			var app = $"app-{v}";

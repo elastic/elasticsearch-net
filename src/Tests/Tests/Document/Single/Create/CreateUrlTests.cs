@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Document.Single.Create
 {
@@ -24,15 +24,17 @@ namespace Tests.Document.Single.Create
 
 			await PUT("/project/_create/NEST")
 				.Fluent(c => c.CreateDocument(project))
+				.Fluent(c => c.Create(project, f => f))
 				.Request(c => c.Create(new CreateRequest<Project>(project)))
 				.FluentAsync(c => c.CreateDocumentAsync(project))
+				.FluentAsync(c => c.CreateAsync(project, f => f))
 				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project)));
 
-			await PUT("/project/_create/NEST")
-				.Fluent(c => c.Create(project, cc => cc.Index("project")))
-				.Request(c => c.Create(new CreateRequest<Project>(project, "project", "NEST") { Document = project }))
-				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project, "project", "NEST") { Document = project }))
-				.FluentAsync(c => c.CreateAsync(project, cc => cc.Index("project")));
+			await PUT("/project2/_create/NEST")
+				.Fluent(c => c.Create(project, cc => cc.Index("project2")))
+				.Request(c => c.Create(new CreateRequest<Project>(project, "project2", "NEST") { Document = project }))
+				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project, "project2", "NEST") { Document = project }))
+				.FluentAsync(c => c.CreateAsync(project, cc => cc.Index("project2")));
 
 			await PUT("/different-projects/_create/elasticsearch")
 					.Request(c => c.Create(new CreateRequest<Project>("different-projects", "elasticsearch") { Document = project }))

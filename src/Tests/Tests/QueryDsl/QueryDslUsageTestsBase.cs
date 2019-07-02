@@ -5,17 +5,18 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl
 {
 	public abstract class QueryDslUsageTestsBase
-		: ApiTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
+		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery());
 
 		protected readonly QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
 
@@ -46,8 +47,8 @@ namespace Tests.QueryDsl
 		protected override string UrlPath => "/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<Project>(f),
-			(client, f) => client.SearchAsync<Project>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<Project>(r),
 			(client, r) => client.SearchAsync<Project>(r)
 		);
@@ -69,6 +70,7 @@ namespace Tests.QueryDsl
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.DefaultInMemoryClient.ConnectionSettings);
 			var query = QueryFluent(new QueryContainerDescriptor<Project>());
+			query.Should().NotBeNull("query evaluated to null which implies it may be conditionless");
 			query.Accept(visitor);
 			var pretty = visitor.PrettyPrint;
 			pretty.Should().NotBeNullOrWhiteSpace();
@@ -105,10 +107,7 @@ namespace Tests.QueryDsl
 
 		[I] protected async Task AssertQueryResponse() => await AssertOnAllResponses(r =>
 		{
-			var validOrNotParseExceptionOrKnownParseException = r.IsValid || r.ServerError?.Error.Type != "parsing_exception" || KnownParseException;
-			validOrNotParseExceptionOrKnownParseException.Should().BeTrue("query should be valid or when not valid not a parsing_exception.");
-
-			//TODO only assert IsValid == true and remove corner cases we don't have time to fix now.
+			r.ShouldBeValid();
 		});
 	}
 }

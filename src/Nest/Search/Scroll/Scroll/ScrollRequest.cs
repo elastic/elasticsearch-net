@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public partial interface IScrollRequest : ICovariantSearchRequest
+	public partial interface IScrollRequest : ITypedSearchRequest
 	{
 		[DataMember(Name ="scroll")]
 		Time Scroll { get; set; }
@@ -24,22 +24,22 @@ namespace Nest
 
 		public string ScrollId { get; set; }
 
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-		private Type _clrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => _clrType;
+		Type ITypedSearchRequest.ClrType => null;
 	}
 
-	public partial class ScrollDescriptor<T> where T : class
+	public partial class ScrollDescriptor<TInferDocument> where TInferDocument : class
 	{
-		Type ICovariantSearchRequest.ClrType => typeof(T);
+		public ScrollDescriptor(Time scroll, string scrollId) => ScrollId(scrollId).Scroll(scroll);
+
+		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
 
 		Time IScrollRequest.Scroll { get; set; }
 
 		string IScrollRequest.ScrollId { get; set; }
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(Time scroll) => Assign(scroll, (a, v) => a.Scroll = v);
+		public ScrollDescriptor<TInferDocument> Scroll(Time scroll) => Assign(scroll, (a, v) => a.Scroll = v);
 
-		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(scrollId, (a, v) => a.ScrollId = v);
+		public ScrollDescriptor<TInferDocument> ScrollId(string scrollId) => Assign(scrollId, (a, v) => a.ScrollId = v);
 	}
 }

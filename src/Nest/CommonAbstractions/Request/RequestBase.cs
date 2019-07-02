@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -9,19 +10,21 @@ namespace Nest
 	public interface IRequest
 	{
 		[IgnoreDataMember]
+		string ContentType { get; }
+
+		[IgnoreDataMember]
 		HttpMethod HttpMethod { get; }
 
 		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
 
-		// TODO refactor RequestParameters
 		[IgnoreDataMember]
-		IRequestParameters RequestParametersInternal { get; }
+		IRequestParameters RequestParameters { get; }
 
 		string GetUrl(IConnectionSettingsValues settings);
 	}
 
-	public interface IRequest<TParameters> : IRequest
+	public interface IRequest<out TParameters> : IRequest
 		where TParameters : class, IRequestParameters, new()
 	{
 		/// <summary>
@@ -29,17 +32,25 @@ namespace Nest
 		/// overrides, etc.
 		/// </summary>
 		[IgnoreDataMember]
-		TParameters RequestParameters { get; set; }
+		new TParameters RequestParameters { get; }
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
 	{
-		protected RequestBase() => Initialize();
+		// ReSharper disable once VirtualMemberCallInConstructor
+		protected RequestBase()
+		{
+			_parameters = new TParameters();
+			// ReSharper disable once VirtualMemberCallInConstructor
+			RequestDefaults(_parameters);
+		}
 
 		protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
 		{
 			pathSelector(RequestState.RouteValues);
-			Initialize();
+			_parameters = new TParameters();
+			// ReSharper disable once VirtualMemberCallInConstructor
+			RequestDefaults(_parameters);
 		}
 
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
@@ -51,7 +62,14 @@ namespace Nest
 		HttpMethod IRequest.HttpMethod => HttpMethod;
 
 		[IgnoreDataMember]
-		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
+		string IRequest.ContentType => ContentType;
+		protected virtual string ContentType { get; } = null;
+
+		private readonly TParameters _parameters;
+
+		[IgnoreDataMember]
+		TParameters IRequest<TParameters>.RequestParameters => _parameters;
+		IRequestParameters IRequest.RequestParameters => _parameters;
 
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
@@ -60,10 +78,11 @@ namespace Nest
 
 		string IRequest.GetUrl(IConnectionSettingsValues settings) => ApiUrls.Resolve(RequestState.RouteValues, settings);
 
-		IRequestParameters IRequest.RequestParametersInternal => RequestState.RequestParameters;
 
-		// TODO remove this is only used to make sure requests set typed_keys automatically, find better approach for this
-		protected virtual void Initialize() { }
+		/// <summary>
+		/// Allows a request implementation to set certain request parameter defaults, use sparingly!
+		/// </summary>
+		protected virtual void RequestDefaults(TParameters parameters) { }
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
@@ -104,18 +123,6 @@ namespace Nest
 
 		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
 
-		protected TDescriptor AssignParam(Action<TParameters> assigner)
-		{
-			assigner?.Invoke(RequestState.RequestParameters);
-			return _descriptor;
-		}
-
-		protected TDescriptor Qs(Action<TParameters> assigner)
-		{
-			assigner?.Invoke(RequestState.RequestParameters);
-			return _descriptor;
-		}
-
 		protected TDescriptor Qs(string name, object value)
 		{
 			Q(name, value);
@@ -137,6 +144,7 @@ namespace Nest
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
+		// ReSharper disable BaseObjectEqualsIsObjectEquals
 		public override bool Equals(object obj) => base.Equals(obj);
 
 		/// <summary>
@@ -144,7 +152,9 @@ namespace Nest
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
+		// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
 		public override int GetHashCode() => base.GetHashCode();
+		// ReSharper restore BaseObjectEqualsIsObjectEquals
 
 		/// <summary>
 		/// Hides the <see cref="ToString" /> method.

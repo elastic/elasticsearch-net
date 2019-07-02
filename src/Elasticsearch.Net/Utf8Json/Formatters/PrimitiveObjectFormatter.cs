@@ -25,8 +25,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	internal sealed class PrimitiveObjectFormatter : IJsonFormatter<object>
     {
@@ -159,7 +161,7 @@ namespace Elasticsearch.Net
 					if (numberSegment.IsDouble())
 						return NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
 
-					// TODO: Check arraysegment to determine if larger than int64?
+					// potential overflow if larger than int64
 					return NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
 				case JsonToken.String:
                     return reader.ReadString();

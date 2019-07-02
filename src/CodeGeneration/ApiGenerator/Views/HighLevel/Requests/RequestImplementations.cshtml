@@ -1,0 +1,72 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@using ApiGenerator.Domain.Code
+@using ApiGenerator.Domain.Code.HighLevel.Requests
+@using ApiGenerator.Generator
+@inherits global::ApiGenerator.CodeTemplatePage<RequestPartialImplementation>
+@{
+	RequestPartialImplementation r = Model;
+	CsharpNames names = r.CsharpNames;
+	var apiLookup = $"ApiUrlsLookups.{r.CsharpNames.Namespace}{r.CsharpNames.MethodName}";
+}
+	///<summary>Request for @names.MethodName <para>@r.OfficialDocumentationLink</para></summary>
+	public partial class @Raw(r.Name) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", names.ParametersName, r.InterfaceName))
+	{
+		protected @(Raw(r.InterfaceName)) Self => this;
+		internal override ApiUrls ApiUrls => @apiLookup;
+@foreach (Constructor c in r.Constructors)
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
+</text>
+}
+		// values part of the url path
+@foreach (var part in r.Parts)
+{
+<text>		[IgnoreDataMember]
+		@(Raw(part.HighLevelTypeName)) @(Raw(r.InterfaceName)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.HighLevelTypeName)))("@(part.Name)");
+</text>
+}
+
+		// Request parameters
+@foreach (var param in r.Params)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+	if (r.Parts.Any(p=>p.Name == original))
+	{
+		continue;
+	}
+	// We prefer to map these explicitly in our own hand written classes.
+	// The interface generation will generate properties for these so code won't compile until we do
+	if (param.RenderPartial && (r.HasBody))
+	{
+		continue;
+	}
+	var doc = param.DescriptionHighLevel.ToArray();
+<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
+</text>
+}
+@if (names.DescriptorNotFoundInCodebase)
+{<text>
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement @names.DescriptorName and @names.RequestName in a file called @(names.RequestName).cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
+ </text>
+}
+	}
+@if (r.NeedsGenericImplementation)
+	{<text>
+	public partial class @Raw(names.GenericRequestName) @Raw(string.Format(": {0}, {1}", names.RequestName, names.GenericInterfaceName))
+	{
+		protected @(Raw(names.GenericInterfaceName)) TypedSelf => this;
+@foreach (Constructor c in r.GenericConstructors)
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
+</text>
+}
+	}
+	 </text>
+}

@@ -5,8 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.Monitoring.IndicesStats
 {
@@ -31,7 +31,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var createShardedIndex = Client.CreateIndex(RandomString(), c => c
+			var createShardedIndex = Client.Indices.Create(RandomString(), c => c
 				.Settings(settings => settings
 					.NumberOfShards(3)
 				)
@@ -40,10 +40,10 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.IndicesStats(Infer.AllIndices, f),
-			(client, f) => client.IndicesStatsAsync(Infer.AllIndices, f),
-			(client, r) => client.IndicesStats(r),
-			(client, r) => client.IndicesStatsAsync(r)
+			(client, f) => client.Indices.Stats(Infer.AllIndices, f),
+			(client, f) => client.Indices.StatsAsync(Infer.AllIndices, f),
+			(client, r) => client.Indices.Stats(r),
+			(client, r) => client.Indices.StatsAsync(r)
 		);
 
 		protected override void ExpectResponse(IndicesStatsResponse response)
@@ -66,7 +66,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 			first.Flush.Should().NotBeNull();
 			first.Warmer.Should().NotBeNull();
 			first.QueryCache.Should().NotBeNull();
-			first.FieldData.Should().NotBeNull();
+			first.Fielddata.Should().NotBeNull();
 			first.Completion.Should().NotBeNull();
 			first.Segments.Should().NotBeNull();
 			first.TransactionLog.Should().NotBeNull();

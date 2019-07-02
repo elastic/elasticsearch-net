@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json
 {
 	internal delegate void JsonSerializeAction<T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
 	internal delegate T JsonDeserializeFunc<T>(ref JsonReader reader, IJsonFormatterResolver resolver);

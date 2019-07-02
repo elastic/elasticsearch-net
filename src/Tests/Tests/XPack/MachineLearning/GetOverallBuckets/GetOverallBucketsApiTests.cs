@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetOverallBuckets
 {
@@ -32,7 +29,7 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putJobResponse = client.PutJob<object>(callUniqueValue.Value, f => f
+				var putJobResponse = client.MachineLearning.PutJob<object>(callUniqueValue.Value, f => f
 					.Description("GetOverallBucketsApiTests")
 					.AnalysisConfig(a => a
 						.BucketSpan($"{BucketSpanSeconds}s")
@@ -62,10 +59,10 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetOverallBuckets(CallIsolatedValue, f),
-			(client, f) => client.GetOverallBucketsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetOverallBuckets(r),
-			(client, r) => client.GetOverallBucketsAsync(r)
+			(client, f) => client.MachineLearning.GetOverallBuckets(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetOverallBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetOverallBuckets(r),
+			(client, r) => client.MachineLearning.GetOverallBucketsAsync(r)
 		);
 
 		protected override GetOverallBucketsDescriptor NewDescriptor() => new GetOverallBucketsDescriptor(CallIsolatedValue);

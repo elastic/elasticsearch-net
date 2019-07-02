@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
-using Tests.Framework.Integration;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests.TestState
 {
 	public class LazyResponses : AsyncLazy<Dictionary<ClientMethod, IResponse>>
 	{

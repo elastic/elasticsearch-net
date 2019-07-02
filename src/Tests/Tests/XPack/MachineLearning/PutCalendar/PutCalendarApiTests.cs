@@ -4,9 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.PutCalendar
 {
@@ -39,10 +37,10 @@ namespace Tests.XPack.MachineLearning.PutCalendar
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutCalendar(CallIsolatedValue, f),
-			(client, f) => client.PutCalendarAsync(CallIsolatedValue, f),
-			(client, r) => client.PutCalendar(r),
-			(client, r) => client.PutCalendarAsync(r)
+			(client, f) => client.MachineLearning.PutCalendar(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.PutCalendarAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.PutCalendar(r),
+			(client, r) => client.MachineLearning.PutCalendarAsync(r)
 		);
 
 		protected override PutCalendarDescriptor NewDescriptor() => new PutCalendarDescriptor(CallIsolatedValue);

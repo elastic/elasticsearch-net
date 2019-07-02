@@ -26,8 +26,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
 	internal sealed class BuiltinResolver : IJsonFormatterResolver
     {

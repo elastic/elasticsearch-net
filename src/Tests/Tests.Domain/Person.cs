@@ -9,7 +9,7 @@ namespace Tests.Domain
 {
 	public class Person
 	{
-		protected static int IdState = 0;
+		protected static int IdState;
 		public string FirstName { get; set; }
 
 		public static Faker<Person> Generator { get; } =

@@ -4,7 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Stats
@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.Stats
 		protected override AggregationDictionary InitializerAggs =>
 			new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits));
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitStats = response.Aggregations.Stats("commit_stats");

@@ -1,0 +1,25 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using RazorLight
+@using ApiGenerator.Domain
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@{
+	RestApiSpec m = Model;
+}
+namespace Nest
+{
+	// ReSharper disable UnusedTypeParameter
+	public abstract partial class @Raw("RequestDescriptorBase<TDescriptor, TParameters, TInterface>")
+	{
+@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
+{
+	var original = common.QueryStringKey;
+	var t = @common.TypeHighLevel;
+	var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
+<text>		///<summary>@(Raw(string.Join("", common.DescriptionHighLevel)))</summary>
+		public TDescriptor @(common.ClsName)(@common.TypeHighLevel @common.ClsArgumentName@tSuffix) => Qs("@original", @(common.ClsArgumentName));
+</text>
+}
+	}
+}

@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatHealth
 {
@@ -19,10 +19,10 @@ namespace Tests.Cat.CatHealth
 		protected override string UrlPath => "/_cat/health";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatHealth(),
-			(client, f) => client.CatHealthAsync(),
-			(client, r) => client.CatHealth(r),
-			(client, r) => client.CatHealthAsync(r)
+			(client, f) => client.Cat.Health(),
+			(client, f) => client.Cat.HealthAsync(),
+			(client, r) => client.Cat.Health(r),
+			(client, r) => client.Cat.HealthAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatHealthRecord> response) =>
@@ -50,10 +50,10 @@ namespace Tests.Cat.CatHealth
 		protected override string UrlPath => "/_cat/health?ts=false";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatHealth(f),
-			(client, f) => client.CatHealthAsync(f),
-			(client, r) => client.CatHealth(r),
-			(client, r) => client.CatHealthAsync(r)
+			(client, f) => client.Cat.Health(f),
+			(client, f) => client.Cat.HealthAsync(f),
+			(client, r) => client.Cat.Health(r),
+			(client, r) => client.Cat.HealthAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatHealthRecord> response)

@@ -1,7 +1,7 @@
 ﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.QueryString
@@ -23,10 +23,9 @@ namespace Tests.QueryDsl.FullText.QueryString
 				_name = "named_query",
 				boost = 1.1,
 				query = "hello world",
-				default_field = "description",
 				default_operator = "or",
 				analyzer = "standard",
-				quote_analyzer = "quote-an",
+				quote_analyzer = "keyword",
 				allow_leading_wildcard = true,
 				fuzzy_max_expansions = 3,
 				fuzziness = "AUTO",
@@ -51,10 +50,9 @@ namespace Tests.QueryDsl.FullText.QueryString
 			Boost = 1.1,
 			Name = "named_query",
 			Query = "hello world",
-			DefaultField = Field<Project>(p => p.Description),
 			DefaultOperator = Operator.Or,
 			Analyzer = "standard",
-			QuoteAnalyzer = "quote-an",
+			QuoteAnalyzer = "keyword",
 			AllowLeadingWildcard = true,
 			MaximumDeterminizedStates = 2,
 			Escape = true,
@@ -77,10 +75,9 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.Boost(1.1)
 				.Fields(f => f.Field(p => p.Description).Field("myOtherField"))
 				.Query("hello world")
-				.DefaultField(p => p.Description)
 				.DefaultOperator(Operator.Or)
 				.Analyzer("standard")
-				.QuoteAnalyzer("quote-an")
+				.QuoteAnalyzer("keyword")
 				.AllowLeadingWildcard()
 				.MaximumDeterminizedStates(2)
 				.Escape()
@@ -96,6 +93,5 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.Lenient()
 				.AutoGenerateSynonymsPhraseQuery(false)
 			);
-#pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 	}
 }

@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace DocGenerator
@@ -16,10 +15,7 @@ namespace DocGenerator
 	public static class StringExtensions
 	{
 		private static readonly Regex LeadingMultiLineComment = new Regex(@"^(?<value>[ \t]*\/\*)", RegexOptions.Compiled);
-		private static readonly Regex LeadingSpacesAndAsterisk = new Regex(@"^(?<value>[ \t]*\*\s?).*", RegexOptions.Compiled);
 
-		// TODO: Total Hack of replacements in anonymous types that represent json. This can be resolved by referencing tests assembly when building the dynamic assembly,
-		// but might want to put doc generation at same directory level as Tests to reference project directly.
 		private static readonly Dictionary<string, string> Substitutions = new Dictionary<string, string>
 		{
 			{ "FixedDate", "new DateTime(2015, 06, 06, 12, 01, 02, 123)" },
@@ -43,27 +39,21 @@ namespace DocGenerator
 			{ "Project.First.Name", "\"Lesch Group\"" },
 			{ "Project.First.NumberOfCommits", "775" },
 			{ "LastNameSearch", "\"Stokes\"" },
-			{ "First.Language", "\"painless\"" },
-			{ "First.Init", "\"params._agg.map = [:]\"" },
-			{
-				"First.Map",
-				"\"if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;\""
-			},
-			{
-				"First.Reduce",
-				"\"def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;\""
-			},
-			{ "Second.Language", "\"painless\"" },
-			{ "Second.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
-			{ "Second.Init", "\"params._agg.commits = []\"" },
-			{ "Second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
-			{ "Second.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "Script.Lang", "\"painless\"" },
-			{ "Script.Init", "\"params._agg.commits = []\"" },
-			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
-			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
-			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "EnvelopeCoordinates", @"new [] { new [] { 45.0, -45.0 }, new [] { -45.0, 45.0 }}" },
+			{ "_first.Language", "\"painless\"" },
+			{ "_first.Init", "\"state.map = [:]\"" },
+			{ "_first.Map", "\"if (state.map.containsKey(doc['state'].value)) state.map[doc['state'].value] += 1; else state.map[doc['state'].value] = 1;\"" },
+			{ "_first.Reduce", "\"def reduce = [:]; for (map in states){ for (entry in map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); }} return reduce;\"" },
+			{ "_first.Combine", "\"return state.map;\"" },
+			{ "_second.Language", "\"painless\"" },
+			{ "_second.Init", "\"state.commits = []\"" },
+			{ "_second.Combine", "\"def sum = 0.0; for (c in state.commits) { sum += c } return sum\"" },
+			{ "_second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { state.commits.add(doc['numberOfCommits'].value) }\"" },
+			{ "_second.Reduce", "\"def sum = 0.0; for (a in states) { sum += a } return sum\"" },
+			{ "_script.Init", "\"state.commits = []\"" },
+			{ "_script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { state.commits.add(doc['numberOfCommits'].value) }\"" },
+			{ "_script.Combine", "\"def sum = 0.0; for (c in state.commits) { sum += c } return sum\"" },
+			{ "_script.Reduce", "\"def sum = 0.0; for (a in states) { sum += a } return sum\"" },
+			{ "EnvelopeCoordinates", @"new [] { new [] { -45.0, 45.0 }, new [] { 45.0, -45.0 }}" },
 			{ "CircleCoordinates", @"new [] { 45.0, -45.0 }" },
 			{ "MultiPointCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
 			{
@@ -126,6 +116,12 @@ namespace DocGenerator
 			},
 			{ "ProjectFilterExpectedJson", "new {term = new {type = new {value = \"project\"}}}" }
 		};
+
+		private static readonly Regex LeadingSpacesAndAsterisk = new Regex(@"^(?<value>[ \t]*\*\s?).*", RegexOptions.Compiled);
+
+		// TODO: Total Hack of replacements in anonymous types that represent json. This can be resolved by referencing tests assembly when building the dynamic assembly,
+
+		// but might want to put doc generation at same directory level as Tests to reference project directly.
 
 		private static readonly Regex TrailingMultiLineComment = new Regex(@"(?<value>\*\/[ \t]*)$", RegexOptions.Compiled);
 
@@ -230,6 +226,7 @@ namespace DocGenerator
 					using System.ComponentModel;
 					using System.Runtime.Serialization;
 					using Newtonsoft.Json.Linq;
+					using Newtonsoft.Json;
 
 					namespace Temporary
 					{{
@@ -253,7 +250,7 @@ namespace DocGenerator
 				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location),
 			};
-			var systemReferences = new string[]
+			var systemReferences = new[]
 			{
 				"System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
 				"System.ObjectModel, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -311,7 +308,7 @@ namespace DocGenerator
 
 		public static string ReplaceArityWithGenericSignature(this string value)
 		{
-			var indexOfBackTick = value.IndexOf("`");
+			var indexOfBackTick = value.IndexOf("`", StringComparison.Ordinal);
 
 			if (indexOfBackTick == -1)
 				return value;

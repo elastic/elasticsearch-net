@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/MoreLikeThis/MoreLikeThisQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Specialized/MoreLikeThis/MoreLikeThisQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -24,7 +24,7 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Like(l => l
-        .Document(d => d.Id(Project.Instance.Name))
+        .Document(d => d.Id(Project.Instance.Name).Routing(Project.Instance.Name))
         .Text("some long text")
     )
     .Analyzer("some_analyzer")
@@ -56,7 +56,7 @@ new MoreLikeThisQuery
     Fields = Fields<Project>(p => p.Name),
     Like = new List<Like>
     {
-        new LikeDocument<Project>(Project.Instance.Name),
+        new LikeDocument<Project>(Project.Instance.Name) { Routing = Project.Instance.Name },
         "some long text"
     },
     Analyzer = "some_analyzer",
@@ -74,6 +74,45 @@ new MoreLikeThisQuery
     {
         "not like this text"
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "more_like_this": {
+    "fields": [
+      "name"
+    ],
+    "minimum_should_match": 1,
+    "stop_words": [
+      "and",
+      "the"
+    ],
+    "min_term_freq": 1,
+    "max_query_terms": 12,
+    "min_doc_freq": 1,
+    "max_doc_freq": 12,
+    "min_word_length": 10,
+    "max_word_length": 300,
+    "boost_terms": 1.1,
+    "analyzer": "some_analyzer",
+    "include": true,
+    "like": [
+      {
+        "_index": "project",
+        "_id": "Durgan LLC",
+        "routing": "Durgan LLC"
+      },
+      "some long text"
+    ],
+    "unlike": [
+      "not like this text"
+    ],
+    "_name": "named_query",
+    "boost": 1.1
+  }
 }
 ----
 

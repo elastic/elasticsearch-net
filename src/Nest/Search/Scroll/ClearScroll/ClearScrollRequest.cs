@@ -14,7 +14,7 @@ namespace Nest
 	{
 		public ClearScrollRequest(IEnumerable<string> scrollIds) => ScrollIds = scrollIds;
 
-		public ClearScrollRequest(string scrollId) => ScrollIds = new string[] { scrollId };
+		public ClearScrollRequest(string scrollId) => ScrollIds = new[] { scrollId };
 
 		public IEnumerable<string> ScrollIds { get; set; }
 	}

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -22,36 +25,71 @@ namespace Nest
 		/// </summary>
 		/// <param name="objectType">The type</param>
 		object As(Type objectType);
+
+		/// <summary>
+		/// Creates an instance of <typeparamref name="T" /> from this
+		/// <see cref="ILazyDocument" /> instance
+		/// </summary>
+		/// <typeparam name="T">The type</typeparam>
+		Task<T> AsAsync<T>(CancellationToken ct = default);
+		
+		/// <summary>
+		/// Creates an instance of <paramref name="objectType" /> from this
+		/// <see cref="ILazyDocument" /> instance
+		/// </summary>
+		/// <param name="objectType">The type</param>
+		Task<object> AsAsync(Type objectType, CancellationToken ct = default);
 	}
 
 	/// <inheritdoc />
 	[JsonFormatter(typeof(LazyDocumentFormatter))]
 	public class LazyDocument : ILazyDocument
 	{
-		private readonly IJsonFormatterResolver _formatterResolver;
+		private readonly IElasticsearchSerializer _serializer;
+		private readonly IMemoryStreamFactory _memoryStreamFactory;
 
-		internal LazyDocument(byte[] bytes, IJsonFormatterResolver formatterResolver)
+		internal LazyDocument(byte[] bytes, IJsonFormatterResolver formatterResolver) 
+			: this(bytes, formatterResolver.GetConnectionSettings()) { }
+
+		private LazyDocument(byte[] bytes, IConnectionSettingsValues settings) :
+			this(bytes, settings.SourceSerializer, settings.MemoryStreamFactory) { }
+		
+		private LazyDocument(byte[] bytes, IElasticsearchSerializer serializer, IMemoryStreamFactory memoryStreamFactory)
 		{
 			Bytes = bytes;
-			_formatterResolver = formatterResolver;
+			_serializer = serializer;
+			_memoryStreamFactory = memoryStreamFactory;
 		}
+
 
 		internal byte[] Bytes { get; }
 
 		/// <inheritdoc />
 		public T As<T>()
 		{
-			var reader = new JsonReader(Bytes);
-			var formatter = new SourceFormatter<T>();
-			return formatter.Deserialize(ref reader, _formatterResolver);
+			using (var ms = _memoryStreamFactory.Create(Bytes))
+				return _serializer.Deserialize<T>(ms);
 		}
 
 		/// <inheritdoc />
 		public object As(Type objectType)
 		{
-			var reader = new JsonReader(Bytes);
-			// TODO: Non generic SourceFormatter equivalent
-			return JsonSerializer.NonGeneric.Deserialize(objectType, ref reader, _formatterResolver);
+			using (var ms = _memoryStreamFactory.Create(Bytes))
+				return _serializer.Deserialize(objectType, ms);
+		}
+		
+		/// <inheritdoc />
+		public Task<T> AsAsync<T>(CancellationToken ct = default)
+		{
+			using (var ms = _memoryStreamFactory.Create(Bytes))
+				return _serializer.DeserializeAsync<T>(ms, ct);
+		}
+
+		/// <inheritdoc />
+		public Task<object> AsAsync(Type objectType, CancellationToken ct = default)
+		{
+			using (var ms = _memoryStreamFactory.Create(Bytes))
+				return _serializer.DeserializeAsync(objectType, ms, ct);
 		}
 	}
 }

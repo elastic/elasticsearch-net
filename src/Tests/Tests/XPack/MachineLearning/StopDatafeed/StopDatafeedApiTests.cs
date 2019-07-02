@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.StopDatafeed
 {
@@ -38,10 +36,10 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.StopDatafeed(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.StopDatafeedAsync(CallIsolatedValue + "-datafeed", f),
-			(client, r) => client.StopDatafeed(r),
-			(client, r) => client.StopDatafeedAsync(r)
+			(client, f) => client.MachineLearning.StopDatafeed(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.StopDatafeedAsync(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.MachineLearning.StopDatafeed(r),
+			(client, r) => client.MachineLearning.StopDatafeedAsync(r)
 		);
 
 		protected override StopDatafeedDescriptor NewDescriptor() => new StopDatafeedDescriptor(CallIsolatedValue + "-datafeed");

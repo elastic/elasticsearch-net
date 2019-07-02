@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 using static Tests.Domain.Helpers.TestValueHelper;
 
@@ -36,6 +34,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 				auto_date_histogram = new
 				{
 					field = "startedOn",
+					buckets = 10,
 					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
 					missing = FixedDate
 				},
@@ -62,6 +61,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.AutoDateHistogram("projects_started_per_month", date => date
 				.Field(p => p.StartedOn)
+				.Buckets(10)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.Missing(FixedDate)
 				.Aggregations(childAggs => childAggs
@@ -78,6 +78,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 			new AutoDateHistogramAggregation("projects_started_per_month")
 			{
 				Field = Field<Project>(p => p.StartedOn),
+				Buckets = 10,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				Missing = FixedDate,
 				Aggregations = new NestedAggregation("project_tags")
@@ -90,7 +91,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** ==== Handling responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods

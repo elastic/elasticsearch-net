@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.ClearCache
@@ -23,10 +23,10 @@ namespace Tests.Indices.StatusManagement.ClearCache
 		protected override string UrlPath => "/_all/_cache/clear?request=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClearCache(AllIndices, f),
-			(client, f) => client.ClearCacheAsync(AllIndices, f),
-			(client, r) => client.ClearCache(r),
-			(client, r) => client.ClearCacheAsync(r)
+			(client, f) => client.Indices.ClearCache(AllIndices, f),
+			(client, f) => client.Indices.ClearCacheAsync(AllIndices, f),
+			(client, r) => client.Indices.ClearCache(r),
+			(client, r) => client.Indices.ClearCacheAsync(r)
 		);
 	}
 }

@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     // Safe for multiple-read, single-write.
     internal class ThreadsafeTypeKeyHashTable<TValue>

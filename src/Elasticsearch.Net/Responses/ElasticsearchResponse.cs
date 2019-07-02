@@ -16,7 +16,12 @@ namespace Elasticsearch.Net
 		/// <inheritdoc cref="IApiCallDetails.HttpMethod"/>
 		public HttpMethod HttpMethod => ApiCall.HttpMethod;
 		/// <inheritdoc cref="IApiCallDetails.AuditTrail"/>
-		public List<Audit> AuditTrail => ApiCall.AuditTrail;
+		public List<Audit> AuditTrail
+		{
+			get => ApiCall.AuditTrail;
+			set => ApiCall.AuditTrail = value;
+		}
+
 		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
 		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
 		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>
@@ -43,10 +48,6 @@ namespace Elasticsearch.Net
 		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
 
 		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
-
-		// TODO: Remove?
-		//ignored
-		List<Audit> IApiCallDetails.AuditTrail { get; set; }
 
 		protected virtual bool TryGetServerErrorReason(out string reason)
 		{

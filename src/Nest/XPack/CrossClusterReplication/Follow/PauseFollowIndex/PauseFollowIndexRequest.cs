@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// Pauses a follower index. When this API returns, the follower index will not fetch any additional operations from

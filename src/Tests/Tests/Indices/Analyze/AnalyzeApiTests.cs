@@ -4,8 +4,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.Analyze
 {
@@ -44,10 +44,10 @@ namespace Tests.Indices.Analyze
 		protected override string UrlPath => $"/_analyze";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Analyze(f),
-			(client, f) => client.AnalyzeAsync(f),
-			(client, r) => client.Analyze(r),
-			(client, r) => client.AnalyzeAsync(r)
+			(client, f) => client.Indices.Analyze(f),
+			(client, f) => client.Indices.AnalyzeAsync(f),
+			(client, r) => client.Indices.Analyze(r),
+			(client, r) => client.Indices.AnalyzeAsync(r)
 		);
 	}
 
@@ -111,10 +111,10 @@ namespace Tests.Indices.Analyze
 		protected override string UrlPath => $"/_analyze";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Analyze(f),
-			(client, f) => client.AnalyzeAsync(f),
-			(client, r) => client.Analyze(r),
-			(client, r) => client.AnalyzeAsync(r)
+			(client, f) => client.Indices.Analyze(f),
+			(client, f) => client.Indices.AnalyzeAsync(f),
+			(client, r) => client.Indices.Analyze(r),
+			(client, r) => client.Indices.AnalyzeAsync(r)
 		);
 
 		protected override void ExpectResponse(AnalyzeResponse response)
@@ -177,10 +177,10 @@ namespace Tests.Indices.Analyze
 		protected override string UrlPath => $"/_analyze";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Analyze(f),
-			(client, f) => client.AnalyzeAsync(f),
-			(client, r) => client.Analyze(r),
-			(client, r) => client.AnalyzeAsync(r)
+			(client, f) => client.Indices.Analyze(f),
+			(client, f) => client.Indices.AnalyzeAsync(f),
+			(client, r) => client.Indices.Analyze(r),
+			(client, r) => client.Indices.AnalyzeAsync(r)
 		);
 
 		protected override void ExpectResponse(AnalyzeResponse response)

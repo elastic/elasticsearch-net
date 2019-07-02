@@ -2,8 +2,8 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatNodes
 {
@@ -18,10 +18,10 @@ namespace Tests.Cat.CatNodes
 		protected override string UrlPath => "/_cat/nodes";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CatNodes(f),
-			(client, f) => client.CatNodesAsync(f),
-			(client, r) => client.CatNodes(r),
-			(client, r) => client.CatNodesAsync(r)
+			(client, f) => client.Cat.Nodes(f),
+			(client, f) => client.Cat.NodesAsync(f),
+			(client, r) => client.Cat.Nodes(r),
+			(client, r) => client.Cat.NodesAsync(r)
 		);
 
 		protected override void ExpectResponse(CatResponse<CatNodesRecord> response) =>

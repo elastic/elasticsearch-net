@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -85,7 +85,7 @@ namespace Nest
 		ISimilarities Similarity { get; set; }
 
 		/// <summary>
-		/// Configure logging thresholds and levels in elasticsearch for search/fetch and indexing
+		/// Configure logging thresholds and levels in Elasticsearch for search/fetch and indexing
 		/// </summary>
 		ISlowLog SlowLog { get; set; }
 
@@ -243,9 +243,8 @@ namespace Nest
 		/// <inheritdoc cref="IDynamicIndexSettings.RefreshInterval" />
 		public TDescriptor RefreshInterval(Time time) => Assign(time, (a, v) => a.RefreshInterval = v);
 
-		// TODO: align name for 7.x
 		/// <inheritdoc cref="IDynamicIndexSettings.RoutingAllocationTotalShardsPerNode" />
-		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
+		public TDescriptor RoutingAllocationTotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(totalShardsPerNode, (a, v) => a.RoutingAllocationTotalShardsPerNode = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.SlowLog" />

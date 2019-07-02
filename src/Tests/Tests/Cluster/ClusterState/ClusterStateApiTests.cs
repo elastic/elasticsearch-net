@@ -3,13 +3,9 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using static Nest.Infer;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterState
 {
@@ -24,10 +20,10 @@ namespace Tests.Cluster.ClusterState
 		protected override string UrlPath => "/_cluster/state";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterState(),
-			(client, f) => client.ClusterStateAsync(),
-			(client, r) => client.ClusterState(r),
-			(client, r) => client.ClusterStateAsync(r)
+			(client, f) => client.Cluster.State(),
+			(client, f) => client.Cluster.StateAsync(),
+			(client, r) => client.Cluster.State(r),
+			(client, r) => client.Cluster.StateAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterStateResponse response)
@@ -36,70 +32,39 @@ namespace Tests.Cluster.ClusterState
 			response.MasterNode.Should().NotBeNullOrWhiteSpace();
 			response.StateUUID.Should().NotBeNullOrWhiteSpace();
 			response.Version.Should().BeGreaterThan(0);
-			Assert(response.Nodes, response.MasterNode);
-			Assert(response.Metadata);
-			Assert(response.RoutingTable);
-			Assert(response.RoutingNodes, response.MasterNode);
-		}
 
-		private void Assert(IReadOnlyDictionary<string, NodeState> nodes, string master)
-		{
-			nodes.Should().NotBeEmpty().And.ContainKey(master);
-			var node = nodes[master];
-			node.Name.Should().NotBeNullOrWhiteSpace();
-			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
-		}
+			var masterNode = response.State["nodes"][response.MasterNode];
+			var masterNodeName = masterNode["name"].Value as string;
+			var transportAddress = masterNode["transport_address"].Value as string;
+			masterNodeName.Should().NotBeNullOrWhiteSpace();
+			transportAddress.Should().NotBeNullOrWhiteSpace();
 
-		private void Assert(MetadataState meta)
-		{
-			meta.ClusterUUID.Should().NotBeNullOrWhiteSpace();
-			meta.Templates.Should().NotBeEmpty().And.ContainKey("nest_tests");
+			var getSyntax = response.Get<string>($"nodes.{response.MasterNode}.transport_address");
 
-			var rawFieldsTemplate = meta.Templates["nest_tests"];
-			rawFieldsTemplate.IndexPatterns.Should().NotBeNullOrEmpty();
-			rawFieldsTemplate.Settings.Should().NotBeNull();
-			rawFieldsTemplate.Settings.NumberOfShards.Should().Be(2);
+			getSyntax.Should().NotBeNullOrWhiteSpace().And.Be(transportAddress);
 
-			var i = Client.Infer.IndexName(Index<Project>());
+			var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
+			badPath.Should().BeNull();
 
-			meta.Indices.Should().NotBeEmpty().And.ContainKey(i);
+			var dict = response.Get<DynamicDictionary>($"nodes");
 
-			var index = meta.Indices[i];
-			index.Aliases.Should().NotBeEmpty().And.Contain(DefaultSeeder.ProjectsAliasName);
-		}
+			dict.Count.Should().BeGreaterThan(0);
+			var node = dict[response.MasterNode].ToDictionary();
+			node.Should().NotBeNull().And.ContainKey("name");
 
-		protected void Assert(RoutingTableState routingTable)
-		{
-			routingTable.Should().NotBeNull();
+			object dictDoesNotExist = response.Get<DynamicDictionary>("nodes2");
+			dictDoesNotExist.Should().BeNull();
 
-			routingTable.Indices.Should().NotBeEmpty().And.ContainKey("project");
-			var indices = routingTable.Indices["project"];
 
-			indices.Shards.Should().NotBeEmpty();
-			var shards = indices.Shards.First().Value;
-			shards.Should().NotBeEmpty();
-			var shard = shards.First();
-			shard.AllocationId.Should().NotBeNull();
-			shard.AllocationId.Id.Should().NotBeNullOrWhiteSpace();
-			shard.Index.Should().NotBeNullOrWhiteSpace();
-			shard.Node.Should().NotBeNullOrWhiteSpace();
-			shard.State.Should().NotBeNullOrWhiteSpace();
-		}
+			dynamic r = response.State;
 
-		protected void Assert(RoutingNodesState routingNodes, string master)
-		{
-			routingNodes.Should().NotBeNull();
+			string lastCommittedConfig = r.metadata.cluster_coordination.last_committed_config[0];
 
-			routingNodes.Nodes.Should().NotBeEmpty().And.ContainKey(master);
-			var nodes = routingNodes.Nodes[master];
+			lastCommittedConfig.Should().NotBeNullOrWhiteSpace();
 
-			nodes.Should().NotBeEmpty();
-			var node = nodes.First();
-			node.AllocationId.Should().NotBeNull();
-			node.AllocationId.Id.Should().NotBeNullOrWhiteSpace();
-			node.Index.Should().NotBeNullOrWhiteSpace();
-			node.Node.Should().NotBeNullOrWhiteSpace();
-			node.State.Should().NotBeNullOrWhiteSpace();
+
+
+
 		}
 	}
 }

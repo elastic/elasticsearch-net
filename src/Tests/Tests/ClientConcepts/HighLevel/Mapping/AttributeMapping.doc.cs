@@ -76,7 +76,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingAutoMapWithAttributes()
 		{
-			var createIndexResponse = _client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<Employee>(m => m.AutoMap())
 			);
 

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -26,6 +27,7 @@ namespace Elasticsearch.Net
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
 			var response = SetBody<TResponse>(details, requestData, responseStream, mimeType) ?? new TResponse();
 			response.ApiCall = details;
 			return response;
@@ -38,7 +40,7 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings,
 			Stream responseStream,
 			string mimeType = RequestData.MimeType,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
@@ -55,12 +57,19 @@ namespace Elasticsearch.Net
 		)
 		{
 			var success = false;
-			var allowedStatusCodes = requestData.AllowedStatusCodes.ToList();
+			var allowedStatusCodes = requestData.AllowedStatusCodes;
 			if (statusCode.HasValue)
-				success = statusCode >= 200 && statusCode < 300
-					|| requestData.Method == HttpMethod.HEAD && statusCode == 404
-					|| allowedStatusCodes.Contains(statusCode.Value)
-					|| allowedStatusCodes.Contains(-1);
+			{
+				if (allowedStatusCodes.Contains(-1) || allowedStatusCodes.Contains(statusCode.Value))
+					success = true;
+				else
+					success = requestData.ConnectionSettings
+						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
+			}
+			//mimeType can include charset information on .NET full framework
+			if (mimeType != null && !mimeType.StartsWith(requestData.RequestMimeType))
+				success = false;
+
 			var details = new ApiCallDetails
 			{
 				Success = success,
@@ -97,11 +106,13 @@ namespace Elasticsearch.Net
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
 
-				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
+				if (requestData.CustomResponseBuilder != null)
+					return requestData.CustomResponseBuilder.DeserializeResponse(serializer, details, responseStream) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
 					? null
-					: requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
+					: serializer.Deserialize<TResponse>(responseStream);
 			}
 		}
 
@@ -127,11 +138,13 @@ namespace Elasticsearch.Net
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
 
-				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
+				if (requestData.CustomResponseBuilder != null)
+					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken).ConfigureAwait(false) as TResponse;
 
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
 					? null
-					: await requestData.ConnectionSettings.RequestResponseSerializer
+					: await serializer
 						.DeserializeAsync<TResponse>(responseStream, cancellationToken)
 						.ConfigureAwait(false);
 			}
@@ -154,7 +167,7 @@ namespace Elasticsearch.Net
 			{
 				using (var ms = memoryStreamFactory.Create(bytes))
 				{
-					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicBody>(ms);
+					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicDictionary>(ms);
 					cs = new DynamicResponse(body) as TResponse;
 				}
 			}

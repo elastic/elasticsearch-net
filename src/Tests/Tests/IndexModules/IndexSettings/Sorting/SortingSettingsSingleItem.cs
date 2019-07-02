@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.IndexModules.IndexSettings.Sorting
 {
@@ -9,6 +8,8 @@ namespace Tests.IndexModules.IndexSettings.Sorting
 	{
 		private class TestClass
 		{
+			// ReSharper disable once InconsistentNaming
+			// ReSharper disable once UnusedMember.Local
 			public string field1 { get; set; }
 		}
 
@@ -48,7 +49,11 @@ namespace Tests.IndexModules.IndexSettings.Sorting
 	{
 		private class TestClass
 		{
+			// ReSharper disable once InconsistentNaming
+			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public string field1 { get; set; }
+			// ReSharper disable once InconsistentNaming
+			// ReSharper disable once UnusedMember.Local
 			public string field2 { get; set; }
 		}
 

@@ -6,9 +6,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning
 {
@@ -38,9 +37,22 @@ namespace Tests.XPack.MachineLearning
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
+		protected PutFilterResponse PutFilter(IElasticClient client, string filterId)
+		{
+			var putFilterResponse = client.MachineLearning.PutFilter(filterId, f => f
+				.Description("A list of safe domains")
+				.Items("*.google.com", "wikipedia.org")
+			);
+
+			if (!putFilterResponse.IsValid)
+				throw new Exception($"Problem putting filter {filterId} for integration test: {putFilterResponse.DebugInformation}");
+
+			return putFilterResponse;
+		}
+
 		protected PutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
 		{
-			var putCalendarResponse = client.PutCalendar(calendarId, f => f
+			var putCalendarResponse = client.MachineLearning.PutCalendar(calendarId, f => f
 				.Description("Planned outages")
 			);
 
@@ -53,7 +65,7 @@ namespace Tests.XPack.MachineLearning
 		{
 			var startDate = DateTime.Now.Year;
 
-			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f
+			var postCalendarEventsResponse = client.MachineLearning.PostCalendarEvents(calendarId, f => f
 				.Events(new ScheduledEvent
 					{
 						StartTime = new DateTimeOffset(startDate, 1, 1, 0, 0, 0, TimeSpan.Zero),
@@ -74,7 +86,6 @@ namespace Tests.XPack.MachineLearning
 			var startDate = DateTime.Now.Year;
 
 			for (var i = 0; i < 10; i++)
-			{
 				yield return new ScheduledEvent
 				{
 					StartTime = new DateTimeOffset(startDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
@@ -82,12 +93,11 @@ namespace Tests.XPack.MachineLearning
 					Description = $"Event {i}",
 					CalendarId = calendarId
 				};
-			}
 		}
 
 		protected PostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)
 		{
-			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f.Events(GetScheduledEvents(calendarId)));
+			var postCalendarEventsResponse = client.MachineLearning.PostCalendarEvents(calendarId, f => f.Events(GetScheduledEvents(calendarId)));
 
 			if (!postCalendarEventsResponse.IsValid)
 				throw new Exception($"Problem posting calendar events {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
@@ -97,7 +107,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected PutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)
 		{
-			var putCalendarJobResponse = client.PutCalendarJob(calendarId, jobId, f => f);
+			var putCalendarJobResponse = client.MachineLearning.PutCalendarJob(calendarId, jobId, f => f);
 
 			if (!putCalendarJobResponse.IsValid)
 				throw new Exception($"Problem putting calendar job {calendarId} / {jobId} for integration test: {putCalendarJobResponse.DebugInformation}");
@@ -107,7 +117,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected PutJobResponse PutJob(IElasticClient client, string jobId)
 		{
-			var putJobResponse = client.PutJob<Metric>(jobId, f => f
+			var putJobResponse = client.MachineLearning.PutJob<Metric>(jobId, f => f
 				.Description("Lab 1 - Simple example")
 				.AnalysisConfig(a => a
 					.BucketSpan("30m")
@@ -125,7 +135,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected OpenJobResponse OpenJob(IElasticClient client, string jobId)
 		{
-			var openJobResponse = client.OpenJob(jobId);
+			var openJobResponse = client.MachineLearning.OpenJob(jobId);
 			if (!openJobResponse.IsValid || openJobResponse.Opened == false)
 				throw new Exception($"Problem opening job {jobId} for integration test: {openJobResponse.DebugInformation}");
 
@@ -149,7 +159,7 @@ namespace Tests.XPack.MachineLearning
 				timestamp += bucketSpanSeconds * 1000;
 			}
 
-			var postJobDataResponse = client.PostJobData(jobId, d => d.Data(data));
+			var postJobDataResponse = client.MachineLearning.PostJobData(jobId, d => d.Data(data));
 			if (!postJobDataResponse.IsValid)
 				throw new Exception($"Problem posting data for integration test: {postJobDataResponse.DebugInformation}");
 
@@ -158,7 +168,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected FlushJobResponse FlushJob(IElasticClient client, string jobId, bool calculateInterim)
 		{
-			var flushJobResponse = client.FlushJob(jobId, f => f.CalculateInterim(calculateInterim));
+			var flushJobResponse = client.MachineLearning.FlushJob(jobId, f => f.CalculateInterim(calculateInterim));
 			if (!flushJobResponse.IsValid || flushJobResponse.Flushed == false)
 				throw new Exception($"Problem flushing job {jobId} for integration test: {flushJobResponse.DebugInformation}");
 
@@ -167,7 +177,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected CloseJobResponse CloseJob(IElasticClient client, string jobId)
 		{
-			var closeJobResponse = client.CloseJob(jobId);
+			var closeJobResponse = client.MachineLearning.CloseJob(jobId);
 			if (!closeJobResponse.IsValid || closeJobResponse.Closed == false)
 				throw new Exception($"Problem closing job {jobId} for integration test: : {closeJobResponse.DebugInformation}");
 
@@ -176,7 +186,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected DeleteJobResponse DeleteJob(IElasticClient client, string jobId)
 		{
-			var deleteJobResponse = client.DeleteJob(jobId);
+			var deleteJobResponse = client.MachineLearning.DeleteJob(jobId);
 			if (!deleteJobResponse.IsValid || deleteJobResponse.Acknowledged == false)
 				throw new Exception($"Problem deleting job {jobId} for integration test: : {deleteJobResponse.DebugInformation}");
 
@@ -185,7 +195,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected PutDatafeedResponse PutDatafeed(IElasticClient client, string jobId)
 		{
-			var putDataFeedResponse = client.PutDatafeed<Metric>(jobId + "-datafeed", f => f
+			var putDataFeedResponse = client.MachineLearning.PutDatafeed<Metric>(jobId + "-datafeed", f => f
 				.Indices(typeof(Metric)) // TODO: This should be default inferred from T on method
 				.JobId(jobId)
 				.Query(q => q.MatchAll()));
@@ -198,7 +208,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected StartDatafeedResponse StartDatafeed(IElasticClient client, string jobId)
 		{
-			var startDatafeedResponse = client.StartDatafeed(jobId + "-datafeed");
+			var startDatafeedResponse = client.MachineLearning.StartDatafeed(jobId + "-datafeed");
 			if (!startDatafeedResponse.IsValid || startDatafeedResponse.Started == false)
 				throw new Exception($"Problem starting datafeed for job {jobId} for integration test: {startDatafeedResponse.DebugInformation}");
 
@@ -207,7 +217,7 @@ namespace Tests.XPack.MachineLearning
 
 		protected StopDatafeedResponse StopDatafeed(IElasticClient client, string jobId)
 		{
-			var stopDatafeedResponse = client.StopDatafeed(jobId + "-datafeed");
+			var stopDatafeedResponse = client.MachineLearning.StopDatafeed(jobId + "-datafeed");
 			if (!stopDatafeedResponse.IsValid || stopDatafeedResponse.Stopped == false)
 				throw new Exception($"Problem stopping datafeed for job {jobId} for integration test: {stopDatafeedResponse.DebugInformation}");
 

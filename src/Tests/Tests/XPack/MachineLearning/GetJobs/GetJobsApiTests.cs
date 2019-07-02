@@ -4,9 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetJobs
 {
@@ -28,10 +26,10 @@ namespace Tests.XPack.MachineLearning.GetJobs
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetJobs(f),
-			(client, f) => client.GetJobsAsync(f),
-			(client, r) => client.GetJobs(r),
-			(client, r) => client.GetJobsAsync(r)
+			(client, f) => client.MachineLearning.GetJobs(f),
+			(client, f) => client.MachineLearning.GetJobsAsync(f),
+			(client, r) => client.MachineLearning.GetJobs(r),
+			(client, r) => client.MachineLearning.GetJobsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetJobsResponse response)
@@ -86,10 +84,10 @@ namespace Tests.XPack.MachineLearning.GetJobs
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetJobs(f),
-			(client, f) => client.GetJobsAsync(f),
-			(client, r) => client.GetJobs(r),
-			(client, r) => client.GetJobsAsync(r)
+			(client, f) => client.MachineLearning.GetJobs(f),
+			(client, f) => client.MachineLearning.GetJobsAsync(f),
+			(client, r) => client.MachineLearning.GetJobs(r),
+			(client, r) => client.MachineLearning.GetJobsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetJobsResponse response)

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using Elasticsearch.Net;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -9,7 +7,6 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IPipelineProcessor : IProcessor
 	{
-		//TODO 7.x: this property clashes with the Name property on the IProcessor, need to rename base in master
 		/// <summary>The name of the pipeline to execute. </summary>
 		[DataMember(Name = "name")]
 		string ProcessorName { get; set; }
@@ -18,7 +15,7 @@ namespace Nest
 	/// <inheritdoc cref="IPipelineProcessor" />
 	public class PipelineProcessor : ProcessorBase, IPipelineProcessor
 	{
-		/// <inheritdoc cref="IPipelineProcessor.ProcessorName"/>
+		/// <inheritdoc />
 		[DataMember(Name = "name")]
 		public string ProcessorName { get; set; }
 

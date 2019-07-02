@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
-	/// Contains aggregates that are returned by Elasticsearch. In NEST `Aggregation` always refers to an aggregation
-	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
+	/// Contains aggregates that are returned by Elasticsearch. In NEST, Aggregation always refers to an aggregation
+	/// request to Elasticsearch and an Aggregate describes an aggregation response.
 	/// </summary>
 	[JsonFormatter(typeof(AggregateDictionaryFormatter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
@@ -121,33 +122,37 @@ namespace Nest
 
 		public GeoCentroidAggregate GeoCentroid(string key) => TryGet<GeoCentroidAggregate>(key);
 
-		public SignificantTermsAggregate SignificantTerms(string key)
+		public SignificantTermsAggregate<TKey> SignificantTerms<TKey>(string key)
 		{
 			var bucket = TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
-				: new SignificantTermsAggregate
+				: new SignificantTermsAggregate<TKey>
 				{
 					BgCount = bucket.BgCount,
 					DocCount = bucket.DocCount,
-					Buckets = bucket.Items.OfType<SignificantTermsBucket>().ToList(),
+					Buckets = GetSignificantTermsBuckets<TKey>(bucket.Items).ToList(),
 					Meta = bucket.Meta
 				};
 		}
 
-		public SignificantTermsAggregate SignificantText(string key)
+		public SignificantTermsAggregate<string> SignificantTerms(string key) => SignificantTerms<string>(key);
+
+		public SignificantTermsAggregate<TKey> SignificantText<TKey>(string key)
 		{
 			var bucket = TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
-				: new SignificantTermsAggregate
+				: new SignificantTermsAggregate<TKey>
 				{
 					BgCount = bucket.BgCount,
 					DocCount = bucket.DocCount,
-					Buckets = bucket.Items.OfType<SignificantTermsBucket>().ToList(),
+					Buckets = GetSignificantTermsBuckets<TKey>(bucket.Items).ToList(),
 					Meta = bucket.Meta
 				};
 		}
+
+		public SignificantTermsAggregate<string> SignificantText(string key) => SignificantText<string>(key);
 
 		public TermsAggregate<TKey> Terms<TKey>(string key)
 		{
@@ -204,18 +209,16 @@ namespace Nest
 			{
 				Buckets = bucket.Items.OfType<CompositeBucket>().ToList(),
 				Meta = bucket.Meta,
-				AfterKey = new CompositeKey(bucket.AfterKey)
+				AfterKey = bucket.AfterKey
 			};
 		}
 
 		public MatrixStatsAggregate MatrixStats(string key) => TryGet<MatrixStatsAggregate>(key);
 
-		private TAggregate TryGet<TAggregate>(string key)
-			where TAggregate : class, IAggregate
-		{
-			IAggregate agg;
-			return BackingDictionary.TryGetValue(key, out agg) ? agg as TAggregate : null;
-		}
+		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
+
+		private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate =>
+			BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 
 		private MultiBucketAggregate<TBucket> GetMultiBucketAggregate<TBucket>(string key)
 			where TBucket : IBucket
@@ -226,7 +229,7 @@ namespace Nest
 			return new MultiBucketAggregate<TBucket>
 			{
 				Buckets = bucket.Items.OfType<TBucket>().ToList(),
-				Meta = bucket.Meta,
+				Meta = bucket.Meta
 			};
 		}
 
@@ -238,7 +241,7 @@ namespace Nest
 			return new MultiBucketAggregate<KeyedBucket<TKey>>
 			{
 				Buckets = GetKeyedBuckets<TKey>(bucket.Items).ToList(),
-				Meta = bucket.Meta,
+				Meta = bucket.Meta
 			};
 		}
 
@@ -254,6 +257,20 @@ namespace Nest
 					KeyAsString = bucket.KeyAsString,
 					DocCount = bucket.DocCount,
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
+				};
+		}
+
+		private IEnumerable<SignificantTermsBucket<TKey>> GetSignificantTermsBuckets<TKey>(IEnumerable<IBucket> items)
+		{
+			var buckets = items.Cast<SignificantTermsBucket<object>>();
+
+			foreach (var bucket in buckets)
+				yield return new SignificantTermsBucket<TKey>(bucket.BackingDictionary)
+				{
+					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					BgCount = bucket.BgCount,
+					DocCount = bucket.DocCount,
+					Score = bucket.Score
 				};
 		}
 	}

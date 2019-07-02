@@ -5,8 +5,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
@@ -23,7 +23,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 		protected override void IntegrationSetup(IElasticClient client)
 		{
-			var create = Client.CreateRepository(_repositoryName, cr => cr
+			var create = Client.Snapshot.CreateRepository(_repositoryName, cr => cr
 				.FileSystem(fs => fs
 					.Settings(_repositoryLocation)
 				)
@@ -32,20 +32,19 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var createIndex = Client.CreateIndex(SnapshotIndexName);
-			var waitForIndex = Client.ClusterHealth(c => c
+			var createIndex = Client.Indices.Create(SnapshotIndexName);
+			var waitForIndex = Client.Cluster.Health(SnapshotIndexName, c => c
 				.WaitForStatus(WaitForStatus.Yellow)
-				.Index(SnapshotIndexName)
 			);
 		}
 
 		protected override LazyResponses Create() => Calls<SnapshotDescriptor, SnapshotRequest, ISnapshotRequest, SnapshotResponse>(
 			CreateInitializer,
 			CreateFluent,
-			(s, c, f) => c.Snapshot(_repositoryName, s, f),
-			(s, c, f) => c.SnapshotAsync(_repositoryName, s, f),
-			(s, c, r) => c.Snapshot(r),
-			(s, c, r) => c.SnapshotAsync(r)
+			(s, c, f) => c.Snapshot.Snapshot(_repositoryName, s, f),
+			(s, c, f) => c.Snapshot.SnapshotAsync(_repositoryName, s, f),
+			(s, c, r) => c.Snapshot.Snapshot(r),
+			(s, c, r) => c.Snapshot.SnapshotAsync(r)
 		);
 
 		protected SnapshotRequest CreateInitializer(string snapshotName) => new SnapshotRequest(_repositoryName, snapshotName)
@@ -61,10 +60,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, GetSnapshotResponse>(
 			ReadInitializer,
 			ReadFluent,
-			(s, c, f) => c.GetSnapshot(_repositoryName, s, f),
-			(s, c, f) => c.GetSnapshotAsync(_repositoryName, s, f),
-			(s, c, r) => c.GetSnapshot(r),
-			(s, c, r) => c.GetSnapshotAsync(r)
+			(s, c, f) => c.Snapshot.Get(_repositoryName, s, f),
+			(s, c, f) => c.Snapshot.GetAsync(_repositoryName, s, f),
+			(s, c, r) => c.Snapshot.Get(r),
+			(s, c, r) => c.Snapshot.GetAsync(r)
 		);
 
 		protected GetSnapshotRequest ReadInitializer(string snapshotName) => new GetSnapshotRequest(_repositoryName, snapshotName);
@@ -75,10 +74,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, DeleteSnapshotResponse>(
 				DeleteInitializer,
 				DeleteFluent,
-				(s, c, f) => c.DeleteSnapshot(_repositoryName, s, f),
-				(s, c, f) => c.DeleteSnapshotAsync(_repositoryName, s, f),
-				(s, c, r) => c.DeleteSnapshot(r),
-				(s, c, r) => c.DeleteSnapshotAsync(r)
+				(s, c, f) => c.Snapshot.Delete(_repositoryName, s, f),
+				(s, c, f) => c.Snapshot.DeleteAsync(_repositoryName, s, f),
+				(s, c, r) => c.Snapshot.Delete(r),
+				(s, c, r) => c.Snapshot.DeleteAsync(r)
 			);
 
 		protected DeleteSnapshotRequest DeleteInitializer(string snapshotName) => new DeleteSnapshotRequest(_repositoryName, snapshotName);

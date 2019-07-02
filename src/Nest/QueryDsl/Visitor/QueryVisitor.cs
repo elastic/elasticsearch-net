@@ -50,6 +50,8 @@
 
 		void Visit(IIdsQuery query);
 
+		void Visit(IIntervalsQuery query);
+
 		void Visit(IMatchQuery query);
 
 		void Visit(IMatchPhraseQuery query);
@@ -182,6 +184,8 @@
 		public virtual void Visit(IHasParentQuery query) { }
 
 		public virtual void Visit(IIdsQuery query) { }
+
+		public virtual void Visit(IIntervalsQuery query) { }
 
 		public virtual void Visit(IMatchQuery query) { }
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -9,10 +9,9 @@ namespace Nest
 	[JsonFormatter(typeof(AggregateFormatter))]
 	public interface IAggregate
 	{
-		//TODO this public set is problematic
 		/// <summary>
 		/// Metadata for the aggregation
 		/// </summary>
-		IReadOnlyDictionary<string, object> Meta { get; set; }
+		IReadOnlyDictionary<string, object> Meta { get; }
 	}
 }

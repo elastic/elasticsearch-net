@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Domain;
+using Tests.Framework.VirtualClustering.Providers;
 
-namespace Tests.Framework
+namespace Tests.Framework.VirtualClustering
 {
 	public class VirtualizedCluster
 	{
-		public FixedPipelineFactory _fixedRequestPipeline;
+		private readonly FixedPipelineFactory _fixedRequestPipeline;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionSettings _settings;
 		private Func<IElasticClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IResponse>> _asyncCall;

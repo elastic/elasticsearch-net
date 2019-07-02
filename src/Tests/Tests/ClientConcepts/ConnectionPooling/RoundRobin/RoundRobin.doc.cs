@@ -48,7 +48,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			this.AssertCreateView(sniffingPool);
 		}
 
-		public void AssertCreateView(IConnectionPool pool)
+		private void AssertCreateView(IConnectionPool pool)
 		{
 			/** So what order do we expect? Imagine the following:
 			*

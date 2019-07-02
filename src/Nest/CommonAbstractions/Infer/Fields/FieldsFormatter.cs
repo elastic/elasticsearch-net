@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -36,7 +36,7 @@ namespace Nest
 
 			var fields = value.ListOfFields;
 			writer.WriteBeginArray();
-			for (int i = 0; i < fields.Count; i++)
+			for (var i = 0; i < fields.Count; i++)
 			{
 				if (i > 0)
 					writer.WriteValueSeparator();

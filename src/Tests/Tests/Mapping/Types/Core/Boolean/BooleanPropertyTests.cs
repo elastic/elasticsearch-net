@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.Boolean
 {
@@ -32,7 +32,7 @@ namespace Tests.Mapping.Types.Core.Boolean
 				.Name(p => p.Name)
 				.Boost(1.3)
 				.DocValues(false)
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.NullValue(false)
@@ -45,7 +45,7 @@ namespace Tests.Mapping.Types.Core.Boolean
 				{
 					DocValues = false,
 					Boost = 1.3,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					NullValue = false

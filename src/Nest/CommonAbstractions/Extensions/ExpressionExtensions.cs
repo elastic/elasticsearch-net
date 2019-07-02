@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
 
 namespace Nest
 {
@@ -17,6 +16,11 @@ namespace Nest
 		{
 			var newBody = new SuffixExpressionVisitor(suffix).Visit(expression.Body);
 			return Expression.Lambda<Func<T, object>>(newBody, expression.Parameters[0]);
+		}
+		public static Expression<Func<T, TValue>> AppendSuffix<T, TValue>(this Expression<Func<T, TValue>> expression, string suffix)
+		{
+			var newBody = new SuffixExpressionVisitor(suffix).Visit(expression.Body);
+			return Expression.Lambda<Func<T, TValue>>(newBody, expression.Parameters[0]);
 		}
 
 		internal static object ComparisonValueFromExpression(this Expression expression, out Type type, out bool cachable)

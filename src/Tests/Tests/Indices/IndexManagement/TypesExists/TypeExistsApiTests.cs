@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.TypesExists
@@ -30,10 +30,10 @@ namespace Tests.Indices.IndexManagement.TypesExists
 		protected override string UrlPath => $"/project/_mapping/_doc?ignore_unavailable=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.TypeExists(Index<Project>(), "_doc", f),
-			(client, f) => client.TypeExistsAsync(Index<Project>(), "_doc", f),
-			(client, r) => client.TypeExists(r),
-			(client, r) => client.TypeExistsAsync(r)
+			(client, f) => client.Indices.TypeExists(Index<Project>(), "_doc", f),
+			(client, f) => client.Indices.TypeExistsAsync(Index<Project>(), "_doc", f),
+			(client, r) => client.Indices.TypeExists(r),
+			(client, r) => client.Indices.TypeExistsAsync(r)
 		);
 
 		protected override TypeExistsDescriptor NewDescriptor() => new TypeExistsDescriptor(Index<Project>(), "doc");

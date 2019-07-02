@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 {
@@ -24,10 +24,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetRepository(f),
-			(client, f) => client.GetRepositoryAsync(f),
-			(client, r) => client.GetRepository(r),
-			(client, r) => client.GetRepositoryAsync(r)
+			(client, f) => client.Snapshot.GetRepository(f),
+			(client, f) => client.Snapshot.GetRepositoryAsync(f),
+			(client, r) => client.Snapshot.GetRepository(r),
+			(client, r) => client.Snapshot.GetRepositoryAsync(r)
 		);
 	}
 }

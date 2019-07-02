@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -32,7 +33,7 @@ namespace Nest
 		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 
 		/// <inheritdoc />
-		public IReadOnlyDictionary<string, object> Meta { get; set; }
+		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 
 	/// <summary>
@@ -50,10 +51,13 @@ namespace Nest
 		public CompositeKey AfterKey { get; set; }
 	}
 
-	// Intermediate object used for deserialization
+	/// <summary>
+	/// Intermediate Aggregation response, transformed to a more specific
+	/// aggregation response when requested.
+	/// </summary>
 	public class BucketAggregate : IAggregate
 	{
-		public IReadOnlyDictionary<string, object> AfterKey { get; set; } = EmptyReadOnly<string, object>.Dictionary;
+		public CompositeKey AfterKey { get; set; }
 		public long BgCount { get; set; }
 		public long DocCount { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }

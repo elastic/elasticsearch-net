@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Ingest.DeletePipeline
 {
@@ -23,10 +23,10 @@ namespace Tests.Ingest.DeletePipeline
 		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeletePipeline(_id, f),
-			(client, f) => client.DeletePipelineAsync(_id, f),
-			(client, r) => client.DeletePipeline(r),
-			(client, r) => client.DeletePipelineAsync(r)
+			(client, f) => client.Ingest.DeletePipeline(_id, f),
+			(client, f) => client.Ingest.DeletePipelineAsync(_id, f),
+			(client, r) => client.Ingest.DeletePipeline(r),
+			(client, r) => client.Ingest.DeletePipelineAsync(r)
 		);
 
 		protected override DeletePipelineDescriptor NewDescriptor() => new DeletePipelineDescriptor(_id);

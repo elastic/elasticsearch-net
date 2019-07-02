@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 		{
 			var name = "temp";
 			await PUT($"/_template/{name}")
-					.Fluent(c => c.PutIndexTemplate(name, p => p))
-					.Request(c => c.PutIndexTemplate(new PutIndexTemplateRequest(name)))
-					.FluentAsync(c => c.PutIndexTemplateAsync(name, p => p))
-					.RequestAsync(c => c.PutIndexTemplateAsync(new PutIndexTemplateRequest(name)))
+					.Fluent(c => c.Indices.PutTemplate(name, p => p))
+					.Request(c => c.Indices.PutTemplate(new PutIndexTemplateRequest(name)))
+					.FluentAsync(c => c.Indices.PutTemplateAsync(name, p => p))
+					.RequestAsync(c => c.Indices.PutTemplateAsync(new PutIndexTemplateRequest(name)))
 				;
 		}
 	}

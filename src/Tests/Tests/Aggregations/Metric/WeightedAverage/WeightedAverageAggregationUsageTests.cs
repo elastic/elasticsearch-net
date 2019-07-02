@@ -5,7 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 using ValueType = Nest.ValueType;
 
@@ -68,7 +68,7 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 				ValueType = ValueType.Long
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitsAvg = response.Aggregations.WeightedAverage("weighted_avg_commits");

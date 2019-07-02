@@ -1,6 +1,7 @@
 ﻿namespace Scripts
 
 open System
+open Tooling
 open Fake.Core
 open System.IO
 open Commandline
@@ -9,7 +10,7 @@ open Versioning
 module Tests =
 
     let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
-    let private buildingOnTeamCity = match Environment.environVarOrNone "TEAMCITY_VERSION" with | Some x -> true | None -> false
+    let private buildingOnTeamCity = match Environment.environVarOrNone "TEAMCITY_VERSION" with | Some _ -> true | None -> false
 
     let SetTestEnvironmentVariables args = 
         let clusterFilter = match args.CommandArguments with | Integration a -> a.ClusterFilter | _ -> None
@@ -39,8 +40,11 @@ module Tests =
             let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
             match (target, Environment.isLinux) with 
-            | (_, true) 
-            | (Commandline.MultiTarget.One, _) -> ["--framework"; "netcoreapp2.1"] |> List.append p
+            | (_, true) -> ["--framework"; "netcoreapp2.1"] |> List.append p
+            | (Commandline.MultiTarget.One, _) ->
+                let random = new Random()
+                let fw = DotNetFramework.AllTests |> List.sortBy (fun _ -> random.Next()) |> List.head
+                ["--framework"; fw.Identifier.MSBuild] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =
             // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
@@ -52,6 +56,10 @@ module Tests =
             | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; "-v"; "m"] |> List.append command
             | _  -> command
             
+        if Environment.UserInteractive then
+            let out = Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            if out.ExitCode <> 0 then failwith "dotnet test failed"
+        else 
         Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
 
     let RunReleaseUnitTests (ArtifactsVersion(version)) =

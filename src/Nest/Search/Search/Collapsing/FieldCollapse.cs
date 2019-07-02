@@ -67,7 +67,7 @@ namespace Nest
 		public FieldCollapseDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IFieldCollapse.Field" />
-		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public FieldCollapseDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IFieldCollapse.InnerHits" />
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>

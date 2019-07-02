@@ -12,9 +12,10 @@ using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using Xunit;
 using Newtonsoft.Json;
+using Tests.Framework.VirtualClustering;
+using Tests.Framework.VirtualClustering.Providers;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {

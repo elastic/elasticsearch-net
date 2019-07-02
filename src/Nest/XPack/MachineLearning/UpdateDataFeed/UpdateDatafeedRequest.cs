@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -100,7 +100,7 @@ namespace Nest
 		public int? ScrollSize { get; set; }
 	}
 
-	public partial class UpdateDatafeedDescriptor<T> where T : class
+	public partial class UpdateDatafeedDescriptor<TDocument> where TDocument : class
 	{
 		AggregationDictionary IUpdateDatafeedRequest.Aggregations { get; set; }
 		IChunkingConfig IUpdateDatafeedRequest.ChunkingConfig { get; set; }
@@ -113,40 +113,40 @@ namespace Nest
 		int? IUpdateDatafeedRequest.ScrollSize { get; set; }
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations, (a, v) => a.Aggregations = v);
+		public UpdateDatafeedDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> ChunkingConfig(Func<ChunkingConfigDescriptor, IChunkingConfig> selector) =>
+		public UpdateDatafeedDescriptor<TDocument> ChunkingConfig(Func<ChunkingConfigDescriptor, IChunkingConfig> selector) =>
 			Assign(selector.InvokeOrDefault(new ChunkingConfigDescriptor()), (a, v) => a.ChunkingConfig = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Frequency(Time frequency) => Assign(frequency, (a, v) => a.Frequency = v);
+		public UpdateDatafeedDescriptor<TDocument> Frequency(Time frequency) => Assign(frequency, (a, v) => a.Frequency = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
+		public UpdateDatafeedDescriptor<TDocument> Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
 
 		///<summary>a shortcut into calling Indices(typeof(TOther))</summary>
-		public UpdateDatafeedDescriptor<T> Indices<TOther>() => Assign(typeof(TOther), (a, v) => a.Indices = v);
+		public UpdateDatafeedDescriptor<TDocument> Indices<TOther>() => Assign(typeof(TOther), (a, v) => a.Indices = v);
 
 		///<summary>A shortcut into calling Indices(Indices.All)</summary>
-		public UpdateDatafeedDescriptor<T> AllIndices() => Indices(Nest.Indices.All);
+		public UpdateDatafeedDescriptor<TDocument> AllIndices() => Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> JobId(Id jobId) => Assign(jobId, (a, v) => a.JobId = v);
+		public UpdateDatafeedDescriptor<TDocument> JobId(Id jobId) => Assign(jobId, (a, v) => a.JobId = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public UpdateDatafeedDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query) =>
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> QueryDelay(Time queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
+		public UpdateDatafeedDescriptor<TDocument> QueryDelay(Time queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
+		public UpdateDatafeedDescriptor<TDocument> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(selector, (a, v) => a.ScriptFields = v?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
+		public UpdateDatafeedDescriptor<TDocument> ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -10,11 +10,13 @@ namespace Nest
 		double? Compression { get; set; }
 	}
 
+	// ReSharper disable once InconsistentNaming
 	public class TDigestMethod : ITDigestMethod
 	{
 		public double? Compression { get; set; }
 	}
 
+	// ReSharper disable once InconsistentNaming
 	public class TDigestMethodDescriptor
 		: DescriptorBase<TDigestMethodDescriptor, ITDigestMethod>, ITDigestMethod
 	{

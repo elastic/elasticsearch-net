@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -34,7 +35,7 @@ namespace Elasticsearch.Net
 					? Request.Uri.ToString()
 					: Request.PathAndQuery + " on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes";
 
-				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} on {path}");
+				sb.AppendLine($"# FailureReason: {failureReason} while attempting {EnumExtensions.GetStringValue(Request.Method)} on {path}");
 				if (Response != null)
 					ResponseStatics.DebugInformationBuilder(Response, sb);
 				else

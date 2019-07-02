@@ -5,8 +5,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.UpdateByQuery
@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Map<Test>(map => map
 						.Dynamic(false)
 						.Properties(props => props
@@ -76,11 +76,11 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			(client, r) => client.UpdateByQueryAsync(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
+		protected override void OnAfterCall(IElasticClient client) => client.Indices.Refresh(CallIsolatedValue);
 
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue);
 
-		private SearchResponse<Test> SearchFlags(string index) =>
+		private ISearchResponse<Test> SearchFlags(string index) =>
 			Client.Search<Test>(s => s
 				.Index(index)
 				.Query(q => q.Match(m => m.Field(p => p.Flag).Query("foo")))
@@ -173,7 +173,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				Client.CreateIndex(index, c => c
+				Client.Indices.Create(index, c => c
 					.Settings(s => s
 						.RefreshInterval(-1)
 					)
@@ -195,7 +195,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			failure.Id.Should().NotBeNullOrWhiteSpace();
 
 			failure.Cause.Should().NotBeNull();
-			failure.Cause.IndexUniqueId.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.IndexUUID.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Reason.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Index.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Shard.Should().NotBeNull();

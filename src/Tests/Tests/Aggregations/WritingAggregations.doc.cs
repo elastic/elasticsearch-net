@@ -8,8 +8,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
+using Tests.IndexModules;
 using static Nest.Infer;
 
 namespace Tests.Aggregations
@@ -281,7 +281,7 @@ namespace Tests.Aggregations
 		* Now, using `.Aggregations`, we can easily get the `Children` aggregation response out and from that,
 		* the `Average` and `Max` sub aggregations.
 		*/
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/CodeStandards/Serialization/Converters.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/CodeStandards/Serialization/Converters.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -24,7 +24,7 @@ var formatters = typeof(IElasticClient).Assembly.GetTypes()
 var visible = new List<string>();
 foreach (var formatter in formatters)
 {
-    if (formatter.IsVisible())
+    if (formatter.IsVisible)
         visible.Add(formatter.Name);
 }
 visible.Should().BeEmpty();

@@ -26,7 +26,7 @@ namespace Nest
 		public BulkAllObservable(
 			IElasticClient client,
 			IBulkAllRequest<T> partitionedBulkRequest,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 		{
 			_client = client;
@@ -42,11 +42,8 @@ namespace Nest
 			_compositeCancelToken = _compositeCancelTokenSource.Token;
 		}
 
-		public bool IsDisposed { get; private set; }
-
 		public void Dispose()
 		{
-			IsDisposed = true;
 			_compositeCancelTokenSource?.Cancel();
 			_compositeCancelTokenSource?.Dispose();
 		}
@@ -104,7 +101,7 @@ namespace Nest
 			var indices = _partitionedBulkRequest.RefreshIndices ?? _partitionedBulkRequest.Index;
 			if (indices == null) return;
 
-			var refresh = _client.Refresh(indices);
+			var refresh = _client.Indices.Refresh(indices);
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
@@ -116,6 +113,7 @@ namespace Nest
 			var response = await _client.BulkAsync(s =>
 				{
 					s.Index(request.Index);
+					s.Timeout(request.Timeout);
 					if (request.BufferToBulk != null) request.BufferToBulk(s, buffer);
 					else s.IndexMany(buffer);
 					if (!string.IsNullOrEmpty(request.Pipeline)) s.Pipeline(request.Pipeline);
@@ -129,24 +127,20 @@ namespace Nest
 			_compositeCancelToken.ThrowIfCancellationRequested();
 
 			if (!response.ApiCall.Success)
-				return await HandleBulkRequest(buffer, page, backOffRetries, response);
+				return await HandleBulkRequest(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
-			var successfulDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 			var retryableDocuments = new List<T>();
 			var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 
 			foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
 			{
-				if (documentWithResponse.Item1.IsValid)
-					successfulDocuments.Add(documentWithResponse);
-				else
-				{
+				if (documentWithResponse.Item1.IsValid) continue;
+
 					if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
 						retryableDocuments.Add(documentWithResponse.Item2);
 					else
 						droppedDocuments.Add(documentWithResponse);
 				}
-			}
 
 			HandleDroppedDocuments(droppedDocuments, response);
 
@@ -173,16 +167,14 @@ namespace Nest
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			//TODO expose this on IAPiCallDetails as RetryLater in 7.0?
 			var failureReason = clientException?.FailureReason.GetValueOrDefault(PipelineFailure.Unexpected);
 			switch (failureReason)
 			{
 				case PipelineFailure.MaxRetriesReached:
-					//TODO move this to its own PipelineFailure classification in 7.0
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
 						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
 
-					return await RetryDocuments(page, ++backOffRetries, buffer);
+					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 				case PipelineFailure.CouldNotStartSniffOnStartup:
 				case PipelineFailure.BadAuthentication:
 				case PipelineFailure.NoNodesAttempted:
@@ -190,6 +182,10 @@ namespace Nest
 				case PipelineFailure.Unexpected:
 					throw ThrowOnBadBulk(response,
 						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
+				case PipelineFailure.BadResponse:
+				case PipelineFailure.PingFailure:
+				case PipelineFailure.MaxTimeoutReached:
+				case PipelineFailure.BadRequest:
 				default:
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 			}

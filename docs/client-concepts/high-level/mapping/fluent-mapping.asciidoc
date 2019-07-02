@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/FluentMapping.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/FluentMapping.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -52,7 +52,7 @@ and map each property explicitly
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Company>(m => m
         .Properties(ps => ps
             .Text(s => s
@@ -84,40 +84,31 @@ only the `FirstName`, `LastName` and `Salary` properties of the `Employee` type 
 
 The json mapping for this example looks like
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            name = new
-            {
-                type = "text"
-            },
-            employees = new
-            {
-                type = "object",
-                properties = new
-                {
-                    firstName = new
-                    {
-                        type = "text"
-                    },
-                    lastName = new
-                    {
-                        type = "text"
-                    },
-                    salary = new
-                    {
-                        type = "integer"
-                    }
-                }
-            }
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "employees": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "text"
+          },
+          "lastName": {
+            "type": "text"
+          },
+          "salary": {
+            "type": "integer"
+          }
         }
+      }
     }
-};
+  }
+}
 ----
 
 Manual mapping in this way is powerful but can become verbose and unwieldy for
@@ -142,7 +133,7 @@ CLR property types, but then we're overriding the `Employees` property to make i
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Company>(m => m
         .AutoMap()
         .Properties(ps => ps
@@ -152,33 +143,28 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
         )
     )
 );
+----
 
-//json
-var expected = new
+[source,javascript]
+----
 {
-    mappings = new
-    {
-        properties = new
-        {
-            name = new
-            {
-                type = "text",
-                fields = new
-                {
-                    keyword = new
-                    {
-                        type = "keyword",
-                        ignore_above = 256
-                    }
-                }
-            },
-            employees = new
-            {
-                type = "nested",
-            }
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
         }
+      },
+      "employees": {
+        "type": "nested"
+      }
     }
-};
+  }
+}
 ----
 
 `.AutoMap()` __                 __**is idempotent**   therefore calling it _before_ or _after_
@@ -187,7 +173,7 @@ generates the same mapping as the previous
 
 [source,csharp]
 ----
-createIndexResponse = _client.CreateIndex("myindex", c => c
+createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Company>(m => m
         .Properties(ps => ps
             .Nested<Employee>(n => n
@@ -251,7 +237,7 @@ attributes, and inferred mappings are overridden with fluent mapping
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<CompanyWithAttributes>(m => m
         .AutoMap() <1>
         .Properties(ps => ps <2>
@@ -285,127 +271,104 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
         )
     )
 );
-
-//json
-var expected = new
-{
-    mappings = new
-    {
-        properties = new
-        {
-            employees = new
-            {
-                type = "nested",
-                properties = new
-                {
-                    birthday = new
-                    {
-                        format = "MM-dd-yy",
-                        type = "date"
-                    },
-                    empl = new
-                    {
-                        properties = new
-                        {
-                            birthday = new
-                            {
-                                type = "date"
-                            },
-                            employees = new
-                            {
-                                properties = new {},
-                                type = "object"
-                            },
-                            firstName = new
-                            {
-                                fields = new
-                                {
-                                    keyword = new
-                                    {
-                                        type = "keyword",
-                                        ignore_above = 256
-                                    }
-                                },
-                                type = "text"
-                            },
-                            hours = new
-                            {
-                                type = "long"
-                            },
-                            isManager = new
-                            {
-                                type = "boolean"
-                            },
-                            lastName = new
-                            {
-                                fields = new
-                                {
-                                    keyword = new
-                                    {
-                                        type = "keyword",
-                                        ignore_above = 256
-                                    }
-                                },
-                                type = "text"
-                            },
-                            salary = new
-                            {
-                                type = "integer"
-                            }
-                        },
-                        type = "nested"
-                    },
-                    first_name = new
-                    {
-                        fields = new
-                        {
-                            firstNameRaw = new
-                            {
-                                type = "keyword"
-                            },
-                            length = new
-                            {
-                                analyzer = "standard",
-                                type = "token_count"
-                            }
-                        },
-                        type = "text"
-                    },
-                    isManager = new
-                    {
-                        null_value = false,
-                        store = true,
-                        type = "boolean"
-                    },
-                    last_name = new
-                    {
-                        type = "text"
-                    },
-                    salary = new
-                    {
-                        ignore_malformed = false,
-                        type = "double"
-                    }
-                }
-            },
-            name = new
-            {
-                null_value = "null",
-                similarity = "BM25",
-                type = "keyword"
-            },
-            office_hours = new
-            {
-                type = "text"
-            }
-        }
-    }
-};
 ----
 <1> Automap company
+
 <2> Override company inferred mappings
+
 <3> Automap nested employee type
+
 <4> Override employee inferred mappings
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "properties": {
+      "employees": {
+        "type": "nested",
+        "properties": {
+          "birthday": {
+            "format": "MM-dd-yy",
+            "type": "date"
+          },
+          "empl": {
+            "properties": {
+              "birthday": {
+                "type": "date"
+              },
+              "employees": {
+                "properties": {},
+                "type": "object"
+              },
+              "firstName": {
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                },
+                "type": "text"
+              },
+              "hours": {
+                "type": "long"
+              },
+              "isManager": {
+                "type": "boolean"
+              },
+              "lastName": {
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                },
+                "type": "text"
+              },
+              "salary": {
+                "type": "integer"
+              }
+            },
+            "type": "nested"
+          },
+          "first_name": {
+            "fields": {
+              "firstNameRaw": {
+                "type": "keyword"
+              },
+              "length": {
+                "analyzer": "standard",
+                "type": "token_count"
+              }
+            },
+            "type": "text"
+          },
+          "isManager": {
+            "null_value": false,
+            "store": true,
+            "type": "boolean"
+          },
+          "last_name": {
+            "type": "text"
+          },
+          "salary": {
+            "ignore_malformed": false,
+            "type": "double"
+          }
+        }
+      },
+      "name": {
+        "null_value": "null",
+        "similarity": "BM25",
+        "type": "keyword"
+      },
+      "office_hours": {
+        "type": "text"
+      }
+    }
+  }
+}
+----
 
 As demonstrated, by calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the
 `Employee` nested properties and again, override any inferred mapping from the automapping process,

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/GettingStarted.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/GettingStarted.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -102,12 +102,13 @@ var person = new Person
     LastName = "Laarman"
 };
 
-var indexResponse = client.IndexDocument(person); <1>
+var ndexResponse = client.IndexDocument(person); <1>
 
 var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
 ----
-<1> synchronous method that returns an `IIndexResponse`
-<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+<1> synchronous method that returns an `IndexResponse`
+
+<2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
 with the latter using the idiomatic *Async suffix on the method name.

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -53,7 +54,7 @@ namespace Nest
 				var rangeString = match.Groups["ranges"].Value;
 				do
 				{
-					var nextRangeStart = rangeString.Substring(1).IndexOfAny(new char[] { '+', '-', '/' });
+					var nextRangeStart = rangeString.Substring(1).IndexOfAny(new[] { '+', '-', '/' });
 					if (nextRangeStart == -1) nextRangeStart = rangeString.Length - 1;
 					var unit = rangeString.Substring(1, nextRangeStart);
 					if (rangeString.StartsWith("+", StringComparison.Ordinal))
@@ -91,7 +92,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => d.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFF") + separator,
+				d => ToMinThreeDecimalPlaces(d) + separator,
 				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
@@ -105,6 +106,24 @@ namespace Nest
 				sb.Append("/" + Self.Round.Value.GetStringValue());
 
 			return sb.ToString();
+		}
+
+		/// <summary>
+		/// Formats a <see cref="DateTime"/> to have a minimum of 3 decimal places if there
+		/// are sub second values
+		/// </summary>
+		/// Fixes bug in Elasticsearch: https://github.com/elastic/elasticsearch/pull/41871
+		private static string ToMinThreeDecimalPlaces(DateTime dateTime)
+		{
+			var format = dateTime.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFF");
+
+			if (format.Length > 20 && format.Length < 23)
+			{
+				var diff = 23 - format.Length;
+				return $"{format}{new string('0', diff)}";
+			}
+
+			return format;
 		}
 	}
 

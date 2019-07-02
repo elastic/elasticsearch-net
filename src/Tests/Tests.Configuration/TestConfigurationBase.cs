@@ -10,7 +10,7 @@ namespace Tests.Configuration
 		/// <summary> comma separated list of test method names to execute </summary>
 		public string TestFilter { get; protected set; }
 
-		/// <summary> The elasticsearch version to test against, defined for both unit and integration tests</summary>
+		/// <summary> The Elasticsearch version to test against, defined for both unit and integration tests</summary>
 		public string ElasticsearchVersion { get; protected set; }
 
 		/// <summary> Force a reseed (bootstrap) of the cluster even if checks indicate bootstrap already ran </summary>

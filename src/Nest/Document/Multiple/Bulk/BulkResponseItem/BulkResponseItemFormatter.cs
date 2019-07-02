@@ -1,5 +1,6 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -49,9 +50,7 @@ namespace Nest
 				}
 			}
 			else
-			{
 				reader.ReadNextBlock();
-			}
 
 			reader.ReadIsEndObjectWithVerify();
 			return bulkResponseItem;

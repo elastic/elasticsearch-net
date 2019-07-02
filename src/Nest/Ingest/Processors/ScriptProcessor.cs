@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
-	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
+	/// Allows inline and stored scripts to be executed within ingest pipelines.
 	/// </summary>
 	[InterfaceDataContract]
 	public interface IScriptProcessor : IProcessor

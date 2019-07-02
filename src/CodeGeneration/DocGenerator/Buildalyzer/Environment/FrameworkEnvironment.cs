@@ -38,13 +38,13 @@ namespace DocGenerator.Buildalyzer.Environment
 		{
 			ToolsPath = LocateToolsPath();
 			ExtensionsPath = Path.GetFullPath(Path.Combine(ToolsPath, @"..\..\"));
-			SDKsPath = Path.Combine(sdkProject ? DotnetPathResolver.ResolvePath(projectPath) : ExtensionsPath, "Sdks");
+			SdKsPath = Path.Combine(sdkProject ? DotnetPathResolver.ResolvePath(projectPath) : ExtensionsPath, "Sdks");
 			RoslynTargetsPath = Path.Combine(ToolsPath, "Roslyn");
 		}
 
 		public string ExtensionsPath { get; }
 		public string RoslynTargetsPath { get; }
-		public string SDKsPath { get; }
+		public string SdKsPath { get; }
 		public string ToolsPath { get; }
 
 		public override string GetToolsPath() => ToolsPath;
@@ -52,8 +52,8 @@ namespace DocGenerator.Buildalyzer.Environment
 		public override Dictionary<string, string> GetGlobalProperties(string solutionDir)
 		{
 			var globalProperties = base.GetGlobalProperties(solutionDir);
-			globalProperties.Add(MsBuildProperties.MSBuildExtensionsPath, ExtensionsPath);
-			globalProperties.Add(MsBuildProperties.MSBuildSDKsPath, SDKsPath);
+			globalProperties.Add(MsBuildProperties.MsBuildExtensionsPath, ExtensionsPath);
+			globalProperties.Add(MsBuildProperties.MsBuildSdKsPath, SdKsPath);
 			globalProperties.Add(MsBuildProperties.RoslynTargetsPath, RoslynTargetsPath);
 			return globalProperties;
 		}

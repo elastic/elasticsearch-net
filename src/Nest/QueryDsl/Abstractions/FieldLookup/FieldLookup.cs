@@ -31,9 +31,9 @@ namespace Nest
 	public class FieldLookupDescriptor<T> : DescriptorBase<FieldLookupDescriptor<T>, IFieldLookup>, IFieldLookup
 		where T : class
 	{
-		public FieldLookupDescriptor() => Self.Index = _ClrType;
+		public FieldLookupDescriptor() => Self.Index = ClrType;
 
-		internal Type _ClrType => typeof(T);
+		private static Type ClrType => typeof(T);
 
 		Id IFieldLookup.Id { get; set; }
 
@@ -49,7 +49,7 @@ namespace Nest
 
 		public FieldLookupDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public FieldLookupDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
+		public FieldLookupDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 
 		public FieldLookupDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 	}

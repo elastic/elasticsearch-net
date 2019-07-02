@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using ApiGenerator.Configuration;
 
 namespace ApiGenerator
 {
@@ -7,7 +9,8 @@ namespace ApiGenerator
 	{
 		private static readonly string DownloadBranch = "master";
 
-		private static void Main(string[] args)
+		// ReSharper disable once UnusedParameter.Local
+		private static async Task Main(string[] args)
 		{
 			var redownloadCoreSpecification = false;
 			var generateCode = false;
@@ -30,8 +33,8 @@ namespace ApiGenerator
 			else
 			{
 				// read last downloaded branch from file.
-				if (File.Exists(CodeConfiguration.LastDownloadedVersionFile))
-					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
+				if (File.Exists(GeneratorLocations.LastDownloadedVersionFile))
+					downloadBranch = File.ReadAllText(GeneratorLocations.LastDownloadedVersionFile);
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))
@@ -48,7 +51,7 @@ namespace ApiGenerator
 				generateCode = answer == "y" || answer == "";
 			}
 			if (generateCode)
-				ApiGenerator.Generate(downloadBranch, "Core", "XPack");
+				await Generator.ApiGenerator.Generate(downloadBranch, "Core", "XPack");
 		}
 	}
 }

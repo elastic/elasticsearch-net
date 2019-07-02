@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>NEST.7xUpgradeAssistant</id>
+		<version>$version$</version>
+		<title>NEST 7.x - Upgrade Assistant</title>
+		<authors>Elastic and contributors</authors>
+		<owners>Elastic</owners>
+		<copyright>2014-$year$ Elasticsearch BV</copyright>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="file">license.txt</license>
+		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
+		<description>NEST 7.0 introduces API namespaces on the client. This package reintroduces removed methods on the client, with instructions on how to upgrade to using the new APIs</description>
+		<summary>NEST 7.0 introduces API namespaces on the client. This package reintroduces removed methods on the client, with instructions on how to upgrade to using the new APIs</summary>
+		<releaseNotes>https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
+		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		<dependencies>
+			<group targetFramework="netstandard2.0">
+				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
+			</group>			
+			<group targetFramework="net461">
+				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\license.txt" target="" />
+		<file src="output\Nest.7xUpgradeAssistant\netstandard2.0\Nest.7xUpgradeAssistant.dll" target="lib\netstandard2.0"/>
+		<file src="output\Nest.7xUpgradeAssistant\netstandard2.0\Nest.7xUpgradeAssistant.xml" target="lib\netstandard2.0"/>		
+		<file src="output\Nest.7xUpgradeAssistant\net461\Nest.7xUpgradeAssistant.dll" target="lib\net461"/>
+		<file src="output\Nest.7xUpgradeAssistant\net461\Nest.7xUpgradeAssistant.xml" target="lib\net461"/>
+	</files>
+</package>

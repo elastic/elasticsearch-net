@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sticky/StickySniffingConnectionPool.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sticky/StickySniffingConnectionPool.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -60,11 +60,11 @@ We set up a cluster with 4 nodes all having a different rack id
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(Nodes(0))
     .ClientCalls(p => p.OnPort(9202).Succeeds(Twice).ThrowsAfterSucceeds())
     .ClientCalls(p => p.FailAlways())
-    .Sniff(s=>s.SucceedAlways(Framework.Cluster
+    .Sniff(s=>s.SucceedAlways(VirtualClusterWith
         .Nodes(Nodes(10))
         .ClientCalls(p => p.SucceedAlways()))
     )
@@ -115,10 +115,10 @@ Our sniffing sorted connection pool is set up to favor nodes in rack_2
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(4)
     .ClientCalls(p => p.SucceedAlways())
-    .Sniff(s=>s.SucceedAlways(Framework.Cluster
+    .Sniff(s=>s.SucceedAlways(VirtualClusterWith
         .Nodes(Nodes(0))
         .ClientCalls(p => p.SucceedAlways()))
     )

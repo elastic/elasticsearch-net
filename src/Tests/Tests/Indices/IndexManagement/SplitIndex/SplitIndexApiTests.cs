@@ -5,8 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.IndexManagement.SplitIndex
 {
@@ -45,15 +45,15 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}/_split/{CallIsolatedValue}-target";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SplitIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			(client, f) => client.SplitIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			(client, r) => client.SplitIndex(r),
-			(client, r) => client.SplitIndexAsync(r)
+			(client, f) => client.Indices.Split(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, f) => client.Indices.SplitAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, r) => client.Indices.Split(r),
+			(client, r) => client.Indices.SplitAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var create = client.CreateIndex(CallIsolatedValue, c => c
+			var create = client.Indices.Create(CallIsolatedValue, c => c
 				.Settings(s => s
 					.NumberOfShards(4)
 					.NumberOfRoutingShards(8)
@@ -61,7 +61,7 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 				)
 			);
 			create.ShouldBeValid();
-			var update = client.UpdateIndexSettings(CallIsolatedValue, u => u
+			var update = client.Indices.UpdateSettings(CallIsolatedValue, u => u
 				.IndexSettings(s => s
 					.BlocksWrite()
 				)

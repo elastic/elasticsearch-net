@@ -6,8 +6,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Security.Role
 {
@@ -23,10 +23,10 @@ namespace Tests.XPack.Security.Role
 		protected override LazyResponses Create() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, PutRoleResponse>(
 			CreateInitializer,
 			CreateFluent,
-			(s, c, f) => c.PutRole(CreateRoleName(s), f),
-			(s, c, f) => c.PutRoleAsync(CreateRoleName(s), f),
-			(s, c, r) => c.PutRole(r),
-			(s, c, r) => c.PutRoleAsync(r)
+			(s, c, f) => c.Security.PutRole(CreateRoleName(s), f),
+			(s, c, f) => c.Security.PutRoleAsync(CreateRoleName(s), f),
+			(s, c, r) => c.Security.PutRole(r),
+			(s, c, r) => c.Security.PutRoleAsync(r)
 		);
 
 		protected PutRoleRequest CreateInitializer(string role) => new PutRoleRequest(CreateRoleName(role))
@@ -66,23 +66,23 @@ namespace Tests.XPack.Security.Role
 		protected override LazyResponses Read() => Calls<GetRoleDescriptor, GetRoleRequest, IGetRoleRequest, GetRoleResponse>(
 			ReadInitializer,
 			ReadFluent,
-			(s, c, f) => c.GetRole(f),
-			(s, c, f) => c.GetRoleAsync(f),
-			(s, c, r) => c.GetRole(r),
-			(s, c, r) => c.GetRoleAsync(r)
+			(s, c, f) => c.Security.GetRole(CreateRoleName(s), f),
+			(s, c, f) => c.Security.GetRoleAsync(CreateRoleName(s), f),
+			(s, c, r) => c.Security.GetRole(r),
+			(s, c, r) => c.Security.GetRoleAsync(r)
 		);
 
 		protected GetRoleRequest ReadInitializer(string role) => new GetRoleRequest(CreateRoleName(role));
 
-		protected IGetRoleRequest ReadFluent(string role, GetRoleDescriptor d) => d.Name(CreateRoleName(role));
+		protected IGetRoleRequest ReadFluent(string role, GetRoleDescriptor d) => d;
 
 		protected override LazyResponses Update() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, PutRoleResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			(s, c, f) => c.PutRole(CreateRoleName(s), f),
-			(s, c, f) => c.PutRoleAsync(CreateRoleName(s), f),
-			(s, c, r) => c.PutRole(r),
-			(s, c, r) => c.PutRoleAsync(r)
+			(s, c, f) => c.Security.PutRole(CreateRoleName(s), f),
+			(s, c, f) => c.Security.PutRoleAsync(CreateRoleName(s), f),
+			(s, c, r) => c.Security.PutRole(r),
+			(s, c, r) => c.Security.PutRoleAsync(r)
 		);
 
 		protected PutRoleRequest UpdateInitializer(string role) => new PutRoleRequest(CreateRoleName(role))
@@ -124,10 +124,10 @@ namespace Tests.XPack.Security.Role
 		protected override LazyResponses Delete() => Calls<DeleteRoleDescriptor, DeleteRoleRequest, IDeleteRoleRequest, DeleteRoleResponse>(
 			DeleteInitializer,
 			DeleteFluent,
-			(s, c, f) => c.DeleteRole(CreateRoleName(s), f),
-			(s, c, f) => c.DeleteRoleAsync(CreateRoleName(s), f),
-			(s, c, r) => c.DeleteRole(r),
-			(s, c, r) => c.DeleteRoleAsync(r)
+			(s, c, f) => c.Security.DeleteRole(CreateRoleName(s), f),
+			(s, c, f) => c.Security.DeleteRoleAsync(CreateRoleName(s), f),
+			(s, c, r) => c.Security.DeleteRole(r),
+			(s, c, r) => c.Security.DeleteRoleAsync(r)
 		);
 
 		protected DeleteRoleRequest DeleteInitializer(string role) => new DeleteRoleRequest(CreateRoleName(role));

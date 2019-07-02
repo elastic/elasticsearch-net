@@ -1,0 +1,42 @@
+@using RazorLight
+@using System.Collections.Generic
+@using System.Collections.ObjectModel
+@using System.Linq
+@using CsQuery.ExtensionMethods.Internal
+@using ApiGenerator
+@using ApiGenerator.Domain.Specification
+@using ApiGenerator.Domain.Code
+@using ApiGenerator.Domain
+@inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
+@{
+	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
+	string ns = model.Key != CsharpNames.RootNamespace ? "."+CsharpNames.ApiNamespace+"." + model.Key + CsharpNames.ApiNamespaceSuffix : null;
+	var endpoints = model.Value;
+}
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Linq.Expressions;
+
+using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+@if (model.Key != CsharpNames.RootNamespace)
+{
+	<text>using Elasticsearch.Net@(ns);
+</text>
+}
+
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
+namespace Nest
+{
+@foreach (var endpoint in endpoints)
+{
+	await IncludeAsync("HighLevel/Descriptors/Descriptor.cshtml", endpoint.DescriptorPartialImplementation);
+}
+}

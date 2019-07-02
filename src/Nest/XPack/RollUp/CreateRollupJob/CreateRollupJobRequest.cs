@@ -64,7 +64,7 @@ namespace Nest
 
 	/// <inheritdoc cref="ICreateRollupJobRequest" />
 	/// >
-	public partial class CreateRollupJobDescriptor<T> where T : class
+	public partial class CreateRollupJobDescriptor<TDocument> where TDocument : class
 	{
 		string ICreateRollupJobRequest.Cron { get; set; }
 		IRollupGroupings ICreateRollupJobRequest.Groups { get; set; }
@@ -74,23 +74,23 @@ namespace Nest
 		IndexName ICreateRollupJobRequest.RollupIndex { get; set; }
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.IndexPattern">
-		public CreateRollupJobDescriptor<T> IndexPattern(string indexPattern) => Assign(indexPattern, (a, v) => a.IndexPattern = v);
+		public CreateRollupJobDescriptor<TDocument> IndexPattern(string indexPattern) => Assign(indexPattern, (a, v) => a.IndexPattern = v);
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.RollupIndex">
-		public CreateRollupJobDescriptor<T> RollupIndex(IndexName index) => Assign(index, (a, v) => a.RollupIndex = v);
+		public CreateRollupJobDescriptor<TDocument> RollupIndex(IndexName index) => Assign(index, (a, v) => a.RollupIndex = v);
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.Cron">
-		public CreateRollupJobDescriptor<T> Cron(string cron) => Assign(cron, (a, v) => a.Cron = v);
+		public CreateRollupJobDescriptor<TDocument> Cron(string cron) => Assign(cron, (a, v) => a.Cron = v);
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.PageSize">
-		public CreateRollupJobDescriptor<T> PageSize(long? pageSize) => Assign(pageSize, (a, v) => a.PageSize = v);
+		public CreateRollupJobDescriptor<TDocument> PageSize(long? pageSize) => Assign(pageSize, (a, v) => a.PageSize = v);
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.Groups">
-		public CreateRollupJobDescriptor<T> Groups(Func<RollupGroupingsDescriptor<T>, IRollupGroupings> selector) =>
-			Assign(selector, (a, v) => a.Groups = v?.Invoke(new RollupGroupingsDescriptor<T>()));
+		public CreateRollupJobDescriptor<TDocument> Groups(Func<RollupGroupingsDescriptor<TDocument>, IRollupGroupings> selector) =>
+			Assign(selector, (a, v) => a.Groups = v?.Invoke(new RollupGroupingsDescriptor<TDocument>()));
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.Metrics">
-		public CreateRollupJobDescriptor<T> Metrics(Func<RollupFieldMetricsDescriptor<T>, IPromise<IList<IRollupFieldMetric>>> selector) =>
-			Assign(selector, (a, v) => a.Metrics = v?.Invoke(new RollupFieldMetricsDescriptor<T>())?.Value);
+		public CreateRollupJobDescriptor<TDocument> Metrics(Func<RollupFieldMetricsDescriptor<TDocument>, IPromise<IList<IRollupFieldMetric>>> selector) =>
+			Assign(selector, (a, v) => a.Metrics = v?.Invoke(new RollupFieldMetricsDescriptor<TDocument>())?.Value);
 	}
 }

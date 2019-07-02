@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -20,7 +22,7 @@ namespace Nest
 			EmptyReadOnly<TKey, TValue>.Dictionary;
 	}
 
-	internal class DictionaryResponseFormatterHelpers
+	internal class ResponseFormatterHelpers
 	{
 		internal static readonly AutomataDictionary ServerErrorFields = new AutomataDictionary
 		{
@@ -43,7 +45,7 @@ namespace Nest
 			while (reader.ReadIsInObject(ref count))
 			{
 				var property = reader.ReadPropertyNameSegmentRaw();
-				if (DictionaryResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
+				if (ResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
 				{
 					switch (errorValue)
 					{

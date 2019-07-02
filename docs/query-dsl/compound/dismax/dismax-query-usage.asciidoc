@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Compound/Dismax/DismaxQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Compound/Dismax/DismaxQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,7 +23,7 @@ q
 .DisMax(c => c
     .Name("named_query")
     .Boost(1.1)
-    .TieBreaker(1.11)
+    .TieBreaker(0.11)
     .Queries(
         qq => qq.MatchAll(m => m.Name("query1")),
         qq => qq.MatchAll(m => m.Name("query2"))
@@ -39,12 +39,36 @@ new DisMaxQuery()
 {
     Name = "named_query",
     Boost = 1.1,
-    TieBreaker = 1.11,
+    TieBreaker = 0.11,
     Queries = new QueryContainer[]
     {
         new MatchAllQuery() { Name = "query1" },
         new MatchAllQuery() { Name = "query2" },
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "dis_max": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "queries": [
+      {
+        "match_all": {
+          "_name": "query1"
+        }
+      },
+      {
+        "match_all": {
+          "_name": "query2"
+        }
+      }
+    ],
+    "tie_breaker": 0.11
+  }
 }
 ----
 

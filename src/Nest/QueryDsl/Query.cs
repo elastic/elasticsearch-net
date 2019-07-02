@@ -48,13 +48,17 @@ namespace Nest
 			new QueryContainerDescriptor<T>().GeoShape(selector);
 
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
-			new QueryContainerDescriptor<T>().HasChild<TChild>(selector);
+			new QueryContainerDescriptor<T>().HasChild(selector);
 
 		public static QueryContainer HasParent<TParent>(Func<HasParentQueryDescriptor<TParent>, IHasParentQuery> selector) where TParent : class =>
-			new QueryContainerDescriptor<T>().HasParent<TParent>(selector);
+			new QueryContainerDescriptor<T>().HasParent(selector);
 
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Ids(selector);
+
+		/// <inheritdoc cref="IIntervalsQuery"/>
+		public static QueryContainer Intervals(Func<IntervalsQueryDescriptor<T>, IIntervalsQuery> selector) =>
+			new QueryContainerDescriptor<T>().Intervals(selector);
 
 		public static QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().Match(selector);
@@ -86,7 +90,7 @@ namespace Nest
 		public static QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Percolate(selector);
 
-		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+		public static QueryContainer Prefix<TValue>(Expression<Func<T, TValue>> fieldDescriptor, string value, double? boost = null,
 			MultiTermQueryRewrite rewrite = null, string name = null
 		) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
@@ -143,7 +147,7 @@ namespace Nest
 		public static QueryContainer SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
 			new QueryContainerDescriptor<T>().SpanFieldMasking(selector);
 
-		public static QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null, string name = null) =>
+		public static QueryContainer Term<TValue>(Expression<Func<T, TValue>> fieldDescriptor, object value, double? boost = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, boost, name);
 
 		public static QueryContainer Term(Field field, object value, double? boost = null, string name = null) =>
@@ -161,7 +165,7 @@ namespace Nest
 		public static QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
 			new QueryContainerDescriptor<T>().TermsSet(selector);
 
-		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+		public static QueryContainer Wildcard<TValue>(Expression<Func<T, TValue>> fieldDescriptor, string value, double? boost = null,
 			MultiTermQueryRewrite rewrite = null, string name = null
 		) =>
 			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);

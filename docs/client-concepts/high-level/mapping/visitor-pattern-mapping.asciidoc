@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/VisitorPatternMapping.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/VisitorPatternMapping.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -65,13 +65,14 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 }
 ----
 <1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
+
 <2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 
 Now we can pass an instance of our custom visitor to `.AutoMap()` 
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = client.Indices.Create("myindex", c => c
     .Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 );
 ----
@@ -80,65 +81,51 @@ and any time the client maps a property of the POCO (Employee in this example) a
 it will apply the transformation defined in each `Visit()` call respectively, which in this example
 disables {ref_current}/doc-values.html[doc_values].
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            birthday = new
-            {
-                type = "date"
-            },
-            employees = new
-            {
-                properties = new { },
-                type = "object"
-            },
-            firstName = new
-            {
-                type = "text",
-                fields = new
-                {
-                    keyword = new
-                    {
-                        type = "keyword",
-                        ignore_above = 256
-                    }
-                }
-            },
-            isManager = new
-            {
-                doc_values = false,
-                type = "boolean"
-            },
-            lastName = new
-            {
-                type = "text",
-                fields = new
-                {
-                    keyword = new
-                    {
-                        type = "keyword",
-                        ignore_above = 256
-                    }
-                }
-            },
-            salary = new
-            {
-                doc_values = false,
-                type = "integer"
-            },
-            hours = new
-            {
-                doc_values = false,
-                type = "long"
-            }
+  "mappings": {
+    "properties": {
+      "birthday": {
+        "type": "date"
+      },
+      "employees": {
+        "properties": {},
+        "type": "object"
+      },
+      "firstName": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
         }
+      },
+      "isManager": {
+        "doc_values": false,
+        "type": "boolean"
+      },
+      "lastName": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "salary": {
+        "doc_values": false,
+        "type": "integer"
+      },
+      "hours": {
+        "doc_values": false,
+        "type": "long"
+      }
     }
-};
+  }
+}
 ----
 
 ==== Visiting on PropertyInfo
@@ -155,50 +142,40 @@ public class EverythingIsATextPropertyVisitor : NoopPropertyVisitor
     public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
 }
 
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = client.Indices.Create("myindex", c => c
         .Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
     );
 ----
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            birthday = new
-            {
-                type = "text"
-            },
-            employees = new
-            {
-                type = "text"
-            },
-            firstName = new
-            {
-                type = "text"
-            },
-            isManager = new
-            {
-                type = "text"
-            },
-            lastName = new
-            {
-                type = "text"
-            },
-            salary = new
-            {
-                type = "text"
-            },
-            hours = new
-            {
-                type = "text"
-            }
-        }
+  "mappings": {
+    "properties": {
+      "birthday": {
+        "type": "text"
+      },
+      "employees": {
+        "type": "text"
+      },
+      "firstName": {
+        "type": "text"
+      },
+      "isManager": {
+        "type": "text"
+      },
+      "lastName": {
+        "type": "text"
+      },
+      "salary": {
+        "type": "text"
+      },
+      "hours": {
+        "type": "text"
+      }
     }
-};
+  }
+}
 ----
 
 ==== Skip properties
@@ -222,25 +199,21 @@ public class IgnoreInheritedPropertiesVisitor<T>  : NoopPropertyVisitor
     }
 }
 
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = client.Indices.Create("myindex", c => c
         .Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
     );
 ----
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            id = new
-            {
-                type = "integer"
-            }
-        }
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "integer"
+      }
     }
-};
+  }
+}
 ----
 

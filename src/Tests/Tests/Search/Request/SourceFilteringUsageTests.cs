@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 using static Nest.Infer;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -55,7 +55,7 @@ namespace Tests.Search.Request
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
@@ -86,7 +86,7 @@ namespace Tests.Search.Request
 				Source = false
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			foreach (var hit in response.Hits)

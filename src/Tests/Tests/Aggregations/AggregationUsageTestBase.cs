@@ -7,14 +7,14 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations
 {
 	public abstract class AggregationUsageTestBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -72,8 +72,8 @@ namespace Tests.Aggregations
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Search<Project>(f),
-			(client, f) => client.SearchAsync<Project>(f),
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
 			(client, r) => client.Search<Project>(r),
 			(client, r) => client.SearchAsync<Project>(r)
 		);

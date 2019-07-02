@@ -6,8 +6,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {
@@ -18,6 +18,10 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			: base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
 
 		protected override object ExpectJson => new
 		{
@@ -49,13 +53,11 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 					}
 				}
 			},
-			aliases = new
+			aliases = new Dictionary<string, object>
 			{
-				new_projects = new { }
+				{ CallIsolatedValue + "-new_projects",  new { } }
 			}
 		};
-
-		protected override int ExpectStatusCode => 200;
 
 		protected override Func<RolloverIndexDescriptor, IRolloverIndexRequest> Fluent => f => f
 			.NewIndex(CallIsolatedValue + "-new")
@@ -81,10 +83,8 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				)
 			)
 			.Aliases(a => a
-				.Alias("new_projects")
+				.Alias(CallIsolatedValue + "-new_projects")
 			);
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override RolloverIndexRequest Initializer => new RolloverIndexRequest(CallIsolatedValue + "-alias", CallIsolatedValue + "-new")
 		{
@@ -120,29 +120,32 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			Aliases = new Aliases
 			{
-				{ "new_projects", new Alias() }
+				{ CallIsolatedValue + "-new_projects", new Alias() }
 			}
 		};
 
-		protected override bool SupportsDeserialization => false;
-
-		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
-
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var create = client.CreateIndex(CallIsolatedValue, c => c
+			var create = client.Indices.Create(CallIsolatedValue, c => c
 				.Aliases(a => a
 					.Alias(CallIsolatedValue + "-alias")
 				)
 			);
 			create.ShouldBeValid();
+			var someDocs = client.Bulk( b=> b
+				.Index(CallIsolatedValue)
+				.Refresh(Refresh.True)
+				.IndexMany(Project.Generator.Generate(1200))
+			);
+			someDocs.ShouldBeValid();
+
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.RolloverIndex(CallIsolatedValue + "-alias", f),
-			(client, f) => client.RolloverIndexAsync(CallIsolatedValue + "-alias", f),
-			(client, r) => client.RolloverIndex(r),
-			(client, r) => client.RolloverIndexAsync(r)
+			(client, f) => client.Indices.Rollover(CallIsolatedValue + "-alias", f),
+			(client, f) => client.Indices.RolloverAsync(CallIsolatedValue + "-alias", f),
+			(client, r) => client.Indices.Rollover(r),
+			(client, r) => client.Indices.RolloverAsync(r)
 		);
 
 		protected override RolloverIndexDescriptor NewDescriptor() => new RolloverIndexDescriptor(CallIsolatedValue + "-alias");
@@ -152,11 +155,11 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			response.ShouldBeValid();
 			response.OldIndex.Should().NotBeNullOrEmpty();
 			response.NewIndex.Should().NotBeNullOrEmpty();
-			response.RolledOver.Should().BeFalse();
-			response.ShardsAcknowledged.Should().BeFalse();
+			response.RolledOver.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
 			response.Conditions.Should().NotBeNull().And.HaveCount(2);
 			response.Conditions["[max_age: 7d]"].Should().BeFalse();
-			response.Conditions["[max_docs: 1000]"].Should().BeFalse();
+			response.Conditions["[max_docs: 1000]"].Should().BeTrue();
 		}
 	}
 }

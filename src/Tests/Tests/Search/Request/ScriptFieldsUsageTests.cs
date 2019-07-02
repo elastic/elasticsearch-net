@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.Request
 {
@@ -32,14 +32,14 @@ namespace Tests.Search.Request
 				{
 					script = new
 					{
-						source = "doc['my_field_name'].value * 2",
+						source = "doc['numberOfCommits'].value * 2",
 					}
 				},
 				test2 = new
 				{
 					script = new
 					{
-						source = "doc['my_field_name'].value * params.factor",
+						source = "doc['numberOfCommits'].value * params.factor",
 						@params = new
 						{
 							factor = 2.0
@@ -52,10 +52,10 @@ namespace Tests.Search.Request
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.ScriptFields(sf => sf
 				.ScriptField("test1", sc => sc
-					.Source("doc['my_field_name'].value * 2")
+					.Source("doc['numberOfCommits'].value * 2")
 				)
 				.ScriptField("test2", sc => sc
-					.Source("doc['my_field_name'].value * params.factor")
+					.Source("doc['numberOfCommits'].value * params.factor")
 					.Params(p => p
 						.Add("factor", 2.0)
 					)
@@ -67,9 +67,9 @@ namespace Tests.Search.Request
 			{
 				ScriptFields = new ScriptFields
 				{
-					{ "test1", new ScriptField { Script = new InlineScript("doc['my_field_name'].value * 2") } },
+					{ "test1", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } },
 					{
-						"test2", new InlineScript("doc['my_field_name'].value * params.factor")
+						"test2", new InlineScript("doc['numberOfCommits'].value * params.factor")
 						{
 							Params = new FluentDictionary<string, object>
 							{

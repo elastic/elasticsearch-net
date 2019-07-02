@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -12,10 +13,9 @@ namespace Nest
 		public IReadOnlyDictionary<string, AdaptiveSelectionStats> AdaptiveSelection { get; internal set; }
 			= EmptyReadOnly<string, AdaptiveSelectionStats>.Dictionary;
 
-		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "breakers")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, BreakerStats>))]
-		public Dictionary<string, BreakerStats> Breakers { get; internal set; }
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, BreakerStats>))]
+		public IReadOnlyDictionary<string, BreakerStats> Breakers { get; internal set; }
 
 		[DataMember(Name = "fs")]
 		public FileSystemStats FileSystem { get; internal set; }
@@ -58,10 +58,9 @@ namespace Nest
 		[DataMember(Name = "script")]
 		public ScriptStats Script { get; internal set; }
 
-		// TODO: IReadOnlyDictinary
 		[DataMember(Name = "thread_pool")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ThreadCountStats>))]
-		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ThreadCountStats>))]
+		public IReadOnlyDictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "timestamp")]
 		public long Timestamp { get; internal set; }
@@ -243,10 +242,9 @@ namespace Nest
 	[DataContract]
 	public class NodeJvmStats
 	{
-		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "buffer_pools")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeBufferPool>))]
-		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeBufferPool>))]
+		public IReadOnlyDictionary<string, NodeBufferPool> BufferPools { get; internal set; }
 
 		[DataMember(Name = "classes")]
 		public JvmClassesStats Classes { get; internal set; }
@@ -318,13 +316,12 @@ namespace Nest
 			[DataMember(Name = "non_heap_used_in_bytes")]
 			public long NonHeapUsedInBytes { get; internal set; }
 
-			// TODO: IReadOnlyDictionary
 			[DataMember(Name = "pools")]
-			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, JVMPool>))]
-			public Dictionary<string, JVMPool> Pools { get; internal set; }
+			[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, JvmPool>))]
+			public IReadOnlyDictionary<string, JvmPool> Pools { get; internal set; }
 
 			[DataContract]
-			public class JVMPool
+			public class JvmPool
 			{
 				[DataMember(Name = "max")]
 				public string Max { get; internal set; }
@@ -365,10 +362,9 @@ namespace Nest
 		[DataContract]
 		public class GarbageCollectionStats
 		{
-			// TODO: IReadOnlyDictionary
 			[DataMember(Name = "collectors")]
-			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, GarbageCollectionGenerationStats>))]
-			public Dictionary<string, GarbageCollectionGenerationStats> Collectors { get; internal set; }
+			[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, GarbageCollectionGenerationStats>))]
+			public IReadOnlyDictionary<string, GarbageCollectionGenerationStats> Collectors { get; internal set; }
 		}
 
 		[DataContract]
@@ -516,25 +512,25 @@ namespace Nest
 	public class TransportStats
 	{
 		[DataMember(Name = "rx_count")]
-		public long RXCount { get; internal set; }
+		public long RxCount { get; internal set; }
 
 		[DataMember(Name = "rx_size")]
-		public string RXSize { get; internal set; }
+		public string RxSize { get; internal set; }
 
 		[DataMember(Name = "rx_size_in_bytes")]
-		public long RXSizeInBytes { get; internal set; }
+		public long RxSizeInBytes { get; internal set; }
 
 		[DataMember(Name = "server_open")]
 		public int ServerOpen { get; internal set; }
 
 		[DataMember(Name = "tx_count")]
-		public long TXCount { get; internal set; }
+		public long TxCount { get; internal set; }
 
 		[DataMember(Name = "tx_size")]
-		public string TXSize { get; internal set; }
+		public string TxSize { get; internal set; }
 
 		[DataMember(Name = "tx_size_in_bytes")]
-		public long TXSizeInBytes { get; internal set; }
+		public long TxSizeInBytes { get; internal set; }
 	}
 
 	[DataContract]

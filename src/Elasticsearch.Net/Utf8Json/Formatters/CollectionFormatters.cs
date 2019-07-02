@@ -28,9 +28,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	internal class ArrayFormatter<T> : IJsonFormatter<T[]>
 	{
@@ -70,6 +70,7 @@ namespace Elasticsearch.Net
 				{
 					if (array.Length < count)
 					{
+						// ReSharper disable once RedundantTypeArgumentsOfMethod
 						Array.Resize<T>(ref array, array.Length * 2);
 					}
 
@@ -918,7 +919,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	internal sealed class ConcurrentBagFormatter<T> : CollectionFormatterBase<T, System.Collections.Concurrent.ConcurrentBag<T>>
+	internal sealed class ConcurrentBagFormatter<T> : CollectionFormatterBase<T, ConcurrentBag<T>>
 	{
 		protected override void Add(ref ConcurrentBag<T> collection, int index, T value)
 		{
@@ -931,7 +932,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	internal sealed class ConcurrentQueueFormatter<T> : CollectionFormatterBase<T, System.Collections.Concurrent.ConcurrentQueue<T>>
+	internal sealed class ConcurrentQueueFormatter<T> : CollectionFormatterBase<T, ConcurrentQueue<T>>
 	{
 		protected override void Add(ref ConcurrentQueue<T> collection, int index, T value)
 		{

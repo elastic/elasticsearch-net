@@ -3,8 +3,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Ingest.PutPipeline
 {
@@ -20,7 +20,7 @@ namespace Tests.Ingest.PutPipeline
 		protected override object ExpectJson { get; } = new
 		{
 			description = "My test pipeline",
-			processors = ProcessorAssertions.Json
+			processors = ProcessorAssertions.AllAsJson
 		};
 
 		protected override int ExpectStatusCode => 200;
@@ -34,17 +34,17 @@ namespace Tests.Ingest.PutPipeline
 		protected override PutPipelineRequest Initializer => new PutPipelineRequest(_id)
 		{
 			Description = "My test pipeline",
-			Processors = ProcessorAssertions.Initializer
+			Processors = ProcessorAssertions.Initializers
 		};
 
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.PutPipeline(_id, f),
-			(client, f) => client.PutPipelineAsync(_id, f),
-			(client, r) => client.PutPipeline(r),
-			(client, r) => client.PutPipelineAsync(r)
+			(client, f) => client.Ingest.PutPipeline(_id, f),
+			(client, f) => client.Ingest.PutPipelineAsync(_id, f),
+			(client, r) => client.Ingest.PutPipeline(r),
+			(client, r) => client.Ingest.PutPipelineAsync(r)
 		);
 
 		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);

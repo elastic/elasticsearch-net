@@ -23,9 +23,9 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			AnotherValue
 		}
 
-		private readonly object DefaultSerialized = new { id = 1 };
+		private readonly object _defaultSerialized = new { id = 1 };
 
-		private readonly Dictionary<string, object> IncludesNullAndType = new Dictionary<string, object>
+		private readonly Dictionary<string, object> _includesNullAndType = new Dictionary<string, object>
 		{
 			{ "$type", $"{typeof(ADocument).FullName}, Tests" },
 			{ "name", null },
@@ -57,14 +57,14 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		[U] public void IndexRequest() => CanAlterSource(
 			r => r.IndexDocument(new ADocument()),
-			DefaultSerialized,
-			IncludesNullAndType
+			_defaultSerialized,
+			_includesNullAndType
 		);
 
 		[U] public void CreateRequest() => CanAlterSource(
 			r => r.CreateDocument(new ADocument()),
-			DefaultSerialized,
-			IncludesNullAndType
+			_defaultSerialized,
+			_includesNullAndType
 		);
 
 		[U] public void UpdateRequest()
@@ -77,13 +77,13 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				),
 				new
 				{
-					doc = DefaultSerialized,
-					upsert = DefaultSerialized,
+					doc = _defaultSerialized,
+					upsert = _defaultSerialized,
 				},
 				new
 				{
-					doc = IncludesNullAndType,
-					upsert = IncludesNullAndType,
+					doc = _includesNullAndType,
+					upsert = _includesNullAndType,
 				}
 			);
 		}
@@ -95,8 +95,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				r => r.TermVectors<ADocument>(t => t
 					.Document(doc)
 				),
-				new { doc = DefaultSerialized },
-				new { doc = IncludesNullAndType }
+				new { doc = _defaultSerialized },
+				new { doc = _includesNullAndType }
 			);
 		}
 
@@ -121,8 +121,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 					.Create<ADocument>(i => i.Document(doc))
 					.Update<ADocument>(i => i.Doc(doc).Upsert(doc))
 				),
-				ExpectBulk(DefaultSerialized).ToArray(),
-				ExpectBulk(IncludesNullAndType).ToArray()
+				ExpectBulk(_defaultSerialized).ToArray(),
+				ExpectBulk(_includesNullAndType).ToArray()
 			);
 		}
 
@@ -140,11 +140,11 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var doc = new ADocument();
 			CanAlterSource(
 				r => r.MultiTermVectors(b => b
-					.Get<ADocument>(g => g.Document(doc))
-					.Get<ADocument>(g => g.Document(doc))
+					.Documents<ADocument>(g => g.Document(doc))
+					.Documents<ADocument>(g => g.Document(doc))
 				),
-				ExpectMultiTermVectors(DefaultSerialized),
-				ExpectMultiTermVectors(IncludesNullAndType)
+				ExpectMultiTermVectors(_defaultSerialized),
+				ExpectMultiTermVectors(_includesNullAndType)
 			);
 		}
 

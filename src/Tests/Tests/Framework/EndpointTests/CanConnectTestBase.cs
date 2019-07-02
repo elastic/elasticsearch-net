@@ -5,9 +5,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Framework
+namespace Tests.Framework.EndpointTests
 {
 	public abstract class CanConnectTestBase<TCluster>
 		: ApiIntegrationTestBase<TCluster, RootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>

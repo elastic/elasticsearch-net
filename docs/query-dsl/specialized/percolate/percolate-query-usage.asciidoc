@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/Percolate/PercolateQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Specialized/Percolate/PercolateQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -48,6 +48,32 @@ new PercolateQuery
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "percolate": {
+    "document": {
+      "name": "Koch, Collier and Mohr",
+      "state": "BellyUp",
+      "startedOn": "2015-01-01T00:00:00",
+      "lastActivity": "0001-01-01T00:00:00",
+      "leadDeveloper": {
+        "gender": "Male",
+        "id": 0,
+        "firstName": "Martijn",
+        "lastName": "Laarman"
+      },
+      "location": {
+        "lat": 42.1523,
+        "lon": -80.321
+      }
+    },
+    "field": "query"
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -80,6 +106,19 @@ The required fields to percolate an existing document are:
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Percolate(p => p
+    .Index<Project>()
+    .Id(Project.Instance.Name)
+    .Routing(Project.Instance.Name)
+    .Field(f => f.Query)
+)
+----
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -93,17 +132,18 @@ new PercolateQuery
 }
 ----
 
-==== Fluent DSL example
-
-[source,csharp]
+[source,javascript]
+.Example json output
 ----
-q
-.Percolate(p => p
-    .Index<Project>()
-    .Id(Project.Instance.Name)
-    .Routing(Project.Instance.Name)
-    .Field(f => f.Query)
-)
+{
+  "percolate": {
+    "type": "doc",
+    "index": "project",
+    "id": "Durgan LLC",
+    "routing": "Durgan LLC",
+    "field": "query"
+  }
+}
 ----
 
 ==== Handling Responses
@@ -127,6 +167,17 @@ only need to be parsed and matched once instead of multiple times.
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Percolate(p => p
+    .Documents(Project.Instance, Project.Instance, Project.Instance)
+    .Field(f => f.Query)
+)
+----
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -138,15 +189,64 @@ new PercolateQuery
 }
 ----
 
-==== Fluent DSL example
-
-[source,csharp]
+[source,javascript]
+.Example json output
 ----
-q
-.Percolate(p => p
-    .Documents(Project.Instance, Project.Instance, Project.Instance)
-    .Field(f => f.Query)
-)
+{
+  "percolate": {
+    "documents": [
+      {
+        "name": "Koch, Collier and Mohr",
+        "state": "BellyUp",
+        "startedOn": "2015-01-01T00:00:00",
+        "lastActivity": "0001-01-01T00:00:00",
+        "leadDeveloper": {
+          "gender": "Male",
+          "id": 0,
+          "firstName": "Martijn",
+          "lastName": "Laarman"
+        },
+        "location": {
+          "lat": 42.1523,
+          "lon": -80.321
+        }
+      },
+      {
+        "name": "Koch, Collier and Mohr",
+        "state": "BellyUp",
+        "startedOn": "2015-01-01T00:00:00",
+        "lastActivity": "0001-01-01T00:00:00",
+        "leadDeveloper": {
+          "gender": "Male",
+          "id": 0,
+          "firstName": "Martijn",
+          "lastName": "Laarman"
+        },
+        "location": {
+          "lat": 42.1523,
+          "lon": -80.321
+        }
+      },
+      {
+        "name": "Koch, Collier and Mohr",
+        "state": "BellyUp",
+        "startedOn": "2015-01-01T00:00:00",
+        "lastActivity": "0001-01-01T00:00:00",
+        "leadDeveloper": {
+          "gender": "Male",
+          "id": 0,
+          "firstName": "Martijn",
+          "lastName": "Laarman"
+        },
+        "location": {
+          "lat": 42.1523,
+          "lon": -80.321
+        }
+      }
+    ],
+    "field": "query"
+  }
+}
 ----
 
 ==== Handling Responses

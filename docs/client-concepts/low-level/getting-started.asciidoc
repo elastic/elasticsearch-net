@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/LowLevel/GettingStarted.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/LowLevel/GettingStarted.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -99,14 +99,15 @@ var person = new Person
     LastName = "Laarman"
 };
 
-var indexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); <1>
-byte[] responseBytes = indexResponse.Body;
+var ndexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); <1>
+byte[] responseBytes = ndexResponse.Body;
 
 var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "1", PostData.Serializable(person)); <2>
 string responseString = asyncIndexResponse.Body;
 ----
-<1> synchronous method that returns an `IIndexResponse`
-<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+<1> synchronous method that returns an `IndexResponse`
+
+<2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 
 NOTE: All available methods within Elasticsearch.Net are exposed as both synchronous and asynchronous versions,
 with the latter using the idiomatic *Async suffix for the method name.
@@ -123,8 +124,8 @@ var person = new
     LastName = "Laarman"
 };
 
-var indexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "1", PostData.Serializable(person));
-byte[] responseStream = indexResponse.Body;
+var ndexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "1", PostData.Serializable(person));
+byte[] responseStream = ndexResponse.Body;
 ----
 
 For API's that take a body you can send the body as an (anonymous) object, byte[], string, stream. Additionally for API's that
@@ -152,8 +153,8 @@ var people = new object[]
     new { FirstName = "Russ", LastName = "Cam" },
 };
 
-var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
-string responseStream = indexResponse.Body;
+var ndexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
+string responseStream = ndexResponse.Body;
 ----
 
 The client will serialize each item seperately and join items up using the `\n` character as required by the Bulk API. Refer to the
@@ -242,7 +243,9 @@ var successOrKnownError = searchResponse.SuccessOrKnownError; <2>
 var exception = searchResponse.OriginalException; <3>
 ----
 <1> Response is in the 200 range, or an expected response for the given request
+
 <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.
+
 <3> If the response is unsuccessful, will hold the original exception.
 
 Using these details, it is possible to make decisions around what should be done in your application.

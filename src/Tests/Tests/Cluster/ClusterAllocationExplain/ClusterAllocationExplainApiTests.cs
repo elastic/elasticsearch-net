@@ -4,8 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.ClusterAllocationExplain
 {
@@ -47,10 +47,10 @@ namespace Tests.Cluster.ClusterAllocationExplain
 		protected override string UrlPath => "/_cluster/allocation/explain?include_yes_decisions=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ClusterAllocationExplain(f),
-			(client, f) => client.ClusterAllocationExplainAsync(f),
-			(client, r) => client.ClusterAllocationExplain(r),
-			(client, r) => client.ClusterAllocationExplainAsync(r)
+			(client, f) => client.Cluster.AllocationExplain(f),
+			(client, f) => client.Cluster.AllocationExplainAsync(f),
+			(client, r) => client.Cluster.AllocationExplain(r),
+			(client, r) => client.Cluster.AllocationExplainAsync(r)
 		);
 
 		protected override void ExpectResponse(ClusterAllocationExplainResponse response)

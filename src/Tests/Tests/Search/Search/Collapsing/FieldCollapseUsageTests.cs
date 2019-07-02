@@ -6,7 +6,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Search.Search.Collapsing
@@ -59,7 +59,7 @@ namespace Tests.Search.Search.Collapsing
 
 		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
 			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
@@ -144,7 +144,7 @@ namespace Tests.Search.Search.Collapsing
 
 		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
 			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);

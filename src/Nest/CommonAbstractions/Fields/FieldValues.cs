@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -71,7 +70,7 @@ namespace Nest
 			if (BackingDictionary == null || !BackingDictionary.TryGetValue(field, out var o))
 				return null;
 
-			//numerics are always returned as doubles by elasticsearch.
+			//numerics are always returned as doubles by Elasticsearch.
 			if (!IsNumeric(typeof(TValue)))
 				return o.As<TValue[]>();
 

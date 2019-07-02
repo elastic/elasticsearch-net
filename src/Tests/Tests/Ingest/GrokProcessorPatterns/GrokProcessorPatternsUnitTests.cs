@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 
-namespace Tests.Ingest.Processor
+namespace Tests.Ingest.GrokProcessorPatterns
 {
 	public class GrokProcessorPatternsUnitTests
 	{
@@ -22,7 +22,7 @@ namespace Tests.Ingest.Processor
 			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
-			var response = client.GrokProcessorPatterns();
+			var response = client.Ingest.GrokProcessorPatterns();
 			response.ShouldBeValid();
 
 			response.Patterns.Should().NotBeNull();

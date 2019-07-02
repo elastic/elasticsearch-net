@@ -21,6 +21,7 @@ namespace Nest
 		private IHasChildQuery _hasChild;
 		private IHasParentQuery _hasParent;
 		private IIdsQuery _ids;
+		private IIntervalsQuery _intervals;
 		private IMatchQuery _match;
 		private IMatchAllQuery _matchAllQuery;
 		private IMatchNoneQuery _matchNoneQuery;
@@ -146,6 +147,12 @@ namespace Nest
 		{
 			get => _ids;
 			set => _ids = Set(value);
+		}
+
+		IIntervalsQuery IQueryContainer.Intervals
+		{
+			get => _intervals;
+			set => _intervals = Set(value);
 		}
 
 		IMatchQuery IQueryContainer.Match

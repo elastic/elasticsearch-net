@@ -1,0 +1,175 @@
+@using RazorLight
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using ApiGenerator.Domain
+@using ApiGenerator
+@using ApiGenerator.Configuration.Overrides
+@inherits CodeTemplatePage<RestApiSpec>
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+@functions {
+	private const string RawSize = "Raw";
+	private const string SizeEnum = "Size";
+	private static GlobalOverrides GlobalOverrides = new GlobalOverrides();
+
+	private string CreateEnum(string enumName, string value, int? i)
+	{
+		var enumValue = (enumName == SizeEnum && value == string.Empty) ? RawSize : value.ToPascalCase(true);
+		var enumCsharp = string.Format("[EnumMember(Value = \"{0}\")] {1}{2}", value, enumValue, i.HasValue ? " = 1 << " + i.Value : null);
+		if (GlobalOverrides.ObsoleteEnumMembers.TryGetValue(enumName, out var d) && d.TryGetValue(value, out var obsolete))
+		{
+			return string.Format("[Obsolete(\"{0}\")]\r\n\t\t{1}", obsolete, enumCsharp);
+		}
+		return enumCsharp;
+	}
+	private string CreateCase(string e, string o)
+	{
+		var enumValue = GetEnumValue(e, o);
+		return string.Format("case {0}.{1}: return \"{2}\";", e, enumValue, o);
+	}
+	private bool IsFlag(string name)
+	{
+		return name.EndsWith("Metric") || name.EndsWith("Feature");
+	}
+
+	private string CreateEnumKeyValue(string enumName, string value, int index)
+	{
+		var enumValue = GetEnumValue(enumName, value);
+		return string.Format("{3}{{ {0}.{1}, \"{2}\" }},", enumName, enumValue, value, index == 0 ? "\t\t\t\t" : string.Empty);
+	}
+
+	private string GetEnumValue(string enumName, string value)
+	{
+		return enumName == SizeEnum && value == string.Empty 
+			? RawSize 
+			: value.ToPascalCase(true);
+	}
+}
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.Runtime.Serialization;
+
+namespace Elasticsearch.Net
+{
+@foreach (EnumDescription e in Model.EnumsInTheSpec)
+{
+	var isFlag = IsFlag(e.Name);
+	<text>
+	@(isFlag ? "[Flags, StringEnum]" : "[StringEnum]")public enum @e.Name
+	{
+		@Raw(string.Join(",\r\n\t\t", e.Options.OrderBy(s => s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(e.Name, s, isFlag ? (int?)i : null))))
+	}</text>
+}
+
+	public static class KnownEnums
+	{
+		private static readonly @(Raw("ConcurrentDictionary<Type, Func<Enum, string>>")) EnumStringResolvers = new @(Raw("ConcurrentDictionary<Type, Func<Enum, string>>"))();
+
+		static KnownEnums()
+		{
+		@foreach (EnumDescription e in Model.EnumsInTheSpec)
+		{
+<text>			EnumStringResolvers.TryAdd(typeof(@(e.Name)), (e) => GetStringValue((@(e.Name))e));
+</text>
+		}
+		}
+
+		private class EnumDictionary : @(Raw("Dictionary<Enum, string>"))
+		{	
+			public EnumDictionary(int capacity) : base(capacity) {}
+			public @(Raw("Func<Enum, string>")) Resolver { get; set; }
+		}	
+
+	@foreach (EnumDescription e in Model.EnumsInTheSpec)
+	{
+		var isFlag = IsFlag(e.Name);
+		<text>
+		public static string GetStringValue(this @(e.Name) enumValue)
+		{
+		</text>
+		if (isFlag)
+		{
+			var allOption = e.Options.FirstOrDefault(o => o == "_all");
+			if (allOption != null)
+			{
+<text>	if ((enumValue & @(e.Name).All) != 0) return "_all";
+</text>
+			}
+<text>			var list = new @(Raw("List<string>()"));
+</text>
+			var g = GlobalOverrides.ObsoleteEnumMembers.TryGetValue(e.Name, out var d);
+			foreach (var option in e.Options.Where(o => o != "_all"))
+			{
+				var value = GetEnumValue(e.Name, option);
+				if (g && d.TryGetValue(option, out var obsolete)) {
+<text>#pragma warning disable 618
+			if ((enumValue & @(e.Name).@(value)) != 0) list.Add("@(option)");
+#pragma warning restore 618
+</text>									
+				}
+				else {
+<text>			if ((enumValue & @(e.Name).@(value)) != 0) list.Add("@(option)");
+</text>
+			    }                                                                                          
+			}
+<text>			return string.Join(",", list);
+		}</text>
+		}
+		else
+		{
+			<text>	switch (enumValue)
+			{
+				@Raw(string.Join("\r\n\t\t\t\t", e.Options.Select(o => CreateCase(e.Name, o))))
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum '@(e.Name)'");
+		}</text>
+		}
+	}
+
+		public static string GetStringValue(this Enum e)
+		{
+			var type = e.GetType();		
+			var resolver = EnumStringResolvers.GetOrAdd(type, GetEnumStringResolver);
+			return resolver(e);
+		}
+
+		private static @Raw("Func<Enum, string>") GetEnumStringResolver(Type type)
+		{
+			var values = Enum.GetValues(type);
+			var dictionary = new EnumDictionary(values.Length);
+
+			for (int index = 0; index < values.Length; index++)
+			{
+				var value = values.GetValue(index);
+				var info = type.GetField(value.ToString());
+				var da = (EnumMemberAttribute[])info.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+				var stringValue = da.Length > 0 ? da[0].Value : Enum.GetName(type, value);
+				dictionary.Add((Enum)value, stringValue);
+			}
+
+			var isFlag = type.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0;
+
+			return (e) => 
+			{
+				if (isFlag)
+				{
+					var list = new @(Raw("List<string>()"));
+					foreach(var kv in dictionary)
+					{
+						if (e.HasFlag(kv.Key)) list.Add(kv.Value);
+					}
+					return string.Join(",", list);
+				}
+				else
+				{
+					return dictionary[e];
+				}
+			};
+		}
+	}
+}

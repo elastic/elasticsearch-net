@@ -1,11 +1,71 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Specification.MachineLearningApi;
 
 namespace Nest
 {
+
+	public class NamespacedClientProxy
+	{
+		private readonly ElasticClient _client;
+
+		protected NamespacedClientProxy(ElasticClient client) => _client = client;
+
+		internal TResponse DoRequest<TRequest, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			Action<IRequestConfiguration> forceConfiguration = null
+		)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new() =>
+			_client.DoRequest<TRequest, TResponse>(p, parameters, forceConfiguration);
+
+		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			CancellationToken ct,
+			Action<IRequestConfiguration> forceConfiguration = null
+		)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new() =>
+			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
+
+		protected CatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
+			where TCatRecord : ICatRecord
+			where TParams : RequestParameters<TParams>, new()
+			where TRequest : class, IRequest<TParams>
+		{
+			if (typeof(TCatRecord) == typeof(CatHelpRecord))
+			{
+				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
+				return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceTextPlain(r));
+			}
+			request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
+			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
+		}
+
+		protected Task<CatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
+			where TCatRecord : ICatRecord
+			where TParams : RequestParameters<TParams>, new()
+			where TRequest : class, IRequest<TParams>
+		{
+			if (typeof(TCatRecord) == typeof(CatHelpRecord))
+			{
+				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
+				return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceTextPlain(r));
+			}
+			request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
+			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
+		}
+
+		internal IRequestParameters ResponseBuilder(PreviewDatafeedRequestParameters parameters, CustomResponseBuilderBase builder)
+		{
+			parameters.CustomResponseBuilder = builder;
+			return parameters;
+		}
+	}
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
@@ -27,7 +87,10 @@ namespace Nest
 
 			Transport = transport;
 			LowLevel = new ElasticLowLevelClient(Transport);
+			SetupNamespaces();
 		}
+
+		partial void SetupNamespaces();
 
 		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
 		public Inferrer Infer => Transport.Settings.Inferrer;
@@ -44,6 +107,7 @@ namespace Nest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
@@ -61,6 +125,7 @@ namespace Nest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
@@ -71,19 +136,34 @@ namespace Nest
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
-			var configuration = request.RequestParametersInternal.RequestConfiguration ?? new RequestConfiguration();
+			
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			forceConfiguration(configuration);
-			request.RequestParametersInternal.RequestConfiguration = configuration;
+			request.RequestParameters.RequestConfiguration = configuration;
+		}
+		private void ForceContentType<TRequest>(TRequest request, string contentType) where TRequest : class, IRequest
+		{
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
+			configuration.Accept = contentType;
+			configuration.ContentType = contentType;
+			request.RequestParameters.RequestConfiguration = configuration;
 		}
 
-		private static readonly int[] AllStatusCodes = { -1 };
-		private static void AcceptAllStatusCodesHandler(IRequestConfiguration requestConfiguration) =>
-			requestConfiguration.AllowedStatusCodes = AllStatusCodes;
-
-		private static void ForceJson(IRequestConfiguration requestConfiguration)
+		internal static void ForceJson(IRequestConfiguration requestConfiguration)
 		{
 			requestConfiguration.Accept = RequestData.MimeType;
 			requestConfiguration.ContentType = RequestData.MimeType;
+		}
+		internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
+		{
+			requestConfiguration.Accept = RequestData.MimeTypeTextPlain;
+			requestConfiguration.ContentType = RequestData.MimeTypeTextPlain;
+		}
+
+		internal IRequestParameters ResponseBuilder(SourceRequestParameters parameters, CustomResponseBuilderBase builder)
+		{
+			parameters.CustomResponseBuilder = builder;
+			return parameters;
 		}
 	}
 }

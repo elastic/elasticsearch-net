@@ -27,10 +27,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 {
     internal class ILStreamReader : BinaryReader
     {

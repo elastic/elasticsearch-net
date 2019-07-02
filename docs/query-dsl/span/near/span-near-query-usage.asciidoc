@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Span/Near/SpanNearQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Span/Near/SpanNearQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -30,7 +30,7 @@ q
         c => c.SpanGap(st => st.Field("field").Width(2))
     )
     .Slop(12)
-    .InOrder(false)
+    .InOrder()
 )
 ----
 
@@ -50,7 +50,48 @@ new SpanNearQuery
         new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
     },
     Slop = 12,
-    InOrder = false,
+    InOrder = true,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_near": {
+    "clauses": [
+      {
+        "span_term": {
+          "field": {
+            "value": "value1"
+          }
+        }
+      },
+      {
+        "span_term": {
+          "field": {
+            "value": "value2"
+          }
+        }
+      },
+      {
+        "span_term": {
+          "field": {
+            "value": "value3"
+          }
+        }
+      },
+      {
+        "span_gap": {
+          "field": 2
+        }
+      }
+    ],
+    "slop": 12,
+    "in_order": true,
+    "_name": "named_query",
+    "boost": 1.1
+  }
 }
 ----
 

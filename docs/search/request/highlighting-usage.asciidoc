@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/HighlightingUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Request/HighlightingUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -136,6 +136,73 @@ new SearchRequest<Project>
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "match": {
+      "name.standard": {
+        "query": "Upton Sons Shield Rice Rowe Roberts"
+      }
+    }
+  },
+  "highlight": {
+    "pre_tags": [
+      "<tag1>"
+    ],
+    "post_tags": [
+      "</tag1>"
+    ],
+    "encoder": "html",
+    "fields": {
+      "name.standard": {
+        "type": "plain",
+        "force_source": true,
+        "fragment_size": 150,
+        "fragmenter": "span",
+        "number_of_fragments": 3,
+        "no_match_size": 150
+      },
+      "leadDeveloper.firstName": {
+        "type": "fvh",
+        "phrase_limit": 10,
+        "boundary_max_scan": 50,
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.firstName": {
+              "query": "Kurt Edgardo Naomi Dariana Justice Felton"
+            }
+          }
+        }
+      },
+      "leadDeveloper.lastName": {
+        "type": "unified",
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.lastName": {
+              "query": "Stokes"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 [float]
 === Handling Responses
 
@@ -143,13 +210,13 @@ new SearchRequest<Project>
 ----
 response.ShouldBeValid();
 
-foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
+foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlight))
 {
     foreach (var highlightField in highlightsInEachHit)
     {
         if (highlightField.Key == "name.standard")
         {
-            foreach (var highlight in highlightField.Value.Highlights)
+            foreach (var highlight in highlightField.Value)
             {
                 highlight.Should().Contain("<tag1>");
                 highlight.Should().Contain("</tag1>");
@@ -157,7 +224,7 @@ foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
         }
         else if (highlightField.Key == "leadDeveloper.firstName")
         {
-            foreach (var highlight in highlightField.Value.Highlights)
+            foreach (var highlight in highlightField.Value)
             {
                 highlight.Should().Contain("<name>");
                 highlight.Should().Contain("</name>");
@@ -165,7 +232,7 @@ foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
         }
         else if (highlightField.Key == "leadDeveloper.lastName")
         {
-            foreach (var highlight in highlightField.Value.Highlights)
+            foreach (var highlight in highlightField.Value)
             {
                 highlight.Should().Contain("<name>");
                 highlight.Should().Contain("</name>");

@@ -3,9 +3,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.MachineLearningInfo
 {
@@ -24,10 +22,10 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 
 		protected override string UrlPath => $"_ml/info";
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.MachineLearningInfo(f),
-			(client, f) => client.MachineLearningInfoAsync(f),
-			(client, r) => client.MachineLearningInfo(r),
-			(client, r) => client.MachineLearningInfoAsync(r)
+			(client, f) => client.MachineLearning.Info(f),
+			(client, f) => client.MachineLearning.InfoAsync(f),
+			(client, r) => client.MachineLearning.Info(r),
+			(client, r) => client.MachineLearning.InfoAsync(r)
 		);
 
 		protected override MachineLearningInfoDescriptor NewDescriptor() => new MachineLearningInfoDescriptor();

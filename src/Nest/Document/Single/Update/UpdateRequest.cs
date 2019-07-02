@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest
+	public partial interface IUpdateRequest<TDocument, TPartialDocument> 
 		where TDocument : class
 		where TPartialDocument : class
 	{

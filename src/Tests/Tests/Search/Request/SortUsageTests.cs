@@ -5,7 +5,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -59,7 +59,7 @@ namespace Tests.Search.Request
 					{
 						_geo_distance = new
 						{
-							location = new[]
+							locationPoint = new[]
 							{
 								new
 								{
@@ -120,7 +120,7 @@ namespace Tests.Search.Request
 					.Missing(-1)
 				)
 				.GeoDistance(g => g
-					.Field(p => p.Location)
+					.Field(p => p.LocationPoint)
 					.DistanceType(GeoDistanceType.Arc)
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
@@ -168,7 +168,7 @@ namespace Tests.Search.Request
 					},
 					new GeoDistanceSort
 					{
-						Field = "location",
+						Field = "locationPoint",
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
 						Unit = DistanceUnit.Centimeters,
@@ -285,7 +285,7 @@ namespace Tests.Search.Request
 					{
 						_geo_distance = new
 						{
-							location = new[]
+							locationPoint = new[]
 							{
 								new { lat = 70.0, lon = -70.0 },
 								new { lat = -12.0, lon = 12.0 }
@@ -303,7 +303,7 @@ namespace Tests.Search.Request
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Sort(ss => ss
 				.GeoDistance(g => g
-					.Field(p => p.Location)
+					.Field(p => p.LocationPoint)
 					.IgnoreUnmapped()
 					.DistanceType(GeoDistanceType.Arc)
 					.Order(SortOrder.Ascending)
@@ -320,7 +320,7 @@ namespace Tests.Search.Request
 				{
 					new GeoDistanceSort
 					{
-						Field = "location",
+						Field = "locationPoint",
 						IgnoreUnmapped = true,
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,

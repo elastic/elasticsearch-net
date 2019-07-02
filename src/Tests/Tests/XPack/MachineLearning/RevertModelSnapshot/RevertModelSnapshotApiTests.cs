@@ -2,9 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 {
@@ -47,23 +45,20 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 				IndexSnapshot(client, callUniqueValue.Value, "first");
 				IndexSnapshot(client, callUniqueValue.Value, "second", "2016-06-01T00:00:00Z");
 
-				client.GetModelSnapshots(callUniqueValue.Value).Count.Should().Be(2);
-				client.Refresh(".ml-state");
+				client.MachineLearning.GetModelSnapshots(callUniqueValue.Value).Count.Should().Be(2);
+				client.Indices.Refresh(".ml-state");
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.RevertModelSnapshot(CallIsolatedValue, "first", f),
-			(client, f) => client.RevertModelSnapshotAsync(CallIsolatedValue, "first", f),
-			(client, r) => client.RevertModelSnapshot(r),
-			(client, r) => client.RevertModelSnapshotAsync(r)
+			(client, f) => client.MachineLearning.RevertModelSnapshot(CallIsolatedValue, "first", f),
+			(client, f) => client.MachineLearning.RevertModelSnapshotAsync(CallIsolatedValue, "first", f),
+			(client, r) => client.MachineLearning.RevertModelSnapshot(r),
+			(client, r) => client.MachineLearning.RevertModelSnapshotAsync(r)
 		);
 
 		protected override RevertModelSnapshotDescriptor NewDescriptor() => new RevertModelSnapshotDescriptor(CallIsolatedValue, "first");
 
-		protected override void ExpectResponse(RevertModelSnapshotResponse response)
-		{
-			response.Model.Should().NotBeNull();
-		}
+		protected override void ExpectResponse(RevertModelSnapshotResponse response) => response.Model.Should().NotBeNull();
 	}
 }

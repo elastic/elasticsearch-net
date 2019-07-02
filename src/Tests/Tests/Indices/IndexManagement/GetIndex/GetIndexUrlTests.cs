@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Indices.IndexManagement.GetIndex
 {
@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		{
 			var index = "index1";
 			await GET($"/{index}")
-					.Fluent(c => c.GetIndex(index, s => s))
-					.Request(c => c.GetIndex(new GetIndexRequest(index)))
-					.FluentAsync(c => c.GetIndexAsync(index))
-					.RequestAsync(c => c.GetIndexAsync(new GetIndexRequest(index)))
+					.Fluent(c => c.Indices.Get(index, s => s))
+					.Request(c => c.Indices.Get(new GetIndexRequest(index)))
+					.FluentAsync(c => c.Indices.GetAsync(index))
+					.RequestAsync(c => c.Indices.GetAsync(new GetIndexRequest(index)))
 				;
 		}
 	}

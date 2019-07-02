@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 {
@@ -66,10 +66,10 @@ namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 		protected override string UrlPath => $"/x/_ccr/follow";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.CreateFollowIndex("x", f),
-			(client, f) => client.CreateFollowIndexAsync("x", f),
-			(client, r) => client.CreateFollowIndex(r),
-			(client, r) => client.CreateFollowIndexAsync(r)
+			(client, f) => client.CrossClusterReplication.CreateFollowIndex("x", f),
+			(client, f) => client.CrossClusterReplication.CreateFollowIndexAsync("x", f),
+			(client, r) => client.CrossClusterReplication.CreateFollowIndex(r),
+			(client, r) => client.CrossClusterReplication.CreateFollowIndexAsync(r)
 		);
 	}
 }

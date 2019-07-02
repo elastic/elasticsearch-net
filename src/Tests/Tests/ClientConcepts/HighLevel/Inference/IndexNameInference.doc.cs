@@ -6,7 +6,7 @@ using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.DocumentationTests;
 using Xunit;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;

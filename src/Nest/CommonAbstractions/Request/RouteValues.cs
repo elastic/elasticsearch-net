@@ -6,15 +6,15 @@ namespace Nest
 {
 	internal class ResolvedRouteValues : Dictionary<string, string>
 	{
-		
+
 	}
-	
+
 	public class RouteValues : Dictionary<string, IUrlParameter>
 	{
 		// Not too happy with this, only exists because IndexRequest needs a resolved
-		// id to know if it has to send a PUT or POST. 
+		// id to know if it has to send a PUT or POST.
 		internal ResolvedRouteValues Resolved { get; private set; }
-		
+
 		internal ResolvedRouteValues Resolve(IConnectionSettingsValues configurationValues)
 		{
 			var resolved = new ResolvedRouteValues();
@@ -26,7 +26,7 @@ namespace Nest
 			Resolved = resolved;
 			return resolved;
 		}
-		
+
 		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
 			switch (routeValue) {
@@ -46,20 +46,19 @@ namespace Nest
 		}
 
 		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
-
+		
 		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value, false);
 
 		internal RouteValues Optional(string route, Metrics value) => Route(route, value, false);
 
 		internal RouteValues Optional(string route, IndexMetrics value) => Route(route, value, false);
 
-		internal TActual Get<TActual>(string route) where TActual : class, IUrlParameter
+		internal TActual Get<TActual>(string route) 
 		{
-			IUrlParameter actual;
-			if (TryGetValue(route, out actual) && actual != null)
+			if (TryGetValue(route, out var actual) && actual != null)
 				return (TActual)actual;
 
-			return null;
+			return default;
 		}
 	}
 }

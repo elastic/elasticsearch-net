@@ -1,12 +1,6 @@
-using System;
 using System.Collections.Concurrent;
-using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer

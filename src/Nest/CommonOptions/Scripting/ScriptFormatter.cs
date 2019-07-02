@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
-
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
 
 namespace Nest
@@ -19,7 +20,10 @@ namespace Nest
 		public IScript Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			IScript script = null;

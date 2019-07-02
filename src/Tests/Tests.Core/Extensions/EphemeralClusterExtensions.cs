@@ -38,6 +38,7 @@ namespace Tests.Core.Extensions
 				if (cluster.ClusterConfiguration.EnableSsl && noCertValidation)
 				{
 					//todo use CA callback instead of allowall
+					// ReSharper disable once UnusedVariable
 					var ca = new X509Certificate2(cluster.ClusterConfiguration.FileSystem.CaCertificate);
 					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 				}

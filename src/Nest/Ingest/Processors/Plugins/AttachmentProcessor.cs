@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -92,13 +92,13 @@ namespace Nest
 		public AttachmentProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.Field" />
-		public AttachmentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public AttachmentProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.TargetField" />
 		public AttachmentProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.TargetField" />
-		public AttachmentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
+		public AttachmentProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IndexedCharacters" />
 		public AttachmentProcessorDescriptor<T> IndexedCharacters(long? indexedCharacters) => Assign(indexedCharacters, (a, v) => a.IndexedCharacters = v);
@@ -107,7 +107,7 @@ namespace Nest
 		public AttachmentProcessorDescriptor<T> IndexedCharactersField(Field field) => Assign(field, (a, v) => a.IndexedCharactersField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IndexedCharactersField" />
-		public AttachmentProcessorDescriptor<T> IndexedCharactersField(Expression<Func<T, object>> objectPath) =>
+		public AttachmentProcessorDescriptor<T> IndexedCharactersField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.IndexedCharactersField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IgnoreMissing" />

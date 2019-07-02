@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 {
@@ -13,10 +13,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 			var repository = "repos";
 
 			await DELETE($"/_snapshot/{repository}")
-					.Fluent(c => c.DeleteRepository(repository))
-					.Request(c => c.DeleteRepository(new DeleteRepositoryRequest(repository)))
-					.FluentAsync(c => c.DeleteRepositoryAsync(repository))
-					.RequestAsync(c => c.DeleteRepositoryAsync(new DeleteRepositoryRequest(repository)))
+					.Fluent(c => c.Snapshot.DeleteRepository(repository))
+					.Request(c => c.Snapshot.DeleteRepository(new DeleteRepositoryRequest(repository)))
+					.FluentAsync(c => c.Snapshot.DeleteRepositoryAsync(repository))
+					.RequestAsync(c => c.Snapshot.DeleteRepositoryAsync(new DeleteRepositoryRequest(repository)))
 				;
 		}
 	}

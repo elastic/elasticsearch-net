@@ -11,12 +11,10 @@ namespace Tests.Domain.Extensions
 				.IndexName(TestValueHelper.ProjectsIndex)
 				.IdProperty(p => p.Name)
 				.RelationName("project")
-				.TypeName("doc")
 			)
 			.DefaultMappingFor<CommitActivity>(map => map
 				.IndexName(TestValueHelper.ProjectsIndex)
 				.RelationName("commits")
-				.TypeName("doc")
 			)
 			.DefaultMappingFor<Developer>(map => map
 				.IndexName("devs")
@@ -25,14 +23,12 @@ namespace Tests.Domain.Extensions
 			)
 			.DefaultMappingFor<ProjectPercolation>(map => map
 				.IndexName("queries")
-				.TypeName(TestValueHelper.PercolatorType)
 			)
 			.DefaultMappingFor<Metric>(map => map
 				.IndexName("server-metrics")
 			)
 			.DefaultMappingFor<Shape>(map => map
 				.IndexName("shapes")
-				.TypeName("doc")
 			);
 	}
 }

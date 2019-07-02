@@ -7,8 +7,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.GetAlias
@@ -22,20 +22,19 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 
-		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d
-			.AllIndices()
-			.Name(Names);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}";
+		
+		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
+		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d.Name(Names);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAlias(f),
-			(client, f) => client.GetAliasAsync(f),
-			(client, r) => client.GetAlias(r),
-			(client, r) => client.GetAliasAsync(r)
+			(client, f) => client.Indices.GetAlias(AllIndices, f),
+			(client, f) => client.Indices.GetAliasAsync(AllIndices, f),
+			(client, r) => client.Indices.GetAlias(r),
+			(client, r) => client.Indices.GetAliasAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAliasResponse response)
@@ -59,20 +58,19 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => TestConfiguration.Instance.InRange("<5.5.0") ? 200 : 404;
 
-		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d
-			.AllIndices()
-			.Name(Names);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}%2Cx%2Cy";
+		
+		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
+		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d.Name(Names);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAlias(f),
-			(client, f) => client.GetAliasAsync(f),
-			(client, r) => client.GetAlias(r),
-			(client, r) => client.GetAliasAsync(r)
+			(client, f) => client.Indices.GetAlias(AllIndices, f),
+			(client, f) => client.Indices.GetAliasAsync(AllIndices, f),
+			(client, r) => client.Indices.GetAlias(r),
+			(client, r) => client.Indices.GetAliasAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAliasResponse response)
@@ -88,30 +86,33 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		private static readonly Names Names = Names("bad-alias");
 
 		public GetAliasNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		
+		protected override bool SupportsDeserialization => false;
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
-
-		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d
-			.Name(Names);
-
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Names);
-		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_alias/bad-alias";
+		protected override string UrlPath => $"/_all/_alias/bad-alias";
+		
+		protected override GetAliasRequest Initializer => new GetAliasRequest(AllIndices, Names);
+		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d.Name(Names);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetAlias(f),
-			(client, f) => client.GetAliasAsync(f),
-			(client, r) => client.GetAlias(r),
-			(client, r) => client.GetAliasAsync(r)
+			(client, f) => client.Indices.GetAlias(AllIndices, f),
+			(client, f) => client.Indices.GetAliasAsync(AllIndices, f),
+			(client, r) => client.Indices.GetAlias(r),
+			(client, r) => client.Indices.GetAliasAsync(r)
 		);
 
 		protected override void ExpectResponse(GetAliasResponse response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Error.Reason.Should().Contain("missing");
+
+			response.IsValid.Should().BeFalse();
+
 			response.Indices.Should().NotBeNull();
+			response.Indices.Should().BeEmpty();
 		}
 	}
 }

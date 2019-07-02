@@ -1,8 +1,8 @@
 ﻿using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 {
@@ -18,10 +18,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteIndexTemplate(CallIsolatedValue),
-			(client, f) => client.DeleteIndexTemplateAsync(CallIsolatedValue),
-			(client, r) => client.DeleteIndexTemplate(r),
-			(client, r) => client.DeleteIndexTemplateAsync(r)
+			(client, f) => client.Indices.DeleteTemplate(CallIsolatedValue),
+			(client, f) => client.Indices.DeleteTemplateAsync(CallIsolatedValue),
+			(client, r) => client.Indices.DeleteTemplate(r),
+			(client, r) => client.Indices.DeleteTemplateAsync(r)
 		);
 	}
 }

@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
 
-namespace Tests.Modules.SnapshotAndRestore.Restore.Restore
+namespace Tests.Modules.SnapshotAndRestore.Restore
 {
 	public class RestoreUrlTests
 	{
@@ -13,11 +12,11 @@ namespace Tests.Modules.SnapshotAndRestore.Restore.Restore
 			var repository = "repos";
 			var snapshot = "snap";
 
-			await POST($"/_snapshot/{repository}/{snapshot}/_restore")
-					.Fluent(c => c.Restore(repository, snapshot))
-					.Request(c => c.Restore(new RestoreRequest(repository, snapshot)))
-					.FluentAsync(c => c.RestoreAsync(repository, snapshot))
-					.RequestAsync(c => c.RestoreAsync(new RestoreRequest(repository, snapshot)))
+			await UrlTester.POST($"/_snapshot/{repository}/{snapshot}/_restore")
+					.Fluent(c => c.Snapshot.Restore(repository, snapshot))
+					.Request(c => c.Snapshot.Restore(new RestoreRequest(repository, snapshot)))
+					.FluentAsync(c => c.Snapshot.RestoreAsync(repository, snapshot))
+					.RequestAsync(c => c.Snapshot.RestoreAsync(new RestoreRequest(repository, snapshot)))
 				;
 		}
 	}

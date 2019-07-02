@@ -11,7 +11,6 @@ using Tests.Core;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using Xunit;
 
 namespace Tests.ClientConcepts.Troubleshooting

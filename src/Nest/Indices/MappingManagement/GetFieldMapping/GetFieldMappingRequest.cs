@@ -5,5 +5,6 @@
 
 	public partial class GetFieldMappingRequest { }
 
-	public partial class GetFieldMappingDescriptor<T> where T : class { }
+	// ReSharper disable once UnusedTypeParameter
+	public partial class GetFieldMappingDescriptor<TDocument> where TDocument : class { }
 }

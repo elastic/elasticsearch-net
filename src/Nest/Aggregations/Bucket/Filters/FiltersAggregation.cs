@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -10,9 +10,8 @@ namespace Nest
 	[ReadAs(typeof(FiltersAggregation))]
 	public interface IFiltersAggregation : IBucketAggregation
 	{
-		// TODO: List<QueryContainer> should be IEnumerable<QueryContainer>?
 		[DataMember(Name ="filters")]
-		Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
+		Union<INamedFiltersContainer, IEnumerable<QueryContainer>> Filters { get; set; }
 
 		[DataMember(Name ="other_bucket")]
 		bool? OtherBucket { get; set; }
@@ -27,7 +26,7 @@ namespace Nest
 
 		public FiltersAggregation(string name) : base(name) { }
 
-		public Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
+		public Union<INamedFiltersContainer, IEnumerable<QueryContainer>> Filters { get; set; }
 
 		/// <summary>
 		/// Gets or sets whether to add a bucket to the response which will contain all documents
@@ -54,7 +53,7 @@ namespace Nest
 			, IFiltersAggregation
 		where T : class
 	{
-		Union<INamedFiltersContainer, List<QueryContainer>> IFiltersAggregation.Filters { get; set; }
+		Union<INamedFiltersContainer, IEnumerable<QueryContainer>> IFiltersAggregation.Filters { get; set; }
 
 		bool? IFiltersAggregation.OtherBucket { get; set; }
 
@@ -85,7 +84,7 @@ namespace Nest
 
 		public FiltersAggregationDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, IPromise<INamedFiltersContainer>> selector) =>
 			Assign(selector, (a, v) => a.Filters =
-				new Union<INamedFiltersContainer, List<QueryContainer>>(v?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
+				new Union<INamedFiltersContainer, IEnumerable<QueryContainer>>(v?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] selectors) =>
 			Assign(selectors, (a, v) => a.Filters = v.Select(vv => vv?.Invoke(new QueryContainerDescriptor<T>())).ToList());

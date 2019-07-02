@@ -6,7 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.GeoDistance
@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 			{
 				geo_distance = new
 				{
-					field = "location",
+					field = "locationPoint",
 					origin = new
 					{
 						lat = 52.376,
@@ -39,7 +39,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoDistance("rings_around_amsterdam", g => g
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.Origin(52.376, 4.894)
 				.Ranges(
 					r => r.To(100),
@@ -51,7 +51,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 		protected override AggregationDictionary InitializerAggs =>
 			new GeoDistanceAggregation("rings_around_amsterdam")
 			{
-				Field = Field((Project p) => p.Location),
+				Field = Field((Project p) => p.LocationPoint),
 				Origin = "52.376, 4.894",
 				Ranges = new List<AggregationRange>
 				{
@@ -61,7 +61,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var ringsAroundAmsterdam = response.Aggregations.GeoDistance("rings_around_amsterdam");

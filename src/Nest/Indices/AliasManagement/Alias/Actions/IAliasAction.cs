@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 
 namespace Nest
@@ -22,7 +23,10 @@ namespace Nest
 		{
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var segment = reader.ReadNextBlockSegment();
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);
@@ -72,7 +76,6 @@ namespace Nest
 					Serialize(ref writer, removeIndexAction, formatterResolver);
 					break;
 				default:
-					// TODO: Should we handle some other way?
 					writer.WriteNull();
 					break;
 			}

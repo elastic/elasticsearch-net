@@ -1,8 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	public class RealmInfo
+	{
+		[DataMember(Name = "name")]
+		public string Name { get; internal set; }
+
+		[DataMember(Name = "type")]
+		public string Type { get; internal set; }
+	}
+
 	public class AuthenticateResponse : ResponseBase
 	{
 		[DataMember(Name = "email")]
@@ -21,5 +31,11 @@ namespace Nest
 
 		[DataMember(Name = "username")]
 		public string Username { get; internal set; }
+
+		[DataMember(Name = "authentication_realm")]
+		public RealmInfo AuthenticationRealm { get; internal set; }
+
+		[DataMember(Name = "lookup_realm")]
+		public RealmInfo LookupRealm { get; internal set; }
 	}
 }

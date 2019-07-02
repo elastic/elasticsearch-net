@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	internal sealed class IgnoreFormatter<T> : IJsonFormatter<T>
     {

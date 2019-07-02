@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Metric/WeightedAverage/WeightedAverageAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Metric/WeightedAverage/WeightedAverageAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -49,6 +49,27 @@ new WeightedAverageAggregation("weighted_avg_commits")
     },
     Weight = new WeightedAverageValue(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1")),
     ValueType = ValueType.Long
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "weighted_avg_commits": {
+    "weighted_avg": {
+      "value": {
+        "field": "numberOfCommits",
+        "missing": 0.0
+      },
+      "weight": {
+        "script": {
+          "source": "(doc['numberOfContributors']?.value ?: 0) + 1"
+        }
+      },
+      "value_type": "long"
+    }
+  }
 }
 ----
 

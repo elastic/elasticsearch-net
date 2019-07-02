@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.SourceExists
 {
@@ -32,8 +32,8 @@ namespace Tests.Document.Single.SourceExists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SourceExists<Project>(CallIsolatedValue, f),
-			(client, f) => client.SourceExistsAsync<Project>(CallIsolatedValue, f),
+			(client, f) => client.SourceExists(CallIsolatedValue, f),
+			(client, f) => client.SourceExistsAsync(CallIsolatedValue, f),
 			(client, r) => client.SourceExists(r),
 			(client, r) => client.SourceExistsAsync(r)
 		);
@@ -50,7 +50,7 @@ namespace Tests.Document.Single.SourceExists
 	{
 		public SourceExistsNotFoundApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
@@ -64,7 +64,7 @@ namespace Tests.Document.Single.SourceExists
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var index = client.CreateIndex(IndexWithNoSource, i => i
+			var index = client.Indices.Create(IndexWithNoSource, i => i
 				.Map<Project>(mm => mm
 					.SourceField(sf => sf.Enabled(false))
 				)
@@ -76,8 +76,8 @@ namespace Tests.Document.Single.SourceExists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SourceExists<Project>(Doc(CallIsolatedValue), f),
-			(client, f) => client.SourceExistsAsync<Project>(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExists(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExistsAsync(Doc(CallIsolatedValue), f),
 			(client, r) => client.SourceExists(r),
 			(client, r) => client.SourceExistsAsync(r)
 		);
@@ -96,7 +96,7 @@ namespace Tests.Document.Single.SourceExists
 	{
 		public SourceExistsIndexNotFoundApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => f => null;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
@@ -112,8 +112,8 @@ namespace Tests.Document.Single.SourceExists
 		private static DocumentPath<Project> Doc(string id) => new DocumentPath<Project>(id).Index(IndexWithNoSource);
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.SourceExists<Project>(Doc(CallIsolatedValue), f),
-			(client, f) => client.SourceExistsAsync<Project>(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExists(Doc(CallIsolatedValue), f),
+			(client, f) => client.SourceExistsAsync(Doc(CallIsolatedValue), f),
 			(client, r) => client.SourceExists(r),
 			(client, r) => client.SourceExistsAsync(r)
 		);

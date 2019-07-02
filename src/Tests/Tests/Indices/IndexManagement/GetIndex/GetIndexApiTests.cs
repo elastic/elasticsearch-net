@@ -4,8 +4,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.GetIndex
@@ -25,10 +25,10 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		protected override string UrlPath => $"/project";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetIndex(typeof(Project)),
-			(client, f) => client.GetIndexAsync(typeof(Project)),
-			(client, r) => client.GetIndex(r),
-			(client, r) => client.GetIndexAsync(r)
+			(client, f) => client.Indices.Get(typeof(Project)),
+			(client, f) => client.Indices.GetAsync(typeof(Project)),
+			(client, r) => client.Indices.Get(r),
+			(client, r) => client.Indices.GetAsync(r)
 		);
 
 		protected override void ExpectResponse(GetIndexResponse response)
@@ -52,10 +52,10 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		protected override string UrlPath => $"/_all";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetIndex(AllIndices),
-			(client, f) => client.GetIndexAsync(AllIndices),
-			(client, r) => client.GetIndex(r),
-			(client, r) => client.GetIndexAsync(r)
+			(client, f) => client.Indices.Get(AllIndices),
+			(client, f) => client.Indices.GetAsync(AllIndices),
+			(client, r) => client.Indices.Get(r),
+			(client, r) => client.Indices.GetAsync(r)
 		);
 	}
 }

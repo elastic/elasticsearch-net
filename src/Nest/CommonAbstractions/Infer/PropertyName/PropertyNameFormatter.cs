@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -8,7 +8,7 @@ namespace Nest
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.String)
 			{
-				reader.ReadNext();
+				reader.ReadNextBlock();
 				return null;
 			}
 

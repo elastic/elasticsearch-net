@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -133,7 +134,7 @@ namespace Nest
 		/// <summary>
 		/// The field to get the date or timestamp from.
 		/// </summary>
-		public DateIndexNameProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public DateIndexNameProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <summary>

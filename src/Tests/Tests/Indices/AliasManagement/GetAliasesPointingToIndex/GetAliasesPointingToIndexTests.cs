@@ -5,7 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
 namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 {
@@ -15,20 +15,18 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 		private static readonly string Index = "aliases-index-" + Unique;
 
 		private readonly IElasticClient _client;
-		private readonly WritableCluster _cluster;
 
 		public GetAliasesPointingToIndexTests(WritableCluster cluster) : base(cluster)
 		{
-			_cluster = cluster;
-			_client = _cluster.Client;
+			_client = cluster.Client;
 
-			if (_client.IndexExists(Index).Exists) return;
+			if (_client.Indices.Exists(Index).Exists) return;
 
 			lock (Unique)
 			{
-				if (_client.IndexExists(Index).Exists) return;
+				if (_client.Indices.Exists(Index).Exists) return;
 
-				var createResponse = _client.CreateIndex(Index, c => c
+				var createResponse = _client.Indices.Create(Index, c => c
 					.Settings(s => s
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
@@ -68,6 +66,11 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 		{
 			var indices = await _client.GetIndicesPointingToAliasAsync(Alias(3));
 			indices.Should().NotBeEmpty().And.Contain(Index);
+		}
+		[I] public async Task NotFoundAliasReturnEmpty()
+		{
+			var indices = await _client.GetIndicesPointingToAliasAsync(Alias(4));
+			indices.Should().BeEmpty();
 		}
 
 		private static void AssertGetAliasesPointingToIndexResponse(IReadOnlyDictionary<string, AliasDefinition> aliasesPointingToIndex)

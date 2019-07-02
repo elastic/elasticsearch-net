@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.AliasManagement.DeleteAlias
 {
@@ -25,16 +25,16 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
-				client.CreateIndex(index, c => c
+				client.Indices.Create(index, c => c
 					.Aliases(aa => aa.Alias(index + "-alias"))
 				);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.DeleteAlias(Infer.AllIndices, Names),
-			(client, f) => client.DeleteAliasAsync(Infer.AllIndices, Names),
-			(client, r) => client.DeleteAlias(r),
-			(client, r) => client.DeleteAliasAsync(r)
+			(client, f) => client.Indices.DeleteAlias(Infer.AllIndices, Names),
+			(client, f) => client.Indices.DeleteAliasAsync(Infer.AllIndices, Names),
+			(client, r) => client.Indices.DeleteAlias(r),
+			(client, r) => client.Indices.DeleteAliasAsync(r)
 		);
 	}
 }

@@ -4,9 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetModelSnapshots
 {
@@ -34,10 +32,10 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetModelSnapshots(CallIsolatedValue, f),
-			(client, f) => client.GetModelSnapshotsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetModelSnapshots(r),
-			(client, r) => client.GetModelSnapshotsAsync(r)
+			(client, f) => client.MachineLearning.GetModelSnapshots(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetModelSnapshotsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetModelSnapshots(r),
+			(client, r) => client.MachineLearning.GetModelSnapshotsAsync(r)
 		);
 
 		protected override GetModelSnapshotsDescriptor NewDescriptor() => new GetModelSnapshotsDescriptor(CallIsolatedValue);
@@ -81,10 +79,10 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetModelSnapshots(CallIsolatedValue, f),
-			(client, f) => client.GetModelSnapshotsAsync(CallIsolatedValue, f),
-			(client, r) => client.GetModelSnapshots(r),
-			(client, r) => client.GetModelSnapshotsAsync(r)
+			(client, f) => client.MachineLearning.GetModelSnapshots(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.GetModelSnapshotsAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.GetModelSnapshots(r),
+			(client, r) => client.MachineLearning.GetModelSnapshotsAsync(r)
 		);
 
 		protected override GetModelSnapshotsDescriptor NewDescriptor() => new GetModelSnapshotsDescriptor(CallIsolatedValue);

@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.Cluster.NodesInfo
 {
@@ -12,32 +12,32 @@ namespace Tests.Cluster.NodesInfo
 		[U] public override async Task Urls()
 		{
 			await GET("/_nodes")
-					.Fluent(c => c.NodesInfo())
-					.Request(c => c.NodesInfo(new NodesInfoRequest()))
-					.FluentAsync(c => c.NodesInfoAsync())
-					.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest()))
+					.Fluent(c => c.Nodes.Info())
+					.Request(c => c.Nodes.Info(new NodesInfoRequest()))
+					.FluentAsync(c => c.Nodes.InfoAsync())
+					.RequestAsync(c => c.Nodes.InfoAsync(new NodesInfoRequest()))
 				;
 
 			await GET("/_nodes/foo")
-					.Fluent(c => c.NodesInfo(n => n.NodeId("foo")))
-					.Request(c => c.NodesInfo(new NodesInfoRequest("foo")))
-					.FluentAsync(c => c.NodesInfoAsync(n => n.NodeId("foo")))
-					.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest("foo")))
+					.Fluent(c => c.Nodes.Info(n => n.NodeId("foo")))
+					.Request(c => c.Nodes.Info(new NodesInfoRequest("foo")))
+					.FluentAsync(c => c.Nodes.InfoAsync(n => n.NodeId("foo")))
+					.RequestAsync(c => c.Nodes.InfoAsync(new NodesInfoRequest("foo")))
 				;
 
 			var metrics = NodesInfoMetric.Http | NodesInfoMetric.Jvm;
 			await GET("/_nodes/jvm%2Chttp")
-					.Fluent(c => c.NodesInfo(p => p.Metric(metrics)))
-					.Request(c => c.NodesInfo(new NodesInfoRequest(metrics)))
-					.FluentAsync(c => c.NodesInfoAsync(p => p.Metric(metrics)))
-					.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest(metrics)))
+					.Fluent(c => c.Nodes.Info(p => p.Metric(metrics)))
+					.Request(c => c.Nodes.Info(new NodesInfoRequest(metrics)))
+					.FluentAsync(c => c.Nodes.InfoAsync(p => p.Metric(metrics)))
+					.RequestAsync(c => c.Nodes.InfoAsync(new NodesInfoRequest(metrics)))
 				;
 
 			await GET("/_nodes/foo/jvm%2Chttp")
-					.Fluent(c => c.NodesInfo(n => n.NodeId("foo").Metric(metrics)))
-					.Request(c => c.NodesInfo(new NodesInfoRequest("foo", metrics)))
-					.FluentAsync(c => c.NodesInfoAsync(n => n.NodeId("foo").Metric(metrics)))
-					.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest("foo", metrics)))
+					.Fluent(c => c.Nodes.Info(n => n.NodeId("foo").Metric(metrics)))
+					.Request(c => c.Nodes.Info(new NodesInfoRequest("foo", metrics)))
+					.FluentAsync(c => c.Nodes.InfoAsync(n => n.NodeId("foo").Metric(metrics)))
+					.RequestAsync(c => c.Nodes.InfoAsync(new NodesInfoRequest("foo", metrics)))
 				;
 		}
 	}

@@ -6,8 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Security.RoleMapping
 {
@@ -30,10 +30,10 @@ namespace Tests.XPack.Security.RoleMapping
 			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, PutRoleMappingResponse>(
 				CreateInitializer,
 				CreateFluent,
-				(s, c, f) => c.PutRoleMapping(CreateRoleMappingName(s), f),
-				(s, c, f) => c.PutRoleMappingAsync(CreateRoleMappingName(s), f),
-				(s, c, r) => c.PutRoleMapping(r),
-				(s, c, r) => c.PutRoleMappingAsync(r)
+				(s, c, f) => c.Security.PutRoleMapping(CreateRoleMappingName(s), f),
+				(s, c, f) => c.Security.PutRoleMappingAsync(CreateRoleMappingName(s), f),
+				(s, c, r) => c.Security.PutRoleMapping(r),
+				(s, c, r) => c.Security.PutRoleMappingAsync(r)
 			);
 
 		protected PutRoleMappingRequest CreateInitializer(string role) => new PutRoleMappingRequest(CreateRoleMappingName(role))
@@ -71,24 +71,24 @@ namespace Tests.XPack.Security.RoleMapping
 			Calls<GetRoleMappingDescriptor, GetRoleMappingRequest, IGetRoleMappingRequest, GetRoleMappingResponse>(
 				ReadInitializer,
 				ReadFluent,
-				(s, c, f) => c.GetRoleMapping(f),
-				(s, c, f) => c.GetRoleMappingAsync(f),
-				(s, c, r) => c.GetRoleMapping(r),
-				(s, c, r) => c.GetRoleMappingAsync(r)
+				(s, c, f) => c.Security.GetRoleMapping(CreateRoleMappingName(s), f),
+				(s, c, f) => c.Security.GetRoleMappingAsync(CreateRoleMappingName(s), f),
+				(s, c, r) => c.Security.GetRoleMapping(r),
+				(s, c, r) => c.Security.GetRoleMappingAsync(r)
 			);
 
 		protected GetRoleMappingRequest ReadInitializer(string role) => new GetRoleMappingRequest(CreateRoleMappingName(role));
 
-		protected IGetRoleMappingRequest ReadFluent(string role, GetRoleMappingDescriptor d) => d.Name(CreateRoleMappingName(role));
+		protected IGetRoleMappingRequest ReadFluent(string role, GetRoleMappingDescriptor d) => d;
 
 		protected override LazyResponses Update() =>
 			Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, PutRoleMappingResponse>(
 				UpdateInitializer,
 				UpdateFluent,
-				(s, c, f) => c.PutRoleMapping(CreateRoleMappingName(s), f),
-				(s, c, f) => c.PutRoleMappingAsync(CreateRoleMappingName(s), f),
-				(s, c, r) => c.PutRoleMapping(r),
-				(s, c, r) => c.PutRoleMappingAsync(r)
+				(s, c, f) => c.Security.PutRoleMapping(CreateRoleMappingName(s), f),
+				(s, c, f) => c.Security.PutRoleMappingAsync(CreateRoleMappingName(s), f),
+				(s, c, r) => c.Security.PutRoleMapping(r),
+				(s, c, r) => c.Security.PutRoleMappingAsync(r)
 			);
 
 		protected PutRoleMappingRequest UpdateInitializer(string role) => new PutRoleMappingRequest(CreateRoleMappingName(role))
@@ -126,10 +126,10 @@ namespace Tests.XPack.Security.RoleMapping
 			Calls<DeleteRoleMappingDescriptor, DeleteRoleMappingRequest, IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(
 				DeleteInitializer,
 				DeleteFluent,
-				(s, c, f) => c.DeleteRoleMapping(CreateRoleMappingName(s), f),
-				(s, c, f) => c.DeleteRoleMappingAsync(CreateRoleMappingName(s), f),
-				(s, c, r) => c.DeleteRoleMapping(r),
-				(s, c, r) => c.DeleteRoleMappingAsync(r)
+				(s, c, f) => c.Security.DeleteRoleMapping(CreateRoleMappingName(s), f),
+				(s, c, f) => c.Security.DeleteRoleMappingAsync(CreateRoleMappingName(s), f),
+				(s, c, r) => c.Security.DeleteRoleMapping(r),
+				(s, c, r) => c.Security.DeleteRoleMappingAsync(r)
 			);
 
 		protected DeleteRoleMappingRequest DeleteInitializer(string role) => new DeleteRoleMappingRequest(CreateRoleMappingName(role));

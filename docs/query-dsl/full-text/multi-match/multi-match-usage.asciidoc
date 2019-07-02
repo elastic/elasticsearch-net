@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/MultiMatch/MultiMatchUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/MultiMatch/MultiMatchUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -67,19 +67,37 @@ new MultiMatchQuery
 }
 ----
 
-[float]
-=== Multi match with boost usage
-
-==== Object Initializer syntax example
-
-[source,csharp]
+[source,javascript]
+.Example json output
 ----
-new MultiMatchQuery
 {
-    Fields = Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"),
-    Query = "hello world",
+  "multi_match": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "query": "hello world",
+    "analyzer": "standard",
+    "fuzzy_rewrite": "constant_score_boolean",
+    "fuzziness": "AUTO",
+    "cutoff_frequency": 0.001,
+    "prefix_length": 2,
+    "max_expansions": 2,
+    "slop": 2,
+    "lenient": true,
+    "tie_breaker": 1.1,
+    "minimum_should_match": 2,
+    "operator": "or",
+    "fields": [
+      "description",
+      "myOtherField"
+    ],
+    "zero_terms_query": "all",
+    "auto_generate_synonyms_phrase_query": false
+  }
 }
 ----
+
+[float]
+=== Multi match with boost usage
 
 ==== Fluent DSL example
 
@@ -92,12 +110,47 @@ q
 )
 ----
 
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new MultiMatchQuery
+{
+    Fields = Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"),
+    Query = "hello world",
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "multi_match": {
+    "query": "hello world",
+    "fields": [
+      "description^2.2",
+      "myOtherField^0.3"
+    ]
+  }
+}
+----
+
 [float]
 === Multi match with no fields specified
 
 Starting with Elasticsearch 6.1.0+, it's possible to send a Multi Match query without providing any fields.
 When no fields are provided the Multi Match query will use the fields defined in the index setting `index.query.default_field`
 (which in turns defaults to `*`).
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.MultiMatch(c => c
+    .Query("hello world")
+)
+----
 
 ==== Object Initializer syntax example
 
@@ -109,13 +162,13 @@ new MultiMatchQuery
 }
 ----
 
-==== Fluent DSL example
-
-[source,csharp]
+[source,javascript]
+.Example json output
 ----
-q
-.MultiMatch(c => c
-    .Query("hello world")
-)
+{
+  "multi_match": {
+    "query": "hello world"
+  }
+}
 ----
 

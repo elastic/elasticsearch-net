@@ -2,7 +2,6 @@
 
 open System.IO
 
-open Paths
 open Projects
 open Commandline
 

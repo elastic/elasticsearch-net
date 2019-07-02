@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.Binary
 {
@@ -28,7 +28,7 @@ namespace Tests.Mapping.Types.Core.Binary
 			.Binary(b => b
 				.Name(p => p.Name)
 				.DocValues()
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("BM25")
 				.Store()
 			);
 
@@ -38,7 +38,7 @@ namespace Tests.Mapping.Types.Core.Binary
 				"name", new BinaryProperty
 				{
 					DocValues = true,
-					Similarity = SimilarityOption.BM25,
+					Similarity = "BM25",
 					Store = true
 				}
 			}

@@ -5,8 +5,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 using static Nest.Infer;
 
@@ -22,13 +22,12 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> Fluent => d => d
-			.Index<ProjectPercolation>()
 			.Name("index.*")
 			.Local();
 
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(PercolationIndex, "index.*")
 		{
@@ -38,10 +37,10 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		protected override string UrlPath => $"/queries/_settings/index.%2A?local=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetIndexSettings(f),
-			(client, f) => client.GetIndexSettingsAsync(f),
-			(client, r) => client.GetIndexSettings(r),
-			(client, r) => client.GetIndexSettingsAsync(r)
+			(client, f) => client.Indices.GetSettings(Index<ProjectPercolation>(), f),
+			(client, f) => client.Indices.GetSettingsAsync(Index<ProjectPercolation>(), f),
+			(client, r) => client.Indices.GetSettings(r),
+			(client, r) => client.Indices.GetSettingsAsync(r)
 		);
 
 		protected override void ExpectResponse(GetIndexSettingsResponse response)

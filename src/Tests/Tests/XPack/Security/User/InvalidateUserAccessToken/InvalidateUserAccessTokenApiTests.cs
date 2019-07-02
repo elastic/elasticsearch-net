@@ -5,8 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.InvalidateUserAccessToken
@@ -34,8 +34,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		protected override Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
-		protected override InvalidateUserAccessTokenRequest Initializer => new InvalidateUserAccessTokenRequest(CurrentAccessToken)
-			{ };
+		protected override InvalidateUserAccessTokenRequest Initializer => new InvalidateUserAccessTokenRequest(CurrentAccessToken);
 
 		protected override bool SupportsDeserialization => false;
 
@@ -43,16 +42,16 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var r = client.GetUserAccessToken(Admin.Username, Admin.Password);
+			var r = client.Security.GetUserAccessToken(Admin.Username, Admin.Password);
 			r.ShouldBeValid();
 			ExtendedValue(AccessTokenValueKey, r.AccessToken);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.InvalidateUserAccessToken(CurrentAccessToken, f),
-			(client, f) => client.InvalidateUserAccessTokenAsync(CurrentAccessToken, f),
-			(client, r) => client.InvalidateUserAccessToken(r),
-			(client, r) => client.InvalidateUserAccessTokenAsync(r)
+			(client, f) => client.Security.InvalidateUserAccessToken(CurrentAccessToken, f),
+			(client, f) => client.Security.InvalidateUserAccessTokenAsync(CurrentAccessToken, f),
+			(client, r) => client.Security.InvalidateUserAccessToken(r),
+			(client, r) => client.Security.InvalidateUserAccessTokenAsync(r)
 		);
 
 		protected override InvalidateUserAccessTokenDescriptor NewDescriptor() => new InvalidateUserAccessTokenDescriptor(CurrentAccessToken);

@@ -6,8 +6,8 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.Get
 {
@@ -32,8 +32,8 @@ namespace Tests.Document.Single.Get
 		protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get<Project>(ProjectId, f),
-			(client, f) => client.GetAsync<Project>(ProjectId, f),
+			(client, f) => client.Get(ProjectId, f),
+			(client, f) => client.GetAsync(ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);
@@ -44,7 +44,14 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
+			response.SequenceNumber.Should().HaveValue();
+			response.PrimaryTerm.Should().HaveValue();
 			response.Source.ShouldAdhereToSourceSerializerWhenSet();
+			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
+			{
+				response.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+				response.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
+			}
 		}
 	}
 
@@ -69,8 +76,8 @@ namespace Tests.Document.Single.Get
 		protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get<Project>(ProjectId, f),
-			(client, f) => client.GetAsync<Project>(ProjectId, f),
+			(client, f) => client.Get(ProjectId, f),
+			(client, f) => client.GetAsync(ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);
@@ -106,8 +113,8 @@ namespace Tests.Document.Single.Get
 		protected override string UrlPath => $"/{BadIndex}/_doc/{U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get<Project>(ProjectId, f),
-			(client, f) => client.GetAsync<Project>(ProjectId, f),
+			(client, f) => client.Get(ProjectId, f),
+			(client, f) => client.GetAsync(ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);
@@ -150,8 +157,8 @@ namespace Tests.Document.Single.Get
 		protected override string UrlPath => $"/project/_doc/{U(CommitActivityId)}?routing={U(CommitActivity.ProjectName)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get<CommitActivity>(CommitActivityId, f),
-			(client, f) => client.GetAsync<CommitActivity>(CommitActivityId, f),
+			(client, f) => client.Get(CommitActivityId, f),
+			(client, f) => client.GetAsync(CommitActivityId, f),
 			(client, r) => client.Get<CommitActivity>(r),
 			(client, r) => client.GetAsync<CommitActivity>(r)
 		);

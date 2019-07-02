@@ -2,7 +2,7 @@ using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.TermLevel.TermsSet
 {
@@ -86,7 +86,7 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 			Boost = 1.1,
 			Field = Infer.Field<Project>(p => p.Branches),
 			Terms = new[] { "master", "dev" },
-			MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
+			MinimumShouldMatchScript = new InlineScript("doc['requiredBranches'].size() == 0 ? params.num_terms : Math.min(params.num_terms, doc['requiredBranches'].value)")
 		};
 
 		protected override object QueryJson => new
@@ -100,7 +100,7 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 					terms = new[] { "master", "dev" },
 					minimum_should_match_script = new
 					{
-						source = "Math.min(params.num_terms, doc['requiredBranches'].value)"
+						source = "doc['requiredBranches'].size() == 0 ? params.num_terms : Math.min(params.num_terms, doc['requiredBranches'].value)"
 					}
 				}
 			}
@@ -113,7 +113,7 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 				.Field(p => p.Branches)
 				.Terms("master", "dev")
 				.MinimumShouldMatchScript(s => s
-					.Source("Math.min(params.num_terms, doc['requiredBranches'].value)")
+					.Source("doc['requiredBranches'].size() == 0 ? params.num_terms : Math.min(params.num_terms, doc['requiredBranches'].value)")
 				)
 			);
 	}

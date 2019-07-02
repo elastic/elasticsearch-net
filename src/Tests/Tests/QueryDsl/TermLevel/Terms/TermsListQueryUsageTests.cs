@@ -5,7 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
@@ -76,7 +76,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Terms(_terms)
 			);
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldNotBeValid();
 
@@ -127,7 +127,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Terms(_terms)
 			);
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);

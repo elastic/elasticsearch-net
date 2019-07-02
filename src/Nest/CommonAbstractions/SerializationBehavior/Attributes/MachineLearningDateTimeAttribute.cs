@@ -1,5 +1,6 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
 
 namespace Nest
@@ -27,7 +28,11 @@ namespace Nest
 				var formatter = formatterResolver.GetFormatter<DateTimeOffset>();
 				return formatter.Deserialize(ref reader, formatterResolver);
 			}
-			if (token == JsonToken.Null) return default;
+			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
+				return default;
+			}
 
 			if (token == JsonToken.Number)
 			{
@@ -54,7 +59,11 @@ namespace Nest
 				var formatter = formatterResolver.GetFormatter<DateTime>();
 				return formatter.Deserialize(ref reader, formatterResolver);
 			}
-			if (token == JsonToken.Null) return default;
+			if (token == JsonToken.Null)
+			{
+				reader.ReadNext();
+				return default;
+			}
 
 			if (token == JsonToken.Number)
 			{

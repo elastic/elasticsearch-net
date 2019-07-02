@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
 
 namespace Nest
 {
@@ -15,9 +16,6 @@ namespace Nest
 
 		[DataMember(Name = "error_message")]
 		public string ErrorMessage { get; internal set; }
-
-		//TODO: make this the default on base class for 7.0 ?
-		public override bool IsValid => base.IsValid && Acknowledged;
 	}
 
 	[JsonFormatter(typeof(StartBasicLicenseFeatureAcknowledgementsFormatter))]

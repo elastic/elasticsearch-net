@@ -30,5 +30,6 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParameters = null
 		)
 			where TResponse : class, IElasticsearchResponse, new();
+		
 	}
 }

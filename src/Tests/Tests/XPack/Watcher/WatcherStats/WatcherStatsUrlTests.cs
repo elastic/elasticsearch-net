@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.Watcher.WatcherStats
 {
@@ -12,25 +12,25 @@ namespace Tests.XPack.Watcher.WatcherStats
 		[U] public override async Task Urls()
 		{
 			await GET("/_watcher/stats")
-					.Fluent(c => c.WatcherStats())
-					.Request(c => c.WatcherStats(new WatcherStatsRequest()))
-					.FluentAsync(c => c.WatcherStatsAsync())
-					.RequestAsync(c => c.WatcherStatsAsync(new WatcherStatsRequest()))
+					.Fluent(c => c.Watcher.Stats())
+					.Request(c => c.Watcher.Stats(new WatcherStatsRequest()))
+					.FluentAsync(c => c.Watcher.StatsAsync())
+					.RequestAsync(c => c.Watcher.StatsAsync(new WatcherStatsRequest()))
 				;
 
 			await GET("/_watcher/stats/_all")
-					.Fluent(c => c.WatcherStats(r => r.Metric(WatcherStatsMetric.All)))
-					.Request(c => c.WatcherStats(new WatcherStatsRequest(WatcherStatsMetric.All)))
-					.FluentAsync(c => c.WatcherStatsAsync(r => r.Metric(WatcherStatsMetric.All)))
-					.RequestAsync(c => c.WatcherStatsAsync(new WatcherStatsRequest(WatcherStatsMetric.All)))
+					.Fluent(c => c.Watcher.Stats(r => r.Metric(WatcherStatsMetric.All)))
+					.Request(c => c.Watcher.Stats(new WatcherStatsRequest(WatcherStatsMetric.All)))
+					.FluentAsync(c => c.Watcher.StatsAsync(r => r.Metric(WatcherStatsMetric.All)))
+					.RequestAsync(c => c.Watcher.StatsAsync(new WatcherStatsRequest(WatcherStatsMetric.All)))
 				;
 
 			var metrics = WatcherStatsMetric.QueuedWatches | WatcherStatsMetric.CurrentWatches;
 			await GET("/_watcher/stats/queued_watches%2Ccurrent_watches")
-					.Fluent(c => c.WatcherStats(r => r.Metric(metrics)))
-					.Request(c => c.WatcherStats(new WatcherStatsRequest(metrics)))
-					.FluentAsync(c => c.WatcherStatsAsync(r => r.Metric(metrics)))
-					.RequestAsync(c => c.WatcherStatsAsync(new WatcherStatsRequest(metrics)))
+					.Fluent(c => c.Watcher.Stats(r => r.Metric(metrics)))
+					.Request(c => c.Watcher.Stats(new WatcherStatsRequest(metrics)))
+					.FluentAsync(c => c.Watcher.StatsAsync(r => r.Metric(metrics)))
+					.RequestAsync(c => c.Watcher.StatsAsync(new WatcherStatsRequest(metrics)))
 				;
 		}
 	}

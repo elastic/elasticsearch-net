@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/MultiFields.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Mapping/MultiFields.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -38,7 +38,7 @@ POCO type is a `text` datatype with multi fields including a `keyword` sub field
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Person>(m => m
         .AutoMap()
     )
@@ -47,29 +47,23 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
 
 This results in the following JSON request
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            name = new
-            {
-                type = "text",
-                fields = new
-                {
-                    keyword = new
-                    {
-                        type = "keyword",
-                        ignore_above = 256
-                    }
-                }
-            }
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
         }
+      }
     }
-};
+  }
+}
 ----
 
 This is useful because the property can be used for both full text search
@@ -96,38 +90,31 @@ var searchResponse = _client.Search<Person>(s => s
 ----
 <1> Use the keyword subfield on `Name`
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    query = new
-    {
-        match = new
-        {
-            name = new
-            {
-                query = "Russ"
-            }
-        }
-    },
-    sort = new object[]
-    {
-        new JObject
-        {
-            { "name.keyword", new JObject { { "order", "desc" } } }
-        }
-    },
-    aggs = new
-    {
-        peoples_names = new
-        {
-            terms = new
-            {
-                field = "name.keyword"
-            }
-        }
+  "query": {
+    "match": {
+      "name": {
+        "query": "Russ"
+      }
     }
-};
+  },
+  "sort": [
+    {
+      "name.keyword": {
+        "order": "desc"
+      }
+    }
+  ],
+  "aggs": {
+    "peoples_names": {
+      "terms": {
+        "field": "name.keyword"
+      }
+    }
+  }
+}
 ----
 
 [NOTE]
@@ -145,7 +132,7 @@ Multi fields can be created on a mapping using the `.Fields()` method within a f
 
 [source,csharp]
 ----
-var createIndexResponse = _client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.Indices.Create("myindex", c => c
     .Map<Person>(m => m
         .Properties(p => p
             .Text(t => t
@@ -170,41 +157,35 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
 );
 ----
 <1> Use the stop analyzer on this sub field
+
 <2> Use a custom analyzer named "named_shingles" that is configured in the index
+
 <3> Index as not analyzed
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        properties = new
-        {
-            name = new
-            {
-                type = "text",
-                fields = new
-                {
-                    stop = new
-                    {
-                        type = "text",
-                        analyzer = "stop"
-                    },
-                    shingles = new
-                    {
-                        type = "text",
-                        analyzer = "name_shingles"
-                    },
-                    keyword = new
-                    {
-                        type = "keyword",
-                        ignore_above = 256
-                    }
-                }
-            }
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "fields": {
+          "stop": {
+            "type": "text",
+            "analyzer": "stop"
+          },
+          "shingles": {
+            "type": "text",
+            "analyzer": "name_shingles"
+          },
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
         }
+      }
     }
-};
+  }
+}
 ----
 

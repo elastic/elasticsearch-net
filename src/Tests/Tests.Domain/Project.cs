@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Nest;
-using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Tests.Configuration;
 using Tests.Domain.Extensions;
@@ -27,7 +26,8 @@ namespace Tests.Domain
 		public JoinField Join => JoinField.Root<Project>();
 		public DateTime LastActivity { get; set; }
 		public Developer LeadDeveloper { get; set; }
-		public SimpleGeoPoint Location { get; set; }
+		public SimpleGeoPoint LocationPoint { get; set; }
+		public IGeoShape LocationShape { get; set; }
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public string Name { get; set; }
 		public int? NumberOfCommits { get; set; }
@@ -51,7 +51,7 @@ namespace Tests.Domain
 			new Faker<Project>()
 				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
-				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
+				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs())
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
 				.RuleFor(p => p.Visibility, f => f.PickRandom<Visibility>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())
@@ -60,9 +60,10 @@ namespace Tests.Domain
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count - 1)])
 				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)))
-				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
+				.RuleFor(p => p.LocationPoint, f => SimpleGeoPoint.Generator.Generate())
+				.RuleFor(p => p.LocationShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
-				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
+				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 50))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
 				.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }))
 				.RuleFor(p => p.SourceOnly, f =>
@@ -83,17 +84,17 @@ namespace Tests.Domain
 
 		public static readonly Project Instance = new Project
 		{
-			Name = Projects.First().Name,
+			Name = First.Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
 			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
+			LocationPoint = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
 			SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		private static readonly object InstanceAnonymousDefault = new
 		{
-			name = Projects.First().Name,
+			name = First.Name,
 			type = TypeName,
 			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
@@ -103,12 +104,12 @@ namespace Tests.Domain
 			numberOfContributors = 0,
 			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
+			locationPoint = new { lat = Instance.LocationPoint.Lat, lon = Instance.LocationPoint.Lon }
 		};
 
 		private static readonly object InstanceAnonymousSourceSerializer = new
 		{
-			name = Projects.First().Name,
+			name = First.Name,
 			type = TypeName,
 			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
@@ -118,7 +119,7 @@ namespace Tests.Domain
 			numberOfContributors = 0,
 			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
+			locationPoint = new { lat = Instance.LocationPoint.Lat, lon = Instance.LocationPoint.Lon },
 			sourceOnly = new { notWrittenByDefaultSerializer = "written" }
 		};
 

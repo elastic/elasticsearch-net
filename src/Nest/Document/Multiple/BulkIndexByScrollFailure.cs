@@ -7,7 +7,7 @@ namespace Nest
 	public class BulkIndexByScrollFailure
 	{
 		[DataMember(Name = "cause")]
-		public BulkIndexFailureCause Cause { get; set; }
+		public Error Cause { get; set; }
 
 		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
@@ -20,14 +20,5 @@ namespace Nest
 
 		[DataMember(Name = "type")]
 		public string Type { get; internal set; }
-	}
-
-	[DataContract]
-	[JsonFormatter(typeof(ErrorCauseFormatter<BulkIndexFailureCause>))]
-	public class BulkIndexFailureCause : Error
-	{
-		public string Index => Metadata?.Index;
-		public string IndexUniqueId => Metadata?.IndexUUID;
-		public int? Shard => Metadata?.Shard;
 	}
 }

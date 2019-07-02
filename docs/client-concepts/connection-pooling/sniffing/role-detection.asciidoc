@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sniffing/RoleDetection.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/Sniffing/RoleDetection.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -21,11 +21,11 @@ We can then use this information when selecting a node to perform an API call on
 
 [source,csharp]
 ----
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202)
-        .Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligible(9200, 9201, 9202))
+        .Succeeds(Always, VirtualClusterWith.Nodes(8).MasterEligible(9200, 9201, 9202))
     )
     .SniffingConnectionPool()
     .AllDefaults()
@@ -47,11 +47,11 @@ var audit = new Auditor(() => Framework.Cluster
 
 await audit.TraceStartup();
 
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202)
-        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+        .Succeeds(Always, VirtualClusterWith.Nodes(8).StoresNoData(9200, 9201, 9202))
     )
     .SniffingConnectionPool()
     .AllDefaults()
@@ -73,10 +73,10 @@ var audit = new Auditor(() => Framework.Cluster
 };
 await audit.TraceStartup();
 
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.SucceedAlways()
-        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).HttpDisabled(9201))
+        .Succeeds(Always, VirtualClusterWith.Nodes(8).StoresNoData(9200, 9201, 9202).HttpDisabled(9201))
     )
     .SniffingConnectionPool()
     .AllDefaults()
@@ -111,10 +111,10 @@ storing no data.
 var masterNodes = new[] {9200, 9201, 9202};
 var totalNodesInTheCluster = 20;
 //
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .MasterOnlyNodes(masterNodes.Length)
     .Sniff(s => s.SucceedAlways()
-        .Succeeds(Always, Framework.Cluster
+        .Succeeds(Always, VirtualClusterWith
             .Nodes(totalNodesInTheCluster)
             .StoresNoData(masterNodes)
             .MasterEligible(masterNodes))
@@ -191,11 +191,11 @@ var setting = "node.attr.rack_id";
 var value = "rack_one";
 var nodesInRackOne = new[] {9204, 9210, 9213};
 
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(totalNodesInTheCluster)
     //
     .Sniff(s => s.SucceedAlways()
-        .Succeeds(Always, Framework.Cluster
+        .Succeeds(Always, VirtualClusterWith
             .Nodes(totalNodesInTheCluster)
             .HasSetting(setting, value, nodesInRackOne))
     )
@@ -262,10 +262,10 @@ predicate that filters out *all* nodes from being the targets of API calls from 
 ----
 var totalNodesInTheCluster = 20;
 
-var audit = new Auditor(() => Framework.Cluster
+var audit = new Auditor(() => VirtualClusterWith
     .Nodes(totalNodesInTheCluster)
     .Sniff(s => s.SucceedAlways()
-        .Succeeds(Always, Framework.Cluster.Nodes(totalNodesInTheCluster))
+        .Succeeds(Always, VirtualClusterWith.Nodes(totalNodesInTheCluster))
     )
     .SniffingConnectionPool()
     .Settings(s => s

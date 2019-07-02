@@ -2,8 +2,8 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Ingest.GetPipeline
 {
@@ -23,10 +23,10 @@ namespace Tests.Ingest.GetPipeline
 		protected override string UrlPath => $"/_ingest/pipeline/{PipelineId}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetPipeline(f),
-			(client, f) => client.GetPipelineAsync(f),
-			(client, r) => client.GetPipeline(r),
-			(client, r) => client.GetPipelineAsync(r)
+			(client, f) => client.Ingest.GetPipeline(f),
+			(client, f) => client.Ingest.GetPipelineAsync(f),
+			(client, r) => client.Ingest.GetPipeline(r),
+			(client, r) => client.Ingest.GetPipelineAsync(r)
 		);
 
 		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor().Id(PipelineId);

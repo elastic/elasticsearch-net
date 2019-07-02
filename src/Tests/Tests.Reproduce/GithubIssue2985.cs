@@ -19,7 +19,7 @@ namespace Tests.Reproduce
 		{
 			var client = _cluster.Client;
 			var index = $"gh2985-{RandomString()}";
-			var response = client.CreateIndex(index, i => i
+			var response = client.Indices.Create(index, i => i
 				.Settings(s => s
 					.Analysis(a => a
 						.Analyzers(an => an
@@ -34,7 +34,7 @@ namespace Tests.Reproduce
 					"Type: illegal_argument_exception Reason: \"Custom Analyzer [custom] failed to find filter under name [ascii_folding]\""
 				);
 
-			client.DeleteIndex(index);
+			client.Indices.Delete(index);
 		}
 	}
 }

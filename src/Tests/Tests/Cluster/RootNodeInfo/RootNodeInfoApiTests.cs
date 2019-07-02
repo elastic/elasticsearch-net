@@ -1,9 +1,11 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.RootNodeInfo
 {
@@ -26,10 +28,19 @@ namespace Tests.Cluster.RootNodeInfo
 
 		protected override void ExpectResponse(RootNodeInfoResponse response)
 		{
-			response.Version.Should().NotBeNull();
-			response.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();
 			response.Tagline.Should().NotBeNullOrWhiteSpace();
 			response.Name.Should().NotBeNullOrWhiteSpace();
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.ClusterUUID.Should().NotBeNullOrWhiteSpace();
+			response.Version.Should().NotBeNull();
+			response.Version.Number.Should().NotBeNullOrWhiteSpace();
+			response.Version.BuildDate.Should().BeAfter(default);
+			response.Version.BuildFlavor.Should().NotBeNullOrWhiteSpace();
+			response.Version.BuildHash.Should().NotBeNullOrWhiteSpace();
+			response.Version.BuildSnapshot.Should().Be(TestConfiguration.Instance.ElasticsearchVersion.Contains("SNAPSHOT"));
+			response.Version.BuildType.Should().NotBeNullOrWhiteSpace();
+			response.Version.MinimumIndexCompatibilityVersion.Should().NotBeNullOrWhiteSpace();
+			response.Version.MinimumWireCompatibilityVersion.Should().NotBeNullOrWhiteSpace();
 		}
 	}
 }

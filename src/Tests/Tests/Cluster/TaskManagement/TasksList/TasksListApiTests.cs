@@ -8,8 +8,8 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
@@ -34,10 +34,10 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override string UrlPath => "/_tasks?actions=%2Alists%2A";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ListTasks(f),
-			(client, f) => client.ListTasksAsync(f),
-			(client, r) => client.ListTasks(r),
-			(client, r) => client.ListTasksAsync(r)
+			(client, f) => client.Tasks.List(f),
+			(client, f) => client.Tasks.ListAsync(f),
+			(client, r) => client.Tasks.List(r),
+			(client, r) => client.Tasks.ListAsync(r)
 		);
 
 		protected override void ExpectResponse(ListTasksResponse response)
@@ -90,10 +90,10 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override string UrlPath => $"/_tasks?detailed=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ListTasks(f),
-			(client, f) => client.ListTasksAsync(f),
-			(client, r) => client.ListTasks(r),
-			(client, r) => client.ListTasksAsync(r)
+			(client, f) => client.Tasks.List(f),
+			(client, f) => client.Tasks.ListAsync(f),
+			(client, r) => client.Tasks.List(r),
+			(client, r) => client.Tasks.ListAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -103,11 +103,11 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			var targetIndex = "tasks-lists-detailed";
 			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), sourceIndex);
 			if (!bulkResponse.IsValid)
-				throw new Exception("failure in setting up integration");
+				throw new Exception($"failure in setting up integration {bulkResponse.ServerError}");
 
-			client.Refresh(sourceIndex);
+			client.Indices.Refresh(sourceIndex);
 
-			var createIndex = client.CreateIndex(targetIndex, i => i
+			var createIndex = client.Indices.Create(targetIndex, i => i
 				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
 				.Map<Project>(DefaultSeeder.ProjectTypeMappings)
 			);

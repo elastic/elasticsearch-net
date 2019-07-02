@@ -1,4 +1,4 @@
-namespace Tests.Framework.Integration
+namespace Tests.Framework.EndpointTests.TestState
 {
 	public enum ClientMethod
 	{

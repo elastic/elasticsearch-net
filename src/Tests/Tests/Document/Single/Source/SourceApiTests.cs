@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
+using Tests.Framework.DocumentationTests;
 
 namespace Tests.Document.Single.Source
 {
@@ -13,7 +13,7 @@ namespace Tests.Document.Single.Source
 
 		[I] public void SourceReturnsDocument()
 		{
-			var project = Client.Source<Project>(Project.Instance.Name, s => s.Routing(Project.Instance.Name));
+			var project = Client.Source<Project>(Project.Instance.Name, s => s.Routing(Project.Instance.Name)).Body;
 			var p = Project.Projects.FirstOrDefault(i => i.Name == Project.Instance.Name);
 			p.Should().NotBeNull("Test setup failure, project instance not found in projects indexed into readonly cluster");
 

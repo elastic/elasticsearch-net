@@ -79,6 +79,7 @@ namespace Nest
 
 		public virtual void Visit(IGeoShapeQuery query)
 		{
+			// ReSharper disable UnusedVariable
 			switch (query.Shape)
 			{
 				case null when query.IndexedShape != null:
@@ -111,6 +112,7 @@ namespace Nest
 				case IPolygonGeoShape polygonGeoShape:
 					Write("geo_shape_polygon");
 					break;
+				// ReSharper restore UnusedVariable
 				default:
 					Write("geo_shape", query.Field);
 					break;
@@ -122,6 +124,8 @@ namespace Nest
 		public virtual void Visit(IHasParentQuery query) => Write("has_parent");
 
 		public virtual void Visit(IIdsQuery query) => Write("ids");
+
+		public virtual void Visit(IIntervalsQuery query) => Write("intervals");
 
 		public virtual void Visit(IMatchQuery query) => Write("match", query.Field);
 

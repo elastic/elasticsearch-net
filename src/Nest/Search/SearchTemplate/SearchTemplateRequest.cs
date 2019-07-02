@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	[ReadAs(typeof(SearchTemplateRequest))]
-	public partial interface ISearchTemplateRequest : ICovariantSearchRequest
+	public partial interface ISearchTemplateRequest : ITypedSearchRequest
 	{
 		[DataMember(Name ="id")]
 		string Id { get; set; }
@@ -25,9 +26,9 @@ namespace Nest
 
 		public string Source { get; set; }
 		protected Type ClrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => ClrType;
+		Type ITypedSearchRequest.ClrType => ClrType;
 
-		protected sealed override void Initialize() => TypedKeys = true;
+		protected sealed override void RequestDefaults(SearchTemplateRequestParameters parameters) => TypedKeys = true;
 	}
 
 	public class SearchTemplateRequest<T> : SearchTemplateRequest
@@ -38,14 +39,9 @@ namespace Nest
 		public SearchTemplateRequest(Indices indices) : base(indices) => ClrType = typeof(T);
 	}
 
-	public partial class SearchTemplateDescriptor<T> where T : class
+	public partial class SearchTemplateDescriptor<TDocument> where TDocument : class
 	{
-		/// <summary>
-		/// Whether conditionless queries are allowed or not
-		/// </summary>
-		internal bool _Strict { get; set; }
-
-		Type ICovariantSearchRequest.ClrType => typeof(T);
+		Type ITypedSearchRequest.ClrType => typeof(TDocument);
 
 		string ISearchTemplateRequest.Id { get; set; }
 
@@ -53,15 +49,15 @@ namespace Nest
 
 		string ISearchTemplateRequest.Source { get; set; }
 
-		protected sealed override void Initialize() => TypedKeys();
+		protected sealed override void RequestDefaults(SearchTemplateRequestParameters parameters) => TypedKeys();
 
-		public SearchTemplateDescriptor<T> Source(string template) => Assign(template, (a, v) => a.Source = v);
+		public SearchTemplateDescriptor<TDocument> Source(string template) => Assign(template, (a, v) => a.Source = v);
 
-		public SearchTemplateDescriptor<T> Id(string id) => Assign(id, (a, v) => a.Id = v);
+		public SearchTemplateDescriptor<TDocument> Id(string id) => Assign(id, (a, v) => a.Id = v);
 
-		public SearchTemplateDescriptor<T> Params(Dictionary<string, object> paramDictionary) => Assign(paramDictionary, (a, v) => a.Params = v);
+		public SearchTemplateDescriptor<TDocument> Params(Dictionary<string, object> paramDictionary) => Assign(paramDictionary, (a, v) => a.Params = v);
 
-		public SearchTemplateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
+		public SearchTemplateDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
 			Assign(paramDictionary, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

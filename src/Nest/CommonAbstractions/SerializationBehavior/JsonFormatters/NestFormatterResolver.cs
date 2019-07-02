@@ -2,6 +2,9 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net.Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -37,12 +40,13 @@ namespace Nest
 				DynamicCompositeResolver.Create(new IJsonFormatter[]
 				{
 					new QueryContainerCollectionFormatter(),
-					new QueryContainerListFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
 					// TODO: condition on TimeSpanToStringFormatter and NullableTimeSpanToStringFormatter to only take effect when StringTimeSpanAttribute is not present.
 					new TimeSpanToStringFormatter(),
 					new NullableTimeSpanToStringFormatter(),
 					new JsonNetCompatibleUriFormatter(),
+					new GeoOrientationFormatter(),
+					new NullableGeoOrientationFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling

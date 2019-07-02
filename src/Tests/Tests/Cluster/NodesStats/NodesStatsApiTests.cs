@@ -8,8 +8,9 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
+using static Nest.Infer;
 
 namespace Tests.Cluster.NodesStats
 {
@@ -25,10 +26,10 @@ namespace Tests.Cluster.NodesStats
 		protected override string UrlPath => "/_nodes/stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.NodesStats(),
-			(client, f) => client.NodesStatsAsync(),
-			(client, r) => client.NodesStats(r),
-			(client, r) => client.NodesStatsAsync(r)
+			(client, f) => client.Nodes.Stats(),
+			(client, f) => client.Nodes.StatsAsync(),
+			(client, r) => client.Nodes.Stats(r),
+			(client, r) => client.Nodes.StatsAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -37,7 +38,7 @@ namespace Tests.Cluster.NodesStats
 			// even if this api is tested in isolation
 			for (var i = 0; i < 5; i++)
 			{
-				var searchResult = client.MultiSearch(m => m
+				var searchResult = client.MultiSearch(AllIndices, m => m
 					.Search<Project>(s => s.MatchAll().Size(0))
 					.Search<Project>(s => s.MatchAll().Size(0))
 					.Search<Project>(s => s.MatchAll().Size(0))
@@ -186,9 +187,10 @@ namespace Tests.Cluster.NodesStats
 
 		protected void Assert(HttpStats http) => http.Should().NotBeNull();
 
-		protected void Assert(Dictionary<string, BreakerStats> breakers)
+		protected void Assert(IReadOnlyDictionary<string, BreakerStats> breakers)
 		{
 			breakers.Should().NotBeEmpty().And.ContainKey("request");
+			// ReSharper disable once UnusedVariable
 			var requestBreaker = breakers["request"];
 			//requestBreaker.LimitSizeInBytes.Should().BeGreaterThan(0);
 			//requestBreaker.Overhead.Should().BeGreaterThan(0);
@@ -213,9 +215,10 @@ namespace Tests.Cluster.NodesStats
 			path.Type.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected void Assert(Dictionary<string, ThreadCountStats> threadPools)
+		protected void Assert(IReadOnlyDictionary<string, ThreadCountStats> threadPools)
 		{
 			threadPools.Should().NotBeEmpty().And.ContainKey("management");
+			// ReSharper disable once UnusedVariable
 			var threadPool = threadPools["management"];
 			//threadPool.Completed.Should().BeGreaterThan(0);
 		}

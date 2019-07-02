@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net
 {
+	[DataContract]
 	[JsonFormatter(typeof(ErrorFormatter))]
 	public class Error : ErrorCause
 	{
@@ -18,54 +22,61 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<ErrorCause> RootCause { get; set; }
 	}
 
-	internal class ErrorFormatter : IJsonFormatter<Error>
+	internal class ErrorFormatter : ErrorCauseFormatter<Error>
 	{
-		public void Serialize(ref JsonWriter writer, Error value, IJsonFormatterResolver formatterResolver) { }
-
-		public Error Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
-			switch (reader.GetCurrentJsonToken())
+			{ "headers", 0 },
+			{ "root_cause", 1 }
+		};
+
+		protected override void Serialize(ref JsonWriter writer, ref int count, Error value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value.Headers.Any())
 			{
-				case JsonToken.String:
-				{
-					var error = new Error { Reason = reader.ReadString() };
-					return error;
-				}
-				case JsonToken.BeginObject:
-				{
-					var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
-					var dict = formatter.Deserialize(ref reader, formatterResolver);
+				if (count > 0)
+					writer.WriteValueSeparator();
 
-					var error = new Error();
-					error.FillValues(dict);
+				writer.WritePropertyName("headers");
+				formatterResolver.GetFormatter<IReadOnlyDictionary<string, string>>()
+					.Serialize(ref writer, value.Headers, formatterResolver);
 
-					if (dict.TryGetValue("caused_by", out var causedBy))
-						error.CausedBy = formatterResolver.ReserializeAndDeserialize<ErrorCause>(causedBy);
+				count++;
+			}
 
-					if (dict.TryGetValue("headers", out var headers))
-					{
-						var d = formatterResolver.ReserializeAndDeserialize<Dictionary<string, string>>(headers);
-						if (d != null) error.Headers = new ReadOnlyDictionary<string, string>(d);
-					}
+			if (value.RootCause.Any())
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
 
-					error.Metadata = ErrorCause.ErrorCauseMetadata.CreateCauseMetadata(dict, formatterResolver);
+				writer.WritePropertyName("root_cause");
+				formatterResolver.GetFormatter<IReadOnlyCollection<ErrorCause>>()
+					.Serialize(ref writer, value.RootCause, formatterResolver);
 
-					return ReadRootCause(dict, formatterResolver, error);
-				}
-				default:
-					reader.ReadNextBlock();
-					return null;
+				count++;
 			}
 		}
 
-		private static Error ReadRootCause(IDictionary<string, object> dict, IJsonFormatterResolver formatterResolver, Error error)
+		protected override bool Deserialize(ref JsonReader reader, ref ArraySegment<byte> property, Error value, IJsonFormatterResolver formatterResolver)
 		{
-			if (!dict.TryGetValue("root_cause", out var rootCause)) return error;
+			if (Fields.TryGetValue(property, out var fieldValue))
+			{
+				switch (fieldValue)
+				{
+					case 0:
+						value.Headers = formatterResolver.GetFormatter<Dictionary<string, string>>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+					case 1:
+						value.RootCause = formatterResolver.GetFormatter<List<ErrorCause>>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+				}
 
-			if (!(rootCause is List<object> os)) return error;
+				return true;
+			}
 
-			error.RootCause = os.Select(formatterResolver.ReserializeAndDeserialize<ErrorCause>).ToList().AsReadOnly();
-			return error;
+			return false;
 		}
 	}
 }

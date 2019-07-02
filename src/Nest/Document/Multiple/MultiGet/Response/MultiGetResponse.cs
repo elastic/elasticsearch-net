@@ -2,12 +2,11 @@
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	[DataContract]
-	//TODO validate this, ported over from ElasticContractResolver but it seems out of place
 	[JsonFormatter(typeof(MultiGetResponseFormatter))]
 	public class MultiGetResponse : ResponseBase
 	{

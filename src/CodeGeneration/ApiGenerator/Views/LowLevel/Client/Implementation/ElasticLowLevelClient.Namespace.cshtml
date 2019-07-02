@@ -1,0 +1,58 @@
+@using RazorLight
+@using System
+@using System.Collections.Generic
+@using System.Collections.ObjectModel
+@using System.Globalization
+@using System.Linq
+@using System.Text.RegularExpressions
+@using ApiGenerator.Domain
+@using ApiGenerator 
+@using ApiGenerator.Domain.Code
+@using CsQuery.StringScanner.Implementation
+@using ApiGenerator.Domain.Specification
+@inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+@{
+	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
+	string ns = model.Key;
+	var endpoints = model.Value;
+}
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
+using static Elasticsearch.Net.HttpMethod;
+
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable once CheckNamespace
+// ReSharper disable InterpolatedStringExpressionIsNotIFormattable
+// ReSharper disable RedundantExtendsListEntry
+namespace Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNamespaceSuffix)
+{
+	///<summary>
+	/// @(ns.SplitPascalCase()) APIs.
+	/// <para>Not intended to be instantiated directly. Use the <see cref="IElasticLowLevelClient.@ns"/> property
+	/// on <see cref="IElasticLowLevelClient"/>.
+	///</para>
+	///</summary>
+	public class @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix) : NamespacedClientProxy
+	{
+		internal @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix)(ElasticLowLevelClient client) : base(client) {}
+@if (ns == "Cat")
+{
+	<text>protected override string ContentType { get; } = "text/plain";</text>
+}
+ 	@{	
+		var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
+		foreach (var method in methods)
+		{
+			await IncludeAsync("LowLevel/Client/Methods/MethodImplementation.cshtml", method);
+		}
+	}
+	}
+}

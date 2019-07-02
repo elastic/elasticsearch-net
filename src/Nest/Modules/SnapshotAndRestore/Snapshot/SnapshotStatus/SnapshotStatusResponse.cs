@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -84,22 +85,10 @@ namespace Nest
 
 	public class SnapshotStats
 	{
-		[DataMember(Name ="number_of_files")]
-		public long NumberOfFiles { get; internal set; }
-
-		[DataMember(Name ="processed_files")]
-		public long ProcessedFiles { get; internal set; }
-
-		[DataMember(Name ="processed_size_in_bytes")]
-		public long ProcessedSizeInBytes { get; internal set; }
-
 		[DataMember(Name ="start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
 		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; internal set; }
-
-		[DataMember(Name ="total_size_in_bytes")]
-		public long TotalSizeInBytes { get; internal set; }
 	}
 }

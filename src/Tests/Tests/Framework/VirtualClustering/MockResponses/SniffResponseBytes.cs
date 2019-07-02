@@ -5,7 +5,7 @@ using System.Linq;
 using Elasticsearch.Net;
 using Tests.Configuration;
 
-namespace Tests.Framework.MockResponses
+namespace Tests.Framework.VirtualClustering.MockResponses
 {
 	public static class SniffResponseBytes
 	{

@@ -5,7 +5,7 @@ using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Bucket.Sampler
 {
@@ -54,7 +54,7 @@ namespace Tests.Aggregations.Bucket.Sampler
 				}
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

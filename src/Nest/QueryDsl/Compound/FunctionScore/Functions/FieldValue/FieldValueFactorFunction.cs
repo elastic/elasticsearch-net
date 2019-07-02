@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 
 namespace Nest
@@ -43,7 +43,7 @@ namespace Nest
 
 		public FieldValueFactorFunctionDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public FieldValueFactorFunctionDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
+		public FieldValueFactorFunctionDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public FieldValueFactorFunctionDescriptor<T> Factor(double? factor) => Assign(factor, (a, v) => a.Factor = v);
 

@@ -3,9 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.UpdateJob
 {
@@ -41,10 +39,10 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.UpdateJob(CallIsolatedValue, f),
-			(client, f) => client.UpdateJobAsync(CallIsolatedValue, f),
-			(client, r) => client.UpdateJob(r),
-			(client, r) => client.UpdateJobAsync(r)
+			(client, f) => client.MachineLearning.UpdateJob(CallIsolatedValue, f),
+			(client, f) => client.MachineLearning.UpdateJobAsync(CallIsolatedValue, f),
+			(client, r) => client.MachineLearning.UpdateJob(r),
+			(client, r) => client.MachineLearning.UpdateJobAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

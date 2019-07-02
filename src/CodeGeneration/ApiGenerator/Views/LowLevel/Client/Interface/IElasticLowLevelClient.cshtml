@@ -1,0 +1,44 @@
+@using RazorLight
+@using System.Linq
+@using ApiGenerator
+@using ApiGenerator.Domain
+@using ApiGenerator.Domain.Code
+@inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
+@{ await IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
+
+namespace Elasticsearch.Net
+{
+	///<summary>
+	///Elasticsearch low level client
+	///</summary>
+	public partial interface IElasticLowLevelClient 
+	{
+		@foreach(var kv in Model.EndpointsPerNamespace)
+		{
+		if (kv.Key != CsharpNames.RootNamespace)
+		{
+<text>
+			///<summary>@(kv.Key.SplitPascalCase()) APIs</summary>
+		    @CsharpNames.LowLevelClientNamespacePrefix@(kv.Key)@CsharpNames.ClientNamespaceSuffix @kv.Key { get; }
+</text>
+			continue;
+		}
+			var endpoints = kv.Value;
+			var methods = endpoints.SelectMany(e=>e.LowLevelClientMethods).ToList();
+			foreach(var method in methods)
+			{
+				await IncludeAsync("LowLevel/Client/Methods/MethodInterface.cshtml", method);
+			}
+		}
+	}
+}

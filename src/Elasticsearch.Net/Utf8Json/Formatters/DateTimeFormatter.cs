@@ -24,8 +24,9 @@
 
 using System;
 using System.Globalization;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	internal sealed class DateTimeFormatter : IJsonFormatter<DateTime>
     {

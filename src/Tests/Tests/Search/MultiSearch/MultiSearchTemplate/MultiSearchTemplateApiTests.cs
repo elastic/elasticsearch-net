@@ -7,8 +7,9 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
+using static Nest.Infer;
 
 namespace Tests.Search.MultiSearch.MultiSearchTemplate
 {
@@ -65,8 +66,8 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		protected override string UrlPath => "/project/_msearch/template";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.MultiSearchTemplate(f),
-			(c, f) => c.MultiSearchTemplateAsync(f),
+			(c, f) => c.MultiSearchTemplate(Index<Project>(), f),
+			(c, f) => c.MultiSearchTemplateAsync(Index<Project>(), f),
 			(c, r) => c.MultiSearchTemplate(r),
 			(c, r) => c.MultiSearchTemplateAsync(r)
 		);

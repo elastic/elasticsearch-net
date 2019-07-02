@@ -1,0 +1,28 @@
+@using System
+@using RazorLight
+@using System.Collections.Generic
+@using System.Linq
+@using System.Net.Cache
+@using ApiGenerator.Domain
+@using ApiGenerator
+@using CsQuery.ExtensionMethods.Internal
+@using Microsoft.CodeAnalysis.CSharp
+@inherits CodeTemplatePage<RestApiSpec>
+@{
+	RestApiSpec m = Model;
+}
+@{ await IncludeAsync("GeneratorNotice.cshtml", m); }
+namespace Nest
+{
+	internal static class ApiUrlsLookups 
+	{
+@foreach (var endpoint in m.Endpoints.Values)
+{
+	var propertyName = $"{endpoint.CsharpNames.Namespace}{endpoint.CsharpNames.MethodName}";
+	var paths = endpoint.RequestPartialImplementation.Paths;
+	<text>
+		internal static ApiUrls @(Raw(propertyName)) = new ApiUrls(new [] {@Raw(string.Join(", ", paths.Select(p=>$"\"{p.Path.TrimStart('/')}\"")))});
+	</text>
+}
+	}
+}

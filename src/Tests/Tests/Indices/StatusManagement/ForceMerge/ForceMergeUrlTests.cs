@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
-using static Tests.Framework.UrlTester;
+using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 using static Nest.Indices;
 
 namespace Tests.Indices.StatusManagement.ForceMerge
@@ -12,23 +12,23 @@ namespace Tests.Indices.StatusManagement.ForceMerge
 		[U] public async Task Urls()
 		{
 			await POST($"/_all/_forcemerge")
-					.Fluent(c => c.ForceMerge(All))
-					.Request(c => c.ForceMerge(new ForceMergeRequest(All)))
-					.FluentAsync(c => c.ForceMergeAsync(All))
-					.RequestAsync(c => c.ForceMergeAsync(new ForceMergeRequest(All)))
+					.Fluent(c => c.Indices.ForceMerge(All))
+					.Request(c => c.Indices.ForceMerge(new ForceMergeRequest(All)))
+					.FluentAsync(c => c.Indices.ForceMergeAsync(All))
+					.RequestAsync(c => c.Indices.ForceMergeAsync(new ForceMergeRequest(All)))
 				;
 			
 			await POST($"/_forcemerge")
-					.Request(c => c.ForceMerge(new ForceMergeRequest()))
-					.RequestAsync(c => c.ForceMergeAsync(new ForceMergeRequest()))
+					.Request(c => c.Indices.ForceMerge(new ForceMergeRequest()))
+					.RequestAsync(c => c.Indices.ForceMergeAsync(new ForceMergeRequest()))
 				;
 
 			var index = "index1,index2";
 			await POST($"/index1%2Cindex2/_forcemerge")
-					.Fluent(c => c.ForceMerge(index))
-					.Request(c => c.ForceMerge(new ForceMergeRequest(index)))
-					.FluentAsync(c => c.ForceMergeAsync(index))
-					.RequestAsync(c => c.ForceMergeAsync(new ForceMergeRequest(index)))
+					.Fluent(c => c.Indices.ForceMerge(index))
+					.Request(c => c.Indices.ForceMerge(new ForceMergeRequest(index)))
+					.FluentAsync(c => c.Indices.ForceMergeAsync(index))
+					.RequestAsync(c => c.Indices.ForceMergeAsync(new ForceMergeRequest(index)))
 				;
 		}
 	}

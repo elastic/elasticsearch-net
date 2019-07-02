@@ -1,16 +1,16 @@
 ﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
+using Tests.Framework.EndpointTests;
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
 	public class TasksListUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await UrlTester.GET("/_tasks")
-			.Fluent(c => c.ListTasks())
-			.Request(c => c.ListTasks(new ListTasksRequest()))
-			.FluentAsync(c => c.ListTasksAsync())
-			.RequestAsync(c => c.ListTasksAsync(new ListTasksRequest()));
+			.Fluent(c => c.Tasks.List())
+			.Request(c => c.Tasks.List(new ListTasksRequest()))
+			.FluentAsync(c => c.Tasks.ListAsync())
+			.RequestAsync(c => c.Tasks.ListAsync(new ListTasksRequest()));
 	}
 }

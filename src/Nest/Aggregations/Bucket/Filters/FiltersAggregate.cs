@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,7 +11,7 @@ namespace Nest
 		public long DocCount { get; set; }
 	}
 
-	//TODO this is mapped rather odly we always deserialize as if this is
+	//TODO this is mapped rather oddly we always deserialize as if this is
 	// {
 	//    "agg1" : { ...},
 	//	  "agg2" : { ... }

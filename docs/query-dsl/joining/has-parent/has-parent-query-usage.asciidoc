@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Joining/HasParent/HasParentQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Joining/HasParent/HasParentQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -24,9 +24,9 @@ q
     .Name("named_query")
     .Boost(1.1)
     .InnerHits(i => i.Explain())
-    .Score(true)
+    .Score()
     .Query(qq => qq.MatchAll())
-    .IgnoreUnmapped(true)
+    .IgnoreUnmapped()
 )
 ----
 
@@ -43,6 +43,26 @@ new HasParentQuery
     Query = new MatchAllQuery(),
     Score = true,
     IgnoreUnmapped = true
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "has_parent": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "parent_type": "developer",
+    "score": true,
+    "ignore_unmapped": true,
+    "query": {
+      "match_all": {}
+    },
+    "inner_hits": {
+      "explain": true
+    }
+  }
 }
 ----
 

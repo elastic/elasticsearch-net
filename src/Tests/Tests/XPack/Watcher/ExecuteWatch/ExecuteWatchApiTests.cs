@@ -6,9 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
-using Tests.Framework;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
 using Xunit;
 
 namespace Tests.XPack.Watcher.ExecuteWatch
@@ -96,7 +95,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Input(i => i
 						.Search(s => s
 							.Request(r => r
@@ -184,10 +183,10 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ExecuteWatch(f),
-			(client, f) => client.ExecuteWatchAsync(f),
-			(client, r) => client.ExecuteWatch(r),
-			(client, r) => client.ExecuteWatchAsync(r)
+			(client, f) => client.Watcher.Execute(f),
+			(client, f) => client.Watcher.ExecuteAsync(f),
+			(client, r) => client.Watcher.Execute(r),
+			(client, r) => client.Watcher.ExecuteAsync(r)
 		);
 
 		protected override void ExpectResponse(ExecuteWatchResponse response)
@@ -545,7 +544,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		{
 			foreach (var callUniqueValue in values)
 			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+				var putWatchResponse = client.Watcher.Put(callUniqueValue.Value, p => p
 					.Input(i => i
 						.Search(s => s
 							.Request(r => r
@@ -604,10 +603,10 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ExecuteWatch(f),
-			(client, f) => client.ExecuteWatchAsync(f),
-			(client, r) => client.ExecuteWatch(r),
-			(client, r) => client.ExecuteWatchAsync(r)
+			(client, f) => client.Watcher.Execute(f),
+			(client, f) => client.Watcher.ExecuteAsync(f),
+			(client, r) => client.Watcher.Execute(r),
+			(client, r) => client.Watcher.ExecuteAsync(r)
 		);
 
 		protected override void ExpectResponse(ExecuteWatchResponse response)

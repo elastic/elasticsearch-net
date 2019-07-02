@@ -5,12 +5,12 @@ using Tests.Core.Extensions;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
-	public class ActionIdsEqualityTests
+	public class NamesEqualityTests
 	{
 		[U] public void Eq()
 		{
-			ActionIds types = "foo,bar";
-			ActionIds[] equal = { "foo,bar", "bar,foo", "foo,  bar", "bar,  foo   " };
+			Names types = "foo,bar";
+			Names[] equal = { "foo,bar", "bar,foo", "foo,  bar", "bar,  foo   " };
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
@@ -20,8 +20,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 
 		[U] public void NotEq()
 		{
-			ActionIds types = "foo,bar";
-			ActionIds[] notEqual = { "foo,bar,x", "foo" };
+			Names types = "foo,bar";
+			Names[] notEqual = { "foo,bar,x", "foo" };
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
@@ -31,9 +31,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 
 		[U] public void Null()
 		{
-			Names value = "foo";
-			(value == null).Should().BeFalse();
-			(null == value).Should().BeFalse();
+			Names types = "foo,bar";
+			(types == null).Should().BeFalse();
+			(null == types).Should().BeFalse();
 		}
 	}
 }

@@ -28,7 +28,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 {
 	internal class MetaMethodInfoComparer : IEqualityComparer<MethodInfo>
 	{

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/WritingQueries.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/WritingQueries.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -395,7 +395,7 @@ and further examples.
 
 ==== Search response
 
-The response returned from a search query is an `ISearchResponse<T>`, where `T` is the
+The response returned from a search query is an `SearchResponse<T>`, where `T` is the
 generic parameter type defined in the search method call. There are a fair few properties
 on the response, but the most common you're likely to work with is `.Documents`,
 which we'll demonstrate below.
@@ -415,11 +415,12 @@ var searchResponse = client.Search<Project>(s => s
 var projects = searchResponse.Documents;
 ----
 
-`.Documents` is a convenient shorthand for
+`.Documents` is a convenient shorthand for retrieving the `_source`
+for each hit
 
 [source,csharp]
 ----
-searchResponse.HitsMetadata.Hits.Select(h => h.Source);
+var sources = searchResponse.HitsMetadata.Hits.Select(h => h.Source);
 ----
 
 and it's possible to retrieve other metadata about each hit from the hits collection. Here's
@@ -428,7 +429,7 @@ an example that retrieves the highlights for a hit, when using <<highlighting-us
 [source,csharp]
 ----
 var highlights = searchResponse.HitsMetadata.Hits.Select(h => h
-    .Highlights <1>
+    .Highlight <1>
 );
 ----
 <1> Get the highlights for the hit, when using highlighting

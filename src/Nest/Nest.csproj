@@ -2,11 +2,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\PublishArtifacts.build.props" />
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;net461</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
+    <PackageReference Condition="'$(OS)' != 'Windows_NT'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" /> 
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Requests.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Requests.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Descriptors.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Descriptors.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ElasticClient.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ElasticClient.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

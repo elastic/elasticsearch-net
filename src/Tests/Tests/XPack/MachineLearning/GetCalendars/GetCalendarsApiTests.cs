@@ -5,9 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.GetCalendars
 {
@@ -43,10 +41,10 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendars(f),
-			(client, f) => client.GetCalendarsAsync(f),
-			(client, r) => client.GetCalendars(r),
-			(client, r) => client.GetCalendarsAsync(r)
+			(client, f) => client.MachineLearning.GetCalendars(f),
+			(client, f) => client.MachineLearning.GetCalendarsAsync(f),
+			(client, r) => client.MachineLearning.GetCalendars(r),
+			(client, r) => client.MachineLearning.GetCalendarsAsync(r)
 		);
 
 		protected override GetCalendarsDescriptor NewDescriptor() => new GetCalendarsDescriptor().CalendarId(CallIsolatedValue);
@@ -78,10 +76,8 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 			{
 				PutJob(client, callUniqueValue.Value + "_job");
 				PutCalendar(client, callUniqueValue.Value);
-				for (int i = 0; i < 20; i++)
-				{
+				for (var i = 0; i < 20; i++)
 					PutCalendar(client, callUniqueValue.Value + "_" + i);
-				}
 			}
 		}
 
@@ -109,13 +105,11 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		protected override string UrlPath => $"_ml/calendars";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendars(),
-			(client, f) => client.GetCalendarsAsync(f),
-			(client, r) => client.GetCalendars(r),
-			(client, r) => client.GetCalendarsAsync(r)
+			(client, f) => client.MachineLearning.GetCalendars(f),
+			(client, f) => client.MachineLearning.GetCalendarsAsync(f),
+			(client, r) => client.MachineLearning.GetCalendars(r),
+			(client, r) => client.MachineLearning.GetCalendarsAsync(r)
 		);
-
-		protected override GetCalendarsDescriptor NewDescriptor() => new GetCalendarsDescriptor().Page(p => p.Size(10).From(10));
 
 		protected override void ExpectResponse(GetCalendarsResponse response)
 		{

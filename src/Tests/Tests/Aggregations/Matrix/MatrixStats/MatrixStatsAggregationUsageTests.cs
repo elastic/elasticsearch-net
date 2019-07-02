@@ -6,7 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.Integration;
+using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Matrix.MatrixStats
@@ -68,12 +68,13 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 				Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")
 			};
 
-		protected override void ExpectResponse(SearchResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var matrix = response.Aggregations.MatrixStats("matrixstats");
 			matrix.Should().NotBeNull();
 			matrix.Fields.Should().NotBeNull().And.HaveCount(2);
+			matrix.DocCount.Should().BeGreaterThan(0);
 
 			AssertField(matrix, "numberOfCommits");
 			AssertField(matrix, "numberOfContributors");

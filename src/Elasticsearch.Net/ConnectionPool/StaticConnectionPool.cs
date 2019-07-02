@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {

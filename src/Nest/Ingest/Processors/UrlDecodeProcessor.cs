@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -60,32 +60,21 @@ namespace Nest
 		bool? IUrlDecodeProcessor.IgnoreMissing { get; set; }
 		Field IUrlDecodeProcessor.TargetField { get; set; }
 
-		/// <summary>
-		/// The field to decode
-		/// </summary>
+		/// <inheritdoc cref="IUrlDecodeProcessor.Field" />
 		public UrlDecodeProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		/// <summary>
-		/// The field to decode
-		/// </summary>
-		public UrlDecodeProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		/// <inheritdoc cref="IUrlDecodeProcessor.Field" />
+		public UrlDecodeProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
-		/// <summary>
-		/// The field to assign the converted value to, by default <see cref="IUrlDecodeProcessor.Field" /> is updated in-place
-		/// </summary>
+		/// <inheritdoc cref="IUrlDecodeProcessor.TargetField" />
 		public UrlDecodeProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
-		/// <summary>
-		/// The field to assign the converted value to, by default <see cref="IUrlDecodeProcessor.Field" /> is updated in-place
-		/// </summary>
-		public UrlDecodeProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+		/// <inheritdoc cref="IUrlDecodeProcessor.TargetField" />
+		public UrlDecodeProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
-		/// <summary>
-		/// If <c>true</c> and <see cref="IUrlDecodeProcessor.Field" /> does not exist or is null,
-		/// the processor quietly exits without modifying the document. Default is <c>false</c>
-		/// </summary>
+		/// <inheritdoc cref="IUrlDecodeProcessor.IgnoreMissing" />
 		public UrlDecodeProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) =>
 			Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
