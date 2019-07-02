@@ -158,8 +158,11 @@ namespace Nest
 		private static void WriteScriptScore(ref JsonWriter writer, IScriptScoreFunction value, IJsonFormatterResolver formatterResolver)
 		{
 			writer.WritePropertyName("script_score");
-			var scriptFormatter = formatterResolver.GetFormatter<IScriptScoreFunction>();
-			scriptFormatter.Serialize(ref writer, value, formatterResolver);
+			writer.WriteBeginObject();
+			writer.WritePropertyName("script");
+			var scriptFormatter = formatterResolver.GetFormatter<IScript>();
+			scriptFormatter.Serialize(ref writer, value?.Script, formatterResolver);
+			writer.WriteEndObject();
 		}
 
 		private static void WriteRandomScore(ref JsonWriter writer, IRandomScoreFunction value, IJsonFormatterResolver formatterResolver)
