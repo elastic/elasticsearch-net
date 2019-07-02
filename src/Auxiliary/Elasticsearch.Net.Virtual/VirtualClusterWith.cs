@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.Virtual
 {
 	public static class VirtualClusterWith
 	{

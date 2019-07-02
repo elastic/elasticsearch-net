@@ -1,8 +1,7 @@
 using System;
 using System.Net.Http;
-using Nest;
 
-namespace Tests.Framework.VirtualClustering.Rules
+namespace Elasticsearch.Net.Virtual.Rules
 {
 	public interface IClientCallRule : IRule { }
 
@@ -10,7 +9,7 @@ namespace Tests.Framework.VirtualClustering.Rules
 	{
 		private IClientCallRule Self => this;
 
-		public ClientCallRule Fails(Union<TimesHelper.AllTimes, int> times, Union<Exception, int> errorState = null)
+		public ClientCallRule Fails(RuleOption<TimesHelper.AllTimes, int> times, RuleOption<Exception, int> errorState = null)
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
@@ -18,7 +17,7 @@ namespace Tests.Framework.VirtualClustering.Rules
 			return this;
 		}
 
-		public ClientCallRule Succeeds(Union<TimesHelper.AllTimes, int> times, int? validResponseCode = 200)
+		public ClientCallRule Succeeds(RuleOption<TimesHelper.AllTimes, int> times, int? validResponseCode = 200)
 		{
 			Self.Times = times;
 			Self.Succeeds = true;
@@ -26,7 +25,7 @@ namespace Tests.Framework.VirtualClustering.Rules
 			return this;
 		}
 
-		public ClientCallRule AfterSucceeds(Union<Exception, int> errorState = null)
+		public ClientCallRule AfterSucceeds(RuleOption<Exception, int> errorState = null)
 		{
 			Self.AfterSucceeds = errorState;
 			return this;
@@ -40,6 +39,6 @@ namespace Tests.Framework.VirtualClustering.Rules
 
 		public ClientCallRule SucceedAlways(int? validResponseCode = 200) => Succeeds(TimesHelper.Always, validResponseCode);
 
-		public ClientCallRule FailAlways(Union<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
+		public ClientCallRule FailAlways(RuleOption<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
 	}
 }

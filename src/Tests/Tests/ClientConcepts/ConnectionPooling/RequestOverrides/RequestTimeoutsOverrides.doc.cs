@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net.Virtual;
+using Elasticsearch.Net.Virtual.Audit;
 using Tests.Framework;
-using Tests.Framework.VirtualClustering;
-using Tests.Framework.VirtualClustering.Audit;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides

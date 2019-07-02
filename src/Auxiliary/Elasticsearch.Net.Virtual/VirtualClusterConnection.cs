@@ -5,15 +5,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
-using FluentAssertions;
-using Nest;
-using Tests.Framework.VirtualClustering.MockResponses;
-using Tests.Framework.VirtualClustering.Providers;
-using Tests.Framework.VirtualClustering.Rules;
-using HttpMethod = Elasticsearch.Net.HttpMethod;
+using Elasticsearch.Net.Virtual.MockResponses;
+using Elasticsearch.Net.Virtual.Providers;
+using Elasticsearch.Net.Virtual.Rules;
 
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.Virtual
 {
 	public class VirtualClusterConnection : InMemoryConnection
 	{
@@ -71,7 +67,9 @@ namespace Tests.Framework.VirtualClustering
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
-			_calls.Should().ContainKey(requestData.Uri.Port);
+			if (!_calls.ContainsKey(requestData.Uri.Port))
+				throw new Exception($"Expected a call to happen on port {requestData.Uri.Port} but received none");
+			
 			try
 			{
 				var state = _calls[requestData.Uri.Port];
@@ -83,7 +81,7 @@ namespace Tests.Framework.VirtualClustering
 						_cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => UpdateCluster(r.NewClusterState),
-						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
+						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.PublishAddressOverride,_cluster.ElasticsearchVersion, _cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))
@@ -195,7 +193,7 @@ namespace Tests.Framework.VirtualClustering
 			return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
-		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, Union<Exception, int> returnOverride = null)
+		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, RuleOption<Exception, int> returnOverride = null)
 			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{

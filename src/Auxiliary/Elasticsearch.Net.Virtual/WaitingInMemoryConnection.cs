@@ -1,9 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.Virtual
 {
 	public class WaitingInMemoryConnection : InMemoryConnection
 	{
@@ -20,8 +19,8 @@ namespace Tests.Framework.VirtualClustering
 
 		public override async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 		{
-			await Task.Delay(_waitTime, cancellationToken);
-			return await base.RequestAsync<TResponse>(requestData, cancellationToken);
+			await Task.Delay(_waitTime, cancellationToken).ConfigureAwait(false);
+			return await base.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
 		}
 	}
 }

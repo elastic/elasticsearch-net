@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 
-namespace Tests.Framework.VirtualClustering.Audit
+namespace Elasticsearch.Net.Virtual.Audit
 {
 	public class CallTraceState
 	{

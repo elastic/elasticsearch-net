@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Elasticsearch.Net;
-using Tests.Framework.VirtualClustering.Providers;
-using Tests.Framework.VirtualClustering.Rules;
+using Elasticsearch.Net.Virtual.Providers;
+using Elasticsearch.Net.Virtual.Rules;
 
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.Virtual
 {
 	public class VirtualCluster
 	{
@@ -24,10 +23,16 @@ namespace Tests.Framework.VirtualClustering
 		internal string PublishAddressOverride { get; private set; }
 
 		internal bool SniffShouldReturnFqnd { get; private set; }
+		internal string ElasticsearchVersion { get; private set; } = "7.0.0";
 
 		public VirtualCluster SniffShouldReturnFqdn()
 		{
 			SniffShouldReturnFqnd = true;
+			return this;
+		}
+		public VirtualCluster SniffElasticsearchVersionNumber(string version)
+		{
+			ElasticsearchVersion = version;
 			return this;
 		}
 

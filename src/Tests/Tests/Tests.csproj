@@ -11,6 +11,8 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
+    <ProjectReference Include="..\..\Auxiliary\Elasticsearch.Net.Virtual\Elasticsearch.Net.Virtual.csproj" />
+      
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
     <PackageReference Include="Bogus" Version="22.1.2" />

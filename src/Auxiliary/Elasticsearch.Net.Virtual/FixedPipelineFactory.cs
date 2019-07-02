@@ -1,11 +1,8 @@
-using Elasticsearch.Net;
-using Nest;
-
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.Virtual
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{
-		public FixedPipelineFactory(IConnectionSettingsValues connectionSettings, IDateTimeProvider dateTimeProvider)
+		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider)
 		{
 			DateTimeProvider = dateTimeProvider;
 			MemoryStreamFactory = new MemoryStreamFactory();
@@ -14,16 +11,16 @@ namespace Tests.Framework.VirtualClustering
 			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters());
 		}
 
-		public ElasticClient Client => new ElasticClient(Transport);
+		public ElasticLowLevelClient Client => new ElasticLowLevelClient(Transport);
 
 		public IRequestPipeline Pipeline { get; }
 
 		private IDateTimeProvider DateTimeProvider { get; }
 		private MemoryStreamFactory MemoryStreamFactory { get; }
-		private IConnectionSettingsValues Settings { get; }
+		private IConnectionConfigurationValues Settings { get; }
 
-		private Transport<IConnectionSettingsValues> Transport =>
-			new Transport<IConnectionSettingsValues>(Settings, this, DateTimeProvider, MemoryStreamFactory);
+		private Transport<IConnectionConfigurationValues> Transport =>
+			new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory);
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
 			IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters
