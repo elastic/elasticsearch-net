@@ -1,5 +1,10 @@
 using System;
+#if DOTNETCORE
 using System.Net.Http;
+using TheException = System.Net.Http.HttpRequestException;
+#else
+using TheException = System.Net.WebException;
+#endif
 
 namespace Elasticsearch.Net.Virtual.Rules
 {
@@ -13,7 +18,7 @@ namespace Elasticsearch.Net.Virtual.Rules
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
-			Self.Return = errorState ?? new HttpRequestException();
+			Self.Return = errorState ?? new TheException();
 			return this;
 		}
 
@@ -33,7 +38,7 @@ namespace Elasticsearch.Net.Virtual.Rules
 
 		public ClientCallRule ThrowsAfterSucceeds()
 		{
-			Self.AfterSucceeds = new HttpRequestException();
+			Self.AfterSucceeds = new TheException();
 			return this;
 		}
 

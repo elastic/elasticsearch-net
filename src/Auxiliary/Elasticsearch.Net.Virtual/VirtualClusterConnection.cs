@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+#if DOTNETCORE
 using System.Net.Http;
+using TheException = System.Net.Http.HttpRequestException;
+#else
+using TheException = System.Net.WebException;
+#endif
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Virtual.MockResponses;
@@ -130,7 +135,7 @@ namespace Elasticsearch.Net.Virtual
 					CallResponse
 				);
 			}
-			catch (HttpRequestException e)
+			catch (TheException e)
 			{
 				return ResponseBuilder.ToResponse<TResponse>(requestData, e, null, null, Stream.Null);
 			}
@@ -184,7 +189,7 @@ namespace Elasticsearch.Net.Virtual
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				_dateTimeProvider.ChangeTime(d => d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new HttpRequestException(
+					throw new TheException(
 						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
@@ -205,7 +210,7 @@ namespace Elasticsearch.Net.Virtual
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				_dateTimeProvider.ChangeTime(d => d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new HttpRequestException(
+					throw new TheException(
 						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
@@ -228,7 +233,7 @@ namespace Elasticsearch.Net.Virtual
 			var ret = returnOverride ?? rule.Return;
 
 			if (ret == null)
-				throw new HttpRequestException();
+				throw new TheException();
 
 			return ret.Match(
 				(e) => throw e,
