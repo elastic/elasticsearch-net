@@ -97,6 +97,7 @@ module Release =
             )
 
         match p with 
+        | Project ElasticsearchNetVirtual 
         | Project Nest -> 
             let esDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
             esDeps |> Seq.iter(fun e ->
