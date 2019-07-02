@@ -12,6 +12,8 @@ namespace Elasticsearch.Net.Virtual
 		private readonly ConnectionConfiguration _settings;
 		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IElasticsearchResponse>> _asyncCall;
 		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IElasticsearchResponse> _syncCall;
+		
+		private class VirtualResponse : ElasticsearchResponseBase { }
 
 		public VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings)
 		{
@@ -19,13 +21,13 @@ namespace Elasticsearch.Net.Virtual
 			_settings = settings;
 			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider);
 
-			_syncCall = (c, r) => c.Search<StringResponse>(PostData.Serializable(new {}), new SearchRequestParameters
+			_syncCall = (c, r) => c.Search<VirtualResponse>(PostData.Serializable(new {}), new SearchRequestParameters
 			{
 					RequestConfiguration = r?.Invoke(new RequestConfigurationDescriptor(null))
 			});
 			_asyncCall = async (c, r) =>
 			{
-				var res = await c.SearchAsync<StringResponse>
+				var res = await c.SearchAsync<VirtualResponse>
 				(
 					PostData.Serializable(new { }),
 					new SearchRequestParameters { RequestConfiguration = r?.Invoke(new RequestConfigurationDescriptor(null)) },

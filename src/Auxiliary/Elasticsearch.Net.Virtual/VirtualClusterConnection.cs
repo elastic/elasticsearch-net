@@ -81,7 +81,7 @@ namespace Elasticsearch.Net.Virtual
 						_cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => UpdateCluster(r.NewClusterState),
-						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.PublishAddressOverride,_cluster.ElasticsearchVersion, _cluster.SniffShouldReturnFqnd)
+						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.ElasticsearchVersion,_cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))

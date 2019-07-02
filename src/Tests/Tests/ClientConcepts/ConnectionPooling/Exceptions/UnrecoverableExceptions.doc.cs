@@ -119,13 +119,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) // <1> Always return a 401 bad response with a HTML response on client calls
 				.StaticConnectionPool()
-				.Settings(s=>s.SkipDeserializationForStatusCodes(401))
+				.Settings(s => s.SkipDeserializationForStatusCodes(401))
 			);
 
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
 					{ AuditEvent.PingSuccess, 9200 },
-					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
 				},
 				(e) =>
 				{
