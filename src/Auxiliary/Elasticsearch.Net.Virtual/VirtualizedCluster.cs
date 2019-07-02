@@ -37,6 +37,7 @@ namespace Elasticsearch.Net.Virtual
 			};
 		}
 
+		public VirtualClusterConnection Connection => Client.Settings.Connection as VirtualClusterConnection;
 		public IConnectionPool ConnectionPool => Client.Settings.ConnectionPool;
 		private ElasticLowLevelClient Client => _fixedRequestPipeline?.Client;
 

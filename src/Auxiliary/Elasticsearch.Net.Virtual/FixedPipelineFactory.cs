@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Virtual
 			new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory);
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
 		) =>
 			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new SearchRequestParameters());
 	}

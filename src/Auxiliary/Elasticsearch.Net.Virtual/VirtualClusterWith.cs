@@ -20,5 +20,6 @@ namespace Elasticsearch.Net.Virtual
 
 		public static VirtualCluster Nodes(IEnumerable<Node> nodes) =>
 			new VirtualCluster(nodes);
+
 	}
 }

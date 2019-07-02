@@ -11,6 +11,16 @@ using Elasticsearch.Net.Virtual.Rules;
 
 namespace Elasticsearch.Net.Virtual
 {
+	/// <summary>
+	/// An in memory connection that uses a rule engine to return different responses for sniffs/pings and API calls.
+	/// <pre>
+	/// Either instantiate through the static <see cref="Success"/> or <see cref="Error"/> for the simplest use-cases
+	/// </pre>
+	/// <pre>
+	/// Or use <see cref="VirtualClusterWith"/> to chain together a rule engine until
+	/// <see cref="SealedVirtualCluster.VirtualClusterConnection"/> becomes available
+	/// </pre>
+	/// </summary>
 	public class VirtualClusterConnection : InMemoryConnection
 	{
 		private static readonly object Lock = new object();
@@ -21,11 +31,27 @@ namespace Elasticsearch.Net.Virtual
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private IDictionary<int, State> _calls = new Dictionary<int, State>();
 
-		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
+		internal VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
 		{
 			UpdateCluster(cluster);
 			_dateTimeProvider = dateTimeProvider;
 		}
+
+		public static VirtualClusterConnection Success(byte[] response) =>
+			VirtualClusterWith
+				.Nodes(1)
+				.ClientCalls(r => r.SucceedAlways().ReturnByteResponse(response))
+				.StaticConnectionPool()
+				.AllDefaults()
+				.Connection;
+		
+		public static VirtualClusterConnection Error() =>
+			VirtualClusterWith
+				.Nodes(1)
+				.ClientCalls(r => r.FailAlways(400))
+				.StaticConnectionPool()
+				.AllDefaults()
+				.Connection;
 
 		private static object DefaultResponse
 		{

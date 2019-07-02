@@ -24,5 +24,9 @@ namespace Elasticsearch.Net.Virtual
 
 		public VirtualizedCluster Settings(Func<ConnectionConfiguration, ConnectionConfiguration> selector) =>
 			new VirtualizedCluster(_dateTimeProvider, selector(CreateSettings()));
+		
+		public VirtualClusterConnection VirtualClusterConnection(Func<ConnectionConfiguration, ConnectionConfiguration> selector = null) =>
+			new VirtualizedCluster(_dateTimeProvider, selector == null ? CreateSettings() : selector(CreateSettings()))
+				.Connection;
 	}
 }
