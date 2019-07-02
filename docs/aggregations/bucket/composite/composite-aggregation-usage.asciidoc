@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Composite/CompositeAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Composite/CompositeAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -90,6 +90,56 @@ new CompositeAggregation("my_buckets")
             Field = Field<Project>(p => p.Tags.First().Name)
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "my_buckets": {
+    "composite": {
+      "sources": [
+        {
+          "branches": {
+            "terms": {
+              "field": "branches.keyword"
+            }
+          }
+        },
+        {
+          "started": {
+            "date_histogram": {
+              "field": "startedOn",
+              "interval": "month"
+            }
+          }
+        },
+        {
+          "branch_count": {
+            "histogram": {
+              "field": "requiredBranches",
+              "interval": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "aggs": {
+      "project_tags": {
+        "nested": {
+          "path": "tags"
+        },
+        "aggs": {
+          "tags": {
+            "terms": {
+              "field": "tags.name"
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ----
 
@@ -192,6 +242,42 @@ new CompositeAggregation("my_buckets")
             Field = Field<Project>(p => p.Tags.First().Name)
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "my_buckets": {
+    "composite": {
+      "sources": [
+        {
+          "branches": {
+            "terms": {
+              "field": "branches.keyword",
+              "order": "asc",
+              "missing_bucket": true
+            }
+          }
+        }
+      ]
+    },
+    "aggs": {
+      "project_tags": {
+        "nested": {
+          "path": "tags"
+        },
+        "aggs": {
+          "tags": {
+            "terms": {
+              "field": "tags.name"
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

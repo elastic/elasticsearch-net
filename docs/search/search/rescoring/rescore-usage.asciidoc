@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Search/Rescoring/RescoreUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Search/Rescoring/RescoreUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -105,6 +105,56 @@ new SearchRequest<Project>
             }
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "from": 10,
+  "size": 20,
+  "query": {
+    "match_all": {}
+  },
+  "rescore": [
+    {
+      "window_size": 20,
+      "query": {
+        "score_mode": "multiply",
+        "rescore_query": {
+          "constant_score": {
+            "filter": {
+              "terms": {
+                "tags": [
+                  "eos",
+                  "sit",
+                  "sed"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "query": {
+        "score_mode": "total",
+        "rescore_query": {
+          "function_score": {
+            "functions": [
+              {
+                "random_score": {
+                  "seed": 1337,
+                  "field": "_seq_no"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
 }
 ----
 

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Matrix/MatrixStats/MatrixStatsAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Matrix/MatrixStats/MatrixStatsAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -53,6 +53,29 @@ new MatrixStatsAggregation("matrixstats", Field<Project>(p => p.NumberOfCommits)
     },
     Mode = MatrixStatsMode.Median,
     Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "matrixstats": {
+    "meta": {
+      "foo": "bar"
+    },
+    "matrix_stats": {
+      "fields": [
+        "numberOfCommits",
+        "numberOfContributors"
+      ],
+      "missing": {
+        "numberOfCommits": 0.0,
+        "numberOfContributors": 1.0
+      },
+      "mode": "median"
+    }
+  }
 }
 ----
 

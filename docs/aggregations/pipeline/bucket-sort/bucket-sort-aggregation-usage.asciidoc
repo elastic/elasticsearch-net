@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/BucketSort/BucketSortAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/BucketSort/BucketSortAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -59,6 +59,40 @@ new DateHistogramAggregation("projects_started_per_month")
             Size = 3,
             GapPolicy = GapPolicy.InsertZeros
         }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_bucket_sort": {
+        "bucket_sort": {
+          "sort": [
+            {
+              "commits": {
+                "order": "desc"
+              }
+            }
+          ],
+          "from": 0,
+          "size": 3,
+          "gap_policy": "insert_zeros"
+        }
+      }
+    }
+  }
 }
 ----
 

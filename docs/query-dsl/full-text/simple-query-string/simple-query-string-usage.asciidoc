@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/SimpleQueryString/SimpleQueryStringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/SimpleQueryString/SimpleQueryStringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -58,6 +58,32 @@ new SimpleQueryStringQuery
     FuzzyMaxExpansions = 50,
     FuzzyTranspositions = true,
     AutoGenerateSynonymsPhraseQuery = false
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "simple_query_string": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "fields": [
+      "description",
+      "myOtherField"
+    ],
+    "query": "hello world",
+    "analyzer": "standard",
+    "default_operator": "or",
+    "flags": "AND|NEAR",
+    "lenient": true,
+    "analyze_wildcard": true,
+    "minimum_should_match": "30%",
+    "fuzzy_prefix_length": 0,
+    "fuzzy_max_expansions": 50,
+    "fuzzy_transpositions": true,
+    "auto_generate_synonyms_phrase_query": false
+  }
 }
 ----
 

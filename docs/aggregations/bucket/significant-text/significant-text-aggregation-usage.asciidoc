@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/SignificantText/SignificantTextAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/SignificantText/SignificantTextAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -56,6 +56,19 @@ new SignificantTextAggregation("significant_descriptions")
 {
     Field = Infer.Field<Project>(p => p.Description),
     FilterDuplicateText = true
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "significant_descriptions": {
+    "significant_text": {
+      "field": "description",
+      "filter_duplicate_text": true
+    }
+  }
 }
 ----
 

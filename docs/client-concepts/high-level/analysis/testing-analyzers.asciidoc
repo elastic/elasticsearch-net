@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/HighLevel/Analysis/TestingAnalyzers.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Analysis/TestingAnalyzers.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -34,54 +34,47 @@ var analyzeResponse = client.Indices.Analyze(a => a
 
 This returns the following response from Elasticsearch
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    tokens = new object[]
+  "tokens": [
     {
-        new
-        {
-            token = "f",
-            start_offset = 0,
-            end_offset = 1,
-            type = "<ALPHANUM>",
-            position = 0
-        },
-        new
-        {
-            token = "is",
-            start_offset = 3,
-            end_offset = 5,
-            type = "<ALPHANUM>",
-            position = 1
-        },
-        new
-        {
-            token = "the",
-            start_offset = 6,
-            end_offset = 9,
-            type = "<ALPHANUM>",
-            position = 2
-        },
-        new
-        {
-            token = "superior",
-            start_offset = 10,
-            end_offset = 18,
-            type = "<ALPHANUM>",
-            position = 3
-        },
-        new
-        {
-            token = "language",
-            start_offset = 19,
-            end_offset = 27,
-            type = "<ALPHANUM>",
-            position = 4
-        }
+      "token": "f",
+      "start_offset": 0,
+      "end_offset": 1,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "is",
+      "start_offset": 3,
+      "end_offset": 5,
+      "type": "<ALPHANUM>",
+      "position": 1
+    },
+    {
+      "token": "the",
+      "start_offset": 6,
+      "end_offset": 9,
+      "type": "<ALPHANUM>",
+      "position": 2
+    },
+    {
+      "token": "superior",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "language",
+      "start_offset": 19,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 4
     }
-};
+  ]
+}
 ----
 
 which is deserialized to an instance of `AnalyzeResponse` by NEST
@@ -118,38 +111,35 @@ var analyzeResponse = client.Indices.Analyze(a => a
     .Filter("lowercase", "stop")
     .Text("F# is THE SUPERIOR language :)")
 );
+----
 
-//json
-var expected = new
+[source,javascript]
+----
 {
-    tokens = new object[]
+  "tokens": [
     {
-        new
-        {
-            token = "f",
-            start_offset = 0,
-            end_offset = 1,
-            type = "<ALPHANUM>",
-            position = 0
-        },
-        new
-        {
-            token = "superior",
-            start_offset = 10,
-            end_offset = 18,
-            type = "<ALPHANUM>",
-            position = 3
-        },
-        new
-        {
-            token = "language",
-            start_offset = 19,
-            end_offset = 27,
-            type = "<ALPHANUM>",
-            position = 4
-        }
+      "token": "f",
+      "start_offset": 0,
+      "end_offset": 1,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "superior",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "language",
+      "start_offset": 19,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 4
     }
-};
+  ]
+}
 ----
 
 Great! This has removed stop words, but we still have `F#` tokenized as `"f"`
@@ -231,46 +221,40 @@ var analyzeResponse = client.Indices.Analyze(a => a
 
 The output now looks like
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    tokens = new object[]
+  "tokens": [
     {
-        new
-        {
-            token = "fsharp",
-            start_offset = 0,
-            end_offset = 2,
-            type = "<ALPHANUM>",
-            position = 0
-        },
-        new
-        {
-            token = "superior",
-            start_offset = 10,
-            end_offset = 18,
-            type = "<ALPHANUM>",
-            position = 3
-        },
-        new
-        {
-            token = "great",
-            start_offset = 10,
-            end_offset = 18,
-            type = "SYNONYM",
-            position = 3
-        },
-        new
-        {
-            token = "language",
-            start_offset = 19,
-            end_offset = 27,
-            type = "<ALPHANUM>",
-            position = 4
-        }
+      "token": "fsharp",
+      "start_offset": 0,
+      "end_offset": 2,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "superior",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "great",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "SYNONYM",
+      "position": 3
+    },
+    {
+      "token": "language",
+      "start_offset": 19,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 4
     }
-};
+  ]
+}
 ----
 
 Exactly what we were after!

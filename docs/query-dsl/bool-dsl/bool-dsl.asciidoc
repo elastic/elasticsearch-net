@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/BoolDsl/BoolDsl.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/BoolDsl/BoolDsl.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -85,40 +85,30 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    query = new
-    {
-        @bool = new
+  "query": {
+    "bool": {
+      "should": [
         {
-            should = new object[]
-            {
-                new
-                {
-                    term = new
-                    {
-                        name = new
-                        {
-                            value = "x"
-                        }
-                    }
-                },
-                new
-                {
-                    term = new
-                    {
-                        name = new
-                        {
-                            value = "y"
-                        }
-                    }
-                }
+          "term": {
+            "name": {
+              "value": "x"
             }
+          }
+        },
+        {
+          "term": {
+            "name": {
+              "value": "y"
+            }
+          }
         }
+      ]
     }
-};
+  }
+}
 ----
 
 [[binary-and-operator]]
@@ -150,40 +140,30 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    query = new
-    {
-        @bool = new
+  "query": {
+    "bool": {
+      "must": [
         {
-            must = new object[]
-            {
-                new
-                {
-                    term = new
-                    {
-                        name = new
-                        {
-                            value = "x"
-                        }
-                    }
-                },
-                new
-                {
-                    term = new
-                    {
-                        name = new
-                        {
-                            value = "y"
-                        }
-                    }
-                }
+          "term": {
+            "name": {
+              "value": "x"
             }
+          }
+        },
+        {
+          "term": {
+            "name": {
+              "value": "y"
+            }
+          }
         }
+      ]
     }
-};
+  }
+}
 ----
 
 A naive implementation of operator overloading would rewrite
@@ -259,30 +239,23 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    query = new
-    {
-        @bool = new
+  "query": {
+    "bool": {
+      "must_not": [
         {
-            must_not = new object[]
-            {
-                new
-                {
-                    term = new
-                    {
-                        name = new
-                        {
-                            value = "x"
-                        }
-                    }
-                }
+          "term": {
+            "name": {
+              "value": "x"
             }
+          }
         }
+      ]
     }
-};
+  }
+}
 ----
 
 Two queries marked with the unary `!`  operator can be combined with the `&&` operator to form
@@ -327,30 +300,23 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    query = new
-    {
-        @bool = new
+  "query": {
+    "bool": {
+      "filter": [
         {
-            filter = new object[]
-            {
-                new
-                {
-                    term = new
-                    {
-                        name = new
-                        {
-                            value = "x"
-                        }
-                    }
-                }
+          "term": {
+            "name": {
+              "value": "x"
             }
+          }
         }
+      ]
     }
-};
+  }
+}
 ----
 
 This runs the {ref_current}/query-filter-context.html[query in a filter context],

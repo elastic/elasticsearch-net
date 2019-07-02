@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Children/ChildrenAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Children/ChildrenAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -44,6 +44,35 @@ new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
         new AverageAggregation("average_per_child", "confidenceFactor")
         && new MaxAggregation("max_per_child", "confidenceFactor")
         && new MinAggregation("min_per_child", "confidenceFactor")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "name_of_child_agg": {
+    "children": {
+      "type": "commits"
+    },
+    "aggs": {
+      "average_per_child": {
+        "avg": {
+          "field": "confidenceFactor"
+        }
+      },
+      "max_per_child": {
+        "max": {
+          "field": "confidenceFactor"
+        }
+      },
+      "min_per_child": {
+        "min": {
+          "field": "confidenceFactor"
+        }
+      }
+    }
+  }
 }
 ----
 

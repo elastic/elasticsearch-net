@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/Histogram/HistogramAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Histogram/HistogramAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -40,6 +40,24 @@ new HistogramAggregation("commits")
     Missing = 0,
     Order = HistogramOrder.KeyDescending,
     Offset = 1.1
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "histogram": {
+      "field": "numberOfCommits",
+      "interval": 100.0,
+      "missing": 0.0,
+      "order": {
+        "_key": "desc"
+      },
+      "offset": 1.1
+    }
+  }
 }
 ----
 

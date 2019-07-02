@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/RequestOverrides/DisableSniffPingPerRequest.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/RequestOverrides/DisableSniffPingPerRequest.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -65,8 +65,11 @@ audit = await audit.TraceCalls(
 );
 ----
 <1> disable sniffing
+
 <2> first call is a successful ping
+
 <3> sniff on startup call happens here, on the second call
+
 <4> No sniff on startup again
 
 Now, let's disable pinging on the request 
@@ -90,6 +93,7 @@ audit = await audit.TraceCall(
 );
 ----
 <1> disable ping
+
 <2> No ping after sniffing
 
 Finally, let's demonstrate disabling both sniff and ping on the request 
@@ -111,5 +115,6 @@ audit = await audit.TraceCall(
 );
 ----
 <1> diable ping and sniff
+
 <2> no ping or sniff before the call
 

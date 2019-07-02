@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/BucketSelector/BucketSelectorAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/BucketSelector/BucketSelectorAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -54,6 +54,36 @@ new DateHistogramAggregation("projects_started_per_month")
         {
             Script = new InlineScript("params.totalCommits >= 500")
         }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_bucket_filter": {
+        "bucket_selector": {
+          "buckets_path": {
+            "totalCommits": "commits"
+          },
+          "script": {
+            "source": "params.totalCommits >= 500"
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

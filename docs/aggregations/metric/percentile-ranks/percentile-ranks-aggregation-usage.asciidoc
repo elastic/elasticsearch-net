@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Metric/PercentileRanks/PercentileRanksAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Metric/PercentileRanks/PercentileRanksAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -46,6 +46,29 @@ new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOf
     },
     Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
     Missing = 0
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits_outlier": {
+    "percentile_ranks": {
+      "field": "numberOfCommits",
+      "values": [
+        15.0,
+        30.0
+      ],
+      "tdigest": {
+        "compression": 200.0
+      },
+      "script": {
+        "source": "doc['numberOfCommits'].value * 1.2"
+      },
+      "missing": 0.0
+    }
+  }
 }
 ----
 

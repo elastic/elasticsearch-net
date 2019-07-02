@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/WritingAggregations.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/WritingAggregations.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -27,6 +27,36 @@ Three different ways, yikes that's a lot to take in! Let's go over them one at a
 want to use each.
 
 This is the json output for each example
+
+[source,javascript]
+----
+{
+  "aggs": {
+    "name_of_child_agg": {
+      "children": {
+        "type": "commits"
+      },
+      "aggs": {
+        "average_per_child": {
+          "avg": {
+            "field": "confidenceFactor"
+          }
+        },
+        "max_per_child": {
+          "max": {
+            "field": "confidenceFactor"
+          }
+        },
+        "min_per_child": {
+          "min": {
+            "field": "confidenceFactor"
+          }
+        }
+      }
+    }
+  }
+}
+----
 
 [float]
 === Fluent DSL

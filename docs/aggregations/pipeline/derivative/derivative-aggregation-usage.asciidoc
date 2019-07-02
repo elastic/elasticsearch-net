@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/Derivative/DerivativeAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/Derivative/DerivativeAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -48,23 +48,28 @@ new DateHistogramAggregation("projects_started_per_month")
 }
 ----
 
-==== Handling Responses
-
-[source,csharp]
+[source,javascript]
+.Example json output
 ----
-response.ShouldBeValid();
-
-var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
-projectsPerMonth.Should().NotBeNull();
-projectsPerMonth.Buckets.Should().NotBeNull();
-projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-
-// derivative not calculated for the first bucket
-foreach (var item in projectsPerMonth.Buckets.Skip(1))
 {
-    var commitsDerivative = item.Derivative("commits_derivative");
-    commitsDerivative.Should().NotBeNull();
-    commitsDerivative.Value.Should().NotBe(null);
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_derivative": {
+        "derivative": {
+          "buckets_path": "commits"
+        }
+      }
+    }
+  }
 }
 ----
 

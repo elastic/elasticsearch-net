@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/TermLevel/Term/TermQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/TermLevel/Term/TermQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -41,12 +41,38 @@ new TermQuery
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "term": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "value": "project description"
+    }
+  }
+}
+----
+
 [float]
 == Verbatim term query
 
 By default an empty term is conditionless so will be rewritten. Sometimes sending an empty term to
 match nothing makes sense. You can either use the `ConditionlessQuery` construct from NEST to provide a fallback or make the
 query verbatim as followed:
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Term(c => c
+    .Verbatim()
+    .Field(p => p.Description)
+    .Value(string.Empty)
+)
+----
 
 ==== Object Initializer syntax example
 
@@ -60,15 +86,15 @@ new TermQuery
 }
 ----
 
-==== Fluent DSL example
-
-[source,csharp]
+[source,javascript]
+.Example json output
 ----
-q
-.Term(c => c
-    .Verbatim()
-    .Field(p => p.Description)
-    .Value(string.Empty)
-)
+{
+  "term": {
+    "description": {
+      "value": ""
+    }
+  }
+}
 ----
 

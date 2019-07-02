@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/Search/Collapsing/FieldCollapseUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Search/Collapsing/FieldCollapseUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -49,6 +49,22 @@ new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
             From = 1
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "collapse": {
+    "field": "state",
+    "max_concurrent_group_searches": 1000,
+    "inner_hits": {
+      "from": 1,
+      "name": "stateofbeing",
+      "size": 5
+    }
+  }
 }
 ----
 
@@ -114,6 +130,35 @@ new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
             }
         }
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "_source": {
+    "excludes": [
+      "*"
+    ]
+  },
+  "collapse": {
+    "field": "state",
+    "inner_hits": {
+      "_source": {
+        "excludes": [
+          "*"
+        ]
+      },
+      "collapse": {
+        "field": "name"
+      },
+      "from": 1,
+      "name": "stateofbeing",
+      "size": 5
+    },
+    "max_concurrent_group_searches": 1000
+  }
 }
 ----
 

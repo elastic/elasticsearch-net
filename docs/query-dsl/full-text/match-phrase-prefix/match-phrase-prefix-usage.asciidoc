@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/FullText/MatchPhrasePrefix/MatchPhrasePrefixUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/MatchPhrasePrefix/MatchPhrasePrefixUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -44,6 +44,23 @@ new MatchPhrasePrefixQuery
     Query = "hello worl",
     MaxExpansions = 2,
     Slop = 2
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "match_phrase_prefix": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "query": "hello worl",
+      "analyzer": "standard",
+      "max_expansions": 2,
+      "slop": 2
+    }
+  }
 }
 ----
 
