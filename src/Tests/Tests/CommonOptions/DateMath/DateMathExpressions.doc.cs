@@ -61,11 +61,41 @@ namespace Tests.CommonOptions.DateMath
 			 * anchor will be an actual `DateTime`, even after a serialization/deserialization round trip
 			 */
 			var date = new DateTime(2015, 05, 05);
-			Expect("2015-05-05T00:00:00")
+
+			/**
+			 * will serialize to
+			 */
+			//json
+			var expected = "2015-05-05T00:00:00";
+
+			// hide
+			Expect(expected)
 				.WhenSerializing<Nest.DateMath>(date)
 				.AssertSubject(dateMath => ((IDateMath)dateMath)
 					.Anchor.Match(
 						d => d.Should().Be(date),
+						s => s.Should().BeNull()
+					)
+				);
+
+			/**
+			 * When the `DateTime` is local or UTC, the time zone information is included.
+			 * For example, for a UTC `DateTime`
+			 */
+			var utcDate = new DateTime(2015, 05, 05, 0, 0, 0, DateTimeKind.Utc);
+
+			/**
+			 * will serialize to
+			 */
+			//json
+			expected = "2015-05-05T00:00:00Z";
+
+			// hide
+			Expect(expected)
+				.WhenSerializing<Nest.DateMath>(utcDate)
+				.AssertSubject(dateMath => ((IDateMath)dateMath)
+					.Anchor.Match(
+						d => d.Should().Be(utcDate),
 						s => s.Should().BeNull()
 					)
 				);
