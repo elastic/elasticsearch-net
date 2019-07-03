@@ -7,5 +7,11 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
     </ItemGroup>
+    <ItemGroup Condition="'$(TestPackageVersion)'!=''">
+        <PackageReference Include="Elasticsearch.Net" Version="$(TestPackageVersion)" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TestPackageVersion)'==''">
+        <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    </ItemGroup>
 
 </Project>
