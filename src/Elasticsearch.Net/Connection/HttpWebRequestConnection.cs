@@ -142,7 +142,9 @@ namespace Elasticsearch.Net
 		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
 		{
 			var request = CreateWebRequest(requestData);
+			// TODO: Do we need some kind of precedence here?
 			SetBasicAuthenticationIfNeeded(request, requestData);
+			SetApiKeyAuthenticationIfNeeded(request, requestData);
 			SetProxyIfNeeded(request, requestData);
 			SetServerCertificateValidationCallBackIfNeeded(request, requestData);
 			SetClientCertificates(request, requestData);
@@ -258,6 +260,19 @@ namespace Elasticsearch.Net
 				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
 		}
 
+		protected virtual void SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
+		{
+			// ApiKey auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+
+			string apiKey = null;
+			if (requestData.ApiKeyAuthenticationCredentials != null)
+				apiKey = $"{requestData.ApiKeyAuthenticationCredentials.Id}:{requestData.ApiKeyAuthenticationCredentials.ApiKey.CreateString()}";
+
+			if (!string.IsNullOrWhiteSpace(apiKey))
+				request.Headers["Authorization"] = "ApiKey " + Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey));
+		}
 
 		/// <summary>
 		/// Registers an APM async task cancellation on the threadpool

@@ -116,6 +116,7 @@ namespace Elasticsearch.Net
 		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
 		private BasicAuthenticationCredentials _basicAuthCredentials;
+		private ApiKeyAuthenticationCredentials _apiKeyAuthentication;
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		private int _connectionLimit;
@@ -169,6 +170,7 @@ namespace Elasticsearch.Net
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
+		ApiKeyAuthenticationCredentials IConnectionConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthentication;
 		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
 		X509CertificateCollection IConnectionConfigurationValues.ClientCertificates => _clientCertificates;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
@@ -433,6 +435,18 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T BasicAuthentication(string username, SecureString password) =>
 			Assign(new BasicAuthenticationCredentials(username, password), (a, v) => a._basicAuthCredentials = v);
+
+		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(string id, SecureString apiKey) =>
+			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthentication = v);
+
+		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(string id, string apiKey) =>
+			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthentication = v);
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
