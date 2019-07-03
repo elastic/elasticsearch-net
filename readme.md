@@ -86,7 +86,7 @@ Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 6
 
 ### Upgrading from 6.x to 7.x
 
-More comprehensive details and a blog post coming soon. For now, please see the [7.0.0 release notes](https://github.com/elastic/elasticsearch-net/releases/tag/7.0.0).
+Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 7.0](https://www.elastic.co/blog/nest-and-elasticsearch-net-7-0-now-ga). Please also see the [7.0.0 release notes](https://github.com/elastic/elasticsearch-net/releases/tag/7.0.0).
 
 # [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
 
