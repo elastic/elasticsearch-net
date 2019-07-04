@@ -1,5 +1,6 @@
 using System;
 using System.Security;
+using System.Text;
 
 namespace Elasticsearch.Net
 {
@@ -14,26 +15,30 @@ namespace Elasticsearch.Net
 
 		public ApiKeyAuthenticationCredentials(string id, SecureString apiKey)
 		{
-			Id = id;
-			ApiKey = apiKey;
+			Base64EncodedApiKey = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{id}:{apiKey.CreateString()}")).CreateSecureString();
 		}
 
 		public ApiKeyAuthenticationCredentials(string id, string apiKey)
 		{
-			Id = id;
-			ApiKey = apiKey.CreateSecureString();
+			Base64EncodedApiKey = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{id}:{apiKey}")).CreateSecureString();
+		}
+
+		public ApiKeyAuthenticationCredentials(string base64EncodedApiKey)
+		{
+			Base64EncodedApiKey = base64EncodedApiKey.CreateSecureString();
+		}
+
+		public ApiKeyAuthenticationCredentials(SecureString base64EncodedApiKey)
+		{
+			Base64EncodedApiKey = base64EncodedApiKey;
 		}
 
 		/// <summary>
-		/// The api_key with which to authenticate
+		/// The Base64 encoded api key with which to authenticate
+		/// Take the form, id:api_key, which is then base 64 encoded
 		/// </summary>
-		public SecureString ApiKey { get; set; }
+		public SecureString Base64EncodedApiKey { get; }
 
-		/// <summary>
-		/// The id with which to authenticate
-		/// </summary>
-		public string Id { get; set; }
-
-		public void Dispose() => ApiKey?.Dispose();
+		public void Dispose() => Base64EncodedApiKey?.Dispose();
 	}
 }

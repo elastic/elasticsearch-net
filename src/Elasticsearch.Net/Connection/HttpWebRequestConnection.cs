@@ -257,7 +257,7 @@ namespace Elasticsearch.Net
 
 
 			if (!string.IsNullOrWhiteSpace(userInfo))
-				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				request.Headers["Authorization"] = $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo))}";
 		}
 
 		protected virtual void SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
@@ -268,10 +268,10 @@ namespace Elasticsearch.Net
 
 			string apiKey = null;
 			if (requestData.ApiKeyAuthenticationCredentials != null)
-				apiKey = $"{requestData.ApiKeyAuthenticationCredentials.Id}:{requestData.ApiKeyAuthenticationCredentials.ApiKey.CreateString()}";
+				apiKey = requestData.ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
 
 			if (!string.IsNullOrWhiteSpace(apiKey))
-				request.Headers["Authorization"] = "ApiKey " + Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey));
+				request.Headers["Authorization"] = $"ApiKey {apiKey}";
 		}
 
 		/// <summary>

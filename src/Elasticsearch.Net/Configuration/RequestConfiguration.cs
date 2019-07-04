@@ -290,12 +290,27 @@ namespace Elasticsearch.Net
 			return this;
 		}
 
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string id, string apiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(id, apiKey);
+			return this;
+		}
+
 		public RequestConfigurationDescriptor ApiKeyAuthentication(string id, SecureString apiKey)
 		{
-			if (Self.ApiKeyAuthenticationCredentials == null)
-				Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials();
-			Self.ApiKeyAuthenticationCredentials.Id = id;
-			Self.ApiKeyAuthenticationCredentials.ApiKey = apiKey;
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(id, apiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string base64EncodedApiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(base64EncodedApiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(SecureString base64EncodedApiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(base64EncodedApiKey);
 			return this;
 		}
 
