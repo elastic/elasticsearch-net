@@ -72,11 +72,10 @@ namespace DocGenerator
 			json = null;
 
 			// find the first anonymous object or new object expression
-			var creationExpressionSyntax = node.DescendantNodes()
-				.FirstOrDefault(n => n is AnonymousObjectCreationExpressionSyntax || n is ObjectCreationExpressionSyntax);
+			var syntax = node.DescendantNodes()
+				.FirstOrDefault(n => n is AnonymousObjectCreationExpressionSyntax || n is ObjectCreationExpressionSyntax || n is LiteralExpressionSyntax);
 
-			return creationExpressionSyntax != null &&
-				creationExpressionSyntax.ToFullString().TryGetJsonForAnonymousType(out json);
+			return syntax != null && syntax.ToFullString().TryGetJsonForExpressionSyntax(out json);
 		}
 
 		/// <summary>
