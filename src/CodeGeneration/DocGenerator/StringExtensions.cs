@@ -213,7 +213,7 @@ namespace DocGenerator
 
 		public static string[] SplitOnNewLines(this string input, StringSplitOptions options) => input.Split(new[] { "\r\n", "\n" }, options);
 
-		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
+		public static bool TryGetJsonForExpressionSyntax(this string anonymousTypeString, out string json)
 		{
 			json = null;
 
