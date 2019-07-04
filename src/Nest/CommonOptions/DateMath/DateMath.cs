@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net.Extensions;
@@ -109,21 +110,50 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Formats a <see cref="DateTime"/> to have a minimum of 3 decimal places if there
-		/// are sub second values
+		/// Formats a <see cref="DateTime"/> to have a minimum of 3 decimal places if there are sub second values
 		/// </summary>
-		/// Fixes bug in Elasticsearch: https://github.com/elastic/elasticsearch/pull/41871
 		private static string ToMinThreeDecimalPlaces(DateTime dateTime)
 		{
-			var format = dateTime.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFF");
+			var builder = StringBuilderCache.Acquire(33);
+			var format = dateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFF", CultureInfo.InvariantCulture);
+			builder.Append(format);
 
+			// Fixes bug in Elasticsearch: https://github.com/elastic/elasticsearch/pull/41871
 			if (format.Length > 20 && format.Length < 23)
 			{
 				var diff = 23 - format.Length;
-				return $"{format}{new string('0', diff)}";
+				for (int i = 0; i < diff; i++)
+					builder.Append('0');
 			}
 
-			return format;
+			switch (dateTime.Kind)
+			{
+				case DateTimeKind.Local:
+					var offset = TimeZoneInfo.Local.GetUtcOffset(dateTime);
+					if (offset >= TimeSpan.Zero)
+						builder.Append('+');
+					else
+					{
+						builder.Append('-');
+						offset = offset.Negate();
+					}
+
+					AppendTwoDigitNumber(builder, offset.Hours);
+					builder.Append(':');
+					AppendTwoDigitNumber(builder, offset.Minutes);
+					break;
+				case DateTimeKind.Utc:
+					builder.Append('Z');
+					break;
+			}
+
+			return StringBuilderCache.GetStringAndRelease(builder);
+		}
+
+		private static void AppendTwoDigitNumber(StringBuilder result, int val)
+		{
+			result.Append((char)('0' + (val / 10)));
+			result.Append((char)('0' + (val % 10)));
 		}
 	}
 
