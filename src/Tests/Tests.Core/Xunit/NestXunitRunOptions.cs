@@ -96,6 +96,7 @@ namespace Tests.Core.Xunit
 
 			AppendExplictConfig(nameof(RandomConfiguration.SourceSerializer), sb);
 			AppendExplictConfig(nameof(RandomConfiguration.TypedKeys), sb);
+			AppendExplictConfig(nameof(RandomConfiguration.HttpCompression), sb);
 
 			if (runningIntegrations)
 				sb.Append("integrate ")
