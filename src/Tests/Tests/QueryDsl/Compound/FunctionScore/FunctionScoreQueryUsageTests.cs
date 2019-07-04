@@ -37,7 +37,19 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 			MinScore = 1.0,
 			Functions = new List<IScoreFunction>
 			{
-				new ExponentialDecayFunction { Origin = 1.0, Decay = 0.5, Field = Field<Project>(p => p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
+				new ExponentialDecayFunction
+				{
+					Origin = 1.0,
+					Decay = 0.5,
+					Field = Field<Project>(p => p.NumberOfCommits),
+					Scale = 0.1,
+					Weight = 2.1,
+					Filter = new NumericRangeQuery
+					{
+						Field = Field<Project>(f => f.NumberOfContributors),
+						GreaterThan = 10
+					}
+				},
 				new GaussDateDecayFunction
 					{ Origin = DateMath.Now, Field = Field<Project>(p => p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
 				new LinearGeoDecayFunction
@@ -52,7 +64,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
 				new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
 				new WeightFunction { Weight = 1.0 },
-				new ScriptScoreFunction { Script = new InlineScript("Math.log(2 + doc['numberOfCommits'].value)") }
+				new ScriptScoreFunction { Script = new InlineScript("Math.log(2 + doc['numberOfCommits'].value)"), Weight = 2.0 }
 			}
 		};
 
@@ -76,7 +88,17 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 								decay = 0.5
 							}
 						},
-						weight = 2.1
+						weight = 2.1,
+						filter = new
+						{
+							range = new
+							{
+								numberOfContributors = new
+								{
+									gt = 10.0
+								}
+							}
+						}
 					},
 					new
 					{
@@ -127,7 +149,8 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 							{
 								source = "Math.log(2 + doc['numberOfCommits'].value)"
 							}
-						}
+						},
+						weight = 2.0
 					}
 				},
 				max_boost = 20.0,
@@ -150,15 +173,36 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				.MaxBoost(20.0)
 				.MinScore(1.0)
 				.Functions(f => f
-					.Exponential(b => b.Field(p => p.NumberOfCommits).Decay(0.5).Origin(1.0).Scale(0.1).Weight(2.1))
+					.Exponential(b => b
+						.Field(p => p.NumberOfCommits)
+						.Decay(0.5)
+						.Origin(1.0)
+						.Scale(0.1)
+						.Weight(2.1)
+						.Filter(fi => fi
+							.Range(r => r
+								.Field(p => p.NumberOfContributors)
+								.GreaterThan(10)
+							)
+						)
+					)
 					.GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
-					.LinearGeoLocation(b =>
-						b.Field(p => p.LocationPoint).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
+					.LinearGeoLocation(b => b
+						.Field(p => p.LocationPoint)
+						.Origin(new GeoLocation(70, -70))
+						.Scale(Distance.Miles(1))
+						.MultiValueMode(MultiValueMode.Average)
+					)
 					.FieldValueFactor(b => b.Field(p => p.NumberOfContributors).Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Square))
 					.RandomScore(r => r.Seed(1337).Field("_seq_no"))
 					.RandomScore(r => r.Seed("randomstring").Field("_seq_no"))
 					.Weight(1.0)
-					.ScriptScore(s => s.Script(ss => ss.Source("Math.log(2 + doc['numberOfCommits'].value)")))
+					.ScriptScore(s => s
+						.Script(ss => ss
+							.Source("Math.log(2 + doc['numberOfCommits'].value)")
+						)
+						.Weight(2)
+					)
 				)
 			);
 	}
