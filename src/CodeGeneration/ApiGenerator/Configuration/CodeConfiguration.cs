@@ -25,7 +25,6 @@ namespace ApiGenerator.Configuration
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 
-			"ccr.follow_info.json",
 			"ccr.forget_follower.json"
 		};
 

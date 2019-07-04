@@ -85,6 +85,30 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// </summary>
 		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public FollowInfoResponse FollowInfo(Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null) => FollowInfo(selector.InvokeOrDefault(new FollowInfoDescriptor(index: index)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public Task<FollowInfoResponse> FollowInfoAsync(Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null, CancellationToken ct = default) => FollowInfoAsync(selector.InvokeOrDefault(new FollowInfoDescriptor(index: index)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public FollowInfoResponse FollowInfo(IFollowInfoRequest request) => DoRequest<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public Task<FollowInfoResponse> FollowInfoAsync(IFollowInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>ccr.follow_stats</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>

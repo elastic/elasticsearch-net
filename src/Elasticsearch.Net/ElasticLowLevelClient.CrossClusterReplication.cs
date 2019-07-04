@@ -65,6 +65,16 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> CreateFollowIndexAsync<TResponse>(string index, PostData body, CreateFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_ccr/follow"), ctx, body, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_ccr/info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
+		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse FollowInfo<TResponse>(string index, FollowInfoRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_ccr/info"), null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_ccr/info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
+		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> FollowInfoAsync<TResponse>(string index, FollowInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_ccr/info"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
