@@ -437,6 +437,9 @@ namespace Nest
 		public QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Script = query);
 
+		public QueryContainer ScriptScore(Func<ScriptScoreQueryDescriptor<T>, IScriptScoreQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.ScriptScore = query);
+
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Exists = query);
 

@@ -275,6 +275,8 @@ Specialized types of queries that do not fit into other groups
 
 * <<script-query-usage,Script Query Usage>>
 
+* <<script-score-query-usage,Script Score Query Usage>>
+
 See the Elasticsearch documentation on {ref_current}/specialized-queries.html[Specialized queries] for more details.
 
 :includes-from-dirs: query-dsl/specialized
@@ -286,6 +288,8 @@ include::query-dsl/specialized/more-like-this/more-like-this-query-usage.asciido
 include::query-dsl/specialized/percolate/percolate-query-usage.asciidoc[]
 
 include::query-dsl/specialized/script/script-query-usage.asciidoc[]
+
+include::query-dsl/specialized/script-score/script-score-query-usage.asciidoc[]
 
 [[span-queries]]
 == Span queries

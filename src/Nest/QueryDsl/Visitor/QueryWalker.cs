@@ -44,6 +44,7 @@ namespace Nest
 			VisitQuery(qd.MatchPhrase, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MatchPhrasePrefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Script, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.ScriptScore, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Exists, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoPolygon, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoDistance, visitor, (v, d) => v.Visit(d));
