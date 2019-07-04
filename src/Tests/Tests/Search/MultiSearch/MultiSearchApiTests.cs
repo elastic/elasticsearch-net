@@ -25,7 +25,7 @@ namespace Tests.Search.MultiSearch
 		protected override string UrlPath => "/project/_msearch";
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		
+
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MultiSearch(Index<Project>(), f),
 			(c, f) => c.MultiSearchAsync(Index<Project>(), f),
@@ -37,7 +37,7 @@ namespace Tests.Search.MultiSearch
 		protected override object ExpectJson => new object[]
 		{
 			new { },
-			new { from = 0, size = 10, query = new { match_all = new { } } },
+			new { from = 0, size = 10, query = new { match_all = new { } }, track_total_hits = true },
 			new { search_type = "dfs_query_then_fetch" },
 			new { },
 			new { index = "devs" },
@@ -60,7 +60,7 @@ namespace Tests.Search.MultiSearch
 		protected override MultiSearchDescriptor NewDescriptor() => new MultiSearchDescriptor(Index<Project>());
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
-			.Search<Project>("10projects", s => s.Query(q => q.MatchAll()).From(0).Size(10))
+			.Search<Project>("10projects", s => s.Query(q => q.MatchAll()).From(0).Size(10).TrackTotalHits())
 			.Search<Project>("dfs_projects", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
 			.Search<Developer>("infer_type_name", s => s.Index("devs").From(0).Size(5).MatchAll())
@@ -90,7 +90,7 @@ namespace Tests.Search.MultiSearch
 		{
 			Operations = new Dictionary<string, ISearchRequest>
 			{
-				{ "10projects", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
+				{ "10projects", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()), TrackTotalHits = true } },
 				{ "dfs_projects", new SearchRequest<Project> { SearchType = SearchType.DfsQueryThenFetch } },
 				{ "5developers", new SearchRequest<Developer> { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 				{ "infer_type_name", new SearchRequest<Developer>("devs") { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
@@ -135,6 +135,7 @@ namespace Tests.Search.MultiSearch
 			var projects = r.GetResponse<Project>("10projects");
 			projects.ShouldBeValid();
 			projects.Documents.Should().HaveCount(10);
+			projects.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
 
 			var projectsCount = r.GetResponse<Project>("count_project");
 			projectsCount.Should().BeNull();
