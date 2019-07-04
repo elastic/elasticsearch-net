@@ -143,8 +143,7 @@ namespace Elasticsearch.Net
 		{
 			var request = CreateWebRequest(requestData);
 			// TODO: Do we need some kind of precedence here?
-			SetBasicAuthenticationIfNeeded(request, requestData);
-			SetApiKeyAuthenticationIfNeeded(request, requestData);
+			SetAuthenticationIfNeeded(requestData, request);
 			SetProxyIfNeeded(request, requestData);
 			SetServerCertificateValidationCallBackIfNeeded(request, requestData);
 			SetClientCertificates(request, requestData);
@@ -241,7 +240,16 @@ namespace Elasticsearch.Net
 				request.Proxy = null;
 		}
 
-		protected virtual void SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
+		private void SetAuthenticationIfNeeded(RequestData requestData, HttpWebRequest request)
+		{
+			// Api Key authentication takes precedence
+			var apiKeySet = SetApiKeyAuthenticationIfNeeded(request, requestData);
+
+			if (!apiKeySet)
+				SetBasicAuthenticationIfNeeded(request, requestData);
+		}
+
+		protected virtual bool SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)
@@ -255,12 +263,15 @@ namespace Elasticsearch.Net
 				userInfo =
 					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 
+			if (string.IsNullOrWhiteSpace(userInfo))
+				return false;
 
-			if (!string.IsNullOrWhiteSpace(userInfo))
-				request.Headers["Authorization"] = $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo))}";
+			request.Headers["Authorization"] = $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo))}";
+			return true;
+
 		}
 
-		protected virtual void SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
+		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			// ApiKey auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)
@@ -270,8 +281,12 @@ namespace Elasticsearch.Net
 			if (requestData.ApiKeyAuthenticationCredentials != null)
 				apiKey = requestData.ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
 
-			if (!string.IsNullOrWhiteSpace(apiKey))
-				request.Headers["Authorization"] = $"ApiKey {apiKey}";
+			if (string.IsNullOrWhiteSpace(apiKey))
+				return false;
+
+			request.Headers["Authorization"] = $"ApiKey {apiKey}";
+			return true;
+
 		}
 
 		/// <summary>
