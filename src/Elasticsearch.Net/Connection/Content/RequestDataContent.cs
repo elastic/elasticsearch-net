@@ -37,6 +37,8 @@ namespace Elasticsearch.Net
 
 			Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
 			{
+				if (_requestData.HttpCompression)
+					stream = new GZipStream(stream, CompressionMode.Compress, false);
 				using(stream)
 					data.Write(stream, requestData.ConnectionSettings);
 				return Task.CompletedTask;
@@ -52,6 +54,8 @@ namespace Elasticsearch.Net
 
 			async Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
 			{
+				if (_requestData.HttpCompression)
+					stream = new GZipStream(stream, CompressionMode.Compress, false);
 				using (stream)
 					await data.WriteAsync(stream, requestData.ConnectionSettings, token).ConfigureAwait(false);
 			}
@@ -75,8 +79,6 @@ namespace Elasticsearch.Net
 
 			var serializeToStreamTask = new TaskCompletionSource<bool>();
 
-			if (_requestData.HttpCompression)
-				stream = new GZipStream(stream, CompressionMode.Compress, false);
 			var wrappedStream = new CompleteTaskOnCloseStream(stream, serializeToStreamTask);
             await _onStreamAvailable(data, wrappedStream, this, context).ConfigureAwait(false);
             await serializeToStreamTask.Task.ConfigureAwait(false);

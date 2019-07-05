@@ -24,6 +24,7 @@ namespace Tests.Configuration
 			Console.WriteLine($" - Random:");
 			Console.WriteLine($" \t- {nameof(config.Random.SourceSerializer)}: {config.Random.SourceSerializer}");
 			Console.WriteLine($" \t- {nameof(config.Random.TypedKeys)}: {config.Random.TypedKeys}");
+			Console.WriteLine($" \t- {nameof(config.Random.HttpCompression)}: {config.Random.HttpCompression}");
 			Console.WriteLine(new string('-', 20));
 		}
 	}

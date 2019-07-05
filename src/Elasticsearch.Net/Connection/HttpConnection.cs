@@ -241,13 +241,7 @@ namespace Elasticsearch.Net
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
-
-			if (requestData.HttpCompression)
-			{
-				requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-				requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
-			}
-
+			
 			return requestMessage;
 		}
 
