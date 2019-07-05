@@ -43,8 +43,7 @@ namespace Tests.Core.Client.Settings
 		private void ApplyTestSettings() => 
 			RerouteToProxyIfNeeded()
 			.EnableDebugMode()
-				//TODO make this random
-			//.EnableHttpCompression()
+			.EnableHttpCompression(TestConfiguration.Instance.Random.HttpCompression)
 #if DEBUG
 			.EnableDebugMode()
 #endif
