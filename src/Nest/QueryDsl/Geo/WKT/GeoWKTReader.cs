@@ -259,14 +259,14 @@ namespace Nest
 
 		private static double NextNumber(WellKnownTextTokenizer tokenizer)
 		{
-			if (tokenizer.NextToken() == TokenType.Number)
+			if (tokenizer.NextToken() == TokenType.Word)
 			{
 				if (string.Equals(tokenizer.TokenValue, WellKnownTextTokenizer.NaN, StringComparison.OrdinalIgnoreCase))
 					return double.NaN;
 
 				if (double.TryParse(
 					tokenizer.TokenValue,
-					NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+					NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign | NumberStyles.AllowExponent,
 					CultureInfo.InvariantCulture, out var d))
 					return d;
 			}
@@ -278,7 +278,7 @@ namespace Nest
 		private static bool IsNumberNext(WellKnownTextTokenizer tokenizer)
 		{
 			var token = tokenizer.PeekToken();
-			return token == TokenType.Number;
+			return token == TokenType.Word;
 		}
 	}
 
@@ -288,7 +288,6 @@ namespace Nest
 	internal enum CharacterType : byte
 	{
 		Whitespace,
-		Digit,
 		Alpha,
 		Comment
 	}
@@ -300,7 +299,6 @@ namespace Nest
 	{
 		None,
 		Word,
-		Number,
 		LParen,
 		RParen,
 		Comma
@@ -339,15 +337,14 @@ namespace Nest
 			// build a map of ASCII chars and their types
 			// Any unmapped ASCII will be considered whitespace
 			// and anything > 0 outside of ASCII will be considered alpha.
-			// Treat + - and . as digit characters to make parsing numbers easier.
 			Chars('a', 'z', CharacterType.Alpha);
 			Chars('A', 'Z', CharacterType.Alpha);
 			Chars(128 + 32, 255, CharacterType.Alpha);
-			Chars('0', '9', CharacterType.Digit);
+			Chars('0', '9', CharacterType.Alpha);
 			Chars(LParen, RParen, CharacterType.Alpha);
-			Chars(Plus, Plus, CharacterType.Digit);
+			Chars(Plus, Plus, CharacterType.Alpha);
 			Chars(Comma, Comma, CharacterType.Alpha);
-			Chars(Minus, Dot, CharacterType.Digit);
+			Chars(Minus, Dot, CharacterType.Alpha);
 			Chars(Comment, Comment, CharacterType.Comment);
 		}
 
@@ -399,7 +396,6 @@ namespace Nest
 			switch (TokenType)
 			{
 				case TokenType.Word:
-				case TokenType.Number:
 					return TokenValue;
 				case TokenType.None:
 					return "END-OF-STREAM";
@@ -522,7 +518,12 @@ namespace Nest
 					if (c < 0)
 						characterType = CharacterType.Whitespace;
 					else if (c < CharacterTypesLength)
+					{
+						if (c == LParen || c == RParen || c == Comma)
+							break;
+
 						characterType = CharacterTypes[c];
+					}
 					else
 						characterType = CharacterType.Alpha;
 				} while (characterType == CharacterType.Alpha);
@@ -530,40 +531,7 @@ namespace Nest
 				_peekChar = c;
 				TokenValue = new string(_buffer.ToArray(), 0, i);
 
-				// special case for NaN
-				if (string.Equals(TokenValue, NaN, StringComparison.OrdinalIgnoreCase))
-					return TokenType = TokenType.Number;
-
 				return TokenType = TokenType.Word;
-			}
-
-			if (characterType == CharacterType.Digit)
-			{
-				var i = 0;
-				var dots = 0;
-				do
-				{
-					_buffer.Insert(i++, (char)c);
-					c = Read();
-
-					if (c < 0)
-						characterType = CharacterType.Whitespace;
-					else if (c < CharacterTypesLength)
-					{
-						characterType = CharacterTypes[c];
-						if (c == Dot)
-							dots++;
-					}
-					else
-						characterType = CharacterType.Alpha;
-				} while (characterType == CharacterType.Digit);
-
-				_peekChar = c;
-				TokenValue = new string(_buffer.ToArray(), 0, i);
-
-				return dots > 1
-					? TokenType = TokenType.Word
-					: TokenType = TokenType.Number;
 			}
 
 			if (characterType == CharacterType.Comment)
