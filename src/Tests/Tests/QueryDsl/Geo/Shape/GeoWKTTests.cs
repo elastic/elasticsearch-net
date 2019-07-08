@@ -24,6 +24,22 @@ namespace Tests.QueryDsl.Geo.Shape
 		}
 
 		[U]
+		public void ReadAndWritePointWithExponent()
+		{
+			var wkt = "POINT (1.2E2 -2.5E-05)";
+			var shape = GeoWKTReader.Read(wkt);
+
+			shape.Should().BeOfType<PointGeoShape>();
+			var point = (PointGeoShape)shape;
+
+			point.Coordinates.Latitude.Should().Be(-0.000025);
+			point.Coordinates.Longitude.Should().Be(120);
+
+			// 1.2E2 will be expanded
+			GeoWKTWriter.Write(point).Should().Be("POINT (120 -2.5E-05)");
+		}
+
+		[U]
 		public void ReadAndWriteMultiPoint()
 		{
 			var wkt = "MULTIPOINT (102.0 2.0, 103.0 2.0)";
