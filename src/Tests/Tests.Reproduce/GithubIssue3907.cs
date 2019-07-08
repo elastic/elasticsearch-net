@@ -12,7 +12,9 @@ namespace Tests.Reproduce
 	{
 		private readonly IntrusiveOperationCluster _cluster;
 
-		// use intrusive operation because we're changing the underlying http handler
+		// use intrusive operation cluster because we're changing the underlying http handler
+		// and this cluster runs with a max concurrency of 1, so changing http handler
+		// will not affect other integration tests
 		public GithubIssue3907(IntrusiveOperationCluster cluster) => _cluster = cluster;
 
 		[I]

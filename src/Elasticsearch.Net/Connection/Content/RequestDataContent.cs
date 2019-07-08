@@ -91,7 +91,7 @@ namespace Elasticsearch.Net
 		protected override bool TryComputeLength(out long length)
 		{
 			// We can't know the length of the content being pushed to the output stream.
-			length = default;
+			length = -1;
 			return false;
 		}
 
@@ -112,11 +112,7 @@ namespace Elasticsearch.Net
 				base.Dispose();
 			}
 
-			public override void Close()
-			{
-				_serializeToStreamTask.TrySetResult(true);
-				base.Close();
-			}
+			public override void Close() => _serializeToStreamTask.TrySetResult(true);
 		}
 
 		/// <summary>
