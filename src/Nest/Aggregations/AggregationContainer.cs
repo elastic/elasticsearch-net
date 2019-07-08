@@ -572,6 +572,11 @@ namespace Nest
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
 
+		public AggregationContainerDescriptor<T> GeoTile(string name,
+			Func<GeoTileGridAggregationDescriptor<T>, IGeoTileGridAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.GeoTile = d);
+
 		public AggregationContainerDescriptor<T> GeoBounds(string name,
 			Func<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregation> selector
 		) =>
