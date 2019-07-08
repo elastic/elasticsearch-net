@@ -29,6 +29,7 @@ namespace Tests.XPack.CrossClusterReplication
 		private const string FollowIndexStep = nameof(FollowIndexStep);
 		private const string FollowStatsAgainStep = nameof(FollowStatsAgainStep);
 		private const string FollowStatsStep = nameof(FollowStatsStep);
+		private const string FollowInfoStep = nameof(FollowInfoStep);
 		private const string IndexDataStep = nameof(IndexDataStep);
 		private const string PauseFollowStep = nameof(PauseFollowStep);
 		private const string PauseForCloseStep = nameof(PauseForCloseStep);
@@ -159,6 +160,17 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
+				FollowInfoStep, u =>
+					u.Calls<FollowInfoDescriptor, FollowInfoRequest, IFollowInfoRequest, FollowInfoResponse>(
+						v => new FollowInfoRequest(CopyIndex(v)),
+						(v, d) => d,
+						(v, c, f) => c.CrossClusterReplication.FollowInfo(CopyIndex(v), f),
+						(v, c, f) => c.CrossClusterReplication.FollowInfoAsync(CopyIndex(v), f),
+						(v, c, r) => c.CrossClusterReplication.FollowInfo(r),
+						(v, c, r) => c.CrossClusterReplication.FollowInfoAsync(r)
+					)
+			},
+			{
 				DeleteOriginalIndicesStep, u => u.Calls<DeleteIndexDescriptor, DeleteIndexRequest, IDeleteIndexRequest, DeleteIndexResponse>
 				(
 					v => new DeleteIndexRequest(v),
@@ -269,6 +281,11 @@ namespace Tests.XPack.CrossClusterReplication
 					s.ReadExceptions.Should().NotBeNull(because).And.BeEmpty(because);
 				}
 			}
+		});
+
+		[I] public async Task FollowInfoResponse() => await Assert<FollowInfoResponse>(FollowInfoStep, r =>
+		{
+			r.IsValid.Should().BeTrue();
 		});
 
 		[I] public async Task GlobalStatsResponse() => await Assert<CcrStatsResponse>(GlobalStatsStep, r =>
