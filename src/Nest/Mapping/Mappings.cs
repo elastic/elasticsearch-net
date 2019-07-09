@@ -13,7 +13,7 @@ namespace Nest
 	/// new features in the future.
 	/// </pre>
 	/// </summary>
-	[Obsolete("Mappings are no longer type dependant, please use TypeMapping directly")]
+	[Obsolete("Mappings are no longer type dependent, please use TypeMapping directly")]
 	public class Mappings : ObsoleteMappingsBase, ITypeMapping, IEnumerable<ITypeMapping>
 	{
 		private IEnumerable<ITypeMapping> AsEnumerable => new[] { new TypeMapping() };
@@ -29,7 +29,8 @@ namespace Nest
 
 	public abstract class ObsoleteMappingsBase : ITypeMapping
 	{
-		[DataMember(Name = "_all")]
+		[IgnoreDataMember]
+		[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 		public IAllField AllField { get => Wrapped.AllField; set => Wrapped.AllField = value; }
 		[DataMember(Name = "date_detection")]
 		bool? ITypeMapping.DateDetection { get => Wrapped.DateDetection; set => Wrapped.DateDetection = value; }
@@ -41,7 +42,8 @@ namespace Nest
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get => Wrapped.DynamicTemplates; set => Wrapped.DynamicTemplates = value; }
 		[DataMember(Name = "_field_names")]
 		IFieldNamesField ITypeMapping.FieldNamesField { get => Wrapped.FieldNamesField; set => Wrapped.FieldNamesField = value; }
-		[DataMember(Name = "_index")]
+		[IgnoreDataMember]
+		[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 		IIndexField ITypeMapping.IndexField { get => Wrapped.IndexField; set => Wrapped.IndexField = value; }
 		[DataMember(Name = "_meta")]
 		IDictionary<string, object> ITypeMapping.Meta { get => Wrapped.Meta; set => Wrapped.Meta = value; }
