@@ -1300,8 +1300,6 @@ namespace Nest
 		public SearchDescriptor<TInferDocument> SuggestText(string suggesttext) => Qs("suggest_text", suggesttext);
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public SearchDescriptor<TInferDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);
-		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public SearchDescriptor<TInferDocument> TrackTotalHits(bool? tracktotalhits = true) => Qs("track_total_hits", tracktotalhits);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchDescriptor<TInferDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
