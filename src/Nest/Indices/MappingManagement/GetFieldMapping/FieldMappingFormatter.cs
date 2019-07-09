@@ -37,8 +37,10 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
+#pragma warning disable 618
 							mapping = formatterResolver.GetFormatter<AllField>()
 								.Deserialize(ref reader, formatterResolver);
+#pragma warning restore 618
 							break;
 						case 1:
 							mapping = formatterResolver.GetFormatter<SourceField>()
@@ -49,8 +51,10 @@ namespace Nest
 								.Deserialize(ref reader, formatterResolver);
 							break;
 						case 3:
+#pragma warning disable 618
 							mapping = formatterResolver.GetFormatter<IndexField>()
 								.Deserialize(ref reader, formatterResolver);
+#pragma warning restore 618
 							break;
 						case 4:
 							mapping = formatterResolver.GetFormatter<SizeField>()

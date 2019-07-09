@@ -1,7 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 	[ReadAs(typeof(IndexField))]
 	public interface IIndexField : IFieldMapping
 	{
@@ -9,11 +11,13 @@ namespace Nest
 		bool? Enabled { get; set; }
 	}
 
+	[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 	public class IndexField : IIndexField
 	{
 		public bool? Enabled { get; set; }
 	}
 
+	[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 	public class IndexFieldDescriptor
 		: DescriptorBase<IndexFieldDescriptor, IIndexField>, IIndexField
 	{
