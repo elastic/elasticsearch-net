@@ -1,7 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 	[ReadAs(typeof(AllField))]
 	public interface IAllField : IFieldMapping
 	{
@@ -36,6 +38,7 @@ namespace Nest
 		bool? StoreTermVectors { get; set; }
 	}
 
+	[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 	public class AllField : IAllField
 	{
 		public string Analyzer { get; set; }
@@ -50,7 +53,7 @@ namespace Nest
 		public bool? StoreTermVectors { get; set; }
 	}
 
-	//OBSOLETE
+	[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 	public class AllFieldDescriptor
 		: DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
 	{
