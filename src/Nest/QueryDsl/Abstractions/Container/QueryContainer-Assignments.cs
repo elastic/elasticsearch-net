@@ -38,6 +38,7 @@ namespace Nest
 		private IRawQuery _raw;
 		private IRegexpQuery _regexp;
 		private IScriptQuery _script;
+		private IScriptScoreQuery _scriptScore;
 		private ISimpleQueryStringQuery _simpleQueryString;
 		private ISpanContainingQuery _spanContaining;
 		private ISpanFieldMaskingQuery _spanFieldMasking;
@@ -249,6 +250,12 @@ namespace Nest
 		{
 			get => _script;
 			set => _script = Set(value);
+		}
+
+		IScriptScoreQuery IQueryContainer.ScriptScore
+		{
+			get => _scriptScore;
+			set => _scriptScore = Set(value);
 		}
 
 		ISimpleQueryStringQuery IQueryContainer.SimpleQueryString
