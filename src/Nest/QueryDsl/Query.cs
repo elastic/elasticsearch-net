@@ -117,6 +117,10 @@ namespace Nest
 		public static QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
 			new QueryContainerDescriptor<T>().Script(selector);
 
+		/// <inheritdoc cref="IScriptScoreQuery"/>
+		public static QueryContainer ScriptScore(Func<ScriptScoreQueryDescriptor<T>, IScriptScoreQuery> selector) =>
+			new QueryContainerDescriptor<T>().ScriptScore(selector);
+
 		public static QueryContainer SimpleQueryString(Func<SimpleQueryStringQueryDescriptor<T>, ISimpleQueryStringQuery> selector) =>
 			new QueryContainerDescriptor<T>().SimpleQueryString(selector);
 
