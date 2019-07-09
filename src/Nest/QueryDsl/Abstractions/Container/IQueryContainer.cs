@@ -115,6 +115,10 @@ namespace Nest
 		[DataMember(Name ="script")]
 		IScriptQuery Script { get; set; }
 
+		/// <inheritdoc cref="IScriptScoreQuery"/>
+		[DataMember(Name ="script_score")]
+		IScriptScoreQuery ScriptScore { get; set; }
+
 		[DataMember(Name ="simple_query_string")]
 		ISimpleQueryStringQuery SimpleQueryString { get; set; }
 

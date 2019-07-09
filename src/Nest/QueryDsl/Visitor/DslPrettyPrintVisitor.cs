@@ -187,6 +187,8 @@ namespace Nest
 
 		public virtual void Visit(IScriptQuery query) => Write("script");
 
+		public virtual void Visit(IScriptScoreQuery query) => Write("script_score");
+
 		public virtual void Visit(IRawQuery query) => Write("raw");
 
 		public virtual void Visit(IPercolateQuery query) => Write("percolate");
