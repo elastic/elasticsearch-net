@@ -3,63 +3,100 @@
 	public enum GeoTilePrecision
 	{
 		/// <summary>
-		/// 5,009.4km x 4,992.6km
+		/// Whole world
 		/// </summary>
+		Precision0 = 0,
 		Precision1 = 1,
 
 		/// <summary>
-		/// 1,252.3km x 624.1km
+		/// Subcontinental area
 		/// </summary>
 		Precision2 = 2,
 
 		/// <summary>
-		/// 156.5km x 156km
+		/// Largets Country
 		/// </summary>
 		Precision3 = 3,
-
-		/// <summary>
-		/// 39.1km x 19.5km
-		/// </summary>
 		Precision4 = 4,
 
 		/// <summary>
-		/// 4.9km x 4.9km
+		/// Large African Country
 		/// </summary>
 		Precision5 = 5,
 
 		/// <summary>
-		/// 1.2km x 609.4m
+		/// Large European Country
 		/// </summary>
 		Precision6 = 6,
 
 		/// <summary>
-		/// 152.9m x 152.4m
+		/// Small Country / US State
 		/// </summary>
 		Precision7 = 7,
-
-		/// <summary>
-		/// 38.2m x 19m
-		/// </summary>
 		Precision8 = 8,
 
 		/// <summary>
-		/// 4.8m x 4.8m
+		/// Wide Area / Large Metropolitan Area
 		/// </summary>
 		Precision9 = 9,
 
 		/// <summary>
-		/// 1.2m x 59.5cm
+		/// Metropolitan Area
 		/// </summary>
 		Precision10 = 10,
 
 		/// <summary>
-		/// 14.9cm x 14.9cm
+		/// City
 		/// </summary>
 		Precision11 = 11,
 
 		/// <summary>
-		/// 3.7cm x 1.9cm
+		/// City / Town / District
 		/// </summary>
-		Precision12 = 12
+		Precision12 = 12,
+
+		/// <summary>
+		/// Village / Suburb
+		/// </summary>
+		Precision13 = 13,
+		Precision14 = 14,
+
+		/// <summary>
+		/// Small Road
+		/// </summary>
+		Precision15 = 15,
+
+		// Street
+		Precision16 = 16,
+
+		/// <summary>
+		/// Block / Park / Addresses
+		/// </summary>
+		Precision17 = 17,
+
+		/// <summary>
+		/// Some Buildings / Trees
+		/// </summary>
+		Precision18 = 18,
+
+		/// <summary>
+		/// Local highway / Crossing
+		/// </summary>
+		Precision19 = 19,
+		Precision20 = 20,
+		Precision21 = 21,
+		Precision22 = 22,
+		Precision23 = 23,
+		Precision24 = 24,
+		Precision25 = 25,
+		Precision26 = 26,
+		Precision27 = 27,
+		Precision28 = 28,
+
+		/// <summary>
+		/// Produces cells that cover less than a 10cm by 10cm of land and so high-precision
+		/// requests can be very costly in terms of RAM and result sizes.
+		/// </summary>
+		Precision29 = 29
 	}
 }
