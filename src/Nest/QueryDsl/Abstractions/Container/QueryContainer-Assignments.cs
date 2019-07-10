@@ -53,6 +53,7 @@ namespace Nest
 		private ITermsQuery _terms;
 		private ITermsSetQuery _termsSet;
 		private IWildcardQuery _wildcard;
+		private IRankFeatureQuery _rankFeature;
 
 		[IgnoreDataMember]
 		private IQueryContainer Self => this;
@@ -340,6 +341,12 @@ namespace Nest
 		{
 			get => _wildcard;
 			set => _wildcard = Set(value);
+		}
+
+		IRankFeatureQuery IQueryContainer.RankFeature
+		{
+			get => _rankFeature;
+			set => _rankFeature = Set(value);
 		}
 
 		private T Set<T>(T value) where T : IQuery
