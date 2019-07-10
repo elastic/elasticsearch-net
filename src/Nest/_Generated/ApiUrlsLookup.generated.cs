@@ -42,6 +42,7 @@ namespace Nest
 		internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
 		internal static ApiUrls CrossClusterReplicationCreateFollowIndex = new ApiUrls(new[]{"{index}/_ccr/follow"});
 		internal static ApiUrls CrossClusterReplicationFollowIndexStats = new ApiUrls(new[]{"{index}/_ccr/stats"});
+		internal static ApiUrls CrossClusterReplicationForgetFollowerIndex = new ApiUrls(new[]{"{index}/_ccr/forget_follower"});
 		internal static ApiUrls CrossClusterReplicationGetAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow", "_ccr/auto_follow/{name}"});
 		internal static ApiUrls CrossClusterReplicationPauseFollowIndex = new ApiUrls(new[]{"{index}/_ccr/pause_follow"});
 		internal static ApiUrls CrossClusterReplicationCreateAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
