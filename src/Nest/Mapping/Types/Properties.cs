@@ -154,6 +154,9 @@ namespace Nest
 
 		public PropertiesDescriptor<T> FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IRankFeatureProperty"/>
+		public PropertiesDescriptor<T> RankFeature(Func<RankFeaturePropertyDescriptor<T>, IRankFeatureProperty> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
