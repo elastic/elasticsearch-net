@@ -1,4 +1,4 @@
-﻿using Elastic.Managed.Configuration;
+﻿using Elastic.Stack.Artifacts;
 using Elasticsearch.Net;
 using Tests.Configuration;
 
@@ -10,6 +10,6 @@ namespace Tests.Core.Extensions
 			configuration.RunIntegrationTests && !forceInMemory ? (IConnection)new HttpConnection() : new InMemoryConnection();
 
 		public static bool InRange(this TestConfigurationBase configuration, string range) =>
-			ElasticsearchVersion.From(configuration.ElasticsearchVersion).InRange(range);
+			ElasticVersion.From(configuration.ElasticsearchVersion).InRange(range);
 	}
 }
