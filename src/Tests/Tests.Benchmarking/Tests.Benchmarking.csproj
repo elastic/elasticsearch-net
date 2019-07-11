@@ -13,7 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
-    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20190711T143355" />
+    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20190711T211820" />
     <PackageReference Include="LibGit2Sharp" Version="0.26.0-preview-0062" />
   </ItemGroup>
 </Project>

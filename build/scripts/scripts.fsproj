@@ -69,7 +69,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bullseye" Version="2.4.0-alpha.1" />
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190711T143355" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190711T211820" />
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
     <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
