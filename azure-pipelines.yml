@@ -50,7 +50,7 @@ jobs:
       maxParallel: 5
       matrix:
           es7:
-              esVersion: '7.0.0'
+              esVersion: 'latest'
   steps:
       - script: './build.sh integrate-one $(esVersion) "readonly,writable" skipdocs'
         displayName: '$(esVersion) linux integration tests'
