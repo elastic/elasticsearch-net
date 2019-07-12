@@ -1,11 +1,12 @@
-﻿using Nest;
+﻿using System.Collections.Generic;
+using Nest;
 
 namespace Tests.Mapping.Types.Core.RankFeatures
 {
 	public class RankFeaturesTest
 	{
 		[RankFeatures]
-		public int RankFeatures { get; set; }
+		public Dictionary<string, int> RankFeatures { get; set; }
 	}
 
 	public class RankFeaturesAttributeTests : AttributeTestsBase<RankFeaturesTest>
