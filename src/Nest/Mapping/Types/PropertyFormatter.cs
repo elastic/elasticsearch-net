@@ -68,6 +68,7 @@ namespace Nest
 					((IProperty)numberProperty).Type = typeString;
 					return numberProperty;
 				case FieldType.Date: return Deserialize<DateProperty>(ref segmentReader, formatterResolver);
+				case FieldType.DateNanos: return Deserialize<DateNanosProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Boolean: return Deserialize<BooleanProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Binary: return Deserialize<BinaryProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Object: return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
