@@ -12,6 +12,8 @@
 
 		void Visit(IDateProperty property);
 
+		void Visit(IDateNanosProperty property);
+
 		void Visit(IBooleanProperty property);
 
 		void Visit(IBinaryProperty property);
