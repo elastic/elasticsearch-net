@@ -55,14 +55,14 @@ namespace Tests.Search.FieldCapabilities
 			indexField.Aggregatable.Should().BeTrue();
 			indexField.Searchable.Should().BeTrue();
 
-			response.Fields.Should().ContainKey("state");
-			var stateCapabilities = response.Fields["state"].Keyword;
-			stateCapabilities.Aggregatable.Should().BeTrue();
-			stateCapabilities.Searchable.Should().BeTrue();
+			response.Fields.Should().ContainKey("jobTitle.keyword");
+			var jobTitleCapabilities = response.Fields["jobTitle.keyword"].Keyword;
+			jobTitleCapabilities.Aggregatable.Should().BeTrue();
+			jobTitleCapabilities.Searchable.Should().BeTrue();
 
-			stateCapabilities = response.Fields[Field<Project>(p => p.State)].Keyword;
-			stateCapabilities.Aggregatable.Should().BeTrue();
-			stateCapabilities.Searchable.Should().BeTrue();
+			jobTitleCapabilities = response.Fields[Field<Developer>(p => p.JobTitle.Suffix("keyword"))].Keyword;
+			jobTitleCapabilities.Aggregatable.Should().BeTrue();
+			jobTitleCapabilities.Searchable.Should().BeTrue();
 		}
 	}
 }
