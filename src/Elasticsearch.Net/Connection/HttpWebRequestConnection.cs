@@ -142,7 +142,6 @@ namespace Elasticsearch.Net
 		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
 		{
 			var request = CreateWebRequest(requestData);
-			// TODO: Do we need some kind of precedence here?
 			SetAuthenticationIfNeeded(requestData, request);
 			SetProxyIfNeeded(request, requestData);
 			SetServerCertificateValidationCallBackIfNeeded(request, requestData);
@@ -249,7 +248,7 @@ namespace Elasticsearch.Net
 				SetBasicAuthenticationIfNeeded(request, requestData);
 		}
 
-		protected virtual bool SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
+		protected virtual void SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)
@@ -264,11 +263,9 @@ namespace Elasticsearch.Net
 					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 
 			if (string.IsNullOrWhiteSpace(userInfo))
-				return false;
+				return;
 
 			request.Headers["Authorization"] = $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo))}";
-			return true;
-
 		}
 
 		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
