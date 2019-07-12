@@ -16,7 +16,7 @@ namespace Nest
 		/// The name of the follower index.
 		/// </summary>
 		[DataMember(Name = "follower_index")]
-		string FollowerIndex { get; set; }
+		IndexName FollowerIndex { get; set; }
 
 		/// <summary>
 		/// The UUID of the follower index.
@@ -38,7 +38,7 @@ namespace Nest
 		public string FollowerCluster { get; set; }
 
 		/// <inheritdoc cref="IForgetFollowerIndexRequest.FollowerIndex"/>
-		public string FollowerIndex { get; set; }
+		public IndexName FollowerIndex { get; set; }
 
 		/// <inheritdoc cref="IForgetFollowerIndexRequest.FollowerIndexUUID"/>
 		public string FollowerIndexUUID { get; set; }
@@ -51,7 +51,7 @@ namespace Nest
 	public partial class ForgetFollowerIndexDescriptor
 	{
 		string IForgetFollowerIndexRequest.FollowerCluster { get; set; }
-		string IForgetFollowerIndexRequest.FollowerIndex { get; set; }
+		IndexName IForgetFollowerIndexRequest.FollowerIndex { get; set; }
 		string IForgetFollowerIndexRequest.FollowerIndexUUID { get; set; }
 		string IForgetFollowerIndexRequest.LeaderRemoteCluster { get; set; }
 
@@ -60,7 +60,7 @@ namespace Nest
 			Assign(followerCluster, (a, v) => a.FollowerCluster = v);
 
 		/// <inheritdoc cref="IForgetFollowerIndexRequest.FollowerIndex"/>
-		public ForgetFollowerIndexDescriptor FollowerIndex(string followerIndex) =>
+		public ForgetFollowerIndexDescriptor FollowerIndex(IndexName followerIndex) =>
 			Assign(followerIndex, (a, v) => a.FollowerIndex = v);
 
 		/// <inheritdoc cref="IForgetFollowerIndexRequest.FollowerIndexUUID"/>
