@@ -42,16 +42,16 @@ namespace Nest
 	{
 		public InvalidateUserAccessTokenRequest(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.Token"/>
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.RefreshToken"/>
 		string IInvalidateUserAccessTokenRequest.RefreshToken { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.RealmName"/>
 		string IInvalidateUserAccessTokenRequest.RealmName { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.Username"/>
 		string IInvalidateUserAccessTokenRequest.Username { get; set; }
 	}
 
@@ -69,16 +69,16 @@ namespace Nest
 		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.Username" />
 		public InvalidateUserAccessTokenDescriptor Username(string username) => Assign(username, (a, v) => a.Username = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.Token" />
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.RefreshToken" />
 		string IInvalidateUserAccessTokenRequest.RefreshToken { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.RealmName" />
 		string IInvalidateUserAccessTokenRequest.RealmName { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IInvalidateUserAccessTokenRequest.Username" />
 		string IInvalidateUserAccessTokenRequest.Username { get; set; }
 	}
 }
