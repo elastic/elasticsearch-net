@@ -10,7 +10,7 @@ namespace Nest
 	{
 		/// <summary>
 		/// An access token.
-		/// This parameter cannot be used any of <see cref="RefreshToken"/>, <see cref="RealmName"/> or <see cref="Username"/> are used.
+		/// This parameter cannot be used if any of <see cref="RefreshToken"/>, <see cref="RealmName"/> or <see cref="Username"/> are used.
 		/// </summary>
 		[DataMember(Name ="token")]
 		string Token { get; set; }
