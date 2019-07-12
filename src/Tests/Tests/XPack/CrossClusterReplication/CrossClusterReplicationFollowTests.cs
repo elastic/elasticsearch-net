@@ -286,6 +286,13 @@ namespace Tests.XPack.CrossClusterReplication
 		[I] public async Task FollowInfoResponse() => await Assert<FollowInfoResponse>(FollowInfoStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
+			r.FollowerIndices.Should().NotBeNull();
+			r.FollowerIndices.Should().NotBeEmpty();
+			var first = r.FollowerIndices.First();
+			first.FollowerIndex.Should().NotBeNullOrWhiteSpace();
+			first.RemoteCluster.Should().NotBeNullOrWhiteSpace();
+			first.LeaderIndex.Should().NotBeNullOrWhiteSpace();
+			first.Parameters.Should().NotBeNull();
 		});
 
 		[I] public async Task GlobalStatsResponse() => await Assert<CcrStatsResponse>(GlobalStatsStep, r =>
