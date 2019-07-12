@@ -14,7 +14,7 @@
 		Precision2 = 2,
 
 		/// <summary>
-		/// Largets Country
+		/// Largest Country
 		/// </summary>
 		Precision3 = 3,
 		Precision4 = 4,
@@ -66,7 +66,9 @@
 		/// </summary>
 		Precision15 = 15,
 
-		// Street
+		/// <summary>
+		/// Street
+		/// </summary>
 		Precision16 = 16,
 
 		/// <summary>
