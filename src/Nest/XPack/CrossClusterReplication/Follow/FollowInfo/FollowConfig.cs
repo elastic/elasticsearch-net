@@ -30,9 +30,9 @@ namespace Nest
 		public string MaximumWriteBufferSize { get; internal set; }
 
 		[DataMember(Name = "max_retry_delay")]
-		public TimeSpan MaximumRetryDelay { get; internal set; }
+		public Time MaximumRetryDelay { get; internal set; }
 
 		[DataMember(Name = "read_poll_timeout")]
-		public TimeSpan ReadPollTimeout { get; internal set; }
+		public Time ReadPollTimeout { get; internal set; }
 	}
 }
