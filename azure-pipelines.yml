@@ -49,7 +49,7 @@ jobs:
   strategy:
       maxParallel: 5
       matrix:
-          es7:
+          latest:
               esVersion: 'latest'
   steps:
       - script: './build.sh integrate-one $(esVersion) "readonly,writable" skipdocs'
