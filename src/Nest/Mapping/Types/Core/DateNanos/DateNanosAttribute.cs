@@ -37,7 +37,6 @@ namespace Nest
 		}
 
 		double? IDateNanosProperty.Boost { get; set; }
-		INumericFielddata IDateNanosProperty.Fielddata { get; set; }
 		string IDateNanosProperty.Format { get; set; }
 		bool? IDateNanosProperty.IgnoreMalformed { get; set; }
 

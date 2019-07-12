@@ -14,9 +14,6 @@ namespace Nest
 		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
-		[DataMember(Name = "fielddata")]
-		INumericFielddata Fielddata { get; set; }
-
 		/// <summary>
 		/// The date format(s) that can be parsed. Defaults to strict_date_optional_time||epoch_millis.
 		/// <see cref="DateFormat" />
@@ -55,9 +52,6 @@ namespace Nest
 		public double? Boost { get; set; }
 
 		/// <inheritdoc />
-		public INumericFielddata Fielddata { get; set; }
-
-		/// <inheritdoc />
 		public string Format { get; set; }
 
 		/// <inheritdoc />
@@ -80,30 +74,34 @@ namespace Nest
 	{
 		public DateNanosPropertyDescriptor() : base(FieldType.DateNanos) { }
 
+		/// <inheritdoc cref="IDateNanosProperty.Boost"/>
 		double? IDateNanosProperty.Boost { get; set; }
-		INumericFielddata IDateNanosProperty.Fielddata { get; set; }
+
+		/// <inheritdoc cref="IDateNanosProperty.Format"/>
 		string IDateNanosProperty.Format { get; set; }
+
+		/// <inheritdoc cref="IDateNanosProperty.IgnoreMalformed"/>
 		bool? IDateNanosProperty.IgnoreMalformed { get; set; }
+
+		/// <inheritdoc cref="IDateNanosProperty.Index"/>
 		bool? IDateNanosProperty.Index { get; set; }
+
+		/// <inheritdoc cref="IDateNanosProperty.NullValue"/>
 		DateTime? IDateNanosProperty.NullValue { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDateNanosProperty.Index"/>
 		public DateNanosPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDateNanosProperty.Boost"/>
 		public DateNanosPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDateNanosProperty.NullValue"/>
 		public DateNanosPropertyDescriptor<T> NullValue(DateTime? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDateNanosProperty.IgnoreMalformed"/>
 		public DateNanosPropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(ignoreMalformed, (a, v) => a.IgnoreMalformed = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDateNanosProperty.Format"/>
 		public DateNanosPropertyDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
-
-		/// <inheritdoc />
-		public DateNanosPropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
-			Assign(selector(new NumericFielddataDescriptor()), (a, v) => a.Fielddata = v);
 	}
 }
