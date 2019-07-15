@@ -833,6 +833,7 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.WordDelimiterGraph(n, t => t
+					.AdjustOffsets()
 					.CatenateAll()
 					.CatenateNumbers()
 					.CatenateWords()
@@ -848,6 +849,7 @@ namespace Tests.Analysis.TokenFilters
 			public override ITokenFilter Initializer =>
 				new WordDelimiterGraphTokenFilter
 				{
+					AdjustOffsets = true,
 					CatenateAll = true,
 					CatenateNumbers = true,
 					CatenateWords = true,
@@ -863,6 +865,7 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "word_delimiter_graph",
+				adjust_offsets = true,
 				generate_word_parts = true,
 				generate_number_parts = true,
 				catenate_words = true,
