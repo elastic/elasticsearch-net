@@ -239,7 +239,7 @@ namespace Elasticsearch.Net
 				request.Proxy = null;
 		}
 
-		private void SetAuthenticationIfNeeded(RequestData requestData, HttpWebRequest request)
+		protected virtual void SetAuthenticationIfNeeded(RequestData requestData, HttpWebRequest request)
 		{
 			// Api Key authentication takes precedence
 			var apiKeySet = SetApiKeyAuthenticationIfNeeded(request, requestData);
@@ -248,6 +248,7 @@ namespace Elasticsearch.Net
 				SetBasicAuthenticationIfNeeded(request, requestData);
 		}
 
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
 		protected virtual void SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
@@ -268,6 +269,7 @@ namespace Elasticsearch.Net
 			request.Headers["Authorization"] = $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo))}";
 		}
 
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
 		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			// ApiKey auth credentials take the following precedence (highest -> lowest):

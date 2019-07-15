@@ -116,7 +116,7 @@ namespace Elasticsearch.Net
 		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
 		private BasicAuthenticationCredentials _basicAuthCredentials;
-		private ApiKeyAuthenticationCredentials _apiKeyAuthentication;
+		private ApiKeyAuthenticationCredentials _apiKeyAuthCredentials;
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		private int _connectionLimit;
@@ -170,7 +170,7 @@ namespace Elasticsearch.Net
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
-		ApiKeyAuthenticationCredentials IConnectionConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthentication;
+		ApiKeyAuthenticationCredentials IConnectionConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthCredentials;
 		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
 		X509CertificateCollection IConnectionConfigurationValues.ClientCertificates => _clientCertificates;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
@@ -440,13 +440,13 @@ namespace Elasticsearch.Net
 		/// Api Key to send with all requests to Elasticsearch
 		/// </summary>
 		public T ApiKeyAuthentication(string id, SecureString apiKey) =>
-			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthentication = v);
+			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthCredentials = v);
 
 		/// <summary>
 		/// Api Key to send with all requests to Elasticsearch
 		/// </summary>
 		public T ApiKeyAuthentication(string id, string apiKey) =>
-			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthentication = v);
+			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthCredentials = v);
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
@@ -537,6 +537,7 @@ namespace Elasticsearch.Net
 			_semaphore?.Dispose();
 			_proxyPassword?.Dispose();
 			_basicAuthCredentials?.Dispose();
+			_apiKeyAuthCredentials?.Dispose();
 		}
 
 		protected virtual bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>

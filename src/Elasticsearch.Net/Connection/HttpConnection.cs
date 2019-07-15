@@ -216,8 +216,57 @@ namespace Elasticsearch.Net
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
 			var request = CreateRequestMessage(requestData);
-			SetBasicAuthenticationIfNeeded(request, requestData);
+			SetAuthenticationIfNeeded(request, requestData);
 			return request;
+		}
+
+		protected virtual void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			// Api Key authentication takes precedence
+			var apiKeySet = SetApiKeyAuthenticationIfNeeded(requestMessage, requestData);
+
+			if (!apiKeySet)
+				SetBasicAuthenticationIfNeeded(requestMessage, requestData);
+		}
+
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
+		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			// ApiKey auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+
+			string apiKey = null;
+			if (requestData.ApiKeyAuthenticationCredentials != null)
+				apiKey = requestData.ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
+
+			if (string.IsNullOrWhiteSpace(apiKey))
+				return false;
+
+			requestMessage.Headers.Authorization = new AuthenticationHeaderValue("ApiKey", apiKey);
+			return true;
+
+		}
+		
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
+		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			// Basic auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+			// 3 - Specified with the URI (lowest precedence)
+
+			string userInfo = null;
+			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
+				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+			else if (requestData.BasicAuthorizationCredentials != null)
+				userInfo =
+					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
+			if (!userInfo.IsNullOrEmpty())
+			{
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+			}
 		}
 
 		protected virtual HttpRequestMessage CreateRequestMessage(RequestData requestData)
@@ -255,21 +304,6 @@ namespace Elasticsearch.Net
 
 		private static void SetAsyncContent(HttpRequestMessage message, RequestData requestData, CancellationToken token) =>
 			message.Content = new RequestDataContent(requestData, token);
-
-		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
-		{
-			string userInfo = null;
-			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
-				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
-			else if (requestData.BasicAuthorizationCredentials != null)
-				userInfo =
-					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
-			if (!userInfo.IsNullOrEmpty())
-			{
-				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
-				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-			}
-		}
 
 		private static System.Net.Http.HttpMethod ConvertHttpMethod(HttpMethod httpMethod)
 		{
