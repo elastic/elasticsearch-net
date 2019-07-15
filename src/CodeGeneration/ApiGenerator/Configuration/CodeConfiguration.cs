@@ -22,8 +22,6 @@ namespace ApiGenerator.Configuration
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-			"indices.freeze.json",
-			"indices.unfreeze.json",
 
 			"ccr.follow_info.json",
 			"ccr.forget_follower.json"
