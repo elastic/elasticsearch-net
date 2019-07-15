@@ -11,6 +11,13 @@ namespace Nest
 	public interface IWordDelimiterGraphTokenFilter : ITokenFilter
 	{
 		/// <summary>
+		/// By default, the filter tries to output subtokens with adjusted offsets to reflect their actual position in the token stream. However, when used in combination with other filters that alter the length or starting position of tokens without changing their offsets (e.g. <see cref="TrimTokenFilter"/>) this can cause tokens with illegal offsets to be emitted. Setting <see cref="AdjustOffsets"/> to false will stop <see cref="WordDelimiterGraphTokenFilter"/> from adjusting these internal offsets.
+		/// </summary>
+		[DataMember(Name ="adjust_offsets")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? AdjustOffsets { get; set; }
+
+		/// <summary>
 		/// If true causes all subword parts to be catenated: "wi-fi-4000" ⇒ "wifi4000". Defaults to false.
 		/// </summary>
 		[DataMember(Name ="catenate_all")]
@@ -105,6 +112,9 @@ namespace Nest
 		public WordDelimiterGraphTokenFilter() : base("word_delimiter_graph") { }
 
 		/// <inheritdoc />
+		public bool? AdjustOffsets { get; set; }
+
+		/// <inheritdoc />
 		public bool? CatenateAll { get; set; }
 
 		/// <inheritdoc />
@@ -149,6 +159,7 @@ namespace Nest
 		: TokenFilterDescriptorBase<WordDelimiterGraphTokenFilterDescriptor, IWordDelimiterGraphTokenFilter>, IWordDelimiterGraphTokenFilter
 	{
 		protected override string Type => "word_delimiter_graph";
+		bool? IWordDelimiterGraphTokenFilter.AdjustOffsets { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.CatenateAll { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.CatenateNumbers { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.CatenateWords { get; set; }
@@ -178,6 +189,9 @@ namespace Nest
 		/// <inheritdoc />
 		public WordDelimiterGraphTokenFilterDescriptor CatenateNumbers(bool? catenateNumbers = true) =>
 			Assign(catenateNumbers, (a, v) => a.CatenateNumbers = v);
+
+		/// <inheritdoc />
+		public WordDelimiterGraphTokenFilterDescriptor AdjustOffsets(bool? adjustOffsets = true) => Assign(adjustOffsets, (a, v) => a.AdjustOffsets = v);
 
 		/// <inheritdoc />
 		public WordDelimiterGraphTokenFilterDescriptor CatenateAll(bool? catenateAll = true) => Assign(catenateAll, (a, v) => a.CatenateAll = v);
