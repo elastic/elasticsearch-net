@@ -161,6 +161,10 @@ namespace Nest
 		[DataMember(Name = "wildcard")]
 		IWildcardQuery Wildcard { get; set; }
 
+		/// <inheritdoc cref="IRankFeatureQuery"/>
+		[DataMember(Name = "rank_feature")]
+		IRankFeatureQuery RankFeature { get; set; }
+
 		void Accept(IQueryVisitor visitor);
 	}
 }

@@ -102,6 +102,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
 			visitor.CountsShouldContainKeyAndCountBe("ip_range", 1);
 			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
+			visitor.CountsShouldContainKeyAndCountBe("rank_feature", 1);
 		}
 	}
 
@@ -192,6 +193,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void Visit(IKeywordProperty mapping) => Increment("keyword");
 
 		public void Visit(ITypeMapping mapping) => Increment("type");
+
+		public void Visit(IRankFeatureProperty mapping) => Increment("rank_feature");
+
+		public void Visit(IRankFeaturesProperty mapping) => Increment("rank_features");
 
 		private void Increment(string key)
 		{
