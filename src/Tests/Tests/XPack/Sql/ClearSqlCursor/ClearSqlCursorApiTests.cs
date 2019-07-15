@@ -11,7 +11,9 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Sql.ClearSqlCursor
 {
-	[SkipVersion("<6.4.0", "")]
+	//[SkipVersion("<6.4.0", "")]
+	// TODO: unskip when https://github.com/elastic/elasticsearch/issues/44320 is fixed
+	[SkipVersion(">1.0.0", "open issue https://github.com/elastic/elasticsearch/issues/44320")]
 	public class ClearSqlCursorApiTests
 		: ApiIntegrationTestBase<XPackCluster, ClearSqlCursorResponse, IClearSqlCursorRequest, ClearSqlCursorDescriptor, ClearSqlCursorRequest>
 	{
