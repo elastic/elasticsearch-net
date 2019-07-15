@@ -12,11 +12,13 @@ namespace Nest
 
 		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
-			var catResponse = new CatResponse<TCatRecord>();
-
 			if (!response.Success)
-				return catResponse;
+				return new CatResponse<TCatRecord>();
 
+			if (response.HttpStatusCode == 404)
+				return builtInSerializer.Deserialize<CatResponse<TCatRecord>>(stream);
+
+			var catResponse = new CatResponse<TCatRecord>();
 			var records = builtInSerializer.Deserialize<IReadOnlyCollection<TCatRecord>>(stream);
 			catResponse.Records = records;
 			return catResponse;
@@ -24,11 +26,13 @@ namespace Nest
 
 		public override async Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default)
 		{
-			var catResponse = new CatResponse<TCatRecord>();
-
 			if (!response.Success)
-				return catResponse;
+				return new CatResponse<TCatRecord>();
 
+			if (response.HttpStatusCode == 404)
+				return await builtInSerializer.DeserializeAsync<CatResponse<TCatRecord>>(stream, ctx).ConfigureAwait(false);
+
+			var catResponse = new CatResponse<TCatRecord>();
 			var records = await builtInSerializer.DeserializeAsync<IReadOnlyCollection<TCatRecord>>(stream, ctx).ConfigureAwait(false);
 			catResponse.Records = records;
 			return catResponse;

@@ -87,6 +87,8 @@ namespace Nest
 				case FieldType.IpRange: return Deserialize<IpRangeProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Join: return Deserialize<JoinProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Alias: return Deserialize<FieldAliasProperty>(ref segmentReader, formatterResolver);
+				case FieldType.RankFeature: return Deserialize<RankFeatureProperty>(ref segmentReader, formatterResolver);
+				case FieldType.RankFeatures: return Deserialize<RankFeaturesProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -180,6 +182,12 @@ namespace Nest
 					break;
 				case "alias":
 					Serialize<IFieldAliasProperty>(ref writer, value, formatterResolver);
+					break;
+				case "rank_feature":
+					Serialize<IRankFeatureProperty>(ref writer, value, formatterResolver);
+					break;
+				case "rank_features":
+					Serialize<IRankFeaturesProperty>(ref writer, value, formatterResolver);
 					break;
 				default:
 					if (value is IGenericProperty genericProperty)
