@@ -928,6 +928,83 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IFreezeIndexRequest : IRequest<FreezeIndexRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	public partial class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
+	{
+		protected IFreezeIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
+		///<summary>/{index}/_freeze</summary>
+		///<param name = "index">this parameter is required</param>
+		public FreezeIndexRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected FreezeIndexRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IFreezeIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
+
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards
+		{
+			get => Q<string>("wait_for_active_shards");
+			set => Q("wait_for_active_shards", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -2328,6 +2405,83 @@ namespace Nest
 		{
 			get => Q<Level? >("level");
 			set => Q("level", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IUnfreezeIndexRequest : IRequest<UnfreezeIndexRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	public partial class UnfreezeIndexRequest : PlainRequestBase<UnfreezeIndexRequestParameters>, IUnfreezeIndexRequest
+	{
+		protected IUnfreezeIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;
+		///<summary>/{index}/_unfreeze</summary>
+		///<param name = "index">this parameter is required</param>
+		public UnfreezeIndexRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected UnfreezeIndexRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IUnfreezeIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
+
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards
+		{
+			get => Q<string>("wait_for_active_shards");
+			set => Q("wait_for_active_shards", value);
 		}
 	}
 
