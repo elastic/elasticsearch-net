@@ -119,6 +119,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						name = new { type = "text" }
 					},
 					type = "object"
+				},
+				rank = new
+				{
+					type = "rank_feature"
 				}
 			}
 		};
@@ -175,6 +179,9 @@ namespace Tests.Indices.MappingManagement.PutMapping
 							.Name(tag => tag.Name)
 						)
 					)
+				)
+				.RankFeature(rf => rf
+					.Name(p => p.Rank)
 				)
 			);
 
@@ -288,6 +295,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						}
 					}
 				},
+				{ p => p.Rank, new RankFeatureProperty() },
 			}
 		};
 
