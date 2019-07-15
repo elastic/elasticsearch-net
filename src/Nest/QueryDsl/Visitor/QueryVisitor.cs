@@ -72,6 +72,8 @@
 
 		void Visit(IQueryStringQuery query);
 
+		void Visit(IRankFeatureQuery query);
+
 		void Visit(IRangeQuery query);
 
 		void Visit(IRegexpQuery query);
@@ -208,6 +210,8 @@
 		public virtual void Visit(IPrefixQuery query) { }
 
 		public virtual void Visit(IQueryStringQuery query) { }
+
+		public virtual void Visit(IRankFeatureQuery query) { }
 
 		public virtual void Visit(IRangeQuery query) { }
 

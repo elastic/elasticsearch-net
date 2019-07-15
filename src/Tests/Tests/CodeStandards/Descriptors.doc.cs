@@ -216,6 +216,9 @@ namespace Tests.CodeStandards
 				where !(m.Name == nameof(RuleConditionDescriptor.AppliesTo) && dt == typeof(RuleConditionDescriptor))
 				where !(m.Name == nameof(RuleConditionDescriptor.Operator) && dt == typeof(RuleConditionDescriptor))
 				where !(m.Name == nameof(RuleConditionDescriptor.Value) && dt == typeof(RuleConditionDescriptor))
+				where !(m.Name == nameof(RankFeatureLogarithmFunctionDescriptor.ScalingFactor) && dt == typeof(RankFeatureLogarithmFunctionDescriptor))
+				where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Exponent) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
+				where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Pivot) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
 
 				select new {m, d, p};
 

@@ -346,6 +346,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			.Scalar(p => p.NumberOfContributors, n => n.Store())
 			.Object<Dictionary<string, Metadata>>(o => o
 				.Name(p => p.Metadata)
+			)
+			.RankFeature(rf => rf
+				.Name(p => p.Rank)
+				.PositiveScoreImpact()
 			);
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props

@@ -121,5 +121,11 @@ namespace Nest
 
 		[EnumMember(Value = "join")]
 		Join,
+
+		[EnumMember(Value = "rank_feature")]
+		RankFeature,
+
+		[EnumMember(Value = "rank_features")]
+		RankFeatures
 	}
 }
