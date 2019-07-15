@@ -114,6 +114,10 @@ namespace Nest
 		public static QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) =>
 			new QueryContainerDescriptor<T>().Regexp(selector);
 
+		/// <inheritdoc cref="IRankFeatureQuery"/>
+		public static QueryContainer RankFeature(Func<RankFeatureQueryDescriptor<T>, IRankFeatureQuery> selector) =>
+			new QueryContainerDescriptor<T>().RankFeature(selector);
+
 		public static QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
 			new QueryContainerDescriptor<T>().Script(selector);
 

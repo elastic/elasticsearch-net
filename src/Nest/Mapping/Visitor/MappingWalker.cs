@@ -211,6 +211,18 @@ namespace Nest
 					case FieldType.Join:
 						Visit<IJoinProperty>(field, t => { _visitor.Visit(t); });
 						break;
+					case FieldType.RankFeature:
+						Visit<IRankFeatureProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
+					case FieldType.RankFeatures:
+						Visit<IRankFeaturesProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
 				}
 			}
 		}

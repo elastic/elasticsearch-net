@@ -273,6 +273,8 @@ Specialized types of queries that do not fit into other groups
 
 * <<percolate-query-usage,Percolate Query Usage>>
 
+* <<rank-feature-query-usage,Rank Feature Query Usage>>
+
 * <<script-query-usage,Script Query Usage>>
 
 * <<script-score-query-usage,Script Score Query Usage>>
@@ -286,6 +288,8 @@ include::query-dsl/specialized/more-like-this/more-like-this-full-document-query
 include::query-dsl/specialized/more-like-this/more-like-this-query-usage.asciidoc[]
 
 include::query-dsl/specialized/percolate/percolate-query-usage.asciidoc[]
+
+include::query-dsl/specialized/rank-feature/rank-feature-query-usage.asciidoc[]
 
 include::query-dsl/specialized/script/script-query-usage.asciidoc[]
 

@@ -353,6 +353,10 @@ namespace Nest
 		public QueryContainer Intervals(Func<IntervalsQueryDescriptor<T>, IIntervalsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Intervals = query);
 
+		/// <inheritdoc cref="IRankFeatureQuery"/>
+		public QueryContainer RankFeature(Func<RankFeatureQueryDescriptor<T>, IRankFeatureQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.RankFeature = query);
+
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery.
 		/// </summary>
