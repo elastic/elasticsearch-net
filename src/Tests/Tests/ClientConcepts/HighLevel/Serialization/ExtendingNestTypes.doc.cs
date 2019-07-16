@@ -48,9 +48,10 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			[PropertyName("numeric")]
 			public bool Numeric { get; set; }
 		}
-
+		
 
 		[U (Skip = "TODO: Does not work with utf8json")]
+		// hide
 		public void InjectACustomIPropertyImplementation()
 		{
 			/**

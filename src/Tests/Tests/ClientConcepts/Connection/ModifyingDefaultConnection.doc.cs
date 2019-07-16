@@ -141,6 +141,7 @@ namespace Tests.ClientConcepts.Connection
 			}
 		}
 
+
 		/**
 		 * As before, a new instance of the custom connection is passed to `ConnectionSettings` in order to
 		 * use
@@ -178,6 +179,9 @@ namespace Tests.ClientConcepts.Connection
 				return message;
 			}
 		}
+		/**
+		 * See <<working-with-certificates, Working with certificates>> for further details.
+		 */
 #endif
 	}
 }

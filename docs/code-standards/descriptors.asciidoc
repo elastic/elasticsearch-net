@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/CodeStandards/Descriptors.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/CodeStandards/Descriptors.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -204,6 +204,9 @@ var methods = from d in YieldAllDescriptors()
     where !(m.Name == nameof(RuleConditionDescriptor.AppliesTo) && dt == typeof(RuleConditionDescriptor))
     where !(m.Name == nameof(RuleConditionDescriptor.Operator) && dt == typeof(RuleConditionDescriptor))
     where !(m.Name == nameof(RuleConditionDescriptor.Value) && dt == typeof(RuleConditionDescriptor))
+    where !(m.Name == nameof(RankFeatureLogarithmFunctionDescriptor.ScalingFactor) && dt == typeof(RankFeatureLogarithmFunctionDescriptor))
+    where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Exponent) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
+    where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Pivot) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
 
     select new {m, d, p};
 

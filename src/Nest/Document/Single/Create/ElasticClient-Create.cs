@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Nest
@@ -31,11 +31,11 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="IElasticClient.CreateDocument{TDocument}"/>
-		public CreateResponse CreateDocument<TDocument>(TDocument document) 
+		public CreateResponse CreateDocument<TDocument>(TDocument document)
 			where TDocument : class => Create(document, null);
 
 		/// <inheritdoc cref="IElasticClient.CreateDocument{TDocument}"/>
-		public Task<CreateResponse> CreateDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default) 
+		public Task<CreateResponse> CreateDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 			where TDocument : class => CreateAsync(document, null, cancellationToken);
 	}
 }

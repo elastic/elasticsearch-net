@@ -4,7 +4,7 @@ using Elasticsearch.Net.Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class MultiSearchJsonConverter : IJsonFormatter<IMultiSearchRequest>
+	internal class MultiSearchFormatter : IJsonFormatter<IMultiSearchRequest>
 	{
 		private const byte Newline = (byte)'\n';
 

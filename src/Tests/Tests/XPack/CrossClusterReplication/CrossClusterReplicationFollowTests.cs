@@ -81,8 +81,8 @@ namespace Tests.XPack.CrossClusterReplication
 							if (cluster.ClusterConfiguration.Version < "6.7.0")
 								return new CreateFollowIndexRequest(CopyIndex(v))
 								{
-									RemoteCluster = DefaultSeeder.RemoteClusterName,
-									LeaderIndex = v
+							RemoteCluster = DefaultSeeder.RemoteClusterName,
+							LeaderIndex = v
 								};
 
 							return new CreateFollowIndexRequest(CopyIndex(v))
@@ -96,7 +96,7 @@ namespace Tests.XPack.CrossClusterReplication
 						{
 							if (cluster.ClusterConfiguration.Version < "6.7.0")
 								return d
-									.RemoteCluster(DefaultSeeder.RemoteClusterName)
+							.RemoteCluster(DefaultSeeder.RemoteClusterName)
 									.LeaderIndex(v);
 
 							return d

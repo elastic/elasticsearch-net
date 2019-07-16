@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -192,13 +193,13 @@ namespace Tests.Document.Single.Index
 			);
 
 			createIndexResponse.ShouldBeValid();
-			var ndexResponse = _client.Index(Document, i => i
+			var indexResponse = _client.Index(Document, i => i
 				.Index(Index)
 				.Refresh(Refresh.True)
 				.Pipeline(PipelineId)
 			);
 
-			ndexResponse.ShouldBeValid();
+			indexResponse.ShouldBeValid();
 		}
 
 		[I]
@@ -212,12 +213,12 @@ namespace Tests.Document.Single.Index
 			var ingestedAttachment = getResponse.Source;
 			ingestedAttachment.Should().NotBeNull();
 
-			var ndexResponse = _client.Index(ingestedAttachment, i => i
+			var indexResponse = _client.Index(ingestedAttachment, i => i
 				.Index(Index + "2")
 				.Refresh(Refresh.True)
 			);
 
-			ndexResponse.ShouldBeValid();
+			indexResponse.ShouldBeValid();
 
 			getResponse = _client.Get<IngestedAttachment>(1, g => g
 				.Index(Index + "2")

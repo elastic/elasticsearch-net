@@ -57,6 +57,12 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
+	///<summary>Request options for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	public class ForgetFollowerIndexRequestParameters : RequestParameters<ForgetFollowerIndexRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
 	///<summary>Request options for GetAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 	public class GetAutoFollowPatternRequestParameters : RequestParameters<GetAutoFollowPatternRequestParameters>
 	{

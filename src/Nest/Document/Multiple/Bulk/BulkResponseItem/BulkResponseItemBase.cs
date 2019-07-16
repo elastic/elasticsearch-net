@@ -82,8 +82,8 @@ namespace Nest
 				}
 			}
 		}
-    
 		public override string ToString() =>
 			$"{Operation} returned {Status} _index: {Index} _type: {Type} _id: {Id} _version: {Version} error: {Error}";
 	}
+
 }

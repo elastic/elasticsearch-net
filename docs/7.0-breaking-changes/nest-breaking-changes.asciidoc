@@ -47,6 +47,12 @@ With the current implementation of serialization with Utf8Json, this approach wi
 serializing types that it sees. `Reflection.Emit` is not supported on all platforms 
 e.g. UWP, Xamarin.iOS, Xamarin.Android.
 
+* Utf8Json is much stricter when deserializing JSON object field names to C# 
+https://en.wikipedia.org/wiki/Plain_old_CLR_object[POCO] properties. With the internal Json.NET serializer 
+in 6.x, JSON object field names would attempt to be matched with C# POCO property names first by an exact 
+match, falling back to a case insensitive match. With Utf8Json in 7.x however, JSON object field names must 
+match exactly the name configured for the C# POCO property name.
+
 [float]
 === High to Low level client dispatch changes
 

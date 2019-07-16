@@ -43,6 +43,7 @@ namespace Nest
 		internal static ApiUrls CrossClusterReplicationCreateFollowIndex = new ApiUrls(new[]{"{index}/_ccr/follow"});
 		internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[]{"{index}/_ccr/info"});
 		internal static ApiUrls CrossClusterReplicationFollowIndexStats = new ApiUrls(new[]{"{index}/_ccr/stats"});
+		internal static ApiUrls CrossClusterReplicationForgetFollowerIndex = new ApiUrls(new[]{"{index}/_ccr/forget_follower"});
 		internal static ApiUrls CrossClusterReplicationGetAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow", "_ccr/auto_follow/{name}"});
 		internal static ApiUrls CrossClusterReplicationPauseFollowIndex = new ApiUrls(new[]{"{index}/_ccr/pause_follow"});
 		internal static ApiUrls CrossClusterReplicationCreateAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
@@ -98,6 +99,7 @@ namespace Nest
 		internal static ApiUrls IndicesFlush = new ApiUrls(new[]{"_flush", "{index}/_flush"});
 		internal static ApiUrls IndicesSyncedFlush = new ApiUrls(new[]{"_flush/synced", "{index}/_flush/synced"});
 		internal static ApiUrls IndicesForceMerge = new ApiUrls(new[]{"_forcemerge", "{index}/_forcemerge"});
+		internal static ApiUrls IndicesFreeze = new ApiUrls(new[]{"{index}/_freeze"});
 		internal static ApiUrls IndicesGet = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesGetAlias = new ApiUrls(new[]{"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
 		internal static ApiUrls IndicesGetFieldMapping = new ApiUrls(new[]{"_mapping/field/{fields}", "{index}/_mapping/field/{fields}"});
@@ -117,6 +119,7 @@ namespace Nest
 		internal static ApiUrls IndicesShrink = new ApiUrls(new[]{"{index}/_shrink/{target}"});
 		internal static ApiUrls IndicesSplit = new ApiUrls(new[]{"{index}/_split/{target}"});
 		internal static ApiUrls IndicesStats = new ApiUrls(new[]{"_stats", "_stats/{metric}", "{index}/_stats", "{index}/_stats/{metric}"});
+		internal static ApiUrls IndicesUnfreeze = new ApiUrls(new[]{"{index}/_unfreeze"});
 		internal static ApiUrls IndicesBulkAlias = new ApiUrls(new[]{"_aliases"});
 		internal static ApiUrls IndicesValidateQuery = new ApiUrls(new[]{"_validate/query", "{index}/_validate/query"});
 		internal static ApiUrls NoNamespaceRootNodeInfo = new ApiUrls(new[]{""});

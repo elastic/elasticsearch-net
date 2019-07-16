@@ -23,6 +23,7 @@ jobs:
       testResultsFiles: 'src/Tests/Tests/**/*.trx'
       testRunTitle: Windows Unit Tests
 
+# TODO change esVersion to latest
 - job: WindowsIntegrationTests
   dependsOn: WindowsCanaryTests
   pool:

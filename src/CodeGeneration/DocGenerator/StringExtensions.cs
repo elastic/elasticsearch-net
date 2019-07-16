@@ -114,7 +114,8 @@ namespace DocGenerator
 										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
 									}"
 			},
-			{ "ProjectFilterExpectedJson", "new {term = new {type = new {value = \"project\"}}}" }
+			{ "ProjectFilterExpectedJson", "new {term = new {type = new {value = \"project\"}}}" },
+			{ "_scriptScoreSource", "\"decayNumericLinear(params.origin, params.scale, params.offset, params.decay, doc['numberOfCommits'].value)\""}
 		};
 
 		private static readonly Regex LeadingSpacesAndAsterisk = new Regex(@"^(?<value>[ \t]*\*\s?).*", RegexOptions.Compiled);
@@ -213,7 +214,7 @@ namespace DocGenerator
 
 		public static string[] SplitOnNewLines(this string input, StringSplitOptions options) => input.Split(new[] { "\r\n", "\n" }, options);
 
-		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
+		public static bool TryGetJsonForExpressionSyntax(this string anonymousTypeString, out string json)
 		{
 			json = null;
 

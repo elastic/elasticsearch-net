@@ -12,6 +12,7 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
+
 	internal static class Extensions
 	{
 		private static readonly ConcurrentDictionary<string, object> EnumCache = new ConcurrentDictionary<string, object>();
@@ -150,7 +151,7 @@ namespace Nest
 			return !enumerable.Any() || enumerable.All(t => t == null);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name, string message = null) 
+		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);

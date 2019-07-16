@@ -29,8 +29,8 @@
 	<files>
 		<file src="..\license.txt" target="" />
 
-		<file src="output\Nest.JsonNetSerializer\net461\Nest.JsonNetSerializer.dll" target="lib\netstandard2.0"/>
-		<file src="output\Nest.JsonNetSerializer\net461\Nest.JsonNetSerializer.xml" target="lib\netstandard2.0"/>
+		<file src="output\Nest.JsonNetSerializer\net461\Nest.JsonNetSerializer.dll" target="lib\net461"/>
+		<file src="output\Nest.JsonNetSerializer\net461\Nest.JsonNetSerializer.xml" target="lib\net461"/>
 	
 		<file src="output\Nest.JsonNetSerializer\netstandard2.0\Nest.JsonNetSerializer.dll" target="lib\netstandard2.0"/>
 		<file src="output\Nest.JsonNetSerializer\netstandard2.0\Nest.JsonNetSerializer.xml" target="lib\netstandard2.0"/>

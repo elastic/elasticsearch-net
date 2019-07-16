@@ -25,8 +25,7 @@ namespace Elasticsearch.Net
 	internal class RequestDataContent : HttpContent
 	{
 		private readonly RequestData _requestData;
-		private readonly Func<PostData, CompleteTaskOnCloseStream, RequestDataContent, TransportContext, Task> _onStreamAvailable;
-
+		private readonly Func<RequestData, CompleteTaskOnCloseStream, RequestDataContent, TransportContext, Task> _onStreamAvailable;
 
 		public RequestDataContent(RequestData requestData)
 		{
@@ -35,12 +34,17 @@ namespace Elasticsearch.Net
 			if (requestData.HttpCompression)
 				Headers.ContentEncoding.Add("gzip");
 
-			Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
+			Task OnStreamAvailable(RequestData data, Stream stream, HttpContent content, TransportContext context)
 			{
+				if (data.HttpCompression)
+					stream = new GZipStream(stream, CompressionMode.Compress, false);
+
 				using(stream)
-					data.Write(stream, requestData.ConnectionSettings);
+					data.PostData.Write(stream, data.ConnectionSettings);
+
 				return Task.CompletedTask;
 			}
+
 			_onStreamAvailable = OnStreamAvailable;
 		}
 		public RequestDataContent(RequestData requestData, CancellationToken token)
@@ -50,11 +54,15 @@ namespace Elasticsearch.Net
 			if (requestData.HttpCompression)
 				Headers.ContentEncoding.Add("gzip");
 
-			async Task OnStreamAvailable(PostData data, Stream stream, HttpContent content, TransportContext context)
+			async Task OnStreamAvailable(RequestData data, Stream stream, HttpContent content, TransportContext context)
 			{
+				if (data.HttpCompression)
+					stream = new GZipStream(stream, CompressionMode.Compress, false);
+
 				using (stream)
-					await data.WriteAsync(stream, requestData.ConnectionSettings, token).ConfigureAwait(false);
+					await data.PostData.WriteAsync(stream, data.ConnectionSettings, token).ConfigureAwait(false);
 			}
+
 			_onStreamAvailable = OnStreamAvailable;
 		}
 
@@ -69,16 +77,9 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is passed as task result.")]
 		protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
 		{
-
-			var data = _requestData.PostData;
-			if (data == null) return;
-
 			var serializeToStreamTask = new TaskCompletionSource<bool>();
-
-			if (_requestData.HttpCompression)
-				stream = new GZipStream(stream, CompressionMode.Compress, false);
 			var wrappedStream = new CompleteTaskOnCloseStream(stream, serializeToStreamTask);
-            await _onStreamAvailable(data, wrappedStream, this, context).ConfigureAwait(false);
+            await _onStreamAvailable(_requestData, wrappedStream, this, context).ConfigureAwait(false);
             await serializeToStreamTask.Task.ConfigureAwait(false);
 		}
 
@@ -110,7 +111,6 @@ namespace Elasticsearch.Net
 				_serializeToStreamTask.TrySetResult(true);
 				base.Dispose();
 			}
-
 
 			public override void Close() => _serializeToStreamTask.TrySetResult(true);
 		}
@@ -193,6 +193,8 @@ namespace Elasticsearch.Net
 			public override void EndWrite(IAsyncResult asyncResult) => _innerStream.EndWrite(asyncResult);
 
 			public override void WriteByte(byte value) => _innerStream.WriteByte(value);
+
+			public override void Close() => _innerStream.Close();
 		}
 	}
 }

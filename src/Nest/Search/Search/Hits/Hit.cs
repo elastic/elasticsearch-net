@@ -113,15 +113,15 @@ namespace Nest
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, InnerHitsResult>))]
 		IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; }
 
+		[DataMember(Name = "_nested")]
+		NestedIdentity Nested { get; }
+
 		/// <summary>
 		/// Which queries the hit is a match for, when a compound query is involved
 		/// and named queries used
 		/// </summary>
 		[DataMember(Name = "matched_queries")]
 		IReadOnlyCollection<string> MatchedQueries { get; }
-
-		[DataMember(Name = "_nested")]
-		NestedIdentity Nested { get; }
 
 		/// <summary>
 		/// The score for the hit in relation to the query

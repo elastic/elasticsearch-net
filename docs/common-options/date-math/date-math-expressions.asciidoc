@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/CommonOptions/DateMath/DateMathExpressions.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/CommonOptions/DateMath/DateMathExpressions.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -83,14 +83,28 @@ anchor will be an actual `DateTime`, even after a serialization/deserialization 
 [source,csharp]
 ----
 var date = new DateTime(2015, 05, 05);
-Expect("2015-05-05T00:00:00")
-    .WhenSerializing<Nest.DateMath>(date)
-    .AssertSubject(dateMath => ((IDateMath)dateMath)
-        .Anchor.Match(
-            d => d.Should().Be(date),
-            s => s.Should().BeNull()
-        )
-    );
+----
+
+will serialize to
+
+[source,javascript]
+----
+"2015-05-05T00:00:00"
+----
+
+When the `DateTime` is local or UTC, the time zone information is included.
+For example, for a UTC `DateTime`
+
+[source,csharp]
+----
+var utcDate = new DateTime(2015, 05, 05, 0, 0, 0, DateTimeKind.Utc);
+----
+
+will serialize to
+
+[source,javascript]
+----
+"2015-05-05T00:00:00Z"
 ----
 
 ==== Complex expressions

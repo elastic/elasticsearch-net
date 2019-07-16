@@ -136,11 +136,11 @@ namespace Nest
 			{
 				if (documentWithResponse.Item1.IsValid) continue;
 
-				if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
-					retryableDocuments.Add(documentWithResponse.Item2);
-				else
-					droppedDocuments.Add(documentWithResponse);
-			}
+					if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
+						retryableDocuments.Add(documentWithResponse.Item2);
+					else
+						droppedDocuments.Add(documentWithResponse);
+				}
 
 			HandleDroppedDocuments(droppedDocuments, response);
 

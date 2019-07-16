@@ -57,7 +57,10 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				SetContent(requestMessage, requestData);
+
+				if (requestData.PostData != null)
+					SetContent(requestMessage, requestData);
+
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
@@ -107,8 +110,11 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				SetAsyncContent(requestMessage, requestData, cancellationToken);
-				using(requestMessage?.Content ?? (IDisposable)Stream.Null) 
+
+				if (requestData.PostData != null)
+					SetAsyncContent(requestMessage, requestData, cancellationToken);
+
+				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
 					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
@@ -241,13 +247,7 @@ namespace Elasticsearch.Net
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
-
-			if (requestData.HttpCompression)
-			{
-				requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-				requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
-			}
-
+			
 			return requestMessage;
 		}
 

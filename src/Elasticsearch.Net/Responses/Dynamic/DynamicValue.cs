@@ -482,7 +482,7 @@ namespace Elasticsearch.Net
 						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
 						{
 							return (T)(object)result;
-					}
+						}
 					}
 					else if (stringValue != null)
 					{
@@ -492,7 +492,7 @@ namespace Elasticsearch.Net
 					else if (type == typeof(string))
 					{
 						return (T)Convert.ChangeType(_value, TypeCode.String, CultureInfo.InvariantCulture);
-				}
+					}
 				}
 				catch
 				{
@@ -660,7 +660,7 @@ namespace Elasticsearch.Net
 					}
 					else
 						return false;
-				}
+					}
 
 				result = Convert.ChangeType(_value, typeCode);
 				return true;

@@ -920,7 +920,6 @@ namespace Nest
 			public const string TopLeft = "top_left";
 
 			public const string Total = "total";
-
 			public const string Value = "value";
 
 			public const string ValueAsString = "value_as_string";

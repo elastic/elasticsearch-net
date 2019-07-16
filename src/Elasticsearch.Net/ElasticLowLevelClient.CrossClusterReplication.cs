@@ -85,6 +85,18 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> FollowIndexStatsAsync<TResponse>(string index, FollowIndexStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_ccr/stats"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_ccr/forget_follower <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+		///<param name = "index">the name of the leader index for which specified follower retention leases should be removed</param>
+		///<param name = "body">the name and UUID of the follower index, the name of the cluster containing the follower index, and the alias from the perspective of that cluster for the remote cluster containing the leader index</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ForgetFollowerIndex<TResponse>(string index, PostData body, ForgetFollowerIndexRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_ccr/forget_follower"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_ccr/forget_follower <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+		///<param name = "index">the name of the leader index for which specified follower retention leases should be removed</param>
+		///<param name = "body">the name and UUID of the follower index, the name of the cluster containing the follower index, and the alias from the perspective of that cluster for the remote cluster containing the leader index</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> ForgetFollowerIndexAsync<TResponse>(string index, PostData body, ForgetFollowerIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ccr/forget_follower"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetAutoFollowPattern<TResponse>(GetAutoFollowPatternRequestParameters requestParameters = null)

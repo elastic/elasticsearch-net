@@ -49,4 +49,29 @@ namespace Tests.Cat.CatCount
 		protected override void ExpectResponse(CatResponse<CatCountRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
 	}
+
+	public class CatCountNonExistentIndexApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+	{
+		public CatCountNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => "/_cat/count/non-existent-index";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Cat.Count(c => c.Index("non-existent-index")),
+			(client, f) => client.Cat.CountAsync(c => c.Index("non-existent-index")),
+			(client, r) => client.Cat.Count(new CatCountRequest("non-existent-index")),
+			(client, r) => client.Cat.CountAsync(new CatCountRequest("non-existent-index"))
+		);
+
+		protected override void ExpectResponse(CatResponse<CatCountRecord> response)
+		{
+			response.ApiCall.Success.Should().BeTrue();
+			response.ServerError.Should().NotBeNull();
+			response.Records.Should().NotBeNull().And.BeEmpty();
+		}
+	}
 }

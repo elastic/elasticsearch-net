@@ -72,6 +72,8 @@
 
 		void Visit(IQueryStringQuery query);
 
+		void Visit(IRankFeatureQuery query);
+
 		void Visit(IRangeQuery query);
 
 		void Visit(IRegexpQuery query);
@@ -85,6 +87,8 @@
 		void Visit(ITermsQuery query);
 
 		void Visit(IScriptQuery query);
+
+		void Visit(IScriptScoreQuery query);
 
 		void Visit(IGeoPolygonQuery query);
 
@@ -207,6 +211,8 @@
 
 		public virtual void Visit(IQueryStringQuery query) { }
 
+		public virtual void Visit(IRankFeatureQuery query) { }
+
 		public virtual void Visit(IRangeQuery query) { }
 
 		public virtual void Visit(IRegexpQuery query) { }
@@ -236,6 +242,8 @@
 		public virtual void Visit(ITermsQuery query) { }
 
 		public virtual void Visit(IScriptQuery query) { }
+
+		public virtual void Visit(IScriptScoreQuery query) { }
 
 		public virtual void Visit(IGeoPolygonQuery query) { }
 

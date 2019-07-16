@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.DocumentationTests;
 
 namespace Tests.ClientConcepts.HighLevel.Indexing

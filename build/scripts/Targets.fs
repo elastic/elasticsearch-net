@@ -3,6 +3,7 @@ namespace Scripts
 open System
 open System.IO
 
+open Paths
 open Build
 open Commandline
 open Bullseye

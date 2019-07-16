@@ -1,10 +1,10 @@
 ﻿namespace Scripts
 
 open System
+open Tooling
 open Fake.Core
 open System.IO
 open Commandline
-open Fake.Core
 open Versioning
 
 module Tests =
@@ -60,7 +60,7 @@ module Tests =
             let out = Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
             if out.ExitCode <> 0 then failwith "dotnet test failed"
         else 
-            Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+        Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
 
     let RunReleaseUnitTests (ArtifactsVersion(version)) =
         //xUnit always does its own build, this env var is picked up by Tests.csproj

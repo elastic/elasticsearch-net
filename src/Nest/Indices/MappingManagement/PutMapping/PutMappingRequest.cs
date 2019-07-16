@@ -18,6 +18,7 @@ namespace Nest
 	public partial class PutMappingRequest
 	{
 		/// <inheritdoc />
+		[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 		public IAllField AllField { get; set; }
 
 		/// <inheritdoc />
@@ -36,6 +37,7 @@ namespace Nest
 		public IFieldNamesField FieldNamesField { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 		public IIndexField IndexField { get; set; }
 
 		/// <inheritdoc />
@@ -63,12 +65,14 @@ namespace Nest
 	[DataContract]
 	public partial class PutMappingDescriptor<TDocument> where TDocument : class
 	{
+		[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
+		[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 		IIndexField ITypeMapping.IndexField { get; set; }
 		IDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
@@ -102,10 +106,12 @@ namespace Nest
 		public PutMappingDescriptor<TDocument> Dynamic(bool? dynamic = true) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
 		/// <inheritdoc cref="ITypeMapping.AllField" />
+		[Obsolete("The _all field is no longer supported in Elasticsearch 7.x and will be removed in the next major release. The value will not be sent in a request. An _all like field can be achieved using copy_to")]
 		public PutMappingDescriptor<TDocument> AllField(Func<AllFieldDescriptor, IAllField> allFieldSelector) =>
 			Assign(allFieldSelector, (a, v) => a.AllField = v?.Invoke(new AllFieldDescriptor()));
 
 		/// <inheritdoc cref="ITypeMapping.IndexField" />
+		[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 		public PutMappingDescriptor<TDocument> IndexField(Func<IndexFieldDescriptor, IIndexField> indexFieldSelector) =>
 			Assign(indexFieldSelector, (a, v) => a.IndexField = v?.Invoke(new IndexFieldDescriptor()));
 
@@ -118,6 +124,7 @@ namespace Nest
 			Assign(disabled, (a, v) => a.SizeField = new SizeField { Enabled = !v });
 
 		/// <inheritdoc cref="ITypeMapping.IndexField" />
+		[Obsolete("Configuration for the _index field is no longer supported in Elasticsearch 7.x and will be removed in the next major release.")]
 		public PutMappingDescriptor<TDocument> DisableIndexField(bool? disabled = true) =>
 			Assign(disabled, (a, v) => a.IndexField = new IndexField { Enabled = !v });
 
