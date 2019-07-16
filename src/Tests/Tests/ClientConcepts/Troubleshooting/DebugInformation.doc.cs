@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Elastic.Xunit.Sdk;
@@ -58,6 +59,23 @@ namespace Tests.ClientConcepts.Troubleshooting
 			);
 
 			response.DebugInformation.Should().NotContain("pass2");
+		}
+		//hide
+		[U] public void ApiKeyIsNotExposedInDebugInformation()
+		{
+			// hide
+			var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
+				.DefaultIndex("index")
+				.ApiKeyAuthentication("id1", "api_key1")
+			);
+
+			var response = client.Search<Project>(s => s
+				.Query(q => q
+					.MatchAll()
+				)
+			);
+
+			response.DebugInformation.Should().NotContain("api_key1");
 		}
 
 		//hide
