@@ -22,7 +22,19 @@ namespace Elasticsearch.Net
 		/// Basic access authorization credentials to specify with this request.
 		/// Overrides any credentials that are set at the global IConnectionSettings level.
 		/// </summary>
+		/// <remarks>
+		///	Cannot be used in conjunction with <see cref="ApiKeyAuthenticationCredentials"/>
+		/// </remarks>
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
+
+		/// <summary>
+		/// An API-key authorization credentials to specify with this request.
+		/// Overrides any credentials that are set at the global IConnectionSettings level.
+		/// </summary>
+		/// <remarks>
+		///	Cannot be used in conjunction with <see cref="BasicAuthenticationCredentials"/>
+		/// </remarks>
+		ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; set; }
 
 		/// <summary>
 		/// Use the following client certificates to authenticate this single request
@@ -102,6 +114,8 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
 
+		public ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; set; }
+
 		public X509CertificateCollection ClientCertificates { get; set; }
 		public string ContentType { get; set; }
 		public bool? DisableDirectStreaming { get; set; }
@@ -138,6 +152,7 @@ namespace Elasticsearch.Net
 			Self.DisableDirectStreaming = config?.DisableDirectStreaming;
 			Self.AllowedStatusCodes = config?.AllowedStatusCodes;
 			Self.BasicAuthenticationCredentials = config?.BasicAuthenticationCredentials;
+			Self.ApiKeyAuthenticationCredentials = config?.ApiKeyAuthenticationCredentials;
 			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
 			Self.RunAs = config?.RunAs;
 			Self.ClientCertificates = config?.ClientCertificates;
@@ -148,6 +163,7 @@ namespace Elasticsearch.Net
 		string IRequestConfiguration.Accept { get; set; }
 		IReadOnlyCollection<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
+		ApiKeyAuthenticationCredentials IRequestConfiguration.ApiKeyAuthenticationCredentials { get; set; }
 		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
 		string IRequestConfiguration.ContentType { get; set; }
 		bool? IRequestConfiguration.DisableDirectStreaming { get; set; }
@@ -271,6 +287,30 @@ namespace Elasticsearch.Net
 				Self.BasicAuthenticationCredentials = new BasicAuthenticationCredentials();
 			Self.BasicAuthenticationCredentials.Username = userName;
 			Self.BasicAuthenticationCredentials.Password = password;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string id, string apiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(id, apiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string id, SecureString apiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(id, apiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string base64EncodedApiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(base64EncodedApiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(SecureString base64EncodedApiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(base64EncodedApiKey);
 			return this;
 		}
 
