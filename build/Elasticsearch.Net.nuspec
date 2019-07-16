@@ -11,13 +11,14 @@
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Elasticsearch.Net</description>
-		<summary>Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.</summary>
+		<summary>Exposes all the Elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.</summary>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
 				<dependency id="System.Buffers" version="[4.5.0,)"/>
+				<dependency id="System.Diagnostics.DiagnosticSource" version="[4.5.1,)" />
 				<dependency id="System.Reflection.Emit" version="[4.3.0,)"/>
 				<dependency id="System.Reflection.Emit.Lightweight" version="[4.3.0,)"/>
 			</group>
