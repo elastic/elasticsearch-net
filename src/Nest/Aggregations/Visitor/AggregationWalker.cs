@@ -81,6 +81,11 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Aggregations);
 			});
+			AcceptAggregation(aggregation.GeoTile, visitor, (v, d) =>
+			{
+				v.Visit(d);
+				Accept(v, d.Aggregations);
+			});
 			AcceptAggregation(aggregation.Global, visitor, (v, d) =>
 			{
 				v.Visit(d);
