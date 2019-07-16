@@ -76,6 +76,7 @@ namespace Elasticsearch.Net
 			ProxyPassword = global.ProxyPassword;
 			DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
 			BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
+			ApiKeyAuthenticationCredentials = local?.ApiKeyAuthenticationCredentials ?? global.ApiKeyAuthenticationCredentials;
 			AllowedStatusCodes = local?.AllowedStatusCodes ?? EmptyReadOnly<int>.Collection;
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
@@ -85,6 +86,8 @@ namespace Elasticsearch.Net
 		
 		public string Accept { get; }
 		public IReadOnlyCollection<int> AllowedStatusCodes { get; }
+
+		public ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; }
 
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 
