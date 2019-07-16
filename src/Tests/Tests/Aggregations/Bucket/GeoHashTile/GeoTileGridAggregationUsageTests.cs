@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -49,6 +50,8 @@ namespace Tests.Aggregations.Bucket.GeoTileGrid
 			response.ShouldBeValid();
 			var myGeoTileTile = response.Aggregations.GeoTile("my_geotile");
 			myGeoTileTile.Should().NotBeNull();
+			myGeoTileTile.Buckets.FirstOrDefault(r => r.Key == "3/0/4").Should().NotBeNull();
+			myGeoTileTile.Buckets.FirstOrDefault(r => r.Key == "3/5/5").Should().NotBeNull();
 		}
 	}
 }
