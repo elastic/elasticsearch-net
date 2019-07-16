@@ -22,7 +22,7 @@ namespace Elasticsearch.Net
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly IConnectionConfigurationValues _settings;
-		
+
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline.SourceName);
 
 		public RequestPipeline(
@@ -392,7 +392,7 @@ namespace Elasticsearch.Net
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
 			if (PingDisabled(node)) return;
-			
+
 			var pingData = CreatePingRequestData(node);
 			using (var audit = Audit(PingSuccess, node))
 			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
@@ -432,7 +432,7 @@ namespace Elasticsearch.Net
 						audit.Path = requestData.PathAndQuery;
 						var response = _connection.Request<SniffResponse>(requestData);
 						d.EndState = response;
-						
+
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success)
@@ -469,7 +469,7 @@ namespace Elasticsearch.Net
 						audit.Path = requestData.PathAndQuery;
 						var response = await _connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						d.EndState = response;
-						
+
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success)
@@ -554,6 +554,7 @@ namespace Elasticsearch.Net
 				PingTimeout = PingTimeout,
 				RequestTimeout = PingTimeout,
 				BasicAuthenticationCredentials = _settings.BasicAuthenticationCredentials,
+				ApiKeyAuthenticationCredentials = _settings.ApiKeyAuthenticationCredentials,
 				EnableHttpPipelining = RequestConfiguration?.EnableHttpPipelining ?? _settings.HttpPipeliningEnabled,
 				ForceNode = RequestConfiguration?.ForceNode
 			};
