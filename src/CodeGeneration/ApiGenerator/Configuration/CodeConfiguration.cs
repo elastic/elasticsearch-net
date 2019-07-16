@@ -24,7 +24,6 @@ namespace ApiGenerator.Configuration
 			"monitoring.bulk.json",
 
 			"ccr.follow_info.json",
-			"ccr.forget_follower.json"
 		};
 
 

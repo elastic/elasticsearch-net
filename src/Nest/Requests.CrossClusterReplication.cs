@@ -140,6 +140,39 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IForgetFollowerIndexRequest : IRequest<ForgetFollowerIndexRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	public partial class ForgetFollowerIndexRequest : PlainRequestBase<ForgetFollowerIndexRequestParameters>, IForgetFollowerIndexRequest
+	{
+		protected IForgetFollowerIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollowerIndex;
+		///<summary>/{index}/_ccr/forget_follower</summary>
+		///<param name = "index">this parameter is required</param>
+		public ForgetFollowerIndexRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ForgetFollowerIndexRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IForgetFollowerIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		[IgnoreDataMember]
