@@ -58,6 +58,8 @@ namespace Nest
 
 		TReturnType Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector);
 
+		TReturnType DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector);
+
 		TReturnType Boolean(Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector);
 
 		TReturnType Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector);
@@ -108,6 +110,8 @@ namespace Nest
 		public PropertiesDescriptor<T> Completion(Func<CompletionPropertyDescriptor<T>, ICompletionProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector) => SetProperty(selector);
+
+		public PropertiesDescriptor<T> DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> DateRange(Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector) => SetProperty(selector);
 
