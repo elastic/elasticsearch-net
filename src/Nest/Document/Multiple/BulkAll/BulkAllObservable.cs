@@ -181,12 +181,16 @@ namespace Nest
 				case PipelineFailure.SniffFailure:
 				case PipelineFailure.Unexpected:
 					throw ThrowOnBadBulk(response,
-						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
+						$"BulkAll halted after {nameof(PipelineFailure)}.{failureReason.GetStringValue()} from _bulk");
 				case PipelineFailure.BadResponse:
 				case PipelineFailure.PingFailure:
 				case PipelineFailure.MaxTimeoutReached:
 				case PipelineFailure.BadRequest:
 				default:
+					if (backOffRetries >= _backOffRetries)
+						throw ThrowOnBadBulk(response, 
+							$"BulkAll halted after {nameof(PipelineFailure)}.{failureReason.GetStringValue()} from _bulk");
+					
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 			}
 		}
