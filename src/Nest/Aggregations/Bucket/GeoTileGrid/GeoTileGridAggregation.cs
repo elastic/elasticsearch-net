@@ -60,16 +60,12 @@ namespace Nest
 			, IGeoTileGridAggregation
 		where T : class
 	{
-		/// <inheritdoc cref="IGeoTileGridAggregation.Field" />
 		Field IGeoTileGridAggregation.Field { get; set; }
 
-		/// <inheritdoc cref="IGeoTileGridAggregation.Precision" />
 		GeoTilePrecision? IGeoTileGridAggregation.Precision { get; set; }
 
-		/// <inheritdoc cref="IGeoTileGridAggregation.ShardSize" />
 		int? IGeoTileGridAggregation.ShardSize { get; set; }
 
-		/// <inheritdoc cref="IGeoTileGridAggregation.Size" />
 		int? IGeoTileGridAggregation.Size { get; set; }
 
 		/// <inheritdoc cref="IGeoTileGridAggregation.Field" />
