@@ -7,7 +7,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>
-	/// The configuration for a field or scrip that provides a value or weight
+	/// The configuration for a field or script that provides a value or weight
 	/// for <see cref="WeightedAverageAggregation" />
 	/// </summary>
 	[InterfaceDataContract]
@@ -103,6 +103,9 @@ namespace Nest
 
 		/// <summary>A date value</summary>
 		[EnumMember(Value = "date")] Date,
+
+		/// <summary>A date nanos value</summary>
+		[EnumMember(Value = "date_nanos")] DateNanos,
 
 		/// <summary>An IP value</summary>
 		[EnumMember(Value = "ip")] Ip,

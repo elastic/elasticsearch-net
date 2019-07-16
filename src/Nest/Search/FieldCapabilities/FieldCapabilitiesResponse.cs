@@ -33,6 +33,7 @@ namespace Nest
 		public FieldCapabilities Byte => BackingDictionary.TryGetValue("byte", out var f) ? f : null;
 		public FieldCapabilities Completion => BackingDictionary.TryGetValue("completion", out var f) ? f : null;
 		public FieldCapabilities Date => BackingDictionary.TryGetValue("date", out var f) ? f : null;
+		public FieldCapabilities DateNanos => BackingDictionary.TryGetValue("date_nanos", out var f) ? f : null;
 		public FieldCapabilities DateRange => BackingDictionary.TryGetValue("date_range", out var f) ? f : null;
 		public FieldCapabilities Double => BackingDictionary.TryGetValue("double", out var f) ? f : null;
 		public FieldCapabilities DoubleRange => BackingDictionary.TryGetValue("double_range", out var f) ? f : null;
