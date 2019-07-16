@@ -125,6 +125,9 @@ namespace Nest
 				case "date":
 					Serialize<IDateProperty>(ref writer, value, formatterResolver);
 					break;
+				case "date_nanos":
+					Serialize<IDateNanosProperty>(ref writer, value, formatterResolver);
+					break;
 				case "boolean":
 					Serialize<IBooleanProperty>(ref writer, value, formatterResolver);
 					break;

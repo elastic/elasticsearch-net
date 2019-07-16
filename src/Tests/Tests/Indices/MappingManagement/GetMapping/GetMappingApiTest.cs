@@ -147,6 +147,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IDateProperty mapping) => Increment("date");
 
+		public void Visit(IDateNanosProperty mapping) => Increment("date_nanos");
+
 		public void Visit(IBinaryProperty mapping) => Increment("binary");
 
 		public void Visit(INestedProperty mapping) => Increment("nested");

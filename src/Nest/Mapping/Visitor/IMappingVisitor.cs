@@ -65,6 +65,8 @@
 
 		public virtual void Visit(IDateProperty property) { }
 
+		public virtual void Visit(IDateNanosProperty property) { }
+
 		public virtual void Visit(IBooleanProperty property) { }
 
 		public virtual void Visit(IBinaryProperty property) { }
