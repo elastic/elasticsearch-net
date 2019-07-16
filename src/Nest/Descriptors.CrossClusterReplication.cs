@@ -79,6 +79,34 @@ namespace Nest
 		public CreateFollowIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
+	///<summary>descriptor for FollowInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
+	public partial class FollowInfoDescriptor : RequestDescriptorBase<FollowInfoDescriptor, FollowInfoRequestParameters, IFollowInfoRequest>, IFollowInfoRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowInfo;
+		///<summary>/{index}/_ccr/info</summary>
+		///<param name = "index">this parameter is required</param>
+		public FollowInfoDescriptor(Indices index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected FollowInfoDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Indices IFollowInfoRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index patterns; use `_all` to perform the operation on all indices</summary>
+		public FollowInfoDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public FollowInfoDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public FollowInfoDescriptor AllIndices() => Index(Indices.All);
+	// Request parameters
+	}
+
 	///<summary>descriptor for FollowIndexStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 	public partial class FollowIndexStatsDescriptor : RequestDescriptorBase<FollowIndexStatsDescriptor, FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
 	{
