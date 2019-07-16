@@ -74,19 +74,14 @@ namespace Nest
 	{
 		public DateNanosPropertyDescriptor() : base(FieldType.DateNanos) { }
 
-		/// <inheritdoc cref="IDateNanosProperty.Boost"/>
 		double? IDateNanosProperty.Boost { get; set; }
 
-		/// <inheritdoc cref="IDateNanosProperty.Format"/>
 		string IDateNanosProperty.Format { get; set; }
 
-		/// <inheritdoc cref="IDateNanosProperty.IgnoreMalformed"/>
 		bool? IDateNanosProperty.IgnoreMalformed { get; set; }
 
-		/// <inheritdoc cref="IDateNanosProperty.Index"/>
 		bool? IDateNanosProperty.Index { get; set; }
 
-		/// <inheritdoc cref="IDateNanosProperty.NullValue"/>
 		DateTime? IDateNanosProperty.NullValue { get; set; }
 
 		/// <inheritdoc cref="IDateNanosProperty.Index"/>
