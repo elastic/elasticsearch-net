@@ -107,6 +107,32 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>descriptor for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	public partial class ForgetFollowerIndexDescriptor : RequestDescriptorBase<ForgetFollowerIndexDescriptor, ForgetFollowerIndexRequestParameters, IForgetFollowerIndexRequest>, IForgetFollowerIndexRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollowerIndex;
+		///<summary>/{index}/_ccr/forget_follower</summary>
+		///<param name = "index">this parameter is required</param>
+		public ForgetFollowerIndexDescriptor(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ForgetFollowerIndexDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName IForgetFollowerIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>the name of the leader index for which specified follower retention leases should be removed</summary>
+		public ForgetFollowerIndexDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ForgetFollowerIndexDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+	// Request parameters
+	}
+
 	///<summary>descriptor for GetAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 	public partial class GetAutoFollowPatternDescriptor : RequestDescriptorBase<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequestParameters, IGetAutoFollowPatternRequest>, IGetAutoFollowPatternRequest
 	{
