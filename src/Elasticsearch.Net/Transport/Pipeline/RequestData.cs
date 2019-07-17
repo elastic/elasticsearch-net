@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net.Extensions;
@@ -80,6 +78,7 @@ namespace Elasticsearch.Net
 			AllowedStatusCodes = local?.AllowedStatusCodes ?? EmptyReadOnly<int>.Collection;
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
+			TransferEncodingChunked = local?.TransferEncodingChunked ?? global.TransferEncodingChunked;
 		}
 		
 		private readonly string _path;
@@ -122,6 +121,7 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 		public bool ThrowExceptions { get; }
 		public string UserAgent { get; }
+		public bool TransferEncodingChunked { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 

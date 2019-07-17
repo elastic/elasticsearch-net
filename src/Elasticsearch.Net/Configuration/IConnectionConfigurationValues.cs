@@ -244,5 +244,10 @@ namespace Elasticsearch.Net
 		/// <para>NOTE: if a request specifies <see cref="IRequestConfiguration.AllowedStatusCodes"/> this takes precedence</para>
 		/// </summary>
 		Func<HttpMethod, int, bool> StatusCodeToResponseSuccess { get; }
+
+		/// <summary>
+		/// Whether the request should be sent with chunked Transfer-Encoding.
+		/// </summary>
+		bool TransferEncodingChunked { get; }
 	}
 }

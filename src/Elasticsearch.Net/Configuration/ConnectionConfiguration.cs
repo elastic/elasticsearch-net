@@ -145,6 +145,7 @@ namespace Elasticsearch.Net
 		private bool _sniffOnConnectionFault;
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
+		private bool _transferEncodingChunked;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -213,6 +214,7 @@ namespace Elasticsearch.Net
 		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
 		string IConnectionConfigurationValues.UserAgent => _userAgent;
 		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
+		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -529,6 +531,11 @@ namespace Elasticsearch.Net
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
 		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
+
+		/// <summary>
+		/// Whether the request should be sent with chunked Transfer-Encoding. Default is <c>true</c>
+		/// </summary>
+		public T TransferEncodingChunked(bool transferEncodingChunked = true) => Assign(transferEncodingChunked, (a, v) => a._transferEncodingChunked = v);
 
 		protected virtual void DisposeManagedResources()
 		{
