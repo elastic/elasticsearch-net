@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -185,6 +186,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	/**[float]
 	* === Empty Filters
 	*/
+	[SkipVersion(">=7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -220,6 +222,7 @@ namespace Tests.Aggregations.Bucket.Filters
 
 	/**[float]
 	* === Conditionless Filters */
+	[SkipVersion(">=7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
