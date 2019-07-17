@@ -33,6 +33,11 @@ namespace Tests.XPack.Security.ApiKey
 			get
 			{
 				TryGetExtendedValue<CreateApiKeyResponse>("response", out var response);
+
+				// Unit tests for HitsTheCorrectUrl will have a null response object.
+				if (response == null)
+					return d => d;
+
 				return d => d.RequestConfiguration(r => r.ApiKeyAuthentication(response.Id, response.ApiKey));
 			}
 		}
@@ -46,6 +51,11 @@ namespace Tests.XPack.Security.ApiKey
 			get
 			{
 				TryGetExtendedValue<CreateApiKeyResponse>("response", out var response);
+
+				// Unit tests for HitsTheCorrectUrl will have a null response object.
+				if (response == null)
+					return new NodesInfoRequest();
+
 				return new NodesInfoRequest
 				{
 					RequestConfiguration = new RequestConfiguration
