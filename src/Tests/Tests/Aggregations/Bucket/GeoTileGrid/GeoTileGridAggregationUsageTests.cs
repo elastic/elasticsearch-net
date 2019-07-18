@@ -10,9 +10,9 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.GeoTileGrid
 {
-	public class GeoTileTileAggregationUsageTests : AggregationUsageTestBase
+	public class GeoTileGridAggregationUsageTests : AggregationUsageTestBase
 	{
-		public GeoTileTileAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public GeoTileGridAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object AggregationJson => new
 		{
