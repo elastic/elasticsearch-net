@@ -183,9 +183,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/**[float]
-	* === Empty Filters
-	*/
+	// hide
 	[SkipVersion(">=7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -220,8 +218,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/**[float]
-	* === Conditionless Filters */
+	// hide
 	[SkipVersion(">=7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
