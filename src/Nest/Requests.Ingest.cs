@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeletePipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>Request for DeletePipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</para></summary>
 	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
 		protected IDeletePipelineRequest Self => this;
@@ -87,7 +87,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetPipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>Request for GetPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
 		protected IGetPipelineRequest Self => this;
@@ -120,7 +120,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GrokProcessorPatterns <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>Request for GrokProcessorPatterns <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</para></summary>
 	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
@@ -139,7 +139,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>Request for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</para></summary>
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
 		protected IPutPipelineRequest Self => this;
@@ -185,7 +185,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for SimulatePipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>Request for SimulatePipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
 		protected ISimulatePipelineRequest Self => this;
