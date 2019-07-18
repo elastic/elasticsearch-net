@@ -48,10 +48,11 @@ namespace Tests.Aggregations.Bucket.GeoTileGrid
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var myGeoTileTile = response.Aggregations.GeoTile("my_geotile");
-			myGeoTileTile.Should().NotBeNull();
-			myGeoTileTile.Buckets.FirstOrDefault(r => r.Key == "3/0/4").Should().NotBeNull();
-			myGeoTileTile.Buckets.FirstOrDefault(r => r.Key == "3/5/5").Should().NotBeNull();
+			var myGeoTileGrid = response.Aggregations.GeoTile("my_geotile");
+			myGeoTileGrid.Should().NotBeNull();
+			var firstBucket = myGeoTileGrid.Buckets.First();
+			firstBucket.Key.Should().NotBeNullOrWhiteSpace();
+			firstBucket.DocCount.Should().BeGreaterThan(0);
 		}
 	}
 }
