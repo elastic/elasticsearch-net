@@ -297,7 +297,7 @@ namespace Elasticsearch.Net
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
-			
+
 			return requestMessage;
 		}
 
@@ -316,7 +316,8 @@ namespace Elasticsearch.Net
 				else
 					requestData.PostData.Write(stream, requestData.ConnectionSettings);
 
-				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false))
+				// the written bytes are uncompressed, so can only be used when http compression isn't used
+				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
 				{
 					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
 					stream.Dispose();
@@ -349,7 +350,8 @@ namespace Elasticsearch.Net
 				else
 					await requestData.PostData.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 
-				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false))
+				// the written bytes are uncompressed, so can only be used when http compression isn't used
+				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
 				{
 					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
 					stream.Dispose();
