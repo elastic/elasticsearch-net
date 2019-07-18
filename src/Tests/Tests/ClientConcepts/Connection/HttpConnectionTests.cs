@@ -1,18 +1,23 @@
 ﻿#if DOTNETCORE
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
+using Tests.Core.ManagedElasticsearch;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
+using FluentAssertions;
 
 namespace Tests.ClientConcepts.Connection
 {
-	public class HttpConnectionTests
+	public class HttpConnectionTests : ClusterTestClassBase<ReadOnlyCluster>
 	{
+		public HttpConnectionTests(ReadOnlyCluster cluster) : base(cluster) { }
+
 		[I] public async Task SingleInstanceOfHttpClient()
 		{
 			var connection = new TestableHttpConnection();
@@ -32,7 +37,8 @@ namespace Tests.ClientConcepts.Connection
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
 
 		[I] public async Task MultipleInstancesOfHttpClientWhenProxyChanges() =>
-			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(proxyAddress: new Uri("http://localhost:9400")));
+			await MultipleInstancesOfHttpClientWhen(() =>
+				CreateRequestData(proxyAddress: Client.ConnectionSettings.ConnectionPool.Nodes.First().Uri));
 
 		[I] public async Task MultipleInstancesOfHttpClientWhenAutomaticProxyDetectionChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(disableAutomaticProxyDetection: true));
@@ -40,7 +46,7 @@ namespace Tests.ClientConcepts.Connection
 		[I] public async Task MultipleInstancesOfHttpClientWhenHttpCompressionChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(httpCompression: true));
 
-		private static async Task MultipleInstancesOfHttpClientWhen(Func<RequestData> differentRequestData)
+		private async Task MultipleInstancesOfHttpClientWhen(Func<RequestData> differentRequestData)
 		{
 			var connection = new TestableHttpConnection();
 			var requestData = CreateRequestData();
@@ -56,28 +62,30 @@ namespace Tests.ClientConcepts.Connection
 			connection.ClientCount.Should().Be(2);
 		}
 
-		private static RequestData CreateRequestData(
-			TimeSpan requestTimeout = default(TimeSpan),
+		private RequestData CreateRequestData(
+			TimeSpan requestTimeout = default,
 			Uri proxyAddress = null,
 			bool disableAutomaticProxyDetection = false,
-			bool httpCompression = false
+			bool httpCompression = false,
+			bool transferEncodingChunked = false
 		)
 		{
-			if (requestTimeout == default(TimeSpan)) requestTimeout = TimeSpan.FromSeconds(10);
+			if (requestTimeout == default) requestTimeout = TimeSpan.FromSeconds(10);
 
-			var connectionSettings = new ConnectionSettings(new Uri("http://localhost:9200"))
+			var node = Client.ConnectionSettings.ConnectionPool.Nodes.First();
+			var connectionSettings = new ConnectionSettings(node.Uri)
 				.RequestTimeout(requestTimeout)
 				.DisableAutomaticProxyDetection(disableAutomaticProxyDetection)
+				.TransferEncodingChunked(transferEncodingChunked)
 				.EnableHttpCompression(httpCompression);
 
 			if (proxyAddress != null)
 				connectionSettings.Proxy(proxyAddress, null, (string)null);
 
-			var requestData = new RequestData(HttpMethod.GET, "/", null, connectionSettings, new PingRequestParameters(),
-				new MemoryStreamFactory())
-			{
-				Node = new Node(new Uri("http://localhost:9200"))
-			};
+			var requestData = new RequestData(HttpMethod.POST, "/_search", "{ \"query\": { \"match_all\" : { } } }", connectionSettings,
+				new SearchRequestParameters(),
+				new MemoryStreamFactory()) { Node = node };
+
 			return requestData;
 		}
 
@@ -91,10 +99,10 @@ namespace Tests.ClientConcepts.Connection
 			var requestData = CreateRequestData(disableAutomaticProxyDetection: true);
 
 			connection.Request<StringResponse>(requestData);
-			connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
+			connection.LastHttpClientHandler.UseProxy.Should().BeFalse();
 
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
-			connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
+			connection.LastHttpClientHandler.UseProxy.Should().BeFalse();
 		}
 
 		[I] public async Task HttpClientUseProxyShouldBeTrueWhenEnabledAutoProxyDetection()
@@ -103,18 +111,63 @@ namespace Tests.ClientConcepts.Connection
 			var requestData = CreateRequestData();
 
 			connection.Request<StringResponse>(requestData);
-			connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
-
+			connection.LastHttpClientHandler.UseProxy.Should().BeTrue();
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
-			connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
+			connection.LastHttpClientHandler.UseProxy.Should().BeTrue();
+		}
+
+		[I] public async Task HttpClientUseTransferEncodingChunkedWhenTransferEncodingChunkedTrue()
+		{
+			var requestData = CreateRequestData(transferEncodingChunked: true);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentLength.Should().BeNull();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[I] public async Task HttpClientSetsContentLengthWhenTransferEncodingChunkedFalse()
+		{
+			var requestData = CreateRequestData(transferEncodingChunked: false);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentLength.Should().HaveValue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[I] public async Task HttpClientSetsContentLengthWhenTransferEncodingChunkedHttpCompression()
+		{
+			var requestData = CreateRequestData(transferEncodingChunked: false, httpCompression: true);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentLength.Should().HaveValue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		}
 
 		public class TestableHttpConnection : HttpConnection
 		{
+			private readonly Action<HttpResponseMessage> _response;
+			private TestableClientHandler _handler;
 			public int CallCount { get; private set; }
 			public int ClientCount => Clients.Count;
+			public HttpClientHandler LastHttpClientHandler => (HttpClientHandler)_handler.InnerHandler;
 
-			public HttpClientHandler LastUsedHttpClientHandler { get; private set; }
+			public TestableHttpConnection(Action<HttpResponseMessage> response)
+			{
+				_response = response;
+			}
+
+			public TestableHttpConnection()
+			{
+			}
 
 			public override TResponse Request<TResponse>(RequestData requestData)
 			{
@@ -130,8 +183,29 @@ namespace Tests.ClientConcepts.Connection
 
 			protected override HttpMessageHandler CreateHttpClientHandler(RequestData requestData)
 			{
-				LastUsedHttpClientHandler = (HttpClientHandler)base.CreateHttpClientHandler(requestData);
-				return LastUsedHttpClientHandler;
+				_handler = new TestableClientHandler(base.CreateHttpClientHandler(requestData), _response);
+				return _handler;
+			}
+
+			protected override void DisposeManagedResources()
+			{
+				_handler?.Dispose();
+				base.DisposeManagedResources();
+			}
+		}
+
+		public class TestableClientHandler : DelegatingHandler
+		{
+			private readonly Action<HttpResponseMessage> _responseAction;
+
+			public TestableClientHandler(HttpMessageHandler handler, Action<HttpResponseMessage> responseAction) : base(handler) =>
+				_responseAction = responseAction;
+
+			protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+			{
+				var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+				_responseAction?.Invoke(response);
+				return response;
 			}
 		}
 	}
