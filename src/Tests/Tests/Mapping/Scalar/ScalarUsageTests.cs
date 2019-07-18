@@ -36,14 +36,6 @@ namespace Tests.Mapping.Scalar
 				dateTimeOffsets = new { type = "date" },
 				dateTimeOffsetNullable = new { type = "date" },
 				dateTimeOffsetNullables = new { type = "date" },
-				dateTimeNanos = new { type = "date_nanos" },
-				dateTimeNanoss = new { type = "date_nanos" },
-				dateTimeNanosNullable = new { type = "date_nanos" },
-				dateTimeNanosNullables = new { type = "date_nanos" },
-				dateTimeNanosOffset = new { type = "date_nanos" },
-				dateTimeNanosOffsets = new { type = "date_nanos" },
-				dateTimeNanosOffsetNullable = new { type = "date_nanos" },
-				dateTimeNanosOffsetNullables = new { type = "date_nanos" },
 				@decimal = new { type = "double" },
 				decimals = new { type = "double" },
 				decimalNullable = new { type = "double" },
@@ -153,14 +145,6 @@ namespace Tests.Mapping.Scalar
 				.Scalar(p => p.DateTimeOffsets, m => m)
 				.Scalar(p => p.DateTimeOffsetNullable, m => m)
 				.Scalar(p => p.DateTimeOffsetNullables, m => m)
-				.ScalarNanos(p => p.DateTimeNanos, m => m)
-				.ScalarNanos(p => p.DateTimeNanoss, m => m)
-				.ScalarNanos(p => p.DateTimeNanosNullable, m => m)
-				.ScalarNanos(p => p.DateTimeNanosNullables, m => m)
-				.ScalarNanos(p => p.DateTimeNanosOffset, m => m)
-				.ScalarNanos(p => p.DateTimeNanosOffsets, m => m)
-				.ScalarNanos(p => p.DateTimeNanosOffsetNullable, m => m)
-				.ScalarNanos(p => p.DateTimeNanosOffsetNullables, m => m)
 				.Scalar(p => p.Bool, m => m)
 				.Scalar(p => p.Bools, m => m)
 				.Scalar(p => p.BoolNullable, m => m)
@@ -215,16 +199,6 @@ namespace Tests.Mapping.Scalar
 			public IEnumerable<DateTimeOffset?> DateTimeOffsetNullables { get; set; }
 			public IEnumerable<DateTimeOffset> DateTimeOffsets { get; set; }
 			public IEnumerable<DateTime> DateTimes { get; set; }
-
-			public DateTime DateTimeNanos { get; set; }
-			public DateTime? DateTimeNanosNullable { get; set; }
-			public IEnumerable<DateTime?> DateTimeNanosNullables { get; set; }
-
-			public DateTimeOffset DateTimeNanosOffset { get; set; }
-			public DateTimeOffset? DateTimeNanosOffsetNullable { get; set; }
-			public IEnumerable<DateTimeOffset?> DateTimeNanosOffsetNullables { get; set; }
-			public IEnumerable<DateTimeOffset> DateTimeNanosOffsets { get; set; }
-			public IEnumerable<DateTime> DateTimeNanoss { get; set; }
 
 			public decimal Decimal { get; set; }
 			public decimal? DecimalNullable { get; set; }

@@ -250,30 +250,6 @@ namespace Nest
 		) =>
 			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 
-		public IProperty ScalarNanos(Expression<Func<T, DateTime>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T, DateTime?>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T, IEnumerable<DateTime>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T, IEnumerable<DateTime?>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T,DateTimeOffset>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T, DateTimeOffset?>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T, IEnumerable<DateTimeOffset>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) => selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
-		public IProperty ScalarNanos(Expression<Func<T, IEnumerable<DateTimeOffset?>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) => selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field));
-
 		public IProperty Scalar(Expression<Func<T, bool>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector = null) =>
 			selector.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
 
