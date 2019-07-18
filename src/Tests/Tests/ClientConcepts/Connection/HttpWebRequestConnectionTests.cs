@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.Connection
 			connection.LastRequest.ContentLength.Should().Be(-1);
 		}
 
-		[I] public async Task HttpClientSetsContentLengthWhenTransferEncodingChunkedFalse()
+		[I] public async Task HttpWebRequestSetsContentLengthWhenTransferEncodingChunkedFalse()
 		{
 			var connection = new TestableHttpWebRequestConnection();
 			var requestData = CreateRequestData(transferEncodingChunked: false);
