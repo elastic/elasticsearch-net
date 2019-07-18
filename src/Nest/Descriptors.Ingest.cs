@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.IngestApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for DeletePipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>descriptor for DeletePipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</para></summary>
 	public partial class DeletePipelineDescriptor : RequestDescriptorBase<DeletePipelineDescriptor, DeletePipelineRequestParameters, IDeletePipelineRequest>, IDeletePipelineRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestDeletePipeline;
@@ -55,7 +55,7 @@ namespace Nest
 		public DeletePipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for GetPipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>descriptor for GetPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 	public partial class GetPipelineDescriptor : RequestDescriptorBase<GetPipelineDescriptor, GetPipelineRequestParameters, IGetPipelineRequest>, IGetPipelineRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
@@ -79,7 +79,7 @@ namespace Nest
 		public GetPipelineDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for GrokProcessorPatterns <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>descriptor for GrokProcessorPatterns <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</para></summary>
 	public partial class GrokProcessorPatternsDescriptor : RequestDescriptorBase<GrokProcessorPatternsDescriptor, GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGrokProcessorPatterns;
@@ -87,7 +87,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>descriptor for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</para></summary>
 	public partial class PutPipelineDescriptor : RequestDescriptorBase<PutPipelineDescriptor, PutPipelineRequestParameters, IPutPipelineRequest>, IPutPipelineRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
@@ -112,7 +112,7 @@ namespace Nest
 		public PutPipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for SimulatePipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+	///<summary>descriptor for SimulatePipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 	public partial class SimulatePipelineDescriptor : RequestDescriptorBase<SimulatePipelineDescriptor, SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulatePipeline;
