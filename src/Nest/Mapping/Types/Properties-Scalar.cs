@@ -115,22 +115,6 @@ namespace Nest
 
 		TReturnType Scalar(Expression<Func<T, IEnumerable<DateTimeOffset?>>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector = null);
 
-		TReturnType ScalarNanos(Expression<Func<T, DateTime>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, DateTime?>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, IEnumerable<DateTime>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, IEnumerable<DateTime?>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, DateTimeOffset>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, DateTimeOffset?>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, IEnumerable<DateTimeOffset>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
-		TReturnType ScalarNanos(Expression<Func<T, IEnumerable<DateTimeOffset?>>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null);
-
 		TReturnType Scalar(Expression<Func<T, bool>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector = null);
 
 		TReturnType Scalar(Expression<Func<T, bool?>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector = null);
@@ -403,42 +387,6 @@ namespace Nest
 			Func<DatePropertyDescriptor<T>, IDateProperty> selector = null
 		) =>
 			SetProperty(selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, DateTime>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, DateTime?>> field, Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, IEnumerable<DateTime>>> field,
-			Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, IEnumerable<DateTime?>>> field,
-			Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, DateTimeOffset>> field,
-			Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, DateTimeOffset?>> field,
-			Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, IEnumerable<DateTimeOffset>>> field,
-			Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
-
-		public PropertiesDescriptor<T> ScalarNanos(Expression<Func<T, IEnumerable<DateTimeOffset?>>> field,
-			Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector = null
-		) =>
-			SetProperty(selector.InvokeOrDefault(new DateNanosPropertyDescriptor<T>().Name(field)));
 
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, bool>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector = null
 		) =>
