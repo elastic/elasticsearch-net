@@ -45,7 +45,7 @@ namespace Tests.ClientConcepts.Connection
 			return requestData;
 		}
 
-		[I] public async Task HttpClientUseTransferEncodingChunkedWhenTransferEncodingChunkedTrue()
+		[I] public async Task HttpWebRequestUseTransferEncodingChunkedWhenTransferEncodingChunkedTrue()
 		{
 			var connection = new TestableHttpWebRequestConnection();
 			var requestData = CreateRequestData(transferEncodingChunked: true);
