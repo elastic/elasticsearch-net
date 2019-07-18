@@ -533,7 +533,7 @@ namespace Elasticsearch.Net
 		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
 
 		/// <summary>
-		/// Whether the request should be sent with chunked Transfer-Encoding. Default is <c>true</c>
+		/// Whether the request should be sent with chunked Transfer-Encoding. Default is <c>false</c>
 		/// </summary>
 		public T TransferEncodingChunked(bool transferEncodingChunked = true) => Assign(transferEncodingChunked, (a, v) => a._transferEncodingChunked = v);
 
