@@ -181,6 +181,9 @@ namespace Elasticsearch.Net
 #endif
 			request.Pipelined = requestData.Pipelined;
 
+			if (requestData.TransferEncodingChunked)
+				request.SendChunked = true;
+
 			if (requestData.HttpCompression)
 			{
 				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;

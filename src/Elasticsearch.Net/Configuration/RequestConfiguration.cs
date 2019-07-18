@@ -106,35 +106,51 @@ namespace Elasticsearch.Net
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
 		bool? ThrowExceptions { get; set; }
+
+		/// <summary>
+		/// Whether the request should be sent with chunked Transfer-Encoding.
+		/// </summary>
+		bool? TransferEncodingChunked { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
 	{
+		/// <inheritdoc />
 		public string Accept { get; set; }
+		/// <inheritdoc />
 		public IReadOnlyCollection<int> AllowedStatusCodes { get; set; }
+		/// <inheritdoc />
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-
+		/// <inheritdoc />
 		public ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; set; }
-
+		/// <inheritdoc />
 		public X509CertificateCollection ClientCertificates { get; set; }
+		/// <inheritdoc />
 		public string ContentType { get; set; }
+		/// <inheritdoc />
 		public bool? DisableDirectStreaming { get; set; }
+		/// <inheritdoc />
 		public bool? DisablePing { get; set; }
+		/// <inheritdoc />
 		public bool? DisableSniff { get; set; }
+		/// <inheritdoc />
 		public bool? EnableHttpPipelining { get; set; } = true;
+		/// <inheritdoc />
 		public Uri ForceNode { get; set; }
+		/// <inheritdoc />
 		public int? MaxRetries { get; set; }
+		/// <inheritdoc />
 		public string OpaqueId { get; set; }
+		/// <inheritdoc />
 		public TimeSpan? PingTimeout { get; set; }
+		/// <inheritdoc />
 		public TimeSpan? RequestTimeout { get; set; }
-
-		/// <summary>
-		/// Submit the request on behalf in the context of a different user
-		/// https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
-		/// </summary>
+		/// <inheritdoc />
 		public string RunAs { get; set; }
-
+		/// <inheritdoc />
 		public bool? ThrowExceptions { get; set; }
+		/// <inheritdoc />
+		public bool? TransferEncodingChunked { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -158,6 +174,7 @@ namespace Elasticsearch.Net
 			Self.ClientCertificates = config?.ClientCertificates;
 			Self.ThrowExceptions = config?.ThrowExceptions;
 			Self.OpaqueId = config?.OpaqueId;
+			Self.TransferEncodingChunked = config?.TransferEncodingChunked;
 		}
 
 		string IRequestConfiguration.Accept { get; set; }
@@ -171,7 +188,6 @@ namespace Elasticsearch.Net
 		bool? IRequestConfiguration.DisableSniff { get; set; }
 		bool? IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
 		Uri IRequestConfiguration.ForceNode { get; set; }
-
 		int? IRequestConfiguration.MaxRetries { get; set; }
 		string IRequestConfiguration.OpaqueId { get; set; }
 		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
@@ -179,6 +195,7 @@ namespace Elasticsearch.Net
 		string IRequestConfiguration.RunAs { get; set; }
 		private IRequestConfiguration Self => this;
 		bool? IRequestConfiguration.ThrowExceptions { get; set; }
+		bool? IRequestConfiguration.TransferEncodingChunked { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -334,5 +351,12 @@ namespace Elasticsearch.Net
 		/// <summary> Use the following client certificate to authenticate this request to Elasticsearch </summary>
 		public RequestConfigurationDescriptor ClientCertificate(string certificatePath) =>
 			ClientCertificates(new X509Certificate2Collection { new X509Certificate(certificatePath) });
+
+		/// <inheritdoc cref="IRequestConfiguration.TransferEncodingChunked" />
+		public RequestConfigurationDescriptor TransferEncodingChunked(bool? transferEncodingChunked = true)
+		{
+			Self.TransferEncodingChunked = transferEncodingChunked;
+			return this;
+		}
 	}
 }
