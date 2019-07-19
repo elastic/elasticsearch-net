@@ -1712,6 +1712,13 @@ namespace Elasticsearch.Net
 			set => Q("rest_total_hits_as_int", value);
 		}
 
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public bool? TrackTotalHits
+		{
+			get => Q<bool? >("track_total_hits");
+			set => Q("track_total_hits", value);
+		}
+
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys
 		{

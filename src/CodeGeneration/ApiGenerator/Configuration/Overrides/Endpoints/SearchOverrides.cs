@@ -22,5 +22,10 @@ namespace ApiGenerator.Configuration.Overrides.Endpoints
 			"track_scores",
 			"terminate_after",
 		};
+
+		public override IEnumerable<string> RenderPartial => new[]
+		{
+			"track_total_hits"
+		};
 	}
 }

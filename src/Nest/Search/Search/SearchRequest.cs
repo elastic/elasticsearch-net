@@ -155,13 +155,7 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "track_scores")]
 		bool? TrackScores { get; set; }
-
-		/// <summary>
-		/// Indicate if the number of documents that match the query should be tracked.
-		/// </summary>
-		[DataMember(Name = "track_total_hits")]
-		bool? TrackTotalHits { get; set; }
-
+		
 		/// <summary>
 		/// Return a version for each search hit
 		/// </summary>
