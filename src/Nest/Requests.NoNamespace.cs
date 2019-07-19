@@ -2580,6 +2580,13 @@ namespace Nest
 			get;
 			set;
 		}
+
+		[DataMember(Name = "track_total_hits")]
+		bool? TrackTotalHits
+		{
+			get;
+			set;
+		}
 	}
 
 	public partial interface ISearchRequest<TInferDocument> : ISearchRequest
