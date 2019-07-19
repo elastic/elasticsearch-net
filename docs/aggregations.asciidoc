@@ -134,6 +134,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<geo-tile-grid-aggregation-usage,Geo Tile Grid Aggregation Usage>>
 
+* <<geo-tile-grid-aggregation-usage,Geo Tile Grid Aggregation Usage>>
+
 * <<global-aggregation-usage,Global Aggregation Usage>>
 
 * <<histogram-aggregation-usage,Histogram Aggregation Usage>>
@@ -192,6 +194,8 @@ include::aggregations/bucket/geo-distance/geo-distance-aggregation-usage.asciido
 include::aggregations/bucket/geo-hash-grid/geo-hash-grid-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/geo-hash-tile/geo-tile-grid-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/geo-tile-grid/geo-tile-grid-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/global/global-aggregation-usage.asciidoc[]
 
