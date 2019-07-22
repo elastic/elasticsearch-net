@@ -2743,7 +2743,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</pre></summary>
 	public partial class DeletePipelineDescriptor  : RequestDescriptorBase<DeletePipelineDescriptor,DeletePipelineRequestParameters, IDeletePipelineRequest>, IDeletePipelineRequest
 	{ 
 		/// <summary>/_ingest/pipeline/{id}</summary>
@@ -2759,7 +2759,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeletePipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
-	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</pre></summary>
 	public partial class GetPipelineDescriptor  : RequestDescriptorBase<GetPipelineDescriptor,GetPipelineRequestParameters, IGetPipelineRequest>, IGetPipelineRequest
 	{ 
 		/// <summary>/_ingest/pipeline</summary>
@@ -2775,7 +2775,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetPipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
-	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</pre></summary>
 	public partial class GrokProcessorPatternsDescriptor  : RequestDescriptorBase<GrokProcessorPatternsDescriptor,GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
 	{ 
 		// values part of the url path
@@ -2783,7 +2783,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</pre></summary>
 	public partial class PutPipelineDescriptor  : RequestDescriptorBase<PutPipelineDescriptor,PutPipelineRequestParameters, IPutPipelineRequest>, IPutPipelineRequest
 	{ 
 		/// <summary>/_ingest/pipeline/{id}</summary>
@@ -2799,7 +2799,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public PutPipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
-	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</pre></summary>
 	public partial class SimulatePipelineDescriptor  : RequestDescriptorBase<SimulatePipelineDescriptor,SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
 	{ 
 		/// <summary>/_ingest/pipeline/_simulate</summary>
@@ -4285,7 +4285,7 @@ namespace Nest
 		///<summary>Specify timeout for watch write operation</summary>
 		public XPackUsageDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
-	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/delete-license.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
 		// values part of the url path
@@ -4293,7 +4293,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-license.html</pre></summary>
 	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{ 
 		// values part of the url path
@@ -4303,7 +4303,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetLicenseDescriptor Local(bool? local = true) => Qs("local", local);
 	}
-	///<summary>descriptor for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-trial-status.html</pre></summary>
 	public partial class GetBasicLicenseStatusDescriptor  : RequestDescriptorBase<GetBasicLicenseStatusDescriptor,GetBasicLicenseStatusRequestParameters, IGetBasicLicenseStatusRequest>, IGetBasicLicenseStatusRequest
 	{ 
 		// values part of the url path
@@ -4311,7 +4311,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-basic-status.html</pre></summary>
 	public partial class GetTrialLicenseStatusDescriptor  : RequestDescriptorBase<GetTrialLicenseStatusDescriptor,GetTrialLicenseStatusRequestParameters, IGetTrialLicenseStatusRequest>, IGetTrialLicenseStatusRequest
 	{ 
 		// values part of the url path
@@ -4319,7 +4319,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/update-license.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{ 
 		// values part of the url path
@@ -4329,7 +4329,7 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
-	///<summary>descriptor for XpackLicensePostStartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicensePostStartBasic <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-basic.html</pre></summary>
 	public partial class StartBasicLicenseDescriptor  : RequestDescriptorBase<StartBasicLicenseDescriptor,StartBasicLicenseRequestParameters, IStartBasicLicenseRequest>, IStartBasicLicenseRequest
 	{ 
 		// values part of the url path
@@ -4339,7 +4339,7 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public StartBasicLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
-	///<summary>descriptor for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-trial.html</pre></summary>
 	public partial class StartTrialLicenseDescriptor  : RequestDescriptorBase<StartTrialLicenseDescriptor,StartTrialLicenseRequestParameters, IStartTrialLicenseRequest>, IStartTrialLicenseRequest
 	{ 
 		// values part of the url path
@@ -4941,7 +4941,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>descriptor for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{ 
 		/// <summary>/_xpack/migration/deprecations</summary>
@@ -5376,7 +5376,7 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	///<summary>descriptor for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/security-api-get-privileges.html</pre></summary>
 	public partial class GetUserPrivilegesDescriptor  : RequestDescriptorBase<GetUserPrivilegesDescriptor,GetUserPrivilegesRequestParameters, IGetUserPrivilegesRequest>, IGetUserPrivilegesRequest
 	{ 
 		// values part of the url path

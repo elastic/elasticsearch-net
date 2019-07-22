@@ -2030,7 +2030,7 @@ namespace Nest
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/delete-license.html</pre></summary>
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
@@ -2090,7 +2090,7 @@ namespace Nest
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</pre></summary>
 	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
 		protected IDeletePipelineRequest Self => this;
@@ -2413,7 +2413,7 @@ namespace Nest
 	{
 		IndexName Index { get; }
 	}
-	///<summary>Request parameters for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>Request parameters for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
@@ -2951,7 +2951,7 @@ namespace Nest
 	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-trial-status.html</pre></summary>
 	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
 	{
 		protected IGetBasicLicenseStatusRequest Self => this;
@@ -3357,7 +3357,7 @@ namespace Nest
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-license.html</pre></summary>
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
@@ -3484,7 +3484,7 @@ namespace Nest
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</pre></summary>
 	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
 		protected IGetPipelineRequest Self => this;
@@ -3816,7 +3816,7 @@ namespace Nest
 	public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-basic-status.html</pre></summary>
 	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
 	{
 		protected IGetTrialLicenseStatusRequest Self => this;
@@ -3840,7 +3840,7 @@ namespace Nest
 	public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/security-api-get-privileges.html</pre></summary>
 	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 	{
 		protected IGetUserPrivilegesRequest Self => this;
@@ -3949,7 +3949,7 @@ namespace Nest
 	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters>
 	{
 	}
-	///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</pre></summary>
 	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
@@ -4775,7 +4775,7 @@ namespace Nest
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/update-license.html</pre></summary>
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
@@ -5054,7 +5054,7 @@ namespace Nest
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</pre></summary>
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
 		protected IPutPipelineRequest Self => this;
@@ -5988,7 +5988,7 @@ namespace Nest
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</pre></summary>
 	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
 		protected ISimulatePipelineRequest Self => this;
@@ -6292,7 +6292,7 @@ namespace Nest
 	public partial interface IStartBasicLicenseRequest : IRequest<StartBasicLicenseRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicensePostStartBasic <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicensePostStartBasic <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-basic.html</pre></summary>
 	public partial class StartBasicLicenseRequest : PlainRequestBase<StartBasicLicenseRequestParameters>, IStartBasicLicenseRequest
 	{
 		protected IStartBasicLicenseRequest Self => this;
@@ -6362,7 +6362,7 @@ namespace Nest
 	public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
 	{
 	}
-	///<summary>Request parameters for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-trial.html</pre></summary>
 	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
 	{
 		protected IStartTrialLicenseRequest Self => this;

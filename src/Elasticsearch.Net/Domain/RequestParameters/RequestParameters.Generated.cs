@@ -1575,7 +1575,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-	///<summary>Request options for IngestDeletePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for IngestDeletePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</pre></summary>
 	public partial class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -1584,19 +1584,19 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IngestGetPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for IngestGetPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</pre></summary>
 	public partial class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	///<summary>Request options for IngestProcessorGrok<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for IngestProcessorGrok<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</pre></summary>
 	public partial class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-	///<summary>Request options for IngestPutPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for IngestPutPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</pre></summary>
 	public partial class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -1605,7 +1605,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-	///<summary>Request options for IngestSimulate<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	///<summary>Request options for IngestSimulate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</pre></summary>
 	public partial class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -2489,43 +2489,43 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for watch write operation</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	///<summary>Request options for XpackLicenseDelete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicenseDelete<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/delete-license.html</pre></summary>
 	public partial class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
-	///<summary>Request options for XpackLicenseGet<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicenseGet<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-license.html</pre></summary>
 	public partial class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	///<summary>Request options for XpackLicenseGetBasicStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicenseGetBasicStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-trial-status.html</pre></summary>
 	public partial class GetBasicLicenseStatusRequestParameters : RequestParameters<GetBasicLicenseStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-	///<summary>Request options for XpackLicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-basic-status.html</pre></summary>
 	public partial class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-	///<summary>Request options for XpackLicensePost<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicensePost<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/update-license.html</pre></summary>
 	public partial class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
-	///<summary>Request options for XpackLicensePostStartBasic<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicensePostStartBasic<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-basic.html</pre></summary>
 	public partial class StartBasicLicenseRequestParameters : RequestParameters<StartBasicLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
-	///<summary>Request options for XpackLicensePostStartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	///<summary>Request options for XpackLicensePostStartTrial<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-trial.html</pre></summary>
 	public partial class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -2796,7 +2796,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-	///<summary>Request options for XpackMigrationDeprecations<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>Request options for XpackMigrationDeprecations<pre>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -3008,7 +3008,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-	///<summary>Request options for XpackSecurityGetUserPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	///<summary>Request options for XpackSecurityGetUserPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/security-api-get-privileges.html</pre></summary>
 	public partial class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

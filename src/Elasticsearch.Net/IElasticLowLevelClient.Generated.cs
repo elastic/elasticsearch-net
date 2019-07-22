@@ -1468,72 +1468,72 @@ namespace Elasticsearch.Net
 		///<summary>GET on / <para>http://www.elastic.co/guide/</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> InfoAsync<TResponse>(RootNodeInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>DELETE on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestDeletePipeline<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>DELETE on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestDeletePipelineAsync<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestGetPipeline<TResponse>(GetPipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestGetPipelineAsync<TResponse>(GetPipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 		///<param name="id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestGetPipeline<TResponse>(string id, GetPipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 		///<param name="id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestGetPipelineAsync<TResponse>(string id, GetPipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/processor/grok <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/processor/grok <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestProcessorGrok<TResponse>(GrokProcessorPatternsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/processor/grok <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/processor/grok <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestProcessorGrokAsync<TResponse>(GrokProcessorPatternsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>PUT on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestPutPipeline<TResponse>(string id, PostData body, PutPipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>PUT on /_ingest/pipeline/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestPutPipelineAsync<TResponse>(string id, PostData body, PutPipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestSimulateGet<TResponse>(SimulatePipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestSimulateGetAsync<TResponse>(SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestSimulateGet<TResponse>(string id, SimulatePipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>GET on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestSimulateGetAsync<TResponse>(string id, SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>POST on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestSimulate<TResponse>(PostData body, SimulatePipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>POST on /_ingest/pipeline/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IngestSimulateAsync<TResponse>(PostData body, SimulatePipelineRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>POST on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IngestSimulate<TResponse>(string id, PostData body, SimulatePipelineRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</para></summary>
+		///<summary>POST on /_ingest/pipeline/{id}/_simulate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html</para></summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2630,48 +2630,48 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_xpack/usage <para>Retrieve information about xpack features usage</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackUsageAsync<TResponse>(XPackUsageRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>DELETE on /_xpack/license <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/delete-license.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicenseDelete<TResponse>(DeleteLicenseRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>DELETE on /_xpack/license <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/delete-license.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicenseDeleteAsync<TResponse>(DeleteLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>GET on /_xpack/license <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-license.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicenseGet<TResponse>(GetLicenseRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>GET on /_xpack/license <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-license.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicenseGetAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/license/basic_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>GET on /_xpack/license/basic_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-trial-status.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicenseGetBasicStatus<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/license/basic_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>GET on /_xpack/license/basic_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-trial-status.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicenseGetBasicStatusAsync<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-basic-status.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicenseGetTrialStatus<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/get-basic-status.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicenseGetTrialStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>PUT on /_xpack/license <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/update-license.html</para></summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicensePost<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>PUT on /_xpack/license <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/update-license.html</para></summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicensePostAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_xpack/license/start_basic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>POST on /_xpack/license/start_basic <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-basic.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicensePostStartBasic<TResponse>(StartBasicLicenseRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_xpack/license/start_basic <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>POST on /_xpack/license/start_basic <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-basic.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicensePostStartBasicAsync<TResponse>(StartBasicLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-trial.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackLicensePostStartTrial<TResponse>(StartTrialLicenseRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/start-trial.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackLicensePostStartTrialAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
@@ -3220,17 +3220,17 @@ namespace Elasticsearch.Net
 		///<param name="body">The detector</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlValidateDetectorAsync<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackMigrationDeprecations<TResponse>(DeprecationInfoRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMigrationDeprecationsAsync<TResponse>(DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</para></summary>
 		///<param name="index">Index pattern</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackMigrationDeprecations<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/6.7/migration-api-deprecation.html</para></summary>
 		///<param name="index">Index pattern</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMigrationDeprecationsAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
@@ -3594,10 +3594,10 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_xpack/security/user <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackSecurityGetUserAsync<TResponse>(GetUserRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/security/user/_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
+		///<summary>GET on /_xpack/security/user/_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/security-api-get-privileges.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse XpackSecurityGetUserPrivileges<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_xpack/security/user/_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
+		///<summary>GET on /_xpack/security/user/_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.7/security-api-get-privileges.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackSecurityGetUserPrivilegesAsync<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_xpack/security/user/_has_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
