@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,5 +10,10 @@ namespace Nest
 
 		[DataMember(Name = "task")]
 		public TaskInfo Task { get; internal set; }
+
+		[DataMember(Name = "response")]
+		internal LazyDocument Response { get; set; }
+
+		public TResponse GetResponse<TResponse>() where TResponse : class, IResponse => Response?.As<TResponse>();
 	}
 }
