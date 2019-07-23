@@ -2,6 +2,7 @@
 using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Domain;
@@ -23,39 +24,46 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	*/
 	public class IndexNameInference : DocumentationTestBase
 	{
+		//hide
+		private class ConnectionSettings : Nest.ConnectionSettings
+		{
+			public ConnectionSettings() : base(new InMemoryConnection())
+			{
+			}
+		}
+
 		/**
 		* ==== Default Index name on Connection Settings
 		* A default index name can be specified on `ConnectionSettings` using `.DefaultIndex()`.
-		* This is the default index name to use when no other index name can be resolved for a request
+		* This is the default index name to use, when no other index name can be resolved for a request
 		*/
 		[U] public void DefaultIndexIsInferred()
 		{
 			var settings = new ConnectionSettings()
-				.DefaultIndex("defaultindex");
-			var resolver = new IndexNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("defaultindex");
+				.DefaultIndex("defaultindex"); // <1> set the default index
+
+			var client = new ElasticClient(settings);
+			var searchResponse = client.Search<Project>();
+
+			/**
+			 * will send a search request to the API endpoint
+			 */
+			//json
+			var expected = "http://localhost:9200/defaultindex/project/_search";
+
+			//hide
+			{
+				searchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				var resolver = new IndexNameResolver(settings);
+				var index = resolver.Resolve<Project>();
+				index.Should().Be("defaultindex");
+			}
 		}
 
 		/**
-		* [[index-name-type-mapping]]
-		* ==== Mapping an Index name for a .NET type
-		* A index name can be mapped for CLR types using `.MapDefaultTypeIndices()` on `ConnectionSettings`.
-		*/
-		[U] public void ExplicitMappingIsInferredUsingMapDefaultTypeIndices()
-		{
-			var settings = new ConnectionSettings()
-				.DefaultMappingFor<Project>(m => m
-					.IndexName("projects")
-				);
-			var resolver = new IndexNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("projects");
-		}
-
-		/**
-		 * `.DefaultMappingFor<T>()` can also be used to specify the index name, as well as be used
-		 * to specify the type name and POCO property that should be used as the id for the document
+		 * [[index-name-type-mapping]]
+		 * ==== Index name for a .NET type
+		 * An index name can be mapped for a _Plain Old CLR Object_ (POCO) using `.DefaultMappingFor<T>()` on `ConnectionSettings`
 		 */
 		[U]
 		public void ExplicitMappingIsInferredUsingDefaultMappingFor()
@@ -64,65 +72,135 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects")
 				);
-			var resolver = new IndexNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("projects");
+
+			var client = new ElasticClient(settings);
+			var searchResponse = client.Search<Project>();
+
+			/**
+			 * will send a search request to the API endpoint
+			 */
+			//json
+			var expected = "http://localhost:9200/projects/project/_search";
+
+			//hide
+			{
+				searchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				var resolver = new IndexNameResolver(settings);
+				var index = resolver.Resolve<Project>();
+				index.Should().Be("projects");
+			}
 		}
 
-		/** An index name for a POCO provided using `.MapDefaultTypeIndices()` or `.DefaultMappingFor<T>()` **will take precedence** over
+		/**
+		 * `.DefaultMappingFor<T>()` can also be used to specify other defaults for a POCO, including
+		 * property names, property to use for the document id, amongst others.
+		 *
+		 * An index name for a POCO provided using `.DefaultMappingFor<T>()` **will take precedence** over
 		* the default index name set on `ConnectionSettings`. This way, the client can be configured with a default index to use if no
 		* index is specified, and a specific index to use for different POCO types.
 		*/
 		[U] public void ExplicitMappingTakesPrecedence()
 		{
 			var settings = new ConnectionSettings()
-				.DefaultIndex("defaultindex")
+				.DefaultIndex("defaultindex") // <1> a default index to use, when no other index can be inferred
 				.DefaultMappingFor<Project>(m => m
-					.IndexName("projects")
+					.IndexName("projects") // <2> a index to use when `Project` is the target POCO type
 				);
-			var resolver = new IndexNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("projects");
+
+			var client = new ElasticClient(settings);
+
+			var projectSearchResponse = client.Search<Project>();
+
+			/**
+			 * will send a search request to the API endpoint
+			 */
+			//json
+			var expected = "http://localhost:9200/projects/project/_search";
+
+			//hide
+			{
+				projectSearchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				var resolver = new IndexNameResolver(settings);
+				var index = resolver.Resolve<Project>();
+				index.Should().Be("projects");
+			}
+
+			/**
+			 * but
+			 */
+			var objectSearchResponse = client.Search<object>();
+
+			/**
+			 * will send a search request to the API endpoint
+			 */
+			//json
+			expected = "http://localhost:9200/defaultindex/object/_search";
+
+			//hide
+			objectSearchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 		}
 
 		/**
 		* ==== Explicitly specifying Index name on the request
-		* For API calls that expect an index name, the index name can be explicitly provided
+		* For API calls that expect an index name, an index name can be explicitly provided
 		* on the request
 		*/
 		[U] public void ExplicitIndexOnRequest()
 		{
-			var client = TestClient.Default;
-			var response = client.Search<Project>(s => s.Index("some-other-index")); //<1> Provide the index name on the request
-			var requestUri = response.ApiCall.Uri;
+			var settings = new ConnectionSettings();
+			var client = new ElasticClient(settings);
 
-			requestUri.Should().NotBeNull();
-			requestUri.LocalPath.Should().StartWith("/some-other-index/");
+			var response = client.Search<Project>(s => s
+				.Index("some-other-index") //<1> Provide the index name on the request
+			);
+
+			/**
+			 * will send a search request to the API endpoint
+			 */
+			//json
+			var expected = "http://localhost:9200/some-other-index/project/_search";
+
+			//hide
+			response.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 		}
 
 		/** When an index name is provided on a request, it **will take precedence** over the default
-		* index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()` or
-		* `.DefaultMappingFor<T>()`
-		*/
+		 * index name specified on `ConnectionSettings`, _and_ any index name specified for the POCO
+		 * using `.DefaultMappingFor<T>()`. The following example will send a search request
+		 * to the same API endpoint as the previous example
+		 */
 		[U] public void ExplicitIndexOnRequestTakesPrecedence()
 		{
-			var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
+			var settings = new ConnectionSettings()
 				.DefaultIndex("defaultindex")
 				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects")
-				));
+				);
 
-			var response = client.Search<Project>(s => s.Index("some-other-index")); //<1> Provide the index name on the request
+			var client = new ElasticClient(settings);
 
-			response.ApiCall.Uri.Should().NotBeNull();
-			response.ApiCall.Uri.LocalPath.Should().StartWith("/some-other-index/");
+			var response = client.Search<Project>(s => s
+				.Index("some-other-index")
+			);
+
+			//hide
+			{
+				var expected = "http://localhost:9200/some-other-index/project/_search";
+				response.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+			}
 		}
 
 		/** In summary, the order of precedence for determining the index name for a request is
 		 *
 		 * . Index name specified  on the request
-		 * . Index name specified for the generic type parameter in the request using `.MapDefaultTypeIndices()` or `.DefaultMappingFor<T>()`
+		 * . Index name specified for the generic type parameter in the request using `.DefaultMappingFor<T>()`
 		 * . Default index name specified on `ConnectionSettings`
+		 *
+		 * [IMPORTANT]
+		 * --
+		 * If no index can be determined for a request that requires an index, the client will throw
+		 * an exception to indicate that this is the case.
+		 * --
 		 */
 
 		//hide

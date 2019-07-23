@@ -152,6 +152,10 @@ NOTE: You can set this to a high value here, and specify a timeout on Elasticsea
 
 Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true. After this callback returns true that endpoint is validated for the lifetime of the ServiceEndpoint for that host.
 
+`SkipDeserializationForStatusCodes`::
+
+Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401, 500
+
 `SniffLifeSpan`::
 
 Set the duration after which a cluster state is considered stale and a sniff should be performed again. An `IConnectionPool` has to signal it supports reseeding, otherwise sniffing will never happen.             Defaults to 1 hour.             Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
