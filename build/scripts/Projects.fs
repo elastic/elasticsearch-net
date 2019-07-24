@@ -5,15 +5,16 @@ module Projects =
     type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
 
     type DotNetFramework = 
-        | Net46 
         | NetStandard2_0
+        | Net461
         | NetCoreApp2_1
-        static member All = [Net46; NetStandard2_0] 
+        static member All = [NetStandard2_0; Net461]
+        static member AllTests = [NetCoreApp2_1; Net461] 
         member this.Identifier = 
             match this with
-            | Net46 -> { MSBuild = "v4.6"; Nuget = "net461"; DefineConstants = ""; }
             | NetStandard2_0 -> { MSBuild = "netstandard2.0"; Nuget = "netstandard2.0"; DefineConstants = ""; }
             | NetCoreApp2_1 -> { MSBuild = "netcoreapp2.1"; Nuget = "netcoreapp2.1"; DefineConstants = ""; }
+            | Net461 -> { MSBuild = "net461"; Nuget = "net461"; DefineConstants = ""; }
 
     type Project =
         | Nest

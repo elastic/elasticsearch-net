@@ -41,8 +41,11 @@ module Tests =
             let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
             match (target, Environment.isLinux) with 
-            | (_, true) 
-            | (Commandline.MultiTarget.One, _) -> ["--framework"; "netcoreapp2.1"] |> List.append p
+            | (_, true) -> ["--framework"; "netcoreapp2.1"] |> List.append p
+            | (Commandline.MultiTarget.One, _) ->
+                let random = new Random()
+                let fw = DotNetFramework.AllTests |> List.sortBy (fun _ -> random.Next()) |> List.head
+                ["--framework"; fw.Identifier.MSBuild] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =
             // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
@@ -54,7 +57,11 @@ module Tests =
             | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; "-v"; "m"] |> List.append command
             | _  -> command
             
-        Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
+        if Environment.UserInteractive then
+            let out = Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            if out.ExitCode <> 0 then failwith "dotnet test failed"
+        else 
+            Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
 
     let RunReleaseUnitTests (ArtifactsVersion(version)) =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
@@ -78,5 +85,6 @@ module Tests =
         | None -> failwith "No versions specified to run integration tests against"
         | Some esVersions ->
             for esVersion in esVersions do
+                Environment.setEnvironVar "NEST_INTEGRATION_TEST" "1"
                 Environment.setEnvironVar "NEST_INTEGRATION_VERSION" esVersion
                 dotnetTest args.MultiTarget |> ignore

@@ -1,5 +1,6 @@
 using Elastic.Managed.Ephemeral.Plugins;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
@@ -8,9 +9,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	/// </summary>
 	public class IntrusiveOperationSeededCluster : ClientTestClusterBase
 	{
-		public IntrusiveOperationSeededCluster() : base(new ClientTestClusterConfiguration(
-			ElasticsearchPlugin.IngestGeoIp, ElasticsearchPlugin.IngestAttachment
-		)
+		public IntrusiveOperationSeededCluster() : base(new ClientTestClusterConfiguration(IngestGeoIp, IngestAttachment)
 		{
 			MaxConcurrency = 1
 		}) { }

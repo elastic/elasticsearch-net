@@ -2,15 +2,25 @@
 
 open System
 open System.IO
+open Elastic.Managed.ConsoleWriters
 open ProcNet
-open Fake.IO.Globbing.Operators
 open ProcNet.Std
 
 module Tooling = 
 
-    type ExecResult = { ExitCode: int option; Output: Std.LineOut seq;}
+    type ExecResult = { ExitCode: int; Output: Std.LineOut seq;}
     
     let private defaultTimeout = TimeSpan.FromMinutes(5.)
+    
+    let startRedirectedInWithTimeout timeout workinDir bin args = 
+        let startArgs = StartArguments(bin, args |> List.toArray)
+        if (Option.isSome workinDir) then
+            startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
+        if Commandline.isMono then startArgs.WaitForStreamReadersTimeout <- Nullable<TimeSpan>()
+        let result = Proc.StartRedirected(startArgs, timeout, LineHighlightWriter())
+        if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
+        if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
+        { ExitCode = result.ExitCode.Value; Output = seq []}
     
     let readInWithTimeout timeout workinDir bin args = 
         let startArgs = StartArguments(bin, args |> List.toArray)
@@ -18,8 +28,8 @@ module Tooling =
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
         let result = Proc.Start(startArgs, timeout, ConsoleOutColorWriter())
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
-        let exitCode = match result.ExitCode.HasValue with | false -> None | true -> Some result.ExitCode.Value
-        { ExitCode = exitCode; Output = seq result.ConsoleOut}
+        if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
+        { ExitCode = result.ExitCode.Value; Output = seq result.ConsoleOut}
         
     let read bin args = readInWithTimeout defaultTimeout None bin args
     
@@ -41,6 +51,8 @@ module Tooling =
     type BuildTooling(timeout, path) =
         let timeout = match timeout with | Some t -> t | None -> defaultTimeout
         member this.Path = path
+        member this.StartInWithTimeout workingDirectory arguments timeout = startRedirectedInWithTimeout timeout (Some workingDirectory) this.Path arguments
+        member this.ReadInWithTimeout workingDirectory arguments timeout = readInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ExecInWithTimeout workingDirectory arguments timeout = execInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ExecWithTimeout arguments timeout = execInWithTimeout timeout None this.Path arguments
         member this.ExecIn workingDirectory arguments = this.ExecInWithTimeout workingDirectory arguments timeout

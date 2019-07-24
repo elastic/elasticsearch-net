@@ -9,6 +9,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
-    <PackageReference Include="BenchMarkDotNet" Version="0.11.4" />
+    <PackageReference Include="BenchMarkDotNet" Version="0.11.5" />
   </ItemGroup>
 </Project>
