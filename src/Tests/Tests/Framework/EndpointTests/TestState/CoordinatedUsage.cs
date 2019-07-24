@@ -65,7 +65,7 @@ namespace Tests.Framework.EndpointTests.TestState
 			var client = Client;
 			return k => _usage.CallOnce(
 				() => new LazyResponses(k,
-					async () => await CallAllClientMethodsOverloads(k, initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
+					async () => await CallAllClientMethodsOverloads(initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
 				, k);
 		}
 
@@ -98,7 +98,6 @@ namespace Tests.Framework.EndpointTests.TestState
 		private string Sanitize(string value) => string.IsNullOrEmpty(Prefix) ? value : $"{Prefix}-{value}";
 
 		private async Task<Dictionary<ClientMethod, IResponse>> CallAllClientMethodsOverloads<TDescriptor, TInitializer, TInterface, TResponse>(
-			string name,
 			Func<string, TInitializer> initializerBody,
 			Func<string, TDescriptor, TInterface> fluentBody,
 			Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
