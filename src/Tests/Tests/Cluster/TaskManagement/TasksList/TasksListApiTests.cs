@@ -102,17 +102,44 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			seeder.SeedNode();
 
 			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.Generate(20000));
+			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000));
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 
+			client.Refresh(typeof(Project));
+
+			var targetIndex = "tasks-list-projects";
+
+			var createIndex = client.CreateIndex(targetIndex, i => i
+				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
+				.Mappings(m => m
+					.Map<Project>(mm =>mm
+						.RoutingField(r => r.Required())
+						.AutoMap()
+						.Properties(DefaultSeeder.ProjectProperties)
+						.Properties<CommitActivity>(props => props
+							.Object<Developer>(o => o
+								.AutoMap()
+								.Name(p => p.Committer)
+								.Properties(DefaultSeeder.DeveloperProperties)
+							)
+							.Text(t => t
+								.Name(p => p.ProjectName)
+								.Index(false)
+							)
+						)
+					)
+				)
+			);
+
+			createIndex.ShouldBeValid();
 			var response = client.ReindexOnServer(r => r
 				.Source(s => s
-					.Index(Infer.Index<Project>())
+					.Index(typeof(Project))
 					.Type(typeof(Project))
 				)
 				.Destination(d => d
-					.Index("tasks-list-projects")
+					.Index(targetIndex)
 					.OpType(OpType.Create)
 				)
 				.Conflicts(Conflicts.Proceed)
