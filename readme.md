@@ -3,33 +3,18 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
 ## Compatibility Matrix
 <table>
     <tr>
+        <th><b>.NET Clients<b></th>
         <th><b>Elasticsearch<b></th>
-        <th><b>Clients<b></th>
         <th><b>Supported<b></th>
         <th><b>Windows/Linux CI</b></th>
         <th><b>Tests<b></th>
     </tr>
     <tr>
-    	<td><code>0.x</code></td>
-    	<td><code>0.x</code></td>
+    	<td><code>0.x - 2.x</code></td>
+    	<td><code>0.x - 2.x</code></td>
     	<td>:x:</td>
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
-    </tr>
-    <tr>
-    	<td><code>1.x</code></td>
-    	<td><code>1.x</code></td>
-    	<td>:x:</td>
-    	<td>:heavy_minus_sign:</td>
-    	<td>:heavy_minus_sign:</td>
-    </tr>
-    <tr>
-    	<td><code>2.x</code></td>
-    	<td><code>2.x</code></td>
-    	<td>:x:</td>
-    	<td>:heavy_minus_sign:</td>
-    	<td>:heavy_minus_sign:</td>
-    	</td>  
     </tr>
     <tr>
     	<td><code>5.x</code></td>
@@ -60,6 +45,38 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master/tests"><img alt="master unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/master.svg?style=flat-square"></a></td>
     </tr>
 </table>
+
+### Further Compatibility Clarifications
+
+#### Can I use a `7.0.0` client against a `5.6` server (new against old), or a `6.0` client against a `7.2` server (old against new)?
+
+No, this is not recommended.
+
+No compatibility assurances are given between different major versions of the client and server. Major differences likely exist between major versions of the server, particularly around request and response object formats.
+
+#### Can I use a `7.0.0` client against a `7.2.0` server?
+
+Both the server and the client are developed according to [SemVer](https://semver.org/) principles, so there should be no breaking changes in a minor version. A `7.0.0` client will work against a `7.2.0` server.
+
+This can be illustrated with some examples;
+
+*Using a `7.0.0` client against a `7.0.0` server*. There is client support for all features in the server. In some instances, we may decide to delay implementing new APIs or some server features until later minor versions of the client, but this is the exception and not the rule.
+
+*Using a `7.0.0` client against a `7.0.1` - `7.2.0` server*. There is client support for all comparable features that are available in the `7.0.0` server. If you want to use new features introduced in `7.2.0` with a lower version client, then you will have to use the low level client `DoRequest` method and perform the request/response (de)serialisation yourself.
+
+When we release a client we will run the unit and integration tests against the latest minor patch version of Elasticsearch that matches the major.minor of the client release, and then any other latest minors within that major version.
+
+Any incompatibilities between minor versions are documented against the release.
+
+#### I have a `6.0` server, what client should I use?
+
+Always use the latest minor version of the client within that major version, so in this instance version `6.8`. The reason being is that `6.8` will contain many bug fixes not present in the `6.0` version of the client.
+
+#### Branch Compatibility
+
+`master` reflects the latest server version (`8.x` snapshots)
+`7.x` reflects the latest development of the `7.x` client
+`7.1` is the integration branch for the next client release (`7.1.0`)
 
 ## Preview builds
 
@@ -92,11 +109,11 @@ Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 7
 
 NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
 
-* High-level client that internally uses the low-level **Elasticsearch.Net** client
-* Maps requests and responses to strongly typed objects with both fluent interface and object initializer syntaxes to build them
-* Comes with a very powerful query DSL that maps one-to-one with Elasticsearch
-* Takes advantage of .NET features where they make sense (e.g. type and index inference, inferred mapping from POCO properties)
-* All calls have async variants with support for cancellation
+The client internally uses the low-level **Elasticsearch.Net** client. It maps requests and responses to strongly typed objects with both fluent interface and object initializer syntax. It also provides a very powerful query DSL that maps 1-to-1 with the Elasticsearch API.
+
+This client takes advantage of .NET features where they make sense (e.g. type and index inference and inferred mapping from POCO properties).
+
+All client method calls have asynchronous variants with support for cancellation.
 
 ## Getting Started
 
@@ -104,15 +121,15 @@ For a comprehensive, walkthrough-styled tutorial, check out the [NuSearch exampl
 
 ### Installing
 
-From the package manager console:
+You can install NEST from the package manager console:
 
 	PM> Install-Package NEST
 
-or by simply searching for `NEST` in the package manager UI.
+Alternatively, simply search for `NEST` in the package manager UI.
 
 ### Connecting
 
-You can connect to your Elasticsearch cluster via a single node, or by specifying multiple nodes using a connection pool.  Using a connection pool has a few advantages over a single node connection, such as load balancing and cluster fail over support.
+You can connect to your Elasticsearch cluster via a single node, or by specifying multiple nodes using a connection pool.  Using a connection pool has a few advantages over a single node connection, such as load balancing and cluster failover support.
 
 **Connecting to a single node**
 
@@ -122,7 +139,7 @@ var settings = new ConnectionSettings(node);
 var client = new ElasticClient(settings);
 ```
 
-**Using a connection pool**
+**Connecting to multiple nodes using a connection pool**
 
 ```csharp
 var nodes = new Uri[]
@@ -139,7 +156,7 @@ var client = new ElasticClient(settings);
 
 ### Indexing
 
-Indexing a document is as simple as (with 6.x):
+Indexing a document is as simple as (with 7.x):
 
 ```csharp
 var tweet = new Tweet
@@ -200,7 +217,7 @@ var response = client.Search<Tweet>(request);
 
 ### Falling back to Elasticsearch.Net
 
-NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Elasticsearch.Net) client that you can fall back to incase anything is missing:
+NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Elasticsearch.Net) client that you can fall back to in case anything is missing:
 
 ```csharp
 //.LowLevel is of type IElasticLowLevelClient
@@ -225,23 +242,19 @@ var response = client.LowLevel.Search<SearchResponse<Tweet>>("myindex", PostData
 
 # [Elasticsearch.Net](src/Elasticsearch.Net)
 
-A low-level, dependency free, client that has no opinions how you build and represent your requests and responses.
+A low-level, dependency free client that has no opinions how you build and represent your requests and responses.
 
-* Low-level client that provides a one-to-one mapping with the Elasticsearch REST API
-* No dependencies
-* Almost completely generated from the official REST API spec which makes it easy to keep up to date
-* Comes with an integration test suite that can be generated from the YAML test definitions that the Elasticsearch core team uses to test their REST API
-* Has no opinions on how you create or consume requests and responses
-* Load balancing and cluster failover support
-* All calls have async variants
+It provides a one-to-one mapping with the Elasticsearch REST API. The client is almost completely generated from the official REST API specification, which makes is easy to keep up-to-date.
+
+The client also has support for load balancing and cluster failover and all client method calls have both synchronous and asynchronous variants
 
 ### Installing
 
-From the package manager console:
+You can install Elasticsearch.Net from the package manager console:
 
 	PM> Install-Package Elasticsearch.Net
 
-or by searching for `Elasticsearch.Net` in the package manager UI.
+Alternatively,  search for `Elasticsearch.Net` in the package manager UI.
 
 ### Connecting
 
@@ -257,7 +270,7 @@ Note the main difference here is that we are instantiating an `ElasticLowLevelCl
 
 ### Calling an API endpoint
 
-Elasticsearch.Net is generated from the the [official REST specification](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec), and thus maps to all Elasticsearch API endpoints.
+Elasticsearch.Net is generated from the [official REST specification](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec), and thus maps to all Elasticsearch API endpoints.
 
 ```csharp
 client.GetSource("myindex","mytype","1",qs=>qs
@@ -265,7 +278,7 @@ client.GetSource("myindex","mytype","1",qs=>qs
 );
 ```
 
-will execute a `GET` to `/myindex/mytype/1/_source?routing=routingvalue`. All the methods and arguments are fully documented based on the documentation of the specification.
+This will execute a `GET` to `/myindex/mytype/1/_source?routing=routingvalue`. All the methods and arguments are fully documented based on the documentation of the specification.
 
 As you can see, Elasticsearch.Net also strongly types the query string parameters that it knows exist on an endpoint with full Intellisense documentation. However, unknown query string parameters can still be added:
 
@@ -311,7 +324,7 @@ This will execute the same request, but this time `myJson` will be serialized by
 
 [All Elasticsearch.Net and NEST documentation on elastic.co](https://www.elastic.co/guide/en/elasticsearch/client/net-api/index.html) is generated from code within the [Tests project](src/Tests) using [Roslyn](https://github.com/dotnet/roslyn); multi-line comments serve as the main bodies of text, intermixed with code samples that test the documented components. The intention is to reduce the likelihood of documentation becoming outdated as the source changes. 
 
-Text within multi-line comments conforms to [asciidoc](http://asciidoc.org/), a lightweight markdown style text format well suited to technical documentation. To generate the asciidoc files from the test files, you need to run the [DocGenerator](src/CodeGeneration/DocGenerator) console application which will output the documentation files in the docs output directory. To verify that the generated asciidoc files can generate the documentation for the website, [clone the elastic docs repo](https://github.com/elastic/docs) and follow the instructions there for building documentation locally. as an example, suppose I have cloned the elastic docs to `c:\source\elastic-docs`, then to verify the generated asciidoc files for NEST are valid would be as following (using Cygwin on Windows)
+Text within multi-line comments conforms to [asciidoc](http://asciidoc.org/), a lightweight markdown style text format well suited to technical documentation. To generate the asciidoc files from the test files, you need to run the [DocGenerator](src/CodeGeneration/DocGenerator) console application which will output the documentation files in the docs output directory. To verify that the generated asciidoc files can generate the documentation for the website, [clone the elastic docs repo](https://github.com/elastic/docs) and follow the instructions there for building documentation locally. As an example, suppose I have cloned the elastic docs to `c:\source\elastic-docs`, then to verify the generated asciidoc files for NEST are valid would be as follows (using Cygwin on Windows):
 
 ```sh
 cd /cygdrive/c/source/elastic-docs
@@ -319,7 +332,7 @@ cd /cygdrive/c/source/elastic-docs
 ./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc --chunk=1 --open
 ```
 
-the result of running this for a successful build will be
+The result of running this for a successful build will be:
 
 ```sh
 Building HTML from /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc
@@ -327,7 +340,7 @@ Done
 See: /cygdrive/c/source/elasticsearch-docs/html_docs/index.html
 ```
 
-and a small HTTP server will be spun up locally on port 8000 through which you can view the documentation.
+A small HTTP server will be spun up locally on port 8000 through which you can view the documentation.
 
 [Pull Requests](https://github.com/elastic/elasticsearch-net/pulls) are most welcome for areas of documentation that need improving.
 
