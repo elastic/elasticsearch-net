@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -25,6 +25,14 @@ how the clients interact with Elasticsearch.
 The following is a list of available connection configuration options on `ConnectionConfiguration`; since
 `ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
 the low level and high level client:
+
+`ApiKeyAuthentication`::
+
+Api Key to send with all requests to Elasticsearch
+
+`ApiKeyAuthentication`::
+
+Api Key to send with all requests to Elasticsearch
 
 `BasicAuthentication`::
 
@@ -181,6 +189,10 @@ Enables sniffing on first usage of a connection pool if that pool supports resee
 Instead of following a c/go like error checking on response.IsValid do throw an exception (except when `SuccessOrKnownError` is false)             on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 +
 Reasons for such exceptions could be search parser errors, index missing exceptions, etc...
+
+`UserAgent`::
+
+The user agent string to send with requests. Useful for debugging purposes to understand client and framework versions that initiate requests to Elasticsearch
 
 :xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
 

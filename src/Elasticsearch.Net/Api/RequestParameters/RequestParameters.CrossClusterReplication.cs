@@ -45,10 +45,22 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		}
 	}
 
+	///<summary>Request options for FollowInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
+	public class FollowInfoRequestParameters : RequestParameters<FollowInfoRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
 	///<summary>Request options for FollowIndexStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 	public class FollowIndexStatsRequestParameters : RequestParameters<FollowIndexStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
+	///<summary>Request options for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	public class ForgetFollowerIndexRequestParameters : RequestParameters<ForgetFollowerIndexRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
 	///<summary>Request options for GetAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>

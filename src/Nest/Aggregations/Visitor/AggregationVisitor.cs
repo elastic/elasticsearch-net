@@ -52,6 +52,8 @@
 
 		void Visit(IGeoHashGridAggregation aggregation);
 
+		void Visit(IGeoTileGridAggregation aggregation);
+
 		void Visit(IGeoBoundsAggregation aggregation);
 
 		void Visit(IHistogramAggregation aggregation);
@@ -142,6 +144,8 @@
 		public virtual void Visit(IFiltersAggregation aggregation) { }
 
 		public virtual void Visit(IGeoHashGridAggregation aggregation) { }
+
+		public virtual void Visit(IGeoTileGridAggregation aggregation) { }
 
 		public virtual void Visit(IHistogramAggregation aggregation) { }
 

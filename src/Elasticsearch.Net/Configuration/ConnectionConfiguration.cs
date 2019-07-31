@@ -116,6 +116,7 @@ namespace Elasticsearch.Net
 		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
 		private BasicAuthenticationCredentials _basicAuthCredentials;
+		private ApiKeyAuthenticationCredentials _apiKeyAuthCredentials;
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		private int _connectionLimit;
@@ -144,6 +145,7 @@ namespace Elasticsearch.Net
 		private bool _sniffOnConnectionFault;
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
+		private bool _transferEncodingChunked;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -169,6 +171,7 @@ namespace Elasticsearch.Net
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
+		ApiKeyAuthenticationCredentials IConnectionConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthCredentials;
 		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
 		X509CertificateCollection IConnectionConfigurationValues.ClientCertificates => _clientCertificates;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
@@ -211,6 +214,7 @@ namespace Elasticsearch.Net
 		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
 		string IConnectionConfigurationValues.UserAgent => _userAgent;
 		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
+		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -435,6 +439,18 @@ namespace Elasticsearch.Net
 			Assign(new BasicAuthenticationCredentials(username, password), (a, v) => a._basicAuthCredentials = v);
 
 		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(string id, SecureString apiKey) =>
+			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthCredentials = v);
+
+		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(string id, string apiKey) =>
+			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthCredentials = v);
+
+		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 		/// <para>NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
@@ -516,6 +532,11 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
 
+		/// <summary>
+		/// Whether the request should be sent with chunked Transfer-Encoding. Default is <c>false</c>
+		/// </summary>
+		public T TransferEncodingChunked(bool transferEncodingChunked = true) => Assign(transferEncodingChunked, (a, v) => a._transferEncodingChunked = v);
+
 		protected virtual void DisposeManagedResources()
 		{
 			_connectionPool?.Dispose();
@@ -523,6 +544,7 @@ namespace Elasticsearch.Net
 			_semaphore?.Dispose();
 			_proxyPassword?.Dispose();
 			_basicAuthCredentials?.Dispose();
+			_apiKeyAuthCredentials?.Dispose();
 		}
 
 		protected virtual bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>

@@ -87,6 +87,13 @@ namespace Nest
 							Accept(t.Fields);
 						});
 						break;
+					case FieldType.DateNanos:
+						Visit<IDateNanosProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+							Accept(t.Fields);
+						});
+						break;
 					case FieldType.Boolean:
 						Visit<IBooleanProperty>(field, t =>
 						{

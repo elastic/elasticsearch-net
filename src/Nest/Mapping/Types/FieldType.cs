@@ -43,6 +43,9 @@ namespace Nest
 		[EnumMember(Value = "date")]
 		Date,
 
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+
 		[EnumMember(Value = "boolean")]
 		Boolean,
 

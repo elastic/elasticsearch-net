@@ -1,0 +1,57 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/XPack/Security/ApiKey/SecurityApiKeyUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[security-api-key-usage]]
+=== Security Api Key Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+TryGetExtendedValue<CreateApiKeyResponse>("response", out var response);
+
+    // Unit tests for HitsTheCorrectUrl will have a null response object.
+if (response == null)
+        return d => d;
+
+return d => d.RequestConfiguration(r => r.ApiKeyAuthentication(response.Id, response.ApiKey));
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+TryGetExtendedValue<CreateApiKeyResponse>("response", out var response);
+
+    // Unit tests for HitsTheCorrectUrl will have a null response object.
+if (response == null)
+        return new NodesInfoRequest();
+
+return new NodesInfoRequest
+    {
+        RequestConfiguration = new RequestConfiguration
+        {
+            ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(response.Id, response.ApiKey)
+        }
+    };
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+response.Nodes.Should().NotBeEmpty();
+----
+

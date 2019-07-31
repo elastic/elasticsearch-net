@@ -1,0 +1,70 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/GeoTileGrid/GeoTileGridAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[geo-tile-grid-aggregation-usage]]
+=== Geo Tile Grid Aggregation Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.GeoTile("my_geotile", g => g
+    .Field(p => p.LocationPoint)
+    .Precision(GeoTilePrecision.Precision3)
+    .Size(1000)
+    .ShardSize(100)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoTileGridAggregation("my_geotile")
+{
+    Field = Field<Project>(p => p.LocationPoint),
+    Precision = GeoTilePrecision.Precision3,
+    Size = 1000,
+    ShardSize = 100
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "my_geotile": {
+    "geotile_grid": {
+      "field": "locationPoint",
+      "precision": 3,
+      "size": 1000,
+      "shard_size": 100
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var myGeoTileGrid = response.Aggregations.GeoTile("my_geotile");
+myGeoTileGrid.Should().NotBeNull();
+var firstBucket = myGeoTileGrid.Buckets.First();
+firstBucket.Key.Should().NotBeNullOrWhiteSpace();
+firstBucket.DocCount.Should().BeGreaterThan(0);
+----
+

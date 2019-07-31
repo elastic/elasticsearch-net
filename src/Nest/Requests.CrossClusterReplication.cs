@@ -107,6 +107,39 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IFollowInfoRequest : IRequest<FollowInfoRequestParameters>
+	{
+		[IgnoreDataMember]
+		Indices Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for FollowInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
+	public partial class FollowInfoRequest : PlainRequestBase<FollowInfoRequestParameters>, IFollowInfoRequest
+	{
+		protected IFollowInfoRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowInfo;
+		///<summary>/{index}/_ccr/info</summary>
+		///<param name = "index">this parameter is required</param>
+		public FollowInfoRequest(Indices index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected FollowInfoRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IFollowInfoRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -136,6 +169,39 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IForgetFollowerIndexRequest : IRequest<ForgetFollowerIndexRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	public partial class ForgetFollowerIndexRequest : PlainRequestBase<ForgetFollowerIndexRequestParameters>, IForgetFollowerIndexRequest
+	{
+		protected IForgetFollowerIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollowerIndex;
+		///<summary>/{index}/_ccr/forget_follower</summary>
+		///<param name = "index">this parameter is required</param>
+		public ForgetFollowerIndexRequest(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ForgetFollowerIndexRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName IForgetFollowerIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 	// Request parameters
 	}
 
