@@ -36,6 +36,10 @@ namespace Nest
 
 		public void Visit(IJoinProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IRankFeatureProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
+		public virtual void Visit(IRankFeaturesProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual void Visit(IIpProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(IGeoPointProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
@@ -43,6 +47,8 @@ namespace Nest
 		public virtual void Visit(INestedProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(IDateProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
+		public virtual void Visit(IDateNanosProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
@@ -70,6 +76,9 @@ namespace Nest
 					break;
 				case IDateProperty dateType:
 					Visit(dateType, propertyInfo, attribute);
+					break;
+				case IDateNanosProperty dateNanosType:
+					Visit(dateNanosType, propertyInfo, attribute);
 					break;
 				case INumberProperty numberType:
 					Visit(numberType, propertyInfo, attribute);
@@ -121,6 +130,12 @@ namespace Nest
 					break;
 				case IIpRangeProperty ipRangeType:
 					Visit(ipRangeType, propertyInfo, attribute);
+					break;
+				case IRankFeatureProperty rankFeature:
+					Visit(rankFeature, propertyInfo, attribute);
+					break;
+				case IRankFeaturesProperty rankFeatures:
+					Visit(rankFeatures, propertyInfo, attribute);
 					break;
 			}
 		}

@@ -85,10 +85,25 @@ namespace Nest
 
 	public class SnapshotStats
 	{
+		[DataMember(Name ="incremental")]
+		public FileCountSnapshotStats Incremental { get; internal set; }
+
+		[DataMember(Name ="total")]
+		public FileCountSnapshotStats Total { get; internal set; }
+
 		[DataMember(Name ="start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
 		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; internal set; }
+	}
+
+	public class FileCountSnapshotStats
+	{
+		[DataMember(Name ="file_count")]
+		public int FileCount { get; internal set; }
+
+		[DataMember(Name ="size_in_bytes")]
+		public long SizeInBytes { get; internal set; }
 	}
 }

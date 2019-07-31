@@ -85,6 +85,30 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// </summary>
 		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public FollowInfoResponse FollowInfo(Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null) => FollowInfo(selector.InvokeOrDefault(new FollowInfoDescriptor(index: index)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public Task<FollowInfoResponse> FollowInfoAsync(Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null, CancellationToken ct = default) => FollowInfoAsync(selector.InvokeOrDefault(new FollowInfoDescriptor(index: index)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public FollowInfoResponse FollowInfo(IFollowInfoRequest request) => DoRequest<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>ccr.follow_info</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</a>
+		/// </summary>
+		public Task<FollowInfoResponse> FollowInfoAsync(IFollowInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>ccr.follow_stats</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>
@@ -108,6 +132,30 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</a>
 		/// </summary>
 		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
+		public ForgetFollowerIndexResponse ForgetFollowerIndex(IndexName index, Func<ForgetFollowerIndexDescriptor, IForgetFollowerIndexRequest> selector) => ForgetFollowerIndex(selector.InvokeOrDefault(new ForgetFollowerIndexDescriptor(index: index)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
+		public Task<ForgetFollowerIndexResponse> ForgetFollowerIndexAsync(IndexName index, Func<ForgetFollowerIndexDescriptor, IForgetFollowerIndexRequest> selector, CancellationToken ct = default) => ForgetFollowerIndexAsync(selector.InvokeOrDefault(new ForgetFollowerIndexDescriptor(index: index)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
+		public ForgetFollowerIndexResponse ForgetFollowerIndex(IForgetFollowerIndexRequest request) => DoRequest<IForgetFollowerIndexRequest, ForgetFollowerIndexResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// </summary>
+		public Task<ForgetFollowerIndexResponse> ForgetFollowerIndexAsync(IForgetFollowerIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IForgetFollowerIndexRequest, ForgetFollowerIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ccr.get_auto_follow_pattern</c> API, read more about this API online:
 		/// <para></para>

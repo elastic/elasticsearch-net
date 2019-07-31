@@ -142,7 +142,7 @@ namespace Elasticsearch.Net
 		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
 		{
 			var request = CreateWebRequest(requestData);
-			SetBasicAuthenticationIfNeeded(request, requestData);
+			SetAuthenticationIfNeeded(requestData, request);
 			SetProxyIfNeeded(request, requestData);
 			SetServerCertificateValidationCallBackIfNeeded(request, requestData);
 			SetClientCertificates(request, requestData);
@@ -180,6 +180,9 @@ namespace Elasticsearch.Net
 			request.MaximumResponseHeadersLength = -1;
 #endif
 			request.Pipelined = requestData.Pipelined;
+
+			if (requestData.TransferEncodingChunked)
+				request.SendChunked = true;
 
 			if (requestData.HttpCompression)
 			{
@@ -239,6 +242,16 @@ namespace Elasticsearch.Net
 				request.Proxy = null;
 		}
 
+		protected virtual void SetAuthenticationIfNeeded(RequestData requestData, HttpWebRequest request)
+		{
+			// Api Key authentication takes precedence
+			var apiKeySet = SetApiKeyAuthenticationIfNeeded(request, requestData);
+
+			if (!apiKeySet)
+				SetBasicAuthenticationIfNeeded(request, requestData);
+		}
+
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
 		protected virtual void SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
@@ -253,11 +266,30 @@ namespace Elasticsearch.Net
 				userInfo =
 					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 
+			if (string.IsNullOrWhiteSpace(userInfo))
+				return;
 
-			if (!string.IsNullOrWhiteSpace(userInfo))
-				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+			request.Headers["Authorization"] = $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo))}";
 		}
 
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
+		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
+		{
+			// ApiKey auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+
+			string apiKey = null;
+			if (requestData.ApiKeyAuthenticationCredentials != null)
+				apiKey = requestData.ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
+
+			if (string.IsNullOrWhiteSpace(apiKey))
+				return false;
+
+			request.Headers["Authorization"] = $"ApiKey {apiKey}";
+			return true;
+
+		}
 
 		/// <summary>
 		/// Registers an APM async task cancellation on the threadpool

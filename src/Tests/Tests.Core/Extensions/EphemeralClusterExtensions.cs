@@ -30,7 +30,10 @@ namespace Tests.Core.Extensions
 				var settings = modifySettings(cluster.CreateConnectionSettings());
 
 				var current = (IConnectionConfigurationValues)settings;
-				var notAlreadyAuthenticated = current.BasicAuthenticationCredentials == null && current.ClientCertificates == null;
+				var notAlreadyAuthenticated = current.BasicAuthenticationCredentials == null
+					&& current.ApiKeyAuthenticationCredentials == null
+					&& current.ClientCertificates == null;
+
 				var noCertValidation = current.ServerCertificateValidationCallback == null;
 
 				if (cluster.ClusterConfiguration.EnableSecurity && notAlreadyAuthenticated)

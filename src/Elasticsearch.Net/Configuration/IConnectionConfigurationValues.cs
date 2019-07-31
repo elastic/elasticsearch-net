@@ -13,7 +13,18 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
+		/// <remarks>
+		/// Cannot be used in conjuction with <see cref="ApiKeyAuthenticationCredentials"/>
+		/// </remarks>
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; }
+
+		/// <summary>
+		/// Api Key authorization credentials to specify with all requests.
+		/// </summary>
+		/// <remarks>
+		/// Cannot be used in conjuction with <see cref="BasicAuthenticationCredentials"/>
+		/// </remarks>
+		ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; }
 
 		/// <summary> Provides a semaphoreslim to transport implementations that need to limit access to a resource</summary>
 		SemaphoreSlim BootstrapLock { get; }
@@ -233,5 +244,10 @@ namespace Elasticsearch.Net
 		/// <para>NOTE: if a request specifies <see cref="IRequestConfiguration.AllowedStatusCodes"/> this takes precedence</para>
 		/// </summary>
 		Func<HttpMethod, int, bool> StatusCodeToResponseSuccess { get; }
+
+		/// <summary>
+		/// Whether the request should be sent with chunked Transfer-Encoding.
+		/// </summary>
+		bool TransferEncodingChunked { get; }
 	}
 }

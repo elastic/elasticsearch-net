@@ -18,6 +18,9 @@ namespace Nest
 		public IProperty Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
 			selector?.Invoke(new DatePropertyDescriptor<T>());
 
+		public IProperty DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector) =>
+			selector?.Invoke(new DateNanosPropertyDescriptor<T>());
+
 		public IProperty DateRange(Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector) =>
 			selector?.Invoke(new DateRangePropertyDescriptor<T>());
 

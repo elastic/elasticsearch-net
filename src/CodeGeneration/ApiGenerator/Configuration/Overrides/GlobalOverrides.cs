@@ -40,7 +40,7 @@ namespace ApiGenerator.Configuration.Overrides
 			"copy_settings", //this still needs a PR?
 			"source", // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
 			"timestamp",
-			"_source_include", "_source_exclude" // can be removed once https://github.com/elastic/elasticsearch/pull/41439 is in
+			"_source_include", "_source_exclude", // can be removed once https://github.com/elastic/elasticsearch/pull/41439 is in
 		};
 	}
 }

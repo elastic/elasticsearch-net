@@ -68,6 +68,7 @@ namespace Nest
 					((IProperty)numberProperty).Type = typeString;
 					return numberProperty;
 				case FieldType.Date: return Deserialize<DateProperty>(ref segmentReader, formatterResolver);
+				case FieldType.DateNanos: return Deserialize<DateNanosProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Boolean: return Deserialize<BooleanProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Binary: return Deserialize<BinaryProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Object: return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -87,6 +88,8 @@ namespace Nest
 				case FieldType.IpRange: return Deserialize<IpRangeProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Join: return Deserialize<JoinProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Alias: return Deserialize<FieldAliasProperty>(ref segmentReader, formatterResolver);
+				case FieldType.RankFeature: return Deserialize<RankFeatureProperty>(ref segmentReader, formatterResolver);
+				case FieldType.RankFeatures: return Deserialize<RankFeaturesProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -123,6 +126,9 @@ namespace Nest
 					break;
 				case "date":
 					Serialize<IDateProperty>(ref writer, value, formatterResolver);
+					break;
+				case "date_nanos":
+					Serialize<IDateNanosProperty>(ref writer, value, formatterResolver);
 					break;
 				case "boolean":
 					Serialize<IBooleanProperty>(ref writer, value, formatterResolver);
@@ -180,6 +186,12 @@ namespace Nest
 					break;
 				case "alias":
 					Serialize<IFieldAliasProperty>(ref writer, value, formatterResolver);
+					break;
+				case "rank_feature":
+					Serialize<IRankFeatureProperty>(ref writer, value, formatterResolver);
+					break;
+				case "rank_features":
+					Serialize<IRankFeaturesProperty>(ref writer, value, formatterResolver);
 					break;
 				default:
 					if (value is IGenericProperty genericProperty)

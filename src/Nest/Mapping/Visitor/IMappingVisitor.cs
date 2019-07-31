@@ -12,6 +12,8 @@
 
 		void Visit(IDateProperty property);
 
+		void Visit(IDateNanosProperty property);
+
 		void Visit(IBooleanProperty property);
 
 		void Visit(IBinaryProperty property);
@@ -49,6 +51,10 @@
 		void Visit(IIpRangeProperty property);
 
 		void Visit(IJoinProperty property);
+
+		void Visit(IRankFeatureProperty property);
+
+		void Visit(IRankFeaturesProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -62,6 +68,8 @@
 		public virtual void Visit(IKeywordProperty property) { }
 
 		public virtual void Visit(IDateProperty property) { }
+
+		public virtual void Visit(IDateNanosProperty property) { }
 
 		public virtual void Visit(IBooleanProperty property) { }
 
@@ -100,5 +108,9 @@
 		public virtual void Visit(IIpRangeProperty property) { }
 
 		public virtual void Visit(IJoinProperty property) { }
+
+		public virtual void Visit(IRankFeatureProperty property) { }
+
+		public virtual void Visit(IRankFeaturesProperty property) { }
 	}
 }

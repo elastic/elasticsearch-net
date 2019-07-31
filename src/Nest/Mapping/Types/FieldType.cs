@@ -43,6 +43,9 @@ namespace Nest
 		[EnumMember(Value = "date")]
 		Date,
 
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+
 		[EnumMember(Value = "boolean")]
 		Boolean,
 
@@ -118,5 +121,11 @@ namespace Nest
 
 		[EnumMember(Value = "join")]
 		Join,
+
+		[EnumMember(Value = "rank_feature")]
+		RankFeature,
+
+		[EnumMember(Value = "rank_features")]
+		RankFeatures
 	}
 }

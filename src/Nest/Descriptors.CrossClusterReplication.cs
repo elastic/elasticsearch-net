@@ -79,6 +79,34 @@ namespace Nest
 		public CreateFollowIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
+	///<summary>descriptor for FollowInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
+	public partial class FollowInfoDescriptor : RequestDescriptorBase<FollowInfoDescriptor, FollowInfoRequestParameters, IFollowInfoRequest>, IFollowInfoRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowInfo;
+		///<summary>/{index}/_ccr/info</summary>
+		///<param name = "index">this parameter is required</param>
+		public FollowInfoDescriptor(Indices index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected FollowInfoDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Indices IFollowInfoRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index patterns; use `_all` to perform the operation on all indices</summary>
+		public FollowInfoDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public FollowInfoDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public FollowInfoDescriptor AllIndices() => Index(Indices.All);
+	// Request parameters
+	}
+
 	///<summary>descriptor for FollowIndexStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 	public partial class FollowIndexStatsDescriptor : RequestDescriptorBase<FollowIndexStatsDescriptor, FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
 	{
@@ -104,6 +132,32 @@ namespace Nest
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FollowIndexStatsDescriptor AllIndices() => Index(Indices.All);
+	// Request parameters
+	}
+
+	///<summary>descriptor for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	public partial class ForgetFollowerIndexDescriptor : RequestDescriptorBase<ForgetFollowerIndexDescriptor, ForgetFollowerIndexRequestParameters, IForgetFollowerIndexRequest>, IForgetFollowerIndexRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollowerIndex;
+		///<summary>/{index}/_ccr/forget_follower</summary>
+		///<param name = "index">this parameter is required</param>
+		public ForgetFollowerIndexDescriptor(IndexName index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ForgetFollowerIndexDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName IForgetFollowerIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>the name of the leader index for which specified follower retention leases should be removed</summary>
+		public ForgetFollowerIndexDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ForgetFollowerIndexDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
 	// Request parameters
 	}
 

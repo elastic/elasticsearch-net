@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -21,6 +21,10 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 q
 .MoreLikeThis(sn => sn
+    .Fields(ff => ff
+        .Field(f => f.Name)
+        .Field(f => f.Description)
+    )
     .Like(l => l
         .Document(d => d
             .Document(Project.Instance)
@@ -37,6 +41,9 @@ q
 ----
 new MoreLikeThisQuery
 {
+    Fields = Infer.Fields<Project>(
+        f => f.Name,
+        f => f.Description),
     Like = new List<Like>
     {
         new LikeDocument<Project>(Project.Instance) { Routing = Project.Instance.Name },
@@ -50,6 +57,10 @@ new MoreLikeThisQuery
 ----
 {
   "more_like_this": {
+    "fields": [
+      "name",
+      "description"
+    ],
     "like": [
       {
         "_index": "project",

@@ -35,6 +35,7 @@ namespace Nest
 			VisitQuery(qd.Prefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.QueryString, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Range, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.RankFeature, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Regexp, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.SimpleQueryString, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Term, visitor, (v, d) => v.Visit(d));
@@ -44,6 +45,7 @@ namespace Nest
 			VisitQuery(qd.MatchPhrase, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MatchPhrasePrefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Script, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.ScriptScore, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Exists, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoPolygon, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoDistance, visitor, (v, d) => v.Visit(d));

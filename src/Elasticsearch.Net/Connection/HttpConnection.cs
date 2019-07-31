@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -57,7 +58,10 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				SetContent(requestMessage, requestData);
+
+				if (requestData.PostData != null)
+					SetContent(requestMessage, requestData);
+
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
@@ -65,7 +69,7 @@ namespace Elasticsearch.Net
 					statusCode = (int)responseMessage.StatusCode;
 					d.EndState = statusCode;
 				}
-				
+
 				requestData.MadeItToResponse = true;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
@@ -107,15 +111,18 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				SetAsyncContent(requestMessage, requestData, cancellationToken);
-				using(requestMessage?.Content ?? (IDisposable)Stream.Null) 
+
+				if (requestData.PostData != null)
+					await SetContentAsync(requestMessage, requestData, cancellationToken).ConfigureAwait(false);
+
+				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
 					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 					statusCode = (int)responseMessage.StatusCode;
 					d.EndState = statusCode;
 				}
-				
+
 				requestData.MadeItToResponse = true;
 				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
@@ -216,8 +223,57 @@ namespace Elasticsearch.Net
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
 			var request = CreateRequestMessage(requestData);
-			SetBasicAuthenticationIfNeeded(request, requestData);
+			SetAuthenticationIfNeeded(request, requestData);
 			return request;
+		}
+
+		protected virtual void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			// Api Key authentication takes precedence
+			var apiKeySet = SetApiKeyAuthenticationIfNeeded(requestMessage, requestData);
+
+			if (!apiKeySet)
+				SetBasicAuthenticationIfNeeded(requestMessage, requestData);
+		}
+
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
+		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			// ApiKey auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+
+			string apiKey = null;
+			if (requestData.ApiKeyAuthenticationCredentials != null)
+				apiKey = requestData.ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
+
+			if (string.IsNullOrWhiteSpace(apiKey))
+				return false;
+
+			requestMessage.Headers.Authorization = new AuthenticationHeaderValue("ApiKey", apiKey);
+			return true;
+
+		}
+
+		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
+		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			// Basic auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+			// 3 - Specified with the URI (lowest precedence)
+
+			string userInfo = null;
+			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
+				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+			else if (requestData.BasicAuthorizationCredentials != null)
+				userInfo =
+					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
+			if (!userInfo.IsNullOrEmpty())
+			{
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+			}
 		}
 
 		protected virtual HttpRequestMessage CreateRequestMessage(RequestData requestData)
@@ -241,27 +297,75 @@ namespace Elasticsearch.Net
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
-			
+
 			return requestMessage;
 		}
 
-		private static void SetContent(HttpRequestMessage message, RequestData requestData) => message.Content = new RequestDataContent(requestData);
-
-		private static void SetAsyncContent(HttpRequestMessage message, RequestData requestData, CancellationToken token) =>
-			message.Content = new RequestDataContent(requestData, token);
-
-		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		private static void SetContent(HttpRequestMessage message, RequestData requestData)
 		{
-			string userInfo = null;
-			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
-				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
-			else if (requestData.BasicAuthorizationCredentials != null)
-				userInfo =
-					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
-			if (!userInfo.IsNullOrEmpty())
+			if (requestData.TransferEncodingChunked)
 			{
-				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
-				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+				message.Content = new RequestDataContent(requestData);
+			}
+			else
+			{
+				var stream = requestData.MemoryStreamFactory.Create();
+				if (requestData.HttpCompression)
+					using (var zipStream = new GZipStream(stream, CompressionMode.Compress, true))
+						requestData.PostData.Write(zipStream, requestData.ConnectionSettings);
+				else
+					requestData.PostData.Write(stream, requestData.ConnectionSettings);
+
+				// the written bytes are uncompressed, so can only be used when http compression isn't used
+				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
+				{
+					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
+					stream.Dispose();
+				}
+				else
+				{
+					stream.Position = 0;
+					message.Content = new StreamContent(stream);
+				}
+
+				if (requestData.HttpCompression)
+					message.Content.Headers.ContentEncoding.Add("gzip");
+
+				message.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+			}
+		}
+
+		private static async Task SetContentAsync(HttpRequestMessage message, RequestData requestData, CancellationToken cancellationToken)
+		{
+			if (requestData.TransferEncodingChunked)
+			{
+				message.Content = new RequestDataContent(requestData, cancellationToken);
+			}
+			else
+			{
+				var stream = requestData.MemoryStreamFactory.Create();
+				if (requestData.HttpCompression)
+					using (var zipStream = new GZipStream(stream, CompressionMode.Compress, true))
+						await requestData.PostData.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
+				else
+					await requestData.PostData.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
+
+				// the written bytes are uncompressed, so can only be used when http compression isn't used
+				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
+				{
+					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
+					stream.Dispose();
+				}
+				else
+				{
+					stream.Position = 0;
+					message.Content = new StreamContent(stream);
+				}
+
+				if (requestData.HttpCompression)
+					message.Content.Headers.ContentEncoding.Add("gzip");
+
+				message.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 			}
 		}
 

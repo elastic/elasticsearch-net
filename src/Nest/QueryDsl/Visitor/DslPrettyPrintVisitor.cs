@@ -147,6 +147,8 @@ namespace Nest
 
 		public virtual void Visit(IQueryStringQuery query) => Write("query_string");
 
+		public virtual void Visit(IRankFeatureQuery query) => Write("rank_feature");
+
 		public virtual void Visit(IRangeQuery query) => Write("range");
 
 		public virtual void Visit(IRegexpQuery query) => Write("regexp");
@@ -186,6 +188,8 @@ namespace Nest
 		public virtual void Visit(IExistsQuery query) => Write("exists");
 
 		public virtual void Visit(IScriptQuery query) => Write("script");
+
+		public virtual void Visit(IScriptScoreQuery query) => Write("script_score");
 
 		public virtual void Visit(IRawQuery query) => Write("raw");
 

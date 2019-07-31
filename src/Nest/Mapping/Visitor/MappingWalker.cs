@@ -87,6 +87,13 @@ namespace Nest
 							Accept(t.Fields);
 						});
 						break;
+					case FieldType.DateNanos:
+						Visit<IDateNanosProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+							Accept(t.Fields);
+						});
+						break;
 					case FieldType.Boolean:
 						Visit<IBooleanProperty>(field, t =>
 						{
@@ -210,6 +217,18 @@ namespace Nest
 						break;
 					case FieldType.Join:
 						Visit<IJoinProperty>(field, t => { _visitor.Visit(t); });
+						break;
+					case FieldType.RankFeature:
+						Visit<IRankFeatureProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
+					case FieldType.RankFeatures:
+						Visit<IRankFeaturesProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
 						break;
 				}
 			}

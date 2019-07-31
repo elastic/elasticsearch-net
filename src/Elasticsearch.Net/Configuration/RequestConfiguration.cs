@@ -22,7 +22,19 @@ namespace Elasticsearch.Net
 		/// Basic access authorization credentials to specify with this request.
 		/// Overrides any credentials that are set at the global IConnectionSettings level.
 		/// </summary>
+		/// <remarks>
+		///	Cannot be used in conjunction with <see cref="ApiKeyAuthenticationCredentials"/>
+		/// </remarks>
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
+
+		/// <summary>
+		/// An API-key authorization credentials to specify with this request.
+		/// Overrides any credentials that are set at the global IConnectionSettings level.
+		/// </summary>
+		/// <remarks>
+		///	Cannot be used in conjunction with <see cref="BasicAuthenticationCredentials"/>
+		/// </remarks>
+		ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; set; }
 
 		/// <summary>
 		/// Use the following client certificates to authenticate this single request
@@ -94,33 +106,51 @@ namespace Elasticsearch.Net
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
 		bool? ThrowExceptions { get; set; }
+
+		/// <summary>
+		/// Whether the request should be sent with chunked Transfer-Encoding.
+		/// </summary>
+		bool? TransferEncodingChunked { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
 	{
+		/// <inheritdoc />
 		public string Accept { get; set; }
+		/// <inheritdoc />
 		public IReadOnlyCollection<int> AllowedStatusCodes { get; set; }
+		/// <inheritdoc />
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-
+		/// <inheritdoc />
+		public ApiKeyAuthenticationCredentials ApiKeyAuthenticationCredentials { get; set; }
+		/// <inheritdoc />
 		public X509CertificateCollection ClientCertificates { get; set; }
+		/// <inheritdoc />
 		public string ContentType { get; set; }
+		/// <inheritdoc />
 		public bool? DisableDirectStreaming { get; set; }
+		/// <inheritdoc />
 		public bool? DisablePing { get; set; }
+		/// <inheritdoc />
 		public bool? DisableSniff { get; set; }
+		/// <inheritdoc />
 		public bool? EnableHttpPipelining { get; set; } = true;
+		/// <inheritdoc />
 		public Uri ForceNode { get; set; }
+		/// <inheritdoc />
 		public int? MaxRetries { get; set; }
+		/// <inheritdoc />
 		public string OpaqueId { get; set; }
+		/// <inheritdoc />
 		public TimeSpan? PingTimeout { get; set; }
+		/// <inheritdoc />
 		public TimeSpan? RequestTimeout { get; set; }
-
-		/// <summary>
-		/// Submit the request on behalf in the context of a different user
-		/// https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
-		/// </summary>
+		/// <inheritdoc />
 		public string RunAs { get; set; }
-
+		/// <inheritdoc />
 		public bool? ThrowExceptions { get; set; }
+		/// <inheritdoc />
+		public bool? TransferEncodingChunked { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -138,16 +168,19 @@ namespace Elasticsearch.Net
 			Self.DisableDirectStreaming = config?.DisableDirectStreaming;
 			Self.AllowedStatusCodes = config?.AllowedStatusCodes;
 			Self.BasicAuthenticationCredentials = config?.BasicAuthenticationCredentials;
+			Self.ApiKeyAuthenticationCredentials = config?.ApiKeyAuthenticationCredentials;
 			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
 			Self.RunAs = config?.RunAs;
 			Self.ClientCertificates = config?.ClientCertificates;
 			Self.ThrowExceptions = config?.ThrowExceptions;
 			Self.OpaqueId = config?.OpaqueId;
+			Self.TransferEncodingChunked = config?.TransferEncodingChunked;
 		}
 
 		string IRequestConfiguration.Accept { get; set; }
 		IReadOnlyCollection<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
+		ApiKeyAuthenticationCredentials IRequestConfiguration.ApiKeyAuthenticationCredentials { get; set; }
 		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
 		string IRequestConfiguration.ContentType { get; set; }
 		bool? IRequestConfiguration.DisableDirectStreaming { get; set; }
@@ -155,7 +188,6 @@ namespace Elasticsearch.Net
 		bool? IRequestConfiguration.DisableSniff { get; set; }
 		bool? IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
 		Uri IRequestConfiguration.ForceNode { get; set; }
-
 		int? IRequestConfiguration.MaxRetries { get; set; }
 		string IRequestConfiguration.OpaqueId { get; set; }
 		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
@@ -163,6 +195,7 @@ namespace Elasticsearch.Net
 		string IRequestConfiguration.RunAs { get; set; }
 		private IRequestConfiguration Self => this;
 		bool? IRequestConfiguration.ThrowExceptions { get; set; }
+		bool? IRequestConfiguration.TransferEncodingChunked { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -274,6 +307,30 @@ namespace Elasticsearch.Net
 			return this;
 		}
 
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string id, string apiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(id, apiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string id, SecureString apiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(id, apiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(string base64EncodedApiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(base64EncodedApiKey);
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ApiKeyAuthentication(SecureString base64EncodedApiKey)
+		{
+			Self.ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(base64EncodedApiKey);
+			return this;
+		}
+
 		public RequestConfigurationDescriptor EnableHttpPipelining(bool enable = true)
 		{
 			Self.EnableHttpPipelining = enable;
@@ -294,5 +351,12 @@ namespace Elasticsearch.Net
 		/// <summary> Use the following client certificate to authenticate this request to Elasticsearch </summary>
 		public RequestConfigurationDescriptor ClientCertificate(string certificatePath) =>
 			ClientCertificates(new X509Certificate2Collection { new X509Certificate(certificatePath) });
+
+		/// <inheritdoc cref="IRequestConfiguration.TransferEncodingChunked" />
+		public RequestConfigurationDescriptor TransferEncodingChunked(bool? transferEncodingChunked = true)
+		{
+			Self.TransferEncodingChunked = transferEncodingChunked;
+			return this;
+		}
 	}
 }

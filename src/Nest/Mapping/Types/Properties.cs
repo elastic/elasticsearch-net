@@ -58,6 +58,8 @@ namespace Nest
 
 		TReturnType Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector);
 
+		TReturnType DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector);
+
 		TReturnType Boolean(Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector);
 
 		TReturnType Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector);
@@ -109,6 +111,8 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector) => SetProperty(selector);
 
+		public PropertiesDescriptor<T> DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> DateRange(Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> DoubleRange(Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector) => SetProperty(selector);
@@ -153,6 +157,12 @@ namespace Nest
 		public PropertiesDescriptor<T> TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IRankFeatureProperty"/>
+		public PropertiesDescriptor<T> RankFeature(Func<RankFeaturePropertyDescriptor<T>, IRankFeatureProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IRankFeaturesProperty"/>
+		public PropertiesDescriptor<T> RankFeatures(Func<RankFeaturesPropertyDescriptor<T>, IRankFeaturesProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 

@@ -39,25 +39,25 @@ namespace Nest.Specification.MigrationApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</a>
 		/// </summary>
 		public DeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null) => DeprecationInfo(selector.InvokeOrDefault(new DeprecationInfoDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</a>
 		/// </summary>
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null, CancellationToken ct = default) => DeprecationInfoAsync(selector.InvokeOrDefault(new DeprecationInfoDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</a>
 		/// </summary>
 		public DeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) => DoRequest<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>migration.deprecations</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</a>
 		/// </summary>
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters, ct);
 	}

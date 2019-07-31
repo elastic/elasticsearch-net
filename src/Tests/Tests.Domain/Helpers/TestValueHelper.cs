@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using Elastic.Managed.Configuration;
 using Elastic.Stack.Artifacts;
 using Tests.Configuration;
 

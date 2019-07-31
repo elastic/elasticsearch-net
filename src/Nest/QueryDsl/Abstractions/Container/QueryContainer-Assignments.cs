@@ -38,6 +38,7 @@ namespace Nest
 		private IRawQuery _raw;
 		private IRegexpQuery _regexp;
 		private IScriptQuery _script;
+		private IScriptScoreQuery _scriptScore;
 		private ISimpleQueryStringQuery _simpleQueryString;
 		private ISpanContainingQuery _spanContaining;
 		private ISpanFieldMaskingQuery _spanFieldMasking;
@@ -52,6 +53,7 @@ namespace Nest
 		private ITermsQuery _terms;
 		private ITermsSetQuery _termsSet;
 		private IWildcardQuery _wildcard;
+		private IRankFeatureQuery _rankFeature;
 
 		[IgnoreDataMember]
 		private IQueryContainer Self => this;
@@ -251,6 +253,12 @@ namespace Nest
 			set => _script = Set(value);
 		}
 
+		IScriptScoreQuery IQueryContainer.ScriptScore
+		{
+			get => _scriptScore;
+			set => _scriptScore = Set(value);
+		}
+
 		ISimpleQueryStringQuery IQueryContainer.SimpleQueryString
 		{
 			get => _simpleQueryString;
@@ -333,6 +341,12 @@ namespace Nest
 		{
 			get => _wildcard;
 			set => _wildcard = Set(value);
+		}
+
+		IRankFeatureQuery IQueryContainer.RankFeature
+		{
+			get => _rankFeature;
+			set => _rankFeature = Set(value);
 		}
 
 		private T Set<T>(T value) where T : IQuery

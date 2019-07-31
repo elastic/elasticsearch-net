@@ -1,0 +1,102 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Specialized/ScriptScore/ScriptScoreQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[script-score-query-usage]]
+=== Script Score Query Usage
+
+A query allowing you to modify the score of documents that are retrieved by a query.
+This can be useful if, for example, a score function is computationally expensive and
+it is sufficient to compute the score on a filtered set of documents.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-script-score-query.html[script_score query] for more details.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.ScriptScore(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Query(qq => qq
+        .Range(r => r
+            .Field(f => f.NumberOfCommits)
+            .GreaterThan(50)
+        )
+    )
+    .Script(s => s
+        .Source(_scriptScoreSource)
+        .Params(p => p
+            .Add("origin", 100)
+            .Add("scale", 10)
+            .Add("decay", 0.5)
+            .Add("offset", 0)
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ScriptScoreQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Query = new NumericRangeQuery
+    {
+        Field = Infer.Field<Project>(f => f.NumberOfCommits),
+        GreaterThan = 50
+    },
+    Script = new InlineScript(_scriptScoreSource)
+    {
+        Params = new Dictionary<string, object>
+        {
+            { "origin", 100 },
+            { "scale", 10 },
+            { "decay", 0.5 },
+            { "offset", 0 }
+        }
+    },
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "script_score": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "query": {
+      "range": {
+        "numberOfCommits": {
+          "gt": 50.0
+        }
+      }
+    },
+    "script": {
+      "source": "decayNumericLinear(params.origin, params.scale, params.offset, params.decay, doc['numberOfCommits'].value)",
+      "params": {
+        "origin": 100,
+        "scale": 10,
+        "decay": 0.5,
+        "offset": 0
+      }
+    }
+  }
+}
+----
+

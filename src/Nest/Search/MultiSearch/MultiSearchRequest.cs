@@ -6,7 +6,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[MapsApi("msearch.json")]
-	[JsonFormatter(typeof(MultiSearchJsonConverter))]
+	[JsonFormatter(typeof(MultiSearchFormatter))]
 	public partial interface IMultiSearchRequest
 	{
 		IDictionary<string, ISearchRequest> Operations { get; set; }
