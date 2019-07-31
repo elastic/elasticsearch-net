@@ -129,6 +129,13 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
 		///<summary>Specify the level of detail for returned information</summary>
 		public Level? Level
 		{

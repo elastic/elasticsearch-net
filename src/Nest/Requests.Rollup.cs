@@ -41,7 +41,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteJob <para></para></summary>
+	///<summary>Request for DeleteJob</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
 		protected IDeleteRollupJobRequest Self => this;
@@ -74,7 +75,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetJob <para></para></summary>
+	///<summary>Request for GetJob</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
 		protected IGetRollupJobRequest Self => this;
@@ -106,7 +108,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCapabilities <para></para></summary>
+	///<summary>Request for GetCapabilities</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
 		protected IGetRollupCapabilitiesRequest Self => this;
@@ -138,7 +141,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetIndexCapabilities <para></para></summary>
+	///<summary>Request for GetIndexCapabilities</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
 		protected IGetRollupIndexCapabilitiesRequest Self => this;
@@ -171,7 +175,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CreateJob <para></para></summary>
+	///<summary>Request for CreateJob</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
 		protected ICreateRollupJobRequest Self => this;
@@ -204,7 +209,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Search <para></para></summary>
+	///<summary>Request for Search</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
 		protected IRollupSearchRequest Self => this;
@@ -250,7 +256,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StartJob <para></para></summary>
+	///<summary>Request for StartJob</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
 		protected IStartRollupJobRequest Self => this;
@@ -283,7 +290,8 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for StopJob <para></para></summary>
+	///<summary>Request for StopJob</summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
 		protected IStopRollupJobRequest Self => this;

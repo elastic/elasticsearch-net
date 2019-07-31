@@ -6,6 +6,7 @@ using ApiGenerator.Domain.Code.HighLevel.Methods;
 using ApiGenerator.Domain.Code.HighLevel.Requests;
 using ApiGenerator.Domain.Code.LowLevel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace ApiGenerator.Domain.Specification
 {
@@ -13,29 +14,33 @@ namespace ApiGenerator.Domain.Specification
 	{
 		/// <summary> The filename of the spec describing the api endpoint </summary>
 		public string FileName { get; set; }
-		
+
 		/// <summary> The original name as declared in the spec </summary>
 		public string Name { get; set; }
-		
+
 		/// <summary> The original namespace as declared in the spec </summary>
 		public string Namespace { get; set; }
-		
+
 		/// <summary> The original method name as declared in the spec </summary>
 		public string MethodName { get; set; }
-		
+
 		/// <summary> Computed Csharp identifier names </summary>
-		public CsharpNames CsharpNames { get; set; } 
-		
+		public CsharpNames CsharpNames { get; set; }
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		[JsonProperty("stability")]
+		public Stability Stability { get; set; }
+
 		[JsonProperty("documentation")]
 		public string OfficialDocumentationLink { get; set; }
-		
+
 		public UrlInformation Url { get; set; }
-		
+
 		public Body Body { get; set; }
 
 		[JsonProperty("methods")]
 		public IReadOnlyCollection<string> HttpMethods { get; set; }
-		
+
 		public IEndpointOverrides Overrides { get; internal set; }
 
 		public RequestInterface RequestInterface => new RequestInterface
@@ -45,11 +50,12 @@ namespace ApiGenerator.Domain.Specification
 			PartialParameters = Body == null ? Enumerable.Empty<QueryParameters>().ToList() : Url.Params.Values.Where(p=>p.RenderPartial && !p.Skip).ToList(),
 			OfficialDocumentationLink = OfficialDocumentationLink
 		};
-		
+
 		public RequestPartialImplementation RequestPartialImplementation => new RequestPartialImplementation
 		{
 			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink,
+			Stability = Stability,
 			Paths = Url.Paths,
 			Parts = Url.Parts,
 			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
@@ -57,10 +63,10 @@ namespace ApiGenerator.Domain.Specification
 			GenericConstructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: false).ToList(),
 			HasBody = Body != null,
 		};
-		
+
 		public DescriptorPartialImplementation DescriptorPartialImplementation => new DescriptorPartialImplementation
 		{
-			CsharpNames = CsharpNames, 
+			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink,
 			Constructors = Constructor.DescriptorConstructors(CsharpNames, Url).ToList(),
 			Paths = Url.Paths,
@@ -68,7 +74,7 @@ namespace ApiGenerator.Domain.Specification
 			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
 			HasBody = Body != null,
 		};
-		
+
 		public RequestParameterImplementation RequestParameterImplementation => new RequestParameterImplementation
 		{
 			CsharpNames = CsharpNames,
@@ -89,7 +95,7 @@ namespace ApiGenerator.Domain.Specification
 		}
 
 		public string HighLevelMethodXmlDocDescription => $"<c>{PreferredHttpMethod}</c> request to the <c>{Name}</c> API, read more about this API online:";
-		
+
 		public HighLevelModel HighLevelModel => new HighLevelModel
 		{
 			CsharpNames = CsharpNames,
@@ -132,7 +138,7 @@ namespace ApiGenerator.Domain.Specification
 						.Select(p => p.Argument)
 						.Concat(new[] { CsharpNames.ParametersName + " requestParameters = null" })
 						.ToList();
-					
+
 					var apiMethod = new LowLevelClientMethod
 					{
 						Arguments = string.Join(", ", args),
@@ -140,7 +146,8 @@ namespace ApiGenerator.Domain.Specification
 						PerPathMethodName = methodName,
 						HttpMethod = httpMethod,
 						OfficialDocumentationLink = OfficialDocumentationLink,
-						DeprecatedPath = path.Deprecation, 
+						Stability = Stability,
+						DeprecatedPath = path.Deprecation,
 						Path = path.Path,
 						Parts = parts,
 						Url = Url,

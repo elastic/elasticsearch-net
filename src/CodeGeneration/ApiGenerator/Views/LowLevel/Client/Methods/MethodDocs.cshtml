@@ -5,17 +5,35 @@
 @using ApiGenerator.Domain
 @using System.Text.RegularExpressions
 @using ApiGenerator.Domain.Code.LowLevel
+@using ApiGenerator.Domain.Specification
+@using CsQuery.ExtensionMethods.Internal
 @inherits ApiGenerator.CodeTemplatePage<LowLevelClientMethod>
 @{
 	LowLevelClientMethod method = Model;
 }
-		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
+		///<summary>@method.HttpMethod on @method.Path@Raw(method.OfficialDocumentationLink.IsNullOrEmpty() ? "" : " <para>" + method.OfficialDocumentationLink + "</para>")</summary>
 @foreach (var part in method.Parts)
 {
 <text>		///@Raw("<param name=\""+part.NameAsArgument+"\">")@part.Description@Raw("</param>")
 </text>
 }
 		///@Raw(@"<param name=""requestParameters"">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>")
+		@if (method.Stability != Stability.Stable)
+		{
+			string warningMessage = "";
+			switch (method.Stability)
+			{
+				case Stability.Experimental:
+					warningMessage = "it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.";
+					break;
+				case Stability.Beta:
+					warningMessage = "it is less likely to break or be removed but still reserve the right to do so.";
+					break;
+			}
+			
+<text>		///@Raw("<remarks>Note: " + method.Stability + " within the Elasticsearch server, " + warningMessage + "</remarks>")
+			</text>
+		}
 		@if (method.DeprecatedPath != null)
 		{
 <text>		[Obsolete("Deprecated in version @(method.DeprecatedPath.Version): @Raw(method.DeprecatedPath.Description)")]

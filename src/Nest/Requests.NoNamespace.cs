@@ -1454,6 +1454,13 @@ namespace Nest
 			get => Q<bool? >("ignore_unavailable");
 			set => Q("ignore_unavailable", value);
 		}
+
+		///<summary>Indicates whether unmapped fields should be included in the response.</summary>
+		public bool? IncludeUnmapped
+		{
+			get => Q<bool? >("include_unmapped");
+			set => Q("include_unmapped", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -2079,8 +2086,8 @@ namespace Nest
 		}
 
 		///<summary>
-		/// The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search
-		/// on the cluster in order to limit the number of concurrent shard requests
+		/// The number of concurrent shard requests each sub search executes concurrently per node. This value should be used to limit the impact of
+		/// the search on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests
 		{
@@ -2530,6 +2537,7 @@ namespace Nest
 	}
 
 	///<summary>Request for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
 		protected IExecutePainlessScriptRequest Self => this;
