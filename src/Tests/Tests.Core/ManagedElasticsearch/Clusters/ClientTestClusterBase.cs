@@ -42,7 +42,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 			Add(AttributeKey("testingcluster"), "true");
 			Add(AttributeKey("gateway"), "true");
-			Add("search.remote.connect", "true");
+			Add("search.remote.connect", "true", "<8.0.0");
+			Add("cluster.remote.connect", "true", ">=8.0.0");
 
 			Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
 			Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1");
