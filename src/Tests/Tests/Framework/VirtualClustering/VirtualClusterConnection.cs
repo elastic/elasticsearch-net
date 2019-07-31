@@ -67,7 +67,7 @@ namespace Tests.Framework.VirtualClustering
 		public bool IsSniffRequest(RequestData requestData) =>
 			requestData.PathAndQuery.StartsWith(RequestPipeline.SniffPath, StringComparison.Ordinal);
 
-		public bool IsPingRequest(RequestData requestData) => requestData.PathAndQuery == "/" && requestData.Method == HttpMethod.HEAD;
+		public bool IsPingRequest(RequestData requestData) => requestData.PathAndQuery == string.Empty && requestData.Method == HttpMethod.HEAD;
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
