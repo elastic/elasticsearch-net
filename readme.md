@@ -10,8 +10,22 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
         <th><b>Tests<b></th>
     </tr>
     <tr>
-    	<td><code>0.x - 2.x</code></td>
-    	<td><code>0.x - 2.x</code></td>
+    	<td><code>0.x</code></td>
+    	<td><code>0.x</code></td>
+    	<td>:x:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
+    </tr>
+    <tr>
+    	<td><code>1.x</code></td>
+    	<td><code>1.x</code></td>
+    	<td>:x:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
+    </tr>
+    <tr>
+    	<td><code>2.x</code></td>
+    	<td><code>2.x</code></td>
     	<td>:x:</td>
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
