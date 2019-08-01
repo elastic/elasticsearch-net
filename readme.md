@@ -90,12 +90,11 @@ Always use the latest minor version of the client within that major version, so 
 
 `master` reflects the latest server version, this is typically the `current latest major + 1`
 `N.x` where N represents the major version component of the Elasticsearch server release its integrating with; e.g. `7.x`
-`N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixs.
+`N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixes.
 
 ## Preview builds
 
 All branches push new nuget packages on successful CI builds to https://ci.appveyor.com/nuget/elasticsearch-net
-
           
 ### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
@@ -121,13 +120,9 @@ Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 7
 
 # [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
 
-NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
+NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).
 
-The client internally uses the low-level **Elasticsearch.Net** client. It maps requests and responses to strongly typed objects with both fluent interface and object initializer syntax. It also provides a very powerful query DSL that maps 1-to-1 with the Elasticsearch API.
-
-This client takes advantage of .NET features where they make sense (e.g. type and index inference and inferred mapping from POCO properties).
-
-All client method calls have asynchronous variants with support for cancellation.
+It aims to be a solid, strongly typed client with a very concise API. The client internally uses the low-level **Elasticsearch.Net** client. It maps requests and responses to strongly-typed objects with both fluent interface and object initializer syntax. It also provides a very powerful query DSL that maps 1-to-1 with the Elasticsearch API. This client takes advantage of .NET features where they make sense (e.g. type and index inference and inferred mapping from POCO properties). All client method calls have asynchronous variants with support for cancellation.
 
 ## Getting Started
 
@@ -258,9 +253,7 @@ var response = client.LowLevel.Search<SearchResponse<Tweet>>("myindex", PostData
 
 A low-level, dependency free client that has no opinions how you build and represent your requests and responses.
 
-It provides a one-to-one mapping with the Elasticsearch REST API. The client is almost completely generated from the official REST API specification, which makes is easy to keep up-to-date.
-
-The client also has support for load balancing and cluster failover and all client method calls have both synchronous and asynchronous variants
+It provides a one-to-one mapping with the Elasticsearch REST API. The client is almost completely generated from the official REST API specification, which makes is easy to keep up-to-date. The client also has support for load balancing and cluster failover and all client method calls have both synchronous and asynchronous variants
 
 ### Installing
 
