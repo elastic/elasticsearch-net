@@ -263,6 +263,19 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
+	public enum ExpandWildcards
+	{
+		[EnumMember(Value = "open")]
+		Open,
+		[EnumMember(Value = "closed")]
+		Closed,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	[StringEnum]
 	public enum Level
 	{
 		[EnumMember(Value = "cluster")]
@@ -318,19 +331,6 @@ namespace Elasticsearch.Net
 		Version = 1 << 5,
 		[EnumMember(Value = "_all")]
 		All = 1 << 6
-	}
-
-	[StringEnum]
-	public enum ExpandWildcards
-	{
-		[EnumMember(Value = "open")]
-		Open,
-		[EnumMember(Value = "closed")]
-		Closed,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "all")]
-		All
 	}
 
 	[StringEnum]
@@ -444,11 +444,11 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(Bytes), (e) => GetStringValue((Bytes)e));
 			EnumStringResolvers.TryAdd(typeof(Health), (e) => GetStringValue((Health)e));
 			EnumStringResolvers.TryAdd(typeof(Size), (e) => GetStringValue((Size)e));
+			EnumStringResolvers.TryAdd(typeof(ExpandWildcards), (e) => GetStringValue((ExpandWildcards)e));
 			EnumStringResolvers.TryAdd(typeof(Level), (e) => GetStringValue((Level)e));
 			EnumStringResolvers.TryAdd(typeof(WaitForEvents), (e) => GetStringValue((WaitForEvents)e));
 			EnumStringResolvers.TryAdd(typeof(WaitForStatus), (e) => GetStringValue((WaitForStatus)e));
 			EnumStringResolvers.TryAdd(typeof(ClusterRerouteMetric), (e) => GetStringValue((ClusterRerouteMetric)e));
-			EnumStringResolvers.TryAdd(typeof(ExpandWildcards), (e) => GetStringValue((ExpandWildcards)e));
 			EnumStringResolvers.TryAdd(typeof(DefaultOperator), (e) => GetStringValue((DefaultOperator)e));
 			EnumStringResolvers.TryAdd(typeof(VersionType), (e) => GetStringValue((VersionType)e));
 			EnumStringResolvers.TryAdd(typeof(Conflicts), (e) => GetStringValue((Conflicts)e));
@@ -733,6 +733,23 @@ namespace Elasticsearch.Net
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Size'");
 		}
 
+		public static string GetStringValue(this ExpandWildcards enumValue)
+		{
+			switch (enumValue)
+			{
+				case ExpandWildcards.Open:
+					return "open";
+				case ExpandWildcards.Closed:
+					return "closed";
+				case ExpandWildcards.None:
+					return "none";
+				case ExpandWildcards.All:
+					return "all";
+			}
+
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ExpandWildcards'");
+		}
+
 		public static string GetStringValue(this Level enumValue)
 		{
 			switch (enumValue)
@@ -802,23 +819,6 @@ namespace Elasticsearch.Net
 			if ((enumValue & ClusterRerouteMetric.Version) != 0)
 				list.Add("version");
 			return string.Join(",", list);
-		}
-
-		public static string GetStringValue(this ExpandWildcards enumValue)
-		{
-			switch (enumValue)
-			{
-				case ExpandWildcards.Open:
-					return "open";
-				case ExpandWildcards.Closed:
-					return "closed";
-				case ExpandWildcards.None:
-					return "none";
-				case ExpandWildcards.All:
-					return "all";
-			}
-
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ExpandWildcards'");
 		}
 
 		public static string GetStringValue(this DefaultOperator enumValue)

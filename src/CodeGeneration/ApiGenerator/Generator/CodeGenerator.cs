@@ -44,7 +44,6 @@ namespace ApiGenerator.Generator
 			}
 		}
 
-
 		private static IEnumerable<string> RenderDocumentation(params string[] doc)
 		{
 			doc = (doc?.SelectMany(WrapDocumentation) ?? Enumerable.Empty<string>()).ToArray();

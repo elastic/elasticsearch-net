@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.IndicesApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for Analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
+	///<summary>Descriptor for Analyze <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 	public partial class AnalyzeDescriptor : RequestDescriptorBase<AnalyzeDescriptor, AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAnalyze;
@@ -55,7 +55,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ClearCache <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
+	///<summary>Descriptor for ClearCache <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 	public partial class ClearCacheDescriptor : RequestDescriptorBase<ClearCacheDescriptor, ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClearCache;
@@ -99,7 +99,7 @@ namespace Nest
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
 	}
 
-	///<summary>descriptor for Close <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
+	///<summary>Descriptor for Close <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class CloseIndexDescriptor : RequestDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClose;
@@ -135,9 +135,11 @@ namespace Nest
 		public CloseIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public CloseIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for Create <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</para></summary>
+	///<summary>Descriptor for Create <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</para></summary>
 	public partial class CreateIndexDescriptor : RequestDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreate;
@@ -171,7 +173,7 @@ namespace Nest
 		public CreateIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
+	///<summary>Descriptor for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 	public partial class DeleteIndexDescriptor : RequestDescriptorBase<DeleteIndexDescriptor, DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDelete;
@@ -209,7 +211,7 @@ namespace Nest
 		public DeleteIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for DeleteAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+	///<summary>Descriptor for DeleteAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class DeleteAliasDescriptor : RequestDescriptorBase<DeleteAliasDescriptor, DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteAlias;
@@ -243,7 +245,7 @@ namespace Nest
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for DeleteTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	///<summary>Descriptor for DeleteTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class DeleteIndexTemplateDescriptor : RequestDescriptorBase<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
@@ -268,7 +270,7 @@ namespace Nest
 		public DeleteIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for Exists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
+	///<summary>Descriptor for Exists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 	public partial class IndexExistsDescriptor : RequestDescriptorBase<IndexExistsDescriptor, IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExists;
@@ -308,7 +310,7 @@ namespace Nest
 		public IndexExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for AliasExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+	///<summary>Descriptor for AliasExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class AliasExistsDescriptor : RequestDescriptorBase<AliasExistsDescriptor, AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAliasExists;
@@ -352,7 +354,7 @@ namespace Nest
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for TemplateExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	///<summary>Descriptor for TemplateExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class IndexTemplateExistsDescriptor : RequestDescriptorBase<IndexTemplateExistsDescriptor, IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesTemplateExists;
@@ -379,7 +381,7 @@ namespace Nest
 		public IndexTemplateExistsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for TypeExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
+	///<summary>Descriptor for TypeExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
 	public partial class TypeExistsDescriptor : RequestDescriptorBase<TypeExistsDescriptor, TypeExistsRequestParameters, ITypeExistsRequest>, ITypeExistsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesTypeExists;
@@ -417,7 +419,7 @@ namespace Nest
 		public TypeExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for Flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
+	///<summary>Descriptor for Flush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 	public partial class FlushDescriptor : RequestDescriptorBase<FlushDescriptor, FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFlush;
@@ -454,7 +456,7 @@ namespace Nest
 		public FlushDescriptor WaitIfOngoing(bool? waitifongoing = true) => Qs("wait_if_ongoing", waitifongoing);
 	}
 
-	///<summary>descriptor for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+	///<summary>Descriptor for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
 	public partial class SyncedFlushDescriptor : RequestDescriptorBase<SyncedFlushDescriptor, SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSyncedFlush;
@@ -487,7 +489,7 @@ namespace Nest
 		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
-	///<summary>descriptor for ForceMerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
+	///<summary>Descriptor for ForceMerge <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 	public partial class ForceMergeDescriptor : RequestDescriptorBase<ForceMergeDescriptor, ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesForceMerge;
@@ -526,7 +528,7 @@ namespace Nest
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyexpungedeletes = true) => Qs("only_expunge_deletes", onlyexpungedeletes);
 	}
 
-	///<summary>descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
 	public partial class FreezeIndexDescriptor : RequestDescriptorBase<FreezeIndexDescriptor, FreezeIndexRequestParameters, IFreezeIndexRequest>, IFreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
@@ -564,7 +566,7 @@ namespace Nest
 		public FreezeIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
+	///<summary>Descriptor for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 	public partial class GetIndexDescriptor : RequestDescriptorBase<GetIndexDescriptor, GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGet;
@@ -608,7 +610,7 @@ namespace Nest
 		public GetIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for GetAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+	///<summary>Descriptor for GetAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class GetAliasDescriptor : RequestDescriptorBase<GetAliasDescriptor, GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetAlias;
@@ -659,7 +661,7 @@ namespace Nest
 		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for GetFieldMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
+	///<summary>Descriptor for GetFieldMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 	public partial class GetFieldMappingDescriptor<TDocument> : RequestDescriptorBase<GetFieldMappingDescriptor<TDocument>, GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetFieldMapping;
@@ -707,7 +709,7 @@ namespace Nest
 		public GetFieldMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>descriptor for GetMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
+	///<summary>Descriptor for GetMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 	public partial class GetMappingDescriptor<TDocument> : RequestDescriptorBase<GetMappingDescriptor<TDocument>, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetMapping;
@@ -746,7 +748,7 @@ namespace Nest
 		public GetMappingDescriptor<TDocument> MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for GetSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
+	///<summary>Descriptor for GetSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 	public partial class GetIndexSettingsDescriptor : RequestDescriptorBase<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetSettings;
@@ -803,7 +805,7 @@ namespace Nest
 		public GetIndexSettingsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for GetTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	///<summary>Descriptor for GetTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class GetIndexTemplateDescriptor : RequestDescriptorBase<GetIndexTemplateDescriptor, GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplate;
@@ -833,7 +835,7 @@ namespace Nest
 		public GetIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>descriptor for Open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
+	///<summary>Descriptor for Open <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class OpenIndexDescriptor : RequestDescriptorBase<OpenIndexDescriptor, OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesOpen;
@@ -873,7 +875,7 @@ namespace Nest
 		public OpenIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for PutAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+	///<summary>Descriptor for PutAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class PutAliasDescriptor : RequestDescriptorBase<PutAliasDescriptor, PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutAlias;
@@ -907,7 +909,7 @@ namespace Nest
 		public PutAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for PutMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
+	///<summary>Descriptor for PutMapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 	public partial class PutMappingDescriptor<TDocument> : RequestDescriptorBase<PutMappingDescriptor<TDocument>, PutMappingRequestParameters, IPutMappingRequest<TDocument>>, IPutMappingRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutMapping;
@@ -946,7 +948,7 @@ namespace Nest
 		public PutMappingDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for UpdateSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
+	///<summary>Descriptor for UpdateSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 	public partial class UpdateIndexSettingsDescriptor : RequestDescriptorBase<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpdateSettings;
@@ -987,7 +989,7 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for PutTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	///<summary>Descriptor for PutTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class PutIndexTemplateDescriptor : RequestDescriptorBase<PutIndexTemplateDescriptor, PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplate;
@@ -1018,7 +1020,7 @@ namespace Nest
 		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for RecoveryStatus <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
+	///<summary>Descriptor for RecoveryStatus <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 	public partial class RecoveryStatusDescriptor : RequestDescriptorBase<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRecoveryStatus;
@@ -1049,7 +1051,7 @@ namespace Nest
 		public RecoveryStatusDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 	}
 
-	///<summary>descriptor for Refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
+	///<summary>Descriptor for Refresh <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 	public partial class RefreshDescriptor : RequestDescriptorBase<RefreshDescriptor, RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRefresh;
@@ -1082,7 +1084,7 @@ namespace Nest
 		public RefreshDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
-	///<summary>descriptor for Rollover <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
+	///<summary>Descriptor for Rollover <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 	public partial class RolloverIndexDescriptor : RequestDescriptorBase<RolloverIndexDescriptor, RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
@@ -1123,7 +1125,7 @@ namespace Nest
 		public RolloverIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for Segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
+	///<summary>Descriptor for Segments <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 	public partial class SegmentsDescriptor : RequestDescriptorBase<SegmentsDescriptor, SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSegments;
@@ -1158,7 +1160,7 @@ namespace Nest
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
-	///<summary>descriptor for ShardStores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
+	///<summary>Descriptor for ShardStores <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 	public partial class IndicesShardStoresDescriptor : RequestDescriptorBase<IndicesShardStoresDescriptor, IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShardStores;
@@ -1193,7 +1195,7 @@ namespace Nest
 		public IndicesShardStoresDescriptor Status(params string[] status) => Qs("status", status);
 	}
 
-	///<summary>descriptor for Shrink <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</para></summary>
+	///<summary>Descriptor for Shrink <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</para></summary>
 	public partial class ShrinkIndexDescriptor : RequestDescriptorBase<ShrinkIndexDescriptor, ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShrink;
@@ -1227,7 +1229,7 @@ namespace Nest
 		public ShrinkIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for Split <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
+	///<summary>Descriptor for Split <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 	public partial class SplitIndexDescriptor : RequestDescriptorBase<SplitIndexDescriptor, SplitIndexRequestParameters, ISplitIndexRequest>, ISplitIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSplit;
@@ -1261,7 +1263,7 @@ namespace Nest
 		public SplitIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
+	///<summary>Descriptor for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 	public partial class IndicesStatsDescriptor : RequestDescriptorBase<IndicesStatsDescriptor, IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesStats;
@@ -1307,6 +1309,8 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("completion_fields", fields?.Select(e => (Field)e));
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public IndicesStatsDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(Fields fielddatafields) => Qs("fielddata_fields", fielddatafields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
@@ -1317,15 +1321,19 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("fields", fields?.Select(e => (Field)e));
+		///<summary>If set to false stats will also collected from closed indices if explicitly specified or if expand_wildcards expands to closed indices</summary>
+		public IndicesStatsDescriptor ForbidClosedIndices(bool? forbidclosedindices = true) => Qs("forbid_closed_indices", forbidclosedindices);
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(params string[] groups) => Qs("groups", groups);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? includesegmentfilesizes = true) => Qs("include_segment_file_sizes", includesegmentfilesizes);
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public IndicesStatsDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public IndicesStatsDescriptor Level(Level? level) => Qs("level", level);
 	}
 
-	///<summary>descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
 	public partial class UnfreezeIndexDescriptor : RequestDescriptorBase<UnfreezeIndexDescriptor, UnfreezeIndexRequestParameters, IUnfreezeIndexRequest>, IUnfreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;
@@ -1363,7 +1371,7 @@ namespace Nest
 		public UnfreezeIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>descriptor for BulkAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
+	///<summary>Descriptor for BulkAlias <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class BulkAliasDescriptor : RequestDescriptorBase<BulkAliasDescriptor, BulkAliasRequestParameters, IBulkAliasRequest>, IBulkAliasRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesBulkAlias;
@@ -1375,7 +1383,7 @@ namespace Nest
 		public BulkAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>descriptor for ValidateQuery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
+	///<summary>Descriptor for ValidateQuery <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 	public partial class ValidateQueryDescriptor<TDocument> : RequestDescriptorBase<ValidateQueryDescriptor<TDocument>, ValidateQueryRequestParameters, IValidateQueryRequest<TDocument>>, IValidateQueryRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesValidateQuery;
