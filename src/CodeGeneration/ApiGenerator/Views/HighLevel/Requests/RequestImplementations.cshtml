@@ -21,10 +21,10 @@
 	switch (r.Stability)
 	{
 		case Stability.Experimental:
-			warningMessage = "it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.";
+			warningMessage = "this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.";
 			break;
 		case Stability.Beta:
-			warningMessage = "it is less likely to break or be removed but still reserve the right to do so.";
+			warningMessage = "this functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.";
 			break;
 	}
 			

@@ -861,13 +861,13 @@ namespace Elasticsearch.Net
 		///<summary>POST on /_scripts/painless/_execute <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 		///<param name = "body">The script to execute</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse ExecutePainlessScript<TResponse>(PostData body, ExecutePainlessScriptRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_scripts/painless/_execute", body, RequestParams(requestParameters));
 		///<summary>POST on /_scripts/painless/_execute <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 		///<param name = "body">The script to execute</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public Task<TResponse> ExecutePainlessScriptAsync<TResponse>(PostData body, ExecutePainlessScriptRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_scripts/painless/_execute", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_search/scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>

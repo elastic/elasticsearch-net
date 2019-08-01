@@ -2537,7 +2537,7 @@ namespace Nest
 	}
 
 	///<summary>Request for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
-	///<remarks>Note: Experimental within the Elasticsearch server, it is highly likely to break or be removed in the near future and has no backwards compatibility guarantees.</remarks>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
 		protected IExecutePainlessScriptRequest Self => this;
