@@ -156,7 +156,7 @@ var client = new ElasticClient(settings);
 
 ### Indexing
 
-Indexing a document is as simple as (with 7.x):
+Indexing a document is as simple as:
 
 ```csharp
 var tweet = new Tweet
