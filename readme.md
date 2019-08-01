@@ -88,9 +88,9 @@ Always use the latest minor version of the client within that major version, so 
 
 #### Branch Compatibility
 
-`master` reflects the latest server version (`8.x` snapshots)
-`7.x` reflects the latest development of the `7.x` client
-`7.1` is the integration branch for the next client release (`7.1.0`)
+`master` reflects the latest server version, this is typically the `current latest major + 1`
+`N.x` where N represents the major version component of the Elasticsearch server release its integrating with; e.g. `7.x`
+`N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixs.
 
 ## Preview builds
 
