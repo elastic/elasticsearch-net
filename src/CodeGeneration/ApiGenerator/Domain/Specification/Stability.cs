@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 
-namespace ApiGenerator.Domain.Specification {
+namespace ApiGenerator.Domain.Specification
+{
 	public enum Stability
 	{
 		/// <summary>
