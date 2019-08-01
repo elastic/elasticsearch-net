@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain.Specification;
 
-namespace ApiGenerator.Domain.Code.HighLevel.Requests 
+namespace ApiGenerator.Domain.Code.HighLevel.Requests
 {
 	public class RequestPartialImplementation
 	{
 		public CsharpNames CsharpNames { get; set; }
 		public string OfficialDocumentationLink { get; set; }
+		public Stability Stability { get; set; }
 		public IReadOnlyCollection<UrlPart> Parts { get; set; }
 		public IReadOnlyCollection<UrlPath> Paths { get; set; }
 		public IReadOnlyCollection<QueryParameters> Params { get; set; }
@@ -20,7 +21,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		public bool NeedsGenericImplementation => !GenerateOnlyGenericInterface && !string.IsNullOrWhiteSpace(CsharpNames.GenericsDeclaredOnRequest);
 
 		public string Name => CsharpNames.GenericOrNonGenericRequestPreference;
-		
+
 		public string InterfaceName => CsharpNames.GenericOrNonGenericInterfacePreference;
 	}
 }

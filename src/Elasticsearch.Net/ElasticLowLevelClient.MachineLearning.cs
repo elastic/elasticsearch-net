@@ -55,35 +55,35 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> CloseJobAsync<TResponse>(string jobId, PostData body, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_close"), ctx, body, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/calendars/{calendar_id} <para></para></summary>
+		///<summary>DELETE on /_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteCalendar<TResponse>(string calendarId, DeleteCalendarRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/calendars/{calendarId:calendarId}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/calendars/{calendar_id} <para></para></summary>
+		///<summary>DELETE on /_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteCalendarAsync<TResponse>(string calendarId, DeleteCalendarRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/calendars/{calendarId:calendarId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/calendars/{calendar_id}/events/{event_id} <para></para></summary>
+		///<summary>DELETE on /_ml/calendars/{calendar_id}/events/{event_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "eventId">The ID of the event to remove from the calendar</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteCalendarEvent<TResponse>(string calendarId, string eventId, DeleteCalendarEventRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/calendars/{calendarId:calendarId}/events/{eventId:eventId}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/calendars/{calendar_id}/events/{event_id} <para></para></summary>
+		///<summary>DELETE on /_ml/calendars/{calendar_id}/events/{event_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "eventId">The ID of the event to remove from the calendar</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteCalendarEventAsync<TResponse>(string calendarId, string eventId, DeleteCalendarEventRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/calendars/{calendarId:calendarId}/events/{eventId:eventId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<summary>DELETE on /_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "jobId">The ID of the job to remove from the calendar</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteCalendarJob<TResponse>(string calendarId, string jobId, DeleteCalendarJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/calendars/{calendarId:calendarId}/jobs/{jobId:jobId}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<summary>DELETE on /_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "jobId">The ID of the job to remove from the calendar</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -99,20 +99,20 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteDatafeedAsync<TResponse>(string datafeedId, DeleteDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/datafeeds/{datafeedId:datafeedId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/_delete_expired_data <para></para></summary>
+		///<summary>DELETE on /_ml/_delete_expired_data</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteExpiredData<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_ml/_delete_expired_data", null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/_delete_expired_data <para></para></summary>
+		///<summary>DELETE on /_ml/_delete_expired_data</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_ml/_delete_expired_data", ctx, null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/filters/{filter_id} <para></para></summary>
+		///<summary>DELETE on /_ml/filters/{filter_id}</summary>
 		///<param name = "filterId">The ID of the filter to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteFilter<TResponse>(string filterId, DeleteFilterRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/filters/{filterId:filterId}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/filters/{filter_id} <para></para></summary>
+		///<summary>DELETE on /_ml/filters/{filter_id}</summary>
 		///<param name = "filterId">The ID of the filter to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> DeleteFilterAsync<TResponse>(string filterId, DeleteFilterRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -163,12 +163,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> FlushJobAsync<TResponse>(string jobId, PostData body, FlushJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_flush"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
+		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name = "jobId">The ID of the job to forecast for</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ForecastJob<TResponse>(string jobId, ForecastJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_forecast"), null, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
+		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name = "jobId">The ID of the job to forecast for</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> ForecastJobAsync<TResponse>(string jobId, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -199,33 +199,33 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetBucketsAsync<TResponse>(string jobId, PostData body, GetBucketsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/results/buckets"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/calendars/{calendar_id}/events <para></para></summary>
+		///<summary>GET on /_ml/calendars/{calendar_id}/events</summary>
 		///<param name = "calendarId">The ID of the calendar containing the events</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetCalendarEvents<TResponse>(string calendarId, GetCalendarEventsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/calendars/{calendarId:calendarId}/events"), null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/calendars/{calendar_id}/events <para></para></summary>
+		///<summary>GET on /_ml/calendars/{calendar_id}/events</summary>
 		///<param name = "calendarId">The ID of the calendar containing the events</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetCalendarEventsAsync<TResponse>(string calendarId, GetCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/calendars/{calendarId:calendarId}/events"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_ml/calendars <para></para></summary>
+		///<summary>POST on /_ml/calendars</summary>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetCalendars<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/calendars", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/calendars <para></para></summary>
+		///<summary>POST on /_ml/calendars</summary>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetCalendarsAsync<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/calendars", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/calendars/{calendar_id} <para></para></summary>
+		///<summary>POST on /_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to fetch</param>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetCalendars<TResponse>(string calendarId, PostData body, GetCalendarsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/calendars/{calendarId:calendarId}"), body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/calendars/{calendar_id} <para></para></summary>
+		///<summary>POST on /_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to fetch</param>
 		///<param name = "body">Calendar selection details if not provided in URI</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -293,20 +293,20 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetDatafeedsAsync<TResponse>(GetDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/datafeeds", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/filters <para></para></summary>
+		///<summary>GET on /_ml/filters</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetFilters<TResponse>(GetFiltersRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ml/filters", null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/filters <para></para></summary>
+		///<summary>GET on /_ml/filters</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetFiltersAsync<TResponse>(GetFiltersRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/filters", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/filters/{filter_id} <para></para></summary>
+		///<summary>GET on /_ml/filters/{filter_id}</summary>
 		///<param name = "filterId">The ID of the filter to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetFilters<TResponse>(string filterId, GetFiltersRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/filters/{filterId:filterId}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/filters/{filter_id} <para></para></summary>
+		///<summary>GET on /_ml/filters/{filter_id}</summary>
 		///<param name = "filterId">The ID of the filter to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetFiltersAsync<TResponse>(string filterId, GetFiltersRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -409,11 +409,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetAnomalyRecordsAsync<TResponse>(string jobId, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/results/records"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/info <para></para></summary>
+		///<summary>GET on /_ml/info</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Info<TResponse>(MachineLearningInfoRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ml/info", null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/info <para></para></summary>
+		///<summary>GET on /_ml/info</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> InfoAsync<TResponse>(MachineLearningInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/info", ctx, null, RequestParams(requestParameters));
@@ -427,13 +427,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> OpenJobAsync<TResponse>(string jobId, OpenJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_open"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_ml/calendars/{calendar_id}/events <para></para></summary>
+		///<summary>POST on /_ml/calendars/{calendar_id}/events</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "body">A list of events</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PostCalendarEvents<TResponse>(string calendarId, PostData body, PostCalendarEventsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/calendars/{calendarId:calendarId}/events"), body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/calendars/{calendar_id}/events <para></para></summary>
+		///<summary>POST on /_ml/calendars/{calendar_id}/events</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "body">A list of events</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -461,25 +461,25 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PreviewDatafeedAsync<TResponse>(string datafeedId, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_preview"), ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/calendars/{calendar_id} <para></para></summary>
+		///<summary>PUT on /_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to create</param>
 		///<param name = "body">The calendar details</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutCalendar<TResponse>(string calendarId, PostData body, PutCalendarRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_ml/calendars/{calendarId:calendarId}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/calendars/{calendar_id} <para></para></summary>
+		///<summary>PUT on /_ml/calendars/{calendar_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to create</param>
 		///<param name = "body">The calendar details</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PutCalendarAsync<TResponse>(string calendarId, PostData body, PutCalendarRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/calendars/{calendarId:calendarId}"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<summary>PUT on /_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "jobId">The ID of the job to add to the calendar</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutCalendarJob<TResponse>(string calendarId, string jobId, PutCalendarJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_ml/calendars/{calendarId:calendarId}/jobs/{jobId:jobId}"), null, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<summary>PUT on /_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "jobId">The ID of the job to add to the calendar</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -497,13 +497,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PutDatafeedAsync<TResponse>(string datafeedId, PostData body, PutDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/datafeeds/{datafeedId:datafeedId}"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/filters/{filter_id} <para></para></summary>
+		///<summary>PUT on /_ml/filters/{filter_id}</summary>
 		///<param name = "filterId">The ID of the filter to create</param>
 		///<param name = "body">The filter details</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutFilter<TResponse>(string filterId, PostData body, PutFilterRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_ml/filters/{filterId:filterId}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/filters/{filter_id} <para></para></summary>
+		///<summary>PUT on /_ml/filters/{filter_id}</summary>
 		///<param name = "filterId">The ID of the filter to create</param>
 		///<param name = "body">The filter details</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -569,13 +569,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> UpdateDatafeedAsync<TResponse>(string datafeedId, PostData body, UpdateDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_update"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/filters/{filter_id}/_update <para></para></summary>
+		///<summary>POST on /_ml/filters/{filter_id}/_update</summary>
 		///<param name = "filterId">The ID of the filter to update</param>
 		///<param name = "body">The filter update</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse UpdateFilter<TResponse>(string filterId, PostData body, UpdateFilterRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/filters/{filterId:filterId}/_update"), body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/filters/{filter_id}/_update <para></para></summary>
+		///<summary>POST on /_ml/filters/{filter_id}/_update</summary>
 		///<param name = "filterId">The ID of the filter to update</param>
 		///<param name = "body">The filter update</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -607,22 +607,22 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> UpdateModelSnapshotAsync<TResponse>(string jobId, string snapshotId, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_update"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate <para></para></summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate</summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ValidateJob<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/anomaly_detectors/_validate", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate <para></para></summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate</summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> ValidateJobAsync<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/anomaly_detectors/_validate", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para></para></summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate/detector</summary>
 		///<param name = "body">The detector</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ValidateDetector<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/anomaly_detectors/_validate/detector", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para></para></summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate/detector</summary>
 		///<param name = "body">The detector</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> ValidateDetectorAsync<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null, CancellationToken ctx = default)

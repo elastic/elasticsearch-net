@@ -214,6 +214,13 @@ namespace Nest
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
 		}
+
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards
+		{
+			get => Q<string>("wait_for_active_shards");
+			set => Q("wait_for_active_shards", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -2372,6 +2379,13 @@ namespace Nest
 			set => Q("completion_fields", value);
 		}
 
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields
 		{
@@ -2386,6 +2400,13 @@ namespace Nest
 			set => Q("fields", value);
 		}
 
+		///<summary>If set to false stats will also collected from closed indices if explicitly specified or if expand_wildcards expands to closed indices</summary>
+		public bool? ForbidClosedIndices
+		{
+			get => Q<bool? >("forbid_closed_indices");
+			set => Q("forbid_closed_indices", value);
+		}
+
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public string[] Groups
 		{
@@ -2398,6 +2419,13 @@ namespace Nest
 		{
 			get => Q<bool? >("include_segment_file_sizes");
 			set => Q("include_segment_file_sizes", value);
+		}
+
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public bool? IncludeUnloadedSegments
+		{
+			get => Q<bool? >("include_unloaded_segments");
+			set => Q("include_unloaded_segments", value);
 		}
 
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>

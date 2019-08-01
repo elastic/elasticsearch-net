@@ -873,6 +873,13 @@ namespace Elasticsearch.Net
 			get => Q<bool? >("ignore_unavailable");
 			set => Q("ignore_unavailable", value);
 		}
+
+		///<summary>Indicates whether unmapped fields should be included in the response.</summary>
+		public bool? IncludeUnmapped
+		{
+			get => Q<bool? >("include_unmapped");
+			set => Q("include_unmapped", value);
+		}
 	}
 
 	///<summary>Request options for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
@@ -1198,8 +1205,8 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search
-		/// on the cluster in order to limit the number of concurrent shard requests
+		/// The number of concurrent shard requests each sub search executes concurrently per node. This value should be used to limit the impact of
+		/// the search on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests
 		{

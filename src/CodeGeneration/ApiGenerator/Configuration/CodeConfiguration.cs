@@ -17,6 +17,15 @@ namespace ApiGenerator.Configuration
 
 			// these APIs are not ready for primetime yet
 			"rank_eval.json",
+			"data_frame.delete_data_frame_transform.json",
+			"data_frame.get_data_frame_transform.json",
+			"data_frame.get_data_frame_transform_stats.json",
+			"data_frame.preview_data_frame_transform.json",
+			"data_frame.put_data_frame_transform.json",
+			"data_frame.start_data_frame_transform.json",
+			"data_frame.stop_data_frame_transform.json",
+
+			"scripts_painless_context.json",
 
 			// these APIs are new and need to be mapped
 			"ml.set_upgrade_mode.json",
