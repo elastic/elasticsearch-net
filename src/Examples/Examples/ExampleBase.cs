@@ -5,6 +5,7 @@ namespace Examples
 {
 	public abstract class ExampleBase
 	{
+		// ReSharper disable once FieldCanBeMadeReadOnly.Global
 		protected IElasticClient client;
 
 		protected ExampleBase()
