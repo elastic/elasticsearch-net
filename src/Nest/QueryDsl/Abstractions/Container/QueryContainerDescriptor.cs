@@ -215,6 +215,15 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.DisMax = query);
 
 		/// <summary>
+		/// Boosts the relevance score of documents closer to a provided origin date or point. For example, you can use this query to give
+        /// more weight to documents closer to a certain date or location.
+        /// You can use the distance_feature query to find the nearest neighbors to a location. You can also use the query in a bool
+        /// search’s should filter to add boosted relevance scores to the bool query’s scores.
+		/// </summary>
+		public QueryContainer DistanceFeature(Func<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.DistanceFeature = query);
+
+		/// <summary>
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost
 		/// for every document in the filter. Maps to Lucene ConstantScoreQuery.
 		/// </summary>

@@ -165,6 +165,10 @@ namespace Nest
 		[DataMember(Name = "rank_feature")]
 		IRankFeatureQuery RankFeature { get; set; }
 
+		/// <inheritdoc cref="IDistanceFeatureQuery"/>
+		[DataMember(Name = "distance_feature")]
+		IDistanceFeatureQuery DistanceFeature { get; set; }
+
 		void Accept(IQueryVisitor visitor);
 	}
 }

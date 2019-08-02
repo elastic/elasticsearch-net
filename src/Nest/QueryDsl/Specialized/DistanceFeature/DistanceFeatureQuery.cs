@@ -1,0 +1,143 @@
+using System;
+using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
+
+namespace Nest
+{
+	/// <summary>
+	/// Boosts the relevance score of documents closer to a provided origin date or point. For example, you can use this query to give
+	/// more weight to documents closer to a certain date or location.
+	/// You can use the distance_feature query to find the nearest neighbors to a location. You can also use the query in a bool
+	/// search’s should filter to add boosted relevance scores to the bool query’s scores.
+	/// </summary>
+	[JsonFormatter(typeof(DistanceFeatureQueryFormatter))]
+	[InterfaceDataContract]
+	public interface IDistanceFeatureQuery : IFieldNameQuery
+	{
+		/// <summary>
+		/// Date or point of origin used to calculate distances.
+		// If the field value is a date or date_nanos field, the origin value must be a date. Date Math, such as now-1h, is supported.
+		// If the field value is a geo_point field, the origin value must be a geopoint.
+		/// </summary>
+		[DataMember(Name = "origin")]
+		string Origin { get; set; }
+
+		/// <summary>
+		/// Distance from the origin at which relevance scores receive half of the boost value.
+		// If the field value is a date or date_nanos field, the pivot value must be a time unit, such as 1h or 10d.
+		// If the field value is a geo_point field, the pivot value must be a distance unit, such as 1km or 12m.
+		/// </summary>
+		[DataMember(Name = "pivot")]
+		string Pivot { get; set; }
+	}
+
+	public class DistanceFeatureQuery : FieldNameQueryBase, IDistanceFeatureQuery
+	{
+		protected override bool Conditionless => IsConditionless(this);
+
+		internal static bool IsConditionless(IDistanceFeatureQuery q) => q.Field.IsConditionless() || q.Origin == null && q.Pivot == null;
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.DistanceFeature = this;
+
+		public string Origin { get; set; }
+
+		public string Pivot { get; set; }
+	}
+
+	public class DistanceFeatureQueryDescriptor<T>
+		: FieldNameQueryDescriptorBase<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery, T>
+			, IDistanceFeatureQuery where T : class
+	{
+		string IDistanceFeatureQuery.Origin { get; set; }
+
+		string IDistanceFeatureQuery.Pivot { get; set; }
+
+		protected override bool Conditionless => DistanceFeatureQuery.IsConditionless(this);
+
+		/// <inheritdoc cref="IDistanceFeatureQuery.Origin" />
+		public DistanceFeatureQueryDescriptor<T> Origin(string origin) =>
+			Assign(origin, (a, v) => a.Origin = v);
+
+		/// <inheritdoc cref="IDistanceFeatureQuery.Pivot" />
+		public DistanceFeatureQueryDescriptor<T> Pivot(string pivot) =>
+			Assign(pivot, (a, v) => a.Pivot = v);
+	}
+
+	internal class DistanceFeatureQueryFormatter : IJsonFormatter<IDistanceFeatureQuery>
+	{
+		public void Serialize(ref JsonWriter writer, IDistanceFeatureQuery value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+
+			writer.WritePropertyName("field");
+			var fieldFormatter = formatterResolver.GetFormatter<Field>();
+			fieldFormatter.Serialize(ref writer, value.Field, formatterResolver);
+			writer.WriteValueSeparator();
+
+			writer.WritePropertyName("origin");
+			writer.WriteString(value.Origin);
+			writer.WriteValueSeparator();
+
+			writer.WritePropertyName("pivot");
+			writer.WriteString(value.Pivot);
+			writer.WriteValueSeparator();
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteDouble(value.Boost.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		{
+			{ "field", 0 },
+			{ "origin", 1 },
+			{ "pivot", 2 },
+			{ "boost", 3 }
+		};
+
+		public IDistanceFeatureQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.ReadIsNull())
+				return null;
+
+			var query = new DistanceFeatureQuery();
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
+			{
+				if (Fields.TryGetValue(reader.ReadPropertyNameSegmentRaw(), out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							query.Field = formatterResolver.GetFormatter<Field>().Deserialize(ref reader, formatterResolver);
+							break;
+						case 1:
+							query.Origin = reader.ReadString();
+							break;
+						case 2:
+							query.Pivot = reader.ReadString();
+							break;
+						case 3:
+							query.Boost = reader.ReadDouble();
+							break;
+					}
+				}
+				else
+					reader.ReadNextBlock();
+			}
+
+			return query;
+		}
+	}
+}
