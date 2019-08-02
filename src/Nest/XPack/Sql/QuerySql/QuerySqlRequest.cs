@@ -15,8 +15,15 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[DataMember(Name ="cursor")]
+		[DataMember(Name="cursor")]
 		string Cursor { get; set; }
+
+		/// <summary>
+		/// Return the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+		/// The following formats can be returned in columnar orientation: json, yaml, cbor and smile.
+		/// </summary>
+		[DataMember(Name="columnar")]
+		bool? Columnar { get; set; }
 	}
 
 	public partial class QuerySqlRequest
@@ -24,6 +31,10 @@ namespace Nest
 		/// <inheritdoc cref="IQuerySqlRequest.Cursor" />
 		/// >
 		public string Cursor { get; set; }
+
+		/// <inheritdoc cref="IQuerySqlRequest.Columnar" />
+		/// >
+		public bool? Columnar { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.FetchSize" />
 		/// >
@@ -45,6 +56,7 @@ namespace Nest
 	public partial class QuerySqlDescriptor
 	{
 		string IQuerySqlRequest.Cursor { get; set; }
+		bool? IQuerySqlRequest.Columnar { get; set; }
 		int? ISqlRequest.FetchSize { get; set; }
 		QueryContainer ISqlRequest.Filter { get; set; }
 		string ISqlRequest.Query { get; set; }
@@ -70,5 +82,9 @@ namespace Nest
 		/// <inheritdoc cref="IQuerySqlRequest.Cursor" />
 		/// >
 		public QuerySqlDescriptor Cursor(string cursor) => Assign(cursor, (a, v) => a.Cursor = v);
+
+		/// <inheritdoc cref="IQuerySqlRequest.Columnar" />
+		/// >
+		public QuerySqlDescriptor Columnar(bool? columnar) => Assign(columnar, (a, v) => a.Columnar = v);
 	}
 }
