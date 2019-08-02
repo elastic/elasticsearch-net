@@ -48,6 +48,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 			}
 		};
 
+#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
@@ -80,6 +81,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 						Script = new InlineScript("params.totalCommits >= 500")
 					}
 			};
+#pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
