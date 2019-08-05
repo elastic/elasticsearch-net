@@ -275,10 +275,4 @@ namespace ExamplesGenerator
 			}
 		}
 	}
-
-	public static class MethodDeclarationSyntaxExtensions
-	{
-		public static bool ContainsSingleLineComment(this MethodDeclarationSyntax methodDeclaration, string comment) =>
-			methodDeclaration.ChildTokens().Any(t => t.IsKind(SyntaxKind.SingleLineCommentTrivia) && t.ToFullString() == comment);
-	}
 }
