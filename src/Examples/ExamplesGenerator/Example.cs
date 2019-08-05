@@ -7,9 +7,9 @@ namespace ExamplesGenerator
 	{
 		public static ExampleComparer Instance = new ExampleComparer();
 
-		public bool Equals(Example x, Example y) => x.Hash == y.Hash && x.LineNumber == y.LineNumber;
+		public bool Equals(Example x, Example y) => x.Hash == y.Hash;
 
-		public int GetHashCode(Example obj) => HashCode.Combine(obj.Hash, obj.LineNumber);
+		public int GetHashCode(Example obj) => HashCode.Combine(obj.Hash);
 	}
 
 	public class Example

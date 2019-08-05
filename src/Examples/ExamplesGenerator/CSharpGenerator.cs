@@ -164,9 +164,12 @@ namespace ExamplesGenerator
 			}
 
 			var methodDeclaration = MethodDeclaration(PredefinedType(Token(VoidKeyword)), example.Name)
-				.AddAttributeLists(AttributeList(SingletonSeparatedList(Attribute(Name("U")))))
+				.AddAttributeLists(
+					// mark as unit test
+					AttributeList(SingletonSeparatedList(Attribute(Name("U")))),
+					// but skip for now, until implemented
+					AttributeList(SingletonSeparatedList(Attribute(Name("SkipExample")))))
 				.AddModifiers(Token(PublicKeyword))
-				.WithLeadingTrivia(Comment("// TODO: implement"), EndOfLine("\n"))
 				.WithBody(Block(statements));
 
 			return methodDeclaration;
