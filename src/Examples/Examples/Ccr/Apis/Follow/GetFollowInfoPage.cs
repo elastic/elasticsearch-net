@@ -1,0 +1,30 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Ccr.Apis.Follow
+{
+	public class GetFollowInfoPage : ExampleBase
+	{
+		[U]
+		[SkipExample]
+		public void Line38()
+		{
+			// tag::b2440b492149b705ef107137fdccb0c2[]
+			var response0 = new SearchResponse<object>();
+			// end::b2440b492149b705ef107137fdccb0c2[]
+
+			response0.MatchesExample(@"GET /<index>/_ccr/info");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line142()
+		{
+			// tag::a520168c1c8b454a8f102d6a13027c73[]
+			var response0 = new SearchResponse<object>();
+			// end::a520168c1c8b454a8f102d6a13027c73[]
+
+			response0.MatchesExample(@"GET /follower_index/_ccr/info");
+		}
+	}
+}

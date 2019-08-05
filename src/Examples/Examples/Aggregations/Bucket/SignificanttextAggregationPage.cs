@@ -1,0 +1,150 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Aggregations.Bucket
+{
+	public class SignificanttextAggregationPage : ExampleBase
+	{
+		[U]
+		[SkipExample]
+		public void Line36()
+		{
+			// tag::68f0c7c77b65bfdded348bbd397831b7[]
+			var response0 = new SearchResponse<object>();
+			// end::68f0c7c77b65bfdded348bbd397831b7[]
+
+			response0.MatchesExample(@"GET news/_search
+			{
+			    ""query"" : {
+			        ""match"" : {""content"" : ""Bird flu""}
+			    },
+			    ""aggregations"" : {
+			        ""my_sample"" : {
+			            ""sampler"" : {
+			                ""shard_size"" : 100
+			            },
+			            ""aggregations"": {
+			                ""keywords"" : {
+			                    ""significant_text"" : { ""field"" : ""content"" }
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line151()
+		{
+			// tag::d44ecc69090c0b2bc08a6cbc2e3467c5[]
+			var response0 = new SearchResponse<object>();
+			// end::d44ecc69090c0b2bc08a6cbc2e3467c5[]
+
+			response0.MatchesExample(@"GET news/_search
+			{
+			  ""query"": {
+			    ""simple_query_string"": {
+			      ""query"": ""+elasticsearch  +pozmantier""
+			    }
+			  },
+			  ""_source"": [
+			    ""title"",
+			    ""source""
+			  ],
+			  ""highlight"": {
+			    ""fields"": {
+			      ""content"": {}
+			    }
+			  }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line219()
+		{
+			// tag::805f5550b90e75aa5cc82b90d8c6c242[]
+			var response0 = new SearchResponse<object>();
+			// end::805f5550b90e75aa5cc82b90d8c6c242[]
+
+			response0.MatchesExample(@"GET news/_search
+			{
+			  ""query"": {
+			    ""match"": {
+			      ""content"": ""elasticsearch""
+			    }
+			  },
+			  ""aggs"": {
+			    ""sample"": {
+			      ""sampler"": {
+			        ""shard_size"": 100
+			      },
+			      ""aggs"": {
+			        ""keywords"": {
+			          ""significant_text"": {
+			            ""field"": ""content"",
+			            ""filter_duplicate_text"": true
+			          }
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line422()
+		{
+			// tag::5f4cab20671ebac9233812f9e35d9c8b[]
+			var response0 = new SearchResponse<object>();
+			// end::5f4cab20671ebac9233812f9e35d9c8b[]
+
+			response0.MatchesExample(@"GET news/_search
+			{
+			    ""query"" : {
+			        ""match"" : {
+			            ""content"" : ""madrid""
+			        }
+			    },
+			    ""aggs"" : {
+			        ""tags"" : {
+			            ""significant_text"" : {
+			                ""field"" : ""content"",
+			                ""background_filter"": {
+			                    ""term"" : { ""content"" : ""spain""}
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line461()
+		{
+			// tag::b3e6d6f7f6d65d1efb60ca7503a20b16[]
+			var response0 = new SearchResponse<object>();
+			// end::b3e6d6f7f6d65d1efb60ca7503a20b16[]
+
+			response0.MatchesExample(@"GET news/_search
+			{
+			    ""query"" : {
+			        ""match"" : {
+			            ""custom_all"" : ""elasticsearch""
+			        }
+			    },
+			    ""aggs"" : {
+			        ""tags"" : {
+			            ""significant_text"" : {
+			                ""field"" : ""custom_all"",
+			                ""source_fields"": [""content"" , ""title""]
+			            }
+			        }
+			    }
+			}");
+		}
+	}
+}

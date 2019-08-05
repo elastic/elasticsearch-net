@@ -1,0 +1,182 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Search.Request
+{
+	public class ScrollPage : ExampleBase
+	{
+		[U]
+		[SkipExample]
+		public void Line40()
+		{
+			// tag::7e52bec09624cf6c0de5d13f2bfad5a5[]
+			var response0 = new SearchResponse<object>();
+			// end::7e52bec09624cf6c0de5d13f2bfad5a5[]
+
+			response0.MatchesExample(@"POST /twitter/_search?scroll=1m
+			{
+			    ""size"": 100,
+			    ""query"": {
+			        ""match"" : {
+			            ""title"" : ""elasticsearch""
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line59()
+		{
+			// tag::b41dce56b0e640d32b1cf452f87cec17[]
+			var response0 = new SearchResponse<object>();
+			// end::b41dce56b0e640d32b1cf452f87cec17[]
+
+			response0.MatchesExample(@"POST /_search/scroll \<1>
+			{
+			    ""scroll"" : ""1m"", \<2>
+			    ""scroll_id"" : ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ=="" \<3>
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line92()
+		{
+			// tag::d5dcddc6398b473b6ad9bce5c6adf986[]
+			var response0 = new SearchResponse<object>();
+			// end::d5dcddc6398b473b6ad9bce5c6adf986[]
+
+			response0.MatchesExample(@"GET /_search?scroll=1m
+			{
+			  ""sort"": [
+			    ""_doc""
+			  ]
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line146()
+		{
+			// tag::72beebe779a258c225dee7b023e60c52[]
+			var response0 = new SearchResponse<object>();
+			// end::72beebe779a258c225dee7b023e60c52[]
+
+			response0.MatchesExample(@"GET /_nodes/stats/indices/search");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line160()
+		{
+			// tag::b0d64d0a554549e5b2808002a0725493[]
+			var response0 = new SearchResponse<object>();
+			// end::b0d64d0a554549e5b2808002a0725493[]
+
+			response0.MatchesExample(@"DELETE /_search/scroll
+			{
+			    ""scroll_id"" : ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==""
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line172()
+		{
+			// tag::3a700f836d8d5da1b656a876554028aa[]
+			var response0 = new SearchResponse<object>();
+			// end::3a700f836d8d5da1b656a876554028aa[]
+
+			response0.MatchesExample(@"DELETE /_search/scroll
+			{
+			    ""scroll_id"" : [
+			      ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ=="",
+			      ""DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB""
+			    ]
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line187()
+		{
+			// tag::c2c21e2824fbf6b7198ede30419da82b[]
+			var response0 = new SearchResponse<object>();
+			// end::c2c21e2824fbf6b7198ede30419da82b[]
+
+			response0.MatchesExample(@"DELETE /_search/scroll/_all");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line196()
+		{
+			// tag::b94cee0f74f57742b3948f9b784dfdd4[]
+			var response0 = new SearchResponse<object>();
+			// end::b94cee0f74f57742b3948f9b784dfdd4[]
+
+			response0.MatchesExample(@"DELETE /_search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==,DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line209()
+		{
+			// tag::1027ab1ca767ac1428176ef4f84bfbcf[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+			// end::1027ab1ca767ac1428176ef4f84bfbcf[]
+
+			response0.MatchesExample(@"GET /twitter/_search?scroll=1m
+			{
+			    ""slice"": {
+			        ""id"": 0, \<1>
+			        ""max"": 2 \<2>
+			    },
+			    ""query"": {
+			        ""match"" : {
+			            ""title"" : ""elasticsearch""
+			        }
+			    }
+			}");
+
+			response1.MatchesExample(@"GET /twitter/_search?scroll=1m
+			{
+			    ""slice"": {
+			        ""id"": 1,
+			        ""max"": 2
+			    },
+			    ""query"": {
+			        ""match"" : {
+			            ""title"" : ""elasticsearch""
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line272()
+		{
+			// tag::fdcaba9547180439ff4b6275034a5170[]
+			var response0 = new SearchResponse<object>();
+			// end::fdcaba9547180439ff4b6275034a5170[]
+
+			response0.MatchesExample(@"GET /twitter/_search?scroll=1m
+			{
+			    ""slice"": {
+			        ""field"": ""date"",
+			        ""id"": 0,
+			        ""max"": 10
+			    },
+			    ""query"": {
+			        ""match"" : {
+			            ""title"" : ""elasticsearch""
+			        }
+			    }
+			}");
+		}
+	}
+}

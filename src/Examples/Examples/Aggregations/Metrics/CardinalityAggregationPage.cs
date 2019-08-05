@@ -1,0 +1,119 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Aggregations.Metrics
+{
+	public class CardinalityAggregationPage : ExampleBase
+	{
+		[U]
+		[SkipExample]
+		public void Line11()
+		{
+			// tag::826140cdd3d5fe9a728239605c6dc71a[]
+			var response0 = new SearchResponse<object>();
+			// end::826140cdd3d5fe9a728239605c6dc71a[]
+
+			response0.MatchesExample(@"POST /sales/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""type_count"" : {
+			            ""cardinality"" : {
+			                ""field"" : ""type""
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line46()
+		{
+			// tag::edbd54e71e56f3a5617aa012b100aa0f[]
+			var response0 = new SearchResponse<object>();
+			// end::edbd54e71e56f3a5617aa012b100aa0f[]
+
+			response0.MatchesExample(@"POST /sales/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""type_count"" : {
+			            ""cardinality"" : {
+			                ""field"" : ""type"",
+			                ""precision_threshold"": 100 \<1>
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line187()
+		{
+			// tag::ef3a3e292e9e74d42703555178ed5fb6[]
+			var response0 = new SearchResponse<object>();
+			// end::ef3a3e292e9e74d42703555178ed5fb6[]
+
+			response0.MatchesExample(@"POST /sales/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""type_promoted_count"" : {
+			            ""cardinality"" : {
+			                ""script"": {
+			                    ""lang"": ""painless"",
+			                    ""source"": ""doc['type'].value + ' ' + doc['promoted'].value""
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line208()
+		{
+			// tag::6969b29883eefa552475ae1837dc5f96[]
+			var response0 = new SearchResponse<object>();
+			// end::6969b29883eefa552475ae1837dc5f96[]
+
+			response0.MatchesExample(@"POST /sales/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""type_promoted_count"" : {
+			            ""cardinality"" : {
+			                ""script"" : {
+			                    ""id"": ""my_script"",
+			                    ""params"": {
+			                        ""type_field"": ""type"",
+			                        ""promoted_field"": ""promoted""
+			                    }
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U]
+		[SkipExample]
+		public void Line236()
+		{
+			// tag::7d86ff090cbd87f144edb72e949470b3[]
+			var response0 = new SearchResponse<object>();
+			// end::7d86ff090cbd87f144edb72e949470b3[]
+
+			response0.MatchesExample(@"POST /sales/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""tag_cardinality"" : {
+			            ""cardinality"" : {
+			                ""field"" : ""tag"",
+			                ""missing"": ""N/A"" \<1>
+			            }
+			        }
+			    }
+			}");
+		}
+	}
+}

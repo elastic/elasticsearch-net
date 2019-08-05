@@ -1,0 +1,19 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Ml.AnomalyDetection.Apis
+{
+	public class GetFilterPage : ExampleBase
+	{
+		[U]
+		[SkipExample]
+		public void Line70()
+		{
+			// tag::800861c15bb33ca01a46fb97dde7537a[]
+			var response0 = new SearchResponse<object>();
+			// end::800861c15bb33ca01a46fb97dde7537a[]
+
+			response0.MatchesExample(@"GET _ml/filters/safe_domains");
+		}
+	}
+}

@@ -1,0 +1,51 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Mapping.Types
+{
+	public class RankFeaturePage : ExampleBase
+	{
+		[U]
+		[SkipExample]
+		public void Line11()
+		{
+			// tag::1e088f892b20697fd6e537a3ecf624ee[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::1e088f892b20697fd6e537a3ecf624ee[]
+
+			response0.MatchesExample(@"PUT my_index
+			{
+			  ""mappings"": {
+			    ""properties"": {
+			      ""pagerank"": {
+			        ""type"": ""rank_feature"" \<1>
+			      },
+			      ""url_length"": {
+			        ""type"": ""rank_feature"",
+			        ""positive_score_impact"": false \<2>
+			      }
+			    }
+			  }
+			}");
+
+			response1.MatchesExample(@"PUT my_index/_doc/1
+			{
+			  ""pagerank"": 8,
+			  ""url_length"": 22
+			}");
+
+			response2.MatchesExample(@"GET my_index/_search
+			{
+			  ""query"": {
+			    ""rank_feature"": {
+			      ""field"": ""pagerank""
+			    }
+			  }
+			}");
+		}
+	}
+}
