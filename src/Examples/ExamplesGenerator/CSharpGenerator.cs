@@ -102,11 +102,7 @@ namespace ExamplesGenerator
 					UsingDirective(Name("Nest"))
 				);
 
-			var namespaceName = page.PascalNameParts.Length == 1
-				? "Examples"
-				: string.Join(".", new[] { "Examples" }.Concat(page.PascalNameParts.SkipLast(1)));
-
-			var @namespace = NamespaceDeclaration(Name(namespaceName));
+			var @namespace = NamespaceDeclaration(Name(page.Namespace));
 			var className = page.PascalNameParts.Last();
 
 			var classDeclaration = ClassDeclaration(className)
@@ -146,6 +142,10 @@ namespace ExamplesGenerator
 						Comment(example.EndTag),
 						EndOfLine("\n"),
 						EndOfLine("\n"));
+				else
+					statement = statement.WithTrailingTrivia(
+						EndOfLine("\n"),
+						EndOfLine("\n"));
 
 				statements.Add(statement);
 			}
@@ -158,7 +158,7 @@ namespace ExamplesGenerator
 				var r = exampleContent.EscapeDoubleQuotes().Indent("\t\t\t").TrimEnd();
 
 				var statement = ParseStatement($"response{i}.MatchesExample(@\"{r}\");")
-					.WithTrailingTrivia(EndOfLine("\n"));
+					.WithTrailingTrivia(EndOfLine("\n"), EndOfLine("\n"));
 
 				statements.Add(statement);
 			}
