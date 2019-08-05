@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -13,30 +14,6 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace ExamplesGenerator
 {
-	public class Page
-	{
-		public string Name { get; set; }
-
-		public List<Example> Examples { get; } = new List<Example>();
-	}
-
-	public class Example
-	{
-		public string LineNumber { get; set; }
-
-		public string Hash { get; set; }
-
-		public string Content { get; set; }
-
-		public List<Language> Languages { get; set; } = new List<Language>();
-	}
-
-	public class Language
-	{
-		public string Name { get; set; }
-		public bool Implemented { get; set; }
-	}
-
 	class Program
 	{
 		static int Main(string[] args)
@@ -48,7 +25,6 @@ namespace ExamplesGenerator
 			}
 
 			var pages = ParsePages(args[0]);
-
 			GenerateExamples(pages);
 
 			return 0;
@@ -60,35 +36,84 @@ namespace ExamplesGenerator
 			{
 				var page = pages[i];
 
-				var parts = page.Name.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+				var sourcePath = page.FullPath(ExampleLocation.ExamplesDir);
+				CompilationUnitSyntax existingCompilationUnit = null;
 
-				var names = parts
-					.Select(p => LowercaseHyphenToPascal(p.Trim()))
-					.ToList();
+				if (File.Exists(sourcePath))
+				{
+					var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(sourcePath));
+					existingCompilationUnit = syntaxTree.GetCompilationUnitRoot();
+				}
 
-				var source = GenerateClassFile(page, names);
+				string source;
+				if (existingCompilationUnit == null)
+				{
+					source = CreateClassFile(page);
+
+					var directoryName = Path.GetDirectoryName(sourcePath);
+					if (!Directory.Exists(directoryName))
+						Directory.CreateDirectory(directoryName);
+				}
+				else
+					source = UpdateClassFile(page, existingCompilationUnit);
+
+				File.WriteAllText(sourcePath, source);
 			}
 		}
 
 		private static NameSyntax Name(string name) => ParseName(name);
 
-		public static string LowercaseHyphenToPascal(string lowercaseHyphenatedInput) =>
-			Regex.Replace(lowercaseHyphenatedInput.Replace("-", " "), @"\b([a-z])", m => m.Captures[0].Value.ToUpper())
-				.Replace(" ", string.Empty);
-
-		private static string GenerateClassFile(Page page, IList<string> names)
+		private static string UpdateClassFile(Page page, CompilationUnitSyntax existingCompilationUnit)
 		{
-			var namespaceName = names.Count == 1
-				? "Examples"
-				: string.Join(".", new[] { "Examples" }.Concat(names.SkipLast(1)));
+			if (existingCompilationUnit == null)
+				throw new ArgumentNullException(nameof(existingCompilationUnit));
 
-			var ns = NamespaceDeclaration(Name(namespaceName))
+			var classDeclaration = existingCompilationUnit
+				.Members.OfType<NamespaceDeclarationSyntax>().Single()
+				.Members.OfType<ClassDeclarationSyntax>().Single();
+
+			var methodDeclarations = classDeclaration.Members.OfType<MethodDeclarationSyntax>();
+			var newClassDeclaration = classDeclaration.WithMembers(default);
+
+			foreach (var example in page.Examples)
+			{
+				var methodDeclaration = methodDeclarations.SingleOrDefault(m => m.ContainsSingleLineComment(example.StartTag));
+
+				if (methodDeclaration == null)
+				{
+					methodDeclaration = CreateMethodDeclaration(example);
+					newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration);
+				}
+				else
+				{
+					// ensure that the method name is the same
+					if (methodDeclaration.Identifier.Text != example.Name)
+						newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration.WithIdentifier(Identifier(example.Name)));
+					else
+						newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration);
+				}
+			}
+
+			return existingCompilationUnit.ReplaceNode(classDeclaration, newClassDeclaration)
+				.NormalizeWhitespace()
+				.ToFullString();
+		}
+
+		private static string CreateClassFile(Page page)
+		{
+
+			var compilationUnit = CompilationUnit()
 				.AddUsings(
 					UsingDirective(Name("Elastic.Xunit.XunitPlumbing")),
 					UsingDirective(Name("Nest"))
 				);
 
-			var className = names.Last();
+			var namespaceName = page.PascalNameParts.Length == 1
+				? "Examples"
+				: string.Join(".", new[] { "Examples" }.Concat(page.PascalNameParts.SkipLast(1)));
+
+			var @namespace = NamespaceDeclaration(Name(namespaceName));
+			var className = page.PascalNameParts.Last();
 
 			var classDeclaration = ClassDeclaration(className)
 				.AddModifiers(Token(SyntaxKind.PublicKeyword))
@@ -96,42 +121,52 @@ namespace ExamplesGenerator
 
 			foreach (var example in page.Examples)
 			{
-				var content = example.Content
-					.Split(new[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-				var builder = new StringBuilder("// tag::" + example.Hash + "[]");
-				builder.AppendLine();
-
-				for (int i = 0; i < content.Length; i++)
-				{
-					builder.AppendLine($"var response{i} = new SearchResponse<T>(); // TODO: fix");
-					builder.AppendLine();
-				}
-
-				builder.AppendLine("// end::" + example.Hash + "[]");
-				builder.AppendLine();
-
-				for (int i = 0; i < content.Length; i++)
-				{
-					var c = content[i];
-					var r = Regex.Replace(c, @"(?<!\\)""", "\"\"");
-
-					builder.AppendLine($"response{i}.MatchesExample(@\"{r}\");");
-					builder.AppendLine();
-				}
-
-				var methodDeclaration = MethodDeclaration(Name("void"), "Line" + example.LineNumber)
-					.AddModifiers(Token(SyntaxKind.PublicKeyword))
-					.WithBody(Block(ParseStatement(builder.ToString())));
-
+				var methodDeclaration = CreateMethodDeclaration(example);
 				classDeclaration = classDeclaration.AddMembers(methodDeclaration);
 			}
 
-			ns = ns.AddMembers(classDeclaration);
+			@namespace = @namespace.AddMembers(classDeclaration);
+			compilationUnit = compilationUnit.AddMembers(@namespace);
 
-			return ns
+			return compilationUnit
 				.NormalizeWhitespace()
 				.ToFullString();
+
+		}
+
+		private static MethodDeclarationSyntax CreateMethodDeclaration(Example example)
+		{
+			var content = example.Content
+				.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+			var builder = new StringBuilder(example.StartTag)
+				.AppendLine();
+
+			for (int i = 0; i < content.Length; i++)
+			{
+				builder.AppendLine("// TODO: implement correct client call")
+					.AppendLine("var response{i} = new SearchResponse<object>();")
+					.AppendLine();
+			}
+
+			builder.AppendLine(example.EndTag)
+				.AppendLine();
+
+			for (int i = 0; i < content.Length; i++)
+			{
+				var c = content[i];
+				var r = Regex.Replace(c, @"(?<!\\)""", "\"\"").TrimEnd();
+
+				builder.AppendLine($"response{i}.MatchesExample(@\"{r}\");")
+					.AppendLine();
+			}
+
+			var methodDeclaration = MethodDeclaration(PredefinedType(Token(SyntaxKind.VoidKeyword)), example.Name)
+				.AddModifiers(Token(SyntaxKind.PublicKeyword))
+				.WithLeadingTrivia(Comment("// TODO: implement"))
+				.WithBody(Block(ParseStatement(builder.ToString())));
+
+			return methodDeclaration;
 		}
 
 		private static IList<Page> ParsePages(string path)
@@ -153,7 +188,7 @@ namespace ExamplesGenerator
 					}
 
 					var name = match.Groups["name"].Value;
-					var lineNumber = match.Groups["lineNumber"].Value;
+					var lineNumber = int.Parse(match.Groups["lineNumber"].Value);
 					var hash = match.Groups["hash"].Value;
 
 					// skip to start of body
@@ -186,21 +221,48 @@ namespace ExamplesGenerator
 
 					if (!pages.TryGetValue(name, out var page))
 					{
-						page = new Page { Name = name, };
+						page = new Page(name);
 						pages.Add(name, page);
 					}
 
-					page.Examples.Add(new Example
-					{
-						Content = content,
-						Hash = hash,
-						LineNumber = lineNumber,
-						Languages = exampleLanguages
-					});
+					var example = new Example(hash, lineNumber, content);
+					example.Languages.AddRange(exampleLanguages);
+					page.Examples.Add(example);
 				}
 			}
 
 			return pages.Values.ToList();
 		}
+	}
+
+	public static class ExampleLocation
+	{
+		public static string ExamplesDir { get; } = $@"{Root}../../../src/Examples/Examples";
+
+		private static string _root;
+		public static string Root
+		{
+			get
+			{
+				if (_root != null) return _root;
+
+				var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+				var runningAsNetCore =
+					directoryInfo.Name == "ExamplesGenerator" &&
+					directoryInfo.Parent != null &&
+					directoryInfo.Parent.Name == "Examples";
+
+				_root = runningAsNetCore ? "" : @"../../../";
+				return _root;
+			}
+		}
+
+	}
+
+	public static class MethodDeclarationSyntaxExtensions
+	{
+		public static bool ContainsSingleLineComment(this MethodDeclarationSyntax methodDeclaration, string comment) =>
+			methodDeclaration.ChildTokens().Any(t => t.IsKind(SyntaxKind.SingleLineCommentTrivia) && t.ToFullString() == comment);
 	}
 }
