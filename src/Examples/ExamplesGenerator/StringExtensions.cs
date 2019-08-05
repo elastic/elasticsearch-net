@@ -13,8 +13,10 @@ namespace ExamplesGenerator {
 
 		public static string Indent(this string input, string indent) => NewLine.Replace(input, "\n" + indent);
 
-		public static string LowercaseHyphenToPascal(this string input) =>
-			LowercasePascal.Replace(input.Replace("-", " "), m => m.Captures[0].Value.ToUpper())
+		public static string LowercaseHyphenUnderscoreToPascal(this string input) =>
+			LowercasePascal.Replace(input
+					.Replace("-", " ")
+					.Replace("_", " "), m => m.Captures[0].Value.ToUpper())
 				.Replace(" ", string.Empty);
 	}
 }

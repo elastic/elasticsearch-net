@@ -38,7 +38,7 @@ namespace ExamplesGenerator
 			: string.Join(".", PascalNameParts.SkipLast(1))));
 
 		public string[] PascalNameParts => _pascalNameParts ?? (_pascalNameParts = NameParts
-			.Select(p => p.Trim().LowercaseHyphenToPascal())
+			.Select(p => p.Trim().LowercaseHyphenUnderscoreToPascal())
 			.ToArray());
 
 		public string FullPath(string root) => Path.GetFullPath(Path.Combine(root, Directory, FileName));
