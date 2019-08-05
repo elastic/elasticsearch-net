@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Newtonsoft.Json;
+using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.Options;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using static Microsoft.CodeAnalysis.Formatting.FormattingOptions;
+using static Microsoft.CodeAnalysis.LanguageNames;
 
 namespace ExamplesGenerator
 {
-	class Program
+	internal class Program
 	{
-		static int Main(string[] args)
+		private static int Main(string[] args)
 		{
 			if (args.Length != 1)
 			{
@@ -32,7 +34,15 @@ namespace ExamplesGenerator
 
 		private static void GenerateExamples(IList<Page> pages)
 		{
-			for (int i = 0; i < pages.Count; i++)
+			var workspace = new AdhocWorkspace();
+			workspace.Options = workspace
+				.Options.WithChangedOption(NewLine, CSharp, "\n")
+				.WithChangedOption(IndentationSize, CSharp, 4)
+				.WithChangedOption(SmartIndent, CSharp, IndentStyle.Smart)
+				.WithChangedOption(UseTabs, CSharp, true)
+				.WithChangedOption(TabSize, CSharp, 4);
+
+			for (var i = 0; i < pages.Count; i++)
 			{
 				var page = pages[i];
 
@@ -48,14 +58,14 @@ namespace ExamplesGenerator
 				string source;
 				if (existingCompilationUnit == null)
 				{
-					source = CreateClassFile(page);
+					source = CreateSource(page, workspace);
 
 					var directoryName = Path.GetDirectoryName(sourcePath);
 					if (!Directory.Exists(directoryName))
 						Directory.CreateDirectory(directoryName);
 				}
 				else
-					source = UpdateClassFile(page, existingCompilationUnit);
+					source = UpdateSource(page, existingCompilationUnit, workspace);
 
 				File.WriteAllText(sourcePath, source);
 			}
@@ -63,14 +73,16 @@ namespace ExamplesGenerator
 
 		private static NameSyntax Name(string name) => ParseName(name);
 
-		private static string UpdateClassFile(Page page, CompilationUnitSyntax existingCompilationUnit)
+		private static string UpdateSource(Page page, CompilationUnitSyntax existingCompilationUnit, AdhocWorkspace workspace)
 		{
 			if (existingCompilationUnit == null)
 				throw new ArgumentNullException(nameof(existingCompilationUnit));
 
 			var classDeclaration = existingCompilationUnit
-				.Members.OfType<NamespaceDeclarationSyntax>().Single()
-				.Members.OfType<ClassDeclarationSyntax>().Single();
+				.Members.OfType<NamespaceDeclarationSyntax>()
+				.Single()
+				.Members.OfType<ClassDeclarationSyntax>()
+				.Single();
 
 			var methodDeclarations = classDeclaration.Members.OfType<MethodDeclarationSyntax>();
 			var newClassDeclaration = classDeclaration.WithMembers(default);
@@ -94,14 +106,12 @@ namespace ExamplesGenerator
 				}
 			}
 
-			return existingCompilationUnit.ReplaceNode(classDeclaration, newClassDeclaration)
-				.NormalizeWhitespace()
+			return Formatter.Format(existingCompilationUnit.ReplaceNode(classDeclaration, newClassDeclaration), workspace)
 				.ToFullString();
 		}
 
-		private static string CreateClassFile(Page page)
+		private static string CreateSource(Page page, AdhocWorkspace workspace)
 		{
-
 			var compilationUnit = CompilationUnit()
 				.AddUsings(
 					UsingDirective(Name("Elastic.Xunit.XunitPlumbing")),
@@ -128,10 +138,7 @@ namespace ExamplesGenerator
 			@namespace = @namespace.AddMembers(classDeclaration);
 			compilationUnit = compilationUnit.AddMembers(@namespace);
 
-			return compilationUnit
-				.NormalizeWhitespace()
-				.ToFullString();
-
+			return Formatter.Format(compilationUnit, workspace).ToFullString();
 		}
 
 		private static MethodDeclarationSyntax CreateMethodDeclaration(Example example)
@@ -139,32 +146,42 @@ namespace ExamplesGenerator
 			var content = example.Content
 				.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-			var builder = new StringBuilder(example.StartTag)
-				.AppendLine();
+			var statements = new List<StatementSyntax>();
+			var tabs = "\t\t\t";
 
-			for (int i = 0; i < content.Length; i++)
+			for (var i = 0; i < content.Length; i++)
 			{
-				builder.AppendLine("// TODO: implement correct client call")
-					.AppendLine("var response{i} = new SearchResponse<object>();")
-					.AppendLine();
+				var statement = ParseStatement($"var response{i} = new SearchResponse<object>();");
+				if (i == 0)
+					statement = statement.WithLeadingTrivia(Comment(example.StartTag + "\n"));
+
+				if (i == content.Length - 1)
+					statement = statement.WithTrailingTrivia(Whitespace("\n"), Comment(tabs + example.EndTag + "\n\n"));
+
+				statements.Add(statement);
 			}
 
-			builder.AppendLine(example.EndTag)
-				.AppendLine();
-
-			for (int i = 0; i < content.Length; i++)
+			for (var i = 0; i < content.Length; i++)
 			{
 				var c = content[i];
-				var r = Regex.Replace(c, @"(?<!\\)""", "\"\"").TrimEnd();
 
-				builder.AppendLine($"response{i}.MatchesExample(@\"{r}\");")
-					.AppendLine();
+				// indent the multi line string literal example, escaping double quotes
+				var r = Regex.Replace(
+						Regex.Replace(c, @"(?<!\\)""", "\"\""),
+						"\r?\n",
+						"\n" + tabs)
+					.TrimEnd();
+
+				var statement = ParseStatement($"response{i}.MatchesExample(@\"{r}\");")
+					.WithTrailingTrivia(Whitespace("\n"));
+
+				statements.Add(statement);
 			}
 
 			var methodDeclaration = MethodDeclaration(PredefinedType(Token(SyntaxKind.VoidKeyword)), example.Name)
 				.AddModifiers(Token(SyntaxKind.PublicKeyword))
-				.WithLeadingTrivia(Comment("// TODO: implement"))
-				.WithBody(Block(ParseStatement(builder.ToString())));
+				.WithLeadingTrivia(Comment("// TODO: implement\n"))
+				.WithBody(Block(statements));
 
 			return methodDeclaration;
 		}
@@ -237,9 +254,9 @@ namespace ExamplesGenerator
 
 	public static class ExampleLocation
 	{
+		private static string _root;
 		public static string ExamplesDir { get; } = $@"{Root}../../../src/Examples/Examples";
 
-		private static string _root;
 		public static string Root
 		{
 			get
@@ -257,7 +274,6 @@ namespace ExamplesGenerator
 				return _root;
 			}
 		}
-
 	}
 
 	public static class MethodDeclarationSyntaxExtensions
