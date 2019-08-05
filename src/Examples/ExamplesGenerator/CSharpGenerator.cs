@@ -17,8 +17,8 @@ namespace ExamplesGenerator
 		public static void GenerateExamples(IList<Page> pages)
 		{
 			var workspace = new AdhocWorkspace();
-			workspace.Options = workspace
-				.Options.WithChangedOption(FormattingOptions.NewLine, CSharp, "\n")
+			workspace.Options = workspace.Options
+				.WithChangedOption(FormattingOptions.NewLine, CSharp, "\n")
 				.WithChangedOption(FormattingOptions.IndentationSize, CSharp, 4)
 				.WithChangedOption(FormattingOptions.SmartIndent, CSharp, FormattingOptions.IndentStyle.Smart)
 				.WithChangedOption(FormattingOptions.UseTabs, CSharp, true)
@@ -67,6 +67,8 @@ namespace ExamplesGenerator
 				.Single();
 
 			var methodDeclarations = classDeclaration.Members.OfType<MethodDeclarationSyntax>();
+
+			// clear members from the class, to add only those that exist in the docs
 			var newClassDeclaration = classDeclaration.WithMembers(default);
 
 			foreach (var example in page.Examples)
@@ -80,7 +82,7 @@ namespace ExamplesGenerator
 				}
 				else
 				{
-					// ensure that the method name is the same
+					// ensure that the method name is the same i.e. same line number
 					if (methodDeclaration.Identifier.Text != example.Name)
 						newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration.WithIdentifier(Identifier(example.Name)));
 					else
