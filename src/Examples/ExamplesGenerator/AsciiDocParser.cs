@@ -66,7 +66,9 @@ namespace ExamplesGenerator {
 
 					var example = new Example(hash, lineNumber, content);
 					example.Languages.AddRange(exampleLanguages);
-					page.Examples.Add(example);
+
+					if (!page.Examples.Contains(example))
+						page.Examples.Add(example);
 				}
 			}
 

@@ -103,7 +103,7 @@ namespace ExamplesGenerator
 				);
 
 			var @namespace = NamespaceDeclaration(Name(page.Namespace));
-			var className = page.PascalNameParts.Last();
+			var className = page.ClassName;
 
 			var classDeclaration = ClassDeclaration(className)
 				.AddModifiers(Token(PublicKeyword))

@@ -16,13 +16,15 @@ namespace ExamplesGenerator
 
 		public Page(string name) => Name = name ?? throw new ArgumentNullException();
 
+		public string ClassName => PascalNameParts.Last() + "Page";
+
 		public string Directory => _directory ?? (_directory = PascalNameParts.Length == 1
 			? Root
 			: string.Join(Path.DirectorySeparatorChar, PascalNameParts.SkipLast(1)));
 
-		public List<Example> Examples { get; } = new List<Example>();
+		public HashSet<Example> Examples { get; } = new HashSet<Example>(ExampleComparer.Instance);
 
-		public string FileName => _fileName ?? (_fileName = PascalNameParts.Last() + ".cs");
+		public string FileName => _fileName ?? (_fileName = ClassName + ".cs");
 
 		public string Name { get; }
 

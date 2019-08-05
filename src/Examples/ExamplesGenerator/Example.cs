@@ -3,6 +3,15 @@ using System.Collections.Generic;
 
 namespace ExamplesGenerator
 {
+	public class ExampleComparer : IEqualityComparer<Example>
+	{
+		public static ExampleComparer Instance = new ExampleComparer();
+
+		public bool Equals(Example x, Example y) => x.Hash == y.Hash && x.LineNumber == y.LineNumber;
+
+		public int GetHashCode(Example obj) => HashCode.Combine(obj.Hash, obj.LineNumber);
+	}
+
 	public class Example
 	{
 		public Example(string hash, int lineNumber, string content)

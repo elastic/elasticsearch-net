@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 namespace ExamplesGenerator {
 	internal static class StringExtensions
 	{
-		private static readonly Regex DoubleQuotes = new Regex(@"(?<!\\)""");
+		private static readonly Regex DoubleQuotes = new Regex("\"");
 
 		private static readonly Regex NewLine = new Regex("\r?\n");
 
