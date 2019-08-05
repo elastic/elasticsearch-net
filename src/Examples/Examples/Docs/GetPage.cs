@@ -150,13 +150,13 @@ namespace Examples.Docs
 		{
 			// tag::0ba0b2db24852abccb7c0fc1098d566e[]
 			var indexResponse = client.Index(new Tweet
-				{
-					Counter = 1,
-					Tags = new[] { "white" }
-				}, i => i
-				.Index("twitter")
-				.Id(2)
-				.Routing("user1")
+			{
+				Counter = 1,
+				Tags = new[] { "white" }
+			}, i => i
+			.Index("twitter")
+			.Id(2)
+			.Routing("user1")
 			);
 			// end::0ba0b2db24852abccb7c0fc1098d566e[]
 
