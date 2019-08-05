@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -14,6 +15,8 @@ namespace ExamplesGenerator
 {
 	public static class CSharpGenerator
 	{
+		private static readonly Regex Content = new Regex("\r?\n\r?\n|\r?\n(?=GET|PUT|POST|DELETE)");
+
 		public static void GenerateExamples(IList<Page> pages)
 		{
 			var workspace = new AdhocWorkspace();
@@ -123,9 +126,8 @@ namespace ExamplesGenerator
 
 		private static MethodDeclarationSyntax CreateMethodDeclaration(Example example)
 		{
-			var content = example.Content
-				.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
-
+			// split content by blank lines and lines that start with HTTP verbs
+			var content = Content.Split(example.Content);
 			var statements = new List<StatementSyntax>();
 
 			for (var i = 0; i < content.Length; i++)
