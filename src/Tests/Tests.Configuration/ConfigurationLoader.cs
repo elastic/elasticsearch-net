@@ -65,10 +65,15 @@ namespace Tests.Configuration
 		{
 			do
 			{
+				// at the top of the source directory, traverse down
+				if (directoryInfo.Name == "src")
+					directoryInfo = new DirectoryInfo(Path.Combine(directoryInfo.FullName, "Tests"));
+
 				var yamlConfigDir = Path.Combine(directoryInfo.FullName, "Tests.Configuration");
 				if (directoryInfo.Name == "Tests" && Directory.Exists(yamlConfigDir))
 					return new DirectoryInfo(yamlConfigDir);
 
+				// traverse up
 				directoryInfo = directoryInfo.Parent;
 			} while (directoryInfo != null);
 			return null;

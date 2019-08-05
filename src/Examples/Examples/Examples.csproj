@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Library.build.props" />
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
+        <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Tests\Tests.Core\Tests.Core.csproj" />
-      <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
       <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+      <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
     </ItemGroup>
 </Project>
