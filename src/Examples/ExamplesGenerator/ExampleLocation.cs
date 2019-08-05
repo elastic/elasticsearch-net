@@ -1,6 +1,7 @@
 using System.IO;
 
-namespace ExamplesGenerator {
+namespace ExamplesGenerator
+{
 	public static class ExampleLocation
 	{
 		private static string _root;

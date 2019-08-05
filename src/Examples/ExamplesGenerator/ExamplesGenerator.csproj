@@ -5,6 +5,7 @@
         <TargetFramework>netcoreapp2.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.6.0" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.2.0" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.2.0" />
       <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

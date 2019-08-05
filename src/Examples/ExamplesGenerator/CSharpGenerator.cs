@@ -13,11 +13,11 @@ using static Microsoft.CodeAnalysis.LanguageNames;
 
 namespace ExamplesGenerator
 {
-	public static class CSharpGenerator
+	internal static class CSharpGenerator
 	{
 		private static readonly Regex Content = new Regex("\r?\n\r?\n|\r?\n(?=GET|PUT|POST|DELETE)");
 
-		public static void GenerateExamples(IList<Page> pages)
+		public static void GenerateExampleClasses(IList<Page> pages)
 		{
 			var workspace = new AdhocWorkspace();
 			workspace.Options = workspace.Options

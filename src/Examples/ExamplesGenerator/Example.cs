@@ -31,7 +31,7 @@ namespace ExamplesGenerator
 
 		public string Hash { get; }
 
-		public List<Language> Languages { get; set; } = new List<Language>();
+		public List<Language> Languages { get; } = new List<Language>();
 
 		public int LineNumber { get; }
 

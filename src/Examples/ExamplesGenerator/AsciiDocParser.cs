@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ExamplesGenerator {
-	public static class AsciiDocParser
+namespace ExamplesGenerator
+{
+	internal static class AsciiDocParser
 	{
 		public static List<Page> ParsePages(string path)
 		{
