@@ -28,12 +28,14 @@ namespace Elasticsearch.Net.Specification.SqlApi
 	public class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for Query <para>Execute SQL</para></summary>
 	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -46,5 +48,6 @@ namespace Elasticsearch.Net.Specification.SqlApi
 	public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 }

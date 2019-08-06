@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories
 		{
@@ -40,6 +41,7 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	public class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Specify timeout for watch write operation</summary>
 		public TimeSpan MasterTimeout
 		{

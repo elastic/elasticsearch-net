@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -82,6 +83,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
@@ -143,6 +145,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatCountRequestParameters : RequestParameters<CatCountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -197,6 +200,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
@@ -265,6 +269,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -326,6 +331,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return help information</summary>
 		public bool? Help
 		{
@@ -345,6 +351,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
@@ -420,6 +427,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -474,6 +482,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -528,6 +537,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -589,6 +599,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -643,6 +654,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatPluginsRequestParameters : RequestParameters<CatPluginsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -697,6 +709,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
@@ -751,6 +764,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -805,6 +819,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
@@ -852,6 +867,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
@@ -913,6 +929,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -967,6 +984,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public string[] Actions
 		{
@@ -1038,6 +1056,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -1092,6 +1111,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatThreadPoolRequestParameters : RequestParameters<CatThreadPoolRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{

@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 	public class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
 		public bool? IgnoreIdleThreads
 		{
@@ -75,6 +76,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 	public class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -94,6 +96,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 	public class ReloadSecureSettingsRequestParameters : RequestParameters<ReloadSecureSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
@@ -106,6 +109,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 	public class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public string[] CompletionFields
 		{
@@ -167,6 +171,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 	public class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
