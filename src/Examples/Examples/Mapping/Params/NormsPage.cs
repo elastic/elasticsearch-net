@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class NormsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::f9d15004aba50331c595837c4546aeef[]

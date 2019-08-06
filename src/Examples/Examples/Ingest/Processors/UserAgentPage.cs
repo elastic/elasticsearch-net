@@ -5,8 +5,7 @@ namespace Examples.Ingest.Processors
 {
 	public class UserAgentPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line27()
 		{
 			// tag::9c504b5c486d9df689a22b11412e61a3[]

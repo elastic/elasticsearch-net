@@ -5,8 +5,7 @@ namespace Examples.Mapping.Dynamic
 {
 	public class TemplatesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::bb33e638fdeded7d721d9bbac2305fda[]
@@ -52,8 +51,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line125()
 		{
 			// tag::4f54b88e05c7a62901062e9e0ed13e5a[]
@@ -87,8 +85,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line179()
 		{
 			// tag::0b91c082258ce623cc716b679aace653[]
@@ -125,8 +122,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line215()
 		{
 			// tag::be51ed37c8425d281a8153abe56b04cb[]
@@ -146,8 +142,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line241()
 		{
 			// tag::6873971eb4e4577d76d0a5bd7cd15ef9[]
@@ -190,8 +185,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line293()
 		{
 			// tag::87f85bb49d18f73d0eed0b704e05eb90[]
@@ -215,8 +209,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line322()
 		{
 			// tag::1a59fa2708ccb3a24c71e8306b81f17f[]
@@ -240,8 +233,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line348()
 		{
 			// tag::3e60c0b29bd3931927e6f2ee7d2ed0ef[]
@@ -272,8 +264,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line387()
 		{
 			// tag::9a91f7d0bf52d6c582c62daef5c9d040[]

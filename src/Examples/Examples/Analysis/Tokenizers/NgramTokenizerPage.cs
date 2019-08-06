@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class NgramTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::39963032d423e2f20f53c4621b6ca3c6[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line211()
 		{
 			// tag::9efcafd1f28490fd658d88df7d93c66c[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class IdFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::3abdbdc99e203e87332d387cfbdeafaa[]

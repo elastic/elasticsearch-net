@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class GeohashgridAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::71af0fec59d37477c850d47730d3f286[]
@@ -55,8 +54,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line94()
 		{
 			// tag::9f0c6a8c6381bb0cb81a3070dd2bf2f2[]
@@ -88,8 +86,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line126()
 		{
 			// tag::36f61e038014f92466cd83d7b007e16b[]

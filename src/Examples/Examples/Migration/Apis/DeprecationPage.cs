@@ -5,8 +5,7 @@ namespace Examples.Migration.Apis
 {
 	public class DeprecationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::135819da3a4bde684357c57a49ad8e85[]
@@ -16,8 +15,7 @@ namespace Examples.Migration.Apis
 			response0.MatchesExample(@"GET /_migration/deprecations");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line114()
 		{
 			// tag::69f8b0f2a9ba47e11f363d788cee9d6d[]

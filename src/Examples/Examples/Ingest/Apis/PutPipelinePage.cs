@@ -5,8 +5,7 @@ namespace Examples.Ingest.Apis
 {
 	public class PutPipelinePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::e7e28812b86c5257bf48931d131409f0[]

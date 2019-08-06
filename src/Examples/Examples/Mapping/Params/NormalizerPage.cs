@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class NormalizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::4cd40113e0fc90c37976f28d7e4a2327[]
@@ -84,8 +83,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line124()
 		{
 			// tag::6f842819c50e8490080dd085e0c6aca3[]

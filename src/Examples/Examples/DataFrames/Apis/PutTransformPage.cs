@@ -5,8 +5,7 @@ namespace Examples.DataFrames.Apis
 {
 	public class PutTransformPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line143()
 		{
 			// tag::6e2c969573581cc1c4ae83f59ef8d2f0[]

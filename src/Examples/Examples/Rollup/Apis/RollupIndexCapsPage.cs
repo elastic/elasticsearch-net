@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class RollupIndexCapsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::2d20c42e9664febeccaff61581605cbe[]
@@ -42,8 +41,7 @@ namespace Examples.Rollup.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line82()
 		{
 			// tag::73d1a6c5ef90b7e35d43a0bfdc1e158d[]
@@ -53,8 +51,7 @@ namespace Examples.Rollup.Apis
 			response0.MatchesExample(@"GET /sensor_rollup/_rollup/data");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line155()
 		{
 			// tag::642161d70dacf7d153767d37d3726838[]

@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class RangeQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::97bcd92ef148312d41e69f0d18284327[]
@@ -27,8 +26,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line153()
 		{
 			// tag::4466d410e06712c63328de4db249e6da[]
@@ -48,8 +46,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line216()
 		{
 			// tag::5d13a71fa7fda73b15111803b1c7cfd3[]

@@ -5,8 +5,7 @@ namespace Examples.Indices.Apis
 {
 	public class ReloadAnalyzersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line15()
 		{
 			// tag::fd25ae98c5c8be66fdd5e6ef32815ff5[]
@@ -46,8 +45,7 @@ namespace Examples.Indices.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line68()
 		{
 			// tag::7554da505cc27f6bd0d028b66e85f4a5[]

@@ -5,8 +5,7 @@ namespace Examples.HowTo
 {
 	public class SearchSpeedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line52()
 		{
 			// tag::12facf3617a41551ce2f0c4d005cb1c7[]
@@ -33,8 +32,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line87()
 		{
 			// tag::a008f42379930edc354b4074e0a33344[]
@@ -48,8 +46,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line99()
 		{
 			// tag::a0a7557bb7e2aff7918557cd648f41af[]
@@ -73,8 +70,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line123()
 		{
 			// tag::a4bae4d956bc0a663f42cfec36bf8e0b[]
@@ -102,8 +98,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line148()
 		{
 			// tag::7dedb148ff74912de81b8f8275f0d7f3[]
@@ -122,8 +117,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line192()
 		{
 			// tag::102c7de25d13c87cf28839ada9f63c95[]
@@ -154,8 +148,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line219()
 		{
 			// tag::17dd67a66c49f7eb618dd17430e48dfa[]
@@ -179,8 +172,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line253()
 		{
 			// tag::abc7a670a47516b58b6b07d7497b140c[]
@@ -226,8 +218,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line326()
 		{
 			// tag::971c7a36ee79f2b3aa82c64ea338de70[]

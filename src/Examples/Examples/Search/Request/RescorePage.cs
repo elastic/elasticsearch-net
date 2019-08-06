@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class RescorePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::829a40d484c778a8c58340c7bf09e1d8[]
@@ -41,8 +40,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line91()
 		{
 			// tag::7d7855afd9882a665bbabda810f94f61[]

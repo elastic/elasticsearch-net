@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class MatchBoolPrefixQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::79c7e8a98c47fad3e96c654d34aa049a[]
@@ -23,8 +22,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::effc6b4784aca12691de5d5782c0384b[]
@@ -45,8 +43,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line61()
 		{
 			// tag::953aab6cbd12a4f034cf02bf34d62a72[]

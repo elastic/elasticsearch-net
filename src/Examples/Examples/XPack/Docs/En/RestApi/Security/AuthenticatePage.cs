@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class AuthenticatePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line30()
 		{
 			// tag::55f4a15b84b724b9fbf2efd29a4da120[]

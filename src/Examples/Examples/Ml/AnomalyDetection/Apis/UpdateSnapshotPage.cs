@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class UpdateSnapshotPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::3b9c54604535d97e8368d47148aecc6f[]

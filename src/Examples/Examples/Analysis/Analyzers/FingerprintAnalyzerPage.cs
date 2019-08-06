@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class FingerprintAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::6490d89a4e43cac5e6b9bc19840d5478[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line88()
 		{
 			// tag::2659ccd414867f3a5ee262c9b7cd3f1d[]
@@ -51,8 +49,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::ce725697f93b3eebb3a266314568565a[]

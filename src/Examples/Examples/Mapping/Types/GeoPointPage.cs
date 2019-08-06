@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class GeoPointPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::f1b512400f2f7ca0b0f2e4bb45a8b2fe[]

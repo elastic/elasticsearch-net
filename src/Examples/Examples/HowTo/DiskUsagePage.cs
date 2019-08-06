@@ -5,8 +5,7 @@ namespace Examples.HowTo
 {
 	public class DiskUsagePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::e273060a675c959fd5f3cde27c8aff07[]
@@ -26,8 +25,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::c8568f4f02f75db9afd669880db98a16[]
@@ -47,8 +45,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line56()
 		{
 			// tag::1a5cd30017368fe4888454a13c6e8561[]
@@ -68,8 +65,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line77()
 		{
 			// tag::ae3ae58724c413734b67a90a6ddb319f[]
@@ -90,8 +86,7 @@ namespace Examples.HowTo
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::597d456edfcb3d410954a3e9b5babf9a[]

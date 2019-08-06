@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class MappingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line141()
 		{
 			// tag::b311b42b7dcc69821df1f77bfaf2d50d[]

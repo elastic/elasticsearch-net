@@ -5,8 +5,7 @@ namespace Examples.DataFrames.Apis
 {
 	public class GetTransformStatsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line105()
 		{
 			// tag::148bef7f7b2a9c1c2011e4d018c4ae50[]
@@ -16,8 +15,7 @@ namespace Examples.DataFrames.Apis
 			response0.MatchesExample(@"GET _data_frame/transforms/_stats?from=5&size=10");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line115()
 		{
 			// tag::d4a2862678b5ef99ec596de1927c3944[]

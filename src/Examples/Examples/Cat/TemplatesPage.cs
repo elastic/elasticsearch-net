@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class TemplatesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::289e6033c96f931844770114113cad6a[]

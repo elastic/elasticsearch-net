@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class FlattenedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::8aa74aee3dcf4b34028e4c5e1c1ed27b[]
@@ -43,8 +42,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line76()
 		{
 			// tag::169b39bb889ecd47541bed3e48725488[]
@@ -59,8 +57,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line88()
 		{
 			// tag::2f4a55dfeba8851b306ef9c1b216ef54[]

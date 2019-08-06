@@ -5,8 +5,7 @@ namespace Examples.Vectors
 {
 	public class VectorFunctionsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::d5fe26f952e93d08d427678ffdfdd2cd[]
@@ -49,8 +48,7 @@ namespace Examples.Vectors
 			response3.MatchesExample(@"");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::5ed03b6c95b31d2915c584aacd782eb6[]
@@ -75,8 +73,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::84502fcc20d08a68002cb004be7a2b20[]
@@ -101,8 +98,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::52ade18507911d36cb875daf9726412c[]
@@ -130,8 +126,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line139()
 		{
 			// tag::a33958dc12dfd4364d75c499652be433[]
@@ -159,8 +154,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line167()
 		{
 			// tag::0bb1457dfc484885e8809fc02536b523[]
@@ -185,8 +179,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line200()
 		{
 			// tag::08843af9fc77104ef77d8c51a2b7c296[]
@@ -211,8 +204,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line225()
 		{
 			// tag::24b552802661be085433cf389ce80a40[]
@@ -237,8 +229,7 @@ namespace Examples.Vectors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line249()
 		{
 			// tag::d9e8b9435e3a07b5d154b842a90c3d85[]

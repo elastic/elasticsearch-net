@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class MissingAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::09dd80a4b937315d4a1aa629b22f9332[]

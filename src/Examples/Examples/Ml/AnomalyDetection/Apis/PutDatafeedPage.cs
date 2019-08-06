@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class PutDatafeedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line112()
 		{
 			// tag::23067c5e8da958fa4d914f3b5c9bf607[]

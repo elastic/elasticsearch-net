@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetJobPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::29278b6d24dd544da186019301dd4f40[]

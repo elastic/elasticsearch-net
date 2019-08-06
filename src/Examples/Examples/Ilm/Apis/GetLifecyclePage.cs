@@ -5,8 +5,7 @@ namespace Examples.Ilm.Apis
 {
 	public class GetLifecyclePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::2e7f4b9be999422a12abb680572b13c8[]
@@ -16,8 +15,7 @@ namespace Examples.Ilm.Apis
 			response0.MatchesExample(@"GET _ilm/policy/my_policy");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line81()
 		{
 			// tag::c4c3838c118e037f476ff6eca050fddd[]

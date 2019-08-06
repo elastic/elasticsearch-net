@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class CreateIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::a9f021477e6c3d78a7907fbd96e16b5f[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"PUT twitter");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::be844338bc330b6d3939bac6ee57bbba[]
@@ -35,8 +33,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::15377f76164fd88309f58097c7125ff2[]
@@ -52,8 +49,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line84()
 		{
 			// tag::eaa809dc19ac4e9a4166ed46c6450c36[]
@@ -73,8 +69,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::ab8a4d5bd020a6923446a9bd9e402d16[]
@@ -95,8 +90,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::f887b972ee522e0497f4b5289d33f764[]
@@ -111,8 +105,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line174()
 		{
 			// tag::ef3fb50903876e4497249165ec493bb5[]

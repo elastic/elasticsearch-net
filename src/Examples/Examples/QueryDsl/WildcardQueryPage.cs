@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class WildcardQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::d31062ff8c015387889fed4ad86fd914[]

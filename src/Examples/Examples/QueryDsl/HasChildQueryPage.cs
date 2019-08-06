@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class HasChildQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line31()
 		{
 			// tag::10239a59784c3069e0d9399d3f9a7008[]
@@ -32,8 +31,7 @@ namespace Examples.QueryDsl
 			response1.MatchesExample(@"");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::a204ff3396082b32175371c7ed8b9394[]
@@ -56,8 +54,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line143()
 		{
 			// tag::d7b459941dc32d790ade80a0f5712560[]

@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class NestedQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line23()
 		{
 			// tag::ae57d3aa9075aaab34bda7655cdafabb[]
@@ -29,8 +28,7 @@ namespace Examples.QueryDsl
 			response1.MatchesExample(@"");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::f9abf6c518e9ec793218c3696f5f2f8f[]

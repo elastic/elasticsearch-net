@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class SignificanttextAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::68f0c7c77b65bfdded348bbd397831b7[]
@@ -33,8 +32,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::d44ecc69090c0b2bc08a6cbc2e3467c5[]
@@ -60,8 +58,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line219()
 		{
 			// tag::805f5550b90e75aa5cc82b90d8c6c242[]
@@ -93,8 +90,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line422()
 		{
 			// tag::5f4cab20671ebac9233812f9e35d9c8b[]
@@ -121,8 +117,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line461()
 		{
 			// tag::b3e6d6f7f6d65d1efb60ca7503a20b16[]

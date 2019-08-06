@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class DeleteExpiredDataPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::f2f09bc4723805c7aaabdc83c55100fa[]

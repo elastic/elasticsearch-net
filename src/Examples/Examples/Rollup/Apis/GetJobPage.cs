@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class GetJobPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::d095b422d9803c02b62c01adffc85376[]
@@ -16,8 +15,7 @@ namespace Examples.Rollup.Apis
 			response0.MatchesExample(@"GET _rollup/job/sensor");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line141()
 		{
 			// tag::6d13e0721a7aac00adcdc5fe77198300[]

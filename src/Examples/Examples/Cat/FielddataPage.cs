@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class FielddataPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line40()
 		{
 			// tag::b26ff669b3c88fb0872fa0a923972f54[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/fielddata?v");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line60()
 		{
 			// tag::973f2d7fbff9f310b21108b31d7ad413[]
@@ -27,8 +25,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/fielddata?v&fields=body");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line79()
 		{
 			// tag::62daf8e41b9e984d18d6cc51f247c7ad[]

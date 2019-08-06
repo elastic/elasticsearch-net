@@ -79,11 +79,11 @@ namespace Examples.Docs
 		{
 			// tag::d718b63cf1b6591a1d59a0cf4fd995eb[]
 			var indexResponse = client.Index(new Tweet
-				{
-					User = "kimchy",
-					PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-					Message = "trying out Elasticsearch"
-				},
+			{
+				User = "kimchy",
+				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+				Message = "trying out Elasticsearch"
+			},
 				i => i
 					.Index("twitter")
 					.Id(1)
@@ -128,11 +128,11 @@ namespace Examples.Docs
 		{
 			// tag::36818c6d9f434d387819c30bd9addb14[]
 			var indexResponse = client.Index(new Tweet
-				{
-					User = "kimchy",
-					PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-					Message = "trying out Elasticsearch"
-				},
+			{
+				User = "kimchy",
+				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+				Message = "trying out Elasticsearch"
+			},
 				i => i
 					.Index("twitter")
 			);
@@ -151,11 +151,11 @@ namespace Examples.Docs
 		{
 			// tag::625dc94df1f9affb49a082fd99d41620[]
 			var indexResponse = client.Index(new Tweet
-				{
-					User = "kimchy",
-					PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-					Message = "trying out Elasticsearch"
-				},
+			{
+				User = "kimchy",
+				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+				Message = "trying out Elasticsearch"
+			},
 				i => i
 					.Index("twitter")
 					.Routing("kimchy")
@@ -175,11 +175,11 @@ namespace Examples.Docs
 		{
 			// tag::b918d6b798da673a33e49b94f61dcdc0[]
 			var indexResponse = client.Index(new Tweet
-				{
-					User = "kimchy",
-					PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-					Message = "trying out Elasticsearch"
-				},
+			{
+				User = "kimchy",
+				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+				Message = "trying out Elasticsearch"
+			},
 				i => i
 					.Index("twitter")
 					.Id(1)
@@ -200,9 +200,9 @@ namespace Examples.Docs
 		{
 			// tag::1f336ecc62480c1d56351cc2f82d0d08[]
 			var indexResponse = client.Index(new Tweet
-				{
-					Message = "elasticsearch now has versioning support, double cool!"
-				},
+			{
+				Message = "elasticsearch now has versioning support, double cool!"
+			},
 				i => i
 					.Index("twitter")
 					.Id(1)

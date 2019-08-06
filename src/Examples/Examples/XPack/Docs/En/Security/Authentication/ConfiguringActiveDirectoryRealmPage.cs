@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringActiveDirectoryRealmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line188()
 		{
 			// tag::21e95d29bc37deb5689a654aa323b4ba[]
@@ -23,8 +22,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line202()
 		{
 			// tag::bd0d30a7683037e1ebadd163514765d4[]

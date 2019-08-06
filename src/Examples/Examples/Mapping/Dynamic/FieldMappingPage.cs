@@ -5,8 +5,7 @@ namespace Examples.Mapping.Dynamic
 {
 	public class FieldMappingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::4909bf2f9e86b4bdd6af1d0b13c0015d[]
@@ -23,8 +22,7 @@ namespace Examples.Mapping.Dynamic
 			response1.MatchesExample(@"GET my_index/_mapping \<1>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line68()
 		{
 			// tag::95fa846e5d0a75210f9ad1fa1acfa8f3[]
@@ -46,8 +44,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line91()
 		{
 			// tag::4eae628c9aaa259f80711c6e9cc6fd25[]
@@ -69,8 +66,7 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line117()
 		{
 			// tag::fa3cd4ffaec8273656a328ae29f32c65[]

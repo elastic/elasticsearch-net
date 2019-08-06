@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class ReverseNestedAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::817891bd13da04e5981a797247601145[]
@@ -30,8 +29,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::aee26dd62fbb6d614a0798f3344c0598[]

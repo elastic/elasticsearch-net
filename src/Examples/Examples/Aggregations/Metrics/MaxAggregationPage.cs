@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class MaxAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::9498a707be49e14dad801db6b6824e34[]
@@ -21,8 +20,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line52()
 		{
 			// tag::736fc5448b66962ceef1e6d5948ef691[]
@@ -43,8 +41,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line73()
 		{
 			// tag::b5e782e309a2a10db272414e8483d8dc[]
@@ -68,8 +65,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line101()
 		{
 			// tag::23fdba37454d6d7abf6bfbb4fd01692f[]
@@ -94,8 +90,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line129()
 		{
 			// tag::41518c094db4a5b03cca3b21497f79cf[]

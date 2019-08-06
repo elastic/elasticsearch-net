@@ -5,8 +5,7 @@ namespace Examples.Aggregations
 {
 	public class MiscPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::0827fcf75228b6d0206a1ffe6bf7d263[]
@@ -26,8 +25,7 @@ namespace Examples.Aggregations
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::2d39331333f64fcc31fa298ac59b161f[]
@@ -50,8 +48,7 @@ namespace Examples.Aggregations
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line98()
 		{
 			// tag::ea447f43ebd5f72c65de699904474d0d[]

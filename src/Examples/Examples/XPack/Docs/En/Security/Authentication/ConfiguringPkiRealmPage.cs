@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringPkiRealmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line140()
 		{
 			// tag::70bbe14bc4d5a5d58e81ab2b02408817[]

@@ -5,8 +5,7 @@ namespace Examples.Setup
 {
 	public class SecureSettingsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line108()
 		{
 			// tag::6e87271a5a10dbb8d27b25c7dbfa868a[]

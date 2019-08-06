@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class ApiConventionsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::978088f989d45dd09339582e9cbc60e0[]
@@ -27,8 +26,7 @@ namespace Examples.Root
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::a34d70d7022eb4ba48909d440c80390f[]
@@ -49,8 +47,7 @@ namespace Examples.Root
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line239()
 		{
 			// tag::09dbd90c5e22ea4a17b4cf9aa72e08ae[]
@@ -60,8 +57,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_search?q=elasticsearch&filter_path=took,hits.hits._id,hits.hits._score");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line268()
 		{
 			// tag::1dbb8cf17fbc45c87c7d2f75f15f9778[]
@@ -71,8 +67,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_cluster/state?filter_path=metadata.indices.*.stat*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line293()
 		{
 			// tag::1252fa45847edba5ec2b2f33da70ec5b[]
@@ -82,8 +77,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_cluster/state?filter_path=routing_table.indices.**.state");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line320()
 		{
 			// tag::621665fdbd7fc103c09bfeed28b67b1a[]
@@ -93,8 +87,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_count?filter_path=-_shards");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line341()
 		{
 			// tag::1e18a67caf8f06ff2710ec4a8b30f625[]
@@ -104,8 +97,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_cluster/state?filter_path=metadata.indices.*.state,-metadata.indices.logstash-*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line370()
 		{
 			// tag::f2adeb0e060827e257551ea69c7d28bd[]
@@ -130,8 +122,7 @@ namespace Examples.Root
 			response3.MatchesExample(@"GET /_search?filter_path=hits.hits._source&_source=title&sort=rating:desc");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line405()
 		{
 			// tag::b9a153725b28fdd0a5aabd7f17a8c2d7[]
@@ -141,8 +132,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET twitter/_settings?flat_settings=true");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line436()
 		{
 			// tag::5925c23a173a63bdb30b458248d1df76[]
@@ -152,8 +142,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET twitter/_settings?flat_settings=false");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line601()
 		{
 			// tag::a6f8636b03cc5f677b7d89e750328612[]
@@ -163,8 +152,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"POST /twitter/_search?size=surprise_me");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line635()
 		{
 			// tag::6d1e75312a28a5ba23837abf768f2510[]

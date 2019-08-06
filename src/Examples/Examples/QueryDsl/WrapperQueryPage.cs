@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class WrapperQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::6159a7d56e93e14a31fc06644c803a38[]

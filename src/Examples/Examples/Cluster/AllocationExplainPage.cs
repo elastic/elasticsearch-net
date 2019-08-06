@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class AllocationExplainPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::e4cd381f35dcaa151dd93cf259e50ae6[]
@@ -16,8 +15,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"PUT /myindex");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
 			// tag::2663038cfc46b106edaef607d553c99c[]
@@ -32,8 +30,7 @@ namespace Examples.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line48()
 		{
 			// tag::75fb2de2b47c564833ab14049c295384[]
@@ -49,8 +46,7 @@ namespace Examples.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::45803e6cb9fee2b430dcf63d50fb7a2b[]
@@ -60,8 +56,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"GET /_cluster/allocation/explain");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line145()
 		{
 			// tag::fb99aaf2e89e70c96c2c79c2ce7a36f1[]
@@ -71,8 +66,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"GET /_cluster/allocation/explain?include_disk_info=true");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line154()
 		{
 			// tag::681419ddc44c9f7914f88be834ae2b44[]

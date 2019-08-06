@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class IndicesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::073539a7e38be3cdf13008330b6a536a[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/indices/twi*?v&s=index");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line53()
 		{
 			// tag::bef41d7201051db3bc394b164c7130ae[]
@@ -27,8 +25,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/indices?v&health=yellow");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::79cba7619b42c0068b90ff72a3e45153[]
@@ -38,8 +35,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/indices?v&s=docs.count:desc");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::d5a849ddac8d7678d8460eef96e03c19[]
@@ -49,8 +45,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/indices/twitter?pri&v&h=health,index,pri,rep,docs.count,mt");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::402de4d169bc4514e8d782bc06ac1c11[]

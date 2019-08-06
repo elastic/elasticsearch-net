@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class GeocentroidAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::d0cf6057bc87042819a7ac961d1b2273[]
@@ -54,8 +53,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line76()
 		{
 			// tag::6dec421bf327ecaf189109d9aaa35919[]

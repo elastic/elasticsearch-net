@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class PendingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::aa814309ad5f1630886ba75255b444f5[]

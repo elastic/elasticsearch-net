@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class ExistsQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::3342c69b2c2303247217532956fcce85[]
@@ -23,8 +22,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::43af86de5e49aa06070092fffc138208[]

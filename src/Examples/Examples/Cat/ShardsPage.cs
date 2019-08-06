@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class ShardsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::7e126e2751311db60cfcbb22c9c41caa[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET _cat/shards");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::e42e92050dd1c20262ce9e38f4b42ba0[]
@@ -27,8 +25,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET _cat/shards/twitt*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line107()
 		{
 			// tag::25c0e66a433a0cd596e0641b752ff6d7[]

@@ -5,8 +5,7 @@ namespace Examples.Ilm.Apis
 {
 	public class StartPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::72ae3851160fcf02b8e2cdfd4e57d238[]
@@ -16,8 +15,7 @@ namespace Examples.Ilm.Apis
 			response0.MatchesExample(@"POST _ilm/start");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line81()
 		{
 			// tag::bc5fcc40c29087a0df7b5405bb70de5c[]

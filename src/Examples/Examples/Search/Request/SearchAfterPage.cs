@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class SearchAfterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::402ee4bf8e2e386d5f9100fdaf13a6d6[]
@@ -28,8 +27,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::525ec32997125d401f9c128ca450cefa[]

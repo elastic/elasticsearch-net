@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class ConditionTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::59fd7082698a6b12d028105456016a66[]
@@ -37,8 +36,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::e20493a20d3992a97238b87c6930f08d[]

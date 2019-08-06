@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class MatchAllQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::09d617863a103c82fb4101e6165ea7fe[]
@@ -21,8 +20,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::75330ec1305d2beb0e2f34d2195464e2[]
@@ -37,8 +35,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line41()
 		{
 			// tag::81c9aa2678d6166a9662ddf2c011a6a5[]

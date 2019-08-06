@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class UpdatePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::381fced1882ca8337143e6bb180a5715[]
@@ -20,8 +19,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line33()
 		{
 			// tag::96de5703ba0bd43fd4ac239ec5408542[]
@@ -40,8 +38,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line52()
 		{
 			// tag::4cd246e5c4c035a2cd4081ae9a3d54e5[]
@@ -60,8 +57,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line74()
 		{
 			// tag::ac544eb247a29ca42aab13826ca88561[]
@@ -80,8 +76,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::eb30ba547e4a7b8f54f33ab259aca523[]
@@ -94,8 +89,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line108()
 		{
 			// tag::58df61acbfb15b8ef0aaa18b81ae98a6[]
@@ -108,8 +102,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line122()
 		{
 			// tag::98aeb275f829b5f7b8eb2147701565ff[]
@@ -128,8 +121,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line149()
 		{
 			// tag::38c1d0f6668e9563c0827f839f9fa505[]
@@ -144,8 +136,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line207()
 		{
 			// tag::015294a400986295039e52ebc62033be[]
@@ -161,8 +152,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line228()
 		{
 			// tag::0a958e486ede3f519d48431ab689eded[]
@@ -184,8 +174,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line255()
 		{
 			// tag::f9636d7ef1a45be4f36418c875cf6bef[]
@@ -209,8 +198,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line285()
 		{
 			// tag::7cac05cb589f1614fd5b8589153bef06[]

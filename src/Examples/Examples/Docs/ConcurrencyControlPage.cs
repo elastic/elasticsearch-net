@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class ConcurrencyControlPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::cffc8b207f354beb6d76c8d334cab677[]
@@ -20,8 +19,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line62()
 		{
 			// tag::278d5bfa1a01f91d5c84679ef1bca390[]
@@ -31,8 +29,7 @@ namespace Examples.Docs
 			response0.MatchesExample(@"GET products/_doc/1567");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line103()
 		{
 			// tag::ac24941027452bdafe82b4bd7edf9000[]

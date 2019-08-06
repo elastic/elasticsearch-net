@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class SearchAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::60677e5144fed659e8417b7fa9964285[]

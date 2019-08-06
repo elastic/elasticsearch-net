@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class IndexBoostPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::393c6b7a2e8c3381530c41ff2f7c4991[]
@@ -22,8 +21,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line26()
 		{
 			// tag::fb8a4322825d26c4e7b41bd763b3d392[]

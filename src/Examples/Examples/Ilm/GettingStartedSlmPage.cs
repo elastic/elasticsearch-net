@@ -5,8 +5,7 @@ namespace Examples.Ilm
 {
 	public class GettingStartedSlmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line23()
 		{
 			// tag::718c2afdece55a7de338e668438eac2d[]
@@ -25,8 +24,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::ef76d0e4cdc2881c161a5557a98a3446[]
@@ -45,8 +43,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line68()
 		{
 			// tag::89b72dd7f747f6297c2b089e8bc807be[]
@@ -62,8 +59,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line90()
 		{
 			// tag::a5bc83a268ea9c8b4368beb6522b5336[]
@@ -81,8 +77,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line138()
 		{
 			// tag::5bf4b2d603221fb1df4adb34829e1164[]
@@ -92,8 +87,7 @@ namespace Examples.Ilm
 			response0.MatchesExample(@"PUT /_slm/policy/nightly-snapshots/_execute");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::f1b545d3c3eeedf8ae09c56070c26053[]

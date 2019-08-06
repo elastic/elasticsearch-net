@@ -5,8 +5,7 @@ namespace Examples.Monitoring
 {
 	public class ConfiguringMetricbeatPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
 			// tag::fb2b8d642e16132eebcff4f8b6d592d1[]
@@ -25,8 +24,7 @@ namespace Examples.Monitoring
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line198()
 		{
 			// tag::519603821dc5b883fc2cf50e3d164084[]

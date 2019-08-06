@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class LowercaseTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::a99bc141066ef673e35f306157750ec9[]

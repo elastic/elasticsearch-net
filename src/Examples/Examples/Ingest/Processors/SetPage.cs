@@ -5,8 +5,7 @@ namespace Examples.Ingest.Processors
 {
 	public class SetPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
 			// tag::366b29ef910f12c7fbced35f39000953[]

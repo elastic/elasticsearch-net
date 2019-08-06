@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class StemmerTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::1ca618e7d72ec73c1064fa6eae3086d1[]

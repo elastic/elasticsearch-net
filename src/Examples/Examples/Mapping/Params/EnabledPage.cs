@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class EnabledPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::b0b00ab5b673d747d36deabbc4359859[]
@@ -54,8 +53,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::d31274ad53af4baa23ec3e5000783cbd[]
@@ -91,8 +89,7 @@ namespace Examples.Mapping.Params
 			response3.MatchesExample(@"GET my_index/_mapping \<3>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line98()
 		{
 			// tag::e93514654ea0c7c9f15cda0eed61a292[]

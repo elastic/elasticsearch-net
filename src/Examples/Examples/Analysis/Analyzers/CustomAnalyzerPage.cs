@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class CustomAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::ef2ea91fb3fa26c740bca994af85e150[]
@@ -43,8 +42,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line159()
 		{
 			// tag::c729a5ef7a671154bb82e308d915cf9f[]

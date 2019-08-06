@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class IdsQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::84cdb6a7a5464af7ef95b3d546883870[]

@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetBucketPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line93()
 		{
 			// tag::2c7fce4025e8e429e1ae8d50f5eb4b88[]

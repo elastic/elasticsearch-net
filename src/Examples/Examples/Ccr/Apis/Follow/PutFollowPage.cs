@@ -5,8 +5,7 @@ namespace Examples.Ccr.Apis.Follow
 {
 	public class PutFollowPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line26()
 		{
 			// tag::73646c12ad33a813ab2280f1dc83500e[]
@@ -20,8 +19,7 @@ namespace Examples.Ccr.Apis.Follow
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line91()
 		{
 			// tag::c1f565c68d7bfce4a4251c7919444977[]

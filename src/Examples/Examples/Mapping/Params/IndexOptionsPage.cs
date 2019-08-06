@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class IndexOptionsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::3a24ebb542f657420fcd8fdf3f757ce6[]

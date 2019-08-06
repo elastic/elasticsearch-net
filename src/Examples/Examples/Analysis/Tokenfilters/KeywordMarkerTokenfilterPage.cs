@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class KeywordMarkerTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::863c221b28ae5e58d39bd8f138291949[]
@@ -40,8 +39,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::abcbf3c246c0d88831b875a601686e35[]
@@ -55,8 +53,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line102()
 		{
 			// tag::4ab8f55a8a45d53fb1676112379c212e[]

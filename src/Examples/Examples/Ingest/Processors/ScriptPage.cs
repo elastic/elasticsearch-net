@@ -5,8 +5,7 @@ namespace Examples.Ingest.Processors
 {
 	public class ScriptPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::c0c7926f235e6ccc7e9a827dcc85e602[]
@@ -29,8 +28,7 @@ namespace Examples.Ingest.Processors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::cdc55ad88de55999fe2d79fd4781918b[]

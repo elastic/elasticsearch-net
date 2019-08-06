@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class IgnoredFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::3fe0fb38f75d2a34fb1e6ac9bedbcdbc[]
@@ -23,8 +22,7 @@ namespace Examples.Mapping.Fields
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line34()
 		{
 			// tag::cf47cd4a39cd62a3ecad919e54a67bca[]

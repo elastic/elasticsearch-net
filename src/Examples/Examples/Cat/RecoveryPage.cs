@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class RecoveryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::0497361415e63295f2151b34818ad1ab[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET _cat/recovery?v");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::be9390dd19d724364b72bf081b3593d7[]
@@ -27,8 +25,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET _cat/recovery?v&h=i,s,t,ty,st,shost,thost,f,fp,b,bp");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::a213728fa704ca23c5983809332d3fb3[]

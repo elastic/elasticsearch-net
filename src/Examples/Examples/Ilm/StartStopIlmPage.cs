@@ -5,8 +5,7 @@ namespace Examples.Ilm
 {
 	public class StartStopIlmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::182df084f028479ecbe8d7648ddad892[]
@@ -16,8 +15,7 @@ namespace Examples.Ilm
 			response0.MatchesExample(@"GET _ilm/status");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::99e0bec31e49636bc0053ac66bc29352[]
@@ -29,8 +27,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::585a34ad79aee16678b37da785933ac8[]
@@ -40,8 +37,7 @@ namespace Examples.Ilm
 			response0.MatchesExample(@"POST _ilm/stop");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::8de1c258461189d65cba97dbc94600cd[]
@@ -53,8 +49,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line135()
 		{
 			// tag::db8563ab7fe37081a9bb66c91d65d673[]
@@ -66,8 +61,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line150()
 		{
 			// tag::72ae3851160fcf02b8e2cdfd4e57d238[]

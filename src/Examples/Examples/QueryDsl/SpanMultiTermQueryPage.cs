@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class SpanMultiTermQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::a22f79d01a4a625840072024feb60b46[]
@@ -25,8 +24,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::87ffa93d8de41fd0c3ea2f52378dab9c[]

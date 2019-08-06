@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class NodesInfoPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::baeaa5e7d4388eeb6350bca18d2a7712[]
@@ -20,8 +19,7 @@ namespace Examples.Cluster
 			response1.MatchesExample(@"GET /_nodes/nodeId1,nodeId2");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::3c4d7ef8422d2db423a8f23effcddaa1[]
@@ -67,8 +65,7 @@ namespace Examples.Cluster
 			response9.MatchesExample(@"GET /_nodes/nodeId1,nodeId2/_all");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line125()
 		{
 			// tag::68b64313bf89ec3f2c645da61999dbb4[]
@@ -78,8 +75,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"GET /_nodes/plugins");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line206()
 		{
 			// tag::0c464965126cc09e6812716a145991d4[]

@@ -5,8 +5,7 @@ namespace Examples.Upgrade
 {
 	public class ClusterRestartPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line27()
 		{
 			// tag::1cd3b9d65576a9212eef898eb3105758[]
@@ -21,8 +20,7 @@ namespace Examples.Upgrade
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
 			// tag::31b4eec9ac4c2c3fdfbaeee8d2f83513[]
@@ -32,8 +30,7 @@ namespace Examples.Upgrade
 			response0.MatchesExample(@"POST _flush/synced");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line60()
 		{
 			// tag::a21a7bf052b41f5b996dc58f7b69770f[]
@@ -43,8 +40,7 @@ namespace Examples.Upgrade
 			response0.MatchesExample(@"POST _ml/set_upgrade_mode?enabled=true");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line83()
 		{
 			// tag::c0a4b0c1c6eff14da8b152ceb19c1c31[]
@@ -58,8 +54,7 @@ namespace Examples.Upgrade
 			response1.MatchesExample(@"GET _cat/nodes");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line117()
 		{
 			// tag::45ef5156dbd2d3fd4fd22b8d99f7aad4[]
@@ -74,8 +69,7 @@ namespace Examples.Upgrade
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line137()
 		{
 			// tag::2d9b30acd6b5683f39d53494c0dd779c[]
@@ -89,8 +83,7 @@ namespace Examples.Upgrade
 			response1.MatchesExample(@"GET _cat/recovery");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line154()
 		{
 			// tag::3c5d5a5c34a62724942329658c688f5e[]

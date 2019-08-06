@@ -5,8 +5,7 @@ namespace Examples.Upgrade
 {
 	public class ReindexUpgradePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::acd65c045139fef38ef5cd20c8c1cfc1[]

@@ -5,8 +5,7 @@ namespace Examples.Modules.Discovery
 {
 	public class VotingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line31()
 		{
 			// tag::1605be45a5711d1929d6ad2d1ae0f797[]

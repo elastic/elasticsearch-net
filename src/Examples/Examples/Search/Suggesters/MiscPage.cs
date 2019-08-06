@@ -5,8 +5,7 @@ namespace Examples.Search.Suggesters
 {
 	public class MiscPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::e194e9cbe3eb2305f4f7cdda0cf529bd[]

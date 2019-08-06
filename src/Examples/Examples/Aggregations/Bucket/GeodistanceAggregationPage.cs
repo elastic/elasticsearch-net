@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class GeodistanceAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::9bf956f9d3f27bb7b4e5a03af84d5da5[]
@@ -60,8 +59,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line94()
 		{
 			// tag::c78b80d080a58090583228421ac1553d[]
@@ -87,8 +85,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line121()
 		{
 			// tag::a5736ad3638c238e3b15c9fdaa1f29f7[]
@@ -115,8 +112,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line149()
 		{
 			// tag::6b31f435607617d96b1dff3bf10c9d8c[]
@@ -142,8 +138,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line204()
 		{
 			// tag::c5afc3d716fdf8c0eefa4732e8a4b3ee[]

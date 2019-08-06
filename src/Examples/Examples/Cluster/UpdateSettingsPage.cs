@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class UpdateSettingsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::4029af36cb3f8202549017f7378803b4[]
@@ -16,8 +15,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"GET /_cluster/settings");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::37f4bd6dd220db648998fc340b3dfa69[]
@@ -32,8 +30,7 @@ namespace Examples.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line33()
 		{
 			// tag::8c05281b724106e703c05df661188c4f[]
@@ -48,8 +45,7 @@ namespace Examples.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line67()
 		{
 			// tag::1f25c9ef11f574f1ba0ad974bf653cd4[]
@@ -64,8 +60,7 @@ namespace Examples.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line93()
 		{
 			// tag::32496570a397852bece96f4da5d17a7e[]

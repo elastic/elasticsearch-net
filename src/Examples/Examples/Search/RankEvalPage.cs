@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class RankEvalPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::2a989679e4b71569e17e02db8865b685[]
@@ -31,8 +30,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line194()
 		{
 			// tag::351775a1f73e47025463bd937948f7b4[]
@@ -56,8 +54,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line233()
 		{
 			// tag::c4f013ff1a8b80c87c0265a91ed12648[]
@@ -81,8 +78,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line282()
 		{
 			// tag::12c4a9be9ffc26cdc0e9343d53c1fd5d[]

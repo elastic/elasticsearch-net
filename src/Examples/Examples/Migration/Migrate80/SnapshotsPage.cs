@@ -5,8 +5,7 @@ namespace Examples.Migration.Migrate80
 {
 	public class SnapshotsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::6458a2377155ecbdd2d3ebd0e1529201[]

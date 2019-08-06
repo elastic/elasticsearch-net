@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class TypeFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::1e867a2d4e10e70350d458a473544022[]

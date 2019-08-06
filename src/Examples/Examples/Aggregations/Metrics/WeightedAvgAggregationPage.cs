@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class WeightedAvgAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::c15dead46d351f62cfc066f1ca1a24eb[]
@@ -31,8 +30,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line102()
 		{
 			// tag::4c15a4b054c7d0aaaa17deaff853bb28[]
@@ -65,8 +63,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line153()
 		{
 			// tag::e88e8c78ed50936c8b7436c90b988ddf[]
@@ -91,8 +88,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line186()
 		{
 			// tag::cebfe0fed62091eb38b6348c89643f89[]

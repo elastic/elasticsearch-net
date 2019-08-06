@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class ElisionTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line15()
 		{
 			// tag::c0fa4f18231d7495c39b62bb4e56fe50[]

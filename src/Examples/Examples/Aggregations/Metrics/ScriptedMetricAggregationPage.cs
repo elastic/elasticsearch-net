@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class ScriptedMetricAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::20600097aa51aa3386536bdc681e92b6[]
@@ -31,8 +30,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::129ce418d8dd1f71087678725a0df19f[]
@@ -65,8 +63,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line149()
 		{
 			// tag::75e360d03fb416f0a65ca37c662c2e9c[]

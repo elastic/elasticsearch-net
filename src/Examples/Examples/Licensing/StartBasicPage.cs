@@ -5,8 +5,7 @@ namespace Examples.Licensing
 {
 	public class StartBasicPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::8699d35269a47ba867fa8cc766287413[]
@@ -16,8 +15,7 @@ namespace Examples.Licensing
 			response0.MatchesExample(@"POST /_license/start_basic");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::f58fd031597e2c3df78bf0efd07206e3[]

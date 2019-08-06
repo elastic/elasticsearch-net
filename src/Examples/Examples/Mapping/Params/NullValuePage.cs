@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class NullValuePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::463e64093c0dfba910eb5b248085584f[]

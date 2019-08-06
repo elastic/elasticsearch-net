@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class RemoteInfoPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::cc0cca5556ec6224c7134c233734beed[]

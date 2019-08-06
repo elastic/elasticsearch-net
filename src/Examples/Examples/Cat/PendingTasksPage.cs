@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class PendingTasksPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::dc2e9e499c7037eb9327cc84a942c5e9[]

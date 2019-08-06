@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class SpanNearQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::35ee06bbcc1291446187f1eeaf7eed90[]

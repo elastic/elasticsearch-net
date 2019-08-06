@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class LowercaseTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::5be6349f5da1a7a5658df1d7fdf542db[]

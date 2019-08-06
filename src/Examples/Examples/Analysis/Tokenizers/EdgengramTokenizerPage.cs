@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class EdgengramTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::a512e4dd8880ce0395937db1bab1d205[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line106()
 		{
 			// tag::a61389da4033bd7b73a63ff2ee258125[]
@@ -61,8 +59,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line224()
 		{
 			// tag::b8893e8f2b1aea4b093e0c4f037cfff7[]

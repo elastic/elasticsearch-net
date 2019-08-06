@@ -5,8 +5,7 @@ namespace Examples.Scripting
 {
 	public class EnginePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
 			// tag::d9de409a4a197ce7cbe3714e07155d34[]

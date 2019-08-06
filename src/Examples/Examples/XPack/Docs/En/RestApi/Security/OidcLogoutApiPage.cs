@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class OidcLogoutApiPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line34()
 		{
 			// tag::2a1eece9a59ac1773edcf0a932c26de0[]

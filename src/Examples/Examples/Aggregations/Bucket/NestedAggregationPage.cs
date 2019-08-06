@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class NestedAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::53e6007f451ddf30074b3e26a4afdaad[]
@@ -29,8 +28,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line33()
 		{
 			// tag::e3d2300ad78b2d20c3a501a73db6bcac[]

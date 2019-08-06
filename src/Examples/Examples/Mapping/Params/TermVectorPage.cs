@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class TermVectorPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::325ce39f81c442a5447ce0ede550c44a[]

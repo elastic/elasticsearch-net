@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 {
 	public class StatsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line74()
 		{
 			// tag::17266cee5eaaddf08e5534bf580a1910[]
@@ -16,8 +15,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"GET _watcher/stats");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line103()
 		{
 			// tag::3ed79871d956bfb2d6d2721d7272520c[]
@@ -27,8 +25,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"GET _watcher/stats?metric=current_watches");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::56b6b50b174a935d368301ebd717231d[]
@@ -38,8 +35,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"GET _watcher/stats/current_watches");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line156()
 		{
 			// tag::6244204213f60edf2f23295f9059f2c9[]

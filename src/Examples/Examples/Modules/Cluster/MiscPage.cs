@@ -5,8 +5,7 @@ namespace Examples.Modules.Cluster
 {
 	public class MiscPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line79()
 		{
 			// tag::4207219a892339e8f3abe0df8723dd27[]
@@ -21,8 +20,7 @@ namespace Examples.Modules.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line120()
 		{
 			// tag::c3fa14da3d0b0f93fb59bb5386b7e776[]

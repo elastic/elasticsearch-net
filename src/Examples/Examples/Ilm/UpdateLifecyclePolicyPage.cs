@@ -5,8 +5,7 @@ namespace Examples.Ilm
 {
 	public class UpdateLifecyclePolicyPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::0c44088f251488432966131135f1bd1c[]
@@ -35,8 +34,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line61()
 		{
 			// tag::2c37ed0b33658d73a712e7942ea7433a[]
@@ -65,8 +63,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line100()
 		{
 			// tag::7251639b2c1267d7c76ab397bbe43bbd[]
@@ -99,8 +96,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line144()
 		{
 			// tag::fc541f5741c1fe052439ededa84ffe8a[]
@@ -129,8 +125,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line186()
 		{
 			// tag::0f6fa3a706a7c17858d3dbe329839ea6[]
@@ -140,8 +135,7 @@ namespace Examples.Ilm
 			response0.MatchesExample(@"GET my_index/_ilm/explain");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line193()
 		{
 			// tag::d5e55676f5242766ebb035b87ce660e2[]
@@ -180,8 +174,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line231()
 		{
 			// tag::f94601bc9cd640adb939af67116a40c8[]
@@ -211,8 +204,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line271()
 		{
 			// tag::aada9dd17e7b08f3c5a279920c84333e[]
@@ -251,8 +243,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line311()
 		{
 			// tag::416c65c55a53d0161426cc09ae999c72[]
@@ -282,8 +273,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line406()
 		{
 			// tag::84935bf612d1aa402a7e16dae1ab99f5[]
@@ -322,8 +312,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line505()
 		{
 			// tag::552b6761ef052efa1e83f8a3c30d6f78[]

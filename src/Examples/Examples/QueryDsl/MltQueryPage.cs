@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class MltQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::32db70e5e08349aa254788ab4a2c4a51[]
@@ -26,8 +25,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::cba099b82792fa5ba7741d00483c2b47[]
@@ -57,8 +55,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line69()
 		{
 			// tag::33f77a3b80f33323faa091538220de2a[]
@@ -93,8 +90,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line124()
 		{
 			// tag::084b3e3ff6f22c1c9a56b79760f50b36[]

@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class DeleteJobPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line80()
 		{
 			// tag::94246f45025ed394cd6415ed8d7a0588[]

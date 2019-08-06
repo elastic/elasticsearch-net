@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class StartJobPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::618c9d42284c067891fb57034a4fd834[]

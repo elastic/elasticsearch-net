@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetOverallBucketsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::e48e7da65c2b32d724fd7e3bfa175c6f[]
@@ -20,8 +19,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line157()
 		{
 			// tag::405db6f3a01eceacfaa8b0ed3e4b3ac2[]

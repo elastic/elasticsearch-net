@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class CopyToPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::363d200a378f8c3acc6d8a77df42eba7[]

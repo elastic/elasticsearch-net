@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 {
 	public class DeactivateWatchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::e827a9040e137410d62d10bb3b3cbb71[]
@@ -16,8 +15,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"GET _watcher/watch/my_watch");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line68()
 		{
 			// tag::f63f6343e74bd5c844854272e746de14[]

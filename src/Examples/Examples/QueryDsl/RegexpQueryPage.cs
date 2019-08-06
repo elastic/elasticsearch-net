@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class RegexpQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line23()
 		{
 			// tag::618d5f3d35921d8cb7e9ccfbe9a4c3e3[]

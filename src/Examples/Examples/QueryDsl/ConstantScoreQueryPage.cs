@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class ConstantScoreQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::d59a084640acf2f5c51d3068d38b5fc0[]

@@ -5,8 +5,7 @@ namespace Examples.Analysis
 {
 	public class TestingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::f0d3b58abf6f2b499a38237a0e6d3498[]
@@ -29,8 +28,7 @@ namespace Examples.Analysis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::acebf0b821acfbd6089f71e0359a56d3[]

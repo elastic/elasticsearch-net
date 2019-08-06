@@ -5,8 +5,7 @@ namespace Examples.Modules.Cluster
 {
 	public class DiskAllocatorPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line56()
 		{
 			// tag::aaaa9a186db96077879ddfcfbd625fdb[]
@@ -19,8 +18,7 @@ namespace Examples.Modules.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::4fe5a9e99dc9400d67a5a2f6f6752c07[]

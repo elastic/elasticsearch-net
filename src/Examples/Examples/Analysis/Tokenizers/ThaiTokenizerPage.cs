@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class ThaiTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::a1e5f3956f9a697e79478fc9a6e30e1f[]

@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class NodesHotThreadsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::77c099c97ea6911e2dd6e996da7dcca0[]

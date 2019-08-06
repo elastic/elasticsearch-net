@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class RevertSnapshotPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line63()
 		{
 			// tag::f28c58902bdefd9e2b36001e8d682d35[]

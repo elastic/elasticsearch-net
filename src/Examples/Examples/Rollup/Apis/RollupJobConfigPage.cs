@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class RollupJobConfigPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::1cf5e58ea0f2ca39abfee4361207b939[]

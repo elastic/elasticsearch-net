@@ -5,8 +5,7 @@ namespace Examples.Setup.Sysconfig
 {
 	public class SwapPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::ed250b74bc77c15bb794f55a12d762c3[]

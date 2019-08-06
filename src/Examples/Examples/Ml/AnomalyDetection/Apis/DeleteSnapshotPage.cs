@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class DeleteSnapshotPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line45()
 		{
 			// tag::1e08e054c761353f99211cd18e8ca47b[]

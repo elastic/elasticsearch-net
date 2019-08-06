@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class DeleteJobPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line63()
 		{
 			// tag::3ac8b5234e9d53859245cf8ab0094ca5[]
@@ -16,8 +15,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 			response0.MatchesExample(@"DELETE _ml/anomaly_detectors/total-requests");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line81()
 		{
 			// tag::ccec66fb20d5ede6c691e0890cfe402a[]

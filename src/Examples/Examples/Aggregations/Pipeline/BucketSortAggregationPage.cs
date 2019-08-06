@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class BucketSortAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::7881659b181997486731d92712fbdca9[]
@@ -42,8 +41,7 @@ namespace Examples.Aggregations.Pipeline
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line139()
 		{
 			// tag::541c4f4fb5959cf88423196e51c7e0ef[]

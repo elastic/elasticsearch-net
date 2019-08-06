@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class MinBucketAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::e668549ff72fd0b9568667d1a817fc6e[]

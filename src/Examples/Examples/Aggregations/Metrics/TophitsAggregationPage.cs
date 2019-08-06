@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class TophitsAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::12b4b34f9958ed157ac2d812d612cda6[]
@@ -43,8 +42,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line189()
 		{
 			// tag::30db2702dd0071c72a090b8311d0db09[]
@@ -83,8 +81,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line243()
 		{
 			// tag::2720c5e463876c415419c426697d15e4[]
@@ -108,8 +105,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line266()
 		{
 			// tag::6ac67f7e30219d85fcc68b99459a39a4[]
@@ -127,8 +123,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line283()
 		{
 			// tag::f1b8612151a660264fb62dc6c74b19be[]

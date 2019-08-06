@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class CreateApiKeysPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line60()
 		{
 			// tag::0c8f24166d0ce7b8792781b268b544a9[]

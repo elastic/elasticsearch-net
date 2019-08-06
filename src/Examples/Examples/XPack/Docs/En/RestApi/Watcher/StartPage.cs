@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 {
 	public class StartPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::97ea5ab17213cb1faaf6f3ea13607098[]

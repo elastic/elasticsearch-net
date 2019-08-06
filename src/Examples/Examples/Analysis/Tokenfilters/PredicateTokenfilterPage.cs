@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class PredicateTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::10338787b66a7f93270c3b88dd6197f8[]
@@ -36,8 +35,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line49()
 		{
 			// tag::e20493a20d3992a97238b87c6930f08d[]

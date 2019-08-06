@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 {
 	public class AckWatchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line47()
 		{
 			// tag::7a1b94de1cbb90b0f06ff8631a70236a[]
@@ -43,8 +42,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line84()
 		{
 			// tag::e827a9040e137410d62d10bb3b3cbb71[]
@@ -54,8 +52,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"GET _watcher/watch/my_watch");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line123()
 		{
 			// tag::bdc1afd2181154bb78797360f9dbb1a0[]
@@ -72,8 +69,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response1.MatchesExample(@"GET _watcher/watch/my_watch");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line180()
 		{
 			// tag::1b0dc9d076bbb58c6a2953ef4323d2fc[]
@@ -87,8 +83,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response1.MatchesExample(@"GET _watcher/watch/my_watch");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line236()
 		{
 			// tag::8051766cadded0892290bc2cc06e145c[]
@@ -98,8 +93,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"POST _watcher/watch/my_watch/_ack/action1,action2");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line245()
 		{
 			// tag::df7dbac966b67404b8bfa9cdda5ef480[]

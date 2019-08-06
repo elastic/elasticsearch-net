@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class DisMaxQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::fcf5a593cfe8809d98a5239ad9c82038[]

@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class SimplepatternTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::9ffc049d5c5a570b90d913e92f910ee4[]

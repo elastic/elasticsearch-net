@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class MultiFieldsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::5271f4ff29bb48838396e5a674664ee0[]
@@ -65,8 +64,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line75()
 		{
 			// tag::fc8097bdfb6f3a4017bf4186ccca8a84[]

@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class AdjacencyMatrixAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
 			// tag::f88cdb3a962bb6f305f4a7ccc07bc0b0[]

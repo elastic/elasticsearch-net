@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class DocvalueFieldsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::097a6bc1d76c3fc92fb299001d27896e[]
@@ -31,8 +30,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::1518ad2c540fd55f9df84bbe75c81606[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class DateNanosPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
 			// tag::14dc06a4c28ffdc1f9dde97dc6838c1e[]

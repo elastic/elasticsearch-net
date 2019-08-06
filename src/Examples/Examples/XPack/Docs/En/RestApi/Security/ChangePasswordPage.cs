@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class ChangePasswordPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::a2d14f8f1ea3efe970887f7892fdb268[]

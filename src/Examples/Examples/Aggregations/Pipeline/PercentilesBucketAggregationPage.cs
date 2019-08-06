@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class PercentilesBucketAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::cff65c0f9fbc53c26c60abe9fb7e4044[]

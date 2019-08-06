@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class PrefixQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::81514791349e0e79ac565160e42889c0[]
@@ -25,8 +24,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::32ea547cefa2976c8c3c2eb45a2a4ff4[]

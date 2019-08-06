@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class SamplerAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::28035a0e2a874f1b6739badf82a0ecc6[]
@@ -38,8 +37,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line89()
 		{
 			// tag::279f7af39b62c7d278f9f10b1f107dc0[]

@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class PathhierarchyTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::dc4dcfeae8a5f248639335c2c9809549[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line95()
 		{
 			// tag::fcc35d56dff0291bcf3663830ce99254[]

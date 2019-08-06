@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetCalendarPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::5fca6671bc8eaddc44ac488d1c3c6909[]

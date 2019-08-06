@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class ShrinkIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::5e93f806cfd459149222b443b7992a51[]
@@ -22,8 +21,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line67()
 		{
 			// tag::0c44dc55c06e882de2947b5e9fa78acc[]
@@ -39,8 +37,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::324a946abc2c86b5a71dd5cec6c765b3[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class BinaryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::9296dd085f411739f5b0ec80eb9b9e27[]

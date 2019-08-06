@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class MultiGetPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line15()
 		{
 			// tag::b02ea386a43df53f5b925ae64ff4bf96[]
@@ -30,8 +29,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::60be49d20e42e165467817dcce53fcf7[]
@@ -53,8 +51,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line58()
 		{
 			// tag::80229b2c753cfce1d1554e03cbdbfa29[]
@@ -74,8 +71,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line77()
 		{
 			// tag::104404dad47a4b52637fb88df6160a08[]
@@ -88,8 +84,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line98()
 		{
 			// tag::562535f3e70cc1a85ee6eb03588f96a6[]
@@ -124,8 +119,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line137()
 		{
 			// tag::1b1e75613163308e4d40073a6c0918ce[]
@@ -151,8 +145,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line162()
 		{
 			// tag::8c7bf48aeb7d0919a1b0fd8685a1e480[]
@@ -173,8 +166,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::1a6750042ee402bc92d644824f5cdc1f[]

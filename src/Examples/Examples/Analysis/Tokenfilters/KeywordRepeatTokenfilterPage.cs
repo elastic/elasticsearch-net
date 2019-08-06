@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class KeywordRepeatTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::9da83c9a2149bfc6fe215a612ae0a9aa[]
@@ -35,8 +34,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::757622a424b8445fee49746862a11b02[]

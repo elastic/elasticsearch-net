@@ -5,8 +5,7 @@ namespace Examples.Mapping
 {
 	public class RemovalOfTypesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line456()
 		{
 			// tag::9ee37bb017ab2f08dc870d9b2f937819[]
@@ -25,8 +24,7 @@ namespace Examples.Mapping
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line472()
 		{
 			// tag::21aedb3425f773979be01722661b6a89[]
@@ -43,8 +41,7 @@ namespace Examples.Mapping
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line487()
 		{
 			// tag::c81959a312a5715c52cacfe01cb0576e[]
@@ -54,8 +51,7 @@ namespace Examples.Mapping
 			response0.MatchesExample(@"GET index/_mappings?include_type_name=false");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line522()
 		{
 			// tag::ab1b1bdda7528003a08d6d5911081483[]
@@ -68,8 +64,7 @@ namespace Examples.Mapping
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line552()
 		{
 			// tag::de8d7db07c3008039c7691955a553e4c[]
@@ -79,8 +74,7 @@ namespace Examples.Mapping
 			response0.MatchesExample(@"GET index/_doc/1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line566()
 		{
 			// tag::f85d1cf4a5b9145632f585cd8c99e49d[]
@@ -99,8 +93,7 @@ namespace Examples.Mapping
 			response1.MatchesExample(@"GET /index/_source/1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line584()
 		{
 			// tag::6dce46ae7f4da2467ea1e68cc9b67b31[]
@@ -114,8 +107,7 @@ namespace Examples.Mapping
 			{ ""foo"" : ""qux"" }");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line615()
 		{
 			// tag::b479466cd446f8112f491ce8810de43a[]
@@ -132,8 +124,7 @@ namespace Examples.Mapping
 			response1.MatchesExample(@"GET index/_doc/1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line659()
 		{
 			// tag::c6f5467904b8182d9203d98414a1bb76[]

@@ -5,8 +5,7 @@ namespace Examples.Ccr.Apis.Follow
 {
 	public class PostUnfollowPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::f6d493650b4344f17297b568016fb445[]
@@ -16,8 +15,7 @@ namespace Examples.Ccr.Apis.Follow
 			response0.MatchesExample(@"POST /<follower_index>/_ccr/unfollow");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::6a350a17701e8c8158407191f2718b66[]

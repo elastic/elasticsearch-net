@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class ChildrenAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::9399cbbd133ec2b7aad2820fa617ae3a[]
@@ -28,8 +27,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::dfdf82b8d99436582f150117695190b3[]
@@ -51,8 +49,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line58()
 		{
 			// tag::e9fe3b53b5b6e1ff9566b5237c0fa513[]
@@ -92,8 +89,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line95()
 		{
 			// tag::d5132d34ae922fa8e898889b627a1405[]

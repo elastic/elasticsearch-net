@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class UpdateSettingsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::8653e76676de5d327201b77512afa3a0[]
@@ -21,8 +20,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::42744a175125df5be0ef77413bf8f608[]
@@ -37,8 +35,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::dfac8d098b50aa0181161bcd17b38ef4[]
@@ -53,8 +50,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line69()
 		{
 			// tag::0be2c28ee65384774b1e479b47dc3d92[]
@@ -69,8 +65,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line83()
 		{
 			// tag::fe5763d32955e8b65eb3048e97b1580c[]
@@ -80,8 +75,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /twitter/_forcemerge?max_num_segments=5");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line101()
 		{
 			// tag::ba0b4081c98f3387f76b77847c52ee9a[]

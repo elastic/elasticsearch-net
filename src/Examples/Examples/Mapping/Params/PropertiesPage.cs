@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class PropertiesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::241df3bb0c16b4bd53ee569a45539184[]
@@ -56,8 +55,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line74()
 		{
 			// tag::7f21b09b9306a03491ddcf0355f33860[]

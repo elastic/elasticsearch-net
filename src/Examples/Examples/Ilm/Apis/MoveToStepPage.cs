@@ -5,8 +5,7 @@ namespace Examples.Ilm.Apis
 {
 	public class MoveToStepPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line88()
 		{
 			// tag::e3c5f93b3c85e8519f801defc20b0ce0[]
@@ -28,8 +27,7 @@ namespace Examples.Ilm.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::bc5fcc40c29087a0df7b5405bb70de5c[]

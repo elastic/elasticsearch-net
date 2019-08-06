@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class QueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::a8e19886f6b4792def0381c3f8cf2b5c[]

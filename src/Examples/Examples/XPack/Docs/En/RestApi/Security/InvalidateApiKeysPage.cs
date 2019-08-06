@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class InvalidateApiKeysPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::0aff04881be21eea45375ec4f4f50e66[]
@@ -19,8 +18,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line77()
 		{
 			// tag::01cc9dac719f2612a48cc1b23db7cd54[]
@@ -33,8 +31,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line90()
 		{
 			// tag::f388e571224dd6850f8c9f9f08fca3da[]
@@ -47,8 +44,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line103()
 		{
 			// tag::dde283eab92608e7bfbfa09c6482a12e[]
@@ -61,8 +57,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line116()
 		{
 			// tag::e7d819634d765cde269e2669e2dc677f[]
@@ -75,8 +70,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line129()
 		{
 			// tag::6c927313867647e0ef3cd3a37cb410cc[]

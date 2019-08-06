@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class ClusterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line56()
 		{
 			// tag::2c602b4ee8f22cda2cdf19bad31da0af[]

@@ -5,8 +5,7 @@ namespace Examples.HowTo.Recipes
 {
 	public class ScoringPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line125()
 		{
 			// tag::a0f15dd7fcb07bc8543fe04c2907d4b9[]
@@ -28,8 +27,7 @@ namespace Examples.HowTo.Recipes
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line171()
 		{
 			// tag::0dfa66a019712e413652c5eddd057ba8[]

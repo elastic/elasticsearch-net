@@ -5,8 +5,7 @@ namespace Examples.Sql.Endpoints
 {
 	public class TranslatePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::8097472be12fcbe8652f03e398e49972[]

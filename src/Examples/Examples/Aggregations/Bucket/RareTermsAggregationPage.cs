@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class RareTermsAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line89()
 		{
 			// tag::91bbb85bc6add315fc9a044d8bcfec8a[]
@@ -25,8 +24,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line128()
 		{
 			// tag::0fa84243cd275a885298602aa8b4415f[]
@@ -46,8 +44,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line279()
 		{
 			// tag::b7207f557d5481db52d5df1aa0dae982[]
@@ -68,8 +65,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line308()
 		{
 			// tag::dea7ef16acd6d148a20876630a010522[]
@@ -90,8 +86,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line332()
 		{
 			// tag::2eea6157a9fbc54a8987e5c1a4f14bbe[]

@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class CountPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::0a1f8ad54b1d8c9feeaceaeed16c8490[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/count?v");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line27()
 		{
 			// tag::e7553d4bb4fd82d8f80a4d7af2624afb[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class SparseVectorPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line27()
 		{
 			// tag::9e9bd85e9135533e7fb8b079a6d4ae21[]

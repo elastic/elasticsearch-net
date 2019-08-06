@@ -5,8 +5,7 @@ namespace Examples.Ilm
 {
 	public class GettingStartedIlmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::993a81c69d26d94810172bee4043f0fd[]
@@ -36,8 +35,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line80()
 		{
 			// tag::e3d7b19f993382750719cdfaad2fdd90[]
@@ -56,8 +54,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line113()
 		{
 			// tag::55ee835d7c28e933ad8fcb9e45af2bf2[]
@@ -74,8 +71,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line157()
 		{
 			// tag::a1dbaff15cf8166f74c443ca58258d7e[]
@@ -85,8 +81,7 @@ namespace Examples.Ilm
 			response0.MatchesExample(@"GET datastream-*/_ilm/explain");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line168()
 		{
 			// tag::c0f09a2304109757010e08c8af1f4a5a[]

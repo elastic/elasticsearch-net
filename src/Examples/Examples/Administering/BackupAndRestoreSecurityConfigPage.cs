@@ -5,8 +5,7 @@ namespace Examples.Administering
 {
 	public class BackupAndRestoreSecurityConfigPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line79()
 		{
 			// tag::92b3749a473cf2e7ff4055316662a4fe[]
@@ -22,8 +21,7 @@ namespace Examples.Administering
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line103()
 		{
 			// tag::43a7b43711eab81ad093e67ecc221327[]
@@ -37,8 +35,7 @@ namespace Examples.Administering
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line122()
 		{
 			// tag::7acf1099282366553cb8b093ed4fcd00[]
@@ -52,8 +49,7 @@ namespace Examples.Administering
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line193()
 		{
 			// tag::ff930e6409b6a923ef1c9e7fc99f24cc[]
@@ -63,8 +59,7 @@ namespace Examples.Administering
 			response0.MatchesExample(@"GET /_snapshot/my_backup");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line200()
 		{
 			// tag::020c56e520ff6556ebfaf98efaef56aa[]

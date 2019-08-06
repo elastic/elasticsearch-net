@@ -5,8 +5,7 @@ namespace Examples.Ilm.Apis
 {
 	public class PutLifecyclePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::daa2d4811bec05ac4546b66bd5a615c7[]
@@ -36,8 +35,7 @@ namespace Examples.Ilm.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line74()
 		{
 			// tag::bc5fcc40c29087a0df7b5405bb70de5c[]

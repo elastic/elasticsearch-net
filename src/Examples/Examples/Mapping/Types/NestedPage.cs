@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class NestedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::8baccd8688a6bad1749b8935f9601ea4[]
@@ -29,8 +28,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::b214942b938e47f2c486e523546cb574[]
@@ -50,8 +48,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line81()
 		{
 			// tag::b919f88e6f47a40d5793479440a90ba6[]

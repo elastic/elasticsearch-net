@@ -5,8 +5,7 @@ namespace Examples.Ingest.Apis
 {
 	public class SimulatePipelinePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::68168bb8190037f0c1ea1254f5f5e5a0[]
@@ -46,8 +45,7 @@ namespace Examples.Ingest.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line135()
 		{
 			// tag::6ee061e58bf07bd6a678d210811e2000[]

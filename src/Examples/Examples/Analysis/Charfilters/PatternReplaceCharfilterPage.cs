@@ -5,8 +5,7 @@ namespace Examples.Analysis.Charfilters
 {
 	public class PatternReplaceCharfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::2b8ba109999fc87712433cea92c99ebe[]
@@ -45,8 +44,7 @@ namespace Examples.Analysis.Charfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line102()
 		{
 			// tag::1e1f0d83b1ca672396341af5dcfd2603[]
@@ -96,8 +94,7 @@ namespace Examples.Analysis.Charfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line205()
 		{
 			// tag::32afaee3f1326785b4009ff48576d42f[]

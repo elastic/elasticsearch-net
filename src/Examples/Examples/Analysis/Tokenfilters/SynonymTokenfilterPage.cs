@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class SynonymTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::09f74df1d07d84ee133ce90f7832e712[]
@@ -36,8 +35,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::bcc57126b24c408b5d944928b6f08c94[]
@@ -72,8 +70,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::9fb5e28535f396ab2eb8bc710eebc1e6[]
@@ -100,8 +97,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line143()
 		{
 			// tag::0c0f37e409459dcd40d29ea684db4706[]

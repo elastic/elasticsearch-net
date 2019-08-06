@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class ScrollPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line40()
 		{
 			// tag::7e52bec09624cf6c0de5d13f2bfad5a5[]
@@ -24,8 +23,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line59()
 		{
 			// tag::b41dce56b0e640d32b1cf452f87cec17[]
@@ -39,8 +37,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::d5dcddc6398b473b6ad9bce5c6adf986[]
@@ -55,8 +52,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line146()
 		{
 			// tag::72beebe779a258c225dee7b023e60c52[]
@@ -66,8 +62,7 @@ namespace Examples.Search.Request
 			response0.MatchesExample(@"GET /_nodes/stats/indices/search");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::b0d64d0a554549e5b2808002a0725493[]
@@ -80,8 +75,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line172()
 		{
 			// tag::3a700f836d8d5da1b656a876554028aa[]
@@ -97,8 +91,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::c2c21e2824fbf6b7198ede30419da82b[]
@@ -108,8 +101,7 @@ namespace Examples.Search.Request
 			response0.MatchesExample(@"DELETE /_search/scroll/_all");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line196()
 		{
 			// tag::b94cee0f74f57742b3948f9b784dfdd4[]
@@ -119,8 +111,7 @@ namespace Examples.Search.Request
 			response0.MatchesExample(@"DELETE /_search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==,DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line209()
 		{
 			// tag::1027ab1ca767ac1428176ef4f84bfbcf[]
@@ -156,8 +147,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line272()
 		{
 			// tag::fdcaba9547180439ff4b6275034a5170[]

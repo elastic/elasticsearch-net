@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class SerialDiffAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::b4da132cb934c33d61e2b60988c6d4a3[]

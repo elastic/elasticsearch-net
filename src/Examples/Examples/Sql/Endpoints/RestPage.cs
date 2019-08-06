@@ -5,8 +5,7 @@ namespace Examples.Sql.Endpoints
 {
 	public class RestPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::4870ece3455f2b5c34eccaa9492f3894[]
@@ -19,8 +18,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line111()
 		{
 			// tag::b649c4dc7d187a27d2112f59e62cecea[]
@@ -34,8 +32,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line137()
 		{
 			// tag::8b8c48b5fcfaaec794875537d3be2e62[]
@@ -49,8 +46,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line173()
 		{
 			// tag::92d82b9d1bda5a8ae1117d03413f4e67[]
@@ -64,8 +60,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line200()
 		{
 			// tag::a972c38ee41dc899708825790a113cb8[]
@@ -79,8 +74,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line228()
 		{
 			// tag::d38b8ef18ca89eafb1e175ec9a393259[]
@@ -94,8 +88,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line283()
 		{
 			// tag::212042898296f208dbf957f33c07e3b2[]
@@ -108,8 +101,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line321()
 		{
 			// tag::cc5dfc9aa125e3fd03f523fc2c356f63[]
@@ -122,8 +114,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line351()
 		{
 			// tag::683da0a8624bc03c79a3db8ffab43f0b[]
@@ -145,8 +136,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line390()
 		{
 			// tag::c11dc94839b861235b4943f046e15997[]
@@ -161,8 +151,7 @@ namespace Examples.Sql.Endpoints
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line427()
 		{
 			// tag::15089efd5a5a72234fdb91c111adb3c1[]

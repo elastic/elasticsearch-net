@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class SpanTermQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::086b2bbc4c3bfc2310c22d10db42cb82[]
@@ -21,8 +20,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::5add42087c83b7e498f8f43e91f343d4[]
@@ -37,8 +35,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::2a07d189553602066fefdb6b7cbdf542[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class BooleanPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::1c1be1df747c9f8ecc9f82e980387d8f[]
@@ -43,8 +42,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line58()
 		{
 			// tag::636ec3c018ac15ec11caf6f3d835a08c[]

@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class MinScorePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::8e8ceac8fc99348f885f85ff714557fd[]

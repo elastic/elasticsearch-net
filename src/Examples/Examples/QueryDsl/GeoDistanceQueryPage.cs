@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class GeoDistanceQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::b4ef55e48f137e8f67f82b42a047c8f6[]
@@ -41,8 +40,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::4639a1bbd12710d5f01f1aaadce09a3e[]
@@ -70,8 +68,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line79()
 		{
 			// tag::6fc37ccf570ff7e35b7b0bd4bacb8abd[]
@@ -99,8 +96,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line109()
 		{
 			// tag::926fff8330fc3008f62b9de34f385a57[]
@@ -125,8 +121,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line136()
 		{
 			// tag::f878546633c6bcc30edcdcf520a20eba[]
@@ -151,8 +146,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::48a40f20b752a8120cf020bda041adca[]

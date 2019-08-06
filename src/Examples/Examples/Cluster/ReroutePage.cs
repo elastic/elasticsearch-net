@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class ReroutePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::c5488b3888749d3d5b9808ab28d384eb[]

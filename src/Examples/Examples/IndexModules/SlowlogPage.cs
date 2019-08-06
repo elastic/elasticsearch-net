@@ -5,8 +5,7 @@ namespace Examples.IndexModules
 {
 	public class SlowlogPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line33()
 		{
 			// tag::fa0b341d790a4da480b47bf501835359[]
@@ -27,8 +26,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line109()
 		{
 			// tag::44a16db65121edaf099d944819356e2c[]

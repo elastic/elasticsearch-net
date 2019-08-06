@@ -5,8 +5,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 {
 	public class GetDfanalyticsStatsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line87()
 		{
 			// tag::cfc52956b005d57111c49dfe1735634e[]

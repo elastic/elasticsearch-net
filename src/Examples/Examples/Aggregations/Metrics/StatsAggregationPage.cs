@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class StatsAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::6f04f3c1afe94e03d26ff5966fd4b98d[]
@@ -21,8 +20,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::9ed80262680e67c629a08f6754a7c5c9[]
@@ -44,8 +42,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::2ba8575100b37b85d0052d46a00ce4cd[]
@@ -69,8 +66,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::1341888a2677cf6e1db11e6cab2dd8ce[]
@@ -96,8 +92,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line125()
 		{
 			// tag::7371dcfe4adb43996f4c26684318302b[]

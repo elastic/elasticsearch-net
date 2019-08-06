@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class RolloverIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line40()
 		{
 			// tag::593c11e8a9f88ec2629f2eb33cded9b7[]
@@ -36,8 +35,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line102()
 		{
 			// tag::659247d91f61ceb17cbcc60801fd3456[]
@@ -54,8 +52,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line126()
 		{
 			// tag::8f6ef669c09e0c8bfc2731f422471770[]
@@ -98,8 +95,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::03584e88046614ec7727db506d866f48[]
@@ -113,8 +109,7 @@ namespace Examples.Indices
 			response1.MatchesExample(@"GET /%3Clogs-%7Bnow%2Fd%7D-*%3E%2C%3Clogs-%7Bnow%2Fd-1d%7D-*%3E%2C%3Clogs-%7Bnow%2Fd-2d%7D-*%3E/_search");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line206()
 		{
 			// tag::75f887596c4972bc679929ca996698f2[]
@@ -143,8 +138,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line235()
 		{
 			// tag::9c5c59e10bb60f2fd8958d63de91826f[]
@@ -170,8 +164,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line277()
 		{
 			// tag::9e9a3ad495e6305563a88dd4c74a5fda[]

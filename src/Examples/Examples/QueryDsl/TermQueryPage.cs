@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class TermQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
 			// tag::d0a8a938a2fa913b6fdbc871079a59dd[]
@@ -26,8 +25,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line95()
 		{
 			// tag::2a1de18774f9c68cafa169847832b2bc[]
@@ -44,8 +42,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line115()
 		{
 			// tag::d4b4cefba4318caeba7480187faf2b13[]
@@ -58,8 +55,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line135()
 		{
 			// tag::cdedd5f33f7e5f7acde561e97bff61de[]
@@ -76,8 +72,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line170()
 		{
 			// tag::a80f5db4357bb25b8704d374c18318ed[]

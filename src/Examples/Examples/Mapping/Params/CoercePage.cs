@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class CoercePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::5c734d4a7252cc155f8dc90c4785f491[]
@@ -43,8 +42,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line60()
 		{
 			// tag::dad2db81c728827a782a3fefd3399849[]

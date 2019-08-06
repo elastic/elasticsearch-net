@@ -60,12 +60,12 @@ namespace Examples.Root
 		{
 			// tag::21fe98843fe0b5473f515d21803db409[]
 			var indexResponse = client.Index(new Customer
-				{
-					Name = "John Doe"
-				}, c => c
-				.Index("customer")
-				.Id(1)
-				.Pretty()
+			{
+				Name = "John Doe"
+			}, c => c
+			.Index("customer")
+			.Id(1)
+			.Pretty()
 			);
 			// end::21fe98843fe0b5473f515d21803db409[]
 
@@ -135,12 +135,12 @@ namespace Examples.Root
 		{
 			// tag::75bda7da7fefff2c16f0423a9aa41c6e[]
 			var indexResponse = client.Index(new Customer
-				{
-					Name = "Jane Doe"
-				}, i => i
-				.Index("customer")
-				.Id(1)
-				.Pretty()
+			{
+				Name = "Jane Doe"
+			}, i => i
+			.Index("customer")
+			.Id(1)
+			.Pretty()
 			);
 			// end::75bda7da7fefff2c16f0423a9aa41c6e[]
 
@@ -155,12 +155,12 @@ namespace Examples.Root
 		{
 			// tag::37c778346eb67042df5e8edf2485e40a[]
 			var indexResponse = client.Index(new Customer
-				{
-					Name = "Jane Doe"
-				}, i => i
-				.Index("customer")
-				.Id(2)
-				.Pretty()
+			{
+				Name = "Jane Doe"
+			}, i => i
+			.Index("customer")
+			.Id(2)
+			.Pretty()
 			);
 			// end::37c778346eb67042df5e8edf2485e40a[]
 
@@ -175,11 +175,11 @@ namespace Examples.Root
 		{
 			// tag::1c0f3b0bc4b7e53b53755fd3bda5b8cf[]
 			var indexResponse = client.Index(new Customer
-				{
-					Name = "Jane Doe"
-				}, i => i
-				.Index("customer")
-				.Pretty()
+			{
+				Name = "Jane Doe"
+			}, i => i
+			.Index("customer")
+			.Pretty()
 			);
 			// end::1c0f3b0bc4b7e53b53755fd3bda5b8cf[]
 
@@ -467,7 +467,7 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["match"]["account_number"] = new JObject{{ "query", "20" }};
+				body["query"]["match"]["account_number"] = new JObject { { "query", "20" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -495,7 +495,7 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["match"]["address"] = new JObject{{ "query", "mill" }};
+				body["query"]["match"]["address"] = new JObject { { "query", "mill" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -523,7 +523,7 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["match"]["address"] = new JObject{{ "query", "mill lane" }};
+				body["query"]["match"]["address"] = new JObject { { "query", "mill lane" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -551,7 +551,7 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["match_phrase"]["address"] = new JObject{{ "query", "mill lane" }};
+				body["query"]["match_phrase"]["address"] = new JObject { { "query", "mill lane" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -594,8 +594,8 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["bool"]["must"][0]["match"]["address"] = new JObject{{ "query", "mill" }};
-				body["query"]["bool"]["must"][1]["match"]["address"] = new JObject{{ "query", "lane" }};
+				body["query"]["bool"]["must"][0]["match"]["address"] = new JObject { { "query", "mill" } };
+				body["query"]["bool"]["must"][1]["match"]["address"] = new JObject { { "query", "lane" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -638,8 +638,8 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["bool"]["should"][0]["match"]["address"] = new JObject{{ "query", "mill" }};
-				body["query"]["bool"]["should"][1]["match"]["address"] = new JObject{{ "query", "lane" }};
+				body["query"]["bool"]["should"][0]["match"]["address"] = new JObject { { "query", "mill" } };
+				body["query"]["bool"]["should"][1]["match"]["address"] = new JObject { { "query", "lane" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -682,8 +682,8 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["bool"]["must_not"][0]["match"]["address"] = new JObject{{ "query", "mill" }};
-				body["query"]["bool"]["must_not"][1]["match"]["address"] = new JObject{{ "query", "lane" }};
+				body["query"]["bool"]["must_not"][0]["match"]["address"] = new JObject { { "query", "mill" } };
+				body["query"]["bool"]["must_not"][1]["match"]["address"] = new JObject { { "query", "lane" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -694,6 +694,7 @@ namespace Examples.Root
 		{
 			// tag::47bb632c6091ad0cd94bc660bdd309a5[]
 			var searchResponse = client.Search<Account>(s => s
+				.Index("bank")
 				.Query(q => q
 					.Bool(b => b
 						.Must(mu => mu
@@ -729,8 +730,8 @@ namespace Examples.Root
 			{
 				// client does not support shorthand match query syntax. Expand out
 				var body = JObject.Parse(e.Body);
-				body["query"]["bool"]["must"][0]["match"]["age"] = new JObject{{ "query", "40" }};
-				body["query"]["bool"]["must_not"][0]["match"]["state"] = new JObject{{ "query", "ID" }};
+				body["query"]["bool"]["must"][0]["match"]["age"] = new JObject { { "query", "40" } };
+				body["query"]["bool"]["must_not"][0]["match"]["state"] = new JObject { { "query", "ID" } };
 				e.Body = body.ToString();
 				return e;
 			});
@@ -741,6 +742,7 @@ namespace Examples.Root
 		{
 			// tag::251ea12c1248385ab409906ac64d9ee9[]
 			var searchResponse = client.Search<Account>(s => s
+				.Index("bank")
 				.Query(q => q
 					.Bool(b => b
 						.Must(mu => mu
@@ -781,6 +783,7 @@ namespace Examples.Root
 		{
 			// tag::feefeb68144002fd1fff57b77b95b85e[]
 			var searchResponse = client.Search<Account>(s => s
+				.Index("bank")
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("group_by_state", ra => ra
@@ -808,6 +811,7 @@ namespace Examples.Root
 		{
 			// tag::cfbaea6f0df045c5d940bbb6a9c69cd8[]
 			var searchResponse = client.Search<Account>(s => s
+				.Index("bank")
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("group_by_state", ra => ra
@@ -847,6 +851,7 @@ namespace Examples.Root
 		{
 			// tag::645796e8047967ca4a7635a22a876f4c[]
 			var searchResponse = client.Search<Account>(s => s
+				.Index("bank")
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("group_by_state", ra => ra
@@ -892,6 +897,7 @@ namespace Examples.Root
 		{
 			// tag::c84b5f9c6528f84a08c5318b3385d55c[]
 			var searchResponse = client.Search<Account>(s => s
+				.Index("bank")
 				.Size(0)
 				.Aggregations(a => a
 					.Range("group_by_age", ra => ra

@@ -5,8 +5,7 @@ namespace Examples.Setup.Sysconfig
 {
 	public class FileDescriptorsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::c5bc577ff92f889225b0d2617adcb48c[]

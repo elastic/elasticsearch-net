@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class GetTokensPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line80()
 		{
 			// tag::cee591c1fc70d4f180c623a3a6d07755[]
@@ -19,8 +18,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line115()
 		{
 			// tag::e1337c6b76defd5a46d05220f9d9c9fc[]
@@ -35,8 +33,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line146()
 		{
 			// tag::1873f8a8a291e6fcd6c1c83ea6928759[]

@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class GeoboundsAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::34cabdecfe9c2cb8dd929853882564eb[]

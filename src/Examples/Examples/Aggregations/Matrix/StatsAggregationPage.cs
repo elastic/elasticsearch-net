@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Matrix
 {
 	public class StatsAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::8ab89e635fcbc485d1728c13dfeeb1ae[]
@@ -25,8 +24,7 @@ namespace Examples.Aggregations.Matrix
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line123()
 		{
 			// tag::7ee2877f8f031b9a4e56a40b371421fb[]

@@ -5,8 +5,7 @@ namespace Examples.Ccr.Apis.Follow
 {
 	public class GetFollowInfoPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::b2440b492149b705ef107137fdccb0c2[]
@@ -16,8 +15,7 @@ namespace Examples.Ccr.Apis.Follow
 			response0.MatchesExample(@"GET /<index>/_ccr/info");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line142()
 		{
 			// tag::a520168c1c8b454a8f102d6a13027c73[]

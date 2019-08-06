@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class MasterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::45bde49f35ffae3f3dabc77a592241b4[]

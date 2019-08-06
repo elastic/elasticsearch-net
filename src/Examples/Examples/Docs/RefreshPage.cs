@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class RefreshPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line87()
 		{
 			// tag::92d343eb755971c44a939d0660bf5ac2[]
@@ -22,8 +21,7 @@ namespace Examples.Docs
 			{""test"": ""test""}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line99()
 		{
 			// tag::1070e59ba144cdf309fd9b2591612b95[]
@@ -39,8 +37,7 @@ namespace Examples.Docs
 			{""test"": ""test""}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::e4b2b5e0aaedf3cbbcde3d61eb1f13fc[]

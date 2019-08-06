@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class NodesStatsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::46157b875b3af6322b19c9fcf4668b93[]
@@ -20,8 +19,7 @@ namespace Examples.Cluster
 			response1.MatchesExample(@"GET /_nodes/nodeId1,nodeId2/stats");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::5457c94f0039c6b95c7f9f305d0c6b58[]
@@ -51,8 +49,7 @@ namespace Examples.Cluster
 			response5.MatchesExample(@"GET /_nodes/10.0.0.1/stats/process");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line313()
 		{
 			// tag::573e292263dc1e6f08f4363f25018e57[]
@@ -90,8 +87,7 @@ namespace Examples.Cluster
 			response7.MatchesExample(@"GET /_nodes/stats/indices/fielddata?fields=field*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line355()
 		{
 			// tag::bd68666ca2e0be12f7624016317a62bc[]

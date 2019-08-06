@@ -5,8 +5,7 @@ namespace Examples.Licensing
 {
 	public class StartTrialPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line47()
 		{
 			// tag::37f1f2e75ed95308ae436bbbb8d5645e[]

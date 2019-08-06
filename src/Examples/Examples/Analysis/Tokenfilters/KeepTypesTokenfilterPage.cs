@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class KeepTypesTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::928923befcb84cdcace229b027fd281f[]
@@ -34,8 +33,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line47()
 		{
 			// tag::b425b2194294437ac21df0b5606fb3d2[]
@@ -49,8 +47,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line82()
 		{
 			// tag::1658d704f26a06e8f37c6430361c3f26[]
@@ -79,8 +76,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line109()
 		{
 			// tag::4d5ded2eede9a987df094dc4a91893d7[]

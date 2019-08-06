@@ -5,8 +5,7 @@ namespace Examples.Sql
 {
 	public class GettingStartedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::15f293688537c82d2bdebda916769fa4[]
@@ -22,8 +21,7 @@ namespace Examples.Sql
 			{""name"": ""Dune"", ""author"": ""Frank Herbert"", ""release_date"": ""1965-06-01"", ""page_count"": 604}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::53b14d640c4c48a5e7ea86ddc26bee64[]

@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class AvgBucketAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::b3e8697874ed65ed6cb62f2568bcc55e[]

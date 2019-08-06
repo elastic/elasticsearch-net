@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class NamedQueriesAndFiltersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::0aad4321e968effc6e6ef2b98c6c71a5[]

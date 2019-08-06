@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class ValuecountAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::5dd695679b5141d9142d3d30ba8d300a[]
@@ -21,8 +20,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line44()
 		{
 			// tag::3722cb3705b6bc7f486969deace3dd83[]
@@ -43,8 +41,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::213ab768f1b6a895e09403a0880e259a[]

@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class ScriptScoreQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::eb35bef392e0957d609f1a26481e048d[]

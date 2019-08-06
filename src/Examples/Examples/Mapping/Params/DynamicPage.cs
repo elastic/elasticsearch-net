@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class DynamicPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::e65e9805b8b17f72616f099e11a5c337[]
@@ -44,8 +43,7 @@ namespace Examples.Mapping.Params
 			response3.MatchesExample(@"GET my_index/_mapping \<4>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line60()
 		{
 			// tag::4b478d9b1231513362d2fa8c766cd0a5[]

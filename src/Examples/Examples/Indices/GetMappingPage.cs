@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class GetMappingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::a8fba09a46b2c3524428aa3259b7124f[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET /twitter/_mapping");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
 			// tag::cf02e3d8b371bd59f0224967c36330da[]
@@ -27,8 +25,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET /twitter,kimchy/_mapping");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::09cdd5ae8114c49886026fef8d00a19c[]

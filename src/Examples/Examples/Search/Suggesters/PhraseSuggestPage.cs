@@ -5,8 +5,7 @@ namespace Examples.Search.Suggesters
 {
 	public class PhraseSuggestPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::5566cff431570f522e1fc5475b2ed875[]
@@ -71,8 +70,7 @@ namespace Examples.Search.Suggesters
 			{""title"": ""nobel prize""}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line84()
 		{
 			// tag::3b162509ed14eda44a9681cd1108fa39[]
@@ -102,8 +100,7 @@ namespace Examples.Search.Suggesters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line226()
 		{
 			// tag::89a6b24618cafd60de1702a5b9f28a8d[]
@@ -140,8 +137,7 @@ namespace Examples.Search.Suggesters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line295()
 		{
 			// tag::203c3bb334384bdfb11ff1101ccfba25[]
@@ -167,8 +163,7 @@ namespace Examples.Search.Suggesters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line416()
 		{
 			// tag::eb6d62f1d855a8e8fe9eab2656d47504[]

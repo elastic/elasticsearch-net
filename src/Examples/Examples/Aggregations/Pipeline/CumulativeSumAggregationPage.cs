@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class CumulativeSumAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::1ae73d3fcc39bef9ddc654bb82d5d239[]

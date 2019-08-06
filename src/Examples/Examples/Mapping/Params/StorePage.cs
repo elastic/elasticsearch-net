@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class StorePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::ff26214b3981f7418688e4c8905d5068[]

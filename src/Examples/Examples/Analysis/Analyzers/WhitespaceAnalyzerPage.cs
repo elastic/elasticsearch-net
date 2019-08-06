@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class WhitespaceAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::262a778d754add491fbc9c721ac25bf0[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line130()
 		{
 			// tag::31aed390c30bd4f42a5c56253695e53f[]

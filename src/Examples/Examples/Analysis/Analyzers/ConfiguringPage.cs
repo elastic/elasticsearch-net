@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class ConfiguringPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::98fa08f638178692476abcae1ac8ce5a[]

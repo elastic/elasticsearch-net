@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class PatternCaptureTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line48()
 		{
 			// tag::f733b25cd4c448b226bb76862974eef2[]
@@ -38,8 +37,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line89()
 		{
 			// tag::080c34d8151d02b760571e3a2899fa97[]

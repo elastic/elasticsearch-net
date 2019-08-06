@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class SeqNoPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::63965d439716ed6d18d30baef09001a5[]

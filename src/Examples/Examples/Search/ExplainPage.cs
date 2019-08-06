@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class ExplainPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::abfec22fbe7d571711cc65661ca887ee[]
@@ -21,8 +20,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::5032518611d928d1f802e215cf79c550[]

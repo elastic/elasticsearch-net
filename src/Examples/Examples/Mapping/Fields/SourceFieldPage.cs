@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class SourceFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::50246e04b49dab320409b95526e6e34c[]
@@ -23,8 +22,7 @@ namespace Examples.Mapping.Fields
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::b557f114e21dbc6f531d4e7621a08e8f[]

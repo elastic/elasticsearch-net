@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class HistogramAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line23()
 		{
 			// tag::322e1a8842fc5924b972a9a32c29c17a[]
@@ -26,8 +25,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line82()
 		{
 			// tag::0003e4064d004a341c193ddd5d82a07f[]
@@ -48,8 +46,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line158()
 		{
 			// tag::c72bd866a7e21907fa71f1067371db55[]
@@ -76,8 +73,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line201()
 		{
 			// tag::e0bba0f00a589933499493390a9a0517[]
@@ -98,8 +94,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line261()
 		{
 			// tag::271c55d9a421dbc794caa0ebaead95e3[]

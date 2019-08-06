@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class NodesUsagePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::488751d6f5baddadd84f6f390d910b07[]

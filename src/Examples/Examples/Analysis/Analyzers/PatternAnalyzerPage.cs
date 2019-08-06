@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class PatternAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line26()
 		{
 			// tag::467833bd44b35a89a7fe0d7df5f253f1[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line179()
 		{
 			// tag::314851d590d195015a76866b92cf6b32[]
@@ -52,8 +50,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line268()
 		{
 			// tag::9e2f7b134ac7c5e7c0119866b7a96700[]
@@ -83,8 +80,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line388()
 		{
 			// tag::f453e14bcf30853e57618bf12f83e148[]

@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class ChargroupTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line26()
 		{
 			// tag::f8cafb1a08bc9b2dd5239f99d4e93f4c[]

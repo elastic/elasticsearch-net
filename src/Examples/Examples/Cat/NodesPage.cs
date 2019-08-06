@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class NodesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::db20adb70a8e8d0709d15ba0daf18d23[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/nodes?v");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::21d3e98d911642ab3bda2657f7a06f80[]

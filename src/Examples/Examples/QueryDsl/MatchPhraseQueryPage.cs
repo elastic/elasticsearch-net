@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class MatchPhraseQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::83f95657beca9bf5d8264c80c7fb463f[]
@@ -23,8 +22,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line31()
 		{
 			// tag::72231b7debac60c95b9869a97dafda3a[]

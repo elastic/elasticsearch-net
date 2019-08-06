@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class FrozenIndicesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line66()
 		{
 			// tag::f9018c483fb6b810d8a921668addfc71[]
@@ -16,8 +15,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"POST /twitter/_forcemerge?max_num_segments=1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line84()
 		{
 			// tag::0652fc9f77639fce67a87dc2e33cef51[]
@@ -27,8 +25,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /twitter/_search?q=user:kimchy&ignore_throttled=false");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line108()
 		{
 			// tag::9ff10591660890ba9d00eb14168c3b67[]

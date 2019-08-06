@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class TextPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::24ea1c6cdf10165228951e562b7ec0ef[]

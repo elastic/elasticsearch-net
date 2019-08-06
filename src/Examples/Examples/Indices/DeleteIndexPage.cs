@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class DeleteIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::98f14fddddea54a7d6149ab7b92e099d[]

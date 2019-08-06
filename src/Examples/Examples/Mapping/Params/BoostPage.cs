@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class BoostPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::dcef5a46104e2602a0b9f5d968f66f4d[]
@@ -29,8 +28,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line34()
 		{
 			// tag::df827f97ecf543a1722003edbf277c01[]
@@ -49,8 +47,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::36a07d7014cdd3d6cd9d97651e66e7ef[]

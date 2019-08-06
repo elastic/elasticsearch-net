@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class IgnoreAbovePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::17a77b9c39526c865d7bd6b72cf4a79f[]

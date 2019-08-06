@@ -5,8 +5,7 @@ namespace Examples.Ingest.Processors
 {
 	public class PipelinePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::8494d09c39e109a012094eb9d6ec52ac[]
@@ -27,8 +26,7 @@ namespace Examples.Ingest.Processors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line48()
 		{
 			// tag::02c48d461536709c3fc8a0e8147c3787[]
@@ -54,8 +52,7 @@ namespace Examples.Ingest.Processors
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line74()
 		{
 			// tag::88647e818ffcbe39e5cf627f5b9a676c[]

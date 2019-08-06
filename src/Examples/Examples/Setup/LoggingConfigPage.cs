@@ -5,8 +5,7 @@ namespace Examples.Setup
 {
 	public class LoggingConfigPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line155()
 		{
 			// tag::8e6bfb4441ffa15c86d5dc20fa083571[]

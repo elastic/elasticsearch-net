@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class BoolQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::06afce2955f9094d96d27067ebca32e8[]
@@ -39,8 +38,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line76()
 		{
 			// tag::f70a54cd9a9f4811bf962e469f2ca2ea[]
@@ -61,8 +59,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::fa88f6f5a7d728ec4f1d05244228cb09[]
@@ -86,8 +83,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line120()
 		{
 			// tag::162b5b693b713f0bfab1209d59443c46[]

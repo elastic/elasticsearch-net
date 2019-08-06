@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class CardinalityAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::826140cdd3d5fe9a728239605c6dc71a[]
@@ -25,8 +24,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::edbd54e71e56f3a5617aa012b100aa0f[]
@@ -46,8 +44,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::ef3a3e292e9e74d42703555178ed5fb6[]
@@ -69,8 +66,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line208()
 		{
 			// tag::6969b29883eefa552475ae1837dc5f96[]
@@ -95,8 +91,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line236()
 		{
 			// tag::7d86ff090cbd87f144edb72e949470b3[]

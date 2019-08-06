@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class RoutingFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line15()
 		{
 			// tag::b684073ea8d34359c290c663d2a5e798[]
@@ -23,8 +22,7 @@ namespace Examples.Mapping.Fields
 			response1.MatchesExample(@"GET my_index/_doc/1?routing=user1 \<2>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line34()
 		{
 			// tag::6817609dd2fcb73b9920327c5cf5ec77[]
@@ -41,8 +39,7 @@ namespace Examples.Mapping.Fields
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::134bdbfb50c81dd3c487514faabc81d3[]
@@ -59,8 +56,7 @@ namespace Examples.Mapping.Fields
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line81()
 		{
 			// tag::4f3089b403945e391f03280ae2f360a4[]

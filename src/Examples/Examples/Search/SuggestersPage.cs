@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class SuggestersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::626f8c4b3e2cd3d9beaa63a7f5799d7a[]
@@ -31,8 +30,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::2533e4b36ae837eaecda08407ecb6383[]
@@ -58,8 +56,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line119()
 		{
 			// tag::5275842787967b6db876025f4a1c6942[]

@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class CjkBigramTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::4a40ccf6b1a0090da8d8033b435b5b7d[]

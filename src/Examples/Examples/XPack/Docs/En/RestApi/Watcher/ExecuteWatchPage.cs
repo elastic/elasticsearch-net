@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 {
 	public class ExecuteWatchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line142()
 		{
 			// tag::01dc7bdc223bd651574ed2d3954a5b1c[]
@@ -16,8 +15,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			response0.MatchesExample(@"POST _watcher/watch/my_watch/_execute");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::f6eff830fb0fad200ebfb1e3e46f6f0e[]
@@ -41,8 +39,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line294()
 		{
 			// tag::7f37031fb40b68a61255b7c71d7eed0b[]
@@ -58,8 +55,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line310()
 		{
 			// tag::9cf6c7012a4f2bb562bc256aa28c3409[]
@@ -74,8 +70,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line324()
 		{
 			// tag::9cd37d0ccbc66ad47ddb626564b27cc8[]
@@ -112,8 +107,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line361()
 		{
 			// tag::10b924bf6298aa6157ed00ce12f8edc1[]

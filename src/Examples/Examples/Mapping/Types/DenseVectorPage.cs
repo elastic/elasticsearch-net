@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class DenseVectorPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::7c7b74084cc9f18b085c25a208bd1306[]

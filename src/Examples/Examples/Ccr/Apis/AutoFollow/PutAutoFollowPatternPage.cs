@@ -5,8 +5,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 {
 	public class PutAutoFollowPatternPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line15()
 		{
 			// tag::6323012afc5d0421840d67cb8a0c4cb9[]
@@ -24,8 +23,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line91()
 		{
 			// tag::754a082212929e02a9f71d5404d3301d[]

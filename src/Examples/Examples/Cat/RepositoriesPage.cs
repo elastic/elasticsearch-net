@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class RepositoriesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::6fa570aac5033e3b25d3071a6c9ea3dc[]

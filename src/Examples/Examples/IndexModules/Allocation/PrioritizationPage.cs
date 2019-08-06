@@ -5,8 +5,7 @@ namespace Examples.IndexModules.Allocation
 {
 	public class PrioritizationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::8703f3b1b3895543abc36e2a7a0013d3[]
@@ -38,8 +37,7 @@ namespace Examples.IndexModules.Allocation
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line49()
 		{
 			// tag::a425fcab60f603504becee7d001f0a4b[]

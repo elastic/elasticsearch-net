@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class DisableUsersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::bb293e1bdf0c6f6d9069eeb7edc9d399[]

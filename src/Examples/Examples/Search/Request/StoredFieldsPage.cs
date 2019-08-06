@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class StoredFieldsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::2eeb3e55a7d3955e084bb369f1539009[]
@@ -22,8 +21,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line30()
 		{
 			// tag::2af86a6ebbb834fbcf6fa7268f87a3a5[]
@@ -39,8 +37,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line62()
 		{
 			// tag::ccec437aed7a10d9111724ffd929fe00[]

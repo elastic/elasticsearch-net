@@ -5,8 +5,7 @@ namespace Examples.Monitoring
 {
 	public class IndicesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::83dfd0852101eca3ba8174c9c38b4e73[]
@@ -16,8 +15,7 @@ namespace Examples.Monitoring
 			response0.MatchesExample(@"GET /_template/.monitoring-*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line30()
 		{
 			// tag::a63906c63a8681c72d53ee0fcf2ffd35[]

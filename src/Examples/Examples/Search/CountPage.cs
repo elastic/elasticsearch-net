@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class CountPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::8f0511f8a5cb176ff2afdd4311799a33[]

@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class ScriptFieldsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::68358f94e77b5dce7eb01679516bae69[]
@@ -38,8 +37,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line45()
 		{
 			// tag::34dd16c077e81b3744963b19a3dc9e49[]

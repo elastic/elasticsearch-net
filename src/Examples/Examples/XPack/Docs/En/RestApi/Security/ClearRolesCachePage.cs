@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class ClearRolesCachePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::ee577c4c7cc723e99569ea2d1137adba[]

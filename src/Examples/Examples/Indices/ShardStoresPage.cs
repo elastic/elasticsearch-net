@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class ShardStoresPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line19()
 		{
 			// tag::897f7ceaa110aa68e1f13ef7791810c5[]
@@ -36,8 +35,7 @@ namespace Examples.Indices
 			response5.MatchesExample(@"GET /_shard_stores");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::3545261682af72f4bee57f2bac0a9590[]

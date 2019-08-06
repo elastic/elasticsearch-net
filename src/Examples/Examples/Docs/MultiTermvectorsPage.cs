@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class MultiTermvectorsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::c6d18f08822463356b297f238c6650d9[]
@@ -32,8 +31,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::2c8638acc208bd0a47403c1f054fde21[]
@@ -57,8 +55,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::f31eea58baf0dbd39823ff9100c9ce28[]
@@ -77,8 +74,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line85()
 		{
 			// tag::29840a67fdc13cd329ca2c69a2303e83[]

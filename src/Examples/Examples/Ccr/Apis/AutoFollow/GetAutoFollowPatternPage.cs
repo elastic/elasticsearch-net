@@ -5,8 +5,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 {
 	public class GetAutoFollowPatternPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::5e124875d97c27362ae858160ae1c6d5[]
@@ -16,8 +15,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 			response0.MatchesExample(@"GET /_ccr/auto_follow/");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line49()
 		{
 			// tag::d56a9d89282df56adbbc34b91390ac17[]
@@ -27,8 +25,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 			response0.MatchesExample(@"GET /_ccr/auto_follow/<auto_follow_pattern_name>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line83()
 		{
 			// tag::79f33e05b203eb46eef7958fbc95ef77[]

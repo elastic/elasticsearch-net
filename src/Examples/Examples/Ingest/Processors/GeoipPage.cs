@@ -5,8 +5,7 @@ namespace Examples.Ingest.Processors
 {
 	public class GeoipPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line45()
 		{
 			// tag::0b6aa8f2d6916951959d6186b25d2b54[]
@@ -37,8 +36,7 @@ namespace Examples.Ingest.Processors
 			response2.MatchesExample(@"GET my_index/_doc/my_id");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line94()
 		{
 			// tag::573a466d7a3a8e31194666e2ecc1d92a[]
@@ -71,8 +69,7 @@ namespace Examples.Ingest.Processors
 			response2.MatchesExample(@"GET my_index/_doc/my_id");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line147()
 		{
 			// tag::c5681f52305e065ef13c3e0ad5393263[]
@@ -103,8 +100,7 @@ namespace Examples.Ingest.Processors
 			response2.MatchesExample(@"GET my_index/_doc/my_id");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line198()
 		{
 			// tag::0737ebaea33631f001fb3f4226948492[]

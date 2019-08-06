@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class DocValuesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::4e75503583efc222045e0be4430a2863[]

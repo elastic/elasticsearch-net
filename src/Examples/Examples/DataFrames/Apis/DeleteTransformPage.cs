@@ -5,8 +5,7 @@ namespace Examples.DataFrames.Apis
 {
 	public class DeleteTransformPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line49()
 		{
 			// tag::c0632f2983704d482200d4900e722534[]

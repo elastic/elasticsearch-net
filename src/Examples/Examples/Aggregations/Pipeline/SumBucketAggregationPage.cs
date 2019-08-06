@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class SumBucketAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::612a9f6a05186fc89ed1a75139d3a8b7[]

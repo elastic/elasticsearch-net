@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class MaxBucketAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::ce5d556d90d0fb077ab078e055005f3a[]

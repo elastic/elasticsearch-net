@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class StatsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::861f5f61409dc87f3671293b87839ff7[]
@@ -16,8 +15,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"GET /_cluster/stats?human&pretty");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line233()
 		{
 			// tag::71c629c44bf3c542a0daacbfc253c4b0[]

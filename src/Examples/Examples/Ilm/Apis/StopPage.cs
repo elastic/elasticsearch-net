@@ -5,8 +5,7 @@ namespace Examples.Ilm.Apis
 {
 	public class StopPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line75()
 		{
 			// tag::585a34ad79aee16678b37da785933ac8[]
@@ -16,8 +15,7 @@ namespace Examples.Ilm.Apis
 			response0.MatchesExample(@"POST _ilm/stop");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line84()
 		{
 			// tag::bc5fcc40c29087a0df7b5405bb70de5c[]

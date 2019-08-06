@@ -5,8 +5,7 @@ namespace Examples.Ccr.Apis.Follow
 {
 	public class PostForgetFollowerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::f4fdfe52ecba65eec6beb30d8deb8bbf[]
@@ -22,8 +21,7 @@ namespace Examples.Ccr.Apis.Follow
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line131()
 		{
 			// tag::07c07f6d497b1a3012aa4320f830e09e[]

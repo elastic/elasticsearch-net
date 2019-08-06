@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class NumericPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::a71c438cc4df1cafe3109ccff475afdb[]

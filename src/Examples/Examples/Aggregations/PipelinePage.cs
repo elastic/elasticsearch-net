@@ -5,8 +5,7 @@ namespace Examples.Aggregations
 {
 	public class PipelinePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line53()
 		{
 			// tag::ec20b1c236955a545476eeeea747d9de[]
@@ -34,8 +33,7 @@ namespace Examples.Aggregations
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line83()
 		{
 			// tag::11be7655fdafcf4c1454a0e9ad8ddf63[]
@@ -67,8 +65,7 @@ namespace Examples.Aggregations
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line121()
 		{
 			// tag::f3dd309ab027e86048b476b54f0d4ca1[]
@@ -93,8 +90,7 @@ namespace Examples.Aggregations
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line147()
 		{
 			// tag::2afc1231679898bd864d06679d9e951b[]

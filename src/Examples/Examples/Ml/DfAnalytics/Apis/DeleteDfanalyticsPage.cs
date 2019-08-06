@@ -5,8 +5,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 {
 	public class DeleteDfanalyticsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line38()
 		{
 			// tag::1c8b6768c4eefc76fcb38708152f561b[]

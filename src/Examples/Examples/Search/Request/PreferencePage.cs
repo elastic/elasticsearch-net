@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class PreferencePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line59()
 		{
 			// tag::9405de6fd841c32ac510eb0a7eeed989[]

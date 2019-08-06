@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class IntervalsQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::5d59e61b35103a17e262a625503f896b[]
@@ -45,8 +44,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line175()
 		{
 			// tag::7471e97aaaf21c3a200abdd89f15c3cc[]
@@ -75,8 +73,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line226()
 		{
 			// tag::2de6885bacb8769b8f22dce253c96b0c[]
@@ -102,8 +99,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line257()
 		{
 			// tag::e2a22c6fd58cc0becf4c383134a08f8b[]
@@ -131,8 +127,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line293()
 		{
 			// tag::5f79c42b0f74fdf71359cef82843fad3[]
@@ -163,8 +158,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line327()
 		{
 			// tag::e7811867397b305efbbe8925d8a01c1a[]

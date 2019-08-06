@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class RollupCapsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::2d20c42e9664febeccaff61581605cbe[]
@@ -42,8 +41,7 @@ namespace Examples.Rollup.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line90()
 		{
 			// tag::a00311843b5f8f3e9f7d511334a828b1[]
@@ -53,8 +51,7 @@ namespace Examples.Rollup.Apis
 			response0.MatchesExample(@"GET _rollup/data/sensor-*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::944806221eb89f5af2298ccdf2902277[]
@@ -64,8 +61,7 @@ namespace Examples.Rollup.Apis
 			response0.MatchesExample(@"GET _rollup/data/_all");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line169()
 		{
 			// tag::f8cb1a04c2e487ff006b5ae0e1a7afbd[]

@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class FilterAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::b93ed4ef309819734f0eeea82e8b0f1f[]

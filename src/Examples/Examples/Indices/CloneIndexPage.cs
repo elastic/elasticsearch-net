@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class CloneIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::f95b3b415480b2fb4d90e5e576f74c90[]
@@ -21,8 +20,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line45()
 		{
 			// tag::01c0e302f4fd5118faf5e34f4a010ebf[]
@@ -37,8 +35,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line66()
 		{
 			// tag::f17b925eace96b699996ad20ae7dd3e2[]
@@ -48,8 +45,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST my_source_index/_clone/my_target_index");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line93()
 		{
 			// tag::e405fe0c10af890c997d6be8d51aa940[]

@@ -5,8 +5,7 @@ namespace Examples.Rollup
 {
 	public class RollupGettingStartedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
 			// tag::3acad8c67832b281b9f15349492b8328[]
@@ -41,8 +40,7 @@ namespace Examples.Rollup
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line116()
 		{
 			// tag::618c9d42284c067891fb57034a4fd834[]
@@ -52,8 +50,7 @@ namespace Examples.Rollup
 			response0.MatchesExample(@"POST _rollup/job/sensor/_start");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line131()
 		{
 			// tag::4e63a0fd56cc5d59595baa0b0721f971[]
@@ -73,8 +70,7 @@ namespace Examples.Rollup
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line189()
 		{
 			// tag::e0f8ecc665f547d5365699ab8773e298[]

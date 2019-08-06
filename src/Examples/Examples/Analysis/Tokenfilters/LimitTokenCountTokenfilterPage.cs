@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class LimitTokenCountTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::fdd46bdb2b0b0b5f8e7e502291496db8[]

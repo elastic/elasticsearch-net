@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class RefreshPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::c2ac42934e4b76197032b2fc429e317d[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /twitter/_refresh");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::104c5a6faa3052d18567c1ae57278638[]

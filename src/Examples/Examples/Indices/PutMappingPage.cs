@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class PutMappingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::bf6e261ee84680c69d46faa9ee5b2f56[]
@@ -28,8 +27,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::88b2e29e3251e48bfb720fa83e9eb6a3[]
@@ -62,8 +60,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line70()
 		{
 			// tag::9943d52ba0f75fa0eb61e944ed7cbcd9[]

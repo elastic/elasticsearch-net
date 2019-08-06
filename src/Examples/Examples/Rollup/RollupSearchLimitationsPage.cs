@@ -5,8 +5,7 @@ namespace Examples.Rollup
 {
 	public class RollupSearchLimitationsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line45()
 		{
 			// tag::3d1cea1ad861d1ee62e5f34b84371943[]

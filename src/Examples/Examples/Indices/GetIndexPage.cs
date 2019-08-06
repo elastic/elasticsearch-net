@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class GetIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::be8f28f31207b173de61be032fcf239c[]

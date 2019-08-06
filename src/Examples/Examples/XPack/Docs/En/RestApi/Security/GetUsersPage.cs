@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class GetUsersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line41()
 		{
 			// tag::3924ee252581ebb96ac0e60046125ae8[]
@@ -16,8 +15,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			response0.MatchesExample(@"GET /_security/user/jacknich");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::bac6203259754d2f09c1ebeecc9ded5d[]
@@ -38,8 +36,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line73()
 		{
 			// tag::abdbc81e799e28c833556b1c29f03ba6[]

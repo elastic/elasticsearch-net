@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class KeepWordsTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::44cb20732770bb9a5f114a7517db774f[]

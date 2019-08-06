@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class DatehistogramAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line107()
 		{
 			// tag::b789292f9cf63ce912e058c46d90ce20[]
@@ -26,8 +25,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line127()
 		{
 			// tag::73e5c88ad1488b213fb278ee1cb42289[]
@@ -47,8 +45,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line203()
 		{
 			// tag::09ecba5814d71e4c44468575eada9878[]
@@ -68,8 +65,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line222()
 		{
 			// tag::2bb2339ac055337abf753bddb7771659[]
@@ -89,8 +85,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line294()
 		{
 			// tag::8a355eb25d2a01ba62dc1a22dd46f46f[]
@@ -111,8 +106,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line357()
 		{
 			// tag::70f0aa5853697e265ef3b1df72940951[]
@@ -146,8 +140,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line409()
 		{
 			// tag::8de3206f80e18185a5ad6481f4c2ee07[]
@@ -168,8 +161,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line478()
 		{
 			// tag::aa6bfe54e2436eb668091fe31c2fbf4d[]
@@ -204,8 +196,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line540()
 		{
 			// tag::9524a9b7373fa4eb2905183b0e806962[]
@@ -227,8 +218,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line610()
 		{
 			// tag::39a6a038c4b551022afe83de0523634e[]
@@ -249,8 +239,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line644()
 		{
 			// tag::6faf10a73f7d5fffbcb037bdb2cbaff8[]

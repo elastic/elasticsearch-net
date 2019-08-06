@@ -5,8 +5,7 @@ namespace Examples.IndexModules
 {
 	public class IndexSortingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::fea339c85b60ccefa6a163a70b86ca82[]
@@ -31,8 +30,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::a69f1a67cdc141e8dde5abb437c76959[]
@@ -61,8 +59,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line116()
 		{
 			// tag::e01a82a0a809a4770ddc84c2cfc1ec85[]
@@ -87,8 +84,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line141()
 		{
 			// tag::46a3694ee4a7bbd4973565e5886782bb[]
@@ -104,8 +100,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line163()
 		{
 			// tag::2e8ba1e0b2a18dd276bbbe64f2b86338[]

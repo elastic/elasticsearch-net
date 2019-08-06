@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class ClearcachePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::486eee2c8e75520f825fec08c1fbd67e[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /twitter/_cache/clear");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::e4a86070ec20da0a7f604e17a12f482e[]
@@ -35,8 +33,7 @@ namespace Examples.Indices
 			response2.MatchesExample(@"POST /twitter/_cache/clear?fielddata=true   \<3>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::62069c4118d79daf9612b29659b16627[]
@@ -46,8 +43,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /twitter/_cache/clear?fields=foo,bar   \<1>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line49()
 		{
 			// tag::389d962b8aa57186c7f94b83aea16c4b[]

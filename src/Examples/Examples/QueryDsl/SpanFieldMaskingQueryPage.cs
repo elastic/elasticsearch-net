@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class SpanFieldMaskingQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::b59861ad84352fee3e78bc869ccbe8b0[]

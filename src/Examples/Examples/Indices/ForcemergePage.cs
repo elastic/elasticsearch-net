@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class ForcemergePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::ca16c1f060ca653ea8fbca445359f78f[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /twitter/_forcemerge");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::64d97cda667be166f3df49e87e713560[]
@@ -27,8 +25,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /logs-000001/_forcemerge?max_num_segments=1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line68()
 		{
 			// tag::e5ee4be6e45c99c270b2c3fdf1a061ab[]
@@ -38,8 +35,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /kimchy/_forcemerge?only_expunge_deletes=false&max_num_segments=100&flush=true");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::9e6b6b784ba8931563dd04a5922098ba[]

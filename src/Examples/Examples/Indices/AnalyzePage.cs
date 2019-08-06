@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class AnalyzePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::06b4f0789d42d85d9af0780388feca83[]
@@ -20,8 +19,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line23()
 		{
 			// tag::a158d87b517d0f7a3d14d8f4eb1c4036[]
@@ -35,8 +33,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::373dd9448e2cba5dd8dbf3a1aded9025[]
@@ -51,8 +48,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line48()
 		{
 			// tag::61354fd8aad2ad07230c39339a2cd318[]
@@ -68,8 +64,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::37b2f5dca993d15ed1711f3532a0f98d[]
@@ -84,8 +79,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line77()
 		{
 			// tag::9f67f5e5cd0355cebea6fb28d28a8b5f[]
@@ -98,8 +92,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line91()
 		{
 			// tag::5c448f76daf65093e1893705e705ab3b[]
@@ -113,8 +106,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line104()
 		{
 			// tag::ebc29a29598d16f3156cbbd0d1b0954a[]
@@ -128,8 +120,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line120()
 		{
 			// tag::441ba0438c9ab8e7ce3579277d98b9a7[]
@@ -143,8 +134,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line133()
 		{
 			// tag::da69ca2ea849335e3a3ab9e15aa0e5f9[]
@@ -158,8 +148,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::98a28410e6c58919d7a700631138e775[]
@@ -176,8 +165,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line227()
 		{
 			// tag::cdc5155ae26dbaa25110a6a6a7e995fe[]

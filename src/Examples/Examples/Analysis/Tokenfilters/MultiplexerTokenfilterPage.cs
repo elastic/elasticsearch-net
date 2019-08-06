@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class MultiplexerTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line33()
 		{
 			// tag::c306212babadc14fa124b88fd8c43a6b[]
@@ -34,8 +33,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line59()
 		{
 			// tag::fa9a3ef94470f3d9bd6500b65bf993d1[]

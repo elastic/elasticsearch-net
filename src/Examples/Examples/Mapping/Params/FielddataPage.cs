@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class FielddataPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line58()
 		{
 			// tag::ef9111c1648d7820925f12e07d1346c5[]
@@ -30,8 +29,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::a7c15fe6b5779c84ce9a34bf4b2a7ab7[]
@@ -49,8 +47,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line120()
 		{
 			// tag::6a81d00f0d73bc5985e76b3cadab645e[]

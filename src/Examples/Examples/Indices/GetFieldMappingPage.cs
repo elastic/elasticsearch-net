@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class GetFieldMappingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::ba3a852ba26b650bc23be38ecebda5e4[]
@@ -31,8 +30,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::299900fb08da80fe455cf3f1bb7d62ee[]
@@ -42,8 +40,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET publications/_mapping/field/title");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::9af393bb38bf098d65d00e7637824f44[]
@@ -61,8 +58,7 @@ namespace Examples.Indices
 			response2.MatchesExample(@"GET /_all/_mapping/field/*.id");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line91()
 		{
 			// tag::ed3bdf4d6799b43526851e92b6a60c55[]
@@ -72,8 +68,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET publications/_mapping/field/author.id,abstract,name");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line128()
 		{
 			// tag::b61afb7ca29a11243232ffcc8b5a43cf[]

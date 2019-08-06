@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class MetaFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::e10d7f411744eb1d5ddaa2f70a368490[]
@@ -27,8 +26,7 @@ namespace Examples.Mapping.Fields
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line31()
 		{
 			// tag::019eab381444c3d77ad3bb4e39edfac6[]

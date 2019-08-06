@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class SearchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::321afb79fc4ee54676a89e0cd24946c1[]
@@ -21,8 +20,7 @@ namespace Examples.Root
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line33()
 		{
 			// tag::8acc1d67b152e7027e0f0e1a8b4b2431[]
@@ -46,8 +44,7 @@ namespace Examples.Root
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line74()
 		{
 			// tag::014b788c879e4aaa1020672e45e25473[]
@@ -62,8 +59,7 @@ namespace Examples.Root
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line99()
 		{
 			// tag::189a921df2f5b1fe580937210ce9c1c2[]

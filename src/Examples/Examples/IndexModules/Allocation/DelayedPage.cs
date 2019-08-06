@@ -5,8 +5,7 @@ namespace Examples.IndexModules.Allocation
 {
 	public class DelayedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line40()
 		{
 			// tag::17e6f3fac556f08a78f7a876e71acb89[]
@@ -21,8 +20,7 @@ namespace Examples.IndexModules.Allocation
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line83()
 		{
 			// tag::a38f29375eabd0103f8d7c00b17bb0ab[]
@@ -32,8 +30,7 @@ namespace Examples.IndexModules.Allocation
 			response0.MatchesExample(@"GET _cluster/health \<1>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::25d40d3049e57e2bb70c2c5b88bd7b87[]

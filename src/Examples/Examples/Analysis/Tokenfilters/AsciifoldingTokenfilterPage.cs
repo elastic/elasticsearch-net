@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class AsciifoldingTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::0d4cb64eca426ac03110fdfd01367ee9[]
@@ -28,8 +27,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
 			// tag::f0609100be8e9eb4af6cbc75d0c40ebe[]

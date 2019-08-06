@@ -5,8 +5,7 @@ namespace Examples.Administering
 {
 	public class BackupClusterConfigPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line41()
 		{
 			// tag::ee79edafcbc80dfda496e3a26506dcbc[]

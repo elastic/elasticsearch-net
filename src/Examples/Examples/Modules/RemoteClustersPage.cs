@@ -5,8 +5,7 @@ namespace Examples.Modules
 {
 	public class RemoteClustersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line103()
 		{
 			// tag::d4ce5a9672f85094e6d833d08debc018[]
@@ -42,8 +41,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line140()
 		{
 			// tag::328b7b4d0de6fac3a91205251de6e9b5[]
@@ -73,8 +71,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line173()
 		{
 			// tag::2a0d451f9e13aca39467883b16270cc2[]

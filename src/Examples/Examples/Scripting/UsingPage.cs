@@ -5,8 +5,7 @@ namespace Examples.Scripting
 {
 	public class UsingPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::e62cf588bfc891504bbf933af86eed7c[]
@@ -36,8 +35,7 @@ namespace Examples.Scripting
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line148()
 		{
 			// tag::40a2bbc35a887d6c7dda3cca1fe7aa58[]
@@ -53,8 +51,7 @@ namespace Examples.Scripting
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line162()
 		{
 			// tag::08e08feb514b24006e13f258d617d873[]
@@ -64,8 +61,7 @@ namespace Examples.Scripting
 			response0.MatchesExample(@"GET _scripts/calculate-score");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line171()
 		{
 			// tag::4484218a06e3bae623250cdaccac5dcb[]
@@ -87,8 +83,7 @@ namespace Examples.Scripting
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line192()
 		{
 			// tag::4061fd5ba7221ca85805ed14d59a6bc5[]

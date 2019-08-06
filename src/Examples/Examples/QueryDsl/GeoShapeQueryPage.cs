@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class GeoShapeQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::183be708fc91109008109b5ed44c8b08[]
@@ -36,8 +35,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::129975da094b6b93cc8fcc4042d47913[]
@@ -67,8 +65,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line102()
 		{
 			// tag::0e941a8309c3743972b8f5a8d9d9ada6[]

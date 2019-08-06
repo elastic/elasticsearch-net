@@ -5,8 +5,7 @@ namespace Examples.Modules.Indices
 {
 	public class RequestCachePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line44()
 		{
 			// tag::00629ea43db6ee1704183170df085495[]
@@ -16,8 +15,7 @@ namespace Examples.Modules.Indices
 			response0.MatchesExample(@"POST /kimchy,elasticsearch/_cache/clear?request=true");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::adebfecf7485326e9f7fae9de9169abc[]
@@ -32,8 +30,7 @@ namespace Examples.Modules.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::f22e069bc0c6f9dae57e084c662a86fd[]
@@ -44,8 +41,7 @@ namespace Examples.Modules.Indices
 			{ ""index.requests.cache.enable"": true }");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::13e9c7cdd43161f1336c94fd70a0db0c[]
@@ -65,8 +61,7 @@ namespace Examples.Modules.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line144()
 		{
 			// tag::36da9668fef56910370f16bfb772cc40[]
@@ -76,8 +71,7 @@ namespace Examples.Modules.Indices
 			response0.MatchesExample(@"GET /_stats/request_cache?human");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line152()
 		{
 			// tag::90631797c7fbda43902abf2cc0ea8304[]

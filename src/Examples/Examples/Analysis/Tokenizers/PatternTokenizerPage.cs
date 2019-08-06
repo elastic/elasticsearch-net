@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class PatternTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::1a6dbe5df488c4a16e2f1101ba8a25d9[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line127()
 		{
 			// tag::448339a39d847c4cac57a325e23c2a5a[]
@@ -56,8 +54,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line217()
 		{
 			// tag::fa8d64d622b4d7fe3234924b4de4f0bf[]

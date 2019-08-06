@@ -5,8 +5,7 @@ namespace Examples.Mapping.Fields
 {
 	public class FieldNamesFieldPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::e4fc720e1f7f2f9a7edf48184fd4a0dd[]

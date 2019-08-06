@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class RankFeatureQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::e2750d69bcb6d4c7e16e704cd0fb3530[]
@@ -32,8 +31,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line83()
 		{
 			// tag::c786505cf972dd41bd0cbb6ebcf939e9[]
@@ -82,8 +80,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line130()
 		{
 			// tag::fd0cd8ecd03468726b59a605eea06d75[]
@@ -125,8 +122,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line236()
 		{
 			// tag::309f0721145b5c656338a02459c3ff1e[]
@@ -146,8 +142,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line257()
 		{
 			// tag::0c05c66cfe3a2169b1ec1aba77e26db2[]
@@ -165,8 +160,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line279()
 		{
 			// tag::e89bf0d893b7bf43c2d9b44db6cfe21b[]
@@ -186,8 +180,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line306()
 		{
 			// tag::9e3c28d5820c38ea117eb2e9a5061089[]

@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class PluginsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::3796d69e8339bab58e70fdde9f9c09ad[]

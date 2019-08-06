@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class DistanceFeatureQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line37()
 		{
 			// tag::b81a7b5f5ef19553f9cd49196f31018c[]
@@ -31,8 +30,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line63()
 		{
 			// tag::b0d3f839237fabf8cdc2221734c668ad[]
@@ -69,8 +67,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line100()
 		{
 			// tag::1e2c5cef7a3f254c71a33865eb4d7569[]
@@ -98,8 +95,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line130()
 		{
 			// tag::57a3e8d2ca64e37e90d658c4cd935399[]

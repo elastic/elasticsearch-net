@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class BulkPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line73()
 		{
 			// tag::ae9ccfaa146731ab9176df90670db1c2[]
@@ -23,8 +22,7 @@ namespace Examples.Docs
 			{ ""doc"" : {""field2"" : ""value2""} }");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line265()
 		{
 			// tag::8cd00a3aba7c3c158277bc032aac2830[]

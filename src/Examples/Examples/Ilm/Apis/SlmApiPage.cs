@@ -5,8 +5,7 @@ namespace Examples.Ilm.Apis
 {
 	public class SlmApiPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line52()
 		{
 			// tag::f0f1a2ad8f815d8dfea122420b295a35[]
@@ -26,8 +25,7 @@ namespace Examples.Ilm.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line116()
 		{
 			// tag::b4f9fe8808cb27a210b162e7aaba261d[]
@@ -37,8 +35,7 @@ namespace Examples.Ilm.Apis
 			response0.MatchesExample(@"GET /_slm/policy/daily-snapshots?human");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line154()
 		{
 			// tag::bc2dd9e5ed37f98016ecf53f968d2211[]
@@ -48,8 +45,7 @@ namespace Examples.Ilm.Apis
 			response0.MatchesExample(@"GET /_slm/policy");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line178()
 		{
 			// tag::c2837666ce06acefbdd575bcc727b370[]
@@ -59,8 +55,7 @@ namespace Examples.Ilm.Apis
 			response0.MatchesExample(@"PUT /_slm/policy/daily-snapshots/_execute");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line247()
 		{
 			// tag::b9e0a99932e6f9ee620f5ca7f8588163[]
@@ -80,8 +75,7 @@ namespace Examples.Ilm.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line346()
 		{
 			// tag::1a1f3421717ff744ed83232729289bb0[]

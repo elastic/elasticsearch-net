@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class FlushJobPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line72()
 		{
 			// tag::6a9931992ce1b0c2c2c82635d32f32cd[]
@@ -19,8 +18,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line99()
 		{
 			// tag::3033133e8675524fd8f969db0625b62e[]

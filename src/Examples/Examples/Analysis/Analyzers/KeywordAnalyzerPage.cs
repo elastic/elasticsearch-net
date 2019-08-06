@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class KeywordAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::19ee488226d357d1576e7d3ae7a4693f[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line70()
 		{
 			// tag::c1efc5cfcb3c29711bfe118f1baa28b0[]

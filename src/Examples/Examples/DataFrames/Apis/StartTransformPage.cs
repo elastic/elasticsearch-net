@@ -5,8 +5,7 @@ namespace Examples.DataFrames.Apis
 {
 	public class StartTransformPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::811a0ff3a0e65bbb869c5654a47892cd[]

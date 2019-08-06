@@ -5,8 +5,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class FindFileStructurePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line226()
 		{
 			// tag::7a145f2c4ad1c3c9fea24afeadb847ef[]

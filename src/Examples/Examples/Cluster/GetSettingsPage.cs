@@ -5,8 +5,7 @@ namespace Examples.Cluster
 {
 	public class GetSettingsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::4029af36cb3f8202549017f7378803b4[]
@@ -16,8 +15,7 @@ namespace Examples.Cluster
 			response0.MatchesExample(@"GET /_cluster/settings");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::e72a172629bd9ce8dd971c0fdf112073[]

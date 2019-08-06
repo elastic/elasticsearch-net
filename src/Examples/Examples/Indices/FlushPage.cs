@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class FlushPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::7ef5a1dfd0c9db876c0dd03d8f0fe3a7[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST twitter/_flush");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::191c0396ef10ca408b41bbb4c7645ee7[]
@@ -31,8 +29,7 @@ namespace Examples.Indices
 			response1.MatchesExample(@"POST _flush");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line75()
 		{
 			// tag::94819e06e05de52c23b285346205ddaf[]
@@ -42,8 +39,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET twitter/_stats?filter_path=**.commit&level=shards \<1>");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line143()
 		{
 			// tag::da2658cc33e1a75c4b0fe96eb62740a7[]
@@ -53,8 +49,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST twitter/_flush/synced");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line239()
 		{
 			// tag::fc079cd6d867c5d65b7a28de197292a4[]

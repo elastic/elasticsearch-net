@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class TrackTotalHitsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line23()
 		{
 			// tag::32789ba30a73d8813b61c39619ad7d71[]
@@ -24,8 +23,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line69()
 		{
 			// tag::e45cb729ed4a694b2d6cabaa55c9b5be[]
@@ -43,8 +41,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line145()
 		{
 			// tag::d9e08bca979c7ba3a9581f69470bf914[]

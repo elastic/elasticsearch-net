@@ -5,8 +5,7 @@ namespace Examples.Ingest.Apis
 {
 	public class DeletePipelinePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line29()
 		{
 			// tag::a05925031c1bfbb10c4ef6e5b678e20a[]
@@ -16,8 +15,7 @@ namespace Examples.Ingest.Apis
 			response0.MatchesExample(@"DELETE _ingest/pipeline/my-pipeline-id");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::6ae6a398b979af8231cf6753a9a73f99[]

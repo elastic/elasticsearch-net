@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class CompositeAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line116()
 		{
 			// tag::118c81b8561fd9a9ead388d7971fccd9[]
@@ -27,8 +26,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line135()
 		{
 			// tag::d4d4cb1e761f72aa7cd408655dbcbeac[]
@@ -58,8 +56,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line170()
 		{
 			// tag::59d377892d4d912b216defa48e7befce[]
@@ -80,8 +77,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line189()
 		{
 			// tag::a7ad889b26defd508889b288e076f05f[]
@@ -112,8 +108,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line222()
 		{
 			// tag::9361db99de15d1f18233a555777c2e1f[]
@@ -134,8 +129,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line252()
 		{
 			// tag::2fb60a596d3d996c1329fb4c50955b89[]
@@ -164,8 +158,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line295()
 		{
 			// tag::5d9aef8cd8d324049e34bf96e38814ee[]
@@ -187,8 +180,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line318()
 		{
 			// tag::ce182c31ce9ffb336dd26ee9899da3e7[]
@@ -211,8 +203,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line348()
 		{
 			// tag::9837cab0afe4bae8d11e42411cb812ad[]
@@ -234,8 +225,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line375()
 		{
 			// tag::af056fa2f099bbf339d07b6d11a46210[]
@@ -256,8 +246,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line415()
 		{
 			// tag::b29c0503d688299dd1eb87ff0fe69415[]
@@ -280,8 +269,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line481()
 		{
 			// tag::b6dc7bb2713d7fe2eb6e480dee2e458d[]
@@ -305,8 +293,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line511()
 		{
 			// tag::e4979ca30ac53864edb4871a23ad73b3[]

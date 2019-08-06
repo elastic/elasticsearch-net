@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class IgnoreMalformedPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line16()
 		{
 			// tag::56af112ba65955f3ca5ef61a199c0daa[]
@@ -45,8 +44,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line60()
 		{
 			// tag::835faff0d2e8874b7b9693376fa7fc57[]

@@ -5,8 +5,7 @@ namespace Examples.Monitoring
 {
 	public class CollectingMonitoringDataPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line57()
 		{
 			// tag::fb2b8d642e16132eebcff4f8b6d592d1[]

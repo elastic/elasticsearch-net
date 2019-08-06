@@ -5,8 +5,7 @@ namespace Examples.Docs
 {
 	public class TermvectorsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::4c9b1db368186091c1a660bcd52890b8[]
@@ -16,8 +15,7 @@ namespace Examples.Docs
 			response0.MatchesExample(@"GET /twitter/_termvectors/1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::a15ca7faa8ba282679396de3c7b90485[]
@@ -27,8 +25,7 @@ namespace Examples.Docs
 			response0.MatchesExample(@"GET /twitter/_termvectors/1?fields=message");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line127()
 		{
 			// tag::587dd0c1aebbc1d93190bf117959cb73[]
@@ -72,8 +69,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line169()
 		{
 			// tag::3dbccd70f0a20ff7a8a2a4ee7ec406ed[]
@@ -95,8 +91,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line189()
 		{
 			// tag::8dfecbb38a81fb5b42f63d6fe9bf9278[]
@@ -114,8 +109,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line276()
 		{
 			// tag::487d12bb3e3036c4493dcbe43191b6f0[]
@@ -132,8 +126,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line301()
 		{
 			// tag::1f580df38ae517800d0c62d9648ebcb9[]
@@ -149,8 +142,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line324()
 		{
 			// tag::8304a9c1ae8d0329b66ba57fb8263485[]
@@ -170,8 +162,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line390()
 		{
 			// tag::ef3b210782fe58df252d0e805b8ef644[]

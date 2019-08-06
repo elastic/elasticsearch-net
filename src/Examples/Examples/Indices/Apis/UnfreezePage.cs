@@ -5,8 +5,7 @@ namespace Examples.Indices.Apis
 {
 	public class UnfreezePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::ffea06f77c9df5720412aa06be964118[]

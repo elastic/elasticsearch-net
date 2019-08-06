@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class BucketScriptAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line45()
 		{
 			// tag::c2d90e1c88ff5b1857ed4a5b169c9689[]

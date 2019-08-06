@@ -5,8 +5,7 @@ namespace Examples.Ilm
 {
 	public class SetUpLifecyclePolicyPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::7ecf197610e30c20f7206513ce393822[]
@@ -35,8 +34,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::3c9d99215a7020ab478bdf5c8287a14f[]
@@ -55,8 +53,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line75()
 		{
 			// tag::25737fd456fd317cc4cc2db76b6cf28e[]
@@ -73,8 +70,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line98()
 		{
 			// tag::160d259243d0800900b065c4b9d2b187[]

@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class OidcPrepareAuthenticationApiPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line53()
 		{
 			// tag::e3019fd5f23458ae49ad9854c97d321c[]
@@ -19,8 +18,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line78()
 		{
 			// tag::57dc15e5ad663c342fd5c1d86fcd1b29[]
@@ -35,8 +33,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line105()
 		{
 			// tag::d35c8cf7a98b3f112e1de8797ec6689d[]

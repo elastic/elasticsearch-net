@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class RedirectsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line408()
 		{
 			// tag::4ab6d3ed4f4422cee8a590040a579be5[]

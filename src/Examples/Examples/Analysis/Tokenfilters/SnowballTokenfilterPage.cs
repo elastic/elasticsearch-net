@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class SnowballTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::e776311ef67c972f322b669dc4ab9926[]

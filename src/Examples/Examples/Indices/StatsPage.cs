@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class StatsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::78c4035e4fbf6851140660f6ed2a1fa5[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET /_stats");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::e0b2f56c34e33ff52f8f9658be2f7ca1[]
@@ -27,8 +25,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET /index1,index2/_stats");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line78()
 		{
 			// tag::45c55ce8b2df147cd68b8f151a36a8d8[]

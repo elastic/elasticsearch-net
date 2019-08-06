@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class UaxurlemailTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::d12df43ffcdcd937bae9b26fb475e239[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line94()
 		{
 			// tag::1125986e8e55028ff4c10b5e6c7bbebb[]

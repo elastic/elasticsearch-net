@@ -5,8 +5,7 @@ namespace Examples.Licensing
 {
 	public class GetLicensePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line48()
 		{
 			// tag::11c395d1649733bcab853fe31ec393b2[]

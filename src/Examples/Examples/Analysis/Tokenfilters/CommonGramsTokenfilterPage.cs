@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class CommonGramsTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::dc0d7dd6fb47db03df4cb11bdb00b125[]
@@ -43,8 +42,7 @@ namespace Examples.Analysis.Tokenfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line78()
 		{
 			// tag::817be849e2c568a21766d6ce2ffafadd[]

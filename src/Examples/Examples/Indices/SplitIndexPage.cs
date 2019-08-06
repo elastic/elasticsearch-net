@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class SplitIndexPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line89()
 		{
 			// tag::76bcb71590ce6acebc8427c4ebcf9521[]
@@ -21,8 +20,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line105()
 		{
 			// tag::01c0e302f4fd5118faf5e34f4a010ebf[]
@@ -37,8 +35,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line126()
 		{
 			// tag::290a366536875db313d1cbbed61cb9b6[]
@@ -53,8 +50,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line161()
 		{
 			// tag::d1a84808a9bca68c9bd7ede0a55a5a9f[]

@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Bucket
 {
 	public class GeotilegridAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line34()
 		{
 			// tag::86f1e66bc101b3f22dc84d2aa172fd75[]
@@ -55,8 +54,7 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::57705815ad6bd50d91e58153ae75d3ca[]

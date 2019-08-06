@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringLdapRealmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line149()
 		{
 			// tag::21e95d29bc37deb5689a654aa323b4ba[]
@@ -23,8 +22,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line163()
 		{
 			// tag::38ffa96674b5fd4042589af0ebb0437b[]

@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class GetAppPrivilegesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line54()
 		{
 			// tag::cd8006165ac64f1ef99af48e5a35a25b[]
@@ -16,8 +15,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			response0.MatchesExample(@"GET /_security/privilege/myapp/read");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::3b18e9de638ff0b1c7a1f1f6bf1c24f3[]
@@ -27,8 +25,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			response0.MatchesExample(@"GET /_security/privilege/myapp/");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line94()
 		{
 			// tag::0ddf705317d9c5095b4a1419a2e3bace[]

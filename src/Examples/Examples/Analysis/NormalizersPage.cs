@@ -5,8 +5,7 @@ namespace Examples.Analysis
 {
 	public class NormalizersPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line25()
 		{
 			// tag::966ff3a4c5b61ed1a36d44c17ce06157[]

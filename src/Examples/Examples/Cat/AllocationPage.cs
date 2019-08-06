@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class AllocationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line8()
 		{
 			// tag::5c7ece1f30267adabdb832424871900a[]

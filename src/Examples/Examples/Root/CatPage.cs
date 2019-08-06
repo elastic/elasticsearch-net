@@ -5,8 +5,7 @@ namespace Examples.Root
 {
 	public class CatPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
 			// tag::45bde49f35ffae3f3dabc77a592241b4[]
@@ -16,8 +15,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_cat/master?v");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
 			// tag::179dabbc531ede7a1813d1a11ce5b5fd[]
@@ -27,8 +25,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_cat/master?help");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line79()
 		{
 			// tag::d940059e16675a40e3d278073331eeed[]
@@ -38,8 +35,7 @@ namespace Examples.Root
 			response0.MatchesExample(@"GET /_cat/nodes?h=ip,port,heapPercent,name");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line195()
 		{
 			// tag::794fa23d07c42900b5e97fb9bf323941[]

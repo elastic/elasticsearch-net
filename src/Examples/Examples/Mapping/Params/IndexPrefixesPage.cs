@@ -5,8 +5,7 @@ namespace Examples.Mapping.Params
 {
 	public class IndexPrefixesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::ff5d15a265855b1c11cb20ceef6a1b58[]
@@ -26,8 +25,7 @@ namespace Examples.Mapping.Params
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::b19ec4a20c19082e5c40e3b1f28bfbcb[]

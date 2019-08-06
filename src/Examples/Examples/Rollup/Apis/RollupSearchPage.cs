@@ -5,8 +5,7 @@ namespace Examples.Rollup.Apis
 {
 	public class RollupSearchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
 			// tag::2d20c42e9664febeccaff61581605cbe[]
@@ -42,8 +41,7 @@ namespace Examples.Rollup.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::4e63a0fd56cc5d59595baa0b0721f971[]
@@ -63,8 +61,7 @@ namespace Examples.Rollup.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line145()
 		{
 			// tag::3d1cea1ad861d1ee62e5f34b84371943[]
@@ -84,8 +81,7 @@ namespace Examples.Rollup.Apis
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line189()
 		{
 			// tag::adcd760ef029f744ab59460818d2342e[]

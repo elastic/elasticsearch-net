@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class SimpleQueryStringQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::0d49474511b236bc89e768c8ee91adf1[]
@@ -25,8 +24,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line110()
 		{
 			// tag::521aa59ae56681fd59ac5840cba6b6c5[]
@@ -44,8 +42,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line145()
 		{
 			// tag::f4563bc7d16d5026f94e8a69699de6e7[]
@@ -63,8 +60,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line166()
 		{
 			// tag::f686f52decb1d57356d42920f46d4d85[]
@@ -82,8 +78,7 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line211()
 		{
 			// tag::2e602d7fbad46132358f921dff7d1a26[]

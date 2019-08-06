@@ -5,8 +5,7 @@ namespace Examples.Analysis.Analyzers
 {
 	public class StopAnalyzerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::42d02087f1c8ab0452ef373079a76843[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line132()
 		{
 			// tag::5a676e5f09ba584408ce6ecacda13d1d[]
@@ -51,8 +49,7 @@ namespace Examples.Analysis.Analyzers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line250()
 		{
 			// tag::42deb4fe32afbe0f94185e256a79c447[]

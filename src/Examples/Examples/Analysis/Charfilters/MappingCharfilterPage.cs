@@ -5,8 +5,7 @@ namespace Examples.Analysis.Charfilters
 {
 	public class MappingCharfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line35()
 		{
 			// tag::f9518803f0368e326ce2f46bd213bde9[]
@@ -55,8 +54,7 @@ namespace Examples.Analysis.Charfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line109()
 		{
 			// tag::8d5c32d86f00cf27d3f52a5fc493ea30[]

@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class SortPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::d1b3b7d2bb2ab90d15fd10318abd24db[]
@@ -30,8 +29,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line31()
 		{
 			// tag::ae9b5fbd42af2386ffbf56ad4a697e51[]
@@ -53,8 +51,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::b997885974522ef439d5e345924cc5ba[]
@@ -80,8 +77,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line126()
 		{
 			// tag::abf329ebefaf58acd4ee30e685731499[]
@@ -98,8 +94,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line139()
 		{
 			// tag::f6b5032bf27c2445d28845be0d413970[]
@@ -116,8 +111,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line159()
 		{
 			// tag::2891aa10ee9d474780adf94d5607f2db[]
@@ -136,8 +130,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::f4a1008b3f9baa67bb03ce9ef5ab4cb4[]
@@ -154,8 +147,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line200()
 		{
 			// tag::7477671958734843dd67cf0b8e6c7515[]
@@ -172,8 +164,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line220()
 		{
 			// tag::5f3549ac7fee94682ca0d7439eebdd2a[]
@@ -192,8 +183,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line272()
 		{
 			// tag::de139866a220124360e5e27d1a736ea4[]
@@ -222,8 +212,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line300()
 		{
 			// tag::22334f4b24bb8977d3e1bf2ffdc29d3f[]
@@ -271,8 +260,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line357()
 		{
 			// tag::ef0f4fa4272c47ff62fb7b422cf975e7[]
@@ -290,8 +278,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line382()
 		{
 			// tag::899eef71a67a1b2aa11a2166ec7f48f1[]
@@ -309,8 +296,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line405()
 		{
 			// tag::d17269bb80fb63ec0bf37d219e003dcb[]
@@ -337,8 +323,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line459()
 		{
 			// tag::979d25dff2d8987119410291ad47b0d1[]
@@ -365,8 +350,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line486()
 		{
 			// tag::d50a3c64890f88af32c6d4ef4899d82a[]
@@ -390,8 +374,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line508()
 		{
 			// tag::a1db5c822745fe167e9ef854dca3d129[]
@@ -415,8 +398,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line533()
 		{
 			// tag::15dad5338065baaaa7d475abe85f4c22[]
@@ -440,8 +422,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line558()
 		{
 			// tag::77243bbf92f2a55e0fca6c2a349a1c15[]
@@ -465,8 +446,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line588()
 		{
 			// tag::04fe1e3a0047b0cdb10987b79fc3f3f3[]
@@ -494,8 +474,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line618()
 		{
 			// tag::e8e451bc8c45bcf16df43804c4fc8329[]

@@ -5,8 +5,7 @@ namespace Examples.Modules.Cluster
 {
 	public class AllocationFilteringPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::281ae12918af10b6377ec760eaa844ce[]
@@ -21,8 +20,7 @@ namespace Examples.Modules.Cluster
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line61()
 		{
 			// tag::07474768b8f9d532b524c15e512736f4[]

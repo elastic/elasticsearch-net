@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class ArrayPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::4d6997c70a1851f9151443c0d38b532e[]

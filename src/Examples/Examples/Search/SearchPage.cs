@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class SearchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::be49260e1b3496c4feac38c56ebb0669[]
@@ -16,8 +15,7 @@ namespace Examples.Search
 			response0.MatchesExample(@"GET /twitter/_search?q=user:kimchy");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line27()
 		{
 			// tag::269071bbf812125f0b250676251c5936[]
@@ -27,8 +25,7 @@ namespace Examples.Search
 			response0.MatchesExample(@"GET /kimchy,elasticsearch/_search?q=tag:wow");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::4b2b9e7600f9d1eecf82de070a1bf2f4[]

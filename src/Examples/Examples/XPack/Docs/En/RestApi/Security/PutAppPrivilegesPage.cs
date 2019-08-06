@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class PutAppPrivilegesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line79()
 		{
 			// tag::4ee31fd4ea6d18f32ec28b7fa433441d[]
@@ -28,8 +27,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line125()
 		{
 			// tag::ee90d1fb22b59d30da339d825303b912[]

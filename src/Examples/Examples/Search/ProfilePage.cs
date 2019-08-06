@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class ProfilePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::f6e300010478e5cbbeb2e589bc16fce7[]
@@ -22,8 +21,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line509()
 		{
 			// tag::d8621790a416f05557c8df037a3722ac[]

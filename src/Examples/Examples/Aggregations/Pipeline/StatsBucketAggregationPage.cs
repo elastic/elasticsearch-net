@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Pipeline
 {
 	public class StatsBucketAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::8a187c87964774530ef99f8962d83da5[]

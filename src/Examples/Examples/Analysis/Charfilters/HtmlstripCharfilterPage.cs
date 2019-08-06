@@ -5,8 +5,7 @@ namespace Examples.Analysis.Charfilters
 {
 	public class HtmlstripCharfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
 			// tag::d6de3491f5787f739d5cd8c2ff3dddfa[]
@@ -21,8 +20,7 @@ namespace Examples.Analysis.Charfilters
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line75()
 		{
 			// tag::426f95b13a5b6042b5273d74ad8ee708[]

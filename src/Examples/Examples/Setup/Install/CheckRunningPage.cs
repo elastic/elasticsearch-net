@@ -5,8 +5,7 @@ namespace Examples.Setup.Install
 {
 	public class CheckRunningPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::3d1ff6097e2359f927c88c2ccdb36252[]

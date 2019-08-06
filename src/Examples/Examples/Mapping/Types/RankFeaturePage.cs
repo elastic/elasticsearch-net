@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class RankFeaturePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::1e088f892b20697fd6e537a3ecf624ee[]

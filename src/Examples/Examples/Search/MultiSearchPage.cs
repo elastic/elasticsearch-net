@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class MultiSearchPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::05af5eab63bf98d0078dfe661cd81124[]
@@ -22,8 +21,7 @@ namespace Examples.Search
 			{""query"" : {""match_all"" : {}}}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line113()
 		{
 			// tag::a914be2ff7dd0cbdec0257f0ad50b625[]
@@ -37,8 +35,7 @@ namespace Examples.Search
 			{ ""source"" : ""{ \""query\"": { \""match_{{template}}\"": {} } }"", ""params"": { ""template"": ""all"" } }");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line128()
 		{
 			// tag::28e66ff0ecdd71cb1426880115eab5dd[]
@@ -60,8 +57,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line147()
 		{
 			// tag::72e72cb3aa1b10b903d8cadcaddf7d10[]
@@ -83,8 +79,7 @@ namespace Examples.Search
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line168()
 		{
 			// tag::8b4c8f395c0a6f952a42051a0d357154[]

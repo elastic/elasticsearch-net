@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class GetSettingsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line7()
 		{
 			// tag::20bdfd960e8d76c4329269e237792eb7[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET /twitter/_settings");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line24()
 		{
 			// tag::c538fc182f433e7141aee9d75c3e42d2[]
@@ -35,8 +33,7 @@ namespace Examples.Indices
 			response2.MatchesExample(@"GET /log_2013_*/_settings");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line42()
 		{
 			// tag::9748682dcfb24b7d4893f534f7040370[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class ParentJoinPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
 			// tag::59a6a91a43e92b9f7035eadae9e1b8b9[]
@@ -28,8 +27,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line39()
 		{
 			// tag::3a9297c0898dfe7b38da82635b7dc1ff[]
@@ -55,8 +53,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::fcfe9592f9c8a59fe2b2110246b9a462[]
@@ -78,8 +75,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::1d13c92896ed8a8bd273773481c90a3c[]
@@ -107,8 +103,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line160()
 		{
 			// tag::a5e3a4c6dbda1f1cd7f22720ef362de2[]
@@ -124,8 +119,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line268()
 		{
 			// tag::26fe7b3c9aeab972725b6d708cc6df22[]
@@ -158,8 +152,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line322()
 		{
 			// tag::e0b414b45460d424ab838b5136492fa1[]
@@ -182,8 +175,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line344()
 		{
 			// tag::2c090fe7ec7b66b3f5c178d71c46323b[]
@@ -205,8 +197,7 @@ namespace Examples.Mapping.Types
 			response3.MatchesExample(@"GET _nodes/stats/indices/fielddata?human&fields=my_join_field#question");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line359()
 		{
 			// tag::bc358cfd219faf9353cb65820981a0df[]
@@ -228,8 +219,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line387()
 		{
 			// tag::1cc03b9715d9a3f876f7b7bb7fe66394[]
@@ -252,8 +242,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line423()
 		{
 			// tag::6eecf0fbf95d132beb0f49b3181da419[]

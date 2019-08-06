@@ -5,8 +5,7 @@ namespace Examples.IndexModules
 {
 	public class SimilarityPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
 			// tag::ce12fedff96537d4a5169724225f4287[]
@@ -31,8 +30,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line46()
 		{
 			// tag::528e5f1c345c3769248cc6889e8cf552[]
@@ -47,8 +45,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line194()
 		{
 			// tag::dfa16b7300d225e013f23625f44c087b[]
@@ -109,8 +106,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line361()
 		{
 			// tag::5f8fb5513d4f725434db2f517ad4298f[]
@@ -144,8 +140,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line527()
 		{
 			// tag::553d79817bb1333970e99507c37a159a[]
@@ -166,8 +161,7 @@ namespace Examples.IndexModules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line548()
 		{
 			// tag::48de51de87a8ad9fd8b8db1ca25b85c1[]

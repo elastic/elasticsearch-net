@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class KeywordPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line20()
 		{
 			// tag::46c4b0dfb674825f9579203d41e7f404[]

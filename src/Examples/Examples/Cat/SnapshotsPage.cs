@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class SnapshotsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
 			// tag::706fc4b9e4df1f6ee3fe34194492c20e[]
@@ -16,8 +15,7 @@ namespace Examples.Cat
 			response0.MatchesExample(@"GET /_cat/snapshots/repo1?v&s=id");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line41()
 		{
 			// tag::18bd891c5a3d7dfd4dee6a9a9baae825[]

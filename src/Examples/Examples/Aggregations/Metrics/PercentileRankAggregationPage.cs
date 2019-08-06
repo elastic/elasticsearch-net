@@ -5,8 +5,7 @@ namespace Examples.Aggregations.Metrics
 {
 	public class PercentileRankAggregationPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line26()
 		{
 			// tag::daaa9e0df859d764ca0a4a4ebcfbdb26[]
@@ -27,8 +26,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line71()
 		{
 			// tag::156dd311073c8c825e608becf63ae7fe[]
@@ -50,8 +48,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line122()
 		{
 			// tag::c9ea558335446fc64006724cb72684e1[]
@@ -78,8 +75,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::59bcc5d1ed0aac1aa949f84d80a4fa1d[]
@@ -105,8 +101,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::214d704d18485ab75ef53aa9c0524590[]
@@ -130,8 +125,7 @@ namespace Examples.Aggregations.Metrics
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line219()
 		{
 			// tag::77f575b0cc37dd7a2415cbf6417d3148[]

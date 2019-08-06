@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class PathhierarchyTokenizerExamplesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line18()
 		{
 			// tag::840b6c5c3d9c56aed854cfab8da04486[]
@@ -93,8 +92,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line98()
 		{
 			// tag::bd767ea03171fe71c73f58f16d5da92f[]
@@ -111,8 +109,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line115()
 		{
 			// tag::b724f547c5d67e95bbc0a9920e47033c[]
@@ -129,8 +126,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line135()
 		{
 			// tag::f1dc6f69453867ffafe86e998dd464d9[]
@@ -149,8 +145,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line155()
 		{
 			// tag::acc52da725a996ae696b00d9f818dfde[]
@@ -172,8 +167,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line176()
 		{
 			// tag::4bba59cf745ac7b996bf90308bc26957[]

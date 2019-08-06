@@ -5,8 +5,7 @@ namespace Examples.QueryDsl
 {
 	public class SpanWithinQueryPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::9429e565d0b56289a10b81220660163c[]

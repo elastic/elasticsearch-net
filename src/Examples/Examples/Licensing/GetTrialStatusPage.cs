@@ -5,8 +5,7 @@ namespace Examples.Licensing
 {
 	public class GetTrialStatusPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line43()
 		{
 			// tag::88cf60d3310a56d8ae12704abc05b565[]

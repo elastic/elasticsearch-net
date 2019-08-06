@@ -5,8 +5,7 @@ namespace Examples.Licensing
 {
 	public class UpdateLicensePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line59()
 		{
 			// tag::4fb399ee372ae8837cbb9aa66be30f62[]
@@ -30,8 +29,7 @@ namespace Examples.Licensing
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line136()
 		{
 			// tag::efe30c2a1611afdc85ae522e4f5a457b[]

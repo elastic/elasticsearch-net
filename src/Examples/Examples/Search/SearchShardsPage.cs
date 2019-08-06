@@ -5,8 +5,7 @@ namespace Examples.Search
 {
 	public class SearchShardsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line17()
 		{
 			// tag::49b137a1c0016face219bac3faf41996[]
@@ -16,8 +15,7 @@ namespace Examples.Search
 			response0.MatchesExample(@"GET /twitter/_search_shards");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line102()
 		{
 			// tag::a44b7da0091ac75e5571475a4e99bb16[]

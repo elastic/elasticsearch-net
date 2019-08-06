@@ -5,8 +5,7 @@ namespace Examples.Ilm
 {
 	public class UsingPoliciesRolloverPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line59()
 		{
 			// tag::aed01ec7b6368fa2c8f86434e176c907[]
@@ -35,8 +34,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line88()
 		{
 			// tag::f29c02d259065033bd557519d1b21481[]
@@ -55,8 +53,7 @@ namespace Examples.Ilm
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line109()
 		{
 			// tag::454e0e11e2bbb4718109a53662f8c45d[]

@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class SegmentsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line9()
 		{
 			// tag::6f507269ad5b31d2bb0885c1b18aac1a[]

@@ -5,8 +5,7 @@ namespace Examples.Mapping.Types
 {
 	public class RangePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line21()
 		{
 			// tag::2b371fbf0654d76436d49f5703d6c137[]
@@ -46,8 +45,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line63()
 		{
 			// tag::84edb44c5b74426f448b2baa101092d6[]
@@ -66,8 +64,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line120()
 		{
 			// tag::1572696b97822d3332be51700e09672f[]
@@ -88,8 +85,7 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line187()
 		{
 			// tag::f894f680943a8af8328aab4741e6ab93[]

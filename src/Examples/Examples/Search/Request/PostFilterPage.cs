@@ -5,8 +5,7 @@ namespace Examples.Search.Request
 {
 	public class PostFilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::35390274db3acad03eb77b2376c57e40[]
@@ -34,8 +33,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line41()
 		{
 			// tag::f83eb6605c7c56e297a494b318400ef0[]
@@ -55,8 +53,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line65()
 		{
 			// tag::81f1b1e1d5c81683b6bf471c469e6046[]
@@ -81,8 +78,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line96()
 		{
 			// tag::48313f620c2871b6f4019b66be730109[]

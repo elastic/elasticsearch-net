@@ -5,8 +5,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringKerberosRealmPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line155()
 		{
 			// tag::9584b042223982e0bfde8d12d42c9705[]

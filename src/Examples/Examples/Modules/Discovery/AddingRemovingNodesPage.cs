@@ -5,8 +5,7 @@ namespace Examples.Modules.Discovery
 {
 	public class AddingRemovingNodesPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line64()
 		{
 			// tag::abcc9f98c6bbaf70aa0b1abf8011d2a4[]
@@ -31,8 +30,7 @@ namespace Examples.Modules.Discovery
 			response3.MatchesExample(@"POST /_cluster/voting_config_exclusions/node_name?timeout=1m");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line108()
 		{
 			// tag::92f073762634a4b2274f71002494192e[]
@@ -42,8 +40,7 @@ namespace Examples.Modules.Discovery
 			response0.MatchesExample(@"GET /_cluster/state?filter_path=metadata.cluster_coordination.voting_config_exclusions");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line127()
 		{
 			// tag::ead4d875877d618594d0cdbdd9b7998b[]

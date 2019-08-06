@@ -5,8 +5,7 @@ namespace Examples.Cat
 {
 	public class AliasPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line36()
 		{
 			// tag::a003467caeafcb2a935522efb83080cb[]

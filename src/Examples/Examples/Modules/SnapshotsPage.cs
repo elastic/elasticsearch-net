@@ -5,8 +5,7 @@ namespace Examples.Modules
 {
 	public class SnapshotsPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line92()
 		{
 			// tag::92b3749a473cf2e7ff4055316662a4fe[]
@@ -22,8 +21,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line107()
 		{
 			// tag::ff930e6409b6a923ef1c9e7fc99f24cc[]
@@ -33,8 +31,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line134()
 		{
 			// tag::b9e4f7a80d21c85f88f578219df8e192[]
@@ -44,8 +41,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/repo*,*backup*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line143()
 		{
 			// tag::0d754b0d8d13c6d39ea353978dfe5992[]
@@ -55,8 +51,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line151()
 		{
 			// tag::37432cda12eb63ce59d186b55233c6e1[]
@@ -66,8 +61,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/_all");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line184()
 		{
 			// tag::44b410249d477c640c127bfc7320e365[]
@@ -84,8 +78,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line201()
 		{
 			// tag::8988215f3a4fc4b7a7ef4a9c5be3391e[]
@@ -102,8 +95,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line279()
 		{
 			// tag::98ee9bfa32b64ca22e4338544b36c370[]
@@ -120,8 +112,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line309()
 		{
 			// tag::f1a7cf532da3a8f9a52a401a90e3a998[]
@@ -137,8 +128,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line324()
 		{
 			// tag::337cd2c3f9e11665f00786705037f86c[]
@@ -148,8 +138,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"POST /_snapshot/my_unverified_backup/_verify");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line341()
 		{
 			// tag::2ab78817eacb5030a447e7fac6b91591[]
@@ -159,8 +148,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"PUT /_snapshot/my_backup/snapshot_1?wait_for_completion=true");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line356()
 		{
 			// tag::4a0353692bb14c5fccdc97903af0aa13[]
@@ -179,8 +167,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line388()
 		{
 			// tag::7eb0303e39243fbb9bf51a99270cd022[]
@@ -194,8 +181,7 @@ namespace Examples.Modules
 			response1.MatchesExample(@"PUT /_snapshot/my_backup/%3Csnapshot-%7Bnow%2Fd%7D%3E");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line419()
 		{
 			// tag::020c56e520ff6556ebfaf98efaef56aa[]
@@ -205,8 +191,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/snapshot_1");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line457()
 		{
 			// tag::0b77ebfb06c63ccbad857b39bb4ff851[]
@@ -216,8 +201,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/snapshot_*,some_other_snapshot");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line466()
 		{
 			// tag::fb224f0ae2a03567b6d9b165e7dd24b6[]
@@ -227,8 +211,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/_all");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line486()
 		{
 			// tag::677fdf84ac97bb107207b6966143144b[]
@@ -246,8 +229,7 @@ namespace Examples.Modules
 			response2.MatchesExample(@"GET /_snapshot/my*/snap*");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line497()
 		{
 			// tag::155c438e215890cdcb4879eaaadf4046[]
@@ -257,8 +239,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/_current");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line506()
 		{
 			// tag::0784fbe88299be4f02eaa86368e93203[]
@@ -268,8 +249,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"DELETE /_snapshot/my_backup/snapshot_2");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line521()
 		{
 			// tag::2b8d2065be3002b0be26598d6ad803a6[]
@@ -279,8 +259,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"DELETE /_snapshot/my_backup");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line537()
 		{
 			// tag::853ca73db9b596cc4ddda66b3ec8faa2[]
@@ -290,8 +269,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"POST /_snapshot/my_backup/snapshot_1/_restore");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line556()
 		{
 			// tag::47dcf95e3d398b9bdcb0a483f705bb4b[]
@@ -308,8 +286,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line595()
 		{
 			// tag::79ecb7594b3e55df3e28149beff222f6[]
@@ -328,8 +305,7 @@ namespace Examples.Modules
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line640()
 		{
 			// tag::1ae301364751c376b3d26581a36d8975[]
@@ -339,8 +315,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/_status");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line650()
 		{
 			// tag::db1913b97109b86cfc5efc7cfcd65d93[]
@@ -350,8 +325,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/_status");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line660()
 		{
 			// tag::e566ca0098be82a2847c17069711a822[]
@@ -361,8 +335,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/snapshot_1/_status");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line717()
 		{
 			// tag::2432f86346177533cabdabbd4eb41b30[]
@@ -372,8 +345,7 @@ namespace Examples.Modules
 			response0.MatchesExample(@"GET /_snapshot/my_backup/snapshot_1,snapshot_2/_status");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line777()
 		{
 			// tag::86c723fc6212d34166661e7dac223491[]

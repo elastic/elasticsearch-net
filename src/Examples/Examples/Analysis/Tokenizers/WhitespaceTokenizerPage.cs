@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class WhitespaceTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::7b9dfe5857bde1bd8483ea3241656714[]

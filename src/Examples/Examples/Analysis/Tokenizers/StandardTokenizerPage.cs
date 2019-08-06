@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenizers
 {
 	public class StandardTokenizerPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line13()
 		{
 			// tag::88a08d0b15ef41324f5c23db533d47d1[]
@@ -20,8 +19,7 @@ namespace Examples.Analysis.Tokenizers
 			}");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line138()
 		{
 			// tag::7375d4fe72c848ee3b0a799fda8bb0f0[]

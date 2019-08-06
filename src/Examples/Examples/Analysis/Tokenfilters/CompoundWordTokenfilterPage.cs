@@ -5,8 +5,7 @@ namespace Examples.Analysis.Tokenfilters
 {
 	public class CompoundWordTokenfilterPage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line86()
 		{
 			// tag::349e77cfe54f857ccfdde0e47c2d7cd5[]

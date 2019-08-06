@@ -5,8 +5,7 @@ namespace Examples.Indices
 {
 	public class OpenClosePage : ExampleBase
 	{
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line26()
 		{
 			// tag::3a6b9143f3de6258d44ff7e0eb38d953[]
@@ -16,8 +15,7 @@ namespace Examples.Indices
 			response0.MatchesExample(@"POST /my_index/_close");
 		}
 
-		[U]
-		[SkipExample]
+		[U(Skip = "Example not implemented")]
 		public void Line51()
 		{
 			// tag::37e6177bf8803971d30a4252498c07a4[]
