@@ -52,7 +52,7 @@ namespace Tests.Cat.CatFielddata
 			// TODO investigate flakiness
 			// build seed:64178 integrate 6.3.0 "readonly" "catfielddata"
 			// fails on TeamCity but not locally, assuming the different PC sizes come into play
-			if (SkipOnTeamCityAttribute.RunningOnTeamCity || _initialSearchResponse == null || _initialSearchResponse.Total <= 0)
+			if (SkipOnCiAttribute.RunningOnTeamCity || _initialSearchResponse == null || _initialSearchResponse.Total <= 0)
 				return;
 
 			response.Records.Should().NotBeEmpty();
