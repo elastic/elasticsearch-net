@@ -13,6 +13,9 @@ namespace Tests.Configuration
 		/// <summary> The Elasticsearch version to test against, defined for both unit and integration tests</summary>
 		public string ElasticsearchVersion { get; protected set; }
 
+		public bool ElasticsearchVersionIsSnapshot => !string.IsNullOrWhiteSpace(ElasticsearchVersion)
+			&& (ElasticsearchVersion.Contains("SNAPSHOT") || ElasticsearchVersion.Contains("latest"));
+
 		/// <summary> Force a reseed (bootstrap) of the cluster even if checks indicate bootstrap already ran </summary>
 		public bool ForceReseed { get; protected set; }
 
