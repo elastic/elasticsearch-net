@@ -33,7 +33,9 @@ namespace Examples
 			example = Example.ApplyGlobalChanges(example);
 
 			response.ApiCall.HttpMethod.Should().Be(example.Method);
-			response.ApiCall.Uri.AbsolutePath.Should().Be(example.Uri.AbsolutePath.TrimEnd('/'));
+			response.ApiCall.Uri.AbsolutePath.Should().Be(example.Uri.AbsolutePath.Length > 1
+				? example.Uri.AbsolutePath.TrimEnd('/')
+				: example.Uri.AbsolutePath);
 
 			// check expected query string params. Rather that _all_ keys match,
 			// only check that the ones in reference doc example are present, because
