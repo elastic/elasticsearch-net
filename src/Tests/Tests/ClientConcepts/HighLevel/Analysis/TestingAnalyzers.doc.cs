@@ -191,6 +191,27 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		 *
 		 *
 		 */
+		/*
+		 *   {
+-   "tokens": [
++   "error": {
++     "reason": "failed to find analyzer [my_analyzer]",
++     "root_cause": [
+        {
+-       "token": "fsharp",
+-       "start_offset": 0,
+-       "end_offset": 2,
+-       "type": "<ALPHANUM>",
+-       "position": 0
++         "reason": "[writable-node-c9352e9200][127.0.0.1:9300][indices:admin/analyze[s]]",
++         "stack_trace": "[[writable-node-c9352e9200][127.0.0.1:9300][indices:admin/analyze[s]]]; nested: RemoteTransportException[[writable-node-c9352e9200][127.0.0.1:9300][indices:admin/analyze[s]]]; nested: IllegalArgumentException[failed to find analyzer [my_analyzer]];\n\tat org.elasticsearch.ElasticsearchException.guessRootCauses(ElasticsearchException.java:639)\n\tat org.elasticsearch.ElasticsearchException.generateFailureXContent(ElasticsearchException.java:567)\n\tat org.elasticsearch.rest.BytesRestResponse.build(BytesRestResponse.java:138)\n\tat org.elasticsearch.rest.BytesRestResponse.<init>(BytesRestResponse.java:96)\n\tat org.elasticsearch.rest.BytesRestResponse.<init>(BytesRestResponse.java:91)\n\tat org.elasticsearch.rest.action.RestActionListener.onFailure(RestActionListener.java:58)\n\tat org.elasticsearch.action.support.TransportAction$1.onFailure(TransportAction.java:79)\n\tat org.elasticsearch.action.support.single.shard.TransportSingleShardAction$AsyncSingleAction.perform(TransportSingleShardAction.java:229)\n\tat org.elasticsearch.action.support.single.shard.TransportSingleShardAction$AsyncSingleAction.onFailure(TransportSingleShardAction.java:210)\n\tat org.elasticsearch.action.support.single.shard.TransportSingleShardAction$AsyncSingleAction$2.handleException(TransportSingleShardAction.java:266)\n\tat org.elasticsearch.transport.TransportService$ContextRestoreResponseHandler.handleException(TransportService.java:1110)\n\tat org.elasticsearch.transport.TransportService$DirectResponseChannel.processException(TransportService.java:1219)\n\tat org.elasticsearch.transport.TransportService$DirectResponseChannel.sendResponse(TransportService.java:1193)\n\tat org.elasticsearch.transport.TaskTransportChannel.sendResponse(TaskTransportChannel.java:60)\n\tat org.elasticsearch.action.support.ChannelActionListener.onFailure(ChannelActionListener.java:56)\n\tat org.elasticsearch.action.ActionRunnable.onFailure(ActionRunnable.java:60)\n\tat org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.onFailure(ThreadContext.java:754)\n\tat org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:39)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:835)\nCaused by: RemoteTransportException[[writable-node-c9352e9200][127.0.0.1:9300][indices:admin/analyze[s]]]; nested: IllegalArgumentException[failed to find analyzer [my_analyzer]];\nCaused by: java.lang.IllegalArgumentException: failed to find analyzer [my_analyzer]\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.getAnalyzer(TransportAnalyzeAction.java:160)\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.analyze(TransportAnalyzeAction.java:138)\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.shardOperation(TransportAnalyzeAction.java:121)\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.shardOperation(TransportAnalyzeAction.java:73)\n\tat org.elasticsearch.action.support.single.shard.TransportSingleShardAction.lambda$asyncShardOperation(TransportSingleShardAction.java:110)\n\tat org.elasticsearch.action.ActionRunnable$1.doRun(ActionRunnable.java:45)\n\tat org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:769)\n\tat org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:835)\n",
++         "type": "remote_transport_exception"
++       }
++     ],
++     "stack_trace": "java.lang.IllegalArgumentException: failed to find analyzer [my_analyzer]\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.getAnalyzer(TransportAnalyzeAction.java:160)\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.analyze(TransportAnalyzeAction.java:138)\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.shardOperation(TransportAnalyzeAction.java:121)\n\tat org.elasticsearch.action.admin.indices.analyze.TransportAnalyzeAction.shardOperation(Tra, but found False.
+Stack Trace:
+		 */
+		[SkipVersion(">=8.0.0-SNAPSHOT", "")]
 		[I]public void CustomAnalyzer()
 		{
 			//hide

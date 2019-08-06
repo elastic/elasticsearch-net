@@ -26,6 +26,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 	{
 		public DeprecationLogging(ReadOnlyCluster cluster) : base(cluster) { }
 
+		[SkipVersion(">=8.0.0-SNAPSHOT", "only returns one warning")]
 		[I] public void RequestWithMultipleWarning()
 		{
 			var request = new SearchRequest<Project>

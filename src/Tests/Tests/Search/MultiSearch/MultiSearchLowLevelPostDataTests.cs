@@ -9,6 +9,10 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.MultiSearch
 {
+	/*
+	 * No longer returns Success need to investigate.
+	 */
+	[SkipVersion(">=8.0.0-SNAPSHOT", "TODO broken in snapshot")]
 	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly IElasticClient _client;
