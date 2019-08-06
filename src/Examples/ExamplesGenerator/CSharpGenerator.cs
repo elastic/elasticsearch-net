@@ -167,10 +167,11 @@ namespace ExamplesGenerator
 
 			var methodDeclaration = MethodDeclaration(PredefinedType(Token(VoidKeyword)), example.Name)
 				.AddAttributeLists(
-					// mark as unit test
-					AttributeList(SingletonSeparatedList(Attribute(Name("U")))),
-					// but skip for now, until implemented
-					AttributeList(SingletonSeparatedList(Attribute(Name("SkipExample")))))
+					// mark as skipped unit test
+					AttributeList(SingletonSeparatedList(
+						Attribute(Name("U"),
+							AttributeArgumentList(SingletonSeparatedList(
+								AttributeArgument(ParseExpression("Skip = \"Example not implemented\""))))))))
 				.AddModifiers(Token(PublicKeyword))
 				.WithBody(Block(statements));
 

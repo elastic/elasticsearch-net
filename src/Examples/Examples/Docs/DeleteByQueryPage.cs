@@ -55,7 +55,7 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		[SkipExample]
 		public void Line107()
 		{

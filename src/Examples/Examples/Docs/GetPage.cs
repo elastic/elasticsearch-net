@@ -1,5 +1,6 @@
 using System;
 using Elastic.Xunit.XunitPlumbing;
+using Examples.Models;
 using Nest;
 
 namespace Examples.Docs
@@ -17,7 +18,6 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[SkipExample]
 		public void Line46()
 		{
 			// tag::98234499cfec70487cec5d013e976a84[]
