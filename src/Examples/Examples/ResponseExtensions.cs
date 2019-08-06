@@ -55,6 +55,8 @@ namespace Examples
 				var expected = ParseJObjects(example.Body);
 				var actual = ParseJObjects(Encoding.UTF8.GetString(response.ApiCall.RequestBodyInBytes));
 
+				expected.Count.Should().Be(actual.Count);
+
 				foreach (var (e, a) in expected.Zip(actual, (e, a) => (e, a)))
 				{
 					var matches = JToken.DeepEquals(e, a);
@@ -74,6 +76,10 @@ namespace Examples
 			}
 		}
 
+		/// <summary>
+		/// Parses a collection of JObjects from the JSON input. Provides support
+		/// for both regular JSON and newline delimited JSON
+		/// </summary>
 		private static List<JObject> ParseJObjects(string json)
 		{
 			var jObjects = new List<JObject>();

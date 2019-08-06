@@ -1,4 +1,0 @@
-[source, csharp]
-----
-include::../src/Examples/DocsGet.cs[tag=3a1137042dd7f0b247bea769b13851f8]
-----

@@ -13,11 +13,14 @@ using static Microsoft.CodeAnalysis.LanguageNames;
 
 namespace ExamplesGenerator
 {
+	/// <summary>
+	/// Generates C# classes from the Elasticsearch reference docs
+	/// </summary>
 	internal static class CSharpGenerator
 	{
 		private static readonly Regex Content = new Regex("\r?\n\r?\n|\r?\n(?=GET|PUT|POST|DELETE)");
 
-		public static void GenerateExampleClasses(IList<Page> pages)
+		public static void GenerateExampleClasses(IList<ReferencePage> pages)
 		{
 			var workspace = new AdhocWorkspace();
 			workspace.Options = workspace.Options
@@ -31,7 +34,7 @@ namespace ExamplesGenerator
 			{
 				var page = pages[i];
 
-				var sourcePath = page.FullPath(ExampleLocation.ExamplesDir);
+				var sourcePath = page.FullPath(ExampleLocation.ExamplesCSharpProject);
 				CompilationUnitSyntax existingCompilationUnit = null;
 
 				if (File.Exists(sourcePath))
@@ -58,7 +61,7 @@ namespace ExamplesGenerator
 
 		private static NameSyntax Name(string name) => ParseName(name);
 
-		private static string UpdateSource(Page page, CompilationUnitSyntax existingCompilationUnit, Workspace workspace)
+		private static string UpdateSource(ReferencePage referencePage, CompilationUnitSyntax existingCompilationUnit, Workspace workspace)
 		{
 			if (existingCompilationUnit == null)
 				throw new ArgumentNullException(nameof(existingCompilationUnit));
@@ -74,7 +77,7 @@ namespace ExamplesGenerator
 			// clear members from the class, to add only those that exist in the docs
 			var newClassDeclaration = classDeclaration.WithMembers(default);
 
-			foreach (var example in page.Examples)
+			foreach (var example in referencePage.Examples)
 			{
 				var methodDeclaration = methodDeclarations.SingleOrDefault(m => m.ContainsSingleLineComment(example.StartTag));
 
@@ -97,7 +100,7 @@ namespace ExamplesGenerator
 				.ToFullString();
 		}
 
-		private static string CreateSource(Page page, Workspace workspace)
+		private static string CreateSource(ReferencePage referencePage, Workspace workspace)
 		{
 			var compilationUnit = CompilationUnit()
 				.AddUsings(
@@ -105,14 +108,14 @@ namespace ExamplesGenerator
 					UsingDirective(Name("Nest"))
 				);
 
-			var @namespace = NamespaceDeclaration(Name(page.Namespace));
-			var className = page.ClassName;
+			var @namespace = NamespaceDeclaration(Name(referencePage.Namespace));
+			var className = referencePage.ClassName;
 
 			var classDeclaration = ClassDeclaration(className)
 				.AddModifiers(Token(PublicKeyword))
 				.AddBaseListTypes(SimpleBaseType(ParseTypeName("ExampleBase")));
 
-			foreach (var example in page.Examples)
+			foreach (var example in referencePage.Examples)
 			{
 				var methodDeclaration = CreateMethodDeclaration(example);
 				classDeclaration = classDeclaration.AddMembers(methodDeclaration);
@@ -124,10 +127,10 @@ namespace ExamplesGenerator
 			return Formatter.Format(compilationUnit, workspace).ToFullString();
 		}
 
-		private static MethodDeclarationSyntax CreateMethodDeclaration(Example example)
+		private static MethodDeclarationSyntax CreateMethodDeclaration(ReferenceExample referenceExample)
 		{
 			// split content by blank lines and lines that start with HTTP verbs
-			var content = Content.Split(example.Content);
+			var content = Content.Split(referenceExample.Content);
 			var statements = new List<StatementSyntax>();
 
 			for (var i = 0; i < content.Length; i++)
@@ -135,13 +138,13 @@ namespace ExamplesGenerator
 				var statement = ParseStatement($"var response{i} = new SearchResponse<object>();");
 				if (i == 0)
 					statement = statement.WithLeadingTrivia(
-						Comment(example.StartTag),
+						Comment(referenceExample.StartTag),
 						EndOfLine("\n"));
 
 				if (i == content.Length - 1)
 					statement = statement.WithTrailingTrivia(
 						EndOfLine("\n"),
-						Comment(example.EndTag),
+						Comment(referenceExample.EndTag),
 						EndOfLine("\n"),
 						EndOfLine("\n"));
 				else
@@ -165,7 +168,7 @@ namespace ExamplesGenerator
 				statements.Add(statement);
 			}
 
-			var methodDeclaration = MethodDeclaration(PredefinedType(Token(VoidKeyword)), example.Name)
+			var methodDeclaration = MethodDeclaration(PredefinedType(Token(VoidKeyword)), referenceExample.Name)
 				.AddAttributeLists(
 					// mark as skipped unit test
 					AttributeList(SingletonSeparatedList(

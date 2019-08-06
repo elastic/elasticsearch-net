@@ -5,9 +5,11 @@ namespace ExamplesGenerator
 	public static class ExampleLocation
 	{
 		private static string _root;
-		public static string ExamplesDir { get; } = $@"{Root}../../../src/Examples/Examples";
 
-		public static string Root
+		public static DirectoryInfo ExamplesAsciiDocDir { get; } = new DirectoryInfo($@"{Root}../../../examples");
+		public static DirectoryInfo ExamplesCSharpProject { get; } = new DirectoryInfo($@"{Root}../../../src/Examples/Examples");
+
+		private static string Root
 		{
 			get
 			{

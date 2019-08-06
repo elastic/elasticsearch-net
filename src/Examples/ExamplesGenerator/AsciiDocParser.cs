@@ -9,10 +9,10 @@ namespace ExamplesGenerator
 {
 	internal static class AsciiDocParser
 	{
-		public static List<Page> ParsePages(string path)
+		public static List<ReferencePage> ParsePages(string path)
 		{
 			var file = File.ReadAllLines(path);
-			var pages = new Dictionary<string, Page>();
+			var pages = new Dictionary<string, ReferencePage>();
 
 			for (var index = 0; index < file.Length; index++)
 			{
@@ -61,11 +61,11 @@ namespace ExamplesGenerator
 
 					if (!pages.TryGetValue(name, out var page))
 					{
-						page = new Page(name);
+						page = new ReferencePage(name);
 						pages.Add(name, page);
 					}
 
-					var example = new Example(hash, lineNumber, content);
+					var example = new ReferenceExample(hash, lineNumber, content);
 					example.Languages.AddRange(exampleLanguages);
 
 					if (!page.Examples.Contains(example))

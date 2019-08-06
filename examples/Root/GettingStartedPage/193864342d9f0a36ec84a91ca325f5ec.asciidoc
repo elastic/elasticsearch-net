@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=193864342d9f0a36ec84a91ca325f5ec,indent=0]
+----
