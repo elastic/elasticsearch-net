@@ -10,7 +10,6 @@ using static Nest.Infer;
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 
-	[SkipVersion(">=8.0.0-SNAPSHOT", "We are sending an empty body here which is no longer accepted")]
 	public class DeleteIndexApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, DeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
@@ -34,7 +33,6 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override void ExpectResponse(DeleteIndexResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 
-	[SkipVersion(">=8.0.0-SNAPSHOT", "We are sending an empty body here which is no longer accepted")]
 	public class DeleteNonExistentIndexApiTests
 		: ApiIntegrationTestBase
 			<WritableCluster, DeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>

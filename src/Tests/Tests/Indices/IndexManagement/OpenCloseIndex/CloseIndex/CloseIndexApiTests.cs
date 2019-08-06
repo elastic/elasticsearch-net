@@ -7,7 +7,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 {
-	[SkipVersion(">=8.0.0-SNAPSHOT", "")]
 	public class CloseIndexApiTests
 		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, CloseIndexResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
 	{

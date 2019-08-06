@@ -10,10 +10,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
-	/*
-	 * Sending a body for DELETE
-	 */
-	[SkipVersion(">=8.0.0-SNAPSHOT", "Skip while we fix this snapshot failure later")]
 	public class IndexTemplateCrudTests
 		: CrudTestBase<WritableCluster, PutIndexTemplateResponse, GetIndexTemplateResponse, PutIndexTemplateResponse, DeleteIndexTemplateResponse,
 			ExistsResponse>

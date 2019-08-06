@@ -10,7 +10,6 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.UnfreezeIndex
 {
-	[SkipVersion(">=8.0.0-SNAPSHOT", "We are sending an empty body here which is no longer accepted")]
 	public class UnfreezeIndexApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, UnfreezeIndexResponse, IUnfreezeIndexRequest, UnfreezeIndexDescriptor, UnfreezeIndexRequest>

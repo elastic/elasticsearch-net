@@ -10,10 +10,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single
 {
-	/*
-	 * Sending a body for DELETE
-	 */
-	[SkipVersion(">=8.0.0-SNAPSHOT", "Skip while we fix this snapshot failure later")]
 	public class DocumentCrudTests
 		: CrudTestBase<WritableCluster, IndexResponse, GetResponse<Project>, UpdateResponse<Project>, DeleteResponse, ExistsResponse>
 	{

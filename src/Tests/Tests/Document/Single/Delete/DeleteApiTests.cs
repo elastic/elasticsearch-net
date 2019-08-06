@@ -11,7 +11,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Single.Delete
 {
-	[SkipVersion(">=8.0.0-SNAPSHOT", "")]
 	public class DeleteApiTests
 		: ApiIntegrationTestBase<WritableCluster, DeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
@@ -54,7 +53,6 @@ namespace Tests.Document.Single.Delete
 		}
 	}
 
-	[SkipVersion(">=8.0.0-SNAPSHOT", "")]
 	public class DeleteNonExistentDocumentApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, DeleteResponse, IDeleteRequest,
 			DeleteDescriptor<Project>, DeleteRequest<Project>>
@@ -94,10 +92,6 @@ namespace Tests.Document.Single.Delete
 		}
 	}
 
-	/*
-	 * request [DELETE /nest-initializer-19a1fa5b-bad-index/_doc/nest-initializer-19a1fa5b] does not support having a body"
-	 */
-	[SkipVersion(">=8.0.0-SNAPSHOT", "TODO broken in snapshot")]
 	public class DeleteNonExistentIndexDocumentApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, DeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
