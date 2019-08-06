@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
+using static Microsoft.CodeAnalysis.Formatting.FormattingOptions;
 using static Microsoft.CodeAnalysis.LanguageNames;
 
 namespace ExamplesGenerator
@@ -18,17 +19,17 @@ namespace ExamplesGenerator
 	/// </summary>
 	internal static class CSharpGenerator
 	{
-		private static readonly Regex Content = new Regex("\r?\n\r?\n|\r?\n(?=GET|PUT|POST|DELETE)");
+		private static readonly Regex Content = new Regex("\r?\n\r?\n|\r?\n(?=HEAD|GET|PUT|POST|DELETE)");
 
 		public static void GenerateExampleClasses(IList<ReferencePage> pages)
 		{
 			var workspace = new AdhocWorkspace();
 			workspace.Options = workspace.Options
-				.WithChangedOption(FormattingOptions.NewLine, CSharp, "\n")
-				.WithChangedOption(FormattingOptions.IndentationSize, CSharp, 4)
-				.WithChangedOption(FormattingOptions.SmartIndent, CSharp, FormattingOptions.IndentStyle.Smart)
-				.WithChangedOption(FormattingOptions.UseTabs, CSharp, true)
-				.WithChangedOption(FormattingOptions.TabSize, CSharp, 4);
+				.WithChangedOption(NewLine, CSharp, "\n")
+				.WithChangedOption(IndentationSize, CSharp, 4)
+				.WithChangedOption(SmartIndent, CSharp, IndentStyle.Smart)
+				.WithChangedOption(UseTabs, CSharp, true)
+				.WithChangedOption(TabSize, CSharp, 4);
 
 			for (var i = 0; i < pages.Count; i++)
 			{
