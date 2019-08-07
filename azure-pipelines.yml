@@ -34,6 +34,8 @@ jobs:
         esVersion: '7.0.0'
       es71:
         esVersion: '7.1.0'
+      es72:
+          esVersion: '7.2.0'
   steps:
       - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack" skipdocs'
         displayName: '$(esVersion) windows integration tests'
@@ -52,7 +54,7 @@ jobs:
       maxParallel: 5
       matrix:
           es7:
-              esVersion: '7.0.0'
+              esVersion: '7.2.0'
   steps:
       - script: './build.sh integrate-one $(esVersion) "readonly,writable" skipdocs'
         displayName: '$(esVersion) linux integration tests'
