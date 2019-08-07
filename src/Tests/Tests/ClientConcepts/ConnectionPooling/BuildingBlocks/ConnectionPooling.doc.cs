@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using Tests.XPack.Security.Privileges;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -29,9 +31,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		 * life of the application>>, the lifetime of a single connection pool instance will also be bound to the lifetime
 		 * of the application.
 		 *
-		 * There are four types of connection pool
+		 * There are five types of connection pool
 		 *
 		 * - <<single-node-connection-pool,SingleNodeConnectionPool>>
+		 * - <<cloud-connection-pool,CloudConnectionPool>>
 		 * - <<static-connection-pool,StaticConnectionPool>>
 		 * - <<sniffing-connection-pool,SniffingConnectionPool>>
 		 * - <<sticky-connection-pool,StickyConnectionPool>>
@@ -78,6 +81,88 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool
 				.Should().BeOfType<SingleNodeConnectionPool>();
+		}
+		
+		/**
+		* [[cloud-connection-pool]]
+		* ==== CloudConnectionPool
+		*
+		* A specialized subclass of `SingleNodeConnectionPool that accepts a Cloud Id and credentials.
+		* When used the client will also pick Elastic Cloud optmized defaults for the connection settings.
+		 *
+		 * A Cloud Id for your cluster can be fetched from your Elastic Cloud cluster administration console.
+		 *
+		 * A Cloud Id should be in the form of `cluster_name:base_64_data` where `base_64_data` are the UUIDs for the services in this cloud instance e.g
+		 *
+		 * `host_name$elasticsearch_uuid$kibana_uuid$apm_uuid`
+		 *
+		 * Out of these only `host_name` and `elasticsearch_uuid` are always available.
+		 * 
+		*/
+		[U] public void CloudConnectionPool()
+		{
+			string ToBase64(string s) => Convert.ToBase64String(Encoding.UTF8.GetBytes(s));
+			/* Here we obviously use a ficticuous Cloud Id so lets create a fake one. */
+
+			var hostName = "cloud-endpoint.example";
+			var elasticsearchUuid = "3dadf823f05388497ea684236d918a1a";
+			var services = $"{hostName}${elasticsearchUuid}$3f26e1609cf54a0f80137a80de560da4";
+			var cloudId = $"my_cluster:{ToBase64(services)}";
+
+			/*
+			 * In a real scenario you would be able to copy paste `cloudId`
+			 *
+			 * A cloud connection pool always needs credentials as well here opt for basic auth 
+			 */
+			var credentials = new BasicAuthenticationCredentials("username", "password");
+			var pool = new CloudConnectionPool(cloudId, credentials);
+			pool.UsingSsl.Should().BeTrue();
+			pool.Nodes.Should().HaveCount(1);
+			var node = pool.Nodes.First();
+			node.Uri.Port.Should().Be(443);
+			node.Uri.Host.Should().Be($"{elasticsearchUuid}.{hostName}");
+			node.Uri.Scheme.Should().Be("https");
+
+			/** This type of pool like its parent the `SingleNodeConnectionPool` is hardwired to opt out of
+			 * reseeding (thus, sniffing) as well as pinging
+			 */
+			pool.SupportsReseeding.Should().BeFalse();
+			pool.SupportsPinging.Should().BeFalse();
+
+			/**
+			 * You can also directly create a cloud enabled connection using the clients constructor
+			*/
+			var client = new ElasticClient(cloudId, credentials);
+			client.ConnectionSettings.ConnectionPool
+				.Should()
+				.BeOfType<CloudConnectionPool>();
+
+			/** However we urge that you always pass your connection settings explicitly
+			 */
+			client = new ElasticClient(new ConnectionSettings(pool));
+			client.ConnectionSettings.ConnectionPool.Should().BeOfType<CloudConnectionPool>();
+
+			client.ConnectionSettings.EnableHttpCompression.Should().BeTrue();
+			client.ConnectionSettings.BasicAuthenticationCredentials.Should().NotBeNull();
+			client.ConnectionSettings.BasicAuthenticationCredentials.Username.Should().Be("username");
+
+			//hide
+			var badCloudIds = new[]
+			{
+				"", 
+				"my_cluster", 
+				"my_cluster:", 
+				$"my_cluster:{ToBase64("hostname")}", 
+				$"my_cluster:{ToBase64("hostname$")}"
+			};
+			foreach (var id in badCloudIds)
+			{
+				Action create = () => new ElasticClient(id, credentials);
+
+				create.Should().Throw<ArgumentException>()
+					.And.Message.Should().Contain("should a string in the form of cluster_name:base_64_data");
+			}
+
 		}
 
 		/**[[static-connection-pool]]
