@@ -29,7 +29,6 @@ namespace Tests.QueryDsl.Joining.SpanNot
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Dist = 12,
 			Post = 13,
 			Pre = 14,
 			Include = new SpanQuery
@@ -63,8 +62,7 @@ namespace Tests.QueryDsl.Joining.SpanNot
 					span_term = new { field1 = new { value = "hoya2" } }
 				},
 				pre = 14,
-				post = 13,
-				dist = 12
+				post = 13
 			}
 		};
 
@@ -72,7 +70,6 @@ namespace Tests.QueryDsl.Joining.SpanNot
 			.SpanNot(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
-				.Dist(12)
 				.Post(13)
 				.Pre(14)
 				.Include(i => i

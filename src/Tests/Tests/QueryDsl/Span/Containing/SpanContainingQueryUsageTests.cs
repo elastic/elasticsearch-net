@@ -3,7 +3,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
-namespace Tests.QueryDsl.Span.Container
+namespace Tests.QueryDsl.Span.Containing
 {
 	public class SpanContainingUsageTests : QueryDslUsageTestsBase
 	{
