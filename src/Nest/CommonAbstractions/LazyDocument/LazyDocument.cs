@@ -45,51 +45,53 @@ namespace Nest
 	[JsonFormatter(typeof(LazyDocumentFormatter))]
 	public class LazyDocument : ILazyDocument
 	{
-		private readonly IElasticsearchSerializer _serializer;
+		private readonly IElasticsearchSerializer _sourceSerializer;
+		private readonly IElasticsearchSerializer _requestResponseSerializer;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 
-		internal LazyDocument(byte[] bytes, IJsonFormatterResolver formatterResolver) 
-			: this(bytes, formatterResolver.GetConnectionSettings()) { }
-
-		private LazyDocument(byte[] bytes, IConnectionSettingsValues settings) :
-			this(bytes, settings.SourceSerializer, settings.MemoryStreamFactory) { }
-		
-		private LazyDocument(byte[] bytes, IElasticsearchSerializer serializer, IMemoryStreamFactory memoryStreamFactory)
+		internal LazyDocument(byte[] bytes, IJsonFormatterResolver formatterResolver)
 		{
 			Bytes = bytes;
-			_serializer = serializer;
-			_memoryStreamFactory = memoryStreamFactory;
+			var settings = formatterResolver.GetConnectionSettings();
+			_sourceSerializer = settings.SourceSerializer;
+			_requestResponseSerializer = settings.RequestResponseSerializer;
+			_memoryStreamFactory = settings.MemoryStreamFactory;
 		}
 
-
 		internal byte[] Bytes { get; }
+
+		internal T AsUsingRequestResponseSerializer<T>()
+		{
+			using (var ms = _memoryStreamFactory.Create(Bytes))
+				return _requestResponseSerializer.Deserialize<T>(ms);
+		}
 
 		/// <inheritdoc />
 		public T As<T>()
 		{
 			using (var ms = _memoryStreamFactory.Create(Bytes))
-				return _serializer.Deserialize<T>(ms);
+				return _sourceSerializer.Deserialize<T>(ms);
 		}
 
 		/// <inheritdoc />
 		public object As(Type objectType)
 		{
 			using (var ms = _memoryStreamFactory.Create(Bytes))
-				return _serializer.Deserialize(objectType, ms);
+				return _sourceSerializer.Deserialize(objectType, ms);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<T> AsAsync<T>(CancellationToken ct = default)
 		{
 			using (var ms = _memoryStreamFactory.Create(Bytes))
-				return _serializer.DeserializeAsync<T>(ms, ct);
+				return _sourceSerializer.DeserializeAsync<T>(ms, ct);
 		}
 
 		/// <inheritdoc />
 		public Task<object> AsAsync(Type objectType, CancellationToken ct = default)
 		{
 			using (var ms = _memoryStreamFactory.Create(Bytes))
-				return _serializer.DeserializeAsync(objectType, ms, ct);
+				return _sourceSerializer.DeserializeAsync(objectType, ms, ct);
 		}
 	}
 }
