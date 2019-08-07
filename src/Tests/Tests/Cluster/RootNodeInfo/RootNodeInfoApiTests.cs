@@ -37,7 +37,7 @@ namespace Tests.Cluster.RootNodeInfo
 			response.Version.BuildDate.Should().BeAfter(default);
 			response.Version.BuildFlavor.Should().NotBeNullOrWhiteSpace();
 			response.Version.BuildHash.Should().NotBeNullOrWhiteSpace();
-			response.Version.BuildSnapshot.Should().Be(TestConfiguration.Instance.ElasticsearchVersion.Contains("SNAPSHOT"));
+			response.Version.BuildSnapshot.Should().Be(TestConfiguration.Instance.ElasticsearchVersionIsSnapshot);
 			response.Version.BuildType.Should().NotBeNullOrWhiteSpace();
 			response.Version.MinimumIndexCompatibilityVersion.Should().NotBeNullOrWhiteSpace();
 			response.Version.MinimumWireCompatibilityVersion.Should().NotBeNullOrWhiteSpace();

@@ -3,12 +3,14 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Info
 {
 	[SkipVersion("<6.8.0", "All APIs exist in Elasticsearch 6.8.0")]
+	[SkipOnCi] //TODO https://github.com/elastic/elasticsearch/issues/45250
 	public class XPackInfoApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string XPackInfoStep = nameof(XPackInfoStep);
