@@ -16,7 +16,8 @@ namespace Nest.JsonNetSerializer.Converters
 			typeof(CompletionField),
 			typeof(Attachment),
 			typeof(ILazyDocument),
-			typeof(GeoCoordinate)
+			typeof(GeoCoordinate),
+			typeof(GeoLocation)
 		};
 
 		private readonly IElasticsearchSerializer _builtInSerializer;
