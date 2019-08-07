@@ -30,7 +30,7 @@ q
         c => c.SpanGap(st => st.Field("field").Width(2))
     )
     .Slop(12)
-    .InOrder(false)
+    .InOrder()
 )
 ----
 
@@ -50,7 +50,7 @@ new SpanNearQuery
         new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
     },
     Slop = 12,
-    InOrder = false,
+    InOrder = true,
 }
 ----
 
@@ -88,7 +88,7 @@ new SpanNearQuery
       }
     ],
     "slop": 12,
-    "in_order": false,
+    "in_order": true,
     "_name": "named_query",
     "boost": 1.1
   }

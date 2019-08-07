@@ -20,7 +20,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [source,csharp]
 ----
 q
-.HasChild<Developer>(c => c
+.HasChild<CommitActivity>(c => c
     .Name("named_query")
     .Boost(1.1)
     .InnerHits(i => i.Explain())
@@ -39,7 +39,7 @@ new HasChildQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Type = Infer.Type<Developer>(),
+    TypeRelation = Infer.Relation<CommitActivity>(),
     InnerHits = new InnerHits { Explain = true },
     MaxChildren = 5,
     MinChildren = 1,
@@ -55,7 +55,7 @@ new HasChildQuery
   "has_child": {
     "_name": "named_query",
     "boost": 1.1,
-    "type": "developer",
+    "type": "commits",
     "score_mode": "avg",
     "min_children": 1,
     "max_children": 5,

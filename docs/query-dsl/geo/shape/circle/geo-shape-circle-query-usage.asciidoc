@@ -23,8 +23,8 @@ q
 .GeoShapeCircle(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.Location)
-    .Coordinates(_coordinates)
+    .Field(p => p.LocationShape)
+    .Coordinates(CircleCoordinates)
     .Radius("100m")
     .Relation(GeoShapeRelation.Intersects)
 )
@@ -38,8 +38,8 @@ new GeoShapeCircleQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Field<Project>(p => p.Location),
-    Shape = new CircleGeoShape(_coordinates) { Radius = "100m" },
+    Field = Field<Project>(p => p.LocationShape),
+    Shape = new CircleGeoShape(CircleCoordinates) { Radius = "100m" },
     Relation = GeoShapeRelation.Intersects,
 }
 ----

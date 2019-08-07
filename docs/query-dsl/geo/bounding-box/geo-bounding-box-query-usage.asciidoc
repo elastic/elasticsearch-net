@@ -23,7 +23,7 @@ q
 .GeoBoundingBox(g => g
     .Boost(1.1)
     .Name("named_query")
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .BoundingBox(b => b
         .TopLeft(34, -34)
         .BottomRight(-34, 34)
@@ -41,7 +41,7 @@ new GeoBoundingBoxQuery
 {
     Boost = 1.1,
     Name = "named_query",
-    Field = Infer.Field<Project>(p => p.Location),
+    Field = Infer.Field<Project>(p => p.LocationPoint),
     BoundingBox = new Nest.BoundingBox
     {
         TopLeft = new GeoLocation(34, -34),
@@ -61,7 +61,7 @@ new GeoBoundingBoxQuery
     "validation_method": "strict",
     "_name": "named_query",
     "boost": 1.1,
-    "location": {
+    "locationPoint": {
       "top_left": {
         "lat": 34.0,
         "lon": -34.0
@@ -83,9 +83,9 @@ q
 .GeoBoundingBox(g => g
     .Boost(1.1)
     .Name("named_query")
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .BoundingBox(b => b
-        .WellKnownText("BBOX (34, -34, -34, 34)")
+        .WellKnownText("BBOX (-34, 34, 34, -34)")
     )
     .ValidationMethod(GeoValidationMethod.Strict)
     .Type(GeoExecution.Indexed)
@@ -100,10 +100,10 @@ new GeoBoundingBoxQuery
 {
     Boost = 1.1,
     Name = "named_query",
-    Field = Infer.Field<Project>(p => p.Location),
+    Field = Infer.Field<Project>(p => p.LocationPoint),
     BoundingBox = new Nest.BoundingBox
     {
-        WellKnownText = "BBOX (34, -34, -34, 34)"
+        WellKnownText = "BBOX (-34, 34, 34, -34)"
     },
     Type = GeoExecution.Indexed,
     ValidationMethod = GeoValidationMethod.Strict
@@ -119,8 +119,8 @@ new GeoBoundingBoxQuery
     "validation_method": "strict",
     "_name": "named_query",
     "boost": 1.1,
-    "location": {
-      "wkt": "BBOX (34, -34, -34, 34)"
+    "locationPoint": {
+      "wkt": "BBOX (-34, 34, 34, -34)"
     }
   }
 }

@@ -26,7 +26,7 @@ Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregat
 ----
 a => a
 .GeoCentroid("centroid", gb => gb
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
 )
 ----
 
@@ -34,7 +34,7 @@ a => a
 
 [source,csharp]
 ----
-new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.LocationPoint))
 ----
 
 [source,javascript]
@@ -43,7 +43,7 @@ new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
 {
   "centroid": {
     "geo_centroid": {
-      "field": "location"
+      "field": "locationPoint"
     }
   }
 }
@@ -78,7 +78,7 @@ a => a
     .Field(p => p.Name)
     .Aggregations(sa => sa
         .GeoCentroid("centroid", gb => gb
-            .Field(p => p.Location)
+            .Field(p => p.LocationPoint)
         )
     )
 )
@@ -91,7 +91,7 @@ a => a
 new TermsAggregation("projects")
 {
     Field = Infer.Field<Project>(p => p.Name),
-    Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+    Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.LocationPoint))
 }
 ----
 
@@ -106,7 +106,7 @@ new TermsAggregation("projects")
     "aggs": {
       "centroid": {
         "geo_centroid": {
-          "field": "location"
+          "field": "locationPoint"
         }
       }
     }
@@ -140,7 +140,7 @@ foreach (var bucket in projects.Buckets)
 ----
 a => a
 .GeoCentroid("centroid", gb => gb
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
 )
 ----
 
@@ -148,7 +148,7 @@ a => a
 
 [source,csharp]
 ----
-new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.LocationPoint))
 ----
 
 [source,javascript]
@@ -157,7 +157,7 @@ new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
 {
   "centroid": {
     "geo_centroid": {
-      "field": "location"
+      "field": "locationPoint"
     }
   }
 }
