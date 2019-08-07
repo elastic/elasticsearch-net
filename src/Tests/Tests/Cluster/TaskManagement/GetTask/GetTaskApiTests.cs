@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -159,11 +160,16 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			_taskId = response.Task;
 
 			// poll until task is complete
-			var completed = false;
+			var getTaskResponse = client.Tasks.GetTask(_taskId);
+			var completed = getTaskResponse.Completed;
 			while (!completed)
 			{
-				var getTaskResponse = client.Tasks.GetTask(_taskId);
-				completed = getTaskResponse.Completed;
+				Thread.Sleep(2000);
+				getTaskResponse = client.Tasks.GetTask(_taskId);
+				if (getTaskResponse.IsValid)
+					completed = getTaskResponse.Completed;
+				else
+					throw new Exception($"problem setting up completed task: {getTaskResponse.DebugInformation}");
 			}
 		}
 	}

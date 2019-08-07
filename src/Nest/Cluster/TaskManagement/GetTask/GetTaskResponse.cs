@@ -14,6 +14,11 @@ namespace Nest
 		[DataMember(Name = "response")]
 		internal LazyDocument Response { get; set; }
 
-		public TResponse GetResponse<TResponse>() where TResponse : class, IResponse => Response?.As<TResponse>();
+		/// <summary>
+		/// Gets the response for the request that the task represents, if available.
+		/// Because the response will have no associated <see cref="ApiCallDetails"/>, the value
+		/// of <see cref="IResponse.IsValid"/> should not be used.
+		/// </summary>
+		public TResponse GetResponse<TResponse>() where TResponse : class, IResponse => Response?.AsUsingRequestResponseSerializer<TResponse>();
 	}
 }
