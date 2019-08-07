@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -6,6 +7,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Circle
 {
+	[SkipVersion(">=6.6.0", "New indexing strategy introduced based on BKD trees that does not support circle geomtery in this fashion, yet. See https://github.com/elastic/elasticsearch/issues/32039")]
 	public class GeoShapeCircleQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
