@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
@@ -106,10 +107,7 @@ namespace Tests.QueryDsl
 
 		[I] protected async Task AssertQueryResponse() => await AssertOnAllResponses(r =>
 		{
-			var validOrNotParseExceptionOrKnownParseException = r.IsValid || r.ServerError?.Error.Type != "parsing_exception" || KnownParseException;
-			validOrNotParseExceptionOrKnownParseException.Should().BeTrue("query should be valid or when not valid not a parsing_exception.");
-
-			//TODO only assert IsValid == true and remove corner cases we don't have time to fix now.
+			r.ShouldBeValid();
 		});
 	}
 }
