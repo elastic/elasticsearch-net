@@ -66,6 +66,18 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+		
+		/// <summary>
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
+		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		/// </summary>
+		public ConnectionConfiguration(string cloudId, BasicAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+
+		/// <summary>
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
+		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		/// </summary>
+		public ConnectionConfiguration(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
 
 		/// <summary>
 		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
@@ -167,6 +179,14 @@ namespace Elasticsearch.Net
 
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
+			
+			if (connectionPool is CloudConnectionPool cloudPool)
+			{
+				_basicAuthCredentials = cloudPool.BasicCredentials;
+				_apiKeyAuthCredentials = cloudPool.ApiKeyCredentials;
+				_enableHttpCompression = true;
+			}
+
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
