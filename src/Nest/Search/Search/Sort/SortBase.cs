@@ -23,6 +23,12 @@ namespace Nest
 		SortMode? Mode { get; set; }
 
 		/// <summary>
+		/// Set a single resolution for the sort
+		/// </summary>
+		[DataMember(Name ="numeric_type")]
+		NumericType? NumericType { get; set; }
+
+		/// <summary>
 		/// Specifies the path and filter to apply when sorting on a nested field
 		/// </summary>
 		[DataMember(Name ="nested")]
@@ -48,6 +54,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public SortMode? Mode { get; set; }
+
+		/// <inheritdoc />
+		public NumericType? NumericType { get; set; }
 
 		/// <inheritdoc />
 		public INestedSort Nested { get; set; }
@@ -76,6 +85,7 @@ namespace Nest
 
 		object ISort.Missing { get; set; }
 		SortMode? ISort.Mode { get; set; }
+		NumericType? ISort.NumericType { get; set; }
 		INestedSort ISort.Nested { get; set; }
 		SortOrder? ISort.Order { get; set; }
 		Field ISort.SortKey => SortKey;
@@ -92,6 +102,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ISort.Order" />
 		public virtual TDescriptor Order(SortOrder? order) => Assign(order, (a, v) => a.Order = v);
+
+		/// <inheritdoc cref="ISort.NumericType" />
+		public virtual TDescriptor NumericType(NumericType? numericType) => Assign(numericType, (a, v) => a.NumericType = v);
 
 		/// <inheritdoc cref="ISort.Mode" />
 		public virtual TDescriptor Mode(SortMode? mode) => Assign(mode, (a, v) => a.Mode = v);
