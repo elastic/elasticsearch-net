@@ -28,7 +28,15 @@ In those cases, we tend to pull your bits locally and write tests ourselves, but
 
 ## Branches
 
-- `master` for the latest client (currently _7.x_)
+Convention:
+
+- `master` reflects the latest server version, this is typically the `current latest major + 1`
+- `N.x` where N represents the major version component of the Elasticsearch server release its integrating with; e.g. `7.x`
+- `N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixes.
+
+Examples:
+
+- `master` for the latest server version (currently _8.x_)
 - `7.x` for 7.x compatible client
 - `6.x` for 6.x compatible client
 - `5.x` for 5.x compatible client

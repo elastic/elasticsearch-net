@@ -184,7 +184,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	// hide
-	[SkipVersion(">=7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
+	[SkipVersion(">=8.0.0-SNAPSHOT","Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -219,7 +219,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	// hide
-	[SkipVersion(">=7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
+	[SkipVersion(">=8.0.0-SNAPSHOT", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

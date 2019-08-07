@@ -69,13 +69,13 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bullseye" Version="2.4.0-rc.2" />
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190627T121416" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190802T092611" />
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
     <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
     <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
     <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
-    <PackageReference Include="FSharp.Core" Version="4.6.0" />
+    <PackageReference Include="FSharp.Core" Version="4.6.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="NuGet.CommandLine" Version="4.9.4" />
     <PackageReference Include="Octokit" Version="0.32.0" />
@@ -83,8 +83,7 @@
 
     <DotNetCliToolReference Include="dotnet-assembly-rewriter" Version="1.0.0-alpha20190401T093210" />
     <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190403T095656" />
-    <PackageReference Update="FSharp.Core" Version="4.6.2" />
-    
+  
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">
     <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />

@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class SnapshotRequestParameters : RequestParameters<SnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -47,6 +48,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class CreateRepositoryRequestParameters : RequestParameters<CreateRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -73,6 +75,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -85,6 +88,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class DeleteRepositoryRequestParameters : RequestParameters<DeleteRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -104,6 +108,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable
 		{
@@ -130,6 +135,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -149,6 +155,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class RestoreRequestParameters : RequestParameters<RestoreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -168,6 +175,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class SnapshotStatusRequestParameters : RequestParameters<SnapshotStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable
 		{
@@ -187,6 +195,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class VerifyRepositoryRequestParameters : RequestParameters<VerifyRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{

@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -8,6 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
+
 	public class DeleteIndexApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, DeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>

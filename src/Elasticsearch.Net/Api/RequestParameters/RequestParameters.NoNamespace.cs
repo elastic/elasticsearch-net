@@ -28,6 +28,7 @@ namespace Elasticsearch.Net
 	public class BulkRequestParameters : RequestParameters<BulkRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline
 		{
@@ -103,12 +104,14 @@ namespace Elasticsearch.Net
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for Count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 	public class CountRequestParameters : RequestParameters<CountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -215,6 +218,7 @@ namespace Elasticsearch.Net
 	public class CreateRequestParameters : RequestParameters<CreateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline
 		{
@@ -276,6 +280,7 @@ namespace Elasticsearch.Net
 	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm
 		{
@@ -344,6 +349,7 @@ namespace Elasticsearch.Net
 	public class DeleteByQueryRequestParameters : RequestParameters<DeleteByQueryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -580,6 +586,7 @@ namespace Elasticsearch.Net
 	public class DeleteByQueryRethrottleRequestParameters : RequestParameters<DeleteByQueryRethrottleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond
 		{
@@ -592,6 +599,7 @@ namespace Elasticsearch.Net
 	public class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -611,6 +619,7 @@ namespace Elasticsearch.Net
 	public class DocumentExistsRequestParameters : RequestParameters<DocumentExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		public override bool SupportsBody => false;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -686,6 +695,7 @@ namespace Elasticsearch.Net
 	public class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		public override bool SupportsBody => false;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -754,6 +764,7 @@ namespace Elasticsearch.Net
 	public class ExplainRequestParameters : RequestParameters<ExplainRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard
 		{
@@ -843,6 +854,7 @@ namespace Elasticsearch.Net
 	public class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -879,6 +891,7 @@ namespace Elasticsearch.Net
 	public class GetRequestParameters : RequestParameters<GetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -954,6 +967,7 @@ namespace Elasticsearch.Net
 	public class GetScriptRequestParameters : RequestParameters<GetScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -966,6 +980,7 @@ namespace Elasticsearch.Net
 	public class SourceRequestParameters : RequestParameters<SourceRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -1034,6 +1049,7 @@ namespace Elasticsearch.Net
 	public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm
 		{
@@ -1116,12 +1132,14 @@ namespace Elasticsearch.Net
 	public class RootNodeInfoRequestParameters : RequestParameters<RootNodeInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for MultiGet <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</para></summary>
 	public class MultiGetRequestParameters : RequestParameters<MultiGetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -1183,6 +1201,7 @@ namespace Elasticsearch.Net
 	public class MultiSearchRequestParameters : RequestParameters<MultiSearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public bool? CcsMinimizeRoundtrips
 		{
@@ -1245,6 +1264,7 @@ namespace Elasticsearch.Net
 	public class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
 		public bool? CcsMinimizeRoundtrips
 		{
@@ -1285,6 +1305,7 @@ namespace Elasticsearch.Net
 	public class MultiTermVectorsRequestParameters : RequestParameters<MultiTermVectorsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned
 		/// documents unless otherwise specified in body "params" or "docs".
@@ -1376,12 +1397,14 @@ namespace Elasticsearch.Net
 	public class PingRequestParameters : RequestParameters<PingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for PutScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public class PutScriptRequestParameters : RequestParameters<PutScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Context name to compile script against</summary>
 		public string Context
 		{
@@ -1408,6 +1431,7 @@ namespace Elasticsearch.Net
 	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
@@ -1466,6 +1490,7 @@ namespace Elasticsearch.Net
 	public class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond
 		{
@@ -1478,18 +1503,21 @@ namespace Elasticsearch.Net
 	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 	public class ExecutePainlessScriptRequestParameters : RequestParameters<ExecutePainlessScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
 		public bool? TotalHitsAsInteger
 		{
@@ -1502,6 +1530,7 @@ namespace Elasticsearch.Net
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1731,6 +1760,7 @@ namespace Elasticsearch.Net
 	public class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1781,6 +1811,7 @@ namespace Elasticsearch.Net
 	public class SearchTemplateRequestParameters : RequestParameters<SearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1880,6 +1911,7 @@ namespace Elasticsearch.Net
 	public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool? FieldStatistics
 		{
@@ -1962,6 +1994,7 @@ namespace Elasticsearch.Net
 	public class UpdateRequestParameters : RequestParameters<UpdateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm
 		{
@@ -2037,6 +2070,7 @@ namespace Elasticsearch.Net
 	public class UpdateByQueryRequestParameters : RequestParameters<UpdateByQueryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -2287,6 +2321,7 @@ namespace Elasticsearch.Net
 	public class UpdateByQueryRethrottleRequestParameters : RequestParameters<UpdateByQueryRethrottleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond
 		{
