@@ -87,7 +87,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * some understanding of how long it took
 			 */
 			response.ApiCall.AuditTrail
-				.Should().OnlyContain(a => a.Ended - a.Started > TimeSpan.Zero);
+				.Should().OnlyContain(a => a.Ended - a.Started >= TimeSpan.Zero);
 
 		}
 	}

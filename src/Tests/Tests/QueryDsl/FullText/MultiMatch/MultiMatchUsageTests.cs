@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
@@ -6,6 +7,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.MultiMatch
 {
+	[SkipVersion(">=8.0.0-SNAPSHOT", "")]
 	public class MultiMatchUsageTests : QueryDslUsageTestsBase
 	{
 		public MultiMatchUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

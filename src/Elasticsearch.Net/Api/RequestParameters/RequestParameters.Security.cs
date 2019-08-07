@@ -28,12 +28,14 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for ChangePassword <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</para></summary>
 	public class ChangePasswordRequestParameters : RequestParameters<ChangePasswordRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -49,6 +51,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames
 		{
@@ -61,12 +64,14 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for CreateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 	public class CreateApiKeyRequestParameters : RequestParameters<CreateApiKeyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -82,6 +87,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -97,6 +103,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -112,6 +119,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -127,6 +135,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class DeleteUserRequestParameters : RequestParameters<DeleteUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -142,6 +151,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class DisableUserRequestParameters : RequestParameters<DisableUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -157,6 +167,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class EnableUserRequestParameters : RequestParameters<EnableUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -172,6 +183,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class GetApiKeyRequestParameters : RequestParameters<GetApiKeyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>API key id of the API key to be retrieved</summary>
 		public string Id
 		{
@@ -205,60 +217,70 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for GetRole <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for GetRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for GetUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</para></summary>
 	public class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for GetUser <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</para></summary>
 	public class GetUserRequestParameters : RequestParameters<GetUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 	public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for HasPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for InvalidateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
 	public class InvalidateApiKeyRequestParameters : RequestParameters<InvalidateApiKeyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for InvalidateUserAccessToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</para></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for PutPrivileges <para>TODO</para></summary>
 	public class PutPrivilegesRequestParameters : RequestParameters<PutPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -274,6 +296,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -289,6 +312,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -304,6 +328,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class PutUserRequestParameters : RequestParameters<PutUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
@@ -319,5 +344,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	public class GetCertificatesRequestParameters : RequestParameters<GetCertificatesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 }
