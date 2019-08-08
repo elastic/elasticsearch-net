@@ -12,6 +12,9 @@ namespace Nest
 		[DataMember(Name ="discovery_types")]
 		public IReadOnlyDictionary<string, int> DiscoveryTypes { get; internal set; }
 
+		[DataMember(Name ="packaging_types")]
+		public IReadOnlyCollection<NodePackagingType> PackagingTypes { get; internal set; }
+
 		[DataMember(Name ="fs")]
 		public ClusterFileSystem FileSystem { get; internal set; }
 
@@ -32,6 +35,18 @@ namespace Nest
 
 		[DataMember(Name ="versions")]
 		public IReadOnlyCollection<string> Versions { get; internal set; }
+	}
+
+	public class NodePackagingType
+	{
+		[DataMember(Name ="flavor")]
+		public string Flavor { get; internal set; }
+
+		[DataMember(Name ="type")]
+		public string Type { get; internal set; }
+
+		[DataMember(Name ="count")]
+		public int Count { get; internal set; }
 	}
 
 	[DataContract]
