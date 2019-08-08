@@ -96,7 +96,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		 *
 		 * `host_name$elasticsearch_uuid$kibana_uuid$apm_uuid`
 		 *
-		 * Out of these only `host_name` and `elasticsearch_uuid` are always available.
+		 * Out of these, only `host_name` and `elasticsearch_uuid` are always available.
 		 * 
 		*/
 		[U] public void CloudConnectionPool()

@@ -7,7 +7,7 @@ namespace Elasticsearch.Net
 	/// An <see cref="IConnectionPool"/> implementation that can be seeded with a cloud id
 	/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="IConnectionConfigurationValues"/>.
 	///
-	/// <para>Read more about Elastic Cloud Id here</para>
+	/// <para>Read more about Elastic Cloud Id:</para>
 	/// <para>https://www.elastic.co/guide/en/cloud/current/ec-cloud-id.html</para>
 	/// </summary>
 	public class CloudConnectionPool : SingleNodeConnectionPool
@@ -80,7 +80,7 @@ namespace Elasticsearch.Net
 
 		private static ParsedCloudId ParseCloudId(string cloudId)
 		{
-			const string exceptionSuffix = "should a string in the form of cluster_name:base_64_data";
+			const string exceptionSuffix = "should be a string in the form of cluster_name:base_64_data";
 			if (string.IsNullOrWhiteSpace(cloudId))
 				throw new ArgumentException($"Parameter {nameof(cloudId)} was null or empty but {exceptionSuffix}", nameof(cloudId));
 
