@@ -249,6 +249,9 @@ namespace Nest
 			[DataMember(Name = "forecasts")]
 			public ForecastStatistics Forecasts { get; internal set; }
 
+			[DataMember(Name = "created_by")]
+			public IReadOnlyDictionary<string, long> CreatedBy { get; internal set; }
+
 			[DataMember(Name = "model_size")]
 			public JobStatistics ModelSize { get; internal set; }
 		}
