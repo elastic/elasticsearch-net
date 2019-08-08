@@ -333,7 +333,7 @@ namespace Tests.Search.Request
 	}
 
 	//hide
-	[SkipVersion("<7..0", "numeric_type added in 7.2.0")]
+	[SkipVersion("<7.2.0", "numeric_type added in 7.2.0")]
 	public class NumericTypeUsageTests : SearchUsageTestBase
 	{
 		public NumericTypeUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
