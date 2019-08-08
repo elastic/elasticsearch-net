@@ -85,6 +85,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IQuerySqlRequest.Columnar" />
 		/// >
-		public QuerySqlDescriptor Columnar(bool? columnar) => Assign(columnar, (a, v) => a.Columnar = v);
+		public QuerySqlDescriptor Columnar(bool? columnar = true) => Assign(columnar, (a, v) => a.Columnar = v);
 	}
 }
