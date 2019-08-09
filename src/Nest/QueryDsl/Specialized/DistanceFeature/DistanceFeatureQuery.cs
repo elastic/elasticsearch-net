@@ -40,6 +40,7 @@ namespace Nest
 
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.DistanceFeature = this;
 
+		/// <inheritdoc />
 		public Union<DateMath, GeoLocation> Origin { get; set; }
 
 		/// <inheritdoc />
