@@ -42,6 +42,7 @@ namespace Nest
 
 		public Union<DateMath, GeoLocation> Origin { get; set; }
 
+		/// <inheritdoc />
 		public Union<Time, Distance> Pivot { get; set; }
 	}
 
