@@ -32,6 +32,7 @@ namespace Nest
 		Union<Time, Distance> Pivot { get; set; }
 	}
 
+	/// <inheritdoc cref="IDistanceFeatureQuery" />
 	public class DistanceFeatureQuery : FieldNameQueryBase, IDistanceFeatureQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
