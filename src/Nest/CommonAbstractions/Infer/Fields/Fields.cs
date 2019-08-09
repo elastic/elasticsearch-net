@@ -22,6 +22,8 @@ namespace Nest
 
 		private string DebugDisplay =>
 			$"Count: {ListOfFields.Count} [" + string.Join(",", ListOfFields.Select((t, i) => $"({i + 1}: {t?.DebugDisplay ?? "NULL"})")) + "]";
+		
+		public override string ToString() => DebugDisplay;
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

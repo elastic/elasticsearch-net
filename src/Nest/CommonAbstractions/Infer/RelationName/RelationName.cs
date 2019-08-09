@@ -72,11 +72,7 @@ namespace Nest
 		//already private in master, breaking change to change in 6.x
 		public bool EqualsString(string other) => !other.IsNullOrEmpty() && other == Name;
 
-		public override string ToString()
-		{
-			if (!Name.IsNullOrEmpty()) return Name;
+		public override string ToString() => DebugDisplay;
 
-			return Type != null ? Type.Name : string.Empty;
-		}
 	}
 }
