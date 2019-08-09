@@ -328,7 +328,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				.Properties(DeveloperProperties)
 			)
 			.GeoPoint(g => g
-				.Name(p => p.Location)
+				.Name(p => p.LocationPoint)
+			)
+			.GeoShape(g => g
+				.Name(p => p.LocationShape)
 			)
 			.Completion(cm => cm
 				.Name(p => p.Suggest)

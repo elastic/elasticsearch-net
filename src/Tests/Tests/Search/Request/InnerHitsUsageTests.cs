@@ -312,7 +312,7 @@ namespace Tests.Search.Request
 		{
 			Query = new HasChildQuery
 			{
-				Type = typeof(Prince),
+				TypeRelation = typeof(Prince),
 				Query = new MatchQuery { Field = Field<Prince>(p => p.FullTextField), Query = "default" },
 				InnerHits = new InnerHits
 				{

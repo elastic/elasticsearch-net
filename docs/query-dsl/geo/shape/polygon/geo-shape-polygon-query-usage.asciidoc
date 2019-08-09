@@ -23,8 +23,8 @@ q
 .GeoShapePolygon(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.Location)
-    .Coordinates(_polygonCoordinates)
+    .Field(p => p.LocationShape)
+    .Coordinates(PolygonCoordinates)
     .Relation(GeoShapeRelation.Intersects)
     .IgnoreUnmapped(true)
 )
@@ -38,8 +38,8 @@ new GeoShapePolygonQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Field<Project>(p => p.Location),
-    Shape = new PolygonGeoShape(_polygonCoordinates),
+    Field = Field<Project>(p => p.LocationShape),
+    Shape = new PolygonGeoShape(PolygonCoordinates),
     Relation = GeoShapeRelation.Intersects,
     IgnoreUnmapped = true
 }
@@ -53,7 +53,7 @@ new GeoShapePolygonQuery
     "_name": "named_query",
     "boost": 1.1,
     "ignore_unmapped": true,
-    "location": {
+    "locationShape": {
       "relation": "intersects",
       "shape": {
         "type": "polygon",

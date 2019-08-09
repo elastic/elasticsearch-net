@@ -13,14 +13,14 @@ namespace Tests.QueryDsl.Joining.HasChild
 		{
 			q => q.Query = null,
 			q => q.Query = ConditionlessQuery,
-			q => q.Type = null,
+			q => q.TypeRelation = null,
 		};
 
 		protected override QueryContainer QueryInitializer => new HasChildQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Type = Infer.Type<Developer>(),
+			TypeRelation = Infer.Relation<CommitActivity>(),
 			InnerHits = new InnerHits { Explain = true },
 			MaxChildren = 5,
 			MinChildren = 1,
@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.Joining.HasChild
 			{
 				_name = "named_query",
 				boost = 1.1,
-				type = "developer",
+				type = "commits",
 				score_mode = "avg",
 				min_children = 1,
 				max_children = 5,
@@ -44,7 +44,7 @@ namespace Tests.QueryDsl.Joining.HasChild
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.HasChild<Developer>(c => c
+			.HasChild<CommitActivity>(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.InnerHits(i => i.Explain())

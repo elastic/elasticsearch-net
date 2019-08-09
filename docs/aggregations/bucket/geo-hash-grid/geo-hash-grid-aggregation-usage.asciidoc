@@ -21,7 +21,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 a => a
 .GeoHash("my_geohash_grid", g => g
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .GeoHashPrecision(GeoHashPrecision.Precision3)
     .Size(1000)
     .ShardSize(100)
@@ -34,7 +34,7 @@ a => a
 ----
 new GeoHashGridAggregation("my_geohash_grid")
 {
-    Field = Field<Project>(p => p.Location),
+    Field = Field<Project>(p => p.LocationPoint),
     Precision = GeoHashPrecision.Precision3,
     Size = 1000,
     ShardSize = 100
@@ -47,7 +47,7 @@ new GeoHashGridAggregation("my_geohash_grid")
 {
   "my_geohash_grid": {
     "geohash_grid": {
-      "field": "location",
+      "field": "locationPoint",
       "precision": 3,
       "size": 1000,
       "shard_size": 100

@@ -355,7 +355,7 @@ See the Elasticsearch documentation on {ref_current}/span-queries.html[Span quer
 
 :includes-from-dirs: query-dsl/span
 
-include::query-dsl/span/container/span-containing-query-usage.asciidoc[]
+include::query-dsl/span/containing/span-containing-query-usage.asciidoc[]
 
 include::query-dsl/span/field-masking/span-field-masking-usage.asciidoc[]
 

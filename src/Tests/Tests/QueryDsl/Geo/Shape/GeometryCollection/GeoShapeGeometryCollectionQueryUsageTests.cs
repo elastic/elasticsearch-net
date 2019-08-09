@@ -8,63 +8,6 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 {
 	public class GeoShapeGeometryCollectionQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		private readonly IEnumerable<GeoCoordinate> _lineStringCoordinates = new GeoCoordinate[]
-		{
-			new[] { -77.03653, 38.897676 },
-			new[] { -77.009051, 38.889939 }
-		};
-
-		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _multiLineStringCoordinates = new[]
-		{
-			new GeoCoordinate[] { new[] { 12.0, 2.0 }, new[] { 13.0, 2.0 }, new[] { 13.0, 3.0 }, new[] { 12.0, 3.0 } },
-			new GeoCoordinate[] { new[] { 10.0, 0.0 }, new[] { 11.0, 0.0 }, new[] { 11.0, 1.0 }, new[] { 10.0, 1.0 } },
-			new GeoCoordinate[] { new[] { 10.2, 0.2 }, new[] { 10.8, 0.2 }, new[] { 10.8, 0.8 }, new[] { 12.0, 0.8 } },
-		};
-
-		private readonly IEnumerable<GeoCoordinate> _multiPointCoordinates = new GeoCoordinate[]
-		{
-			new[] { -77.03653, 38.897676 },
-			new[] { -77.009051, 38.889939 }
-		};
-
-		private readonly IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> _multiPolygonCoordinates = new[]
-		{
-			new[]
-			{
-				new GeoCoordinate[]
-				{
-					new[] { -17.0, 10.0 }, new[] { 16.0, 15.0 }, new[] { 12.0, 0.0 }, new[] { 16.0, -15.0 }, new[] { -17.0, -10.0 },
-					new[] { -17.0, 10.0 }
-				},
-				new GeoCoordinate[]
-				{
-					new[] { 18.2, 8.2 }, new[] { -18.8, 8.2 }, new[] { -10.8, -8.8 }, new[] { 18.2, 8.8 }
-				}
-			},
-			new[]
-			{
-				new GeoCoordinate[]
-				{
-					new[] { -15.0, 8.0 }, new[] { 16.0, 15.0 }, new[] { 12.0, 0.0 }, new[] { 16.0, -15.0 }, new[] { -17.0, -10.0 },
-					new[] { -15.0, 8.0 }
-				}
-			}
-		};
-
-		private readonly GeoCoordinate _pointCoordinates = new[] { -77.03653, 38.897676 };
-
-		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _polygonCoordinates = new[]
-		{
-			new GeoCoordinate[]
-			{
-				new[] { -17.0, 10.0 }, new[] { 16.0, 15.0 }, new[] { 12.0, 0.0 }, new[] { 16.0, -15.0 }, new[] { -17.0, -10.0 }, new[] { -17.0, 10.0 }
-			},
-			new GeoCoordinate[]
-			{
-				new[] { 18.2, 8.2 }, new[] { -18.8, 8.2 }, new[] { -10.8, -8.8 }, new[] { 18.2, 8.8 }
-			}
-		};
-
 		public GeoShapeGeometryCollectionQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen =>
@@ -79,17 +22,17 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.LocationShape),
 			Shape = new Nest.GeometryCollection
 			{
 				Geometries = new IGeoShape[]
 				{
-					new PointGeoShape(_pointCoordinates),
-					new MultiPointGeoShape(_multiPointCoordinates),
-					new LineStringGeoShape(_lineStringCoordinates),
-					new MultiLineStringGeoShape(_multiLineStringCoordinates),
-					new PolygonGeoShape(_polygonCoordinates),
-					new MultiPolygonGeoShape(_multiPolygonCoordinates),
+					new PointGeoShape(PointCoordinates),
+					new MultiPointGeoShape(MultiPointCoordinates),
+					new LineStringGeoShape(LineStringCoordinates),
+					new MultiLineStringGeoShape(MultiLineStringCoordinates),
+					new PolygonGeoShape(PolygonCoordinates),
+					new MultiPolygonGeoShape(MultiPolygonCoordinates),
 				}
 			},
 			Relation = GeoShapeRelation.Intersects,
@@ -103,32 +46,32 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 				new
 				{
 					type = "point",
-					coordinates = _pointCoordinates
+					coordinates = PointCoordinates
 				},
 				new
 				{
 					type = "multipoint",
-					coordinates = _multiPointCoordinates
+					coordinates = MultiPointCoordinates
 				},
 				new
 				{
 					type = "linestring",
-					coordinates = _lineStringCoordinates
+					coordinates = LineStringCoordinates
 				},
 				new
 				{
 					type = "multilinestring",
-					coordinates = _multiLineStringCoordinates
+					coordinates = MultiLineStringCoordinates
 				},
 				new
 				{
 					type = "polygon",
-					coordinates = _polygonCoordinates
+					coordinates = PolygonCoordinates
 				},
 				new
 				{
 					type = "multipolygon",
-					coordinates = _multiPolygonCoordinates
+					coordinates = MultiPolygonCoordinates
 				}
 			}
 		};
@@ -137,14 +80,14 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 			.GeoShapeGeometryCollection(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.Geometries(
-					new PointGeoShape(_pointCoordinates),
-					new MultiPointGeoShape(_multiPointCoordinates),
-					new LineStringGeoShape(_lineStringCoordinates),
-					new MultiLineStringGeoShape(_multiLineStringCoordinates),
-					new PolygonGeoShape(_polygonCoordinates),
-					new MultiPolygonGeoShape(_multiPolygonCoordinates)
+					new PointGeoShape(PointCoordinates),
+					new MultiPointGeoShape(MultiPointCoordinates),
+					new LineStringGeoShape(LineStringCoordinates),
+					new MultiLineStringGeoShape(MultiLineStringCoordinates),
+					new PolygonGeoShape(PolygonCoordinates),
+					new MultiPolygonGeoShape(MultiPolygonCoordinates)
 				)
 				.Relation(GeoShapeRelation.Intersects)
 			);

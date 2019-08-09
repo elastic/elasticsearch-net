@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -6,10 +7,9 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Circle
 {
+	[SkipVersion(">=6.6.0", "New indexing strategy introduced based on BKD trees that does not support circle geomtery in this fashion, yet. See https://github.com/elastic/elasticsearch/issues/32039")]
 	public class GeoShapeCircleQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		private readonly GeoCoordinate _coordinates = new GeoCoordinate(-45.0, 45.0);
-
 		public GeoShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeCircleQuery>(a => a.GeoShape as IGeoShapeCircleQuery)
@@ -23,8 +23,8 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Field<Project>(p => p.Location),
-			Shape = new CircleGeoShape(_coordinates) { Radius = "100m" },
+			Field = Field<Project>(p => p.LocationShape),
+			Shape = new CircleGeoShape(CircleCoordinates) { Radius = "100m" },
 			Relation = GeoShapeRelation.Intersects,
 		};
 
@@ -32,15 +32,15 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 		{
 			type = "circle",
 			radius = "100m",
-			coordinates = _coordinates
+			coordinates = CircleCoordinates
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.GeoShapeCircle(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
-				.Coordinates(_coordinates)
+				.Field(p => p.LocationShape)
+				.Coordinates(CircleCoordinates)
 				.Radius("100m")
 				.Relation(GeoShapeRelation.Intersects)
 			);

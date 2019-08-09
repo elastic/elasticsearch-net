@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -7,14 +8,9 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 {
+	[SkipVersion(">=6.6.0", "New indexing strategy introduced based on BKD trees that does not support circle geomtery in this fashion, yet. See https://github.com/elastic/elasticsearch/issues/32039")]
 	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		private readonly IEnumerable<GeoCoordinate> _coordinates = new GeoCoordinate[]
-		{
-			new[] { -77.03653, 38.897676 },
-			new[] { -77.009051, 38.889939 }
-		};
-
 		public GeoShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen =>
@@ -29,23 +25,23 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Field<Project>(p => p.Location),
-			Shape = new MultiPointGeoShape(_coordinates),
+			Field = Field<Project>(p => p.LocationShape),
+			Shape = new MultiPointGeoShape(MultiPointCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override object ShapeJson => new
 		{
 			type = "multipoint",
-			coordinates = _coordinates
+			coordinates = MultiPointCoordinates
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.GeoShapeMultiPoint(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
-				.Coordinates(_coordinates)
+				.Field(p => p.LocationShape)
+				.Coordinates(MultiPointCoordinates)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 	}

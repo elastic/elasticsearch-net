@@ -5,7 +5,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
-namespace Tests.QueryDsl.Joining.SpanOr
+namespace Tests.QueryDsl.Span.Or
 {
 	public class SpanOrUsageTests : QueryDslUsageTestsBase
 	{

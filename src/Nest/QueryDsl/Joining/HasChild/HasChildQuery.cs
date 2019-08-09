@@ -28,8 +28,12 @@ namespace Nest
 		[JsonProperty("score_mode")]
 		ChildScoreMode? ScoreMode { get; set; }
 
-		[JsonProperty("type")]
+		[JsonIgnore]
+		[Obsolete("Use TypeRelation")]
 		TypeName Type { get; set; }
+
+		[JsonProperty("type")]
+		RelationName TypeRelation { get; set; }
 	}
 
 	public class HasChildQuery : QueryBase, IHasChildQuery
@@ -45,19 +49,23 @@ namespace Nest
 		public int? MinChildren { get; set; }
 		public QueryContainer Query { get; set; }
 		public ChildScoreMode? ScoreMode { get; set; }
+
+		[Obsolete("Use TypeRelation")]
 		public TypeName Type { get; set; }
+
+		public RelationName TypeRelation { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasChild = this;
 
-		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
+		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.TypeRelation == null;
 	}
 
 	public class HasChildQueryDescriptor<T>
 		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
 			, IHasChildQuery where T : class
 	{
-		public HasChildQueryDescriptor() => ((IHasChildQuery)this).Type = TypeName.Create<T>();
+		public HasChildQueryDescriptor() => ((IHasChildQuery)this).TypeRelation = Infer.Relation<T>();
 
 		protected override bool Conditionless => HasChildQuery.IsConditionless(this);
 		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
@@ -71,12 +79,19 @@ namespace Nest
 		int? IHasChildQuery.MinChildren { get; set; }
 		QueryContainer IHasChildQuery.Query { get; set; }
 		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
+
+		[Obsolete("Use TypeRelation")]
 		TypeName IHasChildQuery.Type { get; set; }
+
+		RelationName IHasChildQuery.TypeRelation { get; set; }
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(selector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
+		[Obsolete("Use TypeRelation")]
 		public HasChildQueryDescriptor<T> Type(string type) => Assign(type, (a, v) => a.Type = v);
+
+		public HasChildQueryDescriptor<T> TypeRelation(string type) => Assign(type, (a, v) => a.TypeRelation = v);
 
 		public HasChildQueryDescriptor<T> ScoreMode(ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreMode = v);
 

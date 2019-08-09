@@ -24,7 +24,7 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Match(sq => sq
-        .Prefix(pr => pr.Field(p => p.Name).Value("pre-*"))
+        .Prefix(pr => pr.Field(p => p.Description).Value("pre-*"))
     )
 )
 ----
@@ -37,7 +37,7 @@ new SpanMultiTermQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Match = new PrefixQuery { Field = "name", Value = "pre-*" }
+    Match = new PrefixQuery { Field = Infer.Field<Project>(f => f.Description), Value = "pre-*" }
 }
 ----
 
@@ -50,7 +50,7 @@ new SpanMultiTermQuery
     "boost": 1.1,
     "match": {
       "prefix": {
-        "name": {
+        "description": {
           "value": "pre-*"
         }
       }

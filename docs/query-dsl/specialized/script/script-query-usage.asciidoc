@@ -56,7 +56,7 @@ new ScriptQuery
     "_name": "named_query",
     "boost": 1.1,
     "script": {
-      "source": "doc['numberOfCommits'].value > param1",
+      "source": "doc['numberOfCommits'].value > params.param1",
       "params": {
         "param1": 50
       }

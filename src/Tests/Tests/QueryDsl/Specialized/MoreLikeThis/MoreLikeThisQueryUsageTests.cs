@@ -38,7 +38,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 			Fields = Fields<Project>(p => p.Name),
 			Like = new List<Like>
 			{
-				new LikeDocument<Project>(Project.Instance.Name),
+				new LikeDocument<Project>(Project.Instance.Name) { Routing = Project.Instance.Name },
 				"some long text"
 			},
 			Analyzer = "some_analyzer",
@@ -80,6 +80,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 					{
 						_index = "project",
 						_type = "doc",
+						_routing = Project.Instance.Name,
 						_id = Project.Instance.Name
 					},
 					"some long text"
@@ -95,7 +96,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 				.Name("named_query")
 				.Boost(1.1)
 				.Like(l => l
-					.Document(d => d.Id(Project.Instance.Name))
+					.Document(d => d.Id(Project.Instance.Name).Routing(Project.Instance.Name))
 					.Text("some long text")
 				)
 				.Analyzer("some_analyzer")

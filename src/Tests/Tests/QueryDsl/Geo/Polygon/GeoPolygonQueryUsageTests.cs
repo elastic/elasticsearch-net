@@ -22,8 +22,8 @@ namespace Tests.QueryDsl.Geo.Polygon
 			Boost = 1.1,
 			Name = "named_query",
 			ValidationMethod = GeoValidationMethod.Strict,
-			Points = new[] { new GeoLocation(45, -45), new GeoLocation(-34, 34), },
-			Field = Infer.Field<Project>(p => p.Location)
+			Points = new[] { new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70) },
+			Field = Infer.Field<Project>(p => p.LocationPoint)
 		};
 
 		protected override object QueryJson => new
@@ -33,12 +33,13 @@ namespace Tests.QueryDsl.Geo.Polygon
 				_name = "named_query",
 				boost = 1.1,
 				validation_method = "strict",
-				location = new
+				locationPoint = new
 				{
 					points = new[]
 					{
 						new { lat = 45.0, lon = -45.0 },
-						new { lat = -34.0, lon = 34.0 }
+						new { lat = -34.0, lon = 34.0 },
+						new { lat = 70.0, lon = -70.0 },
 					}
 				}
 			}
@@ -48,9 +49,9 @@ namespace Tests.QueryDsl.Geo.Polygon
 			.GeoPolygon(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.ValidationMethod(GeoValidationMethod.Strict)
-				.Points(new GeoLocation(45, -45), new GeoLocation(-34, 34))
+				.Points(new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70))
 			);
 	}
 }

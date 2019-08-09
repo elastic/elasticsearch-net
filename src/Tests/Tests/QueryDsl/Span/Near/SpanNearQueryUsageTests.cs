@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
-#pragma warning disable 618 // Uses CollectPayloads
-
-namespace Tests.QueryDsl.Joining.SpanNear
+namespace Tests.QueryDsl.Span.Near
 {
 	public class SpanNearUsageTests : QueryDslUsageTestsBase
 	{
@@ -29,10 +28,9 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
 				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
 				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } },
-				new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
 			},
 			Slop = 12,
-			InOrder = false,
+			InOrder = true,
 		};
 
 		protected override object QueryJson => new
@@ -43,11 +41,10 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				{
 					new { span_term = new { field = new { value = "value1" } } },
 					new { span_term = new { field = new { value = "value2" } } },
-					new { span_term = new { field = new { value = "value3" } } },
-					new { span_gap = new { field = 2 } }
+					new { span_term = new { field = new { value = "value3" } } }
 				},
 				slop = 12,
-				in_order = false,
+				in_order = true,
 				_name = "named_query",
 				boost = 1.1
 			}
@@ -60,11 +57,58 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				.Clauses(
 					c => c.SpanTerm(st => st.Field("field").Value("value1")),
 					c => c.SpanTerm(st => st.Field("field").Value("value2")),
-					c => c.SpanTerm(st => st.Field("field").Value("value3")),
+					c => c.SpanTerm(st => st.Field("field").Value("value3"))
+				)
+				.Slop(12)
+				.InOrder()
+			);
+	}
+
+	// hide
+	[SkipVersion("<6.3.0", "SpanGap query introduced in Elasticsearch 6.3.0")]
+	public class SpanNearWithGapUsageTests : QueryDslUsageTestsBase
+	{
+		public SpanNearWithGapUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override QueryContainer QueryInitializer => new SpanNearQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Clauses = new List<ISpanQuery>
+			{
+				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
+				new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
+			},
+			Slop = 12,
+			InOrder = true,
+		};
+
+		protected override object QueryJson => new
+		{
+			span_near = new
+			{
+				clauses = new object[]
+				{
+					new { span_term = new { field = new { value = "value1" } } },
+					new { span_gap = new { field = 2 } }
+				},
+				slop = 12,
+				in_order = true,
+				_name = "named_query",
+				boost = 1.1
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.SpanNear(sn => sn
+				.Name("named_query")
+				.Boost(1.1)
+				.Clauses(
+					c => c.SpanTerm(st => st.Field("field").Value("value1")),
 					c => c.SpanGap(st => st.Field("field").Width(2))
 				)
 				.Slop(12)
-				.InOrder(false)
+				.InOrder()
 			);
 	}
 }

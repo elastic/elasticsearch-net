@@ -24,7 +24,7 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Like(l => l
-        .Document(d => d.Id(Project.Instance.Name))
+        .Document(d => d.Id(Project.Instance.Name).Routing(Project.Instance.Name))
         .Text("some long text")
     )
     .Analyzer("some_analyzer")
@@ -56,7 +56,7 @@ new MoreLikeThisQuery
     Fields = Fields<Project>(p => p.Name),
     Like = new List<Like>
     {
-        new LikeDocument<Project>(Project.Instance.Name),
+        new LikeDocument<Project>(Project.Instance.Name) { Routing = Project.Instance.Name },
         "some long text"
     },
     Analyzer = "some_analyzer",
@@ -103,6 +103,7 @@ new MoreLikeThisQuery
       {
         "_index": "project",
         "_type": "doc",
+        "_routing": "Durgan LLC",
         "_id": "Durgan LLC"
       },
       "some long text"

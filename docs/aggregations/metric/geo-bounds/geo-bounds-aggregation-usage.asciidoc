@@ -21,7 +21,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 a => a
 .GeoBounds("viewport", gb => gb
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .WrapLongitude(true)
 )
 ----
@@ -30,7 +30,7 @@ a => a
 
 [source,csharp]
 ----
-new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
+new GeoBoundsAggregation("viewport", Field<Project>(p => p.LocationPoint))
 {
     WrapLongitude = true
 }
@@ -42,7 +42,7 @@ new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
 {
   "viewport": {
     "geo_bounds": {
-      "field": "location",
+      "field": "locationPoint",
       "wrap_longitude": true
     }
   }

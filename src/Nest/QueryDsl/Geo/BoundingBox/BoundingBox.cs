@@ -11,6 +11,10 @@ namespace Nest
 		[JsonProperty("top_left")]
 		GeoLocation TopLeft { get; set; }
 
+		/// <summary>
+		/// WKT representation of a bounding box.
+		/// <para>Valid only for Elasticsearch 6.2.0+</para>
+		/// </summary>
 		[JsonProperty("wkt")]
 		string WellKnownText { get; set; }
 	}

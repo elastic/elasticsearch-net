@@ -36,7 +36,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 
 		private static Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.GeoShape(s => s
-				.Name(p => p.Location)
+				.Name(p => p.LocationShape)
 				.Tree(GeoTree.Quadtree)
 				.Orientation(GeoOrientation.ClockWise)
 				.Strategy(GeoStrategy.Recursive)
@@ -49,7 +49,7 @@ namespace Tests.Mapping.Types.Core.GeoShape
 		private static IProperties InitializerProperties => new Properties
 		{
 			{
-				"location", new GeoShapeProperty
+				"locationShape", new GeoShapeProperty
 				{
 					Tree = GeoTree.Quadtree,
 					Orientation = GeoOrientation.ClockWise,

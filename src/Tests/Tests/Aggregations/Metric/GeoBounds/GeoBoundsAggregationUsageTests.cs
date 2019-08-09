@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 			{
 				geo_bounds = new
 				{
-					field = "location",
+					field = "locationPoint",
 					wrap_longitude = true
 				}
 			}
@@ -27,12 +27,12 @@ namespace Tests.Aggregations.Metric.GeoBounds
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoBounds("viewport", gb => gb
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.WrapLongitude(true)
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
+			new GeoBoundsAggregation("viewport", Field<Project>(p => p.LocationPoint))
 			{
 				WrapLongitude = true
 			};

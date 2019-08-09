@@ -30,10 +30,10 @@ q
     .Name("named_query")
     .Boost(1.1)
     .InnerHits(i => i.Explain())
-    .Path(p => p.CuratedTags)
+    .Path(p => p.Tags)
     .Query(nq => nq
         .Terms(t => t
-            .Field(f => f.CuratedTags.First().Name)
+            .Field(f => f.Tags.First().Name)
             .Terms("lorem", "ipsum")
         )
     )
@@ -50,10 +50,10 @@ new NestedQuery
     Name = "named_query",
     Boost = 1.1,
     InnerHits = new InnerHits { Explain = true },
-    Path = Field<Project>(p => p.CuratedTags),
+    Path = Field<Project>(p => p.Tags),
     Query = new TermsQuery
     {
-        Field = Field<Project>(p => p.CuratedTags.First().Name),
+        Field = Field<Project>(p => p.Tags.First().Name),
         Terms = new[] { "lorem", "ipsum" }
     },
     IgnoreUnmapped = true
@@ -69,14 +69,14 @@ new NestedQuery
     "boost": 1.1,
     "query": {
       "terms": {
-        "curatedTags.name": [
+        "tags.name": [
           "lorem",
           "ipsum"
         ]
       }
     },
     "ignore_unmapped": true,
-    "path": "curatedTags",
+    "path": "tags",
     "inner_hits": {
       "explain": true
     }

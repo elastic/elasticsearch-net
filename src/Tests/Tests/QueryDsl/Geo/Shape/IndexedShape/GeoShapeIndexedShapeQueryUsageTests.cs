@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -13,6 +14,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.html[geoshape queries] for more detail.
 	 */
+	[SkipVersion("<6.4.0", "Routing value parsed only in 6.4.0+. See https://github.com/elastic/elasticsearch/commit/89aa7bddfbab22ddd5478663717cf825991f84f9")]
 	public class GeoShapeIndexedShapeQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public GeoShapeIndexedShapeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -32,13 +34,14 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Field<Project>(p => p.Location),
+			Field = Field<Project>(p => p.LocationShape),
 			IndexedShape = new FieldLookup
 			{
-				Id = 2,
+				Id = Project.Instance.Name,
 				Index = Index<Project>(),
 				Type = Type<Project>(),
-				Path = Field<Project>(p => p.Location),
+				Path = Field<Project>(p => p.LocationShape),
+				Routing = Project.Instance.Name
 			},
 			Relation = GeoShapeRelation.Intersects
 		};
@@ -49,14 +52,15 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			{
 				_name = "named_query",
 				boost = 1.1,
-				location = new
+				locationShape = new
 				{
 					indexed_shape = new
 					{
-						id = 2,
-						type = "doc",
+						id = Project.Instance.Name,
 						index = "project",
-						path = "location"
+						type = "doc",
+						path = "locationShape",
+						routing = Project.Instance.Name
 					},
 					relation = "intersects"
 				}
@@ -67,10 +71,11 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			.GeoIndexedShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
+				.Field(p => p.LocationShape)
 				.IndexedShape(p => p
-					.Id(2)
-					.Path(pp => pp.Location)
+					.Id(Project.Instance.Name)
+					.Path(pp => pp.LocationShape)
+					.Routing(Project.Instance.Name)
 				)
 				.Relation(GeoShapeRelation.Intersects)
 			);

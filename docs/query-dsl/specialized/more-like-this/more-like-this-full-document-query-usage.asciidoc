@@ -22,7 +22,10 @@ please modify the original csharp file found at the link and submit the PR with 
 q
 .MoreLikeThis(sn => sn
     .Like(l => l
-        .Document(d => d.Document(Project.Instance))
+        .Document(d => d
+            .Document(Project.Instance)
+            .Routing(Project.Instance.Name)
+        )
         .Text("some long text")
     )
 )
@@ -36,7 +39,7 @@ new MoreLikeThisQuery
 {
     Like = new List<Like>
     {
-        new LikeDocument<Project>(Project.Instance),
+        new LikeDocument<Project>(Project.Instance) { Routing = Project.Instance.Name },
         "some long text"
     }
 }
@@ -51,8 +54,6 @@ new MoreLikeThisQuery
       {
         "_index": "project",
         "_type": "doc",
-        "_id": "Durgan LLC",
-        "_routing": "Durgan LLC",
         "doc": {
           "name": "Koch, Collier and Mohr",
           "state": "BellyUp",
@@ -68,7 +69,8 @@ new MoreLikeThisQuery
             "lat": 42.1523,
             "lon": -80.321
           }
-        }
+        },
+        "_routing": "Durgan LLC"
       },
       "some long text"
     ]

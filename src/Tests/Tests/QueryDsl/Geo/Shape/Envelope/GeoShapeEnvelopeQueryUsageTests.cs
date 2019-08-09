@@ -9,12 +9,6 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 {
 	public class GeoShapeEnvelopeQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		private readonly IEnumerable<GeoCoordinate> _coordinates = new GeoCoordinate[]
-		{
-			new[] { -45.0, 45.0 },
-			new[] { 45.0, -45.0 }
-		};
-
 		public GeoShapeEnvelopeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen =>
@@ -29,23 +23,23 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = Field<Project>(p => p.Location),
-			Shape = new EnvelopeGeoShape(_coordinates),
+			Field = Field<Project>(p => p.LocationShape),
+			Shape = new EnvelopeGeoShape(EnvelopeCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override object ShapeJson => new
 		{
 			type = "envelope",
-			coordinates = _coordinates
+			coordinates = EnvelopeCoordinates
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.GeoShapeEnvelope(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Location)
-				.Coordinates(_coordinates)
+				.Field(p => p.LocationShape)
+				.Coordinates(EnvelopeCoordinates)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 	}

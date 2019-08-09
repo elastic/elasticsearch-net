@@ -33,10 +33,8 @@ namespace Tests.QueryDsl.TermLevel.Range
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Field = "description",
-			GreaterThan = FixedDate,
-			GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(DateMathTimeUnit.Month),
-			LessThan = "01/01/2012",
+			Field = "lastActivity",
+			GreaterThanOrEqualTo = DateMath.Now.Subtract("1y").RoundTo(DateMathTimeUnit.Month),
 			LessThanOrEqualTo = DateMath.Now,
 			TimeZone = "+01:00",
 			Format = "dd/MM/yyyy||yyyy"
@@ -46,14 +44,12 @@ namespace Tests.QueryDsl.TermLevel.Range
 		{
 			range = new
 			{
-				description = new
+				lastActivity = new
 				{
 					_name = "named_query",
 					boost = 1.1,
 					format = "dd/MM/yyyy||yyyy",
-					gt = "2015-06-06T12:01:02.123",
-					gte = "2015-06-06T12:01:02.123||/M",
-					lt = "01/01/2012",
+					gte = "now-1y/M",
 					lte = "now",
 					time_zone = "+01:00"
 				}
@@ -64,10 +60,8 @@ namespace Tests.QueryDsl.TermLevel.Range
 			.DateRange(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p => p.Description)
-				.GreaterThan(FixedDate)
-				.GreaterThanOrEquals(DateMath.Anchored(FixedDate).RoundTo(DateMathTimeUnit.Month))
-				.LessThan("01/01/2012")
+				.Field(p => p.LastActivity)
+				.GreaterThanOrEquals(DateMath.Now.Subtract("1y").RoundTo(DateMathTimeUnit.Month))
 				.LessThanOrEquals(DateMath.Now)
 				.Format("dd/MM/yyyy||yyyy")
 				.TimeZone("+01:00")

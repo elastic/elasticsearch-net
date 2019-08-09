@@ -21,7 +21,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 a => a
 .GeoDistance("rings_around_amsterdam", g => g
-    .Field(p => p.Location)
+    .Field(p => p.LocationPoint)
     .Origin(52.376, 4.894)
     .Ranges(
         r => r.To(100),
@@ -37,7 +37,7 @@ a => a
 ----
 new GeoDistanceAggregation("rings_around_amsterdam")
 {
-    Field = Field((Project p) => p.Location),
+    Field = Field((Project p) => p.LocationPoint),
     Origin = "52.376, 4.894",
     Ranges = new List<AggregationRange>
     {
@@ -54,7 +54,7 @@ new GeoDistanceAggregation("rings_around_amsterdam")
 {
   "rings_around_amsterdam": {
     "geo_distance": {
-      "field": "location",
+      "field": "locationPoint",
       "origin": {
         "lat": 52.376,
         "lon": 4.894

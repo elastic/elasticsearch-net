@@ -23,8 +23,8 @@ q
 .GeoShapeMultiLineString(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.Location)
-    .Coordinates(_coordinates)
+    .Field(p => p.LocationShape)
+    .Coordinates(MultiLineStringCoordinates)
     .Relation(GeoShapeRelation.Intersects)
 )
 ----
@@ -37,8 +37,8 @@ new GeoShapeMultiLineStringQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Field<Project>(p => p.Location),
-    Shape = new MultiLineStringGeoShape(_coordinates),
+    Field = Field<Project>(p => p.LocationShape),
+    Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
     Relation = GeoShapeRelation.Intersects,
 }
 ----

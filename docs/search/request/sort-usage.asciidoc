@@ -44,7 +44,7 @@ s => s
         .Missing(-1)
     )
     .GeoDistance(g => g
-        .Field(p => p.Location)
+        .Field(p => p.LocationPoint)
         .DistanceType(GeoDistanceType.Arc)
         .Order(SortOrder.Ascending)
         .Unit(DistanceUnit.Centimeters)
@@ -93,7 +93,7 @@ new SearchRequest<Project>
         },
         new GeoDistanceSort
         {
-            Field = "location",
+            Field = "locationPoint",
             Order = SortOrder.Ascending,
             DistanceType = GeoDistanceType.Arc,
             GeoUnit = DistanceUnit.Centimeters,
@@ -161,7 +161,7 @@ new SearchRequest<Project>
     },
     {
       "_geo_distance": {
-        "location": [
+        "locationPoint": [
           {
             "lat": 70.0,
             "lon": -70.0

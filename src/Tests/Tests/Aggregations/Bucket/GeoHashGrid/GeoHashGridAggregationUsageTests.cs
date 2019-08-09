@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 			{
 				geohash_grid = new
 				{
-					field = "location",
+					field = "locationPoint",
 					precision = 3,
 					size = 1000,
 					shard_size = 100
@@ -29,7 +29,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoHash("my_geohash_grid", g => g
-				.Field(p => p.Location)
+				.Field(p => p.LocationPoint)
 				.GeoHashPrecision(GeoHashPrecision.Precision3)
 				.Size(1000)
 				.ShardSize(100)
@@ -38,7 +38,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 		protected override AggregationDictionary InitializerAggs =>
 			new GeoHashGridAggregation("my_geohash_grid")
 			{
-				Field = Field<Project>(p => p.Location),
+				Field = Field<Project>(p => p.LocationPoint),
 				Precision = GeoHashPrecision.Precision3,
 				Size = 1000,
 				ShardSize = 100
