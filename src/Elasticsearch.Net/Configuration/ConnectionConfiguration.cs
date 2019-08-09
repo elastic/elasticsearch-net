@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// Allows you to control how <see cref="ElasticLowLevelClient"/> behaves and where/how it connects to Elasticsearch
+	/// Allows you to control how <see cref="ElasticLowLevelClient" /> behaves and where/how it connects to Elasticsearch
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
@@ -42,17 +42,19 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c> except for
 		/// HttpClientHandler implementations based on curl, which defaults to
-		/// <see cref="Environment.ProcessorCount"/>
+		/// <see cref="Environment.ProcessorCount" />
 		/// </summary>
 		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
+
 
 		/// <summary>
 		/// The default user agent for Elasticsearch.Net
 		/// </summary>
-		public static readonly string DefaultUserAgent = $"elasticsearch-net/{typeof(IConnectionConfigurationValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Elasticsearch.Net)";
+		public static readonly string DefaultUserAgent =
+			$"elasticsearch-net/{typeof(IConnectionConfigurationValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Elasticsearch.Net)";
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="ConnectionConfiguration" />
 		/// </summary>
 		/// <param name="uri">The root of the Elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
@@ -60,7 +62,14 @@ namespace Elasticsearch.Net
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
+		/// <para><see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id</para>
+		/// </summary>
+		public ConnectionConfiguration(string cloudId, BasicAuthenticationCredentials credentials) : this(
+			new CloudConnectionPool(cloudId, credentials)) { }
+
+		/// <summary>
+		/// Creates a new instance of <see cref="ConnectionConfiguration" />
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
@@ -68,7 +77,7 @@ namespace Elasticsearch.Net
 			: this(connectionPool, null, null) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="ConnectionConfiguration" />
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="connection">An connection implementation that can make API requests</param>
@@ -77,7 +86,7 @@ namespace Elasticsearch.Net
 			: this(connectionPool, connection, null) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="ConnectionConfiguration" />
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
@@ -85,7 +94,7 @@ namespace Elasticsearch.Net
 			: this(connectionPool, null, serializer) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="ConnectionConfiguration" />
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="connection">An connection implementation that can make API requests</param>
@@ -95,7 +104,7 @@ namespace Elasticsearch.Net
 
 		internal static bool IsCurlHandler { get; } =
 #if DOTNETCORE
-			typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+	typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
 #else
 			false;
 #endif
@@ -107,71 +116,44 @@ namespace Elasticsearch.Net
 		where T : ConnectionConfiguration<T>
 	{
 		private readonly IConnection _connection;
-
 		private readonly IConnectionPool _connectionPool;
-
 		private readonly NameValueCollection _headers = new NameValueCollection();
-
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
 		private BasicAuthenticationCredentials _basicAuthCredentials;
-
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
-
 		private int _connectionLimit;
-
 		private TimeSpan? _deadTimeout;
 
 		private bool _disableAutomaticProxyDetection = false;
 
 		private bool _disableDirectStreaming = false;
-
 		private bool _disablePings;
-
 		private bool _enableHttpCompression;
-
 		private bool _enableHttpPipelining = true;
-
 		private TimeSpan? _keepAliveInterval;
-
 		private TimeSpan? _keepAliveTime;
-
 		private TimeSpan? _maxDeadTimeout;
-
 		private int? _maxRetries;
-
 		private TimeSpan? _maxRetryTimeout;
-
 		private Func<Node, bool> _nodePredicate = DefaultNodePredicate;
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
-
 		private TimeSpan? _pingTimeout;
-
 		private bool _prettyJson;
-
 		private string _proxyAddress;
 
 		private string _proxyPassword;
-
 		private string _proxyUsername;
-
 		private TimeSpan _requestTimeout;
-
 		private Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> _serverCertificateValidationCallback;
-
 		private IReadOnlyCollection<int> _skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(new int[] { });
-
 		private TimeSpan? _sniffLifeSpan;
-
 		private bool _sniffOnConnectionFault;
-
 		private bool _sniffOnStartup;
-
 		private bool _throwExceptions;
-
-		private readonly ElasticsearchUrlFormatter _urlFormatter;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 
@@ -190,6 +172,12 @@ namespace Elasticsearch.Net
 				_nodePredicate = DefaultReseedableNodePredicate;
 
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
+
+			if (connectionPool is CloudConnectionPool cloudPool)
+			{
+				_basicAuthCredentials = cloudPool.BasicCredentials;
+				_enableHttpCompression = true;
+			}
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -279,15 +267,20 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to <c>80</c>.
 		/// <para>
-		/// For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating
+		/// For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when
+		/// creating
 		/// ServicePoint objects, affecting the default <see cref="IConnection" /> implementation.
 		/// </para>
 		/// <para>
-		/// For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient
+		/// For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by
+		/// the HttpClient
 		/// inside the default <see cref="IConnection" /> implementation
 		/// </para>
 		/// </summary>
-		/// <param name="connectionLimit">The connection limit, a value lower then 0 will cause the connection limit not to be set at all</param>
+		/// <param name="connectionLimit">
+		/// The connection limit, a value lower then 0 will cause the connection limit not to be set
+		/// at all
+		/// </param>
 		public T ConnectionLimit(int connectionLimit) => Assign(connectionLimit, (a, v) => a._connectionLimit = v);
 
 		/// <summary>
@@ -305,7 +298,8 @@ namespace Elasticsearch.Net
 		/// Set the duration after which a cluster state is considered stale and a sniff should be performed again.
 		/// An <see cref="IConnectionPool" /> has to signal it supports reseeding, otherwise sniffing will never happen.
 		/// Defaults to 1 hour.
-		/// Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
+		/// Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for
+		/// SupportsReseeding
 		/// </summary>
 		/// <param name="sniffLifeSpan">The duration a clusterstate is considered fresh, set to null to disable periodic sniffing</param>
 		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(sniffLifeSpan, (a, v) => a._sniffLifeSpan = v);
@@ -331,19 +325,23 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
-		/// a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible.
+		/// a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as
+		/// possible.
 		/// You can disable these pings globally here if you rather have it fail on the possible slower original request
 		/// </summary>
 		public T DisablePing(bool disable = true) => Assign(disable, (a, v) => a._disablePings = v);
 
 		/// <summary>
-		/// A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a
+		/// A collection of query string parameters that will be sent with every request. Useful in situations where you always
+		/// need to pass a
 		/// parameter e.g. an API key.
 		/// </summary>
-		public T GlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(queryStringParameters, (a, v) => a._queryString.Add(v));
+		public T GlobalQueryStringParameters(NameValueCollection queryStringParameters) =>
+			Assign(queryStringParameters, (a, v) => a._queryString.Add(v));
 
 		/// <summary>
-		/// A collection of headers that will be sent with every request. Useful in situations where you always need to pass a header e.g. a custom
+		/// A collection of headers that will be sent with every request. Useful in situations where you always need to pass a
+		/// header e.g. a custom
 		/// auth header
 		/// </summary>
 		public T GlobalHeaders(NameValueCollection headers) => Assign(headers, (a, v) => a._headers.Add(v));
@@ -460,11 +458,14 @@ namespace Elasticsearch.Net
 		public T EnableHttpPipelining(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpPipelining = v);
 
 		/// <summary>
-		/// Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and
+		/// Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this
+		/// predicate and
 		/// always execute on all nodes.
-		/// When using an <see cref="IConnectionPool" /> implementation that supports reseeding of nodes, this will default to omitting master only
+		/// When using an <see cref="IConnectionPool" /> implementation that supports reseeding of nodes, this will default to
+		/// omitting master only
 		/// node from regular API calls.
-		/// When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken
+		/// When using static or single node connection pooling it is assumed the list of node you instantiate the client with
+		/// should be taken
 		/// verbatim.
 		/// </summary>
 		/// <param name="predicate">Return true if you want the node to be used for API calls</param>
@@ -478,7 +479,8 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
-		/// so that the original request and response JSON can be inspected. It also always asks the server for the full stack trace on errors
+		/// so that the original request and response JSON can be inspected. It also always asks the server for the full stack
+		/// trace on errors
 		/// </summary>
 		/// <param name="onRequestCompleted">
 		/// An optional callback to be performed when the request completes. This will
@@ -519,19 +521,22 @@ namespace Elasticsearch.Net
 			Assign(certificates, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Use a <see cref="System.Security.Cryptography.X509Certificates.X509Certificate"/> to authenticate all HTTP requests. You can also set them on individual request using <see cref="RequestConfiguration.ClientCertificates" />
+		/// Use a <see cref="System.Security.Cryptography.X509Certificates.X509Certificate" /> to authenticate all HTTP requests.
+		/// You can also set them on individual request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificate(X509Certificate certificate) =>
 			Assign(new X509Certificate2Collection { certificate }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Use a file path to a certificate to authenticate all HTTP requests. You can also set them on individual request using <see cref="RequestConfiguration.ClientCertificates" />
+		/// Use a file path to a certificate to authenticate all HTTP requests. You can also set them on individual request using
+		/// <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificate(string certificatePath) =>
 			Assign(new X509Certificate2Collection { new X509Certificate(certificatePath) }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
-		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401,
+		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that
+		/// returns a HTML for 401,
 		/// 500
 		/// </summary>
 		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>

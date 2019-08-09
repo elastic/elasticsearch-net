@@ -15,9 +15,7 @@ namespace Nest
 	/// <inheritdoc cref="IConnectionSettingsValues" />
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
-		/// <summary>
-		/// The default user agent for Nest
-		/// </summary>
+		/// <summary> The default user agent for Nest </summary>
 		public static readonly string DefaultUserAgent =
 			$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)";
 
@@ -27,8 +25,17 @@ namespace Nest
 		/// </summary>
 		public delegate IElasticsearchSerializer SourceSerializerFactory(IElasticsearchSerializer builtIn, IConnectionSettingsValues values);
 
-		public ConnectionSettings(Uri uri = null)
-			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+		/// <summary>
+		/// Creates a new instance of connection settings, if <paramref name="uri"/> is not specified will default to connecting to http://localhost:9200
+		/// </summary>
+		/// <param name="uri"></param>
+		public ConnectionSettings(Uri uri = null) : this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+
+		/// <summary>
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
+		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		/// </summary>
+		public ConnectionSettings(string cloudId, BasicAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
 
 		/// <summary>
 		/// Instantiate connection settings using a <see cref="SingleNodeConnectionPool" /> using the provided

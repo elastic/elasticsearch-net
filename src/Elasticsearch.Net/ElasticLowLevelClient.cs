@@ -6,23 +6,31 @@ using System.Threading.Tasks;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// Low level client that exposes all of elasticsearch API endpoints but leaves you in charge of building request and handling the response
+	/// Low level client that exposes all of Elasticsearch API endpoints but leaves you in charge of building request and handling the response
 	/// </summary>
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
 		private readonly ElasticsearchUrlFormatter _formatter;
 
-		/// <summary>Instantiate a new low level elasticsearch client to http://localhost:9200</summary>
+		/// <summary>Instantiate a new low level Elasticsearch client to http://localhost:9200</summary>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticLowLevelClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
 
-		/// <summary>Instantiate a new low level elasticsearch client using the specified settings</summary>
+		/// <summary>Instantiate a new low level Elasticsearch client using the specified settings</summary>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticLowLevelClient(IConnectionConfigurationValues settings) : this(
 			new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
 
 		/// <summary>
-		/// Instantiate a new low level elasticsearch client explicitly specifying a custom transport setup
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
+		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		/// <para></para>If you want more control use the <see cref="ElasticLowLevelClient(IConnectionConfigurationValues)"/> constructor and pass an instance of
+		/// <see cref="ConnectionConfiguration" /> that takes <paramref name="cloudId"/> in its constructor as well
+		/// </summary>
+		public ElasticLowLevelClient(string cloudId, BasicAuthenticationCredentials credentials) : this(new ConnectionConfiguration(cloudId, credentials)) { }
+
+		/// <summary>
+		/// Instantiate a new low level Elasticsearch client explicitly specifying a custom transport setup
 		/// </summary>
 		public ElasticLowLevelClient(ITransport<IConnectionConfigurationValues> transport)
 		{

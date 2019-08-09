@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +14,14 @@ namespace Nest
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
+		
+		/// <summary>
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
+		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		/// <para></para>If you want more control use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
+		/// <see cref="ConnectionSettings" /> that takes <paramref name="cloudId"/> in its constructor as well
+		/// </summary>
+		public ElasticClient(string cloudId, BasicAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
 
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
@@ -67,6 +75,16 @@ namespace Nest
 			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 		) => Dispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(descriptor, cancellationToken, null, dispatch);
 
+		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
+			where TRequest : IRequest<TParams>
+			where TParams : IRequestParameters, new()
+		{
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
+			setter(configuration);
+			request.RequestParameters.RequestConfiguration = configuration;
+			return request;
+		}
+
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest request,
 			CancellationToken cancellationToken,
@@ -78,16 +96,6 @@ namespace Nest
 			request.RequestParameters.DeserializationOverride = responseGenerator;
 			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
 			return response;
-		}
-
-		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
-			where TRequest : IRequest<TParams>
-			where TParams : IRequestParameters, new()
-		{
-			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-			setter(configuration);
-			request.RequestParameters.RequestConfiguration = configuration;
-			return request;
 		}
 	}
 }
