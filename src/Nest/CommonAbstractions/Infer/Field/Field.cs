@@ -78,6 +78,8 @@ namespace Nest
 			+ $"{(!string.IsNullOrEmpty(Format) ? " format: " + Format : string.Empty)}"
 			+ $"{(_type == null ? string.Empty : " typeof: " + _type.Name)}";
 
+		public override string ToString() => DebugDisplay;
+
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 
 		public bool Equals(Field other) => _type != null

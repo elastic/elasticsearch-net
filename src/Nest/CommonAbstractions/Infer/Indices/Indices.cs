@@ -28,6 +28,8 @@ namespace Nest
 			types => $"Count: {types.Indices.Count} [" + string.Join(",", types.Indices.Select((t, i) => $"({i + 1}: {t.DebugDisplay})")) + "]"
 		);
 
+		public override string ToString() => DebugDisplay;
+
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => Match(
 			all => "_all",
 			many =>

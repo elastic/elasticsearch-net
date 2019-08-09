@@ -13,6 +13,8 @@ namespace Nest
 
 		private string DebugDisplay => Value;
 
+		public override string ToString() => DebugDisplay;
+
 		private static int TypeHashCode { get; } = typeof(Name).GetHashCode();
 
 		public bool Equals(Name other) => EqualsString(other?.Value);

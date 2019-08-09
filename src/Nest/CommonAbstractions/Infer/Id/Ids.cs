@@ -21,6 +21,8 @@ namespace Nest
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
+		public override string ToString() => DebugDisplay;
+
 		public bool Equals(Ids other)
 		{
 			if (other == null) return false;
