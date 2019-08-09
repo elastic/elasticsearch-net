@@ -16,6 +16,7 @@ namespace Tests.Reproduce
 		[I]
 		public void DeserializeDateAggregation()
 		{
+#pragma warning disable 612, 618
 			Action action = () => _cluster.Client.Search<Project>(s => s
 				.Size(0)
 				.Aggregations(a => a
@@ -27,6 +28,7 @@ namespace Tests.Reproduce
 					)
 				)
 			);
+#pragma warning restore 612, 618
 
 			action.Should().NotThrow();
 		}
