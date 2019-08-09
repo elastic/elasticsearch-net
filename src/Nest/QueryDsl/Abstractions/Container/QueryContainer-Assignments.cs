@@ -11,6 +11,7 @@ namespace Nest
 		private ICommonTermsQuery _commonTerms;
 		private IConstantScoreQuery _constantScore;
 		private IDisMaxQuery _disMax;
+		private IDistanceFeatureQuery _distanceFeature;
 		private IExistsQuery _exists;
 		private IFunctionScoreQuery _functionScore;
 		private IFuzzyQuery _fuzzy;
@@ -89,6 +90,12 @@ namespace Nest
 		{
 			get => _disMax;
 			set => _disMax = Set(value);
+		}
+
+		IDistanceFeatureQuery IQueryContainer.DistanceFeature
+		{
+			get => _distanceFeature;
+			set => _distanceFeature = Set(value);
 		}
 
 		IExistsQuery IQueryContainer.Exists

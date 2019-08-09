@@ -55,6 +55,8 @@ namespace Nest
 
 		public virtual void Visit(IDisMaxQuery query) => Write("dis_max");
 
+		public virtual void Visit(IDistanceFeatureQuery query) => Write("distance_feature");
+
 		public virtual void Visit(ISpanContainingQuery query) => Write("span_containing");
 
 		public virtual void Visit(ISpanWithinQuery query) => Write("span_within");
