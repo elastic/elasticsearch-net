@@ -26,8 +26,7 @@ q
     .Clauses(
         c => c.SpanTerm(st => st.Field("field").Value("value1")),
         c => c.SpanTerm(st => st.Field("field").Value("value2")),
-        c => c.SpanTerm(st => st.Field("field").Value("value3")),
-        c => c.SpanGap(st => st.Field("field").Width(2))
+        c => c.SpanTerm(st => st.Field("field").Value("value3"))
     )
     .Slop(12)
     .InOrder()
@@ -47,7 +46,6 @@ new SpanNearQuery
         new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
         new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
         new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } },
-        new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
     },
     Slop = 12,
     InOrder = true,
@@ -79,11 +77,6 @@ new SpanNearQuery
           "field": {
             "value": "value3"
           }
-        }
-      },
-      {
-        "span_gap": {
-          "field": 2
         }
       }
     ],

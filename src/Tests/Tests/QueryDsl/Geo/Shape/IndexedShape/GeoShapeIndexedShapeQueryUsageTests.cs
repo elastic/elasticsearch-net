@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -13,6 +14,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.html[geoshape queries] for more detail.
 	 */
+	[SkipVersion("<6.4.0", "Routing value parsed only in 6.4.0+. See https://github.com/elastic/elasticsearch/commit/89aa7bddfbab22ddd5478663717cf825991f84f9")]
 	public class GeoShapeIndexedShapeQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public GeoShapeIndexedShapeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -68,6 +69,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			);
 	}
 
+	[SkipVersion("<6.2.0", "WKT support added in 6.2.0")]
 	public class GeoBoundingBoxWKTQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public GeoBoundingBoxWKTQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
