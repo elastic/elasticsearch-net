@@ -21,7 +21,7 @@ namespace Nest
 		// If the field value is a geo_point field, the origin value must be a geopoint.
 		/// </summary>
 		[DataMember(Name = "origin")]
-		string Origin { get; set; }
+		Union<DateMath, GeoLocation> Origin { get; set; }
 
 		/// <summary>
 		/// Distance from the origin at which relevance scores receive half of the boost value.
@@ -29,7 +29,7 @@ namespace Nest
 		// If the field value is a geo_point field, the pivot value must be a distance unit, such as 1km or 12m.
 		/// </summary>
 		[DataMember(Name = "pivot")]
-		string Pivot { get; set; }
+		Union<Time, Distance> Pivot { get; set; }
 	}
 
 	public class DistanceFeatureQuery : FieldNameQueryBase, IDistanceFeatureQuery
@@ -40,27 +40,35 @@ namespace Nest
 
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.DistanceFeature = this;
 
-		public string Origin { get; set; }
+		public Union<DateMath, GeoLocation> Origin { get; set; }
 
-		public string Pivot { get; set; }
+		public Union<Time, Distance> Pivot { get; set; }
 	}
 
 	public class DistanceFeatureQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery, T>
 			, IDistanceFeatureQuery where T : class
 	{
-		string IDistanceFeatureQuery.Origin { get; set; }
+		Union<DateMath, GeoLocation> IDistanceFeatureQuery.Origin { get; set; }
 
-		string IDistanceFeatureQuery.Pivot { get; set; }
+		Union<Time, Distance> IDistanceFeatureQuery.Pivot { get; set; }
 
 		protected override bool Conditionless => DistanceFeatureQuery.IsConditionless(this);
 
 		/// <inheritdoc cref="IDistanceFeatureQuery.Origin" />
-		public DistanceFeatureQueryDescriptor<T> Origin(string origin) =>
+		public DistanceFeatureQueryDescriptor<T> Origin(DateMath origin) =>
+			Assign(origin, (a, v) => a.Origin = v);
+
+		/// <inheritdoc cref="IDistanceFeatureQuery.Origin" />
+		public DistanceFeatureQueryDescriptor<T> Origin(GeoLocation origin) =>
 			Assign(origin, (a, v) => a.Origin = v);
 
 		/// <inheritdoc cref="IDistanceFeatureQuery.Pivot" />
-		public DistanceFeatureQueryDescriptor<T> Pivot(string pivot) =>
+		public DistanceFeatureQueryDescriptor<T> Pivot(Time pivot) =>
+			Assign(pivot, (a, v) => a.Pivot = v);
+
+		/// <inheritdoc cref="IDistanceFeatureQuery.Pivot" />
+		public DistanceFeatureQueryDescriptor<T> Pivot(Distance pivot) =>
 			Assign(pivot, (a, v) => a.Pivot = v);
 	}
 
@@ -82,11 +90,13 @@ namespace Nest
 			writer.WriteValueSeparator();
 
 			writer.WritePropertyName("origin");
-			writer.WriteString(value.Origin);
+			formatterResolver.GetFormatter<Union<DateMath, GeoLocation>>().Serialize(ref writer, value.Origin, formatterResolver);
+
 			writer.WriteValueSeparator();
 
 			writer.WritePropertyName("pivot");
-			writer.WriteString(value.Pivot);
+			formatterResolver.GetFormatter<Union<Time, Distance>>().Serialize(ref writer, value.Pivot, formatterResolver);
+
 			writer.WriteValueSeparator();
 
 			if (value.Boost.HasValue)
@@ -123,10 +133,10 @@ namespace Nest
 							query.Field = formatterResolver.GetFormatter<Field>().Deserialize(ref reader, formatterResolver);
 							break;
 						case 1:
-							query.Origin = reader.ReadString();
+							query.Origin = formatterResolver.GetFormatter<Union<DateMath, GeoLocation>>().Deserialize(ref reader, formatterResolver);
 							break;
 						case 2:
-							query.Pivot = reader.ReadString();
+							query.Pivot = formatterResolver.GetFormatter<Union<Time, Distance>>().Deserialize(ref reader, formatterResolver);
 							break;
 						case 3:
 							query.Boost = reader.ReadDouble();

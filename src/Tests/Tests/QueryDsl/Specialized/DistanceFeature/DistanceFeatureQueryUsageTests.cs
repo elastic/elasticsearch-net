@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
@@ -11,6 +12,7 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 	* You can use the distance_feature query to find the nearest neighbors to a location. You can also use the query in a bool
 	* search’s should filter to add boosted relevance scores to the bool query’s scores.
 	*/
+	[SkipVersion("<7.2.0", "Implemented in version 7.2.0")]
 	public class DistanceFeatureQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public DistanceFeatureQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -29,8 +31,8 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 		{
 			Boost = 1.1,
 			Field = Infer.Field<Project>(f => f.StartedOn),
-			Origin = "now",
-			Pivot = "7d"
+			Origin = DateMath.FromString("now"),
+			Pivot = new Time("7d")
 		};
 
 		protected override object QueryJson =>
@@ -40,8 +42,8 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 			.DistanceFeature(rf => rf
 				.Boost(1.1)
 				.Field(f => f.StartedOn)
-				.Origin("now")
-				.Pivot("7d")
+				.Origin(DateMath.FromString("now"))
+				.Pivot(new Time("7d"))
 			);
 	}
 }
