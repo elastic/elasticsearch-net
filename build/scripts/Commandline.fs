@@ -133,7 +133,7 @@ Execution hints can be provided anywhere on the command line
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
             SkipTests = skipTests
-            GenDocs = args |> List.exists (fun x -> x = "gendocs") && isMono = false
+            GenDocs = (args |> List.exists (fun x -> x = "gendocs") || target = "build") && not isMono 
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
                 | Some t -> t.Replace("seed:", "")
