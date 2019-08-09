@@ -160,7 +160,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				Action create = () => new ElasticClient(id, credentials);
 
 				create.Should().Throw<ArgumentException>()
-					.And.Message.Should().Contain("should a string in the form of cluster_name:base_64_data");
+					.And.Message.Should().Contain("should be a string in the form of cluster_name:base_64_data");
 			}
 
 		}
