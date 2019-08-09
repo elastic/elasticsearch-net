@@ -214,12 +214,7 @@ namespace Nest
 		public QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.DisMax = query);
 
-		/// <summary>
-		/// Boosts the relevance score of documents closer to a provided origin date or point. For example, you can use this query to give
-        /// more weight to documents closer to a certain date or location.
-        /// You can use the distance_feature query to find the nearest neighbors to a location. You can also use the query in a bool
-        /// search’s should filter to add boosted relevance scores to the bool query’s scores.
-		/// </summary>
+		/// <inheritdoc cref="IDistanceFeatureQuery"/>
 		public QueryContainer DistanceFeature(Func<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.DistanceFeature = query);
 
