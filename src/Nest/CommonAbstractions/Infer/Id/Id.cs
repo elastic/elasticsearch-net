@@ -68,7 +68,7 @@ namespace Nest
 
 		public static Id From<T>(T document) where T : class => new Id(document);
 
-		public override string ToString() => StringOrLongValue;
+		public override string ToString() => DebugDisplay;
 
 		public override bool Equals(object obj)
 		{

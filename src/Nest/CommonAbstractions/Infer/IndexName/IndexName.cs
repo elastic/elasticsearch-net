@@ -35,7 +35,7 @@ namespace Nest
 		public Type Type { get; }
 
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
-
+		
 		private static int TypeHashCode { get; } = typeof(IndexName).GetHashCode();
 
 		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
