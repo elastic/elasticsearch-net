@@ -26,6 +26,10 @@ namespace Nest
 		public static QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
 			new QueryContainerDescriptor<T>().DisMax(selector);
 
+		/// <inheritdoc cref="IDistanceFeatureQuery"/>
+		public static QueryContainer DistanceFeature(Func<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery> selector) =>
+			new QueryContainerDescriptor<T>().DistanceFeature(selector);
+
 		public static QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Exists(selector);
 

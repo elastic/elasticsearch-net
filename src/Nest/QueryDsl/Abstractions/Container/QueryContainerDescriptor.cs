@@ -214,6 +214,10 @@ namespace Nest
 		public QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.DisMax = query);
 
+		/// <inheritdoc cref="IDistanceFeatureQuery"/>
+		public QueryContainer DistanceFeature(Func<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.DistanceFeature = query);
+
 		/// <summary>
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost
 		/// for every document in the filter. Maps to Lucene ConstantScoreQuery.
