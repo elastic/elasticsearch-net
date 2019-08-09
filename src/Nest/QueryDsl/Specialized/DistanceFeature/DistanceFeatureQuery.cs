@@ -21,7 +21,7 @@ namespace Nest
 		// If the field value is a geo_point field, the origin value must be a geopoint.
 		/// </summary>
 		[DataMember(Name = "origin")]
-		Union<DateMath, GeoLocation> Origin { get; set; }
+		Union<GeoLocation, DateMath> Origin { get; set; }
 
 		/// <summary>
 		/// Distance from the origin at which relevance scores receive half of the boost value.
@@ -29,7 +29,7 @@ namespace Nest
 		// If the field value is a geo_point field, the pivot value must be a distance unit, such as 1km or 12m.
 		/// </summary>
 		[DataMember(Name = "pivot")]
-		Union<Time, Distance> Pivot { get; set; }
+		Union<Distance, Time> Pivot { get; set; }
 	}
 
 	/// <inheritdoc cref="IDistanceFeatureQuery" />
@@ -42,19 +42,19 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.DistanceFeature = this;
 
 		/// <inheritdoc />
-		public Union<DateMath, GeoLocation> Origin { get; set; }
+		public Union<GeoLocation, DateMath> Origin { get; set; }
 
 		/// <inheritdoc />
-		public Union<Time, Distance> Pivot { get; set; }
+		public Union<Distance, Time> Pivot { get; set; }
 	}
 
 	public class DistanceFeatureQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery, T>
 			, IDistanceFeatureQuery where T : class
 	{
-		Union<DateMath, GeoLocation> IDistanceFeatureQuery.Origin { get; set; }
+		Union<GeoLocation, DateMath> IDistanceFeatureQuery.Origin { get; set; }
 
-		Union<Time, Distance> IDistanceFeatureQuery.Pivot { get; set; }
+		Union<Distance, Time> IDistanceFeatureQuery.Pivot { get; set; }
 
 		protected override bool Conditionless => DistanceFeatureQuery.IsConditionless(this);
 
@@ -77,6 +77,9 @@ namespace Nest
 
 	internal class DistanceFeatureQueryFormatter : IJsonFormatter<IDistanceFeatureQuery>
 	{
+		private static readonly UnionFormatter<GeoLocation, DateMath> OriginUnionFormatter = new UnionFormatter<GeoLocation, DateMath> ();
+		private static readonly UnionFormatter<Distance, Time> PivotUnionFormatter = new UnionFormatter<Distance, Time>();
+
 		public void Serialize(ref JsonWriter writer, IDistanceFeatureQuery value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
@@ -93,12 +96,11 @@ namespace Nest
 			writer.WriteValueSeparator();
 
 			writer.WritePropertyName("origin");
-			formatterResolver.GetFormatter<Union<DateMath, GeoLocation>>().Serialize(ref writer, value.Origin, formatterResolver);
-
+			OriginUnionFormatter.Serialize(ref writer, value.Origin, formatterResolver);
 			writer.WriteValueSeparator();
 
 			writer.WritePropertyName("pivot");
-			formatterResolver.GetFormatter<Union<Time, Distance>>().Serialize(ref writer, value.Pivot, formatterResolver);
+			PivotUnionFormatter.Serialize(ref writer, value.Pivot, formatterResolver);
 
 			writer.WriteValueSeparator();
 
@@ -136,10 +138,10 @@ namespace Nest
 							query.Field = formatterResolver.GetFormatter<Field>().Deserialize(ref reader, formatterResolver);
 							break;
 						case 1:
-							query.Origin = formatterResolver.GetFormatter<Union<DateMath, GeoLocation>>().Deserialize(ref reader, formatterResolver);
+							query.Origin = OriginUnionFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 2:
-							query.Pivot = formatterResolver.GetFormatter<Union<Time, Distance>>().Deserialize(ref reader, formatterResolver);
+							query.Pivot = PivotUnionFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 3:
 							query.Boost = reader.ReadDouble();
