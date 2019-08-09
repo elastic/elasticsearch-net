@@ -36,6 +36,8 @@
 
 		void Visit(IDisMaxQuery query);
 
+		void Visit(IDistanceFeatureQuery query);
+
 		void Visit(IFunctionScoreQuery query);
 
 		void Visit(IFuzzyQuery query);
@@ -162,6 +164,8 @@
 		public virtual void Visit(IConstantScoreQuery query) { }
 
 		public virtual void Visit(IDisMaxQuery query) { }
+
+		public virtual void Visit(IDistanceFeatureQuery query) { }
 
 		public virtual void Visit(ISpanContainingQuery query) { }
 

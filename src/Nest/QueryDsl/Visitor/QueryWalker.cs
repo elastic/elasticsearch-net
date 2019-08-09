@@ -82,6 +82,10 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Queries);
 			});
+			VisitQuery(qd.DistanceFeature, visitor, (v, d) =>
+			{
+				v.Visit(d);
+			});
 			VisitQuery(qd.FunctionScore, visitor, (v, d) =>
 			{
 				v.Visit(d);
