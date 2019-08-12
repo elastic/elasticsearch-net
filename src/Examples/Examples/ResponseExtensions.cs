@@ -67,8 +67,8 @@ namespace Examples
 						e.DeepSort();
 						a.DeepSort();
 
-						var sortedExpected = expected.ToString();
-						var sortedActual = actual.ToString();
+						var sortedExpected = string.Join(Environment.NewLine,expected.Select(x => x.ToString()));
+						var sortedActual = string.Join(Environment.NewLine,actual.Select(x => x.ToString()));
 						var diff = sortedExpected.Diff(sortedActual);
 
 						if (!string.IsNullOrWhiteSpace(diff))
