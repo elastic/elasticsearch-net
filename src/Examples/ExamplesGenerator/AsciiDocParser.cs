@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -9,9 +10,12 @@ namespace ExamplesGenerator
 {
 	internal static class AsciiDocParser
 	{
+		private static readonly Regex TitleRegex =
+			new Regex(@"=== (?<name>.*?)\.a(?:scii)?doc: line (?<lineNumber>\d+): (?<hash>.*?)(?:\.a(?:scii)?doc)?$");
+
 		public static List<ReferencePage> ParsePages(string path)
 		{
-			var file = File.ReadAllLines(path);
+			var file = GetLinesFromPath(path);
 			var pages = new Dictionary<string, ReferencePage>();
 
 			for (var index = 0; index < file.Length; index++)
@@ -19,8 +23,7 @@ namespace ExamplesGenerator
 				var line = file[index];
 				if (line.StartsWith("=== "))
 				{
-					// title
-					var match = Regex.Match(line, @"=== (?<name>.*?)\.asciidoc: line (?<lineNumber>\d+): (?<hash>.*)$");
+					var match = TitleRegex.Match(line);
 					if (!match.Success)
 					{
 						Console.WriteLine($"Could not find title match, line: {index}, input: {line}");
@@ -74,6 +77,34 @@ namespace ExamplesGenerator
 			}
 
 			return pages.Values.ToList();
+		}
+
+		private static string[] GetLinesFromPath(string path)
+		{
+			var uri = new Uri(path);
+
+			if (uri.IsFile)
+				return File.ReadAllLines(path);
+
+			using (var client = new WebClient())
+			{
+				try
+				{
+					var lines = new List<string>();
+					using (var stream = client.OpenRead(path))
+					using (var streamReader = new StreamReader(stream, Encoding.UTF8))
+					{
+						string str;
+						while ((str = streamReader.ReadLine()) != null)
+							lines.Add(str);
+					}
+					return lines.ToArray();
+				}
+				catch (Exception e)
+				{
+					throw new Exception($"Could not download master reference file from {path}", e);
+				}
+			}
 		}
 	}
 }
