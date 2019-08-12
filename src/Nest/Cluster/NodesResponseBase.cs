@@ -1,4 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -20,6 +22,7 @@ namespace Nest
 		[DataMember(Name = "total")]
 		public int Total { get; internal set; }
 
-		//TODO map failures
+		[DataMember(Name = "failures")]
+		public IReadOnlyCollection<ErrorCause> Failures { get; internal set; } = EmptyReadOnly<ErrorCause>.Collection;
 	}
 }
