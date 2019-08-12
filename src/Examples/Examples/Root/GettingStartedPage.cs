@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
@@ -246,7 +247,14 @@ namespace Examples.Root
 			updateResponse.MatchesExample(@"POST /customer/_update/1?pretty
 			{
 			  ""script"" : ""ctx._source.age += 5""
-			}");
+			}", e =>
+			{
+				var body = JObject.Parse(e.Body);
+				var script = body["script"];
+				body["script"] = new JObject { { "source", script }};
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
@@ -322,7 +330,7 @@ namespace Examples.Root
 				e.Body = JsonConvert.SerializeObject(new
 				{
 					query = new { query_string = new { query = "*" } },
-					sort = new[] { new { account_number = "asc" } }
+					sort = new[] { new { account_number = new { order = "asc" } } }
 				});
 				return e;
 			});
@@ -345,7 +353,15 @@ namespace Examples.Root
 			  ""sort"": [
 			    { ""account_number"": ""asc"" }
 			  ]
-			}");
+			}", e =>
+			{
+				// client always generates long form for sort order
+				var body = JObject.Parse(e.Body);
+				var asc = body["sort"][0]["account_number"];
+				body["sort"][0]["account_number"] = new JObject{{ "order", asc }};
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
@@ -419,7 +435,15 @@ namespace Examples.Root
 			{
 			  ""query"": { ""match_all"": {} },
 			  ""sort"": { ""balance"": { ""order"": ""desc"" } }
-			}");
+			}", e =>
+			{
+				// client always generates an array for sort
+				var body = JObject.Parse(e.Body);
+				var sort = body["sort"];
+				body["sort"] = new JArray(sort);
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
@@ -442,7 +466,15 @@ namespace Examples.Root
 			{
 			  ""query"": { ""match_all"": {} },
 			  ""_source"": [""account_number"", ""balance""]
-			}");
+			}", e =>
+			{
+				// client always generates long form for _source
+				var body = JObject.Parse(e.Body);
+				var includes = body["_source"];
+				body["_source"] = new JObject{ { "includes", includes }};
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
@@ -775,7 +807,20 @@ namespace Examples.Root
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				// bool must and filter are always an array and numeric range queries always use doubles
+				var body = JObject.Parse(e.Body);
+
+				var must = body["query"]["bool"]["must"];
+				body["query"]["bool"]["must"] = new JArray(must);
+				var filter = body["query"]["bool"]["filter"];
+				filter["range"]["balance"]["gte"] = 20000d;
+				filter["range"]["balance"]["lte"] = 30000d;
+				body["query"]["bool"]["filter"] = new JArray(filter);
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
@@ -889,7 +934,15 @@ namespace Examples.Root
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				// Terms aggs order is always an array
+				var body = JObject.Parse(e.Body);
+				var order = body["aggs"]["group_by_state"]["terms"]["order"];
+				body["aggs"]["group_by_state"]["terms"]["order"] = new JArray(order);
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
@@ -960,7 +1013,18 @@ namespace Examples.Root
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				// range queries always use doubles
+				var body = JObject.Parse(e.Body);
+				foreach (var token in body["aggs"]["group_by_age"]["range"]["ranges"])
+				{
+					token["from"] = double.Parse(token["from"].Value<int>().ToString(), CultureInfo.InvariantCulture);
+					token["to"] = double.Parse(token["to"].Value<int>().ToString(), CultureInfo.InvariantCulture);
+				}
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 	}
 }

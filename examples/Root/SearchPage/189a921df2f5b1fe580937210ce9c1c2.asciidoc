@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/Root/SearchPage.cs[tag=189a921df2f5b1fe580937210ce9c1c2,indent=0]
+----

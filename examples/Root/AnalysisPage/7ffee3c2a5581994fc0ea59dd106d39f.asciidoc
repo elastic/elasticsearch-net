@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/Root/AnalysisPage.cs[tag=7ffee3c2a5581994fc0ea59dd106d39f,indent=0]
+----

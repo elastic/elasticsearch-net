@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=28aad2c5942bfb221c2bf1bbdc01658e,indent=0]
+----

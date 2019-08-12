@@ -1,20 +1,50 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Mapping.Dynamic
 {
 	public class TemplatesPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line71()
 		{
 			// tag::bb33e638fdeded7d721d9bbac2305fda[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.DynamicTemplates(dt => dt
+						.DynamicTemplate("integers", d => d
+							.MatchMappingType("long")
+							.Mapping(mm => mm
+								.Number(n => n
+									.Type(NumberType.Integer)
+								)
+							)
+						)
+						.DynamicTemplate("strings", d => d
+							.MatchMappingType("string")
+							.Mapping(mm => mm
+								.Text(t => t
+									.Fields(f => f
+										.Keyword(k => k
+											.Name("raw")
+											.IgnoreAbove(256)
+										)
+									)
+								)
+							)
+						)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse = client.Index<object>(
+				new { my_integer = 5, my_string = "Some string" },
+				i => i.Index("my_index").Id(1)
+				);
 			// end::bb33e638fdeded7d721d9bbac2305fda[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""dynamic_templates"": [
@@ -44,23 +74,41 @@ namespace Examples.Mapping.Dynamic
 			  }
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""my_integer"": 5, \<1>
 			  ""my_string"": ""Some string"" \<2>
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line125()
 		{
 			// tag::4f54b88e05c7a62901062e9e0ed13e5a[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.DynamicTemplates(dt => dt
+						.DynamicTemplate("longs_as_strings", d => d
+							.MatchMappingType("string")
+							.Match("long_*")
+							.Unmatch("*_text")
+							.Mapping(mm => mm
+								.Number(n => n
+									.Type(NumberType.Long)
+								)
+							)
+						)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse = client.Index<object>(
+				new { long_num = "5", long_text = "foo" },
+				i => i.Index("my_index").Id(1)
+			);
 			// end::4f54b88e05c7a62901062e9e0ed13e5a[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""dynamic_templates"": [
@@ -78,23 +126,48 @@ namespace Examples.Mapping.Dynamic
 			  }
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""long_num"": ""5"", \<1>
 			  ""long_text"": ""foo"" \<2>
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line179()
 		{
 			// tag::0b91c082258ce623cc716b679aace653[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.DynamicTemplates(dt => dt
+						.DynamicTemplate("full_name", d => d
+							.PathMatch("name.*")
+							.PathUnmatch("*.middle")
+							.Mapping(mm => mm
+								.Text(n => n
+									.CopyTo(ct => ct.Field("full_name"))
+								)
+							)
+						)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse = client.Index<object>(
+				new
+				{
+					name = new
+				{
+					first = "John",
+					middle = "Winston",
+					last = "Lennon"
+				}
+				},
+				i => i.Index("my_index").Id(1)
+			);
 			// end::0b91c082258ce623cc716b679aace653[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""dynamic_templates"": [
@@ -110,9 +183,16 @@ namespace Examples.Mapping.Dynamic
 			      }
 			    ]
 			  }
-			}");
+			}", e =>
+			{
+				// client always emits copy_to as array
+				var body = JObject.Parse(e.Body);
+				body["mappings"]["dynamic_templates"][0]["full_name"]["mapping"]["copy_to"] = new JArray("full_name");
+				e.Body = body.ToString();
+				return e;
+			});
 
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""name"": {
 			    ""first"":  ""John"",
@@ -122,14 +202,26 @@ namespace Examples.Mapping.Dynamic
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line215()
 		{
 			// tag::be51ed37c8425d281a8153abe56b04cb[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse = client.Index<object>(new
+			{
+				name = new
+				{
+					first = "Paul",
+					last = "McCartney",
+					title = new
+					{
+						value = "Sir",
+						category = "order of chivalry"
+					}
+				}
+			}, i => i.Index("my_index").Id(2));
 			// end::be51ed37c8425d281a8153abe56b04cb[]
 
-			response0.MatchesExample(@"PUT my_index/_doc/2
+			indexResponse.MatchesExample(@"PUT my_index/_doc/2
 			{
 			  ""name"": {
 			    ""first"":  ""Paul"",

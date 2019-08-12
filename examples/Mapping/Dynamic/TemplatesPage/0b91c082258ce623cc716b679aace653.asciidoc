@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../../src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs[tag=0b91c082258ce623cc716b679aace653,indent=0]
+----
