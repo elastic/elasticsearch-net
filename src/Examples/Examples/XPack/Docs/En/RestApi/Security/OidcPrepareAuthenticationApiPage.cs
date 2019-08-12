@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class OidcPrepareAuthenticationApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line53()
+		public void Line69()
 		{
 			// tag::e3019fd5f23458ae49ad9854c97d321c[]
 			var response0 = new SearchResponse<object>();
@@ -19,7 +19,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line78()
+		public void Line96()
 		{
 			// tag::57dc15e5ad663c342fd5c1d86fcd1b29[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +34,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line105()
+		public void Line124()
 		{
 			// tag::d35c8cf7a98b3f112e1de8797ec6689d[]
 			var response0 = new SearchResponse<object>();

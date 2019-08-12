@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class DisableUsersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line45()
 		{
 			// tag::bb293e1bdf0c6f6d9069eeb7edc9d399[]
 			var response0 = new SearchResponse<object>();

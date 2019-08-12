@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class OidcAuthenticateApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line45()
+		public void Line61()
 		{
 			// tag::95b341300d31db2f573905ebeac42d89[]
 			var response0 = new SearchResponse<object>();

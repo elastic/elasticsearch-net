@@ -6,7 +6,7 @@ namespace Examples.Aggregations.Pipeline
 	public class MovfnAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line41()
+		public void Line42()
 		{
 			// tag::5903a75a28cec4b60c54662457c6d405[]
 			var response0 = new SearchResponse<object>();
@@ -39,7 +39,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line143()
+		public void Line144()
 		{
 			// tag::93c9711ee6c0554cd775c013c3837f13[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +72,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line202()
+		public void Line215()
 		{
 			// tag::13fd394e3e9a3398cac21ac1064fc154[]
 			var response0 = new SearchResponse<object>();
@@ -105,7 +105,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line245()
+		public void Line258()
 		{
 			// tag::c8bebf3c45fc9e75e161bf4e516a957a[]
 			var response0 = new SearchResponse<object>();
@@ -138,7 +138,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line288()
+		public void Line301()
 		{
 			// tag::d0897840a5702b4ec0616e6c90acfe1e[]
 			var response0 = new SearchResponse<object>();
@@ -171,7 +171,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line333()
+		public void Line346()
 		{
 			// tag::46c4d95fc06cd0eb0401caa1e0bdc8f0[]
 			var response0 = new SearchResponse<object>();
@@ -204,7 +204,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line385()
+		public void Line398()
 		{
 			// tag::beea9d59a7cbe53d5d4c4ec2a49487b2[]
 			var response0 = new SearchResponse<object>();
@@ -237,7 +237,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line431()
+		public void Line444()
 		{
 			// tag::bbbbe980b6dcd2a77ff16cc8a081e472[]
 			var response0 = new SearchResponse<object>();
@@ -270,7 +270,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line483()
+		public void Line496()
 		{
 			// tag::d84ea140bbe8abfb156a72c1c963ea00[]
 			var response0 = new SearchResponse<object>();
@@ -303,7 +303,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line541()
+		public void Line554()
 		{
 			// tag::76fc9f5a879772ffcc4ec0c99bf74277[]
 			var response0 = new SearchResponse<object>();
@@ -336,7 +336,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line607()
+		public void Line620()
 		{
 			// tag::af25b173c8bcc73a3bfbfddacb218478[]
 			var response0 = new SearchResponse<object>();

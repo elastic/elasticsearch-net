@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class GetUsersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line41()
+		public void Line56()
 		{
 			// tag::3924ee252581ebb96ac0e60046125ae8[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line63()
 		{
 			// tag::bac6203259754d2f09c1ebeecc9ded5d[]
 			var response0 = new SearchResponse<object>();
@@ -37,7 +37,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line73()
+		public void Line83()
 		{
 			// tag::abdbc81e799e28c833556b1c29f03ba6[]
 			var response0 = new SearchResponse<object>();

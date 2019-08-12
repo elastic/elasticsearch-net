@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class PendingTasksPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line9()
+		public void Line34()
 		{
 			// tag::dc2e9e499c7037eb9327cc84a942c5e9[]
 			var response0 = new SearchResponse<object>();

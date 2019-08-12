@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class GetApiKeysPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line56()
 		{
 			// tag::8d3be5482270921111754772479f8676[]
 			var response0 = new SearchResponse<object>();
@@ -20,7 +20,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line78()
+		public void Line83()
 		{
 			// tag::701f1fffc65e9e51c96aa60261e2eae3[]
 			var response0 = new SearchResponse<object>();
@@ -30,7 +30,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line88()
+		public void Line93()
 		{
 			// tag::7b864d61767ab283cfd5f9b9ba784b1f[]
 			var response0 = new SearchResponse<object>();
@@ -40,7 +40,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line97()
+		public void Line102()
 		{
 			// tag::10d9da8a3b7061479be908c8c5c76cfb[]
 			var response0 = new SearchResponse<object>();
@@ -50,7 +50,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line106()
+		public void Line111()
 		{
 			// tag::62eafc5b3ab75cc67314d5a8567d6077[]
 			var response0 = new SearchResponse<object>();
@@ -60,7 +60,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line116()
+		public void Line121()
 		{
 			// tag::30abc76a39e551f4b52c65002bb6405d[]
 			var response0 = new SearchResponse<object>();

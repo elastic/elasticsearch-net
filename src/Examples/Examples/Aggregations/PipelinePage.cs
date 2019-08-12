@@ -6,7 +6,7 @@ namespace Examples.Aggregations
 	public class PipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line53()
+		public void Line54()
 		{
 			// tag::ec20b1c236955a545476eeeea747d9de[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +34,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line83()
+		public void Line84()
 		{
 			// tag::11be7655fdafcf4c1454a0e9ad8ddf63[]
 			var response0 = new SearchResponse<object>();
@@ -66,7 +66,50 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line121()
+		public void Line119()
+		{
+			// tag::88a6b6f721b91f0919127a34ee2fbe0e[]
+			var response0 = new SearchResponse<object>();
+			// end::88a6b6f721b91f0919127a34ee2fbe0e[]
+
+			response0.MatchesExample(@"POST /_search
+			{
+			    ""aggs"" : {
+			        ""sales_per_month"" : {
+			            ""date_histogram"" : {
+			                ""field"" : ""date"",
+			                ""calendar_interval"" : ""month""
+			            },
+			            ""aggs"": {
+			                ""sale_type"": {
+			                    ""terms"": {
+			                        ""field"": ""type""
+			                    },
+			                    ""aggs"": {
+			                        ""sales"": {
+			                            ""sum"": {
+			                                ""field"": ""price""
+			                            }
+			                        }
+			                    }
+			                },
+			                ""hat_vs_bag_ratio"": {
+			                    ""bucket_script"": {
+			                        ""buckets_path"": {
+			                            ""hats"": ""sale_type['hat']>sales"", \<1>
+			                            ""bags"": ""sale_type['bag']>sales""  \<1>
+			                        },
+			                        ""script"": ""params.hats / params.bags""
+			                    }
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line168()
 		{
 			// tag::f3dd309ab027e86048b476b54f0d4ca1[]
 			var response0 = new SearchResponse<object>();
@@ -91,7 +134,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line147()
+		public void Line194()
 		{
 			// tag::2afc1231679898bd864d06679d9e951b[]
 			var response0 = new SearchResponse<object>();

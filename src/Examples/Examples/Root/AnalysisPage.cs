@@ -6,7 +6,7 @@ namespace Examples.Root
 	public class AnalysisPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line41()
+		public void Line42()
 		{
 			// tag::7ffee3c2a5581994fc0ea59dd106d39f[]
 			var response0 = new SearchResponse<object>();

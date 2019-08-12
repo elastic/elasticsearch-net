@@ -6,7 +6,7 @@ namespace Examples.Modules
 	public class TransportPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line140()
+		public void Line157()
 		{
 			// tag::939e79dee613238f9512fb9cbf0be816[]
 			var response0 = new SearchResponse<object>();
@@ -21,7 +21,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line154()
+		public void Line171()
 		{
 			// tag::cecbbd7b4ec1bf82fd84ae96099febcc[]
 			var response0 = new SearchResponse<object>();

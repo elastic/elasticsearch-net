@@ -8,20 +8,14 @@ namespace Examples.Docs
 {
 	public class IndexPage : ExampleBase
 	{
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
 			// tag::bb143628fd04070683eeeadc9406d9cc[]
-			var indexResponse = client.Index(new Tweet
-			{
-				User = "kimchy",
-				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-				Message = "trying out Elasticsearch"
-			},
-			i => i.Index("twitter").Id(1));
+			var response0 = new SearchResponse<object>();
 			// end::bb143628fd04070683eeeadc9406d9cc[]
 
-			indexResponse.MatchesExample(@"PUT twitter/_doc/1
+			response0.MatchesExample(@"PUT twitter/_doc/1
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",
@@ -29,44 +23,32 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line77()
 		{
 			// tag::804a97ff4d0613e6568e4efb19c52021[]
-			var putSettingsResponse = client.Cluster.PutSettings(s => s
-				.Persistent(p => p
-					.Add("action.auto_create_index", "twitter,index10,-index1*,+ind*")
-				)
-			);
+			var response0 = new SearchResponse<object>();
 
-			var putSettingsResponse2 = client.Cluster.PutSettings(s => s
-				.Persistent(p => p
-					.Add("action.auto_create_index", "false")
-				)
-			);
+			var response1 = new SearchResponse<object>();
 
-			var putSettingsResponse3 = client.Cluster.PutSettings(s => s
-				.Persistent(p => p
-					.Add("action.auto_create_index", "true")
-				)
-			);
+			var response2 = new SearchResponse<object>();
 			// end::804a97ff4d0613e6568e4efb19c52021[]
 
-			putSettingsResponse.MatchesExample(@"PUT _cluster/settings
+			response0.MatchesExample(@"PUT _cluster/settings
 			{
 			    ""persistent"": {
 			        ""action.auto_create_index"": ""twitter,index10,-index1*,+ind*"" \<1>
 			    }
 			}");
 
-			putSettingsResponse2.MatchesExample(@"PUT _cluster/settings
+			response1.MatchesExample(@"PUT _cluster/settings
 			{
 			    ""persistent"": {
 			        ""action.auto_create_index"": ""false"" \<2>
 			    }
 			}");
 
-			putSettingsResponse3.MatchesExample(@"PUT _cluster/settings
+			response2.MatchesExample(@"PUT _cluster/settings
 			{
 			    ""persistent"": {
 			        ""action.auto_create_index"": ""true"" \<3>
@@ -74,24 +56,14 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line121()
 		{
 			// tag::d718b63cf1b6591a1d59a0cf4fd995eb[]
-			var indexResponse = client.Index(new Tweet
-			{
-				User = "kimchy",
-				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-				Message = "trying out Elasticsearch"
-			},
-				i => i
-					.Index("twitter")
-					.Id(1)
-					.OpType(OpType.Create)
-				);
+			var response0 = new SearchResponse<object>();
 			// end::d718b63cf1b6591a1d59a0cf4fd995eb[]
 
-			indexResponse.MatchesExample(@"PUT twitter/_doc/1?op_type=create
+			response0.MatchesExample(@"PUT twitter/_doc/1?op_type=create
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",
@@ -99,23 +71,14 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line134()
 		{
 			// tag::048d8abd42d094bbdcf4452a58ccb35b[]
-			var createResponse = client.Create(new Tweet
-			{
-				User = "kimchy",
-				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-				Message = "trying out Elasticsearch"
-			},
-			i => i
-				.Index("twitter")
-				.Id(1)
-			);
+			var response0 = new SearchResponse<object>();
 			// end::048d8abd42d094bbdcf4452a58ccb35b[]
 
-			createResponse.MatchesExample(@"PUT twitter/_create/1
+			response0.MatchesExample(@"PUT twitter/_create/1
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",
@@ -123,22 +86,14 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line153()
 		{
 			// tag::36818c6d9f434d387819c30bd9addb14[]
-			var indexResponse = client.Index(new Tweet
-			{
-				User = "kimchy",
-				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-				Message = "trying out Elasticsearch"
-			},
-				i => i
-					.Index("twitter")
-			);
+			var response0 = new SearchResponse<object>();
 			// end::36818c6d9f434d387819c30bd9addb14[]
 
-			indexResponse.MatchesExample(@"POST twitter/_doc/
+			response0.MatchesExample(@"POST twitter/_doc/
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",
@@ -146,23 +101,14 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line204()
 		{
 			// tag::625dc94df1f9affb49a082fd99d41620[]
-			var indexResponse = client.Index(new Tweet
-			{
-				User = "kimchy",
-				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-				Message = "trying out Elasticsearch"
-			},
-				i => i
-					.Index("twitter")
-					.Routing("kimchy")
-			);
+			var response0 = new SearchResponse<object>();
 			// end::625dc94df1f9affb49a082fd99d41620[]
 
-			indexResponse.MatchesExample(@"POST twitter/_doc?routing=kimchy
+			response0.MatchesExample(@"POST twitter/_doc?routing=kimchy
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",
@@ -170,24 +116,14 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line327()
 		{
 			// tag::b918d6b798da673a33e49b94f61dcdc0[]
-			var indexResponse = client.Index(new Tweet
-			{
-				User = "kimchy",
-				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-				Message = "trying out Elasticsearch"
-			},
-				i => i
-					.Index("twitter")
-					.Id(1)
-					.Timeout("5m")
-			);
+			var response0 = new SearchResponse<object>();
 			// end::b918d6b798da673a33e49b94f61dcdc0[]
 
-			indexResponse.MatchesExample(@"PUT twitter/_doc/1?timeout=5m
+			response0.MatchesExample(@"PUT twitter/_doc/1?timeout=5m
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",
@@ -195,23 +131,14 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		public void Line357()
 		{
 			// tag::1f336ecc62480c1d56351cc2f82d0d08[]
-			var indexResponse = client.Index(new Tweet
-			{
-				Message = "elasticsearch now has versioning support, double cool!"
-			},
-				i => i
-					.Index("twitter")
-					.Id(1)
-					.Version(2)
-					.VersionType(VersionType.External)
-			);
+			var response0 = new SearchResponse<object>();
 			// end::1f336ecc62480c1d56351cc2f82d0d08[]
 
-			indexResponse.MatchesExample(@"PUT twitter/_doc/1?version=2&version_type=external
+			response0.MatchesExample(@"PUT twitter/_doc/1?version=2&version_type=external
 			{
 			    ""message"" : ""elasticsearch now has versioning support, double cool!""
 			}");

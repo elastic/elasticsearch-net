@@ -6,7 +6,7 @@ namespace Examples.Mapping
 	public class RemovalOfTypesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line456()
+		public void Line458()
 		{
 			// tag::9ee37bb017ab2f08dc870d9b2f937819[]
 			var response0 = new SearchResponse<object>();
@@ -25,7 +25,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line472()
+		public void Line474()
 		{
 			// tag::21aedb3425f773979be01722661b6a89[]
 			var response0 = new SearchResponse<object>();
@@ -42,7 +42,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line487()
+		public void Line489()
 		{
 			// tag::c81959a312a5715c52cacfe01cb0576e[]
 			var response0 = new SearchResponse<object>();
@@ -52,7 +52,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line522()
+		public void Line524()
 		{
 			// tag::ab1b1bdda7528003a08d6d5911081483[]
 			var response0 = new SearchResponse<object>();
@@ -65,7 +65,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line552()
+		public void Line554()
 		{
 			// tag::de8d7db07c3008039c7691955a553e4c[]
 			var response0 = new SearchResponse<object>();
@@ -75,7 +75,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line566()
+		public void Line568()
 		{
 			// tag::f85d1cf4a5b9145632f585cd8c99e49d[]
 			var response0 = new SearchResponse<object>();
@@ -94,7 +94,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line584()
+		public void Line586()
 		{
 			// tag::6dce46ae7f4da2467ea1e68cc9b67b31[]
 			var response0 = new SearchResponse<object>();
@@ -108,7 +108,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line615()
+		public void Line617()
 		{
 			// tag::b479466cd446f8112f491ce8810de43a[]
 			var response0 = new SearchResponse<object>();
@@ -125,7 +125,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line659()
+		public void Line661()
 		{
 			// tag::c6f5467904b8182d9203d98414a1bb76[]
 			var response0 = new SearchResponse<object>();

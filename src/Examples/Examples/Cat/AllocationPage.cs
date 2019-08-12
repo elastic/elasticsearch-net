@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class AllocationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line8()
+		public void Line41()
 		{
 			// tag::5c7ece1f30267adabdb832424871900a[]
 			var response0 = new SearchResponse<object>();

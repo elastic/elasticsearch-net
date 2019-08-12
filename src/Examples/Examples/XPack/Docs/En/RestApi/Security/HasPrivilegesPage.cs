@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class HasPrivilegesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line64()
+		public void Line68()
 		{
 			// tag::9684e5fa8c22a07a372feb6fc1f5f7c0[]
 			var response0 = new SearchResponse<object>();

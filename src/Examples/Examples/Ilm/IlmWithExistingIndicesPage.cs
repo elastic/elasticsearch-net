@@ -1,0 +1,291 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Ilm
+{
+	public class IlmWithExistingIndicesPage : ExampleBase
+	{
+		[U(Skip = "Example not implemented")]
+		public void Line23()
+		{
+			// tag::4e2027438393cf93b9c9402b8511eab5[]
+			var response0 = new SearchResponse<object>();
+			// end::4e2027438393cf93b9c9402b8511eab5[]
+
+			response0.MatchesExample(@"PUT _template/mylogs_template
+			{
+			  ""index_patterns"": [
+			    ""mylogs-*""
+			  ],
+			  ""settings"": {
+			    ""number_of_shards"": 1,
+			    ""number_of_replicas"": 1
+			  },
+			  ""mappings"": {
+			    ""properties"": {
+			      ""message"": {
+			        ""type"": ""text""
+			      },
+			      ""@timestamp"": {
+			        ""type"": ""date""
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line51()
+		{
+			// tag::8502a9281f5393a7160e4e46988da672[]
+			var response0 = new SearchResponse<object>();
+			// end::8502a9281f5393a7160e4e46988da672[]
+
+			response0.MatchesExample(@"POST mylogs-pre-ilm-2019.06.24/_doc
+			{
+			  ""@timestamp"": ""2019-06-24T10:34:00"",
+			  ""message"": ""this is one log message""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line62()
+		{
+			// tag::7d51f0436e87dec4274133856866b07d[]
+			var response0 = new SearchResponse<object>();
+			// end::7d51f0436e87dec4274133856866b07d[]
+
+			response0.MatchesExample(@"POST mylogs-pre-ilm-2019.06.25/_doc
+			{
+			  ""@timestamp"": ""2019-06-25T17:42:00"",
+			  ""message"": ""this is another log message""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line121()
+		{
+			// tag::75097f73665235b20df09739c820ad35[]
+			var response0 = new SearchResponse<object>();
+			// end::75097f73665235b20df09739c820ad35[]
+
+			response0.MatchesExample(@"PUT _ilm/policy/mylogs_policy
+			{
+			  ""policy"": {
+			    ""phases"": {
+			      ""hot"": {
+			        ""actions"": {
+			          ""rollover"": {
+			            ""max_size"": ""25GB""
+			          }
+			        }
+			      },
+			      ""warm"": {
+			        ""min_age"": ""1d"",
+			        ""actions"": {
+			          ""forcemerge"": {
+			            ""max_num_segments"": 1
+			          }
+			        }
+			      },
+			      ""cold"": {
+			        ""min_age"": ""7d"",
+			        ""actions"": {
+			          ""freeze"": {}
+			        }
+			      },
+			      ""delete"": {
+			        ""min_age"": ""30d"",
+			        ""actions"": {
+			          ""delete"": {}
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line165()
+		{
+			// tag::3feab5c602192b8dc58435654b17d3fe[]
+			var response0 = new SearchResponse<object>();
+			// end::3feab5c602192b8dc58435654b17d3fe[]
+
+			response0.MatchesExample(@"PUT _ilm/policy/mylogs_policy_existing
+			{
+			  ""policy"": {
+			    ""phases"": {
+			      ""warm"": {
+			        ""min_age"": ""1d"",
+			        ""actions"": {
+			          ""forcemerge"": {
+			            ""max_num_segments"": 1
+			          }
+			        }
+			      },
+			      ""cold"": {
+			        ""min_age"": ""7d"",
+			        ""actions"": {
+			          ""freeze"": {}
+			        }
+			      },
+			      ""delete"": {
+			        ""min_age"": ""30d"",
+			        ""actions"": {
+			          ""delete"": {}
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line208()
+		{
+			// tag::ec195297eb804cba1cb19c9926773059[]
+			var response0 = new SearchResponse<object>();
+			// end::ec195297eb804cba1cb19c9926773059[]
+
+			response0.MatchesExample(@"PUT mylogs-pre-ilm*/_settings \<1>
+			{
+			  ""index"": {
+			    ""lifecycle"": {
+			      ""name"": ""mylogs_policy_existing""
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line251()
+		{
+			// tag::39bbb602c95c606725eefea252437514[]
+			var response0 = new SearchResponse<object>();
+			// end::39bbb602c95c606725eefea252437514[]
+
+			response0.MatchesExample(@"PUT _ilm/policy/sample_policy
+			{
+			  ""policy"": {
+			    ""phases"": {
+			      ""hot"": {
+			        ""actions"": {
+			          ""rollover"": {
+			            ""max_age"": ""7d"",
+			            ""max_size"": ""50G""
+			          }
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line275()
+		{
+			// tag::bce0d86353e212cee466ccbc90bdc6e7[]
+			var response0 = new SearchResponse<object>();
+			// end::bce0d86353e212cee466ccbc90bdc6e7[]
+
+			response0.MatchesExample(@"PUT _template/mylogs_template
+			{
+			  ""index_patterns"": [
+			    ""ilm-mylogs-*"" \<1>
+			  ],
+			  ""settings"": {
+			    ""number_of_shards"": 1,
+			    ""number_of_replicas"": 1,
+			    ""index"": {
+			      ""lifecycle"": {
+			        ""name"": ""mylogs_condensed_policy"", \<2>
+			        ""rollover_alias"": ""mylogs"" \<3>
+			      }
+			    }
+			  },
+			  ""mappings"": {
+			    ""properties"": {
+			      ""message"": {
+			        ""type"": ""text""
+			      },
+			      ""@timestamp"": {
+			        ""type"": ""date""
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line314()
+		{
+			// tag::89115f8d40d9a13b0b01dc7c33ffd1cc[]
+			var response0 = new SearchResponse<object>();
+			// end::89115f8d40d9a13b0b01dc7c33ffd1cc[]
+
+			response0.MatchesExample(@"PUT ilm-mylogs-000001
+			{
+			  ""aliases"": {
+			    ""mylogs"": {
+			      ""is_write_index"": true
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line344()
+		{
+			// tag::5df1ed33b5fcf3b9d85c20d100780d43[]
+			var response0 = new SearchResponse<object>();
+			// end::5df1ed33b5fcf3b9d85c20d100780d43[]
+
+			response0.MatchesExample(@"PUT _cluster/settings
+			{
+			  ""transient"": {
+			    ""indices.lifecycle.poll_interval"": ""1m"" \<1>
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line371()
+		{
+			// tag::41f211cc838f1bee7eac264784f905e2[]
+			var response0 = new SearchResponse<object>();
+			// end::41f211cc838f1bee7eac264784f905e2[]
+
+			response0.MatchesExample(@"POST _reindex
+			{
+			  ""source"": {
+			    ""index"": ""mylogs-*"", \<1>
+			    ""sort"": { ""@timestamp"": ""desc"" }
+			  },
+			  ""dest"": {
+			    ""index"": ""mylogs"", \<2>
+			    ""op_type"": ""create"" \<3>
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line401()
+		{
+			// tag::227e19aecb349f31e74898384322ae01[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+			// end::227e19aecb349f31e74898384322ae01[]
+
+			response0.MatchesExample(@"PUT _cluster/settings
+			{
+			  ""transient"": {
+			    ""indices.lifecycle.poll_interval"": null
+			  }
+			}");
+
+			response1.MatchesExample(@"");
+		}
+	}
+}

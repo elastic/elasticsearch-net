@@ -6,7 +6,7 @@ namespace Examples.Migration.Apis
 	public class DeprecationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line35()
+		public void Line40()
 		{
 			// tag::135819da3a4bde684357c57a49ad8e85[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Migration.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line114()
+		public void Line119()
 		{
 			// tag::69f8b0f2a9ba47e11f363d788cee9d6d[]
 			var response0 = new SearchResponse<object>();

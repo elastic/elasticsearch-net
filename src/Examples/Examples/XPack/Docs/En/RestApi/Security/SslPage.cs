@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class SslPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line80()
+		public void Line84()
 		{
 			// tag::05f6049c677a156bdf9b83e71a3b87ed[]
 			var response0 = new SearchResponse<object>();

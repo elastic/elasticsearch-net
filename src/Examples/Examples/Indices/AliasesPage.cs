@@ -406,11 +406,17 @@ namespace Examples.Indices
 		{
 			// tag::d8aa6ff25f7bb56e32d02df455103e53[]
 			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
 			// end::d8aa6ff25f7bb56e32d02df455103e53[]
 
-			response0.MatchesExample(@"HEAD /_alias/2016
-			HEAD /_alias/20*
-			HEAD /logs_20162801/_alias/*");
+			response0.MatchesExample(@"HEAD /_alias/2016");
+
+			response1.MatchesExample(@"HEAD /_alias/20*");
+
+			response2.MatchesExample(@"HEAD /logs_20162801/_alias/*");
 		}
 	}
 }

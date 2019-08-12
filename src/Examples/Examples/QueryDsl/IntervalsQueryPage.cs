@@ -6,11 +6,11 @@ namespace Examples.QueryDsl
 	public class IntervalsQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line20()
+		public void Line28()
 		{
-			// tag::5d59e61b35103a17e262a625503f896b[]
+			// tag::807c0c9763f8c1114b3c8278c2a0cb56[]
 			var response0 = new SearchResponse<object>();
-			// end::5d59e61b35103a17e262a625503f896b[]
+			// end::807c0c9763f8c1114b3c8278c2a0cb56[]
 
 			response0.MatchesExample(@"POST _search
 			{
@@ -22,7 +22,7 @@ namespace Examples.QueryDsl
 			          ""intervals"" : [
 			            {
 			              ""match"" : {
-			                ""query"" : ""my favourite food"",
+			                ""query"" : ""my favorite food"",
 			                ""max_gaps"" : 0,
 			                ""ordered"" : true
 			              }
@@ -36,8 +36,7 @@ namespace Examples.QueryDsl
 			              }
 			            }
 			          ]
-			        },
-			        ""_name"" : ""favourite_food""
+			        }
 			      }
 			    }
 			  }
@@ -45,7 +44,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line175()
+		public void Line277()
 		{
 			// tag::7471e97aaaf21c3a200abdd89f15c3cc[]
 			var response0 = new SearchResponse<object>();
@@ -74,7 +73,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line226()
+		public void Line309()
 		{
 			// tag::2de6885bacb8769b8f22dce253c96b0c[]
 			var response0 = new SearchResponse<object>();
@@ -100,7 +99,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line257()
+		public void Line341()
 		{
 			// tag::e2a22c6fd58cc0becf4c383134a08f8b[]
 			var response0 = new SearchResponse<object>();
@@ -128,7 +127,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line293()
+		public void Line377()
 		{
 			// tag::5f79c42b0f74fdf71359cef82843fad3[]
 			var response0 = new SearchResponse<object>();
@@ -159,7 +158,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line327()
+		public void Line411()
 		{
 			// tag::e7811867397b305efbbe8925d8a01c1a[]
 			var response0 = new SearchResponse<object>();

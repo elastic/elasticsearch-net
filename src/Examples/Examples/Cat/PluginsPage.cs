@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class PluginsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line7()
+		public void Line35()
 		{
 			// tag::3796d69e8339bab58e70fdde9f9c09ad[]
 			var response0 = new SearchResponse<object>();

@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class HealthPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line8()
+		public void Line68()
 		{
 			// tag::f8cc4b331a19ff4df8e4a490f906ee69[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line25()
+		public void Line89()
 		{
 			// tag::ccd9e2cf7181de67cf9ab0df1a02c575[]
 			var response0 = new SearchResponse<object>();

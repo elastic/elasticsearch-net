@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class NodesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line7()
+		public void Line297()
 		{
 			// tag::db20adb70a8e8d0709d15ba0daf18d23[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line54()
+		public void Line326()
 		{
 			// tag::21d3e98d911642ab3bda2657f7a06f80[]
 			var response0 = new SearchResponse<object>();

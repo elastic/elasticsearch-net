@@ -6,27 +6,7 @@ namespace Examples.Cluster
 	public class HealthPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line9()
-		{
-			// tag::b02e4907c9936c1adc16ccce9d49900d[]
-			var response0 = new SearchResponse<object>();
-			// end::b02e4907c9936c1adc16ccce9d49900d[]
-
-			response0.MatchesExample(@"GET _cluster/health");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line46()
-		{
-			// tag::1dc474520122c524016c14a4418934b6[]
-			var response0 = new SearchResponse<object>();
-			// end::1dc474520122c524016c14a4418934b6[]
-
-			response0.MatchesExample(@"GET /_cluster/health/test1,test2");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line66()
+		public void Line32()
 		{
 			// tag::04f5dd677c777bcb15d7d5fa63275fc8[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +16,17 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line129()
+		public void Line141()
+		{
+			// tag::b02e4907c9936c1adc16ccce9d49900d[]
+			var response0 = new SearchResponse<object>();
+			// end::b02e4907c9936c1adc16ccce9d49900d[]
+
+			response0.MatchesExample(@"GET _cluster/health");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line178()
 		{
 			// tag::c48264ec5d9b9679fddd72e5c44425b9[]
 			var response0 = new SearchResponse<object>();
