@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -47,6 +48,66 @@ namespace Tests.Document.Multiple.BulkAll
 				seenPages.Should().Be(8);
 				e.Message.Should().Be("boom");
 			}
+		}
+	}
+
+
+	public class BulkAllBadRetriesApiTests : BulkAllApiTestsBase
+	{
+		public BulkAllBadRetriesApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		[U] public void Completes()
+		{
+			var client = Tests.Framework.Cluster.Nodes(2)
+				.ClientCalls(c => c.FailAlways())
+				.StaticConnectionPool()
+				.AllDefaults()
+				.Client;
+
+			var index = CreateIndexName();
+
+			var size = 1000;
+			var pages = 10;
+			var seenPages = 0;
+			var numberOfDocuments = size * pages;
+			var documents = CreateLazyStreamOfDocuments(numberOfDocuments);
+			var requests = 0;
+
+			Exception ex = null;
+			var tokenSource = new CancellationTokenSource();
+			var observableBulk = client.BulkAll(documents, f => f
+					.MaxDegreeOfParallelism(1)
+					.BulkResponseCallback(r => Interlocked.Increment(ref requests))
+					.BackOffTime(TimeSpan.FromMilliseconds(1))
+					.BackOffRetries(2)
+					.Size(size)
+					.RefreshOnCompleted()
+					.Index(index)
+					.BufferToBulk((r, buffer) => r.IndexMany(buffer))
+				, tokenSource.Token);
+
+			try
+			{
+				observableBulk.Wait(TimeSpan.FromSeconds(30), b =>
+				{
+					Interlocked.Increment(ref seenPages);
+				});
+			}
+			catch (Exception e)
+			{
+				ex = e;
+			}
+			ex.Should().NotBeNull();
+
+			var clientException = ex.Should().BeOfType<ElasticsearchClientException>().Subject;
+
+			clientException.Message.Should()
+				.StartWith("BulkAll halted after")
+				.And.EndWith("from _bulk and exhausting retries (2)");
+
+			requests.Should().Be(3);
+			// OnNext only called for successful batches.
+			seenPages.Should().Be(0);
 		}
 	}
 }

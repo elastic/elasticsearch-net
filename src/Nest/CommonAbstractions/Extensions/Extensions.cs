@@ -5,10 +5,12 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -24,9 +26,9 @@ namespace Nest
 	{
 		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(0));
 	}
-
 	internal static class Extensions
 	{
+
 		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 
 		internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
@@ -111,13 +113,13 @@ namespace Nest
 			return null;
 		}
 
-#if !DOTNETCORE
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
-#else
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-#endif
+        #if !DOTNETCORE
+				internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
+        #else
+				internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+        #endif
 
-		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
+				internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
 		internal static bool IsNullOrEmpty(this TypeName value) => value == null || value.GetHashCode() == 0;
 
@@ -174,7 +176,7 @@ namespace Nest
 			return !enumerable.Any() || enumerable.All(t => t == null);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
+		internal static void ThrowIfNull<T>(this T value, string name, string message = null) 
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);
@@ -250,6 +252,12 @@ namespace Nest
 						continue;
 
 					var task = await Task.WhenAny(tasks).ConfigureAwait(false);
+					if (task.Exception != null
+						&& (task.IsFaulted && task.Exception.Flatten().InnerExceptions.First() is Exception e))
+					{
+						ExceptionDispatchInfo.Capture(e).Throw();
+						return;
+					}
 					tasks.Remove(task);
 					i++;
 				}

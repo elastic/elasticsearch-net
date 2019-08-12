@@ -29,7 +29,7 @@ namespace Tests.Framework
 		}
 
 		public IConnectionPool ConnectionPool => Client.ConnectionSettings.ConnectionPool;
-		private ElasticClient Client => _fixedRequestPipeline?.Client;
+		public ElasticClient Client => _fixedRequestPipeline?.Client;
 
 		public VirtualizedCluster ClientProxiesTo(
 			Func<IElasticClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IResponse> sync,

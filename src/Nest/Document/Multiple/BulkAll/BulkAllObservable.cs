@@ -20,6 +20,7 @@ namespace Nest
 		private readonly int _maxDegreeOfParallelism;
 		private readonly IBulkAllRequest<T> _partitionedBulkRequest;
 		private readonly Func<IBulkResponseItem, T, bool> _retryPredicate;
+		private readonly Action<IBulkResponse> _bulkResponseCallback;
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
 
@@ -36,6 +37,8 @@ namespace Nest
 			_bulkSize = _partitionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
 			_retryPredicate = _partitionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
 			_droppedDocumentCallBack = _partitionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
+			_bulkResponseCallback = _partitionedBulkRequest.BulkResponseCallback;
+
 			_maxDegreeOfParallelism =
 				_partitionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -132,6 +135,8 @@ namespace Nest
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
 
+			_bulkResponseCallback?.Invoke(response);
+
 			if (!response.ApiCall.Success)
 				return await HandleBulkRequest(buffer, page, backOffRetries, response);
 
@@ -177,8 +182,8 @@ namespace Nest
 		private async Task<IBulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, IBulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			//TODO expose this on IAPiCallDetails as RetryLater in 7.0?
-			var failureReason = clientException?.FailureReason.GetValueOrDefault(PipelineFailure.Unexpected);
+			var failureReason = clientException?.FailureReason;
+			var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 			switch (failureReason)
 			{
 				case PipelineFailure.MaxRetriesReached:
@@ -186,16 +191,26 @@ namespace Nest
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
 						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
 
-					return await RetryDocuments(page, ++backOffRetries, buffer);
+					ThrowOnExhaustedRetries();
+					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 				case PipelineFailure.CouldNotStartSniffOnStartup:
 				case PipelineFailure.BadAuthentication:
 				case PipelineFailure.NoNodesAttempted:
 				case PipelineFailure.SniffFailure:
 				case PipelineFailure.Unexpected:
-					throw ThrowOnBadBulk(response,
-						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
+					throw ThrowOnBadBulk(response, $"BulkAll halted after {nameof(PipelineFailure)}.{reason} from _bulk");
 				default:
+					ThrowOnExhaustedRetries();
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
+			}
+
+			void ThrowOnExhaustedRetries()
+			{
+				if (_partitionedBulkRequest.ContinueAfterDroppedDocuments || backOffRetries < _backOffRetries) return;
+
+				throw ThrowOnBadBulk(response,
+					$"BulkAll halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
+				);
 			}
 		}
 

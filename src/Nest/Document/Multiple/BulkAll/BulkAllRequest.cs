@@ -103,6 +103,12 @@ namespace Nest
 		/// non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
 		/// </summary>
 		int? WaitForActiveShards { get; set; }
+
+		/// <summary>
+		/// Be notified every time a bulk response returns, this includes retries.
+		/// <see cref="IObserver{T}.OnNext"/> is only called for successful batches.
+		/// </summary>
+		Action<IBulkResponse> BulkResponseCallback { get; set; }
 	}
 
 	public class BulkAllRequest<T> : IBulkAllRequest<T>
@@ -171,6 +177,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? WaitForActiveShards { get; set; }
+
+		/// <inheritdoc />
+		public Action<IBulkResponse> BulkResponseCallback { get; set; }
 	}
 
 	public class BulkAllDescriptor<T> : DescriptorBase<BulkAllDescriptor<T>, IBulkAllRequest<T>>, IBulkAllRequest<T>
@@ -205,6 +214,7 @@ namespace Nest
 		Time IBulkAllRequest<T>.Timeout { get; set; }
 		TypeName IBulkAllRequest<T>.Type { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
+		Action<IBulkResponse> IBulkAllRequest<T>.BulkResponseCallback { get; set; }
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.MaxDegreeOfParallelism" />
 		public BulkAllDescriptor<T> MaxDegreeOfParallelism(int? parallelism) =>
@@ -285,5 +295,9 @@ namespace Nest
 		/// <inheritdoc cref="IBulkAllRequest{T}.DroppedDocumentCallback" />
 		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<IBulkResponseItem, T> callback) =>
 			Assign(callback, (a, v) => a.DroppedDocumentCallback = v);
+
+		/// <inheritdoc cref="IBulkAllRequest{T}.BulkResponseCallback" />
+		public BulkAllDescriptor<T> BulkResponseCallback(Action<IBulkResponse> callback) =>
+			Assign(callback, (a, v) => a.BulkResponseCallback = v);
 	}
 }
