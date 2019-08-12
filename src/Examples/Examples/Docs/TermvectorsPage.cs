@@ -1,0 +1,189 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Docs
+{
+	public class TermvectorsPage : ExampleBase
+	{
+		[U(Skip = "Example not implemented")]
+		public void Line10()
+		{
+			// tag::4c9b1db368186091c1a660bcd52890b8[]
+			var response0 = new SearchResponse<object>();
+			// end::4c9b1db368186091c1a660bcd52890b8[]
+
+			response0.MatchesExample(@"GET /twitter/_termvectors/1");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line20()
+		{
+			// tag::a15ca7faa8ba282679396de3c7b90485[]
+			var response0 = new SearchResponse<object>();
+			// end::a15ca7faa8ba282679396de3c7b90485[]
+
+			response0.MatchesExample(@"GET /twitter/_termvectors/1?fields=message");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line127()
+		{
+			// tag::587dd0c1aebbc1d93190bf117959cb73[]
+			var response0 = new SearchResponse<object>();
+			// end::587dd0c1aebbc1d93190bf117959cb73[]
+
+			response0.MatchesExample(@"PUT /twitter
+			{ ""mappings"": {
+			    ""properties"": {
+			      ""text"": {
+			        ""type"": ""text"",
+			        ""term_vector"": ""with_positions_offsets_payloads"",
+			        ""store"" : true,
+			        ""analyzer"" : ""fulltext_analyzer""
+			       },
+			       ""fullname"": {
+			        ""type"": ""text"",
+			        ""term_vector"": ""with_positions_offsets_payloads"",
+			        ""analyzer"" : ""fulltext_analyzer""
+			      }
+			    }
+			  },
+			  ""settings"" : {
+			    ""index"" : {
+			      ""number_of_shards"" : 1,
+			      ""number_of_replicas"" : 0
+			    },
+			    ""analysis"": {
+			      ""analyzer"": {
+			        ""fulltext_analyzer"": {
+			          ""type"": ""custom"",
+			          ""tokenizer"": ""whitespace"",
+			          ""filter"": [
+			            ""lowercase"",
+			            ""type_as_payload""
+			          ]
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line169()
+		{
+			// tag::3dbccd70f0a20ff7a8a2a4ee7ec406ed[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+			// end::3dbccd70f0a20ff7a8a2a4ee7ec406ed[]
+
+			response0.MatchesExample(@"PUT /twitter/_doc/1
+			{
+			  ""fullname"" : ""John Doe"",
+			  ""text"" : ""twitter test test test ""
+			}");
+
+			response1.MatchesExample(@"PUT /twitter/_doc/2
+			{
+			  ""fullname"" : ""Jane Doe"",
+			  ""text"" : ""Another twitter test ...""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line189()
+		{
+			// tag::8dfecbb38a81fb5b42f63d6fe9bf9278[]
+			var response0 = new SearchResponse<object>();
+			// end::8dfecbb38a81fb5b42f63d6fe9bf9278[]
+
+			response0.MatchesExample(@"GET /twitter/_termvectors/1
+			{
+			  ""fields"" : [""text""],
+			  ""offsets"" : true,
+			  ""payloads"" : true,
+			  ""positions"" : true,
+			  ""term_statistics"" : true,
+			  ""field_statistics"" : true
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line276()
+		{
+			// tag::487d12bb3e3036c4493dcbe43191b6f0[]
+			var response0 = new SearchResponse<object>();
+			// end::487d12bb3e3036c4493dcbe43191b6f0[]
+
+			response0.MatchesExample(@"GET /twitter/_termvectors/1
+			{
+			  ""fields"" : [""text"", ""some_field_without_term_vectors""],
+			  ""offsets"" : true,
+			  ""positions"" : true,
+			  ""term_statistics"" : true,
+			  ""field_statistics"" : true
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line301()
+		{
+			// tag::1f580df38ae517800d0c62d9648ebcb9[]
+			var response0 = new SearchResponse<object>();
+			// end::1f580df38ae517800d0c62d9648ebcb9[]
+
+			response0.MatchesExample(@"GET /twitter/_termvectors
+			{
+			  ""doc"" : {
+			    ""fullname"" : ""John Doe"",
+			    ""text"" : ""twitter test test test""
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line324()
+		{
+			// tag::8304a9c1ae8d0329b66ba57fb8263485[]
+			var response0 = new SearchResponse<object>();
+			// end::8304a9c1ae8d0329b66ba57fb8263485[]
+
+			response0.MatchesExample(@"GET /twitter/_termvectors
+			{
+			  ""doc"" : {
+			    ""fullname"" : ""John Doe"",
+			    ""text"" : ""twitter test test test""
+			  },
+			  ""fields"": [""fullname""],
+			  ""per_field_analyzer"" : {
+			    ""fullname"": ""keyword""
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line390()
+		{
+			// tag::ef3b210782fe58df252d0e805b8ef644[]
+			var response0 = new SearchResponse<object>();
+			// end::ef3b210782fe58df252d0e805b8ef644[]
+
+			response0.MatchesExample(@"GET /imdb/_termvectors
+			{
+			    ""doc"": {
+			      ""plot"": ""When wealthy industrialist Tony Stark is forced to build an armored suit after a life-threatening incident, he ultimately decides to use its technology to fight against evil.""
+			    },
+			    ""term_statistics"" : true,
+			    ""field_statistics"" : true,
+			    ""positions"": false,
+			    ""offsets"": false,
+			    ""filter"" : {
+			      ""max_num_terms"" : 3,
+			      ""min_term_freq"" : 1,
+			      ""min_doc_freq"" : 1
+			    }
+			}");
+		}
+	}
+}

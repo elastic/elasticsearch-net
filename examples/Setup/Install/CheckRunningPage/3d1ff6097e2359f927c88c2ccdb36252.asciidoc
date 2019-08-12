@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../../src/Examples/Examples/Setup/Install/CheckRunningPage.cs[tag=3d1ff6097e2359f927c88c2ccdb36252,indent=0]
+----

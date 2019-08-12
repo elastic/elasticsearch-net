@@ -1,0 +1,51 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.Mapping.Params
+{
+	public class IndexOptionsPage : ExampleBase
+	{
+		[U(Skip = "Example not implemented")]
+		public void Line37()
+		{
+			// tag::3a24ebb542f657420fcd8fdf3f757ce6[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::3a24ebb542f657420fcd8fdf3f757ce6[]
+
+			response0.MatchesExample(@"PUT my_index
+			{
+			  ""mappings"": {
+			    ""properties"": {
+			      ""text"": {
+			        ""type"": ""text"",
+			        ""index_options"": ""offsets""
+			      }
+			    }
+			  }
+			}");
+
+			response1.MatchesExample(@"PUT my_index/_doc/1
+			{
+			  ""text"": ""Quick brown fox""
+			}");
+
+			response2.MatchesExample(@"GET my_index/_search
+			{
+			  ""query"": {
+			    ""match"": {
+			      ""text"": ""brown fox""
+			    }
+			  },
+			  ""highlight"": {
+			    ""fields"": {
+			      ""text"": {} \<1>
+			    }
+			  }
+			}");
+		}
+	}
+}

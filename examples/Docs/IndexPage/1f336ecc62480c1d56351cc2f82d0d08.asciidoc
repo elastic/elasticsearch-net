@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/Docs/IndexPage.cs[tag=1f336ecc62480c1d56351cc2f82d0d08,indent=0]
+----

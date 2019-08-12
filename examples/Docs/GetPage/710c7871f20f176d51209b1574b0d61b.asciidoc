@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=710c7871f20f176d51209b1574b0d61b,indent=0]
+----
