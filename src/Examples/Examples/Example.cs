@@ -8,6 +8,8 @@ namespace Examples
 	{
 		private static readonly Uri BaseUri = new Uri("http://localhost:9200");
 
+		private static readonly Regex Callout = new Regex(@"\\<\d+>\s*$", RegexOptions.Multiline);
+
 		private Example(HttpMethod method, Uri uri, string body)
 		{
 			Method = method;
@@ -26,7 +28,7 @@ namespace Examples
 			var exampleParts = example.Split(new[] { "\r\n", "\r", "\n" }, 2, StringSplitOptions.None);
 			var urlParts = exampleParts[0].Split(new[] { " " }, 2, StringSplitOptions.None);
 			var method = (HttpMethod)Enum.Parse(typeof(HttpMethod), urlParts[0], true);
-			var path = urlParts[1];
+			var path = Callout.Replace(urlParts[1], string.Empty);
 			var body = exampleParts.Length > 1 ? exampleParts[1] : null;
 
 			if (!Uri.TryCreate(BaseUri, path, out var uri))
@@ -34,7 +36,7 @@ namespace Examples
 
 			if (body != null)
 				// remove callouts, like \<1>, from the reference body
-				body = Regex.Replace(body, @"\\<\d+>\s*$", string.Empty, RegexOptions.Multiline);
+				body = Callout.Replace(body, string.Empty);
 
 			return new Example(method, uri, body);
 		}

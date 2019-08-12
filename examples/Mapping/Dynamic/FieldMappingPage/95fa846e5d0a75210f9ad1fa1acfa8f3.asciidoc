@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../../src/Examples/Examples/Mapping/Dynamic/FieldMappingPage.cs[tag=95fa846e5d0a75210f9ad1fa1acfa8f3,indent=0]
+----
