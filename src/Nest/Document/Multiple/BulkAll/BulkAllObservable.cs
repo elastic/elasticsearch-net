@@ -132,8 +132,6 @@ namespace Nest
 			
 			_bulkResponseCallback?.Invoke(response);
 
-			_bulkResponseCallback?.Invoke(response);
-
 			if (!response.ApiCall.Success)
 				return await HandleBulkRequest(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
