@@ -7,7 +7,10 @@ namespace Nest
 {
 	public interface IBulkAllRequest<T> where T : class
 	{
-		/// <summary> In case of a HTTP 429 (Too Many Requests) response status code, how many times should we automatically back off before failing</summary>
+		/// <summary>
+		/// In case of a HTTP 429 (Too Many Requests) response status code, how many times should we automatically back
+		/// off before failing
+		/// </summary>
 		int? BackOffRetries { get; set; }
 
 		/// <summary> In case of a HTTP 429 (Too Many Requests) response status code, how long should we wait before retrying</summary>
@@ -22,7 +25,8 @@ namespace Nest
 
 		/// <summary>
 		/// By default, <see cref="BulkAllObservable{T}" /> calls <see cref="BulkDescriptor.IndexMany{T}" /> on the buffer.
-		/// There might be case where you'd like more control over the bulk operation. By setting this callback, you are in complete control
+		/// There might be case where you'd like more control over the bulk operation. By setting this callback, you are in
+		/// complete control
 		/// of describing how the buffer should be translated to a bulk operation.
 		/// </summary>
 		Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
@@ -43,12 +47,18 @@ namespace Nest
 
 		/// <summary>
 		/// If a bulk operation fails because it receives documents it can not retry they will be fed to this callback.
-		/// If <see cref="ContinueAfterDroppedDocuments" /> is set to <c>true</c> processing will continue, so this callback can be used
+		/// If <see cref="ContinueAfterDroppedDocuments" /> is set to <c>true</c> processing will continue, so this callback can be
+		/// used
 		/// to feed into a dead letter queue. Otherwise bulk all indexing will be halted.
 		/// </summary>
 		Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
 
-		///<summary>Default index for items which don't provide one</summary>
+		/// <summary>
+		/// The index to use for items that don't specify one. By default, will be inferred from <typeparamref name="T" />.
+		///  If no default index has been mapped for <typeparamref name="T" />
+		/// using <see cref="ConnectionSettingsBase{TConnectionSettings}.DefaultMappingFor{TDocument}" />
+		/// on <see cref="Nest.ConnectionSettings" />, an exception will be thrown.
+		/// </summary>
 		IndexName Index { get; set; }
 
 		///<summary>The maximum number of bulk operations we want to have in flight at a time</summary>
@@ -253,16 +263,24 @@ namespace Nest
 		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
 		/// is not amplified by the greedier of the two by more then a given back pressure factor
 		/// When set each scroll request will additionally wait on <see cref="ProducerConsumerBackPressure.WaitAsync" /> as well as
-		/// <see cref="MaxDegreeOfParallelism" /> if set. Not that the consumer has to call <see cref="ProducerConsumerBackPressure.Release" />
+		/// <see cref="MaxDegreeOfParallelism" /> if set. Not that the consumer has to call
+		/// <see cref="ProducerConsumerBackPressure.Release" />
 		/// on the same instance every time it is done.
 		/// </summary>
-		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
-		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
+		/// <param name="maxConcurrency">
+		/// The minimum maximum concurrency which would be the bottleneck of the producer consumer
+		/// pipeline
+		/// </param>
+		/// <param name="backPressureFactor">
+		/// The maximum amplification back pressure of the greedier part of the producer consumer
+		/// pipeline
+		/// </param>
 		public BulkAllDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
 			Assign(new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency), (a, v) => a.BackPressure = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.ContinueAfterDroppedDocuments" />
-		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(proceed, (a, v) => a.ContinueAfterDroppedDocuments = v);
+		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) =>
+			Assign(proceed, (a, v) => a.ContinueAfterDroppedDocuments = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.DroppedDocumentCallback" />
 		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<IBulkResponseItem, T> callback) =>
