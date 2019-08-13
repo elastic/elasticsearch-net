@@ -50,7 +50,7 @@ namespace Examples.Mapping.Dynamic
 
 			indexResponse.MatchesExample(@"PUT my_index/_doc/1 \<1>
 			{
-			  ""create"": ""2015/09/02""
+			  ""create_date"": ""2015/09/02""
 			}");
 		}
 
@@ -93,7 +93,7 @@ namespace Examples.Mapping.Dynamic
 			);
 
 			var indexResponse = client.Index<object>(
-				new { my_float = 1.0d, my_integer = 1 },
+				new { my_float = "1.0", my_integer = "1" },
 				i => i.Index("my_index").Id(1));
 			// end::fa3cd4ffaec8273656a328ae29f32c65[]
 

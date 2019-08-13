@@ -1,0 +1,4 @@
+[source, csharp]
+----
+include::../../../src/Examples/Examples/Root/MappingPage.cs[tag=b311b42b7dcc69821df1f77bfaf2d50d,indent=0]
+----

@@ -5,14 +5,26 @@ namespace Examples.Root
 {
 	public class MappingPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line141()
 		{
 			// tag::b311b42b7dcc69821df1f77bfaf2d50d[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.Properties(p => p
+						.Text(t => t.Name("title"))
+						.Text(t => t.Name("name"))
+						.Number(n => n.Name("age").Type(NumberType.Integer))
+						.Date(d => d
+							.Name("created")
+							.Format("strict_date_optional_time||epoch_millis")
+						)
+					)
+				)
+			);
 			// end::b311b42b7dcc69821df1f77bfaf2d50d[]
 
-			response0.MatchesExample(@"PUT my_index \<1>
+			createIndexResponse.MatchesExample(@"PUT my_index \<1>
 			{
 			  ""mappings"": {
 			    ""properties"": { \<2>
