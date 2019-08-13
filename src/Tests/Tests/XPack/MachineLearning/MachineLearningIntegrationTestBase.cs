@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.MachineLearning
 {
 	[SkipVersion("<5.5.0", "Machine Learning does not exist in previous versions")]
-	[SkipOnTeamCity]
+	[SkipOnCi]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<MachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse

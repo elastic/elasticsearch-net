@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,5 +10,15 @@ namespace Nest
 
 		[DataMember(Name = "task")]
 		public TaskInfo Task { get; internal set; }
+
+		[DataMember(Name = "response")]
+		internal LazyDocument Response { get; set; }
+
+		/// <summary>
+		/// Gets the response for the request that the task represents, if available.
+		/// Because the response will have no associated <see cref="ApiCallDetails"/>, the value
+		/// of <see cref="IResponse.IsValid"/> should not be used.
+		/// </summary>
+		public TResponse GetResponse<TResponse>() where TResponse : class, IResponse => Response?.AsUsingRequestResponseSerializer<TResponse>();
 	}
 }

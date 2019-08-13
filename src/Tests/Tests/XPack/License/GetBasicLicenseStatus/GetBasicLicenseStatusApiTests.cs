@@ -11,7 +11,7 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Tests.XPack.License.GetBasicLicenseStatus
 {
 	[SkipVersion("<6.5.0", "")]
-	[SkipOnTeamCity]
+	[SkipOnCi]
 	public class GetBasicLicenseStatusApiTests
 		: ApiIntegrationTestBase<XPackCluster, GetBasicLicenseStatusResponse, IGetBasicLicenseStatusRequest, GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequest>
 	{

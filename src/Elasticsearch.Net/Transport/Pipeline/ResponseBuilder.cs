@@ -67,7 +67,7 @@ namespace Elasticsearch.Net
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
 			//mimeType can include charset information on .NET full framework
-			if (mimeType != null && !mimeType.StartsWith(requestData.RequestMimeType))
+			if (!string.IsNullOrEmpty(mimeType) && !mimeType.StartsWith(requestData.RequestMimeType))
 				success = false;
 
 			var details = new ApiCallDetails

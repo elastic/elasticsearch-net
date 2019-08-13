@@ -18,7 +18,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-dd'T'HH:mm:ss.SSSZ
 		/// </summary>
 		[DataMember(Name = "date_formats")]
 		IEnumerable<string> DateFormats { get; set; }
@@ -70,7 +70,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-dd'T'HH:mm:ss.SSSZ
 		/// </summary>
 		public IEnumerable<string> DateFormats { get; set; }
 
@@ -152,7 +152,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-dd'T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(IEnumerable<string> dateFormats) =>
 			Assign(dateFormats, (a, v) => a.DateFormats = v);
@@ -160,7 +160,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-dd'T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(params string[] dateFormats) =>
 			Assign(dateFormats, (a, v) => a.DateFormats = v);

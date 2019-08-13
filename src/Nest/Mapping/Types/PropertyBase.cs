@@ -57,6 +57,8 @@ namespace Nest
 		public PropertyName Name { get; set; }
 
 		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name.DebugDisplay} ";
+		
+		public override string ToString() => DebugDisplay;
 
 		/// <summary>
 		/// Override for the property type, used for custom mappings

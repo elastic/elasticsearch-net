@@ -24,6 +24,7 @@ namespace Nest
 
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
+		private Action<BulkResponse> _bulkResponseCallback;
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -129,6 +130,8 @@ namespace Nest
 				.ConfigureAwait(false);
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
+			
+			_bulkResponseCallback?.Invoke(response);
 
 			_bulkResponseCallback?.Invoke(response);
 

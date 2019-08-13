@@ -561,7 +561,7 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParameters = new RootNodeInfoRequestParameters();
 			requestParameters.RequestConfiguration = requestOverrides;
 
-			var data = new RequestData(HttpMethod.HEAD, "/", null, _settings, requestParameters, _memoryStreamFactory) { Node = node };
+			var data = new RequestData(HttpMethod.HEAD, string.Empty, null, _settings, requestParameters, _memoryStreamFactory) { Node = node };
 			return data;
 		}
 

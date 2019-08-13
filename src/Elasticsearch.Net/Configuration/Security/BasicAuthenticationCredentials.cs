@@ -8,9 +8,8 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class BasicAuthenticationCredentials : IDisposable
 	{
-		public BasicAuthenticationCredentials()
-		{
-		}
+		//TODO remove this constructor in 8.0
+		public BasicAuthenticationCredentials() { }
 
 		public BasicAuthenticationCredentials(string username, string password)
 		{
@@ -35,5 +34,6 @@ namespace Elasticsearch.Net
 		public string Username { get; set; }
 
 		public void Dispose() => Password?.Dispose();
+		
 	}
 }

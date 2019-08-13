@@ -47,6 +47,8 @@ namespace Nest
 
 		private string DebugDisplay => StringOrLongValue ?? "Routing from instance typeof: " + Document?.GetType().Name;
 
+		public override string ToString() => DebugDisplay;
+
 		private static int TypeHashCode { get; } = typeof(Routing).GetHashCode();
 
 		public bool Equals(Routing other)

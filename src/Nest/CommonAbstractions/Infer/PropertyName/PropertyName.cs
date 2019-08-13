@@ -44,6 +44,8 @@ namespace Nest
 		internal string DebugDisplay =>
 			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(_type == null ? "" : " typeof: " + _type.Name)}";
 
+		public override string ToString() => DebugDisplay;
+
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 		private static int TypeHashCode { get; } = typeof(PropertyName).GetHashCode();
 

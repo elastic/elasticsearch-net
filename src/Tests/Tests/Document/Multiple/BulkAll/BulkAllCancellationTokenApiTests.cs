@@ -13,7 +13,7 @@ namespace Tests.Document.Multiple.BulkAll
 	{
 		public BulkAllCancellationTokenApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
-		[I] [SkipOnTeamCity]
+		[I] [SkipOnCi]
 		public void CancelBulkAll()
 		{
 			var index = CreateIndexName();
