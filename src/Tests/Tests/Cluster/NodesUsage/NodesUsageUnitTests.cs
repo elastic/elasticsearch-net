@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core.Client;
@@ -19,7 +20,30 @@ namespace Tests.Cluster.NodesUsage
 				{
 					total = 1,
 					successful = 1,
-					failed = 0
+					failed = 0,
+					failures = new[]
+					{
+						new
+						{
+							type = "illegal_argument_exception",
+							reason = "failed to execute script",
+							caused_by = new
+							{
+								type = "script_exception",
+								reason = "failed to run inline script [use(java.lang.Exception) {throw new Exception(\"Customized Exception\")}] using lang [groovy]",
+								caused_by = new
+								{
+									type = "privileged_action_exception",
+									reason = (string)null,
+									caused_by = new
+									{
+										type="exception",
+										reason= "Custom Exception"
+									}
+								}
+							}
+						}
+					}
 				},
 				cluster_name = "my_cluster",
 				nodes = new Dictionary<string, object>
@@ -54,6 +78,11 @@ namespace Tests.Cluster.NodesUsage
 			response.NodeStatistics.Total.Should().Be(1);
 			response.NodeStatistics.Successful.Should().Be(1);
 			response.NodeStatistics.Failed.Should().Be(0);
+			response.NodeStatistics.Failures.Should().HaveCount(1);
+			var failure = response.NodeStatistics.Failures.First();
+			failure.Type.Should().NotBeNull();
+			failure.Reason.Should().NotBeNull();
+			failure.CausedBy.Should().NotBeNull();
 
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);
