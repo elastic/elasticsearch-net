@@ -19,8 +19,14 @@ namespace Nest
 		[JsonProperty("scripted_upsert")]
 		internal bool? _ScriptedUpsert { get; set; }
 
+		[JsonProperty("if_seq_no")]
+		internal long? IfSequenceNumber { get; set; }
+
 		[JsonProperty("upsert")]
 		[JsonConverter(typeof(CollapsedSourceConverter))]
 		internal TDocument _Upsert { get; set; }
+
+		[JsonProperty("if_primary_term")]
+		internal long? IfPrimaryTerm { get; set; }
 	}
 }

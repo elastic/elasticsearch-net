@@ -40,6 +40,10 @@ namespace Nest
 		/// A document to upsert when the specified document to be updated is not found
 		/// </summary>
 		TDocument Upsert { get; set; }
+
+		long? IfSequenceNumber { get; set; }
+
+		long? IfPrimaryTerm { get; set; }
 	}
 
 	public class BulkUpdateOperation<TDocument, TPartialDocument> : BulkOperationBase, IBulkUpdateOperation<TDocument, TPartialDocument>
@@ -108,6 +112,10 @@ namespace Nest
 		/// </summary>
 		public TDocument Upsert { get; set; }
 
+		public long? IfSequenceNumber { get; set; }
+
+		public long? IfPrimaryTerm { get; set; }
+
 		protected override Type ClrType => typeof(TDocument);
 
 		protected override string Operation => "update";
@@ -125,7 +133,9 @@ namespace Nest
 				_Script = Script,
 				_Upsert = Upsert,
 				_DocAsUpsert = DocAsUpsert,
-				_ScriptedUpsert = ScriptedUpsert
+				_ScriptedUpsert = ScriptedUpsert,
+				IfPrimaryTerm = IfPrimaryTerm,
+				IfSequenceNumber = IfSequenceNumber
 			};
 	}
 
@@ -139,11 +149,12 @@ namespace Nest
 		protected override string BulkOperationType => "update";
 		TPartialDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Doc { get; set; }
 		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
-
 		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.IdFrom { get; set; }
 		IScript IBulkUpdateOperation<TDocument, TPartialDocument>.Script { get; set; }
 		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
 		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Upsert { get; set; }
+		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfSequenceNumber { get; set; }
+		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfPrimaryTerm { get; set; }
 
 		protected override object GetBulkOperationBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
@@ -152,7 +163,9 @@ namespace Nest
 				_Script = Self.Script,
 				_Upsert = Self.Upsert,
 				_DocAsUpsert = Self.DocAsUpsert,
-				_ScriptedUpsert = Self.ScriptedUpsert
+				_ScriptedUpsert = Self.ScriptedUpsert,
+				IfPrimaryTerm = Self.IfPrimaryTerm,
+				IfSequenceNumber = Self.IfSequenceNumber
 			};
 
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
@@ -209,5 +222,17 @@ namespace Nest
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> RetriesOnConflict(int? retriesOnConflict) =>
 			Assign(retriesOnConflict, (a, v) => a.RetriesOnConflict = v);
+
+		/// <summary>
+		/// Operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number.
+		/// </summary>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfSequenceNumber(long? seqNo) =>
+			Assign(seqNo, (a, v) => a.IfSequenceNumber = v);
+
+		/// <summary>
+		/// Operations can be made conditional and only be performed if the last modification to the document was assigned the primary term.
+		/// </summary>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? primaryTerm) =>
+			Assign(primaryTerm, (a, v) => a.IfSequenceNumber = v);
 	}
 }
