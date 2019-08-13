@@ -43,6 +43,10 @@ namespace Nest
 		/// A document to upsert when the specified document to be updated is not found
 		/// </summary>
 		TDocument Upsert { get; set; }
+
+		long? IfSequenceNumber { get; set; }
+
+		long? IfPrimaryTerm { get; set; }
 	}
 
 	[DataContract]
@@ -112,6 +116,10 @@ namespace Nest
 		/// </summary>
 		public TDocument Upsert { get; set; }
 
+		public long? IfSequenceNumber { get; set; }
+
+		public long? IfPrimaryTerm { get; set; }
+
 		protected override Type ClrType => typeof(TDocument);
 
 		protected override string Operation => "update";
@@ -140,7 +148,9 @@ namespace Nest
 				Script = Script,
 				Upsert = Upsert,
 				DocAsUpsert = DocAsUpsert,
-				ScriptedUpsert = ScriptedUpsert
+				ScriptedUpsert = ScriptedUpsert,
+				IfPrimaryTerm = IfPrimaryTerm,
+				IfSequenceNumber = IfSequenceNumber
 			};
 	}
 
@@ -161,6 +171,10 @@ namespace Nest
 		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
 		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Upsert { get; set; }
 
+		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfSequenceNumber { get; set; }
+
+		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfPrimaryTerm { get; set; }
+
 		protected override object GetBulkOperationBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
 			{
@@ -168,7 +182,9 @@ namespace Nest
 				Script = Self.Script,
 				Upsert = Self.Upsert,
 				DocAsUpsert = Self.DocAsUpsert,
-				ScriptedUpsert = Self.ScriptedUpsert
+				ScriptedUpsert = Self.ScriptedUpsert,
+				IfPrimaryTerm = Self.IfPrimaryTerm,
+				IfSequenceNumber = Self.IfSequenceNumber
 			};
 
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
@@ -236,5 +252,17 @@ namespace Nest
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> RetriesOnConflict(int? retriesOnConflict) =>
 			Assign(retriesOnConflict, (a, v) => a.RetriesOnConflict = v);
+
+		/// <summary>
+		/// Operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number.
+		/// </summary>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfSequenceNumber(long? seqNo) =>
+			Assign(seqNo, (a, v) => a.IfSequenceNumber = v);
+
+		/// <summary>
+		/// Operations can be made conditional and only be performed if the last modification to the document was assigned the primary term.
+		/// </summary>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? primaryTerm) =>
+			Assign(primaryTerm, (a, v) => a.IfSequenceNumber = v);
 	}
 }

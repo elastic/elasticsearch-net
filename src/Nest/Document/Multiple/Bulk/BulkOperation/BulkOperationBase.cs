@@ -54,7 +54,6 @@ namespace Nest
 		/// <summary>
 		/// Only used for bulk update operations but in the future might come in handy for other complex bulk ops.
 		/// </summary>
-		/// <returns></returns>
 		object IBulkOperation.GetBody() => GetBulkOperationBody();
 
 		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => GetIdForOperation(inferrer);

@@ -20,9 +20,10 @@ namespace Nest
 		private readonly int _maxDegreeOfParallelism;
 		private readonly IBulkAllRequest<T> _partitionedBulkRequest;
 		private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
+		private readonly Action<BulkResponse> _bulkResponseCallback;
+
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
-		private Action<BulkResponse> _bulkResponseCallback;
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -38,7 +39,7 @@ namespace Nest
 			_retryPredicate = _partitionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
 			_droppedDocumentCallBack = _partitionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
 			_bulkResponseCallback = _partitionedBulkRequest.BulkResponseCallback;
-			
+
 			_maxDegreeOfParallelism =
 				_partitionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -128,7 +129,7 @@ namespace Nest
 				.ConfigureAwait(false);
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
-			
+
 			_bulkResponseCallback?.Invoke(response);
 
 			if (!response.ApiCall.Success)
@@ -172,7 +173,7 @@ namespace Nest
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			var failureReason = clientException?.FailureReason; 
+			var failureReason = clientException?.FailureReason;
 			var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 			switch (failureReason)
 			{
