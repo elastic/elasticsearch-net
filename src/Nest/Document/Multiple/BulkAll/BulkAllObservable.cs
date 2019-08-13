@@ -24,7 +24,6 @@ namespace Nest
 
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
-		private Action<BulkResponse> _bulkResponseCallback;
 
 		public BulkAllObservable(
 			IElasticClient client,
