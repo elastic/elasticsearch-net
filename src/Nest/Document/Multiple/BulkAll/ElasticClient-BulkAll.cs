@@ -7,7 +7,12 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to Elasticsearch as bulks concurrently
+		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to Elasticsearch as concurrent bulk requests.
+		/// <para />
+		/// The index to target will be inferred from <typeparamref name="T" />. If no default index has been mapped for <typeparamref name="T" />
+		/// using <see cref="ConnectionSettingsBase{TConnectionSettings}.DefaultMappingFor{TDocument}"/> on <see cref="Nest.ConnectionSettings"/>, an exception will be thrown.
+		/// Inference can be overridden using <see cref="BulkAllDescriptor{T}.Index"/>, and in addition,
+		/// an index can be specified for each document using <see cref="BulkAllDescriptor{T}.BufferToBulk"/>.
 		/// </summary>
 		/// <param name="documents">The lazy stream of documents</param>
 		BulkAllObservable<T> BulkAll<T>(
@@ -18,7 +23,12 @@ namespace Nest
 			where T : class;
 
 		/// <summary>
-		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to Elasticsearch as bulks concurrently
+		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to Elasticsearch as concurrent bulk requests
+		/// <para />
+		/// The index to target will be inferred from <typeparamref name="T" />. If no default index has been mapped for <typeparamref name="T" />
+		/// using <see cref="ConnectionSettingsBase{TConnectionSettings}.DefaultMappingFor{TDocument}"/> on <see cref="Nest.ConnectionSettings"/>, an exception will be thrown.
+		/// Inference can be overridden using <see cref="IBulkAllRequest{T}.Index"/>, and in addition,
+		/// an index can be specified for each document using <see cref="IBulkAllRequest{T}.BufferToBulk"/>.
 		/// </summary>
 		BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) where T : class;
 	}
