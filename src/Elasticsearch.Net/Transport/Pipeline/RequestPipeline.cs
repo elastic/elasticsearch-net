@@ -287,6 +287,8 @@ namespace Elasticsearch.Net
 		{
 			if (!FirstPoolUsageNeedsSniffing) return;
 
+			// TODO cancellationToken could throw here and will bubble out as OperationCancelledException
+			// everywhere else it would bubble out wrapped in a `UnexpectedElasticsearchClientException`
 			var success = await semaphore.WaitAsync(_settings.RequestTimeout, cancellationToken).ConfigureAwait(false);
 			if (!success)
 			{
