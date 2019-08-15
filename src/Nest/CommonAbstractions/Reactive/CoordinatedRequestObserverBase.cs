@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -27,7 +28,15 @@ namespace Nest
 
 		public void OnCompleted() => _completed?.Invoke();
 
-		public void OnError(Exception error) => _onError?.Invoke(error);
+		public void OnError(Exception error)
+		{
+			// This normalizes task cancellation exceptions for observables
+			// If a task cancellation happens in the client it bubbles out as a UnexpectedElasticsearchClientException
+			// where as inside our IObservable implementation we .ThrowIfCancellationRequested() directly.
+			if (error is UnexpectedElasticsearchClientException es && es.InnerException != null && es.InnerException is OperationCanceledException c)
+				_onError?.Invoke(c);
+			else _onError?.Invoke(error);
+		}
 
 		public void OnNext(T value) => _onNext?.Invoke(value);
 	}
