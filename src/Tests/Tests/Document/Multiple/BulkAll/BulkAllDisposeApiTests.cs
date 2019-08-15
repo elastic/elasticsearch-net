@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -51,7 +52,8 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Dispose();
 			//we wait N seconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
-			if (ex != null && !(ex is TaskCanceledException) && !(ex is OperationCanceledException)) throw ex;
+
+			if (ex != null && !(ex is OperationCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = Client.Count<SmallObject>(f => f.Index(index));

@@ -142,6 +142,9 @@ namespace Elasticsearch.Net
 					}
 					catch (Exception killerException)
 					{
+						if (killerException is OperationCanceledException && cancellationToken.IsCancellationRequested)
+							pipeline.AuditCancellationRequested();
+
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
