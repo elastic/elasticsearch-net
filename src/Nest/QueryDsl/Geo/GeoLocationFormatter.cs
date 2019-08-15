@@ -42,7 +42,7 @@ namespace Nest
 					reader.ReadNextBlock();
 			}
 
-			return new GeoCoordinate(lat, lon);
+			return new GeoLocation(lat, lon);
 		}
 
 		public void Serialize(ref JsonWriter writer, GeoLocation value, IJsonFormatterResolver formatterResolver)
