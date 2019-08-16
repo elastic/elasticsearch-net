@@ -77,7 +77,7 @@ namespace Nest
 
 	internal class DistanceFeatureQueryFormatter : IJsonFormatter<IDistanceFeatureQuery>
 	{
-		private static readonly UnionFormatter<GeoCoordinate, DateMath> OriginUnionFormatter = new UnionFormatter<GeoCoordinate, DateMath> ();
+		private static readonly UnionFormatter<GeoCoordinate, DateMath> OriginUnionFormatter = new UnionFormatter<GeoCoordinate, DateMath>(true);
 		private static readonly UnionFormatter<Distance, Time> PivotUnionFormatter = new UnionFormatter<Distance, Time>();
 
 		public void Serialize(ref JsonWriter writer, IDistanceFeatureQuery value, IJsonFormatterResolver formatterResolver)
@@ -101,7 +101,6 @@ namespace Nest
 
 			writer.WritePropertyName("pivot");
 			PivotUnionFormatter.Serialize(ref writer, value.Pivot, formatterResolver);
-
 			writer.WriteValueSeparator();
 
 			if (value.Boost.HasValue)

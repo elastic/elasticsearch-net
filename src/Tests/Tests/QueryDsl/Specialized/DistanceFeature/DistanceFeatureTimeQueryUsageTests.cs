@@ -73,7 +73,7 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 		};
 
 		protected override object QueryJson =>
-			new { distance_feature = new { boost = 1.1, field = "startedOn", origin = new { lat = 70.0, lon = -70.0 }, pivot = "100mi" } };
+			new { distance_feature = new { boost = 1.1, field = "leadDeveloper.location", origin = new [] { -70.0, 70.0 }, pivot = "100mi" } };
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.DistanceFeature(rf => rf
