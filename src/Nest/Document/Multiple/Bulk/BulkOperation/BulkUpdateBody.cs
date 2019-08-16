@@ -24,5 +24,11 @@ namespace Nest
 		[DataMember(Name ="upsert")]
 		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		internal TDocument Upsert { get; set; }
+
+		[DataMember(Name = "if_seq_no")]
+		internal long? IfSequenceNumber { get; set; }
+
+		[DataMember(Name = "if_primary_term")]
+		internal long? IfPrimaryTerm { get; set; }
 	}
 }

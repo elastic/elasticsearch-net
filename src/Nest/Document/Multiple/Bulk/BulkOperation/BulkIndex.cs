@@ -60,6 +60,7 @@ namespace Nest
 		string IBulkIndexOperation<T>.Percolate { get; set; }
 		string IBulkIndexOperation<T>.Pipeline { get; set; }
 		long? IBulkIndexOperation<T>.IfSequenceNumber { get; set; }
+
 		long? IBulkIndexOperation<T>.IfPrimaryTerm { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
