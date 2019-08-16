@@ -16,6 +16,9 @@ namespace Nest
 		[JsonProperty("format")]
 		string Format { get; set; }
 
+		[JsonProperty("missing")]
+		object Missing { get; set; }
+
 		[JsonProperty("ranges")]
 		IEnumerable<IDateRangeExpression> Ranges { get; set; }
 
@@ -31,6 +34,7 @@ namespace Nest
 
 		public Field Field { get; set; }
 		public string Format { get; set; }
+		public object Missing { get; set; }
 		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
 		public string TimeZone { get; set; }
 
@@ -46,6 +50,8 @@ namespace Nest
 
 		string IDateRangeAggregation.Format { get; set; }
 
+		object IDateRangeAggregation.Missing { get; set; }
+
 		IEnumerable<IDateRangeExpression> IDateRangeAggregation.Ranges { get; set; }
 
 		string IDateRangeAggregation.TimeZone { get; set; }
@@ -55,6 +61,8 @@ namespace Nest
 		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
+
+		public DateRangeAggregationDescriptor<T> Missing(object missing) => Assign(missing, (a, v) => a.Missing = v);
 
 		public DateRangeAggregationDescriptor<T> Ranges(params IDateRangeExpression[] ranges) =>
 			Assign(ranges.ToListOrNullIfEmpty(), (a, v) => a.Ranges = v);
