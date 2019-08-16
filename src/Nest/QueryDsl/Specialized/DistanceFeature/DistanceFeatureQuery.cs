@@ -21,7 +21,7 @@ namespace Nest
 		// If the field value is a geo_point field, the origin value must be a geopoint.
 		/// </summary>
 		[DataMember(Name = "origin")]
-		Union<GeoLocation, DateMath> Origin { get; set; }
+		Union<GeoCoordinate, DateMath> Origin { get; set; }
 
 		/// <summary>
 		/// Distance from the origin at which relevance scores receive half of the boost value.
@@ -42,7 +42,7 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.DistanceFeature = this;
 
 		/// <inheritdoc />
-		public Union<GeoLocation, DateMath> Origin { get; set; }
+		public Union<GeoCoordinate, DateMath> Origin { get; set; }
 
 		/// <inheritdoc />
 		public Union<Distance, Time> Pivot { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery, T>
 			, IDistanceFeatureQuery where T : class
 	{
-		Union<GeoLocation, DateMath> IDistanceFeatureQuery.Origin { get; set; }
+		Union<GeoCoordinate, DateMath> IDistanceFeatureQuery.Origin { get; set; }
 
 		Union<Distance, Time> IDistanceFeatureQuery.Pivot { get; set; }
 
@@ -63,7 +63,7 @@ namespace Nest
 			Assign(origin, (a, v) => a.Origin = v);
 
 		/// <inheritdoc cref="IDistanceFeatureQuery.Origin" />
-		public DistanceFeatureQueryDescriptor<T> Origin(GeoLocation origin) =>
+		public DistanceFeatureQueryDescriptor<T> Origin(GeoCoordinate origin) =>
 			Assign(origin, (a, v) => a.Origin = v);
 
 		/// <inheritdoc cref="IDistanceFeatureQuery.Pivot" />
@@ -77,7 +77,7 @@ namespace Nest
 
 	internal class DistanceFeatureQueryFormatter : IJsonFormatter<IDistanceFeatureQuery>
 	{
-		private static readonly UnionFormatter<GeoLocation, DateMath> OriginUnionFormatter = new UnionFormatter<GeoLocation, DateMath> ();
+		private static readonly UnionFormatter<GeoCoordinate, DateMath> OriginUnionFormatter = new UnionFormatter<GeoCoordinate, DateMath> ();
 		private static readonly UnionFormatter<Distance, Time> PivotUnionFormatter = new UnionFormatter<Distance, Time>();
 
 		public void Serialize(ref JsonWriter writer, IDistanceFeatureQuery value, IJsonFormatterResolver formatterResolver)
