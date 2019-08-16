@@ -62,7 +62,6 @@ namespace Nest
 
 		bool ICollection.IsSynchronized => true;
 
-
 		object IList.this[int index]
 		{
 			get => this[index];
