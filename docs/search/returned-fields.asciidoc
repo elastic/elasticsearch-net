@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -114,9 +114,7 @@ var searchResponse = _client.Search<Project>(s => s
 );
 ----
 <1> **Include** the following fields
-
 <2> **Exclude** the following fields
-
 <3> Fields can be included or excluded through wildcard patterns
 
 With source filtering specified on the request, `.Documents` will
