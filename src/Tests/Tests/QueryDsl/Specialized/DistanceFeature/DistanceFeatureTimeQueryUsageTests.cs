@@ -67,8 +67,8 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 		protected override QueryContainer QueryInitializer => new DistanceFeatureQuery()
 		{
 			Boost = 1.1,
-			Field = Infer.Field<Project>(f => f.StartedOn),
-			Origin = new GeoLocation(70, -70),
+			Field = Infer.Field<Project>(f => f.LeadDeveloper.Location),
+			Origin = new GeoCoordinate(70, -70),
 			Pivot = new Distance(100, DistanceUnit.Miles)
 		};
 
@@ -78,8 +78,8 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.DistanceFeature(rf => rf
 				.Boost(1.1)
-				.Field(f => f.StartedOn)
-				.Origin(new GeoLocation(70, -70))
+				.Field(f => f.LeadDeveloper.Location)
+				.Origin(new GeoCoordinate(70, -70))
 				.Pivot(new Distance(100, DistanceUnit.Miles))
 			);
 	}
