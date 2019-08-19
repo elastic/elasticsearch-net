@@ -44,6 +44,7 @@ Execution hints can be provided anywhere on the command line
 - gendocs : generate documentation
 - non-interactive : make targets that run in interactive mode by default to run unassisted.
 - docs:<B> : the branch name B to use when generating documentation
+- ref:<B> : the reference version B to use when generating documentation
 - seed:<N> : provide a seed to run the tests with.
 - random:<K><:B> : sets random K to bool B if if B is omitted will default to true
   K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
@@ -95,6 +96,7 @@ Execution hints can be provided anywhere on the command line
         Seed: string;
         RandomArguments: string list;
         DocsBranch: string;
+        ReferenceBranch: string;
         RemainingArguments: string list;
         MultiTarget: MultiTarget;
         Target: string;
@@ -123,7 +125,8 @@ Execution hints can be provided anywhere on the command line
                x <> "non-interactive" && 
                not (x.StartsWith("seed:")) && 
                not (x.StartsWith("random:")) && 
-               not (x.StartsWith("docs:")))
+               not (x.StartsWith("docs:")) &&
+               not (x.StartsWith("ref:")))
         let target = 
             match (filteredArgs |> List.tryHead) with
             | Some t -> t.Replace("-one", "")
@@ -145,6 +148,10 @@ Execution hints can be provided anywhere on the command line
             DocsBranch = 
                 match args |> List.tryFind (fun x -> x.StartsWith("docs:")) with
                 | Some t -> t.Replace("docs:", "")
+                | _ -> ""
+            ReferenceBranch = 
+                match args |> List.tryFind (fun x -> x.StartsWith("ref:")) with
+                | Some t -> t.Replace("ref:", "")
                 | _ -> ""
             RemainingArguments = filteredArgs
             MultiTarget = 

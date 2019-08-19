@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CommandLine;
 
 namespace DocGenerator
 {
@@ -38,7 +39,7 @@ namespace DocGenerator
 										 .Last().Value
 										 .Split(".")
 										 .Take(2));
-			Console.WriteLine("Using global.json version: " + globalJsonVersion);
+
 			DocVersion = globalJsonVersion;
 
 			var process = new Process
@@ -88,22 +89,41 @@ namespace DocGenerator
 
 		private static int Main(string[] args)
 		{
-			try
-			{
-				if (args.Length > 0)
-					BranchName = args[0];
+			return Parser.Default.ParseArguments<DocGeneratorOptions>(args)
+				.MapResult(
+					opts =>
+					{
+						try
+						{
+							if (!string.IsNullOrEmpty(opts.BranchName))
+								BranchName = opts.BranchName;
 
-				Console.WriteLine($"Using branch name {BranchName} in documentation");
+							if (!string.IsNullOrEmpty(opts.DocVersion))
+								DocVersion = opts.DocVersion;
 
-				LitUp.GoAsync(args).Wait();
-				return 0;
-			}
-			catch (AggregateException ae)
-			{
-				var ex = ae.InnerException ?? ae;
-				Console.WriteLine(ex.Message);
-				return 1;
-			}
+							Console.WriteLine($"Using branch name {BranchName} in documentation");
+							Console.WriteLine($"Using doc reference version {DocVersion} in documentation");
+
+							LitUp.GoAsync(args).Wait();
+							return 0;
+						}
+						catch (AggregateException ae)
+						{
+							var ex = ae.InnerException ?? ae;
+							Console.WriteLine(ex.Message);
+							return 1;
+						}
+					},
+					errs => 1);
 		}
+	}
+
+	public class DocGeneratorOptions
+	{
+		[Option('b', "branch", Required = false, HelpText = "The version that appears in generated from source link")]
+		public string BranchName { get; set; }
+
+		[Option('d', "docs", Required = false, HelpText = "The version that links to the Elasticsearch reference documentation")]
+		public string DocVersion { get; set; }
 	}
 }

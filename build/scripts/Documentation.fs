@@ -5,15 +5,27 @@ open System.IO
 open Paths
 open Projects
 open Commandline
+open Fake.Core
 
 module Documentation = 
 
     let Generate args = 
         let docGenerator = PrivateProject(DocGenerator)
         let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_1
-        let generator = sprintf "%s.dll" docGenerator.Name 
+        let generator = sprintf "%s.dll" docGenerator.Name
         
-        Tooling.DotNet.ExecIn path [generator; args.DocsBranch] |> ignore
+        let (|NotNullOrEmpty|_|) (candidate:string) =
+            if String.isNotNullOrEmpty candidate then Some candidate
+            else None
+        
+        let dotnetArgs =     
+            match (args.DocsBranch, args.ReferenceBranch) with
+            | (NotNullOrEmpty b, NotNullOrEmpty d) -> [ generator; "-b"; b; "-d"; d ];
+            | (NotNullOrEmpty b, _) -> [ generator; "-b"; b ];
+            | (_, NotNullOrEmpty d) -> [ generator; "-d"; d ];
+            | (_, _) -> [ generator ]
+        
+        Tooling.DotNet.ExecIn path dotnetArgs |> ignore
 
     // TODO: hook documentation validation into the process
     let Validate() = 
