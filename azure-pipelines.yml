@@ -30,6 +30,10 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
+      es682:
+        esVersion: '6.8.2'
+      es672:
+        esVersion: '6.7.2'
       es662:
         esVersion: '6.6.2'
       es654:
@@ -57,24 +61,28 @@ jobs:
 - job: LinuxIntegrationTests
   dependsOn: LinuxUnitTests
   pool:
-      vmImage: 'ubuntu-16.04'
+    vmImage: 'ubuntu-16.04'
   strategy:
-      maxParallel: 5
-      matrix:
-        es662:
-          esVersion: '6.6.2'
-        es654:
-          esVersion: '6.5.4'
-        es642:
-          esVersion: '6.4.2'
-        es632:
-          esVersion: '6.3.2'
-        es624:
-          esVersion: '6.2.4'
-        es614:
-          esVersion: '6.1.4'
-        es601:
-          esVersion: '6.0.1'
+    maxParallel: 5
+    matrix:
+      es682:
+        esVersion: '6.8.2'
+      es672:
+        esVersion: '6.7.2'
+      es662:
+        esVersion: '6.6.2'
+      es654:
+        esVersion: '6.5.4'
+      es642:
+        esVersion: '6.4.2'
+      es632:
+        esVersion: '6.3.2'
+      es624:
+        esVersion: '6.2.4'
+      es614:
+        esVersion: '6.1.4'
+      es601:
+        esVersion: '6.0.1'
   steps:
       - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
         displayName: '$(esVersion) linux integration tests'
