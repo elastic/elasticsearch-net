@@ -54,7 +54,8 @@ module Main =
 
         conditional parsed.NeedsFullBuild "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
 
-        conditional (not isMono) "internalize-dependencies" <| fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
+        conditional (not isMono && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
+            fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
         conditional (not parsed.SkipDocs) "documentation" <| fun _ -> Documentation.Generate parsed
 
