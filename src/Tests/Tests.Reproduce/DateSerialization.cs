@@ -10,7 +10,8 @@ namespace Tests.Reproduce
 {
 	public class DateSerialization {
 		[U]
-		public void ShouldRoundtripDateTimeAndDateTimeOffsetWithSameKindAndOffset() {
+		public void ShouldRoundtripDateTimeAndDateTimeOffsetWithSameKindAndOffset()
+		{
 			var dates = new Dates {
 				DateTimeUtcKind = new DateTime(2016, 1, 1, 1, 1, 1, DateTimeKind.Utc),
 				DateTimeOffset = new DateTimeOffset(1999, 1, 1, 1, 1, 1, 1, TimeSpan.FromHours(5)),
