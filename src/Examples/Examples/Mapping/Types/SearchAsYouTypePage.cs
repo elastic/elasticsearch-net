@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 
@@ -41,14 +42,20 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line89()
 		{
 			// tag::9bd25962f177e86dbc5a8030a420cc31[]
-			var response0 = new SearchResponse<object>();
+			var query = client.Search<object>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.MultiMatch(mm => mm
+						.Query("brown f")
+						.Type(TextQueryType.BoolPrefix)
+						.Fields(f => f.Field("my_field").Field("my_field._2gram").Field("my_field._3gram")))));
 			// end::9bd25962f177e86dbc5a8030a420cc31[]
 
-			response0.MatchesExample(@"GET my_index/_search
+			query.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""multi_match"": {
@@ -64,14 +71,19 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U(Skip = "Is doc correct here?")]
 		public void Line151()
 		{
 			// tag::0ced86822f8c0a479af5e1fe28dfc2ec[]
-			var response0 = new SearchResponse<object>();
+			var query = client.Search<Dictionary<string, string>>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.MatchPhrasePrefix(pp => pp
+						.Field(doc => doc["my_field"])
+						.Query("brown f"))));
 			// end::0ced86822f8c0a479af5e1fe28dfc2ec[]
 
-			response0.MatchesExample(@"GET my_index/_search
+			query.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""match_phrase_prefix"": {
