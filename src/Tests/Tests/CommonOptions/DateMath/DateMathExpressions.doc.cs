@@ -232,5 +232,21 @@ namespace Tests.CommonOptions.DateMath
 			(twelveMonths > fiftyTwoWeeks).Should().BeTrue();
 			(oneYear > fiftyTwoWeeks).Should().BeTrue();
 		}
+		[U]
+		public void DifferentLocales()
+		{
+			using (LocaleUtil.UseLocale("en-US"))
+			{
+				Expect("now+18M").WhenSerializing(Nest.DateMath.Now.Add("1.5y"));
+			}
+			using (LocaleUtil.UseLocale("sv-SE"))
+			{
+				Expect("now+18M").WhenSerializing(Nest.DateMath.Now.Add("1.5y"));
+			}
+			using (LocaleUtil.UseLocale("de-DE"))
+			{
+				Expect("now+18M").WhenSerializing(Nest.DateMath.Now.Add("1.5y"));
+			}
+		}
 	}
 }

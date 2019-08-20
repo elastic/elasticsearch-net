@@ -1,4 +1,5 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -101,5 +102,36 @@ namespace Tests.CommonOptions.DistanceUnit
 			*/
 			Expect("45.5nmi").WhenSerializing(new Distance(45.5, Nest.DistanceUnit.NauticalMiles));
 		}
+		[U]
+		public void DifferentLocales()
+		{
+			const string distanceString = "2.5m";
+			Distance distance = distanceString;
+			const string longDistanceString = "2000m";
+			Distance longDistance = longDistanceString;
+
+			using (LocaleUtil.UseLocale("en-US"))
+			{
+				Expect("2.5m")
+					.WhenSerializing(distance);
+				Expect("2000m")
+					.WhenSerializing(longDistance);
+			}
+			using (LocaleUtil.UseLocale("sv-SE"))
+			{
+				Expect("2.5m")
+					.WhenSerializing(distance);
+				Expect("2000m")
+					.WhenSerializing(longDistance);
+			}
+			using (LocaleUtil.UseLocale("de-DE"))
+			{
+				Expect("2.5m")
+					.WhenSerializing(distance);
+				Expect("2000m")
+					.WhenSerializing(longDistance);
+			}
+		}
+
 	}
 }
