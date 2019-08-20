@@ -8,10 +8,40 @@ using Nest;
 
 namespace Tests.Reproduce
 {
-	public class DateSerialization
-	{
+	public class DateSerialization {
 		[U]
-		public void ShouldRoundtripDateTimeAndDateTimeOffsetWithSameKindAndOffset()
+		public void ShouldRoundtripDateTimeAndDateTimeOffsetWithSameKindAndOffset() {
+			var dates = new Dates {
+				DateTimeUtcKind = new DateTime(2016, 1, 1, 1, 1, 1, DateTimeKind.Utc),
+				DateTimeOffset = new DateTimeOffset(1999, 1, 1, 1, 1, 1, 1, TimeSpan.FromHours(5)),
+				DateTimeOffsetUtc = new DateTimeOffset(1999, 1, 1, 1, 1, 1, 1, TimeSpan.Zero)
+			};
+
+			var client = new ElasticClient();
+			var serializedDates = client.SourceSerializer.SerializeToString(dates, client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None);
+
+			serializedDates.Should()
+				.Contain("2016-01-01T01:01:01Z")
+				.And.Contain("1999-01-01T01:01:01.0010000+05:00")
+				.And.Contain("1999-01-01T01:01:01.0010000+00:00");
+
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(serializedDates))) {
+				var deserializedDates = client.RequestResponseSerializer.Deserialize<Dates>(stream);
+
+				deserializedDates.DateTimeUtcKind.Should().Be(dates.DateTimeUtcKind);
+				deserializedDates.DateTimeUtcKind.Kind.Should().Be(dates.DateTimeUtcKind.Kind);
+
+				deserializedDates.DateTimeOffset.Should().Be(dates.DateTimeOffset);
+				deserializedDates.DateTimeOffset.Offset.Should().Be(dates.DateTimeOffset.Offset);
+				deserializedDates.DateTimeOffset.Date.Kind.Should().Be(dates.DateTimeOffset.Date.Kind);
+
+				deserializedDates.DateTimeOffsetUtc.Should().Be(dates.DateTimeOffsetUtc);
+				deserializedDates.DateTimeOffsetUtc.Offset.Should().Be(dates.DateTimeOffsetUtc.Offset);
+				deserializedDates.DateTimeOffsetUtc.Date.Kind.Should().Be(dates.DateTimeOffsetUtc.Date.Kind);
+			}
+		}
+		[U]
+		public void ShouldRoundtripDateTimeAndDateTimeOffsetWithSameKindAndOffsetNewtonsoft()
 		{
 			var dates = new Dates
 			{
@@ -20,7 +50,8 @@ namespace Tests.Reproduce
 				DateTimeOffsetUtc = new DateTimeOffset(1999, 1, 1, 1, 1, 1, 1, TimeSpan.Zero)
 			};
 
-			var client = new ElasticClient();
+			var sett = new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), Nest.JsonNetSerializer.JsonNetSerializer.Default);
+			var client = new ElasticClient(sett);
 			var serializedDates = client.SourceSerializer.SerializeToString(dates, client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None);
 
 			serializedDates.Should()
