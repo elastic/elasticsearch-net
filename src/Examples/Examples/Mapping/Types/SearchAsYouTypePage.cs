@@ -5,14 +5,18 @@ namespace Examples.Mapping.Types
 {
 	public class SearchAsYouTypePage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line18()
 		{
 			// tag::6f31f9cfe0dd741ccad4af62ba8f815e[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.Properties(p => p.SearchAsYouType(t => t.Name("my_field")))
+				)
+			);
 			// end::6f31f9cfe0dd741ccad4af62ba8f815e[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
