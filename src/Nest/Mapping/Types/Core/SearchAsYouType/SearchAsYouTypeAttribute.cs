@@ -8,7 +8,7 @@ namespace Nest
 
 		public int MaxShingleSize
 		{
-			get => Self.MaxShingleSize.GetValueOrDefault(3);
+			get => Self.MaxShingleSize.GetValueOrDefault();
 			set => Self.MaxShingleSize = value;
 		}
 
