@@ -8,7 +8,8 @@ using Nest;
 
 namespace Tests.Reproduce
 {
-	public class DateSerialization {
+	public class DateSerialization
+	{
 		[U]
 		public void ShouldRoundtripDateTimeAndDateTimeOffsetWithSameKindAndOffset()
 		{
