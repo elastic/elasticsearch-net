@@ -32,6 +32,7 @@ module ShadowDependencies =
             projects 
             |> Seq.filter (fun p -> p.Name = project.Name || not <| (DotNetProject.AllPublishable |> Seq.contains p)) 
             |> Seq.map fullOutput
+            
         match project.NeedsMerge with 
         | true -> Tooling.ILRepack.Exec (ilMergeArgs |> List.append (mergeDlls |> Seq.toList)) |> ignore
         | _ -> Tooling.ILRepack.Exec (ilMergeArgs |> List.append [mergeDlls |> Seq.head]) |> ignore
@@ -43,6 +44,4 @@ module ShadowDependencies =
         for f in fw do
             for p in projects do
                 if p.VersionedMergeDependencies <> [] then Rewrite (Some currentMajor) f p.VersionedMergeDependencies
-                if p.MergeDependencies <> [] then Rewrite None f p.MergeDependencies
-    
-         
+     
