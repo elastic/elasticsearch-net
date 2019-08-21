@@ -7,7 +7,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[JsonFormatter(typeof(DistanceFormatter))]
-	public class Distance : IFormattable
+	public class Distance
 	{
 		private static readonly Regex DistanceUnitRegex =
 			new Regex(@"^(?<precision>\d+(?:\.\d+)?)(?<unit>\D+)?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
@@ -66,10 +66,6 @@ namespace Nest
 
 		public static implicit operator Distance(string distanceUnit) => new Distance(distanceUnit);
 
-		public override string ToString() => Precision.ToString() + Unit.GetStringValue();
-
-		public string ToString(IFormatProvider formatProvider) => Precision.ToString(formatProvider) + Unit.GetStringValue();
-
-		public string ToString(string format, IFormatProvider formatProvider) => Precision.ToString(format, formatProvider) + Unit.GetStringValue();
+		public override string ToString() => Precision.ToString(CultureInfo.InvariantCulture) + Unit.GetStringValue();
 	}
 }

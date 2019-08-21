@@ -26,7 +26,7 @@ namespace Nest
 				return;
 			}
 
-			writer.WriteString(value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+			writer.WriteString(value.ToString());
 		}
 	}
 }
