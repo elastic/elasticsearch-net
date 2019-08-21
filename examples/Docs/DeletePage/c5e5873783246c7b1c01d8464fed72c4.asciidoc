@@ -1,4 +1,4 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/DeletePage.cs[tag=c5e5873783246c7b1c01d8464fed72c4,indent=0]
+var deleteResponse = client.Delete<Tweet>(1, d => d.Index("twitter"));
 ----

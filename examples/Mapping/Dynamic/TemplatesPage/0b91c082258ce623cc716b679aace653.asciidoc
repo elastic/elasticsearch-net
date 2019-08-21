@@ -1,4 +1,31 @@
 [source, csharp]
 ----
-include::../../../../src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs[tag=0b91c082258ce623cc716b679aace653,indent=0]
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .DynamicTemplates(dt => dt
+            .DynamicTemplate("full_name", d => d
+                .PathMatch("name.*")
+                .PathUnmatch("*.middle")
+                .Mapping(mm => mm
+                    .Text(n => n
+                        .CopyTo(ct => ct.Field("full_name"))
+                    )
+                )
+            )
+        )
+    )
+);
+
+var indexResponse = client.Index<object>(
+    new
+    {
+        name = new
+        {
+            first = "John",
+            middle = "Winston",
+            last = "Lennon"
+        }
+    },
+    i => i.Index("my_index").Id(1)
+);
 ----

@@ -1,4 +1,15 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=60ee33f3acfdd0fe6f288ac77312c780,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .Fields(f => f
+                .Field("title")
+            )
+            .Query("this that thus")
+            .MinimumShouldMatch(2)
+        )
+    )
+);
 ----

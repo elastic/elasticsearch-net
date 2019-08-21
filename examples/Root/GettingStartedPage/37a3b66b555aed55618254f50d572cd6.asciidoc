@@ -1,4 +1,7 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=37a3b66b555aed55618254f50d572cd6,indent=0]
+var getResponse = client.Get<Customer>(1, g => g
+    .Index("customer")
+    .Pretty()
+);
 ----

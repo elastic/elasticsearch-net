@@ -1,4 +1,12 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=81f09836772b03f6e7e8e7986409d67e,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .DefaultField("content")
+            .Query("this AND that OR thus")
+        )
+    )
+);
 ----

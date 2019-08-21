@@ -1,4 +1,13 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/IndexPage.cs[tag=1f336ecc62480c1d56351cc2f82d0d08,indent=0]
+var indexResponse = client.Index(new Tweet
+{
+    Message = "elasticsearch now has versioning support, double cool!"
+},
+    i => i
+        .Index("twitter")
+        .Id(1)
+        .Version(2)
+        .VersionType(VersionType.External)
+);
 ----

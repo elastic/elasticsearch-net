@@ -1,4 +1,12 @@
 [source, csharp]
 ----
-include::../../../../src/Examples/Examples/Mapping/Dynamic/FieldMappingPage.cs[tag=4eae628c9aaa259f80711c6e9cc6fd25,indent=0]
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .DynamicDateFormats(new[] { "MM/dd/yyyy" })
+    )
+);
+
+var indexResponse = client.Index<object>(
+    new { create_date = "09/25/2015" },
+    i => i.Index("my_index").Id(1));
 ----

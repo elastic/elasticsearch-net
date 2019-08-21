@@ -1,4 +1,14 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=28aad2c5942bfb221c2bf1bbdc01658e,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .Fields(f => f
+                .Field("city.*")
+            )
+            .Query("this AND that OR thus")
+        )
+    )
+);
 ----

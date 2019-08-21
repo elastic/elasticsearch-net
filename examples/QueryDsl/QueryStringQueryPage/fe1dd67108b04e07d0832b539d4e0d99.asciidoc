@@ -1,4 +1,12 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=fe1dd67108b04e07d0832b539d4e0d99,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .DefaultField("content")
+            .Query("(new york city) OR (big apple)")
+        )
+    )
+);
 ----

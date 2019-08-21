@@ -1,4 +1,8 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=506844befdc5691d835771bcbb1c1a60,indent=0]
+var searchResponse = client.Search<Account>(s => s
+    .Index("bank")
+    .MatchAll()
+    .Sort(so => so.Ascending(f => f.AccountNumber))
+);
 ----

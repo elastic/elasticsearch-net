@@ -1,4 +1,10 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=38dfa309717488362d0f784e17ebd1b5,indent=0]
+var updateResponse = client.Update<Customer>(1, u => u
+    .Script(s => s
+        .Source("ctx._source.age += 5")
+    )
+    .Index("customer")
+    .Pretty()
+);
 ----

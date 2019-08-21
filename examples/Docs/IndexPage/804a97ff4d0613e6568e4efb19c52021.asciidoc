@@ -1,4 +1,20 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/IndexPage.cs[tag=804a97ff4d0613e6568e4efb19c52021,indent=0]
+var putSettingsResponse = client.Cluster.PutSettings(s => s
+    .Persistent(p => p
+        .Add("action.auto_create_index", "twitter,index10,-index1*,+ind*")
+    )
+);
+
+var putSettingsResponse2 = client.Cluster.PutSettings(s => s
+    .Persistent(p => p
+        .Add("action.auto_create_index", "false")
+    )
+);
+
+var putSettingsResponse3 = client.Cluster.PutSettings(s => s
+    .Persistent(p => p
+        .Add("action.auto_create_index", "true")
+    )
+);
 ----

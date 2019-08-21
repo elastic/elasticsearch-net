@@ -1,4 +1,12 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=cd247f267968aa0927bfdad56852f8f5,indent=0]
+var searchResponse = client.Search<Account>(s => s
+    .Index("bank")
+    .Query(q => q
+        .Match(m => m
+            .Field(f => f.Address)
+            .Query("mill lane")
+        )
+    )
+);
 ----

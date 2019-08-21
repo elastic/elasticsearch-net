@@ -1,4 +1,13 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=f32f0c19b42de3b87dd764fe4ca17e7c,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .DefaultField("title")
+            .Query("ny city")
+            .AutoGenerateSynonymsPhraseQuery(false)
+        )
+    )
+);
 ----

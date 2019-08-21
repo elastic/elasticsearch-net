@@ -1,4 +1,24 @@
 [source, csharp]
 ----
-include::../../../../src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs[tag=4f54b88e05c7a62901062e9e0ed13e5a,indent=0]
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .DynamicTemplates(dt => dt
+            .DynamicTemplate("longs_as_strings", d => d
+                .MatchMappingType("string")
+                .Match("long_*")
+                .Unmatch("*_text")
+                .Mapping(mm => mm
+                    .Number(n => n
+                        .Type(NumberType.Long)
+                    )
+                )
+            )
+        )
+    )
+);
+
+var indexResponse = client.Index<object>(
+    new { long_num = "5", long_text = "foo" },
+    i => i.Index("my_index").Id(1)
+);
 ----

@@ -1,4 +1,17 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=6f21a878fee3b43c5332b81aaddbeac7,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .Fields(f => f
+                .Field("title")
+                .Field("content")
+            )
+            .Query("this OR that OR thus")
+            .Type(TextQueryType.CrossFields)
+            .MinimumShouldMatch(2)
+        )
+    )
+);
 ----

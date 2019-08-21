@@ -1,4 +1,10 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=69a7be47f85138b10437113ab2f0d72d,indent=0]
+var getResponse = client.Get<Tweet>(2, g => g
+    .Index("twitter")
+    .Routing("user1")
+    .StoredFields(
+        f => f.Tags,
+        f => f.Counter)
+);
 ----

@@ -1,4 +1,16 @@
 [source, csharp]
 ----
-include::../../../../src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs[tag=be51ed37c8425d281a8153abe56b04cb,indent=0]
+var indexResponse = client.Index<object>(new
+{
+    name = new
+    {
+        first = "Paul",
+        last = "McCartney",
+        title = new
+        {
+            value = "Sir",
+            category = "order of chivalry"
+        }
+    }
+}, i => i.Index("my_index").Id(2));
 ----

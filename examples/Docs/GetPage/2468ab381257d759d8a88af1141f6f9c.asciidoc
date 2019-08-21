@@ -1,4 +1,4 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=2468ab381257d759d8a88af1141f6f9c,indent=0]
+var sourceExistsResponse = client.SourceExists<Tweet>(1, s => s.Index("twitter"));
 ----

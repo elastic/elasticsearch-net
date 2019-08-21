@@ -1,4 +1,20 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=645796e8047967ca4a7635a22a876f4c,indent=0]
+var searchResponse = client.Search<Account>(s => s
+    .Index("bank")
+    .Size(0)
+    .Aggregations(a => a
+        .Terms("group_by_state", ra => ra
+            .Field(f => f.State.Suffix("keyword"))
+            .Order(o => o
+                .Descending("average_balance")
+            )
+            .Aggregations(aa => aa
+                .Average("average_balance", av => av
+                    .Field(f => f.Balance)
+                )
+            )
+        )
+    )
+);
 ----

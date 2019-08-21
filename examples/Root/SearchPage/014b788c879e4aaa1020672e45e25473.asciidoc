@@ -1,4 +1,8 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/SearchPage.cs[tag=014b788c879e4aaa1020672e45e25473,indent=0]
+var putSettingsResponse = client.Cluster.PutSettings(c => c
+    .Transient(t => t
+        .Add("cluster.routing.use_adaptive_replica_selection", false)
+    )
+);
 ----

@@ -1,4 +1,14 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/IndexPage.cs[tag=d718b63cf1b6591a1d59a0cf4fd995eb,indent=0]
+var indexResponse = client.Index(new Tweet
+{
+    User = "kimchy",
+    PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+    Message = "trying out Elasticsearch"
+},
+    i => i
+        .Index("twitter")
+        .Id(1)
+        .OpType(OpType.Create)
+    );
 ----

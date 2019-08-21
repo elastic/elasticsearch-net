@@ -1,4 +1,8 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=5eabcdbf61bfcb484dc694f25c2bba36,indent=0]
+var indexResponse = client.Index(new Tweet
+{
+    Counter = 1,
+    Tags = new[] { "red" }
+}, i => i.Index("twitter").Id(1));
 ----

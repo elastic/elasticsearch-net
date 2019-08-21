@@ -1,4 +1,9 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=7d32a32357b5ea8819b72608fcc6fd07,indent=0]
+var bulkResponse = client.Bulk(b => b
+    .Index("customer")
+    .Index<Customer>(i => i.Document(new Customer { Name = "John Doe" }).Id("1"))
+    .Index<Customer>(i => i.Document(new Customer { Name = "Jane Doe" }).Id("2"))
+    .Pretty()
+);
 ----

@@ -1,4 +1,8 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=d222c6a6ec7a3beca6c97011b0874512,indent=0]
+var sourceFilteringResponse = client.Source<Tweet>(1, s => s
+    .Index("twitter")
+    .SourceIncludes("*.id")
+    .SourceExcludes("entities")
+);
 ----

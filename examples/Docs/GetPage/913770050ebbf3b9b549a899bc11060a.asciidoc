@@ -1,4 +1,18 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=913770050ebbf3b9b549a899bc11060a,indent=0]
+var createIndexResponse = client.Indices.Create("twitter", c => c
+    .Map<Tweet>(m => m
+        .Properties(p => p
+            .Number(n => n
+                .Name(f => f.Counter)
+                .Type(NumberType.Integer)
+                .Store(false)
+            )
+            .Keyword(k => k
+                .Name(f => f.Tags)
+                .Store(true)
+            )
+        )
+    )
+);
 ----

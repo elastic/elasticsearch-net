@@ -1,4 +1,12 @@
 [source, csharp]
 ----
-include::../../../../src/Examples/Examples/Mapping/Dynamic/FieldMappingPage.cs[tag=fa3cd4ffaec8273656a328ae29f32c65,indent=0]
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .NumericDetection(true)
+    )
+);
+
+var indexResponse = client.Index<object>(
+    new { my_float = "1.0", my_integer = "1" },
+    i => i.Index("my_index").Id(1));
 ----

@@ -1,4 +1,11 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=37c778346eb67042df5e8edf2485e40a,indent=0]
+var indexResponse = client.Index(new Customer
+{
+    Name = "Jane Doe"
+}, i => i
+.Index("customer")
+.Id(2)
+.Pretty()
+);
 ----

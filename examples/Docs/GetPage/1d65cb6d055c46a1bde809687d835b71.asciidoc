@@ -1,4 +1,7 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=1d65cb6d055c46a1bde809687d835b71,indent=0]
+var getResponse = client.Get<Tweet>(2, g => g
+    .Index("twitter")
+    .Routing("user1")
+);
 ----

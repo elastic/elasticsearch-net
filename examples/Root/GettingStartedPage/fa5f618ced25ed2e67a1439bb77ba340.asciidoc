@@ -1,4 +1,13 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=fa5f618ced25ed2e67a1439bb77ba340,indent=0]
+var createIndexResponse = client.Indices.Create("customer");
+
+var indexResponse = client.Index(new Customer { Name = "John Doe" }, i => i
+    .Index("customer")
+    .Id(1)
+);
+
+var getResponse = client.Get<Customer>(1, g => g.Index("customer"));
+
+var deleteIndexResponse = client.Indices.Delete("customer");
 ----

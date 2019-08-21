@@ -1,4 +1,4 @@
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=db20adb70a8e8d0709d15ba0daf18d23,indent=0]
+var catResponse = client.Cat.Nodes(h => h.Verbose());
 ----
