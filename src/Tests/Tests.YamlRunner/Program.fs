@@ -73,14 +73,15 @@ let h = async {
         folders
         |> Seq.map(fun folder -> folderFiles branchOrTag folder)
         |> Seq.indexed
-        |> Seq.groupBy (fun (i, _) -> i % folders.Length / 4)
+        |> Seq.groupBy (fun (i, _) -> i % folders.Length / 2)
         |> Seq.map (fun (_, indexed) -> indexed |> Seq.map (fun (_, folder) -> folder))
         |> Seq.toList
+        
         
     for group in folderDownloads do
         pbar.WriteLine( sprintf "length %i" (group |> Seq.length) )
         let tasks = group |> Seq.map (fun files -> f files pbar)
-        let! token = Async.StartChild <| Async.Parallel tasks
+        let! token = Async.StartChild <| Async.Parallel (tasks , 4)
         let! result = token
         ignore()
         
