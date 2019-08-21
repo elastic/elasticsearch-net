@@ -1,4 +1,6 @@
-﻿open System
+﻿module Tests.YamlRunner.Main
+
+open System
 open System.Threading
 open System.Threading.Tasks
 open FSharp.Data
@@ -18,29 +20,14 @@ let subBarOptions =
        ForegroundColorDone = Nullable ConsoleColor.DarkGreen,
        ProgressCharacter = '─'
     )
+    
 let branchOrTag = "master"
-let folders branch = 
-    let url = sprintf "https://github.com/elastic/elasticsearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test" branch
-    let doc = HtmlDocument.Load(url)
-    doc.CssSelect("td.content a.js-navigation-open")
-        |> List.map(fun a -> a.InnerText())
-        |> List.filter(fun f -> not <| f.EndsWith(".asciidoc"))
         
+let randomTime = Random()
 let downloadYamlFile url = async {
     //let! yaml = Http.AsyncRequestString url
-    let! x = Async.Sleep 500
+    let! x = Async.Sleep <| randomTime.Next(200, 900)
     return ""
-}
-let folderFiles branch folder = async { 
-    let url = sprintf "https://github.com/elastic/elasticsearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s" branch folder
-    let! doc = HtmlDocument.AsyncLoad(url)
-    let url file = sprintf "https://raw.githubusercontent.com/elastic/elasticsearch/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s/%s" branch folder file
-    let yamlFiles =
-        doc.CssSelect("td.content a.js-navigation-open")
-        |> List.map(fun a -> a.InnerText())
-        |> List.filter(fun f -> f.EndsWith(".yml"))
-        |> List.map url
-    return (folder, yamlFiles)
 }
 let foreach<'a> maxDegreeOfParallelism (asyncs:seq<Async<'a>>) = async {
     let tasks = new System.Collections.Generic.List<Task<'a>>(4)
@@ -82,35 +69,19 @@ let f (yamlFiles:Async<string * list<string>>) (progress: IProgressBar) = async 
             filesProgress.Tick(message)
             return result
         })
-//        |> Seq.indexed
-//        |> Seq.groupBy (fun (i, _) -> i % yamlFiles.Length / 4)
-//        |> Seq.map (fun (_, indexed) -> indexed |> Seq.map (fun (_, url) -> url))
-        
-        
-    let! completed = foreach 1 actions
+    let! completed = foreach 4 actions
     progress.Tick()
 }
 
 let h = async {
-    let folders = folders branchOrTag
     
+    let folders = YamlTestsDownloader.ListFolders Locations.OpenSource branchOrTag
     
     use pbar = new ProgressBar(folders.Length, "Listing folders", barOptions)
     let folderDownloads =
         folders
         |> Seq.map(fun folder -> f (folderFiles branchOrTag folder) pbar)
-//        |> Seq.indexed
-//        |> Seq.groupBy (fun (i, _) -> i % folders.Length / 2)
-//        |> Seq.map (fun (_, indexed) -> indexed |> Seq.map (fun (_, folder) -> folder))
-//        |> Seq.toList
-
     let! completed = foreach 4 folderDownloads
-        
-//    for group in folderDownloads do
-//        let tasks = group |> Seq.map (fun files -> f files pbar)
-//        let! token = Async.StartChild <| Async.Parallel (tasks , 4)
-//        let! result = token
-//        ignore()
         
     pbar.Dispose()
     

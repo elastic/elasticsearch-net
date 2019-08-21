@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Locations.fs" />
+    <Compile Include="YamlTestsDownloader.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
  
