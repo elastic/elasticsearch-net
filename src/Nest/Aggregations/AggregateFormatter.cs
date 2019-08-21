@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -328,7 +329,7 @@ namespace Nest
 
 					metric.Items.Add(new PercentileItem
 					{
-						Percentile = double.Parse(propertyName),
+						Percentile = double.Parse(propertyName, CultureInfo.InvariantCulture),
 						Value = reader.ReadNullableDouble()
 					});
 				}
