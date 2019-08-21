@@ -73,7 +73,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 			return interfaceProperty != null ? interfaceProperty.GetCustomAttribute<TAttribute>(inherit) : null;
 		}
 
-        public MetaType(Type type, Func<string, string> nameMutator, Func<MemberInfo, IJsonProperty> propertyMapper, bool allowPrivate)
+        public MetaType(Type type, Func<string, string> nameMutator, Func<MemberInfo, JsonProperty> propertyMapper, bool allowPrivate)
         {
             var ti = type.GetTypeInfo();
             var isClass = ti.IsClass || ti.IsInterface || ti.IsAbstract;
@@ -131,6 +131,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 
 					var allowPrivateMember = allowPrivate;
 
+					object jsonFormatter = null;
+
 					if (propertyMapper != null)
 					{
 						var property = propertyMapper(item);
@@ -144,12 +146,15 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 
 							if (property.AllowPrivate.HasValue)
 								allowPrivateMember = property.AllowPrivate.Value;
+
+							if (property.JsonFormatter != null)
+								jsonFormatter = property.JsonFormatter;
 						}
 					}
 
 					var props = interfaceProps != null ? interfaceProps.ToArray() : null;
 
-                    var member = new MetaMember(item, name, props, allowPrivateMember || dm != null);
+                    var member = new MetaMember(item, name, props, jsonFormatter, allowPrivateMember || dm != null);
                     if (!member.IsReadable && !member.IsWritable) continue;
 
                     if (!stringMembers.ContainsKey(member.Name))
@@ -166,6 +171,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 					if (dataContractPresent && dm == null) continue;
                     var name = (dm != null && dm.Name != null) ? dm.Name : nameMutator(item.Name);
 					var allowPrivateMember = allowPrivate;
+					object jsonFormatter = null;
 					if (propertyMapper != null)
 					{
 						var field = propertyMapper(item);
@@ -179,10 +185,13 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 
 							if (field.AllowPrivate.HasValue)
 								allowPrivateMember = field.AllowPrivate.Value;
+
+							if (field.JsonFormatter != null)
+								jsonFormatter = field.JsonFormatter;
 						}
 					}
 
-                    var member = new MetaMember(item, name, allowPrivateMember || dm != null);
+                    var member = new MetaMember(item, name, jsonFormatter, allowPrivateMember || dm != null);
                     if (!member.IsReadable && !member.IsWritable) continue;
 
                     if (!stringMembers.ContainsKey(member.Name))

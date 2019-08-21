@@ -44,14 +44,13 @@ namespace Tests.CodeStandards.Serialization
 		[U]
 		public void CanSerializeEnumsWithMultipleMembersMappedToSameValue()
 		{
-			var document = new EnumDocument
+			var document = new EnumSameValuesDocument
 			{
 				Int = HttpStatusCode.Moved,
 				String = AnotherEnum.Value1
 			};
 
 			var client = new ElasticClient();
-
 			var json = client.RequestResponseSerializer.SerializeToString(document);
 
 			// "Value2" will be written for both "Value1" and "Value2" because the underlying integer value
@@ -62,15 +61,51 @@ namespace Tests.CodeStandards.Serialization
 			// is not overwritten i.e. "Value1" will be written for both "Value1" and "Value2"
 			json.Should().Be("{\"int\":301,\"string\":\"Value2\"}");
 
-			EnumDocument deserializedDocument;
+			EnumSameValuesDocument deserializedDocument;
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-				deserializedDocument = client.RequestResponseSerializer.Deserialize<EnumDocument>(stream);
+				deserializedDocument = client.RequestResponseSerializer.Deserialize<EnumSameValuesDocument>(stream);
 
 			deserializedDocument.Int.Should().Be(document.Int);
 			deserializedDocument.String.Should().Be(document.String);
 		}
 
-		private class EnumDocument
+		[U]
+		public void CanSerializeEnumPropertiesWithStringEnumAttribute()
+		{
+			var httpStatusCode = HttpStatusCode.OK;
+			var document = new StringEnumDocument
+			{
+				Int = httpStatusCode,
+				String = httpStatusCode,
+				NullableString = httpStatusCode
+			};
+
+			var client = new ElasticClient();
+			var json = client.RequestResponseSerializer.SerializeToString(document);
+
+			json.Should().Be("{\"int\":200,\"string\":\"OK\",\"nullableString\":\"OK\"}");
+
+			StringEnumDocument deserializedDocument;
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+				deserializedDocument = client.RequestResponseSerializer.Deserialize<StringEnumDocument>(stream);
+
+			deserializedDocument.Int.Should().Be(document.Int);
+			deserializedDocument.String.Should().Be(document.String);
+			deserializedDocument.NullableString.Should().Be(document.NullableString);
+		}
+
+		private class StringEnumDocument
+		{
+			public HttpStatusCode Int { get;set;}
+
+			[StringEnum]
+			public HttpStatusCode String { get;set;}
+
+			[StringEnum]
+			public HttpStatusCode? NullableString { get;set;}
+		}
+
+		private class EnumSameValuesDocument
 	    {
 			public HttpStatusCode Int { get;set;}
 
