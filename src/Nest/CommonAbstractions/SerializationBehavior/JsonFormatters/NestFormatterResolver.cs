@@ -82,7 +82,7 @@ namespace Nest
 					return _finalFormatter.GetFormatter<T>();
 				});
 
-			private IJsonProperty GetMapping(MemberInfo member)
+			private JsonProperty GetMapping(MemberInfo member)
 			{
 				// TODO: Skip calling this method for NEST and Elasticsearch.Net types, at the type level
 				if (!_settings.PropertyMappings.TryGetValue(member, out var propertyMapping))
@@ -101,7 +101,42 @@ namespace Nest
 				if (propertyMapping != null || serializerMapping != null)
 					property.AllowPrivate = true;
 
+				if (member.GetCustomAttribute<StringEnumAttribute>() != null)
+					CreateEnumFormatterForProperty(member, property);
+
 				return property;
+			}
+
+			private static void CreateEnumFormatterForType(Type type, JsonProperty property)
+			{
+				if (type.IsEnum)
+					property.JsonFormatter = typeof(EnumFormatter<>).MakeGenericType(type).CreateInstance(true);
+				else if (type.GetTypeInfo().IsNullable())
+				{
+					var underlyingType = Nullable.GetUnderlyingType(type);
+					if (underlyingType.IsEnum)
+					{
+						var innerFormatter = typeof(EnumFormatter<>).MakeGenericType(underlyingType).CreateInstance(true);
+						property.JsonFormatter = typeof(StaticNullableFormatter<>).MakeGenericType(underlyingType).CreateInstance(innerFormatter);
+					}
+				}
+			}
+
+			private static void CreateEnumFormatterForProperty(MemberInfo member, JsonProperty property)
+			{
+				switch (member)
+				{
+					case PropertyInfo propertyInfo:
+					{
+						CreateEnumFormatterForType(propertyInfo.PropertyType, property);
+						break;
+					}
+					case FieldInfo fieldInfo:
+					{
+						CreateEnumFormatterForType(fieldInfo.FieldType, property);
+						break;
+					}
+				}
 			}
 		}
 	}
