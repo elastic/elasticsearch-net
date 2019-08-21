@@ -66,7 +66,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		/// <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:SnakeCase</summary>
 		public static readonly IJsonFormatterResolver AllowPrivateExcludeNullSnakeCase = DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateSnakeCase.Instance;
 
-		public static IJsonFormatterResolver Create(Func<MemberInfo, IJsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull)
+		public static IJsonFormatterResolver Create(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull)
 		{
 			return new CustomDynamicObjectResolver(propertyMapper, mutator, excludeNull);
 		}
@@ -79,7 +79,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			, ISave
 #endif
 	{
-		private readonly Func<MemberInfo, IJsonProperty> _propertyMapper;
+		private readonly Func<MemberInfo, JsonProperty> _propertyMapper;
 		private readonly Lazy<Func<string, string>> _mutator;
 		private readonly bool _excludeNull;
 		private readonly ThreadsafeTypeKeyHashTable<object> _formatters = new ThreadsafeTypeKeyHashTable<object>();
@@ -94,7 +94,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			assembly = new DynamicAssembly(ModuleName);
 		}
 
-		public CustomDynamicObjectResolver(Func<MemberInfo, IJsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull)
+		public CustomDynamicObjectResolver(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull)
 		{
 			_propertyMapper = propertyMapper;
 			_mutator = mutator;
@@ -588,7 +588,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			{typeof(string)},
 		};
 
-		public static object BuildFormatterToAssembly<T>(DynamicAssembly assembly, IJsonFormatterResolver selfResolver, Func<string, string> mutator, Func<MemberInfo, IJsonProperty> propertyMapper, bool excludeNull)
+		public static object BuildFormatterToAssembly<T>(DynamicAssembly assembly, IJsonFormatterResolver selfResolver, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
 		{
 			var ti = typeof(T).GetTypeInfo();
 
@@ -620,7 +620,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			return (IJsonFormatter<T>)Activator.CreateInstance(formatterTypeInfo.AsType());
 		}
 
-		public static object BuildFormatterToDynamicMethod<T>(IJsonFormatterResolver selfResolver, Func<string,string> mutator, Func<MemberInfo, IJsonProperty> propertyMapper, bool excludeNull, bool allowPrivate)
+		public static object BuildFormatterToDynamicMethod<T>(IJsonFormatterResolver selfResolver, Func<string,string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate)
 		{
 			var ti = typeof(T).GetTypeInfo();
 
@@ -645,7 +645,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			}
 		}
 
-		static TypeInfo BuildType(DynamicAssembly assembly, Type type, Func<string, string> mutator, Func<MemberInfo, IJsonProperty> propertyMapper, bool excludeNull)
+		static TypeInfo BuildType(DynamicAssembly assembly, Type type, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
 		{
 			if (ignoreTypes.Contains(type)) return null;
 
@@ -708,7 +708,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			return typeBuilder.CreateTypeInfo();
 		}
 
-		public static object BuildAnonymousFormatter(Type type, Func<string, string> nameMutator, Func<MemberInfo, IJsonProperty> propertyMapper, bool excludeNull, bool allowPrivate, bool isException)
+		public static object BuildAnonymousFormatter(Type type, Func<string, string> nameMutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate, bool isException)
 		{
 			if (ignoreTypes.Contains(type)) return false;
 
@@ -778,6 +778,10 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					var formatter = Activator.CreateInstance(formatterType, attr.Attribute.Arguments);
 					serializeCustomFormatters.Add(formatter);
 				}
+				else if (item.JsonFormatter != null)
+				{
+					serializeCustomFormatters.Add(item.JsonFormatter);
+				}
 				else
 				{
 					serializeCustomFormatters.Add(null);
@@ -799,6 +803,10 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 					var formatter = Activator.CreateInstance(formatterType, attr.Attribute.Arguments);
 					deserializeCustomFormatters.Add(formatter);
+				}
+				else if (item.JsonFormatter != null)
+				{
+					deserializeCustomFormatters.Add(item.JsonFormatter);
 				}
 				else
 				{

@@ -22,6 +22,8 @@
 // SOFTWARE.
 #endregion
 
+using System;
+
 namespace Elasticsearch.Net.Utf8Json
 {
 	internal interface IJsonProperty
@@ -37,20 +39,20 @@ namespace Elasticsearch.Net.Utf8Json
 
 	internal class JsonProperty : IJsonProperty
 	{
-		public JsonProperty(string name)
-		{
-			Name = name;
-		}
+		public JsonProperty(string name) => Name = name;
 
 		public string Name { get; set; }
 
-		public int Order
-		{
-			get { return 0; }
-		}
+		public int Order => 0;
 
 		public bool Ignore { get; set; }
 
 		public bool? AllowPrivate { get; set; }
+
+		/// <summary>
+		/// An instance of an <see cref="IJsonFormatter"/> that will be used
+		/// to serialize/deserialize the property
+		/// </summary>
+		public object JsonFormatter { get; set; }
 	}
 }
