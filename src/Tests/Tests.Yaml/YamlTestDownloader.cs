@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using CsQuery;
 using ShellProgressBar;
 
 namespace Tests.Yaml
 {
-	public class RestSpecDownloader
+	public class YamlTestDownloader
 	{
 		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
 
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
-			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
-			{ "XPack", "https://github.com/elastic/elasticsearch/tree/{version}/x-pack/plugin/src/test/resources/rest-api-spec/api"}
+			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/test" },
+			{ "XPack", "https://github.com/elastic/elasticsearch/tree/{version}/x-pack/plugin/src/test/resources/rest-api-spec/test"}
 		};
 
 		private static readonly ProgressBarOptions SubProgressBarOptions = new ProgressBarOptions
@@ -25,7 +26,7 @@ namespace Tests.Yaml
 			BackgroundColor = ConsoleColor.DarkGray,
 		};
 
-		private RestSpecDownloader(string branch)
+		private YamlTestDownloader(string branch)
 		{
 			var specifications =
 				(from kv in OnlineSpecifications
@@ -42,10 +43,10 @@ namespace Tests.Yaml
 				}
 			}
 
-			File.WriteAllText(GeneratorLocations.LastDownloadedVersionFile, branch);
+			//File.WriteAllText(GeneratorLocations.LastDownloadedVersionFile, branch);
 		}
 
-		public static RestSpecDownloader Download(string branch) => new RestSpecDownloader(branch);
+		public static YamlTestDownloader Download(string branch) => new YamlTestDownloader(branch);
 
 		private void DownloadJsonDefinitions(Specification spec, IProgressBar pbar)
 		{
@@ -58,8 +59,8 @@ namespace Tests.Yaml
 
 		private void FindJsonFilesOnListing(Specification spec, string html, IProgressBar pbar)
 		{
-			if (!Directory.Exists(GeneratorLocations.RestSpecificationFolder))
-				Directory.CreateDirectory(GeneratorLocations.RestSpecificationFolder);
+			//if (!Directory.Exists(GeneratorLocations.RestSpecificationFolder))
+				//Directory.CreateDirectory(GeneratorLocations.RestSpecificationFolder);
 
 			var dom = CQ.Create(html);
 
@@ -88,9 +89,9 @@ namespace Tests.Yaml
 
 		private void WriteToEndpointsFolder(string folder, string filename, string contents)
 		{
-			var f = Path.Combine(GeneratorLocations.RestSpecificationFolder, folder);
-			if (!Directory.Exists(f)) Directory.CreateDirectory(f);
-			File.WriteAllText(f + "\\" + filename, contents);
+			//var f = Path.Combine(GeneratorLocations.RestSpecificationFolder, folder);
+			//if (!Directory.Exists(f)) Directory.CreateDirectory(f);
+			//File.WriteAllText(f + "\\" + filename, contents);
 		}
 
 		private class Specification

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <PackageReference Include="FSharp.Data" Version="3.1.1" />
+    <PackageReference Include="ShellProgressBar" Version="4.3.0" />
+    <PackageReference Update="FSharp.Core" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

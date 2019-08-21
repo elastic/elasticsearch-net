@@ -12,6 +12,7 @@
     
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
-    <PackageReference Include="ShellProgressBar" Version="4.2.0" />
+    <PackageReference Include="ShellProgressBar" Version="4.3.0" />
+    <PackageReference Include="CsQuery.Core" Version="2.0.1" />
   </ItemGroup>
 </Project>
