@@ -72,9 +72,14 @@ namespace ExamplesGenerator
 							}
 						}
 
+						// create a new block with collected statements. We need a SyntaxNode to work with
 						var body = Block(statements);
 
-						yield return new ImplementedExample(path, hash, body);
+						var method = methodDeclaration.Identifier.Text;
+						var startLineNumber = methodDeclaration.SyntaxTree.GetLineSpan(methodDeclaration.Span).StartLinePosition.Line + 1;
+						var endLineNumber = methodDeclaration.SyntaxTree.GetLineSpan(methodDeclaration.Span).EndLinePosition.Line + 1;
+
+						yield return new ImplementedExample(method, startLineNumber, endLineNumber, path, hash, body);
 					}
 				}
 			}

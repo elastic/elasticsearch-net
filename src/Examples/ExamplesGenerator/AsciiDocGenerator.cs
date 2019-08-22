@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Formatting;
@@ -26,7 +28,7 @@ namespace ExamplesGenerator
 				.WithChangedOption(TabSize, CSharp, 4);
 		}
 
-		public static void GenerateExampleAsciiDoc(IEnumerable<ImplementedExample> examples)
+		public static void GenerateExampleAsciiDoc(IEnumerable<ImplementedExample> examples, string branchName)
 		{
 			foreach (var file in ExamplesAsciiDocDir.EnumerateFiles())
 				file.Delete();
@@ -42,6 +44,10 @@ namespace ExamplesGenerator
 
 				var exampleFile = new FileInfo(Path.Combine(ExamplesAsciiDocDir.FullName, relativeExampleDirectory, example.Hash + ".asciidoc"));
 
+				var cSharpFile = new FileInfo(example.Path);
+				var originalFile = Regex.Replace(cSharpFile.FullName.Replace("\\", "/"), @"^(.*Examples/)",
+					$"https://github.com/elastic/elasticsearch-net/tree/{branchName}/src/Examples/Examples/");
+
 				if (!exampleFile.Directory.Exists)
 					exampleFile.Directory.Create();
 
@@ -52,6 +58,13 @@ namespace ExamplesGenerator
 					.ExtractCallouts(out var callouts);
 
 				var builder = new StringBuilder()
+					.AppendLine("////")
+					.AppendLine("IMPORTANT NOTE")
+					.AppendLine("==============")
+					.AppendLine($"This file is generated from method {example.Method} in {originalFile}#L{example.StartLineNumber}-L{example.EndLineNumber}.")
+					.AppendLine("If you wish to submit a PR to change this example, please change the source method above")
+					.AppendLine("and run dotnet run -- asciidoc in the ExamplesGenerator project directory.")
+					.AppendLine("////")
 					.AppendLine("[source, csharp]")
 					.AppendLine("----")
 					.AppendLine(source)
