@@ -4,6 +4,7 @@ open Argu
 open System
 open ShellProgressBar
 open Tests.YamlRunner.AsyncExtensions
+open Tests.YamlRunner.Models
 
 let barOptions = 
     ProgressBarOptions(
@@ -20,7 +21,7 @@ let subBarOptions =
     )
     
 type Arguments =
-    | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of Locations.TestSuite
+    | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
     | [<AltCommandLine("-r")>]Revision of string
     with
     interface IArgParserTemplate with
@@ -44,16 +45,16 @@ let main argv =
     | Some parsed -> 
         async {
             do! Async.SwitchToThreadPool ()
-            let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue Locations.OpenSource
+            let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
             let revision = parsed.TryGetResult Revision |> Option.defaultValue "master"
             
-            let! folders = YamlTestsDownloader.ListFolders namedSuite revision
+            let! folders = TestsLocator.ListFolders namedSuite revision
             
             let l = folders.Length
             use progress = new ProgressBar(l, sprintf "Listing %i folders" l, barOptions)
             let folderDownloads =
                 folders
-                |> Seq.map(fun folder -> YamlTestsDownloader.DownloadTestsInFolder folder namedSuite revision progress subBarOptions)
+                |> Seq.map(fun folder -> TestsLocator.DownloadTestsInFolder folder namedSuite revision progress subBarOptions)
             let! completed = Async.ForEachAsync 4 folderDownloads
                 
             return 0

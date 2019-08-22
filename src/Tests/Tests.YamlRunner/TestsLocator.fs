@@ -1,46 +1,15 @@
-module Tests.YamlRunner.YamlTestsDownloader
+module Tests.YamlRunner.TestsLocator
 
 open System
-open System.IO
 open System.Threading
 open FSharp.Data
 open Tests.YamlRunner.AsyncExtensions
 open ShellProgressBar
 open Tests.YamlRunner
 
-let randomTime = Random()
-
-let TemporaryPath revision = lazy(Path.Combine(Path.GetTempPath(), "elastic", sprintf "tests-%s" revision))
-
-let private download url = async {
-    let! x = Async.Sleep <| randomTime.Next(500, 900)
-    let! yaml = Http.AsyncRequestString url
-    return yaml
-}
-let private cachedOrDownload revision folder file url = async {
-    let parent = (TemporaryPath revision).Force()
-    let directory = Path.Combine(parent, folder)
-    let file = Path.Combine(directory, file)
-    let fileExists = File.Exists file
-    let directoryExists = Directory.Exists directory
-    let! result = async {
-        match (fileExists, directoryExists) with
-        | (true, _) ->
-            let! text = Async.AwaitTask <| File.ReadAllTextAsync file
-            return text
-        | (_, d) ->
-            if (not d) then Directory.CreateDirectory(directory) |> ignore
-            let! contents = download url
-            File.WriteAllText(file, contents)
-            return contents
-           
-    }
-    return (file, result)
-}
-
 let ListFolders namedSuite revision  = async {
-    let url = Locations.TestGithubRootUrl namedSuite revision
-    let! (_, html) = cachedOrDownload revision "_root_" "index.html" url 
+    let url = TestsDownloader.TestGithubRootUrl namedSuite revision
+    let! (_, html) = TestsDownloader.CachedOrDownload revision "_root_" "index.html" url 
     let doc = HtmlDocument.Parse(html)
     
     return
@@ -49,12 +18,12 @@ let ListFolders namedSuite revision  = async {
         |> List.filter (fun f -> not <| f.EndsWith(".asciidoc"))
 }
     
-let ListFolderFiles namedSuite revision folder (progress:IProgressBar) = async { 
-    let url = Locations.FolderListUrl namedSuite revision folder
-    let! (_, html) = cachedOrDownload revision folder "index.html" url 
+let ListFolderFiles namedSuite revision folder = async { 
+    let url = TestsDownloader.FolderListUrl namedSuite revision folder
+    let! (_, html) =  TestsDownloader.CachedOrDownload revision folder "index.html" url 
     let doc = HtmlDocument.Parse(html)
     let yamlFiles =
-        let fileUrl file = (file, Locations.TestRawUrl namedSuite revision folder file)
+        let fileUrl file = (file, TestsDownloader.TestRawUrl namedSuite revision folder file)
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
@@ -68,7 +37,7 @@ let private downloadTestsInFolder (yamlFiles:list<string * string>) folder revis
     let actions =
         yamlFiles
         |> Seq.map (fun (file, url) -> async {
-            let! (localFile, yaml) = cachedOrDownload revision folder file url
+            let! (localFile, yaml) =  TestsDownloader.CachedOrDownload revision folder file url
             let i = Interlocked.Increment (&seenFiles)
             let message = sprintf "Downloaded [%i/%i] files in %s" i yamlFiles.Length folder
             filesProgress.Tick(message)
@@ -85,7 +54,7 @@ let private downloadTestsInFolder (yamlFiles:list<string * string>) folder revis
 }
 
 let DownloadTestsInFolder folder namedSuite revision (progress: IProgressBar) subBarOptions = async {
-    let! token = Async.StartChild <| ListFolderFiles namedSuite revision folder progress
+    let! token = Async.StartChild <| ListFolderFiles namedSuite revision folder 
     let! yamlFiles = token
     let! localFiles = async {
        match yamlFiles.Length with
@@ -99,6 +68,3 @@ let DownloadTestsInFolder folder namedSuite revision (progress: IProgressBar) su
     progress.Tick()
     return localFiles;
 }
-
-
-

@@ -7,8 +7,9 @@
 
   <ItemGroup>
     <Compile Include="AsyncExtensions.fs" />
-    <Compile Include="Locations.fs" />
-    <Compile Include="YamlTestsDownloader.fs" />
+    <Compile Include="Models.fs" />
+    <Compile Include="TestsDownloader.fs" />
+    <Compile Include="TestsLocator.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
  
