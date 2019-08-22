@@ -10,6 +10,7 @@
     <Compile Include="Models.fs" />
     <Compile Include="TestsDownloader.fs" />
     <Compile Include="TestsLocator.fs" />
+    <Compile Include="Commands.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
  
