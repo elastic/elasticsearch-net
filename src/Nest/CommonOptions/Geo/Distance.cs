@@ -66,6 +66,6 @@ namespace Nest
 
 		public static implicit operator Distance(string distanceUnit) => new Distance(distanceUnit);
 
-		public override string ToString() => $"{Precision}{Unit.GetStringValue()}";
+		public override string ToString() => Precision.ToString(CultureInfo.InvariantCulture) + Unit.GetStringValue();
 	}
 }
