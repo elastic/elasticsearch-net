@@ -6,12 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="AsyncExtensions.fs" />
     <Compile Include="Locations.fs" />
     <Compile Include="YamlTestsDownloader.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
  
   <ItemGroup>
+    <PackageReference Include="Argu" Version="5.5.0" />
     <PackageReference Include="FSharp.Data" Version="3.1.1" />
     <PackageReference Include="ShellProgressBar" Version="4.3.0" />
     <PackageReference Update="FSharp.Core" Version="4.7.0" />
