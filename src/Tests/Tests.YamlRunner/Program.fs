@@ -51,7 +51,6 @@ let main argv =
             
             let l = folders.Length
             use progress = new ProgressBar(l, sprintf "Listing %i folders" l, barOptions)
-            progress.WriteLine((YamlTestsDownloader.TemporaryPath revision).Force())
             let folderDownloads =
                 folders
                 |> Seq.map(fun folder -> YamlTestsDownloader.DownloadTestsInFolder folder namedSuite revision progress subBarOptions)

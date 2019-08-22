@@ -10,14 +10,14 @@ open Tests.YamlRunner
 
 let randomTime = Random()
 
-let TemporaryPath revision = lazy(Path.Combine(Path.GetTempPath(), sprintf "elastic-test-%s" revision))
+let TemporaryPath revision = lazy(Path.Combine(Path.GetTempPath(), "elastic", sprintf "tests-%s" revision))
 
 let private download url = async {
     let! x = Async.Sleep <| randomTime.Next(500, 900)
     let! yaml = Http.AsyncRequestString url
     return yaml
 }
-let cachedOrDownload revision folder file url = async {
+let private cachedOrDownload revision folder file url = async {
     let parent = (TemporaryPath revision).Force()
     let directory = Path.Combine(parent, folder)
     let file = Path.Combine(directory, file)
