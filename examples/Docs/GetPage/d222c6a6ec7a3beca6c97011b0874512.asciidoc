@@ -1,4 +1,15 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line238 in https://github.com/elastic/elasticsearch-net/tree/docs/example-callouts/src/Examples/Examples/Docs/GetPage.cs#L196-L208.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=d222c6a6ec7a3beca6c97011b0874512,indent=0]
+var sourceFilteringResponse = client.Source<Tweet>(1, s => s
+    .Index("twitter")
+    .SourceIncludes("*.id")
+    .SourceExcludes("entities")
+);
 ----

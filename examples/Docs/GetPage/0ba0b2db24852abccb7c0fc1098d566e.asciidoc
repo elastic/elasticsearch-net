@@ -1,4 +1,19 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line178 in https://github.com/elastic/elasticsearch-net/tree/docs/example-callouts/src/Examples/Examples/Docs/GetPage.cs#L148-L168.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=0ba0b2db24852abccb7c0fc1098d566e,indent=0]
+var indexResponse = client.Index(new Tweet
+{
+    Counter = 1,
+    Tags = new[] { "white" }
+}, i => i
+.Index("twitter")
+.Id(2)
+.Routing("user1")
+);
 ----

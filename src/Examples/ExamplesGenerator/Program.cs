@@ -1,4 +1,6 @@
-﻿using CommandLine;
+﻿using System;
+using System.Diagnostics;
+using CommandLine;
 
 namespace ExamplesGenerator
 {
@@ -13,9 +15,45 @@ namespace ExamplesGenerator
 
 		private static int RunAsciiDocAndReturnExitCode(AsciiDocOptions opts)
 		{
+			var branchName = !string.IsNullOrEmpty(opts.BranchName)
+				? opts.BranchName
+				: GetBranchNameFromGit();
+
 			var examples = CSharpParser.ParseImplementedExamples();
-			AsciiDocGenerator.GenerateExampleAsciiDoc(examples);
+			AsciiDocGenerator.GenerateExampleAsciiDoc(examples, branchName);
 			return 0;
+		}
+
+		private static string GetBranchNameFromGit()
+		{
+			var process = new Process
+			{
+				StartInfo = new ProcessStartInfo
+				{
+					UseShellExecute = false,
+					RedirectStandardOutput = true,
+					FileName = "git.exe",
+					CreateNoWindow = true,
+					WorkingDirectory = Environment.CurrentDirectory,
+					Arguments = "rev-parse --abbrev-ref HEAD"
+				}
+			};
+
+			try
+			{
+				process.Start();
+				var branchName = process.StandardOutput.ReadToEnd().Trim();
+				process.WaitForExit();
+				return branchName;
+			}
+			catch (Exception)
+			{
+				return "master";
+			}
+			finally
+			{
+				process.Dispose();
+			}
 		}
 
 		private static int RunCSharpAndReturnExitCode(CSharpOptions opts)
@@ -27,7 +65,11 @@ namespace ExamplesGenerator
 	}
 
 	[Verb("asciidoc", HelpText = "Generate asciidoc client example files from the C# Examples classes")]
-	public class AsciiDocOptions { }
+	public class AsciiDocOptions
+	{
+		[Option('b', "branch", Required = false, HelpText = "The version that appears in generated from source link")]
+		public string BranchName { get; set; }
+	}
 
 	[Verb("csharp", HelpText = "Generate C# Examples classes from the asciidoc master reference")]
 	public class CSharpOptions

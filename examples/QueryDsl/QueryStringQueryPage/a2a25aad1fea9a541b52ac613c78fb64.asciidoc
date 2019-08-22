@@ -1,4 +1,23 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line202 in https://github.com/elastic/elasticsearch-net/tree/docs/example-callouts/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L114-L149.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs[tag=a2a25aad1fea9a541b52ac613c78fb64,indent=0]
+var searchResponse = client.Search<object>(s => s
+    .Index("")
+    .Query(q => q
+        .QueryString(qs => qs
+            .Fields(f => f
+                .Field("content")
+                .Field("name^5")
+            )
+            .Query("this AND that OR thus")
+            .TieBreaker(0)
+        )
+    )
+);
 ----

@@ -1,4 +1,31 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line125 in https://github.com/elastic/elasticsearch-net/tree/docs/example-callouts/src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs#L84-L134.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../../src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs[tag=4f54b88e05c7a62901062e9e0ed13e5a,indent=0]
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .DynamicTemplates(dt => dt
+            .DynamicTemplate("longs_as_strings", d => d
+                .MatchMappingType("string")
+                .Match("long_*")
+                .Unmatch("*_text")
+                .Mapping(mm => mm
+                    .Number(n => n
+                        .Type(NumberType.Long)
+                    )
+                )
+            )
+        )
+    )
+);
+
+var indexResponse = client.Index<object>(
+    new { long_num = "5", long_text = "foo" },
+    i => i.Index("my_index").Id(1)
+);
 ----

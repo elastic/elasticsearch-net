@@ -1,4 +1,29 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line988 in https://github.com/elastic/elasticsearch-net/tree/docs/example-callouts/src/Examples/Examples/Root/GettingStartedPage.cs#L724-L770.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=47bb632c6091ad0cd94bc660bdd309a5,indent=0]
+var searchResponse = client.Search<Account>(s => s
+    .Index("bank")
+    .Query(q => q
+        .Bool(b => b
+            .Must(mu => mu
+                .Match(m => m
+                    .Field(f => f.Age)
+                    .Query("40")
+                )
+            )
+            .MustNot(mn => mn
+                .Match(m => m
+                    .Field(ff => ff.State)
+                    .Query("ID")
+                )
+            )
+        )
+    )
+);
 ----

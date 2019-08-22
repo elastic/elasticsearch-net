@@ -1,4 +1,34 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line1201 in https://github.com/elastic/elasticsearch-net/tree/docs/example-callouts/src/Examples/Examples/Root/GettingStartedPage.cs#L948-L1028.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=c84b5f9c6528f84a08c5318b3385d55c,indent=0]
+var searchResponse = client.Search<Account>(s => s
+    .Index("bank")
+    .Size(0)
+    .Aggregations(a => a
+        .Range("group_by_age", ra => ra
+            .Field(f => f.Age)
+            .Ranges(
+                r => r.From(20).To(30),
+                r => r.From(30).To(40),
+                r => r.From(40).To(50)
+            )
+            .Aggregations(aa => aa
+                .Terms("group_by_gender", t => t
+                    .Field(f => f.Gender.Suffix("keyword"))
+                    .Aggregations(aaa => aaa
+                        .Average("average_balance", av => av
+                            .Field(f => f.Balance)
+                        )
+                    )
+                )
+            )
+        )
+    )
+);
 ----
