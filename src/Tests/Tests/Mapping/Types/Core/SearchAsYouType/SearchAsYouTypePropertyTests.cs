@@ -33,8 +33,7 @@ namespace Tests.Mapping.Types.Core.SearchAsYouType
 				}
 			}
 		};
-
-
+		
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.SearchAsYouType(s => s
 				.MaxShingleSize(4)
