@@ -7,12 +7,8 @@ namespace Tests.Mapping.Types.Core.SearchAsYouType
 		[SearchAsYouType(
 			MaxShingleSize = 4,
 			Analyzer = "myanalyzer",
-			Boost = 1.2,
-			EagerGlobalOrdinals = true,
-			Fielddata = true,
 			Index = true,
 			IndexOptions = IndexOptions.Offsets,
-			PositionIncrementGap = 5,
 			SearchAnalyzer = "mysearchanalyzer",
 			SearchQuoteAnalyzer = "mysearchquoteanalyzer",
 			Similarity = "classic",
@@ -39,12 +35,8 @@ namespace Tests.Mapping.Types.Core.SearchAsYouType
 					type = "search_as_you_type",
 					max_shingle_size = 4,
 					analyzer = "myanalyzer",
-					boost = 1.2,
-					eager_global_ordinals = true,
-					fielddata = true,
 					index = true,
 					index_options = "offsets",
-					position_increment_gap = 5,
 					search_analyzer = "mysearchanalyzer",
 					search_quote_analyzer = "mysearchquoteanalyzer",
 					similarity = "classic",
@@ -52,15 +44,8 @@ namespace Tests.Mapping.Types.Core.SearchAsYouType
 					norms = false,
 					term_vector = "with_positions_offsets"
 				},
-				maxShingleSize = new
-				{
-					type = "search_as_you_type",
-					max_shingle_size = 1
-				},
-				minimal = new
-				{
-					type = "search_as_you_type"
-				}
+				maxShingleSize = new { type = "search_as_you_type", max_shingle_size = 1 },
+				minimal = new { type = "search_as_you_type" }
 			}
 		};
 	}

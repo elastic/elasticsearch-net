@@ -3,9 +3,11 @@ using System.Diagnostics;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Nest {
+namespace Nest
+{
 	[InterfaceDataContract]
-	public interface ITextProperty : ICoreProperty {
+	public interface ITextProperty : ICoreProperty
+	{
 		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
@@ -50,13 +52,10 @@ namespace Nest {
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
-	public class TextProperty : CorePropertyBase, ITextProperty {
+	public class TextProperty : CorePropertyBase, ITextProperty
+	{
 		public TextProperty() : base(FieldType.Text) { }
-
-		protected TextProperty(FieldType fieldType) : base(fieldType) { }
-
 		public string Analyzer { get; set; }
-
 		public double? Boost { get; set; }
 		public bool? EagerGlobalOrdinals { get; set; }
 		public bool? Fielddata { get; set; }
@@ -72,14 +71,11 @@ namespace Nest {
 		public TermVectorOption? TermVector { get; set; }
 	}
 
-	public abstract class TextPropertyDescriptorBase<TDescriptor, TInterface, T>
-		: CorePropertyDescriptorBase<TDescriptor, TInterface, T>, ITextProperty
-		where TDescriptor : TextPropertyDescriptorBase<TDescriptor, TInterface, T>, TInterface
-		where TInterface : class, ITextProperty
+	public class TextPropertyDescriptor<T>
+		: CorePropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
 		where T : class
-	{ 
-
-		protected TextPropertyDescriptorBase(FieldType fieldType) : base(fieldType) { }
+	{
+		public TextPropertyDescriptor() : base(FieldType.Text) { }
 
 		string ITextProperty.Analyzer { get; set; }
 		double? ITextProperty.Boost { get; set; }
@@ -96,44 +92,36 @@ namespace Nest {
 		string ITextProperty.SearchQuoteAnalyzer { get; set; }
 		TermVectorOption? ITextProperty.TermVector { get; set; }
 
-		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
+		public TextPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public TDescriptor EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) =>
+		public TextPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) =>
 			Assign(eagerGlobalOrdinals, (a, v) => a.EagerGlobalOrdinals = v);
 
-		public TDescriptor Fielddata(bool? fielddata = true) => Assign(fielddata, (a, v) => a.Fielddata = v);
+		public TextPropertyDescriptor<T> Fielddata(bool? fielddata = true) => Assign(fielddata, (a, v) => a.Fielddata = v);
 
-		public TDescriptor FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
+		public TextPropertyDescriptor<T> FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
 			Assign(selector, (a, v) => a.FielddataFrequencyFilter = v?.Invoke(new FielddataFrequencyFilterDescriptor()));
 
-		public TDescriptor IndexPrefixes(Func<TextIndexPrefixesDescriptor, ITextIndexPrefixes> selector) =>
+		public TextPropertyDescriptor<T> IndexPrefixes(Func<TextIndexPrefixesDescriptor, ITextIndexPrefixes> selector) =>
 			Assign(selector, (a, v) => a.IndexPrefixes = v?.Invoke(new TextIndexPrefixesDescriptor()));
 
-		public TDescriptor Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
+		public TextPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public TDescriptor IndexPhrases(bool? indexPhrases = true) => Assign(indexPhrases, (a, v) => a.IndexPhrases = v);
+		public TextPropertyDescriptor<T> IndexPhrases(bool? indexPhrases = true) => Assign(indexPhrases, (a, v) => a.IndexPhrases = v);
 
-		public TDescriptor IndexOptions(IndexOptions? indexOptions) => Assign(indexOptions, (a, v) => a.IndexOptions = v);
+		public TextPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(indexOptions, (a, v) => a.IndexOptions = v);
 
-		public TDescriptor Norms(bool? enabled = true) => Assign(enabled, (a, v) => a.Norms = v);
+		public TextPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(enabled, (a, v) => a.Norms = v);
 
-		public TDescriptor PositionIncrementGap(int? positionIncrementGap) =>
+		public TextPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) =>
 			Assign(positionIncrementGap, (a, v) => a.PositionIncrementGap = v);
 
-		public TDescriptor Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
+		public TextPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public TDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a.SearchAnalyzer = v);
+		public TextPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a.SearchAnalyzer = v);
 
-		public TDescriptor SearchQuoteAnalyzer(string searchQuoteAnalyzer) => Assign(searchQuoteAnalyzer, (a, v) => a.SearchQuoteAnalyzer = v);
+		public TextPropertyDescriptor<T> SearchQuoteAnalyzer(string searchQuoteAnalyzer) => Assign(searchQuoteAnalyzer, (a, v) => a.SearchQuoteAnalyzer = v);
 
-		public TDescriptor TermVector(TermVectorOption? termVector) => Assign(termVector, (a, v) => a.TermVector = v);
-	}
-
-	[DebuggerDisplay("{DebugDisplay}")]
-	public class TextPropertyDescriptor<T>
-		: TextPropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
-		where T : class
-	{
-		public TextPropertyDescriptor() : base(FieldType.Text) { }
+		public TextPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(termVector, (a, v) => a.TermVector = v);
 	}
 }
