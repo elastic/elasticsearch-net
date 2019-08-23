@@ -40,6 +40,12 @@ namespace Nest
 		[EnumMember(Value = "text")]
 		Text,
 
+		/// <summary>
+		/// A text-like field that is optimized to provide out-of-the-box support for queries that serve an as-you-type completion use case.
+		/// </summary>
+		[EnumMember(Value = "search_as_you_type")]
+		SearchAsYouType,
+
 		[EnumMember(Value = "date")]
 		Date,
 

@@ -1,8 +1,8 @@
 ﻿namespace Nest
 {
-	public class TextAttribute : ElasticsearchCorePropertyAttributeBase, ITextProperty
-	{
+	public class TextAttribute : ElasticsearchCorePropertyAttributeBase, ITextProperty {
 		public TextAttribute() : base(FieldType.Text) { }
+		protected TextAttribute(FieldType fieldType) : base(fieldType) { }
 
 		public string Analyzer
 		{

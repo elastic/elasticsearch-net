@@ -20,6 +20,9 @@ namespace Nest
 		Phrase,
 
 		[EnumMember(Value = "phrase_prefix")]
-		PhrasePrefix
+		PhrasePrefix,
+
+		[EnumMember(Value = "bool_prefix")]
+		BoolPrefix
 	}
 }
