@@ -1,7 +1,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line68 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/FieldMappingPage.cs#L29-L55.
+This file is generated from method Line22 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Types/TextPage.cs#L8-L29.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
@@ -9,11 +9,7 @@ and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ----
 var createIndexResponse = client.Indices.Create("my_index", c => c
     .Map(m => m
-        .DateDetection(false)
+        .Properties(p => p.Text(t => t.Name("full_name")))
     )
 );
-
-var indexResponse = client.Index<object>(
-    new { create_date = "2015/09/02" },
-    i => i.Index("my_index").Id(1));
 ----
