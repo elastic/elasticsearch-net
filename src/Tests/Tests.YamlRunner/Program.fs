@@ -2,6 +2,7 @@
 
 open Argu
 open Tests.YamlRunner.Models
+open Tests.YamlRunner.TestsReader
 
 type Arguments =
     | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
@@ -26,18 +27,23 @@ let runMain (parsed:ParseResults<Arguments>) = async {
 
 [<EntryPoint>]
 let main argv =
-    let parser = ArgumentParser.Create<Arguments>(programName = "yaml-test-runner")
-    let parsed = 
-        try
-            Some <| parser.ParseCommandLine(inputs = argv, raiseOnUsage = true)
-        with e ->
-            printfn "%s" e.Message
-            None
-    match parsed with
-    | None -> 1
-    | Some parsed ->
-        async {
-            do! Async.SwitchToThreadPool ()
-            return! runMain parsed
-        } |> Async.RunSynchronously
     
+    let documents = TestsReader.test ()
+    0
+    
+    
+//    let parser = ArgumentParser.Create<Arguments>(programName = "yaml-test-runner")
+//    let parsed = 
+//        try
+//            Some <| parser.ParseCommandLine(inputs = argv, raiseOnUsage = true)
+//        with e ->
+//            printfn "%s" e.Message
+//            None
+//    match parsed with
+//    | None -> 1
+//    | Some parsed ->
+//        async {
+//            do! Async.SwitchToThreadPool ()
+//            return! runMain parsed
+//        } |> Async.RunSynchronously
+//    

@@ -49,9 +49,9 @@ let CachedOrDownload revision folder file url = async {
         | (_, d) ->
             if (not d) then Directory.CreateDirectory(directory) |> ignore
             let! contents = download url
-            File.WriteAllText(file, contents)
+            let write = File.WriteAllTextAsync(file, contents)
+            do! Async.AwaitTask write
             return contents
-           
     }
     return (file, result)
 }
