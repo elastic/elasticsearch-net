@@ -79,7 +79,7 @@ namespace Examples.Mapping.Types
 				.Index("my_index")
 				.Query(q => q
 					.MatchPhrasePrefix(pp => pp
-						.Field(doc => doc["my_field"])
+						.Field("my_field")
 						.Query("brown f"))));
 			// end::0ced86822f8c0a479af5e1fe28dfc2ec[]
 
