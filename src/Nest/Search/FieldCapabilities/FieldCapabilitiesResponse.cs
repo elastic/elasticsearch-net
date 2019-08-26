@@ -57,6 +57,7 @@ namespace Nest
 		public FieldCapabilities Percolator => BackingDictionary.TryGetValue("percolator", out var f) ? f : null;
 		public FieldCapabilities Routing => BackingDictionary.TryGetValue("_routing", out var f) ? f : null;
 		public FieldCapabilities ScaledFloat => BackingDictionary.TryGetValue("scaled_float", out var f) ? f : null;
+		public FieldCapabilities SearchAsYouType => BackingDictionary.TryGetValue("search_as_you_type", out var f) ? f : null;
 		public FieldCapabilities Short => BackingDictionary.TryGetValue("short", out var f) ? f : null;
 		public FieldCapabilities Source => BackingDictionary.TryGetValue("_source", out var f) ? f : null;
 		public FieldCapabilities Text => BackingDictionary.TryGetValue("text", out var f) ? f : null;

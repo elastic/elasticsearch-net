@@ -198,6 +198,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IRankFeaturesProperty mapping) => Increment("rank_features");
 
+		public void Visit(ISearchAsYouTypeProperty property) => Increment("search_as_you_type");
+
 		private void Increment(string key)
 		{
 			if (!Counts.ContainsKey(key)) Counts.Add(key, 0);

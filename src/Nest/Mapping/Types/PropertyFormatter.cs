@@ -56,6 +56,7 @@ namespace Nest
 			{
 				case FieldType.Text: return Deserialize<TextProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Keyword: return Deserialize<KeywordProperty>(ref segmentReader, formatterResolver);
+				case FieldType.SearchAsYouType: return Deserialize<SearchAsYouTypeProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Float:
 				case FieldType.Double:
 				case FieldType.Byte:
@@ -113,6 +114,9 @@ namespace Nest
 					break;
 				case "keyword":
 					Serialize<IKeywordProperty>(ref writer, value, formatterResolver);
+					break;
+				case "search_as_you_type":
+					Serialize<ISearchAsYouTypeProperty>(ref writer, value, formatterResolver);
 					break;
 				case "float":
 				case "double":
