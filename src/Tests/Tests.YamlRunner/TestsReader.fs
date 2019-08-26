@@ -53,8 +53,9 @@ let private mapNumericAssert (operation:YamlMap) =
         |> Seq.map (fun (kv) ->
             let v =
                 match kv.Value with
-                | :? int32 as i -> Fixed <| Convert.ToInt64 kv.Value
-                | :? int64 as i -> Fixed <| i
+                | :? int32 as i -> Fixed <| Convert.ToDouble i
+                | :? int64 as i -> Fixed <| Convert.ToDouble i
+                | :? double as i -> Fixed <| Convert.ToDouble i
                 | :? string as i -> StashedId <| StashedId.Create i
                 | _ -> failwithf "unsupported %s" (kv.Value.GetType().Name)
             AssertPath (kv.Key :?> string), v
@@ -175,19 +176,19 @@ let ReadYamlFile (yamlInfo:YamlFileInfo) =
 
     let serializer = SharpYaml.Serialization.Serializer()
     let sections =
+        let r e message = raise <| new Exception(message, e)
         Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
         |> Seq.filter (fun s -> not <| String.IsNullOrWhiteSpace s)
         |> Seq.map (fun sectionString ->
-            printfn "%s" sectionString
             try
                 (sectionString, serializer.Deserialize<Dictionary<string, Object>> sectionString)
-            with | e -> failwithf "parseError %s: %s %s %s" yamlInfo.File e.Message Environment.NewLine sectionString
+            with | e -> r e <| sprintf "parseError %s: %s %s %s" yamlInfo.File e.Message Environment.NewLine sectionString
         )
         |> Seq.filter (fun (s, _) -> s <> null)
         |> Seq.map (fun (s, document) ->
             try
                 mapDocument document
-            with | e -> failwithf "mapError %s: %O %O %O" yamlInfo.File (e.Message) Environment.NewLine s
+            with | e -> r e <| sprintf "mapError %s: %O %O %O" yamlInfo.File (e.Message) Environment.NewLine s
         )
         |> Seq.toList
         |> toDocument

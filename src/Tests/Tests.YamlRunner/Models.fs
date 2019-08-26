@@ -50,7 +50,7 @@ type AssertPath = AssertPath of string
 type Set = Map<ResponseProperty, StashedId>
 type TransformAndSet = Map<StashedId, SetTransformation>
 type Match = Map<AssertPath, Object>
-type NumericValue = Fixed of int64 | StashedId of StashedId
+type NumericValue = Fixed of double | StashedId of StashedId
 type NumericMatch = Map<AssertPath, NumericValue>
     
 type Do = {

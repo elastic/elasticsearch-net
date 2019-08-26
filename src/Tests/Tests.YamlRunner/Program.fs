@@ -40,7 +40,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
         printfn "folder: %O" folder.Folder
         for f in folder.Files do
             for t in f.Tests do
-                printfn "     %s (%i tests)" t.Name t.Operations.Length
+                printfn "     %s (%i steps)" t.Name t.Operations.Length
     
     return 0
 }
