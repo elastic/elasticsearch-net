@@ -50,6 +50,16 @@ namespace Tests.XPack.MachineLearning
 			return putFilterResponse;
 		}
 
+		protected DeleteFilterResponse DeleteFilter(IElasticClient client, string filterId)
+		{
+			var deleteFilterResponse = client.MachineLearning.DeleteFilter(filterId);
+
+			if (!deleteFilterResponse.IsValid)
+				throw new Exception($"Problem deleting filter {filterId} for integration test: {deleteFilterResponse.DebugInformation}");
+
+			return deleteFilterResponse;
+		}
+
 		protected PutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
 		{
 			var putCalendarResponse = client.MachineLearning.PutCalendar(calendarId, f => f
