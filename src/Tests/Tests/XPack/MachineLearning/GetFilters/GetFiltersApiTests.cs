@@ -23,6 +23,12 @@ namespace Tests.XPack.MachineLearning.GetFilters
 				PutFilter(client, callUniqueValue.Value);
 		}
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+				DeleteFilter(client, callUniqueValue.Value);
+		}
+
 		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson => null;
@@ -74,6 +80,13 @@ namespace Tests.XPack.MachineLearning.GetFilters
 				for (int i = 0; i < 3; i++)
 					PutFilter(client, callUniqueValue.Value + "_" + (i + 1));
 			}
+		}
+
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+				for (var i = 0; i < 3; i++)
+					DeleteFilter(client, callUniqueValue.Value + "_" + (i + 1));
 		}
 
 		protected override bool ExpectIsValid => true;

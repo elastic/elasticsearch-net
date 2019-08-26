@@ -22,6 +22,12 @@ namespace Tests.XPack.MachineLearning.UpdateFilter
 				PutFilter(client, callUniqueValue.Value);
 		}
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+				DeleteFilter(client, callUniqueValue.Value);
+		}
+
 		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson => new
