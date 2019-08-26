@@ -5,7 +5,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>
-	/// A text-like field that is optimized to provide out-of-the-box support for queries that serve an as-you-type completion use case.
+	/// A text-like field that is optimized to provide out-of-the-box support for the "search as you type" completion use case.
 	/// <para></para>
 	/// It creates a series of subfields that are analyzed to index terms that can be efficiently matched by a query that
 	/// partially matches the entire indexed text value. Both prefix completion (i.e matching terms starting at the beginning of the input)
