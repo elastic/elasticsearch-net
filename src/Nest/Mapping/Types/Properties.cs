@@ -154,6 +154,8 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) => SetProperty(selector);
 
+		public PropertiesDescriptor<T> SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) => SetProperty(selector);

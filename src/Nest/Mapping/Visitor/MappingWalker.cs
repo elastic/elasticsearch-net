@@ -66,6 +66,13 @@ namespace Nest
 							Accept(t.Fields);
 						});
 						break;
+					case FieldType.SearchAsYouType:
+						Visit<ISearchAsYouTypeProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+							Accept(t.Fields);
+						});
+						break;
 					case FieldType.HalfFloat:
 					case FieldType.ScaledFloat:
 					case FieldType.Float:
