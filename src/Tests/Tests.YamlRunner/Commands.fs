@@ -16,8 +16,6 @@ let private barOptions =
 let private subBarOptions = 
     ProgressBarOptions(ForegroundColor = ConsoleColor.Yellow, ForegroundColorDone = Nullable ConsoleColor.DarkGreen, ProgressCharacter = '─')
 
-
-
 let LocateTests namedSuite revision = async {
     let! folders = TestsLocator.ListFolders namedSuite revision
     let l = folders.Length
@@ -34,4 +32,12 @@ let ReadTests (tests:LocateResults list) =
     let readPaths paths = paths |> List.map TestsReader.ReadYamlFile
     
     tests |> List.map (fun t -> { Folder= t.Folder; Files = readPaths t.Paths})
+    
+let RunTests (tests:YamlTestFolder list) = async {
+    let l = tests.Length
+    use progress = new ProgressBar(l, sprintf "Running %i folders" l, barOptions)
+    let a = TestsRunner.RunTestsInFolder progress subBarOptions
+    let! x = Async.Sequential <| (tests |> List.map a)
+    return x
+}
 

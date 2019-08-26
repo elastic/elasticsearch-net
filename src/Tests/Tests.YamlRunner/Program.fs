@@ -28,6 +28,10 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     let! locateResults = Commands.LocateTests namedSuite revision
     let readResults = Commands.ReadTests locateResults
+    let! runTesults = Commands.RunTests readResults
+    
+    
+    
 //    
 //    printfn "folders: %O" locateResults.Length
 //    for folder in locateResults do 
@@ -35,12 +39,12 @@ let runMain (parsed:ParseResults<Arguments>) = async {
 //        for p in folder.Paths do
 //            printfn "     %s" p.File
     
-    printfn "folders: %O" locateResults.Length
-    for folder in readResults do 
-        printfn "folder: %O" folder.Folder
-        for f in folder.Files do
-            for t in f.Tests do
-                printfn "     %s (%i steps)" t.Name t.Operations.Length
+//    printfn "folders: %O" locateResults.Length
+//    for folder in readResults do 
+//        printfn "folder: %O" folder.Folder
+//        for f in folder.Files do
+//            for t in f.Tests do
+//                printfn "     %s (%i steps)" t.Name t.Operations.Length
     
     return 0
 }

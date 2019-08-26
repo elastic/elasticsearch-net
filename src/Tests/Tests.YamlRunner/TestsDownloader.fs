@@ -26,7 +26,7 @@ let TestRawUrl namedSuite revision folder file =
     let path = path namedSuite revision
     sprintf "%s/%s/%s/%s" rootRawUrl path folder file
         
-let randomTime = Random()
+let private randomTime = Random()
 
 let TemporaryPath revision = lazy(Path.Combine(Path.GetTempPath(), "elastic", sprintf "tests-%s" revision))
 

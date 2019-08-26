@@ -5,6 +5,7 @@ open System.Collections.Generic
 open System.Text.RegularExpressions
 open System.Linq
 
+open System.IO
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsLocator
 
@@ -158,19 +159,21 @@ let private mapDocument (document:Dictionary<string, Object>) =
     | name -> YamlTest { Name=name; Operations=operations }
 
 type YamlTestDocument = {
+    FileInfo: FileInfo
     Setup: Operations option
     Teardown: Operations option
     Tests: YamlTest list
 }
 
-let private toDocument (sections:YamlTestSection list) =
+let private toDocument (yamlInfo:YamlFileInfo) (sections:YamlTestSection list) =
     {
+        FileInfo = FileInfo yamlInfo.File
         Setup = sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)
         Teardown = sections |> List.tryPick (fun s -> match s with | Teardown s -> Some s | _ -> None)
         Tests = sections |> List.map (fun s -> match s with | YamlTest s -> Some s | _ -> None) |> List.choose id
     }
 
-type ReadResults = { Folder: string; Files: YamlTestDocument list } 
+type YamlTestFolder = { Folder: string; Files: YamlTestDocument list } 
 
 let ReadYamlFile (yamlInfo:YamlFileInfo) = 
 
@@ -191,7 +194,7 @@ let ReadYamlFile (yamlInfo:YamlFileInfo) =
             with | e -> r e <| sprintf "mapError %s: %O %O %O" yamlInfo.File (e.Message) Environment.NewLine s
         )
         |> Seq.toList
-        |> toDocument
+        |> toDocument yamlInfo
         
     sections 
 
