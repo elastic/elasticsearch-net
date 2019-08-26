@@ -15,17 +15,21 @@ module AsyncExtensions =
     // but for some reason this did not behave as I had expected
     [<Extension>]
     static member inline ForEachAsync (maxDegreeOfParallelism: int) asyncs = async {
-        let tasks = new List<Task<'a>>(maxDegreeOfParallelism)
+        let tasks = new List<Task<'a>>()
+        let results = new List<'a>()
         for async in asyncs do
             let! x = Async.StartChildAsTask async
             tasks.Add <| x
             if (tasks.Count >= maxDegreeOfParallelism) then
                 let! task = Async.AwaitTask <| Task.WhenAny(tasks)
                 if (task.IsFaulted) then ExceptionDispatchInfo.Capture(task.Exception).Throw();
+                results.Add(task.Result)
                 let removed = tasks.Remove <| task
                 ignore()
+                
         let! completed = Async.AwaitTask <| Task.WhenAll tasks
-        return completed
+        for c in completed do results.Add c
+        return results |> Seq.toList
     }
     
     [<Extension>]

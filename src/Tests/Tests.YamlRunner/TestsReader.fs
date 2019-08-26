@@ -6,12 +6,25 @@ open System.Text.RegularExpressions
 open System.Linq
 
 open Tests.YamlRunner.Models
+open Tests.YamlRunner.TestsLocator
 
 type YamlMap = Dictionary<Object,Object>
+type YamlValue = YamlDictionary of YamlMap | YamlString of string
 
 let private tryPick<'a> (map:YamlMap) key =
     let found, value =  map.TryGetValue key
     if (found) then Some (value :?> 'a) else None
+    
+let private tryPickList<'a,'b> (map:YamlMap) key parse =
+    let found, value =  map.TryGetValue key
+    if (found) then
+        let value =
+            value :?> List<Object>
+            |> Seq.map (fun o -> o :?> 'a)
+            |> Seq.map parse
+            |> Seq.toList<'b>
+        Some value
+    else None
     
 let private pick<'a> (map:YamlMap) key =
     let found, value =  map.TryGetValue key
@@ -19,13 +32,33 @@ let private pick<'a> (map:YamlMap) key =
     else failwithf "expected to find %s of type %s" key typeof<'a>.Name
 
 let private mapSkip (operation:YamlMap) =
-    let version = pick<string> operation "version" 
+    let version = tryPick<string> operation "version" 
     let reason = tryPick<string> operation "reason"
-    Skip { Version=version; Reason=reason }
+    let parseFeature s = match s with | ToFeature s -> s
+    let features =
+        let found, value= operation.TryGetValue "features"
+        match (found, value) with
+        | (false, _) -> None
+        | (_, x) ->
+            match x with 
+            | :? List<Object> -> tryPickList<string, Feature> operation "features" parseFeature
+            | :? String as feature -> Some [parseFeature feature]
+            | _ -> None
+        
+        
+    Skip { Version=version; Reason=reason; Features=features }
     
 let private mapNumericAssert (operation:YamlMap) =
     operation
-        |> Seq.map (fun (kv) -> AssertPath (kv.Key :?> string), kv.Value :?> int64)
+        |> Seq.map (fun (kv) ->
+            let v =
+                match kv.Value with
+                | :? int32 as i -> Fixed <| Convert.ToInt64 kv.Value
+                | :? int64 as i -> Fixed <| i
+                | :? string as i -> StashedId <| StashedId.Create i
+                | _ -> failwithf "unsupported %s" (kv.Value.GetType().Name)
+            AssertPath (kv.Key :?> string), v
+        )
         |> Map.ofSeq
         
 let private firstValueAsPath (operation:YamlMap) = AssertPath (operation.Values.First() :?> string)
@@ -54,7 +87,7 @@ let private mapNodeSelector (operation:YamlMap) =
         let key = kv.Key :?> string
         let value = kv.Value :?> string
         match version with
-        | Some version -> Some <| NodeSelector (version, key, value)
+        | Some version -> Some <| VersionAndAttributeSelector (version, key, value)
         | None -> Some <| NodeAttributeSelector(key, value)
     | (Some version, None) -> Some <| NodeVersionSelector(version)
     | _ -> None
@@ -72,10 +105,7 @@ let private mapDo (operation:YamlMap) =
             match s with | IsDoCatch s -> Some s | _ -> None
         | _ -> None
         
-    let warnings =
-        match tryPick<List<string>> operation "warnings" with
-        | Some s -> Some (s |> Seq.toList)
-        | _ -> None
+    let warnings = tryPickList<string, string> operation "warnings" id
         
     let nodeSelector = mapNodeSelector operation
     Do {
@@ -88,17 +118,26 @@ let private mapDo (operation:YamlMap) =
 let private mapOperation (operation:YamlMap) =
     let kv = operation.First();
     let key = kv.Key :?> string
-    let yamlMap = kv.Value :?> YamlMap
+    let yamlValue : YamlValue =
+        match kv.Value with
+        | :? YamlMap as m -> YamlDictionary m
+        | :? string as s -> YamlString s
+        | _ -> failwithf "unsupported %s" (kv.Value.GetType().Name)
     
     match key with
-    | "skip" -> mapSkip yamlMap
-    | "set" -> Set <| mapSet yamlMap
-    | "transform_and_set" -> TransformAndSet <| mapTransformAndSet yamlMap
-    | "do" -> mapDo yamlMap
-    | "match" ->  Assert <| Match (mapMatch yamlMap)
-    | "is_false" -> Assert <| IsFalse (firstValueAsPath yamlMap)
-    | "is_true" -> Assert <| IsTrue (firstValueAsPath yamlMap)
-    | IsNumericAssert n -> Assert <| NumericAssert (n, mapNumericAssert yamlMap)
+    | IsOperation s ->
+        match (s, yamlValue) with
+        | ("skip", YamlDictionary map) -> mapSkip map
+        | ("set", YamlDictionary map) -> Set <| mapSet map
+        | ("transform_and_set", YamlDictionary map) -> TransformAndSet <| mapTransformAndSet map
+        | ("do", YamlDictionary map) -> mapDo map
+        | ("match", YamlDictionary map) ->  Assert <| Match (mapMatch map)
+        | ("is_false", YamlDictionary map) -> Assert <| IsFalse (firstValueAsPath map)
+        | ("is_true", YamlDictionary map) -> Assert <| IsTrue (firstValueAsPath map)
+        | ("is_false", YamlString str) -> Assert <| IsFalse (AssertPath str)
+        | ("is_true", YamlString str) -> Assert <| IsTrue (AssertPath str)
+        | (IsNumericAssert n, YamlDictionary map) -> Assert <| NumericAssert (n, mapNumericAssert map)
+        | (k, v) -> failwithf "%s does not support %s" k (v.GetType().Name)
     | unknownOperation -> Unknown unknownOperation
     
 let private mapOperations (operations:YamlMap list) =
@@ -117,16 +156,41 @@ let private mapDocument (document:Dictionary<string, Object>) =
     | "teardown" -> Teardown operations
     | name -> YamlTest { Name=name; Operations=operations }
 
-let ReadYamlFile yamlString = 
+type YamlTestDocument = {
+    Setup: Operations option
+    Teardown: Operations option
+    Tests: YamlTest list
+}
+
+let private toDocument (sections:YamlTestSection list) =
+    {
+        Setup = sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)
+        Teardown = sections |> List.tryPick (fun s -> match s with | Teardown s -> Some s | _ -> None)
+        Tests = sections |> List.map (fun s -> match s with | YamlTest s -> Some s | _ -> None) |> List.choose id
+    }
+
+type ReadResults = { Folder: string; Files: YamlTestDocument list } 
+
+let ReadYamlFile (yamlInfo:YamlFileInfo) = 
 
     let serializer = SharpYaml.Serialization.Serializer()
     let sections =
-        Regex.Split(yamlString, @"--- ?\r?\n")
-        |> Seq.filter (fun s -> not <| String.IsNullOrEmpty s)
-        |> Seq.map (fun document -> serializer.Deserialize<Dictionary<string, Object>> document)
-        |> Seq.filter (fun s -> s <> null)
-        |> Seq.map mapDocument
+        Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
+        |> Seq.filter (fun s -> not <| String.IsNullOrWhiteSpace s)
+        |> Seq.map (fun sectionString ->
+            printfn "%s" sectionString
+            try
+                (sectionString, serializer.Deserialize<Dictionary<string, Object>> sectionString)
+            with | e -> failwithf "parseError %s: %s %s %s" yamlInfo.File e.Message Environment.NewLine sectionString
+        )
+        |> Seq.filter (fun (s, _) -> s <> null)
+        |> Seq.map (fun (s, document) ->
+            try
+                mapDocument document
+            with | e -> failwithf "mapError %s: %O %O %O" yamlInfo.File (e.Message) Environment.NewLine s
+        )
         |> Seq.toList
+        |> toDocument
         
-    sections
+    sections 
 

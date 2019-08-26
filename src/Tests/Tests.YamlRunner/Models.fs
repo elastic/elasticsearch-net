@@ -2,10 +2,9 @@ module Tests.YamlRunner.Models
 
 open System
 open System.IO
+open System.Linq.Expressions
 
 type TestSuite = OpenSource | XPack
-
-type Skip = { Version:string; Reason:string option }
 
 type DoCatch =
     | BadRequest // bad_request, 400 response from ES
@@ -36,11 +35,12 @@ let (|IsDoCatch|_|) (s:string) =
 type NodeSelector =
     | NodeVersionSelector of string
     | NodeAttributeSelector of string * string
-    | NodeSelector of string * string * string
+    | VersionAndAttributeSelector of string * string * string
 
 type ResponseProperty = ResponseProperty of string
 
 type StashedId = private StashedId of string
+    // TODO handle $ when already on s
     with static member Create s = StashedId <| sprintf "$%s" s
     
 type SetTransformation = private SetTransformation of string
@@ -50,7 +50,8 @@ type AssertPath = AssertPath of string
 type Set = Map<ResponseProperty, StashedId>
 type TransformAndSet = Map<StashedId, SetTransformation>
 type Match = Map<AssertPath, Object>
-type NumericMatch = Map<AssertPath, int64>
+type NumericValue = Fixed of int64 | StashedId of StashedId
+type NumericMatch = Map<AssertPath, NumericValue>
     
 type Do = {
     ApiCall: string * Object
@@ -58,6 +59,41 @@ type Do = {
     Warnings:option<string list>
     NodeSelector:NodeSelector option
 }
+
+type Feature =
+    | CatchUnauthorized // "catch_unauthorized",
+    | DefaultShards // "default_shards",
+    | EmbeddedStashKey // "embedded_stash_key",
+    | Headers // "headers",
+    | NodeSelector // "node_selector",
+    | StashInKey // "stash_in_key",
+    | StashInPath // "stash_in_path",
+    | StashPathReplace // "stash_path_replace",
+    | Warnings // "warnings",
+    | Yaml // "yaml",
+    | Contains // "contains",
+    | TransformAndSet // "transform_and_set",
+    | ArbitraryKey // "arbitrary_key"
+    | Unsupported of string
+    
+let (|ToFeature|) (s:string) =
+    match s with
+    | "catch_unauthorized" -> CatchUnauthorized
+    | "default_shards" -> DefaultShards
+    | "embedded_stash_key" -> EmbeddedStashKey
+    | "headers" -> Headers
+    | "node_selector" -> NodeSelector
+    | "stash_in_key" -> StashInKey
+    | "stash_in_path" -> StashInPath
+    | "stash_path_replace" -> StashPathReplace
+    | "warnings" -> Warnings
+    | "yaml" -> Yaml
+    | "contains" -> Contains
+    | "transform_and_set" -> TransformAndSet
+    | "arbitrary_key" -> ArbitraryKey
+    | s -> Unsupported s
+
+type Skip = { Version:string option; Reason:string option; Features: Feature list option }
 
 type NumericAssert = 
     | LowerThan 
@@ -90,6 +126,19 @@ type Operation =
     | Set of Set
     | TransformAndSet of TransformAndSet
     | Assert of Assert
+    
+let (|IsOperation|_|) (s:string) =
+    match s with
+    | "skip" 
+    | "set" 
+    | "transform_and_set" 
+    | "do" 
+    | "match" 
+    | "is_false" 
+    | "is_true" -> Some s
+    | IsNumericAssert n -> Some s
+    | _ -> None
+    
 type Operations = Operation list
 
 type YamlTest = {

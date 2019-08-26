@@ -31,9 +31,15 @@ let ListFolderFiles namedSuite revision folder = async {
     return yamlFiles
 }
 
+type YamlFileInfo = { File: string; Yaml: string }
+
+let TestLocalFile file =
+    let yaml = System.IO.File.ReadAllText file
+    { File = file; Yaml = yaml }
+
 let private downloadTestsInFolder (yamlFiles:list<string * string>) folder revision (progress: IProgressBar) subBarOptions = async {
     let mutable seenFiles = 0;
-    let filesProgress = progress.Spawn(yamlFiles.Length, sprintf "Downloading [0/%i] files in %s" yamlFiles.Length folder, subBarOptions)
+    use filesProgress = progress.Spawn(yamlFiles.Length, sprintf "Downloading [0/%i] files in %s" yamlFiles.Length folder, subBarOptions)
     let actions =
         yamlFiles
         |> Seq.map (fun (file, url) -> async {
@@ -46,12 +52,16 @@ let private downloadTestsInFolder (yamlFiles:list<string * string>) folder revis
                 progress.WriteLine(sprintf "Skipped %s since it returned no data" url)
                 return None
             | _ ->
-                return Some localFile
+                return Some {File = localFile; Yaml = yaml}
         })
+        |> Seq.toList
         
     let! completed = Async.ForEachAsync 4 actions
-    return completed
+    let files = completed |> List.choose id;
+    return files 
 }
+
+type LocateResults = { Folder: string; Paths: YamlFileInfo list } 
 
 let DownloadTestsInFolder folder namedSuite revision (progress: IProgressBar) subBarOptions = async {
     let! token = Async.StartChild <| ListFolderFiles namedSuite revision folder 
@@ -60,11 +70,11 @@ let DownloadTestsInFolder folder namedSuite revision (progress: IProgressBar) su
        match yamlFiles.Length with
        | 0 ->
            progress.WriteLine(sprintf "%s folder yielded no tests" folder)
-           return None
-       | _ ->
+           return List.empty
+       | x ->
            let! result = downloadTestsInFolder yamlFiles folder revision progress subBarOptions
-           return Some <| result
+           return result
     }
     progress.Tick()
-    return localFiles;
+    return { Folder = folder; Paths = localFiles }
 }
