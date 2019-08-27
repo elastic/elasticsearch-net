@@ -69,7 +69,8 @@ let RunTestFile (progress:IProgressBar) (barOptions:ProgressBarOptions) (file:Ya
 let RunTestsInFolder (progress:IProgressBar) (barOptions:ProgressBarOptions) mainMessage (folder:YamlTestFolder) = async {
     let l = folder.Files.Length
     let run (i, document) = async {
-        let message = sprintf "%s [%i/%i] files: %s" mainMessage (i+1) l document.FileInfo.FullName 
+        let file = sprintf "%s/%s" document.FileInfo.Directory.Name document.FileInfo.Name
+        let message = sprintf "%s Files [%i/%i] file: %s" mainMessage (i+1) l file
         progress.Tick(message)
         let message = sprintf "Inspecting file for sections" 
         use p = progress.Spawn(0, message, barOptions)
