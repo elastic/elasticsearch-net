@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<summary>Provides a way to assert cluent behaviour through a rule engine backed VirtualClusterConnection</summary>
+		<summary>Provides a way to assert client behaviour through a rule engine backed VirtualClusterConnection</summary>
 		<description>Provides a way to assert cluent behaviour through a rule engine backed VirtualClusterConnection</description>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
