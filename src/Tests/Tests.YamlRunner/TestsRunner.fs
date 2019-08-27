@@ -60,9 +60,7 @@ let RunTestFile (progress:IProgressBar) (barOptions:ProgressBarOptions) (file:Ya
             let lOps = ops.Length
             let mutable seenL = 0;
             let messageL = sprintf "%s [0/%i] operations" m l
-            progress.WriteLine <| message
-            let lp = p.Spawn(lOps, messageL, barOptions)
-            
+            use lp = p.Spawn(lOps, messageL, barOptions)
             let result =
                 ops
                 |> List.map (fun op -> async {
@@ -91,7 +89,7 @@ let RunTestsInFolder (progress:IProgressBar) (barOptions:ProgressBarOptions) (fo
         p.Message <- message
         let! result = RunTestFile p barOptions document
         p.Tick()
-        result
+        return result
     }
         
     let actions =
