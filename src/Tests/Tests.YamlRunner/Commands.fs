@@ -1,6 +1,7 @@
 module Tests.YamlRunner.Commands
 
 open System
+open System.Threading
 open ShellProgressBar
 open Tests.YamlRunner.AsyncExtensions
 open Tests.YamlRunner.TestsLocator
@@ -35,9 +36,17 @@ let ReadTests (tests:LocateResults list) =
     
 let RunTests (tests:YamlTestFolder list) = async {
     let l = tests.Length
-    use progress = new ProgressBar(l, sprintf "Running %i folders" l, barOptions)
-    let a = TestsRunner.RunTestsInFolder progress subBarOptions
-    let! x = Async.Sequential <| (tests |> List.map a)
+    use progress = new ProgressBar(l, sprintf "Executing [0/%i] folders" l, barOptions)
+    do! Async.SwitchToNewThread()
+    let mutable seen = 0;
+    let a v = async {
+        let i = Interlocked.Increment (&seen)
+        progress.Message <- sprintf "Executing [%i/%i] folders: %s" i l v.Folder
+        let! op = TestsRunner.RunTestsInFolder progress subBarOptions v
+        progress.Tick()
+        return op
+    }
+    let x = tests |> List.map a |> List.map Async.RunSynchronously
     return x
 }
 
