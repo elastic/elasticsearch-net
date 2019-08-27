@@ -3,7 +3,7 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	internal class TimeSpanToStringFormatter : IJsonFormatter<TimeSpan>
+	internal class TimeSpanTicksFormatter : IJsonFormatter<TimeSpan>
 	{
 		public TimeSpan Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -17,11 +17,5 @@ namespace Nest
 		}
 
 		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) => writer.WriteInt64(value.Ticks);
-	}
-
-	//TODO: hook up in NestFormatterResolver to return TimeSpanToStringFormatter when StringTimeSpanAttribute is *not* specified on T
-	internal class TimeSpanToStringFormatterResolver : IJsonFormatterResolver
-	{
-		public IJsonFormatter<T> GetFormatter<T>() => null;
 	}
 }
