@@ -35,18 +35,20 @@ let ReadTests (tests:LocateResults list) =
     tests |> List.map (fun t -> { Folder= t.Folder; Files = readPaths t.Paths})
     
 let RunTests (tests:YamlTestFolder list) = async {
-    let l = tests.Length
-    use progress = new ProgressBar(l, sprintf "Executing [0/%i] folders" l, barOptions)
     do! Async.SwitchToNewThread()
-    let mutable seen = 0;
-    let a v = async {
-        let i = Interlocked.Increment (&seen)
-        progress.Message <- sprintf "Executing [%i/%i] folders: %s" i l v.Folder
-        let! op = TestsRunner.RunTestsInFolder progress subBarOptions v
-        progress.Tick()
-        return op
+    let l = tests |> List.sumBy (fun t -> t.Files.Length)
+    use progress = new ProgressBar(l, sprintf "Executing [0/%i] folders" l, barOptions)
+    let a (i, v) = async {
+        let mainMessage = sprintf "Executing [%i/%i] folders: %s" (i+1) l v.Folder 
+        let! op = TestsRunner.RunTestsInFolder progress subBarOptions mainMessage v
+        return op |> Seq.toList
     }
-    let x = tests |> List.map a |> List.map Async.RunSynchronously
+    let x =
+        tests
+        |> Seq.indexed
+        |> Seq.map a
+        |> Seq.map Async.RunSynchronously
+        |> Seq.toList
     return x
 }
 
