@@ -4,19 +4,30 @@ open System
 open ShellProgressBar
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader
+open Tests.YamlRunner.OperationExecutor
 
 let private randomTime = Random()
 
-let RunOperation m operation = async {
-    return OperationExecutor.Execute operation
+let RunOperation file section operation nth = async {
+    let executionContext = {
+        Suite= OpenSource
+        File= file
+        Folder= file.Directory
+        Section= section
+        NthOperation= nth
+        Operation= operation
+    }
+    
+    return OperationExecutor.Execute executionContext
 }
 
-let private createOperations m (ops:Operations) = 
+let private createOperations m file (ops:Operations) = 
     let executedOperations =
         ops
-        |> List.map (fun op -> async {
-            let! pass = RunOperation m op
-            let! x = Async.Sleep <| randomTime.Next(0, 10)
+        |> List.indexed
+        |> List.map (fun (i, op) -> async {
+            let! pass = RunOperation file m op i
+            //let! x = Async.Sleep <| randomTime.Next(0, 10)
             return pass
         })
     (m, executedOperations)
@@ -24,9 +35,11 @@ let private createOperations m (ops:Operations) =
 
 let RunTestFile (progress:IProgressBar) (file:YamlTestDocument) = async {
     
-    let setup =  file.Setup |> Option.map (createOperations "Setup") |> Option.toList 
-    let teardown = file.Teardown |> Option.map (createOperations "Teardown") |> Option.toList 
-    let passed = file.Tests |> List.map (fun s -> s.Operations |> createOperations s.Name) 
+    let m section ops = createOperations section file.FileInfo ops
+    
+    let setup =  file.Setup |> Option.map (m "Setup") |> Option.toList 
+    let teardown = file.Teardown |> Option.map (m "Teardown") |> Option.toList 
+    let passed = file.Tests |> List.map (fun s -> s.Operations |> m s.Name) 
     
     let sections = setup @ passed @ teardown
     

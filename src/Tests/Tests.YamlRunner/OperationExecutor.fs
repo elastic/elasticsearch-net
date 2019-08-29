@@ -14,6 +14,8 @@ type ExecutionContext = {
     with member __.Throw message = failwithf "%s" message
 
 
+let Do executionContext = ignore()
+
 let Execute (op:ExecutionContext) =
     match op.Operation with
     | Unknown u -> op.Throw <| sprintf "Unknown operation %s" u

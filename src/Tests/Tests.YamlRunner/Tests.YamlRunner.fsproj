@@ -10,8 +10,8 @@
     <Compile Include="Models.fs" />
     <Compile Include="TestsDownloader.fs" />
     <Compile Include="TestsLocator.fs" />
-    <Compile Include="TestsReader.fs" />
     <Compile Include="OperationExecutor.fs" />
+    <Compile Include="TestsReader.fs" />
     <Compile Include="TestsRunner.fs" />
     <Compile Include="Commands.fs" />
     <Compile Include="Program.fs" />
