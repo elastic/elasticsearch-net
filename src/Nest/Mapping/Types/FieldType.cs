@@ -132,6 +132,9 @@ namespace Nest
 		RankFeature,
 
 		[EnumMember(Value = "rank_features")]
-		RankFeatures
+		RankFeatures,
+
+		[EnumMember(Value = "flattened")]
+		Flattened
 	}
 }

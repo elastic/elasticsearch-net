@@ -166,6 +166,9 @@ namespace Nest
 		/// <inheritdoc cref="IRankFeaturesProperty"/>
 		public PropertiesDescriptor<T> RankFeatures(Func<RankFeaturesPropertyDescriptor<T>, IRankFeaturesProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IFlattenedProperty"/>
+		public PropertiesDescriptor<T> Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
