@@ -28,7 +28,9 @@
 
 		void Visit(IBoostingQuery query);
 
+#pragma warning disable 618
 		void Visit(ICommonTermsQuery query);
+#pragma warning restore 618
 
 		void Visit(IConstantScoreQuery query);
 
@@ -155,7 +157,9 @@
 
 		public virtual void Visit(IBoostingQuery query) { }
 
+#pragma warning disable 618
 		public virtual void Visit(ICommonTermsQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IConstantScoreQuery query) { }
 

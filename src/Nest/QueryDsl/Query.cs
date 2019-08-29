@@ -11,6 +11,7 @@ namespace Nest
 		public static QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
 			new QueryContainerDescriptor<T>().Boosting(selector);
 
+		[Obsolete("Deprecated in 7.3.0. Use MatchQuery instead, which skips blocks of documents efficiently, without any configuration, provided that the total number of hits is not tracked.")]
 		public static QueryContainer CommonTerms(Func<CommonTermsQueryDescriptor<T>, ICommonTermsQuery> selector) =>
 			new QueryContainerDescriptor<T>().CommonTerms(selector);
 
