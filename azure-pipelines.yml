@@ -56,13 +56,13 @@ jobs:
       maxParallel: 5
       matrix:
         es7:
-	      esVersion: '7.0.0'
-	    es71:
-	      esVersion: '7.1.0'
-	    es72:
-	      esVersion: '7.2.0'
-	    latest7:
-	      esVersion: 'latest-7'
+          esVersion: '7.0.0'
+        es71:
+          esVersion: '7.1.0'
+        es72:
+          esVersion: '7.2.0'
+        latest7:
+          esVersion: 'latest-7'
   steps:
       - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
         displayName: '$(esVersion) linux integration tests'
