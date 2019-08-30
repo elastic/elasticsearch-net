@@ -272,7 +272,7 @@ namespace Nest
 		public GetApiKeyDescriptor Username(string username) => Qs("username", username);
 	}
 
-	///<summary>Descriptor for GetPrivileges <para>TODO</para></summary>
+	///<summary>Descriptor for GetPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 	public partial class GetPrivilegesDescriptor : RequestDescriptorBase<GetPrivilegesDescriptor, GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetPrivileges;

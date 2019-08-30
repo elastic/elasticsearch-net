@@ -455,7 +455,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+	///<summary>Request options for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</para></summary>
 	public class SyncedFlushRequestParameters : RequestParameters<SyncedFlushRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

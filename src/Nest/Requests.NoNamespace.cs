@@ -143,7 +143,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
@@ -674,6 +674,13 @@ namespace Nest
 			set => Q("lenient", value);
 		}
 
+		///<summary>Maximum number of documents to process (default: all documents)</summary>
+		public long? MaxDocs
+		{
+			get => Q<long? >("max_docs");
+			set => Q("max_docs", value);
+		}
+
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -751,7 +758,7 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
@@ -2406,6 +2413,13 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexOnServer;
 		// values part of the url path
 		// Request parameters
+		///<summary>Maximum number of documents to process (default: all documents)</summary>
+		public long? MaxDocs
+		{
+			get => Q<long? >("max_docs");
+			set => Q("max_docs", value);
+		}
+
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
@@ -2551,7 +2565,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
@@ -3457,6 +3471,13 @@ namespace Nest
 			set => Q("lenient", value);
 		}
 
+		///<summary>Maximum number of documents to process (default: all documents)</summary>
+		public long? MaxDocs
+		{
+			get => Q<long? >("max_docs");
+			set => Q("max_docs", value);
+		}
+
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public string Pipeline
 		{
@@ -3541,7 +3562,7 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
