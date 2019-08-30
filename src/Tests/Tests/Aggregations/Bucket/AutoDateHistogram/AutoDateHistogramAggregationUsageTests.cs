@@ -36,7 +36,8 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 					field = "startedOn",
 					buckets = 10,
 					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
-					missing = FixedDate
+					missing = FixedDate,
+					minimum_interval = "day"
 				},
 				aggs = new
 				{
@@ -64,6 +65,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 				.Buckets(10)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.Missing(FixedDate)
+				.MinimumInterval(MinimumInterval.Day)
 				.Aggregations(childAggs => childAggs
 					.Nested("project_tags", n => n
 						.Path(p => p.Tags)
@@ -81,6 +83,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 				Buckets = 10,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				Missing = FixedDate,
+				MinimumInterval = MinimumInterval.Day,
 				Aggregations = new NestedAggregation("project_tags")
 				{
 					Path = Field<Project>(p => p.Tags),
