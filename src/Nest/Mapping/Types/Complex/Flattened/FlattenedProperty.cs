@@ -25,7 +25,7 @@ namespace Nest
 		/// <summary>
 		/// The maximum allowed depth of the flattened object field,
 		/// in terms of nested inner objects. If a flattened object field exceeds this limit,
-		/// then an error will be thrown. Defaults to 20.
+		/// then an error will be thrown. Defaults to <c>20</c>.
 		/// </summary>
 		[DataMember(Name = "depth_limit")]
 		int? DepthLimit { get; set; }
