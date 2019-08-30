@@ -187,8 +187,10 @@ namespace Nest
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall
 		/// of search results (by taking stopwords into account), without sacrificing performance.
 		/// </summary>
+#pragma warning disable 618
 		public QueryContainer CommonTerms(Func<CommonTermsQueryDescriptor<T>, ICommonTermsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.CommonTerms = query);
+#pragma warning restore 618
 
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a

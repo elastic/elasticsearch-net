@@ -4,6 +4,9 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
+// CommonTerms is deprecated in 7.3.0
+#pragma warning disable 618,612
+
 namespace Tests.QueryDsl.FullText.CommonTerms
 {
 	public class CommonTermsUsageTests : QueryDslUsageTestsBase
