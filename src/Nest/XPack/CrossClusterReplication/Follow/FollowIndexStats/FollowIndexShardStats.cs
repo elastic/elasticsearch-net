@@ -44,6 +44,10 @@ namespace Nest
 		[DataMember(Name = "follower_settings_version")]
 		public long FollowerSettingsVersion { get; set; }
 
+		///<summary>The index aliases version the follower is synced up to</summary>
+		[DataMember(Name = "follower_aliases_version")]
+		public long FollowerAliasesVersion { get; set; }
+
 		///<summary>the starting sequence number of the last batch of operations requested from the leader</summary>
 		[DataMember(Name = "last_requested_seq_no")]
 		public long LastRequestedSequenceNumber { get; set; }
