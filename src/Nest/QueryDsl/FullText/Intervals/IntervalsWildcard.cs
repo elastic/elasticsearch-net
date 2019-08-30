@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Nest
 {
 	/// <summary>
-	/// matches terms using a wildcard pattern. This pattern can expand to match at most 128 terms.
+	/// Matches terms using a wildcard pattern. This pattern can expand to match at most 128 terms.
 	/// If the pattern matches more than 128 terms, Elasticsearch returns an error.
 	/// <para />
 	/// Available in Elasticsearch 7.3.0+
