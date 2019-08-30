@@ -38,14 +38,12 @@ namespace Nest
 	public class IntervalsPrefix : IntervalsNoFilterBase, IIntervalsPrefix
 	{
 		/// <inheritdoc />
-		[DataMember(Name = "analyzer")]
 		public string Analyzer { get; set; }
 
 		/// <inheritdoc />
 		public string Prefix { get; set; }
 
 		/// <inheritdoc />
-		[DataMember(Name = "use_field")]
 		public Field UseField { get; set; }
 
 		internal override void WrapInContainer(IIntervalsContainer container) => container.Prefix = this;
