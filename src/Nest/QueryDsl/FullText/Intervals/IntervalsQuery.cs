@@ -26,10 +26,16 @@ namespace Nest
 		/// <inheritdoc cref="IIntervalsMatch"/>
 		public IIntervalsMatch Match { get; set; }
 
+		/// <inheritdoc cref="IIntervalsPrefix"/>
+		public IIntervalsPrefix Prefix { get; set; }
+
+		/// <inheritdoc cref="IIntervalsWildcard"/>
+		public IIntervalsWildcard Wildcard { get; set; }
+
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal static bool IsConditionless(IIntervalsQuery q) =>
-			q.Field.IsConditionless() || q.Match == null && q.AllOf == null && q.AnyOf == null;
+			q.Field.IsConditionless() || q.Match == null && q.AllOf == null && q.AnyOf == null && q.Prefix == null && q.Wildcard == null;
 
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.Intervals = this;
 	}
@@ -45,10 +51,20 @@ namespace Nest
 		IIntervalsAllOf IIntervalsContainer.AllOf { get; set; }
 		IIntervalsAnyOf IIntervalsContainer.AnyOf { get; set; }
 		IIntervalsMatch IIntervalsContainer.Match { get; set; }
+		IIntervalsPrefix IIntervalsContainer.Prefix { get; set; }
+		IIntervalsWildcard IIntervalsContainer.Wildcard { get; set; }
 
 		/// <inheritdoc cref="IntervalsQuery.Match" />
 		public IntervalsQueryDescriptor<T> Match(Func<IntervalsMatchDescriptor, IIntervalsMatch> selector) =>
 			Assign(selector, (a, v) => a.Match = v?.Invoke(new IntervalsMatchDescriptor()));
+
+		/// <inheritdoc cref="IntervalsQuery.Prefix" />
+		public IntervalsQueryDescriptor<T> Prefix(Func<IntervalsPrefixDescriptor, IIntervalsPrefix> selector) =>
+			Assign(selector, (a, v) => a.Prefix = v?.Invoke(new IntervalsPrefixDescriptor()));
+
+		/// <inheritdoc cref="IntervalsQuery.Wildcard" />
+		public IntervalsQueryDescriptor<T> Wildcard(Func<IntervalsWildcardDescriptor, IIntervalsWildcard> selector) =>
+			Assign(selector, (a, v) => a.Wildcard = v?.Invoke(new IntervalsWildcardDescriptor()));
 
 		/// <inheritdoc cref="IntervalsQuery.AnyOf" />
 		public IntervalsQueryDescriptor<T> AnyOf(Func<IntervalsAnyOfDescriptor, IIntervalsAnyOf> selector) =>
@@ -75,6 +91,14 @@ namespace Nest
 		/// <inheritdoc cref="IIntervalsMatch" />
 		[DataMember(Name = "match")]
 		IIntervalsMatch Match { get; set; }
+
+		/// <inheritdoc cref="IIntervalsPrefix" />
+		[DataMember(Name = "prefix")]
+		IIntervalsPrefix Prefix { get; set; }
+
+		/// <inheritdoc cref="IIntervalsWildcard" />
+		[DataMember(Name = "wildcard")]
+		IIntervalsWildcard Wildcard { get; set; }
 	}
 
 	/// <inheritdoc cref="IIntervalsContainer" />
@@ -88,11 +112,23 @@ namespace Nest
 			intervals.WrapInContainer(this);
 		}
 
+		public IntervalsContainer(IntervalsNoFilterBase intervals)
+		{
+			intervals.ThrowIfNull(nameof(intervals));
+			intervals.WrapInContainer(this);
+		}
+
 		IIntervalsAllOf IIntervalsContainer.AllOf { get; set; }
 		IIntervalsAnyOf IIntervalsContainer.AnyOf { get; set; }
 		IIntervalsMatch IIntervalsContainer.Match { get; set; }
+		IIntervalsPrefix IIntervalsContainer.Prefix { get; set; }
+		IIntervalsWildcard IIntervalsContainer.Wildcard { get; set; }
 
 		public static implicit operator IntervalsContainer(IntervalsBase intervals) => intervals == null
+			? null
+			: new IntervalsContainer(intervals);
+
+		public static implicit operator IntervalsContainer(IntervalsNoFilterBase intervals) => intervals == null
 			? null
 			: new IntervalsContainer(intervals);
 	}
@@ -109,6 +145,14 @@ namespace Nest
 		public IntervalsDescriptor Match(Func<IntervalsMatchDescriptor, IIntervalsMatch> selector) =>
 			Assign(selector, (a, v) => a.Match = v?.Invoke(new IntervalsMatchDescriptor()));
 
+		/// <inheritdoc cref="IntervalsPrefixDescriptor" />
+		public IntervalsDescriptor Prefix(Func<IntervalsPrefixDescriptor, IIntervalsPrefix> selector) =>
+			Assign(selector, (a, v) => a.Prefix = v?.Invoke(new IntervalsPrefixDescriptor()));
+
+		/// <inheritdoc cref="IntervalsWildcardDescriptor" />
+		public IntervalsDescriptor Wildcard(Func<IntervalsWildcardDescriptor, IIntervalsWildcard> selector) =>
+			Assign(selector, (a, v) => a.Wildcard = v?.Invoke(new IntervalsWildcardDescriptor()));
+
 		/// <inheritdoc cref="IntervalsAnyOfDescriptor" />
 		public IntervalsDescriptor AnyOf(Func<IntervalsAnyOfDescriptor, IIntervalsAnyOf> selector) =>
 			Assign(selector, (a, v) => a.AnyOf = v?.Invoke(new IntervalsAnyOfDescriptor()));
@@ -118,8 +162,9 @@ namespace Nest
 			Assign(selector, (a, v) => a.AllOf = v?.Invoke(new IntervalsAllOfDescriptor()));
 	}
 
+	// TODO: Rename this to IIntervalsWithFilter and IIntervalsNoFilter to IIntervals in 8.0
 	/// <summary>
-	/// An <see cref="IIntervalsQuery" /> rule
+	/// An <see cref="IIntervalsQuery" /> rule with an optional filter
 	/// </summary>
 	public interface IIntervals
 	{
@@ -131,6 +176,13 @@ namespace Nest
 	}
 
 	/// <summary>
+	/// An <see cref="IIntervalsQuery" /> rule
+	/// </summary>
+	public interface IIntervalsNoFilter
+	{
+	}
+
+	/// <summary>
 	/// Base type for an <see cref="IIntervals" /> implementation
 	/// </summary>
 	public abstract class IntervalsBase : IIntervals
@@ -138,6 +190,14 @@ namespace Nest
 		/// <inheritdoc />
 		public IIntervalsFilter Filter { get; set; }
 
+		internal abstract void WrapInContainer(IIntervalsContainer container);
+	}
+
+	/// <summary>
+	/// Base type for an <see cref="IIntervalsNoFilter" /> implementation
+	/// </summary>
+	public abstract class IntervalsNoFilterBase : IIntervalsNoFilter
+	{
 		internal abstract void WrapInContainer(IIntervalsContainer container);
 	}
 
@@ -165,6 +225,14 @@ namespace Nest
 		/// <inheritdoc cref="IIntervalsMatch" />
 		public IntervalsListDescriptor Match(Func<IntervalsMatchDescriptor, IIntervalsMatch> selector) =>
 			Assign(selector, (a, v) => a.AddIfNotNull(new IntervalsDescriptor().Match(v)));
+
+		/// <inheritdoc cref="IIntervalsPrefix" />
+		public IntervalsListDescriptor Prefix(Func<IntervalsPrefixDescriptor, IIntervalsPrefix> selector) =>
+			Assign(selector, (a, v) => a.AddIfNotNull(new IntervalsDescriptor().Prefix(v)));
+
+		/// <inheritdoc cref="IIntervalsWildcard" />
+		public IntervalsListDescriptor Wildcard(Func<IntervalsWildcardDescriptor, IIntervalsWildcard> selector) =>
+			Assign(selector, (a, v) => a.AddIfNotNull(new IntervalsDescriptor().Wildcard(v)));
 
 		/// <inheritdoc cref="IIntervalsAnyOf" />
 		public IntervalsListDescriptor AnyOf(Func<IntervalsAnyOfDescriptor, IIntervalsAnyOf> selector) =>
