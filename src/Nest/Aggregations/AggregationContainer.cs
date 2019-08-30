@@ -208,6 +208,9 @@ namespace Nest
 		[DataMember(Name = "range")]
 		IRangeAggregation Range { get; set; }
 
+		[DataMember(Name = "rare_terms")]
+		IRareTermsAggregation RareTerms { get; set; }
+
 		[DataMember(Name = "reverse_nested")]
 		IReverseNestedAggregation ReverseNested { get; set; }
 
@@ -338,6 +341,8 @@ namespace Nest
 		public IPercentilesBucketAggregation PercentilesBucket { get; set; }
 
 		public IRangeAggregation Range { get; set; }
+
+		public IRareTermsAggregation RareTerms { get; set; }
 
 		public IReverseNestedAggregation ReverseNested { get; set; }
 
@@ -480,6 +485,8 @@ namespace Nest
 		IPercentilesBucketAggregation IAggregationContainer.PercentilesBucket { get; set; }
 
 		IRangeAggregation IAggregationContainer.Range { get; set; }
+
+		IRareTermsAggregation IAggregationContainer.RareTerms { get; set; }
 
 		IReverseNestedAggregation IAggregationContainer.ReverseNested { get; set; }
 
@@ -637,6 +644,11 @@ namespace Nest
 			Func<RangeAggregationDescriptor<T>, IRangeAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Range = d);
+
+		public AggregationContainerDescriptor<T> RareTerms(string name,
+			Func<RareTermsAggregationDescriptor<T>, IRareTermsAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.RareTerms = d);
 
 		public AggregationContainerDescriptor<T> Stats(string name,
 			Func<StatsAggregationDescriptor<T>, IStatsAggregation> selector
