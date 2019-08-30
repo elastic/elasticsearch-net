@@ -53,7 +53,7 @@ namespace Nest
 		int? IgnoreAbove { get; set; }
 
 		/// <summary>
-		/// Should the field be searchable? Accepts true (default) and false.
+		/// Should the field be searchable? Accepts <c>true</c> (default) and <c>false</c>.
 		/// </summary>
 		[DataMember(Name = "index")]
 		bool? Index { get; set; }
