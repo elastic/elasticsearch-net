@@ -51,6 +51,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<summary>DELETE on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
 		///<param name = "policyId">The name of the index lifecycle policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.delete_lifecycle", "policy_id")]
 		public Task<TResponse> DeleteLifecycleAsync<TResponse>(string policyId, DeleteLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ilm/policy/{policyId:policyId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_ilm/explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</para></summary>
@@ -61,6 +62,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<summary>GET on /{index}/_ilm/explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</para></summary>
 		///<param name = "index">The name of the index to explain</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.explain_lifecycle", "index")]
 		public Task<TResponse> ExplainLifecycleAsync<TResponse>(string index, ExplainLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_ilm/explain"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
@@ -71,6 +73,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<summary>GET on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
 		///<param name = "policyId">The name of the index lifecycle policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.get_lifecycle", "policy_id")]
 		public Task<TResponse> GetLifecycleAsync<TResponse>(string policyId, GetLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ilm/policy/{policyId:policyId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/policy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
@@ -79,6 +82,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ilm/policy", null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/policy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.get_lifecycle", "")]
 		public Task<TResponse> GetLifecycleAsync<TResponse>(GetLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ilm/policy", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
@@ -87,6 +91,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ilm/status", null, RequestParams(requestParameters));
 		///<summary>GET on /_ilm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.get_status", "")]
 		public Task<TResponse> GetStatusAsync<TResponse>(GetIlmStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ilm/status", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/move/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
@@ -99,6 +104,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<param name = "index">The name of the index whose lifecycle step is to change</param>
 		///<param name = "body">The new lifecycle step to move to</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.move_to_step", "index, body")]
 		public Task<TResponse> MoveToStepAsync<TResponse>(string index, PostData body, MoveToStepRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ilm/move/{index:index}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
@@ -111,6 +117,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<param name = "policyId">The name of the index lifecycle policy</param>
 		///<param name = "body">The lifecycle policy definition to register</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.put_lifecycle", "policy_id, body")]
 		public Task<TResponse> PutLifecycleAsync<TResponse>(string policyId, PostData body, PutLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ilm/policy/{policyId:policyId}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ilm/remove <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
@@ -121,6 +128,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<summary>POST on /{index}/_ilm/remove <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
 		///<param name = "index">The name of the index to remove policy on</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.remove_policy", "index")]
 		public Task<TResponse> RemovePolicyAsync<TResponse>(string index, RemovePolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ilm/remove"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ilm/retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
@@ -131,6 +139,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		///<summary>POST on /{index}/_ilm/retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
 		///<param name = "index">The name of the indices (comma-separated) whose failed lifecycle step is to be retry</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.retry", "index")]
 		public Task<TResponse> RetryAsync<TResponse>(string index, RetryIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ilm/retry"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
@@ -139,6 +148,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ilm/start", null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.start", "")]
 		public Task<TResponse> StartAsync<TResponse>(StartIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ilm/start", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
@@ -147,6 +157,7 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ilm/stop", null, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.stop", "")]
 		public Task<TResponse> StopAsync<TResponse>(StopIlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ilm/stop", ctx, null, RequestParams(requestParameters));
 	}

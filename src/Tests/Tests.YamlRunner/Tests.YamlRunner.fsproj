@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    
     <Compile Include="AsyncExtensions.fs" />
     <Compile Include="Models.fs" />
+    <Compile Include="DoMapper.fs" />
     <Compile Include="TestsDownloader.fs" />
     <Compile Include="TestsLocator.fs" />
     <Compile Include="OperationExecutor.fs" />

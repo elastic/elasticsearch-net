@@ -1,6 +1,8 @@
 ﻿module Tests.YamlRunner.Main
 
 open Argu
+open Elasticsearch.Net
+open Tests.YamlRunner
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader
 open Tests.YamlRunner.TestsLocator
@@ -26,12 +28,13 @@ let runMain (parsed:ParseResults<Arguments>) = async {
 //    let read = TestsReader.ReadYamlFile test
     
     
-    let! locateResults = Commands.LocateTests namedSuite revision
-    let readResults = Commands.ReadTests locateResults
-    let! runTesults = Commands.RunTests readResults
+    
+//    let! locateResults = Commands.LocateTests namedSuite revision
+//    let readResults = Commands.ReadTests locateResults
+//    let! runTesults = Commands.RunTests readResults
     
     
-    
+    DoMapper.clientApiDispatch (ElasticLowLevelClient())
 //    
 //    printfn "folders: %O" locateResults.Length
 //    for folder in locateResults do 
