@@ -8,7 +8,9 @@ namespace Nest
 	{
 		private IBoolQuery _bool;
 		private IBoostingQuery _boosting;
+#pragma warning disable 618
 		private ICommonTermsQuery _commonTerms;
+#pragma warning restore 618
 		private IConstantScoreQuery _constantScore;
 		private IDisMaxQuery _disMax;
 		private IExistsQuery _exists;
@@ -73,11 +75,14 @@ namespace Nest
 			set => _boosting = Set(value);
 		}
 
+#pragma warning disable 618
 		ICommonTermsQuery IQueryContainer.CommonTerms
+
 		{
 			get => _commonTerms;
 			set => _commonTerms = Set(value);
 		}
+#pragma warning restore 618
 
 		IConstantScoreQuery IQueryContainer.ConstantScore
 		{

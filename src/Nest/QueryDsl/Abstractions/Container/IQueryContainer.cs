@@ -14,7 +14,9 @@ namespace Nest
 		IBoostingQuery Boosting { get; set; }
 
 		[DataMember(Name ="common")]
+#pragma warning disable 618
 		ICommonTermsQuery CommonTerms { get; set; }
+#pragma warning restore 618
 
 		[DataMember(Name ="constant_score")]
 		IConstantScoreQuery ConstantScore { get; set; }

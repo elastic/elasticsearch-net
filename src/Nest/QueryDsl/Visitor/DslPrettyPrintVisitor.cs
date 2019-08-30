@@ -49,7 +49,9 @@ namespace Nest
 
 		public virtual void Visit(IBoostingQuery query) => Write("boosting");
 
+#pragma warning disable 618
 		public virtual void Visit(ICommonTermsQuery query) => Write("common_terms", query.Field);
+#pragma warning restore 618
 
 		public virtual void Visit(IConstantScoreQuery query) => Write("constant_score");
 

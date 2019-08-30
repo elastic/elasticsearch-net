@@ -1,8 +1,10 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	[Obsolete("Deprecated in 7.3.0. Use MatchQuery instead, which skips blocks of documents efficiently, without any configuration, provided that the total number of hits is not tracked.")]
 	[InterfaceDataContract]
 	[JsonFormatter(typeof(FieldNameQueryFormatter<CommonTermsQuery, ICommonTermsQuery>))]
 	public interface ICommonTermsQuery : IFieldNameQuery
@@ -28,6 +30,7 @@ namespace Nest
 		string Query { get; set; }
 	}
 
+	[Obsolete("Deprecated in 7.3.0. Use MatchQuery instead, which skips blocks of documents efficiently, without any configuration, provided that the total number of hits is not tracked.")]
 	public class CommonTermsQuery : FieldNameQueryBase, ICommonTermsQuery
 	{
 		public string Analyzer { get; set; }
@@ -43,6 +46,7 @@ namespace Nest
 		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
+	[Obsolete("Deprecated in 7.3.0. Use MatchQuery instead, which skips blocks of documents efficiently, without any configuration, provided that the total number of hits is not tracked.")]
 	public class CommonTermsQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<CommonTermsQueryDescriptor<T>, ICommonTermsQuery, T>
 			, ICommonTermsQuery

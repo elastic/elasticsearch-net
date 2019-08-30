@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -27,6 +28,7 @@ namespace Nest
 		/// or all of the low frequency terms in the case of an <see cref="Nest.Operator.And" /> match.
 		/// </summary>
 		[DataMember(Name = "cutoff_frequency")]
+		[Obsolete("Deprecated in 7.3.0. This option can be omitted since MatchQuery can skips blocks of documents efficiently if the total number of hits is not tracked.")]
 		double? CutoffFrequency { get; set; }
 
 		/// <summary>
@@ -112,6 +114,7 @@ namespace Nest
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Deprecated in 7.3.0. This option can be omitted since MatchQuery can skips blocks of documents efficiently if the total number of hits is not tracked.")]
 		public double? CutoffFrequency { get; set; }
 
 		/// <inheritdoc />
@@ -161,6 +164,7 @@ namespace Nest
 		protected virtual string MatchQueryType => null;
 		string IMatchQuery.Analyzer { get; set; }
 		bool? IMatchQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
+		[Obsolete("Deprecated in 7.3.0. This option can be omitted since MatchQuery can skips blocks of documents efficiently if the total number of hits is not tracked.")]
 		double? IMatchQuery.CutoffFrequency { get; set; }
 		IFuzziness IMatchQuery.Fuzziness { get; set; }
 		MultiTermQueryRewrite IMatchQuery.FuzzyRewrite { get; set; }
@@ -190,6 +194,7 @@ namespace Nest
 			Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositions = v);
 
 		/// <inheritdoc cref="IMatchQuery.CutoffFrequency" />
+		[Obsolete("Deprecated in 7.3.0. This option can be omitted since MatchQuery can skips blocks of documents efficiently if the total number of hits is not tracked.")]
 		public MatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency) => Assign(cutoffFrequency, (a, v) => a.CutoffFrequency = v);
 
 		/// <inheritdoc cref="IMatchQuery.FuzzyRewrite" />
