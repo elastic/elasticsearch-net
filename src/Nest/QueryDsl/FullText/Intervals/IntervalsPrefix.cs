@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Nest
 {
 	/// <summary>
-	/// matches terms that start with a specified set of characters. This prefix can expand to match at most 128 terms.
+	/// Matches terms that start with a specified set of characters. This prefix can expand to match at most 128 terms.
 	/// If the prefix matches more than 128 terms, Elasticsearch returns an error.
 	/// You can use the index-prefixes option in the field mapping to avoid this limit.
 	/// <para />
