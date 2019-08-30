@@ -41,9 +41,8 @@ namespace Nest
 				{
 					new QueryContainerCollectionFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
-					// TODO: condition on TimeSpanToStringFormatter and NullableTimeSpanToStringFormatter to only take effect when StringTimeSpanAttribute is not present.
-					new TimeSpanToStringFormatter(),
-					new NullableTimeSpanToStringFormatter(),
+					new TimeSpanTicksFormatter(),
+					new NullableTimeSpanTicksFormatter(),
 					new JsonNetCompatibleUriFormatter(),
 					new GeoOrientationFormatter(),
 					new NullableGeoOrientationFormatter(),
@@ -89,9 +88,7 @@ namespace Nest
 					propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
 				var serializerMapping = _settings.PropertyMappingProvider?.CreatePropertyMapping(member);
-
 				var nameOverride = propertyMapping?.Name ?? serializerMapping?.Name;
-
 				var property = new JsonProperty(nameOverride);
 
 				var overrideIgnore = propertyMapping?.Ignore ?? serializerMapping?.Ignore;
@@ -103,6 +100,20 @@ namespace Nest
 
 				if (member.GetCustomAttribute<StringEnumAttribute>() != null)
 					CreateEnumFormatterForProperty(member, property);
+				else if (member.GetCustomAttribute<StringTimeSpanAttribute>() != null)
+				{
+					switch (member)
+					{
+						case PropertyInfo propertyInfo:
+							property.JsonFormatter =
+								BuiltinResolver.BuiltinResolverGetFormatterHelper.GetFormatter(propertyInfo.PropertyType);
+							break;
+						case FieldInfo fieldInfo:
+							property.JsonFormatter =
+								BuiltinResolver.BuiltinResolverGetFormatterHelper.GetFormatter(fieldInfo.FieldType);
+							break;
+					}
+				}
 
 				return property;
 			}
