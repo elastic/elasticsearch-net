@@ -178,6 +178,20 @@ namespace Nest
 
 		public MultiBucketAggregate<KeyedBucket<string>> AdjacencyMatrix(string key) => GetMultiKeyedBucketAggregate<string>(key);
 
+		public MultiBucketAggregate<RareTermsBucket<TKey>> RareTerms<TKey>(string key)
+		{
+			var bucket = TryGet<BucketAggregate>(key);
+			return bucket == null
+				? null
+				: new MultiBucketAggregate<RareTermsBucket<TKey>>
+				{
+					Buckets = GetRareTermsBuckets<TKey>(bucket.Items).ToList(),
+					Meta = bucket.Meta
+				};
+		}
+
+		public MultiBucketAggregate<RareTermsBucket<string>> RareTerms(string key) => RareTerms<string>(key);
+
 		public MultiBucketAggregate<RangeBucket> Range(string key) => GetMultiBucketAggregate<RangeBucket>(key);
 
 		public MultiBucketAggregate<RangeBucket> DateRange(string key) => GetMultiBucketAggregate<RangeBucket>(key);
@@ -273,6 +287,18 @@ namespace Nest
 					BgCount = bucket.BgCount,
 					DocCount = bucket.DocCount,
 					Score = bucket.Score
+				};
+		}
+
+		private IEnumerable<RareTermsBucket<TKey>> GetRareTermsBuckets<TKey>(IEnumerable<IBucket> items)
+		{
+			var buckets = items.Cast<KeyedBucket<object>>();
+
+			foreach (var bucket in buckets)
+				yield return new RareTermsBucket<TKey>(bucket.BackingDictionary)
+				{
+					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					DocCount = bucket.DocCount.GetValueOrDefault(0)
 				};
 		}
 	}

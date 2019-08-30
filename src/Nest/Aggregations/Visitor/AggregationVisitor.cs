@@ -74,6 +74,8 @@
 
 		void Visit(IRangeAggregation aggregation);
 
+		void Visit(IRareTermsAggregation aggregation);
+
 		void Visit(ITermsAggregation aggregation);
 
 		void Visit(ISignificantTermsAggregation aggregation);
@@ -200,6 +202,8 @@
 		public virtual void Visit(ISignificantTermsAggregation aggregation) { }
 
 		public virtual void Visit(IRangeAggregation aggregation) { }
+
+		public virtual void Visit(IRareTermsAggregation aggregation) { }
 
 		public virtual void Visit(INestedAggregation aggregation) { }
 
