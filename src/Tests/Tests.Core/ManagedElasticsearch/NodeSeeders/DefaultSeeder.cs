@@ -267,90 +267,105 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		);
 
 		public static PropertiesDescriptor<TProject> ProjectProperties<TProject>(PropertiesDescriptor<TProject> props)
-			where TProject : Project => props
-			.Join(j => j
-				.Name(n => n.Join)
-				.Relations(r => r
-					.Join<Project, CommitActivity>()
-				)
-			)
-			.Keyword(d => d.Name(p => p.Type))
-			.Keyword(s => s
-				.Name(p => p.Name)
-				.Store()
-				.Fields(fs => fs
-					.Text(ss => ss
-						.Name("standard")
-						.Analyzer("standard")
-					)
-					.Completion(cm => cm
-						.Name("suggest")
+			where TProject : Project
+		{
+			props
+				.Join(j => j
+					.Name(n => n.Join)
+					.Relations(r => r
+						.Join<Project, CommitActivity>()
 					)
 				)
-			)
-			.Text(s => s
-				.Name(p => p.Description)
-				.Fielddata()
-				.Fields(f => f
-					.Text(t => t
-						.Name("shingle")
-						.Analyzer("shingle")
+				.Keyword(d => d.Name(p => p.Type))
+				.Keyword(s => s
+					.Name(p => p.Name)
+					.Store()
+					.Fields(fs => fs
+						.Text(ss => ss
+							.Name("standard")
+							.Analyzer("standard")
+						)
+						.Completion(cm => cm
+							.Name("suggest")
+						)
 					)
 				)
-			)
-			.Date(d => d
-				.Store()
-				.Name(p => p.StartedOn)
-			)
-			.Text(d => d
-				.Store()
-				.Name(p => p.DateString)
-			)
-			.Keyword(d => d
-				.Name(p => p.State)
-				.Fields(fs => fs
-					.Text(st => st
-						.Name("offsets")
-						.IndexOptions(IndexOptions.Offsets)
-					)
-					.Keyword(sk => sk
-						.Name("keyword")
+				.Text(s => s
+					.Name(p => p.Description)
+					.Fielddata()
+					.Fields(f => f
+						.Text(t => t
+							.Name("shingle")
+							.Analyzer("shingle")
+						)
 					)
 				)
-			)
-			.Nested<Tag>(mo => mo
-				.AutoMap()
-				.Name(p => p.Tags)
-				.Properties(TagProperties)
-			)
-			.Object<Developer>(o => o
-				.AutoMap()
-				.Name(p => p.LeadDeveloper)
-				.Properties(DeveloperProperties)
-			)
-			.GeoPoint(g => g
-				.Name(p => p.LocationPoint)
-			)
-			.GeoShape(g => g
-				.Name(p => p.LocationShape)
-			)
-			.Completion(cm => cm
-				.Name(p => p.Suggest)
-				.Contexts(cx => cx
-					.Category(c => c
-						.Name("color")
+				.Date(d => d
+					.Store()
+					.Name(p => p.StartedOn)
+				)
+				.Text(d => d
+					.Store()
+					.Name(p => p.DateString)
+				)
+				.Keyword(d => d
+					.Name(p => p.State)
+					.Fields(fs => fs
+						.Text(st => st
+							.Name("offsets")
+							.IndexOptions(IndexOptions.Offsets)
+						)
+						.Keyword(sk => sk
+							.Name("keyword")
+						)
 					)
 				)
-			)
-			.Scalar(p => p.NumberOfCommits, n => n.Store())
-			.Scalar(p => p.NumberOfContributors, n => n.Store())
-			.Object<Dictionary<string, Metadata>>(o => o
-				.Name(p => p.Metadata)
-			)
-			.RankFeature(rf => rf
-				.Name(p => p.Rank)
-				.PositiveScoreImpact()
-			);
+				.Nested<Tag>(mo => mo
+					.AutoMap()
+					.Name(p => p.Tags)
+					.Properties(TagProperties)
+				)
+				.Object<Developer>(o => o
+					.AutoMap()
+					.Name(p => p.LeadDeveloper)
+					.Properties(DeveloperProperties)
+				)
+				.GeoPoint(g => g
+					.Name(p => p.LocationPoint)
+				)
+				.GeoShape(g => g
+					.Name(p => p.LocationShape)
+				)
+				.Completion(cm => cm
+					.Name(p => p.Suggest)
+					.Contexts(cx => cx
+						.Category(c => c
+							.Name("color")
+						)
+					)
+				)
+				.Scalar(p => p.NumberOfCommits, n => n.Store())
+				.Scalar(p => p.NumberOfContributors, n => n.Store())
+				.Object<Dictionary<string, Metadata>>(o => o
+					.Name(p => p.Metadata)
+				)
+				.RankFeature(rf => rf
+					.Name(p => p.Rank)
+					.PositiveScoreImpact()
+				);
+
+			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+				props.Flattened(f => f
+					.Name(p => p.Labels)
+				);
+			else
+				props.Object<Labels>(f => f
+					.Name(p => p.Labels)
+					.Enabled(false)
+				);
+
+			return props;
+		}
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
 			.Keyword(s => s

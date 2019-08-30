@@ -2,14 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bogus;
-using Nest;
 using Elasticsearch.Net;
+using Nest;
 using Tests.Configuration;
 using Tests.Domain.Extensions;
 using Tests.Domain.Helpers;
 
 namespace Tests.Domain
 {
+	public class Labels
+	{
+		public LabelActivity LabelActivity { get; set; }
+		public string Priority { get; set; }
+
+		public IList<string> Release { get; set; }
+	}
+
+	public class LabelActivity
+	{
+		public long? Closed { get; set; }
+		public long? Created { get; set; }
+	}
+
 	public class Project
 	{
 		public static string TypeName = "project";
@@ -24,6 +38,8 @@ namespace Tests.Domain
 			: InstanceAnonymousDefault;
 
 		public JoinField Join => JoinField.Root<Project>();
+
+		public Labels Labels { get; set; }
 		public DateTime LastActivity { get; set; }
 		public Developer LeadDeveloper { get; set; }
 		public SimpleGeoPoint LocationPoint { get; set; }
@@ -42,6 +58,7 @@ namespace Tests.Domain
 		public StateOfBeing State { get; set; }
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<Tag> Tags { get; set; }
+
 		public string Type => TypeName;
 
 		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
@@ -78,7 +95,21 @@ namespace Tests.Domain
 					{
 						{ "color", new[] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
 					}
-				});
+				})
+				.RuleFor(p => p.Labels, f =>
+					{
+						var closedDate = f.Date.Recent(7);
+						return new Labels
+						{
+						Priority = Gimme.Random.ListItem(new List<string> { "urgent", "high", "normal", "low" }),
+						Release = Gimme.Random.ListItems(new List<string> { f.System.Semver(), f.System.Semver(), f.System.Semver(), f.System.Semver() }),
+						LabelActivity = new LabelActivity
+								{
+									Created = f.Date.Past(1, closedDate).ToUnixTime(),
+									Closed = closedDate.ToUnixTime()
+								}
+						};
+					});
 
 		public static IList<Project> Projects { get; } = Generator.Clone().Generate(100);
 
