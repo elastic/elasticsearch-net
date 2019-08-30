@@ -29,7 +29,7 @@ namespace Nest
 		string Pattern { get; set; }
 
 		/// <summary>
-		/// If specified, then match intervals from this field rather than the top-level <field>.
+		/// If specified, then match intervals from this field rather than the top-level field.
 		/// The prefix is normalized using the search analyzer from this field, unless a separate analyzer is specified.
 		/// </summary>
 		[DataMember(Name = "use_field")]
