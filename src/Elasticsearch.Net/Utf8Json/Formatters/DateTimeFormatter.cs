@@ -862,9 +862,34 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             }
             writer.WriteInt32(second);
 
-            if (nanosecond != 0)
+			if (nanosecond != 0)
             {
                 writer.WriteRawUnsafe((byte)'.');
+                if (nanosecond < 1000000)
+                {
+                    writer.WriteRawUnsafe((byte) '0');
+                    if (nanosecond < 100000)
+                    {
+                        writer.WriteRawUnsafe((byte) '0');
+                        if (nanosecond < 10000)
+                        {
+                            writer.WriteRawUnsafe((byte) '0');
+                            if (nanosecond < 1000)
+                            {
+                                writer.WriteRawUnsafe((byte) '0');
+                                if (nanosecond < 100)
+                                {
+                                    writer.WriteRawUnsafe((byte) '0');
+                                    if (nanosecond < 10)
+                                    {
+                                        writer.WriteRawUnsafe((byte) '0');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 writer.WriteInt64(nanosecond);
             }
 
@@ -877,14 +902,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             var array = str.Array;
             var i = str.Offset;
             var len = str.Count;
-            var to = str.Offset + str.Count;
+            var to = str.Offset + len;
 
             // check day exists
             bool hasDay = false;
             {
                 bool foundDot = false;
                 bool foundColon = false;
-                for (int j = i; j < str.Count; j++)
+                for (int j = i; j < to; j++)
                 {
                     if (array[j] == '.')
                     {
@@ -989,7 +1014,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 : ts.Add(tk);
 
             ERROR:
-            throw new InvalidOperationException("invalid datetime format. value:" + StringEncoding.UTF8.GetString(str.Array, str.Offset, str.Count));
+            throw new InvalidOperationException("invalid TimeSpan format. value:" + StringEncoding.UTF8.GetString(str.Array, str.Offset, str.Count));
         }
     }
 }
