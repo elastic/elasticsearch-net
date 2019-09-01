@@ -99,7 +99,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request options for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -417,6 +417,13 @@ namespace Elasticsearch.Net
 			set => Q("lenient", value);
 		}
 
+		///<summary>Maximum number of documents to process (default: all documents)</summary>
+		public long? MaxDocs
+		{
+			get => Q<long? >("max_docs");
+			set => Q("max_docs", value);
+		}
+
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -487,7 +494,7 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
@@ -1415,6 +1422,13 @@ namespace Elasticsearch.Net
 	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Maximum number of documents to process (default: all documents)</summary>
+		public long? MaxDocs
+		{
+			get => Q<long? >("max_docs");
+			set => Q("max_docs", value);
+		}
+
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
@@ -1493,7 +1507,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -2117,6 +2131,13 @@ namespace Elasticsearch.Net
 			set => Q("lenient", value);
 		}
 
+		///<summary>Maximum number of documents to process (default: all documents)</summary>
+		public long? MaxDocs
+		{
+			get => Q<long? >("max_docs");
+			set => Q("max_docs", value);
+		}
+
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public string Pipeline
 		{
@@ -2194,7 +2215,7 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
