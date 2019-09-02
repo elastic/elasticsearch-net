@@ -1,11 +1,14 @@
+using System.Net;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using Tests.Core.Extensions;
 
 namespace Tests.XPack.Info
 {
@@ -59,6 +62,13 @@ namespace Tests.XPack.Info
 			r.Features.Sql.Should().NotBeNull();
 			r.Features.Watcher.Should().NotBeNull();
 			r.License.Should().NotBeNull();
+
+			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+			{
+				r.Features.Flattened.Should().NotBeNull();
+				r.Features.DataFrame.Should().NotBeNull();
+				r.Features.Vectors.Should().NotBeNull();
+			}
 		});
 
 		[I] public async Task XPackUsageResponse() => await Assert<XPackUsageResponse>(XPackUsageStep, (v, r) =>
@@ -86,6 +96,13 @@ namespace Tests.XPack.Info
 			r.Alerting.Count.Should().NotBeNull();
 			r.Alerting.Execution.Should().NotBeNull();
 			r.Alerting.Watch.Should().NotBeNull();
+
+			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+			{
+				r.Flattened.Should().NotBeNull();
+				r.DataFrame.Should().NotBeNull();
+				r.Vectors.Should().NotBeNull();
+			}
 		});
 	}
 }

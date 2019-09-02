@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
@@ -44,6 +45,15 @@ namespace Nest
 		[DataMember(Name = "rollup")]
 		public XPackUsage Rollup { get; internal set; }
 
+		[DataMember(Name = "data_frame")]
+		public XPackUsage DataFrame { get; internal set; }
+
+		[DataMember(Name = "flattened")]
+		public XPackUsage Flattened { get; internal set; }
+
+		[DataMember(Name = "ilm")]
+		public IlmUsage IndexLifecycleManagement { get; internal set; }
+
 		[DataMember(Name = "ccr")]
 		public CcrUsage Ccr { get; internal set; }
 
@@ -64,6 +74,9 @@ namespace Nest
 
 		[DataMember(Name = "security")]
 		public SecurityUsage Security { get; internal set; }
+
+		[DataMember(Name = "vectors")]
+		public XPackUsage Vectors { get; internal set; }
 	}
 
 	public class XPackUsage
@@ -307,6 +320,25 @@ namespace Nest
 			/// </summary>
 			[DataMember(Name = "total")]
 			public long Total { get; internal set; }
+		}
+	}
+
+	public class IlmUsage
+	{
+		[DataMember(Name = "policy_count")]
+		public int PolicyCount { get; internal set; }
+
+		[DataMember(Name = "policy_stats")]
+		public IReadOnlyCollection<IlmPolicyStatistics> PolicyStatistics { get; internal set; } =
+			EmptyReadOnly<IlmPolicyStatistics>.Collection;
+
+		public class IlmPolicyStatistics
+		{
+			[DataMember(Name = "phases")]
+			public IPhases Phases { get; internal set; }
+
+			[DataMember(Name = "indices_managed")]
+			public int IndicesManaged { get; internal set; }
 		}
 	}
 }
