@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -13,10 +14,13 @@ namespace Tests.Aggregations.Bucket.RareTerms
 	 * A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the
 	 * distribution and are not frequent. Conceptually, this is like a terms aggregation that is sorted by _count ascending.
 	 * As noted in the terms aggregation docs, actually ordering a terms agg by count ascending has unbounded error.
-	 * Instead, you should use the rare_terms aggregation
+	 * Instead, you should use the rare_terms aggregation.
+	 *
+	 * NOTE: Valid only in Elasticsearch 7.3.0+
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-rare-terms-aggregation.html[rare terms aggregation] for more detail.
 	 */
+	[SkipVersion("<7.3.0", "Introduced in 7.3.0")]
 	public class RareTermsAggregationUsageTests : AggregationUsageTestBase
 	{
 		public RareTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
