@@ -64,6 +64,9 @@ namespace Nest
 
 		[DataMember(Name = "security")]
 		public SecurityUsage Security { get; internal set; }
+
+		[DataMember(Name = "voting_only")]
+		public XPackUsage VotingOnly { get; internal set; }
 	}
 
 	public class XPackUsage

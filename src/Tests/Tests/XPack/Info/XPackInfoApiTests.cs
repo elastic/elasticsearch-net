@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using Tests.Core.Extensions;
 
 namespace Tests.XPack.Info
 {
@@ -86,6 +88,9 @@ namespace Tests.XPack.Info
 			r.Alerting.Count.Should().NotBeNull();
 			r.Alerting.Execution.Should().NotBeNull();
 			r.Alerting.Watch.Should().NotBeNull();
+
+			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+				r.VotingOnly.Should().NotBeNull();
 		});
 	}
 }
