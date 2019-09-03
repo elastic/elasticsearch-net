@@ -20,7 +20,7 @@ namespace Nest
 		[DataMember(Name ="stage")]
 		public string Stage { get; internal set; }
 
-		[Obsolete("Deprecated in NEST 7.3. Will be removed in 8.0")]
+		[Obsolete("Deprecated. Will be removed in 8.0")]
 		public RecoveryStartStatus Start { get; internal set; }
 
 		// TODO Rename in 8.0
