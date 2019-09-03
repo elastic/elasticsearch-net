@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
@@ -18,6 +20,9 @@ namespace Nest
 
 		[DataMember(Name ="partial")]
 		bool? Partial { get; set; }
+
+		[DataMember(Name = "metadata")]
+		IDictionary<string, object> Metadata { get; set; }
 	}
 
 	public partial class SnapshotRequest
@@ -28,6 +33,8 @@ namespace Nest
 		public Indices Indices { get; set; }
 
 		public bool? Partial { get; set; }
+
+		public IDictionary<string, object> Metadata { get; set; }
 	}
 
 	public partial class SnapshotDescriptor
@@ -38,6 +45,8 @@ namespace Nest
 		Indices ISnapshotRequest.Indices { get; set; }
 
 		bool? ISnapshotRequest.Partial { get; set; }
+
+		IDictionary<string, object> ISnapshotRequest.Metadata { get; set; }
 
 		public SnapshotDescriptor Index(IndexName index) => Indices(index);
 
@@ -50,5 +59,10 @@ namespace Nest
 		public SnapshotDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(includeGlobalState, (a, v) => a.IncludeGlobalState = v);
 
 		public SnapshotDescriptor Partial(bool? partial = true) => Assign(partial, (a, v) => a.Partial = v);
+
+		public SnapshotDescriptor Metadata(IDictionary<string, object> metadata) => Assign(metadata, (a, v) => a.Metadata = v);
+
+		public SnapshotDescriptor Metadata(Func<FluentDictionary<string, object>, IDictionary<string, object>> selector) =>
+			Assign(selector, (a, v) => a.Metadata = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }
