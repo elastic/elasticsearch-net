@@ -5,7 +5,7 @@ namespace Nest
 {
 	public class RecoveryIndexStatus
 	{
-		[Obsolete("Deprecated in NEST 7.3, use Size instead. Will be removed in 8.0")]
+		[Obsolete("Deprecated. Use Size instead. Will be removed in 8.0")]
 		public RecoveryBytes Bytes => Size;
 
 		[DataMember(Name = "files")]
