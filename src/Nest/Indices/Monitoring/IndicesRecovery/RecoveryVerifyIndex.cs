@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 
-namespace Nest {
+namespace Nest
+{
 	public class RecoveryVerifyIndex
 	{
 		[DataMember(Name ="check_index_time_in_millis")]
