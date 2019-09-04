@@ -4,8 +4,14 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	/// <summary>
+	/// A snapshot repository that stores snapshot data within a Hadoop HDFS filesystem
+	/// <para />
+	/// Requires the repository-hdfs plugin to be installed on the cluster
+	/// </summary>
 	public interface IHdfsRepository : IRepository<IHdfsRepositorySettings> { }
 
+	/// <inheritdoc />
 	public class HdfsRepository : IHdfsRepository
 	{
 		public HdfsRepository(HdfsRepositorySettings settings) => Settings = settings;
@@ -15,49 +21,89 @@ namespace Nest
 		public string Type { get; } = "hdfs";
 	}
 
+	/// <summary>
+	/// Snapshot repository settings for <see cref="IHdfsRepository"/>
+	/// </summary>
 	public interface IHdfsRepositorySettings : IRepositorySettings
 	{
+		/// <summary>
+		///  Big files can be broken down into chunks during snapshotting if needed.
+		///  The chunk size can be specified in bytes or by using size value notation,
+		///  i.e. 1g, 10m, 5k. Disabled by default
+		/// </summary>
 		[DataMember(Name ="chunk_size")]
 		string ChunkSize { get; set; }
 
+		/// <summary>
+		/// When set to true metadata files are stored in compressed format. This setting doesn't
+		/// affect index files that are already compressed by default. Defaults to <c>false</c>.
+		/// </summary>
 		[DataMember(Name ="compress")]
 		bool? Compress { get; set; }
 
+		/// <summary>
+		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
+		/// </summary>
 		[DataMember(Name ="concurrent_streams")]
 		int? ConcurrentStreams { get; set; }
 
+		/// <summary>
+		/// Hadoop configuration XML to be loaded (use commas for multi values)
+		/// </summary>
 		[DataMember(Name ="conf_location")]
 		string ConfigurationLocation { get; set; }
 
+		/// <summary>
+		/// 'inlined' key=value added to the Hadoop configuration
+		/// </summary>
 		[IgnoreDataMember]
 		Dictionary<string, object> InlineHadoopConfiguration { get; set; }
 
+		/// <summary>
+		/// Whether to load the default Hadoop configuration (default) or not
+		/// </summary>
 		[DataMember(Name ="load_defaults")]
 		bool? LoadDefaults { get; set; }
 
+		/// <summary>
+		/// The path with the file-system where data is stored/loaded. Required
+		/// </summary>
 		[DataMember(Name ="path")]
 		string Path { get; set; }
 
+		/// <summary>
+		/// The Hadoop file-system URI. Optional
+		/// </summary>
 		[DataMember(Name ="uri")]
 		string Uri { get; set; }
 	}
 
+	/// <inheritdoc />
 	public class HdfsRepositorySettings : IHdfsRepositorySettings
 	{
 		internal HdfsRepositorySettings() { }
 
 		public HdfsRepositorySettings(string path) => Path = path;
 
+		/// <inheritdoc />
 		public string ChunkSize { get; set; }
+		/// <inheritdoc />
 		public bool? Compress { get; set; }
+		/// <inheritdoc />
 		public int? ConcurrentStreams { get; set; }
+		/// <inheritdoc />
 		public string ConfigurationLocation { get; set; }
+		/// <inheritdoc />
 		public Dictionary<string, object> InlineHadoopConfiguration { get; set; }
+		/// <inheritdoc />
 		public bool? LoadDefaults { get; set; }
+		/// <inheritdoc />
 		public string Path { get; set; }
+		/// <inheritdoc />
 		public string Uri { get; set; }
 	}
 
+	/// <inheritdoc cref="IHdfsRepositorySettings"/>
 	public class HdfsRepositorySettingsDescriptor
 		: DescriptorBase<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings>, IHdfsRepositorySettings
 	{
@@ -70,58 +116,35 @@ namespace Nest
 		string IHdfsRepositorySettings.Path { get; set; }
 		string IHdfsRepositorySettings.Uri { get; set; }
 
-		/// <summary>
-		/// optional - Hadoop file-system URI
-		/// </summary>
+		/// <inheritdoc cref="IHdfsRepositorySettings.Uri"/>
 		public HdfsRepositorySettingsDescriptor Uri(string uri) => Assign(uri, (a, v) => a.Uri = v);
 
-		/// <summary>
-		/// required - path with the file-system where data is stored/loaded
-		/// </summary>
+		/// <inheritdoc cref="IHdfsRepositorySettings.Path"/>
 		public HdfsRepositorySettingsDescriptor Path(string path) => Assign(path, (a, v) => a.Path = v);
 
-		/// <summary>
-		/// whether to load the default Hadoop configuration (default) or not
-		/// </summary>
-		/// <param name="loadDefaults"></param>
+		/// <inheritdoc cref="IHdfsRepositorySettings.LoadDefaults"/>
 		public HdfsRepositorySettingsDescriptor LoadDefaults(bool? loadDefaults = true) => Assign(loadDefaults, (a, v) => a.LoadDefaults = v);
 
-		/// <summary>
-		/// Hadoop configuration XML to be loaded (use commas for multi values)
-		/// </summary>
-		/// <param name="configurationLocation"></param>
+		/// <inheritdoc cref="IHdfsRepositorySettings.ConfigurationLocation"/>
 		public HdfsRepositorySettingsDescriptor ConfigurationLocation(string configurationLocation) =>
 			Assign(configurationLocation, (a, v) => a.ConfigurationLocation = v);
 
-		/// <summary>
-		/// 'inlined' key=value added to the Hadoop configuration
-		/// </summary>
+		/// <inheritdoc cref="IHdfsRepositorySettings.InlineHadoopConfiguration"/>
 		public HdfsRepositorySettingsDescriptor InlinedHadoopConfiguration(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> inlineConfig
 		) => Assign(inlineConfig, (a, v) => a.InlineHadoopConfiguration = v(new FluentDictionary<string, object>()));
 
-		/// <summary>
-		/// When set to true metadata files are stored in compressed format. This setting doesn't
-		/// affect index files that are already compressed by default. Defaults to false.
-		/// </summary>
-		/// <param name="compress"></param>
+		/// <inheritdoc cref="IHdfsRepositorySettings.Compress"/>
 		public HdfsRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
-		/// <summary>
-		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
-		/// </summary>
-		/// <param name="concurrentStreams"></param>
+		/// <inheritdoc cref="IHdfsRepositorySettings.ConcurrentStreams"/>
 		public HdfsRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(concurrentStreams, (a, v) => a.ConcurrentStreams = v);
 
-		/// <summary>
-		///  Big files can be broken down into chunks during snapshotting if needed.
-		///  The chunk size can be specified in bytes or by using size value notation,
-		///  i.e. 1g, 10m, 5k. Disabled by default
-		/// </summary>
-		/// <param name="chunkSize"></param>
+		/// <inheritdoc cref="IHdfsRepositorySettings.ChunkSize"/>
 		public HdfsRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(chunkSize, (a, v) => a.ChunkSize = v);
 	}
 
+	/// <inheritdoc cref="IHdfsRepository"/>
 	public class HdfsRepositoryDescriptor
 		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
 	{
@@ -129,6 +152,7 @@ namespace Nest
 		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
 		string ISnapshotRepository.Type => "hdfs";
 
+		/// <inheritdoc cref="IHdfsRepositorySettings"/>
 		public HdfsRepositoryDescriptor Settings(string path, Func<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings> settingsSelector = null
 		) =>
 			Assign(settingsSelector.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)), (a, v) => a.Settings = v);
