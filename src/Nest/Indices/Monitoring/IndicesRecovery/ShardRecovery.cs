@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -23,11 +24,13 @@ namespace Nest
 		[Obsolete("Deprecated. Will be removed in 8.0")]
 		public RecoveryStartStatus Start { get; internal set; }
 
-		// TODO Rename in 8.0
+		// TODO Rename property in 8.0
+		[JsonFormatter(typeof(NullableDateTimeEpochMillisecondsFormatter))]
 		[DataMember(Name ="start_time_in_millis")]
 		public DateTime? StartTime { get; internal set; }
 
-		// TODO Rename in 8.0
+		// TODO Rename property in 8.0
+		[JsonFormatter(typeof(NullableDateTimeEpochMillisecondsFormatter))]
 		[DataMember(Name ="stop_time_in_millis")]
 		public DateTime? StopTime { get; internal set; }
 
