@@ -737,7 +737,7 @@ namespace Tests.XPack.Watcher.PutWatch
 									{
 										numberOfCommits = new
 										{
-											gt = 10
+											gt = 10.0
 										}
 									}
 								}
