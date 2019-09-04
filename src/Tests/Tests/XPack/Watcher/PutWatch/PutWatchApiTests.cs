@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -687,6 +688,162 @@ namespace Tests.XPack.Watcher.PutWatch
 						}
 					},
 					Body = "{{ctx.payload._value}}"
+				}
+			};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Watcher.Put(CallIsolatedValue, f),
+			(client, f) => client.Watcher.PutAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Put(r),
+			(client, r) => client.Watcher.PutAsync(r)
+		);
+
+		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);
+
+		protected override void ExpectResponse(PutWatchResponse response)
+		{
+			response.Created.Should().BeTrue();
+			response.Version.Should().Be(1);
+			response.Id.Should().Be(CallIsolatedValue);
+		}
+	}
+
+	[SkipVersion("<7.3.0", "Foreach introduced in 7.3.0")]
+	public class PutWatchApiWithForeachTests : ApiIntegrationTestBase<XPackCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
+	{
+		public PutWatchApiWithForeachTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson =>
+			new
+			{
+				input = new
+				{
+					search = new
+					{
+						request = new
+						{
+							indices = new[] { "project" },
+							body = new
+							{
+								query = new
+								{
+									range = new
+									{
+										numberOfCommits = new
+										{
+											gt = 10.0
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				trigger = new
+				{
+					schedule = new
+					{
+						interval = "5m"
+					}
+				},
+				actions = new
+				{
+					log_hits = new
+					{
+						@foreach = "ctx.payload.hits.hits",
+						logging = new
+						{
+							text = "Found id {{ctx.payload._id}} with field {{ctx.payload._source.numberOfCommits}}"
+						},
+						transform = new
+						{
+							script = new
+							{
+								source = "return [ 'time' : ctx.trigger.scheduled_time ]"
+							}
+						},
+						condition = new
+						{
+							always = new {}
+						}
+					}
+				}
+			};
+
+		protected override int ExpectStatusCode => 201;
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override Func<PutWatchDescriptor, IPutWatchRequest> Fluent => p => p
+			.Input(i => i
+				.Search(s => s
+					.Request(si => si
+						.Indices<Project>()
+						.Body<Project>(b => b
+							.Query(q => q
+								.Range(r => r
+									.Field(f => f.NumberOfCommits)
+									.GreaterThan(10)
+								)
+							)
+						)
+					)
+				)
+			)
+			.Trigger(t => t
+				.Schedule(s => s
+					.Interval(new Interval(5, IntervalUnit.Minute))
+				)
+			)
+			.Actions(a => a
+				.Logging("log_hits", i => i
+					.Foreach("ctx.payload.hits.hits")
+					.Text("Found id {{ctx.payload._id}} with field {{ctx.payload._source.numberOfCommits}}")
+					.Transform(t => t
+						.Script(st =>st
+							.Source("return [ 'time' : ctx.trigger.scheduled_time ]")
+						)
+					)
+					.Condition(c => c
+						.Always()
+					)
+				)
+			);
+
+		protected override PutWatchRequest Initializer =>
+			new PutWatchRequest(CallIsolatedValue)
+			{
+				Input = new SearchInput
+				{
+					Request = new SearchInputRequest
+					{
+						Indices = new IndexName[] { typeof(Project) },
+						Body = new SearchRequest<Project>
+						{
+							Query = new NumericRangeQuery
+							{
+								Field = Infer.Field<Project>(f => f.NumberOfCommits),
+								GreaterThan = 10
+							}
+						}
+					}
+				},
+				Trigger = new ScheduleContainer
+				{
+					Interval = new Interval(5, IntervalUnit.Minute)
+				},
+				Actions = new LoggingAction("log_hits")
+				{
+					Foreach = "ctx.payload.hits.hits",
+					Text = "Found id {{ctx.payload._id}} with field {{ctx.payload._source.numberOfCommits}}",
+					Transform = new InlineScriptTransform("return [ 'time' : ctx.trigger.scheduled_time ]"),
+					Condition = new AlwaysCondition()
 				}
 			};
 

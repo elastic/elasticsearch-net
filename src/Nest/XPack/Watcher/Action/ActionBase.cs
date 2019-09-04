@@ -7,22 +7,57 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
+	/// <summary>
+	/// A Watcher action
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IAction
 	{
+		/// <summary>
+		/// The type of action
+		/// </summary>
 		[IgnoreDataMember]
 		ActionType ActionType { get; }
 
+		/// <summary>
+		/// The name of the action
+		/// </summary>
 		[IgnoreDataMember]
 		string Name { get; set; }
 
+		/// <summary>
+		/// Limit how often an action is executed, after it has been executed.
+		/// When a throttling period is set, repeated executions of the action are prevented if it has already
+		/// executed within the throttling period time frame (now - throttling period).
+		/// </summary>
 		[IgnoreDataMember]
 		Time ThrottlePeriod { get; set; }
 
-		[DataMember(Name = "transform")]
+		/// <summary>
+		/// Trigger the configured action for every element within an array
+		/// defined by the path assigned.
+		/// <para />
+		/// Valid only in Elasticsearch 7.3.0+
+		/// </summary>
+		[IgnoreDataMember]
+		string Foreach { get; set; }
+
+		/// <summary>
+		/// Transforms the payload before executing the action. The transformation is only applied
+		/// for the payload for this action.
+		/// </summary>
+		[IgnoreDataMember]
 		TransformContainer Transform { get; set; }
+
+		/// <summary>
+		/// A condition for the action. Allows a single watch to specify multiple actions, but
+		/// further control when each action will be executed.
+		/// </summary>
+		[IgnoreDataMember]
+		ConditionContainer Condition { get; set; }
 	}
 
+	/// <inheritdoc />
 	public abstract class ActionBase : IAction
 	{
 		internal ActionBase() { }
@@ -31,11 +66,20 @@ namespace Nest
 
 		public abstract ActionType ActionType { get; }
 
+		/// <inheritdoc />
 		public string Name { get; set; }
 
+		/// <inheritdoc />
 		public Time ThrottlePeriod { get; set; }
 
+		/// <inheritdoc />
+		public string Foreach { get; set; }
+
+		/// <inheritdoc />
 		public TransformContainer Transform { get; set; }
+
+		/// <inheritdoc />
+		public ConditionContainer Condition { get; set; }
 
 		public static bool operator false(ActionBase a) => false;
 
@@ -78,7 +122,10 @@ namespace Nest
 			{ "index", 3 },
 			{ "logging", 4 },
 			{ "slack", 5 },
-			{ "pagerduty", 6 }
+			{ "pagerduty", 6 },
+			{ "foreach", 7 },
+			{ "transform", 8 },
+			{ "condition", 9 }
 		};
 
 		public Actions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -92,6 +139,10 @@ namespace Nest
 
 				Time throttlePeriod = null;
 				IAction action = null;
+				string @foreach = null;
+				TransformContainer transform = null;
+				ConditionContainer condition = null;
+
 				while (reader.ReadIsInObject(ref actionCount))
 				{
 					var propertyName = reader.ReadPropertyNameSegmentRaw();
@@ -128,6 +179,17 @@ namespace Nest
 								action = formatterResolver.GetFormatter<PagerDutyAction>()
 									.Deserialize(ref reader, formatterResolver);
 								break;
+							case 7:
+								@foreach = reader.ReadString();
+								break;
+							case 8:
+								transform = formatterResolver.GetFormatter<TransformContainer>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
+							case 9:
+								condition = formatterResolver.GetFormatter<ConditionContainer>()
+									.Deserialize(ref reader, formatterResolver);
+								break;
 						}
 					}
 					else
@@ -138,6 +200,9 @@ namespace Nest
 				{
 					action.Name = name;
 					action.ThrottlePeriod = throttlePeriod;
+					action.Foreach = @foreach;
+					action.Transform = transform;
+					action.Condition = condition;
 					dictionary.Add(name, action);
 				}
 			}
@@ -166,6 +231,28 @@ namespace Nest
 						timeFormatter.Serialize(ref writer, action.ThrottlePeriod, formatterResolver);
 						writer.WriteValueSeparator();
 					}
+
+					if (!string.IsNullOrEmpty(action.Foreach))
+					{
+						writer.WritePropertyName("foreach");
+						writer.WriteString(action.Foreach);
+						writer.WriteValueSeparator();
+					}
+
+					if (action.Transform != null)
+					{
+						writer.WritePropertyName("transform");
+						formatterResolver.GetFormatter<TransformContainer>().Serialize(ref writer, action.Transform, formatterResolver);
+						writer.WriteValueSeparator();
+					}
+
+					if (action.Condition != null)
+					{
+						writer.WritePropertyName("condition");
+						formatterResolver.GetFormatter<ConditionContainer>().Serialize(ref writer, action.Condition, formatterResolver);
+						writer.WriteValueSeparator();
+					}
+
 					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
 
 					switch (action.ActionType)
