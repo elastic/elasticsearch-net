@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -57,6 +59,47 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "state")]
 		public JobState State { get; internal set; }
+
+		/// <summary>
+		/// Timing-related statistics about the job's progress
+		/// <para />
+		/// Valid only in Elasticsearch 7.3.0+
+		/// </summary>
+		[DataMember(Name = "timing_stats")]
+		public TimingStats TimingStats { get; internal set; }
+	}
+
+	public class TimingStats
+	{
+		[DataMember(Name = "job_id")]
+		public string JobId { get; internal set; }
+
+		[DataMember(Name = "bucket_count")]
+		public long BucketCount { get; internal set; }
+
+		/// <summary>
+		/// Minimum among all bucket processing times in milliseconds
+		/// </summary>
+		[DataMember(Name = "minimum_bucket_processing_time_ms")]
+		public double MinimumBucketProcessingTimeMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Maximum among all bucket processing times in milliseconds
+		/// </summary>
+		[DataMember(Name = "maximum_bucket_processing_time_ms")]
+		public double MaximumBucketProcessingTimeMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Average of all bucket processing times in milliseconds
+		/// </summary>
+		[DataMember(Name = "average_bucket_processing_time_ms")]
+		public double AverageBucketProcessingTimeMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Exponential moving average of all bucket processing times in milliseconds
+		/// </summary>
+		[DataMember(Name = "exponential_average_bucket_processing_time_ms")]
+		public double ExponentialAverageBucketProcessingTimeMilliseconds { get; internal set; }
 	}
 
 	public class JobForecastStatistics
