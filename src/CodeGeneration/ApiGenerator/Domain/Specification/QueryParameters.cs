@@ -9,7 +9,7 @@ namespace ApiGenerator.Domain.Specification
 	{
 		private static readonly string[] FieldsParams =
 		{
-			"fields", "_source_include", "_source_exclude", "_source_includes", "_source_excludes",
+			"fields", "_source_includes", "_source_excludes",
 		};
 		
 		public bool Skip { get; set; }

@@ -15,8 +15,6 @@ namespace ApiGenerator.Configuration.Overrides.Endpoints
 			"q", //we dont support GET searches
 			"sort",
 			"_source",
-			"_source_include",
-			"_source_exclude",
 			"_source_includes",
 			"_source_excludes",
 			"track_scores",
