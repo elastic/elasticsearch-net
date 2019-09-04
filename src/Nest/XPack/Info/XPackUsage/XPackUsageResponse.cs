@@ -77,6 +77,9 @@ namespace Nest
 
 		[DataMember(Name = "vectors")]
 		public XPackUsage Vectors { get; internal set; }
+
+		[DataMember(Name = "voting_only")]
+		public XPackUsage VotingOnly { get; internal set; }
 	}
 
 	public class XPackUsage

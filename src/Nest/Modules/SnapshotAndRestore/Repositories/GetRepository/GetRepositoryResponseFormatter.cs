@@ -87,6 +87,13 @@ namespace Nest
 							var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings, formatterResolver);
 							repositories.Add(name, hdfs);
 							break;
+						case "source":
+							// reset the offset
+							snapshotSegmentReader.ResetOffset();
+							var source = formatterResolver.GetFormatter<ISourceOnlyRepository>()
+								.Deserialize(ref snapshotSegmentReader, formatterResolver);
+							repositories.Add(name, source);
+							break;
 					}
 				}
 			}
