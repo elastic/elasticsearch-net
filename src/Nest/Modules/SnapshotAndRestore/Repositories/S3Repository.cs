@@ -3,8 +3,14 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	/// <summary>
+	/// A snapshot repository that stores snapshots in an Amazon S3 bucket
+	/// <para />
+	/// Requires the repository-s3 plugin to be installed on the cluster
+	/// </summary>
 	public interface IS3Repository : IRepository<IS3RepositorySettings> { }
 
+	/// <inheritdoc />
 	public class S3Repository : IS3Repository
 	{
 		public S3Repository(IS3RepositorySettings settings) => Settings = settings;
@@ -14,6 +20,9 @@ namespace Nest
 		public string Type { get; } = "s3";
 	}
 
+	/// <summary>
+	/// Snapshot repository settings for <see cref="IS3Repository"/>
+	/// </summary>
 	public interface IS3RepositorySettings : IRepositorySettings
 	{
 		/// <summary>
@@ -85,6 +94,7 @@ namespace Nest
 		string StorageClass { get; set; }
 	}
 
+	/// <inheritdoc />
 	public class S3RepositorySettings : IS3RepositorySettings
 	{
 		internal S3RepositorySettings() { }
@@ -119,6 +129,7 @@ namespace Nest
 		public string StorageClass { get; set; }
 	}
 
+	/// <inheritdoc cref="IS3RepositorySettings"/>
 	public class S3RepositorySettingsDescriptor
 		: DescriptorBase<S3RepositorySettingsDescriptor, IS3RepositorySettings>, IS3RepositorySettings
 	{
@@ -163,6 +174,7 @@ namespace Nest
 		public S3RepositorySettingsDescriptor StorageClass(string storageClass) => Assign(storageClass, (a, v) => a.StorageClass = v);
 	}
 
+	/// <inheritdoc cref="IS3Repository"/>
 	public class S3RepositoryDescriptor
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
@@ -170,6 +182,7 @@ namespace Nest
 		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
 		string ISnapshotRepository.Type { get; } = "s3";
 
+		/// <inheritdoc cref="IS3RepositorySettings"/>
 		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>
 			Assign(settingsSelector.InvokeOrDefault(new S3RepositorySettingsDescriptor(bucket)), (a, v) => a.Settings = v);
 	}

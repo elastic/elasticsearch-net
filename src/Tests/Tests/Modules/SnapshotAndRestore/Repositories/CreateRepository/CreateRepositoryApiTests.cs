@@ -129,7 +129,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 	}
 
-	[SkipVersion("<6.5.0", "new feature")]
 	public class CreateSourceOnlyRepositoryApiTests
 		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
@@ -137,7 +136,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 
 		public CreateSourceOnlyRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson { get; } = new
+		protected override object ExpectJson => new
 		{
 			type = "source",
 			settings = new

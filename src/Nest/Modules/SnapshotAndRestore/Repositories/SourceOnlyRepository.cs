@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
-
+	/// <summary>
+	/// A source repository enables you to create minimal, source-only snapshots that take up to 50% less space on disk.
+	/// Source only snapshots contain stored fields and index metadata. They do not include index or doc values structures
+	/// and are not searchable when restored. After restoring a source-only snapshot, you must reindex the data into a new index.
+	/// </summary>
 	[JsonFormatter(typeof(SourceOnlyRepositoryFormatter))]
 	public interface ISourceOnlyRepository : IRepositoryWithSettings
 	{
+		/// <summary>
+		/// The type of snapshot repository to delegate to for storage
+		/// </summary>
 		[IgnoreDataMember]
 		string DelegateType { get; }
 	}
 
+	/// <inheritdoc />
 	public class SourceOnlyRepository : ISourceOnlyRepository
 	{
 		private readonly object _delegateSettings;
@@ -38,6 +48,7 @@ namespace Nest
 		string ISnapshotRepository.Type { get; } = "source";
 	}
 
+	/// <inheritdoc cref="ISourceOnlyRepository" />
 	public class SourceOnlyRepositoryDescriptor
 		: DescriptorBase<SourceOnlyRepositoryDescriptor, ISourceOnlyRepository>, ISourceOnlyRepository
 	{
@@ -59,19 +70,19 @@ namespace Nest
 		public SourceOnlyRepositoryDescriptor ReadOnlyUrl(Func<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository> selector) =>
 			DelegateTo(selector);
 
-		/// <inheritdoc cref="CreateRepositoryDescriptor.ReadOnlyUrl" />
+		/// <inheritdoc cref="CreateRepositoryDescriptor.Azure" />
 		public SourceOnlyRepositoryDescriptor Azure(Func<AzureRepositoryDescriptor, IAzureRepository> selector = null) =>
 			DelegateTo(selector);
 
-		/// <inheritdoc cref="CreateRepositoryDescriptor.ReadOnlyUrl" />
+		/// <inheritdoc cref="CreateRepositoryDescriptor.Hdfs" />
 		public SourceOnlyRepositoryDescriptor Hdfs(Func<HdfsRepositoryDescriptor, IHdfsRepository> selector) =>
 			DelegateTo(selector);
 
-		/// <inheritdoc cref="CreateRepositoryDescriptor.ReadOnlyUrl" />
+		/// <inheritdoc cref="CreateRepositoryDescriptor.S3" />
 		public SourceOnlyRepositoryDescriptor S3(Func<S3RepositoryDescriptor, IS3Repository> selector) =>
 			DelegateTo(selector);
 
-		/// <inheritdoc cref="CreateRepositoryDescriptor.ReadOnlyUrl" />
+		/// <inheritdoc cref="CreateRepositoryDescriptor.Custom" />
 		public SourceOnlyRepositoryDescriptor Custom(IRepositoryWithSettings repository)
 		{
 			_delegateType = repository?.Type;
@@ -82,6 +93,14 @@ namespace Nest
 
 	internal class SourceOnlyRepositoryFormatter : IJsonFormatter<ISourceOnlyRepository>
 	{
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		{
+			{ "type", 0 },
+			{ "settings", 1 }
+		};
+
+		private static readonly byte[] DelegateType = JsonWriter.GetEncodedPropertyNameWithoutQuotation("delegate_type");
+
 		public void Serialize(ref JsonWriter writer, ISourceOnlyRepository value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value.DelegateType.IsNullOrEmpty())
@@ -141,6 +160,13 @@ namespace Nest
 			formatter.Serialize(ref writer, value as TRepositorySettings, formatterResolver);
 		}
 
+		private static TRepositorySettings Deserialize<TRepositorySettings>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TRepositorySettings : class, IRepositorySettings
+		{
+			var formatter = formatterResolver.GetFormatter<TRepositorySettings>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
+
 		public ISourceOnlyRepository Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
@@ -149,10 +175,73 @@ namespace Nest
 				return null;
 			}
 
-			//TODO read delegate type and settings
+			var count = 0;
+			ArraySegment<byte> settings = default;
 
-			return new SourceOnlyRepository("fs", null);
+			while (reader.ReadIsInObject(ref count))
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (Fields.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							reader.ReadNext();
+							break;
+						case 1:
+							settings = reader.ReadNextBlockSegment();
+							break;
+					}
+
+				}
+				else
+					reader.ReadNextBlock();
+			}
+
+			if (settings == default)
+				return null;
+
+			var segmentReader = new JsonReader(settings.Array, settings.Offset);
+			string delegateType = null;
+			object delegateSettings = null;
+
+			// reset count to zero to so that ReadIsInObject skips opening brace
+			count = 0;
+			while (segmentReader.ReadIsInObject(ref count))
+			{
+				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(DelegateType))
+				{
+					delegateType = segmentReader.ReadString();
+					break;
+				}
+
+				segmentReader.ReadNextBlock();
+			}
+
+			// reset the offset
+			segmentReader.ResetOffset();
+
+			switch (delegateType)
+			{
+				case "s3":
+					delegateSettings = Deserialize<S3RepositorySettings>(ref segmentReader, formatterResolver);
+					break;
+				case "azure":
+					delegateSettings = Deserialize<AzureRepositorySettings>(ref segmentReader, formatterResolver);
+					break;
+				case "url":
+					delegateSettings = Deserialize<ReadOnlyUrlRepositorySettings>(ref segmentReader, formatterResolver);
+					break;
+				case "hdfs":
+					delegateSettings = Deserialize<HdfsRepositorySettings>(ref segmentReader, formatterResolver);
+					break;
+				case "fs":
+					delegateSettings = Deserialize<FileSystemRepositorySettings>(ref segmentReader, formatterResolver);
+					break;
+			}
+
+			return new SourceOnlyRepository(delegateType, delegateSettings);
 		}
-
 	}
 }
