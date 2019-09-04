@@ -38,8 +38,16 @@ namespace Nest
 		/// <summary>
 		/// Limit the number of processed documents
 		/// </summary>
+		// TODO: Remove in 8.0
 		[DataMember(Name ="size")]
+		[Obsolete("Deprecated. Use MaximumDocuments")]
 		long? Size { get; set; }
+
+		/// <summary>
+		/// Limit the number of processed documents
+		/// </summary>
+		[DataMember(Name ="max_docs")]
+		long? MaximumDocuments { get; set; }
 
 		/// <summary>
 		/// The source for the reindex operation
@@ -51,19 +59,23 @@ namespace Nest
 	/// <inheritdoc cref="IReindexOnServerRequest" />
 	public partial class ReindexOnServerRequest
 	{
-		/// <inheritdoc cref="IReindexOnServerRequest.Conflicts" />
+		/// <inheritdoc />
 		public Conflicts? Conflicts { get; set; }
 
-		/// <inheritdoc cref="IReindexOnServerRequest.Destination" />
+		/// <inheritdoc />
 		public IReindexDestination Destination { get; set; }
 
-		/// <inheritdoc cref="IReindexOnServerRequest.Script" />
+		/// <inheritdoc />
 		public IScript Script { get; set; }
 
-		/// <inheritdoc cref="IReindexOnServerRequest.Size" />
+		/// <inheritdoc />
+		[Obsolete("Deprecated. Use MaximumDocuments")]
 		public long? Size { get; set; }
 
-		/// <inheritdoc cref="IReindexOnServerRequest.Source" />
+		/// <inheritdoc />
+		public long? MaximumDocuments { get; set; }
+
+		/// <inheritdoc />
 		public IReindexSource Source { get; set; }
 	}
 
@@ -72,8 +84,10 @@ namespace Nest
 		Conflicts? IReindexOnServerRequest.Conflicts { get; set; }
 		IReindexDestination IReindexOnServerRequest.Destination { get; set; }
 		IScript IReindexOnServerRequest.Script { get; set; }
+		[Obsolete("Deprecated. Use MaximumDocuments")]
 		long? IReindexOnServerRequest.Size { get; set; }
 		IReindexSource IReindexOnServerRequest.Source { get; set; }
+		long? IReindexOnServerRequest.MaximumDocuments { get; set; }
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Source" />
 		public ReindexOnServerDescriptor Source(Func<ReindexSourceDescriptor, IReindexSource> selector = null) =>
@@ -90,10 +104,15 @@ namespace Nest
 		public ReindexOnServerDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
+		[Obsolete("Deprecated. Use MaximumDocuments")]
 		/// <inheritdoc cref="IReindexOnServerRequest.Size" />
 		public ReindexOnServerDescriptor Size(long? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Conflicts" />
 		public ReindexOnServerDescriptor Conflicts(Conflicts? conflicts) => Assign(conflicts, (a, v) => a.Conflicts = v);
+
+		/// <inheritdoc cref="IReindexOnServerRequest.MaximumDocuments"/>
+		public ReindexOnServerDescriptor MaximumDocuments(long? maximumDocuments) =>
+			Assign(maximumDocuments, (a, v) => a.MaximumDocuments = v);
 	}
 }
