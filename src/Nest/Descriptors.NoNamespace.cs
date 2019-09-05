@@ -316,8 +316,6 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public DeleteByQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public DeleteByQueryDescriptor<TDocument> MaxDocs(long? maxdocs) => Qs("max_docs", maxdocs);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DeleteByQueryDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -1140,8 +1138,6 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexOnServer;
 		// values part of the url path
 		// Request parameters
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public ReindexOnServerDescriptor MaxDocs(long? maxdocs) => Qs("max_docs", maxdocs);
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public ReindexOnServerDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
@@ -1596,8 +1592,6 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public UpdateByQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public UpdateByQueryDescriptor<TDocument> MaxDocs(long? maxdocs) => Qs("max_docs", maxdocs);
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public UpdateByQueryDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>

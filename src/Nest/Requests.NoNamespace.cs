@@ -674,13 +674,6 @@ namespace Nest
 			set => Q("lenient", value);
 		}
 
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public long? MaxDocs
-		{
-			get => Q<long? >("max_docs");
-			set => Q("max_docs", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -2413,13 +2406,6 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexOnServer;
 		// values part of the url path
 		// Request parameters
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public long? MaxDocs
-		{
-			get => Q<long? >("max_docs");
-			set => Q("max_docs", value);
-		}
-
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
@@ -3469,13 +3455,6 @@ namespace Nest
 		{
 			get => Q<bool? >("lenient");
 			set => Q("lenient", value);
-		}
-
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public long? MaxDocs
-		{
-			get => Q<long? >("max_docs");
-			set => Q("max_docs", value);
 		}
 
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>

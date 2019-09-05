@@ -417,13 +417,6 @@ namespace Elasticsearch.Net
 			set => Q("lenient", value);
 		}
 
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public long? MaxDocs
-		{
-			get => Q<long? >("max_docs");
-			set => Q("max_docs", value);
-		}
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference
 		{
@@ -1422,13 +1415,6 @@ namespace Elasticsearch.Net
 	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public long? MaxDocs
-		{
-			get => Q<long? >("max_docs");
-			set => Q("max_docs", value);
-		}
-
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
@@ -2129,13 +2115,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("lenient");
 			set => Q("lenient", value);
-		}
-
-		///<summary>Maximum number of documents to process (default: all documents)</summary>
-		public long? MaxDocs
-		{
-			get => Q<long? >("max_docs");
-			set => Q("max_docs", value);
 		}
 
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
