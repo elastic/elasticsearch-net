@@ -24,6 +24,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override object ExpectJson { get; } = new
 		{
+			max_docs = Project.Projects.Count,
 			query = new
 			{
 				ids = new
@@ -38,6 +39,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
 			.Index(Indices)
 			.IgnoreUnavailable()
+			.MaximumDocuments(Project.Projects.Count)
 			.Query(q => q
 				.Ids(ids => ids
 					.Values(Project.First.Name, "x")
@@ -49,6 +51,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(Indices)
 		{
 			IgnoreUnavailable = true,
+			MaximumDocuments = Project.Projects.Count,
 			Query = new IdsQuery
 			{
 				Values = new Id[] { Project.First.Name, "x" }
