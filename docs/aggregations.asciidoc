@@ -148,6 +148,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<range-aggregation-usage,Range Aggregation Usage>>
 
+* <<rare-terms-aggregation-usage,Rare Terms Aggregation Usage>>
+
 * <<reverse-nested-aggregation-usage,Reverse Nested Aggregation Usage>>
 
 * <<sampler-aggregation-usage,Sampler Aggregation Usage>>
@@ -206,6 +208,8 @@ include::aggregations/bucket/nested/nested-aggregation-usage.asciidoc[]
 include::aggregations/bucket/parent/parent-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/range/range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/rare-terms/rare-terms-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/reverse-nested/reverse-nested-aggregation-usage.asciidoc[]
 
