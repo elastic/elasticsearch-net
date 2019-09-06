@@ -46,6 +46,10 @@ in 6.x, JSON object field names would attempt to be matched with C# POCO propert
 match, falling back to a case insensitive match. With Utf8Json in 7.x however, JSON object field names must 
 match exactly the name configured for the C# POCO property name.
 
+* `DateTime` and `DateTimeOffset` are serialized with 7 sub-second fractional digits when the instance specifies a non-zero millisecond value. For example 
+** `new DateTime(2019,9,5, 12, 0, 0, 3)` serializes to `"2019-09-05T12:00:00.0030000"`
+** `new DateTimeOffset(2019,9,5, 12, 0, 0, 3, TimeSpan.FromHours(12))` serializes to `"2019-09-05T12:00:00.0030000+12:00"`
+
 [float]
 === `Response.Success` semantics
 
