@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -68,6 +68,7 @@ var createIndexResponse = client.Indices.Create("myindex", c => c
 );
 ----
 <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
+
 <2> we disable direct streaming here to capture the request and response bytes. In a production application, you would likely not call this as it adds overhead to each call.
 
 The JSON output for the mapping does not contain the ignored properties
@@ -179,6 +180,7 @@ var createIndexResponse = client.Indices.Create("myindex", c => c
     );
 ----
 <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
+
 <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
 
 [source,javascript]
