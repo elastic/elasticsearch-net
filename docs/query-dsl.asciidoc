@@ -267,7 +267,7 @@ Specialized types of queries that do not fit into other groups
 
 :anchor-list: query-dsl/specialized
 
-* <<distance-feature-time-query-usage,Distance Feature Time Query Usage>>
+* <<distance-feature-query-usage,Distance Feature Query Usage>>
 
 * <<more-like-this-full-document-query-usage,More Like This Full Document Query Usage>>
 
@@ -285,7 +285,7 @@ See the Elasticsearch documentation on {ref_current}/specialized-queries.html[Sp
 
 :includes-from-dirs: query-dsl/specialized
 
-include::query-dsl/specialized/distance-feature/distance-feature-time-query-usage.asciidoc[]
+include::query-dsl/specialized/distance-feature/distance-feature-query-usage.asciidoc[]
 
 include::query-dsl/specialized/more-like-this/more-like-this-full-document-query-usage.asciidoc[]
 

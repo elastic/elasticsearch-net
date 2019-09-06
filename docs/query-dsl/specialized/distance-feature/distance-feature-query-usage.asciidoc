@@ -7,16 +7,23 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/DistanceFeature/DistanceFeatureTimeQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/Specialized/DistanceFeature/DistanceFeatureQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[distance-feature-time-query-usage]]
-=== Distance Feature Time Query Usage
+[[distance-feature-query-usage]]
+=== Distance Feature Query Usage
 
-Boosts the relevance score of documents closer to a provided origin date or point. For example, you can use this query to give
-more weight to documents closer to a certain date.
+Boosts the relevance score of documents closer to a provided `origin` date or point. For example, you can use this query to give
+more weight to documents closer to a certain date or location.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-distance-feature-query[distance feature query] for more details.
+
+[float]
+== Using a date
+
+An instance of `DateMath` can be provided as the `origin`, with `pivot` being a `Time` from the origin
 
 ==== Fluent DSL example
 
@@ -57,8 +64,13 @@ new DistanceFeatureQuery
 }
 ----
 
+[float]
+== Using a location
+
 You can use the distance_feature query to find the nearest neighbors to a location. You can also use the query in a bool
-search’s should filter to add boosted relevance scores to the bool query’s scores.
+search''s should filter to add boosted relevance scores to the bool query's scores.
+
+An instance of `GeoCoordinate` can be provided as the `origin`, with `pivot` being a `Distance` from the origin
 
 ==== Fluent DSL example
 
