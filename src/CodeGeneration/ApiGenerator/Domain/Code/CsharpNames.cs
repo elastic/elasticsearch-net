@@ -11,7 +11,7 @@ namespace ApiGenerator.Domain.Code
 	{
 		public CsharpNames(string name, string endpointMethodName, string endpointNamespace)
 		{
-			RestSpecName = string.IsNullOrWhiteSpace(endpointNamespace) ? endpointNamespace : $"{endpointNamespace}.{endpointMethodName}";
+			RestSpecName = string.IsNullOrWhiteSpace(endpointNamespace) ? endpointMethodName : $"{endpointNamespace}.{endpointMethodName}";
 			Namespace = CreateCSharpNamespace(endpointNamespace);
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(name, out var mapsApiMethodName))
 				ApiName = mapsApiMethodName;

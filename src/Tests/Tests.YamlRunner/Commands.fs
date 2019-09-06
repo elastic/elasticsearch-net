@@ -30,7 +30,7 @@ let LocateTests namedSuite revision = async {
 
 let ReadTests (tests:LocateResults list) = 
     
-    let readPaths paths = paths |> List.map TestsReader.ReadYamlFile
+    let readPaths paths = paths |> List.map TestsReader.ReadYamlFile  
     
     tests |> List.map (fun t -> { Folder= t.Folder; Files = readPaths t.Paths})
     

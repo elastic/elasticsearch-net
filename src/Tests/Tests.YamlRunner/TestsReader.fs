@@ -14,7 +14,11 @@ type YamlValue = YamlDictionary of YamlMap | YamlString of string
 
 let private tryPick<'a> (map:YamlMap) key =
     let found, value =  map.TryGetValue key
-    if (found) then Some (value :?> 'a) else None
+    if (found) then
+        map.Remove key |> ignore
+        Some (value :?> 'a)
+        
+    else None
     
 let private tryPickList<'a,'b> (map:YamlMap) key parse =
     let found, value =  map.TryGetValue key
@@ -24,12 +28,15 @@ let private tryPickList<'a,'b> (map:YamlMap) key parse =
             |> Seq.map (fun o -> o :?> 'a)
             |> Seq.map parse
             |> Seq.toList<'b>
+        map.Remove key |> ignore
         Some value
     else None
     
 let private pick<'a> (map:YamlMap) key =
     let found, value =  map.TryGetValue key
-    if (found) then (value :?> 'a)
+    if (found) then
+        map.Remove key |> ignore
+        (value :?> 'a)
     else failwithf "expected to find %s of type %s" key typeof<'a>.Name
 
 let private mapSkip (operation:YamlMap) =
@@ -98,8 +105,12 @@ let private mapNodeSelector (operation:YamlMap) =
 let private mapDo (operation:YamlMap) =
     
     let last = operation.Last()
+    //Todo should be map.First after picking the others
     let lastKey = last.Key :?> string
-    let lastValue = last.Key 
+    let lastValue =
+        last.Value :?> YamlMap
+        |> Seq.map (fun o -> o.Key :?> String , o.Value)
+        |> Map.ofSeq
     
     let catch =
         match tryPick<string> operation "catch" with
@@ -108,7 +119,6 @@ let private mapDo (operation:YamlMap) =
         | _ -> None
         
     let warnings = tryPickList<string, string> operation "warnings" id
-        
     let nodeSelector = mapNodeSelector operation
     Do {
         ApiCall = (lastKey, lastValue)

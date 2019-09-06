@@ -21,14 +21,14 @@ type DoCatch =
 let (|IsDoCatch|_|) (s:string) =
     match s with
     | "bad_request" -> Some BadRequest 
-    | "unauthorized " -> Some Unauthorized 
-    | "forbidden " -> Some Forbidden 
-    | "missing " -> Some Missing 
-    | "request_timeout " -> Some RequestTimeout 
-    | "conflict " -> Some Conflict 
-    | "unavailable " -> Some Unavailable
-    | "param " -> Some UnknownParameter
-    | "request " -> Some OtherBadResponse 
+    | "unauthorized" -> Some Unauthorized 
+    | "forbidden" -> Some Forbidden 
+    | "missing" -> Some Missing 
+    | "request_timeout" -> Some RequestTimeout 
+    | "conflict" -> Some Conflict 
+    | "unavailable" -> Some Unavailable
+    | "param" -> Some UnknownParameter
+    | "request" -> Some OtherBadResponse 
     | "regex" -> Some Regex
     | _ -> None
     
@@ -54,7 +54,7 @@ type NumericValue = Fixed of double | StashedId of StashedId
 type NumericMatch = Map<AssertPath, NumericValue>
     
 type Do = {
-    ApiCall: string * Object
+    ApiCall: string * Map<String, Object>
     Catch:DoCatch option
     Warnings:option<string list>
     NodeSelector:NodeSelector option

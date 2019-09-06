@@ -29,12 +29,9 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     
     
-//    let! locateResults = Commands.LocateTests namedSuite revision
-//    let readResults = Commands.ReadTests locateResults
-//    let! runTesults = Commands.RunTests readResults
-    
-    
-    DoMapper.clientApiDispatch (ElasticLowLevelClient())
+    let! locateResults = Commands.LocateTests namedSuite revision
+    let readResults = Commands.ReadTests locateResults 
+    let! runTesults = Commands.RunTests readResults 
 //    
 //    printfn "folders: %O" locateResults.Length
 //    for folder in locateResults do 

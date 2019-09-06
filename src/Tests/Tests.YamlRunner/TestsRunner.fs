@@ -8,7 +8,7 @@ open Tests.YamlRunner.OperationExecutor
 
 let private randomTime = Random()
 
-let RunOperation file section operation nth = async {
+let RunOperation file section operation nth (progress:IProgressBar) = async {
     let executionContext = {
         Suite= OpenSource
         File= file
@@ -18,24 +18,24 @@ let RunOperation file section operation nth = async {
         Operation= operation
     }
     
-    return OperationExecutor.Execute executionContext
+    return! OperationExecutor.Execute executionContext progress
 }
 
-let private createOperations m file (ops:Operations) = 
+let private createOperations m file (ops:Operations) progress = 
     let executedOperations =
         ops
         |> List.indexed
         |> List.map (fun (i, op) -> async {
-            let! pass = RunOperation file m op i
+            let! pass = RunOperation file m op i progress
             //let! x = Async.Sleep <| randomTime.Next(0, 10)
             return pass
         })
     (m, executedOperations)
     
 
-let RunTestFile (progress:IProgressBar) (file:YamlTestDocument) = async {
+let RunTestFile progress (file:YamlTestDocument) = async {
     
-    let m section ops = createOperations section file.FileInfo ops
+    let m section ops = createOperations section file.FileInfo ops progress
     
     let setup =  file.Setup |> Option.map (m "Setup") |> Option.toList 
     let teardown = file.Teardown |> Option.map (m "Teardown") |> Option.toList 
@@ -84,7 +84,7 @@ let RunTestsInFolder (progress:IProgressBar) (barOptions:ProgressBarOptions) mai
         progress.Tick(message)
         let message = sprintf "Inspecting file for sections" 
         use p = progress.Spawn(0, message, barOptions)
-        let! result = RunTestFile p document
+        let! result = RunTestFile p document 
         return result
     }
         

@@ -4,16 +4,19 @@ open System
 open System.Reflection
 open System.Collections.Generic
 open System.Collections.ObjectModel
-open System.Collections.ObjectModel
-open System.IO
+open System.Globalization
 open System.Linq.Expressions
+open System.Threading.Tasks
 open Elasticsearch.Net
 
-type ApiInvoke = delegate of Object * Object[] -> IElasticsearchResponse
+type ApiInvoke = delegate of Object * Object[] -> Task<StringResponse>
 type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection<string, string>, methodInfo:MethodInfo) =
     member this.ClientMethodName = methodInfo.Name
     member this.ApiName = restName
-    member this.PathParameters = pathParams
+    member private this.IndexOfParam p = pathParams.IndexOf p
+    member private this.SupportsBody = pathParams.IndexOf "body" >= 0
+    member this.PathParameters =
+        pathParams |> Seq.map (fun k -> k) |> Seq.filter (fun k -> k <> "body") |> Set.ofSeq
     member private this.Delegate =
         let instanceExpression = Expression.Parameter(typeof<Object>, "instance");
         let argumentsExpression = Expression.Parameter(typeof<Object[]>, "arguments");
@@ -26,13 +29,61 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
                 let convert = Expression.Convert (index, p.ParameterType)
                 argumentExpressions.Add convert
             )
+        let x = [|typeof<StringResponse>|] 
         let callExpression =
             let instance = Expression.Convert(instanceExpression, methodInfo.ReflectedType)
-            Expression.Call(instance, methodInfo, argumentExpressions)
-        let invokeExpression = Expression.Convert(callExpression, typeof<Object>)
+            //Expression.Call(instance, methodInfo ,argumentExpressions)
+            Expression.Call(instance, methodInfo.Name, x, argumentExpressions.ToArray())
+            
+        let invokeExpression = Expression.Convert(callExpression, typeof<Task<StringResponse>>)
         Expression.Lambda<ApiInvoke>(invokeExpression, instanceExpression, argumentsExpression).Compile();
         
-    member this.Invoke arguments = this.Delegate.Invoke(instance, arguments)
+    member this.CanInvoke (o:Map<string, Object>) =
+        let operationKeys =
+            o
+            |> Seq.map (fun k -> k.Key)
+            |> Seq.filter (fun k -> k <> "body")
+            |> Set.ofSeq
+        this.PathParameters.IsSubsetOf operationKeys
+    
+    member this.Invoke (o:Map<string, Object>) =
+        let foundBody, body = o.TryGetValue "body"
+        
+        let arguments =
+            o
+            |> Map.toSeq
+            |> Seq.filter (fun (k, v) -> this.PathParameters.Contains(k))
+            |> Seq.sortBy (fun (k, v) -> this.IndexOfParam k)
+            |> Seq.map (fun (k, v) ->
+                let toString (value:Object) = 
+                    match value with
+                    | :? String as s -> s
+                    | :? int32 as i -> i.ToString(CultureInfo.InvariantCulture)
+                    | :? double as i -> i.ToString(CultureInfo.InvariantCulture)
+                    | :? int64 as i -> i.ToString(CultureInfo.InvariantCulture)
+                    | :? Boolean as b -> if b then "false" else "true"
+                    | e -> failwithf "unknown type %s " (e.GetType().Name)
+                
+                match v with
+                | :? List<Object> as a ->
+                    let values = a |> Seq.map toString |> Seq.toArray
+                    String.Join(',', values)
+                | e -> toString e
+                ) 
+            |> Seq.cast<Object>
+            |> Seq.toArray
+        match (foundBody, this.SupportsBody) with
+        | (true, true) ->
+            let arguments = Array.append arguments [|PostData.Serializable body; null; Async.DefaultCancellationToken|]
+            this.Delegate.Invoke(instance, arguments)
+        | (false, true) ->
+            let arguments = Array.append arguments [|null ; null; Async.DefaultCancellationToken|]
+            this.Delegate.Invoke(instance, arguments)
+        | (false, false) ->
+            let arguments = Array.append arguments [|null; Async.DefaultCancellationToken|]
+            this.Delegate.Invoke(instance, arguments)
+        | (true, false) ->
+            failwithf "found a body but this method does not take a body"
 
 
 let getProp (t:Type) prop = t.GetProperty(prop).GetGetMethod()
@@ -47,9 +98,31 @@ let methodsWithAttribute instance mapsApiAttribute  =
     |> Array.map (fun (m, a) -> (m, a.[0] :?> Attribute))
     |> Array.map (fun (m, a) -> (m, getRestName mapsApiAttribute a, getParameters mapsApiAttribute a))
     |> Array.map (fun (m, restName, pathParams) -> (FastApiInvoke(instance, restName, pathParams, m)))
+
+exception ParamException of string 
+
+let createApiLookup (invokers: FastApiInvoke list) : (Map<string, Object> -> FastApiInvoke) =
+    let first = invokers |> List.head
+    let name = first.ApiName
+    let clientMethod = first.ClientMethodName
+    
+    let lookup (o:Map<string, Object>) =
+        
+        let invokers =
+            invokers
+            |> Seq.sortBy (fun i -> i.PathParameters.Count)
+            |> Seq.filter (fun i -> i.CanInvoke o)
+            |> Seq.toList
+        
+        match invokers with
+        | [] ->
+            raise <| ParamException(sprintf "%s matched no method on %s: %O " name clientMethod o)
+        | invoker::tail ->
+           invoker 
+    lookup
     
     
-let clientApiDispatch client =
+let clientApiDispatch (client:IElasticLowLevelClient) =
     let t = client.GetType()
     let mapsApiAttribute = t.Assembly.GetType("Elasticsearch.Net.MapsApiAttribute")
     
@@ -61,8 +134,15 @@ let clientApiDispatch client =
         |> Array.concat
         |> Array.append rootMethods
     
-    for m in namespaces do
-        
-        printfn "method: %O api: %s len: %i" m.ClientMethodName m.ApiName m.PathParameters.Count
+    namespaces
+    |> List.ofArray
+    |> List.groupBy (fun n -> n.ApiName)
+    |> Map.ofList<String, FastApiInvoke list>
+    |> Map.map<String, FastApiInvoke list, (Map<String, Object> -> FastApiInvoke)>(fun k v -> createApiLookup v)
+    
+let DoMap =
+    let settings = new ConnectionConfiguration()
+    let x = settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
+    clientApiDispatch (new ElasticLowLevelClient(x))
         
 
