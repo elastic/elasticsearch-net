@@ -21,8 +21,7 @@ namespace Tests.Document.Multiple.Bulk
 		{
 			new Dictionary<string, object> { { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>
-				{ { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name, if_seq_no = -1 } } },
+			new Dictionary<string, object> { { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name, if_seq_no = -1, if_primary_term = 0 } } },
 			Project.InstanceAnonymous,
 		};
 
@@ -31,7 +30,7 @@ namespace Tests.Document.Multiple.Bulk
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Index<Project>(i => i.Document(Project.Instance))
-			.Index<Project>(i => i.IfSequenceNumber(-1).Document(Project.Instance));
+			.Index<Project>(i => i.IfSequenceNumber(-1).IfPrimaryTerm(0).Document(Project.Instance));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -40,7 +39,7 @@ namespace Tests.Document.Multiple.Bulk
 			Operations = new List<IBulkOperation>
 			{
 				new BulkIndexOperation<Project>(Project.Instance),
-				new BulkIndexOperation<Project>(Project.Instance) { IfSequenceNumber = -1 }
+				new BulkIndexOperation<Project>(Project.Instance) { IfSequenceNumber = -1, IfPrimaryTerm = 0 }
 			}
 		};
 

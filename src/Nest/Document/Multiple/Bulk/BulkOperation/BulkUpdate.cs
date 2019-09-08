@@ -263,6 +263,6 @@ namespace Nest
 		/// Operations can be made conditional and only be performed if the last modification to the document was assigned the primary term.
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? primaryTerm) =>
-			Assign(primaryTerm, (a, v) => a.IfSequenceNumber = v);
+			Assign(primaryTerm, (a, v) => a.IfPrimaryTerm = v);
 	}
 }
