@@ -419,7 +419,7 @@ namespace Nest
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // sum
 			reader.ReadNext(); // :
-			var sum = reader.ReadDouble();
+			var sum = reader.ReadNullableDouble();
 
 			var statsMetric = new StatsAggregate
 			{
