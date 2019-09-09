@@ -10,6 +10,9 @@ open System.Threading.Tasks
 open Elasticsearch.Net
 
 type ApiInvoke = delegate of Object * Object[] -> Task<StringResponse>
+
+type RequestParametersInvoke = delegate of unit ->  IRequestParameters
+
 type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection<string, string>, methodInfo:MethodInfo) =
     member this.ClientMethodName = methodInfo.Name
     member this.ApiName = restName
@@ -17,6 +20,15 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
     member private this.SupportsBody = pathParams.IndexOf "body" >= 0
     member this.PathParameters =
         pathParams |> Seq.map (fun k -> k) |> Seq.filter (fun k -> k <> "body") |> Set.ofSeq
+        
+    member private this.CreateRequestParameters = 
+        let t = methodInfo.GetParameters() |> Array.find (fun p -> typeof<IRequestParameters>.IsAssignableFrom(p.ParameterType))
+        let c = t.ParameterType.GetConstructors() |> Array.head
+        
+        let newExp = Expression.New(c)
+        Expression.Lambda<RequestParametersInvoke>(newExp).Compile()
+        
+    ///<summary> Create a call into a specific client method </summary>
     member private this.Delegate =
         let instanceExpression = Expression.Parameter(typeof<Object>, "instance");
         let argumentsExpression = Expression.Parameter(typeof<Object[]>, "arguments");
@@ -32,7 +44,6 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         let x = [|typeof<StringResponse>|] 
         let callExpression =
             let instance = Expression.Convert(instanceExpression, methodInfo.ReflectedType)
-            //Expression.Call(instance, methodInfo ,argumentExpressions)
             Expression.Call(instance, methodInfo.Name, x, argumentExpressions.ToArray())
             
         let invokeExpression = Expression.Convert(callExpression, typeof<Task<StringResponse>>)
@@ -72,15 +83,23 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
                 ) 
             |> Seq.cast<Object>
             |> Seq.toArray
+        
+        let requestParameters = this.CreateRequestParameters.Invoke();
+        o
+        |> Map.toSeq
+        |> Seq.filter (fun (k, v) -> not <| this.PathParameters.Contains(k))
+        |> Seq.filter (fun (k, v) -> k <> "body")
+        |> Seq.iter (fun (k, v) -> requestParameters.SetQueryString(k, v))
+        
         match (foundBody, this.SupportsBody) with
         | (true, true) ->
-            let arguments = Array.append arguments [|PostData.Serializable body; null; Async.DefaultCancellationToken|]
+            let arguments = Array.append arguments [|PostData.Serializable body; requestParameters; Async.DefaultCancellationToken|]
             this.Delegate.Invoke(instance, arguments)
         | (false, true) ->
-            let arguments = Array.append arguments [|null ; null; Async.DefaultCancellationToken|]
+            let arguments = Array.append arguments [|null ; requestParameters; Async.DefaultCancellationToken|]
             this.Delegate.Invoke(instance, arguments)
         | (false, false) ->
-            let arguments = Array.append arguments [|null; Async.DefaultCancellationToken|]
+            let arguments = Array.append arguments [|requestParameters; Async.DefaultCancellationToken|]
             this.Delegate.Invoke(instance, arguments)
         | (true, false) ->
             failwithf "found a body but this method does not take a body"
@@ -110,7 +129,7 @@ let createApiLookup (invokers: FastApiInvoke list) : (Map<string, Object> -> Fas
         
         let invokers =
             invokers
-            |> Seq.sortBy (fun i -> i.PathParameters.Count)
+            |> Seq.sortByDescending (fun i -> i.PathParameters.Count)
             |> Seq.filter (fun i -> i.CanInvoke o)
             |> Seq.toList
         
@@ -141,7 +160,7 @@ let clientApiDispatch (client:IElasticLowLevelClient) =
     |> Map.map<String, FastApiInvoke list, (Map<String, Object> -> FastApiInvoke)>(fun k v -> createApiLookup v)
     
 let DoMap =
-    let settings = new ConnectionConfiguration()
+    let settings = new ConnectionConfiguration(new Uri("http://ipv4.fiddler:9200"))
     let x = settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
     clientApiDispatch (new ElasticLowLevelClient(x))
         

@@ -4,7 +4,6 @@ open Tests.YamlRunner.DoMapper
 open Tests.YamlRunner.Models
 open ShellProgressBar
 
-
 type ExecutionContext = {
     Suite: TestSuite
     Folder: DirectoryInfo
@@ -14,7 +13,6 @@ type ExecutionContext = {
     Operation: Operation
 }
     with member __.Throw message = failwithf "%s" message
-
 
 let Do executionContext = ignore()
 
@@ -29,7 +27,6 @@ let Execute (op:ExecutionContext) (progress:IProgressBar) = async {
             try
                 let invoke = lookup data
                 let! r = Async.AwaitTask <| invoke.Invoke(data)
-                //printfn "r: %b" r.ApiCall.Success
                 progress.WriteLine <| sprintf "%s %s" (r.ApiCall.HttpMethod.ToString()) (r.Uri.PathAndQuery)
             with
             | ParamException e ->
