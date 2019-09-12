@@ -47,18 +47,24 @@ let RunTestFile progress (file:YamlTestDocument) = async {
     let ops = sections |> List.sumBy (fun (_, i) -> i.Length)
     progress.MaxTicks <- ops
     
-    let runSection progressHeader sectionHeader ops = async {
+    let runSection progressHeader sectionHeader (ops: Async<ExecutionResult> list) = async {
         let l = ops |> List.length
         let result =
             ops
             |> List.indexed
-            |> Seq.map (fun (i, op) -> async {
-                let operations = sprintf "%s [%i/%i] operations: %s" progressHeader (i+1) l sectionHeader
-                progress.Tick(operations)
-                return! op
-            })
-            |> Seq.map Async.RunSynchronously
-            |> Seq.toList
+            |> Seq.unfold (fun ms ->
+                match ms with
+                | (i, op) :: tl ->
+                    let operations = sprintf "%s [%i/%i] operations: %s" progressHeader (i+1) l sectionHeader
+                    progress.Tick(operations)
+                    let r = Async.RunSynchronously op
+                    match r with
+                    | Succeeded context -> Some (r, tl)
+                    | Skipped context -> Some (r, [])
+                    | Failed context -> Some (r, [])
+                | [] -> None
+            )
+            |> List.ofSeq
         return result
     }
     
