@@ -40,7 +40,7 @@ let RunTests (tests:YamlTestFolder list) = async {
     let l = tests |> List.sumBy (fun t -> t.Files.Length)
     use progress = new ProgressBar(l, sprintf "Folders [0/%i]" l, barOptions)
     let a (i, v) = async {
-        let mainMessage = sprintf "[%i/%i] Folders : %s | " (i+1) f v.Folder 
+        let mainMessage = sprintf "[%i/%i] Folders : %s | " (i+1) f v.Folder
         let! op = TestsRunner.RunTestsInFolder progress subBarOptions mainMessage v
         return op |> Seq.toList
     }

@@ -5,10 +5,12 @@ open ShellProgressBar
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader
 open Tests.YamlRunner.OperationExecutor
+open Tests.YamlRunner.Stashes
+open Elasticsearch.Net
 
 let private randomTime = Random()
 
-let RunOperation file section operation nth (progress:IProgressBar) = async {
+let RunOperation file section operation nth stashes (progress:IProgressBar) = async {
     let executionContext = {
         Suite= OpenSource
         File= file
@@ -16,22 +18,22 @@ let RunOperation file section operation nth (progress:IProgressBar) = async {
         Section= section
         NthOperation= nth
         Operation= operation
+        Stashes = stashes
     }
-    
     return! OperationExecutor.Execute executionContext progress
 }
 
 let private createOperations m file (ops:Operations) progress = 
     let executedOperations =
+        let stashes = Stashes()
         ops
         |> List.indexed
         |> List.map (fun (i, op) -> async {
-            let! pass = RunOperation file m op i progress
+            let! pass = RunOperation file m op i stashes progress
             //let! x = Async.Sleep <| randomTime.Next(0, 10)
             return pass
         })
     (m, executedOperations)
-    
 
 let RunTestFile progress (file:YamlTestDocument) = async {
     
@@ -60,7 +62,7 @@ let RunTestFile progress (file:YamlTestDocument) = async {
                     let r = Async.RunSynchronously op
                     match r with
                     | Succeeded context -> Some (r, tl)
-                    | Skipped context -> Some (r, [])
+                    | Skipped context -> Some (r, tl)
                     | Failed context -> Some (r, [])
                 | [] -> None
             )
@@ -90,7 +92,11 @@ let RunTestsInFolder (progress:IProgressBar) (barOptions:ProgressBarOptions) mai
         progress.Tick(message)
         let message = sprintf "Inspecting file for sections" 
         use p = progress.Spawn(0, message, barOptions)
-        let! result = RunTestFile p document 
+        let! result = RunTestFile p document
+        
+        let x = DoMapper.Client.Indices.Delete<VoidResponse>("*") 
+        let x = DoMapper.Client.Indices.DeleteTemplateForAll<VoidResponse>("*") 
+        
         return result
     }
         

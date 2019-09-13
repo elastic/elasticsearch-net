@@ -9,8 +9,6 @@ open System.IO
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsLocator
 
-type YamlMap = Dictionary<Object,Object>
-type YamlValue = YamlDictionary of YamlMap | YamlString of string
 
 let private tryPick<'a> (map:YamlMap) key =
     let found, value =  map.TryGetValue key
@@ -109,8 +107,6 @@ let private mapDo (operation:YamlMap) =
     let lastKey = last.Key :?> string
     let lastValue =
         last.Value :?> YamlMap
-        |> Seq.map (fun o -> o.Key :?> String , o.Value)
-        |> Map.ofSeq
     
     let catch =
         match tryPick<string> operation "catch" with

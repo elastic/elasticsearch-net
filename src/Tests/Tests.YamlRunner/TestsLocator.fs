@@ -15,6 +15,7 @@ let ListFolders namedSuite revision  = async {
     return
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map (fun a -> a.InnerText())
+        |> List.filter (fun f -> not <| f.StartsWith("cluster"))
         |> List.filter (fun f -> not <| f.EndsWith(".asciidoc"))
 }
     

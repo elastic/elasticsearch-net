@@ -1,8 +1,7 @@
 module Tests.YamlRunner.Models
 
 open System
-open System.IO
-open System.Linq.Expressions
+open System.Collections.Generic
 
 type TestSuite = OpenSource | XPack
 
@@ -41,7 +40,9 @@ type ResponseProperty = ResponseProperty of string
 
 type StashedId = private StashedId of string
     // TODO handle $ when already on s
-    with static member Create s = StashedId <| sprintf "$%s" s
+    with
+        static member Create s = StashedId <| sprintf "$%s" s
+        static member Body = StashedId.Create "body"
     
 type SetTransformation = private SetTransformation of string
     with static member Create s = SetTransformation <| sprintf "$%s" s
@@ -53,8 +54,11 @@ type Match = Map<AssertPath, Object>
 type NumericValue = Fixed of double | StashedId of StashedId
 type NumericMatch = Map<AssertPath, NumericValue>
     
+type YamlMap = Dictionary<Object,Object>
+type YamlValue = YamlDictionary of YamlMap | YamlString of string
+
 type Do = {
-    ApiCall: string * Map<String, Object>
+    ApiCall: string * YamlMap
     Catch:DoCatch option
     Warnings:option<string list>
     NodeSelector:NodeSelector option

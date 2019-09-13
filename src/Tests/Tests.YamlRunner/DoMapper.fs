@@ -5,9 +5,13 @@ open System.Reflection
 open System.Collections.Generic
 open System.Collections.ObjectModel
 open System.Globalization
+open System.IO
+open System.Linq
 open System.Linq.Expressions
 open System.Threading.Tasks
 open Elasticsearch.Net
+open Elasticsearch.Net
+open Tests.YamlRunner.Models
 
 type ApiInvoke = delegate of Object * Object[] -> Task<StringResponse>
 
@@ -48,16 +52,21 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
             
         let invokeExpression = Expression.Convert(callExpression, typeof<Task<StringResponse>>)
         Expression.Lambda<ApiInvoke>(invokeExpression, instanceExpression, argumentsExpression).Compile();
+    
+    member private this.toMap (o:YamlMap) = o |> Seq.map (fun o -> o.Key :?> String , o.Value) |> Map.ofSeq
         
-    member this.CanInvoke (o:Map<string, Object>) =
+    member this.CanInvoke (o:YamlMap) =
         let operationKeys =
             o
+            |> this.toMap
             |> Seq.map (fun k -> k.Key)
             |> Seq.filter (fun k -> k <> "body")
             |> Set.ofSeq
         this.PathParameters.IsSubsetOf operationKeys
     
-    member this.Invoke (o:Map<string, Object>) =
+    member this.Invoke (map:YamlMap) =
+        let o = map |> this.toMap
+        
         let foundBody, body = o.TryGetValue "body"
         
         let arguments =
@@ -94,18 +103,27 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         |> Seq.filter (fun (k, v) -> k <> "body")
         |> Seq.iter (fun (k, v) -> requestParameters.SetQueryString(k, v))
         
-        match (foundBody, this.SupportsBody) with
-        | (true, true) ->
-            let arguments = Array.append arguments [|PostData.Serializable body; requestParameters; Async.DefaultCancellationToken|]
-            this.Delegate.Invoke(instance, arguments)
-        | (false, true) ->
-            let arguments = Array.append arguments [|null ; requestParameters; Async.DefaultCancellationToken|]
-            this.Delegate.Invoke(instance, arguments)
-        | (false, false) ->
-            let arguments = Array.append arguments [|requestParameters; Async.DefaultCancellationToken|]
-            this.Delegate.Invoke(instance, arguments)
-        | (true, false) ->
-            failwithf "found a body but this method does not take a body"
+        let post =
+            match body with
+            | null -> null
+            | :? List<Object> as e ->
+                
+                
+                PostData.MultiJson e
+            | :? String as s -> PostData.String s
+            | value -> PostData.Serializable body :> PostData
+        
+        let args = 
+            match (foundBody, this.SupportsBody) with
+            | (true, true) ->
+                Array.append arguments [|post; requestParameters; Async.DefaultCancellationToken|]
+            | (false, true) ->
+                Array.append arguments [|null ; requestParameters; Async.DefaultCancellationToken|]
+            | (false, false) ->
+                Array.append arguments [|requestParameters; Async.DefaultCancellationToken|]
+            | (true, false) -> failwithf "found a body but this method does not take a body"
+        
+        this.Delegate.Invoke(instance, args)
 
 
 let getProp (t:Type) prop = t.GetProperty(prop).GetGetMethod()
@@ -123,12 +141,12 @@ let methodsWithAttribute instance mapsApiAttribute  =
 
 exception ParamException of string 
 
-let createApiLookup (invokers: FastApiInvoke list) : (Map<string, Object> -> FastApiInvoke) =
+let createApiLookup (invokers: FastApiInvoke list) : (YamlMap -> FastApiInvoke) =
     let first = invokers |> List.head
     let name = first.ApiName
     let clientMethod = first.ClientMethodName
     
-    let lookup (o:Map<string, Object>) =
+    let lookup (o:YamlMap) =
         
         let invokers =
             invokers
@@ -160,11 +178,14 @@ let clientApiDispatch (client:IElasticLowLevelClient) =
     |> List.ofArray
     |> List.groupBy (fun n -> n.ApiName)
     |> Map.ofList<String, FastApiInvoke list>
-    |> Map.map<String, FastApiInvoke list, (Map<String, Object> -> FastApiInvoke)>(fun k v -> createApiLookup v)
-    
-let DoMap =
+    |> Map.map<String, FastApiInvoke list, (YamlMap -> FastApiInvoke)>(fun k v -> createApiLookup v)
+
+let Client = 
     let settings = new ConnectionConfiguration(new Uri("http://ipv4.fiddler:9200"))
     let x = settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
-    clientApiDispatch (new ElasticLowLevelClient(x))
+    new ElasticLowLevelClient(x)
+    
+let DoMap =
+    clientApiDispatch Client
         
 
