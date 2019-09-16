@@ -13,7 +13,7 @@ open Elasticsearch.Net
 open Elasticsearch.Net
 open Tests.YamlRunner.Models
 
-type ApiInvoke = delegate of Object * Object[] -> Task<StringResponse>
+type ApiInvoke = delegate of Object * Object[] -> Task<DynamicResponse>
 
 type RequestParametersInvoke = delegate of unit ->  IRequestParameters
 
@@ -45,12 +45,12 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
                 let convert = Expression.Convert (index, p.ParameterType)
                 argumentExpressions.Add convert
             )
-        let x = [|typeof<StringResponse>|] 
+        let x = [|typeof<DynamicResponse>|] 
         let callExpression =
             let instance = Expression.Convert(instanceExpression, methodInfo.ReflectedType)
             Expression.Call(instance, methodInfo.Name, x, argumentExpressions.ToArray())
             
-        let invokeExpression = Expression.Convert(callExpression, typeof<Task<StringResponse>>)
+        let invokeExpression = Expression.Convert(callExpression, typeof<Task<DynamicResponse>>)
         Expression.Lambda<ApiInvoke>(invokeExpression, instanceExpression, argumentsExpression).Compile();
     
     member private this.toMap (o:YamlMap) = o |> Seq.map (fun o -> o.Key :?> String , o.Value) |> Map.ofSeq
@@ -107,9 +107,10 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
             match body with
             | null -> null
             | :? List<Object> as e ->
-                
-                
-                PostData.MultiJson e
+                match e with
+                | e when e.All(fun i -> i.GetType() = typeof<String>) ->
+                    PostData.MultiJson(e.Cast<String>())
+                | e -> PostData.MultiJson e
             | :? String as s -> PostData.String s
             | value -> PostData.Serializable body :> PostData
         

@@ -100,7 +100,7 @@ namespace Elasticsearch.Net
 
 			using (responseStream)
 			{
-				if (SetSpecialTypes<TResponse>(bytes, requestData.MemoryStreamFactory, out var r))
+				if (SetSpecialTypes<TResponse>(mimeType, bytes, requestData.MemoryStreamFactory, out var r))
 					return r;
 
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
@@ -133,7 +133,7 @@ namespace Elasticsearch.Net
 
 			using (responseStream)
 			{
-				if (SetSpecialTypes<TResponse>(bytes, requestData.MemoryStreamFactory, out var r)) return r;
+				if (SetSpecialTypes<TResponse>(mimeType, bytes, requestData.MemoryStreamFactory, out var r)) return r;
 
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static bool SetSpecialTypes<TResponse>(byte[] bytes, IMemoryStreamFactory memoryStreamFactory, out TResponse cs)
+		private static bool SetSpecialTypes<TResponse>(string mimeType, byte[] bytes, IMemoryStreamFactory memoryStreamFactory, out TResponse cs)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			cs = null;
@@ -165,10 +165,20 @@ namespace Elasticsearch.Net
 				cs = new VoidResponse() as TResponse;
 			else if (responseType == typeof(DynamicResponse))
 			{
-				using (var ms = memoryStreamFactory.Create(bytes))
+				//if not json store the result under "body"
+				if (mimeType != RequestData.MimeType)
 				{
-					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicDictionary>(ms);
-					cs = new DynamicResponse(body) as TResponse;
+					var dictionary = new DynamicDictionary();
+					dictionary["body"] = new DynamicValue(bytes.Utf8String());
+					cs = new DynamicResponse(dictionary) as TResponse;
+				}
+				else
+				{
+					using (var ms = memoryStreamFactory.Create(bytes))
+					{
+						var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicDictionary>(ms);
+						cs = new DynamicResponse(body) as TResponse;
+					}
 				}
 			}
 			return cs != null;

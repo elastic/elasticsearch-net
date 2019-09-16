@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Elasticsearch.Net.Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
@@ -51,33 +52,34 @@ namespace Elasticsearch.Net
 			get { return false; }
 		}
 
+		private static Regex SplitRegex = new Regex(@"(?<!\\)\.");
+
 		/// <summary>
-		/// Traverses data using path notation
+		/// Traverses data using path notation.
+		/// <para><c>e.g some.deep.nested.json.path</c></para>
+		/// <para> A special lookup is available for ANY key <c>_arbitrary_key_<c> <c>e.g some.deep._arbitrary_key_.json.path</c> which will traverse into the first key</para>
 		/// </summary>
-		/// <param name="path">path into the stored object, keys are seperated with a dot and the last key is returned as T</param>
+		/// <param name="path">path into the stored object, keys are separated with a dot and the last key is returned as T</param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns>T or default</returns>
 		public T Get<T>(string path)
 		{
 			if (path == null) return default;
-			var stack = new Stack<string>(path.Split('.'));
-			if (stack.Count == 0) return default;
 
-			var lastValue = stack.Pop();
-			var queue = new Queue<string>(stack.Reverse());
-			IDictionary<string, DynamicValue> map = this;
+			var split = SplitRegex.Split(path);
+			var queue = new Queue<string>(split);
+			if (queue.Count == 0) return default;
+
+			var d = new DynamicValue(_backingDictionary);
 			while (queue.Count > 0)
 			{
-				var key = queue.Dequeue();
-				var value = map[key];
-				map = value?.ToDictionary();
-				if (map == null) break;
+				var key = queue.Dequeue().Replace(@"\.", ".");
+				if (key == "_arbitrary_key_") d = d[0];
+				else if (int.TryParse(key, out var i)) d = d[i];
+				else d = d[key];
 			}
-			var v = map?[lastValue]?.Value;
-			if (v != null && typeof(T) == typeof(DynamicDictionary) && v is IDictionary<string, object> dict)
-				return (T)(object)DynamicDictionary.Create(dict);
 
-			return v == null ? default : (T)v;
+			return d.TryParse<T>();
 		}
 
 		/// <summary>
@@ -281,7 +283,8 @@ namespace Elasticsearch.Net
 
 			foreach (var key in values.Keys)
 			{
-				instance[key] = new DynamicValue(values[key]);
+				var v = values[key];
+				instance[key] = v is DynamicValue av ? av : new DynamicValue(v);
 			}
 
 			return instance;

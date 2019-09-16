@@ -28,6 +28,7 @@ let ListFolderFiles namedSuite revision folder = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
+        |> List.filter(fun f -> f = "80_cas.yml")
         |> List.map fileUrl
     return yamlFiles
 }
@@ -70,7 +71,7 @@ let DownloadTestsInFolder folder namedSuite revision (progress: IProgressBar) su
     let! localFiles = async {
        match yamlFiles.Length with
        | 0 ->
-           progress.WriteLine(sprintf "%s folder yielded no tests" folder)
+           //progress.WriteLine(sprintf "%s folder yielded no tests" folder)
            return List.empty
        | x ->
            let! result = downloadTestsInFolder yamlFiles folder revision progress subBarOptions

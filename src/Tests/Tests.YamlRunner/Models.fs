@@ -41,7 +41,10 @@ type ResponseProperty = ResponseProperty of string
 type StashedId = private StashedId of string
     // TODO handle $ when already on s
     with
-        static member Create s = StashedId <| sprintf "$%s" s
+        static member Create (s:String) =
+            match s with
+            | s when s.StartsWith "$" -> StashedId s
+            | s -> StashedId <| sprintf "$%s" s
         static member Body = StashedId.Create "body"
     
 type SetTransformation = private SetTransformation of string
