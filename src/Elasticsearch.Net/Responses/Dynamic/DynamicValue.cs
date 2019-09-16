@@ -483,25 +483,22 @@ namespace Elasticsearch.Net
 				try
 				{
 					if (_value.GetType().IsAssignableFrom(typeof(T)))
-					{
 						return (T)_value;
-					}
-
 
 					var type = typeof(T);
-
 					var stringValue = _value as string;
+
 					if (type == typeof(DateTime))
 					{
-						DateTime result;
-
-						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
 						{
 							return (T)(object)result;
 						}
 					}
 					else if (stringValue != null)
 					{
+						if (type == typeof(object)) return (T)Convert.ChangeType(_value, type);
+
 						var converter = TypeDescriptor.GetConverter(type);
 						if (converter.IsValid(stringValue)) return (T)converter.ConvertFromInvariantString(stringValue);
 					}

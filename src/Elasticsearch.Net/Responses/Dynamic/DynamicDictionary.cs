@@ -57,7 +57,10 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Traverses data using path notation.
 		/// <para><c>e.g some.deep.nested.json.path</c></para>
+		/// <para></para>
 		/// <para> A special lookup is available for ANY key <c>_arbitrary_key_<c> <c>e.g some.deep._arbitrary_key_.json.path</c> which will traverse into the first key</para>
+		/// <para> If <c>_arbitrary_key_</c> is the last value it will return the key name</para>
+		/// <para></para>
 		/// </summary>
 		/// <param name="path">path into the stored object, keys are separated with a dot and the last key is returned as T</param>
 		/// <typeparam name="T"></typeparam>
@@ -74,7 +77,15 @@ namespace Elasticsearch.Net
 			while (queue.Count > 0)
 			{
 				var key = queue.Dequeue().Replace(@"\.", ".");
-				if (key == "_arbitrary_key_") d = d[0];
+				if (key == "_arbitrary_key_")
+				{
+					if (queue.Count > 0) d = d[0];
+					else
+					{
+						var v = d?.ToDictionary()?.Keys?.FirstOrDefault();
+						d = v != null ? new DynamicValue(v) : DynamicValue.NullValue;
+					}
+				}
 				else if (int.TryParse(key, out var i)) d = d[i];
 				else d = d[key];
 			}

@@ -28,7 +28,7 @@ let ListFolderFiles namedSuite revision folder = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
-        |> List.filter(fun f -> f = "80_cas.yml")
+        //|> List.filter(fun f -> f = "30_copy_settings.yml")
         |> List.map fileUrl
     return yamlFiles
 }
