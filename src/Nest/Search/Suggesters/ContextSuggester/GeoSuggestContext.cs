@@ -11,7 +11,7 @@ namespace Nest
 		bool? Neighbors { get; set; }
 
 		[DataMember(Name = "precision")]
-		IEnumerable<string> Precision { get; set; }
+		string Precision { get; set; }
 	}
 
 	[DataContract]
@@ -19,7 +19,7 @@ namespace Nest
 	{
 		public bool? Neighbors { get; set; }
 
-		public IEnumerable<string> Precision { get; set; }
+		public string Precision { get; set; }
 		public override string Type => "geo";
 	}
 
@@ -30,9 +30,9 @@ namespace Nest
 	{
 		protected override string Type => "geo";
 		bool? IGeoSuggestContext.Neighbors { get; set; }
-		IEnumerable<string> IGeoSuggestContext.Precision { get; set; }
+		string IGeoSuggestContext.Precision { get; set; }
 
-		public GeoSuggestContextDescriptor<T> Precision(params string[] precisions) => Assign(precisions, (a, v) => a.Precision = v);
+		public GeoSuggestContextDescriptor<T> Precision(string precision) => Assign(precision, (a, v) => a.Precision = v);
 
 		public GeoSuggestContextDescriptor<T> Neighbors(bool? neighbors = true) => Assign(neighbors, (a, v) => a.Neighbors = v);
 	}
