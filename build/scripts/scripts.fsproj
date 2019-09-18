@@ -66,7 +66,7 @@
     <FscToolExe>fsharpc</FscToolExe>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Bullseye" Version="2.4.0-rc.2" />
+    <PackageReference Include="Bullseye" Version="3.0.0-rc.1" />
     <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190724T022011" />
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
@@ -81,7 +81,7 @@
 
     <DotNetCliToolReference Include="dotnet-assembly-rewriter" Version="1.0.0-alpha20190401T093210" />
     <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190403T095656" />
-    
+  
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">
     <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />
