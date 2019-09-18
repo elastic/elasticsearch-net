@@ -7,6 +7,9 @@ namespace Nest
 	/// </summary>
 	public interface IPatternReplaceCharFilter : ICharFilter
 	{
+		[DataMember(Name ="flags")]
+		string Flags { get; set; }
+
 		[DataMember(Name ="pattern")]
 		string Pattern { get; set; }
 
@@ -20,6 +23,9 @@ namespace Nest
 		public PatternReplaceCharFilter() : base("pattern_replace") { }
 
 		/// <inheritdoc />
+		public string Flags { get; set; }
+
+		/// <inheritdoc />
 		public string Pattern { get; set; }
 
 		/// <inheritdoc />
@@ -31,8 +37,14 @@ namespace Nest
 		: CharFilterDescriptorBase<PatternReplaceCharFilterDescriptor, IPatternReplaceCharFilter>, IPatternReplaceCharFilter
 	{
 		protected override string Type => "pattern_replace";
+
+		string IPatternReplaceCharFilter.Flags { get; set; }
 		string IPatternReplaceCharFilter.Pattern { get; set; }
 		string IPatternReplaceCharFilter.Replacement { get; set; }
+
+		/// <inheritdoc />
+		public PatternReplaceCharFilterDescriptor Flags(string flags) =>
+			Assign(flags, (a, v) => a.Flags = v);
 
 		/// <inheritdoc />
 		public PatternReplaceCharFilterDescriptor Pattern(string pattern) =>

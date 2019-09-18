@@ -17,9 +17,9 @@ namespace Tests.Analysis.CharFilters
 
 		public class PatternReplaceTests : CharFilterAssertionBase<PatternReplaceTests>
 		{
-			public override FuncTokenizer Fluent => (n, cf) => cf.PatternReplace(n, c => c.Pattern("x").Replacement("y"));
-			public override ICharFilter Initializer => new PatternReplaceCharFilter { Pattern = "x", Replacement = "y" };
-			public override object Json => new { pattern = "x", replacement = "y", type = "pattern_replace" };
+			public override FuncTokenizer Fluent => (n, cf) => cf.PatternReplace(n, c => c.Flags("CASE_INSENSITIVE").Pattern("x").Replacement("y"));
+			public override ICharFilter Initializer => new PatternReplaceCharFilter { Flags = "CASE_INSENSITIVE", Pattern = "x", Replacement = "y" };
+			public override object Json => new { flags = "CASE_INSENSITIVE", pattern = "x", replacement = "y", type = "pattern_replace" };
 			public override string Name => "pr";
 		}
 
