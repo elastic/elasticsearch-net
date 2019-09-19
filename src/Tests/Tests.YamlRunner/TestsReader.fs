@@ -7,6 +7,7 @@ open System.Linq
 
 open System.IO
 open Tests.YamlRunner.Models
+open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsLocator
 
 
@@ -59,20 +60,20 @@ let private mapNumericAssert (operation:YamlMap) =
         |> Seq.map (fun (kv) ->
             let v =
                 match kv.Value with
-                | :? int32 as i -> Fixed <| Convert.ToDouble i
-                | :? int64 as i -> Fixed <| Convert.ToDouble i
-                | :? double as i -> Fixed <| Convert.ToDouble i
-                | :? string as i -> StashedId <| StashedId.Create i
+                | :? int32 as i -> Long <| Convert.ToInt64 i
+                | :? int64 as i -> Long i
+                | :? double as i -> Double <| Convert.ToDouble i
+                | :? string as i -> NumericId <| StashedId.Create i
                 | _ -> failwithf "unsupported %s" (kv.Value.GetType().Name)
-            AssertPath (kv.Key :?> string), v
+            AssertOn.Create (kv.Key :?> string), v
         )
         |> Map.ofSeq
         
-let private firstValueAsPath (operation:YamlMap) = AssertPath (operation.Values.First() :?> string)
+let private firstValueAsPath (operation:YamlMap) = AssertOn.Create (operation.Values.First() :?> string)
 
 let private mapMatch (operation:YamlMap) =
     operation
-        |> Seq.map (fun (kv) -> AssertPath (kv.Key :?> string), kv.Value)
+        |> Seq.map (fun (kv) -> AssertOn.Create(kv.Key :?> string), AssertValue.FromObject kv.Value)
         |> Map.ofSeq
         
 let private mapTransformAndSet (operation:YamlMap) =
@@ -142,8 +143,8 @@ let private mapOperation (operation:YamlMap) =
         | ("match", YamlDictionary map) ->  Assert <| Match (mapMatch map)
         | ("is_false", YamlDictionary map) -> Assert <| IsFalse (firstValueAsPath map)
         | ("is_true", YamlDictionary map) -> Assert <| IsTrue (firstValueAsPath map)
-        | ("is_false", YamlString str) -> Assert <| IsFalse (AssertPath str)
-        | ("is_true", YamlString str) -> Assert <| IsTrue (AssertPath str)
+        | ("is_false", YamlString str) -> Assert <| IsFalse (AssertOn.Create str)
+        | ("is_true", YamlString str) -> Assert <| IsTrue (AssertOn.Create str)
         | (IsNumericAssert n, YamlDictionary map) -> Assert <| NumericAssert (n, mapNumericAssert map)
         | (k, v) -> failwithf "%s does not support %s" k (v.GetType().Name)
     | unknownOperation -> Unknown unknownOperation

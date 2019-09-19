@@ -410,28 +410,24 @@ namespace Elasticsearch.Net
 				return true;
 			}
 
-			var d = Value as IDictionary<string, object>;
-			object r;
-			if (d != null && d.TryGetValue(name, out r))
+			if (Value is IDictionary<string, object> d)
 			{
-				result = SelfOrNew(r);
+				result = d.TryGetValue(name, out var r) ? SelfOrNew(r) : NullValue;
 				return true;
 			}
-			var x = Value as IDynamicMetaObjectProvider;
-			if (x != null)
+			if (Value is IDynamicMetaObjectProvider x)
 			{
 				var dm = GetDynamicMember(Value, name);
 				result = SelfOrNew(dm);
 				return true;
 			}
-			var ds = Value as IDictionary;
-			if (ds != null && ds.Contains(name))
+			if (Value is IDictionary ds)
 			{
-				result = SelfOrNew(ds[name]);
+				result = ds.Contains(name) ? SelfOrNew(ds[name]) : NullValue;
 				return true;
 			}
 
-			result = SelfOrNew(Value);
+			result = NullValue;
 			return true;
 		}
 
@@ -507,6 +503,7 @@ namespace Elasticsearch.Net
 						return (T)Convert.ChangeType(_value, TypeCode.String, CultureInfo.InvariantCulture);
 					}
 					else if (_value.GetType().IsValueType) return (T)Convert.ChangeType(_value, type);
+					else if (type == typeof(object)) return (T)_value;
 				}
 				catch
 				{

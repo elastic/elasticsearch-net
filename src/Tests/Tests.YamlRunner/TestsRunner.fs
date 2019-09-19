@@ -20,7 +20,13 @@ let RunOperation file section operation nth stashes (progress:IProgressBar) = as
         Operation= operation
         Stashes = stashes
     }
-    return! OperationExecutor.Execute executionContext progress
+    let! pass = OperationExecutor.Execute executionContext progress
+    match pass with
+    | Failed f ->
+        let c = pass.Context
+        progress.WriteLine <| sprintf "%s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
+    | _ -> ignore()
+    return pass
 }
 
 let private createOperations m file (ops:Operations) progress = 
@@ -92,10 +98,11 @@ let RunTestsInFolder (progress:IProgressBar) (barOptions:ProgressBarOptions) mai
         progress.Tick(message)
         let message = sprintf "Inspecting file for sections" 
         use p = progress.Spawn(0, message, barOptions)
-        let! result = RunTestFile p document
         
         let x = DoMapper.Client.Indices.Delete<VoidResponse>("*") 
-        let x = DoMapper.Client.Indices.DeleteTemplateForAll<VoidResponse>("*") 
+        let x = DoMapper.Client.Indices.DeleteTemplateForAll<VoidResponse>("*")
+        
+        let! result = RunTestFile p document
         
         return result
     }

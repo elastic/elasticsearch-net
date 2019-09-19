@@ -16,6 +16,7 @@ let ListFolders namedSuite revision  = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map (fun a -> a.InnerText())
         |> List.filter (fun f -> not <| f.StartsWith("cluster"))
+        //|> List.filter (fun f -> f = "delete")
         |> List.filter (fun f -> not <| f.EndsWith(".asciidoc"))
 }
     
@@ -28,7 +29,7 @@ let ListFolderFiles namedSuite revision folder = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
-        //|> List.filter(fun f -> f = "30_copy_settings.yml")
+        //|> List.filter(fun f -> f = "51_refresh_with_types.yml")
         |> List.map fileUrl
     return yamlFiles
 }

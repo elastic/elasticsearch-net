@@ -12,17 +12,24 @@ open ShellProgressBar
 type Stashes() =
     inherit Dictionary<StashedId, Object>()
     
-    member val Response:DynamicResponse option = None with get, set
+    member val ResponseOption:DynamicResponse option = None with get, set
+    member private this.LazyResponse = lazy(this.ResponseOption.Value)
+    member this.Response () = this.LazyResponse.Force()
     
-    member this.Dictionary = lazy(this.Response.Value)
-    
-    member this.GetResponseValue (progress:IProgressBar) (path:String) =
+    member this.ResolvePath (progress:IProgressBar) (path:String) =
         let r = this.ResolveToken progress
         let tokens =
             path.Split('.')
             |> Seq.map r
-        let path = String.Join('.', tokens)
-        this.Dictionary.Force().Get path
+        String.Join('.', tokens)
+        
+    member this.GetResponseValue (progress:IProgressBar) (path:String) =
+        let g = this.Response().Get 
+        match path with
+        | "$body" -> g "body"
+        | _ -> 
+            let path = this.ResolvePath progress path
+            g path
     
     member this.Resolve (progress:IProgressBar) (object:YamlMap) =
         let rec resolve (o:Object) : Object =
