@@ -38,6 +38,12 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
+		/// Create a regular dictionary as shallow copy
+		/// </summary>
+		/// <returns></returns>
+		public Dictionary<string, object> ToDictionary() => _backingDictionary.ToDictionary(kv => kv.Key, kv => kv.Value.Value);
+
+		/// <summary>
 		/// Returns an empty dynamic dictionary.
 		/// </summary>
 		/// <value>A <see cref="DynamicDictionary" /> instance.</value>

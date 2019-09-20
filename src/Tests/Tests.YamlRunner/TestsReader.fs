@@ -7,7 +7,6 @@ open System.Linq
 
 open System.IO
 open Tests.YamlRunner.Models
-open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsLocator
 
 

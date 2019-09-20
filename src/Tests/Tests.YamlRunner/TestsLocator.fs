@@ -1,13 +1,15 @@
 module Tests.YamlRunner.TestsLocator
 
 open System
+open System.Globalization
+open System.IO
 open System.Threading
 open FSharp.Data
 open Tests.YamlRunner.AsyncExtensions
 open ShellProgressBar
 open Tests.YamlRunner
 
-let ListFolders namedSuite revision  = async {
+let ListFolders namedSuite revision directory = async {
     let url = TestsDownloader.TestGithubRootUrl namedSuite revision
     let! (_, html) = TestsDownloader.CachedOrDownload revision "_root_" "index.html" url 
     let doc = HtmlDocument.Parse(html)
@@ -16,11 +18,12 @@ let ListFolders namedSuite revision  = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map (fun a -> a.InnerText())
         |> List.filter (fun f -> not <| f.StartsWith("cluster"))
-        //|> List.filter (fun f -> f = "delete")
+        |> List.filter (fun f -> not <| f.StartsWith("cat"))
+        |> List.filter (fun f -> match directory with | Some s -> f = s | None -> true)
         |> List.filter (fun f -> not <| f.EndsWith(".asciidoc"))
 }
     
-let ListFolderFiles namedSuite revision folder = async { 
+let ListFolderFiles namedSuite revision folder fileFilter = async { 
     let url = TestsDownloader.FolderListUrl namedSuite revision folder
     let! (_, html) =  TestsDownloader.CachedOrDownload revision folder "index.html" url 
     let doc = HtmlDocument.Parse(html)
@@ -29,6 +32,7 @@ let ListFolderFiles namedSuite revision folder = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
+        |> List.filter (fun f -> match fileFilter with | Some s -> f.StartsWith(s, StringComparison.OrdinalIgnoreCase) | None -> true)
         //|> List.filter(fun f -> f = "51_refresh_with_types.yml")
         |> List.map fileUrl
     return yamlFiles
@@ -66,8 +70,8 @@ let private downloadTestsInFolder (yamlFiles:list<string * string>) folder revis
 
 type LocateResults = { Folder: string; Paths: YamlFileInfo list } 
 
-let DownloadTestsInFolder folder namedSuite revision (progress: IProgressBar) subBarOptions = async {
-    let! token = Async.StartChild <| ListFolderFiles namedSuite revision folder 
+let DownloadTestsInFolder folder fileFilter namedSuite revision (progress: IProgressBar) subBarOptions = async {
+    let! token = Async.StartChild <| ListFolderFiles namedSuite revision folder fileFilter
     let! yamlFiles = token
     let! localFiles = async {
        match yamlFiles.Length with

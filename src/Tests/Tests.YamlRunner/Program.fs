@@ -1,50 +1,34 @@
 ﻿module Tests.YamlRunner.Main
 
 open Argu
-open Elasticsearch.Net
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
-open Tests.YamlRunner.TestsReader
-open Tests.YamlRunner.TestsLocator
 
 type Arguments =
     | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
     | [<AltCommandLine("-r")>]Revision of string
+    | [<AltCommandLine("-d")>]Directory of string
+    | [<AltCommandLine("-f")>]File of string
     with
     interface IArgParserTemplate with
         member s.Usage =
             match s with
             | NamedSuite _ -> "specify a known yaml test suite. defaults to `opensource`."
             | Revision _ -> "The git revision to reference (commit/branch/tag). defaults to `master`"
+            | Directory _ -> "Only run tests in this folder"
+            | File _ -> "Only run tests starting with this filename"
 
 
 let runMain (parsed:ParseResults<Arguments>) = async {
     
     let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
     let revision = parsed.TryGetResult Revision |> Option.defaultValue "master"
+    let directory = parsed.TryGetResult Directory |> Option.defaultValue "get_source" |> Some
+    let file = parsed.TryGetResult File //|> Option.defaultValue "10_basic.yml" |> Some
     
-    
-//    let test = TestsLocator.TestLocalFile "/tmp/elastic/tests-master/bulk/60_deprecated.yml"
-//    let read = TestsReader.ReadYamlFile test
-    
-    
-    
-    let! locateResults = Commands.LocateTests namedSuite revision
+    let! locateResults = Commands.LocateTests namedSuite revision directory file
     let readResults = Commands.ReadTests locateResults 
     let! runTesults = Commands.RunTests readResults 
-//    
-//    printfn "folders: %O" locateResults.Length
-//    for folder in locateResults do 
-//        printfn "folder: %O" folder.Folder
-//        for p in folder.Paths do
-//            printfn "     %s" p.File
-    
-//    printfn "folders: %O" locateResults.Length
-//    for folder in readResults do 
-//        printfn "folder: %O" folder.Folder
-//        for f in folder.Files do
-//            for t in f.Tests do
-//                printfn "     %s (%i steps)" t.Name t.Operations.Length
     
     return 0
 }

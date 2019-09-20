@@ -8,10 +8,8 @@ open Tests.YamlRunner.Models
 open Tests.YamlRunner.Stashes
 open ShellProgressBar
 open Elasticsearch.Net
-open Legivel.Customization.Mapping
 open Newtonsoft.Json
 open Newtonsoft.Json.Linq
-open System.Text
 open System.Collections.Generic
 
 type ExecutionContext = {
@@ -51,10 +49,9 @@ let Set op s (progress:IProgressBar) =
         | Some r ->
             let v = stashes.GetResponseValue progress prop
             stashes.[id] <- v
-            progress.WriteLine <| sprintf "%A %s %O" id prop v
+            //progress.WriteLine <| sprintf "%A %s %O" id prop v
             Succeeded op
         | None ->
-            progress.WriteLine <| sprintf "%A %s NOT FOUND" id prop
             Failed <| Fail.Create op "Attempted to look up %s but no response was set prior" prop
     
     let responses = s |> Map.map v 
@@ -88,7 +85,6 @@ let Do op d progress = async {
                 return Failed <| Fail.Create op "%s %O" e d.Catch
             
     else 
-        printfn "%s: %b" name found
         return Failed <| Fail.Create op "Api: %s not found on client" name 
 }
 
@@ -123,12 +119,18 @@ let IsFalse op (t:AssertOn) progress =
     
 let IsMatch op (m:Match) progress =
     let stashes = op.Stashes
-    let isMatch expected actual = 
+    let isMatch expected actual =
         let toJtoken (t:Object) =
             match t with
             | null -> new JValue(t) :> JToken
+            // yaml test framework often compares ints with doubles, does not validate
+            // actual numeric types returned
+            | :? int 
+            | :? int64 -> new JValue(Convert.ToDouble(t)) :> JToken
             | :? Dictionary<Object, Object> as d -> JObject.FromObject(d) :> JToken
+            | :? IDictionary<String, Object> as d -> JObject.FromObject(d) :> JToken
             | _ -> JToken.FromObject t
+            
         let expected = toJtoken expected
         let actual = toJtoken actual
         match JToken.DeepEquals (expected, actual) with
@@ -137,6 +139,7 @@ let IsMatch op (m:Match) progress =
             let e = expected.ToString(Formatting.None)
             Failed <| Fail.Create op "expected: %s actual: %s" e a
         | _ -> Succeeded op
+        
     let asserts =
         m
         |> Seq.map (fun kv ->
@@ -159,7 +162,16 @@ let IsMatch op (m:Match) progress =
                     | true -> Succeeded op
                     | false -> Failed <| Fail.Create op "regex did not match body %s" body
             | WholeResponse ->
-                Failed <| Fail.Create op "Can not call match on whole parsed response ('')"
+                let response = stashes.Response().Dictionary.ToDictionary()
+                match assertValue with
+                | Value o -> isMatch o response
+                | Id id ->
+                    let found, expected = stashes.TryGetValue id
+                    match found with
+                    | true -> isMatch expected response
+                    | false -> Failed <| Fail.Create op "%A not stashed at this point" id 
+                | RegexAssertion re ->
+                    Failed <| Fail.Create op "regex can no t be called on the parsed body ('')"
         )
         |> Seq.sortBy (fun ex -> match ex with | Succeeded o -> 3 | Skipped o -> 2 | Failed o -> 1)
         |> Seq.toList
