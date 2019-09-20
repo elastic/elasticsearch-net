@@ -23,7 +23,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
     let revision = parsed.TryGetResult Revision |> Option.defaultValue "master"
-    let directory = parsed.TryGetResult Directory |> Option.defaultValue "get_source" |> Some
+    let directory = parsed.TryGetResult Directory |> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult File //|> Option.defaultValue "10_basic.yml" |> Some
     
     let! locateResults = Commands.LocateTests namedSuite revision directory file

@@ -49,7 +49,6 @@ let Set op s (progress:IProgressBar) =
         | Some r ->
             let v = stashes.GetResponseValue progress prop
             stashes.[id] <- v
-            //progress.WriteLine <| sprintf "%A %s %O" id prop v
             Succeeded op
         | None ->
             Failed <| Fail.Create op "Attempted to look up %s but no response was set prior" prop
@@ -117,7 +116,7 @@ let IsFalse op (t:AssertOn) progress =
     | Succeeded op ->
         Failed <| Fail.Create op "Expected is_false but got is_true behavior"
     
-let IsMatch op (m:Match) progress =
+let IsMatch op (matchOp:Match) progress =
     let stashes = op.Stashes
     let isMatch expected actual =
         let toJtoken (t:Object) =
@@ -139,40 +138,35 @@ let IsMatch op (m:Match) progress =
             let e = expected.ToString(Formatting.None)
             Failed <| Fail.Create op "expected: %s actual: %s" e a
         | _ -> Succeeded op
-        
-    let asserts =
-        m
-        |> Seq.map (fun kv ->
-            let assertOn, assertValue = (kv.Key, kv.Value)
+    
+    let doMatch assertOn assertValue = 
+        let value =
             match assertOn with
-            | ResponsePath path ->
-                let responseValue = stashes.GetResponseValue progress path :> Object
-                match assertValue with
-                | Value o ->
-                    isMatch o responseValue
-                | Id id ->
-                    let found, expected = stashes.TryGetValue id
-                    match found with
-                    | true -> isMatch expected responseValue
-                    | false -> Failed <| Fail.Create op "%A not stashed at this point" id 
-                | RegexAssertion re ->
-                    let body = responseValue.ToString()
-                    let matched = re.Regex.IsMatch(body)
-                    match matched with
-                    | true -> Succeeded op
-                    | false -> Failed <| Fail.Create op "regex did not match body %s" body
-            | WholeResponse ->
-                let response = stashes.Response().Dictionary.ToDictionary()
-                match assertValue with
-                | Value o -> isMatch o response
-                | Id id ->
-                    let found, expected = stashes.TryGetValue id
-                    match found with
-                    | true -> isMatch expected response
-                    | false -> Failed <| Fail.Create op "%A not stashed at this point" id 
-                | RegexAssertion re ->
-                    Failed <| Fail.Create op "regex can no t be called on the parsed body ('')"
-        )
+            | ResponsePath path -> stashes.GetResponseValue progress path :> Object
+            | WholeResponse -> stashes.Response().Dictionary.ToDictionary() :> Object
+        
+        match assertValue with
+        | Value o -> isMatch o value
+        | Id id ->
+            let found, expected = stashes.TryGetValue id
+            match found with
+            | true -> isMatch expected value
+            | false -> Failed <| Fail.Create op "%A not stashed at this point" id 
+        | RegexAssertion re ->
+            match assertOn with
+            | WholeResponse -> 
+                Failed <| Fail.Create op "regex can no t be called on the parsed body ('')"
+            | ResponsePath _ -> 
+                let body = value.ToString()
+                let matched = re.Regex.IsMatch(body)
+                match matched with
+                | true -> Succeeded op
+                | false -> Failed <| Fail.Create op "regex did not match body %s" body
+                
+    let asserts =
+        matchOp
+        |> Map.toList
+        |> Seq.map (fun (k, v) -> doMatch k v)
         |> Seq.sortBy (fun ex -> match ex with | Succeeded o -> 3 | Skipped o -> 2 | Failed o -> 1)
         |> Seq.toList
         

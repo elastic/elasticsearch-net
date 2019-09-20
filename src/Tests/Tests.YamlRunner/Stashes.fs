@@ -57,7 +57,6 @@ type Stashes() =
                 let s = sprintf "Expected to resolve %s but no such value was stashed at this point" s 
                 progress.WriteLine s 
                 failwith s
-            progress.WriteLine <| sprintf "Found %s: %O" s value
             value 
         | s -> s :> Object
         
