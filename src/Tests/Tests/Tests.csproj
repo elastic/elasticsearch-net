@@ -5,7 +5,6 @@
     <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
-    <LangVersion>latest</LangVersion>
     <IsTestProject>True</IsTestProject>
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
