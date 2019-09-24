@@ -19,7 +19,7 @@ namespace Nest
 			switch (token)
 			{
 				case JsonToken.BeginArray:
-					var formatter = formatterResolver.GetFormatter<IEnumerable<string>>();
+					var formatter = formatterResolver.GetFormatter<IEnumerable<object>>();
 					termsExclude = new TermsExclude(formatter.Deserialize(ref reader, formatterResolver));
 					break;
 				case JsonToken.String:
@@ -38,7 +38,7 @@ namespace Nest
 				writer.WriteNull();
 			else if (value.Values != null)
 			{
-				var formatter = formatterResolver.GetFormatter<IEnumerable<string>>();
+				var formatter = formatterResolver.GetFormatter<IEnumerable<object>>();
 				formatter.Serialize(ref writer, value.Values, formatterResolver);
 			}
 			else

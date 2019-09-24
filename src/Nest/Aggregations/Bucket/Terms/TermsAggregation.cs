@@ -124,13 +124,13 @@ namespace Nest
 		public TermsAggregationDescriptor<T> Include(string includePattern) =>
 			Assign(new TermsInclude(includePattern), (a, v) => a.Include = v);
 
-		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
+		public TermsAggregationDescriptor<T> Include(IEnumerable<object> values) =>
 			Assign(new TermsInclude(values), (a, v) => a.Include = v);
 
 		public TermsAggregationDescriptor<T> Exclude(string excludePattern) =>
 			Assign(new TermsExclude(excludePattern), (a, v) => a.Exclude = v);
 
-		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
+		public TermsAggregationDescriptor<T> Exclude(IEnumerable<object> values) =>
 			Assign(new TermsExclude(values), (a, v) => a.Exclude = v);
 
 		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode? collectMode) =>

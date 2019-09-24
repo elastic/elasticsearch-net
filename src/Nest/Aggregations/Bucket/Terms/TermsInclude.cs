@@ -22,7 +22,7 @@ namespace Nest
 		/// to include in the response
 		/// </summary>
 		/// <param name="values">The exact terms to include</param>
-		public TermsInclude(IEnumerable<string> values) => Values = values;
+		public TermsInclude(IEnumerable<object> values) => Values = values;
 
 		/// <summary>
 		/// Creates an instance of <see cref="TermsInclude" /> that partitions the terms into a number of
@@ -58,6 +58,6 @@ namespace Nest
 		/// Collection of terms to include in the response
 		/// </summary>
 		[IgnoreDataMember]
-		public IEnumerable<string> Values { get; set; }
+		public IEnumerable<object> Values { get; set; }
 	}
 }

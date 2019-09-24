@@ -21,7 +21,7 @@ namespace Nest
 		/// to exclude from the response
 		/// </summary>
 		/// <param name="values">The exact terms to exclude</param>
-		public TermsExclude(IEnumerable<string> values) => Values = values;
+		public TermsExclude(IEnumerable<object> values) => Values = values;
 
 		/// <summary>
 		/// The regular expression pattern to determine terms to exclude from the response
@@ -31,6 +31,6 @@ namespace Nest
 		/// <summary>
 		/// Collection of terms to exclude from the response
 		/// </summary>
-		public IEnumerable<string> Values { get; set; }
+		public IEnumerable<object> Values { get; set; }
 	}
 }

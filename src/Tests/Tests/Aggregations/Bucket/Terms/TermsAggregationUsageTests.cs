@@ -301,6 +301,94 @@ namespace Tests.Aggregations.Bucket.Terms
 	}
 
 	/**
+	 * [[terms-exact-value-filter]]
+	 * [float]
+	 * == Filtering with exact values
+	 *
+	 * Using terms aggregation with filtering to include only specific values that are not strings
+	 *
+	 */
+	public class TermsAggregationIncludeExactValuesNonStringsUsageTests : AggregationUsageTestBase {
+		public TermsAggregationIncludeExactValuesNonStringsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new {
+			numberOfContributors = new {
+				meta = new {
+					foo = "bar"
+				},
+				terms = new {
+					field = "numberOfContributors",
+					min_doc_count = 2,
+					size = 5,
+					shard_size = 100,
+					execution_hint = "map",
+					missing = "n/a",
+					include = new[] { 1, 2, 3 },
+					order = new object[]
+					{
+						new { _key = "asc" },
+						new { _count = "desc" }
+					}
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Terms("numberOfContributors", st => st
+				.Field(p => p.NumberOfContributors)
+				.MinimumDocumentCount(2)
+				.Size(5)
+				.ShardSize(100)
+				.ExecutionHint(TermsAggregationExecutionHint.Map)
+				.Missing("n/a")
+				.Include(new object[] { 1, 2, 3 })
+				.Order(o => o
+					.KeyAscending()
+					.CountDescending()
+				)
+				.Meta(m => m
+					.Add("foo", "bar")
+				)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new TermsAggregation("numberOfContributors") {
+				Field = Field<Project>(p => p.NumberOfContributors),
+				MinimumDocumentCount = 2,
+				Size = 5,
+				ShardSize = 100,
+				ExecutionHint = TermsAggregationExecutionHint.Map,
+				Missing = "n/a",
+				Include = new TermsInclude(new object[] { 1, 2, 3 }),
+				Order = new List<TermsOrder>
+				{
+					TermsOrder.KeyAscending,
+					TermsOrder.CountDescending
+				},
+				Meta = new Dictionary<string, object>
+				{
+					{ "foo", "bar" }
+				}
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response) {
+			response.ShouldBeValid();
+			var states = response.Aggregations.Terms("numberOfContributors");
+			states.Should().NotBeNull();
+			states.DocCountErrorUpperBound.Should().HaveValue();
+			states.SumOtherDocCount.Should().HaveValue();
+			states.Buckets.Should().NotBeNull();
+			states.Buckets.Count.Should().BeGreaterThan(0);
+			foreach (var item in states.Buckets) {
+				item.Key.Should().NotBeNullOrEmpty();
+				item.DocCount.Should().BeGreaterOrEqualTo(1);
+			}
+			states.Meta.Should().NotBeNull().And.HaveCount(1);
+			states.Meta["foo"].Should().Be("bar");
+		}
+	}
+
+	/**
 	 * [float]
 	 * == Filtering with partitions
 	 *
