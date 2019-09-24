@@ -2,12 +2,11 @@
 using System.Threading;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Elasticsearch.Net.VirtualizedCluster;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain.Extensions;
-using Tests.Framework.VirtualClustering;
 
 namespace Tests.Document.Multiple.BulkAll
 {
@@ -57,16 +56,17 @@ namespace Tests.Document.Multiple.BulkAll
 	public class BulkAllBadRetriesApiTests : BulkAllApiTestsBase
 	{
 		public BulkAllBadRetriesApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
-		
+
 		[U] public void Completes()
 		{
-			var client = VirtualClusterWith.Nodes(2)
+			var cluster = VirtualClusterWith.Nodes(2)
 				.ClientCalls(c => c.FailAlways())
 				.StaticConnectionPool()
-				.AllDefaults()
-				.Client;
-			
-			
+				.AllDefaults();
+
+			var settings = new ConnectionSettings(cluster.ConnectionPool, cluster.Connection).ApplyDomainSettings();
+			var client = new ElasticClient(settings);
+
 			var index = CreateIndexName();
 
 			var size = 1000;
@@ -103,11 +103,11 @@ namespace Tests.Document.Multiple.BulkAll
 			ex.Should().NotBeNull();
 
 			var clientException = ex.Should().BeOfType<ElasticsearchClientException>().Subject;
-			
+
 			clientException.Message.Should()
 				.StartWith("BulkAll halted after")
 				.And.EndWith("from _bulk and exhausting retries (2)");
-			
+
 			requests.Should().Be(3);
 			// OnNext only called for successful batches.
 			seenPages.Should().Be(0);
