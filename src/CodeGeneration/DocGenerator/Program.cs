@@ -87,9 +87,8 @@ namespace DocGenerator
 
 		public static string OutputDirPath { get; }
 
-		private static int Main(string[] args)
-		{
-			return Parser.Default.ParseArguments<DocGeneratorOptions>(args)
+		private static int Main(string[] args) =>
+			Parser.Default.ParseArguments<DocGeneratorOptions>(args)
 				.MapResult(
 					opts =>
 					{
@@ -115,7 +114,6 @@ namespace DocGenerator
 						}
 					},
 					errs => 1);
-		}
 	}
 
 	public class DocGeneratorOptions

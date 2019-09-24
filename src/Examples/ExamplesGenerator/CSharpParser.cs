@@ -20,10 +20,8 @@ namespace ExamplesGenerator
 		private static readonly Regex StartTag = new Regex(@"// tag::(?<hash>.*?)\[\]");
 		private static readonly Regex EndTag = new Regex(@"// end::(?<hash>.*?)\[\]");
 
-		private static Func<SyntaxTrivia, bool> SingleLineTriviaMatches(Regex regex)
-		{
-			return t => t.IsKind(SyntaxKind.SingleLineCommentTrivia) && regex.IsMatch(t.ToFullString());
-		}
+		private static Func<SyntaxTrivia, bool> SingleLineTriviaMatches(Regex regex) =>
+			t => t.IsKind(SyntaxKind.SingleLineCommentTrivia) && regex.IsMatch(t.ToFullString());
 
 		public static IEnumerable<ImplementedExample> ParseImplementedExamples()
 		{
@@ -54,7 +52,7 @@ namespace ExamplesGenerator
 
 						var statements = new List<StatementSyntax>();
 
-						for (int i = 0; i < methodDeclaration.Body.Statements.Count; i++)
+						for (var i = 0; i < methodDeclaration.Body.Statements.Count; i++)
 						{
 							var statement = methodDeclaration.Body.Statements[i];
 
