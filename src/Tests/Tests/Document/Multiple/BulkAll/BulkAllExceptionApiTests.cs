@@ -11,7 +11,6 @@ using Tests.Domain.Extensions;
 
 namespace Tests.Document.Multiple.BulkAll
 {
-	[ProjectReferenceOnly]
 	public class BulkAllExceptionApiTests : BulkAllApiTestsBase
 	{
 		public BulkAllExceptionApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
@@ -55,6 +54,7 @@ namespace Tests.Document.Multiple.BulkAll
 	}
 
 
+	[ProjectReferenceOnly]
 	public class BulkAllBadRetriesApiTests : BulkAllApiTestsBase
 	{
 		public BulkAllBadRetriesApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
