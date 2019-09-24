@@ -322,7 +322,6 @@ namespace Tests.Aggregations.Bucket.Terms
 					size = 5,
 					shard_size = 100,
 					execution_hint = "map",
-					missing = "n/a",
 					include = new[] { 1, 2, 3 },
 					order = new object[]
 					{
@@ -340,7 +339,6 @@ namespace Tests.Aggregations.Bucket.Terms
 				.Size(5)
 				.ShardSize(100)
 				.ExecutionHint(TermsAggregationExecutionHint.Map)
-				.Missing("n/a")
 				.Include(new object[] { 1, 2, 3 })
 				.Order(o => o
 					.KeyAscending()
@@ -358,7 +356,6 @@ namespace Tests.Aggregations.Bucket.Terms
 				Size = 5,
 				ShardSize = 100,
 				ExecutionHint = TermsAggregationExecutionHint.Map,
-				Missing = "n/a",
 				Include = new TermsInclude(new object[] { 1, 2, 3 }),
 				Order = new List<TermsOrder>
 				{
@@ -373,18 +370,18 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response) {
 			response.ShouldBeValid();
-			var states = response.Aggregations.Terms("numberOfContributors");
-			states.Should().NotBeNull();
-			states.DocCountErrorUpperBound.Should().HaveValue();
-			states.SumOtherDocCount.Should().HaveValue();
-			states.Buckets.Should().NotBeNull();
-			states.Buckets.Count.Should().BeGreaterThan(0);
-			foreach (var item in states.Buckets) {
+			var numberOfContributors = response.Aggregations.Terms("numberOfContributors");
+			numberOfContributors.Should().NotBeNull();
+			numberOfContributors.DocCountErrorUpperBound.Should().HaveValue();
+			numberOfContributors.SumOtherDocCount.Should().HaveValue();
+			numberOfContributors.Buckets.Should().NotBeNull();
+			numberOfContributors.Buckets.Count.Should().BeGreaterThan(0);
+			foreach (var item in numberOfContributors.Buckets) {
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
-			states.Meta.Should().NotBeNull().And.HaveCount(1);
-			states.Meta["foo"].Should().Be("bar");
+			numberOfContributors.Meta.Should().NotBeNull().And.HaveCount(1);
+			numberOfContributors.Meta["foo"].Should().Be("bar");
 		}
 	}
 
