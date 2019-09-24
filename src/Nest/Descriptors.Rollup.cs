@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.RollupApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for DeleteJob <para></para></summary>
+	///<summary>Descriptor for DeleteJob</summary>
 	public partial class DeleteRollupJobDescriptor : RequestDescriptorBase<DeleteRollupJobDescriptor, DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupDeleteJob;
@@ -51,7 +51,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetJob <para></para></summary>
+	///<summary>Descriptor for GetJob</summary>
 	public partial class GetRollupJobDescriptor : RequestDescriptorBase<GetRollupJobDescriptor, GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetJob;
@@ -73,7 +73,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetCapabilities <para></para></summary>
+	///<summary>Descriptor for GetCapabilities</summary>
 	public partial class GetRollupCapabilitiesDescriptor : RequestDescriptorBase<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetCapabilities;
@@ -95,7 +95,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetIndexCapabilities <para></para></summary>
+	///<summary>Descriptor for GetIndexCapabilities</summary>
 	public partial class GetRollupIndexCapabilitiesDescriptor : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetIndexCapabilities;
@@ -121,7 +121,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for CreateJob <para></para></summary>
+	///<summary>Descriptor for CreateJob</summary>
 	public partial class CreateRollupJobDescriptor<TDocument> : RequestDescriptorBase<CreateRollupJobDescriptor<TDocument>, CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupCreateJob;
@@ -142,7 +142,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Search <para></para></summary>
+	///<summary>Descriptor for Search</summary>
 	public partial class RollupSearchDescriptor<TDocument> : RequestDescriptorBase<RollupSearchDescriptor<TDocument>, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupSearch;
@@ -173,7 +173,7 @@ namespace Nest
 		public RollupSearchDescriptor<TDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>descriptor for StartJob <para></para></summary>
+	///<summary>Descriptor for StartJob</summary>
 	public partial class StartRollupJobDescriptor : RequestDescriptorBase<StartRollupJobDescriptor, StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupStartJob;
@@ -194,7 +194,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for StopJob <para></para></summary>
+	///<summary>Descriptor for StopJob</summary>
 	public partial class StopRollupJobDescriptor : RequestDescriptorBase<StopRollupJobDescriptor, StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupStopJob;

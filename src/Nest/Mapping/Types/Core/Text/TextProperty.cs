@@ -8,46 +8,46 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface ITextProperty : ICoreProperty
 	{
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="boost")]
+		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
-		[DataMember(Name ="eager_global_ordinals")]
+		[DataMember(Name = "eager_global_ordinals")]
 		bool? EagerGlobalOrdinals { get; set; }
 
-		[DataMember(Name ="fielddata")]
+		[DataMember(Name = "fielddata")]
 		bool? Fielddata { get; set; }
 
-		[DataMember(Name ="fielddata_frequency_filter")]
+		[DataMember(Name = "fielddata_frequency_filter")]
 		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		bool? Index { get; set; }
 
-		[DataMember(Name ="index_options")]
+		[DataMember(Name = "index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
-		[DataMember(Name ="index_phrases")]
+		[DataMember(Name = "index_phrases")]
 		bool? IndexPhrases { get; set; }
 
-		[DataMember(Name ="index_prefixes")]
+		[DataMember(Name = "index_prefixes")]
 		ITextIndexPrefixes IndexPrefixes { get; set; }
 
-		[DataMember(Name ="norms")]
+		[DataMember(Name = "norms")]
 		bool? Norms { get; set; }
 
-		[DataMember(Name ="position_increment_gap")]
+		[DataMember(Name = "position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
-		[DataMember(Name ="search_analyzer")]
+		[DataMember(Name = "search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[DataMember(Name ="search_quote_analyzer")]
+		[DataMember(Name = "search_quote_analyzer")]
 		string SearchQuoteAnalyzer { get; set; }
 
-		[DataMember(Name ="term_vector")]
+		[DataMember(Name = "term_vector")]
 		TermVectorOption? TermVector { get; set; }
 	}
 
@@ -55,9 +55,7 @@ namespace Nest
 	public class TextProperty : CorePropertyBase, ITextProperty
 	{
 		public TextProperty() : base(FieldType.Text) { }
-
 		public string Analyzer { get; set; }
-
 		public double? Boost { get; set; }
 		public bool? EagerGlobalOrdinals { get; set; }
 		public bool? Fielddata { get; set; }
@@ -73,7 +71,6 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 	}
 
-	[DebuggerDisplay("{DebugDisplay}")]
 	public class TextPropertyDescriptor<T>
 		: CorePropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
 		where T : class

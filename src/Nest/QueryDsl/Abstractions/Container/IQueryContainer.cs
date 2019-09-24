@@ -14,7 +14,9 @@ namespace Nest
 		IBoostingQuery Boosting { get; set; }
 
 		[DataMember(Name ="common")]
+#pragma warning disable 618
 		ICommonTermsQuery CommonTerms { get; set; }
+#pragma warning restore 618
 
 		[DataMember(Name ="constant_score")]
 		IConstantScoreQuery ConstantScore { get; set; }
@@ -164,6 +166,10 @@ namespace Nest
 		/// <inheritdoc cref="IRankFeatureQuery"/>
 		[DataMember(Name = "rank_feature")]
 		IRankFeatureQuery RankFeature { get; set; }
+
+		/// <inheritdoc cref="IDistanceFeatureQuery"/>
+		[DataMember(Name = "distance_feature")]
+		IDistanceFeatureQuery DistanceFeature { get; set; }
 
 		void Accept(IQueryVisitor visitor);
 	}

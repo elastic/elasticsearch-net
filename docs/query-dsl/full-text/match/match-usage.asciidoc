@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -24,7 +24,6 @@ q
     .Field(p => p.Description)
     .Analyzer("standard")
     .Boost(1.1)
-    .CutoffFrequency(0.001)
     .Query("hello world")
     .Fuzziness(Fuzziness.AutoLength(3, 6))
     .Lenient()
@@ -47,7 +46,6 @@ new MatchQuery
     Analyzer = "standard",
     Boost = 1.1,
     Name = "named_query",
-    CutoffFrequency = 0.001,
     Query = "hello world",
     Fuzziness = Fuzziness.AutoLength(3, 6),
     FuzzyTranspositions = true,
@@ -72,7 +70,6 @@ new MatchQuery
       "fuzzy_rewrite": "top_terms_blended_freqs_10",
       "fuzziness": "AUTO:3,6",
       "fuzzy_transpositions": true,
-      "cutoff_frequency": 0.001,
       "lenient": true,
       "minimum_should_match": 2,
       "operator": "or",

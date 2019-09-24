@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
@@ -11,8 +12,6 @@ namespace Tests.QueryDsl.FullText.Intervals
 	 * Matching rules are constructed from a small set of definitions, and the rules are then applied to terms from a particular field.
 	 *
 	 * The definitions produce sequences of minimal intervals that span terms in a body of text. These intervals can be further combined and filtered by parent sources.
-	 *
-	 * NOTE: Only available in Elasticsearch 6.7.0+
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-intervals-query.html[Intervals query]
 	 */
@@ -171,6 +170,93 @@ namespace Tests.QueryDsl.FullText.Intervals
 									.Source("interval.start > 0 && interval.end < 200")
 								)
 							)
+						)
+					)
+				)
+			);
+	}
+
+	/**[float]
+	 * === Prefix and Wildcard rules
+	 *
+	 * Prefix and Wildcard rules can be used to search for intervals that contain
+	 * terms starting with a prefix, or match a pattern, respectively.
+	 *
+	 * NOTE: Only available in Elasticsearch 7.3.0+
+	 */
+	[SkipVersion("<7.3.0", "prefix and wildcard rules introduced in 7.3.0")]
+	public class IntervalsPrefixAndWildcardUsageTests : QueryDslUsageTestsBase
+	{
+		public IntervalsPrefixAndWildcardUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		private static readonly string IntervalsPrefix = Project.First.Description.Split(' ')[0];
+
+		protected override QueryContainer QueryInitializer => new IntervalsQuery
+		{
+			Field = Field<Project>(p => p.Description),
+			Name = "named_query",
+			Boost = 1.1,
+			AnyOf = new IntervalsAnyOf
+			{
+				Intervals = new IntervalsContainer[]
+				{
+					new IntervalsWildcard
+					{
+						Pattern = IntervalsPrefix + "*"
+					},
+					new IntervalsPrefix
+					{
+						Prefix = IntervalsPrefix
+					}
+				}
+			}
+		};
+
+		protected override object QueryJson => new
+		{
+			intervals = new
+			{
+				description = new
+				{
+					_name = "named_query",
+					boost = 1.1,
+					any_of = new
+					{
+						intervals = new object[]
+						{
+							new
+							{
+								wildcard = new
+								{
+									pattern = IntervalsPrefix + "*"
+								}
+							},
+							new
+							{
+								prefix = new
+								{
+									prefix = IntervalsPrefix
+								}
+							}
+						}
+					}
+
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Intervals(c => c
+				.Field(p => p.Description)
+				.Name("named_query")
+				.Boost(1.1)
+				.AnyOf(any => any
+					.Intervals(i => i
+						.Wildcard(m => m
+							.Pattern(IntervalsPrefix + "*")
+						)
+						.Prefix(m => m
+							.Prefix(IntervalsPrefix)
 						)
 					)
 				)

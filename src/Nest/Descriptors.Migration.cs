@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.MigrationApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for DeprecationInfo <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
+	///<summary>Descriptor for DeprecationInfo <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
 	public partial class DeprecationInfoDescriptor : RequestDescriptorBase<DeprecationInfoDescriptor, DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationDeprecationInfo;

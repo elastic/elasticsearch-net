@@ -47,6 +47,12 @@ namespace Nest
 		[DataMember(Name = "ccr")]
 		public XPackFeature Ccr { get; internal set; }
 
+		[DataMember(Name = "data_frame")]
+		public XPackFeature DataFrame { get; internal set; }
+
+		[DataMember(Name = "flattened")]
+		public XPackFeature Flattened { get; internal set; }
+
 		[DataMember(Name = "graph")]
 		public XPackFeature Graph { get; internal set; }
 
@@ -70,6 +76,9 @@ namespace Nest
 
 		[DataMember(Name = "sql")]
 		public XPackFeature Sql { get; internal set; }
+
+		[DataMember(Name = "vectors")]
+		public XPackFeature Vectors { get; internal set; }
 
 		[DataMember(Name = "watcher")]
 		public XPackFeature Watcher { get; internal set; }

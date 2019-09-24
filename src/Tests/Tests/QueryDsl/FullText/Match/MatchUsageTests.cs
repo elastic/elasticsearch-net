@@ -23,7 +23,6 @@ namespace Tests.QueryDsl.FullText.Match
 			Analyzer = "standard",
 			Boost = 1.1,
 			Name = "named_query",
-			CutoffFrequency = 0.001,
 			Query = "hello world",
 			Fuzziness = Fuzziness.AutoLength(3, 6),
 			FuzzyTranspositions = true,
@@ -47,7 +46,6 @@ namespace Tests.QueryDsl.FullText.Match
 					fuzzy_rewrite = "top_terms_blended_freqs_10",
 					fuzziness = "AUTO:3,6",
 					fuzzy_transpositions = true,
-					cutoff_frequency = 0.001,
 					lenient = true,
 					minimum_should_match = 2,
 					@operator = "or",
@@ -61,7 +59,6 @@ namespace Tests.QueryDsl.FullText.Match
 				.Field(p => p.Description)
 				.Analyzer("standard")
 				.Boost(1.1)
-				.CutoffFrequency(0.001)
 				.Query("hello world")
 				.Fuzziness(Fuzziness.AutoLength(3, 6))
 				.Lenient()

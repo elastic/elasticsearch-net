@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -181,6 +181,8 @@ var methods = from d in YieldAllDescriptors()
     //skips
     where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
     where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
+    where !(m.Name == "CalendarInterval" && d == typeof(DateHistogramAggregationDescriptor<>))
+    where !(m.Name == "FixedInterval" && d == typeof(DateHistogramAggregationDescriptor<>))
     where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
     where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
     where !(m.Name == "Lang" && dt == typeof(ScriptQueryDescriptor<>))

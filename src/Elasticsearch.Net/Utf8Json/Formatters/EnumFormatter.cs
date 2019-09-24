@@ -151,11 +151,11 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	// can inherit for set optimize manual serialize/deserialize func.
 	internal class EnumFormatter<T> : IJsonFormatter<T>, IObjectPropertyNameFormatter<T>
 	{
-		readonly static ByteArrayStringHashTable<T> nameValueMapping;
-		readonly static Dictionary<T, string> valueNameMapping;
+		private static readonly ByteArrayStringHashTable<T> nameValueMapping;
+		private static readonly Dictionary<T, string> valueNameMapping;
 
-		readonly static JsonSerializeAction<T> defaultSerializeByUnderlyingValue;
-		readonly static JsonDeserializeFunc<T> defaultDeserializeByUnderlyingValue;
+		private static readonly JsonSerializeAction<T> defaultSerializeByUnderlyingValue;
+		private static readonly JsonDeserializeFunc<T> defaultDeserializeByUnderlyingValue;
 
 		static EnumFormatter()
 		{
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			foreach (var item in type.GetFields().Where(fi => fi.FieldType == type))
 			{
 				var value = item.GetValue(null);
-				var name = Enum.GetName(type, value);
+				var name = item.Name;
 				var dataMember = item.GetCustomAttributes(typeof(DataMemberAttribute), true)
 					.OfType<DataMemberAttribute>()
 					.FirstOrDefault();

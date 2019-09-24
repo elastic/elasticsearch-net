@@ -173,31 +173,31 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetApiKeyAsync<TResponse>(GetApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/api_key", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_security/privilege <para>TODO</para></summary>
+		///<summary>GET on /_security/privilege <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_security/privilege", null, RequestParams(requestParameters));
-		///<summary>GET on /_security/privilege <para>TODO</para></summary>
+		///<summary>GET on /_security/privilege <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetPrivilegesAsync<TResponse>(GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/privilege", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_security/privilege/{application} <para>TODO</para></summary>
+		///<summary>GET on /_security/privilege/{application} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetPrivileges<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_security/privilege/{application:application}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_security/privilege/{application} <para>TODO</para></summary>
+		///<summary>GET on /_security/privilege/{application} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> GetPrivilegesAsync<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_security/privilege/{application:application}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_security/privilege/{application}/{name} <para>TODO</para></summary>
+		///<summary>GET on /_security/privilege/{application}/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetPrivileges<TResponse>(string application, string name, GetPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_security/privilege/{application:application}/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_security/privilege/{application}/{name} <para>TODO</para></summary>
+		///<summary>GET on /_security/privilege/{application}/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -341,13 +341,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/role/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
-		///<param name = "body">The role to add</param>
+		///<param name = "body">The role mapping to add</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutRoleMapping<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_security/role_mapping/{name:name}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
-		///<param name = "body">The role to add</param>
+		///<param name = "body">The role mapping to add</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PutRoleMappingAsync<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/role_mapping/{name:name}"), ctx, body, RequestParams(requestParameters));

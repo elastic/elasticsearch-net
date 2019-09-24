@@ -55,6 +55,10 @@
 		void Visit(IRankFeatureProperty property);
 
 		void Visit(IRankFeaturesProperty property);
+
+		void Visit(ISearchAsYouTypeProperty property);
+
+		void Visit(IFlattenedProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -112,5 +116,9 @@
 		public virtual void Visit(IRankFeatureProperty property) { }
 
 		public virtual void Visit(IRankFeaturesProperty property) { }
+
+		public virtual void Visit(ISearchAsYouTypeProperty property) { }
+
+		public virtual void Visit(IFlattenedProperty property) { }
 	}
 }

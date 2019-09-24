@@ -16,7 +16,27 @@ namespace ApiGenerator.Configuration
 			"indices.get_upgrade.json",
 
 			// these APIs are not ready for primetime yet
+			"indices.reload_search_analyzers.json",
 			"rank_eval.json",
+
+			"data_frame.delete_data_frame_transform.json",
+			"data_frame.get_data_frame_transform.json",
+			"data_frame.get_data_frame_transform_stats.json",
+			"data_frame.preview_data_frame_transform.json",
+			"data_frame.put_data_frame_transform.json",
+			"data_frame.start_data_frame_transform.json",
+			"data_frame.stop_data_frame_transform.json",
+
+			"ml.evaluate_data_frame.json",
+			"ml.delete_data_frame_analytics.json",
+			"ml.get_data_frame_analytics.json",
+			"ml.get_data_frame_analytics_stats.json",
+			"ml.put_data_frame_analytics.json",
+			"ml.start_data_frame_analytics.json",
+			"ml.stop_data_frame_analytics.json",
+
+			"scripts_painless_context.json",
+			"security.get_builtin_privileges.json",
 
 			// these APIs are new and need to be mapped
 			"ml.set_upgrade_mode.json",

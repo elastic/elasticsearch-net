@@ -28,11 +28,15 @@
 
 		void Visit(IBoostingQuery query);
 
+#pragma warning disable 618
 		void Visit(ICommonTermsQuery query);
+#pragma warning restore 618
 
 		void Visit(IConstantScoreQuery query);
 
 		void Visit(IDisMaxQuery query);
+
+		void Visit(IDistanceFeatureQuery query);
 
 		void Visit(IFunctionScoreQuery query);
 
@@ -153,11 +157,15 @@
 
 		public virtual void Visit(IBoostingQuery query) { }
 
+#pragma warning disable 618
 		public virtual void Visit(ICommonTermsQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IConstantScoreQuery query) { }
 
 		public virtual void Visit(IDisMaxQuery query) { }
+
+		public virtual void Visit(IDistanceFeatureQuery query) { }
 
 		public virtual void Visit(ISpanContainingQuery query) { }
 

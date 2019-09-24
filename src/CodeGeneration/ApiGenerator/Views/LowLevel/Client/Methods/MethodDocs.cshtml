@@ -5,17 +5,35 @@
 @using ApiGenerator.Domain
 @using System.Text.RegularExpressions
 @using ApiGenerator.Domain.Code.LowLevel
+@using ApiGenerator.Domain.Specification
+@using CsQuery.ExtensionMethods.Internal
 @inherits ApiGenerator.CodeTemplatePage<LowLevelClientMethod>
 @{
 	LowLevelClientMethod method = Model;
 }
-		///<summary>@method.HttpMethod on @method.Path <para>@method.OfficialDocumentationLink</para></summary>
+		///<summary>@method.HttpMethod on @method.Path@Raw(method.OfficialDocumentationLink.IsNullOrEmpty() ? "" : " <para>" + method.OfficialDocumentationLink + "</para>")</summary>
 @foreach (var part in method.Parts)
 {
 <text>		///@Raw("<param name=\""+part.NameAsArgument+"\">")@part.Description@Raw("</param>")
 </text>
 }
 		///@Raw(@"<param name=""requestParameters"">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>")
+		@if (method.Stability != Stability.Stable)
+		{
+			string warningMessage = "";
+			switch (method.Stability)
+			{
+				case Stability.Experimental:
+					warningMessage = "this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.";
+					break;
+				case Stability.Beta:
+					warningMessage = "this functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.";
+					break;
+			}
+			
+<text>		///@Raw("<remarks>Note: " + method.Stability + " within the Elasticsearch server, " + warningMessage + "</remarks>")
+			</text>
+		}
 		@if (method.DeprecatedPath != null)
 		{
 <text>		[Obsolete("Deprecated in version @(method.DeprecatedPath.Version): @Raw(method.DeprecatedPath.Description)")]

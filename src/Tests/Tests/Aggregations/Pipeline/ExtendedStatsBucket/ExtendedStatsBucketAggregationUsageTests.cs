@@ -42,6 +42,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 			}
 		};
 
+#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
@@ -68,6 +69,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 			{
 				Sigma = 2.0
 			};
+#pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

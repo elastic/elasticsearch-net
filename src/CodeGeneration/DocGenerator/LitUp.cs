@@ -66,7 +66,10 @@ namespace DocGenerator
 			var projects = workspace.CurrentSolution.Projects
 				.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
-			foreach (var file in GetDocumentFiles(projects).SelectMany(s => s)) await file.SaveToDocumentationFolderAsync();
+			DeleteExistingDocs();
+
+			foreach (var file in GetDocumentFiles(projects).SelectMany(s => s))
+				await file.SaveToDocumentationFolderAsync();
 
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("Documentation generated.");
@@ -76,6 +79,20 @@ namespace DocGenerator
 			{
 				Console.WriteLine("Press any key to continue...");
 				Console.ReadKey();
+			}
+		}
+
+		private static void DeleteExistingDocs()
+		{
+			var outputDir = new DirectoryInfo(Program.OutputDirPath);
+
+			foreach (var file in outputDir.EnumerateFiles())
+				file.Delete();
+
+			foreach (var dir in outputDir.EnumerateDirectories())
+			{
+				if (!dir.Name.EndsWith("breaking-changes"))
+					dir.Delete(true);
 			}
 		}
 

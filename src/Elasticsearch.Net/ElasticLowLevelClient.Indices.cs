@@ -209,20 +209,20 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> FlushAsync<TResponse>(string index, FlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_flush"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+		///<summary>POST on /_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse SyncedFlushForAll<TResponse>(SyncedFlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_flush/synced", null, RequestParams(requestParameters));
-		///<summary>POST on /_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+		///<summary>POST on /_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> SyncedFlushForAllAsync<TResponse>(SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_flush/synced", ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+		///<summary>POST on /{index}/_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse SyncedFlush<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_flush/synced"), null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+		///<summary>POST on /{index}/_flush/synced <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> SyncedFlushAsync<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -331,14 +331,14 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse GetFieldMappingUsingTypeForAll<TResponse>(string type, string fields, GetFieldMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_mapping/{type:type}/field/{fields:fields}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> GetFieldMappingUsingTypeForAllAsync<TResponse>(string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_mapping/{type:type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
@@ -346,7 +346,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse GetFieldMappingUsingType<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}/field/{fields:fields}"), null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_mapping/{type}/field/{fields} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
@@ -354,7 +354,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> GetFieldMappingUsingTypeAsync<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
@@ -378,27 +378,27 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<summary>GET on /_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse GetMappingUsingTypeForAll<TResponse>(string type, GetMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_mapping/{type:type}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> GetMappingUsingTypeForAllAsync<TResponse>(string type, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_mapping/{type:type}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse GetMappingUsingType<TResponse>(string index, string type, GetMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}"), null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_mapping/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "type">A comma-separated list of document types</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> GetMappingUsingTypeAsync<TResponse>(string index, string type, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
@@ -500,7 +500,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">The name of the document type</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse PutMappingUsingType<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/{type:type}/_mapping"), body, RequestParams(requestParameters));
 		///<summary>PUT on /{index}/{type}/_mapping <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
@@ -508,21 +508,21 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">The name of the document type</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> PutMappingUsingTypeAsync<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/{type:type}/_mapping"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_mappings/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 		///<param name = "type">The name of the document type</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse PutMappingUsingTypeForAll<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_mappings/{type:type}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_mappings/{type} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 		///<param name = "type">The name of the document type</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> PutMappingUsingTypeForAllAsync<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_mappings/{type:type}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_settings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
@@ -772,7 +772,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name = "body">The query definition specified with the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse ValidateQueryUsingType<TResponse>(string index, string type, PostData body, ValidateQueryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_validate/query"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/{type}/_validate/query <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
@@ -780,7 +780,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name = "body">The query definition specified with the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public Task<TResponse> ValidateQueryUsingTypeAsync<TResponse>(string index, string type, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_validate/query"), ctx, body, RequestParams(requestParameters));
 	}

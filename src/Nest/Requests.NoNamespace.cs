@@ -143,7 +143,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
@@ -751,7 +751,7 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
@@ -1454,6 +1454,13 @@ namespace Nest
 			get => Q<bool? >("ignore_unavailable");
 			set => Q("ignore_unavailable", value);
 		}
+
+		///<summary>Indicates whether unmapped fields should be included in the response.</summary>
+		public bool? IncludeUnmapped
+		{
+			get => Q<bool? >("include_unmapped");
+			set => Q("include_unmapped", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -2079,8 +2086,8 @@ namespace Nest
 		}
 
 		///<summary>
-		/// The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search
-		/// on the cluster in order to limit the number of concurrent shard requests
+		/// The number of concurrent shard requests each sub search executes concurrently per node. This value should be used to limit the impact of
+		/// the search on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests
 		{
@@ -2530,6 +2537,7 @@ namespace Nest
 	}
 
 	///<summary>Request for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
 	{
 		protected IExecutePainlessScriptRequest Self => this;
@@ -2543,7 +2551,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
@@ -3533,7 +3541,7 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");

@@ -44,6 +44,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
         public PropertyInfo[] InterfacePropertyInfos { get; private set; }
         public MethodInfo ShouldSerializeMethodInfo { get; private set; }
         public MethodInfo ShouldSerializeTypeMethodInfo { get; private set; }
+		public object JsonFormatter {get; private set; }
 
         MethodInfo getMethod;
         MethodInfo setMethod;
@@ -57,7 +58,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             this.IsReadable = isReadable;
         }
 
-        public MetaMember(FieldInfo info, string name, bool allowPrivate)
+        public MetaMember(FieldInfo info, string name, object jsonFormatter, bool allowPrivate)
         {
             this.Name = name;
             this.MemberName = info.Name;
@@ -67,9 +68,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             this.IsWritable = allowPrivate || (info.IsPublic && !info.IsInitOnly);
             this.ShouldSerializeMethodInfo = GetShouldSerialize(info);
 			this.ShouldSerializeTypeMethodInfo = info.FieldType.GetTypeInfo().GetShouldSerializeMethod();
+			this.JsonFormatter = jsonFormatter;
 		}
 
-        public MetaMember(PropertyInfo info, string name, PropertyInfo[] interfaceInfos, bool allowPrivate)
+        public MetaMember(PropertyInfo info, string name, PropertyInfo[] interfaceInfos, object jsonFormatter, bool allowPrivate)
         {
             this.getMethod = info.GetGetMethod(true);
             this.setMethod = info.GetSetMethod(true);
@@ -83,6 +85,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             this.IsWritable = (setMethod != null) && (allowPrivate || setMethod.IsPublic) && !setMethod.IsStatic;
             this.ShouldSerializeMethodInfo = GetShouldSerialize(info);
 			this.ShouldSerializeTypeMethodInfo = info.PropertyType.GetTypeInfo().GetShouldSerializeMethod();
+			this.JsonFormatter = jsonFormatter;
         }
 
         static MethodInfo GetShouldSerialize(MemberInfo info)

@@ -327,25 +327,25 @@ namespace Nest.Specification.IndicesApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.flush_synced</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</a>
 		/// </summary>
 		public SyncedFlushResponse SyncedFlush(Indices index = null, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) => SyncedFlush(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(index: index)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.flush_synced</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</a>
 		/// </summary>
 		public Task<SyncedFlushResponse> SyncedFlushAsync(Indices index = null, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null, CancellationToken ct = default) => SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(index: index)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.flush_synced</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</a>
 		/// </summary>
 		public SyncedFlushResponse SyncedFlush(ISyncedFlushRequest request) => DoRequest<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.flush_synced</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api">http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</a>
 		/// </summary>
 		public Task<SyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken ct = default) => DoRequestAsync<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters, ct);
 		/// <summary>

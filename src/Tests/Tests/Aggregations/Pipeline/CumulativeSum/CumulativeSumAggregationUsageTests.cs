@@ -41,6 +41,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 			}
 		};
 
+#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
@@ -64,6 +65,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 					new SumAggregation("commits", "numberOfCommits") &&
 					new CumulativeSumAggregation("cumulative_commits", "commits")
 			};
+#pragma warning restore 618
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

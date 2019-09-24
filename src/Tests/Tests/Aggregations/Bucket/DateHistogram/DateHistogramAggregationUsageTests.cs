@@ -64,6 +64,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
+#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", date => date
 				.Field(p => p.StartedOn)
@@ -106,6 +107,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					}
 				}
 			};
+#pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
@@ -160,6 +162,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
+#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", date => date
 				.Field(p => p.StartedOn)
@@ -186,6 +189,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				Order = HistogramOrder.CountAscending,
 				Missing = FixedDate
 			};
+#pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

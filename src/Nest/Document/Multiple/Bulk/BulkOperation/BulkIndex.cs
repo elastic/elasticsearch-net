@@ -60,6 +60,7 @@ namespace Nest
 		string IBulkIndexOperation<T>.Percolate { get; set; }
 		string IBulkIndexOperation<T>.Pipeline { get; set; }
 		long? IBulkIndexOperation<T>.IfSequenceNumber { get; set; }
+
 		long? IBulkIndexOperation<T>.IfPrimaryTerm { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
@@ -82,6 +83,6 @@ namespace Nest
 
 		public BulkIndexDescriptor<T> IfSequenceNumber(long? seqNo) => Assign(seqNo, (a, v) => a.IfSequenceNumber = v);
 
-		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfSequenceNumber = v);
+		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfPrimaryTerm = v);
 	}
 }

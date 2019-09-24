@@ -99,7 +99,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request options for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -487,7 +487,7 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
@@ -873,6 +873,13 @@ namespace Elasticsearch.Net
 			get => Q<bool? >("ignore_unavailable");
 			set => Q("ignore_unavailable", value);
 		}
+
+		///<summary>Indicates whether unmapped fields should be included in the response.</summary>
+		public bool? IncludeUnmapped
+		{
+			get => Q<bool? >("include_unmapped");
+			set => Q("include_unmapped", value);
+		}
 	}
 
 	///<summary>Request options for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
@@ -1198,8 +1205,8 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search
-		/// on the cluster in order to limit the number of concurrent shard requests
+		/// The number of concurrent shard requests each sub search executes concurrently per node. This value should be used to limit the impact of
+		/// the search on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests
 		{
@@ -1486,7 +1493,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -2187,7 +2194,7 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");

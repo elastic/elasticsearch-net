@@ -40,6 +40,7 @@ namespace Elasticsearch.Net.Utf8Json
 
         readonly byte[] bytes;
         int offset;
+		int initialOffset;
 
         public JsonReader(byte[] bytes)
             : this(bytes, 0)
@@ -60,6 +61,8 @@ namespace Elasticsearch.Net.Utf8Json
                     this.offset = offset += 3;
                 }
             }
+
+			this.initialOffset = offset;
         }
 
         JsonParsingException CreateParsingException(string expected)
@@ -113,9 +116,21 @@ namespace Elasticsearch.Net.Utf8Json
             }
         }
 
+		/// <summary>
+		/// Advances the offset by a specified amount
+		/// </summary>
+		/// <param name="offset">The amount to offset by</param>
         public void AdvanceOffset(int offset)
         {
             this.offset += offset;
+        }
+
+		/// <summary>
+		/// Resets the offset of the reader back to the original offset
+		/// </summary>
+		public void ResetOffset()
+        {
+            this.offset = this.initialOffset;
         }
 
         public byte[] GetBufferUnsafe()

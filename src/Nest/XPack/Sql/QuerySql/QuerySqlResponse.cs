@@ -20,7 +20,16 @@ namespace Nest
 		[DataMember(Name = "cursor")]
 		public string Cursor { get; internal set; }
 
+		/// <summary>
+		/// If <see cref="IQuerySqlRequest.Columnar"/> has been set to false, this property will contain the row values
+		/// </summary>
 		[DataMember(Name = "rows")]
 		public IReadOnlyCollection<SqlRow> Rows { get; internal set; } = EmptyReadOnly<SqlRow>.Collection;
+
+		/// <summary>
+		/// If <see cref="IQuerySqlRequest.Columnar"/> has been set to true, this property will contain the column values
+		/// </summary>
+		[DataMember(Name = "values")]
+		public IReadOnlyCollection<SqlRow> Values { get; internal set; } = EmptyReadOnly<SqlRow>.Collection;
 	}
 }

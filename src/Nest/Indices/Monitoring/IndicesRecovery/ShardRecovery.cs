@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -20,13 +21,17 @@ namespace Nest
 		[DataMember(Name ="stage")]
 		public string Stage { get; internal set; }
 
-		[DataMember(Name ="start")]
+		[Obsolete("Deprecated. Will be removed in 8.0")]
 		public RecoveryStartStatus Start { get; internal set; }
 
-		[DataMember(Name ="start_time")]
+		// TODO Rename property in 8.0
+		[JsonFormatter(typeof(NullableDateTimeEpochMillisecondsFormatter))]
+		[DataMember(Name ="start_time_in_millis")]
 		public DateTime? StartTime { get; internal set; }
 
-		[DataMember(Name ="stop_time")]
+		// TODO Rename property in 8.0
+		[JsonFormatter(typeof(NullableDateTimeEpochMillisecondsFormatter))]
+		[DataMember(Name ="stop_time_in_millis")]
 		public DateTime? StopTime { get; internal set; }
 
 		[DataMember(Name ="target")]
@@ -40,5 +45,8 @@ namespace Nest
 
 		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
+
+		[DataMember(Name ="verify_index")]
+		public RecoveryVerifyIndex VerifyIndex { get; internal set; }
 	}
 }

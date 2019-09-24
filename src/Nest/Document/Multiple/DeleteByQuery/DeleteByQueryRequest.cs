@@ -20,6 +20,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="slice")]
 		ISlicedScroll Slice { get; set; }
+
+		/// <summary>
+		/// Limit the number of processed documents
+		/// </summary>
+		[DataMember(Name ="max_docs")]
+		long? MaximumDocuments { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -34,6 +40,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISlicedScroll Slice { get; set; }
+
+		/// <inheritdoc />
+		public long? MaximumDocuments { get; set; }
 	}
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
@@ -49,6 +58,7 @@ namespace Nest
 	{
 		QueryContainer IDeleteByQueryRequest.Query { get; set; }
 		ISlicedScroll IDeleteByQueryRequest.Slice { get; set; }
+		long? IDeleteByQueryRequest.MaximumDocuments { get; set; }
 
 		/// <summary>
 		/// A match_all query to select all documents. Convenient shorthand for specifying
@@ -56,17 +66,16 @@ namespace Nest
 		/// </summary>
 		public DeleteByQueryDescriptor<TDocument> MatchAll() => Assign(new QueryContainerDescriptor<TDocument>().MatchAll(), (a, v) => a.Query = v);
 
-		/// <summary>
-		/// The query to use to select documents for deletion
-		/// </summary>
+		/// <inheritdoc cref="IDeleteByQueryRequest.Query"/>
 		public DeleteByQueryDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
 			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
-		/// <summary>
-		/// Parallelize the deleting process. This parallelization can improve efficiency and
-		/// provide a convenient way to break the request down into smaller parts.
-		/// </summary>
+		/// <inheritdoc cref="IDeleteByQueryRequest.Slice"/>
 		public DeleteByQueryDescriptor<TDocument> Slice(Func<SlicedScrollDescriptor<TDocument>, ISlicedScroll> selector) =>
 			Assign(selector, (a, v) => a.Slice = v?.Invoke(new SlicedScrollDescriptor<TDocument>()));
+
+		/// <inheritdoc cref="IDeleteByQueryRequest.MaximumDocuments"/>
+		public DeleteByQueryDescriptor<TDocument> MaximumDocuments(long? maximumDocuments) =>
+			Assign(maximumDocuments, (a, v) => a.MaximumDocuments = v);
 	}
 }

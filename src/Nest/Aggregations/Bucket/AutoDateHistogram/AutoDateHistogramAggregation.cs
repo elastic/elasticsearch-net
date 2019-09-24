@@ -33,6 +33,13 @@ namespace Nest
 
 		[DataMember(Name = "time_zone")]
 		string TimeZone { get; set; }
+
+		/// <summary>
+		/// Specify the minimum rounding interval that should be used. This can make the collection process
+		/// more efficient, as the aggregation will not attempt to round at any interval lower than this.
+		/// </summary>
+		[DataMember(Name = "minimum_interval")]
+		MinimumInterval? MinimumInterval { get; set; }
 	}
 
 	public class AutoDateHistogramAggregation : BucketAggregationBase, IAutoDateHistogramAggregation
@@ -63,6 +70,8 @@ namespace Nest
 		public IDictionary<string, object> Params { get; set; }
 		public IScript Script { get; set; }
 		public string TimeZone { get; set; }
+
+		public MinimumInterval? MinimumInterval { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.AutoDateHistogram = this;
 	}
@@ -99,6 +108,8 @@ namespace Nest
 
 		string IAutoDateHistogramAggregation.TimeZone { get; set; }
 
+		MinimumInterval? IAutoDateHistogramAggregation.MinimumInterval { get; set; }
+
 		public AutoDateHistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public AutoDateHistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.Field = v);
@@ -117,5 +128,8 @@ namespace Nest
 		public AutoDateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(offset, (a, v) => a.Offset = v);
 
 		public AutoDateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(missing, (a, v) => a.Missing = v);
+
+		/// <inheritdoc cref="IAutoDateHistogramAggregation.MinimumInterval"/>
+		public AutoDateHistogramAggregationDescriptor<T> MinimumInterval(MinimumInterval? minimumInterval) => Assign(minimumInterval, (a, v) => a.MinimumInterval = v);
 	}
 }

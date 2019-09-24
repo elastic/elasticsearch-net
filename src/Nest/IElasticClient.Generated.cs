@@ -140,25 +140,25 @@ namespace Nest
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken ct = default);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		ClearScrollResponse ClearScroll(IClearScrollRequest request);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default);
 		/// <summary>
@@ -794,42 +794,42 @@ namespace Nest
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		ISearchResponse<TDocument> Scroll<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null)
 			where TInferDocument : class where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		Task<ISearchResponse<TDocument>> ScrollAsync<TInferDocument, TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TInferDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
 			where TInferDocument : class where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		ISearchResponse<TDocument> Scroll<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		Task<ISearchResponse<TDocument>> ScrollAsync<TDocument>(Time scroll, string scrollId, Func<ScrollDescriptor<TDocument>, IScrollRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		ISearchResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 			where TDocument : class;
 		/// <summary>
 		/// <c>POST</c> request to the <c>scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</a>
+		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</a>
 		/// </summary>
 		Task<ISearchResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken ct = default)
 			where TDocument : class;

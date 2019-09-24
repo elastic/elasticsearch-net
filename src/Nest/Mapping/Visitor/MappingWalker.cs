@@ -66,6 +66,13 @@ namespace Nest
 							Accept(t.Fields);
 						});
 						break;
+					case FieldType.SearchAsYouType:
+						Visit<ISearchAsYouTypeProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+							Accept(t.Fields);
+						});
+						break;
 					case FieldType.HalfFloat:
 					case FieldType.ScaledFloat:
 					case FieldType.Float:
@@ -216,7 +223,10 @@ namespace Nest
 						});
 						break;
 					case FieldType.Join:
-						Visit<IJoinProperty>(field, t => { _visitor.Visit(t); });
+						Visit<IJoinProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
 						break;
 					case FieldType.RankFeature:
 						Visit<IRankFeatureProperty>(field, t =>
@@ -226,6 +236,12 @@ namespace Nest
 						break;
 					case FieldType.RankFeatures:
 						Visit<IRankFeaturesProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
+					case FieldType.Flattened:
+						Visit<IFlattenedProperty>(field, t =>
 						{
 							_visitor.Visit(t);
 						});

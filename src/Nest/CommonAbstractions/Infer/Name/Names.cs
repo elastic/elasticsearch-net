@@ -22,6 +22,8 @@ namespace Nest
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
+		public override string ToString() => DebugDisplay;
+
 		public bool Equals(Names other) => EqualsAllIds(Value, other.Value);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) =>

@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>descriptor for DeleteLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
+	///<summary>Descriptor for DeleteLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
 	public partial class DeleteLifecycleDescriptor : RequestDescriptorBase<DeleteLifecycleDescriptor, DeleteLifecycleRequestParameters, IDeleteLifecycleRequest>, IDeleteLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementDeleteLifecycle;
@@ -51,7 +51,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for ExplainLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</para></summary>
+	///<summary>Descriptor for ExplainLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</para></summary>
 	public partial class ExplainLifecycleDescriptor : RequestDescriptorBase<ExplainLifecycleDescriptor, ExplainLifecycleRequestParameters, IExplainLifecycleRequest>, IExplainLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementExplainLifecycle;
@@ -77,7 +77,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
+	///<summary>Descriptor for GetLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
 	public partial class GetLifecycleDescriptor : RequestDescriptorBase<GetLifecycleDescriptor, GetLifecycleRequestParameters, IGetLifecycleRequest>, IGetLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementGetLifecycle;
@@ -99,7 +99,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
+	///<summary>Descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
 	public partial class GetIlmStatusDescriptor : RequestDescriptorBase<GetIlmStatusDescriptor, GetIlmStatusRequestParameters, IGetIlmStatusRequest>, IGetIlmStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementGetStatus;
@@ -107,7 +107,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for MoveToStep <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
+	///<summary>Descriptor for MoveToStep <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
 	public partial class MoveToStepDescriptor : RequestDescriptorBase<MoveToStepDescriptor, MoveToStepRequestParameters, IMoveToStepRequest>, IMoveToStepRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementMoveToStep;
@@ -133,7 +133,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for PutLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
+	///<summary>Descriptor for PutLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
 	public partial class PutLifecycleDescriptor : RequestDescriptorBase<PutLifecycleDescriptor, PutLifecycleRequestParameters, IPutLifecycleRequest>, IPutLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementPutLifecycle;
@@ -154,7 +154,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for RemovePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
+	///<summary>Descriptor for RemovePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
 	public partial class RemovePolicyDescriptor : RequestDescriptorBase<RemovePolicyDescriptor, RemovePolicyRequestParameters, IRemovePolicyRequest>, IRemovePolicyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementRemovePolicy;
@@ -180,7 +180,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
+	///<summary>Descriptor for Retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
 	public partial class RetryIlmDescriptor : RequestDescriptorBase<RetryIlmDescriptor, RetryIlmRequestParameters, IRetryIlmRequest>, IRetryIlmRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementRetry;
@@ -206,7 +206,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
+	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</para></summary>
 	public partial class StartIlmDescriptor : RequestDescriptorBase<StartIlmDescriptor, StartIlmRequestParameters, IStartIlmRequest>, IStartIlmRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementStart;
@@ -214,7 +214,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
+	///<summary>Descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</para></summary>
 	public partial class StopIlmDescriptor : RequestDescriptorBase<StopIlmDescriptor, StopIlmRequestParameters, IStopIlmRequest>, IStopIlmRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementStop;

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
@@ -218,6 +220,12 @@ namespace Nest
 						continue;
 
 					var task = await Task.WhenAny(tasks).ConfigureAwait(false);
+					if (task.Exception != null
+						&& (task.IsFaulted && task.Exception.Flatten().InnerExceptions.First() is Exception e))
+					{
+						ExceptionDispatchInfo.Capture(e).Throw();
+						return;
+					}
 					tasks.Remove(task);
 				}
 

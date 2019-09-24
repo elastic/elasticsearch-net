@@ -19,8 +19,15 @@ namespace Nest
 		[DataMember(Name ="format")]
 		string Format { get; set; }
 
+		[Obsolete("Deprecated in version 7.2.0, use CalendarInterval or FixedInterval instead")]
 		[DataMember(Name ="interval")]
 		Union<DateInterval, Time> Interval { get; set; }
+
+		[DataMember(Name ="calendar_interval")]
+		Union<DateInterval, Time> CalendarInterval { get; set; }
+
+		[DataMember(Name ="fixed_interval")]
+		Union<DateInterval, Time> FixedInterval { get; set; }
 
 		[DataMember(Name ="min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
@@ -65,7 +72,11 @@ namespace Nest
 			set => _format = value;
 		}
 
+
+		[Obsolete("Deprecated in version 7.2.0, use CalendarInterval or FixedInterval instead")]
 		public Union<DateInterval, Time> Interval { get; set; }
+		public Union<DateInterval, Time> CalendarInterval { get; set; }
+		public Union<DateInterval, Time> FixedInterval { get; set; }
 
 		public int? MinimumDocumentCount { get; set; }
 		public DateTime? Missing { get; set; }
@@ -99,7 +110,10 @@ namespace Nest
 			set => _format = value;
 		}
 
+		[Obsolete("Deprecated in version 7.2.0, use CalendarInterval or FixedInterval instead")]
 		Union<DateInterval, Time> IDateHistogramAggregation.Interval { get; set; }
+		Union<DateInterval, Time> IDateHistogramAggregation.CalendarInterval { get; set; }
+		Union<DateInterval, Time> IDateHistogramAggregation.FixedInterval { get; set; }
 
 		int? IDateHistogramAggregation.MinimumDocumentCount { get; set; }
 
@@ -124,10 +138,17 @@ namespace Nest
 		public DateHistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
+		[Obsolete("Deprecated in version 7.2.0, use CalendarInterval or FixedInterval instead")]
 		public DateHistogramAggregationDescriptor<T> Interval(Time interval) => Assign(interval, (a, v) => a.Interval = v);
 
+		[Obsolete("Deprecated in version 7.2.0, use CalendarInterval or FixedInterval instead")]
 		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval) =>
 			Assign(interval, (a, v) => a.Interval = v);
+
+		public DateHistogramAggregationDescriptor<T> CalendarInterval(Time interval) => Assign(interval, (a, v) => a.CalendarInterval = v);
+		public DateHistogramAggregationDescriptor<T> CalendarInterval(DateInterval interval) => Assign(interval, (a, v) => a.CalendarInterval = v);
+		public DateHistogramAggregationDescriptor<T> FixedInterval(Time interval) => Assign(interval, (a, v) => a.FixedInterval = v);
+		public DateHistogramAggregationDescriptor<T> FixedInterval(DateInterval interval) => Assign(interval, (a, v) => a.FixedInterval = v);
 
 		public DateHistogramAggregationDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 

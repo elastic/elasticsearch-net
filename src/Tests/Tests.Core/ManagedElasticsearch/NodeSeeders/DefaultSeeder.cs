@@ -41,18 +41,20 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		public void SeedNode()
 		{
-			if (!TestClient.Configuration.ForceReseed && AlreadySeeded()) return;
+			var alreadySeeded = false;
+			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded())) return;
 
-			var t = Task.Run(async () => await SeedNodeAsync());
+			var t = Task.Run(async () => await SeedNodeAsync(alreadySeeded).ConfigureAwait(false));
 
 			t.Wait(TimeSpan.FromSeconds(40));
 		}
 
 		public void SeedNodeNoData()
 		{
-			if (!TestClient.Configuration.ForceReseed && AlreadySeeded()) return;
+			var alreadySeeded = false;
+			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded())) return;
 
-			var t = Task.Run(async () => await SeedNodeNoDataAsync());
+			var t = Task.Run(async () => await SeedNodeNoDataAsync(alreadySeeded).ConfigureAwait(false));
 
 			t.Wait(TimeSpan.FromSeconds(40));
 		}
@@ -62,23 +64,23 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// If raw_fields exists assume this cluster is already seeded.
 		private bool AlreadySeeded() => Client.Indices.TemplateExists(TestsIndexTemplateName).Exists;
 
-		private async Task SeedNodeAsync()
+		private async Task SeedNodeAsync(bool alreadySeeded)
 		{
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-			await DeleteIndicesAndTemplatesAsync();
-			await ClusterSettingsAsync();
-			await PutPipeline();
+			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+			await ClusterSettingsAsync().ConfigureAwait(false);
+			await PutPipeline().ConfigureAwait(false);
 			// and now recreate everything
-			await CreateIndicesAndSeedIndexDataAsync();
+			await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
 		}
 
-		private async Task SeedNodeNoDataAsync()
+		private async Task SeedNodeNoDataAsync(bool alreadySeeded)
 		{
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-			await DeleteIndicesAndTemplatesAsync();
-			await ClusterSettingsAsync();
+			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+			await ClusterSettingsAsync().ConfigureAwait(false);
 			// and now recreate everything
-			await CreateIndicesAsync();
+			await CreateIndicesAsync().ConfigureAwait(false);
 		}
 
 		public async Task ClusterSettingsAsync()
@@ -99,7 +101,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
 			{
 				Transient = clusterConfiguration
-			});
+			}).ConfigureAwait(false);
 
 			putSettingsResponse.ShouldBeValid();
 		}
@@ -113,32 +115,35 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				.Processors(pp => pp
 					.Set<Project>(s => s.Field(p => p.Metadata).Value(new { x = "y" }))
 				)
-			);
+			).ConfigureAwait(false);
 			putProcessors.ShouldBeValid();
 		}
 
 
-		public async Task DeleteIndicesAndTemplatesAsync()
+		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
 		{
-			var tasks = new Task[]
+			var tasks = new List<Task>
 			{
-				Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName),
 				Client.Indices.DeleteAsync(typeof(Project)),
 				Client.Indices.DeleteAsync(typeof(Developer)),
 				Client.Indices.DeleteAsync(typeof(ProjectPercolation))
 			};
-			await Task.WhenAll(tasks);
+
+			if (alreadySeeded)
+				tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
+
+			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
 		}
 
 		private async Task CreateIndicesAndSeedIndexDataAsync()
 		{
-			await CreateIndicesAsync();
-			await SeedIndexDataAsync();
+			await CreateIndicesAsync().ConfigureAwait(false);
+			await SeedIndexDataAsync().ConfigureAwait(false);
 		}
 
 		public async Task CreateIndicesAsync()
 		{
-			var indexTemplateResponse = await CreateIndexTemplateAsync();
+			var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
 			indexTemplateResponse.ShouldBeValid();
 
 			var tasks = new[]
@@ -152,7 +157,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				{
 					foreach (var r in t.Result)
 						r.ShouldBeValid();
-				});
+				}).ConfigureAwait(false);
 		}
 
 		private async Task SeedIndexDataAsync()
@@ -172,8 +177,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 						(d, c) => d.Document(c).Routing(c.ProjectName)
 					)
 				) };
-			await Task.WhenAll(tasks);
-			await Client.Indices.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
+			await Task.WhenAll(tasks).ConfigureAwait(false);
+			await Client.Indices.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation))).ConfigureAwait(false);
 		}
 
 		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(
@@ -267,90 +272,105 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		);
 
 		public static PropertiesDescriptor<TProject> ProjectProperties<TProject>(PropertiesDescriptor<TProject> props)
-			where TProject : Project => props
-			.Join(j => j
-				.Name(n => n.Join)
-				.Relations(r => r
-					.Join<Project, CommitActivity>()
-				)
-			)
-			.Keyword(d => d.Name(p => p.Type))
-			.Keyword(s => s
-				.Name(p => p.Name)
-				.Store()
-				.Fields(fs => fs
-					.Text(ss => ss
-						.Name("standard")
-						.Analyzer("standard")
-					)
-					.Completion(cm => cm
-						.Name("suggest")
+			where TProject : Project
+		{
+			props
+				.Join(j => j
+					.Name(n => n.Join)
+					.Relations(r => r
+						.Join<Project, CommitActivity>()
 					)
 				)
-			)
-			.Text(s => s
-				.Name(p => p.Description)
-				.Fielddata()
-				.Fields(f => f
-					.Text(t => t
-						.Name("shingle")
-						.Analyzer("shingle")
+				.Keyword(d => d.Name(p => p.Type))
+				.Keyword(s => s
+					.Name(p => p.Name)
+					.Store()
+					.Fields(fs => fs
+						.Text(ss => ss
+							.Name("standard")
+							.Analyzer("standard")
+						)
+						.Completion(cm => cm
+							.Name("suggest")
+						)
 					)
 				)
-			)
-			.Date(d => d
-				.Store()
-				.Name(p => p.StartedOn)
-			)
-			.Text(d => d
-				.Store()
-				.Name(p => p.DateString)
-			)
-			.Keyword(d => d
-				.Name(p => p.State)
-				.Fields(fs => fs
-					.Text(st => st
-						.Name("offsets")
-						.IndexOptions(IndexOptions.Offsets)
-					)
-					.Keyword(sk => sk
-						.Name("keyword")
+				.Text(s => s
+					.Name(p => p.Description)
+					.Fielddata()
+					.Fields(f => f
+						.Text(t => t
+							.Name("shingle")
+							.Analyzer("shingle")
+						)
 					)
 				)
-			)
-			.Nested<Tag>(mo => mo
-				.AutoMap()
-				.Name(p => p.Tags)
-				.Properties(TagProperties)
-			)
-			.Object<Developer>(o => o
-				.AutoMap()
-				.Name(p => p.LeadDeveloper)
-				.Properties(DeveloperProperties)
-			)
-			.GeoPoint(g => g
-				.Name(p => p.LocationPoint)
-			)
-			.GeoShape(g => g
-				.Name(p => p.LocationShape)
-			)
-			.Completion(cm => cm
-				.Name(p => p.Suggest)
-				.Contexts(cx => cx
-					.Category(c => c
-						.Name("color")
+				.Date(d => d
+					.Store()
+					.Name(p => p.StartedOn)
+				)
+				.Text(d => d
+					.Store()
+					.Name(p => p.DateString)
+				)
+				.Keyword(d => d
+					.Name(p => p.State)
+					.Fields(fs => fs
+						.Text(st => st
+							.Name("offsets")
+							.IndexOptions(IndexOptions.Offsets)
+						)
+						.Keyword(sk => sk
+							.Name("keyword")
+						)
 					)
 				)
-			)
-			.Scalar(p => p.NumberOfCommits, n => n.Store())
-			.Scalar(p => p.NumberOfContributors, n => n.Store())
-			.Object<Dictionary<string, Metadata>>(o => o
-				.Name(p => p.Metadata)
-			)
-			.RankFeature(rf => rf
-				.Name(p => p.Rank)
-				.PositiveScoreImpact()
-			);
+				.Nested<Tag>(mo => mo
+					.AutoMap()
+					.Name(p => p.Tags)
+					.Properties(TagProperties)
+				)
+				.Object<Developer>(o => o
+					.AutoMap()
+					.Name(p => p.LeadDeveloper)
+					.Properties(DeveloperProperties)
+				)
+				.GeoPoint(g => g
+					.Name(p => p.LocationPoint)
+				)
+				.GeoShape(g => g
+					.Name(p => p.LocationShape)
+				)
+				.Completion(cm => cm
+					.Name(p => p.Suggest)
+					.Contexts(cx => cx
+						.Category(c => c
+							.Name("color")
+						)
+					)
+				)
+				.Scalar(p => p.NumberOfCommits, n => n.Store())
+				.Scalar(p => p.NumberOfContributors, n => n.Store())
+				.Object<Dictionary<string, Metadata>>(o => o
+					.Name(p => p.Metadata)
+				)
+				.RankFeature(rf => rf
+					.Name(p => p.Rank)
+					.PositiveScoreImpact()
+				);
+
+			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+				props.Flattened(f => f
+					.Name(p => p.Labels)
+				);
+			else
+				props.Object<Labels>(f => f
+					.Name(p => p.Labels)
+					.Enabled(false)
+				);
+
+			return props;
+		}
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
 			.Keyword(s => s

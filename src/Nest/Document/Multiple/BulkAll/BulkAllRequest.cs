@@ -47,7 +47,11 @@ namespace Nest
 		/// </summary>
 		Action<BulkResponseItemBase, T> DroppedDocumentCallback { get; set; }
 
-		///<summary>Default index for items which don't provide one</summary>
+		///<summary>The index to use for items that don't specify one. By default, will be inferred from <typeparamref name="T"/>.
+		/// If no default index has been mapped for <typeparamref name="T" />
+		/// using <see cref="ConnectionSettingsBase{TConnectionSettings}.DefaultMappingFor{TDocument}"/>
+		/// on <see cref="Nest.ConnectionSettings"/>, an exception will be thrown.
+		/// </summary>
 		IndexName Index { get; set; }
 
 		///<summary>The maximum number of bulk operations we want to have in flight at a time</summary>
@@ -85,6 +89,12 @@ namespace Nest
 		/// non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
 		/// </summary>
 		int? WaitForActiveShards { get; set; }
+
+		/// <summary>
+		/// Be notified every time a bulk response returns, this includes retries.
+		/// <see cref="IObserver{T}.OnNext"/> is only called for successful batches.
+		/// </summary>
+		Action<BulkResponse> BulkResponseCallback { get; set; }
 	}
 
 	public class BulkAllRequest<T> : IBulkAllRequest<T>
@@ -146,6 +156,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? WaitForActiveShards { get; set; }
+
+		/// <inheritdoc />
+		public Action<BulkResponse> BulkResponseCallback { get; set; }
 	}
 
 	public class BulkAllDescriptor<T> : DescriptorBase<BulkAllDescriptor<T>, IBulkAllRequest<T>>, IBulkAllRequest<T>
@@ -177,6 +190,7 @@ namespace Nest
 		int? IBulkAllRequest<T>.Size { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
+		Action<BulkResponse> IBulkAllRequest<T>.BulkResponseCallback { get; set; }
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.MaxDegreeOfParallelism" />
 		public BulkAllDescriptor<T> MaxDegreeOfParallelism(int? parallelism) =>
@@ -238,5 +252,9 @@ namespace Nest
 		/// <inheritdoc cref="IBulkAllRequest{T}.DroppedDocumentCallback" />
 		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<BulkResponseItemBase, T> callback) =>
 			Assign(callback, (a, v) => a.DroppedDocumentCallback = v);
+
+		/// <inheritdoc cref="IBulkAllRequest{T}.BulkResponseCallback" />
+		public BulkAllDescriptor<T> BulkResponseCallback(Action<BulkResponse> callback) =>
+			Assign(callback, (a, v) => a.BulkResponseCallback = v);
 	}
 }
