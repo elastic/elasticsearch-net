@@ -6,10 +6,12 @@ using Elasticsearch.Net.VirtualizedCluster;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain.Extensions;
 
 namespace Tests.Document.Multiple.BulkAll
 {
+	[ProjectReferenceOnly]
 	public class BulkAllExceptionApiTests : BulkAllApiTestsBase
 	{
 		public BulkAllExceptionApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
