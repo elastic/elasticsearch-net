@@ -8,15 +8,15 @@ using Elastic.Managed.Configuration;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Virtual;
-using Elasticsearch.Net.Virtual.Audit;
+using Elasticsearch.Net.VirtualizedCluster;
+using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client.Settings;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
-using static Elasticsearch.Net.Virtual.Rules.TimesHelper;
+using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing

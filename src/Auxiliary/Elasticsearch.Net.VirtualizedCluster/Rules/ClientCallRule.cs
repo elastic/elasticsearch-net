@@ -6,7 +6,7 @@ using TheException = System.Net.Http.HttpRequestException;
 using TheException = System.Net.WebException;
 #endif
 
-namespace Elasticsearch.Net.Virtual.Rules
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
 	public interface IClientCallRule : IRule { }
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace Elasticsearch.Net.Virtual.Rules
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
 	public class PingRule : RuleBase<PingRule>, IRule
 	{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Elasticsearch.Net.Virtual.MockResponses
+namespace Elasticsearch.Net.VirtualizedCluster.MockResponses
 {
 	public static class SniffResponseBytes
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Elasticsearch.Net.Virtual.Rules
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
 	public interface IRule
 	{

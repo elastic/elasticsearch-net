@@ -10,11 +10,11 @@ using TheException = System.Net.WebException;
 #endif
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Virtual.MockResponses;
-using Elasticsearch.Net.Virtual.Providers;
-using Elasticsearch.Net.Virtual.Rules;
+using Elasticsearch.Net.VirtualizedCluster.MockResponses;
+using Elasticsearch.Net.VirtualizedCluster.Providers;
+using Elasticsearch.Net.VirtualizedCluster.Rules;
 
-namespace Elasticsearch.Net.Virtual
+namespace Elasticsearch.Net.VirtualizedCluster
 {
 	/// <summary>
 	/// An in memory connection that uses a rule engine to return different responses for sniffs/pings and API calls.

@@ -70,7 +70,7 @@ module Projects =
             | Project Nest -> "Nest"
             | Project ElasticsearchNet -> "Elasticsearch.Net"
             | Project NestJsonNetSerializer -> "Nest.JsonNetSerializer"
-            | Project ElasticsearchNetVirtual -> "Elasticsearch.Net.Virtual"
+            | Project ElasticsearchNetVirtual -> "Elasticsearch.Net.VirtualizedCluster"
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
             | PrivateProject ApiGenerator -> "ApiGenerator"

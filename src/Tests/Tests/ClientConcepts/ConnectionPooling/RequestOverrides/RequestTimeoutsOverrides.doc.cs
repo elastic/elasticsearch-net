@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net.Virtual;
-using Elasticsearch.Net.Virtual.Audit;
+using Elasticsearch.Net.VirtualizedCluster;
+using Elasticsearch.Net.VirtualizedCluster.Audit;
 using Tests.Framework;
 using static Elasticsearch.Net.AuditEvent;
 

@@ -1,4 +1,4 @@
-namespace Elasticsearch.Net.Virtual
+namespace Elasticsearch.Net.VirtualizedCluster
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{

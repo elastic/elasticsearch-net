@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Virtual.Extensions;
+using Elasticsearch.Net.VirtualizedCluster.Extensions;
 
-namespace Elasticsearch.Net.Virtual.Audit
+namespace Elasticsearch.Net.VirtualizedCluster.Audit
 {
 	public class Auditor
 	{

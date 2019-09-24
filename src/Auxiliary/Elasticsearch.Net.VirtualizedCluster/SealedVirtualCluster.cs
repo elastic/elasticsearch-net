@@ -1,7 +1,7 @@
 using System;
-using Elasticsearch.Net.Virtual.Providers;
+using Elasticsearch.Net.VirtualizedCluster.Providers;
 
-namespace Elasticsearch.Net.Virtual
+namespace Elasticsearch.Net.VirtualizedCluster
 {
 	public class SealedVirtualCluster
 	{

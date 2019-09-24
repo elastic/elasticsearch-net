@@ -1,4 +1,4 @@
-﻿namespace Elasticsearch.Net.Virtual.Extensions
+﻿namespace Elasticsearch.Net.VirtualizedCluster.Extensions
 {
 	internal static class NumericExtensions
 	{
