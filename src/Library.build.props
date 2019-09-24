@@ -16,8 +16,11 @@
 
     	<DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netstandard2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.2'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp3.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 
 		<RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
 		<Authors>Elasticsearch BV</Authors>

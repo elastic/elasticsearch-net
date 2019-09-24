@@ -230,7 +230,7 @@ namespace DocGenerator.AsciiDoc
 			string configuration = null;
 			if (Program.BuildOutputPath.Contains("src"))
 			{
-				//bin/Debug|Release/netcoreapp2.1
+				//bin/Debug|Release/netcoreapp3.0
 				configuration = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)).Parent?.Name;
 				return;
 			}
