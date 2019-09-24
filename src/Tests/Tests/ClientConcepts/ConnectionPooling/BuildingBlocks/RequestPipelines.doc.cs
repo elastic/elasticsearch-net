@@ -9,13 +9,13 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.VirtualizedCluster;
+using Elasticsearch.Net.VirtualizedCluster.Providers;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework;
 using Xunit;
 using Newtonsoft.Json;
-using Tests.Framework.VirtualClustering;
-using Tests.Framework.VirtualClustering.Providers;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {

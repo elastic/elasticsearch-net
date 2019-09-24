@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Elasticsearch.Net.VirtualizedCluster;
+using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.SerializationTests;
-using Tests.Framework.VirtualClustering;
-using Tests.Framework.VirtualClustering.Audit;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
@@ -119,13 +119,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) // <1> Always return a 401 bad response with a HTML response on client calls
 				.StaticConnectionPool()
-				.Settings(s=>s.SkipDeserializationForStatusCodes(401))
+				.Settings(s => s.SkipDeserializationForStatusCodes(401))
 			);
 
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
 					{ AuditEvent.PingSuccess, 9200 },
-					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
 				},
 				(e) =>
 				{
@@ -177,10 +177,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response))
 				.StaticConnectionPool()
-				.Settings(s => s.DisableDirectStreaming().DefaultIndex("default-index").SkipDeserializationForStatusCodes(401))
+				.Settings(s => s.DisableDirectStreaming().SkipDeserializationForStatusCodes(401))
 				.ClientProxiesTo(
-					(c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
-					async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse
+					(c, r) => c.Get<GetResponse<Project>>("default", "1"),
+					async (c, r) => await c.GetAsync<GetResponse<Project>>("default-index", "1") as IResponse
 				)
 			);
 

@@ -60,9 +60,6 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 			(client, r) => client.Indices.ExistsAsync(r)
 		);
 
-		protected override void ExpectResponse(ExistsResponse response)
-		{
-			response.Exists.Should().BeFalse();
-		}
+		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeFalse();
 	}
 }

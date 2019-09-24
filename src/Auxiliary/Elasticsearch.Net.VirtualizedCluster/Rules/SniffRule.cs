@@ -1,7 +1,6 @@
 using System;
-using Nest;
 
-namespace Tests.Framework.VirtualClustering.Rules
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
 	public interface ISniffRule : IRule
 	{
@@ -13,7 +12,7 @@ namespace Tests.Framework.VirtualClustering.Rules
 		VirtualCluster ISniffRule.NewClusterState { get; set; }
 		private ISniffRule Self => this;
 
-		public SniffRule Fails(Union<TimesHelper.AllTimes, int> times, Union<Exception, int> errorState = null)
+		public SniffRule Fails(RuleOption<TimesHelper.AllTimes, int> times, RuleOption<Exception, int> errorState = null)
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
@@ -21,7 +20,7 @@ namespace Tests.Framework.VirtualClustering.Rules
 			return this;
 		}
 
-		public SniffRule Succeeds(Union<TimesHelper.AllTimes, int> times, VirtualCluster cluster = null)
+		public SniffRule Succeeds(RuleOption<TimesHelper.AllTimes, int> times, VirtualCluster cluster = null)
 		{
 			Self.Times = times;
 			Self.Succeeds = true;
@@ -32,6 +31,6 @@ namespace Tests.Framework.VirtualClustering.Rules
 
 		public SniffRule SucceedAlways(VirtualCluster cluster = null) => Succeeds(TimesHelper.Always, cluster);
 
-		public SniffRule FailAlways(Union<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
+		public SniffRule FailAlways(RuleOption<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
 	}
 }

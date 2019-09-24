@@ -29,4 +29,8 @@
     
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
+	<ItemGroup>
+        <PackageReference Condition="'$(OS)' != 'Windows_NT' and '$(TargetFramework)'=='net461'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />
+        <PackageReference Condition="'$(OS)' != 'Windows_NT' and '$(TargetFramework)'=='net472'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />
+    </ItemGroup>
 </Project>

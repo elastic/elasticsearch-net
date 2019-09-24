@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
-using FluentAssertions;
-using Nest;
-using Tests.Core.Extensions;
-using Tests.Framework.Extensions;
+using Elasticsearch.Net.VirtualizedCluster.Extensions;
 
-namespace Tests.Framework.VirtualClustering.Audit
+namespace Elasticsearch.Net.VirtualizedCluster.Audit
 {
 	public class Auditor
 	{
@@ -36,8 +31,8 @@ namespace Tests.Framework.VirtualClustering.Audit
 		public List<Elasticsearch.Net.Audit> AuditTrail { get; set; }
 		public Func<VirtualizedCluster> Cluster { get; set; }
 
-		public IResponse Response { get; internal set; }
-		public IResponse ResponseAsync { get; internal set; }
+		public IElasticsearchResponse Response { get; internal set; }
+		public IElasticsearchResponse ResponseAsync { get; internal set; }
 
 		private bool StartedUp { get; }
 
@@ -66,7 +61,7 @@ namespace Tests.Framework.VirtualClustering.Audit
 			_clusterAsync = _clusterAsync ?? Cluster();
 			if (!StartedUp) AssertPoolBeforeStartup?.Invoke(_clusterAsync.ConnectionPool);
 			AssertPoolBeforeCall?.Invoke(_clusterAsync.ConnectionPool);
-			ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
 			AsyncAuditTrail = ResponseAsync.ApiCall.AuditTrail;
 			if (!StartedUp) AssertPoolAfterStartup?.Invoke(_clusterAsync.ConnectionPool);
 			AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
@@ -75,7 +70,7 @@ namespace Tests.Framework.VirtualClustering.Audit
 
 		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
-			await TraceStartup(callTrace);
+			await TraceStartup(callTrace).ConfigureAwait(false);
 			return AssertAuditTrails(callTrace, nthCall);
 		}
 
@@ -89,8 +84,7 @@ namespace Tests.Framework.VirtualClustering.Audit
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
 			Action call = () => _cluster.ClientCall(callTrace?.RequestOverrides);
-			var exception = call.Should().ThrowExactly<TException>()
-				.Subject.First();
+			var exception = TryCall(call, assert);
 			assert(exception);
 
 			AuditTrail = exception.AuditTrail;
@@ -98,9 +92,8 @@ namespace Tests.Framework.VirtualClustering.Audit
 
 			_clusterAsync = _clusterAsync ?? Cluster();
 			_clusterAsync.ClientThrows(true);
-			Func<Task> callAsync = async () => await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
-			exception = callAsync.Should().ThrowExactly<TException>()
-				.Subject.First();
+			Func<Task> callAsync = () => _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			exception = await TryCallAsync(callAsync, assert).ConfigureAwait(false);
 			assert(exception);
 
 			AsyncAuditTrail = exception.AuditTrail;
@@ -109,14 +102,14 @@ namespace Tests.Framework.VirtualClustering.Audit
 
 		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
 		{
-			await TraceException(callTrace, assert);
+			await TraceException(callTrace, assert).ConfigureAwait(false);
 			var audit = new Auditor(_cluster, _clusterAsync);
-			return await audit.TraceElasticsearchExceptionOnResponse(callTrace, assert);
+			return await audit.TraceElasticsearchExceptionOnResponse(callTrace, assert).ConfigureAwait(false);
 		}
 
 		public async Task<Auditor> TraceUnexpectedElasticsearchException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
 		{
-			await TraceException(callTrace, assert);
+			await TraceException(callTrace, assert).ConfigureAwait(false);
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
@@ -129,11 +122,12 @@ namespace Tests.Framework.VirtualClustering.Audit
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
 			Action call = () => { Response = _cluster.ClientCall(callTrace?.RequestOverrides); };
-			call.Should().NotThrow();
-
-			Response.ShouldNotBeValid();
+			call();
+			
+			if (Response.ApiCall.Success) throw new Exception("Expected call to not be valid");
+				
 			var exception = Response.ApiCall.OriginalException as ElasticsearchClientException;
-			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
+			if (exception == null) throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
 			assert(exception);
 
 			AuditTrail = exception.AuditTrail;
@@ -141,11 +135,11 @@ namespace Tests.Framework.VirtualClustering.Audit
 
 			_clusterAsync = _clusterAsync ?? Cluster();
 			_clusterAsync.ClientThrows(false);
-			Func<Task> callAsync = async () => { ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides); };
-			callAsync.Should().NotThrow();
-			ResponseAsync.ShouldNotBeValid();
+			Func<Task> callAsync = async () => { ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false); };
+			await callAsync().ConfigureAwait(false);
+			if (Response.ApiCall.Success) throw new Exception("Expected call to not be valid");
 			exception = ResponseAsync.ApiCall.OriginalException as ElasticsearchClientException;
-			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
+			if (exception == null) throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
 			assert(exception);
 
 			AsyncAuditTrail = exception.AuditTrail;
@@ -163,17 +157,15 @@ namespace Tests.Framework.VirtualClustering.Audit
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
 			Action call = () => _cluster.ClientCall(callTrace?.RequestOverrides);
-			var exception = call.Should().ThrowExactly<UnexpectedElasticsearchClientException>()
-				.Subject.First();
+			var exception = TryCall(call, assert);
 			assert(exception);
 
 			AuditTrail = exception.AuditTrail;
 			AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 
 			_clusterAsync = _clusterAsync ?? Cluster();
-			Func<Task> callAsync = async () => await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
-			exception = callAsync.Should().ThrowExactly<UnexpectedElasticsearchClientException>()
-				.Subject.First();
+			Func<Task> callAsync = () => _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			exception = await TryCallAsync(callAsync, assert).ConfigureAwait(false);
 			assert(exception);
 
 			AsyncAuditTrail = exception.AuditTrail;
@@ -183,10 +175,9 @@ namespace Tests.Framework.VirtualClustering.Audit
 
 		private Auditor AssertAuditTrails(ClientCall callTrace, int nthCall)
 		{
-			AuditTrail.Count.Should()
-				.Be(AsyncAuditTrail.Count,
-					$"{nthCall} has a mismatch between sync and async. \r\nasync:{AuditTrail}\r\nsync:{AsyncAuditTrail}");
-
+			if (AuditTrail.Count != AsyncAuditTrail.Count)
+				throw new Exception($"{nthCall} has a mismatch between sync and async. \r\nasync:{AuditTrail}\r\nsync:{AsyncAuditTrail}");
+			
 			AssertTrailOnResponse(callTrace, AuditTrail, true, nthCall);
 			AssertTrailOnResponse(callTrace, AuditTrail, false, nthCall);
 
@@ -223,7 +214,7 @@ namespace Tests.Framework.VirtualClustering.Audit
 		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{
 			var auditor = this;
-			foreach (var a in audits.Select((a, i) => new { a, i })) auditor = await auditor.TraceCall(a.a, a.i);
+			foreach (var a in audits.Select((a, i) => new { a, i })) auditor = await auditor.TraceCall(a.a, a.i).ConfigureAwait(false);
 			return auditor;
 		}
 
@@ -235,11 +226,11 @@ namespace Tests.Framework.VirtualClustering.Audit
 			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(Environment.NewLine),
 				(sb, a) => sb.AppendLine($"-> {a}"),
 				sb => sb.ToString());
-
-			callTrace.Select(c => c.Event)
-				.Should()
-				.ContainInOrder(auditTrail.Select(a => a.Event),
-					$"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items{actualAuditTrail}");
+			
+			var traceEvents =callTrace.Select(c => c.Event).ToList();
+			var auditEvents = auditTrail.Select(a => a.Event).ToList();
+			if (!traceEvents.SequenceEqual(auditEvents))
+				throw new Exception($"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items{actualAuditTrail}");
 
 			foreach (var t in auditTrail.Select((a, i) => new { a, i }))
 			{
@@ -248,13 +239,51 @@ namespace Tests.Framework.VirtualClustering.Audit
 				var nthAuditTrailItem = (i + 1).ToOrdinal();
 				var because = $"thats the {{0}} specified on the {nthAuditTrailItem} item in the {nthClientCall} client call's {typeOfTrail}";
 				var c = callTrace[i];
-				audit.Event.Should().Be(c.Event, string.Format(because, "event"));
-				if (c.Port.HasValue) audit.Node.Uri.Port.Should().Be(c.Port.Value, string.Format(because, "port"));
+				if (audit.Event != c.Event) 
+					throw new Exception(string.Format(because, "event"));
+				if (c.Port.HasValue && audit.Node.Uri.Port != c.Port.Value) 
+					throw new Exception(string.Format(because, "port"));
+				
 				c.SimpleAssert?.Invoke(audit);
 				c.AssertWithBecause?.Invoke(string.Format(because, "custom assertion"), audit);
 			}
 
-			callTrace.Count.Should().Be(auditTrail.Count, $"actual auditTrail {actualAuditTrail}");
+			if (callTrace.Count != auditTrail.Count) 
+				throw new Exception($"callTrace has {callTrace.Count} items. Actual auditTrail {actualAuditTrail}");
 		}
+		
+		private static TException TryCall<TException>(Action call, Action<TException> assert) where TException : ElasticsearchClientException
+		{
+			TException exception = null;
+			try
+			{
+				call();
+			}
+			catch (TException ex)
+			{
+				exception = ex;
+				assert(ex);
+			}
+			if (exception is null) throw new Exception("No exception happened while one was expected");
+
+			return exception;
+		}
+		private static async Task<TException> TryCallAsync<TException>(Func<Task> call, Action<TException> assert) where TException : ElasticsearchClientException
+		{
+			TException exception = null;
+			try
+			{
+				await call().ConfigureAwait(false);
+			}
+			catch (TException ex)
+			{
+				exception = ex;
+				assert(ex);
+			}
+			if (exception is null) throw new Exception("No exception happened while one was expected");
+
+			return exception;
+		}
+
 	}
 }

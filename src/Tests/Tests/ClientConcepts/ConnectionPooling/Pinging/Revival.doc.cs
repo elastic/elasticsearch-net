@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Elasticsearch.Net.VirtualizedCluster;
+using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Tests.Framework;
-using Tests.Framework.VirtualClustering;
-using Tests.Framework.VirtualClustering.Audit;
-using static Tests.Framework.VirtualClustering.Rules.TimesHelper;
+using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Pinging
