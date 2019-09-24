@@ -12,7 +12,7 @@ namespace Elasticsearch.Net.Virtual
 		private readonly ConnectionConfiguration _settings;
 		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IElasticsearchResponse>> _asyncCall;
 		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IElasticsearchResponse> _syncCall;
-		
+
 		private class VirtualResponse : ElasticsearchResponseBase { }
 
 		public VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings)
@@ -39,7 +39,7 @@ namespace Elasticsearch.Net.Virtual
 
 		public VirtualClusterConnection Connection => Client.Settings.Connection as VirtualClusterConnection;
 		public IConnectionPool ConnectionPool => Client.Settings.ConnectionPool;
-		private ElasticLowLevelClient Client => _fixedRequestPipeline?.Client;
+		public ElasticLowLevelClient Client => _fixedRequestPipeline?.Client;
 
 		public VirtualizedCluster ClientProxiesTo(
 			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IElasticsearchResponse> sync,
