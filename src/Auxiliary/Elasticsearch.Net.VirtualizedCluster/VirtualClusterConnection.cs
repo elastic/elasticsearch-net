@@ -2,19 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+#if DOTNETCORE
 using System.Net.Http;
+using TheException = System.Net.Http.HttpRequestException;
+#else
+using TheException = System.Net.WebException;
+#endif
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
-using FluentAssertions;
-using Nest;
-using Tests.Framework.VirtualClustering.MockResponses;
-using Tests.Framework.VirtualClustering.Providers;
-using Tests.Framework.VirtualClustering.Rules;
-using HttpMethod = Elasticsearch.Net.HttpMethod;
+using Elasticsearch.Net.VirtualizedCluster.MockResponses;
+using Elasticsearch.Net.VirtualizedCluster.Providers;
+using Elasticsearch.Net.VirtualizedCluster.Rules;
 
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.VirtualizedCluster
 {
+	/// <summary>
+	/// An in memory connection that uses a rule engine to return different responses for sniffs/pings and API calls.
+	/// <pre>
+	/// Either instantiate through the static <see cref="Success"/> or <see cref="Error"/> for the simplest use-cases
+	/// </pre>
+	/// <pre>
+	/// Or use <see cref="VirtualClusterWith"/> to chain together a rule engine until
+	/// <see cref="SealedVirtualCluster.VirtualClusterConnection"/> becomes available
+	/// </pre>
+	/// </summary>
 	public class VirtualClusterConnection : InMemoryConnection
 	{
 		private static readonly object Lock = new object();
@@ -25,11 +36,27 @@ namespace Tests.Framework.VirtualClustering
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private IDictionary<int, State> _calls = new Dictionary<int, State>();
 
-		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
+		internal VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
 		{
 			UpdateCluster(cluster);
 			_dateTimeProvider = dateTimeProvider;
 		}
+
+		public static VirtualClusterConnection Success(byte[] response) =>
+			VirtualClusterWith
+				.Nodes(1)
+				.ClientCalls(r => r.SucceedAlways().ReturnByteResponse(response))
+				.StaticConnectionPool()
+				.AllDefaults()
+				.Connection;
+		
+		public static VirtualClusterConnection Error() =>
+			VirtualClusterWith
+				.Nodes(1)
+				.ClientCalls(r => r.FailAlways(400))
+				.StaticConnectionPool()
+				.AllDefaults()
+				.Connection;
 
 		private static object DefaultResponse
 		{
@@ -71,7 +98,9 @@ namespace Tests.Framework.VirtualClustering
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
-			_calls.Should().ContainKey(requestData.Uri.Port);
+			if (!_calls.ContainsKey(requestData.Uri.Port))
+				throw new Exception($"Expected a call to happen on port {requestData.Uri.Port} but received none");
+			
 			try
 			{
 				var state = _calls[requestData.Uri.Port];
@@ -83,7 +112,7 @@ namespace Tests.Framework.VirtualClustering
 						_cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => UpdateCluster(r.NewClusterState),
-						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
+						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.ElasticsearchVersion,_cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))
@@ -106,7 +135,7 @@ namespace Tests.Framework.VirtualClustering
 					CallResponse
 				);
 			}
-			catch (HttpRequestException e)
+			catch (TheException e)
 			{
 				return ResponseBuilder.ToResponse<TResponse>(requestData, e, null, null, Stream.Null);
 			}
@@ -160,7 +189,7 @@ namespace Tests.Framework.VirtualClustering
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				_dateTimeProvider.ChangeTime(d => d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new HttpRequestException(
+					throw new TheException(
 						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
@@ -181,7 +210,7 @@ namespace Tests.Framework.VirtualClustering
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				_dateTimeProvider.ChangeTime(d => d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new HttpRequestException(
+					throw new TheException(
 						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
@@ -195,7 +224,7 @@ namespace Tests.Framework.VirtualClustering
 			return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
-		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, Union<Exception, int> returnOverride = null)
+		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, RuleOption<Exception, int> returnOverride = null)
 			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
@@ -204,7 +233,7 @@ namespace Tests.Framework.VirtualClustering
 			var ret = returnOverride ?? rule.Return;
 
 			if (ret == null)
-				throw new HttpRequestException();
+				throw new TheException();
 
 			return ret.Match(
 				(e) => throw e,

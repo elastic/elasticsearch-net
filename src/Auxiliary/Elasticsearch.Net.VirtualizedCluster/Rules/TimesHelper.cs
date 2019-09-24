@@ -1,6 +1,6 @@
 using System;
 
-namespace Tests.Framework.VirtualClustering.Rules
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
 	public static class TimesHelper
 	{

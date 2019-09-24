@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Elasticsearch.Net;
-using Tests.Configuration;
 
-namespace Tests.Framework.VirtualClustering.MockResponses
+namespace Elasticsearch.Net.VirtualizedCluster.MockResponses
 {
 	public static class SniffResponseBytes
 	{
 		private static string ClusterName => "elasticsearch-test-cluster";
 
-		public static byte[] Create(IEnumerable<Node> nodes, string publishAddressOverride, bool randomFqdn = false)
+		//version = TestConfiguration.Instance.ElasticsearchVersion,
+		public static byte[] Create(IEnumerable<Node> nodes, string elasticsearchVersion,string publishAddressOverride, bool randomFqdn = false)
 		{
 			var response = new
 			{
 				cluster_name = ClusterName,
-				nodes = SniffResponseNodes(nodes, publishAddressOverride, randomFqdn)
+				nodes = SniffResponseNodes(nodes, elasticsearchVersion, publishAddressOverride, randomFqdn)
 			};
 			using (var ms = new MemoryStream())
 			{
@@ -25,14 +24,19 @@ namespace Tests.Framework.VirtualClustering.MockResponses
 			}
 		}
 
-		private static IDictionary<string, object> SniffResponseNodes(IEnumerable<Node> nodes, string publishAddressOverride, bool randomFqdn) =>
+		private static IDictionary<string, object> SniffResponseNodes(
+			IEnumerable<Node> nodes, 
+			string elasticsearchVersion,
+			string publishAddressOverride, 
+			bool randomFqdn
+		) =>
 			(from node in nodes
 				let id = string.IsNullOrEmpty(node.Id) ? Guid.NewGuid().ToString("N").Substring(0, 8) : node.Id
 				let name = string.IsNullOrEmpty(node.Name) ? Guid.NewGuid().ToString("N").Substring(0, 8) : node.Name
 				select new { id, name, node })
-			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name, publishAddressOverride, randomFqdn));
+			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name, elasticsearchVersion, publishAddressOverride, randomFqdn));
 
-		private static object CreateNodeResponse(Node node, string name, string publishAddressOverride, bool randomFqdn)
+		private static object CreateNodeResponse(Node node, string name, string elasticsearchVersion, string publishAddressOverride, bool randomFqdn)
 		{
 			var port = node.Uri.Port;
 			var fqdn = randomFqdn ? $"fqdn{port}/" : "";
@@ -51,7 +55,7 @@ namespace Tests.Framework.VirtualClustering.MockResponses
 				transport_address = $"127.0.0.1:{port + 1000}]",
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
-				version = TestConfiguration.Instance.ElasticsearchVersion,
+				version = elasticsearchVersion,
 				build_hash = Guid.NewGuid().ToString("N").Substring(0, 8),
 				roles = new List<string>(),
 				http = node.HttpEnabled

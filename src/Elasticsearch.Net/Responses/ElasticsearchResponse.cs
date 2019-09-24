@@ -48,11 +48,25 @@ namespace Elasticsearch.Net
 		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
 
 		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
+		
+		public virtual bool TryGetServerError(out ServerError serverError)
+		{
+			serverError = null;
+			var bytes = ApiCall.ResponseBodyInBytes;
+			if (bytes == null || ResponseMimeType != RequestData.MimeType)
+				return false;
 
-		protected virtual bool TryGetServerErrorReason(out string reason)
+			using(var stream = ConnectionConfiguration.MemoryStreamFactory.Create(bytes))
+				return ServerError.TryCreate(stream, out serverError);
+		}
+
+		protected bool TryGetServerErrorReason(out string reason)
 		{
 			reason = null;
-			return false;
+			if (!TryGetServerError(out var serverError)) return false;
+
+			reason = serverError?.Error?.ToString();
+			return !string.IsNullOrEmpty(reason);
 		}
 
 		public override string ToString() => ApiCall.ToString();

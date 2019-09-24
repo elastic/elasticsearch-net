@@ -3,15 +3,15 @@
 	public interface IRequestPipelineFactory
 	{
 		IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
 		);
 	}
 
 	public class RequestPipelineFactory : IRequestPipelineFactory
 	{
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
 		) =>
-			new RequestPipeline(configurationValues, dateTimeProvider, memorystreamFactory, requestParameters);
+			new RequestPipeline(configurationValues, dateTimeProvider, memoryStreamFactory, requestParameters);
 	}
 }

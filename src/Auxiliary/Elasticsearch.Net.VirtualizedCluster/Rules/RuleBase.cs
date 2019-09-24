@@ -1,40 +1,38 @@
 ﻿using System;
 using System.IO;
-using Elasticsearch.Net;
-using Nest;
 
-namespace Tests.Framework.VirtualClustering.Rules
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
 	public interface IRule
 	{
-		Union<Exception, int> AfterSucceeds { get; set; }
+		RuleOption<Exception, int> AfterSucceeds { get; set; }
 		int? OnPort { get; set; }
 
 		/// <summary>
 		/// Either a hard exception or soft HTTP error code
 		/// </summary>
-		Union<Exception, int> Return { get; set; }
+		RuleOption<Exception, int> Return { get; set; }
 
 		string ReturnContentType { get; set; }
 
 		byte[] ReturnResponse { get; set; }
 		bool Succeeds { get; set; }
 		TimeSpan? Takes { get; set; }
-		Union<TimesHelper.AllTimes, int> Times { get; set; }
+		RuleOption<TimesHelper.AllTimes, int> Times { get; set; }
 	}
 
 	public abstract class RuleBase<TRule> : IRule
 		where TRule : RuleBase<TRule>, IRule
 	{
-		Union<Exception, int> IRule.AfterSucceeds { get; set; }
+		RuleOption<Exception, int> IRule.AfterSucceeds { get; set; }
 		int? IRule.OnPort { get; set; }
-		Union<Exception, int> IRule.Return { get; set; }
+		RuleOption<Exception, int> IRule.Return { get; set; }
 		string IRule.ReturnContentType { get; set; }
 		byte[] IRule.ReturnResponse { get; set; }
 		private IRule Self => this;
 		bool IRule.Succeeds { get; set; }
 		TimeSpan? IRule.Takes { get; set; }
-		Union<TimesHelper.AllTimes, int> IRule.Times { get; set; }
+		RuleOption<TimesHelper.AllTimes, int> IRule.Times { get; set; }
 
 		public TRule OnPort(int port)
 		{
