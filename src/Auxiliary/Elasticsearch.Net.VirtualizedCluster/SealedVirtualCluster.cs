@@ -1,9 +1,7 @@
 using System;
-using Elasticsearch.Net;
-using Nest;
-using Tests.Framework.VirtualClustering.Providers;
+using Elasticsearch.Net.VirtualizedCluster.Providers;
 
-namespace Tests.Framework.VirtualClustering
+namespace Elasticsearch.Net.VirtualizedCluster
 {
 	public class SealedVirtualCluster
 	{
@@ -18,13 +16,17 @@ namespace Tests.Framework.VirtualClustering
 			_dateTimeProvider = dateTimeProvider;
 		}
 
-		private ConnectionSettings CreateSettings() =>
-			new ConnectionSettings(_connectionPool, _connection).DefaultIndex("default-index");
+		private ConnectionConfiguration CreateSettings() =>
+			new ConnectionConfiguration(_connectionPool, _connection);
 
 		public VirtualizedCluster AllDefaults() =>
 			new VirtualizedCluster(_dateTimeProvider, CreateSettings());
 
-		public VirtualizedCluster Settings(Func<ConnectionSettings, ConnectionSettings> selector) =>
+		public VirtualizedCluster Settings(Func<ConnectionConfiguration, ConnectionConfiguration> selector) =>
 			new VirtualizedCluster(_dateTimeProvider, selector(CreateSettings()));
+		
+		public VirtualClusterConnection VirtualClusterConnection(Func<ConnectionConfiguration, ConnectionConfiguration> selector = null) =>
+			new VirtualizedCluster(_dateTimeProvider, selector == null ? CreateSettings() : selector(CreateSettings()))
+				.Connection;
 	}
 }
