@@ -107,8 +107,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var clientException = ex.Should().BeOfType<ElasticsearchClientException>().Subject;
 
 			clientException.Message.Should()
-				.StartWith("BulkAll halted after")
-				.And.EndWith("from _bulk and exhausting retries (2)");
+				.StartWith("BulkAll halted after");
 
 			requests.Should().Be(3);
 			// OnNext only called for successful batches.
