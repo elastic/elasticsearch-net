@@ -42,10 +42,6 @@
     <PackageReference Include="NuGet.CommandLine" Version="4.9.4" />
     <PackageReference Include="Octokit" Version="0.32.0" />
     <PackageReference Include="Proc" Version="0.6.1" />
-
-    <DotNetCliToolReference Include="dotnet-assembly-rewriter" Version="1.0.0-alpha20190924T220113" />
-    <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190924T220245" />
-  
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">
     <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />
