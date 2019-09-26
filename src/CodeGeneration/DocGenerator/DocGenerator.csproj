@@ -3,7 +3,7 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <VersionSuffix>alpha</VersionSuffix>
     <!-- CAC001: We dont need to set ConfigureAwait(false) here -->
     <NoWarn>NU1701,NU1605,CAC001</NoWarn>

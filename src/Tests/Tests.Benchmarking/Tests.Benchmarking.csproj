@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2;net472</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;net472</TargetFrameworks>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
-    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20190806T115008" />
+    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20190925T065816" />
     <PackageReference Include="LibGit2Sharp" Version="0.26.0-preview-0062" />
   </ItemGroup>
 </Project>

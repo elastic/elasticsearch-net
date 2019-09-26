@@ -77,7 +77,7 @@ namespace Elasticsearch.Net
 		{
 			if (contentType.IsNullOrEmpty()) return requestParams;
 
-			requestParams = requestParams ?? new TRequestParams();
+			requestParams ??= new TRequestParams();
 			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
