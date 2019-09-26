@@ -19,6 +19,11 @@ jobs:
     vmImage: 'vs2017-win2016'
   steps:
   - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk'
+      inputs:
+        packageType: sdk
+        version: 2.2.103
+  - task: UseDotNet@2
     inputs:
       version: '3.0.100'
   - script: build.bat canary
