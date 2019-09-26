@@ -336,8 +336,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndObject)
 				return statsMetric;
 
-			var propertyName = (string)reader.Value;
-			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
+			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).Contains(Parser.AsStringSuffix))
 			{
 				reader.Read();
 				reader.Read();
