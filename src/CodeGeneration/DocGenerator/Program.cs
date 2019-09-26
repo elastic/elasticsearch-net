@@ -35,8 +35,9 @@ namespace DocGenerator
 			}
 
 			var globalJsonVersion = string.Join(".", Regex.Matches(File.ReadAllText(globalJson), "\"version\": \"(.*)\"")
-										 .Last().Groups
-										 .Last().Value
+										 .Last()
+										 .Groups[^1]
+										 .Value
 										 .Split(".")
 										 .Take(2));
 

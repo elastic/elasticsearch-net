@@ -27,13 +27,14 @@ namespace ApiGenerator.Domain.Code.LowLevel
 			{
 				string Evaluator(Match m)
 				{
-					var arg = m.Groups.Last().Value.ToCamelCase();
+
+					var arg = m.Groups[^1].Value.ToCamelCase();
 					return $"{{{arg}:{arg}}}";
 				}
 
 				var url = Path.TrimStart('/');
 				var options = Url.OriginalParts?.Select(p => p.Key) ?? Enumerable.Empty<string>();
-				
+
 				var pattern = string.Join("|", options);
 				var urlCode = $"\"{url}\"";
 				if (Path.Contains("{"))
