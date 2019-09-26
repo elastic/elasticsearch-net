@@ -27,6 +27,11 @@ namespace Elasticsearch.Net
 		IConnectionConfigurationValues ConnectionConfiguration { get; }
 
 		/// <summary>
+		/// RequestData used in the request
+		/// </summary>
+		RequestData RequestData { get; }
+
+		/// <summary>
 		/// A collection of deprecation warnings returned from Elasticsearch.
 		/// <para>Used to signal that the request uses an API feature that is marked as deprecated</para>
 		/// </summary>

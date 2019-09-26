@@ -18,6 +18,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public RequestData RequestData { get; set; }
 		public IEnumerable<string> DeprecationWarnings { get; set; }
 		public HttpMethod HttpMethod { get; set; }
 		public int? HttpStatusCode { get; set; }

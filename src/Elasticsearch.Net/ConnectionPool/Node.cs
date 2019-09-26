@@ -11,6 +11,17 @@ namespace Elasticsearch.Net
 
 		public Node(Uri uri)
 		{
+			if (uri.Scheme != "http" && uri.Scheme != "https")
+			{
+				uri = new Uri("http://" + uri.OriginalString);
+			}
+
+			if (uri.Port == 80 && !uri.OriginalString.Contains("80"))
+			{
+				var builder = new UriBuilder(uri) {Port = 9200};
+				uri = builder.Uri;
+			}
+
 			//this makes sure that Elasticsearch paths stay relative to the path passed in
 			//http://my-saas-provider.com/instance
 			if (!uri.OriginalString.EndsWith("/", StringComparison.Ordinal))

@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 				{
 					using (var stream = request.GetRequestStream())
 					{
-						if (requestData.HttpCompression)
+						if (requestData.HttpRequestCompression)
 							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 								data.Write(zipStream, requestData.ConnectionSettings);
 						else
@@ -98,7 +98,7 @@ namespace Elasticsearch.Net
 
 						using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
 						{
-							if (requestData.HttpCompression)
+							if (requestData.HttpRequestCompression)
 								using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 									await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 							else
@@ -184,11 +184,9 @@ namespace Elasticsearch.Net
 			if (requestData.TransferEncodingChunked)
 				request.SendChunked = true;
 
-			if (requestData.HttpCompression)
+			if (requestData.HttpResponseCompression)
 			{
 				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-				request.Headers.Add("Accept-Encoding", "gzip,deflate");
-				request.Headers.Add("Content-Encoding", "gzip");
 			}
 
 			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))

@@ -80,10 +80,22 @@ namespace Elasticsearch.Net
 		bool DisablePings { get; }
 
 		/// <summary>
-		/// Enable gzip compressed requests and responses, do note that you need to configure Elasticsearch to set this
+		/// Enable both gzip compressed requests and responses, do note that you need to configure Elasticsearch to set this
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
+
+		/// <summary>
+		/// Enable gzip compressed requests, do note that you need to configure Elasticsearch to set this
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// </summary>
+		bool EnableHttpRequestCompression { get; }
+
+		/// <summary>
+		/// Enable gzip compressed responses, do note that you need to configure Elasticsearch to set this
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// </summary>
+		bool EnableHttpResponseCompression { get; }
 
 		/// <summary>
 		/// Try to send these headers for every request

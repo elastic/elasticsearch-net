@@ -8,7 +8,6 @@ using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Diagnostics;
@@ -29,7 +28,6 @@ namespace Elasticsearch.Net
 
 		public bool IsBypassed(Uri host) => host.IsLoopback;
 	}
-
 
 	/// <summary> The default IConnection implementation. Uses <see cref="HttpClient" />.</summary>
 	public class HttpConnection : IConnection
@@ -175,7 +173,10 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpMessageHandler CreateHttpClientHandler(RequestData requestData)
 		{
-			var handler = new HttpClientHandler { AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None, };
+			var handler = new HttpClientHandler
+			{
+				AutomaticDecompression = requestData.HttpResponseCompression ? GZip | Deflate : None,
+			};
 
 			// same limit as desktop clr
 			if (requestData.ConnectionSettings.ConnectionLimit > 0)
@@ -223,57 +224,7 @@ namespace Elasticsearch.Net
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
 			var request = CreateRequestMessage(requestData);
-			SetAuthenticationIfNeeded(request, requestData);
 			return request;
-		}
-
-		protected virtual void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
-		{
-			// Api Key authentication takes precedence
-			var apiKeySet = SetApiKeyAuthenticationIfNeeded(requestMessage, requestData);
-
-			if (!apiKeySet)
-				SetBasicAuthenticationIfNeeded(requestMessage, requestData);
-		}
-
-		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
-		protected virtual bool SetApiKeyAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
-		{
-			// ApiKey auth credentials take the following precedence (highest -> lowest):
-			// 1 - Specified on the request (highest precedence)
-			// 2 - Specified at the global IConnectionSettings level
-
-			string apiKey = null;
-			if (requestData.ApiKeyAuthenticationCredentials != null)
-				apiKey = requestData.ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
-
-			if (string.IsNullOrWhiteSpace(apiKey))
-				return false;
-
-			requestMessage.Headers.Authorization = new AuthenticationHeaderValue("ApiKey", apiKey);
-			return true;
-
-		}
-
-		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
-		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
-		{
-			// Basic auth credentials take the following precedence (highest -> lowest):
-			// 1 - Specified on the request (highest precedence)
-			// 2 - Specified at the global IConnectionSettings level
-			// 3 - Specified with the URI (lowest precedence)
-
-			string userInfo = null;
-			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
-				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
-			else if (requestData.BasicAuthorizationCredentials != null)
-				userInfo =
-					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
-			if (!userInfo.IsNullOrEmpty())
-			{
-				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
-				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-			}
 		}
 
 		protected virtual HttpRequestMessage CreateRequestMessage(RequestData requestData)
@@ -310,14 +261,14 @@ namespace Elasticsearch.Net
 			else
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
-				if (requestData.HttpCompression)
+				if (requestData.HttpRequestCompression)
 					using (var zipStream = new GZipStream(stream, CompressionMode.Compress, true))
 						requestData.PostData.Write(zipStream, requestData.ConnectionSettings);
 				else
 					requestData.PostData.Write(stream, requestData.ConnectionSettings);
 
 				// the written bytes are uncompressed, so can only be used when http compression isn't used
-				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
+				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpRequestCompression)
 				{
 					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
 					stream.Dispose();
@@ -328,8 +279,10 @@ namespace Elasticsearch.Net
 					message.Content = new StreamContent(stream);
 				}
 
-				if (requestData.HttpCompression)
+				if (requestData.HttpRequestCompression)
+				{
 					message.Content.Headers.ContentEncoding.Add("gzip");
+				}
 
 				message.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 			}
@@ -344,14 +297,14 @@ namespace Elasticsearch.Net
 			else
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
-				if (requestData.HttpCompression)
+				if (requestData.HttpRequestCompression)
 					using (var zipStream = new GZipStream(stream, CompressionMode.Compress, true))
 						await requestData.PostData.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 				else
 					await requestData.PostData.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 
 				// the written bytes are uncompressed, so can only be used when http compression isn't used
-				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
+				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpRequestCompression)
 				{
 					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
 					stream.Dispose();
@@ -362,7 +315,7 @@ namespace Elasticsearch.Net
 					message.Content = new StreamContent(stream);
 				}
 
-				if (requestData.HttpCompression)
+				if (requestData.HttpRequestCompression)
 					message.Content.Headers.ContentEncoding.Add("gzip");
 
 				message.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
@@ -388,7 +341,8 @@ namespace Elasticsearch.Net
 			unchecked
 			{
 				var hashCode = requestData.RequestTimeout.GetHashCode();
-				hashCode = (hashCode * 397) ^ requestData.HttpCompression.GetHashCode();
+				hashCode = (hashCode * 397) ^ requestData.HttpRequestCompression.GetHashCode();
+				hashCode = (hashCode * 397) ^ requestData.HttpResponseCompression.GetHashCode();
 				hashCode = (hashCode * 397) ^ (requestData.ProxyAddress?.GetHashCode() ?? 0);
 				hashCode = (hashCode * 397) ^ (requestData.ProxyUsername?.GetHashCode() ?? 0);
 				hashCode = (hashCode * 397) ^ (requestData.ProxyPassword?.GetHashCode() ?? 0);

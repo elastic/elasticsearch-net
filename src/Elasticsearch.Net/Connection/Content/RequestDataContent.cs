@@ -31,12 +31,12 @@ namespace Elasticsearch.Net
 		{
 			_requestData = requestData;
 			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
-			if (requestData.HttpCompression)
+			if (requestData.HttpRequestCompression)
 				Headers.ContentEncoding.Add("gzip");
 
 			Task OnStreamAvailable(RequestData data, Stream stream, HttpContent content, TransportContext context)
 			{
-				if (data.HttpCompression)
+				if (data.HttpRequestCompression)
 					stream = new GZipStream(stream, CompressionMode.Compress, false);
 
 				using(stream)
@@ -51,12 +51,12 @@ namespace Elasticsearch.Net
 		{
 			_requestData = requestData;
 			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
-			if (requestData.HttpCompression)
+			if (requestData.HttpRequestCompression)
 				Headers.ContentEncoding.Add("gzip");
 
 			async Task OnStreamAvailable(RequestData data, Stream stream, HttpContent content, TransportContext context)
 			{
-				if (data.HttpCompression)
+				if (data.HttpRequestCompression)
 					stream = new GZipStream(stream, CompressionMode.Compress, false);
 
 				using (stream)

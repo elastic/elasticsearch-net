@@ -50,7 +50,7 @@ namespace Elasticsearch.Net
 			{
 				using (var stream = requestData.MemoryStreamFactory.Create())
 				{
-					if (requestData.HttpCompression)
+					if (requestData.HttpRequestCompression)
 						using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 							data.Write(zipStream, requestData.ConnectionSettings);
 					else
@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 			{
 				using (var stream = requestData.MemoryStreamFactory.Create())
 				{
-					if (requestData.HttpCompression)
+					if (requestData.HttpRequestCompression)
 						using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 							await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 					else

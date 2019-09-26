@@ -22,6 +22,8 @@ namespace Elasticsearch.Net
 			set => ApiCall.AuditTrail = value;
 		}
 
+		public RequestData RequestData => ApiCall.RequestData;
+
 		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
 		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
 		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>

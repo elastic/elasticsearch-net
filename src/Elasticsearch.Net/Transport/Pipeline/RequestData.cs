@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
@@ -41,7 +42,8 @@ namespace Elasticsearch.Net
 				data.DisableDirectStreaming = local?.DisableDirectStreaming ?? global.DisableDirectStreaming;
 
 			Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
-			HttpCompression = global.EnableHttpCompression;
+			HttpRequestCompression = global.EnableHttpRequestCompression;
+			HttpResponseCompression = global.EnableHttpResponseCompression;
 			RequestMimeType = local?.ContentType ?? MimeType;
 			Accept = local?.Accept ?? MimeType;
 
@@ -79,8 +81,75 @@ namespace Elasticsearch.Net
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
 			TransferEncodingChunked = local?.TransferEncodingChunked ?? global.TransferEncodingChunked;
+
+			SetAuthenticationHeadersIfNeeded();
+			SetCompressionHeadersIfNeeded();
+		}
+
+		private void SetCompressionHeadersIfNeeded()
+		{
+			if (HttpResponseCompression)
+				Headers.Add("Accept-Encoding", "gzip,deflate");
+
+			if (HttpRequestCompression)
+				Headers.Add("Content-Encoding", "gzip");
+		}
+
+		private void SetAuthenticationHeadersIfNeeded()
+		{
+			// Api Key authentication takes precedence
+			var apiKeySet = SetApiKeyAuthenticationIfNeeded();
+
+			if (!apiKeySet)
+				SetBasicAuthenticationIfNeeded();
 		}
 		
+		private bool SetApiKeyAuthenticationIfNeeded()
+		{
+			// ApiKey auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+
+			string apiKey = null;
+			if (ApiKeyAuthenticationCredentials != null)
+				apiKey = ApiKeyAuthenticationCredentials.Base64EncodedApiKey.CreateString();
+
+			if (string.IsNullOrWhiteSpace(apiKey))
+				return false;
+
+			Headers.Add("Authorization", $"ApiKey {apiKey}");
+			return true;
+		}
+
+		private void SetBasicAuthenticationIfNeeded()
+		{
+			// Basic auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+			// 3 - Specified with the URI (lowest precedence)
+
+			string userInfo = null;
+			if (Uri != null && !Uri.UserInfo.IsNullOrEmpty())
+				userInfo = Uri.UnescapeDataString(Uri.UserInfo);
+			else if (BasicAuthorizationCredentials != null)
+				userInfo = $"{BasicAuthorizationCredentials.Username}:{BasicAuthorizationCredentials.Password.CreateString()}";
+			if (!userInfo.IsNullOrEmpty())
+			{
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				Headers.Add("Authorization", $"Basic {credentials}");
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
 		private readonly string _path;
 		
 		public string Accept { get; }
@@ -96,7 +165,8 @@ namespace Elasticsearch.Net
 		public bool DisableAutomaticProxyDetection { get; }
 
 		public NameValueCollection Headers { get; }
-		public bool HttpCompression { get; }
+		public bool HttpRequestCompression { get; }
+		public bool HttpResponseCompression { get; }
 		public int KeepAliveInterval { get; }
 		public int KeepAliveTime { get; }
 		public bool MadeItToResponse { get; set; }

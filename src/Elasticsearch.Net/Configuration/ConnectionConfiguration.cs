@@ -136,7 +136,8 @@ namespace Elasticsearch.Net
 		private bool _disableAutomaticProxyDetection;
 		private bool _disableDirectStreaming;
 		private bool _disablePings;
-		private bool _enableHttpCompression;
+		private bool _enableHttpRequestCompression;
+		private bool _enableHttpResponseCompression;
 		private bool _enableHttpPipelining = true;
 		private TimeSpan? _keepAliveInterval;
 		private TimeSpan? _keepAliveTime;
@@ -184,9 +185,9 @@ namespace Elasticsearch.Net
 			{
 				_basicAuthCredentials = cloudPool.BasicCredentials;
 				_apiKeyAuthCredentials = cloudPool.ApiKeyCredentials;
-				_enableHttpCompression = true;
+				_enableHttpRequestCompression = true;
+				_enableHttpResponseCompression = true;
 			}
-
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -201,7 +202,9 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
 		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
 		bool IConnectionConfigurationValues.DisablePings => _disablePings;
-		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
+		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpRequestCompression && _enableHttpResponseCompression;
+		bool IConnectionConfigurationValues.EnableHttpRequestCompression => _enableHttpRequestCompression;
+		bool IConnectionConfigurationValues.EnableHttpResponseCompression => _enableHttpResponseCompression;
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _enableHttpPipelining;
 		TimeSpan? IConnectionConfigurationValues.KeepAliveInterval => _keepAliveInterval;
@@ -306,11 +309,29 @@ namespace Elasticsearch.Net
 		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(sniffLifeSpan, (a, v) => a._sniffLifeSpan = v);
 
 		/// <summary>
-		/// Enables gzip compressed requests and responses.
+		/// Enables both gzip compressed requests and responses.
 		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
-		public T EnableHttpCompression(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpCompression = v);
+		public T EnableHttpCompression(bool enabled = true) => Assign(enabled, (a, v) =>
+		{
+			a._enableHttpRequestCompression = v;
+			a._enableHttpResponseCompression = v;
+		});
+
+		/// <summary>
+		/// Enables gzip compressed requests.
+		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// </summary>
+		public T EnableHttpRequestCompression(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpRequestCompression = v);
+
+		/// <summary>
+		/// Enables gzip compressed responses.
+		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// </summary>
+		public T EnableHttpResponseCompression(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpResponseCompression = v);
 
 		/// <summary>
 		/// Disables the automatic detection of a proxy
@@ -457,6 +478,18 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T BasicAuthentication(string username, SecureString password) =>
 			Assign(new BasicAuthenticationCredentials(username, password), (a, v) => a._basicAuthCredentials = v);
+
+		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(string base64EncodedApiKey) =>
+			Assign(new ApiKeyAuthenticationCredentials(base64EncodedApiKey), (a, v) => a._apiKeyAuthCredentials = v);
+
+		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(SecureString base64EncodedApiKey) =>
+			Assign(new ApiKeyAuthenticationCredentials(base64EncodedApiKey), (a, v) => a._apiKeyAuthCredentials = v);
 
 		/// <summary>
 		/// Api Key to send with all requests to Elasticsearch
