@@ -2,11 +2,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
-    <VersionPrefix>6.0.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
+    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
+    <IsTestProject>True</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />

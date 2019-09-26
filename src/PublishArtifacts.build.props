@@ -14,7 +14,6 @@
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
-    <LangVersion>latest</LangVersion>
 
     <DoSourceLink></DoSourceLink>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>

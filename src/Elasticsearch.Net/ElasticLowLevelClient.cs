@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 		{
 			if (contentType.IsNullOrEmpty()) return requestParams;
 
-			requestParams = requestParams ?? new TRequestParams();
+			requestParams ??= new TRequestParams();
 			//The properties are set here on RequestConfiguration here because they are not nullable (fixed in master).
 			if (requestParams.RequestConfiguration == null)
 				requestParams.RequestConfiguration = new RequestConfiguration

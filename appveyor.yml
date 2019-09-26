@@ -4,6 +4,8 @@ test: off
 environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: true
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+install:
+    - cmd: choco install dotnetcore-sdk --version 3.0.100
 build_script:
     - cmd: build.bat canary
 
