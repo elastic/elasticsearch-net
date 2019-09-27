@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -10,6 +9,12 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.MockResponses;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
+#if DOTNETCORE
+using System.Net.Http;
+using TheException = System.Net.Http.HttpRequestException;
+#else
+using TheException = System.Net.WebException;
+#endif
 
 namespace Tests.Framework
 {
@@ -104,11 +109,7 @@ namespace Tests.Framework
 					CallResponse
 				);
 			}
-#if DOTNETCORE
-			catch (HttpRequestException e)
-#else
-			catch (WebException e)
-#endif
+			catch (TheException e)
 			{
 				return ResponseBuilder.ToResponse<TResponse>(requestData, e, null, null, Stream.Null);
 			}
@@ -162,12 +163,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				_dateTimeProvider.ChangeTime(d => d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-#if DOTNETCORE
-					throw new HttpRequestException(
-						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#else
-					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#endif
+					throw new TheException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
 			return rule.Succeeds
@@ -187,12 +183,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				_dateTimeProvider.ChangeTime(d => d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-#if DOTNETCORE
-					throw new HttpRequestException(
-						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#else
-					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#endif
+					throw new TheException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
 			if (rule.Succeeds && times >= state.Successes)
@@ -213,12 +204,8 @@ namespace Tests.Framework
 			var failed = Interlocked.Increment(ref state.Failures);
 			var ret = returnOverride ?? rule.Return;
 
-			if (ret == null)
-#if DOTNETCORE
-				throw new HttpRequestException();
-#else
-				throw new WebException();
-#endif
+			if (ret == null) throw new TheException();
+
 			return ret.Match(
 				(e) => throw e,
 				(statusCode) => ReturnConnectionStatus<TResponse>(requestData, CallResponse(rule),

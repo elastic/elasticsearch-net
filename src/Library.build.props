@@ -13,6 +13,8 @@
 		<!-- File version reflects actual version number without prelease since that not allowed in its struct -->
 		<FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
+    <DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='net472'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <DefineConstants Condition="'$(TargetFramework)'=='netstandard2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
@@ -29,4 +31,8 @@
 		<PackageIconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</PackageIconUrl>
     
 	</PropertyGroup>
+  <ItemGroup>
+    <PackageReference Condition="'$(OS)' != 'Windows_NT' and '$(TargetFramework)'=='net461'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />
+    <PackageReference Condition="'$(OS)' != 'Windows_NT' and '$(TargetFramework)'=='net472'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />
+  </ItemGroup>
 </Project>
