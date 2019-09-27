@@ -15,7 +15,7 @@ namespace Tests.Document.Multiple.BulkAll
 	{
 		public BulkAllDisposeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		[I] [SkipOnTeamCity]
+		[I] [SkipOnCi]
 		public void DisposingObservableCancelsBulkAll()
 		{
 			var index = CreateIndexName();
