@@ -95,7 +95,6 @@ namespace Tests.Document.Single
 		{
 			r.ShouldNotBeValid();
 			r.Index.Should().NotBeNullOrEmpty();
-			r.Type.Should().NotBeNullOrEmpty();
 			r.Id.Should().NotBeNullOrEmpty();
 		});
 
