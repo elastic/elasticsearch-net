@@ -27,41 +27,32 @@ module Projects =
         | DocGenerator
         | ApiGenerator
         
-    type DependencyProject = 
-        | JsonNet 
-
     type DotNetProject = 
         | Project of Project
         | PrivateProject of PrivateProject
-        | DepencyProject of DependencyProject
 
         static member All = 
             seq [
-                Project Project.ElasticsearchNet; 
-                Project Project.Nest; 
-                Project Project.NestJsonNetSerializer;
-                Project Project.ElasticsearchNetVirtual; 
-                PrivateProject PrivateProject.Tests
+                Project ElasticsearchNet; 
+                Project Nest; 
+                Project NestJsonNetSerializer;
+                Project ElasticsearchNetVirtual;
+                PrivateProject Tests
             ]
 
         static member AllPublishable = 
             seq [
-                Project Project.ElasticsearchNet; 
-                Project Project.Nest; 
-                Project Project.NestJsonNetSerializer;
-                Project Project.ElasticsearchNetVirtual;
+                Project ElasticsearchNet; 
+                Project Nest; 
+                Project NestJsonNetSerializer;
+                Project ElasticsearchNetVirtual;
             ] 
-        static member Tests = seq [PrivateProject PrivateProject.Tests]
+        static member Tests = seq [PrivateProject Tests]
         
-        member this.MergeDependencies=
-            match this with 
-            | Project Nest -> [Project Project.Nest; ]
-            | _ -> []
-
         member this.VersionedMergeDependencies =
             match this with 
-            | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; ]
-            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
+            | Project Nest -> [Project Nest; Project ElasticsearchNet; ]
+            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Nest; Project ElasticsearchNet ]
             | Project ElasticsearchNet -> [Project ElasticsearchNet]
             | _ -> []
 
@@ -74,15 +65,17 @@ module Projects =
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
             | PrivateProject ApiGenerator -> "ApiGenerator"
-            | DepencyProject JsonNet -> "Newtonsoft.Json"
- 
+
         member this.NugetId =
             match this with
             | Project Nest -> "NEST"
             | Project NestJsonNetSerializer -> "NEST.JsonNetSerializer"
             | _ -> this.Name
         
-        member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true
+        member this.NeedsMerge =
+            match this with
+            | Project NestJsonNetSerializer -> false
+            | _ -> true
                 
         member this.Versioned name version =
             match version with
@@ -93,8 +86,7 @@ module Projects =
             match this with
             | Project _ -> this.Name 
             | PrivateProject _ -> sprintf "Elastic.Internal.%s" this.Name
-            | DepencyProject JsonNet -> "Elastic.Internal.JsonNet"
-                
+             
         static member TryFindName (name: string) =
             DotNetProject.All
             |> Seq.map(fun p -> p.Name)
