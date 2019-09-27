@@ -13,6 +13,7 @@ namespace Tests.Core.Client.Settings
 {
 	public class TestConnectionSettings : ConnectionSettings
 	{
+		public static readonly bool RunningMitmProxy = Process.GetProcessesByName("mitmproxy").Any();
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
 		public TestConnectionSettings(
@@ -30,7 +31,8 @@ namespace Tests.Core.Client.Settings
 			) =>
 			ApplyTestSettings();
 
-		public static string LocalOrProxyHost => RunningFiddler ? "ipv4.fiddler" : LocalHost;
+		public static string LocalOrProxyHost => RunningFiddler || RunningMitmProxy ? "ipv4.fiddler" : LocalHost;
+
 
 		private static int ConnectionLimitDefault =>
 			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out var x)
@@ -39,12 +41,11 @@ namespace Tests.Core.Client.Settings
 
 		private static string LocalHost => "localhost";
 
-		internal ConnectionSettings ApplyTestSettings() => EnableDebugMode()
+		internal ConnectionSettings ApplyTestSettings() =>
+			RerouteToProxyIfNeeded()
 			//TODO make this random
 			//.EnableHttpCompression()
-#if DEBUG
 			.EnableDebugMode()
-#endif
 			.ConnectionLimit(ConnectionLimitDefault)
 			.OnRequestCompleted(r =>
 			{
@@ -56,6 +57,14 @@ namespace Tests.Core.Client.Settings
 
 				foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
 			});
+
+		private ConnectionSettings RerouteToProxyIfNeeded()
+		{
+			if (!RunningMitmProxy) return this;
+
+			return Proxy(new Uri("http://127.0.0.1:8080"), (string)null, (string)null);
+		}
+
 
 		private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
 		{
