@@ -8,6 +8,12 @@ namespace Nest
 	public interface IPatternReplaceTokenFilter : ITokenFilter
 	{
 		/// <summary>
+		/// The flags for the regular expression
+		/// </summary>
+		[DataMember(Name ="flags")]
+		string Flags { get; set; }
+
+		/// <summary>
 		/// The regular expression
 		/// </summary>
 		[DataMember(Name ="pattern")]
@@ -26,6 +32,9 @@ namespace Nest
 		public PatternReplaceTokenFilter() : base("pattern_replace") { }
 
 		/// <inheritdoc />
+		public string Flags { get; set; }
+
+		/// <inheritdoc />
 		public string Pattern { get; set; }
 
 		/// <inheritdoc />
@@ -39,13 +48,16 @@ namespace Nest
 		protected override string Type => "pattern_replace";
 
 		string IPatternReplaceTokenFilter.Pattern { get; set; }
-
 		string IPatternReplaceTokenFilter.Replacement { get; set; }
+		string IPatternReplaceTokenFilter.Flags { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPatternReplaceTokenFilter.Flags" />
+		public PatternReplaceTokenFilterDescriptor Flags(string flags) => Assign(flags, (a, v) => a.Flags = v);
+
+		/// <inheritdoc cref="IPatternReplaceTokenFilter.Pattern" />
 		public PatternReplaceTokenFilterDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPatternReplaceTokenFilter.Replacement" />
 		public PatternReplaceTokenFilterDescriptor Replacement(string replacement) => Assign(replacement, (a, v) => a.Replacement = v);
 	}
 }
