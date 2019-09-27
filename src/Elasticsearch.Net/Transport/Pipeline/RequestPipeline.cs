@@ -210,7 +210,7 @@ namespace Elasticsearch.Net
 				: $"Status code {statusCode} from: {callDetails.HttpMethod} {callDetails.Uri.PathAndQuery}";
 
 
-			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";
+			var exceptionMessage = innerException?.Message ?? "Request failed to execute";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())

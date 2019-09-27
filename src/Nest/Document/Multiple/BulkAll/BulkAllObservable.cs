@@ -128,7 +128,6 @@ namespace Nest
 				.ConfigureAwait(false);
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
-			
 			_bulkResponseCallback?.Invoke(response);
 
 			if (!response.ApiCall.Success)
@@ -166,7 +165,7 @@ namespace Nest
 
 			foreach (var dropped in droppedDocuments) _droppedDocumentCallBack(dropped.Item1, dropped.Item2);
 			if (!_partitionedBulkRequest.ContinueAfterDroppedDocuments)
-				throw ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
+				throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after receiving failures that can not be retried from _bulk");
 		}
 
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
@@ -178,7 +177,7 @@ namespace Nest
 			{
 				case PipelineFailure.MaxRetriesReached:
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
-						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
+						throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after attempted bulk failed over all the active nodes");
 
 					ThrowOnExhaustedRetries();
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
@@ -187,7 +186,7 @@ namespace Nest
 				case PipelineFailure.NoNodesAttempted:
 				case PipelineFailure.SniffFailure:
 				case PipelineFailure.Unexpected:
-					throw ThrowOnBadBulk(response, $"BulkAll halted after {nameof(PipelineFailure)}.{reason} from _bulk");
+					throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk");
 				case PipelineFailure.BadResponse:
 				case PipelineFailure.PingFailure:
 				case PipelineFailure.MaxTimeoutReached:
@@ -202,7 +201,7 @@ namespace Nest
 				if (_partitionedBulkRequest.ContinueAfterDroppedDocuments || backOffRetries < _backOffRetries) return;
 
 				throw ThrowOnBadBulk(response,
-					$"BulkAll halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
+					$"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
 				);
 			}
 		}
