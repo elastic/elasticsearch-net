@@ -347,7 +347,7 @@ namespace Tests.Analysis.TokenFilters
 
 			public override string Name => "marker";
 		}
-		
+
 		public class MarkerWithPatternsTests : TokenFilterAssertionBase<MarkerWithPatternsTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
@@ -493,16 +493,18 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.PatternReplace(n, t => t
+					.Flags("CASE_INSENSITIVE")
 					.Pattern(@"(\d|\w)")
 					.Replacement("replacement")
 				);
 
 			public override ITokenFilter Initializer =>
-				new PatternReplaceTokenFilter { Pattern = @"(\d|\w)", Replacement = "replacement" };
+				new PatternReplaceTokenFilter { Flags = "CASE_INSENSITIVE", Pattern = @"(\d|\w)", Replacement = "replacement" };
 
 			public override object Json => new
 			{
 				type = "pattern_replace",
+				flags = "CASE_INSENSITIVE",
 				pattern = "(\\d|\\w)",
 				replacement = "replacement"
 			};
