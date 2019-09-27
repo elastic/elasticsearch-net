@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.Core.Xunit
@@ -25,5 +26,13 @@ namespace Tests.Core.Xunit
 		public override bool Skip => true;
 
 		private string Url { get; }
+	}
+
+	public class SkipAttribute : SkipTestAttributeBase
+	{
+		public SkipAttribute(string reason) => Reason = reason;
+
+		public override bool Skip => true;
+		public override string Reason { get; }
 	}
 }

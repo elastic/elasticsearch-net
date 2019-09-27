@@ -36,7 +36,6 @@ module Projects =
                 Project ElasticsearchNet; 
                 Project Nest; 
                 Project NestJsonNetSerializer;
-                Project NestUpgradeAssistant; 
                 Project ElasticsearchNetVirtual;
                 PrivateProject Tests
             ]
