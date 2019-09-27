@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static Elasticsearch.Net.ResponseStatics;
 
 namespace Elasticsearch.Net
 {
@@ -30,26 +31,46 @@ namespace Elasticsearch.Net
 				var failureReason = FailureReason.GetStringValue();
 				if (FailureReason == PipelineFailure.Unexpected && AuditTrail.HasAny())
 					failureReason = "Unrecoverable/Unexpected " + AuditTrail.Last().Event.GetStringValue();
-				var path = Request.Uri != null
-					? Request.Uri.ToString()
-					: Request.PathAndQuery + " on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes";
 
-				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} on {path}");
+				sb.Append("# FailureReason: ")
+					.Append(failureReason)
+					.Append(" while attempting ");
+
+				if (Request != null)
+				{
+					sb.Append(Request.Method.GetStringValue()).Append(" on ");
+					if (Request.Uri != null)
+						sb.AppendLine(Request.Uri.ToString());
+					else
+						sb.Append(Request.PathAndQuery)
+							.AppendLine(" on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes");
+				}
+				else if (Response != null)
+				{
+					sb.Append(Response.HttpMethod.GetStringValue())
+						.Append(" on ")
+						.AppendLine(Response.Uri.ToString());
+				}
+				else
+					sb.AppendLine("a request");
+
 				if (Response != null)
-					ResponseStatics.DebugInformationBuilder(Response, sb);
+					DebugInformationBuilder(Response, sb);
 				else
 				{
-					ResponseStatics.DebugAuditTrail(AuditTrail, sb);
-					ResponseStatics.DebugAuditTrailExceptions(AuditTrail, sb);
+					DebugAuditTrail(AuditTrail, sb);
+					DebugAuditTrailExceptions(AuditTrail, sb);
 				}
+
 				if (InnerException != null)
 				{
-					sb.AppendLine($"# Inner Exception: {InnerException.Message}");
-					sb.AppendLine(InnerException.ToString());
+					sb.Append("# Inner Exception: ")
+						.AppendLine(InnerException.Message)
+						.AppendLine(InnerException.ToString());
 				}
-				sb.AppendLine($"# Exception:");
-				sb.AppendLine(ToString());
 
+				sb.AppendLine("# Exception:")
+					.AppendLine(ToString());
 				return sb.ToString();
 			}
 		}

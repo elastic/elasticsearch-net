@@ -176,20 +176,20 @@ namespace Nest
 
 			foreach (var dropped in droppedDocuments) _droppedDocumentCallBack(dropped.Item1, dropped.Item2);
 			if (!_partitionedBulkRequest.ContinueAfterDroppedDocuments)
-				throw ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
+				throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after receiving failures that can not be retried from _bulk");
 		}
 
 		private async Task<IBulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, IBulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			var failureReason = clientException?.FailureReason;
+			var failureReason = clientException?.FailureReason; 
 			var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 			switch (failureReason)
 			{
 				case PipelineFailure.MaxRetriesReached:
 					//TODO move this to its own PipelineFailure classification in 7.0
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
-						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
+						throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after attempted bulk failed over all the active nodes");
 
 					ThrowOnExhaustedRetries();
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
@@ -198,7 +198,7 @@ namespace Nest
 				case PipelineFailure.NoNodesAttempted:
 				case PipelineFailure.SniffFailure:
 				case PipelineFailure.Unexpected:
-					throw ThrowOnBadBulk(response, $"BulkAll halted after {nameof(PipelineFailure)}.{reason} from _bulk");
+					throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk");
 				default:
 					ThrowOnExhaustedRetries();
 					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
@@ -209,7 +209,7 @@ namespace Nest
 				if (_partitionedBulkRequest.ContinueAfterDroppedDocuments || backOffRetries < _backOffRetries) return;
 
 				throw ThrowOnBadBulk(response,
-					$"BulkAll halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
+					$"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
 				);
 			}
 		}

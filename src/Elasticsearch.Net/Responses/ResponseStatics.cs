@@ -37,6 +37,8 @@ namespace Elasticsearch.Net
 
 		public static void DebugAuditTrailExceptions(List<Audit> auditTrail, StringBuilder sb)
 		{
+			if (auditTrail == null) return;
+
 			var auditExceptions = auditTrail.Select((audit, i) => new { audit, i }).Where(a => a.audit.Exception != null);
 			foreach (var a in auditExceptions)
 				sb.AppendLine($"# Audit exception in step {a.i + 1} {a.audit.Event.GetStringValue()}:\r\n{a.audit.Exception}");
