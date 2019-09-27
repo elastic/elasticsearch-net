@@ -41,7 +41,6 @@ module Paths =
             | Tests -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
             | DocGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
             | ApiGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
-        | _ -> null
 
     let BinFolder (folder:string) = 
         let f = folder.Replace(@"\", "/")

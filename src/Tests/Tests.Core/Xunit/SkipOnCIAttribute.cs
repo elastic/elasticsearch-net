@@ -26,4 +26,12 @@ namespace Tests.Core.Xunit
 
 		private string Url { get; }
 	}
+
+	public class SkipAttribute : SkipTestAttributeBase
+	{
+		public SkipAttribute(string reason) => Reason = reason;
+
+		public override bool Skip => true;
+		public override string Reason { get; }
+	}
 }
