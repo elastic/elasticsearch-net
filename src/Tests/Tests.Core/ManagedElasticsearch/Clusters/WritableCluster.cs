@@ -22,7 +22,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			var plugins = new List<ElasticsearchPlugin>
 			{
 				IngestGeoIp,
-				//IngestAttachment, // latest ingest snapshot build has stderr out needs fixing in abstractions possibly
+				IngestAttachment,
 				AnalysisKuromoji,
 				AnalysisIcu,
 				AnalysisPhonetic,
