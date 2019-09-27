@@ -48,9 +48,9 @@ namespace Elasticsearch.Net
 				}
 				else if (Response != null)
 				{
-					sb.Append(Response.HttpMethod.GetStringValue());
-					sb.Append(" on ");
-					sb.AppendLine(Response.Uri.ToString());
+					sb.Append(Response.HttpMethod.GetStringValue())
+						.Append(" on ")
+						.AppendLine(Response.Uri.ToString());
 				}
 				else
 					sb.AppendLine("a request");
@@ -65,13 +65,13 @@ namespace Elasticsearch.Net
 
 				if (InnerException != null)
 				{
-					sb.Append("# Inner Exception: ");
-					sb.AppendLine(InnerException.Message);
-					sb.AppendLine(InnerException.ToString());
+					sb.Append("# Inner Exception: ")
+						.AppendLine(InnerException.Message)
+						.AppendLine(InnerException.ToString());
 				}
 
-				sb.AppendLine("# Exception:");
-				sb.AppendLine(ToString());
+				sb.AppendLine("# Exception:")
+					.AppendLine(ToString());
 				return sb.ToString();
 			}
 		}
