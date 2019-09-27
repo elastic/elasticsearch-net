@@ -1,4 +1,20 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line42 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/AnalysisPage.cs#L8-L35.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/AnalysisPage.cs[tag=7ffee3c2a5581994fc0ea59dd106d39f,indent=0]
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .Properties(p => p
+            .Text(t => t
+                .Name("title")
+                .Analyzer("standard")
+            )
+        )
+    )
+);
 ----

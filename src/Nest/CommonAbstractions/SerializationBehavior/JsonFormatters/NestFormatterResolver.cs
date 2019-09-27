@@ -41,9 +41,8 @@ namespace Nest
 				{
 					new QueryContainerCollectionFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
-					// TODO: condition on TimeSpanToStringFormatter and NullableTimeSpanToStringFormatter to only take effect when StringTimeSpanAttribute is not present.
-					new TimeSpanToStringFormatter(),
-					new NullableTimeSpanToStringFormatter(),
+					new TimeSpanTicksFormatter(),
+					new NullableTimeSpanTicksFormatter(),
 					new JsonNetCompatibleUriFormatter(),
 					new GeoOrientationFormatter(),
 					new NullableGeoOrientationFormatter(),
@@ -82,16 +81,14 @@ namespace Nest
 					return _finalFormatter.GetFormatter<T>();
 				});
 
-			private IJsonProperty GetMapping(MemberInfo member)
+			private JsonProperty GetMapping(MemberInfo member)
 			{
 				// TODO: Skip calling this method for NEST and Elasticsearch.Net types, at the type level
 				if (!_settings.PropertyMappings.TryGetValue(member, out var propertyMapping))
 					propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
 				var serializerMapping = _settings.PropertyMappingProvider?.CreatePropertyMapping(member);
-
 				var nameOverride = propertyMapping?.Name ?? serializerMapping?.Name;
-
 				var property = new JsonProperty(nameOverride);
 
 				var overrideIgnore = propertyMapping?.Ignore ?? serializerMapping?.Ignore;
@@ -101,7 +98,56 @@ namespace Nest
 				if (propertyMapping != null || serializerMapping != null)
 					property.AllowPrivate = true;
 
+				if (member.GetCustomAttribute<StringEnumAttribute>() != null)
+					CreateEnumFormatterForProperty(member, property);
+				else if (member.GetCustomAttribute<StringTimeSpanAttribute>() != null)
+				{
+					switch (member)
+					{
+						case PropertyInfo propertyInfo:
+							property.JsonFormatter =
+								BuiltinResolver.BuiltinResolverGetFormatterHelper.GetFormatter(propertyInfo.PropertyType);
+							break;
+						case FieldInfo fieldInfo:
+							property.JsonFormatter =
+								BuiltinResolver.BuiltinResolverGetFormatterHelper.GetFormatter(fieldInfo.FieldType);
+							break;
+					}
+				}
+
 				return property;
+			}
+
+			private static void CreateEnumFormatterForType(Type type, JsonProperty property)
+			{
+				if (type.IsEnum)
+					property.JsonFormatter = typeof(EnumFormatter<>).MakeGenericType(type).CreateInstance(true);
+				else if (type.GetTypeInfo().IsNullable())
+				{
+					var underlyingType = Nullable.GetUnderlyingType(type);
+					if (underlyingType.IsEnum)
+					{
+						var innerFormatter = typeof(EnumFormatter<>).MakeGenericType(underlyingType).CreateInstance(true);
+						property.JsonFormatter = typeof(StaticNullableFormatter<>).MakeGenericType(underlyingType).CreateInstance(innerFormatter);
+					}
+				}
+			}
+
+			private static void CreateEnumFormatterForProperty(MemberInfo member, JsonProperty property)
+			{
+				switch (member)
+				{
+					case PropertyInfo propertyInfo:
+					{
+						CreateEnumFormatterForType(propertyInfo.PropertyType, property);
+						break;
+					}
+					case FieldInfo fieldInfo:
+					{
+						CreateEnumFormatterForType(fieldInfo.FieldType, property);
+						break;
+					}
+				}
 			}
 		}
 	}

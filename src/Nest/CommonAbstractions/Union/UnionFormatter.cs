@@ -5,16 +5,31 @@ namespace Nest
 {
 	internal class UnionFormatter<TFirst, TSecond> : IJsonFormatter<Union<TFirst, TSecond>>
 	{
+		private readonly bool _attemptTSecondIfTFirstIsNull;
+
+		public UnionFormatter() => _attemptTSecondIfTFirstIsNull = false;
+
+		public UnionFormatter(bool attemptTSecondIfTFirstIsNull) => _attemptTSecondIfTFirstIsNull = attemptTSecondIfTFirstIsNull;
+
 		public Union<TFirst, TSecond> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			Union<TFirst, TSecond> union = null;
 			var segment = reader.ReadNextBlockSegment();
 			if (TryRead(ref segment, formatterResolver, out TFirst first))
-				union = first;
+			{
+				if (first == null && _attemptTSecondIfTFirstIsNull)
+				{
+					if (TryRead(ref segment, formatterResolver, out TSecond second))
+						return second;
+				}
+				else
+				{
+					return first;
+				}
+			}
 			else if (TryRead(ref segment, formatterResolver, out TSecond second))
-				union = second;
+				return second;
 
-			return union;
+			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, Union<TFirst, TSecond> value, IJsonFormatterResolver formatterResolver)

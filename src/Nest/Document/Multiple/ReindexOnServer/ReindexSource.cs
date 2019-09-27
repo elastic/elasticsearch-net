@@ -28,7 +28,7 @@ namespace Nest
 		IRemoteSource Remote { get; set; }
 
 		/// <summary>
-		/// Limit the number of processed documents
+		/// The batch size of documents
 		/// </summary>
 		[DataMember(Name ="size")]
 		int? Size { get; set; }

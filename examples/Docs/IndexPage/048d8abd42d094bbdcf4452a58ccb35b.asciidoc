@@ -1,4 +1,20 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line134 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/IndexPage.cs#L102-L124.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/IndexPage.cs[tag=048d8abd42d094bbdcf4452a58ccb35b,indent=0]
+var createResponse = client.Create(new Tweet
+{
+    User = "kimchy",
+    PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+    Message = "trying out Elasticsearch"
+},
+i => i
+    .Index("twitter")
+    .Id(1)
+);
 ----

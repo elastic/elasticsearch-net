@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.MachineLearning
 {
 	[SkipVersion("<5.5.0", "Machine Learning does not exist in previous versions")]
-	[SkipOnTeamCity]
+	[SkipOnCi]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<MachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
@@ -48,6 +48,16 @@ namespace Tests.XPack.MachineLearning
 				throw new Exception($"Problem putting filter {filterId} for integration test: {putFilterResponse.DebugInformation}");
 
 			return putFilterResponse;
+		}
+
+		protected DeleteFilterResponse DeleteFilter(IElasticClient client, string filterId)
+		{
+			var deleteFilterResponse = client.MachineLearning.DeleteFilter(filterId);
+
+			if (!deleteFilterResponse.IsValid)
+				throw new Exception($"Problem deleting filter {filterId} for integration test: {deleteFilterResponse.DebugInformation}");
+
+			return deleteFilterResponse;
 		}
 
 		protected PutCalendarResponse PutCalendar(IElasticClient client, string calendarId)

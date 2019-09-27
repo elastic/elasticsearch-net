@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.1
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -82,6 +82,6 @@ some understanding of how long it took
 [source,csharp]
 ----
 response.ApiCall.AuditTrail
-    .Should().OnlyContain(a => a.Ended - a.Started > TimeSpan.Zero);
+    .Should().OnlyContain(a => a.Ended - a.Started >= TimeSpan.Zero);
 ----
 

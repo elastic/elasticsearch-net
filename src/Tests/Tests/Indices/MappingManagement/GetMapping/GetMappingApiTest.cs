@@ -5,6 +5,7 @@ using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -84,11 +85,14 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			var visitor = new TestVisitor();
 			var b = TestClient.Configuration.Random.SourceSerializer;
+
+			var supportsFlattenedType = TestConfiguration.Instance.InRange(">=7.3.0");
+
 			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 18 : 17);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
-			visitor.CountsShouldContainKeyAndCountBe("object", 8);
+			visitor.CountsShouldContainKeyAndCountBe("object", supportsFlattenedType? 8 : 9);
 			visitor.CountsShouldContainKeyAndCountBe("number", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
@@ -103,6 +107,9 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("ip_range", 1);
 			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
 			visitor.CountsShouldContainKeyAndCountBe("rank_feature", 1);
+
+			if (supportsFlattenedType)
+				visitor.CountsShouldContainKeyAndCountBe("flattened", 1);
 		}
 	}
 
@@ -197,6 +204,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void Visit(IRankFeatureProperty mapping) => Increment("rank_feature");
 
 		public void Visit(IRankFeaturesProperty mapping) => Increment("rank_features");
+
+		public void Visit(ISearchAsYouTypeProperty property) => Increment("search_as_you_type");
+
+		public void Visit(IFlattenedProperty property) => Increment("flattened");
 
 		private void Increment(string key)
 		{

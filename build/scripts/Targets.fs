@@ -57,7 +57,7 @@ module Main =
         conditional (not isMono && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
             fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
-        conditional (not parsed.SkipDocs) "documentation" <| fun _ -> Documentation.Generate parsed
+        conditional (parsed.GenDocs) "documentation" <| fun _ -> Documentation.Generate parsed
 
         conditional (not parsed.SkipTests) "test" <| fun _ -> Tests.RunUnitTests parsed |> ignore
         
@@ -68,13 +68,13 @@ module Main =
         target "inherit-doc" <| InheritDoc.PatchInheritDocs
 
         target "test-nuget-package" <| fun _ -> 
-            //run release unit tests puts packages in the system cache prevent this from happening locally
+            // run release unit tests puts packages in the system cache prevent this from happening locally
             if not Commandline.runningOnCi then ignore ()
             else Tests.RunReleaseUnitTests artifactsVersion |> ignore
             
         target "nuget-pack" <| fun _ -> Release.NugetPack artifactsVersion
 
-        conditional (parsed.Target = "canary") "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
+        conditional (parsed.Target = "canary" && not isMono) "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
 
         conditional (parsed.Target <> "canary") "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions 
 

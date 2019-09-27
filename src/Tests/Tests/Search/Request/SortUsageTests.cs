@@ -331,4 +331,38 @@ namespace Tests.Search.Request
 				}
 			};
 	}
+
+	//hide
+	[SkipVersion("<7.2.0", "numeric_type added in 7.2.0")]
+	public class NumericTypeUsageTests : SearchUsageTestBase
+	{
+		public NumericTypeUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson =>
+			new
+			{
+				sort = new object[]
+				{
+					new { startedOn = new { numeric_type = "date", order = "asc" } }
+				}
+			};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Sort(ss => ss
+				.Field(g => g
+					.Field(p => p.StartedOn)
+					.NumericType(NumericType.Date)
+					.Ascending()
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Sort = new List<ISort>
+				{
+					new FieldSort { Field = "startedOn", NumericType = NumericType.Date, Order = SortOrder.Ascending },
+				}
+			};
+	}
 }

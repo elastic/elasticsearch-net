@@ -13,7 +13,7 @@ namespace Tests.Document.Multiple.BulkAll
 	{
 		public BulkAllCancellationTokenApiTests(IntrusiveOperationCluster cluster) : base(cluster) { }
 
-		[I] [SkipOnTeamCity]
+		[I] [SkipOnCi]
 		public void CancelBulkAll()
 		{
 			var index = CreateIndexName();
@@ -45,12 +45,13 @@ namespace Tests.Document.Multiple.BulkAll
 			//when we subscribe the observable becomes hot
 			observableBulk.Subscribe(bulkObserver);
 
-			//we wait Nseconds to see some bulks
+			//we wait N seconds to see some bulks
 			handle.WaitOne(TimeSpan.FromSeconds(3));
 			tokenSource.Cancel();
-			//we wait Nseconds to give in flight request a chance to cancel
+			//we wait N seconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
-			if (ex != null && !(ex is TaskCanceledException) && !(ex is OperationCanceledException)) throw ex;
+
+			if (ex != null && !(ex is OperationCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = Client.Count<SmallObject>(f => f.Index(index));

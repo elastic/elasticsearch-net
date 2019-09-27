@@ -38,6 +38,7 @@ namespace DocGenerator
 			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" },
 			{ "Project.First.Name", "\"Lesch Group\"" },
 			{ "Project.First.NumberOfCommits", "775" },
+			{ "IntervalsPrefix", "\"lorem\"" },
 			{ "LastNameSearch", "\"Stokes\"" },
 			{ "_first.Language", "\"painless\"" },
 			{ "_first.Init", "\"state.map = [:]\"" },

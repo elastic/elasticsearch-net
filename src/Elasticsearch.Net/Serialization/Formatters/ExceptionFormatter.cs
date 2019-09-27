@@ -112,7 +112,7 @@ namespace Elasticsearch.Net
 			var valueFormatter = formatterResolver.GetFormatter<object>();
 
 			writer.WriteBeginArray();
-			for (int i = 0; i < flattenedExceptions.Count; i++)
+			for (var i = 0; i < flattenedExceptions.Count; i++)
 			{
 				if (i > 0)
 					writer.WriteValueSeparator();

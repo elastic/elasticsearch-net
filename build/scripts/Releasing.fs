@@ -97,6 +97,7 @@ module Release =
             )
 
         match p with 
+        | Project ElasticsearchNetVirtual 
         | Project Nest -> 
             let esDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
             esDeps |> Seq.iter(fun e ->
@@ -107,7 +108,6 @@ module Release =
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
-        | Project NestUpgradeAssistant
         | Project NestJsonNetSerializer -> 
             let nestDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
             nestDeps |> Seq.iter (fun e ->
@@ -144,7 +144,7 @@ module Release =
             
     let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
         match p with
-        | Project NestUpgradeAssistant ->
+        | Project ElasticsearchNetVirtual ->
             printfn "Skipping %s from building a versioned nightly" p.Name
             ignore()
         | _ -> nugetPackVersionedUnfiltered p nugetId nuspec properties version

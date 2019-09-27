@@ -210,7 +210,7 @@ namespace Elasticsearch.Net
 				: $"Status code {statusCode} from: {callDetails.HttpMethod} {callDetails.Uri.PathAndQuery}";
 
 
-			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";
+			var exceptionMessage = innerException?.Message ?? "Request failed to execute";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())
@@ -287,6 +287,8 @@ namespace Elasticsearch.Net
 		{
 			if (!FirstPoolUsageNeedsSniffing) return;
 
+			// TODO cancellationToken could throw here and will bubble out as OperationCancelledException
+			// everywhere else it would bubble out wrapped in a `UnexpectedElasticsearchClientException`
 			var success = await semaphore.WaitAsync(_settings.RequestTimeout, cancellationToken).ConfigureAwait(false);
 			if (!success)
 			{

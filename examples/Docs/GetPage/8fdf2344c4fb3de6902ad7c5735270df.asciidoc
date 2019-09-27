@@ -1,4 +1,15 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line84 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L43-L55.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Docs/GetPage.cs[tag=8fdf2344c4fb3de6902ad7c5735270df,indent=0]
+var getResponse = client.Get<Tweet>(0, g => g
+    .Index("twitter")
+    .SourceIncludes("*.id")
+    .SourceExcludes("entities")
+);
 ----

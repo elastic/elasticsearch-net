@@ -16,6 +16,9 @@ namespace Nest
 		Client,
 
 		[EnumMember(Value = "ingest")]
-		Ingest
+		Ingest,
+
+		[EnumMember(Value = "ml")]
+		MachineLearning
 	}
 }

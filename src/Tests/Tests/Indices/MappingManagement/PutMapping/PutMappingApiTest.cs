@@ -9,7 +9,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
-	[SkipVersion("<5.2.0", "This uses the range types introduced in 5.2.0")]
+	[SkipVersion("<7.3.0", "This uses flattened type introduced in 5.2.0")]
 	public class PutMappingApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
@@ -123,12 +123,16 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				rank = new
 				{
 					type = "rank_feature"
+				},
+				labels = new
+				{
+					type = "flattened",
+					depth_limit = 4
 				}
 			}
 		};
 
 		protected override int ExpectStatusCode => 200;
-
 
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
@@ -182,6 +186,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				)
 				.RankFeature(rf => rf
 					.Name(p => p.Rank)
+				)
+				.Flattened(f => f
+					.Name(p => p.Labels)
+					.DepthLimit(4)
 				)
 			);
 
@@ -296,6 +304,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					}
 				},
 				{ p => p.Rank, new RankFeatureProperty() },
+				{ p => p.Labels, new FlattenedProperty
+				{
+					DepthLimit = 4
+				} },
 			}
 		};
 

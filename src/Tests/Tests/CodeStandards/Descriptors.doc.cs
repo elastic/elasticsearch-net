@@ -193,6 +193,8 @@ namespace Tests.CodeStandards
 				//skips
 				where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
 				where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
+				where !(m.Name == "CalendarInterval" && d == typeof(DateHistogramAggregationDescriptor<>))
+				where !(m.Name == "FixedInterval" && d == typeof(DateHistogramAggregationDescriptor<>))
 				where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
 				where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
 				where !(m.Name == "Lang" && dt == typeof(ScriptQueryDescriptor<>))

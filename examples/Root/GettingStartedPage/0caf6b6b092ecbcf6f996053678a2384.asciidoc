@@ -1,4 +1,15 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line284 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/GettingStartedPage.cs#L43-L57.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=0caf6b6b092ecbcf6f996053678a2384,indent=0]
+var createIndexResponse = client.Indices.Create("customer", c => c
+    .Pretty()
+);
+
+var catResponse = client.Cat.Indices(h => h.Verbose());
 ----

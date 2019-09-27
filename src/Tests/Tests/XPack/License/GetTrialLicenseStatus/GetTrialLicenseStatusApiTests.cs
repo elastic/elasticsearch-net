@@ -11,7 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.License.GetTrialLicenseStatus
 {
 	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
-	[SkipOnTeamCity]
+	[SkipOnCi]
 	public class GetTrialLicenseStatusApiTests
 		: ApiIntegrationTestBase<XPackCluster, GetTrialLicenseStatusResponse, IGetTrialLicenseStatusRequest, GetTrialLicenseStatusDescriptor,
 			GetTrialLicenseStatusRequest>

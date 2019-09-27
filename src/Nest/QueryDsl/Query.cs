@@ -11,6 +11,7 @@ namespace Nest
 		public static QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
 			new QueryContainerDescriptor<T>().Boosting(selector);
 
+		[Obsolete("Deprecated in 7.3.0. Use MatchQuery instead, which skips blocks of documents efficiently, without any configuration, provided that the total number of hits is not tracked.")]
 		public static QueryContainer CommonTerms(Func<CommonTermsQueryDescriptor<T>, ICommonTermsQuery> selector) =>
 			new QueryContainerDescriptor<T>().CommonTerms(selector);
 
@@ -25,6 +26,10 @@ namespace Nest
 
 		public static QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
 			new QueryContainerDescriptor<T>().DisMax(selector);
+
+		/// <inheritdoc cref="IDistanceFeatureQuery"/>
+		public static QueryContainer DistanceFeature(Func<DistanceFeatureQueryDescriptor<T>, IDistanceFeatureQuery> selector) =>
+			new QueryContainerDescriptor<T>().DistanceFeature(selector);
 
 		public static QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Exists(selector);

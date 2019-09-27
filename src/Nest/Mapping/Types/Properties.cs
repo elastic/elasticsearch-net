@@ -154,6 +154,8 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) => SetProperty(selector);
 
+		public PropertiesDescriptor<T> SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) => SetProperty(selector);
@@ -163,6 +165,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IRankFeaturesProperty"/>
 		public PropertiesDescriptor<T> RankFeatures(Func<RankFeaturesPropertyDescriptor<T>, IRankFeaturesProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IFlattenedProperty"/>
+		public PropertiesDescriptor<T> Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 

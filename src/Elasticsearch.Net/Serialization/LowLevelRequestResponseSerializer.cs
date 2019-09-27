@@ -11,25 +11,17 @@ namespace Elasticsearch.Net
 	{
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 
-		public object Deserialize(Type type, Stream stream)
-		{
-			return JsonSerializer.NonGeneric.Deserialize(type, stream, ElasticsearchNetFormatterResolver.Instance);
-		}
+		public object Deserialize(Type type, Stream stream) =>
+			JsonSerializer.NonGeneric.Deserialize(type, stream, ElasticsearchNetFormatterResolver.Instance);
 
-		public T Deserialize<T>(Stream stream)
-		{
-			return JsonSerializer.Deserialize<T>(stream, ElasticsearchNetFormatterResolver.Instance);
-		}
+		public T Deserialize<T>(Stream stream) =>
+			JsonSerializer.Deserialize<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 
-		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
-		{
-			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, ElasticsearchNetFormatterResolver.Instance);
-		}
+		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
+			JsonSerializer.NonGeneric.DeserializeAsync(type, stream, ElasticsearchNetFormatterResolver.Instance);
 
-		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
-		{
-			return JsonSerializer.DeserializeAsync<T>(stream, ElasticsearchNetFormatterResolver.Instance);
-		}
+		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) =>
+			JsonSerializer.DeserializeAsync<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 
 		public void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.None) =>
 			JsonSerializer.Serialize(writableStream, data, ElasticsearchNetFormatterResolver.Instance);

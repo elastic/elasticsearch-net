@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Elasticsearch.Net.VirtualizedCluster;
+using Elasticsearch.Net.VirtualizedCluster.Audit;
+using Elasticsearch.Net.VirtualizedCluster.Providers;
 using FluentAssertions;
 using Tests.Framework;
-using Tests.Framework.VirtualClustering;
-using Tests.Framework.VirtualClustering.Audit;
-using Tests.Framework.VirtualClustering.Providers;
-using static Tests.Framework.VirtualClustering.Rules.TimesHelper;
+using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin

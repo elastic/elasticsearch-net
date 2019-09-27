@@ -49,11 +49,15 @@ namespace Nest
 
 		public virtual void Visit(IBoostingQuery query) => Write("boosting");
 
+#pragma warning disable 618
 		public virtual void Visit(ICommonTermsQuery query) => Write("common_terms", query.Field);
+#pragma warning restore 618
 
 		public virtual void Visit(IConstantScoreQuery query) => Write("constant_score");
 
 		public virtual void Visit(IDisMaxQuery query) => Write("dis_max");
+
+		public virtual void Visit(IDistanceFeatureQuery query) => Write("distance_feature");
 
 		public virtual void Visit(ISpanContainingQuery query) => Write("span_containing");
 

@@ -41,9 +41,10 @@ NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to for
 
 Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
-- skipdocs : skip generating documentation
+- gendocs : generate documentation
 - non-interactive : make targets that run in interactive mode by default to run unassisted.
 - docs:<B> : the branch name B to use when generating documentation
+- ref:<B> : the reference version B to use when generating documentation
 - seed:<N> : provide a seed to run the tests with.
 - random:<K><:B> : sets random K to bool B if if B is omitted will default to true
   K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
@@ -91,10 +92,11 @@ Execution hints can be provided anywhere on the command line
     type PassedArguments = {
         NonInteractive: bool;
         SkipTests: bool;
-        SkipDocs: bool;
+        GenDocs: bool;
         Seed: string;
         RandomArguments: string list;
         DocsBranch: string;
+        ReferenceBranch: string;
         RemainingArguments: string list;
         MultiTarget: MultiTarget;
         Target: string;
@@ -119,11 +121,12 @@ Execution hints can be provided anywhere on the command line
             args
             |> List.filter(fun x -> 
                x <> "skiptests" && 
-               x <> "skipdocs" && 
+               x <> "gendocs" && 
                x <> "non-interactive" && 
                not (x.StartsWith("seed:")) && 
                not (x.StartsWith("random:")) && 
-               not (x.StartsWith("docs:")))
+               not (x.StartsWith("docs:")) &&
+               not (x.StartsWith("ref:")))
         let target = 
             match (filteredArgs |> List.tryHead) with
             | Some t -> t.Replace("-one", "")
@@ -133,7 +136,7 @@ Execution hints can be provided anywhere on the command line
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
             SkipTests = skipTests
-            SkipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
+            GenDocs = (args |> List.exists (fun x -> x = "gendocs") || target = "build") && not isMono 
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
                 | Some t -> t.Replace("seed:", "")
@@ -145,6 +148,10 @@ Execution hints can be provided anywhere on the command line
             DocsBranch = 
                 match args |> List.tryFind (fun x -> x.StartsWith("docs:")) with
                 | Some t -> t.Replace("docs:", "")
+                | _ -> ""
+            ReferenceBranch = 
+                match args |> List.tryFind (fun x -> x.StartsWith("ref:")) with
+                | Some t -> t.Replace("ref:", "")
                 | _ -> ""
             RemainingArguments = filteredArgs
             MultiTarget = 

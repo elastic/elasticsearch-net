@@ -1,0 +1,32 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/CodeStandards/Serialization/Formatters.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[formatters]]
+=== Formatters
+
+[source,csharp]
+----
+var formatters = typeof(IElasticClient).Assembly.GetTypes()
+    .Concat(typeof(IElasticLowLevelClient).Assembly.GetTypes())
+    .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IJsonFormatter<>)))
+    .ToList();
+var visible = new List<string>();
+foreach (var formatter in formatters)
+{
+    if (formatter.IsVisible)
+        visible.Add(formatter.Name);
+}
+visible.Should().BeEmpty();
+----
+

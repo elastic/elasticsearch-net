@@ -56,6 +56,7 @@ namespace Nest
 			{
 				case FieldType.Text: return Deserialize<TextProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Keyword: return Deserialize<KeywordProperty>(ref segmentReader, formatterResolver);
+				case FieldType.SearchAsYouType: return Deserialize<SearchAsYouTypeProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Float:
 				case FieldType.Double:
 				case FieldType.Byte:
@@ -90,6 +91,7 @@ namespace Nest
 				case FieldType.Alias: return Deserialize<FieldAliasProperty>(ref segmentReader, formatterResolver);
 				case FieldType.RankFeature: return Deserialize<RankFeatureProperty>(ref segmentReader, formatterResolver);
 				case FieldType.RankFeatures: return Deserialize<RankFeaturesProperty>(ref segmentReader, formatterResolver);
+				case FieldType.Flattened: return Deserialize<FlattenedProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -113,6 +115,9 @@ namespace Nest
 					break;
 				case "keyword":
 					Serialize<IKeywordProperty>(ref writer, value, formatterResolver);
+					break;
+				case "search_as_you_type":
+					Serialize<ISearchAsYouTypeProperty>(ref writer, value, formatterResolver);
 					break;
 				case "float":
 				case "double":
@@ -192,6 +197,9 @@ namespace Nest
 					break;
 				case "rank_features":
 					Serialize<IRankFeaturesProperty>(ref writer, value, formatterResolver);
+					break;
+				case "flattened":
+					Serialize<IFlattenedProperty>(ref writer, value, formatterResolver);
 					break;
 				default:
 					if (value is IGenericProperty genericProperty)

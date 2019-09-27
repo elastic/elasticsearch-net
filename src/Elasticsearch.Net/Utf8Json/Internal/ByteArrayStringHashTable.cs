@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         {
             if (!TryAddInternal(Encoding.UTF8.GetBytes(key), value))
             {
-                throw new ArgumentException("Key was already exists. Key:" + key);
+                throw new ArgumentException("Key already exists. Key:" + key);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         {
             if (!TryAddInternal(key, value))
             {
-                throw new ArgumentException("Key was already exists. Key:" + Encoding.UTF8.GetString(key));
+                throw new ArgumentException("Key already exists. Key:" + Encoding.UTF8.GetString(key));
             }
         }
 

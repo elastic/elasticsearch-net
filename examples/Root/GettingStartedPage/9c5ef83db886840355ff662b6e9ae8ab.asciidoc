@@ -1,4 +1,14 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line532 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/GettingStartedPage.cs#L260-L271.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=9c5ef83db886840355ff662b6e9ae8ab,indent=0]
+var deleteResponse = client.Delete<Customer>(2, d => d
+    .Index("customer")
+    .Pretty()
+);
 ----

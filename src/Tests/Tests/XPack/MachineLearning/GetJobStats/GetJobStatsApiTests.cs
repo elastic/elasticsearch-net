@@ -3,6 +3,7 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;
 
@@ -24,6 +25,11 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
+		}
+
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values) DeleteJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -65,6 +71,17 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 			firstJob.ModelSizeStats.TotalByFieldCount.Should().Be(0);
 			firstJob.ModelSizeStats.TotalOverFieldCount.Should().Be(0);
 			firstJob.ModelSizeStats.TotalPartitionFieldCount.Should().Be(0);
+
+			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+			{
+				firstJob.TimingStats.Should().NotBeNull();
+				firstJob.TimingStats.JobId.Should().Be(firstJob.JobId);
+				firstJob.TimingStats.BucketCount.Should().Be(0);
+				firstJob.TimingStats.MinimumBucketProcessingTimeMilliseconds.Should().Be(0);
+				firstJob.TimingStats.MaximumBucketProcessingTimeMilliseconds.Should().Be(0);
+				firstJob.TimingStats.AverageBucketProcessingTimeMilliseconds.Should().Be(0);
+				firstJob.TimingStats.ExponentialAverageBucketProcessingTimeMilliseconds.Should().Be(0);
+			}
 		}
 	}
 

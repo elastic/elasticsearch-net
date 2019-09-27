@@ -1,4 +1,17 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line470 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/GettingStartedPage.cs#L174-L191.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=1c0f3b0bc4b7e53b53755fd3bda5b8cf,indent=0]
+var indexResponse = client.Index(new Customer
+{
+    Name = "Jane Doe"
+}, i => i
+.Index("customer")
+.Pretty()
+);
 ----

@@ -13,6 +13,12 @@ namespace Tests.XPack.MachineLearning.PutFilter
 	{
 		public PutFilterApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+				DeleteFilter(client, callUniqueValue.Value);
+		}
+
 		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson => new

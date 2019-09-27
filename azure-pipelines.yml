@@ -3,7 +3,10 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - script: ./build.sh test-one skipdocs
+  - task: UseDotNet@2
+    inputs:
+        version: '3.0.100'
+  - script: ./build.sh test-one
     displayName: 'build and unit test'
   - task: PublishTestResults@2
     inputs:
@@ -15,7 +18,10 @@ jobs:
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-  - script: build.bat canary skipdocs
+  - task: UseDotNet@2
+    inputs:
+      version: '3.0.100'
+  - script: build.bat canary
     displayName: 'build and unit test'
   - task: PublishTestResults@2
     inputs:
@@ -33,7 +39,10 @@ jobs:
       latest:
         esVersion: 'latest'
   steps:
-      - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack" skipdocs'
+      - task: UseDotNet@2
+        inputs:
+            version: '3.0.100'
+      - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
         displayName: '$(esVersion) windows integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()
@@ -52,7 +61,10 @@ jobs:
           latest:
               esVersion: 'latest'
   steps:
-      - script: './build.sh integrate-one $(esVersion) "readonly,writable" skipdocs'
+      - task: UseDotNet@2
+        inputs:
+            version: '3.0.100'
+      - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
         displayName: '$(esVersion) linux integration tests'
       - task: PublishTestResults@2
         condition: succeededOrFailed()

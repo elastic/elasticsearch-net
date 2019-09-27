@@ -8,7 +8,7 @@ namespace Elasticsearch.Net
 
 		public BytesResponse(byte[] body) => Body = body;
 
-		public bool TryGetServerError(out ServerError serverError)
+		public override bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
 			if (Body == null || Body.Length == 0 || ResponseMimeType != RequestData.MimeType)
@@ -16,15 +16,6 @@ namespace Elasticsearch.Net
 
 			using(var stream = ConnectionConfiguration.MemoryStreamFactory.Create(Body))
 				return ServerError.TryCreate(stream, out serverError);
-		}
-
-		protected override bool TryGetServerErrorReason(out string reason)
-		{
-			reason = null;
-			if (!TryGetServerError(out var serverError)) return false;
-
-			reason = serverError?.Error?.ToString();
-			return !reason.IsNullOrEmpty();
 		}
 	}
 }

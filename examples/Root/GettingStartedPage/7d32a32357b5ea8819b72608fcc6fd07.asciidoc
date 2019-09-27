@@ -1,4 +1,16 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line550 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/GettingStartedPage.cs#L273-L290.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
 [source, csharp]
 ----
-include::../../../src/Examples/Examples/Root/GettingStartedPage.cs[tag=7d32a32357b5ea8819b72608fcc6fd07,indent=0]
+var bulkResponse = client.Bulk(b => b
+    .Index("customer")
+    .Index<Customer>(i => i.Document(new Customer { Name = "John Doe" }).Id("1"))
+    .Index<Customer>(i => i.Document(new Customer { Name = "Jane Doe" }).Id("2"))
+    .Pretty()
+);
 ----
