@@ -2,7 +2,6 @@ using System;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
 
-
 namespace Nest
 {
 	internal class SuggestContextFormatter : IJsonFormatter<ISuggestContext>
