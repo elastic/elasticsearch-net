@@ -31,7 +31,7 @@ namespace DocGenerator
 			OutputDirPath = Path.Combine(r, "docs");
 			BuildOutputPath = Path.Combine(r, "build", "output");
 
-			var globalJsonVersion = string.Join(".", Regex.Matches(File.ReadAllText(globalJson), "\"version\": \"(.*)\"")
+			var globalJsonVersion = string.Join(".", Regex.Matches(File.ReadAllText(globalJson), "\"doc_current\": \"(.*)\"")
 										 .Last()
 										 .Groups[^1]
 										 .Value
