@@ -4,7 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using DocGenerator.Buildalyzer;
+using Buildalyzer;
+using Buildalyzer.Workspaces;
 using DocGenerator.Documentation.Files;
 using Microsoft.CodeAnalysis;
 
@@ -48,12 +49,9 @@ namespace DocGenerator
 			//.NET core csprojects are not supported all that well.
 			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
 			// Use Buildalyzer to get a workspace from the solution.
-			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "Elasticsearch.sln"), new[]
-			{
-				"Elasticsearch.Net",
-				"Nest",
-				"Tests"
-			});
+			var options = new AnalyzerManagerOptions() { };
+
+			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "CodeGeneration", "ElasticsearchCodeGeneration.sln"));
 
 			var workspace = analyzer.GetWorkspace();
 
