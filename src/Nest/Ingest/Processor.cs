@@ -34,7 +34,7 @@ namespace Nest
 		string Tag { get; set; }
 
 		/// <summary> When a failure happens, ignore it and proceed to the next processor </summary>
-		[JsonProperty("ignore_failue")]
+		[JsonProperty("ignore_failure")]
 		bool? IgnoreFailure { get; set; }
 	}
 
