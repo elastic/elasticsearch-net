@@ -6,6 +6,7 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Integration;
+using Tests.Framework.Extensions;
 using Xunit;
 
 namespace Tests.Framework

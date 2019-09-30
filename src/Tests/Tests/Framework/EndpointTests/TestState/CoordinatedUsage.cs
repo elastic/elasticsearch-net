@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
+using Tests.Framework.Extensions;
 
 namespace Tests.Framework.EndpointTests.TestState
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,6 +12,8 @@ using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.Bulk
 {
+
+	[SkipVersion("<6.6.0", "if_seq_no not supported")]
 	public class BulkInvalidVersionApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkInvalidVersionApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

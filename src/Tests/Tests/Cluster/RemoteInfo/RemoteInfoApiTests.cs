@@ -5,6 +5,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
+using Tests.Framework.Extensions;
 using Tests.Framework.Integration;
 using M = System.Collections.Generic.Dictionary<string, object>;
 using static Nest.Infer;

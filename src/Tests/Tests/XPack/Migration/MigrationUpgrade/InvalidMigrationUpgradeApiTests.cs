@@ -7,6 +7,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.Extensions;
 
 namespace Tests.XPack.Migration.MigrationUpgrade
 {

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-assembly-rewriter": {
+      "version": "1.0.0-ci20190926102235",
+      "commands": [
+        "assembly-rewriter"
+      ]
+    },
+    "dotnet-assembly-differ": {
+      "version": "1.0.0-ci20190926135713",
+      "commands": [
+        "assembly-differ"
+      ]
+    }
+  }
+}

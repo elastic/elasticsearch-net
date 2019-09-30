@@ -12,7 +12,7 @@ module Cluster =
         let clusterName = Option.defaultValue "" <| match args.CommandArguments with | Cluster c -> Some c.Name | _ -> None
         let clusterVersion = Option.defaultValue "" <|match args.CommandArguments with | Cluster c -> c.Version | _ -> None
         
-        let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp2.1")
+        let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp3.0")
         let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         
         let sourceDir = Paths.Source("Tests/Tests.Configuration");

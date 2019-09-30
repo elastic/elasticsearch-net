@@ -1,6 +1,11 @@
 using System;
-using System.Net.Http;
 using Nest;
+#if DOTNETCORE
+using System.Net.Http;
+using TheException = System.Net.Http.HttpRequestException;
+#else
+using TheException = System.Net.WebException;
+#endif
 
 namespace Tests.Framework
 {
@@ -14,12 +19,7 @@ namespace Tests.Framework
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
-			Self.Return = errorState ??
-#if DOTNETCORE
-				new HttpRequestException();
-#else
-			new WebException();
-#endif
+			Self.Return = errorState ?? new TheException();
 			return this;
 		}
 
@@ -39,12 +39,7 @@ namespace Tests.Framework
 
 		public ClientCallRule ThrowsAfterSucceeds()
 		{
-			Self.AfterSucceeds =
-#if DOTNETCORE
-				new HttpRequestException();
-#else
-                    new WebException();
-                #endif
+			Self.AfterSucceeds = new TheException();
 			return this;
 		}
 
