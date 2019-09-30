@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CommandLine;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace DocGenerator
 {
@@ -11,28 +12,24 @@ namespace DocGenerator
 	{
 		static Program()
 		{
-			string P(string path)
-			{
-				return path.Replace(@"\", Path.DirectorySeparatorChar.ToString());
-			}
+			var root = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-			var globalJson = P(@"..\..\..\global.json");
-			if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
+			do
 			{
-				Console.WriteLine("IDE: " + currentDirectory);
-				InputDirPath = P(@"..\..\");
-				OutputDirPath = P(@"..\..\..\docs");
-				BuildOutputPath = P(@"..\..\..\src");
-			}
-			else
-			{
-			    globalJson = P(@"..\..\..\..\global.json");
-				Console.WriteLine("CMD: " + currentDirectory);
-				InputDirPath = P(@"..\..\..\..\src");
-				OutputDirPath = P(@"..\..\..\..\docs");
-				BuildOutputPath = P(@"..\..\..\..\build\output");
-			}
+				if (File.Exists(Path.Combine(root.FullName, "global.json")))
+					break;
+				root = root.Parent;
+			} while (root != null && root.Parent != root.Root);
+
+			if (root == null || root.Parent == root.Root)
+				throw new Exception("Expected to find a global.json in a parent folder");
+
+
+			var r = root.FullName;
+			var globalJson = Path.Combine(r, "global.json");
+			InputDirPath = Path.Combine(r, "src");
+			OutputDirPath = Path.Combine(r, "docs");
+			BuildOutputPath = Path.Combine(r, "build", "output");
 
 			var globalJsonVersion = string.Join(".", Regex.Matches(File.ReadAllText(globalJson), "\"version\": \"(.*)\"")
 										 .Last()

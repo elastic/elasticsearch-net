@@ -55,11 +55,14 @@ namespace DocGenerator
 
 			var workspace = analyzer.GetWorkspace();
 
-			workspace.WorkspaceFailed += (s, e) => { Console.Error.WriteLine(e.Diagnostic.Message); };
+			workspace.WorkspaceFailed += (s, e) =>
+			{
+				Console.Error.WriteLine(e.Diagnostic.Message);
+			};
 
 			// Buildalyzer, similar to MsBuildWorkspace with the new csproj file format, does
 			// not pick up source documents in the project directory. Manually add them
-			AddDocumentsToWorkspace(workspace);
+			// AddDocumentsToWorkspace(workspace);
 
 			var projects = workspace.CurrentSolution.Projects
 				.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);

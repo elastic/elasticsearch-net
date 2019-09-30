@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net", "..\Ela
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "..\Nest\Nest.csproj", "{D9E18A91-86F1-4F55-8AC6-015EAB4D3360}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests\Tests.csproj", "{C268FDAD-F6A6-479D-A1DC-10A5DE67A076}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D9E18A91-86F1-4F55-8AC6-015EAB4D3360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E18A91-86F1-4F55-8AC6-015EAB4D3360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E18A91-86F1-4F55-8AC6-015EAB4D3360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C268FDAD-F6A6-479D-A1DC-10A5DE67A076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C268FDAD-F6A6-479D-A1DC-10A5DE67A076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C268FDAD-F6A6-479D-A1DC-10A5DE67A076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C268FDAD-F6A6-479D-A1DC-10A5DE67A076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
