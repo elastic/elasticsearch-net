@@ -34,7 +34,7 @@ namespace Nest
 		string Tag { get; set; }
 
 		/// <summary> When a failure happens, ignore it and proceed to the next processor </summary>
-		[DataMember(Name = "ignore_failue")]
+		[DataMember(Name = "ignore_failure")]
 		bool? IgnoreFailure { get; set; }
 	}
 
