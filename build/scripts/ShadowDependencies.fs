@@ -8,6 +8,9 @@ module ShadowDependencies =
     let private assemblyRewriter = "assembly-rewriter"
     let private keyFile = Paths.Keys "keypair.snk"
     let Rewrite majorVersion framework projects =
+        
+        Tooling.DotNet.Exec ["tool"; "restore"]
+        
         let project = projects |> Seq.head
         let folder = Paths.ProjectOutputFolder project framework
         

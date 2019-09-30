@@ -16,8 +16,11 @@
 
     	<DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netstandard2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.2'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp3.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 
 		<RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
 		<Authors>Elasticsearch BV</Authors>
@@ -27,7 +30,6 @@
 		<ReleaseNotes>See https://github.com/elastic/elasticsearch-net/releases</ReleaseNotes>
 		<PackageIconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</PackageIconUrl>
     
-		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
         <PackageReference Condition="'$(OS)' != 'Windows_NT' and '$(TargetFramework)'=='net461'" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />

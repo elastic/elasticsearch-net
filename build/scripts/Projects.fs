@@ -7,13 +7,13 @@ module Projects =
     type DotNetFramework = 
         | NetStandard2_0
         | Net461
-        | NetCoreApp2_1
+        | NetCoreApp3_0
         static member All = [NetStandard2_0; Net461]
-        static member AllTests = [NetCoreApp2_1; Net461] 
+        static member AllTests = [NetCoreApp3_0; Net461] 
         member this.Identifier = 
             match this with
             | NetStandard2_0 -> { MSBuild = "netstandard2.0"; Nuget = "netstandard2.0"; DefineConstants = ""; }
-            | NetCoreApp2_1 -> { MSBuild = "netcoreapp2.1"; Nuget = "netcoreapp2.1"; DefineConstants = ""; }
+            | NetCoreApp3_0 -> { MSBuild = "netcoreapp3.0"; Nuget = "netcoreapp3.0"; DefineConstants = ""; }
             | Net461 -> { MSBuild = "net461"; Nuget = "net461"; DefineConstants = ""; }
 
     type Project =
