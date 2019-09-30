@@ -311,18 +311,26 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndObject) return new GeoCentroidAggregate { Count = count };
 
 			reader.Read();
-			var min = reader.Value as double?;
+			var min = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 			reader.Read();
 			reader.Read();
-			var max = reader.Value as double?;
+			var max = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 			reader.Read();
 			reader.Read();
-			var average = reader.Value as double?;
+			var average = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 			reader.Read();
 			reader.Read();
-			var sum = reader.Value as double?;
+			var sum = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 
-			var statsMetric = new StatsAggregate()
+			var statsMetric = new StatsAggregate
 			{
 				Average = average,
 				Count = count,
@@ -336,7 +344,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndObject)
 				return statsMetric;
 
-			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).Contains(Parser.AsStringSuffix))
+			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).EndsWith(Parser.AsStringSuffix))
 			{
 				reader.Read();
 				reader.Read();
@@ -350,7 +358,7 @@ namespace Nest
 
 		private IAggregate GetExtendedStatsAggregate(StatsAggregate statsMetric, JsonReader reader)
 		{
-			var extendedStatsMetric = new ExtendedStatsAggregate()
+			var extendedStatsMetric = new ExtendedStatsAggregate
 			{
 				Average = statsMetric.Average,
 				Count = statsMetric.Count,
@@ -360,16 +368,20 @@ namespace Nest
 			};
 
 			reader.Read();
-			extendedStatsMetric.SumOfSquares = reader.Value as double?;
+			extendedStatsMetric.SumOfSquares = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 			reader.Read();
 			reader.Read();
-			extendedStatsMetric.Variance = reader.Value as double?;
+			extendedStatsMetric.Variance = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 			reader.Read();
 			reader.Read();
-			extendedStatsMetric.StdDeviation = reader.Value as double?;
+			extendedStatsMetric.StdDeviation = reader.TokenType == JsonToken.Integer
+				? reader.Value as long?
+				: reader.Value as double?;
 			reader.Read();
-
-			string propertyName;
 
 			if (reader.TokenType != JsonToken.EndObject)
 			{
@@ -377,7 +389,7 @@ namespace Nest
 				reader.Read();
 				reader.Read();
 
-				propertyName = (string)reader.Value;
+				var propertyName = (string)reader.Value;
 				if (propertyName == Parser.Upper)
 				{
 					reader.Read();
@@ -396,7 +408,7 @@ namespace Nest
 				reader.Read();
 			}
 
-			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).Contains(Parser.AsStringSuffix))
+			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).EndsWith(Parser.AsStringSuffix))
 			{
 				// std_deviation_bounds is an object, so we need to skip its properties
 				if (((string)reader.Value).Equals(Parser.StdDeviationBoundsAsString))
