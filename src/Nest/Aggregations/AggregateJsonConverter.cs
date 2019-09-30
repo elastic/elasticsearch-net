@@ -336,8 +336,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndObject)
 				return statsMetric;
 
-			var propertyName = (string)reader.Value;
-			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
+			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).Contains(Parser.AsStringSuffix))
 			{
 				reader.Read();
 				reader.Read();
@@ -397,11 +396,10 @@ namespace Nest
 				reader.Read();
 			}
 
-			propertyName = (string)reader.Value;
-			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
+			while (reader.TokenType != JsonToken.EndObject && ((string)reader.Value).Contains(Parser.AsStringSuffix))
 			{
 				// std_deviation_bounds is an object, so we need to skip its properties
-				if (propertyName.Equals(Parser.StdDeviationBoundsAsString))
+				if (((string)reader.Value).Equals(Parser.StdDeviationBoundsAsString))
 				{
 					reader.Read();
 					reader.Read();
