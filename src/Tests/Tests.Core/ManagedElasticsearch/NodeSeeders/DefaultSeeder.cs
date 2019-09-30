@@ -347,6 +347,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 						.Category(c => c
 							.Name("color")
 						)
+						.GeoLocation(c => c
+							.Name("geo")
+							.Precision("1")
+						)
 					)
 				)
 				.Scalar(p => p.NumberOfCommits, n => n.Store())

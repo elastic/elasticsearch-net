@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
@@ -7,9 +8,15 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IGeoSuggestContext : ISuggestContext
 	{
-		[DataMember(Name = "neighbors")]
+		[IgnoreDataMember]
+		[Obsolete("No longer valid. Will be removed in next major release")]
 		bool? Neighbors { get; set; }
 
+		/// <summary>
+		/// The precision of the geohash to encode the query geo point.
+		/// Only the first value will be serialized.
+		/// </summary>
+		[JsonFormatter(typeof(SerializeAsSingleFormatter<string>))]
 		[DataMember(Name = "precision")]
 		IEnumerable<string> Precision { get; set; }
 	}
@@ -17,8 +24,10 @@ namespace Nest
 	[DataContract]
 	public class GeoSuggestContext : SuggestContextBase, IGeoSuggestContext
 	{
+		[Obsolete("No longer valid. Will be removed in next major release")]
 		public bool? Neighbors { get; set; }
 
+		/// <inheritdoc />
 		public IEnumerable<string> Precision { get; set; }
 		public override string Type => "geo";
 	}
@@ -29,11 +38,15 @@ namespace Nest
 		where T : class
 	{
 		protected override string Type => "geo";
+
+		[Obsolete("No longer valid. Will be removed in next major release")]
 		bool? IGeoSuggestContext.Neighbors { get; set; }
 		IEnumerable<string> IGeoSuggestContext.Precision { get; set; }
 
+		/// <inheritdoc cref="IGeoSuggestContext.Precision" />
 		public GeoSuggestContextDescriptor<T> Precision(params string[] precisions) => Assign(precisions, (a, v) => a.Precision = v);
 
+		[Obsolete("No longer valid. Will be removed in next major release")]
 		public GeoSuggestContextDescriptor<T> Neighbors(bool? neighbors = true) => Assign(neighbors, (a, v) => a.Neighbors = v);
 	}
 }
