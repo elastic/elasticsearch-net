@@ -1,4 +1,4 @@
-module Tests.YamlRunner.TestsRunner
+namespace Tests.YamlRunner
 
 open System
 open ShellProgressBar
@@ -8,110 +8,113 @@ open Tests.YamlRunner.OperationExecutor
 open Tests.YamlRunner.Stashes
 open Elasticsearch.Net
 
-let private randomTime = Random()
-
-let RunOperation file section operation nth stashes (progress:IProgressBar) = async {
-    let executionContext = {
-        Suite= OpenSource
-        File= file
-        Folder= file.Directory
-        Section= section
-        NthOperation= nth
-        Operation= operation
-        Stashes = stashes
+type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions:ProgressBarOptions) =
+    
+    member this.OperationExecutor = OperationExecutor(client)
+    
+    member private this.RunOperation file section operation nth stashes (subProgressBar:IProgressBar) = async {
+        let executionContext = {
+            Suite= OpenSource
+            File= file
+            Folder= file.Directory
+            Section= section
+            NthOperation= nth
+            Operation= operation
+            Stashes = stashes
+        }
+        let! pass = this.OperationExecutor.Execute executionContext subProgressBar
+        match pass with
+        | Failed f ->
+            let c = pass.Context
+            subProgressBar.WriteLine <| sprintf "%s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
+        | _ -> ignore()
+        return pass
     }
-    let! pass = OperationExecutor.Execute executionContext progress
-    match pass with
-    | Failed f ->
-        let c = pass.Context
-        progress.WriteLine <| sprintf "%s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
-    | _ -> ignore()
-    return pass
-}
-
-let private createOperations m file (ops:Operations) progress = 
-    let executedOperations =
-        let stashes = Stashes()
-        ops
-        |> List.indexed
-        |> List.map (fun (i, op) -> async {
-            let! pass = RunOperation file m op i stashes progress
-            //let! x = Async.Sleep <| randomTime.Next(0, 10)
-            return pass
-        })
-    (m, executedOperations)
-
-let RunTestFile progress (file:YamlTestDocument) = async {
     
-    let m section ops = createOperations section file.FileInfo ops progress
-    
-    let setup =  file.Setup |> Option.map (m "Setup") |> Option.toList 
-    let teardown = file.Teardown |> Option.map (m "Teardown") |> Option.toList 
-    let passed = file.Tests |> List.map (fun s -> s.Operations |> m s.Name) 
-    
-    let sections = setup @ passed @ teardown
-    
-    let l = sections.Length
-    let ops = sections |> List.sumBy (fun (_, i) -> i.Length)
-    progress.MaxTicks <- ops
-    
-    let runSection progressHeader sectionHeader (ops: Async<ExecutionResult> list) = async {
-        let l = ops |> List.length
-        let result =
+    member private this.CreateOperations m file (ops:Operations) subProgressBar = 
+        let executedOperations =
+            let stashes = Stashes()
             ops
             |> List.indexed
-            |> Seq.unfold (fun ms ->
-                match ms with
-                | (i, op) :: tl ->
-                    let operations = sprintf "%s [%i/%i] operations: %s" progressHeader (i+1) l sectionHeader
-                    progress.Tick(operations)
-                    let r = Async.RunSynchronously op
-                    match r with
-                    | Succeeded context -> Some (r, tl)
-                    | Skipped context -> Some (r, tl)
-                    | Failed context -> Some (r, [])
-                | [] -> None
-            )
-            |> List.ofSeq
-        return result
-    }
-    
-    let runAllSections =
-        sections
-        |> Seq.indexed
-        |> Seq.map (fun (i, suite) -> 
-            let progressHeader = sprintf "[%i/%i] sections" (i+1) l
-            let (sectionHeader, ops) = suite
-            runSection progressHeader sectionHeader ops 
-        )
-        |> Seq.map Async.RunSynchronously
-    
-    return runAllSections |> Seq.toList
-    
-}
+            |> List.map (fun (i, op) -> async {
+                let! pass = this.RunOperation file m op i stashes subProgressBar
+                //let! x = Async.Sleep <| randomTime.Next(0, 10)
+                return pass
+            })
+        (m, executedOperations)
 
-let RunTestsInFolder (progress:IProgressBar) (barOptions:ProgressBarOptions) mainMessage (folder:YamlTestFolder) = async {
-    let l = folder.Files.Length
-    let run (i, document) = async {
-        let file = sprintf "%s/%s" document.FileInfo.Directory.Name document.FileInfo.Name
-        let message = sprintf "%s [%i/%i] Files : %s" mainMessage (i+1) l file
-        progress.Tick(message)
-        let message = sprintf "Inspecting file for sections" 
-        use p = progress.Spawn(0, message, barOptions)
+
+    member private this.RunTestFile subProgressbar (file:YamlTestDocument) = async {
         
-        let x = DoMapper.Client.Indices.Delete<VoidResponse>("*") 
-        let x = DoMapper.Client.Indices.DeleteTemplateForAll<VoidResponse>("*")
+        let m section ops = this.CreateOperations section file.FileInfo ops subProgressbar
         
-        let! result = RunTestFile p document
+        let setup =  file.Setup |> Option.map (m "Setup") |> Option.toList 
+        let teardown = file.Teardown |> Option.map (m "Teardown") |> Option.toList 
+        let passed = file.Tests |> List.map (fun s -> s.Operations |> m s.Name) 
         
-        return result
+        let sections = setup @ passed @ teardown
+        
+        let l = sections.Length
+        let ops = sections |> List.sumBy (fun (_, i) -> i.Length)
+        subProgressbar.MaxTicks <- ops
+        
+        let runSection progressHeader sectionHeader (ops: Async<ExecutionResult> list) = async {
+            let l = ops |> List.length
+            let result =
+                ops
+                |> List.indexed
+                |> Seq.unfold (fun ms ->
+                    match ms with
+                    | (i, op) :: tl ->
+                        let operations = sprintf "%s [%i/%i] operations: %s" progressHeader (i+1) l sectionHeader
+                        subProgressbar.Tick(operations)
+                        let r = Async.RunSynchronously op
+                        match r with
+                        | Succeeded context -> Some (r, tl)
+                        | Skipped context -> Some (r, tl)
+                        | Failed context -> Some (r, [])
+                    | [] -> None
+                )
+                |> List.ofSeq
+            return result
+        }
+        
+        let runAllSections =
+            sections
+            |> Seq.indexed
+            |> Seq.map (fun (i, suite) -> 
+                let progressHeader = sprintf "[%i/%i] sections" (i+1) l
+                let (sectionHeader, ops) = suite
+                runSection progressHeader sectionHeader ops 
+            )
+            |> Seq.map Async.RunSynchronously
+        
+        return runAllSections |> Seq.toList
+        
     }
-        
-    let actions =
-        folder.Files
-        |> Seq.indexed 
-        |> Seq.map run 
-        |> Seq.map Async.RunSynchronously
-    return actions
-}
+
+    member this.RunTestsInFolder mainMessage (folder:YamlTestFolder) = async {
+        let l = folder.Files.Length
+        let run (i, document) = async {
+            let file = sprintf "%s/%s" document.FileInfo.Directory.Name document.FileInfo.Name
+            let message = sprintf "%s [%i/%i] Files : %s" mainMessage (i+1) l file
+            progress.Tick(message)
+            let message = sprintf "Inspecting file for sections" 
+            use p = progress.Spawn(0, message, barOptions)
+            
+            let x = client.Indices.Delete<VoidResponse>("*") 
+            let x = client.Indices.DeleteTemplateForAll<VoidResponse>("*")
+            
+            let! result = this.RunTestFile p document
+            
+            return result
+        }
+            
+        let actions =
+            folder.Files
+            |> Seq.indexed 
+            |> Seq.map run 
+            |> Seq.map Async.RunSynchronously
+        return actions
+    }
 

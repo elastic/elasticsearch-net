@@ -28,6 +28,9 @@
     <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
     <Content Include="..\..\appveyor.yml"><Link>appveyor.yml</Link></Content>
     <Content Include="..\..\azure-pipelines.yml"><Link>azure-pipelines.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\yaml-runner.yml">
+      <Link>yaml-runner.yml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="4.7.0" />

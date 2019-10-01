@@ -9,9 +9,8 @@ open System.IO
 open System.Linq
 open System.Linq.Expressions
 open System.Threading.Tasks
-open Elasticsearch.Net
-open Elasticsearch.Net
 open Tests.YamlRunner.Models
+open Elasticsearch.Net
 
 type ApiInvoke = delegate of Object * Object[] -> Task<DynamicResponse>
 
@@ -163,7 +162,7 @@ let createApiLookup (invokers: FastApiInvoke list) : (YamlMap -> FastApiInvoke) 
     lookup
     
     
-let clientApiDispatch (client:IElasticLowLevelClient) =
+let createDoMap (client:IElasticLowLevelClient) =
     let t = client.GetType()
     let mapsApiAttribute = t.Assembly.GetType("Elasticsearch.Net.MapsApiAttribute")
     
@@ -181,12 +180,6 @@ let clientApiDispatch (client:IElasticLowLevelClient) =
     |> Map.ofList<String, FastApiInvoke list>
     |> Map.map<String, FastApiInvoke list, (YamlMap -> FastApiInvoke)>(fun k v -> createApiLookup v)
 
-let Client = 
-    let settings = new ConnectionConfiguration(new Uri("http://ipv4.fiddler:9200"))
-    let x = settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
-    new ElasticLowLevelClient(x)
     
-let DoMap =
-    clientApiDispatch Client
         
 

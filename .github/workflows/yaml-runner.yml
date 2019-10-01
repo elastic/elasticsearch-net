@@ -1,0 +1,39 @@
+name: Yaml integration tests
+
+on:
+  push:
+    branches:
+    - spike/master/gh-actions
+  pull_request:
+    branches:
+    - spike/master/gh-actions
+
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    
+    container:
+      image:  mcr.microsoft.com/dotnet/core/sdk:3.0
+
+    services:
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/8.0.0-SNAPSHOT
+        env:
+          node.name: es1
+          cluster.name: elasticsearch-gh-actions
+          cluster.initial_master_nodes: es1
+          discovery.seed_hosts: es1
+          cluster.routing.allocation.disk.threshold_enabled: false
+          bootstrap.memory_lock: true
+          node.attr.testattr: test
+          path.repo: tmp
+          repositories.url.allowed_urls: http://snapshot.test 
+        ports:
+        - 9200:9200
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+
+    steps:
+    - uses: actions/checkout@v1     
+    - run: dotnet-run -f create -e http://elasticsearch:${{ job.services.elasticsearch.ports[9200] }} 
+      working-directory: ./src/Tests/Tests.YamlRunner
