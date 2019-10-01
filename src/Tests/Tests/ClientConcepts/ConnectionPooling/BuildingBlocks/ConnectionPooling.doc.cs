@@ -222,14 +222,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			IEnumerable<StaticConnectionPool> CreatStaticConnectionPools()
 			{
 				Thread.Sleep(1);
-
-				var uris = new[]
-				{
-					new Uri("https://10.0.0.1:9200/"),
-					new Uri("https://10.0.0.2:9200/"),
-					new Uri("https://10.0.0.3:9200/")
-				};
-
+				var uris = Enumerable.Range(1, 50).Select(i => new Uri($"https://10.0.0.{i}:9200/"));
 				yield return new StaticConnectionPool(uris);
 			}
 
