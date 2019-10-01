@@ -214,6 +214,30 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			}
 		}
 
+		// hide
+		[U] public void RandomizedInitialNodes()
+		{
+			StaticConnectionPool CreatStaticConnectionPool()
+			{
+				var uris = new[]
+				{
+					new Uri("https://10.0.0.1:9200/"),
+					new Uri("https://10.0.0.2:9200/"),
+					new Uri("https://10.0.0.3:9200/")
+				};
+
+				var staticConnectionPool = new StaticConnectionPool(uris);
+				return staticConnectionPool;
+			}
+
+			// assertion works on the probability of seeing a Uri other than https://10.0.0.1:9200/
+			// as the first value over 50 runs, when randomized.
+			Enumerable.Repeat(CreatStaticConnectionPool().CreateView().First().Uri.ToString(), 50)
+				.All(uri => uri == "https://10.0.0.1:9200/")
+				.Should()
+				.BeFalse();
+		}
+
 		/**[[sniffing-connection-pool]]
 		* ==== SniffingConnectionPool
 		*

@@ -15,24 +15,38 @@ namespace Elasticsearch.Net
 			: this(uris.Select(uri => new Node(uri)), randomize, dateTimeProvider) { }
 
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: this(nodes, null, dateTimeProvider) => Randomize = randomize;
+		{
+			nodes.ThrowIfEmpty(nameof(nodes));
+			Randomize = randomize;
+			Initialize(nodes, dateTimeProvider);
+		}
 
 		//this constructor is protected because nodeScorer only makes sense on subclasses that support reseeding
 		//otherwise just manually sort `nodes` before instantiating.
 		protected StaticConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
 		{
 			nodes.ThrowIfEmpty(nameof(nodes));
+			_nodeScorer = nodeScorer;
+			Initialize(nodes, dateTimeProvider);
+		}
+
+		private void Initialize(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider)
+		{
 			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
 
-			var nn = nodes.ToList();
-			var uris = nn.Select(n => n.Uri).ToList();
-			if (uris.Select(u => u.Scheme).Distinct().Count() > 1)
-				throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
+			string scheme = null;
+			foreach (var node in nodes)
+			{
+				if (scheme == null)
+				{
+					scheme = node.Uri.Scheme;
+					UsingSsl = scheme == "https";
+				}
+				else if (scheme != node.Uri.Scheme)
+					throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
+			}
 
-			UsingSsl = uris.Any(uri => uri.Scheme == "https");
-
-			_nodeScorer = nodeScorer;
-			InternalNodes = SortNodes(nn)
+			InternalNodes = SortNodes(nodes)
 				.DistinctBy(n => n.Uri)
 				.ToList();
 			LastUpdate = DateTimeProvider.Now();
@@ -57,7 +71,7 @@ namespace Elasticsearch.Net
 		public virtual bool SupportsReseeding => false;
 
 		/// <inheritdoc />
-		public bool UsingSsl { get; }
+		public bool UsingSsl { get; private set; }
 
 		protected List<Node> AliveNodes
 		{
@@ -70,7 +84,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		protected IDateTimeProvider DateTimeProvider { get; }
+		protected IDateTimeProvider DateTimeProvider { get; private set; }
 
 		protected List<Node> InternalNodes { get; set; }
 		protected Random Random { get; } = new Random();
