@@ -30,7 +30,7 @@ jobs:
           repositories.url.allowed_urls: http://snapshot.test 
         ports:
         - 9200:9200
-        options: --attach --no-healthcheck
+        options: --attach 
 
     steps:
     - uses: actions/checkout@v1     
