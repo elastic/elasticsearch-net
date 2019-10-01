@@ -27,11 +27,12 @@ jobs:
           bootstrap.memory_lock: true
           node.attr.testattr: test
           path.repo: tmp
-          repositories.url.allowed_urls: http://snapshot.test 
+          repositories.url.allowed_urls: http://snapshot.test
+          ES_JAVA_OPTS: Xms1g -Xmx1g
         ports:
         - 9200:9200
-        options: --no-healthcheck
-
+        options: --health-cmd="curl -fsSL http://localhost:9200/_cat/health?h=status" --health-interval=5s --health-retries=12 --health-timeout=2s --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 
+        
     steps:
     - uses: actions/checkout@v1     
     - run: dotnet-run -f create -e http://elasticsearch:${{ job.services.elasticsearch.ports[9200] }} 
