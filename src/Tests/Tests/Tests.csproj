@@ -6,6 +6,7 @@
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
     <IsTestProject>True</IsTestProject>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="Elasticsearch.Net.VirtualizedCluster" Version="$(TestPackageVersion)" />

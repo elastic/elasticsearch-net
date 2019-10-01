@@ -73,7 +73,7 @@ namespace DocGenerator.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 
 			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)",
-				$"{github}/tree/{Program.BranchName}/src/Tests/Tests/");
+				$"{github}/tree/{Program.DocVersion}/src/Tests/Tests/");
 
 			_newDocument.Insert(0, new Comment
 			{
