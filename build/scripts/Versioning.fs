@@ -20,7 +20,7 @@ module Versioning =
 
     //Versions in form of e.g 6.1.0 is inferred as datetime so we bake the json shape into the provider like this
     type SdkVersion = { version:string;  }
-    type GlobalJson = { sdk: SdkVersion; version:string; }
+    type GlobalJson = { sdk: SdkVersion; version:string; doc_current:string; }
         
     let private globalJson () =
         let jsonString = File.ReadAllText "global.json"
