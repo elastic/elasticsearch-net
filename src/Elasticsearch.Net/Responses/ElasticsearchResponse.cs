@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
 				return ServerError.TryCreate(stream, out serverError);
 		}
 
-		protected bool TryGetServerErrorReason(out string reason)
+		protected virtual bool TryGetServerErrorReason(out string reason)
 		{
 			reason = null;
 			if (!TryGetServerError(out var serverError)) return false;
