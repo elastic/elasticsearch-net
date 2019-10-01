@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -217,8 +219,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		// hide
 		[U] public void RandomizedInitialNodes()
 		{
-			StaticConnectionPool CreatStaticConnectionPool()
+			IEnumerable<StaticConnectionPool> CreatStaticConnectionPools()
 			{
+				Thread.Sleep(1);
+
 				var uris = new[]
 				{
 					new Uri("https://10.0.0.1:9200/"),
@@ -226,13 +230,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 					new Uri("https://10.0.0.3:9200/")
 				};
 
-				var staticConnectionPool = new StaticConnectionPool(uris);
-				return staticConnectionPool;
+				yield return new StaticConnectionPool(uris);
 			}
 
 			// assertion works on the probability of seeing a Uri other than https://10.0.0.1:9200/
 			// as the first value over 50 runs, when randomized.
-			Enumerable.Repeat(CreatStaticConnectionPool().CreateView().First().Uri.ToString(), 50)
+			CreatStaticConnectionPools()
+				.Take(50)
+				.Select(p => p.CreateView().First().Uri.ToString())
 				.All(uri => uri == "https://10.0.0.1:9200/")
 				.Should()
 				.BeFalse();
