@@ -31,7 +31,7 @@ jobs:
           ES_JAVA_OPTS: Xms1g -Xmx1g
         ports:
         - 9200:9200
-        options: --health-cmd="curl -fsSL http://localhost:9200/_cat/health?h=status" --health-interval=5s --health-retries=12 --health-timeout=2s --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 
+        options: -h es1 --health-cmd="curl -fsSL http://localhost:9200/_cat/health?h=status" --health-interval=5s --health-retries=12 --health-timeout=2s --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 
         
     steps:
     - uses: actions/checkout@v1     
