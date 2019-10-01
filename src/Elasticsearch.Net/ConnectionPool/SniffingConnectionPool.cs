@@ -17,7 +17,7 @@ namespace Elasticsearch.Net
 			: base(nodes, randomize, dateTimeProvider) { }
 
 		public SniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
-			: base(nodes, nodeScorer, dateTimeProvider) { }
+			: base(nodes, nodeScorer, false, dateTimeProvider) { }
 
 		/// <inheritdoc />
 		public override IReadOnlyCollection<Node> Nodes
