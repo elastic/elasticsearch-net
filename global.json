@@ -2,5 +2,6 @@
   "sdk": {
     "version": "3.0.100"
   },
-  "version": "6.8.2"
+  "version": "6.8.2",
+  "doc_current": "6.8"
 }
