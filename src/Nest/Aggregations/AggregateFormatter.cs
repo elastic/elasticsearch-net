@@ -436,7 +436,7 @@ namespace Nest
 
 			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
-			while (reader.GetCurrentJsonToken() != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
+			while (reader.GetCurrentJsonToken() != JsonToken.EndObject && propertyName.EndsWith(Parser.AsStringSuffix))
 			{
 				reader.ReadNext(); // <value>
 				if (reader.GetCurrentJsonToken() == JsonToken.ValueSeparator)

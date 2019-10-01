@@ -16,8 +16,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	* === Ignoring properties
 	* Properties on a POCO can be ignored for mapping purposes in a few ways:
 	*
-	* - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to
+	* - Using the `Ignore` property on a derived `ElasticsearchPropertyAttributeBase` type, such as `TextAttribute`, applied to
 	* the property that should be ignored on the POCO
+	*
+	* - Using the `Ignore` property on `PropertyNameAttribute` applied to a property that should be ignored on the POCO
 	*
 	* - Using the `.DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
 	* selector)` on `ConnectionSettings`
@@ -41,7 +43,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			[Text(Ignore = true)]
 			public string PropertyToIgnore { get; set; }
 
+			[PropertyName("anotherPropertyToIgnore", Ignore = true)]
 			public string AnotherPropertyToIgnore { get; set; }
+
+			public string FluentMappingPropertyToIgnore { get; set; }
 
 			[Ignore, JsonIgnore]
 			public string JsonIgnoredProperty { get; set; }
@@ -54,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
 				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In a production application, you would likely not call this as it adds overhead to each call.
 				.DefaultMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(m => m
-					.Ignore(p => p.AnotherPropertyToIgnore)
+					.Ignore(p => p.FluentMappingPropertyToIgnore)
 				);
 
 			var client = new ElasticClient(connectionSettings);

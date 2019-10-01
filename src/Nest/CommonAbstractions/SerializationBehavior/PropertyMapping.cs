@@ -65,7 +65,10 @@ namespace Nest
 			if (ignore == null && propertyName == null && dataMemberProperty == null) return null;
 
 			return new PropertyMapping
-				{ Name = propertyName?.Name ?? dataMemberProperty?.Name, Ignore = ignore != null };
+			{
+				Name = propertyName?.Name ?? dataMemberProperty?.Name,
+				Ignore = ignore != null || propertyName != null && propertyName.Ignore
+			};
 		}
 	}
 }
