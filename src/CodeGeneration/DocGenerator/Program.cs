@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using CommandLine;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DocGenerator
 {
@@ -31,14 +33,12 @@ namespace DocGenerator
 			OutputDirPath = Path.Combine(r, "docs");
 			BuildOutputPath = Path.Combine(r, "build", "output");
 
-			var globalJsonVersion = string.Join(".", Regex.Matches(File.ReadAllText(globalJson), "\"doc_current\": \"(.*)\"")
-										 .Last()
-										 .Groups[^1]
-										 .Value
-										 .Split(".")
-										 .Take(2));
+			var jObject = JObject.Parse(File.ReadAllText(globalJson));
 
-			DocVersion = globalJsonVersion;
+			DocVersion = string.Join(".", jObject["doc_current"]
+				.Value<string>()
+				.Split(".")
+				.Take(2));
 
 			var process = new Process
 			{
