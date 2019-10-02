@@ -48,6 +48,9 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     let client = createClient endpoint
     
+    let r = client.RootNodeInfo<StringResponse>()
+    printfn "%s" r.DebugInformation
+    
     let! locateResults = Commands.LocateTests namedSuite revision directory file
     match downloadOnly with
     | true ->
