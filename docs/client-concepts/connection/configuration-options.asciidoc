@@ -32,7 +32,7 @@ Basic Authentication credentials to send with all requests to Elasticsearch
 
 `ClientCertificate`::
 
-Use a `X509Certificate` to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+Use a `X509Certificate` to authenticate all HTTP requests.             You can also set them on individual request using `ClientCertificates`
 
 `ClientCertificate`::
 
@@ -120,7 +120,7 @@ When not specified, defaults to `RequestTimeout` , which itself defaults to `60`
 
 `NodePredicate`::
 
-Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes. When using an `IConnectionPool` implementation that supports reseeding of nodes, this will default to omitting master only             node from regular API calls.             When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken             verbatim.
+Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes. When using an `IConnectionPool` implementation that supports reseeding of nodes, this will default to             omitting master only             node from regular API calls.             When using static or single node connection pooling it is assumed the list of node you instantiate the client with             should be taken             verbatim.
 
 `OnRequestCompleted`::
 
@@ -158,7 +158,7 @@ Configure the client to skip deserialization of certain status codes e.g: you ru
 
 `SniffLifeSpan`::
 
-Set the duration after which a cluster state is considered stale and a sniff should be performed again. An `IConnectionPool` has to signal it supports reseeding, otherwise sniffing will never happen.             Defaults to 1 hour.             Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
+Set the duration after which a cluster state is considered stale and a sniff should be performed again. An `IConnectionPool` has to signal it supports reseeding, otherwise sniffing will never happen.             Defaults to 1 hour.             Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for             SupportsReseeding
 
 `SniffOnConnectionFault`::
 
