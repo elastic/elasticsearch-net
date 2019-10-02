@@ -17,8 +17,10 @@ please modify the original csharp file found at the link and submit the PR with 
 
 Properties on a POCO can be ignored for mapping purposes in a few ways:
 
-* Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to
+* Using the `Ignore` property on a derived `ElasticsearchPropertyAttributeBase` type, such as `TextAttribute`, applied to
 the property that should be ignored on the POCO
+
+* Using the `Ignore` property on `PropertyNameAttribute` applied to a property that should be ignored on the POCO
 
 * Using the `.DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
 selector)` on `ConnectionSettings`
@@ -42,7 +44,10 @@ public class CompanyWithAttributesAndPropertiesToIgnore
     [Text(Ignore = true)]
     public string PropertyToIgnore { get; set; }
 
+    [PropertyName("anotherPropertyToIgnore", Ignore = true)]
     public string AnotherPropertyToIgnore { get; set; }
+
+    public string FluentMappingPropertyToIgnore { get; set; }
 
     [Ignore, JsonIgnore]
     public string JsonIgnoredProperty { get; set; }
@@ -56,7 +61,7 @@ All of the properties except `Name` have been ignored in the mapping
 var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
     .DisableDirectStreaming() <2>
     .DefaultMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(m => m
-        .Ignore(p => p.AnotherPropertyToIgnore)
+        .Ignore(p => p.FluentMappingPropertyToIgnore)
     );
 
 var client = new ElasticClient(connectionSettings);

@@ -97,42 +97,28 @@ to the request, change the maximum number of connections allowed to an endpoint,
 By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
 provides some examples
 
-On .NET full framework the overrides on HttpConnection are different as they are geared towards using HttpWebRequest.
-Here are two examples for .NET full framework
-
 [source,csharp]
 ----
 public class MyCustomHttpConnection : HttpConnection
 {
-    protected override void AlterServicePoint(ServicePoint requestServicePoint, RequestData requestData)
+    protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
     {
-        base.AlterServicePoint(requestServicePoint, requestData);
-        requestServicePoint.ConnectionLimit = 10000;
-        requestServicePoint.UseNagleAlgorithm = true;
+        var message = base.CreateRequestMessage(requestData);
+        var header = string.Empty;
+        message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
+        return message;
     }
 }
 
-public class X509CertificateHttpConnection : HttpConnection
+public class KerberosConnection : HttpConnection
 {
-    protected override HttpWebRequest CreateHttpWebRequest(RequestData requestData)
+    protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
     {
-        var request = base.CreateHttpWebRequest(requestData);
-        request.ClientCertificates.Add(new X509Certificate("file_path_to_cert"));
-        return request;
+        var message = base.CreateRequestMessage(requestData);
+        var header = string.Empty;
+        message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
+        return message;
     }
 }
 ----
-
-As before, a new instance of the custom connection is passed to `ConnectionSettings` in order to
-use
-
-[source,csharp]
-----
-var connection = new X509CertificateHttpConnection();
-var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-var settings = new ConnectionSettings(connectionPool, connection);
-var client = new ElasticClient(settings);
-----
-
-See <<working-with-certificates, Working with certificates>> for further details.
 
