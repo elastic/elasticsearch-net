@@ -13,7 +13,6 @@ type Arguments =
     | [<AltCommandLine("-t")>]TestFile of string
     | [<AltCommandLine("-e")>]Endpoint of string
     | [<AltCommandLine("-r")>]Revision of string
-    | [<AltCommandLine("-D");>]DownloadOnly of bool
     with
     interface IArgParserTemplate with
         member s.Usage =
@@ -23,43 +22,60 @@ type Arguments =
             | Folder _ -> "Only run tests in this folder"
             | TestFile _ -> "Only run tests starting with this filename"
             | Endpoint _ -> "The elasticsearch endpoint to run tests against"
-            | DownloadOnly _ -> "Only download the tests, do not attempt to run them"
+
+let private runningProxy = Process.GetProcessesByName("fiddler").Length + Process.GetProcessesByName("mitmproxy").Length > 0
+let private defaultEndpoint = 
+    let defaultHost = if runningProxy then "ipv4.fiddler" else "localhost";
+    sprintf "http://%s:9200" defaultHost;
 
 let private createClient endpoint = 
-    let runningProxy = Process.GetProcessesByName("fiddler").Length + Process.GetProcessesByName("mitmproxy").Length > 0
-    let defaultHost = if runningProxy then "ipv4.fiddler" else "localhost";
-    let defaultUrl = sprintf "http://%s:9200" defaultHost;
-    let uri = match endpoint with | Some s -> new Uri(s) | _ -> new Uri(defaultUrl)
+    let uri = new Uri(endpoint)
     let settings = new ConnectionConfiguration(uri)
     let settings =
         match runningProxy with
         | true -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
         | _ -> settings
     new ElasticLowLevelClient(settings)
+    
+let validateRevisionParams endpoint passedRevision =    
+    let client = createClient endpoint
+    let r =
+        let config = new RequestConfiguration(DisableDirectStreaming=Nullable(true))
+        let p = new RootNodeInfoRequestParameters(RequestConfiguration = config)
+        client.RootNodeInfo<DynamicResponse>(p)
+        
+    printfn "%s" r.DebugInformation
+    if not r.Success then
+        failwithf "No running elasticsearch found at %s" endpoint
+    
+    let version = r.Get<string>("version.number") 
+    let runningRevision = r.Get<string>("version.build_hash")
+    
+    // TODO validate the endpoint running confirms to expected `passedRevision`
+    // needs to handle tags (7.4.0) and branches (7.x, 7.4, master)
+    // not quite sure whats the rules are
+    let revision = runningRevision
+        
+    (client, revision, version)
+    
+ 
 
 let runMain (parsed:ParseResults<Arguments>) = async {
     
     let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
-    let revision = parsed.TryGetResult Revision |> Option.defaultValue "master"
     let directory = parsed.TryGetResult Folder //|> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
-    let endpoint = parsed.TryGetResult Endpoint
-    let downloadOnly = parsed.TryGetResult DownloadOnly |> Option.defaultValue false
+    let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue defaultEndpoint
+    let passedRevision = parsed.TryGetResult Revision
     
-    let client = createClient endpoint
+    let (client, revision, version) = validateRevisionParams endpoint passedRevision
     
-    let r = client.RootNodeInfo<StringResponse>()
-    printfn "%s" r.DebugInformation
+    printfn "Found version %s downloading specs from: %s" version revision
     
     let! locateResults = Commands.LocateTests namedSuite revision directory file
-    match downloadOnly with
-    | true ->
-        let exitCode = if locateResults.Length > 0 then 0 else 1;
-        return exitCode
-    | false ->
-        let readResults = Commands.ReadTests locateResults 
-        let! runTesults = Commands.RunTests readResults client
-        return 0
+    let readResults = Commands.ReadTests locateResults 
+    let! runTesults = Commands.RunTests readResults client
+    return 0
 }
 
 [<EntryPoint>]
