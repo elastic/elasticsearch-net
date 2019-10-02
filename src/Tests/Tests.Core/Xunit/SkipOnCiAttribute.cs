@@ -12,4 +12,12 @@ namespace Tests.Core.Xunit
 		public static bool RunningOnAppVeyor => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR_BUILD_VERSION"));
 		public override bool Skip => RunningOnTeamCity || RunningOnAppVeyor || RunningOnAzureDevops;
 	}
+
+	public class SkipAttribute : SkipTestAttributeBase
+	{
+		public SkipAttribute(string reason) => Reason = reason;
+
+		public override bool Skip => true;
+		public override string Reason { get; }
+	}
 }
