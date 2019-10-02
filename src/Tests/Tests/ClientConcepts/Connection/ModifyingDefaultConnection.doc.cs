@@ -120,15 +120,16 @@ namespace Tests.ClientConcepts.Connection
 		*
 		* By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
 		* provides some examples
-		*
-		*
+		*/
+#if !DOTNETCORE
+
+		/**
 		* [[servicepoint-behaviour]]
 		* ===== ServicePoint behaviour
 		*
 		* If you are running on the Desktop CLR you can override specific properties for the current `ServicePoint` easily
 		* by overriding `AlterServicePoint` on an `IConnection` implementation deriving from `HttpConnection`
 		*/
-#if !DOTNETCORE
 		public class MyCustomHttpConnection : HttpConnection
 		{
 			protected override void AlterServicePoint(ServicePoint requestServicePoint, RequestData requestData)
@@ -186,15 +187,16 @@ namespace Tests.ClientConcepts.Connection
 		 */
 #endif
 #if DOTNETCORE
-		/*
+		/**
 		* [[kerberos-authentication]]
 		* ===== Kerberos Authentication
 		*
-		* For a lot of use cases subclassing HttpConnection is a great way to customize the http connection for your needs.
-		* E.g if you want to authenticate with Kerberos, creating a custom HttpConnection as followed allows you to set the right HTTP headers.
+		* For a lot of use cases, deriving from `HttpConnection` is a great way to customize the connection for your needs.
+		* If you want to authenticate with Kerberos for example, creating a custom `HttpConnection` as follows
+		* allows you to set the right HTTP headers
 		*
 		*
-		* TIP use something like https://www.nuget.org/packages/Kerberos.NET/ to fill in the actual blanks of this implementation
+		* TIP: use something like https://www.nuget.org/packages/Kerberos.NET/ to fill in the actual blanks of this implementation
 		*/
 		public class KerberosConnection : HttpConnection
 		{
