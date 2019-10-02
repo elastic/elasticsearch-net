@@ -29,7 +29,8 @@ namespace DocGenerator.AsciiDoc
 			if (directoryAttribute != null) document.Attributes.Remove(directoryAttribute);
 
 			var github = "https://github.com/elastic/elasticsearch-net";
-			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/Tests/");
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"),
+				@"^(.*Tests/)", $"{github}/tree/{Program.BranchName}/src/Tests/Tests/");
 			document.Insert(0, new Comment
 			{
 				Style = CommentStyle.MultiLine,
