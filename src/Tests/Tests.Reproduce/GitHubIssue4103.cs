@@ -51,7 +51,10 @@ namespace Tests.Reproduce
 			            ""upper"": ""2019-09-26T20:05:53.344Z"",
 			            ""lower"": ""2019-09-26T17:56:16.529Z""
 			        }
-			      }
+			      },
+				  ""sum"" : {
+                    ""value"": 40
+                  }
 			  }
 			}";
 
@@ -65,6 +68,8 @@ namespace Tests.Reproduce
 			searchResponse.ShouldNotThrow();
 
 			var response = client.Search<object>(s => s.AllIndices());
+
+			response.Aggregations.Count.Should().Be(2);
 
 			var extendedStats = response.Aggregations.ExtendedStats("1");
 			extendedStats.Should().NotBeNull();

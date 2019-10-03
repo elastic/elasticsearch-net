@@ -413,10 +413,11 @@ namespace Nest
 				// std_deviation_bounds is an object, so we need to skip its properties
 				if (((string)reader.Value).Equals(Parser.StdDeviationBoundsAsString))
 				{
-					reader.Read();
-					reader.Read();
-					reader.Read();
-					reader.Read();
+					reader.Read(); // move to {
+					reader.Read(); // move to "upper"
+					reader.Read(); // move to upper date value
+					reader.Read(); // move to "lower"
+					reader.Read(); // move to lower date value. Subsequent 2 reads will read closing "std_deviation_bounds_as_string" } and next token
 				}
 				reader.Read();
 				reader.Read();
