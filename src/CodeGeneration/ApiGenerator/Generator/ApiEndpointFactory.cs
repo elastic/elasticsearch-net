@@ -7,35 +7,37 @@ using ApiGenerator.Configuration.Overrides;
 using ApiGenerator.Domain;
 using ApiGenerator.Domain.Code;
 using ApiGenerator.Domain.Specification;
+using Microsoft.Extensions.DependencyModel;
 using Newtonsoft.Json.Linq;
 
-namespace ApiGenerator.Generator 
+namespace ApiGenerator.Generator
 {
 	public static class ApiEndpointFactory
 	{
 		public static ApiEndpoint FromFile(string jsonFile)
 		{
 			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
+			TransformNewSpecStructureToOld(officialJsonSpec);
 			PatchOfficialSpec(officialJsonSpec, jsonFile);
 			var (name, endpoint) = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
-			
+
 			endpoint.FileName = Path.GetFileName(jsonFile);
 			endpoint.Name = name;
 			var tokens = name.Split(".");
-			
+
 			endpoint.MethodName = tokens.Last();
 			if (tokens.Length > 1)
 				endpoint.Namespace = tokens[0];
 			//todo side effect
 			endpoint.CsharpNames = new CsharpNames(name, endpoint.MethodName, endpoint.Namespace);
-			
+
 			LoadOverridesOnEndpoint(endpoint);
 			PatchRequestParameters(endpoint);
 
 			EnforceRequiredOnParts(jsonFile, endpoint.Url);
 			return endpoint;
 		}
-		
+
 		/// <summary>
 		/// This makes sure required is configured correctly by inspecting the paths.
 		/// Will emit a warning if the spec file got this wrong
@@ -70,7 +72,7 @@ namespace ApiGenerator.Generator
 			var newParams = ApiQueryParametersPatcher.Patch(endpoint.Name, endpoint.Url.Params, endpoint.Overrides);
 			endpoint.Url.Params = newParams;
 		}
-		
+
 		/// <summary>
 		/// Finds a patch file in patches and union merges this with the official spec.
 		/// This allows us to check in tweaks should breaking changes occur in the spec before we catch them
@@ -101,6 +103,74 @@ namespace ApiGenerator.Generator
 
 			ReplaceOptions("*.url.parts.metric.options");
 			ReplaceOptions("*.url.parts.index_metric.options");
+		}
+
+		/// <summary>
+		/// Changes the structure of new REST API spec in 7.4.0 to one that matches prior spec structure.
+		/// </summary>
+		private static void TransformNewSpecStructureToOld(JObject original)
+		{
+			var name = (JProperty)original.First;
+			var spec = (JObject)name.Value;
+
+			// old spec structure, nothing to change
+			if (spec.ContainsKey("methods"))
+				return;
+
+			var methods = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+			JObject parts = null;
+			var paths = new List<string>();
+			var deprecatedPaths = new List<JObject>();
+
+			foreach (var path in spec["url"]["paths"].Cast<JObject>())
+			{
+				if (path.ContainsKey("deprecated"))
+				{
+					var deprecated = new JObject
+					{
+						["version"] = path["deprecated"]["version"].Value<string>(),
+						["path"] = path["path"].Value<string>(),
+						["description"] = path["deprecated"]["description"].Value<string>()
+					};
+
+					deprecatedPaths.Add(deprecated);
+				}
+				else
+					paths.Add(path["path"].Value<string>());
+
+				if (path.ContainsKey("parts"))
+				{
+					if (parts == null)
+						parts = path["parts"].Value<JObject>();
+					else
+						parts.Merge(path["parts"].Value<JObject>());
+				}
+
+				foreach (var method in path["methods"].Cast<JValue>())
+					methods.Add(method.Value<string>());
+			}
+
+
+
+			var newUrl = new JObject
+			{
+				["paths"] = new JArray(paths.ToArray()),
+			};
+
+			if (spec.ContainsKey("params"))
+			{
+				newUrl["params"] = spec["params"];
+				spec.Remove("params");
+			}
+
+			if (parts != null)
+				newUrl["parts"] = parts;
+
+			if (deprecatedPaths.Any())
+				newUrl["deprecated_paths"] = new JArray(deprecatedPaths.ToArray());
+
+			spec["url"] = newUrl;
+			spec["methods"] = new JArray(methods.ToArray());
 		}
 	}
 }
