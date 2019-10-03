@@ -28,6 +28,6 @@ namespace Nest
 
 		public GeoSuggestContextDescriptor<T> Precision(Distance precision) => Assign(precision, (a, v) => a.Precision = v);
 
-		public GeoSuggestContextDescriptor<T> Precision(int precision) => Assign(precision, (a, v) => a.Precision = v);
+		public GeoSuggestContextDescriptor<T> Precision(int? precision) => Assign(precision, (a, v) => a.Precision = v);
 	}
 }
