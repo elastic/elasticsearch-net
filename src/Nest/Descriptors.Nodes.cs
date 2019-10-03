@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.NodesApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for HotThreads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
+	///<summary>Descriptor for HotThreads <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 	public partial class NodesHotThreadsDescriptor : RequestDescriptorBase<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesHotThreads;
@@ -64,7 +64,7 @@ namespace Nest
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>Descriptor for Info <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
+	///<summary>Descriptor for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 	public partial class NodesInfoDescriptor : RequestDescriptorBase<NodesInfoDescriptor, NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesInfo;
@@ -130,7 +130,7 @@ namespace Nest
 		public ReloadSecureSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>Descriptor for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
+	///<summary>Descriptor for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 	public partial class NodesStatsDescriptor : RequestDescriptorBase<NodesStatsDescriptor, NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesStats;
@@ -211,7 +211,7 @@ namespace Nest
 		public NodesStatsDescriptor Types(params string[] types) => Qs("types", types);
 	}
 
-	///<summary>Descriptor for Usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
+	///<summary>Descriptor for Usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 	public partial class NodesUsageDescriptor : RequestDescriptorBase<NodesUsageDescriptor, NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesUsage;

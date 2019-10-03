@@ -143,7 +143,10 @@ namespace ApiGenerator.Generator
 					if (parts == null)
 						parts = path["parts"].Value<JObject>();
 					else
-						parts.Merge(path["parts"].Value<JObject>());
+						parts.Merge(path["parts"].Value<JObject>(), new JsonMergeSettings
+						{
+							MergeArrayHandling = MergeArrayHandling.Union
+						});
 				}
 
 				foreach (var method in path["methods"].Cast<JValue>())

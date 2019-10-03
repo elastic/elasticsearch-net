@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.ClusterApi
 {
-	///<summary>Request options for AllocationExplain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
+	///<summary>Request options for AllocationExplain <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
 	public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for GetSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+	///<summary>Request options for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for Health <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
+	///<summary>Request options for Health <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</para></summary>
 	public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -158,7 +158,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for PendingTasks <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</para></summary>
+	///<summary>Request options for PendingTasks <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</para></summary>
 	public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -177,7 +177,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for PutSettings <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+	///<summary>Request options for PutSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -203,13 +203,13 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for RemoteInfo <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</para></summary>
+	///<summary>Request options for RemoteInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</para></summary>
 	public class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for Reroute <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
+	///<summary>Request options for Reroute <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
 	public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -256,7 +256,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for State <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
+	///<summary>Request options for State <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</para></summary>
 	public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -320,7 +320,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
+	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</para></summary>
 	public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
