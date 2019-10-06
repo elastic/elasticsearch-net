@@ -18,6 +18,7 @@
     <Compile Include="OperationExecutor.fs" />
     <Compile Include="TestsReader.fs" />
     <Compile Include="TestsRunner.fs" />
+    <Compile Include="TestsExporter.fs" />
     <Compile Include="Commands.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

@@ -6,6 +6,7 @@ open Tests.YamlRunner.AsyncExtensions
 open Tests.YamlRunner.TestsLocator
 open Tests.YamlRunner.TestsReader
 open Elasticsearch.Net
+open Tests.YamlRunner
 
 let private barOptions = 
     ProgressBarOptions(
@@ -37,6 +38,7 @@ let ReadTests (tests:LocateResults list) =
 let RunTests (tests:YamlTestFolder list) client = async {
     do! Async.SwitchToNewThread()
     
+    
     let f = tests.Length
     let l = tests |> List.sumBy (fun t -> t.Files.Length)
     use progress = new ProgressBar(l, sprintf "Folders [0/%i]" l, barOptions)
@@ -44,7 +46,7 @@ let RunTests (tests:YamlTestFolder list) client = async {
     let a (i, v) = async {
         let mainMessage = sprintf "[%i/%i] Folders : %s | " (i+1) f v.Folder
         let! op = runner.RunTestsInFolder mainMessage v
-        return op |> Seq.toList
+        return v, op |> Seq.toList
     }
     let x =
         tests
@@ -57,4 +59,6 @@ let RunTests (tests:YamlTestFolder list) client = async {
         
     return x
 }
+
+let ExportTests = TestsExporter.Export 
 

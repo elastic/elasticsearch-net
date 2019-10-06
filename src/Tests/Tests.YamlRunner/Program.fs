@@ -2,9 +2,11 @@
 
 open System
 open System.Diagnostics
+open System.Xml.Linq
 open Argu
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
+open Tests.YamlRunner.OperationExecutor
 open Elasticsearch.Net
 
 type Arguments =
@@ -74,7 +76,13 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     let! locateResults = Commands.LocateTests namedSuite revision directory file
     let readResults = Commands.ReadTests locateResults 
-    let! runTesults = Commands.RunTests readResults client
+    let! runResults = Commands.RunTests readResults client
+    let testsFile = Commands.ExportTests runResults
+    
+    printfn "--> %s" testsFile
+    
+    let contents = System.IO.File.ReadAllText testsFile
+    printfn "%s" contents
     return 0
 }
 

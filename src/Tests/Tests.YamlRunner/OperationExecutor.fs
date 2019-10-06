@@ -11,6 +11,7 @@ open Elasticsearch.Net
 open Newtonsoft.Json
 open Newtonsoft.Json.Linq
 open System.Collections.Generic
+open System.Diagnostics
 
 type ExecutionContext = {
     Suite: TestSuite
@@ -20,10 +21,13 @@ type ExecutionContext = {
     NthOperation: int
     Operation: Operation
     Stashes: Stashes
+    Elapsed: int64 ref
 }
     with member __.Throw message = failwithf "%s" message
 
-type Fail = SeenException of ExecutionContext * Exception | ValidationFailure of ExecutionContext * string
+type Fail =
+    | SeenException of ExecutionContext * Exception
+    | ValidationFailure of ExecutionContext * string
     with
         member this.Context = match this with | SeenException (c, _) -> c | ValidationFailure (c, _) -> c
         member this.Log () =
@@ -42,7 +46,7 @@ type ExecutionResult =
         member this.Context = match this with | Succeeded c -> c | Skipped c -> c | Failed f -> f.Context
 
 
-type OperationExecutor(client:IElasticLowLevelClient) = 
+type OperationExecutor(client:IElasticLowLevelClient) =
 
     member private this.OpMap = DoMapper.createDoMap client
     

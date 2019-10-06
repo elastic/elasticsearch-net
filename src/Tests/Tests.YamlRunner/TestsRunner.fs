@@ -1,6 +1,7 @@
 namespace Tests.YamlRunner
 
 open System
+open System.Diagnostics
 open ShellProgressBar
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader
@@ -21,8 +22,11 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
             NthOperation= nth
             Operation= operation
             Stashes = stashes
+            Elapsed = ref 0L
         }
+        let sw = Stopwatch.StartNew()
         let! pass = this.OperationExecutor.Execute executionContext subProgressBar
+        executionContext.Elapsed := sw.ElapsedMilliseconds
         match pass with
         | Failed f ->
             let c = pass.Context
@@ -76,7 +80,7 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
                     | [] -> None
                 )
                 |> List.ofSeq
-            return result
+            return sectionHeader, result
         }
         
         let runAllSections =
@@ -107,7 +111,7 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
             
             let! result = this.RunTestFile p document
             
-            return result
+            return document, result
         }
             
         let actions =
