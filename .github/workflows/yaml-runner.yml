@@ -42,6 +42,7 @@ jobs:
       env:
         DOTNET_ROOT: /opt/hostedtoolcache/dncs/3.0.100/x64
     - uses: actions/upload-artifact@master
+      if: always()
       with:
         name: junit-yaml-integration.xml
         path: build/output/junit-yaml-integration.xml
