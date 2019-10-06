@@ -17,15 +17,15 @@ jobs:
         image: docker.elastic.co/elasticsearch/elasticsearch:8.0.0-SNAPSHOT
         env:
           node.name: es1
-          #cluster.name: elasticsearch-gh-actions
+          cluster.name: elasticsearch-gh-actions
           discovery.type: single-node
           #cluster.initial_master_nodes: es1
           #discovery.seed_hosts: es1
-          #cluster.routing.allocation.disk.threshold_enabled: false
+          cluster.routing.allocation.disk.threshold_enabled: false
           #bootstrap.memory_lock: true
           node.attr.testattr: test
           #path.repo: tmp
-          #repositories.url.allowed_urls: http://snapshot.test
+          repositories.url.allowed_urls: http://snapshot.test
           #ES_JAVA_OPTS: Xms1g -Xmx1g
         ports:
         - 9200:9200
@@ -36,9 +36,6 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.0.100'
-    - run: echo ::debug file=app.js,line=1::Entered octocatAddition method
-    - run: echo ::warning file=x,line=1,col=2::message
-    - run: echo ::error file=app.js,line=10,col=15::Something went wrong
     - run: mkdir -p build/output
     - run: dotnet run -- -o ../../../build/output/junit-yaml-integration.xml -f create -e http://localhost:${{ job.services.elasticsearch.ports[9200] }} 
       working-directory: ./src/Tests/Tests.YamlRunner
