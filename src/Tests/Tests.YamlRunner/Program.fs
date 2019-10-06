@@ -15,6 +15,7 @@ type Arguments =
     | [<AltCommandLine("-t")>]TestFile of string
     | [<AltCommandLine("-e")>]Endpoint of string
     | [<AltCommandLine("-r")>]Revision of string
+    | [<AltCommandLine("-o")>]JUnitOutputFile of string
     with
     interface IArgParserTemplate with
         member s.Usage =
@@ -24,6 +25,7 @@ type Arguments =
             | Folder _ -> "Only run tests in this folder"
             | TestFile _ -> "Only run tests starting with this filename"
             | Endpoint _ -> "The elasticsearch endpoint to run tests against"
+            | JUnitOutputFile _ -> "The path and file name to use for the junit xml output, defaults to a random tmp filename"
 
 let private runningProxy = Process.GetProcessesByName("fiddler").Length + Process.GetProcessesByName("mitmproxy").Length > 0
 let private defaultEndpoint = 
@@ -60,8 +62,6 @@ let validateRevisionParams endpoint passedRevision =
         
     (client, revision, version)
     
- 
-
 let runMain (parsed:ParseResults<Arguments>) = async {
     
     let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
@@ -69,6 +69,9 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
     let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue defaultEndpoint
     let passedRevision = parsed.TryGetResult Revision
+    let outputFile =
+        parsed.TryGetResult JUnitOutputFile
+        |> Option.defaultValue (System.IO.Path.GetTempFileName())
     
     let (client, revision, version) = validateRevisionParams endpoint passedRevision
     
@@ -77,13 +80,16 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let! locateResults = Commands.LocateTests namedSuite revision directory file
     let readResults = Commands.ReadTests locateResults 
     let! runResults = Commands.RunTests readResults client
-    let testsFile = Commands.ExportTests runResults
+    let summary = Commands.ExportTests runResults outputFile
     
-    printfn "--> %s" testsFile
-    
-    let contents = System.IO.File.ReadAllText testsFile
+    let contents = System.IO.File.ReadAllText outputFile
     printfn "%s" contents
-    return 0
+    
+    printfn "Total Tests: %i Failed: %i Errors: %i Skipped: %i"
+        summary.Tests summary.Failed summary.Errors summary.Skipped
+    printfn "Total Time %O" <| TimeSpan.FromSeconds summary.Time
+        
+    return summary.Failed + summary.Errors
 }
 
 [<EntryPoint>]

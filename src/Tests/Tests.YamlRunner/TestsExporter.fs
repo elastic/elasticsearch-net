@@ -68,21 +68,32 @@ let testCases (results: FolderResults) =
     |> List.concat
     
 let countTests (xElement:XElement) =
-    let testCases = xElement.XPathSelectElements "//testcase"
-    let errors = xElement.XPathSelectElements "//testcase[errors]"
-    let failed = xElement.XPathSelectElements "//testcase[failure]"
-    let skipped = xElement.XPathSelectElements "//testcase[skipped]"
+    let xp = xElement.XPathSelectElements 
+    let x s = xp s |> Seq.length
+    let testCases = x "//testcase" 
+    let errors = x "//testcase[errors]"
+    let failed = x "//testcase[failure]"
+    let skipped = x "//testcase[skipped]"
     let time =
-        xElement.XPathSelectElements "//testcase[@time]"
+        xp "//testcase[@time]"
         |> Seq.map (fun a -> Double.Parse (a.Attribute(XName.Get "time")).Value)
         |> Seq.sum
         
-    let tests = XAttribute("tests", testCases |> Seq.length)
-    let failed = XAttribute("failures", failed |> Seq.length)
-    let errors = XAttribute("errors", errors |> Seq.length)
-    let skipped = XAttribute("disabled", skipped |> Seq.length)
-    let time = XAttribute("time", time)
-    xElement.Add(tests, failed, errors, skipped, time)
+    xElement.Add
+        (
+            XAttribute("tests", testCases),
+            XAttribute("failures", failed),
+            XAttribute("errors", errors),
+            XAttribute("disabled", skipped),
+            XAttribute("time", time)
+        )
+    {|
+       Tests = testCases;
+       Failed = failed;
+       Errors=errors;
+       Skipped= skipped;
+       Time = time
+    |}
 
 let testSuites (results: RunResults) =
     results
@@ -91,16 +102,14 @@ let testSuites (results: RunResults) =
         let testCases = testCases documents
         let suite = XElement("testsuite", [name])
         suite.Add(testCases)
-        countTests suite
+        let summary = countTests suite
         suite
     )
 
-let Export (results: RunResults) =
+let Export (results: RunResults) (outputFile:string) =
     let suites = testSuites results
-    
     let xml = XElement("testsuites", suites)
-    countTests xml
+    let summary = countTests xml
     
-    let fileName = System.IO.Path.GetTempFileName()
-    xml.Save(fileName)
-    fileName
+    xml.Save(outputFile)
+    summary
