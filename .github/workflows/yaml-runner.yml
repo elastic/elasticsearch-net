@@ -36,7 +36,8 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.0.100'
-    - run: dotnet run -- -o ../../build/output/junit-yaml-integration.xml -f create -e http://localhost:${{ job.services.elasticsearch.ports[9200] }} 
+    - run: mkdir -p build/output
+    - run: dotnet run -- -o ../../../build/output/junit-yaml-integration.xml -f create -e http://localhost:${{ job.services.elasticsearch.ports[9200] }} 
       working-directory: ./src/Tests/Tests.YamlRunner
       env:
         DOTNET_ROOT: /opt/hostedtoolcache/dncs/3.0.100/x64

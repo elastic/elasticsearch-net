@@ -112,7 +112,7 @@ let Export (results: RunResults) (outputFile:string) =
     let summary = countTests xml
     
     let fullPath = System.IO.Path.GetFullPath outputFile
-    printfn "Persisting junit file to :%s" fullPath
+    printfn "Persisting junit file to %s" fullPath
     
     xml.Save(outputFile)
     summary
