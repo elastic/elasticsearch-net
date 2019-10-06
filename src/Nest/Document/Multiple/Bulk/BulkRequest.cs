@@ -57,19 +57,9 @@ namespace Nest
 			Func<BulkDeleteDescriptor<T>, T, IBulkDeleteOperation<T>> bulkDeleteSelector = null
 		)
 			where T : class =>
-			AddOperations(@objects, bulkDeleteSelector, o => new BulkDeleteDescriptor<T>().Document(o));
-
-		/// <summary>
-		/// DeleteMany, convenience method to delete many objects at once.
-		/// </summary>
-		/// <param name="ids">Enumerable of string ids to delete</param>
-		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(
-			IEnumerable<string> ids,
-			Func<BulkDeleteDescriptor<T>, string, IBulkDeleteOperation<T>> bulkDeleteSelector = null
-		)
-			where T : class =>
-			AddOperations(ids, bulkDeleteSelector, id => new BulkDeleteDescriptor<T>().Id(id));
+			AddOperations(@objects, bulkDeleteSelector, o => o is string str ?
+				new BulkDeleteDescriptor<T>().Id(str) :
+				new BulkDeleteDescriptor<T>().Document(o));
 
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
