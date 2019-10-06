@@ -2,11 +2,9 @@
 
 open System
 open System.Diagnostics
-open System.Xml.Linq
 open Argu
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
-open Tests.YamlRunner.OperationExecutor
 open Elasticsearch.Net
 
 type Arguments =

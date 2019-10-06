@@ -111,5 +111,8 @@ let Export (results: RunResults) (outputFile:string) =
     let xml = XElement("testsuites", suites)
     let summary = countTests xml
     
+    let fullPath = System.IO.Path.GetFullPath outputFile
+    printfn "Persisting junit file to :%s" fullPath
+    
     xml.Save(outputFile)
     summary
