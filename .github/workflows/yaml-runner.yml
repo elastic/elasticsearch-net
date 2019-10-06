@@ -22,11 +22,11 @@ jobs:
           #cluster.initial_master_nodes: es1
           #discovery.seed_hosts: es1
           cluster.routing.allocation.disk.threshold_enabled: false
-          #bootstrap.memory_lock: true
+          bootstrap.memory_lock: true
           node.attr.testattr: test
           #path.repo: tmp
           repositories.url.allowed_urls: http://snapshot.test
-          ES_JAVA_OPTS: Xms1g -Xmx1g
+          #ES_JAVA_OPTS: Xms1g -Xmx1g
         ports:
         - 9200:9200
         options: -h es1 --health-cmd="curl -fsSL http://localhost:9200/_cat/health?h=status" --health-interval=5s --health-retries=12 --health-timeout=5s --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 
