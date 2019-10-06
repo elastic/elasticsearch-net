@@ -18,9 +18,9 @@ jobs:
         env:
           node.name: es1
           cluster.name: elasticsearch-gh-actions
-          #discovery.type: single-node
-          cluster.initial_master_nodes: es1
-          discovery.seed_hosts: es1
+          discovery.type: single-node
+          #cluster.initial_master_nodes: es1
+          #discovery.seed_hosts: es1
           cluster.routing.allocation.disk.threshold_enabled: false
           bootstrap.memory_lock: true
           node.attr.testattr: test
