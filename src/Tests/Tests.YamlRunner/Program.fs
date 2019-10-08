@@ -80,9 +80,9 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let! runResults = Commands.RunTests readResults client
     let summary = Commands.ExportTests runResults outputFile
     
-    let contents = System.IO.File.ReadAllText outputFile
-    printfn "%s" contents
+    Commands.PrettyPrintResults outputFile
     
+    printfn "JUnit output: %s" outputFile
     printfn "Total Tests: %i Failed: %i Errors: %i Skipped: %i"
         summary.Tests summary.Failed summary.Errors summary.Skipped
     printfn "Total Time %O" <| TimeSpan.FromSeconds summary.Time

@@ -60,5 +60,7 @@ let RunTests (tests:YamlTestFolder list) client = async {
     return x
 }
 
-let ExportTests = TestsExporter.Export 
+let ExportTests = TestsExporter.Export
+
+let PrettyPrintResults = TestsExporter.PrettyPrintResults 
 

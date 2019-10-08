@@ -116,3 +116,18 @@ let Export (results: RunResults) (outputFile:string) =
     
     xml.Save(outputFile)
     summary
+    
+let PrettyPrintResults (outputFile:string) =
+    let fullPath = System.IO.Path.GetFullPath outputFile
+    
+    let xml = XDocument.Load fullPath
+    let xp (e:XElement) = e.XPathSelectElements
+    
+    for suite in (xp xml.Root "//testsuite[testcase[failure|error]]") do
+        printfn "%s" <| suite.Attribute(XName.Get "name").Value
+        for testcase in (xp suite "testcase[failure|error]") do
+            printfn "  %s" <| testcase.Attribute(XName.Get "name").Value
+            for error in (xp testcase "failure|error") do
+                printfn "    %s" <| error.Attribute(XName.Get "message").Value
+    
+    

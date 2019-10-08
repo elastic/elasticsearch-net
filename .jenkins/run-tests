@@ -51,11 +51,13 @@ docker build --file .jenkins/DockerFile --tag elastic/elasticsearch-net .
 
 echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
+mkdir -p build/output
+
 docker run \
   --network=elasticsearch \
   --env "DOTNET_VERSION" \
   --name test-runner \
-  --volume ${repo}:/sln \
+  --volume ${repo}/build/output:/sln/build/output \
   --rm \
   elastic/elasticsearch-net \
   ./build.sh rest-spec-tests -f create -e ${elasticsearch_url} -o /sln/build/output/rest-spec-junit.xml
