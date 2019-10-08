@@ -9,7 +9,13 @@
           "path" : "/{index}/{type}/_delete_by_query",
           "description" : "Specifying types in urls has been deprecated"
         }
-      ]
+      ],
+      "params": {
+        "analyzer": {
+          "type" : "string",
+          "description" : "The analyzer to use for the query string"
+        }
+      }
     }
   }
 }

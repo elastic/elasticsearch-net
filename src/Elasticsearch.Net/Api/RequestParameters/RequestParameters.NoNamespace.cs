@@ -361,6 +361,13 @@ namespace Elasticsearch.Net
 			set => Q("analyze_wildcard", value);
 		}
 
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer
+		{
+			get => Q<string>("analyzer");
+			set => Q("analyzer", value);
+		}
+
 		///<summary>What to do when the delete by query hits version conflicts?</summary>
 		public Conflicts? Conflicts
 		{
@@ -1245,6 +1252,13 @@ namespace Elasticsearch.Net
 	public class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips
+		{
+			get => Q<bool? >("ccs_minimize_roundtrips");
+			set => Q("ccs_minimize_roundtrips", value);
+		}
+
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches
 		{
@@ -1782,6 +1796,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<bool? >("allow_no_indices");
 			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips
+		{
+			get => Q<bool? >("ccs_minimize_roundtrips");
+			set => Q("ccs_minimize_roundtrips", value);
 		}
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>

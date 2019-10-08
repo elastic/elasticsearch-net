@@ -300,6 +300,8 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public DeleteByQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzewildcard = true) => Qs("analyze_wildcard", analyzewildcard);
+		///<summary>The analyzer to use for the query string</summary>
+		public DeleteByQueryDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>What to do when the delete by query hits version conflicts?</summary>
 		public DeleteByQueryDescriptor<TDocument> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
 		///<summary>The default operator for query string query (AND or OR)</summary>
@@ -1019,6 +1021,8 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public MultiSearchTemplateDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public MultiSearchTemplateDescriptor CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? maxconcurrentsearches) => Qs("max_concurrent_searches", maxconcurrentsearches);
 		///<summary>Search operation type</summary>
@@ -1374,6 +1378,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchTemplateDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public SearchTemplateDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SearchTemplateDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
