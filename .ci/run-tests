@@ -25,7 +25,7 @@ function cleanup {
     NODE_NAME=${NODE_NAME} \
     NETWORK_NAME=elasticsearch \
     CLEANUP=true \
-    bash ./.jenkins/run-elasticsearch.sh
+    bash ./.ci/run-elasticsearch.sh
   # Report status and exit
   if [[ "$status" == "0" ]]; then
     echo -e "\n\033[32;1mSUCCESS run-tests\033[0m"
@@ -43,11 +43,11 @@ ELASTICSEARCH_VERSION=${elasticsearch_image}:${ELASTICSEARCH_VERSION} \
   NODE_NAME=${NODE_NAME} \
   NETWORK_NAME=elasticsearch \
   DETACH=true \
-  bash ./.jenkins/run-elasticsearch.sh
+  bash ./.ci/run-elasticsearch.sh
 
 echo -e "\033[1m>>>>> Build [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
-docker build --file .jenkins/DockerFile --tag elastic/elasticsearch-net .
+docker build --file .ci/DockerFile --tag elastic/elasticsearch-net .
 
 echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 

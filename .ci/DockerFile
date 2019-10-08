@@ -23,7 +23,7 @@ RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basen
 
 # copy these manually since these do not follow a pattern under src
 COPY build/scripts/scripts.fsproj ./build/scripts/
-COPY .jenkins/Jenkins.csproj ./.jenkins/
+COPY .ci/Jenkins.csproj ./.ci/
 
 RUN dotnet restore src/Elasticsearch.sln
 

@@ -85,7 +85,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamplesGenerator", "Exampl
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests.YamlRunner", "Tests\Tests.YamlRunner\Tests.YamlRunner.fsproj", "{81473437-5722-4829-A5CD-125B17CCA238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jenkins", "..\.jenkins\Jenkins.csproj", "{5A9C1B95-9280-433E-8D1B-1F5396126166}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jenkins", "..\.ci\Jenkins.csproj", "{5A9C1B95-9280-433E-8D1B-1F5396126166}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
