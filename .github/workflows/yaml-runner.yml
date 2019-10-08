@@ -3,10 +3,10 @@ name: Yaml integration tests
 on:
   push:
     branches:
-    - feature/master/yaml-test-runner
+    - feature/master/yaml-test-runner-disabled
   pull_request:
     branches:
-    - feature/master/yaml-test-runner
+    - feature/master/yaml-test-runner-disabled
 
 jobs:
   yaml-tests:
@@ -32,7 +32,6 @@ jobs:
         options: -h es1 --health-cmd="curl -fsSL http://localhost:9200/_cat/health?h=status" --health-interval=5s --health-retries=12 --health-timeout=5s --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 
         
     steps:
-    - run: docker logs es1
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.0.100'
