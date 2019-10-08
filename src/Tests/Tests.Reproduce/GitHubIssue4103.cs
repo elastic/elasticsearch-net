@@ -51,7 +51,10 @@ namespace Tests.Reproduce
 			            ""upper"": ""2019-09-26T20:05:53.344Z"",
 			            ""lower"": ""2019-09-26T17:56:16.529Z""
 			        }
-			      }
+			      },
+				  ""sum"" : {
+                    ""value"": 40
+                  }
 			  }
 			}";
 
@@ -66,6 +69,8 @@ namespace Tests.Reproduce
 
 			var response = client.Search<object>(s => s.AllIndices());
 
+			response.Aggregations.Count.Should().Be(2);
+
 			var extendedStats = response.Aggregations.ExtendedStats("1");
 			extendedStats.Should().NotBeNull();
 			extendedStats.Count.Should().Be(3);
@@ -79,6 +84,10 @@ namespace Tests.Reproduce
 			extendedStats.StdDeviationBounds.Should().NotBeNull();
 			extendedStats.StdDeviationBounds.Upper.Should().Be(1569528353344.9695);
 			extendedStats.StdDeviationBounds.Lower.Should().Be(1569520576529.0305);
+
+			var sum = response.Aggregations.Sum("sum");
+			sum.Should().NotBeNull();
+			sum.Value.Should().Be(40);
 		}
 	}
 }
