@@ -11,6 +11,8 @@ namespace ApiGenerator.Domain.Code.LowLevel
 
 		public string Arguments { get; set; }
 		public string OfficialDocumentationLink { get; set; }
+
+		public Stability Stability { get; set; }
 		public string PerPathMethodName { get; set; }
 		public string HttpMethod { get; set; }
 

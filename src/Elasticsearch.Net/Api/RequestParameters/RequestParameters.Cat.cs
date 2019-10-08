@@ -387,6 +387,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("help", value);
 		}
 
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public bool? IncludeUnloadedSegments
+		{
+			get => Q<bool? >("include_unloaded_segments");
+			set => Q("include_unloaded_segments", value);
+		}
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{

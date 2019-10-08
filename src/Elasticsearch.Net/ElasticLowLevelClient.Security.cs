@@ -341,13 +341,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/role/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
-		///<param name = "body">The role to add</param>
+		///<param name = "body">The role mapping to add</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutRoleMapping<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_security/role_mapping/{name:name}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</para></summary>
 		///<param name = "name">Role-mapping name</param>
-		///<param name = "body">The role to add</param>
+		///<param name = "body">The role mapping to add</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> PutRoleMappingAsync<TResponse>(string name, PostData body, PutRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/role_mapping/{name:name}"), ctx, body, RequestParams(requestParameters));

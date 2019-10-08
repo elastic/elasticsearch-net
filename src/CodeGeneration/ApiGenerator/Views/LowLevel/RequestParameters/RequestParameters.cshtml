@@ -5,6 +5,7 @@
 @using ApiGenerator
 @using ApiGenerator.Domain.Code
 @using ApiGenerator.Domain.Specification
+@using CsQuery.ExtensionMethods.Internal
 @inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
 @{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 @{
@@ -29,7 +30,7 @@ namespace Elasticsearch.Net@(ns)
 		var supportsBody = endpoint.Body != null;
 		var names = r.CsharpNames;
 <text>
-	///<summary>Request options for @names.MethodName <para>@r.OfficialDocumentationLink</para></summary>
+	///<summary>Request options for @names.MethodName@Raw(r.OfficialDocumentationLink.IsNullOrEmpty() ? "" : " <para>" + r.OfficialDocumentationLink + "</para>")</summary>
 	public class @names.ParametersName : RequestParameters<@names.ParametersName> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@r.HttpMethod;

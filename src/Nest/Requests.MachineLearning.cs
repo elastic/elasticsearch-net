@@ -94,7 +94,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendar <para></para></summary>
+	///<summary>Request for DeleteCalendar</summary>
 	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 	{
 		protected IDeleteCalendarRequest Self => this;
@@ -133,7 +133,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendarEvent <para></para></summary>
+	///<summary>Request for DeleteCalendarEvent</summary>
 	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 	{
 		protected IDeleteCalendarEventRequest Self => this;
@@ -175,7 +175,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendarJob <para></para></summary>
+	///<summary>Request for DeleteCalendarJob</summary>
 	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 	{
 		protected IDeleteCalendarJobRequest Self => this;
@@ -245,7 +245,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for DeleteExpiredData <para></para></summary>
+	///<summary>Request for DeleteExpiredData</summary>
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
@@ -264,7 +264,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteFilter <para></para></summary>
+	///<summary>Request for DeleteFilter</summary>
 	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
 	{
 		protected IDeleteFilterRequest Self => this;
@@ -479,7 +479,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ForecastJob <para></para></summary>
+	///<summary>Request for ForecastJob</summary>
 	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 	{
 		protected IForecastJobRequest Self => this;
@@ -560,7 +560,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCalendarEvents <para></para></summary>
+	///<summary>Request for GetCalendarEvents</summary>
 	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 	{
 		protected IGetCalendarEventsRequest Self => this;
@@ -613,7 +613,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCalendars <para></para></summary>
+	///<summary>Request for GetCalendars</summary>
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 	{
 		protected IGetCalendarsRequest Self => this;
@@ -769,7 +769,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetFilters <para></para></summary>
+	///<summary>Request for GetFilters</summary>
 	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
 	{
 		protected IGetFiltersRequest Self => this;
@@ -1032,7 +1032,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Info <para></para></summary>
+	///<summary>Request for Info</summary>
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
 		protected IMachineLearningInfoRequest Self => this;
@@ -1084,7 +1084,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PostCalendarEvents <para></para></summary>
+	///<summary>Request for PostCalendarEvents</summary>
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 	{
 		protected IPostCalendarEventsRequest Self => this;
@@ -1196,7 +1196,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutCalendar <para></para></summary>
+	///<summary>Request for PutCalendar</summary>
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 	{
 		protected IPutCalendarRequest Self => this;
@@ -1235,7 +1235,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutCalendarJob <para></para></summary>
+	///<summary>Request for PutCalendarJob</summary>
 	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 	{
 		protected IPutCalendarJobRequest Self => this;
@@ -1304,7 +1304,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutFilter <para></para></summary>
+	///<summary>Request for PutFilter</summary>
 	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
 	{
 		protected IPutFilterRequest Self => this;
@@ -1517,7 +1517,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateFilter <para></para></summary>
+	///<summary>Request for UpdateFilter</summary>
 	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
 	{
 		protected IUpdateFilterRequest Self => this;
@@ -1620,7 +1620,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateJob <para></para></summary>
+	///<summary>Request for ValidateJob</summary>
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
@@ -1634,7 +1634,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateDetector <para></para></summary>
+	///<summary>Request for ValidateDetector</summary>
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;

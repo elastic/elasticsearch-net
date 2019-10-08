@@ -48,6 +48,15 @@ namespace ApiGenerator.Generator
 				}
 			}
 
+			// Check if there are any non-Stable endpoints present.
+			foreach (var endpoint in spec.Endpoints)
+			{
+				if (endpoint.Value.Stability != Stability.Stable)
+				{
+					Warnings.Add($"Endpoint {endpoint.Value.Name} is not marked as Stable ({endpoint.Value.Stability})");
+				}
+			}
+
 			if (Warnings.Count == 0) return;
 
 			Console.ForegroundColor = ConsoleColor.Yellow;
@@ -106,7 +115,6 @@ namespace ApiGenerator.Generator
 				var isIgnored = CodeConfiguration.IgnoredApis.Contains($"{value}.json");
 				if (isIgnored) Warnings.Add($"{value} uses MapsApi: {key} ignored in ${nameof(CodeConfiguration)}.{nameof(CodeConfiguration.IgnoredApis)}");
 				else Warnings.Add($"{value} uses MapsApi: {key} which does not exist");
-
 			}
 
 			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };
@@ -119,7 +127,5 @@ namespace ApiGenerator.Generator
 			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, QueryParameters>>();
 			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, false);
 		}
-
-
 	}
 }

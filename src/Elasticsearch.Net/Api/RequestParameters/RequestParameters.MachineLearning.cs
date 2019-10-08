@@ -51,21 +51,21 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteCalendar <para></para></summary>
+	///<summary>Request options for DeleteCalendar</summary>
 	public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for DeleteCalendarEvent <para></para></summary>
+	///<summary>Request options for DeleteCalendarEvent</summary>
 	public class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for DeleteCalendarJob <para></para></summary>
+	///<summary>Request options for DeleteCalendarJob</summary>
 	public class DeleteCalendarJobRequestParameters : RequestParameters<DeleteCalendarJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -85,14 +85,14 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteExpiredData <para></para></summary>
+	///<summary>Request options for DeleteExpiredData</summary>
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for DeleteFilter <para></para></summary>
+	///<summary>Request options for DeleteFilter</summary>
 	public class DeleteFilterRequestParameters : RequestParameters<DeleteFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -159,7 +159,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for ForecastJob <para></para></summary>
+	///<summary>Request options for ForecastJob</summary>
 	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -173,7 +173,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for GetCalendarEvents <para></para></summary>
+	///<summary>Request options for GetCalendarEvents</summary>
 	public class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -200,7 +200,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetCalendars <para></para></summary>
+	///<summary>Request options for GetCalendars</summary>
 	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -240,7 +240,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetFilters <para></para></summary>
+	///<summary>Request options for GetFilters</summary>
 	public class GetFiltersRequestParameters : RequestParameters<GetFiltersRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -314,7 +314,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for Info <para></para></summary>
+	///<summary>Request options for Info</summary>
 	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -328,7 +328,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for PostCalendarEvents <para></para></summary>
+	///<summary>Request options for PostCalendarEvents</summary>
 	public class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -362,14 +362,14 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for PutCalendar <para></para></summary>
+	///<summary>Request options for PutCalendar</summary>
 	public class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for PutCalendarJob <para></para></summary>
+	///<summary>Request options for PutCalendarJob</summary>
 	public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -383,7 +383,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for PutFilter <para></para></summary>
+	///<summary>Request options for PutFilter</summary>
 	public class PutFilterRequestParameters : RequestParameters<PutFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -431,7 +431,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for UpdateFilter <para></para></summary>
+	///<summary>Request options for UpdateFilter</summary>
 	public class UpdateFilterRequestParameters : RequestParameters<UpdateFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -452,14 +452,14 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for ValidateJob <para></para></summary>
+	///<summary>Request options for ValidateJob</summary>
 	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for ValidateDetector <para></para></summary>
+	///<summary>Request options for ValidateDetector</summary>
 	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

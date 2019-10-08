@@ -1,10 +1,17 @@
 {
   "search_template": {
     "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html",
+    "stability": "stable",
     "methods": ["GET", "POST"],
     "url": {
-      "path": "/_search/template",
-      "paths": ["/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template"],
+      "paths": ["/_search/template", "/{index}/_search/template"],
+      "deprecated_paths" : [
+        {
+          "version" : "7.0.0",
+          "path" : "/{index}/{type}/_search/template",
+          "description" : "Specifying types in urls has been deprecated"
+        }
+      ],
       "parts": {
         "index": {
           "type" : "list",
