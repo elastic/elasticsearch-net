@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			response.Get<string>("object._arbitrary_key_").Should()
 				.NotBeEmpty()
-				.And.Be("value1");
+				.And.Be("first");
 
 			response.Get<int>("array.1").Should().Be(2);
 			response.Get<long>("array.1").Should().Be(2);
