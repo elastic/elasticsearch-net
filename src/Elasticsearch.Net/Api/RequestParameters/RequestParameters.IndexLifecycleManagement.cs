@@ -34,6 +34,19 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 	public class ExplainLifecycleRequestParameters : RequestParameters<ExplainLifecycleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>filters the indices included in the response to ones in an ILM error state, implies only_managed</summary>
+		public bool? OnlyErrors
+		{
+			get => Q<bool? >("only_errors");
+			set => Q("only_errors", value);
+		}
+
+		///<summary>filters the indices included in the response to ones managed by ILM</summary>
+		public bool? OnlyManaged
+		{
+			get => Q<bool? >("only_managed");
+			set => Q("only_managed", value);
+		}
 	}
 
 	///<summary>Request options for GetLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>

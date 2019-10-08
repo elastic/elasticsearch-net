@@ -47,7 +47,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Snapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for Snapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
 		protected ISnapshotRequest Self => this;
@@ -96,7 +96,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CreateRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for CreateRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		protected ICreateRepositoryRequest Self => this;
@@ -155,7 +155,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
 		protected IDeleteSnapshotRequest Self => this;
@@ -197,7 +197,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for DeleteRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 		protected IDeleteRepositoryRequest Self => this;
@@ -249,7 +249,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected IGetSnapshotRequest Self => this;
@@ -305,7 +305,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for GetRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
 		protected IGetRepositoryRequest Self => this;
@@ -356,7 +356,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Restore <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for Restore <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
 		protected IRestoreRequest Self => this;
@@ -411,7 +411,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for Status <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
 		protected ISnapshotStatusRequest Self => this;
@@ -465,7 +465,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for VerifyRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for VerifyRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
 		protected IVerifyRepositoryRequest Self => this;

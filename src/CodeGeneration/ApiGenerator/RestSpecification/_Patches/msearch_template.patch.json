@@ -9,7 +9,14 @@
           "path" : "/{index}/{type}/_msearch/template",
           "description" : "Specifying types in urls has been deprecated"
         }
-      ]
+      ],
+      "params": {
+        "ccs_minimize_roundtrips": {
+          "type" : "boolean",
+          "description" : "Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution",
+          "default" : "true"
+        }
+      }
     }
   }
 }

@@ -74,7 +74,11 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ExplainLifecycleDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
-	// Request parameters
+		// Request parameters
+		///<summary>filters the indices included in the response to ones in an ILM error state, implies only_managed</summary>
+		public ExplainLifecycleDescriptor OnlyErrors(bool? onlyerrors = true) => Qs("only_errors", onlyerrors);
+		///<summary>filters the indices included in the response to ones managed by ILM</summary>
+		public ExplainLifecycleDescriptor OnlyManaged(bool? onlymanaged = true) => Qs("only_managed", onlymanaged);
 	}
 
 	///<summary>Descriptor for GetLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>

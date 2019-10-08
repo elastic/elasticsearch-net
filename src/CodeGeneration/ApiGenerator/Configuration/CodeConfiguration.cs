@@ -26,6 +26,7 @@ namespace ApiGenerator.Configuration
 			"data_frame.put_data_frame_transform.json",
 			"data_frame.start_data_frame_transform.json",
 			"data_frame.stop_data_frame_transform.json",
+			"data_frame.update_data_frame_transform.json",
 
 			"ml.evaluate_data_frame.json",
 			"ml.delete_data_frame_analytics.json",
@@ -41,7 +42,15 @@ namespace ApiGenerator.Configuration
 			// these APIs are new and need to be mapped
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
-			"monitoring.bulk.json"
+			"monitoring.bulk.json",
+			"snapshot.cleanup_repository.json",
+			"ml.estimate_memory_usage.json",
+			"indices.clone.json",
+
+			"slm.delete_lifecycle.json",
+			"slm.execute_lifecycle.json",
+			"slm.get_lifecycle.json",
+			"slm.put_lifecycle.json",
 		};
 
 
