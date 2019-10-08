@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for HotThreads <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
+	///<summary>Request for HotThreads <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</para></summary>
 	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		protected INodesHotThreadsRequest Self => this;
@@ -120,7 +120,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Info <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
+	///<summary>Request for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		protected INodesInfoRequest Self => this;
@@ -230,7 +230,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
+	///<summary>Request for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</para></summary>
 	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		protected INodesStatsRequest Self => this;
@@ -355,7 +355,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
+	///<summary>Request for Usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</para></summary>
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
 		protected INodesUsageRequest Self => this;

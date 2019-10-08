@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.SnapshotApi
 {
-	///<summary>Request options for Snapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for Snapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class SnapshotRequestParameters : RequestParameters<SnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -44,7 +44,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for CreateRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for CreateRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class CreateRepositoryRequestParameters : RequestParameters<CreateRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -71,7 +71,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for DeleteRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for DeleteRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class DeleteRepositoryRequestParameters : RequestParameters<DeleteRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -104,7 +104,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -131,7 +131,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for GetRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for GetRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -151,7 +151,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for Restore <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for Restore <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class RestoreRequestParameters : RequestParameters<RestoreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -171,7 +171,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for Status <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for Status <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class SnapshotStatusRequestParameters : RequestParameters<SnapshotStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -191,7 +191,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for VerifyRepository <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for VerifyRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class VerifyRepositoryRequestParameters : RequestParameters<VerifyRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

@@ -29,7 +29,7 @@ using Elasticsearch.Net.Utf8Json;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for Bulk <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
+	///<summary>Descriptor for Bulk <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
 	public partial class BulkDescriptor : RequestDescriptorBase<BulkDescriptor, BulkRequestParameters, IBulkRequest>, IBulkRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
@@ -84,7 +84,7 @@ namespace Nest
 		public BulkDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>Descriptor for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
+	///<summary>Descriptor for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
 	public partial class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
@@ -92,7 +92,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Count <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
+	///<summary>Descriptor for Count <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 	public partial class CountDescriptor<TDocument> : RequestDescriptorBase<CountDescriptor<TDocument>, CountRequestParameters, ICountRequest<TDocument>>, ICountRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
@@ -153,7 +153,7 @@ namespace Nest
 		public CountDescriptor<TDocument> TerminateAfter(long? terminateafter) => Qs("terminate_after", terminateafter);
 	}
 
-	///<summary>Descriptor for Create <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+	///<summary>Descriptor for Create <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 	public partial class CreateDescriptor<TDocument> : RequestDescriptorBase<CreateDescriptor<TDocument>, CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
@@ -211,7 +211,7 @@ namespace Nest
 		public CreateDescriptor<TDocument> WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>Descriptor for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</para></summary>
+	///<summary>Descriptor for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</para></summary>
 	public partial class DeleteDescriptor<TDocument> : RequestDescriptorBase<DeleteDescriptor<TDocument>, DeleteRequestParameters, IDeleteRequest<TDocument>>, IDeleteRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
@@ -395,7 +395,7 @@ namespace Nest
 		public DeleteByQueryRethrottleDescriptor RequestsPerSecond(long? requestspersecond) => Qs("requests_per_second", requestspersecond);
 	}
 
-	///<summary>Descriptor for DeleteScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
+	///<summary>Descriptor for DeleteScript <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public partial class DeleteScriptDescriptor : RequestDescriptorBase<DeleteScriptDescriptor, DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
@@ -420,7 +420,7 @@ namespace Nest
 		public DeleteScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>Descriptor for DocumentExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
+	///<summary>Descriptor for DocumentExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class DocumentExistsDescriptor<TDocument> : RequestDescriptorBase<DocumentExistsDescriptor<TDocument>, DocumentExistsRequestParameters, IDocumentExistsRequest<TDocument>>, IDocumentExistsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDocumentExists;
@@ -490,7 +490,7 @@ namespace Nest
 		public DocumentExistsDescriptor<TDocument> VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
-	///<summary>Descriptor for SourceExists <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
+	///<summary>Descriptor for SourceExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class SourceExistsDescriptor<TDocument> : RequestDescriptorBase<SourceExistsDescriptor<TDocument>, SourceExistsRequestParameters, ISourceExistsRequest<TDocument>>, ISourceExistsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSourceExists;
@@ -556,7 +556,7 @@ namespace Nest
 		public SourceExistsDescriptor<TDocument> VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
-	///<summary>Descriptor for Explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</para></summary>
+	///<summary>Descriptor for Explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</para></summary>
 	public partial class ExplainDescriptor<TDocument> : RequestDescriptorBase<ExplainDescriptor<TDocument>, ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
@@ -626,7 +626,7 @@ namespace Nest
 		public ExplainDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 	}
 
-	///<summary>Descriptor for FieldCapabilities <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
+	///<summary>Descriptor for FieldCapabilities <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
 	public partial class FieldCapabilitiesDescriptor : RequestDescriptorBase<FieldCapabilitiesDescriptor, FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceFieldCapabilities;
@@ -666,7 +666,7 @@ namespace Nest
 		public FieldCapabilitiesDescriptor IncludeUnmapped(bool? includeunmapped = true) => Qs("include_unmapped", includeunmapped);
 	}
 
-	///<summary>Descriptor for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
+	///<summary>Descriptor for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class GetDescriptor<TDocument> : RequestDescriptorBase<GetDescriptor<TDocument>, GetRequestParameters, IGetRequest<TDocument>>, IGetRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
@@ -736,7 +736,7 @@ namespace Nest
 		public GetDescriptor<TDocument> VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
-	///<summary>Descriptor for GetScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
+	///<summary>Descriptor for GetScript <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public partial class GetScriptDescriptor : RequestDescriptorBase<GetScriptDescriptor, GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
@@ -759,7 +759,7 @@ namespace Nest
 		public GetScriptDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
-	///<summary>Descriptor for Source <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
+	///<summary>Descriptor for Source <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public partial class SourceDescriptor<TDocument> : RequestDescriptorBase<SourceDescriptor<TDocument>, SourceRequestParameters, ISourceRequest<TDocument>>, ISourceRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSource;
@@ -825,7 +825,7 @@ namespace Nest
 		public SourceDescriptor<TDocument> VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
-	///<summary>Descriptor for Index <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+	///<summary>Descriptor for Index <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 	public partial class IndexDescriptor<TDocument> : RequestDescriptorBase<IndexDescriptor<TDocument>, IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
@@ -896,7 +896,7 @@ namespace Nest
 		public IndexDescriptor<TDocument> WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>Descriptor for RootNodeInfo <para>http://www.elastic.co/guide/</para></summary>
+	///<summary>Descriptor for RootNodeInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</para></summary>
 	public partial class RootNodeInfoDescriptor : RequestDescriptorBase<RootNodeInfoDescriptor, RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRootNodeInfo;
@@ -904,7 +904,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for MultiGet <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</para></summary>
+	///<summary>Descriptor for MultiGet <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</para></summary>
 	public partial class MultiGetDescriptor : RequestDescriptorBase<MultiGetDescriptor, MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMultiGet;
@@ -955,7 +955,7 @@ namespace Nest
 			where T : class => Qs("_source_includes", fields?.Select(e => (Field)e));
 	}
 
-	///<summary>Descriptor for MultiSearch <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</para></summary>
+	///<summary>Descriptor for MultiSearch <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</para></summary>
 	public partial class MultiSearchDescriptor : RequestDescriptorBase<MultiSearchDescriptor, MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMultiSearch;
@@ -996,7 +996,7 @@ namespace Nest
 		public MultiSearchDescriptor TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>Descriptor for MultiSearchTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</para></summary>
+	///<summary>Descriptor for MultiSearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</para></summary>
 	public partial class MultiSearchTemplateDescriptor : RequestDescriptorBase<MultiSearchTemplateDescriptor, MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMultiSearchTemplate;
@@ -1033,7 +1033,7 @@ namespace Nest
 		public MultiSearchTemplateDescriptor TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>Descriptor for MultiTermVectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</para></summary>
+	///<summary>Descriptor for MultiTermVectors <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</para></summary>
 	public partial class MultiTermVectorsDescriptor : RequestDescriptorBase<MultiTermVectorsDescriptor, MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMultiTermVectors;
@@ -1089,7 +1089,7 @@ namespace Nest
 		public MultiTermVectorsDescriptor VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
-	///<summary>Descriptor for Ping <para>http://www.elastic.co/guide/</para></summary>
+	///<summary>Descriptor for Ping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</para></summary>
 	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
@@ -1097,7 +1097,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutScript <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
+	///<summary>Descriptor for PutScript <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public partial class PutScriptDescriptor : RequestDescriptorBase<PutScriptDescriptor, PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
@@ -1177,7 +1177,7 @@ namespace Nest
 		public ReindexRethrottleDescriptor RequestsPerSecond(long? requestspersecond) => Qs("requests_per_second", requestspersecond);
 	}
 
-	///<summary>Descriptor for RenderSearchTemplate <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para></summary>
+	///<summary>Descriptor for RenderSearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
 	public partial class RenderSearchTemplateDescriptor : RequestDescriptorBase<RenderSearchTemplateDescriptor, RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRenderSearchTemplate;
@@ -1207,7 +1207,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
+	///<summary>Descriptor for Scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public partial class ScrollDescriptor<TInferDocument> : RequestDescriptorBase<ScrollDescriptor<TInferDocument>, ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
@@ -1217,7 +1217,7 @@ namespace Nest
 		public ScrollDescriptor<TInferDocument> TotalHitsAsInteger(bool? totalhitsasinteger = true) => Qs("rest_total_hits_as_int", totalhitsasinteger);
 	}
 
-	///<summary>Descriptor for Search <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</para></summary>
+	///<summary>Descriptor for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</para></summary>
 	public partial class SearchDescriptor<TInferDocument> : RequestDescriptorBase<SearchDescriptor<TInferDocument>, SearchRequestParameters, ISearchRequest<TInferDocument>>, ISearchRequest<TInferDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
@@ -1306,7 +1306,7 @@ namespace Nest
 		public SearchDescriptor<TInferDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>Descriptor for SearchShards <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para></summary>
+	///<summary>Descriptor for SearchShards <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para></summary>
 	public partial class SearchShardsDescriptor<TDocument> : RequestDescriptorBase<SearchShardsDescriptor<TDocument>, SearchShardsRequestParameters, ISearchShardsRequest<TDocument>>, ISearchShardsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
@@ -1351,7 +1351,7 @@ namespace Nest
 		public SearchShardsDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 	}
 
-	///<summary>Descriptor for SearchTemplate <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para></summary>
+	///<summary>Descriptor for SearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para></summary>
 	public partial class SearchTemplateDescriptor<TDocument> : RequestDescriptorBase<SearchTemplateDescriptor<TDocument>, SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchTemplate;
@@ -1410,7 +1410,7 @@ namespace Nest
 		public SearchTemplateDescriptor<TDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>Descriptor for TermVectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</para></summary>
+	///<summary>Descriptor for TermVectors <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</para></summary>
 	public partial class TermVectorsDescriptor<TDocument> : RequestDescriptorBase<TermVectorsDescriptor<TDocument>, TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermVectors;
@@ -1485,7 +1485,7 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
-	///<summary>Descriptor for Update <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</para></summary>
+	///<summary>Descriptor for Update <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</para></summary>
 	public partial class UpdateDescriptor<TDocument, TPartialDocument> : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;

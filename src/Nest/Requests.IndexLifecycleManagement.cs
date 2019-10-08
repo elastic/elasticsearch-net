@@ -94,7 +94,20 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		IndexName IExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
-	// Request parameters
+		// Request parameters
+		///<summary>filters the indices included in the response to ones in an ILM error state, implies only_managed</summary>
+		public bool? OnlyErrors
+		{
+			get => Q<bool? >("only_errors");
+			set => Q("only_errors", value);
+		}
+
+		///<summary>filters the indices included in the response to ones managed by ILM</summary>
+		public bool? OnlyManaged
+		{
+			get => Q<bool? >("only_managed");
+			set => Q("only_managed", value);
+		}
 	}
 
 	[InterfaceDataContract]

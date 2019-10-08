@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApiGenerator.Configuration.Overrides;
@@ -7,6 +8,7 @@ using ApiGenerator.Domain.Code.HighLevel.Requests;
 using ApiGenerator.Domain.Code.LowLevel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace ApiGenerator.Domain.Specification
 {
@@ -32,7 +34,7 @@ namespace ApiGenerator.Domain.Specification
 		public Stability Stability { get; set; }
 
 		[JsonProperty("documentation")]
-		public string OfficialDocumentationLink { get; set; }
+		public Documentation OfficialDocumentationLink { get; set; }
 
 		public UrlInformation Url { get; set; }
 
@@ -48,13 +50,13 @@ namespace ApiGenerator.Domain.Specification
 			CsharpNames = CsharpNames,
 			UrlParts = Url.Parts,
 			PartialParameters = Body == null ? Enumerable.Empty<QueryParameters>().ToList() : Url.Params.Values.Where(p=>p.RenderPartial && !p.Skip).ToList(),
-			OfficialDocumentationLink = OfficialDocumentationLink
+			OfficialDocumentationLink = OfficialDocumentationLink.Url
 		};
 
 		public RequestPartialImplementation RequestPartialImplementation => new RequestPartialImplementation
 		{
 			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink,
+			OfficialDocumentationLink = OfficialDocumentationLink.Url,
 			Stability = Stability,
 			Paths = Url.Paths,
 			Parts = Url.Parts,
@@ -67,7 +69,7 @@ namespace ApiGenerator.Domain.Specification
 		public DescriptorPartialImplementation DescriptorPartialImplementation => new DescriptorPartialImplementation
 		{
 			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink,
+			OfficialDocumentationLink = OfficialDocumentationLink.Url,
 			Constructors = Constructor.DescriptorConstructors(CsharpNames, Url).ToList(),
 			Paths = Url.Paths,
 			Parts = Url.Parts,
@@ -78,7 +80,7 @@ namespace ApiGenerator.Domain.Specification
 		public RequestParameterImplementation RequestParameterImplementation => new RequestParameterImplementation
 		{
 			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink,
+			OfficialDocumentationLink = OfficialDocumentationLink.Url,
 			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
 			HttpMethod = PreferredHttpMethod
 		};
@@ -101,16 +103,16 @@ namespace ApiGenerator.Domain.Specification
 			CsharpNames = CsharpNames,
 			Fluent = new FluentMethod(CsharpNames, Url.Parts,
 				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
-				link: OfficialDocumentationLink,
+				link: OfficialDocumentationLink.Url,
 				summary: HighLevelMethodXmlDocDescription
 			),
 			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments ? null : new BoundFluentMethod(CsharpNames, Url.Parts,
 				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
-				link: OfficialDocumentationLink,
+				link: OfficialDocumentationLink.Url,
 				summary: HighLevelMethodXmlDocDescription
 			),
 			Initializer = new InitializerMethod(CsharpNames,
-				link: OfficialDocumentationLink,
+				link: OfficialDocumentationLink.Url,
 				summary: HighLevelMethodXmlDocDescription
 			)
 		};
@@ -145,7 +147,7 @@ namespace ApiGenerator.Domain.Specification
 						CsharpNames = CsharpNames,
 						PerPathMethodName = methodName,
 						HttpMethod = httpMethod,
-						OfficialDocumentationLink = OfficialDocumentationLink,
+						OfficialDocumentationLink = OfficialDocumentationLink.Url,
 						Stability = Stability,
 						DeprecatedPath = path.Deprecation,
 						Path = path.Path,

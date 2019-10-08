@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.TasksApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for Cancel <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<summary>Descriptor for Cancel <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public partial class CancelTasksDescriptor : RequestDescriptorBase<CancelTasksDescriptor, CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TasksCancel;
@@ -58,7 +58,7 @@ namespace Nest
 		public CancelTasksDescriptor ParentTaskId(string parenttaskid) => Qs("parent_task_id", parenttaskid);
 	}
 
-	///<summary>Descriptor for GetTask <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<summary>Descriptor for GetTask <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public partial class GetTaskDescriptor : RequestDescriptorBase<GetTaskDescriptor, GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TasksGetTask;
@@ -83,7 +83,7 @@ namespace Nest
 		public GetTaskDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
-	///<summary>Descriptor for List <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<summary>Descriptor for List <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public partial class ListTasksDescriptor : RequestDescriptorBase<ListTasksDescriptor, ListTasksRequestParameters, IListTasksRequest>, IListTasksRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TasksList;
