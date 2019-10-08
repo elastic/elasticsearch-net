@@ -456,7 +456,7 @@ namespace Nest
 		public FlushDescriptor WaitIfOngoing(bool? waitifongoing = true) => Qs("wait_if_ongoing", waitifongoing);
 	}
 
-	///<summary>Descriptor for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para></summary>
+	///<summary>Descriptor for SyncedFlush <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html#synced-flush-api</para></summary>
 	public partial class SyncedFlushDescriptor : RequestDescriptorBase<SyncedFlushDescriptor, SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSyncedFlush;

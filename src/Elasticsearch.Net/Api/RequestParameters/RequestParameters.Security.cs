@@ -213,7 +213,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for GetPrivileges <para>TODO</para></summary>
+	///<summary>Request options for GetPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

@@ -327,25 +327,25 @@ namespace Nest.Specification.SecurityApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
 		/// </summary>
 		public GetPrivilegesResponse GetPrivileges(Name name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null) => GetPrivileges(selector.InvokeOrDefault(new GetPrivilegesDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
 		/// </summary>
 		public Task<GetPrivilegesResponse> GetPrivilegesAsync(Name name = null, Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null, CancellationToken ct = default) => GetPrivilegesAsync(selector.InvokeOrDefault(new GetPrivilegesDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
 		/// </summary>
 		public GetPrivilegesResponse GetPrivileges(IGetPrivilegesRequest request) => DoRequest<IGetPrivilegesRequest, GetPrivilegesResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
 		/// </summary>
 		public Task<GetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetPrivilegesRequest, GetPrivilegesResponse>(request, request.RequestParameters, ct);
 		/// <summary>

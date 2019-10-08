@@ -100,7 +100,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request options for ClearScroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -493,7 +493,7 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
@@ -1520,7 +1520,7 @@ namespace Elasticsearch.Net
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</para></summary>
+	///<summary>Request options for Scroll <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll</para></summary>
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -2228,7 +2228,7 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
+		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public long? Size
 		{
 			get => Q<long? >("size");
