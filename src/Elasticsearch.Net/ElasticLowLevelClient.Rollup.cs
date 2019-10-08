@@ -43,130 +43,152 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		{
 		}
 
-		///<summary>DELETE on /_rollup/job/{id} <para></para></summary>
+		///<summary>DELETE on /_rollup/job/{id}</summary>
 		///<param name = "id">The ID of the job to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse DeleteJob<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_rollup/job/{id:id}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_rollup/job/{id} <para></para></summary>
+		///<summary>DELETE on /_rollup/job/{id}</summary>
 		///<param name = "id">The ID of the job to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.delete_job", "id")]
 		public Task<TResponse> DeleteJobAsync<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_rollup/job/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/job/{id} <para></para></summary>
+		///<summary>GET on /_rollup/job/{id}</summary>
 		///<param name = "id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse GetJob<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_rollup/job/{id:id}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/job/{id} <para></para></summary>
+		///<summary>GET on /_rollup/job/{id}</summary>
 		///<param name = "id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.get_jobs", "id")]
 		public Task<TResponse> GetJobAsync<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_rollup/job/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/job/ <para></para></summary>
+		///<summary>GET on /_rollup/job/</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse GetJob<TResponse>(GetRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_rollup/job/", null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/job/ <para></para></summary>
+		///<summary>GET on /_rollup/job/</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.get_jobs", "")]
 		public Task<TResponse> GetJobAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_rollup/job/", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/data/{id} <para></para></summary>
+		///<summary>GET on /_rollup/data/{id}</summary>
 		///<param name = "id">The ID of the index to check rollup capabilities on, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse GetCapabilities<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_rollup/data/{id:id}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/data/{id} <para></para></summary>
+		///<summary>GET on /_rollup/data/{id}</summary>
 		///<param name = "id">The ID of the index to check rollup capabilities on, or left blank for all jobs</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.get_rollup_caps", "id")]
 		public Task<TResponse> GetCapabilitiesAsync<TResponse>(string id, GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_rollup/data/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/data/ <para></para></summary>
+		///<summary>GET on /_rollup/data/</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse GetCapabilities<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_rollup/data/", null, RequestParams(requestParameters));
-		///<summary>GET on /_rollup/data/ <para></para></summary>
+		///<summary>GET on /_rollup/data/</summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.get_rollup_caps", "")]
 		public Task<TResponse> GetCapabilitiesAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_rollup/data/", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_rollup/data <para></para></summary>
+		///<summary>GET on /{index}/_rollup/data</summary>
 		///<param name = "index">The rollup index or index pattern to obtain rollup capabilities from.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse GetIndexCapabilities<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_rollup/data"), null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_rollup/data <para></para></summary>
+		///<summary>GET on /{index}/_rollup/data</summary>
 		///<param name = "index">The rollup index or index pattern to obtain rollup capabilities from.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.get_rollup_index_caps", "index")]
 		public Task<TResponse> GetIndexCapabilitiesAsync<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_rollup/data"), ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_rollup/job/{id} <para></para></summary>
+		///<summary>PUT on /_rollup/job/{id}</summary>
 		///<param name = "id">The ID of the job to create</param>
 		///<param name = "body">The job configuration</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse CreateJob<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_rollup/job/{id:id}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_rollup/job/{id} <para></para></summary>
+		///<summary>PUT on /_rollup/job/{id}</summary>
 		///<param name = "id">The ID of the job to create</param>
 		///<param name = "body">The job configuration</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.put_job", "id, body")]
 		public Task<TResponse> CreateJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_rollup/job/{id:id}"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_rollup_search <para></para></summary>
+		///<summary>POST on /{index}/_rollup_search</summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse Search<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_rollup_search"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_rollup_search <para></para></summary>
+		///<summary>POST on /{index}/_rollup_search</summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.rollup_search", "index, body")]
 		public Task<TResponse> SearchAsync<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_rollup_search"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_rollup_search <para></para></summary>
+		///<summary>POST on /{index}/{type}/_rollup_search</summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "type">The doc type inside the index</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse SearchUsingType<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_rollup_search"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_rollup_search <para></para></summary>
+		///<summary>POST on /{index}/{type}/_rollup_search</summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "type">The doc type inside the index</param>
 		///<param name = "body">The search request body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
+		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		[MapsApi("rollup.rollup_search", "index, type, body")]
 		public Task<TResponse> SearchUsingTypeAsync<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_rollup_search"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_rollup/job/{id}/_start <para></para></summary>
+		///<summary>POST on /_rollup/job/{id}/_start</summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse StartJob<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_rollup/job/{id:id}/_start"), null, RequestParams(requestParameters));
-		///<summary>POST on /_rollup/job/{id}/_start <para></para></summary>
+		///<summary>POST on /_rollup/job/{id}/_start</summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.start_job", "id")]
 		public Task<TResponse> StartJobAsync<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_rollup/job/{id:id}/_start"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_rollup/job/{id}/_stop <para></para></summary>
+		///<summary>POST on /_rollup/job/{id}/_stop</summary>
 		///<param name = "id">The ID of the job to stop</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse StopJob<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_rollup/job/{id:id}/_stop"), null, RequestParams(requestParameters));
-		///<summary>POST on /_rollup/job/{id}/_stop <para></para></summary>
+		///<summary>POST on /_rollup/job/{id}/_stop</summary>
 		///<param name = "id">The ID of the job to stop</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("rollup.stop_job", "id")]
 		public Task<TResponse> StopJobAsync<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_rollup/job/{id:id}/_stop"), ctx, null, RequestParams(requestParameters));
