@@ -1,0 +1,31 @@
+ARG DOTNET_VERSION=3.0.100
+FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
+
+WORKDIR /sln
+
+COPY ./*.sln ./nuget.config  ./
+COPY ./src/*.sln ./src/
+
+# todo standardize on Build.props as Directory.Build.props needs that form
+COPY ./src/*.Build.props ./src/*.build.props   ./src/
+
+# consider flattening our repos to just projects under ./src and ./test
+
+# Copy the main source project files
+COPY src/*/*.?sproj ./src/
+COPY src/Auxiliary/*/*.?sproj ./src/Auxiliary/
+COPY src/CodeGeneration/*/*.?sproj ./src/CodeGeneration/
+COPY src/Examples/*/*.?sproj ./src/Examples/
+COPY src/Tests/*/*.?sproj ./src/Tests/
+RUN ls -al
+RUN find . -name "*.?sproj"
+# RUN for file in $(find . -name "*.?sproj"); do echo "$file => $(dirname $file)/$(basename ${file%.*})/"; done
+RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basename ${file%.*})/ && mv $file $(dirname $file)/$(basename ${file%.*})/; done
+COPY build/scripts/scripts.fsproj ./build/scripts/
+COPY .jenkins/Jenkins.csproj ./.jenkins/
+
+RUN dotnet restore src/Elasticsearch.sln
+
+# Install app dependencies
+
+COPY . .

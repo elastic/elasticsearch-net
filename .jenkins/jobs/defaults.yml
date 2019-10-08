@@ -20,7 +20,7 @@
           &lt;commitId&gt;, etc.)
     properties:
     - github:
-        url: https://github.com/elastic/go-elasticsearch/
+        url: https://github.com/elastic/elasticsearch-net/
     - inject:
         properties-content: HOME=$JENKINS_HOME
     concurrent: true
@@ -29,10 +29,10 @@
     - git:
         name: origin
         credentials-id: f6c7695a-671e-4f4f-a331-acdce44ff9ba
-        reference-repo: /var/lib/jenkins/.git-references/go-elasticsearch.git
+        reference-repo: /var/lib/jenkins/.git-references/elasticsearch-net.git
         branches:
         - ${branch_specifier}
-        url: git@github.com:elastic/go-elasticsearch.git
+        url: git@github.com:elastic/elasticsearch-net.git
         basedir: ''
         wipe-workspace: 'True'
     triggers:
@@ -47,10 +47,6 @@
         type: yaml
         filename: .jenkins/test-matrix.yml
         name: ELASTICSEARCH_VERSION
-    - axis:
-        type: yaml
-        filename: .jenkins/test-matrix.yml
-        name: GO_VERSION
     - axis:
         type: yaml
         filename: .jenkins/test-matrix.yml

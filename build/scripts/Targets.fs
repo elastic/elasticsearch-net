@@ -98,6 +98,8 @@ module Main =
         ] (fun _ -> printfn "Finished Release Build %O" artifactsVersion)
 
         command "diff" [ "clean"; ] <| fun _ -> Differ.Run parsed
+        
+        command "rest-spec-tests" [ ] <| fun _ -> ReposTooling.RestSpecTests parsed.RemainingArguments
 
         command "cluster" [ "restore"; "full-build" ] <| fun _ -> ReposTooling.LaunchCluster parsed
         

@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
-
-if [[ -z $TEST_SUITE ]]; then
-  echo -e "\033[31;1mERROR:\033[0m Required environment variable [TEST_SUITE] not set\033[0m"
+if [[ -z $ELASTICSEARCH_VERSION ]]; then
+  echo -e "\033[31;1mERROR:\033[0m Required environment variable [ELASTICSEARCH_VERSION] not set\033[0m"
   exit 1
 fi
 
-if [[ $TEST_SUITE != "oss" && $TEST_SUITE != "xpack" ]]; then
-  echo -e "\033[31;1mERROR:\033[0m Unknown value [$TEST_SUITE] for [TEST_SUITE]\033[0m"
-  exit 1
+set -euxo pipefail
+
+TEST_SUITE=${TEST_SUITE-oss}
+elasticsearch_image=elasticsearch
+elasticsearch_url=https://elastic:changeme@localhost:9200
+if [[ $TEST_SUITE != "xpack" ]]; then
+  elasticsearch_image=elasticsearch-${TEST_SUITE}
+  elasticsearch_url=http://localhost:9200
 fi
 
-if [[ $TEST_SUITE == "oss" ]]; then
-  elasticsearch_image=elasticsearch-oss:8.0.0-SNAPSHOT
-  elasticsearch_url=http://es1:9200
-fi
+echo -e "\033[1m>>>>> Start [$ELASTICSEARCH_VERSION container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
-if [[ $TEST_SUITE == "xpack" ]]; then
-  elasticsearch_image=elasticsearch:8.0.0-SNAPSHOT
-  elasticsearch_url=https://elastic:elastic@es1:9200
-fi
+ELASTICSEARCH_VERSION=$(elasticsearch_image):$(ELASTICSEARCH_VERSION)
+NETWORK_NAME=elasticsearch
+bash ./run-elasticsearch.sh
+
+echo -e "\033[1m>>>>> Start [dotnet $DOTNET_VERSION container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+
+docker run --rm "mcr.microsoft.com/dotnet/core/sdk:DOTNET_VERSION"
+
+docker build --file .jenkins/DockerFile --tag elastic/elasticsearch-net .
+
 
 function cleanup {
   docker container rm --force --volumes es1 > /dev/null 2>&1 || true

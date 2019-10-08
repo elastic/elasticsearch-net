@@ -13,10 +13,11 @@ fi
 set -euxo pipefail
 
 moniker=$(echo "$ELASTICSEARCH_VERSION" | tr -C "[:alnum:]" '-')
+suffix=rest-test
 
 NODE_NAME=${moniker}${NODE_NAME-node1}
 MASTER_NODE_NAME=${MASTER_NODE_NAME-${moniker}node1}
-CLUSTER_NAME=${CLUSTER_NAME-${moniker}yaml}
+CLUSTER_NAME=${CLUSTER_NAME-${moniker}${suffix}}
 HTTP_PORT=${HTTP_PORT-9200}
 
 ELASTIC_PASSWORD=${ELASTIC_PASSWORD-changeme}
@@ -27,8 +28,9 @@ SSL_CA=${SSL_CA-"$PWD/certs/ca.crt"}
 DETACH=${DETACH-false}
 CLEANUP=${CLEANUP-false}
 
-volume_name=${NODE_NAME}-yaml-data
-network_name=${moniker}yaml
+volume_name=${NODE_NAME}-${suffix}-data
+network_default=${moniker}${suffix}
+NETWORK_NAME=${NETWORK_NAME-"$network_default"}
 
 set +x
 
@@ -40,9 +42,9 @@ function cleanup_volume {
 }
 function cleanup_node {
   if [[ "$(docker ps -q -f name=$1)" ]]; then
-    cleanup_volume "$1-yaml-data"
     echo -e "\033[34;1mINFO:\033[0m Removing container $1\033[0m"
     (docker container rm --force --volumes "$1") || true
+    cleanup_volume "$1-${suffix}-data"
   fi
 }
 function cleanup_network {
@@ -59,18 +61,22 @@ function cleanup {
   fi
   if [[ "$DETACH" != "true" ]]; then
     echo -e "\033[34;1mINFO:\033[0m clean the network if not detached (start and exit)\033[0m"
-    cleanup_network "$network_name"
+    cleanup_network "$NETWORK_NAME"
   fi
 }; 
 trap "cleanup 0" EXIT
 
 if [[ "$CLEANUP" == "true" ]]; then
   trap - EXIT
-  containers=$(docker network inspect -f '{{ range $key, $value := .Containers }}{{ printf "%s\n" .Name}}{{ end }}' ${network_name})
+  if [[ -z "$(docker network ls -q -f name=${NETWORK_NAME})" ]]; then
+    echo -e "\033[34;1mINFO:\033[0m $NETWORK_NAME is already deleted\033[0m"
+    exit 0
+  fi
+  containers=$(docker network inspect -f '{{ range $key, $value := .Containers }}{{ printf "%s\n" .Name}}{{ end }}' ${NETWORK_NAME})
   while read -r container; do
     cleanup_node "$container"
   done <<< "$containers"
-  cleanup_network "$network_name"
+  cleanup_network "$NETWORK_NAME"
   echo -e "\033[32;1mSUCCESS:\033[0m Cleaned up and exiting\033[0m"
   exit 0
 fi
@@ -78,8 +84,8 @@ fi
 echo -e "\033[34;1mINFO:\033[0m Making sure previous run leftover infrastructure is removed \033[0m"
 cleanup 1
 
-echo -e "\033[34;1mINFO:\033[0m Creating network $network_name if it does not exist already \033[0m"
-docker network inspect "$network_name" > /dev/null 2>&1 || docker network create "$network_name" 
+echo -e "\033[34;1mINFO:\033[0m Creating network $NETWORK_NAME if it does not exist already \033[0m"
+docker network inspect "$NETWORK_NAME" > /dev/null 2>&1 || docker network create "$NETWORK_NAME" 
 
 environment=($(cat <<-END
   --env node.name=$NODE_NAME
@@ -131,9 +137,8 @@ fi
 echo -e "\033[34;1mINFO:\033[0m Starting container $NODE_NAME \033[0m"
 set -x
 docker run \
-  -h "$NODE_NAME" \
   --name "$NODE_NAME" \
-  --network "$network_name" \
+  --network "$NETWORK_NAME" \
   --env ES_JAVA_OPTS=-"Xms1g -Xmx1g" \
   "${environment[@]}" \
   "${volumes[@]}" \
@@ -165,7 +170,7 @@ if [[ "$DETACH" == "true" ]]; then
     exit 1
   else 
     echo 
-    echo -e "\033[32;1mSUCCESS:\033[0m Detached and healthy: ${NODE_NAME} on docker network: ${network_name}\033[0m"
+    echo -e "\033[32;1mSUCCESS:\033[0m Detached and healthy: ${NODE_NAME} on docker network: ${NETWORK_NAME}\033[0m"
     echo -e "\033[32;1mSUCCESS:\033[0m Running on: ${url/$NODE_NAME/localhost}:${HTTP_PORT}\033[0m"
     exit 0
   fi
