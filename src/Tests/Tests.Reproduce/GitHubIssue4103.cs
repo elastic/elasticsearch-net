@@ -84,6 +84,10 @@ namespace Tests.Reproduce
 			extendedStats.StdDeviationBounds.Should().NotBeNull();
 			extendedStats.StdDeviationBounds.Upper.Should().Be(1569528353344.9695);
 			extendedStats.StdDeviationBounds.Lower.Should().Be(1569520576529.0305);
+
+			var sum = response.Aggregations.Sum("sum");
+			sum.Should().NotBeNull();
+			sum.Value.Should().Be(40);
 		}
 	}
 }
