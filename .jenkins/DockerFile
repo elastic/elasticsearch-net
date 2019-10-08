@@ -13,14 +13,15 @@ COPY ./src/*.Build.props ./src/*.build.props   ./src/
 
 # Copy the main source project files
 COPY src/*/*.?sproj ./src/
+COPY src/Tests/*/*.?sproj ./src/Tests/
 COPY src/Auxiliary/*/*.?sproj ./src/Auxiliary/
 COPY src/CodeGeneration/*/*.?sproj ./src/CodeGeneration/
 COPY src/Examples/*/*.?sproj ./src/Examples/
-COPY src/Tests/*/*.?sproj ./src/Tests/
-RUN ls -al
-RUN find . -name "*.?sproj"
-# RUN for file in $(find . -name "*.?sproj"); do echo "$file => $(dirname $file)/$(basename ${file%.*})/"; done
+
+# this puts the project files back into original location since COPY flattens
 RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basename ${file%.*})/ && mv $file $(dirname $file)/$(basename ${file%.*})/; done
+
+# copy these manually since these do not follow a pattern under src
 COPY build/scripts/scripts.fsproj ./build/scripts/
 COPY .jenkins/Jenkins.csproj ./.jenkins/
 

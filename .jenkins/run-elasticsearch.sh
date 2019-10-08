@@ -15,8 +15,8 @@ set -euxo pipefail
 moniker=$(echo "$ELASTICSEARCH_VERSION" | tr -C "[:alnum:]" '-')
 suffix=rest-test
 
-NODE_NAME=${moniker}${NODE_NAME-node1}
-MASTER_NODE_NAME=${MASTER_NODE_NAME-${moniker}node1}
+NODE_NAME=${NODE_NAME-${moniker}node1}
+MASTER_NODE_NAME=${MASTER_NODE_NAME-${NODE_NAME}}
 CLUSTER_NAME=${CLUSTER_NAME-${moniker}${suffix}}
 HTTP_PORT=${HTTP_PORT-9200}
 
