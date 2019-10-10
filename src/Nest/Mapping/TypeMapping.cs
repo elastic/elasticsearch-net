@@ -27,6 +27,7 @@ namespace Nest
 		/// will result in an error if an unknown field is encountered in a document.
 		/// </summary>
 		[DataMember(Name = "dynamic")]
+		[JsonFormatter(typeof(DynamicMappingFormatter))]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		/// <summary>
