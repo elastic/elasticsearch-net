@@ -33,6 +33,7 @@ using Nest.Specification.NodesApi;
 using Nest.Specification.RollupApi;
 using Nest.Specification.SecurityApi;
 using Nest.Specification.SnapshotApi;
+using Nest.Specification.SnapshotLifecycleManagementApi;
 using Nest.Specification.SqlApi;
 using Nest.Specification.TasksApi;
 using Nest.Specification.WatcherApi;
@@ -144,6 +145,13 @@ namespace Nest
 			private set;
 		}
 
+		///<summary>Snapshot Lifecycle Management APIs</summary>
+		public SnapshotLifecycleManagementNamespace SnapshotLifecycleManagement
+		{
+			get;
+			private set;
+		}
+
 		///<summary>Sql APIs</summary>
 		public SqlNamespace Sql
 		{
@@ -188,6 +196,7 @@ namespace Nest
 			Rollup = new RollupNamespace(this);
 			Security = new SecurityNamespace(this);
 			Snapshot = new SnapshotNamespace(this);
+			SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
 			Watcher = new WatcherNamespace(this);

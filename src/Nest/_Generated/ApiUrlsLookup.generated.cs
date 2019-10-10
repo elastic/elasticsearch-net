@@ -232,6 +232,10 @@ namespace Nest
 		internal static ApiUrls SecurityPutRole = new ApiUrls(new[]{"_security/role/{name}"});
 		internal static ApiUrls SecurityPutRoleMapping = new ApiUrls(new[]{"_security/role_mapping/{name}"});
 		internal static ApiUrls SecurityPutUser = new ApiUrls(new[]{"_security/user/{username}"});
+		internal static ApiUrls SnapshotLifecycleManagementDeleteSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}"});
+		internal static ApiUrls SnapshotLifecycleManagementExecuteSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}/_execute"});
+		internal static ApiUrls SnapshotLifecycleManagementGetSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}", "_slm/policy"});
+		internal static ApiUrls SnapshotLifecycleManagementPutSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}"});
 		internal static ApiUrls SnapshotSnapshot = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal static ApiUrls SnapshotCreateRepository = new ApiUrls(new[]{"_snapshot/{repository}"});
 		internal static ApiUrls SnapshotDelete = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
