@@ -87,6 +87,7 @@ namespace Nest
 		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[]{"{index}/_doc/{id}", "{index}/_doc"});
 		internal static ApiUrls IndicesAnalyze = new ApiUrls(new[]{"_analyze", "{index}/_analyze"});
 		internal static ApiUrls IndicesClearCache = new ApiUrls(new[]{"_cache/clear", "{index}/_cache/clear"});
+		internal static ApiUrls IndicesClone = new ApiUrls(new[]{"{index}/_clone/{target}"});
 		internal static ApiUrls IndicesClose = new ApiUrls(new[]{"{index}/_close"});
 		internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"{index}"});

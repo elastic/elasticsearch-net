@@ -45,7 +45,6 @@ namespace ApiGenerator.Configuration
 			"monitoring.bulk.json",
 			"snapshot.cleanup_repository.json",
 			"ml.estimate_memory_usage.json",
-			"indices.clone.json",
 		};
 
 

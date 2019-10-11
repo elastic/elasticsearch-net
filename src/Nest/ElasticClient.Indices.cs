@@ -85,6 +85,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) => DoRequestAsync<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</a>
+		/// </summary>
+		public CloneIndexResponse Clone(IndexName index, IndexName target, Func<CloneIndexDescriptor, ICloneIndexRequest> selector = null) => Clone(selector.InvokeOrDefault(new CloneIndexDescriptor(index: index, target: target)));
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</a>
+		/// </summary>
+		public Task<CloneIndexResponse> CloneAsync(IndexName index, IndexName target, Func<CloneIndexDescriptor, ICloneIndexRequest> selector = null, CancellationToken ct = default) => CloneAsync(selector.InvokeOrDefault(new CloneIndexDescriptor(index: index, target: target)), ct);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</a>
+		/// </summary>
+		public CloneIndexResponse Clone(ICloneIndexRequest request) => DoRequest<ICloneIndexRequest, CloneIndexResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</a>
+		/// </summary>
+		public Task<CloneIndexResponse> CloneAsync(ICloneIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICloneIndexRequest, CloneIndexResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>indices.close</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</a>
