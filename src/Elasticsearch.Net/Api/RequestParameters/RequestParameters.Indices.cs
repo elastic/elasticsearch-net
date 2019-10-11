@@ -102,6 +102,32 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</para></summary>
+	public class CloneIndexRequestParameters : RequestParameters<CloneIndexRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Specify timeout for connection to master</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+
+		///<summary>Set the number of active shards to wait for on the cloned index before the operation returns.</summary>
+		public string WaitForActiveShards
+		{
+			get => Q<string>("wait_for_active_shards");
+			set => Q("wait_for_active_shards", value);
+		}
+	}
+
 	///<summary>Request options for Close <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters>
 	{

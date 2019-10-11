@@ -147,6 +147,68 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICloneIndexRequest : IRequest<CloneIndexRequestParameters>
+	{
+		[IgnoreDataMember]
+		IndexName Index
+		{
+			get;
+		}
+
+		[IgnoreDataMember]
+		IndexName Target
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</para></summary>
+	public partial class CloneIndexRequest : PlainRequestBase<CloneIndexRequestParameters>, ICloneIndexRequest
+	{
+		protected ICloneIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClone;
+		///<summary>/{index}/_clone/{target}</summary>
+		///<param name = "index">this parameter is required</param>
+		///<param name = "target">this parameter is required</param>
+		public CloneIndexRequest(IndexName index, IndexName target): base(r => r.Required("index", index).Required("target", target))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected CloneIndexRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		IndexName ICloneIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		[IgnoreDataMember]
+		IndexName ICloneIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
+
+		///<summary>Set the number of active shards to wait for on the cloned index before the operation returns.</summary>
+		public string WaitForActiveShards
+		{
+			get => Q<string>("wait_for_active_shards");
+			set => Q("wait_for_active_shards", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
 		[IgnoreDataMember]
