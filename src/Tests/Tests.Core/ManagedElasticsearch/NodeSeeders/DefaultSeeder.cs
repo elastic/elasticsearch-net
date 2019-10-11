@@ -227,6 +227,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					.AutoMap()
 					.Name(p => p.Committer)
 					.Properties(DeveloperProperties)
+					.Dynamic()
 				)
 				.Text(t => t
 					.Name(p => p.ProjectName)
