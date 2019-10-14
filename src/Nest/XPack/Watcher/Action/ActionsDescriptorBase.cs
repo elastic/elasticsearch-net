@@ -32,6 +32,7 @@ namespace Nest
 		TransformContainer IAction.Transform { get; set; }
 		ConditionContainer IAction.Condition { get; set; }
 		string IAction.Foreach { get; set; }
+		int? IAction.MaxIterations { get; set; }
 
 		/// <inheritdoc cref="IAction.Transform"/>
 		public TDescriptor Transform(Func<TransformDescriptor, TransformContainer> selector) =>
@@ -46,5 +47,8 @@ namespace Nest
 
 		/// <inheritdoc cref="IAction.Foreach"/>
 		public TDescriptor Foreach(string @foreach) => Assign(@foreach, (a, v) => a.Foreach = v);
+
+		/// <inheritdoc cref="IAction.MaxIterations"/>
+		public TDescriptor MaxIterations(int maxIterations) => Assign(maxIterations, (a,v) => a.MaxIterations = v);
 	}
 }
