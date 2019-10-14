@@ -92,6 +92,14 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="storage_class")]
 		string StorageClass { get; set; }
+
+		/// <summary>
+		///  Whether to force the use of the path style access pattern. If `true`, the
+		// path style access pattern will be used. If `false`, the access pattern will
+		// be automatically determined by the AWS Java SDK.
+		/// </summary>
+		[DataMember(Name = "path_style_access")]
+		bool? PathStyleAccess { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -127,6 +135,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string StorageClass { get; set; }
+
+		/// <inheritdoc />
+		public bool? PathStyleAccess { get; set; }
 	}
 
 	/// <inheritdoc cref="IS3RepositorySettings"/>
@@ -144,6 +155,7 @@ namespace Nest
 		bool? IS3RepositorySettings.Compress { get; set; }
 		bool? IS3RepositorySettings.ServerSideEncryption { get; set; }
 		string IS3RepositorySettings.StorageClass { get; set; }
+		bool? IS3RepositorySettings.PathStyleAccess { get; set; }
 
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket" />
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(bucket, (a, v) => a.Bucket = v);
@@ -172,6 +184,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IS3RepositorySettings.StorageClass" />
 		public S3RepositorySettingsDescriptor StorageClass(string storageClass) => Assign(storageClass, (a, v) => a.StorageClass = v);
+
+		/// <inheritdoc cref="IS3RepositorySettings.PathStyleAccess" />
+		public S3RepositorySettingsDescriptor PathStyleAccess(bool? pathStyleAccess = true) =>
+			Assign(pathStyleAccess, (a, v) => a.PathStyleAccess = v);
 	}
 
 	/// <inheritdoc cref="IS3Repository"/>
