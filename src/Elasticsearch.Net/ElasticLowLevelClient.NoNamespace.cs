@@ -37,6 +37,7 @@ using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
 using Elasticsearch.Net.Specification.SecurityApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
+using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
 using Elasticsearch.Net.Specification.WatcherApi;
@@ -136,6 +137,12 @@ namespace Elasticsearch.Net
 			private set;
 		}
 
+		public LowLevelSnapshotLifecycleManagementNamespace SnapshotLifecycleManagement
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelSqlNamespace Sql
 		{
 			get;
@@ -176,6 +183,7 @@ namespace Elasticsearch.Net
 			Rollup = new LowLevelRollupNamespace(this);
 			Security = new LowLevelSecurityNamespace(this);
 			Snapshot = new LowLevelSnapshotNamespace(this);
+			SnapshotLifecycleManagement = new LowLevelSnapshotLifecycleManagementNamespace(this);
 			Sql = new LowLevelSqlNamespace(this);
 			Tasks = new LowLevelTasksNamespace(this);
 			Watcher = new LowLevelWatcherNamespace(this);

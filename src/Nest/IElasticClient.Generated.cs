@@ -35,6 +35,7 @@ using Nest.Specification.NodesApi;
 using Nest.Specification.RollupApi;
 using Nest.Specification.SecurityApi;
 using Nest.Specification.SnapshotApi;
+using Nest.Specification.SnapshotLifecycleManagementApi;
 using Nest.Specification.SqlApi;
 using Nest.Specification.TasksApi;
 using Nest.Specification.WatcherApi;
@@ -1063,6 +1064,12 @@ namespace Nest
 
 		///<summary>Snapshot APIs</summary>
 		SnapshotNamespace Snapshot
+		{
+			get;
+		}
+
+		///<summary>Snapshot Lifecycle Management APIs</summary>
+		SnapshotLifecycleManagementNamespace SnapshotLifecycleManagement
 		{
 			get;
 		}

@@ -53,26 +53,26 @@ namespace ApiGenerator.Domain.Specification
 					case "timestamp": return "Timestamp";
 					case "index_metric": return "IndexMetrics";
 					case "metric": return "Metrics";
-					
-					case "node_id" when Type == "list": 
+
+					case "node_id" when Type == "list":
 						return "NodeIds";
-					
-					case "fields" when Type == "list": 
+
+					case "fields" when Type == "list":
 						return "Fields";
-					
+
 					case "parent_task_id":
-					case "task_id": 
+					case "task_id":
 						return "TaskId";
-					
+
 					case "forecast_id":
 					case "action_id":
 						return "Ids";
-					
+
 					case "index":
 					case "new_index":
-					case "target": 
+					case "target":
 						return Type == "string" ? "IndexName" : "Indices";
-					
+
 					case "watch_id":
 					case "job_id":
 					case "calendar_id":
@@ -80,10 +80,12 @@ namespace ApiGenerator.Domain.Specification
 					case "datafeed_id":
 					case "snapshot_id":
 					case "filter_id":
-					case "policy_id":
-					case "id": 
+					case "id":
 						return "Id";
-					
+
+					case "policy_id":
+						return Type == "string" ? "Id" : "Ids";
+
 					case "application":
 					case "repository":
 					case "snapshot":
@@ -96,8 +98,8 @@ namespace ApiGenerator.Domain.Specification
 					case "thread_pool_patterns":
 					case "type":
 						return Type == "string" ? "Name" : "Names";
-					
-					
+
+
 					//This forces a compilation error post code generation as intended
 					default: return Type + "_";
 				}
