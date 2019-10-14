@@ -171,6 +171,11 @@ namespace Nest
 		[DataMember(Name = "distance_feature")]
 		IDistanceFeatureQuery DistanceFeature { get; set; }
 
+		/// <inheritdoc cref="IPinnedQuery"/>
+		[DataMember(Name = "pinned")]
+		IPinnedQuery Pinned { get; set; }
+
+
 		void Accept(IQueryVisitor visitor);
 	}
 }

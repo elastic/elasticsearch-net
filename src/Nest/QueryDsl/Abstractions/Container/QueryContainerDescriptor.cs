@@ -475,5 +475,8 @@ namespace Nest
 		/// </summary>
 		public QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.TermsSet = query);
+
+		public QueryContainer Pinned(Func<PinnedQueryDescriptor<T>, IPinnedQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.Pinned = query);
 	}
 }
