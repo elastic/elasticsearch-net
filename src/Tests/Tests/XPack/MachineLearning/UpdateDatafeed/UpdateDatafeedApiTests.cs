@@ -19,7 +19,6 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 		protected override object ExpectJson => new
 		{
 			indices = new[] { "server-metrics" },
-			job_id = CallIsolatedValue,
 			query = new
 			{
 				match_all = new
@@ -33,7 +32,6 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 
 		protected override Func<UpdateDatafeedDescriptor<Metric>, IUpdateDatafeedRequest> Fluent => f => f
 			.Indices("server-metrics") //goes on body not in the url
-			.JobId(CallIsolatedValue)
 			.Query(q => q
 				.MatchAll(m => m.Boost(2))
 			);
@@ -43,7 +41,6 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 		protected override UpdateDatafeedRequest Initializer =>
 			new UpdateDatafeedRequest(CallIsolatedValue + "-datafeed")
 			{
-				JobId = CallIsolatedValue,
 				Indices = "server-metrics",
 				Query = new MatchAllQuery
 				{
