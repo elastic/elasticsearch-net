@@ -9,7 +9,10 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.QueryDsl.Specialized.Pinned
 {
 	/**
-	 * See the Elasticsearch documentation on {ref_current}/query-dsl-rank-feature-query.html[rank feature query] for more details.
+	 * Promotes selected documents to rank higher than those matching a given query. This feature is typically used to
+	 * guide searchers to curated documents that are promoted over and above any "organic" matches for a search. The promoted or "pinned"
+	 * documents are identified using the document IDs stored in the _id field.
+	 * See the Elasticsearch documentation on {ref_current}/query-dsl-pinned-query.html[pinned query] for more details.
 	*/
 	public class PinnedQueryUsageTests : QueryDslUsageTestsBase
 	{
