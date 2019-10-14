@@ -19,6 +19,7 @@ namespace Tests.XPack.Slm
 		private const string ExecuteSnapshotLifecycleStep = nameof(ExecuteSnapshotLifecycleStep);
 		private const string GetAllSnapshotLifecycleStep = nameof(GetAllSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleStep = nameof(GetSnapshotLifecycleStep);
+		private const string GetSnapshotLifecycleAfterExecuteStep = nameof(GetSnapshotLifecycleAfterExecuteStep);
 		private const string PutSnapshotLifecycleStep = nameof(PutSnapshotLifecycleStep);
 
 
@@ -102,6 +103,20 @@ namespace Tests.XPack.Slm
 					)
 			},
 			{
+				GetSnapshotLifecycleAfterExecuteStep, u =>
+					u.Calls<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequest, IGetSnapshotLifecycleRequest, GetSnapshotLifecycleResponse>(
+						v => new GetSnapshotLifecycleRequest(v)
+						{
+							Human = true
+						},
+						(v, d) => d.PolicyId(v).Human(),
+						(v, c, f) => c.SnapshotLifecycleManagement.GetSnapshotLifecycle(f),
+						(v, c, f) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleAsync(f),
+						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycle(r),
+						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleAsync(r)
+					)
+			},
+			{
 				DeleteSnapshotLifecycleStep, u =>
 					u.Calls<DeleteSnapshotLifecycleDescriptor, DeleteSnapshotLifecycleRequest, IDeleteSnapshotLifecycleRequest,
 						DeleteSnapshotLifecycleResponse>(
@@ -160,6 +175,20 @@ namespace Tests.XPack.Slm
 				r.IsValid.Should().BeTrue();
 				r.SnapshotName.Should().NotBeNull();
 			});
+
+		[I] public async Task GetSnapshotLifeCycleAfterExecuteResponse() => await Assert<GetSnapshotLifecycleResponse>(GetSnapshotLifecycleAfterExecuteStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.Policies.Should().NotBeNull().And.HaveCount(1).And.ContainKey(v);
+
+			var metadata = r.Policies[v];
+			metadata.InProgress.Should().NotBeNull();
+			metadata.InProgress.Name.Should().NotBeNullOrWhiteSpace();
+			metadata.InProgress.UUID.Should().NotBeNullOrWhiteSpace();
+			metadata.InProgress.State.Should().NotBeNullOrWhiteSpace();
+			metadata.InProgress.StartTime.Should().BeAfter(DateTimeOffset.MinValue);
+
+		});
 
 		[I] public async Task DeleteSnapshotLifecycleResponse() => await Assert<DeleteSnapshotLifecycleResponse>(DeleteSnapshotLifecycleStep,
 			(v, r) =>

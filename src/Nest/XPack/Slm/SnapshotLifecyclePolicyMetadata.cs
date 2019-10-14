@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -45,5 +46,36 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "version")]
 		public int Version { get; internal set; }
+
+		/// <summary>
+		/// If a snapshot is currently in progress this will return information about the snapshot.
+		/// </summary>
+		[DataMember(Name = "in_progress")]
+		public InProgressLifecycleSnapshot InProgress { get; internal set; }
+	}
+
+	/// <summary>
+	/// If a snapshot is in progress when calling the Get Snapshot Lifecycle metadata
+	/// this will hold some minimal information about the in flight snapshot
+	/// </summary>
+	public class InProgressLifecycleSnapshot
+	{
+		/// <summary> The name of the snapshot currently being taken </summary>
+		[DataMember(Name = "name")]
+		public string Name { get; internal set; }
+
+		/// <summary> The UUI of the snapshot currently being taken </summary>
+		[DataMember(Name = "uuid")]
+		public string UUID { get; internal set; }
+
+		/// <summary> The state of the snapshot currently being taken </summary>
+		[DataMember(Name = "state")]
+		public string State { get; internal set; }
+
+		/// <summary> The start time of the snapshot currently being taken </summary>
+		[DataMember(Name = "start_time_millis")]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
+		public DateTimeOffset StartTime { get; internal set; }
+
 	}
 }
