@@ -237,6 +237,7 @@ namespace Nest
 		internal static ApiUrls SnapshotLifecycleManagementExecuteSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}/_execute"});
 		internal static ApiUrls SnapshotLifecycleManagementGetSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}", "_slm/policy"});
 		internal static ApiUrls SnapshotLifecycleManagementPutSnapshotLifecycle = new ApiUrls(new[]{"_slm/policy/{policy_id}"});
+		internal static ApiUrls SnapshotCleanupRepository = new ApiUrls(new[]{"_snapshot/{repository}/_cleanup"});
 		internal static ApiUrls SnapshotSnapshot = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal static ApiUrls SnapshotCreateRepository = new ApiUrls(new[]{"_snapshot/{repository}"});
 		internal static ApiUrls SnapshotDelete = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
