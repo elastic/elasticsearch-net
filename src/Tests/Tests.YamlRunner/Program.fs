@@ -14,6 +14,7 @@ type Arguments =
     | [<AltCommandLine("-e")>]Endpoint of string
     | [<AltCommandLine("-r")>]Revision of string
     | [<AltCommandLine("-o")>]JUnitOutputFile of string
+    | [<AltCommandLine("-p")>]Profile of bool
     with
     interface IArgParserTemplate with
         member s.Usage =
@@ -24,6 +25,7 @@ type Arguments =
             | TestFile _ -> "Only run tests starting with this filename"
             | Endpoint _ -> "The elasticsearch endpoint to run tests against"
             | JUnitOutputFile _ -> "The path and file name to use for the junit xml output, defaults to a random tmp filename"
+            | Profile _ -> "Print out process id and wait for confirmation to kick off the tests"
 
 let private runningProxy = Process.GetProcessesByName("fiddler").Length + Process.GetProcessesByName("mitmproxy").Length > 0
 let private defaultEndpoint = 
@@ -66,6 +68,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let directory = parsed.TryGetResult Folder //|> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
     let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue defaultEndpoint
+    let profile = parsed.TryGetResult Profile |> Option.defaultValue false
     let passedRevision = parsed.TryGetResult Revision
     let outputFile =
         parsed.TryGetResult JUnitOutputFile
@@ -76,7 +79,11 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     printfn "Found version %s downloading specs from: %s" version revision
     
     let! locateResults = Commands.LocateTests namedSuite revision directory file
-    let readResults = Commands.ReadTests locateResults 
+    let readResults = Commands.ReadTests locateResults
+    if profile then
+        printf "Waiting for profiler to attach to pid: %O" <| Process.GetCurrentProcess().Id
+        Console.ReadKey() |> ignore
+        
     let! runResults = Commands.RunTests readResults client
     let summary = Commands.ExportTests runResults outputFile
     
