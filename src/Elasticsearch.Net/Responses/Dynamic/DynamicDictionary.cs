@@ -38,7 +38,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Create a regular dictionary as shallow copy
+		/// Creates a new instance of Dictionary{String,Object} using the keys and underlying object values of this DynamicDictionary instance's key values.
 		/// </summary>
 		/// <returns></returns>
 		public Dictionary<string, object> ToDictionary() => _backingDictionary.ToDictionary(kv => kv.Key, kv => kv.Value.Value);
