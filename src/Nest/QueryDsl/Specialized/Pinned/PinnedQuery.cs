@@ -43,15 +43,9 @@ namespace Nest
 
 		public PinnedQueryDescriptor<T> Ids(IEnumerable<Id> ids) => Ids(ids?.ToArray());
 
-		public PinnedQueryDescriptor<T> Ids(params string[] ids) => Assign(ids?.Select(v => (Id)v), (a, v) => a.Ids = v);
-
 		public PinnedQueryDescriptor<T> Ids(IEnumerable<string> ids) => Ids(ids.ToArray());
 
-		public PinnedQueryDescriptor<T> Ids(params long[] ids) => Assign(ids?.Select(v => (Id)v), (a, v) => a.Ids = v);
-
 		public PinnedQueryDescriptor<T> Ids(IEnumerable<long> ids) => Ids(ids.ToArray());
-
-		public PinnedQueryDescriptor<T> Ids(params Guid[] ids) => Assign(ids?.Select(v => (Id)v), (a, v) => a.Ids = v);
 
 		public PinnedQueryDescriptor<T> Ids(IEnumerable<Guid> ids) => Ids(ids.ToArray());
 
