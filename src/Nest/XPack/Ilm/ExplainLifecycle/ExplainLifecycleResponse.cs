@@ -78,6 +78,12 @@ namespace Nest
 		[DataMember(Name = "step_time_millis")]
 		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset StepTime { get; internal set; }
+
+		/// <summary>
+		/// The age of the index, useful to gauge when the next phase will trigger based on <see cref="IPhase.MinimumAge"/>
+		/// </summary>
+		[DataMember(Name = "age")]
+		public Time Age { get; internal set; }
 	}
 
 	public class PhaseExecution
