@@ -16,6 +16,7 @@ namespace Nest
 		/// Default is <c>true</c>
 		/// </summary>
 		[DataMember(Name = "dynamic")]
+		[JsonFormatter(typeof(DynamicMappingFormatter))]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		/// <summary>

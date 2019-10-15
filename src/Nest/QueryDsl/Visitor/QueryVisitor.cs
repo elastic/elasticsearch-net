@@ -141,6 +141,8 @@
 		void Visit(IParentIdQuery query);
 
 		void Visit(ITermsSetQuery query);
+
+		void Visit(IPinnedQuery query);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -270,6 +272,8 @@
 		public virtual void Visit(IParentIdQuery query) { }
 
 		public virtual void Visit(ITermsSetQuery query) { }
+
+		public virtual void Visit(IPinnedQuery query) { }
 
 		public virtual void Visit(IQueryVisitor visitor) { }
 	}
