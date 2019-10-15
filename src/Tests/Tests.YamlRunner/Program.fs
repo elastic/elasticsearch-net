@@ -27,7 +27,8 @@ type Arguments =
             | JUnitOutputFile _ -> "The path and file name to use for the junit xml output, defaults to a random tmp filename"
             | Profile _ -> "Print out process id and wait for confirmation to kick off the tests"
 
-let private runningProxy = Process.GetProcessesByName("fiddler").Length + Process.GetProcessesByName("mitmproxy").Length > 0
+let private runningMitmProxy = Process.GetProcessesByName("mitmproxy").Length > 0
+let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddler").Length > 0
 let private defaultEndpoint = 
     let defaultHost = if runningProxy then "ipv4.fiddler" else "localhost";
     sprintf "http://%s:9200" defaultHost;
@@ -36,7 +37,7 @@ let private createClient endpoint =
     let uri = new Uri(endpoint)
     let settings = new ConnectionConfiguration(uri)
     let settings =
-        match runningProxy with
+        match runningMitmProxy with
         | true -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
         | _ -> settings
     new ElasticLowLevelClient(settings)
