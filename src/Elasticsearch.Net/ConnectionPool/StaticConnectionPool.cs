@@ -15,9 +15,15 @@ namespace Elasticsearch.Net
 			: this(uris.Select(uri => new Node(uri)), randomize, dateTimeProvider) { }
 
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
+			: this(nodes, randomize, randomizeSeed: null, dateTimeProvider) { }
+
+		protected StaticConnectionPool(IEnumerable<Node> nodes, bool randomize, int? randomizeSeed = null, IDateTimeProvider dateTimeProvider = null)
 		{
-			nodes.ThrowIfEmpty(nameof(nodes));
 			Randomize = randomize;
+			Random = !randomize || !randomizeSeed.HasValue
+				? new Random()
+				: new Random(randomizeSeed.Value);
+
 			Initialize(nodes, dateTimeProvider);
 		}
 
@@ -25,17 +31,19 @@ namespace Elasticsearch.Net
 		//otherwise just manually sort `nodes` before instantiating.
 		protected StaticConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
 		{
-			nodes.ThrowIfEmpty(nameof(nodes));
 			_nodeScorer = nodeScorer;
 			Initialize(nodes, dateTimeProvider);
 		}
 
 		private void Initialize(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider)
 		{
+
+			var nodesProvided = nodes?.ToList() ?? throw new ArgumentNullException(nameof(nodes));
+			nodesProvided.ThrowIfEmpty(nameof(nodes));
 			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
 
 			string scheme = null;
-			foreach (var node in nodes)
+			foreach (var node in nodesProvided)
 			{
 				if (scheme == null)
 				{
@@ -46,7 +54,7 @@ namespace Elasticsearch.Net
 					throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
 			}
 
-			InternalNodes = SortNodes(nodes)
+			InternalNodes = SortNodes(nodesProvided)
 				.DistinctBy(n => n.Uri)
 				.ToList();
 			LastUpdate = DateTimeProvider.Now();
@@ -87,7 +95,7 @@ namespace Elasticsearch.Net
 		protected IDateTimeProvider DateTimeProvider { get; private set; }
 
 		protected List<Node> InternalNodes { get; set; }
-		protected Random Random { get; } = new Random();
+		protected Random Random { get; }
 		protected bool Randomize { get; }
 
 		/// <summary>
