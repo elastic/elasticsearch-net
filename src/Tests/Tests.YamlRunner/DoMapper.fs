@@ -111,7 +111,7 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
                     PostData.MultiJson(e.Cast<String>())
                 | e -> PostData.MultiJson e
             | :? String as s -> PostData.String s
-            | value -> PostData.Serializable body :> PostData
+            | _ -> PostData.Serializable body :> PostData
         
         let args = 
             match (foundBody, this.SupportsBody) with
