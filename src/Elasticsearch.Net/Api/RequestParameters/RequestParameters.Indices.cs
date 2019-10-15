@@ -106,6 +106,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	public class CloneIndexRequestParameters : RequestParameters<CloneIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
