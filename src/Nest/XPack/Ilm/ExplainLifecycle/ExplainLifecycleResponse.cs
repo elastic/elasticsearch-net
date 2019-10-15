@@ -80,7 +80,7 @@ namespace Nest
 		public DateTimeOffset StepTime { get; internal set; }
 
 		/// <summary>
-		/// The age of the index, useful to guage when the next phase will trigger based on <see cref="IPhase.MinimumAge"/>
+		/// The age of the index, useful to gauge when the next phase will trigger based on <see cref="IPhase.MinimumAge"/>
 		/// </summary>
 		[DataMember(Name = "age")]
 		public Time Age { get; internal set; }
