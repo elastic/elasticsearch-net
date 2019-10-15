@@ -110,6 +110,8 @@
 
 		void Visit(ICumulativeSumAggregation aggregation);
 
+		void Visit(ICumulativeCardinalityAggregation aggregation);
+
 		void Visit(ISerialDifferencingAggregation aggregation);
 
 		void Visit(IBucketScriptAggregation aggregation);
@@ -178,6 +180,8 @@
 		public virtual void Visit(IPercentilesBucketAggregation aggregation) { }
 
 		public virtual void Visit(ICumulativeSumAggregation aggregation) { }
+
+		public virtual void Visit(ICumulativeCardinalityAggregation aggregation) { }
 
 		public virtual void Visit(IBucketScriptAggregation aggregation) { }
 

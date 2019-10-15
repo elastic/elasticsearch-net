@@ -51,6 +51,9 @@ namespace Nest
 		[DataMember(Name = "flattened")]
 		public XPackUsage Flattened { get; internal set; }
 
+		[DataMember(Name = "data_science")]
+		public XPackUsage DataScience { get; internal set; }
+
 		[DataMember(Name = "ilm")]
 		public IlmUsage IndexLifecycleManagement { get; internal set; }
 
