@@ -712,7 +712,7 @@ namespace Tests.XPack.Watcher.PutWatch
 		}
 	}
 
-	[SkipVersion("<7.3.0", "Foreach introduced in 7.3.0")]
+	[SkipVersion("<7.4.0", "Foreach introduced in 7.3.0, max iterations in 7.4.0")]
 	public class PutWatchApiWithForeachTests : ApiIntegrationTestBase<XPackCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
 	{
 		public PutWatchApiWithForeachTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -757,6 +757,7 @@ namespace Tests.XPack.Watcher.PutWatch
 					log_hits = new
 					{
 						@foreach = "ctx.payload.hits.hits",
+						max_iterations = 500,
 						logging = new
 						{
 							text = "Found id {{ctx.payload._id}} with field {{ctx.payload._source.numberOfCommits}}"
@@ -804,6 +805,7 @@ namespace Tests.XPack.Watcher.PutWatch
 			.Actions(a => a
 				.Logging("log_hits", i => i
 					.Foreach("ctx.payload.hits.hits")
+					.MaxIterations(500)
 					.Text("Found id {{ctx.payload._id}} with field {{ctx.payload._source.numberOfCommits}}")
 					.Transform(t => t
 						.Script(st =>st
@@ -841,6 +843,7 @@ namespace Tests.XPack.Watcher.PutWatch
 				Actions = new LoggingAction("log_hits")
 				{
 					Foreach = "ctx.payload.hits.hits",
+					MaxIterations = 500,
 					Text = "Found id {{ctx.payload._id}} with field {{ctx.payload._source.numberOfCommits}}",
 					Transform = new InlineScriptTransform("return [ 'time' : ctx.trigger.scheduled_time ]"),
 					Condition = new AlwaysCondition()
