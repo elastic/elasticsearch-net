@@ -66,5 +66,8 @@ namespace Nest
 
 		[JsonProperty("score")]
 		internal double? SuggestScore { get; set; }
+		
+		[JsonProperty("fields")]
+		public FieldValues Fields { get; internal set; }
 	}
 }
