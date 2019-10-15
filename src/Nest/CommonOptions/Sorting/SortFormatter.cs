@@ -75,7 +75,10 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, ISort value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value?.SortKey == null)
+			{
+				writer.WriteNull();
 				return;
+			}
 
 			writer.WriteBeginObject();
 			var settings = formatterResolver.GetConnectionSettings();

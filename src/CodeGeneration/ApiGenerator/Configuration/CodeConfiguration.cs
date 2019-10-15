@@ -45,12 +45,6 @@ namespace ApiGenerator.Configuration
 			"monitoring.bulk.json",
 			"snapshot.cleanup_repository.json",
 			"ml.estimate_memory_usage.json",
-			"indices.clone.json",
-
-			"slm.delete_lifecycle.json",
-			"slm.execute_lifecycle.json",
-			"slm.get_lifecycle.json",
-			"slm.put_lifecycle.json",
 		};
 
 

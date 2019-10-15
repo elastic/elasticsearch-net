@@ -37,6 +37,7 @@ using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
 using Elasticsearch.Net.Specification.SecurityApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
+using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
 using Elasticsearch.Net.Specification.WatcherApi;

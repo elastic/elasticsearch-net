@@ -88,6 +88,7 @@ namespace ApiGenerator.Domain.Code
 				case "ccr": return "CrossClusterReplication";
 				case "ml": return "MachineLearning";
 				case "xpack": return "XPack";
+				case "slm": return "SnapshotLifecycleManagement";
 				default: return endpointNamespace.ToPascalCase();
 			}
 		}

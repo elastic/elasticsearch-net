@@ -99,6 +99,40 @@ namespace Nest
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
 	}
 
+	///<summary>Descriptor for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</para></summary>
+	public partial class CloneIndexDescriptor : RequestDescriptorBase<CloneIndexDescriptor, CloneIndexRequestParameters, ICloneIndexRequest>, ICloneIndexRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClone;
+		///<summary>/{index}/_clone/{target}</summary>
+		///<param name = "index">this parameter is required</param>
+		///<param name = "target">this parameter is required</param>
+		public CloneIndexDescriptor(IndexName index, IndexName target): base(r => r.Required("index", index).Required("target", target))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected CloneIndexDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		IndexName ICloneIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName ICloneIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
+		///<summary>The name of the source index to clone</summary>
+		public CloneIndexDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CloneIndexDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public CloneIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Explicit operation timeout</summary>
+		public CloneIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>Set the number of active shards to wait for on the cloned index before the operation returns.</summary>
+		public CloneIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
+	}
+
 	///<summary>Descriptor for Close <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class CloseIndexDescriptor : RequestDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{

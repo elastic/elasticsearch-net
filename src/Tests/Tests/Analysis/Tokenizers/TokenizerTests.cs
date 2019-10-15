@@ -114,15 +114,18 @@ namespace Tests.Analysis.Tokenizers
 			public override string Name => "icu";
 		}
 
+		[SkipVersion("<7.4.0", "not all options available before this version")]
 		public class KuromojiTests : TokenizerAssertionBase<KuromojiTests>
 		{
 			private const string Example = "/箱根山-箱根/成田空港-成田/";
+			private const string Inline = "東京スカイツリー,東京 スカイツリー,トウキョウ スカイツリー,カスタム名詞";
 
 			public override FuncTokenizer Fluent => (n, t) => t.Kuromoji(n, e => e
 				.Mode(KuromojiTokenizationMode.Extended)
 				.DiscardPunctuation()
 				.NBestExamples(Example)
 				.NBestCost(1000)
+				.UserDictionaryRules(Inline)
 			);
 
 			public override ITokenizer Initializer => new KuromojiTokenizer
@@ -130,7 +133,8 @@ namespace Tests.Analysis.Tokenizers
 				Mode = KuromojiTokenizationMode.Extended,
 				DiscardPunctuation = true,
 				NBestExamples = Example,
-				NBestCost = 1000
+				NBestCost = 1000,
+				UserDictionaryRules = new [] { Inline }
 			};
 
 			public override object Json => new
@@ -139,7 +143,8 @@ namespace Tests.Analysis.Tokenizers
 				mode = "extended",
 				nbest_cost = 1000,
 				nbest_examples = Example,
-				type = "kuromoji_tokenizer"
+				type = "kuromoji_tokenizer",
+				user_dictionary_rules = new [] { Inline }
 			};
 
 			public override string Name => "kuro";
