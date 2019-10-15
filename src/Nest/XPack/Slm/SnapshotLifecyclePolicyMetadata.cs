@@ -51,14 +51,14 @@ namespace Nest
 		/// If a snapshot is currently in progress this will return information about the snapshot.
 		/// </summary>
 		[DataMember(Name = "in_progress")]
-		public InProgressLifecycleSnapshot InProgress { get; internal set; }
+		public LifecycleSnapshotInProgress InProgress { get; internal set; }
 	}
 
 	/// <summary>
 	/// If a snapshot is in progress when calling the Get Snapshot Lifecycle metadata
 	/// this will hold some minimal information about the in flight snapshot
 	/// </summary>
-	public class InProgressLifecycleSnapshot
+	public class LifecycleSnapshotInProgress
 	{
 		/// <summary> The name of the snapshot currently being taken </summary>
 		[DataMember(Name = "name")]
