@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Pipeline.MovingFunction
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-pipeline-movfn-aggregation.html[Moving Function Aggregation]
 	 */
-	[SkipVersion("<6.4.0", "Introduced in Elasticsearch 6.4.0+")]
+	[SkipVersion("<7.4.0", "Shift option introduced in 7.4.0+")]
 	public class MovingFunctionAggregationUsageTests : AggregationUsageTestBase
 	{
 		public MovingFunctionAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -50,6 +50,7 @@ namespace Tests.Aggregations.Pipeline.MovingFunction
 						{
 							buckets_path = "commits",
 							window = 30,
+							shift = 0,
 							script = "MovingFunctions.unweightedAvg(values)"
 						}
 					}
@@ -69,6 +70,7 @@ namespace Tests.Aggregations.Pipeline.MovingFunction
 					.MovingFunction("commits_moving_avg", mv => mv
 						.BucketsPath("commits")
 						.Window(30)
+						.Shift(0)
 						.Script("MovingFunctions.unweightedAvg(values)")
 					)
 				)
@@ -84,6 +86,7 @@ namespace Tests.Aggregations.Pipeline.MovingFunction
 					&& new MovingFunctionAggregation("commits_moving_avg", "commits")
 					{
 						Window = 30,
+						Shift = 0,
 						Script = "MovingFunctions.unweightedAvg(values)"
 					}
 			};
