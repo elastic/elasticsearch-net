@@ -7,6 +7,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Framework;
 using Tests.XPack.Security.Privileges;
 
@@ -214,20 +215,30 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			}
 		}
 
+		//hide
+		private class SeededRandomConectionPool : StaticConnectionPool
+		{
+			public SeededRandomConectionPool(IEnumerable<Node> nodes, int seed)
+				: base(nodes, randomize: true, randomizeSeed: seed, dateTimeProvider: null)
+			{}
+		}
+
 		// hide
 		[U] public void RandomizedInitialNodes()
 		{
-			IEnumerable<StaticConnectionPool> CreatStaticConnectionPools()
+			IEnumerable<StaticConnectionPool> CreateSeededPools(int nodeCount, int pools)
 			{
-				Thread.Sleep(1);
-				var uris = Enumerable.Range(1, 50).Select(i => new Uri($"https://10.0.0.{i}:9200/"));
-				yield return new StaticConnectionPool(uris);
+				var seed = TestConfiguration.Instance.Seed;
+				var nodes = Enumerable.Range(1, nodeCount)
+					.Select(i => new Node(new Uri($"https://10.0.0.{i}:9200/")))
+					.ToList();
+				for(var i = 0; i < nodeCount; i++)
+					yield return new SeededRandomConectionPool(nodes, seed + i);
 			}
 
-			// assertion works on the probability of seeing a Uri other than https://10.0.0.1:9200/
-			// as the first value over 50 runs, when randomized.
-			CreatStaticConnectionPools()
-				.Take(50)
+			var connectionPools = CreateSeededPools(100, 100).ToList();
+			connectionPools.Should().HaveCount(100);
+			connectionPools
 				.Select(p => p.CreateView().First().Uri.ToString())
 				.All(uri => uri == "https://10.0.0.1:9200/")
 				.Should()
