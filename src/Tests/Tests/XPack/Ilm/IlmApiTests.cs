@@ -176,7 +176,7 @@ namespace Tests.XPack.Ilm
 
 			indexDict.Index.Should().Be("project");
 			indexDict.Managed.Should().Be(false);
-
+			indexDict.Age.Should().BeNull();
 		});
 
 		[I] public async Task IlmStopResponse() => await Assert<StopIlmResponse>(IlmStopStep, (v, r) =>
