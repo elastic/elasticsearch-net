@@ -42,6 +42,12 @@ namespace Nest
 		[IgnoreDataMember]
 		string Foreach { get; set; }
 
+		[IgnoreDataMember]
+		/// <summary>The maximum number of iterations that each watch executes. If this limit is reached,
+		/// the execution is gracefully stopped. Defaults to <c>100</c>.
+		/// </summary>
+		int? MaxIterations  { get; set; }
+
 		/// <summary>
 		/// Transforms the payload before executing the action. The transformation is only applied
 		/// for the payload for this action.
@@ -74,6 +80,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string Foreach { get; set; }
+
+		/// <inheritdoc />
+		public int? MaxIterations { get; set; }
 
 		/// <inheritdoc />
 		public TransformContainer Transform { get; set; }
@@ -125,7 +134,8 @@ namespace Nest
 			{ "pagerduty", 6 },
 			{ "foreach", 7 },
 			{ "transform", 8 },
-			{ "condition", 9 }
+			{ "condition", 9 },
+			{ "max_iterations", 10 },
 		};
 
 		public Actions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -140,6 +150,7 @@ namespace Nest
 				Time throttlePeriod = null;
 				IAction action = null;
 				string @foreach = null;
+				int? maxIterations = null;
 				TransformContainer transform = null;
 				ConditionContainer condition = null;
 
@@ -190,6 +201,9 @@ namespace Nest
 								condition = formatterResolver.GetFormatter<ConditionContainer>()
 									.Deserialize(ref reader, formatterResolver);
 								break;
+							case 10:
+								maxIterations = reader.ReadInt32();
+								break;
 						}
 					}
 					else
@@ -201,6 +215,7 @@ namespace Nest
 					action.Name = name;
 					action.ThrottlePeriod = throttlePeriod;
 					action.Foreach = @foreach;
+					action.MaxIterations = maxIterations;
 					action.Transform = transform;
 					action.Condition = condition;
 					dictionary.Add(name, action);
@@ -236,6 +251,12 @@ namespace Nest
 					{
 						writer.WritePropertyName("foreach");
 						writer.WriteString(action.Foreach);
+						writer.WriteValueSeparator();
+					}
+					if (action.MaxIterations.HasValue)
+					{
+						writer.WritePropertyName("max_iterations");
+						writer.WriteInt32(action.MaxIterations.Value);
 						writer.WriteValueSeparator();
 					}
 
