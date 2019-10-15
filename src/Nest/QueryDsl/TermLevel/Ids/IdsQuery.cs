@@ -35,6 +35,7 @@ namespace Nest
 
 		public IdsQueryDescriptor Values(IEnumerable<Id> values) => Values(values?.ToArray());
 
+		// TODO 8.x remove params on Values already implicitly converting to Id
 		public IdsQueryDescriptor Values(params string[] values) => Assign(values?.Select(v => (Id)v), (a, v) => a.Values = v);
 
 		public IdsQueryDescriptor Values(IEnumerable<string> values) => Values(values.ToArray());
