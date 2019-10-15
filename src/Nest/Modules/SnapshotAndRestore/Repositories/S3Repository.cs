@@ -100,6 +100,15 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "path_style_access")]
 		bool? PathStyleAccess { get; set; }
+
+		/// <summary>
+		/// Whether chunked encoding should be disabled or not. If false, chunked encoding is enabled and will be used where appropriate.
+		/// If true, chunked encoding is disabled and will not be used, which may mean that snapshot operations consume more resources
+		/// and take longer to complete. It should only be set to true if you are using a storage service that does not support chunked
+		/// encoding. Defaults to false.
+		/// </summary>
+		[DataMember(Name = "disable_chunked_encoding")]
+		bool? DisableChunkedEncoding { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -138,6 +147,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public bool? PathStyleAccess { get; set; }
+
+		/// <inheritdoc />
+		public bool? DisableChunkedEncoding { get; set; }
 	}
 
 	/// <inheritdoc cref="IS3RepositorySettings"/>
@@ -156,6 +168,7 @@ namespace Nest
 		bool? IS3RepositorySettings.ServerSideEncryption { get; set; }
 		string IS3RepositorySettings.StorageClass { get; set; }
 		bool? IS3RepositorySettings.PathStyleAccess { get; set; }
+		bool? IS3RepositorySettings.DisableChunkedEncoding { get; set; }
 
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket" />
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(bucket, (a, v) => a.Bucket = v);
@@ -188,6 +201,10 @@ namespace Nest
 		/// <inheritdoc cref="IS3RepositorySettings.PathStyleAccess" />
 		public S3RepositorySettingsDescriptor PathStyleAccess(bool? pathStyleAccess = true) =>
 			Assign(pathStyleAccess, (a, v) => a.PathStyleAccess = v);
+
+		/// <inheritdoc cref="IS3RepositorySettings.DisableChunkedEncoding" />
+		public S3RepositorySettingsDescriptor DisableChunkedEncoding(bool? disableChunkedEncoding = true) =>
+			Assign(disableChunkedEncoding, (a, v) => a.DisableChunkedEncoding = v);
 	}
 
 	/// <inheritdoc cref="IS3Repository"/>
