@@ -43,6 +43,9 @@ namespace Nest
 		string Foreach { get; set; }
 
 		[IgnoreDataMember]
+		/// <summary>The maximum number of iterations that each watch executes. If this limit is reached,
+		/// the execution is gracefully stopped. Defaults to <c>100</c>.
+		/// </summary>
 		int? MaxIterations  { get; set; }
 
 		/// <summary>
