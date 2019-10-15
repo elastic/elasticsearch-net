@@ -96,7 +96,7 @@ namespace Nest
 		/// <summary>
 		///  Whether to force the use of the path style access pattern. If `true`, the
 		// path style access pattern will be used. If `false`, the access pattern will
-		// be automatically determined by the AWS Java SDK.
+		// be automatically determined by the AWS Java SDK used internally by Elasticsearch
 		/// </summary>
 		[DataMember(Name = "path_style_access")]
 		bool? PathStyleAccess { get; set; }
