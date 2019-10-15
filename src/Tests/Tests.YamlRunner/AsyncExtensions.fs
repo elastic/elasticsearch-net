@@ -15,7 +15,7 @@ module AsyncExtensions =
     // but for some reason this did not behave as I had expected
     [<Extension>]
     static member inline ForEachAsync (maxDegreeOfParallelism: int) asyncs = async {
-        let tasks = new List<Task<'a>>()
+        let tasks = new List<Task<'a>>(maxDegreeOfParallelism)
         let results = new List<'a>()
         for async in asyncs do
             let! x = Async.StartChildAsTask async

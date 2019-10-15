@@ -130,7 +130,7 @@ let getProp (t:Type) prop = t.GetProperty(prop).GetGetMethod()
 let getRestName (t:Type) a = (getProp t "RestSpecName").Invoke(a, null) :?> String
 let getParameters (t:Type) a = (getProp t "Parameters").Invoke(a, null) :?> KeyedCollection<string, string>
 
-let methodsWithAttribute instance mapsApiAttribute  =
+let private methodsWithAttribute instance mapsApiAttribute  =
     let clientType = instance.GetType()
     clientType.GetMethods()
     |> Array.map (fun m -> (m, m.GetCustomAttributes(mapsApiAttribute, false)))
@@ -141,7 +141,7 @@ let methodsWithAttribute instance mapsApiAttribute  =
 
 exception ParamException of string 
 
-let createApiLookup (invokers: FastApiInvoke list) : (YamlMap -> FastApiInvoke) =
+let private createApiLookup (invokers: FastApiInvoke list) : (YamlMap -> FastApiInvoke) =
     let first = invokers |> List.head
     let name = first.ApiName
     let clientMethod = first.ClientMethodName

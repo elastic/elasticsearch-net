@@ -9,6 +9,10 @@ open Tests.YamlRunner.AsyncExtensions
 open ShellProgressBar
 open Tests.YamlRunner
 
+
+/// https://api.github.com/repos/elastic/elasticsearch/contents/rest-api-spec/src/main/resources/rest-api-spec/test?ref=master
+/// Look into using the content API instead, will be cleaner and involve no html navigation
+
 let ListFolders namedSuite revision directory = async {
     let url = TestsDownloader.TestGithubRootUrl namedSuite revision
     let! (_, html) = TestsDownloader.CachedOrDownload revision "_root_" "index.html" url 
