@@ -7,7 +7,7 @@ fi
 set -euxo pipefail
 
 TEST_SUITE=${TEST_SUITE-oss}
-DOTNET_VERSION=${TEST_SUITE-3.0.100}
+DOTNET_VERSION=${DOTNET_VERSION-3.0.100}
 NODE_NAME=es1
 
 repo=$(pwd)
