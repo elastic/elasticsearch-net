@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -44,6 +45,11 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="user_dictionary")]
 		string UserDictionary { get; set; }
+
+		/// <summary> Inline rule version of <see cref="UserDictionary"/> </summary>
+		[DataMember(Name ="user_dictionary_rules")]
+		IEnumerable<string> UserDictionaryRules { get; set; }
+
 	}
 
 	/// <inheritdoc />
@@ -65,6 +71,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string UserDictionary { get; set; }
+
+		/// <inheritdoc />
+		public IEnumerable<string> UserDictionaryRules { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -78,6 +87,7 @@ namespace Nest
 		int? IKuromojiTokenizer.NBestCost { get; set; }
 		string IKuromojiTokenizer.NBestExamples { get; set; }
 		string IKuromojiTokenizer.UserDictionary { get; set; }
+		IEnumerable<string> IKuromojiTokenizer.UserDictionaryRules { get; set; }
 
 		/// <inheritdoc />
 		public KuromojiTokenizerDescriptor Mode(KuromojiTokenizationMode? mode) => Assign(mode, (a, v) => a.Mode = v);
@@ -93,5 +103,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		public KuromojiTokenizerDescriptor NBestCost(int? cost) => Assign(cost, (a, v) => a.NBestCost = v);
+
+		/// <inheritdoc />
+		public KuromojiTokenizerDescriptor UserDictionaryRules(IEnumerable<string> rules) => Assign(rules, (a, v) => a.UserDictionaryRules = rules);
+
+		/// <inheritdoc />
+		public KuromojiTokenizerDescriptor UserDictionaryRules(params string[] rules) => Assign(rules, (a, v) => a.UserDictionaryRules = rules);
 	}
 }
