@@ -190,5 +190,9 @@ namespace Nest
 
 		public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
 			new QueryContainerDescriptor<T>().Wildcard(selector);
+
+		public static QueryContainer Pinned(Func<PinnedQueryDescriptor<T>, IPinnedQuery> selector) =>
+			new QueryContainerDescriptor<T>().Pinned(selector);
+
 	}
 }
