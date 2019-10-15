@@ -12,6 +12,9 @@ namespace Nest
 
 		[DataMember(Name ="window")]
 		int? Window { get; set; }
+
+		[DataMember(Name ="shift")]
+		int? Shift { get; set; }
 	}
 
 	public class MovingFunctionAggregation
@@ -26,6 +29,8 @@ namespace Nest
 
 		public int? Window { get; set; }
 
+		public int? Shift { get; set; }
+
 		internal override void WrapInContainer(AggregationContainer c) => c.MovingFunction = this;
 	}
 
@@ -35,9 +40,13 @@ namespace Nest
 	{
 		string IMovingFunctionAggregation.Script { get; set; }
 		int? IMovingFunctionAggregation.Window { get; set; }
+		int? IMovingFunctionAggregation.Shift { get; set; }
 
 		public MovingFunctionAggregationDescriptor Window(int? windowSize) => Assign(windowSize, (a, v) => a.Window = v);
 
 		public MovingFunctionAggregationDescriptor Script(string script) => Assign(script, (a, v) => a.Script = v);
+
+		public MovingFunctionAggregationDescriptor Shift(int? shift) => Assign(shift, (a, v) => a.Shift = v);
+
 	}
 }
