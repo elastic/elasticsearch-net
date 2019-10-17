@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -14,6 +15,7 @@ namespace Tests.QueryDsl.Specialized.Pinned
 	 * documents are identified using the document IDs stored in the _id field.
 	 * See the Elasticsearch documentation on {ref_current}/query-dsl-pinned-query.html[pinned query] for more details.
 	*/
+	[SkipVersion("<7.4.0", "Introduced in 7.4")]
 	public class PinnedQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public PinnedQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
