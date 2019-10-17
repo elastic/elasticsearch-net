@@ -102,7 +102,7 @@ namespace Tests.XPack.Info
 				r.Flattened.Should().NotBeNull();
 				r.DataFrame.Should().NotBeNull();
 				r.Vectors.Should().NotBeNull();
-        r.VotingOnly.Should().NotBeNull();
+				r.VotingOnly.Should().NotBeNull();
 			}
 		});
 	}
