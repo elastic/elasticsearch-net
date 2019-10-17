@@ -189,6 +189,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IGeoShapeProperty mapping) => Increment("geo_shape");
 
+		public void Visit(IShapeProperty mapping) => Increment("shape");
+
 		public void Visit(IIpProperty mapping) => Increment("ip");
 
 		public void Visit(IObjectProperty mapping) => Increment("object");

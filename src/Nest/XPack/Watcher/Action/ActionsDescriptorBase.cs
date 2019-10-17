@@ -49,6 +49,6 @@ namespace Nest
 		public TDescriptor Foreach(string @foreach) => Assign(@foreach, (a, v) => a.Foreach = v);
 
 		/// <inheritdoc cref="IAction.MaxIterations"/>
-		public TDescriptor MaxIterations(int maxIterations) => Assign(maxIterations, (a,v) => a.MaxIterations = v);
+		public TDescriptor MaxIterations(int? maxIterations) => Assign(maxIterations, (a,v) => a.MaxIterations = v);
 	}
 }
