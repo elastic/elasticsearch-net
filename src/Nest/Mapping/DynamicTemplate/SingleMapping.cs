@@ -36,6 +36,9 @@ namespace Nest
 		public IProperty GeoShape(Func<GeoShapePropertyDescriptor<T>, IGeoShapeProperty> selector) =>
 			selector?.Invoke(new GeoShapePropertyDescriptor<T>());
 
+		public IProperty Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector) =>
+			selector?.Invoke(new ShapePropertyDescriptor<T>());
+
 		public IProperty IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector) =>
 			selector?.Invoke(new IntegerRangePropertyDescriptor<T>());
 

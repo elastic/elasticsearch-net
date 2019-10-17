@@ -8,7 +8,7 @@ namespace ApiGenerator.Configuration
 {
 	public static class CodeConfiguration
 	{
-		/// <summary> These API"s are not implemented yet in the low and high level client</summary>
+		/// <summary> These APIs are not implemented yet in the low and high level client</summary>
 		public static string[] IgnoredApis { get; } =
 		{
 			// APIs is no longer useful and will be removed

@@ -76,6 +76,8 @@ namespace Nest
 
 		TReturnType GeoShape(Func<GeoShapePropertyDescriptor<T>, IGeoShapeProperty> selector);
 
+		TReturnType Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector);
+
 		TReturnType Completion(Func<CompletionPropertyDescriptor<T>, ICompletionProperty> selector);
 
 		TReturnType Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector);
@@ -122,6 +124,8 @@ namespace Nest
 		public PropertiesDescriptor<T> GeoPoint(Func<GeoPointPropertyDescriptor<T>, IGeoPointProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> GeoShape(Func<GeoShapePropertyDescriptor<T>, IGeoShapeProperty> selector) => SetProperty(selector);
+
+		public PropertiesDescriptor<T> Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector) => SetProperty(selector);
 
