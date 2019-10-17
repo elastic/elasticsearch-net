@@ -43,8 +43,7 @@ namespace ApiGenerator.Configuration
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-			"snapshot.cleanup_repository.json",
-			"ml.estimate_memory_usage.json",
+			"ml.estimate_memory_usage.json"
 		};
 
 
