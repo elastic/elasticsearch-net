@@ -11,6 +11,6 @@ namespace Tests.Core.Extensions
 			configuration.RunIntegrationTests && !forceInMemory ? (IConnection)new HttpConnection() : new InMemoryConnection();
 
 		public static bool InRange(this TestConfigurationBase configuration, string range) =>
-			ElasticVersion.From(configuration.ElasticsearchVersion).InRange(range);
+			configuration.ElasticsearchVersion.InRange(range);
 	}
 }

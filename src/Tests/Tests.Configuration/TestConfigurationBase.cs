@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Stack.Artifacts;
 
 namespace Tests.Configuration
 {
@@ -11,10 +12,9 @@ namespace Tests.Configuration
 		public string TestFilter { get; protected set; }
 
 		/// <summary> The Elasticsearch version to test against, defined for both unit and integration tests</summary>
-		public string ElasticsearchVersion { get; protected set; }
+		public ElasticVersion ElasticsearchVersion { get; protected set; }
 
-		public bool ElasticsearchVersionIsSnapshot => !string.IsNullOrWhiteSpace(ElasticsearchVersion)
-			&& (ElasticsearchVersion.Contains("SNAPSHOT") || ElasticsearchVersion.Contains("latest"));
+		public bool ElasticsearchVersionIsSnapshot => ElasticsearchVersion.ArtifactBuildState == ArtifactBuildState.Snapshot;
 
 		/// <summary> Force a reseed (bootstrap) of the cluster even if checks indicate bootstrap already ran </summary>
 		public bool ForceReseed { get; protected set; }
@@ -69,7 +69,7 @@ namespace Tests.Configuration
 
 		/// <summary> Randomly enable typed keys on searches (defaults to true) on NEST search requests</summary>
 		public bool TypedKeys { get; set; }
-		
+
 		/// <summary> Randomly enable compression on the http requests</summary>
 		public bool HttpCompression { get; set; }
 	}

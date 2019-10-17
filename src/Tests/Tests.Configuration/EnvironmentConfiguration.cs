@@ -13,7 +13,7 @@ namespace Tests.Configuration
 
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 			ElasticsearchVersion = string.IsNullOrWhiteSpace(version) ? yamlConfiguration.ElasticsearchVersion : version;
-			if (string.IsNullOrWhiteSpace(ElasticsearchVersion))
+			if (ElasticsearchVersion == null)
 				throw new Exception("Elasticsearch Version could not be determined from env var NEST_INTEGRATION_VERSION nor the test yaml configuration");
 
 			var externalSeed = TryGetEnv("NEST_TEST_SEED", out var seed)
