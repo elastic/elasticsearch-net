@@ -43,6 +43,18 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		{
 		}
 
+		///<summary>POST on /_snapshot/{repository}/_cleanup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+		///<param name = "repository">A repository name</param>
+		///<param name = "body"></param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse CleanupRepository<TResponse>(string repository, PostData body, CleanupRepositoryRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_snapshot/{repository:repository}/_cleanup"), body, RequestParams(requestParameters));
+		///<summary>POST on /_snapshot/{repository}/_cleanup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+		///<param name = "repository">A repository name</param>
+		///<param name = "body"></param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> CleanupRepositoryAsync<TResponse>(string repository, PostData body, CleanupRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_snapshot/{repository:repository}/_cleanup"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_snapshot/{repository}/{snapshot} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "snapshot">A snapshot name</param>
