@@ -31,7 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bullseye" Version="3.0.0" />
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191017T144254" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191017T152836" />
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
     <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
