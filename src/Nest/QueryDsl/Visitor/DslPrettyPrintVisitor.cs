@@ -83,10 +83,20 @@ namespace Nest
 
 		public virtual void Visit(IGeoShapeQuery query)
 		{
+			WriteShape(query.Shape, query.IndexedShape, query.Field, "geo_shape");
+		}
+
+		public virtual void Visit(IShapeQuery query)
+		{
+			WriteShape(query.Shape, query.IndexedShape, query.Field, "shape");
+		}
+
+		private void WriteShape(IGeoShape shape, IFieldLookup indexedField, Field field, string queryType)
+		{
 			// ReSharper disable UnusedVariable
-			switch (query.Shape)
+			switch (shape)
 			{
-				case null when query.IndexedShape != null:
+				case null when indexedField != null:
 					Write("geo_indexed_shape");
 					break;
 				case ICircleGeoShape circleGeoShape:
@@ -118,7 +128,7 @@ namespace Nest
 					break;
 				// ReSharper restore UnusedVariable
 				default:
-					Write("geo_shape", query.Field);
+					Write(queryType, field);
 					break;
 			}
 		}

@@ -14,7 +14,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.Geo.Shape
 {
-	public abstract class GeoShapeSerializationTestsBase
+	public abstract class ShapeSerializationTestsBase
 		: ApiIntegrationTestBase<IntrusiveOperationCluster,
 			ISearchResponse<Domain.Shape>,
 			ISearchRequest,
@@ -24,7 +24,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		private readonly IEnumerable<GeoCoordinate> _coordinates =
 			Domain.Shape.Shapes.First().Envelope.Coordinates;
 
-		protected GeoShapeSerializationTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage)
+		protected ShapeSerializationTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		{
 			query = new
 			{
-				geo_shape = new
+				shape = new
 				{
 					_name = "named_query",
 					boost = 1.1,
@@ -56,14 +56,14 @@ namespace Tests.QueryDsl.Geo.Shape
 		protected override Func<SearchDescriptor<Domain.Shape>, ISearchRequest> Fluent => s => s
 			.Index(Index)
 			.Query(q => q
-				.GeoShape(c => c
+				.Shape(c => c
 					.Name("named_query")
 					.Boost(1.1)
 					.Field(p => p.Envelope)
 					.Shape(sh => sh
 						.Envelope(_coordinates)
 					)
-					.Relation(GeoShapeRelation.Intersects)
+					.Relation(ShapeRelation.Intersects)
 					.IgnoreUnmapped()
 				)
 			);
@@ -74,13 +74,13 @@ namespace Tests.QueryDsl.Geo.Shape
 
 		protected override SearchRequest<Domain.Shape> Initializer => new SearchRequest<Domain.Shape>(Index)
 		{
-			Query = new GeoShapeQuery
+			Query = new ShapeQuery
 			{
 				Name = "named_query",
 				Boost = 1.1,
 				Field = Infer.Field<Domain.Shape>(p => p.Envelope),
 				Shape = new EnvelopeGeoShape(_coordinates),
-				Relation = GeoShapeRelation.Intersects,
+				Relation = ShapeRelation.Intersects,
 				IgnoreUnmapped = true,
 			}
 		};
@@ -101,9 +101,9 @@ namespace Tests.QueryDsl.Geo.Shape
 		}
 	}
 
-	public class GeoShapeSerializationTests : GeoShapeSerializationTestsBase
+	public class ShapeSerializationTests : ShapeSerializationTestsBase
 	{
-		public GeoShapeSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
+		public ShapeSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
 		protected override string Index => "geoshapes";
@@ -150,9 +150,9 @@ namespace Tests.QueryDsl.Geo.Shape
 	}
 
 	[SkipVersion("<6.2.0", "Support for WKT in Elasticsearch 6.2.0+")]
-	public class GeoShapeWKTSerializationTests : GeoShapeSerializationTestsBase
+	public class ShapeGeoWKTSerializationTests : ShapeSerializationTestsBase
 	{
-		public GeoShapeWKTSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
+		public ShapeGeoWKTSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
 		protected override string Index => "wkt-geoshapes";
