@@ -102,6 +102,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with Point
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapePointQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapePointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -153,7 +154,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	}
 
 	// hide
-	[SkipVersion(">=7.0.0", "multipoint queries are not supported")]
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeMultiPointQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -210,6 +211,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with LineString
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeLineStringQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeLineStringQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -266,6 +268,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with MultiLineString
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeMultiLineStringQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeMultiLineStringQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -322,6 +325,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with Polygon
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapePolygonQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapePolygonQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -381,6 +385,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with MultiPolygon
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeMultiPolygonQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeMultiPolygonQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -437,6 +442,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with GeometryCollection
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeGeometryCollectionQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeGeometryCollectionQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -540,6 +546,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	 * == Querying with Envelope
 	 *
 	 */
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeEnvelopeQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeEnvelopeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -591,7 +598,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	}
 
 	// hide
-	[SkipVersion(">=7.0.0", "CIRCLE geometry is not supported. See https://github.com/elastic/elasticsearch/issues/39237")]
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeCircleQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -648,12 +655,13 @@ namespace Tests.QueryDsl.Geo.Shape
 	* [[shape-query-indexedshape]]
 	* == Querying with an indexed shape
 	*
-	* The GeoShape Query supports using a shape which has already been indexed in another index and/or index type within a geoshape query.
-	* This is particularly useful for when you have a pre-defined list of shapes which are useful to your application and you want to reference this
-	* using a logical name (for example __New Zealand__), rather than having to provide their coordinates within the request each time.
+	* The Query also supports using a shape which has already been indexed in another index. This is particularly useful for when you have
+	* a pre-defined list of shapes which are useful to your application and you want to reference this using a logical name (for example New Zealand)
+	* rather than having to provide their coordinates each time. In this situation it is only necessary to provide:
 	*
-	* See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.html[geoshape queries] for more detail.
+	* See the Elasticsearch documentation on {ref_current}/query-dsl-shape-query.html for more detail.
 	*/
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeIndexedShapeQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public ShapeIndexedShapeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -101,6 +101,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		}
 	}
 
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeSerializationTests : ShapeSerializationTestsBase
 	{
 		public ShapeSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
@@ -149,7 +150,7 @@ namespace Tests.QueryDsl.Geo.Shape
 		}
 	}
 
-	[SkipVersion("<6.2.0", "Support for WKT in Elasticsearch 6.2.0+")]
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeGeoWKTSerializationTests : ShapeSerializationTestsBase
 	{
 		public ShapeGeoWKTSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
