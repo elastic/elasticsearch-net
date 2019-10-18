@@ -7,24 +7,21 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/QueryDsl/Geo/Shape/GeoShapeQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/feature/7.x/shape-queries/src/Tests/Tests/QueryDsl/Specialized/Shape/ShapeQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[geo-shape-query-usage]]
-=== Geo Shape Query Usage
+[[shape-query-usage]]
+=== Shape Query Usage
 
-The GeoShape Query uses the same grid square representation as the geo_shape mapping
-to find documents that have a shape that intersects with the query shape.
-It will also use the same PrefixTree configuration as defined for the field mapping.
+Like geo_shape, Elasticsearch supports the ability to index arbitrary two dimension (non Geospatial) geometries making
+it possible to map out virtual worlds, sporting venues, theme parks, and CAD diagrams. The shape field type
+supports points, lines, polygons, multi-polygons, envelope, etc.
 
-The query supports two ways of defining the query shape, either by providing a whole
-shape definition, or by referencing the name of a shape pre-indexed in another index.
+See the Elasticsearch documentation on {ref_current}/query-dsl-shape-query.html[shape queries] for more detail.
 
-See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.html[geoshape queries] for more detail.
-
-[[geo-shape-query-point]]
+[[shape-query-point]]
 [float]
 == Querying with Point
 
@@ -33,14 +30,14 @@ See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.h
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .Point(PointCoordinates)
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -48,13 +45,13 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new PointGeoShape(PointCoordinates),
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects
 }
 ----
 
@@ -62,10 +59,10 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "point",
@@ -79,7 +76,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-linestring]]
+[[shape-query-linestring]]
 [float]
 == Querying with LineString
 
@@ -88,14 +85,14 @@ new GeoShapeQuery
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .LineString(LineStringCoordinates)
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -103,13 +100,13 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new LineStringGeoShape(LineStringCoordinates),
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects,
 }
 ----
 
@@ -117,10 +114,10 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "linestring",
@@ -140,7 +137,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-multilinestring]]
+[[shape-query-multilinestring]]
 [float]
 == Querying with MultiLineString
 
@@ -149,14 +146,14 @@ new GeoShapeQuery
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .MultiLineString(MultiLineStringCoordinates)
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -164,13 +161,13 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects,
 }
 ----
 
@@ -178,10 +175,10 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "multilinestring",
@@ -247,7 +244,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-polygon]]
+[[shape-query-polygon]]
 [float]
 == Querying with Polygon
 
@@ -256,15 +253,15 @@ new GeoShapeQuery
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .Polygon(PolygonCoordinates)
     )
     .IgnoreUnmapped()
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -272,14 +269,14 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new PolygonGeoShape(PolygonCoordinates),
     IgnoreUnmapped = true,
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects,
 }
 ----
 
@@ -287,11 +284,11 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
     "ignore_unmapped": true,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "polygon",
@@ -347,7 +344,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-multipolygon]]
+[[shape-query-multipolygon]]
 [float]
 == Querying with MultiPolygon
 
@@ -356,14 +353,14 @@ new GeoShapeQuery
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .MultiPolygon(MultiPolygonCoordinates)
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -371,13 +368,13 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new MultiPolygonGeoShape(MultiPolygonCoordinates),
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects,
 }
 ----
 
@@ -385,10 +382,10 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "multipolygon",
@@ -474,7 +471,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-geometrycollection]]
+[[shape-query-geometrycollection]]
 [float]
 == Querying with GeometryCollection
 
@@ -483,10 +480,10 @@ new GeoShapeQuery
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .GeometryCollection(
             new PointGeoShape(PointCoordinates),
@@ -497,7 +494,7 @@ q
             new MultiPolygonGeoShape(MultiPolygonCoordinates)
         )
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -505,11 +502,11 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new GeometryCollection(new IGeoShape[]
     {
         new PointGeoShape(PointCoordinates),
@@ -519,7 +516,7 @@ new GeoShapeQuery
         new PolygonGeoShape(PolygonCoordinates),
         new MultiPolygonGeoShape(MultiPolygonCoordinates),
     }),
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects,
 }
 ----
 
@@ -527,10 +524,10 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "geometrycollection",
@@ -762,7 +759,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-envelope]]
+[[shape-query-envelope]]
 [float]
 == Querying with Envelope
 
@@ -771,14 +768,14 @@ new GeoShapeQuery
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .Shape(s => s
         .Envelope(EnvelopeCoordinates)
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -786,13 +783,13 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     Shape = new EnvelopeGeoShape(EnvelopeCoordinates),
-    Relation = GeoShapeRelation.Intersects,
+    Relation = ShapeRelation.Intersects,
 }
 ----
 
@@ -800,10 +797,10 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "relation": "intersects",
       "shape": {
         "type": "envelope",
@@ -823,7 +820,7 @@ new GeoShapeQuery
 }
 ----
 
-[[geo-shape-query-indexedshape]]
+[[shape-query-indexedshape]]
 [float]
 == Querying with an indexed shape
 
@@ -838,16 +835,16 @@ See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.h
 [source,csharp]
 ----
 q
-.GeoShape(c => c
+.Shape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p => p.LocationShape)
+    .Field(p => p.ArbitraryShape)
     .IndexedShape(p => p
         .Id(Project.Instance.Name)
-        .Path(pp => pp.LocationShape)
+        .Path(pp => pp.ArbitraryShape)
         .Routing(Project.Instance.Name)
     )
-    .Relation(GeoShapeRelation.Intersects)
+    .Relation(ShapeRelation.Intersects)
 )
 ----
 
@@ -855,19 +852,19 @@ q
 
 [source,csharp]
 ----
-new GeoShapeQuery
+new ShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.LocationShape),
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
     IndexedShape = new FieldLookup
     {
         Id = Project.Instance.Name,
         Index = Infer.Index<Project>(),
-        Path = Infer.Field<Project>(p => p.LocationShape),
+        Path = Infer.Field<Project>(p => p.ArbitraryShape),
         Routing = Project.Instance.Name
     },
-    Relation = GeoShapeRelation.Intersects
+    Relation = ShapeRelation.Intersects
 }
 ----
 
@@ -875,14 +872,14 @@ new GeoShapeQuery
 .Example json output
 ----
 {
-  "geo_shape": {
+  "shape": {
     "_name": "named_query",
     "boost": 1.1,
-    "locationShape": {
+    "arbitraryShape": {
       "indexed_shape": {
         "id": "Durgan LLC",
         "index": "project",
-        "path": "locationShape",
+        "path": "arbitraryShape",
         "routing": "Durgan LLC"
       },
       "relation": "intersects"

@@ -45,6 +45,9 @@ namespace Nest
 		[DataMember(Name ="geo_shape")]
 		IGeoShapeQuery GeoShape { get; set; }
 
+		[DataMember(Name ="shape")]
+		IShapeQuery Shape { get; set; }
+
 		[DataMember(Name ="has_child")]
 		IHasChildQuery HasChild { get; set; }
 

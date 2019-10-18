@@ -4,7 +4,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 
-namespace Tests.QueryDsl.Geo.Shape
+namespace Tests.QueryDsl.Geo.GeoShape
 {
 	public class GeoWKTTests
 	{
