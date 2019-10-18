@@ -154,7 +154,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	}
 
 	// hide
-	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
+	[SkipVersion(">=7.0.0", "Multipoint queries are not supported in shape queries")]
 	public class ShapeMultiPointQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
