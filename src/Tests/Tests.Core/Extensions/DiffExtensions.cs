@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -81,8 +82,9 @@ namespace Tests.Core.Extensions
 
 		private static string AppendCsharpApproximation(string expected, string actual, string diff)
 		{
-			diff += "\r\n C# approximation of actual ------ ";
-			diff += "\r\n new ";
+			var eol = Environment.NewLine;
+			diff += $"{eol} C# approximation of actual ------ ";
+			diff += $"{eol} new ";
 			var approx = Regex.Replace(actual, @"^(?=.*:.*)[^:]+:", (s) => s
 							.Value.Replace("\"", "")
 							.Replace(":", " =")
@@ -93,8 +95,8 @@ namespace Tests.Core.Extensions
 			approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
 			diff += approx + ";";
 
-			diff += "\r\n C# approximation of expected ------ ";
-			diff += "\r\n new ";
+			diff += $"{eol} C# approximation of expected ------ ";
+			diff += $"{eol} new ";
 			approx = Regex.Replace(expected, @"^(?=.*:.*)[^:]+:", (s) => s
 							.Value.Replace("\"", "")
 							.Replace(":", " =")
