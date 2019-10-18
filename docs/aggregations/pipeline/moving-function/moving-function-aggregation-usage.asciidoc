@@ -40,6 +40,7 @@ a => a
         .MovingFunction("commits_moving_avg", mv => mv
             .BucketsPath("commits")
             .Window(30)
+            .Shift(0)
             .Script("MovingFunctions.unweightedAvg(values)")
         )
     )
@@ -59,6 +60,7 @@ new DateHistogramAggregation("projects_started_per_month")
         && new MovingFunctionAggregation("commits_moving_avg", "commits")
         {
             Window = 30,
+            Shift = 0,
             Script = "MovingFunctions.unweightedAvg(values)"
         }
 }
@@ -83,6 +85,7 @@ new DateHistogramAggregation("projects_started_per_month")
         "moving_fn": {
           "buckets_path": "commits",
           "window": 30,
+          "shift": 0,
           "script": "MovingFunctions.unweightedAvg(values)"
         }
       }
