@@ -9,7 +9,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
-	[SkipVersion("<7.3.0", "This uses flattened type introduced in 5.2.0")]
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class PutMappingApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
@@ -80,6 +80,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				locationShape = new
 				{
 					type = "geo_shape"
+				},
+				arbitraryShape = new
+				{
+					type = "shape"
 				},
 				metadata = new { type = "object" },
 				name = new
@@ -264,6 +268,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					}
 				},
 				{ p => p.LocationShape, new GeoShapeProperty() },
+				{ p => p.ArbitraryShape, new ShapeProperty() },
 				{ p => p.Metadata, new ObjectProperty() },
 				{ p => p.Name, new TextProperty { Index = false } },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },

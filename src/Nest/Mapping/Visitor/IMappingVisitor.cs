@@ -28,6 +28,8 @@
 
 		void Visit(IGeoShapeProperty property);
 
+		void Visit(IShapeProperty property);
+
 		void Visit(INumberProperty property);
 
 		void Visit(ICompletionProperty property);
@@ -90,6 +92,8 @@
 		public virtual void Visit(IGeoPointProperty property) { }
 
 		public virtual void Visit(IGeoShapeProperty property) { }
+
+		public virtual void Visit(IShapeProperty property) { }
 
 		public virtual void Visit(ICompletionProperty property) { }
 

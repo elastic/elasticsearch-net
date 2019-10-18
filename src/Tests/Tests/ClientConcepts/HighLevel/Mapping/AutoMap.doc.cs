@@ -193,7 +193,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * [horizontal]
 		 * `Nest.QueryContainer`:: maps to `"percolator"`
 		 * `Nest.GeoLocation`:: maps to `"geo_point"`
-		 * `Nest.IGeoShape`:: maps to `"geo_shape"`
+		 * `Nest.IGeoShape`:: maps to `"geo_shape"` (if you want to map to a `"shape"` type use explicit mapping or the [Shape] attribute on the property)
 		 * `Nest.CompletionField`:: maps to `"completion"`
 		 * `Nest.DateRange`:: maps to `"date_range"`
 		 * `Nest.DoubleRange`:: maps to `"double_range"`

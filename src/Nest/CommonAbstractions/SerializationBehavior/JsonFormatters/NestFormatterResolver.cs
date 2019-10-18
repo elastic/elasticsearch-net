@@ -46,6 +46,8 @@ namespace Nest
 					new JsonNetCompatibleUriFormatter(),
 					new GeoOrientationFormatter(),
 					new NullableGeoOrientationFormatter(),
+					new ShapeOrientationFormatter(),
+					new NullableShapeOrientationFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling

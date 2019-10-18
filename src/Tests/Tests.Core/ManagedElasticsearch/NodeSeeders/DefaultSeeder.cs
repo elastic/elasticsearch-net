@@ -342,6 +342,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				.GeoShape(g => g
 					.Name(p => p.LocationShape)
 				)
+				.Shape(g => g
+					.Name(p => p.ArbitraryShape)
+				)
 				.Completion(cm => cm
 					.Name(p => p.Suggest)
 					.Contexts(cx => cx

@@ -154,6 +154,13 @@ namespace Nest
 							Accept(t.Fields);
 						});
 						break;
+					case FieldType.Shape:
+						Visit<IShapeProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+							Accept(t.Fields);
+						});
+						break;
 					case FieldType.Completion:
 						Visit<ICompletionProperty>(field, t =>
 						{

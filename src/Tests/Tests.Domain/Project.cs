@@ -44,6 +44,9 @@ namespace Tests.Domain
 		public Developer LeadDeveloper { get; set; }
 		public SimpleGeoPoint LocationPoint { get; set; }
 		public IGeoShape LocationShape { get; set; }
+
+		[Shape] // Explicity map as a shape type
+		public IGeoShape ArbitraryShape { get; set; }
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public string Name { get; set; }
 		public int? NumberOfCommits { get; set; }
@@ -80,6 +83,7 @@ namespace Tests.Domain
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)))
 				.RuleFor(p => p.LocationPoint, f => SimpleGeoPoint.Generator.Generate())
 				.RuleFor(p => p.LocationShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
+				.RuleFor(p => p.ArbitraryShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 50))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())

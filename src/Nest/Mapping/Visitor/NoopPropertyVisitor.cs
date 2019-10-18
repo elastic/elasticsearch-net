@@ -14,6 +14,8 @@ namespace Nest
 
 		public virtual void Visit(IGeoShapeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IShapeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual void Visit(ICompletionProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(IMurmur3HashProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
@@ -93,6 +95,9 @@ namespace Nest
 					break;
 				case IGeoShapeProperty geoShapeType:
 					Visit(geoShapeType, propertyInfo, attribute);
+					break;
+				case IShapeProperty shapeType:
+					Visit(shapeType, propertyInfo, attribute);
 					break;
 				case IGeoPointProperty geoPointType:
 					Visit(geoPointType, propertyInfo, attribute);

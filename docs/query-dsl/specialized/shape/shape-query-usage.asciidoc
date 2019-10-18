@@ -1,0 +1,890 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/feature/7.x/shape-queries/src/Tests/Tests/QueryDsl/Specialized/Shape/ShapeQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[shape-query-usage]]
+=== Shape Query Usage
+
+Like geo_shape, Elasticsearch supports the ability to index arbitrary two dimension (non Geospatial) geometries making
+it possible to map out virtual worlds, sporting venues, theme parks, and CAD diagrams. The shape field type
+supports points, lines, polygons, multi-polygons, envelope, etc.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-shape-query.html[shape queries] for more detail.
+
+[[shape-query-point]]
+[float]
+== Querying with Point
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .Point(PointCoordinates)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new PointGeoShape(PointCoordinates),
+    Relation = ShapeRelation.Intersects
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "point",
+        "coordinates": [
+          38.897676,
+          -77.03653
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-linestring]]
+[float]
+== Querying with LineString
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .LineString(LineStringCoordinates)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new LineStringGeoShape(LineStringCoordinates),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "linestring",
+        "coordinates": [
+          [
+            38.897676,
+            -77.03653
+          ],
+          [
+            38.889939,
+            -77.009051
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-multilinestring]]
+[float]
+== Querying with MultiLineString
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .MultiLineString(MultiLineStringCoordinates)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "multilinestring",
+        "coordinates": [
+          [
+            [
+              2.0,
+              12.0
+            ],
+            [
+              2.0,
+              13.0
+            ],
+            [
+              3.0,
+              13.0
+            ],
+            [
+              3.0,
+              12.0
+            ]
+          ],
+          [
+            [
+              0.0,
+              10.0
+            ],
+            [
+              0.0,
+              11.0
+            ],
+            [
+              1.0,
+              11.0
+            ],
+            [
+              1.0,
+              10.0
+            ]
+          ],
+          [
+            [
+              0.2,
+              10.2
+            ],
+            [
+              0.2,
+              10.8
+            ],
+            [
+              0.8,
+              10.8
+            ],
+            [
+              0.8,
+              12.0
+            ]
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-polygon]]
+[float]
+== Querying with Polygon
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .Polygon(PolygonCoordinates)
+    )
+    .IgnoreUnmapped()
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new PolygonGeoShape(PolygonCoordinates),
+    IgnoreUnmapped = true,
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "ignore_unmapped": true,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            [
+              10.0,
+              -17.0
+            ],
+            [
+              15.0,
+              16.0
+            ],
+            [
+              0.0,
+              12.0
+            ],
+            [
+              -15.0,
+              16.0
+            ],
+            [
+              -10.0,
+              -17.0
+            ],
+            [
+              10.0,
+              -17.0
+            ]
+          ],
+          [
+            [
+              8.2,
+              18.2
+            ],
+            [
+              8.2,
+              -18.8
+            ],
+            [
+              -8.8,
+              -10.8
+            ],
+            [
+              8.8,
+              18.2
+            ]
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-multipolygon]]
+[float]
+== Querying with MultiPolygon
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .MultiPolygon(MultiPolygonCoordinates)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new MultiPolygonGeoShape(MultiPolygonCoordinates),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "multipolygon",
+        "coordinates": [
+          [
+            [
+              [
+                10.0,
+                -17.0
+              ],
+              [
+                15.0,
+                16.0
+              ],
+              [
+                0.0,
+                12.0
+              ],
+              [
+                -15.0,
+                16.0
+              ],
+              [
+                -10.0,
+                -17.0
+              ],
+              [
+                10.0,
+                -17.0
+              ]
+            ],
+            [
+              [
+                8.2,
+                18.2
+              ],
+              [
+                8.2,
+                -18.8
+              ],
+              [
+                -8.8,
+                -10.8
+              ],
+              [
+                8.8,
+                18.2
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                8.0,
+                -15.0
+              ],
+              [
+                15.0,
+                16.0
+              ],
+              [
+                0.0,
+                12.0
+              ],
+              [
+                -15.0,
+                16.0
+              ],
+              [
+                -10.0,
+                -17.0
+              ],
+              [
+                8.0,
+                -15.0
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-geometrycollection]]
+[float]
+== Querying with GeometryCollection
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .GeometryCollection(
+            new PointGeoShape(PointCoordinates),
+            new MultiPointGeoShape(MultiPointCoordinates),
+            new LineStringGeoShape(LineStringCoordinates),
+            new MultiLineStringGeoShape(MultiLineStringCoordinates),
+            new PolygonGeoShape(PolygonCoordinates),
+            new MultiPolygonGeoShape(MultiPolygonCoordinates)
+        )
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new GeometryCollection(new IGeoShape[]
+    {
+        new PointGeoShape(PointCoordinates),
+        new MultiPointGeoShape(MultiPointCoordinates),
+        new LineStringGeoShape(LineStringCoordinates),
+        new MultiLineStringGeoShape(MultiLineStringCoordinates),
+        new PolygonGeoShape(PolygonCoordinates),
+        new MultiPolygonGeoShape(MultiPolygonCoordinates),
+    }),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "geometrycollection",
+        "geometries": [
+          {
+            "type": "point",
+            "coordinates": [
+              38.897676,
+              -77.03653
+            ]
+          },
+          {
+            "type": "multipoint",
+            "coordinates": [
+              [
+                38.897676,
+                -77.03653
+              ],
+              [
+                38.889939,
+                -77.009051
+              ]
+            ]
+          },
+          {
+            "type": "linestring",
+            "coordinates": [
+              [
+                38.897676,
+                -77.03653
+              ],
+              [
+                38.889939,
+                -77.009051
+              ]
+            ]
+          },
+          {
+            "type": "multilinestring",
+            "coordinates": [
+              [
+                [
+                  2.0,
+                  12.0
+                ],
+                [
+                  2.0,
+                  13.0
+                ],
+                [
+                  3.0,
+                  13.0
+                ],
+                [
+                  3.0,
+                  12.0
+                ]
+              ],
+              [
+                [
+                  0.0,
+                  10.0
+                ],
+                [
+                  0.0,
+                  11.0
+                ],
+                [
+                  1.0,
+                  11.0
+                ],
+                [
+                  1.0,
+                  10.0
+                ]
+              ],
+              [
+                [
+                  0.2,
+                  10.2
+                ],
+                [
+                  0.2,
+                  10.8
+                ],
+                [
+                  0.8,
+                  10.8
+                ],
+                [
+                  0.8,
+                  12.0
+                ]
+              ]
+            ]
+          },
+          {
+            "type": "polygon",
+            "coordinates": [
+              [
+                [
+                  10.0,
+                  -17.0
+                ],
+                [
+                  15.0,
+                  16.0
+                ],
+                [
+                  0.0,
+                  12.0
+                ],
+                [
+                  -15.0,
+                  16.0
+                ],
+                [
+                  -10.0,
+                  -17.0
+                ],
+                [
+                  10.0,
+                  -17.0
+                ]
+              ],
+              [
+                [
+                  8.2,
+                  18.2
+                ],
+                [
+                  8.2,
+                  -18.8
+                ],
+                [
+                  -8.8,
+                  -10.8
+                ],
+                [
+                  8.8,
+                  18.2
+                ]
+              ]
+            ]
+          },
+          {
+            "type": "multipolygon",
+            "coordinates": [
+              [
+                [
+                  [
+                    10.0,
+                    -17.0
+                  ],
+                  [
+                    15.0,
+                    16.0
+                  ],
+                  [
+                    0.0,
+                    12.0
+                  ],
+                  [
+                    -15.0,
+                    16.0
+                  ],
+                  [
+                    -10.0,
+                    -17.0
+                  ],
+                  [
+                    10.0,
+                    -17.0
+                  ]
+                ],
+                [
+                  [
+                    8.2,
+                    18.2
+                  ],
+                  [
+                    8.2,
+                    -18.8
+                  ],
+                  [
+                    -8.8,
+                    -10.8
+                  ],
+                  [
+                    8.8,
+                    18.2
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    8.0,
+                    -15.0
+                  ],
+                  [
+                    15.0,
+                    16.0
+                  ],
+                  [
+                    0.0,
+                    12.0
+                  ],
+                  [
+                    -15.0,
+                    16.0
+                  ],
+                  [
+                    -10.0,
+                    -17.0
+                  ],
+                  [
+                    8.0,
+                    -15.0
+                  ]
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-envelope]]
+[float]
+== Querying with Envelope
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .Envelope(EnvelopeCoordinates)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new EnvelopeGeoShape(EnvelopeCoordinates),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "envelope",
+        "coordinates": [
+          [
+            -45.0,
+            45.0
+          ],
+          [
+            45.0,
+            -45.0
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-indexedshape]]
+[float]
+== Querying with an indexed shape
+
+The GeoShape Query supports using a shape which has already been indexed in another index and/or index type within a geoshape query.
+This is particularly useful for when you have a pre-defined list of shapes which are useful to your application and you want to reference this
+using a logical name (for example __New Zealand__), rather than having to provide their coordinates within the request each time.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.html[geoshape queries] for more detail.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .IndexedShape(p => p
+        .Id(Project.Instance.Name)
+        .Path(pp => pp.ArbitraryShape)
+        .Routing(Project.Instance.Name)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    IndexedShape = new FieldLookup
+    {
+        Id = Project.Instance.Name,
+        Index = Infer.Index<Project>(),
+        Path = Infer.Field<Project>(p => p.ArbitraryShape),
+        Routing = Project.Instance.Name
+    },
+    Relation = ShapeRelation.Intersects
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "indexed_shape": {
+        "id": "Durgan LLC",
+        "index": "project",
+        "path": "arbitraryShape",
+        "routing": "Durgan LLC"
+      },
+      "relation": "intersects"
+    }
+  }
+}
+----
+
