@@ -77,6 +77,7 @@ namespace Nest
 				case FieldType.Ip: return Deserialize<IpProperty>(ref segmentReader, formatterResolver);
 				case FieldType.GeoPoint: return Deserialize<GeoPointProperty>(ref segmentReader, formatterResolver);
 				case FieldType.GeoShape: return Deserialize<GeoShapeProperty>(ref segmentReader, formatterResolver);
+				case FieldType.Shape: return Deserialize<ShapeProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Completion: return Deserialize<CompletionProperty>(ref segmentReader, formatterResolver);
 				case FieldType.TokenCount: return Deserialize<TokenCountProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Murmur3Hash: return Deserialize<Murmur3HashProperty>(ref segmentReader, formatterResolver);
@@ -155,6 +156,9 @@ namespace Nest
 					break;
 				case "geo_shape":
 					Serialize<IGeoShapeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "shape":
+					Serialize<IShapeProperty>(ref writer, value, formatterResolver);
 					break;
 				case "completion":
 					Serialize<ICompletionProperty>(ref writer, value, formatterResolver);

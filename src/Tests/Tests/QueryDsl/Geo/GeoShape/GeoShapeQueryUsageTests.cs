@@ -5,7 +5,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.Geo.Shape
+namespace Tests.QueryDsl.Geo.GeoShape
 {
 	/**
 	 * The GeoShape Query uses the same grid square representation as the geo_shape mapping

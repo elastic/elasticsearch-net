@@ -165,6 +165,12 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
+		/// Finds documents with shapes that either intersect, are within, or do not intersect a specified shape.
+		/// </summary>
+		public QueryContainer Shape(Func<ShapeQueryDescriptor<T>, IShapeQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.Shape = query);
+
+		/// <summary>
 		/// Matches documents with a geo_point type field that falls within a polygon of points
 		/// </summary>
 		public QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery> selector) =>
