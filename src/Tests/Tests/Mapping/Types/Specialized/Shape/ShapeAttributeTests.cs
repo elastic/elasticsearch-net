@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 
 namespace Tests.Mapping.Types.Shape
 {
@@ -13,6 +14,7 @@ namespace Tests.Mapping.Types.Shape
 		public object Minimal { get; set; }
 	}
 
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapeAttributeTests : AttributeTestsBase<ShapeTest>
 	{
 		protected override object ExpectJson => new
