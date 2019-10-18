@@ -598,7 +598,7 @@ namespace Tests.QueryDsl.Geo.Shape
 	}
 
 	// hide
-	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
+	[SkipVersion(">=7.0.0", "Circle queries are not supported in shape queries")]
 	public class ShapeCircleQueryUsageTests : ShapeQueryUsageTestsBase
 	{
 		public ShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
