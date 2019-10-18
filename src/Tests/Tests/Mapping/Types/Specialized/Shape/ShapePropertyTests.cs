@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -6,6 +7,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Shape
 {
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class ShapePropertyTests : PropertyTestsBase
 	{
 		public ShapePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

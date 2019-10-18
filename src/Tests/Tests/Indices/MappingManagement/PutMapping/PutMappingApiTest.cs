@@ -9,7 +9,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
-	[SkipVersion("<7.3.0", "This uses flattened type introduced in 5.2.0")]
+	[SkipVersion("<7.4.0", "Shape queries introduced in 7.4.0+")]
 	public class PutMappingApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
