@@ -77,7 +77,7 @@ namespace Elasticsearch.Net
 		public virtual bool SupportsReseeding => false;
 
 		/// <inheritdoc />
-		public bool UsingSsl { get; set; }
+		public bool UsingSsl { get; private set; }
 
 		protected List<Node> AliveNodes
 		{
@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		protected IDateTimeProvider DateTimeProvider { get; set; }
+		protected IDateTimeProvider DateTimeProvider { get; private set;B }
 
 		protected List<Node> InternalNodes { get; set; }
 		protected Random Random { get; }
