@@ -21,6 +21,7 @@ namespace Nest
 		private IGeoDistanceQuery _geoDistance;
 		private IGeoPolygonQuery _geoPolygon;
 		private IGeoShapeQuery _geoShape;
+		private IShapeQuery _shape;
 		private IHasChildQuery _hasChild;
 		private IHasParentQuery _hasParent;
 		private IIdsQuery _ids;
@@ -144,6 +145,12 @@ namespace Nest
 		{
 			get => _geoShape;
 			set => _geoShape = Set(value);
+		}
+
+		IShapeQuery IQueryContainer.Shape
+		{
+			get => _shape;
+			set => _shape = Set(value);
 		}
 
 		IHasChildQuery IQueryContainer.HasChild
