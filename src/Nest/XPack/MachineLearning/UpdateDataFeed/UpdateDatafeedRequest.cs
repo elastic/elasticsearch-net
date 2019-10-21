@@ -38,6 +38,7 @@ namespace Nest
 		/// <summary>
 		/// A numerical character string that uniquely identifies the job.
 		/// </summary>
+		[Obsolete("As of 7.4.0 the ability to associate a feed with a different job is being deprecated as it adds unnecessary complexity")]
 		[DataMember(Name ="job_id")]
 		Id JobId { get; set; }
 
@@ -85,6 +86,7 @@ namespace Nest
 		public Indices Indices { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("As of 7.4.0 the ability to associate a feed with a different job is being deprecated as it adds unnecessary complexity")]
 		public Id JobId { get; set; }
 
 		/// <inheritdoc />
@@ -133,6 +135,7 @@ namespace Nest
 		public UpdateDatafeedDescriptor<TDocument> AllIndices() => Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
+		[Obsolete("As of 7.4.0 the ability to associate a feed with a different job is being deprecated as it adds unnecessary complexity")]
 		public UpdateDatafeedDescriptor<TDocument> JobId(Id jobId) => Assign(jobId, (a, v) => a.JobId = v);
 
 		/// <inheritdoc />
