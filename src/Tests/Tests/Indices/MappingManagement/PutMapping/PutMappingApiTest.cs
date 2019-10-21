@@ -164,6 +164,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					.Name(p => p.Name)
 					.Index(false)
 				)
+				.Shape(shape => shape.Name(p => p.ArbitraryShape))
 				.Object<Developer>(o => o
 					.Name(p => p.LeadDeveloper)
 					.AutoMap()
