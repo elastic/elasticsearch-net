@@ -7,14 +7,22 @@ namespace Examples.Root
 {
 	public class SearchPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line18()
 		{
 			// tag::5d32279dcd52b22d9e1178a02a3ad957[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse = client.Index(new Tweet
+			{
+				User = "kimchy",
+				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+				Message = "trying out Elasticsearch"
+			}, i => i
+				.Index("twitter")
+				.Routing("kimchy")
+			);
 			// end::5d32279dcd52b22d9e1178a02a3ad957[]
 
-			response0.MatchesExample(@"POST /twitter/_doc?routing=kimchy
+			indexResponse.MatchesExample(@"POST /twitter/_doc?routing=kimchy
 			{
 			    ""user"" : ""kimchy"",
 			    ""post_date"" : ""2009-11-15T14:12:12"",

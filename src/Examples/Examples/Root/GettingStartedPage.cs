@@ -25,11 +25,11 @@ namespace Examples.Root
 		{
 			// tag::311c4b632a29b9ead63b02d01f10096b[]
 			var indexResponse = client.Index(new Customer
-				{
-					Name = "John Doe"
-				}, i => i
-				.Index("customer")
-				.Id(1)
+			{
+				Name = "John Doe"
+			}, i => i
+			.Index("customer")
+			.Id(1)
 			);
 			// end::311c4b632a29b9ead63b02d01f10096b[]
 
@@ -102,7 +102,15 @@ namespace Examples.Root
 			  ],
 			  ""from"": 10,
 			  ""size"": 10
-			}");
+			}", e =>
+			{
+				var body = JObject.Parse(e.Body);
+				// only long form of sort it supported by the client
+				var sort = body["sort"][0]["account_number"].Value<string>();
+				body["sort"][0]["account_number"] = new JObject { { "order", sort } };
+				e.Body = body.ToString();
+				return e;
+			});
 		}
 
 		[U]
