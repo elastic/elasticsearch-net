@@ -53,6 +53,9 @@ namespace Nest
 		[DataMember(Name = "flattened")]
 		public XPackFeature Flattened { get; internal set; }
 
+		[DataMember(Name = "data_science")]
+		public XPackFeature DataScience { get; internal set; }
+
 		[DataMember(Name = "graph")]
 		public XPackFeature Graph { get; internal set; }
 

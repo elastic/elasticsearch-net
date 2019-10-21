@@ -48,6 +48,7 @@ namespace Nest
 				Accept(v, d.Aggregations);
 			});
 			AcceptAggregation(aggregation.CumulativeSum, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.CumulativeCardinality, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.DateHistogram, visitor, (v, d) =>
 			{
 				v.Visit(d);
