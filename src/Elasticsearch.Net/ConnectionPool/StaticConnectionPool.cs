@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		protected IDateTimeProvider DateTimeProvider { get; private set;B }
+		protected IDateTimeProvider DateTimeProvider { get; private set; }
 
 		protected List<Node> InternalNodes { get; set; }
 		protected Random Random { get; }
