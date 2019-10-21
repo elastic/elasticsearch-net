@@ -154,5 +154,8 @@ namespace Nest
 		public ProcessorsDescriptor Pipeline(Func<PipelineProcessorDescriptor, IPipelineProcessor> selector) =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new PipelineProcessorDescriptor())));
 
+		/// <inheritdoc cref="IPipelineProcessor" />
+		public ProcessorsDescriptor Circle<T>(Func<CircleProcessorDescriptor<T>, ICircleProcessor> selector) where T : class  =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new CircleProcessorDescriptor<T>())));
 	}
 }
