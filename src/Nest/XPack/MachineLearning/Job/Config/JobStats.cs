@@ -100,6 +100,13 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "exponential_average_bucket_processing_time_ms")]
 		public double ExponentialAverageBucketProcessingTimeMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Exponential moving average of all bucket processing times in milliseconds
+		/// </summary>
+		/// <remarks>Valid in Elasticsearch 7.4.0+</remarks>
+		[DataMember(Name = "exponential_average_bucket_processing_time_per_hour_ms")]
+		public double ExponentialAverageBucketProcessingTimePerHourMilliseconds { get; internal set; }
 	}
 
 	public class JobForecastStatistics
