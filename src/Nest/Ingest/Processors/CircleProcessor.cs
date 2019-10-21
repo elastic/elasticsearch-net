@@ -43,13 +43,13 @@ namespace Nest
 		/// (measured in meters for geo_shape, unit-less for shape)
 		/// </summary>
 		[DataMember(Name = "error_distance")]
-		double ErrorDistance { get; set; }
+		double? ErrorDistance { get; set; }
 
 		/// <summary>
 		/// Which field mapping type is to be used when processing the circle.
 		/// </summary>
 		[DataMember(Name = "shape_type")]
-		ShapeType ShapeType { get; set; }
+		ShapeType? ShapeType { get; set; }
 	}
 
 	public class CircleProcessor : ProcessorBase, ICircleProcessor
@@ -64,10 +64,10 @@ namespace Nest
 		public bool? IgnoreMissing { get; set; }
 
 		/// <inheritdoc />
-		public double ErrorDistance { get; set; }
+		public double? ErrorDistance { get; set; }
 
 		/// <inheritdoc />
-		public ShapeType ShapeType { get; set; }
+		public ShapeType? ShapeType { get; set; }
 
 		/// <inheritdoc />
 		protected override string Name => "circle";
@@ -82,8 +82,8 @@ namespace Nest
 		Field ICircleProcessor.Field { get; set; }
 		Field ICircleProcessor.TargetField { get; set; }
 		bool? ICircleProcessor.IgnoreMissing { get; set; }
-		double ICircleProcessor.ErrorDistance { get; set; }
-		ShapeType ICircleProcessor.ShapeType { get; set; }
+		double? ICircleProcessor.ErrorDistance { get; set; }
+		ShapeType? ICircleProcessor.ShapeType { get; set; }
 
 		/// <inheritdoc cref="ICircleProcessor.Field" />
 		public CircleProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -104,11 +104,11 @@ namespace Nest
 			Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 
 		/// <inheritdoc cref="ICircleProcessor.IgnoreMissing">
-		public CircleProcessorDescriptor<T> ErrorDistance(double errorDistance) =>
+		public CircleProcessorDescriptor<T> ErrorDistance(double? errorDistance) =>
 			Assign(errorDistance, (a, v) => a.ErrorDistance = v);
 
 		/// <inheritdoc cref="ICircleProcessor.ShapeType">
-		public CircleProcessorDescriptor<T> ShapeType(ShapeType shapeType) =>
+		public CircleProcessorDescriptor<T> ShapeType(ShapeType? shapeType) =>
 			Assign(shapeType, (a, v) => a.ShapeType = v);
 	}
 }

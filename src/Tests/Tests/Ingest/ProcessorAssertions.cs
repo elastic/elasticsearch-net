@@ -412,7 +412,7 @@ namespace Tests.Ingest
 				field = "description",
 				target_field = "arbitraryShape",
 				shape_type = "shape",
-				error_distance = 10,
+				error_distance = 10.0,
 				ignore_missing = true,
 			};
 
