@@ -1,0 +1,37 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line412 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/DeleteByQueryPage.cs#L150-L226.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var deleteByQueryResponse = client.DeleteByQuery<Tweet>(d => d
+    .Index("twitter")
+    .Slice(s => s
+        .Id(0)
+        .Max(2)
+    )
+    .Query(q => q
+        .Range(r => r
+            .Field(f => f.Likes)
+            .LessThan(10)
+        )
+    )
+);
+
+var deleteByQueryResponse2 = client.DeleteByQuery<Tweet>(d => d
+    .Index("twitter")
+    .Slice(s => s
+        .Id(1)
+        .Max(2)
+    )
+    .Query(q => q
+        .Range(r => r
+            .Field(f => f.Likes)
+            .LessThan(10)
+        )
+    )
+);
+----
