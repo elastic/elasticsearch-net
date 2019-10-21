@@ -386,6 +386,38 @@ namespace Tests.Ingest
 			public override string Key => "attachment";
 		}
 
+		[SkipVersion("<7.4.0", "Circle processor added in 7.4.0")]
+		public class Circle : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Circle<Project>(ud => ud
+					.Field(p => p.Description)
+					.TargetField(p => p.ArbitraryShape)
+					.ShapeType(ShapeType.Shape)
+					.ErrorDistance(10d)
+					.IgnoreMissing()
+				);
+
+			public override IProcessor Initializer => new CircleProcessor
+			{
+				Field = "description",
+				TargetField = "arbitraryShape",
+				ShapeType = ShapeType.Shape,
+				ErrorDistance = 10d,
+				IgnoreMissing = true
+			};
+
+			public override object Json => new
+			{
+				field = "description",
+				target_field = "arbitraryShape",
+				shape_type = "shape",
+				error_distance = 10,
+				ignore_missing = true,
+			};
+
+			public override string Key => "circle";
+		}
 
 		[SkipVersion("<6.4.0", "")]
 		public class Bytes : ProcessorAssertion

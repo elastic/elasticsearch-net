@@ -39,6 +39,7 @@ namespace Nest
 			{ "set_security_user", 27 },
 			{ "pipeline", 28 },
 			{ "drop", 29 },
+			{ "circle", 30 },
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -148,6 +149,9 @@ namespace Nest
 						break;
 					case 29:
 						processor = Deserialize<DropProcessor>(ref reader, formatterResolver);
+						break;
+					case 30:
+						processor = Deserialize<CircleProcessor>(ref reader, formatterResolver);
 						break;
 				}
 			}
@@ -259,6 +263,9 @@ namespace Nest
 					break;
 				case "drop":
 					Serialize<IDropProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "circle":
+					Serialize<ICircleProcessor>(ref writer, value, formatterResolver);
 					break;
 				default:
 					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProcessor>();
