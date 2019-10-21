@@ -6,7 +6,7 @@ namespace Examples.Indices
 	public class GetMappingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line8()
+		public void Line10()
 		{
 			// tag::a8fba09a46b2c3524428aa3259b7124f[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line28()
+		public void Line65()
 		{
 			// tag::cf02e3d8b371bd59f0224967c36330da[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line39()
+		public void Line75()
 		{
 			// tag::09cdd5ae8114c49886026fef8d00a19c[]
 			var response0 = new SearchResponse<object>();

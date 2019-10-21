@@ -6,13 +6,13 @@ namespace Examples.Indices
 	public class IndicesExistsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line7()
+		public void Line12()
 		{
-			// tag::2609ef78d52856aece101d28fc1e0701[]
+			// tag::22b6176a55b7884c247e30fb0899be5d[]
 			var response0 = new SearchResponse<object>();
-			// end::2609ef78d52856aece101d28fc1e0701[]
+			// end::22b6176a55b7884c247e30fb0899be5d[]
 
-			response0.MatchesExample(@"HEAD twitter");
+			response0.MatchesExample(@"HEAD /twitter");
 		}
 	}
 }

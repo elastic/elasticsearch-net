@@ -16,7 +16,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line158()
+		public void Line156()
 		{
 			// tag::6d13e0721a7aac00adcdc5fe77198300[]
 			var response0 = new SearchResponse<object>();

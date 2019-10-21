@@ -6,7 +6,26 @@ namespace Examples.QueryDsl
 	public class MatchQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line12()
+		public void Line18()
+		{
+			// tag::e0d6e02b998bdea99c9c08dcc3630c5e[]
+			var response0 = new SearchResponse<object>();
+			// end::e0d6e02b998bdea99c9c08dcc3630c5e[]
+
+			response0.MatchesExample(@"GET /_search
+			{
+			    ""query"": {
+			        ""match"" : {
+			            ""message"" : {
+			                ""query"" : ""this is a test""
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line150()
 		{
 			// tag::fa2fe60f570bd930d2891778c6efbfe6[]
 			var response0 = new SearchResponse<object>();
@@ -23,7 +42,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line175()
 		{
 			// tag::6138d6919f3cbaaf61e1092f817d295c[]
 			var response0 = new SearchResponse<object>();
@@ -43,7 +62,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line87()
+		public void Line219()
 		{
 			// tag::5043b83a89091fa00edb341ddf7ba370[]
 			var response0 = new SearchResponse<object>();
@@ -63,7 +82,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		public void Line241()
 		{
 			// tag::0ac9916f47a2483b89c1416684af322a[]
 			var response0 = new SearchResponse<object>();
@@ -84,7 +103,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line138()
+		public void Line268()
 		{
 			// tag::7f56755fb6c42f7e6203339a6d0cb6e6[]
 			var response0 = new SearchResponse<object>();

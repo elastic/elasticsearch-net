@@ -6,7 +6,17 @@ namespace Examples.Indices
 	public class SegmentsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line12()
+		public void Line11()
+		{
+			// tag::3f176d802b3e2964686ecd91748fab89[]
+			var response0 = new SearchResponse<object>();
+			// end::3f176d802b3e2964686ecd91748fab89[]
+
+			response0.MatchesExample(@"GET /twitter/_segments");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line106()
 		{
 			// tag::940e8c2c7ff92d71f489bdb7183c1ce6[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +26,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line22()
+		public void Line115()
 		{
 			// tag::975b4b92464d52068516aa2f0f955cc1[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +36,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line31()
+		public void Line124()
 		{
 			// tag::6414b9276ba1c63898c3ff5cbe03c54e[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +46,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line129()
+		public void Line184()
 		{
 			// tag::1b21d886f6e9619c73079d14581ccbe4[]
 			var response0 = new SearchResponse<object>();

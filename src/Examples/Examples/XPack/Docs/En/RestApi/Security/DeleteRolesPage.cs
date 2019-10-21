@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class DeleteRolesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line40()
 		{
 			// tag::cffce059425d3d21e7f9571500d63524[]
 			var response0 = new SearchResponse<object>();

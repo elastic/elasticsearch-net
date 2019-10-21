@@ -22,7 +22,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line31()
+		public void Line30()
 		{
 			// tag::5c10e00c99b338353b3e486e94be253e[]
 			var response0 = new SearchResponse<object>();
@@ -38,7 +38,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line45()
+		public void Line43()
 		{
 			// tag::160ae4ff9c53b8a98700caed0e82d7fe[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +54,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line63()
+		public void Line60()
 		{
 			// tag::1e86a78433a0748970d6c3922a34898c[]
 			var response0 = new SearchResponse<object>();

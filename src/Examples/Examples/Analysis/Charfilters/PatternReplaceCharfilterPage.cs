@@ -45,7 +45,7 @@ namespace Examples.Analysis.Charfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line102()
+		public void Line101()
 		{
 			// tag::1e1f0d83b1ca672396341af5dcfd2603[]
 			var response0 = new SearchResponse<object>();
@@ -95,7 +95,7 @@ namespace Examples.Analysis.Charfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line205()
+		public void Line202()
 		{
 			// tag::32afaee3f1326785b4009ff48576d42f[]
 			var response0 = new SearchResponse<object>();

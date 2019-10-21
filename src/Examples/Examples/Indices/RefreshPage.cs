@@ -6,7 +6,7 @@ namespace Examples.Indices
 	public class RefreshPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line11()
+		public void Line10()
 		{
 			// tag::c2ac42934e4b76197032b2fc429e317d[]
 			var response0 = new SearchResponse<object>();
@@ -16,17 +16,23 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line24()
+		public void Line91()
 		{
-			// tag::104c5a6faa3052d18567c1ae57278638[]
+			// tag::0e98949e80e665795bc6cfc997165241[]
 			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::104c5a6faa3052d18567c1ae57278638[]
+			// end::0e98949e80e665795bc6cfc997165241[]
 
 			response0.MatchesExample(@"POST /kimchy,elasticsearch/_refresh");
+		}
 
-			response1.MatchesExample(@"POST /_refresh");
+		[U(Skip = "Example not implemented")]
+		public void Line101()
+		{
+			// tag::d7898526d239d2aea83727fb982f8f77[]
+			var response0 = new SearchResponse<object>();
+			// end::d7898526d239d2aea83727fb982f8f77[]
+
+			response0.MatchesExample(@"POST /_refresh");
 		}
 	}
 }

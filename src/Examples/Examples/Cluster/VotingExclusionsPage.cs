@@ -6,7 +6,7 @@ namespace Examples.Cluster
 	public class VotingExclusionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line65()
+		public void Line73()
 		{
 			// tag::59681840e544bb5b3bd858c194972f23[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line73()
+		public void Line82()
 		{
 			// tag::25cb9e1da00dfd971065ce182467434d[]
 			var response0 = new SearchResponse<object>();

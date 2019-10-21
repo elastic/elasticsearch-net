@@ -6,7 +6,7 @@ namespace Examples.Docs
 	public class UpdateByQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line10()
+		public void Line12()
 		{
 			// tag::a4a396cd07657b3977713fb3a742c41b[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line80()
+		public void Line298()
 		{
 			// tag::52a87b81e4e0b6b11e23e85db1602a63[]
 			var response0 = new SearchResponse<object>();
@@ -33,7 +33,37 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line104()
+		public void Line318()
+		{
+			// tag::cde4dddae5c06e7f1d38c9d933dbc7ac[]
+			var response0 = new SearchResponse<object>();
+			// end::cde4dddae5c06e7f1d38c9d933dbc7ac[]
+
+			response0.MatchesExample(@"POST twitter,blog/_update_by_query");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line327()
+		{
+			// tag::d8b115341da772a628a024e7d1644e73[]
+			var response0 = new SearchResponse<object>();
+			// end::d8b115341da772a628a024e7d1644e73[]
+
+			response0.MatchesExample(@"POST twitter/_update_by_query?routing=1");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line337()
+		{
+			// tag::54a770f053f3225ea0d1e34334232411[]
+			var response0 = new SearchResponse<object>();
+			// end::54a770f053f3225ea0d1e34334232411[]
+
+			response0.MatchesExample(@"POST twitter/_update_by_query?scroll_size=100");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line350()
 		{
 			// tag::2fd69fb0538e4f36ac69a8b8f8bf5ae8[]
 			var response0 = new SearchResponse<object>();
@@ -54,37 +84,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line152()
-		{
-			// tag::cde4dddae5c06e7f1d38c9d933dbc7ac[]
-			var response0 = new SearchResponse<object>();
-			// end::cde4dddae5c06e7f1d38c9d933dbc7ac[]
-
-			response0.MatchesExample(@"POST twitter,blog/_update_by_query");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line162()
-		{
-			// tag::d8b115341da772a628a024e7d1644e73[]
-			var response0 = new SearchResponse<object>();
-			// end::d8b115341da772a628a024e7d1644e73[]
-
-			response0.MatchesExample(@"POST twitter/_update_by_query?routing=1");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line172()
-		{
-			// tag::54a770f053f3225ea0d1e34334232411[]
-			var response0 = new SearchResponse<object>();
-			// end::54a770f053f3225ea0d1e34334232411[]
-
-			response0.MatchesExample(@"POST twitter/_update_by_query?scroll_size=100");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line182()
+		public void Line392()
 		{
 			// tag::c4b278ba293abd0d02a0b5ad1a99f84a[]
 			var response0 = new SearchResponse<object>();
@@ -107,7 +107,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line360()
+		public void Line417()
 		{
 			// tag::7df191cc7f814e410a4ac7261065e6ef[]
 			var response0 = new SearchResponse<object>();
@@ -117,7 +117,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line420()
+		public void Line475()
 		{
 			// tag::be3a6431d01846950dc1a39a7a6a1faa[]
 			var response0 = new SearchResponse<object>();
@@ -127,7 +127,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line441()
+		public void Line495()
 		{
 			// tag::18ddb7e7a4bcafd449df956e828ed7a8[]
 			var response0 = new SearchResponse<object>();
@@ -137,7 +137,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line461()
+		public void Line514()
 		{
 			// tag::bdb30dd52d32f50994008f4f9c0da5f0[]
 			var response0 = new SearchResponse<object>();
@@ -147,7 +147,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line490()
+		public void Line534()
 		{
 			// tag::0d664883151008b1051ef2c9ab2d0373[]
 			var response0 = new SearchResponse<object>();
@@ -179,7 +179,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line518()
+		public void Line561()
 		{
 			// tag::4acf902c2598b2558f34f20c1744c433[]
 			var response0 = new SearchResponse<object>();
@@ -193,7 +193,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line549()
+		public void Line590()
 		{
 			// tag::ea02de2dbe05091fcb0dac72c8ba5f83[]
 			var response0 = new SearchResponse<object>();
@@ -208,7 +208,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line563()
+		public void Line603()
 		{
 			// tag::025b54db0edc50c24ea48a2bd94366ad[]
 			var response0 = new SearchResponse<object>();
@@ -218,7 +218,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line641()
+		public void Line659()
 		{
 			// tag::2fe28d9a91b3081a9ec4601af8fb7b1c[]
 			var response0 = new SearchResponse<object>();
@@ -262,7 +262,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line680()
+		public void Line697()
 		{
 			// tag::abd4fc3ce7784413a56fe2dcfe2809b5[]
 			var response0 = new SearchResponse<object>();
@@ -279,7 +279,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line709()
+		public void Line724()
 		{
 			// tag::97babc8d19ef0866774576716eb6d19e[]
 			var response0 = new SearchResponse<object>();

@@ -33,7 +33,11 @@ namespace Examples
 			example = Example.ApplyGlobalChanges(example);
 
 			response.ApiCall.HttpMethod.Should().Be(example.Method);
-			response.ApiCall.Uri.AbsolutePath.Should().Be(example.Uri.AbsolutePath.Length > 1
+
+			// the client encodes characters such as commas, so decode to compare
+			var decodedAbsolutePath = HttpUtility.UrlDecode(response.ApiCall.Uri.AbsolutePath);
+
+			decodedAbsolutePath.Should().Be(example.Uri.AbsolutePath.Length > 1
 				? example.Uri.AbsolutePath.TrimEnd('/')
 				: example.Uri.AbsolutePath);
 

@@ -6,7 +6,17 @@ namespace Examples.Search
 	public class CountPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line11()
+		public void Line7()
+		{
+			// tag::1b542e3ea87a742f95641d64dcfb1bdb[]
+			var response0 = new SearchResponse<object>();
+			// end::1b542e3ea87a742f95641d64dcfb1bdb[]
+
+			response0.MatchesExample(@"GET /twitter/_count?q=user:kimchy");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line90()
 		{
 			// tag::8f0511f8a5cb176ff2afdd4311799a33[]
 			var response0 = new SearchResponse<object>();

@@ -6,7 +6,7 @@ namespace Examples.Search.Request
 	public class InnerHitsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line87()
+		public void Line86()
 		{
 			// tag::2a91e1fb8ad93a188fa9d77ec01bc431[]
 			var response0 = new SearchResponse<object>();
@@ -57,7 +57,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line211()
+		public void Line207()
 		{
 			// tag::983fbb78e57e8fe98db38cf2d217e943[]
 			var response0 = new SearchResponse<object>();
@@ -113,7 +113,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line325()
+		public void Line318()
 		{
 			// tag::79feb4a0c0a21b7015a52f9736cd4683[]
 			var response0 = new SearchResponse<object>();
@@ -176,7 +176,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line445()
+		public void Line435()
 		{
 			// tag::3f5b5bee692e7d4b0992dc0a64e95a60[]
 			var response0 = new SearchResponse<object>();

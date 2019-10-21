@@ -16,7 +16,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line267()
+		public void Line266()
 		{
 			// tag::71c629c44bf3c542a0daacbfc253c4b0[]
 			var response0 = new SearchResponse<object>();

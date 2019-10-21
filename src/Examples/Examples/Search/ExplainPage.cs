@@ -6,7 +6,7 @@ namespace Examples.Search
 	public class ExplainPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line16()
+		public void Line8()
 		{
 			// tag::abfec22fbe7d571711cc65661ca887ee[]
 			var response0 = new SearchResponse<object>();
@@ -21,7 +21,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		public void Line182()
 		{
 			// tag::5032518611d928d1f802e215cf79c550[]
 			var response0 = new SearchResponse<object>();

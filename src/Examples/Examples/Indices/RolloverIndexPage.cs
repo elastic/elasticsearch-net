@@ -6,7 +6,24 @@ namespace Examples.Indices
 	public class RolloverIndexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line40()
+		public void Line11()
+		{
+			// tag::84e8a4cf3453ed2fd4aeecdbdb02b813[]
+			var response0 = new SearchResponse<object>();
+			// end::84e8a4cf3453ed2fd4aeecdbdb02b813[]
+
+			response0.MatchesExample(@"POST /alias1/_rollover/twitter
+			{
+			  ""conditions"": {
+			    ""max_age"":   ""7d"",
+			    ""max_docs"":  1000,
+			    ""max_size"": ""5gb""
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line162()
 		{
 			// tag::593c11e8a9f88ec2629f2eb33cded9b7[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +53,36 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line102()
+		public void Line222()
+		{
+			// tag::75f887596c4972bc679929ca996698f2[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+			// end::75f887596c4972bc679929ca996698f2[]
+
+			response0.MatchesExample(@"PUT /logs-000001
+			{
+			  ""aliases"": {
+			    ""logs_write"": {}
+			  }
+			}");
+
+			response1.MatchesExample(@"POST /logs_write/_rollover
+			{
+			  ""conditions"" : {
+			    ""max_age"": ""7d"",
+			    ""max_docs"": 1000,
+			    ""max_size"": ""5gb""
+			  },
+			  ""settings"": {
+			    ""index.number_of_shards"": 2
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line256()
 		{
 			// tag::659247d91f61ceb17cbcc60801fd3456[]
 			var response0 = new SearchResponse<object>();
@@ -53,7 +99,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line126()
+		public void Line280()
 		{
 			// tag::8f6ef669c09e0c8bfc2731f422471770[]
 			var response0 = new SearchResponse<object>();
@@ -96,7 +142,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line187()
+		public void Line339()
 		{
 			// tag::03584e88046614ec7727db506d866f48[]
 			var response0 = new SearchResponse<object>();
@@ -110,51 +156,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line206()
+		public void Line354()
 		{
-			// tag::75f887596c4972bc679929ca996698f2[]
+			// tag::896eb7487a512fc43a2af7e16717f40d[]
 			var response0 = new SearchResponse<object>();
+			// end::896eb7487a512fc43a2af7e16717f40d[]
 
-			var response1 = new SearchResponse<object>();
-			// end::75f887596c4972bc679929ca996698f2[]
-
-			response0.MatchesExample(@"PUT /logs-000001
-			{
-			  ""aliases"": {
-			    ""logs_write"": {}
-			  }
-			}");
-
-			response1.MatchesExample(@"POST /logs_write/_rollover
-			{
-			  ""conditions"" : {
-			    ""max_age"": ""7d"",
-			    ""max_docs"": 1000,
-			    ""max_size"": ""5gb""
-			  },
-			  ""settings"": {
-			    ""index.number_of_shards"": 2
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line235()
-		{
-			// tag::9c5c59e10bb60f2fd8958d63de91826f[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::9c5c59e10bb60f2fd8958d63de91826f[]
-
-			response0.MatchesExample(@"PUT /logs-000001
-			{
-			  ""aliases"": {
-			    ""logs_write"": {}
-			  }
-			}");
-
-			response1.MatchesExample(@"POST /logs_write/_rollover?dry_run
+			response0.MatchesExample(@"POST /logs_write/_rollover?dry_run
 			{
 			  ""conditions"" : {
 			    ""max_age"": ""7d"",
@@ -165,7 +173,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line277()
+		public void Line382()
 		{
 			// tag::9e9a3ad495e6305563a88dd4c74a5fda[]
 			var response0 = new SearchResponse<object>();

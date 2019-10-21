@@ -29,7 +29,7 @@ namespace Examples.Analysis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line43()
+		public void Line42()
 		{
 			// tag::acebf0b821acfbd6089f71e0359a56d3[]
 			var response0 = new SearchResponse<object>();

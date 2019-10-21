@@ -54,7 +54,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line76()
+		public void Line75()
 		{
 			// tag::6dec421bf327ecaf189109d9aaa35919[]
 			var response0 = new SearchResponse<object>();

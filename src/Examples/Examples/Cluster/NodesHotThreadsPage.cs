@@ -6,7 +6,7 @@ namespace Examples.Cluster
 	public class NodesHotThreadsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line9()
+		public void Line61()
 		{
 			// tag::77c099c97ea6911e2dd6e996da7dcca0[]
 			var response0 = new SearchResponse<object>();

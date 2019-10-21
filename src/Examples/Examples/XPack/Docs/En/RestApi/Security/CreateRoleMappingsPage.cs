@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class CreateRoleMappingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line109()
+		public void Line112()
 		{
 			// tag::23b062c157235246d7c347b9047b2435[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line144()
+		public void Line146()
 		{
 			// tag::b176e0d428726705298184ef39ad5cb2[]
 			var response0 = new SearchResponse<object>();
@@ -43,7 +43,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line158()
+		public void Line159()
 		{
 			// tag::e60b7f75ca806f2c74927c3d9409a986[]
 			var response0 = new SearchResponse<object>();
@@ -88,7 +88,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line217()
+		public void Line216()
 		{
 			// tag::5ad365ed9e1a3c26093a0f09666c133a[]
 			var response0 = new SearchResponse<object>();
@@ -110,7 +110,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line241()
+		public void Line239()
 		{
 			// tag::7e5faa551f2c95ffd627da352563d450[]
 			var response0 = new SearchResponse<object>();
@@ -127,7 +127,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line257()
+		public void Line254()
 		{
 			// tag::b80e1f5b26bae4f3c2f8a604b7caaf17[]
 			var response0 = new SearchResponse<object>();
@@ -147,7 +147,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line282()
+		public void Line278()
 		{
 			// tag::0d94d76b7f00d0459d1f8c962c144dcd[]
 			var response0 = new SearchResponse<object>();
@@ -191,7 +191,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line333()
+		public void Line328()
 		{
 			// tag::50dc35d3d8705bd62aed20a15209476c[]
 			var response0 = new SearchResponse<object>();

@@ -6,7 +6,7 @@ namespace Examples.Modules
 	public class CrossClusterSearchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line16()
+		public void Line25()
 		{
 			// tag::a8d39396d741e768083808bb11443e9b[]
 			var response0 = new SearchResponse<object>();
@@ -39,7 +39,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line62()
 		{
 			// tag::972c0c1b6c0b8327fadd77cc1c71b532[]
 			var response0 = new SearchResponse<object>();
@@ -56,13 +56,13 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line112()
+		public void Line133()
 		{
-			// tag::475943160dca26fd77e750eb586f72bb[]
+			// tag::6a570214755e38fd587e406d5b19b371[]
 			var response0 = new SearchResponse<object>();
-			// end::475943160dca26fd77e750eb586f72bb[]
+			// end::6a570214755e38fd587e406d5b19b371[]
 
-			response0.MatchesExample(@"GET /cluster_one:twitter,twitter/_search
+			response0.MatchesExample(@"GET /twitter,cluster_one:twitter,cluster_two:twitter/_search
 			{
 			  ""query"": {
 			    ""match"": {
@@ -73,33 +73,16 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line197()
+		public void Line232()
 		{
-			// tag::530326f2f610142a4a314c49c216045b[]
+			// tag::9949bcc64c9cd6f4041819546d7fce78[]
 			var response0 = new SearchResponse<object>();
-			// end::530326f2f610142a4a314c49c216045b[]
+			// end::9949bcc64c9cd6f4041819546d7fce78[]
 
 			response0.MatchesExample(@"PUT _cluster/settings
 			{
 			  ""persistent"": {
-			    ""cluster.remote.cluster_two.skip_unavailable"": true \<1>
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line210()
-		{
-			// tag::89a950acef646a65bb947c862743ac61[]
-			var response0 = new SearchResponse<object>();
-			// end::89a950acef646a65bb947c862743ac61[]
-
-			response0.MatchesExample(@"GET /cluster_one:twitter,cluster_two:twitter,twitter/_search \<1>
-			{
-			  ""query"": {
-			    ""match"": {
-			      ""user"": ""kimchy""
-			    }
+			    ""cluster.remote.cluster_two.skip_unavailable"": true
 			  }
 			}");
 		}

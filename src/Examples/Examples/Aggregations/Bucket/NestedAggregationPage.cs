@@ -8,18 +8,18 @@ namespace Examples.Aggregations.Bucket
 		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
-			// tag::53e6007f451ddf30074b3e26a4afdaad[]
+			// tag::60917d97013c4516c621c6c24c29748f[]
 			var response0 = new SearchResponse<object>();
-			// end::53e6007f451ddf30074b3e26a4afdaad[]
+			// end::60917d97013c4516c621c6c24c29748f[]
 
-			response0.MatchesExample(@"PUT /index
+			response0.MatchesExample(@"PUT /products
 			{
 			    ""mappings"": {
 			        ""properties"" : {
-			            ""resellers"" : { \<1>
+			            ""resellers"" : { <1>
 			                ""type"" : ""nested"",
 			                ""properties"" : {
-			                    ""name"" : { ""type"" : ""text"" },
+			                    ""reseller"" : { ""type"" : ""text"" },
 			                    ""price"" : { ""type"" : ""double"" }
 			                }
 			            }
@@ -29,13 +29,36 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line33()
+		public void Line31()
 		{
-			// tag::e3d2300ad78b2d20c3a501a73db6bcac[]
+			// tag::a1849d3cb44fc24b58323ec97c5e9c5c[]
 			var response0 = new SearchResponse<object>();
-			// end::e3d2300ad78b2d20c3a501a73db6bcac[]
+			// end::a1849d3cb44fc24b58323ec97c5e9c5c[]
 
-			response0.MatchesExample(@"GET /_search
+			response0.MatchesExample(@"PUT /products/_doc/0
+			{
+			  ""name"": ""LED TV"", <1>
+			  ""resellers"": [
+			    {
+			      ""reseller"": ""companyA"",
+			      ""price"": 350
+			    },
+			    {
+			      ""reseller"": ""companyB"",
+			      ""price"": 500
+			    }
+			  ]
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line55()
+		{
+			// tag::be91aeed1af812064943dd5192425ab2[]
+			var response0 = new SearchResponse<object>();
+			// end::be91aeed1af812064943dd5192425ab2[]
+
+			response0.MatchesExample(@"GET /products/_search
 			{
 			    ""query"" : {
 			        ""match"" : { ""name"" : ""led tv"" }

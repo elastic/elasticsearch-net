@@ -49,7 +49,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line90()
 		{
 			// tag::0dfe9d6724c7bd11094bb4a0796e7ac7[]
 			var response0 = new SearchResponse<object>();
@@ -79,7 +79,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line174()
+		public void Line172()
 		{
 			// tag::2a9c29afe23e30a68dd6e30ea22f5d42[]
 			var response0 = new SearchResponse<object>();

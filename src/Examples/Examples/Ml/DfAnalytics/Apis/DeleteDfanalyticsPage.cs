@@ -6,7 +6,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class DeleteDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line38()
+		public void Line37()
 		{
 			// tag::1c8b6768c4eefc76fcb38708152f561b[]
 			var response0 = new SearchResponse<object>();

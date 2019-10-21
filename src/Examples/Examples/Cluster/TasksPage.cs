@@ -6,7 +6,7 @@ namespace Examples.Cluster
 	public class TasksPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line13()
+		public void Line64()
 		{
 			// tag::166bcfc6d5d39defec7ad6aa44d0914b[]
 			var response0 = new SearchResponse<object>();
@@ -24,7 +24,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line67()
+		public void Line118()
 		{
 			// tag::33610800d9de3c3e6d6b3c611ace7330[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +34,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line78()
+		public void Line128()
 		{
 			// tag::29824032d7d64512d17458fdd687b1f6[]
 			var response0 = new SearchResponse<object>();
@@ -44,7 +44,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line143()
 		{
 			// tag::8f4a7f68f2ca3698abdf20026a2d8c5f[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +54,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line153()
+		public void Line206()
 		{
 			// tag::93fb59d3204f37af952198b331fb6bb7[]
 			var response0 = new SearchResponse<object>();
@@ -64,7 +64,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line163()
+		public void Line215()
 		{
 			// tag::77447e2966708e92f5e219d43ac3f00d[]
 			var response0 = new SearchResponse<object>();
@@ -74,21 +74,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line172()
-		{
-			// tag::927fc3b86302afb2fc41785261771663[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::927fc3b86302afb2fc41785261771663[]
-
-			response0.MatchesExample(@"GET _cat/tasks");
-
-			response1.MatchesExample(@"GET _cat/tasks?detailed");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line186()
+		public void Line226()
 		{
 			// tag::d89d36741d906a71eca6c144e8d83889[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +84,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line196()
+		public void Line236()
 		{
 			// tag::612c2e975f833de9815651135735eae5[]
 			var response0 = new SearchResponse<object>();
@@ -108,7 +94,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line208()
+		public void Line247()
 		{
 			// tag::bd3d710ec50a151453e141691163af72[]
 			var response0 = new SearchResponse<object>();
@@ -118,7 +104,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line216()
+		public void Line254()
 		{
 			// tag::a3ce0cfe2176f3d8a36959a5916995f0[]
 			var response0 = new SearchResponse<object>();

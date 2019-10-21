@@ -6,7 +6,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetRecordPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line76()
 		{
 			// tag::16337a7169486ffea5bfe185b6426b9c[]
 			var response0 = new SearchResponse<object>();

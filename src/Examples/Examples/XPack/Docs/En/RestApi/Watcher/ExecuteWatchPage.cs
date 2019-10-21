@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 	public class ExecuteWatchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line142()
+		public void Line147()
 		{
 			// tag::01dc7bdc223bd651574ed2d3954a5b1c[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line151()
+		public void Line155()
 		{
 			// tag::f6eff830fb0fad200ebfb1e3e46f6f0e[]
 			var response0 = new SearchResponse<object>();
@@ -40,7 +40,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line294()
+		public void Line297()
 		{
 			// tag::7f37031fb40b68a61255b7c71d7eed0b[]
 			var response0 = new SearchResponse<object>();
@@ -56,7 +56,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line310()
+		public void Line312()
 		{
 			// tag::9cf6c7012a4f2bb562bc256aa28c3409[]
 			var response0 = new SearchResponse<object>();
@@ -71,7 +71,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line324()
+		public void Line325()
 		{
 			// tag::9cd37d0ccbc66ad47ddb626564b27cc8[]
 			var response0 = new SearchResponse<object>();

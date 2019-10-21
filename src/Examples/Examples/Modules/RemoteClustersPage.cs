@@ -42,7 +42,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line140()
+		public void Line139()
 		{
 			// tag::328b7b4d0de6fac3a91205251de6e9b5[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +72,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line173()
+		public void Line171()
 		{
 			// tag::2a0d451f9e13aca39467883b16270cc2[]
 			var response0 = new SearchResponse<object>();

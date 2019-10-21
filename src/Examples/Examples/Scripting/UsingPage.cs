@@ -36,7 +36,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line148()
+		public void Line147()
 		{
 			// tag::40a2bbc35a887d6c7dda3cca1fe7aa58[]
 			var response0 = new SearchResponse<object>();
@@ -52,7 +52,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line162()
+		public void Line161()
 		{
 			// tag::08e08feb514b24006e13f258d617d873[]
 			var response0 = new SearchResponse<object>();
@@ -62,16 +62,21 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line171()
+		public void Line169()
 		{
-			// tag::4484218a06e3bae623250cdaccac5dcb[]
+			// tag::b3423b00c6336ee0a1720b4ed7031cd7[]
 			var response0 = new SearchResponse<object>();
-			// end::4484218a06e3bae623250cdaccac5dcb[]
+			// end::b3423b00c6336ee0a1720b4ed7031cd7[]
 
-			response0.MatchesExample(@"GET _search
+			response0.MatchesExample(@"GET twitter/_search
 			{
 			  ""query"": {
-			    ""script"": {
+			    ""script_score"": {
+			      ""query"": {
+			        ""match"": {
+			            ""message"": ""some message""
+			        }
+			      },
 			      ""script"": {
 			        ""id"": ""calculate-score"",
 			        ""params"": {
@@ -84,7 +89,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line192()
+		public void Line194()
 		{
 			// tag::4061fd5ba7221ca85805ed14d59a6bc5[]
 			var response0 = new SearchResponse<object>();

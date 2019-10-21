@@ -26,7 +26,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line41()
 		{
 			// tag::b19ec4a20c19082e5c40e3b1f28bfbcb[]
 			var response0 = new SearchResponse<object>();

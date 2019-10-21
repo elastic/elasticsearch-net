@@ -8,11 +8,11 @@ namespace Examples.Analysis.Analyzers
 		[U(Skip = "Example not implemented")]
 		public void Line55()
 		{
-			// tag::ef2ea91fb3fa26c740bca994af85e150[]
+			// tag::81db5fb0ea5b942204f4ba27b7ae836a[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::ef2ea91fb3fa26c740bca994af85e150[]
+			// end::81db5fb0ea5b942204f4ba27b7ae836a[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
@@ -20,7 +20,7 @@ namespace Examples.Analysis.Analyzers
 			    ""analysis"": {
 			      ""analyzer"": {
 			        ""my_custom_analyzer"": {
-			          ""type"":      ""custom"", \<1>
+			          ""type"": ""custom"", <1>
 			          ""tokenizer"": ""standard"",
 			          ""char_filter"": [
 			            ""html_strip""
@@ -38,44 +38,44 @@ namespace Examples.Analysis.Analyzers
 			response1.MatchesExample(@"POST my_index/_analyze
 			{
 			  ""analyzer"": ""my_custom_analyzer"",
-			  ""text"": ""Is this \<b>déjà vu</b>?""
+			  ""text"": ""Is this <b>déjà vu</b>?""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line159()
+		public void Line157()
 		{
-			// tag::c729a5ef7a671154bb82e308d915cf9f[]
+			// tag::8fb13998654631659f998e35922bcde6[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::c729a5ef7a671154bb82e308d915cf9f[]
+			// end::8fb13998654631659f998e35922bcde6[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
 			  ""settings"": {
 			    ""analysis"": {
 			      ""analyzer"": {
-			        ""my_custom_analyzer"": {
+			        ""my_custom_analyzer"": { <1>
 			          ""type"": ""custom"",
 			          ""char_filter"": [
-			            ""emoticons"" \<1>
+			            ""emoticons""
 			          ],
-			          ""tokenizer"": ""punctuation"", \<1>
+			          ""tokenizer"": ""punctuation"",
 			          ""filter"": [
 			            ""lowercase"",
-			            ""english_stop"" \<1>
+			            ""english_stop""
 			          ]
 			        }
 			      },
 			      ""tokenizer"": {
-			        ""punctuation"": { \<1>
+			        ""punctuation"": { <2>
 			          ""type"": ""pattern"",
 			          ""pattern"": ""[ .,!?]""
 			        }
 			      },
 			      ""char_filter"": {
-			        ""emoticons"": { \<1>
+			        ""emoticons"": { <3>
 			          ""type"": ""mapping"",
 			          ""mappings"": [
 			            "":) => _happy_"",
@@ -84,7 +84,7 @@ namespace Examples.Analysis.Analyzers
 			        }
 			      },
 			      ""filter"": {
-			        ""english_stop"": { \<1>
+			        ""english_stop"": { <4>
 			          ""type"": ""stop"",
 			          ""stopwords"": ""_english_""
 			        }
@@ -96,7 +96,7 @@ namespace Examples.Analysis.Analyzers
 			response1.MatchesExample(@"POST my_index/_analyze
 			{
 			  ""analyzer"": ""my_custom_analyzer"",
-			  ""text"":     ""I'm a :) person, and you?""
+			  ""text"": ""I'm a :) person, and you?""
 			}");
 		}
 	}

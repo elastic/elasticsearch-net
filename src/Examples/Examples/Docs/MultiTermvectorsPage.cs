@@ -6,7 +6,7 @@ namespace Examples.Docs
 	public class MultiTermvectorsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line14()
+		public void Line10()
 		{
 			// tag::c6d18f08822463356b297f238c6650d9[]
 			var response0 = new SearchResponse<object>();
@@ -32,7 +32,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line91()
 		{
 			// tag::2c8638acc208bd0a47403c1f054fde21[]
 			var response0 = new SearchResponse<object>();
@@ -56,7 +56,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line65()
+		public void Line114()
 		{
 			// tag::f31eea58baf0dbd39823ff9100c9ce28[]
 			var response0 = new SearchResponse<object>();
@@ -75,7 +75,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line85()
+		public void Line135()
 		{
 			// tag::29840a67fdc13cd329ca2c69a2303e83[]
 			var response0 = new SearchResponse<object>();

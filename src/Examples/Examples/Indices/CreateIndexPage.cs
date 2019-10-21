@@ -8,39 +8,39 @@ namespace Examples.Indices
 		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
-			// tag::a9f021477e6c3d78a7907fbd96e16b5f[]
+			// tag::1c23507edd7a3c18538b68223378e4ab[]
 			var response0 = new SearchResponse<object>();
-			// end::a9f021477e6c3d78a7907fbd96e16b5f[]
+			// end::1c23507edd7a3c18538b68223378e4ab[]
 
-			response0.MatchesExample(@"PUT twitter");
+			response0.MatchesExample(@"PUT /twitter");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line39()
+		public void Line82()
 		{
-			// tag::be844338bc330b6d3939bac6ee57bbba[]
+			// tag::e5d2172b524332196cac0f031c043659[]
 			var response0 = new SearchResponse<object>();
-			// end::be844338bc330b6d3939bac6ee57bbba[]
+			// end::e5d2172b524332196cac0f031c043659[]
 
-			response0.MatchesExample(@"PUT twitter
+			response0.MatchesExample(@"PUT /twitter
 			{
 			    ""settings"" : {
 			        ""index"" : {
-			            ""number_of_shards"" : 3, \<1>
-			            ""number_of_replicas"" : 2 \<2>
+			            ""number_of_shards"" : 3, <1>
+			            ""number_of_replicas"" : 2 <2>
 			        }
 			    }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line57()
+		public void Line100()
 		{
-			// tag::15377f76164fd88309f58097c7125ff2[]
+			// tag::b9c5d7ca6ca9c6f747201f45337a4abf[]
 			var response0 = new SearchResponse<object>();
-			// end::15377f76164fd88309f58097c7125ff2[]
+			// end::b9c5d7ca6ca9c6f747201f45337a4abf[]
 
-			response0.MatchesExample(@"PUT twitter
+			response0.MatchesExample(@"PUT /twitter
 			{
 			    ""settings"" : {
 			        ""number_of_shards"" : 3,
@@ -50,13 +50,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line84()
+		public void Line124()
 		{
-			// tag::eaa809dc19ac4e9a4166ed46c6450c36[]
+			// tag::dfef545b1e2c247bafd1347e8e807ac1[]
 			var response0 = new SearchResponse<object>();
-			// end::eaa809dc19ac4e9a4166ed46c6450c36[]
+			// end::dfef545b1e2c247bafd1347e8e807ac1[]
 
-			response0.MatchesExample(@"PUT test
+			response0.MatchesExample(@"PUT /test
 			{
 			    ""settings"" : {
 			        ""number_of_shards"" : 1
@@ -70,13 +70,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		public void Line148()
 		{
-			// tag::ab8a4d5bd020a6923446a9bd9e402d16[]
+			// tag::4d56b179242fed59e3d6476f817b6055[]
 			var response0 = new SearchResponse<object>();
-			// end::ab8a4d5bd020a6923446a9bd9e402d16[]
+			// end::4d56b179242fed59e3d6476f817b6055[]
 
-			response0.MatchesExample(@"PUT test
+			response0.MatchesExample(@"PUT /test
 			{
 			    ""aliases"" : {
 			        ""alias_1"" : {},
@@ -91,13 +91,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line160()
+		public void Line195()
 		{
-			// tag::f887b972ee522e0497f4b5289d33f764[]
+			// tag::4d46dbb96125b27f46299547de9d8709[]
 			var response0 = new SearchResponse<object>();
-			// end::f887b972ee522e0497f4b5289d33f764[]
+			// end::4d46dbb96125b27f46299547de9d8709[]
 
-			response0.MatchesExample(@"PUT test
+			response0.MatchesExample(@"PUT /test
 			{
 			    ""settings"": {
 			        ""index.write.wait_for_active_shards"": ""2""
@@ -106,13 +106,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line174()
+		public void Line208()
 		{
-			// tag::ef3fb50903876e4497249165ec493bb5[]
+			// tag::fabe14480624a99e8ee42c7338672058[]
 			var response0 = new SearchResponse<object>();
-			// end::ef3fb50903876e4497249165ec493bb5[]
+			// end::fabe14480624a99e8ee42c7338672058[]
 
-			response0.MatchesExample(@"PUT test?wait_for_active_shards=2");
+			response0.MatchesExample(@"PUT /test?wait_for_active_shards=2");
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace Examples.IndexModules.Allocation
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line68()
+		public void Line67()
 		{
 			// tag::b8b198ede3d08f315348e2a857e47773[]
 			var response0 = new SearchResponse<object>();
@@ -33,7 +33,7 @@ namespace Examples.IndexModules.Allocation
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		public void Line108()
 		{
 			// tag::28ac880057135e46b3b00c7f3976538c[]
 			var response0 = new SearchResponse<object>();

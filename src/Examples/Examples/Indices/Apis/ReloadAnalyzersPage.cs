@@ -6,11 +6,21 @@ namespace Examples.Indices.Apis
 	public class ReloadAnalyzersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line15()
+		public void Line14()
 		{
-			// tag::fd25ae98c5c8be66fdd5e6ef32815ff5[]
+			// tag::b0015e63323171f38995b8e4aa2b52d5[]
 			var response0 = new SearchResponse<object>();
-			// end::fd25ae98c5c8be66fdd5e6ef32815ff5[]
+			// end::b0015e63323171f38995b8e4aa2b52d5[]
+
+			response0.MatchesExample(@"POST /twitter/_reload_search_analyzers");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line98()
+		{
+			// tag::db8cbfa2afece5d21b3ca69ffee8f5c0[]
+			var response0 = new SearchResponse<object>();
+			// end::db8cbfa2afece5d21b3ca69ffee8f5c0[]
 
 			response0.MatchesExample(@"PUT /my_index
 			{
@@ -25,9 +35,9 @@ namespace Examples.Indices.Apis
 			                },
 			                ""filter"" : {
 			                    ""synonym"" : {
-			                        ""type"" : ""synonym"",
-			                        ""synonyms_path"" : ""analysis/synonym.txt"",
-			                        ""updateable"" : true \<1>
+			                        ""type"" : ""synonym_graph"",
+			                        ""synonyms_path"" : ""analysis/synonym.txt"", <1>
+			                        ""updateable"" : true <2>
 			                    }
 			                }
 			            }
@@ -38,7 +48,7 @@ namespace Examples.Indices.Apis
 			            ""text"": {
 			                ""type"": ""text"",
 			                ""analyzer"" : ""standard"",
-			                ""search_analyzer"": ""my_synonyms"" \<2>
+			                ""search_analyzer"": ""my_synonyms"" <3>
 			            }
 			        }
 			    }
@@ -46,7 +56,7 @@ namespace Examples.Indices.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line68()
+		public void Line142()
 		{
 			// tag::7554da505cc27f6bd0d028b66e85f4a5[]
 			var response0 = new SearchResponse<object>();

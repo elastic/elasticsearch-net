@@ -6,7 +6,22 @@ namespace Examples.Indices
 	public class AliasesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line16()
+		public void Line12()
+		{
+			// tag::d3016e4e8025362ad9a05ee86bb2061f[]
+			var response0 = new SearchResponse<object>();
+			// end::d3016e4e8025362ad9a05ee86bb2061f[]
+
+			response0.MatchesExample(@"POST /_aliases
+			{
+			    ""actions"" : [
+			        { ""add"" : { ""index"" : ""twitter"", ""alias"" : ""alias1"" } }
+			    ]
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line156()
 		{
 			// tag::b4392116f2cc57ce8064ccbad30318d5[]
 			var response0 = new SearchResponse<object>();
@@ -21,7 +36,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line30()
+		public void Line172()
 		{
 			// tag::3653567181f43a5f64c74f934aa821c2[]
 			var response0 = new SearchResponse<object>();
@@ -36,23 +51,23 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		public void Line190()
 		{
-			// tag::5a51ead3c0398ecb12bdb5456fd70ab9[]
+			// tag::af3fb9fa5691a7b37a6dc2a69ff66e64[]
 			var response0 = new SearchResponse<object>();
-			// end::5a51ead3c0398ecb12bdb5456fd70ab9[]
+			// end::af3fb9fa5691a7b37a6dc2a69ff66e64[]
 
 			response0.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""remove"" : { ""index"" : ""test1"", ""alias"" : ""alias1"" } },
-			        { ""add"" : { ""index"" : ""test2"", ""alias"" : ""alias1"" } }
+			        { ""add"" : { ""index"" : ""test1"", ""alias"" : ""alias2"" } }
 			    ]
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line62()
+		public void Line208()
 		{
 			// tag::f0e21e03a07c8fa0209b0aafdb3791e6[]
 			var response0 = new SearchResponse<object>();
@@ -68,7 +83,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line222()
 		{
 			// tag::5f210f74725ea0c9265190346edfa246[]
 			var response0 = new SearchResponse<object>();
@@ -83,7 +98,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line95()
+		public void Line239()
 		{
 			// tag::6799d132c1c7ca3970763acde2337ef9[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +113,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line115()
+		public void Line258()
 		{
 			// tag::de176bc4788ea286fff9e92418a43ea8[]
 			var response0 = new SearchResponse<object>();
@@ -122,7 +137,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line144()
+		public void Line286()
 		{
 			// tag::23ab0f1023b1b2cd5cdf2a8f9ccfd57b[]
 			var response0 = new SearchResponse<object>();
@@ -141,7 +156,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line161()
+		public void Line302()
 		{
 			// tag::7cf71671859be7c1ecf673396db377cd[]
 			var response0 = new SearchResponse<object>();
@@ -162,7 +177,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line191()
+		public void Line330()
 		{
 			// tag::bc1ad5cc6d3eab98e3ce01f209ba7094[]
 			var response0 = new SearchResponse<object>();
@@ -183,7 +198,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line212()
+		public void Line350()
 		{
 			// tag::fa0f4485cd48f986b7ae8cbb24e331c4[]
 			var response0 = new SearchResponse<object>();
@@ -205,7 +220,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line239()
+		public void Line376()
 		{
 			// tag::427f6b5c5376cbf0f71f242a60ca3d9e[]
 			var response0 = new SearchResponse<object>();
@@ -215,7 +230,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line262()
+		public void Line397()
 		{
 			// tag::f6d6889667f56b8f49d2858070571a6b[]
 			var response0 = new SearchResponse<object>();
@@ -242,7 +257,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line289()
+		public void Line423()
 		{
 			// tag::b0ec418bf416c62bed602b0a32a6d5f5[]
 			var response0 = new SearchResponse<object>();
@@ -255,7 +270,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line302()
+		public void Line435()
 		{
 			// tag::67bba546d835bca8f31df13e3587c348[]
 			var response0 = new SearchResponse<object>();
@@ -265,7 +280,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line312()
+		public void Line444()
 		{
 			// tag::ad79228630684d950fe9792a768d24c5[]
 			var response0 = new SearchResponse<object>();
@@ -289,134 +304,6 @@ namespace Examples.Indices
 			        }
 			    ]
 			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line369()
-		{
-			// tag::591adf1aaf016b9c382990923e37d099[]
-			var response0 = new SearchResponse<object>();
-			// end::591adf1aaf016b9c382990923e37d099[]
-
-			response0.MatchesExample(@"PUT /logs_201305/_alias/2013");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line382()
-		{
-			// tag::890f659cfc10ff8171420809bdcf7c67[]
-			var response0 = new SearchResponse<object>();
-			// end::890f659cfc10ff8171420809bdcf7c67[]
-
-			response0.MatchesExample(@"PUT /users
-			{
-			    ""mappings"" : {
-			        ""properties"" : {
-			            ""user_id"" : {""type"" : ""integer""}
-			        }
-			    }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line397()
-		{
-			// tag::83b2785e63357ab3ade51d8ec0c11917[]
-			var response0 = new SearchResponse<object>();
-			// end::83b2785e63357ab3ade51d8ec0c11917[]
-
-			response0.MatchesExample(@"PUT /users/_alias/user_12
-			{
-			    ""routing"" : ""12"",
-			    ""filter"" : {
-			        ""term"" : {
-			            ""user_id"" : 12
-			        }
-			    }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line420()
-		{
-			// tag::e47c3557fe8ccfc4286155c4b72e7c76[]
-			var response0 = new SearchResponse<object>();
-			// end::e47c3557fe8ccfc4286155c4b72e7c76[]
-
-			response0.MatchesExample(@"PUT /logs_20162801
-			{
-			    ""mappings"" : {
-			        ""properties"" : {
-			            ""year"" : {""type"" : ""integer""}
-			        }
-			    },
-			    ""aliases"" : {
-			        ""current_day"" : {},
-			        ""2016"" : {
-			            ""filter"" : {
-			                ""term"" : {""year"" : 2016 }
-			            }
-			        }
-			    }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line456()
-		{
-			// tag::72501997d053c29aa0b66a6bb6fb4105[]
-			var response0 = new SearchResponse<object>();
-			// end::72501997d053c29aa0b66a6bb6fb4105[]
-
-			response0.MatchesExample(@"DELETE /logs_20162801/_alias/current_day");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line495()
-		{
-			// tag::4c0ac18976e4d95d23b6890ea9129a7e[]
-			var response0 = new SearchResponse<object>();
-			// end::4c0ac18976e4d95d23b6890ea9129a7e[]
-
-			response0.MatchesExample(@"GET /logs_20162801/_alias/*");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line524()
-		{
-			// tag::0e98b8cb47ce75336068c6d914b86495[]
-			var response0 = new SearchResponse<object>();
-			// end::0e98b8cb47ce75336068c6d914b86495[]
-
-			response0.MatchesExample(@"GET /_alias/2016");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line553()
-		{
-			// tag::56aa1bff647d1db49dabf175c1e56919[]
-			var response0 = new SearchResponse<object>();
-			// end::56aa1bff647d1db49dabf175c1e56919[]
-
-			response0.MatchesExample(@"GET /_alias/20*");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line584()
-		{
-			// tag::d8aa6ff25f7bb56e32d02df455103e53[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-
-			var response2 = new SearchResponse<object>();
-			// end::d8aa6ff25f7bb56e32d02df455103e53[]
-
-			response0.MatchesExample(@"HEAD /_alias/2016");
-
-			response1.MatchesExample(@"HEAD /_alias/20*");
-
-			response2.MatchesExample(@"HEAD /logs_20162801/_alias/*");
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line149()
+		public void Line148()
 		{
 			// tag::a55bdc75b139d947d64b32dc9824e558[]
 			var response0 = new SearchResponse<object>();
@@ -41,7 +41,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line163()
+		public void Line161()
 		{
 			// tag::8fb11f30a609b13c1373ce4a26124159[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +54,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line181()
+		public void Line178()
 		{
 			// tag::bff745b32238691bae88de22530643cb[]
 			var response0 = new SearchResponse<object>();
@@ -70,7 +70,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line195()
+		public void Line191()
 		{
 			// tag::c4f62c66f967c6e0da3616957efbeccf[]
 			var response0 = new SearchResponse<object>();
@@ -83,7 +83,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line212()
+		public void Line207()
 		{
 			// tag::567829f263dd472bf76500db05d2200a[]
 			var response0 = new SearchResponse<object>();
@@ -101,7 +101,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line228()
+		public void Line222()
 		{
 			// tag::ae5f9956a525e976bfc37dcb4e7414ae[]
 			var response0 = new SearchResponse<object>();
@@ -114,7 +114,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line241()
+		public void Line234()
 		{
 			// tag::4f869e56eb25586ac402ccfb00aa0359[]
 			var response0 = new SearchResponse<object>();
@@ -133,7 +133,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line258()
+		public void Line250()
 		{
 			// tag::a5816a58c1fa769c23c6211ab449e6f3[]
 			var response0 = new SearchResponse<object>();
@@ -146,7 +146,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line281()
+		public void Line272()
 		{
 			// tag::1f1ccd9af526b2251bf960a85288fc97[]
 			var response0 = new SearchResponse<object>();
@@ -165,7 +165,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line302()
+		public void Line292()
 		{
 			// tag::02da8c5d098d9e7cc263efac344a96de[]
 			var response0 = new SearchResponse<object>();
@@ -183,7 +183,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line318()
+		public void Line307()
 		{
 			// tag::577b09f45256ff855252d29e1d1cd433[]
 			var response0 = new SearchResponse<object>();
@@ -196,7 +196,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line333()
+		public void Line321()
 		{
 			// tag::76c551d13c3d907ad6dc56b85bec76de[]
 			var response0 = new SearchResponse<object>();
@@ -216,7 +216,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line351()
+		public void Line338()
 		{
 			// tag::9aeca1d56bb2ff0701587b269163311e[]
 			var response0 = new SearchResponse<object>();
@@ -229,7 +229,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line366()
+		public void Line352()
 		{
 			// tag::9d2464f0dce99d47f2699d953ee55b37[]
 			var response0 = new SearchResponse<object>();
@@ -249,7 +249,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line384()
+		public void Line369()
 		{
 			// tag::e7f366d76e3e53b4c0c30f7b0c21fbc0[]
 			var response0 = new SearchResponse<object>();
@@ -262,7 +262,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line399()
+		public void Line383()
 		{
 			// tag::4b3ef0f1d3cb9598a3fb94c03948e9e2[]
 			var response0 = new SearchResponse<object>();
@@ -287,7 +287,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line422()
+		public void Line405()
 		{
 			// tag::72ef8c634b3594963f203d2b3631c12e[]
 			var response0 = new SearchResponse<object>();
@@ -300,7 +300,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line438()
+		public void Line420()
 		{
 			// tag::6dd3c5a716302fdd39fcf5c150b826bc[]
 			var response0 = new SearchResponse<object>();
@@ -316,7 +316,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line454()
+		public void Line435()
 		{
 			// tag::70932f56df27fb502d2095fefcaa83d6[]
 			var response0 = new SearchResponse<object>();

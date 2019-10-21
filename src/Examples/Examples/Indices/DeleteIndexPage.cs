@@ -6,7 +6,7 @@ namespace Examples.Indices
 	public class DeleteIndexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line7()
+		public void Line10()
 		{
 			// tag::98f14fddddea54a7d6149ab7b92e099d[]
 			var response0 = new SearchResponse<object>();

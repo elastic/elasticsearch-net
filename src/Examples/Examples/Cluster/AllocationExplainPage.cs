@@ -5,18 +5,9 @@ namespace Examples.Cluster
 {
 	public class AllocationExplainPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
-		public void Line19()
-		{
-			// tag::e4cd381f35dcaa151dd93cf259e50ae6[]
-			var response0 = new SearchResponse<object>();
-			// end::e4cd381f35dcaa151dd93cf259e50ae6[]
-
-			response0.MatchesExample(@"PUT /myindex");
-		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line28()
+		public void Line74()
 		{
 			// tag::2663038cfc46b106edaef607d553c99c[]
 			var response0 = new SearchResponse<object>();
@@ -31,7 +22,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line48()
+		public void Line87()
 		{
 			// tag::75fb2de2b47c564833ab14049c295384[]
 			var response0 = new SearchResponse<object>();
@@ -47,33 +38,23 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line65()
+		public void Line104()
 		{
-			// tag::45803e6cb9fee2b430dcf63d50fb7a2b[]
+			// tag::a21f2014288a2d2c82585be4eb85708c[]
 			var response0 = new SearchResponse<object>();
-			// end::45803e6cb9fee2b430dcf63d50fb7a2b[]
 
-			response0.MatchesExample(@"GET /_cluster/allocation/explain");
-		}
+			var response1 = new SearchResponse<object>();
+			// end::a21f2014288a2d2c82585be4eb85708c[]
 
-		[U(Skip = "Example not implemented")]
-		public void Line145()
-		{
-			// tag::fb99aaf2e89e70c96c2c79c2ce7a36f1[]
-			var response0 = new SearchResponse<object>();
-			// end::fb99aaf2e89e70c96c2c79c2ce7a36f1[]
+			response0.MatchesExample(@"PUT /idx?master_timeout=1s&timeout=1s
+			{""settings"": {""index.routing.allocation.include._name"": ""non_existent_node""} }");
 
-			response0.MatchesExample(@"GET /_cluster/allocation/explain?include_disk_info=true");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line154()
-		{
-			// tag::681419ddc44c9f7914f88be834ae2b44[]
-			var response0 = new SearchResponse<object>();
-			// end::681419ddc44c9f7914f88be834ae2b44[]
-
-			response0.MatchesExample(@"GET /_cluster/allocation/explain?include_yes_decisions=true");
+			response1.MatchesExample(@"GET /_cluster/allocation/explain
+			{
+			  ""index"": ""idx"",
+			  ""shard"": 0,
+			  ""primary"": true
+			}");
 		}
 	}
 }

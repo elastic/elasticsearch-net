@@ -157,11 +157,11 @@ namespace Examples.Mapping.Dynamic
 				new
 				{
 					name = new
-				{
-					first = "John",
-					middle = "Winston",
-					last = "Lennon"
-				}
+					{
+						first = "John",
+						middle = "Winston",
+						last = "Lennon"
+					}
 				},
 				i => i.Index("my_index").Id(1)
 			);
@@ -203,7 +203,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		public void Line215()
+		public void Line214()
 		{
 			// tag::be51ed37c8425d281a8153abe56b04cb[]
 			var indexResponse = client.Index<object>(new
@@ -235,7 +235,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line241()
+		public void Line239()
 		{
 			// tag::6873971eb4e4577d76d0a5bd7cd15ef9[]
 			var response0 = new SearchResponse<object>();
@@ -278,7 +278,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line293()
+		public void Line291()
 		{
 			// tag::87f85bb49d18f73d0eed0b704e05eb90[]
 			var response0 = new SearchResponse<object>();
@@ -302,7 +302,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line322()
+		public void Line319()
 		{
 			// tag::1a59fa2708ccb3a24c71e8306b81f17f[]
 			var response0 = new SearchResponse<object>();
@@ -326,7 +326,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line348()
+		public void Line344()
 		{
 			// tag::3e60c0b29bd3931927e6f2ee7d2ed0ef[]
 			var response0 = new SearchResponse<object>();
@@ -357,7 +357,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line387()
+		public void Line382()
 		{
 			// tag::9a91f7d0bf52d6c582c62daef5c9d040[]
 			var response0 = new SearchResponse<object>();

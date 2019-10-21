@@ -90,7 +90,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line98()
+		public void Line99()
 		{
 			// tag::e93514654ea0c7c9f15cda0eed61a292[]
 			var response0 = new SearchResponse<object>();

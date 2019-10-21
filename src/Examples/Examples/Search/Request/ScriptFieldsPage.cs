@@ -38,7 +38,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line45()
+		public void Line44()
 		{
 			// tag::34dd16c077e81b3744963b19a3dc9e49[]
 			var response0 = new SearchResponse<object>();

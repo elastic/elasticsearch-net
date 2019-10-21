@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class CountPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line52()
 		{
 			// tag::e7553d4bb4fd82d8f80a4d7af2624afb[]
 			var response0 = new SearchResponse<object>();

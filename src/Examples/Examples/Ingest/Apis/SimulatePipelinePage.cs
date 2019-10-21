@@ -6,13 +6,41 @@ namespace Examples.Ingest.Apis
 	public class SimulatePipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line50()
+		public void Line31()
 		{
-			// tag::68168bb8190037f0c1ea1254f5f5e5a0[]
+			// tag::67ffa135c50c43d6788636c88078c7d1[]
 			var response0 = new SearchResponse<object>();
-			// end::68168bb8190037f0c1ea1254f5f5e5a0[]
+			// end::67ffa135c50c43d6788636c88078c7d1[]
 
-			response0.MatchesExample(@"POST _ingest/pipeline/_simulate
+			response0.MatchesExample(@"POST /_ingest/pipeline/my-pipeline-id/_simulate
+			{
+			  ""docs"": [
+			    {
+			      ""_index"": ""index"",
+			      ""_id"": ""id"",
+			      ""_source"": {
+			        ""foo"": ""bar""
+			      }
+			    },
+			    {
+			      ""_index"": ""index"",
+			      ""_id"": ""id"",
+			      ""_source"": {
+			        ""foo"": ""rab""
+			      }
+			    }
+			  ]
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line212()
+		{
+			// tag::17c2b0a6b0305804ff3b7fd3b4a68df3[]
+			var response0 = new SearchResponse<object>();
+			// end::17c2b0a6b0305804ff3b7fd3b4a68df3[]
+
+			response0.MatchesExample(@"POST /_ingest/pipeline/_simulate
 			{
 			  ""pipeline"" :
 			  {
@@ -46,13 +74,13 @@ namespace Examples.Ingest.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line135()
+		public void Line296()
 		{
-			// tag::6ee061e58bf07bd6a678d210811e2000[]
+			// tag::463de55bb164cde9ac51acd4a7384901[]
 			var response0 = new SearchResponse<object>();
-			// end::6ee061e58bf07bd6a678d210811e2000[]
+			// end::463de55bb164cde9ac51acd4a7384901[]
 
-			response0.MatchesExample(@"POST _ingest/pipeline/_simulate?verbose
+			response0.MatchesExample(@"POST /_ingest/pipeline/_simulate?verbose
 			{
 			  ""pipeline"" :
 			  {
