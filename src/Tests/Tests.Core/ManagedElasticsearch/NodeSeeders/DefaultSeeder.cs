@@ -342,9 +342,6 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				.GeoShape(g => g
 					.Name(p => p.LocationShape)
 				)
-				.Shape(g => g
-					.Name(p => p.ArbitraryShape)
-				)
 				.Completion(cm => cm
 					.Name(p => p.Suggest)
 					.Contexts(cx => cx
@@ -375,6 +372,11 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				props.Object<Labels>(f => f
 					.Name(p => p.Labels)
 					.Enabled(false)
+				);
+
+			if (TestConfiguration.Instance.InRange(">=7.4.0"))
+				props.Shape(g => g
+					.Name(p => p.ArbitraryShape)
 				);
 
 			return props;
