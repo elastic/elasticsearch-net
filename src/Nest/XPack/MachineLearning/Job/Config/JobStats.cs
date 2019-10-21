@@ -71,6 +71,9 @@ namespace Nest
 
 	public class TimingStats
 	{
+		[DataMember(Name = "result_type")]
+		public string ResultType { get; internal set; }
+		
 		[DataMember(Name = "job_id")]
 		public string JobId { get; internal set; }
 
