@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -8,6 +9,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.CumulativeCardinality
 {
+	[SkipVersion("<7.4.0", "Introduced in 7.4")]
 	public class CumulativeCardinalityAggregationUsageTests : AggregationUsageTestBase
 	{
 		public CumulativeCardinalityAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
