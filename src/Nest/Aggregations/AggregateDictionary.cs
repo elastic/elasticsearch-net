@@ -55,6 +55,8 @@ namespace Nest
 
 		public ValueAggregate CumulativeSum(string key) => TryGet<ValueAggregate>(key);
 
+		public ValueAggregate CumulativeCardinality(string key) => TryGet<ValueAggregate>(key);
+
 		public ValueAggregate BucketScript(string key) => TryGet<ValueAggregate>(key);
 
 		public ValueAggregate SerialDifferencing(string key) => TryGet<ValueAggregate>(key);

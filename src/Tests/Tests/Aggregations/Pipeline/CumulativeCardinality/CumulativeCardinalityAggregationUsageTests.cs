@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -6,11 +7,12 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Aggregations.Pipeline.CumulativeSum
+namespace Tests.Aggregations.Pipeline.CumulativeCardinality
 {
-	public class CumulativeSumAggregationUsageTests : AggregationUsageTestBase
+	[SkipVersion("<7.4.0", "Introduced in 7.4")]
+	public class CumulativeCardinalityAggregationUsageTests : AggregationUsageTestBase
 	{
-		public CumulativeSumAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CumulativeCardinalityAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object AggregationJson => new
 		{
@@ -19,20 +21,20 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month",
+					calendar_interval = "month",
 				},
 				aggs = new
 				{
 					commits = new
 					{
-						sum = new
+						cardinality = new
 						{
 							field = "numberOfCommits"
 						}
 					},
 					cumulative_commits = new
 					{
-						cumulative_sum = new
+						cumulative_cardinality = new
 						{
 							buckets_path = "commits"
 						}
@@ -41,16 +43,15 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 			}
 		};
 
-#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
-				.Interval(DateInterval.Month)
+				.CalendarInterval(DateInterval.Month)
 				.Aggregations(aa => aa
-					.Sum("commits", sm => sm
+					.Cardinality("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
 					)
-					.CumulativeSum("cumulative_commits", d => d
+					.CumulativeCardinality("cumulative_commits", d => d
 						.BucketsPath("commits")
 					)
 				)
@@ -60,12 +61,11 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
-				Interval = DateInterval.Month,
+				CalendarInterval = DateInterval.Month,
 				Aggregations =
-					new SumAggregation("commits", "numberOfCommits") &&
-					new CumulativeSumAggregation("cumulative_commits", "commits")
+					new CardinalityAggregation("commits", "numberOfCommits") &&
+					new CumulativeCardinalityAggregation("cumulative_commits", "commits")
 			};
-#pragma warning restore 618
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
@@ -78,7 +78,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 
 			foreach (var item in projectsPerMonth.Buckets)
 			{
-				var commitsDerivative = item.CumulativeSum("cumulative_commits");
+				var commitsDerivative = item.CumulativeCardinality("cumulative_commits");
 				commitsDerivative.Should().NotBeNull();
 				commitsDerivative.Value.Should().NotBe(null);
 			}
