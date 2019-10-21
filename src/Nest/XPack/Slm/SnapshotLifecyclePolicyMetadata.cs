@@ -52,6 +52,31 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "in_progress")]
 		public LifecycleSnapshotInProgress InProgress { get; internal set; }
+
+		/// <summary>
+		///	 Information about the last time the policy successfully initiated a snapshot.
+		/// </summary>
+		[DataMember(Name = "last_success")]
+		public SnapshotInvocationRecord LastSuccess { get; set; }
+
+		/// <summary>
+		///	 Information about the last time the policy failed to initiate a snapshot
+		/// </summary>
+		[DataMember(Name = "last_failure")]
+		public SnapshotInvocationRecord LastFailure { get; set; }
+	}
+
+	public class SnapshotInvocationRecord
+	{
+		[DataMember(Name = "snapshot_name")]
+		public string SnapshotName { get; set; }
+
+		[DataMember(Name = "time_string")]
+		public string TimeString { get; set; }
+
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
+		[DataMember(Name = "time")]
+		public DateTimeOffset Time { get; set; }
 	}
 
 	/// <summary>
