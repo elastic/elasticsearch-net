@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -273,11 +273,8 @@ var createIndexResponse = _client.Indices.Create("myindex", c => c
 );
 ----
 <1> Automap company
-
 <2> Override company inferred mappings
-
 <3> Automap nested employee type
-
 <4> Override employee inferred mappings
 
 [source,javascript]

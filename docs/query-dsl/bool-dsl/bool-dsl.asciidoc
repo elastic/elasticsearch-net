@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -207,9 +207,7 @@ Assert(
 );
 ----
 <1> three queries `&&` together using the Fluent API
-
 <2> three queries `&&` together using Object Initialzer syntax
-
 <3> assert the resulting `bool` query in each case has 3 `must` clauses
 
 [[unary-negation-operator]]
@@ -269,9 +267,7 @@ Assert(
     c => c.Bool.MustNot.Should().HaveCount(2)); <3>
 ----
 <1> two queries with `!` operator applied, `&&` together using the Fluent API
-
 <2> two queries with `!` operator applied, `&&` together using the Object Initializer syntax
-
 <3> assert the resulting `bool` query in each case has two `must_not` clauses
 
 [[unary-plus-operator]]

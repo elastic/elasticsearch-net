@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -97,7 +97,6 @@ var pool = new CloudConnectionPool(cloudId, credentials); <2>
 var client = new ElasticClient(new ConnectionSettings(pool));
 ----
 <1> a username and password that can access Elasticsearch service on Elastic Cloud
-
 <2> `cloudId` is a value that can be retrieved from the Elastic Cloud web console
 
 This type of pool, like its parent the `SingleNodeConnectionPool`, is hardwired to opt out of

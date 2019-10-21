@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -107,7 +107,6 @@ var ndexResponse = client.IndexDocument(person); <1>
 var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
 ----
 <1> synchronous method that returns an `IndexResponse`
-
 <2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,

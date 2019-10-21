@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -62,7 +62,6 @@ var createIndexResponse = _client.Indices.Create("myindex", c => c
 );
 ----
 <1> Auto map `Company` using the generic method
-
 <2> Auto map `Employee` using the non-generic method
 
 This produces the following JSON request
