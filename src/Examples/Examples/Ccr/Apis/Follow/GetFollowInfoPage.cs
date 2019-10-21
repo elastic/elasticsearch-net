@@ -6,7 +6,7 @@ namespace Examples.Ccr.Apis.Follow
 	public class GetFollowInfoPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line38()
+		public void Line36()
 		{
 			// tag::b2440b492149b705ef107137fdccb0c2[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line142()
+		public void Line138()
 		{
 			// tag::a520168c1c8b454a8f102d6a13027c73[]
 			var response0 = new SearchResponse<object>();

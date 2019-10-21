@@ -19,7 +19,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line111()
+		public void Line110()
 		{
 			// tag::b649c4dc7d187a27d2112f59e62cecea[]
 			var response0 = new SearchResponse<object>();
@@ -33,7 +33,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line137()
+		public void Line135()
 		{
 			// tag::8b8c48b5fcfaaec794875537d3be2e62[]
 			var response0 = new SearchResponse<object>();
@@ -47,7 +47,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line173()
+		public void Line170()
 		{
 			// tag::92d82b9d1bda5a8ae1117d03413f4e67[]
 			var response0 = new SearchResponse<object>();
@@ -61,7 +61,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line200()
+		public void Line196()
 		{
 			// tag::a972c38ee41dc899708825790a113cb8[]
 			var response0 = new SearchResponse<object>();
@@ -75,7 +75,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line228()
+		public void Line223()
 		{
 			// tag::d38b8ef18ca89eafb1e175ec9a393259[]
 			var response0 = new SearchResponse<object>();
@@ -89,7 +89,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line283()
+		public void Line277()
 		{
 			// tag::212042898296f208dbf957f33c07e3b2[]
 			var response0 = new SearchResponse<object>();
@@ -102,7 +102,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line321()
+		public void Line314()
 		{
 			// tag::cc5dfc9aa125e3fd03f523fc2c356f63[]
 			var response0 = new SearchResponse<object>();
@@ -115,7 +115,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line351()
+		public void Line341()
 		{
 			// tag::683da0a8624bc03c79a3db8ffab43f0b[]
 			var response0 = new SearchResponse<object>();
@@ -137,7 +137,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line390()
+		public void Line379()
 		{
 			// tag::c11dc94839b861235b4943f046e15997[]
 			var response0 = new SearchResponse<object>();
@@ -152,7 +152,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line427()
+		public void Line415()
 		{
 			// tag::15089efd5a5a72234fdb91c111adb3c1[]
 			var response0 = new SearchResponse<object>();

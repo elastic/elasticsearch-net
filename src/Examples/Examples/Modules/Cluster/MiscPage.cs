@@ -21,7 +21,7 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line120()
+		public void Line119()
 		{
 			// tag::c3fa14da3d0b0f93fb59bb5386b7e776[]
 			var response0 = new SearchResponse<object>();

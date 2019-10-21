@@ -6,7 +6,7 @@ namespace Examples.Search
 	public class SearchTemplatePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line8()
+		public void Line7()
 		{
 			// tag::e068d93555351b9afbdb9dd2aff6368d[]
 			var response0 = new SearchResponse<object>();
@@ -27,7 +27,117 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line41()
+		public void Line110()
+		{
+			// tag::b19dc078255bfa1237206913ae94012f[]
+			var response0 = new SearchResponse<object>();
+			// end::b19dc078255bfa1237206913ae94012f[]
+
+			response0.MatchesExample(@"POST _scripts/<templateid>
+			{
+			    ""script"": {
+			        ""lang"": ""mustache"",
+			        ""source"": {
+			            ""query"": {
+			                ""match"": {
+			                    ""title"": ""{{query_string}}""
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line145()
+		{
+			// tag::e51c88800679913981757542bc639816[]
+			var response0 = new SearchResponse<object>();
+			// end::e51c88800679913981757542bc639816[]
+
+			response0.MatchesExample(@"GET _scripts/<templateid>");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line171()
+		{
+			// tag::ed639528456671b302ecc887f5a60987[]
+			var response0 = new SearchResponse<object>();
+			// end::ed639528456671b302ecc887f5a60987[]
+
+			response0.MatchesExample(@"DELETE _scripts/<templateid>");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line183()
+		{
+			// tag::de5b9f1211876f6ba7a4c93e87c27d3a[]
+			var response0 = new SearchResponse<object>();
+			// end::de5b9f1211876f6ba7a4c93e87c27d3a[]
+
+			response0.MatchesExample(@"GET _search/template
+			{
+			    ""id"": ""<templateid>"", <1>
+			    ""params"": {
+			        ""query_string"": ""search for these words""
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line203()
+		{
+			// tag::4b13f649aa2eca6f7ee4221f708430c1[]
+			var response0 = new SearchResponse<object>();
+			// end::4b13f649aa2eca6f7ee4221f708430c1[]
+
+			response0.MatchesExample(@"GET _render/template
+			{
+			  ""source"": ""{ \""query\"": { \""terms\"": {{#toJson}}statuses{{/toJson}} }}"",
+			  ""params"": {
+			    ""statuses"" : {
+			        ""status"": [ ""pending"", ""published"" ]
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line256()
+		{
+			// tag::99e29a569f37ea83b02687e6e2793529[]
+			var response0 = new SearchResponse<object>();
+			// end::99e29a569f37ea83b02687e6e2793529[]
+
+			response0.MatchesExample(@"GET _search/template
+			{
+			  ""id"": ""my_template"",
+			  ""params"": {
+			    ""status"": [ ""pending"", ""published"" ]
+			  },
+			  ""explain"": true
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line275()
+		{
+			// tag::3462452c6fdba8dc1efe2cca101246e8[]
+			var response0 = new SearchResponse<object>();
+			// end::3462452c6fdba8dc1efe2cca101246e8[]
+
+			response0.MatchesExample(@"GET _search/template
+			{
+			  ""id"": ""my_template"",
+			  ""params"": {
+			    ""status"": [ ""pending"", ""published"" ]
+			  },
+			  ""profile"": true
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line292()
 		{
 			// tag::4697b9aa952ac1613ee1a6ec7b3223c1[]
 			var response0 = new SearchResponse<object>();
@@ -49,7 +159,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line66()
+		public void Line316()
 		{
 			// tag::eb1f3134f28a9ba8406b0f10199cf5be[]
 			var response0 = new SearchResponse<object>();
@@ -67,7 +177,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line99()
+		public void Line348()
 		{
 			// tag::6be45fa02e779a727ddf48f871610aa8[]
 			var response0 = new SearchResponse<object>();
@@ -86,7 +196,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line145()
+		public void Line393()
 		{
 			// tag::33bb4a6ec63a709a14dfa15a5e2cca88[]
 			var response0 = new SearchResponse<object>();
@@ -108,7 +218,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line179()
+		public void Line426()
 		{
 			// tag::02f0012ca77fdc409592e524e5647fb8[]
 			var response0 = new SearchResponse<object>();
@@ -138,7 +248,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line366()
+		public void Line615()
 		{
 			// tag::a5cc9a86f0f9525cd86564421c721d2f[]
 			var response0 = new SearchResponse<object>();
@@ -157,116 +267,6 @@ namespace Examples.Search
 			        ""host"": ""https://www.elastic.co/"",
 			        ""page"": ""learn""
 			    }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line408()
-		{
-			// tag::07248c39e529f40e1e1648a9ec48ab33[]
-			var response0 = new SearchResponse<object>();
-			// end::07248c39e529f40e1e1648a9ec48ab33[]
-
-			response0.MatchesExample(@"POST _scripts/<templatename>
-			{
-			    ""script"": {
-			        ""lang"": ""mustache"",
-			        ""source"": {
-			            ""query"": {
-			                ""match"": {
-			                    ""title"": ""{{query_string}}""
-			                }
-			            }
-			        }
-			    }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line444()
-		{
-			// tag::7e160bad9b0524db95b27411f5955d17[]
-			var response0 = new SearchResponse<object>();
-			// end::7e160bad9b0524db95b27411f5955d17[]
-
-			response0.MatchesExample(@"GET _scripts/<templatename>");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line471()
-		{
-			// tag::310c3d0d4f00ab9aa13ca31f55f727f5[]
-			var response0 = new SearchResponse<object>();
-			// end::310c3d0d4f00ab9aa13ca31f55f727f5[]
-
-			response0.MatchesExample(@"DELETE _scripts/<templatename>");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line495()
-		{
-			// tag::e5a10173765fc4471e0ec310e275b5a1[]
-			var response0 = new SearchResponse<object>();
-			// end::e5a10173765fc4471e0ec310e275b5a1[]
-
-			response0.MatchesExample(@"GET _search/template
-			{
-			    ""id"": ""<templateName>"", \<1>
-			    ""params"": {
-			        ""query_string"": ""search for these words""
-			    }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line514()
-		{
-			// tag::4b13f649aa2eca6f7ee4221f708430c1[]
-			var response0 = new SearchResponse<object>();
-			// end::4b13f649aa2eca6f7ee4221f708430c1[]
-
-			response0.MatchesExample(@"GET _render/template
-			{
-			  ""source"": ""{ \""query\"": { \""terms\"": {{#toJson}}statuses{{/toJson}} }}"",
-			  ""params"": {
-			    ""statuses"" : {
-			        ""status"": [ ""pending"", ""published"" ]
-			    }
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line566()
-		{
-			// tag::99e29a569f37ea83b02687e6e2793529[]
-			var response0 = new SearchResponse<object>();
-			// end::99e29a569f37ea83b02687e6e2793529[]
-
-			response0.MatchesExample(@"GET _search/template
-			{
-			  ""id"": ""my_template"",
-			  ""params"": {
-			    ""status"": [ ""pending"", ""published"" ]
-			  },
-			  ""explain"": true
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line585()
-		{
-			// tag::3462452c6fdba8dc1efe2cca101246e8[]
-			var response0 = new SearchResponse<object>();
-			// end::3462452c6fdba8dc1efe2cca101246e8[]
-
-			response0.MatchesExample(@"GET _search/template
-			{
-			  ""id"": ""my_template"",
-			  ""params"": {
-			    ""status"": [ ""pending"", ""published"" ]
-			  },
-			  ""profile"": true
 			}");
 		}
 	}

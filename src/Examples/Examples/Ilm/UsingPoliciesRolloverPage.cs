@@ -35,7 +35,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line88()
+		public void Line87()
 		{
 			// tag::f29c02d259065033bd557519d1b21481[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +54,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line109()
+		public void Line108()
 		{
 			// tag::454e0e11e2bbb4718109a53662f8c45d[]
 			var response0 = new SearchResponse<object>();

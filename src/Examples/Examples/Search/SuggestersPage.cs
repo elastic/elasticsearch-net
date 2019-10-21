@@ -6,7 +6,7 @@ namespace Examples.Search
 	public class SuggestersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line16()
+		public void Line8()
 		{
 			// tag::626f8c4b3e2cd3d9beaa63a7f5799d7a[]
 			var response0 = new SearchResponse<object>();
@@ -31,7 +31,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line43()
+		public void Line51()
 		{
 			// tag::2533e4b36ae837eaecda08407ecb6383[]
 			var response0 = new SearchResponse<object>();
@@ -57,7 +57,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line119()
+		public void Line127()
 		{
 			// tag::5275842787967b6db876025f4a1c6942[]
 			var response0 = new SearchResponse<object>();

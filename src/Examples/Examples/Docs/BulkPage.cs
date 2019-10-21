@@ -6,7 +6,7 @@ namespace Examples.Docs
 	public class BulkPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line73()
+		public void Line11()
 		{
 			// tag::ae9ccfaa146731ab9176df90670db1c2[]
 			var response0 = new SearchResponse<object>();
@@ -23,7 +23,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line265()
+		public void Line405()
 		{
 			// tag::8cd00a3aba7c3c158277bc032aac2830[]
 			var response0 = new SearchResponse<object>();

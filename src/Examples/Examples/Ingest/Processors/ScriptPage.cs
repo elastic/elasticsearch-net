@@ -8,19 +8,18 @@ namespace Examples.Ingest.Processors
 		[U(Skip = "Example not implemented")]
 		public void Line50()
 		{
-			// tag::c0c7926f235e6ccc7e9a827dcc85e602[]
+			// tag::197d87fdb4aeccf3d9a08ae485c12306[]
 			var response0 = new SearchResponse<object>();
-			// end::c0c7926f235e6ccc7e9a827dcc85e602[]
+			// end::197d87fdb4aeccf3d9a08ae485c12306[]
 
 			response0.MatchesExample(@"PUT _ingest/pipeline/my_index
 			{
-			    ""description"": ""use index:my_index and type:_doc"",
+			    ""description"": ""use index:my_index"",
 			    ""processors"": [
 			      {
 			        ""script"": {
 			          ""source"": """"""
 			            ctx._index = 'my_index';
-			            ctx._type = '_doc';
 			          """"""
 			        }
 			      }
@@ -29,7 +28,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line71()
+		public void Line69()
 		{
 			// tag::cdc55ad88de55999fe2d79fd4781918b[]
 			var response0 = new SearchResponse<object>();

@@ -16,7 +16,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line136()
+		public void Line135()
 		{
 			// tag::0fa220ee3fb267020382f74aa70eb1e9[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line144()
+		public void Line142()
 		{
 			// tag::a3cfd350c73a104b99a998c6be931408[]
 			var response0 = new SearchResponse<object>();

@@ -29,7 +29,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line34()
+		public void Line33()
 		{
 			// tag::df827f97ecf543a1722003edbf277c01[]
 			var response0 = new SearchResponse<object>();
@@ -48,7 +48,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line49()
 		{
 			// tag::36a07d7014cdd3d6cd9d97651e66e7ef[]
 			var response0 = new SearchResponse<object>();

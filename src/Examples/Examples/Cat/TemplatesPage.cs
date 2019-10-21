@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class TemplatesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line7()
+		public void Line50()
 		{
 			// tag::289e6033c96f931844770114113cad6a[]
 			var response0 = new SearchResponse<object>();

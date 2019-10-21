@@ -6,22 +6,22 @@ namespace Examples.Indices
 	public class SplitIndexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line89()
+		public void Line10()
 		{
-			// tag::76bcb71590ce6acebc8427c4ebcf9521[]
+			// tag::1a19b7db5485cd814e1f76f7cd7d2923[]
 			var response0 = new SearchResponse<object>();
-			// end::76bcb71590ce6acebc8427c4ebcf9521[]
+			// end::1a19b7db5485cd814e1f76f7cd7d2923[]
 
-			response0.MatchesExample(@"PUT my_source_index
+			response0.MatchesExample(@"POST /twitter/_split/split-twitter-index
 			{
 			  ""settings"": {
-			    ""index.number_of_shards"" : 1
+			    ""index.number_of_shards"": 2
 			  }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line105()
+		public void Line42()
 		{
 			// tag::01c0e302f4fd5118faf5e34f4a010ebf[]
 			var response0 = new SearchResponse<object>();
@@ -36,13 +36,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line126()
+		public void Line147()
 		{
-			// tag::290a366536875db313d1cbbed61cb9b6[]
+			// tag::2e796e5ca59768d4426abbf9a049db3e[]
 			var response0 = new SearchResponse<object>();
-			// end::290a366536875db313d1cbbed61cb9b6[]
+			// end::2e796e5ca59768d4426abbf9a049db3e[]
 
-			response0.MatchesExample(@"POST my_source_index/_split/my_target_index
+			response0.MatchesExample(@"POST /my_source_index/_split/my_target_index
 			{
 			  ""settings"": {
 			    ""index.number_of_shards"": 2
@@ -51,16 +51,16 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line161()
+		public void Line181()
 		{
-			// tag::d1a84808a9bca68c9bd7ede0a55a5a9f[]
+			// tag::f2f1cae094855a45fd8f73478bec8e70[]
 			var response0 = new SearchResponse<object>();
-			// end::d1a84808a9bca68c9bd7ede0a55a5a9f[]
+			// end::f2f1cae094855a45fd8f73478bec8e70[]
 
-			response0.MatchesExample(@"POST my_source_index/_split/my_target_index
+			response0.MatchesExample(@"POST /my_source_index/_split/my_target_index
 			{
 			  ""settings"": {
-			    ""index.number_of_shards"": 5 \<1>
+			    ""index.number_of_shards"": 5 <1>
 			  },
 			  ""aliases"": {
 			    ""my_search_indices"": {}

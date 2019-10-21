@@ -6,7 +6,7 @@ namespace Examples.Mapping.Types
 	public class FlattenedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		public void Line38()
 		{
 			// tag::8aa74aee3dcf4b34028e4c5e1c1ed27b[]
 			var response0 = new SearchResponse<object>();

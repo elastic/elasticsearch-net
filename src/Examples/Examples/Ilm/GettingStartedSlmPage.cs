@@ -6,15 +6,15 @@ namespace Examples.Ilm
 	public class GettingStartedSlmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line23()
+		public void Line25()
 		{
-			// tag::718c2afdece55a7de338e668438eac2d[]
+			// tag::1d7abeea98f6ed64cc8371794c90a921[]
 			var response0 = new SearchResponse<object>();
-			// end::718c2afdece55a7de338e668438eac2d[]
+			// end::1d7abeea98f6ed64cc8371794c90a921[]
 
 			response0.MatchesExample(@"POST /_security/role/slm-admin
 			{
-			  ""cluster"": [""manage_slm"", ""create_snapshot""],
+			  ""cluster"": [""manage_slm"", ""cluster:admin/snapshot/*""],
 			  ""indices"": [
 			    {
 			      ""names"": ["".slm-history-*""],
@@ -25,7 +25,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line43()
 		{
 			// tag::ef76d0e4cdc2881c161a5557a98a3446[]
 			var response0 = new SearchResponse<object>();
@@ -60,35 +60,40 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line90()
+		public void Line92()
 		{
-			// tag::a5bc83a268ea9c8b4368beb6522b5336[]
+			// tag::c782b579f1ad15f46a7b9e45219806a5[]
 			var response0 = new SearchResponse<object>();
-			// end::a5bc83a268ea9c8b4368beb6522b5336[]
+			// end::c782b579f1ad15f46a7b9e45219806a5[]
 
 			response0.MatchesExample(@"PUT /_slm/policy/nightly-snapshots
 			{
-			  ""schedule"": ""0 30 1 * * ?"", \<1>
-			  ""name"": ""<nightly-snap-{now/d}>"", \<2>
-			  ""repository"": ""my_repository"", \<3>
-			  ""config"": { \<4>
-			    ""indices"": [""*""] \<5>
+			  ""schedule"": ""0 30 1 * * ?"", <1>
+			  ""name"": ""<nightly-snap-{now/d}>"", <2>
+			  ""repository"": ""my_repository"", <3>
+			  ""config"": { <4>
+			    ""indices"": [""*""] <5>
+			  },
+			  ""retention"": { <6>
+			    ""expire_after"": ""30d"", <7>
+			    ""min_count"": 5, <8>
+			    ""max_count"": 50 <9>
 			  }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line138()
+		public void Line148()
 		{
-			// tag::5bf4b2d603221fb1df4adb34829e1164[]
+			// tag::af5ff39759d3af0525d941634a6cdb82[]
 			var response0 = new SearchResponse<object>();
-			// end::5bf4b2d603221fb1df4adb34829e1164[]
+			// end::af5ff39759d3af0525d941634a6cdb82[]
 
-			response0.MatchesExample(@"PUT /_slm/policy/nightly-snapshots/_execute");
+			response0.MatchesExample(@"POST /_slm/policy/nightly-snapshots/_execute");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line151()
+		public void Line160()
 		{
 			// tag::f1b545d3c3eeedf8ae09c56070c26053[]
 			var response0 = new SearchResponse<object>();

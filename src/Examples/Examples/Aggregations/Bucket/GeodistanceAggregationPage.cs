@@ -60,7 +60,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line94()
+		public void Line93()
 		{
 			// tag::c78b80d080a58090583228421ac1553d[]
 			var response0 = new SearchResponse<object>();
@@ -86,7 +86,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line121()
+		public void Line119()
 		{
 			// tag::a5736ad3638c238e3b15c9fdaa1f29f7[]
 			var response0 = new SearchResponse<object>();
@@ -113,7 +113,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line149()
+		public void Line146()
 		{
 			// tag::6b31f435607617d96b1dff3bf10c9d8c[]
 			var response0 = new SearchResponse<object>();
@@ -139,7 +139,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line204()
+		public void Line200()
 		{
 			// tag::c5afc3d716fdf8c0eefa4732e8a4b3ee[]
 			var response0 = new SearchResponse<object>();

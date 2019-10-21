@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class GetAppPrivilegesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line59()
+		public void Line58()
 		{
 			// tag::cd8006165ac64f1ef99af48e5a35a25b[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line88()
 		{
 			// tag::3b18e9de638ff0b1c7a1f1f6bf1c24f3[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line99()
+		public void Line95()
 		{
 			// tag::0ddf705317d9c5095b4a1419a2e3bace[]
 			var response0 = new SearchResponse<object>();

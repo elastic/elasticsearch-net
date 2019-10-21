@@ -39,7 +39,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line96()
+		public void Line95()
 		{
 			// tag::07afce825c09de17a3d73a02b17a0a97[]
 			var response0 = new SearchResponse<object>();

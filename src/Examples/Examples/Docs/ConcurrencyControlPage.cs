@@ -20,7 +20,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line62()
+		public void Line60()
 		{
 			// tag::278d5bfa1a01f91d5c84679ef1bca390[]
 			var response0 = new SearchResponse<object>();
@@ -30,7 +30,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line103()
+		public void Line99()
 		{
 			// tag::ac24941027452bdafe82b4bd7edf9000[]
 			var response0 = new SearchResponse<object>();

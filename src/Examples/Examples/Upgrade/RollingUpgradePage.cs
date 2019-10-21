@@ -6,7 +6,7 @@ namespace Examples.Upgrade
 	public class RollingUpgradePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line35()
+		public void Line46()
 		{
 			// tag::1cd3b9d65576a9212eef898eb3105758[]
 			var response0 = new SearchResponse<object>();
@@ -21,7 +21,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		public void Line48()
 		{
 			// tag::31b4eec9ac4c2c3fdfbaeee8d2f83513[]
 			var response0 = new SearchResponse<object>();
@@ -31,7 +31,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line70()
+		public void Line80()
 		{
 			// tag::a21a7bf052b41f5b996dc58f7b69770f[]
 			var response0 = new SearchResponse<object>();
@@ -41,7 +41,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line93()
 		{
 			// tag::7e49705769c42895fb7b1e2ca028ff47[]
 			var response0 = new SearchResponse<object>();
@@ -51,7 +51,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line106()
 		{
 			// tag::45ef5156dbd2d3fd4fd22b8d99f7aad4[]
 			var response0 = new SearchResponse<object>();
@@ -66,7 +66,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		public void Line124()
 		{
 			// tag::5c53944aec2ce3e55854e315f0482029[]
 			var response0 = new SearchResponse<object>();
@@ -76,7 +76,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line141()
+		public void Line154()
 		{
 			// tag::6b74ff6df5d7583add837b34a6c80a43[]
 			var response0 = new SearchResponse<object>();
@@ -86,7 +86,7 @@ namespace Examples.Upgrade
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line168()
+		public void Line180()
 		{
 			// tag::3c5d5a5c34a62724942329658c688f5e[]
 			var response0 = new SearchResponse<object>();

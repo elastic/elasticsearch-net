@@ -5,39 +5,61 @@ namespace Examples.Root
 {
 	public class MappingPage : ExampleBase
 	{
-		[U]
-		public void Line141()
+		[U(Skip = "Example not implemented")]
+		public void Line144()
 		{
-			// tag::b311b42b7dcc69821df1f77bfaf2d50d[]
-			var createIndexResponse = client.Indices.Create("my_index", c => c
-				.Map(m => m
-					.Properties(p => p
-						.Text(t => t.Name("title"))
-						.Text(t => t.Name("name"))
-						.Number(n => n.Name("age").Type(NumberType.Integer))
-						.Date(d => d
-							.Name("created")
-							.Format("strict_date_optional_time||epoch_millis")
-						)
-					)
-				)
-			);
-			// end::b311b42b7dcc69821df1f77bfaf2d50d[]
+			// tag::d8b2a88b5eca99d3691ad3cd40266736[]
+			var response0 = new SearchResponse<object>();
+			// end::d8b2a88b5eca99d3691ad3cd40266736[]
 
-			createIndexResponse.MatchesExample(@"PUT my_index \<1>
+			response0.MatchesExample(@"PUT /my-index
 			{
 			  ""mappings"": {
-			    ""properties"": { \<2>
-			      ""title"":    { ""type"": ""text""  }, \<3>
-			      ""name"":     { ""type"": ""text""  }, \<4>
-			      ""age"":      { ""type"": ""integer"" },  \<5>
-			      ""created"":  {
-			        ""type"":   ""date"", \<6>
-			        ""format"": ""strict_date_optional_time||epoch_millis""
-			      }
+			    ""properties"": {
+			      ""age"":    { ""type"": ""integer"" },  <1>
+			      ""email"":  { ""type"": ""keyword""  }, <2>
+			      ""name"":   { ""type"": ""text""  }     <3>
 			    }
 			  }
 			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line173()
+		{
+			// tag::71ba9033107882f61cdc3b32fc73568d[]
+			var response0 = new SearchResponse<object>();
+			// end::71ba9033107882f61cdc3b32fc73568d[]
+
+			response0.MatchesExample(@"PUT /my-index/_mapping
+			{
+			  ""properties"": {
+			    ""employee-id"": {
+			      ""type"": ""keyword"",
+			      ""index"": false
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line211()
+		{
+			// tag::609260ad1d5998be2ca09ff1fe237efa[]
+			var response0 = new SearchResponse<object>();
+			// end::609260ad1d5998be2ca09ff1fe237efa[]
+
+			response0.MatchesExample(@"GET /my-index/_mapping");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line257()
+		{
+			// tag::99a52be903945b17e734a1d02a57e958[]
+			var response0 = new SearchResponse<object>();
+			// end::99a52be903945b17e734a1d02a57e958[]
+
+			response0.MatchesExample(@"GET /my-index/_mapping/field/employee-id");
 		}
 	}
 }

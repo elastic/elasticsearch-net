@@ -6,7 +6,7 @@ namespace Examples.Indices
 	public class UpdateSettingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line11()
+		public void Line10()
 		{
 			// tag::8653e76676de5d327201b77512afa3a0[]
 			var response0 = new SearchResponse<object>();
@@ -21,7 +21,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line25()
+		public void Line71()
 		{
 			// tag::42744a175125df5be0ef77413bf8f608[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +36,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line95()
 		{
 			// tag::dfac8d098b50aa0181161bcd17b38ef4[]
 			var response0 = new SearchResponse<object>();
@@ -51,7 +51,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line69()
+		public void Line112()
 		{
 			// tag::0be2c28ee65384774b1e479b47dc3d92[]
 			var response0 = new SearchResponse<object>();
@@ -66,7 +66,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line83()
+		public void Line125()
 		{
 			// tag::fe5763d32955e8b65eb3048e97b1580c[]
 			var response0 = new SearchResponse<object>();
@@ -76,7 +76,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line101()
+		public void Line143()
 		{
 			// tag::ba0b4081c98f3387f76b77847c52ee9a[]
 			var response0 = new SearchResponse<object>();

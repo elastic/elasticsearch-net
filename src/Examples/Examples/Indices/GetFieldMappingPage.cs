@@ -6,13 +6,23 @@ namespace Examples.Indices
 	public class GetFieldMappingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line11()
+		public void Line12()
 		{
-			// tag::ba3a852ba26b650bc23be38ecebda5e4[]
+			// tag::02c9cadc657f6afd4ca854c577188d31[]
 			var response0 = new SearchResponse<object>();
-			// end::ba3a852ba26b650bc23be38ecebda5e4[]
+			// end::02c9cadc657f6afd4ca854c577188d31[]
 
-			response0.MatchesExample(@"PUT publications
+			response0.MatchesExample(@"GET /twitter/_mapping/field/user");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line65()
+		{
+			// tag::f0f0f778e19134fbe3e4be98fc47bd34[]
+			var response0 = new SearchResponse<object>();
+			// end::f0f0f778e19134fbe3e4be98fc47bd34[]
+
+			response0.MatchesExample(@"PUT /publications
 			{
 			    ""mappings"": {
 			        ""properties"": {
@@ -31,7 +41,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line35()
+		public void Line87()
 		{
 			// tag::299900fb08da80fe455cf3f1bb7d62ee[]
 			var response0 = new SearchResponse<object>();
@@ -41,7 +51,27 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line72()
+		public void Line120()
+		{
+			// tag::ed3bdf4d6799b43526851e92b6a60c55[]
+			var response0 = new SearchResponse<object>();
+			// end::ed3bdf4d6799b43526851e92b6a60c55[]
+
+			response0.MatchesExample(@"GET publications/_mapping/field/author.id,abstract,name");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line156()
+		{
+			// tag::b61afb7ca29a11243232ffcc8b5a43cf[]
+			var response0 = new SearchResponse<object>();
+			// end::b61afb7ca29a11243232ffcc8b5a43cf[]
+
+			response0.MatchesExample(@"GET publications/_mapping/field/a*");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line208()
 		{
 			// tag::9af393bb38bf098d65d00e7637824f44[]
 			var response0 = new SearchResponse<object>();
@@ -56,26 +86,6 @@ namespace Examples.Indices
 			response1.MatchesExample(@"GET /_all/_mapping/field/message,user.id");
 
 			response2.MatchesExample(@"GET /_all/_mapping/field/*.id");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line91()
-		{
-			// tag::ed3bdf4d6799b43526851e92b6a60c55[]
-			var response0 = new SearchResponse<object>();
-			// end::ed3bdf4d6799b43526851e92b6a60c55[]
-
-			response0.MatchesExample(@"GET publications/_mapping/field/author.id,abstract,name");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line128()
-		{
-			// tag::b61afb7ca29a11243232ffcc8b5a43cf[]
-			var response0 = new SearchResponse<object>();
-			// end::b61afb7ca29a11243232ffcc8b5a43cf[]
-
-			response0.MatchesExample(@"GET publications/_mapping/field/a*");
 		}
 	}
 }

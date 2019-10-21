@@ -6,7 +6,7 @@ namespace Examples.Search
 	public class SearchShardsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line17()
+		public void Line7()
 		{
 			// tag::49b137a1c0016face219bac3faf41996[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line102()
+		public void Line142()
 		{
 			// tag::a44b7da0091ac75e5571475a4e99bb16[]
 			var response0 = new SearchResponse<object>();

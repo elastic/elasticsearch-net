@@ -22,7 +22,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line26()
+		public void Line25()
 		{
 			// tag::fb8a4322825d26c4e7b41bd763b3d392[]
 			var response0 = new SearchResponse<object>();

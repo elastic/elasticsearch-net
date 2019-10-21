@@ -6,7 +6,7 @@ namespace Examples.Mapping.Params
 	public class FielddataPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line58()
+		public void Line56()
 		{
 			// tag::ef9111c1648d7820925f12e07d1346c5[]
 			var response0 = new SearchResponse<object>();
@@ -30,7 +30,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line86()
+		public void Line84()
 		{
 			// tag::a7c15fe6b5779c84ce9a34bf4b2a7ab7[]
 			var response0 = new SearchResponse<object>();
@@ -48,7 +48,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line120()
+		public void Line117()
 		{
 			// tag::6a81d00f0d73bc5985e76b3cadab645e[]
 			var response0 = new SearchResponse<object>();

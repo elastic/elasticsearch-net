@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 	public class ActivateWatchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line36()
+		public void Line50()
 		{
 			// tag::e827a9040e137410d62d10bb3b3cbb71[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.XPack.Docs.En.RestApi.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line69()
+		public void Line82()
 		{
 			// tag::3477a89d869b1f7f72d50c2ca86c4679[]
 			var response0 = new SearchResponse<object>();

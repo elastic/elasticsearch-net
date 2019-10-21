@@ -6,61 +6,43 @@ namespace Examples.Indices
 	public class FlushPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line13()
+		public void Line10()
 		{
-			// tag::7ef5a1dfd0c9db876c0dd03d8f0fe3a7[]
+			// tag::bf7b04e79b861d76d1922a588d57f817[]
 			var response0 = new SearchResponse<object>();
-			// end::7ef5a1dfd0c9db876c0dd03d8f0fe3a7[]
+			// end::bf7b04e79b861d76d1922a588d57f817[]
 
-			response0.MatchesExample(@"POST twitter/_flush");
+			response0.MatchesExample(@"POST /twitter/_flush");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		public void Line116()
 		{
-			// tag::191c0396ef10ca408b41bbb4c7645ee7[]
+			// tag::cefde3553fdbd516813e73a603c72c24[]
 			var response0 = new SearchResponse<object>();
+			// end::cefde3553fdbd516813e73a603c72c24[]
 
-			var response1 = new SearchResponse<object>();
-			// end::191c0396ef10ca408b41bbb4c7645ee7[]
-
-			response0.MatchesExample(@"POST kimchy,elasticsearch/_flush");
-
-			response1.MatchesExample(@"POST _flush");
+			response0.MatchesExample(@"POST /kimchy/_flush");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line75()
+		public void Line126()
 		{
-			// tag::94819e06e05de52c23b285346205ddaf[]
+			// tag::66db9f5108a3936115f1fb64c844934a[]
 			var response0 = new SearchResponse<object>();
-			// end::94819e06e05de52c23b285346205ddaf[]
+			// end::66db9f5108a3936115f1fb64c844934a[]
 
-			response0.MatchesExample(@"GET twitter/_stats?filter_path=**.commit&level=shards \<1>");
+			response0.MatchesExample(@"POST /kimchy,elasticsearch/_flush");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line143()
+		public void Line136()
 		{
-			// tag::da2658cc33e1a75c4b0fe96eb62740a7[]
+			// tag::f27c28ddbf4c266b5f42d14da837b8de[]
 			var response0 = new SearchResponse<object>();
-			// end::da2658cc33e1a75c4b0fe96eb62740a7[]
+			// end::f27c28ddbf4c266b5f42d14da837b8de[]
 
-			response0.MatchesExample(@"POST twitter/_flush/synced");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line239()
-		{
-			// tag::fc079cd6d867c5d65b7a28de197292a4[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::fc079cd6d867c5d65b7a28de197292a4[]
-
-			response0.MatchesExample(@"POST kimchy,elasticsearch/_flush/synced");
-
-			response1.MatchesExample(@"POST _flush/synced");
+			response0.MatchesExample(@"POST /_flush");
 		}
 	}
 }

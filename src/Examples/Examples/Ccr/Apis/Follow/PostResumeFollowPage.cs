@@ -6,7 +6,7 @@ namespace Examples.Ccr.Apis.Follow
 	public class PostResumeFollowPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line40()
+		public void Line38()
 		{
 			// tag::109db8ff7b715aca98de8ef1ab7e44ab[]
 			var response0 = new SearchResponse<object>();
@@ -18,7 +18,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line83()
+		public void Line80()
 		{
 			// tag::824fded1f9db28906ae7e85ae8de9bd0[]
 			var response0 = new SearchResponse<object>();

@@ -6,39 +6,17 @@ namespace Examples.Ingest.Apis
 	public class GetPipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line28()
+		public void Line30()
 		{
-			// tag::375bd91eeb64a865c49352ef0c745a0a[]
+			// tag::6a3a86ff58e5f20950d429cf2832c229[]
 			var response0 = new SearchResponse<object>();
-			// end::375bd91eeb64a865c49352ef0c745a0a[]
+			// end::6a3a86ff58e5f20950d429cf2832c229[]
 
-			response0.MatchesExample(@"GET _ingest/pipeline/my-pipeline-id");
+			response0.MatchesExample(@"GET /_ingest/pipeline/my-pipeline-id");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line69()
-		{
-			// tag::8fc926f8c03c4a03afee543370d92f66[]
-			var response0 = new SearchResponse<object>();
-			// end::8fc926f8c03c4a03afee543370d92f66[]
-
-			response0.MatchesExample(@"PUT _ingest/pipeline/my-pipeline-id
-			{
-			  ""description"" : ""describe pipeline"",
-			  ""version"" : 123,
-			  ""processors"" : [
-			    {
-			      ""set"" : {
-			        ""field"": ""foo"",
-			        ""value"": ""bar""
-			      }
-			    }
-			  ]
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line107()
 		{
 			// tag::9f549bb400b6cc1523b00d60bc8fd8e1[]
 			var response0 = new SearchResponse<object>();

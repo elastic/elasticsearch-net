@@ -6,15 +6,15 @@ namespace Examples.Docs
 	public class DeleteByQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line8()
+		public void Line10()
 		{
-			// tag::c1de6df850c4111c68ec57a6f9c2ec6d[]
+			// tag::ebb6b59fbc9325c17e45f524602d6be2[]
 			var response0 = new SearchResponse<object>();
-			// end::c1de6df850c4111c68ec57a6f9c2ec6d[]
+			// end::ebb6b59fbc9325c17e45f524602d6be2[]
 
-			response0.MatchesExample(@"POST twitter/_delete_by_query
+			response0.MatchesExample(@"POST /twitter/_delete_by_query
 			{
-			  ""query"": { \<1>
+			  ""query"": {
 			    ""match"": {
 			      ""message"": ""some message""
 			    }
@@ -23,7 +23,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line347()
 		{
 			// tag::e21e1c26dc8687e7bf7bd2bf019a6698[]
 			var response0 = new SearchResponse<object>();
@@ -38,13 +38,13 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		public void Line360()
 		{
-			// tag::099e1dbe296568756df5a9816efcae45[]
+			// tag::c22b72c4a52ee098331b3f252c22860d[]
 			var response0 = new SearchResponse<object>();
-			// end::099e1dbe296568756df5a9816efcae45[]
+			// end::c22b72c4a52ee098331b3f252c22860d[]
 
-			response0.MatchesExample(@"POST twitter,blog/_delete_by_query
+			response0.MatchesExample(@"POST /twitter,blog/_delete_by_query
 			{
 			  ""query"": {
 			    ""match_all"": {}
@@ -53,7 +53,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line107()
+		public void Line374()
 		{
 			// tag::c32a3f8071d87f0a3f5a78e07fe7a669[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +72,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line126()
+		public void Line392()
 		{
 			// tag::dfb1fe96d806a644214d06f9b4b87878[]
 			var response0 = new SearchResponse<object>();
@@ -89,47 +89,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line303()
-		{
-			// tag::216848930c2d344fe0bed0daa70c35b9[]
-			var response0 = new SearchResponse<object>();
-			// end::216848930c2d344fe0bed0daa70c35b9[]
-
-			response0.MatchesExample(@"GET _tasks?detailed=true&actions=*/delete/byquery");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line358()
-		{
-			// tag::be3a6431d01846950dc1a39a7a6a1faa[]
-			var response0 = new SearchResponse<object>();
-			// end::be3a6431d01846950dc1a39a7a6a1faa[]
-
-			response0.MatchesExample(@"GET /_tasks/r1A2WoRbTwKZ516z6NEs5A:36619");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line379()
-		{
-			// tag::18ddb7e7a4bcafd449df956e828ed7a8[]
-			var response0 = new SearchResponse<object>();
-			// end::18ddb7e7a4bcafd449df956e828ed7a8[]
-
-			response0.MatchesExample(@"POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line399()
-		{
-			// tag::52c7e4172a446c394210a07c464c57d2[]
-			var response0 = new SearchResponse<object>();
-			// end::52c7e4172a446c394210a07c464c57d2[]
-
-			response0.MatchesExample(@"POST _delete_by_query/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line429()
+		public void Line412()
 		{
 			// tag::1e49eba5b9042c1900a608fe5105ba43[]
 			var response0 = new SearchResponse<object>();
@@ -169,7 +129,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line465()
+		public void Line447()
 		{
 			// tag::3e573bfabe00f8bfb8bb69aa5820768e[]
 			var response0 = new SearchResponse<object>();
@@ -192,7 +152,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line505()
+		public void Line485()
 		{
 			// tag::a5a7050fb9dcb9574e081957ade28617[]
 			var response0 = new SearchResponse<object>();
@@ -211,7 +171,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line523()
+		public void Line502()
 		{
 			// tag::14701dcc0cca9665fce2aace0cb62af7[]
 			var response0 = new SearchResponse<object>();
@@ -227,6 +187,46 @@ namespace Examples.Docs
 			    }
 			  }
 			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line570()
+		{
+			// tag::52c7e4172a446c394210a07c464c57d2[]
+			var response0 = new SearchResponse<object>();
+			// end::52c7e4172a446c394210a07c464c57d2[]
+
+			response0.MatchesExample(@"POST _delete_by_query/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line584()
+		{
+			// tag::216848930c2d344fe0bed0daa70c35b9[]
+			var response0 = new SearchResponse<object>();
+			// end::216848930c2d344fe0bed0daa70c35b9[]
+
+			response0.MatchesExample(@"GET _tasks?detailed=true&actions=*/delete/byquery");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line638()
+		{
+			// tag::be3a6431d01846950dc1a39a7a6a1faa[]
+			var response0 = new SearchResponse<object>();
+			// end::be3a6431d01846950dc1a39a7a6a1faa[]
+
+			response0.MatchesExample(@"GET /_tasks/r1A2WoRbTwKZ516z6NEs5A:36619");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line658()
+		{
+			// tag::18ddb7e7a4bcafd449df956e828ed7a8[]
+			var response0 = new SearchResponse<object>();
+			// end::18ddb7e7a4bcafd449df956e828ed7a8[]
+
+			response0.MatchesExample(@"POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel");
 		}
 	}
 }

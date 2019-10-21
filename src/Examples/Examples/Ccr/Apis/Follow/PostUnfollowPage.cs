@@ -6,7 +6,7 @@ namespace Examples.Ccr.Apis.Follow
 	public class PostUnfollowPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line35()
+		public void Line34()
 		{
 			// tag::f6d493650b4344f17297b568016fb445[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line72()
+		public void Line70()
 		{
 			// tag::6a350a17701e8c8158407191f2718b66[]
 			var response0 = new SearchResponse<object>();

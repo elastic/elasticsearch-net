@@ -25,7 +25,7 @@ namespace Examples.Aggregations.Matrix
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line123()
+		public void Line122()
 		{
 			// tag::7ee2877f8f031b9a4e56a40b371421fb[]
 			var response0 = new SearchResponse<object>();

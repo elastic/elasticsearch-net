@@ -6,7 +6,7 @@ namespace Examples.Aggregations.Bucket
 	public class HistogramAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line23()
+		public void Line28()
 		{
 			// tag::322e1a8842fc5924b972a9a32c29c17a[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line82()
+		public void Line86()
 		{
 			// tag::0003e4064d004a341c193ddd5d82a07f[]
 			var response0 = new SearchResponse<object>();
@@ -47,7 +47,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line158()
+		public void Line161()
 		{
 			// tag::c72bd866a7e21907fa71f1067371db55[]
 			var response0 = new SearchResponse<object>();
@@ -74,7 +74,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line201()
+		public void Line213()
 		{
 			// tag::e0bba0f00a589933499493390a9a0517[]
 			var response0 = new SearchResponse<object>();
@@ -95,7 +95,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line261()
+		public void Line272()
 		{
 			// tag::271c55d9a421dbc794caa0ebaead95e3[]
 			var response0 = new SearchResponse<object>();

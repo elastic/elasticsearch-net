@@ -6,7 +6,7 @@ namespace Examples.Search
 	public class MultiSearchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line65()
+		public void Line127()
 		{
 			// tag::05af5eab63bf98d0078dfe661cd81124[]
 			var response0 = new SearchResponse<object>();
@@ -22,7 +22,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line113()
+		public void Line160()
 		{
 			// tag::a914be2ff7dd0cbdec0257f0ad50b625[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +36,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line128()
+		public void Line173()
 		{
 			// tag::28e66ff0ecdd71cb1426880115eab5dd[]
 			var response0 = new SearchResponse<object>();
@@ -58,7 +58,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line147()
+		public void Line192()
 		{
 			// tag::72e72cb3aa1b10b903d8cadcaddf7d10[]
 			var response0 = new SearchResponse<object>();
@@ -80,7 +80,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line168()
+		public void Line212()
 		{
 			// tag::8b4c8f395c0a6f952a42051a0d357154[]
 			var response0 = new SearchResponse<object>();

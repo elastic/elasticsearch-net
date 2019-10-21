@@ -62,7 +62,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line59()
+		public void Line58()
 		{
 			// tag::bf2e6ea2bae621b9b2fee7003e891f86[]
 			var response0 = new SearchResponse<object>();
@@ -80,7 +80,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line120()
+		public void Line116()
 		{
 			// tag::3f94ed945ae6416a0eb372c2db14d7e0[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +98,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line179()
+		public void Line173()
 		{
 			// tag::26abfc49c238c2b5d259983ac38dbcee[]
 			var response0 = new SearchResponse<object>();

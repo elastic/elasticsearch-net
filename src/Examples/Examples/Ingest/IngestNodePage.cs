@@ -6,7 +6,7 @@ namespace Examples.Ingest
 	public class IngestNodePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line186()
+		public void Line171()
 		{
 			// tag::841306ff1ac69cceb5bf1c28e2f26dd3[]
 			var response0 = new SearchResponse<object>();
@@ -25,7 +25,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line203()
+		public void Line187()
 		{
 			// tag::027ee5302d967b530123886906c42a90[]
 			var response0 = new SearchResponse<object>();
@@ -38,7 +38,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line246()
+		public void Line227()
 		{
 			// tag::9a5f1f590791012d32d29605daf82135[]
 			var response0 = new SearchResponse<object>();
@@ -57,7 +57,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line263()
+		public void Line243()
 		{
 			// tag::f8a8b78caaf69d44c71c476ea2a178aa[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +72,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line279()
+		public void Line258()
 		{
 			// tag::3eb75cee4c802d99bb526386349ee36b[]
 			var response0 = new SearchResponse<object>();
@@ -85,7 +85,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line342()
+		public void Line318()
 		{
 			// tag::089ca88d7fd064a474e156d773211bc5[]
 			var response0 = new SearchResponse<object>();
@@ -109,7 +109,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line364()
+		public void Line339()
 		{
 			// tag::8f6cec77f890027ad2e01f06e1290e25[]
 			var response0 = new SearchResponse<object>();
@@ -122,7 +122,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line412()
+		public void Line386()
 		{
 			// tag::3b54be0a1a020edb8943f063f05b5cd7[]
 			var response0 = new SearchResponse<object>();
@@ -141,7 +141,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line458()
+		public void Line431()
 		{
 			// tag::da19607976c3740945300c18e692bc49[]
 			var response0 = new SearchResponse<object>();
@@ -154,7 +154,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line474()
+		public void Line446()
 		{
 			// tag::784dcf96b4970ce6c90d999cdfc2ef0b[]
 			var response0 = new SearchResponse<object>();
@@ -167,11 +167,11 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line529()
+		public void Line498()
 		{
-			// tag::462b3cfb75b60b2df9e0567520aa9bf9[]
+			// tag::7cc6435cb7508e532df1e761934f1683[]
 			var response0 = new SearchResponse<object>();
-			// end::462b3cfb75b60b2df9e0567520aa9bf9[]
+			// end::7cc6435cb7508e532df1e761934f1683[]
 
 			response0.MatchesExample(@"PUT _ingest/pipeline/logs_pipeline
 			{
@@ -192,6 +192,7 @@ namespace Examples.Ingest
 			    },
 			    {
 			      ""fail"": {
+			        ""if"": ""ctx.service?.name != 'apache_httpd' && ctx.service?.name != 'syslog'"",
 			        ""message"": ""This pipeline requires service.name to be either `syslog` or `apache_httpd`""
 			      }
 			    }
@@ -200,7 +201,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line575()
+		public void Line545()
 		{
 			// tag::fe2d94eba550076cc27ee21a711fdb5c[]
 			var response0 = new SearchResponse<object>();
@@ -221,7 +222,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line592()
+		public void Line561()
 		{
 			// tag::bfc92c930234ada7a3f394263b0deb1e[]
 			var response0 = new SearchResponse<object>();
@@ -236,7 +237,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line643()
+		public void Line609()
 		{
 			// tag::2ad6189aef1ecbb52bf0ddbd4e7a80cb[]
 			var response0 = new SearchResponse<object>();

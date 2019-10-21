@@ -41,7 +41,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		public void Line45()
 		{
 			// tag::4639a1bbd12710d5f01f1aaadce09a3e[]
 			var response0 = new SearchResponse<object>();
@@ -69,7 +69,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line79()
+		public void Line77()
 		{
 			// tag::6fc37ccf570ff7e35b7b0bd4bacb8abd[]
 			var response0 = new SearchResponse<object>();
@@ -97,7 +97,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line109()
+		public void Line106()
 		{
 			// tag::926fff8330fc3008f62b9de34f385a57[]
 			var response0 = new SearchResponse<object>();
@@ -122,7 +122,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line136()
+		public void Line132()
 		{
 			// tag::f878546633c6bcc30edcdcf520a20eba[]
 			var response0 = new SearchResponse<object>();
@@ -147,7 +147,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line160()
+		public void Line155()
 		{
 			// tag::48a40f20b752a8120cf020bda041adca[]
 			var response0 = new SearchResponse<object>();

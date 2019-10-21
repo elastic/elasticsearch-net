@@ -19,7 +19,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line96()
+		public void Line95()
 		{
 			// tag::57dc15e5ad663c342fd5c1d86fcd1b29[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +34,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line124()
+		public void Line121()
 		{
 			// tag::d35c8cf7a98b3f112e1de8797ec6689d[]
 			var response0 = new SearchResponse<object>();

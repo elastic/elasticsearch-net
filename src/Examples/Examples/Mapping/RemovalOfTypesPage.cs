@@ -52,7 +52,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line524()
+		public void Line523()
 		{
 			// tag::ab1b1bdda7528003a08d6d5911081483[]
 			var response0 = new SearchResponse<object>();
@@ -65,7 +65,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line554()
+		public void Line550()
 		{
 			// tag::de8d7db07c3008039c7691955a553e4c[]
 			var response0 = new SearchResponse<object>();
@@ -75,7 +75,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line568()
+		public void Line563()
 		{
 			// tag::f85d1cf4a5b9145632f585cd8c99e49d[]
 			var response0 = new SearchResponse<object>();
@@ -94,7 +94,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line586()
+		public void Line580()
 		{
 			// tag::6dce46ae7f4da2467ea1e68cc9b67b31[]
 			var response0 = new SearchResponse<object>();
@@ -108,24 +108,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line617()
-		{
-			// tag::b479466cd446f8112f491ce8810de43a[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::b479466cd446f8112f491ce8810de43a[]
-
-			response0.MatchesExample(@"PUT index/my_type/1
-			{
-			  ""foo"": ""baz""
-			}");
-
-			response1.MatchesExample(@"GET index/_doc/1");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line661()
+		public void Line612()
 		{
 			// tag::c6f5467904b8182d9203d98414a1bb76[]
 			var response0 = new SearchResponse<object>();

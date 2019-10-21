@@ -8,11 +8,11 @@ namespace Examples.Sql
 		[U(Skip = "Example not implemented")]
 		public void Line10()
 		{
-			// tag::15f293688537c82d2bdebda916769fa4[]
+			// tag::0a46ac2968a574ce145f197f10d30152[]
 			var response0 = new SearchResponse<object>();
-			// end::15f293688537c82d2bdebda916769fa4[]
+			// end::0a46ac2968a574ce145f197f10d30152[]
 
-			response0.MatchesExample(@"PUT /library/book/_bulk?refresh
+			response0.MatchesExample(@"PUT /library/_bulk?refresh
 			{""index"":{""_id"": ""Leviathan Wakes""}}
 			{""name"": ""Leviathan Wakes"", ""author"": ""James S.A. Corey"", ""release_date"": ""2011-06-02"", ""page_count"": 561}
 			{""index"":{""_id"": ""Hyperion""}}
@@ -22,7 +22,7 @@ namespace Examples.Sql
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line24()
+		public void Line23()
 		{
 			// tag::53b14d640c4c48a5e7ea86ddc26bee64[]
 			var response0 = new SearchResponse<object>();

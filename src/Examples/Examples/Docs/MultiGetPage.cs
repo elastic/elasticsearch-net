@@ -6,23 +6,21 @@ namespace Examples.Docs
 	public class MultiGetPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line15()
+		public void Line10()
 		{
-			// tag::b02ea386a43df53f5b925ae64ff4bf96[]
+			// tag::ccfaeef928ba7dd4b5de0c518151fd7c[]
 			var response0 = new SearchResponse<object>();
-			// end::b02ea386a43df53f5b925ae64ff4bf96[]
+			// end::ccfaeef928ba7dd4b5de0c518151fd7c[]
 
 			response0.MatchesExample(@"GET /_mget
 			{
 			    ""docs"" : [
 			        {
-			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
+			            ""_index"" : ""twitter"",
 			            ""_id"" : ""1""
 			        },
 			        {
-			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
+			            ""_index"" : ""twitter"",
 			            ""_id"" : ""2""
 			        }
 			    ]
@@ -30,35 +28,13 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line38()
+		public void Line128()
 		{
-			// tag::60be49d20e42e165467817dcce53fcf7[]
+			// tag::53cf7d3731f50620b3277b80e2fbfd56[]
 			var response0 = new SearchResponse<object>();
-			// end::60be49d20e42e165467817dcce53fcf7[]
+			// end::53cf7d3731f50620b3277b80e2fbfd56[]
 
-			response0.MatchesExample(@"GET /test/_mget
-			{
-			    ""docs"" : [
-			        {
-			            ""_type"" : ""_doc"",
-			            ""_id"" : ""1""
-			        },
-			        {
-			            ""_type"" : ""_doc"",
-			            ""_id"" : ""2""
-			        }
-			    ]
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line58()
-		{
-			// tag::80229b2c753cfce1d1554e03cbdbfa29[]
-			var response0 = new SearchResponse<object>();
-			// end::80229b2c753cfce1d1554e03cbdbfa29[]
-
-			response0.MatchesExample(@"GET /test/_doc/_mget
+			response0.MatchesExample(@"GET /twitter/_mget
 			{
 			    ""docs"" : [
 			        {
@@ -72,43 +48,40 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line146()
 		{
-			// tag::104404dad47a4b52637fb88df6160a08[]
+			// tag::81095ba46e4d8c5da3623f5ea8c54a34[]
 			var response0 = new SearchResponse<object>();
-			// end::104404dad47a4b52637fb88df6160a08[]
+			// end::81095ba46e4d8c5da3623f5ea8c54a34[]
 
-			response0.MatchesExample(@"GET /test/_doc/_mget
+			response0.MatchesExample(@"GET /twitter/_mget
 			{
 			    ""ids"" : [""1"", ""2""]
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line98()
+		public void Line168()
 		{
-			// tag::562535f3e70cc1a85ee6eb03588f96a6[]
+			// tag::6b1ab3f273c6e425067cd5889b0c258f[]
 			var response0 = new SearchResponse<object>();
-			// end::562535f3e70cc1a85ee6eb03588f96a6[]
+			// end::6b1ab3f273c6e425067cd5889b0c258f[]
 
 			response0.MatchesExample(@"GET /_mget
 			{
 			    ""docs"" : [
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""1"",
 			            ""_source"" : false
 			        },
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""2"",
 			            ""_source"" : [""field3"", ""field4""]
 			        },
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""3"",
 			            ""_source"" : {
 			                ""include"": [""user""],
@@ -120,24 +93,22 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line137()
+		public void Line206()
 		{
-			// tag::1b1e75613163308e4d40073a6c0918ce[]
+			// tag::c4272ba35b81125a805fb1a7292f3d25[]
 			var response0 = new SearchResponse<object>();
-			// end::1b1e75613163308e4d40073a6c0918ce[]
+			// end::c4272ba35b81125a805fb1a7292f3d25[]
 
 			response0.MatchesExample(@"GET /_mget
 			{
 			    ""docs"" : [
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""1"",
 			            ""stored_fields"" : [""field1"", ""field2""]
 			        },
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""2"",
 			            ""stored_fields"" : [""field3"", ""field4""]
 			        }
@@ -146,45 +117,43 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line162()
+		public void Line229()
 		{
-			// tag::8c7bf48aeb7d0919a1b0fd8685a1e480[]
+			// tag::27fac828d28ab065524dd1ce148840c0[]
 			var response0 = new SearchResponse<object>();
-			// end::8c7bf48aeb7d0919a1b0fd8685a1e480[]
+			// end::27fac828d28ab065524dd1ce148840c0[]
 
-			response0.MatchesExample(@"GET /test/_doc/_mget?stored_fields=field1,field2
+			response0.MatchesExample(@"GET /test/_mget?stored_fields=field1,field2
 			{
 			    ""docs"" : [
 			        {
-			            ""_id"" : ""1"" \<1>
+			            ""_id"" : ""1""
 			        },
 			        {
 			            ""_id"" : ""2"",
-			            ""stored_fields"" : [""field3"", ""field4""] \<2>
+			            ""stored_fields"" : [""field3"", ""field4""]
 			        }
 			    ]
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line187()
+		public void Line252()
 		{
-			// tag::1a6750042ee402bc92d644824f5cdc1f[]
+			// tag::1b37488d0a79d3c950029851b7cd623e[]
 			var response0 = new SearchResponse<object>();
-			// end::1a6750042ee402bc92d644824f5cdc1f[]
+			// end::1b37488d0a79d3c950029851b7cd623e[]
 
 			response0.MatchesExample(@"GET /_mget?routing=key1
 			{
 			    ""docs"" : [
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""1"",
 			            ""routing"" : ""key2""
 			        },
 			        {
 			            ""_index"" : ""test"",
-			            ""_type"" : ""_doc"",
 			            ""_id"" : ""2""
 			        }
 			    ]

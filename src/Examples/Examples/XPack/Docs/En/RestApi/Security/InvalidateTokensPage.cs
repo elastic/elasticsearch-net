@@ -19,21 +19,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line84()
-		{
-			// tag::da2bb6894d95489812b653be2feeeb5b[]
-			var response0 = new SearchResponse<object>();
-			// end::da2bb6894d95489812b653be2feeeb5b[]
-
-			response0.MatchesExample(@"{
-			  ""access_token"" : ""dGhpcyBpcyBub3QgYSByZWFsIHRva2VuIGJ1dCBpdCBpcyBvbmx5IHRlc3QgZGF0YS4gZG8gbm90IHRyeSB0byByZWFkIHRva2VuIQ=="",
-			  ""type"" : ""Bearer"",
-			  ""expires_in"" : 1200
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line98()
+		public void Line95()
 		{
 			// tag::dbf9abc37899352751dab0ede62af2fd[]
 			var response0 = new SearchResponse<object>();
@@ -46,7 +32,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line112()
+		public void Line108()
 		{
 			// tag::e1337c6b76defd5a46d05220f9d9c9fc[]
 			var response0 = new SearchResponse<object>();
@@ -61,22 +47,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line126()
-		{
-			// tag::774740abbecda50b03d75dbff8cbe60f[]
-			var response0 = new SearchResponse<object>();
-			// end::774740abbecda50b03d75dbff8cbe60f[]
-
-			response0.MatchesExample(@"{
-			  ""access_token"" : ""dGhpcyBpcyBub3QgYSByZWFsIHRva2VuIGJ1dCBpdCBpcyBvbmx5IHRlc3QgZGF0YS4gZG8gbm90IHRyeSB0byByZWFkIHRva2VuIQ=="",
-			  ""type"" : ""Bearer"",
-			  ""expires_in"" : 1200,
-			  ""refresh_token"": ""vLBPvmAB6KvwvJZr27cS""
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line142()
+		public void Line135()
 		{
 			// tag::0c6f9c9da75293fae69659ac1d6329de[]
 			var response0 = new SearchResponse<object>();
@@ -89,7 +60,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line156()
+		public void Line148()
 		{
 			// tag::4bc4db44b8c74610b73f21a421099a13[]
 			var response0 = new SearchResponse<object>();
@@ -102,7 +73,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line169()
+		public void Line159()
 		{
 			// tag::0280247e0cf2e561c548f22c9fb31163[]
 			var response0 = new SearchResponse<object>();
@@ -115,7 +86,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line182()
+		public void Line170()
 		{
 			// tag::6dd2a107bc64fd6f058fb17c21640649[]
 			var response0 = new SearchResponse<object>();

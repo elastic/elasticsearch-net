@@ -21,7 +21,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line171()
+		public void Line170()
 		{
 			// tag::cecbbd7b4ec1bf82fd84ae96099febcc[]
 			var response0 = new SearchResponse<object>();

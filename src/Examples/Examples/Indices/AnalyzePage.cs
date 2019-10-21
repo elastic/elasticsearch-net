@@ -8,11 +8,25 @@ namespace Examples.Indices
 		[U(Skip = "Example not implemented")]
 		public void Line11()
 		{
-			// tag::06b4f0789d42d85d9af0780388feca83[]
+			// tag::fa42ae3bf6a300420cd0f77ba006458a[]
 			var response0 = new SearchResponse<object>();
-			// end::06b4f0789d42d85d9af0780388feca83[]
+			// end::fa42ae3bf6a300420cd0f77ba006458a[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
+			{
+			  ""analyzer"" : ""standard"",
+			  ""text"" : ""Quick Brown Foxes!""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line140()
+		{
+			// tag::76dbdd0b2bd48c3c6b1a8d81e23bafd6[]
+			var response0 = new SearchResponse<object>();
+			// end::76dbdd0b2bd48c3c6b1a8d81e23bafd6[]
+
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""analyzer"" : ""standard"",
 			  ""text"" : ""this is a test""
@@ -20,13 +34,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line23()
+		public void Line154()
 		{
-			// tag::a158d87b517d0f7a3d14d8f4eb1c4036[]
+			// tag::fd9b668eeb1f117950bd4991c7c03fb1[]
 			var response0 = new SearchResponse<object>();
-			// end::a158d87b517d0f7a3d14d8f4eb1c4036[]
+			// end::fd9b668eeb1f117950bd4991c7c03fb1[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""analyzer"" : ""standard"",
 			  ""text"" : [""this is a test"", ""the second text""]
@@ -34,13 +48,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		public void Line170()
 		{
-			// tag::373dd9448e2cba5dd8dbf3a1aded9025[]
+			// tag::ef33b3b373f7040b874146599db5d557[]
 			var response0 = new SearchResponse<object>();
-			// end::373dd9448e2cba5dd8dbf3a1aded9025[]
+			// end::ef33b3b373f7040b874146599db5d557[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""tokenizer"" : ""keyword"",
 			  ""filter"" : [""lowercase""],
@@ -49,29 +63,29 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line48()
+		public void Line180()
 		{
-			// tag::61354fd8aad2ad07230c39339a2cd318[]
+			// tag::dc8c94c9bef1f879282caea5c406f36e[]
 			var response0 = new SearchResponse<object>();
-			// end::61354fd8aad2ad07230c39339a2cd318[]
+			// end::dc8c94c9bef1f879282caea5c406f36e[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""tokenizer"" : ""keyword"",
 			  ""filter"" : [""lowercase""],
 			  ""char_filter"" : [""html_strip""],
-			  ""text"" : ""this is a \<b>test</b>""
+			  ""text"" : ""this is a <b>test</b>""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line64()
+		public void Line195()
 		{
-			// tag::37b2f5dca993d15ed1711f3532a0f98d[]
+			// tag::22dde5fe7ac5d85d52115641a68b3c55[]
 			var response0 = new SearchResponse<object>();
-			// end::37b2f5dca993d15ed1711f3532a0f98d[]
+			// end::22dde5fe7ac5d85d52115641a68b3c55[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""tokenizer"" : ""whitespace"",
 			  ""filter"" : [""lowercase"", {""type"": ""stop"", ""stopwords"": [""a"", ""is"", ""this""]}],
@@ -80,26 +94,26 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line210()
 		{
-			// tag::9f67f5e5cd0355cebea6fb28d28a8b5f[]
+			// tag::3951d7fcd7f849fa278daf342872125a[]
 			var response0 = new SearchResponse<object>();
-			// end::9f67f5e5cd0355cebea6fb28d28a8b5f[]
+			// end::3951d7fcd7f849fa278daf342872125a[]
 
-			response0.MatchesExample(@"GET analyze_sample/_analyze
+			response0.MatchesExample(@"GET /analyze_sample/_analyze
 			{
 			  ""text"" : ""this is a test""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line223()
 		{
-			// tag::5c448f76daf65093e1893705e705ab3b[]
+			// tag::71fa652ddea811eb3c8bf8c5db21e549[]
 			var response0 = new SearchResponse<object>();
-			// end::5c448f76daf65093e1893705e705ab3b[]
+			// end::71fa652ddea811eb3c8bf8c5db21e549[]
 
-			response0.MatchesExample(@"GET analyze_sample/_analyze
+			response0.MatchesExample(@"GET /analyze_sample/_analyze
 			{
 			  ""analyzer"" : ""whitespace"",
 			  ""text"" : ""this is a test""
@@ -107,13 +121,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line104()
+		public void Line238()
 		{
-			// tag::ebc29a29598d16f3156cbbd0d1b0954a[]
+			// tag::de2f59887737de3a27716177b60393a2[]
 			var response0 = new SearchResponse<object>();
-			// end::ebc29a29598d16f3156cbbd0d1b0954a[]
+			// end::de2f59887737de3a27716177b60393a2[]
 
-			response0.MatchesExample(@"GET analyze_sample/_analyze
+			response0.MatchesExample(@"GET /analyze_sample/_analyze
 			{
 			  ""field"" : ""obj1.field1"",
 			  ""text"" : ""this is a test""
@@ -121,13 +135,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line120()
+		public void Line256()
 		{
-			// tag::441ba0438c9ab8e7ce3579277d98b9a7[]
+			// tag::49d87c2eb7314ed34221c5fb4f21dfcc[]
 			var response0 = new SearchResponse<object>();
-			// end::441ba0438c9ab8e7ce3579277d98b9a7[]
+			// end::49d87c2eb7314ed34221c5fb4f21dfcc[]
 
-			response0.MatchesExample(@"GET analyze_sample/_analyze
+			response0.MatchesExample(@"GET /analyze_sample/_analyze
 			{
 			  ""normalizer"" : ""my_normalizer"",
 			  ""text"" : ""BaR""
@@ -135,13 +149,13 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line133()
+		public void Line268()
 		{
-			// tag::da69ca2ea849335e3a3ab9e15aa0e5f9[]
+			// tag::15a34bfe0ef8ef6333c8c7b55c011e5d[]
 			var response0 = new SearchResponse<object>();
-			// end::da69ca2ea849335e3a3ab9e15aa0e5f9[]
+			// end::15a34bfe0ef8ef6333c8c7b55c011e5d[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""filter"" : [""lowercase""],
 			  ""text"" : ""BaR""
@@ -149,30 +163,30 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line151()
+		public void Line285()
 		{
-			// tag::98a28410e6c58919d7a700631138e775[]
+			// tag::89f8eac24f3ec6a7668d580aaf0eeefa[]
 			var response0 = new SearchResponse<object>();
-			// end::98a28410e6c58919d7a700631138e775[]
+			// end::89f8eac24f3ec6a7668d580aaf0eeefa[]
 
-			response0.MatchesExample(@"GET _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
 			  ""tokenizer"" : ""standard"",
 			  ""filter"" : [""snowball""],
 			  ""text"" : ""detailed output"",
 			  ""explain"" : true,
-			  ""attributes"" : [""keyword""] \<1>
+			  ""attributes"" : [""keyword""] <1>
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line227()
+		public void Line360()
 		{
-			// tag::cdc5155ae26dbaa25110a6a6a7e995fe[]
+			// tag::0957bbd535f58c97b12ffba90813d64c[]
 			var response0 = new SearchResponse<object>();
-			// end::cdc5155ae26dbaa25110a6a6a7e995fe[]
+			// end::0957bbd535f58c97b12ffba90813d64c[]
 
-			response0.MatchesExample(@"PUT analyze_sample
+			response0.MatchesExample(@"PUT /analyze_sample
 			{
 			  ""settings"" : {
 			    ""index.analyze.max_token_count"" : 20000

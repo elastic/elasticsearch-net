@@ -55,7 +55,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		public void Line91()
+		public void Line90()
 		{
 			// tag::4eae628c9aaa259f80711c6e9cc6fd25[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -83,7 +83,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		public void Line117()
+		public void Line115()
 		{
 			// tag::fa3cd4ffaec8273656a328ae29f32c65[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c

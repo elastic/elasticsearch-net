@@ -8,7 +8,7 @@ namespace Examples.Docs
 	public class GetPage : ExampleBase
 	{
 		[U]
-		public void Line9()
+		public void Line10()
 		{
 			// tag::fbcf5078a6a9e09790553804054c36b3[]
 			var getResponse = client.Get<Tweet>(0, g => g.Index("twitter"));
@@ -18,17 +18,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line46()
-		{
-			// tag::98234499cfec70487cec5d013e976a84[]
-			var existsResponse = client.DocumentExists<Tweet>(0, g => g.Index("twitter"));
-			// end::98234499cfec70487cec5d013e976a84[]
-
-			existsResponse.MatchesExample(@"HEAD twitter/_doc/0");
-		}
-
-		[U]
-		public void Line72()
+		public void Line53()
 		{
 			// tag::138ccd89f72aa7502dd9578403dcc589[]
 			var getResponse = client.Get<Tweet>(0, g => g
@@ -41,7 +31,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line84()
+		public void Line65()
 		{
 			// tag::8fdf2344c4fb3de6902ad7c5735270df[]
 			var getResponse = client.Get<Tweet>(0, g => g
@@ -55,7 +45,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line93()
+		public void Line73()
 		{
 			// tag::745f9b8cdb8e91073f6e520e1d9f8c05[]
 			var getResponse = client.Get<Tweet>(0, g => g
@@ -75,7 +65,64 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line109()
+		public void Line86()
+		{
+			// tag::1d65cb6d055c46a1bde809687d835b71[]
+			var getResponse = client.Get<Tweet>(2, g => g
+				.Index("twitter")
+				.Routing("user1")
+			);
+			// end::1d65cb6d055c46a1bde809687d835b71[]
+
+			getResponse.MatchesExample(@"GET twitter/_doc/2?routing=user1");
+		}
+
+		[U]
+		public void Line250()
+		{
+			// tag::98234499cfec70487cec5d013e976a84[]
+			var existsResponse = client.DocumentExists<Tweet>(0, g => g.Index("twitter"));
+			// end::98234499cfec70487cec5d013e976a84[]
+
+			existsResponse.MatchesExample(@"HEAD twitter/_doc/0");
+		}
+
+		[U]
+		public void Line266()
+		{
+			// tag::89a8ac1509936acc272fc2d72907bc45[]
+			var sourceResponse = client.Source<Tweet>(1, s => s.Index("twitter"));
+			// end::89a8ac1509936acc272fc2d72907bc45[]
+
+			sourceResponse.MatchesExample(@"GET twitter/_source/1");
+		}
+
+		[U]
+		public void Line275()
+		{
+			// tag::d222c6a6ec7a3beca6c97011b0874512[]
+			var sourceFilteringResponse = client.Source<Tweet>(1, s => s
+				.Index("twitter")
+				.SourceIncludes("*.id")
+				.SourceExcludes("entities")
+			);
+			// end::d222c6a6ec7a3beca6c97011b0874512[]
+
+			sourceFilteringResponse.MatchesExample(@"GET twitter/_source/1/?_source_includes=*.id&_source_excludes=entities");
+		}
+
+		[U]
+		public void Line285()
+		{
+			// tag::2468ab381257d759d8a88af1141f6f9c[]
+			var sourceExistsResponse = client.SourceExists<Tweet>(1, s => s.Index("twitter"));
+			// end::2468ab381257d759d8a88af1141f6f9c[]
+
+			sourceExistsResponse.MatchesExample(@"HEAD twitter/_source/1");
+		}
+
+		[U]
+		public void Line299()
 		{
 			// tag::913770050ebbf3b9b549a899bc11060a[]
 			var createIndexResponse = client.Indices.Create("twitter", c => c
@@ -113,7 +160,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line131()
+		public void Line320()
 		{
 			// tag::5eabcdbf61bfcb484dc694f25c2bba36[]
 			var indexResponse = client.Index(new Tweet
@@ -131,7 +178,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line144()
+		public void Line332()
 		{
 			// tag::710c7871f20f176d51209b1574b0d61b[]
 			var getResponse = client.Get<Tweet>(1, g => g
@@ -146,7 +193,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line178()
+		public void Line363()
 		{
 			// tag::0ba0b2db24852abccb7c0fc1098d566e[]
 			var indexResponse = client.Index(new Tweet
@@ -168,7 +215,7 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line189()
+		public void Line373()
 		{
 			// tag::69a7be47f85138b10437113ab2f0d72d[]
 			var getResponse = client.Get<Tweet>(2, g => g
@@ -181,53 +228,6 @@ namespace Examples.Docs
 			// end::69a7be47f85138b10437113ab2f0d72d[]
 
 			getResponse.MatchesExample(@"GET twitter/_doc/2?routing=user1&stored_fields=tags,counter");
-		}
-
-		[U]
-		public void Line229()
-		{
-			// tag::89a8ac1509936acc272fc2d72907bc45[]
-			var sourceResponse = client.Source<Tweet>(1, s => s.Index("twitter"));
-			// end::89a8ac1509936acc272fc2d72907bc45[]
-
-			sourceResponse.MatchesExample(@"GET twitter/_source/1");
-		}
-
-		[U]
-		public void Line238()
-		{
-			// tag::d222c6a6ec7a3beca6c97011b0874512[]
-			var sourceFilteringResponse = client.Source<Tweet>(1, s => s
-				.Index("twitter")
-				.SourceIncludes("*.id")
-				.SourceExcludes("entities")
-			);
-			// end::d222c6a6ec7a3beca6c97011b0874512[]
-
-			sourceFilteringResponse.MatchesExample(@"GET twitter/_source/1/?_source_includes=*.id&_source_excludes=entities");
-		}
-
-		[U]
-		public void Line248()
-		{
-			// tag::2468ab381257d759d8a88af1141f6f9c[]
-			var sourceExistsResponse = client.SourceExists<Tweet>(1, s => s.Index("twitter"));
-			// end::2468ab381257d759d8a88af1141f6f9c[]
-
-			sourceExistsResponse.MatchesExample(@"HEAD twitter/_source/1");
-		}
-
-		[U]
-		public void Line262()
-		{
-			// tag::1d65cb6d055c46a1bde809687d835b71[]
-			var getResponse = client.Get<Tweet>(2, g => g
-				.Index("twitter")
-				.Routing("user1")
-			);
-			// end::1d65cb6d055c46a1bde809687d835b71[]
-
-			getResponse.MatchesExample(@"GET twitter/_doc/2?routing=user1");
 		}
 	}
 }
