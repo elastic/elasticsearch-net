@@ -17,7 +17,7 @@ namespace Tests.Search
 	/**=== Writing queries
 	 *
 	 * Once you have data indexed within Elasticsearch, you're going to want to be able to search it. Elasticsearch
-	 * offers a powerful query DSL to define queries to execute agains Elasticsearch. This DSL is based on JSON
+	 * offers a powerful query DSL to define queries to execute against Elasticsearch. This DSL is based on JSON
 	 * and is exposed in NEST in the form of both a Fluent API and an Object Initializer syntax
 	 *
 	 */
