@@ -16,7 +16,7 @@ please modify the original csharp file found at the link and submit the PR with 
 === Writing queries
 
 Once you have data indexed within Elasticsearch, you're going to want to be able to search it. Elasticsearch
-offers a powerful query DSL to define queries to execute agains Elasticsearch. This DSL is based on JSON
+offers a powerful query DSL to define queries to execute against Elasticsearch. This DSL is based on JSON
 and is exposed in NEST in the form of both a Fluent API and an Object Initializer syntax
 
 ==== Match All query
@@ -277,7 +277,9 @@ var searchResponse = _client.Search<Project>(s => s
 );
 ----
 <1> match documents where lead developer first name contains Russ
+
 <2> ...and where the lead developer last name contains Cam
+
 <3> ...and where the project started in 2017
 
 which yields the following query JSON
@@ -353,6 +355,7 @@ searchResponse = _client.Search<Project>(s => s
 );
 ----
 <1> combine queries using the binary `&&` operator
+
 <2> wrap a query in a `bool` query filter clause using the unary `+` operator and combine using the binary `&&` operator
 
 Take a look at the dedicated section on <<bool-queries, writing `bool` queries>> for more detail
