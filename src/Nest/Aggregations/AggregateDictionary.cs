@@ -271,7 +271,9 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new KeyedBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = typeof(TKey).IsEnum
+						? (TKey)Enum.Parse(typeof(TKey), bucket.Key.ToString())
+						: (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
 					KeyAsString = bucket.KeyAsString,
 					DocCount = bucket.DocCount,
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
@@ -285,7 +287,9 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new SignificantTermsBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = typeof(TKey).IsEnum
+						? (TKey)Enum.Parse(typeof(TKey), bucket.Key.ToString())
+						: (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
 					BgCount = bucket.BgCount,
 					DocCount = bucket.DocCount,
 					Score = bucket.Score
@@ -299,7 +303,9 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new RareTermsBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = typeof(TKey).IsEnum
+						? (TKey)Enum.Parse(typeof(TKey), bucket.Key.ToString())
+						: (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
 					DocCount = bucket.DocCount.GetValueOrDefault(0)
 				};
 		}
