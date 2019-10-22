@@ -22,7 +22,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month",
+					interval = "month"
 				},
 				aggs = new
 				{
@@ -41,6 +41,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 							model = "simple",
 							window = 30,
 							predict = 10,
+							gap_policy = "insert_zeros",
 							settings = new { }
 						}
 					}
@@ -61,6 +62,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 						.BucketsPath("commits")
 						.Window(30)
 						.Predict(10)
+						.GapPolicy(GapPolicy.InsertZeros)
 						.Model(m => m
 							.Simple()
 						)
@@ -79,6 +81,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					{
 						Window = 30,
 						Predict = 10,
+						GapPolicy = GapPolicy.InsertZeros,
 						Model = new SimpleModel()
 					}
 			};
