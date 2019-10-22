@@ -30,8 +30,8 @@ namespace Elasticsearch.Net
 
 			var response = r.ResponseBodyInBytes?.Utf8String() ?? ResponseAlreadyCaptured;
 			var request = r.RequestBodyInBytes?.Utf8String() ?? RequestAlreadyCaptured;
-			sb.AppendLine($"# Request:\r\n{request}");
-			sb.AppendLine($"# Response:\r\n{response}");
+			sb.AppendLine($"# Request:{Environment.NewLine}{request}");
+			sb.AppendLine($"# Response:{Environment.NewLine}{response}");
 
 			return sb.ToString();
 		}
@@ -42,7 +42,7 @@ namespace Elasticsearch.Net
 
 			var auditExceptions = auditTrail.Select((audit, i) => new { audit, i }).Where(a => a.audit.Exception != null);
 			foreach (var a in auditExceptions)
-				sb.AppendLine($"# Audit exception in step {a.i + 1} {a.audit.Event.GetStringValue()}:\r\n{a.audit.Exception}");
+				sb.AppendLine($"# Audit exception in step {a.i + 1} {a.audit.Event.GetStringValue()}:{Environment.NewLine}{a.audit.Exception}");
 		}
 
 		public static void DebugAuditTrail(List<Audit> auditTrail, StringBuilder sb)

@@ -19,7 +19,7 @@ namespace ApiGenerator.Generator
 			if (!string.IsNullOrWhiteSpace(obsolete)) A($"[Obsolete(\"Scheduled to be removed in 7.0, {obsolete}\")]");
 
 			A(PropertyGenerator(type, name, key, setter));
-			return string.Join("\r\n\t\t", components);
+			return string.Join($"{Environment.NewLine}\t\t", components);
 
 			void A(string s)
 			{
@@ -36,7 +36,7 @@ namespace ApiGenerator.Generator
 			A(generated);
 			if (!c.Body.IsNullOrEmpty()) A(c.Body);
 			if (!c.AdditionalCode.IsNullOrEmpty()) A(c.AdditionalCode);
-			return string.Join("\r\n\t\t", components);
+			return string.Join($"{Environment.NewLine}\t\t", components);
 
 			void A(string s)
 			{

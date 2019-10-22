@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain.Specification;
@@ -7,7 +8,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 {
 	public class Constructor
 	{
-		private const string Indent = "\r\n\t\t";
+		private static readonly string Indent = $"{Environment.NewLine}\t\t";
 		public string AdditionalCode { get; set; } = string.Empty;
 		public bool Parameterless { get; set; }
 		public string Body { get; set; }
@@ -28,15 +29,15 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 			var generateGeneric = CodeConfiguration.GenericOnlyInterfaces.Contains(names.RequestInterfaceName) || !inheritsFromPlainRequestBase;
 			return GenerateConstructors(url, inheritsFromPlainRequestBase, generateGeneric, names.RequestName, generic);
 		}
-		
-		private static string FirstGeneric(string fullGenericString) => 
+
+		private static string FirstGeneric(string fullGenericString) =>
 			fullGenericString?.Replace("<", "").Replace(">", "").Split(",").First().Trim();
 
 		private static IEnumerable<Constructor> GenerateConstructors(
 			UrlInformation url,
 			bool inheritsFromPlainRequestBase,
 			bool generateGeneric,
-			string typeName, 
+			string typeName,
 			string generic
 		)
 		{
@@ -64,8 +65,8 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 				ctors.AddRange(from path in paths.Where(path => path.HasResolvableArguments)
 					let baseArgs = path.AutoResolveBaseArguments(generic)
 					let constructorArgs = path.AutoResolveConstructorArguments
-					let baseOrThis = inheritsFromPlainRequestBase  
-						? "this" 
+					let baseOrThis = inheritsFromPlainRequestBase
+						? "this"
 						: "base"
 					let generated = $"public {typeName}({constructorArgs}) : {baseOrThis}({baseArgs})"
 					select new Constructor
@@ -84,7 +85,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					{
 						Parameterless = string.IsNullOrEmpty(docPathConstArgs),
 						Generated = $"public {typeName}({docPathConstArgs}) : this({docPathBaseArgs})",
-		
+
 						AdditionalCode = $"partial void DocumentFromPath({generic} document);",
 						Description = docPath.GetXmlDocs(Indent, skipResolvable: true, documentConstructor: true),
 						Body = "=> DocumentFromPath(documentWithId);"

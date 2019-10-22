@@ -123,9 +123,9 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 			Action call = () => { Response = _cluster.ClientCall(callTrace?.RequestOverrides); };
 			call();
-			
+
 			if (Response.ApiCall.Success) throw new Exception("Expected call to not be valid");
-				
+
 			var exception = Response.ApiCall.OriginalException as ElasticsearchClientException;
 			if (exception == null) throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
 			assert(exception);
@@ -175,9 +175,10 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 		private Auditor AssertAuditTrails(ClientCall callTrace, int nthCall)
 		{
+			var nl = Environment.NewLine;
 			if (AuditTrail.Count != AsyncAuditTrail.Count)
-				throw new Exception($"{nthCall} has a mismatch between sync and async. \r\nasync:{AuditTrail}\r\nsync:{AsyncAuditTrail}");
-			
+				throw new Exception($"{nthCall} has a mismatch between sync and async. {nl}async:{AuditTrail}{nl}sync:{AsyncAuditTrail}");
+
 			AssertTrailOnResponse(callTrace, AuditTrail, true, nthCall);
 			AssertTrailOnResponse(callTrace, AuditTrail, false, nthCall);
 
@@ -226,7 +227,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(Environment.NewLine),
 				(sb, a) => sb.AppendLine($"-> {a}"),
 				sb => sb.ToString());
-			
+
 			var traceEvents =callTrace.Select(c => c.Event).ToList();
 			var auditEvents = auditTrail.Select(a => a.Event).ToList();
 			if (!traceEvents.SequenceEqual(auditEvents))
@@ -239,19 +240,19 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 				var nthAuditTrailItem = (i + 1).ToOrdinal();
 				var because = $"thats the {{0}} specified on the {nthAuditTrailItem} item in the {nthClientCall} client call's {typeOfTrail}";
 				var c = callTrace[i];
-				if (audit.Event != c.Event) 
+				if (audit.Event != c.Event)
 					throw new Exception(string.Format(because, "event"));
-				if (c.Port.HasValue && audit.Node.Uri.Port != c.Port.Value) 
+				if (c.Port.HasValue && audit.Node.Uri.Port != c.Port.Value)
 					throw new Exception(string.Format(because, "port"));
-				
+
 				c.SimpleAssert?.Invoke(audit);
 				c.AssertWithBecause?.Invoke(string.Format(because, "custom assertion"), audit);
 			}
 
-			if (callTrace.Count != auditTrail.Count) 
+			if (callTrace.Count != auditTrail.Count)
 				throw new Exception($"callTrace has {callTrace.Count} items. Actual auditTrail {actualAuditTrail}");
 		}
-		
+
 		private static TException TryCall<TException>(Action call, Action<TException> assert) where TException : ElasticsearchClientException
 		{
 			TException exception = null;
