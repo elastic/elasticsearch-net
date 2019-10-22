@@ -25,6 +25,7 @@ namespace Tests.Search.Request
 			new
 			{
 				query = ProjectFilterExpectedJson,
+				docvalue_fields = new [] { "state" },
 				suggest = new Dictionary<string, object>
 				{
 					{
@@ -110,6 +111,9 @@ namespace Tests.Search.Request
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Query(q => ProjectFilter)
+			.DocValueFields(d => d
+				.Field(f => f.State)
+			)
 			.Suggest(ss => ss
 				.Term("my-term-suggest", t => t
 					.MaxEdits(1)
@@ -168,6 +172,7 @@ namespace Tests.Search.Request
 			new SearchRequest<Project>
 			{
 				Query = ProjectFilter,
+				DocValueFields = Fields<Project>(f => f.State),
 				Suggest = new SuggestContainer
 				{
 					{
@@ -269,6 +274,8 @@ namespace Tests.Search.Request
 			option.Source.Name.Should().NotBeNullOrWhiteSpace();
 			option.Source.ShouldAdhereToSourceSerializerWhenSet();
 			option.Score.Should().BeGreaterThan(0);
+			option.Fields.Should().NotBeNull().And.NotBeEmpty();
+			option.Fields.Should().ContainKey("state");
 			option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 			option.Contexts.Should().ContainKey("color");
 			var colorContexts = option.Contexts["color"];
