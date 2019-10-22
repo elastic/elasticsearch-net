@@ -2,6 +2,7 @@
 
 namespace Elasticsearch.Net
 {
+	// TODO we use this in some places but its no longer clear to me why need to circumvent RecyclableMemoryStream in some cases
 	/// <summary>
 	/// A factory for creating memory streams using instances of <see cref="MemoryStream" />
 	/// </summary>
