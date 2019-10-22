@@ -32,31 +32,33 @@ using System.Threading;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	///  MemoryStream implementation that deals with pooling and managing memory streams which use potentially large
-	///  buffers.
+	/// MemoryStream implementation that deals with pooling and managing memory streams which use potentially large
+	/// buffers.
 	/// </summary>
 	/// <remarks>
-	///  This class works in tandem with the RecylableMemoryStreamManager to supply MemoryStream
-	///  objects to callers, while avoiding these specific problems:
-	///  1. LOH allocations - since all large buffers are pooled, they will never incur a Gen2 GC
-	///  2. Memory waste - A standard memory stream doubles its size when it runs out of room. This
-	///  leads to continual memory growth as each stream approaches the maximum allowed size.
-	///  3. Memory copying - Each time a MemoryStream grows, all the bytes are copied into new buffers.
-	///  This implementation only copies the bytes when GetBuffer is called.
-	///  4. Memory fragmentation - By using homogeneous buffer sizes, it ensures that blocks of memory
-	///  can be easily reused.
-	///  The stream is implemented on top of a series of uniformly-sized blocks. As the stream's length grows,
-	///  additional blocks are retrieved from the memory manager. It is these blocks that are pooled, not the stream
-	///  object itself.
-	///  The biggest wrinkle in this implementation is when GetBuffer() is called. This requires a single
-	///  contiguous buffer. If only a single block is in use, then that block is returned. If multiple blocks
-	///  are in use, we retrieve a larger buffer from the memory manager. These large buffers are also pooled,
-	///  split by size--they are multiples of a chunk size (1 MB by default).
-	///  Once a large buffer is assigned to the stream the blocks are NEVER again used for this stream. All operations take place on the
-	///  large buffer. The large buffer can be replaced by a larger buffer from the pool as needed. All blocks and large buffers
-	///  are maintained in the stream until the stream is disposed (unless AggressiveBufferReturn is enabled in the stream manager).
+	/// This class works in tandem with the RecyclableMemoryStreamManager to supply MemoryStream
+	/// objects to callers, while avoiding these specific problems:
+	/// 1. LOH allocations - since all large buffers are pooled, they will never incur a Gen2 GC
+	/// 2. Memory waste - A standard memory stream doubles its size when it runs out of room. This
+	/// leads to continual memory growth as each stream approaches the maximum allowed size.
+	/// 3. Memory copying - Each time a MemoryStream grows, all the bytes are copied into new buffers.
+	/// This implementation only copies the bytes when GetBuffer is called.
+	/// 4. Memory fragmentation - By using homogeneous buffer sizes, it ensures that blocks of memory
+	/// can be easily reused.
+	/// The stream is implemented on top of a series of uniformly-sized blocks. As the stream's length grows,
+	/// additional blocks are retrieved from the memory manager. It is these blocks that are pooled, not the stream
+	/// object itself.
+	/// The biggest wrinkle in this implementation is when GetBuffer() is called. This requires a single
+	/// contiguous buffer. If only a single block is in use, then that block is returned. If multiple blocks
+	/// are in use, we retrieve a larger buffer from the memory manager. These large buffers are also pooled,
+	/// split by size--they are multiples/exponentials of a chunk size (1 MB by default).
+	/// Once a large buffer is assigned to the stream the blocks are NEVER again used for this stream. All operations take
+	/// place on the
+	/// large buffer. The large buffer can be replaced by a larger buffer from the pool as needed. All blocks and large buffers
+	/// are maintained in the stream until the stream is disposed (unless AggressiveBufferReturn is enabled in the stream
+	/// manager).
 	/// </remarks>
-	internal class RecyclableMemoryStream : MemoryStream
+	internal sealed class RecyclableMemoryStream : MemoryStream
 	{
 		private const long MaxStreamLength = int.MaxValue;
 
@@ -66,6 +68,12 @@ namespace Elasticsearch.Net
 		/// All of these blocks must be the same size
 		/// </summary>
 		private readonly List<byte[]> _blocks = new List<byte[]>(1);
+
+		/// <summary>
+		/// This buffer exists so that WriteByte can forward all of its calls to Write
+		/// without creating a new byte[] buffer on every call.
+		/// </summary>
+		private readonly byte[] _byteBuffer = new byte[1];
 
 		private readonly Guid _id;
 
@@ -93,16 +101,73 @@ namespace Elasticsearch.Net
 		/// </remarks>
 		private byte[] _largeBuffer;
 
-		private int _length;
+		/// <summary>
+		/// Unique identifier for this stream across it's entire lifetime
+		/// </summary>
+		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+		internal Guid Id
+		{
+			get
+			{
+				CheckDisposed();
+				return _id;
+			}
+		}
 
-		private int _position;
+		/// <summary>
+		/// A temporary identifier for the current usage of this stream.
+		/// </summary>
+		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+		internal string Tag
+		{
+			get
+			{
+				CheckDisposed();
+				return _tag;
+			}
+		}
+
+		/// <summary>
+		/// Gets the memory manager being used by this stream.
+		/// </summary>
+		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+		internal RecyclableMemoryStreamManager MemoryManager
+		{
+			get
+			{
+				CheckDisposed();
+				return _memoryManager;
+			}
+		}
+
+		/// <summary>
+		/// Callstack of the constructor. It is only set if MemoryManager.GenerateCallStacks is true,
+		/// which should only be in debugging situations.
+		/// </summary>
+		internal string AllocationStack { get; }
+
+		/// <summary>
+		/// Callstack of the Dispose call. It is only set if MemoryManager.GenerateCallStacks is true,
+		/// which should only be in debugging situations.
+		/// </summary>
+		internal string DisposeStack { get; private set; }
+
+		#region Constructors
 
 		/// <summary>
 		/// Allocate a new RecyclableMemoryStream object.
 		/// </summary>
 		/// <param name="memoryManager">The memory manager</param>
 		public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager)
-			: this(memoryManager, null, 0, null) { }
+			: this(memoryManager, Guid.NewGuid(), null, 0, null) { }
+
+		/// <summary>
+		/// Allocate a new RecyclableMemoryStream object.
+		/// </summary>
+		/// <param name="memoryManager">The memory manager</param>
+		/// <param name="id">A unique identifier which can be used to trace usages of the stream.</param>
+		public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id)
+			: this(memoryManager, id, null, 0, null) { }
 
 		/// <summary>
 		/// Allocate a new RecyclableMemoryStream object
@@ -110,7 +175,16 @@ namespace Elasticsearch.Net
 		/// <param name="memoryManager">The memory manager</param>
 		/// <param name="tag">A string identifying this stream for logging and debugging purposes</param>
 		public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, string tag)
-			: this(memoryManager, tag, 0, null) { }
+			: this(memoryManager, Guid.NewGuid(), tag, 0, null) { }
+
+		/// <summary>
+		/// Allocate a new RecyclableMemoryStream object
+		/// </summary>
+		/// <param name="memoryManager">The memory manager</param>
+		/// <param name="id">A unique identifier which can be used to trace usages of the stream.</param>
+		/// <param name="tag">A string identifying this stream for logging and debugging purposes</param>
+		public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id, string tag)
+			: this(memoryManager, id, tag, 0, null) { }
 
 		/// <summary>
 		/// Allocate a new RecyclableMemoryStream object
@@ -119,25 +193,35 @@ namespace Elasticsearch.Net
 		/// <param name="tag">A string identifying this stream for logging and debugging purposes</param>
 		/// <param name="requestedSize">The initial requested size to prevent future allocations</param>
 		public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, string tag, int requestedSize)
-			: this(memoryManager, tag, requestedSize, null) { }
+			: this(memoryManager, Guid.NewGuid(), tag, requestedSize, null) { }
 
 		/// <summary>
 		/// Allocate a new RecyclableMemoryStream object
 		/// </summary>
 		/// <param name="memoryManager">The memory manager</param>
+		/// <param name="id">A unique identifier which can be used to trace usages of the stream.</param>
+		/// <param name="tag">A string identifying this stream for logging and debugging purposes</param>
+		/// <param name="requestedSize">The initial requested size to prevent future allocations</param>
+		public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id, string tag, int requestedSize)
+			: this(memoryManager, id, tag, requestedSize, null) { }
+
+		/// <summary>
+		/// Allocate a new RecyclableMemoryStream object
+		/// </summary>
+		/// <param name="memoryManager">The memory manager</param>
+		/// <param name="id">A unique identifier which can be used to trace usages of the stream.</param>
 		/// <param name="tag">A string identifying this stream for logging and debugging purposes</param>
 		/// <param name="requestedSize">The initial requested size to prevent future allocations</param>
 		/// <param name="initialLargeBuffer">
-		/// An initial buffer to use. This buffer will be owned by the stream and returned to the memory manager upon
-		/// Dispose.
+		/// An initial buffer to use. This buffer will be owned by the stream and returned to the
+		/// memory manager upon Dispose.
 		/// </param>
-		internal RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, string tag, int requestedSize,
-			byte[] initialLargeBuffer
+		internal RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id, string tag, int requestedSize, byte[] initialLargeBuffer
 		)
 			: base(EmptyArray)
 		{
 			_memoryManager = memoryManager;
-			_id = Guid.NewGuid();
+			_id = id;
 			_tag = tag;
 
 			if (requestedSize < memoryManager.BlockSize) requestedSize = memoryManager.BlockSize;
@@ -146,27 +230,98 @@ namespace Elasticsearch.Net
 				EnsureCapacity(requestedSize);
 			else
 				_largeBuffer = initialLargeBuffer;
+
+			if (_memoryManager.GenerateCallStacks) AllocationStack = Environment.StackTrace;
+
+			RecyclableMemoryStreamManager.EventsWriter.MemoryStreamCreated(_id, _tag, requestedSize);
+			_memoryManager.ReportStreamCreated();
+		}
+
+		#endregion
+
+		#region Dispose and Finalize
+
+		~RecyclableMemoryStream() => Dispose(false);
+
+		/// <summary>
+		/// Returns the memory used by this stream back to the pool.
+		/// </summary>
+		/// <param name="disposing">Whether we're disposing (true), or being called by the finalizer (false)</param>
+		[SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly",
+			Justification = "We have different disposal semantics, so SuppressFinalize is in a different spot.")]
+		protected override void Dispose(bool disposing)
+		{
+			if (Interlocked.CompareExchange(ref _disposedState, 1, 0) != 0)
+			{
+				string doubleDisposeStack = null;
+				if (_memoryManager.GenerateCallStacks) doubleDisposeStack = Environment.StackTrace;
+
+				RecyclableMemoryStreamManager.EventsWriter.MemoryStreamDoubleDispose(_id, _tag,
+					AllocationStack,
+					DisposeStack,
+					doubleDisposeStack);
+				return;
+			}
+
+			RecyclableMemoryStreamManager.EventsWriter.MemoryStreamDisposed(_id, _tag);
+
+			if (_memoryManager.GenerateCallStacks) DisposeStack = Environment.StackTrace;
+
+			if (disposing)
+			{
+				_memoryManager.ReportStreamDisposed();
+
+				GC.SuppressFinalize(this);
+			}
+			else
+			{
+				// We're being finalized.
+
+				RecyclableMemoryStreamManager.EventsWriter.MemoryStreamFinalized(_id, _tag, AllocationStack);
+
+#if !NETSTANDARD1_4
+				if (AppDomain.CurrentDomain.IsFinalizingForUnload())
+				{
+					// If we're being finalized because of a shutdown, don't go any further.
+					// We have no idea what's already been cleaned up. Triggering events may cause
+					// a crash.
+					base.Dispose(disposing);
+					return;
+				}
+#endif
+
+				_memoryManager.ReportStreamFinalized();
+			}
+
+			_memoryManager.ReportStreamLength(_length);
+
+			if (_largeBuffer != null) _memoryManager.ReturnLargeBuffer(_largeBuffer, _tag);
+
+			if (_dirtyBuffers != null)
+				foreach (var buffer in _dirtyBuffers)
+					_memoryManager.ReturnLargeBuffer(buffer, _tag);
+
+			_memoryManager.ReturnBlocks(_blocks, _tag);
+			_blocks.Clear();
+
+			base.Dispose(disposing);
 		}
 
 		/// <summary>
-		/// Whether the stream can currently read
+		/// Equivalent to Dispose
 		/// </summary>
-		public override bool CanRead => !Disposed;
+#if NETSTANDARD1_4
+        public void Close()
+#else
+		public override void Close()
+#endif
+		{
+			Dispose(true);
+		}
 
-		/// <summary>
-		/// Whether the stream can currently seek
-		/// </summary>
-		public override bool CanSeek => !Disposed;
+		#endregion
 
-		/// <summary>
-		/// Always false
-		/// </summary>
-		public override bool CanTimeout => false;
-
-		/// <summary>
-		/// Whether the stream can currently write
-		/// </summary>
-		public override bool CanWrite => !Disposed;
+		#region MemoryStream overrides
 
 		/// <summary>
 		/// Gets or sets the capacity
@@ -196,6 +351,8 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		private int _length;
+
 		/// <summary>
 		/// Gets the number of bytes written to this stream.
 		/// </summary>
@@ -208,6 +365,8 @@ namespace Elasticsearch.Net
 				return _length;
 			}
 		}
+
+		private int _position;
 
 		/// <summary>
 		/// Gets the current position in the stream
@@ -232,90 +391,24 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Unique identifier for this stream across it's entire lifetime
+		/// Whether the stream can currently read
 		/// </summary>
-		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
-		internal Guid Id
-		{
-			get
-			{
-				CheckDisposed();
-				return _id;
-			}
-		}
+		public override bool CanRead => !Disposed;
 
 		/// <summary>
-		/// Gets the memory manager being used by this stream.
+		/// Whether the stream can currently seek
 		/// </summary>
-		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
-		internal RecyclableMemoryStreamManager MemoryManager
-		{
-			get
-			{
-				CheckDisposed();
-				return _memoryManager;
-			}
-		}
+		public override bool CanSeek => !Disposed;
 
 		/// <summary>
-		/// A temporary identifier for the current usage of this stream.
+		/// Always false
 		/// </summary>
-		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
-		internal string Tag
-		{
-			get
-			{
-				CheckDisposed();
-				return _tag;
-			}
-		}
-
-		private bool Disposed => Interlocked.Read(ref _disposedState) != 0;
-
-		~RecyclableMemoryStream() => Dispose(false);
+		public override bool CanTimeout => false;
 
 		/// <summary>
-		/// Returns the memory used by this stream back to the pool.
+		/// Whether the stream can currently write
 		/// </summary>
-		/// <param name="disposing">Whether we're disposing (true), or being called by the finalizer (false)</param>
-		[SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly",
-			Justification = "We have different disposal semantics, so SuppressFinalize is in a different spot.")]
-		protected override void Dispose(bool disposing)
-		{
-			if (Interlocked.CompareExchange(ref _disposedState, 1, 0) != 0) return;
-
-			if (disposing)
-				GC.SuppressFinalize(this);
-			else
-			{
-#if !DOTNETCORE
-				if (AppDomain.CurrentDomain.IsFinalizingForUnload())
-				{
-					// If we're being finalized because of a shutdown, don't go any further.
-					// We have no idea what's already been cleaned up. Triggering events may cause
-					// a crash.
-					base.Dispose(disposing);
-					return;
-				}
-#endif
-			}
-
-			if (_largeBuffer != null) _memoryManager.ReturnLargeBuffer(_largeBuffer, _tag);
-
-			if (_dirtyBuffers != null)
-				foreach (var buffer in _dirtyBuffers)
-					_memoryManager.ReturnLargeBuffer(buffer, _tag);
-
-			_memoryManager.ReturnBlocks(_blocks, _tag);
-			_blocks.Clear();
-
-			base.Dispose(disposing);
-		}
-
-		/// <summary>
-		/// Equivalent to Dispose
-		/// </summary>
-		public override void Close() => Dispose(true);
+		public override bool CanWrite => !Disposed;
 
 		/// <summary>
 		/// Returns a single buffer containing the contents of the stream.
@@ -327,7 +420,11 @@ namespace Elasticsearch.Net
 		/// until Dispose is called, but the next time GetBuffer() is called, a new buffer from the pool will be required.
 		/// </remarks>
 		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+#if NETSTANDARD1_4
+        public byte[] GetBuffer()
+#else
 		public override byte[] GetBuffer()
+#endif
 		{
 			CheckDisposed();
 
@@ -356,7 +453,29 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Returns a new array with a copy of the buffer's contents. You should almost certainly be using GetBuffer combined with the Length to
+		/// Returns an ArraySegment that wraps a single buffer containing the contents of the stream.
+		/// </summary>
+		/// <param name="buffer">An ArraySegment containing a reference to the underlying bytes.</param>
+		/// <returns>Always returns true.</returns>
+		/// <remarks>
+		/// GetBuffer has no failure modes (it always returns something, even if it's an empty buffer), therefore this method
+		/// always returns a valid ArraySegment to the same buffer returned by GetBuffer.
+		/// </remarks>
+#if NET40 || NET45
+        public bool TryGetBuffer(out ArraySegment<byte> buffer)
+#else
+		public override bool TryGetBuffer(out ArraySegment<byte> buffer)
+#endif
+		{
+			CheckDisposed();
+			buffer = new ArraySegment<byte>(GetBuffer(), 0, (int)Length);
+			// GetBuffer has no failure modes, so this should always succeed
+			return true;
+		}
+
+		/// <summary>
+		/// Returns a new array with a copy of the buffer's contents. You should almost certainly be using GetBuffer combined with
+		/// the Length to
 		/// access the bytes in this stream. Calling ToArray will destroy the benefits of pooled buffers, but it is included
 		/// for the sake of completeness.
 		/// </summary>
@@ -369,6 +488,10 @@ namespace Elasticsearch.Net
 			var newBuffer = new byte[Length];
 
 			InternalRead(newBuffer, 0, _length, 0);
+			var stack = _memoryManager.GenerateCallStacks ? Environment.StackTrace : null;
+			RecyclableMemoryStreamManager.EventsWriter.MemoryStreamToArray(_id, _tag, stack, 0);
+			_memoryManager.ReportStreamToArray();
+
 			return newBuffer;
 		}
 #pragma warning restore CS0809
@@ -414,6 +537,32 @@ namespace Elasticsearch.Net
 			return amountRead;
 		}
 
+#if NETCOREAPP2_1 || NETSTANDARD2_1
+        /// <summary>
+        /// Reads from the current position into the provided buffer
+        /// </summary>
+        /// <param name="buffer">Destination buffer</param>
+        /// <returns>The number of bytes read</returns>
+        /// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+        public override int Read(Span<byte> buffer) => SafeRead(buffer, ref _position);
+
+		/// <summary>
+        /// Reads from the specified position into the provided buffer
+        /// </summary>
+        /// <param name="buffer">Destination buffer</param>
+        /// <param name="streamPosition">Position in the stream to start reading from</param>
+        /// <returns>The number of bytes read</returns>
+        /// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+        public int SafeRead(Span<byte> buffer, ref int streamPosition)
+        {
+            CheckDisposed();
+
+            var amountRead = InternalRead(buffer, streamPosition);
+            streamPosition += amountRead;
+            return amountRead;
+        }
+#endif
+
 		/// <summary>
 		/// Writes the buffer to the stream
 		/// </summary>
@@ -441,10 +590,6 @@ namespace Elasticsearch.Net
 			var end = (long)_position + count;
 			// Check for overflow
 			if (end > MaxStreamLength) throw new IOException("Maximum capacity exceeded");
-
-			var requiredBuffers = (end + blockSize - 1) / blockSize;
-
-			if (requiredBuffers * blockSize > MaxStreamLength) throw new IOException("Maximum capacity exceeded");
 
 			EnsureCapacity((int)end);
 
@@ -476,6 +621,55 @@ namespace Elasticsearch.Net
 			_length = Math.Max(_position, _length);
 		}
 
+#if NETCOREAPP2_1 || NETSTANDARD2_1
+        /// <summary>
+        /// Writes the buffer to the stream
+        /// </summary>
+        /// <param name="source">Source buffer</param>
+        /// <exception cref="ArgumentNullException">buffer is null</exception>
+        /// <exception cref="ObjectDisposedException">Object has been disposed</exception>
+        public override void Write(ReadOnlySpan<byte> source)
+        {
+            CheckDisposed();
+
+            var blockSize = _memoryManager.BlockSize;
+            var end = (long)_position + source.Length;
+            // Check for overflow
+            if (end > MaxStreamLength)
+            {
+                throw new IOException("Maximum capacity exceeded");
+            }
+
+            EnsureCapacity((int)end);
+
+            if (_largeBuffer == null)
+            {
+                var blockAndOffset = GetBlockAndRelativeOffset(_position);
+
+                while (source.Length > 0)
+                {
+                    var currentBlock = _blocks[blockAndOffset.Block];
+                    var remainingInBlock = blockSize - blockAndOffset.Offset;
+                    var amountToWriteInBlock = Math.Min(remainingInBlock, source.Length);
+
+                    source.Slice(0, amountToWriteInBlock)
+                        .CopyTo(currentBlock.AsSpan(blockAndOffset.Offset));
+
+                    source = source.Slice(amountToWriteInBlock);
+
+                    ++blockAndOffset.Block;
+                    blockAndOffset.Offset = 0;
+                }
+            }
+            else
+            {
+                source.CopyTo(_largeBuffer.AsSpan(_position));
+            }
+            _position = (int)end;
+            _length = Math.Max(_position, _length);
+        }
+#endif
+
 		/// <summary>
 		/// Returns a useful string for debugging. This should not normally be called in actual production code.
 		/// </summary>
@@ -489,25 +683,8 @@ namespace Elasticsearch.Net
 		public override void WriteByte(byte value)
 		{
 			CheckDisposed();
-			var end = _position + 1;
-
-			// Check for overflow
-			if (end > MaxStreamLength) throw new IOException("Maximum capacity exceeded");
-
-			EnsureCapacity(end);
-			if (_largeBuffer == null)
-			{
-				var blockSize = _memoryManager.BlockSize;
-				var block = _position / blockSize;
-				var offset = _position - block * blockSize;
-				var currentBlock = _blocks[block];
-				currentBlock[offset] = value;
-			}
-			else
-				_largeBuffer[_position] = value;
-
-			_position = end;
-			_length = Math.Max(_position, _length);
+			_byteBuffer[0] = value;
+			Write(_byteBuffer, 0, 1);
 		}
 
 		/// <summary>
@@ -623,6 +800,12 @@ namespace Elasticsearch.Net
 				stream.Write(_largeBuffer, 0, _length);
 		}
 
+		#endregion
+
+		#region Helper Methods
+
+		private bool Disposed => Interlocked.Read(ref _disposedState) != 0;
+
 		private void CheckDisposed()
 		{
 			if (Disposed) throw new ObjectDisposedException($"The stream with Id {_id} and Tag {_tag} is disposed.");
@@ -644,7 +827,6 @@ namespace Elasticsearch.Net
 				{
 					amountToCopy = Math.Min(_blocks[blockAndOffset.Block].Length - blockAndOffset.Offset,
 						bytesRemaining);
-
 					Buffer.BlockCopy(_blocks[blockAndOffset.Block], blockAndOffset.Offset, buffer,
 						bytesWritten + offset, amountToCopy);
 
@@ -661,6 +843,55 @@ namespace Elasticsearch.Net
 			return amountToCopy;
 		}
 
+#if NETCOREAPP2_1 || NETSTANDARD2_1
+        private int InternalRead(Span<byte> buffer, int fromPosition)
+        {
+            if (_length - fromPosition <= 0)
+            {
+                return 0;
+            }
+
+            int amountToCopy;
+
+            if (_largeBuffer == null)
+            {
+                var blockAndOffset = GetBlockAndRelativeOffset(fromPosition);
+                var bytesWritten = 0;
+                var bytesRemaining = Math.Min(buffer.Length, _length - fromPosition);
+
+                while (bytesRemaining > 0)
+                {
+                    amountToCopy = Math.Min(_blocks[blockAndOffset.Block].Length - blockAndOffset.Offset,
+                                            bytesRemaining);
+                    _blocks[blockAndOffset.Block].AsSpan(blockAndOffset.Offset, amountToCopy)
+                        .CopyTo(buffer.Slice(bytesWritten));
+
+                    bytesWritten += amountToCopy;
+                    bytesRemaining -= amountToCopy;
+
+                    ++blockAndOffset.Block;
+                    blockAndOffset.Offset = 0;
+                }
+                return bytesWritten;
+            }
+            amountToCopy = Math.Min(buffer.Length, _length - fromPosition);
+            _largeBuffer.AsSpan(fromPosition, amountToCopy).CopyTo(buffer);
+            return amountToCopy;
+        }
+#endif
+
+		private struct BlockAndOffset
+		{
+			public int Block;
+			public int Offset;
+
+			public BlockAndOffset(int block, int offset)
+			{
+				Block = block;
+				Offset = offset;
+			}
+		}
+
 		private BlockAndOffset GetBlockAndRelativeOffset(int offset)
 		{
 			var blockSize = _memoryManager.BlockSize;
@@ -670,8 +901,14 @@ namespace Elasticsearch.Net
 		private void EnsureCapacity(int newCapacity)
 		{
 			if (newCapacity > _memoryManager.MaximumStreamCapacity && _memoryManager.MaximumStreamCapacity > 0)
+			{
+				RecyclableMemoryStreamManager.EventsWriter.MemoryStreamOverCapacity(newCapacity,
+					_memoryManager
+						.MaximumStreamCapacity, _tag,
+					AllocationStack);
 				throw new InvalidOperationException("Requested capacity is too large: " + newCapacity + ". Limit is " +
 					_memoryManager.MaximumStreamCapacity);
+			}
 
 			if (_largeBuffer != null)
 			{
@@ -697,23 +934,15 @@ namespace Elasticsearch.Net
 				_memoryManager.ReturnLargeBuffer(_largeBuffer, _tag);
 			else
 			{
-				if (_dirtyBuffers == null) _dirtyBuffers = new List<byte[]>(1);
+				if (_dirtyBuffers == null)
+					// We most likely will only ever need space for one
+					_dirtyBuffers = new List<byte[]>(1);
 				_dirtyBuffers.Add(_largeBuffer);
 			}
 
 			_largeBuffer = null;
 		}
 
-		private struct BlockAndOffset
-		{
-			public int Block;
-			public int Offset;
-
-			public BlockAndOffset(int block, int offset)
-			{
-				Block = block;
-				Offset = offset;
-			}
-		}
+		#endregion
 	}
 }
