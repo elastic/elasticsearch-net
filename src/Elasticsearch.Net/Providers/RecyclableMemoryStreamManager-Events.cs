@@ -21,6 +21,8 @@
 // ---------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.Tracing;
 using System.Threading;
 
@@ -32,71 +34,76 @@ namespace Elasticsearch.Net
 	/// </summary>
 	internal class EventCounter
 	{
-		public EventCounter(string blocks, object eventsWriter) { }
+		public EventCounter(string blocks, RecyclableMemoryStreamManager.Events eventsWriter) { }
 
 		public void WriteMetric(long v) { }
+	}
+#endif
+#if !NETSTANDARD2_1
+	internal class PollingCounter : IDisposable
+	{
+		public PollingCounter(string largeBuffers, RecyclableMemoryStreamManager.Events eventsWriter, Func<double> func) { }
+
+		public void Dispose() {}
 	}
 #endif
 
 	internal sealed partial class RecyclableMemoryStreamManager
 	{
 		public static readonly Events EventsWriter = new Events();
-		public static readonly Counters Counter = new Counters();
+		private Counters Counter { get; }
 
-		public sealed class Counters
+		public sealed class Counters : IDisposable
 		{
-			public Counters()
-			{
-				BlocksCounter = new EventCounter("blocks", EventsWriter);
-				BufferCounter = new EventCounter("large-buffers", EventsWriter);
-				MemoryStreamCounter = new EventCounter("memorystreams", EventsWriter);
-			}
+			private ReadOnlyCollection<PollingCounter> Polls { get;}
 
-			private EventCounter BlocksCounter { get; }
-			private EventCounter BufferCounter { get; }
-			private EventCounter MemoryStreamCounter { get; }
+			public Counters(RecyclableMemoryStreamManager instance)
+			{
+				PollingCounter Create(string name, Func<double> poll, string description) =>
+					new PollingCounter(name, EventsWriter, poll)
+					{
+#if NETSTANDARD2_1
+						DisplayName = description
+#endif
+					};
+
+
+				var polls = new List<PollingCounter>()
+				{
+					{ Create("blocks", () => _blocks, "Pooled blocks active")},
+					{ Create("large-buffers", () => _largeBuffers, "Large buffers active")},
+					{ Create("large-buffers-free", () => instance.LargeBuffersFree, "Large buffers free")},
+					{ Create("large-pool-inuse", () => instance.LargePoolInUseSize, "Large pool in use size")},
+					{ Create("small-pool-free", () => instance.SmallBlocksFree, "Small pool free blocks")},
+					{ Create("small-pool-inuse", () => instance.SmallPoolInUseSize, "Small pool in use size")},
+					{ Create("small-pool-free", () => instance.SmallPoolFreeSize, "Small pool free size")},
+					{ Create("small-pool-max", () => instance.MaximumFreeSmallPoolBytes, "Small pool max size")},
+					{ Create("memory-streams", () => _memoryStreams, "Active memory streams")},
+				};
+				Polls = new ReadOnlyCollection<PollingCounter>(polls);
+
+
+			}
 
 			private long _blocks = 0;
-			internal void ReportBlockCreated()
-			{
-				var count = Interlocked.Increment(ref _blocks);
-				BlocksCounter.WriteMetric(count);
+			internal void ReportBlockCreated() => Interlocked.Increment(ref _blocks);
 
-			}
-
-			internal void ReportBlockDiscarded()
-			{
-				var count = Interlocked.Decrement(ref _blocks);
-				BlocksCounter.WriteMetric(count);
-
-			}
+			internal void ReportBlockDiscarded() => Interlocked.Decrement(ref _blocks);
 
 			private long _largeBuffers = 0;
-			internal void ReportLargeBufferCreated()
-			{
-				var count = Interlocked.Increment(ref _largeBuffers);
-				BufferCounter.WriteMetric(count);
-			}
+			internal void ReportLargeBufferCreated() => Interlocked.Increment(ref _largeBuffers);
 
-			internal void ReportLargeBufferDiscarded()
-			{
-				var count = Interlocked.Decrement(ref _largeBuffers);
-				BufferCounter.WriteMetric(count);
-			}
+			internal void ReportLargeBufferDiscarded() => Interlocked.Decrement(ref _largeBuffers);
 
 			private long _memoryStreams = 0;
-			internal void ReportStreamCreated()
-			{
-				var count = Interlocked.Decrement(ref _memoryStreams);
-				MemoryStreamCounter.WriteMetric(count);
-			}
+			internal void ReportStreamCreated() => Interlocked.Increment(ref _memoryStreams);
 
-			internal void ReportStreamDisposed()
-			{
-				var count = Interlocked.Decrement(ref _memoryStreams);
-				MemoryStreamCounter.WriteMetric(count);
-			}
+			internal void ReportStreamDisposed() => Interlocked.Decrement(ref _memoryStreams);
 
+			public void Dispose()
+			{
+				foreach(var p in Polls) p.Dispose();
+			}
 		}
 
 		[EventSource(Name = "Elasticsearch-Net-RecyclableMemoryStream", Guid = "{AD44FDAC-D3FC-460A-9EBE-E55A3569A8F6}")]

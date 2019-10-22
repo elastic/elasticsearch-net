@@ -16,14 +16,18 @@ namespace Elasticsearch.Net
 
 		public RecyclableMemoryStreamFactory()
 		{
-			var blockSize = 1024;
-			var largeBufferMultiple = 1024 * 1024;
-			var maxBufferSize = 16 * largeBufferMultiple;
-			_manager = new RecyclableMemoryStreamManager(blockSize, largeBufferMultiple, maxBufferSize)
+//			var blockSize = 1024;
+//			var largeBufferMultiple = 1024 * 1024;
+//			var maxBufferSize = 16 * largeBufferMultiple;
+//			_manager = new RecyclableMemoryStreamManager(blockSize, largeBufferMultiple, maxBufferSize)
+//			{
+//				//AggressiveBufferReturn = true,
+//				MaximumFreeLargePoolBytes = maxBufferSize * 4,
+//				MaximumFreeSmallPoolBytes = 100 * blockSize
+//			};
+			_manager = new RecyclableMemoryStreamManager()
 			{
 				//AggressiveBufferReturn = true,
-				MaximumFreeLargePoolBytes = maxBufferSize * 4,
-				MaximumFreeSmallPoolBytes = 100 * blockSize
 			};
 		}
 

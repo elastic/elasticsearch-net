@@ -156,6 +156,7 @@ namespace Elasticsearch.Net
 
 			for (var i = 0; i < _largePools.Length; ++i) _largePools[i] = new ConcurrentStack<byte[]>();
 
+			Counter = new Counters(this);
 			EventsWriter.MemoryStreamManagerInitialized(blockSize, largeBufferMultiple, maximumBufferSize);
 		}
 
@@ -528,17 +529,23 @@ namespace Elasticsearch.Net
 
 		private class ReportingMemoryStream : MemoryStream
 		{
-			public ReportingMemoryStream(byte[] bytes) : base(bytes) => Counter.ReportStreamCreated();
+			private readonly RecyclableMemoryStreamManager _instance;
+
+			public ReportingMemoryStream(byte[] bytes, RecyclableMemoryStreamManager instance) : base(bytes)
+			{
+				_instance = instance;
+				_instance.Counter.ReportStreamCreated();
+			}
 
 			//NOTE DisposeAsync calls Dispose as well
-			protected override void Dispose(bool disposing) => Counter.ReportLargeBufferDiscarded();
+			protected override void Dispose(bool disposing) => _instance.Counter.ReportStreamDisposed();
 		}
 
 		/// <summary>
 		/// Shortcut to create a stream that directly wraps bytes but still uses reporting on the stream being created and disposes.
 		/// Note this does NOT use the pooled memory streams as the bytes have already been allocated
 		/// </summary>
-		public MemoryStream GetStream(byte[] bytes) => new ReportingMemoryStream(bytes);
+		public MemoryStream GetStream(byte[] bytes) => new ReportingMemoryStream(bytes, this);
 
 		/// <summary>
 		/// Retrieve a new MemoryStream object with no tag and a default initial capacity.
