@@ -20,6 +20,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 				{
 					field = "startedOn",
 					interval = "month",
+					min_doc_count = 1
 				},
 				aggs = new
 				{
@@ -77,6 +78,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
 				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(1)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
@@ -106,6 +108,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
+				MinimumDocumentCount = 1,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new FilterAggregation("stable_state")

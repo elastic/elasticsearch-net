@@ -21,6 +21,7 @@ namespace Tests.Aggregations.Pipeline.Derivative
 				{
 					field = "startedOn",
 					interval = "month",
+					min_doc_count = 1
 				},
 				aggs = new
 				{
@@ -47,6 +48,7 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
 				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(1)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
@@ -62,6 +64,7 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
+				MinimumDocumentCount = 1,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new DerivativeAggregation("commits_derivative", "commits")
