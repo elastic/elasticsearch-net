@@ -6,7 +6,7 @@
 @inherits ApiGenerator.CodeTemplatePage<List<string>>
 @{
 	List<string> summary = Model;
-	var description = summary.Count == 1 ? summary.First() : string.Join("\r\n\t\t", summary.Select(d => "/// " + d));
+	var description = summary.Count == 1 ? summary.First() : string.Join($"{Environment.NewLine}\t\t", summary.Select(d => "/// " + d));
 	if (summary.Count == 1)
 	{
 <text>		///<summary>@Raw(description)</summary></text>
