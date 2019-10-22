@@ -217,7 +217,6 @@ namespace Nest
 			};
 		}
 
-
 		public CompositeBucketAggregate Composite(string key)
 		{
 			var bucket = TryGet<BucketAggregate>(key);
@@ -263,7 +262,6 @@ namespace Nest
 			};
 		}
 
-
 		private IEnumerable<KeyedBucket<TKey>> GetKeyedBuckets<TKey>(IEnumerable<IBucket> items)
 		{
 			var buckets = items.Cast<KeyedBucket<object>>();
@@ -271,7 +269,7 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new KeyedBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = GetKeyFromBucketKey<TKey>(bucket.Key),
 					KeyAsString = bucket.KeyAsString,
 					DocCount = bucket.DocCount,
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
@@ -285,7 +283,7 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new SignificantTermsBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = GetKeyFromBucketKey<TKey>(bucket.Key),
 					BgCount = bucket.BgCount,
 					DocCount = bucket.DocCount,
 					Score = bucket.Score
@@ -299,9 +297,14 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new RareTermsBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = GetKeyFromBucketKey<TKey>(bucket.Key),
 					DocCount = bucket.DocCount.GetValueOrDefault(0)
 				};
 		}
+
+		private static TKey GetKeyFromBucketKey<TKey>(object key) =>
+			typeof(TKey).IsEnum
+				? (TKey)Enum.Parse(typeof(TKey), key.ToString(), true)
+				: (TKey)Convert.ChangeType(key, typeof(TKey));
 	}
 }
