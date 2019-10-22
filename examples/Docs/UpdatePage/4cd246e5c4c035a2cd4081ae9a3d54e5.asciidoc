@@ -1,0 +1,20 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line114 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdatePage.cs#L60-L86.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var updateResponse = client.Update<object>(1, u => u
+    .Index("test")
+    .Script(s => s
+        .Source("ctx._source.tags.add(params.tag)")
+        .Lang("painless")
+        .Params(p => p
+            .Add("tag", "blue")
+        )
+    )
+);
+----

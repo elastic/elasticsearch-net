@@ -1,7 +1,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line323 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L145-L167.
+This file is generated from method Line323 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L146-L168.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
