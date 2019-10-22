@@ -209,8 +209,7 @@ namespace Nest
 
 		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
 
-		private TAggregate TryGet<TAggregate>(string key)
-			where TAggregate : class, IAggregate =>
+		private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate =>
 			BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 
 		private MultiBucketAggregate<TBucket> GetMultiBucketAggregate<TBucket>(string key)
@@ -238,7 +237,6 @@ namespace Nest
 			};
 		}
 
-
 		private IEnumerable<KeyedBucket<TKey>> GetKeyedBuckets<TKey>(IEnumerable<IBucket> items)
 		{
 			var buckets = items.Cast<KeyedBucket<object>>();
@@ -246,11 +244,16 @@ namespace Nest
 			foreach (var bucket in buckets)
 				yield return new KeyedBucket<TKey>(bucket.BackingDictionary)
 				{
-					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
+					Key = GetKeyFromBucketKey<TKey>(bucket.Key),
 					KeyAsString = bucket.KeyAsString,
 					DocCount = bucket.DocCount,
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
 				};
 		}
+
+		private static TKey GetKeyFromBucketKey<TKey>(object key) =>
+			typeof(TKey).IsEnum
+				? (TKey)Enum.Parse(typeof(TKey), key.ToString(), true)
+				: (TKey)Convert.ChangeType(key, typeof(TKey));
 	}
 }
