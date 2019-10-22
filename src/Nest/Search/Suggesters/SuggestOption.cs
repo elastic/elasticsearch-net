@@ -25,7 +25,7 @@ namespace Nest
 		public long Frequency { get; set; }
 
 		/// <summary>
-		/// Phrase suggester only, higlighted version of text
+		/// Phrase suggester only, highlighted version of text
 		/// </summary>
 		[JsonProperty("highlighted")]
 		public string Highlighted { get; internal set; }
@@ -66,5 +66,8 @@ namespace Nest
 
 		[JsonProperty("score")]
 		internal double? SuggestScore { get; set; }
+		
+		[JsonProperty("fields")]
+		public FieldValues Fields { get; internal set; }
 	}
 }
