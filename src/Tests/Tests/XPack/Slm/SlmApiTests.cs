@@ -153,9 +153,7 @@ namespace Tests.XPack.Slm
 
 			metadata.Version.Should().Be(1);
 			metadata.ModifiedDate.Should().BeAfter(DateTimeOffset.MinValue);
-			metadata.ModifiedDateInMilliseconds.Should().BeGreaterThan(0);
 			metadata.NextExecution.Should().BeAfter(DateTimeOffset.MinValue);
-			metadata.NextExecutionInMilliseconds.Should().BeGreaterThan(0);
 			metadata.Policy.Name.Should().Be(v);
 			metadata.Policy.Repository.Should().Be(v);
 			metadata.Policy.Schedule.Should().BeEquivalentTo(new CronExpression("0 0 0 1 1 ? *"));
