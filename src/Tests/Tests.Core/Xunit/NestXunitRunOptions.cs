@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using Elastic.Xunit;
 using Tests.Configuration;
@@ -91,18 +92,18 @@ namespace Tests.Core.Xunit
 			bool runningIntegrations
 		)
 		{
-			var sb = new StringBuilder("build.bat ")
-				.Append($"seed:{config.Seed} ");
+			var sb = new StringBuilder(".\\build.bat ")
+				.Append("seed:").Append(config.Seed).Append(" ");
 
-			AppendExplictConfig(nameof(RandomConfiguration.SourceSerializer), sb);
-			AppendExplictConfig(nameof(RandomConfiguration.TypedKeys), sb);
-			AppendExplictConfig(nameof(RandomConfiguration.HttpCompression), sb);
+			AppendConfig(nameof(RandomConfiguration.SourceSerializer), config.Random.SourceSerializer, sb);
+			AppendConfig(nameof(RandomConfiguration.TypedKeys), config.Random.TypedKeys, sb);
+			AppendConfig(nameof(RandomConfiguration.HttpCompression), config.Random.HttpCompression, sb);
 
 			if (runningIntegrations)
 				sb.Append("integrate ")
 					.Append(TestConfiguration.Instance.ElasticsearchVersion);
-
-			else sb.Append("test");
+			else
+				sb.Append("test");
 
 			if (runningIntegrations && failedCollections.Count > 0)
 			{
@@ -135,20 +136,9 @@ namespace Tests.Core.Xunit
 		}
 
 		/// <summary>
-		/// Append random overwrite to reproduce line only if one was provided explicitly
+		/// Append random values used
 		/// </summary>
-		private static void AppendExplictConfig(string key, StringBuilder sb)
-		{
-			if (!TryGetExplicitRandomConfig(key, out var b)) return;
-
-			sb.Append($"random:{key}{(b ? "" : ":false")} ");
-		}
-
-		private static bool TryGetExplicitRandomConfig(string key, out bool value)
-		{
-			value = false;
-			var v = Environment.GetEnvironmentVariable($"NEST_RANDOM_{key.ToUpper()}");
-			return !string.IsNullOrWhiteSpace(v) && bool.TryParse(v, out value);
-		}
+		private static void AppendConfig(string key, bool value, StringBuilder sb) =>
+			sb.Append($"random:{key.ToLowerInvariant()}{(value ? "" : ":false")} ");
 	}
 }
