@@ -108,7 +108,7 @@ namespace Tests.QueryDsl.Specialized.Shape
 		public ShapeSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
-		protected override string Index => "geoshapes";
+		protected override string Index => "shapes";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -123,15 +123,11 @@ namespace Tests.QueryDsl.Specialized.Shape
 				.Map<Domain.Shape>(mm => mm
 					.AutoMap()
 					.Properties(p => p
-						.GeoShape(g => g
+						.Shape(g => g
 							.Name(n => n.GeometryCollection)
 						)
-						.GeoShape(g => g
+						.Shape(g => g
 							.Name(n => n.Envelope)
-						)
-						.GeoShape(g => g
-							.Name(n => n.Circle)
-							.Strategy(GeoStrategy.Recursive)
 						)
 					)
 				)
@@ -157,7 +153,7 @@ namespace Tests.QueryDsl.Specialized.Shape
 		public ShapeGeoWKTSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
-		protected override string Index => "wkt-geoshapes";
+		protected override string Index => "wkt-shapes";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -172,15 +168,11 @@ namespace Tests.QueryDsl.Specialized.Shape
 				.Map<Domain.Shape>(mm => mm
 					.AutoMap()
 					.Properties(p => p
-						.GeoShape(g => g
+						.Shape(g => g
 							.Name(n => n.GeometryCollection)
 						)
-						.GeoShape(g => g
+						.Shape(g => g
 							.Name(n => n.Envelope)
-						)
-						.GeoShape(g => g
-							.Name(n => n.Circle)
-							.Strategy(GeoStrategy.Recursive)
 						)
 					)
 				)
@@ -198,8 +190,7 @@ namespace Tests.QueryDsl.Specialized.Shape
 				{
 					id = shape.Id,
 					geometryCollection = GeoWKTWriter.Write(shape.GeometryCollection),
-					envelope = GeoWKTWriter.Write(shape.Envelope),
-					circle = shape.Circle
+					envelope = GeoWKTWriter.Write(shape.Envelope)
 				});
 			}
 
@@ -245,7 +236,6 @@ namespace Tests.QueryDsl.Specialized.Shape
 					jValue.Value.Should().BeOfType<string>();
 					jValue = (JValue)jObject["envelope"];
 					jValue.Value.Should().BeOfType<string>();
-					jObject["circle"].Should().BeOfType<JObject>();
 				}
 			}
 		}
