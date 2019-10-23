@@ -103,7 +103,8 @@ namespace Nest
 					for (var i = buffer.Offset; i < buffer.Count - 1; i++)
 						writer.WriteRawUnsafe(buffer.Array[i]);
 
-					if (buffer.Count - buffer.Offset > 1)
+					// does the IGeoDistanceSort have other properties set i.e. is it more than simply {} ?
+					if (buffer.Count > 2)
 						writer.WriteValueSeparator();
 
 					writer.WritePropertyName(settings.Inferrer.Field(geo.Field));

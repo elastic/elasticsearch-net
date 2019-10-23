@@ -80,6 +80,25 @@ namespace Tests.Search.Request
 					},
 					new
 					{
+						_geo_distance = new
+						{
+							locationPoint = new[]
+							{
+								new
+								{
+									lat = 70.0,
+									lon = -70.0
+								},
+								new
+								{
+									lat = -12.0,
+									lon = 12.0
+								}
+							}
+						}
+					},
+					new
+					{
 						_script = new
 						{
 							order = "asc",
@@ -125,6 +144,10 @@ namespace Tests.Search.Request
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
+					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+				)
+				.GeoDistance(g => g
+					.Field(p => p.LocationPoint)
 					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
 				)
 				.Script(sc => sc
@@ -173,6 +196,11 @@ namespace Tests.Search.Request
 						DistanceType = GeoDistanceType.Arc,
 						Unit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
+						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+					},
+					new GeoDistanceSort
+					{
+						Field = "locationPoint",
 						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
 					new ScriptSort
