@@ -1,7 +1,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line72 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/SearchPage.cs#L84-L101.
+This file is generated from method Line72 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/SearchPage.cs#L85-L102.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

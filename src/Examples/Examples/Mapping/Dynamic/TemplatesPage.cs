@@ -186,9 +186,10 @@ namespace Examples.Mapping.Dynamic
 			}", e =>
 			{
 				// client always emits copy_to as array
-				var body = JObject.Parse(e.Body);
-				body["mappings"]["dynamic_templates"][0]["full_name"]["mapping"]["copy_to"] = new JArray("full_name");
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["mappings"]["dynamic_templates"][0]["full_name"]["mapping"]["copy_to"] = new JArray("full_name");
+				});
 				return e;
 			});
 

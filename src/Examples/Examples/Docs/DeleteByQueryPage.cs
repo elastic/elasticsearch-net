@@ -34,10 +34,11 @@ namespace Examples.Docs
 			}", e =>
 			{
 				// client does not support shorthand match query syntax. Expand out
-				var body = JObject.Parse(e.Body);
-				var query = body["query"]["match"]["message"].Value<string>();
-				body["query"]["match"]["message"] = new JObject { { "query", query } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var query = body["query"]["match"]["message"].Value<string>();
+					body["query"]["match"]["message"] = new JObject { { "query", query } };
+				});
 				return e;
 			});
 		}
@@ -106,10 +107,11 @@ namespace Examples.Docs
 			  }
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
 				// numeric ranges always use doubles
-				body["query"]["range"]["age"]["gte"] = 10d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["range"]["age"]["gte"] = 10d;
+				});
 				return e;
 			});
 		}
@@ -139,10 +141,11 @@ namespace Examples.Docs
 			  }
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
-				var value = body["query"]["term"]["user"].Value<string>();
-				body["query"]["term"]["user"] = new JObject { { "value", value } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var value = body["query"]["term"]["user"].Value<string>();
+					body["query"]["term"]["user"] = new JObject { { "value", value } };
+				});
 				return e;
 			});
 		}
@@ -195,10 +198,11 @@ namespace Examples.Docs
 			  }
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
 				// numeric ranges always use doubles
-				body["query"]["range"]["likes"]["lt"] = 10d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["range"]["likes"]["lt"] = 10d;
+				});
 				return e;
 			});
 
@@ -217,10 +221,11 @@ namespace Examples.Docs
 			  }
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
-				// numeric ranges always use doubles
-				body["query"]["range"]["likes"]["lt"] = 10d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					// numeric ranges always use doubles
+					body["query"]["range"]["likes"]["lt"] = 10d;
+				});
 				return e;
 			});
 		}
@@ -264,14 +269,13 @@ namespace Examples.Docs
 			{
 				var uri = e.Uri.ToString().Replace("size=0&", string.Empty);
 				e.Uri = new Uri(uri);
-
-				var body = JObject.Parse(e.Body);
-
-				// size always in the body
-				body["size"] = 0;
-				// numeric ranges always use doubles
-				body["query"]["range"]["likes"]["lt"] = 10d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					// size always in the body
+					body["size"] = 0;
+					// numeric ranges always use doubles
+					body["query"]["range"]["likes"]["lt"] = 10d;
+				});
 				return e;
 			});
 		}
@@ -307,11 +311,11 @@ namespace Examples.Docs
 				// query string params always need a value
 				var uri = e.Uri.ToString().Replace("refresh", "refresh=true");
 				e.Uri = new Uri(uri);
-
-				// slices is defined in body
-				var body = JObject.Parse(e.Body);
-				body["query"]["range"]["likes"]["lt"] = 10d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					// slices is defined in body
+					body["query"]["range"]["likes"]["lt"] = 10d;
+				});
 				return e;
 			});
 		}
@@ -347,12 +351,11 @@ namespace Examples.Docs
 				// size is specified in the body
 				var uri = e.Uri.ToString().Replace("size=0&", string.Empty);
 				e.Uri = new Uri(uri);
-
-				var body = JObject.Parse(e.Body);
-				body["size"] = 0;
-				body["query"]["range"]["likes"]["lt"] = 10d;
-				e.Body = body.ToString();
-
+				e.ApplyBodyChanges(body =>
+				{
+					body["size"] = 0;
+					body["query"]["range"]["likes"]["lt"] = 10d;
+				});
 				return e;
 			});
 		}

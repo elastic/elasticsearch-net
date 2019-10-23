@@ -107,9 +107,10 @@ namespace Examples.QueryDsl
 			    }
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
-				body["query"]["query_string"]["tie_breaker"] = 0d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["query_string"]["tie_breaker"] = 0d;
+				});
 				return e;
 			});
 		}

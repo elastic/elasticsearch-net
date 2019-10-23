@@ -124,10 +124,11 @@ namespace Examples.Mapping.Types
 			}", e =>
 			{
 				// client does not support short form match_phrase_prefix
-				var body = JObject.Parse(e.Body);
-				var value = body["query"]["match_phrase_prefix"]["my_field"];
-				body["query"]["match_phrase_prefix"]["my_field"] = new JObject { { "query", value } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var value = body["query"]["match_phrase_prefix"]["my_field"];
+					body["query"]["match_phrase_prefix"]["my_field"] = new JObject { { "query", value } };
+				});
 				return e;
 			});
 		}
