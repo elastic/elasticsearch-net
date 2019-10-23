@@ -103,7 +103,7 @@ namespace Nest
 					for (var i = buffer.Offset; i < buffer.Count - 1; i++)
 						writer.WriteRawUnsafe(buffer.Array[i]);
 
-					if (buffer.Count > 0)
+					if (buffer.Count - buffer.Offset > 1)
 						writer.WriteValueSeparator();
 
 					writer.WritePropertyName(settings.Inferrer.Field(geo.Field));
