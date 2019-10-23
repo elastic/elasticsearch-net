@@ -16,13 +16,13 @@ namespace Tests.QueryDsl.Geo.GeoShape
 {
 	public abstract class GeoShapeSerializationTestsBase
 		: ApiIntegrationTestBase<IntrusiveOperationCluster,
-			ISearchResponse<Domain.Shape>,
+			ISearchResponse<Domain.GeoShape>,
 			ISearchRequest,
-			SearchDescriptor<Domain.Shape>,
-			SearchRequest<Domain.Shape>>
+			SearchDescriptor<Domain.GeoShape>,
+			SearchRequest<Domain.GeoShape>>
 	{
 		private readonly IEnumerable<GeoCoordinate> _coordinates =
-			Domain.Shape.Shapes.First().Envelope.Coordinates;
+			Domain.GeoShape.Shapes.First().Envelope.Coordinates;
 
 		protected GeoShapeSerializationTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.Geo.GeoShape
 
 		protected override int ExpectStatusCode => 200;
 
-		protected override Func<SearchDescriptor<Domain.Shape>, ISearchRequest> Fluent => s => s
+		protected override Func<SearchDescriptor<Domain.GeoShape>, ISearchRequest> Fluent => s => s
 			.Index(Index)
 			.Query(q => q
 				.GeoShape(c => c
@@ -72,13 +72,13 @@ namespace Tests.QueryDsl.Geo.GeoShape
 
 		protected abstract string Index { get; }
 
-		protected override SearchRequest<Domain.Shape> Initializer => new SearchRequest<Domain.Shape>(Index)
+		protected override SearchRequest<Domain.GeoShape> Initializer => new SearchRequest<Domain.GeoShape>(Index)
 		{
 			Query = new GeoShapeQuery
 			{
 				Name = "named_query",
 				Boost = 1.1,
-				Field = Infer.Field<Domain.Shape>(p => p.Envelope),
+				Field = Infer.Field<Domain.GeoShape>(p => p.Envelope),
 				Shape = new EnvelopeGeoShape(_coordinates),
 				Relation = GeoShapeRelation.Intersects,
 				IgnoreUnmapped = true,
@@ -90,11 +90,11 @@ namespace Tests.QueryDsl.Geo.GeoShape
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Search(f),
 			(client, f) => client.SearchAsync(f),
-			(client, r) => client.Search<Domain.Shape>(r),
-			(client, r) => client.SearchAsync<Domain.Shape>(r)
+			(client, r) => client.Search<Domain.GeoShape>(r),
+			(client, r) => client.SearchAsync<Domain.GeoShape>(r)
 		);
 
-		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
+		protected override void ExpectResponse(ISearchResponse<Domain.GeoShape> response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.Documents.Count.Should().Be(10);
@@ -118,7 +118,7 @@ namespace Tests.QueryDsl.Geo.GeoShape
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
-				.Map<Domain.Shape>(mm => mm
+				.Map<Domain.GeoShape>(mm => mm
 					.AutoMap()
 					.Properties(p => p
 						.GeoShape(g => g
@@ -140,7 +140,7 @@ namespace Tests.QueryDsl.Geo.GeoShape
 
 			var bulkResponse = Client.Bulk(b => b
 				.Index(Index)
-				.IndexMany(Domain.Shape.Shapes)
+				.IndexMany(Domain.GeoShape.Shapes)
 				.Refresh(Refresh.WaitFor)
 			);
 
@@ -167,7 +167,7 @@ namespace Tests.QueryDsl.Geo.GeoShape
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
-				.Map<Domain.Shape>(mm => mm
+				.Map<Domain.GeoShape>(mm => mm
 					.AutoMap()
 					.Properties(p => p
 						.GeoShape(g => g
@@ -189,7 +189,7 @@ namespace Tests.QueryDsl.Geo.GeoShape
 
 			var bulk = new List<object>();
 
-			foreach (var shape in Domain.Shape.Shapes)
+			foreach (var shape in Domain.GeoShape.Shapes)
 			{
 				bulk.Add(new { index = new { _index = Index, _id = shape.Id } });
 				bulk.Add(new
@@ -210,7 +210,7 @@ namespace Tests.QueryDsl.Geo.GeoShape
 				throw new Exception($"Error indexing shapes for integration test: {bulkResponse.DebugInformation}");
 		}
 
-		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
+		protected override void ExpectResponse(ISearchResponse<Domain.GeoShape> response)
 		{
 			base.ExpectResponse(response);
 

@@ -27,6 +27,9 @@ namespace Tests.Domain.Extensions
 			.DefaultMappingFor<Metric>(map => map
 				.IndexName("server-metrics")
 			)
+			.DefaultMappingFor<GeoShape>(map => map
+				.IndexName("geoshapes")
+			)
 			.DefaultMappingFor<Shape>(map => map
 				.IndexName("shapes")
 			);

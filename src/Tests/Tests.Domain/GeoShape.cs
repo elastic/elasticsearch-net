@@ -7,13 +7,14 @@ using Tests.Configuration;
 
 namespace Tests.Domain
 {
-	public class Shape
+	public class GeoShape
 	{
 		private static int _idState;
+		public ICircleGeoShape Circle { get; set; }
 		public IEnvelopeGeoShape Envelope { get; set; }
 
-		public static Faker<Shape> Generator { get; } =
-			new Faker<Shape>()
+		public static Faker<GeoShape> Generator { get; } =
+			new Faker<GeoShape>()
 				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Id, p => Interlocked.Increment(ref _idState))
 				.RuleFor(p => p.GeometryCollection, p =>
@@ -31,13 +32,14 @@ namespace Tests.Domain
 				{
 					new GeoCoordinate(45, 0),
 					new GeoCoordinate(0, 45)
-				}));
+				}))
+				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p), $"{p.Random.Int(1, 100)}km"));
 
 		public IGeometryCollection GeometryCollection { get; set; }
 
 		public int Id { get; set; }
 
-		public static IList<Shape> Shapes { get; } = Generator.Clone().Generate(10);
+		public static IList<GeoShape> Shapes { get; } = Generator.Clone().Generate(10);
 
 		private static IPointGeoShape GenerateRandomPoint(Faker p) =>
 			new PointGeoShape(GenerateGeoCoordinate(p));
