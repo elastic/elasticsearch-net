@@ -34,73 +34,73 @@ The values are typically extracted from the fields of the document (using the fi
 
 :anchor-list: aggregations/metric
 
-* <<cardinality-aggregation-usage,Cardinality Aggregation Usage>>
+* <<average-aggregation-usage,Average Aggregation Usage>>
 
-* <<geo-centroid-aggregation-usage,Geo Centroid Aggregation Usage>>
+* <<cardinality-aggregation-usage,Cardinality Aggregation Usage>>
 
 * <<extended-stats-aggregation-usage,Extended Stats Aggregation Usage>>
 
-* <<scripted-metric-aggregation-usage,Scripted Metric Aggregation Usage>>
+* <<geo-bounds-aggregation-usage,Geo Bounds Aggregation Usage>>
 
-* <<weighted-average-aggregation-usage,Weighted Average Aggregation Usage>>
-
-* <<top-hits-aggregation-usage,Top Hits Aggregation Usage>>
+* <<geo-centroid-aggregation-usage,Geo Centroid Aggregation Usage>>
 
 * <<max-aggregation-usage,Max Aggregation Usage>>
 
-* <<min-aggregation-usage,Min Aggregation Usage>>
-
 * <<median-absolute-deviation-aggregation-usage,Median Absolute Deviation Aggregation Usage>>
 
-* <<sum-aggregation-usage,Sum Aggregation Usage>>
-
-* <<percentiles-aggregation-usage,Percentiles Aggregation Usage>>
-
-* <<value-count-aggregation-usage,Value Count Aggregation Usage>>
+* <<min-aggregation-usage,Min Aggregation Usage>>
 
 * <<percentile-ranks-aggregation-usage,Percentile Ranks Aggregation Usage>>
 
-* <<geo-bounds-aggregation-usage,Geo Bounds Aggregation Usage>>
+* <<percentiles-aggregation-usage,Percentiles Aggregation Usage>>
+
+* <<scripted-metric-aggregation-usage,Scripted Metric Aggregation Usage>>
 
 * <<stats-aggregation-usage,Stats Aggregation Usage>>
 
-* <<average-aggregation-usage,Average Aggregation Usage>>
+* <<sum-aggregation-usage,Sum Aggregation Usage>>
+
+* <<top-hits-aggregation-usage,Top Hits Aggregation Usage>>
+
+* <<value-count-aggregation-usage,Value Count Aggregation Usage>>
+
+* <<weighted-average-aggregation-usage,Weighted Average Aggregation Usage>>
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-metrics.html[Metric aggregations] for more details.
 
 :includes-from-dirs: aggregations/metric
 
-include::aggregations/metric/cardinality/cardinality-aggregation-usage.asciidoc[]
+include::aggregations/metric/average/average-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/geo-centroid/geo-centroid-aggregation-usage.asciidoc[]
+include::aggregations/metric/cardinality/cardinality-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/extended-stats/extended-stats-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/scripted-metric/scripted-metric-aggregation-usage.asciidoc[]
+include::aggregations/metric/geo-bounds/geo-bounds-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/weighted-average/weighted-average-aggregation-usage.asciidoc[]
-
-include::aggregations/metric/top-hits/top-hits-aggregation-usage.asciidoc[]
+include::aggregations/metric/geo-centroid/geo-centroid-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/max/max-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/min/min-aggregation-usage.asciidoc[]
-
 include::aggregations/metric/median-absolute-deviation/median-absolute-deviation-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
-
-include::aggregations/metric/percentiles/percentiles-aggregation-usage.asciidoc[]
-
-include::aggregations/metric/value-count/value-count-aggregation-usage.asciidoc[]
+include::aggregations/metric/min/min-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/percentile-ranks/percentile-ranks-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/geo-bounds/geo-bounds-aggregation-usage.asciidoc[]
+include::aggregations/metric/percentiles/percentiles-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/scripted-metric/scripted-metric-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/stats/stats-aggregation-usage.asciidoc[]
 
-include::aggregations/metric/average/average-aggregation-usage.asciidoc[]
+include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/top-hits/top-hits-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/value-count/value-count-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/weighted-average/weighted-average-aggregation-usage.asciidoc[]
 
 [[bucket-aggregations]]
 == Bucket Aggregations
@@ -112,53 +112,53 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 :anchor-list: aggregations/bucket
 
-* <<nested-aggregation-usage,Nested Aggregation Usage>>
-
-* <<significant-text-aggregation-usage,Significant Text Aggregation Usage>>
-
-* <<range-aggregation-usage,Range Aggregation Usage>>
-
-* <<terms-aggregation-usage,Terms Aggregation Usage>>
-
-* <<geo-tile-grid-aggregation-usage,Geo Tile Grid Aggregation Usage>>
-
-* <<reverse-nested-aggregation-usage,Reverse Nested Aggregation Usage>>
-
-* <<rare-terms-aggregation-usage,Rare Terms Aggregation Usage>>
-
-* <<histogram-aggregation-usage,Histogram Aggregation Usage>>
-
 * <<adjacency-matrix-usage,Adjacency Matrix Usage>>
-
-* <<parent-aggregation-usage,Parent Aggregation Usage>>
 
 * <<auto-date-histogram-aggregation-usage,Auto Date Histogram Aggregation Usage>>
 
-* <<geo-distance-aggregation-usage,Geo Distance Aggregation Usage>>
-
 * <<children-aggregation-usage,Children Aggregation Usage>>
-
-* <<date-histogram-aggregation-usage,Date Histogram Aggregation Usage>>
-
-* <<ip-range-aggregation-usage,Ip Range Aggregation Usage>>
-
-* <<significant-terms-aggregation-usage,Significant Terms Aggregation Usage>>
-
-* <<missing-aggregation-usage,Missing Aggregation Usage>>
-
-* <<sampler-aggregation-usage,Sampler Aggregation Usage>>
-
-* <<geo-hash-grid-aggregation-usage,Geo Hash Grid Aggregation Usage>>
-
-* <<filter-aggregation-usage,Filter Aggregation Usage>>
 
 * <<composite-aggregation-usage,Composite Aggregation Usage>>
 
-* <<filters-aggregation-usage,Filters Aggregation Usage>>
+* <<date-histogram-aggregation-usage,Date Histogram Aggregation Usage>>
 
 * <<date-range-aggregation-usage,Date Range Aggregation Usage>>
 
+* <<filter-aggregation-usage,Filter Aggregation Usage>>
+
+* <<filters-aggregation-usage,Filters Aggregation Usage>>
+
+* <<geo-distance-aggregation-usage,Geo Distance Aggregation Usage>>
+
+* <<geo-hash-grid-aggregation-usage,Geo Hash Grid Aggregation Usage>>
+
+* <<geo-tile-grid-aggregation-usage,Geo Tile Grid Aggregation Usage>>
+
 * <<global-aggregation-usage,Global Aggregation Usage>>
+
+* <<histogram-aggregation-usage,Histogram Aggregation Usage>>
+
+* <<ip-range-aggregation-usage,Ip Range Aggregation Usage>>
+
+* <<missing-aggregation-usage,Missing Aggregation Usage>>
+
+* <<nested-aggregation-usage,Nested Aggregation Usage>>
+
+* <<parent-aggregation-usage,Parent Aggregation Usage>>
+
+* <<range-aggregation-usage,Range Aggregation Usage>>
+
+* <<rare-terms-aggregation-usage,Rare Terms Aggregation Usage>>
+
+* <<reverse-nested-aggregation-usage,Reverse Nested Aggregation Usage>>
+
+* <<sampler-aggregation-usage,Sampler Aggregation Usage>>
+
+* <<significant-terms-aggregation-usage,Significant Terms Aggregation Usage>>
+
+* <<significant-text-aggregation-usage,Significant Text Aggregation Usage>>
+
+* <<terms-aggregation-usage,Terms Aggregation Usage>>
 
 [NOTE]
 --
@@ -173,53 +173,53 @@ See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket.
 
 :includes-from-dirs: aggregations/bucket
 
-include::aggregations/bucket/nested/nested-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/significant-text/significant-text-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/range/range-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/terms/terms-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/geo-tile-grid/geo-tile-grid-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/reverse-nested/reverse-nested-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/rare-terms/rare-terms-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/histogram/histogram-aggregation-usage.asciidoc[]
-
 include::aggregations/bucket/adjacency-matrix/adjacency-matrix-usage.asciidoc[]
-
-include::aggregations/bucket/parent/parent-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/auto-date-histogram/auto-date-histogram-aggregation-usage.asciidoc[]
 
-include::aggregations/bucket/geo-distance/geo-distance-aggregation-usage.asciidoc[]
-
 include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/ip-range/ip-range-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/significant-terms/significant-terms-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/missing/missing-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/sampler/sampler-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/geo-hash-grid/geo-hash-grid-aggregation-usage.asciidoc[]
-
-include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/composite/composite-aggregation-usage.asciidoc[]
 
-include::aggregations/bucket/filters/filters-aggregation-usage.asciidoc[]
+include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/date-range/date-range-aggregation-usage.asciidoc[]
 
+include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/filters/filters-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/geo-distance/geo-distance-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/geo-hash-grid/geo-hash-grid-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/geo-tile-grid/geo-tile-grid-aggregation-usage.asciidoc[]
+
 include::aggregations/bucket/global/global-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/histogram/histogram-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/ip-range/ip-range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/missing/missing-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/nested/nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/parent/parent-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/range/range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/rare-terms/rare-terms-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/reverse-nested/reverse-nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/sampler/sampler-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/significant-terms/significant-terms-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/significant-text/significant-text-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/terms/terms-aggregation-usage.asciidoc[]
 
 [[pipeline-aggregations]]
 == Pipeline Aggregations
@@ -229,85 +229,89 @@ There are many different types of pipeline aggregation, each computing different
 
 :anchor-list: aggregations/pipeline
 
-* <<percentiles-bucket-aggregation-usage,Percentiles Bucket Aggregation Usage>>
+* <<average-bucket-aggregation-usage,Average Bucket Aggregation Usage>>
 
-* <<moving-function-aggregation-usage,Moving Function Aggregation Usage>>
+* <<bucket-script-aggregation-usage,Bucket Script Aggregation Usage>>
 
-* <<serial-differencing-aggregation-usage,Serial Differencing Aggregation Usage>>
+* <<bucket-selector-aggregation-usage,Bucket Selector Aggregation Usage>>
+
+* <<bucket-sort-aggregation-usage,Bucket Sort Aggregation Usage>>
+
+* <<cumulative-cardinality-aggregation-usage,Cumulative Cardinality Aggregation Usage>>
+
+* <<cumulative-sum-aggregation-usage,Cumulative Sum Aggregation Usage>>
+
+* <<derivative-aggregation-usage,Derivative Aggregation Usage>>
+
+* <<extended-stats-bucket-aggregation-usage,Extended Stats Bucket Aggregation Usage>>
 
 * <<max-bucket-aggregation-usage,Max Bucket Aggregation Usage>>
+
+* <<min-bucket-aggregation-usage,Min Bucket Aggregation Usage>>
+
+* <<moving-average-ewma-aggregation-usage,Moving Average Ewma Aggregation Usage>>
+
+* <<moving-average-holt-linear-aggregation-usage,Moving Average Holt Linear Aggregation Usage>>
 
 * <<moving-average-holt-winters-aggregation-usage,Moving Average Holt Winters Aggregation Usage>>
 
 * <<moving-average-linear-aggregation-usage,Moving Average Linear Aggregation Usage>>
 
-* <<moving-average-ewma-aggregation-usage,Moving Average Ewma Aggregation Usage>>
-
 * <<moving-average-simple-aggregation-usage,Moving Average Simple Aggregation Usage>>
 
-* <<moving-average-holt-linear-aggregation-usage,Moving Average Holt Linear Aggregation Usage>>
+* <<moving-function-aggregation-usage,Moving Function Aggregation Usage>>
 
-* <<cumulative-sum-aggregation-usage,Cumulative Sum Aggregation Usage>>
+* <<percentiles-bucket-aggregation-usage,Percentiles Bucket Aggregation Usage>>
 
-* <<min-bucket-aggregation-usage,Min Bucket Aggregation Usage>>
-
-* <<bucket-script-aggregation-usage,Bucket Script Aggregation Usage>>
-
-* <<sum-bucket-aggregation-usage,Sum Bucket Aggregation Usage>>
+* <<serial-differencing-aggregation-usage,Serial Differencing Aggregation Usage>>
 
 * <<stats-bucket-aggregation-usage,Stats Bucket Aggregation Usage>>
 
-* <<bucket-selector-aggregation-usage,Bucket Selector Aggregation Usage>>
-
-* <<average-bucket-aggregation-usage,Average Bucket Aggregation Usage>>
-
-* <<bucket-sort-aggregation-usage,Bucket Sort Aggregation Usage>>
-
-* <<extended-stats-bucket-aggregation-usage,Extended Stats Bucket Aggregation Usage>>
-
-* <<derivative-aggregation-usage,Derivative Aggregation Usage>>
+* <<sum-bucket-aggregation-usage,Sum Bucket Aggregation Usage>>
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-pipeline.html[Pipeline aggregations] for more details.
 
 :includes-from-dirs: aggregations/pipeline
 
-include::aggregations/pipeline/percentiles-bucket/percentiles-bucket-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/average-bucket/average-bucket-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/moving-function/moving-function-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/bucket-script/bucket-script-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/serial-differencing/serial-differencing-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/bucket-selector/bucket-selector-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/bucket-sort/bucket-sort-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/cumulative-cardinality/cumulative-cardinality-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/cumulative-sum/cumulative-sum-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/derivative/derivative-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/extended-stats-bucket/extended-stats-bucket-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/max-bucket/max-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/min-bucket/min-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-ewma-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-holt-linear-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/moving-average/moving-average-holt-winters-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/moving-average/moving-average-linear-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/moving-average/moving-average-ewma-aggregation-usage.asciidoc[]
-
 include::aggregations/pipeline/moving-average/moving-average-simple-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/moving-average/moving-average-holt-linear-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/moving-function/moving-function-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/cumulative-sum/cumulative-sum-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/percentiles-bucket/percentiles-bucket-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/min-bucket/min-bucket-aggregation-usage.asciidoc[]
-
-include::aggregations/pipeline/bucket-script/bucket-script-aggregation-usage.asciidoc[]
-
-include::aggregations/pipeline/sum-bucket/sum-bucket-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/serial-differencing/serial-differencing-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc[]
 
-include::aggregations/pipeline/bucket-selector/bucket-selector-aggregation-usage.asciidoc[]
-
-include::aggregations/pipeline/average-bucket/average-bucket-aggregation-usage.asciidoc[]
-
-include::aggregations/pipeline/bucket-sort/bucket-sort-aggregation-usage.asciidoc[]
-
-include::aggregations/pipeline/extended-stats-bucket/extended-stats-bucket-aggregation-usage.asciidoc[]
-
-include::aggregations/pipeline/derivative/derivative-aggregation-usage.asciidoc[]
+include::aggregations/pipeline/sum-bucket/sum-bucket-aggregation-usage.asciidoc[]
 
 [[matrix-aggregations]]
 == Matrix Aggregations

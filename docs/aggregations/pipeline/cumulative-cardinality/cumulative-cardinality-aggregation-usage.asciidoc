@@ -7,13 +7,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/CumulativeSum/CumulativeSumAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Pipeline/CumulativeCardinality/CumulativeCardinalityAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[cumulative-sum-aggregation-usage]]
-=== Cumulative Sum Aggregation Usage
+[[cumulative-cardinality-aggregation-usage]]
+=== Cumulative Cardinality Aggregation Usage
 
 ==== Fluent DSL example
 
@@ -22,12 +22,12 @@ please modify the original csharp file found at the link and submit the PR with 
 a => a
 .DateHistogram("projects_started_per_month", dh => dh
     .Field(p => p.StartedOn)
-    .Interval(DateInterval.Month)
+    .CalendarInterval(DateInterval.Month)
     .Aggregations(aa => aa
-        .Sum("commits", sm => sm
+        .Cardinality("commits", sm => sm
             .Field(p => p.NumberOfCommits)
         )
-        .CumulativeSum("cumulative_commits", d => d
+        .CumulativeCardinality("cumulative_commits", d => d
             .BucketsPath("commits")
         )
     )
@@ -41,10 +41,10 @@ a => a
 new DateHistogramAggregation("projects_started_per_month")
 {
     Field = "startedOn",
-    Interval = DateInterval.Month,
+    CalendarInterval = DateInterval.Month,
     Aggregations =
-        new SumAggregation("commits", "numberOfCommits") &&
-        new CumulativeSumAggregation("cumulative_commits", "commits")
+        new CardinalityAggregation("commits", "numberOfCommits") &&
+        new CumulativeCardinalityAggregation("cumulative_commits", "commits")
 }
 ----
 
@@ -55,16 +55,16 @@ new DateHistogramAggregation("projects_started_per_month")
   "projects_started_per_month": {
     "date_histogram": {
       "field": "startedOn",
-      "interval": "month"
+      "calendar_interval": "month"
     },
     "aggs": {
       "commits": {
-        "sum": {
+        "cardinality": {
           "field": "numberOfCommits"
         }
       },
       "cumulative_commits": {
-        "cumulative_sum": {
+        "cumulative_cardinality": {
           "buckets_path": "commits"
         }
       }
@@ -86,7 +86,7 @@ projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
 foreach (var item in projectsPerMonth.Buckets)
 {
-    var commitsDerivative = item.CumulativeSum("cumulative_commits");
+    var commitsDerivative = item.CumulativeCardinality("cumulative_commits");
     commitsDerivative.Should().NotBeNull();
     commitsDerivative.Value.Should().NotBe(null);
 }

@@ -53,6 +53,10 @@ s => s
         .Mode(SortMode.Min)
         .Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
     )
+    .GeoDistance(g => g
+        .Field(p => p.LocationPoint)
+        .Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+    )
     .Script(sc => sc
         .Type("number")
         .Ascending()
@@ -103,6 +107,11 @@ new SearchRequest<Project>
             DistanceType = GeoDistanceType.Arc,
             Unit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
+            Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+        },
+        new GeoDistanceSort
+        {
+            Field = "locationPoint",
             Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
         },
         new ScriptSort
@@ -182,6 +191,20 @@ new SearchRequest<Project>
         "mode": "min",
         "distance_type": "arc",
         "unit": "cm"
+      }
+    },
+    {
+      "_geo_distance": {
+        "locationPoint": [
+          {
+            "lat": 70.0,
+            "lon": -70.0
+          },
+          {
+            "lat": -12.0,
+            "lon": 12.0
+          }
+        ]
       }
     },
     {
