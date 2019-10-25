@@ -28,7 +28,7 @@ jobs:
       testRunner: VSTest
       testResultsFiles: 'src/Tests/Tests/**/*.trx'
       testRunTitle: Windows Unit Tests
-
+      
 - job: WindowsIntegrationTests
   dependsOn: WindowsCanaryTests
   pool:

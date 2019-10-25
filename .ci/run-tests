@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+if [[ -z $ELASTICSEARCH_VERSION ]]; then
+  echo -e "\033[31;1mERROR:\033[0m Required environment variable [ELASTICSEARCH_VERSION] not set\033[0m"
+  exit 1
+fi
+set -euxo pipefail
+
+TEST_SUITE=${TEST_SUITE-oss}
+DOTNET_VERSION=${DOTNET_VERSION-3.0.100}
+NODE_NAME=es1
+
+repo=$(pwd)
+elasticsearch_image=elasticsearch
+elasticsearch_url=https://elastic:changeme@${NODE_NAME}:9200
+if [[ $TEST_SUITE != "xpack" ]]; then
+  elasticsearch_image=elasticsearch-${TEST_SUITE}
+  elasticsearch_url=http://${NODE_NAME}:9200
+fi
+
+function cleanup {
+  status=$?
+  set +x
+  ELASTICSEARCH_VERSION=${elasticsearch_image}:${ELASTICSEARCH_VERSION} \
+    NODE_NAME=${NODE_NAME} \
+    NETWORK_NAME=elasticsearch \
+    CLEANUP=true \
+    bash ./.ci/run-elasticsearch.sh
+  # Report status and exit
+  if [[ "$status" == "0" ]]; then
+    echo -e "\n\033[32;1mSUCCESS run-tests\033[0m"
+    exit 0
+  else
+    echo -e "\n\033[31;1mFAILURE during run-tests\033[0m"
+    exit ${status}
+  fi
+}
+trap cleanup EXIT
+
+echo -e "\033[1m>>>>> Start [$ELASTICSEARCH_VERSION container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+
+ELASTICSEARCH_VERSION=${elasticsearch_image}:${ELASTICSEARCH_VERSION} \
+  NODE_NAME=${NODE_NAME} \
+  NETWORK_NAME=elasticsearch \
+  DETACH=true \
+  bash ./.ci/run-elasticsearch.sh
+
+echo -e "\033[1m>>>>> Build [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+
+docker build --file .ci/DockerFile --tag elastic/elasticsearch-net .
+
+echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+
+mkdir -p build/output
+
+docker run \
+  --network=elasticsearch \
+  --env "DOTNET_VERSION" \
+  --name test-runner \
+  --volume ${repo}/build/output:/sln/build/output \
+  --rm \
+  elastic/elasticsearch-net \
+  ./build.sh rest-spec-tests -f create -e ${elasticsearch_url} -o /sln/build/output/rest-spec-junit.xml

@@ -38,7 +38,8 @@ module Paths =
             | _ -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
         | PrivateProject p ->
             match p with
-            | Tests -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
+            | Tests -> sprintf "%s/Tests/%s/%s.csproj" SourceFolder project.Name project.Name
+            | RestSpecTestRunner -> sprintf "%s/Tests/%s/%s.csproj" SourceFolder project.Name project.Name
             | DocGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
             | ApiGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
 

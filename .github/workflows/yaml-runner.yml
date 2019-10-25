@@ -1,0 +1,47 @@
+name: Yaml integration tests
+
+on:
+  push:
+    branches:
+    - feature/master/yaml-test-runner-disabled
+  pull_request:
+    branches:
+    - feature/master/yaml-test-runner-disabled
+
+jobs:
+  yaml-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.0.0-SNAPSHOT
+        env:
+          node.name: es1
+          cluster.name: elasticsearch-gh-actions
+          discovery.type: single-node
+          #cluster.initial_master_nodes: es1
+          #discovery.seed_hosts: es1
+          cluster.routing.allocation.disk.threshold_enabled: false
+          bootstrap.memory_lock: true
+          node.attr.testattr: test
+          #path.repo: tmp
+          repositories.url.allowed_urls: http://snapshot.test
+          #ES_JAVA_OPTS: Xms1g -Xmx1g
+        ports:
+        - 9200:9200
+        options: -h es1 --health-cmd="curl -fsSL http://localhost:9200/_cat/health?h=status" --health-interval=5s --health-retries=12 --health-timeout=5s --ulimit nofile=65536:65536 --ulimit memlock=-1:-1 
+        
+    steps:
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.0.100'
+    - run: mkdir -p build/output
+    - run: dotnet run -- -o ../../../build/output/junit-yaml-integration.xml -f create -e http://localhost:${{ job.services.elasticsearch.ports[9200] }} 
+      working-directory: ./src/Tests/Tests.YamlRunner
+      env:
+        DOTNET_ROOT: /opt/hostedtoolcache/dncs/3.0.100/x64
+    - uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: junit-yaml-integration.xml
+        path: build/output/junit-yaml-integration.xml

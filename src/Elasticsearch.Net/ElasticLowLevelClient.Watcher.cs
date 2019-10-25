@@ -51,6 +51,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.ack_watch", "watch_id")]
 		public Task<TResponse> AcknowledgeAsync<TResponse>(string watchId, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_ack"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_ack/{action_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
@@ -63,6 +64,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<param name = "watchId">Watch ID</param>
 		///<param name = "actionId">A comma-separated list of the action ids to be acked</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.ack_watch", "watch_id, action_id")]
 		public Task<TResponse> AcknowledgeAsync<TResponse>(string watchId, string actionId, AcknowledgeWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_ack/{actionId:actionId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
@@ -73,6 +75,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>PUT on /_watcher/watch/{watch_id}/_activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
 		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.activate_watch", "watch_id")]
 		public Task<TResponse> ActivateAsync<TResponse>(string watchId, ActivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_activate"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{watch_id}/_deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
@@ -83,6 +86,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>PUT on /_watcher/watch/{watch_id}/_deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
 		///<param name = "watchId">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.deactivate_watch", "watch_id")]
 		public Task<TResponse> DeactivateAsync<TResponse>(string watchId, DeactivateWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{watchId:watchId}/_deactivate"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
@@ -93,6 +97,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>DELETE on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.delete_watch", "id")]
 		public Task<TResponse> DeleteAsync<TResponse>(string id, DeleteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_watcher/watch/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{id}/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
@@ -105,6 +110,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<param name = "id">Watch ID</param>
 		///<param name = "body">Execution control</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.execute_watch", "id, body")]
 		public Task<TResponse> ExecuteAsync<TResponse>(string id, PostData body, ExecuteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{id:id}/_execute"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
@@ -115,6 +121,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>PUT on /_watcher/watch/_execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 		///<param name = "body">Execution control</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.execute_watch", "body")]
 		public Task<TResponse> ExecuteAsync<TResponse>(PostData body, ExecuteWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, "_watcher/watch/_execute", ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
@@ -125,6 +132,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>GET on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
 		///<param name = "id">Watch ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.get_watch", "id")]
 		public Task<TResponse> GetAsync<TResponse>(string id, GetWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_watcher/watch/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_watcher/watch/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
@@ -137,6 +145,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<param name = "id">Watch ID</param>
 		///<param name = "body">The watch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.put_watch", "id, body")]
 		public Task<TResponse> PutAsync<TResponse>(string id, PostData body, PutWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{id:id}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_watcher/_start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
@@ -145,6 +154,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_watcher/_start", null, RequestParams(requestParameters));
 		///<summary>POST on /_watcher/_start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.start", "")]
 		public Task<TResponse> StartAsync<TResponse>(StartWatcherRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_watcher/_start", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_watcher/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
@@ -153,6 +163,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_watcher/stats", null, RequestParams(requestParameters));
 		///<summary>GET on /_watcher/stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.stats", "")]
 		public Task<TResponse> StatsAsync<TResponse>(WatcherStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_watcher/stats", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_watcher/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
@@ -163,6 +174,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		///<summary>GET on /_watcher/stats/{metric} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 		///<param name = "metric">Controls what additional stat metrics should be include in the response</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.stats", "metric")]
 		public Task<TResponse> StatsAsync<TResponse>(string metric, WatcherStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_watcher/stats/{metric:metric}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_watcher/_stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
@@ -171,6 +183,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_watcher/_stop", null, RequestParams(requestParameters));
 		///<summary>POST on /_watcher/_stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.stop", "")]
 		public Task<TResponse> StopAsync<TResponse>(StopWatcherRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_watcher/_stop", ctx, null, RequestParams(requestParameters));
 	}

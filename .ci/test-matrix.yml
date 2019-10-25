@@ -1,0 +1,13 @@
+---
+
+ELASTICSEARCH_VERSION:
+  - 8.0.0-SNAPSHOT
+
+TEST_SUITE:
+  - oss
+  - xpack
+  - 
+DOTNET_VERSION:
+    - 3.0.100
+
+exclude: ~

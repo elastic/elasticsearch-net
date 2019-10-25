@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net.Extensions 
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class NameValueCollectionExtensions
 	{
@@ -21,8 +21,12 @@ namespace Elasticsearch.Net.Extensions
 
 				var key = nv.AllKeys[i];
 				builder.Append(Uri.EscapeDataString(key));
-				builder.Append("=");
-				builder.Append(Uri.EscapeDataString(nv[key]));
+				var value = nv[key];
+				if (!value.IsNullOrEmpty())
+				{
+					builder.Append("=");
+					builder.Append(Uri.EscapeDataString(nv[key]));
+				}
 			}
 
 			return builder.ToString();
@@ -43,7 +47,7 @@ namespace Elasticsearch.Net.Extensions
 					continue;
 				}
 				var resolved = provider.CreateString(kv.Value);
-				if (!resolved.IsNullOrEmpty())
+				if (resolved != null)
 					queryString[kv.Key] = resolved;
 				else
 					queryString.Remove(kv.Key);
