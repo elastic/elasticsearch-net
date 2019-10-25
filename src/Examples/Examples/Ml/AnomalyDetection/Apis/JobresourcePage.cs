@@ -6,7 +6,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class JobresourcePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line361()
+		public void Line374()
 		{
 			// tag::07daeea2d56f43ae1229860111dae8af[]
 			var response0 = new SearchResponse<object>();

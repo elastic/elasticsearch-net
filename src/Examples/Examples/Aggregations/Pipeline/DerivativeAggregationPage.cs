@@ -39,7 +39,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line132()
+		public void Line131()
 		{
 			// tag::d683ed8c4a72f82200bbad0c3921e427[]
 			var response0 = new SearchResponse<object>();
@@ -77,7 +77,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line232()
+		public void Line230()
 		{
 			// tag::8553b0c396e9de7d841fcc6373e017e2[]
 			var response0 = new SearchResponse<object>();

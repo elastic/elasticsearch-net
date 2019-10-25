@@ -31,7 +31,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line102()
+		public void Line101()
 		{
 			// tag::4c15a4b054c7d0aaaa17deaff853bb28[]
 			var response0 = new SearchResponse<object>();
@@ -64,7 +64,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line153()
+		public void Line151()
 		{
 			// tag::e88e8c78ed50936c8b7436c90b988ddf[]
 			var response0 = new SearchResponse<object>();
@@ -89,7 +89,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line186()
+		public void Line183()
 		{
 			// tag::cebfe0fed62091eb38b6348c89643f89[]
 			var response0 = new SearchResponse<object>();

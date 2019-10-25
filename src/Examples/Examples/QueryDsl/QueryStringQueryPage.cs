@@ -6,60 +6,26 @@ namespace Examples.QueryDsl
 {
 	public class QueryStringQueryPage : ExampleBase
 	{
-		[U]
-		public void Line11()
+		[U(Skip = "Example not implemented")]
+		public void Line42()
 		{
-			// tag::81f09836772b03f6e7e8e7986409d67e[]
-			var searchResponse = client.Search<object>(s => s
-				.Index("")
-				.Query(q => q
-					.QueryString(qs => qs
-						.DefaultField("content")
-						.Query("this AND that OR thus")
-					)
-				)
-			);
-			// end::81f09836772b03f6e7e8e7986409d67e[]
+			// tag::ad6ea0c1e46712aa1fd6d3bfa0ec979e[]
+			var response0 = new SearchResponse<object>();
+			// end::ad6ea0c1e46712aa1fd6d3bfa0ec979e[]
 
-			searchResponse.MatchesExample(@"GET /_search
+			response0.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""query_string"" : {
-			            ""default_field"" : ""content"",
-			            ""query"" : ""this AND that OR thus""
+			            ""query"" : ""(new york city) OR (big apple)"",
+			            ""default_field"" : ""content""
 			        }
 			    }
 			}");
 		}
 
 		[U]
-		public void Line28()
-		{
-			// tag::fe1dd67108b04e07d0832b539d4e0d99[]
-			var searchResponse = client.Search<object>(s => s
-				.Index("")
-				.Query(q => q
-					.QueryString(qs => qs
-						.DefaultField("content")
-						.Query("(new york city) OR (big apple)")
-					)
-				)
-			);
-			// end::fe1dd67108b04e07d0832b539d4e0d99[]
-
-			searchResponse.MatchesExample(@"GET /_search
-			{
-			    ""query"": {
-			        ""query_string"" : {
-			            ""default_field"" : ""content"",
-			            ""query"" : ""(new york city) OR (big apple)"" \<1>
-			        }
-			    }
-			}");
-		}
-
-		[U]
-		public void Line168()
+		public void Line255()
 		{
 			// tag::f2d68493abd3ca430bd03a7f7f8d18f9[]
 			var searchResponse = client.Search<object>(s => s
@@ -88,7 +54,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line185()
+		public void Line271()
 		{
 			// tag::e17e8852ec3f31781e1364f4dffeb6d0[]
 			var searchResponse = client.Search<object>(s => s
@@ -112,7 +78,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line202()
+		public void Line287()
 		{
 			// tag::a2a25aad1fea9a541b52ac613c78fb64[]
 			var searchResponse = client.Search<object>(s => s
@@ -141,15 +107,16 @@ namespace Examples.QueryDsl
 			    }
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
-				body["query"]["query_string"]["tie_breaker"] = 0d;
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["query_string"]["tie_breaker"] = 0d;
+				});
 				return e;
 			});
 		}
 
 		[U]
-		public void Line222()
+		public void Line306()
 		{
 			// tag::28aad2c5942bfb221c2bf1bbdc01658e[]
 			var searchResponse = client.Search<object>(s => s
@@ -177,7 +144,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line240()
+		public void Line323()
 		{
 			// tag::db6cba451ba562abe953d09ad80cc15c[]
 			var searchResponse = client.Search<object>(s => s
@@ -201,7 +168,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line275()
+		public void Line342()
 		{
 			// tag::58b5003c0a53a39bf509aa3797aad471[]
 			var searchResponse = client.Search<object>(s => s
@@ -230,7 +197,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line300()
+		public void Line408()
 		{
 			// tag::f32f0c19b42de3b87dd764fe4ca17e7c[]
 			var searchResponse = client.Search<object>(s => s
@@ -258,7 +225,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line329()
+		public void Line436()
 		{
 			// tag::60ee33f3acfdd0fe6f288ac77312c780[]
 			var searchResponse = client.Search<object>(s => s
@@ -290,7 +257,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line356()
+		public void Line462()
 		{
 			// tag::be1bd47393646ac6bbee177d1cdb7738[]
 			var searchResponse = client.Search<object>(s => s
@@ -324,7 +291,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line381()
+		public void Line486()
 		{
 			// tag::fdd38f0d248385a444c777e7acd97846[]
 			var searchResponse = client.Search<object>(s => s
@@ -358,7 +325,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line411()
+		public void Line518()
 		{
 			// tag::6f21a878fee3b43c5332b81aaddbeac7[]
 			var searchResponse = client.Search<object>(s => s

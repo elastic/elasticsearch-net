@@ -40,46 +40,23 @@ namespace DocGenerator
 				.Split(".")
 				.Take(2));
 
-			var process = new Process
-			{
-				StartInfo = new ProcessStartInfo
-				{
-					UseShellExecute = false,
-					RedirectStandardOutput = true,
-					FileName = "git.exe",
-					CreateNoWindow = true,
-					WorkingDirectory = Environment.CurrentDirectory,
-					Arguments = "rev-parse --abbrev-ref HEAD"
-				}
-			};
-
-			try
-			{
-				process.Start();
-				BranchName = process.StandardOutput.ReadToEnd().Trim();
-				process.WaitForExit();
-			}
-			catch (Exception)
-			{
-				BranchName = "master";
-			}
-			finally
-			{
-				process.Dispose();
-			}
+			BranchName =
+				jObject.ContainsKey("doc_branch")
+					? jObject["doc_branch"].Value<string>()
+					: "master";
 		}
 
 		/// <summary>
 		/// The branch name to include in generated docs to link back to the original source file
 		/// </summary>
-		public static string BranchName { get; set; }
+		public static string BranchName { get; private set; }
 
 		public static string BuildOutputPath { get; }
 
 		/// <summary>
 		/// The Elasticsearch documentation version to link to
 		/// </summary>
-		public static string DocVersion { get; set; }
+		public static string DocVersion { get; private set; }
 
 		public static string InputDirPath { get; }
 

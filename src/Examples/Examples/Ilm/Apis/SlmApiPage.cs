@@ -6,27 +6,32 @@ namespace Examples.Ilm.Apis
 	public class SlmApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line52()
+		public void Line185()
 		{
-			// tag::f0f1a2ad8f815d8dfea122420b295a35[]
+			// tag::aa7cf5df36b867aee5e3314ac4b4fa68[]
 			var response0 = new SearchResponse<object>();
-			// end::f0f1a2ad8f815d8dfea122420b295a35[]
+			// end::aa7cf5df36b867aee5e3314ac4b4fa68[]
 
 			response0.MatchesExample(@"PUT /_slm/policy/daily-snapshots
 			{
-			  ""schedule"": ""0 30 1 * * ?"", \<1>
-			  ""name"": ""<daily-snap-{now/d}>"", \<2>
-			  ""repository"": ""my_repository"", \<3>
-			  ""config"": { \<4>
-			    ""indices"": [""data-*"", ""important""], \<5>
+			  ""schedule"": ""0 30 1 * * ?"", <1>
+			  ""name"": ""<daily-snap-{now/d}>"", <2>
+			  ""repository"": ""my_repository"", <3>
+			  ""config"": { <4>
+			    ""indices"": [""data-*"", ""important""], <5>
 			    ""ignore_unavailable"": false,
 			    ""include_global_state"": false
+			  },
+			  ""retention"": { <6>
+			    ""expire_after"": ""30d"", <7>
+			    ""min_count"": 5, <8>
+			    ""max_count"": 50 <9>
 			  }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line116()
+		public void Line261()
 		{
 			// tag::b4f9fe8808cb27a210b162e7aaba261d[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +41,7 @@ namespace Examples.Ilm.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line154()
+		public void Line312()
 		{
 			// tag::bc2dd9e5ed37f98016ecf53f968d2211[]
 			var response0 = new SearchResponse<object>();
@@ -46,21 +51,21 @@ namespace Examples.Ilm.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line178()
+		public void Line357()
 		{
-			// tag::c2837666ce06acefbdd575bcc727b370[]
+			// tag::0ab002c6618af75e1041a23c692327ad[]
 			var response0 = new SearchResponse<object>();
-			// end::c2837666ce06acefbdd575bcc727b370[]
+			// end::0ab002c6618af75e1041a23c692327ad[]
 
-			response0.MatchesExample(@"PUT /_slm/policy/daily-snapshots/_execute");
+			response0.MatchesExample(@"POST /_slm/policy/daily-snapshots/_execute");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line247()
+		public void Line437()
 		{
-			// tag::b9e0a99932e6f9ee620f5ca7f8588163[]
+			// tag::df620765f4ee59012ebb9f7a474d9e5d[]
 			var response0 = new SearchResponse<object>();
-			// end::b9e0a99932e6f9ee620f5ca7f8588163[]
+			// end::df620765f4ee59012ebb9f7a474d9e5d[]
 
 			response0.MatchesExample(@"PUT /_slm/policy/daily-snapshots
 			{
@@ -71,18 +76,73 @@ namespace Examples.Ilm.Apis
 			    ""indices"": [""data-*"", ""important""],
 			    ""ignore_unavailable"": true,
 			    ""include_global_state"": false
+			  },
+			  ""retention"": {
+			    ""expire_after"": ""30d"",
+			    ""min_count"": 5,
+			    ""max_count"": 50
 			  }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line346()
+		public void Line554()
+		{
+			// tag::55e8ddf643726dec51531ada0bec7143[]
+			var response0 = new SearchResponse<object>();
+			// end::55e8ddf643726dec51531ada0bec7143[]
+
+			response0.MatchesExample(@"GET /_slm/stats");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line614()
 		{
 			// tag::1a1f3421717ff744ed83232729289bb0[]
 			var response0 = new SearchResponse<object>();
 			// end::1a1f3421717ff744ed83232729289bb0[]
 
 			response0.MatchesExample(@"DELETE /_slm/policy/daily-snapshots");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line649()
+		{
+			// tag::e71d300cd87f09a9527cf45395dd7eb1[]
+			var response0 = new SearchResponse<object>();
+			// end::e71d300cd87f09a9527cf45395dd7eb1[]
+
+			response0.MatchesExample(@"POST /_slm/_execute_retention");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line708()
+		{
+			// tag::41195ef13af0465cdee1ae18f6c00fde[]
+			var response0 = new SearchResponse<object>();
+			// end::41195ef13af0465cdee1ae18f6c00fde[]
+
+			response0.MatchesExample(@"POST _slm/stop");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line759()
+		{
+			// tag::371962cf63e65c10026177c6a1bad0b6[]
+			var response0 = new SearchResponse<object>();
+			// end::371962cf63e65c10026177c6a1bad0b6[]
+
+			response0.MatchesExample(@"POST _slm/start");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line811()
+		{
+			// tag::cde4104a29dfe942d55863cdd8718627[]
+			var response0 = new SearchResponse<object>();
+			// end::cde4104a29dfe942d55863cdd8718627[]
+
+			response0.MatchesExample(@"GET _slm/status");
 		}
 	}
 }

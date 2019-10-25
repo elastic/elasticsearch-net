@@ -42,6 +42,7 @@ namespace Nest
 		public FieldCapabilities FloatRange => BackingDictionary.TryGetValue("float_range", out var f) ? f : null;
 		public FieldCapabilities GeoPoint => BackingDictionary.TryGetValue("geo_point", out var f) ? f : null;
 		public FieldCapabilities GeoShape => BackingDictionary.TryGetValue("geo_shape", out var f) ? f : null;
+		public FieldCapabilities Shape => BackingDictionary.TryGetValue("shape", out var f) ? f : null;
 		public FieldCapabilities HalfFloat => BackingDictionary.TryGetValue("half_float", out var f) ? f : null;
 		public FieldCapabilities Id => BackingDictionary.TryGetValue("_id", out var f) ? f : null;
 		public FieldCapabilities Index => BackingDictionary.TryGetValue("_index", out var f) ? f : null;

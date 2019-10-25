@@ -6,7 +6,26 @@ namespace Examples.Indices
 	public class StatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line12()
+		public void Line10()
+		{
+			// tag::fce5d68a9ac1b34b59d5308b65688e59[]
+			var response0 = new SearchResponse<object>();
+			// end::fce5d68a9ac1b34b59d5308b65688e59[]
+
+			response0.MatchesExample(@"GET /twitter/_stats");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line97()
+		{
+			// tag::e0b2f56c34e33ff52f8f9658be2f7ca1[]
+			var response0 = new SearchResponse<object>();
+			// end::e0b2f56c34e33ff52f8f9658be2f7ca1[]
+
+			response0.MatchesExample(@"GET /index1,index2/_stats");
+		}
+		[U(Skip = "Example not implemented")]
+		public void Line107()
 		{
 			// tag::78c4035e4fbf6851140660f6ed2a1fa5[]
 			var response0 = new SearchResponse<object>();
@@ -16,37 +35,23 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line20()
+		public void Line121()
 		{
-			// tag::e0b2f56c34e33ff52f8f9658be2f7ca1[]
+			// tag::a861a89f52008610e813b9f073951c58[]
 			var response0 = new SearchResponse<object>();
-			// end::e0b2f56c34e33ff52f8f9658be2f7ca1[]
+			// end::a861a89f52008610e813b9f073951c58[]
 
-			response0.MatchesExample(@"GET /index1,index2/_stats");
+			response0.MatchesExample(@"GET /_stats/merge,refresh");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line78()
+		public void Line135()
 		{
-			// tag::45c55ce8b2df147cd68b8f151a36a8d8[]
+			// tag::7a8de5606f283f4ef171b015eef6befa[]
 			var response0 = new SearchResponse<object>();
+			// end::7a8de5606f283f4ef171b015eef6befa[]
 
-			var response1 = new SearchResponse<object>();
-
-			var response2 = new SearchResponse<object>();
-
-			var response3 = new SearchResponse<object>();
-			// end::45c55ce8b2df147cd68b8f151a36a8d8[]
-
-			response0.MatchesExample(@"# Get back stats for merge and refresh only for all indices");
-
-			response1.MatchesExample(@"GET /_stats/merge,refresh
-			# Get back stats for type1 and type2 documents for the my_index index");
-
-			response2.MatchesExample(@"GET /my_index/_stats/indexing?types=type1,type2
-			# Get back just search stats for group1 and group2");
-
-			response3.MatchesExample(@"GET /_stats/search?groups=group1,group2");
+			response0.MatchesExample(@"GET /_stats/search?groups=group1,group2");
 		}
 	}
 }

@@ -18,7 +18,7 @@
 		var enumCsharp = string.Format("[EnumMember(Value = \"{0}\")] {1}{2}", value, enumValue, i.HasValue ? " = 1 << " + i.Value : null);
 		if (GlobalOverrides.ObsoleteEnumMembers.TryGetValue(enumName, out var d) && d.TryGetValue(value, out var obsolete))
 		{
-			return string.Format("[Obsolete(\"{0}\")]\r\n\t\t{1}", obsolete, enumCsharp);
+			return string.Format("[Obsolete(\"{0}\")]{2}\t\t{1}", obsolete, enumCsharp, Environment.NewLine);
 		}
 		return enumCsharp;
 	}
@@ -62,7 +62,7 @@ namespace Elasticsearch.Net
 	<text>
 	@(isFlag ? "[Flags, StringEnum]" : "[StringEnum]")public enum @e.Name
 	{
-		@Raw(string.Join(",\r\n\t\t", e.Options.OrderBy(s => s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(e.Name, s, isFlag ? (int?)i : null))))
+		@Raw(string.Join(","+ Environment.NewLine + "\t\t", e.Options.OrderBy(s => s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(e.Name, s, isFlag ? (int?)i : null))))
 	}</text>
 }
 
@@ -124,7 +124,7 @@ namespace Elasticsearch.Net
 		{
 			<text>	switch (enumValue)
 			{
-				@Raw(string.Join("\r\n\t\t\t\t", e.Options.Select(o => CreateCase(e.Name, o))))
+				@Raw(string.Join(Environment.NewLine + "\t\t\t\t", e.Options.Select(o => CreateCase(e.Name, o))))
 			}
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum '@(e.Name)'");
 		}</text>

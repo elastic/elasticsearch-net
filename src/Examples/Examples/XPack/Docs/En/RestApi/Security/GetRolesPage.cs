@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class GetRolesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line55()
+		public void Line56()
 		{
 			// tag::115529722ba30b0b0d51a7ff87e59198[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line90()
 		{
 			// tag::128283698535116931dca9d16a16dca2[]
 			var response0 = new SearchResponse<object>();

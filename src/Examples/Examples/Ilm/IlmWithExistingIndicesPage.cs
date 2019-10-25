@@ -35,7 +35,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line51()
+		public void Line49()
 		{
 			// tag::8502a9281f5393a7160e4e46988da672[]
 			var response0 = new SearchResponse<object>();
@@ -49,7 +49,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line62()
+		public void Line59()
 		{
 			// tag::7d51f0436e87dec4274133856866b07d[]
 			var response0 = new SearchResponse<object>();
@@ -63,7 +63,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line121()
+		public void Line118()
 		{
 			// tag::75097f73665235b20df09739c820ad35[]
 			var response0 = new SearchResponse<object>();
@@ -106,7 +106,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line165()
+		public void Line161()
 		{
 			// tag::3feab5c602192b8dc58435654b17d3fe[]
 			var response0 = new SearchResponse<object>();
@@ -142,7 +142,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line208()
+		public void Line203()
 		{
 			// tag::ec195297eb804cba1cb19c9926773059[]
 			var response0 = new SearchResponse<object>();
@@ -159,7 +159,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line251()
+		public void Line245()
 		{
 			// tag::39bbb602c95c606725eefea252437514[]
 			var response0 = new SearchResponse<object>();
@@ -183,7 +183,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line275()
+		public void Line268()
 		{
 			// tag::bce0d86353e212cee466ccbc90bdc6e7[]
 			var response0 = new SearchResponse<object>();
@@ -218,7 +218,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line314()
+		public void Line307()
 		{
 			// tag::89115f8d40d9a13b0b01dc7c33ffd1cc[]
 			var response0 = new SearchResponse<object>();
@@ -235,7 +235,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line344()
+		public void Line336()
 		{
 			// tag::5df1ed33b5fcf3b9d85c20d100780d43[]
 			var response0 = new SearchResponse<object>();
@@ -250,7 +250,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line371()
+		public void Line363()
 		{
 			// tag::41f211cc838f1bee7eac264784f905e2[]
 			var response0 = new SearchResponse<object>();
@@ -270,7 +270,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line401()
+		public void Line393()
 		{
 			// tag::227e19aecb349f31e74898384322ae01[]
 			var response0 = new SearchResponse<object>();

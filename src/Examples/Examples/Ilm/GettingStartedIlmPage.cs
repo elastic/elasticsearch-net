@@ -36,7 +36,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line80()
+		public void Line79()
 		{
 			// tag::e3d7b19f993382750719cdfaad2fdd90[]
 			var response0 = new SearchResponse<object>();
@@ -55,7 +55,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line113()
+		public void Line112()
 		{
 			// tag::55ee835d7c28e933ad8fcb9e45af2bf2[]
 			var response0 = new SearchResponse<object>();
@@ -72,53 +72,13 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line157()
+		public void Line155()
 		{
 			// tag::a1dbaff15cf8166f74c443ca58258d7e[]
 			var response0 = new SearchResponse<object>();
 			// end::a1dbaff15cf8166f74c443ca58258d7e[]
 
 			response0.MatchesExample(@"GET datastream-*/_ilm/explain");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line168()
-		{
-			// tag::c0f09a2304109757010e08c8af1f4a5a[]
-			var response0 = new SearchResponse<object>();
-			// end::c0f09a2304109757010e08c8af1f4a5a[]
-
-			response0.MatchesExample(@"{
-			  ""indices"": {
-			    ""datastream-000001"": {
-			      ""index"": ""datastream-000001"",
-			      ""managed"": true,                           \<1>
-			      ""policy"": ""datastream_policy"",             \<2>
-			      ""lifecycle_date_millis"": 1538475653281,
-			      ""age"": ""30s"",                              \<3>
-			      ""phase"": ""hot"",                            \<4>
-			      ""phase_time_millis"": 1538475653317,
-			      ""action"": ""rollover"",                      \<5>
-			      ""action_time_millis"": 1538475653317,
-			      ""step"": ""attempt-rollover"",                \<6>
-			      ""step_time_millis"": 1538475653317,
-			      ""phase_execution"": {
-			        ""policy"": ""datastream_policy"",
-			        ""phase_definition"": {                    \<7>
-			          ""min_age"": ""0ms"",
-			          ""actions"": {
-			            ""rollover"": {
-			              ""max_size"": ""50gb"",
-			              ""max_age"": ""30d""
-			            }
-			          }
-			        },
-			        ""version"": 1,                            \<8>
-			        ""modified_date_in_millis"": 1539609701576
-			      }
-			    }
-			  }
-			}");
 		}
 	}
 }

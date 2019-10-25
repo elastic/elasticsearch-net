@@ -16,7 +16,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line84()
+		public void Line83()
 		{
 			// tag::0652fc9f77639fce67a87dc2e33cef51[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line108()
+		public void Line106()
 		{
 			// tag::9ff10591660890ba9d00eb14168c3b67[]
 			var response0 = new SearchResponse<object>();

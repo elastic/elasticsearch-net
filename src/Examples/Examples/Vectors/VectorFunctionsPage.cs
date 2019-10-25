@@ -54,7 +54,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line62()
+		public void Line61()
 		{
 			// tag::e077e86607f272568cff9cd950c21bb6[]
 			var response0 = new SearchResponse<object>();
@@ -85,7 +85,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line98()
+		public void Line97()
 		{
 			// tag::d6b15235dd3238e8b94caa42d0c0c32e[]
 			var response0 = new SearchResponse<object>();
@@ -116,7 +116,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line128()
+		public void Line126()
 		{
 			// tag::3ab88f9b42d28940835c6a6cd91f50fd[]
 			var response0 = new SearchResponse<object>();
@@ -150,7 +150,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line163()
+		public void Line160()
 		{
 			// tag::a7ac82b206e859c187678c62681ba380[]
 			var response0 = new SearchResponse<object>();
@@ -184,7 +184,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line197()
+		public void Line193()
 		{
 			// tag::36fc6170ce7ff17b719f988ae03a50c9[]
 			var response0 = new SearchResponse<object>();
@@ -215,7 +215,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line236()
+		public void Line231()
 		{
 			// tag::ab123056145692c7e7e0d7a95aa7ea72[]
 			var response0 = new SearchResponse<object>();
@@ -246,7 +246,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line267()
+		public void Line261()
 		{
 			// tag::b0e60ffce9edecba49a8b0cce869a85d[]
 			var response0 = new SearchResponse<object>();
@@ -277,7 +277,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line297()
+		public void Line290()
 		{
 			// tag::20a6db9d4b71d551d6864e95d5b93c4f[]
 			var response0 = new SearchResponse<object>();

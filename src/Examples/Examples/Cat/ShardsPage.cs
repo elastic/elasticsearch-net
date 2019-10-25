@@ -6,7 +6,7 @@ namespace Examples.Cat
 	public class ShardsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line11()
+		public void Line286()
 		{
 			// tag::7e126e2751311db60cfcbb22c9c41caa[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		public void Line312()
 		{
 			// tag::e42e92050dd1c20262ce9e38f4b42ba0[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line107()
+		public void Line377()
 		{
 			// tag::25c0e66a433a0cd596e0641b752ff6d7[]
 			var response0 = new SearchResponse<object>();

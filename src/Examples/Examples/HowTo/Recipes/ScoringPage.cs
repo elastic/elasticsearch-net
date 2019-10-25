@@ -6,7 +6,7 @@ namespace Examples.HowTo.Recipes
 	public class ScoringPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line125()
+		public void Line123()
 		{
 			// tag::a0f15dd7fcb07bc8543fe04c2907d4b9[]
 			var response0 = new SearchResponse<object>();
@@ -28,7 +28,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line171()
+		public void Line168()
 		{
 			// tag::0dfa66a019712e413652c5eddd057ba8[]
 			var response0 = new SearchResponse<object>();

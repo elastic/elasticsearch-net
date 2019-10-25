@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class GetRoleMappingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line59()
+		public void Line64()
 		{
 			// tag::8b3a94495127efd9d56b2cd7f3eecdca[]
 			var response0 = new SearchResponse<object>();

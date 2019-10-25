@@ -37,7 +37,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line94()
+		public void Line92()
 		{
 			// tag::573a466d7a3a8e31194666e2ecc1d92a[]
 			var response0 = new SearchResponse<object>();
@@ -70,7 +70,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line147()
+		public void Line143()
 		{
 			// tag::c5681f52305e065ef13c3e0ad5393263[]
 			var response0 = new SearchResponse<object>();
@@ -101,7 +101,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line198()
+		public void Line192()
 		{
 			// tag::0737ebaea33631f001fb3f4226948492[]
 			var response0 = new SearchResponse<object>();

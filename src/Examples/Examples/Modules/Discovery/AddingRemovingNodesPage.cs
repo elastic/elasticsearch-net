@@ -31,7 +31,7 @@ namespace Examples.Modules.Discovery
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line108()
+		public void Line107()
 		{
 			// tag::92f073762634a4b2274f71002494192e[]
 			var response0 = new SearchResponse<object>();
@@ -41,7 +41,7 @@ namespace Examples.Modules.Discovery
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line127()
+		public void Line125()
 		{
 			// tag::ead4d875877d618594d0cdbdd9b7998b[]
 			var response0 = new SearchResponse<object>();

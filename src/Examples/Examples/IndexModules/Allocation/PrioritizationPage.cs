@@ -38,7 +38,7 @@ namespace Examples.IndexModules.Allocation
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line49()
+		public void Line48()
 		{
 			// tag::a425fcab60f603504becee7d001f0a4b[]
 			var response0 = new SearchResponse<object>();

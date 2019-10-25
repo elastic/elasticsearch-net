@@ -24,7 +24,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line59()
+		public void Line58()
 		{
 			// tag::b41dce56b0e640d32b1cf452f87cec17[]
 			var response0 = new SearchResponse<object>();
@@ -38,7 +38,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		public void Line90()
 		{
 			// tag::d5dcddc6398b473b6ad9bce5c6adf986[]
 			var response0 = new SearchResponse<object>();
@@ -53,7 +53,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line146()
+		public void Line143()
 		{
 			// tag::72beebe779a258c225dee7b023e60c52[]
 			var response0 = new SearchResponse<object>();
@@ -63,7 +63,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line160()
+		public void Line156()
 		{
 			// tag::b0d64d0a554549e5b2808002a0725493[]
 			var response0 = new SearchResponse<object>();
@@ -76,7 +76,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line172()
+		public void Line167()
 		{
 			// tag::3a700f836d8d5da1b656a876554028aa[]
 			var response0 = new SearchResponse<object>();
@@ -92,7 +92,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line187()
+		public void Line181()
 		{
 			// tag::c2c21e2824fbf6b7198ede30419da82b[]
 			var response0 = new SearchResponse<object>();
@@ -102,7 +102,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line196()
+		public void Line189()
 		{
 			// tag::b94cee0f74f57742b3948f9b784dfdd4[]
 			var response0 = new SearchResponse<object>();
@@ -112,7 +112,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line209()
+		public void Line201()
 		{
 			// tag::1027ab1ca767ac1428176ef4f84bfbcf[]
 			var response0 = new SearchResponse<object>();
@@ -148,7 +148,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line272()
+		public void Line263()
 		{
 			// tag::fdcaba9547180439ff4b6275034a5170[]
 			var response0 = new SearchResponse<object>();

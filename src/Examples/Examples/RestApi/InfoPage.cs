@@ -16,7 +16,7 @@ namespace Examples.RestApi
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line145()
+		public void Line157()
 		{
 			// tag::b11a0675e49df0709be693297ca73a2c[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.RestApi
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line153()
+		public void Line164()
 		{
 			// tag::4ed946065faa92f9950f04e402676a97[]
 			var response0 = new SearchResponse<object>();

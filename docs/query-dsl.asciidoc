@@ -244,9 +244,9 @@ which support lat/lon pairs, and {ref_current}/geo-shape.html[geo_shape] fields,
 
 * <<geo-distance-query-usage,Geo Distance Query Usage>>
 
-* <<geo-polygon-query-usage,Geo Polygon Query Usage>>
-
 * <<geo-shape-query-usage,Geo Shape Query Usage>>
+
+* <<geo-polygon-query-usage,Geo Polygon Query Usage>>
 
 See the Elasticsearch documentation on {ref_current}/geo-queries.html[Geo queries] for more details.
 
@@ -256,9 +256,9 @@ include::query-dsl/geo/bounding-box/geo-bounding-box-query-usage.asciidoc[]
 
 include::query-dsl/geo/distance/geo-distance-query-usage.asciidoc[]
 
-include::query-dsl/geo/polygon/geo-polygon-query-usage.asciidoc[]
+include::query-dsl/geo/geo-shape/geo-shape-query-usage.asciidoc[]
 
-include::query-dsl/geo/shape/geo-shape-query-usage.asciidoc[]
+include::query-dsl/geo/polygon/geo-polygon-query-usage.asciidoc[]
 
 [[specialized-queries]]
 == Specialized queries
@@ -275,11 +275,15 @@ Specialized types of queries that do not fit into other groups
 
 * <<percolate-query-usage,Percolate Query Usage>>
 
+* <<pinned-query-usage,Pinned Query Usage>>
+
 * <<rank-feature-query-usage,Rank Feature Query Usage>>
 
 * <<script-query-usage,Script Query Usage>>
 
 * <<script-score-query-usage,Script Score Query Usage>>
+
+* <<shape-query-usage,Shape Query Usage>>
 
 See the Elasticsearch documentation on {ref_current}/specialized-queries.html[Specialized queries] for more details.
 
@@ -293,11 +297,15 @@ include::query-dsl/specialized/more-like-this/more-like-this-query-usage.asciido
 
 include::query-dsl/specialized/percolate/percolate-query-usage.asciidoc[]
 
+include::query-dsl/specialized/pinned/pinned-query-usage.asciidoc[]
+
 include::query-dsl/specialized/rank-feature/rank-feature-query-usage.asciidoc[]
 
 include::query-dsl/specialized/script/script-query-usage.asciidoc[]
 
 include::query-dsl/specialized/script-score/script-score-query-usage.asciidoc[]
+
+include::query-dsl/specialized/shape/shape-query-usage.asciidoc[]
 
 [[span-queries]]
 == Span queries

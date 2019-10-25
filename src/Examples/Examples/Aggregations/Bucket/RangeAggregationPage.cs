@@ -30,7 +30,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line68()
+		public void Line67()
 		{
 			// tag::d637c754aec195a1df39cafca49cbe7e[]
 			var response0 = new SearchResponse<object>();
@@ -55,7 +55,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line122()
+		public void Line120()
 		{
 			// tag::4d147b4a4dabef9b0a8a13cbe8174e09[]
 			var response0 = new SearchResponse<object>();
@@ -80,7 +80,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line181()
+		public void Line178()
 		{
 			// tag::bdf31f63d0941a4183ceae1cc2342c39[]
 			var response0 = new SearchResponse<object>();
@@ -107,7 +107,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line206()
+		public void Line202()
 		{
 			// tag::4c9c453c92431a05b413bfc0163104b4[]
 			var response0 = new SearchResponse<object>();
@@ -123,7 +123,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line221()
+		public void Line216()
 		{
 			// tag::7a6d758654eecbc3a1a76744b4de0a23[]
 			var response0 = new SearchResponse<object>();
@@ -152,7 +152,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line282()
+		public void Line275()
 		{
 			// tag::022956b81fa70e72b56c66be16d0e982[]
 			var response0 = new SearchResponse<object>();
@@ -182,7 +182,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line313()
+		public void Line305()
 		{
 			// tag::3b52f4f7ea4abfa6db6bf54199b15f53[]
 			var response0 = new SearchResponse<object>();
@@ -211,7 +211,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line395()
+		public void Line386()
 		{
 			// tag::4547c455375eeda5ad9f74b40d4fa61b[]
 			var response0 = new SearchResponse<object>();

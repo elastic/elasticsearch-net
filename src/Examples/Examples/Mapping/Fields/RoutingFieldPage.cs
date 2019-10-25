@@ -23,7 +23,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line34()
+		public void Line33()
 		{
 			// tag::6817609dd2fcb73b9920327c5cf5ec77[]
 			var response0 = new SearchResponse<object>();
@@ -40,7 +40,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line55()
+		public void Line53()
 		{
 			// tag::134bdbfb50c81dd3c487514faabc81d3[]
 			var response0 = new SearchResponse<object>();
@@ -57,7 +57,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line81()
+		public void Line78()
 		{
 			// tag::4f3089b403945e391f03280ae2f360a4[]
 			var response0 = new SearchResponse<object>();

@@ -93,7 +93,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line98()
+		public void Line97()
 		{
 			// tag::bd767ea03171fe71c73f58f16d5da92f[]
 			var response0 = new SearchResponse<object>();
@@ -110,7 +110,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line115()
+		public void Line112()
 		{
 			// tag::b724f547c5d67e95bbc0a9920e47033c[]
 			var response0 = new SearchResponse<object>();
@@ -127,7 +127,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line135()
+		public void Line131()
 		{
 			// tag::f1dc6f69453867ffafe86e998dd464d9[]
 			var response0 = new SearchResponse<object>();
@@ -146,7 +146,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line155()
+		public void Line149()
 		{
 			// tag::acc52da725a996ae696b00d9f818dfde[]
 			var response0 = new SearchResponse<object>();
@@ -168,7 +168,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line176()
+		public void Line169()
 		{
 			// tag::4bba59cf745ac7b996bf90308bc26957[]
 			var response0 = new SearchResponse<object>();

@@ -6,7 +6,7 @@ namespace Examples.Modules.Cluster
 	public class DiskAllocatorPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line56()
+		public void Line55()
 		{
 			// tag::aaaa9a186db96077879ddfcfbd625fdb[]
 			var response0 = new SearchResponse<object>();
@@ -19,7 +19,7 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		public void Line79()
 		{
 			// tag::4fe5a9e99dc9400d67a5a2f6f6752c07[]
 			var response0 = new SearchResponse<object>();

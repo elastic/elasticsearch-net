@@ -14,17 +14,5 @@ namespace Examples.Ilm.Apis
 
 			response0.MatchesExample(@"GET _ilm/status");
 		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line46()
-		{
-			// tag::99e0bec31e49636bc0053ac66bc29352[]
-			var response0 = new SearchResponse<object>();
-			// end::99e0bec31e49636bc0053ac66bc29352[]
-
-			response0.MatchesExample(@"{
-			  ""operation_mode"": ""RUNNING""
-			}");
-		}
 	}
 }

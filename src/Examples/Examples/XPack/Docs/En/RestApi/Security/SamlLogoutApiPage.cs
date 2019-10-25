@@ -1,0 +1,22 @@
+using Elastic.Xunit.XunitPlumbing;
+using Nest;
+
+namespace Examples.XPack.Docs.En.RestApi.Security
+{
+	public class SamlLogoutApiPage : ExampleBase
+	{
+		[U(Skip = "Example not implemented")]
+		public void Line62()
+		{
+			// tag::8d4dda5d988d568f4f4210a6387e026f[]
+			var response0 = new SearchResponse<object>();
+			// end::8d4dda5d988d568f4f4210a6387e026f[]
+
+			response0.MatchesExample(@"POST /_security/saml/logout
+			{
+			  ""token"" : ""46ToAxZVaXVVZTVKOVF5YU04ZFJVUDVSZlV3"",
+			  ""refresh_token"" : ""mJdXLtmvTUSpoLwMvdBt_w""
+			}");
+		}
+	}
+}

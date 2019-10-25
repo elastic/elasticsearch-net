@@ -6,7 +6,7 @@ namespace Examples.Root
 	public class ApiConventionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line96()
+		public void Line74()
 		{
 			// tag::978088f989d45dd09339582e9cbc60e0[]
 			var response0 = new SearchResponse<object>();
@@ -27,7 +27,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line151()
+		public void Line128()
 		{
 			// tag::a34d70d7022eb4ba48909d440c80390f[]
 			var response0 = new SearchResponse<object>();
@@ -48,7 +48,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line239()
+		public void Line215()
 		{
 			// tag::09dbd90c5e22ea4a17b4cf9aa72e08ae[]
 			var response0 = new SearchResponse<object>();
@@ -58,7 +58,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line268()
+		public void Line243()
 		{
 			// tag::1dbb8cf17fbc45c87c7d2f75f15f9778[]
 			var response0 = new SearchResponse<object>();
@@ -68,7 +68,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line293()
+		public void Line266()
 		{
 			// tag::1252fa45847edba5ec2b2f33da70ec5b[]
 			var response0 = new SearchResponse<object>();
@@ -78,7 +78,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line320()
+		public void Line291()
 		{
 			// tag::621665fdbd7fc103c09bfeed28b67b1a[]
 			var response0 = new SearchResponse<object>();
@@ -88,7 +88,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line341()
+		public void Line310()
 		{
 			// tag::1e18a67caf8f06ff2710ec4a8b30f625[]
 			var response0 = new SearchResponse<object>();
@@ -98,9 +98,9 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line370()
+		public void Line337()
 		{
-			// tag::f2adeb0e060827e257551ea69c7d28bd[]
+			// tag::6464124d1677f4552ddddd95a340ca3a[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -108,22 +108,22 @@ namespace Examples.Root
 			var response2 = new SearchResponse<object>();
 
 			var response3 = new SearchResponse<object>();
-			// end::f2adeb0e060827e257551ea69c7d28bd[]
+			// end::6464124d1677f4552ddddd95a340ca3a[]
 
-			response0.MatchesExample(@"POST /library/book?refresh
+			response0.MatchesExample(@"POST /library/_doc?refresh
 			{""title"": ""Book #1"", ""rating"": 200.1}");
 
-			response1.MatchesExample(@"POST /library/book?refresh
+			response1.MatchesExample(@"POST /library/_doc?refresh
 			{""title"": ""Book #2"", ""rating"": 1.7}");
 
-			response2.MatchesExample(@"POST /library/book?refresh
+			response2.MatchesExample(@"POST /library/_doc?refresh
 			{""title"": ""Book #3"", ""rating"": 0.1}");
 
 			response3.MatchesExample(@"GET /_search?filter_path=hits.hits._source&_source=title&sort=rating:desc");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line405()
+		public void Line370()
 		{
 			// tag::b9a153725b28fdd0a5aabd7f17a8c2d7[]
 			var response0 = new SearchResponse<object>();
@@ -133,7 +133,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line436()
+		public void Line400()
 		{
 			// tag::5925c23a173a63bdb30b458248d1df76[]
 			var response0 = new SearchResponse<object>();
@@ -143,7 +143,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line601()
+		public void Line564()
 		{
 			// tag::a6f8636b03cc5f677b7d89e750328612[]
 			var response0 = new SearchResponse<object>();
@@ -153,7 +153,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line635()
+		public void Line596()
 		{
 			// tag::6d1e75312a28a5ba23837abf768f2510[]
 			var response0 = new SearchResponse<object>();

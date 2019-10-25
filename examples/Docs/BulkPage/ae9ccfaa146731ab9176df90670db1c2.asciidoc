@@ -1,0 +1,31 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line11 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/BulkPage.cs#L8-L43.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var bulkResponse = client.Bulk(b => b
+    .Index<object>(i => i
+        .Index("test")
+        .Id("1")
+        .Document(new { field1 = "value1" })
+    )
+    .Delete<object>(d => d
+        .Index("test")
+        .Id("2")
+    )
+    .Create<object>(c => c
+        .Index("test")
+        .Id("3")
+        .Document(new { field1 = "value3" })
+    )
+    .Update<object>(u => u
+        .Index("test")
+        .Id("1")
+        .Doc(new { field2 = "value2" })
+    )
+);
+----

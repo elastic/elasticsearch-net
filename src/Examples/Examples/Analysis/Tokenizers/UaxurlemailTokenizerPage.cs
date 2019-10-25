@@ -20,7 +20,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line94()
+		public void Line92()
 		{
 			// tag::1125986e8e55028ff4c10b5e6c7bbebb[]
 			var response0 = new SearchResponse<object>();

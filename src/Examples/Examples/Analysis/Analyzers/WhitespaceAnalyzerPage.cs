@@ -20,7 +20,7 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line130()
+		public void Line128()
 		{
 			// tag::31aed390c30bd4f42a5c56253695e53f[]
 			var response0 = new SearchResponse<object>();

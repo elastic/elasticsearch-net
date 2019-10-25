@@ -26,7 +26,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		public void Line45()
 		{
 			// tag::2d39331333f64fcc31fa298ac59b161f[]
 			var response0 = new SearchResponse<object>();
@@ -49,7 +49,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line98()
+		public void Line96()
 		{
 			// tag::ea447f43ebd5f72c65de699904474d0d[]
 			var response0 = new SearchResponse<object>();

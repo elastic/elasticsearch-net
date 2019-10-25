@@ -42,7 +42,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		public void Line91()
 		{
 			// tag::4e63a0fd56cc5d59595baa0b0721f971[]
 			var response0 = new SearchResponse<object>();
@@ -62,7 +62,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line145()
+		public void Line143()
 		{
 			// tag::3d1cea1ad861d1ee62e5f34b84371943[]
 			var response0 = new SearchResponse<object>();
@@ -82,7 +82,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line189()
+		public void Line186()
 		{
 			// tag::adcd760ef029f744ab59460818d2342e[]
 			var response0 = new SearchResponse<object>();

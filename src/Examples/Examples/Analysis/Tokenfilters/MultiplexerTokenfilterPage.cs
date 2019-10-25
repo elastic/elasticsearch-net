@@ -34,7 +34,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line59()
+		public void Line58()
 		{
 			// tag::fa9a3ef94470f3d9bd6500b65bf993d1[]
 			var response0 = new SearchResponse<object>();

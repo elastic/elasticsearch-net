@@ -52,6 +52,9 @@ namespace Nest
 		public static QueryContainer GeoShape(Func<GeoShapeQueryDescriptor<T>, IGeoShapeQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoShape(selector);
 
+		public static QueryContainer Shape(Func<ShapeQueryDescriptor<T>, IShapeQuery> selector) =>
+			new QueryContainerDescriptor<T>().Shape(selector);
+
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
 			new QueryContainerDescriptor<T>().HasChild(selector);
 

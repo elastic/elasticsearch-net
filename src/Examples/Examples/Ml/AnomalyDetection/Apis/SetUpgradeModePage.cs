@@ -6,7 +6,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class SetUpgradeModePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line78()
+		public void Line76()
 		{
 			// tag::ae4aa368617637a390074535df86e64b[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line103()
+		public void Line98()
 		{
 			// tag::8e9e7dc5fad2b2b8e74ab4dc225d9c53[]
 			var response0 = new SearchResponse<object>();

@@ -46,7 +46,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line63()
+		public void Line62()
 		{
 			// tag::84edb44c5b74426f448b2baa101092d6[]
 			var response0 = new SearchResponse<object>();
@@ -65,7 +65,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line120()
+		public void Line117()
 		{
 			// tag::1572696b97822d3332be51700e09672f[]
 			var response0 = new SearchResponse<object>();
@@ -86,7 +86,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line187()
+		public void Line182()
 		{
 			// tag::f894f680943a8af8328aab4741e6ab93[]
 			var response0 = new SearchResponse<object>();

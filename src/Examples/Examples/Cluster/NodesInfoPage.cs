@@ -5,22 +5,9 @@ namespace Examples.Cluster
 {
 	public class NodesInfoPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
-		public void Line8()
-		{
-			// tag::baeaa5e7d4388eeb6350bca18d2a7712[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::baeaa5e7d4388eeb6350bca18d2a7712[]
-
-			response0.MatchesExample(@"GET /_nodes");
-
-			response1.MatchesExample(@"GET /_nodes/nodeId1,nodeId2");
-		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line55()
+		public void Line162()
 		{
 			// tag::3c4d7ef8422d2db423a8f23effcddaa1[]
 			var response0 = new SearchResponse<object>();
@@ -66,7 +53,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line125()
+		public void Line189()
 		{
 			// tag::68b64313bf89ec3f2c645da61999dbb4[]
 			var response0 = new SearchResponse<object>();
@@ -76,7 +63,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line206()
+		public void Line260()
 		{
 			// tag::0c464965126cc09e6812716a145991d4[]
 			var response0 = new SearchResponse<object>();

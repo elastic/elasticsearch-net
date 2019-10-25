@@ -51,6 +51,9 @@ namespace Nest
 		[DataMember(Name = "flattened")]
 		public XPackUsage Flattened { get; internal set; }
 
+		[DataMember(Name = "data_science")]
+		public XPackUsage DataScience { get; internal set; }
+
 		[DataMember(Name = "ilm")]
 		public IlmUsage IndexLifecycleManagement { get; internal set; }
 
@@ -75,7 +78,7 @@ namespace Nest
 		public SecurityUsage Security { get; internal set; }
 
 		[DataMember(Name = "vectors")]
-		public XPackUsage Vectors { get; internal set; }
+		public VectorUsage Vectors { get; internal set; }
 
 		[DataMember(Name = "voting_only")]
 		public XPackUsage VotingOnly { get; internal set; }
@@ -88,6 +91,18 @@ namespace Nest
 
 		[DataMember(Name = "enabled")]
 		public bool Enabled { get; internal set; }
+	}
+
+	public class VectorUsage : XPackUsage
+	{
+		[DataMember(Name = "dense_vector_fields_count")]
+		public int DenseVectorFieldsCount { get; internal set; }
+
+		[DataMember(Name = "sparse_vector_fields_count")]
+		public int SparseVectorFieldsCount { get; internal set; }
+
+		[DataMember(Name = "dense_vector_dims_avg_count")]
+		public int DenseVectorDimensionsAverageCount { get; internal set; }
 	}
 
 	public class SecurityUsage : XPackUsage

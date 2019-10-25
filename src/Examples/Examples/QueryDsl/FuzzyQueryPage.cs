@@ -6,37 +6,42 @@ namespace Examples.QueryDsl
 	public class FuzzyQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line19()
+		public void Line29()
 		{
-			// tag::d1e20f8f8c64f8e2cadea9e5c8376504[]
+			// tag::10dd8b5da64f1f6af031706dd50bc9b5[]
 			var response0 = new SearchResponse<object>();
-			// end::d1e20f8f8c64f8e2cadea9e5c8376504[]
+			// end::10dd8b5da64f1f6af031706dd50bc9b5[]
 
 			response0.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
-			       ""fuzzy"" : { ""user"" : ""ki"" }
+			        ""fuzzy"": {
+			            ""user"": {
+			                ""value"": ""ki""
+			            }
+			        }
 			    }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line32()
+		public void Line46()
 		{
-			// tag::f2f4631d427b04207285227d1ca6114d[]
+			// tag::8baebb670ca5624d7920ccac4afdff06[]
 			var response0 = new SearchResponse<object>();
-			// end::f2f4631d427b04207285227d1ca6114d[]
+			// end::8baebb670ca5624d7920ccac4afdff06[]
 
 			response0.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
-			        ""fuzzy"" : {
-			            ""user"" : {
+			        ""fuzzy"": {
+			            ""user"": {
 			                ""value"": ""ki"",
-			                ""boost"": 1.0,
-			                ""fuzziness"": 2,
+			                ""fuzziness"": ""AUTO"",
+			                ""max_expansions"": 50,
 			                ""prefix_length"": 0,
-			                ""max_expansions"": 100
+			                ""transpositions"": true,
+			                ""rewrite"": ""constant_score""
 			            }
 			        }
 			    }

@@ -40,7 +40,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line287()
+		public void Line283()
 		{
 			// tag::98574a419b6be603a0af8f7f22a92d23[]
 			var response0 = new SearchResponse<object>();

@@ -31,7 +31,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		public void Line45()
 		{
 			// tag::528e5f1c345c3769248cc6889e8cf552[]
 			var response0 = new SearchResponse<object>();
@@ -46,7 +46,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line194()
+		public void Line192()
 		{
 			// tag::dfa16b7300d225e013f23625f44c087b[]
 			var response0 = new SearchResponse<object>();
@@ -107,7 +107,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line361()
+		public void Line357()
 		{
 			// tag::5f8fb5513d4f725434db2f517ad4298f[]
 			var response0 = new SearchResponse<object>();
@@ -141,7 +141,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line527()
+		public void Line520()
 		{
 			// tag::553d79817bb1333970e99507c37a159a[]
 			var response0 = new SearchResponse<object>();
@@ -162,7 +162,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line548()
+		public void Line540()
 		{
 			// tag::48de51de87a8ad9fd8b8db1ca25b85c1[]
 			var response0 = new SearchResponse<object>();

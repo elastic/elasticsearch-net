@@ -78,7 +78,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 
 			foreach (var item in projectsPerMonth.Buckets)
 			{
-				var commitsDerivative = item.Derivative("cumulative_commits");
+				var commitsDerivative = item.CumulativeSum("cumulative_commits");
 				commitsDerivative.Should().NotBeNull();
 				commitsDerivative.Value.Should().NotBe(null);
 			}

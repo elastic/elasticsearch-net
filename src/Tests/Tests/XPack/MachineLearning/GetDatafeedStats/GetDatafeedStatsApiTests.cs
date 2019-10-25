@@ -40,7 +40,13 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		{
 			response.ShouldBeValid();
 			response.Count.Should().BeGreaterOrEqualTo(1);
-			response.Datafeeds.First().State.Should().Be(DatafeedState.Stopped);
+			var datafeedStats = response.Datafeeds.First();
+			datafeedStats.State.Should().Be(DatafeedState.Stopped);
+
+			if (Cluster.ClusterConfiguration.Version >= "7.4.0")
+			{
+				datafeedStats.TimingStats.Should().NotBeNull();
+			}
 		}
 	}
 

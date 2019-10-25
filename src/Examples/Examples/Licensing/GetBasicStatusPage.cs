@@ -6,7 +6,7 @@ namespace Examples.Licensing
 	public class GetBasicStatusPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		public void Line36()
 		{
 			// tag::f92d2f5018a8843ffbb56ade15f84406[]
 			var response0 = new SearchResponse<object>();

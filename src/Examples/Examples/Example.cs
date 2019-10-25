@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
+using Newtonsoft.Json.Linq;
 
 namespace Examples
 {
@@ -17,11 +18,20 @@ namespace Examples
 			Body = body;
 		}
 
-		public string Body { get; set; }
+		public string Body { get; private set; }
 
 		public HttpMethod Method { get; set; }
 
 		public Uri Uri { get; set; }
+
+		public void ApplyBodyChanges(Action<JObject> action)
+		{
+			var body = Body == null
+				? new JObject()
+				: JObject.Parse(Body);
+			action(body);
+			Body = body.ToString();
+		}
 
 		public static Example Create(string example)
 		{

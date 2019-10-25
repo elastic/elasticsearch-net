@@ -33,7 +33,11 @@ namespace Examples
 			example = Example.ApplyGlobalChanges(example);
 
 			response.ApiCall.HttpMethod.Should().Be(example.Method);
-			response.ApiCall.Uri.AbsolutePath.Should().Be(example.Uri.AbsolutePath.Length > 1
+
+			// the client encodes characters such as commas, so decode to compare
+			var decodedAbsolutePath = HttpUtility.UrlDecode(response.ApiCall.Uri.AbsolutePath);
+
+			decodedAbsolutePath.Should().Be(example.Uri.AbsolutePath.Length > 1
 				? example.Uri.AbsolutePath.TrimEnd('/')
 				: example.Uri.AbsolutePath);
 
@@ -59,7 +63,7 @@ namespace Examples
 
 				expected.Count.Should().Be(actual.Count);
 
-				foreach (var (e, a) in expected.Zip(actual, (e, a) => (e, a)))
+				foreach (var (e, a) in expected.Zip(actual))
 				{
 					var matches = JToken.DeepEquals(e, a);
 					if (!matches)

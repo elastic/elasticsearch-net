@@ -7,30 +7,31 @@ namespace Examples.Root
 {
 	public class SearchPage : ExampleBase
 	{
-		[U(Skip = "waiting on https://github.com/elastic/elasticsearch/pull/45432")]
+		[U]
 		public void Line18()
 		{
-			// tag::321afb79fc4ee54676a89e0cd24946c1[]
-			var indexResponse =
-				client.Index(new Tweet
-					{
-						User = "kimchy",
-						PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
-						Message = "trying out Elasticsearch"
-					},
-					i => i.Index("twitter").Routing("kimchy"));
-			// end::321afb79fc4ee54676a89e0cd24946c1[]
+			// tag::5d32279dcd52b22d9e1178a02a3ad957[]
+			var indexResponse = client.Index(new Tweet
+			{
+				User = "kimchy",
+				PostDate = new DateTime(2009, 11, 15, 14, 12, 12),
+				Message = "trying out Elasticsearch"
+			}, i => i
+				.Index("twitter")
+				.Routing("kimchy")
+			);
+			// end::5d32279dcd52b22d9e1178a02a3ad957[]
 
 			indexResponse.MatchesExample(@"POST /twitter/_doc?routing=kimchy
 			{
 			    ""user"" : ""kimchy"",
-			    ""postDate"" : ""2009-11-15T14:12:12"",
+			    ""post_date"" : ""2009-11-15T14:12:12"",
 			    ""message"" : ""trying out Elasticsearch""
 			}");
 		}
 
 		[U]
-		public void Line33()
+		public void Line32()
 		{
 			// tag::8acc1d67b152e7027e0f0e1a8b4b2431[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -68,20 +69,21 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client only supports array of must/filter
-				var body = JObject.Parse(e.Body);
-				var must = body["query"]["bool"]["must"];
-				var filter = body["query"]["bool"]["filter"];
-				var value = filter["term"]["user"];
-				filter["term"]["user"] = new JObject {{ "value", value }};
-				body["query"]["bool"]["must"] = new JArray(must);
-				body["query"]["bool"]["filter"] = new JArray(filter);
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var must = body["query"]["bool"]["must"];
+					var filter = body["query"]["bool"]["filter"];
+					var value = filter["term"]["user"];
+					filter["term"]["user"] = new JObject { { "value", value } };
+					body["query"]["bool"]["must"] = new JArray(must);
+					body["query"]["bool"]["filter"] = new JArray(filter);
+				});
 				return e;
 			});
 		}
 
 		[U]
-		public void Line74()
+		public void Line72()
 		{
 			// tag::014b788c879e4aaa1020672e45e25473[]
 			var putSettingsResponse = client.Cluster.PutSettings(c => c
@@ -100,7 +102,7 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line99()
+		public void Line96()
 		{
 			// tag::189a921df2f5b1fe580937210ce9c1c2[]
 			var searchResponse = client.Search<object>(s => s
@@ -121,9 +123,10 @@ namespace Examples.Root
 				// client sends stats in the query string
 				var uri = new UriBuilder(e.Uri) { Query = "?stats=group1,group2" };
 				e.Uri = uri.Uri;
-				var body = JObject.Parse(e.Body);
-				body.Remove("stats");
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body.Remove("stats");
+				});
 				return e;
 			});
 		}

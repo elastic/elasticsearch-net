@@ -49,7 +49,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line81()
+		public void Line80()
 		{
 			// tag::b919f88e6f47a40d5793479440a90ba6[]
 			var response0 = new SearchResponse<object>();

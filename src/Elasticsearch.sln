@@ -63,7 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{C7865979
 ProjectSection(SolutionItems) = preProject
 	..\build\NEST.JsonNetSerializer.nuspec = ..\build\NEST.JsonNetSerializer.nuspec
 	..\build\NEST.nuspec = ..\build\NEST.nuspec
-	..\NuGet.config = ..\NuGet.config
+	..\nuget.config = ..\nuget.config
 	..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
 	..\build\Elasticsearch.Net.VirtualizedCluster.nuspec = ..\build\Elasticsearch.Net.VirtualizedCluster.nuspec
 EndProjectSection

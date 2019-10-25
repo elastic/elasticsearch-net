@@ -20,7 +20,7 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line132()
+		public void Line130()
 		{
 			// tag::5a676e5f09ba584408ce6ecacda13d1d[]
 			var response0 = new SearchResponse<object>();
@@ -50,7 +50,7 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line250()
+		public void Line246()
 		{
 			// tag::42deb4fe32afbe0f94185e256a79c447[]
 			var response0 = new SearchResponse<object>();

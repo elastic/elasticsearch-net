@@ -8,7 +8,7 @@ namespace ApiGenerator.Configuration
 {
 	public static class CodeConfiguration
 	{
-		/// <summary> These API"s are not implemented yet in the low and high level client</summary>
+		/// <summary> These APIs are not implemented yet in the low and high level client</summary>
 		public static string[] IgnoredApis { get; } =
 		{
 			// APIs is no longer useful and will be removed
@@ -43,8 +43,7 @@ namespace ApiGenerator.Configuration
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-			"snapshot.cleanup_repository.json",
-			"ml.estimate_memory_usage.json",
+			"ml.estimate_memory_usage.json"
 		};
 
 

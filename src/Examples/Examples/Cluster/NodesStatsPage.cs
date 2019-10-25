@@ -5,22 +5,9 @@ namespace Examples.Cluster
 {
 	public class NodesStatsPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
-		public void Line11()
-		{
-			// tag::46157b875b3af6322b19c9fcf4668b93[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::46157b875b3af6322b19c9fcf4668b93[]
-
-			response0.MatchesExample(@"GET /_nodes/stats");
-
-			response1.MatchesExample(@"GET /_nodes/nodeId1,nodeId2/stats");
-		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line72()
+		public void Line440()
 		{
 			// tag::5457c94f0039c6b95c7f9f305d0c6b58[]
 			var response0 = new SearchResponse<object>();
@@ -50,9 +37,9 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line313()
+		public void Line458()
 		{
-			// tag::573e292263dc1e6f08f4363f25018e57[]
+			// tag::150b5fee5678bf8cdf0932da73eada80[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -68,17 +55,17 @@ namespace Examples.Cluster
 			var response6 = new SearchResponse<object>();
 
 			var response7 = new SearchResponse<object>();
-			// end::573e292263dc1e6f08f4363f25018e57[]
+			// end::150b5fee5678bf8cdf0932da73eada80[]
 
-			response0.MatchesExample(@"# Fielddata summarised by node");
+			response0.MatchesExample(@"# Fielddata summarized by node");
 
 			response1.MatchesExample(@"GET /_nodes/stats/indices/fielddata?fields=field1,field2");
 
-			response2.MatchesExample(@"# Fielddata summarised by node and index");
+			response2.MatchesExample(@"# Fielddata summarized by node and index");
 
 			response3.MatchesExample(@"GET /_nodes/stats/indices/fielddata?level=indices&fields=field1,field2");
 
-			response4.MatchesExample(@"# Fielddata summarised by node, index, and shard");
+			response4.MatchesExample(@"# Fielddata summarized by node, index, and shard");
 
 			response5.MatchesExample(@"GET /_nodes/stats/indices/fielddata?level=shards&fields=field1,field2");
 
@@ -88,7 +75,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line355()
+		public void Line476()
 		{
 			// tag::bd68666ca2e0be12f7624016317a62bc[]
 			var response0 = new SearchResponse<object>();
@@ -107,6 +94,36 @@ namespace Examples.Cluster
 			response2.MatchesExample(@"# Some groups from just the indices stats");
 
 			response3.MatchesExample(@"GET /_nodes/stats/indices?groups=foo,bar");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line492()
+		{
+			// tag::09769561f082b50558fb7d8707719963[]
+			var response0 = new SearchResponse<object>();
+			// end::09769561f082b50558fb7d8707719963[]
+
+			response0.MatchesExample(@"GET /_nodes/stats/ingest?filter_path=nodes.*.ingest");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line500()
+		{
+			// tag::ef9c29759459904fef162acd223462c4[]
+			var response0 = new SearchResponse<object>();
+			// end::ef9c29759459904fef162acd223462c4[]
+
+			response0.MatchesExample(@"GET /_nodes/stats?metric=ingest&filter_path=nodes.*.ingest");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line508()
+		{
+			// tag::f160561efab38e40c2feebf5a2542ab5[]
+			var response0 = new SearchResponse<object>();
+			// end::f160561efab38e40c2feebf5a2542ab5[]
+
+			response0.MatchesExample(@"GET /_nodes/stats?metric=ingest&filter_path=nodes.*.ingest.pipelines");
 		}
 	}
 }

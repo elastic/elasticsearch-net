@@ -134,6 +134,8 @@
 
 		void Visit(IGeoShapeQuery query);
 
+		void Visit(IShapeQuery query);
+
 		void Visit(IRawQuery query);
 
 		void Visit(IPercolateQuery query);
@@ -192,6 +194,8 @@
 		public virtual void Visit(IFuzzyDateQuery query) { }
 
 		public virtual void Visit(IGeoShapeQuery query) { }
+
+		public virtual void Visit(IShapeQuery query) { }
 
 		public virtual void Visit(IHasChildQuery query) { }
 

@@ -6,23 +6,43 @@ namespace Examples.Ingest.Apis
 	public class DeletePipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line29()
+		public void Line28()
 		{
-			// tag::a05925031c1bfbb10c4ef6e5b678e20a[]
+			// tag::dff61a76d5ef9ca8cbe59a416269a84b[]
 			var response0 = new SearchResponse<object>();
-			// end::a05925031c1bfbb10c4ef6e5b678e20a[]
+			// end::dff61a76d5ef9ca8cbe59a416269a84b[]
 
-			response0.MatchesExample(@"DELETE _ingest/pipeline/my-pipeline-id");
+			response0.MatchesExample(@"DELETE /_ingest/pipeline/my-pipeline-id");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line64()
+		public void Line67()
 		{
-			// tag::6ae6a398b979af8231cf6753a9a73f99[]
+			// tag::a7cf31f4b907e4c00132aca75f55790c[]
 			var response0 = new SearchResponse<object>();
-			// end::6ae6a398b979af8231cf6753a9a73f99[]
+			// end::a7cf31f4b907e4c00132aca75f55790c[]
 
-			response0.MatchesExample(@"DELETE _ingest/pipeline/*");
+			response0.MatchesExample(@"DELETE /_ingest/pipeline/pipeline-one");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line76()
+		{
+			// tag::c6b5c695a9b757b5e7325345b206bde5[]
+			var response0 = new SearchResponse<object>();
+			// end::c6b5c695a9b757b5e7325345b206bde5[]
+
+			response0.MatchesExample(@"DELETE /_ingest/pipeline/pipeline-*");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line85()
+		{
+			// tag::11e772ff5dbb73408ae30a1a367a0d9b[]
+			var response0 = new SearchResponse<object>();
+			// end::11e772ff5dbb73408ae30a1a367a0d9b[]
+
+			response0.MatchesExample(@"DELETE /_ingest/pipeline/*");
 		}
 	}
 }

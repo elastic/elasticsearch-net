@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 	public class ConfiguringActiveDirectoryRealmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line188()
+		public void Line189()
 		{
 			// tag::21e95d29bc37deb5689a654aa323b4ba[]
 			var response0 = new SearchResponse<object>();
@@ -23,7 +23,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line202()
+		public void Line203()
 		{
 			// tag::bd0d30a7683037e1ebadd163514765d4[]
 			var response0 = new SearchResponse<object>();

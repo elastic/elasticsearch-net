@@ -10,7 +10,6 @@ namespace Tests.Domain
 	public class Shape
 	{
 		private static int _idState;
-		public ICircleGeoShape Circle { get; set; }
 		public IEnvelopeGeoShape Envelope { get; set; }
 
 		public static Faker<Shape> Generator { get; } =
@@ -32,8 +31,7 @@ namespace Tests.Domain
 				{
 					new GeoCoordinate(45, 0),
 					new GeoCoordinate(0, 45)
-				}))
-				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p), $"{p.Random.Int(1, 100)}km"));
+				}));
 
 		public IGeometryCollection GeometryCollection { get; set; }
 

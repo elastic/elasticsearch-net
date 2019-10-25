@@ -113,6 +113,9 @@ namespace Nest
 		[DataMember(Name = "cumulative_sum")]
 		ICumulativeSumAggregation CumulativeSum { get; set; }
 
+		[DataMember(Name = "cumulative_cardinality")]
+		ICumulativeCardinalityAggregation CumulativeCardinality { get; set; }
+
 		[DataMember(Name = "date_histogram")]
 		IDateHistogramAggregation DateHistogram { get; set; }
 
@@ -282,6 +285,8 @@ namespace Nest
 
 		public ICumulativeSumAggregation CumulativeSum { get; set; }
 
+		public ICumulativeCardinalityAggregation CumulativeCardinality { get; set; }
+
 		public IDateHistogramAggregation DateHistogram { get; set; }
 
 		public IAutoDateHistogramAggregation AutoDateHistogram { get; set; }
@@ -358,6 +363,7 @@ namespace Nest
 		public IStatsAggregation Stats { get; set; }
 
 		public IStatsBucketAggregation StatsBucket { get; set; }
+
 		public ISumAggregation Sum { get; set; }
 
 		public ISumBucketAggregation SumBucket { get; set; }
@@ -424,6 +430,8 @@ namespace Nest
 		ICompositeAggregation IAggregationContainer.Composite { get; set; }
 
 		ICumulativeSumAggregation IAggregationContainer.CumulativeSum { get; set; }
+
+		ICumulativeCardinalityAggregation IAggregationContainer.CumulativeCardinality { get; set; }
 
 		IDateHistogramAggregation IAggregationContainer.DateHistogram { get; set; }
 
@@ -749,6 +757,11 @@ namespace Nest
 			Func<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.CumulativeSum = d);
+
+		public AggregationContainerDescriptor<T> CumulativeCardinality(string name,
+			Func<CumulativeCardinalityAggregationDescriptor, ICumulativeCardinalityAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.CumulativeCardinality = d);
 
 		public AggregationContainerDescriptor<T> SerialDifferencing(string name,
 			Func<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation> selector

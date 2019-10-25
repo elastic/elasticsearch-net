@@ -40,7 +40,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line57()
+		public void Line56()
 		{
 			// tag::abcbf3c246c0d88831b875a601686e35[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +54,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line102()
+		public void Line99()
 		{
 			// tag::4ab8f55a8a45d53fb1676112379c212e[]
 			var response0 = new SearchResponse<object>();

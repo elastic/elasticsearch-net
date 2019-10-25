@@ -38,16 +38,16 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
-		public void Line72()
+		public void Line71()
 		{
 			// tag::867e5fad9c57055712fe2b69fa69a97c[]
 			var indexResponse = client.Index(new MyDocument
-				{
-					MyField = "quick brown fox jump lazy dog"
-				}, i => i
-					.Index("my_index")
-					.Id(1)
-					.Refresh(Refresh.True)
+			{
+				MyField = "quick brown fox jump lazy dog"
+			}, i => i
+				.Index("my_index")
+				.Id(1)
+				.Refresh(Refresh.True)
 			);
 			// end::867e5fad9c57055712fe2b69fa69a97c[]
 
@@ -64,7 +64,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
-		public void Line89()
+		public void Line87()
 		{
 			// tag::9bd25962f177e86dbc5a8030a420cc31[]
 			var query = client.Search<MyDocument>(s => s
@@ -100,7 +100,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
-		public void Line151()
+		public void Line147()
 		{
 			// tag::0ced86822f8c0a479af5e1fe28dfc2ec[]
 			var searchResponse = client.Search<MyDocument>(s => s
@@ -124,10 +124,11 @@ namespace Examples.Mapping.Types
 			}", e =>
 			{
 				// client does not support short form match_phrase_prefix
-				var body = JObject.Parse(e.Body);
-				var value = body["query"]["match_phrase_prefix"]["my_field"];
-				body["query"]["match_phrase_prefix"]["my_field"] = new JObject { { "query", value } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var value = body["query"]["match_phrase_prefix"]["my_field"];
+					body["query"]["match_phrase_prefix"]["my_field"] = new JObject { { "query", value } };
+				});
 				return e;
 			});
 		}

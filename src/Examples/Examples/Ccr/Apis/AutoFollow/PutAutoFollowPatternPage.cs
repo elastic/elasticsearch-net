@@ -24,7 +24,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line88()
 		{
 			// tag::754a082212929e02a9f71d5404d3301d[]
 			var response0 = new SearchResponse<object>();

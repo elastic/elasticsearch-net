@@ -21,7 +21,7 @@ namespace Examples.Analysis.Charfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line75()
+		public void Line74()
 		{
 			// tag::426f95b13a5b6042b5273d74ad8ee708[]
 			var response0 = new SearchResponse<object>();
