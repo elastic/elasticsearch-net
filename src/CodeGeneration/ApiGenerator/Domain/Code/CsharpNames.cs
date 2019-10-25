@@ -11,6 +11,7 @@ namespace ApiGenerator.Domain.Code
 	{
 		public CsharpNames(string name, string endpointMethodName, string endpointNamespace)
 		{
+			RestSpecName = string.IsNullOrWhiteSpace(endpointNamespace) ? endpointMethodName : $"{endpointNamespace}.{endpointMethodName}";
 			Namespace = CreateCSharpNamespace(endpointNamespace);
 			if (CodeConfiguration.ApiNameMapping.TryGetValue(name, out var mapsApiMethodName))
 				ApiName = mapsApiMethodName;
@@ -20,12 +21,12 @@ namespace ApiGenerator.Domain.Code
 			string Replace(string original, string ns, string find, string replace)
 			{
 				if (ns != null && Namespace != ns) return original;
+
 				var replaced = original.Replace(find, replace);
 				if (string.IsNullOrEmpty(replaced)) return original;
 
 				return replaced;
 			}
-
 
 			MethodName = Replace(ApiName, null, Namespace, "");
 
@@ -43,7 +44,9 @@ namespace ApiGenerator.Domain.Code
 		/// <summary> Pascal cased version of the namespace from the specification </summary>
 		public string Namespace { get; }
 
-		/// <summary>
+		public string RestSpecName { get; }
+
+	/// <summary>
 		/// The pascal cased method name as loaded by <see cref="ApiEndpointFactory.FromFile"/>
 		/// <pre>Uses <see cref="CodeConfiguration.ApiNameMapping"/> mapping of request implementations in the nest code base</pre>
 		/// </summary>

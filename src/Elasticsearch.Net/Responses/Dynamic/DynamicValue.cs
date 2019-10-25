@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 using System.Dynamic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Microsoft.CSharp.RuntimeBinder;
@@ -23,7 +25,7 @@ namespace Elasticsearch.Net
 		/// Initializes a new instance of the <see cref="DynamicValue" /> class.
 		/// </summary>
 		/// <param name="value">The value to store in the instance</param>
-		public DynamicValue(object value) => _value = value;
+		public DynamicValue(object value) => _value = value is DynamicValue av ? av.Value : value;
 
 		/// <summary>
 		/// Gets a value indicating whether this instance has value.
@@ -45,19 +47,32 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public static DynamicValue NullValue { get; } = new DynamicValue(null);
+		public static DynamicValue SelfOrNew(object v) => v is DynamicValue av ? av : new DynamicValue(v);
+
 		public DynamicValue this[int i]
 		{
 			get
 			{
-				if (!HasValue)
-					return new DynamicValue(null);
+				if (!HasValue) return NullValue;
 
-				var l = Value as IList;
-				if (l != null && l.Count - 1 >= i)
+				var v = Value;
+
+				if (v is IList l && l.Count - 1 >= i)
+					return SelfOrNew(l[i]);
+				if (v is IList<object> o && o.Count - 1 >= i)
+					return SelfOrNew(o[i]);
+
+				if (v is IDictionary<string, object> d)
 				{
-					return new DynamicValue(l[i]);
+					if (d.TryGetValue(i.ToString(CultureInfo.InvariantCulture), out v))
+						return SelfOrNew(v);
+
+					if (i >= d.Count) return new DynamicValue(null);
+					var at = d[d.Keys.ElementAt(i)];
+					return SelfOrNew(at);
 				}
-				return new DynamicValue(null);
+				return NullValue;
 			}
 		}
 
@@ -391,32 +406,28 @@ namespace Elasticsearch.Net
 		{
 			if (!HasValue)
 			{
-				result = new DynamicValue(null);
+				result = NullValue;
 				return true;
 			}
 
-			var d = Value as IDictionary<string, object>;
-			object r;
-			if (d != null && d.TryGetValue(name, out r))
+			if (Value is IDictionary<string, object> d)
 			{
-				result = new DynamicValue(r);
+				result = d.TryGetValue(name, out var r) ? SelfOrNew(r) : NullValue;
 				return true;
 			}
-			var x = Value as IDynamicMetaObjectProvider;
-			if (x != null)
+			if (Value is IDynamicMetaObjectProvider x)
 			{
 				var dm = GetDynamicMember(Value, name);
-				result = new DynamicValue(dm);
+				result = SelfOrNew(dm);
 				return true;
 			}
-			var ds = Value as IDictionary;
-			if (ds != null && ds.Contains(name))
+			if (Value is IDictionary ds)
 			{
-				result = new DynamicValue(ds[name]);
+				result = ds.Contains(name) ? SelfOrNew(ds[name]) : NullValue;
 				return true;
 			}
 
-			result = new DynamicValue(Value);
+			result = NullValue;
 			return true;
 		}
 
@@ -468,31 +479,31 @@ namespace Elasticsearch.Net
 				try
 				{
 					if (_value.GetType().IsAssignableFrom(typeof(T)))
-					{
 						return (T)_value;
-					}
 
 					var type = typeof(T);
-
 					var stringValue = _value as string;
+
 					if (type == typeof(DateTime))
 					{
-						DateTime result;
-
-						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
 						{
 							return (T)(object)result;
 					}
 					}
 					else if (stringValue != null)
 					{
+						if (type == typeof(object)) return (T)Convert.ChangeType(_value, type);
+
 						var converter = TypeDescriptor.GetConverter(type);
 						if (converter.IsValid(stringValue)) return (T)converter.ConvertFromInvariantString(stringValue);
 					}
 					else if (type == typeof(string))
 					{
 						return (T)Convert.ChangeType(_value, TypeCode.String, CultureInfo.InvariantCulture);
-				}
+					}
+					else if (_value.GetType().IsValueType) return (T)Convert.ChangeType(_value, type);
+					else if (type == typeof(object)) return (T)_value;
 				}
 				catch
 				{

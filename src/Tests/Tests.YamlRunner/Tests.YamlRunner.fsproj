@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <TieredCompilation>false</TieredCompilation>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    
+    <Compile Include="AsyncExtensions.fs" />
+    <Compile Include="Models.fs" />
+    <Compile Include="Stashes.fs" />
+    <Compile Include="DoMapper.fs" />
+    <Compile Include="TestsDownloader.fs" />
+    <Compile Include="TestsLocator.fs" />
+    <Compile Include="OperationExecutor.fs" />
+    <Compile Include="TestsReader.fs" />
+    <Compile Include="TestsRunner.fs" />
+    <Compile Include="TestsExporter.fs" />
+    <Compile Include="Commands.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.7.0" />
+    
+    <PackageReference Include="Argu" Version="5.5.0" />
+    <PackageReference Include="FSharp.Data" Version="3.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="SharpYaml" Version="1.6.5" />
+    <PackageReference Include="ShellProgressBar" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

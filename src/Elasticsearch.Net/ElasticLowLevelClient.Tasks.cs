@@ -49,6 +49,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_tasks/_cancel", null, RequestParams(requestParameters));
 		///<summary>POST on /_tasks/_cancel <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("tasks.cancel", "")]
 		public Task<TResponse> CancelAsync<TResponse>(CancelTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_tasks/_cancel", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_tasks/{task_id}/_cancel <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
@@ -59,6 +60,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 		///<summary>POST on /_tasks/{task_id}/_cancel <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "taskId">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("tasks.cancel", "task_id")]
 		public Task<TResponse> CancelAsync<TResponse>(string taskId, CancelTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_tasks/{taskId:taskId}/_cancel"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_tasks/{task_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
@@ -69,6 +71,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 		///<summary>GET on /_tasks/{task_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "taskId">Return the task with specified id (node_id:task_number)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("tasks.get", "task_id")]
 		public Task<TResponse> GetTaskAsync<TResponse>(string taskId, GetTaskRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_tasks/{taskId:taskId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_tasks <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
@@ -77,6 +80,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_tasks", null, RequestParams(requestParameters));
 		///<summary>GET on /_tasks <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("tasks.list", "")]
 		public Task<TResponse> ListAsync<TResponse>(ListTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_tasks", ctx, null, RequestParams(requestParameters));
 	}

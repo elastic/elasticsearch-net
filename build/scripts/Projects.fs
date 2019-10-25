@@ -26,6 +26,7 @@ module Projects =
         | Tests
         | DocGenerator
         | ApiGenerator
+        | RestSpecTestRunner
         
     type DotNetProject = 
         | Project of Project
@@ -65,6 +66,7 @@ module Projects =
             | PrivateProject Tests -> "Tests"
             | PrivateProject DocGenerator -> "DocGenerator"
             | PrivateProject ApiGenerator -> "ApiGenerator"
+            | PrivateProject RestSpecTestRunner -> "Tests.YamlRunner"
 
         member this.NugetId =
             match this with
