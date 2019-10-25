@@ -266,6 +266,8 @@ namespace Nest
 		public GetApiKeyDescriptor Id(string id) => Qs("id", id);
 		///<summary>API key name of the API key to be retrieved</summary>
 		public GetApiKeyDescriptor Name(string name) => Qs("name", name);
+		///<summary>flag to query API keys owned by the currently authenticated user</summary>
+		public GetApiKeyDescriptor Owner(bool? owner = true) => Qs("owner", owner);
 		///<summary>realm name of the user who created this API key to be retrieved</summary>
 		public GetApiKeyDescriptor RealmName(string realmname) => Qs("realm_name", realmname);
 		///<summary>user name of the user who created this API key to be retrieved</summary>
