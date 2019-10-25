@@ -69,14 +69,15 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client only supports array of must/filter
-				var body = JObject.Parse(e.Body);
-				var must = body["query"]["bool"]["must"];
-				var filter = body["query"]["bool"]["filter"];
-				var value = filter["term"]["user"];
-				filter["term"]["user"] = new JObject { { "value", value } };
-				body["query"]["bool"]["must"] = new JArray(must);
-				body["query"]["bool"]["filter"] = new JArray(filter);
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var must = body["query"]["bool"]["must"];
+					var filter = body["query"]["bool"]["filter"];
+					var value = filter["term"]["user"];
+					filter["term"]["user"] = new JObject { { "value", value } };
+					body["query"]["bool"]["must"] = new JArray(must);
+					body["query"]["bool"]["filter"] = new JArray(filter);
+				});
 				return e;
 			});
 		}
@@ -122,9 +123,10 @@ namespace Examples.Root
 				// client sends stats in the query string
 				var uri = new UriBuilder(e.Uri) { Query = "?stats=group1,group2" };
 				e.Uri = uri.Uri;
-				var body = JObject.Parse(e.Body);
-				body.Remove("stats");
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body.Remove("stats");
+				});
 				return e;
 			});
 		}

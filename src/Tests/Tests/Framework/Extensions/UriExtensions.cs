@@ -34,16 +34,16 @@ namespace Tests.Framework.Extensions
 
 		private static void AssertQueryString(Uri actualUri, Uri expectedUri, string origin)
 		{
-			var because = $"\r\nExpected query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
-			because += $"\r\nActual querystring from {origin}  : {actualUri.Query} on {actualUri.PathAndQuery}\r\n";
+			var eol = Environment.NewLine;
+			var because = $"{eol} query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
+			because += $"{eol}Actual querystring from {origin}  : {actualUri.Query} on {actualUri.PathAndQuery}{eol}";
 
 			var actualParameters = ExplodeQueryString(actualUri);
 			var expectedParameters = ExplodeQueryString(expectedUri);
 
 			actualParameters.Keys.Should()
-				.BeEquivalentTo(expectedParameters.Keys, "All query string parameters need to be asserted.\r\n{0}", because);
+				.BeEquivalentTo(expectedParameters.Keys, $"All query string parameters need to be asserted.{eol}{{0}}", because);
 
-			//actualParameters.Count.Should().Be(expectedParameters.Count, "All query string parameters need to be asserted.\r\n{0}", because);
 			if (actualParameters.Count == 0) return;
 
 			actualParameters.Should().ContainKeys(expectedParameters.Keys.ToArray(), because);
@@ -58,8 +58,9 @@ namespace Tests.Framework.Extensions
 			string origin
 		)
 		{
-			var because = $"\r\nExpected query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
-			because += $"\r\nActual query string from {origin}: {actualUri.Query} on {actualUri.PathAndQuery}\r\n";
+			var eol = Environment.NewLine;
+			var because = $"{eol}Expected query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
+			because += $"{eol}Actual query string from {origin}: {actualUri.Query} on {actualUri.PathAndQuery}{eol}";
 
 			//only assert these if they appear in expectedUri
 			var specialQueryStringParameters = new[] { "pretty", "typed_keys", "error_trace" };
@@ -68,9 +69,9 @@ namespace Tests.Framework.Extensions
 				if (!expectedParameters.ContainsKey(key)) continue;
 
 				var expected = expectedParameters[key];
-				actualParameters.Should().ContainKey(key, "query value for '{0}' expected to exist\r\n{1}", key, because);
+				actualParameters.Should().ContainKey(key, $"query value for '{{0}}' expected to exist{eol}{{1}}", key, because);
 				var actual = actualParameters[key];
-				new[] { key, actual }.Should().BeEquivalentTo(new[] { key, expected }, "query value for '{0}' should be equal\r\n{1}", key, because);
+				new[] { key, actual }.Should().BeEquivalentTo(new[] { key, expected }, $"query value for '{{0}}' should be equal{eol}{{1}}", key, because);
 			}
 
 			foreach (var key in specialQueryStringParameters)
@@ -82,8 +83,9 @@ namespace Tests.Framework.Extensions
 
 		private static void ComparePaths(Uri actualUri, Uri expectedUri, string origin)
 		{
-			var because = $"\r\nExpected from {origin}: {expectedUri.PathAndQuery}";
-			because += $"\r\nActual from {origin}: {actualUri.PathAndQuery}\r\n";
+			var eol = Environment.NewLine;
+			var because = $"{eol}Expected from {origin}: {expectedUri.PathAndQuery}";
+			because += $"{eol}Actual from {origin}: {actualUri.PathAndQuery}{eol}";
 			actualUri.AbsolutePath.Should().Be(expectedUri.AbsolutePath, because);
 		}
 

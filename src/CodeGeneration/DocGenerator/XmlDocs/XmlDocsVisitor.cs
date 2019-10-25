@@ -17,7 +17,7 @@ namespace DocGenerator.XmlDocs
 	{
 		// AsciiDocNet does not currently have a type for list item continuations, so mimic here
 		// for the moment
-		private const string ListItemContinuation = "\r\n+\r\n";
+		private static readonly string ListItemContinuation = Environment.NewLine + "+" + Environment.NewLine;
 		private readonly Type _type;
 		private LabeledListItem _labeledListItem;
 

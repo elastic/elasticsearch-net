@@ -63,7 +63,7 @@ namespace Examples
 
 				expected.Count.Should().Be(actual.Count);
 
-				foreach (var (e, a) in expected.Zip(actual, (e, a) => (e, a)))
+				foreach (var (e, a) in expected.Zip(actual))
 				{
 					var matches = JToken.DeepEquals(e, a);
 					if (!matches)

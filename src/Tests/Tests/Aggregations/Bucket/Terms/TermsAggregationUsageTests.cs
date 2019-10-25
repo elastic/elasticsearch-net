@@ -188,7 +188,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var states = response.Aggregations.Terms("states");
+			var states = response.Aggregations.Terms<StateOfBeing>("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
 			states.SumOtherDocCount.Should().HaveValue();
@@ -196,7 +196,7 @@ namespace Tests.Aggregations.Bucket.Terms
 			states.Buckets.Count.Should().BeGreaterThan(0);
 			foreach (var item in states.Buckets)
 			{
-				item.Key.Should().NotBeNullOrEmpty();
+				item.Key.Should().BeOfType<StateOfBeing>();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
 			states.Meta.Should().NotBeNull().And.HaveCount(1);

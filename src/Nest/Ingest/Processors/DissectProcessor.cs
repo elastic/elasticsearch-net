@@ -73,6 +73,7 @@ namespace Nest
 		public DissectProcessorDescriptor<T> Pattern(string pattern) =>
 			Assign(pattern, (a, v) => a.Pattern = v);
 
+		// TODO! rename the parameter in 8.0
 		/// <inheritdoc cref="IDissectProcessor.IgnoreMissing">
 		public DissectProcessorDescriptor<T> IgnoreMissing(bool? traceMatch = true) =>
 			Assign(traceMatch, (a, v) => a.IgnoreMissing = v);

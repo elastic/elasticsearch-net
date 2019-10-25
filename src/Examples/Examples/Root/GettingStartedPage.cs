@@ -71,10 +71,11 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client always generates long form for sort order
-				var body = JObject.Parse(e.Body);
-				var asc = body["sort"][0]["account_number"];
-				body["sort"][0]["account_number"] = new JObject { { "order", asc } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var asc = body["sort"][0]["account_number"];
+					body["sort"][0]["account_number"] = new JObject { { "order", asc } };
+				});
 				return e;
 			});
 		}
@@ -104,11 +105,12 @@ namespace Examples.Root
 			  ""size"": 10
 			}", e =>
 			{
-				var body = JObject.Parse(e.Body);
-				// only long form of sort it supported by the client
-				var sort = body["sort"][0]["account_number"].Value<string>();
-				body["sort"][0]["account_number"] = new JObject { { "order", sort } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					// only long form of sort it supported by the client
+					var sort = body["sort"][0]["account_number"].Value<string>();
+					body["sort"][0]["account_number"] = new JObject { { "order", sort } };
+				});
 				return e;
 			});
 		}
@@ -134,9 +136,10 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client does not support shorthand match query syntax. Expand out
-				var body = JObject.Parse(e.Body);
-				body["query"]["match"]["address"] = new JObject { { "query", "mill lane" } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["match"]["address"] = new JObject { { "query", "mill lane" } };
+				});
 				return e;
 			});
 		}
@@ -162,9 +165,10 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client does not support shorthand match query syntax. Expand out
-				var body = JObject.Parse(e.Body);
-				body["query"]["match_phrase"]["address"] = new JObject { { "query", "mill lane" } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["match_phrase"]["address"] = new JObject { { "query", "mill lane" } };
+				});
 				return e;
 			});
 		}
@@ -209,10 +213,11 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client does not support shorthand match query syntax. Expand out
-				var body = JObject.Parse(e.Body);
-				body["query"]["bool"]["must"][0]["match"]["age"] = new JObject { { "query", "40" } };
-				body["query"]["bool"]["must_not"][0]["match"]["state"] = new JObject { { "query", "ID" } };
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					body["query"]["bool"]["must"][0]["match"]["age"] = new JObject { { "query", "40" } };
+					body["query"]["bool"]["must_not"][0]["match"]["state"] = new JObject { { "query", "ID" } };
+				});
 				return e;
 			});
 		}
@@ -258,15 +263,15 @@ namespace Examples.Root
 			}", e =>
 			{
 				// bool must and filter are always an array and numeric range queries always use doubles
-				var body = JObject.Parse(e.Body);
-
-				var must = body["query"]["bool"]["must"];
-				body["query"]["bool"]["must"] = new JArray(must);
-				var filter = body["query"]["bool"]["filter"];
-				filter["range"]["balance"]["gte"] = 20000d;
-				filter["range"]["balance"]["lte"] = 30000d;
-				body["query"]["bool"]["filter"] = new JArray(filter);
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var must = body["query"]["bool"]["must"];
+					body["query"]["bool"]["must"] = new JArray(must);
+					var filter = body["query"]["bool"]["filter"];
+					filter["range"]["balance"]["gte"] = 20000d;
+					filter["range"]["balance"]["lte"] = 30000d;
+					body["query"]["bool"]["filter"] = new JArray(filter);
+				});
 				return e;
 			});
 		}
@@ -385,10 +390,11 @@ namespace Examples.Root
 			}", e =>
 			{
 				// Terms aggs order is always an array
-				var body = JObject.Parse(e.Body);
-				var order = body["aggs"]["group_by_state"]["terms"]["order"];
-				body["aggs"]["group_by_state"]["terms"]["order"] = new JArray(order);
-				e.Body = body.ToString();
+				e.ApplyBodyChanges(body =>
+				{
+					var order = body["aggs"]["group_by_state"]["terms"]["order"];
+					body["aggs"]["group_by_state"]["terms"]["order"] = new JArray(order);
+				});
 				return e;
 			});
 		}

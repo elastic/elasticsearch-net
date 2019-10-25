@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Elastic.Managed.ConsoleWriters;
 using Elastic.Managed.Ephemeral;
@@ -38,8 +39,8 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			if (File.Exists(hunspellPrefix + ".dic")) return;
 
 			Directory.CreateDirectory(hunspellFolder);
-			File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
-			File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
+			File.WriteAllText(hunspellPrefix + ".dic", $"1{Environment.NewLine}abcdegf");
+			File.WriteAllText(hunspellPrefix + ".aff", $"SET UTF8{Environment.NewLine}SFX P Y 1{Environment.NewLine}SFX P 0 s");
 		}
 
 		private static void SetupIcuFiles(string configPath)

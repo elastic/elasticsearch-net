@@ -23,6 +23,7 @@ namespace Tests.Core.Client.Serializers
 		protected override IEnumerable<JsonConverter> CreateJsonConverters()
 		{
 			yield return new SourceOnlyUsingBuiltInConverter();
+			yield return new Domain.JsonConverters.DateTimeConverter();
 		}
 
 		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>

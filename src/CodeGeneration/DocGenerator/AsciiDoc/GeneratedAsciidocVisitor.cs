@@ -75,11 +75,12 @@ namespace DocGenerator.AsciiDoc
 			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)",
 				$"{github}/tree/{Program.BranchName}/src/Tests/Tests/");
 
+			var eol = Environment.NewLine;
 			_newDocument.Insert(0, new Comment
 			{
 				Style = CommentStyle.MultiLine,
-				Text = $"IMPORTANT NOTE\r\n==============\r\nThis file has been generated from {originalFile}. \r\n" +
-					"If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
+				Text = $"IMPORTANT NOTE{eol}=============={eol}This file has been generated from {originalFile}. {eol}" +
+					$"If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,{eol}" +
 					"please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
 			});
 

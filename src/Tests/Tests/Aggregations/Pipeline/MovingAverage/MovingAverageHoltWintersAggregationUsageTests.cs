@@ -39,7 +39,8 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month"
+					interval = "month",
+					min_doc_count = 1
 				},
 				aggs = new
 				{
@@ -77,6 +78,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
 				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(1)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
@@ -103,6 +105,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
+				MinimumDocumentCount = 1,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits")
 					&& new MovingAverageAggregation("commits_moving_avg", "commits")
@@ -142,7 +145,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				var movingAverage = item.MovingAverage("commits_moving_avg");
 
 				// Moving Average specifies a window of 4 so
-				// moving average values should exist from 5th bucketr onwards
+				// moving average values should exist from 5th bucket onwards
 				if (bucketCount <= 4)
 					movingAverage.Should().BeNull();
 				else

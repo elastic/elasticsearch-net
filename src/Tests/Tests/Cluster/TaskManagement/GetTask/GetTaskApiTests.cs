@@ -138,7 +138,7 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			var targetIndex = "tasks-lists-completed-get";
 			var bulkResponse = client.IndexMany(Project.Generator.Generate(500), sourceIndex);
 			if (!bulkResponse.IsValid)
-				throw new Exception("failure in setting up integration");
+				throw new Exception($"failure in setting up integration for {nameof(GetTaskApiCompletedTaskTests)}. {bulkResponse.DebugInformation}");
 
 			var createIndex = client.Indices.Create(targetIndex, i => i
 				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
