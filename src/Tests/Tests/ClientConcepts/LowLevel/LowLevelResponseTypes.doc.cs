@@ -31,6 +31,7 @@ namespace Tests.ClientConcepts.LowLevel
 			return @"{
 			""boolean"" : true,	
 			""string"" : ""v"",
+			""number"" : 29,
 			""array"" : [1, 2, 3, 4],
 			""object"" : {
 				""first"" : ""value1"",
@@ -81,6 +82,10 @@ namespace Tests.ClientConcepts.LowLevel
 
 			response.Get<int>("array.1").Should().Be(2);
 			response.Get<long>("array.1").Should().Be(2);
+			response.Get<long>("number").Should().Be(29);
+			response.Get<long?>("number").Should().Be(29);
+			response.Get<long?>("number_does_not_exist").Should().Be(null);
+			response.Get<long?>("number").Should().Be(29);
 
 			response.Get<string>("array_of_objects.1.second").Should()
 				.NotBeEmpty()

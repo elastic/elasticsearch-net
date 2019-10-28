@@ -474,6 +474,10 @@ namespace Elasticsearch.Net
 		/// <returns>If value is not null, value is returned, else default value is returned</returns>
 		public T TryParse<T>(T defaultValue = default(T))
 		{
+			var type = typeof(T);
+			if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+				type = type.GenericTypeArguments[0];
+
 			if (HasValue)
 			{
 				try
@@ -481,7 +485,6 @@ namespace Elasticsearch.Net
 					if (_value.GetType().IsAssignableFrom(typeof(T)))
 						return (T)_value;
 
-					var type = typeof(T);
 					var stringValue = _value as string;
 
 					if (type == typeof(DateTime))
