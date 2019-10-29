@@ -80,7 +80,8 @@ namespace Tests.Search.MultiSearch
 
 			var b = response.Body;
 			List<object> responses = b.responses;
-			responses.Count().Should().Be(4);
+			response.Should().NotBeNull("{0}", response.DebugInformation);
+			responses.Count().Should().Be(4, "{0}", response.DebugInformation);
 
 			object r = b.responses[0];
 			r.Should().NotBeNull();
