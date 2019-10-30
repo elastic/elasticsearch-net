@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.1.0-beta3-final" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="ShellProgressBar" Version="4.2.0" />
+    <PackageReference Include="ShellProgressBar" Version="4.3.0" />
     <PackageReference Include="CsQuery.Core" Version="2.0.1" />
     <!-- https://github.com/toddams/RazorLight/issues/172 -->
     <PackageReference Include="RazorLight.Unofficial" Version="2.0.0-beta1.3" />

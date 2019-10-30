@@ -8,7 +8,7 @@ using Elasticsearch.Net.Extensions;
 namespace Elasticsearch.Net
 {
 	// ReSharper disable once UnusedTypeParameter
-	public interface IPostData<out T> 
+	public interface IPostData<out T>
 	{
 		void Write(Stream writableStream, IConnectionConfigurationValues settings);
 		Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken token);
@@ -29,9 +29,12 @@ namespace Elasticsearch.Net
 		protected const string NewLineString = "\n";
 		protected static readonly byte[] NewLineByteArray = { (byte)'\n' };
 
+		//TODO internal set?;
 		public bool? DisableDirectStreaming { get; set; }
 		public PostType Type { get; protected set; }
 		public byte[] WrittenBytes { get; protected set; }
+
+		public static PostData Empty => new PostData<object>(string.Empty);
 
 		public abstract void Write(Stream writableStream, IConnectionConfigurationValues settings);
 

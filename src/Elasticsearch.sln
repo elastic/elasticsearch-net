@@ -77,6 +77,10 @@ EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.VirtualizedCluster", "Auxiliary\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj", "{BA4C7FC9-13AD-4632-9A51-FAAD376E70BE}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests.YamlRunner", "Tests\Tests.YamlRunner\Tests.YamlRunner.fsproj", "{81473437-5722-4829-A5CD-125B17CCA238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jenkins", "..\.ci\Jenkins.csproj", "{5A9C1B95-9280-433E-8D1B-1F5396126166}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,8 @@ Global
 		{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{2FABB663-F4DB-499A-89F8-3A08828D1D91} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{BA4C7FC9-13AD-4632-9A51-FAAD376E70BE} = {14241027-0A92-466D-B024-E0063F338915}
+		{81473437-5722-4829-A5CD-125B17CCA238} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
+		{5A9C1B95-9280-433E-8D1B-1F5396126166} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5B393962-7586-49BA-BD99-3B1E35F48E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -166,5 +172,13 @@ Global
 		{BA4C7FC9-13AD-4632-9A51-FAAD376E70BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA4C7FC9-13AD-4632-9A51-FAAD376E70BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA4C7FC9-13AD-4632-9A51-FAAD376E70BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81473437-5722-4829-A5CD-125B17CCA238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81473437-5722-4829-A5CD-125B17CCA238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81473437-5722-4829-A5CD-125B17CCA238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81473437-5722-4829-A5CD-125B17CCA238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9C1B95-9280-433E-8D1B-1F5396126166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9C1B95-9280-433E-8D1B-1F5396126166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9C1B95-9280-433E-8D1B-1F5396126166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9C1B95-9280-433E-8D1B-1F5396126166}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
