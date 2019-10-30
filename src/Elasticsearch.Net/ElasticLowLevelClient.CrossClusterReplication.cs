@@ -51,6 +51,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.delete_auto_follow_pattern", "name")]
 		public Task<TResponse> DeleteAutoFollowPatternAsync<TResponse>(string name, DeleteAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ccr/auto_follow/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /{index}/_ccr/follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
@@ -63,6 +64,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<param name = "index">The name of the follower index</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.follow", "index, body")]
 		public Task<TResponse> CreateFollowIndexAsync<TResponse>(string index, PostData body, CreateFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_ccr/follow"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_ccr/info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
@@ -73,6 +75,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<summary>GET on /{index}/_ccr/info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html</para></summary>
 		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.follow_info", "index")]
 		public Task<TResponse> FollowInfoAsync<TResponse>(string index, FollowInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_ccr/info"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
@@ -83,6 +86,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
 		///<param name = "index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.follow_stats", "index")]
 		public Task<TResponse> FollowIndexStatsAsync<TResponse>(string index, FollowIndexStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_ccr/stats"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ccr/forget_follower <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
@@ -95,6 +99,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<param name = "index">the name of the leader index for which specified follower retention leases should be removed</param>
 		///<param name = "body">the name and UUID of the follower index, the name of the cluster containing the follower index, and the alias from the perspective of that cluster for the remote cluster containing the leader index</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.forget_follower", "index, body")]
 		public Task<TResponse> ForgetFollowerIndexAsync<TResponse>(string index, PostData body, ForgetFollowerIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ccr/forget_follower"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
@@ -103,6 +108,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ccr/auto_follow", null, RequestParams(requestParameters));
 		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.get_auto_follow_pattern", "")]
 		public Task<TResponse> GetAutoFollowPatternAsync<TResponse>(GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ccr/auto_follow", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
@@ -113,6 +119,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<summary>GET on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.get_auto_follow_pattern", "name")]
 		public Task<TResponse> GetAutoFollowPatternAsync<TResponse>(string name, GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ccr/auto_follow/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
@@ -123,6 +130,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 		///<param name = "index">The name of the follower index that should pause following its leader index.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.pause_follow", "index")]
 		public Task<TResponse> PauseFollowIndexAsync<TResponse>(string index, PauseFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ccr/pause_follow"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
@@ -135,6 +143,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<param name = "name">The name of the auto follow pattern.</param>
 		///<param name = "body">The specification of the auto follow pattern</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.put_auto_follow_pattern", "name, body")]
 		public Task<TResponse> CreateAutoFollowPatternAsync<TResponse>(string name, PostData body, CreateAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ccr/auto_follow/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ccr/resume_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
@@ -147,6 +156,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<param name = "index">The name of the follow index to resume following.</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.resume_follow", "index, body")]
 		public Task<TResponse> ResumeFollowIndexAsync<TResponse>(string index, PostData body, ResumeFollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ccr/resume_follow"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
@@ -155,6 +165,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ccr/stats", null, RequestParams(requestParameters));
 		///<summary>GET on /_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.stats", "")]
 		public Task<TResponse> StatsAsync<TResponse>(CcrStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ccr/stats", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ccr/unfollow <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
@@ -165,6 +176,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		///<summary>POST on /{index}/_ccr/unfollow <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "index">The name of the follower index that should be turned into a regular index.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.unfollow", "index")]
 		public Task<TResponse> UnfollowIndexAsync<TResponse>(string index, UnfollowIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_ccr/unfollow"), ctx, null, RequestParams(requestParameters));
 	}

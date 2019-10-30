@@ -202,6 +202,7 @@ Execution hints can be provided anywhere on the command line
         | ["touch"; ] -> parsed
         | ["temp"; ] -> parsed
         | "diff" :: tail -> { parsed with RemainingArguments = tail }
+        | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
         | ["canary"; ] -> parsed
         | ["codegen"; ] -> parsed
         

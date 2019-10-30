@@ -8,6 +8,9 @@
     <!-- Here to satisy UTF8JSON which defines NETSTANDARD also for anything > NET45 -->
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
     <LangVersion>8.0</LangVersion>
+    <TieredCompilation>false</TieredCompilation>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
