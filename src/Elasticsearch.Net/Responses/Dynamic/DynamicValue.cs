@@ -474,14 +474,18 @@ namespace Elasticsearch.Net
 		/// <returns>If value is not null, value is returned, else default value is returned</returns>
 		public T TryParse<T>(T defaultValue = default(T))
 		{
+			var type = typeof(T);
+			if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+				type = type.GenericTypeArguments[0];
+
 			if (HasValue)
 			{
 				try
 				{
-					if (_value.GetType().IsAssignableFrom(typeof(T)))
+					var valueType = _value.GetType();
+					if (valueType.IsAssignableFrom(typeof(T)))
 						return (T)_value;
 
-					var type = typeof(T);
 					var stringValue = _value as string;
 
 					if (type == typeof(DateTime))
@@ -502,7 +506,9 @@ namespace Elasticsearch.Net
 					{
 						return (T)Convert.ChangeType(_value, TypeCode.String, CultureInfo.InvariantCulture);
 					}
-					else if (_value.GetType().IsValueType) return (T)Convert.ChangeType(_value, type);
+					else if (valueType.IsValueType) return (T)Convert.ChangeType(_value, type);
+					else if (type == typeof(DynamicDictionary) && valueType == typeof(Dictionary<string, object>))
+						return (T)(object)DynamicDictionary.Create(_value as Dictionary<string, object>);
 					else if (type == typeof(object)) return (T)_value;
 				}
 				catch
