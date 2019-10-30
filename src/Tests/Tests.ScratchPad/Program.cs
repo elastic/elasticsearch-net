@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Diagnostics;
 using Nest;
+using Tests.Core.Client;
+using Tests.Domain;
 using Xunit.Sdk;
 
 namespace Tests.ScratchPad
@@ -46,33 +49,54 @@ namespace Tests.ScratchPad
 			}
 		}
 
+		private static readonly IList<Project> Projects = Project.Generator.Clone().Generate(10000);
+		private static byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
+		private static readonly IElasticClient Client = TestClient.FixedInMemoryClient(Response);
+
+
 		private static async Task Main(string[] args)
 		{
-			DiagnosticListener.AllListeners.Subscribe(new ListenerObserver());
+			var response = Client.Bulk(b => b.IndexMany(Projects));
 
-			using (var node = new Elastic.Managed.Ephemeral.EphemeralCluster("7.0.0"))
+
+			await Task.Delay(TimeSpan.FromSeconds(6));
+			Console.WriteLine($"Kicking off");
+
+			for (var i = 0; i < 10_000; i++)
 			{
-				node.Start();
-
-				var settings = new ConnectionSettings(new StaticConnectionPool(new[] { node.NodesUris("ipv4.fiddler").First() }))
-					.EnableHttpCompression()
-					.Proxy(new Uri("http://127.0.0.1:8080"), (string)null, (string)null)
-					;
-				var client = new ElasticClient(settings);
-
-				var x = client.Search<object>(s=>s.AllIndices());
-
-				await Task.Delay(TimeSpan.FromSeconds(7));
-
-				Console.WriteLine(new string('-', Console.WindowWidth - 1));
-
-				var y = client.Search<object>(s=>s.Index("does-not-exist"));
-
-				await Task.Delay(TimeSpan.FromSeconds(7));
-
-
+				var r = Client.Bulk(b => b.IndexMany(Projects));
+				Console.Write($"\r{i}: {r.IsValid} {r.Items.Count}");
 			}
 		}
+
+
+		private static object BulkItemResponse(Project project) => new
+		{
+			index = new
+			{
+				_index = "nest-52cfd7aa",
+				_type = "_doc",
+				_id = project.Name,
+				_version = 1,
+				_shards = new
+				{
+					total = 2,
+					successful = 1,
+					failed = 0
+				},
+				created = true,
+				status = 201
+			}
+		};
+
+		private static object ReturnBulkResponse(IList<Project> projects) => new
+		{
+			took = 276,
+			errors = false,
+			items = projects
+				.Select(p => BulkItemResponse(p))
+				.ToArray()
+		};
 
 		private static void Bench<TBenchmark>() where TBenchmark : RunBase => BenchmarkRunner.Run<TBenchmark>();
 

@@ -8,6 +8,8 @@ namespace Nest
 	{
 		private const byte Newline = (byte)'\n';
 
+		private static SourceWriteFormatter<object> SourceWriter { get; } = new SourceWriteFormatter<object>();
+
 		public IBulkRequest Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
 			throw new NotSupportedException();
 
@@ -42,12 +44,7 @@ namespace Nest
 				if (body == null)
 					continue;
 
-				var bodySerializer = op.Operation == "update" || body is ILazyDocument
-					? requestResponseSerializer
-					: sourceSerializer;
-
-				var bodyBytes = bodySerializer.SerializeToBytes(body, memoryStreamFactory, SerializationFormatting.None);
-				writer.WriteRaw(bodyBytes);
+				SourceWriter.Serialize(ref writer, body, formatterResolver);
 				writer.WriteRaw(Newline);
 			}
 		}
