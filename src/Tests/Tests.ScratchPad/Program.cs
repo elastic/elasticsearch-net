@@ -50,16 +50,22 @@ namespace Tests.ScratchPad
 		}
 
 		private static readonly IList<Project> Projects = Project.Generator.Clone().Generate(10000);
-		private static byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
-		private static readonly IElasticClient Client = TestClient.FixedInMemoryClient(Response);
+		private static readonly byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
+
+		private static readonly IElasticClient Client =
+			new ElasticClient(new ConnectionSettings(new InMemoryConnection(Response, 200, null, null))
+				.DefaultIndex("index")
+				.EnableHttpCompression(false)
+			);
 
 
 		private static async Task Main(string[] args)
 		{
+			Console.Write($"Warmup...");
 			var response = Client.Bulk(b => b.IndexMany(Projects));
+			Console.WriteLine("\rWarmed up kicking off in 2 seconds!");
 
-
-			await Task.Delay(TimeSpan.FromSeconds(6));
+			await Task.Delay(TimeSpan.FromSeconds(2));
 			Console.WriteLine($"Kicking off");
 
 			for (var i = 0; i < 10_000; i++)
