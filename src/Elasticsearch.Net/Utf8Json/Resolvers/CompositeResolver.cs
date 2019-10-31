@@ -23,12 +23,20 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
 namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
+	internal static class ResolverConfig
+	{
+		// this needs to be determined `dynamically` at compile time
+		// because we rewrite namespaces and published versioned packages
+		public static readonly string Namespace = String.Join(".", typeof(ResolverConfig).Namespace.Split('.').Take(2));
+	}
+
 	internal sealed class CompositeResolver : IJsonFormatterResolver
     {
         public static readonly CompositeResolver Instance = new CompositeResolver();
@@ -147,7 +155,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 	internal abstract class DynamicCompositeResolver : IJsonFormatterResolver
     {
-        const string ModuleName = "Elasticsearch.Net.DynamicCompositeResolver";
+		private static readonly string ModuleName =  $"{ResolverConfig.Namespace}.DynamicCompositeResolver";
 
         static readonly DynamicAssembly assembly;
 
