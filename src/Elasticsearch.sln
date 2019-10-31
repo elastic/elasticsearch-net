@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RelatedFiles", "RelatedFile
 		..\src\Library.build.props = ..\src\Library.build.props
 		Directory.Build.props = Directory.Build.props
 		Tests.build.props = Tests.build.props
+		InternalsVisible.targets = InternalsVisible.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGeneration", "CodeGeneration", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"

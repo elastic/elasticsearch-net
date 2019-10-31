@@ -157,7 +157,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
     {
 		private static readonly string ModuleName =  $"{ResolverConfig.Namespace}.DynamicCompositeResolver";
 
-        static readonly DynamicAssembly assembly;
+		static readonly DynamicAssembly assembly;
 
         static DynamicCompositeResolver()
         {
