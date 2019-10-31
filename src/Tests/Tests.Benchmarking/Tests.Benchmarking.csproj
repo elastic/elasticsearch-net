@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0;net472</TargetFrameworks>
     <OutputType>Exe</OutputType>
+    <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Optimize>true</Optimize>

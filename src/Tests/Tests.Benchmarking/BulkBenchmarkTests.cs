@@ -41,7 +41,7 @@ namespace Tests.Benchmarking
 		[Benchmark(Description = "PR")]
 		public BulkResponse NestUpdatedBulk() => Client.Bulk(b => b.IndexMany(Projects));
 
-		[Benchmark(Description = "PR no recyclable ")]
+		[Benchmark(Description = "PR no recyclable")]
 		public BulkResponse NoRecyclableMemory() => ClientNoRecyclableMemory.Bulk(b => b.IndexMany(Projects));
 
 		[Benchmark(Description = "7.x")]
