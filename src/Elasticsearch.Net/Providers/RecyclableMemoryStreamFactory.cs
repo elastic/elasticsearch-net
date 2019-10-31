@@ -21,13 +21,13 @@ namespace Elasticsearch.Net
 //			var maxBufferSize = 16 * largeBufferMultiple;
 //			_manager = new RecyclableMemoryStreamManager(blockSize, largeBufferMultiple, maxBufferSize)
 //			{
-//				//AggressiveBufferReturn = true,
+//				AggressiveBufferReturn = true,
 //				MaximumFreeLargePoolBytes = maxBufferSize * 4,
 //				MaximumFreeSmallPoolBytes = 100 * blockSize
 //			};
 			_manager = new RecyclableMemoryStreamManager()
 			{
-				//AggressiveBufferReturn = true,
+				AggressiveBufferReturn = true,
 			};
 		}
 

@@ -40,10 +40,7 @@ namespace Nest
 			var sourceSerializer = settings.SourceSerializer;
 			var f = ForceFormatting ?? SerializationFormatting.None;
 
-			using var ms = settings.MemoryStreamFactory.Create();
-			sourceSerializer.Serialize(value, ms, f);
-			writer.WriteRaw(ms);
-
+			writer.WriteSerialized(value, sourceSerializer, settings, f);
 		}
 	}
 }
