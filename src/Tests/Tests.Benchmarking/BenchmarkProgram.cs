@@ -63,9 +63,8 @@ namespace Tests.Benchmarking
 		{
 			var jobs = new[]
 			{
-				Job.ShortRun.With(Runtime.Core).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.LegacyJit),
+				Job.MediumRun.With(ClrRuntime.Net472).With(Jit.LegacyJit),
+				Job.MediumRun.With(CoreRuntime.Core30).With(Jit.RyuJit),
 			};
 			var config = DefaultConfig.Instance
 				.With(jobs)

@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
-		
+
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
@@ -179,7 +179,7 @@ namespace Elasticsearch.Net
 
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
-			
+
 			if (connectionPool is CloudConnectionPool cloudPool)
 			{
 				_basicAuthCredentials = cloudPool.BasicCredentials;
@@ -504,7 +504,7 @@ namespace Elasticsearch.Net
 				.Assign(onRequestCompleted, (a, v) =>
 				{
 					var originalCompletedRequestHandler = _completedRequestHandler;
-					var debugCompletedRequestHandler = v ?? (d => Debug.WriteLine(d.DebugInformation));
+					var debugCompletedRequestHandler = v ?? (d => { });
 					_completedRequestHandler = d =>
 					{
 						originalCompletedRequestHandler?.Invoke(d);

@@ -44,11 +44,9 @@ namespace Nest
 					ignore_unavailable = GetString("ignore_unavailable")
 				};
 
-				var headerBytes = serializer.SerializeToBytes(header, memoryStreamFactory, SerializationFormatting.None);
-				writer.WriteRaw(headerBytes);
+				writer.WriteSerialized(header, serializer, settings, SerializationFormatting.None);
 				writer.WriteRaw(Newline);
-				var bodyBytes = serializer.SerializeToBytes(operation, memoryStreamFactory, SerializationFormatting.None);
-				writer.WriteRaw(bodyBytes);
+				writer.WriteSerialized(operation, serializer, settings, SerializationFormatting.None);
 				writer.WriteRaw(Newline);
 			}
 		}

@@ -9,21 +9,22 @@ using Tests.Domain;
 
 namespace Tests.Benchmarking
 {
-	[BenchmarkConfig]
+	[BenchmarkConfig(5)]
 	public class BulkBenchmarkTests
 	{
 		private static readonly IList<Project> Projects = Project.Generator.Clone().Generate(10000);
-		private static byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
+		private static readonly byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
 
 		private static readonly IElasticClient Client =
 			new ElasticClient(new ConnectionSettings(new InMemoryConnection(Response, 200, null, null))
-				.DisableDirectStreaming()
+				.DefaultIndex("index")
 				.EnableHttpCompression(false)
 			);
+
 		private static readonly Nest7.IElasticClient ClientV7 =
 			new Nest7.ElasticClient(new Nest7.ConnectionSettings(
 					new Elasticsearch.Net7.InMemoryConnection(Response, 200, null, null))
-				.DisableDirectStreaming()
+				.DefaultIndex("index")
 				.EnableHttpCompression(false)
 			);
 
@@ -33,7 +34,7 @@ namespace Tests.Benchmarking
 		[Benchmark(Description = "NEST updated Bulk()")]
 		public BulkResponse NestUpdatedBulk() => Client.Bulk(b => b.IndexMany(Projects));
 
-		[Benchmark(Description = "NEST current Bulk()")]
+		[Benchmark(Description = "NEST Bulk()")]
 		public Nest7.BulkResponse NestCurrentBulk() => ClientV7.Bulk(b => b.IndexMany(Projects));
 
 		private static object BulkItemResponse(Project project) => new
