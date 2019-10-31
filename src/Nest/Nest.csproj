@@ -10,6 +10,16 @@
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase"/>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Requests.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Requests.cs</DependentUpon>
@@ -25,4 +35,5 @@
       <DependentUpon>ElasticClient.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\InternalsVisible.targets" />
 </Project>
