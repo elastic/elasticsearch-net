@@ -26,17 +26,17 @@
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Nest" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
     
-    <InternalsVisibleTo Include="Tests"/>
-    <InternalsVisibleTo Include="Tests.Domain"/>
+    <InternalsVisibleTo Include="Tests" />
+    <InternalsVisibleTo Include="Tests.Domain" />
 
   </ItemGroup>
   <ItemGroup>
