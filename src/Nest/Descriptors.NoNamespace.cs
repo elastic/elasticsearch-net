@@ -342,8 +342,6 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> SearchTimeout(Time searchtimeout) => Qs("search_timeout", searchtimeout);
 		///<summary>Search operation type</summary>
 		public DeleteByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public DeleteByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -872,7 +870,7 @@ namespace Nest
 		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifprimaryterm) => Qs("if_primary_term", ifprimaryterm);
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
 		public IndexDescriptor<TDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
-		///<summary>Explicit operation type</summary>
+		///<summary>Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID</summary>
 		public IndexDescriptor<TDocument> OpType(OpType? optype) => Qs("op_type", optype);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
@@ -1620,8 +1618,6 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> SearchTimeout(Time searchtimeout) => Qs("search_timeout", searchtimeout);
 		///<summary>Search operation type</summary>
 		public UpdateByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public UpdateByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>

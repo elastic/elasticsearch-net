@@ -493,13 +493,6 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public long? Size
-		{
-			get => Q<long? >("size");
-			set => Q("size", value);
-		}
-
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices
 		{
@@ -1055,7 +1048,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for Index <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 	public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm
@@ -1071,7 +1064,10 @@ namespace Elasticsearch.Net
 			set => Q("if_seq_no", value);
 		}
 
-		///<summary>Explicit operation type</summary>
+		///<summary>
+		/// Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit
+		/// document ID
+		///</summary>
 		public OpType? OpType
 		{
 			get => Q<OpType? >("op_type");
@@ -2226,13 +2222,6 @@ namespace Elasticsearch.Net
 		{
 			get => Q<SearchType? >("search_type");
 			set => Q("search_type", value);
-		}
-
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public long? Size
-		{
-			get => Q<long? >("size");
-			set => Q("size", value);
 		}
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>

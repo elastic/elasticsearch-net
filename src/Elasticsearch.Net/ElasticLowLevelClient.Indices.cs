@@ -357,38 +357,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.get_field_mapping", "index, fields")]
 		public Task<TResponse> GetFieldMappingAsync<TResponse>(string index, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_mapping/{type}/field/{fields} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "fields">A comma-separated list of fields</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse GetFieldMappingUsingTypeForAll<TResponse>(string type, string fields, GetFieldMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_mapping/{type:type}/field/{fields:fields}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_mapping/{type}/field/{fields} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "fields">A comma-separated list of fields</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.get_field_mapping", "type, fields")]
-		public Task<TResponse> GetFieldMappingUsingTypeForAllAsync<TResponse>(string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_mapping/{type:type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_mapping/{type}/field/{fields} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
-		///<param name = "index">A comma-separated list of index names</param>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "fields">A comma-separated list of fields</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse GetFieldMappingUsingType<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}/field/{fields:fields}"), null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_mapping/{type}/field/{fields} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
-		///<param name = "index">A comma-separated list of index names</param>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "fields">A comma-separated list of fields</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.get_field_mapping", "index, type, fields")]
-		public Task<TResponse> GetFieldMappingUsingTypeAsync<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetMappingForAll<TResponse>(GetMappingRequestParameters requestParameters = null)
@@ -409,34 +377,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.get_mapping", "index")]
 		public Task<TResponse> GetMappingAsync<TResponse>(string index, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_mapping/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse GetMappingUsingTypeForAll<TResponse>(string type, GetMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_mapping/{type:type}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_mapping/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.get_mapping", "type")]
-		public Task<TResponse> GetMappingUsingTypeForAllAsync<TResponse>(string type, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_mapping/{type:type}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_mapping/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
-		///<param name = "index">A comma-separated list of index names</param>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse GetMappingUsingType<TResponse>(string index, string type, GetMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}"), null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_mapping/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
-		///<param name = "index">A comma-separated list of index names</param>
-		///<param name = "type">A comma-separated list of document types</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.get_mapping", "index, type")]
-		public Task<TResponse> GetMappingUsingTypeAsync<TResponse>(string index, string type, GetMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetSettingsForAll<TResponse>(GetIndexSettingsRequestParameters requestParameters = null)
@@ -540,38 +480,19 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.put_mapping", "index, body")]
 		public Task<TResponse> PutMappingAsync<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_mapping"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/{type}/_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
-		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
-		///<param name = "type">The name of the document type</param>
-		///<param name = "body">The mapping definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse PutMappingUsingType<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/{type:type}/_mapping"), body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/{type}/_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
-		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
-		///<param name = "type">The name of the document type</param>
-		///<param name = "body">The mapping definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.put_mapping", "index, type, body")]
-		public Task<TResponse> PutMappingUsingTypeAsync<TResponse>(string index, string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/{type:type}/_mapping"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_mappings/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
-		///<param name = "type">The name of the document type</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse PutMappingUsingTypeForAll<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_mappings/{type:type}"), body, RequestParams(requestParameters));
+		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		public TResponse PutMappingUsingTypeForAll<TResponse>(PostData body, PutMappingRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_mappings/{type}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_mappings/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
-		///<param name = "type">The name of the document type</param>
 		///<param name = "body">The mapping definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.put_mapping", "type, body")]
-		public Task<TResponse> PutMappingUsingTypeForAllAsync<TResponse>(string type, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_mappings/{type:type}"), ctx, body, RequestParams(requestParameters));
+		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
+		[MapsApi("indices.put_mapping", "body")]
+		public Task<TResponse> PutMappingUsingTypeForAllAsync<TResponse>(PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_mappings/{type}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

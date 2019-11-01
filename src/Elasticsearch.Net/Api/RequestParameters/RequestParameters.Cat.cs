@@ -57,13 +57,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("local", value);
 		}
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{
@@ -167,20 +160,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{
@@ -236,20 +215,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{
@@ -296,20 +261,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 		{
 			get => Q<bool? >("ts");
 			set => Q("ts", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
 		}
 
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
@@ -545,6 +496,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -717,11 +675,25 @@ namespace Elasticsearch.Net.Specification.CatApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
+		///<summary>If `true`, the response only includes ongoing shard recoveries</summary>
+		public bool? ActiveOnly
+		{
+			get => Q<bool? >("active_only");
+			set => Q("active_only", value);
+		}
+
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
 			get => Q<Bytes? >("bytes");
 			set => Q("bytes", value);
+		}
+
+		///<summary>If `true`, the response includes detailed information about shard recoveries</summary>
+		public bool? Detailed
+		{
+			get => Q<bool? >("detailed");
+			set => Q("detailed", value);
 		}
 
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -745,11 +717,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("help", value);
 		}
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout
+		///<summary>Comma-separated list or wildcard expression of index names to limit the returned information</summary>
+		public string[] IndexQueryString
 		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
+			get => Q<string[]>("index");
+			set => Q("index", value);
 		}
 
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>

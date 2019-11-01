@@ -736,8 +736,6 @@ namespace Nest
 		public GetMappingDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public GetMappingDescriptor<TDocument> IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
@@ -936,8 +934,6 @@ namespace Nest
 		public PutMappingDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public PutMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public PutMappingDescriptor<TDocument> IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutMappingDescriptor<TDocument> MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit operation timeout</summary>

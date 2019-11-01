@@ -751,13 +751,6 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public long? Size
-		{
-			get => Q<long? >("size");
-			set => Q("size", value);
-		}
-
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices
 		{
@@ -1862,7 +1855,10 @@ namespace Nest
 			set => Q("if_seq_no", value);
 		}
 
-		///<summary>Explicit operation type</summary>
+		///<summary>
+		/// Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit
+		/// document ID
+		///</summary>
 		public OpType? OpType
 		{
 			get => Q<OpType? >("op_type");
@@ -3539,13 +3535,6 @@ namespace Nest
 		{
 			get => Q<SearchType? >("search_type");
 			set => Q("search_type", value);
-		}
-
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public long? Size
-		{
-			get => Q<long? >("size");
-			set => Q("size", value);
 		}
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>

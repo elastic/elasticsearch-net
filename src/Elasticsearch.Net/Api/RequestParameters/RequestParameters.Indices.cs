@@ -768,13 +768,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("ignore_unavailable", value);
 		}
 
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -980,13 +973,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<bool? >("ignore_unavailable");
 			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
