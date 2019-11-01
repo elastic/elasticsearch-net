@@ -26,28 +26,10 @@
               "description":"A comma-separated list of index names to use as default"
             }
           }
-        },
-        {
-          "path" : "/{index}/{type}/_msearch/template",
-          "methods": ["GET", "POST"],
-          "parts": {
-            "index": {
-              "type" : "list",
-              "description" : "A comma-separated list of index names to use as default"
-            },
-            "type": {
-              "type" : "list",
-              "description" : "A comma-separated list of document types to use as default"
-            }
-          },
-          "deprecated": {
-            "version" : "7.0.0",
-            "description" : "Specifying types in urls has been deprecated"
-          }
         }
       ]
     },
-    "params": {
+    "params":{
       "search_type":{
         "type":"enum",
         "options":[
@@ -58,18 +40,23 @@
         ],
         "description":"Search operation type"
       },
-      "typed_keys": {
-        "type" : "boolean",
-        "description" : "Specify whether aggregation and suggester names should be prefixed by their respective types in the response"
+      "typed_keys":{
+        "type":"boolean",
+        "description":"Specify whether aggregation and suggester names should be prefixed by their respective types in the response"
       },
-      "max_concurrent_searches" : {
-        "type" : "number",
-        "description" : "Controls the maximum number of concurrent searches the multi search api will execute"
+      "max_concurrent_searches":{
+        "type":"number",
+        "description":"Controls the maximum number of concurrent searches the multi search api will execute"
       },
-      "rest_total_hits_as_int" : {
-        "type" : "boolean",
-        "description" : "Indicates whether hits.total should be rendered as an integer or an object in the rest search response",
-        "default" : false
+      "rest_total_hits_as_int":{
+        "type":"boolean",
+        "description":"Indicates whether hits.total should be rendered as an integer or an object in the rest search response",
+        "default":false
+      },
+      "ccs_minimize_roundtrips":{
+        "type":"boolean",
+        "description":"Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution",
+        "default":"true"
       }
     },
     "body":{
