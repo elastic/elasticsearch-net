@@ -19,8 +19,6 @@ namespace Nest
 
 		TDocument Source { get; }
 
-		string Type { get; }
-
 		long Version { get; }
 
 		long? SequenceNumber { get; }
@@ -53,9 +51,6 @@ namespace Nest
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
 		public TDocument Source { get; internal set; }
-
-		[DataMember(Name = "_type")]
-		public string Type { get; internal set; }
 
 		[DataMember(Name = "_version")]
 		public long Version { get; internal set; }

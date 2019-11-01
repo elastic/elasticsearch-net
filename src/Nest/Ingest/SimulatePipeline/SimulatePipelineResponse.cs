@@ -44,9 +44,6 @@ namespace Nest
 
 		[DataMember(Name ="_source")]
 		public ILazyDocument Source { get; internal set; }
-
-		[DataMember(Name ="_type")]
-		public string Type { get; internal set; }
 	}
 
 	[DataContract]

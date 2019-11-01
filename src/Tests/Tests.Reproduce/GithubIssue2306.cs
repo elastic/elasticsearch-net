@@ -22,7 +22,6 @@ namespace Tests.Reproduce
 			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
-			response.Type.Should().Be("doc");
 			response.Id.Should().Be("non-existent-id");
 		}
 	}

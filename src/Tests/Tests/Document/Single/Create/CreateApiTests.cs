@@ -98,7 +98,6 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be("_doc");
 			createResponse.Id.Should().Be(project.Name);
 
 			createResponse.Shards.Should().NotBeNull();
@@ -153,7 +152,6 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be("_doc");
 
 			var bulkResponse = Client.Bulk(b => b
 				.Index(index)
@@ -199,7 +197,6 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Index.Should().Be(index);
 			createResponse.Result.Should().Be(Result.Created);
-			createResponse.Type.Should().StartWith("_doc");
 		}
 	}
 }

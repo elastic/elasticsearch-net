@@ -52,12 +52,6 @@ namespace Nest
 		TDocument Source { get; }
 
 		/// <summary>
-		/// The type of hit
-		/// </summary>
-		[DataMember(Name = "_type")]
-		string Type { get; }
-
-		/// <summary>
 		/// The version of the hit
 		/// </summary>
 		[DataMember(Name = "_version")]
@@ -71,7 +65,6 @@ namespace Nest
 			where TTarget : class =>
 			new Hit<TTarget>()
 			{
-				Type = source.Type,
 				Index = source.Index,
 				Id = source.Id,
 				Routing = source.Routing,
@@ -171,8 +164,6 @@ namespace Nest
 		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
 		/// <inheritdoc />
 		public TDocument Source { get; internal set; }
-		/// <inheritdoc />
-		public string Type { get; internal set; }
 		/// <inheritdoc />
 		public long Version { get; internal set; }
 	}

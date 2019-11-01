@@ -88,7 +88,6 @@ namespace Tests.Document.Single.Get
 		{
 			response.Found.Should().BeFalse();
 			response.Index.Should().Be("project");
-			response.Type.Should().Be("_doc");
 			response.Id.Should().Be(CallIsolatedValue);
 		}
 	}

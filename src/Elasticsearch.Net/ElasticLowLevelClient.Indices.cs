@@ -99,6 +99,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "target">The name of the target index to clone into</param>
 		///<param name = "body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.clone", "index, target, body")]
 		public Task<TResponse> CloneAsync<TResponse>(string index, string target, PostData body, CloneIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_clone/{target:target}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_close <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
@@ -206,19 +207,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.exists_template", "name")]
 		public Task<TResponse> TemplateExistsForAllAsync<TResponse>(string name, IndexTemplateExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"_template/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>HEAD on /{index}/_mapping/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
-		///<param name = "index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
-		///<param name = "type">A comma-separated list of document types to check</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse TypeExists<TResponse>(string index, string type, TypeExistsRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(HEAD, Url($"{index:index}/_mapping/{type:type}"), null, RequestParams(requestParameters));
-		///<summary>HEAD on /{index}/_mapping/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
-		///<param name = "index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
-		///<param name = "type">A comma-separated list of document types to check</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("indices.exists_type", "index, type")]
-		public Task<TResponse> TypeExistsAsync<TResponse>(string index, string type, TypeExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"{index:index}/_mapping/{type:type}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_flush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse FlushForAll<TResponse>(FlushRequestParameters requestParameters = null)

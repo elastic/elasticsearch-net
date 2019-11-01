@@ -51,12 +51,6 @@ namespace Nest
 		[DataMember(Name = "status")]
 		public int Status { get; internal set; }
 
-		/// <summary>
-		/// The type against which the bulk operation ran
-		/// </summary>
-		[DataMember(Name = "_type")]
-		public string Type { get; internal set; }
-
 		/// <summary> The version of the document </summary>
 		[DataMember(Name = "_version")]
 		public long Version { get; internal set; }
@@ -68,7 +62,7 @@ namespace Nest
 		{
 			get
 			{
-				if (Error != null || Type.IsNullOrEmpty()) return false;
+				if (Error != null) return false;
 
 				switch (Operation.ToLowerInvariant())
 				{
@@ -83,7 +77,7 @@ namespace Nest
 			}
 		}
 		public override string ToString() =>
-			$"{Operation} returned {Status} _index: {Index} _type: {Type} _id: {Id} _version: {Version} error: {Error}";
+			$"{Operation} returned {Status} _index: {Index} _id: {Id} _version: {Version} error: {Error}";
 	}
 
 }

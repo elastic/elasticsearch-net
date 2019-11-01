@@ -101,7 +101,6 @@ namespace Tests.Document.Single
 		protected override void ExpectDeleteNotFoundResponse(DeleteResponse response)
 		{
 			response.Index.Should().NotBeNullOrEmpty();
-			response.Type.Should().NotBeNullOrEmpty();
 			response.Id.Should().NotBeNullOrEmpty();
 			response.Version.Should().BeGreaterThan(0);
 			response.SequenceNumber.Should().BeGreaterThan(0);
