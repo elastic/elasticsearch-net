@@ -480,19 +480,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.put_mapping", "index, body")]
 		public Task<TResponse> PutMappingAsync<TResponse>(string index, PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_mapping"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /_mappings/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
-		///<param name = "body">The mapping definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
-		public TResponse PutMappingUsingTypeForAll<TResponse>(PostData body, PutMappingRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_mappings/{type}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_mappings/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
-		///<param name = "body">The mapping definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.put_mapping", "body")]
-		public Task<TResponse> PutMappingUsingTypeForAllAsync<TResponse>(PostData body, PutMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_mappings/{type}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 		///<param name = "body">The index settings to be updated</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

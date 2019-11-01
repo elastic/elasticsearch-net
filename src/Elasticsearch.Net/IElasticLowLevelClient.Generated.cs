@@ -143,7 +143,6 @@ namespace Elasticsearch.Net
 		///<param name = "type">Default document type for items which don&#x27;t provide one</param>
 		///<param name = "body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		TResponse BulkUsingType<TResponse>(string index, string type, PostData body, BulkRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/{type}/_bulk <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
@@ -151,7 +150,6 @@ namespace Elasticsearch.Net
 		///<param name = "type">Default document type for items which don&#x27;t provide one</param>
 		///<param name = "body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		Task<TResponse> BulkUsingTypeAsync<TResponse>(string index, string type, PostData body, BulkRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_search/scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>

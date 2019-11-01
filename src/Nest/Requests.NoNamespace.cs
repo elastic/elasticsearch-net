@@ -38,6 +38,12 @@ namespace Nest
 		{
 			get;
 		}
+
+		[IgnoreDataMember]
+		Name Type
+		{
+			get;
+		}
 	}
 
 	///<summary>Request for Bulk <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
@@ -56,9 +62,18 @@ namespace Nest
 		{
 		}
 
+		///<summary>/{index}/{type}/_bulk</summary>
+		///<param name = "index">Optional, accepts null</param>
+		///<param name = "type">Optional, accepts null</param>
+		public BulkRequest(IndexName index, Name type): base(r => r.Optional("index", index).Optional("type", type))
+		{
+		}
+
 		// values part of the url path
 		[IgnoreDataMember]
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		[IgnoreDataMember]
+		Name IBulkRequest.Type => Self.RouteValues.Get<Name>("type");
 		// Request parameters
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline
@@ -117,13 +132,6 @@ namespace Nest
 		{
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
-		}
-
-		///<summary>Default document type for items which don't provide one</summary>
-		public string TypeQueryString
-		{
-			get => Q<string>("type");
-			set => Q("type", value);
 		}
 
 		///<summary>
