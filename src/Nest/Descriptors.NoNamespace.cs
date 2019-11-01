@@ -44,13 +44,23 @@ namespace Nest
 		{
 		}
 
+		///<summary>/{index}/{type}/_bulk</summary>
+		///<param name = "index">Optional, accepts null</param>
+		///<param name = "type">Optional, accepts null</param>
+		public BulkDescriptor(IndexName index, Name type): base(r => r.Optional("index", index).Optional("type", type))
+		{
+		}
+
 		// values part of the url path
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Name IBulkRequest.Type => Self.RouteValues.Get<Name>("type");
 		///<summary>Default index for items which don't provide one</summary>
 		public BulkDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public BulkDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (IndexName)v));
+		///<summary>Default document type for items which don't provide one</summary>
+		public BulkDescriptor Type(Name type) => Assign(type, (a, v) => a.RouteValues.Optional("type", v));
 		// Request parameters
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
@@ -78,8 +88,6 @@ namespace Nest
 			where T : class => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Default document type for items which don't provide one</summary>
-		public BulkDescriptor TypeQueryString(string typequerystring) => Qs("type", typequerystring);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public BulkDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
@@ -342,8 +350,6 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> SearchTimeout(Time searchtimeout) => Qs("search_timeout", searchtimeout);
 		///<summary>Search operation type</summary>
 		public DeleteByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public DeleteByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -872,7 +878,7 @@ namespace Nest
 		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifprimaryterm) => Qs("if_primary_term", ifprimaryterm);
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
 		public IndexDescriptor<TDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
-		///<summary>Explicit operation type</summary>
+		///<summary>Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID</summary>
 		public IndexDescriptor<TDocument> OpType(OpType? optype) => Qs("op_type", optype);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
@@ -1620,8 +1626,6 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> SearchTimeout(Time searchtimeout) => Qs("search_timeout", searchtimeout);
 		///<summary>Search operation type</summary>
 		public UpdateByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
-		///<summary>Deprecated, please use `max_docs` instead</summary>
-		public UpdateByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>

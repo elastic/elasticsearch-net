@@ -58,8 +58,6 @@ namespace Nest
 		public CatAliasesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAliasesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatAliasesDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>
@@ -135,10 +133,6 @@ namespace Nest
 		public CatCountDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatCountDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatCountDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatCountDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>
@@ -175,10 +169,6 @@ namespace Nest
 		public CatFielddataDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatFielddataDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatFielddataDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatFielddataDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>
@@ -199,10 +189,6 @@ namespace Nest
 		public CatHealthDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Set to false to disable timestamping</summary>
 		public CatHealthDescriptor IncludeTimestamp(bool? includetimestamp = true) => Qs("ts", includetimestamp);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatHealthDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatHealthDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatHealthDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>
@@ -320,6 +306,8 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatNodes;
 		// values part of the url path
 		// Request parameters
+		///<summary>The unit in which to display byte values</summary>
+		public CatNodesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
@@ -399,7 +387,7 @@ namespace Nest
 
 		// values part of the url path
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		///<summary>A comma-separated list of index names to limit the returned information</summary>
+		///<summary>Comma-separated list or wildcard expression of index names to limit the returned information</summary>
 		public CatRecoveryDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatRecoveryDescriptor Index<TOther>()
@@ -407,16 +395,18 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatRecoveryDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
+		///<summary>If `true`, the response only includes ongoing shard recoveries</summary>
+		public CatRecoveryDescriptor ActiveOnly(bool? activeonly = true) => Qs("active_only", activeonly);
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>If `true`, the response includes detailed information about shard recoveries</summary>
+		public CatRecoveryDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRecoveryDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatRecoveryDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRecoveryDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatRecoveryDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>

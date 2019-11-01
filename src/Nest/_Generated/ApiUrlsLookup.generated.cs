@@ -18,7 +18,7 @@ namespace Nest
 {
 	internal static class ApiUrlsLookups
 	{
-		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[]{"_bulk", "{index}/_bulk"});
+		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[]{"_bulk", "{index}/_bulk", "{index}/{type}/_bulk"});
 		internal static ApiUrls CatAliases = new ApiUrls(new[]{"_cat/aliases", "_cat/aliases/{name}"});
 		internal static ApiUrls CatAllocation = new ApiUrls(new[]{"_cat/allocation", "_cat/allocation/{node_id}"});
 		internal static ApiUrls CatCount = new ApiUrls(new[]{"_cat/count", "_cat/count/{index}"});
@@ -96,7 +96,6 @@ namespace Nest
 		internal static ApiUrls IndicesExists = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesAliasExists = new ApiUrls(new[]{"_alias/{name}", "{index}/_alias/{name}"});
 		internal static ApiUrls IndicesTemplateExists = new ApiUrls(new[]{"_template/{name}"});
-		internal static ApiUrls IndicesTypeExists = new ApiUrls(new[]{"{index}/_mapping/{type}"});
 		internal static ApiUrls IndicesFlush = new ApiUrls(new[]{"_flush", "{index}/_flush"});
 		internal static ApiUrls IndicesSyncedFlush = new ApiUrls(new[]{"_flush/synced", "{index}/_flush/synced"});
 		internal static ApiUrls IndicesForceMerge = new ApiUrls(new[]{"_forcemerge", "{index}/_forcemerge"});

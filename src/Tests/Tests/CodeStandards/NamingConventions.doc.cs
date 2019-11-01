@@ -113,7 +113,6 @@ namespace Tests.CodeStandards
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
 				typeof(IndexExistsRequest),
-				typeof(TypeExistsRequest),
 				typeof(IndexTemplateExistsRequest),
 				typeof(SearchTemplateRequest),
 				typeof(SearchTemplateRequest<>),

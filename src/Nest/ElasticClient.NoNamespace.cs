@@ -590,28 +590,28 @@ namespace Nest
 		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<ISourceRequest, SourceResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, SourceRequestResponseBuilder<TDocument>.Instance), ct);
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>
 		public IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
 			where TDocument : class => Index<TDocument>(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(documentWithId: document)));
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>
 		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class => IndexAsync<TDocument>(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(documentWithId: document)), ct);
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>
 		public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
 			where TDocument : class => DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>

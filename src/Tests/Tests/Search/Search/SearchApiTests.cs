@@ -328,7 +328,6 @@ namespace Tests.Search.Search
 			response.HitsMetadata.Should().NotBeNull();
 			response.Hits.Count().Should().BeGreaterThan(0);
 			response.Hits.First().Should().NotBeNull();
-			response.Hits.First().Type.Should().NotBeNullOrWhiteSpace();
 			response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
 			var lastActivityYear = Convert.ToInt32(response.Hits.First().Fields.Value<string>("lastActivity"));
 			lastActivityYear.Should().BeGreaterThan(0);

@@ -83,7 +83,6 @@ namespace Tests.Document.Single.Delete
 			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
-			response.Type.Should().Be("_doc");
 			response.Id.Should().Be(CallIsolatedValue);
 			response.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			response.Shards.Successful.Should().BeGreaterOrEqualTo(1);

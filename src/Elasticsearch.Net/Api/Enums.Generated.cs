@@ -350,9 +350,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "external")]
 		External,
 		[EnumMember(Value = "external_gte")]
-		ExternalGte,
-		[EnumMember(Value = "force")]
-		Force
+		ExternalGte
 	}
 
 	[StringEnum]
@@ -844,8 +842,6 @@ namespace Elasticsearch.Net
 					return "external";
 				case VersionType.ExternalGte:
 					return "external_gte";
-				case VersionType.Force:
-					return "force";
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'VersionType'");

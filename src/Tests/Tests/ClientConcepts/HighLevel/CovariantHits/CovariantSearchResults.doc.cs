@@ -43,7 +43,6 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			result.HitsMetadata.Total.Value.Should().Be(100);
 
 			result.Hits.Should().OnlyContain(hit => hit.Index == "project", "_index on hit");
-			result.Hits.Should().OnlyContain(hit => !string.IsNullOrEmpty(hit.Type), "_type on hit");
 			result.Hits.Should().OnlyContain(hit => !string.IsNullOrEmpty(hit.Id), "_id on hit");
 			result.Hits.Should().OnlyContain(hit => hit.Score.HasValue, "_score on hit");
 			result.Hits.Should().OnlyContain(hit => hit.Source != null, "_source on hit");

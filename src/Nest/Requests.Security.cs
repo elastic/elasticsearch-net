@@ -468,6 +468,13 @@ namespace Nest
 			set => Q("name", value);
 		}
 
+		///<summary>flag to query API keys owned by the currently authenticated user</summary>
+		public bool? Owner
+		{
+			get => Q<bool? >("owner");
+			set => Q("owner", value);
+		}
+
 		///<summary>realm name of the user who created this API key to be retrieved</summary>
 		public string RealmName
 		{

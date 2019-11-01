@@ -301,30 +301,6 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<ExistsResponse> TemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
-		/// <c>HEAD</c> request to the <c>indices.exists_type</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</a>
-		/// </summary>
-		public ExistsResponse TypeExists(Indices index, Names type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null) => TypeExists(selector.InvokeOrDefault(new TypeExistsDescriptor(index: index, type: type)));
-		/// <summary>
-		/// <c>HEAD</c> request to the <c>indices.exists_type</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</a>
-		/// </summary>
-		public Task<ExistsResponse> TypeExistsAsync(Indices index, Names type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null, CancellationToken ct = default) => TypeExistsAsync(selector.InvokeOrDefault(new TypeExistsDescriptor(index: index, type: type)), ct);
-		/// <summary>
-		/// <c>HEAD</c> request to the <c>indices.exists_type</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</a>
-		/// </summary>
-		public ExistsResponse TypeExists(ITypeExistsRequest request) => DoRequest<ITypeExistsRequest, ExistsResponse>(request, request.RequestParameters);
-		/// <summary>
-		/// <c>HEAD</c> request to the <c>indices.exists_type</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</a>
-		/// </summary>
-		public Task<ExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken ct = default) => DoRequestAsync<ITypeExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
-		/// <summary>
 		/// <c>POST</c> request to the <c>indices.flush</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</a>

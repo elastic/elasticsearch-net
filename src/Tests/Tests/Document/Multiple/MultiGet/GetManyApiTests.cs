@@ -26,7 +26,6 @@ namespace Tests.Document.Multiple.MultiGet
 			foreach (var hit in response)
 			{
 				hit.Index.Should().NotBeNullOrWhiteSpace();
-				hit.Type.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 			}
@@ -39,7 +38,6 @@ namespace Tests.Document.Multiple.MultiGet
 			foreach (var hit in response)
 			{
 				hit.Index.Should().NotBeNullOrWhiteSpace();
-				hit.Type.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 			}
@@ -52,7 +50,6 @@ namespace Tests.Document.Multiple.MultiGet
 			foreach (var hit in response)
 			{
 				hit.Index.Should().NotBeNullOrWhiteSpace();
-				hit.Type.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeFalse();
 			}

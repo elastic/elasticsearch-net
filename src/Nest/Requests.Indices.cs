@@ -719,78 +719,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
-	{
-		[IgnoreDataMember]
-		Indices Index
-		{
-			get;
-		}
-
-		[IgnoreDataMember]
-		Names Type
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for TypeExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
-	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
-	{
-		protected ITypeExistsRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesTypeExists;
-		///<summary>/{index}/_mapping/{type}</summary>
-		///<param name = "index">this parameter is required</param>
-		///<param name = "type">this parameter is required</param>
-		public TypeExistsRequest(Indices index, Names type): base(r => r.Required("index", index).Required("type", type))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected TypeExistsRequest(): base()
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		[IgnoreDataMember]
-		Names ITypeExistsRequest.Type => Self.RouteValues.Get<Names>("type");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-	}
-
-	[InterfaceDataContract]
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1390,13 +1318,6 @@ namespace Nest
 			set => Q("ignore_unavailable", value);
 		}
 
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -1764,13 +1685,6 @@ namespace Nest
 		{
 			get => Q<bool? >("ignore_unavailable");
 			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Specify timeout for connection to master</summary>

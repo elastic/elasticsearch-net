@@ -12,7 +12,7 @@ namespace Nest
 		/// TermVector API returns 200 even if <see cref="Found"/>;
 		/// </summary>
 		public override bool IsValid => base.IsValid && Found;
-		
+
 		[DataMember(Name ="found")]
 		public bool Found { get; internal set; }
 
@@ -28,9 +28,6 @@ namespace Nest
 
 		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
-
-		[DataMember(Name ="_type")]
-		public string Type { get; internal set; }
 
 		[DataMember(Name ="_version")]
 		public long Version { get; internal set; }

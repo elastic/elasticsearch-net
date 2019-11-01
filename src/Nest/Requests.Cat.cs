@@ -89,13 +89,6 @@ namespace Nest
 			set => Q("local", value);
 		}
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{
@@ -249,20 +242,6 @@ namespace Nest
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{
@@ -336,20 +315,6 @@ namespace Nest
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{
@@ -403,20 +368,6 @@ namespace Nest
 		{
 			get => Q<bool? >("ts");
 			set => Q("ts", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
 		}
 
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
@@ -705,6 +656,13 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatNodes;
 		// values part of the url path
 		// Request parameters
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -916,11 +874,25 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
+		///<summary>If `true`, the response only includes ongoing shard recoveries</summary>
+		public bool? ActiveOnly
+		{
+			get => Q<bool? >("active_only");
+			set => Q("active_only", value);
+		}
+
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes
 		{
 			get => Q<Bytes? >("bytes");
 			set => Q("bytes", value);
+		}
+
+		///<summary>If `true`, the response includes detailed information about shard recoveries</summary>
+		public bool? Detailed
+		{
+			get => Q<bool? >("detailed");
+			set => Q("detailed", value);
 		}
 
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -942,13 +914,6 @@ namespace Nest
 		{
 			get => Q<bool? >("help");
 			set => Q("help", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
 		}
 
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
