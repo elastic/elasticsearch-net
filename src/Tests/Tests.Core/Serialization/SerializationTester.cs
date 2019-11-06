@@ -215,7 +215,7 @@ namespace Tests.Core.Serialization
 
 		private static bool MatchJson<T>(JToken expectedJson, string actualJson, RoundTripResult<T> result, string message)
 		{
-			var actualJsonToken = JToken.Parse(actualJson));
+			var actualJsonToken = JToken.Parse(actualJson);
 			var matches = JToken.DeepEquals(expectedJson, actualJsonToken);
 			if (matches) return true;
 

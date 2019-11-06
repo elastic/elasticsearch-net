@@ -92,7 +92,7 @@ namespace ApiGenerator
 		{
 			var f = Path.Combine(GeneratorLocations.RestSpecificationFolder, folder);
 			if (!Directory.Exists(f)) Directory.CreateDirectory(f);
-			File.WriteAllText(f + "\\" + filename, contents);
+			File.WriteAllText(f + Path.DirectorySeparatorChar  + filename, contents);
 		}
 
 		private class Specification
