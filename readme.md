@@ -253,7 +253,7 @@ var response = client.LowLevel.Search<SearchResponse<Tweet>>("myindex", PostData
 
 A low-level, dependency free client that has no opinions how you build and represent your requests and responses.
 
-It provides a one-to-one mapping with the Elasticsearch REST API. The client is almost completely generated from the official REST API specification, which makes is easy to keep up-to-date. The client also has support for load balancing and cluster failover and all client method calls have both synchronous and asynchronous variants
+It provides a one-to-one mapping with the Elasticsearch REST API. The client is almost completely generated from the official REST API specification, which makes it easy to keep up-to-date. The client also has support for load balancing and cluster failover and all client method calls have both synchronous and asynchronous variants
 
 ### Installing
 
