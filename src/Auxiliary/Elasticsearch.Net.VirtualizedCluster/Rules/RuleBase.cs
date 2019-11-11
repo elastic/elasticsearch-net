@@ -50,9 +50,9 @@ namespace Elasticsearch.Net.VirtualizedCluster.Rules
 			where T : class
 		{
 			byte[] r;
-			using (var ms = new MemoryStream())
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
 			{
-				new LowLevelRequestResponseSerializer().Serialize(response, ms);
+				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				r = ms.ToArray();
 			}
 			Self.ReturnResponse = r;
