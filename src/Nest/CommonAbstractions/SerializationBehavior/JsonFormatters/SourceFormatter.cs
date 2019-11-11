@@ -30,7 +30,8 @@ namespace Nest
 			var settings = formatterResolver.GetConnectionSettings();
 
 			// avoid serialization to bytes when not using custom source serializer
-			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer))
+			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer)
+				|| settings.SourceSerializer is IInternalSerializerWithFormatter s && s.FormatterResolver != null)
 			{
 				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
 				return;
@@ -38,15 +39,8 @@ namespace Nest
 
 			var sourceSerializer = settings.SourceSerializer;
 			var f = ForceFormatting ?? SerializationFormatting.None;
-			byte[] bytes;
-			using (var ms = settings.MemoryStreamFactory.Create())
-			{
-				sourceSerializer.Serialize(value, ms, f);
-				// TODO: read each byte instead of creating and allocating an array
-				bytes = ms.ToArray();
-			}
 
-			writer.WriteRaw(bytes);
+			writer.WriteSerialized(value, sourceSerializer, settings, f);
 		}
 	}
 }

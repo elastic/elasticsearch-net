@@ -1,4 +1,3 @@
-using Elasticsearch.Net.CrossPlatform;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -13,8 +12,7 @@ namespace Nest
 				return;
 			}
 
-			var nestType = value.GetType().Assembly() == typeof(SourceWriteFormatter<>).Assembly();
-			if (nestType)
+			if (value.GetType().IsNestType())
 				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
 			else
 				base.Serialize(ref writer, value, formatterResolver);

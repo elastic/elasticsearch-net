@@ -34,9 +34,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
     {
         public static readonly bool Is32Bit = (IntPtr.Size == 4);
 
-        public static void WriteRaw(ref JsonWriter writer, byte[] src)
+        public static void WriteRaw(ref JsonWriter writer, byte[] src) => WriteRaw(ref writer, src, src.Length);
+        public static void WriteRaw(ref JsonWriter writer, byte[] src, int length)
         {
-            switch (src.Length)
+            switch (length)
             {
                 case 0: break;
                 case 1: if (Is32Bit) { UnsafeMemory32.WriteRaw1(ref writer, src); } else { UnsafeMemory64.WriteRaw1(ref writer, src); } break;
@@ -76,15 +77,18 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             }
         }
 
-        public static unsafe void MemoryCopy(ref JsonWriter writer, byte[] src)
+        public static void MemoryCopy(ref JsonWriter writer, byte[] src) => MemoryCopy(ref writer, src, src.Length);
+
+        public static unsafe void MemoryCopy(ref JsonWriter writer, byte[] src, int length)
         {
-            BinaryUtil.EnsureCapacity(ref writer.buffer, writer.offset, src.Length);
+            BinaryUtil.EnsureCapacity(ref writer.buffer, writer.offset, length);
+#if !NET45
             fixed (void* dstP = &writer.buffer[writer.offset])
             fixed (void* srcP = &src[0])
             {
-                Buffer.MemoryCopy(srcP, dstP, writer.buffer.Length - writer.offset, src.Length);
+                Buffer.MemoryCopy(srcP, dstP, writer.buffer.Length - writer.offset, length);
             }
-            writer.offset += src.Length;
+            writer.offset += length;
         }
     }
 
