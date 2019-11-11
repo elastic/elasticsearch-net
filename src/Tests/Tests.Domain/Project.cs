@@ -78,7 +78,7 @@ namespace Tests.Domain
 				.RuleFor(p => p.DateString, (p, d) => d.StartedOn.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"))
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count - 1)])
-				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
+				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 10)))
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)))
 				.RuleFor(p => p.LocationPoint, f => SimpleGeoPoint.Generator.Generate())
 				.RuleFor(p => p.LocationShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
