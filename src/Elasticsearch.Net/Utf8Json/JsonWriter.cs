@@ -23,6 +23,7 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Elasticsearch.Net.Extensions;
@@ -147,6 +148,27 @@ namespace Elasticsearch.Net.Utf8Json
             offset += rawValue.Length;
 #endif
         }
+        public void WriteRaw(byte[] rawValue, int length)
+        {
+            UnsafeMemory.WriteRaw(ref this, rawValue, length);
+        }
+        public void WriteRaw(MemoryStream ms)
+		{
+			if (ms.TryGetBuffer(out var b) && !(b.Array is null) && b.Offset == 0)
+				WriteRaw(b.Array, b.Count);
+			else
+			{
+				var bytes = ms.ToArray();
+				this.WriteRaw(bytes);
+			}
+		}
+
+		public void WriteSerialized<T>(T value, IElasticsearchSerializer serializer, IConnectionConfigurationValues settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			using var ms = settings.MemoryStreamFactory.Create();
+			serializer.Serialize(value, ms, formatting);
+			WriteRaw(ms);
+		}
 
 #if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -483,5 +505,6 @@ namespace Elasticsearch.Net.Utf8Json
 			buffer[offset++] = (byte)CharUtils.HexDigit((c >> 4) & '\x000f');
 			buffer[offset++] = (byte)CharUtils.HexDigit(c & '\x000f');
 		}
+
 	}
 }
