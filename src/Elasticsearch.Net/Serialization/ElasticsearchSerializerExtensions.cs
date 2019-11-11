@@ -27,7 +27,7 @@ namespace Elasticsearch.Net
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
-			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.Default;
+			memoryStreamFactory ??= RecyclableMemoryStreamFactory.Default;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
-			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.Default;
+			memoryStreamFactory ??= RecyclableMemoryStreamFactory.Default;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
