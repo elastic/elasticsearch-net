@@ -51,11 +51,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
             static FormatterCache()
             {
-#if (UNITY_METRO || UNITY_WSA) && !NETFX_CORE
-                var attr = (JsonFormatterAttribute)typeof(T).GetCustomAttributes(typeof(JsonFormatterAttribute), true).FirstOrDefault();
-#else
                 var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonFormatterAttribute>(true);
-#endif
                 if (attr == null)
                 {
                     return;

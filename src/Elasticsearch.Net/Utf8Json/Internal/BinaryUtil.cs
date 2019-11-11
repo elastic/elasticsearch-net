@@ -31,9 +31,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
     {
         const int ArrayMaxSize = 0x7FFFFFC7; // https://msdn.microsoft.com/en-us/library/system.array
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void EnsureCapacity(ref byte[] bytes, int offset, int appendLength)
         {
             var newLength = offset + appendLength;
@@ -80,9 +78,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         }
 
         // Buffer.BlockCopy version of Array.Resize
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void FastResize(ref byte[] array, int newSize)
         {
             if (newSize < 0) throw new ArgumentOutOfRangeException("newSize");
@@ -102,14 +98,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             }
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
-        public static
-#if NETSTANDARD
-            unsafe
-#endif
-            byte[] FastCloneWithResize(byte[] src, int newSize)
+        public static unsafe byte[] FastCloneWithResize(byte[] src, int newSize)
         {
             if (newSize < 0) throw new ArgumentOutOfRangeException("newSize");
             if (src.Length < newSize) throw new ArgumentException("length < newSize");
@@ -118,27 +108,17 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
             byte[] dst = new byte[newSize];
 
-#if NETSTANDARD && !NET45
             fixed (byte* pSrc = &src[0])
             fixed (byte* pDst = &dst[0])
             {
                 Buffer.MemoryCopy(pSrc, pDst, dst.Length, newSize);
             }
-#else
-            Buffer.BlockCopy(src, 0, dst, 0, newSize);
-#endif
 
             return dst;
         }
 
-#if NETSTANDARD
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
-		public static
-#if NETSTANDARD
-			unsafe
-#endif
-			byte[] ToArray(ref ArraySegment<byte> src)
+		public static unsafe byte[] ToArray(ref ArraySegment<byte> src)
 		{
 			if (src == null) throw new ArgumentNullException("src");
 
@@ -147,15 +127,11 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 			if (src.Count == 0)
 				return dst;
 
-#if NETSTANDARD && !NET45
 			fixed (byte* pSrc = &src.Array[src.Offset])
 			fixed (byte* pDst = &dst[0])
 			{
 				Buffer.MemoryCopy(pSrc, pDst, dst.Length, src.Count);
 			}
-#else
-            Buffer.BlockCopy(src.Array, src.Offset, dst, 0, src.Count);
-#endif
 
 			return dst;
 		}

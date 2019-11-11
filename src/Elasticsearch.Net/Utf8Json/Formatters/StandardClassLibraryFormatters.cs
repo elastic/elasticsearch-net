@@ -424,11 +424,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				StandardClassLibraryFormatterHelper.keyValuePairAutomata.TryGetValue(keyString, out key);
-#else
-                StandardClassLibraryFormatterHelper.keyValuePairAutomata.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -501,11 +497,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	{
 		public static readonly TypeFormatter Default = new TypeFormatter();
 
-#if NETSTANDARD
 		static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
-#else
-        static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+");
-#endif
 
 		bool serializeAssemblyQualifiedName;
 		bool deserializeSubtractAssemblyQualifiedName;
@@ -551,8 +543,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-
-#if NETSTANDARD
 
 	internal sealed class BigIntegerFormatter : IJsonFormatter<BigInteger>
 	{
@@ -638,11 +628,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 			// deserialize immediately(no delay, because capture byte[] causes memory leak)
 			var v = formatterResolver.GetFormatterWithVerify<T>().Deserialize(ref reader, formatterResolver);
-#if NETSTANDARD
 			return new Lazy<T>(v.AsFunc());
-#else
-            return new Lazy<T>(() => v);
-#endif
 		}
 	}
 
@@ -686,7 +672,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-	#if VALUETASK
+	#if NETSTANDARD2_1
 	internal sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
 	{
 		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver)
@@ -702,8 +688,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 	#endif
-
-#endif
 
 	internal static class StandardClassLibraryFormatterHelper
 	{
