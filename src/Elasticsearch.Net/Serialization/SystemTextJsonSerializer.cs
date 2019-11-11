@@ -32,6 +32,11 @@ namespace Elasticsearch.Net
 			JsonSerializer.Serialize<T>(writer, data, GetFormatting(formatting));
 		}
 
+		public async Task SerializeAsync<T>(
+			T data, Stream stream, SerializationFormatting formatting = None, CancellationToken cancellationToken = default
+		) =>
+			await JsonSerializer.SerializeAsync<T>(stream, data, GetFormatting(formatting), cancellationToken).ConfigureAwait(false);
+
 		private JsonSerializerOptions GetFormatting(SerializationFormatting formatting) => formatting == None ? _none : _indented;
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
@@ -40,10 +45,6 @@ namespace Elasticsearch.Net
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync<T>(stream, _none, cancellationToken).AsTask();
 
-		public Task SerializeAsync<T>(
-			T data, Stream stream, SerializationFormatting formatting = None, CancellationToken cancellationToken = default
-		) =>
-			JsonSerializer.SerializeAsync<T>(stream, data, GetFormatting(formatting), cancellationToken);
 	}
 
 
