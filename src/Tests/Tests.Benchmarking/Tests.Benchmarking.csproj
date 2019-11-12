@@ -15,6 +15,6 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
     <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20191017T152836" />
     <PackageReference Include="LibGit2Sharp" Version="0.26.0-preview-0062" />
-    <PackageReference Include="NEST.v7" Version="7.5.0-ci20191031T180108" />
+    <PackageReference Include="NEST.v8" Version="8.1.0-ci20191112T041057" />
   </ItemGroup>
 </Project>
