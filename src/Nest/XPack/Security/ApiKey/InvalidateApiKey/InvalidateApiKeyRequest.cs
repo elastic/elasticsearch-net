@@ -28,6 +28,14 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "username")]
 		string Username { get; set; }
+
+		/// <summary>
+		/// A boolean flag that can be used to query API keys owned by the currently authenticated user. Defaults to false.
+		/// The RealmName or Username parameters cannot be specified when this parameter is set to true as they are
+		/// assumed to be the currently authenticated ones.
+		/// </summary>
+		[DataMember(Name = "owner")]
+		bool? Owner { get; set; }
 	}
 
 	public partial class InvalidateApiKeyRequest
@@ -43,6 +51,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string Username { get; set; }
+
+		/// <inheritdoc />
+		public bool? Owner { get; set; }
 	}
 
 	public partial class InvalidateApiKeyDescriptor
@@ -59,6 +70,9 @@ namespace Nest
 		/// <inheritdoc />
 		string IInvalidateApiKeyRequest.Username { get; set; }
 
+		/// <inheritdoc />
+		bool? IInvalidateApiKeyRequest.Owner { get; set; }
+
 		/// <inheritdoc cref="IInvalidateApiKeyRequest.Id" />
 		public InvalidateApiKeyDescriptor Id(string id) => Assign(id, (a, v) => a.Id = v);
 
@@ -70,5 +84,8 @@ namespace Nest
 
 		/// <inheritdoc cref="IInvalidateApiKeyRequest.Username" />
 		public InvalidateApiKeyDescriptor Username(string username) => Assign(username, (a, v) => a.Username = v);
+
+		/// <inheritdoc cref="IInvalidateApiKeyRequest.Owner" />
+		public InvalidateApiKeyDescriptor Owner(bool? owner = true) => Assign(owner, (a, v) => a.Owner = v);
 	}
 }
