@@ -61,7 +61,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
         }
 
         public ILStreamReader(byte[] ilByteArray)
-            : base(new MemoryStream(ilByteArray))
+            : base(RecyclableMemoryStreamFactory.Default.Create(ilByteArray))
         {
             this.endPosition = ilByteArray.Length;
         }
