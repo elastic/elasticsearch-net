@@ -17,7 +17,7 @@ namespace Nest
 			var settings = formatterResolver.GetConnectionSettings();
 
 			// avoid deserialization through stream when not using custom source serializer
-			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer))
+			if (AttemptFastPath(settings.SourceSerializer))
 				return formatterResolver.GetFormatter<T>().Deserialize(ref reader, formatterResolver);
 
 			var arraySegment = reader.ReadNextBlockSegment();
@@ -25,18 +25,24 @@ namespace Nest
 				return settings.SourceSerializer.Deserialize<T>(ms);
 		}
 
+		/// <summary>
+		/// Avoid serialization to bytes when not using a custom source serializer.
+		/// This used to check for reference of the source serializer and the request response serializer
+		/// However each now gets wrapped in a new `DiagnosticsSerializerProxy` so this check no longer works
+		/// therefor we now check if the SourceSerializer is internal with a formatter.
+		/// DiagnosticsSerializerProxy implements this interface, it simply proxies to whatever it wraps so
+		/// we need to assert the resolver is not actually null here since it can wrap something that is not
+		/// `IInternalSerializerWithFormatter`
+		/// </summary>
+		private static bool AttemptFastPath(IElasticsearchSerializer serializer) =>
+			serializer is IInternalSerializerWithFormatter s && s.FormatterResolver != null;
+
+
 		public virtual void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
 			var settings = formatterResolver.GetConnectionSettings();
 
-			// avoid serialization to bytes when not using custom source serializer
-			// This used to check for reference of the source serializer and the request response serializer
-			// However each now gets wrapped in a new `DiagnosticsSerializerProxy` so this check no longer works
-			// therefor we now check if the SourceSerializer is internal with a formatter.
-			// DiagnosticsSerializerProxy implements this interface, it simply proxies to whatever it wraps so
-			// we need to assert the resolver is not actually null here since it can wrap something that is not
-			// `IInternalSerializerWithFormatter`
-			if (settings.SourceSerializer is IInternalSerializerWithFormatter s && s.FormatterResolver != null)
+			if (AttemptFastPath(settings.SourceSerializer))
 			{
 				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
 				return;
