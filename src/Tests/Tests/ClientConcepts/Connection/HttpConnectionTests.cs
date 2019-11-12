@@ -160,10 +160,7 @@ namespace Tests.ClientConcepts.Connection
 			public int ClientCount => Clients.Count;
 			public HttpClientHandler LastHttpClientHandler => (HttpClientHandler)_handler.InnerHandler;
 
-			public TestableHttpConnection(Action<HttpResponseMessage> response)
-			{
-				_response = response;
-			}
+			public TestableHttpConnection(Action<HttpResponseMessage> response) => _response = response;
 
 			public TestableHttpConnection()
 			{

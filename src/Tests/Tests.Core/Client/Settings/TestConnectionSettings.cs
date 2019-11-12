@@ -21,11 +21,12 @@ namespace Tests.Core.Client.Settings
 			SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
 			bool forceInMemory = false,
-			int port = 9200
+			int port = 9200,
+			byte[] response = null
 		)
 			: base(
 				CreatePool(createPool, port),
-				TestConfiguration.Instance.CreateConnection(forceInMemory),
+				TestConfiguration.Instance.CreateConnection(forceInMemory, response),
 				CreateSerializerFactory(sourceSerializerFactory),
 				propertyMappingProvider
 			) =>
@@ -40,7 +41,7 @@ namespace Tests.Core.Client.Settings
 
 		private static string LocalHost => "localhost";
 
-		private void ApplyTestSettings() => 
+		private void ApplyTestSettings() =>
 			RerouteToProxyIfNeeded()
 			.EnableDebugMode()
 			.EnableHttpCompression(TestConfiguration.Instance.Random.HttpCompression)
