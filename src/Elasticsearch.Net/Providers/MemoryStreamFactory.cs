@@ -8,6 +8,8 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class MemoryStreamFactory : IMemoryStreamFactory
 	{
+		public static MemoryStreamFactory Default { get; } = new MemoryStreamFactory();
+
 		/// <inheritdoc />
 		public MemoryStream Create() => new MemoryStream();
 
