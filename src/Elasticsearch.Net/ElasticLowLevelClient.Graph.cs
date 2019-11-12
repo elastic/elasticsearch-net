@@ -53,6 +53,7 @@ namespace Elasticsearch.Net.Specification.GraphApi
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">Graph Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("graph.explore", "index, body")]
 		public Task<TResponse> ExploreAsync<TResponse>(string index, PostData body, GraphExploreRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_graph/explore"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/{type}/_graph/explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
@@ -69,6 +70,7 @@ namespace Elasticsearch.Net.Specification.GraphApi
 		///<param name = "body">Graph Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
+		[MapsApi("graph.explore", "index, type, body")]
 		public Task<TResponse> ExploreUsingTypeAsync<TResponse>(string index, string type, PostData body, GraphExploreRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_graph/explore"), ctx, body, RequestParams(requestParameters));
 	}

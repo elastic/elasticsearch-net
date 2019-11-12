@@ -49,6 +49,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_license", null, RequestParams(requestParameters));
 		///<summary>DELETE on /_license <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.delete", "")]
 		public Task<TResponse> DeleteAsync<TResponse>(DeleteLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_license", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_license <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html</para></summary>
@@ -57,6 +58,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_license", null, RequestParams(requestParameters));
 		///<summary>GET on /_license <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.get", "")]
 		public Task<TResponse> GetAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_license", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_license/basic_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html</para></summary>
@@ -65,6 +67,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_license/basic_status", null, RequestParams(requestParameters));
 		///<summary>GET on /_license/basic_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.get_basic_status", "")]
 		public Task<TResponse> GetBasicStatusAsync<TResponse>(GetBasicLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_license/basic_status", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_license/trial_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html</para></summary>
@@ -73,6 +76,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_license/trial_status", null, RequestParams(requestParameters));
 		///<summary>GET on /_license/trial_status <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.get_trial_status", "")]
 		public Task<TResponse> GetTrialStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_license/trial_status", ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_license <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html</para></summary>
@@ -83,6 +87,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 		///<summary>PUT on /_license <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html</para></summary>
 		///<param name = "body">licenses to be installed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.post", "body")]
 		public Task<TResponse> PostAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, "_license", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_basic <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html</para></summary>
@@ -91,6 +96,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_license/start_basic", null, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_basic <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.post_start_basic", "")]
 		public Task<TResponse> StartBasicAsync<TResponse>(StartBasicLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_license/start_basic", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_trial <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html</para></summary>
@@ -99,6 +105,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_license/start_trial", null, RequestParams(requestParameters));
 		///<summary>POST on /_license/start_trial <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("license.post_start_trial", "")]
 		public Task<TResponse> StartTrialAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_license/start_trial", ctx, null, RequestParams(requestParameters));
 	}

@@ -49,6 +49,7 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_migration/deprecations", null, RequestParams(requestParameters));
 		///<summary>GET on /_migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("migration.deprecations", "")]
 		public Task<TResponse> DeprecationInfoAsync<TResponse>(DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_migration/deprecations", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
@@ -59,6 +60,7 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 		///<summary>GET on /{index}/_migration/deprecations <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
 		///<param name = "index">Index pattern</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("migration.deprecations", "index")]
 		public Task<TResponse> DeprecationInfoAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_migration/deprecations"), ctx, null, RequestParams(requestParameters));
 	}

@@ -24,6 +24,11 @@ namespace Nest
 		OpType? OpType { get; set; }
 
 		/// <summary>
+		/// Id of the pipeline to use to process documents
+		/// </summary>
+		string Pipeline { get; set; }
+
+		/// <summary>
 		/// The routing to use when reindexing
 		/// </summary>
 		[DataMember(Name ="routing")]
@@ -50,6 +55,9 @@ namespace Nest
 		public OpType? OpType { get; set; }
 
 		/// <inheritdoc />
+		public string Pipeline { get; set; }
+
+		/// <inheritdoc />
 		public ReindexRouting Routing { get; set; }
 
 		/// <inheritdoc />
@@ -61,11 +69,15 @@ namespace Nest
 	{
 		IndexName IReindexDestination.Index { get; set; }
 		OpType? IReindexDestination.OpType { get; set; }
+		string IReindexDestination.Pipeline { get; set; }
 		ReindexRouting IReindexDestination.Routing { get; set; }
 		VersionType? IReindexDestination.VersionType { get; set; }
 
 		/// <inheritdoc cref="IReindexDestination.Routing" />
 		public ReindexDestinationDescriptor Routing(ReindexRouting routing) => Assign(routing, (a, v) => a.Routing = v);
+
+		/// <inheritdoc cref="IReindexDestination.Pipeline" />
+		public ReindexDestinationDescriptor Pipeline(string pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
 
 		/// <inheritdoc cref="IReindexDestination.OpType" />
 		public ReindexDestinationDescriptor OpType(OpType? opType) => Assign(opType, (a, v) => a.OpType = v);

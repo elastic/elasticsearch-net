@@ -1,0 +1,16 @@
+<Project>
+  <Target Name="AssemblyInfos" BeforeTargets="CoreGenerateAssemblyInfo" Inputs="@InternalsVisibleTo" Outputs="%(InternalsVisibleTo.Identity)">
+    <PropertyGroup>
+      <ExposedAssembly>%(InternalsVisibleTo.Identity)</ExposedAssembly>
+      <VersionNamespaced>$(ExposedAssembly.Replace("Nest","Nest$(MajorVersion)").Replace("Elasticsearch.Net","Elasticsearch.Net$(MajorVersion)"))</VersionNamespaced>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>%(InternalsVisibleTo.Identity), PublicKey=$(ExposedPublicKey)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>$(VersionNamespaced), PublicKey=$(ExposedPublicKey)</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>
+</Project>

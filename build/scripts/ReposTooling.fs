@@ -30,4 +30,9 @@ module ReposTooling =
         let folder = Path.getDirectory (Paths.ProjFile <| DotNetProject.PrivateProject PrivateProject.ApiGenerator)
         let timeout = TimeSpan.FromMinutes(120.)
         Tooling.DotNet.ExecInWithTimeout folder ["run"; ] timeout  |> ignore
+        
+    let RestSpecTests args =
+        let folder = Path.getDirectory (Paths.ProjFile <| DotNetProject.PrivateProject PrivateProject.RestSpecTestRunner)
+        let timeout = TimeSpan.FromMinutes(120.)
+        Tooling.DotNet.ExecInWithTimeout folder (["run"; "--" ] @ args) timeout  |> ignore
          

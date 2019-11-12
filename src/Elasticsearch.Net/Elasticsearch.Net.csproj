@@ -8,6 +8,9 @@
     <!-- Here to satisy UTF8JSON which defines NETSTANDARD also for anything > NET45 -->
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
     <LangVersion>8.0</LangVersion>
+    <TieredCompilation>false</TieredCompilation>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
@@ -20,6 +23,21 @@
       
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Nest" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase"/>
+    
+    <InternalsVisibleTo Include="Tests"/>
+    <InternalsVisibleTo Include="Tests.Domain"/>
+
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ElasticLowLevelClient.*.cs">
@@ -73,4 +91,5 @@
       <DependentUpon>Utf8Json\UnsafeMemory.tt</DependentUpon>
     </Compile>
   </ItemGroup>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\InternalsVisible.targets" />
 </Project>

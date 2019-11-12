@@ -28,16 +28,23 @@
     <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
     <Content Include="..\..\appveyor.yml"><Link>appveyor.yml</Link></Content>
     <Content Include="..\..\azure-pipelines.yml"><Link>azure-pipelines.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\yaml-runner.yml">
+      <Link>yaml-runner.yml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="4.7.0" />
+    
     <PackageReference Include="Bullseye" Version="3.0.0" />
     <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191017T152836" />
+    
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
     <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
     <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
+
+    
     <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
-    <PackageReference Include="FSharp.Core" Version="4.6.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="NuGet.CommandLine" Version="4.9.4" />
     <PackageReference Include="Octokit" Version="0.32.0" />

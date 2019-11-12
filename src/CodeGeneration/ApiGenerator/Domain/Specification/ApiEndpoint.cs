@@ -132,9 +132,13 @@ namespace ApiGenerator.Domain.Specification
 				{
 					var methodName = CsharpNames.PerPathMethodName(path.Path);
 					var parts = new List<UrlPart>(path.Parts);
+					var mapsApiArgumentHints = parts.Select(p => p.Name).ToList();
 
 					if (Body != null)
+					{
 						parts.Add(new UrlPart { Name = "body", Type = "PostData", Description = Body.Description });
+						mapsApiArgumentHints.Add("body");
+					}
 
 					var args = parts
 						.Select(p => p.Argument)
@@ -144,6 +148,7 @@ namespace ApiGenerator.Domain.Specification
 					var apiMethod = new LowLevelClientMethod
 					{
 						Arguments = string.Join(", ", args),
+						MapsApiArguments = string.Join(", ", mapsApiArgumentHints),
 						CsharpNames = CsharpNames,
 						PerPathMethodName = methodName,
 						HttpMethod = httpMethod,

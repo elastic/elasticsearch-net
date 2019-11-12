@@ -85,7 +85,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		private readonly ThreadsafeTypeKeyHashTable<object> _formatters = new ThreadsafeTypeKeyHashTable<object>();
 
 		// configuration
-		const string ModuleName = "Elasticsearch.Net.CustomDynamicObjectResolver";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.CustomDynamicObjectResolver";
 
 		static readonly DynamicAssembly assembly;
 
@@ -133,7 +133,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal();
 		static readonly Func<string, string> nameMutator = StringMutator.Original;
 		static readonly bool excludeNull = false;
-		const string ModuleName = "Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal";
 
 		static readonly DynamicAssembly assembly;
 
@@ -178,7 +178,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase();
 		static readonly Func<string, string> nameMutator = StringMutator.ToCamelCase;
 		static readonly bool excludeNull = false;
-		const string ModuleName = "Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase";
 
 		static readonly DynamicAssembly assembly;
 
@@ -223,7 +223,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase();
 		static readonly Func<string, string> nameMutator = StringMutator.ToSnakeCase;
 		static readonly bool excludeNull = false;
-		const string ModuleName = "Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase";
 
 		static readonly DynamicAssembly assembly;
 
@@ -268,7 +268,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal();
 		static readonly Func<string, string> nameMutator = StringMutator.Original;
 		static readonly bool excludeNull = true;
-		const string ModuleName = "Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal";
 
 		static readonly DynamicAssembly assembly;
 
@@ -313,7 +313,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase();
 		static readonly Func<string, string> nameMutator = StringMutator.ToCamelCase;
 		static readonly bool excludeNull = true;
-		const string ModuleName = "Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase";
 
 		static readonly DynamicAssembly assembly;
 
@@ -358,7 +358,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase();
 		static readonly Func<string, string> nameMutator = StringMutator.ToSnakeCase;
 		static readonly bool excludeNull = true;
-		const string ModuleName = "Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase";
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase";
 
 		static readonly DynamicAssembly assembly;
 
@@ -653,7 +653,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			var hasShouldSerialize = serializationInfo.Members.Any(x => x.ShouldSerializeMethodInfo != null);
 
 			var formatterType = typeof(IJsonFormatter<>).MakeGenericType(type);
-			var typeBuilder = assembly.DefineType("Elasticsearch.Net." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
+			var typeBuilder = assembly.DefineType(ResolverConfig.Namespace + "." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
 
 			FieldBuilder stringByteKeysField;
 			Dictionary<MetaMember, FieldInfo> customFormatterLookup;
