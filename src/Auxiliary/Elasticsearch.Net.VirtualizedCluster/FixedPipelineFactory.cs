@@ -5,7 +5,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider)
 		{
 			DateTimeProvider = dateTimeProvider;
-			MemoryStreamFactory = new MemoryStreamFactory();
+			MemoryStreamFactory = RecyclableMemoryStreamFactory.Default;
 
 			Settings = connectionSettings;
 			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters());
@@ -16,7 +16,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public IRequestPipeline Pipeline { get; }
 
 		private IDateTimeProvider DateTimeProvider { get; }
-		private MemoryStreamFactory MemoryStreamFactory { get; }
+		private IMemoryStreamFactory MemoryStreamFactory { get; }
 		private IConnectionConfigurationValues Settings { get; }
 
 		private Transport<IConnectionConfigurationValues> Transport =>

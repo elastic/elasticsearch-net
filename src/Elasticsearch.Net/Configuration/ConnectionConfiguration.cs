@@ -158,6 +158,7 @@ namespace Elasticsearch.Net
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
 		private bool _transferEncodingChunked;
+		private IMemoryStreamFactory _memoryStreamFactory = RecyclableMemoryStreamFactory.Default;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -209,7 +210,7 @@ namespace Elasticsearch.Net
 		TimeSpan? IConnectionConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
-		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory { get; } = RecyclableMemoryStreamFactory.Default;
+		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
 
 		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
@@ -556,6 +557,11 @@ namespace Elasticsearch.Net
 		/// Whether the request should be sent with chunked Transfer-Encoding. Default is <c>false</c>
 		/// </summary>
 		public T TransferEncodingChunked(bool transferEncodingChunked = true) => Assign(transferEncodingChunked, (a, v) => a._transferEncodingChunked = v);
+
+		/// <summary>
+		/// The memory stream factory to use, defaults to <see cref="RecyclableMemoryStreamFactory.Default"/>
+		/// </summary>
+		public T MemoryStreamFactory(IMemoryStreamFactory memoryStreamFactory) => Assign(memoryStreamFactory, (a, v) => a._memoryStreamFactory = v);
 
 		protected virtual void DisposeManagedResources()
 		{
