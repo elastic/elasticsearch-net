@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
@@ -30,21 +31,21 @@ namespace Tests.Benchmarking
 			if (!Directory.Exists(Path.Combine(dirInfo.FullName, ".git"))) Environment.Exit(2);
 
 			Console.WriteLine(dirInfo.FullName);
-			using (var repos = new Repository(dirInfo.FullName))
-			{
-				Commit = repos.Head.Tip.Sha;
-				CommitMessage = repos.Head.Tip.Message?.Trim(' ', '\t', '\r', '\n');
-				Branch = repos.Head.FriendlyName;
-				var remoteName = repos.Head.RemoteName;
-				Repository =
-					repos.Network.Remotes.FirstOrDefault(r => r.Name == remoteName)?.Url
-					?? repos.Network.Remotes.FirstOrDefault()?.Url;
-			}
+//			using (var repos = new Repository(dirInfo.FullName))
+//			{
+//				Commit = repos.Head.Tip.Sha;
+//				CommitMessage = repos.Head.Tip.Message?.Trim(' ', '\t', '\r', '\n');
+//				Branch = repos.Head.FriendlyName;
+//				var remoteName = repos.Head.RemoteName;
+//				Repository =
+//					repos.Network.Remotes.FirstOrDefault(r => r.Name == remoteName)?.Url
+//					?? repos.Network.Remotes.FirstOrDefault()?.Url;
+//			}
 		}
 
 		public static int Main(string[] arguments)
 		{
-			Console.WriteLine($"Tests.Benchmarking: [{Branch}]@({Commit}) on {Repository} : {CommitMessage} - ");
+			//Console.WriteLine($"Tests.Benchmarking: [{Branch}]@({Commit}) on {Repository} : {CommitMessage} - ");
 			var config = CreateDefaultConfig();
 			if (arguments.Any() && arguments[0].Equals("--all", StringComparison.OrdinalIgnoreCase))
 			{
@@ -61,14 +62,15 @@ namespace Tests.Benchmarking
 
 		private static IConfig CreateDefaultConfig()
 		{
-			var jobs = new[]
+			var jobs = new List<Job>
 			{
-				Job.ShortRun.With(Runtime.Core).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.LegacyJit),
+				Job.MediumRun.With(CoreRuntime.Core30).With(Jit.RyuJit),
 			};
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				jobs.Add(Job.MediumRun.With(ClrRuntime.Net472).With(Jit.LegacyJit));
+
 			var config = DefaultConfig.Instance
-				.With(jobs)
+				.With(jobs.ToArray())
 				.With(MemoryDiagnoser.Default);
 			return config;
 		}

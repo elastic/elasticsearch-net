@@ -13,6 +13,8 @@ namespace Tests.Core.Client.Settings
 	{
 		public AlwaysInMemoryConnectionSettings() : base(forceInMemory: true) { }
 
+		public AlwaysInMemoryConnectionSettings(byte[] bytes) : base(forceInMemory: true, response: bytes) { }
+
 		public AlwaysInMemoryConnectionSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
@@ -23,7 +25,7 @@ namespace Tests.Core.Client.Settings
 				createPool,
 				sourceSerializerFactory,
 				propertyMappingProvider,
-				true,
+				forceInMemory: true,
 				port
 			) { }
 	}
