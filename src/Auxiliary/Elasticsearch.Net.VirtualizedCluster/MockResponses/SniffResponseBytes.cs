@@ -17,17 +17,17 @@ namespace Elasticsearch.Net.VirtualizedCluster.MockResponses
 				cluster_name = ClusterName,
 				nodes = SniffResponseNodes(nodes, elasticsearchVersion, publishAddressOverride, randomFqdn)
 			};
-			using (var ms = new MemoryStream())
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
 			{
-				new LowLevelRequestResponseSerializer().Serialize(response, ms);
+				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				return ms.ToArray();
 			}
 		}
 
 		private static IDictionary<string, object> SniffResponseNodes(
-			IEnumerable<Node> nodes, 
+			IEnumerable<Node> nodes,
 			string elasticsearchVersion,
-			string publishAddressOverride, 
+			string publishAddressOverride,
 			bool randomFqdn
 		) =>
 			(from node in nodes

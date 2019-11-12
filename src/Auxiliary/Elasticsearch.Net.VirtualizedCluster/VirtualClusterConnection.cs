@@ -264,9 +264,9 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			if (_defaultResponseBytes != null) return _defaultResponseBytes;
 
 			var response = DefaultResponse;
-			using (var ms = new MemoryStream())
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
 			{
-				new LowLevelRequestResponseSerializer().Serialize(response, ms);
+				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				_defaultResponseBytes = ms.ToArray();
 			}
 			return _defaultResponseBytes;
