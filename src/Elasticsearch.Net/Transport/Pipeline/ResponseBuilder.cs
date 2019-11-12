@@ -165,10 +165,20 @@ namespace Elasticsearch.Net
 				cs = new VoidResponse() as TResponse;
 			else if (responseType == typeof(DynamicResponse))
 			{
-				using (var ms = memoryStreamFactory.Create(bytes))
+				//if not json store the result under "body"
+				if (!mimeType.StartsWith(RequestData.MimeType))
 				{
-					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicDictionary>(ms);
-					cs = new DynamicResponse(body) as TResponse;
+					var dictionary = new DynamicDictionary();
+					dictionary["body"] = new DynamicValue(bytes.Utf8String());
+					cs = new DynamicResponse(dictionary) as TResponse;
+				}
+				else
+				{
+					using (var ms = memoryStreamFactory.Create(bytes))
+					{
+						var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicDictionary>(ms);
+						cs = new DynamicResponse(body) as TResponse;
+					}
 				}
 			}
 			return cs != null;
