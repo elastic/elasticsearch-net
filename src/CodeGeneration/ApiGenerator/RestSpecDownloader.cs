@@ -60,7 +60,7 @@ namespace ApiGenerator
 
 		private void FindJsonFilesOnListing(Specification spec, string html, IProgressBar pbar)
 		{
-			if (!Directory.Exists(GeneratorLocations.RestSpecificationFolder)) 
+			if (!Directory.Exists(GeneratorLocations.RestSpecificationFolder))
 				Directory.CreateDirectory(GeneratorLocations.RestSpecificationFolder);
 
 			var dom = CQ.Create(html);
@@ -92,7 +92,8 @@ namespace ApiGenerator
 		{
 			var f = Path.Combine(GeneratorLocations.RestSpecificationFolder, folder);
 			if (!Directory.Exists(f)) Directory.CreateDirectory(f);
-			File.WriteAllText(f + Path.DirectorySeparatorChar  + filename, contents);
+			var target = Path.Combine(f, filename);
+			File.WriteAllText(target, contents);
 		}
 
 		private class Specification
