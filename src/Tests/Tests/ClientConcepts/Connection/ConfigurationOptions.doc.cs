@@ -70,7 +70,7 @@ namespace Tests.ClientConcepts.Connection
 		}
 		/**
 		* but this can be awkward when using connection pooling with multiple nodes, especially when the connection pool
-		* used is one that is capable of reseeding iteslf. For this reason, we'd recommend specifying credentials
+		* used is one that is capable of reseeding itself. For this reason, we'd recommend specifying credentials
 		* on `ConnectionSettings`.
 		*====
 		*/

@@ -90,7 +90,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r=>r.DisableSniffing().DisablePing()) // <1> diable ping and sniff
+				new ClientCall(r=>r.DisableSniffing().DisablePing()) // <1> disable ping and sniff
 				{
 					{ HealthyResponse, 9200 } // <2> no ping or sniff before the call
 				}

@@ -48,7 +48,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			[PropertyName("numeric")]
 			public bool Numeric { get; set; }
 		}
-		
+
 
 		[U (Skip = "TODO: Does not work with utf8json")]
 		// hide
@@ -58,7 +58,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 * `PropertyNameAttribute` can be used to mark properties that should be serialized. Without this attribute,
 			 * NEST won't pick up the property for serialization.
 			 *
-			 * Now that we have our own `IProperty` implementation we can add it to our propertes mapping when creating an index
+			 * Now that we have our own `IProperty` implementation we can add it to our properties mapping when creating an index
 			 */
 			var createIndexResponse = _client.Indices.Create("myindex", c => c
 				.Map<Project>(m => m
