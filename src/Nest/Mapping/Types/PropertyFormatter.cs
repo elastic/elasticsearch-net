@@ -94,7 +94,7 @@ namespace Nest
 				case FieldType.RankFeatures: return Deserialize<RankFeaturesProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Flattened: return Deserialize<FlattenedProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
-					// no "type" field in the property mapping
+					// no "type" field in the property mapping, or FieldType enum could not be parsed from typeString
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
 				default:
 					throw new ArgumentOutOfRangeException(nameof(type), type, "mapping property converter does not know this value");
@@ -210,7 +210,7 @@ namespace Nest
 						Serialize<IGenericProperty>(ref writer, genericProperty, formatterResolver);
 					else
 					{
-						var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProperty>();
+						var formatter = formatterResolver.GetFormatter<object>();
 						formatter.Serialize(ref writer, value, formatterResolver);
 					}
 					break;
