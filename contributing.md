@@ -4,13 +4,14 @@ Contributing back to `Elasticsearch.Net` and `NEST` is very much appreciated.
 Whether you [feel the need to change one character](https://github.com/elasticsearch/elasticsearch-net/pull/536) or have a go at 
 [mapping new APIs](http://github.com/elasticsearch/elasticsearch-net/pull/376), no pull request (PR) is too small or too big. 
 
-In fact many of our most awesome features/fixes have been provided to us by [these wonderful folks](https://github.com/elasticsearch/elasticsearch-net/graphs/contributors) to which we are forever indebted.
+In fact many of our most awesome features/fixes have been provided to us by 
+[these wonderful folks](https://github.com/elasticsearch/elasticsearch-net/graphs/contributors) to which we are forever indebted. 
 
 It's usually best to open an issue first to discuss a feature or bug, before opening a pull request. Doing so can save time and help further ascertain the crux of an issue.
 
 ## Sign the CLA
 
-We do ask that you sign the [Elasticsearch CLA](https://www.elastic.co/contributor-agreement/) before we can accept pull requests from you. 
+We do ask that you sign the [Elasticsearch CLA](https://www.elastic.co/contributor-agreement) before we can accept pull requests from you. 
 
 ## Coding Styleguide
 
@@ -23,8 +24,8 @@ In most cases we won't shun a PR just because it uses the wrong indentation sett
 ## Tests
 
 PRs with tests are more likely to be reviewed faster because it makes the job or reviewing the PR much easier. That being said,
-we respect that you may be fixing a bug in your own time and might not have the time/energy to submit a PR with complete tests. 
-In those cases, we tend to pull your bits locally and write tests ourselves, but this may mean your PR might sit idle longer than you would like.
+we respect that you may be fixing a bug in your own time and may not have the time/energy to submit a PR with complete tests. 
+In those cases we tend to pull your bits locally and write tests ourselves, but this may mean your PR might sit idle longer than you would like.
 
 ## Branches
 
@@ -65,13 +66,13 @@ The solution uses a number of awesome Open Source software tools to ease develop
 for Windows 
 
 ```
-build.bat
+.\build.bat
 ```
 
 for OSX/Linux
 
 ```
-build.sh
+./build.sh
 ```
 
 This will
@@ -94,21 +95,22 @@ The build script has a number of different build targets to run different types 
 ### Compile and run unit tests
 
 ```bat
-build.bat
+.\build.bat
 ```
 with no target will run the `Build` target, compiling the solution and running unit tests
 
 ### Compile
 
-```bash
-build.bat skiptests
+```bat
+.\build.bat skiptests
 ```
+
 This compiles the solution and skips running tests
 
 ### Quick Compile and run integration tests
 
-```bash
-build.bat integrate [Elasticsearch Version Number e.g. 5.0.0]
+```bat
+.\build.bat integrate [Elasticsearch Version Number e.g. 5.0.0]
 ```
 will quick compile the solution and run integration tests against the target Elasticsearch version. The first time this is run for a version of Elasticsearch, it will download Elasticsearch and unzip Elasticsearch, install the plugins necessary to run the integration tests, and start the node. Because of this, the first run may take some time to start.
 

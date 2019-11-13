@@ -8,7 +8,8 @@ namespace Nest
 		/// <summary>
 		/// Adds or updates a typed JSON document in a specific index, making it searchable.
 		/// <para> </para>
-		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html</a>
+		/// <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html">
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html</a>
 		/// </summary>
 		/// <typeparam name="TDocument">The document type used to infer the default index, type and id</typeparam>
 		/// <param name="document">

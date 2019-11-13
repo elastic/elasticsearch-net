@@ -16,7 +16,7 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// <para> </para>
-		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -39,7 +39,7 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// <para> </para>
-		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -54,7 +54,7 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// <para> </para>
-		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -80,7 +80,7 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// <para> </para>
-		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
