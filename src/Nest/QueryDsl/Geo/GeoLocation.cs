@@ -46,6 +46,9 @@ namespace Nest
 		[DataMember(Name = "lon")]
 		public double Longitude { get; }
 
+		[IgnoreDataMember]
+		internal GeoFormat Format { get; set; }
+
 		public bool Equals(GeoLocation other)
 		{
 			if (ReferenceEquals(null, other))

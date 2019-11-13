@@ -36,35 +36,35 @@ namespace Nest
 			{
 				case GeoShapeType.Point:
 					var point = ParsePoint(tokenizer);
-					point.Format = GeoShapeFormat.WellKnownText;
+					point.Format = GeoFormat.WellKnownText;
 					return point;
 				case GeoShapeType.MultiPoint:
 					var multiPoint = ParseMultiPoint(tokenizer);
-					multiPoint.Format = GeoShapeFormat.WellKnownText;
+					multiPoint.Format = GeoFormat.WellKnownText;
 					return multiPoint;
 				case GeoShapeType.LineString:
 					var lineString = ParseLineString(tokenizer);
-					lineString.Format = GeoShapeFormat.WellKnownText;
+					lineString.Format = GeoFormat.WellKnownText;
 					return lineString;
 				case GeoShapeType.MultiLineString:
 					var multiLineString = ParseMultiLineString(tokenizer);
-					multiLineString.Format = GeoShapeFormat.WellKnownText;
+					multiLineString.Format = GeoFormat.WellKnownText;
 					return multiLineString;
 				case GeoShapeType.Polygon:
 					var polygon = ParsePolygon(tokenizer);
-					polygon.Format = GeoShapeFormat.WellKnownText;
+					polygon.Format = GeoFormat.WellKnownText;
 					return polygon;
 				case GeoShapeType.MultiPolygon:
 					var multiPolygon = ParseMultiPolygon(tokenizer);
-					multiPolygon.Format = GeoShapeFormat.WellKnownText;
+					multiPolygon.Format = GeoFormat.WellKnownText;
 					return multiPolygon;
 				case GeoShapeType.BoundingBox:
 					var envelope = ParseBoundingBox(tokenizer);
-					envelope.Format = GeoShapeFormat.WellKnownText;
+					envelope.Format = GeoFormat.WellKnownText;
 					return envelope;
 				case GeoShapeType.GeometryCollection:
 					var geometryCollection = ParseGeometryCollection(tokenizer);
-					geometryCollection.Format = GeoShapeFormat.WellKnownText;
+					geometryCollection.Format = GeoFormat.WellKnownText;
 					return geometryCollection;
 				default:
 					throw new GeoWKTException($"Unknown geometry type: {type}");
@@ -217,7 +217,7 @@ namespace Nest
 				: new GeoCoordinate(lat, lon, z.Value);
 		}
 
-		private static void NextCloser(WellKnownTextTokenizer tokenizer)
+		internal static void NextCloser(WellKnownTextTokenizer tokenizer)
 		{
 			if (tokenizer.NextToken() != TokenType.RParen)
 				throw new GeoWKTException(
@@ -234,7 +234,7 @@ namespace Nest
 					tokenizer.Position);
 		}
 
-		private static TokenType NextEmptyOrOpen(WellKnownTextTokenizer tokenizer)
+		internal static TokenType NextEmptyOrOpen(WellKnownTextTokenizer tokenizer)
 		{
 			var token = tokenizer.NextToken();
 			if (token == TokenType.LParen ||
@@ -257,7 +257,7 @@ namespace Nest
 				$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
 		}
 
-		private static double NextNumber(WellKnownTextTokenizer tokenizer)
+		internal static double NextNumber(WellKnownTextTokenizer tokenizer)
 		{
 			if (tokenizer.NextToken() == TokenType.Word)
 			{
