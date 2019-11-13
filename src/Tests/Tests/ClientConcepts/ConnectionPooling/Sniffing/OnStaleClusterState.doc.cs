@@ -47,7 +47,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					.SniffLifeSpan(TimeSpan.FromMinutes(30))
 				)
 			);
-			/** healty cluster all nodes return healthy responses*/
+			/** healthy cluster all nodes return healthy responses*/
 			audit = await audit.TraceCalls(
 				new ClientCall { { HealthyResponse, 9200 } },
 				new ClientCall { { HealthyResponse, 9201 } },

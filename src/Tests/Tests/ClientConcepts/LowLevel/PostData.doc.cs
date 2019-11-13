@@ -81,7 +81,7 @@ namespace Tests.ClientConcepts.LowLevel
 			/**[float]
 			* === Other types of PostData
 			*
-			* You can also pass the following objects directy to the low level client.
+			* You can also pass the following objects directly to the low level client.
 			*
 			* - A Serializable `object`
 			* - A collection of `object` as multi line json
