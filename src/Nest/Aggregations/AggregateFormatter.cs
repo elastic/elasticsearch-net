@@ -877,6 +877,12 @@ namespace Nest
 		private IBucket GetFiltersBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var docCount = reader.ReadNullableLong().GetValueOrDefault(0);
+			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
+				return new FiltersBucketItem(EmptyReadOnly<string, IAggregate>.Dictionary)
+				{
+					DocCount = docCount
+				};
+
 			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
 			var subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
