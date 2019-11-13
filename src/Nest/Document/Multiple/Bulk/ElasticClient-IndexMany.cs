@@ -13,7 +13,7 @@ namespace Nest
 		/// <summary>
 		/// Shortcut into the Bulk call that indexes the specified objects
 		/// <para> </para>
-		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="client"></param>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
@@ -30,7 +30,7 @@ namespace Nest
 		/// <summary>
 		/// Shortcut into the Bulk call that indexes the specified objects
 		/// <para> </para>
-		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="client"></param>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>

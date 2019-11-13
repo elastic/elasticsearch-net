@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
-		
+
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
@@ -179,7 +179,7 @@ namespace Elasticsearch.Net
 
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
-			
+
 			if (connectionPool is CloudConnectionPool cloudPool)
 			{
 				_basicAuthCredentials = cloudPool.BasicCredentials;
@@ -308,7 +308,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Enables gzip compressed requests and responses.
 		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
-		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		public T EnableHttpCompression(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpCompression = v);
 
