@@ -166,6 +166,8 @@ namespace Nest
 							.Serialize(ref writer, action.Value, formatterResolver);
 						break;
 				}
+
+				count++;
 			}
 			writer.WriteEndObject();
 		}

@@ -65,6 +65,17 @@ namespace Tests.XPack.Ilm
 						{
 							Phases = new Phases
 							{
+								Cold = new Phase
+								{
+									Actions = new LifecycleActions
+									{
+										new FreezeLifecycleAction(),
+										new SetPriorityLifecycleAction
+										{
+											Priority = 50
+										}
+									}
+								},
 								Warm = new Phase
 								{
 									MinimumAge = "10d",
@@ -88,10 +99,28 @@ namespace Tests.XPack.Ilm
 						}
 					},
 					(v, d) => d
-						.Policy(p => p.Phases(a => a.Warm(w => w.MinimumAge("10d")
-																.Actions(ac => ac.ForceMerge(f => f.MaximumNumberOfSegments(1))))
-													.Delete(w => w.MinimumAge("30d")
-		       													  .Actions(ac => ac.Delete(f => f)))))
+						.Policy(p => p
+							.Phases(a => a
+								.Cold(w => w
+									.Actions(ac => ac
+										.Freeze(f => f)
+										.SetPriority(f => f.Priority(50))
+									)
+								)
+								.Warm(w => w
+									.MinimumAge("10d")
+									.Actions(ac => ac
+										.ForceMerge(f => f.MaximumNumberOfSegments(1))
+									)
+								)
+								.Delete(w => w
+									.MinimumAge("30d")
+									.Actions(ac => ac
+										.Delete(f => f)
+									)
+								)
+							)
+						)
 					,
 					(v, c, f) => c.IndexLifecycleManagement.PutLifecycle("policy" + v, f),
 					(v, c, f) => c.IndexLifecycleManagement.PutLifecycleAsync("policy" + v, f),
