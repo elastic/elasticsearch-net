@@ -122,6 +122,7 @@ Execution hints can be provided anywhere on the command line
             |> List.filter(fun x -> 
                x <> "skiptests" && 
                x <> "gendocs" && 
+               x <> "skipdocs" && 
                x <> "non-interactive" && 
                not (x.StartsWith("seed:")) && 
                not (x.StartsWith("random:")) && 
@@ -132,11 +133,12 @@ Execution hints can be provided anywhere on the command line
             | Some t -> t.Replace("-one", "")
             | _ -> "build"
         let skipTests = args |> List.exists (fun x -> x = "skiptests")
+        let skipDocs = args |> List.exists (fun x -> x = "skipdocs")
 
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
             SkipTests = skipTests
-            GenDocs = (args |> List.exists (fun x -> x = "gendocs") || target = "build") 
+            GenDocs = not skipDocs && (args |> List.exists (fun x -> x = "gendocs") || target = "build") 
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
                 | Some t -> t.Replace("seed:", "")
