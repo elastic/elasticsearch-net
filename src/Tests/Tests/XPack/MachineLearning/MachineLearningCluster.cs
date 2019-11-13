@@ -39,7 +39,7 @@ namespace Tests.XPack.MachineLearning
 			var to = Path.Combine(cluster.FileSystem.LocalFolder, "server_metrics.tar.gz");
 			if (!File.Exists(to))
 			{
-				var from = "https://download.elasticsearch.org/demos/machine_learning/gettingstarted/server_metrics.tar.gz";
+				var from = "https://download.elastic.co/demos/machine_learning/gettingstarted/server_metrics.tar.gz";
 				W($"Download machine learning sample data from: {from}");
 				DownloadFile(from, to);
 				W($"Downloaded machine learning sample data to: {to}");
