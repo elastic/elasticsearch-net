@@ -81,7 +81,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure Elasticsearch to set this
-		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
 
@@ -231,7 +231,7 @@ namespace Elasticsearch.Net
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
 		string UserAgent { get; }
-		
+
 		/// <summary>
 		/// Allow you to override the status code inspection that sets <see cref="ElasticsearchResponseBase.Success"/>
 		/// <para>
