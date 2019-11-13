@@ -190,6 +190,10 @@ Instead of following a c/go like error checking on response.IsValid do throw an 
 +
 Reasons for such exceptions could be search parser errors, index missing exceptions, etc...
 
+`TransferEncodingChunked`::
+
+Whether the request should be sent with chunked Transfer-Encoding. Default is `false`
+
 `UserAgent`::
 
 The user agent string to send with requests. Useful for debugging purposes to understand client and framework versions that initiate requests to Elasticsearch

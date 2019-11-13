@@ -74,7 +74,7 @@ own serializer, or by modifying how NEST's serializer behaves.
 [[mapping]]
 == Mapping
 
-To interact with Elasticsearch using NEST, we need to be able to contol how POCO types in our solution
+To interact with Elasticsearch using NEST, we need to be able to control how POCO types in our solution
 map to JSON documents and fields stored within the inverted index in Elasticsearch. This section
 describes all of the different functionality available within NEST that makes working with POCOs and Elasticsearch
 a breeze. 
