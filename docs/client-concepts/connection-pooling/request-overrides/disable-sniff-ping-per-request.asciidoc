@@ -114,7 +114,6 @@ audit = await audit.TraceCall(
     }
 );
 ----
-<1> diable ping and sniff
-
+<1> disable ping and sniff
 <2> no ping or sniff before the call
 
