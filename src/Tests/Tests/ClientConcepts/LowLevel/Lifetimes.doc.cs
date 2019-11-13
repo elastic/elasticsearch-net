@@ -73,7 +73,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/**
-		* `ConnectionSettings`, `IConnectionPool` and `IConnection` all explictily implement `IDisposable`
+		* `ConnectionSettings`, `IConnectionPool` and `IConnection` all explicitly implement `IDisposable`
 		*/
 		[U] public void InitialDisposeState()
 		{

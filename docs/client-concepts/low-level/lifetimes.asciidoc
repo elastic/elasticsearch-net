@@ -74,7 +74,7 @@ private class AConnection : InMemoryConnection
 }
 ----
 
-`ConnectionSettings`, `IConnectionPool` and `IConnection` all explictily implement `IDisposable`
+`ConnectionSettings`, `IConnectionPool` and `IConnection` all explicitly implement `IDisposable`
 
 [source,csharp]
 ----

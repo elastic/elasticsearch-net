@@ -296,7 +296,7 @@ ndexResponse = client.Index(indexRequest);
 ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
-Its important to note that the routing is resolved at request time, not instantation time
+Its important to note that the routing is resolved at request time, not instantiation time
 here we update the `child`'s `JoinField` after already creating the index request for `child`
 
 [source,csharp]

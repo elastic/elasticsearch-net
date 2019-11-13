@@ -52,7 +52,7 @@ public class MyPluginProperty : IProperty
 `PropertyNameAttribute` can be used to mark properties that should be serialized. Without this attribute,
 NEST won't pick up the property for serialization.
 
-Now that we have our own `IProperty` implementation we can add it to our propertes mapping when creating an index
+Now that we have our own `IProperty` implementation we can add it to our properties mapping when creating an index
 
 [source,csharp]
 ----

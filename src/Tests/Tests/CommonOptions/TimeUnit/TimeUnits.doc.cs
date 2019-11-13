@@ -268,7 +268,7 @@ namespace Tests.CommonOptions.TimeUnit
 			* ==== Units of Time
 			*
 			* Where Units of Time can be specified as a union of either a `DateInterval` or `Time`,
-			* a `DateInterval` or `Time` may be passed which will be implicity converted to a
+			* a `DateInterval` or `Time` may be passed which will be implicitly converted to a
 			* `Union<DateInterval, Time>`, the serialized form of which represents the initial value
 			* passed
 			*/

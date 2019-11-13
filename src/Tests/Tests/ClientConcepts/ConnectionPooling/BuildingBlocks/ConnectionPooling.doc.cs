@@ -90,7 +90,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		* ==== CloudConnectionPool
 		*
 		* A specialized subclass of `SingleNodeConnectionPool` that accepts a Cloud Id and credentials.
-		* When used the client will also pick Elastic Cloud optmized defaults for the connection settings.
+		* When used the client will also pick Elastic Cloud optimized defaults for the connection settings.
 		 *
 		 * A Cloud Id for your cluster can be fetched from your Elastic Cloud cluster administration console.
 		 *

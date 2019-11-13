@@ -47,7 +47,7 @@ var audit = new Auditor(() => VirtualClusterWith
 );
 ----
 
-healty cluster all nodes return healthy responses
+healthy cluster all nodes return healthy responses
 
 [source,csharp]
 ----
