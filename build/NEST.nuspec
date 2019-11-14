@@ -15,6 +15,7 @@
 		<summary>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</summary>
 		<releaseNotes>https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework="net461">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />

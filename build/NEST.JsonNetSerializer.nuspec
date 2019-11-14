@@ -15,6 +15,7 @@
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2017-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest,serializer,json</tags>
+		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework="net461">
 				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />

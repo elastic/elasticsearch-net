@@ -15,6 +15,7 @@
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
 				<dependency id="System.Buffers" version="[4.5.0,)"/>
