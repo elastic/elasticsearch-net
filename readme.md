@@ -362,4 +362,4 @@ A small HTTP server will be spun up locally on port 8000 through which you can v
 
 This software is Copyright (c) 2014-2019 by Elasticsearch BV.
 
-This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elasticsearch/elasticsearch-net/blob/develop/license.txt).
+This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt).
