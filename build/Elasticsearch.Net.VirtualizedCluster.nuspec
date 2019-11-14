@@ -28,9 +28,11 @@
 		<file src="..\license.txt" target="" />
 	
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.dll" target="lib\netstandard2.0"/>
+		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.pdb" target="lib\netstandard2.0"/>
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.xml" target="lib\netstandard2.0"/>
 
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\net461\Elasticsearch.Net.VirtualizedCluster.dll" target="lib\net461"/>
+		<file src="output\Elasticsearch.Net.VirtualizedCluster\net461\Elasticsearch.Net.VirtualizedCluster.pdb" target="lib\net461"/>
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\net461\Elasticsearch.Net.VirtualizedCluster.xml" target="lib\net461"/>
 	</files>
 </package>
