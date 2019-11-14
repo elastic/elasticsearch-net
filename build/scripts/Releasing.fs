@@ -39,14 +39,23 @@ module Release =
         
     let private currentMajorVersion version = sprintf "%i" <| version.Full.Major
     let private nextMajorVersion version = sprintf "%i" <| version.Full.Major + 1u
+    
+    let private gitInfo args =
+        let result = Tooling.Git.ReadInWithTimeout "." args (TimeSpan.FromSeconds(10.))
+        (Seq.head result.Output).Line.Trim()
 
     let private props version =
         let currentMajorVersion = currentMajorVersion version
-        let nextMajorVersion = nextMajorVersion version
+        let nextMajorVersion = nextMajorVersion version      
+        let branch = gitInfo ["rev-parse"; "--abbrev-ref"; "HEAD"]     
+        let commit = gitInfo ["rev-parse"; "HEAD"]
+        
         new StringBuilder()
         |> addKeyValue "currentMajorVersion" currentMajorVersion
         |> addKeyValue "nextMajorVersion" nextMajorVersion
         |> addKeyValue "year" year
+        |> addKeyValue "branch" branch
+        |> addKeyValue "commit" commit
 
     let pack file n properties version  = 
         Tooling.Nuget.Exec [ "pack"; file; 
