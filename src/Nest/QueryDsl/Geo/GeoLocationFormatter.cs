@@ -1,6 +1,8 @@
-﻿using Elasticsearch.Net.Utf8Json;
+﻿using System.Globalization;
+using System.IO;
+using System.Text;
+using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
-
 
 namespace Nest
 {
@@ -14,35 +16,59 @@ namespace Nest
 
 		public GeoLocation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			switch (reader.GetCurrentJsonToken())
 			{
-				reader.ReadNext();
-				return null;
-			}
-
-			var count = 0;
-			double lat = 0;
-			double lon = 0;
-			while (reader.ReadIsInObject(ref count))
-			{
-				var propertyName = reader.ReadPropertyNameSegmentRaw();
-				if (Fields.TryGetValue(propertyName, out var value))
-				{
-					switch (value)
+				case JsonToken.Null:
+					reader.ReadNext();
+					return null;
+				case JsonToken.String:
+					var wkt = reader.ReadString();
+					using (var tokenizer = new WellKnownTextTokenizer(new StringReader(wkt)))
 					{
-						case 0:
-							lat = reader.ReadDouble();
-							break;
-						case 1:
-							lon = reader.ReadDouble();
-							break;
-					}
-				}
-				else
-					reader.ReadNextBlock();
-			}
+						var token = tokenizer.NextToken();
+						if (token != TokenType.Word)
+							throw new GeoWKTException(
+								$"Expected word but found {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
 
-			return new GeoLocation(lat, lon);
+						var type = tokenizer.TokenValue.ToUpperInvariant();
+						if (type != GeoShapeType.Point)
+							throw new GeoWKTException(
+								$"Expected {GeoShapeType.Point} but found {type}", tokenizer.LineNumber, tokenizer.Position);
+
+						if (GeoWKTReader.NextEmptyOrOpen(tokenizer) == TokenType.Word)
+							return null;
+
+						var lon = GeoWKTReader.NextNumber(tokenizer);
+						var lat = GeoWKTReader.NextNumber(tokenizer);
+						return new GeoLocation(lat, lon) { Format = GeoFormat.WellKnownText };
+					}
+				default:
+				{
+					var count = 0;
+					double lat = 0;
+					double lon = 0;
+					while (reader.ReadIsInObject(ref count))
+					{
+						var propertyName = reader.ReadPropertyNameSegmentRaw();
+						if (Fields.TryGetValue(propertyName, out var value))
+						{
+							switch (value)
+							{
+								case 0:
+									lat = reader.ReadDouble();
+									break;
+								case 1:
+									lon = reader.ReadDouble();
+									break;
+							}
+						}
+						else
+							reader.ReadNextBlock();
+					}
+
+					return new GeoLocation(lat, lon) { Format = GeoFormat.GeoJson };
+				}
+			}
 		}
 
 		public void Serialize(ref JsonWriter writer, GeoLocation value, IJsonFormatterResolver formatterResolver)
@@ -53,13 +79,31 @@ namespace Nest
 				return;
 			}
 
-			writer.WriteBeginObject();
-			writer.WritePropertyName("lat");
-			writer.WriteDouble(value.Latitude);
-			writer.WriteValueSeparator();
-			writer.WritePropertyName("lon");
-			writer.WriteDouble(value.Longitude);
-			writer.WriteEndObject();
+			switch (value.Format)
+			{
+				case GeoFormat.GeoJson:
+					writer.WriteBeginObject();
+					writer.WritePropertyName("lat");
+					writer.WriteDouble(value.Latitude);
+					writer.WriteValueSeparator();
+					writer.WritePropertyName("lon");
+					writer.WriteDouble(value.Longitude);
+					writer.WriteEndObject();
+					break;
+				case GeoFormat.WellKnownText:
+					var lon = value.Longitude.ToString(CultureInfo.InvariantCulture);
+					var lat = value.Latitude.ToString(CultureInfo.InvariantCulture);
+					var length = GeoShapeType.Point.Length + lon.Length + lat.Length + 4;
+					var builder = new StringBuilder(length)
+						.Append(GeoShapeType.Point)
+						.Append(" (")
+						.Append(lon)
+						.Append(" ")
+						.Append(lat)
+						.Append(")");
+					writer.WriteString(builder.ToString());
+					break;
+			}
 		}
 	}
 }

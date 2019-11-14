@@ -17,7 +17,7 @@ namespace Nest
 		string Type { get; }
 	}
 
-	internal enum GeoShapeFormat
+	internal enum GeoFormat
 	{
 		GeoJson,
 		WellKnownText
@@ -48,7 +48,7 @@ namespace Nest
 		/// <inheritdoc />
 		public string Type { get; protected set; }
 
-		internal GeoShapeFormat Format { get; set; }
+		internal GeoFormat Format { get; set; }
 	}
 
 	internal class GeoShapeFormatter<TShape> : IJsonFormatter<TShape>
@@ -93,7 +93,7 @@ namespace Nest
 				return;
 			}
 
-			if (value is GeoShapeBase shapeBase && shapeBase.Format == GeoShapeFormat.WellKnownText)
+			if (value is GeoShapeBase shapeBase && shapeBase.Format == GeoFormat.WellKnownText)
 			{
 				writer.WriteString(GeoWKTWriter.Write(shapeBase));
 				return;
