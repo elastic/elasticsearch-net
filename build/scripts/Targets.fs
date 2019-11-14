@@ -75,7 +75,9 @@ module Main =
 
         conditional (parsed.Target = "canary" && not isMono) "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
 
-        conditional (parsed.Target <> "canary") "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions 
+        conditional (parsed.Target <> "canary") "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
+        
+        conditional (parsed.Target <> "canary") "diff-against-nuget" <| fun _ -> Differ.DiffWithPreviousNugetVersion parsed
 
         target "validate-artifacts" <| fun _ -> Versioning.ValidateArtifacts artifactsVersion
         
@@ -93,7 +95,12 @@ module Main =
         command "integrate" [ "clean"; "restore"; "full-build";] <| fun _ -> Tests.RunIntegrationTests parsed
 
         command "release" [ 
-           "build"; "nuget-pack"; "nuget-pack-versioned"; "validate-artifacts"; "generate-release-notes"
+           "build";
+           "nuget-pack";
+           "nuget-pack-versioned";
+           "validate-artifacts";
+           "diff-against-nuget";
+           "generate-release-notes"
         ] (fun _ -> printfn "Finished Release Build %O" artifactsVersion)
 
         command "diff" [ "clean"; ] <| fun _ -> Differ.Run parsed
