@@ -61,6 +61,7 @@ module Tooling =
     let nugetFile = Path.GetFullPath "build/scripts/bin/Release/netcoreapp3.0/NuGet.exe" 
     let Nuget = BuildTooling(None, nugetFile)
     let ILRepack = BuildTooling(None, "build/scripts/bin/Release/netcoreapp3.0/ILRepack.exe")
-    let DotNet = BuildTooling(Some <| TimeSpan.FromMinutes(5.), "dotnet")
+    let DotNet = BuildTooling(None, "dotnet")
+    let Git = BuildTooling(None, "git")
 
     
