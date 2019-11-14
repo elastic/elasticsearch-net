@@ -205,9 +205,8 @@ Execution hints can be provided anywhere on the command line
         | ["canary"; ] -> parsed
         | ["codegen"; ] -> parsed
         
-        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }  }
-
-        | ["test"; testFilter] -> { parsed with CommandArguments = Test { TestFilter = Some testFilter }  }
+        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; DoSourceLink = true }
+        | ["test"; testFilter] -> { parsed with CommandArguments = Test { TestFilter = Some testFilter } }
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
             {

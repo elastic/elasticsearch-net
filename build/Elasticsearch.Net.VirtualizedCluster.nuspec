@@ -15,6 +15,7 @@
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
 				<dependency id="Elasticsearch.Net" version="[$currentMajorVersion$, $nextMajorVersion$)" />
@@ -28,9 +29,11 @@
 		<file src="..\license.txt" target="" />
 	
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.dll" target="lib\netstandard2.0"/>
+		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.pdb" target="lib\netstandard2.0"/>
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.xml" target="lib\netstandard2.0"/>
 
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\net461\Elasticsearch.Net.VirtualizedCluster.dll" target="lib\net461"/>
+		<file src="output\Elasticsearch.Net.VirtualizedCluster\net461\Elasticsearch.Net.VirtualizedCluster.pdb" target="lib\net461"/>
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\net461\Elasticsearch.Net.VirtualizedCluster.xml" target="lib\net461"/>
 	</files>
 </package>
