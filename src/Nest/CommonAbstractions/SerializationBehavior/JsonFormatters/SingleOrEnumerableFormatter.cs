@@ -27,6 +27,8 @@ namespace Nest
 		}
 	}
 
+	// TODO investigate this is really needed
+	// only used in one place and on master this is already gone
 	internal class SerializeAsSingleFormatter<T> : IJsonFormatter<IEnumerable<T>>
 	{
 		public IEnumerable<T> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)

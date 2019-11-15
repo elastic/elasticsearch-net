@@ -152,7 +152,7 @@ namespace Nest
 			return !enumerable.Any() || enumerable.All(t => t == null);
 		}
 
-		internal static void ThrowIfNull<T>(this T value, string name, string message = null) 
+		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);
