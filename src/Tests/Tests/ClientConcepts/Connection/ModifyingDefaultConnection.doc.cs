@@ -141,7 +141,6 @@ namespace Tests.ClientConcepts.Connection
 			}
 		}
 
-
 		/**
 		 * As before, a new instance of the custom connection is passed to `ConnectionSettings` in order to
 		 * use
