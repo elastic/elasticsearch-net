@@ -150,7 +150,7 @@ module Release =
 
             callback p nugetId nuspec properties version
         )
-            
+        
     let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
         match p with
         | Project ElasticsearchNetVirtual ->
