@@ -1,5 +1,4 @@
 using Elasticsearch.Net.CrossPlatform;
-using System.Reflection;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest

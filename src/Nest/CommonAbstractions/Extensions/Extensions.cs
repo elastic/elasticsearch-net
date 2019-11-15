@@ -14,7 +14,6 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
-
 	internal static class Extensions
 	{
 		private static readonly ConcurrentDictionary<string, object> EnumCache = new ConcurrentDictionary<string, object>();
