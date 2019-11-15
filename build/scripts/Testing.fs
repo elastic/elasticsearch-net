@@ -4,7 +4,6 @@ open System
 open Fake.Core
 open System.IO
 open Commandline
-open Fake.Core
 open Versioning
 
 module Tests =

@@ -157,7 +157,7 @@ module Release =
             printfn "Skipping %s from building a versioned nightly" p.Name
             ignore()
         | _ -> nugetPackVersionedUnfiltered p nugetId nuspec properties version
-            
+
     let NugetPack (ArtifactsVersion(version)) = packProjects version nugetPackMain 
 
     let NugetPackVersioned (ArtifactsVersion(version)) = packProjects version nugetPackVersioned
