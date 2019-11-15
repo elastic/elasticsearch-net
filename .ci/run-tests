@@ -8,7 +8,7 @@ set -euxo pipefail
 
 TEST_SUITE=${TEST_SUITE-oss}
 DOTNET_VERSION=${DOTNET_VERSION-3.0.100}
-NODE_NAME=es1
+NODE_NAME=instance
 
 repo=$(pwd)
 elasticsearch_image=elasticsearch
