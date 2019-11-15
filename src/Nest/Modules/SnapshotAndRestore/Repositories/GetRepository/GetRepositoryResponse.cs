@@ -26,9 +26,9 @@ namespace Nest
 			where TRepository : class, ISnapshotRepository
 		{
 			if (Repositories == null) return null;
-			if (!Repositories.ContainsKey(name)) return null;
+			if (!Repositories.TryGetValue(name, out var repository)) return null;
 
-			return Repositories[name] as TRepository;
+			return repository as TRepository;
 		}
 	}
 }

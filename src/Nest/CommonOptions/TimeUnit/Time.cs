@@ -115,11 +115,11 @@ namespace Nest
 				if (StaticTimeValue.Value < other.StaticTimeValue.Value) return -1;
 				return 1;
 			}
-			
+
 			if (Milliseconds == null && other.Milliseconds == null) return 0;
 			if (Milliseconds != null && other.Milliseconds == null) return 1;
 			if (Milliseconds == null || other.Milliseconds == null) return 1;
-			
+
 			if (Math.Abs(Milliseconds.Value - other.Milliseconds.Value) < FLOAT_TOLERANCE) return 0;
 			if (other.Milliseconds != null && Milliseconds < other.Milliseconds.Value) return -1;
 
