@@ -7,6 +7,7 @@ namespace Nest
 	{
 		TDocument Source { get; }
 	}
+
 	public class GetResponse<TDocument> : ResponseBase, IGetResponse<TDocument> where TDocument : class
 	{
 		[DataMember(Name = "fields")]

@@ -5,6 +5,20 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public class QueryUsage
+	{
+		[DataMember(Name = "total")]
+		public int Total { get; internal set; }
+
+		[DataMember(Name = "paging")]
+		public int Paging { get; internal set; }
+
+		[DataMember(Name = "failed")]
+		public int Failed { get; internal set; }
+
+		[DataMember(Name = "count")]
+		public int? Count { get; internal set; }
+	}
 
 	public class CcrUsage : XPackUsage
 	{
@@ -22,20 +36,6 @@ namespace Nest
 
 		[DataMember(Name = "queries")]
 		public IReadOnlyDictionary<string, QueryUsage> Queries { get; set; } = EmptyReadOnly<string, QueryUsage>.Dictionary;
-	}
-	public class QueryUsage
-	{
-		[DataMember(Name = "total")]
-		public int Total { get; internal set; }
-
-		[DataMember(Name = "paging")]
-		public int Paging { get; internal set; }
-
-		[DataMember(Name = "failed")]
-		public int Failed { get; internal set; }
-
-		[DataMember(Name = "count")]
-		public int? Count { get; internal set; }
 	}
 	public class XPackUsageResponse : ResponseBase
 	{
@@ -59,6 +59,7 @@ namespace Nest
 
 		[DataMember(Name = "ccr")]
 		public CcrUsage Ccr { get; internal set; }
+
 		[DataMember(Name = "watcher")]
 		public AlertingUsage Alerting { get; internal set; }
 
@@ -244,6 +245,7 @@ namespace Nest
 	{
 		[DataMember(Name = "collection_enabled")]
 		public bool CollectionEnabled { get; internal set; }
+
 		[DataMember(Name = "enabled_exporters")]
 		public IReadOnlyDictionary<string, long> EnabledExporters { get; set; } = EmptyReadOnly<string, long>.Dictionary;
 	}

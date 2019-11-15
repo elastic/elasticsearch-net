@@ -1,5 +1,4 @@
-﻿
-namespace Nest
+﻿namespace Nest
 {
-	public class DeleteRollupJobResponse : AcknowledgedResponseBase { 	}
+	public class DeleteRollupJobResponse : AcknowledgedResponseBase { }
 }
