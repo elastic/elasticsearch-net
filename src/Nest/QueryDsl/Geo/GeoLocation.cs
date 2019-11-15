@@ -18,18 +18,8 @@ namespace Nest
 		/// <summary>
 		/// Represents a Latitude/Longitude as a 2 dimensional point.
 		/// </summary>
-		/// <param name="latitude">Value between -90 and 90</param>
-		/// <param name="longitude">Value between -180 and 180</param>
-		/// <exception cref="ArgumentOutOfRangeException">If <paramref name="latitude" /> or <paramref name="longitude" /> are invalid</exception>
 		public GeoLocation(double latitude, double longitude)
 		{
-			if (!IsValidLatitude(latitude))
-				throw new ArgumentOutOfRangeException(string.Format(CultureInfo.InvariantCulture,
-					"Invalid latitude '{0}'. Valid values are between -90 and 90", latitude));
-			if (!IsValidLongitude(longitude))
-				throw new ArgumentOutOfRangeException(string.Format(CultureInfo.InvariantCulture,
-					"Invalid longitude '{0}'. Valid values are between -180 and 180", longitude));
-
 			Latitude = latitude;
 			Longitude = longitude;
 		}
@@ -62,35 +52,18 @@ namespace Nest
 		public string ToString(string format, IFormatProvider formatProvider) => ToString();
 
 		/// <summary>
-		/// True if <paramref name="latitude" /> is a valid latitude. Otherwise false.
+		/// Checks if <paramref name="latitude" /> is a valid latitude between -90 and 90, inclusive.
 		/// </summary>
 		/// <param name="latitude"></param>
 		/// <returns></returns>
 		public static bool IsValidLatitude(double latitude) => latitude >= -90 && latitude <= 90;
 
 		/// <summary>
-		/// True if <paramref name="longitude" /> is a valid longitude. Otherwise false.
+		/// Checks if <paramref name="longitude" /> is a valid longitude between -180 and 180, inclusive.
 		/// </summary>
 		/// <param name="longitude"></param>
 		/// <returns></returns>
 		public static bool IsValidLongitude(double longitude) => longitude >= -180 && longitude <= 180;
-
-		/// <summary>
-		/// Try to create a <see cref="GeoLocation" />.
-		/// Return
-		/// <value>null</value>
-		/// if either <paramref name="latitude" /> or <paramref name="longitude" /> are invalid.
-		/// </summary>
-		/// <param name="latitude">Value between -90 and 90</param>
-		/// <param name="longitude">Value between -180 and 180</param>
-		/// <returns></returns>
-		public static GeoLocation TryCreate(double latitude, double longitude)
-		{
-			if (IsValidLatitude(latitude) && IsValidLongitude(longitude))
-				return new GeoLocation(latitude, longitude);
-
-			return null;
-		}
 
 		public override string ToString() =>
 			Latitude.ToString("#0.0#######", CultureInfo.InvariantCulture) + "," +
@@ -157,6 +130,8 @@ namespace Nest
 		/// <summary>
 		/// Creates a new instance of <see cref="GeoCoordinate" /> from an array
 		/// of 2 or 3 doubles, in the order Latitude, Longitude, and optional Z value.
+		/// Returns null if coordinates are null
+		/// <exception cref="ArgumentOutOfRangeException">If the array does not contain 2 or 3 values</exception>
 		/// </summary>
 		public static implicit operator GeoCoordinate(double[] coordinates)
 		{
@@ -168,11 +143,11 @@ namespace Nest
 					return new GeoCoordinate(coordinates[0], coordinates[1]);
 				case 3:
 					return new GeoCoordinate(coordinates[0], coordinates[1], coordinates[2]);
+				default:
+					throw new ArgumentOutOfRangeException(
+						nameof(coordinates),
+						$"Cannot create a {nameof(GeoCoordinate)} from an array that does not contain 2 or 3 values");
 			}
-
-			throw new ArgumentOutOfRangeException(
-				nameof(coordinates),
-				$"Cannot create a {nameof(GeoCoordinate)} from an array that does not contain 2 or 3 values");
 		}
 	}
 }
