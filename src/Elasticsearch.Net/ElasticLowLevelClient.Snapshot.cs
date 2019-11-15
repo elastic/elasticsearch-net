@@ -53,6 +53,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		///<param name = "repository">A repository name</param>
 		///<param name = "body"></param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("snapshot.cleanup_repository", "repository, body")]
 		public Task<TResponse> CleanupRepositoryAsync<TResponse>(string repository, PostData body, CleanupRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_snapshot/{repository:repository}/_cleanup"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_snapshot/{repository}/{snapshot} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
