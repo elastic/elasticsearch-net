@@ -90,7 +90,7 @@ Enables gzip compressed requests and responses.
 +
 IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this
 +
-http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
+https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html
 
 `EnableHttpPipelining`::
 
