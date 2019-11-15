@@ -2,10 +2,12 @@
 
 Contributing back to `Elasticsearch.Net` and `NEST` is very much appreciated. 
 Whether you [feel the need to change one character](https://github.com/elasticsearch/elasticsearch-net/pull/536) or have a go at 
-[mapping new API's](http://github.com/elasticsearch/elasticsearch-net/pull/376) no PR is too small or too big. 
+[mapping new APIs](http://github.com/elasticsearch/elasticsearch-net/pull/376), no pull request (PR) is too small or too big. 
 
 In fact many of our most awesome features/fixes have been provided to us by 
 [these wonderful folks](https://github.com/elasticsearch/elasticsearch-net/graphs/contributors) to which we are forever indebted. 
+
+It's usually best to open an issue first to discuss a feature or bug, before opening a pull request. Doing so can save time and help further ascertain the crux of an issue.
 
 ## Sign the CLA
 
@@ -27,7 +29,15 @@ In those cases we tend to pull your bits locally and write tests ourselves, but 
 
 ## Branches
 
-- `master` for the latest client (currently _8.x alpha_)
+Convention:
+
+- `master` reflects the latest server version, this is typically the `current latest major + 1`
+- `N.x` where N represents the major version component of the Elasticsearch server release its integrating with; e.g. `7.x`
+- `N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixes.
+
+Examples:
+
+- `master` for the latest server version (currently _8.x_)
 - `7.x` for 7.x compatible client
 - `6.x` for 6.x compatible client
 - `5.x` for 5.x compatible client
@@ -46,6 +56,12 @@ Please submit your [Pull Requests](https://help.github.com/articles/creating-a-p
 - [`5.x`](https://github.com/elastic/elasticsearch-net/tree/5.x) branch for 5.x
 
 # Building the solution
+
+The solution uses a number of awesome Open Source software tools to ease development:
+
+## Bullseye
+
+[Bullseye](https://github.com/adamralph/bullseye) is used as the build automation system for the solution. To get started after cloning the solution, it's best to run the build script in the root
 
 for Windows 
 
@@ -110,15 +126,3 @@ You may come across an exception similar to below when running the build script
 The `1.x` and `master` branches have diverged dramatically as a result of changes in preparation for 2.0. This includes changes to the build process such that switching between the `master` and `1.x` branches and back again can change the versions of packages used within the build processes. To rectify this issue, try deleting the `packages` folder within the root of the solution and run the build script again.
 
 If working on both 1.x and 2.x and 5.x versions of NEST, it is recommended to clone the git repository for each version into separate directories to avoid the need to switch between the divergent branches.
-
-### System.Exception: Attempting to run with dotnet.exe with 1.0.x but global.json mandates 1.0.1
-
-When running the `build` script, you may encounter a mismatch with your version of the .NET Core runtime. Ensure your version of .NET Core exactly matches the version specified under `sdk` in the `global.json` file.
-
-```json
-{
-  "sdk": {
-    "version": "1.0.1"
-  }
-}
-```
