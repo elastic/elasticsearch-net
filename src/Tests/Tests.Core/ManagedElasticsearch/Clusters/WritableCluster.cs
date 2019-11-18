@@ -30,7 +30,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			};
 
 			// TODO: temporary until https://github.com/elastic/elasticsearch-net-abstractions/commit/3977ccb6449870fb4f1e6059be960e12ec5e5125 is released
-			if (ElasticVersion.From(TestClient.Configuration.ElasticsearchVersion) >= "6.4.0")
+			if (TestClient.Configuration.ElasticsearchVersion >= "6.4.0")
 				plugins.Add(new ElasticsearchPlugin("analysis-nori", v => v >= "6.4.0"));
 
 			return new ClientTestClusterConfiguration(plugins.ToArray())

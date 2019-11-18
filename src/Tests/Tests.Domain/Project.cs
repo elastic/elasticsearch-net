@@ -45,7 +45,6 @@ namespace Tests.Domain
 		public SimpleGeoPoint LocationPoint { get; set; }
 		public IGeoShape LocationShape { get; set; }
 
-		[Shape] // Explicity map as a shape type
 		public IGeoShape ArbitraryShape { get; set; }
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public string Name { get; set; }

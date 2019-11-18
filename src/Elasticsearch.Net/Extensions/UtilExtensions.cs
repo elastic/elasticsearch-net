@@ -12,10 +12,10 @@ namespace Elasticsearch.Net.Extensions
 		private const long MillisecondsInAWeek = MillisecondsInADay * 7;
 		private const long MillisecondsInADay = MillisecondsInAnHour * 24;
 		private const long MillisecondsInAnHour = MillisecondsInAMinute * 60;
-
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 		private const long MillisecondsInAMinute = MillisecondsInASecond * 60;
 		private const long MillisecondsInASecond = 1000;
+
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 
 		internal static string Utf8String(this MemoryStream ms)
 		{
