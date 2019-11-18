@@ -45,11 +45,15 @@ module Tests =
             let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
             match (target, Environment.isLinux) with 
-            | (_, true) -> ["--framework"; "netcoreapp3.0"] |> List.append p
+            | (_, true) ->
+                printfn "Running on linux defaulting tests to .NET Core only" 
+                ["--framework"; "netcoreapp3.0"] |> List.append p
             | (Commandline.MultiTarget.One, _) ->
                 let random = match seed with | Some i -> Random(i) | None -> Random()
                 let fw = DotNetFramework.AllTests |> List.sortBy (fun _ -> random.Next()) |> List.head
-                ["--framework"; fw.Identifier.MSBuild] |> List.append p
+                let tfm = fw.Identifier.MSBuild
+                printfn "Running on non linux system randomly selected '%s' for tests" tfm
+                ["--framework"; tfm] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =
             // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
