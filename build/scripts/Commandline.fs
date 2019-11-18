@@ -93,7 +93,7 @@ Execution hints can be provided anywhere on the command line
         NonInteractive: bool;
         SkipTests: bool;
         GenDocs: bool;
-        Seed: string;
+        Seed: int option;
         RandomArguments: string list;
         DocsBranch: string;
         ReferenceBranch: string;
@@ -141,8 +141,8 @@ Execution hints can be provided anywhere on the command line
             GenDocs = not skipDocs && (args |> List.exists (fun x -> x = "gendocs") || target = "build") 
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
-                | Some t -> t.Replace("seed:", "")
-                | _ -> ""
+                | Some t -> Some <| Int32.Parse (t.Replace("seed:", ""))
+                | _ -> None
             RandomArguments = 
                 args 
                 |> List.filter (fun x -> (x.StartsWith("random:")))
