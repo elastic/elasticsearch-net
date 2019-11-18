@@ -178,6 +178,9 @@ namespace Tests.ClientConcepts.Connection
 				return message;
 			}
 		}
+		/**
+		 * See <<working-with-certificates, Working with certificates>> for further details.
+		 */
 #endif
 	}
 }

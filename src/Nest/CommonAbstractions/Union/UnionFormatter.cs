@@ -7,15 +7,9 @@ namespace Nest
 	{
 		private readonly bool _attemptTSecondIfTFirstIsNull;
 
-		public UnionFormatter()
-		{
-			_attemptTSecondIfTFirstIsNull = false;
-		}
+		public UnionFormatter() => _attemptTSecondIfTFirstIsNull = false;
 
-		public UnionFormatter(bool attemptTSecondIfTFirstIsNull)
-		{
-			_attemptTSecondIfTFirstIsNull = attemptTSecondIfTFirstIsNull;
-		}
+		public UnionFormatter(bool attemptTSecondIfTFirstIsNull) => _attemptTSecondIfTFirstIsNull = attemptTSecondIfTFirstIsNull;
 
 		public Union<TFirst, TSecond> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

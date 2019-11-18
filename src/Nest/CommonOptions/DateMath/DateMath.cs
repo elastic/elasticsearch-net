@@ -122,7 +122,7 @@ namespace Nest
 			if (format.Length > 20 && format.Length < 23)
 			{
 				var diff = 23 - format.Length;
-				for (int i = 0; i < diff; i++)
+				for (var i = 0; i < diff; i++)
 					builder.Append('0');
 			}
 

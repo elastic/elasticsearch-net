@@ -17,7 +17,7 @@ namespace ApiGenerator.Domain
 		public string Commit { get; set; }
 
 		public static SortedDictionary<string, QueryParameters> CommonApiQueryParameters { get; set; }
-		
+
 		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
 		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespace =>
@@ -56,7 +56,7 @@ namespace ApiGenerator.Domain
 						Name = CreateName(para.ClsName, e.CsharpNames.MethodName, e.CsharpNames.Namespace),
 						Options = para.Options
 					}).ToList();
-				
+
 				var urlPartEnums = (
 					from e in Endpoints.Values 
 					from part in e.Url.Parts 

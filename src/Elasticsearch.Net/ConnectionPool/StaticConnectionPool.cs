@@ -37,7 +37,6 @@ namespace Elasticsearch.Net
 
 		private void Initialize(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider)
 		{
-
 			var nodesProvided = nodes?.ToList() ?? throw new ArgumentNullException(nameof(nodes));
 			nodesProvided.ThrowIfEmpty(nameof(nodes));
 			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
