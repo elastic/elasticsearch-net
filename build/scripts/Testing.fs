@@ -24,10 +24,7 @@ module Tests =
         
         env "NEST_INTEGRATION_CLUSTER" clusterFilter
         env "NEST_TEST_FILTER" testFilter
-        let seed =
-            match args.Seed with
-            | Some i -> Some <| i.ToString(CultureInfo.InvariantCulture)
-            | None -> None
+        let seed = Some <| args.Seed.ToString(CultureInfo.InvariantCulture)
         env "NEST_TEST_SEED" seed 
 
         for random in args.RandomArguments do 
@@ -49,7 +46,7 @@ module Tests =
                 printfn "Running on linux defaulting tests to .NET Core only" 
                 ["--framework"; "netcoreapp3.0"] |> List.append p
             | (Commandline.MultiTarget.One, _) ->
-                let random = match seed with | Some i -> Random(i) | None -> Random()
+                let random = Random(seed)
                 let fw = DotNetFramework.AllTests |> List.sortBy (fun _ -> random.Next()) |> List.head
                 let tfm = fw.Identifier.MSBuild
                 printfn "Running on non linux system randomly selected '%s' for tests" tfm
