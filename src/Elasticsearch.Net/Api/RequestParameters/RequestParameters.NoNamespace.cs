@@ -1040,7 +1040,7 @@ namespace Elasticsearch.Net
 	///<summary>Request options for Index <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 	public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
 		public long? IfPrimaryTerm
 		{
@@ -1055,7 +1055,10 @@ namespace Elasticsearch.Net
 			set => Q("if_seq_no", value);
 		}
 
-		///<summary>Explicit operation type</summary>
+		///<summary>
+		/// Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit
+		/// document ID
+		///</summary>
 		public OpType? OpType
 		{
 			get => Q<OpType? >("op_type");

@@ -872,7 +872,7 @@ namespace Nest
 		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifprimaryterm) => Qs("if_primary_term", ifprimaryterm);
 		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
 		public IndexDescriptor<TDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
-		///<summary>Explicit operation type</summary>
+		///<summary>Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID</summary>
 		public IndexDescriptor<TDocument> OpType(OpType? optype) => Qs("op_type", optype);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);

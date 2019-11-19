@@ -399,7 +399,7 @@ namespace Nest
 
 		// values part of the url path
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		///<summary>A comma-separated list of index names to limit the returned information</summary>
+		///<summary>Comma-separated list or wildcard expression of index names to limit the returned information</summary>
 		public CatRecoveryDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatRecoveryDescriptor Index<TOther>()

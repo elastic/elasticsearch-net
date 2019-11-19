@@ -99,6 +99,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "target">The name of the target index to clone into</param>
 		///<param name = "body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.clone", "index, target, body")]
 		public Task<TResponse> CloneAsync<TResponse>(string index, string target, PostData body, CloneIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_clone/{target:target}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_close <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
