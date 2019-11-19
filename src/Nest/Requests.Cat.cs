@@ -141,13 +141,6 @@ namespace Nest
 		[IgnoreDataMember]
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public Bytes? Bytes
-		{
-			get => Q<Bytes? >("bytes");
-			set => Q("bytes", value);
-		}
-
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -308,13 +301,6 @@ namespace Nest
 		[IgnoreDataMember]
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public Bytes? Bytes
-		{
-			get => Q<Bytes? >("bytes");
-			set => Q("bytes", value);
-		}
-
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -491,13 +477,6 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public Bytes? Bytes
-		{
-			get => Q<Bytes? >("bytes");
-			set => Q("bytes", value);
-		}
-
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -916,11 +895,18 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public Bytes? Bytes
+		///<summary>If `true`, the response only includes ongoing shard recoveries</summary>
+		public bool? ActiveOnly
 		{
-			get => Q<Bytes? >("bytes");
-			set => Q("bytes", value);
+			get => Q<bool? >("active_only");
+			set => Q("active_only", value);
+		}
+
+		///<summary>If `true`, the response includes detailed information about shard recoveries</summary>
+		public bool? Detailed
+		{
+			get => Q<bool? >("detailed");
+			set => Q("detailed", value);
 		}
 
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -1058,13 +1044,6 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public Bytes? Bytes
-		{
-			get => Q<Bytes? >("bytes");
-			set => Q("bytes", value);
-		}
-
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -1131,13 +1110,6 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public Bytes? Bytes
-		{
-			get => Q<Bytes? >("bytes");
-			set => Q("bytes", value);
-		}
-
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{

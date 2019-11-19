@@ -86,8 +86,6 @@ namespace Nest
 		///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
 		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAllocationDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -167,8 +165,6 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
 		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(fields, (a, v) => a.RouteValues.Optional("fields", (Fields)v));
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatFielddataDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -246,8 +242,6 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatIndicesDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatIndicesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -407,8 +401,10 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatRecoveryDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>If `true`, the response only includes ongoing shard recoveries</summary>
+		public CatRecoveryDescriptor ActiveOnly(bool? activeonly = true) => Qs("active_only", activeonly);
+		///<summary>If `true`, the response includes detailed information about shard recoveries</summary>
+		public CatRecoveryDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRecoveryDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -470,8 +466,6 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatSegmentsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public CatSegmentsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSegmentsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -509,8 +503,6 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatShardsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
-		///<summary>The unit in which to display byte values</summary>
-		public CatShardsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
