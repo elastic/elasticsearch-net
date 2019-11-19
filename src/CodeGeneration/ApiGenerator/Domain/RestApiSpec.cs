@@ -74,6 +74,16 @@ namespace ApiGenerator.Domain
 					.Concat(urlParameterEnums)
 					.DistinctBy(e => e.Name)
 					.ToList();
+
+				//TODO can be removed in 8.x
+				var versionType = _enumDescriptions.FirstOrDefault(f => f.Name == "VersionType");
+				if (versionType != null)
+				{
+					var options = new List<string>(versionType.Options);
+					options.Add("force");
+					versionType.Options = options;
+				}
+
 				return _enumDescriptions;
 			}
 		}

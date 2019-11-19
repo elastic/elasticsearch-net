@@ -351,6 +351,7 @@ namespace Elasticsearch.Net
 		External,
 		[EnumMember(Value = "external_gte")]
 		ExternalGte,
+		[Obsolete("Force is no longer accepted by the server as of 7.5.0 and will result in an error when used")]
 		[EnumMember(Value = "force")]
 		Force
 	}
