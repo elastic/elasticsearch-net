@@ -74,13 +74,13 @@ namespace ApiGenerator.Domain.Specification
 
 
 		public IReadOnlyCollection<UrlPart> Parts => Paths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
-		
+
 		public bool IsPartless => !Parts.Any();
 
 		private static readonly string[] DocumentApiParts = { "index", "id" };
 
 		public bool IsDocumentApi => IsADocumentRoute(Parts);
-		
+
 		public static bool IsADocumentRoute(IReadOnlyCollection<UrlPart> parts) =>
 			parts.Count() == DocumentApiParts.Length
 			&& parts.All(p => DocumentApiParts.Contains(p.Name));

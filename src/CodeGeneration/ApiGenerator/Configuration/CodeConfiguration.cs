@@ -15,14 +15,6 @@ namespace ApiGenerator.Configuration
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
 
-			// THese API's are DOD and will never be implemented
-			"data_frame_transform_deprecated.delete_transform.json",
-			"data_frame_transform_deprecated.get_transform_stats.json",
-			"data_frame_transform_deprecated.put_transform.json",
-			"data_frame_transform_deprecated.start_transform.json",
-			"data_frame_transform_deprecated.stop_transform.json",
-			"data_frame_transform_deprecated.update_transform.json",
-
 			// these APIs are not ready for primetime yet
 			"indices.reload_search_analyzers.json",
 			"rank_eval.json",
@@ -53,8 +45,16 @@ namespace ApiGenerator.Configuration
 			"monitoring.bulk.json",
 			"ml.estimate_memory_usage.json",
 
-
 			"ccr.pause_auto_follow_pattern.json",
+			"ccr.resume_auto_follow_pattern.json",
+			"data_frame_transform_deprecated.delete_transform.json",
+			"data_frame_transform_deprecated.get_transform.json",
+			"data_frame_transform_deprecated.get_transform_stats.json",
+			"data_frame_transform_deprecated.preview_transform.json",
+			"data_frame_transform_deprecated.put_transform.json",
+			"data_frame_transform_deprecated.start_transform.json",
+			"data_frame_transform_deprecated.stop_transform.json",
+			"data_frame_transform_deprecated.update_transform.json",
 			"enrich.delete_policy.json",
 			"enrich.execute_policy.json",
 			"enrich.get_policy.json",
@@ -70,9 +70,7 @@ namespace ApiGenerator.Configuration
 			"transform.start_transform.json",
 			"transform.stop_transform.json",
 			"transform.update_transform.json",
-
 		};
-
 
 		/// <summary>
 		/// Scan all nest source code files for Requests and look for the [MapsApi(filename)] attribute.
