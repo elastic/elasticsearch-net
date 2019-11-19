@@ -2,8 +2,10 @@
 @using System
 @using System.Collections.Generic
 @using System.Linq
+@using System.Text
 @using ApiGenerator.Domain
 @using ApiGenerator
+@using ApiGenerator.Configuration
 @using ApiGenerator.Configuration.Overrides
 @inherits CodeTemplatePage<RestApiSpec>
 @{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
@@ -25,7 +27,12 @@
 	private string CreateCase(string e, string o)
 	{
 		var enumValue = GetEnumValue(e, o);
-		return string.Format("case {0}.{1}: return \"{2}\";", e, enumValue, o);
+		var isObsolete = GlobalOverrides.ObsoleteEnumMembers.TryGetValue(e, out var d) && d.TryGetValue(o, out _);
+		var sb = new StringBuilder();
+		if (isObsolete) sb.AppendLine("#pragma warning disable 618");
+		sb.Append(string.Format("case {0}.{1}: return \"{2}\";", e, enumValue, o));
+		if (isObsolete) sb.AppendLine(Environment.NewLine + "#pragma warning disable 618");
+		return sb.ToString();
 	}
 	private bool IsFlag(string name)
 	{
