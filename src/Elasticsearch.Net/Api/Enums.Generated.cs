@@ -845,8 +845,10 @@ namespace Elasticsearch.Net
 					return "external";
 				case VersionType.ExternalGte:
 					return "external_gte";
+#pragma warning disable 618
 				case VersionType.Force:
 					return "force";
+#pragma warning disable 618
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'VersionType'");
