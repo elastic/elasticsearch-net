@@ -501,28 +501,28 @@ namespace Nest
 		Task<SourceResponse<TDocument>> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>
 		IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
 			where TDocument : class;
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>
 		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector, CancellationToken ct = default)
 			where TDocument : class;
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>
 		IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
 			where TDocument : class;
 		/// <summary>
-		/// <c>POST</c> request to the <c>index</c> API, read more about this API online:
+		/// <c>PUT</c> request to the <c>index</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</a>
 		/// </summary>

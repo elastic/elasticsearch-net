@@ -1862,7 +1862,10 @@ namespace Nest
 			set => Q("if_seq_no", value);
 		}
 
-		///<summary>Explicit operation type</summary>
+		///<summary>
+		/// Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit
+		/// document ID
+		///</summary>
 		public OpType? OpType
 		{
 			get => Q<OpType? >("op_type");

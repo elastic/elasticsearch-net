@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ApiGenerator.Domain.Specification;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ApiGenerator.Domain
 {
@@ -48,26 +49,41 @@ namespace ApiGenerator.Domain
 				}
 
 				var urlParameterEnums = (
-					from e in Endpoints.Values 
-					from para in e.Url.Params.Values 
-					where para.Options != null && para.Options.Any() 
+					from e in Endpoints.Values
+					from para in e.Url.Params.Values
+					where para.Options != null && para.Options.Any()
+					let name = CreateName(para.ClsName, e.CsharpNames.MethodName, e.CsharpNames.Namespace)
+					where name != "Time"
 					select new EnumDescription
 					{
-						Name = CreateName(para.ClsName, e.CsharpNames.MethodName, e.CsharpNames.Namespace),
+						Name = name,
 						Options = para.Options
 					}).ToList();
 
 				var urlPartEnums = (
-					from e in Endpoints.Values 
-					from part in e.Url.Parts 
-					where part.Options != null && part.Options.Any() 
+					from e in Endpoints.Values
+					from part in e.Url.Parts
+					where part.Options != null && part.Options.Any()
 					select new EnumDescription
 					{
 						Name = CreateName(part.Name.ToPascalCase(), e.CsharpNames.MethodName, e.CsharpNames.Namespace),
 						Options = part.Options
 					}).ToList();
 
-				_enumDescriptions = urlPartEnums.Concat(urlParameterEnums).DistinctBy(e => e.Name).ToList();
+				_enumDescriptions = urlPartEnums
+					.Concat(urlParameterEnums)
+					.DistinctBy(e => e.Name)
+					.ToList();
+
+				//TODO can be removed in 8.x
+				var versionType = _enumDescriptions.FirstOrDefault(f => f.Name == "VersionType");
+				if (versionType != null)
+				{
+					var options = new List<string>(versionType.Options);
+					options.Add("force");
+					versionType.Options = options;
+				}
+
 				return _enumDescriptions;
 			}
 		}

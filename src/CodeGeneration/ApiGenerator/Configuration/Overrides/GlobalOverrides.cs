@@ -4,7 +4,10 @@ namespace ApiGenerator.Configuration.Overrides
 {
 	public class GlobalOverrides : EndpointOverridesBase
 	{
-		public IDictionary<string, Dictionary<string, string>> ObsoleteEnumMembers { get; set; } = new Dictionary<string, Dictionary<string, string>>();
+		public IDictionary<string, Dictionary<string, string>> ObsoleteEnumMembers { get; set; } = new Dictionary<string, Dictionary<string, string>>()
+		{
+			{ "VersionType", new Dictionary<string, string>() { { "force", "Force is no longer accepted by the server as of 7.5.0 and will result in an error when used" } } }
+		};
 
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
 		{
@@ -39,7 +42,9 @@ namespace ApiGenerator.Configuration.Overrides
 			"parent", //can be removed once https://github.com/elastic/elasticsearch/pull/41098 is in
 			"copy_settings", //this still needs a PR?
 			"source", // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
-			"timestamp"
+			"timestamp",
+			"time",
+			"bytes"
 		};
 	}
 }

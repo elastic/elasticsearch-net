@@ -43,9 +43,34 @@ namespace ApiGenerator.Configuration
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-			"ml.estimate_memory_usage.json"
-		};
+			"ml.estimate_memory_usage.json",
 
+			"ccr.pause_auto_follow_pattern.json",
+			"ccr.resume_auto_follow_pattern.json",
+			"data_frame_transform_deprecated.delete_transform.json",
+			"data_frame_transform_deprecated.get_transform.json",
+			"data_frame_transform_deprecated.get_transform_stats.json",
+			"data_frame_transform_deprecated.preview_transform.json",
+			"data_frame_transform_deprecated.put_transform.json",
+			"data_frame_transform_deprecated.start_transform.json",
+			"data_frame_transform_deprecated.stop_transform.json",
+			"data_frame_transform_deprecated.update_transform.json",
+			"enrich.delete_policy.json",
+			"enrich.execute_policy.json",
+			"enrich.get_policy.json",
+			"enrich.put_policy.json",
+			"enrich.stats.json",
+			"slm.execute_retention.json",
+			"slm.get_stats.json",
+			"transform.delete_transform.json",
+			"transform.get_transform.json",
+			"transform.get_transform_stats.json",
+			"transform.preview_transform.json",
+			"transform.put_transform.json",
+			"transform.start_transform.json",
+			"transform.stop_transform.json",
+			"transform.update_transform.json",
+		};
 
 		/// <summary>
 		/// Scan all nest source code files for Requests and look for the [MapsApi(filename)] attribute.

@@ -351,6 +351,7 @@ namespace Elasticsearch.Net
 		External,
 		[EnumMember(Value = "external_gte")]
 		ExternalGte,
+		[Obsolete("Force is no longer accepted by the server as of 7.5.0 and will result in an error when used")]
 		[EnumMember(Value = "force")]
 		Force
 	}
@@ -844,8 +845,10 @@ namespace Elasticsearch.Net
 					return "external";
 				case VersionType.ExternalGte:
 					return "external_gte";
+#pragma warning disable 618
 				case VersionType.Force:
 					return "force";
+#pragma warning disable 618
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'VersionType'");
