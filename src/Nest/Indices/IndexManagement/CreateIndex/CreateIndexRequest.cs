@@ -56,10 +56,14 @@ namespace Nest
 			CreateIndexRequest.RemoveReadOnlySettings(a.Settings);
 		});
 
-		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
-			Assign(selector, (a, v) => a.Settings = v?.Invoke(new IndexSettingsDescriptor())?.Value);
+		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IndexSettingsDescriptor> selector) =>
+			Assign(selector, (a, v) =>
+			{
+				IPromise<IIndexSettings> res = v?.Invoke(new IndexSettingsDescriptor());
+				a.Settings = res?.Value;
+			});
 
-		public CreateIndexDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+		public CreateIndexDescriptor Map<T>(Func<TypeMappingDescriptor<T>, TypeMappingDescriptor<T>> selector) where T : class =>
 			Assign(selector, (a, v) => a.Mappings = v?.Invoke(new TypeMappingDescriptor<T>()));
 
 		public CreateIndexDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
