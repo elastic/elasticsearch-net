@@ -12,6 +12,8 @@ fi
 
 set -euxo pipefail
 
+SCRIPT_PATH=$(dirname $(realpath -s $0))
+
 moniker=$(echo "$ELASTICSEARCH_VERSION" | tr -C "[:alnum:]" '-')
 suffix=rest-test
 
@@ -21,10 +23,10 @@ CLUSTER_NAME=${CLUSTER_NAME-${moniker}${suffix}}
 HTTP_PORT=${HTTP_PORT-9200}
 
 ELASTIC_PASSWORD=${ELASTIC_PASSWORD-changeme}
-SSL_CERT=${SSL_CERT-"$PWD/certs/testnode.crt"}
-SSL_KEY=${SSL_KEY-"$PWD/certs/testnode.key"}
-SSL_CA=${SSL_CA-"$PWD/certs/ca.crt"}
-SSL_CA_PEM=${SSL_CA-"$PWD/certs/ca.pem"}
+SSL_CERT=${SSL_CERT-"${SCRIPT_PATH}/certs/testnode.crt"}
+SSL_KEY=${SSL_KEY-"${SCRIPT_PATH}/certs/testnode.key"}
+SSL_CA=${SSL_CA-"${SCRIPT_PATH}/certs/ca.crt"}
+SSL_CA_PEM=${SSL_CA-"${SCRIPT_PATH}/certs/ca.pem"}
 
 DETACH=${DETACH-false}
 CLEANUP=${CLEANUP-false}
@@ -48,7 +50,7 @@ function container_running {
   fi
 }
 function cleanup_node {
-  if container_running $1; then
+  if container_running "$1"; then
     echo -e "\033[34;1mINFO:\033[0m Removing container $1\033[0m"
     (docker container rm --force --volumes "$1") || true
     cleanup_volume "$1-${suffix}-data"
@@ -70,7 +72,7 @@ function cleanup {
     echo -e "\033[34;1mINFO:\033[0m clean the network if not detached (start and exit)\033[0m"
     cleanup_network "$NETWORK_NAME"
   fi
-}; 
+};
 trap "cleanup 0" EXIT
 
 if [[ "$CLEANUP" == "true" ]]; then
@@ -92,7 +94,7 @@ echo -e "\033[34;1mINFO:\033[0m Making sure previous run leftover infrastructure
 cleanup 1
 
 echo -e "\033[34;1mINFO:\033[0m Creating network $NETWORK_NAME if it does not exist already \033[0m"
-docker network inspect "$NETWORK_NAME" > /dev/null 2>&1 || docker network create "$NETWORK_NAME" 
+docker network inspect "$NETWORK_NAME" > /dev/null 2>&1 || docker network create "$NETWORK_NAME"
 
 environment=($(cat <<-END
   --env node.name=$NODE_NAME
@@ -166,9 +168,9 @@ docker run \
   --rm \
   docker.elastic.co/elasticsearch/"$ELASTICSEARCH_VERSION";
 set +x
-  
+
 if [[ "$DETACH" == "true" ]]; then
-  until container_running $NODE_NAME && [[ "$(docker inspect -f "{{.State.Health.Status}}" ${NODE_NAME})" != "starting" ]]; do
+  until ! container_running "$NODE_NAME" || (container_running "$NODE_NAME" && [[ "$(docker inspect -f "{{.State.Health.Status}}" ${NODE_NAME})" != "starting" ]]); do
     echo ""
     docker inspect -f "{{range .State.Health.Log}}{{.Output}}{{end}}" ${NODE_NAME}
     echo -e "\033[34;1mINFO:\033[0m waiting for node $NODE_NAME to be up\033[0m"
@@ -176,18 +178,18 @@ if [[ "$DETACH" == "true" ]]; then
   done;
 
   # Always show logs if the container is running, this is very useful both on CI as well as while developing
-  if container_running $NODE_NAME; then
+  if container_running "$NODE_NAME"; then
     docker logs $NODE_NAME
   fi
 
-  if ! container_running $NODE_NAME || [[ "$(docker inspect -f "{{.State.Health.Status}}" ${NODE_NAME})" != "healthy" ]]; then
+  if ! container_running "$NODE_NAME" || [[ "$(docker inspect -f "{{.State.Health.Status}}" ${NODE_NAME})" != "healthy" ]]; then
     cleanup 1
-    echo 
+    echo
     echo -e "\033[31;1mERROR:\033[0m Failed to start ${ELASTICSEARCH_VERSION} in detached mode beyond health checks\033[0m"
     echo -e "\033[31;1mERROR:\033[0m dumped the docker log before shutting the node down\033[0m"
     exit 1
-  else 
-    echo 
+  else
+    echo
     echo -e "\033[32;1mSUCCESS:\033[0m Detached and healthy: ${NODE_NAME} on docker network: ${NETWORK_NAME}\033[0m"
     echo -e "\033[32;1mSUCCESS:\033[0m Running on: ${url/$NODE_NAME/localhost}:${HTTP_PORT}\033[0m"
     exit 0
