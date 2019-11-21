@@ -1,6 +1,8 @@
 ﻿namespace Scripts
 
 open System
+open System.Globalization
+open Tooling
 open Fake.Core
 open System.IO
 open Commandline
@@ -22,7 +24,8 @@ module Tests =
         
         env "NEST_INTEGRATION_CLUSTER" clusterFilter
         env "NEST_TEST_FILTER" testFilter
-        env "NEST_TEST_SEED" (Some <| args.Seed)
+        let seed = Some <| args.Seed.ToString(CultureInfo.InvariantCulture)
+        env "NEST_TEST_SEED" seed 
 
         for random in args.RandomArguments do 
             let tokens = random.Split [|':'|]
@@ -33,17 +36,21 @@ module Tests =
             env key (Some <| value)
         ignore()
 
-    let private dotnetTest (target: Commandline.MultiTarget) =
+    let private dotnetTest (target: Commandline.MultiTarget) seed =
         Directory.CreateDirectory Paths.BuildOutput |> ignore
         let command = 
             let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
             match (target, Environment.isLinux) with 
-            | (_, true) -> ["--framework"; "netcoreapp3.0"] |> List.append p
+            | (_, true) ->
+                printfn "Running on linux defaulting tests to .NET Core only" 
+                ["--framework"; "netcoreapp3.0"] |> List.append p
             | (Commandline.MultiTarget.One, _) ->
-                let random = new Random()
+                let random = Random(seed)
                 let fw = DotNetFramework.AllTests |> List.sortBy (fun _ -> random.Next()) |> List.head
-                ["--framework"; fw.Identifier.MSBuild] |> List.append p
+                let tfm = fw.Identifier.MSBuild
+                printfn "Running on non linux system randomly selected '%s' for tests" tfm
+                ["--framework"; tfm] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =
             // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
@@ -61,7 +68,7 @@ module Tests =
         else 
             Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
 
-    let RunReleaseUnitTests (ArtifactsVersion(version)) =
+    let RunReleaseUnitTests (ArtifactsVersion(version)) seed =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
         //if its set it will include the local package source (build/output/_packages)
         //and references NEST and NEST.JsonNetSerializer by the current version
@@ -73,9 +80,9 @@ module Tests =
         Environment.setEnvironVar "TestPackageVersion" (version.Full.ToString())
         Tooling.DotNet.ExecIn "src/Tests/Tests" ["clean";] |> ignore
         Tooling.DotNet.ExecIn "src/Tests/Tests" ["restore";] |> ignore
-        dotnetTest Commandline.MultiTarget.One 
+        dotnetTest Commandline.MultiTarget.One seed
 
-    let RunUnitTests args = dotnetTest args.MultiTarget 
+    let RunUnitTests args = dotnetTest args.MultiTarget args.Seed 
 
     let RunIntegrationTests args =
         let passedVersions = match args.CommandArguments with | Integration a -> Some a.ElasticsearchVersions | _ -> None
@@ -85,4 +92,4 @@ module Tests =
             for esVersion in esVersions do
                 Environment.setEnvironVar "NEST_INTEGRATION_TEST" "1"
                 Environment.setEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-                dotnetTest args.MultiTarget |> ignore
+                dotnetTest args.MultiTarget args.Seed |> ignore
