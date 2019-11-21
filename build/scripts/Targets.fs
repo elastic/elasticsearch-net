@@ -36,6 +36,8 @@ module Main =
         
         let parsed = Commandline.parse (args |> Array.toList)
         
+        
+        let seed = parsed.Seed;
         let buildVersions = Versioning.BuildVersioning parsed
         let artifactsVersion = Versioning.ArtifactsVersion buildVersions
         Versioning.Validate parsed.Target buildVersions
@@ -69,7 +71,7 @@ module Main =
         target "test-nuget-package" <| fun _ -> 
             // run release unit tests puts packages in the system cache prevent this from happening locally
             if not Commandline.runningOnCi then ignore ()
-            else Tests.RunReleaseUnitTests artifactsVersion |> ignore
+            else Tests.RunReleaseUnitTests artifactsVersion seed |> ignore
             
         target "nuget-pack" <| fun _ -> Release.NugetPack artifactsVersion
 
