@@ -9,7 +9,7 @@ namespace Examples
 	{
 		private static readonly Uri BaseUri = new Uri("http://localhost:9200");
 
-		private static readonly Regex Callout = new Regex(@"\\<\d+>\s*$", RegexOptions.Multiline);
+		private static readonly Regex Callout = new Regex(@"(?:\\)?<\d+>\s*$", RegexOptions.Multiline);
 
 		private Example(HttpMethod method, Uri uri, string body)
 		{
