@@ -1,0 +1,32 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line36 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/BoolQueryPage.cs#L11-L82.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var searchResponse = client.Search<Account>(s => s
+    .AllIndices()
+    .Query(q => q
+        .Bool(b => b
+            .Must(m => m.Term(p => p.User, "kimchy"))
+            .Filter(f => f.Term(p => p.Tags, "tech"))
+            .MustNot(m => m
+                .Range(r => r
+                    .Field(p => p.Age)
+                    .GreaterThanOrEquals(10)
+                    .LessThanOrEquals(20)
+                )
+            )
+            .Should(
+                _ => _.Term(p => p.Tags, "wow"),
+                _ => _.Term(p => p.Tags, "elasticsearch")
+            )
+            .MinimumShouldMatch(1)
+            .Boost(1.0)
+        )
+    )
+);
+----
