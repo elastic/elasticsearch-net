@@ -2744,6 +2744,13 @@ namespace Nest
 			set => Q("preference", value);
 		}
 
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString
+		{
+			get => Q<string>("q");
+			set => Q("q", value);
+		}
+
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache
 		{
