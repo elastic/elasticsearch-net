@@ -42,6 +42,7 @@ namespace Examples.Search
 				.AllIndices()
 				.Size(0)
 				.TerminateAfter(1)
+
 				.Query(q => q.QueryString(qs => qs.Query("message:number")))
 			);
 			// end::bfcd65ab85d684d36a8550080032958d[]
