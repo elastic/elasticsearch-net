@@ -37,10 +37,14 @@ namespace Examples
 			// the client encodes characters such as commas, so decode to compare
 			var decodedAbsolutePath = HttpUtility.UrlDecode(response.ApiCall.Uri.AbsolutePath);
 
-			var uri = example.RequestUri.Uri;
-			decodedAbsolutePath.Should().Be(uri.AbsolutePath.Length > 1
-				? uri.AbsolutePath.TrimEnd('/')
-				: uri.AbsolutePath);
+			var expectedUri = example.RequestUri.Uri;
+			var expectedPath = expectedUri.AbsolutePath.Length > 1 ? expectedUri.AbsolutePath.TrimEnd('/') : expectedUri.AbsolutePath;
+
+			// A lot of the examples are not constrained to an index which is not necessary what users typically do
+			// in NEST you have to be explicit and call AllIndices() which explicitly puts _all on the path
+			// So if we expect `/_search` but `/_all/_search` is passed we feel they are equivalent
+			if (expectedPath != "/_search" || decodedAbsolutePath != "/_all/_search")
+				decodedAbsolutePath.Should().Be(expectedPath);
 
 			// check expected query string params. Rather that _all_ keys match,
 			// only check that the ones in reference doc example are present, because
