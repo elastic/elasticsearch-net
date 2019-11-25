@@ -1,18 +1,31 @@
 using Elastic.Xunit.XunitPlumbing;
+using Examples.Models;
 using Nest;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.QueryDsl
 {
 	public class QueryFilterContextPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line62()
 		{
 			// tag::f29a28fffa7ec604a33a838f48f7ea79[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Blog>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.Match(m => m.Field(p => p.Title).Query("Search"))
+					&& q.Match(m => m.Field(p => p.Content).Query("Elasticsearch"))
+					&& +q.Term(m => m.Field(p => p.Status).Value(PublishStatus.Published))
+					&& +q.DateRange(m => m
+						.Field(p => p.PublishDate)
+						.GreaterThanOrEquals("2015-01-01")
+					)
+				)
+			);
 			// end::f29a28fffa7ec604a33a838f48f7ea79[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": { \<1>
 			    ""bool"": { \<2>
@@ -26,7 +39,18 @@ namespace Examples.QueryDsl
 			      ]
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(b =>
+				{
+					var must = b["query"]["bool"]["must"];
+					var filter = b["query"]["bool"]["filter"];
+					must[0]["match"]["title"].ReplaceWithValue(v => new JObject { { "query", v } });
+					must[1]["match"]["content"].ReplaceWithValue(v => new JObject { { "query", v } });
+					filter[0]["term"]["status"].ReplaceWithValue(v => new JObject { { "value", v } });
+				});
+				return e;
+			});
 		}
 	}
 }
