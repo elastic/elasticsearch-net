@@ -121,8 +121,7 @@ namespace Examples.Root
 			}", e =>
 			{
 				// client sends stats in the query string
-				var uri = new UriBuilder(e.Uri) { Query = "?stats=group1,group2" };
-				e.Uri = uri.Uri;
+				e.RequestUri.Query = "stats=group1,group2";
 				e.ApplyBodyChanges(body =>
 				{
 					body.Remove("stats");

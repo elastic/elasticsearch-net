@@ -57,9 +57,7 @@ namespace Examples.Docs
 			getResponse.MatchesExample(@"GET twitter/_doc/0?_source=*.id,retweeted", e =>
 			{
 				// client does not support short hand _source for _source_includes
-				var uri = e.Uri.ToString();
-				uri = uri.Replace("_source", "_source_includes");
-				e.Uri = new Uri(uri);
+				e.RequestUri.Query = e.RequestUri.Query.Replace("_source", "_source_includes");
 				return e;
 			});
 		}

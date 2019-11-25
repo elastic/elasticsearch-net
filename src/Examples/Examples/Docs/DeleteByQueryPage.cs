@@ -267,8 +267,7 @@ namespace Examples.Docs
 			  }
 			}", e =>
 			{
-				var uri = e.Uri.ToString().Replace("size=0&", string.Empty);
-				e.Uri = new Uri(uri);
+				e.RequestUri.Query = e.RequestUri.Query.Replace("size=0", string.Empty);
 				e.ApplyBodyChanges(body =>
 				{
 					// size always in the body
@@ -309,8 +308,7 @@ namespace Examples.Docs
 			}", e =>
 			{
 				// query string params always need a value
-				var uri = e.Uri.ToString().Replace("refresh", "refresh=true");
-				e.Uri = new Uri(uri);
+				e.RequestUri.Query = e.RequestUri.Query.Replace("refresh", "refresh=true");
 				e.ApplyBodyChanges(body =>
 				{
 					// slices is defined in body
@@ -349,8 +347,7 @@ namespace Examples.Docs
 			}", e =>
 			{
 				// size is specified in the body
-				var uri = e.Uri.ToString().Replace("size=0&", string.Empty);
-				e.Uri = new Uri(uri);
+				e.RequestUri.Query = e.RequestUri.Query.Replace("size=0", string.Empty);
 				e.ApplyBodyChanges(body =>
 				{
 					body["size"] = 0;

@@ -34,25 +34,23 @@ namespace Examples.Search
 			});
 		}
 
-		[U]
-		public void Line156()
+		[U] public void Line156()
 		{
 			// tag::bfcd65ab85d684d36a8550080032958d[]
 			var searchResponse = client.Search<object>(s => s
 				.AllIndices()
 				.Size(0)
 				.TerminateAfter(1)
-
-				.Query(q => q.QueryString(qs => qs.Query("message:number")))
+				.QueryOnQueryString("message:number")
 			);
 			// end::bfcd65ab85d684d36a8550080032958d[]
 
 			searchResponse.MatchesExample(@"GET /_search?q=message:number&size=0&terminate_after=1", e =>
 			{
 				e.Method = HttpMethod.POST;
-				e.ApplyBodyChanges(b =>
-				{
-				});
+				e.RequestUri.Path = "/_all/_search";
+				e.QueryStringOnBody("size", 0);
+				e.QueryStringOnBody("terminate_after", 1);
 				return e;
 			});
 		}

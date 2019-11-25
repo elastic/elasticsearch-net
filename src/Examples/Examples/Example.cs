@@ -14,7 +14,7 @@ namespace Examples
 		private Example(HttpMethod method, Uri uri, string body)
 		{
 			Method = method;
-			Uri = uri;
+			RequestUri = new UriBuilder(uri);
 			Body = body;
 		}
 
@@ -22,7 +22,7 @@ namespace Examples
 
 		public HttpMethod Method { get; set; }
 
-		public Uri Uri { get; set; }
+		public UriBuilder RequestUri { get; set; }
 
 		public void ApplyBodyChanges(Action<JObject> action)
 		{
@@ -31,6 +31,16 @@ namespace Examples
 				: JObject.Parse(Body);
 			action(body);
 			Body = body.ToString();
+		}
+
+		public Example QueryStringOnBody(string key, object value)
+		{
+			RequestUri.Query = RequestUri.Query.Replace($"{key}={value}", string.Empty);
+			ApplyBodyChanges(body =>
+			{
+				body[key] = new JValue(value);
+			});
+			return this;
 		}
 
 		public static Example Create(string example)
