@@ -13,5 +13,9 @@ namespace Examples.Models
 		public double? Balance { get; set; }
 		public string Gender { get; set; }
 		public string State { get; set; }
+		public string User { get; set; }
+
+		[PropertyName("tag")]
+		public string[] Tags { get; set; }
 	}
 }

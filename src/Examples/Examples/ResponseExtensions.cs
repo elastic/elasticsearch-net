@@ -17,6 +17,13 @@ namespace Examples
 	{
 		private static readonly JsonSerializer Serializer = new JsonSerializer();
 
+		public static void MatchesExample(this IResponse response, string content, Action<Example, JObject> clientChanges) =>
+			response.MatchesExample(content, c =>
+			{
+				c.ApplyBodyChanges(b=> clientChanges(c, b));
+				return c;
+			});
+
 		/// <summary>
 		/// Asserts that the client generated request matches the example from the docs
 		/// </summary>
