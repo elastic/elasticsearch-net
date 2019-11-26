@@ -10,7 +10,7 @@ namespace Examples.Root
 		public void Line144()
 		{
 			// tag::d8b2a88b5eca99d3691ad3cd40266736[]
-			var mapResponse = client.Indices.Create("my-index", c => c
+			var createIndexResponse = client.Indices.Create("my-index", c => c
 				.Map<Employee>(m => m
 					.Properties(props => props
 						.Scalar(p => p.Age)
@@ -21,7 +21,7 @@ namespace Examples.Root
 			);
 			// end::d8b2a88b5eca99d3691ad3cd40266736[]
 
-			mapResponse.MatchesExample(@"PUT /my-index
+			createIndexResponse.MatchesExample(@"PUT /my-index
 			{
 			  ""mappings"": {
 			    ""properties"": {
