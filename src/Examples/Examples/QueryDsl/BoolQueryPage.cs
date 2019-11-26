@@ -140,10 +140,12 @@ namespace Examples.QueryDsl
 			      }
 			    }
 			  }
-			}", (e, b) =>
+			}", (e, body) =>
 			{
-				var (_, _, filter, _) = b["query"].FixBoolQuery();
-				filter[0]["term"]["status"].ToLongFormTermQuery();
+				body["query"]["bool"].ToLongFormBoolQuery(b =>
+				{
+					b["filter"][0]["term"]["status"].ToLongFormTermQuery();
+				});
 			});
 		}
 

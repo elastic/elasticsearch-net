@@ -49,20 +49,15 @@ namespace Examples
 		/// Docs document bool query without the clauses as arrays, NEST only every sends them as arrays
 		/// This fixes the examples
 		/// </summary>
-		public static (JArray must, JArray mustNot, JArray filter, JArray should) FixBoolQuery(this JToken o)
+		public static void ToLongFormBoolQuery(this JToken o, Action<JObject> mutateBool = null)
 		{
-			var empty = new JArray();
-			if (!(o is JObject obj)) return (empty, empty, empty, empty);
-
-			obj = obj.ContainsKey("bool") ? obj["bool"] as JObject : obj;
-
-			if (obj == null) return (empty, empty, empty, empty);
+			if (!(o is JObject obj)) return;
 
 			var m = obj["must"].ToJArray();
 			var mn = obj["must_not"].ToJArray();
 			var f = obj["filter"].ToJArray();
 			var s = obj["should"].ToJArray();
-			return (m, mn, f, s);
+			mutateBool?.Invoke(obj);
 		}
 
 	}

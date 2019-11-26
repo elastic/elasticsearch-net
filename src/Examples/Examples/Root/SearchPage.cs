@@ -66,19 +66,14 @@ namespace Examples.Root
 			            }
 			        }
 			    }
-			}", e =>
+			}", (e, body) =>
 			{
-				// client only supports array of must/filter
-				e.ApplyBodyChanges(body =>
+				body["query"]["bool"].ToLongFormBoolQuery(b =>
 				{
-					var must = body["query"]["bool"]["must"];
-					var filter = body["query"]["bool"]["filter"];
+					var filter = b["filter"];
 					var value = filter["term"]["user"];
 					filter["term"]["user"] = new JObject { { "value", value } };
-					body["query"]["bool"]["must"] = new JArray(must);
-					body["query"]["bool"]["filter"] = new JArray(filter);
 				});
-				return e;
 			});
 		}
 
