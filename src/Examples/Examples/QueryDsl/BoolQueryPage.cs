@@ -26,7 +26,7 @@ namespace Examples.QueryDsl
 							)
 						)
 						.Should(
-							_ => _.Term(p => p.Tags, "wow"),
+							sh => sh.Term(p => p.Tags, "wow"),
 							_ => _.Term(p => p.Tags, "elasticsearch")
 						)
 						.MinimumShouldMatch(1)
