@@ -7,8 +7,10 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net
 {
-	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
+	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer, IInternalSerializerWithFormatter
 	{
+		IJsonFormatterResolver IInternalSerializerWithFormatter.FormatterResolver => null;
+
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 
 		public object Deserialize(Type type, Stream stream) =>
