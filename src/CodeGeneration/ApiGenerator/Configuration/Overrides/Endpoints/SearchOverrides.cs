@@ -12,7 +12,6 @@ namespace ApiGenerator.Configuration.Overrides.Endpoints
 			"timeout",
 			"explain",
 			"version",
-			"q", //we dont support GET searches
 			"sort",
 			"_source",
 			"_source_includes",
