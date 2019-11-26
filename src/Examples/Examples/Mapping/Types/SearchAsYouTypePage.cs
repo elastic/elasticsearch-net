@@ -57,7 +57,7 @@ namespace Examples.Mapping.Types
 			}", e =>
 			{
 				// query string params always need a value
-				e.RequestUri.Query = e.RequestUri.Query.Replace("refresh", "refresh=true");
+				e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true");
 				return e;
 			});
 		}

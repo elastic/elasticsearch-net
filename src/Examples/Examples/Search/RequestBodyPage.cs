@@ -48,7 +48,7 @@ namespace Examples.Search
 			searchResponse.MatchesExample(@"GET /_search?q=message:number&size=0&terminate_after=1", e =>
 			{
 				e.Method = HttpMethod.POST;
-				e.RequestUri.Path = "/_all/_search";
+				e.Uri.Path = "/_all/_search";
 				e.QueryStringOnBody("size", 0);
 				e.QueryStringOnBody("terminate_after", 1);
 				return e;

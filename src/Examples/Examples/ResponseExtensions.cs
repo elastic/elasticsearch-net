@@ -44,7 +44,7 @@ namespace Examples
 			// the client encodes characters such as commas, so decode to compare
 			var decodedAbsolutePath = HttpUtility.UrlDecode(response.ApiCall.Uri.AbsolutePath);
 
-			var expectedUri = example.RequestUri.Uri;
+			var expectedUri = example.Uri.Uri;
 			var expectedPath = expectedUri.AbsolutePath.Length > 1 ? expectedUri.AbsolutePath.TrimEnd('/') : expectedUri.AbsolutePath;
 
 			// A lot of the examples are not constrained to an index which is not necessary what users typically do
@@ -57,8 +57,8 @@ namespace Examples
 			// only check that the ones in reference doc example are present, because
 			// the client may append more key/values such as "typed_keys"
 			// Because the tests remove keys with string replace the following bad query string can appear
-			example.RequestUri.Query = example.RequestUri.Query.Replace("?&", "?").Replace("&&", "&");
-			var expectedQueryParams = HttpUtility.ParseQueryString(example.RequestUri.Query);
+			example.Uri.Query = example.Uri.Query.Replace("?&", "?").Replace("&&", "&");
+			var expectedQueryParams = HttpUtility.ParseQueryString(example.Uri.Query);
 			var actualQueryParams = HttpUtility.ParseQueryString(response.ApiCall.Uri.Query);
 			if (expectedQueryParams.HasKeys())
 			{

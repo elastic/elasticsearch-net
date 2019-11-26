@@ -288,7 +288,7 @@ namespace Examples.Docs
 			searchResponse.MatchesExample(@"POST twitter/_search?size=0&q=extra:test&filter_path=hits.total", e =>
 			{
 				// size and query are defined in the body
-				e.RequestUri.Query = e.RequestUri.Query.Replace("size=0&q=extra:test&", string.Empty);
+				e.Uri.Query = e.Uri.Query.Replace("size=0&q=extra:test&", string.Empty);
 				e.ApplyBodyChanges(body =>
 				{
 					body["size"] = 0;

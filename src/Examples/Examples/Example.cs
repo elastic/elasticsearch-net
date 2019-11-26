@@ -14,7 +14,7 @@ namespace Examples
 		private Example(HttpMethod method, Uri uri, string body)
 		{
 			Method = method;
-			RequestUri = new UriBuilder(uri);
+			Uri = new UriBuilder(uri);
 			Body = body;
 		}
 
@@ -22,7 +22,7 @@ namespace Examples
 
 		public HttpMethod Method { get; set; }
 
-		public UriBuilder RequestUri { get; set; }
+		public UriBuilder Uri { get; set; }
 
 		public void ApplyBodyChanges(Action<JObject> action)
 		{
@@ -35,7 +35,7 @@ namespace Examples
 
 		public Example QueryStringOnBody(string key, object value)
 		{
-			RequestUri.Query = RequestUri.Query.Replace($"{key}={value}", string.Empty);
+			Uri.Query = Uri.Query.Replace($"{key}={value}", string.Empty);
 			ApplyBodyChanges(body =>
 			{
 				body[key] = new JValue(value);
@@ -51,7 +51,7 @@ namespace Examples
 			var path = Callout.Replace(urlParts[1], string.Empty);
 			var body = exampleParts.Length > 1 ? exampleParts[1] : null;
 
-			if (!Uri.TryCreate(BaseUri, path, out var uri))
+			if (!System.Uri.TryCreate(BaseUri, path, out var uri))
 				throw new Exception($"Cannot parse Uri from {path}");
 
 			if (body != null)
