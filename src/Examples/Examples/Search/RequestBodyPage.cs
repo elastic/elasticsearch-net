@@ -49,8 +49,8 @@ namespace Examples.Search
 			{
 				e.Method = HttpMethod.POST;
 				e.Uri.Path = "/_all/_search";
-				e.QueryStringOnBody("size", 0);
-				e.QueryStringOnBody("terminate_after", 1);
+				e.MoveQueryStringToBody("size", 0);
+				e.MoveQueryStringToBody("terminate_after", 1);
 				return e;
 			});
 		}

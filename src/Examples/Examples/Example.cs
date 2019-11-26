@@ -33,7 +33,7 @@ namespace Examples
 			Body = body.ToString();
 		}
 
-		public Example QueryStringOnBody(string key, object value)
+		public Example MoveQueryStringToBody(string key, object value)
 		{
 			Uri.Query = Uri.Query.Replace($"{key}={value}", string.Empty);
 			ApplyBodyChanges(body =>
