@@ -30,15 +30,19 @@ namespace Tests.Benchmarking
 			if (!Directory.Exists(Path.Combine(dirInfo.FullName, ".git"))) Environment.Exit(2);
 
 			Console.WriteLine(dirInfo.FullName);
-			using (var repos = new Repository(dirInfo.FullName))
+			try
 			{
+				using var repos = new Repository(dirInfo.FullName);
 				Commit = repos.Head.Tip.Sha;
 				CommitMessage = repos.Head.Tip.Message?.Trim(' ', '\t', '\r', '\n');
 				Branch = repos.Head.FriendlyName;
 				var remoteName = repos.Head.RemoteName;
 				Repository =
-					repos.Network.Remotes.FirstOrDefault(r => r.Name == remoteName)?.Url
-					?? repos.Network.Remotes.FirstOrDefault()?.Url;
+					repos.Network.Remotes.FirstOrDefault(r => r.Name == remoteName)?.Url;
+			}
+			catch (Exception)
+			{
+				// ignored, libgit not very linux friendly
 			}
 		}
 

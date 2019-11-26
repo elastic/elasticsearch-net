@@ -35,7 +35,7 @@ namespace Nest
 		/// `IInternalSerializerWithFormatter`
 		/// </summary>
 		private static bool AttemptFastPath(IElasticsearchSerializer serializer) =>
-			serializer is IInternalSerializerWithFormatter s && s.FormatterResolver != null;
+			serializer is IInternalSerializer s && s.TryGetJsonFormatter(out var _);
 
 
 		public virtual void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)

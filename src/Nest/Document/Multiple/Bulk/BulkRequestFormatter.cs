@@ -41,6 +41,13 @@ namespace Nest
 				if (body == null)
 					continue;
 
+				if (op.Operation == "update" || body is ILazyDocument)
+				{
+					var requestResponseSerializer = settings.RequestResponseSerializer;
+					requestResponseSerializer.SerializeUsingWriter(ref writer, body, settings, SerializationFormatting.None);
+					return;
+				}
+
 				SourceWriter.Serialize(ref writer, body, formatterResolver);
 				writer.WriteRaw(Newline);
 			}
