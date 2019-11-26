@@ -11,7 +11,7 @@ namespace Examples.QueryDsl
 		public void Line42()
 		{
 			// tag::ad6ea0c1e46712aa1fd6d3bfa0ec979e[]
-			var response0 = client.Search<Blog>(s => s
+			var searchResponse = client.Search<Blog>(s => s
 				.AllIndices()
 				.Query(q => q
 					.QueryString(qs => qs
@@ -22,7 +22,7 @@ namespace Examples.QueryDsl
 			);
 			// end::ad6ea0c1e46712aa1fd6d3bfa0ec979e[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""query_string"" : {
