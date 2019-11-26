@@ -1,5 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
+using Nest;
 using static Nest.Infer;
 
 namespace Examples.Root
@@ -13,7 +14,7 @@ namespace Examples.Root
 			var createIndexResponse = client.Indices.Create("my-index", c => c
 				.Map<Employee>(m => m
 					.Properties(props => props
-						.Scalar(p => p.Age)
+						.Number(n => n.Name(p=>p.Age).Type(NumberType.Integer))
 						.Keyword(k => k.Name(p => p.Email))
 						.Text(k => k.Name(p => p.Name))
 					)
