@@ -47,7 +47,7 @@ namespace Examples
 			var expectedUri = example.Uri.Uri;
 			var expectedPath = expectedUri.AbsolutePath.Length > 1 ? expectedUri.AbsolutePath.TrimEnd('/') : expectedUri.AbsolutePath;
 
-			// A lot of the examples are not constrained to an index which is not necessary what users typically do
+			// A lot of the examples are not constrained to an index which is not necessarily what users typically do.
 			// in NEST you have to be explicit and call AllIndices() which explicitly puts _all on the path
 			// So if we expect `/_search` but `/_all/_search` is passed we feel they are equivalent
 			if (expectedPath != "/_search" || decodedAbsolutePath != "/_all/_search")
