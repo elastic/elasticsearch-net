@@ -85,13 +85,13 @@ namespace Examples.QueryDsl
 		public void Line75()
 		{
 			// tag::f70a54cd9a9f4811bf962e469f2ca2ea[]
-			var response0 = client.Search<Blog>(s => s
+			var searchResponse = client.Search<Blog>(s => s
 				.AllIndices()
 				.Query(q => +q.Term(p => p.Status, PublishStatus.Active))
 			);
 			// end::f70a54cd9a9f4811bf962e469f2ca2ea[]
 
-			response0.MatchesExample(@"GET _search
+			searchResponse.MatchesExample(@"GET _search
 			{
 			  ""query"": {
 			    ""bool"": {
@@ -117,7 +117,7 @@ namespace Examples.QueryDsl
 		public void Line94()
 		{
 			// tag::fa88f6f5a7d728ec4f1d05244228cb09[]
-			var response0 = client.Search<Blog>(s => s
+			var searchResponse = client.Search<Blog>(s => s
 				.AllIndices()
 				.Query(q =>
 					+q.Term(p => p.Status, PublishStatus.Active)
@@ -126,7 +126,7 @@ namespace Examples.QueryDsl
 			);
 			// end::fa88f6f5a7d728ec4f1d05244228cb09[]
 
-			response0.MatchesExample(@"GET _search
+			searchResponse.MatchesExample(@"GET _search
 			{
 			  ""query"": {
 			    ""bool"": {
