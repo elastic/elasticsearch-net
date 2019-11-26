@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Nest;
 
 namespace Examples.Models
@@ -7,7 +8,7 @@ namespace Examples.Models
 		public int? Age { get; set; }
 		public string Name { get; set; }
 		public string Email { get; set; }
-		[PropertyName("employee-id")]
+		[DataMember(Name = "employee-id")]
 		public string EmployeeId { get; set; }
 	}
 }

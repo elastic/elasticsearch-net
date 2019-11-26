@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using Nest;
 
 namespace Examples.Models
@@ -11,7 +12,7 @@ namespace Examples.Models
 
 		public string Message { get; set; }
 
-		[PropertyName("post_date")]
+		[DataMember(Name = "post_date")]
 		public DateTime? PostDate { get; set; }
 
 		public string[] Tags { get; set; }
