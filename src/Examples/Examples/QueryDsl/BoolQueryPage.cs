@@ -67,10 +67,10 @@ namespace Examples.QueryDsl
 					var filter = b["query"]["bool"]["filter"].ToJArray();
 					var mustNot = b["query"]["bool"]["must_not"].ToJArray();
 					var should = b["query"]["bool"]["should"];
-					must[0]["term"]["user"].FixSimpleTerm();
-					filter[0]["term"]["tag"].FixSimpleTerm();
-					should[0]["term"]["tag"].FixSimpleTerm();
-					should[1]["term"]["tag"].FixSimpleTerm();
+					must[0]["term"]["user"].ToLongFormTermQuery();
+					filter[0]["term"]["tag"].ToLongFormTermQuery();
+					should[0]["term"]["tag"].ToLongFormTermQuery();
+					should[1]["term"]["tag"].ToLongFormTermQuery();
 
 					//NEST sends double
 					var ageQuery = mustNot[0]["range"]["age"];
@@ -107,7 +107,7 @@ namespace Examples.QueryDsl
 				e.ApplyBodyChanges(b =>
 				{
 					var filter = b["query"]["bool"]["filter"].ToJArray();
-					filter[0]["term"]["status"].FixSimpleTerm();
+					filter[0]["term"]["status"].ToLongFormTermQuery();
 				});
 				return e;
 			});
@@ -143,7 +143,7 @@ namespace Examples.QueryDsl
 			}", (e, b) =>
 			{
 				var (_, _, filter, _) = b["query"].FixBoolQuery();
-				filter[0]["term"]["status"].FixSimpleTerm();
+				filter[0]["term"]["status"].ToLongFormTermQuery();
 			});
 		}
 
@@ -174,7 +174,7 @@ namespace Examples.QueryDsl
 			      }
 			    }
 			  }
-			}", (c, b) => b["query"]["constant_score"]["filter"]["term"]["status"].FixSimpleTerm());
+			}", (c, b) => b["query"]["constant_score"]["filter"]["term"]["status"].ToLongFormTermQuery());
 		}
 	}
 }

@@ -45,9 +45,9 @@ namespace Examples.QueryDsl
 				{
 					var must = b["query"]["bool"]["must"];
 					var filter = b["query"]["bool"]["filter"];
-					must[0]["match"]["title"].ReplaceWithValue(v => new JObject { { "query", v } });
-					must[1]["match"]["content"].ReplaceWithValue(v => new JObject { { "query", v } });
-					filter[0]["term"]["status"].ReplaceWithValue(v => new JObject { { "value", v } });
+					must[0]["match"]["title"].ToLongFormQuery();
+					must[1]["match"]["content"].ToLongFormQuery();
+					filter[0]["term"]["status"].ToLongFormTermQuery();
 				});
 				return e;
 			});

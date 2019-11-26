@@ -11,8 +11,31 @@ namespace Examples
 			toReplace.Replace(n);
 			return n;
 		}
-		public static JToken FixSimpleTerm(this JToken termSimple) => termSimple.ReplaceWithValue(v=>new JObject { { "value", v } });
-		public static JToken FixSimpleQuery(this JToken querySimple) => querySimple.ReplaceWithValue(v=>new JObject { { "query", v } });
+		/// <summary>
+		/// The docs document queries often in short form e.g
+		/// <code>
+		/// { "field" : "value" }
+		/// </code>
+		/// Where as NEST always generates the long form query
+		/// <code>
+		/// { "field" : { "query" : "value" }
+		/// </code>
+		/// <c>NOTE:</c> Term query uses a slightly different long form so use <see cref="ToLongFormTermQuery"/> instead.
+		/// </summary>
+		public static JToken ToLongFormQuery(this JToken querySimple) => querySimple.ReplaceWithValue(v => new JObject { { "query", v } });
+
+		/// <summary>
+		/// The docs document term queries often in short form e.g
+		/// <code>
+		/// { "field" : "value" }
+		/// </code>
+		/// Where as NEST always generates the long form query
+		/// <code>
+		/// { "field" : { "value" : "value" }
+		/// </code>
+		/// <c>NOTE:</c> Term query is slightly special, most queries expand to use the `query` key, use <see cref="ToLongFormQuery"/> instead.
+		/// </summary>
+		public static JToken ToLongFormTermQuery(this JToken termSimple) => termSimple.ReplaceWithValue(v => new JObject { { "value", v } });
 
 		public static JArray ToJArray(this JToken o)
 		{
