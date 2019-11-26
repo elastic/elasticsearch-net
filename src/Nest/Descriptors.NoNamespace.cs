@@ -1272,6 +1272,8 @@ namespace Nest
 		public SearchDescriptor<TInferDocument> PreFilterShardSize(long? prefiltershardsize) => Qs("pre_filter_shard_size", prefiltershardsize);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchDescriptor<TInferDocument> Preference(string preference) => Qs("preference", preference);
+		///<summary>Query in the Lucene query string syntax</summary>
+		public SearchDescriptor<TInferDocument> QueryOnQueryString(string queryonquerystring) => Qs("q", queryonquerystring);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchDescriptor<TInferDocument> RequestCache(bool? requestcache = true) => Qs("request_cache", requestcache);
 		///<summary>

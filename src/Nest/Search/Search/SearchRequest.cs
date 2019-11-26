@@ -155,7 +155,7 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "track_scores")]
 		bool? TrackScores { get; set; }
-		
+
 		/// <summary>
 		/// Return a version for each search hit
 		/// </summary>
@@ -224,7 +224,7 @@ namespace Nest
 		public bool? Version { get; set; }
 
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
+			RequestState.RequestParameters?.ContainsQueryString("source") == true
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
@@ -246,7 +246,7 @@ namespace Nest
 	public partial class SearchDescriptor<TInferDocument> where TInferDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
+			RequestState.RequestParameters?.ContainsQueryString("source") == true
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
