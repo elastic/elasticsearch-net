@@ -109,6 +109,30 @@ namespace Nest.Specification.SnapshotLifecycleManagementApi
 		/// </summary>
 		public Task<GetSnapshotLifecycleResponse> GetSnapshotLifecycleAsync(IGetSnapshotLifecycleRequest request, CancellationToken ct = default) => DoRequestAsync<IGetSnapshotLifecycleRequest, GetSnapshotLifecycleResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public GetStatusResponse GetStatus(Func<GetStatusDescriptor, IGetStatusRequest> selector = null) => GetStatus(selector.InvokeOrDefault(new GetStatusDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public Task<GetStatusResponse> GetStatusAsync(Func<GetStatusDescriptor, IGetStatusRequest> selector = null, CancellationToken ct = default) => GetStatusAsync(selector.InvokeOrDefault(new GetStatusDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public GetStatusResponse GetStatus(IGetStatusRequest request) => DoRequest<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public Task<GetStatusResponse> GetStatusAsync(IGetStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>PUT</c> request to the <c>slm.put_lifecycle</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</a>
@@ -132,5 +156,53 @@ namespace Nest.Specification.SnapshotLifecycleManagementApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</a>
 		/// </summary>
 		public Task<PutSnapshotLifecycleResponse> PutSnapshotLifecycleAsync(IPutSnapshotLifecycleRequest request, CancellationToken ct = default) => DoRequestAsync<IPutSnapshotLifecycleRequest, PutSnapshotLifecycleResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public StartResponse Start(Func<StartDescriptor, IStartRequest> selector = null) => Start(selector.InvokeOrDefault(new StartDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public Task<StartResponse> StartAsync(Func<StartDescriptor, IStartRequest> selector = null, CancellationToken ct = default) => StartAsync(selector.InvokeOrDefault(new StartDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public StartResponse Start(IStartRequest request) => DoRequest<IStartRequest, StartResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public Task<StartResponse> StartAsync(IStartRequest request, CancellationToken ct = default) => DoRequestAsync<IStartRequest, StartResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public StopResponse Stop(Func<StopDescriptor, IStopRequest> selector = null) => Stop(selector.InvokeOrDefault(new StopDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public Task<StopResponse> StopAsync(Func<StopDescriptor, IStopRequest> selector = null, CancellationToken ct = default) => StopAsync(selector.InvokeOrDefault(new StopDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public StopResponse Stop(IStopRequest request) => DoRequest<IStopRequest, StopResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public Task<StopResponse> StopAsync(IStopRequest request, CancellationToken ct = default) => DoRequestAsync<IStopRequest, StopResponse>(request, request.RequestParameters, ct);
 	}
 }

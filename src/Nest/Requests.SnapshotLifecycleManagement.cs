@@ -130,6 +130,23 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IGetStatusRequest : IRequest<GetStatusRequestParameters>
+	{
+	}
+
+	///<summary>Request for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
+	public partial class GetStatusRequest : PlainRequestBase<GetStatusRequestParameters>, IGetStatusRequest
+	{
+		protected IGetStatusRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
+		// values part of the url path
+		// Request parameters
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement GetStatusDescriptor and GetStatusRequest in a file called GetStatusRequest.cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
+	}
+
+	[InterfaceDataContract]
 	public partial interface IPutSnapshotLifecycleRequest : IRequest<PutSnapshotLifecycleRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -160,5 +177,39 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IPutSnapshotLifecycleRequest.PolicyId => Self.RouteValues.Get<Id>("policy_id");
 	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IStartRequest : IRequest<StartRequestParameters>
+	{
+	}
+
+	///<summary>Request for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
+	public partial class StartRequest : PlainRequestBase<StartRequestParameters>, IStartRequest
+	{
+		protected IStartRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
+		// values part of the url path
+		// Request parameters
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement StartDescriptor and StartRequest in a file called StartRequest.cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
+	}
+
+	[InterfaceDataContract]
+	public partial interface IStopRequest : IRequest<StopRequestParameters>
+	{
+	}
+
+	///<summary>Request for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
+	public partial class StopRequest : PlainRequestBase<StopRequestParameters>, IStopRequest
+	{
+		protected IStopRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;
+		// values part of the url path
+		// Request parameters
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement StopDescriptor and StopRequest in a file called StopRequest.cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
 	}
 }
