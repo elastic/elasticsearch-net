@@ -87,12 +87,12 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_slm/policy", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_slm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetStatus<TResponse>(GetStatusRequestParameters requestParameters = null)
+		public TResponse GetStatus<TResponse>(GetSlmStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_slm/status", null, RequestParams(requestParameters));
 		///<summary>GET on /_slm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("slm.get_status", "")]
-		public Task<TResponse> GetStatusAsync<TResponse>(GetStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetStatusAsync<TResponse>(GetSlmStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_slm/status", ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /_slm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</para></summary>
 		///<param name = "policyId">The id of the snapshot lifecycle policy</param>
@@ -109,21 +109,21 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_slm/policy/{policyId:policyId}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_slm/start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Start<TResponse>(StartRequestParameters requestParameters = null)
+		public TResponse Start<TResponse>(StartSlmRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_slm/start", null, RequestParams(requestParameters));
 		///<summary>POST on /_slm/start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("slm.start", "")]
-		public Task<TResponse> StartAsync<TResponse>(StartRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> StartAsync<TResponse>(StartSlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_slm/start", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_slm/stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Stop<TResponse>(StopRequestParameters requestParameters = null)
+		public TResponse Stop<TResponse>(StopSlmRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_slm/stop", null, RequestParams(requestParameters));
 		///<summary>POST on /_slm/stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("slm.stop", "")]
-		public Task<TResponse> StopAsync<TResponse>(StopRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> StopAsync<TResponse>(StopSlmRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_slm/stop", ctx, null, RequestParams(requestParameters));
 	}
 }

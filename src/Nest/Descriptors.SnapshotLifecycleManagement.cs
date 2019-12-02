@@ -95,14 +95,11 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
-	public partial class GetStatusDescriptor : RequestDescriptorBase<GetStatusDescriptor, GetStatusRequestParameters, IGetStatusRequest>, IGetStatusRequest
+	public partial class GetSlmStatusDescriptor : RequestDescriptorBase<GetSlmStatusDescriptor, GetSlmStatusRequestParameters, IGetSlmStatusRequest>, IGetSlmStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
-		// values part of the url path
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement GetStatusDescriptor and GetStatusRequest in a file called GetStatusRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// values part of the url path
+	// Request parameters
 	}
 
 	///<summary>Descriptor for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</para></summary>
@@ -127,24 +124,18 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
-	public partial class StartDescriptor : RequestDescriptorBase<StartDescriptor, StartRequestParameters, IStartRequest>, IStartRequest
+	public partial class StartSlmDescriptor : RequestDescriptorBase<StartSlmDescriptor, StartSlmRequestParameters, IStartSlmRequest>, IStartSlmRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
-		// values part of the url path
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement StartDescriptor and StartRequest in a file called StartRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// values part of the url path
+	// Request parameters
 	}
 
 	///<summary>Descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
-	public partial class StopDescriptor : RequestDescriptorBase<StopDescriptor, StopRequestParameters, IStopRequest>, IStopRequest
+	public partial class StopSlmDescriptor : RequestDescriptorBase<StopSlmDescriptor, StopSlmRequestParameters, IStopSlmRequest>, IStopSlmRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;
-		// values part of the url path
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement StopDescriptor and StopRequest in a file called StopRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// values part of the url path
+	// Request parameters
 	}
 }
