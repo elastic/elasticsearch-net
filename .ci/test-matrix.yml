@@ -5,7 +5,7 @@ ELASTICSEARCH_VERSION:
 
 TEST_SUITE:
   - oss
-  - xpack
+# - xpack
 
 DOTNET_VERSION:
     - 3.0.100
