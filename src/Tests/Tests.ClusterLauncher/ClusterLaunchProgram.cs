@@ -48,6 +48,9 @@ namespace Tests.ClusterLauncher
 			if (cluster == null)
 			{
 				Console.Error.WriteLine($"No cluster found that starts with '{clusterName}");
+				Console.Out.WriteLine("Available clusters:");
+				foreach (var c in clusters)
+					Console.Out.WriteLine($"  - {c.Name.Replace("Cluster", "")}");
 				return 4;
 			}
 

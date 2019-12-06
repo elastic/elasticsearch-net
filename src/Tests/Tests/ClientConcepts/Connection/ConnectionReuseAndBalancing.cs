@@ -15,10 +15,8 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using static Nest.Infer;
 
-namespace Tests.Reproduce
+namespace Tests.ClientConcepts.Connection
 {
-	public class ConnectionReuseCluster : ClientTestClusterBase { }
-
 	public class ConnectionReuseAndBalancing : ClusterTestClassBase<ConnectionReuseCluster>
 	{
 		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
