@@ -9,12 +9,12 @@ namespace Examples
 	{
 		private static readonly Uri BaseUri = new Uri("http://localhost:9200");
 
-		private static readonly Regex Callout = new Regex(@"\\<\d+>\s*$", RegexOptions.Multiline);
+		private static readonly Regex Callout = new Regex(@"(?:\\)?<\d+>\s*$", RegexOptions.Multiline);
 
 		private Example(HttpMethod method, Uri uri, string body)
 		{
 			Method = method;
-			Uri = uri;
+			Uri = new UriBuilder(uri);
 			Body = body;
 		}
 
@@ -22,7 +22,7 @@ namespace Examples
 
 		public HttpMethod Method { get; set; }
 
-		public Uri Uri { get; set; }
+		public UriBuilder Uri { get; set; }
 
 		public void ApplyBodyChanges(Action<JObject> action)
 		{
@@ -33,6 +33,16 @@ namespace Examples
 			Body = body.ToString();
 		}
 
+		public Example MoveQueryStringToBody(string key, object value)
+		{
+			Uri.Query = Uri.Query.Replace($"{key}={value}", string.Empty);
+			ApplyBodyChanges(body =>
+			{
+				body[key] = new JValue(value);
+			});
+			return this;
+		}
+
 		public static Example Create(string example)
 		{
 			var exampleParts = example.Split(new[] { "\r\n", "\r", "\n" }, 2, StringSplitOptions.None);
@@ -41,7 +51,7 @@ namespace Examples
 			var path = Callout.Replace(urlParts[1], string.Empty);
 			var body = exampleParts.Length > 1 ? exampleParts[1] : null;
 
-			if (!Uri.TryCreate(BaseUri, path, out var uri))
+			if (!System.Uri.TryCreate(BaseUri, path, out var uri))
 				throw new Exception($"Cannot parse Uri from {path}");
 
 			if (body != null)

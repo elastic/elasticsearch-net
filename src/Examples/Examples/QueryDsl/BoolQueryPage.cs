@@ -1,18 +1,42 @@
 using Elastic.Xunit.XunitPlumbing;
+using Examples.Models;
+using FluentAssertions;
 using Nest;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.QueryDsl
 {
 	public class BoolQueryPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line36()
 		{
 			// tag::06afce2955f9094d96d27067ebca32e8[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Account>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Bool(b => b
+						.Must(m => m.Term(p => p.User, "kimchy"))
+						.Filter(f => f.Term(p => p.Tags, "tech"))
+						.MustNot(m => m
+							.Range(r => r
+								.Field(p => p.Age)
+								.GreaterThanOrEquals(10)
+								.LessThanOrEquals(20)
+							)
+						)
+						.Should(
+							sh => sh.Term(p => p.Tags, "wow"),
+							sh => sh.Term(p => p.Tags, "elasticsearch")
+						)
+						.MinimumShouldMatch(1)
+						.Boost(1.0)
+					)
+				)
+			);
 			// end::06afce2955f9094d96d27067ebca32e8[]
 
-			response0.MatchesExample(@"POST _search
+			searchResponse.MatchesExample(@"POST _search
 			{
 			  ""query"": {
 			    ""bool"" : {
@@ -35,17 +59,39 @@ namespace Examples.QueryDsl
 			      ""boost"" : 1.0
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(b =>
+				{
+					var must = b["query"]["bool"]["must"].ToJArray();
+					var filter = b["query"]["bool"]["filter"].ToJArray();
+					var mustNot = b["query"]["bool"]["must_not"].ToJArray();
+					var should = b["query"]["bool"]["should"];
+					must[0]["term"]["user"].ToLongFormTermQuery();
+					filter[0]["term"]["tag"].ToLongFormTermQuery();
+					should[0]["term"]["tag"].ToLongFormTermQuery();
+					should[1]["term"]["tag"].ToLongFormTermQuery();
+
+					//NEST sends double
+					var ageQuery = mustNot[0]["range"]["age"];
+					ageQuery["gte"] = 10.0;
+					ageQuery["lte"] = 20.0;
+				});
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line75()
 		{
 			// tag::f70a54cd9a9f4811bf962e469f2ca2ea[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Blog>(s => s
+				.AllIndices()
+				.Query(q => +q.Term(p => p.Status, PublishStatus.Active))
+			);
 			// end::f70a54cd9a9f4811bf962e469f2ca2ea[]
 
-			response0.MatchesExample(@"GET _search
+			searchResponse.MatchesExample(@"GET _search
 			{
 			  ""query"": {
 			    ""bool"": {
@@ -56,17 +102,31 @@ namespace Examples.QueryDsl
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(b =>
+				{
+					var filter = b["query"]["bool"]["filter"].ToJArray();
+					filter[0]["term"]["status"].ToLongFormTermQuery();
+				});
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line94()
 		{
 			// tag::fa88f6f5a7d728ec4f1d05244228cb09[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Blog>(s => s
+				.AllIndices()
+				.Query(q =>
+					+q.Term(p => p.Status, PublishStatus.Active)
+					&& q.MatchAll()
+				)
+			);
 			// end::fa88f6f5a7d728ec4f1d05244228cb09[]
 
-			response0.MatchesExample(@"GET _search
+			searchResponse.MatchesExample(@"GET _search
 			{
 			  ""query"": {
 			    ""bool"": {
@@ -80,17 +140,32 @@ namespace Examples.QueryDsl
 			      }
 			    }
 			  }
-			}");
+			}", (e, body) =>
+			{
+				body["query"]["bool"].ToLongFormBoolQuery(b =>
+				{
+					b["filter"][0]["term"]["status"].ToLongFormTermQuery();
+				});
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line117()
 		{
 			// tag::162b5b693b713f0bfab1209d59443c46[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Blog>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.ConstantScore(cs=>cs
+						.Filter(f=>f
+							.Term(p => p.Status, PublishStatus.Active)
+						)
+					)
+				)
+			);
 			// end::162b5b693b713f0bfab1209d59443c46[]
 
-			response0.MatchesExample(@"GET _search
+			searchResponse.MatchesExample(@"GET _search
 			{
 			  ""query"": {
 			    ""constant_score"": {
@@ -101,7 +176,7 @@ namespace Examples.QueryDsl
 			      }
 			    }
 			  }
-			}");
+			}", (c, b) => b["query"]["constant_score"]["filter"]["term"]["status"].ToLongFormTermQuery());
 		}
 	}
 }

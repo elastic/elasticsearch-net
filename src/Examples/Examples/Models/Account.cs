@@ -1,10 +1,11 @@
+using System.Runtime.Serialization;
 using Nest;
 
 namespace Examples.Models
 {
 	public class Account
 	{
-		[PropertyName("account_number")]
+		[DataMember(Name ="account_number")]
 		public string AccountNumber { get; set; }
 
 		public string Address { get; set; }
@@ -13,5 +14,9 @@ namespace Examples.Models
 		public double? Balance { get; set; }
 		public string Gender { get; set; }
 		public string State { get; set; }
+		public string User { get; set; }
+
+		[DataMember(Name = "tag")]
+		public string[] Tags { get; set; }
 	}
 }

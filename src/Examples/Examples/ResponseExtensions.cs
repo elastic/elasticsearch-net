@@ -17,6 +17,13 @@ namespace Examples
 	{
 		private static readonly JsonSerializer Serializer = new JsonSerializer();
 
+		public static void MatchesExample(this IResponse response, string content, Action<Example, JObject> clientChanges) =>
+			response.MatchesExample(content, c =>
+			{
+				c.ApplyBodyChanges(b=> clientChanges(c, b));
+				return c;
+			});
+
 		/// <summary>
 		/// Asserts that the client generated request matches the example from the docs
 		/// </summary>
@@ -37,22 +44,35 @@ namespace Examples
 			// the client encodes characters such as commas, so decode to compare
 			var decodedAbsolutePath = HttpUtility.UrlDecode(response.ApiCall.Uri.AbsolutePath);
 
-			decodedAbsolutePath.Should().Be(example.Uri.AbsolutePath.Length > 1
-				? example.Uri.AbsolutePath.TrimEnd('/')
-				: example.Uri.AbsolutePath);
+			var expectedUri = example.Uri.Uri;
+			var expectedPath = expectedUri.AbsolutePath.Length > 1 ? expectedUri.AbsolutePath.TrimEnd('/') : expectedUri.AbsolutePath;
+
+			// A lot of the examples are not constrained to an index which is not necessarily what users typically do.
+			// in NEST you have to be explicit and call AllIndices() which explicitly puts _all on the path
+			// So if we expect `/_search` but `/_all/_search` is passed we feel they are equivalent
+			if (expectedPath != "/_search" || decodedAbsolutePath != "/_all/_search")
+				decodedAbsolutePath.Should().Be(expectedPath);
 
 			// check expected query string params. Rather that _all_ keys match,
 			// only check that the ones in reference doc example are present, because
 			// the client may append more key/values such as "typed_keys"
+			// Because the tests remove keys with string replace the following bad query string can appear
+			example.Uri.Query = example.Uri.Query.Replace("?&", "?").Replace("&&", "&");
 			var expectedQueryParams = HttpUtility.ParseQueryString(example.Uri.Query);
 			var actualQueryParams = HttpUtility.ParseQueryString(response.ApiCall.Uri.Query);
 			if (expectedQueryParams.HasKeys())
 			{
 				foreach (var key in expectedQueryParams.AllKeys)
 				{
+					if (string.IsNullOrWhiteSpace(key)) continue;
+
 					actualQueryParams.AllKeys.Should().Contain(key);
-					var value = expectedQueryParams.Get(key);
-					actualQueryParams.Get(key).Should().Be(value);
+					var expectedValue = expectedQueryParams.Get(key);
+					var actualValue = actualQueryParams.Get(key);
+					// The client always sends x=true while the docs document just sending ?x
+					if (string.IsNullOrEmpty(expectedValue) && actualValue == "true")
+						continue;
+					actualQueryParams.Get(key).Should().Be(expectedValue);
 				}
 			}
 

@@ -1,14 +1,14 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line86 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L65-L76.
+This file is generated from method Line7 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/RequestBodyPage.cs#L11-L35.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
 [source, csharp]
 ----
-var getResponse = client.Get<Tweet>(2, g => g
+var searchResponse = client.Search<Tweet>(s => s
     .Index("twitter")
-    .Routing("user1")
+    .Query(q => q.Term(p => p.User, "kimchy"))
 );
 ----

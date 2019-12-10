@@ -270,11 +270,7 @@ namespace Examples.Docs
 			var searchResponse = client.Search<Tweet>(s => s
 				.Index("twitter")
 				.Size(0)
-				.Query(q => q
-					.QueryString(qs => qs
-						.Query("extra:test")
-					)
-				)
+				.QueryOnQueryString("extra:test")
 				.FilterPath(new [] { "hits.total" }) // <1> Using filter path can result in a response that cannot be parsed by the client's serializer. In these cases, using the low level client and parsing the JSON response may be preferred.
 			);
 			// end::4acf902c2598b2558f34f20c1744c433[]
@@ -287,13 +283,7 @@ namespace Examples.Docs
 
 			searchResponse.MatchesExample(@"POST twitter/_search?size=0&q=extra:test&filter_path=hits.total", e =>
 			{
-				// size and query are defined in the body
-				e.Uri = new Uri(e.Uri.ToString().Replace("size=0&q=extra:test&", string.Empty));
-				e.ApplyBodyChanges(body =>
-				{
-					body["size"] = 0;
-					body["query"] = new JObject { ["query_string"] = new JObject { ["query"] = "extra:test" } };
-				});
+				e.MoveQueryStringToBody("size", 0);
 				return e;
 			});
 		}
