@@ -23,18 +23,15 @@
 #endregion
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Elasticsearch.Net.Utf8Json.Internal
 {
 	internal static class ByteArrayComparer
     {
-#if NETSTANDARD
-
-#if NETSTANDARD
-
         static readonly bool Is32Bit = (IntPtr.Size == 4);
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode(byte[] bytes, int offset, int count)
         {
             if (Is32Bit)
@@ -47,19 +44,13 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             }
         }
 
-#endif
-
-#if NETSTANDARD
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
-        public static unsafe bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys)
         {
             return Equals(xs, xsOffset, xsCount, ys, 0, ys.Length);
         }
 
-#if NETSTANDARD
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys, int ysOffset, int ysCount)
         {
             if (xs == null || ys == null || xsCount != ysCount)
@@ -118,45 +109,5 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                 }
             }
         }
-
-#else
-#if NETSTANDARD
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
-        public static bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys)
-        {
-            if (xs == null || ys == null || xsCount != ys.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < ys.Length; i++)
-            {
-                if (xs[xsOffset++] != ys[i]) return false;
-            }
-
-            return true;
-        }
-
-#if NETSTANDARD
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
-        public static bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys, int ysOffset, int ysCount)
-        {
-            if (xs == null || ys == null || xsCount != ysCount)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < xsCount; i++)
-            {
-                if (xs[xsOffset++] != ys[ysOffset++]) return false;
-            }
-
-            return true;
-        }
-
-#endif
-
     }
 }

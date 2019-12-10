@@ -38,7 +38,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		{
 			var underlyingType = Enum.GetUnderlyingType(type);
 
-#if NETSTANDARD
 			isBoxed = false;
 			var dynamicMethod = new DynamicMethod("EnumSerializeByUnderlyingValue", null, new[] { typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) }, type.Module, true);
 			var il = dynamicMethod.GetILGenerator();
@@ -47,55 +46,12 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			il.Emit(OpCodes.Call, typeof(JsonWriter).GetRuntimeMethod("Write" + underlyingType.Name, new[] { underlyingType }));
 			il.Emit(OpCodes.Ret);
 			return dynamicMethod.CreateDelegate(typeof(JsonSerializeAction<>).MakeGenericType(type));
-#else
-            // Boxed
-            isBoxed = true;
-            JsonSerializeAction<object> f;
-            if (underlyingType == typeof(byte))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteByte((byte)value);
-            }
-            else if (underlyingType == typeof(sbyte))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteSByte((sbyte)value);
-            }
-            else if (underlyingType == typeof(short))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteInt16((short)value);
-            }
-            else if (underlyingType == typeof(ushort))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteUInt16((ushort)value);
-            }
-            else if (underlyingType == typeof(int))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteInt32((int)value);
-            }
-            else if (underlyingType == typeof(uint))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteUInt32((uint)value);
-            }
-            else if (underlyingType == typeof(long))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteInt64((long)value);
-            }
-            else if (underlyingType == typeof(ulong))
-            {
-                f = (ref JsonWriter writer, object value, IJsonFormatterResolver _) => writer.WriteUInt64((ulong)value);
-            }
-            else
-            {
-                throw new InvalidOperationException("Type is not Enum. Type:" + type);
-            }
-            return f;
-#endif
 		}
 
 		public static object GetDeserializeDelegate(Type type, out bool isBoxed)
 		{
 			var underlyingType = Enum.GetUnderlyingType(type);
 
-#if NETSTANDARD
 			isBoxed = false;
 			var dynamicMethod = new DynamicMethod("EnumDeserializeByUnderlyingValue", type, new[] { typeof(JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) }, type.Module, true);
 			var il = dynamicMethod.GetILGenerator();
@@ -103,48 +59,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			il.Emit(OpCodes.Call, typeof(JsonReader).GetRuntimeMethod("Read" + underlyingType.Name, Type.EmptyTypes));
 			il.Emit(OpCodes.Ret);
 			return dynamicMethod.CreateDelegate(typeof(JsonDeserializeFunc<>).MakeGenericType(type));
-#else
-            // Boxed
-            isBoxed = true;
-            JsonDeserializeFunc<object> f;
-            if (underlyingType == typeof(byte))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadByte();
-            }
-            else if (underlyingType == typeof(sbyte))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadSByte();
-            }
-            else if (underlyingType == typeof(short))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadInt16();
-            }
-            else if (underlyingType == typeof(ushort))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadUInt16();
-            }
-            else if (underlyingType == typeof(int))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadInt32();
-            }
-            else if (underlyingType == typeof(uint))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadUInt32();
-            }
-            else if (underlyingType == typeof(long))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadInt64();
-            }
-            else if (underlyingType == typeof(ulong))
-            {
-                f = (ref JsonReader reader, IJsonFormatterResolver _) => (object)reader.ReadUInt64();
-            }
-            else
-            {
-                throw new InvalidOperationException("Type is not Enum. Type:" + type);
-            }
-            return f;
-#endif
 		}
 	}
 

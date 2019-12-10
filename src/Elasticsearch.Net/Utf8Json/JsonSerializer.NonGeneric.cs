@@ -121,7 +121,6 @@ namespace Elasticsearch.Net.Utf8Json
                 GetOrAdd(type).serialize2.Invoke(stream, value, resolver);
             }
 
-#if NETSTANDARD
 
             /// <summary>
             /// Serialize to stream.
@@ -157,7 +156,6 @@ namespace Elasticsearch.Net.Utf8Json
                 return GetOrAdd(type).serializeAsync.Invoke(stream, value, resolver);
             }
 
-#endif
 
             public static void Serialize(ref JsonWriter writer, object value, IJsonFormatterResolver resolver)
             {
@@ -300,8 +298,6 @@ namespace Elasticsearch.Net.Utf8Json
                 return GetOrAdd(type).deserialize4.Invoke(ref reader, resolver);
             }
 
-#if NETSTANDARD
-
             public static System.Threading.Tasks.Task<object> DeserializeAsync(Type type, Stream stream)
             {
                 return DeserializeAsync(type, stream, defaultResolver);
@@ -311,8 +307,6 @@ namespace Elasticsearch.Net.Utf8Json
             {
                 return GetOrAdd(type).deserializeAsync.Invoke(stream, resolver);
             }
-
-#endif
 
             class CompiledMethods
             {
@@ -326,10 +320,8 @@ namespace Elasticsearch.Net.Utf8Json
                 public readonly Func<Stream, IJsonFormatterResolver, object> deserialize3;
                 public readonly DeserializeJsonReader deserialize4;
 
-#if NETSTANDARD
                 public readonly Func<Stream, object, IJsonFormatterResolver, System.Threading.Tasks.Task> serializeAsync;
                 public readonly Func<Stream, IJsonFormatterResolver, System.Threading.Tasks.Task<object>> deserializeAsync;
-#endif
 
                 public CompiledMethods(Type type)
                 {
@@ -445,8 +437,6 @@ namespace Elasticsearch.Net.Utf8Json
                         deserialize4 = CreateDelegate<DeserializeJsonReader>(dm);
                     }
 
-#if NETSTANDARD
-
                     {
                         var dm = new DynamicMethod("SerializeAsync", typeof(System.Threading.Tasks.Task), new[] { typeof(Stream), typeof(object), typeof(IJsonFormatterResolver) }, type.Module, true);
                         var il = dm.GetILGenerator();
@@ -473,18 +463,13 @@ namespace Elasticsearch.Net.Utf8Json
 
                         deserializeAsync = CreateDelegate<Func<Stream, IJsonFormatterResolver, System.Threading.Tasks.Task<object>>>(dm);
                     }
-#endif
                 }
-
-#if NETSTANDARD
 
                 static async System.Threading.Tasks.Task<object> TaskCast<T>(System.Threading.Tasks.Task<T> task)
                 {
                     var t = await task.ConfigureAwait(false);
                     return (object)t;
                 }
-
-#endif
 
                 static T CreateDelegate<T>(DynamicMethod dm)
                 {
