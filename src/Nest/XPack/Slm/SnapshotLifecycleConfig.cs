@@ -24,7 +24,6 @@ namespace Nest
 		Indices Indices { get; set; }
 	}
 
-
 	public class SnapshotLifecycleConfig : ISnapshotLifecycleConfig
 	{
 		/// <inheritdoc />

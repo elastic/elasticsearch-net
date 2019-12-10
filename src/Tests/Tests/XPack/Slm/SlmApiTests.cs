@@ -11,7 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Slm
 {
-	[SkipVersion("<7.4.0", "All APIs exist in Elasticsearch 7.4.0")]
+	[SkipVersion("<7.5.0", "Snapshot lifecycle retention implement in 7.5.0")]
 	public class SlmApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string CreateRepositoryStep = nameof(CreateRepositoryStep);
@@ -21,7 +21,6 @@ namespace Tests.XPack.Slm
 		private const string GetSnapshotLifecycleStep = nameof(GetSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleAfterExecuteStep = nameof(GetSnapshotLifecycleAfterExecuteStep);
 		private const string PutSnapshotLifecycleStep = nameof(PutSnapshotLifecycleStep);
-
 
 		public SlmApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -50,6 +49,12 @@ namespace Tests.XPack.Slm
 							Config = new SnapshotLifecycleConfig
 							{
 								Indices = typeof(Project)
+							},
+							Retention = new SnapshotRetentionConfig
+							{
+								ExpireAfter = "30d",
+								MinimumCount = 1,
+								MaximumCount = 5
 							}
 						},
 						(v, d) => d
@@ -58,6 +63,11 @@ namespace Tests.XPack.Slm
 							.Schedule("0 0 0 1 1 ? *")
 							.Config(c => c
 								.Indices<Project>()
+							)
+							.Retention(r => r
+								.ExpireAfter("30d")
+								.MinimumCount(1)
+								.MaximumCount(5)
 							),
 						(v, c, f) => c.SnapshotLifecycleManagement.PutSnapshotLifecycle(v, f),
 						(v, c, f) => c.SnapshotLifecycleManagement.PutSnapshotLifecycleAsync(v, f),
@@ -159,6 +169,9 @@ namespace Tests.XPack.Slm
 			metadata.Policy.Schedule.Should().BeEquivalentTo(new CronExpression("0 0 0 1 1 ? *"));
 			metadata.Policy.Config.Should().NotBeNull();
 			metadata.Policy.Config.Indices.Should().NotBeNull().And.Be(Nest.Indices.Parse("project"));
+			metadata.Policy.Retention.ExpireAfter.Should().Be("30d");
+			metadata.Policy.Retention.MinimumCount.Should().Be(1);
+			metadata.Policy.Retention.MaximumCount.Should().Be(5);
 		});
 
 		[I] public async Task GetAllSnapshotLifecycleResponse() => await Assert<GetSnapshotLifecycleResponse>(GetAllSnapshotLifecycleStep, (v, r) =>
@@ -189,7 +202,6 @@ namespace Tests.XPack.Slm
 				metadata.InProgress.State.Should().NotBeNullOrWhiteSpace();
 				metadata.InProgress.StartTime.Should().BeAfter(DateTimeOffset.MinValue);
 			}
-
 		});
 
 		[I] public async Task DeleteSnapshotLifecycleResponse() => await Assert<DeleteSnapshotLifecycleResponse>(DeleteSnapshotLifecycleStep,
