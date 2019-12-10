@@ -17,6 +17,7 @@ namespace Tests.XPack.Slm
 		private const string CreateRepositoryStep = nameof(CreateRepositoryStep);
 		private const string DeleteSnapshotLifecycleStep = nameof(DeleteSnapshotLifecycleStep);
 		private const string ExecuteSnapshotLifecycleStep = nameof(ExecuteSnapshotLifecycleStep);
+		private const string ExecuteRetentionLifecycleStep = nameof(ExecuteRetentionLifecycleStep);
 		private const string GetAllSnapshotLifecycleStep = nameof(GetAllSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleStep = nameof(GetSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleAfterExecuteStep = nameof(GetSnapshotLifecycleAfterExecuteStep);
@@ -103,6 +104,18 @@ namespace Tests.XPack.Slm
 					)
 			},
 			{
+				ExecuteRetentionLifecycleStep, u =>
+					u.Calls<ExecuteRetentionSnapshotLifecycleDescriptor, ExecuteRetentionSnapshotLifecycleRequest, IExecuteRetentionSnapshotLifecycleRequest,
+						ExecuteRetentionSnapshotLifecycleResponse>(
+						v => new ExecuteRetentionSnapshotLifecycleRequest(),
+						(v, d) => d,
+						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycle(f),
+						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycleAsync(f),
+						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycle(r),
+						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycleAsync(r)
+					)
+			},
+			{
 				GetSnapshotLifecycleAfterExecuteStep, u =>
 					u.Calls<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequest, IGetSnapshotLifecycleRequest, GetSnapshotLifecycleResponse>(
 						v => new GetSnapshotLifecycleRequest(v)
@@ -172,6 +185,12 @@ namespace Tests.XPack.Slm
 			{
 				r.IsValid.Should().BeTrue();
 				r.SnapshotName.Should().NotBeNull();
+			});
+
+		[I] public async Task ExecuteRetentionSnapshotLifecycleResponse() => await Assert<ExecuteRetentionSnapshotLifecycleResponse>(ExecuteRetentionLifecycleStep,
+			(v, r) =>
+			{
+				r.IsValid.Should().BeTrue();
 			});
 
 		[I] public async Task GetSnapshotLifeCycleAfterExecuteResponse() => await Assert<GetSnapshotLifecycleResponse>(GetSnapshotLifecycleAfterExecuteStep, (v, r) =>

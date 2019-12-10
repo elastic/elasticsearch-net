@@ -72,6 +72,14 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for ExecuteRetentionSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public partial class ExecuteRetentionSnapshotLifecycleDescriptor : RequestDescriptorBase<ExecuteRetentionSnapshotLifecycleDescriptor, ExecuteRetentionSnapshotLifecycleRequestParameters, IExecuteRetentionSnapshotLifecycleRequest>, IExecuteRetentionSnapshotLifecycleRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetentionSnapshotLifecycle;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
 	public partial class GetSnapshotLifecycleDescriptor : RequestDescriptorBase<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequestParameters, IGetSnapshotLifecycleRequest>, IGetSnapshotLifecycleRequest
 	{
