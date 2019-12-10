@@ -728,7 +728,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 	internal sealed class TimeSpanFormatter : IJsonFormatter<TimeSpan>
     {
-#if NETSTANDARD
         readonly string formatString;
 
         public TimeSpanFormatter()
@@ -740,21 +739,15 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         {
             this.formatString = formatString;
         }
-#endif
 
         public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver)
         {
-#if NETSTANDARD
             writer.WriteString(value.ToString(formatString));
-#else
-            writer.WriteString(value.ToString());
-#endif
         }
 
         public TimeSpan Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             var str = reader.ReadString();
-#if NETSTANDARD
             if (formatString == null)
             {
                 return TimeSpan.Parse(str, CultureInfo.InvariantCulture);
@@ -763,9 +756,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             {
                 return TimeSpan.ParseExact(str, formatString, CultureInfo.InvariantCulture);
             }
-#else
-            return TimeSpan.Parse(str);
-#endif
         }
     }
 
@@ -778,12 +768,10 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             this.innerFormatter = new TimeSpanFormatter();
         }
 
-#if NETSTANDARD
         public NullableTimeSpanFormatter(string formatString)
         {
             this.innerFormatter = new TimeSpanFormatter(formatString);
         }
-#endif
 
         public void Serialize(ref JsonWriter writer, TimeSpan? value, IJsonFormatterResolver formatterResolver)
         {

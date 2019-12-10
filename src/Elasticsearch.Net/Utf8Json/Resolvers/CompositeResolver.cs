@@ -164,13 +164,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
             assembly = new DynamicAssembly(ModuleName);
         }
 
-#if DEBUG && (NET45 || NET47)
-        public static AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
-
         public static IJsonFormatterResolver Create(IJsonFormatter[] formatters, IJsonFormatterResolver[] resolvers)
         {
             var id = Guid.NewGuid().ToString().Replace("-", "");

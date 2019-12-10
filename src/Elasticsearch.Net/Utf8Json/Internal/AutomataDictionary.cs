@@ -44,7 +44,6 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             root = new AutomataNode(0);
         }
 
-#if NETSTANDARD
         public unsafe void Add(string str, int value)
         {
             Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(str), value);
@@ -104,38 +103,6 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                 }
             }
         }
-#else
-        // for Unity, use safe only.
-
-        public void Add(string str, int value)
-        {
-            Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(str), value);
-        }
-
-        public unsafe void Add(byte[] bytes, int value)
-        {
-            var offset = 0;
-
-            var node = root;
-
-            var rest = bytes.Length;
-            while (rest != 0)
-            {
-                var key = AutomataKeyGen.GetKeySafe(bytes, ref offset, ref rest);
-
-                if (rest == 0)
-                {
-                    node = node.Add(key, value, Encoding.UTF8.GetString(bytes));
-                }
-                else
-                {
-                    node = node.Add(key);
-                }
-            }
-        }
-
-#endif
-
 
         public bool TryGetValueSafe(ArraySegment<byte> key, out int value)
         {

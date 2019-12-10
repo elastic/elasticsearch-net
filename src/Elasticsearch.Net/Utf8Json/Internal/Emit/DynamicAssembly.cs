@@ -32,9 +32,6 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 	{
 		private static readonly byte[] PublicKey = Assembly.GetExecutingAssembly().GetName().GetPublicKey();
 
-#if NET45 || NET47
-        readonly string moduleName;
-#endif
         readonly AssemblyBuilder assemblyBuilder;
         readonly ModuleBuilder moduleBuilder;
 
@@ -73,28 +70,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
         {
 			var assemblyName = new AssemblyName(moduleName);
 			assemblyName.SetPublicKey(PublicKey);
-#if NET45 || NET47
-            this.moduleName = moduleName;
-            this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
-			this.moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName, moduleName + ".dll");
-#else
-#if NETSTANDARD
             this.assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-#else
-            this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-#endif
             this.moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName);
-#endif
         }
-
-#if NET45 || NET47
-
-        public AssemblyBuilder Save()
-        {
-            assemblyBuilder.Save(moduleName + ".dll");
-            return assemblyBuilder;
-        }
-
-#endif
     }
 }
