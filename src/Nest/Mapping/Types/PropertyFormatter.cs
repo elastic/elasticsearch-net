@@ -109,119 +109,110 @@ namespace Nest
 				return;
 			}
 
-			switch (value.Type)
+			switch (value)
 			{
-				case "text":
-					Serialize<ITextProperty>(ref writer, value, formatterResolver);
+				case ITextProperty textProperty:
+					Serialize(ref writer, textProperty, formatterResolver);
 					break;
-				case "keyword":
-					Serialize<IKeywordProperty>(ref writer, value, formatterResolver);
+				case IKeywordProperty keywordProperty:
+					Serialize(ref writer, keywordProperty, formatterResolver);
 					break;
-				case "search_as_you_type":
-					Serialize<ISearchAsYouTypeProperty>(ref writer, value, formatterResolver);
+				case INumberProperty numberProperty:
+					Serialize(ref writer, numberProperty, formatterResolver);
 					break;
-				case "float":
-				case "double":
-				case "byte":
-				case "short":
-				case "integer":
-				case "long":
-				case "scaled_float":
-				case "half_float":
-					Serialize<INumberProperty>(ref writer, value, formatterResolver);
+				case IDateProperty dateProperty:
+					Serialize(ref writer, dateProperty, formatterResolver);
 					break;
-				case "date":
-					Serialize<IDateProperty>(ref writer, value, formatterResolver);
+				case IBooleanProperty booleanProperty:
+					Serialize(ref writer, booleanProperty, formatterResolver);
 					break;
-				case "date_nanos":
-					Serialize<IDateNanosProperty>(ref writer, value, formatterResolver);
+				case INestedProperty nestedProperty:
+					Serialize(ref writer, nestedProperty, formatterResolver);
 					break;
-				case "boolean":
-					Serialize<IBooleanProperty>(ref writer, value, formatterResolver);
+				case IObjectProperty objectProperty:
+					Serialize(ref writer, objectProperty, formatterResolver);
 					break;
-				case "binary":
-					Serialize<IBinaryProperty>(ref writer, value, formatterResolver);
+				case ISearchAsYouTypeProperty searchAsYouTypeProperty:
+					Serialize(ref writer, searchAsYouTypeProperty, formatterResolver);
 					break;
-				case "object":
-					Serialize<IObjectProperty>(ref writer, value, formatterResolver);
+				case IDateNanosProperty dateNanosProperty:
+					Serialize(ref writer, dateNanosProperty, formatterResolver);
 					break;
-				case "nested":
-					Serialize<INestedProperty>(ref writer, value, formatterResolver);
+				case IBinaryProperty binaryProperty:
+					Serialize(ref writer, binaryProperty, formatterResolver);
 					break;
-				case "ip":
-					Serialize<IIpProperty>(ref writer, value, formatterResolver);
+				case IIpProperty ipProperty:
+					Serialize(ref writer, ipProperty, formatterResolver);
 					break;
-				case "geo_point":
-					Serialize<IGeoPointProperty>(ref writer, value, formatterResolver);
+				case IGeoPointProperty geoPointProperty:
+					Serialize(ref writer, geoPointProperty, formatterResolver);
 					break;
-				case "geo_shape":
-					Serialize<IGeoShapeProperty>(ref writer, value, formatterResolver);
+				case IGeoShapeProperty geoShapeProperty:
+					Serialize(ref writer, geoShapeProperty, formatterResolver);
 					break;
-				case "shape":
-					Serialize<IShapeProperty>(ref writer, value, formatterResolver);
+				case IShapeProperty shapeProperty:
+					Serialize(ref writer, shapeProperty, formatterResolver);
 					break;
-				case "completion":
-					Serialize<ICompletionProperty>(ref writer, value, formatterResolver);
+				case ICompletionProperty completionProperty:
+					Serialize(ref writer, completionProperty, formatterResolver);
 					break;
-				case "token_count":
-					Serialize<ITokenCountProperty>(ref writer, value, formatterResolver);
+				case ITokenCountProperty tokenCountProperty:
+					Serialize(ref writer, tokenCountProperty, formatterResolver);
 					break;
-				case "murmur3":
-					Serialize<IMurmur3HashProperty>(ref writer, value, formatterResolver);
+				case IMurmur3HashProperty murmur3HashProperty:
+					Serialize(ref writer, murmur3HashProperty, formatterResolver);
 					break;
-				case "percolator":
-					Serialize<IPercolatorProperty>(ref writer, value, formatterResolver);
+				case IPercolatorProperty percolatorProperty:
+					Serialize(ref writer, percolatorProperty, formatterResolver);
 					break;
-				case "date_range":
-					Serialize<IDateRangeProperty>(ref writer, value, formatterResolver);
+				case IDateRangeProperty dateRangeProperty:
+					Serialize(ref writer, dateRangeProperty, formatterResolver);
 					break;
-				case "double_range":
-					Serialize<IDoubleRangeProperty>(ref writer, value, formatterResolver);
+				case IDoubleRangeProperty doubleRangeProperty:
+					Serialize(ref writer, doubleRangeProperty, formatterResolver);
 					break;
-				case "float_range":
-					Serialize<IFloatRangeProperty>(ref writer, value, formatterResolver);
+				case IFloatRangeProperty floatRangeProperty:
+					Serialize(ref writer, floatRangeProperty, formatterResolver);
 					break;
-				case "integer_range":
-					Serialize<IIntegerRangeProperty>(ref writer, value, formatterResolver);
+				case IIntegerRangeProperty integerRangeProperty:
+					Serialize(ref writer, integerRangeProperty, formatterResolver);
 					break;
-				case "long_range":
-					Serialize<ILongRangeProperty>(ref writer, value, formatterResolver);
+				case ILongRangeProperty longRangeProperty:
+					Serialize(ref writer, longRangeProperty, formatterResolver);
 					break;
-				case "ip_range":
-					Serialize<IIpRangeProperty>(ref writer, value, formatterResolver);
+				case IIpRangeProperty ipRangeProperty:
+					Serialize(ref writer, ipRangeProperty, formatterResolver);
 					break;
-				case "join":
-					Serialize<IJoinProperty>(ref writer, value, formatterResolver);
+				case IJoinProperty joinProperty:
+					Serialize(ref writer, joinProperty, formatterResolver);
 					break;
-				case "alias":
-					Serialize<IFieldAliasProperty>(ref writer, value, formatterResolver);
+				case IFieldAliasProperty fieldAliasProperty:
+					Serialize(ref writer, fieldAliasProperty, formatterResolver);
 					break;
-				case "rank_feature":
-					Serialize<IRankFeatureProperty>(ref writer, value, formatterResolver);
+				case IRankFeatureProperty rankFeatureProperty:
+					Serialize(ref writer, rankFeatureProperty, formatterResolver);
 					break;
-				case "rank_features":
-					Serialize<IRankFeaturesProperty>(ref writer, value, formatterResolver);
+				case IRankFeaturesProperty rankFeaturesProperty:
+					Serialize(ref writer, rankFeaturesProperty, formatterResolver);
 					break;
-				case "flattened":
-					Serialize<IFlattenedProperty>(ref writer, value, formatterResolver);
+				case IFlattenedProperty flattenedProperty:
+					Serialize(ref writer, flattenedProperty, formatterResolver);
+					break;
+				case IGenericProperty genericProperty:
+					Serialize(ref writer, genericProperty, formatterResolver);
 					break;
 				default:
-					if (value is IGenericProperty genericProperty)
-						Serialize<IGenericProperty>(ref writer, genericProperty, formatterResolver);
-					else
-					{
-						var formatter = formatterResolver.GetFormatter<object>();
-						formatter.Serialize(ref writer, value, formatterResolver);
-					}
+					var formatter = formatterResolver.GetFormatter<object>();
+					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
 		}
 
-		private static void Serialize<TProperty>(ref JsonWriter writer, IProperty value, IJsonFormatterResolver formatterResolver)
+		private static void Serialize<TProperty>(ref JsonWriter writer, TProperty value, IJsonFormatterResolver formatterResolver)
 			where TProperty : class, IProperty
 		{
 			var formatter = formatterResolver.GetFormatter<TProperty>();
-			formatter.Serialize(ref writer, value as TProperty, formatterResolver);
+			formatter.Serialize(ref writer, value, formatterResolver);
 		}
 
 		private static TProperty Deserialize<TProperty>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
