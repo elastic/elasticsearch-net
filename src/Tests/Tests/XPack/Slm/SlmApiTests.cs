@@ -19,6 +19,7 @@ namespace Tests.XPack.Slm
 		private const string ExecuteSnapshotLifecycleStep = nameof(ExecuteSnapshotLifecycleStep);
 		private const string GetAllSnapshotLifecycleStep = nameof(GetAllSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleStep = nameof(GetSnapshotLifecycleStep);
+		private const string GetMissingSnapshotLifecycleStep = nameof(GetMissingSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleAfterExecuteStep = nameof(GetSnapshotLifecycleAfterExecuteStep);
 		private const string PutSnapshotLifecycleStep = nameof(PutSnapshotLifecycleStep);
 
@@ -63,6 +64,20 @@ namespace Tests.XPack.Slm
 						(v, c, f) => c.SnapshotLifecycleManagement.PutSnapshotLifecycleAsync(v, f),
 						(v, c, r) => c.SnapshotLifecycleManagement.PutSnapshotLifecycle(r),
 						(v, c, r) => c.SnapshotLifecycleManagement.PutSnapshotLifecycleAsync(r)
+					)
+			},
+			{
+				GetMissingSnapshotLifecycleStep, u =>
+					u.Calls<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequest, IGetSnapshotLifecycleRequest, GetSnapshotLifecycleResponse>(
+						v => new GetSnapshotLifecycleRequest(v + "-missing")
+						{
+							Human = true
+						},
+						(v, d) => d.PolicyId(v + "-missing").Human(),
+						(v, c, f) => c.SnapshotLifecycleManagement.GetSnapshotLifecycle(f),
+						(v, c, f) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleAsync(f),
+						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycle(r),
+						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleAsync(r)
 					)
 			},
 			{
@@ -142,6 +157,12 @@ namespace Tests.XPack.Slm
 			r.IsValid.Should().BeTrue();
 			r.Acknowledged.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
+		});
+
+		[I] public async Task GetMissingSnapshotLifecycleResponse() => await Assert<GetSnapshotLifecycleResponse>(GetMissingSnapshotLifecycleStep, (v, r) =>
+		{
+			r.IsValid.Should().BeFalse();
+			r.ServerError.Should().NotBeNull();
 		});
 
 		[I] public async Task GetSnapshotLifecycleResponse() => await Assert<GetSnapshotLifecycleResponse>(GetSnapshotLifecycleStep, (v, r) =>
