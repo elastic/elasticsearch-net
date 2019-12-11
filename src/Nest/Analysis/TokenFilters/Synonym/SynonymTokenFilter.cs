@@ -35,6 +35,18 @@ namespace Nest
 
 		[DataMember(Name ="tokenizer")]
 		string Tokenizer { get; set; }
+
+		/// <summary>
+		/// Whether this token filter can reload changes to synonym files
+		/// on demand.
+		/// Marking as updateable means this component is only usable at search time
+		/// </summary>
+		/// <remarks>
+		/// Supported in Elasticsearch 7.3.0+
+		/// </remarks>
+		[DataMember(Name = "updateable")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? Updateable { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -59,6 +71,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string Tokenizer { get; set; }
+
+		/// <inheritdoc />
+		public bool? Updateable { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -72,26 +87,30 @@ namespace Nest
 		IEnumerable<string> ISynonymTokenFilter.Synonyms { get; set; }
 		string ISynonymTokenFilter.SynonymsPath { get; set; }
 		string ISynonymTokenFilter.Tokenizer { get; set; }
+		bool? ISynonymTokenFilter.Updateable { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymTokenFilter.Expand"/>
 		public SynonymTokenFilterDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);
 
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		public SynonymTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymTokenFilter.Tokenizer"/>
 		public SynonymTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(tokenizer, (a, v) => a.Tokenizer = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymTokenFilter.SynonymsPath"/>
 		public SynonymTokenFilterDescriptor SynonymsPath(string path) => Assign(path, (a, v) => a.SynonymsPath = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymTokenFilter.Format"/>
 		public SynonymTokenFilterDescriptor Format(SynonymFormat? format) => Assign(format, (a, v) => a.Format = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymTokenFilter.Synonyms"/>
 		public SynonymTokenFilterDescriptor Synonyms(IEnumerable<string> synonyms) => Assign(synonyms, (a, v) => a.Synonyms = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymTokenFilter.Synonyms"/>
 		public SynonymTokenFilterDescriptor Synonyms(params string[] synonyms) => Assign(synonyms, (a, v) => a.Synonyms = v);
+
+		/// <inheritdoc cref="ISynonymTokenFilter.Updateable"/>
+		public SynonymTokenFilterDescriptor Updateable(bool? updateable = true) => Assign(updateable, (a, v) => a.Updateable = v);
 	}
 }
