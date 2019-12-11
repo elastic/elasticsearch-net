@@ -319,5 +319,9 @@ namespace Nest
 		public IProperty Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector = null) =>
 			selector.InvokeOrDefault(new IpRangePropertyDescriptor<T>().Name(field));
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
+
+		/// <inheritdoc cref="ISearchAsYouTypeProperty"/>
+		public IProperty SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) =>
+			selector?.Invoke(new SearchAsYouTypePropertyDescriptor<T>());
 	}
 }
