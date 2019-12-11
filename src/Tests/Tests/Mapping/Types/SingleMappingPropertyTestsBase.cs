@@ -9,10 +9,10 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Mapping.Types
 {
 	public abstract class SingleMappingPropertyTestsBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, PutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
+		: ApiIntegrationTestBase<WritableCluster, PutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
 			PutIndexTemplateRequest>
 	{
-		protected SingleMappingPropertyTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected SingleMappingPropertyTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
