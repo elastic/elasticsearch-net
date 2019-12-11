@@ -97,6 +97,10 @@ namespace Nest
 		public QueryContainer MatchPhrase(Func<MatchPhraseQueryDescriptor<T>, IMatchPhraseQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.MatchPhrase = query);
 
+		/// <inheritdoc cref="IMatchBoolPrefixQuery"/>
+		public QueryContainer MatchBoolPrefix(Func<MatchBoolPrefixQueryDescriptor<T>, IMatchBoolPrefixQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.MatchBoolPrefix = query);
+
 		/// <summary>
 		/// The match_phrase_prefix is the same as match_phrase, expect it allows for prefix matches on the last term
 		/// in the text

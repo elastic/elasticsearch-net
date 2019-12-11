@@ -78,6 +78,9 @@ namespace Nest
 		[DataMember(Name ="match_all")]
 		IMatchAllQuery MatchAll { get; set; }
 
+		[DataMember(Name ="match_bool_prefix")]
+		IMatchBoolPrefixQuery MatchBoolPrefix { get; set; }
+
 		[DataMember(Name ="match_none")]
 		IMatchNoneQuery MatchNone { get; set; }
 
