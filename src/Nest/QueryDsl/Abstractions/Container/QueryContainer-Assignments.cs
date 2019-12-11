@@ -28,6 +28,7 @@ namespace Nest
 		private IIntervalsQuery _intervals;
 		private IMatchQuery _match;
 		private IMatchAllQuery _matchAllQuery;
+		private IMatchBoolPrefixQuery _matchBoolPrefixQuery;
 		private IMatchNoneQuery _matchNoneQuery;
 		private IMatchPhraseQuery _matchPhrase;
 		private IMatchPhrasePrefixQuery _matchPhrasePrefix;
@@ -187,6 +188,12 @@ namespace Nest
 		{
 			get => _matchAllQuery;
 			set => _matchAllQuery = Set(value);
+		}
+
+		IMatchBoolPrefixQuery IQueryContainer.MatchBoolPrefix
+		{
+			get => _matchBoolPrefixQuery;
+			set => _matchBoolPrefixQuery = Set(value);
 		}
 
 		IMatchNoneQuery IQueryContainer.MatchNone
