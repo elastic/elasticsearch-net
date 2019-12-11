@@ -9,6 +9,7 @@
 		<license type="file">license.txt</license>
 		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
+		<icon>images\nuget-icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<summary>Provides a way to assert client behaviour through a rule engine backed VirtualClusterConnection</summary>
 		<description>Provides a way to assert cluent behaviour through a rule engine backed VirtualClusterConnection</description>
@@ -27,6 +28,7 @@
 	</metadata>
 	<files>
 		<file src="..\license.txt" target="" />
+		<file src="nuget-icon.png" target="images\" />
 	
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.dll" target="lib\netstandard2.0"/>
 		<file src="output\Elasticsearch.Net.VirtualizedCluster\netstandard2.0\Elasticsearch.Net.VirtualizedCluster.pdb" target="lib\netstandard2.0"/>
