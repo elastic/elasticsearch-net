@@ -200,6 +200,10 @@ var tweet = response.Source; // the original document
 NEST exposes a fluent interface and a [powerful query DSL](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/query-dsl.html)
 
 ```csharp
+// define your DefaultIndex this way to make it work perfect:
+var settings = new ConnectionSettings(node).DefaultIndex("mytweetindex");
+```
+```csharp
 var response = client.Search<Tweet>(s => s
     .From(0)
     .Size(10)
