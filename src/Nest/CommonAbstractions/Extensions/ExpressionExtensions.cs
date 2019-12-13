@@ -30,9 +30,41 @@ namespace Nest
 
 			if (expression == null) return null;
 
-			if (!(expression is LambdaExpression lambda)) throw new Exception($"Not a lambda expression: {expression}");
+			switch (expression)
+			{
+				case LambdaExpression lambdaExpression:
+					type = lambdaExpression.Parameters.FirstOrDefault()?.Type;
+					break;
+				case MemberExpression memberExpression:
+					type = memberExpression.Member.DeclaringType;
+					break;
+				case MethodCallExpression methodCallExpression:
+					// special case F# method call expressions on FuncConvert
+					// that are used to convert F# quotations representing lambda expressions, to expressions.
+					// https://github.com/dotnet/fsharp/blob/7adaacf150dd79f072efe42d43168c9cd6edbced/src/fsharp/FSharp.Core/Linq.fs#L796
+					//
+					// For example:
+					//
+					// type Doc = { Message: string; State: string }
+					// let field (f:Expr<'a -> 'b>) =
+					//     Microsoft.FSharp.Linq.RuntimeHelpers.LeafExpressionConverter.QuotationToExpression f
+					//     |> Nest.Field.op_Implicit
+					//
+					// let fieldExpression = field <@ fun (d: Doc) -> d.Message @>
+					//
+					if (methodCallExpression.Method.DeclaringType.FullName == "Microsoft.FSharp.Core.FuncConvert" &&
+						methodCallExpression.Arguments.FirstOrDefault() is LambdaExpression lambda)
+						type = lambda.Parameters.FirstOrDefault()?.Type;
+					else
+						throw new Exception($"Unsupported {nameof(MethodCallExpression)}: {expression}");
+					break;
+				default:
+					throw new Exception(
+						$"Expected {nameof(LambdaExpression)}, {nameof(MemberExpression)} or "
+						+ $"{nameof(MethodCallExpression)}, received: {expression.GetType().Name}");
 
-			type = lambda.Parameters.FirstOrDefault()?.Type;
+			}
+
 			var visitor = new ToStringExpressionVisitor();
 			var toString = visitor.Resolve(expression);
 			cachable = visitor.Cachable;
