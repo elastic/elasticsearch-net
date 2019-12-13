@@ -9,7 +9,7 @@ namespace Tests.XPack.Slm.ExecuteLifecycle
 	public class ExecuteLifecycleUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() =>
-			await PUT("/_slm/policy/policy_id/_execute")
+			await POST("/_slm/policy/policy_id/_execute")
 				.Fluent(c => c.SnapshotLifecycleManagement.ExecuteSnapshotLifecycle("policy_id"))
 				.Request(c => c.SnapshotLifecycleManagement.ExecuteSnapshotLifecycle(new ExecuteSnapshotLifecycleRequest("policy_id")))
 				.FluentAsync(c => c.SnapshotLifecycleManagement.ExecuteSnapshotLifecycleAsync("policy_id"))
