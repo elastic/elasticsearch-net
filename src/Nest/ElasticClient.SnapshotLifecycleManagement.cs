@@ -89,25 +89,25 @@ namespace Nest.Specification.SnapshotLifecycleManagementApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</a>
 		/// </summary>
-		public ExecuteRetentionSnapshotLifecycleResponse ExecuteRetentionSnapshotLifecycle(Func<ExecuteRetentionSnapshotLifecycleDescriptor, IExecuteRetentionSnapshotLifecycleRequest> selector = null) => ExecuteRetentionSnapshotLifecycle(selector.InvokeOrDefault(new ExecuteRetentionSnapshotLifecycleDescriptor()));
+		public ExecuteRetentionResponse ExecuteRetention(Func<ExecuteRetentionDescriptor, IExecuteRetentionRequest> selector = null) => ExecuteRetention(selector.InvokeOrDefault(new ExecuteRetentionDescriptor()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>slm.execute_retention</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</a>
 		/// </summary>
-		public Task<ExecuteRetentionSnapshotLifecycleResponse> ExecuteRetentionSnapshotLifecycleAsync(Func<ExecuteRetentionSnapshotLifecycleDescriptor, IExecuteRetentionSnapshotLifecycleRequest> selector = null, CancellationToken ct = default) => ExecuteRetentionSnapshotLifecycleAsync(selector.InvokeOrDefault(new ExecuteRetentionSnapshotLifecycleDescriptor()), ct);
+		public Task<ExecuteRetentionResponse> ExecuteRetentionAsync(Func<ExecuteRetentionDescriptor, IExecuteRetentionRequest> selector = null, CancellationToken ct = default) => ExecuteRetentionAsync(selector.InvokeOrDefault(new ExecuteRetentionDescriptor()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>slm.execute_retention</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</a>
 		/// </summary>
-		public ExecuteRetentionSnapshotLifecycleResponse ExecuteRetentionSnapshotLifecycle(IExecuteRetentionSnapshotLifecycleRequest request) => DoRequest<IExecuteRetentionSnapshotLifecycleRequest, ExecuteRetentionSnapshotLifecycleResponse>(request, request.RequestParameters);
+		public ExecuteRetentionResponse ExecuteRetention(IExecuteRetentionRequest request) => DoRequest<IExecuteRetentionRequest, ExecuteRetentionResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>slm.execute_retention</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</a>
 		/// </summary>
-		public Task<ExecuteRetentionSnapshotLifecycleResponse> ExecuteRetentionSnapshotLifecycleAsync(IExecuteRetentionSnapshotLifecycleRequest request, CancellationToken ct = default) => DoRequestAsync<IExecuteRetentionSnapshotLifecycleRequest, ExecuteRetentionSnapshotLifecycleResponse>(request, request.RequestParameters, ct);
+		public Task<ExecuteRetentionResponse> ExecuteRetentionAsync(IExecuteRetentionRequest request, CancellationToken ct = default) => DoRequestAsync<IExecuteRetentionRequest, ExecuteRetentionResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>slm.get_lifecycle</c> API, read more about this API online:
 		/// <para></para>

@@ -105,14 +105,14 @@ namespace Tests.XPack.Slm
 			},
 			{
 				ExecuteRetentionLifecycleStep, u =>
-					u.Calls<ExecuteRetentionSnapshotLifecycleDescriptor, ExecuteRetentionSnapshotLifecycleRequest, IExecuteRetentionSnapshotLifecycleRequest,
-						ExecuteRetentionSnapshotLifecycleResponse>(
-						v => new ExecuteRetentionSnapshotLifecycleRequest(),
+					u.Calls<ExecuteRetentionDescriptor, ExecuteRetentionRequest, IExecuteRetentionRequest,
+						ExecuteRetentionResponse>(
+						v => new ExecuteRetentionRequest(),
 						(v, d) => d,
-						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycle(f),
-						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycleAsync(f),
-						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycle(r),
-						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetentionSnapshotLifecycleAsync(r)
+						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetention(f),
+						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetentionAsync(f),
+						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetention(r),
+						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetentionAsync(r)
 					)
 			},
 			{
@@ -187,7 +187,7 @@ namespace Tests.XPack.Slm
 				r.SnapshotName.Should().NotBeNull();
 			});
 
-		[I] public async Task ExecuteRetentionSnapshotLifecycleResponse() => await Assert<ExecuteRetentionSnapshotLifecycleResponse>(ExecuteRetentionLifecycleStep,
+		[I] public async Task ExecuteRetentionSnapshotLifecycleResponse() => await Assert<ExecuteRetentionResponse>(ExecuteRetentionLifecycleStep,
 			(v, r) =>
 			{
 				r.IsValid.Should().BeTrue();

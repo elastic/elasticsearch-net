@@ -98,15 +98,15 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IExecuteRetentionSnapshotLifecycleRequest : IRequest<ExecuteRetentionSnapshotLifecycleRequestParameters>
+	public partial interface IExecuteRetentionRequest : IRequest<ExecuteRetentionRequestParameters>
 	{
 	}
 
-	///<summary>Request for ExecuteRetentionSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
-	public partial class ExecuteRetentionSnapshotLifecycleRequest : PlainRequestBase<ExecuteRetentionSnapshotLifecycleRequestParameters>, IExecuteRetentionSnapshotLifecycleRequest
+	///<summary>Request for ExecuteRetention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public partial class ExecuteRetentionRequest : PlainRequestBase<ExecuteRetentionRequestParameters>, IExecuteRetentionRequest
 	{
-		protected IExecuteRetentionSnapshotLifecycleRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetentionSnapshotLifecycle;
+		protected IExecuteRetentionRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetention;
 	// values part of the url path
 	// Request parameters
 	}

@@ -67,12 +67,12 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_slm/policy/{policyId:policyId}/_execute"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_slm/_execute_retention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ExecuteRetentionSnapshotLifecycle<TResponse>(ExecuteRetentionSnapshotLifecycleRequestParameters requestParameters = null)
+		public TResponse ExecuteRetention<TResponse>(ExecuteRetentionRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_slm/_execute_retention", null, RequestParams(requestParameters));
 		///<summary>POST on /_slm/_execute_retention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("slm.execute_retention", "")]
-		public Task<TResponse> ExecuteRetentionSnapshotLifecycleAsync<TResponse>(ExecuteRetentionSnapshotLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> ExecuteRetentionAsync<TResponse>(ExecuteRetentionRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_slm/_execute_retention", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_slm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
 		///<param name = "policyId">Comma-separated list of snapshot lifecycle policies to retrieve</param>

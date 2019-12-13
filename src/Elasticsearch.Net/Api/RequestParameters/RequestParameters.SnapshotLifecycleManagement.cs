@@ -36,8 +36,8 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for ExecuteRetentionSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
-	public class ExecuteRetentionSnapshotLifecycleRequestParameters : RequestParameters<ExecuteRetentionSnapshotLifecycleRequestParameters>
+	///<summary>Request options for ExecuteRetention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public class ExecuteRetentionRequestParameters : RequestParameters<ExecuteRetentionRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
