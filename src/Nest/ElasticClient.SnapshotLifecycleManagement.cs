@@ -133,6 +133,30 @@ namespace Nest.Specification.SnapshotLifecycleManagementApi
 		/// </summary>
 		public Task<GetSnapshotLifecycleStatsResponse> GetSnapshotLifecycleStatsAsync(IGetSnapshotLifecycleStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetSnapshotLifecycleStatsRequest, GetSnapshotLifecycleStatsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public GetSnapshotLifecycleManagementStatusResponse GetStatus(Func<GetSnapshotLifecycleManagementStatusDescriptor, IGetSnapshotLifecycleManagementStatusRequest> selector = null) => GetStatus(selector.InvokeOrDefault(new GetSnapshotLifecycleManagementStatusDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public Task<GetSnapshotLifecycleManagementStatusResponse> GetStatusAsync(Func<GetSnapshotLifecycleManagementStatusDescriptor, IGetSnapshotLifecycleManagementStatusRequest> selector = null, CancellationToken ct = default) => GetStatusAsync(selector.InvokeOrDefault(new GetSnapshotLifecycleManagementStatusDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public GetSnapshotLifecycleManagementStatusResponse GetStatus(IGetSnapshotLifecycleManagementStatusRequest request) => DoRequest<IGetSnapshotLifecycleManagementStatusRequest, GetSnapshotLifecycleManagementStatusResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>slm.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</a>
+		/// </summary>
+		public Task<GetSnapshotLifecycleManagementStatusResponse> GetStatusAsync(IGetSnapshotLifecycleManagementStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetSnapshotLifecycleManagementStatusRequest, GetSnapshotLifecycleManagementStatusResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>PUT</c> request to the <c>slm.put_lifecycle</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</a>
@@ -156,5 +180,53 @@ namespace Nest.Specification.SnapshotLifecycleManagementApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</a>
 		/// </summary>
 		public Task<PutSnapshotLifecycleResponse> PutSnapshotLifecycleAsync(IPutSnapshotLifecycleRequest request, CancellationToken ct = default) => DoRequestAsync<IPutSnapshotLifecycleRequest, PutSnapshotLifecycleResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public StartSnapshotLifecycleManagementResponse Start(Func<StartSnapshotLifecycleManagementDescriptor, IStartSnapshotLifecycleManagementRequest> selector = null) => Start(selector.InvokeOrDefault(new StartSnapshotLifecycleManagementDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public Task<StartSnapshotLifecycleManagementResponse> StartAsync(Func<StartSnapshotLifecycleManagementDescriptor, IStartSnapshotLifecycleManagementRequest> selector = null, CancellationToken ct = default) => StartAsync(selector.InvokeOrDefault(new StartSnapshotLifecycleManagementDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public StartSnapshotLifecycleManagementResponse Start(IStartSnapshotLifecycleManagementRequest request) => DoRequest<IStartSnapshotLifecycleManagementRequest, StartSnapshotLifecycleManagementResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.start</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</a>
+		/// </summary>
+		public Task<StartSnapshotLifecycleManagementResponse> StartAsync(IStartSnapshotLifecycleManagementRequest request, CancellationToken ct = default) => DoRequestAsync<IStartSnapshotLifecycleManagementRequest, StartSnapshotLifecycleManagementResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public StopSnapshotLifecycleManagementResponse Stop(Func<StopSnapshotLifecycleManagementDescriptor, IStopSnapshotLifecycleManagementRequest> selector = null) => Stop(selector.InvokeOrDefault(new StopSnapshotLifecycleManagementDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public Task<StopSnapshotLifecycleManagementResponse> StopAsync(Func<StopSnapshotLifecycleManagementDescriptor, IStopSnapshotLifecycleManagementRequest> selector = null, CancellationToken ct = default) => StopAsync(selector.InvokeOrDefault(new StopSnapshotLifecycleManagementDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public StopSnapshotLifecycleManagementResponse Stop(IStopSnapshotLifecycleManagementRequest request) => DoRequest<IStopSnapshotLifecycleManagementRequest, StopSnapshotLifecycleManagementResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>slm.stop</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</a>
+		/// </summary>
+		public Task<StopSnapshotLifecycleManagementResponse> StopAsync(IStopSnapshotLifecycleManagementRequest request, CancellationToken ct = default) => DoRequestAsync<IStopSnapshotLifecycleManagementRequest, StopSnapshotLifecycleManagementResponse>(request, request.RequestParameters, ct);
 	}
 }
