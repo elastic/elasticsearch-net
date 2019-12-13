@@ -146,14 +146,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 { typeof(ArraySegment<byte>), ByteArraySegmentFormatter.Default },
                 { typeof(ArraySegment<byte>?),new StaticNullableFormatter<ArraySegment<byte>>(ByteArraySegmentFormatter.Default) },
 
-    #if NETSTANDARD
                 {typeof(System.Numerics.BigInteger), BigIntegerFormatter.Default},
                 {typeof(System.Numerics.BigInteger?), new StaticNullableFormatter<System.Numerics.BigInteger>(BigIntegerFormatter.Default)},
                 {typeof(System.Numerics.Complex), ComplexFormatter.Default},
                 {typeof(System.Numerics.Complex?), new StaticNullableFormatter<System.Numerics.Complex>(ComplexFormatter.Default)},
                 {typeof(System.Dynamic.ExpandoObject), ExpandoObjectFormatter.Default },
                 {typeof(System.Threading.Tasks.Task), TaskUnitFormatter.Default},
-    #endif
             };
 
             internal static object GetFormatter(Type t)

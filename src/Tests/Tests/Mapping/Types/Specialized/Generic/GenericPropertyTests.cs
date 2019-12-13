@@ -9,7 +9,7 @@ namespace Tests.Mapping.Types.Specialized.Generic
 	{
 		private const string GenericType = "{dynamic_type}";
 
-		public GenericPropertyTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GenericPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Func<SingleMappingSelector<object>, IProperty> FluentSingleMapping => m => m
 			.Generic(g => g

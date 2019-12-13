@@ -78,7 +78,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			{typeof(SortedList<,>), typeof(SortedListFormatter<,>)},
 			{typeof(ILookup<,>), typeof(InterfaceLookupFormatter<,>)},
 			{typeof(IGrouping<,>), typeof(InterfaceGroupingFormatter<,>)},
-#if NETSTANDARD
 			{typeof(ObservableCollection<>), typeof(ObservableCollectionFormatter<>)},
 			{typeof(ReadOnlyObservableCollection<>),(typeof(ReadOnlyObservableCollectionFormatter<>))},
 			{typeof(IReadOnlyList<>), typeof(InterfaceReadOnlyListFormatter<>)},
@@ -92,7 +91,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			{typeof(System.Collections.Concurrent.ConcurrentDictionary<,>), typeof(ConcurrentDictionaryFormatter<,>)},
 			{typeof(Lazy<>), typeof(LazyFormatter<>)},
 			{typeof(Task<>), typeof(TaskValueFormatter<>)},
-#endif
 		};
 
 		// Reduce IL2CPP code generate size(don't write long code in <T>)
@@ -145,10 +143,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					return CreateInstance(typeof(NullableFormatter<>), new[] { nullableElementType });
 				}
 
-#if NETSTANDARD
-
-				//TODO: VALUETASK is not defined.
-#if VALUETASK
+#if NETSTANDARD2_1
 				// ValueTask
 				else if (genericType == typeof(ValueTask<>))
 				{
@@ -197,7 +192,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
 
-#if DOTNETCORE
+#if NETSTANDARD
 				// ValueTuple
 				else if (ti.FullName.StartsWith("System.ValueTuple"))
 				{
@@ -234,8 +229,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
-#endif
-
 #endif
 
 				// ArraySegement

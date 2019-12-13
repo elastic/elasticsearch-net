@@ -86,7 +86,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
         }
     }
 
-#if DEBUG && NETSTANDARD
+#if DEBUG
 
     // not yet completed so only for debug.
 	internal static class ILViewer

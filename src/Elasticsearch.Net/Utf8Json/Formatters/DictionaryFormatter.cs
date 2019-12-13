@@ -188,7 +188,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             return intermediateCollection;
         }
     }
-	
+
 	internal sealed class DictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, Dictionary<TKey, TValue>.Enumerator, Dictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
@@ -280,8 +280,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         }
     }
 
-#if NETSTANDARD
-
 	internal sealed class ReadOnlyDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, ReadOnlyDictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
@@ -331,8 +329,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             return new ConcurrentDictionary<TKey, TValue>();
         }
     }
-
-#endif
 
 	internal sealed class NonGenericDictionaryFormatter<T> : IJsonFormatter<T>
         where T : class, System.Collections.IDictionary, new()

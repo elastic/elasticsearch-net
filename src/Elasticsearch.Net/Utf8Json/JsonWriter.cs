@@ -38,14 +38,8 @@ namespace Elasticsearch.Net.Utf8Json
         static readonly byte[] emptyBytes = new byte[0];
 
         // write direct from UnsafeMemory
-#if NETSTANDARD
-        internal
-#endif
-        byte[] buffer;
-#if NETSTANDARD
-        internal
-#endif
-        int offset;
+        internal byte[] buffer;
+        internal int offset;
 
         public int CurrentOffset
         {
@@ -117,84 +111,60 @@ namespace Elasticsearch.Net.Utf8Json
             return Encoding.UTF8.GetString(buffer, 0, offset);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void EnsureCapacity(int appendLength)
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, appendLength);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteRaw(byte rawValue)
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = rawValue;
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteRaw(byte[] rawValue)
         {
-#if NETSTANDARD
             UnsafeMemory.WriteRaw(ref this, rawValue);
-#else
-            BinaryUtil.EnsureCapacity(ref buffer, offset, rawValue.Length);
-            Buffer.BlockCopy(rawValue, 0, buffer, offset, rawValue.Length);
-            offset += rawValue.Length;
-#endif
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteRawUnsafe(byte rawValue)
         {
             buffer[offset++] = rawValue;
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteBeginArray()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = (byte)'[';
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteEndArray()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = (byte)']';
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteBeginObject()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = (byte)'{';
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteEndObject()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = (byte)'}';
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteValueSeparator()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
@@ -202,9 +172,7 @@ namespace Elasticsearch.Net.Utf8Json
         }
 
         /// <summary>:</summary>
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteNameSeparator()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
@@ -212,27 +180,21 @@ namespace Elasticsearch.Net.Utf8Json
         }
 
         /// <summary>WriteString + WriteNameSeparator</summary>
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WritePropertyName(string propertyName)
         {
             WriteString(propertyName);
             WriteNameSeparator();
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteQuotation()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = (byte)'\"';
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteNull()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 4);
@@ -243,9 +205,7 @@ namespace Elasticsearch.Net.Utf8Json
             offset += 4;
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteBoolean(bool value)
         {
             if (value)
@@ -269,9 +229,7 @@ namespace Elasticsearch.Net.Utf8Json
             }
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteTrue()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 4);
@@ -282,9 +240,7 @@ namespace Elasticsearch.Net.Utf8Json
             offset += 4;
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteFalse()
         {
             BinaryUtil.EnsureCapacity(ref buffer, offset, 5);
@@ -296,41 +252,31 @@ namespace Elasticsearch.Net.Utf8Json
             offset += 5;
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteSingle(float value)
         {
             offset += DoubleToStringConverter.GetBytes(ref buffer, offset, value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteDouble(double value)
         {
             offset += DoubleToStringConverter.GetBytes(ref buffer, offset, value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteByte(byte value)
         {
             WriteUInt64((ulong)value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteUInt16(ushort value)
         {
             WriteUInt64((ulong)value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteUInt32(uint value)
         {
             WriteUInt64((ulong)value);
@@ -341,25 +287,19 @@ namespace Elasticsearch.Net.Utf8Json
             offset += NumberConverter.WriteUInt64(ref buffer, offset, value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteSByte(sbyte value)
         {
             WriteInt64((long)value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteInt16(short value)
         {
             WriteInt64((long)value);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void WriteInt32(int value)
         {
             WriteInt64((long)value);

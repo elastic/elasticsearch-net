@@ -130,6 +130,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IGetSnapshotLifecycleStatsRequest : IRequest<GetSnapshotLifecycleStatsRequestParameters>
+	{
+	}
+
+	///<summary>Request for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+	public partial class GetSnapshotLifecycleStatsRequest : PlainRequestBase<GetSnapshotLifecycleStatsRequestParameters>, IGetSnapshotLifecycleStatsRequest
+	{
+		protected IGetSnapshotLifecycleStatsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetSnapshotLifecycleStats;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IPutSnapshotLifecycleRequest : IRequest<PutSnapshotLifecycleRequestParameters>
 	{
 		[IgnoreDataMember]

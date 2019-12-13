@@ -135,8 +135,6 @@ namespace Elasticsearch.Net.Utf8Json
             stream.Write(buffer.Array, buffer.Offset, buffer.Count);
         }
 
-#if NETSTANDARD
-
         /// <summary>
         /// Serialize to stream(write async).
         /// </summary>
@@ -166,8 +164,6 @@ namespace Elasticsearch.Net.Utf8Json
                 MemoryPool.Return(buf);
             }
         }
-
-#endif
 
         /// <summary>
         /// Serialize to binary. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
@@ -292,7 +288,6 @@ namespace Elasticsearch.Net.Utf8Json
             if (resolver == null)
 				resolver = DefaultResolver;
 
-#if NETSTANDARD && !NET45
 			if (stream is MemoryStream ms)
             {
 				if (ms.TryGetBuffer(out var buf2))
@@ -309,7 +304,6 @@ namespace Elasticsearch.Net.Utf8Json
                     return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
                 }
             }
-#endif
             var buf = MemoryPool.Rent();
 			var poolBuf = buf;
 			try
@@ -334,8 +328,6 @@ namespace Elasticsearch.Net.Utf8Json
 			}
         }
 
-#if NETSTANDARD
-
         public static Task<T> DeserializeAsync<T>(Stream stream)
         {
             return DeserializeAsync<T>(stream, defaultResolver);
@@ -349,7 +341,6 @@ namespace Elasticsearch.Net.Utf8Json
             if (resolver == null)
 				resolver = DefaultResolver;
 
-#if NETSTANDARD && !NET45
 			if (stream is MemoryStream ms)
             {
 				if (ms.TryGetBuffer(out var buf2))
@@ -366,7 +357,6 @@ namespace Elasticsearch.Net.Utf8Json
                     return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
                 }
             }
-#endif
 
             var buffer = MemoryPool.Rent();
             var buf = buffer;
@@ -398,8 +388,6 @@ namespace Elasticsearch.Net.Utf8Json
                 MemoryPool.Return(buffer);
             }
         }
-
-#endif
 
         public static string PrettyPrint(byte[] json) => PrettyPrint(json, 0);
 

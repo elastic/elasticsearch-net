@@ -74,6 +74,10 @@ namespace Nest
 		public static QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) =>
 			new QueryContainerDescriptor<T>().MatchAll(selector);
 
+		/// <inheritdoc cref="IMatchBoolPrefixQuery"/>
+		public static QueryContainer MatchBoolPrefix(Func<MatchBoolPrefixQueryDescriptor<T>, IMatchBoolPrefixQuery> selector = null) =>
+			new QueryContainerDescriptor<T>().MatchBoolPrefix(selector);
+
 		public static QueryContainer MatchNone(Func<MatchNoneQueryDescriptor, IMatchNoneQuery> selector = null) =>
 			new QueryContainerDescriptor<T>().MatchNone(selector);
 
