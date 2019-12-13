@@ -87,6 +87,9 @@ namespace Nest
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
 		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryString(name, value);
+
+		protected string AcceptHeaderFromFormat(string format) =>
+			RequestState.RequestParameters.AcceptHeaderFromFormat(format);
 	}
 
 	public abstract partial class PlainRequestBase<TParameters> : RequestBase<TParameters>

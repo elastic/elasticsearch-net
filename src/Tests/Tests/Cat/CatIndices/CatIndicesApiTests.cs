@@ -20,8 +20,8 @@ namespace Tests.Cat.CatIndices
 		protected override string UrlPath => "/_cat/indices";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Cat.Indices(),
-			(client, f) => client.Cat.IndicesAsync(),
+			(client, f) => client.Cat.Indices(f),
+			(client, f) => client.Cat.IndicesAsync(f),
 			(client, r) => client.Cat.Indices(r),
 			(client, r) => client.Cat.IndicesAsync(r)
 		);

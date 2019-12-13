@@ -58,5 +58,24 @@ namespace Elasticsearch.Net
 
 			Self.QueryString.Remove(name);
 		}
+
+		public string AcceptHeaderFromFormat(string format)
+		{
+			if (format == null)
+				return null;
+
+			var lowerFormat = format.ToLowerInvariant();
+
+			switch(lowerFormat)
+			{
+				case "smile":
+				case "yaml":
+				case "cbor":
+				case "json":
+					return $"application/{lowerFormat}";
+				default:
+					return null;
+			}
+		}
 	}
 }

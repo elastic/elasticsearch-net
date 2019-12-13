@@ -64,7 +64,7 @@
 		continue;
 	}
 	var doc = param.DescriptionHighLevel.ToArray();
-<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
+<text>		@Raw(param.InitializerGenerator(r.CsharpNames.Namespace, param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
 </text>
 }
 @if (names.DescriptorNotFoundInCodebase)

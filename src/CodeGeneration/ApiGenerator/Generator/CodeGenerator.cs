@@ -9,16 +9,32 @@ namespace ApiGenerator.Generator
 	//TODO this should be in views and models
 	public static class CodeGenerator
 	{
+		public static string CatFormatPropertyGenerator(string type, string name, string key, string setter) =>
+			  $"public {type} {name} {{ "
+			+ $"	get => Q<{type}>(\"{key}\");"
+			+ $"	set {{ "
+			+ $"		Q(\"{key}\", {setter});"
+			+ $"		if (RequestConfiguration == null) "
+			+ $"			RequestConfiguration = new RequestConfiguration();"
+			+ $""
+			+ $"		RequestConfiguration.Accept = AcceptHeaderFromFormat({setter});"
+			+ $"	}}"
+			+ $"}}";
+
 		public static string PropertyGenerator(string type, string name, string key, string setter) =>
 			$"public {type} {name} {{ get => Q<{type}>(\"{key}\"); set => Q(\"{key}\", {setter}); }}";
 
-		public static string Property(string type, string name, string key, string setter, string obsolete, params string[] doc)
+		public static string Property(string @namespace, string type, string name, string key, string setter, string obsolete, params string[] doc)
 		{
 			var components = new List<string>();
 			foreach (var d in RenderDocumentation(doc)) A(d);
 			if (!string.IsNullOrWhiteSpace(obsolete)) A($"[Obsolete(\"Scheduled to be removed in 7.0, {obsolete}\")]");
 
-			A(PropertyGenerator(type, name, key, setter));
+			var generated = @namespace != null && @namespace == "Cat" && name == "Format"
+				? CatFormatPropertyGenerator(type, name, key, setter)
+				: PropertyGenerator(type, name, key, setter);
+
+			A(generated);
 			return string.Join($"{Environment.NewLine}\t\t", components);
 
 			void A(string s)

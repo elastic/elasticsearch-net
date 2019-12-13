@@ -65,7 +65,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -145,7 +151,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -225,7 +237,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -305,7 +323,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -367,7 +391,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -481,7 +511,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -564,7 +600,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -626,7 +668,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -688,7 +736,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
@@ -757,7 +811,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -819,7 +879,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -913,7 +979,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -968,7 +1040,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1048,7 +1126,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1114,7 +1198,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1194,7 +1284,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1270,7 +1366,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1353,7 +1455,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1433,7 +1541,13 @@ namespace Nest
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				if (RequestConfiguration == null)
+					RequestConfiguration = new RequestConfiguration();
+				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
