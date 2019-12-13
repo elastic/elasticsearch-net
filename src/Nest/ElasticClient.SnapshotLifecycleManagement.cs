@@ -61,25 +61,25 @@ namespace Nest.Specification.SnapshotLifecycleManagementApi
 		/// </summary>
 		public Task<DeleteSnapshotLifecycleResponse> DeleteSnapshotLifecycleAsync(IDeleteSnapshotLifecycleRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteSnapshotLifecycleRequest, DeleteSnapshotLifecycleResponse>(request, request.RequestParameters, ct);
 		/// <summary>
-		/// <c>PUT</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</a>
 		/// </summary>
 		public ExecuteSnapshotLifecycleResponse ExecuteSnapshotLifecycle(Id policyId, Func<ExecuteSnapshotLifecycleDescriptor, IExecuteSnapshotLifecycleRequest> selector = null) => ExecuteSnapshotLifecycle(selector.InvokeOrDefault(new ExecuteSnapshotLifecycleDescriptor(policyId: policyId)));
 		/// <summary>
-		/// <c>PUT</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</a>
 		/// </summary>
 		public Task<ExecuteSnapshotLifecycleResponse> ExecuteSnapshotLifecycleAsync(Id policyId, Func<ExecuteSnapshotLifecycleDescriptor, IExecuteSnapshotLifecycleRequest> selector = null, CancellationToken ct = default) => ExecuteSnapshotLifecycleAsync(selector.InvokeOrDefault(new ExecuteSnapshotLifecycleDescriptor(policyId: policyId)), ct);
 		/// <summary>
-		/// <c>PUT</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</a>
 		/// </summary>
 		public ExecuteSnapshotLifecycleResponse ExecuteSnapshotLifecycle(IExecuteSnapshotLifecycleRequest request) => DoRequest<IExecuteSnapshotLifecycleRequest, ExecuteSnapshotLifecycleResponse>(request, request.RequestParameters);
 		/// <summary>
-		/// <c>PUT</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>slm.execute_lifecycle</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</a>
 		/// </summary>
