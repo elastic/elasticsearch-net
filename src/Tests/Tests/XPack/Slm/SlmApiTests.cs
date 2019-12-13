@@ -188,14 +188,14 @@ namespace Tests.XPack.Slm
 			r.Policies.Should().NotBeNull().And.HaveCount(4).And.ContainKey(v);
 		});
 
-		[I] public async Task GetSnapshotLifecycleStatusResponse() => await Assert<GetIlmStatusResponse>(GetSnapshotLifecycleStatusStep, (v, r) =>
+		[I] public async Task GetSnapshotLifecycleStatusResponse() => await Assert<GetSlmStatusResponse>(GetSnapshotLifecycleStatusStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 			r.OperationMode.Should().Be(LifecycleOperationMode.Running);
 		});
 
-		[I] public async Task StopSnapshotLifecycleResponse() => await Assert<StopIlmResponse>(StopSnapshotLifecycleStep, (v, r) =>
+		[I] public async Task StopSnapshotLifecycleResponse() => await Assert<StopSlmResponse>(StopSnapshotLifecycleStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
