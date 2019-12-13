@@ -59,6 +59,7 @@ namespace Nest
 		[DataMember(Name = "graph")]
 		public XPackFeature Graph { get; internal set; }
 
+		// TODO! Expand to fullname in 8.0?
 		[DataMember(Name = "ilm")]
 		public XPackFeature Ilm { get; internal set; }
 
@@ -85,6 +86,9 @@ namespace Nest
 
 		[DataMember(Name = "watcher")]
 		public XPackFeature Watcher { get; internal set; }
+
+		[DataMember(Name = "slm")]
+		public XPackFeature SnapshotLifecycleManagement { get; internal set; }
 	}
 
 	public class XPackFeature
