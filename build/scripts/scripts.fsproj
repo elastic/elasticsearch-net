@@ -36,7 +36,7 @@
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
     
     <PackageReference Include="Bullseye" Version="3.0.0" />
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191031T103739" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191209T135928" />
     
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
@@ -45,7 +45,7 @@
     
     <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="NuGet.CommandLine" Version="4.9.4" />
+    <PackageReference Include="NuGet.CommandLine" Version="5.3.1" />
     <PackageReference Include="NuGet.PackageManagement" Version="5.3.1" />
     <PackageReference Include="NuGet.Protocol.Core.v3" Version="4.2.0" />
 

@@ -37,6 +37,7 @@ namespace Nest
 		[DataMember(Name = "queries")]
 		public IReadOnlyDictionary<string, QueryUsage> Queries { get; set; } = EmptyReadOnly<string, QueryUsage>.Dictionary;
 	}
+
 	public class XPackUsageResponse : ResponseBase
 	{
 		[DataMember(Name = "sql")]
@@ -83,6 +84,51 @@ namespace Nest
 
 		[DataMember(Name = "voting_only")]
 		public XPackUsage VotingOnly { get; internal set; }
+
+		[DataMember(Name = "slm")]
+		public SlmUsage SnapshotLifecycleManagement { get; internal set; }
+	}
+
+	public class SlmUsage : XPackUsage
+	{
+		[DataMember(Name = "policy_count")]
+		public int PolicyCount { get; internal set; }
+
+		[DataMember(Name = "policy_stats")]
+		public SnapshotLifecycleStats PolicyStats { get; internal set; }
+	}
+
+	public class SnapshotLifecycleStats
+	{
+		[DataMember(Name = "retention_runs")]
+		public long RetentionRuns { get; internal set; }
+
+		[DataMember(Name = "retention_failed")]
+		public long RetentionFailed { get; internal set; }
+
+		[DataMember(Name = "retention_timed_out")]
+		public long RetentionTimedOut { get; internal set; }
+
+		[DataMember(Name = "retention_deletion_time")]
+		public string RetentionDeletionTime { get; internal set; }
+
+		[DataMember(Name = "retention_deletion_time_millis")]
+		public long RetentionDeletionTimeMilliseconds { get; internal set; }
+
+		[DataMember(Name = "total_snapshots_taken")]
+		public long TotalSnapshotsTaken { get; internal set; }
+
+		[DataMember(Name = "total_snapshots_failed")]
+		public long TotalSnapshotsFailed { get; internal set; }
+
+		[DataMember(Name = "total_snapshots_deleted")]
+		public long TotalSnapshotsDeleted { get; internal set; }
+
+		[DataMember(Name = "total_snapshot_deletion_failures")]
+		public long TotalSnapshotsDeletionFailures { get; internal set; }
+
+		//[DataMember(Name = "policy_stats")]
+		//public IDictionary<string, SnapshotPolicyStats> PolicyStats { get; internal set; }
 	}
 
 	public class XPackUsage

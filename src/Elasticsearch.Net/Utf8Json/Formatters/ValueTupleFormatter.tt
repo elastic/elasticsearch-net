@@ -28,8 +28,6 @@
 // SOFTWARE.
 #endregion
 
-#if NETSTANDARD
-
 using System;
 
 namespace Elasticsearch.Net
@@ -103,11 +101,7 @@ namespace Elasticsearch.Net
             {
                 var keyString = reader.ReadPropertyNameSegmentRaw();
                 int key;
-#if NETSTANDARD
                 dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
                 switch (key)
                 {
@@ -129,4 +123,3 @@ namespace Elasticsearch.Net
 <# } #>
 }
 
-#endif

@@ -85,6 +85,15 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 		[MapsApi("slm.get_lifecycle", "")]
 		public Task<TResponse> GetSnapshotLifecycleAsync<TResponse>(GetSnapshotLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_slm/policy", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_slm/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetSnapshotLifecycleStats<TResponse>(GetSnapshotLifecycleStatsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_slm/stats", null, RequestParams(requestParameters));
+		///<summary>GET on /_slm/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("slm.get_stats", "")]
+		public Task<TResponse> GetSnapshotLifecycleStatsAsync<TResponse>(GetSnapshotLifecycleStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_slm/stats", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_slm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetStatus<TResponse>(GetSnapshotLifecycleManagementStatusRequestParameters requestParameters = null)

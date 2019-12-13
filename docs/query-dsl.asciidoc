@@ -51,6 +51,8 @@ NEST exposes all of the full text queries available in Elasticsearch
 
 * <<match-usage,Match Usage>>
 
+* <<match-bool-prefix-usage,Match Bool Prefix Usage>>
+
 * <<match-phrase-usage,Match Phrase Usage>>
 
 * <<match-phrase-prefix-usage,Match Phrase Prefix Usage>>
@@ -70,6 +72,8 @@ include::query-dsl/full-text/common-terms/common-terms-usage.asciidoc[]
 include::query-dsl/full-text/intervals/intervals-usage.asciidoc[]
 
 include::query-dsl/full-text/match/match-usage.asciidoc[]
+
+include::query-dsl/full-text/match-bool-prefix/match-bool-prefix-usage.asciidoc[]
 
 include::query-dsl/full-text/match-phrase/match-phrase-usage.asciidoc[]
 

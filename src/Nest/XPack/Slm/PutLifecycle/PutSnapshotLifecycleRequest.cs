@@ -35,6 +35,14 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "schedule")]
 		CronExpression Schedule { get; set; }
+
+		/// <summary>
+		/// Automatic deletion of older snapshots is an optional feature of snapshot lifecycle management. Retention is run as a cluster level task
+		/// that is not associated with a particular policy’s schedule (though the configuration of which snapshots to keep is done on a
+		/// per-policy basis).
+		/// </summary>
+		[DataMember(Name = "retention")]
+		ISnapshotRetentionConfiguration Retention { get; set; }
 	}
 
 	public partial class PutSnapshotLifecycleRequest
@@ -50,6 +58,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public CronExpression Schedule { get; set; }
+
+		/// <inheritdoc />
+		public ISnapshotRetentionConfiguration Retention { get; set; }
 	}
 
 	public partial class PutSnapshotLifecycleDescriptor
@@ -58,6 +69,8 @@ namespace Nest
 		string IPutSnapshotLifecycleRequest.Name { get; set; }
 		string IPutSnapshotLifecycleRequest.Repository { get; set; }
 		CronExpression IPutSnapshotLifecycleRequest.Schedule { get; set; }
+
+		ISnapshotRetentionConfiguration IPutSnapshotLifecycleRequest.Retention { get; set; }
 
 		/// <inheritdoc cref="IPutSnapshotLifecycleRequest.Name" />
 		public PutSnapshotLifecycleDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
@@ -71,5 +84,9 @@ namespace Nest
 		/// <inheritdoc cref="IPutSnapshotLifecycleRequest.Config" />
 		public PutSnapshotLifecycleDescriptor Config(Func<SnapshotLifecycleConfigDescriptor, ISnapshotLifecycleConfig> selector) =>
 			Assign(selector, (a, v) => a.Config = v.InvokeOrDefault(new SnapshotLifecycleConfigDescriptor()));
+
+		/// <inheritdoc cref="IPutSnapshotLifecycleRequest.Retention" />
+		public PutSnapshotLifecycleDescriptor Retention(Func<SnapshotRetentionConfigurationDescriptor, ISnapshotRetentionConfiguration> selector) =>
+			Assign(selector, (a, v) => a.Retention = v.InvokeOrDefault(new SnapshotRetentionConfigurationDescriptor()));
 	}
 }

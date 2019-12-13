@@ -33,6 +33,18 @@ namespace Nest
 
 		[DataMember(Name ="tokenizer")]
 		string Tokenizer { get; set; }
+
+		/// <summary>
+		/// Whether this token filter can reload changes to synonym files
+		/// on demand.
+		/// Marking as updateable means this component is only usable at search time
+		/// </summary>
+		/// <remarks>
+		/// Supported in Elasticsearch 7.3.0+
+		/// </remarks>
+		[DataMember(Name = "updateable")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? Updateable { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -57,6 +69,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string Tokenizer { get; set; }
+
+		/// <inheritdoc />
+		public bool? Updateable { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -66,33 +81,34 @@ namespace Nest
 		protected override string Type => "synonym_graph";
 		bool? ISynonymGraphTokenFilter.Expand { get; set; }
 		SynonymFormat? ISynonymGraphTokenFilter.Format { get; set; }
-
 		bool? ISynonymGraphTokenFilter.Lenient { get; set; }
-
 		IEnumerable<string> ISynonymGraphTokenFilter.Synonyms { get; set; }
 		string ISynonymGraphTokenFilter.SynonymsPath { get; set; }
 		string ISynonymGraphTokenFilter.Tokenizer { get; set; }
+		bool? ISynonymGraphTokenFilter.Updateable { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Expand"/>
 		public SynonymGraphTokenFilterDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);
 
-		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Lenient" />
 		public SynonymGraphTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
-
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Tokenizer"/>
 		public SynonymGraphTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(tokenizer, (a, v) => a.Tokenizer = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.SynonymsPath"/>
 		public SynonymGraphTokenFilterDescriptor SynonymsPath(string path) => Assign(path, (a, v) => a.SynonymsPath = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Format"/>
 		public SynonymGraphTokenFilterDescriptor Format(SynonymFormat? format) => Assign(format, (a, v) => a.Format = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Synonyms"/>
 		public SynonymGraphTokenFilterDescriptor Synonyms(IEnumerable<string> synonymGraphs) => Assign(synonymGraphs, (a, v) => a.Synonyms = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Synonyms"/>
 		public SynonymGraphTokenFilterDescriptor Synonyms(params string[] synonymGraphs) => Assign(synonymGraphs, (a, v) => a.Synonyms = v);
+
+		/// <inheritdoc cref="ISynonymGraphTokenFilter.Updateable"/>
+		public SynonymGraphTokenFilterDescriptor Updateable(bool? updateable = true) => Assign(updateable, (a, v) => a.Updateable = v);
 	}
 }

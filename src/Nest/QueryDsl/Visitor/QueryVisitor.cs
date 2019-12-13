@@ -64,6 +64,8 @@
 
 		void Visit(IMatchAllQuery query);
 
+		void Visit(IMatchBoolPrefixQuery query);
+
 		void Visit(IMatchNoneQuery query);
 
 		void Visit(IMoreLikeThisQuery query);
@@ -212,6 +214,8 @@
 		public virtual void Visit(IMatchPhrasePrefixQuery query) { }
 
 		public virtual void Visit(IMatchAllQuery query) { }
+
+		public virtual void Visit(IMatchBoolPrefixQuery query) { }
 
 		public virtual void Visit(IMatchNoneQuery query) { }
 

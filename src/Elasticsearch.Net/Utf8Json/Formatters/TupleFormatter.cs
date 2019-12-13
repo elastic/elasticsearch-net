@@ -24,7 +24,6 @@
 
 
 using Elasticsearch.Net.Utf8Json.Internal;
-#if NETSTANDARD
 using System;
 // These all proxy to TupleFormatterHelper
 // ReSharper disable StaticMemberInGenericType
@@ -202,11 +201,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -253,11 +248,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -310,11 +301,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -373,11 +360,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -442,11 +425,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -517,11 +496,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -598,11 +573,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -685,11 +656,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-#if NETSTANDARD
 				dictionary.TryGetValue(keyString, out key);
-#else
-                dictionary.TryGetValueSafe(keyString, out key);
-#endif
 
 				switch (key)
 				{
@@ -728,4 +695,3 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	}
 
 }
-#endif
