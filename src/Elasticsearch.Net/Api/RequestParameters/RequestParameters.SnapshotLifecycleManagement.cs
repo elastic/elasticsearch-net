@@ -49,6 +49,7 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 	public class GetSnapshotLifecycleStatsRequestParameters : RequestParameters<GetSnapshotLifecycleStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</para></summary>
