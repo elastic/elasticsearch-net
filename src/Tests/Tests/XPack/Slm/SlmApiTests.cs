@@ -81,8 +81,8 @@ namespace Tests.XPack.Slm
 					)
 			},
 			{
-				GetSnapshotLifecycleStatusStep, u => u.Calls<GetSlmStatusDescriptor, GetSlmStatusRequest, IGetSlmStatusRequest, GetSlmStatusResponse>(
-					v => new GetSlmStatusRequest(),
+				GetSnapshotLifecycleStatusStep, u => u.Calls<GetSnapshotLifecycleManagementStatusDescriptor, GetSnapshotLifecycleManagementStatusRequest, IGetSnapshotLifecycleManagementStatusRequest, GetSnapshotLifecycleManagementStatusResponse>(
+					v => new GetSnapshotLifecycleManagementStatusRequest(),
 					(v, d) => d,
 					(v, c, f) => c.SnapshotLifecycleManagement.GetStatus(f),
 					(v, c, f) => c.SnapshotLifecycleManagement.GetStatusAsync(f),
@@ -128,8 +128,8 @@ namespace Tests.XPack.Slm
 					)
 			},
 			{
-				StopSnapshotLifecycleStep, u => u.Calls<StopSlmDescriptor, StopSlmRequest, IStopSlmRequest, StopSlmResponse>(
-					v => new StopSlmRequest(),
+				StopSnapshotLifecycleStep, u => u.Calls<StopSnapshotLifecycleManagementDescriptor, StopSnapshotLifecycleManagementRequest, IStopSnapshotLifecycleManagementRequest, StopSnapshotLifecycleManagementResponse>(
+					v => new StopSnapshotLifecycleManagementRequest(),
 					(v, d) => d,
 					(v, c, f) => c.SnapshotLifecycleManagement.Stop(f),
 					(v, c, f) => c.SnapshotLifecycleManagement.StopAsync(f),
@@ -188,14 +188,14 @@ namespace Tests.XPack.Slm
 			r.Policies.Should().NotBeNull().And.HaveCount(4).And.ContainKey(v);
 		});
 
-		[I] public async Task GetSnapshotLifecycleStatusResponse() => await Assert<GetSlmStatusResponse>(GetSnapshotLifecycleStatusStep, (v, r) =>
+		[I] public async Task GetSnapshotLifecycleStatusResponse() => await Assert<GetSnapshotLifecycleManagementStatusResponse>(GetSnapshotLifecycleStatusStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 			r.OperationMode.Should().Be(LifecycleOperationMode.Running);
 		});
 
-		[I] public async Task StopSnapshotLifecycleResponse() => await Assert<StopSlmResponse>(StopSnapshotLifecycleStep, (v, r) =>
+		[I] public async Task StopSnapshotLifecycleResponse() => await Assert<StopSnapshotLifecycleManagementResponse>(StopSnapshotLifecycleStep, (v, r) =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);

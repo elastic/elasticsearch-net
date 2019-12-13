@@ -95,7 +95,7 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
-	public partial class GetSlmStatusDescriptor : RequestDescriptorBase<GetSlmStatusDescriptor, GetSlmStatusRequestParameters, IGetSlmStatusRequest>, IGetSlmStatusRequest
+	public partial class GetSnapshotLifecycleManagementStatusDescriptor : RequestDescriptorBase<GetSnapshotLifecycleManagementStatusDescriptor, GetSnapshotLifecycleManagementStatusRequestParameters, IGetSnapshotLifecycleManagementStatusRequest>, IGetSnapshotLifecycleManagementStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
 	// values part of the url path
@@ -124,7 +124,7 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
-	public partial class StartSlmDescriptor : RequestDescriptorBase<StartSlmDescriptor, StartSlmRequestParameters, IStartSlmRequest>, IStartSlmRequest
+	public partial class StartSnapshotLifecycleManagementDescriptor : RequestDescriptorBase<StartSnapshotLifecycleManagementDescriptor, StartSnapshotLifecycleManagementRequestParameters, IStartSnapshotLifecycleManagementRequest>, IStartSnapshotLifecycleManagementRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
 	// values part of the url path
@@ -132,7 +132,7 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
-	public partial class StopSlmDescriptor : RequestDescriptorBase<StopSlmDescriptor, StopSlmRequestParameters, IStopSlmRequest>, IStopSlmRequest
+	public partial class StopSnapshotLifecycleManagementDescriptor : RequestDescriptorBase<StopSnapshotLifecycleManagementDescriptor, StopSnapshotLifecycleManagementRequestParameters, IStopSnapshotLifecycleManagementRequest>, IStopSnapshotLifecycleManagementRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;
 	// values part of the url path

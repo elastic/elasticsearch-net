@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class GetSlmStatusResponse : ResponseBase
+	public class GetSnapshotLifecycleManagementStatusResponse : ResponseBase
 	{
 		[DataMember(Name = "operation_mode")]
 		public LifecycleOperationMode OperationMode { get; internal set; }

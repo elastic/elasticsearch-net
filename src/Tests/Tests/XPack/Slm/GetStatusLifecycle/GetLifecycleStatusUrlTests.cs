@@ -11,8 +11,8 @@ namespace Tests.XPack.Slm.GetStatusLifecycle
 		[U] public override async Task Urls() =>
 			await GET("/_slm/status")
 				.Fluent(c => c.SnapshotLifecycleManagement.GetStatus())
-				.Request(c => c.SnapshotLifecycleManagement.GetStatus(new GetSlmStatusRequest()))
+				.Request(c => c.SnapshotLifecycleManagement.GetStatus(new GetSnapshotLifecycleManagementStatusRequest()))
 				.FluentAsync(c => c.SnapshotLifecycleManagement.GetStatusAsync())
-				.RequestAsync(c => c.SnapshotLifecycleManagement.GetStatusAsync(new GetSlmStatusRequest()));
+				.RequestAsync(c => c.SnapshotLifecycleManagement.GetStatusAsync(new GetSnapshotLifecycleManagementStatusRequest()));
 	}
 }

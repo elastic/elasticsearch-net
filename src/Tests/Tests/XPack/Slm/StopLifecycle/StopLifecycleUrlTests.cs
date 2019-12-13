@@ -11,8 +11,8 @@ namespace Tests.XPack.Slm.StopLifecycle
 		[U] public override async Task Urls() =>
 			await POST("/_slm/stop")
 				.Fluent(c => c.SnapshotLifecycleManagement.Stop())
-				.Request(c => c.SnapshotLifecycleManagement.Stop(new StopSlmRequest()))
+				.Request(c => c.SnapshotLifecycleManagement.Stop(new StopSnapshotLifecycleManagementRequest()))
 				.FluentAsync(c => c.SnapshotLifecycleManagement.StopAsync())
-				.RequestAsync(c => c.SnapshotLifecycleManagement.StopAsync(new StopSlmRequest()));
+				.RequestAsync(c => c.SnapshotLifecycleManagement.StopAsync(new StopSnapshotLifecycleManagementRequest()));
 	}
 }

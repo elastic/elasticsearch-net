@@ -130,14 +130,14 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IGetSlmStatusRequest : IRequest<GetSlmStatusRequestParameters>
+	public partial interface IGetSnapshotLifecycleManagementStatusRequest : IRequest<GetSnapshotLifecycleManagementStatusRequestParameters>
 	{
 	}
 
 	///<summary>Request for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
-	public partial class GetSlmStatusRequest : PlainRequestBase<GetSlmStatusRequestParameters>, IGetSlmStatusRequest
+	public partial class GetSnapshotLifecycleManagementStatusRequest : PlainRequestBase<GetSnapshotLifecycleManagementStatusRequestParameters>, IGetSnapshotLifecycleManagementStatusRequest
 	{
-		protected IGetSlmStatusRequest Self => this;
+		protected IGetSnapshotLifecycleManagementStatusRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
 	// values part of the url path
 	// Request parameters
@@ -177,28 +177,28 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IStartSlmRequest : IRequest<StartSlmRequestParameters>
+	public partial interface IStartSnapshotLifecycleManagementRequest : IRequest<StartSnapshotLifecycleManagementRequestParameters>
 	{
 	}
 
 	///<summary>Request for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
-	public partial class StartSlmRequest : PlainRequestBase<StartSlmRequestParameters>, IStartSlmRequest
+	public partial class StartSnapshotLifecycleManagementRequest : PlainRequestBase<StartSnapshotLifecycleManagementRequestParameters>, IStartSnapshotLifecycleManagementRequest
 	{
-		protected IStartSlmRequest Self => this;
+		protected IStartSnapshotLifecycleManagementRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
 	// values part of the url path
 	// Request parameters
 	}
 
 	[InterfaceDataContract]
-	public partial interface IStopSlmRequest : IRequest<StopSlmRequestParameters>
+	public partial interface IStopSnapshotLifecycleManagementRequest : IRequest<StopSnapshotLifecycleManagementRequestParameters>
 	{
 	}
 
 	///<summary>Request for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
-	public partial class StopSlmRequest : PlainRequestBase<StopSlmRequestParameters>, IStopSlmRequest
+	public partial class StopSnapshotLifecycleManagementRequest : PlainRequestBase<StopSnapshotLifecycleManagementRequestParameters>, IStopSnapshotLifecycleManagementRequest
 	{
-		protected IStopSlmRequest Self => this;
+		protected IStopSnapshotLifecycleManagementRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;
 	// values part of the url path
 	// Request parameters

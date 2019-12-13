@@ -11,8 +11,8 @@ namespace Tests.XPack.Slm.StartLifecycle
 		[U] public override async Task Urls() =>
 			await POST("/_slm/start")
 				.Fluent(c => c.SnapshotLifecycleManagement.Start())
-				.Request(c => c.SnapshotLifecycleManagement.Start(new StartSlmRequest()))
+				.Request(c => c.SnapshotLifecycleManagement.Start(new StartSnapshotLifecycleManagementRequest()))
 				.FluentAsync(c => c.SnapshotLifecycleManagement.StartAsync())
-				.RequestAsync(c => c.SnapshotLifecycleManagement.StartAsync(new StartSlmRequest()));
+				.RequestAsync(c => c.SnapshotLifecycleManagement.StartAsync(new StartSnapshotLifecycleManagementRequest()));
 	}
 }
