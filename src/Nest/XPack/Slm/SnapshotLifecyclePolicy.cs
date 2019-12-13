@@ -20,6 +20,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public CronExpression Schedule { get; set; }
+
+		/// <inheritdoc />
+		public ISnapshotRetentionConfiguration Retention { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -54,5 +57,13 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "schedule")]
 		CronExpression Schedule { get; set; }
+
+		/// <summary>
+		/// Automatic deletion of older snapshots is an optional feature of snapshot lifecycle management. Retention is run as a cluster level task
+		/// that is not associated with a particular policy’s schedule (though the configuration of which snapshots to keep is done on a
+		/// per-policy basis).
+		/// </summary>
+		[DataMember(Name = "retention")]
+		ISnapshotRetentionConfiguration Retention { get; set; }
 	}
 }
