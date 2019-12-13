@@ -286,9 +286,7 @@ namespace Elasticsearch.Net.Utf8Json
             }
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public void SkipWhiteSpace()
         {
             // eliminate array bound check
@@ -727,17 +725,13 @@ namespace Elasticsearch.Net.Utf8Json
             }
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         static int GetCodePoint(char a, char b, char c, char d)
         {
             return (((((ToNumber(a) * 16) + ToNumber(b)) * 16) + ToNumber(c)) * 16) + ToNumber(d);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         static int ToNumber(char x)
         {
             if ('0' <= x && x <= '9')
@@ -1006,9 +1000,7 @@ namespace Elasticsearch.Net.Utf8Json
             ReadNextCore(token);
         }
 
-#if NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         void ReadNextCore(JsonToken token)
         {
             switch (token)

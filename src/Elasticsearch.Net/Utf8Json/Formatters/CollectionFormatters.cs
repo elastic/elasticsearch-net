@@ -504,11 +504,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 				{
 					var keyString = reader.ReadPropertyNameSegmentRaw();
 					int key;
-#if NETSTANDARD
 					CollectionFormatterHelper.groupingAutomata.TryGetValue(keyString, out key);
-#else
-                    CollectionFormatterHelper.groupingAutomata.TryGetValueSafe(keyString, out key);
-#endif
 
 					switch (key)
 					{
@@ -832,7 +828,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	}
 
 
-#if NETSTANDARD
 
 	internal sealed class ObservableCollectionFormatter<T> : CollectionFormatterBase<T, ObservableCollection<T>>
 	{
@@ -968,9 +963,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			return stack;
 		}
 	}
-
-#endif
-
 
 	internal static class CollectionFormatterHelper
 	{

@@ -122,3 +122,5 @@ public class KerberosConnection : HttpConnection
 }
 ----
 
+See <<working-with-certificates, Working with certificates>> for further details.
+

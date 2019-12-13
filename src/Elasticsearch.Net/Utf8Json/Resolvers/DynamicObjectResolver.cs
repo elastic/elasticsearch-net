@@ -73,11 +73,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	}
 
 
-	internal sealed class CustomDynamicObjectResolver
-		: IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-			, ISave
-#endif
+	internal sealed class CustomDynamicObjectResolver : IJsonFormatterResolver
 	{
 		private readonly Func<MemberInfo, JsonProperty> _propertyMapper;
 		private readonly Lazy<Func<string, string>> _mutator;
@@ -101,13 +97,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			_excludeNull = excludeNull;
 		}
 
-#if DEBUG && (NET45 || NET47)
-		public AssemblyBuilder Save()
-		{
-			return assembly.Save();
-		}
-#endif
-
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			return (IJsonFormatter<T>)_formatters.GetOrAdd(typeof(T), type =>
@@ -115,19 +104,10 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		}
 	}
 
-#if DEBUG && (NET45 || NET47)
-    public interface ISave
-    {
-        AssemblyBuilder Save();
-    }
-#endif
 
 	#region DynamicAssembly
 
 	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal : IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-            , ISave
-#endif
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal();
@@ -146,13 +126,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 		}
 
-#if DEBUG && (NET45 || NET47)
-        public AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
-
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			return FormatterCache<T>.formatter;
@@ -170,9 +143,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	}
 
 	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase : IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-            , ISave
-#endif
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase();
@@ -191,13 +161,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 		}
 
-#if DEBUG && (NET45 || NET47)
-        public AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
-
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			return FormatterCache<T>.formatter;
@@ -215,9 +178,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	}
 
 	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase : IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-            , ISaveD
-#endif
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase();
@@ -236,13 +196,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 		}
 
-#if DEBUG && (NET45 || NET47)
-        public AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
-
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			return FormatterCache<T>.formatter;
@@ -260,9 +213,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	}
 
 	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal : IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-            , ISave
-#endif
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal();
@@ -281,13 +231,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 		}
 
-#if DEBUG && (NET45 || NET47)
-        public AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
-
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			return FormatterCache<T>.formatter;
@@ -305,9 +248,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	}
 
 	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase : IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-            , ISave
-#endif
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase();
@@ -326,13 +266,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 		}
 
-#if DEBUG && (NET45 || NET47)
-        public AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
-
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			return FormatterCache<T>.formatter;
@@ -350,9 +283,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	}
 
 	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase : IJsonFormatterResolver
-#if DEBUG && (NET45 || NET47)
-            , ISave
-#endif
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase();
@@ -370,13 +300,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase()
 		{
 		}
-
-#if DEBUG && (NET45 || NET47)
-        public AssemblyBuilder Save()
-        {
-            return assembly.Save();
-        }
-#endif
 
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
@@ -540,12 +463,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 	internal static class DynamicObjectTypeBuilder
 	{
-#if NETSTANDARD
 		static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
-#else
-        static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+");
-#endif
-
 
 		static int nameSequence;
 
@@ -1166,7 +1084,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				emitStringByteKeys();
 				il.EmitLdc_I4(index);
 				il.Emit(OpCodes.Ldelem_Ref);
-#if NETSTANDARD
 				// same as in constructor
 				byte[] rawField;
 				if (excludeNull || hasShouldSerialize)
@@ -1192,9 +1109,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				{
 					il.EmitCall(EmitInfo.UnsafeMemory_MemoryCopy);
 				}
-#else
-                il.EmitCall(EmitInfo.JsonWriter.WriteRaw);
-#endif
 
 				// EmitValue
 				EmitSerializeValue(typeInfo, item, il, index, tryEmitLoadCustomFormatter, argWriter, argValue, argResolver);
@@ -1680,9 +1594,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			public static readonly ConstructorInfo ObjectCtor = typeof(object).GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Length == 0);
 
 			public static readonly MethodInfo GetFormatterWithVerify = typeof(JsonFormatterResolverExtensions).GetRuntimeMethod("GetFormatterWithVerify", new[] { typeof(IJsonFormatterResolver) });
-#if NETSTANDARD
 			public static readonly MethodInfo UnsafeMemory_MemoryCopy = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer, byte[] src) => UnsafeMemory.MemoryCopy(ref writer, src));
-#endif
 			public static readonly ConstructorInfo InvalidOperationExceptionConstructor = typeof(System.InvalidOperationException).GetTypeInfo().DeclaredConstructors.First(x => { var p = x.GetParameters(); return p.Length == 1 && p[0].ParameterType == typeof(string); });
 			public static readonly MethodInfo GetTypeFromHandle = ExpressionUtility.GetMethodInfo(() => Type.GetTypeFromHandle(default(RuntimeTypeHandle)));
 

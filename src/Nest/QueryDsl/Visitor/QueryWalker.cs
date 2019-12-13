@@ -44,6 +44,7 @@ namespace Nest
 			VisitQuery(qd.Wildcard, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Match, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MatchPhrase, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.MatchBoolPrefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MatchPhrasePrefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Script, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.ScriptScore, visitor, (v, d) => v.Visit(d));

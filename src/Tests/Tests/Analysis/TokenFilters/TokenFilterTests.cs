@@ -689,7 +689,7 @@ namespace Tests.Analysis.TokenFilters
 		}
 
 		[SkipVersion("<6.4.0", "Lenient is an option introduced in 6.4.0")]
-		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymTests>
+		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymLenientTests>
 		{
 			private readonly string[] _synonyms = { "foo", "bar => baz" };
 
@@ -714,6 +714,32 @@ namespace Tests.Analysis.TokenFilters
 			};
 
 			public override string Name => "syn_lenient";
+		}
+
+		[SkipVersion("<7.3.0", "updateable introduced in 7.3.0")]
+		public class SynonymUpdateableTests : TokenFilterAssertionBase<SynonymTests>
+		{
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Synonym(n, t => t
+					.SynonymsPath("analysis/stopwords.txt")
+					.Updateable()
+				);
+
+			public override ITokenFilter Initializer =>
+				new SynonymTokenFilter
+				{
+					SynonymsPath = "analysis/stopwords.txt",
+					Updateable = true
+				};
+
+			public override object Json => new
+			{
+				type = "synonym",
+				synonyms_path = "analysis/stopwords.txt",
+				updateable = true
+			};
+
+			public override string Name => "syn_updateable";
 		}
 
 		public class SynonymGraphTests : TokenFilterAssertionBase<SynonymGraphTests>
@@ -748,6 +774,32 @@ namespace Tests.Analysis.TokenFilters
 			};
 
 			public override string Name => "syn_graph";
+		}
+
+		[SkipVersion("<7.3.0", "updateable introduced in 7.3.0")]
+		public class SynonymGraphUpdateableTests : TokenFilterAssertionBase<SynonymGraphUpdateableTests>
+		{
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.SynonymGraph(n, t => t
+					.SynonymsPath("analysis/stopwords.txt")
+					.Updateable()
+				);
+
+			public override ITokenFilter Initializer =>
+				new SynonymGraphTokenFilter
+				{
+					SynonymsPath = "analysis/stopwords.txt",
+					Updateable = true
+				};
+
+			public override object Json => new
+			{
+				type = "synonym_graph",
+				synonyms_path = "analysis/stopwords.txt",
+				updateable = true,
+			};
+
+			public override string Name => "syn_graph_updateable";
 		}
 
 		public class TrimTests : TokenFilterAssertionBase<TrimTests>

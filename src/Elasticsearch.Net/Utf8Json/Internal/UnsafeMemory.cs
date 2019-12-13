@@ -22,8 +22,6 @@
 // SOFTWARE.
 #endregion
 
-#if NETSTANDARD
-
 using System.Runtime.CompilerServices;
 
 namespace Elasticsearch.Net.Utf8Json.Internal
@@ -914,5 +912,3 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
     }
 }
-
-#endif

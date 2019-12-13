@@ -18,7 +18,7 @@ namespace Elasticsearch.Net
 			_fallbackFormatter = new DynamicObjectTypeFallbackFormatter(_innerFormatterResolver);
 		}
 
-		public static ElasticsearchNetFormatterResolver Instance => new ElasticsearchNetFormatterResolver();
+		public static ElasticsearchNetFormatterResolver Instance { get; } = new ElasticsearchNetFormatterResolver();
 
 		public IJsonFormatter<T> GetFormatter<T>() =>
 			typeof(T) == typeof(object)
