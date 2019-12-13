@@ -72,6 +72,14 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for ExecuteRetention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public partial class ExecuteRetentionDescriptor : RequestDescriptorBase<ExecuteRetentionDescriptor, ExecuteRetentionRequestParameters, IExecuteRetentionRequest>, IExecuteRetentionRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetention;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
 	public partial class GetSnapshotLifecycleDescriptor : RequestDescriptorBase<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequestParameters, IGetSnapshotLifecycleRequest>, IGetSnapshotLifecycleRequest
 	{
@@ -91,14 +99,6 @@ namespace Nest
 		Ids IGetSnapshotLifecycleRequest.PolicyId => Self.RouteValues.Get<Ids>("policy_id");
 		///<summary>Comma-separated list of snapshot lifecycle policies to retrieve</summary>
 		public GetSnapshotLifecycleDescriptor PolicyId(Ids policyId) => Assign(policyId, (a, v) => a.RouteValues.Optional("policy_id", v));
-	// Request parameters
-	}
-
-	///<summary>Descriptor for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
-	public partial class GetSnapshotLifecycleStatsDescriptor : RequestDescriptorBase<GetSnapshotLifecycleStatsDescriptor, GetSnapshotLifecycleStatsRequestParameters, IGetSnapshotLifecycleStatsRequest>, IGetSnapshotLifecycleStatsRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetSnapshotLifecycleStats;
-	// values part of the url path
 	// Request parameters
 	}
 

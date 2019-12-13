@@ -98,6 +98,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IExecuteRetentionRequest : IRequest<ExecuteRetentionRequestParameters>
+	{
+	}
+
+	///<summary>Request for ExecuteRetention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public partial class ExecuteRetentionRequest : PlainRequestBase<ExecuteRetentionRequestParameters>, IExecuteRetentionRequest
+	{
+		protected IExecuteRetentionRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetention;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IGetSnapshotLifecycleRequest : IRequest<GetSnapshotLifecycleRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -126,20 +140,6 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Ids IGetSnapshotLifecycleRequest.PolicyId => Self.RouteValues.Get<Ids>("policy_id");
-	// Request parameters
-	}
-
-	[InterfaceDataContract]
-	public partial interface IGetSnapshotLifecycleStatsRequest : IRequest<GetSnapshotLifecycleStatsRequestParameters>
-	{
-	}
-
-	///<summary>Request for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
-	public partial class GetSnapshotLifecycleStatsRequest : PlainRequestBase<GetSnapshotLifecycleStatsRequestParameters>, IGetSnapshotLifecycleStatsRequest
-	{
-		protected IGetSnapshotLifecycleStatsRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetSnapshotLifecycleStats;
-	// values part of the url path
 	// Request parameters
 	}
 

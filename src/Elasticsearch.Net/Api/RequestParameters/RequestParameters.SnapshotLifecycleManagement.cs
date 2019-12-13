@@ -33,17 +33,17 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 	///<summary>Request options for ExecuteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
 	public class ExecuteSnapshotLifecycleRequestParameters : RequestParameters<ExecuteSnapshotLifecycleRequestParameters>
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+
+	///<summary>Request options for ExecuteRetention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public class ExecuteRetentionRequestParameters : RequestParameters<ExecuteRetentionRequestParameters>
+	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
 	///<summary>Request options for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
 	public class GetSnapshotLifecycleRequestParameters : RequestParameters<GetSnapshotLifecycleRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-
-	///<summary>Request options for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
-	public class GetSnapshotLifecycleStatsRequestParameters : RequestParameters<GetSnapshotLifecycleStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
