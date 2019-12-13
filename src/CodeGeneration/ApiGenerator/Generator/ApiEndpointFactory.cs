@@ -94,8 +94,13 @@ namespace ApiGenerator.Generator
 
 			if (pathsOverride != null) original.SelectToken("*.url.paths").Replace(pathsOverride);
 
-			var paramsOverride = patchedJson.SelectToken("*.params");
+			var methodsOverride = patchedJson.SelectToken("*.methods");
+			if (methodsOverride != null)
+			{
+				original.SelectToken("*.methods").Replace(methodsOverride);
+			}
 
+			var paramsOverride = patchedJson.SelectToken("*.params");
 			var originalParams = original.SelectToken("*.url.params") as JObject;
 			originalParams?.Merge(paramsOverride, new JsonMergeSettings
 			{
