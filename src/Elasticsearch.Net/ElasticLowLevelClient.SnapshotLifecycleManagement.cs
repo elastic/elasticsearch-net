@@ -54,17 +54,17 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 		[MapsApi("slm.delete_lifecycle", "policy_id")]
 		public Task<TResponse> DeleteSnapshotLifecycleAsync<TResponse>(string policyId, DeleteSnapshotLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_slm/policy/{policyId:policyId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_slm/policy/{policy_id}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
+		///<summary>POST on /_slm/policy/{policy_id}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
 		///<param name = "policyId">The id of the snapshot lifecycle policy to be executed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ExecuteSnapshotLifecycle<TResponse>(string policyId, ExecuteSnapshotLifecycleRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_slm/policy/{policyId:policyId}/_execute"), null, RequestParams(requestParameters));
-		///<summary>PUT on /_slm/policy/{policy_id}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_slm/policy/{policyId:policyId}/_execute"), null, RequestParams(requestParameters));
+		///<summary>POST on /_slm/policy/{policy_id}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
 		///<param name = "policyId">The id of the snapshot lifecycle policy to be executed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("slm.execute_lifecycle", "policy_id")]
 		public Task<TResponse> ExecuteSnapshotLifecycleAsync<TResponse>(string policyId, ExecuteSnapshotLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_slm/policy/{policyId:policyId}/_execute"), ctx, null, RequestParams(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_slm/policy/{policyId:policyId}/_execute"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_slm/_execute_retention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ExecuteRetention<TResponse>(ExecuteRetentionRequestParameters requestParameters = null)
@@ -94,6 +94,15 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 		[MapsApi("slm.get_lifecycle", "")]
 		public Task<TResponse> GetSnapshotLifecycleAsync<TResponse>(GetSnapshotLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_slm/policy", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_slm/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetSnapshotLifecycleStats<TResponse>(GetSnapshotLifecycleStatsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_slm/stats", null, RequestParams(requestParameters));
+		///<summary>GET on /_slm/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("slm.get_stats", "")]
+		public Task<TResponse> GetSnapshotLifecycleStatsAsync<TResponse>(GetSnapshotLifecycleStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_slm/stats", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_slm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetStatus<TResponse>(GetSnapshotLifecycleManagementStatusRequestParameters requestParameters = null)
