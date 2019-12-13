@@ -21,7 +21,7 @@ namespace Tests.XPack.Slm
 		private const string GetSnapshotLifecycleStep = nameof(GetSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleAfterExecuteStep = nameof(GetSnapshotLifecycleAfterExecuteStep);
 		private const string PutSnapshotLifecycleStep = nameof(PutSnapshotLifecycleStep);
-
+		private const string GetSnapshotLifecycleStats = nameof(GetSnapshotLifecycleStats);
 
 		public SlmApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -117,6 +117,17 @@ namespace Tests.XPack.Slm
 					)
 			},
 			{
+				GetSnapshotLifecycleStats, u =>
+					u.Calls<GetSnapshotLifecycleStatsDescriptor, GetSnapshotLifecycleStatsRequest, IGetSnapshotLifecycleStatsRequest, GetSnapshotLifecycleStatsResponse>(
+						v => new GetSnapshotLifecycleStatsRequest(),
+						(v, d) => d,
+						(v, c, f) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleStats(f),
+						(v, c, f) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleStatsAsync(f),
+						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleStats(r),
+						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleStatsAsync(r)
+					)
+			},
+			{
 				DeleteSnapshotLifecycleStep, u =>
 					u.Calls<DeleteSnapshotLifecycleDescriptor, DeleteSnapshotLifecycleRequest, IDeleteSnapshotLifecycleRequest,
 						DeleteSnapshotLifecycleResponse>(
@@ -197,6 +208,12 @@ namespace Tests.XPack.Slm
 			{
 				r.IsValid.Should().BeTrue();
 				r.Acknowledged.Should().BeTrue();
+			});
+
+		[I] public async Task GetSnapshotLifecycleStatsResponse() => await Assert<GetSnapshotLifecycleStatsResponse>(GetSnapshotLifecycleStats,
+			(v, r) =>
+			{
+				r.IsValid.Should().BeTrue();
 			});
 	}
 }

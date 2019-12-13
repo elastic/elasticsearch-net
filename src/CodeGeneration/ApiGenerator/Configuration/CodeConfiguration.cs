@@ -63,7 +63,6 @@ namespace ApiGenerator.Configuration
 			"enrich.put_policy.json",
 			"enrich.stats.json",
 			"slm.execute_retention.json",
-			"slm.get_stats.json",
 			"transform.delete_transform.json",
 			"transform.get_transform.json",
 			"transform.get_transform_stats.json",
