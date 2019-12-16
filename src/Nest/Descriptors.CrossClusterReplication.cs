@@ -201,10 +201,7 @@ namespace Nest
 
 		// values part of the url path
 		Name IPauseAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement PauseAutoFollowPatternDescriptor and PauseAutoFollowPatternRequest in a file called PauseAutoFollowPatternRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// Request parameters
 	}
 
 	///<summary>Descriptor for PauseFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
@@ -272,10 +269,7 @@ namespace Nest
 
 		// values part of the url path
 		Name IResumeAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement ResumeAutoFollowPatternDescriptor and ResumeAutoFollowPatternRequest in a file called ResumeAutoFollowPatternRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// Request parameters
 	}
 
 	///<summary>Descriptor for ResumeFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>

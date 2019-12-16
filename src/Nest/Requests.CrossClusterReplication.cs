@@ -267,10 +267,7 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Name IPauseAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement PauseAutoFollowPatternDescriptor and PauseAutoFollowPatternRequest in a file called PauseAutoFollowPatternRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// Request parameters
 	}
 
 	[InterfaceDataContract]
@@ -369,10 +366,7 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Name IResumeAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement ResumeAutoFollowPatternDescriptor and ResumeAutoFollowPatternRequest in a file called ResumeAutoFollowPatternRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
+	// Request parameters
 	}
 
 	[InterfaceDataContract]
