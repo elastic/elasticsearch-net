@@ -69,6 +69,12 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
+	///<summary>Request options for PauseAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</para></summary>
+	public class PauseAutoFollowPatternRequestParameters : RequestParameters<PauseAutoFollowPatternRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
 	///<summary>Request options for PauseFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 	public class PauseFollowIndexRequestParameters : RequestParameters<PauseFollowIndexRequestParameters>
 	{
@@ -79,6 +85,12 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 	public class CreateAutoFollowPatternRequestParameters : RequestParameters<CreateAutoFollowPatternRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+
+	///<summary>Request options for ResumeAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</para></summary>
+	public class ResumeAutoFollowPatternRequestParameters : RequestParameters<ResumeAutoFollowPatternRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
 	///<summary>Request options for ResumeFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
