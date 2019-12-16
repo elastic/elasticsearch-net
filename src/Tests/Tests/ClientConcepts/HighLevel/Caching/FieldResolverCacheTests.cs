@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Microsoft.FSharp.Core;
 using Nest;
 using Tests.Domain;
 using Xunit.Abstractions;
@@ -532,6 +535,117 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 				public override string ToString() =>
 					$"First hit for {Name} took {FirstHit}ms, Cached hit took {CachedHit}ms ({FirstHit / CachedHit}x faster).";
+			}
+		}
+
+		public class ExpressionExtensions
+		{
+			private class Doc
+			{
+				public string Prop { get; set; }
+			}
+
+			private readonly FieldInfo _propertyNameComparisonField;
+			private readonly FieldInfo _propertyNameTypeField;
+			private FieldInfo _fieldComparisonField;
+			private FieldInfo _fieldTypeField;
+
+			public ExpressionExtensions()
+			{
+				_propertyNameComparisonField = typeof(PropertyName).GetField("_comparisonValue", BindingFlags.Instance | BindingFlags.NonPublic);
+				_propertyNameTypeField = typeof(PropertyName).GetField("_type", BindingFlags.Instance | BindingFlags.NonPublic);
+				_fieldComparisonField = typeof(Field).GetField("_comparisonValue", BindingFlags.Instance | BindingFlags.NonPublic);
+				_fieldTypeField = typeof(Field).GetField("_type", BindingFlags.Instance | BindingFlags.NonPublic);
+			}
+
+			[U]
+			public void CanCacheLambdaExpressionPropertyName()
+			{
+				Expression<Func<Doc, string>> expression = d => d.Prop;
+
+				var property = new PropertyName(expression);
+				property.CacheableExpression.Should().BeTrue();
+
+				var value = _propertyNameComparisonField.GetValue(property);
+				value.Should().BeOfType<string>().And.Be(nameof(Doc.Prop));
+				_propertyNameTypeField.GetValue(property).Should().Be(typeof(Doc));
+			}
+
+			[U]
+			public void CanCacheMemberExpressionPropertyName()
+			{
+				var parameterExpression = Expression.Parameter(typeof(Doc), "x");
+				var expression = Expression.Property(parameterExpression, typeof(Doc).GetProperty(nameof(Doc.Prop)));
+
+				var property = new PropertyName(expression);
+				property.CacheableExpression.Should().BeTrue();
+
+				var value = _propertyNameComparisonField.GetValue(property);
+				value.Should().BeOfType<string>().And.Be(nameof(Doc.Prop));
+				_propertyNameTypeField.GetValue(property).Should().Be(typeof(Doc));
+			}
+
+			[U]
+			public void CanCacheFSharpFuncMethodCallExpressionPropertyName()
+			{
+				Expression<Func<Doc, string>> lambdaExpression = d => d.Prop;
+				var expression = Expression.Call(
+					typeof(FuncConvert),
+					"ToFSharpFunc",
+					new[] { typeof(Doc), typeof(string) },
+					lambdaExpression);
+
+				var property = new PropertyName(expression);
+				property.CacheableExpression.Should().BeTrue();
+
+				var value = _propertyNameComparisonField.GetValue(property);
+				value.Should().BeOfType<string>().And.Be(nameof(Doc.Prop));
+				_propertyNameTypeField.GetValue(property).Should().Be(typeof(Doc));
+			}
+
+			[U]
+			public void CanCacheLambdaExpressionField()
+			{
+				Expression<Func<Doc, string>> expression = d => d.Prop;
+
+				var field = new Field(expression);
+				field.CachableExpression.Should().BeTrue();
+
+				var value = _fieldComparisonField.GetValue(field);
+				value.Should().BeOfType<string>().And.Be(nameof(Doc.Prop));
+				_fieldTypeField.GetValue(field).Should().Be(typeof(Doc));
+			}
+
+			[U]
+			public void CanCacheMemberExpressionField()
+			{
+				var parameterExpression = Expression.Parameter(typeof(Doc), "x");
+				var expression = Expression.Property(parameterExpression, typeof(Doc).GetProperty(nameof(Doc.Prop)));
+
+				var field = new Field(expression);
+				field.CachableExpression.Should().BeTrue();
+
+				var value = _fieldComparisonField.GetValue(field);
+				value.Should().BeOfType<string>().And.Be(nameof(Doc.Prop));
+				_fieldTypeField.GetValue(field).Should().Be(typeof(Doc));
+			}
+
+			[U]
+			public void CanCacheFSharpFuncMethodCallExpressionField()
+			{
+				Expression<Func<Doc, string>> lambdaExpression = d => d.Prop;
+				var expression = Expression.Call(
+					typeof(FuncConvert),
+					"ToFSharpFunc",
+					new[] { typeof(Doc), typeof(string) },
+					lambdaExpression);
+
+				var field = new Field(expression);
+				field.CachableExpression.Should().BeTrue();
+
+				var value = _fieldComparisonField.GetValue(field);
+				value.Should().BeOfType<string>().And.Be(nameof(Doc.Prop));
+				_fieldTypeField.GetValue(field).Should().Be(typeof(Doc));
 			}
 		}
 	}
