@@ -26,6 +26,7 @@ using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
+using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;

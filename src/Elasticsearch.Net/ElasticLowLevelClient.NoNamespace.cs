@@ -26,6 +26,7 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
+using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -66,6 +67,12 @@ namespace Elasticsearch.Net
 		}
 
 		public LowLevelCrossClusterReplicationNamespace CrossClusterReplication
+		{
+			get;
+			private set;
+		}
+
+		public LowLevelEnrichNamespace Enrich
 		{
 			get;
 			private set;
@@ -172,6 +179,7 @@ namespace Elasticsearch.Net
 			Cat = new LowLevelCatNamespace(this);
 			Cluster = new LowLevelClusterNamespace(this);
 			CrossClusterReplication = new LowLevelCrossClusterReplicationNamespace(this);
+			Enrich = new LowLevelEnrichNamespace(this);
 			Graph = new LowLevelGraphNamespace(this);
 			IndexLifecycleManagement = new LowLevelIndexLifecycleManagementNamespace(this);
 			Indices = new LowLevelIndicesNamespace(this);

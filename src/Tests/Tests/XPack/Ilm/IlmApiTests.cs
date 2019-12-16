@@ -29,8 +29,8 @@ namespace Tests.XPack.Ilm
 		{
 			{
 				PutDocumentStep, u => u.Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest<Project>, IndexResponse>(
-					v => new IndexRequest<Project>(Document),
-					(v, d) => d,
+					v => new IndexRequest<Project>(Document) { Routing = Document.Name },
+					(v, d) => d.Routing(Document.Name),
 					(v, c, f) => c.Index(Document, f),
 					(v, c, f) => c.IndexAsync(Document, f),
 					(v, c, r) => c.Index(r),
