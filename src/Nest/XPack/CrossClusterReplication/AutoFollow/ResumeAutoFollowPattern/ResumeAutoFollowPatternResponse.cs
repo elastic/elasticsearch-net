@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class ResumeAutoFollowPatternResponse : ResponseBase
+	public class ResumeAutoFollowPatternResponse : AcknowledgedResponseBase
 	{
 	}
 }
