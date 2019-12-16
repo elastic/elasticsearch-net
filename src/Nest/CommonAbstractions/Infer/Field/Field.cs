@@ -56,6 +56,7 @@ namespace Nest
 		/// </remarks>
 		public string Format { get; set; }
 
+		// TODO: Rename to CacheableExpression in 8.0.0
 		public bool CachableExpression { get; }
 
 		/// <summary>
