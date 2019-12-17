@@ -106,6 +106,13 @@ namespace Nest
 		/// The special pipeline name _none indicates no ingest pipeline should be run.`
 		/// </summary>
 		string DefaultPipeline { get; set; }
+
+		/// <summary>
+		/// The required ingest node pipeline for this index. Index requests will fail if the required pipeline is set and the pipeline
+		/// does not exist. The required pipeline can not be overridden with the pipeline parameter. A default pipeline and a required pipeline
+		/// can not both be set. The special pipeline name _none indicates no ingest pipeline will run.
+		/// </summary>
+		string RequiredPipeline { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -179,6 +186,9 @@ namespace Nest
 		/// <inheritdoc cref="IDynamicIndexSettings.DefaultPipeline" />
 		public string DefaultPipeline { get; set; }
 
+		/// <inheritdoc cref="IDynamicIndexSettings.RequiredPipeline" />
+		public string RequiredPipeline { get; set; }
+
 		/// <summary> Add any setting to the index </summary>
 		public void Add(string setting, object value) => BackingDictionary[setting] = value;
 	}
@@ -212,6 +222,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IDynamicIndexSettings.DefaultPipeline" />
 		public TDescriptor DefaultPipeline(string defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipeline = v);
+
+		/// <inheritdoc cref="IDynamicIndexSettings.RequiredPipeline" />
+		public TDescriptor RequiredPipeline(string requiredPipeline) => Assign(requiredPipeline, (a, v) => a.RequiredPipeline = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksMetadata" />
 		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadata = v);
