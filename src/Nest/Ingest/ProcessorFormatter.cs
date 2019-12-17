@@ -40,6 +40,7 @@ namespace Nest
 			{ "pipeline", 28 },
 			{ "drop", 29 },
 			{ "circle", 30 },
+			{ "enrich", 31 },
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -153,6 +154,9 @@ namespace Nest
 					case 30:
 						processor = Deserialize<CircleProcessor>(ref reader, formatterResolver);
 						break;
+					case 31:
+						processor = Deserialize<EnrichProcessor>(ref reader, formatterResolver);
+						break;
 				}
 			}
 			else
@@ -191,6 +195,9 @@ namespace Nest
 					break;
 				case "dot_expander":
 					Serialize<IDotExpanderProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "enrich":
+					Serialize<IEnrichProcessor>(ref writer, value, formatterResolver);
 					break;
 				case "fail":
 					Serialize<IFailProcessor>(ref writer, value, formatterResolver);

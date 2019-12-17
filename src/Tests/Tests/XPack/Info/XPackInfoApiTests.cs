@@ -66,8 +66,18 @@ namespace Tests.XPack.Info
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
 				r.Features.Flattened.Should().NotBeNull();
-				r.Features.DataFrame.Should().NotBeNull();
 				r.Features.Vectors.Should().NotBeNull();
+
+				if (TestConfiguration.Instance.InRange("<7.5.0"))
+#pragma warning disable 618
+					r.Features.DataFrame.Should().NotBeNull();
+#pragma warning restore 618
+			}
+
+			if (TestConfiguration.Instance.InRange(">=7.5.0"))
+			{
+				r.Features.Enrich.Should().NotBeNull();
+				r.Features.Transform.Should().NotBeNull();
 			}
 		});
 
@@ -100,9 +110,18 @@ namespace Tests.XPack.Info
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
 				r.Flattened.Should().NotBeNull();
-				r.DataFrame.Should().NotBeNull();
 				r.Vectors.Should().NotBeNull();
 				r.VotingOnly.Should().NotBeNull();
+
+				if (TestConfiguration.Instance.InRange("<7.5.0"))
+#pragma warning disable 618
+					r.DataFrame.Should().NotBeNull();
+#pragma warning restore 618
+			}
+
+			if (TestConfiguration.Instance.InRange(">=7.5.0"))
+			{
+				r.Enrich.Should().NotBeNull();
 			}
 		});
 	}
