@@ -200,11 +200,8 @@ var tweet = response.Source; // the original document
 NEST exposes a fluent interface and a [powerful query DSL](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/query-dsl.html)
 
 ```csharp
-// define your DefaultIndex this way to make it work perfect:
-var settings = new ConnectionSettings(node).DefaultIndex("mytweetindex");
-```
-```csharp
 var response = client.Search<Tweet>(s => s
+    .Index("mytweetindex") //or specify index via settings.DefaultIndex("mytweetindex");
     .From(0)
     .Size(10)
     .Query(q => q
@@ -219,6 +216,7 @@ As well as an object initializer syntax if lambdas aren't your thing:
 ```csharp
 var request = new SearchRequest
 {
+    Index = "mytweetindex", //or specify index via settings.DefaultIndex("mytweetindex"),
     From = 0,
     Size = 10,
     Query = new TermQuery { Field = "user", Value = "kimchy" } || 
