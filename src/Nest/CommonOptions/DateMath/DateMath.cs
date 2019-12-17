@@ -83,7 +83,7 @@ namespace Nest
 
 		internal static bool IsValidDateMathString(string dateMath) => dateMath != null && DateMathRegex.IsMatch(dateMath);
 
-		internal bool IsValid => Self.Anchor.Match(d => d != default, s => !s.IsNullOrEmpty());
+		internal bool IsValid => Self.Anchor.Match(_ => true, s => !s.IsNullOrEmpty());
 
 		public override string ToString()
 		{
