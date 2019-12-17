@@ -22,6 +22,7 @@ using Nest;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
+using Nest.Specification.EnrichApi;
 using Nest.Specification.GraphApi;
 using Nest.Specification.IndexLifecycleManagementApi;
 using Nest.Specification.IndicesApi;
@@ -63,6 +64,13 @@ namespace Nest
 
 		///<summary>Cross Cluster Replication APIs</summary>
 		public CrossClusterReplicationNamespace CrossClusterReplication
+		{
+			get;
+			private set;
+		}
+
+		///<summary>Enrich APIs</summary>
+		public EnrichNamespace Enrich
 		{
 			get;
 			private set;
@@ -185,6 +193,7 @@ namespace Nest
 			Cat = new CatNamespace(this);
 			Cluster = new ClusterNamespace(this);
 			CrossClusterReplication = new CrossClusterReplicationNamespace(this);
+			Enrich = new EnrichNamespace(this);
 			Graph = new GraphNamespace(this);
 			IndexLifecycleManagement = new IndexLifecycleManagementNamespace(this);
 			Indices = new IndicesNamespace(this);

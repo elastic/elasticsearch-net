@@ -125,6 +125,33 @@ namespace Tests.Ingest
 			public override string Key => "date";
 		}
 
+		[SkipVersion("<7.5.0", "Introduced in 7.5.0")]
+		public class Enrich : ProcessorAssertion
+		{
+			public static string PolicyName = "enrich_processor_policy";
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Enrich<Project>(f => f
+				.PolicyName(PolicyName)
+				.Field(f => f.Name)
+				.TargetField("target_field")
+			);
+
+			public override IProcessor Initializer => new EnrichProcessor
+			{
+				PolicyName = PolicyName,
+				Field = Infer.Field<Project>(f => f.Name),
+				TargetField = "target_field"
+			};
+
+			public override object Json => new
+			{
+				policy_name = PolicyName,
+				field = "name",
+				target_field = "target_field"
+			};
+			public override string Key => "enrich";
+		}
+
 		public class Fail : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Fail(f => f.Message("an error message"));

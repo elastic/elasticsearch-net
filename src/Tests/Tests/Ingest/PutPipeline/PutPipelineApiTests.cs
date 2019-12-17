@@ -2,7 +2,10 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
@@ -22,6 +25,31 @@ namespace Tests.Ingest.PutPipeline
 			description = "My test pipeline",
 			processors = ProcessorAssertions.AllAsJson
 		};
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			if (TestConfiguration.Instance.InRange(">=7.5.0"))
+			{
+				var putPolicyResponse = client.Enrich.PutPolicy<Project>(ProcessorAssertions.Enrich.PolicyName, p => p
+					.Match(m => m
+						.Indices(typeof(Project))
+						.MatchField(f => f.Name)
+						.EnrichFields(f => f
+							.Field(ff => ff.Description)
+							.Field(ff => ff.Tags)
+						)
+					)
+				);
+
+				if (!putPolicyResponse.IsValid)
+					throw new Exception($"Failure setting up integration test: {putPolicyResponse.DebugInformation}");
+
+				var executePolicyResponse = client.Enrich.ExecutePolicy(ProcessorAssertions.Enrich.PolicyName);
+
+				if (!executePolicyResponse.IsValid)
+					throw new Exception($"Failure setting up integration test: {executePolicyResponse.DebugInformation}");
+			}
+		}
 
 		protected override int ExpectStatusCode => 200;
 

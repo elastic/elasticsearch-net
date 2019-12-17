@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
@@ -46,6 +47,7 @@ namespace Nest
 		[DataMember(Name = "rollup")]
 		public XPackUsage Rollup { get; internal set; }
 
+		[Obsolete("Changed to Transform in 7.5.0")]
 		[DataMember(Name = "data_frame")]
 		public XPackUsage DataFrame { get; internal set; }
 
@@ -79,6 +81,9 @@ namespace Nest
 		[DataMember(Name = "security")]
 		public SecurityUsage Security { get; internal set; }
 
+		[DataMember(Name = "transform")]
+		public XPackUsage Transform { get; internal set; }
+
 		[DataMember(Name = "vectors")]
 		public VectorUsage Vectors { get; internal set; }
 
@@ -87,6 +92,9 @@ namespace Nest
 
 		[DataMember(Name = "slm")]
 		public SlmUsage SnapshotLifecycleManagement { get; internal set; }
+
+		[DataMember(Name = "enrich")]
+		public XPackUsage Enrich { get; set; }
 	}
 
 	public class SlmUsage : XPackUsage

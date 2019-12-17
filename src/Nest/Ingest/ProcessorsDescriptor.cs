@@ -18,12 +18,15 @@ namespace Nest
 		public ProcessorsDescriptor Attachment<T>(Func<AttachmentProcessorDescriptor<T>, IAttachmentProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new AttachmentProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IAppendProcessor"/>
 		public ProcessorsDescriptor Append<T>(Func<AppendProcessorDescriptor<T>, IAppendProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new AppendProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IConvertProcessor"/>
 		public ProcessorsDescriptor Convert<T>(Func<ConvertProcessorDescriptor<T>, IConvertProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new ConvertProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IDateProcessor"/>
 		public ProcessorsDescriptor Date<T>(Func<DateProcessorDescriptor<T>, IDateProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new DateProcessorDescriptor<T>())));
 
@@ -42,6 +45,11 @@ namespace Nest
 		public ProcessorsDescriptor DotExpander<T>(Func<DotExpanderProcessorDescriptor<T>, IDotExpanderProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new DotExpanderProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IEnrichProcessor"/>
+		public ProcessorsDescriptor Enrich<T>(Func<EnrichProcessorDescriptor<T>, IEnrichProcessor> selector) where T : class =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new EnrichProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IFailProcessor"/>
 		public ProcessorsDescriptor Fail(Func<FailProcessorDescriptor, IFailProcessor> selector) =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new FailProcessorDescriptor())));
 
@@ -66,16 +74,19 @@ namespace Nest
 		public ProcessorsDescriptor Gsub<T>(Func<GsubProcessorDescriptor<T>, IGsubProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new GsubProcessorDescriptor<T>())));
 
-
+		/// <inheritdoc cref="IJoinProcessor"/>
 		public ProcessorsDescriptor Join<T>(Func<JoinProcessorDescriptor<T>, IJoinProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new JoinProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="ILowercaseProcessor"/>
 		public ProcessorsDescriptor Lowercase<T>(Func<LowercaseProcessorDescriptor<T>, ILowercaseProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new LowercaseProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IRemoveProcessor"/>
 		public ProcessorsDescriptor Remove<T>(Func<RemoveProcessorDescriptor<T>, IRemoveProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new RemoveProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IRenameProcessor"/>
 		public ProcessorsDescriptor Rename<T>(Func<RenameProcessorDescriptor<T>, IRenameProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new RenameProcessorDescriptor<T>())));
 
@@ -96,13 +107,15 @@ namespace Nest
 		public ProcessorsDescriptor Sort<T>(Func<SortProcessorDescriptor<T>, ISortProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new SortProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="ISplitProcessor"/>
 		public ProcessorsDescriptor Split<T>(Func<SplitProcessorDescriptor<T>, ISplitProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new SplitProcessorDescriptor<T>())));
 
-
+		/// <inheritdoc cref="ITrimProcessor"/>
 		public ProcessorsDescriptor Trim<T>(Func<TrimProcessorDescriptor<T>, ITrimProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new TrimProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IUppercaseProcessor"/>
 		public ProcessorsDescriptor Uppercase<T>(Func<UppercaseProcessorDescriptor<T>, IUppercaseProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new UppercaseProcessorDescriptor<T>())));
 
@@ -128,9 +141,7 @@ namespace Nest
 		public ProcessorsDescriptor Kv<T>(Func<KeyValueProcessorDescriptor<T>, IKeyValueProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new KeyValueProcessorDescriptor<T>())));
 
-		/// <summary>
-		/// URL-decodes a string
-		/// </summary>
+		/// <inheritdoc cref="IUrlDecodeProcessor"/>
 		public ProcessorsDescriptor UrlDecode<T>(Func<UrlDecodeProcessorDescriptor<T>, IUrlDecodeProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new UrlDecodeProcessorDescriptor<T>())));
 

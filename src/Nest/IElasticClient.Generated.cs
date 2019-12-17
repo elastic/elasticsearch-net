@@ -24,6 +24,7 @@ using Nest;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
+using Nest.Specification.EnrichApi;
 using Nest.Specification.GraphApi;
 using Nest.Specification.IndexLifecycleManagementApi;
 using Nest.Specification.IndicesApi;
@@ -62,6 +63,12 @@ namespace Nest
 
 		///<summary>Cross Cluster Replication APIs</summary>
 		CrossClusterReplicationNamespace CrossClusterReplication
+		{
+			get;
+		}
+
+		///<summary>Enrich APIs</summary>
+		EnrichNamespace Enrich
 		{
 			get;
 		}
