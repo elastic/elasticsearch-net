@@ -28,7 +28,7 @@ namespace Tests.Aggregations.Bucket.Composite
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-composite-aggregation.html[Composite Aggregation].
 	*/
-	[SkipVersion("<6.1.0", "Composite Aggregation is only available in Elasticsearch 6.1.0+")]
+	[SkipVersion("<7.5.0", "Geo tile grid composite agg added in 7.5.0, rest available in 6.1.0+")]
 	public class CompositeAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public CompositeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -73,6 +73,17 @@ namespace Tests.Aggregations.Bucket.Composite
 								}
 							}
 						},
+						new
+						{
+							geo = new
+							{
+								geotile_grid = new
+								{
+									field = "locationPoint",
+									precision = 12
+								}
+							}
+						},
 					}
 				},
 				aggs = new
@@ -109,6 +120,10 @@ namespace Tests.Aggregations.Bucket.Composite
 						.Field(f => f.RequiredBranches)
 						.Interval(1)
 					)
+					.GeoTileGrid("geo", h => h
+						.Field(f => f.LocationPoint)
+						.Precision(GeoTilePrecision.Precision12)
+					)
 				)
 				.Aggregations(childAggs => childAggs
 					.Nested("project_tags", n => n
@@ -138,6 +153,11 @@ namespace Tests.Aggregations.Bucket.Composite
 					{
 						Field = Field<Project>(f => f.RequiredBranches),
 						Interval = 1
+					},
+					new GeoTileGridCompositeAggregationSource("geo")
+					{
+						Field = Field<Project>(f => f.LocationPoint),
+						Precision = GeoTilePrecision.Precision12
 					}
 				},
 				Aggregations = new NestedAggregation("project_tags")
@@ -164,8 +184,8 @@ namespace Tests.Aggregations.Bucket.Composite
 			composite.AfterKey.Should().NotBeNull();
 			if (TestConfiguration.Instance.InRange(">=6.3.0"))
 				composite.AfterKey.Should()
-					.HaveCount(3)
-					.And.ContainKeys("branches", "started", "branch_count");
+					.HaveCount(4)
+					.And.ContainKeys("branches", "started", "branch_count", "geo");
 			foreach (var item in composite.Buckets)
 			{
 				var key = item.Key;

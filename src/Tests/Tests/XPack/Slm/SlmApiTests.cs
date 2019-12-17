@@ -11,17 +11,20 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Slm
 {
-	[SkipVersion("<7.5.0", "Snapshot lifecycle retention implement in 7.5.0")]
+	[SkipVersion("<7.5.0", "All APIs exist in Elasticsearch 7.4.0, Retention, Status, Start and Stop added in 7.5.0")]
 	public class SlmApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string CreateRepositoryStep = nameof(CreateRepositoryStep);
 		private const string DeleteSnapshotLifecycleStep = nameof(DeleteSnapshotLifecycleStep);
 		private const string ExecuteSnapshotLifecycleStep = nameof(ExecuteSnapshotLifecycleStep);
+		private const string ExecuteRetentionLifecycleStep = nameof(ExecuteRetentionLifecycleStep);
 		private const string GetAllSnapshotLifecycleStep = nameof(GetAllSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleStep = nameof(GetSnapshotLifecycleStep);
 		private const string GetMissingSnapshotLifecycleStep = nameof(GetMissingSnapshotLifecycleStep);
+		private const string GetSnapshotLifecycleStatusStep = nameof(GetSnapshotLifecycleStatusStep);
 		private const string GetSnapshotLifecycleAfterExecuteStep = nameof(GetSnapshotLifecycleAfterExecuteStep);
 		private const string PutSnapshotLifecycleStep = nameof(PutSnapshotLifecycleStep);
+		private const string StopSnapshotLifecycleStep = nameof(StopSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleStats = nameof(GetSnapshotLifecycleStats);
 
 		public SlmApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
@@ -106,6 +109,16 @@ namespace Tests.XPack.Slm
 					)
 			},
 			{
+				GetSnapshotLifecycleStatusStep, u => u.Calls<GetSnapshotLifecycleManagementStatusDescriptor, GetSnapshotLifecycleManagementStatusRequest, IGetSnapshotLifecycleManagementStatusRequest, GetSnapshotLifecycleManagementStatusResponse>(
+					v => new GetSnapshotLifecycleManagementStatusRequest(),
+					(v, d) => d,
+					(v, c, f) => c.SnapshotLifecycleManagement.GetStatus(f),
+					(v, c, f) => c.SnapshotLifecycleManagement.GetStatusAsync(f),
+					(v, c, r) => c.SnapshotLifecycleManagement.GetStatus(r),
+					(v, c, r) => c.SnapshotLifecycleManagement.GetStatusAsync(r)
+				)
+			},
+			{
 				GetAllSnapshotLifecycleStep, u =>
 					u.Calls<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequest, IGetSnapshotLifecycleRequest, GetSnapshotLifecycleResponse>(
 						v => new GetSnapshotLifecycleRequest(),
@@ -126,6 +139,18 @@ namespace Tests.XPack.Slm
 						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteSnapshotLifecycleAsync(v, f),
 						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteSnapshotLifecycle(r),
 						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteSnapshotLifecycleAsync(r)
+					)
+			},
+			{
+				ExecuteRetentionLifecycleStep, u =>
+					u.Calls<ExecuteRetentionDescriptor, ExecuteRetentionRequest, IExecuteRetentionRequest,
+						ExecuteRetentionResponse>(
+						v => new ExecuteRetentionRequest(),
+						(v, d) => d,
+						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetention(f),
+						(v, c, f) => c.SnapshotLifecycleManagement.ExecuteRetentionAsync(f),
+						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetention(r),
+						(v, c, r) => c.SnapshotLifecycleManagement.ExecuteRetentionAsync(r)
 					)
 			},
 			{
@@ -152,6 +177,16 @@ namespace Tests.XPack.Slm
 						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleStats(r),
 						(v, c, r) => c.SnapshotLifecycleManagement.GetSnapshotLifecycleStatsAsync(r)
 					)
+			},
+			{
+				StopSnapshotLifecycleStep, u => u.Calls<StopSnapshotLifecycleManagementDescriptor, StopSnapshotLifecycleManagementRequest, IStopSnapshotLifecycleManagementRequest, StopSnapshotLifecycleManagementResponse>(
+					v => new StopSnapshotLifecycleManagementRequest(),
+					(v, d) => d,
+					(v, c, f) => c.SnapshotLifecycleManagement.Stop(f),
+					(v, c, f) => c.SnapshotLifecycleManagement.StopAsync(f),
+					(v, c, r) => c.SnapshotLifecycleManagement.Stop(r),
+					(v, c, r) => c.SnapshotLifecycleManagement.StopAsync(r)
+				)
 			},
 			{
 				DeleteSnapshotLifecycleStep, u =>
@@ -213,11 +248,31 @@ namespace Tests.XPack.Slm
 			r.Policies.Should().NotBeNull().And.HaveCount(4).And.ContainKey(v);
 		});
 
+		[I] public async Task GetSnapshotLifecycleStatusResponse() => await Assert<GetSnapshotLifecycleManagementStatusResponse>(GetSnapshotLifecycleStatusStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.ApiCall.HttpStatusCode.Should().Be(200);
+			r.OperationMode.Should().Be(LifecycleOperationMode.Running);
+		});
+
+		[I] public async Task StopSnapshotLifecycleResponse() => await Assert<StopSnapshotLifecycleManagementResponse>(StopSnapshotLifecycleStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.ApiCall.HttpStatusCode.Should().Be(200);
+			r.Acknowledged.Should().BeTrue();
+		});
+
 		[I] public async Task ExecuteSnapshotLifecycleResponse() => await Assert<ExecuteSnapshotLifecycleResponse>(ExecuteSnapshotLifecycleStep,
 			(v, r) =>
 			{
 				r.IsValid.Should().BeTrue();
 				r.SnapshotName.Should().NotBeNull();
+			});
+
+		[I] public async Task ExecuteRetentionSnapshotLifecycleResponse() => await Assert<ExecuteRetentionResponse>(ExecuteRetentionLifecycleStep,
+			(v, r) =>
+			{
+				r.IsValid.Should().BeTrue();
 			});
 
 		[I] public async Task GetSnapshotLifeCycleAfterExecuteResponse() => await Assert<GetSnapshotLifecycleResponse>(GetSnapshotLifecycleAfterExecuteStep, (v, r) =>
@@ -235,6 +290,7 @@ namespace Tests.XPack.Slm
 				metadata.InProgress.State.Should().NotBeNullOrWhiteSpace();
 				metadata.InProgress.StartTime.Should().BeAfter(DateTimeOffset.MinValue);
 			}
+
 		});
 
 		[I] public async Task DeleteSnapshotLifecycleResponse() => await Assert<DeleteSnapshotLifecycleResponse>(DeleteSnapshotLifecycleStep,

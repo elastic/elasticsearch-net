@@ -20,6 +20,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				{ "index.number_of_replicas", 2 },
 				{ "index.auto_expand_replicas", "1-3" },
 				{ "index.default_pipeline", "a-default-pipeline" },
+				{ "index.required_pipeline", "a-required-pipeline" },
 				{ "index.refresh_interval", -1 },
 				{ "index.blocks.read_only", true },
 				{ "index.blocks.read", true },
@@ -46,6 +47,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				.NumberOfShards(1)
 				.NumberOfReplicas(2)
 				.DefaultPipeline("a-default-pipeline")
+				.RequiredPipeline("a-required-pipeline")
 				.AutoExpandReplicas("1-3")
 				.BlocksMetadata()
 				.BlocksRead()
@@ -74,6 +76,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 					NumberOfShards = 1,
 					NumberOfReplicas = 2,
 					DefaultPipeline = "a-default-pipeline",
+					RequiredPipeline = "a-required-pipeline",
 					AutoExpandReplicas = "1-3",
 					BlocksMetadata = true,
 					BlocksRead = true,

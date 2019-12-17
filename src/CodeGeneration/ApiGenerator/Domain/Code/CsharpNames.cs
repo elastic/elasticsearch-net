@@ -36,6 +36,7 @@ namespace ApiGenerator.Domain.Code
 				{ "Indices", (find: "Index", replace: "") },
 				{ "CrossClusterReplication", (find: "Ccr", replace: "") },
 				{ "IndexLifecycleManagement", (find: "Ilm", replace: "") },
+				{ "SnapshotLifecycleManagement", (find: "Slm", replace: "") },
 			};
 			foreach (var (ns, (find, replace)) in namespaceRenames)
 				MethodName = Replace(MethodName, ns, find, replace);
@@ -88,10 +89,10 @@ namespace ApiGenerator.Domain.Code
 				// https://github.com/elastic/elasticsearch/issues/41845
 				case "ssl": return "Security";
 				case "ilm": return "IndexLifecycleManagement";
+				case "slm": return "SnapshotLifecycleManagement";
 				case "ccr": return "CrossClusterReplication";
 				case "ml": return "MachineLearning";
 				case "xpack": return "XPack";
-				case "slm": return "SnapshotLifecycleManagement";
 				default: return endpointNamespace.ToPascalCase();
 			}
 		}

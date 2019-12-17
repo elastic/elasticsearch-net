@@ -55,7 +55,6 @@ namespace ApiGenerator.Configuration
 			"data_frame_transform_deprecated.start_transform.json",
 			"data_frame_transform_deprecated.stop_transform.json",
 			"data_frame_transform_deprecated.update_transform.json",
-			"slm.execute_retention.json",
 			"transform.delete_transform.json",
 			"transform.get_transform.json",
 			"transform.get_transform_stats.json",

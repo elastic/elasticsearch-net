@@ -36,6 +36,12 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
+	///<summary>Request options for ExecuteRetention <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html</para></summary>
+	public class ExecuteRetentionRequestParameters : RequestParameters<ExecuteRetentionRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
 	///<summary>Request options for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
 	public class GetSnapshotLifecycleRequestParameters : RequestParameters<GetSnapshotLifecycleRequestParameters>
 	{
@@ -48,9 +54,27 @@ namespace Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
+	///<summary>Request options for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
+	public class GetSnapshotLifecycleManagementStatusRequestParameters : RequestParameters<GetSnapshotLifecycleManagementStatusRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
 	///<summary>Request options for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</para></summary>
 	public class PutSnapshotLifecycleRequestParameters : RequestParameters<PutSnapshotLifecycleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+
+	///<summary>Request options for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
+	public class StartSnapshotLifecycleManagementRequestParameters : RequestParameters<StartSnapshotLifecycleManagementRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
+	public class StopSnapshotLifecycleManagementRequestParameters : RequestParameters<StopSnapshotLifecycleManagementRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 }
