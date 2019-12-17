@@ -55,6 +55,17 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="results_index_name")]
 		IndexName ResultsIndexName { get; set; }
+
+		/// <summary>
+		/// Advanced configuration option. Whether this job should be allowed to open when there is insufficient machine learning
+		/// node capacity for it to be immediately assigned to a node. The default is false, which means that the
+		/// machine learning open job will return an error if a machine learning node with capacity to run the job cannot immediately be found.
+		/// (However, this is also subject to the cluster-wide xpack.ml.max_lazy_ml_nodes setting.)
+		/// If this option is set to true then the machine learning open job will not return an error, and the job will wait in the opening
+		/// state until sufficient machine learning node capacity is available.
+		/// </summary>
+		[DataMember(Name ="allow_lazy_open")]
+		bool? AllowLazyOpen { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -80,6 +91,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IndexName ResultsIndexName { get; set; }
+
+		/// <inheritdoc />
+		public bool? AllowLazyOpen { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -92,6 +106,7 @@ namespace Nest
 		IModelPlotConfig IPutJobRequest.ModelPlotConfig { get; set; }
 		long? IPutJobRequest.ModelSnapshotRetentionDays { get; set; }
 		IndexName IPutJobRequest.ResultsIndexName { get; set; }
+		bool? IPutJobRequest.AllowLazyOpen { get; set; }
 
 		/// <inheritdoc />
 		public PutJobDescriptor<TDocument> AnalysisConfig(Func<AnalysisConfigDescriptor<TDocument>, IAnalysisConfig> selector) =>
@@ -123,6 +138,10 @@ namespace Nest
 		/// <inheritdoc />
 		public PutJobDescriptor<TDocument> ResultsIndexName<TIndex>() =>
 			Assign(typeof(TIndex), (a, v) => a.ResultsIndexName = v);
+
+		/// <inheritdoc />
+		public PutJobDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen) =>
+			Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
 	}
 
 	[StringEnum]
