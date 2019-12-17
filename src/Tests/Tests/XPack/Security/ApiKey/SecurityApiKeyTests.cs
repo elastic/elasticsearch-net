@@ -122,7 +122,8 @@ namespace Tests.XPack.Security.ApiKey
 					)
 			},
 			{
-				GetAllApiKeysStep, u =>
+				// This was fixed in 7.5.0
+				GetAllApiKeysStep, ">=7.5.0", u =>
 					u.Calls<GetApiKeyDescriptor, GetApiKeyRequest, IGetApiKeyRequest, GetApiKeyResponse>(
 						v => new GetApiKeyRequest
 						{
