@@ -19,6 +19,9 @@ namespace Nest
 		Ingest,
 
 		[EnumMember(Value = "ml")]
-		MachineLearning
+		MachineLearning,
+
+		[EnumMember(Value = "voting_only")]
+		VotingOnly,
 	}
 }
