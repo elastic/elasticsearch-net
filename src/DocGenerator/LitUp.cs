@@ -44,14 +44,22 @@ namespace DocGenerator
 			yield return InputFiles("*.asciidoc");
 		}
 
+		public static HashSet<string> ProjectsWeWant { get; } = new HashSet<string>
+		{
+			"DocGenerator", "Elasticsearch.Net", "Nest", "Tests"
+		};
+
 		public static async Task GoAsync(string[] args)
 		{
 			//.NET core csprojects are not supported all that well.
 			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
 			// Use Buildalyzer to get a workspace from the solution.
-			var options = new AnalyzerManagerOptions() { };
+			var options = new AnalyzerManagerOptions()
+			{
+				ProjectFilter = p => ProjectsWeWant.Contains(p.ProjectName)
+			};
 
-			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "CodeGeneration", "ElasticsearchCodeGeneration.sln"));
+			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "..", "Elasticsearch.sln"), options);
 
 			var workspace = analyzer.GetWorkspace();
 
@@ -82,6 +90,7 @@ namespace DocGenerator
 				Console.ReadKey();
 			}
 		}
+
 
 		private static void DeleteExistingDocs()
 		{
