@@ -40,5 +40,11 @@ namespace Elasticsearch.Net
 		/// Gets the stringified representation of a query string value as it would be sent to Elasticsearch.
 		/// </summary>
 		string GetResolvedQueryStringValue(string n, IConnectionConfigurationValues s);
+
+		/// <summary>
+		/// Gets the HTTP Accept Header value from the shortened name. If the shortened name is not recognized,
+		/// <c>null</c> is returned.
+		/// </summary>
+		string AcceptHeaderFromFormat(string format);
 	}
 }

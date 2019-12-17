@@ -33,7 +33,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -88,7 +92,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -143,7 +151,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -198,7 +210,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -239,7 +255,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -314,7 +334,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -390,7 +414,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -445,7 +473,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -507,7 +539,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
@@ -569,7 +605,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -624,7 +664,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -700,7 +744,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -748,7 +796,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -810,7 +862,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -858,7 +914,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -913,7 +973,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -982,7 +1046,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1040,7 +1108,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1095,7 +1167,11 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public string Format
 		{
 			get => Q<string>("format");
-			set => Q("format", value);
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
 		}
 
 		///<summary>Comma-separated list of column names to display</summary>

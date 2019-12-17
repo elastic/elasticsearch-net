@@ -115,6 +115,7 @@ namespace Elasticsearch.Net
 		public string ProxyAddress { get; }
 		public SecureString ProxyPassword { get; }
 		public string ProxyUsername { get; }
+		// TODO: rename to ContentType in 8.0.0
 		public string RequestMimeType { get; }
 		public TimeSpan RequestTimeout { get; }
 		public string RunAs { get; }

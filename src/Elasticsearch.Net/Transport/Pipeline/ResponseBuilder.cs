@@ -67,7 +67,7 @@ namespace Elasticsearch.Net
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
 			//mimeType can include charset information on .NET full framework
-			if (!string.IsNullOrEmpty(mimeType) && !mimeType.StartsWith(requestData.RequestMimeType))
+			if (!string.IsNullOrEmpty(mimeType) && !mimeType.StartsWith(requestData.Accept))
 				success = false;
 
 			var details = new ApiCallDetails
@@ -110,7 +110,7 @@ namespace Elasticsearch.Net
 				if (requestData.CustomResponseBuilder != null)
 					return requestData.CustomResponseBuilder.DeserializeResponse(serializer, details, responseStream) as TResponse;
 
-				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
+				return mimeType == null || !mimeType.StartsWith(requestData.Accept, StringComparison.Ordinal)
 					? null
 					: serializer.Deserialize<TResponse>(responseStream);
 			}
@@ -142,7 +142,7 @@ namespace Elasticsearch.Net
 				if (requestData.CustomResponseBuilder != null)
 					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken).ConfigureAwait(false) as TResponse;
 
-				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
+				return mimeType == null || !mimeType.StartsWith(requestData.Accept, StringComparison.Ordinal)
 					? null
 					: await serializer
 						.DeserializeAsync<TResponse>(responseStream, cancellationToken)
