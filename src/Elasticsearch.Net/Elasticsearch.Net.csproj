@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\PublishArtifacts.build.props" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>8.0</LangVersion>
-    <TieredCompilation>false</TieredCompilation>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
+    
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
@@ -34,7 +32,6 @@
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase"/>
     
     <InternalsVisibleTo Include="Tests"/>
-    <InternalsVisibleTo Include="Tests.Domain"/>
 
   </ItemGroup>
   <ItemGroup>
@@ -89,5 +86,4 @@
       <DependentUpon>Utf8Json\UnsafeMemory.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\InternalsVisible.targets" />
 </Project>

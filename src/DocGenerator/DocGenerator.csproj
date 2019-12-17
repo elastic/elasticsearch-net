@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <VersionSuffix>alpha</VersionSuffix>
+    <IsPackable>false</IsPackable>
+    
     <!-- CAC001: We dont need to set ConfigureAwait(false) here -->
     <NoWarn>NU1701,NU1605,CAC001</NoWarn>
     <LangVersion>8.0</LangVersion>

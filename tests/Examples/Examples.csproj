@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Library.build.props"/>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsTestProject>True</IsTestProject>

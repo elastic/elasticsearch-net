@@ -1,3 +1,0 @@
-#empty file to prevent csproj's from recieving the paket targets
-#for now we rely only on paket for our build related tooling but we 
-#hope to move back at some point for the project files as well
