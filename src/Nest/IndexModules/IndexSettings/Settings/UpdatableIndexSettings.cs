@@ -59,6 +59,7 @@ namespace Nest
 		public const string RefreshInterval = "index.refresh_interval";
 
 		public const string DefaultPipeline = "index.default_pipeline";
+		public const string RequiredPipeline = "index.required_pipeline";
 
 		public const string RequestsCacheEnable = "index.requests.cache.enable";
 		public const string RoutingAllocationDisableAllocation = "index.routing.allocation.disable_allocation";
