@@ -124,7 +124,7 @@ namespace Nest
 		{
 		}
 
-		///<summary>/_enrich/policy/</summary>
+		///<summary>/_enrich/policy</summary>
 		public GetEnrichPolicyRequest(): base()
 		{
 		}

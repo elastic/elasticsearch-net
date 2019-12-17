@@ -68,7 +68,7 @@ namespace Nest
 		internal static ApiUrls NoNamespaceDeleteScript = new ApiUrls(new[]{"_scripts/{id}"});
 		internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[]{"_enrich/policy/{name}"});
 		internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[]{"_enrich/policy/{name}/_execute"});
-		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[]{"_enrich/policy/{name}", "_enrich/policy/"});
+		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[]{"_enrich/policy/{name}", "_enrich/policy"});
 		internal static ApiUrls EnrichPutPolicy = new ApiUrls(new[]{"_enrich/policy/{name}"});
 		internal static ApiUrls EnrichStats = new ApiUrls(new[]{"_enrich/_stats"});
 		internal static ApiUrls NoNamespaceDocumentExists = new ApiUrls(new[]{"{index}/_doc/{id}"});
