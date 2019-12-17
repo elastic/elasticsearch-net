@@ -98,6 +98,12 @@ namespace Nest
 			Func<DateHistogramCompositeAggregationSourceDescriptor<T>, IDateHistogramCompositeAggregationSource> selector
 		) =>
 			Assign(selector?.Invoke(new DateHistogramCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
+
+		/// <inheritdoc cref="IGeoTileGridCompositeAggregationSource" />
+		public CompositeAggregationSourcesDescriptor<T> GeoTileGrid(string name,
+			Func<GeoTileGridCompositeAggregationSourceDescriptor<T>, IGeoTileGridCompositeAggregationSource> selector
+		) =>
+			Assign(selector?.Invoke(new GeoTileGridCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 	}
 
 	/// <inheritdoc cref="ICompositeAggregationSource" />
@@ -154,6 +160,9 @@ namespace Nest
 				case IHistogramCompositeAggregationSource histogramCompositeAggregationSource:
 					Serialize(ref writer, histogramCompositeAggregationSource, formatterResolver);
 					break;
+				case IGeoTileGridCompositeAggregationSource geoTileGridCompositeAggregationSource:
+					Serialize(ref writer, geoTileGridCompositeAggregationSource, formatterResolver);
+					break;
 				default:
 					Serialize(ref writer, value, formatterResolver);
 					break;
@@ -176,6 +185,7 @@ namespace Nest
 			{ "terms", 0 },
 			{ "date_histogram", 1 },
 			{ "histogram", 2 },
+			{ "geotile_grid", 3 },
 		};
 
 		public ICompositeAggregationSource Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -206,6 +216,10 @@ namespace Nest
 						break;
 					case 2:
 						compositeAggregationSource = formatterResolver.GetFormatter<HistogramCompositeAggregationSource>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+					case 3:
+						compositeAggregationSource = formatterResolver.GetFormatter<GeoTileGridCompositeAggregationSource>()
 							.Deserialize(ref reader, formatterResolver);
 						break;
 				}
