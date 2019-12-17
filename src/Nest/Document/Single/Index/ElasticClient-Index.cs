@@ -11,7 +11,7 @@ namespace Nest
 		/// <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html">
 		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html</a>
 		/// </summary>
-		/// <typeparam name="TDocument">The document type used to infer the default index, type and id</typeparam>
+		/// <typeparam name="TDocument">The document type used to infer the default index and id</typeparam>
 		/// <param name="document">
 		/// The document to be indexed. Id will be inferred from (in order):
 		/// <para>1. Id property set up on <see cref="ConnectionSettings" /> for <typeparamref name="TDocument" /></para>
@@ -21,7 +21,6 @@ namespace Nest
 		/// </para>
 		/// <para>3. A property named Id on <typeparamref name="TDocument" /></para>
 		/// </param>
-		/// <param name="selector">Optionally further describe the index operation i.e override type, index, id</param>
 		IndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class;
 
 		/// <inheritdoc cref="IElasticClient.IndexDocument{TDocument}" />
