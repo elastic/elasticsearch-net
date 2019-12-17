@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Nest
 {
 	/// <summary>
-	/// Deletes an enrich policy
+	/// A request to get statistics about enrich
 	/// </summary>
 	[MapsApi("enrich.stats")]
 	[ReadAs(typeof(EnrichStatsRequest))]

@@ -88,7 +88,6 @@ namespace Nest
 		[DataMember(Name = "security")]
 		public XPackFeature Security { get; internal set; }
 
-		// TODO! Expand to fullname in 8.0?
 		[DataMember(Name = "slm")]
 		public XPackFeature SnapshotLifecycleManagement { get; internal set; }
 
