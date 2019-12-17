@@ -63,10 +63,10 @@ module Tests =
             | _  -> command
             
         if Environment.UserInteractive then
-            let out = Tooling.DotNet.StartInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            let out = Tooling.DotNet.StartInWithTimeout "." commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
             if out.ExitCode <> 0 then failwith "dotnet test failed"
         else 
-            Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+            Tooling.DotNet.ExecInWithTimeout "." commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
 
     let RunReleaseUnitTests (ArtifactsVersion(version)) seed =
         //xUnit always does its own build, this env var is picked up by Tests.csproj

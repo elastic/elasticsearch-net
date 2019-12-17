@@ -33,15 +33,13 @@ module Paths =
         match project with 
         | Project p -> 
             match p with 
-            | NestJsonNetSerializer -> sprintf "%s/Auxiliary/%s/%s.csproj" SourceFolder project.Name project.Name
-            | ElasticsearchNetVirtual -> sprintf "%s/Auxiliary/%s/%s.csproj" SourceFolder project.Name project.Name
             | _ -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
         | PrivateProject p ->
             match p with
-            | Tests -> sprintf "%s/Tests/%s/%s.csproj" SourceFolder project.Name project.Name
-            | RestSpecTestRunner -> sprintf "%s/Tests/%s/%s.csproj" SourceFolder project.Name project.Name
-            | DocGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
-            | ApiGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
+            | RestSpecTestRunner 
+            | Tests -> sprintf "tests/%s/%s.csproj" project.Name project.Name
+            | DocGenerator 
+            | ApiGenerator -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
 
     let BinFolder (folder:string) = 
         let f = folder.Replace(@"\", "/")
