@@ -12,7 +12,7 @@
     <PackageReference Include="Elasticsearch.Net.VirtualizedCluster" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="$(SolutionRoot)\src\Auxiliary\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />

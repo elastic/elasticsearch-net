@@ -9,7 +9,7 @@
     <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="$(SolutionRoot)\src\Auxiliary\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />

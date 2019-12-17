@@ -8,6 +8,6 @@
     <PackageReference Include="Elasticsearch.Net" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Elasticsearch.Net\Elasticsearch.Net.csproj" />
   </ItemGroup>
 </Project>
