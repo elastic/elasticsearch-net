@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Elasticsearch.Net\Elasticsearch.Net.csproj" />
     
     <Compile Include="AsyncExtensions.fs" />
     <Compile Include="Models.fs" />

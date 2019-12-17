@@ -15,7 +15,9 @@
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<MajorVersion>$(Version.Split('.')[0])</MajorVersion>
 
-    	<DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
+    <SolutionRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))</SolutionRoot>
+
+    <DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <DefineConstants Condition="'$(TargetFramework)'=='netstandard2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
 		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>

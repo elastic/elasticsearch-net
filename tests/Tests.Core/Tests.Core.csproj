@@ -9,10 +9,10 @@
     <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="..\..\Auxiliary\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Auxiliary\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />
     <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20191209T135928" />
     <PackageReference Include="Proc" Version="0.6.1" />
     <PackageReference Include="xunit" Version="2.3.1" />

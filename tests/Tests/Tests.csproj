@@ -12,10 +12,10 @@
     <PackageReference Include="Elasticsearch.Net.VirtualizedCluster" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="..\..\Auxiliary\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Auxiliary\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
       
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
