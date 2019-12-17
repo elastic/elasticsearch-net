@@ -128,7 +128,7 @@ namespace ApiGenerator.Domain.Specification
 		}
 
 
-		public string InitializerGenerator(string type, string name, string key, string setter, params string[] doc) =>
-			CodeGenerator.Property(type, name, key, setter, Obsolete, doc);
+		public string InitializerGenerator(string @namespace, string type, string name, string key, string setter, params string[] doc) =>
+			CodeGenerator.Property(@namespace, type, name, key, setter, Obsolete, doc);
 	}
 }

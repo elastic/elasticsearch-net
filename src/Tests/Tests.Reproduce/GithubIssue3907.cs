@@ -8,7 +8,7 @@ using Tests.Domain;
 
 namespace Tests.Reproduce
 {
-	public class GithubIssue3907 : IClusterFixture<ReadOnlyCluster>
+	public class GithubIssue3907 : IClusterFixture<IntrusiveOperationCluster>
 	{
 		private readonly IntrusiveOperationCluster _cluster;
 

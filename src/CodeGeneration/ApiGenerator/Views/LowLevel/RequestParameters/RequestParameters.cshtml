@@ -35,7 +35,7 @@ namespace Elasticsearch.Net@(ns)
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@r.HttpMethod;
 		@foreach (var param in r.Params)
 		{
-<text>		@Raw(param.InitializerGenerator(param.TypeLowLevel, param.ClsName, param.QueryStringKey, param.SetterLowLevel, param.Description))
+<text>		@Raw(param.InitializerGenerator(r.CsharpNames.Namespace, param.TypeLowLevel, param.ClsName, param.QueryStringKey, param.SetterLowLevel, param.Description))
 </text>
 		}
 	}</text>
