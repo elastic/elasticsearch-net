@@ -27,11 +27,11 @@ namespace Elasticsearch.Net
 		public TOut GetQueryStringValue<TOut>(string name)
 		{
 			if (!ContainsQueryString(name))
-				return default(TOut);
+				return default;
 
 			var value = Self.QueryString[name];
 			if (value == null)
-				return default(TOut);
+				return default;
 
 			return (TOut)value;
 		}
@@ -59,6 +59,15 @@ namespace Elasticsearch.Net
 			Self.QueryString.Remove(name);
 		}
 
+		protected void SetAcceptHeader(string format)
+		{
+			if (RequestConfiguration == null)
+				RequestConfiguration = new RequestConfiguration();
+
+			RequestConfiguration.Accept = AcceptHeaderFromFormat(format);
+		}
+
+		/// <inheritdoc />
 		public string AcceptHeaderFromFormat(string format)
 		{
 			if (format == null)

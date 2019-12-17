@@ -12,13 +12,7 @@ namespace ApiGenerator.Generator
 		public static string CatFormatPropertyGenerator(string type, string name, string key, string setter) =>
 			  $"public {type} {name} {{ "
 			+ $"	get => Q<{type}>(\"{key}\");"
-			+ $"	set {{ "
-			+ $"		Q(\"{key}\", {setter});"
-			+ $"		if (RequestConfiguration == null) "
-			+ $"			RequestConfiguration = new RequestConfiguration();"
-			+ $""
-			+ $"		RequestConfiguration.Accept = AcceptHeaderFromFormat({setter});"
-			+ $"	}}"
+			+ $"	set {{ Q(\"{key}\", {setter}); SetAcceptHeader({setter}); }}"
 			+ $"}}";
 
 		public static string PropertyGenerator(string type, string name, string key, string setter) =>

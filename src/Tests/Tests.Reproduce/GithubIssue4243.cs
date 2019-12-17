@@ -16,9 +16,6 @@ namespace Tests.Reproduce
 	{
 		private readonly ReadOnlyCluster _cluster;
 
-		// use intrusive operation cluster because we're changing the underlying http handler
-		// and this cluster runs with a max concurrency of 1, so changing http handler
-		// will not affect other integration tests
 		public GithubIssue4243(ReadOnlyCluster cluster) => _cluster = cluster;
 
 		[I]

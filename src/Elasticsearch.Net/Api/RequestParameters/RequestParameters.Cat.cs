@@ -35,9 +35,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -95,9 +93,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -155,9 +151,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -222,9 +216,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -282,9 +274,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -368,9 +358,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -449,9 +437,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -509,9 +495,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -569,9 +553,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -636,9 +618,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -696,9 +676,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -770,9 +748,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -830,9 +806,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -890,9 +864,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -936,9 +908,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -996,9 +966,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -1070,9 +1038,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -1133,9 +1099,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 
@@ -1193,9 +1157,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set
 			{
 				Q("format", value);
-				if (RequestConfiguration == null)
-					RequestConfiguration = new RequestConfiguration();
-				RequestConfiguration.Accept = AcceptHeaderFromFormat(value);
+				SetAcceptHeader(value);
 			}
 		}
 

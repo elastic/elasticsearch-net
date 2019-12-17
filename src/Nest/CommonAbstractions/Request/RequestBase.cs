@@ -88,8 +88,13 @@ namespace Nest
 
 		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryString(name, value);
 
-		protected string AcceptHeaderFromFormat(string format) =>
-			RequestState.RequestParameters.AcceptHeaderFromFormat(format);
+		protected void SetAcceptHeader(string format)
+		{
+			if (RequestState.RequestParameters.RequestConfiguration == null)
+				RequestState.RequestParameters.RequestConfiguration = new RequestConfiguration();
+
+			RequestState.RequestParameters.RequestConfiguration.Accept = RequestState.RequestParameters.AcceptHeaderFromFormat(format);
+		}
 	}
 
 	public abstract partial class PlainRequestBase<TParameters> : RequestBase<TParameters>
