@@ -2,6 +2,7 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Library.build.props" />
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <IsTestProject>True</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />

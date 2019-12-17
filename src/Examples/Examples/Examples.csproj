@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Library.build.props" />
-    <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
-    </PropertyGroup>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Library.build.props"/>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <IsTestProject>True</IsTestProject>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\Tests\Tests.Core\Tests.Core.csproj" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-      <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-      <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0"/>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1"/>
+    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1"/>
+  </ItemGroup>
 </Project>
