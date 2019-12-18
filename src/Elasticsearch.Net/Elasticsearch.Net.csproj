@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <PackageId>Elasticsearch.Net</PackageId>
+    <Title>Elasticsearch.Net</Title>
+    <PackageTags>elasticsearch;elastic;search;lucene;nest</PackageTags>
+    <Description>
+      Exposes all the Elasticsearch API endpoints but leaves you in control of building the request and response bodies. 
+      Comes with built in cluster failover/connection pooling support.
+    </Description>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
     <IsPackable>true</IsPackable>
     
@@ -9,11 +19,7 @@
     
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview3.19128.7" />
-
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.5.0" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.5.1" />
       
@@ -22,16 +28,16 @@
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Nest" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase"/>
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase"/>
+    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
     
-    <InternalsVisibleTo Include="Tests"/>
+    <InternalsVisibleTo Include="Tests" />
 
   </ItemGroup>
   <ItemGroup>

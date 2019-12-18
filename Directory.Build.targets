@@ -1,4 +1,5 @@
 <Project>
+  <Import Project="$(SolutionRoot)\src\_PublishArtifacts.Build.props" Condition="$(IsPackable) == True"/>
   <PropertyGroup Condition="$(IsPackable) == True OR $(MSBuildProjectName.StartsWith('Tests'))">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionRoot)\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
@@ -11,8 +12,6 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
 
-    <DoSourceLink></DoSourceLink>
-    <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
     <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
     <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard2.0'">true</CopyLocalLockFileAssemblies>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -38,14 +37,4 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="GenerateSourceLink" BeforeTargets="CoreCompile" Condition="'$(DoSourceLink)'!=''">
-    <Delete Files="$(SourceLink)" Condition="Exists('$(SourceLink)')"/>
-    <Exec Command="git rev-parse HEAD" ConsoleToMSBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="LatestCommit"/>
-    </Exec>
-    <Exec Command="git rev-parse --show-toplevel" ConsoleToMSBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="GitRootFolder"/>
-    </Exec>
-    <WriteLinesToFile File="$(SourceLink)" Lines="{&quot;documents&quot;: { &quot;$([System.IO.Path]::GetFullPath('$(GitRootFolder)/').Replace('\','\\'))*&quot; : &quot;$(RepoUri)/$(LatestCommit)/*&quot; }}"/>
-  </Target>
 </Project>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
-		<id>Elasticsearch.Net.VirtualizedCluster</id>
 		<version>$version$</version>
-		<title>Elasticsearch.Net.VirtualizedCluster - A highly configurable in memory IConnection</title>
 		<authors>Elastic and contributors</authors>
 		<owners>Elastic</owners>
 		<license type="file">license.txt</license>
@@ -11,11 +9,8 @@
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<icon>images\nuget-icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<summary>Provides a way to assert client behaviour through a rule engine backed VirtualClusterConnection</summary>
-		<description>Provides a way to assert cluent behaviour through a rule engine backed VirtualClusterConnection</description>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
-		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">

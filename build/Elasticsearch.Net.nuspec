@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
-		<id>Elasticsearch.Net</id>
 		<version>$version$</version>
 		<title>Elasticsearch.Net - Elasticsearch .NET low level client</title>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
+		<copyright>2014-$year$ Elasticsearch BV</copyright>
+		
+		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
+
 		<authors>Elastic and contributors</authors>
 		<owners>Elastic</owners>
 		<license type="file">license.txt</license>
 		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<icon>images\nuget-icon.png</icon>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Elasticsearch.Net</description>
-		<summary>Exposes all the Elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.</summary>
-		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
-		<copyright>2014-$year$ Elasticsearch BV</copyright>
-		<tags>elasticsearch,elastic,search,lucene,nest</tags>
-		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
 				<dependency id="System.Buffers" version="[4.5.0,)"/>

@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
-		<id>NEST.JsonNetSerializer</id>
 		<version>$version$</version>
-		<title>NEST.JsonNetSerializer - Elasticsearch .NET custom Json.NET serializer</title>
 		<authors>Elastic and contributors</authors>
 		<owners>Elastic</owners>
 		<license type="file">license.txt</license>
@@ -11,11 +9,8 @@
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<icon>images\nuget-icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>NEST uses an internal serializer. This package enables serialization for your documents using your own custom Json.NET serializer</description>
-		<summary>NEST uses an internal serializer. This package enables serialization for your documents using your own custom Json.NET serializer</summary>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<copyright>2017-$year$ Elasticsearch BV</copyright>
-		<tags>elasticsearch,elastic,search,lucene,nest,serializer,json</tags>
 		<repository type="git" url="https://github.com/elastic/elasticsearch-net.git" branch="$branch$" commit="$commit$" />
 		<dependencies>
 			<group targetFramework="net461">

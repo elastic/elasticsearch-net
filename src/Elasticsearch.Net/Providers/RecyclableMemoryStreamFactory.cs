@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
@@ -14,21 +13,20 @@ namespace Elasticsearch.Net
 
 		public static RecyclableMemoryStreamFactory Default { get; } = new RecyclableMemoryStreamFactory();
 
-		public RecyclableMemoryStreamFactory()
+		public RecyclableMemoryStreamFactory() => _manager = CreateManager(experimental: false);
+
+		private static RecyclableMemoryStreamManager CreateManager(bool experimental)
 		{
-//			var blockSize = 1024;
-//			var largeBufferMultiple = 1024 * 1024;
-//			var maxBufferSize = 16 * largeBufferMultiple;
-//			_manager = new RecyclableMemoryStreamManager(blockSize, largeBufferMultiple, maxBufferSize)
-//			{
-//				AggressiveBufferReturn = true,
-//				MaximumFreeLargePoolBytes = maxBufferSize * 4,
-//				MaximumFreeSmallPoolBytes = 100 * blockSize
-//			};
-			_manager = new RecyclableMemoryStreamManager()
+			if (!experimental) return new RecyclableMemoryStreamManager() { AggressiveBufferReturn = true };
+
+			const int blockSize = 1024;
+			const int largeBufferMultiple = 1024 * 1024;
+			const int maxBufferSize = 16 * largeBufferMultiple;
+			return new RecyclableMemoryStreamManager(blockSize, largeBufferMultiple, maxBufferSize)
 			{
-				AggressiveBufferReturn = true,
+				AggressiveBufferReturn = true, MaximumFreeLargePoolBytes = maxBufferSize * 4, MaximumFreeSmallPoolBytes = 100 * blockSize
 			};
+
 		}
 
 		public MemoryStream Create() => _manager.GetStream(Guid.Empty, TagSource);

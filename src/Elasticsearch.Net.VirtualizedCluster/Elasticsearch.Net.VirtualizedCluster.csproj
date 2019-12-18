@@ -1,5 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <PackageId>Elasticsearch.Net.VirtualizedCluster</PackageId>
+    <Title>Elasticsearch.Net.VirtualizedCluster - A highly configurable in memory IConnection</Title>
+    <PackageTags>elasticsearch;elastic;search;lucene;nest</PackageTags>
+    <Description>Provides a way to assert cluent behaviour through a rule engine backed VirtualClusterConnection</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
