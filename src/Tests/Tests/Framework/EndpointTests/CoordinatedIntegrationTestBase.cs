@@ -25,6 +25,8 @@ namespace Tests.Framework.EndpointTests
 		protected async Task Assert<TResponse>(string name, Action<TResponse> assert)
 			where TResponse : class, IResponse
 		{
+			if (_coordinatedUsage.Skips(name)) return;
+
 			var lazyResponses = await ExecuteOnceInOrderUntil(name);
 			if (lazyResponses == null) throw new Exception($"{name} is defined but it yields no LazyResponses object");
 
