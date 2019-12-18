@@ -112,5 +112,16 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "results_retention_days")]
 		public long? ResultsRetentionDays { get; set; }
+
+		/// <summary>
+		/// Advanced configuration option. Whether this job should be allowed to open when there is insufficient machine learning
+		/// node capacity for it to be immediately assigned to a node. The default is false, which means that the
+		/// machine learning open job will return an error if a machine learning node with capacity to run the job cannot immediately be found.
+		/// (However, this is also subject to the cluster-wide xpack.ml.max_lazy_ml_nodes setting.)
+		/// If this option is set to true then the machine learning open job will not return an error, and the job will wait in the opening
+		/// state until sufficient machine learning node capacity is available.
+		/// </summary>
+		[DataMember(Name ="allow_lazy_open")]
+		public bool? AllowLazyOpen { get; set; }
 	}
 }
