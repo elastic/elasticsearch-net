@@ -69,6 +69,17 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="scroll_size")]
 		int? ScrollSize { get; set; }
+
+		/// <summary>
+		/// If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop
+		/// itself and close its associated job after this many real-time searches that return no documents. In other words, it will
+		/// stop after <see cref="Frequency"/> times <see cref="MaximumEmptySearches"/> of real-time operation. If not set then a datafeed
+		/// with no end time that sees no data will remain started until it is explicitly stopped.
+		/// <para/>
+		/// By default this setting is not set.
+		/// </summary>
+		[DataMember(Name ="max_empty_searches")]
+		int? MaximumEmptySearches { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -101,6 +112,8 @@ namespace Nest
 		/// <inheritdoc />
 		public int? ScrollSize { get; set; }
 
+		/// <inheritdoc />
+		public int? MaximumEmptySearches { get; set; }
 	}
 
 	public partial class PutDatafeedDescriptor<TDocument> where TDocument : class
@@ -114,6 +127,7 @@ namespace Nest
 		Time IPutDatafeedRequest.QueryDelay { get; set; }
 		IScriptFields IPutDatafeedRequest.ScriptFields { get; set; }
 		int? IPutDatafeedRequest.ScrollSize { get; set; }
+		int? IPutDatafeedRequest.MaximumEmptySearches { get; set; }
 
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
@@ -152,5 +166,8 @@ namespace Nest
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<TDocument> ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
 
+		/// <inheritdoc />
+		public PutDatafeedDescriptor<TDocument> MaximumEmptySearches(int? maximumEmptySearches) =>
+			Assign(maximumEmptySearches, (a, v) => a.MaximumEmptySearches = v);
 	}
 }

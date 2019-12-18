@@ -64,5 +64,13 @@ namespace Nest
 		[DataMember(Name = "scroll_size")]
 		public int? ScrollSize { get; internal set; }
 
+		/// <summary>
+		/// If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop
+		/// itself and close its associated job after this many real-time searches that return no documents. In other words, it will
+		/// stop after <see cref="Frequency"/> times <see cref="MaximumEmptySearches"/> of real-time operation. If not set then a datafeed
+		/// with no end time that sees no data will remain started until it is explicitly stopped.
+		/// </summary>
+		[DataMember(Name ="max_empty_searches")]
+		public int? MaximumEmptySearches { get; set; }
 	}
 }
