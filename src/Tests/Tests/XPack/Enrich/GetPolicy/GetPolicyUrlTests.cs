@@ -22,7 +22,7 @@ namespace Tests.XPack.Enrich.GetEnrichPolicy
 				.FluentAsync(c => c.Enrich.GetPolicyAsync(new [] { "policy_name_1", "policy_name_2" }))
 				.RequestAsync(c => c.Enrich.GetPolicyAsync(new GetEnrichPolicyRequest(new [] { "policy_name_1", "policy_name_2" })));
 
-			await GET("/_enrich/policy/")
+			await GET("/_enrich/policy")
 				.Fluent(c => c.Enrich.GetPolicy())
 				.Request(c => c.Enrich.GetPolicy(new GetEnrichPolicyRequest()))
 				.FluentAsync(c => c.Enrich.GetPolicyAsync())

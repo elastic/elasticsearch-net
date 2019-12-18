@@ -28,12 +28,14 @@ namespace Elasticsearch.Net.Specification.EnrichApi
 	public class DeleteEnrichPolicyRequestParameters : RequestParameters<DeleteEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-execute-policy.html</para></summary>
 	public class ExecuteEnrichPolicyRequestParameters : RequestParameters<ExecuteEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => false;
 		///<summary>Should the request should block until the execution is complete.</summary>
 		public bool? WaitForCompletion
 		{
@@ -46,17 +48,20 @@ namespace Elasticsearch.Net.Specification.EnrichApi
 	public class GetEnrichPolicyRequestParameters : RequestParameters<GetEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-put-policy.html</para></summary>
 	public class PutEnrichPolicyRequestParameters : RequestParameters<PutEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats.html</para></summary>
 	public class EnrichStatsRequestParameters : RequestParameters<EnrichStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 }
