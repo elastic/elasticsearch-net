@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Nest;
+using Tests.Configuration;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Extensions;
 
@@ -39,10 +41,24 @@ namespace Tests.Framework.EndpointTests.TestState
 		private readonly Dictionary<ClientMethod, string> _values;
 		public IReadOnlyDictionary<ClientMethod, string> MethodIsolatedValues => _values;
 
+		private readonly Dictionary<string, string> _callsNotInRange = new Dictionary<string, string>();
+
+		public bool Skips(string name) => _callsNotInRange.ContainsKey(name);
+
 		protected override string GetKeyForItem(LazyResponses item) => item.Name;
 
 		public void Add(string name, Func<CoordinatedUsage, Func<string, LazyResponses>> create)
 		{
+			var responses = create(this)(name);
+			Add(responses);
+		}
+		public void Add(string name, string versionRange, Func<CoordinatedUsage, Func<string, LazyResponses>> create)
+		{
+			if (!TestConfiguration.Instance.InRange(versionRange))
+			{
+				_callsNotInRange.Add(name, versionRange);
+				return;
+			}
 			var responses = create(this)(name);
 			Add(responses);
 		}

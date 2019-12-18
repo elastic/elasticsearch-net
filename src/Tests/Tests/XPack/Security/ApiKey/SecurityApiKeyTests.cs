@@ -17,6 +17,7 @@ namespace Tests.XPack.Security.ApiKey
 		private const string CreateApiKeyWithRolesStep = nameof(CreateApiKeyWithRolesStep);
 		private const string CreateApiKeyWithNoRolesStep = nameof(CreateApiKeyWithNoRolesStep);
 		private const string GetApiKeyStep = nameof(GetApiKeyStep);
+		private const string GetAllApiKeysStep = nameof(GetAllApiKeysStep);
 		private const string InvalidateApiKeyStep = nameof(InvalidateApiKeyStep);
 
 		public SecurityApiKeyTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
@@ -121,6 +122,26 @@ namespace Tests.XPack.Security.ApiKey
 					)
 			},
 			{
+				// This was fixed in 7.5.0
+				GetAllApiKeysStep, ">=7.5.0", u =>
+					u.Calls<GetApiKeyDescriptor, GetApiKeyRequest, IGetApiKeyRequest, GetApiKeyResponse>(
+						v => new GetApiKeyRequest
+						{
+							RequestConfiguration = new RequestConfiguration
+							{
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+							}
+						},
+						(v, d) => d
+							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+						,
+						(v, c, f) => c.Security.GetApiKey(f),
+						(v, c, f) => c.Security.GetApiKeyAsync(f),
+						(v, c, r) => c.Security.GetApiKey(r),
+						(v, c, r) => c.Security.GetApiKeyAsync(r)
+					)
+			},
+			{
 				GetApiKeyStep, u =>
 					u.Calls<GetApiKeyDescriptor, GetApiKeyRequest, IGetApiKeyRequest, GetApiKeyResponse>(
 						v => new GetApiKeyRequest
@@ -171,6 +192,11 @@ namespace Tests.XPack.Security.ApiKey
 			r.Name.Should().NotBeNullOrEmpty();
 			r.Expiration.Should().NotBeNull();
 			r.ApiKey.Should().NotBeNullOrEmpty();
+		});
+
+		[I] public async Task SecurityGetAllApiKeysResponse() => await Assert<GetApiKeyResponse>(GetAllApiKeysStep, r =>
+		{
+			r.IsValid.Should().BeTrue();
 		});
 
 		[I] public async Task SecurityGetApiKeyResponse() => await Assert<GetApiKeyResponse>(GetApiKeyStep, r =>
