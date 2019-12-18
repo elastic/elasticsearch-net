@@ -140,7 +140,7 @@ namespace Nest
 			Assign(typeof(TIndex), (a, v) => a.ResultsIndexName = v);
 
 		/// <inheritdoc />
-		public PutJobDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen) =>
+		public PutJobDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true) =>
 			Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
 	}
 
