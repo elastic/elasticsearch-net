@@ -238,6 +238,39 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IPauseAutoFollowPatternRequest : IRequest<PauseAutoFollowPatternRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for PauseAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</para></summary>
+	public partial class PauseAutoFollowPatternRequest : PlainRequestBase<PauseAutoFollowPatternRequestParameters>, IPauseAutoFollowPatternRequest
+	{
+		protected IPauseAutoFollowPatternRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseAutoFollowPattern;
+		///<summary>/_ccr/auto_follow/{name}/pause</summary>
+		///<param name = "name">this parameter is required</param>
+		public PauseAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PauseAutoFollowPatternRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IPauseAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -300,6 +333,39 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IResumeAutoFollowPatternRequest : IRequest<ResumeAutoFollowPatternRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ResumeAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</para></summary>
+	public partial class ResumeAutoFollowPatternRequest : PlainRequestBase<ResumeAutoFollowPatternRequestParameters>, IResumeAutoFollowPatternRequest
+	{
+		protected IResumeAutoFollowPatternRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeAutoFollowPattern;
+		///<summary>/_ccr/auto_follow/{name}/resume</summary>
+		///<param name = "name">this parameter is required</param>
+		public ResumeAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ResumeAutoFollowPatternRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IResumeAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 	// Request parameters
 	}
 

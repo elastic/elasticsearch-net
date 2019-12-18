@@ -122,6 +122,17 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		[MapsApi("ccr.get_auto_follow_pattern", "name")]
 		public Task<TResponse> GetAutoFollowPatternAsync<TResponse>(string name, GetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ccr/auto_follow/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_ccr/auto_follow/{name}/pause <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</para></summary>
+		///<param name = "name">The name of the auto follow pattern that should pause discovering new indices to follow.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PauseAutoFollowPattern<TResponse>(string name, PauseAutoFollowPatternRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ccr/auto_follow/{name:name}/pause"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ccr/auto_follow/{name}/pause <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</para></summary>
+		///<param name = "name">The name of the auto follow pattern that should pause discovering new indices to follow.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.pause_auto_follow_pattern", "name")]
+		public Task<TResponse> PauseAutoFollowPatternAsync<TResponse>(string name, PauseAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ccr/auto_follow/{name:name}/pause"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 		///<param name = "index">The name of the follower index that should pause following its leader index.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -146,6 +157,17 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		[MapsApi("ccr.put_auto_follow_pattern", "name, body")]
 		public Task<TResponse> CreateAutoFollowPatternAsync<TResponse>(string name, PostData body, CreateAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ccr/auto_follow/{name:name}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ccr/auto_follow/{name}/resume <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</para></summary>
+		///<param name = "name">The name of the auto follow pattern to resume discovering new indices to follow.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ResumeAutoFollowPattern<TResponse>(string name, ResumeAutoFollowPatternRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ccr/auto_follow/{name:name}/resume"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ccr/auto_follow/{name}/resume <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</para></summary>
+		///<param name = "name">The name of the auto follow pattern to resume discovering new indices to follow.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ccr.resume_auto_follow_pattern", "name")]
+		public Task<TResponse> ResumeAutoFollowPatternAsync<TResponse>(string name, ResumeAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ccr/auto_follow/{name:name}/resume"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_ccr/resume_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
 		///<param name = "index">The name of the follow index to resume following.</param>
 		///<param name = "body">The name of the leader index and other optional ccr related parameters</param>

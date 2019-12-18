@@ -47,8 +47,6 @@ namespace ApiGenerator.Configuration
 
 			"get_script_context.json",
 			"indices.exists_type.json",
-			"ccr.pause_auto_follow_pattern.json",
-			"ccr.resume_auto_follow_pattern.json",
 			"data_frame_transform_deprecated.delete_transform.json",
 			"data_frame_transform_deprecated.get_transform.json",
 			"data_frame_transform_deprecated.get_transform_stats.json",

@@ -183,6 +183,27 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for PauseAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</para></summary>
+	public partial class PauseAutoFollowPatternDescriptor : RequestDescriptorBase<PauseAutoFollowPatternDescriptor, PauseAutoFollowPatternRequestParameters, IPauseAutoFollowPatternRequest>, IPauseAutoFollowPatternRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseAutoFollowPattern;
+		///<summary>/_ccr/auto_follow/{name}/pause</summary>
+		///<param name = "name">this parameter is required</param>
+		public PauseAutoFollowPatternDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PauseAutoFollowPatternDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IPauseAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for PauseFollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
 	public partial class PauseFollowIndexDescriptor : RequestDescriptorBase<PauseFollowIndexDescriptor, PauseFollowIndexRequestParameters, IPauseFollowIndexRequest>, IPauseFollowIndexRequest
 	{
@@ -227,6 +248,27 @@ namespace Nest
 
 		// values part of the url path
 		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	///<summary>Descriptor for ResumeAutoFollowPattern <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</para></summary>
+	public partial class ResumeAutoFollowPatternDescriptor : RequestDescriptorBase<ResumeAutoFollowPatternDescriptor, ResumeAutoFollowPatternRequestParameters, IResumeAutoFollowPatternRequest>, IResumeAutoFollowPatternRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeAutoFollowPattern;
+		///<summary>/_ccr/auto_follow/{name}/resume</summary>
+		///<param name = "name">this parameter is required</param>
+		public ResumeAutoFollowPatternDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ResumeAutoFollowPatternDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IResumeAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 	// Request parameters
 	}
 

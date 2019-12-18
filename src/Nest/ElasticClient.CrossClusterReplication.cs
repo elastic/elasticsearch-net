@@ -181,6 +181,30 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// </summary>
 		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</a>
+		/// </summary>
+		public PauseAutoFollowPatternResponse PauseAutoFollowPattern(Name name, Func<PauseAutoFollowPatternDescriptor, IPauseAutoFollowPatternRequest> selector = null) => PauseAutoFollowPattern(selector.InvokeOrDefault(new PauseAutoFollowPatternDescriptor(name: name)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</a>
+		/// </summary>
+		public Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Name name, Func<PauseAutoFollowPatternDescriptor, IPauseAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => PauseAutoFollowPatternAsync(selector.InvokeOrDefault(new PauseAutoFollowPatternDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</a>
+		/// </summary>
+		public PauseAutoFollowPatternResponse PauseAutoFollowPattern(IPauseAutoFollowPatternRequest request) => DoRequest<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.pause_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-pause-auto-follow-pattern.html</a>
+		/// </summary>
+		public Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(IPauseAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.pause_follow</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</a>
@@ -228,6 +252,30 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</a>
 		/// </summary>
 		public Task<CreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</a>
+		/// </summary>
+		public ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Name name, Func<ResumeAutoFollowPatternDescriptor, IResumeAutoFollowPatternRequest> selector = null) => ResumeAutoFollowPattern(selector.InvokeOrDefault(new ResumeAutoFollowPatternDescriptor(name: name)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</a>
+		/// </summary>
+		public Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Name name, Func<ResumeAutoFollowPatternDescriptor, IResumeAutoFollowPatternRequest> selector = null, CancellationToken ct = default) => ResumeAutoFollowPatternAsync(selector.InvokeOrDefault(new ResumeAutoFollowPatternDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</a>
+		/// </summary>
+		public ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(IResumeAutoFollowPatternRequest request) => DoRequest<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ccr.resume_auto_follow_pattern</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-resume-auto-follow-pattern.html</a>
+		/// </summary>
+		public Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(IResumeAutoFollowPatternRequest request, CancellationToken ct = default) => DoRequestAsync<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.resume_follow</c> API, read more about this API online:
 		/// <para></para>
