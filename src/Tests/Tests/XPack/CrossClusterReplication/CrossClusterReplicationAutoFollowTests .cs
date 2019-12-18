@@ -18,6 +18,8 @@ namespace Tests.XPack.CrossClusterReplication
 	{
 		private const string CreateAutoFollowStep = nameof(CreateAutoFollowStep);
 		private const string GetAutoFollowStep = nameof(GetAutoFollowStep);
+		private const string PauseAutoFollowStep = nameof(PauseAutoFollowStep);
+		private const string ResumeAutoFollowStep = nameof(ResumeAutoFollowStep);
 		private const string DeleteAutoFollowStep = nameof(DeleteAutoFollowStep);
 		private const string GlobalStatsStep = nameof(GlobalStatsStep);
 
@@ -57,6 +59,28 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
+				PauseAutoFollowStep, u =>
+					u.Calls<PauseAutoFollowPatternDescriptor, PauseAutoFollowPatternRequest, IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(
+						v => new PauseAutoFollowPatternRequest(AutoPattern(v)),
+						(v, d) => d,
+						(v, c, f) => c.CrossClusterReplication.PauseAutoFollowPattern(AutoPattern(v), f),
+						(v, c, f) => c.CrossClusterReplication.PauseAutoFollowPatternAsync(AutoPattern(v), f),
+						(v, c, r) => c.CrossClusterReplication.PauseAutoFollowPattern(r),
+						(v, c, r) => c.CrossClusterReplication.PauseAutoFollowPatternAsync(r)
+					)
+			},
+			{
+				ResumeAutoFollowStep, u =>
+					u.Calls<ResumeAutoFollowPatternDescriptor, ResumeAutoFollowPatternRequest, IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(
+						v => new ResumeAutoFollowPatternRequest(AutoPattern(v)),
+						(v, d) => d,
+						(v, c, f) => c.CrossClusterReplication.ResumeAutoFollowPattern(AutoPattern(v), f),
+						(v, c, f) => c.CrossClusterReplication.ResumeAutoFollowPatternAsync(AutoPattern(v), f),
+						(v, c, r) => c.CrossClusterReplication.ResumeAutoFollowPattern(r),
+						(v, c, r) => c.CrossClusterReplication.ResumeAutoFollowPatternAsync(r)
+					)
+			},
+			{
 				DeleteAutoFollowStep, u =>
 					u.Calls<DeleteAutoFollowPatternDescriptor, DeleteAutoFollowPatternRequest, IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(
 						v => new DeleteAutoFollowPatternRequest(AutoPattern(v)),
@@ -86,6 +110,10 @@ namespace Tests.XPack.CrossClusterReplication
 		private static string AutoPattern(string v) => $"auto-pattern-{v}";
 
 		[I] public async Task CreateIsAcked() => await Assert<CreateAutoFollowPatternResponse>(CreateAutoFollowStep, r => r.Acknowledged.Should().BeTrue());
+
+		[I] public async Task PauseIsAcked() => await Assert<PauseAutoFollowPatternResponse>(PauseAutoFollowStep, r => r.Acknowledged.Should().BeTrue());
+
+		[I] public async Task ResumeIsAcked() => await Assert<ResumeAutoFollowPatternResponse>(ResumeAutoFollowStep, r => r.Acknowledged.Should().BeTrue());
 
 		[I] public async Task DeleteIsAcked() => await Assert<DeleteAutoFollowPatternResponse>(DeleteAutoFollowStep, r => r.Acknowledged.Should().BeTrue());
 
