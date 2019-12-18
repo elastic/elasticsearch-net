@@ -622,28 +622,28 @@ namespace Elasticsearch.Net
 		[MapsApi("index", "index, id, body")]
 		public Task<TResponse> IndexAsync<TResponse>(string index, string id, PostData body, IndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_doc/{id:id}"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+		///<summary>POST on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "body">The document</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Index<TResponse>(string index, PostData body, IndexRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/_doc"), body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_doc"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "body">The document</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("index", "index, body")]
 		public Task<TResponse> IndexAsync<TResponse>(string index, PostData body, IndexRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_doc"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_doc"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "type">The type of the document</param>
 		///<param name = "body">The document</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		public TResponse IndexUsingType<TResponse>(string index, string type, PostData body, IndexRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/{type:type}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/{type} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "type">The type of the document</param>
 		///<param name = "body">The document</param>
@@ -651,7 +651,7 @@ namespace Elasticsearch.Net
 		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		[MapsApi("index", "index, type, body")]
 		public Task<TResponse> IndexUsingTypeAsync<TResponse>(string index, string type, PostData body, IndexRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/{type:type}"), ctx, body, RequestParams(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /{index}/{type}/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "type">The type of the document</param>

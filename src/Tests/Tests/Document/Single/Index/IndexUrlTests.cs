@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
@@ -40,6 +41,20 @@ namespace Tests.Document.Single.Index
 				.Request(c => c.Index(new IndexRequest<Project>(project)))
 				.FluentAsync(c => c.IndexDocumentAsync(project))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(project)));
+		}
+
+		[U] public async Task LowLevelUrls()
+		{
+			var project = new Project { Name = "NEST" };
+
+			await POST("/index/_doc")
+				.LowLevel(c => c.Index<VoidResponse>("index", PostData.Empty))
+				.LowLevelAsync(c => c.IndexAsync<VoidResponse>("index", PostData.Empty));
+
+			await PUT("/index/_doc/id")
+				.LowLevel(c => c.Index<VoidResponse>("index", "id", PostData.Empty))
+				.LowLevelAsync(c => c.IndexAsync<VoidResponse>("index", "id", PostData.Empty));
+
 		}
 
 		[U] public async Task CanIndexUrlIds()
