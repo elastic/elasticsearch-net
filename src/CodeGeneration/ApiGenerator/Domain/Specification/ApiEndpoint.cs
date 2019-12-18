@@ -133,6 +133,10 @@ namespace ApiGenerator.Domain.Specification
 					var methodName = CsharpNames.PerPathMethodName(path.Path);
 					var parts = new List<UrlPart>(path.Parts);
 					var mapsApiArgumentHints = parts.Select(p => p.Name).ToList();
+					// TODO This is hack until we stop transforming the new spec format into the old
+					if (Name == "index" && !mapsApiArgumentHints.Contains("id"))
+						httpMethod = "POST";
+					else if (Name == "index") httpMethod = PreferredHttpMethod;
 
 					if (Body != null)
 					{
