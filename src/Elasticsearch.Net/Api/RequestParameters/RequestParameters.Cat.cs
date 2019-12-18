@@ -86,6 +86,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -202,6 +209,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>A comma-separated list of fields to return in the output</summary>
 		public string[] Fields
 		{
@@ -351,6 +365,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -546,6 +567,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -734,6 +762,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("active_only", value);
 		}
 
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>If `true`, the response includes detailed information about shard recoveries</summary>
 		public bool? Detailed
 		{
@@ -857,6 +892,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -901,6 +943,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
