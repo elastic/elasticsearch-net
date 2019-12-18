@@ -39,12 +39,6 @@ ProjectSection(SolutionItems) = preProject
 	appveyor.yml = appveyor.yml
 	global.json = global.json
 	azure-pipelines.yml = azure-pipelines.yml
-	Elasticsearch.sln.DotSettings = Elasticsearch.sln.DotSettings
-EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3}"
-ProjectSection(SolutionItems) = preProject
-	build\NEST.JsonNetSerializer.nuspec = build\NEST.JsonNetSerializer.nuspec
 	nuget.config = nuget.config
 EndProjectSection
 EndProject
@@ -103,7 +97,6 @@ Global
 		{30FB80AE-3B37-4FBB-8450-9666969EEE1A} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 		{CE7AC1D4-15AF-47FB-83FA-F7137DFD9076} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 		{EAE89579-CCA9-45CE-AF83-3DCD98690EA8} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
-		{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{2FABB663-F4DB-499A-89F8-3A08828D1D91} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{81473437-5722-4829-A5CD-125B17CCA238} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088} = {3EA11364-0513-44B7-AD6D-A675485E7448}
