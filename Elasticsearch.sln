@@ -40,6 +40,7 @@ ProjectSection(SolutionItems) = preProject
 	global.json = global.json
 	azure-pipelines.yml = azure-pipelines.yml
 	nuget.config = nuget.config
+	dotnet-tools.json = dotnet-tools.json
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdown", "Markdown", "{2FABB663-F4DB-499A-89F8-3A08828D1D91}"

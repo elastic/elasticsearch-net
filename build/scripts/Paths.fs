@@ -21,13 +21,13 @@ module Paths =
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
     
-    let Solution = "src/Elasticsearch.sln"
+    let Solution = "Elasticsearch.sln"
     
     let CheckedInTool(tool) = sprintf "%s/%s" CheckedInToolsFolder tool
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
-    let TestsSource(folder) = sprintf "%s/Tests/%s" SourceFolder folder
+    let TestsSource(folder) = sprintf "tests/%s"  folder
     
     let ProjFile(project:DotNetProject) =
         match project with 

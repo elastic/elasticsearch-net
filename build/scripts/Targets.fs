@@ -20,7 +20,7 @@ module Main =
     let setCommandLineEnvVars () =
         Environment.setEnvironVar"NEST_COMMAND_LINE_BUILD" "1"
         
-        let sourceDir = Paths.Source("Tests/Tests.Configuration");
+        let sourceDir = Paths.TestsSource("Tests.Configuration");
         let defaultYaml = Path.Combine(sourceDir, "tests.default.yaml");
         let userYaml = Path.Combine(sourceDir, "tests.yaml");
         let e f = File.Exists f;
@@ -113,7 +113,7 @@ module Main =
         
         command "codegen" [ ] <| ReposTooling.GenerateApi 
 
-        Targets.RunTargetsAndExit([parsed.Target], fun e -> e.GetType() = typeof<ProcExecException>)
+        Targets.RunTargetsAndExit([parsed.Target], (fun e -> e.GetType() = typeof<ProcExecException>), ":")
 
         0
 
