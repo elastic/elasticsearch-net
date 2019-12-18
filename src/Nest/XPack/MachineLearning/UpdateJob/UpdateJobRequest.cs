@@ -66,19 +66,48 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="results_retention_days")]
 		long? ResultsRetentionDays { get; set; }
+
+		/// <summary>
+		/// Advanced configuration option. Whether this job should be allowed to open when there is insufficient machine learning
+		/// node capacity for it to be immediately assigned to a node. The default is false, which means that the
+		/// machine learning open job will return an error if a machine learning node with capacity to run the job cannot immediately be found.
+		/// (However, this is also subject to the cluster-wide xpack.ml.max_lazy_ml_nodes setting.)
+		/// If this option is set to true then the machine learning open job will not return an error, and the job will wait in the opening
+		/// state until sufficient machine learning node capacity is available.
+		/// </summary>
+		[DataMember(Name ="allow_lazy_open")]
+		bool? AllowLazyOpen { get; set; }
 	}
 
 	/// <inheritdoc />
 	public partial class UpdateJobRequest
 	{
+		/// <inheritdoc />
 		public IAnalysisMemoryLimit AnalysisLimits { get; set; }
+
+		/// <inheritdoc />
 		public Time BackgroundPersistInterval { get; set; }
+
+		/// <inheritdoc />
 		public Dictionary<string, object> CustomSettings { get; set; }
+
+		/// <inheritdoc />
 		public string Description { get; set; }
+
+		/// <inheritdoc />
 		public IModelPlotConfigEnabled ModelPlotConfig { get; set; }
+
+		/// <inheritdoc />
 		public long? ModelSnapshotRetentionDays { get; set; }
+
+		/// <inheritdoc />
 		public long? RenormalizationWindowDays { get; set; }
+
+		/// <inheritdoc />
 		public long? ResultsRetentionDays { get; set; }
+
+		/// <inheritdoc />
+		public bool? AllowLazyOpen { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -92,6 +121,8 @@ namespace Nest
 		long? IUpdateJobRequest.ModelSnapshotRetentionDays { get; set; }
 		long? IUpdateJobRequest.RenormalizationWindowDays { get; set; }
 		long? IUpdateJobRequest.ResultsRetentionDays { get; set; }
+
+		bool? IUpdateJobRequest.AllowLazyOpen { get; set; }
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<TDocument> AnalysisLimits(Func<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit> selector) =>
@@ -123,5 +154,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public UpdateJobDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
+
+		/// <inheritdoc />
+		public UpdateJobDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true) =>
+			Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
 	}
 }
