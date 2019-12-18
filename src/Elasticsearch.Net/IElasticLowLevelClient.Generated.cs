@@ -417,13 +417,13 @@ namespace Elasticsearch.Net
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IndexAsync<TResponse>(string index, string id, PostData body, IndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+		///<summary>POST on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "body">The document</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		TResponse Index<TResponse>(string index, PostData body, IndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
+		///<summary>POST on /{index}/_doc <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "body">The document</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
