@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugSymbols>True</DebugSymbols>
     <NoWarn>CAC001</NoWarn>
+    <IsTestProject>False</IsTestProject>
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
@@ -17,6 +18,7 @@
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
     <PackageReference Include="FluentAssertions" Version="5.7.0" />
+    <PackageReference Include="PrettierTestLogger" Version="1.1.1" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
   </ItemGroup>
 </Project>
