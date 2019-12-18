@@ -71,6 +71,11 @@ namespace Tests.Framework.EndpointTests
 			var callDetails = call(Client.LowLevel);
 			return Assert("lowlevel", callDetails);
 		}
+		public async Task<UrlTester> LowLevelAsync(Func<IElasticLowLevelClient, Task<VoidResponse>> call)
+		{
+			var callDetails = await call(Client.LowLevel);
+			return Assert("lowlevel async", callDetails);
+		}
 
 		private UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
 			where TResponse : IResponse
