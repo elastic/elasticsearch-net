@@ -46,7 +46,7 @@ namespace Nest
 		/// when rest.action.multi.allow_explicit_index is set to false you can use this constructor to generate a multiget operation
 		/// with no index and type set
 		/// <pre>
-		/// See also: https://github.com/elasticsearch/elasticsearch/issues/3636
+		/// See also: https://github.com/elastic/elasticsearch/issues/3636
 		/// </pre>
 		/// </summary>
 		public MultiGetOperationDescriptor(bool allowExplicitIndex)
