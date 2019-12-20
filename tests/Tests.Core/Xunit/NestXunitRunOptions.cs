@@ -29,10 +29,11 @@ namespace Tests.Core.Xunit
 
 		public override void OnTestsFinished(Dictionary<string, Stopwatch> clusterTotals, ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
-			Console.Out.Flush();
-			DumpClusterTotals(clusterTotals);
-			DumpSeenDeprecations();
-			DumpFailedCollections(failedCollections);
+			return;
+			// Console.Out.Flush();
+			// DumpClusterTotals(clusterTotals);
+			// DumpSeenDeprecations();
+			// DumpFailedCollections(failedCollections);
 		}
 
 		private static void DumpClusterTotals(Dictionary<string, Stopwatch> clusterTotals)

@@ -1,0 +1,14 @@
+<RunSettings>
+	<RunConfiguration>
+		<CollectSourceInformation>true</CollectSourceInformation>
+	</RunConfiguration>
+	<LoggerRunSettings>
+		<Loggers>
+			<Logger friendlyName="Console" enabled="False"/>
+			<Logger friendlyName="pretty" enabled="True"/>
+		</Loggers>
+	</LoggerRunSettings>
+	<TestRunParameters>
+		<Parameter name="DisableFullSkipMessages" value="Examples.;"/>
+	</TestRunParameters>
+</RunSettings>
