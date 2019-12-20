@@ -18,7 +18,6 @@ namespace Tests.Reproduce
 			var tester = SerializationTester.Default;
 			var actual = tester.Deserializes<double>("16.27749494276941");
 
-			actual.Result.Should().NotBe(expected); // we are expecting precision problem;
 			Math.Round(actual.Result, 13).Should().Be(Math.Round(expected, 13));
 		}
 	}

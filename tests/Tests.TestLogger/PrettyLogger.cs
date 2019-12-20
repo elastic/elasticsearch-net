@@ -49,6 +49,7 @@ namespace Tests.Core.VsTest
 							.Where(s => !string.IsNullOrWhiteSpace(s))
 						);
 				}
+				foreach (var a in StartUpActions) a();
 			};
 		}
 
@@ -301,5 +302,8 @@ namespace Tests.Core.VsTest
 			// minutes
 			return (milliseconds / 60_000d).ToString("N0", Provider) + " m";
 		}
+
+		public static void AddStartupAction(Action action) => StartUpActions.Add(action);
+		private static List<Action> StartUpActions { get; } = new List<Action>();
 	}
 }

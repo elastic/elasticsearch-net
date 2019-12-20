@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Elastic.Xunit;
 using Tests.Configuration;
+using Tests.Core.VsTest;
 
 namespace Tests.Core.Xunit
 {
@@ -25,12 +26,13 @@ namespace Tests.Core.Xunit
 			Generators.Initialize();
 		}
 
-		public override void OnBeforeTestsRun() => TestConfiguration.Instance.DumpConfiguration();
+		public override void OnBeforeTestsRun()
+		{
+			//TestConfiguration.Instance.DumpConfiguration();
+		}
 
 		public override void OnTestsFinished(Dictionary<string, Stopwatch> clusterTotals, ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
-			return;
-			// Console.Out.Flush();
 			// DumpClusterTotals(clusterTotals);
 			// DumpSeenDeprecations();
 			// DumpFailedCollections(failedCollections);

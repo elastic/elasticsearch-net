@@ -60,7 +60,7 @@ module Main =
 
         conditional (parsed.GenDocs) "documentation" <| fun _ -> Documentation.Generate parsed
 
-        conditional (not parsed.SkipTests) "test" <| fun _ -> Tests.RunUnitTests parsed |> ignore
+        conditional (not parsed.SkipTests) "test" <| Tests.RunUnitTests 
         
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
 

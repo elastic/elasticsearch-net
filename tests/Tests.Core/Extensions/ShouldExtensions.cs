@@ -20,6 +20,9 @@ namespace Tests.Core.Extensions
 		public static void ShouldNotBeValid(this IResponse response) =>
 			response.IsValid.Should().BeFalse("{0}", response.DebugInformation);
 
+		public static void ShouldBeSuccess(this IResponse response) =>
+			response.ApiCall.Success.Should().BeTrue("{0}", response.DebugInformation);
+
 
 		public static void ShouldAdhereToSourceSerializerWhenSet(this Project project)
 		{
