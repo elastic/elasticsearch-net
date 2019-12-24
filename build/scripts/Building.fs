@@ -27,6 +27,18 @@ module Build =
             
         DotNet.Exec ["build"; Solution; "-c"; "Release"; props] |> ignore
 
+    let Pack (ArtifactsVersion(version)) = 
+        let props = 
+            [ 
+                "CurrentVersion", (version.Full.ToString());
+                "CurrentAssemblyVersion", (version.Assembly.ToString());
+                "CurrentAssemblyFileVersion", (version.AssemblyFile.ToString());
+            ] 
+            |> List.map (fun (p,v) -> sprintf "%s=%s" p v)
+            |> String.concat ";"
+            |> sprintf "/p:%s"
+            
+        DotNet.Exec ["pack"; Solution; "-c"; "Release"; "-o"; Paths.NugetOutput ; props] |> ignore
 
     let Clean () =
         printfn "Cleaning known output folders"

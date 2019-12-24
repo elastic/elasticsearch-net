@@ -73,7 +73,7 @@ module Main =
             if not Commandline.runningOnCi then ignore ()
             else Tests.RunReleaseUnitTests artifactsVersion seed |> ignore
             
-        target "nuget-pack" <| fun _ -> Release.NugetPack artifactsVersion
+        target "nuget-pack" <| fun _ -> Build.Pack artifactsVersion
 
         conditional (parsed.Target = "canary" && not isMono) "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
 
