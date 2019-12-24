@@ -27,9 +27,6 @@ Targets:
     elasticsearch versions to test or `latest`. Can filter tests by <clustername> and <testfilter>
 * canary 
   - create a canary nuget package based on the current version.
-* diff <..args>
-  - runs assembly-differ with the specified arguments
-    see: https://github.com/nullean/AssemblyDiffer#differ
 * cluster <cluster-name> [version]
   - Start a cluster defined in Tests.Core or Tests from the command line and leaves it running
     untill a key is pressed. Handy if you want to run the integration tests numerous times while developing  
@@ -176,9 +173,6 @@ Execution hints can be provided anywhere on the command line
 
         match arguments with
         | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> parsed
-        | ["touch"; ] -> parsed
-        | ["temp"; ] -> parsed
-        | "diff" :: tail -> { parsed with RemainingArguments = tail }
         | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
         | ["canary"; ] -> parsed
         | ["codegen"; ] -> parsed

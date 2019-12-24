@@ -4,7 +4,9 @@ open System
 open System.Reflection
 open System.Diagnostics
 open System.IO
+open Differ
 
+open System.IO
 open Commandline
 open Fake.Core
 open Fake.IO
@@ -143,13 +145,26 @@ module Versioning =
            !! (sprintf "%s/**/*.dll" tmp)
            |> Seq.iter(fun f -> 
                 let fv = FileVersionInfo.GetVersionInfo(f)
-                let a = AssemblyName.GetAssemblyName(f).Version
+                let name = AssemblyName.GetAssemblyName(f)
+                let a = name.Version
                 printfn "Assembly: %A File: %s Product: %s => %s" a fv.FileVersion fv.ProductVersion f
                 if (a.Minor > 0 || a.Revision > 0 || a.Build > 0) then failwith (sprintf "%s assembly version is not sticky to its major component" f)
                 if (parse (fv.ProductVersion) <> version.Full) then
                     failwith (sprintf "Expected product info %s to match new version %O " fv.ProductVersion fileVersion)
 
                 validateDllStrongName f f
+                
+                let dir = Path.getDirectory f
+                let tfm = DirectoryInfo(dir).Name
+                let nugetId = name.Name.Replace("Nest", "NEST")     
+                    
+                let command = [ sprintf "previous-nuget|%s|%s|%s" nugetId (version.Full.ToString()) tfm;
+                                sprintf "directory|%s" dir ]
+                                
+                Differ.Run command
+                                
+                printfn "Direcoty %O" command
+                
            )
            Directory.delete tmp
         )

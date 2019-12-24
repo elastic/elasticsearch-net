@@ -73,8 +73,6 @@ module Main =
 
         conditional (not isCanary) "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
         
-        conditional (not isCanary) "diff-against-nuget" <| fun _ -> Differ.DiffWithPreviousNugetVersion parsed
-
         target "validate-artifacts" <| fun _ -> Versioning.ValidateArtifacts artifactsVersion
         
         // the following are expected to be called as targets directly        
@@ -95,13 +93,10 @@ module Main =
            "nuget-pack";
            "nuget-pack-versioned";
            "validate-artifacts";
-           "diff-against-nuget";
            "generate-release-notes"
         ] (fun _ -> printfn "Finished Release Build %O" artifactsVersion)
 
         command "cluster" [ "restore"; "full-build" ] <| fun _ -> ReposTooling.LaunchCluster parsed
-        
-        command "diff" [ "clean"; ] <| fun _ -> Differ.Run parsed
         
         command "codegen" [ ] <| ReposTooling.GenerateApi
         
