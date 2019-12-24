@@ -46,7 +46,7 @@ namespace DocGenerator
 
 		public static HashSet<string> ProjectsWeWant { get; } = new HashSet<string>
 		{
-			"DocGenerator", "Elasticsearch.Net", "Nest", "Tests"
+			"Elasticsearch.Net", "Nest", "Tests"
 		};
 
 		public static async Task GoAsync(string[] args)
