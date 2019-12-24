@@ -70,9 +70,9 @@ namespace Examples.Root
 			{
 				body["query"]["bool"].ToLongFormBoolQuery(b =>
 				{
-					var filter = b["filter"];
-					var value = filter["term"]["user"];
-					filter["term"]["user"] = new JObject { { "value", value } };
+					var filter = b["filter"] as JArray;
+					var value = filter[0]["term"]["user"];
+					filter[0]["term"]["user"] = new JObject { { "value", value } };
 				});
 			});
 		}
