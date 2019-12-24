@@ -16,7 +16,7 @@ module Tooling =
         let startArgs = StartArguments(bin, args |> List.toArray)
         if (Option.isSome workinDir) then
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
-        if Commandline.isMono then startArgs.WaitForStreamReadersTimeout <- Nullable<TimeSpan>()
+        if Commandline.notWindows then startArgs.WaitForStreamReadersTimeout <- Nullable<TimeSpan>()
         let result = Proc.StartRedirected(startArgs, timeout, LineHighlightWriter())
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
         if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin

@@ -85,7 +85,7 @@ module Versioning =
         | Update (newVersion, _) -> ArtifactsVersion newVersion
     
     let private sn () =
-            match isMono with 
+            match notWindows with 
             | true -> "sn"
             | false ->
                 let programFiles = Environment.environVar "PROGRAMFILES(X86)"

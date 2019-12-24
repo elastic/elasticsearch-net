@@ -36,7 +36,6 @@ module Main =
         
         let parsed = Commandline.parse (args |> Array.toList)
         
-        
         let seed = parsed.Seed;
         let buildVersions = Versioning.BuildVersioning parsed
         let artifactsVersion = Versioning.ArtifactsVersion buildVersions
@@ -44,16 +43,9 @@ module Main =
         
         Tests.SetTestEnvironmentVariables parsed
         
-        target "touch" <| fun _ -> printfn "Touching build %O" artifactsVersion
-
-        target "start" <| fun _ -> 
-            match (isMono, parsed.ValidMonoTarget) with
-            | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (parsed.Target)
-            | _ -> printfn "STARTING BUILD"
-
         conditional parsed.ReleaseBuild "clean" Build.Clean 
 
-        conditional (not isMono && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
+        conditional (notWindows && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
             fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
         conditional (parsed.GenDocs) "documentation" <| fun _ -> Documentation.Generate parsed
@@ -70,12 +62,12 @@ module Main =
 
         target "test-nuget-package" <| fun _ -> 
             // run release unit tests puts packages in the system cache prevent this from happening locally
-            if not Commandline.runningOnCi then ignore ()
+            if Commandline.runningOnCi then ignore ()
             else Tests.RunReleaseUnitTests artifactsVersion seed |> ignore
             
         target "nuget-pack" <| fun _ -> Build.Pack artifactsVersion
 
-        conditional (parsed.Target = "canary" && not isMono) "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
+        conditional (parsed.Target = "canary") "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
 
         conditional (parsed.Target <> "canary") "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
         

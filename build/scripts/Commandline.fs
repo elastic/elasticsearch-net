@@ -101,12 +101,10 @@ Execution hints can be provided anywhere on the command line
         MultiTarget: MultiTarget
         ReleaseBuild: bool;
         Target: string;
-        ValidMonoTarget: bool;
         CommandArguments: CommandArguments;
     }
 
-    //TODO RENAME to notWindows
-    let isMono =
+    let notWindows =
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
         RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)
         
@@ -166,11 +164,6 @@ Execution hints can be provided anywhere on the command line
                 | "release"
                 | "canary" -> true
                 | _ -> false
-            ValidMonoTarget = 
-                match target with
-                | "release"
-                | "canary" -> false
-                | _ -> true
             CommandArguments = Unknown
         }
             
