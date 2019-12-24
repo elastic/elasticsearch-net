@@ -11,7 +11,6 @@
     <Compile Include="Paths.fs" />
     <Compile Include="Tooling.fs" />
     <Compile Include="Versioning.fs" />
-    <Compile Include="Releasing.fs" />
     <Compile Include="ReleaseNotes.fs" />
     <Compile Include="Benchmarking.fs" />
     <Compile Include="XmlDocPatcher.fs" />

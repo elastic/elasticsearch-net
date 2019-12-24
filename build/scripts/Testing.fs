@@ -62,8 +62,8 @@ module Tests =
         //This will download all packages but its the only way to make sure we reference the built
         //package and not one from cache...y
         Environment.setEnvironVar "TestPackageVersion" (version.Full.ToString())
-        Tooling.DotNet.ExecIn "src/Tests/Tests" ["clean";] |> ignore
-        Tooling.DotNet.ExecIn "src/Tests/Tests" ["restore";] |> ignore
+        Tooling.DotNet.ExecIn "tests/Tests" ["clean";] |> ignore
+        Tooling.DotNet.ExecIn "tests/Tests" ["restore";] |> ignore
         dotnetTest "tests/Tests/Tests.csproj"
 
     let RunUnitTests () = dotnetTest "tests/tests.proj"

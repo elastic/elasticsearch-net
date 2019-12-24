@@ -41,16 +41,18 @@ module Main =
         let artifactsVersion = Versioning.ArtifactsVersion buildVersions
         Versioning.Validate parsed.Target buildVersions
         
+        let isCanary = parsed.Target = "canary";
+        
         Tests.SetTestEnvironmentVariables parsed
         
         conditional parsed.ReleaseBuild "clean" Build.Clean 
 
-        conditional (notWindows && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
+        conditional (not notWindows && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
             fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
         conditional (parsed.GenDocs) "documentation" <| fun _ -> Documentation.Generate parsed
 
-        conditional (not parsed.SkipTests) "test" <| Tests.RunUnitTests 
+        conditional (not parsed.SkipTests && not isCanary) "test" <| Tests.RunUnitTests 
         
         target "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
 
@@ -67,11 +69,11 @@ module Main =
             
         target "nuget-pack" <| fun _ -> Build.Pack artifactsVersion
 
-        conditional (parsed.Target = "canary") "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
+        conditional (isCanary) "nuget-pack-versioned" <| fun _ -> Build.Pack artifactsVersion
 
-        conditional (parsed.Target <> "canary") "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
+        conditional (not isCanary) "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
         
-        conditional (parsed.Target <> "canary") "diff-against-nuget" <| fun _ -> Differ.DiffWithPreviousNugetVersion parsed
+        conditional (not isCanary) "diff-against-nuget" <| fun _ -> Differ.DiffWithPreviousNugetVersion parsed
 
         target "validate-artifacts" <| fun _ -> Versioning.ValidateArtifacts artifactsVersion
         
