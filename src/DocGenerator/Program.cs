@@ -31,7 +31,6 @@ namespace DocGenerator
 			var globalJson = Path.Combine(r, "global.json");
 			InputDirPath = Path.Combine(r, "src");
 			OutputDirPath = Path.Combine(r, "docs");
-			BuildOutputPath = Path.Combine(r, "build", "output");
 
 			var jObject = JObject.Parse(File.ReadAllText(globalJson));
 
@@ -50,8 +49,6 @@ namespace DocGenerator
 		/// The branch name to include in generated docs to link back to the original source file
 		/// </summary>
 		public static string BranchName { get; private set; }
-
-		public static string BuildOutputPath { get; }
 
 		/// <summary>
 		/// The Elasticsearch documentation version to link to

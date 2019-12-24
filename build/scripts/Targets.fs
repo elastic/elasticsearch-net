@@ -51,9 +51,7 @@ module Main =
             | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (parsed.Target)
             | _ -> printfn "STARTING BUILD"
 
-        conditional parsed.NeedsClean "clean" Build.Clean 
-
-        conditional parsed.NeedsFullBuild "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
+        conditional parsed.ReleaseBuild "clean" Build.Clean 
 
         conditional (not isMono && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
             fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
@@ -62,6 +60,8 @@ module Main =
 
         conditional (not parsed.SkipTests) "test" <| Tests.RunUnitTests 
         
+        target "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
+
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
 
         target "restore" Restore
@@ -105,13 +105,13 @@ module Main =
            "generate-release-notes"
         ] (fun _ -> printfn "Finished Release Build %O" artifactsVersion)
 
-        command "diff" [ "clean"; ] <| fun _ -> Differ.Run parsed
-        
-        command "rest-spec-tests" [ ] <| fun _ -> ReposTooling.RestSpecTests parsed.RemainingArguments
-
         command "cluster" [ "restore"; "full-build" ] <| fun _ -> ReposTooling.LaunchCluster parsed
         
-        command "codegen" [ ] <| ReposTooling.GenerateApi 
+        command "diff" [ "clean"; ] <| fun _ -> Differ.Run parsed
+        
+        command "codegen" [ ] <| ReposTooling.GenerateApi
+        
+        command "rest-spec-tests" [ ] <| fun _ -> ReposTooling.RestSpecTests parsed.RemainingArguments
 
         Targets.RunTargetsAndExit([parsed.Target], (fun e -> e.GetType() = typeof<ProcExecException>), ":")
 

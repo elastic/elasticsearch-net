@@ -13,6 +13,8 @@ module Documentation =
         let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp3_0
         let generator = sprintf "%s.dll" docGenerator.Name
         
+        printfn "==> %s" path
+        
         let (|NotNullOrEmpty|_|) (candidate:string) =
             if String.isNotNullOrEmpty candidate then Some candidate
             else None

@@ -10,10 +10,12 @@ module Paths =
 
     let BuildFolder = "build"
     let TargetsFolder = "build/scripts"
+    
     let BuildOutput = sprintf "%s/output" BuildFolder
+    let Output(folder) = sprintf "%s/%s" BuildOutput folder
     
     let ProjectOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
-        sprintf "%s/%s/%s" BuildOutput project.Name framework.Identifier.Nuget
+        sprintf "src/%s/bin/Release/%s" project.Name framework.Identifier.Nuget
   
     let Tool tool = sprintf "packages/build/%s" tool
     let CheckedInToolsFolder = "build/tools"
@@ -23,9 +25,7 @@ module Paths =
     
     let Solution = "Elasticsearch.sln"
     
-    let CheckedInTool(tool) = sprintf "%s/%s" CheckedInToolsFolder tool
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
-    let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
     let TestsSource(folder) = sprintf "tests/%s"  folder
     

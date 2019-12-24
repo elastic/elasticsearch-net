@@ -29,6 +29,7 @@
     <!-- Default Version numbers -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
+    <OutputPath Condition="'$(OutputPathBaseDir)' != ''">$(OutputPathBaseDir)\$(MSBuildProjectName)\</OutputPath>
     <SolutionRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))</SolutionRoot>
 
     <DefineConstants Condition="'$(TargetFramework)'=='net461' or '$(TargetFramework)'=='net472'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>

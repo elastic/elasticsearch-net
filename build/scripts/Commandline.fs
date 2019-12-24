@@ -98,13 +98,10 @@ Execution hints can be provided anywhere on the command line
         DocsBranch: string;
         ReferenceBranch: string;
         RemainingArguments: string list;
-        MultiTarget: MultiTarget;
+        MultiTarget: MultiTarget
+        ReleaseBuild: bool;
         Target: string;
         ValidMonoTarget: bool;
-        NeedsFullBuild: bool;
-        NeedsClean: bool;
-        DoSourceLink: bool;
-
         CommandArguments: CommandArguments;
     }
 
@@ -164,30 +161,17 @@ Execution hints can be provided anywhere on the command line
                 match (filteredArgs |> List.tryHead) with
                 | Some t -> t.Replace("-one", "")
                 | _ -> "build"
+            ReleaseBuild = 
+                match target with
+                | "release"
+                | "canary" -> true
+                | _ -> false
             ValidMonoTarget = 
                 match target with
                 | "release"
                 | "canary" -> false
                 | _ -> true
-            NeedsFullBuild = 
-                match (target, skipTests) with
-                | (_, true) -> true
-                //dotnet-xunit needs to a build of its own anyways
-                | ("test", _)
-                | ("integrate", _) -> false
-                | _ -> true;
-            NeedsClean = 
-                match (target, skipTests) with
-                | ("release", _) -> true
-                //dotnet-xunit needs to a build of its own anyways
-                | ("test", _)
-                | ("cluster", _)
-                | ("integrate", _) 
-                | ("build", _)
-                | ("diff", _) -> false
-                | _ -> true;
             CommandArguments = Unknown
-            DoSourceLink = false
         }
             
         let arguments =
@@ -206,7 +190,7 @@ Execution hints can be provided anywhere on the command line
         | ["canary"; ] -> parsed
         | ["codegen"; ] -> parsed
         
-        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; DoSourceLink = true }
+        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; }
         | ["test"; testFilter] -> { parsed with CommandArguments = Test { TestFilter = Some testFilter } }
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->

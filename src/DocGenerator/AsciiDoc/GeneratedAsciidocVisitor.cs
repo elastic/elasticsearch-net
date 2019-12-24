@@ -227,21 +227,14 @@ namespace DocGenerator.AsciiDoc
 		{
 			if (attributeEntry.Name != "xml-docs") return;
 
-			//true when running from the IDE, build/output might have not been created
-			string configuration = null;
-			if (Program.BuildOutputPath.Contains("src"))
-			{
-				//bin/Debug|Release/netcoreapp3.0
-				configuration = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)).Parent?.Name;
-				return;
-			}
+			var configuration = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)).Parent?.Name;
 
 			string XmlFile(string project)
 			{
 				if (configuration == null)
-					return Path.Combine(Program.BuildOutputPath, project, "netstandard2.0", $"{project}.XML");
+					return Path.Combine(Program.InputDirPath, project, "netstandard2.0", $"{project}.XML");
 
-				return Path.Combine(Program.BuildOutputPath, project, "bin", configuration, "netstandard2.0",
+				return Path.Combine(Program.InputDirPath, project, "bin", configuration, "netstandard2.0",
 					$"{project}.XML");
 			}
 
