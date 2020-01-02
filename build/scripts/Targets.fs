@@ -62,7 +62,7 @@ module Main =
 
         target "inherit-doc" <| InheritDoc.PatchInheritDocs
 
-        target "test-nuget-package" <| fun _ -> 
+        conditional (not parsed.SkipTests) "test-nuget-package" <| fun _ -> 
             // run release unit tests puts packages in the system cache prevent this from happening locally
             if Commandline.runningOnCi then ignore ()
             else Tests.RunReleaseUnitTests artifactsVersion seed |> ignore
@@ -78,7 +78,7 @@ module Main =
         // the following are expected to be called as targets directly        
         let buildChain = [
             "clean"; "version"; "restore"; "full-build"; "test"; 
-            "internalize-dependencies"; "inherit-doc"; "documentation"; 
+            "inherit-doc"; "documentation"; 
         ]
         command "build" buildChain <| fun _ -> printfn "STARTING BUILD"
 

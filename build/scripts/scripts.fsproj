@@ -11,12 +11,12 @@
     <Compile Include="Paths.fs" />
     <Compile Include="Tooling.fs" />
     <Compile Include="Differ.fs" />
+    <Compile Include="ShadowDependencies.fs" />
     <Compile Include="Versioning.fs" />
     <Compile Include="ReleaseNotes.fs" />
     <Compile Include="Benchmarking.fs" />
     <Compile Include="XmlDocPatcher.fs" />
     <Compile Include="Building.fs" />
-    <Compile Include="ShadowDependencies.fs" />
     <Compile Include="ReposTooling.fs" />
     <Compile Include="Testing.fs" />
     <Compile Include="Documentation.fs" />

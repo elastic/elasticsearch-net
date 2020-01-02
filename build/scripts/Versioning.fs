@@ -142,6 +142,11 @@ module Versioning =
         !! "build/output/_packages/*.nupkg"
         |> Seq.iter(fun f -> 
            Zip.unzip tmp f
+           let project =
+               let x = (!! (sprintf "%s/*.nuspec" tmp) |> Seq.head |> String.replace ".nuspec" "")
+               System.IO.Path.GetFileNameWithoutExtension(x)
+           let nugetId = project.Replace("Nest", "NEST")
+           
            !! (sprintf "%s/**/*.dll" tmp)
            |> Seq.iter(fun f -> 
                 let fv = FileVersionInfo.GetVersionInfo(f)
@@ -153,17 +158,18 @@ module Versioning =
                     failwith (sprintf "Expected product info %s to match new version %O " fv.ProductVersion fileVersion)
 
                 validateDllStrongName f f
+           )
+           let directories = Directory.GetDirectories <| sprintf "%s/lib" tmp
+           directories
+           |> Seq.iter(fun d ->
+                let info = DirectoryInfo d
+                let tfm = info.Name
+                let fullPath = Path.GetFullPath d
                 
-                let dir = Path.getDirectory f
-                let tfm = DirectoryInfo(dir).Name
-                let nugetId = name.Name.Replace("Nest", "NEST")     
-                    
                 let command = [ sprintf "previous-nuget|%s|%s|%s" nugetId (version.Full.ToString()) tfm;
-                                sprintf "directory|%s" dir ]
-                                
+                                sprintf "directory|%s" fullPath ]
+                
                 Differ.Run command
-                                
-                printfn "Direcoty %O" command
                 
            )
            Directory.delete tmp
