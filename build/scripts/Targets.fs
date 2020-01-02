@@ -45,7 +45,7 @@ module Main =
         
         Tests.SetTestEnvironmentVariables parsed
         
-        conditional parsed.ReleaseBuild "clean" Build.Clean 
+        conditional parsed.ReleaseBuild "clean" <| fun _ -> Build.Clean isCanary
 
         conditional (not notWindows && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
             fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
@@ -69,7 +69,7 @@ module Main =
             
         target "nuget-pack" <| fun _ -> Build.Pack artifactsVersion
 
-        conditional (isCanary) "nuget-pack-versioned" <| fun _ -> Build.Pack artifactsVersion
+        conditional (isCanary) "nuget-pack-versioned" <| fun _ -> Build.VersionedPack artifactsVersion
 
         conditional (not isCanary) "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
         

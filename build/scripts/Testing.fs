@@ -52,7 +52,7 @@ module Tests =
             
         Tooling.DotNet.ExecInWithTimeout "." commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
 
-    let RunReleaseUnitTests (ArtifactsVersion(version)) seed =
+    let RunReleaseUnitTests version seed =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
         //if its set it will include the local package source (build/output/_packages)
         //and references NEST and NEST.JsonNetSerializer by the current version

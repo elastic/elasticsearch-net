@@ -40,7 +40,7 @@ module ShadowDependencies =
         | true -> Tooling.ILRepack.Exec (ilMergeArgs |> List.append (mergeDlls |> Seq.toList)) |> ignore
         | _ -> Tooling.ILRepack.Exec (ilMergeArgs |> List.append [mergeDlls |> Seq.head]) |> ignore
 
-    let ShadowDependencies (ArtifactsVersion(version)) = 
+    let ShadowDependencies (version) = 
         let fw = DotNetFramework.All
         let projects = DotNetProject.AllPublishable
         let currentMajor = sprintf "%i" <| version.Full.Major

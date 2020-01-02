@@ -22,16 +22,17 @@ module Tooling =
         if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
         { ExitCode = result.ExitCode.Value; Output = seq []}
     
-    let readInWithTimeout timeout workinDir bin args = 
+    let readInWithTimeout timeout workinDir bin writer args = 
         let startArgs = StartArguments(bin, args |> List.toArray)
         if (Option.isSome workinDir) then
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
-        let result = Proc.Start(startArgs, timeout, ConsoleOutColorWriter())
+        let result = Proc.Start(startArgs, timeout, Option.defaultValue null writer)
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
         if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
         { ExitCode = result.ExitCode.Value; Output = seq result.ConsoleOut}
         
-    let read bin args = readInWithTimeout defaultTimeout None bin args
+    let read bin args = readInWithTimeout defaultTimeout None bin (Some <| ConsoleOutColorWriter()) args 
+    let readQuiet bin args = readInWithTimeout defaultTimeout None bin None args
     
     let execInWithTimeout timeout workinDir bin args = 
         let startArgs = ExecArguments(bin, args |> List.toArray)

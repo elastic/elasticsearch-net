@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "dotnet-assembly-rewriter": {
-      "version": "1.0.0-ci20190926102235",
+      "version": "1.0.0-ci20200102095458",
       "commands": [
         "assembly-rewriter"
       ]

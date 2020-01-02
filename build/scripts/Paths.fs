@@ -16,6 +16,9 @@ module Paths =
     
     let ProjectOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
         sprintf "src/%s/bin/Release/%s" project.Name framework.Identifier.Nuget
+        
+    let InplaceBuildOutput project tfm = 
+        sprintf "src/%s/bin/Release/%s" project tfm
   
     let Tool tool = sprintf "packages/build/%s" tool
     let CheckedInToolsFolder = "build/tools"
@@ -44,3 +47,5 @@ module Paths =
     let BinFolder (folder:string) = 
         let f = folder.Replace(@"\", "/")
         sprintf "%s/%s/bin/Release" SourceFolder f
+        
+        

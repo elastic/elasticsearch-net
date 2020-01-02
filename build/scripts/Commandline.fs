@@ -158,8 +158,8 @@ Execution hints can be provided anywhere on the command line
                 | _ -> "build"
             ReleaseBuild = 
                 match target with
-                | "release"
-                | "canary" -> true
+                | "canary"
+                | "release" -> true
                 | _ -> false
             CommandArguments = Unknown
         }
