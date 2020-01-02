@@ -37,7 +37,7 @@ module Tests =
 
     let private dotnetTest proj =
         Directory.CreateDirectory Paths.BuildOutput |> ignore
-        let command = ["test"; proj; "--nologo"; "-c"; "RELEASE"; "-s"; "tests/.runsettings"]
+        let command = ["test"; proj; "--nologo"; "-c"; "RELEASE"; "-s"; "tests/.runsettings"; "--no-build"]
            
         let commandWithCodeCoverage =
             // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
