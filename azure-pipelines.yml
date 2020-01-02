@@ -11,8 +11,24 @@ jobs:
   - task: PublishTestResults@2
     inputs:
         testRunner: VSTest
-        testResultsFiles: 'src/Tests/Tests/**/*.trx'
+        testResultsFiles: 'tests/**/*.trx'
         testRunTitle: Linux Unit Tests
+  # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
+  # First install the tool on the machine, then run it
+  - script: |
+      dotnet tool install -g dotnet-reportgenerator-globaltool
+      reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
+    displayName: 'CodeCov Create'
+
+  # Publish the code coverage result (summary and web site)
+  # The summary allows to view the coverage percentage in the summary tab
+  # The web site allows to view which lines are covered directly in Azure Pipeline
+  - task: PublishCodeCoverageResults@1
+    displayName: 'CodeCov Publish'
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+      reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - job: WindowsCanaryTests
   pool:
@@ -26,7 +42,7 @@ jobs:
   - task: PublishTestResults@2
     inputs:
       testRunner: VSTest
-      testResultsFiles: 'src/Tests/Tests/**/*.trx'
+      testResultsFiles: 'tests/**/*.trx'
       testRunTitle: Windows Unit Tests
       
 - job: WindowsIntegrationTests
@@ -60,7 +76,7 @@ jobs:
         condition: succeededOrFailed()
         inputs:
             testRunner: VSTest
-            testResultsFiles: 'src/Tests/Tests/**/*.trx'
+            testResultsFiles: 'tests/Tests/**/*.trx'
             testRunTitle: '$(esVersion) Windows Integration Tests'
             
 - job: LinuxIntegrationTests
@@ -94,5 +110,5 @@ jobs:
         condition: succeededOrFailed()
         inputs:
             testRunner: VSTest
-            testResultsFiles: 'src/Tests/Tests/**/*.trx'
+            testResultsFiles: 'tests/Tests/**/*.trx'
             testRunTitle: '$(esVersion) Linux Integration Tests'

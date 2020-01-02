@@ -81,15 +81,9 @@ namespace Nest
 
 		public virtual void Visit(IFuzzyStringQuery query) => Write("fuzzy_string", query.Field);
 
-		public virtual void Visit(IGeoShapeQuery query)
-		{
-			WriteShape(query.Shape, query.IndexedShape, query.Field, "geo_shape");
-		}
+		public virtual void Visit(IGeoShapeQuery query) => WriteShape(query.Shape, query.IndexedShape, query.Field, "geo_shape");
 
-		public virtual void Visit(IShapeQuery query)
-		{
-			WriteShape(query.Shape, query.IndexedShape, query.Field, "shape");
-		}
+		public virtual void Visit(IShapeQuery query) => WriteShape(query.Shape, query.IndexedShape, query.Field, "shape");
 
 		private void WriteShape(IGeoShape shape, IFieldLookup indexedField, Field field, string queryType)
 		{

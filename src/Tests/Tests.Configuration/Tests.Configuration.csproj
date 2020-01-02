@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Library.build.props" />
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191209T135928" />
-  </ItemGroup>
-</Project>

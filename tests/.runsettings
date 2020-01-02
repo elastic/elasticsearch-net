@@ -1,0 +1,24 @@
+<RunSettings>
+	<RunConfiguration>
+		<CollectSourceInformation>true</CollectSourceInformation>
+	</RunConfiguration>
+	<LoggerRunSettings>
+		<Loggers>
+			<Logger friendlyName="Console" enabled="False"/>
+			<Logger friendlyName="pretty" enabled="True"/>
+		</Loggers>
+	</LoggerRunSettings>
+	<TestRunParameters>
+		<Parameter name="DisableFullSkipMessages" value="Examples.;"/>
+	</TestRunParameters>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="XPlat Code Coverage">
+				<Configuration>
+					<Format>cobertura</Format>
+					<UseSourceLink>true</UseSourceLink>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>

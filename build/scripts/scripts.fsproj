@@ -7,18 +7,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commandline.fs" />
-    <Compile Include="Projects.fs" />
     <Compile Include="Paths.fs" />
     <Compile Include="Tooling.fs" />
+    <Compile Include="ReposTooling.fs" />
     <Compile Include="Versioning.fs" />
-    <Compile Include="Releasing.fs" />
     <Compile Include="ReleaseNotes.fs" />
     <Compile Include="Benchmarking.fs" />
     <Compile Include="XmlDocPatcher.fs" />
     <Compile Include="Building.fs" />
-    <Compile Include="ShadowDependencies.fs" />
-    <Compile Include="ReposTooling.fs" />
-    <Compile Include="Differ.fs" />
     <Compile Include="Testing.fs" />
     <Compile Include="Documentation.fs" />
     <Compile Include="Targets.fs" />
@@ -35,7 +31,7 @@
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
     
-    <PackageReference Include="Bullseye" Version="3.0.0" />
+    <PackageReference Include="Bullseye" Version="3.1.0" />
     <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20191209T135928" />
     
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
@@ -54,7 +50,6 @@
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">
     <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="$(PkgNuGet_CommandLine)\tools\NuGet.exe" DestinationFolder="$(OutDir)" />
   </Target>
 
 </Project>

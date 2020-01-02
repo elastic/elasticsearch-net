@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+<!--    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>-->
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <NoWarn>$(NoWarn);xUnit1013</NoWarn>
+    <DebugSymbols>True</DebugSymbols>
+    <IsTestProject>True</IsTestProject>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
+    <PackageReference Include="Elasticsearch.Net.VirtualizedCluster" Version="$(TestPackageVersion)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TestPackageVersion)'==''">
+    <ProjectReference Include="$(SolutionRoot)\src\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
+    <PackageReference Include="FSharp.Core" Version="4.7.0" />
+      
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
+    <PackageReference Include="Bogus" Version="22.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.5.1" />
+    <PackageReference Include="System.Reactive" Version="3.1.1" />
+    <PackageReference Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Include="SharpZipLib" Version="1.0.0-alpha2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
+    <PackageReference Include="SemanticVersioning" Version="0.8.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
+    <PackageReference Include="coverlet.collector" Version="1.1.0" />
+    <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
+  </ItemGroup>
+</Project>

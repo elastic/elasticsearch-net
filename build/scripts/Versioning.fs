@@ -4,7 +4,6 @@ open System
 open System.Reflection
 open System.Diagnostics
 open System.IO
-
 open Commandline
 open Fake.Core
 open Fake.IO
@@ -29,7 +28,7 @@ module Versioning =
     let writeVersionIntoGlobalJson version =
         let globalJson = globalJson ()
         let newGlobalJson = { globalJson with version = version.ToString(); }
-        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson, Formatting.Indented))
+        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson, Newtonsoft.Json.Formatting.Indented))
         printfn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
     let GlobalJsonVersion = parse <| globalJson().version
@@ -53,8 +52,6 @@ module Versioning =
         | Update of New: AnchoredVersion * Old: AnchoredVersion 
         | NoChange of Current: AnchoredVersion
         
-    type ArtifactsVersion = ArtifactsVersion of AnchoredVersion
-
     let AnchoredVersion version = 
         let av v = parse (sprintf "%s.0.0" (v.Major.ToString()))
         let fv v = parse (sprintf "%s.%s.%s.0" (v.Major.ToString()) (v.Minor.ToString()) (v.Patch.ToString()))
@@ -81,11 +78,11 @@ module Versioning =
     
     let ArtifactsVersion buildVersions =
         match buildVersions with
-        | NoChange n -> ArtifactsVersion n
-        | Update (newVersion, _) -> ArtifactsVersion newVersion
+        | NoChange n -> n
+        | Update (newVersion, _) -> newVersion
     
     let private sn () =
-            match isMono with 
+            match notWindows with 
             | true -> "sn"
             | false ->
                 let programFiles = Environment.environVar "PROGRAMFILES(X86)"
@@ -104,52 +101,91 @@ module Versioning =
                 | None -> failwithf "Could not locate sn.exe"
 
     let private officialToken = "96c599bbe3e70f5d"
+    let private keyFile = Paths.Keys "keypair.snk"
 
     let private validate dll name =
         let sn = sn ()
-        let out = Tooling.read sn ["-v"; dll;]
+        let out = Tooling.readQuiet sn ["-v"; dll;]
         
         // Mono StrongName - version 5.18.1.0
         // returns `is strongnamed` 
-        let valid = (out.ExitCode, out.Output |> Seq.findIndex(fun s -> s.Line.Contains("is valid") || s.Line.Contains("is strongnamed")))
+        let valid = (out.ExitCode, out.Output |> Seq.tryFindIndex(fun s -> s.Line.Contains("is valid") || s.Line.Contains("is strongnamed")))
         match valid with
-        | (0, i) when i >= 0 -> printfn "%s was signed correctly" name 
-        | (_, _) -> failwithf "{0} was not validly signed"
+        | (0, Some i) when i >= 0 -> printfn "%s is strongnamed" name 
+        | (_, _) -> failwithf "%s is NOT strongnamed" dll
         
-        let out = Tooling.read sn ["-T"; dll;]
+        let out = Tooling.readQuiet sn ["-T"; dll;]
         
-        let tokenMessage = (out.Output |> Seq.find(fun s -> s.Line.Contains("Public key token", StringComparison.OrdinalIgnoreCase)));
+        let tokenMessage = (out.Output |> Seq.tryFind(fun s -> s.Line.Contains("Public key token", StringComparison.OrdinalIgnoreCase)));
         
         // Mono StrongName - version 5.18.1.0
         // returns `Key Token:` 
-        let token = (tokenMessage.Line.Replace("Public Key Token:", "").Replace("Public key token is", "")).Trim();
+        let token =
+            match tokenMessage with
+            | Some s -> Some <| (s.Line.Replace("Public Key Token:", "").Replace("Public key token is", "")).Trim()
+            | None -> None
     
         let valid = (out.ExitCode, token)
         match valid with
-        | (0, t) when t = officialToken  -> printfn "%s was signed with official key token %s" name t
-        | (_, t) -> printfn "%s was not signed with the official token: %s but %s" name officialToken t
+        | (0, Some t) when t = officialToken  -> printfn "%s was signed with official key token %s" name t
+        | (_, Some t) -> printfn "%s was not signed with the official token: %s but %s" name officialToken t
+        | (_, None) -> printfn "%s was not signed at all" name 
         
     let private validateDllStrongName dll name =
         match File.Exists dll with
         | true -> validate dll name 
-        | _ -> failwithf "Attemped to verify signature of %s but it was not found!" dll
+        | _ -> failwithf "Attempted to verify signature of %s but it was not found!" dll
 
-    let ValidateArtifacts (ArtifactsVersion(version)) =
+    let private assemblyRewriter = "assembly-rewriter"
+    
+    let BuiltArtifacts (version: AnchoredVersion) = 
+        let packages =
+            let allPackages = !! "build/output/_packages/*.nupkg" |> Seq.toList
+            let toProject (package: string) =
+                let id = Path.GetFileName(package) |> String.replace (version.Full.ToString()) "" |> String.replace "..nupkg" ""
+                let assembly = id |> String.replace "NEST" "Nest"
+                {| Package = package; NugetId = id; AssemblyName = assembly |} 
+                
+            allPackages |> List.map toProject
+        packages
+    
+    let ValidateArtifacts version =
         let fileVersion = version.AssemblyFile
         let tmp = "build/output/_packages/tmp"
-        !! "build/output/_packages/*.nupkg"
-        |> Seq.iter(fun f -> 
-           Zip.unzip tmp f
-           !! (sprintf "%s/**/*.dll" tmp)
-           |> Seq.iter(fun f -> 
+        
+        let packages = BuiltArtifacts version
+        printf "%O" packages
+        
+        packages
+        |> Seq.iter(fun p ->
+            Zip.unzip tmp p.Package
+            let nugetId = p.NugetId
+
+            let directories = Directory.GetDirectories <| sprintf "%s/lib" tmp
+            directories
+            |> Seq.iter(fun d ->
+                
+                let info = DirectoryInfo d
+                let tfm = info.Name
+                let fullPath = Path.GetFullPath d
+                
+                let command = [ sprintf "previous-nuget|%s|%s|%s" nugetId (version.Full.ToString()) tfm;
+                                sprintf "directory|%s" fullPath ]
+                
+                ReposTooling.Differ command
+            )
+           
+            !! (sprintf "%s/**/*.dll" tmp)
+            |> Seq.iter(fun f -> 
                 let fv = FileVersionInfo.GetVersionInfo(f)
-                let a = AssemblyName.GetAssemblyName(f).Version
+                let name = AssemblyName.GetAssemblyName(f)
+                let a = name.Version
                 printfn "Assembly: %A File: %s Product: %s => %s" a fv.FileVersion fv.ProductVersion f
                 if (a.Minor > 0 || a.Revision > 0 || a.Build > 0) then failwith (sprintf "%s assembly version is not sticky to its major component" f)
                 if (parse (fv.ProductVersion) <> version.Full) then
                     failwith (sprintf "Expected product info %s to match new version %O " fv.ProductVersion fileVersion)
 
                 validateDllStrongName f f
-           )
-           Directory.delete tmp
+            )
+            Directory.delete tmp
         )
