@@ -73,8 +73,8 @@ Execution hints can be provided anywhere on the command line
     type MultiTarget = All | One
 
     type VersionArguments = { Version: string; }
-    type TestArguments = { TestFilter: string option; }
-    type IntegrationArguments = { TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
+    type TestArguments = { TrxExport: bool; CodeCoverage: bool; TestFilter: string option; }
+    type IntegrationArguments = { TrxExport: bool; TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
 
     type BenchmarkArguments = { Endpoint: string; Username: string option; Password: string option; }
     type ClusterArguments = { Name: string; Version: string option; }
@@ -104,6 +104,8 @@ Execution hints can be provided anywhere on the command line
     let notWindows =
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
         RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)
+        
+    let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
         
     let runningOnCi = Environment.hasEnvironVar "TF_BUILD" || Environment.hasEnvironVar "APPVEYOR_BUILD_VERSION"
     
@@ -178,7 +180,14 @@ Execution hints can be provided anywhere on the command line
         | ["codegen"; ] -> parsed
         
         | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; }
-        | ["test"; testFilter] -> { parsed with CommandArguments = Test { TestFilter = Some testFilter } }
+        | ["test"; testFilter] ->
+            {
+                parsed with CommandArguments = Test {
+                        TestFilter = Some testFilter
+                        TrxExport = buildingOnAzurePipeline 
+                        CodeCoverage = buildingOnAzurePipeline && (target = "test")
+                }
+            }
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
             {
@@ -200,12 +209,14 @@ Execution hints can be provided anywhere on the command line
         | ["integrate"; esVersions] -> 
             {
                 parsed with CommandArguments = Integration {
+                        TrxExport = buildingOnAzurePipeline
                         ElasticsearchVersions = split esVersions; ClusterFilter = None; TestFilter = None
                 }
             }
         | ["integrate"; esVersions; clusterFilter] ->
             {
                 parsed with CommandArguments = Integration {
+                        TrxExport = buildingOnAzurePipeline
                         ElasticsearchVersions = split esVersions;
                         ClusterFilter = Some clusterFilter;
                         TestFilter = None
@@ -214,6 +225,7 @@ Execution hints can be provided anywhere on the command line
         | ["integrate"; esVersions; clusterFilter; testFilter] ->
             {
                 parsed with CommandArguments = Integration {
+                        TrxExport = buildingOnAzurePipeline
                         ElasticsearchVersions = split esVersions;
                         ClusterFilter = Some clusterFilter
                         TestFilter = Some testFilter

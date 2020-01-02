@@ -71,7 +71,7 @@ module Main =
         target "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
 
         //TEST
-        conditionalCommand "test" testChain (not parsed.SkipTests && not isCanary) <| Tests.RunUnitTests 
+        conditionalCommand "test" testChain (not parsed.SkipTests && not isCanary) <| fun _ -> Tests.RunUnitTests parsed
 
         target "inherit-doc" <| InheritDoc.PatchInheritDocs
         
@@ -95,7 +95,7 @@ module Main =
         conditional "test-nuget-package" (not parsed.SkipTests && Environment.isWindows)  <| fun _ -> 
             // run release unit tests puts packages in the system cache prevent this from happening locally
             if Commandline.runningOnCi then ignore ()
-            else Tests.RunReleaseUnitTests artifactsVersion seed |> ignore
+            else Tests.RunReleaseUnitTests artifactsVersion parsed |> ignore
             
         //CANARY
         command "canary" canaryChain  <| fun _ ->

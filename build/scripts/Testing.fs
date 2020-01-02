@@ -9,8 +9,6 @@ open Versioning
 
 module Tests =
 
-    let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
-    let private buildingOnTeamCity = match Environment.environVarOrNone "TEAMCITY_VERSION" with | Some _ -> true | None -> false
 
     let SetTestEnvironmentVariables args = 
         let clusterFilter = match args.CommandArguments with | Integration a -> a.ClusterFilter | _ -> None
@@ -35,23 +33,23 @@ module Tests =
             env key (Some <| value)
         ignore()
 
-    let private dotnetTest proj =
+    let private dotnetTest proj args =
         Directory.CreateDirectory Paths.BuildOutput |> ignore
         let command = ["test"; proj; "--nologo"; "-c"; "Release"; "-s"; "tests/.runsettings"; "--no-build"]
+        
+        let wantsTrx =
+            let wants = match args.CommandArguments with | Integration a -> a.TrxExport | Test t -> t.TrxExport | _ -> false
+            match wants with | true -> ["--collect:\"XPlat Code Coverage\""] | false -> []
+        let wantsCoverage =
+            let wants = match args.CommandArguments with | Test t -> t.CodeCoverage | _ -> false
+            match wants with | true -> ["--logger"; "trx"] | false -> []
            
-        let commandWithCodeCoverage =
-            // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
-            // Using coverlet.msbuild package
-            // https://github.com/tonerdo/coverlet/issues/110
-            // Bites us here as well a PR is up already but not merged will try again afterwards
-            // https://github.com/tonerdo/coverlet/pull/329
-            match (buildingOnAzurePipeline) with
-            | (true) -> [ "--logger"; "trx"; "--collect:\"XPlat Code Coverage\""; ] |> List.append command
-            | _  -> command
+        let commandWithAdditionalOptions =
+            command |> List.append wantsTrx |> List.append wantsCoverage
             
-        Tooling.DotNet.ExecInWithTimeout "." commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
+        Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 30.)
 
-    let RunReleaseUnitTests version seed =
+    let RunReleaseUnitTests version args =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
         //if its set it will include the local package source (build/output/_packages)
         //and references NEST and NEST.JsonNetSerializer by the current version
@@ -63,9 +61,10 @@ module Tests =
         Environment.setEnvironVar "TestPackageVersion" (version.Full.ToString())
         Tooling.DotNet.ExecIn "tests/Tests" ["clean";] |> ignore
         Tooling.DotNet.ExecIn "tests/Tests" ["restore";] |> ignore
-        dotnetTest "tests/Tests/Tests.csproj"
+        dotnetTest "tests/Tests/Tests.csproj" args
 
-    let RunUnitTests () = dotnetTest "tests/tests.proj"
+    let RunUnitTests args =
+        dotnetTest "tests/tests.proj" args
 
     let RunIntegrationTests args =
         let passedVersions = match args.CommandArguments with | Integration a -> Some a.ElasticsearchVersions | _ -> None
@@ -75,4 +74,4 @@ module Tests =
             for esVersion in esVersions do
                 Environment.setEnvironVar "NEST_INTEGRATION_TEST" "1"
                 Environment.setEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-                dotnetTest "tests/Tests/Tests.csproj"
+                dotnetTest "tests/Tests/Tests.csproj" args
