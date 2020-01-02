@@ -45,8 +45,8 @@ module Tests =
             // https://github.com/tonerdo/coverlet/issues/110
             // Bites us here as well a PR is up already but not merged will try again afterwards
             // https://github.com/tonerdo/coverlet/pull/329
-            match (buildingOnAzurePipeline) with
-            | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; ] |> List.append command
+            match (true || buildingOnAzurePipeline) with
+            | (true) -> [ "--logger"; "trx"; "--collect:\"XPlat Code Coverage\""; ] |> List.append command
             | _  -> command
             
         Tooling.DotNet.ExecInWithTimeout "." commandWithCodeCoverage (TimeSpan.FromMinutes 30.)
