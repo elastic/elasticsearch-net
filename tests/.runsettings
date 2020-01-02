@@ -9,7 +9,7 @@
 		</Loggers>
 	</LoggerRunSettings>
 	<TestRunParameters>
-		<Parameter name="DisableFullSkipMessages" value="Examples.;"/>
+		<Parameter name="DisableFullSkipMessages" value=""/>
 	</TestRunParameters>
 	<DataCollectionRunSettings>
 		<DataCollectors>
