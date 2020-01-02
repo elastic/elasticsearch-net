@@ -7,12 +7,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commandline.fs" />
-    <Compile Include="Projects.fs" />
     <Compile Include="Paths.fs" />
     <Compile Include="Tooling.fs" />
     <Compile Include="Differ.fs" />
     <Compile Include="Versioning.fs" />
-    <Compile Include="ShadowDependencies.fs" />
     <Compile Include="ReleaseNotes.fs" />
     <Compile Include="Benchmarking.fs" />
     <Compile Include="XmlDocPatcher.fs" />

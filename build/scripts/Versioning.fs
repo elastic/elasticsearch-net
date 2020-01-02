@@ -9,9 +9,6 @@ open Fake.Core
 open Fake.IO
 open Fake.IO.Globbing.Operators
 open Newtonsoft.Json
-open System.Xml
-open System.Xml.Linq
-open System.Xml.XPath
 
 module Versioning = 
     // We used to rely on AssemblyInfo.cs from NEST to read and write the current version.

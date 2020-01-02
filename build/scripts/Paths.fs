@@ -1,7 +1,5 @@
 ﻿namespace Scripts
 
-open Projects
-
 module Paths =
 
     let OwnerName = "elastic"
@@ -14,9 +12,6 @@ module Paths =
     let BuildOutput = sprintf "%s/output" BuildFolder
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     
-    let ProjectOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
-        sprintf "src/%s/bin/Release/%s" project.Name framework.Identifier.Nuget
-        
     let InplaceBuildOutput project tfm = 
         sprintf "src/%s/bin/Release/%s" project tfm
   
@@ -32,17 +27,8 @@ module Paths =
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
     let TestsSource(folder) = sprintf "tests/%s"  folder
     
-    let ProjFile(project:DotNetProject) =
-        match project with 
-        | Project p -> 
-            match p with 
-            | _ -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
-        | PrivateProject p ->
-            match p with
-            | RestSpecTestRunner 
-            | Tests -> sprintf "tests/%s/%s.csproj" project.Name project.Name
-            | DocGenerator 
-            | ApiGenerator -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
+    let ProjFile project = sprintf "%s/%s/%s.csproj" SourceFolder project project
+    let TestProjFile project = sprintf "tests/%s/%s.csproj" project project
 
     let BinFolder (folder:string) = 
         let f = folder.Replace(@"\", "/")

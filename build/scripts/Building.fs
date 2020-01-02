@@ -3,7 +3,6 @@
 open System.IO
 
 open Paths
-open Projects
 open Tooling
 open Versioning
 open Fake.Core
@@ -50,8 +49,6 @@ module Build =
         Shell.cleanDir Paths.BuildOutput
         if isCanary then 
             DotNet.Exec ["clean"; Solution; "-c"; "Release"; "-v"; "q"] |> ignore 
-            DotNetProject.All |> Seq.iter(fun p -> Shell.cleanDir (Paths.BinFolder p.Name))
-            
             
     let private assemblyRewriter = "assembly-rewriter"
     let private keyFile = Paths.Keys "keypair.snk"

@@ -47,9 +47,6 @@ module Main =
         
         conditional parsed.ReleaseBuild "clean" <| fun _ -> Build.Clean isCanary
 
-        conditional (not notWindows && (Commandline.runningOnCi || parsed.Target = "release")) "internalize-dependencies" <|
-            fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
-
         conditional (parsed.GenDocs) "documentation" <| fun _ -> Documentation.Generate parsed
 
         conditional (not parsed.SkipTests && not isCanary) "test" <| Tests.RunUnitTests 

@@ -2,7 +2,6 @@
 
 open System
 open System.Globalization
-open Tooling
 open Fake.Core
 open System.IO
 open Commandline

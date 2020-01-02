@@ -1,7 +1,6 @@
 ﻿namespace Scripts
 
 open Fake.Core
-open Commandline
 
 module Differ =    
     let Run args =

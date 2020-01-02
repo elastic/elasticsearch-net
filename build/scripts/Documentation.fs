@@ -2,16 +2,14 @@
 
 open System.IO
 
-open Projects
 open Commandline
 open Fake.Core
 
 module Documentation = 
 
     let Generate args = 
-        let docGenerator = PrivateProject(DocGenerator)
-        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp3_0
-        let generator = sprintf "%s.dll" docGenerator.Name
+        let path = Paths.InplaceBuildOutput "DocGenerator" "netcoreapp3.0"
+        let generator = sprintf "%s.dll" "DocGenerator"
         
         printfn "==> %s" path
         
