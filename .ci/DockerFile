@@ -3,29 +3,30 @@ FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNET_VERSION} AS elasticsearch-net-bu
 
 WORKDIR /sln
 
-COPY ./*.sln ./nuget.config  ./
-COPY ./src/*.sln ./src/
+COPY ./*.sln ./nuget.config ./*.Build.props ./*.Build.targets ./
 
 # todo standardize on Build.props as Directory.Build.props needs that form
 COPY ./src/*.Build.props  ./src/
 COPY ./tests/*.Build.props  ./tests/
-COPY .*.Build.props  ./
-COPY .*.Build.targets  ./
-
-# consider flattening our repos to just projects under ./src and ./test
 
 # Copy the main source project files
 COPY src/*/*.?sproj ./src/
 COPY tests/*/*.?sproj ./tests/
 
 # this puts the project files back into original location since COPY flattens
+RUN for file in $(find . -name "*.?sproj"); do echo mkdir -p $(dirname $file)/$(basename ${file%.*})/ && echo mv $file $(dirname $file)/$(basename ${file%.*})/; done
 RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basename ${file%.*})/ && mv $file $(dirname $file)/$(basename ${file%.*})/; done
 
-# copy these manually since these do not follow a pattern under src
+# copy these manually since these do not follow a pattern under src or tests
 COPY build/scripts/scripts.fsproj ./build/scripts/
 COPY .ci/Jenkins.csproj ./.ci/
 
-RUN dotnet restore src/Elasticsearch.sln
+RUN ls -al 
+RUN ls -al tests
+RUN ls -al src
+RUN ls -al src/Elasticsearch.Net
+
+RUN dotnet restore 
 
 # Install app dependencies
 
