@@ -50,7 +50,6 @@ module Build =
         if isCanary then 
             DotNet.Exec ["clean"; Solution; "-c"; "Release"; "-v"; "q"] |> ignore 
             
-    let private assemblyRewriter = "assembly-rewriter"
     let private keyFile = Paths.Keys "keypair.snk"
     let private tmp = "build/output/_packages/tmp" 
     
@@ -118,9 +117,8 @@ module Build =
                |> Seq.map (fun dll ->
                    sprintf @"-i ""%s"" -o ""%s"" " dll (renamedDll dll)
                )
-               |> Seq.fold (+) " "
            
-            Tooling.DotNet.ExecIn "." [assemblyRewriter; dlls] |> ignore
+            ReposTooling.Rewriter dlls
            
             let rewrittenDll = renamedDll mainDll 
             let ilMergeArgs = [

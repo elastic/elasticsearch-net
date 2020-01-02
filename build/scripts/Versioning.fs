@@ -172,7 +172,7 @@ module Versioning =
                 let command = [ sprintf "previous-nuget|%s|%s|%s" nugetId (version.Full.ToString()) tfm;
                                 sprintf "directory|%s" fullPath ]
                 
-                Differ.Run command
+                ReposTooling.Differ command
             )
            
             !! (sprintf "%s/**/*.dll" tmp)
