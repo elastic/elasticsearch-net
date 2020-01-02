@@ -45,7 +45,7 @@ module Tests =
             // https://github.com/tonerdo/coverlet/issues/110
             // Bites us here as well a PR is up already but not merged will try again afterwards
             // https://github.com/tonerdo/coverlet/pull/329
-            match (true || buildingOnAzurePipeline) with
+            match (buildingOnAzurePipeline) with
             | (true) -> [ "--logger"; "trx"; "--collect:\"XPlat Code Coverage\""; ] |> List.append command
             | _  -> command
             
