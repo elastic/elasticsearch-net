@@ -39,10 +39,10 @@ module Tests =
         
         let wantsTrx =
             let wants = match args.CommandArguments with | Integration a -> a.TrxExport | Test t -> t.TrxExport | _ -> false
-            match wants with | true -> ["--collect:\"XPlat Code Coverage\""] | false -> []
+            match wants with | true -> ["--logger"; "trx"] | false -> []
         let wantsCoverage =
             let wants = match args.CommandArguments with | Test t -> t.CodeCoverage | _ -> false
-            match wants with | true -> ["--logger"; "trx"] | false -> []
+            match wants with | true -> ["--collect:\"XPlat Code Coverage\""] | false -> []
            
         let commandWithAdditionalOptions =
             command |> List.append wantsTrx |> List.append wantsCoverage
