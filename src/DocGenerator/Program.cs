@@ -31,6 +31,7 @@ namespace DocGenerator
 			var globalJson = Path.Combine(r, "global.json");
 			InputDirPath = Path.Combine(r, "src");
 			OutputDirPath = Path.Combine(r, "docs");
+			TmpOutputDirPath = Path.Combine(r, "docs-temp");
 
 			var jObject = JObject.Parse(File.ReadAllText(globalJson));
 
@@ -59,6 +60,8 @@ namespace DocGenerator
 
 		public static string OutputDirPath { get; }
 
+		public static string TmpOutputDirPath { get; }
+
 		private static int Main(string[] args) =>
 			Parser.Default.ParseArguments<DocGeneratorOptions>(args)
 				.MapResult(
@@ -75,8 +78,7 @@ namespace DocGenerator
 							Console.WriteLine($"Using branch name {BranchName} in documentation");
 							Console.WriteLine($"Using doc reference version {DocVersion} in documentation");
 
-							LitUp.GoAsync(args).Wait();
-							return 0;
+							return LitUp.GoAsync(args).GetAwaiter().GetResult();
 						}
 						catch (AggregateException ae)
 						{

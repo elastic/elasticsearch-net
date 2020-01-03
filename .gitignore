@@ -82,3 +82,5 @@ project.lock.json
 .idea/
 *.sln.iml
 /src/.vs/restore.dg
+# temporary location for doc generation
+docs-temp

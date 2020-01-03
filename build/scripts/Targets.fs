@@ -75,7 +75,7 @@ module Main =
 
         target "inherit-doc" <| InheritDoc.PatchInheritDocs
         
-        conditional "documentation" (parsed.GenDocs)  <| fun _ -> Documentation.Generate parsed
+        conditionalCommand "documentation" testChain (parsed.GenDocs)  <| fun _ -> Documentation.Generate parsed
         
         //BUILD
         command "build" buildChain <| fun _ -> printfn "STARTING BUILD"

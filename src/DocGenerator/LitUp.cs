@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Buildalyzer;
 using Buildalyzer.Workspaces;
@@ -15,10 +16,10 @@ namespace DocGenerator
 	{
 		private static readonly string[] SkipFolders = { "Debug", "Release" };
 
-		private static string GetProjectDir(string projectName) => Path.Combine(Program.InputDirPath, projectName);
+		private static string GetTestProjectDir(string projectName) => Path.Combine(Program.InputDirPath, "..", "tests", projectName);
 
 		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
-			from f in Directory.GetFiles(GetProjectDir("Tests"), $"{path}", SearchOption.AllDirectories)
+			from f in Directory.GetFiles(GetTestProjectDir("Tests"), $"{path}", SearchOption.AllDirectories)
 			let dir = new DirectoryInfo(f)
 			where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
 			select DocumentationFile.Load(new FileInfo(f));
@@ -49,7 +50,7 @@ namespace DocGenerator
 			"Elasticsearch.Net", "Nest", "Tests"
 		};
 
-		public static async Task GoAsync(string[] args)
+		public static async Task<int> GoAsync(string[] args)
 		{
 			//.NET core csprojects are not supported all that well.
 			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
@@ -63,9 +64,11 @@ namespace DocGenerator
 
 			var workspace = analyzer.GetWorkspace();
 
+			var seenFailures = false;
 			workspace.WorkspaceFailed += (s, e) =>
 			{
-				Console.Error.WriteLine(e.Diagnostic.Message);
+				Console.Error.WriteLine($"Workplace failure: {e.Diagnostic.Message}");
+				seenFailures = true;
 			};
 
 			// Buildalyzer, similar to MsBuildWorkspace with the new csproj file format, does
@@ -75,10 +78,31 @@ namespace DocGenerator
 			var projects = workspace.CurrentSolution.Projects
 				.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
-			DeleteExistingDocs();
+			if (seenFailures)
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.Error.WriteLine("Documentation failed to generate.");
+				Console.ResetColor();
+				return 2;
+			}
+
+			DeleteExistingTmpDocs();
 
 			foreach (var file in GetDocumentFiles(projects).SelectMany(s => s))
 				await file.SaveToDocumentationFolderAsync();
+
+			if (seenFailures)
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.Error.WriteLine("Documentation failed to generate.");
+				Console.ResetColor();
+				return 2;
+			}
+
+
+
+			CopyBreakingChangesDocs();
+			DeleteExistingDocsAndSwap();
 
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("Documentation generated.");
@@ -89,20 +113,62 @@ namespace DocGenerator
 				Console.WriteLine("Press any key to continue...");
 				Console.ReadKey();
 			}
+			return 0;
 		}
 
 
-		private static void DeleteExistingDocs()
+		private static void DeleteExistingTmpDocs()
+		{
+			var outputDir = new DirectoryInfo(Program.TmpOutputDirPath);
+			if (!outputDir.Exists) return;
+
+			foreach (var file in outputDir.EnumerateFiles())
+				file.Delete();
+
+		}
+		private static void CopyBreakingChangesDocs()
 		{
 			var outputDir = new DirectoryInfo(Program.OutputDirPath);
+			var tmpDir = new DirectoryInfo(Program.TmpOutputDirPath);
+			if (!outputDir.Exists) throw new Exception($"Docs folder should be present in repos but does not exist at: {Program.OutputDirPath}");
+			if (!tmpDir.Exists)
+				throw new Exception($"Temp docs folder should be present in repos after generation ran but does not exist at: {Program.TmpOutputDirPath}");
+
+			foreach (var dir in outputDir.EnumerateDirectories())
+			{
+				if (!dir.Name.EndsWith("breaking-changes")) continue;
+
+				var newLocation = Path.Combine(tmpDir.FullName, dir.Name);
+				Console.WriteLine($"Moving {dir.Name} to: {tmpDir.FullName}");
+				dir.MoveTo(newLocation);
+			}
+		}
+
+		private static void DeleteExistingDocsAndSwap()
+		{
+			var outputDir = new DirectoryInfo(Program.OutputDirPath);
+			var tmpDir = new DirectoryInfo(Program.TmpOutputDirPath);
 
 			foreach (var file in outputDir.EnumerateFiles())
 				file.Delete();
 
 			foreach (var dir in outputDir.EnumerateDirectories())
+				dir.Delete(true);
+
+			WaitForActualDelete(outputDir);
+			Console.WriteLine($"Swapping {tmpDir.FullName} to {outputDir.FullName}");
+			tmpDir.MoveTo(Program.OutputDirPath);
+
+			static void WaitForActualDelete(FileSystemInfo toDelete)
 			{
-				if (!dir.Name.EndsWith("breaking-changes"))
-					dir.Delete(true);
+				Console.WriteLine($"Attempting to delete {toDelete.FullName}");
+				toDelete.Delete();
+				var x = 0;
+				for (x = 0; toDelete.Exists && x < 100; x++)
+				{
+					Thread.Sleep(100);
+					x++;
+				}
 			}
 		}
 
