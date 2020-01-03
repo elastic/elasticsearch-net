@@ -33,7 +33,11 @@ Targets:
 * benchmark [non-interactive] [url] [username] [password] 
   - Runs a benchmark from Tests.Benchmarking and indexes the results to [url] when provided.
     If non-interactive runs all benchmarks without prompting
-
+* codegen
+  - runs the code generator interactively
+* documentation
+  - runs the doc generation, without running any tests
+  
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
 Execution hints can be provided anywhere on the command line
@@ -126,13 +130,13 @@ Execution hints can be provided anywhere on the command line
             match (filteredArgs |> List.tryHead) with
             | Some t -> t.Replace("-one", "")
             | _ -> "build"
-        let skipTests = args |> List.exists (fun x -> x = "skiptests")
+        let skipTests = args |> List.exists (fun x -> x = "skiptests") || target = "documentation"
         let skipDocs = args |> List.exists (fun x -> x = "skipdocs")
 
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
             SkipTests = skipTests
-            GenDocs = not skipDocs && (args |> List.exists (fun x -> x = "gendocs") || target = "build") 
+            GenDocs = not skipDocs && (args |> List.exists (fun x -> x = "gendocs") || target = "build" || target = "documentation") 
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
                 | Some t -> Int32.Parse (t.Replace("seed:", ""))
@@ -179,6 +183,7 @@ Execution hints can be provided anywhere on the command line
         | ["clean"]
         | ["benchmark"]
         | ["codegen"; ] 
+        | ["documentation"; ] 
         | ["profile"] -> parsed
         | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
         

@@ -44,7 +44,7 @@ namespace DocGenerator.Documentation.Files
 					.TrimEnd("Tests")
 					.PascalToHyphen() + ".asciidoc";
 
-			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumentationFolder));
+			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.TmpOutputDirPath, testInDocumentationFolder));
 			var fileInfo = new FileInfo(documentationTargetPath);
 
 			if (fileInfo.Directory != null)

@@ -30,10 +30,10 @@ namespace DocGenerator.Documentation.Files
 		{
 			var testFullPath = FileLocation.FullName;
 			var p = "\\" + Path.DirectorySeparatorChar.ToString();
-			var testInDocumenationFolder = Regex.Replace(testFullPath, $@"(^.+{p}Tests{p}|\" + Extension + "$)", "").PascalToHyphen() + Extension;
+			var testInDocumentationFolder = Regex.Replace(testFullPath, $@"(^.+{p}Tests{p}|\" + Extension + "$)", "").PascalToHyphen() + Extension;
 
-			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumenationFolder));
-			var fileInfo = new FileInfo(documenationTargetPath);
+			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.TmpOutputDirPath, testInDocumentationFolder));
+			var fileInfo = new FileInfo(documentationTargetPath);
 			if (fileInfo.Directory != null)
 				Directory.CreateDirectory(fileInfo.Directory.FullName);
 			return fileInfo;
