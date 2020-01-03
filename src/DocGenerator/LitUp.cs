@@ -156,8 +156,8 @@ namespace DocGenerator
 				dir.Delete(true);
 
 			WaitForActualDelete(outputDir);
+			Console.WriteLine($"Swapping {tmpDir.FullName} to {outputDir.FullName}");
 			tmpDir.MoveTo(Program.OutputDirPath);
-			Console.WriteLine($"Swapped {tmpDir.FullName} to {outputDir.FullName}");
 
 			static void WaitForActualDelete(FileSystemInfo toDelete)
 			{
