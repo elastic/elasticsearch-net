@@ -17,7 +17,7 @@ namespace Tests.Search.Request
 	* which is off by default and generally not recommended.
 	* Use <<source-filtering-usage,source filtering>> instead to select subsets of the original source document to be returned.
 	*
-	* See the Elasticsearch documentation on {ref_current}/search-request-stored-fields.html[Fields] for more detail.
+	* See the Elasticsearch documentation on {ref_current}/search-request-body.html#request-body-search-stored-fields[Fields] for more detail.
 	*/
 	public class FieldsUsageTests : SearchUsageTestBase
 	{
