@@ -45,7 +45,7 @@ module Tests =
             match wants with | true -> ["--collect:\"XPlat Code Coverage\""] | false -> []
            
         let commandWithAdditionalOptions =
-            command |> List.append wantsTrx |> List.append wantsCoverage
+            wantsCoverage |> List.append wantsTrx |> List.append command
             
         Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 30.)
 
