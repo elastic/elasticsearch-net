@@ -5,6 +5,10 @@
 #
 # Export the ELASTICSEARCH_VERSION variable, eg. 'elasticsearch:8.0.0-SNAPSHOT'.
 
+# Version 1.0
+# - Initial version of the run-elasticsearch.sh script
+
+
 if [[ -z "$ELASTICSEARCH_VERSION" ]]; then
   echo -e "\033[31;1mERROR:\033[0m Required environment variable [ELASTICSEARCH_VERSION] not set\033[0m"
   exit 1
@@ -178,11 +182,11 @@ if [[ "$DETACH" == "true" ]]; then
   done;
 
   # Always show logs if the container is running, this is very useful both on CI as well as while developing
-  if container_running "$NODE_NAME"; then
+  if container_running $NODE_NAME; then
     docker logs $NODE_NAME
   fi
 
-  if ! container_running "$NODE_NAME" || [[ "$(docker inspect -f "{{.State.Health.Status}}" ${NODE_NAME})" != "healthy" ]]; then
+  if ! container_running $NODE_NAME || [[ "$(docker inspect -f "{{.State.Health.Status}}" ${NODE_NAME})" != "healthy" ]]; then
     cleanup 1
     echo
     echo -e "\033[31;1mERROR:\033[0m Failed to start ${ELASTICSEARCH_VERSION} in detached mode beyond health checks\033[0m"
