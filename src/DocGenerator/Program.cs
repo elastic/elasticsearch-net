@@ -78,8 +78,7 @@ namespace DocGenerator
 							Console.WriteLine($"Using branch name {BranchName} in documentation");
 							Console.WriteLine($"Using doc reference version {DocVersion} in documentation");
 
-							LitUp.GoAsync(args).Wait();
-							return 0;
+							return LitUp.GoAsync(args).GetAwaiter().GetResult();
 						}
 						catch (AggregateException ae)
 						{
