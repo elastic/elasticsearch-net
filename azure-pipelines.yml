@@ -8,13 +8,6 @@ jobs:
        version: '3.0.100'
   - script: ./build.sh documentation
     displayName: 'Generate Documentation'
-  - task: PublishTestResults@2
-            inputs:
-                testRunner: VSTest
-                testResultsFiles: 'tests/**/*.trx'
-                testRunTitle: Linux Unit Tests
-  # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
-  # First install the tool on the machine, then run it
   - script: |
       if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git status; exit 1; fi
     displayName: 'Ensure no uncommitted docs'
