@@ -174,18 +174,38 @@ Execution hints can be provided anywhere on the command line
         let split (s:string) = s.Split ',' |> Array.toList 
 
         match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> parsed
+        | []
+        | ["build"]
+        | ["clean"]
+        | ["benchmark"]
+        | ["codegen"; ] 
+        | ["profile"] -> parsed
         | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
-        | ["canary"; ] -> parsed
-        | ["codegen"; ] -> parsed
         
         | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; }
+        | ["canary"] ->
+            {
+                parsed with CommandArguments = Test {
+                        TestFilter = None
+                        TrxExport = buildingOnAzurePipeline 
+                        CodeCoverage = buildingOnAzurePipeline
+                }
+            }
+        
+        | ["test"] ->
+            {
+                parsed with CommandArguments = Test {
+                        TestFilter = None
+                        TrxExport = buildingOnAzurePipeline 
+                        CodeCoverage = false
+                }
+            }
         | ["test"; testFilter] ->
             {
                 parsed with CommandArguments = Test {
                         TestFilter = Some testFilter
                         TrxExport = buildingOnAzurePipeline 
-                        CodeCoverage = buildingOnAzurePipeline && (target = "test")
+                        CodeCoverage = false
                 }
             }
 
