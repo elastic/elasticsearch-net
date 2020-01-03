@@ -187,7 +187,7 @@ namespace Tests.Search.Request
 	* [[inner-hits-usage]]
 	*== Inner Hits Usage
 	*
-	* The {ref_current}/mapping-parent-field.html[parent/child] and {ref_current}/nested.html[nested] features allow the
+	* The {ref_current}/parent-join.html[parent/child] and {ref_current}/nested.html[nested] features allow the
 	* return of documents that have matches in a different scope.
 	* In the parent/child case, parent document are returned based on matches in child documents or child document
 	* are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
@@ -200,7 +200,7 @@ namespace Tests.Search.Request
 	*
 	* Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
 	*
-	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
+	* See the Elasticsearch documentation on {ref_current}/search-request-body.html#request-body-search-inner-hits[Inner hits] for more detail.
 	*/
 	public abstract class InnerHitsApiTestsBase<TRoyal>
 		: ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>,
