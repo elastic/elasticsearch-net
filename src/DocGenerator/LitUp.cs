@@ -65,7 +65,7 @@ namespace DocGenerator
 
 			workspace.WorkspaceFailed += (s, e) =>
 			{
-				Console.Error.WriteLine(e.Diagnostic.Message);
+				Console.Error.WriteLine($"Workplace failure: {e.Diagnostic.Message}");
 			};
 
 			// Buildalyzer, similar to MsBuildWorkspace with the new csproj file format, does
@@ -94,7 +94,7 @@ namespace DocGenerator
 
 		private static void DeleteExistingDocs()
 		{
-			var outputDir = new DirectoryInfo(Program.OutputDirPath);
+			var outputDir = new DirectoryInfo(Program.TmpOutputDirPath);
 
 			foreach (var file in outputDir.EnumerateFiles())
 				file.Delete();

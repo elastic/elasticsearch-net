@@ -54,7 +54,7 @@ namespace DocGenerator.AsciiDoc
 
 				foreach (var directory in directories)
 				{
-					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc",
+					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc",
 						SearchOption.AllDirectories))
 					{
 						var fileInfo = new FileInfo(file);
@@ -80,7 +80,7 @@ namespace DocGenerator.AsciiDoc
 
 				foreach (var directory in directories)
 				{
-					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc",
+					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc",
 						SearchOption.AllDirectories))
 					{
 						var fileInfo = new FileInfo(file);

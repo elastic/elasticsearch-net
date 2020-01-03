@@ -16,7 +16,7 @@ namespace DocGenerator.Documentation.Files
 			var copyRelativeTask = CopyFileAsync(FileLocation.FullName, docFileName.FullName);
 
 			// copy to the root as well, for the doc generation process (path is relative to root)
-			var copyRootTask = CopyFileAsync(FileLocation.FullName, Path.Combine(Program.OutputDirPath, docFileName.Name));
+			var copyRootTask = CopyFileAsync(FileLocation.FullName, Path.Combine(Program.TmpOutputDirPath, docFileName.Name));
 
 			await copyRelativeTask;
 			await copyRootTask;
@@ -30,7 +30,7 @@ namespace DocGenerator.Documentation.Files
 			var testInDocumenationFolder = Regex.Replace(testFullPath, $@"(^.+{p}Tests{p}|\" + Extension + "$)", "")
 				.PascalToHyphen() + Extension;
 
-			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumenationFolder));
+			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.TmpOutputDirPath, testInDocumenationFolder));
 
 			var fileInfo = new FileInfo(documentationTargetPath);
 			if (fileInfo.Directory != null)
