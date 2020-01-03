@@ -1,7 +1,0 @@
-<Project>
-	<PropertyGroup>
-		<LangVersion>8.0</LangVersion>
-    <!-- We'll work on a project by project approach to enable this -->
-<!--    <Nullable>enable</Nullable>-->
-	</PropertyGroup>
-</Project>

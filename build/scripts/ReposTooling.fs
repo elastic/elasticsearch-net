@@ -27,12 +27,28 @@ module ReposTooling =
         
     let GenerateApi () =
         //TODO allow branch name to be passed for CI
-        let folder = Path.getDirectory (Paths.ProjFile <| DotNetProject.PrivateProject PrivateProject.ApiGenerator)
+        let folder = Path.getDirectory (Paths.ProjFile "ApiGenerator")
         let timeout = TimeSpan.FromMinutes(120.)
         Tooling.DotNet.ExecInWithTimeout folder ["run"; ] timeout  |> ignore
         
     let RestSpecTests args =
-        let folder = Path.getDirectory (Paths.ProjFile <| DotNetProject.PrivateProject PrivateProject.RestSpecTestRunner)
+        let folder = Path.getDirectory (Paths.TestProjFile "Tests.YamlRunner")
         let timeout = TimeSpan.FromMinutes(120.)
         Tooling.DotNet.ExecInWithTimeout folder (["run"; "--" ] @ args) timeout  |> ignore
+    
+    
+    let restoreOnce = lazy(Tooling.DotNet.Exec ["tool"; "restore"])
+    
+    let private differ = "assembly-differ"
+    let Differ args =
+        restoreOnce.Force()
+              
+        let args = args |> String.concat " "
+        let command = sprintf @"%s %s -o ../../%s" differ args Paths.BuildOutput
+        Tooling.DotNet.ExecIn Paths.TargetsFolder [command] |> ignore
+
+    let private assemblyRewriter = "assembly-rewriter"
+    let Rewriter args =
+        restoreOnce.Force()
+        Tooling.DotNet.ExecIn "." (List.append [assemblyRewriter] (List.ofSeq args)) |> ignore
          

@@ -27,9 +27,6 @@ Targets:
     elasticsearch versions to test or `latest`. Can filter tests by <clustername> and <testfilter>
 * canary 
   - create a canary nuget package based on the current version.
-* diff <..args>
-  - runs assembly-differ with the specified arguments
-    see: https://github.com/nullean/AssemblyDiffer#differ
 * cluster <cluster-name> [version]
   - Start a cluster defined in Tests.Core or Tests from the command line and leaves it running
     untill a key is pressed. Handy if you want to run the integration tests numerous times while developing  
@@ -76,8 +73,8 @@ Execution hints can be provided anywhere on the command line
     type MultiTarget = All | One
 
     type VersionArguments = { Version: string; }
-    type TestArguments = { TestFilter: string option; }
-    type IntegrationArguments = { TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
+    type TestArguments = { TrxExport: bool; CodeCoverage: bool; TestFilter: string option; }
+    type IntegrationArguments = { TrxExport: bool; TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
 
     type BenchmarkArguments = { Endpoint: string; Username: string option; Password: string option; }
     type ClusterArguments = { Name: string; Version: string option; }
@@ -98,20 +95,17 @@ Execution hints can be provided anywhere on the command line
         DocsBranch: string;
         ReferenceBranch: string;
         RemainingArguments: string list;
-        MultiTarget: MultiTarget;
+        MultiTarget: MultiTarget
+        ReleaseBuild: bool;
         Target: string;
-        ValidMonoTarget: bool;
-        NeedsFullBuild: bool;
-        NeedsClean: bool;
-        DoSourceLink: bool;
-
         CommandArguments: CommandArguments;
     }
 
-    //TODO RENAME to notWindows
-    let isMono =
+    let notWindows =
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
         RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)
+        
+    let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
         
     let runningOnCi = Environment.hasEnvironVar "TF_BUILD" || Environment.hasEnvironVar "APPVEYOR_BUILD_VERSION"
     
@@ -164,30 +158,12 @@ Execution hints can be provided anywhere on the command line
                 match (filteredArgs |> List.tryHead) with
                 | Some t -> t.Replace("-one", "")
                 | _ -> "build"
-            ValidMonoTarget = 
+            ReleaseBuild = 
                 match target with
-                | "release"
-                | "canary" -> false
-                | _ -> true
-            NeedsFullBuild = 
-                match (target, skipTests) with
-                | (_, true) -> true
-                //dotnet-xunit needs to a build of its own anyways
-                | ("test", _)
-                | ("integrate", _) -> false
-                | _ -> true;
-            NeedsClean = 
-                match (target, skipTests) with
-                | ("release", _) -> true
-                //dotnet-xunit needs to a build of its own anyways
-                | ("test", _)
-                | ("cluster", _)
-                | ("integrate", _) 
-                | ("build", _)
-                | ("diff", _) -> false
-                | _ -> true;
+                | "canary"
+                | "release" -> true
+                | _ -> false
             CommandArguments = Unknown
-            DoSourceLink = false
         }
             
         let arguments =
@@ -198,16 +174,40 @@ Execution hints can be provided anywhere on the command line
         let split (s:string) = s.Split ',' |> Array.toList 
 
         match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> parsed
-        | ["touch"; ] -> parsed
-        | ["temp"; ] -> parsed
-        | "diff" :: tail -> { parsed with RemainingArguments = tail }
+        | []
+        | ["build"]
+        | ["clean"]
+        | ["benchmark"]
+        | ["codegen"; ] 
+        | ["profile"] -> parsed
         | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
-        | ["canary"; ] -> parsed
-        | ["codegen"; ] -> parsed
         
-        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; DoSourceLink = true }
-        | ["test"; testFilter] -> { parsed with CommandArguments = Test { TestFilter = Some testFilter } }
+        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; }
+        | ["canary"] ->
+            {
+                parsed with CommandArguments = Test {
+                        TestFilter = None
+                        TrxExport = buildingOnAzurePipeline 
+                        CodeCoverage = buildingOnAzurePipeline
+                }
+            }
+        
+        | ["test"] ->
+            {
+                parsed with CommandArguments = Test {
+                        TestFilter = None
+                        TrxExport = buildingOnAzurePipeline 
+                        CodeCoverage = false
+                }
+            }
+        | ["test"; testFilter] ->
+            {
+                parsed with CommandArguments = Test {
+                        TestFilter = Some testFilter
+                        TrxExport = buildingOnAzurePipeline 
+                        CodeCoverage = false
+                }
+            }
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
             {
@@ -229,12 +229,14 @@ Execution hints can be provided anywhere on the command line
         | ["integrate"; esVersions] -> 
             {
                 parsed with CommandArguments = Integration {
+                        TrxExport = buildingOnAzurePipeline
                         ElasticsearchVersions = split esVersions; ClusterFilter = None; TestFilter = None
                 }
             }
         | ["integrate"; esVersions; clusterFilter] ->
             {
                 parsed with CommandArguments = Integration {
+                        TrxExport = buildingOnAzurePipeline
                         ElasticsearchVersions = split esVersions;
                         ClusterFilter = Some clusterFilter;
                         TestFilter = None
@@ -243,6 +245,7 @@ Execution hints can be provided anywhere on the command line
         | ["integrate"; esVersions; clusterFilter; testFilter] ->
             {
                 parsed with CommandArguments = Integration {
+                        TrxExport = buildingOnAzurePipeline
                         ElasticsearchVersions = split esVersions;
                         ClusterFilter = Some clusterFilter
                         TestFilter = Some testFilter

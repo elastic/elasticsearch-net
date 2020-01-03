@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\PublishArtifacts.build.props" />
+  <PropertyGroup>
+    <PackageId>NEST</PackageId>
+    <Title>NEST - Elasticsearch .NET high level client</Title>
+    <PackageTags>elasticsearch;elastic;search;lucene;nest</PackageTags>
+    <Description>
+      Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and 
+      responses. Uses and exposes Elasticsearch.Net.
+    </Description>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
@@ -35,5 +44,4 @@
       <DependentUpon>ElasticClient.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\InternalsVisible.targets" />
 </Project>
