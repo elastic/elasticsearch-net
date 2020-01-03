@@ -7,6 +7,7 @@ open Fake.Core
 
 module Documentation = 
 
+    exception DocGenError of string 
     let Generate args = 
         let path = Paths.InplaceBuildOutput "DocGenerator" "netcoreapp3.0"
         let generator = sprintf "%s.dll" "DocGenerator"
@@ -24,7 +25,33 @@ module Documentation =
             | (_, NotNullOrEmpty d) -> [ generator; "-d"; d ];
             | (_, _) -> [ generator ]
         
-        Tooling.DotNet.ExecIn path dotnetArgs |> ignore
+        let rec retry times fn =
+            if times > 1 then
+                try
+                    fn(times)
+                with 
+                | _ -> retry (times - 1) fn
+            else
+                fn(times)
+                
+        // This seems silly? That's because it is!
+        // If `Paths.MagicDocumentationFile` (a cache in Elasticsearch.Net `obj` folder) is missing
+        // `BuildAlyzer` has problems loading the project.
+        //
+        // This file only appears however when running the generation command multiple times
+        //
+        // Solution: brute force run it a bunch of times
+        retry 5 <| fun times ->
+            printfn "Attempt %i to generate the docs" (System.Math.Abs(times - 5) + 1)
+            let result = Tooling.DotNet.ReadQuietIn path dotnetArgs
+            if result.ExitCode = 0 || times = 1 || File.Exists(Paths.MagicDocumentationFile) then
+                result.Output |> Seq.iter (fun l -> if l.Error then printfn "%s" l.Line else eprintfn "%s" l.Line)
+                if result.ExitCode <> 0 then
+                    eprintfn "documentation generation failed"
+                    raise (DocGenError("documentation generation failed"))
+            else
+                eprintfn "documentation generation failed"
+                raise (DocGenError("documentation generation failed"))
 
     // TODO: hook documentation validation into the process
     let Validate() = 
