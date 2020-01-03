@@ -47,6 +47,10 @@ a => a
             .Field(f => f.RequiredBranches)
             .Interval(1)
         )
+        .GeoTileGrid("geo", h => h
+            .Field(f => f.LocationPoint)
+            .Precision(GeoTilePrecision.Precision12)
+        )
     )
     .Aggregations(childAggs => childAggs
         .Nested("project_tags", n => n
@@ -80,6 +84,11 @@ new CompositeAggregation("my_buckets")
         {
             Field = Field<Project>(f => f.RequiredBranches),
             Interval = 1
+        },
+        new GeoTileGridCompositeAggregationSource("geo")
+        {
+            Field = Field<Project>(f => f.LocationPoint),
+            Precision = GeoTilePrecision.Precision12
         }
     },
     Aggregations = new NestedAggregation("project_tags")
@@ -122,6 +131,14 @@ new CompositeAggregation("my_buckets")
               "interval": 1.0
             }
           }
+        },
+        {
+          "geo": {
+            "geotile_grid": {
+              "field": "locationPoint",
+              "precision": 12
+            }
+          }
         }
       ]
     },
@@ -158,8 +175,8 @@ composite.Buckets.Should().NotBeNullOrEmpty();
 composite.AfterKey.Should().NotBeNull();
 if (TestConfiguration.Instance.InRange(">=6.3.0"))
     composite.AfterKey.Should()
-        .HaveCount(3)
-        .And.ContainKeys("branches", "started", "branch_count");
+        .HaveCount(4)
+        .And.ContainKeys("branches", "started", "branch_count", "geo");
 foreach (var item in composite.Buckets)
 {
     var key = item.Key;

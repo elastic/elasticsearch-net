@@ -7,13 +7,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/MovingAverage/MovingAverageEwmaAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/CumulativeCardinality/CumulativeCardinalityAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[moving-average-ewma-aggregation-usage]]
-=== Moving Average Ewma Aggregation Usage
+[[cumulative-cardinality-aggregation-usage]]
+=== Cumulative Cardinality Aggregation Usage
 
 ==== Fluent DSL example
 
@@ -22,19 +22,13 @@ please modify the original csharp file found at the link and submit the PR with 
 a => a
 .DateHistogram("projects_started_per_month", dh => dh
     .Field(p => p.StartedOn)
-    .Interval(DateInterval.Month)
-    .MinimumDocumentCount(1)
+    .CalendarInterval(DateInterval.Month)
     .Aggregations(aa => aa
-        .Sum("commits", sm => sm
+        .Cardinality("commits", sm => sm
             .Field(p => p.NumberOfCommits)
         )
-        .MovingAverage("commits_moving_avg", mv => mv
+        .CumulativeCardinality("cumulative_commits", d => d
             .BucketsPath("commits")
-            .Model(m => m
-                .Ewma(e => e
-                    .Alpha(0.3f)
-                )
-            )
         )
     )
 )
@@ -47,17 +41,10 @@ a => a
 new DateHistogramAggregation("projects_started_per_month")
 {
     Field = "startedOn",
-    Interval = DateInterval.Month,
-    MinimumDocumentCount = 1,
+    CalendarInterval = DateInterval.Month,
     Aggregations =
-        new SumAggregation("commits", "numberOfCommits")
-        && new MovingAverageAggregation("commits_moving_avg", "commits")
-        {
-            Model = new EwmaModel
-            {
-                Alpha = 0.3f,
-            }
-        }
+        new CardinalityAggregation("commits", "numberOfCommits") &&
+        new CumulativeCardinalityAggregation("cumulative_commits", "commits")
 }
 ----
 
@@ -68,22 +55,17 @@ new DateHistogramAggregation("projects_started_per_month")
   "projects_started_per_month": {
     "date_histogram": {
       "field": "startedOn",
-      "interval": "month",
-      "min_doc_count": 1
+      "calendar_interval": "month"
     },
     "aggs": {
       "commits": {
-        "sum": {
+        "cardinality": {
           "field": "numberOfCommits"
         }
       },
-      "commits_moving_avg": {
-        "moving_avg": {
-          "buckets_path": "commits",
-          "model": "ewma",
-          "settings": {
-            "alpha": 0.3
-          }
+      "cumulative_commits": {
+        "cumulative_cardinality": {
+          "buckets_path": "commits"
         }
       }
     }
@@ -102,12 +84,11 @@ projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-// average not calculated for the first bucket
-foreach (var item in projectsPerMonth.Buckets.Skip(1))
+foreach (var item in projectsPerMonth.Buckets)
 {
-    var movingAvg = item.MovingAverage("commits_moving_avg");
-    movingAvg.Should().NotBeNull();
-    movingAvg.Value.Should().BeGreaterThan(0);
+    var commitsDerivative = item.CumulativeCardinality("cumulative_commits");
+    commitsDerivative.Should().NotBeNull();
+    commitsDerivative.Value.Should().NotBe(null);
 }
 ----
 

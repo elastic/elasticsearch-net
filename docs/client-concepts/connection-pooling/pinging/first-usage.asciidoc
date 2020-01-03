@@ -92,13 +92,9 @@ await audit.TraceCalls(
 );
 ----
 <1> The first call goes to 9200, which succeeds
-
 <2> The 2nd call does a ping on 9201 because its used for the first time. This fails
-
 <3> So we ping 9202. This _also_ fails
-
 <4> We then ping 9203 because we haven't used it before and it succeeds
-
 <5> Finally, we assert that the connection pool has two nodes that are marked as dead
 
 All nodes are pinged on first use, provided they are healthy
@@ -125,6 +121,5 @@ await audit.TraceCalls(
 );
 ----
 <1> Pings on nodes always succeed
-
 <2> A successful ping on each node
 
