@@ -8,9 +8,6 @@ open System.Xml.Linq
 open System.Xml.XPath
 open System.IO
 
-open Projects
-
-
 module InheritDoc =
     
     let private apiName n = Regex.Replace(n, @"^\w\:(.+?)(?:\(.+$|$)", "$1")
@@ -79,11 +76,13 @@ module InheritDoc =
         writer.Formatting <- Formatting.Indented;
         xml.Save(writer);
 
-    let PatchInheritDocs() = 
-        AllPublishableProjectsWithSupportedFrameworks
-        |> Seq.map (fun p -> 
-            let folder = Paths.ProjectOutputFolder p.project p.framework
-            Path.Combine(folder, p.project.Name) + ".xml"
-        )
-        |> Seq.filter File.Exists
-        |> Seq.iter patchInheritDoc
+    let PatchInheritDocs() =
+        ignore()
+        //TODO VALIDATE this still works as expected
+//        AllPublishableProjectsWithSupportedFrameworks
+//        |> Seq.map (fun p -> 
+//            let folder = Paths.ProjectOutputFolder p.project p.framework
+//            Path.Combine(folder, p.project.Name) + ".xml"
+//        )
+//        |> Seq.filter File.Exists
+//        |> Seq.iter patchInheritDoc
