@@ -17,7 +17,7 @@ namespace Tests.Search.Request
 	 *
 	 * Script fields can be accessed on the response using <<returned-fields,`.Fields`>>, similarly to stored fields.
 	 *
-	 * See the Elasticsearch documentation on {ref_current}/search-request-script-fields.html[script fields]
+	 * See the Elasticsearch documentation on {ref_current}/search-request-body.html#request-body-search-script-fields[script fields]
 	 * for more detail.
 	 */
 	public class ScriptFieldsUsageTests : SearchUsageTestBase
