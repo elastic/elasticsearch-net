@@ -19,7 +19,7 @@ module Versioning =
 
     //Versions in form of e.g 6.1.0 is inferred as datetime so we bake the json shape into the provider like this
     type SdkVersion = { version:string;  }
-    type GlobalJson = { sdk: SdkVersion; version:string; doc_current:string; }
+    type GlobalJson = { sdk: SdkVersion; version:string; doc_current:string; doc_branch: string; }
         
     let private globalJson () =
         let jsonString = File.ReadAllText "global.json"
@@ -27,7 +27,21 @@ module Versioning =
         
     let writeVersionIntoGlobalJson version =
         let globalJson = globalJson ()
-        let newGlobalJson = { globalJson with version = version.ToString(); }
+        let doc_current =
+            match globalJson.doc_current with
+            | "master" -> "master"
+            | _ -> sprintf "%i.%i" version.Major version.Minor
+        let doc_branch =
+            match globalJson.doc_current with
+            | "master" -> "master"
+            | _ -> sprintf "%i.x" version.Major 
+            
+        let newGlobalJson = {
+            globalJson with
+                version = version.ToString()
+                doc_current = doc_current
+                doc_branch = doc_branch
+        }
         File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson, Newtonsoft.Json.Formatting.Indented))
         printfn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
