@@ -107,7 +107,6 @@ var exceptions = new[] <1>
     typeof(DocumentExistsRequest<>),
     typeof(AliasExistsRequest),
     typeof(IndexExistsRequest),
-    typeof(TypeExistsRequest),
     typeof(IndexTemplateExistsRequest),
     typeof(SearchTemplateRequest),
     typeof(SearchTemplateRequest<>),

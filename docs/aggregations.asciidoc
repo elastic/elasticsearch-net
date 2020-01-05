@@ -237,6 +237,8 @@ There are many different types of pipeline aggregation, each computing different
 
 * <<bucket-sort-aggregation-usage,Bucket Sort Aggregation Usage>>
 
+* <<cumulative-cardinality-aggregation-usage,Cumulative Cardinality Aggregation Usage>>
+
 * <<cumulative-sum-aggregation-usage,Cumulative Sum Aggregation Usage>>
 
 * <<derivative-aggregation-usage,Derivative Aggregation Usage>>
@@ -278,6 +280,8 @@ include::aggregations/pipeline/bucket-script/bucket-script-aggregation-usage.asc
 include::aggregations/pipeline/bucket-selector/bucket-selector-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/bucket-sort/bucket-sort-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/cumulative-cardinality/cumulative-cardinality-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/cumulative-sum/cumulative-sum-aggregation-usage.asciidoc[]
 

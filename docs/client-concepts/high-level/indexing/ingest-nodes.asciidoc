@@ -57,6 +57,5 @@ var settings = new ConnectionSettings(pool).NodePredicate(n => n.IngestEnabled);
 var indexingClient = new ElasticClient(settings);
 ----
 <1> list of cluster nodes
-
 <2> predicate to select only nodes with ingest capabilities
 
