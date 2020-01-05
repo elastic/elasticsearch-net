@@ -1,5 +1,5 @@
 jobs:
-- job: Documentation
+- job: Stale Docs
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
