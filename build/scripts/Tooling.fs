@@ -1,8 +1,6 @@
 ﻿namespace Scripts
 
-open Elastic.Managed.ConsoleWriters
 open System
-open System.IO
 open ProcNet
 open ProcNet.Std
 
