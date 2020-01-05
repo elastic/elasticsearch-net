@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -84,7 +84,6 @@ audit = await audit.TraceCall(
 );
 ----
 <1> Set the maximum number of retries to 3
-
 <2> The client call trace returns an `MaxRetriesReached` audit after the initial attempt and the number of retries allowed
 
 In our previous example we simulated very fast failures, but in the real world, a call might take upwards of a second.

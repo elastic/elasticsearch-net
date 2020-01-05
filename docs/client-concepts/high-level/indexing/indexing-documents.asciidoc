@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -40,7 +40,6 @@ if (!indexResponse.IsValid)
 var indexResponseAsync = await client.IndexDocumentAsync(person); <2>
 ----
 <1> synchronous method that returns an IIndexResponse
-
 <2> asynchronous method that returns a Task<IIndexResponse> that can be awaited
 
 ==== Single documents with parameters
@@ -62,7 +61,6 @@ client.Index(person, i => i.Index("people")); <1>
 client.Index(new IndexRequest<Person>(person, "people")); <2>
 ----
 <1> fluent syntax
-
 <2> object initializer syntax
 
 ==== Multiple documents with `IndexMany`
@@ -113,11 +111,8 @@ if (indexManyResponse.Errors) <2>
 var indexManyAsyncResponse = await client.IndexManyAsync(people); <4>
 ----
 <1> synchronous method that returns an IBulkResponse
-
 <2> the response can be inspected to see if any of the bulk operations resulted in an error
-
 <3> If there are errors, they can be enumerated and inspected
-
 <4> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 
 ==== Multiple documents with bulk
@@ -141,7 +136,6 @@ var asyncBulkIndexResponse = await client.BulkAsync(b => b
     .IndexMany(people)); <2>
 ----
 <1> synchronous method that returns an IBulkResponse, the same as IndexMany and can be inspected in the same way for errors
-
 <2> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 
 ==== Multiple documents with `BulkAllObservable` helper
@@ -173,11 +167,8 @@ var bulkAllObservable = client.BulkAll(people, b => b
 });
 ----
 <1> how long to wait between retries
-
 <2> how many retries are attempted if a failure occurs
-
 <3> items per bulk request
-
 <4> perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
 
 ==== Advanced bulk indexing
@@ -213,10 +204,7 @@ client.BulkAll(people, b => b
       }));
 ----
 <1> customise the individual operations in the bulk request before it is dispatched
-
 <2> Index each document into either even-index or odd-index
-
 <3> decide if a document should be retried in the event of a failure
-
 <4> if a document cannot be indexed this delegate is called
 
