@@ -9,7 +9,7 @@ jobs:
   - script: ./build.sh documentation
     displayName: 'Generate Documentation'
   - script: |
-      if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git status; exit 1; fi
+      if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git diff; git status; exit 1; fi
     displayName: 'Ensure no uncommitted docs'
 - job: LinuxUnitTests
   pool:
