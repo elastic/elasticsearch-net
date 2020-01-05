@@ -52,10 +52,11 @@ namespace DocGenerator.AsciiDoc
 
 				var counter = 1;
 
-				foreach (var directory in directories)
+				foreach (var directory in directories.OrderBy(s=>s))
 				{
-					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc",
-						SearchOption.AllDirectories))
+					var files = Directory.EnumerateFiles(
+						Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories);
+					 foreach (var file in files.OrderBy(s=>s))
 					{
 						var fileInfo = new FileInfo(file);
 						var referencedFileUri = new Uri(fileInfo.FullName);
@@ -80,8 +81,9 @@ namespace DocGenerator.AsciiDoc
 
 				foreach (var directory in directories)
 				{
-					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc",
-						SearchOption.AllDirectories))
+					var files = Directory.EnumerateFiles(
+						Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories);
+					 foreach (var file in files.OrderBy(s=>s))
 					{
 						var fileInfo = new FileInfo(file);
 						var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
