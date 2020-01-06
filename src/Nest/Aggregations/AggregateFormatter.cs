@@ -770,12 +770,23 @@ namespace Nest
 			if (token == JsonToken.String)
 				key = reader.ReadString();
 			else
-				key = reader.ReadDouble();
+			{
+				var numberSegment = reader.ReadNumberSegment();
+				if (numberSegment.IsDouble())
+					key = NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
+				else
+					key = NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
+			}
 
 			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
 			if (propertyName == Parser.From || propertyName == Parser.To)
-				return GetRangeBucket(ref reader, formatterResolver, (string)key, propertyName);
+			{
+				var rangeKey = key is double d
+					? d.ToString("#.#")
+					: key.ToString();
+				return GetRangeBucket(ref reader, formatterResolver, rangeKey, propertyName);
+			}
 
 			string keyAsString = null;
 			if (propertyName == Parser.KeyAsString)
