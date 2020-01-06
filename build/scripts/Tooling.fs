@@ -1,8 +1,6 @@
 ﻿namespace Scripts
 
-open Elastic.Managed.ConsoleWriters
 open System
-open System.IO
 open ProcNet
 open ProcNet.Std
 
@@ -24,6 +22,7 @@ module Tooling =
         if (Option.isSome workinDir) then
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
         let result = Proc.Start(startArgs, timeout, Option.defaultValue<IConsoleOutWriter> (NoopWriter())  writer)
+        
         if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
         if not result.ExitCode.HasValue then failwithf "process yielded no exit code: %s" bin
         { ExitCode = result.ExitCode.Value; Output = seq result.ConsoleOut}

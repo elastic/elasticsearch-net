@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -120,7 +120,6 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 <1> Sniffing returns 8 nodes, starting from 9204
-
 <2> After successfully sniffing, the ping now happens on 9204
 
 ==== Prefers master eligible nodes

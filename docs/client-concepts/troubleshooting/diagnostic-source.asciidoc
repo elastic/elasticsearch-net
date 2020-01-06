@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -124,8 +124,6 @@ using (var subscription = DiagnosticListener.AllListeners.Subscribe(listenerObse
 }
 ----
 <1> use a sniffing connection pool that sniffs on startup and pings before first usage, so our diagnostics will emit most topics.
-
 <2> make a search API call
-
 <3> verify that the listener is picking up events
 

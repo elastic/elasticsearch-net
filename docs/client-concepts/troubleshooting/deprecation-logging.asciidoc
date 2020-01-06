@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -46,7 +46,7 @@ var request = new SearchRequest<Project>
 var response = this.Client.Search<Project>(request);
 
 response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
-response.ApiCall.DeprecationWarnings.Should().HaveCount(2);
+response.ApiCall.DeprecationWarnings.Should().HaveCountGreaterOrEqualTo(2);
 response.DebugInformation.Should().Contain("Deprecated aggregation order key"); <1>
 ----
 <1> `DebugInformation` also contains the deprecation warnings
