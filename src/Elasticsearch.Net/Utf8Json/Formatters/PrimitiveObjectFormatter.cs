@@ -158,11 +158,11 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 case JsonToken.Number:
 					var numberSegment = reader.ReadNumberSegment();
 					// conditional operator here would cast both to double, so don't use.
-					if (numberSegment.IsDouble())
-						return NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
+					if (numberSegment.IsLong())
+						return NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
 
-					// potential overflow if larger than int64
-					return NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
+
+					return NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
 				case JsonToken.String:
                     return reader.ReadString();
                 case JsonToken.True:

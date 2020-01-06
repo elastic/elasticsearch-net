@@ -760,6 +760,8 @@ namespace Nest
 			return dateHistogram;
 		}
 
+
+
 		private IBucket GetKeyedBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
@@ -772,10 +774,10 @@ namespace Nest
 			else
 			{
 				var numberSegment = reader.ReadNumberSegment();
-				if (numberSegment.IsDouble())
-					key = NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
-				else
+				if (numberSegment.IsLong())
 					key = NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
+				else
+					key = NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
 			}
 
 			reader.ReadNext(); // ,
