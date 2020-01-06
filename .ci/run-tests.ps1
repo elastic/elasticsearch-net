@@ -11,12 +11,8 @@ param (
     $DOTNET_VERSION = "3.0.100"
 )
 
-trap {
-  cleanup
-}
-
+$ESC = [char]27
 $NODE_NAME = "es1"
-$repo = $PWD
 $elasticsearch_image= "elasticsearch"
 $elasticsearch_url = "https://elastic:changeme@${NODE_NAME}:9200"
 
@@ -50,31 +46,33 @@ function cleanup {
 }
 
 
-Write-Output ">>>>> Start [$env:ELASTICSEARCH_VERSION container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+try {
+    Write-Output "$ESC[1m>>>>> Start [$env:ELASTICSEARCH_VERSION container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>$ESC[0m"
 
-$runParams = @{
-  NODE_NAME= "$NODE_NAME"
-  NETWORK_NAME = "elasticsearch"
-  DETACH = $true  
+    $runParams = @{
+        NODE_NAME= "$NODE_NAME"
+        NETWORK_NAME = "elasticsearch"
+        DETACH = $true
+    }
+
+    ./.ci/run-elasticsearch.ps1 @runParams
+
+    Write-Output "$ESC[1m>>>>> Repository specific tests >>>>>>>>>>>>>>>>>>>>>>>>>>>>>$ESC[0m"
+
+    $runParams = @{
+        ELASTICSEARCH_VERSION = "$env:ELASTICSEARCH_VERSION"
+        ELASTICSEARCH_CONTAINER = "$env:ELASTICSEARCH_VERSION"
+        NETWORK_NAME = "elasticsearch"
+        NODE_NAME= "$NODE_NAME"
+        ELASTICSEARCH_URL = $elasticsearch_url
+        DOTNET_VERSION = $DOTNET_VERSION
+    }
+
+    ./.ci/run-repository.ps1 @runParams
+
+    cleanup   
+}
+catch {
+    cleanup
 }
 
-./.ci/run-elasticsearch.ps1 @runParams
-
-Write-Output ">>>>> Build [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-
-docker build --file .ci/DockerFile --tag elastic/elasticsearch-net .
-
-Write-Output ">>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-
-mkdir -p build/output -ErrorAction Ignore
-
-docker run `
---network=elasticsearch `
---env "DOTNET_VERSION=$DOTNET_VERSION" `
---name test-runner `
---volume ${repo}/build/output:/sln/build/output `
---rm `
-elastic/elasticsearch-net `
-./build.sh rest-spec-tests -f create -e $elasticsearch_url -o /sln/build/output/rest-spec-junit.xml
-
-cleanup
