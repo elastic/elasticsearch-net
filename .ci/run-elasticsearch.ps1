@@ -129,7 +129,7 @@ if ($CLEANUP) {
     Write-Output "$ESC[34;1mINFO:$ESC[0m $NETWORK_NAME is already deleted$ESC[0m"
     exit 0
   }
-  $containers = $(docker network inspect --format '{{ range $key, $value := .Containers }}{{ printf "%s\n" .Name}}{{ end }}' ${NETWORK_NAME})
+  $containers = $(docker network inspect --format '{{ range $key, $value := .Containers }}{{ println .Name}}{{ end }}' ${NETWORK_NAME})
 
   foreach($container in $containers) {
     cleanup_node "$container"
