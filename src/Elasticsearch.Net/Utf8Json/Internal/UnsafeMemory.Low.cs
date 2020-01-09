@@ -82,7 +82,6 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         public static unsafe void MemoryCopy(ref JsonWriter writer, byte[] src, int length)
         {
             BinaryUtil.EnsureCapacity(ref writer.buffer, writer.offset, length);
-#if !NET45
             fixed (void* dstP = &writer.buffer[writer.offset])
             fixed (void* srcP = &src[0])
             {

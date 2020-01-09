@@ -7,10 +7,8 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net
 {
-	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer, IInternalSerializerWithFormatter
+	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer, IInternalSerializer
 	{
-		IJsonFormatterResolver IInternalSerializerWithFormatter.FormatterResolver => null;
-
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 
 		public object Deserialize(Type type, Stream stream) =>
@@ -32,5 +30,11 @@ namespace Elasticsearch.Net
 			CancellationToken cancellationToken = default
 		) =>
 			JsonSerializer.SerializeAsync(writableStream, data, ElasticsearchNetFormatterResolver.Instance);
+
+		bool IInternalSerializer.TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
+		{
+			formatterResolver = ElasticsearchNetFormatterResolver.Instance;
+			return true;
+		}
 	}
 }

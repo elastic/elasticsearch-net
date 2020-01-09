@@ -32,13 +32,10 @@ namespace Elasticsearch.Net
 		public override string ToString() => _stringRepresentation;
 	}
 
-	//TODO this no longer needs to be IInternalSerializerWithFormatter
-	// Previous we checked that the serializer we are wrapping implements the interface and if so set the formatter
-	// However its totally fine for formatter to be null. `IJsonFormatter` solves this better.
 	/// <summary>
 	/// Wraps configured serializer so that we can emit diagnostics per configured serializer.
 	/// </summary>
-	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializerWithFormatter, IInternalSerializer
+	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializer
 	{
 		private readonly IElasticsearchSerializer _serializer;
 		private readonly bool _wrapsUtf8JsonSerializer;
@@ -50,9 +47,9 @@ namespace Elasticsearch.Net
 		{
 			_serializer = serializer;
 			_state = new SerializerRegistrationInformation(serializer.GetType(), purpose);
-			if (serializer is IInternalSerializerWithFormatter withFormatter)
+			if (serializer is IInternalSerializer s && s.TryGetJsonFormatter(out var formatterResolver))
 			{
-				_formatterResolver = withFormatter.FormatterResolver;
+				_formatterResolver = formatterResolver;
 				_wrapsUtf8JsonSerializer = true;
 			}
 			else
@@ -61,8 +58,6 @@ namespace Elasticsearch.Net
 				_formatterResolver = null;
 			}
 		}
-
-		public IJsonFormatterResolver FormatterResolver => _formatterResolver;
 
 		public bool TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
 		{

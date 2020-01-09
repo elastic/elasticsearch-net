@@ -31,6 +31,13 @@ namespace Tests.Benchmarking
 		[GlobalSetup]
 		public void Setup() { }
 
+		[Benchmark(Description = "NEST")]
+		public BulkResponse HighLevel()
+		{
+			var lowLevel = Client.Bulk(b=>b.IndexMany(Projects));
+			return lowLevel;
+		}
+
 		[Benchmark(Description = "ListOfObjects")]
 		public BulkResponse ListOfObjects()
 		{

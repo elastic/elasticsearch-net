@@ -1,3 +1,4 @@
+using System;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
@@ -7,7 +8,9 @@ namespace Nest
 	{
 		public static DefaultHighLevelSerializer CreateStateful<T>(this IElasticsearchSerializer serializer, IJsonFormatter<T> formatter)
 		{
-			var currentFormatterResolver = ((IInternalSerializerWithFormatter)serializer).FormatterResolver;
+			if (!(serializer is IInternalSerializer s) || !s.TryGetJsonFormatter(out var currentFormatterResolver))
+				throw new Exception($"Can not create a stateful serializer because {serializer.GetType()} does not yield a json formatter");
+
 			var formatterResolver = new StatefulFormatterResolver<T>(formatter, currentFormatterResolver);
 			return new DefaultHighLevelSerializer(formatterResolver);
 		}

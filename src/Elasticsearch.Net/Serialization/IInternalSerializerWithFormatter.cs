@@ -7,8 +7,4 @@ namespace Elasticsearch.Net
 		bool TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver);
 	}
 
-	internal interface IInternalSerializerWithFormatter
-	{
-		IJsonFormatterResolver FormatterResolver { get; }
-	}
 }
