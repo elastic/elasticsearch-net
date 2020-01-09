@@ -105,6 +105,8 @@ namespace Elasticsearch.Net
 
 	public class PostData<T> : PostData, IPostData<T>
 	{
+		private readonly Action<Stream> _syncWriter;
+		private readonly Func<Stream, CancellationToken, Task> _asyncWriter;
 		private readonly IEnumerable<object> _enumerableOfObject;
 		private readonly IEnumerable<string> _enumerableOfStrings;
 		private readonly string _literalString;
@@ -142,6 +144,25 @@ namespace Elasticsearch.Net
 		{
 			_enumerableOfObject = item;
 			Type = PostType.EnumerableOfObject;
+		}
+
+		protected internal PostData(Action<Stream> syncWriter, Func<Stream, CancellationToken, Task> asyncWriter)
+		{
+			const string message = "PostData.StreamHandler needs to handle both synchronous and async paths";
+			_syncWriter = syncWriter ?? throw new ArgumentNullException(nameof(syncWriter), message);
+			_asyncWriter = asyncWriter ?? throw new ArgumentNullException(nameof(asyncWriter), message);
+			if (_syncWriter == null || _asyncWriter == null)
+				throw new ArgumentNullException();
+		}
+
+		private static void BufferIfNeeded(IConnectionConfigurationValues settings, bool disableDirectStreaming, ref MemoryStream buffer,
+			ref Stream stream
+		)
+		{
+			if (!disableDirectStreaming) return;
+
+			buffer = settings.MemoryStreamFactory.Create();
+			stream = buffer;
 		}
 
 		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
