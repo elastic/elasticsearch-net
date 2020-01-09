@@ -132,11 +132,16 @@ namespace Tests.ClientConcepts.LowLevel
 			await Post(() => bytes, writes: bytes, writtenBytesIsSet: true, settings: settings);
 
 			/**
+			 * On platforms that support `ReadOnlyMemory<byte>` you can use `PostData.ReadOnlyMemory` to pass this directly
+			 */
+			await Post(() => PostData.ReadOnlyMemory(bytes.AsMemory()), writes: bytes, writtenBytesIsSet: false, settings: settings);
+
+			/**
 			 * When passing a collection of `string`, the client assumes that it's a collection of valid serialized json,
 			 * so joins each with newline feeds, ensuring there is a trailing linefeed. As with `string` and `byte[]`,
-			 * the `WrittenBytes` property is assigned the UTF-8 bytes of the collection of strings
+			 * the `WrittenBytes` property is assigned the UTF-8 bytes of the collection of strings if `DisableDirectStreaming` is set on `ConnectionConfiguration`
 			 */
-			await Post(() => PostData.MultiJson(collectionOfStrings), writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
+			await Post(() => PostData.MultiJson(collectionOfStrings), writes: utf8BytesOfListOfStrings, writtenBytesIsSet: false, settings: settings);
 
 			/**
 			* When passing a collection of `object`, the client assumes that it's a collection of objects
@@ -149,6 +154,16 @@ namespace Tests.ClientConcepts.LowLevel
 			await Post(() => PostData.Serializable(@object), writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
 
 			/**
+			 * If you want even more control over how your data is written to the stream consider `PostData.StreamHandler`
+			 * which allows you to inject your own writer routines
+			 */
+			var streamHandler = PostData.StreamHandler(bytes,
+				(b, s) => s.Write(b.AsSpan()),
+				async (b, s, ctx) => await s.WriteAsync(b.AsMemory(), ctx)
+			);
+			await Post(() => streamHandler, writes: bytes, writtenBytesIsSet: false, settings: settings);
+
+			/**
 			* ==== Forcing WrittenBytes to be set
 			*
 			* If you want to maintain a copy of the request that went out, you can set `DisableDirectStreaming`  on `ConnectionConfiguration`.
@@ -158,9 +173,18 @@ namespace Tests.ClientConcepts.LowLevel
 
 			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
 
+			await Post(() => PostData.MultiJson(collectionOfStrings), writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
+
+			await Post(() => PostData.ReadOnlyMemory(bytes.AsMemory()), writes: bytes, writtenBytesIsSet: true, settings: settings);
+
+			await Post(() => streamHandler, writes: bytes, writtenBytesIsSet: true, settings: settings);
+
 			/** This behavior can also be observed when serializing a simple object using `DisableDirectStreaming` enabled
 			 */
 			await Post(() => PostData.Serializable(@object), writes: utf8ObjectBytes, writtenBytesIsSet: true, settings: settings);
+
+
+
 		}
 
 		//hide

@@ -64,14 +64,47 @@ namespace Elasticsearch.Net
 
 		public static PostData String(string serializedString) => new PostData<object>(serializedString);
 
-		public static PostData StreamHandler(Action<Stream> syncWriter, Func<Stream, CancellationToken, Task> asyncWriter) =>
-			new PostData<object>(syncWriter, asyncWriter);
+		public static PostData StreamHandler<T>(T state, Action<T, Stream> syncWriter, Func<T, Stream, CancellationToken, Task> asyncWriter) =>
+			new StreamableData<T>(state, syncWriter, asyncWriter);
+
+		protected void BufferIfNeeded(IConnectionConfigurationValues settings, ref MemoryStream buffer, ref Stream stream)
+		{
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+			if (!disableDirectStreaming) return;
+
+			buffer = settings.MemoryStreamFactory.Create();
+			stream = buffer;
+		}
+
+		protected void FinishStream(Stream writableStream, MemoryStream buffer, IConnectionConfigurationValues settings)
+		{
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+			if (buffer == null || !disableDirectStreaming) return;
+
+			buffer.Position = 0;
+			buffer.CopyTo(writableStream, BufferSize);
+			WrittenBytes ??= buffer.ToArray();
+		}
+
+		protected async
+#if NETSTANDARD2_1
+			ValueTask
+			#else
+			Task
+#endif
+			FinishStreamAsync(Stream writableStream, MemoryStream buffer, IConnectionConfigurationValues settings, CancellationToken ctx)
+		{
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+			if (buffer == null || !disableDirectStreaming) return;
+
+			buffer.Position = 0;
+			await buffer.CopyToAsync(writableStream, BufferSize, ctx).ConfigureAwait(false);
+			WrittenBytes ??= buffer.ToArray();
+		}
 	}
 
 	public class PostData<T> : PostData, IPostData<T>
 	{
-		private readonly Action<Stream> _syncWriter;
-		private readonly Func<Stream, CancellationToken, Task> _asyncWriter;
 		private readonly IEnumerable<object> _enumerableOfObject;
 		private readonly IEnumerable<string> _enumerableOfStrings;
 		private readonly string _literalString;
@@ -109,25 +142,6 @@ namespace Elasticsearch.Net
 		{
 			_enumerableOfObject = item;
 			Type = PostType.EnumerableOfObject;
-		}
-
-		protected internal PostData(Action<Stream> syncWriter, Func<Stream, CancellationToken, Task> asyncWriter)
-		{
-			const string message = "PostData.StreamHandler needs to handle both synchronous and async paths";
-			_syncWriter = syncWriter ?? throw new ArgumentNullException(nameof(syncWriter), message);
-			_asyncWriter = asyncWriter ?? throw new ArgumentNullException(nameof(asyncWriter), message);
-			if (_syncWriter == null || _asyncWriter == null)
-				throw new ArgumentNullException();
-		}
-
-		private static void BufferIfNeeded(IConnectionConfigurationValues settings, bool disableDirectStreaming, ref MemoryStream buffer,
-			ref Stream stream
-		)
-		{
-			if (!disableDirectStreaming) return;
-
-			buffer = settings.MemoryStreamFactory.Create();
-			stream = buffer;
 		}
 
 		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
@@ -175,7 +189,7 @@ namespace Elasticsearch.Net
 				case PostType.EnumerableOfString:
 					if (!_enumerableOfStrings.HasAny()) return;
 
-					BufferIfNeeded(settings, disableDirectStreaming, ref buffer, ref stream);
+					BufferIfNeeded(settings, ref buffer, ref stream);
 					foreach (var s in _enumerableOfStrings)
 					{
 						var bytes = s.Utf8Bytes();
@@ -187,7 +201,7 @@ namespace Elasticsearch.Net
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
-					BufferIfNeeded(settings, disableDirectStreaming, ref buffer, ref stream);
+					BufferIfNeeded(settings, ref buffer, ref stream);
 					foreach (var o in _enumerableOfObject)
 					{
 						settings.RequestResponseSerializer.Serialize(o, stream, SerializationFormatting.None);
@@ -196,9 +210,7 @@ namespace Elasticsearch.Net
 					break;
 
 				case PostType.StreamHandler:
-					BufferIfNeeded(settings, disableDirectStreaming, ref buffer, ref stream);
-					_syncWriter(stream);
-					break;
+					throw new Exception("PostData is not expected/capable to handle streamable data, use StreamableData instead");
 
 				case PostType.Serializable:
 					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
@@ -206,11 +218,9 @@ namespace Elasticsearch.Net
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
-			if (buffer == null || !disableDirectStreaming) return;
 
-			buffer.Position = 0;
-			buffer.CopyTo(writableStream, BufferSize);
-			WrittenBytes ??= buffer.ToArray();
+			FinishStream(writableStream, buffer, settings);
+
 		}
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
@@ -256,7 +266,7 @@ namespace Elasticsearch.Net
 				case PostType.EnumerableOfString:
 					if (!_enumerableOfStrings.HasAny()) return;
 
-					BufferIfNeeded(settings, disableDirectStreaming, ref buffer, ref stream);
+					BufferIfNeeded(settings, ref buffer, ref stream);
 					foreach (var s in _enumerableOfStrings)
 					{
 						var bytes = s.Utf8Bytes();
@@ -268,7 +278,7 @@ namespace Elasticsearch.Net
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
-					BufferIfNeeded(settings, disableDirectStreaming, ref buffer, ref stream);
+					BufferIfNeeded(settings, ref buffer, ref stream);
 					foreach (var o in _enumerableOfObject)
 					{
 						await settings.RequestResponseSerializer.SerializeAsync(o, stream, SerializationFormatting.None, cancellationToken)
@@ -278,9 +288,7 @@ namespace Elasticsearch.Net
 					break;
 
 				case PostType.StreamHandler:
-					BufferIfNeeded(settings, disableDirectStreaming, ref buffer, ref stream);
-					await _asyncWriter(stream, cancellationToken).ConfigureAwait(false);
-					break;
+					throw new Exception("PostData is not expected/capable to handle streamable data, use StreamableData instead");
 
 				case PostType.Serializable:
 					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
@@ -289,11 +297,8 @@ namespace Elasticsearch.Net
 					throw new ArgumentOutOfRangeException();
 			}
 
-			if (buffer == null || !disableDirectStreaming) return;
-
-			buffer.Position = 0;
-			await buffer.CopyToAsync(writableStream, BufferSize, cancellationToken).ConfigureAwait(false);
-			WrittenBytes ??= buffer.ToArray();
+			await FinishStreamAsync(writableStream, buffer, settings, cancellationToken).ConfigureAwait(false);
 		}
+
 	}
 }

@@ -112,18 +112,9 @@ namespace Tests.Benchmarking
 		[Benchmark(Description = "PostDataStreamHandler")]
 		public BulkResponse PostDataStreamHandler()
 		{
-			var lowLevel = ClientLowLevel.Bulk<BulkResponse>(PostData.StreamHandler(
-				s =>
-				{
-					var span = StaticBytes.AsSpan();
-					s.Write(span);
-				},
-				async (s, ctx) =>
-				{
-					var span = StaticBytes.AsMemory();
-					await s.WriteAsync(span, ctx);
-				}
-				));
+			var lowLevel = ClientLowLevel.Bulk<BulkResponse>(PostData.StreamHandler(StaticBytes,
+				(bytes, s) => s.Write(bytes.AsSpan()),
+				async (bytes, s, ctx) => await s.WriteAsync(bytes.AsMemory(), ctx)));
 			return lowLevel;
 		}
 
