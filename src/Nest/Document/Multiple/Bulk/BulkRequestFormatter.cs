@@ -45,10 +45,9 @@ namespace Nest
 				{
 					var requestResponseSerializer = settings.RequestResponseSerializer;
 					requestResponseSerializer.SerializeUsingWriter(ref writer, body, settings, SerializationFormatting.None);
-					return;
 				}
-
-				SourceWriter.Serialize(ref writer, body, formatterResolver);
+				else
+					SourceWriter.Serialize(ref writer, body, formatterResolver);
 				writer.WriteRaw(Newline);
 			}
 		}
