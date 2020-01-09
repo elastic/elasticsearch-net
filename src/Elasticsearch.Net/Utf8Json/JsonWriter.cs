@@ -134,15 +134,10 @@ namespace Elasticsearch.Net.Utf8Json
         {
             UnsafeMemory.WriteRaw(ref this, rawValue, length);
         }
-        public void WriteRaw(MemoryStream ms)
+
+		public void WriteRaw(MemoryStream ms)
 		{
-			if (ms.TryGetBuffer(out var b) && !(b.Array is null) && b.Offset == 0)
-				WriteRaw(b.Array, b.Count);
-			else
-			{
-				var bytes = ms.ToArray();
-				this.WriteRaw(bytes);
-			}
+			UnsafeMemory.WriteRaw(ref this, ms);
 		}
 
 		public void WriteSerialized<T>(T value, IElasticsearchSerializer serializer, IConnectionConfigurationValues settings, SerializationFormatting formatting = SerializationFormatting.None)
