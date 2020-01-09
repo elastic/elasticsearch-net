@@ -64,10 +64,8 @@ namespace Tests.Benchmarking
 		{
 			var jobs = new List<Job>
 			{
-				Job.MediumRun.With(CoreRuntime.Core30).With(Jit.RyuJit),
+				Job.Default.With(CoreRuntime.Core30).With(Jit.RyuJit),
 			};
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-				jobs.Add(Job.MediumRun.With(ClrRuntime.Net472).With(Jit.LegacyJit));
 
 			var config = DefaultConfig.Instance
 				.With(jobs.ToArray())
