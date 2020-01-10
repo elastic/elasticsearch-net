@@ -54,8 +54,8 @@ namespace Elasticsearch.Net
 			}
 			else
 			{
-				_wrapsUtf8JsonSerializer = false;
 				_formatterResolver = null;
+				_wrapsUtf8JsonSerializer = false;
 			}
 		}
 
