@@ -21,13 +21,12 @@ namespace Tests.Benchmarking
 				.EnableHttpCompression(false)
 			);
 
-		//TODO can uncomment when https://github.com/elastic/elasticsearch-net/pull/4202 lands
-//		private static readonly IElasticClient ClientNoRecyclableMemory =
-//			new ElasticClient(new ConnectionSettings(new InMemoryConnection(Response, 200, null, null))
-//				.DefaultIndex("index")
-//				.EnableHttpCompression(false)
-//				.MemoryStreamFactory(MemoryStreamFactory.Default)
-//			);
+		private static readonly IElasticClient ClientNoRecyclableMemory =
+			new ElasticClient(new ConnectionSettings(new InMemoryConnection(Response, 200, null, null))
+				.DefaultIndex("index")
+				.EnableHttpCompression(false)
+				.MemoryStreamFactory(MemoryStreamFactory.Default)
+			);
 
 		private static readonly Nest8.IElasticClient ClientV8 =
 			new Nest8.ElasticClient(new Nest8.ConnectionSettings(
@@ -42,8 +41,8 @@ namespace Tests.Benchmarking
 		[Benchmark(Description = "PR")]
 		public BulkResponse NestUpdatedBulk() => Client.Bulk(b => b.IndexMany(Projects));
 
-//		[Benchmark(Description = "PR no recyclable")]
-//		public BulkResponse NoRecyclableMemory() => ClientNoRecyclableMemory.Bulk(b => b.IndexMany(Projects));
+		[Benchmark(Description = "PR no recyclable")]
+		public BulkResponse NoRecyclableMemory() => ClientNoRecyclableMemory.Bulk(b => b.IndexMany(Projects));
 
 		[Benchmark(Description = "8.x")]
 		public Nest8.BulkResponse NestCurrentBulk() => ClientV8.Bulk(b => b.IndexMany(Projects));
