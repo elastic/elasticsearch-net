@@ -28,8 +28,12 @@ namespace Tests.Benchmarking
 
 		private static readonly IElasticLowLevelClient ClientLowLevel = Client.LowLevel;
 
-		[GlobalSetup]
-		public void Setup() { }
+		[Benchmark(Description = "NEST")]
+		public BulkResponse HighLevel()
+		{
+			var lowLevel = Client.Bulk(b=>b.IndexMany(Projects));
+			return lowLevel;
+		}
 
 		[Benchmark(Description = "ListOfObjects")]
 		public BulkResponse ListOfObjects()
@@ -116,13 +120,6 @@ namespace Tests.Benchmarking
 				(bytes, s) => s.Write(bytes.AsSpan()),
 				async (bytes, s, ctx) => await s.WriteAsync(bytes.AsMemory(), ctx)));
 			return lowLevel;
-		}
-
-		[GlobalCleanup]
-		private static void X()
-		{
-			var bytes = Encoding.UTF8.GetByteCount(StaticString);
-			Console.WriteLine($"=====> {((bytes/1024f)/1024f)}");
 		}
 
 		private static object BulkItemResponse(Project project) => new

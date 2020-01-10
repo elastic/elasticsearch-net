@@ -8,11 +8,17 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
-	internal class DefaultHighLevelSerializer : IElasticsearchSerializer, IInternalSerializerWithFormatter
+	internal class DefaultHighLevelSerializer : IElasticsearchSerializer, IInternalSerializer
 	{
 		public DefaultHighLevelSerializer(IJsonFormatterResolver formatterResolver) => FormatterResolver = formatterResolver;
 
-		public IJsonFormatterResolver FormatterResolver { get; }
+		private IJsonFormatterResolver FormatterResolver { get; }
+
+		bool IInternalSerializer.TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
+		{
+			formatterResolver = FormatterResolver;
+			return true;
+		}
 
 		public T Deserialize<T>(Stream stream) =>
 			JsonSerializer.Deserialize<T>(stream, FormatterResolver);
@@ -32,5 +38,6 @@ namespace Nest
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None,
 			CancellationToken cancellationToken = default
 		) => JsonSerializer.SerializeAsync(stream, data, FormatterResolver);
+
 	}
 }

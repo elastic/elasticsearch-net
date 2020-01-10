@@ -23,6 +23,7 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Elasticsearch.Net.Extensions;
@@ -129,6 +130,22 @@ namespace Elasticsearch.Net.Utf8Json
         {
             UnsafeMemory.WriteRaw(ref this, rawValue);
         }
+        public void WriteRaw(byte[] rawValue, int length)
+        {
+            UnsafeMemory.WriteRaw(ref this, rawValue, length);
+        }
+
+		public void WriteRaw(MemoryStream ms)
+		{
+			UnsafeMemory.WriteRaw(ref this, ms);
+		}
+
+		public void WriteSerialized<T>(T value, IElasticsearchSerializer serializer, IConnectionConfigurationValues settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			using var ms = settings.MemoryStreamFactory.Create();
+			serializer.Serialize(value, ms, formatting);
+			WriteRaw(ms);
+		}
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void WriteRawUnsafe(byte rawValue)
@@ -423,5 +440,6 @@ namespace Elasticsearch.Net.Utf8Json
 			buffer[offset++] = (byte)CharUtils.HexDigit((c >> 4) & '\x000f');
 			buffer[offset++] = (byte)CharUtils.HexDigit(c & '\x000f');
 		}
+
 	}
 }

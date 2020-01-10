@@ -1,9 +1,10 @@
 using Elasticsearch.Net.Utf8Json;
 
-namespace Elasticsearch.Net 
+namespace Elasticsearch.Net
 {
-	internal interface IInternalSerializerWithFormatter
+	internal interface IInternalSerializer
 	{
-		IJsonFormatterResolver FormatterResolver { get; }
+		bool TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver);
 	}
+
 }

@@ -23,6 +23,7 @@
 #endregion
 
 using System;
+using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace Elasticsearch.Net.Utf8Json
@@ -60,11 +61,10 @@ namespace Elasticsearch.Net.Utf8Json
             return formatter;
         }
 
+		private static readonly MethodInfo _getFormatterMethod = typeof(IJsonFormatterResolver).GetRuntimeMethod("GetFormatter", Type.EmptyTypes);
         public static object GetFormatterDynamic(this IJsonFormatterResolver resolver, Type type)
         {
-            var methodInfo = typeof(IJsonFormatterResolver).GetRuntimeMethod("GetFormatter", Type.EmptyTypes);
-
-            var formatter = methodInfo.MakeGenericMethod(type).Invoke(resolver, null);
+            var formatter = _getFormatterMethod.MakeGenericMethod(type).Invoke(resolver, null);
             return formatter;
         }
     }

@@ -37,8 +37,7 @@ namespace Nest
 			using (var ms = settings.MemoryStreamFactory.Create())
 			{
 				untypedDocumentRequest.WriteJson(serializer, ms, SerializationFormatting.None);
-				var v = ms.ToArray();
-				writer.WriteRaw(v);
+				writer.WriteRaw(ms);
 			}
 		}
 	}

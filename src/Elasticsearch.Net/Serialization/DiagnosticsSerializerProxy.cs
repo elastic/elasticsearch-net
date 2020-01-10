@@ -35,9 +35,10 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Wraps configured serializer so that we can emit diagnostics per configured serializer.
 	/// </summary>
-	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializerWithFormatter
+	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializer
 	{
 		private readonly IElasticsearchSerializer _serializer;
+		private readonly bool _wrapsUtf8JsonSerializer;
 		private readonly SerializerRegistrationInformation _state;
 		private readonly IJsonFormatterResolver _formatterResolver;
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.Serializer.SourceName);
@@ -46,11 +47,23 @@ namespace Elasticsearch.Net
 		{
 			_serializer = serializer;
 			_state = new SerializerRegistrationInformation(serializer.GetType(), purpose);
-			if (serializer is IInternalSerializerWithFormatter withFormatter)
-				_formatterResolver = withFormatter.FormatterResolver;
+			if (serializer is IInternalSerializer s && s.TryGetJsonFormatter(out var formatterResolver))
+			{
+				_formatterResolver = formatterResolver;
+				_wrapsUtf8JsonSerializer = true;
+			}
+			else
+			{
+				_formatterResolver = null;
+				_wrapsUtf8JsonSerializer = false;
+			}
 		}
 
-		public IJsonFormatterResolver FormatterResolver => _formatterResolver;
+		public bool TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
+		{
+			formatterResolver = _formatterResolver;
+			return _wrapsUtf8JsonSerializer;
+		}
 
 		public object Deserialize(Type type, Stream stream)
 		{
