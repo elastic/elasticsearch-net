@@ -14,16 +14,59 @@ namespace Elasticsearch.Net.Extensions
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsDouble(this ref ArraySegment<byte> arraySegment)
 		{
+			if (arraySegment.Array == null)
+				return false;
+
 			var i = 0;
 			while (i < arraySegment.Count)
 			{
-				if (arraySegment.Array != null && arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
+				if (arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
 					return true;
 
 				i++;
 			}
 
 			return false;
+		}
+
+		private static readonly byte[] LongMaxValue = StringEncoding.UTF8.GetBytes(long.MaxValue.ToString());
+
+		private static readonly byte[] LongMinValue = StringEncoding.UTF8.GetBytes(long.MinValue.ToString());
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsLong(this ref ArraySegment<byte> arraySegment)
+		{
+			if (arraySegment.Array == null || arraySegment.Count == 0 || arraySegment.Count > 20)
+				return false;
+
+			var isNegative = arraySegment.Array[arraySegment.Offset] == '-';
+
+			if (arraySegment.Count == 20 && !isNegative)
+				return false;
+
+			var longBytes = isNegative ? LongMinValue : LongMaxValue;
+			var i = isNegative ? 1 : 0;
+
+			while (i < arraySegment.Count)
+			{
+				var b = arraySegment.Array[arraySegment.Offset + i];
+				if (!NumberConverter.IsNumber(b))
+					return false;
+
+				// only compare to long.MinValue or long.MaxValue if we're dealing with same number of bytes
+				if (arraySegment.Count == longBytes.Length)
+				{
+					if (b > longBytes[i])
+						return false;
+
+					if (b < longBytes[i])
+						return true;
+				}
+
+				i++;
+			}
+
+			return true;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
