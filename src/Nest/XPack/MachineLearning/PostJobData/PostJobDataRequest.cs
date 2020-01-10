@@ -63,14 +63,9 @@ namespace Nest
 
 			var settings = formatterResolver.GetConnectionSettings();
 			var sourceSerializer = settings.SourceSerializer;
-			var memoryStreamFactory = settings.MemoryStreamFactory;
 
 			foreach (var data in value.Data)
-			{
-				var bodyJson = sourceSerializer.SerializeToBytes(data, memoryStreamFactory, SerializationFormatting.None);
-				writer.WriteRaw(bodyJson);
-				writer.WriteRaw(Newline);
-			}
+				writer.WriteSerialized(data, sourceSerializer, settings, SerializationFormatting.None);
 		}
 	}
 }

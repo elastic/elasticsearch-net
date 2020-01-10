@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Elasticsearch.Net
 {
@@ -14,46 +15,31 @@ namespace Elasticsearch.Net
 			_serializable = item;
 		}
 
+		public static implicit operator SerializableData<T>(T serializableData) => new SerializableData<T>(serializableData);
+
 		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
-			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
+			MemoryStream buffer = null;
 			var stream = writableStream;
-			MemoryStream ms = null;
-			if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
-			{
-				ms = settings.MemoryStreamFactory.Create();
-				stream = ms;
-			}
-			settings.RequestResponseSerializer.Serialize(_serializable, stream, indent);
-			if (ms != null)
-			{
-				ms.Position = 0;
-				ms.CopyTo(writableStream, BufferSize);
-			}
-			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
-		}
+			BufferIfNeeded(settings, ref buffer, ref stream);
 
-		public static implicit operator SerializableData<T>(T serializableData) => new SerializableData<T>(serializableData);
+			var indent = settings.PrettyJson ? Indented : None;
+			settings.RequestResponseSerializer.Serialize(_serializable, stream, indent);
+
+			FinishStream(writableStream, buffer, settings);
+		}
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
-			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
-			var stream = writableStream;
-			MemoryStream ms = null;
-			if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
-			{
-				ms = settings.MemoryStreamFactory.Create();
-				stream = ms;
-			}
-			await settings.RequestResponseSerializer.SerializeAsync(_serializable, stream, indent, cancellationToken).ConfigureAwait(false);
-			if (ms != null)
-			{
-				ms.Position = 0;
-				await ms.CopyToAsync(writableStream, BufferSize, cancellationToken).ConfigureAwait(false);
-			}
-			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+			MemoryStream buffer = null;
+            var stream = writableStream;
+            BufferIfNeeded(settings, ref buffer, ref stream);
+
+            var indent = settings.PrettyJson ? Indented : None;
+			await settings.RequestResponseSerializer.SerializeAsync(_serializable, stream, indent, cancellationToken)
+				.ConfigureAwait(false);
+
+			await FinishStreamAsync(writableStream, buffer, settings, cancellationToken).ConfigureAwait(false);
 		}
 	}
 }

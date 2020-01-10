@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Extensions;
@@ -11,15 +12,20 @@ namespace Elasticsearch.Net
 	public interface IPostData<out T>
 	{
 		void Write(Stream writableStream, IConnectionConfigurationValues settings);
+
 		Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken token);
 	}
 
 	public enum PostType
 	{
 		ByteArray,
+#if NETSTANDARD2_1
+		ReadOnlyMemory,
+#endif
 		LiteralString,
 		EnumerableOfString,
 		EnumerableOfObject,
+		StreamHandler,
 		Serializable
 	}
 
@@ -52,7 +58,49 @@ namespace Elasticsearch.Net
 
 		public static PostData Bytes(byte[] bytes) => new PostData<object>(bytes);
 
+#if NETSTANDARD2_1
+		public static PostData ReadOnlyMemory(ReadOnlyMemory<byte> bytes) => new PostData<object>(bytes);
+#endif
+
 		public static PostData String(string serializedString) => new PostData<object>(serializedString);
+
+		public static PostData StreamHandler<T>(T state, Action<T, Stream> syncWriter, Func<T, Stream, CancellationToken, Task> asyncWriter) =>
+			new StreamableData<T>(state, syncWriter, asyncWriter);
+
+		protected void BufferIfNeeded(IConnectionConfigurationValues settings, ref MemoryStream buffer, ref Stream stream)
+		{
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+			if (!disableDirectStreaming) return;
+
+			buffer = settings.MemoryStreamFactory.Create();
+			stream = buffer;
+		}
+
+		protected void FinishStream(Stream writableStream, MemoryStream buffer, IConnectionConfigurationValues settings)
+		{
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+			if (buffer == null || !disableDirectStreaming) return;
+
+			buffer.Position = 0;
+			buffer.CopyTo(writableStream, BufferSize);
+			WrittenBytes ??= buffer.ToArray();
+		}
+
+		protected async
+#if NETSTANDARD2_1
+			ValueTask
+			#else
+			Task
+#endif
+			FinishStreamAsync(Stream writableStream, MemoryStream buffer, IConnectionConfigurationValues settings, CancellationToken ctx)
+		{
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+			if (buffer == null || !disableDirectStreaming) return;
+
+			buffer.Position = 0;
+			await buffer.CopyToAsync(writableStream, BufferSize, ctx).ConfigureAwait(false);
+			WrittenBytes ??= buffer.ToArray();
+		}
 	}
 
 	public class PostData<T> : PostData, IPostData<T>
@@ -60,12 +108,23 @@ namespace Elasticsearch.Net
 		private readonly IEnumerable<object> _enumerableOfObject;
 		private readonly IEnumerable<string> _enumerableOfStrings;
 		private readonly string _literalString;
+#if NETSTANDARD2_1
+		private readonly ReadOnlyMemory<byte> _memoryOfBytes;
+#endif
 
 		protected internal PostData(byte[] item)
 		{
 			WrittenBytes = item;
 			Type = PostType.ByteArray;
 		}
+
+#if NETSTANDARD2_1
+		protected internal PostData(ReadOnlyMemory<byte> item)
+		{
+			_memoryOfBytes = item;
+			Type = PostType.ReadOnlyMemory;
+		}
+#endif
 
 		protected internal PostData(string item)
 		{
@@ -87,74 +146,142 @@ namespace Elasticsearch.Net
 
 		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
-			MemoryStream ms = null;
+			MemoryStream buffer = null;
+			var stream = writableStream;
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+
 			switch (Type)
 			{
 				case PostType.ByteArray:
-					ms = settings.MemoryStreamFactory.Create(WrittenBytes);
+					if (WrittenBytes == null) return;
+
+					if (!disableDirectStreaming)
+						stream.Write(WrittenBytes, 0, WrittenBytes.Length);
+					else
+						buffer = settings.MemoryStreamFactory.Create(WrittenBytes);
 					break;
+
+#if NETSTANDARD2_1
+				case PostType.ReadOnlyMemory:
+					if (_memoryOfBytes.IsEmpty) return;
+
+					if (!disableDirectStreaming)
+						stream.Write(_memoryOfBytes.Span);
+					else
+					{
+						WrittenBytes ??= _memoryOfBytes.Span.ToArray();
+						buffer = settings.MemoryStreamFactory.Create(WrittenBytes);
+					}
+					break;
+#endif
+
 				case PostType.LiteralString:
-					ms = !string.IsNullOrEmpty(_literalString) ? settings.MemoryStreamFactory.Create(_literalString?.Utf8Bytes()) : null;
+					if (string.IsNullOrEmpty(_literalString)) return;
+
+					var stringBytes = WrittenBytes ?? _literalString.Utf8Bytes();
+					WrittenBytes ??= stringBytes;
+					if (!disableDirectStreaming)
+						stream.Write(stringBytes, 0, stringBytes.Length);
+					else
+						buffer = settings.MemoryStreamFactory.Create(stringBytes);
 					break;
+
 				case PostType.EnumerableOfString:
-					ms = _enumerableOfStrings.HasAny()
-						? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumerableOfStrings) + NewLineString).Utf8Bytes())
-						: null;
+					if (!_enumerableOfStrings.HasAny()) return;
+
+					BufferIfNeeded(settings, ref buffer, ref stream);
+					foreach (var s in _enumerableOfStrings)
+					{
+						var bytes = s.Utf8Bytes();
+						stream.Write(bytes, 0, bytes.Length);
+						stream.Write(NewLineByteArray, 0, 1);
+					}
 					break;
+
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
-					Stream stream;
-					if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
-					{
-						ms = settings.MemoryStreamFactory.Create();
-						stream = ms;
-					}
-					else stream = writableStream;
+					BufferIfNeeded(settings, ref buffer, ref stream);
 					foreach (var o in _enumerableOfObject)
 					{
 						settings.RequestResponseSerializer.Serialize(o, stream, SerializationFormatting.None);
 						stream.Write(NewLineByteArray, 0, 1);
 					}
 					break;
+
+				case PostType.StreamHandler:
+					var streamHandlerException = $"{nameof(PostData)} cannot handle {nameof(PostType.StreamHandler)} data. "
+						+ $"Use {typeof(StreamableData<>).FullName} through {nameof(PostData)}.{nameof(StreamHandler)}<T>() for streamable data";
+					throw new Exception(streamHandlerException);
 				case PostType.Serializable:
-					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
+					var serializableException = $"{nameof(PostData)} cannot handle {nameof(PostType.Serializable)} data. "
+						+ $"Use {typeof(SerializableData<>).FullName} through {nameof(PostData)}.{nameof(Serializable)}<T>() for serializable data";
+					throw new Exception(serializableException);
+
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
-			if (ms != null)
-			{
-				ms.Position = 0;
-				ms.CopyTo(writableStream, BufferSize);
-			}
-			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+
+			FinishStream(writableStream, buffer, settings);
+
 		}
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
-			MemoryStream ms = null;
+			MemoryStream buffer = null;
+			var stream = writableStream;
+			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
+
 			switch (Type)
 			{
 				case PostType.ByteArray:
-					ms = settings.MemoryStreamFactory.Create(WrittenBytes);
+					if (!disableDirectStreaming)
+						await stream.WriteAsync(WrittenBytes, 0, WrittenBytes.Length, cancellationToken).ConfigureAwait(false);
+					else
+						buffer = settings.MemoryStreamFactory.Create(WrittenBytes);
 					break;
+
+#if NETSTANDARD2_1
+				case PostType.ReadOnlyMemory:
+					if (_memoryOfBytes.IsEmpty) return;
+
+					if (!disableDirectStreaming)
+						stream.Write(_memoryOfBytes.Span);
+					else
+					{
+						WrittenBytes ??= _memoryOfBytes.Span.ToArray();
+						buffer = settings.MemoryStreamFactory.Create(WrittenBytes);
+					}
+					break;
+#endif
+
 				case PostType.LiteralString:
-					ms = !string.IsNullOrEmpty(_literalString) ? settings.MemoryStreamFactory.Create(_literalString.Utf8Bytes()) : null;
+					if (string.IsNullOrEmpty(_literalString)) return;
+
+					var stringBytes = WrittenBytes ?? _literalString.Utf8Bytes();
+					WrittenBytes ??= stringBytes;
+					if (!disableDirectStreaming)
+						await stream.WriteAsync(stringBytes, 0, stringBytes.Length, cancellationToken).ConfigureAwait(false);
+					else
+						buffer = settings.MemoryStreamFactory.Create(stringBytes);
 					break;
+
 				case PostType.EnumerableOfString:
-					ms = _enumerableOfStrings.HasAny()
-						? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumerableOfStrings) + NewLineString).Utf8Bytes())
-						: null;
+					if (!_enumerableOfStrings.HasAny()) return;
+
+					BufferIfNeeded(settings, ref buffer, ref stream);
+					foreach (var s in _enumerableOfStrings)
+					{
+						var bytes = s.Utf8Bytes();
+						await stream.WriteAsync(bytes, 0, bytes.Length, cancellationToken).ConfigureAwait(false);
+						await stream.WriteAsync(NewLineByteArray, 0, 1, cancellationToken).ConfigureAwait(false);
+					}
 					break;
+
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
-					Stream stream;
-					if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
-					{
-						ms = settings.MemoryStreamFactory.Create();
-						stream = ms;
-					}
-					else stream = writableStream;
+					BufferIfNeeded(settings, ref buffer, ref stream);
 					foreach (var o in _enumerableOfObject)
 					{
 						await settings.RequestResponseSerializer.SerializeAsync(o, stream, SerializationFormatting.None, cancellationToken)
@@ -162,16 +289,19 @@ namespace Elasticsearch.Net
 						await stream.WriteAsync(NewLineByteArray, 0, 1, cancellationToken).ConfigureAwait(false);
 					}
 					break;
+
+				case PostType.StreamHandler:
+					throw new Exception("PostData is not expected/capable to handle streamable data, use StreamableData instead");
+
 				case PostType.Serializable:
 					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
+
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
-			if (ms != null)
-			{
-				ms.Position = 0;
-				await ms.CopyToAsync(writableStream, BufferSize, cancellationToken).ConfigureAwait(false);
-			}
-			if (Type != 0)
-				WrittenBytes = ms?.ToArray();
+
+			await FinishStreamAsync(writableStream, buffer, settings, cancellationToken).ConfigureAwait(false);
 		}
+
 	}
 }

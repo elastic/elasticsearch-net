@@ -12,41 +12,43 @@ namespace Nest
 	{
 		public virtual SerializationFormatting? ForceFormatting { get; } = null;
 
+		/// <summary>
+		/// If SourceSerializer exposes a formatter we can use it directly
+		/// </summary>
+		private static bool AttemptFastPath(IElasticsearchSerializer serializer, out IJsonFormatterResolver formatter)
+		{
+			formatter = null;
+			return serializer is IInternalSerializer s && s.TryGetJsonFormatter(out formatter);
+		}
+
+
 		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var settings = formatterResolver.GetConnectionSettings();
 
-			// avoid deserialization through stream when not using custom source serializer
-			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer))
-				return formatterResolver.GetFormatter<T>().Deserialize(ref reader, formatterResolver);
+			var sourceSerializer = settings.SourceSerializer;
+			if (AttemptFastPath(sourceSerializer, out var formatter))
+				return formatter.GetFormatter<T>().Deserialize(ref reader, formatter);
 
 			var arraySegment = reader.ReadNextBlockSegment();
 			using (var ms = settings.MemoryStreamFactory.Create(arraySegment.Array, arraySegment.Offset, arraySegment.Count))
-				return settings.SourceSerializer.Deserialize<T>(ms);
+				return sourceSerializer.Deserialize<T>(ms);
 		}
+
 
 		public virtual void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
 			var settings = formatterResolver.GetConnectionSettings();
 
-			// avoid serialization to bytes when not using custom source serializer
-			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer))
+			var sourceSerializer = settings.SourceSerializer;
+			if (AttemptFastPath(sourceSerializer, out var formatter))
 			{
-				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
+				formatter.GetFormatter<T>().Serialize(ref writer, value, formatter);
 				return;
 			}
 
-			var sourceSerializer = settings.SourceSerializer;
 			var f = ForceFormatting ?? SerializationFormatting.None;
-			byte[] bytes;
-			using (var ms = settings.MemoryStreamFactory.Create())
-			{
-				sourceSerializer.Serialize(value, ms, f);
-				// TODO: read each byte instead of creating and allocating an array
-				bytes = ms.ToArray();
-			}
-
-			writer.WriteRaw(bytes);
+			writer.WriteSerialized(value, sourceSerializer, settings, f);
 		}
 	}
 }
