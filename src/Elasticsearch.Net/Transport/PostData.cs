@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -210,10 +210,13 @@ namespace Elasticsearch.Net
 					break;
 
 				case PostType.StreamHandler:
-					throw new Exception("PostData is not expected/capable to handle streamable data, use StreamableData instead");
-
+					var streamHandlerException = $"{nameof(PostData)} cannot handle {nameof(PostType.StreamHandler)} data. "
+						+ $"Use {typeof(StreamableData<>).FullName} through {nameof(PostData)}.{nameof(StreamHandler)}<T>() for streamable data";
+					throw new Exception(streamHandlerException);
 				case PostType.Serializable:
-					throw new Exception("PostData is not expected/capable to handle contain serializable, use SerializableData instead");
+					var serializableException = $"{nameof(PostData)} cannot handle {nameof(PostType.Serializable)} data. "
+						+ $"Use {typeof(SerializableData<>).FullName} through {nameof(PostData)}.{nameof(Serializable)}<T>() for serializable data";
+					throw new Exception(serializableException);
 
 				default:
 					throw new ArgumentOutOfRangeException();

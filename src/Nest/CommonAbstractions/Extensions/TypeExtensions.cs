@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Elasticsearch.Net.CrossPlatform;
 
 namespace Nest
 {
@@ -150,5 +151,9 @@ namespace Nest
 		}
 
 		internal delegate T ObjectActivator<out T>(params object[] args);
+
+		private static readonly Assembly NestAssembly = typeof(TypeExtensions).Assembly();
+
+		public static bool IsNestType(this Type type) => type.Assembly() == NestAssembly;
 	}
 }
