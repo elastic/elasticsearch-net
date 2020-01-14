@@ -118,9 +118,9 @@ Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 6
 
 Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 7.0](https://www.elastic.co/blog/nest-and-elasticsearch-net-7-0-now-ga). Please also see the [7.0.0 release notes](https://github.com/elastic/elasticsearch-net/releases/tag/7.0.0).
 
-# [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
+# [NEST](https://github.com/elastic/elasticsearch-net/tree/master/src/Nest)
 
-NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).
+NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elastic/elasticsearch).
 
 It aims to be a solid, strongly typed client with a very concise API. The client internally uses the low-level **Elasticsearch.Net** client. It maps requests and responses to strongly-typed objects with both fluent interface and object initializer syntax. It also provides a very powerful query DSL that maps 1-to-1 with the Elasticsearch API. This client takes advantage of .NET features where they make sense (e.g. type and index inference and inferred mapping from POCO properties). All client method calls have asynchronous variants with support for cancellation.
 
@@ -226,7 +226,7 @@ var response = client.Search<Tweet>(request);
 
 ### Falling back to Elasticsearch.Net
 
-NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Elasticsearch.Net) client that you can fall back to in case anything is missing:
+NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/tree/master/src/Elasticsearch.Net) client that you can fall back to in case anything is missing:
 
 ```csharp
 //.LowLevel is of type IElasticLowLevelClient
@@ -362,4 +362,4 @@ A small HTTP server will be spun up locally on port 8000 through which you can v
 
 This software is Copyright (c) 2014-2019 by Elasticsearch BV.
 
-This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt).
+This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elastic/elasticsearch-net/blob/master/license.txt).

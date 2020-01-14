@@ -1,11 +1,11 @@
 # Contributing
 
 Contributing back to `Elasticsearch.Net` and `NEST` is very much appreciated. 
-Whether you [feel the need to change one character](https://github.com/elasticsearch/elasticsearch-net/pull/536) or have a go at 
-[mapping new APIs](http://github.com/elasticsearch/elasticsearch-net/pull/376), no pull request (PR) is too small or too big. 
+Whether you [feel the need to change one character](https://github.com/elastic/elasticsearch-net/pull/536) or have a go at 
+[mapping new APIs](http://github.com/elastic/elasticsearch-net/pull/376), no pull request (PR) is too small or too big. 
 
 In fact many of our most awesome features/fixes have been provided to us by 
-[these wonderful folks](https://github.com/elasticsearch/elasticsearch-net/graphs/contributors) to which we are forever indebted. 
+[these wonderful folks](https://github.com/elastic/elasticsearch-net/graphs/contributors) to which we are forever indebted. 
 
 It's usually best to open an issue first to discuss a feature or bug, before opening a pull request. Doing so can save time and help further ascertain the crux of an issue.
 
