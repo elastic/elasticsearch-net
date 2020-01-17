@@ -102,7 +102,7 @@ var person = new Person
     LastName = "Laarman"
 };
 
-var ndexResponse = client.IndexDocument(person); <1>
+var indexResponse = client.IndexDocument(person); <1>
 
 var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
 ----
