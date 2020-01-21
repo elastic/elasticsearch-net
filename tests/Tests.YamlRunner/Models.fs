@@ -1,5 +1,6 @@
 module Tests.YamlRunner.Models
 
+open Elasticsearch.Net
 open System
 open System.Collections.Generic
 open System.Text.RegularExpressions
@@ -180,6 +181,7 @@ type Assert =
 
 type Operation =
     | Unknown of string
+    | Actions of string * (IElasticLowLevelClient -> unit)
     | Skip of Skip
     | Do of Do
     | Set of Set
@@ -192,6 +194,7 @@ type Operation =
             | Assert s -> sprintf "%s operation %s" this.Name (s.Log())
             | Do s -> sprintf "%s operation %s" "Do" (s.Log())
             | Unknown s -> sprintf "%s operation %s" this.Name s
+            | Actions (s, _) -> sprintf "%s custom %s actions" this.Name s
             | Skip s -> sprintf "%s operation %s" this.Name s.Log
             | Set s ->
                 sprintf "%s operation %s" this.Name (s |> Seq.map (fun k -> sprintf "%A %A" k.Key k.Value) |> String.concat " ")

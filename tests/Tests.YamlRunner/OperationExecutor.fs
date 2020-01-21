@@ -11,7 +11,6 @@ open Elasticsearch.Net
 open Newtonsoft.Json
 open Newtonsoft.Json.Linq
 open System.Collections.Generic
-open System.Diagnostics
 
 type ExecutionContext = {
     Suite: TestSuite
@@ -146,9 +145,10 @@ type OperationExecutor(client:IElasticLowLevelClient) =
         
         let doMatch assertOn assertValue = 
             let value =
-                match assertOn with
-                | ResponsePath path -> stashes.GetResponseValue progress path :> Object
-                | WholeResponse -> stashes.Response().Dictionary.ToDictionary() :> Object
+                match (assertOn, assertValue) with
+                | (ResponsePath "$body", Value _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (ResponsePath path, _) -> stashes.GetResponseValue progress path :> Object
+                | (WholeResponse, _) -> stashes.Response().Dictionary.ToDictionary() :> Object
             
             match assertValue with
             | Value o -> isMatch o value
@@ -180,6 +180,11 @@ type OperationExecutor(client:IElasticLowLevelClient) =
     member this.Execute (op:ExecutionContext) (progress:IProgressBar) = async {
         match op.Operation with
         | Unknown u -> return Skipped op
+        | Actions (s, a) ->
+            // TODO try with
+            a client
+            return Succeeded op
+            
         | Skip s -> return Skipped op
         | Do d ->
             let (name, _) = d.ApiCall
