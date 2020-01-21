@@ -201,6 +201,7 @@ NEST exposes a fluent interface and a [powerful query DSL](https://www.elastic.c
 
 ```csharp
 var response = client.Search<Tweet>(s => s
+    .Index("mytweetindex") //or specify index via settings.DefaultIndex("mytweetindex");
     .From(0)
     .Size(10)
     .Query(q => q
@@ -215,6 +216,7 @@ As well as an object initializer syntax if lambdas aren't your thing:
 ```csharp
 var request = new SearchRequest
 {
+    Index = "mytweetindex", //or specify index via settings.DefaultIndex("mytweetindex"),
     From = 0,
     Size = 10,
     Query = new TermQuery { Field = "user", Value = "kimchy" } || 
