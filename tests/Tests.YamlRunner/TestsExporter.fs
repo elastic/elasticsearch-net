@@ -30,7 +30,9 @@ let mapExecutionResult result =
             Some error
         | ValidationFailure (c, f) -> 
             let failure = XElement("failure", [message])
-            failure.Value <- c.Stashes.Response().DebugInformation
+            match c.Stashes.ResponseOption with
+            | Some r -> failure.Value <- r.DebugInformation
+            | None -> failure.Value <- "Could not access response!"
             Some failure
     | ExecutionResult.Skipped s ->
         Some <| XElement("skipped", [])
@@ -124,10 +126,19 @@ let PrettyPrintResults (outputFile:string) =
     let xp (e:XElement) = e.XPathSelectElements
     
     for suite in (xp xml.Root "//testsuite[testcase[failure|error]]") do
+        Console.ForegroundColor <- ConsoleColor.Yellow
         printfn "%s" <| suite.Attribute(XName.Get "name").Value
         for testcase in (xp suite "testcase[failure|error]") do
-            printfn "  %s" <| testcase.Attribute(XName.Get "name").Value
+            Console.ForegroundColor <- ConsoleColor.Blue
+            printfn "  - %s" <| testcase.Attribute(XName.Get "name").Value
             for error in (xp testcase "failure|error") do
-                printfn "    %s" <| error.Attribute(XName.Get "message").Value
+                Console.ForegroundColor <- ConsoleColor.Red
+                printfn "    - %s" <| error.Attribute(XName.Get "message").Value
+                Console.ForegroundColor <- ConsoleColor.Gray
+                printfn "" 
+                printfn "%s" <| error.Value
+                printfn "" 
+                
+        Console.ResetColor()
     
     

@@ -5,7 +5,9 @@ open System.Collections.Generic
 open System.Text.RegularExpressions
 open System.Linq
 
+open Elasticsearch.Net
 open System.IO
+open Tests.YamlRunner.Models
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsLocator
 
@@ -171,10 +173,17 @@ type YamlTestDocument = {
     Tests: YamlTest list
 }
 
+let private DefaultSetup : Operation list = [Actions("Setup", fun client ->
+    let x = client.Indices.Delete<VoidResponse>("*") 
+    let x = client.Indices.DeleteTemplateForAll<VoidResponse>("*")
+    ignore()
+)]
+
 let private toDocument (yamlInfo:YamlFileInfo) (sections:YamlTestSection list) =
+    let setups = (sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)) 
     {
         FileInfo = FileInfo yamlInfo.File
-        Setup = sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)
+        Setup = Some <| (DefaultSetup @ (setups |> Option.defaultValue []))
         Teardown = sections |> List.tryPick (fun s -> match s with | Teardown s -> Some s | _ -> None)
         Tests = sections |> List.map (fun s -> match s with | YamlTest s -> Some s | _ -> None) |> List.choose id
     }

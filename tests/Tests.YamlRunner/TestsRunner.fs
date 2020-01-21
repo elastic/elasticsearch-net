@@ -46,17 +46,20 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
                 return pass
             })
         (m, executedOperations)
-
-
+        
     member private this.RunTestFile subProgressbar (file:YamlTestDocument) = async {
         
         let m section ops = this.CreateOperations section file.FileInfo ops subProgressbar
+        let bootstrap section operations =
+            let ops = operations |> Option.map (m section) |> Option.toList |> List.collect (fun (s, ops) -> ops)
+            (section, ops)
         
-        let setup =  file.Setup |> Option.map (m "Setup") |> Option.toList 
-        let teardown = file.Teardown |> Option.map (m "Teardown") |> Option.toList 
-        let passed = file.Tests |> List.map (fun s -> s.Operations |> m s.Name) 
-        
-        let sections = setup @ passed @ teardown
+        let setup =  bootstrap "Setup" file.Setup 
+        let teardown = bootstrap "Teardown" file.Teardown 
+        let sections =
+            file.Tests
+            |> List.map (fun s -> s.Operations |> m s.Name)
+            |> List.collect (fun s -> [setup; s; teardown])
         
         let l = sections.Length
         let ops = sections |> List.sumBy (fun (_, i) -> i.Length)
@@ -105,9 +108,6 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
             progress.Tick(message)
             let message = sprintf "Inspecting file for sections" 
             use p = progress.Spawn(0, message, barOptions)
-            
-            let x = client.Indices.Delete<VoidResponse>("*") 
-            let x = client.Indices.DeleteTemplateForAll<VoidResponse>("*")
             
             let! result = this.RunTestFile p document
             
