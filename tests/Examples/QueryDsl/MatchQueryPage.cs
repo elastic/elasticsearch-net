@@ -5,14 +5,22 @@ namespace Examples.QueryDsl
 {
 	public class MatchQueryPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line18()
 		{
 			// tag::e0d6e02b998bdea99c9c08dcc3630c5e[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("this is a test")
+					)
+				)
+			);
 			// end::e0d6e02b998bdea99c9c08dcc3630c5e[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match"" : {
@@ -24,31 +32,54 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line150()
 		{
 			// tag::fa2fe60f570bd930d2891778c6efbfe6[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("this is a test")
+					)
+				)
+			);
 			// end::fa2fe60f570bd930d2891778c6efbfe6[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match"" : {
 			            ""message"" : ""this is a test""
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(b => {
+					b["query"]["match"]["message"].ToLongFormQuery();
+				});
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line175()
 		{
 			// tag::6138d6919f3cbaaf61e1092f817d295c[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("this is a test")
+						.Operator(Operator.And)
+					)
+				)
+			);
 			// end::6138d6919f3cbaaf61e1092f817d295c[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match"" : {
@@ -61,14 +92,23 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line219()
 		{
 			// tag::5043b83a89091fa00edb341ddf7ba370[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("this is a testt")
+						.Fuzziness(Fuzziness.Auto)
+					)
+				)
+			);
 			// end::5043b83a89091fa00edb341ddf7ba370[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match"" : {
@@ -81,14 +121,24 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line241()
 		{
 			// tag::0ac9916f47a2483b89c1416684af322a[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("to be or not to be")
+						.Operator(Operator.And)
+						.ZeroTermsQuery(ZeroTermsQuery.All)
+					)
+				)
+			);
 			// end::0ac9916f47a2483b89c1416684af322a[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match"" : {
@@ -102,14 +152,23 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line268()
 		{
 			// tag::7f56755fb6c42f7e6203339a6d0cb6e6[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("ny city")
+						.AutoGenerateSynonymsPhraseQuery(false)
+					)
+				)
+			);
 			// end::7f56755fb6c42f7e6203339a6d0cb6e6[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			   ""query"": {
 			       ""match"" : {

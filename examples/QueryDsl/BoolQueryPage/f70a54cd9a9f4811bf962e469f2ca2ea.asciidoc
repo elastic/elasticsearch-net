@@ -7,7 +7,7 @@ and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
 [source, csharp]
 ----
-var response0 = client.Search<Blog>(s => s
+var searchResponse = client.Search<Blog>(s => s
     .AllIndices()
     .Query(q => +q.Term(p => p.Status, PublishStatus.Active))
 );

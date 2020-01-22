@@ -1,16 +1,16 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line144 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/MappingPage.cs#L9-L34.
+This file is generated from method Line144 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/MappingPage.cs#L10-L35.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
 [source, csharp]
 ----
-var mapResponse = client.Indices.Create("my-index", c => c
+var createIndexResponse = client.Indices.Create("my-index", c => c
     .Map<Employee>(m => m
         .Properties(props => props
-            .Scalar(p => p.Age)
+            .Number(n => n.Name(p => p.Age).Type(NumberType.Integer))
             .Keyword(k => k.Name(p => p.Email))
             .Text(k => k.Name(p => p.Name))
         )
