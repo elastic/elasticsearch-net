@@ -8,14 +8,39 @@ namespace Nest
 	{
 		protected override object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			//{
 			reader.Read(); //property name
-			var fieldName = reader.Value as string;
-			reader.Read(); //{
-			var query = ReadAs(reader, objectType, existingValue, serializer);
+			var fieldName = (string)reader.Value;
+			reader.Read();
+			TReadAs query = null;
+
+			switch (reader.TokenType)
+			{
+				case JsonToken.StartObject:
+					query = ReadAs(reader, objectType, existingValue, serializer);
+					break;
+				case JsonToken.Null:
+					break;
+				default:
+					query = new TReadAs();
+					switch (query)
+					{
+						case ITermQuery termQuery:
+							termQuery.Value = reader.Value;
+							break;
+						case IMatchQuery matchQuery:
+							matchQuery.Query = (string)reader.Value;
+							break;
+						case IMatchPhraseQuery matchPhraseQuery:
+							matchPhraseQuery.Query = (string)reader.Value;
+							break;
+						case IMatchPhrasePrefixQuery matchPhrasePrefixQuery:
+							matchPhrasePrefixQuery.Query = (string)reader.Value;
+							break;
+					}
+					break;
+			}
 
 			if (query == null) return null;
-
 			query.Field = fieldName;
 
 			return query;

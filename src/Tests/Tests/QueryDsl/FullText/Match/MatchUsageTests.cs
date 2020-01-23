@@ -1,4 +1,9 @@
-﻿using Nest;
+﻿using System.IO;
+using System.Text;
+using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
+using Nest;
+using Newtonsoft.Json;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -69,5 +74,16 @@ namespace Tests.QueryDsl.FullText.Match
 				.FuzzyRewrite(MultiTermQueryRewrite.TopTermsBlendedFreqs(10))
 				.Name("named_query")
 			);
+
+		//hide
+		[U] public void DeserializeShortForm()
+		{
+			var json = JsonConvert.SerializeObject(new { description = "project description" });
+			using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+			var query = Client.RequestResponseSerializer.Deserialize<IMatchQuery>(stream);
+			query.Should().NotBeNull();
+			query.Field.Should().Be(new Field("description"));
+			query.Query.Should().Be("project description");
+		}
 	}
 }

@@ -1,4 +1,9 @@
+using System.IO;
+using System.Text;
+using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Nest;
+using Newtonsoft.Json;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -47,5 +52,16 @@ namespace Tests.QueryDsl.PrefixLevel.Prefix
 				.Value("proj")
 				.Rewrite(MultiTermQueryRewrite.TopTerms(10))
 			);
+
+		//hide
+		[U] public void DeserializeShortForm()
+		{
+			var json = JsonConvert.SerializeObject(new { description = "project description" });
+			using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+			var query = Client.RequestResponseSerializer.Deserialize<IPrefixQuery>(stream);
+			query.Should().NotBeNull();
+			query.Field.Should().Be(new Field("description"));
+			query.Value.Should().Be("project description");
+		}
 	}
 }

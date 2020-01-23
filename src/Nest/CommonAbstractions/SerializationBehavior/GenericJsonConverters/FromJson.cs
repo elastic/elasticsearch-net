@@ -10,7 +10,7 @@ namespace Nest
 		/// </summary>
 		public static T ReadAs<T>(JsonReader reader, JsonSerializer serializer)
 		{
-			var t = (T)typeof(T).CreateInstance();
+			var t = typeof(T).CreateInstance<T>();
 			serializer.Populate(reader, t);
 			return t;
 		}
