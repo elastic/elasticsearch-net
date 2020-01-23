@@ -27,6 +27,7 @@ namespace Nest
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
 		[JsonProperty("must", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[JsonConverter(typeof(SingleOrEnumerableJsonConverter<QueryContainer>))]
 		IEnumerable<QueryContainer> Must { get; set; }
 
 		/// <summary>
@@ -34,6 +35,7 @@ namespace Nest
 		/// Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
 		[JsonProperty("must_not", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[JsonConverter(typeof(SingleOrEnumerableJsonConverter<QueryContainer>))]
 		IEnumerable<QueryContainer> MustNot { get; set; }
 
 		/// <summary>
@@ -42,6 +44,7 @@ namespace Nest
 		/// The minimum number of should clauses to match can be set using <see cref="MinimumShouldMatch" />.
 		/// </summary>
 		[JsonProperty("should", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[JsonConverter(typeof(SingleOrEnumerableJsonConverter<QueryContainer>))]
 		IEnumerable<QueryContainer> Should { get; set; }
 	}
 
