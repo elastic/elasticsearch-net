@@ -40,9 +40,6 @@ namespace Nest
 
 	internal class QueryContainerCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanRead => false;
-		public override bool CanWrite => true;
-
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var collection = (IEnumerable<QueryContainer>)value;
@@ -62,8 +59,26 @@ namespace Nest
 			writer.WriteEndArray();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			switch (reader.TokenType)
+			{
+				case JsonToken.StartObject:
+					return new[] { serializer.Deserialize<QueryContainer>(reader) };
+				case JsonToken.StartArray:
+					var queryContainers = new List<QueryContainer>();
+					while (reader.Read())
+					{
+						if (reader.TokenType == JsonToken.EndArray)
+							break;
+
+						queryContainers.Add(serializer.Deserialize<QueryContainer>(reader));
+					}
+					return queryContainers;
+				default:
+					return null;
+			}
+		}
 
 		public override bool CanConvert(Type objectType) => true;
 	}
