@@ -25,6 +25,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				{ "index.blocks.read_only", true },
 				{ "index.blocks.read", true },
 				{ "index.blocks.write", true },
+				{ "index.blocks.read_only_allow_delete", true },
 				{ "index.blocks.metadata", true },
 				{ "index.priority", 11 },
 				{ "index.recovery.initial_shards", "full-1" },
@@ -53,6 +54,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				.BlocksRead()
 				.BlocksReadOnly()
 				.BlocksWrite()
+				.BlocksReadOnlyAllowDelete()
 				.Priority(11)
 				.RecoveryInitialShards(RecoveryInitialShards.FullMinusOne)
 				.RequestsCacheEnabled()
@@ -82,6 +84,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 					BlocksRead = true,
 					BlocksReadOnly = true,
 					BlocksWrite = true,
+					BlocksReadOnlyAllowDelete = true,
 					Priority = 11,
 					RecoveryInitialShards = RecoveryInitialShards.FullMinusOne,
 					RequestsCacheEnabled = true,

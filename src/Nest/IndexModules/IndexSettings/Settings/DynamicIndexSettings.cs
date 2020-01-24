@@ -43,6 +43,11 @@ namespace Nest
 		bool? BlocksWrite { get; set; }
 
 		/// <summary>
+		/// Set to true to disable read operations, but allow delete operations, against the index.
+		/// </summary>
+		bool? BlocksReadOnlyAllowDelete { get; set; }
+
+		/// <summary>
 		/// All of the settings exposed in the merge module are expert only and may be obsoleted in the future at any time!
 		/// </summary>
 		IMergeSettings Merge { get; set; }
@@ -142,6 +147,9 @@ namespace Nest
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksWrite" />
 		public bool? BlocksWrite { get; set; }
 
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksReadOnlyAllowDelete" />
+		public bool? BlocksReadOnlyAllowDelete { get; set; }
+
 		/// <inheritdoc cref="IDynamicIndexSettings.Merge" />
 		public IMergeSettings Merge { get; set; }
 
@@ -237,6 +245,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksWrite" />
 		public TDescriptor BlocksWrite(bool? blocksWrite = true) => Assign(blocksWrite, (a, v) => a.BlocksWrite = v);
+
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksReadOnlyAllowDelete" />
+		public TDescriptor BlocksReadOnlyAllowDelete(bool? blocksReadOnlyAllowDelete = true) => Assign(blocksReadOnlyAllowDelete, (a, v) => a.BlocksReadOnlyAllowDelete = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.Priority" />
 		public TDescriptor Priority(int? priority) => Assign(priority, (a, v) => a.Priority = v);

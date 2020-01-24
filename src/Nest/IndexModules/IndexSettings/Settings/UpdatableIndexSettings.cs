@@ -9,13 +9,14 @@ namespace Nest
 		public const string AnalyzeMaxTokenCount = "index.analyze.max_token_count";
 		public const string AutoExpandReplicas = "index.auto_expand_replicas";
 		public const string BlocksMetadata = "index.blocks.metadata";
+		public const string BlocksReadOnlyAllowDelete = "index.blocks.read_only_allow_delete";
 		public const string BlocksRead = "index.blocks.read";
 		public const string BlocksReadOnly = "index.blocks.read_only";
 		public const string BlocksWrite = "index.blocks.write";
 
 		public const string CompoundFormat = "index.compound_format";
 		public const string CompoundOnFlush = "index.compound_on_flush";
-    
+
 		/// <summary>limits the number of unique nested types per index.</summary>
 		public const string MappingNestedFieldsLimit = "index.mapping.nested_fields.limit";
 		/// <summary>
