@@ -1,9 +1,12 @@
+using System.IO;
+using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
-namespace Tests.QueryDsl.PrefixLevel.Prefix
+namespace Tests.QueryDsl.TermLevel.Prefix
 {
 	public class PrefixQueryUsageTests : QueryDslUsageTestsBase
 	{
@@ -47,5 +50,15 @@ namespace Tests.QueryDsl.PrefixLevel.Prefix
 				.Value("proj")
 				.Rewrite(MultiTermQueryRewrite.TopTerms(10))
 			);
+
+		//hide
+		[U] public void DeserializeShortForm()
+		{
+			using var stream = new MemoryStream(ShortFormQuery);
+			var query = Client.RequestResponseSerializer.Deserialize<IPrefixQuery>(stream);
+			query.Should().NotBeNull();
+			query.Field.Should().Be(new Field("description"));
+			query.Value.Should().Be("project description");
+		}
 	}
 }

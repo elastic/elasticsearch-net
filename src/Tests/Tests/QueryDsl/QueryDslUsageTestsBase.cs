@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -19,6 +21,8 @@ namespace Tests.QueryDsl
 		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
 		protected readonly QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
+
+		protected byte[] ShortFormQuery => Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new { description = "project description" }));
 
 		protected QueryDslUsageTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
