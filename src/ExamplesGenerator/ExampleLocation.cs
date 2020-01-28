@@ -6,8 +6,8 @@ namespace ExamplesGenerator
 	{
 		private static string _root;
 
-		public static DirectoryInfo ExamplesAsciiDocDir { get; } = new DirectoryInfo($@"{Root}../../../examples");
-		public static DirectoryInfo ExamplesCSharpProject { get; } = new DirectoryInfo($@"{Root}../../../src/Examples/Examples");
+		public static DirectoryInfo ExamplesAsciiDocDir { get; } = new DirectoryInfo($@"{Root}../../examples");
+		public static DirectoryInfo ExamplesCSharpProject { get; } = new DirectoryInfo($@"{Root}../../tests/Examples");
 
 		private static string Root
 		{
@@ -20,7 +20,7 @@ namespace ExamplesGenerator
 				var runningAsNetCore =
 					directoryInfo.Name == "ExamplesGenerator" &&
 					directoryInfo.Parent != null &&
-					directoryInfo.Parent.Name == "Examples";
+					directoryInfo.Parent.Name == "src";
 
 				_root = runningAsNetCore ? "" : @"../../../";
 				return _root;

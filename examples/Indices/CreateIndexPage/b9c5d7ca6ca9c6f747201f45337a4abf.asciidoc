@@ -1,0 +1,16 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line100 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/CreateIndexPage.cs#L54-L85.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("twitter", c => c
+    .Settings(s => s
+        .NumberOfShards(3)
+        .NumberOfReplicas(2)
+    )
+);
+----
