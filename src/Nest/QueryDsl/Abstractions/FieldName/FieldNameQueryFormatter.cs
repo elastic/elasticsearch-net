@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net.Utf8Json;
+﻿using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Nest
 {
@@ -34,17 +36,65 @@ namespace Nest
 		public override TInterface Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			reader.ReadIsBeginObjectWithVerify();
-			var token = reader.GetCurrentJsonToken();
+
+			if (reader.ReadIsEndObject())
+				return default;
 
 			TInterface query = null;
-			string fieldName = null;
-			if (token != JsonToken.EndObject)
+			var fieldName = reader.ReadPropertyName();
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
 			{
-				fieldName = reader.ReadPropertyName();
-				query = base.Deserialize(ref reader, formatterResolver);
+				case JsonToken.BeginObject:
+					query = base.Deserialize(ref reader, formatterResolver);
+					reader.ReadIsEndObjectWithVerify();
+					break;
+				case JsonToken.Null:
+					reader.ReadNext();
+					break;
+				default:
+					query = new T();
+					switch (query)
+					{
+						case ITermQuery termQuery:
+							switch (token)
+							{
+								case JsonToken.String:
+									termQuery.Value = reader.ReadString();
+									break;
+								case JsonToken.Number:
+									var segment = reader.ReadNumberSegment();
+									if (segment.IsLong())
+										termQuery.Value = NumberConverter.ReadInt64(segment.Array, segment.Offset, out var count);
+									else
+										termQuery.Value = NumberConverter.ReadDouble(segment.Array, segment.Offset, out var count);
+									break;
+								case JsonToken.True:
+								case JsonToken.False:
+									termQuery.Value = reader.ReadBoolean();
+									break;
+							}
+							reader.ReadIsEndObjectWithVerify();
+							break;
+						case IMatchQuery matchQuery:
+							matchQuery.Query = reader.ReadString();
+							reader.ReadIsEndObjectWithVerify();
+							break;
+						case IMatchPhraseQuery matchPhraseQuery:
+							matchPhraseQuery.Query = reader.ReadString();
+							reader.ReadIsEndObjectWithVerify();
+							break;
+						case IMatchPhrasePrefixQuery matchPhrasePrefixQuery:
+							matchPhrasePrefixQuery.Query = reader.ReadString();
+							reader.ReadIsEndObjectWithVerify();
+							break;
+						case IMatchBoolPrefixQuery matchBoolPrefixQuery:
+							matchBoolPrefixQuery.Query = reader.ReadString();
+							reader.ReadIsEndObjectWithVerify();
+							break;
+					}
+					break;
 			}
-
-			reader.ReadIsEndObjectWithVerify();
 
 			if (query == null)
 				return null;

@@ -1,3 +1,6 @@
+using System.IO;
+using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -44,6 +47,16 @@ namespace Tests.QueryDsl.TermLevel.Term
 				.Field(p => p.Description)
 				.Value("project description")
 			);
+
+		//hide
+		[U] public void DeserializeShortForm()
+		{
+			using var stream = new MemoryStream(ShortFormQuery);
+			var query = Client.RequestResponseSerializer.Deserialize<ITermQuery>(stream);
+			query.Should().NotBeNull();
+			query.Field.Should().Be(new Field("description"));
+			query.Value.Should().Be("project description");
+		}
 	}
 
 	/**[float]
