@@ -56,6 +56,7 @@ namespace Nest
 			Set(BlocksRead, value.BlocksRead);
 			Set(BlocksWrite, value.BlocksWrite);
 			Set(BlocksMetadata, value.BlocksMetadata);
+			Set(BlocksReadOnlyAllowDelete, value.BlocksReadOnlyAllowDelete);
 			Set(Priority, value.Priority);
 			Set(UpdatableIndexSettings.AutoExpandReplicas, value.AutoExpandReplicas);
 			Set(UpdatableIndexSettings.RecoveryInitialShards, value.RecoveryInitialShards);
@@ -178,6 +179,7 @@ namespace Nest
 			Set<bool?>(s, settings, BlocksRead, v => s.BlocksRead = v, formatterResolver);
 			Set<bool?>(s, settings, BlocksWrite, v => s.BlocksWrite = v, formatterResolver);
 			Set<bool?>(s, settings, BlocksMetadata, v => s.BlocksMetadata = v, formatterResolver);
+			Set<bool?>(s, settings, BlocksReadOnlyAllowDelete, v => s.BlocksReadOnlyAllowDelete = v, formatterResolver);
 			Set<int?>(s, settings, Priority, v => s.Priority = v, formatterResolver);
 			Set<string>(s, settings, DefaultPipeline, v => s.DefaultPipeline = v, formatterResolver);
 			Set<string>(s, settings, RequiredPipeline, v => s.RequiredPipeline = v, formatterResolver);
