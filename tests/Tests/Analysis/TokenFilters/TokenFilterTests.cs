@@ -1,6 +1,9 @@
 using System;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Core.Serialization;
 
 namespace Tests.Analysis.TokenFilters
 {
@@ -1042,6 +1045,72 @@ namespace Tests.Analysis.TokenFilters
 			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter();
 			public override object Json => new { type = "remove_duplicates" };
 			public override string Name => "dupes";
+		}
+
+		public class UserDefinedTokenFilterTests
+		{
+			public class UserDefinedTokenFilter : TokenFilterBase
+			{
+				public UserDefinedTokenFilter(string type) : base(type)
+				{
+				}
+
+				[DataMember(Name = "string_property")]
+				public string StringProperty { get; set; }
+
+				[DataMember(Name = "int_property")]
+				public int? IntProperty { get; set; }
+			}
+
+			private static string FilterName => "user_defined";
+
+			private static ITokenFilter UserDefinedFilter => new UserDefinedTokenFilter(FilterName) { StringProperty = "string", IntProperty = 1 };
+
+			[U] public void Fluent() =>
+				SerializationTestHelper.Expect(Json).FromRequest(c => c
+					.Indices.Create("index", ci => ci
+						.Settings(s => s
+							.Analysis(a => a
+								.TokenFilters(t => t
+									.UserDefined(FilterName, UserDefinedFilter)
+								)
+							)
+						)
+					)
+				);
+
+			[U] public void Initializer() =>
+				SerializationTestHelper.Expect(Json).FromRequest(c => c
+					.Indices.Create(new CreateIndexRequest("index")
+						{
+							Settings = new IndexSettings
+							{
+								Analysis = new Nest.Analysis
+								{
+									TokenFilters = new Nest.TokenFilters
+									{
+										{ FilterName, UserDefinedFilter }
+									}
+								}
+							}
+						}
+					)
+				);
+
+			private static object Json => new {
+				settings = new {
+					analysis = new {
+						filter = new {
+							user_defined = new {
+								int_property = 1,
+								string_property = "string",
+								type = "user_defined"
+							}
+						}
+					}
+				}
+			};
+
 		}
 	}
 }
