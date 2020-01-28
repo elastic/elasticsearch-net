@@ -75,8 +75,8 @@ namespace Examples.Indices
 				{
 					b["settings"] = new JObject
 					{
-						{ "index.write.number_of_shards", 3 },
-						{ "index.write.number_of_replicas", 2 },
+						{ "index.number_of_shards", 3 },
+						{ "index.number_of_replicas", 2 },
 					};
 				});
 
@@ -116,8 +116,10 @@ namespace Examples.Indices
 			{
 				e.ApplyBodyChanges(b =>
 				{
-					b["settings"]["number_of_shards"].Remove();
-					b["settings"]["index.number_of_shards"] = 1;
+					b["settings"] = new JObject
+					{
+						{ "index.number_of_shards", 1 },
+					};
 				});
 
 				return e;
