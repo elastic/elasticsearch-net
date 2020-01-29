@@ -4,9 +4,9 @@ namespace Nest
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(AverageAggregation))]
-	public interface IAverageAggregation : IMetricAggregation { }
+	public interface IAverageAggregation : IFormattableMetricAggregation { }
 
-	public class AverageAggregation : MetricAggregationBase, IAverageAggregation
+	public class AverageAggregation : FormattableMetricAggregationBase, IAverageAggregation
 	{
 		internal AverageAggregation() { }
 
@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	public class AverageAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<AverageAggregationDescriptor<T>, IAverageAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<AverageAggregationDescriptor<T>, IAverageAggregation, T>
 			, IAverageAggregation
 		where T : class { }
 }

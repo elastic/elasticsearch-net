@@ -5,13 +5,13 @@ namespace Nest
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(ExtendedStatsAggregation))]
-	public interface IExtendedStatsAggregation : IMetricAggregation
+	public interface IExtendedStatsAggregation : IFormattableMetricAggregation
 	{
 		[DataMember(Name ="sigma")]
 		double? Sigma { get; set; }
 	}
 
-	public class ExtendedStatsAggregation : MetricAggregationBase, IExtendedStatsAggregation
+	public class ExtendedStatsAggregation : FormattableMetricAggregationBase, IExtendedStatsAggregation
 	{
 		internal ExtendedStatsAggregation() { }
 
@@ -23,7 +23,7 @@ namespace Nest
 	}
 
 	public class ExtendedStatsAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregation, T>
 			, IExtendedStatsAggregation
 		where T : class
 	{
