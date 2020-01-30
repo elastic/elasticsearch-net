@@ -53,53 +53,83 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         Expression.Lambda<ApiInvoke>(invokeExpression, instanceExpression, argumentsExpression).Compile();
     
     member private this.toMap (o:YamlMap) = o |> Seq.map (fun o -> o.Key :?> String , o.Value) |> Map.ofSeq
+    
+    member this.ArgString (v:Object) =
+        let toString (value:Object) = 
+            match value with
+            | null -> null
+            | :? String as s -> s
+            | :? int32 as i -> i.ToString(CultureInfo.InvariantCulture)
+            | :? double as i -> i.ToString(CultureInfo.InvariantCulture)
+            | :? int64 as i -> i.ToString(CultureInfo.InvariantCulture)
+            | :? Boolean as b -> if b then "false" else "true"
+            | e -> failwithf "unknown type %s " (e.GetType().Name)
+        
+        match v with
+        | :? List<Object> as a ->
+            let values = a |> Seq.map toString |> Seq.toList
+            // https://github.com/elastic/elasticsearch/blob/6f1359fb70fba1bd7a1e26f4a9d42a9098ed4371/rest-api-spec/src/main/resources/rest-api-spec/test/indices.refresh/10_basic.yml#L40-L42
+            match values with
+            | [] -> "_all" 
+            | _ -> String.Join(',', values)
+        | e -> toString e
+                
         
     member this.CanInvoke (o:YamlMap) =
         let operationKeys =
             o
             |> this.toMap
+            |> Map.filter (fun k v -> this.PathParameters.Contains(k))
+            // Some tests explicitly set "" as means to not send a parameter
+            // Our client uses overloads and these error when passing null or empty string
+            // So we need to consider these when doing a subset of this api
+            |> Map.filter (fun k v -> not <| String.IsNullOrWhiteSpace(this.ArgString v))
             |> Seq.map (fun k -> k.Key)
-            |> Seq.filter (fun k -> k <> "body")
             |> Set.ofSeq
+        
         this.PathParameters.IsSubsetOf operationKeys
     
-    member this.Invoke (map:YamlMap) =
+    member this.Invoke (map:YamlMap) (headers:Headers option) =
         let o = map |> this.toMap
         
         let foundBody, body = o.TryGetValue "body"
         
         let arguments =
             o
+            |> Map.filter (fun k v -> this.PathParameters.Contains(k))
+            |> Map.filter (fun k v -> not <| String.IsNullOrWhiteSpace(this.ArgString v))
             |> Map.toSeq
-            |> Seq.filter (fun (k, v) -> this.PathParameters.Contains(k))
-            |> Seq.sortBy (fun (k, v) -> this.IndexOfParam k)
             |> Seq.map (fun (k, v) ->
-                let toString (value:Object) = 
-                    match value with
-                    | :? String as s -> s
-                    | :? int32 as i -> i.ToString(CultureInfo.InvariantCulture)
-                    | :? double as i -> i.ToString(CultureInfo.InvariantCulture)
-                    | :? int64 as i -> i.ToString(CultureInfo.InvariantCulture)
-                    | :? Boolean as b -> if b then "false" else "true"
-                    | e -> failwithf "unknown type %s " (e.GetType().Name)
-                
-                match v with
-                | :? List<Object> as a ->
-                    let values = a |> Seq.map toString |> Seq.toList
-                    // https://github.com/elastic/elasticsearch/blob/6f1359fb70fba1bd7a1e26f4a9d42a9098ed4371/rest-api-spec/src/main/resources/rest-api-spec/test/indices.refresh/10_basic.yml#L40-L42
-                    match values with
-                    | [] -> "_all" 
-                    | _ -> String.Join(',', values)
-                | e -> toString e
-                ) 
-            |> Seq.cast<Object>
+                match k with
+                // category_id is mapped as long (only path param that is not string)
+                | "category_id" ->
+                    match v with
+                    // Some test use a string e.g "1"
+                    | :? String as v -> (k, Int64.Parse(v) :> Object)
+                    // Yaml reads numbers as int32
+                    | :? Int32 as v -> (k, Convert.ToInt64(v) :> Object)
+                    | _ -> (k, v)
+                | _ -> (k, this.ArgString v :> Object)
+            ) 
+            |> Seq.sortBy (fun (k, v) -> this.IndexOfParam k)
+            |> Seq.map (fun (k, v) -> v)
             |> Seq.toArray
         
-        let requestParameters = this.CreateRequestParameters.Invoke();
+        let requestParameters = this.CreateRequestParameters.Invoke()
+        requestParameters.RequestConfiguration <- RequestConfiguration(Headers=(headers |> Option.defaultValue null))
+                                                                         
+        match o.TryFind("ignore") with
+        | Some o  ->
+               match o with
+               | :? List<Object> as o -> requestParameters.RequestConfiguration.AllowedStatusCodes <- o.Select(fun i -> Convert.ToInt32(i)).ToArray()
+               | _ -> requestParameters.RequestConfiguration.AllowedStatusCodes <- [Convert.ToInt32(o)]
+        | None -> ignore()
+        
         o
         |> Map.toSeq
         |> Seq.filter (fun (k, v) -> not <| this.PathParameters.Contains(k))
         |> Seq.filter (fun (k, v) -> k <> "body")
+        |> Seq.filter (fun (k, v) -> k <> "ignore")
         |> Seq.iter (fun (k, v) -> requestParameters.SetQueryString(k, v))
         
         let post =
