@@ -16,20 +16,34 @@ namespace ApiGenerator.Generator
 	{
 		public static List<string> Warnings { get; private set; }
 
-		public static async Task Generate(string downloadBranch, params string[] folders)
+		public static async Task Generate(string downloadBranch, bool lowLevelOnly, params string[] folders)
 		{
+			async Task Generate(IList<RazorGeneratorBase> generators, RestApiSpec restApiSpec, bool highLevel)
+			{
+				var pbarOpts = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
+				var message = $"Generating {(highLevel ? "high" : "low")} level code";
+				using var pbar = new ProgressBar(generators.Count, message, pbarOpts);
+				foreach (var generator in generators)
+				{
+					pbar.Message = "Generating " + generator.Title;
+					await generator.Generate(restApiSpec, pbar);
+					pbar.Tick("Generated " + generator.Title);
+				}
+			}
+
 			Warnings = new List<string>();
 			var spec = CreateRestApiSpecModel(downloadBranch, folders);
-			var generators = new List<RazorGeneratorBase>
+			var lowLevelGenerators = new List<RazorGeneratorBase>
 			{
-
 				//low level client
 				new LowLevelClientInterfaceGenerator(),
 				new LowLevelClientImplementationGenerator(),
 				new RequestParametersGenerator(),
 				new EnumsGenerator(),
+			};
 
-
+			var highLevelGenerators = new List<RazorGeneratorBase>
+			{
 				//high level client
 				new HighLevelClientInterfaceGenerator(),
 				new HighLevelClientImplementationGenerator(),
@@ -38,15 +52,9 @@ namespace ApiGenerator.Generator
 				new ApiUrlsLookupsGenerator(),
 			};
 
-			using (var pbar = new ProgressBar(generators.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
-			{
-				foreach (var generator in generators)
-				{
-					pbar.Message = "Generating " + generator.Title;
-					await generator.Generate(spec, pbar);
-					pbar.Tick("Generated " + generator.Title);
-				}
-			}
+			await Generate(lowLevelGenerators, spec, highLevel: false);
+			if (!lowLevelOnly)
+				await Generate(highLevelGenerators, spec, highLevel: true);
 
 			// Check if there are any non-Stable endpoints present.
 			foreach (var endpoint in spec.Endpoints)
@@ -69,7 +77,7 @@ namespace ApiGenerator.Generator
 		{
 			var directories = Directory.GetDirectories(GeneratorLocations.RestSpecificationFolder, "*", SearchOption.AllDirectories)
 				.Where(f => folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
-				.OrderBy(f=>new FileInfo(f).Name)
+				.OrderBy(f => new FileInfo(f).Name)
 				.ToList();
 
 			var endpoints = new SortedDictionary<string, ApiEndpoint>();
@@ -109,11 +117,12 @@ namespace ApiGenerator.Generator
 					pbar.Tick();
 				}
 			}
-			var wrongMapsApi = CodeConfiguration.ApiNameMapping.Where(k =>!string.IsNullOrWhiteSpace(k.Key) && !seenFiles.Contains(k.Key));
+			var wrongMapsApi = CodeConfiguration.ApiNameMapping.Where(k => !string.IsNullOrWhiteSpace(k.Key) && !seenFiles.Contains(k.Key));
 			foreach (var (key, value) in wrongMapsApi)
 			{
 				var isIgnored = CodeConfiguration.IgnoredApis.Contains($"{value}.json");
-				if (isIgnored) Warnings.Add($"{value} uses MapsApi: {key} ignored in ${nameof(CodeConfiguration)}.{nameof(CodeConfiguration.IgnoredApis)}");
+				if (isIgnored)
+					Warnings.Add($"{value} uses MapsApi: {key} ignored in ${nameof(CodeConfiguration)}.{nameof(CodeConfiguration.IgnoredApis)}");
 				else Warnings.Add($"{value} uses MapsApi: {key} which does not exist");
 			}
 

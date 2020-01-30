@@ -15,7 +15,7 @@ namespace ApiGenerator.Generator.Razor
 			var view = ViewLocations.LowLevel("RequestParameters", "RequestParameters.cshtml");
 			string Target(string id) => GeneratorLocations.LowLevel("Api", "RequestParameters", $"RequestParameters.{id}.cs");
 
-			var namespaced = spec.EndpointsPerNamespace.ToList();
+			var namespaced = spec.EndpointsPerNamespaceHighLevel.ToList();
 			await DoRazorDependantFiles(progressBar, namespaced, view, kv => kv.Key, id => Target(id));
 		}
 	}

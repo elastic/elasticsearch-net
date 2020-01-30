@@ -12,18 +12,10 @@ namespace ApiGenerator
 		// ReSharper disable once UnusedParameter.Local
 		private static async Task Main(string[] args)
 		{
-			var redownloadCoreSpecification = false;
-			var generateCode = false;
+
+			var redownloadCoreSpecification = Ask("Download online rest specifications?", false);
+
 			var downloadBranch = DownloadBranch;
-
-			var answer = "invalid";
-			while (answer != "y" && answer != "n" && answer != "")
-			{
-				Console.Write("Download online rest specifications? [y/N] (default N): ");
-				answer = Console.ReadLine()?.Trim().ToLowerInvariant();
-				redownloadCoreSpecification = answer == "y";
-			}
-
 			if (redownloadCoreSpecification)
 			{
 				Console.Write($"Branch to download specification from (default {downloadBranch}): ");
@@ -40,18 +32,29 @@ namespace ApiGenerator
 			if (string.IsNullOrEmpty(downloadBranch))
 				downloadBranch = DownloadBranch;
 
+			var generateCode = Ask("Generate code from the specification files on disk?", true);
+			var lowLevelOnly = generateCode && Ask("Generate low level client only?", false);
+
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);
 
-			answer = "invalid";
+			if (generateCode)
+				await Generator.ApiGenerator.Generate(downloadBranch, lowLevelOnly, "Core", "XPack");
+		}
+
+		private static bool Ask(string question, bool defaultAnswer = true)
+		{
+			var answer = "invalid";
+			var defaultResponse = defaultAnswer ? "y" : "n";
+
 			while (answer != "y" && answer != "n" && answer != "")
 			{
-				Console.Write("Generate code from the specification files on disk? [Y/n] (default Y): ");
+				Console.Write($"{question}[y/N] (default {defaultResponse}): ");
 				answer = Console.ReadLine()?.Trim().ToLowerInvariant();
-				generateCode = answer == "y" || answer == "";
+				if (string.IsNullOrWhiteSpace(answer)) answer = defaultResponse;
+				defaultAnswer = answer == "y";
 			}
-			if (generateCode)
-				await Generator.ApiGenerator.Generate(downloadBranch, "Core", "XPack");
+			return defaultAnswer;
 		}
 	}
 }
