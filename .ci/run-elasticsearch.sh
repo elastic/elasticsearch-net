@@ -57,8 +57,9 @@ function cleanup_node {
   if container_running "$1"; then
     echo -e "\033[34;1mINFO:\033[0m Removing container $1\033[0m"
     (docker container rm --force --volumes "$1") || true
-    cleanup_volume "$1-${suffix}-data"
   fi
+  echo -e "\033[34;1mINFO:\033[0m Removing volume $1-${suffix}-data\033[0m"
+  cleanup_volume "$1-${suffix}-data"
 }
 function cleanup_network {
   if [[ "$(docker network ls -q -f name=$1)" ]]; then
