@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         where TDictionary : class, IEnumerable<KeyValuePair<TKey, TValue>>
         where TEnumerator : IEnumerator<KeyValuePair<TKey, TValue>>
     {
-		protected bool SkipValue(TValue value) => value == null;
+		protected bool SkipValue(TValue value) => false;
 
         public void Serialize(ref JsonWriter writer, TDictionary value, IJsonFormatterResolver formatterResolver)
         {
