@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 	public class DynamicDictionary
 		: DynamicObject,
 			IEquatable<DynamicDictionary>,
-			IEnumerable<string>,
+			IEnumerable<KeyValuePair<string, DynamicValue>>,
 			IDictionary<string, DynamicValue>
 	{
 		private readonly IDictionary<string, DynamicValue> _backingDictionary = new Dictionary<string, DynamicValue>(StringComparer.OrdinalIgnoreCase);
@@ -250,7 +250,7 @@ namespace Elasticsearch.Net
 		/// <returns>A <see cref="IEnumerator" /> that contains dynamic member names.</returns>
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return _backingDictionary.Keys.GetEnumerator();
+			return _backingDictionary.GetEnumerator();
 		}
 
 		/// <summary>
@@ -260,15 +260,6 @@ namespace Elasticsearch.Net
 		IEnumerator<KeyValuePair<string, DynamicValue>> IEnumerable<KeyValuePair<string, DynamicValue>>.GetEnumerator()
 		{
 			return _backingDictionary.GetEnumerator();
-		}
-
-		/// <summary>
-		/// Returns the enumeration of all dynamic member names.
-		/// </summary>
-		/// <returns>A <see cref="IEnumerable{T}" /> that contains dynamic member names.</returns>
-		public IEnumerator<string> GetEnumerator()
-		{
-			return _backingDictionary.Keys.GetEnumerator();
 		}
 
 		/// <summary>
