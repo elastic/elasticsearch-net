@@ -185,13 +185,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -629,13 +622,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("include_defaults", value);
 		}
 
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -722,13 +708,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<bool? >("include_defaults");
 			set => Q("include_defaults", value);
-		}
-
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -851,13 +830,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<bool? >("flat_settings");
 			set => Q("flat_settings", value);
-		}
-
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1067,13 +1039,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("flat_settings", value);
 		}
 
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -1149,13 +1114,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<bool? >("dry_run");
 			set => Q("dry_run", value);
-		}
-
-		///<summary>Whether a type should be included in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Specify timeout for connection to master</summary>

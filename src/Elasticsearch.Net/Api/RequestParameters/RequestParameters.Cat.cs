@@ -567,13 +567,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
