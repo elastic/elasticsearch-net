@@ -49,18 +49,19 @@ namespace ApiGenerator.Domain.Specification
 		{
 			CsharpNames = CsharpNames,
 			UrlParts = Url.Parts,
-			PartialParameters = Body == null ? Enumerable.Empty<QueryParameters>().ToList() : Url.Params.Values.Where(p=>p.RenderPartial && !p.Skip).ToList(),
-			OfficialDocumentationLink = OfficialDocumentationLink.Url
+			PartialParameters =
+				Body == null ? Enumerable.Empty<QueryParameters>().ToList() : Url.Params.Values.Where(p => p.RenderPartial && !p.Skip).ToList(),
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url
 		};
 
 		public RequestPartialImplementation RequestPartialImplementation => new RequestPartialImplementation
 		{
 			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink.Url,
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
 			Stability = Stability,
 			Paths = Url.Paths,
 			Parts = Url.Parts,
-			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
+			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			Constructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: true).ToList(),
 			GenericConstructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: false).ToList(),
 			HasBody = Body != null,
@@ -69,19 +70,19 @@ namespace ApiGenerator.Domain.Specification
 		public DescriptorPartialImplementation DescriptorPartialImplementation => new DescriptorPartialImplementation
 		{
 			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink.Url,
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
 			Constructors = Constructor.DescriptorConstructors(CsharpNames, Url).ToList(),
 			Paths = Url.Paths,
 			Parts = Url.Parts,
-			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
+			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			HasBody = Body != null,
 		};
 
 		public RequestParameterImplementation RequestParameterImplementation => new RequestParameterImplementation
 		{
 			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink.Url,
-			Params = Url.Params.Values.Where(p=>!p.Skip).ToList(),
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
+			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			HttpMethod = PreferredHttpMethod
 		};
 
@@ -92,32 +93,37 @@ namespace ApiGenerator.Domain.Specification
 				var first = HttpMethods.First();
 				if (HttpMethods.Count > 1 && first.ToUpperInvariant() == "GET")
 					return HttpMethods.Last();
+
 				return first;
 			}
 		}
 
-		public string HighLevelMethodXmlDocDescription => $"<c>{PreferredHttpMethod}</c> request to the <c>{Name}</c> API, read more about this API online:";
+		public string HighLevelMethodXmlDocDescription =>
+			$"<c>{PreferredHttpMethod}</c> request to the <c>{Name}</c> API, read more about this API online:";
 
 		public HighLevelModel HighLevelModel => new HighLevelModel
 		{
 			CsharpNames = CsharpNames,
 			Fluent = new FluentMethod(CsharpNames, Url.Parts,
 				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
-				link: OfficialDocumentationLink.Url,
+				link: OfficialDocumentationLink?.Url,
 				summary: HighLevelMethodXmlDocDescription
 			),
-			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments ? null : new BoundFluentMethod(CsharpNames, Url.Parts,
-				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
-				link: OfficialDocumentationLink.Url,
-				summary: HighLevelMethodXmlDocDescription
-			),
+			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments
+				? null
+				: new BoundFluentMethod(CsharpNames, Url.Parts,
+					selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
+					link: OfficialDocumentationLink?.Url,
+					summary: HighLevelMethodXmlDocDescription
+				),
 			Initializer = new InitializerMethod(CsharpNames,
-				link: OfficialDocumentationLink.Url,
+				link: OfficialDocumentationLink?.Url,
 				summary: HighLevelMethodXmlDocDescription
 			)
 		};
 
 		private List<LowLevelClientMethod> _lowLevelClientMethods;
+
 		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{
 			get
@@ -126,6 +132,9 @@ namespace ApiGenerator.Domain.Specification
 
 				// enumerate once and cache
 				_lowLevelClientMethods = new List<LowLevelClientMethod>();
+
+				if (OfficialDocumentationLink == null)
+					Generator.ApiGenerator.Warnings.Add($"API '{Name}' has no documentation");
 
 				var httpMethod = PreferredHttpMethod;
 				foreach (var path in Url.PathsWithDeprecations)
@@ -156,7 +165,7 @@ namespace ApiGenerator.Domain.Specification
 						CsharpNames = CsharpNames,
 						PerPathMethodName = methodName,
 						HttpMethod = httpMethod,
-						OfficialDocumentationLink = OfficialDocumentationLink.Url,
+						OfficialDocumentationLink = OfficialDocumentationLink?.Url,
 						Stability = Stability,
 						DeprecatedPath = path.Deprecation,
 						Path = path.Path,
@@ -169,6 +178,5 @@ namespace ApiGenerator.Domain.Specification
 				return _lowLevelClientMethods;
 			}
 		}
-
 	}
 }
