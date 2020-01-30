@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Elasticsearch.Net.Extensions;
 using Microsoft.CSharp.RuntimeBinder;
 
 // ReSharper disable ArrangeConstructorOrDestructorBody
@@ -47,6 +48,17 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public T Get<T>(string path)
+		{
+			var dynamicDictionary = Value switch
+			{
+				DynamicDictionary v => v,
+				IDictionary<string, object> v => DynamicDictionary.Create(v),
+				_ => null
+			};
+			return dynamicDictionary == null ? default : dynamicDictionary.Get<T>(path);
+		}
+
 		public static DynamicValue NullValue { get; } = new DynamicValue(null);
 		public static DynamicValue SelfOrNew(object v) => v is DynamicValue av ? av : new DynamicValue(v);
 
@@ -71,6 +83,15 @@ namespace Elasticsearch.Net
 					if (i >= d.Count) return new DynamicValue(null);
 					var at = d[d.Keys.ElementAt(i)];
 					return SelfOrNew(at);
+				}
+				if (v is IDictionary<string, DynamicValue> dv)
+				{
+					if (dv.TryGetValue(i.ToString(CultureInfo.InvariantCulture), out var dvv))
+						return dvv;
+
+					if (i >= dv.Count) return new DynamicValue(null);
+					var at = dv[dv.Keys.ElementAt(i)];
+					return at;
 				}
 				return NullValue;
 			}
@@ -426,6 +447,25 @@ namespace Elasticsearch.Net
 				result = ds.Contains(name) ? SelfOrNew(ds[name]) : NullValue;
 				return true;
 			}
+			if (Value is IList l)
+			{
+				var projected = l
+					.Cast<object>()
+					.Select(i => SelfOrNew(i).Dispatch(out var o, name) ? o : null)
+					.Where(i => i != null)
+					.ToArray();
+				result = SelfOrNew(projected);
+				return projected.Length  > 0;
+			}
+			if (Value is IList<object> lo)
+			{
+				var projected = lo
+					.Select(i => SelfOrNew(i).Dispatch(out var o, name) ? o : null)
+					.Where(i => i != null)
+					.ToArray();
+				result = SelfOrNew(projected);
+				return projected.Length  > 0;
+			}
 
 			result = NullValue;
 			return true;
@@ -472,53 +512,116 @@ namespace Elasticsearch.Net
 		/// <typeparam name="T">When no default value is supplied, required to supply the default type</typeparam>
 		/// <param name="defaultValue">Optional parameter for default value, if not given it returns default of type T</param>
 		/// <returns>If value is not null, value is returned, else default value is returned</returns>
-		public T TryParse<T>(T defaultValue = default(T))
+		public T TryParse<T>(T defaultValue = default)
 		{
-			var type = typeof(T);
-			if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-				type = type.GenericTypeArguments[0];
-
-			if (HasValue)
+			if (!HasValue) return defaultValue;
+			try
 			{
-				try
+				return TryParse(defaultValue, typeof(T), _value, out var o) ? (T)o : defaultValue;
+			}
+			catch
+			{
+				return defaultValue;
+			}
+		}
+
+		internal bool TryParse(object defaultValue, Type targetReturnType, object value, out object newObject)
+		{
+			newObject = defaultValue;
+			if (value == null) return false;
+
+			if (targetReturnType.IsGenericType && targetReturnType.GetGenericTypeDefinition() == typeof(Nullable<>))
+				targetReturnType = targetReturnType.GenericTypeArguments[0];
+
+			try
+			{
+				var valueType = value.GetType();
+				if (targetReturnType.IsArray && value is DynamicValue v)
 				{
-					var valueType = _value.GetType();
-					if (valueType.IsAssignableFrom(typeof(T)))
-						return (T)_value;
-
-					var stringValue = _value as string;
-
-					if (type == typeof(DateTime))
-					{
-						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
-						{
-							return (T)(object)result;
-						}
-					}
-					else if (stringValue != null)
-					{
-						if (type == typeof(object)) return (T)Convert.ChangeType(_value, type);
-
-						var converter = TypeDescriptor.GetConverter(type);
-						if (converter.IsValid(stringValue)) return (T)converter.ConvertFromInvariantString(stringValue);
-					}
-					else if (type == typeof(string))
-					{
-						return (T)Convert.ChangeType(_value, TypeCode.String, CultureInfo.InvariantCulture);
-					}
-					else if (valueType.IsValueType) return (T)Convert.ChangeType(_value, type);
-					else if (type == typeof(DynamicDictionary) && valueType == typeof(Dictionary<string, object>))
-						return (T)(object)DynamicDictionary.Create(_value as Dictionary<string, object>);
-					else if (type == typeof(object)) return (T)_value;
+					value = v.Value;
+					valueType = value.GetType();
 				}
-				catch
+				if (targetReturnType.IsArray)
 				{
-					return defaultValue;
+					if (!valueType.IsArray)
+					{
+						return false;
+					}
+					var ar = (object[])value;
+					var t = targetReturnType.GetElementType();
+					var objectArray = ar
+						.Select(a => TryParse(defaultValue, t, a, out var o) ? o : null)
+						.Where(a => a != null)
+						//.Select(a => Convert.ChangeType(a, t))
+						.ToArray();
+
+					var arr = Array.CreateInstance(t, objectArray.Length);
+					Array.Copy(objectArray, arr, objectArray.Length);
+					newObject = arr;
+					return true;
+				}
+
+				if (valueType.IsAssignableFrom(targetReturnType))
+				{
+					newObject = value;
+					return true;
+				}
+
+				var stringValue = value as string;
+
+				if (targetReturnType == typeof(DateTime)
+					&& DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
+				{
+					newObject = result;
+					return true;
+				}
+				if (stringValue != null)
+				{
+					if (targetReturnType == typeof(object))
+					{
+						newObject = Convert.ChangeType(value, targetReturnType);
+						return true;
+					}
+
+					var converter = TypeDescriptor.GetConverter(targetReturnType);
+					if (converter.IsValid(stringValue))
+					{
+						newObject = converter.ConvertFromInvariantString(stringValue);
+					return true;
+					}
+				}
+				else if (value is DynamicValue dv)
+					return dv.TryParse(defaultValue, targetReturnType, dv.Value, out newObject);
+				else if (targetReturnType == typeof(string))
+				{
+					newObject = Convert.ChangeType(value, TypeCode.String, CultureInfo.InvariantCulture);
+					return true;
+				}
+				else if (valueType.IsValueType)
+				{
+					newObject = Convert.ChangeType(_value, targetReturnType);
+					return true;
+				}
+				else if (targetReturnType == typeof(DynamicDictionary) && valueType == typeof(Dictionary<string, object>))
+				{
+					newObject = DynamicDictionary.Create(value as Dictionary<string, object>);
+					return true;
+				}
+
+				else if (targetReturnType == typeof(object))
+				{
+					newObject = value;
+					return true;
 				}
 			}
-
-			return defaultValue;
+			catch
+			{
+				return false;
+			}
+			return false;
 		}
+
+
 
 		public static bool operator ==(DynamicValue dynamicValue, object compareValue)
 		{
