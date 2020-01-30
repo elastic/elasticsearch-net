@@ -20,7 +20,7 @@ using Nest;
 
 @{
 	RestApiSpec model = Model;
-	var namespaces = model.EndpointsPerNamespace.Keys.Where(k => k != CsharpNames.RootNamespace);
+	var namespaces = model.EndpointsPerNamespaceHighLevel.Keys.Where(k => k != CsharpNames.RootNamespace);
 <text>
 // ReSharper disable RedundantTypeArgumentsOfMethod
 namespace Nest
@@ -51,7 +51,7 @@ namespace Nest
 </text>
 	
 
-	foreach (var kv in model.EndpointsPerNamespace)
+	foreach (var kv in model.EndpointsPerNamespaceHighLevel)
 	{
 		if (kv.Key != CsharpNames.RootNamespace)
 		{
