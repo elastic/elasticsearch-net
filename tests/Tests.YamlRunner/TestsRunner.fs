@@ -2,20 +2,23 @@ namespace Tests.YamlRunner
 
 open System
 open System.Diagnostics
+open System.Runtime.ExceptionServices
 open ShellProgressBar
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader
 open Tests.YamlRunner.OperationExecutor
 open Tests.YamlRunner.Stashes
 open Elasticsearch.Net
+open Skips
 
-type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions:ProgressBarOptions) =
+type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite, progress:IProgressBar, barOptions:ProgressBarOptions) =
     
     member this.OperationExecutor = OperationExecutor(client)
     
     member private this.RunOperation file section operation nth stashes (subProgressBar:IProgressBar) = async {
         let executionContext = {
-            Suite= OpenSource
+            Version = version
+            Suite= suite
             File= file
             Folder= file.Directory
             Section= section
@@ -25,14 +28,19 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
             Elapsed = ref 0L
         }
         let sw = Stopwatch.StartNew()
-        let! pass = this.OperationExecutor.Execute executionContext subProgressBar
-        executionContext.Elapsed := sw.ElapsedMilliseconds
-        match pass with
-        | Failed f ->
-            let c = pass.Context
-            subProgressBar.WriteLine <| sprintf "%s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
-        | _ -> ignore()
-        return pass
+        try
+            let! pass = this.OperationExecutor.Execute executionContext subProgressBar
+            executionContext.Elapsed := sw.ElapsedMilliseconds
+            match pass with
+            | Failed f ->
+                let c = pass.Context
+                subProgressBar.WriteLine <| sprintf "%s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
+            | _ -> ignore()
+            return pass
+        with
+        | e ->
+            subProgressBar.WriteLine <| sprintf "E! File: %s/%s Op: (%i) %s Section: %s " file.Directory.Name file.Name nth (operation.Log()) section 
+            return Failed <| SeenException (executionContext, e)
     }
     
     member private this.CreateOperations m file (ops:Operations) subProgressBar = 
@@ -42,24 +50,25 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
             |> List.indexed
             |> List.map (fun (i, op) -> async {
                 let! pass = this.RunOperation file m op i stashes subProgressBar
-                //let! x = Async.Sleep <| randomTime.Next(0, 10)
                 return pass
             })
         (m, executedOperations)
         
     member private this.RunTestFile subProgressbar (file:YamlTestDocument) = async {
-        
         let m section ops = this.CreateOperations section file.FileInfo ops subProgressbar
         let bootstrap section operations =
             let ops = operations |> Option.map (m section) |> Option.toList |> List.collect (fun (s, ops) -> ops)
-            (section, ops)
+            ops
         
         let setup =  bootstrap "Setup" file.Setup 
-        let teardown = bootstrap "Teardown" file.Teardown 
+        let teardown = bootstrap "TEARDOWN" file.Teardown 
         let sections =
             file.Tests
             |> List.map (fun s -> s.Operations |> m s.Name)
-            |> List.collect (fun s -> [setup; s; teardown])
+            |> List.collect (fun s ->
+                let (name, ops) = s
+                [(name, setup @ ops)]
+            )
         
         let l = sections.Length
         let ops = sections |> List.sumBy (fun (_, i) -> i.Length)
@@ -78,7 +87,8 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
                         let r = Async.RunSynchronously op
                         match r with
                         | Succeeded context -> Some (r, tl)
-                        | Skipped context -> Some (r, tl)
+                        | NotSkipped context -> Some (r, tl)
+                        | Skipped (context, reason) -> Some (r, [])
                         | Failed context -> Some (r, [])
                     | [] -> None
                 )
@@ -89,16 +99,48 @@ type TestRunner(client:IElasticLowLevelClient, progress:IProgressBar, barOptions
         let runAllSections =
             sections
             |> Seq.indexed
-            |> Seq.map (fun (i, suite) -> 
-                let progressHeader = sprintf "[%i/%i] sections" (i+1) l
-                let (sectionHeader, ops) = suite
-                runSection progressHeader sectionHeader ops 
+            |> Seq.collect (fun (i, suite) ->
+                let runTests () =
+                    let run section =
+                        let progressHeader = sprintf "[%i/%i] sections" (i+1) l
+                        let (sectionHeader, ops) = section
+                        runSection progressHeader sectionHeader ops;
+                    [
+                        // setup run as part of the suite, unfold will stop if setup fails or skips
+                        run suite;
+                        //always run teardown
+                        run ("TEARDOWN", teardown)
+                    ]
+                let file =
+                    let fi = file.FileInfo
+                    let di = file.FileInfo.Directory
+                    sprintf "%s/%s" di.Name fi.Name
+                match Skips.SkipList.TryGetValue <| SkipFile(file) with
+                | (true, s) ->
+                    let (sectionHeader, _) = suite
+                    match s with
+                    | All -> []
+                    | Section s when s = sectionHeader -> []
+                    | Sections s when s |> List.exists (fun s -> s = sectionHeader) -> []
+                    | _ -> runTests()
+                | (false, _) -> runTests()
             )
             |> Seq.map Async.RunSynchronously
         
         return runAllSections |> Seq.toList
         
     }
+    
+    member this.GlobalSetup () =
+        match suite with
+        | OpenSource -> ignore()
+        | XPack ->
+            let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
+            let r = client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
+            let userCreated = r.Success 
+            if (not userCreated) then failwithf "Global setup for %A failed\r\n%s" suite r.DebugInformation
+            client.Indices.Refresh<VoidResponse>("_all") |> ignore
+            
 
     member this.RunTestsInFolder mainMessage (folder:YamlTestFolder) = async {
         let l = folder.Files.Length

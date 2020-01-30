@@ -3,6 +3,7 @@ module Tests.YamlRunner.Models
 open Elasticsearch.Net
 open System
 open System.Collections.Generic
+open System.Collections.Specialized
 open System.Text.RegularExpressions
 open Microsoft.FSharp.Reflection
 
@@ -23,7 +24,7 @@ type DoCatch =
     | Unavailable//unavailable a 503 response from ES
     | UnknownParameter //param a client-side error indicating an unknown parameter has been passed to the method
     | OtherBadResponse //request 4xx-5xx error response from ES, not equal to any named response above
-    | CatchRegex // /foo bar/ the text of the error message matches this regular expression
+    | CatchRegex of string // /foo bar/ the text of the error message matches this regular expression
     
 let (|IsDoCatch|_|) (s:string) =
     match s with
@@ -36,8 +37,7 @@ let (|IsDoCatch|_|) (s:string) =
     | "unavailable" -> Some Unavailable
     | "param" -> Some UnknownParameter
     | "request" -> Some OtherBadResponse 
-    | "regex" -> Some CatchRegex
-    | _ -> None
+    | s -> Some <| CatchRegex (s.Trim('/'))
     
 type NodeSelector =
     | NodeVersionSelector of string
@@ -49,6 +49,7 @@ type ResponseProperty = ResponseProperty of string
 type StashedId = private StashedId of string with
     static member Create (s:String) =
         match s with
+        | s when s.StartsWith "${" -> StashedId.Create <| s.Trim('$', '{', '}')
         | s when s.StartsWith "$" -> StashedId s
         | s -> StashedId <| sprintf "$%s" s
     static member Body = StashedId.Create "body"
@@ -73,6 +74,7 @@ let (|ResponsePath|WholeResponse|) input =
 
 type Set = Map<ResponseProperty, StashedId>
 type TransformAndSet = Map<StashedId, SetTransformation>
+type Headers = NameValueCollection
 type RegexAssertion = { Regex:Regex }
 type AssertValue =
     Id of StashedId | Value of Object | RegexAssertion of RegexAssertion
@@ -102,24 +104,28 @@ type Do = {
     Catch:DoCatch option
     Warnings:option<string list>
     NodeSelector:NodeSelector option
+    Headers: Headers option
+    AutoFail: bool 
 }
     with member this.Log () = sprintf "Api %s" <| fst this.ApiCall
 
 type Feature =
-    | CatchUnauthorized // "catch_unauthorized",
-    | DefaultShards // "default_shards",
-    | EmbeddedStashKey // "embedded_stash_key",
-    | Headers // "headers",
-    | NodeSelector // "node_selector",
-    | StashInKey // "stash_in_key",
+    | CatchUnauthorized // "catch_unauthorized", //NOT seen in master
+    | DefaultShards // "default_shards", //NOT seen in master
+    | EmbeddedStashKey // "embedded_stash_key", //NOT seen in master
+    | Headers // "headers", 
+    | NodeSelector // "node_selector", //TODO support
+    | StashInKey // "stash_in_key", //NOT seen in master
     | StashInPath // "stash_in_path",
-    | StashPathReplace // "stash_path_replace",
-    | Warnings // "warnings",
-    | Yaml // "yaml",
-    | Contains // "contains",
-    | TransformAndSet // "transform_and_set",
+    | StashPathReplace // "stash_path_replace", //NOT seen in master
+    | Warnings // "warnings", 
+    | Yaml // "yaml", 
+    | Contains // "contains", //NOT seen in master
+    | TransformAndSet // "transform_and_set", //TODO support
     | ArbitraryKey // "arbitrary_key"
     | Unsupported of string
+
+let SupportedFeatures = [EmbeddedStashKey; StashInPath; Yaml; ArbitraryKey; Warnings; Headers]
     
 let (|ToFeature|) (s:string) =
     match s with
@@ -138,7 +144,7 @@ let (|ToFeature|) (s:string) =
     | "arbitrary_key" -> ArbitraryKey
     | s -> Unsupported s
 
-type Skip = { Version:string option; Reason:string option; Features: Feature list option }
+type Skip = { Version:SemVer.Range option; Reason:string option; Features: Feature list option }
     with member this.Log = sprintf "Version %A Features:%A Reason: %A" this.Version this.Features this.Reason
 
 type NumericAssert = 
@@ -181,7 +187,7 @@ type Assert =
 
 type Operation =
     | Unknown of string
-    | Actions of string * (IElasticLowLevelClient -> unit)
+    | Actions of string * (IElasticLowLevelClient * TestSuite -> DynamicResponse option)
     | Skip of Skip
     | Do of Do
     | Set of Set
@@ -204,8 +210,10 @@ type Operation =
 let (|IsOperation|_|) (s:string) =
     match s with
     | "skip" 
+    | "warnings" 
     | "set" 
     | "transform_and_set" 
+    | "headers" 
     | "do" 
     | "match" 
     | "is_false" 

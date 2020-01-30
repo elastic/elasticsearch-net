@@ -37,7 +37,6 @@ let ListFolderFiles namedSuite revision folder fileFilter = async {
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
         |> List.filter (fun f -> match fileFilter with | Some s -> f.StartsWith(s, StringComparison.OrdinalIgnoreCase) | None -> true)
-        //|> List.filter(fun f -> f = "51_refresh_with_types.yml")
         |> List.map fileUrl
     return yamlFiles
 }
