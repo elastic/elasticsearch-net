@@ -1,18 +1,25 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Indices
 {
 	public class PutMappingPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line11()
 		{
 			// tag::5be23858b35043fcb7b50fe36b873e6e[]
-			var response0 = new SearchResponse<object>();
+			var putMappingResponse = client.Map<object>(m => m
+					.Index("twitter")
+					.Properties(pp =>
+							pp.Keyword(k => k.Name("email")
+						)
+					)
+				);
 			// end::5be23858b35043fcb7b50fe36b873e6e[]
 
-			response0.MatchesExample(@"PUT /twitter/_mapping
+			putMappingResponse.MatchesExample(@"PUT /twitter/_mapping
 			{
 			  ""properties"": {
 			    ""email"": {
@@ -22,24 +29,30 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line90()
 		{
 			// tag::12433d2b637d002e8d5c9a1adce69d3b[]
-			var response0 = new SearchResponse<object>();
+			var putMappingResponse = client.Indices.Create("publications");
 			// end::12433d2b637d002e8d5c9a1adce69d3b[]
 
-			response0.MatchesExample(@"PUT /publications");
+			putMappingResponse.MatchesExample(@"PUT /publications");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line98()
 		{
 			// tag::e4be53736bcc02b03068fd72fdbfe271[]
-			var response0 = new SearchResponse<object>();
+			var putMappingResponse = client.Map<object>(m => m
+				.Index("publications")
+				.Properties(pp =>
+					pp.Text(k => k.Name("title")
+					)
+				)
+			);
 			// end::e4be53736bcc02b03068fd72fdbfe271[]
 
-			response0.MatchesExample(@"PUT /publications/_mapping
+			putMappingResponse.MatchesExample(@"PUT /publications/_mapping
 			{
 			  ""properties"": {
 			    ""title"":  { ""type"": ""text""}
@@ -47,30 +60,28 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line115()
 		{
 			// tag::1da77e114459e0b77d78a3dcc8fae429[]
-			var response0 = new SearchResponse<object>();
+			var createIndex1Response = client.Indices.Create("twitter-1");
 
-			var response1 = new SearchResponse<object>();
+			var createIndex2Response = client.Indices.Create("twitter-2");
 
-			var response2 = new SearchResponse<object>();
-
-			var response3 = new SearchResponse<object>();
-
-			var response4 = new SearchResponse<object>();
+			var putMappingResponse = client.Map<object>(m => m
+				.Index("twitter-1,twitter-2")
+				.Properties(pp =>
+					pp.Text(k => k.Name("user_name")
+					)
+				)
+			);
 			// end::1da77e114459e0b77d78a3dcc8fae429[]
 
-			response0.MatchesExample(@"# Create the two indices");
+			createIndex1Response.MatchesExample(@"PUT /twitter-1");
 
-			response1.MatchesExample(@"PUT /twitter-1");
+			createIndex2Response.MatchesExample(@"PUT /twitter-2");
 
-			response2.MatchesExample(@"PUT /twitter-2");
-
-			response3.MatchesExample(@"# Update both mappings");
-
-			response4.MatchesExample(@"PUT /twitter-1,twitter-2/_mapping <1>
+			putMappingResponse.MatchesExample(@"PUT /twitter-1,twitter-2/_mapping <1>
 			{
 			  ""properties"": {
 			    ""user_name"": {
@@ -80,14 +91,25 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line150()
 		{
 			// tag::d9474f66970c6955e24b17c7447e7b5f[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", m => m
+				.Map(m => m
+					.Properties(pp => pp
+						.Object<object>(o => o
+							.Name("name")
+							.Properties(p => p
+								.Text(t => t
+									.Name("first")))
+						)
+					)
+				)
+			);
 			// end::d9474f66970c6955e24b17c7447e7b5f[]
 
-			response0.MatchesExample(@"PUT /my_index
+			createIndexResponse.MatchesExample(@"PUT /my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
@@ -100,7 +122,13 @@ namespace Examples.Indices
 			      }
 			    }
 			  }
-			}");
+			}", (e, body) =>
+			{
+				var value = body["mappings"]["properties"]["name"];
+				var nameToken = JObject.Parse(value.ToString());
+				nameToken.Add("type", "object");
+				body["mappings"]["properties"]["name"] = nameToken;
+			});
 		}
 
 		[U(Skip = "Example not implemented")]
