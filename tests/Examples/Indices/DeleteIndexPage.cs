@@ -5,14 +5,14 @@ namespace Examples.Indices
 {
 	public class DeleteIndexPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line10()
 		{
 			// tag::98f14fddddea54a7d6149ab7b92e099d[]
-			var response0 = new SearchResponse<object>();
+			var deleteIndexResponse = client.DeleteIndex("twitter");
 			// end::98f14fddddea54a7d6149ab7b92e099d[]
 
-			response0.MatchesExample(@"DELETE /twitter");
+			deleteIndexResponse.MatchesExample(@"DELETE /twitter");
 		}
 	}
 }
