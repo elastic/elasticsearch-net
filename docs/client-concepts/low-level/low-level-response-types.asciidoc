@@ -17,30 +17,30 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [source,csharp]
 ----
-return @"{
-""boolean"" : true,    
+return $@"{{
+""boolean"" : true,
 ""string"" : ""v"",
 ""number"" : 29,
 ""array"" : [1, 2, 3, 4],
-""object"" : {
+""object"" : {{
     ""first"" : ""value1"",
     ""second"" : ""value2"",
-    ""nested"" : { ""x"" : ""value3"" }
-},
+    ""nested"" : {{ ""x"" : ""value3"" }}
+}},
 ""array_of_objects"" : [
-    {
+    {{
         ""first"" : ""value11"",
         ""second"" : ""value12"",
-        ""nested"" : { ""x"" : ""value4"" }
-    },
-    {
+        ""nested"" : {{ ""x"" : ""value4"", ""z"" : [{{""id"": 1}}] }}
+    }},
+    {{
         ""first"" : ""value21"",
         ""second"" : ""value22"",
-        ""nested"" : { ""x"" : ""value5"" },
-        ""complex.nested"" : { ""x"" : ""value6"" }
-    }
+        ""nested"" : {{ ""x"" : ""value5"", ""z"" : [{{""id"": 3}}, {{""id"": 2}}] }},
+        ""complex.nested"" : {{ ""x"" : ""value6"" }}
+    }}
 ]
-        }";
+        }}";
 ----
 
 [float]
@@ -72,5 +72,26 @@ response.Get<string>("array_of_objects.1.second").Should()
 response.Get<string>("array_of_objects.1.complex\\.nested.x").Should()
     .NotBeEmpty()
     .And.Be("value6");
+----
+
+You can project into arrays using the dot notation
+
+[source,csharp]
+----
+response.Get<string[]>("array_of_objects.first").Should()
+    .NotBeEmpty()
+    .And.HaveCount(2)
+    .And.BeEquivalentTo(new [] {"value11", "value21"});
+----
+
+You can even peek into array of arrays
+
+[source,csharp]
+----
+var nestedZs = response.Get<int[][]>("array_of_objects.nested.z.id")
+    //.SelectMany(d=>d.Get<int[]>("id"))
+    .Should().NotBeEmpty()
+    .And.HaveCount(2)
+    .And.BeEquivalentTo(new [] { new [] {1}, new []{3,2}});
 ----
 
