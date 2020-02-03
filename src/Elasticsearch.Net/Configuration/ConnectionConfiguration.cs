@@ -472,6 +472,12 @@ namespace Elasticsearch.Net
 			Assign(new ApiKeyAuthenticationCredentials(id, apiKey), (a, v) => a._apiKeyAuthCredentials = v);
 
 		/// <summary>
+		/// Api Key to send with all requests to Elasticsearch
+		/// </summary>
+		public T ApiKeyAuthentication(ApiKeyAuthenticationCredentials credentials) =>
+			Assign(credentials, (a, v) => a._apiKeyAuthCredentials = v);
+
+		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 		/// <para>NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
